@@ -17,10 +17,15 @@ This is the short handoff view. The full reasoning and command history are in
    corrected local replay reaches `Connected.`.
 6. The repaired x86_64 client completes the NewGraal `fd` and `fc` exchange,
    receives an encrypted login-success packet, and logs `Connected.`.
-7. A local server-warp reaches the game server. The client requests
-   `classiciphone.gmap` and then requests the expected `.nw` levels.
-8. The client receives the re-keyed `.code` responses. The files round-trip
-   through a local implementation of the native DES and checksum algorithm.
+7. Packet 48 causes the expected server-warp transition and a second game
+   connection.
+8. On the second connection, the client requests `classiciphone.gmap`, three
+   `.code` level containers, and sends the normal heartbeat packets.
+9. The emulator renders the level tile field and the game HUD. This proves the
+   map, player-property, level-container, and renderer paths can all run in a
+   controlled local test.
+10. The symbol translation pass applied 8,601 names to the ARM64 IDA database
+    with zero rename failures.
 
 ## Not verified
 
@@ -28,22 +33,27 @@ This is the short handoff view. The full reasoning and command history are in
 * That the current live connector still accepts the 2019 client query.
 * That the current server's certificate and package-signing chain can be
   replaced safely without changing protocol behavior.
-* A world render after the synthetic level responses.
 * ARM64 runtime behavior on a real ARM64 device.
+* Whether the live server sends the same completion sequence as the local
+  responder.
 
 ## Current blocker
 
-The test client stays on the splash image after the map and level requests.
-The external Android cache contains the sent files, but no final world
-transition is visible. The remaining possibilities are narrow:
+The local client renders the world but keeps the centered blue `Connecting to
+classic...` control visible. The responder sends a NewGraal type 182 frame
+after the first ordinary client packet. The complete outgoing capture contains
+that frame, but an x86_64 trap at the native handler mapped to packet 182 is not
+hit. A matching trap at the known packet 48 server-warp handler is hit, so the
+probe is exercising native dispatch correctly.
 
-* packet 35 may be received but not dispatched to the download handler;
-* the native level loader may reject a field in the re-keyed container;
-* the player warp and property sequence may be too small to enter the normal
-  renderer path; or
-* the client may be waiting for an additional package or script that the
-  local responder does not send.
+The most likely remaining issue is that the packet 182 entry is missing or
+overwritten in the input-handler table after the connector client is replaced
+for the game connection. The static ARM64 table maps packet 182 to handler
+index 14, `sub_1EB4C0`, which calls
+`TGUIScriptLoader_hideConnectingWindow`. That static mapping and the local
+runtime behavior do not yet agree.
 
-The next experiment should log the return value and identity fields at
-`TServerLevel_LoadEncrypted`, rather than adding more guessed packets.
-
+The level loader is no longer the first suspect. The tile field and HUD render
+after the corrected two-connection sequence. The next focused experiment is to
+inspect or instrument the live `indatahandlers[182]` value on the second
+connection, then test the same sequence on ARM64.

@@ -9,6 +9,7 @@ so the native client can be tested against the current service payload.
 from pathlib import Path
 import argparse
 import socket
+import time
 from urllib.parse import urlsplit
 
 
@@ -42,6 +43,36 @@ def main() -> None:
         default=BODY_FILES["/con.png"],
         help="captured response body to return for /con.png",
     )
+    parser.add_argument(
+        "--linger",
+        type=float,
+        default=0.0,
+        help="seconds to keep each response socket open after sending",
+    )
+    parser.add_argument(
+        "--delay",
+        type=float,
+        default=0.0,
+        help="seconds to wait after reading a request and before sending",
+    )
+    parser.add_argument(
+        "--omit-content-length",
+        action="store_true",
+        help="leave out Content-Length to exercise the old stream parser",
+    )
+    parser.add_argument(
+        "--http-version",
+        choices=("1.0", "1.1"),
+        default="1.0",
+        help="HTTP version used in the response status line",
+    )
+    parser.add_argument(
+        "--header",
+        action="append",
+        default=[],
+        metavar="NAME: VALUE",
+        help="additional response header, repeatable",
+    )
     args = parser.parse_args()
 
     with socket.create_server(("127.0.0.1", args.port), reuse_port=False) as server:
@@ -66,16 +97,29 @@ def main() -> None:
                         path = urlsplit(parts[1].decode("latin1", "replace")).path
                 body_path = args.con_png if path == "/con.png" else BODY_FILES.get(path)
                 body = body_path.read_bytes() if body_path and body_path.exists() else b""
+                extra_headers = b"".join(
+                    header.encode("latin1") + b"\r\n" for header in args.header
+                )
                 response = (
-                    b"HTTP/1.0 200 OK\r\n"
-                    b"server: Graal-Capture\r\n"
+                    f"HTTP/{args.http_version} 200 OK\r\n".encode("ascii")
+                    + b"server: Graal-Capture\r\n"
                     b"content-type: application/octet-stream\r\n"
-                    + f"content-length: {len(body)}\r\n".encode("ascii")
-                    + b"connection: keep-alive\r\n\r\n"
+                    + (
+                        b""
+                        if args.omit_content_length
+                        else f"content-length: {len(body)}\r\n".encode("ascii")
+                    )
+                    + b"connection: keep-alive\r\n"
+                    + extra_headers
+                    + b"\r\n"
                     + body
                 )
+                if args.delay > 0:
+                    time.sleep(args.delay)
                 conn.sendall(response)
                 conn.shutdown(socket.SHUT_WR)
+                if args.linger > 0:
+                    time.sleep(args.linger)
 
 
 if __name__ == "__main__":

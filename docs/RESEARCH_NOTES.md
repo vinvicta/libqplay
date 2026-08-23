@@ -228,3 +228,70 @@ The notes use three informal evidence levels:
 This vocabulary is intentionally repetitive. Reverse-engineering notes become
 hard to trust when a local synthetic response is described as if it came from
 the production server.
+
+## Update package and script follow-up
+
+The update-package path is now mapped far enough to explain why a synthetic
+`FILE StartConnectMessage` line alone does not produce an immediate package
+request. `requestUpdatePackage_void` at ARM64 `0x209020` creates or loads
+`updatepackages/basepackage.gupd`. `TUpdatePackage_load` at `0x209fa4` parses
+the `GRPKG001` header and fields such as `NAME`, `VERSION`, `PLATFORM`,
+`SUBPACKAGE`, and `FILE`. A `SUBPACKAGE` entry starts another download during
+the load, while a `FILE` entry adds a file to the package's file list.
+
+`TClient_sendRequestUpdatePackage` at `0x1f8e78` sends the package name,
+install separator, and one five-byte checksum per listed file. The normal file
+request helpers remain separate: `TClient_sendWantImage` uses the packet 23
+path, `TClient_sendWantImageUpdateCRC` uses packet 47, and
+`TClient_sendPreloadLevel` uses packet 35. The local responder currently
+answers the ordinary map, level, and base-package requests directly. It does
+not claim to reproduce a complete production package installation sequence.
+
+The decoded built-in `StartScript_GraalGui` bytecode contains the GUI setup but
+does not contain `onPackagesDownloaded`. That explains why adding a minimal
+synthetic `StartConnectMessage` package did not by itself hide the native
+connecting control. The package path is still worth preserving for future
+tests, but it is no longer the leading explanation for the rendered-world
+result.
+
+## Corrected two-connection runtime trace
+
+The first useful local run sent the map and player properties on the same
+socket as packet 48. That was wrong because packet 48 is a server-warp
+instruction and the client intentionally closes the socket before reconnecting.
+The corrected responder sends packet 48 on connection one, then sends packet 7
+and packet 55 on connection two. The resulting trace is:
+
+```text
+connection 1: login, packet 48 server-warp, reconnect
+connection 2: login, packet 7 classiciphone.gmap
+connection 2: packet 55 minimal player properties
+connection 2: packet 47 map request
+connection 2: packet 35 overworld_west_ocean_09.nw
+connection 2: packet 35 overworld_west_ocean_02.nw
+connection 2: packet 35 overworld_west_ocean_10.nw
+connection 2: packet 34 level completion or acknowledgement
+connection 2: client packet 2, then server packet 182 test
+connection 2: client heartbeat packets 24
+```
+
+The x86_64 emulator screenshot after this sequence shows the green tile field,
+the player HUD, and the three top-right status icons. The centered blue
+`Connecting to classic...` control is still present. This is a stronger result
+than the earlier splash-only observation because it proves the renderer path
+has run.
+
+The server capture contains an encrypted type 182 frame with sequence 10 and
+an empty body. Static ARM64 analysis maps packet 182 to handler index 14 and
+the handler table entry points to `sub_1EB4C0`, which calls the native hide
+routine and invokes `onServerListerConnect`. An x86_64 test build with a trap
+at that handler does not trap, while an otherwise identical trap at the known
+packet 48 handler does trap. The current working theory is therefore that the
+packet 182 table entry is absent or overwritten after the connector client is
+replaced for the game connection. This remains a local diagnostic result, not
+a claim about the live service's completion packet.
+
+The public game responder now accepts `--frame-after-client
+CLIENTTYPE:TYPE:HEXBODY`. This makes the test event-driven, so a completion
+candidate can be sent after a real client milestone instead of relying on a
+fragile wall-clock delay.

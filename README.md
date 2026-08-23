@@ -32,9 +32,15 @@ two compatibility repairs can connect to a loopback responder, complete the
 NewGraal key exchange, receive a server-warp, request the map, and request
 encrypted level files.
 
+The corrected two-connection replay now renders the level tile field and game
+HUD. The blue connecting control remains visible because packet 182 is present
+in the encrypted capture but does not reach the native handler that static
+analysis associates with hiding that control. This is the active runtime
+blocker, not a claim that the live service is working.
+
 The game has not yet been verified against a live game server. The local test
-client still displays the splash image after the synthetic level files are
-sent. That is an active investigation item, not a claimed success.
+client renders a synthetic world but still displays its connecting control.
+That is an active investigation item, not a claimed success.
 
 ## Repository layout
 
@@ -86,10 +92,9 @@ the analysis auditable without publishing secrets or a full game data set.
 
 ## Next investigation step
 
-The next useful experiment is to instrument the level-loading return path and
-the packet-35 file handler in the x86_64 diagnostic build. The client already
-gets as far as requesting the map and levels. The remaining work is to decide
-whether the level container is rejected, whether the file is saved under a
-different cache root, or whether the synthetic player/map sequence does not
-complete the normal renderer transition.
-
+The next useful experiment is to inspect the live `indatahandlers[182]` value
+on the second connection and repeat the sequence on ARM64. Static analysis
+maps packet 182 to handler index 14, but the x86_64 dispatch probe does not
+reach that handler even though the packet is present on the wire. The renderer
+already runs, so adding more guessed level packets is less useful than
+resolving this table mismatch.

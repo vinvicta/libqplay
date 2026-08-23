@@ -58,6 +58,36 @@ The `con.png` body should be an archived response that has already been
 parsed offline. Do not treat an invalid RSA signature as a production fix.
 It is accepted in the diagnostic APK only to reach the next native stage.
 
+## Two-connection game replay
+
+Packet 48 is a server-warp instruction. The responder must therefore send it
+on the first connection and wait for the client to reconnect before sending the
+map and level sequence. The event-driven option below sends packet 182 after
+the first ordinary client packet, which is useful for testing completion
+candidates without guessing a delay:
+
+```bash
+python3 tools/game_handshake_server.py \
+  --port 14900 \
+  --script /path/to/StartScript_Connector.dec.bin \
+  --output /tmp/graal-game-capture \
+  --package-file /tmp/basepackage-script.gupd \
+  --file-root /tmp/graal-assets \
+  --level-code-root /tmp/graal-assets/coded \
+  --server-signature 73 \
+  --file-transfer-mode single \
+  --basepackage-responses 4 \
+  --extra-frame-once 48:2c636c61737369632c3132372e302e302e312c3134393030 \
+  --extra-frame-after-first 7:2020636c61737369636970686f6e652e676d6170 \
+  --extra-frame-after-first 55:2024746573742e20202f2020302020 \
+  --frame-after-client 2:182:
+```
+
+The x86_64 diagnostic APK then reaches the rendered tile field and HUD. It
+still leaves the blue connecting control visible, and ARM64 runtime behavior
+has not been tested yet. Keep the trap and force-hide patchers in the private
+working tree. They are investigation aids, not release repairs.
+
 ## Game responder
 
 The local game responder implements only the frames needed for a bounded
@@ -110,4 +140,3 @@ The current work has reproduced milestones 1 through 3 locally. Milestone 4
 is intentionally still open. A local responder can prove native control flow,
 but it cannot prove account authentication, server compatibility, or current
 service availability.
-

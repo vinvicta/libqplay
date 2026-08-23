@@ -295,6 +295,16 @@ def main() -> None:
         metavar="TYPE:HEXBODY",
         help="send an additional encrypted frame on every connection after the first",
     )
+    parser.add_argument(
+        "--frame-after-client",
+        action="append",
+        default=[],
+        metavar="CLIENTTYPE:TYPE:HEXBODY",
+        help=(
+            "send one encrypted server frame after the first matching client "
+            "packet type on each connection"
+        ),
+    )
     args = parser.parse_args()
 
     if not 0 <= args.server_signature <= 223:
@@ -320,6 +330,19 @@ def main() -> None:
     extra_frames_after_first = [
         parse_extra_frame(spec) for spec in args.extra_frame_after_first
     ]
+    frame_after_client = []
+    for spec in args.frame_after_client:
+        try:
+            client_type, server_spec = spec.split(":", 1)
+            server_type, body_text = server_spec.split(":", 1)
+            frame_after_client.append(
+                (int(client_type, 0), int(server_type, 0), bytes.fromhex(body_text))
+            )
+        except ValueError as exc:
+            raise SystemExit(
+                f"invalid --frame-after-client {spec!r}: "
+                "expected CLIENTTYPE:TYPE:HEXBODY"
+            ) from exc
     if args.package_file:
         package_data = args.package_file.read_bytes()
     else:
@@ -366,6 +389,7 @@ def main() -> None:
                 responded = False
                 basepackage_sent = False
                 served_files = set()
+                sent_after_client = set()
                 client_stream = RC4Stream(output_key)
                 server_stream = RC4Stream(cipher_key)
                 server_sequence = 1
@@ -478,6 +502,22 @@ def main() -> None:
                                     f"data={len(response_data)}",
                                     flush=True,
                                 )
+                            for milestone, (
+                                client_type,
+                                server_type,
+                                server_body,
+                            ) in enumerate(frame_after_client):
+                                if milestone in sent_after_client:
+                                    continue
+                                if frame["type"] == client_type:
+                                    send_server_frame(server_type, server_body)
+                                    sent_after_client.add(milestone)
+                                    print(
+                                        f"{index + 1}: sent frame type={server_type} "
+                                        f"after client type={client_type} "
+                                        f"body={len(server_body)}",
+                                        flush=True,
+                                    )
                 while len(captured) < 65536:
                     try:
                         chunk = conn.recv(4096)

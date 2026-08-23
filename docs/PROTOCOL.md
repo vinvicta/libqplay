@@ -183,6 +183,7 @@ in the investigation.
 | 83 | 21 | native update path |
 | 84 | 22 | native update path |
 | 85 | 23 | native update path |
+| 182 | 14 | native hide-connecting-window path |
 
 Packet 48 carries a comma-separated destination. The local test body was:
 
@@ -197,6 +198,15 @@ Packet 7 carries two encoded coordinate bytes followed by a level or map
 name. A `.gmap` name takes the map-loading path. Sending a bare `.nw` name
 does not enter the same branch, which was one reason the first synthetic test
 stopped at the splash screen.
+
+Packet 182 deserves a careful qualification. Static ARM64 analysis maps it to
+handler index 14, whose native wrapper calls
+`TGUIScriptLoader_hideConnectingWindow`. The local responder can place packet
+182 on the encrypted wire after the world transition, but a trap at the
+matching x86_64 native handler is not reached. A trap at the packet 48 handler
+is reached, so this is evidence of a missing or overwritten runtime table entry
+on the game connection, not proof that packet 182 is the live server's final
+login-complete message.
 
 ## 7. Local trace
 
@@ -219,7 +229,7 @@ packet 35 requests overworld_west_ocean_10.nw
 ```
 
 The responder logs the requested names and sends re-keyed encrypted level
-containers. The client remains connected and sends ping frames, but the
-renderer still shows the splash image. That final transition is not yet
-explained.
-
+containers. The client remains connected and sends ping frames. With the
+correct two-connection sequence, the emulator renders the tile field and HUD,
+but the blue connecting control remains visible. The remaining UI transition
+is not yet explained.
