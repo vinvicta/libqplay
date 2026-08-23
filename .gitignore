@@ -1,0 +1,17 @@
+# Private reverse-engineering inputs and runtime captures
+*.apk
+*.i64
+*.idb
+*.so
+*.bin
+*.pcap
+*.pem
+*.key
+captures/
+private/
+tmp/
+
+# Python and editor output
+__pycache__/
+*.pyc
+.DS_Store

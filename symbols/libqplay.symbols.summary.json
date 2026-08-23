@@ -1,0 +1,11 @@
+{
+  "apply_renames": true,
+  "data": 505,
+  "functions": 4714,
+  "input": "private original ARM64 libqplay.so",
+  "jump_thunks": 199,
+  "plt_thunks": 3183,
+  "rename_failures": [],
+  "renamed": 8601,
+  "translated_symbols": 8601
+}

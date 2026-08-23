@@ -1,0 +1,32 @@
+{
+  "source_function": "TServerList_enterNextConnectorMode_int",
+  "source_address": "0x203df4",
+  "decoder_functions": {
+    "codesimplefix0": "0xea2c0",
+    "decodesimple": "0xea100"
+  },
+  "attempts": [
+    {
+      "mode": 1,
+      "first": "https://con.quattroplay.com/con.png",
+      "retry": "https://con2.quattroplay.com/con.png"
+    },
+    {
+      "mode": 2,
+      "first": "https://con.quattroplay.com/con.gs",
+      "retry": "https://con2.quattroplay.com/con.gs"
+    },
+    {
+      "mode": 3,
+      "first": "http://con.quattroplay.com/conf.gs",
+      "retry": "http://con2.quattroplay.com/conf.gs"
+    }
+  ],
+  "query_parameters": [
+    "g=<premium option>",
+    "p=<platform name>",
+    "v=6.15401",
+    "b=Jul  4 2019 09:35:48",
+    "p=<DES+Base64 encoded parameter list, key GP1Lq9Y4>"
+  ]
+}
