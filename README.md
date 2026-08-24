@@ -54,14 +54,17 @@ request, server warp, encrypted login exchange, map request, three level-file
 requests, `pics1.png` request, and continuing heartbeats, but stayed on the
 title or loading image. A second diagnostic build cleared the loading byte
 only after timer and packet processing, at the JNI render boundary. That build
-displayed the tiled world, player HUD, and status icons. This proves that the
-translated ARM64 process can execute the game draw path, while the correct
-production state transition and real ARM64-device behavior remain open.
+displayed the tiled world, player HUD, and status icons. A stronger
+one-instruction candidate instead forces the existing non-premium
+initialization path at `0x15ca7c`; with the corrected map fixture, it displays
+the same world through the normal render branch. The candidate still needs
+real ARM64-device and authorized live-service validation.
 
 The game has not yet been verified against a live game server. The local test
-proves that the x86_64 native client can reach a rendered world through a
-bounded loopback responder. Live endpoint availability, current package
-signing, account authentication, and ARM64 rendering remain open.
+proves that the x86_64 native client and the patched ARM64 library can reach a
+rendered world through a bounded loopback responder. Live endpoint
+availability, current package signing, account authentication, and physical
+ARM64-device behavior remain open.
 
 ## Repository layout
 

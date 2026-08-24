@@ -38,10 +38,13 @@ This is the short handoff view. The full reasoning and command history are in
     translation layer completes the connector, server warp, encrypted login,
     map, three level-file requests, image request, and heartbeat path. The
     expected map, level, and image files appear in the external cache.
-13. A second ARM64 diagnostic build clears the loading-screen byte only after
-    timer and packet processing, at the JNI render boundary. The same local
-    replay then displays the tiled world, player HUD, and status icons through
-    the translated ARM64 draw path.
+13. A one-instruction ARM64 diagnostic candidate forces the existing
+    non-premium initialization branch at `0x15ca7c`. With the exact `.gmap`
+    fixture, the normal render loop displays the tiled world, player HUD, and
+    status icons through the translated ARM64 draw path.
+14. A separate render-boundary diagnostic clears the loading byte only after
+    timer and packet processing. It produces the same visible result and
+    remains available as a control for the initialization candidate.
 
 ## Not verified
 
@@ -50,10 +53,10 @@ This is the short handoff view. The full reasoning and command history are in
 * That the current server's certificate and package-signing chain can be
   replaced safely without changing protocol behavior.
 * ARM64 runtime behavior on a real ARM64 device, especially renderer entry.
-* Whether the normal ARM64 state transition clears the loading byte at the
-  correct time on a physical ARM64 device. The ordinary translated ARM64 run
-  remains on the title or loading image even after the resource requests
-  complete, while the render-boundary diagnostic displays the world.
+* Whether the decoded premium-option value and the non-premium branch are the
+  intended production state transition on a physical ARM64 device. The
+  ordinary translated ARM64 run remains on the title or loading image, while
+  both diagnostics display the world.
 * Whether the live server sends the same completion sequence as the local
   responder.
 
@@ -70,10 +73,11 @@ The ARM64 diagnostic run establishes a narrower result. Under the available
 x86_64 emulator, Android translated the ARM64 native code far enough to make
 both game connections, accept the encrypted login, request the map and level
 files, cache the image, and keep the heartbeat alive. The ordinary build did
-not leave the title or loading image, but a render-boundary diagnostic that
-cleared the flag after packet processing displayed the world and HUD. This
-separates the translated draw path from the still-unresolved production state
-transition. A real ARM64 device is still needed for final runtime validation.
+not leave the title or loading image. The non-premium initialization candidate
+and the independent render-boundary control both displayed the world and HUD.
+This separates the translated draw path from the still-unresolved production
+entitlement and state semantics. A real ARM64 device is still needed for
+final runtime validation.
 
 The remaining blockers are external validation rather than an identified
 local parser failure:

@@ -54,6 +54,27 @@ that changing the flag at packet 190 is too early, or otherwise interferes
 with the normal transition. Packet 190 remains part of the working protocol
 sequence and is not a repair point.
 
+## Non-premium initialization candidate
+
+The most promising repair is the one-instruction test
+`tools/patch_force_no_premium_loading_test.py`. It changes the conditional
+branch at `0x15ca7c` from `B.LE 0x15cac0` to an unconditional branch to the
+existing flag-clear path. The rest of `sigcheck`, environment initialization,
+and the normal JNI render-loop branch are unchanged.
+
+The first run of this candidate appeared to stall, but that run used a map
+body without the required `.gmap` suffix. Repeating it with
+`classiciphone.gmap` produced the map request, all three level requests,
+`pics1.png`, continuing heartbeats, and a rendered world with the ordinary
+render loop. The resulting ARM64 library SHA-256 was
+`89a7cf3a10d9da9fb00f50e6917ce10402c1147bcf5738a176c26b32868ba858`.
+
+This is currently the leading local compatibility candidate because it
+corrects initialization state instead of forcing a draw every frame. It still
+needs validation on the intended ARM64 device and against an authorized live
+service. The decoded premium-option meaning also deserves a final check before
+calling this a production repair.
+
 ## Successful render-boundary diagnostic
 
 The stronger diagnostic hooks the getter call at `0x244228`, after the loop

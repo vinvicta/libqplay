@@ -69,6 +69,10 @@ python3 tools/patch_fixed_output_rc4_key_test.py \
   /tmp/libqplay.http.so \
   /tmp/libqplay.diagnostic.so
 
+python3 tools/patch_force_no_premium_loading_test.py \
+  /tmp/libqplay.diagnostic.so \
+  /tmp/libqplay.nonpremium.so
+
 python3 tools/patch_render_loop_clear_loading_flag_test.py \
   /tmp/libqplay.diagnostic.so \
   /tmp/libqplay.render-boundary.so
@@ -94,6 +98,14 @@ and lets the normal game-draw path run after network and resource work. It
 displayed the tiled ARM64 world and HUD through the available x86_64
 translation layer. It is not a release patch because it clears the byte on
 each render iteration.
+
+The preferred candidate for a state-oriented test is
+`tools/patch_force_no_premium_loading_test.py`. It changes only the branch at
+`0x15ca7c`, forcing the existing initialization path that clears the loading
+byte at `0x15cac8`. With the exact `classiciphone.gmap` fixture, this candidate
+renders through the ordinary JNI branch. The first apparent failure of this
+candidate used a map name without the `.gmap` suffix and should not be used as
+evidence against it.
 
 ## Connector replay
 

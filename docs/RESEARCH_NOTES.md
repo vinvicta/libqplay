@@ -386,6 +386,35 @@ sequencing, not an isolated loading-overlay switch. The test is retained as a
 negative control in `tools/patch_loading_screen_getter_test.py` and should not
 be used as a compatibility repair.
 
+## ARM64 non-premium initialization candidate
+
+The static initializer explains why the loading flag can remain set. At
+`0x15ca7c`, `TClientEnvironment::sigcheck` branches to `0x15cac0` only when
+the decoded premium option is zero or negative. That target stores zero into
+`loadingscreenenabled` at `0x15cac8` and then continues through the ordinary
+environment setup. A diagnostic helper,
+`tools/patch_force_no_premium_loading_test.py`, changes only the conditional
+branch to an unconditional branch to `0x15cac0`.
+
+The first run of this candidate was not a valid rejection. Its responder sent
+the map name without the `.gmap` suffix, so the client never received the map
+fixture. With the exact `classiciphone.gmap` body and the normal render loop,
+the candidate requested the map, all three level containers, and `pics1.png`,
+then continued sending packet 24 heartbeats. The screen showed the same tiled
+world, HUD, and status icons as the later render-boundary diagnostic.
+
+The resulting ARM64 library SHA-256 was:
+
+```text
+89a7cf3a10d9da9fb00f50e6917ce10402c1147bcf5738a176c26b32868ba858
+```
+
+This one-instruction candidate is currently a better local repair than the
+per-frame render hook because it restores the flag during initialization and
+leaves the normal render decision intact. It is still a diagnostic patch. The
+premium-option value and the correct production entitlement behavior need to
+be confirmed before using it outside the bounded test.
+
 ## ARM64 render-boundary state diagnostic
 
 The next experiment kept the getter and startup path intact. The JNI render
