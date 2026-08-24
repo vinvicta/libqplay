@@ -187,7 +187,7 @@
     {
       "handler_index": 30,
       "va": "0x1f1e68",
-      "name": "sub_1F1E68"
+      "name": "TClient_handleTextControlPacket"
     },
     {
       "handler_index": 31,
@@ -272,27 +272,27 @@
     {
       "handler_index": 48,
       "va": "0x1eab78",
-      "name": "sub_1EAB78"
+      "name": "TClient_processServerModifies"
     },
     {
       "handler_index": 49,
       "va": "0x1ea9f4",
-      "name": "sub_1EA9F4"
+      "name": "TClient_processServerModifies2"
     },
     {
       "handler_index": 50,
       "va": "0x1ea83c",
-      "name": "sub_1EA83C"
+      "name": "TClient_processServerModifies3"
     },
     {
       "handler_index": 51,
       "va": "0x1edf8c",
-      "name": "sub_1EDF8C"
+      "name": "TClient_modifyBoard"
     },
     {
       "handler_index": 52,
       "va": "0x1ee234",
-      "name": "sub_1EE234"
+      "name": "TClient_modifyBoardLevel"
     },
     {
       "handler_index": 53,

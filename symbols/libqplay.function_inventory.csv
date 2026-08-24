@@ -8180,10 +8180,10 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2008428,TClient_setServerLevelFile,ida_named_non_elf,,,,,.text,256,2,5120,False,False,False
 2008684,sub_1EA66C,ida_default_sub,,,,,.text,144,2,5120,False,False,True
 2008828,TClient_setInDataHandlersFromArray,ida_named_non_elf,,,,,.text,320,1,5120,False,False,False
-2009148,sub_1EA83C,ida_default_sub,,,,,.text,60,2,5120,False,False,True
+2009148,TClient_processServerModifies3,ida_named_non_elf,,,,,.text,60,2,5120,False,False,False
 2009208,sub_1EA878,ida_default_sub,,,,,.text,380,1,5120,False,False,True
-2009588,sub_1EA9F4,ida_default_sub,,,,,.text,388,2,5120,False,False,True
-2009976,sub_1EAB78,ida_default_sub,,,,,.text,184,2,5120,False,False,True
+2009588,TClient_processServerModifies2,ida_named_non_elf,,,,,.text,388,2,5120,False,False,False
+2009976,TClient_processServerModifies,ida_named_non_elf,,,,,.text,184,2,5120,False,False,False
 2010160,jump_TPlayerList_setStaffGuilds_TString_const,elf_symbol,jump_thunk,j_._ZN11TPlayerList14setStaffGuildsERK7TString,TPlayerList::setStaffGuilds(TString const&),jump_TPlayerList_setStaffGuilds_TString_const,.text,4,2,5312,True,False,False
 2010164,sub_1EAC34,ida_default_sub,,,,,.text,856,2,5120,False,False,True
 2011020,sub_1EAF8C,ida_default_sub,,,,,.text,84,1,5120,False,False,True
@@ -8246,8 +8246,8 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2022884,sub_1EDDE4,ida_default_sub,,,,,.text,100,1,5120,False,False,True
 2022984,TClient_setPlayerWeaponImages,ida_named_non_elf,,,,,.text,188,1,5120,False,False,False
 2023172,TClient_handleServerLoginPacket,ida_named_non_elf,,,,,.text,136,1,5120,False,False,False
-2023308,sub_1EDF8C,ida_default_sub,,,,,.text,680,2,5120,False,False,True
-2023988,sub_1EE234,ida_default_sub,,,,,.text,812,2,5120,False,False,True
+2023308,TClient_modifyBoard,ida_named_non_elf,,,,,.text,680,2,5120,False,False,False
+2023988,TClient_modifyBoardLevel,ida_named_non_elf,,,,,.text,812,2,5120,False,False,False
 2024800,TClient_setNpcWeaponImages,ida_named_non_elf,,,,,.text,192,1,5120,False,False,False
 2024992,TClient_parseSetPing_TString_const,elf_symbol,function,_Z20TClient_parseSetPingRK7TString,TClient_parseSetPing(TString const&),TClient_parseSetPing_TString_const,.text,232,4,5120,False,False,False
 2025224,sub_1EE708,ida_default_sub,,,,,.text,168,1,5120,False,False,True
@@ -8284,7 +8284,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2039028,TClient_initStaticScriptVars_void,elf_symbol,function,_Z28TClient_initStaticScriptVarsv,TClient_initStaticScriptVars(void),TClient_initStaticScriptVars_void,.text,68,4,5120,False,False,False
 2039096,TClient_logGameEcho,ida_named_non_elf,,,,,.text,152,2,5120,False,False,False
 2039248,sub_1F1DD0,ida_default_sub,,,,,.text,152,1,5120,False,False,True
-2039400,sub_1F1E68,ida_default_sub,,,,,.text,708,1,5120,False,False,True
+2039400,TClient_handleTextControlPacket,ida_named_non_elf,,,,,.text,708,1,5120,False,False,False
 2040108,TClient_setEncryptedScript,ida_named_non_elf,,,,,.text,1148,1,5120,False,False,False
 2041256,TClient_loadEncryptedScript,ida_named_non_elf,,,,,.text,1144,1,5120,False,False,False
 2042400,TClient_handleGaniUpdate,ida_named_non_elf,,,,,.text,356,1,5120,False,False,False

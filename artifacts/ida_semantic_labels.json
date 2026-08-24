@@ -8,10 +8,10 @@
   "policy": "These aliases are analysis labels, not recovered source names. The evidence is recorded so a later pass can correct a label without confusing it with an imported ELF symbol.",
   "inventory_after_labels": {
     "total_functions": 11271,
-    "ida_default_sub_functions": 2042,
-    "ida_named_non_elf_functions": 1133,
-    "named_function_total": 9229,
-    "new_labels_in_this_pass": 69
+    "ida_default_sub_functions": 2036,
+    "ida_named_non_elf_functions": 1139,
+    "named_function_total": 9235,
+    "new_labels_in_this_pass": 75
   },
   "labels": [
     {
@@ -427,6 +427,42 @@
       "name": "TClient_handleUpdatePackage",
       "confidence": "high",
       "evidence": ["Parses an update-package record", "Obtains the TUpdatePackage and adds it to the client request list when absent"]
+    },
+    {
+      "va": "0x1f1e68",
+      "name": "TClient_handleTextControlPacket",
+      "confidence": "high",
+      "evidence": ["Handles GraalEngine, QEngine, getstats, stats, and receivetext controls", "Uses sendSetText and stats responses"]
+    },
+    {
+      "va": "0x1eab78",
+      "name": "TClient_processServerModifies",
+      "confidence": "high",
+      "evidence": ["Calls TPlayer_doServerModifies", "Enters the resulting server level"]
+    },
+    {
+      "va": "0x1ea9f4",
+      "name": "TClient_processServerModifies2",
+      "confidence": "high",
+      "evidence": ["Clears level state and calls TPlayer_doServerModifies2", "Enters the resulting server level"]
+    },
+    {
+      "va": "0x1ea83c",
+      "name": "TClient_processServerModifies3",
+      "confidence": "high",
+      "evidence": ["Forwards the packet to TPlayer_doServerModifies3 for the current server level"]
+    },
+    {
+      "va": "0x1edf8c",
+      "name": "TClient_modifyBoard",
+      "confidence": "high",
+      "evidence": ["Decodes board coordinates", "Calls TPlayer_modifyBoard on the current level"]
+    },
+    {
+      "va": "0x1ee234",
+      "name": "TClient_modifyBoardLevel",
+      "confidence": "high",
+      "evidence": ["Resolves a level name and decodes board coordinates", "Calls TPlayer_modifyBoard on that level"]
     }
   ],
   "network_contacted": false
