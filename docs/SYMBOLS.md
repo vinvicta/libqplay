@@ -65,6 +65,35 @@ it as an inferred semantic name, not part of the original symbol import. Its
 method-table reference and native behavior are documented in
 `artifacts/game_server_tls.json`.
 
+## Complete function inventory
+
+The symbol table and the IDA function list are different sets. The ELF has
+8,601 surviving records, including 505 data records. Of those records, 8,096
+land on IDA functions. IDA's analysis adds 11,271 function starts in total:
+
+| Function source | Count |
+| --- | ---: |
+| Backed by a translated ELF symbol | 8,096 |
+| IDA default `sub_` names | 2,111 |
+| Named by IDA but not backed by an ELF record | 1,064 |
+| Total IDA functions | 11,271 |
+
+The complete address-level inventory is in
+`symbols/libqplay.function_inventory.csv` and
+`symbols/libqplay.function_inventory.json`. Every row records the IDA name,
+address, segment, size, incoming-reference count, thunk and library flags,
+and the matching original ELF symbol when one exists. The summary file records
+the input hash and counts. This is the honest limit of the available evidence:
+the 2,111 `sub_` entries are real functions identified by IDA, but the APK
+does not contain source names for them. They remain addressable and searchable
+without being given guesses that could mislead later protocol work.
+
+The inventory was generated from the active ARM64 database by
+`tools/export_function_inventory.py`. It waits for auto-analysis, joins each
+function start against the translated symbol export, and writes the result in
+address order. Running it again against a different library revision should
+produce a different input hash and must be kept as a separate export.
+
 ## Repeating the pass
 
 Run the IDAPython script from IDA's Python console or with the IDA batch

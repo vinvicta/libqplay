@@ -49,6 +49,16 @@ mangled name beside the demangled name preserves a useful lookup key. A thunk
 is named separately from its target so cross-references do not become
 ambiguous.
 
+The follow-up inventory keeps the coverage boundary explicit. IDA reports
+11,271 function starts in this database. The translated ELF rows account for
+8,096 function starts and the remaining rows are 2,111 default `sub_` names
+plus 1,064 names that IDA created without a matching ELF symbol. The 505
+remaining ELF rows are data symbols. `symbols/libqplay.function_inventory.csv`
+and its JSON counterpart record every function start, its size, segment,
+incoming references, flags, and source category. The `sub_` rows are not
+missing from the archive; they are unnamed because this stripped portion of
+the file provides no reliable semantic name for them.
+
 The translated symbols changed the pace of the rest of the investigation.
 Instead of guessing from strings, the connector and login flow could be
 followed by name. Important ARM64 addresses include:
