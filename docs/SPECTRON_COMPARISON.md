@@ -94,6 +94,31 @@ the original `0xe0170`, and the known loading-state marker moves from file
 offset `0x2ce1d0` to `0x2db730`. These differences make direct symbol-address
 transfers unsafe.
 
+The offline ELF report makes that separation measurable. The original has
+6,674 dynamic-symbol table entries and 6,671 named entries; Spectron has
+6,773 and 6,770. Only 1,036 names are exact matches, mostly shared third-party
+code. A simple application-name heuristic finds 1,035 readable names in the
+original but only 28 in Spectron, where the C++ names have been obfuscated.
+The `.text` section also moves from file offset `0x0e0170` and size
+`0x1ed970` to `0x0df800` and size `0x1fb870`. This is why an address copied from
+the translated 1.8 IDA database is not meaningful in the modded build.
+
+The report records the exact embedded identity strings without publishing a
+private credential. The six-certificate trust text is 12,820 bytes at
+`0x2dcef8` in the original and `0x2ea9e0` in Spectron, with the same SHA-256
+`c87ea7bc32005cca699fb724ab455926fd852a1bd40ce0985aadf31a994878a0`. The
+`PjosLg8D` marker is at `0x2e1788` and `0x2ef7c8`; its following 360-character
+public-key text begins 16 bytes later in both files and has SHA-256
+`336e42a7b288feb8611ddbbcb19c135f2049a01169df9f15878e1dcb2d1facaa`. The
+native DES-decoded DER remains 269 bytes with SHA-256
+`35e7245d68e6ab6c84bd55061704fe2d3d16800cbe0a671aceae6c85e1301b82`.
+
+The last text hash corrects an earlier archive typo. The previous value
+`22d742...` did not hash the 360-byte embedded Base64 text. The value above is
+the direct hash of the bytes found in both libraries; the decoded DER identity
+was already correct. `artifacts/spectron_native_compare.json` and
+`tools/compare_spectron_native.py` now provide the reproducible comparison.
+
 There is one exact binary match that matters for the connector investigation.
 The 12,820-byte base64 string beginning with `6erxf21jcqpGrZR4` appears at
 file offset `0x2dcef8` in the original ARM64 library and at `0x2ea9e0` in the

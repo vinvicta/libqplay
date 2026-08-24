@@ -141,6 +141,8 @@ proves the local native TLS path, not a current live certificate or service.
 * `docs/HELPER_TOOLCHAIN.md` records the pinned GS2 and connector-helper
   checks, including their reproducible hashes and current limitations.
 * `docs/SPECTRON_COMPARISON.md` records the supplied modded APK comparison.
+* `artifacts/spectron_native_compare.json` records the offline ELF, symbol,
+  section, and embedded-string comparison for the two ARM64 native builds.
 * `docs/TESTING.md` describes local-only reproduction without contacting a
   live game service.
 * `artifacts/helper_toolchain_replay.json` records the verified HexaParser and
@@ -179,6 +181,8 @@ proves the local native TLS path, not a current live certificate or service.
   port for a loopback ADB reverse mapping, and
   `tools/tls_capture_server.py` serves an archived response over a
   127.0.0.1-only TLS listener.
+  `tools/compare_spectron_native.py` compares the supplied Spectron native
+  library with the original ARM64 build without loading either one.
   `tools/decode_game_server_tls_certificate.py` decodes the separate
   game-server certificate from the recovered connector script without opening
   a socket. `tools/encode_game_server_tls_certificate.py` prepares a

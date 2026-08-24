@@ -106,7 +106,7 @@
     "connector_public_key_text": {
       "marker": "PjosLg8D",
       "length": 360,
-      "sha256": "22d742b8e80aa2e79e3e1dbc7f5b332ff52f458d293a6e29995a02a548749a93",
+      "sha256": "336e42a7b288feb8611ddbbcb19c135f2049a01169df9f15878e1dcb2d1facaa",
       "original_spectron_byte_for_byte_equal": true,
       "native_des_decoded_der_bytes": 269,
       "native_des_decoded_der_sha256": "35e7245d68e6ab6c84bd55061704fe2d3d16800cbe0a671aceae6c85e1301b82"
