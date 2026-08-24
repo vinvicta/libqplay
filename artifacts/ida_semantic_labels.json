@@ -8,10 +8,10 @@
   "policy": "These aliases are analysis labels, not recovered source names. The evidence is recorded so a later pass can correct a label without confusing it with an imported ELF symbol.",
   "inventory_after_labels": {
     "total_functions": 11271,
-    "ida_default_sub_functions": 2036,
-    "ida_named_non_elf_functions": 1139,
-    "named_function_total": 9235,
-    "new_labels_in_this_pass": 75
+    "ida_default_sub_functions": 2028,
+    "ida_named_non_elf_functions": 1147,
+    "named_function_total": 9243,
+    "new_labels_in_this_pass": 83
   },
   "labels": [
     {
@@ -463,6 +463,54 @@
       "name": "TClient_modifyBoardLevel",
       "confidence": "high",
       "evidence": ["Resolves a level name and decodes board coordinates", "Calls TPlayer_modifyBoard on that level"]
+    },
+    {
+      "va": "0x1ea66c",
+      "name": "TClient_setNpcServerLevel",
+      "confidence": "high",
+      "evidence": ["Resolves a .gmap or level resource", "Stores it in data_TClient_npcserverlevel"]
+    },
+    {
+      "va": "0x1ea504",
+      "name": "TClient_addLevelLink",
+      "confidence": "high",
+      "evidence": ["Constructs a TServerLevelLink from the packet string", "Adds it to the current level's link list"]
+    },
+    {
+      "va": "0x1ed9d0",
+      "name": "TClient_setNpcScript",
+      "confidence": "high",
+      "evidence": ["Decodes an NPC ID", "Sets the NPC script and invokes its script-refresh virtual method"]
+    },
+    {
+      "va": "0x1ef654",
+      "name": "TClient_removeLevelObject",
+      "confidence": "high",
+      "evidence": ["Resolves a level and object ID", "Invokes the object's removal virtual method"]
+    },
+    {
+      "va": "0x1e9f84",
+      "name": "TClient_clearNpcServerLevel",
+      "confidence": "high",
+      "evidence": ["Collects NPC objects from the NPC server level", "Destroys the temporary list entries and clears the temporary list"]
+    },
+    {
+      "va": "0x1eebcc",
+      "name": "TClient_handlePlayerHurt",
+      "confidence": "high",
+      "evidence": ["Decodes a hurt position", "Calls sub_1ECE1C when the active player is eligible to be hurt"]
+    },
+    {
+      "va": "0x1ef900",
+      "name": "TClient_handlePlayerHurtAtPosition",
+      "confidence": "high",
+      "evidence": ["Computes a hurt position relative to the active player", "Calls sub_1ECE1C when the active player is eligible"]
+    },
+    {
+      "va": "0x1ec3e4",
+      "name": "TClient_setPlayerPosition",
+      "confidence": "high",
+      "evidence": ["Decodes two coordinates", "Updates the active player's position when its level matches data_TClient_serverlevel"]
     }
   ],
   "network_contacted": false

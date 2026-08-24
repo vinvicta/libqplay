@@ -297,7 +297,7 @@
     {
       "handler_index": 53,
       "va": "0x1ea66c",
-      "name": "sub_1EA66C"
+      "name": "TClient_setNpcServerLevel"
     },
     {
       "handler_index": 54,
@@ -307,12 +307,12 @@
     {
       "handler_index": 55,
       "va": "0x1ea504",
-      "name": "sub_1EA504"
+      "name": "TClient_addLevelLink"
     },
     {
       "handler_index": 56,
       "va": "0x1ed9d0",
-      "name": "sub_1ED9D0"
+      "name": "TClient_setNpcScript"
     },
     {
       "handler_index": 57,
@@ -332,12 +332,12 @@
     {
       "handler_index": 60,
       "va": "0x1ef654",
-      "name": "sub_1EF654"
+      "name": "TClient_removeLevelObject"
     },
     {
       "handler_index": 61,
       "va": "0x1e9f84",
-      "name": "sub_1E9F84"
+      "name": "TClient_clearNpcServerLevel"
     },
     {
       "handler_index": 62,
@@ -347,17 +347,17 @@
     {
       "handler_index": 63,
       "va": "0x1eebcc",
-      "name": "sub_1EEBCC"
+      "name": "TClient_handlePlayerHurt"
     },
     {
       "handler_index": 64,
       "va": "0x1ef900",
-      "name": "sub_1EF900"
+      "name": "TClient_handlePlayerHurtAtPosition"
     },
     {
       "handler_index": 65,
       "va": "0x1ec3e4",
-      "name": "sub_1EC3E4"
+      "name": "TClient_setPlayerPosition"
     },
     {
       "handler_index": 66,
