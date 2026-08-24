@@ -396,11 +396,15 @@ environment setup. A diagnostic helper,
 `tools/patch_force_no_premium_loading_test.py`, changes only the conditional
 branch to an unconditional branch to `0x15cac0`.
 
-The option is a string marker, not an integer comparison. The embedded input
-is `a9a` at `0x2ce1d0`. The ARM64 `codesimplefix0` and `decodesimple` helpers
-transform it into a non-empty three-byte `TString`, and `sigcheck` tests the
-string length loaded at `0x15ca70`. The original code therefore takes the
-enabled branch and leaves the initial loading byte set to one.
+The option is a string marker, not an integer comparison. IDA displays the
+printable prefix `a9a` at `0x2ce1d0`, but the native `strlen` call sees the full
+seven-byte sequence `61 39 61 15 11 35 49` before its NUL terminator. Applying
+the ARM64 `codesimplefix0` and `decodesimple` helpers to all seven bytes yields
+the string `classic`. The decoded value matches the `g=classic` connector
+query. `sigcheck` tests the resulting string length loaded at `0x15ca70`, so
+the original code takes the enabled branch and leaves the initial loading byte
+set to one. The machine-readable details are in
+`artifacts/premium_option.json`.
 
 The first run of this candidate was not a valid rejection. Its responder sent
 the map name without the `.gmap` suffix, so the client never received the map
@@ -418,8 +422,10 @@ The resulting ARM64 library SHA-256 was:
 This one-instruction candidate is currently a better local repair than the
 per-frame render hook because it restores the flag during initialization and
 leaves the normal render decision intact. It is still a diagnostic patch. The
-premium-option value and the correct production entitlement behavior need to
-be confirmed before using it outside the bounded test.
+decoded value is now statically confirmed as `classic`. The correct production
+entitlement behavior and whether this client should take the non-premium
+branch on a current service still need confirmation before using the patch
+outside the bounded test.
 
 ## ARM64 render-boundary state diagnostic
 

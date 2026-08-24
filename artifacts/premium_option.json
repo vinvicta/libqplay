@@ -1,0 +1,15 @@
+{
+  "source_function": "TGameEnvironment_getPremiumOption_void",
+  "source_address": "0xe9d64",
+  "input_address": "0x2ce1d0",
+  "input_hex_with_nul": "6139611511354900",
+  "printable_prefix": "a9a",
+  "strlen_bytes": 7,
+  "decoder_functions": {
+    "codesimplefix0": "0xea2c0",
+    "decodesimple": "0xea100"
+  },
+  "decoded_value": "classic",
+  "sigcheck_length_test": "0x15ca70",
+  "sigcheck_branch": "0x15ca7c"
+}

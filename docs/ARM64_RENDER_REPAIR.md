@@ -18,11 +18,13 @@ the loading flag at `0x15cac8`. When the option is enabled, that clear is
 skipped. This means the byte is part of startup state, not merely a final
 overlay switch.
 
-The option is not read as a numeric entitlement in this routine. The helper
-starts from the embedded marker `a9a` at `0x2ce1d0`, transforms it through the
-two simple string codecs, and returns a non-empty three-byte `TString`.
-`sigcheck` then tests the string length at `0x15ca70`, so the original path
-treats the option as enabled and skips the flag clear.
+The option is not read as a numeric entitlement in this routine. IDA shows the
+printable prefix `a9a` at `0x2ce1d0`, but the native `strlen` call sees the full
+seven bytes `61 39 61 15 11 35 49` before the NUL terminator. The two simple
+string codecs transform that seven-byte marker into `classic`. `sigcheck`
+then tests the resulting string length at `0x15ca70`, so the original path
+treats the option as enabled and skips the flag clear. The same evidence is
+recorded in `artifacts/premium_option.json`.
 
 The JNI render loop checks the flag at `0x244228`, immediately before choosing
 between the loading-screen path and the normal game drawing path. The useful
@@ -78,8 +80,9 @@ render loop. The resulting ARM64 library SHA-256 was
 This is currently the leading local compatibility candidate because it
 corrects initialization state instead of forcing a draw every frame. It still
 needs validation on the intended ARM64 device and against an authorized live
-service. The decoded premium-option meaning also deserves a final check before
-calling this a production repair.
+service. The decoded value is statically confirmed as `classic`; the
+production meaning of the entitlement branch still deserves a final check
+before calling this a production repair.
 
 ## Successful render-boundary diagnostic
 

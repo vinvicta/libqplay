@@ -53,10 +53,10 @@ This is the short handoff view. The full reasoning and command history are in
 * That the current server's certificate and package-signing chain can be
   replaced safely without changing protocol behavior.
 * ARM64 runtime behavior on a real ARM64 device, especially renderer entry.
-* Whether the decoded premium-option value and the non-premium branch are the
-  intended production state transition on a physical ARM64 device. The
-  ordinary translated ARM64 run remains on the title or loading image, while
-  both diagnostics display the world.
+* Whether forcing the non-premium branch is the intended production state
+  transition on a physical ARM64 device. The embedded marker statically
+  decodes to `classic`, and the ordinary translated ARM64 run remains on the
+  title or loading image, while both diagnostics display the world.
 * Whether the live server sends the same completion sequence as the local
   responder.
 
