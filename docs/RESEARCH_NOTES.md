@@ -220,11 +220,13 @@ notes should always name the complete cache root, not just the relative
 ## Spectron comparison
 
 The supplied Spectron APK was inspected as a related client. It includes
-custom routing and signing-related strings, and it bundles an Xposed library.
+custom routing and signing-related strings, a newer obfuscated native library,
+and a bundled `libxposed.so` with an ARM64 hook loader and WebTop JNI exports.
 The presence of a loopback address or a signing string is not enough to prove
-that every original connection is redirected in the same way. The comparison
-was useful for understanding the intended package format, but the original
-client's own symbolized library remains the source of truth for this task.
+that every connection is redirected in the same way. The full hashes,
+addresses, and runtime observations are in
+[SPECTRON_COMPARISON.md](SPECTRON_COMPARISON.md). The original client's own
+symbolized library remains the source of truth for this task.
 
 ## Evidence levels used in this archive
 
@@ -307,8 +309,7 @@ handler. This proves that the renderer, map cache, level loader, image loader,
 and connecting-window transition all run in the bounded local test.
 
 One negative control is worth preserving. A test build routed packet 59
-directly to the apparent x86_64 parser block at `0x2096f0`, bypassing the
-directly to the apparent x86_64 parser block. That build did not reproduce the
+directly to the apparent x86_64 parser block at `0x2096f0`. That build did not reproduce the
 working exchange. It changed the first connection to ordinary packet 23
 requests and stopped before the normal second-connection sequence. The direct
 jump is therefore rejected as a repair. The working responder uses packet 102

@@ -1,0 +1,123 @@
+# Spectron comparison
+
+This note records what the supplied `spectron_client_1.0.2.apk` tells us
+about the old client. It is a comparison artifact, not a claim that the
+modded build is a drop-in replacement or that it has been proven playable.
+
+## Inputs
+
+The modded APK has SHA-256
+`5b10289ad2b67fba77f5f4159d51cdbeaf4ca2710fb1459da69c8d4b1af5149c`.
+The original ARM64 library has SHA-256
+`9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8`.
+The modded ARM64 library has SHA-256
+`f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219`.
+
+The two helper repositories were inspected at these commits:
+
+* [GScript.Go-HexaParser](https://github.com/MorenoLand/GScript.Go-HexaParser),
+  `ad9bd3657feece825b5f5a888f5db34ffe37afb9`.
+* [Moreno.kahn](https://github.com/MorenoLand/Moreno.kahn),
+  `5e3a05fc8fbcf3c3f72b3c263238b2ed275fc66d`.
+
+## Package differences
+
+| Property | Original | Spectron |
+| --- | --- | --- |
+| Package | `com.quattroplay.GraalClassic` | `com.quattroplay.GraalClassiC` |
+| Version | `6158` / `1.8` | `6612` / `2.2` |
+| Target SDK | 26 | 33 |
+| ARM64 `libqplay.so` | 3,657,208 bytes | 3,736,872 bytes |
+| ARM64 `libqplay.so` symbols | Many application names retained | Application names largely obfuscated |
+
+The package includes 6,767 files under `assets/offline/`, making it a useful
+content and behavior reference. It should not be treated as proof that the
+old client can use those assets without matching scripts, checksums, and
+server-side responses.
+
+## Native observations
+
+The Spectron `libqplay.so` still exports the native CyaSSL implementation. A
+few useful relative addresses are:
+
+* `CyaInt::ValidateDate` at `0x2c2940`;
+* `CyaInt::CyaSSL_connect` at `0x2d2bcc`;
+* `CyaInt::CyaSSL_CTX_load_verify_buffer` at `0x2d35d8`.
+
+The same library contains the strings `SetSigningCertificate`,
+`GRAALRELOADED-version:`, `127.0.0.1`, `graal://`, and `graal3://`. It also
+contains the ordinary `http://` and `https://` vocabulary and the familiar
+game-server error messages. These strings establish that custom routing and
+signing-related code is present. They do not establish which host is used at
+runtime, nor do they prove that the old certificate problem is fixed.
+
+The APK also bundles `libxposed.so`, SHA-256
+`0300bf22966ff43a03495292493530e8e048032a808f80132e5360d8f8bdf456`.
+Its native imports include `dlopen`, `dlsym`, `mprotect`, and
+`dl_iterate_phdr`. Its string table includes `A64_HOOK`,
+`inline hook %p->%p successfully! %zu bytes overwritten`, and `libqplay.so`.
+The ARM64 library exports these JNI entry points:
+
+* `JNI_OnLoad` at `0x832e8`, returning JNI 1.6;
+* `Java_com_WebTop_onCreated` at `0x85de8`;
+* `Java_com_WebTop_onmsg` at `0x85d34`;
+* `Java_com_WebTop_getMainUrl` at `0x85f84`.
+
+The exported `onCreated` body is a short save-and-return stub in this file.
+The `onmsg` entry point dispatches through an object method, while
+`getMainUrl` builds and returns a native string. The combination is consistent
+with a custom WebTop or hook bridge, but it does not by itself identify a
+game-server endpoint.
+
+## Java observations
+
+The Java dex files still use the normal Graal activity and renderer bridge:
+`QPlayActivity` creates the native renderer and `QPlayRenderer` calls
+`Natives.QPlayMain`. The activity has fields and methods named
+`signingCertificate`, `GetSigningCertificate`, and `SetSigningCertificate`.
+Those names may refer to application signing or entitlement checks. They are
+not enough to conclude that they hold the HTTPS server certificate or that
+they implement certificate pinning.
+
+The dex strings do not expose an obvious `con.quattroplay.com` or game-login
+hostname. The native library does contain loopback and URL strings, so a
+runtime trace is still required before describing the mod as a local-server
+client.
+
+## Runtime comparison
+
+The modded package was installed alongside the original on the x86_64
+emulator. Its log reached:
+
+```text
+Connecting to the login server...
+Serverwarp...
+Connected.
+```
+
+The visible UI reached a custom green menu with `Edit Profile` and `Start`.
+The same run logged failures writing some external scoped-storage files,
+including level files. Remote HTTP and HTTPS sockets were also observed, so
+the `127.0.0.1` string is not evidence of a self-contained offline server.
+A playable world was not verified for the modded package.
+
+## What this changes for the original client
+
+The original client remains the source of truth for the 1.8 protocol. Its
+ARM64 symbol translation is complete at 8,601 applied names, and the local
+no-swap replay reaches a rendered world through the normal packet table.
+That replay uses packet 178 for server warp, packet 190 for the connecting
+window completion path, packet 49 for the GMAP transition, and packet 102 for
+file responses. A large-file transfer can use 68, 84, 102, 69.
+
+The comparison therefore supports three practical conclusions:
+
+1. The newer package is a useful source of content and behavioral clues.
+2. Its native library and hook library are different builds with different
+   symbol and routing assumptions.
+3. Grafting either library into the original package would introduce more
+   unknowns than it removes. The next safe comparison is an ARM64 loopback
+   run using the original client and the already verified local responder.
+
+The live-service login remains unverified. No production endpoint or account
+was used for the local replay.

@@ -58,6 +58,7 @@ account authentication remain open.
 * `docs/LEVEL_CONTAINER.md` describes the encrypted `.code` level container.
 * `docs/SYMBOLS.md` explains the symbol export and naming policy.
 * `docs/RUNTIME_STATUS.md` lists verified milestones and open blockers.
+* `docs/SPECTRON_COMPARISON.md` records the supplied modded APK comparison.
 * `docs/TESTING.md` describes local-only reproduction without contacting a
   live game service.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.
