@@ -76,6 +76,12 @@ emulator or device, and configure ADB reverse mappings for ports 18080 and
 14900. The ARM64 fixed-key patch uses a trampoline at `0x1f2dcc` and resumes
 the original function at `0x1fd6b8`; it is only for the offline responder.
 
+For a loading-sequence negative control, apply
+`tools/patch_loading_screen_getter_test.py` after the native diagnostic edits.
+On ARM64 it patches `TClientEnvironment::getLoadingScreenEnabled` at
+`0x15d35c`. The observed result was no connector request and no world render,
+so this patch is not part of the working replay.
+
 ## Connector replay
 
 The responder defaults to legacy-looking lowercase headers, but this is not a

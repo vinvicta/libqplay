@@ -371,6 +371,21 @@ ARM64 renderer or level transition works on real ARM64 hardware. The exact
 warp body is also significant: `,classic,127.0.0.1,14900` caused the second
 connection, while the earlier colon form did not.
 
+## Loading-screen getter negative control
+
+The symbolized ARM64 library exposes `TClientEnvironment::getLoadingScreenEnabled`
+at `0x15d35c`. Its callers include `TGUIScriptLoader::showConnectingWindow`,
+`GuiCanvas::prerenderFrame`, and the JNI render loop. A diagnostic patch at that
+getter returns false without changing the connector or game packet code.
+
+On the corrected ARM64 loopback build, this patch did not expose a rendered
+world. It also suppressed the normal `Connecting to the login server...` log
+and generated no request at the local connector port, while the process and
+OpenGL context stayed alive. That makes the getter part of startup and UI
+sequencing, not an isolated loading-overlay switch. The test is retained as a
+negative control in `tools/patch_loading_screen_getter_test.py` and should not
+be used as a compatibility repair.
+
 One negative control is worth preserving. A test build routed packet 59
 directly to the apparent x86_64 parser block at `0x2096f0`. That build did not reproduce the
 working exchange. It changed the first connection to ordinary packet 23
