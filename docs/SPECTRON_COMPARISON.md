@@ -100,7 +100,8 @@ file offset `0x2dcef8` in the original ARM64 library and at `0x2ea9e0` in the
 Spectron ARM64 library. Both strings have SHA-256
 `c87ea7bc32005cca699fb724ab455926fd852a1bd40ce0985aadf31a994878a0`, and a
 byte-for-byte comparison is equal. Decoding either copy with the original
-native key rule produces the same five-certificate historical bundle. The
+native key rule produces the same six-block historical bundle, including the
+malformed AlphaSSL PEM markers. The
 Spectron package therefore does not fix the expired connector trust chain by
 embedding a newer certificate. Any working behavior in that package must come
 from its separate routing, hook, package, or service logic.

@@ -71,6 +71,38 @@
         }
       }
     },
+    "connector_certificate_replacement": {
+      "purpose": "Replace the historical encrypted trust bundle with a user-supplied certificate-only PEM bundle while retaining native peer and hostname verification.",
+      "production_status": "preferred path, pending an authorized current chain",
+      "tool": "tools/patch_graalweb_trust_bundle.py",
+      "historical_embedded_text_sha256": "c87ea7bc32005cca699fb724ab455926fd852a1bd40ce0985aadf31a994878a0",
+      "des_key": "jhOdx9SY",
+      "original_bundle_bytes": 9615,
+      "original_certificate_block_count": 6,
+      "standard_marker_block_count": 5,
+      "malformed_marker_block_count": 1,
+      "malformed_marker_style": "BEGINCERTIFICATE / ENDCERTIFICATE",
+      "sites": {
+        "arm64-v8a": {
+          "native_offset": "0x2dcef8",
+          "encoded_capacity": 12820
+        },
+        "x86_64": {
+          "native_offset": "0x2fca80",
+          "encoded_capacity": 12820
+        },
+        "x86": {
+          "native_offset": "0x2ecb08",
+          "encoded_capacity": 12820
+        },
+        "armeabi": {
+          "native_offset": "0x21a438",
+          "encoded_capacity": 12820
+        }
+      },
+      "network_contacted": false,
+      "runtime_verified": false
+    },
     "force_nonpremium_initialization": {
       "purpose": "Run the existing startup branch that clears the native loading flag.",
       "production_status": "leading local candidate, not released",

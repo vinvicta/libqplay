@@ -92,6 +92,11 @@ This is the short handoff view. The full reasoning and command history are in
     `888a236bb839eef7ab094196b924796680d23d857a0d7533487bcd3786efb308`.
     Its original RSA branch bytes are `dc 00 00 35`. This package is prepared
     for a future translated or physical ARM64 runtime check only.
+22. The trust-bundle replacement tool was checked against the original ARM64,
+    armeabi, x86, and x86_64 libraries. A one-certificate standard PEM bundle
+    encoded at each architecture-specific offset and decoded byte-for-byte.
+    These checks were offline and did not establish compatibility with a live
+    endpoint.
 
 ## Not verified
 

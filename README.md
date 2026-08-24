@@ -33,11 +33,15 @@ the standard ASN.1 `DigestInfo` form. The certificate problem remains real,
 and both it and any response signed by a different key must stay separate from
 the game-server protocol.
 
-The certificate payload is a five-entry PEM bundle. The native path uses the
-ordinary base64 alphabet, DES-ECB with bit-reversed key bytes, and a seven-byte
-short-block tail. The first entry is the expired Eurocenter Games certificate;
-the bundle also carries the expired AddTrust root. The exact hashes and an
-offline decoder are kept in `artifacts/graalweb_trust_bundle.json` and
+The certificate payload contains six historical certificate blocks in a PEM
+bundle. One AlphaSSL block uses malformed `BEGINCERTIFICATE` and
+`ENDCERTIFICATE` markers, so the decoder records both raw and normalized
+hashes. The native path uses the ordinary base64 alphabet, DES-ECB with
+bit-reversed key bytes, and a seven-byte short-block tail. The first entry is
+the expired Eurocenter Games certificate; the bundle also carries the expired
+AddTrust root and an AlphaSSL intermediate that expired in 2024. The exact
+hashes and an offline decoder are kept in
+`artifacts/graalweb_trust_bundle.json` and
 `tools/decode_graalweb_cert_bundle.py`.
 
 The symbolized handler-table investigation also produced an important
@@ -132,6 +136,9 @@ for the connector fixture only, not for arbitrary GS2 scripts.
   connector parser mirrors the native raw-digest RSA check, and
   `tools/patch_connector_test_public_key.py` supports a private controlled-key
   diagnostic without including a private key.
+  `tools/patch_graalweb_trust_bundle.py` replaces the historical trust text
+  with a user-supplied certificate-only PEM bundle while leaving CyaSSL
+  verification enabled.
 * `artifacts/` contains small metadata exports. APKs, certificates, private
   keys, captured credentials, and game assets are intentionally not included.
 

@@ -133,23 +133,40 @@ ended on 2023-07-29. The verifier includes `CyaInt_ValidateDate` at `0x2b53b8`,
 which consults the current clock. A current device therefore has a concrete
 certificate-expiry failure before the connector can complete.
 
-The full native payload is a five-certificate PEM bundle, not a single DER
-certificate. `TEncryption_initStaticVars` at `0xe6b40` installs the ordinary
-base64 alphabet. `TSocketConnection_setVerifyGraalWebCert` passes the decoded
-bytes to `TEncryption::des_decrypt`, and the native DES helper reverses the
-bits in each byte of `jhOdx9SY` before decrypting complete eight-byte blocks.
-The decoder leaves the final seven bytes untouched. Those bytes complete the
-last PEM delimiter, so preserving the short tail is part of the exact native
+The full native payload contains six certificate blocks in a historical PEM
+bundle, not a single DER certificate. `TEncryption_initStaticVars` at
+`0xe6b40` installs the ordinary base64 alphabet.
+`TSocketConnection_setVerifyGraalWebCert` passes the decoded bytes to
+`TEncryption::des_decrypt`, and the native DES helper reverses the bits in
+each byte of `jhOdx9SY` before decrypting complete eight-byte blocks. The
+decoder leaves the final seven bytes untouched. Those bytes complete the last
+PEM delimiter, so preserving the short tail is part of the exact native
 behavior.
 
-The five recovered entries are the Eurocenter Games self-signed certificate,
-AddTrust External CA Root, StartCom Certification Authority, GlobalSign Root
-CA, and thawte Primary Root CA. The AddTrust entry expired in 2020. The first
-entry is the certificate the client presents to CyaSSL as its GraalWeb trust
-material and expired in 2023. Hashes and dates for every entry are recorded in
+The entries are the Eurocenter Games self-signed certificate, AddTrust
+External CA Root, StartCom Certification Authority, an AlphaSSL intermediate,
+GlobalSign Root CA, and thawte Primary Root CA. The AddTrust entry expired in
+2020, the AlphaSSL intermediate expired in 2024, and the first entry expired
+in 2023. The AlphaSSL block is stored with `BEGINCERTIFICATE` and
+`ENDCERTIFICATE` markers missing a space. The decoder normalizes those markers
+only for certificate parsing and retains raw hashes in
 `artifacts/graalweb_trust_bundle.json`. The offline decoder is
 `tools/decode_graalweb_cert_bundle.py`; it never opens a socket and does not
 write the bundle unless an output path is explicitly supplied.
+
+The six-block count describes the decrypted bytes, not a claim that every block
+was accepted by the old native parser. CyaSSL PEM loaders use exact certificate
+markers in the versions compared during this investigation, so the malformed
+AlphaSSL block should be treated as a raw historical block until a runtime load
+trace confirms how the specific bundled library handles it. A replacement
+bundle should use standard PEM markers.
+
+For a current, authorized chain, `tools/patch_graalweb_trust_bundle.py` can
+replace the encrypted text in a private library copy. It checks the original
+library hash at the architecture-specific offset, accepts only parseable PEM
+certificate blocks, round-trips the native DES transform, and leaves the
+certificate verification code enabled. It is a trust-material update tool,
+not a certificate or hostname-verification bypass.
 
 This is native CyaSSL behavior, not an Android Java `SSLContext` pinning
 failure. The ordinary game-server certificate path is separate from the

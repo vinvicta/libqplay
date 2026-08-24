@@ -86,7 +86,10 @@ The decoder was checked more closely after the first certificate extraction.
 The decoded ciphertext is 9,615 bytes. `des_decryptmemory` processes 9,608
 bytes in DES-ECB blocks and leaves a seven-byte tail untouched, matching the
 native loop condition. Decrypting with the bit-reversed key bytes for
-`jhOdx9SY` produces a 9,615-byte PEM bundle with five certificates. The
+`jhOdx9SY` produces a 9,615-byte bundle with six certificate blocks. The
+fourth block has the historical markers `BEGINCERTIFICATE` and
+`ENDCERTIFICATE` without the usual space. The decoder normalizes those two
+markers only for x509 parsing and records the raw block hash separately. The
 unprocessed tail is `45 2d 2d 2d 2d 2d 0a`, which completes the final PEM
 delimiter. The first certificate is the self-signed Eurocenter Games
 certificate, with SHA-256 fingerprint
@@ -95,6 +98,24 @@ certificate, with SHA-256 fingerprint
 which expired in 2020. The full metadata is in
 `artifacts/graalweb_trust_bundle.json`, and the extraction is reproducible
 with `tools/decode_graalweb_cert_bundle.py`.
+
+A later pass counted the bundle markers rather than relying on the original
+five-entry regular expression. There are six certificate blocks. The fourth
+is an AlphaSSL intermediate whose PEM markers omit the space between `BEGIN`
+or `END` and `CERTIFICATE`; its DER parses after marker normalization, while
+the raw bytes remain part of the historical trust buffer. The AlphaSSL
+intermediate expired in 2024, and the GlobalSign root that follows it expires
+in 2028. This correction is recorded with raw and normalized hashes in the
+trust-bundle artifact.
+
+The new `tools/patch_graalweb_trust_bundle.py` performs the inverse native
+DES/Base64 transform for a user-supplied certificate-only bundle. It refuses a
+different original library revision, rejects private-key material, and
+round-trips the replacement through the same full-block and short-tail rule.
+It intentionally requires standard PEM markers, so the recovered historical
+bundle is useful as an exact transform control only after its malformed marker
+block is normalized. A current authorized chain is still needed for a
+production-compatible HTTPS test.
 
 The native call chain is now confirmed in IDA rather than inferred from the
 certificate strings. `THTTPRequest_sendRequest` at `0x1ffde8` selects the

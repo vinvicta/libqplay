@@ -16,6 +16,7 @@ the title or loading image after network and resource work has completed.
 | Test | Change | Result | Status |
 | --- | --- | --- | --- |
 | Certificate skip | Return from `TSocketConnection::setVerifyGraalWebCert` at ARM64 `0x20ab20` or x86_64 `0x222270` | The HTTPS attempt reached port 443, but the client still stayed on the splash screen | Useful isolation test, not sufficient |
+| Trust bundle replacement | Encrypt a user-supplied certificate-only PEM bundle with the native `jhOdx9SY` rule at ARM64 `0x2dcef8` or x86_64 `0x2fca80` | The original encoded text decodes exactly, and a shorter standard-marker certificate bundle round-trips through the native decoder. Live endpoint compatibility is not tested | Production-compatible path, pending authorized current chain |
 | Longer connect poll | Change the x86_64 zero-second poll timeout to five seconds | The client still stayed on the splash screen | Not the complete cause |
 | HTTP transport redirect | Force the recognized HTTPS parser result to port 80 with SSL disabled | The local HTTP request was received, but transport alone did not advance the client | Not a repair |
 | Native RSA path retained | Leave the RSA branch at its original bytes and use the saved response, which passes the native raw-digest check | A package-preserving x86_64 APK was built with original RSA bytes `75 1d`; runtime rerun is pending | Preferred package test |
@@ -29,6 +30,12 @@ connector request. The ordinary game connection is created by
 `TGraalConnection::connectToServer`, which supplies its own certificate field
 through `TGraalConnection::setSSLVerifyCert`. This is why the two trust paths
 must not be described as one global Android SSL-pinning problem.
+
+The preferred certificate path is a replacement trust bundle, not the skip.
+`tools/patch_graalweb_trust_bundle.py` refuses a different library revision,
+refuses private-key material, and keeps peer and hostname verification in the
+native code. The supplied bundle must come from an authorized current endpoint
+or its operator. The repository contains no replacement production chain.
 
 The archived package's RSA result is a separate boundary. The saved fixture
 passes it when checked in the native format, so a package-preserving replay

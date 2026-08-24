@@ -121,6 +121,27 @@ renders through the ordinary JNI branch. The first apparent failure of this
 candidate used a map name without the `.gmap` suffix and should not be used as
 evidence against it.
 
+## Replacing the historical trust bundle
+
+The certificate-skip patch is useful for isolating later protocol stages, but
+it is not the production-compatible route. When an authorized current PEM
+chain is available, patch a private library copy while leaving the native TLS
+verification code intact:
+
+```bash
+python3 tools/patch_graalweb_trust_bundle.py \
+  --arch arm64-v8a \
+  --bundle /path/to/current-authorized-chain.pem \
+  /path/to/original/arm64-v8a/libqplay.so \
+  /tmp/libqplay.current-trust.so
+```
+
+The tool accepts certificate blocks only, rejects private keys, checks the
+original embedded string hash, and verifies its own native DES/Base64
+round-trip. It does not contact the endpoint or prove that the supplied chain
+matches the current service. Do not use the historical
+`analysis/graalweb.cert.pem` as a current replacement.
+
 ## Connector replay
 
 The responder defaults to legacy-looking lowercase headers, but this is not a

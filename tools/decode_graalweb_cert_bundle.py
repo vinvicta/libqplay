@@ -33,6 +33,10 @@ DEFAULT_LIBRARY = Path(
 CERT_PREFIX = b"6erxf21jcqpGrZR4"
 CERT_TEXT_LENGTH = 12820
 DES_KEY = b"jhOdx9SY"
+PEM_CERTIFICATE = re.compile(
+    rb"-----BEGIN ?CERTIFICATE-----.*?-----END ?CERTIFICATE-----\r?\n?",
+    re.DOTALL,
+)
 EXPECTED_TEXT_SHA256 = (
     "c87ea7bc32005cca699fb724ab455926fd852a1bd40ce0985aadf31a994878a0"
 )
@@ -71,26 +75,30 @@ def recover_bundle(library: bytes) -> tuple[int, bytes, bytes, bytes]:
 
 
 def certificate_metadata(bundle: bytes) -> list[dict[str, object]]:
-    pem_blocks = re.findall(
-        rb"-----BEGIN CERTIFICATE-----.*?-----END CERTIFICATE-----\n?",
-        bundle,
-        re.DOTALL,
-    )
+    pem_blocks = PEM_CERTIFICATE.findall(bundle)
     if not pem_blocks:
         raise ValueError("decrypted payload did not contain PEM certificates")
 
     result = []
     for index, pem in enumerate(pem_blocks):
-        cert = x509.load_pem_x509_certificate(pem)
+        normalized_pem = pem.replace(
+            b"-----BEGINCERTIFICATE-----", b"-----BEGIN CERTIFICATE-----"
+        ).replace(b"-----ENDCERTIFICATE-----", b"-----END CERTIFICATE-----")
+        cert = x509.load_pem_x509_certificate(normalized_pem)
         result.append(
             {
                 "index": index,
                 "pem_bytes": len(pem),
                 "pem_sha256": sha256(pem),
+                "normalized_pem_bytes": len(normalized_pem),
+                "normalized_pem_sha256": sha256(normalized_pem),
+                "marker_style": (
+                    "missing-space" if b"BEGINCERTIFICATE" in pem else "standard"
+                ),
                 "der_sha256": sha256(cert.public_bytes(Encoding.DER)),
                 "subject": cert.subject.rfc4514_string(),
                 "issuer": cert.issuer.rfc4514_string(),
-                "serial": format(cert.serial_number, "X"),
+                "serial": format(cert.serial_number, "X").zfill(2),
                 "not_before": cert.not_valid_before.isoformat() + "Z",
                 "not_after": cert.not_valid_after.isoformat() + "Z",
                 "sha256_fingerprint": cert.fingerprint(hashes.SHA256()).hex(),

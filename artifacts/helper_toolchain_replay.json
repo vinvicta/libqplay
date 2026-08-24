@@ -92,7 +92,9 @@
       "length": 12820,
       "sha256": "c87ea7bc32005cca699fb724ab455926fd852a1bd40ce0985aadf31a994878a0",
       "byte_for_byte_equal": true,
-      "decoded_certificate_count": 5
+      "decoded_certificate_count": 6,
+      "malformed_pem_marker_blocks": 1,
+      "malformed_pem_marker_style": "BEGINCERTIFICATE / ENDCERTIFICATE"
     },
     "webtop_url_template": "https://spectronnative-page.onrender.com?device=%s",
     "webtop_device_id": "NOID",
