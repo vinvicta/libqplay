@@ -103,6 +103,22 @@
       "network_contacted": false,
       "runtime_verified": false
     },
+    "game_server_tls_material_audit": {
+      "purpose": "Trace the game-server verify buffer configured by StartScript_Connector.",
+      "production_status": "stock stale material confirmed by offline decode; no patch applied",
+      "callback_arm64": "0x1eb964",
+      "script_method": "client.setSSLParameters",
+      "script_string_index": 143,
+      "cipher": "RC4-SHA",
+      "protocol": "SSLv23",
+      "des_key": "NakFpz15",
+      "certificate_der_bytes": 718,
+      "certificate_der_sha256": "2e6425395e91baab7be95d9918de198684bcb718800bff07113e7f336d06ce56",
+      "certificate_not_after": "2023-07-29T07:37:32Z",
+      "matches_connector_trust_bundle_index": 0,
+      "network_contacted": false,
+      "runtime_verified": false
+    },
     "connector_nonblocking_tls_audit": {
       "purpose": "Verify whether delayed nonblocking TCP completion skips the native TLS initializer.",
       "production_status": "stock path confirmed by IDA; no patch applied",

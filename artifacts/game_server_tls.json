@@ -1,0 +1,48 @@
+{
+  "purpose": "Offline audit of the game-server TLS verify material carried by StartScript_Connector.",
+  "source": {
+    "strings_json": "analysis/StartScript_Connector.bytecode/strings.json",
+    "script_string_index": 143,
+    "base64_characters": 960,
+    "encoded_text_sha256": "78e58b46febbcadee7eefb7b7717d33e272b5fe55f882c27897a74679aecd584",
+    "ciphertext_bytes": 718,
+    "ciphertext_sha256": "1a74a1e47442c18fe3ac316f8a590748ff4047d9110fa7662c1e6e3ecd89453c"
+  },
+  "native_transform": {
+    "callback_arm64": "0x1eb964",
+    "callback_label": "sub_1EB964",
+    "des_key": "NakFpz15",
+    "des_key_bit_reversed_hex": "7286d6620e5e8cac",
+    "full_des_block_bytes": 712,
+    "unprocessed_tail_hex": "a9d71e4d488b",
+    "operation": "DES-ECB with reversed key-byte bits, decrypt complete blocks only"
+  },
+  "script_parameters": {
+    "method": "client.setSSLParameters",
+    "arguments_in_decoded_bytecode": [
+      "base64decode(string_143)",
+      "RC4-SHA",
+      "SSLv23",
+      1
+    ],
+    "meaning": "The native callback decrypts the certificate argument, stores cipher, protocol, and verify-buffer fields, then enables SSL."
+  },
+  "certificate": {
+    "der_bytes": 718,
+    "der_sha256": "2e6425395e91baab7be95d9918de198684bcb718800bff07113e7f336d06ce56",
+    "subject": "CN=Stefan Knorr,OU=Technical Department,O=Eurocenter Games,L=Paris,ST=Paris,C=FR",
+    "issuer": "CN=Stefan Knorr,OU=Technical Department,O=Eurocenter Games,L=Paris,ST=Paris,C=FR",
+    "serial": "B087AC89F25B5C53",
+    "not_before": "2013-07-31T07:37:32Z",
+    "not_after": "2023-07-29T07:37:32Z",
+    "sha256_fingerprint": "2e6425395e91baab7be95d9918de198684bcb718800bff07113e7f336d06ce56",
+    "matches_graalweb_trust_bundle_index": 0
+  },
+  "interpretation": {
+    "connector_and_game_server_share_der": true,
+    "connector_trust_replacement_alone_is_sufficient": false,
+    "runtime_verified": false,
+    "network_contacted": false
+  },
+  "source_tool": "tools/decode_game_server_tls_certificate.py"
+}

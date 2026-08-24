@@ -101,6 +101,13 @@ This is the short handoff view. The full reasoning and command history are in
     `EINPROGRESS` completion reaches `TSocketConnection_setStatus_int` with
     status 5, which starts CyaSSL when SSL is enabled. The earlier blocking-I/O
     experiment remains rejected because it froze the renderer.
+24. The decoded connector script carries a second TLS configuration for the
+    game server. Its `setSSLParameters` certificate is a 718-byte DER object
+    with SHA-256
+    `2e6425395e91baab7be95d9918de198684bcb718800bff07113e7f336d06ce56`, the
+    same expired Eurocenter Games certificate as connector trust-bundle entry
+    0. The native callback uses `NakFpz15` and enables `RC4-SHA` with
+    `SSLv23`; this is documented offline in `artifacts/game_server_tls.json`.
 
 ## Not verified
 

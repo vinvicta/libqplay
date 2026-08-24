@@ -33,6 +33,13 @@ the standard ASN.1 `DigestInfo` form. The certificate problem remains real,
 and both it and any response signed by a different key must stay separate from
 the game-server protocol.
 
+The game-server path has a separate stale trust input in the decoded connector
+script. Its `setSSLParameters` call installs the same expired Eurocenter Games
+certificate, this time after native DES decryption with `NakFpz15`, and selects
+the old `RC4-SHA` and `SSLv23` settings. Connector-only trust replacement is
+therefore not enough for a current full login. See
+`artifacts/game_server_tls.json` for the offline certificate comparison.
+
 The certificate payload contains six historical certificate blocks in a PEM
 bundle. One AlphaSSL block uses malformed `BEGINCERTIFICATE` and
 `ENDCERTIFICATE` markers, so the decoder records both raw and normalized
@@ -139,6 +146,9 @@ for the connector fixture only, not for arbitrary GS2 scripts.
   `tools/patch_graalweb_trust_bundle.py` replaces the historical trust text
   with a user-supplied certificate-only PEM bundle while leaving CyaSSL
   verification enabled.
+  `tools/decode_game_server_tls_certificate.py` decodes the separate
+  game-server certificate from the recovered connector script without opening
+  a socket.
 * `artifacts/` contains small metadata exports. APKs, certificates, private
   keys, captured credentials, and game assets are intentionally not included.
 

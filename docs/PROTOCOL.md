@@ -183,6 +183,25 @@ connector trust buffer. A production repair should replace or update the
 trust chain through a verified endpoint. The local diagnostic builds merely
 skip or redirect the check so that later protocol behavior can be observed.
 
+The separate game-server trust buffer is stale too. The decoded
+`StartScript_Connector` bytecode calls `client.setSSLParameters` with a
+Base64-decoded certificate literal, `RC4-SHA`, `SSLv23`, and an enabled flag.
+The native callback at ARM64 `0x1eb964` decrypts the certificate argument with
+the bit-reversed DES key `NakFpz15`, then stores the protocol, cipher, and
+verify-buffer fields before enabling SSL. The 960-character literal at string
+index 143 decrypts to a 718-byte DER certificate with SHA-256
+`2e6425395e91baab7be95d9918de198684bcb718800bff07113e7f336d06ce56`. It is
+the same Eurocenter Games self-signed certificate as entry 0 of the connector
+trust bundle, and its `notAfter` date is 2023-07-29. The exact metadata and
+offline decoder are in `artifacts/game_server_tls.json` and
+`tools/decode_game_server_tls_certificate.py`.
+
+This makes an expired game-server trust certificate a concrete second
+compatibility failure, not just an inference from the connector path. It also
+means that replacing only the connector bundle cannot repair the full login
+sequence. The old `RC4-SHA` and `SSLv23` settings are another current-service
+compatibility risk, although their live behavior has not been tested here.
+
 ## 4. NewGraal framing
 
 After connector script execution, the game socket uses framed data. The

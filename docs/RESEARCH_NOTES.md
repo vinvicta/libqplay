@@ -128,6 +128,24 @@ through `CyaSSL_CTX_load_verify_buffer`, configures verification, and calls
 flag are separate fields. This is why a connector certificate repair alone is
 not a complete game-server repair.
 
+The game-server trust material can now be traced back to the recovered script.
+`StartScript_Connector` calls `client.setSSLParameters` with a 960-character
+Base64 literal, `RC4-SHA`, `SSLv23`, and an enabled flag. The native callback at
+`0x1eb964` decrypts that certificate argument with the bit-reversed DES key
+`NakFpz15`, then stores the SSL protocol, cipher list, and verify buffer. The
+result is a 718-byte DER certificate whose SHA-256 is
+`2e6425395e91baab7be95d9918de198684bcb718800bff07113e7f336d06ce56`. Its
+subject and issuer are the self-signed Eurocenter Games certificate, and it
+expired on 2023-07-29. That hash exactly matches certificate 0 in the
+connector's decrypted `jhOdx9SY` trust bundle. This is the first direct link
+between the two stale trust paths. The recovery is offline and recorded in
+`artifacts/game_server_tls.json`.
+
+The same script selects the old `RC4-SHA` cipher and `SSLv23` protocol for the
+game connection. A current server may reject those settings even after the
+certificate is updated, but that remains an unverified compatibility risk
+rather than a claim about the live endpoint.
+
 A focused IDA re-audit checked whether the nonblocking socket itself prevented
 TLS from starting. `TSocketConnection_setNonBlocking` at `0x206320` calls
 `fcntl(fd, F_SETFL, O_NONBLOCK)`, and `TSocketConnection_connectSocket` at
