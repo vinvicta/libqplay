@@ -43,6 +43,23 @@
       "scope": "127.0.0.1 only"
     }
   },
+  "game_server_tls_source_patch": {
+    "source_tool": "tools/replace_game_server_tls_source.py",
+    "source_input_sha256": "a30f9eca136e3b8ff827bfb1bfe13fb442bd2e882963bf9863cd8de5f2669e68",
+    "identity_output_sha256": "a30f9eca136e3b8ff827bfb1bfe13fb442bd2e882963bf9863cd8de5f2669e68",
+    "identity_replaced_occurrences": 2,
+    "identity_compiled_bytecode_bytes": 16141,
+    "identity_compiled_bytecode_sha256": "67b70c449f87d6e3b71ef0fe92ba73fff9fe5fe7a1ad63aedb34e9daf4a7b752",
+    "modern_test_certificate_der_sha256": "8190858688f7e84aafe0712a3314b4aeb549a76983c4867c1f0c84a2c244f8e7",
+    "modern_test_certificate_base64_characters": 1072,
+    "modern_output_sha256": "18e43fce52ab90f9541c0bc5860610cc555fba86a1fd2bc0466f5ffba89deac5",
+    "modern_native_order_output_sha256": "590b5e70195d490a178e121a4c97169688ea053379fc38b5195f1e2f6da4b813",
+    "modern_compiled_bytecode_bytes": 16253,
+    "modern_compiled_bytecode_sha256": "119653464dc0692cc2fc478d7edc6ea1080096559fbac7b9e24a993a2862235d",
+    "modern_native_order_compiled_bytecode_sha256": "7c28ec2dab48ad3787809b55257d95807a2b8f9a9d08e2caaf4aee6e9bf70d6a",
+    "verification_bypassed": false,
+    "network_contacted": false
+  },
   "moreno_kahn": {
     "repository_commit": "5e3a05fc8fbcf3c3f72b3c263238b2ed275fc66d",
     "wolfssl_commit": "cb138b22a2e9111e5ac9fb9e13a690762c86b884",

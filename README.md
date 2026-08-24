@@ -104,6 +104,14 @@ observed native order, after which the rebuilt script reaches the same local
 two-connection replay and produces an identical screenshot. This is verified
 for the connector fixture only, not for arbitrary GS2 scripts.
 
+The separate game-server certificate path now has a source-level repair tool
+as well. `tools/replace_game_server_tls_source.py` finds both recovered
+`setSSLParameters` certificate literals, verifies the existing native DES
+format, and writes a new GS2 file without changing the input. The original
+certificate produces an identity source and bytecode result, while a longer
+offline test certificate compiled successfully at 1,072 Base64 characters.
+The tool leaves verification enabled and does not contact a network.
+
 ## Repository layout
 
 * `docs/RESEARCH_NOTES.md` is the chronological investigation record.
@@ -150,8 +158,10 @@ for the connector fixture only, not for arbitrary GS2 scripts.
   game-server certificate from the recovered connector script without opening
   a socket. `tools/encode_game_server_tls_certificate.py` prepares a
   certificate-only replacement for the same script argument and verifies the
-  native DES round trip. The resulting script still needs compilation,
-  packaging, and an authorized signature.
+  native DES round trip. `tools/replace_game_server_tls_source.py` applies the
+  same transform directly to recovered GS2 source for HexaParser. The
+  resulting script still needs compilation, packaging, and an authorized
+  signature.
 * `artifacts/` contains small metadata exports. APKs, certificates, private
   keys, captured credentials, and game assets are intentionally not included.
 

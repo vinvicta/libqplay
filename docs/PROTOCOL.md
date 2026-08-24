@@ -202,6 +202,28 @@ the string to grow for a normal recompilation. Its optional
 `--max-base64-characters 960` check is only for workflows that require the
 historical literal capacity.
 
+When the recovered GS2 source is available, use
+`tools/replace_game_server_tls_source.py` instead of editing the long literal
+by hand. It checks both `setSSLParameters` calls by default, verifies that the
+old values decrypt to X.509 certificates, replaces only the certificate
+arguments, and writes a separate source file:
+
+```bash
+python3 tools/replace_game_server_tls_source.py \
+  /tmp/StartScript_Connector.repaired.gs2 \
+  /path/to/current-authorized-server.cert.pem \
+  --output /tmp/StartScript_Connector.server-cert.gs2 \
+  --report /tmp/StartScript_Connector.server-cert.json
+```
+
+The source helper allows the literal to grow for recompilation. The existing
+HexaParser literal-order adapter remains a separate, fixture-specific step;
+the certificate replacement does not change handler or server-list ordering.
+The identity source compiled to the same 16,141-byte bytecode as the earlier
+repaired source. A 1,072-character offline test replacement also compiled
+successfully, producing 16,253 bytes. Both checks were offline and kept
+verification enabled.
+
 This makes an expired game-server trust certificate a concrete second
 compatibility failure, not just an inference from the connector path. It also
 means that replacing only the connector bundle cannot repair the full login

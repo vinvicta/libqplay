@@ -98,7 +98,7 @@ def main() -> None:
     parser.add_argument(
         "strings_json",
         type=Path,
-        help="HexaParser JSON string table from StartScript_Connector",
+        help="disassembler JSON string table from StartScript_Connector",
     )
     parser.add_argument(
         "certificate_pem",

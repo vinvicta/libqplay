@@ -751,3 +751,31 @@ container, native script loader, protocol responder, and translated renderer
 all agree for this fixture. It is still a loopback diagnostic. It does not
 verify a live server, current trust material, account login, arbitrary GS2
 scripts, or a physical ARM64 renderer.
+
+## Source-level game-server TLS replacement
+
+The bytecode string-table encoder was useful for proving the native
+`NakFpz15` transform, but the supplied HexaParser workflow starts from GS2
+source. I added `tools/replace_game_server_tls_source.py` so the same repair
+can be applied at that boundary without manually editing a very long string.
+
+The helper locates the Base64 value inside each recovered
+`setSSLParameters` call. It requires two occurrences by default, decrypts and
+validates each existing value as an X.509 certificate, accepts one
+certificate-only PEM replacement, and writes a new source file. It preserves
+the source's newline style, refuses to overwrite the input, leaves native
+verification enabled, and records `network_contacted: false` in its optional
+report.
+
+The recovered certificate was used as an identity test. Both occurrences were
+found, the output source hash remained
+`a30f9eca136e3b8ff827bfb1bfe13fb442bd2e882963bf9863cd8de5f2669e68`, and the
+compiled output remained the known 16,141-byte file with SHA-256
+`67b70c449f87d6e3b71ef0fe92ba73fff9fe5fe7a1ad63aedb34e9daf4a7b752`. A
+self-signed offline certificate produced a 1,072-character replacement and
+compiled to 16,253 bytes with SHA-256
+`119653464dc0692cc2fc478d7edc6ea1080096559fbac7b9e24a993a2862235d`.
+Applying the existing literal-order adapter to that source also compiled to
+16,253 bytes. These checks show that the source-level path accepts a longer
+certificate and composes with the known fixture adapter. They do not claim
+that the test certificate is trusted by any service.

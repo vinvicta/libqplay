@@ -113,6 +113,13 @@ This is the short handoff view. The full reasoning and command history are in
     script string 143, rejects private-key or multi-certificate PEM input, and
     reproduces the original literal byte-for-byte when fed the recovered
     certificate. It does not disable verification or contact a network.
+26. The source-level helper
+    `tools/replace_game_server_tls_source.py` finds both recovered
+    `setSSLParameters` certificate calls, validates their existing DER values,
+    and writes a separate GS2 source file. Feeding it the recovered
+    certificate gives an identity source and the same 16,141-byte compiled
+    bytecode. A 1,072-character offline test certificate also compiles to
+    16,253 bytes. These are compiler and transform checks only.
 
 ## Not verified
 
@@ -132,6 +139,8 @@ This is the short handoff view. The full reasoning and command history are in
 * Whether the literal-order adapter generalizes to scripts with different
   syntax or multiline literals. Only the recovered connector fixture has
   passed the adapted runtime replay.
+* Whether a replacement certificate and the old `RC4-SHA` and `SSLv23`
+  settings are accepted by a current authorized game server.
 
 ## Current blocker
 

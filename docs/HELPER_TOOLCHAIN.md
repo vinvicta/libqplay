@@ -163,6 +163,49 @@ HexaParser needs, or will safely tolerate, the same transformation. The
 adapter should therefore be applied only after comparing its output with the
 native-order reconstruction and checking the resulting bytecode locally.
 
+## Source-level game-server TLS replacement
+
+The script certificate is a separate concern from the handler-table ordering.
+`tools/encode_game_server_tls_certificate.py` edits the disassembler's JSON
+string table, which is useful when working directly with bytecode records.
+For the supplied HexaParser source, `tools/replace_game_server_tls_source.py`
+performs the same native transform at the source level.
+
+By default the source helper requires both recovered `setSSLParameters` calls.
+It verifies that every existing literal decrypts to a stable X.509 DER
+certificate, accepts exactly one certificate-only PEM replacement, and refuses
+to overwrite the input source. It does not bypass peer or hostname
+verification and opens no socket.
+
+The source-level command is:
+
+```bash
+python3 tools/replace_game_server_tls_source.py \
+  /tmp/StartScript_Connector.repaired.gs2 \
+  /path/to/current-authorized-server.cert.pem \
+  --output /tmp/StartScript_Connector.server-cert.gs2 \
+  --report /tmp/StartScript_Connector.server-cert.json
+```
+
+The default output allows a longer Base64 value because a normal recompilation
+can allocate a new string-table entry. Use
+`--max-base64-characters 960` only when an in-place capacity limit is part of
+the chosen bytecode workflow. Use `--expected-occurrences 1` for a source
+that intentionally contains only one SSL call.
+
+The source helper was tested in three ways. Replacing the recovered
+certificate with itself found two occurrences and produced the exact repaired
+source hash `a30f9eca136e3b8ff827bfb1bfe13fb442bd2e882963bf9863cd8de5f2669e68`.
+HexaParser then produced the known 16,141-byte bytecode hash
+`67b70c449f87d6e3b71ef0fe92ba73fff9fe5fe7a1ad63aedb34e9daf4a7b752`. A
+self-signed offline test certificate produced a 1,072-character replacement
+and compiled to 16,253 bytes with SHA-256
+`119653464dc0692cc2fc478d7edc6ea1080096559fbac7b9e24a993a2862235d`.
+Applying the existing literal-order adapter to that source also compiled to
+16,253 bytes. These checks validate source compilation and the native transform
+only. They do not establish a current server chain or authorize a release
+package.
+
 ## Moreno.kahn
 
 Repository: `MorenoLand/Moreno.kahn`
