@@ -88,6 +88,15 @@ stream can be loaded and can coexist with the full protocol/resource path.
 The exact hashes and test scope are in
 `artifacts/bytecode_loading_clear_replay.json`.
 
+When the direct script patch was combined with the one-instruction native
+startup clear at `0x15ca7c`, the same translated ARM64 fixture displayed the
+green world field, HUD, and status icons. The script package, TLS path, RSA
+branch, and game responder were otherwise unchanged. Since the combined run
+contains two edits, it confirms that the direct script patch is compatible
+with the rendering candidate but does not replace the native ownership
+finding. The native branch remains the variable tied to the visible
+title-to-world transition in this test.
+
 ## x86 diagnostic scope
 
 The x86_64 comparison needs a separate qualification. Its original library

@@ -187,9 +187,10 @@ python3 tools/patch_connector_bytecode_loading_clear.py \
 For the checked fixture, the output grows from 15,581 to 15,587 bytes and
 from 3,143 to 3,146 instructions. Its SHA-256 is
 `3c8286ece57d96ecf088f6ba01b6a6094f6d317dda451369392bfa731aa0fb2f`. The
-Kahn-signed package is 16,188 bytes with SHA-256
-`7473bac833911005821d210874be2e53df6eeed0d1ae8831dfa0fdf713f27e9e`, and
-the package passes the native raw RSA check with the matching private test key.
+Kahn-signed outer package is 16,452 bytes, with an encrypted payload of
+16,188 bytes, and has SHA-256
+`7473bac833911005821d210874be2e53df6eeed0d1ae8831dfa0fdf713f27e9e`. The
+package passes the native raw RSA check with the matching private test key.
 
 The ARM64-only package using that script and the same local native library
 made one connector TLS request, opened two `14900` game connections, completed
@@ -202,6 +203,19 @@ stream and the script-level insertion are accepted, but it is not yet proof
 that this insertion alone produces a visible world on a physical ARM64 device
 or against a live service. The full hash record is in
 `artifacts/bytecode_loading_clear_replay.json`.
+
+Adding the already validated one-instruction native startup candidate to that
+same private library produced the next bounded render check. The combined
+native library SHA-256 is
+`8f7b343d81a1cd8eef390d0a494912f86ab03f7a22f4fe4a2f2bb170409d6722`, and the
+debug APK SHA-256 is
+`57e6987a920b261c9a6b9abeb909cd4156c4995bb4dd6930422b87a27adc3dde`. With
+the direct script package still installed, the emulator observed the same two
+game connections, map and level requests, image traffic, and heartbeats. The
+translated ARM64 renderer left the title/loading artwork and displayed the
+green world field with the HUD. This is a combined diagnostic result, so it
+does not prove that the script assignment itself clears the native byte; the
+native branch edit remains the variable associated with the visual change.
 
 For source review, `tools/patch_gs2_success_loading_clear.py` inserts the same
 assignment into the recovered `onServerLogin` function before compilation. On

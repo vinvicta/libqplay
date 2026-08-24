@@ -157,6 +157,19 @@ This is the short handoff view. The full reasoning and command history are in
     proves script loading and protocol/resource progress, not a final visible
     world transition. Hashes and scope are in
     `artifacts/bytecode_loading_clear_replay.json`.
+30. The direct script patch was then combined with the existing native
+    non-premium branch candidate at `0x15ca7c`. The private translated-ARM64
+    run again made two `14900` connections, received the map and three level
+    files, and sent heartbeats. This time the renderer displayed the green
+    world field, HUD, and status icons. The native library SHA-256 is
+    `8f7b343d81a1cd8eef390d0a494912f86ab03f7a22f4fe4a2f2bb170409d6722`, the
+    APK SHA-256 is
+    `57e6987a920b261c9a6b9abeb909cd4156c4995bb4dd6930422b87a27adc3dde`, and
+    the screenshot SHA-256 is
+    `fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`.
+    Because two changes are present, this confirms compatibility of the
+    direct script patch but leaves the native branch as the variable tied to
+    the visual transition.
 
 ## Not verified
 

@@ -907,3 +907,21 @@ synthetic responder stopped at a bounded post-login resource boundary. This
 is therefore a strong script-loader and protocol result, but not proof that
 the direct insertion alone produces the final visible world. The complete
 hash record is `artifacts/bytecode_loading_clear_replay.json`.
+
+The next private check combined the direct bytecode package with the existing
+one-instruction native startup candidate at ARM64 `0x15ca7c`. The combined
+native library hash is
+`8f7b343d81a1cd8eef390d0a494912f86ab03f7a22f4fe4a2f2bb170409d6722`, and the
+debug APK hash is
+`57e6987a920b261c9a6b9abeb909cd4156c4995bb4dd6930422b87a27adc3dde`. It again
+made two game connections, received the map and three level files, followed
+the image path, and kept sending heartbeats. The translated ARM64 renderer
+displayed the green world field, HUD, and status icons. Its screenshot hash is
+`fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`.
+
+This combination is useful because the direct script patch did not regress the
+known render candidate. It does not isolate the visual cause: the native
+startup branch is still present, and the direct script assignment alone left
+the title/loading artwork visible in the preceding bounded run. The native
+ownership audit therefore remains the best explanation for the visual split in
+this fixture.

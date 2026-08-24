@@ -21,7 +21,8 @@
     "network_contacted": false
   },
   "package": {
-    "package_bytes": 16188,
+    "package_bytes": 16452,
+    "encrypted_payload_bytes": 16188,
     "package_sha256": "7473bac833911005821d210874be2e53df6eeed0d1ae8831dfa0fdf713f27e9e",
     "embedded_script_bytes": 15587,
     "embedded_script_sha256": "3c8286ece57d96ecf088f6ba01b6a6094f6d317dda451369392bfa731aa0fb2f",
@@ -54,6 +55,24 @@
     "game_capture_first_outbound_sha256": "148812299189da60e2f4eae3a77169c02ed4e8b2167f501996d6ec985a401969",
     "screenshot_sha256": "70e6573244e58125d4092d8265c8acc4e2074dd866bd9cd5897ddf079d39e135",
     "screenshot_interpretation": "title/loading artwork remained visible; the synthetic responder stopped at resource delivery and heartbeat traffic",
+    "live_service_verified": false,
+    "physical_arm64_device_verified": false
+  },
+  "combined_render_replay": {
+    "native_library_sha256": "8f7b343d81a1cd8eef390d0a494912f86ab03f7a22f4fe4a2f2bb170409d6722",
+    "apk_sha256": "57e6987a920b261c9a6b9abeb909cd4156c4995bb4dd6930422b87a27adc3dde",
+    "additional_native_patch": "force the existing non-premium startup branch at 0x15ca7c",
+    "native_rsa_branch_changed": false,
+    "game_connections_port_14900": 2,
+    "map": "classiciphone.gmap",
+    "level_files": 3,
+    "image_request_observed": "guigames_graymessage2.png",
+    "heartbeats_seen": true,
+    "game_capture_first_inbound_sha256": "a0f29127edece253ce238396f6c45616f1fbf4a58084907df681cfe73b34d651",
+    "game_capture_first_outbound_sha256": "08b03ddcbbe9816aca8cc6ddb1d762a86ec809545d3d22b4172918840dea290f",
+    "screenshot_sha256": "fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e",
+    "rendered_world_observed": true,
+    "interpretation": "The direct script patch remains compatible, while the native startup branch clear is the change associated with leaving the title/loading artwork in this fixture.",
     "live_service_verified": false,
     "physical_arm64_device_verified": false
   },
