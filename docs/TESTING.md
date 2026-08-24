@@ -286,7 +286,7 @@ outgoing key:
 ```bash
 python3 tools/decode_game_handshake_capture.py \
   /tmp/graal-handshake-2.in.bin \
-  --key-hex 0123456789abcdef
+  --key-hex 30313233343536373839616263646566
 ```
 
 The decoder prints frame metadata and hashes by default. Use the option that
