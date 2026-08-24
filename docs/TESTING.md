@@ -327,18 +327,51 @@ arrays, server lists, and a two-element handler pair in reverse order. Compare
 the generated source with the native-order reconstruction before applying it
 to another script.
 
-For the successful local replay, pack the adapted bytecode with the legacy ZIP
-patch and compatible archived metadata. The final bytecode included its
-trailing `0x0a`, and the native loader accepted it. The adapted package reached
-the same two-connection loopback replay and rendered the same screenshot as
-the original bytecode. The raw unadapted package requested the connector but,
-when both test game ports were listening, opened three connections to the
-alternate `14896` listener and none to the expected `14900` listener. This is
-why the raw compiler output must not be treated as runtime-compatible.
+The adapted source is useful for review, but the clean runtime control did not
+reproduce the earlier adapted replay. Under the same native library, Kahn test
+signer, TLS fixture, and game responder, the adapted package requested the
+connector and opened no connection to the expected `14900` listener. Removing
+the compiler-added trailing `0x0a` did not change that result. Its output has
+3,582 instructions after the trailer is removed, while the original stream
+has 3,143, so the literal adapter is not currently a complete compiler repair.
+
+To preserve the original VM stream, patch the decoded bytecode directly:
+
+```bash
+python3 tools/patch_connector_bytecode_loading_clear.py \
+  /path/to/graal-decomp/analysis/StartScript_Connector.dec.bin \
+  /tmp/StartScript_Connector.loading-clear.dec.bin \
+  --report /tmp/StartScript_Connector.loading-clear.json
+```
+
+This copies the existing six-byte `loadingscreenenabled = false` sequence from
+`printDisconnectError` into `onServerLogin` before the `reconnections` reset,
+then updates shifted function offsets and branch targets. It produced a
+15,587-byte stream with SHA-256
+`3c8286ece57d96ecf088f6ba01b6a6094f6d317dda451369392bfa731aa0fb2f`. Pack it
+with the compatible ZIP creator and the matching private test signer only in a
+private diagnostic workspace:
+
+```bash
+/tmp/conpack_wsl \
+  /tmp/Moreno.kahn/kahn-private.rsa.der \
+  /tmp/StartScript_Connector.loading-clear.dec.bin \
+  /tmp/StartScript_Connector.loading-clear.con \
+  NPCS/StartScript_Connector \
+  /tmp/script-key /tmp/original.rk /tmp/original.t
+```
+
+The local ARM64 replay of this direct patch made two `14900` game connections,
+completed encrypted login, received `classiciphone.gmap`, three level files,
+and continuing heartbeat traffic. The title/loading artwork remained in the
+bounded screenshot because the synthetic responder stops at a post-login
+resource boundary. Treat this as script and protocol evidence, not as proof
+of live login or final rendering. The complete public hash record is in
+`artifacts/bytecode_loading_clear_replay.json`.
 
 Do not copy private signing keys into the repository or into an APK intended
-for distribution. The hashes for the adapted source, bytecode, package, and
-replay are in `artifacts/helper_toolchain_replay.json`.
+for distribution. The static HexaParser hashes and the corrected runtime
+status are in `artifacts/helper_toolchain_replay.json`.
 
 ## Two-connection game replay
 

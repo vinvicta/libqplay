@@ -33,15 +33,37 @@
     "adapted_loopback_replay": {
       "connector_request": true,
       "connector_query_sha256": "3586b24ea8f0b90b722bc988c4a7e126ee8e0664f2b06d1cb6e7ab8338e6759f",
-      "game_connections_port_14900": 2,
-      "map": "classiciphone.gmap",
-      "level_files": 3,
-      "image": "pics1.png",
-      "heartbeats": true,
-      "render_screenshot_sha256": "fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e",
-      "matches_original_compat_screenshot": true,
+      "game_connections_port_14900": 0,
+      "map": null,
+      "level_files": 0,
+      "image": null,
+      "heartbeats": false,
+      "render_screenshot_sha256": null,
+      "matches_original_compat_screenshot": false,
+      "clean_control_result": "not_reproduced",
+      "clean_control_note": "The package requested the connector but did not reach the expected game listener under the same native library, Kahn test signer, TLS fixture, and responder. Removing the compiler trailing 0x0a did not change the result.",
       "scope": "127.0.0.1 only"
-    }
+    },
+    "static_output_comparison": {
+      "original_record_lengths": {
+        "1": 4,
+        "2": 553,
+        "3": 8293,
+        "4": 6699
+      },
+      "original_instruction_count": 3143,
+      "original_string_count": 302,
+      "adapted_record_lengths_without_trailing_0a": {
+        "1": 4,
+        "2": 553,
+        "3": 8271,
+        "4": 7280
+      },
+      "adapted_instruction_count_without_trailing_0a": 3582,
+      "adapted_string_count": 299,
+      "interpretation": "The literal adapter corrects a visible source ordering issue but does not preserve the original VM instruction and record layout."
+    },
+    "historical_adapted_replay_note": "Earlier notes recorded an adapted screenshot. The clean control did not reproduce it, so that claim is retained only as historical context and is not treated as verified."
   },
   "game_server_tls_source_patch": {
     "source_tool": "tools/replace_game_server_tls_source.py",

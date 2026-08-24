@@ -107,12 +107,16 @@ rendered world through a bounded loopback responder. Live endpoint
 availability, current package signing, account authentication, and physical
 ARM64-device behavior remain open.
 
-The recovered connector script now has a tested local compiler path as well.
+The recovered connector script now has a documented compiler path as well.
 HexaParser's raw output reverses the same-line brace literals used for handler
-tables and server lists. `tools/reverse_hexaparser_literals.py` restores the
-observed native order, after which the rebuilt script reaches the same local
-two-connection replay and produces an identical screenshot. This is verified
-for the connector fixture only, not for arbitrary GS2 scripts.
+tables and server lists, and the narrow adapter restores that order for static
+comparison. A clean runtime control still found a larger instruction and
+record-layout difference, and the adapted output did not reach the expected
+game port. The proven compatibility path keeps the original VM stream and
+uses `tools/patch_connector_bytecode_loading_clear.py` to insert the existing
+loading-state assignment into `onServerLogin`. That candidate reaches the
+local game/resource protocol path, but its bounded screenshot remains on the
+title/loading artwork.
 
 The separate game-server certificate path now has a source-level repair tool
 as well. It is not active in the recovered Classic branch, but
@@ -149,8 +153,11 @@ proves the local native TLS path, not a current live certificate or service.
 * `docs/TESTING.md` describes local-only reproduction without contacting a
   live game service.
 * `artifacts/helper_toolchain_replay.json` records the verified HexaParser and
-  conpack hashes, including the legacy ZIP-header and literal-order
-  compatibility tests.
+  conpack hashes, including the legacy ZIP-header and corrected clean-control
+  status for the literal-order experiment.
+* `artifacts/bytecode_loading_clear_replay.json` records the direct
+  original-stream script patch, package signature check, and local protocol
+  replay hashes.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.
 * `symbols/libqplay.symbols.json` is the machine-readable equivalent.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.
@@ -171,7 +178,11 @@ proves the local native TLS path, not a current live certificate or service.
   `tools/encode_connector_query.py` reproduces the captured connector query
   without opening a socket. `tools/conpack_legacy_zip_compat.patch` records
   the small source change needed for the old client's ZIP reader, and
-  `tools/reverse_hexaparser_literals.py` records the narrow compiler adapter.
+  `tools/reverse_hexaparser_literals.py` records the narrow compiler adapter,
+  and `tools/patch_connector_bytecode_loading_clear.py` preserves the original
+  VM stream while adding the tested login-time loading clear.
+  `tools/patch_gs2_success_loading_clear.py` records the equivalent source
+  edit for readable GS2 experiments; its compiled output remains unverified.
   `tools/decode_graalweb_cert_bundle.py` recovers certificate metadata from
   the original ARM64 library without contacting a service. The offline
   connector parser mirrors the native raw-digest RSA check, and

@@ -76,6 +76,7 @@ treated as a production build.
 | Test | Change | Result | Status |
 | --- | --- | --- | --- |
 | Getter override | Return false from `getLoadingScreenEnabled` | The startup sequence was disrupted and no connector request was observed | Negative control |
+| Original-stream script clear | Copy the existing `loadingscreenenabled = false` bytecode sequence into `onServerLogin` with `tools/patch_connector_bytecode_loading_clear.py` | The original VM stream loaded, reached two `14900` game connections, accepted login, received the map and three level files, and sent heartbeats. The bounded screenshot still showed title/loading artwork | Strong local script and protocol candidate, render state still open |
 | Non-premium branch | Change the conditional at ARM64 `0x15ca7c` so the existing clear at `0x15cac8` runs | The translated ARM64 client rendered the tiled world, HUD, and status icons with the exact `.gmap` fixture | Leading local candidate |
 | Render-boundary clear | Hook the getter call at `0x244228`, clear the flag through GOT slot `0x375e30`, then return to `0x24422c` | The translated ARM64 client rendered the same world and HUD | Control only |
 

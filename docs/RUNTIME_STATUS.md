@@ -58,11 +58,12 @@ This is the short handoff view. The full reasoning and command history are in
     two-port negative control it opened three connections to the alternate
     `14896` listener and none to the expected `14900` listener.
 17. `tools/reverse_hexaparser_literals.py` restores the observed literal
-    order for the connector fixture. The adapted bytecode reaches two
-    `14900` connections, the map, three level files, `pics1.png`, and
-    continuing heartbeats. Its rendered screenshot exactly matches the
-    original-bytecode compatibility replay. This is a fixture-level compiler
-    parity result, not proof for arbitrary scripts.
+    order in the recovered source for static comparison, but a clean replay
+    of its compiler output did not reach the expected `14900` listener under
+    the same native library, Kahn test signer, TLS fixture, and game responder.
+    The adapted stream has 3,582 instructions after its trailing byte is
+    removed, compared with 3,143 in the original. The earlier adapted
+    screenshot claim is not treated as current runtime evidence.
 18. A full-asset, ARM64-only debug APK built from the original 1.8 package and
     the five-step diagnostic chain was installed on the x86_64 emulator. Its
     APK SHA-256 is
@@ -145,6 +146,17 @@ This is the short handoff view. The full reasoning and command history are in
     also clears it. The stale `NakFpz15` certificate is therefore not active
     in the main Classic login path, although it remains relevant to other
     legacy modes or modified scripts.
+29. `tools/patch_connector_bytecode_loading_clear.py` inserts the original
+    VM's six-byte `loadingscreenenabled = false` sequence into `onServerLogin`
+    immediately before the reconnection reset. The patched stream grows from
+    15,581 to 15,587 bytes and from 3,143 to 3,146 instructions. A Kahn-signed
+    package using the same private ARM64 native library made one connector TLS
+    request, two `14900` game connections, completed encrypted login, received
+    `classiciphone.gmap` and three level files, and continued heartbeat traffic.
+    The title/loading artwork remained in the bounded screenshot, so this
+    proves script loading and protocol/resource progress, not a final visible
+    world transition. Hashes and scope are in
+    `artifacts/bytecode_loading_clear_replay.json`.
 
 ## Not verified
 
@@ -162,8 +174,8 @@ This is the short handoff view. The full reasoning and command history are in
 * Whether the live server sends the same completion sequence as the local
   responder.
 * Whether the literal-order adapter generalizes to scripts with different
-  syntax or multiline literals. Only the recovered connector fixture has
-  passed the adapted runtime replay.
+  syntax or multiline literals. Its current output has not passed the clean
+  runtime control for this connector fixture.
 * Whether a replacement certificate and the old `RC4-SHA` and `SSLv23`
   settings are accepted by a current authorized game server on a branch that
   actually enables game-server TLS.
@@ -175,8 +187,11 @@ diagnostic build. The no-swap table has been checked against IDA and the
 emulator, and the earlier xchg handler-table patch and packet-182 hide
 hypothesis are closed as false leads. Packet 182 maps to the process or
 window-list path, while packet 190 reaches the connecting-window completion
-wrapper. The recovered connector source also reaches the same local replay
-after the targeted literal-order adapter; the raw HexaParser output does not.
+wrapper. The recovered source remains useful for review, but the clean
+HexaParser output did not reach the expected game port. The original bytecode
+does reach it after a direct script-level loading clear, which keeps the
+proven VM stream intact. That path currently proves network and resource
+progress only; its bounded screenshot still shows the title/loading artwork.
 
 The ARM64 diagnostic run establishes a narrower result. Under the available
 x86_64 emulator, Android translated the ARM64 native code far enough to make

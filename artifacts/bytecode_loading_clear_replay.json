@@ -1,0 +1,78 @@
+{
+  "date": "2026-08-24",
+  "scope": "127.0.0.1-only Android 36 x86_64 emulator with translated ARM64 native code",
+  "input": {
+    "decoded_connector_path": "analysis/StartScript_Connector.dec.bin",
+    "decoded_connector_bytes": 15581,
+    "decoded_connector_sha256": "4919f3c82efd4359b992bb69acf6397bda47964c5d0355e88734dbf029b8df8b"
+  },
+  "bytecode_patch": {
+    "tool": "tools/patch_connector_bytecode_loading_clear.py",
+    "target_function": "onServerLogin",
+    "insertion_before": "reconnections",
+    "insertion_instruction_index": 1915,
+    "copied_assignment": "loadingscreenenabled = false",
+    "copied_assignment_bytes": 6,
+    "instruction_count_before": 3143,
+    "instruction_count_after": 3146,
+    "patched_connector_bytes": 15587,
+    "patched_connector_sha256": "3c8286ece57d96ecf088f6ba01b6a6094f6d317dda451369392bfa731aa0fb2f",
+    "verification_bypassed": false,
+    "network_contacted": false
+  },
+  "package": {
+    "package_bytes": 16188,
+    "package_sha256": "7473bac833911005821d210874be2e53df6eeed0d1ae8831dfa0fdf713f27e9e",
+    "embedded_script_bytes": 15587,
+    "embedded_script_sha256": "3c8286ece57d96ecf088f6ba01b6a6094f6d317dda451369392bfa731aa0fb2f",
+    "native_raw_rsa_signature_valid": true,
+    "test_public_key_sha256": "6c452033795ab3fe1fac4b18ff9e33594ba0133a172c139aa00e24d5121dfd2a",
+    "private_signing_key_committed": false
+  },
+  "apk": {
+    "apk_sha256": "30f4c6deaceaefee36a65baf2c6b4706b7daac44396290e744bc055863833d9e",
+    "native_library_sha256": "9ddd8502f96735119cbbee9bc1638121fcb565fc0c4b4cb60f3800a22bb1210b",
+    "abi": "arm64-v8a",
+    "native_chain": [
+      "controlled connector public key",
+      "certificate-only local trust bundle",
+      "loopback resolver",
+      "HTTPS port 18443",
+      "fixed outgoing RC4 test key"
+    ],
+    "release_artifact": false
+  },
+  "runtime": {
+    "connector_tls_requests": 1,
+    "game_connections_port_14900": 2,
+    "serverwarp_log_seen": true,
+    "encrypted_login_frames_seen": true,
+    "map": "classiciphone.gmap",
+    "level_files": 3,
+    "heartbeats_seen": true,
+    "game_capture_first_inbound_sha256": "103fd215ad7b9a13a69b6809752decff070b2e06c6d5a3ae4ef8ed5b513856c1",
+    "game_capture_first_outbound_sha256": "148812299189da60e2f4eae3a77169c02ed4e8b2167f501996d6ec985a401969",
+    "screenshot_sha256": "70e6573244e58125d4092d8265c8acc4e2074dd866bd9cd5897ddf079d39e135",
+    "screenshot_interpretation": "title/loading artwork remained visible; the synthetic responder stopped at resource delivery and heartbeat traffic",
+    "live_service_verified": false,
+    "physical_arm64_device_verified": false
+  },
+  "hexaparser_control": {
+    "clean_control_result": "compiler-emitted bytecode did not reach port 14900 under the same native library, Kahn signer, TLS fixture, and game responder",
+    "original_instruction_count": 3143,
+    "adapted_instruction_count": 3582,
+    "original_record_lengths": {
+      "1": 4,
+      "2": 553,
+      "3": 8293,
+      "4": 6699
+    },
+    "adapted_record_lengths_without_trailing_0a": {
+      "1": 4,
+      "2": 553,
+      "3": 8271,
+      "4": 7280
+    },
+    "historical_adapted_replay_claim": "not reproduced by the clean control and retained only as a historical note in the investigation log"
+  }
+}

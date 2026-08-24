@@ -703,7 +703,7 @@ different from the APK's embedded public DER SHA-256
 That creator is suitable for generating test containers with its own key, but
 it is not a drop-in signer for the original client.
 
-## HexaParser runtime parity correction
+## HexaParser literal-order experiment (historical record)
 
 The first complete compile was not the end of the toolchain check. The raw
 HexaParser source and the native-order reconstruction showed a consistent
@@ -750,23 +750,14 @@ archived `.rk` and `.t` metadata. Its bytecode retained a final `0x0a` byte,
 which the native loader accepted. This closes the earlier uncertainty about
 whether the trailer itself was the runtime problem.
 
-The raw and adapted packages were then compared under the same local
-conditions. Both made the connector request with query capture SHA-256
-`3586b24ea8f0b90b722bc988c4a7e126ee8e0664f2b06d1cb6e7ab8338e6759f`. With
-both candidate game ports listening, the raw package made zero connections to
-`14900` and three to `14896`, producing a wrong-endpoint or reconnect loop.
-The adapted package made two `14900` connections and completed the expected
-encrypted login, server warp, map request, three level-file requests,
-`pics1.png`, and continuing packet-24 heartbeats.
-
-The adapted render screenshot has SHA-256
-`fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`, exactly
-matching the earlier original-bytecode compatibility screenshot. This is a
-strong local integration result: recovered source, compiler, compatible
-container, native script loader, protocol responder, and translated renderer
-all agree for this fixture. It is still a loopback diagnostic. It does not
-verify a live server, current trust material, account login, arbitrary GS2
-scripts, or a physical ARM64 renderer.
+An earlier comparison report recorded the raw package making zero connections
+to `14900` and three to `14896`, while the adapted package was reported to make
+two `14900` connections and render a matching screenshot. Those values are
+kept here as historical observations, but the adapted result was not
+reproduced by the later clean control. The corrected interpretation and the
+current direct-bytecode result are recorded in the final section below. The
+literal-order adapter remains a useful source experiment, not a proven
+runtime repair.
 
 ## Source-level game-server TLS replacement
 
@@ -879,3 +870,40 @@ translated ARM64 rendering in one bounded replay. It does not validate the
 historical game-server `RC4-SHA` certificate against a live service, an
 authorized account, or a physical ARM64 renderer. The test certificate,
 private key, APK, and captures remain outside the repository.
+
+## Correction: clean HexaParser control and direct bytecode patch
+
+The earlier HexaParser parity section above recorded an adapted replay that
+could not be reproduced when the test was rerun with clean, freshly stopped
+loopback responders. The exact same native library, Kahn test key, TLS
+certificate, fixed responder key, and emulator were used for the comparison.
+The adapted stream requested the connector but never reached the expected
+`14900` listener. Stripping its compiler-added trailing `0x0a` did not help.
+
+The reason is broader than the visible list reversal. The original decoded
+stream has 3,143 instructions and record lengths `4/553/8293/6699`. The
+adapted stream has 3,582 instructions after the trailer is removed and record
+lengths `4/553/8271/7280`. Its function names are recognizable, but its
+function boundaries and opcode stream are not a byte-for-byte-compatible
+rebuild of the old VM format. The literal adapter remains useful for reading
+and comparing source data, but its runtime status is now unverified.
+
+To keep the proven VM stream, I added
+`tools/patch_connector_bytecode_loading_clear.py`. It copies the existing
+six-byte `loadingscreenenabled = false` sequence from `printDisconnectError`
+into `onServerLogin`, immediately before the `reconnections` reset. The tool
+updates only shifted function offsets and branch targets, refuses to overwrite
+the input, and opens no socket. The resulting decoded script has SHA-256
+`3c8286ece57d96ecf088f6ba01b6a6094f6d317dda451369392bfa731aa0fb2f` and the
+Kahn-signed package has SHA-256
+`7473bac833911005821d210874be2e53df6eeed0d1ae8831dfa0fdf713f27e9e`.
+
+The direct bytecode candidate passed the next local boundary. The ARM64-only
+package made one TLS connector request, two game connections on `14900`,
+completed the encrypted login exchange, received `classiciphone.gmap`, three
+level files, and continuing heartbeats. The app logged `Serverwarp...` and did
+not crash. The screenshot still showed the title/loading artwork because the
+synthetic responder stopped at a bounded post-login resource boundary. This
+is therefore a strong script-loader and protocol result, but not proof that
+the direct insertion alone produces the final visible world. The complete
+hash record is `artifacts/bytecode_loading_clear_replay.json`.

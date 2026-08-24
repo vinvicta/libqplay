@@ -63,6 +63,31 @@ flag after a successful login; its visible assignment is in the disconnect
 error handler. No successful-login native clear was found in this ARM64
 revision.
 
+## Script-level loading clear candidate
+
+The recovered bytecode does contain a loading-state assignment, but it is in
+`printDisconnectError`, not in `onServerLogin`. The compiler output from
+HexaParser is readable and structurally parseable, yet the clean runtime
+control did not reach the expected game port after the literal-order adapter.
+Its stream expands from 3,143 to 3,582 instructions, so recompiling the source
+is not currently a safe way to preserve this old VM's behavior.
+
+`tools/patch_connector_bytecode_loading_clear.py` takes the smaller path. It
+copies the original six serialized bytes for
+`loadingscreenenabled = false` into `onServerLogin`, immediately before the
+existing `this.reconnections = 0` assignment. It updates only shifted function
+entry offsets and branch targets. The direct candidate retains the original
+handler tables, string table, opcodes, native RSA branch, and native TLS code.
+
+In a clean loopback replay, the direct candidate made the connector TLS
+request, completed two encrypted game connections, received the GMAP and
+three level files, and continued heartbeat traffic. The title/loading artwork
+remained visible in the captured frame, so this is not yet a render-success
+claim. It does establish that a script-level insertion in the original VM
+stream can be loaded and can coexist with the full protocol/resource path.
+The exact hashes and test scope are in
+`artifacts/bytecode_loading_clear_replay.json`.
+
 ## x86 diagnostic scope
 
 The x86_64 comparison needs a separate qualification. Its original library

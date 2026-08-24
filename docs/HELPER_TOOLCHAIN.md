@@ -80,16 +80,15 @@ repaired source compiled successfully to a 16,141-byte bytecode file with
 SHA-256
 `67b70c449f87d6e3b71ef0fe92ba73fff9fe5fe7a1ad63aedb34e9daf4a7b752`.
 
-That compile result is a useful milestone, but it was not initially a runtime
-replacement for the archived script. The original ARM64 client accepted the
-original bytecode after it was repacked with the compatible ZIP headers below,
-then connected to the local game responder. The same client requested the
-connector package but did not reach the expected game-server flow when given
-the raw recompiled bytecode. The first single-port run looked like it had not
-opened a game socket. A later two-port negative control showed the more precise
-behavior: the raw output opened three connections to the alternate `14896`
-listener, but opened none to the expected `14900` listener and never completed
-the normal resource replay.
+That compile result is a useful source and parser milestone, but it is not a
+runtime replacement for the archived script. The original ARM64 client
+accepted the original bytecode after it was repacked with the compatible ZIP
+headers below, then connected to the local game responder. The same client
+requested the connector package but did not reach the expected game-server
+flow when given the raw recompiled bytecode. A later two-port negative control
+showed the more precise behavior: the raw output opened three connections to
+the alternate `14896` listener, but opened none to the expected `14900`
+listener and never completed the normal resource replay.
 
 ## HexaParser literal-order adapter
 
@@ -143,25 +142,75 @@ adapted source has SHA-256
 `e3a825b81bde930b8b26625ee7f14d3035d7b0dafb1015ee5d8df23591059572`, and the
 compiled 16,141-byte script has SHA-256
 `ab5b500216b560603ba433618c85a3d8e38ac06ad12c42a978f923930c79742a`. The
-compiled file ends in `0x0a`. That trailer was accepted by the native loader in
-the successful replay, so removing it is not required for this fixture.
+compiled file ends in `0x0a`. The clean control tested both the compiler output
+and a version with that trailer removed; neither reached the expected game
+listener. The trailer is therefore not the explanation for the compiler/runtime
+mismatch.
 
 Packing that script with the legacy ZIP patch, the archived `.rk` and `.t`
-metadata, and the local diagnostic signature path produced a 16,446-byte
-package with SHA-256
-`d4dc4fc9969daeed648a671b92934606d6b54f0f86620c7ec82fa0d1676ca297`. With
-the raw output, the same package path produced the wrong-endpoint result
-described above. With the literal-order adapter, the loopback replay produced
-two `14900` game connections, the expected map, three level files,
-`pics1.png`, and continuing heartbeat packets. Its screenshot SHA-256 was
-`fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`, exactly
-matching the earlier original-bytecode compatibility replay.
+metadata, and the local diagnostic signature path still produces a structurally
+valid test package. A clean replay under the same native library, Kahn test
+signer, local TLS responder, and game responder did not reproduce the earlier
+adapted-runtime claim, however. The adapted output requested the connector but
+opened no connection to the expected `14900` listener. Removing the compiler's
+trailing `0x0a` did not change that result.
 
-This proves runtime parity for the recovered connector fixture after the
-targeted literal-order repair. It does not prove that every script emitted by
-HexaParser needs, or will safely tolerate, the same transformation. The
-adapter should therefore be applied only after comparing its output with the
-native-order reconstruction and checking the resulting bytecode locally.
+The clean comparison also shows that this is more than a literal-order issue.
+The original stream has record lengths `4/553/8293/6699`, 3,143 instructions,
+and 302 strings. The adapted stream, after removing its trailing byte, has
+record lengths `4/553/8271/7280`, 3,582 instructions, and 299 strings. The
+function names remain recognizable, but the function boundaries and opcode
+stream are substantially different. The adapter is still useful as a readable
+source experiment, but its output is not currently proven compatible with
+this old VM. The earlier adapted screenshot claim is retained only as a
+historical note and is not used as current evidence.
+
+## Original-bytecode loading-state patch
+
+The proven original stream contains the exact three-instruction assignment
+`loadingscreenenabled = false` in `printDisconnectError`. The new
+`tools/patch_connector_bytecode_loading_clear.py` copies those six serialized
+bytes into `onServerLogin`, immediately before the existing
+`this.reconnections = 0` sequence. It then adjusts function entry offsets and
+branch targets that move after the insertion. It does not change the string
+table, the handler arrays, the RSA branch, or the native library.
+
+The offline command is:
+
+```bash
+python3 tools/patch_connector_bytecode_loading_clear.py \
+  /path/to/graal-decomp/analysis/StartScript_Connector.dec.bin \
+  /tmp/StartScript_Connector.loading-clear.dec.bin \
+  --report /tmp/StartScript_Connector.loading-clear.json
+```
+
+For the checked fixture, the output grows from 15,581 to 15,587 bytes and
+from 3,143 to 3,146 instructions. Its SHA-256 is
+`3c8286ece57d96ecf088f6ba01b6a6094f6d317dda451369392bfa731aa0fb2f`. The
+Kahn-signed package is 16,188 bytes with SHA-256
+`7473bac833911005821d210874be2e53df6eeed0d1ae8831dfa0fdf713f27e9e`, and
+the package passes the native raw RSA check with the matching private test key.
+
+The ARM64-only package using that script and the same local native library
+made one connector TLS request, opened two `14900` game connections, completed
+the encrypted login exchange, received `classiciphone.gmap`, three level
+files, and continuing heartbeat traffic. The native log reached
+`Serverwarp...` without a crash. The title/loading artwork remained visible
+in the captured frame because this synthetic responder stops at a bounded
+post-login resource boundary. This is strong evidence that the original VM
+stream and the script-level insertion are accepted, but it is not yet proof
+that this insertion alone produces a visible world on a physical ARM64 device
+or against a live service. The full hash record is in
+`artifacts/bytecode_loading_clear_replay.json`.
+
+For source review, `tools/patch_gs2_success_loading_clear.py` inserts the same
+assignment into the recovered `onServerLogin` function before compilation. On
+the checked source its output SHA-256 is
+`c1728c540c89ec5d7b69ad642c9dbaa7d6517e8369cfeb705baa14a9ddd722d6`. That
+source-level candidate is useful for documenting the intended change, but its
+HexaParser output belongs to the compiler stream that failed the clean runtime
+control above. The direct decoded-bytecode patch remains the compatibility
+candidate for this VM.
 
 ## Source-level game-server TLS replacement
 
@@ -329,15 +378,17 @@ fetch or live connector request was made while testing this repository.
 ## Why these checks matter
 
 The two helpers cover different layers. HexaParser validates the recovered
-GS2 bytecode and provides a readable source-level cross-check. Moreno.kahn
-validates the binary connector envelope before the native client consumes the
-script. Together they reduce the chance that a native finding is based on a
-bad archive extraction or a misleading bytecode listing. The experiments also
+GS2 source as a readable source-level cross-check. Moreno.kahn validates the
+binary connector envelope before the native client consumes the script.
+Together they reduce the chance that a native finding is based on a bad
+archive extraction or a misleading bytecode listing. The experiments also
 show why both layers need separate acceptance tests: an archive can be
 structurally correct while its ZIP dialect is too new for this client, and a
-source compiler can emit a parseable bytecode file whose literal order is
-wrong for the old runtime. The targeted adapter fixes the checked connector
-fixture, but it is not a general compiler validation.
+source compiler can emit a parseable bytecode file whose instruction layout is
+not compatible with the old runtime. The literal adapter fixes the observed
+same-line list ordering for static comparison, but it is not currently a
+runtime repair. The original-stream bytecode insertion is the tested script
+compatibility path.
 
 The reproducible artifacts used for these checks remain local: the APK, the
 connector response, the decoded script, and the generated GS2 text are not
@@ -349,12 +400,14 @@ hashes, and limitations instead.
 The successful local replay is a bounded native integration proof. A
 loopback connector and game responder completed the connector parse, the
 encrypted game handshake, server warp, map and resource requests, and
-translated ARM64 rendering. The responder also observed continuing heartbeat
-packets. Both the archived script and the adapted HexaParser output reached
-that replay; the raw HexaParser output did not. The archive packer and the
-literal-order adapter were checked separately before the integrated run, so
+continuing heartbeat packets with the original bytecode and with the direct
+loading-state bytecode insertion. The clean HexaParser control did not reach
+the expected game port under those same conditions. The archive packer and
+the bytecode patcher were checked separately before the integrated run, so
 the result is tied to recorded hashes rather than an unexamined generated
-package.
+package. Earlier notes described an adapted HexaParser screenshot; that
+result was not reproducible in the clean control and is no longer treated as
+verified.
 
 No live game-server login, current connector response, account authentication,
 production certificate chain, production package signature, or physical
