@@ -28,9 +28,9 @@ The translation count is the number of ELF symbol records handled by the
 script. IDA's function survey also reports compiler-generated functions and
 other analysis-created entries, so its total function count is not expected
 to equal 8,601. After the follow-up semantic pass, the original ARM64
-database reports 11,271 total functions, 9,197 with names, and 2,074 default
+database reports 11,271 total functions, 9,207 with names, and 2,064 default
 `sub_` names. Those figures describe the IDA database; the 8,601 count
-describes the reproducible symbol import and rename pass. The 37 semantic labels
+describes the reproducible symbol import and rename pass. The 47 semantic labels
 are recorded separately in `artifacts/ida_semantic_labels.json`, alongside
 the earlier inferred `TClient_setSSLParameters_scriptCallback` label. None of
 these semantic labels is part of the 8,601 original ELF symbol records.
@@ -84,8 +84,8 @@ land on IDA functions. IDA's analysis adds 11,271 function starts in total:
 | Function source | Count |
 | --- | ---: |
 | Backed by a translated ELF symbol | 8,096 |
-| IDA default `sub_` names | 2,074 |
-| Named by IDA but not backed by an ELF record | 1,101 |
+| IDA default `sub_` names | 2,064 |
+| Named by IDA but not backed by an ELF record | 1,111 |
 | Total IDA functions | 11,271 |
 
 The complete address-level inventory is in

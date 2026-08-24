@@ -8,10 +8,10 @@
   "policy": "These aliases are analysis labels, not recovered source names. The evidence is recorded so a later pass can correct a label without confusing it with an imported ELF symbol.",
   "inventory_after_labels": {
     "total_functions": 11271,
-    "ida_default_sub_functions": 2074,
-    "ida_named_non_elf_functions": 1101,
-    "named_function_total": 9197,
-    "new_labels_in_this_pass": 37
+    "ida_default_sub_functions": 2064,
+    "ida_named_non_elf_functions": 1111,
+    "named_function_total": 9207,
+    "new_labels_in_this_pass": 47
   },
   "labels": [
     {
@@ -235,6 +235,66 @@
       "name": "TClient_setEncodedFileKey",
       "confidence": "high",
       "evidence": ["Decodes the resource key and checksum fields", "Calls TResourceFunctions_setEncodedFileKey and advances TClient_onDownloadAction"]
+    },
+    {
+      "va": "0x1f0470",
+      "name": "TClient_requestGameFile",
+      "confidence": "high",
+      "evidence": ["Parses a game-file request", "Strips the filename and calls THTTPRequest_requestURLAsGameFile"]
+    },
+    {
+      "va": "0x1f15b8",
+      "name": "TClient_handleMapLevelPacket",
+      "confidence": "high",
+      "evidence": ["Recognizes .gmap data", "Calls TPlayer_enterServerLevel after parsing the map-level packet"]
+    },
+    {
+      "va": "0x1ea56c",
+      "name": "TClient_setServerLevelFile",
+      "confidence": "high",
+      "evidence": ["Normalizes and stores TClient::serverlevelname", "Selects a .gmap or level resource and updates TClient::serverlevel"]
+    },
+    {
+      "va": "0x1f17b4",
+      "name": "TClient_handlePlayerLoginLogout",
+      "confidence": "high",
+      "evidence": ["Looks up players by ID or account name", "Updates properties and invokes onPlayerLogin or onPlayerLogout"]
+    },
+    {
+      "va": "0x1ef2d0",
+      "name": "TClient_handleGaniScript",
+      "confidence": "high",
+      "evidence": ["Handles the gani:: update prefix", "Adds class scripts, loads animation data, saves encrypted scripts, and reloads animation"]
+    },
+    {
+      "va": "0x1f2a20",
+      "name": "TClient_handleGaniUpdate",
+      "confidence": "high",
+      "evidence": ["Parses a gani update", "Loads the resulting animation from the assembled string"]
+    },
+    {
+      "va": "0x1edae8",
+      "name": "TClient_setGhostMode",
+      "confidence": "high",
+      "evidence": ["Decodes the incoming value", "Stores it in data_TClient_ghostmode"]
+    },
+    {
+      "va": "0x1e9840",
+      "name": "TClient_setGhostMessage",
+      "confidence": "high",
+      "evidence": ["Stores the incoming value in data_TClient_ghostmessage"]
+    },
+    {
+      "va": "0x1edb7c",
+      "name": "TClient_handleSignImages",
+      "confidence": "high",
+      "evidence": ["Calls TPlayer_parseSignImages for the active player", "Stops walking when the packet requests it"]
+    },
+    {
+      "va": "0x1ed1e4",
+      "name": "TClient_clearLevelState",
+      "confidence": "high",
+      "evidence": ["Clears active-player weapons and every level and map NPC list", "Clears global NPC and script-universe player lists"]
     }
   ],
   "network_contacted": false

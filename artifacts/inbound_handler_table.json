@@ -172,7 +172,7 @@
     {
       "handler_index": 27,
       "va": "0x1f0470",
-      "name": "sub_1F0470"
+      "name": "TClient_requestGameFile"
     },
     {
       "handler_index": 28,
@@ -192,7 +192,7 @@
     {
       "handler_index": 31,
       "va": "0x1f15b8",
-      "name": "sub_1F15B8"
+      "name": "TClient_handleMapLevelPacket"
     },
     {
       "handler_index": 32,
@@ -202,7 +202,7 @@
     {
       "handler_index": 33,
       "va": "0x1ea56c",
-      "name": "sub_1EA56C"
+      "name": "TClient_setServerLevelFile"
     },
     {
       "handler_index": 34,
@@ -212,17 +212,17 @@
     {
       "handler_index": 35,
       "va": "0x1f17b4",
-      "name": "sub_1F17B4"
+      "name": "TClient_handlePlayerLoginLogout"
     },
     {
       "handler_index": 36,
       "va": "0x1ef2d0",
-      "name": "sub_1EF2D0"
+      "name": "TClient_handleGaniScript"
     },
     {
       "handler_index": 37,
       "va": "0x1f2a20",
-      "name": "sub_1F2A20"
+      "name": "TClient_handleGaniUpdate"
     },
     {
       "handler_index": 38,
@@ -232,12 +232,12 @@
     {
       "handler_index": 39,
       "va": "0x1edae8",
-      "name": "sub_1EDAE8"
+      "name": "TClient_setGhostMode"
     },
     {
       "handler_index": 40,
       "va": "0x1e9840",
-      "name": "sub_1E9840"
+      "name": "TClient_setGhostMessage"
     },
     {
       "handler_index": 41,
@@ -257,7 +257,7 @@
     {
       "handler_index": 45,
       "va": "0x1edb7c",
-      "name": "sub_1EDB7C"
+      "name": "TClient_handleSignImages"
     },
     {
       "handler_index": 46,
@@ -267,7 +267,7 @@
     {
       "handler_index": 47,
       "va": "0x1ed1e4",
-      "name": "sub_1ED1E4"
+      "name": "TClient_clearLevelState"
     },
     {
       "handler_index": 48,
