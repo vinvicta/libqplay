@@ -11,6 +11,7 @@ import json
 import os
 
 import ida_auto
+import idaapi
 import ida_bytes
 import ida_idaapi
 import ida_name
@@ -18,6 +19,7 @@ import ida_nalt
 
 
 OUTPUT_PATH = "/home/v/Desktop/graal-decomp/analysis/inbound_handler_table.json"
+WORKSPACE_ROOT = "/home/v/Desktop/graal-decomp"
 TABLE_NAME = "off_369960"
 TABLE_EA = 0x369960
 ENTRY_STRIDE = 8
@@ -54,6 +56,16 @@ def input_sha256():
     return None
 
 
+def display_idb_path():
+    path = idaapi.get_path(idaapi.PATH_TYPE_IDB)
+    if not path:
+        path = ida_nalt.get_input_file_path()
+    prefix = WORKSPACE_ROOT + os.sep
+    if path.startswith(prefix):
+        return os.path.relpath(path, WORKSPACE_ROOT)
+    return path
+
+
 ida_auto.auto_wait()
 named_ea = ida_name.get_name_ea(ida_idaapi.BADADDR, TABLE_NAME)
 if named_ea != ida_idaapi.BADADDR:
@@ -76,7 +88,7 @@ artifact = {
     "binary": {
         "architecture": "arm64-v8a",
         "libqplay_sha256": input_sha256(),
-        "idb": ida_nalt.get_input_file_path(),
+        "idb": display_idb_path(),
     },
     "purpose": "Snapshot of the native handler-index table used by TClient packet dispatch.",
     "table_va": hex(TABLE_EA),
@@ -103,7 +115,7 @@ artifact = {
 
 os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
 with open(OUTPUT_PATH, "w", encoding="utf-8") as handle:
-    json.dump(artifact, handle, ensure_ascii=False, indent=2, sort_keys=True)
+    json.dump(artifact, handle, ensure_ascii=False, indent=2)
     handle.write("\n")
 
 print(json.dumps({"path": OUTPUT_PATH, "table_va": hex(TABLE_EA), "entries": len(entries)}))

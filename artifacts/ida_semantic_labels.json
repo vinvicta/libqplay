@@ -8,10 +8,10 @@
   "policy": "These aliases are analysis labels, not recovered source names. The evidence is recorded so a later pass can correct a label without confusing it with an imported ELF symbol.",
   "inventory_after_labels": {
     "total_functions": 11271,
-    "ida_default_sub_functions": 2084,
-    "ida_named_non_elf_functions": 1091,
-    "named_function_total": 9187,
-    "new_labels_in_this_pass": 27
+    "ida_default_sub_functions": 2074,
+    "ida_named_non_elf_functions": 1101,
+    "named_function_total": 9197,
+    "new_labels_in_this_pass": 37
   },
   "labels": [
     {
@@ -175,6 +175,66 @@
       "name": "TClient_clearInDataHandlers",
       "confidence": "high",
       "evidence": ["Clears the 256-entry inbound handler array"]
+    },
+    {
+      "va": "0x1ec664",
+      "name": "TClient_addWeapon",
+      "confidence": "high",
+      "evidence": ["Parses a packed weapon string", "Calls TPlayer_addWeapon for the active player"]
+    },
+    {
+      "va": "0x1f25a8",
+      "name": "TClient_loadEncryptedScript",
+      "confidence": "high",
+      "evidence": ["Decodes the script version, key, checksum, and target type", "Calls TServerWeapon_loadScriptEncrypted2 or TScript_checkRequestScript"]
+    },
+    {
+      "va": "0x1f212c",
+      "name": "TClient_setEncryptedScript",
+      "confidence": "high",
+      "evidence": ["Decodes the script version, key, checksum, and target type", "Calls TServerWeapon_setEncryptedScript2 or TScriptUniverse_addEncryptedClassScript"]
+    },
+    {
+      "va": "0x1eb8a0",
+      "name": "TClient_deleteWeapon",
+      "confidence": "high",
+      "evidence": ["Calls TPlayer_deleteWeapon for the active player"]
+    },
+    {
+      "va": "0x1e9850",
+      "name": "TClient_setDisconnectReason",
+      "confidence": "high",
+      "evidence": ["Stores the incoming value in data_TClient_disconnectreason"]
+    },
+    {
+      "va": "0x1ef850",
+      "name": "TClient_setServerOptions",
+      "confidence": "high",
+      "evidence": ["Decodes the five-character option value", "Stores it in data_TClient_serveroptions"]
+    },
+    {
+      "va": "0x1e95b0",
+      "name": "TClient_enableGraal2002ServerMode",
+      "confidence": "high",
+      "evidence": ["Sets data_TClient_graal2002server to one"]
+    },
+    {
+      "va": "0x1ed934",
+      "name": "TClient_setTimeVar",
+      "confidence": "high",
+      "evidence": ["Decodes the four-character time value", "Stores it in data_TTime_timevar"]
+    },
+    {
+      "va": "0x1ef48c",
+      "name": "TClient_setBigFileSize",
+      "confidence": "high",
+      "evidence": ["Decodes the big-file size", "Stores it in data_TClient_bigfilesize and advances TClient_onDownloadAction"]
+    },
+    {
+      "va": "0x1f12b8",
+      "name": "TClient_setEncodedFileKey",
+      "confidence": "high",
+      "evidence": ["Decodes the resource key and checksum fields", "Calls TResourceFunctions_setEncodedFileKey and advances TClient_onDownloadAction"]
     }
   ],
   "network_contacted": false

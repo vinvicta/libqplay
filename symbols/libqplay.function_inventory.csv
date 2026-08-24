@@ -8141,7 +8141,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2004320,sub_1E9560,ida_default_sub,,,,,.text,32,1,5120,False,False,True
 2004352,sub_1E9580,ida_default_sub,,,,,.text,32,1,5120,False,False,True
 2004384,sub_1E95A0,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-2004400,sub_1E95B0,ida_default_sub,,,,,.text,20,2,5120,False,False,True
+2004400,TClient_enableGraal2002ServerMode,ida_named_non_elf,,,,,.text,20,2,5120,False,False,False
 2004420,sub_1E95C4,ida_default_sub,,,,,.text,16,1,5120,False,False,True
 2004436,sub_1E95D4,ida_default_sub,,,,,.text,64,2,5120,False,False,True
 2004500,sub_1E9614,ida_default_sub,,,,,.text,64,1,5120,False,False,True
@@ -8154,7 +8154,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2004828,TGameEnvironment_emit_onRCChat,ida_named_non_elf,,,,,.text,128,2,5120,False,False,False
 2004956,TClient_handleServerLoginSignature,ida_named_non_elf,,,,,.text,100,1,5120,False,False,False
 2005056,sub_1E9840,ida_default_sub,,,,,.text,16,2,5120,False,False,True
-2005072,sub_1E9850,ida_default_sub,,,,,.text,16,2,5120,False,False,True
+2005072,TClient_setDisconnectReason,ida_named_non_elf,,,,,.text,16,2,5120,False,False,False
 2005088,TClient_setServerWarpDestination,ida_named_non_elf,,,,,.text,16,2,5120,False,False,False
 2005104,sub_1E9870,ida_default_sub,,,,,.text,12,1,5120,False,False,True
 2005116,TClient_beginUpdatePackageDownload,ida_named_non_elf,,,,,.text,156,1,5120,False,False,False
@@ -8201,7 +8201,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2012564,TClient_processClientsideTrigger,ida_named_non_elf,,,,,.text,752,2,5120,False,False,False
 2013328,sub_1EB890,ida_default_sub,,,,,.text,8,2,5120,False,False,True
 2013336,sub_1EB898,ida_default_sub,,,,,.text,8,2,5120,False,False,True
-2013344,sub_1EB8A0,ida_default_sub,,,,,.text,28,2,5120,False,False,True
+2013344,TClient_deleteWeapon,ida_named_non_elf,,,,,.text,28,2,5120,False,False,False
 2013372,sub_1EB8BC,ida_default_sub,,,,,.text,36,1,5120,False,False,True
 2013408,TClient_applyPlayerProperties,ida_named_non_elf,,,,,.text,60,2,5120,False,False,False
 2013468,TClient_clearInDataHandlers,ida_named_non_elf,,,,,.text,28,1,5120,False,False,False
@@ -8226,7 +8226,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2015880,sub_1EC288,ida_default_sub,,,,,.text,348,1,5120,False,False,True
 2016228,sub_1EC3E4,ida_default_sub,,,,,.text,176,1,5120,False,False,True
 2016416,TClient_finishCachedFile,ida_named_non_elf,,,,,.text,452,2,5120,False,False,False
-2016868,sub_1EC664,ida_default_sub,,,,,.text,256,1,5120,False,False,True
+2016868,TClient_addWeapon,ida_named_non_elf,,,,,.text,256,1,5120,False,False,False
 2017124,TClient_processFileChunk,ida_named_non_elf,,,,,.text,1380,2,5120,False,False,False
 2018504,TClient_dispatchEncodedFileChunk,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
 2018552,TClient_handleMapWarpPacket,ida_named_non_elf,,,,,.text,292,1,5120,False,False,False
@@ -8235,7 +8235,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2020068,sub_1ED2E4,ida_default_sub,,,,,.text,260,1,5120,False,False,True
 2020328,sub_1ED3E8,ida_default_sub,,,,,.text,776,1,5120,False,False,True
 2021104,sub_1ED6F0,ida_default_sub,,,,,.text,580,1,5120,False,False,True
-2021684,sub_1ED934,ida_default_sub,,,,,.text,156,1,5120,False,False,True
+2021684,TClient_setTimeVar,ida_named_non_elf,,,,,.text,156,1,5120,False,False,False
 2021840,sub_1ED9D0,ida_default_sub,,,,,.text,232,1,5120,False,False,True
 2022072,sub_1EDAB8,ida_default_sub,,,,,.text,48,1,5120,False,False,True
 2022120,sub_1EDAE8,ida_default_sub,,,,,.text,68,1,5120,False,False,True
@@ -8258,11 +8258,11 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2026832,sub_1EED50,ida_default_sub,,,,,.text,484,1,5120,False,False,True
 2027316,sub_1EEF34,ida_default_sub,,,,,.text,916,1,5120,False,False,True
 2028240,sub_1EF2D0,ida_default_sub,,,,,.text,444,1,5120,False,False,True
-2028684,sub_1EF48C,ida_default_sub,,,,,.text,212,1,5120,False,False,True
+2028684,TClient_setBigFileSize,ida_named_non_elf,,,,,.text,212,1,5120,False,False,False
 2028896,sub_1EF560,ida_default_sub,,,,,.text,244,1,5120,False,False,True
 2029140,sub_1EF654,ida_default_sub,,,,,.text,284,1,5120,False,False,True
 2029424,sub_1EF770,ida_default_sub,,,,,.text,224,1,5120,False,False,True
-2029648,sub_1EF850,ida_default_sub,,,,,.text,176,1,5120,False,False,True
+2029648,TClient_setServerOptions,ida_named_non_elf,,,,,.text,176,1,5120,False,False,False
 2029824,sub_1EF900,ida_default_sub,,,,,.text,524,1,5120,False,False,True
 2030348,sub_1EFB0C,ida_default_sub,,,,,.text,776,1,5120,False,False,True
 2031124,sub_1EFE14,ida_default_sub,,,,,.text,1576,1,5120,False,False,True
@@ -8275,7 +8275,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2035172,TClient_parseEncodedFileChunk,ida_named_non_elf,,,,,.text,368,1,5120,False,False,False
 2035540,sub_1F0F54,ida_default_sub,,,,,.text,416,1,5120,False,False,True
 2035956,sub_1F10F4,ida_default_sub,,,,,.text,452,1,5120,False,False,True
-2036408,sub_1F12B8,ida_default_sub,,,,,.text,768,1,5120,False,False,True
+2036408,TClient_setEncodedFileKey,ida_named_non_elf,,,,,.text,768,1,5120,False,False,False
 2037176,sub_1F15B8,ida_default_sub,,,,,.text,508,1,5120,False,False,True
 2037684,sub_1F17B4,ida_default_sub,,,,,.text,896,1,5120,False,False,True
 2038580,TClient_setOutDataHandlers_TClient_int_int,elf_symbol,function,_Z26TClient_setOutDataHandlersP7TClientPii,"TClient_setOutDataHandlers(TClient *,int *,int)",TClient_setOutDataHandlers_TClient_int_int,.text,84,4,5120,False,False,False
@@ -8285,8 +8285,8 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2039096,sub_1F1D38,ida_default_sub,,,,,.text,152,2,5120,False,False,True
 2039248,sub_1F1DD0,ida_default_sub,,,,,.text,152,1,5120,False,False,True
 2039400,sub_1F1E68,ida_default_sub,,,,,.text,708,1,5120,False,False,True
-2040108,sub_1F212C,ida_default_sub,,,,,.text,1148,1,5120,False,False,True
-2041256,sub_1F25A8,ida_default_sub,,,,,.text,1144,1,5120,False,False,True
+2040108,TClient_setEncryptedScript,ida_named_non_elf,,,,,.text,1148,1,5120,False,False,False
+2041256,TClient_loadEncryptedScript,ida_named_non_elf,,,,,.text,1144,1,5120,False,False,False
 2042400,sub_1F2A20,ida_default_sub,,,,,.text,356,1,5120,False,False,True
 2042756,sub_1F2B84,ida_default_sub,,,,,.text,572,1,5120,False,False,True
 2043328,j__ZN17TClientPropertiesD1Ev,ida_named_non_elf,,,,,.text,4,0,5312,True,False,False
