@@ -163,6 +163,18 @@
     "runtime_verified": false,
     "scope": "private x86_64 package prepared for the saved loopback response"
   },
+  "package_preserving_arm64_candidate": {
+    "apk_sha256": "dad598e0cec03b501ff8cc30648ad843346fa3a331db3087ffa54ff92938af3a",
+    "native_sha256": "888a236bb839eef7ab094196b924796680d23d857a0d7533487bcd3786efb308",
+    "rsa_result_site_original_bytes": "dc 00 00 35",
+    "certificate_diagnostic_applied": true,
+    "loopback_transport_diagnostics_applied": true,
+    "loading_candidate_applied": true,
+    "abi_set": ["arm64-v8a"],
+    "signature_schemes_verified": ["v1", "v2", "v3"],
+    "runtime_verified": false,
+    "scope": "private ARM64 package prepared for the saved loopback response"
+  },
   "production_boundary": [
     "Obtain a current connector response for the exact client query.",
     "Validate its package signature against the authorized current key.",

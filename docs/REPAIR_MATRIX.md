@@ -109,6 +109,13 @@ not required for the saved archived response, but the no-bypass runtime
 variant has not yet been rerun. No live service or physical ARM64 device was
 used.
 
+For the main ARM64 target, a package-preserving ARM64-only candidate was also
+built with the original RSA bytes and the non-premium loading candidate. Its
+APK SHA-256 is
+`dad598e0cec03b501ff8cc30648ad843346fa3a331db3087ffa54ff92938af3a`.
+The candidate is ready for a future emulator or physical-device run, but its
+runtime behavior is not claimed here.
+
 ## What a real repair still needs
 
 The next production-compatible sequence is deliberately external to this
