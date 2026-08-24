@@ -194,7 +194,10 @@ index 143 decrypts to a 718-byte DER certificate with SHA-256
 the same Eurocenter Games self-signed certificate as entry 0 of the connector
 trust bundle, and its `notAfter` date is 2023-07-29. The exact metadata and
 offline decoder are in `artifacts/game_server_tls.json` and
-`tools/decode_game_server_tls_certificate.py`.
+`tools/decode_game_server_tls_certificate.py`. An authorized operator can
+prepare a replacement certificate-only script value with
+`tools/encode_game_server_tls_certificate.py`; the script must then be
+recompiled, repacked, and signed for the intended endpoint.
 
 This makes an expired game-server trust certificate a concrete second
 compatibility failure, not just an inference from the connector path. It also

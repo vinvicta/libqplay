@@ -108,6 +108,11 @@ This is the short handoff view. The full reasoning and command history are in
     same expired Eurocenter Games certificate as connector trust-bundle entry
     0. The native callback uses `NakFpz15` and enables `RC4-SHA` with
     `SSLv23`; this is documented offline in `artifacts/game_server_tls.json`.
+25. The offline encoder
+    `tools/encode_game_server_tls_certificate.py` prepares a replacement for
+    script string 143, rejects private-key or multi-certificate PEM input, and
+    reproduces the original literal byte-for-byte when fed the recovered
+    certificate. It does not disable verification or contact a network.
 
 ## Not verified
 

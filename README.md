@@ -148,7 +148,10 @@ for the connector fixture only, not for arbitrary GS2 scripts.
   verification enabled.
   `tools/decode_game_server_tls_certificate.py` decodes the separate
   game-server certificate from the recovered connector script without opening
-  a socket.
+  a socket. `tools/encode_game_server_tls_certificate.py` prepares a
+  certificate-only replacement for the same script argument and verifies the
+  native DES round trip. The resulting script still needs compilation,
+  packaging, and an authorized signature.
 * `artifacts/` contains small metadata exports. APKs, certificates, private
   keys, captured credentials, and game assets are intentionally not included.
 
