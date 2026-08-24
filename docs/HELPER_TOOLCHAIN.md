@@ -70,13 +70,26 @@ That compile succeeded and the bytecode SHA-256 was
 `9fb11056e6ce0cd8fc8caf497c25a5ba8b55e0c9c9667376d27eaee2da07b29f`. The
 round-trip source retained the nested `LoginBackground.addcontrol(this)` call.
 
-A direct compile of the complete generated connector source currently stops
-with a parser error at line 469, beginning at
-`function onAppleMessageBoxButton(title, buttonindex)`. The decompiler output
-is therefore verified as a readable GS2 view, while full source-to-bytecode
-round-tripping of this particular script remains an open toolchain issue. The
-failure does not invalidate the successful bytecode decompilation or the
-compiler fixture test.
+The complete generated connector source first stopped with a parser error at
+line 469, beginning at `function onAppleMessageBoxButton(title, buttonindex)`.
+Inspection showed that the generated text was missing one closing brace after
+`printDisconnectError`. Adding that brace produced a 552-line, 25,683-byte
+source file with SHA-256
+`a30f9eca136e3b8ff827bfb1bfe13fb442bd2e882963bf9863cd8de5f2669e68`. The
+repaired source compiled successfully to a 16,141-byte bytecode file with
+SHA-256
+`67b70c449f87d6e3b71ef0fe92ba73fff9fe5fe7a1ad63aedb34e9daf4a7b752`.
+
+That compile result is a useful milestone, but it is not yet a runtime
+replacement for the archived script. The original ARM64 client accepted the
+original bytecode after it was repacked with the compatible ZIP headers below,
+then connected to the local game responder. The same client requested the
+connector package but never opened the game socket when given the recompiled
+bytecode. Removing the compiler's final `0x0a` byte did not change that result.
+The experiment therefore identifies a compiler or bytecode-parity gap, not a
+failure in the recovered source or in the conpack envelope. The generated
+source remains valuable for review, while the original bytecode remains the
+runtime fixture until the compiler output is made compatible.
 
 ## Moreno.kahn
 
@@ -128,17 +141,50 @@ archived response's RSA signature does not match the public key embedded in
 the APK. That stale-package result remains a compatibility diagnostic, not a
 production trust decision.
 
-The optional `conpack_wsl.c` creator was inspected but not built in this
-environment because the checkout does not include the required wolfSSL
-headers and sources. A direct Linux compile stops at
-`wolfssl/wolfcrypt/rsa.h`; the README's wolfSSL include and source paths are
-needed for a complete build. The supplied `outer-private.rsa.der` also
-derives to public-key SHA-256
+The optional `conpack_wsl.c` creator initially stopped at the missing
+`wolfssl/wolfcrypt/rsa.h` header. Cloning the wolfSSL source at commit
+`cb138b22a2e9111e5ac9fb9e13a690762c86b884` supplied the required headers and
+sources. The resulting Linux build used:
+
+```bash
+cp /tmp/Moreno.kahn/conpack_wsl.c /tmp/conpack_wsl.c
+patch -p0 /tmp/conpack_wsl.c < tools/conpack_legacy_zip_compat.patch
+gcc -O2 -I/tmp/wolfssl \
+  /tmp/conpack_wsl.c \
+  /tmp/wolfssl/wolfcrypt/src/*.c \
+  -lz -lm -o /tmp/conpack_wsl
+```
+
+The supplied `outer-private.rsa.der` derives to public-key SHA-256
 `07714f7eac2ff6e3236f2887ebab9c367714120c834acff3f745e674ccd46d1a`, while
 the APK's embedded public DER is
 `35e7245d68e6ab6c84bd55061704fe2d3d16800cbe0a671aceae6c85e1301b82`.
-Archives created with that helper key are therefore useful for testing a
-custom packer, but they are not automatically signed for this APK.
+The helper key is therefore useful for testing a custom packer, but it is not
+automatically trusted by the original APK. The local ARM64 candidate uses a
+diagnostic package-signature bypass for this bounded test.
+
+The first packages produced by the unmodified helper were valid ZIP files,
+but the old client rejected them before the script ran. Comparing the
+decrypted archive with the saved connector archive isolated four legacy ZIP
+header requirements:
+
+* local and central entries use general-purpose flag `0x0002`;
+* local and central entries use DOS time and date `0xffff`;
+* central-directory version-made-by is `0` rather than `20`;
+* the remaining compression method, sizes, CRCs, and entry names are ordinary
+  deflate metadata.
+
+The minimal source patch is recorded in
+`tools/conpack_legacy_zip_compat.patch`. It must be applied before the helper
+signs the outer payload. A package made with that patch and the original
+15,581-byte connector bytecode had SHA-256
+`c242e73cf1abf7a4bd80fa1c5e2e17a1f569960937a83f52cfda1c422307392a`. Running
+`conn-extract` on it produced an archive with the same SHA-256 as the saved
+local archive, `fc937afa039dff52ff4ae7f2e3ad809d75c19f5698875d862e5646644446b2b5`.
+The APK then completed the two-connection loopback login, map and level-file
+sequence, and continued sending heartbeat packets. The render candidate
+displayed the tiled world and HUD. This is a local diagnostic result, not a
+live-service login.
 
 The same utility has commands for the DES/Base64 connector query, resource
 DES, RC4, and the game's zlib wrapper. The query command is useful for format
@@ -157,9 +203,29 @@ The two helpers cover different layers. HexaParser validates the recovered
 GS2 bytecode and provides a readable source-level cross-check. Moreno.kahn
 validates the binary connector envelope before the native client consumes the
 script. Together they reduce the chance that a native finding is based on a
-bad archive extraction or a misleading bytecode listing.
+bad archive extraction or a misleading bytecode listing. The experiments also
+show why both layers need separate acceptance tests: an archive can be
+structurally correct while its ZIP dialect is too new for this client, and a
+source compiler can emit a parseable bytecode file that this old runtime does
+not execute.
 
 The reproducible artifacts used for these checks remain local: the APK, the
 connector response, the decoded script, and the generated GS2 text are not
 committed here. The public repository records the pinned commits, commands,
 hashes, and limitations instead.
+
+## Loopback proof versus live verification
+
+The successful local replay is a bounded native integration proof. A
+loopback connector and game responder completed the connector parse, the
+encrypted game handshake, server warp, map and resource requests, and
+translated ARM64 rendering. The responder also observed continuing heartbeat
+packets. The source compiler and the archive packer were tested separately so
+that a successful network trace is not mistaken for proof that the generated
+script is runtime-compatible.
+
+No live game-server login, current connector response, account authentication,
+production certificate chain, production package signature, or physical
+ARM64 renderer run has been verified. The repository should describe the
+current result as a controlled loopback render proof and keep live login and
+real-device validation as open milestones.

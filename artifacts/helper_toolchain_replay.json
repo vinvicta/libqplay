@@ -1,0 +1,44 @@
+{
+  "date": "2026-08-24",
+  "hexaparser": {
+    "repository_commit": "ad9bd3657feece825b5f5a888f5db34ffe37afb9",
+    "go_version": "go1.22.2",
+    "raw_decompiled_source_bytes": 25677,
+    "raw_decompiled_source_sha256": "cf60e41536ddebed89ca1c3b3342476763b3d28c1cc9fff29e211931a080afa5",
+    "repaired_source_bytes": 25683,
+    "repaired_source_sha256": "a30f9eca136e3b8ff827bfb1bfe13fb442bd2e882963bf9863cd8de5f2669e68",
+    "recompiled_bytecode_bytes": 16141,
+    "recompiled_bytecode_sha256": "67b70c449f87d6e3b71ef0fe92ba73fff9fe5fe7a1ad63aedb34e9daf4a7b752",
+    "runtime_replay_result": "connector_requested_but_game_socket_not_opened",
+    "runtime_note": "The source and bytecode compile, but the recompiled connector is not yet runtime-compatible with this old client."
+  },
+  "moreno_kahn": {
+    "repository_commit": "5e3a05fc8fbcf3c3f72b3c263238b2ed275fc66d",
+    "wolfssl_commit": "cb138b22a2e9111e5ac9fb9e13a690762c86b884",
+    "embedded_public_der_sha256": "35e7245d68e6ab6c84bd55061704fe2d3d16800cbe0a671aceae6c85e1301b82",
+    "test_signing_public_der_sha256": "07714f7eac2ff6e3236f2887ebab9c367714120c834acff3f745e674ccd46d1a",
+    "legacy_zip_header_patch": {
+      "general_purpose_flag": "0x0002",
+      "dos_time": "0xffff",
+      "dos_date": "0xffff",
+      "central_directory_version_made_by": "0"
+    },
+    "original_script_bytes": 15581,
+    "original_script_sha256": "4919f3c82efd4359b992bb69acf6397bda47964c5d0355e88734dbf029b8df8b",
+    "generated_connector_bytes": 16446,
+    "generated_connector_sha256": "c242e73cf1abf7a4bd80fa1c5e2e17a1f569960937a83f52cfda1c422307392a",
+    "extracted_zip_sha256": "fc937afa039dff52ff4ae7f2e3ad809d75c19f5698875d862e5646644446b2b5",
+    "outer_signature_note": "The test signer differs from the APK's embedded verification key. The local ARM64 replay uses an explicit diagnostic signature bypass."
+  },
+  "loopback_replay": {
+    "scope": "127.0.0.1 only",
+    "connector_query_sha256": "3586b24ea8f0b90b722bc988c4a7e126ee8e0664f2b06d1cb6e7ab8338e6759f",
+    "arm64_render_candidate_sha256": "89a7cf3a10d9da9fb00f50e6917ce10402c1147bcf5738a176c26b32868ba858",
+    "game_connections": 2,
+    "map": "classiciphone.gmap",
+    "render_screenshot_sha256": "fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e",
+    "result": "connector, encrypted login, map and resource requests, heartbeats, and translated ARM64 rendering observed",
+    "live_service_verified": false,
+    "physical_arm64_device_verified": false
+  }
+}

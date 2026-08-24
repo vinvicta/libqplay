@@ -80,6 +80,8 @@ ARM64-device behavior remain open.
 * `docs/SPECTRON_COMPARISON.md` records the supplied modded APK comparison.
 * `docs/TESTING.md` describes local-only reproduction without contacting a
   live game service.
+* `artifacts/helper_toolchain_replay.json` records the verified HexaParser and
+  conpack hashes, including the legacy ZIP-header compatibility test.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.
 * `symbols/libqplay.symbols.json` is the machine-readable equivalent.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.
@@ -87,7 +89,8 @@ ARM64-device behavior remain open.
   native decoded value.
 * `tools/` contains IDAPython, parsing, replay, and diagnostic patch helpers.
   `tools/encode_connector_query.py` reproduces the captured connector query
-  without opening a socket.
+  without opening a socket. `tools/conpack_legacy_zip_compat.patch` records
+  the small source change needed for the old client's ZIP reader.
 * `artifacts/` contains small metadata exports. APKs, certificates, private
   keys, captured credentials, and game assets are intentionally not included.
 

@@ -147,6 +147,14 @@ The `con.png` body should be an archived response that has already been
 parsed offline. Do not treat an invalid RSA signature as a production fix.
 It is accepted in the diagnostic APK only to reach the next native stage.
 
+When generating a replacement body with the supplied `conpack_wsl.c`, apply
+`tools/conpack_legacy_zip_compat.patch` before compiling the helper. This old
+client expects the archived ZIP's flag `0x0002`, DOS time and date `0xffff`,
+and central-directory version-made-by value `0`. The original connector
+bytecode was repacked with those fields and reached the game responder. The
+HexaParser output compiles, but its current bytecode has not passed the same
+runtime acceptance test, so use the archived bytecode for this replay.
+
 ## Two-connection game replay
 
 Packet 178 is the server-warp instruction. The responder must send it on the

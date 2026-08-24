@@ -45,6 +45,12 @@ This is the short handoff view. The full reasoning and command history are in
 14. A separate render-boundary diagnostic clears the loading byte only after
     timer and packet processing. It produces the same visible result and
     remains available as a control for the initialization candidate.
+15. The supplied conpack tool now produces a client-compatible legacy ZIP
+    when its four header fields are matched to the archived package. The
+    original connector bytecode survives repack and reaches the same local
+    two-connection game replay. HexaParser can decompile and recompile the
+    recovered source, but the recompiled bytecode is not yet accepted by the
+    old runtime, so it remains a source-review experiment.
 
 ## Not verified
 
@@ -59,6 +65,9 @@ This is the short handoff view. The full reasoning and command history are in
   title or loading image, while both diagnostics display the world.
 * Whether the live server sends the same completion sequence as the local
   responder.
+* Whether the HexaParser compiler can be brought to bytecode parity with the
+  original runtime. Its current output is parseable and packable, but the
+  client stops after requesting the connector package.
 
 ## Current blocker
 
