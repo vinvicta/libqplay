@@ -28,9 +28,9 @@ The translation count is the number of ELF symbol records handled by the
 script. IDA's function survey also reports compiler-generated functions and
 other analysis-created entries, so its total function count is not expected
 to equal 8,601. After the follow-up semantic pass, the original ARM64
-database reports 11,271 total functions, 9,250 with names, and 2,021 default
+database reports 11,271 total functions, 9,299 with names, and 1,972 default
 `sub_` names. Those figures describe the IDA database; the 8,601 count
-describes the reproducible symbol import and rename pass. The 90 semantic labels
+describes the reproducible symbol import and rename pass. The 139 semantic labels
 are recorded separately in `artifacts/ida_semantic_labels.json`, alongside
 the earlier inferred `TClient_setSSLParameters_scriptCallback` label. None of
 these semantic labels is part of the 8,601 original ELF symbol records.
@@ -75,6 +75,16 @@ imported symbol CSV because they are semantic labels, not ELF names. The
 complete list and the evidence behind each label are in
 `artifacts/ida_semantic_labels.json`.
 
+The latest pass extends that coverage across the whole core `TClient` protocol
+region, from `0x1e9000` through `0x1f3000`. It labels map entry, NPC creation
+and removal, object and effect updates, encrypted-script dispatch, ping and
+text handling, and the inbound and outbound handler bridges. A few wrappers
+use exact offset-based names such as `TClient_setPlayerStateFlag2328` or
+`TClient_getConnectionString8288`. That is deliberate. The instructions prove
+the field offset or virtual slot, but they do not recover the original C++
+member name. Keeping the uncertainty visible makes these aliases safer to use
+in later patches.
+
 ## Complete function inventory
 
 The symbol table and the IDA function list are different sets. The ELF has
@@ -84,8 +94,8 @@ land on IDA functions. IDA's analysis adds 11,271 function starts in total:
 | Function source | Count |
 | --- | ---: |
 | Backed by a translated ELF symbol | 8,096 |
-| IDA default `sub_` names | 2,021 |
-| Named by IDA but not backed by an ELF record | 1,154 |
+| IDA default `sub_` names | 1,972 |
+| Named by IDA but not backed by an ELF record | 1,203 |
 | Total IDA functions | 11,271 |
 
 The complete address-level inventory is in

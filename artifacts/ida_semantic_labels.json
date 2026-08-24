@@ -8,10 +8,10 @@
   "policy": "These aliases are analysis labels, not recovered source names. The evidence is recorded so a later pass can correct a label without confusing it with an imported ELF symbol.",
   "inventory_after_labels": {
     "total_functions": 11271,
-    "ida_default_sub_functions": 2021,
-    "ida_named_non_elf_functions": 1154,
-    "named_function_total": 9250,
-    "new_labels_in_this_pass": 90
+    "ida_default_sub_functions": 1972,
+    "ida_named_non_elf_functions": 1203,
+    "named_function_total": 9299,
+    "new_labels_in_this_pass": 139
   },
   "labels": [
     {
@@ -553,6 +553,300 @@
       "name": "TClient_setLeaderIfOnServerLevel",
       "confidence": "high",
       "evidence": ["Checks whether activeplayer's current level equals data_TClient_serverlevel", "Sets data_TClient_leader to 1 when the levels match"]
+    },
+    {
+      "va": "0x1e9518",
+      "name": "TClient_callVirtual312WithMinusOne",
+      "confidence": "medium",
+      "evidence": ["Invokes the receiver virtual method at vtable offset +312", "Passes 0xffffffff and the forwarded argument"]
+    },
+    {
+      "va": "0x1e9540",
+      "name": "TClient_callVirtual312",
+      "confidence": "medium",
+      "evidence": ["Invokes the receiver virtual method at vtable offset +312", "Passes no additional argument"]
+    },
+    {
+      "va": "0x1e9560",
+      "name": "TClient_callVirtual320",
+      "confidence": "medium",
+      "evidence": ["Invokes the receiver virtual method at vtable offset +320", "Passes no additional argument"]
+    },
+    {
+      "va": "0x1e9580",
+      "name": "TClient_setClientState332",
+      "confidence": "high",
+      "evidence": ["Checks data_TClient_client", "Stores the argument at client+332 and sets client+329 to 1"]
+    },
+    {
+      "va": "0x1e95a0",
+      "name": "TClient_setServerOptionsRaw",
+      "confidence": "high",
+      "evidence": ["Assigns the argument directly to data_TClient_serveroptions"]
+    },
+    {
+      "va": "0x1e95c4",
+      "name": "TClient_setTimeVarRaw",
+      "confidence": "high",
+      "evidence": ["Assigns the argument directly to data_TTime_timevar"]
+    },
+    {
+      "va": "0x1e9614",
+      "name": "TClient_setPlayerStateFields2080_2088",
+      "confidence": "high",
+      "evidence": ["Checks that activeplayer is on data_TClient_serverlevel", "Stores two forwarded values at activeplayer+2080 and activeplayer+2088"]
+    },
+    {
+      "va": "0x1e9694",
+      "name": "TClient_setGhostModeValue",
+      "confidence": "high",
+      "evidence": ["Assigns the argument directly to data_TClient_ghostmode"]
+    },
+    {
+      "va": "0x1e96a4",
+      "name": "TClient_setPlayerStateFlag2328",
+      "confidence": "high",
+      "evidence": ["Checks activeplayer", "Stores the boolean argument at activeplayer+2328"]
+    },
+    {
+      "va": "0x1e9870",
+      "name": "TClient_setLoginAccountName",
+      "confidence": "high",
+      "evidence": ["Assigns the supplied string to data_TClient_loginaccountname"]
+    },
+    {
+      "va": "0x1e9918",
+      "name": "TClient_getConnectionString8288",
+      "confidence": "medium",
+      "evidence": ["Reads the connection object at client+256", "Copies its TString at offset +8288 or returns an empty result"]
+    },
+    {
+      "va": "0x1e9968",
+      "name": "TClient_getConnectionString8296",
+      "confidence": "medium",
+      "evidence": ["Reads the connection object at client+256", "Copies its TString at offset +8296 or returns an empty result"]
+    },
+    {
+      "va": "0x1e99b8",
+      "name": "TClient_getConnectionString8304",
+      "confidence": "medium",
+      "evidence": ["Reads the connection object at client+256", "Copies its TString at offset +8304 or returns an empty result"]
+    },
+    {
+      "va": "0x1e9a08",
+      "name": "TClient_throwObjectForPlayerId",
+      "confidence": "high",
+      "evidence": ["Finds a player by client ID", "Throws object type 0 and links the result to that player under Classic server and active-level conditions"]
+    },
+    {
+      "va": "0x1e9a70",
+      "name": "TClient_spyExplosionForPlayerId",
+      "confidence": "high",
+      "evidence": ["Finds a player by client ID", "Creates a direction-adjusted spy explosion in that player's action level"]
+    },
+    {
+      "va": "0x1e9be0",
+      "name": "TClient_putBombAtPosition",
+      "confidence": "high",
+      "evidence": ["Creates a bomb in the active player's action level", "Optionally associates the bomb with the source player"]
+    },
+    {
+      "va": "0x1e9cb4",
+      "name": "TClient_putFlyingObjectAtPosition",
+      "confidence": "high",
+      "evidence": ["Creates a flying object in a player's action level", "Optionally removes a mirrored shot and associates the object with its source"]
+    },
+    {
+      "va": "0x1e9da4",
+      "name": "TClient_addNpcWeaponForActivePlayer",
+      "confidence": "high",
+      "evidence": ["Checks the active player and Graal 2002 mode", "Calls TPlayer_addNPCWeapon for IDs up to 25"]
+    },
+    {
+      "va": "0x1e9dd8",
+      "name": "TClient_addSignAtServerLevel",
+      "confidence": "high",
+      "evidence": ["Allocates a TServerSign on data_TClient_serverlevel", "Assigns its coordinates and text and appends it to the level list"]
+    },
+    {
+      "va": "0x1e9e9c",
+      "name": "TClient_saveServerLevelEncrypted",
+      "confidence": "high",
+      "evidence": ["Checks data_TClient_serverlevel", "Calls TServerLevel_SaveEncrypted"]
+    },
+    {
+      "va": "0x1ea0a0",
+      "name": "TClient_removeLevelObjectFromLevel",
+      "confidence": "high",
+      "evidence": ["Resolves a level by name", "Looks up an object ID in its object hash and invokes the object's removal virtual method"]
+    },
+    {
+      "va": "0x1ea0dc",
+      "name": "TClient_removeNpcByNumericId",
+      "confidence": "high",
+      "evidence": ["Looks up an NPC ID in data_TGameEnvironment_allnpcsh", "Invokes the NPC removal virtual method at vtable offset +8"]
+    },
+    {
+      "va": "0x1ea114",
+      "name": "TClient_moveNpcToLevelAtPosition",
+      "confidence": "high",
+      "evidence": ["Resolves an NPC by ID and a target level", "Adds or removes the NPC, updates its position, and refreshes its lookup tree"]
+    },
+    {
+      "va": "0x1ea1e0",
+      "name": "TClient_addOrUpdateNpc",
+      "confidence": "high",
+      "evidence": ["Creates or updates an NPC and attaches it to the NPC server level", "Initializes properties and images and links matching players"]
+    },
+    {
+      "va": "0x1ea878",
+      "name": "TClient_enterServerMapFile",
+      "confidence": "high",
+      "evidence": ["Copies map-file metadata into active-player state", "Resolves a .gmap, selects its first level, and enters that level"]
+    },
+    {
+      "va": "0x1eac34",
+      "name": "TClient_enterServerMapTile",
+      "confidence": "high",
+      "evidence": ["Resolves a .gmap and clamps tile coordinates", "Constructs a level warp string and enters or updates the selected map tile"]
+    },
+    {
+      "va": "0x1eaf8c",
+      "name": "TClient_requestGameFileStripped",
+      "confidence": "high",
+      "evidence": ["Strips the supplied filename", "Requests it from THTTPRequest_requestURLAsGameFile"]
+    },
+    {
+      "va": "0x1eafe0",
+      "name": "TClient_setEncodedFileKeyAndContinue",
+      "confidence": "high",
+      "evidence": ["Calls TResourceFunctions_setEncodedFileKey", "Advances TClient_onDownloadAction"]
+    },
+    {
+      "va": "0x1eaff8",
+      "name": "TClient_setBigFileSizeAndContinue",
+      "confidence": "high",
+      "evidence": ["Stores data_TClient_bigfilesize", "Advances TClient_onDownloadAction"]
+    },
+    {
+      "va": "0x1eba54",
+      "name": "TClient_sendTriggerActionForClass",
+      "confidence": "high",
+      "evidence": ["Recognizes weapon, gui, and npc class strings", "Sends a trigger action using the serverside or servernpc class name"]
+    },
+    {
+      "va": "0x1ebb30",
+      "name": "TClient_dispatchHandlerIndex",
+      "confidence": "high",
+      "evidence": ["Bounds-checks a handler index at 0x5e", "Loads a function pointer from data_TClient_indatahandlers and invokes it"]
+    },
+    {
+      "va": "0x1ebb74",
+      "name": "TClient_removeBombFromLevels",
+      "confidence": "high",
+      "evidence": ["Removes a bomb from the active player's action level", "Also removes it from the current level when the levels differ"]
+    },
+    {
+      "va": "0x1ebc14",
+      "name": "TClient_addChestAtPosition",
+      "confidence": "high",
+      "evidence": ["Allocates a TServerChest when the server level exists", "Assigns type and coordinates and appends or destroys it according to state"]
+    },
+    {
+      "va": "0x1ebd18",
+      "name": "TClient_shootProjectile",
+      "confidence": "high",
+      "evidence": ["Checks that the active player is on the server level", "Creates a projectile with the supplied trajectory and strings and links the source player"]
+    },
+    {
+      "va": "0x1ebdf4",
+      "name": "TClient_setEncryptedScriptForTarget",
+      "confidence": "high",
+      "evidence": ["Dispatches an encrypted script update to a weapon or class", "Leaves the explicit gani case as a no-op"]
+    },
+    {
+      "va": "0x1ebf18",
+      "name": "TClient_loadEncryptedScriptForTarget",
+      "confidence": "high",
+      "evidence": ["Dispatches an encrypted script load to a weapon or class", "Leaves the explicit gani case as a no-op"]
+    },
+    {
+      "va": "0x1ec164",
+      "name": "TClient_removeExtraFromLevels",
+      "confidence": "high",
+      "evidence": ["Removes an extra from the active player's action and current levels", "Plays extra.wav"]
+    },
+    {
+      "va": "0x1ec288",
+      "name": "TClient_makeExplosion",
+      "confidence": "high",
+      "evidence": ["Creates an explosion in a player's action level", "Chooses bomb.wav or thunder.wav and links the source player when requested"]
+    },
+    {
+      "va": "0x1ece1c",
+      "name": "TClient_hurtPlayer",
+      "confidence": "high",
+      "evidence": ["Finds the target player or nearby NPC", "Applies server damage through TPlayer_hurtPlayer and may send a PK notification"]
+    },
+    {
+      "va": "0x1ed2e4",
+      "name": "TClient_setGaniScript",
+      "confidence": "high",
+      "evidence": ["Prefixes the supplied name with gani::", "Installs the class script, saves the animation script, and reloads its objects"]
+    },
+    {
+      "va": "0x1ed3e8",
+      "name": "TClient_updateGlobalPlayer",
+      "confidence": "high",
+      "evidence": ["Creates or updates a global player", "Moves logged-out players to the deleted list and invokes onPlayerLogin or onPlayerLogout"]
+    },
+    {
+      "va": "0x1ed6f0",
+      "name": "TClient_giveItemExtra",
+      "confidence": "high",
+      "evidence": ["Gives an item extra to a player", "Plays item.wav and initializes shield or sword metadata when applicable"]
+    },
+    {
+      "va": "0x1eb8bc",
+      "name": "TClient_addWeaponForActivePlayer",
+      "confidence": "high",
+      "evidence": ["Checks activeplayer", "Forwards two strings to TPlayer_addWeapon"]
+    },
+    {
+      "va": "0x1eb93c",
+      "name": "TClient_getGraalPassword",
+      "confidence": "medium",
+      "evidence": ["Invokes TOptions_getGraalPassWord", "Returns through the script callback ABI"]
+    },
+    {
+      "va": "0x1edab8",
+      "name": "TClient_handlePing",
+      "confidence": "high",
+      "evidence": ["Sends a ping answer when the mode is zero", "Stores the answer ID in data_TClient_answeredpingid when the mode is one"]
+    },
+    {
+      "va": "0x1edde4",
+      "name": "TClient_setNpcScriptById",
+      "confidence": "high",
+      "evidence": ["Resolves an NPC by ID", "Assigns its script and invokes the script-refresh virtual method when nonempty"]
+    },
+    {
+      "va": "0x1f1b88",
+      "name": "TClient_setOutDataHandlersFromArray",
+      "confidence": "high",
+      "evidence": ["Reads handler values through virtual length and index methods", "Forwards the resulting array to TClient_setOutDataHandlers"]
+    },
+    {
+      "va": "0x1f1dd0",
+      "name": "TClient_updateGaniFromString",
+      "confidence": "high",
+      "evidence": ["Loads a GANI object", "Converts the supplied string to a TStringList representation and replaces the animation data"]
+    },
+    {
+      "va": "0x1f2b84",
+      "name": "TClient_processTextControlAction",
+      "confidence": "high",
+      "evidence": ["Handles getstats through QEngine stats output", "Otherwise sends receivetext to the active weapon with parsed arguments"]
     }
   ],
   "network_contacted": false
