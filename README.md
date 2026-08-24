@@ -100,6 +100,8 @@ for the connector fixture only, not for arbitrary GS2 scripts.
 * `docs/RUNTIME_STATUS.md` lists verified milestones and open blockers.
 * `docs/ARM64_RENDER_REPAIR.md` records the ARM64 loading-state experiments
   and the successful render-boundary diagnostic.
+* `docs/REPAIR_MATRIX.md` separates the connector, loading-state, and rejected
+  handler-table diagnostics from release-ready repairs.
 * `docs/HELPER_TOOLCHAIN.md` records the pinned GS2 and connector-helper
   checks, including their reproducible hashes and current limitations.
 * `docs/SPECTRON_COMPARISON.md` records the supplied modded APK comparison.
@@ -116,6 +118,8 @@ for the connector fixture only, not for arbitrary GS2 scripts.
 * `artifacts/graalweb_trust_bundle.json` records the recovered certificate
   bundle hashes, dates, and native decoder details. The PEM material itself is
   not committed.
+* `artifacts/diagnostic_patch_matrix.json` records exact patch sites, private
+  replay hashes, and the result of each compatibility experiment.
 * `tools/` contains IDAPython, parsing, replay, and diagnostic patch helpers.
   `tools/encode_connector_query.py` reproduces the captured connector query
   without opening a socket. `tools/conpack_legacy_zip_compat.patch` records

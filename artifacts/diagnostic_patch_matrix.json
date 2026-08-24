@@ -1,0 +1,127 @@
+{
+  "date": "2026-08-24",
+  "scope": "Private loopback and translated-ARM64 diagnostics only",
+  "source_libraries": {
+    "arm64-v8a": {
+      "sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+      "size": 3657208
+    },
+    "x86_64": {
+      "sha256": "b529184d981ec2a08e6a623e1d0634bb6a36d0e71856c544608190ed5b35a8d7",
+      "size": 3850000
+    }
+  },
+  "patches": {
+    "connector_rsa_diagnostic": {
+      "purpose": "Continue past a stale archived connector package whose RSA signature does not match the embedded verification key.",
+      "production_status": "rejected",
+      "sites": {
+        "x86_64": {
+          "native_offset": "0x245009",
+          "original": "75 1d",
+          "replacement": "eb 1d"
+        },
+        "arm64-v8a": {
+          "native_offset": "0x22c5c8",
+          "original": "dc 00 00 35",
+          "replacement": "06 00 00 14"
+        }
+      }
+    },
+    "connector_certificate_diagnostic": {
+      "purpose": "Skip the expired historical GraalWeb trust bundle while studying later connector behavior.",
+      "production_status": "rejected",
+      "sites": {
+        "x86_64": {
+          "native_offset": "0x222270",
+          "original": "41 56 48 8d 35",
+          "replacement": "c3 90 90 90 90"
+        },
+        "arm64-v8a": {
+          "native_offset": "0x20ab20",
+          "original": "ff 43 01 d1",
+          "replacement": "c0 03 5f d6"
+        }
+      }
+    },
+    "force_nonpremium_initialization": {
+      "purpose": "Run the existing startup branch that clears the native loading flag.",
+      "production_status": "leading local candidate, not released",
+      "sites": {
+        "arm64-v8a": {
+          "native_offset": "0x15ca7c",
+          "original": "2d 02 00 54",
+          "replacement": "11 00 00 14"
+        }
+      }
+    },
+    "render_boundary_loading_clear": {
+      "purpose": "Clear the loading flag immediately before the normal JNI draw decision.",
+      "production_status": "control only",
+      "sites": {
+        "arm64-v8a": {
+          "hook_site": "0x244228",
+          "code_cave": "0x1f9508",
+          "resume": "0x24422c",
+          "loading_flag_got": "0x375e30"
+        }
+      }
+    }
+  },
+  "experiments": [
+    {
+      "name": "Certificate bypass only",
+      "observed": "The connector moved to HTTPS port 443 but remained on the splash screen.",
+      "verdict": "The expired certificate is real, but it is not the only startup failure."
+    },
+    {
+      "name": "Certificate bypass plus longer connect poll",
+      "observed": "The client still remained on the splash screen.",
+      "verdict": "A zero-second poll timeout is not sufficient to explain the complete failure."
+    },
+    {
+      "name": "Force HTTPS through HTTP transport",
+      "observed": "The request reached the local HTTP listener but the client still remained on the splash screen until the package and RSA checks were handled separately.",
+      "verdict": "Changing transport alone is not a repair."
+    },
+    {
+      "name": "Blocking socket I/O",
+      "observed": "The renderer froze.",
+      "verdict": "Rejected because it changes the asynchronous client design."
+    },
+    {
+      "name": "Handler-pair operand swap",
+      "observed": "The xchg experiment made the local protocol less correct. IDA, decoded bytecode, and the working no-swap replay agree on packet type first and handler index second.",
+      "verdict": "Rejected. The original handler table is correct for this revision."
+    },
+    {
+      "name": "Non-premium initialization branch",
+      "observed": "The ARM64-only diagnostic completed connector, encrypted login, map, level, image, and heartbeat traffic, then rendered the tiled world and HUD through the x86_64 emulator translation layer when given the exact .gmap fixture.",
+      "verdict": "Best local loading-state candidate. Physical ARM64 and live service checks remain open."
+    },
+    {
+      "name": "Render-boundary loading clear",
+      "observed": "The same translated-ARM64 world and HUD rendered after the flag was cleared at the JNI draw boundary.",
+      "verdict": "Useful control that proves the draw gate, not a release repair."
+    }
+  ],
+  "working_private_replay": {
+    "apk_sha256": "b1c52234b10fb5a4a2c6c58e85370ccab710b1c355574d295df30b5ed6edddcc",
+    "native_sha256": "89a7cf3a10d9da9fb00f50e6917ce10402c1147bcf5738a176c26b32868ba858",
+    "scope": "127.0.0.1 connector and game responders",
+    "game_connections": 2,
+    "map": "classiciphone.gmap",
+    "level_files": 3,
+    "image": "pics1.png",
+    "heartbeats": true,
+    "render_screenshot_sha256": "fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e",
+    "live_service_verified": false,
+    "physical_arm64_device_verified": false
+  },
+  "production_boundary": [
+    "Obtain a current connector response for the exact client query.",
+    "Validate its package signature against the authorized current key.",
+    "Replace the historical trust bundle with a current authorized chain while retaining hostname verification.",
+    "Confirm the loading-state behavior on a real ARM64 device with an authorized account and service endpoint."
+  ]
+}
