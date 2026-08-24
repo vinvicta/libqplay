@@ -103,6 +103,25 @@
       "network_contacted": false,
       "runtime_verified": false
     },
+    "connector_nonblocking_tls_audit": {
+      "purpose": "Verify whether delayed nonblocking TCP completion skips the native TLS initializer.",
+      "production_status": "stock path confirmed by IDA; no patch applied",
+      "sites": {
+        "set_nonblocking": "0x206320",
+        "connect_socket": "0x206bd8",
+        "check_connecting": "0x206a48",
+        "set_status": "0x2067b4",
+        "enable_ssl": "0x206450"
+      },
+      "status_values": {
+        "4": "TCP connect in progress",
+        "5": "TCP connected and eligible for TLS initialization"
+      },
+      "completion_check": "select with zero timeout followed by getsockopt(SOL_SOCKET, SO_ERROR)",
+      "ssl_transition": "setStatus(5) calls enableSSLOnSocket when the socket SSL flag is enabled",
+      "network_contacted": false,
+      "runtime_verified": false
+    },
     "force_nonpremium_initialization": {
       "purpose": "Run the existing startup branch that clears the native loading flag.",
       "production_status": "leading local candidate, not released",

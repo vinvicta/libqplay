@@ -128,6 +128,29 @@ through `CyaSSL_CTX_load_verify_buffer`, configures verification, and calls
 flag are separate fields. This is why a connector certificate repair alone is
 not a complete game-server repair.
 
+A focused IDA re-audit checked whether the nonblocking socket itself prevented
+TLS from starting. `TSocketConnection_setNonBlocking` at `0x206320` calls
+`fcntl(fd, F_SETFL, O_NONBLOCK)`, and `TSocketConnection_connectSocket` at
+`0x206bd8` uses status 4 for `EINPROGRESS`. That path is completed by
+`TSocketConnection_checkConnecting` at `0x206a48`, which uses a zero-timeout
+`select` and checks `SO_ERROR`. A successful check calls
+`TSocketConnection_setStatus_int` at `0x2067b4` with status 5. The status setter
+then invokes `enableSSLOnSocket` when the socket's SSL flag is set. The delayed
+connect path therefore does initialize CyaSSL; making every socket operation
+blocking is not the missing repair and already froze the renderer in a local
+test.
+
+The same audit found two details worth keeping visible. The TLS setup uses the
+per-socket trust buffer, enables peer verification when that buffer is present,
+checks the configured hostname, and starts `CyaSSL_connect` with nonblocking
+I/O. If `CyaSSL_CTX_load_verify_buffer` fails, the client logs `Error
+initializing SSL (1)` but continues toward `CyaSSL_new` and `CyaSSL_connect`,
+so replacement tooling must validate the bundle before it reaches the native
+loader. For an immediately completed TCP connect, `setStatus(5)` can also call
+the TLS initializer before the explicit call at `0x206d04`; this apparent
+duplicate initialization was not runtime-tested and is recorded as a native
+quirk rather than treated as the primary failure.
+
 An expired certificate does not explain every observed failure. A diagnostic
 build that forced the parser through plain HTTP still did not advance until
 the response format was made compatible. Certificate repair is necessary for

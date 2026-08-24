@@ -97,6 +97,10 @@ This is the short handoff view. The full reasoning and command history are in
     encoded at each architecture-specific offset and decoded byte-for-byte.
     These checks were offline and did not establish compatibility with a live
     endpoint.
+23. The IDA audit of the nonblocking connector path confirms that status 4
+    `EINPROGRESS` completion reaches `TSocketConnection_setStatus_int` with
+    status 5, which starts CyaSSL when SSL is enabled. The earlier blocking-I/O
+    experiment remains rejected because it froze the renderer.
 
 ## Not verified
 

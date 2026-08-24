@@ -73,6 +73,15 @@ to the original-looking lowercase names and keep-alive value, while its
 `--header-case`, `--connection-value`, and `--omit-content-length` options
 make these distinctions reproducible.
 
+The connector's native socket is deliberately nonblocking. `fcntl` sets
+`O_NONBLOCK` at `TSocketConnection_setNonBlocking` (`0x206320`), status 4 marks
+an in-progress connect, and `TSocketConnection_checkConnecting` (`0x206a48`)
+uses `select` plus `SO_ERROR` to finish it. The successful transition to
+status 5 passes through `TSocketConnection_setStatus_int` (`0x2067b4`), which
+starts CyaSSL when the request enabled SSL. This confirms that a delayed TCP
+connect is not, by itself, evidence that the TLS handshake was skipped. The
+local blocking-I/O experiment froze the renderer and remains rejected.
+
 ## 2. Connector response envelope
 
 The body is not a PNG despite the filename. It is a big-endian length wrapper:
