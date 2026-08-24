@@ -18,6 +18,12 @@ the loading flag at `0x15cac8`. When the option is enabled, that clear is
 skipped. This means the byte is part of startup state, not merely a final
 overlay switch.
 
+The option is not read as a numeric entitlement in this routine. The helper
+starts from the embedded marker `a9a` at `0x2ce1d0`, transforms it through the
+two simple string codecs, and returns a non-empty three-byte `TString`.
+`sigcheck` then tests the string length at `0x15ca70`, so the original path
+treats the option as enabled and skips the flag clear.
+
 The JNI render loop checks the flag at `0x244228`, immediately before choosing
 between the loading-screen path and the normal game drawing path. The useful
 diagnostic boundary is therefore the render-loop check, while the getter and

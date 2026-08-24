@@ -396,6 +396,12 @@ environment setup. A diagnostic helper,
 `tools/patch_force_no_premium_loading_test.py`, changes only the conditional
 branch to an unconditional branch to `0x15cac0`.
 
+The option is a string marker, not an integer comparison. The embedded input
+is `a9a` at `0x2ce1d0`. The ARM64 `codesimplefix0` and `decodesimple` helpers
+transform it into a non-empty three-byte `TString`, and `sigcheck` tests the
+string length loaded at `0x15ca70`. The original code therefore takes the
+enabled branch and leaves the initial loading byte set to one.
+
 The first run of this candidate was not a valid rejection. Its responder sent
 the map name without the `.gmap` suffix, so the client never received the map
 fixture. With the exact `classiciphone.gmap` body and the normal render loop,
