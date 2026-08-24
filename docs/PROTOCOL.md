@@ -296,6 +296,14 @@ as a negative control, not as a repair. `tools/patch_compatibility_repairs.py`
 now contains only the independent connector RSA and expired-certificate
 diagnostics.
 
+The native table behind the loader starts at `0x369960` and currently contains
+85 populated eight-byte entries. Its index is an internal handler index, not a
+wire packet number. The full address and name snapshot is in
+`artifacts/inbound_handler_table.json`; `tools/export_inbound_handler_table.py`
+recreates it from the active IDA database. The artifact also keeps the small
+set of packet-to-index pairs observed in the local replay, so later protocol
+work can distinguish a changed script mapping from a changed native table.
+
 ## 6. Useful inbound packet pairs
 
 The following mappings come from the decoded connector script and the native

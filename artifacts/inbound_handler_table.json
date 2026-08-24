@@ -1,0 +1,464 @@
+{
+  "binary": {
+    "architecture": "arm64-v8a",
+    "libqplay_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "idb": "GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so.i64"
+  },
+  "purpose": "Snapshot of the native handler-index table used by TClient packet dispatch.",
+  "table_va": "0x369960",
+  "table_entry_stride": 8,
+  "table_entry_count": 85,
+  "index_scope": "The handler index is the internal index selected by the serialized setInDataHandlers data. It is not the wire packet number.",
+  "loader": {
+    "va": "0x1ea6fc",
+    "name": "TClient_setInDataHandlersFromArray",
+    "action": "Reads pairs from a serialized array, stores the function pointer for each handler index, and handles the special setEncryptionIn, raw-length, and ping entries."
+  },
+  "clear_function": {
+    "va": "0x1eb91c",
+    "name": "TClient_clearInDataHandlers",
+    "action": "Clears the 256-entry inbound handler array."
+  },
+  "observed_packet_to_handler_index": {
+    "7": 31,
+    "9": 1,
+    "48": 8,
+    "49": 32,
+    "54": 10,
+    "68": 21,
+    "69": 23,
+    "84": 22,
+    "102": 24,
+    "178": 0,
+    "182": 15,
+    "190": 14
+  },
+  "entries": [
+    {
+      "handler_index": 0,
+      "va": "0x1e9860",
+      "name": "TClient_setServerWarpDestination"
+    },
+    {
+      "handler_index": 1,
+      "va": "0x1eb8e0",
+      "name": "TClient_applyPlayerProperties"
+    },
+    {
+      "handler_index": 2,
+      "va": "0x1ec664",
+      "name": "sub_1EC664"
+    },
+    {
+      "handler_index": 3,
+      "va": "0x1f25a8",
+      "name": "sub_1F25A8"
+    },
+    {
+      "handler_index": 4,
+      "va": "0x1f212c",
+      "name": "sub_1F212C"
+    },
+    {
+      "handler_index": 5,
+      "va": "0x1eb8a0",
+      "name": "sub_1EB8A0"
+    },
+    {
+      "handler_index": 6,
+      "va": "0x1eb898",
+      "name": "sub_1EB898"
+    },
+    {
+      "handler_index": 7,
+      "va": "0x1eb890",
+      "name": "sub_1EB890"
+    },
+    {
+      "handler_index": 8,
+      "va": "0x1ee9ec",
+      "name": "TClient_handleClientsideTriggerPacket"
+    },
+    {
+      "handler_index": 9,
+      "va": "0x1e9850",
+      "name": "sub_1E9850"
+    },
+    {
+      "handler_index": 10,
+      "va": "0x1edf04",
+      "name": "TClient_handleServerLoginPacket"
+    },
+    {
+      "handler_index": 11,
+      "va": "0x1ef850",
+      "name": "sub_1EF850"
+    },
+    {
+      "handler_index": 12,
+      "va": "0x1eb52c",
+      "name": "TGUIScriptLoader_showAdministratorMessage"
+    },
+    {
+      "handler_index": 13,
+      "va": "0x1e95b0",
+      "name": "sub_1E95B0"
+    },
+    {
+      "handler_index": 14,
+      "va": "0x1eb4c0",
+      "name": "TGUIScriptLoader_finishServerListConnect"
+    },
+    {
+      "handler_index": 15,
+      "va": "0x1eb450",
+      "name": "TClient_sendWindowList"
+    },
+    {
+      "handler_index": 16,
+      "va": "0x1eb430",
+      "name": "TClient_sendHaveWindow"
+    },
+    {
+      "handler_index": 17,
+      "va": "0x1eb42c",
+      "name": "jump_TIdentification_setCookie_TString_const"
+    },
+    {
+      "handler_index": 18,
+      "va": "0x1ed934",
+      "name": "sub_1ED934"
+    },
+    {
+      "handler_index": 19,
+      "va": "0x1ec4a0",
+      "name": "TClient_finishCachedFile"
+    },
+    {
+      "handler_index": 20,
+      "va": "0x1eb208",
+      "name": "TClient_finishDownloadFile"
+    },
+    {
+      "handler_index": 21,
+      "va": "0x1eb12c",
+      "name": "TClient_beginBigFileDownload"
+    },
+    {
+      "handler_index": 22,
+      "va": "0x1ef48c",
+      "name": "sub_1EF48C"
+    },
+    {
+      "handler_index": 23,
+      "va": "0x1eb294",
+      "name": "TClient_finishFileDownload"
+    },
+    {
+      "handler_index": 24,
+      "va": "0x1f0de4",
+      "name": "TClient_parseEncodedFileChunk"
+    },
+    {
+      "handler_index": 25,
+      "va": "0x1eb008",
+      "name": "TClient_continueDownloadQueue"
+    },
+    {
+      "handler_index": 26,
+      "va": "0x1f12b8",
+      "name": "sub_1F12B8"
+    },
+    {
+      "handler_index": 27,
+      "va": "0x1f0470",
+      "name": "sub_1F0470"
+    },
+    {
+      "handler_index": 28,
+      "va": "0x1e975c",
+      "name": "TGameEnvironment_emit_onRCChat"
+    },
+    {
+      "handler_index": 29,
+      "va": "0x1e96dc",
+      "name": "TGameEnvironment_emit_onFolderLog"
+    },
+    {
+      "handler_index": 30,
+      "va": "0x1f1e68",
+      "name": "sub_1F1E68"
+    },
+    {
+      "handler_index": 31,
+      "va": "0x1f15b8",
+      "name": "sub_1F15B8"
+    },
+    {
+      "handler_index": 32,
+      "va": "0x1eccf8",
+      "name": "TClient_handleMapWarpPacket"
+    },
+    {
+      "handler_index": 33,
+      "va": "0x1ea56c",
+      "name": "sub_1EA56C"
+    },
+    {
+      "handler_index": 34,
+      "va": "0x1e9654",
+      "name": "sub_1E9654"
+    },
+    {
+      "handler_index": 35,
+      "va": "0x1f17b4",
+      "name": "sub_1F17B4"
+    },
+    {
+      "handler_index": 36,
+      "va": "0x1ef2d0",
+      "name": "sub_1EF2D0"
+    },
+    {
+      "handler_index": 37,
+      "va": "0x1f2a20",
+      "name": "sub_1F2A20"
+    },
+    {
+      "handler_index": 38,
+      "va": "0x1e9678",
+      "name": "sub_1E9678"
+    },
+    {
+      "handler_index": 39,
+      "va": "0x1edae8",
+      "name": "sub_1EDAE8"
+    },
+    {
+      "handler_index": 40,
+      "va": "0x1e9840",
+      "name": "sub_1E9840"
+    },
+    {
+      "handler_index": 41,
+      "va": "0x1edb2c",
+      "name": "sub_1EDB2C"
+    },
+    {
+      "handler_index": 42,
+      "va": "0x1eac30",
+      "name": "jump_TPlayerList_setStaffGuilds_TString_const"
+    },
+    {
+      "handler_index": 44,
+      "va": "0x1f1d38",
+      "name": "sub_1F1D38"
+    },
+    {
+      "handler_index": 45,
+      "va": "0x1edb7c",
+      "name": "sub_1EDB7C"
+    },
+    {
+      "handler_index": 46,
+      "va": "0x1ee708",
+      "name": "sub_1EE708"
+    },
+    {
+      "handler_index": 47,
+      "va": "0x1ed1e4",
+      "name": "sub_1ED1E4"
+    },
+    {
+      "handler_index": 48,
+      "va": "0x1eab78",
+      "name": "sub_1EAB78"
+    },
+    {
+      "handler_index": 49,
+      "va": "0x1ea9f4",
+      "name": "sub_1EA9F4"
+    },
+    {
+      "handler_index": 50,
+      "va": "0x1ea83c",
+      "name": "sub_1EA83C"
+    },
+    {
+      "handler_index": 51,
+      "va": "0x1edf8c",
+      "name": "sub_1EDF8C"
+    },
+    {
+      "handler_index": 52,
+      "va": "0x1ee234",
+      "name": "sub_1EE234"
+    },
+    {
+      "handler_index": 53,
+      "va": "0x1ea66c",
+      "name": "sub_1EA66C"
+    },
+    {
+      "handler_index": 54,
+      "va": "0x1e95d4",
+      "name": "sub_1E95D4"
+    },
+    {
+      "handler_index": 55,
+      "va": "0x1ea504",
+      "name": "sub_1EA504"
+    },
+    {
+      "handler_index": 56,
+      "va": "0x1ed9d0",
+      "name": "sub_1ED9D0"
+    },
+    {
+      "handler_index": 57,
+      "va": "0x1ea438",
+      "name": "sub_1EA438"
+    },
+    {
+      "handler_index": 58,
+      "va": "0x1eef34",
+      "name": "sub_1EEF34"
+    },
+    {
+      "handler_index": 59,
+      "va": "0x1f0728",
+      "name": "sub_1F0728"
+    },
+    {
+      "handler_index": 60,
+      "va": "0x1ef654",
+      "name": "sub_1EF654"
+    },
+    {
+      "handler_index": 61,
+      "va": "0x1e9f84",
+      "name": "sub_1E9F84"
+    },
+    {
+      "handler_index": 62,
+      "va": "0x1efe14",
+      "name": "sub_1EFE14"
+    },
+    {
+      "handler_index": 63,
+      "va": "0x1eebcc",
+      "name": "sub_1EEBCC"
+    },
+    {
+      "handler_index": 64,
+      "va": "0x1ef900",
+      "name": "sub_1EF900"
+    },
+    {
+      "handler_index": 65,
+      "va": "0x1ec3e4",
+      "name": "sub_1EC3E4"
+    },
+    {
+      "handler_index": 66,
+      "va": "0x1e9f1c",
+      "name": "sub_1E9F1C"
+    },
+    {
+      "handler_index": 67,
+      "va": "0x1e9eb8",
+      "name": "sub_1E9EB8"
+    },
+    {
+      "handler_index": 69,
+      "va": "0x1ef770",
+      "name": "sub_1EF770"
+    },
+    {
+      "handler_index": 70,
+      "va": "0x1ede48",
+      "name": "sub_1EDE48"
+    },
+    {
+      "handler_index": 71,
+      "va": "0x1ee560",
+      "name": "sub_1EE560"
+    },
+    {
+      "handler_index": 75,
+      "va": "0x1ee860",
+      "name": "sub_1EE860"
+    },
+    {
+      "handler_index": 76,
+      "va": "0x1f05fc",
+      "name": "sub_1F05FC"
+    },
+    {
+      "handler_index": 77,
+      "va": "0x1edd78",
+      "name": "sub_1EDD78"
+    },
+    {
+      "handler_index": 78,
+      "va": "0x1f0f54",
+      "name": "sub_1F0F54"
+    },
+    {
+      "handler_index": 79,
+      "va": "0x1f0920",
+      "name": "sub_1F0920"
+    },
+    {
+      "handler_index": 80,
+      "va": "0x1ef560",
+      "name": "sub_1EF560"
+    },
+    {
+      "handler_index": 81,
+      "va": "0x1eed50",
+      "name": "sub_1EED50"
+    },
+    {
+      "handler_index": 82,
+      "va": "0x1f10f4",
+      "name": "sub_1F10F4"
+    },
+    {
+      "handler_index": 83,
+      "va": "0x1ee7b0",
+      "name": "sub_1EE7B0"
+    },
+    {
+      "handler_index": 84,
+      "va": "0x1efb0c",
+      "name": "sub_1EFB0C"
+    },
+    {
+      "handler_index": 85,
+      "va": "0x1f0ae4",
+      "name": "sub_1F0AE4"
+    },
+    {
+      "handler_index": 91,
+      "va": "0x1f0c44",
+      "name": "sub_1F0C44"
+    },
+    {
+      "handler_index": 92,
+      "va": "0x1ec044",
+      "name": "TClient_handleUpdatePackageDownloaded"
+    },
+    {
+      "handler_index": 93,
+      "va": "0x1edcd4",
+      "name": "TClient_parseSetRawLen_TString_const"
+    },
+    {
+      "handler_index": 94,
+      "va": "0x1ee620",
+      "name": "TClient_parseSetPing_TString_const"
+    }
+  ],
+  "network_contacted": false
+}

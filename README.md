@@ -163,12 +163,14 @@ proves the local native TLS path, not a current live certificate or service.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.
 * `symbols/libqplay.function_inventory.csv` and
   `symbols/libqplay.function_inventory.json` cover all 11,271 IDA function
-  starts, including the 2,090 remaining analysis-created `sub_` entries that have no
+  starts, including the 2,084 remaining analysis-created `sub_` entries that have no
   surviving ELF name.
 * `symbols/libqplay.function_inventory.summary.json` records the input hash
   and the boundary between translated symbols and IDA-created functions.
-* `artifacts/ida_semantic_labels.json` records 25 evidence-backed names
-  applied to formerly unnamed login, file-download, and UI helpers.
+* `artifacts/ida_semantic_labels.json` records 27 evidence-backed names
+  applied to formerly unnamed login, file-download, handler-table, and UI helpers.
+* `artifacts/inbound_handler_table.json` records the native handler-index table,
+  its current function targets, and the observed packet-to-index pairs.
 * `artifacts/premium_option.json` records the complete marker bytes and the
   native decoded value.
 * `artifacts/loading_state_ownership.json` records the ARM64 flag readers,
@@ -178,6 +180,8 @@ proves the local native TLS path, not a current live certificate or service.
   not committed.
 * `artifacts/diagnostic_patch_matrix.json` records exact patch sites, private
   replay hashes, and the result of each compatibility experiment.
+* `tools/export_inbound_handler_table.py` reproduces the handler-table export
+  from the active IDA database.
 * `tools/` contains IDAPython, parsing, replay, and diagnostic patch helpers.
   `tools/encode_connector_query.py` reproduces the captured connector query
   without opening a socket. `tools/conpack_legacy_zip_compat.patch` records

@@ -8179,7 +8179,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2008324,sub_1EA504,ida_default_sub,,,,,.text,104,2,5120,False,False,True
 2008428,sub_1EA56C,ida_default_sub,,,,,.text,256,2,5120,False,False,True
 2008684,sub_1EA66C,ida_default_sub,,,,,.text,144,2,5120,False,False,True
-2008828,sub_1EA6FC,ida_default_sub,,,,,.text,320,1,5120,False,False,True
+2008828,TClient_setInDataHandlersFromArray,ida_named_non_elf,,,,,.text,320,1,5120,False,False,False
 2009148,sub_1EA83C,ida_default_sub,,,,,.text,60,2,5120,False,False,True
 2009208,sub_1EA878,ida_default_sub,,,,,.text,380,1,5120,False,False,True
 2009588,sub_1EA9F4,ida_default_sub,,,,,.text,388,2,5120,False,False,True
@@ -8204,7 +8204,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2013344,sub_1EB8A0,ida_default_sub,,,,,.text,28,2,5120,False,False,True
 2013372,sub_1EB8BC,ida_default_sub,,,,,.text,36,1,5120,False,False,True
 2013408,TClient_applyPlayerProperties,ida_named_non_elf,,,,,.text,60,2,5120,False,False,False
-2013468,sub_1EB91C,ida_default_sub,,,,,.text,28,1,5120,False,False,True
+2013468,TClient_clearInDataHandlers,ida_named_non_elf,,,,,.text,28,1,5120,False,False,False
 2013496,jump_TClient_startFileDownloading_void,elf_symbol,jump_thunk,j_._ZN7TClient20startFileDownloadingEv,TClient::startFileDownloading(void),jump_TClient_startFileDownloading_void,.text,4,1,5312,True,False,False
 2013500,sub_1EB93C,ida_default_sub,,,,,.text,32,1,5120,False,False,True
 2013532,jump_TGraalConnection_setEncryptionOut_TString_const_TString_const_TString_const,elf_symbol,jump_thunk,j_._ZN16TGraalConnection16setEncryptionOutERK7TStringS2_S2_,"TGraalConnection::setEncryptionOut(TString const&,TString const&,TString const&)",jump_TGraalConnection_setEncryptionOut_TString_const_TString_const_TString_const,.text,4,1,5312,True,False,False
