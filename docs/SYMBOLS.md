@@ -56,6 +56,13 @@ analysis labels, not an assertion that every demangled signature was manually
 verified. The important connector and packet functions were checked against
 cross-references and emulator traces.
 
+Some important callbacks have no surviving ELF symbol. The IDA database now
+labels the game-server SSL method at `0x1eb964` as
+`TClient_setSSLParameters_scriptCallback`. The `scriptCallback` suffix marks
+it as an inferred semantic name, not part of the original symbol import. Its
+method-table reference and native behavior are documented in
+`artifacts/game_server_tls.json`.
+
 ## Repeating the pass
 
 Run the IDAPython script from IDA's Python console or with the IDA batch
