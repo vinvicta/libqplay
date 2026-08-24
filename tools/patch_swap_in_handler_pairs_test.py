@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-"""Diagnostic x86_64 repair for reversed script handler pairs.
+"""Historical negative control for the handler-pair interpretation.
 
-The VM builds the handler array in reverse stack order on this build.  The
-native setInDataHandlers loop expects each normal pair as
+This patch is intentionally not a repair. The earlier analysis assumed that
+the VM built the handler array in reverse stack order. The native
+setInDataHandlers loop and the successful replay show that the actual pair is
+already
   packet_type, handler_index
-but receives
-  handler_index, packet_type.
+in this library revision.
 
-At the default-handler path, exchange the two byte values before the native
-lookup/store.  The special 0xfc..0xff cases branch around this site and are
-left unchanged.
+The script remains useful only when reproducing the rejected xchg experiment.
+It should not be used for a working diagnostic APK.
 """
 
 from __future__ import annotations
@@ -40,7 +40,7 @@ def main() -> None:
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_bytes(blob)
     print(
-        f"swapped normal setInDataHandlers pair order at 0x{PATCH_VA:x}; "
+        f"applied rejected handler-pair negative control at 0x{PATCH_VA:x}; "
         f"sha256={hashlib.sha256(blob).hexdigest()}"
     )
 

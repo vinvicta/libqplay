@@ -113,19 +113,27 @@ called out in `docs/TESTING.md` so a future test does not repeat it.
 ## Script to native handler boundary
 
 The decoded connector script installs inbound handler pairs. The pair for
-server login is `(54, 10)`. Static inspection of the native setter showed a
-reversed lookup and store on this build. The lookup uses the second value and
-the store uses the first value, leaving packet 54 without `onServerLogin`.
+server login is `(54, 10)`. The first reading of the setter treated the VM
+array as reversed and suggested swapping the two values. That interpretation
+was disproved by the live IDA table and by the successful no-swap replay.
 
-The ARM64 instructions at `0x1ea7ac` and `0x1ea7b4` use the wrong register
-indices. The local repair changes the bytes from `00 d8 62 f8` to
-`00 d8 61 f8`, and from `40 d8 21 f8` to `40 d8 22 f8`. The x86_64 repair is
-an `xchg ecx,edx` replacement at `0x202ea5`. The patch helper checks original
-bytes before writing.
+The original ARM64 instructions at `0x1ea7ac` and `0x1ea7b4` are the correct
+lookup and store for this library revision:
 
-This bug is independent of the expired connector certificate. Keeping the two
-findings separate prevents an overly broad patch from hiding which layer
-actually failed.
+```text
+0x1ea7ac: 00 d8 62 f8
+0x1ea7b4: 40 d8 21 f8
+```
+
+The x86_64 build likewise retains the original bytes around `0x202ea0`,
+including `83 f9 5e 7f 96 48 63 c9`. The `xchg ecx,edx` patch at `0x202ea5`
+was a negative control. It changed the table enough to break the normal
+protocol sequence, so it is no longer included in the compatibility patcher.
+
+This conclusion is independent of the expired connector certificate and the
+stale package signature. Keeping those diagnostics separate makes it clear
+which changes are needed to study the client and which bytes are already
+correct.
 
 ## NewGraal key exchange
 
@@ -148,22 +156,30 @@ credential and is not included in this repository.
 ## Server warp and packet mapping
 
 The connector script selected a login host and port. To keep the test local,
-the responder sends packet 48 with a comma-separated destination that points
-to `127.0.0.1:14900`. The client prints `Serverwarp...`, reconnects, and
-replays its login sequence.
+the responder sends packet 178 with a comma-separated destination that points
+to `127.0.0.1:14900`. The client prints `Serverwarp...`, closes the first game
+socket, reconnects, and replays its login sequence. Packet 48 is a trigger
+action in this client table, not the server-warp instruction.
 
-Packet 7 was initially sent with a bare `.nw` name. Static analysis of the
-handler showed that it sets the active player's level name but only takes the
-map entry path when the name ends in `.gmap`. The responder was corrected to
-send `classiciphone.gmap` after the two coordinate bytes. The client then
-requested the map and emitted level requests.
+The final second connection sends packet 9 with a minimal own-player property,
+packet 190 with an empty body, and packet 49 with the GMAP transition. The
+packet 9 body for the test name `test` is `20 24 74 65 73 74`. Packet 190
+reaches `sub_1EB4C0`, which hides the connecting window and invokes the
+server-list connection callback. This corrected the earlier assumption that
+packet 182 was the completion event. Static analysis maps packet 182 to the
+process or window-list path at handler index 15.
 
-Packet 55 carries player properties. A minimal valid nickname property begins
-with property code zero encoded as `0x20`, followed by a length byte encoded as
-length plus 32, then the nickname. The local body for `test` is
-`20 24 74 65 73 74`. It is enough to exercise the property parser, but it may
-not be enough to construct all state the normal login script expects. That is
-one possible reason the renderer does not leave the splash screen.
+The packet 49 body contains five encoded coordinate bytes followed by the
+map name. The local body is:
+
+```text
+20 20 52 20 20 63 6c 61 73 73 69 63 69 70 68 6f 6e 65 2e 67 6d 61 70
+```
+
+The map name is deliberately `classiciphone.gmap`. An earlier experiment sent
+a bare `.nw` name through packet 7, a client-specific level-selection path,
+which did not enter the same GMAP transition. The final replay uses packet 49
+and does not rely on packet 7.
 
 ## Level loader investigation
 
@@ -181,13 +197,10 @@ the new level filename.
 
 The container helper passed a round trip against the original file and the
 client's external cache contains the exact 316-byte files that were sent. The
-client still shows the splash image, so there is now a sharper question:
-does the loader reject the container, or does the client never call the loader
-after packet 35?
-
-The next test should answer that directly by instrumenting the return value of
-`TServerLevel_LoadEncrypted` and the packet-35 handler. It is more useful than
-adding another guessed packet to the responder.
+final replay then loaded all three containers and rendered the tile field and
+HUD. This closes the earlier loader-versus-dispatch question for the local
+path. The remaining uncertainty is whether a live server provides the same
+identity, signature, and resource sequence.
 
 ## Cache path correction
 
@@ -243,75 +256,66 @@ the load, while a `FILE` entry adds a file to the package's file list.
 install separator, and one five-byte checksum per listed file. The normal file
 request helpers remain separate: `TClient_sendWantImage` uses the packet 23
 path, `TClient_sendWantImageUpdateCRC` uses packet 47, and
-`TClient_sendPreloadLevel` uses packet 35. The local responder currently
-answers the ordinary map, level, and base-package requests directly. It does
-not claim to reproduce a complete production package installation sequence.
+`TClient_sendPreloadLevel` uses packet 35. The local responder answers these
+requests with the native packet 102 file parser. Its multi-packet mode uses
+the sequence 68, 84, 102, 69, while the final replay uses one packet 102 per
+file. It does not claim to reproduce a complete production package
+installation sequence.
 
 The decoded built-in `StartScript_GraalGui` bytecode contains the GUI setup but
 does not contain `onPackagesDownloaded`. That explains why adding a minimal
 synthetic `StartConnectMessage` package did not by itself hide the native
 connecting control. The package path is still worth preserving for future
 tests, but it is no longer the leading explanation for the rendered-world
-result.
+result. The final local run hides the connecting control through packet 190 in
+the normal no-swap table.
 
 ## Corrected two-connection runtime trace
 
 The first useful local run sent the map and player properties on the same
-socket as packet 48. That was wrong because packet 48 is a server-warp
-instruction and the client intentionally closes the socket before reconnecting.
-The corrected responder sends packet 48 on connection one, then sends packet 7
-and packet 55 on connection two. The resulting trace is:
+socket as packet 48. That was wrong because packet 48 is a trigger-action
+packet. Static analysis and the successful replay established that packet 178
+is the server-warp instruction. The corrected responder sends packet 178 on
+connection one, then sends packets 9, 190, and 49 on connection two.
+
+The final trace is:
 
 ```text
-connection 1: login, packet 48 server-warp, reconnect
-connection 2: login, packet 7 classiciphone.gmap
-connection 2: packet 55 minimal player properties
-connection 2: packet 47 map request
-connection 2: packet 35 overworld_west_ocean_09.nw
-connection 2: packet 35 overworld_west_ocean_02.nw
-connection 2: packet 35 overworld_west_ocean_10.nw
-connection 2: packet 34 level completion or acknowledgement
-connection 2: client packet 2, then server packet 182 test
+connection 1: login, packet 178 server-warp, reconnect
+connection 2: login, packet 9 minimal player properties
+connection 2: packet 190 empty connecting-window completion
+connection 2: packet 49 classiciphone.gmap transition
+connection 2: client requests basepackage and classiciphone.gmap
+connection 2: server returns classiciphone.gmap as packet 102
+connection 2: server repeats packet 49 after the map response
+connection 2: client requests three level containers through packets 46 and 35
+connection 2: server returns each level as packet 102
+connection 2: client requests pics1.png through packet 23
+connection 2: server returns pics1.png as packet 102
 connection 2: client heartbeat packets 24
 ```
 
-The x86_64 emulator screenshot after this sequence shows the green tile field,
-the player HUD, and the three top-right status icons. In the working diagnostic
-build, a small dispatcher hook routes packet 182 to the native hide wrapper and
-the centered blue `Connecting to classic...` control is absent. This is a
-stronger result than the earlier splash-only observation because it proves the
-renderer and UI transition paths have run.
+The map response alone left the client with a cached GMAP but did not
+immediately re-enter the pending transition. The responder therefore sends a
+second packet 49 after returning the map. That event-driven retry causes the
+client to request the three level containers and then `pics1.png`.
 
-The server capture contains an encrypted type 182 frame with sequence 10 and
-an empty body. Static ARM64 analysis maps packet 182 to handler index 14 and
-the handler table entry points to `sub_1EB4C0`, which calls the native hide
-routine and invokes `onServerListerConnect`. An x86_64 test build with a trap
-at that handler does not trap, while an otherwise identical trap at the known
-packet 48 handler does trap. The current working theory is therefore that the
-packet 182 table entry is absent or overwritten after the connector client is
-replaced for the game connection. The direct x86_64 dispatcher hook proves that
-the native hide routine works, but it is only a diagnostic bypass. This remains
-a local diagnostic result, not a claim about the live service's completion
-packet.
+The x86_64 emulator screenshot after this sequence shows the green tile field,
+the player HUD, and the three top-right status icons. The centered blue
+`Connecting to classic...` control is absent through the normal packet 190
+handler. This proves that the renderer, map cache, level loader, image loader,
+and connecting-window transition all run in the bounded local test.
 
 One negative control is worth preserving. A test build routed packet 59
 directly to the apparent x86_64 parser block at `0x2096f0`, bypassing the
-repaired handler table. That build did not reproduce the working exchange. On
-connection one it returned to ordinary packet 23 resource requests, and on
-connection two it stopped after the map response. The control build, which
-leaves packet 59 in the repaired table, requests the three level containers and
-`pics1.png` and renders the tile field. The direct jump is therefore rejected
-as a repair even though the address itself still looks like the packet-59
-parser in static disassembly.
+directly to the apparent x86_64 parser block. That build did not reproduce the
+working exchange. It changed the first connection to ordinary packet 23
+requests and stopped before the normal second-connection sequence. The direct
+jump is therefore rejected as a repair. The working responder uses packet 102
+for a complete file response and can also emit the native 68, 84, 102, 69
+large-file sequence.
 
-A second negative control attempted to write `indatahandlers[182]` from the
-common return path of `setInDataHandlers`. That build also changed the normal
-package state and fell back to ordinary packet 23 requests, so the write was
-not retained as a repair. The explicit dispatcher hook is currently the only
-local completion test that preserves the working package and level sequence.
-
-The public game responder now accepts `--frame-after-client
-CLIENTTYPE[@OCCURRENCE]:TYPE:HEXBODY`. The occurrence is one-based and
-defaults to one. This makes the test event-driven, so a completion candidate
-can be sent after a real client milestone instead of relying on a fragile
-wall-clock delay.
+The public game responder accepts `--frame-after-client` and
+`--frame-after-map`. The first is useful for event-driven packet experiments.
+The second was used here to send packet 49 only after the GMAP response, which
+made the successful replay deterministic without a wall-clock delay.

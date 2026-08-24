@@ -26,28 +26,30 @@ and applied names with zero rename failures:
 
 The old connector has a concrete compatibility problem. Its embedded
 GraalWeb certificate expired on 2023-07-29, so the original HTTPS path cannot
-be trusted by a current clock. There is also a separate script-to-native
-handler-table ordering bug in this build. A diagnostic x86_64 build with the
-two compatibility repairs can connect to a loopback responder, complete the
-NewGraal key exchange, receive a server-warp, request the map, and request
-encrypted level files.
+be trusted by a current clock. The archived connector package also fails the
+RSA check against this APK's embedded public key. Both findings are separate
+from the game-server protocol and are handled only by private diagnostic
+patches in the local test build.
 
-The corrected two-connection replay now renders the level tile field and game
-HUD. The normal repaired handler table accepts the package, map, level, and
-image responses. A separate experiment that forced packet 59 directly to the
-apparent file-parser address made the first connection request the wrong
-resources, so that override is not part of the working diagnostic path.
+The symbolized handler-table investigation also produced an important
+correction. The original `setInDataHandlers` instructions are correct for this
+client revision. The earlier x86_64 `xchg` patch and the matching ARM64
+operand swap were a false lead caused by reading the intermediate bytecode
+array in the wrong order. The decoded runtime pairs are packet type first,
+handler index second, and the unmodified table accepts the normal local
+sequence.
 
-An x86_64-only diagnostic dispatcher routes packet 182 directly to the native
-hide wrapper. With that test hook and the force-hide visibility repair, the
-connecting control disappears and the local synthetic world remains rendered.
-The normal script-installed packet-182 table entry is still unresolved, and
-the live service has not been tested.
+The corrected two-connection replay now renders the level tile field, player
+HUD, and status icons. The client accepts a server-warp, a player-properties
+packet, the connecting-window completion packet, the map transition, three
+encrypted level containers, and `pics1.png`. The file response is packet 102,
+not packet 59. A direct packet-59 parser jump was retained only as a negative
+control because it breaks the normal request sequence.
 
 The game has not yet been verified against a live game server. The local test
-client renders a synthetic world, and the working x86_64 diagnostic build hides
-the connecting control through an explicit packet-182 test hook. That hook is
-an investigation aid, not a claimed production repair.
+proves that the native client can reach a rendered world through a bounded
+loopback responder. Live endpoint availability, current package signing, and
+account authentication remain open.
 
 ## Repository layout
 
@@ -99,9 +101,9 @@ the analysis auditable without publishing secrets or a full game data set.
 
 ## Next investigation step
 
-The next useful experiment is to inspect the live `indatahandlers[182]` value
-on the second connection and repeat the sequence on ARM64. Static analysis
-maps packet 182 to handler index 14, but the x86_64 dispatch probe does not
-reach that handler even though the packet is present on the wire. The renderer
-already runs, so adding more guessed level packets is less useful than
-resolving this table mismatch.
+The highest-value remaining work is live-service and ARM64 validation. The
+local path is already complete through world rendering, so the next checks are
+to verify the current connector trust and package-signing chain, repeat the
+same packet sequence on a real ARM64 device, and compare the live server's
+resource and login responses with the captured local trace. Those tests should
+only use an endpoint and account that the operator is authorized to test.

@@ -31,7 +31,7 @@ serveripstr     = md5("127.0.0.1" + "14900")
                 = 5034ec765552177b890e732a02e3b699
 ```
 
-The Android downloader may first save a generic packet-59 response under a
+The Android downloader may first save a generic packet-102 response under a
 level-image cache path. The server-level loader later looks for the
 `weblevels/<serveripstr>/...-14900.code` path. This distinction explains why
 placing a file in the generic image directory did not make the loader see it.
@@ -114,4 +114,3 @@ overworld_west_ocean_10.nw-14900.code
 
 Those files decrypt and pass the checksum in the local helper. They are test
 fixtures, not claimed to be faithful copies of the live overworld levels.
-

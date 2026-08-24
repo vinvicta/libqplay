@@ -17,17 +17,18 @@ This is the short handoff view. The full reasoning and command history are in
    corrected local replay reaches `Connected.`.
 6. The repaired x86_64 client completes the NewGraal `fd` and `fc` exchange,
    receives an encrypted login-success packet, and logs `Connected.`.
-7. Packet 48 causes the expected server-warp transition and a second game
-   connection.
-8. On the second connection, the client requests `classiciphone.gmap`, three
-   `.code` level containers, `pics1.png`, and sends the normal heartbeat
-   packets.
+7. Packet 178 causes the expected server-warp transition and a second game
+   connection. Packet 48 is a trigger-action path in this client table.
+8. On the second connection, packets 9, 190, and 49 lead to requests for
+   `classiciphone.gmap`, three `.code` level containers, and `pics1.png`.
+   The responder returns each file through packet 102 and the client sends the
+   normal heartbeat packets.
 9. The emulator renders the level tile field and the game HUD. This proves the
    map, player-property, level-container, image, and renderer paths can all run
    in a controlled local test.
-10. An x86_64 diagnostic dispatcher can route packet 182 directly to the
-    native hide wrapper. With the force-hide visibility repair, the rendered
-    world remains visible without the centered connecting control.
+10. The original no-swap handler table routes packet 190 to the native
+    connecting-window completion wrapper. The rendered world remains visible
+    without the centered connecting control.
 11. The symbol translation pass applied 8,601 names to the ARM64 IDA database
     with zero rename failures.
 
@@ -43,30 +44,22 @@ This is the short handoff view. The full reasoning and command history are in
 
 ## Current blocker
 
-The remaining repair is the normal script-installed packet-182 mapping. The
-responder sends a NewGraal type 182 frame after the first ordinary client
-packet. The complete outgoing capture contains that frame, but an x86_64 trap
-at the handler selected by the normal table is not hit. A matching trap at the
-known packet 48 server-warp handler is hit, so the probe is exercising native
-dispatch correctly.
+The local native path is no longer blocked. The no-swap table has been checked
+against IDA and the emulator, and the final replay reaches a rendered world.
+The earlier xchg handler-table patch and packet-182 hide hypothesis are closed
+as false leads. Packet 182 maps to the process or window-list path, while
+packet 190 reaches the connecting-window completion wrapper.
 
-An x86_64 diagnostic dispatcher routes packet 182 directly to
-`TGUIScriptLoader_hideConnectingWindow`, and the force-hide build then produces
-the expected no-connecting-control screenshot. That proves the native wrapper
-and UI path work. It does not yet explain why the connector script's table
-entry is missing or overwritten after the game connection. The static ARM64
-table maps packet 182 to handler index 14, `sub_1EB4C0`.
+The remaining blockers are external validation rather than an identified
+local parser failure:
 
-The level loader is no longer the first suspect. The tile field and HUD render
-after the corrected two-connection sequence. The next focused experiment is to
-inspect or instrument the live `indatahandlers[182]` value on the second
-connection, then test the same sequence on ARM64. The local UI result is now
-handled by a diagnostic hook, but the production-quality table repair remains
-open.
+* the current connector certificate and package-signing chain have not been
+  tested against a live service;
+* no live game-server login has been attempted or verified;
+* the working replay uses an x86_64 diagnostic APK, so ARM64 device behavior
+  still needs a controlled run.
 
-An attempted shortcut that routed every packet 59 directly to the apparent
-file-parser address was rejected by comparison. It changed the client's first
-connection from update-aware packet 47 requests to ordinary packet 23 requests
-and prevented the second connection from reaching the map and level sequence.
-The working local build leaves packet 59 under the repaired native handler
-table.
+The packet-59 shortcut remains rejected. The working file path is packet 102,
+with optional large-file framing 68, 84, 102, 69. The local responder also
+needs to send packet 49 again after the GMAP response because the tested client
+otherwise caches the map without completing the pending transition.

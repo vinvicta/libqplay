@@ -125,7 +125,7 @@ class RC4Stream:
 
 
 def encode_file_size(value: int) -> bytes:
-    """Encode the five 7-bit fields consumed by the packet-59 handler."""
+    """Encode the five 7-bit fields consumed by the packet-102 handler."""
 
     if value < 0 or value > 0x0FFFFFFF:
         raise ValueError("file size is outside the NewGraal five-byte range")
@@ -141,7 +141,7 @@ def encode_file_size(value: int) -> bytes:
 
 
 def make_file_chunk_body(filename: bytes, data: bytes) -> bytes:
-    """Build the packet-59 body: size, name length, name, and file bytes."""
+    """Build the packet-102 body: size, name length, name, and file bytes."""
 
     if not filename or len(filename) > 223:
         raise ValueError("filename length must fit the one-byte Graal string field")
@@ -179,7 +179,7 @@ def resolve_test_file(
         # A NewGraal level transition requests the level name, while the
         # native loader consumes the encrypted ``level-port.code`` container
         # under ``weblevels/<serveripstr>/``.  Return the container filename
-        # in packet 59 so TCachedStream stores it in the .code cache.
+        # in packet 102 so TCachedStream stores it in the .code cache.
         code_root = level_code_root.resolve()
         code_name = f"{Path(name).name}-{server_port}.code"
         code_candidate = code_root / code_name
@@ -229,7 +229,7 @@ def main() -> None:
     parser.add_argument(
         "--no-basepackage",
         action="store_true",
-        help="keep the responder at the handshake stage without returning packet 59",
+        help="keep the responder at the handshake stage without returning packet 102",
     )
     parser.add_argument(
         "--file-root",
@@ -249,13 +249,13 @@ def main() -> None:
     )
     parser.add_argument(
         "--probe-file",
-        help="send one unsolicited packet-59 probe file after the login frame",
+        help="send one unsolicited packet-102 probe file after the login frame",
     )
     parser.add_argument(
         "--file-transfer-mode",
         choices=("big", "single"),
         default="big",
-        help="use the native multi-packet file-transfer sequence or one packet 59",
+        help="use the native multi-packet file-transfer sequence or one packet 102",
     )
     parser.add_argument(
         "--login-delay",
@@ -305,6 +305,13 @@ def main() -> None:
             "type on each connection; OCCURRENCE is 1-based and defaults to 1"
         ),
     )
+    parser.add_argument(
+        "--frame-after-map",
+        action="append",
+        default=[],
+        metavar="TYPE:HEXBODY",
+        help="send an additional encrypted server frame after each .gmap response",
+    )
     args = parser.parse_args()
 
     if not 0 <= args.server_signature <= 223:
@@ -330,6 +337,7 @@ def main() -> None:
     extra_frames_after_first = [
         parse_extra_frame(spec) for spec in args.extra_frame_after_first
     ]
+    frames_after_map = [parse_extra_frame(spec) for spec in args.frame_after_map]
     frame_after_client = []
     for spec in args.frame_after_client:
         try:
@@ -468,13 +476,13 @@ def main() -> None:
                                     # This is the sequence represented by the
                                     # native packet handlers: begin a named large
                                     # file, announce its five-byte size, append a
-                                    # packet-59 chunk, then finalize the cache.
-                                    send_server_frame(83, filename)
+                                    # packet-102 chunk, then finalize the cache.
+                                    send_server_frame(68, filename)
                                     send_server_frame(84, encode_file_size(len(package_data)))
-                                    send_server_frame(59, package_body)
-                                    send_server_frame(85, filename)
+                                    send_server_frame(102, package_body)
+                                    send_server_frame(69, filename)
                                 else:
-                                    send_server_frame(59, package_body)
+                                    send_server_frame(102, package_body)
                                 basepackage_sent = True
                                 served_files.add("basepackage.gupd")
                                 print(
@@ -509,9 +517,19 @@ def main() -> None:
                                     continue
                                 response_name, response_data = resolved
                                 send_server_frame(
-                                    59,
+                                    102,
                                     make_file_chunk_body(response_name, response_data),
                                 )
+                                if requested_key.endswith(".gmap"):
+                                    for map_type, map_body in frames_after_map:
+                                        if args.post_login_delay > 0:
+                                            time.sleep(args.post_login_delay)
+                                        send_server_frame(map_type, map_body)
+                                        print(
+                                            f"{index + 1}: sent frame type={map_type} "
+                                            "after gmap response",
+                                            flush=True,
+                                        )
                                 served_files.add(requested_key)
                                 print(
                                     f"{index + 1}: sent file {requested_name!r} "
@@ -579,9 +597,9 @@ def main() -> None:
                                 if probe_body is not None:
                                     if args.post_login_delay > 0:
                                         time.sleep(args.post_login_delay)
-                                    send_server_frame(59, probe_body)
+                                    send_server_frame(102, probe_body)
                                     print(
-                                        f"{index + 1}: sent probe packet 59 file={args.probe_file}",
+                                        f"{index + 1}: sent probe packet 102 file={args.probe_file}",
                                         flush=True,
                                     )
                                 frames_to_send = list(extra_frames)

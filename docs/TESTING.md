@@ -63,11 +63,12 @@ It is accepted in the diagnostic APK only to reach the next native stage.
 
 ## Two-connection game replay
 
-Packet 48 is a server-warp instruction. The responder must therefore send it
-on the first connection and wait for the client to reconnect before sending the
-map and level sequence. The event-driven option below sends packet 182 after
-the first ordinary client packet, which is useful for testing completion
-candidates without guessing a delay:
+Packet 178 is the server-warp instruction. The responder must send it on the
+first connection and wait for the client to reconnect before sending the map
+and level sequence. On the second connection, packet 190 is the local
+connecting-window completion event and packet 49 starts the GMAP transition.
+The second packet 49 below is sent after the map response because the tested
+client caches the map before it re-enters the pending transition:
 
 ```bash
 python3 tools/game_handshake_server.py \
@@ -79,31 +80,33 @@ python3 tools/game_handshake_server.py \
   --level-code-root /tmp/graal-assets/coded \
   --server-signature 73 \
   --file-transfer-mode single \
-  --basepackage-responses 4 \
-  --extra-frame-once 48:2c636c61737369632c3132372e302e302e312c3134393030 \
-  --extra-frame-after-first 7:2020636c61737369636970686f6e652e676d6170 \
-  --extra-frame-after-first 55:2024746573742e20202f2020302020 \
-  --frame-after-client 2:182:
+  --connection-timeout 60 \
+  --extra-frame-once 178:2c636c61737369632c3132372e302e302e312c3134393030 \
+  --extra-frame-after-first 9:202474657374 \
+  --extra-frame-after-first '190:' \
+  --extra-frame-after-first 49:2020522020636c61737369636970686f6e652e676d6170 \
+  --frame-after-map 49:2020522020636c61737369636970686f6e652e676d6170
 ```
 
-The x86_64 diagnostic APK reaches the rendered tile field and HUD. The
-packet-182 dispatcher and force-hide diagnostic hooks remove the blue
-connecting control in the local screenshot. The normal script-installed table
-entry remains unresolved, and ARM64 runtime behavior has not been tested yet.
-Keep the trap and force-hide patchers in the private working tree. They are
-investigation aids, not release repairs.
+The x86_64 diagnostic APK reaches the rendered tile field and HUD using the
+original no-swap handler table. The normal packet-190 handler removes the blue
+connecting control. This is a local synthetic success. ARM64 runtime behavior
+and live login remain unverified.
 
-The `--frame-after-client` option also accepts
+The `--frame-after-client` option accepts
 `CLIENTTYPE@OCCURRENCE:TYPE:HEXBODY`. The occurrence is one-based and defaults
-to one. The public replay helper logs the selected occurrence so a capture can
-be matched against the client trace.
+to one. The `--frame-after-map` option accepts `TYPE:HEXBODY` and sends the
+frame after each `.gmap` response. Both options are useful for bounded local
+experiments because they avoid timing guesses.
 
 ## Game responder
 
 The local game responder implements only the frames needed for a bounded
-protocol test. Its command line includes a server-warp, a minimal player
-property update, a map selection, and the encrypted fixture files. Review
-the script before changing the packet sequence.
+protocol test. Its command line includes a packet-178 server-warp, a minimal
+packet-9 player property update, packet 190 completion, a packet-49 map
+selection, and encrypted fixture files. File responses use packet 102 in
+single mode or the native 68, 84, 102, 69 sequence in big mode. Review the
+script before changing the packet sequence.
 
 ```bash
 python3 tools/game_handshake_server.py \
@@ -131,7 +134,7 @@ outgoing key:
 ```bash
 python3 tools/decode_game_handshake_capture.py \
   /tmp/graal-handshake-2.in.bin \
-  --outgoing-key 0123456789abcdef
+  --key-hex 0123456789abcdef
 ```
 
 The decoder prints frame metadata and hashes by default. Use the option that
@@ -146,7 +149,8 @@ There are four separate milestones:
 3. The client requests and accepts the map and level files.
 4. The player enters a rendered world and a live server accepts the login.
 
-The current work has reproduced milestones 1 through 3 locally. Milestone 4
-is intentionally still open. A local responder can prove native control flow,
-but it cannot prove account authentication, server compatibility, or current
+The current work has reproduced milestones 1 through 3 locally and has also
+rendered a synthetic world with the client HUD. The live-login part of
+milestone 4 remains open. A local responder can prove native control flow, but
+it cannot prove account authentication, server compatibility, or current
 service availability.

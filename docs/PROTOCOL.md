@@ -137,120 +137,128 @@ TClient_manageDataByScript         0x1e7bf0
 `tools/decode_game_handshake_capture.py` keeps one RC4 state per direction
 and decodes captured frames without printing login fields by default.
 
-## 5. Handler table ordering defect
+## 5. Inbound handler table
 
-The connector script installs normal inbound handler pairs such as `(54, 10)`.
-On this library revision the VM-produced array reaches `setInDataHandlers`
-with the two values reversed. The unpatched native loop looks up the handler
-using one byte and stores it using the other byte. The result is that packet
-54 does not point to `onServerLogin`.
-
-The ARM64 instructions are:
-
-```text
-0x1ea7ac: 00 d8 62 f8   LDR X0, [X0,W2,SXTW#3]
-0x1ea7b4: 40 d8 21 f8   STR X0, [X2,W1,SXTW#3]
-```
-
-The local diagnostic repair changes them to:
+The first interpretation of `setInDataHandlers` was wrong. The connector
+bytecode was read as if the VM had reversed each pair, which led to an
+experimental `xchg ecx,edx` patch on x86_64 and matching operand changes on
+ARM64. That patch made the local protocol less correct. The live IDA table,
+the decoded script pairs, and the successful no-swap replay agree on the
+original behavior:
 
 ```text
-0x1ea7ac: 00 d8 61 f8
-0x1ea7b4: 40 d8 22 f8
+pair layout:       packet_type, handler_index
+ARM64 lookup:      0x1ea7ac: 00 d8 62 f8
+ARM64 store:       0x1ea7b4: 40 d8 21 f8
+x86_64 bytes:      83 f9 5e 7f 96 48 63 c9
 ```
 
-The x86_64 equivalent is a three-byte `xchg ecx,edx` replacement at
-`0x202ea5`. The patch helper checks original bytes before writing. The full
-compatibility patch list is in `tools/patch_compatibility_repairs.py`.
+The original bytes are the correct bytes for this library revision. The
+historical xchg experiment is kept in `tools/patch_swap_in_handler_pairs_test.py`
+as a negative control, not as a repair. `tools/patch_compatibility_repairs.py`
+now contains only the independent connector RSA and expired-certificate
+diagnostics.
 
 ## 6. Useful inbound packet pairs
 
-These pairs are the packet type and native handler index after correcting the
-ordering defect. The list is limited to entries that were used or confirmed
-in the investigation.
+The following mappings come from the decoded connector script and the native
+table at `data_TClient_indatahandlers`. They are packet type to handler index,
+not handler index to packet type. Names are kept cautious because old Graal
+protocol revisions reused numeric ranges differently.
 
 | Packet | Handler index | Observed role |
 | ---: | ---: | --- |
-| 0 | 30 | text or weapon receive path |
-| 7 | 31 | player warp and level selection |
-| 35 | 8 | file or level data response |
-| 48 | 0 | server-warp destination |
-| 54 | 10 | server login result |
-| 55 | 1 | own-player property update |
-| 59 | 24 | generic file chunk response |
-| 78 | 19 | native update path |
-| 82 | 20 | native update path |
-| 83 | 21 | native update path |
-| 84 | 22 | native update path |
-| 85 | 23 | native update path |
-| 182 | 14 | native hide-connecting-window path |
+| 7 | 31 | client-specific level-selection path, seen in an earlier test |
+| 9 | 1 | own-player property update, `sub_1EB8E0` |
+| 48 | 8 | trigger-action path, `sub_1EE9EC` |
+| 49 | 32 | player warp and GMAP transition, `sub_1ECCF8` |
+| 54 | 10 | encrypted login result |
+| 68 | 21 | large-file start |
+| 69 | 23 | large-file end |
+| 84 | 22 | large-file size |
+| 102 | 24 | file data parser, `sub_1F0DE4` |
+| 178 | 0 | server-warp destination, `sub_1E9860` |
+| 182 | 15 | process or window-list path, `sub_1EB450` |
+| 190 | 14 | hide connecting window and `onServerListerConnect`, `sub_1EB4C0` |
 
-Packet 48 carries a comma-separated destination. The local test body was:
+Packet 178 carries a comma-separated destination. The local test body was:
 
 ```text
 ,classic,127.0.0.1,14900
 ```
 
-The script handler assigns `port`, `host`, and `servername`, updates the
-login attributes, and calls `sendLogin` again.
+The handler assigns `port`, `host`, and `servername`, updates the login
+attributes, and causes the client to reconnect to the selected game socket.
+Packet 48 is a trigger-action packet in this table, not the server-warp
+packet.
 
-Packet 7 carries two encoded coordinate bytes followed by a level or map
-name. A `.gmap` name takes the map-loading path. Sending a bare `.nw` name
-does not enter the same branch, which was one reason the first synthetic test
-stopped at the splash screen.
+Packet 9 is the minimal player-properties response used by the final local
+replay. Its body begins with the encoded property code and length:
 
-Packet 182 deserves a careful qualification. Static ARM64 analysis maps it to
-handler index 14, whose native wrapper calls
-`TGUIScriptLoader_hideConnectingWindow`. The local responder can place packet
-182 on the encrypted wire after the world transition, but a trap at the
-matching x86_64 native handler is not reached. A trap at the packet 48 handler
-is reached, so this is evidence of a missing or overwritten runtime table entry
-on the game connection, not proof that packet 182 is the live server's final
-login-complete message.
+```text
+20 24 74 65 73 74
+```
 
-The UI path itself is confirmed by a separate x86_64 diagnostic dispatcher. It
-checks for packet 182 in `TClient_processIncomingPackage` and calls the same
-native hide wrapper directly. Together with the force-hide visibility repair,
-that build removes the connecting control while keeping the rendered world.
-This isolates the unresolved problem to script-installed table state rather
-than the native hide routine.
+This is enough to exercise the own-player property path for the test name
+`test`. Packet 190 has an empty body in the replay and reaches the native
+connecting-window completion wrapper. That is the correct local completion
+candidate. Packet 182 follows the process or window-list path instead, so the
+earlier theory that packet 182 was the missing hide event is rejected.
 
-The generic packet-59 entry must remain under the repaired table. A diagnostic
-build that jumped packet 59 directly to the apparent parser block at x86_64
-`0x2096f0` did not behave like the normal table path. It requested ordinary
-packet 23 resources on the first connection and stopped before the second
-connection's map sequence. This negative result is useful because it confirms
-that the surrounding dispatch and handler state matter, not only the parser
-body itself.
+The final map transition uses packet 49. Its body contains the encoded
+coordinates and the GMAP name. The local body was:
+
+```text
+20 20 52 20 20 63 6c 61 73 73 69 63 69 70 68 6f 6e 65 2e 67 6d 61 70
+```
+
+The client then requests the map through its outgoing packet 47 or packet 23
+path, depending on the cached update state. The local responder returns the
+map as packet 102.
+
+The generic file parser is packet 102, not packet 59. The handler receives the
+full packet with the type byte at index zero. Its five encoded file fields are
+at indices one through five, the name length is at index six, and the name and
+data follow. The native large-file path uses packet 68 for the start, 84 for
+the size, packet 102 for data, and 69 for the end. The local responder supports
+both that sequence and a single packet-102 response.
+
+A direct packet-59 jump to the apparent x86_64 parser address was a negative
+control. It changed the first connection to ordinary packet-23 requests and
+prevented the normal second-connection map sequence. Packet 59 is therefore
+not part of the working file path for this client revision.
 
 ## 7. Local trace
 
-With the corrected lowercase HTTP headers and the handler-table repair, the
-local trace is:
+The final bounded replay used the original no-swap handler table and two game
+connections:
 
 ```text
 connector request
 connector package accepted by diagnostic branch
-login server connected
-server-warp to 127.0.0.1:14900
-game fd/fc exchange
-encrypted packet 54 accepted
-Connected.
-connection one sends packet 48 and closes for the server warp
-connection two sends packet 7 and packet 55
-packet 7 selects classiciphone.gmap
-packet 47 requests classiciphone.gmap
-packet 35 requests overworld_west_ocean_09.nw
-packet 35 requests overworld_west_ocean_02.nw
-packet 35 requests overworld_west_ocean_10.nw
-packet 2 triggers the local packet-182 test frame
-packet 23 requests pics1.png
-packet 24 heartbeat frames continue
+connection 1: server packet 178 selects 127.0.0.1:14900
+game fd/fc exchange and encrypted login result 54
+connection 2: server packets 9, 190, and 49
+connection 2: client requests basepackage, then classiciphone.gmap
+server sends classiciphone.gmap as packet 102
+server repeats packet 49 after the map response to complete the pending warp
+client requests three .nw level containers through packets 46 and 35
+server sends each level as packet 102
+client requests pics1.png through packet 23
+server sends pics1.png as packet 102
+client heartbeat packet 24 frames continue
 ```
 
-The responder logs the requested names and sends re-keyed encrypted level
-containers. The client remains connected and sends ping frames. With the
-correct two-connection sequence, the emulator renders the tile field and HUD,
-and the x86_64 diagnostic packet-182 hook removes the connecting control. The
-normal script-installed packet-182 table entry remains unresolved, and ARM64
-runtime behavior has not been tested.
+The responder logged these level names:
+
+```text
+overworld_west_ocean_09.nw
+overworld_west_ocean_02.nw
+overworld_west_ocean_10.nw
+```
+
+The emulator rendered the green tile field, player HUD, and status icons with
+no centered connecting control. The map file was also present in the external
+Android cache under `maps/classiciphone.gmap`. This is a local synthetic
+success, not a live-service login, and the ARM64 runtime still needs a device
+test.
