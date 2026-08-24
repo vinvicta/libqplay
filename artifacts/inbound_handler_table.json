@@ -387,62 +387,62 @@
     {
       "handler_index": 75,
       "va": "0x1ee860",
-      "name": "sub_1EE860"
+      "name": "TClient_addChest"
     },
     {
       "handler_index": 76,
       "va": "0x1f05fc",
-      "name": "sub_1F05FC"
+      "name": "TClient_addSign"
     },
     {
       "handler_index": 77,
       "va": "0x1edd78",
-      "name": "sub_1EDD78"
+      "name": "TClient_addNpcWeapon"
     },
     {
       "handler_index": 78,
       "va": "0x1f0f54",
-      "name": "sub_1F0F54"
+      "name": "TClient_handleFlyingObject"
     },
     {
       "handler_index": 79,
       "va": "0x1f0920",
-      "name": "sub_1F0920"
+      "name": "TClient_handleBomb"
     },
     {
       "handler_index": 80,
       "va": "0x1ef560",
-      "name": "sub_1EF560"
+      "name": "TClient_removeBomb"
     },
     {
       "handler_index": 81,
       "va": "0x1eed50",
-      "name": "sub_1EED50"
+      "name": "TClient_handleExplosion"
     },
     {
       "handler_index": 82,
       "va": "0x1f10f4",
-      "name": "sub_1F10F4"
+      "name": "TClient_handleSpyExplosion"
     },
     {
       "handler_index": 83,
       "va": "0x1ee7b0",
-      "name": "sub_1EE7B0"
+      "name": "TClient_handleThrowObject"
     },
     {
       "handler_index": 84,
       "va": "0x1efb0c",
-      "name": "sub_1EFB0C"
+      "name": "TClient_handleExtra"
     },
     {
       "handler_index": 85,
       "va": "0x1f0ae4",
-      "name": "sub_1F0AE4"
+      "name": "TClient_removeExtra"
     },
     {
       "handler_index": 91,
       "va": "0x1f0c44",
-      "name": "sub_1F0C44"
+      "name": "TClient_handleUpdatePackage"
     },
     {
       "handler_index": 92,

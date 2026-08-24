@@ -8,10 +8,10 @@
   "policy": "These aliases are analysis labels, not recovered source names. The evidence is recorded so a later pass can correct a label without confusing it with an imported ELF symbol.",
   "inventory_after_labels": {
     "total_functions": 11271,
-    "ida_default_sub_functions": 2054,
-    "ida_named_non_elf_functions": 1121,
-    "named_function_total": 9217,
-    "new_labels_in_this_pass": 57
+    "ida_default_sub_functions": 2042,
+    "ida_named_non_elf_functions": 1133,
+    "named_function_total": 9229,
+    "new_labels_in_this_pass": 69
   },
   "labels": [
     {
@@ -355,6 +355,78 @@
       "name": "TClient_setNpcWeaponImages",
       "confidence": "high",
       "evidence": ["Decodes an NPC ID", "Updates the NPC's weapon images through TServerPlayer_setWeaponImgs"]
+    },
+    {
+      "va": "0x1ee860",
+      "name": "TClient_addChest",
+      "confidence": "high",
+      "evidence": ["Decodes chest fields", "Constructs a TServerChest for the selected level and adds it to the level list"]
+    },
+    {
+      "va": "0x1f05fc",
+      "name": "TClient_addSign",
+      "confidence": "high",
+      "evidence": ["Parses sign coordinates and text", "Constructs a TServerSign and adds it to the level list"]
+    },
+    {
+      "va": "0x1edd78",
+      "name": "TClient_addNpcWeapon",
+      "confidence": "high",
+      "evidence": ["Decodes a weapon ID", "Calls TPlayer_addNPCWeapon"]
+    },
+    {
+      "va": "0x1f0f54",
+      "name": "TClient_handleFlyingObject",
+      "confidence": "high",
+      "evidence": ["Handles a flying-object packet", "Calls removeMirroredShot or putFlyingObject after updating the player's action level"]
+    },
+    {
+      "va": "0x1f0920",
+      "name": "TClient_handleBomb",
+      "confidence": "high",
+      "evidence": ["Handles a bomb packet", "Calls TServerLevel_putBomb after updating the player's action level"]
+    },
+    {
+      "va": "0x1ef560",
+      "name": "TClient_removeBomb",
+      "confidence": "high",
+      "evidence": ["Decodes bomb coordinates", "Calls TServerLevel_removeBomb"]
+    },
+    {
+      "va": "0x1eed50",
+      "name": "TClient_handleExplosion",
+      "confidence": "high",
+      "evidence": ["Handles an explosion packet", "Plays bomb.wav or thunder.wav and calls TServerLevel_makeExplosion"]
+    },
+    {
+      "va": "0x1f10f4",
+      "name": "TClient_handleSpyExplosion",
+      "confidence": "high",
+      "evidence": ["Handles a spy-explosion packet", "Calls TServerLevel_spyExplosion"]
+    },
+    {
+      "va": "0x1ee7b0",
+      "name": "TClient_handleThrowObject",
+      "confidence": "high",
+      "evidence": ["Decodes a client ID and object ID", "Calls TServerPlayer_throwObject"]
+    },
+    {
+      "va": "0x1efb0c",
+      "name": "TClient_handleExtra",
+      "confidence": "high",
+      "evidence": ["Handles shield, sword, and item.wav cases", "Calls TServerLevel_putExtra"]
+    },
+    {
+      "va": "0x1f0ae4",
+      "name": "TClient_removeExtra",
+      "confidence": "high",
+      "evidence": ["Removes an extra object", "Plays extra.wav and calls TServerLevel_removeExtra"]
+    },
+    {
+      "va": "0x1f0c44",
+      "name": "TClient_handleUpdatePackage",
+      "confidence": "high",
+      "evidence": ["Parses an update-package record", "Obtains the TUpdatePackage and adds it to the client request list when absent"]
     }
   ],
   "network_contacted": false
