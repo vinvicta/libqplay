@@ -31,6 +31,12 @@ def read_request(conn: socket.socket) -> bytes:
     return bytes(data)
 
 
+def response_header(name: str, value: str, style: str) -> bytes:
+    if style == "title":
+        name = "-".join(part.capitalize() for part in name.split("-"))
+    return f"{name}: {value}\r\n".encode("ascii")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--port", type=int, default=18080)
@@ -65,6 +71,18 @@ def main() -> None:
         choices=("1.0", "1.1"),
         default="1.0",
         help="HTTP version used in the response status line",
+    )
+    parser.add_argument(
+        "--header-case",
+        choices=("lower", "title"),
+        default="lower",
+        help="case used for built-in response header names",
+    )
+    parser.add_argument(
+        "--connection-value",
+        choices=("keep-alive", "close"),
+        default="keep-alive",
+        help="value used for the built-in Connection response header",
     )
     parser.add_argument(
         "--header",
@@ -103,14 +121,20 @@ def main() -> None:
                 )
                 response = (
                     f"HTTP/{args.http_version} 200 OK\r\n".encode("ascii")
-                    + b"server: Graal-Capture\r\n"
-                    b"content-type: application/octet-stream\r\n"
+                    + response_header("server", "Graal-Capture", args.header_case)
+                    + response_header(
+                        "content-type", "application/octet-stream", args.header_case
+                    )
                     + (
                         b""
                         if args.omit_content_length
-                        else f"content-length: {len(body)}\r\n".encode("ascii")
+                        else response_header(
+                            "content-length", str(len(body)), args.header_case
+                        )
                     )
-                    + b"connection: keep-alive\r\n"
+                    + response_header(
+                        "connection", args.connection_value, args.header_case
+                    )
                     + extra_headers
                     + b"\r\n"
                     + body

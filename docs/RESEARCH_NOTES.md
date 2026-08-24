@@ -80,6 +80,17 @@ embedded certificate and supplies it to the CyaSSL context. The certificate
 expired on 2023-07-29, and the verifier's date routine consults the current
 clock. That is a real compatibility failure for a current device.
 
+The native call chain is now confirmed in IDA rather than inferred from the
+certificate strings. `THTTPRequest_sendRequest` at `0x1ffde8` selects the
+socket transport and calls `TSocketConnection_setVerifyGraalWebCert` when the
+request asks for verification. `TSocketConnection_enableSSLOnSocket` at
+`0x206450` creates a CyaSSL client context, loads the supplied verify buffer
+through `CyaSSL_CTX_load_verify_buffer`, configures verification, and calls
+`CyaSSL_connect`. The game-server path reaches the same socket class through
+`TGraalConnection_connectToServer` at `0x1feb98`, but its trust buffer and SSL
+flag are separate fields. This is why a connector certificate repair alone is
+not a complete game-server repair.
+
 An expired certificate does not explain every observed failure. A diagnostic
 build that forced the parser through plain HTTP still did not advance until
 the response format was made compatible. Certificate repair is necessary for
@@ -98,17 +109,29 @@ The package is therefore a stale or mismatched artifact for a strict client.
 The local test has a narrowly scoped RSA branch bypass so the script compiler
 can be studied. That bypass is not a safe release repair.
 
-The next surprise came from the HTTP response headers. The old parser stores
-literal lowercase header names such as `content-length:` and
-`connection: keep-alive`. The first replay responder used conventional
-capitalized headers and `Connection: close`. The client accepted the TCP
-connection, but never recognized the body and timed out through four short
-polls. Once the responder used the legacy lowercase names, the client logged
-`Connected.` and ran the connector script. This was a protocol-format issue,
-not a cryptographic issue.
+The response-header finding needed a correction after a second IDA pass. The
+function `THTTPRequest_preParseData_void` at `0x201d68` lowercases each header
+line with `TString::lower` before matching `server:`, `content-length:`,
+`content-type:`, and the other fields. Header-name capitalization is therefore
+not a client compatibility requirement.
 
-That correction is encoded in `tools/connector_capture_server.py` and is
-called out in `docs/TESTING.md` so a future test does not repeat it.
+The same local diagnostic APK and connector body were then tested with three
+response variants. Lowercase names plus `Connection: keep-alive`, title-case
+names plus `Connection: keep-alive`, and lowercase names plus
+`Connection: close` all reached the game responder, completed both game
+connections, and requested the GMAP and three level files. The parser does
+recognize the exact lowercased value `connection: keep-alive` as a reuse hint,
+but a close response with a valid `Content-Length` still completed this
+bounded replay. A fourth replay without `Content-Length` also completed when
+the responder half-closed its write side, giving the stream parser an EOF
+boundary. The old note that lowercase names were required is withdrawn.
+
+The replay tool keeps lowercase names and `keep-alive` as conservative legacy
+defaults, and exposes `--header-case` and `--connection-value` for controlled
+comparison tests. It also exposes `--omit-content-length` for the EOF case.
+The earlier capitalized-header failure was confounded by another response or
+timing difference that has not been reproduced, so it should not be treated as
+evidence of a header-case rule.
 
 ## Script to native handler boundary
 

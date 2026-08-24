@@ -43,8 +43,14 @@ length and checksum through its reimplementation of the native algorithm.
 
 ## Connector replay
 
-The responder must use legacy lowercase headers. The old parser searches for
-header names such as `content-length:` and `connection: keep-alive`.
+The responder defaults to legacy-looking lowercase headers, but this is not a
+hard requirement. IDA decompilation shows that `THTTPRequest_preParseData`
+lowercases each response header line before matching it. A valid
+`Content-Length` is recommended when the response connection remains open,
+but the parser can also use EOF. This helper half-closes its write side after
+the body, so the no-length variant is a bounded test. `Connection: keep-alive`
+is the conservative default; `Connection: close` is also accepted in the
+bounded replay.
 
 ```bash
 python3 tools/connector_capture_server.py \
@@ -53,6 +59,20 @@ python3 tools/connector_capture_server.py \
   --count 12 \
   --accept-timeout 180
 ```
+
+To compare response formatting without changing the body, use:
+
+```bash
+python3 tools/connector_capture_server.py \
+  --port 18080 \
+  --con-png /tmp/con.png \
+  --header-case title \
+  --connection-value close
+```
+
+The local test matrix completed the connector and game replay with lowercase
+or title-case names, with either connection value, and without
+`Content-Length` when the responder supplied an EOF boundary.
 
 When `--output-dir` points to a new directory, the responder creates it before
 accepting requests. This keeps capture setup separate from the protocol test.
