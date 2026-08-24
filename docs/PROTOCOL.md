@@ -197,7 +197,10 @@ offline decoder are in `artifacts/game_server_tls.json` and
 `tools/decode_game_server_tls_certificate.py`. An authorized operator can
 prepare a replacement certificate-only script value with
 `tools/encode_game_server_tls_certificate.py`; the script must then be
-recompiled, repacked, and signed for the intended endpoint.
+recompiled, repacked, and signed for the intended endpoint. The encoder allows
+the string to grow for a normal recompilation. Its optional
+`--max-base64-characters 960` check is only for workflows that require the
+historical literal capacity.
 
 This makes an expired game-server trust certificate a concrete second
 compatibility failure, not just an inference from the connector path. It also

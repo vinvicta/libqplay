@@ -28,7 +28,7 @@ from cryptography.hazmat.primitives.serialization import Encoding
 
 
 DEFAULT_STRING_INDEX = 143
-DEFAULT_MAX_BASE64_CHARACTERS = 960
+DEFAULT_MAX_BASE64_CHARACTERS = 0
 DES_KEY = b"NakFpz15"
 
 
@@ -115,7 +115,7 @@ def main() -> None:
         "--max-base64-characters",
         type=int,
         default=DEFAULT_MAX_BASE64_CHARACTERS,
-        help="maximum encoded length for in-place-compatible replacement; use 0 to disable",
+        help="maximum encoded length for an in-place-compatible replacement; 0 allows growth for recompilation",
     )
     args = parser.parse_args()
 
