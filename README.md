@@ -39,17 +39,28 @@ array in the wrong order. The decoded runtime pairs are packet type first,
 handler index second, and the unmodified table accepts the normal local
 sequence.
 
-The corrected two-connection replay now renders the level tile field, player
-HUD, and status icons. The client accepts a server-warp, a player-properties
-packet, the connecting-window completion packet, the map transition, three
-encrypted level containers, and `pics1.png`. The file response is packet 102,
-not packet 59. A direct packet-59 parser jump was retained only as a negative
-control because it breaks the normal request sequence.
+The corrected two-connection replay renders the level tile field, player HUD,
+and status icons with the x86_64 diagnostic build. The client accepts a
+server-warp, a player-properties packet, the connecting-window completion
+packet, the map transition, three encrypted level containers, and `pics1.png`.
+The file response is packet 102, not packet 59. A direct packet-59 parser jump
+was retained only as a negative control because it breaks the normal request
+sequence.
+
+The same replay was run with an ARM64-only diagnostic APK. The available
+Android emulator is x86_64, so Android loaded the ARM64 library through its
+native translation layer. That build completed the connector request, server
+warp, encrypted login exchange, map request, three level-file requests,
+`pics1.png` request, and continuing heartbeats. It also populated the expected
+external cache files. The screen nevertheless stayed on the original title or
+loading image. This verifies the ARM64 transport and resource-request path in
+translation, but it is not proof that the ARM64 renderer or level transition
+works on real ARM64 hardware.
 
 The game has not yet been verified against a live game server. The local test
-proves that the native client can reach a rendered world through a bounded
-loopback responder. Live endpoint availability, current package signing, and
-account authentication remain open.
+proves that the x86_64 native client can reach a rendered world through a
+bounded loopback responder. Live endpoint availability, current package
+signing, account authentication, and ARM64 rendering remain open.
 
 ## Repository layout
 
@@ -103,8 +114,8 @@ the analysis auditable without publishing secrets or a full game data set.
 ## Next investigation step
 
 The highest-value remaining work is live-service and ARM64 validation. The
-local path is already complete through world rendering, so the next checks are
-to verify the current connector trust and package-signing chain, repeat the
-same packet sequence on a real ARM64 device, and compare the live server's
-resource and login responses with the captured local trace. Those tests should
-only use an endpoint and account that the operator is authorized to test.
+next checks are to verify the current connector trust and package-signing
+chain, repeat the same packet sequence on a real ARM64 device, and compare the
+live server's resource and login responses with the captured local trace. Those
+tests should only use an endpoint and account that the operator is authorized
+to test.

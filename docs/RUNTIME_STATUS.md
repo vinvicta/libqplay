@@ -26,14 +26,18 @@ This is the short handoff view. The full reasoning and command history are in
    `classiciphone.gmap`, three `.code` level containers, and `pics1.png`.
    The responder returns each file through packet 102 and the client sends the
    normal heartbeat packets.
-9. The emulator renders the level tile field and the game HUD. This proves the
-   map, player-property, level-container, image, and renderer paths can all run
-   in a controlled local test.
+9. The x86_64 diagnostic build renders the level tile field and the game HUD.
+   This proves the map, player-property, level-container, image, and renderer
+   paths can all run in a controlled local test with that native library.
 10. The original no-swap handler table routes packet 190 to the native
     connecting-window completion wrapper. The rendered world remains visible
     without the centered connecting control.
 11. The symbol translation pass applied 8,601 names to the ARM64 IDA database
     with zero rename failures.
+12. An ARM64-only diagnostic build running through the x86_64 emulator's native
+    translation layer completes the connector, server warp, encrypted login,
+    map, three level-file requests, image request, and heartbeat path. The
+    expected map, level, and image files appear in the external cache.
 
 ## Not verified
 
@@ -41,17 +45,28 @@ This is the short handoff view. The full reasoning and command history are in
 * That the current live connector still accepts the 2019 client query.
 * That the current server's certificate and package-signing chain can be
   replaced safely without changing protocol behavior.
-* ARM64 runtime behavior on a real ARM64 device.
+* ARM64 runtime behavior on a real ARM64 device, especially renderer entry.
+* Whether the ARM64 renderer and level transition work outside the emulator's
+  x86_64 translation layer. The translated run remains on the title or loading
+  image even after the resource requests complete.
 * Whether the live server sends the same completion sequence as the local
   responder.
 
 ## Current blocker
 
-The local native path is no longer blocked. The no-swap table has been checked
-against IDA and the emulator, and the final replay reaches a rendered world.
-The earlier xchg handler-table patch and packet-182 hide hypothesis are closed
-as false leads. Packet 182 maps to the process or window-list path, while
-packet 190 reaches the connecting-window completion wrapper.
+The local native path is complete through rendered-world entry for the x86_64
+diagnostic build. The no-swap table has been checked against IDA and the
+emulator, and the earlier xchg handler-table patch and packet-182 hide
+hypothesis are closed as false leads. Packet 182 maps to the process or
+window-list path, while packet 190 reaches the connecting-window completion
+wrapper.
+
+The ARM64 diagnostic run establishes a narrower result. Under the available
+x86_64 emulator, Android translated the ARM64 native code far enough to make
+both game connections, accept the encrypted login, request the map and level
+files, cache the image, and keep the heartbeat alive. It did not leave the
+title or loading image. A real ARM64 device is therefore still needed before
+the ARM64 renderer can be called verified.
 
 The remaining blockers are external validation rather than an identified
 local parser failure:
@@ -59,8 +74,9 @@ local parser failure:
 * the current connector certificate and package-signing chain have not been
   tested against a live service;
 * no live game-server login has been attempted or verified;
-* the working replay uses an x86_64 diagnostic APK, so ARM64 device behavior
-  still needs a controlled run.
+* the rendered replay uses the x86_64 diagnostic APK;
+* the ARM64-only replay needs a real ARM64 device run to separate native
+  renderer behavior from the emulator translation layer.
 
 The packet-59 shortcut remains rejected. The working file path is packet 102,
 with optional large-file framing 68, 84, 102, 69. The local responder also

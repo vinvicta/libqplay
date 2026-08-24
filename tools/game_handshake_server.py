@@ -219,7 +219,7 @@ def main() -> None:
     parser.add_argument(
         "--output-key-hex",
         default="30313233343536373839616263646566",
-        help="RC4 key used by the diagnostic x86_64 APK for client-to-server frames",
+        help="RC4 key used by the diagnostic x86_64 and ARM64 APKs for client-to-server frames",
     )
     parser.add_argument(
         "--package-file",

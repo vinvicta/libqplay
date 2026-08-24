@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Route x86_64 legacy hostname resolution to the emulator's local proxy.
+"""Route legacy hostname resolution to the emulator's local proxy.
 
 The patch replaces only ``resolveHost`` with ``127.0.0.1`` (network byte
-order).  Combined with ``adb reverse tcp:80 tcp:<host-port>``, it lets a
-read-only local capture server observe the connector request without
-modifying the original APK or the remote service.
+order). It supports the original x86_64 and ARM64 libraries. Combined with
+the HTTP parser diagnostic and an ADB reverse mapping, it lets a read-only
+local capture server observe the connector request without modifying the
+original APK or the remote service.
 """
 
 from pathlib import Path
@@ -12,30 +13,41 @@ import argparse
 import hashlib
 
 
-FUNCTION_VA = 0x21D8D0
-ORIGINAL_PREFIX = bytes.fromhex("48 8b 07 48 85 c0 74")
-PATCH_PREFIX = bytes.fromhex("b8 7f 00 00 01 c3 90")
+PATCHES = {
+    "x86_64": (
+        0x21D8D0,
+        bytes.fromhex("48 8b 07 48 85 c0 74"),
+        bytes.fromhex("b8 7f 00 00 01 c3 90"),
+    ),
+    "arm64-v8a": (
+        0x206108,
+        bytes.fromhex("ff 83 00 d1 f3 53 00 a9 f5 7b 01 a9"),
+        bytes.fromhex("e0 0f 80 52 00 20 a0 72 c0 03 5f d6"),
+    ),
+}
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
+    parser.add_argument("--arch", choices=sorted(PATCHES), default="x86_64")
     parser.add_argument("input", type=Path)
     parser.add_argument("output", type=Path)
     args = parser.parse_args()
 
+    function_va, original_prefix, patch_prefix = PATCHES[args.arch]
     blob = bytearray(args.input.read_bytes())
-    if blob[FUNCTION_VA : FUNCTION_VA + len(ORIGINAL_PREFIX)] != ORIGINAL_PREFIX:
+    actual = blob[function_va : function_va + len(original_prefix)]
+    if actual != original_prefix:
         raise SystemExit(
-            f"unexpected bytes at 0x{FUNCTION_VA:x}: "
-            f"{blob[FUNCTION_VA:FUNCTION_VA + len(ORIGINAL_PREFIX)].hex(' ')}"
+            f"unexpected bytes at 0x{function_va:x}: {actual.hex(' ')}"
         )
 
-    blob[FUNCTION_VA : FUNCTION_VA + len(PATCH_PREFIX)] = PATCH_PREFIX
+    blob[function_va : function_va + len(patch_prefix)] = patch_prefix
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_bytes(blob)
     print(
-        f"patched 0x{FUNCTION_VA:x}: "
-        f"{ORIGINAL_PREFIX.hex(' ')} -> {PATCH_PREFIX.hex(' ')}"
+        f"patched 0x{function_va:x}: "
+        f"{original_prefix.hex(' ')} -> {patch_prefix.hex(' ')}"
     )
     print(f"sha256={hashlib.sha256(blob).hexdigest()}")
 

@@ -41,6 +41,41 @@ python3 tools/make_level_code.py \
 Repeat for the other requested levels. The helper validates the container
 length and checksum through its reimplementation of the native algorithm.
 
+## ARM64 diagnostic native build
+
+The following order applies the ARM64-only diagnostic edits to a private copy
+of the original library. Each helper checks the expected original bytes before
+writing, so a different library revision stops instead of being patched
+silently:
+
+```bash
+python3 tools/patch_compatibility_repairs.py \
+  --arch arm64-v8a \
+  /path/to/original/arm64-v8a/libqplay.so \
+  /tmp/libqplay.compat.so
+
+python3 tools/patch_localhost_resolver_test.py \
+  --arch arm64-v8a \
+  /tmp/libqplay.compat.so \
+  /tmp/libqplay.loopback.so
+
+python3 tools/patch_force_http_parser_test.py \
+  --arch arm64-v8a --port 18080 \
+  /tmp/libqplay.loopback.so \
+  /tmp/libqplay.http.so
+
+python3 tools/patch_fixed_output_rc4_key_test.py \
+  --arch arm64-v8a \
+  /tmp/libqplay.http.so \
+  /tmp/libqplay.diagnostic.so
+```
+
+Place the final file in a private ARM64 APK, keep the other ABI libraries out
+of that diagnostic package when testing ARM64 selection, sign it for the local
+emulator or device, and configure ADB reverse mappings for ports 18080 and
+14900. The ARM64 fixed-key patch uses a trampoline at `0x1f2dcc` and resumes
+the original function at `0x1fd6b8`; it is only for the offline responder.
+
 ## Connector replay
 
 The responder defaults to legacy-looking lowercase headers, but this is not a
@@ -110,8 +145,11 @@ python3 tools/game_handshake_server.py \
 
 The x86_64 diagnostic APK reaches the rendered tile field and HUD using the
 original no-swap handler table. The normal packet-190 handler removes the blue
-connecting control. This is a local synthetic success. ARM64 runtime behavior
-and live login remain unverified.
+connecting control. This is a local synthetic success. The ARM64-only APK was
+also able to complete the connector, server warp, encrypted login, map and
+level requests, image request, and heartbeat path under the x86_64 emulator's
+translation layer, but it remained on the title or loading image. ARM64
+renderer behavior on a real device and live login remain unverified.
 
 The `--frame-after-client` option accepts
 `CLIENTTYPE@OCCURRENCE:TYPE:HEXBODY`. The occurrence is one-based and defaults
@@ -170,7 +208,8 @@ There are four separate milestones:
 4. The player enters a rendered world and a live server accepts the login.
 
 The current work has reproduced milestones 1 through 3 locally and has also
-rendered a synthetic world with the client HUD. The live-login part of
-milestone 4 remains open. A local responder can prove native control flow, but
-it cannot prove account authentication, server compatibility, or current
-service availability.
+rendered a synthetic world with the x86_64 client HUD. The ARM64-only build
+reproduced the same network and resource-request milestones under translation,
+but did not render the world. The live-login part of milestone 4 remains open.
+A local responder can prove native control flow, but it cannot prove account
+authentication, server compatibility, or current service availability.

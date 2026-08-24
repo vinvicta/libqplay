@@ -35,18 +35,102 @@ EXPECTED_CAVE = bytes.fromhex(
     "0f 1f 84"
 ) + bytes(CAVE_CAPACITY - 19)
 
+ARM64_PATCH_SITE = 0x1FD6B4
+ARM64_ORIGINAL_PREFIX = bytes.fromhex(
+    "ff c3 00 d1 f3 53 00 a9 f5 5b 01 a9"
+)
+ARM64_RESUME_SITE = ARM64_PATCH_SITE + 4
+ARM64_CAVE_VA = 0x1F2DCC
+ARM64_CAVE_CAPACITY = 128
+ARM64_EXPECTED_CAVE = bytes(ARM64_CAVE_CAPACITY)
+
 
 def rel32(site: int, target: int) -> bytes:
     return struct.pack("<i", target - (site + 5))
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("input", type=Path)
-    parser.add_argument("output", type=Path)
-    args = parser.parse_args()
+def arm64_branch(site: int, target: int) -> bytes:
+    delta = target - site
+    if delta % 4:
+        raise ValueError("ARM64 branch target is not instruction-aligned")
+    immediate = delta // 4
+    if not -(1 << 25) <= immediate < (1 << 25):
+        raise ValueError("ARM64 B target is outside its 26-bit range")
+    return struct.pack("<I", 0x14000000 | (immediate & 0x03FFFFFF))
 
-    blob = bytearray(args.input.read_bytes())
+
+def arm64_cbz_x(register: int, site: int, target: int) -> bytes:
+    delta = target - site
+    if delta % 4:
+        raise ValueError("ARM64 CBZ target is not instruction-aligned")
+    immediate = delta // 4
+    if not -(1 << 18) <= immediate < (1 << 18):
+        raise ValueError("ARM64 CBZ target is outside its 19-bit range")
+    return struct.pack(
+        "<I", 0xB4000000 | ((immediate & 0x7FFFF) << 5) | register
+    )
+
+
+def arm64_mov_w(register: int, immediate: int) -> bytes:
+    if not 0 <= immediate <= 0xFFFF:
+        raise ValueError("ARM64 MOVZ immediate must fit in 16 bits")
+    return struct.pack("<I", 0x52800000 | (immediate << 5) | register)
+
+
+def arm64_mov_imm64(register: int, value: int) -> bytes:
+    if not 0 <= value < (1 << 64):
+        raise ValueError("ARM64 immediate must fit in 64 bits")
+    code = bytearray()
+    for halfword in range(4):
+        opcode = 0xD2800000 if halfword == 0 else 0xF2800000
+        immediate = (value >> (halfword * 16)) & 0xFFFF
+        code += struct.pack(
+            "<I", opcode | (halfword << 21) | (immediate << 5) | register
+        )
+    return bytes(code)
+
+
+def arm64_str_x(source: int, base: int, offset: int) -> bytes:
+    if offset % 8 or not 0 <= offset // 8 < (1 << 12):
+        raise ValueError("ARM64 STR X offset must be an aligned 12-bit scaled value")
+    return struct.pack(
+        "<I", 0xF9000000 | ((offset // 8) << 10) | (base << 5) | source
+    )
+
+
+def arm64_str_w(source: int, base: int, offset: int) -> bytes:
+    if offset % 4 or not 0 <= offset // 4 < (1 << 12):
+        raise ValueError("ARM64 STR W offset must be an aligned 12-bit scaled value")
+    return struct.pack(
+        "<I", 0xB9000000 | ((offset // 4) << 10) | (base << 5) | source
+    )
+
+
+def build_arm64_cave() -> bytes:
+    """Build a trampoline that rewrites the existing key backing buffer."""
+
+    key_low = int.from_bytes(OUTPUT_KEY[:8], "little")
+    key_high = int.from_bytes(OUTPUT_KEY[8:], "little")
+    code = bytearray()
+    # The branch at the patch site replaces the original stack allocation.
+    # Re-run it here, then resume at the original second instruction.
+    code += struct.pack("<I", 0xD100C3FF)  # SUB SP, SP, #0x30
+    # Keep x0-x3 untouched. The original function has not saved them yet.
+    code += arm64_cbz_x(2, ARM64_CAVE_VA + len(code), ARM64_RESUME_SITE)
+    code += struct.pack("<I", 0xF9400044)  # LDR X4, [X2]
+    code += arm64_mov_imm64(5, key_low)
+    code += arm64_mov_imm64(6, key_high)
+    code += arm64_mov_w(7, len(OUTPUT_KEY))
+    code += arm64_str_w(7, 4, 0)  # length = 16
+    code += arm64_str_x(5, 4, 8)
+    code += arm64_str_x(6, 4, 16)
+    code += arm64_branch(ARM64_CAVE_VA + len(code), ARM64_RESUME_SITE)
+    if len(code) > ARM64_CAVE_CAPACITY:
+        raise ValueError(f"ARM64 trampoline is {len(code)} bytes")
+    return code.ljust(ARM64_CAVE_CAPACITY, b"\x00")
+
+
+def patch_x86(blob: bytearray) -> None:
     actual = blob[CALL_SITE : CALL_SITE + len(ORIGINAL_CALL)]
     if actual != ORIGINAL_CALL:
         raise SystemExit(
@@ -58,7 +142,7 @@ def main() -> None:
             f"unexpected code cave at 0x{CAVE_VA:x}: {cave.hex(' ')}"
         )
 
-    # r12 points at the output cipherkey TString in setEncryptionOut.  Its
+    # r12 points at the output cipherkey TString in setEncryptionOut. Its
     # backing buffer already has the required 16-byte allocation; overwrite
     # those bytes, call the normal RC4 constructor, and return to the store
     # immediately following the original call.
@@ -82,11 +166,47 @@ def main() -> None:
     blob[CALL_SITE : CALL_SITE + len(ORIGINAL_CALL)] = (
         b"\xe9" + rel32(CALL_SITE, CAVE_VA)
     )
+
+
+def patch_arm64(blob: bytearray) -> None:
+    actual = blob[ARM64_PATCH_SITE : ARM64_PATCH_SITE + len(ARM64_ORIGINAL_PREFIX)]
+    if actual != ARM64_ORIGINAL_PREFIX:
+        raise SystemExit(
+            f"unexpected bytes at 0x{ARM64_PATCH_SITE:x}: {actual.hex(' ')}"
+        )
+    cave = blob[ARM64_CAVE_VA : ARM64_CAVE_VA + ARM64_CAVE_CAPACITY]
+    if cave != ARM64_EXPECTED_CAVE:
+        raise SystemExit(
+            f"unexpected ARM64 code cave at 0x{ARM64_CAVE_VA:x}: {cave.hex(' ')}"
+        )
+    blob[ARM64_CAVE_VA : ARM64_CAVE_VA + ARM64_CAVE_CAPACITY] = build_arm64_cave()
+    blob[ARM64_PATCH_SITE : ARM64_PATCH_SITE + 4] = arm64_branch(
+        ARM64_PATCH_SITE, ARM64_CAVE_VA
+    )
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--arch", choices=("x86_64", "arm64-v8a"), default="x86_64")
+    parser.add_argument("input", type=Path)
+    parser.add_argument("output", type=Path)
+    args = parser.parse_args()
+
+    blob = bytearray(args.input.read_bytes())
+    if args.arch == "x86_64":
+        patch_x86(blob)
+        patch_site = CALL_SITE
+        cave_va = CAVE_VA
+    else:
+        patch_arm64(blob)
+        patch_site = ARM64_PATCH_SITE
+        cave_va = ARM64_CAVE_VA
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_bytes(blob)
     print(
-        f"patched outgoing RC4 key at 0x{CALL_SITE:x}; "
-        f"key={OUTPUT_KEY!r}; sha256={hashlib.sha256(blob).hexdigest()}"
+        f"patched {args.arch} outgoing RC4 key at 0x{patch_site:x}; "
+        f"cave=0x{cave_va:x}; key={OUTPUT_KEY!r}; "
+        f"sha256={hashlib.sha256(blob).hexdigest()}"
     )
 
 

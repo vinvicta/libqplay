@@ -105,10 +105,17 @@ A playable world was not verified for the modded package.
 
 The original client remains the source of truth for the 1.8 protocol. Its
 ARM64 symbol translation is complete at 8,601 applied names, and the local
-no-swap replay reaches a rendered world through the normal packet table.
-That replay uses packet 178 for server warp, packet 190 for the connecting
-window completion path, packet 49 for the GMAP transition, and packet 102 for
-file responses. A large-file transfer can use 68, 84, 102, 69.
+x86_64 no-swap replay reaches a rendered world through the normal packet
+table. That replay uses packet 178 for server warp, packet 190 for the
+connecting-window completion path, packet 49 for the GMAP transition, and
+packet 102 for file responses. A large-file transfer can use 68, 84, 102, 69.
+
+The ARM64-only diagnostic build was also run through the available x86_64
+emulator's native translation layer. It completed the same connector, game
+login, map, level-file, image, and heartbeat sequence, but remained on the
+title or loading image. That result is useful for separating transport and
+resource behavior from renderer behavior, but it is not an ARM64 device
+validation.
 
 The comparison therefore supports three practical conclusions:
 

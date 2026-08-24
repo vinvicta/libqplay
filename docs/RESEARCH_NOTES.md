@@ -331,6 +331,46 @@ the player HUD, and the three top-right status icons. The centered blue
 handler. This proves that the renderer, map cache, level loader, image loader,
 and connecting-window transition all run in the bounded local test.
 
+## ARM64 diagnostic replay
+
+The ARM64 diagnostic build uses four independent native edits. The connector
+compatibility patch accepts the stale package signature at `0x22c5c8` and skips
+the expired GraalWeb certificate setup at `0x20ab20`. The loopback resolver at
+`0x206108` returns network-order `127.0.0.1`. The HTTP parser test patch forces
+the connector request through port `18080` without TLS at `0x200de0`,
+`0x200df0`, `0x200df4`, `0x200f74`, and `0x200f78`.
+
+The offline handshake responder also needs a deterministic outgoing RC4 key.
+The corrected ARM64 trampoline branches from `0x1fd6b4` to the zero-filled
+code cave at `0x1f2dcc`, rewrites the existing output-key `TString` backing
+buffer with `0123456789abcdef`, and resumes at `0x1fd6b8`. It repeats the
+overwritten `SUB SP, SP, #0x30` before resuming the original prologue. That
+stack instruction matters; an earlier trampoline draft omitted it and was not
+valid. Incoming encryption remains unchanged.
+
+The corrected ARM64-only APK was installed on the available Android 36
+x86_64 emulator. Android loaded `lib/arm64/libqplay.so` through its native
+translation layer. The first connection logged the connector login and packet
+178 server warp. The second connection logged the `fd` and `fc` exchange,
+encrypted login result, packet 9, packet 190, packet 49, the map request, all
+three encrypted level-file requests, the `pics1.png` request, and continuing
+packet 24 heartbeats. The external cache contained these verified fixture
+hashes:
+
+```text
+classiciphone.gmap                    bc061465a7705bad074e7ae872bd9d0da14ce3d420f395fc4084760c48b682a8
+overworld_west_ocean_02.nw-14900.code  9003d2474c556fb69b04a6f019523dd738b1bad6701099a08274fe5be2b30779
+pics1.png                              fe2dff5c4af86179d0cf83306a40c7e7b92d728a99f1f73a5ec2cf9c897764eb
+```
+
+The process stayed alive and continued heartbeats, but screenshots from the
+ARM64-only build remained on the original title or loading image. This is
+strong evidence for the ARM64 connector, game framing, server-warp, and
+resource-request path under translation. It does not establish that the
+ARM64 renderer or level transition works on real ARM64 hardware. The exact
+warp body is also significant: `,classic,127.0.0.1,14900` caused the second
+connection, while the earlier colon form did not.
+
 One negative control is worth preserving. A test build routed packet 59
 directly to the apparent x86_64 parser block at `0x2096f0`. That build did not reproduce the
 working exchange. It changed the first connection to ordinary packet 23
