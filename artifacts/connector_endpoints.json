@@ -26,7 +26,15 @@
     "g=<premium option>",
     "p=<platform name>",
     "v=6.15401",
-    "b=Jul  4 2019 09:35:48",
+    "\"b=Jul  4 2019 09:35:48\"",
     "p=<DES+Base64 encoded parameter list, key GP1Lq9Y4>"
-  ]
+  ],
+  "query_plaintext_example": "g=classic,p=android,v=6.15401,\"b=Jul  4 2019 09:35:48\"",
+  "query_encoding": {
+    "algorithm": "DES-ECB",
+    "key": "GP1Lq9Y4",
+    "key_transform": "reverse bit order in each key byte",
+    "full_blocks_only": true,
+    "url_encoder": "THTTPRequest_expandPath"
+  }
 }

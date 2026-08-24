@@ -33,6 +33,20 @@ to loopback. The query contains the premium option, platform name, client
 version `6.15401`, the build string `Jul  4 2019 09:35:48`, and a DES plus
 Base64 parameter list. The small parameter list uses the key `GP1Lq9Y4`.
 
+For the captured ARM64 request, the plaintext list before native encryption is
+exactly:
+
+```text
+g=classic,p=android,v=6.15401,"b=Jul  4 2019 09:35:48"
+```
+
+The quotes surround the entire build item, including `b=`, because the native
+`TStringList_GetCommaText2` serializer passes each item through `escaped34`.
+The DES routine reverses the bit order in every key byte, encrypts complete
+eight-byte blocks only, leaves the final short block unchanged, then applies
+Base64 and URL escaping. `tools/encode_connector_query.py` reproduces this
+offline and does not open a socket.
+
 The relevant native path is:
 
 ```text

@@ -485,6 +485,23 @@ The public game responder accepts `--frame-after-client` and
 The second was used here to send packet 49 only after the GMAP response, which
 made the successful replay deterministic without a wall-clock delay.
 
+## Exact connector query
+
+The captured ARM64 request's `p=` value can be decoded offline with the native
+DES key rule. Its plaintext list is:
+
+```text
+g=classic,p=android,v=6.15401,"b=Jul  4 2019 09:35:48"
+```
+
+The quote begins before `b=` because `TStringList_GetCommaText2` calls
+`escaped34` on the whole list item. The native DES implementation reverses
+the bits in each key byte and encrypts only complete eight-byte blocks. The
+final six bytes of this 54-byte plaintext remain unchanged before Base64 and
+URL escaping. `tools/encode_connector_query.py` reproduces the value from
+these rules and provides a safer offline check than trying to infer the query
+from a live request.
+
 ## Helper repository verification
 
 The two supplied helper repositories were cloned with Git and tested at fixed

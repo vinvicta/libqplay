@@ -130,10 +130,14 @@ production trust decision.
 
 The same utility has commands for the DES/Base64 connector query, resource
 DES, RC4, and the game's zlib wrapper. The query command is useful for format
-experiments, but the exact client query should be generated from the native
-`TStringList` serialization. In particular, the build timestamp contains
-spaces and is quoted by the native `escaped34` helper. No live fetch or live
-connector request was made while testing this repository.
+experiments, but it is not a byte-for-byte client query generator by itself.
+The native client reverses the bit order in each DES key byte, while the
+helper's standalone DES implementation uses its own standard byte handling.
+The exact captured plaintext list is
+`g=classic,p=android,v=6.15401,"b=Jul  4 2019 09:35:48"`. The quotes cover the
+whole `b=` item because it contains spaces. Use
+`tools/encode_connector_query.py` for an exact offline reproduction. No live
+fetch or live connector request was made while testing this repository.
 
 ## Why these checks matter
 

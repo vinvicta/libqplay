@@ -84,6 +84,8 @@ ARM64-device behavior remain open.
 * `symbols/libqplay.symbols.json` is the machine-readable equivalent.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.
 * `tools/` contains IDAPython, parsing, replay, and diagnostic patch helpers.
+  `tools/encode_connector_query.py` reproduces the captured connector query
+  without opening a socket.
 * `artifacts/` contains small metadata exports. APKs, certificates, private
   keys, captured credentials, and game assets are intentionally not included.
 
