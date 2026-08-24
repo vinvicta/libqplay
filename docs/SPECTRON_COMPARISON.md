@@ -110,7 +110,7 @@ The connector signing key is not different either. The 360-character
 DES-wrapped public-key text following `PjosLg8D` is byte-for-byte identical
 in the two ARM64 libraries. A raw Base64 decode is encrypted data, not DER;
 after the native bit-reversed DES transform it produces the same 269-byte RSA
-public key as `analysis/libqplay.public.der`, SHA-256
+public key recorded in `artifacts/helper_toolchain_replay.json`, SHA-256
 `35e7245d68e6ab6c84bd55061704fe2d3d16800cbe0a671aceae6c85e1301b82`. This
 rules out the Spectron key as a source of a current connector signing key.
 
