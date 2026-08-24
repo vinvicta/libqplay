@@ -169,6 +169,8 @@ proves the local native TLS path, not a current live certificate or service.
   and the boundary between translated symbols and IDA-created functions.
 * `artifacts/premium_option.json` records the complete marker bytes and the
   native decoded value.
+* `artifacts/loading_state_ownership.json` records the ARM64 flag readers,
+  writers, render branch, and packet-190 call-site audit.
 * `artifacts/graalweb_trust_bundle.json` records the recovered certificate
   bundle hashes, dates, and native decoder details. The PEM material itself is
   not committed.

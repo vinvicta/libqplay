@@ -32,6 +32,11 @@ A second pass over the ARM64 IDA database traced the flag itself rather than
 only the screen that it controls. The byte at `0x37a549` starts at `1`, and its
 GOT slot is `0x375e30`.
 
+The address-level reader and writer table is preserved in
+`artifacts/loading_state_ownership.json`. The IDA database also carries
+comments at the key call sites so the same conclusion is visible while
+navigating the ARM64 file.
+
 The native access pattern is narrow:
 
 * `TClientEnvironment::getLoadingScreenEnabled` at `0x15d35c` reads the byte

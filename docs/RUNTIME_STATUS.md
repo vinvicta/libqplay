@@ -170,6 +170,11 @@ This is the short handoff view. The full reasoning and command history are in
     Because two changes are present, this confirms compatibility of the
     direct script patch but leaves the native branch as the variable tied to
     the visual transition.
+31. The IDA ownership audit is now captured in
+    `artifacts/loading_state_ownership.json`. It lists the three native getter
+    call sites, the two post-startup setter paths, the `sigcheck` clear, the
+    render-loop branch, and packet-190's no-write behavior. The active IDB has
+    matching comments at those addresses.
 
 ## Not verified
 

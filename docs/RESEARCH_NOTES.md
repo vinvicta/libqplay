@@ -925,3 +925,26 @@ startup branch is still present, and the direct script assignment alone left
 the title/loading artwork visible in the preceding bounded run. The native
 ownership audit therefore remains the best explanation for the visual split in
 this fixture.
+
+## ARM64 loading-state call-site audit
+
+The active IDA database now has comments at the state ownership boundaries.
+The native byte at `0x37a549` starts at `1`, and the GOT slot at `0x375e30`
+points to it. `TClientEnvironment_sigcheck_TString_const_bool` at `0x15ca08`
+clears it at `0x15cac8` only when the decoded premium option is empty. The
+recovered marker decodes to `classic`, so the normal startup branch skips that
+store.
+
+The getter is read at three meaningful call sites: the connecting-window
+builder at `0x168154`, the GUI pre-render function at `0x1b188c`, and the JNI
+loop at `0x244228`. The JNI loop reads it after `runTimers` at `0x244224`; a
+nonzero result goes to `drawDefaultScreen`, while zero continues to
+`TClientEnvironment_drawGame_bool`.
+
+The native setter has only two post-startup call sites in this revision. The
+message-box path calls it at `0x16882c`, and the connect-failure path calls it
+at `0x2037d4`. The packet-190 wrapper at `0x1eb4c0` hides the connecting window,
+invokes `universe.onServerListerConnect`, and sets
+`TServerList::allowpreloginreconnects` to `-1`; it does not write the native
+loading byte. The address-level evidence is in
+`artifacts/loading_state_ownership.json`.

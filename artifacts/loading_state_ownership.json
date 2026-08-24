@@ -1,0 +1,85 @@
+{
+  "binary": {
+    "architecture": "arm64-v8a",
+    "libqplay_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "idb": "GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so.i64"
+  },
+  "global": {
+    "loadingscreenenabled_va": "0x37a549",
+    "loadingscreenenabled_initial_byte": 1,
+    "loadingscreenenabled_got_va": "0x375e30"
+  },
+  "native_functions": {
+    "sigcheck": {
+      "va": "0x15ca08",
+      "name": "TClientEnvironment_sigcheck_TString_const_bool",
+      "startup_clear_va": "0x15cac8",
+      "branch_va": "0x15ca7c",
+      "callers": [
+        {
+          "function": "TClientEnvironment_loadEngine_TString_const_bool",
+          "call_va": "0x15cb4c"
+        }
+      ],
+      "interpretation": "The nonempty decoded classic marker takes the branch that skips the native startup clear."
+    },
+    "getter": {
+      "va": "0x15d35c",
+      "name": "TClientEnvironment_getLoadingScreenEnabled_void",
+      "plt_va": "0xd2590",
+      "callsites": [
+        {
+          "function": "TGUIScriptLoader_showConnectingWindow_void",
+          "call_va": "0x168154"
+        },
+        {
+          "function": "GuiCanvas_prerenderFrame_bool",
+          "call_va": "0x1b188c"
+        },
+        {
+          "function": "Java_com_quattroplay_GraalClassic_Natives_QPlayLoop",
+          "call_va": "0x244228"
+        }
+      ]
+    },
+    "setter": {
+      "va": "0x15d370",
+      "name": "TClientEnvironment_setLoadingScreenEnabled_bool",
+      "plt_va": "0xd8db0",
+      "callsites": [
+        {
+          "function": "TGUIScriptLoader_showMessageBox_TString_const_TString_const_bool",
+          "call_va": "0x16882c",
+          "path": "modal or message-box"
+        },
+        {
+          "function": "TServerList_showConnectFailure_TString_const_bool_bool",
+          "call_va": "0x2037d4",
+          "path": "connect failure"
+        }
+      ]
+    }
+  },
+  "render_decision": {
+    "function": "Java_com_quattroplay_GraalClassic_Natives_QPlayLoop",
+    "run_timers_call_va": "0x244224",
+    "getter_call_va": "0x244228",
+    "branch_va": "0x244230",
+    "loading_path": "drawDefaultScreen",
+    "game_path": "TClientEnvironment_drawGame_bool",
+    "interpretation": "The native flag is read after timers and before the normal game draw path."
+  },
+  "packet_190_completion": {
+    "wrapper_va": "0x1eb4c0",
+    "name": "sub_1EB4C0",
+    "actions": [
+      "hideConnectingWindow",
+      "invoke universe.onServerListerConnect",
+      "set TServerList::allowpreloginreconnects to -1"
+    ],
+    "native_loading_flag_write": false
+  },
+  "native_setter_scope": "The ARM64 xrefs found only modal and connect-failure setter calls after startup; no normal packet-190 or successful-login native setter call was found.",
+  "script_scope_note": "A GS2 assignment can be a separate VM/global path. The direct bytecode experiment is therefore recorded separately and is not counted as a native write.",
+  "network_contacted": false
+}
