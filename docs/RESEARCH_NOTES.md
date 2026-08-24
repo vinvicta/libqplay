@@ -484,3 +484,30 @@ The public game responder accepts `--frame-after-client` and
 `--frame-after-map`. The first is useful for event-driven packet experiments.
 The second was used here to send packet 49 only after the GMAP response, which
 made the successful replay deterministic without a wall-clock delay.
+
+## Helper repository verification
+
+The two supplied helper repositories were cloned with Git and tested at fixed
+commits. `MorenoLand/GScript.Go-HexaParser` was checked at
+`ad9bd3657feece825b5f5a888f5db34ffe37afb9`, and
+`MorenoLand/Moreno.kahn` was checked at
+`5e3a05fc8fbcf3c3f72b3c263238b2ed275fc66d`. The exact commands and hashes
+are in `docs/HELPER_TOOLCHAIN.md`.
+
+HexaParser's Go tests passed with Go 1.22.2. Its decompiler converted the
+15,581-byte decoded connector script into 552 lines of readable GS2, exposing
+the same endpoint selection, login, packet-handler, reconnect, and resource
+logic found through the native and instruction-level analysis. Its compiler
+also passed the repository's Issue 37 fixture. Compiling the entire generated
+connector source still stops at a parser error around the
+`onAppleMessageBoxButton` function, so that output is currently a source-level
+cross-check rather than a complete bytecode round trip.
+
+Moreno.kahn's Linux `contool` built cleanly. Its `conn-extract` output for
+`analysis/live_connector_response_local.bin` has SHA-256
+`fc937afa039dff52ff4ae7f2e3ad809d75c19f5698875d862e5646644446b2b5`, exactly
+matching `analysis/live_connector_payload_local.zip`. The archive lists `.rk`,
+`.t`, and `NPCS/StartScript_Connector`, which independently confirms the
+outer length wrapper and RC4 extraction. This command does not verify the
+embedded RSA signature, so the existing stale-signature finding remains
+unchanged.

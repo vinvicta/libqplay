@@ -75,6 +75,8 @@ ARM64-device behavior remain open.
 * `docs/RUNTIME_STATUS.md` lists verified milestones and open blockers.
 * `docs/ARM64_RENDER_REPAIR.md` records the ARM64 loading-state experiments
   and the successful render-boundary diagnostic.
+* `docs/HELPER_TOOLCHAIN.md` records the pinned GS2 and connector-helper
+  checks, including their reproducible hashes and current limitations.
 * `docs/SPECTRON_COMPARISON.md` records the supplied modded APK comparison.
 * `docs/TESTING.md` describes local-only reproduction without contacting a
   live game service.
