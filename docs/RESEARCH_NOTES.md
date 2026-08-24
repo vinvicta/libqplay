@@ -51,20 +51,21 @@ ambiguous.
 
 The follow-up inventory keeps the coverage boundary explicit. IDA reports
 11,271 function starts in this database. The translated ELF rows account for
-8,096 function starts and the remaining rows are 2,064 default `sub_` names
-plus 1,111 names that IDA created without a matching ELF symbol. The 505
+8,096 function starts and the remaining rows are 2,054 default `sub_` names
+plus 1,121 names that IDA created without a matching ELF symbol. The 505
 remaining ELF rows are data symbols. `symbols/libqplay.function_inventory.csv`
 and its JSON counterpart record every function start, its size, segment,
 incoming references, flags, and source category. The `sub_` rows are not
 missing from the archive; they are unnamed because this stripped portion of
 the file provides no reliable semantic name for them.
 
-A focused follow-up pass did recover reliable behavior names for 47 of those
+A focused follow-up pass did recover reliable behavior names for 57 of those
 IDA-created functions. The labels cover the two server-login callbacks, the
 packet-190 server-list completion wrapper, file-download bookkeeping, the
 inbound handler-table loader and clearer, weapon and encrypted-script updates,
-level and map transitions, player login and logout, and a few script-window
-helpers. For example, `TClient_handleServerLoginPacket`
+level and map transitions, player login and logout, NPC movement and
+projectiles, and a few script-window helpers. For example,
+`TClient_handleServerLoginPacket`
 decodes the incoming signature and invokes `onServerLogin`, while
 `TClient_finishFileDownload` emits `onFileDownloaded` and advances the cached
 download. The labels are applied in the IDB and reflected in the function

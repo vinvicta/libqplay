@@ -252,7 +252,7 @@
     {
       "handler_index": 44,
       "va": "0x1f1d38",
-      "name": "sub_1F1D38"
+      "name": "TClient_logGameEcho"
     },
     {
       "handler_index": 45,
@@ -317,17 +317,17 @@
     {
       "handler_index": 57,
       "va": "0x1ea438",
-      "name": "sub_1EA438"
+      "name": "TClient_updateServerNpc"
     },
     {
       "handler_index": 58,
       "va": "0x1eef34",
-      "name": "sub_1EEF34"
+      "name": "TClient_handleNpcMovement"
     },
     {
       "handler_index": 59,
       "va": "0x1f0728",
-      "name": "sub_1F0728"
+      "name": "TClient_addNpcToLevel"
     },
     {
       "handler_index": 60,
@@ -342,7 +342,7 @@
     {
       "handler_index": 62,
       "va": "0x1efe14",
-      "name": "sub_1EFE14"
+      "name": "TClient_handleProjectile"
     },
     {
       "handler_index": 63,
@@ -362,27 +362,27 @@
     {
       "handler_index": 66,
       "va": "0x1e9f1c",
-      "name": "sub_1E9F1C"
+      "name": "TClient_freezePlayer"
     },
     {
       "handler_index": 67,
       "va": "0x1e9eb8",
-      "name": "sub_1E9EB8"
+      "name": "TClient_unfreezePlayer"
     },
     {
       "handler_index": 69,
       "va": "0x1ef770",
-      "name": "sub_1EF770"
+      "name": "TClient_saveLevelEncrypted"
     },
     {
       "handler_index": 70,
       "va": "0x1ede48",
-      "name": "sub_1EDE48"
+      "name": "TClient_setPlayerWeaponImages"
     },
     {
       "handler_index": 71,
       "va": "0x1ee560",
-      "name": "sub_1EE560"
+      "name": "TClient_setNpcWeaponImages"
     },
     {
       "handler_index": 75,

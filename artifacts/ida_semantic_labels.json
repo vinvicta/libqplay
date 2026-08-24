@@ -8,10 +8,10 @@
   "policy": "These aliases are analysis labels, not recovered source names. The evidence is recorded so a later pass can correct a label without confusing it with an imported ELF symbol.",
   "inventory_after_labels": {
     "total_functions": 11271,
-    "ida_default_sub_functions": 2064,
-    "ida_named_non_elf_functions": 1111,
-    "named_function_total": 9207,
-    "new_labels_in_this_pass": 47
+    "ida_default_sub_functions": 2054,
+    "ida_named_non_elf_functions": 1121,
+    "named_function_total": 9217,
+    "new_labels_in_this_pass": 57
   },
   "labels": [
     {
@@ -295,6 +295,66 @@
       "name": "TClient_clearLevelState",
       "confidence": "high",
       "evidence": ["Clears active-player weapons and every level and map NPC list", "Clears global NPC and script-universe player lists"]
+    },
+    {
+      "va": "0x1f1d38",
+      "name": "TClient_logGameEcho",
+      "confidence": "high",
+      "evidence": ["Parses a game echo packet", "Sends the resulting text to TLog_echo"]
+    },
+    {
+      "va": "0x1ea438",
+      "name": "TClient_updateServerNpc",
+      "confidence": "high",
+      "evidence": ["Removes packet framing", "Forwards the update to sub_1EA1E0"]
+    },
+    {
+      "va": "0x1eef34",
+      "name": "TClient_handleNpcMovement",
+      "confidence": "high",
+      "evidence": ["Decodes NPC movement coordinates", "Calls TServerNPC_addNPCMove"]
+    },
+    {
+      "va": "0x1f0728",
+      "name": "TClient_addNpcToLevel",
+      "confidence": "high",
+      "evidence": ["Finds or creates an NPC and selects its level", "Adds it to the level and updates its gani lookup tree"]
+    },
+    {
+      "va": "0x1efe14",
+      "name": "TClient_handleProjectile",
+      "confidence": "high",
+      "evidence": ["Decodes projectile fields and resolves the firing player", "Calls TServerLevel_shootProjectile"]
+    },
+    {
+      "va": "0x1e9f1c",
+      "name": "TClient_freezePlayer",
+      "confidence": "high",
+      "evidence": ["Sets the active player's freeze counter to 600", "Sets the player action mode"]
+    },
+    {
+      "va": "0x1e9eb8",
+      "name": "TClient_unfreezePlayer",
+      "confidence": "high",
+      "evidence": ["Sets the active player's freeze counter to -1"]
+    },
+    {
+      "va": "0x1ef770",
+      "name": "TClient_saveLevelEncrypted",
+      "confidence": "high",
+      "evidence": ["Decodes a level identifier", "Calls TServerLevel_SaveEncrypted"]
+    },
+    {
+      "va": "0x1ede48",
+      "name": "TClient_setPlayerWeaponImages",
+      "confidence": "high",
+      "evidence": ["Decodes a client ID", "Updates the selected player's weapon images"]
+    },
+    {
+      "va": "0x1ee560",
+      "name": "TClient_setNpcWeaponImages",
+      "confidence": "high",
+      "evidence": ["Decodes an NPC ID", "Updates the NPC's weapon images through TServerPlayer_setWeaponImgs"]
     }
   ],
   "network_contacted": false
