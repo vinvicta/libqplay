@@ -69,6 +69,31 @@ The `onmsg` entry point dispatches through an object method, while
 with a custom WebTop or hook bridge, but it does not by itself identify a
 game-server endpoint.
 
+The stripped `libxposed.so` was also decompiled far enough to resolve the
+WebTop URL builder. `Java_com_WebTop_getMainUrl` is exported at relative
+address `0x85f84` and appears at `0x185f84` in the Ghidra image. It decrypts a
+five-byte device string as `NOID`, then formats the URL template
+`https://spectronnative-page.onrender.com?device=%s`. The value returned by
+the supplied APK is therefore:
+
+```text
+https://spectronnative-page.onrender.com?device=NOID
+```
+
+`Java_com_WebTop_onCreated` is a no-op in this library. The Java `WebTop`
+class loads `libxposed.so`, creates a WebView, and exposes a JavaScript bridge
+named `native`. Its message handler can evaluate JavaScript, load DEX bytes,
+and perform reflection. This is a remote control and modding layer, not a
+replacement for the original connector or a direct fix for its expired
+certificate. The URL was recovered statically. The analysis did not open the
+page or contact any remote service.
+
+The Spectron ARM64 `libqplay.so` is a separate native build, not a lightly
+patched copy of the 1.8 library. Its ELF entry point is `0xdf800` rather than
+the original `0xe0170`, and the known loading-state marker moves from file
+offset `0x2ce1d0` to `0x2db730`. These differences make direct symbol-address
+transfers unsafe.
+
 ## Java observations
 
 The Java dex files still use the normal Graal activity and renderer bridge:
@@ -122,9 +147,11 @@ The comparison therefore supports three practical conclusions:
 1. The newer package is a useful source of content and behavioral clues.
 2. Its native library and hook library are different builds with different
    symbol and routing assumptions.
-3. Grafting either library into the original package would introduce more
-   unknowns than it removes. The next safe comparison is an ARM64 loopback
-   run using the original client and the already verified local responder.
+3. The WebTop URL belongs to the supplied modding layer and was not proven to
+   be the old game's login endpoint.
+4. Grafting either library into the original package would introduce more
+   unknowns than it removes. The useful comparison is an ARM64 loopback run
+   using the original client and the already verified local responder.
 
 The live-service login remains unverified. No production endpoint or account
 was used for the local replay.

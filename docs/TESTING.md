@@ -54,19 +54,19 @@ python3 tools/patch_compatibility_repairs.py \
   /path/to/original/arm64-v8a/libqplay.so \
   /tmp/libqplay.compat.so
 
-python3 tools/patch_localhost_resolver_test.py \
-  --arch arm64-v8a \
-  /tmp/libqplay.compat.so \
-  /tmp/libqplay.loopback.so
-
 python3 tools/patch_force_http_parser_test.py \
   --arch arm64-v8a --port 18080 \
-  /tmp/libqplay.loopback.so \
+  /tmp/libqplay.compat.so \
   /tmp/libqplay.http.so
+
+python3 tools/patch_localhost_resolver_test.py \
+  --arch arm64-v8a \
+  /tmp/libqplay.http.so \
+  /tmp/libqplay.loopback.so
 
 python3 tools/patch_fixed_output_rc4_key_test.py \
   --arch arm64-v8a \
-  /tmp/libqplay.http.so \
+  /tmp/libqplay.loopback.so \
   /tmp/libqplay.diagnostic.so
 
 python3 tools/patch_force_no_premium_loading_test.py \
@@ -83,6 +83,20 @@ of that diagnostic package when testing ARM64 selection, sign it for the local
 emulator or device, and configure ADB reverse mappings for ports 18080 and
 14900. The ARM64 fixed-key patch uses a trampoline at `0x1f2dcc` and resumes
 the original function at `0x1fd6b8`; it is only for the offline responder.
+
+The exact working ARM64 chain used on 2026-08-24 was compatibility repair,
+HTTP parser redirect to port 18080, localhost resolver, fixed output RC4 test
+key, and the non-premium loading-state candidate. The final native file has
+SHA-256
+`89a7cf3a10d9da9fb00f50e6917ce10402c1147bcf5738a176c26b32868ba858`.
+
+For the bounded package run, the original APK was staged privately with its
+`META-INF` directory and non-ARM64 library directories removed. The final
+ARM64 library was copied to `lib/arm64-v8a/libqplay.so`, the APK was zipaligned
+and signed with a local debug key, and the resulting APK had SHA-256
+`b1c52234b10fb5a4a2c6c58e85370ccab710b1c355574d295df30b5ed6edddcc`.
+This package is an offline diagnostic artifact. Do not publish it as a
+production client.
 
 For a loading-sequence negative control, apply
 `tools/patch_loading_screen_getter_test.py` after the native diagnostic edits.
@@ -278,6 +292,35 @@ python3 tools/decode_game_handshake_capture.py \
 The decoder prints frame metadata and hashes by default. Use the option that
 explicitly permits login-field output only on private captures.
 
+## Final ARM64 translated replay record
+
+The full-asset package was installed on the Android 36 x86_64 emulator with
+ADB reverse mappings for ports 18080 and 14900. The emulator log included:
+
+```text
+Initialized OpenGL.
+Connecting to the login server...
+Serverwarp...
+```
+
+The connector request capture SHA-256 was
+`3586b24ea8f0b90b722bc988c4a7e126ee8e0664f2b06d1cb6e7ab8338e6759f`.
+The game responder recorded two connections. The first capture was 525 bytes
+in and 401 bytes out. The second was 841 bytes in and 16,377 bytes out. The
+second connection requested `classiciphone.gmap`, three level-code files, and
+continued sending packet 24 heartbeats. The private capture hashes were:
+
+```text
+first inbound   ea99abfc5ba94c2236d1a397902bf520b6d3556c369ec4366ef2bf6434459fea
+first outbound  e9802e18635259baa04eee2eab0e9a962ce1d3abc14839a34c0e6e353c97977e
+second inbound  c3408fc4f5fe41c04cc73c3f2511292bef3f1f211bc1307dcb83396c4228e042
+second outbound e7f8291522951a1dd78f570bb368992bca5fa82ac548619144ed563e2cf15a47
+screenshot      fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e
+```
+
+The responder was bound to loopback only. No live connector, live game
+server, account, or remote Spectron page was used.
+
 ## What counts as a successful test
 
 There are four separate milestones:
@@ -288,8 +331,8 @@ There are four separate milestones:
 4. The player enters a rendered world and a live server accepts the login.
 
 The current work has reproduced milestones 1 through 3 locally and has also
-rendered a synthetic world with the x86_64 client HUD. The ARM64-only build
-reproduced the same network and resource-request milestones under translation,
-but did not render the world. The live-login part of milestone 4 remains open.
-A local responder can prove native control flow, but it cannot prove account
-authentication, server compatibility, or current service availability.
+rendered a synthetic world with the x86_64 client HUD. The ARM64-only
+candidate rendered the same world through Android's x86_64 translation layer.
+The live-login part of milestone 4 remains open. A local responder can prove
+native control flow, but it cannot prove account authentication, server
+compatibility, or current service availability.

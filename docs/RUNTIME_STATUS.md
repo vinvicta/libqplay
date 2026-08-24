@@ -61,6 +61,20 @@ This is the short handoff view. The full reasoning and command history are in
     continuing heartbeats. Its rendered screenshot exactly matches the
     original-bytecode compatibility replay. This is a fixture-level compiler
     parity result, not proof for arbitrary scripts.
+18. A full-asset, ARM64-only debug APK built from the original 1.8 package and
+    the five-step diagnostic chain was installed on the x86_64 emulator. Its
+    APK SHA-256 is
+    `b1c52234b10fb5a4a2c6c58e85370ccab710b1c355574d295df30b5ed6edddcc`, and
+    its packaged ARM64 `libqplay.so` SHA-256 is
+    `89a7cf3a10d9da9fb00f50e6917ce10402c1147bcf5738a176c26b32868ba858`.
+    Android logged Berberis loading the ARM64 process and `qplay` reached
+    OpenGL initialization. The private responder observed the connector
+    request, two game connections, encrypted login, the map, three level
+    files, `pics1.png`, and continuing heartbeat packets. The captured screen
+    reached the tiled world and HUD. The screenshot SHA-256 is
+    `fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`.
+    This is a local translated-ARM64 result, not a release APK or a physical
+    ARM64-device result.
 
 ## Not verified
 
@@ -108,7 +122,8 @@ local parser failure:
 * the current connector certificate and package-signing chain have not been
   tested against a live service;
 * no live game-server login has been attempted or verified;
-* the rendered replay uses the x86_64 diagnostic APK;
+* the rendered replay uses an x86_64 emulator with Android's ARM64
+  translation layer;
 * the ARM64-only replay needs a real ARM64 device run to separate native
   renderer behavior from the emulator translation layer.
 
