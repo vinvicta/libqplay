@@ -478,6 +478,42 @@ normal packet sequence and reaches visible game drawing under translation.
 It is still a diagnostic patch because it clears the flag on every render
 iteration. A physical ARM64 device and a live service remain unverified.
 
+## ARM64 loading-state ownership audit
+
+The follow-up IDA pass traced every native access to the loading byte. The
+`TClientEnvironment::loadingscreenenabled` data at `0x37a549` is initialized
+to `1`, and its GOT slot is `0x375e30`. The getter at `0x15d35c` only reads
+that byte. The setter at `0x15d370` writes it and, when disabling the screen
+while `loadingstate` is at most `2`, advances the state to `3`.
+
+In `TClientEnvironment::sigcheck` at `0x15ca08`, the decoded premium option
+is tested at `0x15ca70`. The branch at `0x15ca7c` reaches the clear at
+`0x15cac8` only for an empty option. The marker at `0x2ce1d0` decodes to
+`classic`, so the normal native path skips that clear. The data xrefs show
+the byte being accessed by sigcheck, the getter, and the setter, with no later
+native store found in the successful connector and resource path.
+
+The setter's PLT call xrefs are limited to the message-box path at `0x16882c`
+and the connect-failure path at `0x2037c0`. Packet 190 reaches
+`sub_1EB4C0` at `0x1eb4c0`, which hides the connecting window and invokes the
+server-list callback, but does not clear `loadingscreenenabled`. The JNI
+loop calls the getter at `0x244228` after `runTimers` and branches at
+`0x244230` to the loading-screen draw path when the result is nonzero.
+
+This explains the ordinary ARM64 replay without requiring a missing-resource
+hypothesis: the transport and resource requests can complete while the native
+draw gate remains set. The evidence is architecture-specific and is based on
+the native writers visible in IDA. It does not rule out a GS2 VM write from an
+external package. The recovered connector source has no successful-login
+clear; its visible assignment is in the disconnect error handler.
+
+The x86 comparison also needs care. Its original library starts with the
+loading byte enabled and contains the same premium-option branch. Several
+historical x86 diagnostic APKs used in the rendered replay set override the
+getter at `0x16ee80` to return false. Their screenshots remain useful
+downstream renderer evidence, but they should not be described as proof of
+unmodified x86 loading-state behavior.
+
 One negative control is worth preserving. A test build routed packet 59
 directly to the apparent x86_64 parser block at `0x2096f0`. That build did not reproduce the
 working exchange. It changed the first connection to ordinary packet 23

@@ -26,6 +26,55 @@ then tests the resulting string length at `0x15ca70`, so the original path
 treats the option as enabled and skips the flag clear. The same evidence is
 recorded in `artifacts/premium_option.json`.
 
+## Native ownership audit
+
+A second pass over the ARM64 IDA database traced the flag itself rather than
+only the screen that it controls. The byte at `0x37a549` starts at `1`, and its
+GOT slot is `0x375e30`.
+
+The native access pattern is narrow:
+
+* `TClientEnvironment::getLoadingScreenEnabled` at `0x15d35c` reads the byte
+  and returns it.
+* `TClientEnvironment::setLoadingScreenEnabled` at `0x15d370` writes the byte.
+  When it writes false and `loadingstate` is at most `2`, it also changes
+  `loadingstate` to `3`.
+* `TClientEnvironment::sigcheck` at `0x15ca08` reaches the existing clear at
+  `0x15cac8` only when the decoded premium-option string is empty.
+
+The data xrefs in the ARM64 database show the flag being accessed by those
+three routines, with no later native store in the successful connector and
+resource path. The only call xrefs to the setter's PLT entry are the message
+box path at `0x16882c` and the connect-failure path at `0x2037c0`. Those are
+error paths. The packet-190 wrapper at `0x1eb4c0` hides the connecting window
+and invokes the server-list callback, but it does not clear this flag.
+
+The JNI loop makes the consequence explicit. After `runTimers`,
+`QPlayLoop` reads the getter at `0x244228` and branches at `0x244230` to the
+loading-screen draw path when the value is nonzero. This explains how the
+unmodified ARM64 replay can complete both game connections, download the map
+and other resources, and still draw the loading image. The local evidence is
+therefore a native startup-state gate, not a general connector or resource
+failure.
+
+This is an audit of native writers. It does not rule out a write from a GS2
+script or another VM path. The recovered connector source does not clear the
+flag after a successful login; its visible assignment is in the disconnect
+error handler. No successful-login native clear was found in this ARM64
+revision.
+
+## x86 diagnostic scope
+
+The x86_64 comparison needs a separate qualification. Its original library
+also starts with the loading byte set and contains the same premium-option
+branch. Several historical x86 diagnostic APKs in the local test set,
+including the no-swap and current-normal variants, override the loading getter
+at `0x16ee80` to return false. Their rendered screenshots prove that the
+protocol, resource, and downstream renderer paths can work, but they do not
+prove how an unmodified x86 build resolves its loading state. The ARM64 native
+ownership result above is the architecture-specific finding being carried
+forward.
+
 The JNI render loop checks the flag at `0x244228`, immediately before choosing
 between the loading-screen path and the normal game drawing path. The useful
 diagnostic boundary is therefore the render-loop check, while the getter and
@@ -167,8 +216,10 @@ not on a physical ARM64 device. The forced-draw screenshot proves that the
 translated process can execute the relevant draw path, but it does not prove
 that the same behavior is correct on real ARM64 hardware.
 
-The next safe step is to trace the later resource-completion and environment
-state transitions, then test a narrowly timed state repair on an authorized
-ARM64 device. The render-boundary bypass should remain available as a
-diagnostic comparison, but should not be treated as the final compatibility
-fix.
+The next safe step is to test the initialization candidate and the render
+boundary control on an authorized physical ARM64 device, then compare them
+with a live service only when that service and account are authorized for the
+test. The native ownership audit makes a later resource-completion trace a
+lower-priority follow-up. The render-boundary bypass should remain available
+as a diagnostic comparison, but should not be treated as the final
+compatibility fix.

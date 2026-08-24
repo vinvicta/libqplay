@@ -285,8 +285,12 @@ overworld_west_ocean_10.nw
 
 The x86_64 diagnostic build rendered the green tile field, player HUD, and
 status icons with no centered connecting control. The map file was also
-present in the external Android cache under `maps/classiciphone.gmap`. The
-ARM64-only diagnostic build, running through the available x86_64 emulator's
-translation layer, made the same requests and cached the same resources but
-remained on the title or loading image. This is a local synthetic success, not
-a live-service login, and ARM64 rendering still needs a real device test.
+present in the external Android cache under `maps/classiciphone.gmap`. Several
+historical x86 diagnostic APKs used a loading-getter override, so this proves
+the downstream protocol and renderer path but not stock x86 loading-state
+ownership. The ARM64-only diagnostic build, running through the available
+x86_64 emulator's translation layer, made the same requests and cached the
+same resources but remained on the title or loading image. Native ARM64 IDA
+evidence points to the loading byte staying enabled after the `classic`
+startup path. This is a local synthetic success, not a live-service login,
+and ARM64 rendering still needs a real device test.

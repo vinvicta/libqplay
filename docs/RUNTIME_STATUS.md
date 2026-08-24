@@ -28,7 +28,9 @@ This is the short handoff view. The full reasoning and command history are in
    normal heartbeat packets.
 9. The x86_64 diagnostic build renders the level tile field and the game HUD.
    This proves the map, player-property, level-container, image, and renderer
-   paths can all run in a controlled local test with that native library.
+   paths can all run in a controlled local test with that native library. It
+   is not a stock loading-state result because several historical x86 test
+   APKs used a loading-getter override.
 10. The original no-swap handler table routes packet 190 to the native
     connecting-window completion wrapper. The rendered world remains visible
     without the centered connecting control.
@@ -71,6 +73,8 @@ This is the short handoff view. The full reasoning and command history are in
   transition on a physical ARM64 device. The embedded marker statically
   decodes to `classic`, and the ordinary translated ARM64 run remains on the
   title or loading image, while both diagnostics display the world.
+* Whether an unmodified x86_64 build clears its loading state without the
+  getter override present in several historical diagnostic APKs.
 * Whether the live server sends the same completion sequence as the local
   responder.
 * Whether the literal-order adapter generalizes to scripts with different
@@ -91,11 +95,12 @@ The ARM64 diagnostic run establishes a narrower result. Under the available
 x86_64 emulator, Android translated the ARM64 native code far enough to make
 both game connections, accept the encrypted login, request the map and level
 files, cache the image, and keep the heartbeat alive. The ordinary build did
-not leave the title or loading image. The non-premium initialization candidate
-and the independent render-boundary control both displayed the world and HUD.
-This separates the translated draw path from the still-unresolved production
-entitlement and state semantics. A real ARM64 device is still needed for
-final runtime validation.
+not leave the title or loading image. The native audit shows why: the flag at
+`0x37a549` starts enabled, the normal `classic` initialization path skips its
+clear, and the packet-190 completion wrapper does not change it. The
+non-premium initialization candidate and the independent render-boundary
+control both displayed the world and HUD. A real ARM64 device is still
+needed for final runtime validation.
 
 The remaining blockers are external validation rather than an identified
 local parser failure:

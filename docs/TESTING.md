@@ -221,10 +221,13 @@ python3 tools/game_handshake_server.py \
 
 The x86_64 diagnostic APK reaches the rendered tile field and HUD using the
 original no-swap handler table. The normal packet-190 handler removes the blue
-connecting control. This is a local synthetic success. The ordinary ARM64
-build completes the connector, server warp, encrypted login, map and level
-requests, image request, and heartbeat path under the x86_64 emulator's
-translation layer, but remains on the title or loading image. The separate
+connecting control. This is a local synthetic success, and several historical
+x86 diagnostic APKs used a loading-getter override, so it is not evidence for
+stock x86 loading-state ownership. The ordinary ARM64 build completes the
+connector, server warp, encrypted login, map and level requests, image
+request, and heartbeat path under the x86_64 emulator's translation layer, but
+remains on the title or loading image. The ARM64 IDA audit attributes that
+split to the native loading byte and its startup clear path. The separate
 render-boundary diagnostic displays the ARM64 world and HUD. ARM64 behavior
 on a real device and live login remain unverified.
 

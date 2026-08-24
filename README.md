@@ -40,12 +40,14 @@ handler index second, and the unmodified table accepts the normal local
 sequence.
 
 The corrected two-connection replay renders the level tile field, player HUD,
-and status icons with the x86_64 diagnostic build. The client accepts a
-server-warp, a player-properties packet, the connecting-window completion
-packet, the map transition, three encrypted level containers, and `pics1.png`.
-The file response is packet 102, not packet 59. A direct packet-59 parser jump
-was retained only as a negative control because it breaks the normal request
-sequence.
+and status icons with an x86_64 diagnostic build. That is a downstream
+protocol and renderer result, not a claim about stock x86 loading-state
+ownership: several historical x86 test APKs used a loading-getter override.
+The client accepts a server-warp, a player-properties packet, the
+connecting-window completion packet, the map transition, three encrypted
+level containers, and `pics1.png`. The file response is packet 102, not packet
+59. A direct packet-59 parser jump was retained only as a negative control
+because it breaks the normal request sequence.
 
 The same replay was run with an ARM64-only diagnostic APK. The available
 Android emulator is x86_64, so Android loaded the ARM64 library through its
@@ -59,6 +61,15 @@ one-instruction candidate instead forces the existing non-premium
 initialization path at `0x15ca7c`; with the corrected map fixture, it displays
 the same world through the normal render branch. The candidate still needs
 real ARM64-device and authorized live-service validation.
+
+The ARM64 IDA audit now identifies the local screen split more precisely. The
+native loading byte at `0x37a549` starts at `1`; the successful `classic`
+premium-option path skips the native clear at `0x15cac8`; and the packet-190
+completion wrapper does not write the byte. The JNI loop reads it at
+`0x244228` before choosing the loading or game draw path. This points to a
+startup loading-state gate, rather than a missing map or failed resource
+download, while leaving the production meaning of the entitlement branch
+unverified.
 
 The game has not yet been verified against a live game server. The local test
 proves that the x86_64 native client and the patched ARM64 library can reach a
@@ -138,9 +149,8 @@ the analysis auditable without publishing secrets or a full game data set.
 ## Next investigation step
 
 The highest-value remaining work is live-service and ARM64 validation. The
-next checks are to trace the native state transition that should clear the
-loading byte, verify the current connector trust and package-signing chain,
-repeat the same packet sequence on a real ARM64 device, and compare the live
-server's resource and login responses with the captured local trace. Those
-tests should only use an endpoint and account that the operator is authorized
-to test.
+next checks are to verify the current connector trust and package-signing
+chain, repeat the same packet sequence on a real ARM64 device, and compare a
+live server's resource and login responses with the captured local trace.
+Those tests should only use an endpoint and account that the operator is
+authorized to test.
