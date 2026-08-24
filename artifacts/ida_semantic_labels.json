@@ -8,10 +8,10 @@
   "policy": "These aliases are analysis labels, not recovered source names. The evidence is recorded so a later pass can correct a label without confusing it with an imported ELF symbol.",
   "inventory_after_labels": {
     "total_functions": 11271,
-    "ida_default_sub_functions": 2028,
-    "ida_named_non_elf_functions": 1147,
-    "named_function_total": 9243,
-    "new_labels_in_this_pass": 83
+    "ida_default_sub_functions": 2021,
+    "ida_named_non_elf_functions": 1154,
+    "named_function_total": 9250,
+    "new_labels_in_this_pass": 90
   },
   "labels": [
     {
@@ -511,6 +511,48 @@
       "name": "TClient_setPlayerPosition",
       "confidence": "high",
       "evidence": ["Decodes two coordinates", "Updates the active player's position when its level matches data_TClient_serverlevel"]
+    },
+    {
+      "va": "0x1eb890",
+      "name": "TClient_setPlayerFlagValueNullName",
+      "confidence": "high",
+      "evidence": ["Tail-calls TScriptMachine_setPlayerFlagValue", "Passes a null TString-name argument and preserves the boolean value"]
+    },
+    {
+      "va": "0x1eb898",
+      "name": "TClient_setPlayerFlagValueEmptyName",
+      "confidence": "high",
+      "evidence": ["Tail-calls TScriptMachine_setPlayerFlagValue", "Passes an empty or dummy TString-name pointer and preserves the boolean value"]
+    },
+    {
+      "va": "0x1e9654",
+      "name": "TClient_setPlayerStateFlag40",
+      "confidence": "high",
+      "evidence": ["Checks activeplayer", "Stores byte 1 at activeplayer+1920 and dword 40 at activeplayer+1924; the underlying field names were not recovered"]
+    },
+    {
+      "va": "0x1e9678",
+      "name": "TClient_setPlayerStateFlag1680",
+      "confidence": "high",
+      "evidence": ["Checks activeplayer", "Stores byte 1 at activeplayer+1680; the underlying field name was not recovered"]
+    },
+    {
+      "va": "0x1edb2c",
+      "name": "TClient_setPlayerStateFlagFromChar",
+      "confidence": "high",
+      "evidence": ["Reads the first input character", "Stores the boolean result of its 0x20-relative test at activeplayer+2328; the underlying field name was not recovered"]
+    },
+    {
+      "va": "0x1ee708",
+      "name": "TClient_removeNpcById",
+      "confidence": "medium",
+      "evidence": ["Decodes an NPC identifier", "Looks up the object in data_TGameEnvironment_allnpcsh and invokes its virtual method at vtable offset +8"]
+    },
+    {
+      "va": "0x1e95d4",
+      "name": "TClient_setLeaderIfOnServerLevel",
+      "confidence": "high",
+      "evidence": ["Checks whether activeplayer's current level equals data_TClient_serverlevel", "Sets data_TClient_leader to 1 when the levels match"]
     }
   ],
   "network_contacted": false

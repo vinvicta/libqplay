@@ -8143,10 +8143,10 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2004384,sub_1E95A0,ida_default_sub,,,,,.text,16,1,5120,False,False,True
 2004400,TClient_enableGraal2002ServerMode,ida_named_non_elf,,,,,.text,20,2,5120,False,False,False
 2004420,sub_1E95C4,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-2004436,sub_1E95D4,ida_default_sub,,,,,.text,64,2,5120,False,False,True
+2004436,TClient_setLeaderIfOnServerLevel,ida_named_non_elf,,,,,.text,64,2,5120,False,False,False
 2004500,sub_1E9614,ida_default_sub,,,,,.text,64,1,5120,False,False,True
-2004564,sub_1E9654,ida_default_sub,,,,,.text,36,2,5120,False,False,True
-2004600,sub_1E9678,ida_default_sub,,,,,.text,28,2,5120,False,False,True
+2004564,TClient_setPlayerStateFlag40,ida_named_non_elf,,,,,.text,36,2,5120,False,False,False
+2004600,TClient_setPlayerStateFlag1680,ida_named_non_elf,,,,,.text,28,2,5120,False,False,False
 2004628,sub_1E9694,ida_default_sub,,,,,.text,16,1,5120,False,False,True
 2004644,sub_1E96A4,ida_default_sub,,,,,.text,28,1,5120,False,False,True
 2004672,TClient_parseSetEncryptionIn_TString_const,elf_symbol,function,_Z28TClient_parseSetEncryptionInRK7TString,TClient_parseSetEncryptionIn(TString const&),TClient_parseSetEncryptionIn_TString_const,.text,28,4,5120,False,False,False
@@ -8199,8 +8199,8 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2012352,TGUIScriptLoader_finishServerListConnect,ida_named_non_elf,,,,,.text,108,2,5120,False,False,False
 2012460,TGUIScriptLoader_showAdministratorMessage,ida_named_non_elf,,,,,.text,104,2,5120,False,False,False
 2012564,TClient_processClientsideTrigger,ida_named_non_elf,,,,,.text,752,2,5120,False,False,False
-2013328,sub_1EB890,ida_default_sub,,,,,.text,8,2,5120,False,False,True
-2013336,sub_1EB898,ida_default_sub,,,,,.text,8,2,5120,False,False,True
+2013328,TClient_setPlayerFlagValueNullName,ida_named_non_elf,,,,,.text,8,2,5120,False,False,False
+2013336,TClient_setPlayerFlagValueEmptyName,ida_named_non_elf,,,,,.text,8,2,5120,False,False,False
 2013344,TClient_deleteWeapon,ida_named_non_elf,,,,,.text,28,2,5120,False,False,False
 2013372,sub_1EB8BC,ida_default_sub,,,,,.text,36,1,5120,False,False,True
 2013408,TClient_applyPlayerProperties,ida_named_non_elf,,,,,.text,60,2,5120,False,False,False
@@ -8239,7 +8239,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2021840,TClient_setNpcScript,ida_named_non_elf,,,,,.text,232,1,5120,False,False,False
 2022072,sub_1EDAB8,ida_default_sub,,,,,.text,48,1,5120,False,False,True
 2022120,TClient_setGhostMode,ida_named_non_elf,,,,,.text,68,1,5120,False,False,False
-2022188,sub_1EDB2C,ida_default_sub,,,,,.text,80,1,5120,False,False,True
+2022188,TClient_setPlayerStateFlagFromChar,ida_named_non_elf,,,,,.text,80,1,5120,False,False,False
 2022268,TClient_handleSignImages,ida_named_non_elf,,,,,.text,344,2,5120,False,False,False
 2022612,TClient_parseSetRawLen_TString_const,elf_symbol,function,_Z22TClient_parseSetRawLenRK7TString,TClient_parseSetRawLen(TString const&),TClient_parseSetRawLen_TString_const,.text,164,4,5120,False,False,False
 2022776,TClient_addNpcWeapon,ida_named_non_elf,,,,,.text,108,1,5120,False,False,False
@@ -8250,7 +8250,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2023988,TClient_modifyBoardLevel,ida_named_non_elf,,,,,.text,812,2,5120,False,False,False
 2024800,TClient_setNpcWeaponImages,ida_named_non_elf,,,,,.text,192,1,5120,False,False,False
 2024992,TClient_parseSetPing_TString_const,elf_symbol,function,_Z20TClient_parseSetPingRK7TString,TClient_parseSetPing(TString const&),TClient_parseSetPing_TString_const,.text,232,4,5120,False,False,False
-2025224,sub_1EE708,ida_default_sub,,,,,.text,168,1,5120,False,False,True
+2025224,TClient_removeNpcById,ida_named_non_elf,,,,,.text,168,1,5120,False,False,False
 2025392,TClient_handleThrowObject,ida_named_non_elf,,,,,.text,176,1,5120,False,False,False
 2025568,TClient_addChest,ida_named_non_elf,,,,,.text,396,1,5120,False,False,False
 2025964,TClient_handleClientsideTriggerPacket,ida_named_non_elf,,,,,.text,480,1,5120,False,False,False
