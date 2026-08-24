@@ -299,10 +299,10 @@ def main() -> None:
         "--frame-after-client",
         action="append",
         default=[],
-        metavar="CLIENTTYPE:TYPE:HEXBODY",
+        metavar="CLIENTTYPE[@OCCURRENCE]:TYPE:HEXBODY",
         help=(
-            "send one encrypted server frame after the first matching client "
-            "packet type on each connection"
+            "send one encrypted server frame after a matching client packet "
+            "type on each connection; OCCURRENCE is 1-based and defaults to 1"
         ),
     )
     args = parser.parse_args()
@@ -333,15 +333,28 @@ def main() -> None:
     frame_after_client = []
     for spec in args.frame_after_client:
         try:
-            client_type, server_spec = spec.split(":", 1)
+            client_spec, server_spec = spec.split(":", 1)
             server_type, body_text = server_spec.split(":", 1)
+            if "@" in client_spec:
+                client_text, occurrence_text = client_spec.rsplit("@", 1)
+                occurrence = int(occurrence_text, 0)
+            else:
+                client_text = client_spec
+                occurrence = 1
+            if occurrence < 1:
+                raise ValueError("occurrence must be positive")
             frame_after_client.append(
-                (int(client_type, 0), int(server_type, 0), bytes.fromhex(body_text))
+                (
+                    int(client_text, 0),
+                    occurrence,
+                    int(server_type, 0),
+                    bytes.fromhex(body_text),
+                )
             )
         except ValueError as exc:
             raise SystemExit(
                 f"invalid --frame-after-client {spec!r}: "
-                "expected CLIENTTYPE:TYPE:HEXBODY"
+                "expected CLIENTTYPE[@OCCURRENCE]:TYPE:HEXBODY"
             ) from exc
     if args.package_file:
         package_data = args.package_file.read_bytes()
@@ -390,6 +403,7 @@ def main() -> None:
                 basepackage_sent = False
                 served_files = set()
                 sent_after_client = set()
+                client_type_occurrences = {}
                 client_stream = RC4Stream(output_key)
                 server_stream = RC4Stream(cipher_key)
                 server_sequence = 1
@@ -430,6 +444,9 @@ def main() -> None:
                                 f"{index + 1}: client{nested_label} frame "
                                 f"seq={frame['sequence']} type={frame['type']} body={len(body)}",
                                 flush=True,
+                            )
+                            client_type_occurrences[frame["type"]] = (
+                                client_type_occurrences.get(frame["type"], 0) + 1
                             )
 
                             requested_filename = None
@@ -504,17 +521,22 @@ def main() -> None:
                                 )
                             for milestone, (
                                 client_type,
+                                occurrence,
                                 server_type,
                                 server_body,
                             ) in enumerate(frame_after_client):
                                 if milestone in sent_after_client:
                                     continue
-                                if frame["type"] == client_type:
+                                if (
+                                    frame["type"] == client_type
+                                    and client_type_occurrences[client_type] == occurrence
+                                ):
                                     send_server_frame(server_type, server_body)
                                     sent_after_client.add(milestone)
                                     print(
                                         f"{index + 1}: sent frame type={server_type} "
                                         f"after client type={client_type} "
+                                        f"occurrence={occurrence} "
                                         f"body={len(server_body)}",
                                         flush=True,
                                     )

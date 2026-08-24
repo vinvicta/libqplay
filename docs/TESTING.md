@@ -54,6 +54,9 @@ python3 tools/connector_capture_server.py \
   --accept-timeout 180
 ```
 
+When `--output-dir` points to a new directory, the responder creates it before
+accepting requests. This keeps capture setup separate from the protocol test.
+
 The `con.png` body should be an archived response that has already been
 parsed offline. Do not treat an invalid RSA signature as a production fix.
 It is accepted in the diagnostic APK only to reach the next native stage.
@@ -87,6 +90,11 @@ The x86_64 diagnostic APK then reaches the rendered tile field and HUD. It
 still leaves the blue connecting control visible, and ARM64 runtime behavior
 has not been tested yet. Keep the trap and force-hide patchers in the private
 working tree. They are investigation aids, not release repairs.
+
+The `--frame-after-client` option also accepts
+`CLIENTTYPE@OCCURRENCE:TYPE:HEXBODY`. The occurrence is one-based and defaults
+to one. The public replay helper logs the selected occurrence so a capture can
+be matched against the client trace.
 
 ## Game responder
 

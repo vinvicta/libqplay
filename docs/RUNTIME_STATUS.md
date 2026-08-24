@@ -20,10 +20,11 @@ This is the short handoff view. The full reasoning and command history are in
 7. Packet 48 causes the expected server-warp transition and a second game
    connection.
 8. On the second connection, the client requests `classiciphone.gmap`, three
-   `.code` level containers, and sends the normal heartbeat packets.
+   `.code` level containers, `pics1.png`, and sends the normal heartbeat
+   packets.
 9. The emulator renders the level tile field and the game HUD. This proves the
-   map, player-property, level-container, and renderer paths can all run in a
-   controlled local test.
+   map, player-property, level-container, image, and renderer paths can all run
+   in a controlled local test.
 10. The symbol translation pass applied 8,601 names to the ARM64 IDA database
     with zero rename failures.
 
@@ -57,3 +58,10 @@ The level loader is no longer the first suspect. The tile field and HUD render
 after the corrected two-connection sequence. The next focused experiment is to
 inspect or instrument the live `indatahandlers[182]` value on the second
 connection, then test the same sequence on ARM64.
+
+An attempted shortcut that routed every packet 59 directly to the apparent
+file-parser address was rejected by comparison. It changed the client's first
+connection from update-aware packet 47 requests to ordinary packet 23 requests
+and prevented the second connection from reaching the map and level sequence.
+The working local build leaves packet 59 under the repaired native handler
+table.

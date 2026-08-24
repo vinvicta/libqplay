@@ -291,7 +291,18 @@ packet 182 table entry is absent or overwritten after the connector client is
 replaced for the game connection. This remains a local diagnostic result, not
 a claim about the live service's completion packet.
 
+One negative control is worth preserving. A test build routed packet 59
+directly to the apparent x86_64 parser block at `0x2096f0`, bypassing the
+repaired handler table. That build did not reproduce the working exchange. On
+connection one it returned to ordinary packet 23 resource requests, and on
+connection two it stopped after the map response. The control build, which
+leaves packet 59 in the repaired table, requests the three level containers and
+`pics1.png` and renders the tile field. The direct jump is therefore rejected
+as a repair even though the address itself still looks like the packet-59
+parser in static disassembly.
+
 The public game responder now accepts `--frame-after-client
-CLIENTTYPE:TYPE:HEXBODY`. This makes the test event-driven, so a completion
-candidate can be sent after a real client milestone instead of relying on a
-fragile wall-clock delay.
+CLIENTTYPE[@OCCURRENCE]:TYPE:HEXBODY`. The occurrence is one-based and
+defaults to one. This makes the test event-driven, so a completion candidate
+can be sent after a real client milestone instead of relying on a fragile
+wall-clock delay.

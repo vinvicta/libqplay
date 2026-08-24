@@ -74,6 +74,7 @@ def main() -> None:
         help="additional response header, repeatable",
     )
     args = parser.parse_args()
+    args.output_dir.mkdir(parents=True, exist_ok=True)
 
     with socket.create_server(("127.0.0.1", args.port), reuse_port=False) as server:
         server.settimeout(args.accept_timeout)

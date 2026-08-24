@@ -208,6 +208,14 @@ is reached, so this is evidence of a missing or overwritten runtime table entry
 on the game connection, not proof that packet 182 is the live server's final
 login-complete message.
 
+The generic packet-59 entry must remain under the repaired table. A diagnostic
+build that jumped packet 59 directly to the apparent parser block at x86_64
+`0x2096f0` did not behave like the normal table path. It requested ordinary
+packet 23 resources on the first connection and stopped before the second
+connection's map sequence. This negative result is useful because it confirms
+that the surrounding dispatch and handler state matter, not only the parser
+body itself.
+
 ## 7. Local trace
 
 With the corrected lowercase HTTP headers and the handler-table repair, the
@@ -221,11 +229,16 @@ server-warp to 127.0.0.1:14900
 game fd/fc exchange
 encrypted packet 54 accepted
 Connected.
+connection one sends packet 48 and closes for the server warp
+connection two sends packet 7 and packet 55
 packet 7 selects classiciphone.gmap
 packet 47 requests classiciphone.gmap
 packet 35 requests overworld_west_ocean_09.nw
 packet 35 requests overworld_west_ocean_02.nw
 packet 35 requests overworld_west_ocean_10.nw
+packet 2 triggers the local packet-182 test frame
+packet 23 requests pics1.png
+packet 24 heartbeat frames continue
 ```
 
 The responder logs the requested names and sends re-keyed encrypted level

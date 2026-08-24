@@ -33,8 +33,13 @@ NewGraal key exchange, receive a server-warp, request the map, and request
 encrypted level files.
 
 The corrected two-connection replay now renders the level tile field and game
-HUD. The blue connecting control remains visible because packet 182 is present
-in the encrypted capture but does not reach the native handler that static
+HUD. The normal repaired handler table accepts the package, map, level, and
+image responses. A separate experiment that forced packet 59 directly to the
+apparent file-parser address made the first connection request the wrong
+resources, so that override is not part of the working diagnostic path.
+
+The blue connecting control remains visible because packet 182 is present in
+the encrypted capture but does not reach the native handler that static
 analysis associates with hiding that control. This is the active runtime
 blocker, not a claim that the live service is working.
 
