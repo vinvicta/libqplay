@@ -8,10 +8,10 @@
   "policy": "These aliases are analysis labels, not recovered source names. The evidence is recorded so a later pass can correct a label without confusing it with an imported ELF symbol.",
   "inventory_after_labels": {
     "total_functions": 11271,
-    "ida_default_sub_functions": 2090,
-    "ida_named_non_elf_functions": 1085,
-    "named_function_total": 9181,
-    "new_labels_in_this_pass": 21
+    "ida_default_sub_functions": 2086,
+    "ida_named_non_elf_functions": 1089,
+    "named_function_total": 9185,
+    "new_labels_in_this_pass": 25
   },
   "labels": [
     {
@@ -139,6 +139,30 @@
       "name": "TClient_parseEncodedFileChunk",
       "confidence": "medium",
       "evidence": ["Decodes the five-character numeric prefix", "Passes the decoded identifier and two substrings to TClient_processFileChunk"]
+    },
+    {
+      "va": "0x1e9860",
+      "name": "TClient_setServerWarpDestination",
+      "confidence": "high",
+      "evidence": ["Stores the incoming packet string in TClient::serverwarpdestination", "Referenced by the packet-handler table"]
+    },
+    {
+      "va": "0x1eb8e0",
+      "name": "TClient_applyPlayerProperties",
+      "confidence": "high",
+      "evidence": ["Forwards the property string to TPlayer_setProperties", "Clears the first-properties flag"]
+    },
+    {
+      "va": "0x1eccf8",
+      "name": "TClient_handleMapWarpPacket",
+      "confidence": "high",
+      "evidence": ["Decodes five coordinate and map fields", "Forwards the selected tile and map data to the level transition helper"]
+    },
+    {
+      "va": "0x1ee9ec",
+      "name": "TClient_handleClientsideTriggerPacket",
+      "confidence": "high",
+      "evidence": ["Decodes the trigger client ID, coordinates, and class strings", "Forwards the result to TClient_processClientsideTrigger"]
     }
   ],
   "network_contacted": false

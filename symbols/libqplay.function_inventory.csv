@@ -8155,7 +8155,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2004956,TClient_handleServerLoginSignature,ida_named_non_elf,,,,,.text,100,1,5120,False,False,False
 2005056,sub_1E9840,ida_default_sub,,,,,.text,16,2,5120,False,False,True
 2005072,sub_1E9850,ida_default_sub,,,,,.text,16,2,5120,False,False,True
-2005088,sub_1E9860,ida_default_sub,,,,,.text,16,2,5120,False,False,True
+2005088,TClient_setServerWarpDestination,ida_named_non_elf,,,,,.text,16,2,5120,False,False,False
 2005104,sub_1E9870,ida_default_sub,,,,,.text,12,1,5120,False,False,True
 2005116,TClient_beginUpdatePackageDownload,ida_named_non_elf,,,,,.text,156,1,5120,False,False,False
 2005272,sub_1E9918,ida_default_sub,,,,,.text,80,1,5120,False,False,True
@@ -8203,7 +8203,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2013336,sub_1EB898,ida_default_sub,,,,,.text,8,2,5120,False,False,True
 2013344,sub_1EB8A0,ida_default_sub,,,,,.text,28,2,5120,False,False,True
 2013372,sub_1EB8BC,ida_default_sub,,,,,.text,36,1,5120,False,False,True
-2013408,sub_1EB8E0,ida_default_sub,,,,,.text,60,2,5120,False,False,True
+2013408,TClient_applyPlayerProperties,ida_named_non_elf,,,,,.text,60,2,5120,False,False,False
 2013468,sub_1EB91C,ida_default_sub,,,,,.text,28,1,5120,False,False,True
 2013496,jump_TClient_startFileDownloading_void,elf_symbol,jump_thunk,j_._ZN7TClient20startFileDownloadingEv,TClient::startFileDownloading(void),jump_TClient_startFileDownloading_void,.text,4,1,5312,True,False,False
 2013500,sub_1EB93C,ida_default_sub,,,,,.text,32,1,5120,False,False,True
@@ -8229,7 +8229,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2016868,sub_1EC664,ida_default_sub,,,,,.text,256,1,5120,False,False,True
 2017124,TClient_processFileChunk,ida_named_non_elf,,,,,.text,1380,2,5120,False,False,False
 2018504,TClient_dispatchEncodedFileChunk,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
-2018552,sub_1ECCF8,ida_default_sub,,,,,.text,292,1,5120,False,False,True
+2018552,TClient_handleMapWarpPacket,ida_named_non_elf,,,,,.text,292,1,5120,False,False,False
 2018844,sub_1ECE1C,ida_default_sub,,,,,.text,816,3,5120,False,False,True
 2019812,sub_1ED1E4,ida_default_sub,,,,,.text,256,2,5120,False,False,True
 2020068,sub_1ED2E4,ida_default_sub,,,,,.text,260,1,5120,False,False,True
@@ -8253,7 +8253,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2025224,sub_1EE708,ida_default_sub,,,,,.text,168,1,5120,False,False,True
 2025392,sub_1EE7B0,ida_default_sub,,,,,.text,176,1,5120,False,False,True
 2025568,sub_1EE860,ida_default_sub,,,,,.text,396,1,5120,False,False,True
-2025964,sub_1EE9EC,ida_default_sub,,,,,.text,480,1,5120,False,False,True
+2025964,TClient_handleClientsideTriggerPacket,ida_named_non_elf,,,,,.text,480,1,5120,False,False,False
 2026444,sub_1EEBCC,ida_default_sub,,,,,.text,380,1,5120,False,False,True
 2026832,sub_1EED50,ida_default_sub,,,,,.text,484,1,5120,False,False,True
 2027316,sub_1EEF34,ida_default_sub,,,,,.text,916,1,5120,False,False,True

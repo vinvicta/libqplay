@@ -167,7 +167,7 @@ proves the local native TLS path, not a current live certificate or service.
   surviving ELF name.
 * `symbols/libqplay.function_inventory.summary.json` records the input hash
   and the boundary between translated symbols and IDA-created functions.
-* `artifacts/ida_semantic_labels.json` records 21 evidence-backed names
+* `artifacts/ida_semantic_labels.json` records 25 evidence-backed names
   applied to formerly unnamed login, file-download, and UI helpers.
 * `artifacts/premium_option.json` records the complete marker bytes and the
   native decoded value.
