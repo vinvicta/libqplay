@@ -779,3 +779,34 @@ Applying the existing literal-order adapter to that source also compiled to
 16,253 bytes. These checks show that the source-level path accepts a longer
 certificate and composes with the known fixture adapter. They do not claim
 that the test certificate is trusted by any service.
+
+## Clean package-preserving ARM64 replay
+
+The local Android emulator became available again during the continuation. It
+was an Android 36 x86_64 device running the ARM64 package through Berberis.
+The first launch was stopped by the normal Android compatibility warning; the
+warning was dismissed, only the test app data was cleared, and fresh loopback
+responders were started on the connector and game reverse ports.
+
+The package-preserving ARM64 candidate has APK SHA-256
+`dad598e0cec03b501ff8cc30648ad843346fa3a331db3087ffa54ff92938af3a` and native
+SHA-256
+`888a236bb839eef7ab094196b924796680d23d857a0d7533487bcd3786efb308`. Its
+RSA result site still contains the original `dc 00 00 35` bytes. The clean
+run made the connector request with capture SHA-256
+`3586b24ea8f0b90b722bc988c4a7e126ee8e0664f2b06d1cb6e7ab8338e6759f`, then
+completed two game connections. The first game capture hashes were
+`3bd0db0749df7e73715a03bfd34a5ca8e984eb3f7ac869f3c6e05653e684c536` inbound
+and `a5555ffd8b4e83f528d53f692c58a92991f2247e4037148a43779cc068316d55`
+outbound. The responder observed the map, three encrypted level containers,
+`pics1.png`, and continuing packet-24 heartbeats.
+
+The screen reached the same tiled world and HUD as the earlier diagnostic
+run. Its screenshot SHA-256 was
+`fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`.
+Because the native RSA branch was not changed and the response passed the
+native raw-digest check, this is the stronger local evidence that the saved
+connector fixture does not need the RSA bypass. The certificate skip,
+loopback endpoint changes, deterministic test key, and loading-state edit are
+still present, so this remains a controlled replay rather than a live-client
+repair.

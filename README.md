@@ -40,6 +40,14 @@ the old `RC4-SHA` and `SSLv23` settings. Connector-only trust replacement is
 therefore not enough for a current full login. See
 `artifacts/game_server_tls.json` for the offline certificate comparison.
 
+The saved connector fixture has now also been replayed with the native RSA
+result branch unchanged. A private ARM64-only candidate made the connector
+request, opened both game connections, loaded the map and resources, and
+rendered the same local world through Android's ARM64 translation layer. The
+RSA bypass is therefore not needed for this saved fixture. The remaining
+diagnostic controls are the stale trust skip, loopback routing, deterministic
+test key, and loading-state candidate.
+
 The certificate payload contains six historical certificate blocks in a PEM
 bundle. One AlphaSSL block uses malformed `BEGINCERTIFICATE` and
 `ENDCERTIFICATE` markers, so the decoder records both raw and normalized

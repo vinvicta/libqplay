@@ -84,14 +84,20 @@ This is the short handoff view. The full reasoning and command history are in
     RSA bytes, the certificate diagnostic, loopback transport patches, and the
     fixed local handshake key. Its APK SHA-256 is
     `e794a8c096de46d14e2a98142fd8082c003d4b05e30fd9735e187c365d8e86ab`.
-    It has not been rerun because the local emulator is no longer available.
+    It remains a private candidate and has not been rerun in this continuation.
 21. A matching ARM64-only package-preserving candidate was also built with
     the loading-state candidate. Its APK SHA-256 is
     `dad598e0cec03b501ff8cc30648ad843346fa3a331db3087ffa54ff92938af3a`,
     and its native SHA-256 is
     `888a236bb839eef7ab094196b924796680d23d857a0d7533487bcd3786efb308`.
-    Its original RSA branch bytes are `dc 00 00 35`. This package is prepared
-    for a future translated or physical ARM64 runtime check only.
+    Its original RSA branch bytes are `dc 00 00 35`. After clearing only the
+    emulator app data, this candidate made a fresh connector request, opened
+    two game connections, received the map, three level files, `pics1.png`,
+    and continuing heartbeats, then rendered the same world and HUD. Its
+    screenshot SHA-256 is
+    `fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`.
+    The native RSA bypass was not used. This remains a translated-ARM64
+    loopback result, not a physical-device or live-service result.
 22. The trust-bundle replacement tool was checked against the original ARM64,
     armeabi, x86, and x86_64 libraries. A one-certificate standard PEM bundle
     encoded at each architecture-specific offset and decoded byte-for-byte.

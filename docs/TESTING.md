@@ -357,6 +357,37 @@ screenshot      fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e
 The responder was bound to loopback only. No live connector, live game
 server, account, or remote Spectron page was used.
 
+## Package-preserving RSA replay
+
+The saved connector response passes the native wolfSSL raw-digest RSA check,
+so the package-preserving ARM64 candidate can be tested with the RSA branch
+unchanged. The private candidate used here has APK SHA-256
+`dad598e0cec03b501ff8cc30648ad843346fa3a331db3087ffa54ff92938af3a`, native
+library SHA-256
+`888a236bb839eef7ab094196b924796680d23d857a0d7533487bcd3786efb308`, and
+original RSA branch bytes `dc 00 00 35` at ARM64 `0x22c5c8`.
+
+With the existing Android 36 x86_64 emulator, the test app data was cleared,
+the compatibility warning was dismissed, and the two loopback reverse
+mappings were restored. The fresh run captured the normal connector request
+with SHA-256
+`3586b24ea8f0b90b722bc988c4a7e126ee8e0664f2b06d1cb6e7ab8338e6759f`, made two
+game connections, requested `classiciphone.gmap`, three level containers, and
+`pics1.png`, and continued sending heartbeats. The first game capture hashes
+were:
+
+```text
+in  3bd0db0749df7e73715a03bfd34a5ca8e984eb3f7ac869f3c6e05653e684c536
+out a5555ffd8b4e83f528d53f692c58a92991f2247e4037148a43779cc068316d55
+```
+
+The rendered screenshot SHA-256 was
+`fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`, the
+same as the earlier RSA-bypass diagnostic run. This confirms that the saved
+fixture does not require bypassing the native package-signature result. It
+does not validate the current service, and the certificate and loopback
+patches remain diagnostic controls.
+
 ## What counts as a successful test
 
 There are four separate milestones:

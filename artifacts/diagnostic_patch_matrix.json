@@ -175,8 +175,8 @@
     },
     {
       "name": "Native connector RSA verification correction",
-      "observed": "The saved 16,446-byte connector body passes the embedded-key check when wolfSSL's raw SHA-256 RSA-SSL block is reproduced. The standard ASN.1 DigestInfo check fails because it is the wrong signature format.",
-      "verdict": "The saved fixture does not need the RSA-result bypass. A no-bypass runtime replay remains to be run."
+      "observed": "The saved 16,446-byte connector body passes the embedded-key check when wolfSSL's raw SHA-256 RSA-SSL block is reproduced. The standard ASN.1 DigestInfo check fails because it is the wrong signature format. A fresh package-preserving ARM64 candidate with original branch bytes dc 00 00 35 completed the connector and game replay with the branch unchanged.",
+      "verdict": "The saved fixture does not need the RSA-result bypass, and the native branch has now been verified in the translated-ARM64 loopback replay."
     },
     {
       "name": "Force HTTPS through HTTP transport",
@@ -239,7 +239,23 @@
     "loading_candidate_applied": true,
     "abi_set": ["arm64-v8a"],
     "signature_schemes_verified": ["v1", "v2", "v3"],
-    "runtime_verified": false,
+    "runtime_verified": true,
+    "runtime_evidence": {
+      "emulator": "Android 36 x86_64 with Berberis ARM64 translation",
+      "fresh_app_data": true,
+      "connector_request": true,
+      "connector_request_sha256": "3586b24ea8f0b90b722bc988c4a7e126ee8e0664f2b06d1cb6e7ab8338e6759f",
+      "game_connections": 2,
+      "first_game_inbound_sha256": "3bd0db0749df7e73715a03bfd34a5ca8e984eb3f7ac869f3c6e05653e684c536",
+      "first_game_outbound_sha256": "a5555ffd8b4e83f528d53f692c58a92991f2247e4037148a43779cc068316d55",
+      "map": "classiciphone.gmap",
+      "level_files": 3,
+      "image": "pics1.png",
+      "heartbeats": true,
+      "render_screenshot_sha256": "fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e",
+      "rsa_bypass_used": false,
+      "scope": "127.0.0.1 connector and game responders"
+    },
     "scope": "private ARM64 package prepared for the saved loopback response"
   },
   "production_boundary": [

@@ -23,7 +23,7 @@ the title or loading image after network and resource work has completed.
 | Delayed TLS path audit | Recheck `O_NONBLOCK`, status 4 to 5 completion, `SO_ERROR`, and the status setter's SSL call in IDA | The delayed path does start CyaSSL through `TSocketConnection_setStatus_int`; no blocking-I/O repair is justified | False lead closed |
 | Longer connect poll | Change the x86_64 zero-second poll timeout to five seconds | The client still stayed on the splash screen | Not the complete cause |
 | HTTP transport redirect | Force the recognized HTTPS parser result to port 80 with SSL disabled | The local HTTP request was received, but transport alone did not advance the client | Not a repair |
-| Native RSA path retained | Leave the RSA branch at its original bytes and use the saved response, which passes the native raw-digest check | A package-preserving x86_64 APK was built with original RSA bytes `75 1d`; runtime rerun is pending | Preferred package test |
+| Native RSA path retained | Leave the RSA branch at its original bytes and use the saved response, which passes the native raw-digest check | The package-preserving ARM64 candidate retained original bytes `dc 00 00 35` and completed a fresh translated-ARM64 loopback replay without the RSA bypass | Verified local package test, live service still open |
 | RSA result bypass | Accept a response that fails the native package-signature check at ARM64 `0x22c5c8` or x86_64 `0x245009` | Used by the early replay before the raw wolfSSL format was identified. The saved archived fixture passes without it | Unnecessary for the saved fixture, diagnostic only for mismatched packages |
 | Controlled connector key | Replace the encrypted embedded key at ARM64 `0x2e1798` or x86_64 `0x3003d8` in a private library copy, then sign a local package with the matching test key | The generated 16,446-byte package passed the native wolfSSL raw-digest RSA check without bypassing the result branch | Diagnostic only |
 | Blocking socket I/O | Make all socket operations blocking | The renderer froze | Rejected |
@@ -116,16 +116,23 @@ It reached two game connections, `classiciphone.gmap`, three level containers,
 `pics1.png`, continuing heartbeats, and a rendered world. The APK and native
 hashes, plus the screenshot hash, are in the JSON artifact and
 `docs/RUNTIME_STATUS.md`. The corrected parser shows that the RSA bypass was
-not required for the saved archived response, but the no-bypass runtime
-variant has not yet been rerun. No live service or physical ARM64 device was
-used.
+not required for the saved archived response. A later clean-data replay of the
+package-preserving ARM64 candidate retained the native RSA branch, made the
+same connector request, opened two game connections, and produced the same
+render screenshot. No live service or physical ARM64 device was used.
 
 For the main ARM64 target, a package-preserving ARM64-only candidate was also
 built with the original RSA bytes and the non-premium loading candidate. Its
 APK SHA-256 is
 `dad598e0cec03b501ff8cc30648ad843346fa3a331db3087ffa54ff92938af3a`.
-The candidate is ready for a future emulator or physical-device run, but its
-runtime behavior is not claimed here.
+Its native library has SHA-256
+`888a236bb839eef7ab094196b924796680d23d857a0d7533487bcd3786efb308`, and the
+original RSA branch bytes are `dc 00 00 35`. It was installed after clearing
+only the emulator app data, the Android compatibility dialog was dismissed,
+and the fresh loopback replay rendered the world with screenshot SHA-256
+`fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`.
+This is still a translated-ARM64 diagnostic result, not a live-service or
+physical-device result.
 
 ## What a real repair still needs
 
