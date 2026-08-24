@@ -31,6 +31,13 @@ RSA check against this APK's embedded public key. Both findings are separate
 from the game-server protocol and are handled only by private diagnostic
 patches in the local test build.
 
+The certificate payload is a five-entry PEM bundle. The native path uses the
+ordinary base64 alphabet, DES-ECB with bit-reversed key bytes, and a seven-byte
+short-block tail. The first entry is the expired Eurocenter Games certificate;
+the bundle also carries the expired AddTrust root. The exact hashes and an
+offline decoder are kept in `artifacts/graalweb_trust_bundle.json` and
+`tools/decode_graalweb_cert_bundle.py`.
+
 The symbolized handler-table investigation also produced an important
 correction. The original `setInDataHandlers` instructions are correct for this
 client revision. The earlier x86_64 `xchg` patch and the matching ARM64
@@ -106,11 +113,16 @@ for the connector fixture only, not for arbitrary GS2 scripts.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.
 * `artifacts/premium_option.json` records the complete marker bytes and the
   native decoded value.
+* `artifacts/graalweb_trust_bundle.json` records the recovered certificate
+  bundle hashes, dates, and native decoder details. The PEM material itself is
+  not committed.
 * `tools/` contains IDAPython, parsing, replay, and diagnostic patch helpers.
   `tools/encode_connector_query.py` reproduces the captured connector query
   without opening a socket. `tools/conpack_legacy_zip_compat.patch` records
   the small source change needed for the old client's ZIP reader, and
   `tools/reverse_hexaparser_literals.py` records the narrow compiler adapter.
+  `tools/decode_graalweb_cert_bundle.py` recovers certificate metadata from
+  the original ARM64 library without contacting a service.
 * `artifacts/` contains small metadata exports. APKs, certificates, private
   keys, captured credentials, and game assets are intentionally not included.
 

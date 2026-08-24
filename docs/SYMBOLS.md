@@ -24,6 +24,14 @@ The full exports are in `symbols/`. The CSV is convenient for grep, a
 spreadsheet, or a quick address lookup. The JSON preserves the same records
 with explicit fields.
 
+The translation count is the number of ELF symbol records handled by the
+script. IDA's function survey also reports compiler-generated functions and
+other analysis-created entries, so its total function count is not expected
+to equal 8,601. For the original ARM64 database, the current survey reports
+11,271 total functions, 9,159 with names, and 2,112 without names. Those
+figures describe the IDA database; the 8,601 count describes the reproducible
+symbol import and rename pass.
+
 ## Naming policy
 
 The native names are kept close to their demangled ELF form. Characters that
@@ -59,4 +67,3 @@ The generated summary should have `rename_failures` equal to an empty list.
 If a future library revision produces a different count, keep its exports in
 a separate directory and record the build identity in the accompanying
 notes. Do not overwrite this table without preserving the old hash.
-

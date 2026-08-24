@@ -121,6 +121,24 @@ ended on 2023-07-29. The verifier includes `CyaInt_ValidateDate` at `0x2b53b8`,
 which consults the current clock. A current device therefore has a concrete
 certificate-expiry failure before the connector can complete.
 
+The full native payload is a five-certificate PEM bundle, not a single DER
+certificate. `TEncryption_initStaticVars` at `0xe6b40` installs the ordinary
+base64 alphabet. `TSocketConnection_setVerifyGraalWebCert` passes the decoded
+bytes to `TEncryption::des_decrypt`, and the native DES helper reverses the
+bits in each byte of `jhOdx9SY` before decrypting complete eight-byte blocks.
+The decoder leaves the final seven bytes untouched. Those bytes complete the
+last PEM delimiter, so preserving the short tail is part of the exact native
+behavior.
+
+The five recovered entries are the Eurocenter Games self-signed certificate,
+AddTrust External CA Root, StartCom Certification Authority, GlobalSign Root
+CA, and thawte Primary Root CA. The AddTrust entry expired in 2020. The first
+entry is the certificate the client presents to CyaSSL as its GraalWeb trust
+material and expired in 2023. Hashes and dates for every entry are recorded in
+`artifacts/graalweb_trust_bundle.json`. The offline decoder is
+`tools/decode_graalweb_cert_bundle.py`; it never opens a socket and does not
+write the bundle unless an output path is explicitly supplied.
+
 This is native CyaSSL behavior, not an Android Java `SSLContext` pinning
 failure. The ordinary game-server certificate path is separate from the
 connector trust buffer. A production repair should replace or update the

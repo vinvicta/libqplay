@@ -80,6 +80,22 @@ embedded certificate and supplies it to the CyaSSL context. The certificate
 expired on 2023-07-29, and the verifier's date routine consults the current
 clock. That is a real compatibility failure for a current device.
 
+The decoder was checked more closely after the first certificate extraction.
+`TEncryption_initStaticVars` at `0xe6b40` installs the standard
+`ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/` alphabet.
+The decoded ciphertext is 9,615 bytes. `des_decryptmemory` processes 9,608
+bytes in DES-ECB blocks and leaves a seven-byte tail untouched, matching the
+native loop condition. Decrypting with the bit-reversed key bytes for
+`jhOdx9SY` produces a 9,615-byte PEM bundle with five certificates. The
+unprocessed tail is `45 2d 2d 2d 2d 2d 0a`, which completes the final PEM
+delimiter. The first certificate is the self-signed Eurocenter Games
+certificate, with SHA-256 fingerprint
+`2e6425395e91baab7be95d9918de198684bcb718800bff07113e7f336d06ce56` and
+`notAfter` `2023-07-29T07:37:32Z`. The second is AddTrust External CA Root,
+which expired in 2020. The full metadata is in
+`artifacts/graalweb_trust_bundle.json`, and the extraction is reproducible
+with `tools/decode_graalweb_cert_bundle.py`.
+
 The native call chain is now confirmed in IDA rather than inferred from the
 certificate strings. `THTTPRequest_sendRequest` at `0x1ffde8` selects the
 socket transport and calls `TSocketConnection_setVerifyGraalWebCert` when the
