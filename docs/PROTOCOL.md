@@ -313,10 +313,10 @@ protocol revisions reused numeric ranges differently.
 | 68 | 21 | large-file start |
 | 69 | 23 | large-file end |
 | 84 | 22 | large-file size |
-| 102 | 24 | file data parser, `sub_1F0DE4` |
+| 102 | 24 | file data parser, `TClient_parseEncodedFileChunk` |
 | 178 | 0 | server-warp destination, `sub_1E9860` |
-| 182 | 15 | process or window-list path, `sub_1EB450` |
-| 190 | 14 | hide connecting window and `onServerListerConnect`, `sub_1EB4C0` |
+| 182 | 15 | process or window-list path, `TClient_sendWindowList` |
+| 190 | 14 | hide connecting window and `onServerListerConnect`, `TGUIScriptLoader_finishServerListConnect` |
 
 Packet 178 carries a comma-separated destination. The local test body was:
 

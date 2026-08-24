@@ -27,12 +27,13 @@ with explicit fields.
 The translation count is the number of ELF symbol records handled by the
 script. IDA's function survey also reports compiler-generated functions and
 other analysis-created entries, so its total function count is not expected
-to equal 8,601. For the original ARM64 database, the current survey reports
-11,271 total functions, 9,160 with names, and 2,111 without names. Those
-figures describe the IDA database; the 8,601 count describes the reproducible
-symbol import and rename pass. The one-entry difference from earlier notes is
-the inferred `TClient_setSSLParameters_scriptCallback` label below. It is an
-IDA semantic label and is not part of the 8,601 original ELF symbol records.
+to equal 8,601. After the follow-up semantic pass, the original ARM64
+database reports 11,271 total functions, 9,181 with names, and 2,090 default
+`sub_` names. Those figures describe the IDA database; the 8,601 count
+describes the reproducible symbol import and rename pass. The 21 new labels
+are recorded separately in `artifacts/ida_semantic_labels.json`, alongside
+the earlier inferred `TClient_setSSLParameters_scriptCallback` label. None of
+these semantic labels is part of the 8,601 original ELF symbol records.
 
 ## Naming policy
 
@@ -65,6 +66,15 @@ it as an inferred semantic name, not part of the original symbol import. Its
 method-table reference and native behavior are documented in
 `artifacts/game_server_tls.json`.
 
+The same database now has evidence-backed names for the login callback,
+server-list completion, file-download, and script-window helpers that IDA
+originally displayed as `sub_` functions. Examples include
+`TClient_handleServerLoginPacket`, `TClient_finishFileDownload`, and
+`TGUIScriptLoader_finishServerListConnect`. These remain separate from the
+imported symbol CSV because they are semantic labels, not ELF names. The
+complete list and the evidence behind each label are in
+`artifacts/ida_semantic_labels.json`.
+
 ## Complete function inventory
 
 The symbol table and the IDA function list are different sets. The ELF has
@@ -74,8 +84,8 @@ land on IDA functions. IDA's analysis adds 11,271 function starts in total:
 | Function source | Count |
 | --- | ---: |
 | Backed by a translated ELF symbol | 8,096 |
-| IDA default `sub_` names | 2,111 |
-| Named by IDA but not backed by an ELF record | 1,064 |
+| IDA default `sub_` names | 2,090 |
+| Named by IDA but not backed by an ELF record | 1,085 |
 | Total IDA functions | 11,271 |
 
 The complete address-level inventory is in
@@ -84,9 +94,11 @@ The complete address-level inventory is in
 address, segment, size, incoming-reference count, thunk and library flags,
 and the matching original ELF symbol when one exists. The summary file records
 the input hash and counts. This is the honest limit of the available evidence:
-the 2,111 `sub_` entries are real functions identified by IDA, but the APK
-does not contain source names for them. They remain addressable and searchable
-without being given guesses that could mislead later protocol work.
+the remaining default `sub_` entries are real functions identified by IDA, but
+the APK does not contain source names for them. They remain addressable and
+searchable without being given guesses that could mislead later protocol work.
+The semantic pass names only the small set whose behavior was clear enough to
+document.
 
 The inventory was generated from the active ARM64 database by
 `tools/export_function_inventory.py`. It waits for auto-analysis, joins each

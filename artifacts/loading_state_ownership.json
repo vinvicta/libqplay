@@ -71,7 +71,7 @@
   },
   "packet_190_completion": {
     "wrapper_va": "0x1eb4c0",
-    "name": "sub_1EB4C0",
+    "name": "TGUIScriptLoader_finishServerListConnect",
     "actions": [
       "hideConnectingWindow",
       "invoke universe.onServerListerConnect",

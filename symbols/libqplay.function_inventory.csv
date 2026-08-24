@@ -8150,14 +8150,14 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2004628,sub_1E9694,ida_default_sub,,,,,.text,16,1,5120,False,False,True
 2004644,sub_1E96A4,ida_default_sub,,,,,.text,28,1,5120,False,False,True
 2004672,TClient_parseSetEncryptionIn_TString_const,elf_symbol,function,_Z28TClient_parseSetEncryptionInRK7TString,TClient_parseSetEncryptionIn(TString const&),TClient_parseSetEncryptionIn_TString_const,.text,28,4,5120,False,False,False
-2004700,sub_1E96DC,ida_default_sub,,,,,.text,128,2,5120,False,False,True
-2004828,sub_1E975C,ida_default_sub,,,,,.text,128,2,5120,False,False,True
-2004956,sub_1E97DC,ida_default_sub,,,,,.text,100,1,5120,False,False,True
+2004700,TGameEnvironment_emit_onFolderLog,ida_named_non_elf,,,,,.text,128,2,5120,False,False,False
+2004828,TGameEnvironment_emit_onRCChat,ida_named_non_elf,,,,,.text,128,2,5120,False,False,False
+2004956,TClient_handleServerLoginSignature,ida_named_non_elf,,,,,.text,100,1,5120,False,False,False
 2005056,sub_1E9840,ida_default_sub,,,,,.text,16,2,5120,False,False,True
 2005072,sub_1E9850,ida_default_sub,,,,,.text,16,2,5120,False,False,True
 2005088,sub_1E9860,ida_default_sub,,,,,.text,16,2,5120,False,False,True
 2005104,sub_1E9870,ida_default_sub,,,,,.text,12,1,5120,False,False,True
-2005116,sub_1E987C,ida_default_sub,,,,,.text,156,1,5120,False,False,True
+2005116,TClient_beginUpdatePackageDownload,ida_named_non_elf,,,,,.text,156,1,5120,False,False,False
 2005272,sub_1E9918,ida_default_sub,,,,,.text,80,1,5120,False,False,True
 2005352,sub_1E9968,ida_default_sub,,,,,.text,80,1,5120,False,False,True
 2005432,sub_1E99B8,ida_default_sub,,,,,.text,80,1,5120,False,False,True
@@ -8189,16 +8189,16 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2011020,sub_1EAF8C,ida_default_sub,,,,,.text,84,1,5120,False,False,True
 2011104,sub_1EAFE0,ida_default_sub,,,,,.text,24,1,5120,False,False,True
 2011128,sub_1EAFF8,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-2011144,sub_1EB008,ida_default_sub,,,,,.text,292,2,5120,False,False,True
-2011436,sub_1EB12C,ida_default_sub,,,,,.text,220,2,5120,False,False,True
-2011656,sub_1EB208,ida_default_sub,,,,,.text,140,2,5120,False,False,True
-2011796,sub_1EB294,ida_default_sub,,,,,.text,408,2,5120,False,False,True
+2011144,TClient_continueDownloadQueue,ida_named_non_elf,,,,,.text,292,2,5120,False,False,False
+2011436,TClient_beginBigFileDownload,ida_named_non_elf,,,,,.text,220,2,5120,False,False,False
+2011656,TClient_finishDownloadFile,ida_named_non_elf,,,,,.text,140,2,5120,False,False,False
+2011796,TClient_finishFileDownload,ida_named_non_elf,,,,,.text,408,2,5120,False,False,False
 2012204,jump_TIdentification_setCookie_TString_const,elf_symbol,jump_thunk,j_._ZN15TIdentification9setCookieERK7TString,TIdentification::setCookie(TString const&),jump_TIdentification_setCookie_TString_const,.text,4,2,5312,True,False,False
-2012208,sub_1EB430,ida_default_sub,,,,,.text,32,2,5120,False,False,True
-2012240,sub_1EB450,ida_default_sub,,,,,.text,112,2,5120,False,False,True
-2012352,sub_1EB4C0,ida_default_sub,,,,,.text,108,2,5120,False,False,True
-2012460,sub_1EB52C,ida_default_sub,,,,,.text,104,2,5120,False,False,True
-2012564,sub_1EB594,ida_default_sub,,,,,.text,752,2,5120,False,False,True
+2012208,TClient_sendHaveWindow,ida_named_non_elf,,,,,.text,32,2,5120,False,False,False
+2012240,TClient_sendWindowList,ida_named_non_elf,,,,,.text,112,2,5120,False,False,False
+2012352,TGUIScriptLoader_finishServerListConnect,ida_named_non_elf,,,,,.text,108,2,5120,False,False,False
+2012460,TGUIScriptLoader_showAdministratorMessage,ida_named_non_elf,,,,,.text,104,2,5120,False,False,False
+2012564,TClient_processClientsideTrigger,ida_named_non_elf,,,,,.text,752,2,5120,False,False,False
 2013328,sub_1EB890,ida_default_sub,,,,,.text,8,2,5120,False,False,True
 2013336,sub_1EB898,ida_default_sub,,,,,.text,8,2,5120,False,False,True
 2013344,sub_1EB8A0,ida_default_sub,,,,,.text,28,2,5120,False,False,True
@@ -8212,8 +8212,8 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2013540,TClient_setSSLParameters_scriptCallback,ida_named_non_elf,,,,,.text,164,1,5120,False,False,False
 2013704,jump_TGraalConnection_setProtocol_NewGraal_TString_const,elf_symbol,jump_thunk,j_._ZN16TGraalConnection20setProtocol_NewGraalERK7TString,TGraalConnection::setProtocol_NewGraal(TString const&),jump_TGraalConnection_setProtocol_NewGraal_TString_const,.text,4,1,5312,True,False,False
 2013708,jump_TClient_connectToGameServer_void,elf_symbol,jump_thunk,j_._ZN7TClient19connectToGameServerEv,TClient::connectToGameServer(void),jump_TClient_connectToGameServer_void,.text,4,1,5312,True,False,False
-2013712,sub_1EBA10,ida_default_sub,,,,,.text,24,1,5120,False,False,True
-2013736,sub_1EBA28,ida_default_sub,,,,,.text,44,1,5120,False,False,True
+2013712,TGUIScriptLoader_runFailedsafeConnectorIfNoClient,ida_named_non_elf,,,,,.text,24,1,5120,False,False,False
+2013736,TClient_setEncryptionIn,ida_named_non_elf,,,,,.text,44,1,5120,False,False,False
 2013780,sub_1EBA54,ida_default_sub,,,,,.text,220,1,5120,False,False,True
 2014000,sub_1EBB30,ida_default_sub,,,,,.text,68,1,5120,False,False,True
 2014068,sub_1EBB74,ida_default_sub,,,,,.text,160,1,5120,False,False,True
@@ -8221,14 +8221,14 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2014488,sub_1EBD18,ida_default_sub,,,,,.text,220,1,5120,False,False,True
 2014708,sub_1EBDF4,ida_default_sub,,,,,.text,292,1,5120,False,False,True
 2015000,sub_1EBF18,ida_default_sub,,,,,.text,300,1,5120,False,False,True
-2015300,sub_1EC044,ida_default_sub,,,,,.text,288,2,5120,False,False,True
+2015300,TClient_handleUpdatePackageDownloaded,ida_named_non_elf,,,,,.text,288,2,5120,False,False,False
 2015588,sub_1EC164,ida_default_sub,,,,,.text,292,1,5120,False,False,True
 2015880,sub_1EC288,ida_default_sub,,,,,.text,348,1,5120,False,False,True
 2016228,sub_1EC3E4,ida_default_sub,,,,,.text,176,1,5120,False,False,True
-2016416,sub_1EC4A0,ida_default_sub,,,,,.text,452,2,5120,False,False,True
+2016416,TClient_finishCachedFile,ida_named_non_elf,,,,,.text,452,2,5120,False,False,False
 2016868,sub_1EC664,ida_default_sub,,,,,.text,256,1,5120,False,False,True
-2017124,sub_1EC764,ida_default_sub,,,,,.text,1380,2,5120,False,False,True
-2018504,sub_1ECCC8,ida_default_sub,,,,,.text,48,1,5120,False,False,True
+2017124,TClient_processFileChunk,ida_named_non_elf,,,,,.text,1380,2,5120,False,False,False
+2018504,TClient_dispatchEncodedFileChunk,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
 2018552,sub_1ECCF8,ida_default_sub,,,,,.text,292,1,5120,False,False,True
 2018844,sub_1ECE1C,ida_default_sub,,,,,.text,816,3,5120,False,False,True
 2019812,sub_1ED1E4,ida_default_sub,,,,,.text,256,2,5120,False,False,True
@@ -8245,7 +8245,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2022776,sub_1EDD78,ida_default_sub,,,,,.text,108,1,5120,False,False,True
 2022884,sub_1EDDE4,ida_default_sub,,,,,.text,100,1,5120,False,False,True
 2022984,sub_1EDE48,ida_default_sub,,,,,.text,188,1,5120,False,False,True
-2023172,sub_1EDF04,ida_default_sub,,,,,.text,136,1,5120,False,False,True
+2023172,TClient_handleServerLoginPacket,ida_named_non_elf,,,,,.text,136,1,5120,False,False,False
 2023308,sub_1EDF8C,ida_default_sub,,,,,.text,680,2,5120,False,False,True
 2023988,sub_1EE234,ida_default_sub,,,,,.text,812,2,5120,False,False,True
 2024800,sub_1EE560,ida_default_sub,,,,,.text,192,1,5120,False,False,True
@@ -8272,7 +8272,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2033952,sub_1F0920,ida_default_sub,,,,,.text,452,1,5120,False,False,True
 2034404,sub_1F0AE4,ida_default_sub,,,,,.text,352,1,5120,False,False,True
 2034756,sub_1F0C44,ida_default_sub,,,,,.text,416,1,5120,False,False,True
-2035172,sub_1F0DE4,ida_default_sub,,,,,.text,368,1,5120,False,False,True
+2035172,TClient_parseEncodedFileChunk,ida_named_non_elf,,,,,.text,368,1,5120,False,False,False
 2035540,sub_1F0F54,ida_default_sub,,,,,.text,416,1,5120,False,False,True
 2035956,sub_1F10F4,ida_default_sub,,,,,.text,452,1,5120,False,False,True
 2036408,sub_1F12B8,ida_default_sub,,,,,.text,768,1,5120,False,False,True

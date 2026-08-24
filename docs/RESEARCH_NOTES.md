@@ -51,13 +51,24 @@ ambiguous.
 
 The follow-up inventory keeps the coverage boundary explicit. IDA reports
 11,271 function starts in this database. The translated ELF rows account for
-8,096 function starts and the remaining rows are 2,111 default `sub_` names
-plus 1,064 names that IDA created without a matching ELF symbol. The 505
+8,096 function starts and the remaining rows are 2,090 default `sub_` names
+plus 1,085 names that IDA created without a matching ELF symbol. The 505
 remaining ELF rows are data symbols. `symbols/libqplay.function_inventory.csv`
 and its JSON counterpart record every function start, its size, segment,
 incoming references, flags, and source category. The `sub_` rows are not
 missing from the archive; they are unnamed because this stripped portion of
 the file provides no reliable semantic name for them.
+
+A focused follow-up pass did recover reliable behavior names for 21 of those
+IDA-created functions. The labels cover the two server-login callbacks, the
+packet-190 server-list completion wrapper, file-download bookkeeping, and a
+few script-window helpers. For example, `TClient_handleServerLoginPacket`
+decodes the incoming signature and invokes `onServerLogin`, while
+`TClient_finishFileDownload` emits `onFileDownloaded` and advances the cached
+download. The labels are applied in the IDB and reflected in the function
+inventory, but they are not presented as original ELF symbols. The complete
+list with confidence and evidence is in
+`artifacts/ida_semantic_labels.json`.
 
 The translated symbols changed the pace of the rest of the investigation.
 Instead of guessing from strings, the connector and login flow could be
@@ -305,7 +316,7 @@ action in this client table, not the server-warp instruction.
 The final second connection sends packet 9 with a minimal own-player property,
 packet 190 with an empty body, and packet 49 with the GMAP transition. The
 packet 9 body for the test name `test` is `20 24 74 65 73 74`. Packet 190
-reaches `sub_1EB4C0`, which hides the connecting window and invokes the
+reaches `TGUIScriptLoader_finishServerListConnect`, which hides the connecting window and invokes the
 server-list connection callback. This corrected the earlier assumption that
 packet 182 was the completion event. Static analysis maps packet 182 to the
 process or window-list path at handler index 15.
@@ -616,7 +627,7 @@ native store found in the successful connector and resource path.
 
 The setter's PLT call xrefs are limited to the message-box path at `0x16882c`
 and the connect-failure path at `0x2037c0`. Packet 190 reaches
-`sub_1EB4C0` at `0x1eb4c0`, which hides the connecting window and invokes the
+`TGUIScriptLoader_finishServerListConnect` at `0x1eb4c0`, which hides the connecting window and invokes the
 server-list callback, but does not clear `loadingscreenenabled`. The JNI
 loop calls the getter at `0x244228` after `runTimers` and branches at
 `0x244230` to the loading-screen draw path when the result is nonzero.

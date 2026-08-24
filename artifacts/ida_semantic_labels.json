@@ -1,0 +1,145 @@
+{
+  "binary": {
+    "architecture": "arm64-v8a",
+    "libqplay_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "idb": "GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so.i64"
+  },
+  "purpose": "Evidence-backed names applied to IDA-created functions that had no surviving ELF symbol.",
+  "policy": "These aliases are analysis labels, not recovered source names. The evidence is recorded so a later pass can correct a label without confusing it with an imported ELF symbol.",
+  "inventory_after_labels": {
+    "total_functions": 11271,
+    "ida_default_sub_functions": 2090,
+    "ida_named_non_elf_functions": 1085,
+    "named_function_total": 9181,
+    "new_labels_in_this_pass": 21
+  },
+  "labels": [
+    {
+      "va": "0x1e96dc",
+      "name": "TGameEnvironment_emit_onFolderLog",
+      "confidence": "high",
+      "evidence": ["Builds the literal onFolderLog", "Invokes the universe event with one string argument"]
+    },
+    {
+      "va": "0x1e975c",
+      "name": "TGameEnvironment_emit_onRCChat",
+      "confidence": "high",
+      "evidence": ["Builds the literal onRCChat", "Invokes the universe event with one string argument"]
+    },
+    {
+      "va": "0x1e97dc",
+      "name": "TClient_handleServerLoginSignature",
+      "confidence": "high",
+      "evidence": ["Stores the incoming value in TClient::serversignature", "Invokes the onServerLogin event"]
+    },
+    {
+      "va": "0x1e987c",
+      "name": "TClient_beginUpdatePackageDownload",
+      "confidence": "high",
+      "evidence": ["Looks up or adds a TUpdatePackage", "Initializes its download counters and requested filename"]
+    },
+    {
+      "va": "0x1eb008",
+      "name": "TClient_continueDownloadQueue",
+      "confidence": "high",
+      "evidence": ["Removes completed entries from the old request set", "Requests the next update or download file"]
+    },
+    {
+      "va": "0x1eb12c",
+      "name": "TClient_beginBigFileDownload",
+      "confidence": "high",
+      "evidence": ["Initializes big-file bookkeeping", "Clears the cached stream and advances onDownloadAction"]
+    },
+    {
+      "va": "0x1eb208",
+      "name": "TClient_finishDownloadFile",
+      "confidence": "high",
+      "evidence": ["Completes a requested file", "Handles .gupd completion and validates the file key"]
+    },
+    {
+      "va": "0x1eb294",
+      "name": "TClient_finishFileDownload",
+      "confidence": "high",
+      "evidence": ["Invokes onFileDownloaded", "Saves the cached stream and advances the download action"]
+    },
+    {
+      "va": "0x1eb430",
+      "name": "TClient_sendHaveWindow",
+      "confidence": "high",
+      "evidence": ["Calls TClient_sendHaveWindow with the current script window name"]
+    },
+    {
+      "va": "0x1eb450",
+      "name": "TClient_sendWindowList",
+      "confidence": "high",
+      "evidence": ["Builds a comma-text window list", "Calls TClient_sendWindowList"]
+    },
+    {
+      "va": "0x1eb4c0",
+      "name": "TGUIScriptLoader_finishServerListConnect",
+      "confidence": "high",
+      "evidence": ["Hides the connecting window", "Invokes onServerListerConnect", "Sets allowpreloginreconnects to -1"]
+    },
+    {
+      "va": "0x1eb52c",
+      "name": "TGUIScriptLoader_showAdministratorMessage",
+      "confidence": "high",
+      "evidence": ["Adds line endings to the supplied text", "Shows it with the Administrator Message title"]
+    },
+    {
+      "va": "0x1eb594",
+      "name": "TClient_processClientsideTrigger",
+      "confidence": "high",
+      "evidence": ["Uses the clientside trigger type", "Looks up the player and attaches a TClientSideTrigger"]
+    },
+    {
+      "va": "0x1eba10",
+      "name": "TGUIScriptLoader_runFailedsafeConnectorIfNoClient",
+      "confidence": "high",
+      "evidence": ["Calls runFailedsafeConnector only when the global client is absent"]
+    },
+    {
+      "va": "0x1eba28",
+      "name": "TClient_setEncryptionIn",
+      "confidence": "high",
+      "evidence": ["Forwards the three string arguments to TGraalConnection_setEncryptionIn"]
+    },
+    {
+      "va": "0x1ec044",
+      "name": "TClient_handleUpdatePackageDownloaded",
+      "confidence": "high",
+      "evidence": ["Saves the package version", "Invokes onUpdatePackageDownloaded and onPackagesDownloadComplete"]
+    },
+    {
+      "va": "0x1ec4a0",
+      "name": "TClient_finishCachedFile",
+      "confidence": "high",
+      "evidence": ["Saves and updates the cached file", "Routes .gupd files to updatePackageFailed or the normal download action"]
+    },
+    {
+      "va": "0x1ec764",
+      "name": "TClient_processFileChunk",
+      "confidence": "medium",
+      "evidence": ["Emits onFileChunkReceived", "Builds the cached file state used by the file-download callbacks"]
+    },
+    {
+      "va": "0x1eccc8",
+      "name": "TClient_dispatchEncodedFileChunk",
+      "confidence": "medium",
+      "evidence": ["Checks the encoded stream and payload strings", "Forwards valid input to TClient_processFileChunk"]
+    },
+    {
+      "va": "0x1edf04",
+      "name": "TClient_handleServerLoginPacket",
+      "confidence": "high",
+      "evidence": ["Decodes the first packet character into serversignature", "Invokes onServerLogin"]
+    },
+    {
+      "va": "0x1f0de4",
+      "name": "TClient_parseEncodedFileChunk",
+      "confidence": "medium",
+      "evidence": ["Decodes the five-character numeric prefix", "Passes the decoded identifier and two substrings to TClient_processFileChunk"]
+    }
+  ],
+  "network_contacted": false
+}

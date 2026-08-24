@@ -136,7 +136,7 @@ false globally is not a safe loading-screen repair.
 ### Packet-190 flag experiments
 
 Packet 190 is correctly mapped to handler index 14 and the native
-`sub_1EB4C0` wrapper. That wrapper hides the connecting window and invokes the
+`TGUIScriptLoader_finishServerListConnect` wrapper. That wrapper hides the connecting window and invokes the
 server-list connection callback. It is not the right place to force the ARM64
 render flag.
 
