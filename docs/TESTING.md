@@ -68,6 +68,10 @@ python3 tools/patch_fixed_output_rc4_key_test.py \
   --arch arm64-v8a \
   /tmp/libqplay.http.so \
   /tmp/libqplay.diagnostic.so
+
+python3 tools/patch_render_loop_clear_loading_flag_test.py \
+  /tmp/libqplay.diagnostic.so \
+  /tmp/libqplay.render-boundary.so
 ```
 
 Place the final file in a private ARM64 APK, keep the other ABI libraries out
@@ -81,6 +85,15 @@ For a loading-sequence negative control, apply
 On ARM64 it patches `TClientEnvironment::getLoadingScreenEnabled` at
 `0x15d35c`. The observed result was no connector request and no world render,
 so this patch is not part of the working replay.
+
+The render-boundary diagnostic is a separate local test. It hooks the getter
+call at `0x244228` after timers and packet processing, uses the zero-filled
+cave at `0x1f9508`, clears the loading byte through GOT slot `0x375e30`, and
+returns to `0x24422c`. This leaves the original conditional branch in place
+and lets the normal game-draw path run after network and resource work. It
+displayed the tiled ARM64 world and HUD through the available x86_64
+translation layer. It is not a release patch because it clears the byte on
+each render iteration.
 
 ## Connector replay
 
@@ -151,11 +164,12 @@ python3 tools/game_handshake_server.py \
 
 The x86_64 diagnostic APK reaches the rendered tile field and HUD using the
 original no-swap handler table. The normal packet-190 handler removes the blue
-connecting control. This is a local synthetic success. The ARM64-only APK was
-also able to complete the connector, server warp, encrypted login, map and
-level requests, image request, and heartbeat path under the x86_64 emulator's
-translation layer, but it remained on the title or loading image. ARM64
-renderer behavior on a real device and live login remain unverified.
+connecting control. This is a local synthetic success. The ordinary ARM64
+build completes the connector, server warp, encrypted login, map and level
+requests, image request, and heartbeat path under the x86_64 emulator's
+translation layer, but remains on the title or loading image. The separate
+render-boundary diagnostic displays the ARM64 world and HUD. ARM64 behavior
+on a real device and live login remain unverified.
 
 The `--frame-after-client` option accepts
 `CLIENTTYPE@OCCURRENCE:TYPE:HEXBODY`. The occurrence is one-based and defaults

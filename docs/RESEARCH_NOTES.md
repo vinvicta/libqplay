@@ -386,6 +386,57 @@ sequencing, not an isolated loading-overlay switch. The test is retained as a
 negative control in `tools/patch_loading_screen_getter_test.py` and should not
 be used as a compatibility repair.
 
+## ARM64 render-boundary state diagnostic
+
+The next experiment kept the getter and startup path intact. The JNI render
+loop at `0x244224` runs `TClientEnvironment::runTimers`, calls the loading
+getter at `0x244228`, converts the result at `0x24422c`, and branches to the
+loading-screen path at `0x244230` when the value is nonzero. The loading flag's
+GOT slot is `0x375e30`.
+
+A first diagnostic replaced the conditional branch at `0x244230` with a NOP.
+That forced the normal game-draw path and produced a rendered ARM64 world in
+the translated emulator. It proved that the translated code can execute the
+map and GUI drawing code, but it did not tell us whether the global state was
+being read too early or whether the branch itself was the only issue.
+
+The stronger test is `tools/patch_render_loop_clear_loading_flag_test.py`. It
+replaces the getter call at `0x244228` with a branch to the zero-filled cave at
+`0x1f9508`. The cave loads the flag pointer through the existing GOT, stores a
+zero byte, sets `w0` to zero, and branches back to `0x24422c`. The original
+`UXTB` and conditional branch therefore remain in the loop. Because the hook
+runs after timers and packet processing, it does not change connector startup,
+packet dispatch, or the map transition.
+
+The final ARM64 loopback build used the corrected compatibility, resolver,
+HTTP parser, and deterministic RC4-key diagnostics followed by this render
+boundary patch. Its library SHA-256 was:
+
+```text
+9a8a7cd30ca27849469f5d4e5602c6cda9071d18f621fade56d94ef02bc1440a
+```
+
+The local responder sent the comma-separated warp body
+`,classic,127.0.0.1,14900`. The map packet and fixture used the exact name
+`classiciphone.gmap`, including the `.gmap` suffix, and packet 49 was sent
+again after the map response. The omission of that suffix caused earlier runs
+to stop before map requests, so it is part of the reproduction contract. The
+ARM64 process then requested the map, all three level containers, and
+`pics1.png`, and continued sending packet 24 heartbeats. The external cache
+contained:
+
+```text
+classiciphone.gmap                    bc061465a7705bad074e7ae872bd9d0da14ce3d420f395fc4084760c48b682a8
+overworld_west_ocean_02.nw-14900.code  9003d2474c556fb69b04a6f019523dd738b1bad6701099a08274fe5be2b30779
+pics1.png                              fe2dff5c4af86179d0cf83306a40c7e7b92d728a99f1f73a5ec2cf9c897764eb
+```
+
+The screenshot showed the tiled green world, the player HUD, and the status
+icons. This is the first ARM64 test in this investigation that preserves the
+normal packet sequence and reaches visible game drawing under translation.
+It is still a diagnostic patch because it clears the flag on every render
+iteration. A physical ARM64 device and a live service remain unverified.
+
 One negative control is worth preserving. A test build routed packet 59
 directly to the apparent x86_64 parser block at `0x2096f0`. That build did not reproduce the
 working exchange. It changed the first connection to ordinary packet 23

@@ -49,13 +49,14 @@ sequence.
 
 The same replay was run with an ARM64-only diagnostic APK. The available
 Android emulator is x86_64, so Android loaded the ARM64 library through its
-native translation layer. That build completed the connector request, server
-warp, encrypted login exchange, map request, three level-file requests,
-`pics1.png` request, and continuing heartbeats. It also populated the expected
-external cache files. The screen nevertheless stayed on the original title or
-loading image. This verifies the ARM64 transport and resource-request path in
-translation, but it is not proof that the ARM64 renderer or level transition
-works on real ARM64 hardware.
+native translation layer. The ordinary ARM64 build completed the connector
+request, server warp, encrypted login exchange, map request, three level-file
+requests, `pics1.png` request, and continuing heartbeats, but stayed on the
+title or loading image. A second diagnostic build cleared the loading byte
+only after timer and packet processing, at the JNI render boundary. That build
+displayed the tiled world, player HUD, and status icons. This proves that the
+translated ARM64 process can execute the game draw path, while the correct
+production state transition and real ARM64-device behavior remain open.
 
 The game has not yet been verified against a live game server. The local test
 proves that the x86_64 native client can reach a rendered world through a
@@ -69,6 +70,8 @@ signing, account authentication, and ARM64 rendering remain open.
 * `docs/LEVEL_CONTAINER.md` describes the encrypted `.code` level container.
 * `docs/SYMBOLS.md` explains the symbol export and naming policy.
 * `docs/RUNTIME_STATUS.md` lists verified milestones and open blockers.
+* `docs/ARM64_RENDER_REPAIR.md` records the ARM64 loading-state experiments
+  and the successful render-boundary diagnostic.
 * `docs/SPECTRON_COMPARISON.md` records the supplied modded APK comparison.
 * `docs/TESTING.md` describes local-only reproduction without contacting a
   live game service.
@@ -114,8 +117,9 @@ the analysis auditable without publishing secrets or a full game data set.
 ## Next investigation step
 
 The highest-value remaining work is live-service and ARM64 validation. The
-next checks are to verify the current connector trust and package-signing
-chain, repeat the same packet sequence on a real ARM64 device, and compare the
-live server's resource and login responses with the captured local trace. Those
+next checks are to trace the native state transition that should clear the
+loading byte, verify the current connector trust and package-signing chain,
+repeat the same packet sequence on a real ARM64 device, and compare the live
+server's resource and login responses with the captured local trace. Those
 tests should only use an endpoint and account that the operator is authorized
 to test.
