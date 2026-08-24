@@ -276,10 +276,11 @@ connection 2: client heartbeat packets 24
 ```
 
 The x86_64 emulator screenshot after this sequence shows the green tile field,
-the player HUD, and the three top-right status icons. The centered blue
-`Connecting to classic...` control is still present. This is a stronger result
-than the earlier splash-only observation because it proves the renderer path
-has run.
+the player HUD, and the three top-right status icons. In the working diagnostic
+build, a small dispatcher hook routes packet 182 to the native hide wrapper and
+the centered blue `Connecting to classic...` control is absent. This is a
+stronger result than the earlier splash-only observation because it proves the
+renderer and UI transition paths have run.
 
 The server capture contains an encrypted type 182 frame with sequence 10 and
 an empty body. Static ARM64 analysis maps packet 182 to handler index 14 and
@@ -288,8 +289,10 @@ routine and invokes `onServerListerConnect`. An x86_64 test build with a trap
 at that handler does not trap, while an otherwise identical trap at the known
 packet 48 handler does trap. The current working theory is therefore that the
 packet 182 table entry is absent or overwritten after the connector client is
-replaced for the game connection. This remains a local diagnostic result, not
-a claim about the live service's completion packet.
+replaced for the game connection. The direct x86_64 dispatcher hook proves that
+the native hide routine works, but it is only a diagnostic bypass. This remains
+a local diagnostic result, not a claim about the live service's completion
+packet.
 
 One negative control is worth preserving. A test build routed packet 59
 directly to the apparent x86_64 parser block at `0x2096f0`, bypassing the
@@ -300,6 +303,12 @@ leaves packet 59 in the repaired table, requests the three level containers and
 `pics1.png` and renders the tile field. The direct jump is therefore rejected
 as a repair even though the address itself still looks like the packet-59
 parser in static disassembly.
+
+A second negative control attempted to write `indatahandlers[182]` from the
+common return path of `setInDataHandlers`. That build also changed the normal
+package state and fell back to ordinary packet 23 requests, so the write was
+not retained as a repair. The explicit dispatcher hook is currently the only
+local completion test that preserves the working package and level sequence.
 
 The public game responder now accepts `--frame-after-client
 CLIENTTYPE[@OCCURRENCE]:TYPE:HEXBODY`. The occurrence is one-based and

@@ -86,10 +86,12 @@ python3 tools/game_handshake_server.py \
   --frame-after-client 2:182:
 ```
 
-The x86_64 diagnostic APK then reaches the rendered tile field and HUD. It
-still leaves the blue connecting control visible, and ARM64 runtime behavior
-has not been tested yet. Keep the trap and force-hide patchers in the private
-working tree. They are investigation aids, not release repairs.
+The x86_64 diagnostic APK reaches the rendered tile field and HUD. The
+packet-182 dispatcher and force-hide diagnostic hooks remove the blue
+connecting control in the local screenshot. The normal script-installed table
+entry remains unresolved, and ARM64 runtime behavior has not been tested yet.
+Keep the trap and force-hide patchers in the private working tree. They are
+investigation aids, not release repairs.
 
 The `--frame-after-client` option also accepts
 `CLIENTTYPE@OCCURRENCE:TYPE:HEXBODY`. The occurrence is one-based and defaults

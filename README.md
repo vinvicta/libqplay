@@ -38,14 +38,16 @@ image responses. A separate experiment that forced packet 59 directly to the
 apparent file-parser address made the first connection request the wrong
 resources, so that override is not part of the working diagnostic path.
 
-The blue connecting control remains visible because packet 182 is present in
-the encrypted capture but does not reach the native handler that static
-analysis associates with hiding that control. This is the active runtime
-blocker, not a claim that the live service is working.
+An x86_64-only diagnostic dispatcher routes packet 182 directly to the native
+hide wrapper. With that test hook and the force-hide visibility repair, the
+connecting control disappears and the local synthetic world remains rendered.
+The normal script-installed packet-182 table entry is still unresolved, and
+the live service has not been tested.
 
 The game has not yet been verified against a live game server. The local test
-client renders a synthetic world but still displays its connecting control.
-That is an active investigation item, not a claimed success.
+client renders a synthetic world, and the working x86_64 diagnostic build hides
+the connecting control through an explicit packet-182 test hook. That hook is
+an investigation aid, not a claimed production repair.
 
 ## Repository layout
 

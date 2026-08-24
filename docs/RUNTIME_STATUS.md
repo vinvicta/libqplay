@@ -25,7 +25,10 @@ This is the short handoff view. The full reasoning and command history are in
 9. The emulator renders the level tile field and the game HUD. This proves the
    map, player-property, level-container, image, and renderer paths can all run
    in a controlled local test.
-10. The symbol translation pass applied 8,601 names to the ARM64 IDA database
+10. An x86_64 diagnostic dispatcher can route packet 182 directly to the
+    native hide wrapper. With the force-hide visibility repair, the rendered
+    world remains visible without the centered connecting control.
+11. The symbol translation pass applied 8,601 names to the ARM64 IDA database
     with zero rename failures.
 
 ## Not verified
@@ -40,24 +43,26 @@ This is the short handoff view. The full reasoning and command history are in
 
 ## Current blocker
 
-The local client renders the world but keeps the centered blue `Connecting to
-classic...` control visible. The responder sends a NewGraal type 182 frame
-after the first ordinary client packet. The complete outgoing capture contains
-that frame, but an x86_64 trap at the native handler mapped to packet 182 is not
-hit. A matching trap at the known packet 48 server-warp handler is hit, so the
-probe is exercising native dispatch correctly.
+The remaining repair is the normal script-installed packet-182 mapping. The
+responder sends a NewGraal type 182 frame after the first ordinary client
+packet. The complete outgoing capture contains that frame, but an x86_64 trap
+at the handler selected by the normal table is not hit. A matching trap at the
+known packet 48 server-warp handler is hit, so the probe is exercising native
+dispatch correctly.
 
-The most likely remaining issue is that the packet 182 entry is missing or
-overwritten in the input-handler table after the connector client is replaced
-for the game connection. The static ARM64 table maps packet 182 to handler
-index 14, `sub_1EB4C0`, which calls
-`TGUIScriptLoader_hideConnectingWindow`. That static mapping and the local
-runtime behavior do not yet agree.
+An x86_64 diagnostic dispatcher routes packet 182 directly to
+`TGUIScriptLoader_hideConnectingWindow`, and the force-hide build then produces
+the expected no-connecting-control screenshot. That proves the native wrapper
+and UI path work. It does not yet explain why the connector script's table
+entry is missing or overwritten after the game connection. The static ARM64
+table maps packet 182 to handler index 14, `sub_1EB4C0`.
 
 The level loader is no longer the first suspect. The tile field and HUD render
 after the corrected two-connection sequence. The next focused experiment is to
 inspect or instrument the live `indatahandlers[182]` value on the second
-connection, then test the same sequence on ARM64.
+connection, then test the same sequence on ARM64. The local UI result is now
+handled by a diagnostic hook, but the production-quality table repair remains
+open.
 
 An attempted shortcut that routed every packet 59 directly to the apparent
 file-parser address was rejected by comparison. It changed the client's first

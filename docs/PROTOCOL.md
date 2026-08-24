@@ -208,6 +208,13 @@ is reached, so this is evidence of a missing or overwritten runtime table entry
 on the game connection, not proof that packet 182 is the live server's final
 login-complete message.
 
+The UI path itself is confirmed by a separate x86_64 diagnostic dispatcher. It
+checks for packet 182 in `TClient_processIncomingPackage` and calls the same
+native hide wrapper directly. Together with the force-hide visibility repair,
+that build removes the connecting control while keeping the rendered world.
+This isolates the unresolved problem to script-installed table state rather
+than the native hide routine.
+
 The generic packet-59 entry must remain under the repaired table. A diagnostic
 build that jumped packet 59 directly to the apparent parser block at x86_64
 `0x2096f0` did not behave like the normal table path. It requested ordinary
@@ -244,5 +251,6 @@ packet 24 heartbeat frames continue
 The responder logs the requested names and sends re-keyed encrypted level
 containers. The client remains connected and sends ping frames. With the
 correct two-connection sequence, the emulator renders the tile field and HUD,
-but the blue connecting control remains visible. The remaining UI transition
-is not yet explained.
+and the x86_64 diagnostic packet-182 hook removes the connecting control. The
+normal script-installed packet-182 table entry remains unresolved, and ARM64
+runtime behavior has not been tested.
