@@ -13,8 +13,10 @@
   },
   "patches": {
     "connector_rsa_diagnostic": {
-      "purpose": "Continue past a stale archived connector package whose RSA signature does not match the embedded verification key.",
+      "purpose": "Continue past a connector package whose signature does not match the embedded verification key, for controlled mismatch testing.",
       "production_status": "rejected",
+      "saved_fixture_native_signature_valid": true,
+      "saved_fixture_rsa_bypass_needed": false,
       "sites": {
         "x86_64": {
           "native_offset": "0x245009",
@@ -26,6 +28,31 @@
           "original": "dc 00 00 35",
           "replacement": "06 00 00 14"
         }
+      }
+    },
+    "connector_test_public_key": {
+      "purpose": "Preserve the native RSA result branch while testing a locally generated connector package with a matching controlled key.",
+      "production_status": "rejected",
+      "key_encoding": "DES-wrapped base64 PKCS#1 RSAPublicKey DER",
+      "replacement_key_der_bytes": 270,
+      "replacement_key_der_sha256": "5dff27a209730bdc52b4c182e85411dcdf584659d94dddca25062cfdae149cd9",
+      "replacement_base64_length": 360,
+      "private_key_committed": false,
+      "sites": {
+        "x86_64": {
+          "native_offset": "0x3003d8",
+          "original_value_length": 360
+        },
+        "arm64-v8a": {
+          "native_offset": "0x2e1798",
+          "original_value_length": 360
+        }
+      },
+      "generated_control_package": {
+        "size": 16446,
+        "sha256": "d26035d9569789c2d6a60fb52673e91877a58e221117ca987a08dcbd674045be",
+        "native_raw_signature_verified": true,
+        "runtime_verified": false
       }
     },
     "connector_certificate_diagnostic": {
@@ -80,6 +107,11 @@
       "verdict": "A zero-second poll timeout is not sufficient to explain the complete failure."
     },
     {
+      "name": "Native connector RSA verification correction",
+      "observed": "The saved 16,446-byte connector body passes the embedded-key check when wolfSSL's raw SHA-256 RSA-SSL block is reproduced. The standard ASN.1 DigestInfo check fails because it is the wrong signature format.",
+      "verdict": "The saved fixture does not need the RSA-result bypass. A no-bypass runtime replay remains to be run."
+    },
+    {
       "name": "Force HTTPS through HTTP transport",
       "observed": "The request reached the local HTTP listener but the client still remained on the splash screen until the package and RSA checks were handled separately.",
       "verdict": "Changing transport alone is not a repair."
@@ -115,8 +147,21 @@
     "image": "pics1.png",
     "heartbeats": true,
     "render_screenshot_sha256": "fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e",
+    "rsa_bypass_used_in_replay": true,
+    "rsa_bypass_needed_for_saved_fixture": false,
+    "no_rsa_bypass_runtime_verified": false,
     "live_service_verified": false,
     "physical_arm64_device_verified": false
+  },
+  "package_preserving_x86_candidate": {
+    "apk_sha256": "e794a8c096de46d14e2a98142fd8082c003d4b05e30fd9735e187c365d8e86ab",
+    "native_sha256": "c96bd6a75631efcfc17b39d19370573ff1bb8acbb2066f20b10073c3517a3f59",
+    "rsa_result_site_original_bytes": "75 1d",
+    "certificate_diagnostic_applied": true,
+    "loopback_transport_diagnostics_applied": true,
+    "signature_schemes_verified": ["v1", "v2", "v3"],
+    "runtime_verified": false,
+    "scope": "private x86_64 package prepared for the saved loopback response"
   },
   "production_boundary": [
     "Obtain a current connector response for the exact client query.",

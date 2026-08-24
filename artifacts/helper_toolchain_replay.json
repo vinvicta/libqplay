@@ -48,6 +48,23 @@
     "wolfssl_commit": "cb138b22a2e9111e5ac9fb9e13a690762c86b884",
     "embedded_public_der_sha256": "35e7245d68e6ab6c84bd55061704fe2d3d16800cbe0a671aceae6c85e1301b82",
     "test_signing_public_der_sha256": "07714f7eac2ff6e3236f2887ebab9c367714120c834acff3f745e674ccd46d1a",
+    "native_rsa_signature_scheme": "wolfssl-rsa-ssl-raw-sha256",
+    "native_rsa_ida_evidence": {
+      "verify_wrapper_va": "0xf758c",
+      "rsa_verify_va": "0x2bffa4",
+      "digest_compare_helper_va": "0xf1da8",
+      "comparison": "RsaSSL_Verify recovered message equals SHA-256(encrypted_payload)",
+      "standard_digestinfo_form": false
+    },
+    "controlled_key_test": {
+      "public_pkcs1_der_bytes": 270,
+      "public_pkcs1_der_sha256": "5dff27a209730bdc52b4c182e85411dcdf584659d94dddca25062cfdae149cd9",
+      "connector_package_bytes": 16446,
+      "connector_package_sha256": "d26035d9569789c2d6a60fb52673e91877a58e221117ca987a08dcbd674045be",
+      "native_raw_signature_valid": true,
+      "private_key_committed": false,
+      "runtime_verified": false
+    },
     "legacy_zip_header_patch": {
       "general_purpose_flag": "0x0002",
       "dos_time": "0xffff",
@@ -59,7 +76,7 @@
     "generated_connector_bytes": 16446,
     "generated_connector_sha256": "c242e73cf1abf7a4bd80fa1c5e2e17a1f569960937a83f52cfda1c422307392a",
     "extracted_zip_sha256": "fc937afa039dff52ff4ae7f2e3ad809d75c19f5698875d862e5646644446b2b5",
-    "outer_signature_note": "The test signer differs from the APK's embedded verification key. The local ARM64 replay uses an explicit diagnostic signature bypass."
+    "outer_signature_note": "The saved archived response passes the native raw-digest check with the APK's embedded key. The local ARM64 replay used an explicit diagnostic signature bypass before that verifier format was identified; the bypass is not needed for the saved response."
   },
   "spectron_comparison": {
     "apk_sha256": "5b10289ad2b67fba77f5f4159d51cdbeaf4ca2710fb1459da69c8d4b1af5149c",

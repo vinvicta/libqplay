@@ -26,10 +26,12 @@ and applied names with zero rename failures:
 
 The old connector has a concrete compatibility problem. Its embedded
 GraalWeb certificate expired on 2023-07-29, so the original HTTPS path cannot
-be trusted by a current clock. The archived connector package also fails the
-RSA check against this APK's embedded public key. Both findings are separate
-from the game-server protocol and are handled only by private diagnostic
-patches in the local test build.
+be trusted by a current clock. The saved connector fixture is structurally
+valid and passes the native wolfSSL raw-digest RSA check against this APK's
+embedded public key. An earlier parser reported the opposite because it used
+the standard ASN.1 `DigestInfo` form. The certificate problem remains real,
+and both it and any response signed by a different key must stay separate from
+the game-server protocol.
 
 The certificate payload is a five-entry PEM bundle. The native path uses the
 ordinary base64 alphabet, DES-ECB with bit-reversed key bytes, and a seven-byte
@@ -126,7 +128,10 @@ for the connector fixture only, not for arbitrary GS2 scripts.
   the small source change needed for the old client's ZIP reader, and
   `tools/reverse_hexaparser_literals.py` records the narrow compiler adapter.
   `tools/decode_graalweb_cert_bundle.py` recovers certificate metadata from
-  the original ARM64 library without contacting a service.
+  the original ARM64 library without contacting a service. The offline
+  connector parser mirrors the native raw-digest RSA check, and
+  `tools/patch_connector_test_public_key.py` supports a private controlled-key
+  diagnostic without including a private key.
 * `artifacts/` contains small metadata exports. APKs, certificates, private
   keys, captured credentials, and game assets are intentionally not included.
 

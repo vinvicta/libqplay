@@ -5,9 +5,13 @@ This is an offline patcher for the two APK architectures.  It deliberately
 checks every original byte before writing, so it cannot silently patch a
 different library revision.
 
-Diagnostics:
+Diagnostics, enabled by default:
   * accept connector packages whose RSA signature no longer verifies; and
   * disable the expired embedded GraalWeb certificate check.
+
+Use ``--skip-rsa-bypass`` when the response is already known to pass the
+native wolfSSL check. The saved local connector fixture does, so this option
+is the correct starting point for a package-preserving replay.
 
 The last two repairs are compatibility diagnostics for this archival client;
 they should only be used with a trusted connector/server endpoint.
@@ -39,6 +43,11 @@ PATCHES = {
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--arch", choices=sorted(PATCHES), required=True)
+    parser.add_argument(
+        "--skip-rsa-bypass",
+        action="store_true",
+        help="leave the native connector RSA result branch unchanged",
+    )
     parser.add_argument("input", type=Path)
     parser.add_argument("output", type=Path)
     args = parser.parse_args()
@@ -51,6 +60,9 @@ def main() -> None:
                 f"unexpected bytes at 0x{address:x} for {description}: "
                 f"{actual.hex(' ')}"
             )
+        if args.skip_rsa_bypass and description == "accept connector RSA result":
+            print(f"left 0x{address:x} unchanged: {description}")
+            continue
         blob[address : address + len(replacement)] = replacement
         print(f"patched 0x{address:x}: {description}")
 

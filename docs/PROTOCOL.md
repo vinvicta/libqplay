@@ -106,12 +106,24 @@ per-package RC4 key from `.rk`, and uses that key for the remaining entries.
 `tools/parse_connector_response.py` checks the framing and outer ZIP. The
 decoder in `tools/decode_connector_scripts.py` checks the inner package.
 
-The archived body has a valid ZIP but its RSA signature does not verify
-against the public key recovered from this APK. That is a useful diagnostic
-result. It means that package is stale, belongs to another connector key, or
-was captured for another client revision. It does not prove that the current
-service would reject the real request. The local test bypasses this branch
-only to study the native code after the package boundary.
+The signature check has a native detail that is easy to miss. At ARM64
+`0x22c588`, the client hashes the encrypted payload with SHA-256, then calls
+`TEncryption_rsa_verify` at `0xf758c`. IDA shows that wrapper calling
+`CyaInt_RsaSSL_Verify` and comparing the recovered message with the digest.
+That wolfSSL helper uses a PKCS#1 type-1 block containing the raw 32-byte
+digest. It does not contain the ASN.1 `DigestInfo` wrapper expected by a
+standard high-level `public_key.verify(..., SHA256())` call. The parser now
+reports this native result as `rsa_signature_valid` and keeps the standard
+form as a separate `standard_rsa_signature_valid` diagnostic field.
+
+The saved archived body has a valid ZIP and its RSA signature does verify
+against the public key recovered from this APK when the native raw-digest
+format is used. The earlier standard-form check was a parser error, not
+evidence that this fixture was stale. A response signed by another connector
+key would still fail this branch, and the current live service remains
+unverified. The first replay used an RSA-result bypass before this correction;
+the `--skip-rsa-bypass` option in `tools/patch_compatibility_repairs.py` keeps
+the native check intact for the saved fixture.
 
 ## 3. Certificate finding
 

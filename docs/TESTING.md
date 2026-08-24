@@ -280,6 +280,21 @@ Validate a connector body without opening a socket:
 python3 tools/parse_connector_response.py /tmp/con.png
 ```
 
+The report's `rsa_signature_valid` field mirrors the native wolfSSL
+`RsaSSL_Verify` path. It checks a PKCS#1 type-1 block containing the raw
+SHA-256 digest of the encrypted payload. `standard_rsa_signature_valid` is
+kept as a comparison field for the ASN.1 `DigestInfo` form used by common
+high-level Python APIs. The saved archived response passes
+`rsa_signature_valid` and fails only the standard comparison field. A response
+signed by another key can fail the native field. A local test package signed
+with a matching controlled key also passes the native field when the library's
+embedded key is replaced with `tools/patch_connector_test_public_key.py` in a
+private copy.
+
+For the saved response, pass `--skip-rsa-bypass` to
+`tools/patch_compatibility_repairs.py` so the native package check remains
+unchanged while the expired certificate diagnostic is applied.
+
 Decode a previously captured NewGraal stream with the known diagnostic
 outgoing key:
 

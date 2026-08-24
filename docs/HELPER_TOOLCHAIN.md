@@ -208,10 +208,14 @@ NPCS/StartScript_Connector     15,581 bytes
 
 This independently confirms the outer response layout and RC4 stream key
 used by the local parser. `conn-extract` is an archive extraction check, not a
-signature-verification check. The existing parser still reports that the
-archived response's RSA signature does not match the public key embedded in
-the APK. That stale-package result remains a compatibility diagnostic, not a
-production trust decision.
+signature-verification check. The parser also reproduces the native wolfSSL
+signature format now. It hashes the encrypted payload with SHA-256, recovers
+the raw message from the RSA type-1 block, and compares the two byte strings.
+The standard ASN.1 `DigestInfo` form is reported separately because the old
+client does not use it. The saved archived response passes the native check
+against the public key embedded in the APK. The earlier stale-package result
+was caused by the wrong high-level verifier, not by this fixture's signing
+key.
 
 The optional `conpack_wsl.c` creator initially stopped at the missing
 `wolfssl/wolfcrypt/rsa.h` header. Cloning the wolfSSL source at commit
@@ -232,8 +236,18 @@ The supplied `outer-private.rsa.der` derives to public-key SHA-256
 the APK's embedded public DER is
 `35e7245d68e6ab6c84bd55061704fe2d3d16800cbe0a671aceae6c85e1301b82`.
 The helper key is therefore useful for testing a custom packer, but it is not
-automatically trusted by the original APK. The local ARM64 candidate uses a
-diagnostic package-signature bypass for this bounded test.
+automatically trusted by the original APK. The local ARM64 candidate used a
+diagnostic package-signature bypass before the native verifier correction. The
+saved fixture can now be replayed with that RSA bypass omitted.
+
+The native-key substitution helper provides a stronger, still private test.
+`tools/patch_connector_test_public_key.py` replaces the encrypted connector
+key text at ARM64 `0x2e1798` or x86_64 `0x3003d8` with a locally generated
+public key. It checks the original 360-character text before writing and does
+not carry the matching private key. A `con.png` generated with that private
+key passed the native raw-digest verifier. This preserves the RSA branch and
+isolates the earlier package-key mismatch from the separate certificate and
+loading-state experiments. It is a test harness, not a production key update.
 
 The first packages produced by the unmodified helper were valid ZIP files,
 but the old client rejected them before the script ran. Comparing the

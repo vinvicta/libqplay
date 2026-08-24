@@ -120,10 +120,34 @@ big-endian payload length, and the encrypted ZIP. The archived body is 16,446
 bytes and decrypts to a valid ZIP containing `.rk`, `.t`, and
 `NPCS/StartScript_Connector`.
 
-The body does not validate against the public key recovered from this APK.
-The package is therefore a stale or mismatched artifact for a strict client.
-The local test has a narrowly scoped RSA branch bypass so the script compiler
-can be studied. That bypass is not a safe release repair.
+The saved body validates against the public key recovered from this APK when
+the native wolfSSL raw-digest format is reproduced. The first local replay
+still used a narrowly scoped RSA branch bypass because the initial offline
+checker used the standard ASN.1 `DigestInfo` form. That bypass is not needed
+for this saved fixture, although it remains a diagnostic for a package signed
+by another key.
+
+There was a second parser correction here. The first offline checker used
+Python's standard PKCS#1 signature API, which looks for an ASN.1 `DigestInfo`
+prefix. The native code does something more specific: it hashes the encrypted
+payload, calls wolfSSL `RsaSSL_Verify`, and compares the recovered message with
+the raw 32-byte digest. IDA confirms that comparison in
+`TEncryption_rsa_verify` at `0xf758c` and its equality helper at `0xf1da8`.
+The parser now mirrors the native type-1 block and reports the standard form
+separately, so a valid native signature will not be mislabeled as invalid just
+because it uses the old wolfSSL API.
+
+To test that conclusion without changing the production key, a new helper
+can replace the embedded connector public key in a private copy of the
+library. The replacement is generated from a local test key, and a matching
+`con.png` made by the supplied `Moreno.kahn` tool passes the native raw-digest
+check. The test package is 16,446 bytes with SHA-256
+`d26035d9569789c2d6a60fb52673e91877a58e221117ca987a08dcbd674045be`.
+The raw PKCS#1 public-key DER used for this bounded test is 270 bytes with
+SHA-256 `5dff27a209730bdc52b4c182e85411dcdf584659d94dddca25062cfdae149cd9`.
+The private key stays outside the repository. This proves the parser and
+packer agree on the native format, not that the old production key or live
+connector is still accepted.
 
 The response-header finding needed a correction after a second IDA pass. The
 function `THTTPRequest_preParseData_void` at `0x201d68` lowercases each header
@@ -170,9 +194,9 @@ was a negative control. It changed the table enough to break the normal
 protocol sequence, so it is no longer included in the compatibility patcher.
 
 This conclusion is independent of the expired connector certificate and the
-stale package signature. Keeping those diagnostics separate makes it clear
-which changes are needed to study the client and which bytes are already
-correct.
+corrected package-signature result. Keeping those diagnostics separate makes
+it clear which changes are needed to study the client and which bytes are
+already correct.
 
 ## NewGraal key exchange
 
@@ -349,9 +373,12 @@ and connecting-window transition all run in the bounded local test.
 
 ## ARM64 diagnostic replay
 
-The ARM64 diagnostic build uses four independent native edits. The connector
-compatibility patch accepts the stale package signature at `0x22c5c8` and skips
-the expired GraalWeb certificate setup at `0x20ab20`. The loopback resolver at
+The ARM64 diagnostic build uses four independent native edits. The first
+replay used the connector compatibility patch at `0x22c5c8` and skipped the
+expired GraalWeb certificate setup at `0x20ab20`. The corrected native parser
+shows that the saved connector fixture would pass without the RSA edit; the
+patcher now supports `--skip-rsa-bypass` for that package-preserving variant.
+The loopback resolver at
 `0x206108` returns network-order `127.0.0.1`. The HTTP parser test patch forces
 the connector request through port `18080` without TLS at `0x200de0`,
 `0x200df0`, `0x200df4`, `0x200f74`, and `0x200f78`.
@@ -584,9 +611,10 @@ Moreno.kahn's Linux `contool` built cleanly. Its `conn-extract` output for
 `fc937afa039dff52ff4ae7f2e3ad809d75c19f5698875d862e5646644446b2b5`, exactly
 matching `analysis/live_connector_payload_local.zip`. The archive lists `.rk`,
 `.t`, and `NPCS/StartScript_Connector`, which independently confirms the
-outer length wrapper and RC4 extraction. This command does not verify the
-embedded RSA signature, so the existing stale-signature finding remains
-unchanged.
+outer length wrapper and RC4 extraction. The corrected offline parser
+separately verifies the embedded RSA signature in the native wolfSSL format.
+The saved response passes that check. The standard ASN.1 verifier still
+reports false because it is not the format used by this client.
 
 The optional `conpack_wsl.c` creator was built after wolfSSL was checked out at
 commit `cb138b22a2e9111e5ac9fb9e13a690762c86b884`. The helper's

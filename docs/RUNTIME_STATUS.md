@@ -11,8 +11,10 @@ This is the short handoff view. The full reasoning and command history are in
 3. The connector request shape is known, including the `p=` query, the
    legacy HTTP/1.0 headers, and the three fallback modes.
 4. The archived connector body has valid framing and decrypts to a valid
-   three-entry ZIP. Its RSA signature does not match the embedded public key,
-   which is why the diagnostic replay uses an explicit test-only bypass.
+   three-entry ZIP. Its RSA signature passes the native wolfSSL raw-digest
+   check against the embedded public key. The first replay used an explicit
+   RSA bypass because the original offline checker used the wrong signature
+   format; a package-preserving replay should leave that branch unchanged.
 5. The response parser lowercases header lines before matching them. Local
    replay variants with lowercase or title-case names, and with either
    `Connection: keep-alive` or `Connection: close`, all reached the game
@@ -75,6 +77,14 @@ This is the short handoff view. The full reasoning and command history are in
     `fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`.
     This is a local translated-ARM64 result, not a release APK or a physical
     ARM64-device result.
+19. The corrected offline parser reproduces the native raw-digest RSA check.
+    The saved connector response passes with the embedded key, so the RSA
+    bypass used by the first replay is not required for that fixture.
+20. A private package-preserving x86_64 candidate was built with the original
+    RSA bytes, the certificate diagnostic, loopback transport patches, and the
+    fixed local handshake key. Its APK SHA-256 is
+    `e794a8c096de46d14e2a98142fd8082c003d4b05e30fd9735e187c365d8e86ab`.
+    It has not been rerun because the local emulator is no longer available.
 
 ## Not verified
 
@@ -115,6 +125,13 @@ clear, and the packet-190 completion wrapper does not change it. The
 non-premium initialization candidate and the independent render-boundary
 control both displayed the world and HUD. A real ARM64 device is still
 needed for final runtime validation.
+
+One earlier blocker has been removed from the list. The saved connector
+response was initially treated as unsigned because the offline checker used
+the wrong RSA encoding. IDA and the corrected parser show that it passes the
+native wolfSSL raw-digest check. The remaining connector concerns are the
+expired HTTPS trust bundle and the behavior of the current live endpoint, not
+the saved fixture's RSA branch.
 
 The remaining blockers are external validation rather than an identified
 local parser failure:

@@ -5,10 +5,11 @@ appropriate for a release client. Every patch was applied to a private copy,
 and the patch scripts check the original bytes before changing them.
 
 The most important result is that there is not one failure with one switch.
-The old connector has an expired trust bundle and a stale archived package can
-fail its RSA check. After those boundaries are passed in a loopback replay,
-the ARM64 client still has a loading-state gate that can keep drawing the
-title or loading image after network and resource work has completed.
+The old connector has an expired trust bundle. A response signed by another
+connector key can fail its RSA check, but the saved archived fixture passes the
+native raw-digest check. After the trust boundary is handled in a loopback
+replay, the ARM64 client still has a loading-state gate that can keep drawing
+the title or loading image after network and resource work has completed.
 
 ## Connector diagnostics
 
@@ -17,7 +18,9 @@ title or loading image after network and resource work has completed.
 | Certificate skip | Return from `TSocketConnection::setVerifyGraalWebCert` at ARM64 `0x20ab20` or x86_64 `0x222270` | The HTTPS attempt reached port 443, but the client still stayed on the splash screen | Useful isolation test, not sufficient |
 | Longer connect poll | Change the x86_64 zero-second poll timeout to five seconds | The client still stayed on the splash screen | Not the complete cause |
 | HTTP transport redirect | Force the recognized HTTPS parser result to port 80 with SSL disabled | The local HTTP request was received, but transport alone did not advance the client | Not a repair |
-| RSA result bypass | Accept the archived package at ARM64 `0x22c5c8` or x86_64 `0x245009` | The local script could be studied and the game-server handoff could be reached | Diagnostic only |
+| Native RSA path retained | Leave the RSA branch at its original bytes and use the saved response, which passes the native raw-digest check | A package-preserving x86_64 APK was built with original RSA bytes `75 1d`; runtime rerun is pending | Preferred package test |
+| RSA result bypass | Accept a response that fails the native package-signature check at ARM64 `0x22c5c8` or x86_64 `0x245009` | Used by the early replay before the raw wolfSSL format was identified. The saved archived fixture passes without it | Unnecessary for the saved fixture, diagnostic only for mismatched packages |
+| Controlled connector key | Replace the encrypted embedded key at ARM64 `0x2e1798` or x86_64 `0x3003d8` in a private library copy, then sign a local package with the matching test key | The generated 16,446-byte package passed the native wolfSSL raw-digest RSA check without bypassing the result branch | Diagnostic only |
 | Blocking socket I/O | Make all socket operations blocking | The renderer froze | Rejected |
 
 The certificate skip is narrowly scoped to the connector path. IDA shows that
@@ -27,11 +30,24 @@ connector request. The ordinary game connection is created by
 through `TGraalConnection::setSSLVerifyCert`. This is why the two trust paths
 must not be described as one global Android SSL-pinning problem.
 
-The archived package's RSA result is a separate boundary. Skipping it was
-useful for replaying the package locally, but it removes an authenticity check.
-A release client needs a current package signed by the key it is authorized to
-trust. The local package used for the final replay was signed with a temporary
+The archived package's RSA result is a separate boundary. The saved fixture
+passes it when checked in the native format, so a package-preserving replay
+should leave the branch unchanged. Skipping it remains useful for studying a
+package from another key, but it removes an authenticity check. A release
+client needs a current package signed with the key it is authorized to trust.
+The local package used for the first replay was signed with a temporary
 diagnostic key and must not be treated as a release artifact.
+
+The controlled-key experiment is a stronger test of the parser and packer,
+not a replacement for the bypass. `tools/patch_connector_test_public_key.py`
+rewrites the native DES-wrapped key text only after checking the original
+360-character value. The local raw PKCS#1 public-key DER is 270 bytes with
+SHA-256
+`5dff27a209730bdc52b4c182e85411dcdf584659d94dddca25062cfdae149cd9`.
+The matching package has SHA-256
+`d26035d9569789c2d6a60fb52673e91877a58e221117ca987a08dcbd674045be`.
+The private test key is not committed, and no runtime APK using this key was
+treated as a production build.
 
 ## Loading-state diagnostics
 
@@ -77,7 +93,7 @@ contains only the connector RSA and certificate edits. The loading-state
 experiments have separate names so a test operator cannot accidentally assume
 that a renderer control is part of the connector repair.
 
-The complete private replay used these controls:
+The first complete private replay used these controls:
 
 1. connector RSA diagnostic bypass;
 2. connector certificate diagnostic bypass;
@@ -88,7 +104,10 @@ The complete private replay used these controls:
 It reached two game connections, `classiciphone.gmap`, three level containers,
 `pics1.png`, continuing heartbeats, and a rendered world. The APK and native
 hashes, plus the screenshot hash, are in the JSON artifact and
-`docs/RUNTIME_STATUS.md`. No live service or physical ARM64 device was used.
+`docs/RUNTIME_STATUS.md`. The corrected parser shows that the RSA bypass was
+not required for the saved archived response, but the no-bypass runtime
+variant has not yet been rerun. No live service or physical ARM64 device was
+used.
 
 ## What a real repair still needs
 

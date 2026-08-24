@@ -2,8 +2,8 @@
 """Parse and validate a legacy libqplay connector response offline.
 
 The native implementation reverses the bit order in every DES key byte.  The
-script mirrors that detail, validates the signed-package envelope, attempts
-the embedded RSA signature check, and RC4-decrypts the payload for ZIP
+script mirrors that detail, validates the signed-package envelope, reproduces
+the native wolfSSL RSA-SSL check, and RC4-decrypts the payload for ZIP
 inspection.  It never opens a network connection.
 """
 
@@ -69,6 +69,46 @@ def rc4(key: bytes, data: bytes) -> bytes:
     return bytes(out)
 
 
+def native_rsa_ssl_recover(public_key, signature: bytes) -> bytes | None:
+    """Recover the raw message accepted by wolfSSL ``RsaSSL_Verify``.
+
+    The native wrapper calls ``RsaSSL_Verify`` and then compares its recovered
+    message with the 32-byte SHA-256 digest calculated from the encrypted
+    payload.  This is the PKCS#1 v1.5 type-1 block used by wolfSSL's
+    ``RsaSSL_Sign`` and ``RsaSSL_Verify`` helpers.  It is not the ASN.1
+    ``DigestInfo`` encoding used by ``cryptography``'s high-level
+    ``public_key.verify(..., hashes.SHA256())`` API.
+    """
+
+    numbers = public_key.public_numbers()
+    modulus_length = (public_key.key_size + 7) // 8
+    if len(signature) != modulus_length:
+        return None
+
+    signature_integer = int.from_bytes(signature, "big")
+    if signature_integer >= numbers.n:
+        return None
+    encoded_message = pow(signature_integer, numbers.e, numbers.n).to_bytes(
+        modulus_length, "big"
+    )
+    if encoded_message[:2] != b"\x00\x01":
+        return None
+
+    separator = encoded_message.find(b"\x00", 2)
+    if separator < 10:
+        return None
+    if any(byte != 0xFF for byte in encoded_message[2:separator]):
+        return None
+    return encoded_message[separator + 1 :]
+
+
+def native_rsa_ssl_verify(public_key, signature: bytes, expected_message: bytes) -> bool:
+    """Return whether native wolfSSL verification recovers ``expected_message``."""
+
+    recovered_message = native_rsa_ssl_recover(public_key, signature)
+    return recovered_message == expected_message
+
+
 def parse_response(body: bytes) -> tuple[bytes, bytes, bytes]:
     if len(body) < 8:
         raise ValueError("response is shorter than the signed-package header")
@@ -96,7 +136,10 @@ def main() -> None:
     key_der = native_des_decrypt(base64.b64decode(EMBEDDED_RSA_KEY_B64))
     public_key = serialization.load_der_public_key(key_der)
 
-    signature_valid = False
+    expected_digest = hashlib.sha256(encrypted_payload).digest()
+    signature_valid = native_rsa_ssl_verify(public_key, signature, expected_digest)
+
+    standard_signature_valid = False
     try:
         public_key.verify(
             signature,
@@ -104,10 +147,10 @@ def main() -> None:
             padding.PKCS1v15(),
             hashes.SHA256(),
         )
-        signature_valid = True
+        standard_signature_valid = True
     except Exception:
-        # Invalid signatures are an expected diagnostic result for stale or
-        # queryless endpoint bodies; keep the report machine-readable.
+        # The historical connector uses the native raw-digest form. A failure
+        # here is expected even for a valid native signature.
         pass
 
     decrypted_payload = rc4(RC4_KEY, encrypted_payload)
@@ -133,9 +176,12 @@ def main() -> None:
         "framing_end": 8 + len(signature) + len(encrypted_payload),
         "trailing_length": len(trailing),
         "encrypted_payload_sha256": hashlib.sha256(encrypted_payload).hexdigest(),
+        "rsa_signature_scheme": "wolfssl-rsa-ssl-raw-sha256",
+        "expected_rsa_message_length": len(expected_digest),
         "embedded_public_key_der_length": len(key_der),
         "embedded_public_key_der_sha256": hashlib.sha256(key_der).hexdigest(),
         "rsa_signature_valid": signature_valid,
+        "standard_rsa_signature_valid": standard_signature_valid,
         "decrypted_payload_length": len(decrypted_payload),
         "decrypted_payload_sha256": hashlib.sha256(decrypted_payload).hexdigest(),
         "zip_valid": zip_valid,
