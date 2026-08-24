@@ -106,15 +106,26 @@ Spectron package therefore does not fix the expired connector trust chain by
 embedding a newer certificate. Any working behavior in that package must come
 from its separate routing, hook, package, or service logic.
 
+The connector signing key is not different either. The 360-character
+DES-wrapped public-key text following `PjosLg8D` is byte-for-byte identical
+in the two ARM64 libraries. A raw Base64 decode is encrypted data, not DER;
+after the native bit-reversed DES transform it produces the same 269-byte RSA
+public key as `analysis/libqplay.public.der`, SHA-256
+`35e7245d68e6ab6c84bd55061704fe2d3d16800cbe0a671aceae6c85e1301b82`. This
+rules out the Spectron key as a source of a current connector signing key.
+
 ## Java observations
 
 The Java dex files still use the normal Graal activity and renderer bridge:
 `QPlayActivity` creates the native renderer and `QPlayRenderer` calls
 `Natives.QPlayMain`. The activity has fields and methods named
 `signingCertificate`, `GetSigningCertificate`, and `SetSigningCertificate`.
-Those names may refer to application signing or entitlement checks. They are
-not enough to conclude that they hold the HTTPS server certificate or that
-they implement certificate pinning.
+The newer Spectron activity passes `GetSigningCertificate()` into
+`PiracyChecker.enableSigningCertificate()` and enables an unauthorized-apps
+check. This is an application-signature entitlement check, not the native
+HTTPS trust bundle. The original 1.8 dex does not contain this Spectron
+PiracyChecker path. These names therefore do not identify an old-client TLS
+pinning bypass.
 
 The dex strings do not expose an obvious `con.quattroplay.com` or game-login
 hostname. The native library does contain loopback and URL strings, so a
