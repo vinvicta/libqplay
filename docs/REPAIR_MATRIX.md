@@ -17,6 +17,7 @@ the title or loading image after network and resource work has completed.
 | --- | --- | --- | --- |
 | Certificate skip | Return from `TSocketConnection::setVerifyGraalWebCert` at ARM64 `0x20ab20` or x86_64 `0x222270` | The HTTPS attempt reached port 443, but the client still stayed on the splash screen | Useful isolation test, not sufficient |
 | Trust bundle replacement | Encrypt a user-supplied certificate-only PEM bundle with the native `jhOdx9SY` rule at ARM64 `0x2dcef8` or x86_64 `0x2fca80` | The original encoded text decodes exactly, and a shorter standard-marker certificate bundle round-trips through the native decoder. Live endpoint compatibility is not tested | Production-compatible path, pending authorized current chain |
+| TLS port-only loopback test | Change only the HTTPS port constants at ARM64 `0x200df0` and `0x200f74` with `tools/patch_connector_tls_port_test.py` | A SAN-matching local certificate reached the native TLS request on port `18443` while the HTTPS flag, hostname checks, and RSA branch remained intact | Loopback diagnostic only |
 | Game-server TLS material audit | Decode the `setSSLParameters` certificate literal and trace native callback `0x1eb964` | The game-server verify buffer is the same expired Eurocenter Games certificate as connector trust-bundle entry 0. The script also selects `RC4-SHA` and `SSLv23` | Concrete second compatibility failure, no patch applied |
 | Game-server certificate encoder | Prepare a certificate-only replacement for script string 143 with the native `NakFpz15` transform | The replacement round-trips offline with peer verification left enabled | Compile, package, sign, and validate only for an authorized endpoint |
 | Game-server GS2 source replacement | Replace both recovered `setSSLParameters` certificate literals before HexaParser compilation | The original certificate gives an identity source and bytecode result; a 1,072-character offline test certificate compiles successfully | Source preparation only, no live endpoint test |
@@ -40,6 +41,16 @@ The preferred certificate path is a replacement trust bundle, not the skip.
 refuses private-key material, and keeps peer and hostname verification in the
 native code. The supplied bundle must come from an authorized current endpoint
 or its operator. The repository contains no replacement production chain.
+
+The replacement path has a complete local replay record. A one-certificate
+PEM bundle for `con.quattroplay.com` was encoded into a private ARM64 copy,
+the HTTPS port was moved to `18443` only for ADB reverse, and the local TLS
+responder observed the native request. With the original RSA branch retained,
+the same APK completed the game handshake, loaded the map and assets, kept the
+heartbeat alive, and rendered the translated ARM64 world. The exact hashes
+and capture scope are in `artifacts/diagnostic_patch_matrix.json`. This
+removes the local TLS path from the list of unknowns, but it does not validate
+the expired historical chain against a current authorized service.
 
 The archived package's RSA result is a separate boundary. The saved fixture
 passes it when checked in the native format, so a package-preserving replay

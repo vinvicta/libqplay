@@ -142,6 +142,119 @@ round-trip. It does not contact the endpoint or prove that the supplied chain
 matches the current service. Do not use the historical
 `analysis/graalweb.cert.pem` as a current replacement.
 
+## Native TLS trust replacement replay
+
+The trust replacement path has now been exercised through the native ARM64
+TLS implementation. This is a local proof of the patch and handshake path,
+not a claim that the historical client can reach a current service.
+
+The test certificate was self-signed for the local responder with the exact
+hostname used by the client:
+
+```bash
+openssl req -x509 -newkey rsa:2048 -nodes -days 365 \
+  -keyout /tmp/graal-local-con.key \
+  -out /tmp/graal-local-con.crt \
+  -subj /CN=con.quattroplay.com \
+  -addext subjectAltName=DNS:con.quattroplay.com \
+  -addext basicConstraints=critical,CA:TRUE
+```
+
+Apply the patches to private copies in this order. The RSA branch remains
+unchanged because the archived response passes the native raw-digest check.
+The deterministic RC4 key and non-premium branch are local responder and
+render diagnostics, not production changes:
+
+```bash
+python3 tools/patch_graalweb_trust_bundle.py \
+  --arch arm64-v8a \
+  --bundle /tmp/graal-local-con.crt \
+  /path/to/original/arm64-v8a/libqplay.so \
+  /tmp/libqplay.trust.so
+
+python3 tools/patch_localhost_resolver_test.py \
+  --arch arm64-v8a \
+  /tmp/libqplay.trust.so \
+  /tmp/libqplay.loopback.so
+
+python3 tools/patch_connector_tls_port_test.py \
+  --arch arm64-v8a --port 18443 \
+  /tmp/libqplay.loopback.so \
+  /tmp/libqplay.tls.so
+
+python3 tools/patch_fixed_output_rc4_key_test.py \
+  --arch arm64-v8a \
+  /tmp/libqplay.tls.so \
+  /tmp/libqplay.tls-key.so
+
+python3 tools/patch_force_no_premium_loading_test.py \
+  /tmp/libqplay.tls-key.so \
+  /tmp/libqplay.tls-full.so
+```
+
+The port helper changes only the two ARM64 `MOV W1,#443` instructions at
+`0x200df0` and `0x200f74`. It leaves the HTTPS flag, hostname, native trust
+verification, and RSA branch intact. The resolver helper then routes the
+legacy hostname to loopback. Do not use the port or resolver edits for a
+release endpoint.
+
+For the private APK run, include only the ARM64 library, sign the package with
+a local test key, and configure these reverse mappings:
+
+```bash
+adb reverse tcp:18443 tcp:18443
+adb reverse tcp:14900 tcp:14900
+```
+
+Start the public TLS responder with the archived connector body and start the
+game responder on `14900`:
+
+```bash
+python3 tools/tls_capture_server.py \
+  --certificate /tmp/graal-local-con.crt \
+  --private-key /tmp/graal-local-con.key \
+  --response /path/to/analysis/live_connector_response_local.bin \
+  --port 18443 \
+  --count 1
+
+python3 tools/game_handshake_server.py \
+  --port 14900 \
+  --script /path/to/analysis/StartScript_Connector.dec.bin \
+  --output /tmp/graal-tls-game \
+  --package-file /tmp/basepackage-script.gupd \
+  --file-root /tmp/graal-assets \
+  --level-code-root /tmp/graal-assets/coded \
+  --server-signature 73 \
+  --file-transfer-mode single \
+  --connection-timeout 60 \
+  --extra-frame-once 178:2c636c61737369632c3132372e302e302e312c3134393030 \
+  --extra-frame-after-first 9:202474657374 \
+  --extra-frame-after-first '190:' \
+  --extra-frame-after-first 49:2020522020636c61737369636970686f6e652e676d6170 \
+  --frame-after-map 49:2020522020636c61737369636970686f6e652e676d6170
+```
+
+The verified ARM64 native hashes for this chain were, in order,
+`3a28098407ee2322ddd0d12a178ce4cc7b3f5751b3e6024fcf48dbf09d9eee30` after
+hostname routing, `41e69dd8a7ea70606ec3f299776bca40a9a212767f14f2b1633866da1a19b459`
+after the TLS port move, `f002828554b70f87eed78e469324be3f0f13b28e16f7aa51024e5408e708935f`
+after the local RC4 key diagnostic, and
+`22a0fd4801f71f29f7c53a7ba77f0c4db669a83fc1ae5a5f53e3ce9b95f33e9a` after the
+loading-state candidate. The debug-signed APK hash was
+`2984a6d4b7698a2ab444166265939a75a61c43b679dfd87b0d7a063bf7fd0759`.
+
+The TLS responder saw a 196-byte request for `/con.png` with
+`Host: con.quattroplay.com:18443`. The native client received the archived
+16,446-byte body without a certificate error, then reached `Serverwarp...` and
+completed two encrypted game connections. The second connection requested
+`classiciphone.gmap`, three level containers, and `pics1.png`, and continued
+with packet-24 heartbeats. The final translated-ARM64 screenshot has SHA-256
+`fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`.
+
+The responder is hard-coded to `127.0.0.1`. Stop both responders and remove
+the reverse mappings after the test. Do not publish the self-signed private
+key, the debug APK, or captured login data.
+
 ## Connector replay
 
 The responder defaults to legacy-looking lowercase headers, but this is not a

@@ -103,6 +103,35 @@
       "network_contacted": false,
       "runtime_verified": false
     },
+    "connector_tls_port_test": {
+      "purpose": "Move only the diagnostic HTTPS port so ADB reverse can reach a loopback TLS responder without changing the HTTPS flag, hostname, trust checks, or RSA branch.",
+      "production_status": "loopback diagnostic only",
+      "tool": "tools/patch_connector_tls_port_test.py",
+      "port": 18443,
+      "sites": {
+        "arm64-v8a": [
+          {
+            "native_offset": "0x200df0",
+            "original": "61 37 80 52",
+            "replacement": "61 01 89 52"
+          },
+          {
+            "native_offset": "0x200f74",
+            "original": "61 37 80 52",
+            "replacement": "61 01 89 52"
+          }
+        ],
+        "x86_64": {
+          "native_offset": "0x2184b9",
+          "original": "05 bb 01 00 00",
+          "replacement": "05 0b 48 00 00"
+        }
+      },
+      "https_flag_preserved": true,
+      "hostname_verification_preserved": true,
+      "rsa_branch_preserved": true,
+      "network_contacted": false
+    },
     "game_server_tls_material_audit": {
       "purpose": "Trace the game-server verify buffer configured by StartScript_Connector.",
       "production_status": "stock stale material confirmed by offline decode; no patch applied",
@@ -202,6 +231,11 @@
       "name": "Render-boundary loading clear",
       "observed": "The same translated-ARM64 world and HUD rendered after the flag was cleared at the JNI draw boundary.",
       "verdict": "Useful control that proves the draw gate, not a release repair."
+    },
+    {
+      "name": "Native TLS trust replacement loopback replay",
+      "observed": "A certificate-only PEM replacement with SAN con.quattroplay.com was accepted by the native ARM64 TLS path on port 18443. The responder saw the connector request, and the same private package then completed two encrypted game connections, the map, three level containers, pics1.png, heartbeats, and the translated ARM64 world render.",
+      "verdict": "The trust replacement and native TLS path work in a bounded loopback replay. A current authorized chain, live service, and physical ARM64 device remain unverified."
     }
   ],
   "working_private_replay": {
@@ -257,6 +291,68 @@
       "scope": "127.0.0.1 connector and game responders"
     },
     "scope": "private ARM64 package prepared for the saved loopback response"
+  },
+  "tls_preserving_loopback_replay": {
+    "emulator": "Android 36 x86_64 with Berberis ARM64 translation",
+    "fresh_app_data": true,
+    "certificate": {
+      "subject": "CN=con.quattroplay.com",
+      "subject_alt_name": "DNS:con.quattroplay.com",
+      "pem_sha256": "1fb27a4fa0662069e4d7e1b85700eb4a8c3262f50fbef4c3eea16263ab6e8e2f",
+      "sha256_fingerprint": "99ca6c5434aa0377d5fcb1177bf2a9a72c05ca4c3ffa9cc00056a971f63f26d3",
+      "not_after": "2027-08-24T09:38:57Z"
+    },
+    "trust_bundle": {
+      "canonical_pem_bytes": 1208,
+      "canonical_pem_sha256": "1fb27a4fa0662069e4d7e1b85700eb4a8c3262f50fbef4c3eea16263ab6e8e2f",
+      "native_encoded_bytes": 1612,
+      "native_encoded_sha256": "1d45d76d892175f6e1efd1cc225ebd6348f8244ce4173ff1a006830613a51464",
+      "native_trust_patched_library_sha256": "be6c9fbfbe4c18c2835e3f142d2141d155985e5e4d815d8b88754f7a3a535661"
+    },
+    "patch_chain": [
+      "tools/patch_graalweb_trust_bundle.py",
+      "tools/patch_localhost_resolver_test.py",
+      "tools/patch_connector_tls_port_test.py --port 18443",
+      "tools/patch_fixed_output_rc4_key_test.py",
+      "tools/patch_force_no_premium_loading_test.py"
+    ],
+    "native_sha256": {
+      "resolver_patched": "3a28098407ee2322ddd0d12a178ce4cc7b3f5751b3e6024fcf48dbf09d9eee30",
+      "tls_port_patched": "41e69dd8a7ea70606ec3f299776bca40a9a212767f14f2b1633866da1a19b459",
+      "fixed_output_key": "f002828554b70f87eed78e469324be3f0f13b28e16f7aa51024e5408e708935f",
+      "full_diagnostic": "22a0fd4801f71f29f7c53a7ba77f0c4db669a83fc1ae5a5f53e3ce9b95f33e9a"
+    },
+    "apk_sha256": "2984a6d4b7698a2ab444166265939a75a61c43b679dfd87b0d7a063bf7fd0759",
+    "apk_signature_schemes_verified": ["v1", "v2", "v3"],
+    "connector": {
+      "tls_port": 18443,
+      "server_bind": "127.0.0.1",
+      "request_bytes": 196,
+      "request_sha256": "c7c8f4a0be039414efcb919dd6b1340e606cc0c63c8644356c446d8e68b99a73",
+      "response_bytes": 16446,
+      "response_sha256": "73996942d493a8db4b7b6238dcc9d6e4bb68a91b48ba5946db4cff9252bc4b7c",
+      "tls_handshake_observed": true,
+      "native_trust_replacement_accepted": true,
+      "certificate_skip_patch_applied": false,
+      "rsa_bypass_applied": false
+    },
+    "game": {
+      "server_bind": "127.0.0.1",
+      "port": 14900,
+      "connections": 2,
+      "first_inbound_sha256": "52ae6c7a57aa51d13faba5f96e3907d17fa9e5ca9651c0f1dd1da8b9d1f7bf24",
+      "first_outbound_sha256": "1602c8206ac42ce7db6c20726f9c3725e28fbf981a0243edd431e1bfc5f03ff8",
+      "second_inbound_sha256": "c2d391774dd38d370c143d462993c6a92859d6c91e075c7f3239b44fd780a91d",
+      "second_outbound_sha256": "6e593a89015b41cf00ef781419e0714b3238b037cce2f08528697b3da216d239",
+      "map": "classiciphone.gmap",
+      "level_files": 3,
+      "image": "pics1.png",
+      "heartbeats": true
+    },
+    "render_screenshot_sha256": "fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e",
+    "scope": "127.0.0.1 responders with ADB reverse; no live connector, game server, account, or remote page",
+    "live_service_verified": false,
+    "physical_arm64_device_verified": false
   },
   "production_boundary": [
     "Obtain a current connector response for the exact client query.",

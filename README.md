@@ -120,6 +120,13 @@ certificate produces an identity source and bytecode result, while a longer
 offline test certificate compiled successfully at 1,072 Base64 characters.
 The tool leaves verification enabled and does not contact a network.
 
+The native connector trust replacement has also been exercised locally. A
+SAN-matching test certificate was installed into a private ARM64 copy, the
+HTTPS port was moved only for ADB reverse, and the original RSA branch stayed
+unchanged. The package completed the connector and game replay and rendered
+the same world through the x86_64 emulator's ARM64 translation layer. This
+proves the local native TLS path, not a current live certificate or service.
+
 ## Repository layout
 
 * `docs/RESEARCH_NOTES.md` is the chronological investigation record.
@@ -162,6 +169,10 @@ The tool leaves verification enabled and does not contact a network.
   `tools/patch_graalweb_trust_bundle.py` replaces the historical trust text
   with a user-supplied certificate-only PEM bundle while leaving CyaSSL
   verification enabled.
+  `tools/patch_connector_tls_port_test.py` moves only the diagnostic HTTPS
+  port for a loopback ADB reverse mapping, and
+  `tools/tls_capture_server.py` serves an archived response over a
+  127.0.0.1-only TLS listener.
   `tools/decode_game_server_tls_certificate.py` decodes the separate
   game-server certificate from the recovered connector script without opening
   a socket. `tools/encode_game_server_tls_certificate.py` prepares a

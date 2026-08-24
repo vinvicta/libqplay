@@ -810,3 +810,56 @@ connector fixture does not need the RSA bypass. The certificate skip,
 loopback endpoint changes, deterministic test key, and loading-state edit are
 still present, so this remains a controlled replay rather than a live-client
 repair.
+
+## Native TLS trust replacement replay
+
+The next test kept the connector's native TLS verification path enabled. A
+private self-signed certificate with subject and SAN `con.quattroplay.com` was
+encoded with `tools/patch_graalweb_trust_bundle.py`. The canonical PEM bytes
+were 1,208 bytes with SHA-256
+`1fb27a4fa0662069e4d7e1b85700eb4a8c3262f50fbef4c3eea16263ab6e8e2f`; the
+native encoded replacement was 1,612 bytes with SHA-256
+`1d45d76d892175f6e1efd1cc225ebd6348f8244ce4173ff1a006830613a51464`.
+The trust patch itself produced ARM64 library SHA-256
+`be6c9fbfbe4c18c2835e3f142d2141d155985e5e4d815d8b88754f7a3a535661`.
+
+The public `tools/patch_connector_tls_port_test.py` changed the two HTTPS
+port constants at `0x200df0` and `0x200f74` from `443` to `18443`. It did not
+change the HTTPS flag, host name, native peer checks, or the RSA result
+branch. The resolver then routed the requested host to loopback. This port
+move exists only because ADB reverse cannot expose a privileged host port
+inside this emulator.
+
+The final private ARM64 chain added the deterministic outgoing RC4 key needed
+by the synthetic game responder and the existing non-premium loading-state
+candidate. The intermediate hashes were:
+
+```text
+resolver patch       3a28098407ee2322ddd0d12a178ce4cc7b3f5751b3e6024fcf48dbf09d9eee30
+TLS port patch        41e69dd8a7ea70606ec3f299776bca40a9a212767f14f2b1633866da1a19b459
+fixed output key     f002828554b70f87eed78e469324be3f0f13b28e16f7aa51024e5408e708935f
+full diagnostic      22a0fd4801f71f29f7c53a7ba77f0c4db669a83fc1ae5a5f53e3ce9b95f33e9a
+debug APK            2984a6d4b7698a2ab444166265939a75a61c43b679dfd87b0d7a063bf7fd0759
+```
+
+The local TLS responder saw the request with
+`Host: con.quattroplay.com:18443` and delivered the saved 16,446-byte body.
+There was no certificate-skip patch and no RSA bypass. The game responder
+then recorded two encrypted connections. The second connection requested the
+exact GMAP name `classiciphone.gmap`, three encrypted level containers, and
+`pics1.png`, followed by packet-24 heartbeats. The capture hashes were:
+
+```text
+first inbound    52ae6c7a57aa51d13faba5f96e3907d17fa9e5ca9651c0f1dd1da8b9d1f7bf24
+first outbound   1602c8206ac42ce7db6c20726f9c3725e28fbf981a0243edd431e1bfc5f03ff8
+second inbound   c2d391774dd38d370c143d462993c6a92859d6c91e075c7f3239b44fd780a91d
+second outbound  6e593a89015b41cf00ef781419e0714b3238b037cce2f08528697b3da216d239
+screenshot       fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e
+```
+
+This is the strongest local end-to-end result so far. It shows the native TLS
+trust replacement, encrypted NewGraal exchange, resource delivery, and
+translated ARM64 rendering in one bounded replay. It does not validate the
+historical game-server `RC4-SHA` certificate against a live service, an
+authorized account, or a physical ARM64 renderer. The test certificate,
+private key, APK, and captures remain outside the repository.

@@ -126,6 +126,19 @@ This is the short handoff view. The full reasoning and command history are in
     certificate gives an identity source and the same 16,141-byte compiled
     bytecode. A 1,072-character offline test certificate also compiles to
     16,253 bytes. These are compiler and transform checks only.
+27. A private ARM64-only package retained the native connector RSA branch,
+    replaced the historical trust bundle with a SAN-matching local certificate,
+    routed the hostname to loopback, and moved only the HTTPS port to `18443`
+    for ADB reverse. Native TLS delivered the 16,446-byte connector fixture.
+    The same package then made two encrypted game connections, requested the
+    map, three level containers, and `pics1.png`, continued heartbeats, and
+    rendered the tiled world and HUD through Berberis. Its APK SHA-256 is
+    `2984a6d4b7698a2ab444166265939a75a61c43b679dfd87b0d7a063bf7fd0759`, its
+    final native SHA-256 is
+    `22a0fd4801f71f29f7c53a7ba77f0c4db669a83fc1ae5a5f53e3ce9b95f33e9a`, and
+    its screenshot matches the earlier replay at
+    `fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`.
+    The responder was loopback-only and no live service was contacted.
 
 ## Not verified
 
@@ -172,9 +185,10 @@ needed for final runtime validation.
 One earlier blocker has been removed from the list. The saved connector
 response was initially treated as unsigned because the offline checker used
 the wrong RSA encoding. IDA and the corrected parser show that it passes the
-native wolfSSL raw-digest check. The remaining connector concerns are the
-expired HTTPS trust bundle and the behavior of the current live endpoint, not
-the saved fixture's RSA branch.
+native wolfSSL raw-digest check. The local trust replacement replay has now
+also completed, so the remaining connector concern is the current authorized
+chain and live endpoint behavior, not the saved fixture's RSA branch or the
+local native TLS path.
 
 The remaining blockers are external validation rather than an identified
 local parser failure:
