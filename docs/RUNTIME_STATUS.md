@@ -48,9 +48,17 @@ This is the short handoff view. The full reasoning and command history are in
 15. The supplied conpack tool now produces a client-compatible legacy ZIP
     when its four header fields are matched to the archived package. The
     original connector bytecode survives repack and reaches the same local
-    two-connection game replay. HexaParser can decompile and recompile the
-    recovered source, but the recompiled bytecode is not yet accepted by the
-    old runtime, so it remains a source-review experiment.
+    two-connection game replay.
+16. Raw HexaParser output is parseable and packable, but its same-line brace
+    literals are reversed relative to the native-order reconstruction. In a
+    two-port negative control it opened three connections to the alternate
+    `14896` listener and none to the expected `14900` listener.
+17. `tools/reverse_hexaparser_literals.py` restores the observed literal
+    order for the connector fixture. The adapted bytecode reaches two
+    `14900` connections, the map, three level files, `pics1.png`, and
+    continuing heartbeats. Its rendered screenshot exactly matches the
+    original-bytecode compatibility replay. This is a fixture-level compiler
+    parity result, not proof for arbitrary scripts.
 
 ## Not verified
 
@@ -65,9 +73,9 @@ This is the short handoff view. The full reasoning and command history are in
   title or loading image, while both diagnostics display the world.
 * Whether the live server sends the same completion sequence as the local
   responder.
-* Whether the HexaParser compiler can be brought to bytecode parity with the
-  original runtime. Its current output is parseable and packable, but the
-  client stops after requesting the connector package.
+* Whether the literal-order adapter generalizes to scripts with different
+  syntax or multiline literals. Only the recovered connector fixture has
+  passed the adapted runtime replay.
 
 ## Current blocker
 
@@ -76,7 +84,8 @@ diagnostic build. The no-swap table has been checked against IDA and the
 emulator, and the earlier xchg handler-table patch and packet-182 hide
 hypothesis are closed as false leads. Packet 182 maps to the process or
 window-list path, while packet 190 reaches the connecting-window completion
-wrapper.
+wrapper. The recovered connector source also reaches the same local replay
+after the targeted literal-order adapter; the raw HexaParser output does not.
 
 The ARM64 diagnostic run establishes a narrower result. Under the available
 x86_64 emulator, Android translated the ARM64 native code far enough to make

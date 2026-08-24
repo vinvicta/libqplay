@@ -151,9 +151,46 @@ When generating a replacement body with the supplied `conpack_wsl.c`, apply
 `tools/conpack_legacy_zip_compat.patch` before compiling the helper. This old
 client expects the archived ZIP's flag `0x0002`, DOS time and date `0xffff`,
 and central-directory version-made-by value `0`. The original connector
-bytecode was repacked with those fields and reached the game responder. The
-HexaParser output compiles, but its current bytecode has not passed the same
-runtime acceptance test, so use the archived bytecode for this replay.
+bytecode was repacked with those fields and reached the game responder.
+
+## Rebuilding the connector script
+
+The recovered source first needs the missing closing brace documented in
+`docs/HELPER_TOOLCHAIN.md`. After that parser repair, apply the observed
+HexaParser literal-order adapter before compiling:
+
+```bash
+python3 tools/reverse_hexaparser_literals.py \
+  /tmp/StartScript_Connector.repaired.gs2 \
+  /tmp/StartScript_Connector.native-order.gs2
+
+cd /tmp/GScript.Go-HexaParser
+go run . compile \
+  -grammar gs2 \
+  -type weapon \
+  -name StartScript_Connector \
+  -o /tmp/StartScript_Connector.native-order.gs2bc \
+  /tmp/StartScript_Connector.native-order.gs2
+```
+
+The adapter is intentionally limited to same-line brace literals. It is
+based on the checked connector fixture, where HexaParser printed handler
+arrays, server lists, and a two-element handler pair in reverse order. Compare
+the generated source with the native-order reconstruction before applying it
+to another script.
+
+For the successful local replay, pack the adapted bytecode with the legacy ZIP
+patch and compatible archived metadata. The final bytecode included its
+trailing `0x0a`, and the native loader accepted it. The adapted package reached
+the same two-connection loopback replay and rendered the same screenshot as
+the original bytecode. The raw unadapted package requested the connector but,
+when both test game ports were listening, opened three connections to the
+alternate `14896` listener and none to the expected `14900` listener. This is
+why the raw compiler output must not be treated as runtime-compatible.
+
+Do not copy private signing keys into the repository or into an APK intended
+for distribution. The hashes for the adapted source, bytecode, package, and
+replay are in `artifacts/helper_toolchain_replay.json`.
 
 ## Two-connection game replay
 

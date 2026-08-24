@@ -80,16 +80,88 @@ repaired source compiled successfully to a 16,141-byte bytecode file with
 SHA-256
 `67b70c449f87d6e3b71ef0fe92ba73fff9fe5fe7a1ad63aedb34e9daf4a7b752`.
 
-That compile result is a useful milestone, but it is not yet a runtime
+That compile result is a useful milestone, but it was not initially a runtime
 replacement for the archived script. The original ARM64 client accepted the
 original bytecode after it was repacked with the compatible ZIP headers below,
 then connected to the local game responder. The same client requested the
-connector package but never opened the game socket when given the recompiled
-bytecode. Removing the compiler's final `0x0a` byte did not change that result.
-The experiment therefore identifies a compiler or bytecode-parity gap, not a
-failure in the recovered source or in the conpack envelope. The generated
-source remains valuable for review, while the original bytecode remains the
-runtime fixture until the compiler output is made compatible.
+connector package but did not reach the expected game-server flow when given
+the raw recompiled bytecode. The first single-port run looked like it had not
+opened a game socket. A later two-port negative control showed the more precise
+behavior: the raw output opened three connections to the alternate `14896`
+listener, but opened none to the expected `14900` listener and never completed
+the normal resource replay.
+
+## HexaParser literal-order adapter
+
+The next comparison found the bytecode-parity issue. The native-order
+reconstruction and the repaired HexaParser source contain the same handler
+data, but the decompiler prints each same-line brace literal backwards. The
+most useful examples are:
+
+```text
+native-order setInDataHandlers: {178, 0, 9, 1, ..., 94}
+HexaParser output:             {94, 108, ..., 9, 0, 178}
+
+native-order setOutDataHandlers: {158, 161, 157, ..., 163}
+HexaParser output:               {163, 44, 162, ..., 158}
+
+native-order onData pair: {42, 18}
+HexaParser output:        {18, 42}
+```
+
+The Classic login-server lists are reversed in the same way. IDA's trace of
+`TScript_setStream_TString_const` shows that this code is loaded as a script
+function table, string table, and opcode stream. The observed ordering is
+consistent with the old VM constructing a literal on a stack while HexaParser
+prints values in the order it encounters them. This is a decompiler and
+compiler-boundary issue, not evidence that the original native handler table
+needs an operand swap. The earlier swap experiment remains a false lead.
+
+`tools/reverse_hexaparser_literals.py` is a deliberately narrow adapter. It
+reverses comma-separated brace literals that begin and end on one source line,
+while skipping bodies that look like statement blocks or function calls. The
+missing closing brace described above must still be repaired before applying
+the adapter. A complete local round trip was:
+
+```bash
+python3 tools/reverse_hexaparser_literals.py \
+  /tmp/StartScript_Connector.repaired.gs2 \
+  /tmp/StartScript_Connector.native-order.gs2
+
+cd /tmp/GScript.Go-HexaParser
+go run . compile \
+  -grammar gs2 \
+  -type weapon \
+  -name StartScript_Connector \
+  -o /tmp/StartScript_Connector.native-order.gs2bc \
+  /tmp/StartScript_Connector.native-order.gs2
+```
+
+For the checked fixture, the repaired input source has SHA-256
+`a30f9eca136e3b8ff827bfb1bfe13fb442bd2e882963bf9863cd8de5f2669e68`, the
+adapted source has SHA-256
+`e3a825b81bde930b8b26625ee7f14d3035d7b0dafb1015ee5d8df23591059572`, and the
+compiled 16,141-byte script has SHA-256
+`ab5b500216b560603ba433618c85a3d8e38ac06ad12c42a978f923930c79742a`. The
+compiled file ends in `0x0a`. That trailer was accepted by the native loader in
+the successful replay, so removing it is not required for this fixture.
+
+Packing that script with the legacy ZIP patch, the archived `.rk` and `.t`
+metadata, and the local diagnostic signature path produced a 16,446-byte
+package with SHA-256
+`d4dc4fc9969daeed648a671b92934606d6b54f0f86620c7ec82fa0d1676ca297`. With
+the raw output, the same package path produced the wrong-endpoint result
+described above. With the literal-order adapter, the loopback replay produced
+two `14900` game connections, the expected map, three level files,
+`pics1.png`, and continuing heartbeat packets. Its screenshot SHA-256 was
+`fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`, exactly
+matching the earlier original-bytecode compatibility replay.
+
+This proves runtime parity for the recovered connector fixture after the
+targeted literal-order repair. It does not prove that every script emitted by
+HexaParser needs, or will safely tolerate, the same transformation. The
+adapter should therefore be applied only after comparing its output with the
+native-order reconstruction and checking the resulting bytecode locally.
 
 ## Moreno.kahn
 
@@ -206,8 +278,9 @@ script. Together they reduce the chance that a native finding is based on a
 bad archive extraction or a misleading bytecode listing. The experiments also
 show why both layers need separate acceptance tests: an archive can be
 structurally correct while its ZIP dialect is too new for this client, and a
-source compiler can emit a parseable bytecode file that this old runtime does
-not execute.
+source compiler can emit a parseable bytecode file whose literal order is
+wrong for the old runtime. The targeted adapter fixes the checked connector
+fixture, but it is not a general compiler validation.
 
 The reproducible artifacts used for these checks remain local: the APK, the
 connector response, the decoded script, and the generated GS2 text are not
@@ -220,9 +293,11 @@ The successful local replay is a bounded native integration proof. A
 loopback connector and game responder completed the connector parse, the
 encrypted game handshake, server warp, map and resource requests, and
 translated ARM64 rendering. The responder also observed continuing heartbeat
-packets. The source compiler and the archive packer were tested separately so
-that a successful network trace is not mistaken for proof that the generated
-script is runtime-compatible.
+packets. Both the archived script and the adapted HexaParser output reached
+that replay; the raw HexaParser output did not. The archive packer and the
+literal-order adapter were checked separately before the integrated run, so
+the result is tied to recorded hashes rather than an unexamined generated
+package.
 
 No live game-server login, current connector response, account authentication,
 production certificate chain, production package signature, or physical

@@ -9,8 +9,39 @@
     "repaired_source_sha256": "a30f9eca136e3b8ff827bfb1bfe13fb442bd2e882963bf9863cd8de5f2669e68",
     "recompiled_bytecode_bytes": 16141,
     "recompiled_bytecode_sha256": "67b70c449f87d6e3b71ef0fe92ba73fff9fe5fe7a1ad63aedb34e9daf4a7b752",
-    "runtime_replay_result": "connector_requested_but_game_socket_not_opened",
-    "runtime_note": "The source and bytecode compile, but the recompiled connector is not yet runtime-compatible with this old client."
+    "runtime_replay_result": "connector_requested_but_expected_14900_flow_not_reached",
+    "runtime_note": "The first single-port run stopped before a game socket. A later two-port negative control showed that the raw output can open the alternate 14896 path, but it does not reproduce the expected 14900 replay."
+  },
+  "literal_order_repair": {
+    "adapter": "tools/reverse_hexaparser_literals.py",
+    "source_input_sha256": "a30f9eca136e3b8ff827bfb1bfe13fb442bd2e882963bf9863cd8de5f2669e68",
+    "source_output_bytes": 25683,
+    "source_output_sha256": "e3a825b81bde930b8b26625ee7f14d3035d7b0dafb1015ee5d8df23591059572",
+    "bytecode_bytes": 16141,
+    "bytecode_sha256": "ab5b500216b560603ba433618c85a3d8e38ac06ad12c42a978f923930c79742a",
+    "connector_package_bytes": 16446,
+    "connector_package_sha256": "d4dc4fc9969daeed648a671b92934606d6b54f0f86620c7ec82fa0d1676ca297",
+    "metadata_note": "The compatible package used the archived .rk and .t metadata and the legacy ZIP-header patch. Private signing material remains local.",
+    "raw_output_negative_control": {
+      "package_sha256": "d8b46fe7209bd4f6fb78f5fa9f50e9f2f7c42e5dfc555c7452149af4bda6c183",
+      "connector_request": true,
+      "connector_query_sha256": "3586b24ea8f0b90b722bc988c4a7e126ee8e0664f2b06d1cb6e7ab8338e6759f",
+      "game_connections_port_14900": 0,
+      "game_connections_port_14896": 3,
+      "result": "wrong_endpoint_or_reconnect_loop"
+    },
+    "adapted_loopback_replay": {
+      "connector_request": true,
+      "connector_query_sha256": "3586b24ea8f0b90b722bc988c4a7e126ee8e0664f2b06d1cb6e7ab8338e6759f",
+      "game_connections_port_14900": 2,
+      "map": "classiciphone.gmap",
+      "level_files": 3,
+      "image": "pics1.png",
+      "heartbeats": true,
+      "render_screenshot_sha256": "fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e",
+      "matches_original_compat_screenshot": true,
+      "scope": "127.0.0.1 only"
+    }
   },
   "moreno_kahn": {
     "repository_commit": "5e3a05fc8fbcf3c3f72b3c263238b2ed275fc66d",

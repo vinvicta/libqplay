@@ -521,10 +521,11 @@ HexaParser's Go tests passed with Go 1.22.2. Its decompiler converted the
 15,581-byte decoded connector script into 552 lines of readable GS2, exposing
 the same endpoint selection, login, packet-handler, reconnect, and resource
 logic found through the native and instruction-level analysis. Its compiler
-also passed the repository's Issue 37 fixture. Compiling the entire generated
-connector source still stops at a parser error around the
-`onAppleMessageBoxButton` function, so that output is currently a source-level
-cross-check rather than a complete bytecode round trip.
+also passed the repository's Issue 37 fixture. The generated connector source
+needed one missing closing brace after `printDisconnectError`; adding that
+brace produced the repaired 25,683-byte source recorded in
+`docs/HELPER_TOOLCHAIN.md`, and the complete source then compiled to a
+16,141-byte script.
 
 Moreno.kahn's Linux `contool` built cleanly. Its `conn-extract` output for
 `analysis/live_connector_response_local.bin` has SHA-256
@@ -535,11 +536,76 @@ outer length wrapper and RC4 extraction. This command does not verify the
 embedded RSA signature, so the existing stale-signature finding remains
 unchanged.
 
-The optional `conpack_wsl.c` creator could not be built here because wolfSSL
-headers and sources are not installed. The helper's `outer-private.rsa.der`
-derives to public-key SHA-256
+The optional `conpack_wsl.c` creator was built after wolfSSL was checked out at
+commit `cb138b22a2e9111e5ac9fb9e13a690762c86b884`. The helper's
+`outer-private.rsa.der` derives to public-key SHA-256
 `07714f7eac2ff6e3236f2887ebab9c367714120c834acff3f745e674ccd46d1a`, which is
 different from the APK's embedded public DER SHA-256
 `35e7245d68e6ab6c84bd55061704fe2d3d16800cbe0a671aceae6c85e1301b82`.
 That creator is suitable for generating test containers with its own key, but
 it is not a drop-in signer for the original client.
+
+## HexaParser runtime parity correction
+
+The first complete compile was not the end of the toolchain check. The raw
+HexaParser source and the native-order reconstruction showed a consistent
+ordering difference in same-line brace literals. The recovered script's
+handler and server-list data is stored as a sequence of values, so reversing
+the list changes behavior even though the bytecode remains structurally
+parseable.
+
+The comparison was easiest to see in the connector setup:
+
+```text
+native-order setOutDataHandlers: {158, 161, 157, ..., 163}
+HexaParser output:               {163, 44, 162, ..., 158}
+
+native-order setInDataHandlers: {178, 0, 9, 1, ..., 94}
+HexaParser output:              {94, 108, ..., 9, 0, 178}
+
+native-order onData pair: {42, 18}
+HexaParser output:        {18, 42}
+```
+
+The Classic login-server lists showed the same reversal. This observation
+also explains why the old operand-swap theory was attractive but wrong. The
+native setter stores the original pair order. The reversed values came from
+the script literal representation, not from the ARM64 load and store
+instructions. The no-swap native bytes remain the correct bytes for this
+library.
+
+The new public helper `tools/reverse_hexaparser_literals.py` performs the
+narrow repair. It reads the repaired HexaParser source, reverses only
+comma-separated brace literals that fit on one line, skips bodies that look
+like statement blocks or function calls, and writes a separate source file.
+It is an adapter for the observed output, not a replacement GS2 parser.
+
+The checked hashes are:
+
+* repaired source input: `a30f9eca136e3b8ff827bfb1bfe13fb442bd2e882963bf9863cd8de5f2669e68`;
+* adapted source: `e3a825b81bde930b8b26625ee7f14d3035d7b0dafb1015ee5d8df23591059572`;
+* adapted bytecode: `ab5b500216b560603ba433618c85a3d8e38ac06ad12c42a978f923930c79742a`;
+* adapted connector package: `d4dc4fc9969daeed648a671b92934606d6b54f0f86620c7ec82fa0d1676ca297`.
+
+The adapted package used the compatible ZIP-header source patch and the
+archived `.rk` and `.t` metadata. Its bytecode retained a final `0x0a` byte,
+which the native loader accepted. This closes the earlier uncertainty about
+whether the trailer itself was the runtime problem.
+
+The raw and adapted packages were then compared under the same local
+conditions. Both made the connector request with query capture SHA-256
+`3586b24ea8f0b90b722bc988c4a7e126ee8e0664f2b06d1cb6e7ab8338e6759f`. With
+both candidate game ports listening, the raw package made zero connections to
+`14900` and three to `14896`, producing a wrong-endpoint or reconnect loop.
+The adapted package made two `14900` connections and completed the expected
+encrypted login, server warp, map request, three level-file requests,
+`pics1.png`, and continuing packet-24 heartbeats.
+
+The adapted render screenshot has SHA-256
+`fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`, exactly
+matching the earlier original-bytecode compatibility screenshot. This is a
+strong local integration result: recovered source, compiler, compatible
+container, native script loader, protocol responder, and translated renderer
+all agree for this fixture. It is still a loopback diagnostic. It does not
+verify a live server, current trust material, account login, arbitrary GS2
+scripts, or a physical ARM64 renderer.

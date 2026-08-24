@@ -66,6 +66,13 @@ rendered world through a bounded loopback responder. Live endpoint
 availability, current package signing, account authentication, and physical
 ARM64-device behavior remain open.
 
+The recovered connector script now has a tested local compiler path as well.
+HexaParser's raw output reverses the same-line brace literals used for handler
+tables and server lists. `tools/reverse_hexaparser_literals.py` restores the
+observed native order, after which the rebuilt script reaches the same local
+two-connection replay and produces an identical screenshot. This is verified
+for the connector fixture only, not for arbitrary GS2 scripts.
+
 ## Repository layout
 
 * `docs/RESEARCH_NOTES.md` is the chronological investigation record.
@@ -81,7 +88,8 @@ ARM64-device behavior remain open.
 * `docs/TESTING.md` describes local-only reproduction without contacting a
   live game service.
 * `artifacts/helper_toolchain_replay.json` records the verified HexaParser and
-  conpack hashes, including the legacy ZIP-header compatibility test.
+  conpack hashes, including the legacy ZIP-header and literal-order
+  compatibility tests.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.
 * `symbols/libqplay.symbols.json` is the machine-readable equivalent.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.
@@ -90,7 +98,8 @@ ARM64-device behavior remain open.
 * `tools/` contains IDAPython, parsing, replay, and diagnostic patch helpers.
   `tools/encode_connector_query.py` reproduces the captured connector query
   without opening a socket. `tools/conpack_legacy_zip_compat.patch` records
-  the small source change needed for the old client's ZIP reader.
+  the small source change needed for the old client's ZIP reader, and
+  `tools/reverse_hexaparser_literals.py` records the narrow compiler adapter.
 * `artifacts/` contains small metadata exports. APKs, certificates, private
   keys, captured credentials, and game assets are intentionally not included.
 
