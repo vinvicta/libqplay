@@ -128,6 +128,18 @@ archived response's RSA signature does not match the public key embedded in
 the APK. That stale-package result remains a compatibility diagnostic, not a
 production trust decision.
 
+The optional `conpack_wsl.c` creator was inspected but not built in this
+environment because the checkout does not include the required wolfSSL
+headers and sources. A direct Linux compile stops at
+`wolfssl/wolfcrypt/rsa.h`; the README's wolfSSL include and source paths are
+needed for a complete build. The supplied `outer-private.rsa.der` also
+derives to public-key SHA-256
+`07714f7eac2ff6e3236f2887ebab9c367714120c834acff3f745e674ccd46d1a`, while
+the APK's embedded public DER is
+`35e7245d68e6ab6c84bd55061704fe2d3d16800cbe0a671aceae6c85e1301b82`.
+Archives created with that helper key are therefore useful for testing a
+custom packer, but they are not automatically signed for this APK.
+
 The same utility has commands for the DES/Base64 connector query, resource
 DES, RC4, and the game's zlib wrapper. The query command is useful for format
 experiments, but it is not a byte-for-byte client query generator by itself.

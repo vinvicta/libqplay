@@ -534,3 +534,12 @@ matching `analysis/live_connector_payload_local.zip`. The archive lists `.rk`,
 outer length wrapper and RC4 extraction. This command does not verify the
 embedded RSA signature, so the existing stale-signature finding remains
 unchanged.
+
+The optional `conpack_wsl.c` creator could not be built here because wolfSSL
+headers and sources are not installed. The helper's `outer-private.rsa.der`
+derives to public-key SHA-256
+`07714f7eac2ff6e3236f2887ebab9c367714120c834acff3f745e674ccd46d1a`, which is
+different from the APK's embedded public DER SHA-256
+`35e7245d68e6ab6c84bd55061704fe2d3d16800cbe0a671aceae6c85e1301b82`.
+That creator is suitable for generating test containers with its own key, but
+it is not a drop-in signer for the original client.
