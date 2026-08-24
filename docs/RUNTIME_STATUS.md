@@ -139,6 +139,12 @@ This is the short handoff view. The full reasoning and command history are in
     its screenshot matches the earlier replay at
     `fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`.
     The responder was loopback-only and no live service was contacted.
+28. The recovered GS2 source was checked for the separate game-server TLS
+    literal. The Classic branch sets `usessl` to false, the NewGraal login
+    function guards `setSSLParameters` with that flag, and a final assignment
+    also clears it. The stale `NakFpz15` certificate is therefore not active
+    in the main Classic login path, although it remains relevant to other
+    legacy modes or modified scripts.
 
 ## Not verified
 
@@ -159,7 +165,8 @@ This is the short handoff view. The full reasoning and command history are in
   syntax or multiline literals. Only the recovered connector fixture has
   passed the adapted runtime replay.
 * Whether a replacement certificate and the old `RC4-SHA` and `SSLv23`
-  settings are accepted by a current authorized game server.
+  settings are accepted by a current authorized game server on a branch that
+  actually enables game-server TLS.
 
 ## Current blocker
 

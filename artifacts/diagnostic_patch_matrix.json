@@ -145,6 +145,9 @@
       "certificate_der_sha256": "2e6425395e91baab7be95d9918de198684bcb718800bff07113e7f336d06ce56",
       "certificate_not_after": "2023-07-29T07:37:32Z",
       "matches_connector_trust_bundle_index": 0,
+      "classic_source_usessl_value": false,
+      "classic_game_server_tls_active": false,
+      "main_classic_blocker": false,
       "network_contacted": false,
       "runtime_verified": false
     },

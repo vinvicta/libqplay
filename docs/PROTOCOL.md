@@ -184,7 +184,8 @@ trust chain through a verified endpoint. The local diagnostic builds merely
 skip or redirect the check so that later protocol behavior can be observed.
 
 The separate game-server trust buffer is stale too. The decoded
-`StartScript_Connector` bytecode calls `client.setSSLParameters` with a
+`StartScript_Connector` bytecode contains a conditional
+`client.setSSLParameters` call with a
 Base64-decoded certificate literal, `RC4-SHA`, `SSLv23`, and an enabled flag.
 The native callback at ARM64 `0x1eb964` decrypts the certificate argument with
 the bit-reversed DES key `NakFpz15`, then stores the protocol, cipher, and
@@ -216,7 +217,12 @@ python3 tools/replace_game_server_tls_source.py \
   --report /tmp/StartScript_Connector.server-cert.json
 ```
 
-The source helper allows the literal to grow for recompilation. The existing
+The recovered source also settles when this branch is active. The Classic
+branch sets `usessl` to false, `sendLoginNewProtocol` guards the call with that
+flag, and a final assignment clears it again. The stale game-server TLS value
+is therefore not used by the main Classic path. It remains relevant to other
+legacy modes or modified scripts that enable SSL. The source helper allows the
+literal to grow for recompilation. The existing
 HexaParser literal-order adapter remains a separate, fixture-specific step;
 the certificate replacement does not change handler or server-list ordering.
 The identity source compiled to the same 16,141-byte bytecode as the earlier
@@ -224,11 +230,13 @@ repaired source. A 1,072-character offline test replacement also compiled
 successfully, producing 16,253 bytes. Both checks were offline and kept
 verification enabled.
 
-This makes an expired game-server trust certificate a concrete second
-compatibility failure, not just an inference from the connector path. It also
-means that replacing only the connector bundle cannot repair the full login
-sequence. The old `RC4-SHA` and `SSLv23` settings are another current-service
-compatibility risk, although their live behavior has not been tested here.
+This makes an expired game-server trust certificate a concrete stale input for
+branches that enable it, not an active Classic failure. Replacing only the
+connector bundle still cannot repair every part of the full login sequence,
+because the Classic replay has an independent loading-state gate. The old
+`RC4-SHA` and `SSLv23` settings remain a current-service compatibility risk for
+those non-Classic branches, although their live behavior has not been tested
+here.
 
 ## 4. NewGraal framing
 

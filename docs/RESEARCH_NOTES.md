@@ -135,8 +135,8 @@ request asks for verification. `TSocketConnection_enableSSLOnSocket` at
 through `CyaSSL_CTX_load_verify_buffer`, configures verification, and calls
 `CyaSSL_connect`. The game-server path reaches the same socket class through
 `TGraalConnection_connectToServer` at `0x1feb98`, but its trust buffer and SSL
-flag are separate fields. This is why a connector certificate repair alone is
-not a complete game-server repair.
+flag are separate fields. That separate field matters only when the script
+enables game-server SSL; the recovered Classic branch leaves it disabled.
 
 The game-server trust material can now be traced back to the recovered script.
 `StartScript_Connector` calls `client.setSSLParameters` with a 960-character
@@ -152,9 +152,15 @@ between the two stale trust paths. The recovery is offline and recorded in
 `artifacts/game_server_tls.json`.
 
 The same script selects the old `RC4-SHA` cipher and `SSLv23` protocol for the
-game connection. A current server may reject those settings even after the
-certificate is updated, but that remains an unverified compatibility risk
-rather than a claim about the live endpoint.
+game connection when its `usessl` flag is true. The recovered source now makes
+the Classic case explicit: its `classic` branch sets `this.usessl = false`,
+`sendLoginNewProtocol` calls `setSSLParameters` only under that flag, and a
+final unconditional assignment also sets it to false. The stale game-server
+certificate is therefore not on the main Classic login path. It remains a
+real compatibility concern for other legacy modes or a modified script that
+enables SSL, but it is not evidence of why the Classic client fails to reach
+its connector today. The source-level control-flow result is recorded in
+`artifacts/game_server_tls.json`.
 
 A focused IDA re-audit checked whether the nonblocking socket itself prevented
 TLS from starting. `TSocketConnection_setNonBlocking` at `0x206320` calls

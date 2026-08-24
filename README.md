@@ -33,12 +33,14 @@ the standard ASN.1 `DigestInfo` form. The certificate problem remains real,
 and both it and any response signed by a different key must stay separate from
 the game-server protocol.
 
-The game-server path has a separate stale trust input in the decoded connector
-script. Its `setSSLParameters` call installs the same expired Eurocenter Games
-certificate, this time after native DES decryption with `NakFpz15`, and selects
-the old `RC4-SHA` and `SSLv23` settings. Connector-only trust replacement is
-therefore not enough for a current full login. See
-`artifacts/game_server_tls.json` for the offline certificate comparison.
+The decoded connector script also carries a separate stale trust literal for
+legacy branches. It installs the same expired Eurocenter Games certificate
+with native DES key `NakFpz15`, `RC4-SHA`, and `SSLv23`. The recovered Classic
+branch sets `usessl` to false before `sendLoginNewProtocol`, and the script
+also clears it unconditionally, so this game-server TLS literal is not active
+in the main Classic path. The current Classic SSL concern is the connector's
+native HTTPS trust bundle. See `artifacts/game_server_tls.json` for the
+offline source and certificate evidence.
 
 The saved connector fixture has now also been replayed with the native RSA
 result branch unchanged. A private ARM64-only candidate made the connector
@@ -113,7 +115,8 @@ two-connection replay and produces an identical screenshot. This is verified
 for the connector fixture only, not for arbitrary GS2 scripts.
 
 The separate game-server certificate path now has a source-level repair tool
-as well. `tools/replace_game_server_tls_source.py` finds both recovered
+as well. It is not active in the recovered Classic branch, but
+`tools/replace_game_server_tls_source.py` finds both recovered
 `setSSLParameters` certificate literals, verifies the existing native DES
 format, and writes a new GS2 file without changing the input. The original
 certificate produces an identity source and bytecode result, while a longer
@@ -191,6 +194,8 @@ proves the local native TLS path, not a current live certificate or service.
   same transform directly to recovered GS2 source for HexaParser. The
   resulting script still needs compilation, packaging, and an authorized
   signature.
+  `tools/audit_classic_ssl_mode.py` checks whether the recovered Classic
+  source actually enables the separate game-server TLS branch.
 * `artifacts/` contains small metadata exports. APKs, certificates, private
   keys, captured credentials, and game assets are intentionally not included.
 

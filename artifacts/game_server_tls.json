@@ -27,6 +27,17 @@
     ],
     "meaning": "The native callback decrypts the certificate argument, stores cipher, protocol, and verify-buffer fields, then enables SSL."
   },
+  "source_level_control_flow": {
+    "recovered_source_sha256": "a30f9eca136e3b8ff827bfb1bfe13fb442bd2e882963bf9863cd8de5f2669e68",
+    "classic_branch_sets_usessl": false,
+    "classic_branch_source_lines": [33, 35],
+    "send_login_new_protocol_ssl_guard_source_line": 223,
+    "final_unconditional_usessl_value": false,
+    "classic_game_server_tls_active": false,
+    "game_server_tls_literal_active_for_classic": false,
+    "source_audit_tool": "tools/audit_classic_ssl_mode.py",
+    "interpretation": "The recovered Classic branch uses the NewGraal game protocol over its ordinary TCP connection. The stale setSSLParameters literal remains relevant to legacy modes or modified scripts that leave usessl enabled."
+  },
   "certificate": {
     "der_bytes": 718,
     "der_sha256": "2e6425395e91baab7be95d9918de198684bcb718800bff07113e7f336d06ce56",
@@ -41,6 +52,7 @@
   "interpretation": {
     "connector_and_game_server_share_der": true,
     "connector_trust_replacement_alone_is_sufficient": false,
+    "game_server_tls_is_main_classic_blocker": false,
     "runtime_verified": false,
     "network_contacted": false
   },
