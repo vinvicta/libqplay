@@ -59,7 +59,7 @@ incoming references, flags, and source category. The `sub_` rows are not
 missing from the archive; they are unnamed because this stripped portion of
 the file provides no reliable semantic name for them.
 
-A focused follow-up pass did recover reliable behavior names for 276 of those
+A focused follow-up pass did recover reliable behavior names for 311 of those
 IDA-created functions. The labels cover the two server-login callbacks, the
 packet-190 server-list completion wrapper, file-download bookkeeping, the
 inbound handler-table loader and clearer, weapon and encrypted-script updates,
@@ -76,6 +76,16 @@ download. The labels are applied in the IDB and reflected in the function
 inventory, but they are not presented as original ELF symbols. The complete
 list with confidence and evidence is in
 `artifacts/ida_semantic_labels.json`.
+
+A separate JNI sweep labels 35 native-to-Java wrappers in
+`0x24025c..0x242df0` from exact method strings in the call sites. The labels
+cover Facebook, TrialPay, Fabzat, TapJoy, Distimo, Google Play, URL,
+keyboard, device-model, and OS-version paths. `JNI_onScriptFunctionCall` at
+`0x241628` forwards the two script buffers to Java, and
+`JNI_setVideoPlayerRectangle` at `0x242df0` caches the render rectangle before
+resolving the Java video method. The two cache-string setters at `0x2401f4`
+and `0x240204` remain unnamed because their semantic caller names are not yet
+proven.
 
 The latest native audit extends the same evidence standard beyond the packet
 core. It labels the `TGraalConnection` and `THTTPRequest` accessors used by

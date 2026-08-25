@@ -8,10 +8,10 @@
   "policy": "These aliases are analysis labels, not recovered source names. The evidence is recorded so a later pass can correct a label without confusing it with an imported ELF symbol.",
   "inventory_after_labels": {
     "total_functions": 11271,
-    "ida_default_sub_functions": 1835,
-    "ida_named_non_elf_functions": 1340,
-    "named_function_total": 9436,
-    "new_labels_in_this_pass": 276
+    "ida_default_sub_functions": 1800,
+    "ida_named_non_elf_functions": 1375,
+    "named_function_total": 9471,
+    "new_labels_in_this_pass": 311
   },
   "labels": [
     {
@@ -1669,6 +1669,216 @@
       "name": "TUpdatePackage_updateForce",
       "confidence": "high",
       "evidence": ["Forwards to TUpdatePackage_update_bool with true"]
+    },
+    {
+      "va": "0x24025c",
+      "name": "JNI_getNewFacebookPermissions",
+      "confidence": "high",
+      "evidence": ["Calls Java static getNewFacebookPermissions with signature ()[B", "Copies the returned byte array into a TString"]
+    },
+    {
+      "va": "0x240380",
+      "name": "JNI_getNewFacebookToken",
+      "confidence": "high",
+      "evidence": ["Calls Java static getNewFacebookToken with signature ()[B", "Copies the returned byte array into a TString"]
+    },
+    {
+      "va": "0x2404a4",
+      "name": "JNI_getAndroidDeviceModel",
+      "confidence": "high",
+      "evidence": ["Calls Java static getAndroidDeviceModel with signature ()[B", "Copies the returned byte array into a TString"]
+    },
+    {
+      "va": "0x2405c8",
+      "name": "JNI_getAndroidOSVersion",
+      "confidence": "high",
+      "evidence": ["Calls Java static getAndroidOSVersion with signature ()[B", "Copies the returned byte array into a TString"]
+    },
+    {
+      "va": "0x2406ec",
+      "name": "JNI_isTrialpaySupported",
+      "confidence": "high",
+      "evidence": ["Calls Java static isTrialpaySupported with signature ()Z", "Returns the Java boolean result"]
+    },
+    {
+      "va": "0x240774",
+      "name": "JNI_isFabzatSupported",
+      "confidence": "high",
+      "evidence": ["Calls Java static isFabzatSupported with signature ()Z", "Returns the Java boolean result"]
+    },
+    {
+      "va": "0x2407fc",
+      "name": "JNI_canShowFacebookWebDialog",
+      "confidence": "high",
+      "evidence": ["Calls Java static canShowFacebookWebDialog with signature ()Z", "Returns the Java boolean result"]
+    },
+    {
+      "va": "0x240884",
+      "name": "JNI_isNewFacebookAvailable",
+      "confidence": "high",
+      "evidence": ["Calls Java static isNewFacebookAvailable with signature ()Z", "Returns the Java boolean result"]
+    },
+    {
+      "va": "0x24090c",
+      "name": "JNI_initGooglePlay",
+      "confidence": "high",
+      "evidence": ["Calls Java static initGooglePlay with signature ()Z", "Returns the Java boolean result"]
+    },
+    {
+      "va": "0x240994",
+      "name": "JNI_isTapJoyEnabled",
+      "confidence": "high",
+      "evidence": ["Calls Java static isTapJoyEnabled with signature ()Z", "Returns the Java boolean result"]
+    },
+    {
+      "va": "0x240a1c",
+      "name": "JNI_canShowFacebookShareDialog",
+      "confidence": "high",
+      "evidence": ["Calls Java static canShowFacebookShareDialog with signature ([B[B[B[B[B[B)Z", "Converts six TString byte buffers and returns the Java boolean result"]
+    },
+    {
+      "va": "0x240eb8",
+      "name": "JNI_buyGooglePlayItem",
+      "confidence": "high",
+      "evidence": ["Calls Java static buyGooglePlayItem with signature ([B[B)Z", "Passes two TString byte buffers and returns the Java boolean result"]
+    },
+    {
+      "va": "0x2410ac",
+      "name": "JNI_connectToTapJoyService",
+      "confidence": "high",
+      "evidence": ["Calls Java static connectToTapJoyService with signature ([B[B)Z", "Passes two TString byte buffers and returns the Java boolean result"]
+    },
+    {
+      "va": "0x241288",
+      "name": "JNI_canOpenURL",
+      "confidence": "high",
+      "evidence": ["Calls Java static canOpenURL with signature ([B)Z", "Passes one TString byte buffer and returns the Java boolean result"]
+    },
+    {
+      "va": "0x2413cc",
+      "name": "JNI_getNewFacebookSessionState",
+      "confidence": "high",
+      "evidence": ["Calls Java static getNewFacebookSessionState with signature ()I", "Returns the Java integer result"]
+    },
+    {
+      "va": "0x241444",
+      "name": "JNI_closeVirtualKeyboard",
+      "confidence": "high",
+      "evidence": ["Calls Java static closeVirtualKeyboard with signature (I)V", "Passes the native integer argument"]
+    },
+    {
+      "va": "0x2414cc",
+      "name": "JNI_showFabzatStore",
+      "confidence": "high",
+      "evidence": ["Calls Java static showFabzatStore with signature ()V"]
+    },
+    {
+      "va": "0x241540",
+      "name": "JNI_setDistimoRegisteredUser",
+      "confidence": "high",
+      "evidence": ["Calls Java static setDistimoRegisteredUser with signature ()V"]
+    },
+    {
+      "va": "0x2415b4",
+      "name": "JNI_logoutFromNewFacebook",
+      "confidence": "high",
+      "evidence": ["Calls Java static logoutFromNewFacebook with signature ()V"]
+    },
+    {
+      "va": "0x241628",
+      "name": "JNI_onScriptFunctionCall",
+      "confidence": "high",
+      "evidence": ["Calls Java static onScriptFunctionCall with signature ([B[B)V", "Forwards two TString byte buffers to the Java script callback"]
+    },
+    {
+      "va": "0x2417f0",
+      "name": "JNI_showTrialpayOfferwall",
+      "confidence": "high",
+      "evidence": ["Calls Java static showTrialpayOfferwall with signature ([B)V", "Passes one TString byte buffer"]
+    },
+    {
+      "va": "0x24190c",
+      "name": "JNI_setTrialpayAgeAndGender",
+      "confidence": "high",
+      "evidence": ["Calls Java static setTrialpayAgeAndGender with signature (I[B)V", "Passes the native integer and one TString byte buffer"]
+    },
+    {
+      "va": "0x241a38",
+      "name": "JNI_setTrialpayCampaign",
+      "confidence": "high",
+      "evidence": ["Calls Java static setTrialpayCampaign with signature ([B[B)V", "Passes two TString byte buffers"]
+    },
+    {
+      "va": "0x241c00",
+      "name": "JNI_initTrialpay",
+      "confidence": "high",
+      "evidence": ["Calls Java static initTrialpay with signature ([B)V", "Passes one TString byte buffer"]
+    },
+    {
+      "va": "0x241d1c",
+      "name": "JNI_fabzatSetResourcePath",
+      "confidence": "high",
+      "evidence": ["Calls Java static fabzatSetResourcePath with signature ([B)V", "Passes one TString byte buffer"]
+    },
+    {
+      "va": "0x241e38",
+      "name": "JNI_initFabzatStore",
+      "confidence": "high",
+      "evidence": ["Calls Java static initFabzatStore with signature ([B[B)V", "Passes two TString byte buffers"]
+    },
+    {
+      "va": "0x242000",
+      "name": "JNI_registerPurchaseToDistimo",
+      "confidence": "high",
+      "evidence": ["Calls Java static registerPurchaseToDistimo with signature ([B[B)V", "Passes two TString byte buffers"]
+    },
+    {
+      "va": "0x2421c8",
+      "name": "JNI_connectToDistimoService",
+      "confidence": "high",
+      "evidence": ["Calls Java static connectToDistimoService with signature ([B)V", "Passes one TString byte buffer"]
+    },
+    {
+      "va": "0x24233c",
+      "name": "JNI_showFacebookWebDialog",
+      "confidence": "high",
+      "evidence": ["Calls Java static showFacebookWebDialog with signature ([B[B)V", "Passes two TString byte buffers"]
+    },
+    {
+      "va": "0x242504",
+      "name": "JNI_showFacebookShareDialog",
+      "confidence": "high",
+      "evidence": ["Calls Java static showFacebookShareDialog with signature ([B[B[B[B[B[B)V", "Passes six TString byte buffers"]
+    },
+    {
+      "va": "0x24296c",
+      "name": "JNI_requestNewFacebookGraph",
+      "confidence": "high",
+      "evidence": ["Calls Java static requestNewFacebookGraph with signature ([B)V", "Passes one TString byte buffer"]
+    },
+    {
+      "va": "0x242a88",
+      "name": "JNI_requestNewFacebookRights",
+      "confidence": "high",
+      "evidence": ["Calls Java static requestNewFacebookRights with signature (I[B)V", "Passes the native integer and one TString byte buffer"]
+    },
+    {
+      "va": "0x242bb4",
+      "name": "JNI_loginToNewFacebook",
+      "confidence": "high",
+      "evidence": ["Calls Java static loginToNewFacebook with signature (I[B)V", "Passes the native integer and one TString byte buffer"]
+    },
+    {
+      "va": "0x242ce0",
+      "name": "JNI_showTapJoyOffers",
+      "confidence": "high",
+      "evidence": ["Calls Java static showTapJoyOffers with signature ([B)V", "Passes one TString byte buffer"]
+    },
+    {
+      "va": "0x242df0",
+      "name": "JNI_setVideoPlayerRectangle",
+      "confidence": "high",
+      "evidence": ["Calls Java static setVideoPlayerRectangle with signature (IIII)V", "Caches four rectangle values in dword_391228 through dword_391234 before resolving the Java method"]
     }
   ],
   "network_contacted": false
