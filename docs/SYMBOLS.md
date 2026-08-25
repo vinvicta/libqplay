@@ -175,6 +175,11 @@ lists, and the restart state. These are kept in
 the 467 applied labels, until the same names are written to IDA and included
 in a fresh inventory export.
 
+When the IDA bridge is available, run
+`tools/ida_apply_native_callback_candidates.py` in review mode first. It
+resolves the existing names, reports missing functions, and only writes the
+proposed names and evidence comments when `APPLY_RENAMES` is explicitly enabled.
+
 The inventory was generated from the active ARM64 database by
 `tools/export_function_inventory.py`. It waits for auto-analysis, joins each
 function start against the translated symbol export, and writes the result in
