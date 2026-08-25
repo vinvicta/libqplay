@@ -1190,6 +1190,45 @@ as applied IDA labels because the bridge is still unavailable. With the earlier
 zlib, static-state, and sound entries, the review-only candidate set contains
 51 native names. No live endpoint was contacted during this pass.
 
+## TServerPlayer property and function tables
+
+The player property constructor at `0x18b9bc` installs 52 records from
+`0x37ce00`, followed by six script functions from `0x37d7c0`. The property
+names decode to account, AP, attachment state, bombs, buddy state, chat and
+chat offset, darts, hearts and HP, glove and weapon power, currency, guild and
+head images, identity and channel flags, language, level name, message bubble,
+MP, nickname, pause state, platform, player-list metadata, ratings, shield and
+sword images, coordinates, and the six related image or state aliases. The
+complete record-to-address map is in the candidate artifact.
+
+This table also shows where the old client intentionally aliases script
+properties:
+
+* `fullhearts` and `maxhp` share getter `0x18a784`.
+* `gralats` and `rupees` share getter `0x18a698` and setter `0x18b1c8`.
+* `head` and `headimg` share getter `0x18abfc` and setter `0x18a6b8`.
+* `hearts` and `hp` share getter `0x18a6d8`.
+
+Those shared targets are represented as one candidate each, so the batch does
+not assign two incompatible names to the same native function. The `nick`
+getter at `0x18acec` is included, while its setter is already a surviving ELF
+jump to `TServerPlayer::setNick` at `0x18e164` and is intentionally not
+duplicated. The `attachedtoobject` name contains the familiar encoded-zero
+terminator marker, so the recovered spelling is based on the table context and
+the paired setter rather than on the literal bytes alone.
+
+The six function entries decode to `isguildpm`, `ismasspm`, `pmswaiting`,
+`openexternalhistory`, `openexternalpm`, and `showprofile`. Their callback
+starts are `0x18add0`, `0x18ad7c`, `0x18aa68`, `0x18aa88`, `0x18aa90`, and
+`0x18aeec`. The saved IDA inventory has no function boundary for
+`0x18aa68`, but the callback pointer is present in the registration record, so
+it is retained as a candidate with that database limitation called out.
+
+The new player entries are stored under `server_player_properties` and
+`server_player_functions`. They add 74 unique native addresses and raise the
+review-only candidate set from 51 to 125. No IDA names were changed during
+this pass, and no live endpoint was contacted.
+
 ## Held-connection ARM64 resource replay
 
 The runtime path was revisited after the offline sound-table pass. The earlier

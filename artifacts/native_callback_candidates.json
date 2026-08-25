@@ -294,6 +294,529 @@
       ]
     }
   ],
+  "server_player_properties": [
+    {
+      "va": "0x18ac8c",
+      "current_ida_name": "sub_18AC8C",
+      "proposed_name": "TServerPlayer_getAccount",
+      "confidence": "high",
+      "evidence": ["The TServerPlayerProperties record at 0x37ce00 decodes to account and stores this address in its getter slot", "The same record has no setter target"]
+    },
+    {
+      "va": "0x18a568",
+      "current_ida_name": "sub_18A568",
+      "proposed_name": "TServerPlayer_getAP",
+      "confidence": "high",
+      "evidence": ["The TServerPlayerProperties record at 0x37ce30 decodes to ap and stores this address in its getter slot", "The accessor is paired with the setter at 0x18a588"]
+    },
+    {
+      "va": "0x18a588",
+      "current_ida_name": "sub_18A588",
+      "proposed_name": "TServerPlayer_setAP",
+      "confidence": "high",
+      "evidence": ["The ap record at 0x37ce30 stores this address in its setter slot", "The body is the paired script setter for the AP property"]
+    },
+    {
+      "va": "0x18a5dc",
+      "current_ida_name": "sub_18A5DC",
+      "proposed_name": "TServerPlayer_getAttached",
+      "confidence": "high",
+      "evidence": ["The TServerPlayerProperties record at 0x37ce60 decodes to attached and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18a604",
+      "current_ida_name": "sub_18A604",
+      "proposed_name": "TServerPlayer_getAttachedToObject",
+      "confidence": "high",
+      "evidence": ["The record at 0x37ce90 decodes to attachedtoobject after accounting for the encoded terminator byte", "The getter is paired with the setter at 0x18ca40"]
+    },
+    {
+      "va": "0x18ca40",
+      "current_ida_name": "sub_18CA40",
+      "proposed_name": "TServerPlayer_setAttachedToObject",
+      "confidence": "high",
+      "evidence": ["The attachedtoobject record at 0x37ce90 stores this address in its setter slot", "The callback changes the player's attached object through the script property contract"]
+    },
+    {
+      "va": "0x18a60c",
+      "current_ida_name": "sub_18A60C",
+      "proposed_name": "TServerPlayer_getBombs",
+      "confidence": "high",
+      "evidence": ["The record at 0x37cec0 decodes to bombs and stores this address in its getter slot", "The getter is paired with the setter at 0x18b1a0"]
+    },
+    {
+      "va": "0x18b1a0",
+      "current_ida_name": "sub_18B1A0",
+      "proposed_name": "TServerPlayer_setBombs",
+      "confidence": "high",
+      "evidence": ["The bombs record at 0x37cec0 stores this address in its setter slot", "The callback is the script-facing bombs mutator"]
+    },
+    {
+      "va": "0x18a720",
+      "current_ida_name": "sub_18A720",
+      "proposed_name": "TServerPlayer_getIsBuddy",
+      "confidence": "high",
+      "evidence": ["The record at 0x37cef0 decodes to isbuddy and stores this address in its getter slot", "The getter is paired with the setter at 0x18a728"]
+    },
+    {
+      "va": "0x18a728",
+      "current_ida_name": "sub_18A728",
+      "proposed_name": "TServerPlayer_setIsBuddy",
+      "confidence": "high",
+      "evidence": ["The isbuddy record at 0x37cef0 stores this address in its setter slot", "The callback is the script-facing isbuddy mutator"]
+    },
+    {
+      "va": "0x18acbc",
+      "current_ida_name": "sub_18ACBC",
+      "proposed_name": "TServerPlayer_getChat",
+      "confidence": "high",
+      "evidence": ["The record at 0x37cf20 decodes to chat and stores this address in its getter slot", "The getter is paired with the setter at 0x18a62c"]
+    },
+    {
+      "va": "0x18a62c",
+      "current_ida_name": "sub_18A62C",
+      "proposed_name": "TServerPlayer_setChat",
+      "confidence": "high",
+      "evidence": ["The chat record at 0x37cf20 stores this address in its setter slot", "The callback is the script-facing chat mutator"]
+    },
+    {
+      "va": "0x18ac5c",
+      "current_ida_name": "sub_18AC5C",
+      "proposed_name": "TServerPlayer_getCommunityName",
+      "confidence": "high",
+      "evidence": ["The record at 0x37cf50 decodes to communityname and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18aec8",
+      "current_ida_name": "sub_18AEC8",
+      "proposed_name": "TServerPlayer_getChatOffset",
+      "confidence": "high",
+      "evidence": ["The record at 0x37cf80 decodes to chatoffset and stores this address in its getter slot", "The getter is paired with the setter at 0x18ae9c"]
+    },
+    {
+      "va": "0x18ae9c",
+      "current_ida_name": "sub_18AE9C",
+      "proposed_name": "TServerPlayer_setChatOffset",
+      "confidence": "high",
+      "evidence": ["The chatoffset record at 0x37cf80 stores this address in its setter slot", "The callback is the script-facing chat-offset mutator"]
+    },
+    {
+      "va": "0x18a5bc",
+      "current_ida_name": "sub_18A5BC",
+      "proposed_name": "TServerPlayer_getDarts",
+      "confidence": "high",
+      "evidence": ["The record at 0x37cfb0 decodes to darts and stores this address in its getter slot", "The getter is paired with the setter at 0x18b178"]
+    },
+    {
+      "va": "0x18b178",
+      "current_ida_name": "sub_18B178",
+      "proposed_name": "TServerPlayer_setDarts",
+      "confidence": "high",
+      "evidence": ["The darts record at 0x37cfb0 stores this address in its setter slot", "The callback is the script-facing darts mutator"]
+    },
+    {
+      "va": "0x18a784",
+      "current_ida_name": "sub_18A784",
+      "proposed_name": "TServerPlayer_getFullHeartsMaxHP",
+      "confidence": "high",
+      "evidence": ["The records at 0x37cfe0 and 0x37d490 decode to fullhearts and maxhp and share this getter", "The shared callback is retained as one symbol rather than being assigned two conflicting names"]
+    },
+    {
+      "va": "0x18a650",
+      "current_ida_name": "sub_18A650",
+      "proposed_name": "TServerPlayer_getGlovePower",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d010 decodes to glovepower and stores this address in its getter slot", "The getter is paired with the setter at 0x18a670"]
+    },
+    {
+      "va": "0x18a670",
+      "current_ida_name": "sub_18A670",
+      "proposed_name": "TServerPlayer_setGlovePower",
+      "confidence": "high",
+      "evidence": ["The glovepower record at 0x37d010 stores this address in its setter slot", "The callback is the script-facing glove-power mutator"]
+    },
+    {
+      "va": "0x18a698",
+      "current_ida_name": "sub_18A698",
+      "proposed_name": "TServerPlayer_getGralatsRupees",
+      "confidence": "high",
+      "evidence": ["The records at 0x37d040 and 0x37d670 decode to gralats and rupees and share this getter", "The shared callback is retained as one symbol because both script properties use the same target"]
+    },
+    {
+      "va": "0x18b1c8",
+      "current_ida_name": "sub_18B1C8",
+      "proposed_name": "TServerPlayer_setGralatsRupees",
+      "confidence": "high",
+      "evidence": ["The gralats and rupees records at 0x37d040 and 0x37d670 share this setter", "The callback is the common script-facing currency mutator"]
+    },
+    {
+      "va": "0x18ac2c",
+      "current_ida_name": "sub_18AC2C",
+      "proposed_name": "TServerPlayer_getGuild",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d070 decodes to guild and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18abfc",
+      "current_ida_name": "sub_18ABFC",
+      "proposed_name": "TServerPlayer_getHeadOrHeadImg",
+      "confidence": "high",
+      "evidence": ["The records at 0x37d0a0 and 0x37d0d0 decode to head and headimg and share this getter", "The shared callback is retained as one symbol because the table deliberately aliases both properties"]
+    },
+    {
+      "va": "0x18a6b8",
+      "current_ida_name": "sub_18A6B8",
+      "proposed_name": "TServerPlayer_setHeadOrHeadImg",
+      "confidence": "high",
+      "evidence": ["The head and headimg records at 0x37d0a0 and 0x37d0d0 share this setter", "The callback is the common script-facing head-image mutator"]
+    },
+    {
+      "va": "0x18ae48",
+      "current_ida_name": "sub_18AE48",
+      "proposed_name": "TServerPlayer_getHeadset",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d100 decodes to headset and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18b1f8",
+      "current_ida_name": "sub_18B1F8",
+      "proposed_name": "TServerPlayer_setHeadset",
+      "confidence": "high",
+      "evidence": ["The headset record at 0x37d100 stores this address in its setter slot", "The callback is the script-facing headset mutator"]
+    },
+    {
+      "va": "0x18a6d8",
+      "current_ida_name": "sub_18A6D8",
+      "proposed_name": "TServerPlayer_getHeartsOrHP",
+      "confidence": "high",
+      "evidence": ["The records at 0x37d130 and 0x37d190 decode to hearts and hp and share this getter", "The shared callback is retained as one symbol because both properties use the same target"]
+    },
+    {
+      "va": "0x18abcc",
+      "current_ida_name": "sub_18ABCC",
+      "proposed_name": "TServerPlayer_getHorseImg",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d160 decodes to horseimg and stores this address in its getter slot", "The getter is paired with the setter at 0x18aad4"]
+    },
+    {
+      "va": "0x18aad4",
+      "current_ida_name": "sub_18AAD4",
+      "proposed_name": "TServerPlayer_setHorseImg",
+      "confidence": "high",
+      "evidence": ["The horseimg record at 0x37d160 stores this address in its setter slot", "The callback is the script-facing horse-image mutator"]
+    },
+    {
+      "va": "0x18a6f8",
+      "current_ida_name": "sub_18A6F8",
+      "proposed_name": "TServerPlayer_getID",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d1c0 decodes to id and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18a700",
+      "current_ida_name": "sub_18A700",
+      "proposed_name": "TServerPlayer_getIsAdmin",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d1f0 decodes to isadmin and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18a708",
+      "current_ida_name": "sub_18A708",
+      "proposed_name": "TServerPlayer_getIsBlocking",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d220 decodes to isblocking and stores this address in its getter slot", "The getter is paired with the setter at 0x18a714"]
+    },
+    {
+      "va": "0x18a714",
+      "current_ida_name": "sub_18A714",
+      "proposed_name": "TServerPlayer_setIsBlocking",
+      "confidence": "high",
+      "evidence": ["The isblocking record at 0x37d220 stores this address in its setter slot", "The callback is the script-facing blocking-state mutator"]
+    },
+    {
+      "va": "0x18a730",
+      "current_ida_name": "sub_18A730",
+      "proposed_name": "TServerPlayer_getIsChannel",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d250 decodes to ischannel and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18a738",
+      "current_ida_name": "sub_18A738",
+      "proposed_name": "TServerPlayer_getIsChannelOpen",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d280 decodes to ischannelopen and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18a740",
+      "current_ida_name": "sub_18A740",
+      "proposed_name": "TServerPlayer_getIsChannelUser",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d2b0 decodes to ischanneluser and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18a748",
+      "current_ida_name": "sub_18A748",
+      "proposed_name": "TServerPlayer_getIsExternal",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d2e0 decodes to isexternal and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18a750",
+      "current_ida_name": "sub_18A750",
+      "proposed_name": "TServerPlayer_getIsFemale",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d310 decodes to isfemale and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18a75c",
+      "current_ida_name": "sub_18A75C",
+      "proposed_name": "TServerPlayer_getIsIgnored",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d340 decodes to isignored and stores this address in its getter slot", "The getter is paired with the setter at 0x18a764"]
+    },
+    {
+      "va": "0x18a764",
+      "current_ida_name": "sub_18A764",
+      "proposed_name": "TServerPlayer_setIsIgnored",
+      "confidence": "high",
+      "evidence": ["The isignored record at 0x37d340 stores this address in its setter slot", "The callback is the script-facing ignored-state mutator"]
+    },
+    {
+      "va": "0x18a76c",
+      "current_ida_name": "sub_18A76C",
+      "proposed_name": "TServerPlayer_getIsIgnoring",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d370 decodes to isignoring and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18a774",
+      "current_ida_name": "sub_18A774",
+      "proposed_name": "TServerPlayer_getIsLoggedIn",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d3a0 decodes to isloggedin and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18a77c",
+      "current_ida_name": "sub_18A77C",
+      "proposed_name": "TServerPlayer_getIsMale",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d3d0 decodes to ismale and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18ab9c",
+      "current_ida_name": "sub_18AB9C",
+      "proposed_name": "TServerPlayer_getLanguage",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d400 decodes to language and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18ae24",
+      "current_ida_name": "sub_18AE24",
+      "proposed_name": "TServerPlayer_getLanguageDomain",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d430 decodes to languagedomain and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18ab6c",
+      "current_ida_name": "sub_18AB6C",
+      "proposed_name": "TServerPlayer_getLevelName",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d460 decodes to levelname and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18b2d8",
+      "current_ida_name": "sub_18B2D8",
+      "proposed_name": "TServerPlayer_getMessageBubble",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d4c0 decodes to messagebubble and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18a7a4",
+      "current_ida_name": "sub_18A7A4",
+      "proposed_name": "TServerPlayer_getMP",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d4f0 decodes to mp and stores this address in its getter slot", "The getter is paired with the setter at 0x18a7c4"]
+    },
+    {
+      "va": "0x18a7c4",
+      "current_ida_name": "sub_18A7C4",
+      "proposed_name": "TServerPlayer_setMP",
+      "confidence": "high",
+      "evidence": ["The mp record at 0x37d4f0 stores this address in its setter slot", "The callback is the script-facing MP mutator"]
+    },
+    {
+      "va": "0x18acec",
+      "current_ida_name": "sub_18ACEC",
+      "proposed_name": "TServerPlayer_getNick",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d520 decodes to nick and stores this address in its getter slot", "The existing setter target is an ELF jump to TServerPlayer::setNick and is intentionally not duplicated here"]
+    },
+    {
+      "va": "0x18a7f8",
+      "current_ida_name": "sub_18A7F8",
+      "proposed_name": "TServerPlayer_getPaused",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d550 decodes to paused and stores this address in its getter slot", "The getter is paired with the setter at 0x18a818"]
+    },
+    {
+      "va": "0x18a818",
+      "current_ida_name": "sub_18A818",
+      "proposed_name": "TServerPlayer_setPaused",
+      "confidence": "high",
+      "evidence": ["The paused record at 0x37d550 stores this address in its setter slot", "The callback is the script-facing paused-state mutator"]
+    },
+    {
+      "va": "0x18ab3c",
+      "current_ida_name": "sub_18AB3C",
+      "proposed_name": "TServerPlayer_getPlatform",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d580 decodes to platform and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18a838",
+      "current_ida_name": "sub_18A838",
+      "proposed_name": "TServerPlayer_getPlayerListIcon",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d5b0 decodes to playerlisticon and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18ad58",
+      "current_ida_name": "sub_18AD58",
+      "proposed_name": "TServerPlayer_getPlayersIndex",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d5e0 decodes to playersindex and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18a840",
+      "current_ida_name": "sub_18A840",
+      "proposed_name": "TServerPlayer_getRating",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d610 decodes to rating and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18a84c",
+      "current_ida_name": "sub_18A84C",
+      "proposed_name": "TServerPlayer_getRatingD",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d640 decodes to ratingd and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18ab0c",
+      "current_ida_name": "sub_18AB0C",
+      "proposed_name": "TServerPlayer_getShieldImg",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d6a0 decodes to shieldimg and stores this address in its getter slot", "The getter is paired with the setter at 0x18aacc"]
+    },
+    {
+      "va": "0x18aacc",
+      "current_ida_name": "sub_18AACC",
+      "proposed_name": "TServerPlayer_setShieldImg",
+      "confidence": "high",
+      "evidence": ["The shieldimg record at 0x37d6a0 stores this address in its setter slot", "The callback is the script-facing shield-image mutator"]
+    },
+    {
+      "va": "0x18a858",
+      "current_ida_name": "sub_18A858",
+      "proposed_name": "TServerPlayer_getShieldPower",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d6d0 decodes to shieldpower and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18aadc",
+      "current_ida_name": "sub_18AADC",
+      "proposed_name": "TServerPlayer_getSwordImg",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d700 decodes to swordimg and stores this address in its getter slot", "The getter is paired with the setter at 0x18aac4"]
+    },
+    {
+      "va": "0x18aac4",
+      "current_ida_name": "sub_18AAC4",
+      "proposed_name": "TServerPlayer_setSwordImg",
+      "confidence": "high",
+      "evidence": ["The swordimg record at 0x37d700 stores this address in its setter slot", "The callback is the script-facing sword-image mutator"]
+    },
+    {
+      "va": "0x18a878",
+      "current_ida_name": "sub_18A878",
+      "proposed_name": "TServerPlayer_getSwordPower",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d730 decodes to swordpower and stores this address in its getter slot", "The property is read-only in the registration table"]
+    },
+    {
+      "va": "0x18a898",
+      "current_ida_name": "sub_18A898",
+      "proposed_name": "TServerPlayer_getX",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d760 decodes to x and stores this address in its getter slot", "The getter is paired with the setter at 0x18a8cc"]
+    },
+    {
+      "va": "0x18a8cc",
+      "current_ida_name": "sub_18A8CC",
+      "proposed_name": "TServerPlayer_setX",
+      "confidence": "high",
+      "evidence": ["The x record at 0x37d760 stores this address in its setter slot", "The callback is the script-facing x-position mutator"]
+    },
+    {
+      "va": "0x18a980",
+      "current_ida_name": "sub_18A980",
+      "proposed_name": "TServerPlayer_getY",
+      "confidence": "high",
+      "evidence": ["The record at 0x37d790 decodes to y and stores this address in its getter slot", "The getter is paired with the setter at 0x18a9b4"]
+    },
+    {
+      "va": "0x18a9b4",
+      "current_ida_name": "sub_18A9B4",
+      "proposed_name": "TServerPlayer_setY",
+      "confidence": "high",
+      "evidence": ["The y record at 0x37d790 stores this address in its setter slot", "The callback is the script-facing y-position mutator"]
+    }
+  ],
+  "server_player_functions": [
+    {
+      "va": "0x18add0",
+      "current_ida_name": "sub_18ADD0",
+      "proposed_name": "TServerPlayer_script_isGuildPM",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37d7c0 decodes to isguildpm and stores this callback at +0x18", "The callback is part of the six-entry TServerPlayer script-function table"]
+    },
+    {
+      "va": "0x18ad7c",
+      "current_ida_name": "sub_18AD7C",
+      "proposed_name": "TServerPlayer_script_isMassPM",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37d7f0 decodes to ismasspm and stores this callback at +0x18", "The callback is part of the six-entry TServerPlayer script-function table"]
+    },
+    {
+      "va": "0x18aa68",
+      "current_ida_name": "sub_18AA68",
+      "proposed_name": "TServerPlayer_script_PMsWaiting",
+      "confidence": "high",
+      "review_note": "The callback pointer is present in the table, but the saved function inventory did not contain an IDA function boundary at this address.",
+      "evidence": ["The function record at 0x37d820 decodes to pmswaiting and stores this callback at +0x18", "The missing boundary is a database issue, not a missing table name"]
+    },
+    {
+      "va": "0x18aa88",
+      "current_ida_name": "sub_18AA88",
+      "proposed_name": "TServerPlayer_script_openExternalHistory",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37d850 decodes to openexternalhistory and stores this callback at +0x18", "The callback is part of the six-entry TServerPlayer script-function table"]
+    },
+    {
+      "va": "0x18aa90",
+      "current_ida_name": "sub_18AA90",
+      "proposed_name": "TServerPlayer_script_openExternalPM",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37d880 decodes to openexternalpm and stores this callback at +0x18", "The callback is part of the six-entry TServerPlayer script-function table"]
+    },
+    {
+      "va": "0x18aeec",
+      "current_ida_name": "sub_18AEEC",
+      "proposed_name": "TServerPlayer_script_showProfile",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37d8b0 decodes to showprofile and stores this callback at +0x18", "The callback is part of the six-entry TServerPlayer script-function table"]
+    }
+  ],
   "server_level_properties": [
     {
       "va": "0x19f948",

@@ -32,6 +32,8 @@ def load_candidates():
         "static_initializers",
         "sound_wrappers",
         "sound_table_followup",
+        "server_player_properties",
+        "server_player_functions",
         "server_level_properties",
         "server_level_functions",
     )

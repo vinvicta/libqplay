@@ -179,7 +179,7 @@ proves the local native TLS path, not a current live certificate or service.
   bridge helpers.
 * `artifacts/native_callback_candidates.json` records the next table-backed
   callback, static-state, sound-wrapper, and server-level names recovered from
-  the native library. The current review-only set contains 51 entries. These
+  the native library. The current review-only set contains 125 entries. These
   remain clearly marked as candidates until they are applied to the IDA
   database.
 * `artifacts/inbound_handler_table.json` records the native handler-index table,

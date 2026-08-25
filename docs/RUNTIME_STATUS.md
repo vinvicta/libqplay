@@ -231,6 +231,13 @@ This is the short handoff view. The full reasoning and command history are in
     names are recorded as unapplied candidates, raising the review-only native
     set from 27 to 51 entries. The IDA bridge timed out again, so no IDB names
     were changed and no endpoint was contacted.
+38. The next table audit covered `TServerPlayerProperties` at `0x18b9bc`.
+    It registered 52 properties and six script functions from `0x37ce00` and
+    `0x37d7c0`. Shared getter and setter targets were deduplicated, the
+    existing `TServerPlayer::setNick` ELF jump was left alone, and the one
+    callback without an IDA function boundary at `0x18aa68` was retained with
+    a review note. The unapplied candidate set now contains 125 unique native
+    addresses. No endpoint was contacted.
 
 ## Not verified
 

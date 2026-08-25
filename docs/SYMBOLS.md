@@ -208,6 +208,22 @@ native candidate set to 51 entries. The current IDA inventory and the 467
 applied semantic labels remain unchanged until the bridge can accept and
 verify the batch.
 
+The player table is the next large group. Its constructor at `0x18b9bc`
+registers 52 properties from `0x37ce00` and six script functions from
+`0x37d7c0`. The names cover player identity, chat, inventory, image state,
+coordinates, channel state, ratings, and external-message helpers. Four sets
+of properties intentionally share native targets: `fullhearts` with `maxhp`,
+`gralats` with `rupees`, `head` with `headimg`, and `hearts` with `hp`.
+The candidate artifact records one name per native target and explains each
+alias. The nickname getter is included, while the setter already has an ELF
+name through the `TServerPlayer::setNick` jump.
+
+The six player callbacks decode to `isguildpm`, `ismasspm`, `pmswaiting`,
+`openexternalhistory`, `openexternalpm`, and `showprofile`. The pointer at
+`0x18aa68` is present in the table but still lacks an IDA function boundary in
+the saved inventory, so the application helper will report it for manual
+boundary recovery. The 74 new candidates bring the review-only set to 125.
+
 When the IDA bridge is available, run
 `tools/ida_apply_native_callback_candidates.py` in review mode first. It
 resolves the existing names, checks each expected function address, reports
