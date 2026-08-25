@@ -3816,7 +3816,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 954928,TFileNameScan_loadCacheFile_TString_const_TString_const_bool,elf_symbol,function,_ZN13TFileNameScan13loadCacheFileERK7TStringS2_b,"TFileNameScan::loadCacheFile(TString const&,TString const&,bool)",TFileNameScan_loadCacheFile_TString_const_TString_const_bool,.text,1112,4,5120,False,False,False
 956040,TFileNameScan_loadCacheFile2_TStream_TString_const_bool,elf_symbol,function,_ZN13TFileNameScan14loadCacheFile2EP7TStreamRK7TStringb,"TFileNameScan::loadCacheFile2(TStream *,TString const&,bool)",TFileNameScan_loadCacheFile2_TStream_TString_const_bool,.text,1016,4,5120,False,False,False
 957056,TFileNameScan_scanDataFolder_void,elf_symbol,function,_ZN13TFileNameScan14scanDataFolderEv,TFileNameScan::scanDataFolder(void),TFileNameScan_scanDataFolder_void,.text,632,4,5120,False,False,False
-957688,sub_E9CF8,ida_default_sub,,,,,.text,20,1,5120,False,False,True
+957688,TGameEnvironment_getAllPlayersCount,ida_named_non_elf,,,,,.text,20,1,5120,False,False,False
 957708,TGameEnvironment_isPremiumVersion_void,elf_symbol,function,_ZN16TGameEnvironment16isPremiumVersionEv,TGameEnvironment::isPremiumVersion(void),TGameEnvironment_isPremiumVersion_void,.text,8,2,5120,False,False,False
 957716,TGameEnvironment_isDemoVersion_void,elf_symbol,function,_ZN16TGameEnvironment13isDemoVersionEv,TGameEnvironment::isDemoVersion(void),TGameEnvironment_isDemoVersion_void,.text,8,2,5120,False,False,False
 957724,TGameEnvironment_script_adventureQuit,ida_named_non_elf,,,,,.text,20,1,5120,False,False,False
@@ -5489,18 +5489,18 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1476304,TGUIScriptLoader_showMessageBox_TString_const_TString_const_bool,elf_symbol,function,_ZN16TGUIScriptLoader14showMessageBoxERK7TStringS2_b,"TGUIScriptLoader::showMessageBox(TString const&,TString const&,bool)",TGUIScriptLoader_showMessageBox_TString_const_TString_const_bool,.text,412,4,5120,False,False,False
 1476716,TGUIScriptLoader_getDefaultItemScript_int,elf_symbol,function,_ZN16TGUIScriptLoader20getDefaultItemScriptEi,TGUIScriptLoader::getDefaultItemScript(int),TGUIScriptLoader_getDefaultItemScript_int,.text,344,4,5120,False,False,False
 1477060,TGUIScriptLoader_runFailedsafeConnector_void,elf_symbol,function,_ZN16TGUIScriptLoader22runFailedsafeConnectorEv,TGUIScriptLoader::runFailedsafeConnector(void),TGUIScriptLoader_runFailedsafeConnector_void,.text,300,4,5120,False,False,False
-1477360,sub_168AF0,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1477376,sub_168B00,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1477392,sub_168B10,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1477400,sub_168B18,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1477408,sub_168B20,ida_default_sub,,,,,.text,8,1,5120,False,False,True
+1477360,TInput_getHardwareKeyboardEnabled,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1477376,TInput_setHardwareKeyboardEnabled,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1477392,TControlBinding_getAction,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1477400,TControlBinding_getKeycode,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1477408,TControlBinding_getSlot,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
 1477416,TControlBindingProperties_TControlBindingProperties_void,elf_symbol,function,_ZN25TControlBindingPropertiesC2Ev,TControlBindingProperties::TControlBindingProperties(void),TControlBindingProperties_TControlBindingProperties_void,.text,156,5,5120,False,False,False
 1477572,TControlBinding_TControlBinding_TString_const,elf_symbol,function,_ZN15TControlBindingC2ERK7TString,TControlBinding::TControlBinding(TString const&),TControlBinding_TControlBinding_TString_const,.text,92,2,5120,False,False,False
 1477664,TControlBinding_TControlBinding_int_int_int,elf_symbol,function,_ZN15TControlBindingC2Eiii,"TControlBinding::TControlBinding(int,int,int)",TControlBinding_TControlBinding_int_int_int,.text,156,5,5120,False,False,False
 1477820,TControlBinding_isKeyMatching_int,elf_symbol,function,_ZN15TControlBinding13isKeyMatchingEi,TControlBinding::isKeyMatching(int),TControlBinding_isKeyMatching_int,.text,56,4,5120,False,False,False
 1477876,TInput_initKeyDescriptions_void,elf_symbol,function,_ZN6TInput19initKeyDescriptionsEv,TInput::initKeyDescriptions(void),TInput_initKeyDescriptions_void,.text,172,4,5120,False,False,False
 1478048,TInput_getKeyText_int,elf_symbol,function,_ZN6TInput10getKeyTextEi,TInput::getKeyText(int),TInput_getKeyText_int,.text,160,4,5120,False,False,False
-1478208,sub_168E40,ida_default_sub,,,,,.text,36,1,5120,False,False,True
+1478208,TControlBinding_getKeytext,ida_named_non_elf,,,,,.text,36,1,5120,False,False,False
 1478244,TInput_getKeyCode_TString_const,elf_symbol,function,_ZN6TInput10getKeyCodeERK7TString,TInput::getKeyCode(TString const&),TInput_getKeyCode_TString_const,.text,376,4,5120,False,False,False
 1478620,TInput_getKeyState_int,elf_symbol,function,_ZN6TInput11getKeyStateEi,TInput::getKeyState(int),TInput_getKeyState_int,.text,20,4,5120,False,False,False
 1478640,TInput_getShiftKeyState_void,elf_symbol,function,_ZN6TInput16getShiftKeyStateEv,TInput::getShiftKeyState(void),TInput_getShiftKeyState_void,.text,52,4,5120,False,False,False
@@ -5532,14 +5532,15 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1480804,non_virtual_thunk_to_TControlBindingProperties_TControlBindingProperties__2,elf_symbol,function,_ZThn16_N25TControlBindingPropertiesD0Ev,`non-virtual thunk to'TControlBindingProperties::~TControlBindingProperties(),non_virtual_thunk_to_TControlBindingProperties_TControlBindingProperties__2,.text,8,2,5120,False,False,False
 1480812,TControlBinding_TControlBinding,elf_symbol,function,_ZN15TControlBindingD1Ev,TControlBinding::~TControlBinding(),TControlBinding_TControlBinding,.text,20,3,5120,False,False,False
 1480832,TControlBinding_TControlBinding__2,elf_symbol,function,_ZN15TControlBindingD0Ev,TControlBinding::~TControlBinding(),TControlBinding_TControlBinding__2,.text,48,2,5120,False,False,False
-1480880,sub_1698B0,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1480888,sub_1698B8,ida_default_sub,,,,,.text,52,1,5120,False,False,True
-1480940,sub_1698EC,ida_default_sub,,,,,.text,108,1,5120,False,False,True
-1481056,sub_169960,ida_default_sub,,,,,.text,52,1,5120,False,False,True
-1481108,sub_169994,ida_default_sub,,,,,.text,108,1,5120,False,False,True
-1481256,sub_169A28,ida_default_sub,,,,,.text,32,1,5120,False,False,True
+1480880,TLevelObject_getLevel,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1480888,TLevelObject_getX,ida_named_non_elf,,,,,.text,52,1,5120,False,False,False
+1480940,TLevelObject_setX,ida_named_non_elf,,,,,.text,108,1,5120,False,False,False
+1481056,TLevelObject_getY,ida_named_non_elf,,,,,.text,52,1,5120,False,False,False
+1481108,TLevelObject_setY,ida_named_non_elf,,,,,.text,108,1,5120,False,False,False
+1481224,TLevelObject_getZ,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
+1481256,TLevelObject_getLayer,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
 1481288,TLevelObject_getRotationCenter_TPlayer,elf_symbol,function,_ZN12TLevelObject17getRotationCenterEP7TPlayer,TLevelObject::getRotationCenter(TPlayer *),TLevelObject_getRotationCenter_TPlayer,.text,56,10,5120,False,False,False
-1481344,sub_169A80,ida_default_sub,,,,,.text,88,1,5120,False,False,True
+1481344,TLevelObject_setZ,ida_named_non_elf,,,,,.text,88,1,5120,False,False,False
 1481448,TLevelObject_getz_void,elf_symbol,function,_ZN12TLevelObject4getzEv,TLevelObject::getz(void),TLevelObject_getz_void,.text,84,15,5120,False,False,False
 1481532,getImageDrawPosition_TPlayer_float_float_float_bool,elf_symbol,function,_Z20getImageDrawPositionP7TPlayerfffb,"getImageDrawPosition(TPlayer *,float,float,float,bool)",getImageDrawPosition_TPlayer_float_float_float_bool,.text,264,4,5120,False,False,False
 1481808,TLevelObject_getDrawPosition_TPlayer_TFloatPoint_const,elf_symbol,function,_ZN12TLevelObject15getDrawPositionEP7TPlayerRK11TFloatPoint,"TLevelObject::getDrawPosition(TPlayer *,TFloatPoint const&)",TLevelObject_getDrawPosition_TPlayer_TFloatPoint_const,.text,176,11,5120,False,False,False

@@ -7,11 +7,11 @@
   "purpose": "Evidence-backed names applied to IDA-created functions that had no surviving ELF symbol.",
   "policy": "These aliases are analysis labels, not recovered source names. The evidence is recorded so a later pass can correct a label without confusing it with an imported ELF symbol.",
   "inventory_after_labels": {
-    "total_functions": 11271,
-    "ida_default_sub_functions": 1788,
-    "ida_named_non_elf_functions": 1387,
-    "named_function_total": 9483,
-    "new_labels_in_this_pass": 323
+    "total_functions": 11272,
+    "ida_default_sub_functions": 1774,
+    "ida_named_non_elf_functions": 1402,
+    "named_function_total": 9498,
+    "new_labels_in_this_pass": 338
   },
   "labels": [
     {
@@ -1951,6 +1951,96 @@
       "name": "TIdentification_script_getSystemID",
       "confidence": "high",
       "evidence": ["The encoded script-function table entry at 0x376930 decodes to adventure_getsystemid", "Calls TIdentification::getSystemID with the native selector"]
+    },
+    {
+      "va": "0xe9cf8",
+      "name": "TGameEnvironment_getAllPlayersCount",
+      "confidence": "high",
+      "evidence": ["The TGameEnvironment property table entry at 0x376780 decodes to allplayerscount", "Returns the current element count from TGameEnvironment::allplayers"]
+    },
+    {
+      "va": "0x168af0",
+      "name": "TInput_getHardwareKeyboardEnabled",
+      "confidence": "high",
+      "evidence": ["The TInput property table at 0x37af58 registers enablehardwarekeyboard with this getter", "Returns data_TInput_enablehardwarekeyboard"]
+    },
+    {
+      "va": "0x168b00",
+      "name": "TInput_setHardwareKeyboardEnabled",
+      "confidence": "high",
+      "evidence": ["The TInput property table at 0x37af58 registers enablehardwarekeyboard with this setter", "Stores the incoming value in data_TInput_enablehardwarekeyboard"]
+    },
+    {
+      "va": "0x168b10",
+      "name": "TControlBinding_getAction",
+      "confidence": "high",
+      "evidence": ["The TControlBindingProperties table at 0x37ae98 registers action with this getter", "Returns the binding field at object offset +112"]
+    },
+    {
+      "va": "0x168b18",
+      "name": "TControlBinding_getKeycode",
+      "confidence": "high",
+      "evidence": ["The TControlBindingProperties table at 0x37ae98 registers keycode with this getter", "Returns the binding field at object offset +120"]
+    },
+    {
+      "va": "0x168e40",
+      "name": "TControlBinding_getKeytext",
+      "confidence": "high",
+      "evidence": ["The TControlBindingProperties table at 0x37ae98 registers keytext with this getter", "Resolves the stored keycode through TInput::getKeyText"]
+    },
+    {
+      "va": "0x168b20",
+      "name": "TControlBinding_getSlot",
+      "confidence": "high",
+      "evidence": ["The TControlBindingProperties table at 0x37ae98 registers slot with this getter", "Returns the binding field at object offset +116"]
+    },
+    {
+      "va": "0x1698b0",
+      "name": "TLevelObject_getLevel",
+      "confidence": "high",
+      "evidence": ["The TLevelObject property table at 0x37b048 registers level with this getter", "Returns the owning level pointer at object offset +136"]
+    },
+    {
+      "va": "0x1698b8",
+      "name": "TLevelObject_getX",
+      "confidence": "high",
+      "evidence": ["The TLevelObject property table at 0x37b048 registers x with this getter", "Adds the tile offset at object offset +152 to the virtual base x coordinate using 64 pixels per tile"]
+    },
+    {
+      "va": "0x1698ec",
+      "name": "TLevelObject_setX",
+      "confidence": "high",
+      "evidence": ["The TLevelObject property table at 0x37b048 registers x with this setter", "Clamps ordinary objects to 0.0 through 64.0 and forwards the delta through the vtable position setter at offset 336"]
+    },
+    {
+      "va": "0x169960",
+      "name": "TLevelObject_getY",
+      "confidence": "high",
+      "evidence": ["The TLevelObject property table at 0x37b048 registers y with this getter", "Adds the tile offset at object offset +156 to the virtual base y coordinate using 64 pixels per tile"]
+    },
+    {
+      "va": "0x169994",
+      "name": "TLevelObject_setY",
+      "confidence": "high",
+      "evidence": ["The TLevelObject property table at 0x37b048 registers y with this setter", "Clamps ordinary objects to 0.0 through 64.0 and forwards the delta through the vtable position setter at offset 352"]
+    },
+    {
+      "va": "0x169a08",
+      "name": "TLevelObject_getZ",
+      "confidence": "high",
+      "evidence": ["The TLevelObject property table at 0x37b048 registers z with this getter", "Dispatches through the object vtable at offset 360"]
+    },
+    {
+      "va": "0x169a80",
+      "name": "TLevelObject_setZ",
+      "confidence": "high",
+      "evidence": ["The TLevelObject property table at 0x37b048 registers z with this setter", "Accepts values from -50.0 through 170.0, forwards valid values through the vtable at offset 368, and updates the z-dirty flag at object offset +164"]
+    },
+    {
+      "va": "0x169a28",
+      "name": "TLevelObject_getLayer",
+      "confidence": "high",
+      "evidence": ["The TLevelObject property table at 0x37b048 registers layer with this getter", "Maps the internal layer value at object offset +160 into the script-visible layer numbering"]
     }
   ],
   "network_contacted": false

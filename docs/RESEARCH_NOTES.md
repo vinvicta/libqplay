@@ -50,16 +50,16 @@ is named separately from its target so cross-references do not become
 ambiguous.
 
 The follow-up inventory keeps the coverage boundary explicit. IDA reports
-11,271 function starts in this database. The translated ELF rows account for
-8,096 function starts and the remaining rows are 1,835 default `sub_` names
-plus 1,340 names that IDA created without a matching ELF symbol. The 505
+11,272 function starts in this database. The translated ELF rows account for
+8,096 function starts and the remaining rows are 1,774 default `sub_` names
+plus 1,402 names that IDA created without a matching ELF symbol. The 505
 remaining ELF rows are data symbols. `symbols/libqplay.function_inventory.csv`
 and its JSON counterpart record every function start, its size, segment,
 incoming references, flags, and source category. The `sub_` rows are not
 missing from the archive; they are unnamed because this stripped portion of
 the file provides no reliable semantic name for them.
 
-A focused follow-up pass did recover reliable behavior names for 323 of those
+A focused follow-up pass did recover reliable behavior names for 338 of those
 IDA-created functions. The labels cover the two server-login callbacks, the
 packet-190 server-list completion wrapper, file-download bookkeeping, the
 inbound handler-table loader and clearer, weapon and encrypted-script updates,
@@ -108,6 +108,17 @@ environment table maps `adventure_quit` to `0xe9d1c`, which sets
 `getgamesubversion` to `0xe9d30`, which returns `googleplay`. The
 identification table maps `adventure_getosid`, `adventure_getnetworkid`, and
 `adventure_getsystemid` to wrappers around the corresponding native methods.
+
+The input and level-object property tables supplied another reliable naming
+anchor. The TInput table at `0x37af58` maps `enablehardwarekeyboard` to
+`0x168af0` and `0x168b00`. The TControlBindingProperties table at `0x37ae98`
+maps `action`, `keycode`, `keytext`, and `slot` to their four accessors. The
+TLevelObject table at `0x37b048` maps `level`, `x`, `y`, `z`, and `layer` to the
+accessors at `0x1698b0` through `0x169a28` and `0x169a80`. Their bodies confirm
+tile-coordinate scaling, ordinary-object clamping, layer remapping, and the
+vtable position calls. The `z` getter at `0x169a08` was a referenced code
+pointer without a function boundary in IDA, so it was defined from the property
+table reference before being labeled.
 
 The latest native audit extends the same evidence standard beyond the packet
 core. It labels the `TGraalConnection` and `THTTPRequest` accessors used by

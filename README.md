@@ -162,12 +162,12 @@ proves the local native TLS path, not a current live certificate or service.
 * `symbols/libqplay.symbols.json` is the machine-readable equivalent.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.
 * `symbols/libqplay.function_inventory.csv` and
-  `symbols/libqplay.function_inventory.json` cover all 11,271 IDA function
-  starts, including the 1,788 remaining analysis-created `sub_` entries that have no
+  `symbols/libqplay.function_inventory.json` cover all 11,272 IDA function
+  starts, including the 1,774 remaining analysis-created `sub_` entries that have no
   surviving ELF name.
 * `symbols/libqplay.function_inventory.summary.json` records the input hash
   and the boundary between translated symbols and IDA-created functions.
-* `artifacts/ida_semantic_labels.json` records 323 evidence-backed names
+* `artifacts/ida_semantic_labels.json` records 338 evidence-backed names
   applied to formerly unnamed login, file-download, handler-table, UI, TLS,
   HTTP, socket, animation, sound, network-thread, update-package, and JNI
   bridge helpers.
