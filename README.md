@@ -172,8 +172,8 @@ proves the local native TLS path, not a current live certificate or service.
   HTTP, socket, animation, sound, network-thread, update-package, and JNI
   bridge helpers.
 * `artifacts/native_callback_candidates.json` records the next table-backed
-  callback names recovered from the zlib stream bridge and native static-state
-  helpers. These remain clearly marked as candidates until they are applied to
+  callback, static-state, and sound-wrapper names recovered from the native
+  library. These remain clearly marked as candidates until they are applied to
   the IDA database.
 * `artifacts/inbound_handler_table.json` records the native handler-index table,
   its current function targets, and the observed packet-to-index pairs.
@@ -189,7 +189,8 @@ proves the local native TLS path, not a current live certificate or service.
 * `tools/export_inbound_handler_table.py` reproduces the handler-table export
   from the active IDA database.
 * `tools/ida_apply_native_callback_candidates.py` reviews and optionally applies
-  the prepared zlib and static-state callback names once the IDA bridge is ready.
+  the prepared callback, static-state, and sound-wrapper names once the IDA
+  bridge is ready.
 * `tools/` contains IDAPython, parsing, replay, and diagnostic patch helpers.
   `tools/encode_connector_query.py` reproduces the captured connector query
   without opening a socket. `tools/conpack_legacy_zip_compat.patch` records

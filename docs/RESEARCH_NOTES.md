@@ -1096,6 +1096,14 @@ than by proximity alone.
 
 These observations are recorded in
 `artifacts/native_callback_candidates.json` under `static_initializers`.
-The application script now reviews both candidate groups, but remains
+The application script now reviews all candidate groups, but remains
 review-only by default. No IDA names or comments were changed during this
 offline pass, and no network endpoint was contacted.
+
+The same region also contains three useful sound wrappers. At `0xe0af8`, the
+wrapper reads `TSounds::soundplayer` and calls the address-point-adjusted
+`TSoundPlayerJava::isMusicPlaying` vtable slot. The result is narrowed to a
+boolean. The adjacent `0xe0bf8` and `0xe0c08` routines load and store the
+exported `TSounds::soundoffscreendistance` double through the relocation at
+`0x3754b0`. These are recorded under `sound_wrappers` in the candidate
+artifact, bringing the unapplied plan to 22 entries.

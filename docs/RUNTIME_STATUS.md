@@ -185,6 +185,11 @@ This is the short handoff view. The full reasoning and command history are in
     `TOptions::windowpos`, and `displayedgif`. The proposed names remain
     unapplied until the IDA bridge returns, so the public inventory and the
     applied-label count are unchanged.
+34. The same offline pass recovered three sound wrappers at `0xe0af8`,
+    `0xe0bf8`, and `0xe0c08`. Vtable relocations identify the first as
+    `TSounds_isMusicPlaying`; the other two access the exported
+    `TSounds::soundoffscreendistance` global. They are recorded as unapplied
+    candidates, bringing the plan to 22 entries.
 
 ## Not verified
 

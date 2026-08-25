@@ -172,7 +172,10 @@ close, and error. It also identified several compiler-generated static-state
 helpers for `TFiles`, `TClient`, `TSocket`, `TServerFlying`, resource link
 lists, the restart state, the `TDrawTexture::textures` list, `curanis`,
 `TOptions::windowpos`, and `displayedgif`. The ELF relocation records tie the
-latter four routines to their global objects, but the proposed names are still kept in
+latter four routines to their global objects. The adjacent sound wrappers also
+cover `TSounds::isMusicPlaying` and the exported
+`TSounds::soundoffscreendistance` getter and setter. The proposed names are
+still kept in
 `artifacts/native_callback_candidates.json` as candidates, not counted among
 the 467 applied labels, until the same names are written to IDA and included
 in a fresh inventory export.

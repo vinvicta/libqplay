@@ -27,7 +27,8 @@ def load_candidates():
         document = json.load(handle)
     if document.get("status") != "candidates_not_yet_applied_to_ida":
         raise RuntimeError("candidate artifact status is not an unapplied plan")
-    return document["callbacks"] + document.get("static_initializers", [])
+    groups = ("callbacks", "static_initializers", "sound_wrappers")
+    return [candidate for group in groups for candidate in document.get(group, [])]
 
 
 def resolve_candidate(candidate):

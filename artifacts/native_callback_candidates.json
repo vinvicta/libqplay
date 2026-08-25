@@ -5,11 +5,12 @@
     "idb": "GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so.i64"
   },
   "status": "candidates_not_yet_applied_to_ida",
-  "purpose": "High-confidence names recovered from the native callback tables and compiler-generated initialization helpers. These entries are deliberately separate from ida_semantic_labels.json until the IDA database is updated.",
+  "purpose": "High-confidence names recovered from native callback tables, compiler-generated initialization helpers, and adjacent sound wrappers. These entries are deliberately separate from ida_semantic_labels.json until the IDA database is updated.",
   "source": [
     "TStream_fillZipFunctions_zlib_filefunc_def_s at 0xf0e98",
     "ARM64 disassembly of the callback bodies and nearby static initialization code",
     "AArch64 ELF relocation records for the referenced global objects",
+    "AArch64 vtable relocation records for TSoundPlayer and TSoundPlayerJava",
     "symbols/libqplay.function_inventory.json from the saved IDA database"
   ],
   "callbacks": [
@@ -197,6 +198,38 @@
       "evidence": [
         "The GOT relocation at 0x374cd8 resolves to the global displayedgif",
         "The body initializes that pointer to null with a single zero store"
+      ]
+    }
+  ],
+  "sound_wrappers": [
+    {
+      "va": "0xe0af8",
+      "current_ida_name": "sub_E0AF8",
+      "proposed_name": "TSounds_isMusicPlaying",
+      "confidence": "high",
+      "evidence": [
+        "The body reads TSounds::soundplayer and dispatches through the sound-player vtable at offset 0x38",
+        "The address-point-adjusted vtable slot resolves to TSoundPlayerJava::isMusicPlaying and the result is narrowed to one byte"
+      ]
+    },
+    {
+      "va": "0xe0bf8",
+      "current_ida_name": "sub_E0BF8",
+      "proposed_name": "TSounds_getSoundOffscreenDistance",
+      "confidence": "high",
+      "evidence": [
+        "The GOT relocation at 0x3754b0 resolves to TSounds::soundoffscreendistance",
+        "The body loads and returns the global as a double"
+      ]
+    },
+    {
+      "va": "0xe0c08",
+      "current_ida_name": "sub_E0C08",
+      "proposed_name": "TSounds_setSoundOffscreenDistance",
+      "confidence": "high",
+      "evidence": [
+        "The GOT relocation at 0x3754b0 resolves to TSounds::soundoffscreendistance",
+        "The body stores its double argument into the global and returns"
       ]
     }
   ],
