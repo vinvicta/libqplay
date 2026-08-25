@@ -1129,6 +1129,67 @@ and tail-calls `TSounds::setMusicVolume`. They are included in the candidate
 artifact as `TSounds_stopSounds` and `TSounds_setMusicVolume`, bringing the
 unapplied plan to 27 entries.
 
+## TServerLevel script registration table
+
+The next offline pass reached a much larger, self-describing table in the
+server-level implementation. `TServerLevelProperties::TServerLevelProperties`
+at `0x1a1128` installs six property records from `0x37fce0`. The names decode
+through the library's own `THashList::decodesimple` routine at `0xea100`:
+`height`, `isnopkzone`, `issparringzone`, `nopkzone`, `tilelayercount`, and
+`width`. The callback bodies match the names and expose a few useful layout
+facts:
+
+* `0x19f948` reads the active layer height and scales it by 64 pixels, with a
+  64-pixel fallback when no layer is active.
+* `0x19f978` and `0x19f980` are the shared getter and setter for the no-PK
+  flag at object offset `0x12a`. The table intentionally exposes the same
+  pair under both `isnopkzone` and `nopkzone`.
+* `0x19f988` reads the separate sparring-zone byte at offset `0x129`.
+* `0x19f990` follows the layer list at offset `0x70` and returns its count.
+* `0x19f99c` reads the active layer width and applies the same 64-pixel
+  scaling as the height getter.
+
+The same constructor installs eighteen script functions from `0x37fe00`.
+Their names and callback starts are listed below. This is stronger evidence
+than a nearby string match because each name is tied to a registration record,
+and each body reaches the corresponding exported server-level method or list.
+
+| Script name | Callback | What the body confirms |
+| --- | ---: | --- |
+| `getmappartfile` | `0x19fad8` | Bounds-checks map coordinates and returns a map-part filename or the level fallback path. |
+| `findareanpcs` | `0x1a5150` | Calls `getOnNPC` for four bounds and converts the result into a script variable. |
+| `putbomb` | `0x1a6764` | Builds the optional image string and calls `TServerLevel::putBomb`. |
+| `putbomb2` | `0x1a6728` | Normalizes the short form and tail-calls `putBomb`. |
+| `putexplosion` | `0x1a7fd8` | Plays the effect sound and calls `makeExplosion`. |
+| `putexplosion2` | `0x1a7ecc` | Handles the variant effect arguments before calling `makeExplosion`. |
+| `reflectarrow` | `0x1a0110` | Reverses arrow motion, updates its state, and forwards a shot through `TClient::sendShot`. |
+| `removearrow` | `0x1a00ac` | Deletes an indexed arrow and invokes its virtual cleanup path. |
+| `removebomb` | `0x19ffe8` | Deletes an indexed bomb from the level list and releases it. |
+| `removeexplo` | `0x19ff84` | Deletes an indexed explosion from the level list and releases it. |
+| `removeitem` | `0x19febc` | Deletes an indexed item and calls its virtual destructor. |
+| `shoot` | `0x1a97d0` | Forwards projectile coordinates, strings, flags, and player context to `shootProjectile`. |
+| `testbomb` | `0x1a5ddc` | Calls `isOnBomb` and returns the matching list index. |
+| `testexplo` | `0x1a5898` | Calls `isOnExplosion` for the supplied coordinates. |
+| `testitem` | `0x1a5760` | Calls `isOnExtra` for the supplied coordinates. |
+| `testsign` | `0x1a560c` | Calls `isOnSign`, returning `-1` when no active level exists. |
+| `testnpc` | `0x1a4e98` | Calls `isOnNPC` and returns the matching NPC index. |
+| `tiletype` | `0x1a45a8` | Directly forwards to `TServerLevel::getTileType`. |
+
+Two bytes in the encoded `reflectarrow` record decode to zero under the normal
+formula. The table stores nonzero replacements instead, so a literal decoder
+reports two unknown characters even though the callback behavior and the
+expected script name are clear. This is the same old string-table terminator
+quirk seen in the GUI tables. The exact legacy names `removeexplo` and
+`testexplo` are retained rather than silently expanding them to modern-sounding
+spellings.
+
+These twenty-four names are now in
+`artifacts/native_callback_candidates.json` under
+`server_level_properties` and `server_level_functions`. They are not counted
+as applied IDA labels because the bridge is still unavailable. With the earlier
+zlib, static-state, and sound entries, the review-only candidate set contains
+51 native names. No live endpoint was contacted during this pass.
+
 ## Held-connection ARM64 resource replay
 
 The runtime path was revisited after the offline sound-table pass. The earlier

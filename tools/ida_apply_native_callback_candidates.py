@@ -32,6 +32,8 @@ def load_candidates():
         "static_initializers",
         "sound_wrappers",
         "sound_table_followup",
+        "server_level_properties",
+        "server_level_functions",
     )
     return [candidate for group in groups for candidate in document.get(group, [])]
 

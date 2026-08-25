@@ -184,6 +184,30 @@ in a fresh inventory export. The candidate plan now contains 25 entries.
 The same sound table also contributes the short `stopsounds` and
 `setmusicvolume` wrappers, bringing the candidate plan to 27 entries.
 
+The server-level property and function tables are the next unapplied group.
+`TServerLevelProperties::TServerLevelProperties` at `0x1a1128` registers six
+properties from `0x37fce0`, and eighteen script functions from `0x37fe00`.
+The property names decode to `height`, `isnopkzone`, `issparringzone`,
+`nopkzone`, `tilelayercount`, and `width`. The function names decode to
+`getmappartfile`, `findareanpcs`, `putbomb`, `putbomb2`, `putexplosion`,
+`putexplosion2`, `reflectarrow`, `removearrow`, `removebomb`, `removeexplo`,
+`removeitem`, `shoot`, `testbomb`, `testexplo`, `testitem`, `testsign`,
+`testnpc`, and `tiletype`.
+
+The callback bodies provide an unusually complete cross-check. The property
+accessors read layer dimensions, zone flags, and the layer-list count. The
+function wrappers call the exported `TServerLevel` methods for bombs,
+explosions, projectiles, tiles, and collision tests, or delete entries from
+the corresponding object lists. The `reflectarrow` record has the known
+encoded-zero terminator anomaly, while the short names `removeexplo` and
+`testexplo` are preserved exactly as stored by the client.
+
+The twenty-four proposed names are kept separate in
+`artifacts/native_callback_candidates.json`. They bring the review-only
+native candidate set to 51 entries. The current IDA inventory and the 467
+applied semantic labels remain unchanged until the bridge can accept and
+verify the batch.
+
 When the IDA bridge is available, run
 `tools/ida_apply_native_callback_candidates.py` in review mode first. It
 resolves the existing names, checks each expected function address, reports

@@ -222,6 +222,15 @@ This is the short handoff view. The full reasoning and command history are in
     Packet and fixture hashes are recorded in
     `artifacts/arm64_local_fixture_render_replay.json`. The fixtures are local
     compatibility inputs, not a claim about the live server revision.
+37. The latest offline symbol pass recovered the six `TServerLevel` property
+    accessors and eighteen server-level script wrappers registered from
+    `0x37fce0` and `0x37fe00`. Their names decode to level dimensions, zone
+    flags, map-part lookup, NPC queries, bomb and explosion operations,
+    projectile shooting, collision tests, and tile lookup. The callback bodies
+    reach the matching exported `TServerLevel` methods or object lists. The
+    names are recorded as unapplied candidates, raising the review-only native
+    set from 27 to 51 entries. The IDA bridge timed out again, so no IDB names
+    were changed and no endpoint was contacted.
 
 ## Not verified
 

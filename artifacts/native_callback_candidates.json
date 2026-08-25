@@ -11,7 +11,8 @@
     "ARM64 disassembly of the callback bodies and nearby static initialization code",
     "AArch64 ELF relocation records for the referenced global objects",
     "AArch64 vtable relocation records for TSoundPlayer and TSoundPlayerJava",
-    "symbols/libqplay.function_inventory.json from the saved IDA database"
+    "symbols/libqplay.function_inventory.json from the saved IDA database",
+    "TServerLevelProperties constructor and script tables at 0x1a1128, 0x37fce0, and 0x37fe00"
   ],
   "callbacks": [
     {
@@ -290,6 +291,250 @@
         "The TSounds_initStaticScriptVars function table at 0x376228 registers this callback under the encoded script name setmusicvolume",
         "The wrapper loads two double arguments from the script callback buffers and tail-calls TSounds::setMusicVolume(double, double)",
         "The callback is the function target in the table record at 0x376240"
+      ]
+    }
+  ],
+  "server_level_properties": [
+    {
+      "va": "0x19f948",
+      "current_ida_name": "sub_19F948",
+      "proposed_name": "TServerLevel_getHeight",
+      "confidence": "high",
+      "evidence": [
+        "TServerLevelProperties::TServerLevelProperties at 0x1a1128 registers the encoded property name height in the first record at 0x37fce0",
+        "The getter reads the active layer height and returns it in 64-pixel units, using 64 as the fallback when no layer is active"
+      ]
+    },
+    {
+      "va": "0x19f978",
+      "current_ida_name": "sub_19F978",
+      "proposed_name": "TServerLevel_getNoPKZone",
+      "confidence": "high",
+      "evidence": [
+        "The property records at 0x37fd10 and 0x37fd70 decode to isnopkzone and nopkzone and share this getter",
+        "The body returns the byte at the server-level zone flag offset 0x12a"
+      ]
+    },
+    {
+      "va": "0x19f980",
+      "current_ida_name": "sub_19F980",
+      "proposed_name": "TServerLevel_setNoPKZone",
+      "confidence": "high",
+      "evidence": [
+        "The isnopkzone and nopkzone property records at 0x37fd10 and 0x37fd70 share this setter",
+        "The body stores the incoming script boolean at the same server-level zone flag offset 0x12a"
+      ]
+    },
+    {
+      "va": "0x19f988",
+      "current_ida_name": "sub_19F988",
+      "proposed_name": "TServerLevel_getSparringZone",
+      "confidence": "high",
+      "evidence": [
+        "The property record at 0x37fd40 decodes to issparringzone and points to this getter",
+        "The body reads the separate server-level zone byte at object offset 0x129"
+      ]
+    },
+    {
+      "va": "0x19f990",
+      "current_ida_name": "sub_19F990",
+      "proposed_name": "TServerLevel_getTileLayerCount",
+      "confidence": "high",
+      "evidence": [
+        "The property record at 0x37fda0 decodes to tilelayercount and points to this getter",
+        "The body follows the layer-list pointer at object offset 0x70 and returns its element count"
+      ]
+    },
+    {
+      "va": "0x19f99c",
+      "current_ida_name": "sub_19F99C",
+      "proposed_name": "TServerLevel_getWidth",
+      "confidence": "high",
+      "evidence": [
+        "The property record at 0x37fdd0 decodes to width and points to this getter",
+        "The body reads the active layer width and returns it in 64-pixel units, mirroring the height getter"
+      ]
+    }
+  ],
+  "server_level_functions": [
+    {
+      "va": "0x19fad8",
+      "current_ida_name": "sub_19FAD8",
+      "proposed_name": "TServerLevel_script_getMapPartFile",
+      "confidence": "high",
+      "evidence": [
+        "The function record at 0x37fe00 decodes to getmappartfile",
+        "The body converts the two script coordinates, bounds-checks the map-part index, and returns the selected TStringList entry or the level fallback path"
+      ]
+    },
+    {
+      "va": "0x1a5150",
+      "current_ida_name": "sub_1A5150",
+      "proposed_name": "TServerLevel_script_findAreaNPCs",
+      "confidence": "high",
+      "evidence": [
+        "The function record at 0x37fe30 decodes to findareanpcs",
+        "The body calls TServerLevel::getOnNPC with four coordinate bounds and converts the returned list into a script variable"
+      ]
+    },
+    {
+      "va": "0x1a6764",
+      "current_ida_name": "sub_1A6764",
+      "proposed_name": "TServerLevel_script_putBomb",
+      "confidence": "high",
+      "evidence": [
+        "The function record at 0x37fe60 decodes to putbomb",
+        "The body builds the optional image string and calls TServerLevel::putBomb with the script coordinates, direction, layer, and flags"
+      ]
+    },
+    {
+      "va": "0x1a6728",
+      "current_ida_name": "sub_1A6728",
+      "proposed_name": "TServerLevel_script_putBomb2",
+      "confidence": "high",
+      "evidence": [
+        "The function record at 0x37fe90 decodes to putbomb2",
+        "The short variant normalizes its script arguments and tail-calls TServerLevel::putBomb"
+      ]
+    },
+    {
+      "va": "0x1a7fd8",
+      "current_ida_name": "sub_1A7FD8",
+      "proposed_name": "TServerLevel_script_putExplosion",
+      "confidence": "high",
+      "evidence": [
+        "The function record at 0x37fec0 decodes to putexplosion",
+        "The body plays the explosion sound and calls TServerLevel::makeExplosion with the script position and effect parameters"
+      ]
+    },
+    {
+      "va": "0x1a7ecc",
+      "current_ida_name": "sub_1A7ECC",
+      "proposed_name": "TServerLevel_script_putExplosion2",
+      "confidence": "high",
+      "evidence": [
+        "The function record at 0x37fef0 decodes to putexplosion2",
+        "The variant handles its explosion type and sound arguments before calling TServerLevel::makeExplosion"
+      ]
+    },
+    {
+      "va": "0x1a0110",
+      "current_ida_name": "sub_1A0110",
+      "proposed_name": "TServerLevel_script_reflectArrow",
+      "confidence": "high",
+      "evidence": [
+        "The function record at 0x37ff20 is the reflectarrow entry; two encoded terminator bytes are preserved in the table and the recovered name is confirmed by the arrow mutation body",
+        "The body reverses the arrow coordinates, updates its direction and state fields, and forwards the resulting shot through TClient::sendShot"
+      ]
+    },
+    {
+      "va": "0x1a00ac",
+      "current_ida_name": "sub_1A00AC",
+      "proposed_name": "TServerLevel_script_removeArrow",
+      "confidence": "high",
+      "evidence": [
+        "The function record at 0x37ff50 decodes to removearrow",
+        "The body removes the indexed arrow from the level list and invokes its virtual cleanup path"
+      ]
+    },
+    {
+      "va": "0x19ffe8",
+      "current_ida_name": "sub_19FFE8",
+      "proposed_name": "TServerLevel_script_removeBomb",
+      "confidence": "high",
+      "evidence": [
+        "The function record at 0x37ff80 decodes to removebomb",
+        "The body bounds-checks the requested index, deletes the bomb from the level list, and releases the removed object"
+      ]
+    },
+    {
+      "va": "0x19ff84",
+      "current_ida_name": "sub_19FF84",
+      "proposed_name": "TServerLevel_script_removeExplo",
+      "confidence": "high",
+      "evidence": [
+        "The function record at 0x37ffb0 decodes exactly to the legacy script name removeexplo",
+        "The body deletes the indexed explosion entry and releases the removed object"
+      ]
+    },
+    {
+      "va": "0x19febc",
+      "current_ida_name": "sub_19FEBC",
+      "proposed_name": "TServerLevel_script_removeItem",
+      "confidence": "high",
+      "evidence": [
+        "The function record at 0x37ffe0 decodes to removeitem",
+        "The body bounds-checks the item list, deletes the selected entry, and calls its virtual destructor"
+      ]
+    },
+    {
+      "va": "0x1a97d0",
+      "current_ida_name": "sub_1A97D0",
+      "proposed_name": "TServerLevel_script_shoot",
+      "confidence": "high",
+      "evidence": [
+        "The function record at 0x380010 decodes to shoot",
+        "The body forwards the seven floating-point arguments, strings, flags, and current player context to TServerLevel::shootProjectile"
+      ]
+    },
+    {
+      "va": "0x1a5ddc",
+      "current_ida_name": "sub_1A5DDC",
+      "proposed_name": "TServerLevel_script_testBomb",
+      "confidence": "high",
+      "evidence": [
+        "The function record at 0x380040 decodes to testbomb",
+        "The body calls TServerLevel::isOnBomb and returns the matching list index or -1"
+      ]
+    },
+    {
+      "va": "0x1a5898",
+      "current_ida_name": "sub_1A5898",
+      "proposed_name": "TServerLevel_script_testExplo",
+      "confidence": "high",
+      "evidence": [
+        "The function record at 0x380070 decodes exactly to the legacy script name testexplo",
+        "The body forwards the two coordinates to TServerLevel::isOnExplosion and returns its result"
+      ]
+    },
+    {
+      "va": "0x1a5760",
+      "current_ida_name": "sub_1A5760",
+      "proposed_name": "TServerLevel_script_testItem",
+      "confidence": "high",
+      "evidence": [
+        "The function record at 0x3800a0 decodes to testitem",
+        "The body forwards the two coordinates to TServerLevel::isOnExtra and returns its result"
+      ]
+    },
+    {
+      "va": "0x1a560c",
+      "current_ida_name": "sub_1A560C",
+      "proposed_name": "TServerLevel_script_testSign",
+      "confidence": "high",
+      "evidence": [
+        "The function record at 0x3800d0 decodes to testsign",
+        "The body checks the active level and tail-calls TServerLevel::isOnSign, returning -1 when no level is present"
+      ]
+    },
+    {
+      "va": "0x1a4e98",
+      "current_ida_name": "sub_1A4E98",
+      "proposed_name": "TServerLevel_script_testNPC",
+      "confidence": "high",
+      "evidence": [
+        "The function record at 0x380100 decodes to testnpc",
+        "The body calls TServerLevel::isOnNPC for the supplied coordinates and returns the matching NPC index"
+      ]
+    },
+    {
+      "va": "0x1a45a8",
+      "current_ida_name": "sub_1A45A8",
+      "proposed_name": "TServerLevel_script_tileType",
+      "confidence": "high",
+      "evidence": [
+        "The function record at 0x380130 decodes to tiletype",
+        "The body is a direct script wrapper around TServerLevel::getTileType"
       ]
     }
   ],
