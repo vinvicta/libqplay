@@ -8,10 +8,10 @@
   "policy": "These aliases are analysis labels, not recovered source names. The evidence is recorded so a later pass can correct a label without confusing it with an imported ELF symbol.",
   "inventory_after_labels": {
     "total_functions": 11272,
-    "ida_default_sub_functions": 1667,
-    "ida_named_non_elf_functions": 1509,
-    "named_function_total": 9605,
-    "new_labels_in_this_pass": 445
+    "ida_default_sub_functions": 1645,
+    "ida_named_non_elf_functions": 1531,
+    "named_function_total": 9627,
+    "new_labels_in_this_pass": 467
   },
   "labels": [
     {
@@ -2683,6 +2683,138 @@
       "name": "GuiControl_script_showAlwaysOnTop",
       "confidence": "high",
       "evidence": ["GuiControl script-function table at 0x3810f0 registers showalwaysontop with this wrapper"]
+    },
+    {
+      "va": "0xfc880",
+      "name": "TFileScripting_script_getScriptAccessFile",
+      "confidence": "high",
+      "evidence": ["TFileScripting script-function table at 0x376bd0 registers getscriptaccessfile with this wrapper"]
+    },
+    {
+      "va": "0xfc7ec",
+      "name": "TFileScripting_script_fileExists",
+      "confidence": "high",
+      "evidence": ["TFileScripting script-function table at 0x376bd0 registers fileexists with this wrapper"]
+    },
+    {
+      "va": "0xfbba4",
+      "name": "TFileScripting_script_escapeFilename",
+      "confidence": "high",
+      "evidence": ["TFileScripting script-function table at 0x376bd0 registers escapefilename with this wrapper"]
+    },
+    {
+      "va": "0xfbeec",
+      "name": "TFileScripting_script_removeEscapesFromFilename",
+      "confidence": "high",
+      "evidence": ["TFileScripting script-function table at 0x376bd0 registers removeescapesfromfilename with this wrapper"]
+    },
+    {
+      "va": "0xfc740",
+      "name": "TFileScripting_script_fileSize",
+      "confidence": "high",
+      "evidence": ["TFileScripting script-function table at 0x376bd0 registers filesize with this wrapper"]
+    },
+    {
+      "va": "0xfbe74",
+      "name": "TFileScripting_script_fileUpdate",
+      "confidence": "high",
+      "evidence": ["TFileScripting script-function table at 0x376bd0 registers fileupdate with this wrapper"]
+    },
+    {
+      "va": "0xfbe68",
+      "name": "TFileScripting_script_freeAllResources",
+      "confidence": "high",
+      "evidence": ["TFileScripting script-function table at 0x376bd0 registers the freeallresources cleanup wrapper", "The callback calls TClientEnvironment_freeResources_bool_bool"]
+    },
+    {
+      "va": "0xfbe20",
+      "name": "TFileScripting_script_findFiles",
+      "confidence": "high",
+      "evidence": ["TFileScripting script-function table at 0x376bd0 registers findfiles with this wrapper"]
+    },
+    {
+      "va": "0xfbb84",
+      "name": "TFileScripting_script_extractFileExt",
+      "confidence": "high",
+      "evidence": ["TFileScripting script-function table at 0x376bd0 registers extractfileext with this wrapper"]
+    },
+    {
+      "va": "0xfbb64",
+      "name": "TFileScripting_script_getExtension",
+      "confidence": "high",
+      "evidence": ["TFileScripting script-function table at 0x376bd0 registers getextension with this wrapper"]
+    },
+    {
+      "va": "0xfc684",
+      "name": "TFileScripting_script_getFileModTime",
+      "confidence": "high",
+      "evidence": ["TFileScripting script-function table at 0x376bd0 registers getfilemodtime with this wrapper"]
+    },
+    {
+      "va": "0xfc540",
+      "name": "TFileScripting_script_setFileModTime",
+      "confidence": "high",
+      "evidence": ["TFileScripting script-function table at 0x376bd0 registers the adventure_setfilemodtime wrapper", "The callback updates a resolved file or level-resource modification time"]
+    },
+    {
+      "va": "0xfbac8",
+      "name": "TFileScripting_script_getApplicationFolder",
+      "confidence": "high",
+      "evidence": ["TFileScripting script-function table at 0x376bd0 registers adventure_getapplicationfolder with this wrapper", "The selector returns baseuserfolder, fullexepath, or basedatafolder"]
+    },
+    {
+      "va": "0xfbda4",
+      "name": "TFileScripting_script_getFileContent",
+      "confidence": "high",
+      "evidence": ["TFileScripting script-function table at 0x376bd0 registers adventure_getfilecontent with this wrapper", "The callback loads a file into a script string"]
+    },
+    {
+      "va": "0xfbbc8",
+      "name": "TFileScripting_script_setFileContent",
+      "confidence": "high",
+      "evidence": ["TFileScripting script-function table at 0x376bd0 registers adventure_setfilecontent with this wrapper", "The callback saves script-string content to a file"]
+    },
+    {
+      "va": "0xfbd4c",
+      "name": "TFileScripting_script_getFolder",
+      "confidence": "high",
+      "evidence": ["TFileScripting script-function table at 0x376bd0 registers adventure_getfolder with this wrapper", "The callback converts the native folder list into a script array"]
+    },
+    {
+      "va": "0xfbc7c",
+      "name": "TFileScripting_script_openDefaultViewer",
+      "confidence": "high",
+      "evidence": ["TFileScripting script-function table at 0x376bd0 registers adventure_opendefaultviewer with this wrapper", "The callback selects an executable, batch, or shell viewer for the resolved resource"]
+    },
+    {
+      "va": "0xfbc5c",
+      "name": "TFileScripting_script_extractFileBase",
+      "confidence": "high",
+      "evidence": ["TFileScripting script-function table at 0x376bd0 registers extractfilebase with this wrapper"]
+    },
+    {
+      "va": "0xfbb44",
+      "name": "TFileScripting_script_extractFilename",
+      "confidence": "high",
+      "evidence": ["TFileScripting script-function table at 0x376bd0 registers extractfilename with this wrapper"]
+    },
+    {
+      "va": "0xfbb24",
+      "name": "TFileScripting_script_extractFilepath",
+      "confidence": "high",
+      "evidence": ["TFileScripting script-function table at 0x376bd0 registers extractfilepath with this wrapper"]
+    },
+    {
+      "va": "0xfc4b0",
+      "name": "TFileScripting_script_deleteFile",
+      "confidence": "high",
+      "evidence": ["TFileScripting script-function table at 0x376bd0 registers deletefile with this wrapper", "The callback resolves the script-access file, deletes it, and updates its resource object"]
+    },
+    {
+      "va": "0xfca80",
+      "name": "TFileScripting_script_decompressFile",
+      "confidence": "high",
+      "evidence": ["TFileScripting script-function table at 0x376bd0 registers decompressfile with this wrapper", "The callback expands a packaged resource into the writable folder and preserves timestamps"]
     }
   ],
   "network_contacted": false

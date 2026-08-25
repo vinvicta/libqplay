@@ -51,15 +51,15 @@ ambiguous.
 
 The follow-up inventory keeps the coverage boundary explicit. IDA reports
 11,272 function starts in this database. The translated ELF rows account for
-8,096 function starts and the remaining rows are 1,667 default `sub_` names
-plus 1,509 names that IDA created without a matching ELF symbol. The 505
+8,096 function starts and the remaining rows are 1,645 default `sub_` names
+plus 1,531 names that IDA created without a matching ELF symbol. The 505
 remaining ELF rows are data symbols. `symbols/libqplay.function_inventory.csv`
 and its JSON counterpart record every function start, its size, segment,
 incoming references, flags, and source category. The `sub_` rows are not
 missing from the archive; they are unnamed because this stripped portion of
 the file provides no reliable semantic name for them.
 
-A focused follow-up pass did recover reliable behavior names for 445 of those
+A focused follow-up pass did recover reliable behavior names for 467 of those
 IDA-created functions. The labels cover the two server-login callbacks, the
 packet-190 server-list completion wrapper, file-download bookkeeping, the
 inbound handler-table loader and clearer, weapon and encrypted-script updates,
@@ -131,6 +131,17 @@ The `minextent` and `minsize` entries share their callback pair. The table
 entry that decodes to `showhint` contains the same one-byte encoded terminator
 quirk seen in other old script tables, so the name is treated as an inferred
 table name with the encoding anomaly documented.
+
+The file-scripting table at `0x376bd0` is another strong naming anchor.
+`TFileScripting_initStaticScriptVars` at `0xfd1d0` registers 27 entries,
+and 22 of the callbacks were IDA-created functions. The wrappers now expose
+exact names for the script-access filename, file existence and size, filename
+escaping, file update, resource cleanup, file searches, extension and path
+helpers, timestamps, application folders, file contents, folder lists, default
+viewers, deletion, and decompression. The bodies also preserve an important
+runtime distinction: paths with explicit filesystem components use `TFiles`,
+while packaged level content is resolved through `TResourceFunctions` and
+`TResourceObject`.
 
 The latest native audit extends the same evidence standard beyond the packet
 core. It labels the `TGraalConnection` and `THTTPRequest` accessors used by

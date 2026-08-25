@@ -28,9 +28,9 @@ The translation count is the number of ELF symbol records handled by the
 script. IDA's function survey also reports compiler-generated functions and
 other analysis-created entries, so its total function count is not expected
 to equal 8,601. After the follow-up semantic pass, the original ARM64
-database reports 11,272 total functions, 9,605 with names, and 1,667 default
+database reports 11,272 total functions, 9,627 with names, and 1,645 default
 `sub_` names. Those figures describe the IDA database; the 8,601 count
-describes the reproducible symbol import and rename pass. The 445 semantic labels
+describes the reproducible symbol import and rename pass. The 467 semantic labels
 are recorded separately in `artifacts/ida_semantic_labels.json`, alongside
 the earlier inferred `TClient_setSSLParameters_scriptCallback` label. None of
 these semantic labels is part of the 8,601 original ELF symbol records.
@@ -101,8 +101,8 @@ land on IDA functions. IDA's analysis adds 11,272 function starts in total:
 | Function source | Count |
 | --- | ---: |
 | Backed by a translated ELF symbol | 8,096 |
-| IDA default `sub_` names | 1,667 |
-| Named by IDA but not backed by an ELF record | 1,509 |
+| IDA default `sub_` names | 1,645 |
+| Named by IDA but not backed by an ELF record | 1,531 |
 | Total IDA functions | 11,272 |
 
 The complete address-level inventory is in
@@ -155,6 +155,15 @@ lookup, resize, repaint, show or hide, and first-responder helpers. The
 `minextent` and `minsize` properties intentionally share one getter and setter
 pair, and the table's encoded `showhint` terminator is recorded as an encoding
 artifact rather than treated as a different property name.
+
+The file-scripting table at `0x376bd0`, installed by
+`TFileScripting_initStaticScriptVars` at `0xfd1d0`, contains 27 script
+functions. Twenty-two formerly unnamed callbacks now have exact
+script-prefixed labels for script-access paths, file existence and size,
+filename escaping, timestamps, folder enumeration, file content, default
+viewers, deletion, and resource decompression. The wrappers distinguish
+ordinary filesystem paths from packaged level resources, so this table is
+useful when tracing startup resource lookup and updates.
 
 The inventory was generated from the active ARM64 database by
 `tools/export_function_inventory.py`. It waits for auto-analysis, joins each

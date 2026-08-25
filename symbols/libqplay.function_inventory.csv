@@ -4230,36 +4230,36 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1029212,TBSPTree_removeObject_void_TRectangle_const,elf_symbol,function,_ZN8TBSPTree12removeObjectEPvRK10TRectangle,"TBSPTree::removeObject(void *,TRectangle const&)",TBSPTree_removeObject_void_TRectangle_const,.text,388,4,5120,False,False,False
 1029600,TBSPTree_moveObject_void_TRectangle_const_TRectangle_const,elf_symbol,function,_ZN8TBSPTree10moveObjectEPvRK10TRectangleS3_,"TBSPTree::moveObject(void *,TRectangle const&,TRectangle const&)",TBSPTree_moveObject_void_TRectangle_const_TRectangle_const,.text,980,4,5120,False,False,False
 1030580,TBSPTree_findObject_bool_void_TRectangle_const,elf_symbol,function,_ZN8TBSPTree10findObjectEPFbPvERK10TRectangle,"TBSPTree::findObject(bool (*)(void *),TRectangle const&)",TBSPTree_findObject_bool_void_TRectangle_const,.text,276,4,5120,False,False,False
-1030856,sub_FBAC8,ida_default_sub,,,,,.text,92,1,5120,False,False,True
-1030948,sub_FBB24,ida_default_sub,,,,,.text,32,1,5120,False,False,True
-1030980,sub_FBB44,ida_default_sub,,,,,.text,32,1,5120,False,False,True
-1031012,sub_FBB64,ida_default_sub,,,,,.text,32,1,5120,False,False,True
-1031044,sub_FBB84,ida_default_sub,,,,,.text,32,1,5120,False,False,True
-1031076,sub_FBBA4,ida_default_sub,,,,,.text,32,1,5120,False,False,True
+1030856,TFileScripting_script_getApplicationFolder,ida_named_non_elf,,,,,.text,92,1,5120,False,False,False
+1030948,TFileScripting_script_extractFilepath,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
+1030980,TFileScripting_script_extractFilename,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
+1031012,TFileScripting_script_getExtension,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
+1031044,TFileScripting_script_extractFileExt,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
+1031076,TFileScripting_script_escapeFilename,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
 1031108,jump_TFiles_fileExists_TString_const,elf_symbol,jump_thunk,j_._ZN6TFiles10fileExistsERK7TString,TFiles::fileExists(TString const&),jump_TFiles_fileExists_TString_const,.text,4,1,5312,True,False,False
-1031112,sub_FBBC8,ida_default_sub,,,,,.text,144,1,5120,False,False,True
+1031112,TFileScripting_script_setFileContent,ida_named_non_elf,,,,,.text,144,1,5120,False,False,False
 1031256,jump_TFiles_setUTCFileModTime_TString_const_uint,elf_symbol,jump_thunk,j_._ZN6TFiles17setUTCFileModTimeERK7TStringj,"TFiles::setUTCFileModTime(TString const&,uint)",jump_TFiles_setUTCFileModTime_TString_const_uint,.text,4,1,5312,True,False,False
-1031260,sub_FBC5C,ida_default_sub,,,,,.text,32,1,5120,False,False,True
-1031292,sub_FBC7C,ida_default_sub,,,,,.text,208,1,5120,False,False,True
-1031500,sub_FBD4C,ida_default_sub,,,,,.text,80,1,5120,False,False,True
+1031260,TFileScripting_script_extractFileBase,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
+1031292,TFileScripting_script_openDefaultViewer,ida_named_non_elf,,,,,.text,208,1,5120,False,False,False
+1031500,TFileScripting_script_getFolder,ida_named_non_elf,,,,,.text,80,1,5120,False,False,False
 1031580,jump_TFiles_fileSize_TString_const,elf_symbol,jump_thunk,j_._ZN6TFiles8fileSizeERK7TString,TFiles::fileSize(TString const&),jump_TFiles_fileSize_TString_const,.text,4,1,5312,True,False,False
 1031584,jump_TFiles_fileIsFolder_TString_const,elf_symbol,jump_thunk,j_._ZN6TFiles12fileIsFolderERK7TString,TFiles::fileIsFolder(TString const&),jump_TFiles_fileIsFolder_TString_const,.text,4,1,5312,True,False,False
-1031588,sub_FBDA4,ida_default_sub,,,,,.text,120,1,5120,False,False,True
+1031588,TFileScripting_script_getFileContent,ida_named_non_elf,,,,,.text,120,1,5120,False,False,False
 1031708,jump_TFiles_getUTCFileModTime_TString_const,elf_symbol,jump_thunk,j_._ZN6TFiles17getUTCFileModTimeERK7TString,TFiles::getUTCFileModTime(TString const&),jump_TFiles_getUTCFileModTime_TString_const,.text,4,1,5312,True,False,False
-1031712,sub_FBE20,ida_default_sub,,,,,.text,72,1,5120,False,False,True
-1031784,sub_FBE68,ida_default_sub,,,,,.text,12,1,5120,False,False,True
-1031796,sub_FBE74,ida_default_sub,,,,,.text,120,1,5120,False,False,True
-1031916,sub_FBEEC,ida_default_sub,,,,,.text,32,1,5120,False,False,True
+1031712,TFileScripting_script_findFiles,ida_named_non_elf,,,,,.text,72,1,5120,False,False,False
+1031784,TFileScripting_script_freeAllResources,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
+1031796,TFileScripting_script_fileUpdate,ida_named_non_elf,,,,,.text,120,1,5120,False,False,False
+1031916,TFileScripting_script_removeEscapesFromFilename,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
 1031948,TFileScripting_AllowedFoldername_TString_const_bool,elf_symbol,function,_ZN14TFileScripting17AllowedFoldernameERK7TStringb,"TFileScripting::AllowedFoldername(TString const&,bool)",TFileScripting_AllowedFoldername_TString_const_bool,.text,516,4,5120,False,False,False
 1032464,TFileScripting_getScriptAccessFilename_TString_const_bool,elf_symbol,function,_ZN14TFileScripting23getScriptAccessFilenameERK7TStringb,"TFileScripting::getScriptAccessFilename(TString const&,bool)",TFileScripting_getScriptAccessFilename_TString_const_bool,.text,928,4,5120,False,False,False
-1033392,sub_FC4B0,ida_default_sub,,,,,.text,144,1,5120,False,False,True
-1033536,sub_FC540,ida_default_sub,,,,,.text,324,1,5120,False,False,True
-1033860,sub_FC684,ida_default_sub,,,,,.text,188,1,5120,False,False,True
-1034048,sub_FC740,ida_default_sub,,,,,.text,172,1,5120,False,False,True
-1034220,sub_FC7EC,ida_default_sub,,,,,.text,148,1,5120,False,False,True
-1034368,sub_FC880,ida_default_sub,,,,,.text,32,1,5120,False,False,True
+1033392,TFileScripting_script_deleteFile,ida_named_non_elf,,,,,.text,144,1,5120,False,False,False
+1033536,TFileScripting_script_setFileModTime,ida_named_non_elf,,,,,.text,324,1,5120,False,False,False
+1033860,TFileScripting_script_getFileModTime,ida_named_non_elf,,,,,.text,188,1,5120,False,False,False
+1034048,TFileScripting_script_fileSize,ida_named_non_elf,,,,,.text,172,1,5120,False,False,False
+1034220,TFileScripting_script_fileExists,ida_named_non_elf,,,,,.text,148,1,5120,False,False,False
+1034368,TFileScripting_script_getScriptAccessFile,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
 1034400,TFileScripting_getScriptWriteAccessFolder_TString_const,elf_symbol,function,_ZN14TFileScripting26getScriptWriteAccessFolderERK7TString,TFileScripting::getScriptWriteAccessFolder(TString const&),TFileScripting_getScriptWriteAccessFolder_TString_const,.text,480,4,5120,False,False,False
-1034880,sub_FCA80,ida_default_sub,,,,,.text,1292,1,5120,False,False,True
+1034880,TFileScripting_script_decompressFile,ida_named_non_elf,,,,,.text,1292,1,5120,False,False,False
 1036172,TFileScripting_getScriptWriteBitmapFilename_TString_const,elf_symbol,function,_ZN14TFileScripting28getScriptWriteBitmapFilenameERK7TString,TFileScripting::getScriptWriteBitmapFilename(TString const&),TFileScripting_getScriptWriteBitmapFilename_TString_const,.text,200,4,5120,False,False,False
 1036372,TFileScripting_initStaticVars_void,elf_symbol,function,_Z29TFileScripting_initStaticVarsv,TFileScripting_initStaticVars(void),TFileScripting_initStaticVars_void,.text,380,4,5120,False,False,False
 1036752,TFileScripting_initStaticScriptVars_void,elf_symbol,function,_Z35TFileScripting_initStaticScriptVarsv,TFileScripting_initStaticScriptVars(void),TFileScripting_initStaticScriptVars_void,.text,20,4,5120,False,False,False
