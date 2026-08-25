@@ -6778,73 +6778,73 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1779404,non_virtual_thunk_to_GuiCheckBoxCtrlProperties_GuiCheckBoxCtrlProperties__2,elf_symbol,function,_ZThn16_N25GuiCheckBoxCtrlPropertiesD0Ev,`non-virtual thunk to'GuiCheckBoxCtrlProperties::~GuiCheckBoxCtrlProperties(),non_virtual_thunk_to_GuiCheckBoxCtrlProperties_GuiCheckBoxCtrlProperties__2,.text,8,2,5120,False,False,False
 1779412,GuiCheckBoxCtrl_GuiCheckBoxCtrl,elf_symbol,function,_ZN15GuiCheckBoxCtrlD2Ev,GuiCheckBoxCtrl::~GuiCheckBoxCtrl(),GuiCheckBoxCtrl_GuiCheckBoxCtrl,.text,52,3,5120,False,False,False
 1779464,GuiCheckBoxCtrl_GuiCheckBoxCtrl__2,elf_symbol,function,_ZN15GuiCheckBoxCtrlD0Ev,GuiCheckBoxCtrl::~GuiCheckBoxCtrl(),GuiCheckBoxCtrl_GuiCheckBoxCtrl__2,.text,60,2,5120,False,False,False
-1779528,sub_1B2748,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779536,sub_1B2750,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779544,sub_1B2758,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779552,sub_1B2760,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779560,sub_1B2768,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779568,sub_1B2770,ida_default_sub,,,,,.text,28,1,5120,False,False,True
-1779596,sub_1B278C,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779604,sub_1B2794,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779612,sub_1B279C,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779620,sub_1B27A4,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779628,sub_1B27AC,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779636,sub_1B27B4,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779644,sub_1B27BC,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779652,sub_1B27C4,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779660,sub_1B27CC,ida_default_sub,,,,,.text,68,1,5120,False,False,True
-1779728,sub_1B2810,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779736,sub_1B2818,ida_default_sub,,,,,.text,68,1,5120,False,False,True
-1779804,sub_1B285C,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779812,sub_1B2864,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779820,sub_1B286C,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779828,sub_1B2874,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779836,sub_1B287C,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779844,sub_1B2884,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779852,sub_1B288C,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779860,sub_1B2894,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779868,sub_1B289C,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779876,sub_1B28A4,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779884,sub_1B28AC,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779892,sub_1B28B4,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779900,sub_1B28BC,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779908,sub_1B28C4,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779916,sub_1B28CC,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779924,sub_1B28D4,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779932,sub_1B28DC,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779940,sub_1B28E4,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1779948,sub_1B28EC,ida_default_sub,,,,,.text,72,1,5120,False,False,True
-1780020,sub_1B2934,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1780028,sub_1B293C,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1780036,sub_1B2944,ida_default_sub,,,,,.text,32,1,5120,False,False,True
-1780068,sub_1B2964,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1780076,sub_1B296C,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1780084,sub_1B2974,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1780092,sub_1B297C,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1780100,sub_1B2984,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1780108,sub_1B298C,ida_default_sub,,,,,.text,24,1,5120,False,False,True
-1780132,sub_1B29A4,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1780140,sub_1B29AC,ida_default_sub,,,,,.text,24,1,5120,False,False,True
-1780164,sub_1B29C4,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1780172,sub_1B29CC,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1780180,sub_1B29D4,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1780196,sub_1B29E4,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1780204,sub_1B29EC,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1780220,sub_1B29FC,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1780228,sub_1B2A04,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1780236,sub_1B2A0C,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1780244,sub_1B2A14,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1780252,sub_1B2A1C,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1780268,sub_1B2A2C,ida_default_sub,,,,,.text,32,1,5120,False,False,True
-1780300,sub_1B2A4C,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1780308,sub_1B2A54,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1780316,sub_1B2A5C,ida_default_sub,,,,,.text,72,1,5120,False,False,True
-1780388,sub_1B2AA4,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1780396,sub_1B2AAC,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1780404,sub_1B2AB4,ida_default_sub,,,,,.text,8,2,5120,False,False,True
-1780412,sub_1B2ABC,ida_default_sub,,,,,.text,56,1,5120,False,False,True
-1780468,sub_1B2AF4,ida_default_sub,,,,,.text,32,1,5120,False,False,True
-1780500,sub_1B2B14,ida_default_sub,,,,,.text,32,1,5120,False,False,True
+1779528,GuiControl_getAcceptDropFiles,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779536,GuiControl_setAcceptDropFiles,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779544,GuiControl_getActive,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779552,GuiControl_getAlpha,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779560,GuiControl_getAreaClickPriority,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779568,GuiControl_setAreaClickPriority,ida_named_non_elf,,,,,.text,28,1,5120,False,False,False
+1779596,GuiControl_getBitmapCache,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779604,GuiControl_getAwake,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779612,GuiControl_getBlue,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779620,GuiControl_getCanMove,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779628,GuiControl_setCanMove,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779636,GuiControl_getCanResize,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779644,GuiControl_setCanResize,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779652,GuiControl_getClientHeight,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779660,GuiControl_setClientHeight,ida_named_non_elf,,,,,.text,68,1,5120,False,False,False
+1779728,GuiControl_getClientWidth,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779736,GuiControl_setClientWidth,ida_named_non_elf,,,,,.text,68,1,5120,False,False,False
+1779804,GuiControl_getClipChildren,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779812,GuiControl_setClipChildren,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779820,GuiControl_getClipMove,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779828,GuiControl_setClipMove,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779836,GuiControl_getClipToBounds,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779844,GuiControl_setClipToBounds,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779852,GuiControl_getEditing,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779860,GuiControl_setEditing,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779868,GuiControl_getFastChildRender,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779876,GuiControl_setFastChildRender,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779884,GuiControl_getFirstResponder,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779892,GuiControl_getFlickering,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779900,GuiControl_getFlickerBaseTime,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779908,GuiControl_setFlickerBaseTime,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779916,GuiControl_getFlickerTime,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779924,GuiControl_setFlickerTime,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779932,GuiControl_getGreen,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779940,GuiControl_getHeight,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1779948,GuiControl_setHeight,ida_named_non_elf,,,,,.text,72,1,5120,False,False,False
+1780020,GuiControl_getHintTime,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1780028,GuiControl_setHintTime,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1780036,GuiControl_getIsInAnimation,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
+1780068,GuiControl_getLockMouseDown,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1780076,GuiControl_setLockMouseDown,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1780084,GuiControl_getMode,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1780092,GuiControl_getRed,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1780100,GuiControl_getResizeWidth,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1780108,GuiControl_setResizeWidth,ida_named_non_elf,,,,,.text,24,1,5120,False,False,False
+1780132,GuiControl_getResizeHeight,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1780140,GuiControl_setResizeHeight,ida_named_non_elf,,,,,.text,24,1,5120,False,False,False
+1780164,GuiControl_getRotation,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1780172,GuiControl_getScrollLineX,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1780180,GuiControl_setScrollLineX,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1780196,GuiControl_getScrollLineY,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1780204,GuiControl_setScrollLineY,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1780220,GuiControl_getAlwaysOnTop,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1780228,GuiControl_setAlwaysOnTop,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1780236,GuiControl_getShowHint,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1780244,GuiControl_setShowHint,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1780252,GuiControl_getUseOwnProfile,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1780268,GuiControl_setUseOwnProfile,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
+1780300,GuiControl_getVisible,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1780308,GuiControl_getWidth,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1780316,GuiControl_setWidth,ida_named_non_elf,,,,,.text,72,1,5120,False,False,False
+1780388,GuiControl_getX,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1780396,GuiControl_getY,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1780404,GuiControl_getParent,ida_named_non_elf,,,,,.text,8,2,5120,False,False,False
+1780412,GuiControl_script_resize,ida_named_non_elf,,,,,.text,56,1,5120,False,False,False
+1780468,GuiControl_script_showTop,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
+1780500,GuiControl_script_showAlwaysOnTop,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
 1780532,GuiControl_compare_y_void_const_void_const,elf_symbol,function,_Z20GuiControl_compare_yPKvS0_,"GuiControl_compare_y(void const*,void const*)",GuiControl_compare_y_void_const_void_const,.text,68,3,5120,False,False,False
 1780600,GuiControl_onChildResized_GuiControl,elf_symbol,function,_ZN10GuiControl14onChildResizedEPS_,GuiControl::onChildResized(GuiControl*),GuiControl_onChildResized_GuiControl,.text,4,27,5120,False,False,False
 1780604,GuiControl_onParentResized_TPoint_const_TPoint_const,elf_symbol,function,_ZN10GuiControl15onParentResizedERK6TPointS2_,"GuiControl::onParentResized(TPoint const&,TPoint const&)",GuiControl_onParentResized_TPoint_const_TPoint_const,.text,468,24,5120,False,False,False
@@ -6856,32 +6856,32 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1781476,GuiControl_onKeyUp_GuiEvent_const,elf_symbol,function,_ZN10GuiControl7onKeyUpERK8GuiEvent,GuiControl::onKeyUp(GuiEvent const&),GuiControl_onKeyUp_GuiEvent_const,.text,60,22,5120,False,False,False
 1781536,GuiControl_showAlwaysTop_void,elf_symbol,function,_ZN10GuiControl13showAlwaysTopEv,GuiControl::showAlwaysTop(void),GuiControl_showAlwaysTop_void,.text,40,25,5120,False,False,False
 1781576,GuiControl_getScrollLineSizes_uint_uint,elf_symbol,function,_ZN10GuiControl18getScrollLineSizesEPjS0_,"GuiControl::getScrollLineSizes(uint *,uint *)",GuiControl_getScrollLineSizes_uint_uint,.text,20,27,5120,False,False,False
-1781596,sub_1B2F5C,ida_default_sub,,,,,.text,64,1,5120,False,False,True
-1781660,sub_1B2F9C,ida_default_sub,,,,,.text,64,1,5120,False,False,True
+1781596,GuiControl_getVertSizing,ida_named_non_elf,,,,,.text,64,1,5120,False,False,False
+1781660,GuiControl_getHorizSizing,ida_named_non_elf,,,,,.text,64,1,5120,False,False,False
 1781724,sub_1B2FDC,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1781740,sub_1B2FEC,ida_default_sub,,,,,.text,128,1,5120,False,False,True
-1781868,sub_1B306C,ida_default_sub,,,,,.text,140,1,5120,False,False,True
-1782008,sub_1B30F8,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1782016,sub_1B3100,ida_default_sub,,,,,.text,48,1,5120,False,False,True
-1782064,sub_1B3130,ida_default_sub,,,,,.text,256,1,5120,False,False,True
-1782320,sub_1B3230,ida_default_sub,,,,,.text,68,2,5120,False,False,True
-1782388,sub_1B3274,ida_default_sub,,,,,.text,72,1,5120,False,False,True
-1782460,sub_1B32BC,ida_default_sub,,,,,.text,76,1,5120,False,False,True
-1782536,sub_1B3308,ida_default_sub,,,,,.text,72,1,5120,False,False,True
-1782608,sub_1B3350,ida_default_sub,,,,,.text,124,1,5120,False,False,True
-1782732,sub_1B33CC,ida_default_sub,,,,,.text,36,2,5120,False,False,True
-1782768,sub_1B33F0,ida_default_sub,,,,,.text,36,1,5120,False,False,True
-1782804,sub_1B3414,ida_default_sub,,,,,.text,36,1,5120,False,False,True
-1782840,sub_1B3438,ida_default_sub,,,,,.text,36,1,5120,False,False,True
-1782876,sub_1B345C,ida_default_sub,,,,,.text,56,1,5120,False,False,True
-1782932,sub_1B3494,ida_default_sub,,,,,.text,64,1,5120,False,False,True
-1782996,sub_1B34D4,ida_default_sub,,,,,.text,68,1,5120,False,False,True
-1783064,sub_1B3518,ida_default_sub,,,,,.text,64,1,5120,False,False,True
-1783128,sub_1B3558,ida_default_sub,,,,,.text,144,1,5120,False,False,True
-1783276,sub_1B35EC,ida_default_sub,,,,,.text,68,1,5120,False,False,True
-1783344,sub_1B3630,ida_default_sub,,,,,.text,36,1,5120,False,False,True
-1783380,sub_1B3654,ida_default_sub,,,,,.text,116,1,5120,False,False,True
-1783496,sub_1B36C8,ida_default_sub,,,,,.text,112,1,5120,False,False,True
+1781740,GuiControl_setVertSizing,ida_named_non_elf,,,,,.text,128,1,5120,False,False,False
+1781868,GuiControl_setHorizSizing,ida_named_non_elf,,,,,.text,140,1,5120,False,False,False
+1782008,GuiControl_setHint,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1782016,GuiControl_getHint,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
+1782064,GuiControl_getStyle,ida_named_non_elf,,,,,.text,256,1,5120,False,False,False
+1782320,GuiControl_setMinExtent,ida_named_non_elf,,,,,.text,68,2,5120,False,False,False
+1782388,GuiControl_script_findControl,ida_named_non_elf,,,,,.text,72,1,5120,False,False,False
+1782460,GuiControl_setExtent,ida_named_non_elf,,,,,.text,76,1,5120,False,False,False
+1782536,GuiControl_setPosition,ida_named_non_elf,,,,,.text,72,1,5120,False,False,False
+1782608,GuiControl_setClientExtent,ida_named_non_elf,,,,,.text,124,1,5120,False,False,False
+1782732,GuiControl_getMinExtent,ida_named_non_elf,,,,,.text,36,2,5120,False,False,False
+1782768,GuiControl_getClientExtent,ida_named_non_elf,,,,,.text,36,1,5120,False,False,False
+1782804,GuiControl_getPosition,ida_named_non_elf,,,,,.text,36,1,5120,False,False,False
+1782840,GuiControl_getExtent,ida_named_non_elf,,,,,.text,36,1,5120,False,False,False
+1782876,GuiControl_getRotationCenter,ida_named_non_elf,,,,,.text,56,1,5120,False,False,False
+1782932,GuiControl_setProfile,ida_named_non_elf,,,,,.text,64,1,5120,False,False,False
+1782996,GuiControl_setFirstResponder,ida_named_non_elf,,,,,.text,68,1,5120,False,False,False
+1783064,GuiControl_script_addControl,ida_named_non_elf,,,,,.text,64,1,5120,False,False,False
+1783128,GuiControl_getColor,ida_named_non_elf,,,,,.text,144,1,5120,False,False,False
+1783276,GuiControl_setBounds,ida_named_non_elf,,,,,.text,68,1,5120,False,False,False
+1783344,GuiControl_getBounds,ida_named_non_elf,,,,,.text,36,1,5120,False,False,False
+1783380,GuiControl_script_localToGlobalCoord,ida_named_non_elf,,,,,.text,116,1,5120,False,False,False
+1783496,GuiControl_script_globalToLocalCoord,ida_named_non_elf,,,,,.text,112,1,5120,False,False,False
 1783608,jump_TScriptEnvironment_destroyScriptVariable_TGraalVar,elf_symbol,jump_thunk,j_._ZN18TScriptEnvironment21destroyScriptVariableEP9TGraalVar,TScriptEnvironment::destroyScriptVariable(TGraalVar *),jump_TScriptEnvironment_destroyScriptVariable_TGraalVar,.text,4,1,5312,True,False,False
 1783612,GuiControl_resizeChildren_TPoint_const_TPoint_const,elf_symbol,function,_ZN10GuiControl14resizeChildrenERK6TPointS2_,"GuiControl::resizeChildren(TPoint const&,TPoint const&)",GuiControl_resizeChildren_TPoint_const_TPoint_const,.text,124,25,5120,False,False,False
 1783736,GuiControl_onMoved_void,elf_symbol,function,_ZN10GuiControl7onMovedEv,GuiControl::onMoved(void),GuiControl_onMoved_void,.text,100,27,5120,False,False,False
@@ -6893,15 +6893,15 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1784424,GuiControl_onAdd_void,elf_symbol,function,_ZN10GuiControl5onAddEv,GuiControl::onAdd(void),GuiControl_onAdd_void,.text,108,26,5120,False,False,False
 1784532,GuiControl_notifyVisible_bool,elf_symbol,function,_ZN10GuiControl13notifyVisibleEb,GuiControl::notifyVisible(bool),GuiControl_notifyVisible_bool,.text,200,25,5120,False,False,False
 1784732,GuiControl_onAction_void,elf_symbol,function,_ZN10GuiControl8onActionEv,GuiControl::onAction(void),GuiControl_onAction_void,.text,84,22,5120,False,False,False
-1784816,sub_1B3BF0,ida_default_sub,,,,,.text,68,1,5120,False,False,True
-1784884,sub_1B3C34,ida_default_sub,,,,,.text,68,1,5120,False,False,True
+1784816,GuiControl_setY,ida_named_non_elf,,,,,.text,68,1,5120,False,False,False
+1784884,GuiControl_setX,ida_named_non_elf,,,,,.text,68,1,5120,False,False,False
 1784952,GuiControl_onAcceleratorKeyEvent_GuiEvent_const_bool,elf_symbol,function,_ZN10GuiControl21onAcceleratorKeyEventERK8GuiEventb,"GuiControl::onAcceleratorKeyEvent(GuiEvent const&,bool)",GuiControl_onAcceleratorKeyEvent_GuiEvent_const_bool,.text,156,23,5120,False,False,False
 1785108,GuiControl_getStyle_void,elf_symbol,function,_ZN10GuiControl8getStyleEv,GuiControl::getStyle(void),GuiControl_getStyle_void,.text,196,25,5120,False,False,False
 1785304,GuiControl_onMouseWheelUp_GuiEvent_const,elf_symbol,function,_ZN10GuiControl14onMouseWheelUpERK8GuiEvent,GuiControl::onMouseWheelUp(GuiEvent const&),GuiControl_onMouseWheelUp_GuiEvent_const,.text,104,26,5120,False,False,False
 1785408,GuiControl_onMouseWheelDown_GuiEvent_const,elf_symbol,function,_ZN10GuiControl16onMouseWheelDownERK8GuiEvent,GuiControl::onMouseWheelDown(GuiEvent const&),GuiControl_onMouseWheelDown_GuiEvent_const,.text,104,26,5120,False,False,False
 1785512,GuiControl_setFirstResponder_GuiControl,elf_symbol,function,_ZN10GuiControl17setFirstResponderEPS_,GuiControl::setFirstResponder(GuiControl*),GuiControl_setFirstResponder_GuiControl,.text,88,27,5120,False,False,False
 1785600,GuiControl_onKeyDown_GuiEvent_const,elf_symbol,function,_ZN10GuiControl9onKeyDownERK8GuiEvent,GuiControl::onKeyDown(GuiEvent const&),GuiControl_onKeyDown_GuiEvent_const,.text,104,16,5120,False,False,False
-1785704,sub_1B3F68,ida_default_sub,,,,,.text,76,1,5120,False,False,True
+1785704,GuiControl_getProfile,ida_named_non_elf,,,,,.text,76,1,5120,False,False,False
 1785780,GuiControl_findLastTabable_bool,elf_symbol,function,_ZN10GuiControl15findLastTabableEb,GuiControl::findLastTabable(bool),GuiControl_findLastTabable_bool,.text,288,25,5120,False,False,False
 1786068,GuiControl_findPrevTabable_GuiControl_bool,elf_symbol,function,_ZN10GuiControl15findPrevTabableEPS_b,"GuiControl::findPrevTabable(GuiControl*,bool)",GuiControl_findPrevTabable_GuiControl_bool,.text,404,26,5120,False,False,False
 1786472,GuiControl_findNextTabable_GuiControl_bool,elf_symbol,function,_ZN10GuiControl15findNextTabableEPS_b,"GuiControl::findNextTabable(GuiControl*,bool)",GuiControl_findNextTabable_GuiControl_bool,.text,408,26,5120,False,False,False
@@ -6943,7 +6943,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1795348,GuiControl_sleep_void,elf_symbol,function,_ZN10GuiControl5sleepEv,GuiControl::sleep(void),GuiControl_sleep_void,.text,124,4,5120,False,False,False
 1795472,GuiControl_setStyle_TGUIStyle,elf_symbol,function,_ZN10GuiControl8setStyleEP9TGUIStyle,GuiControl::setStyle(TGUIStyle *),GuiControl_setStyle_TGUIStyle,.text,136,4,5120,False,False,False
 1795608,GuiControl_setStyleName_TString_const_bool,elf_symbol,function,_ZN10GuiControl12setStyleNameERK7TStringb,"GuiControl::setStyleName(TString const&,bool)",GuiControl_setStyleName_TString_const_bool,.text,880,4,5120,False,False,False
-1796488,sub_1B6988,ida_default_sub,,,,,.text,72,1,5120,False,False,True
+1796488,GuiControl_setStyle,ida_named_non_elf,,,,,.text,72,1,5120,False,False,False
 1796560,GuiControl_isMouseLocked_int,elf_symbol,function,_ZN10GuiControl13isMouseLockedEi,GuiControl::isMouseLocked(int),GuiControl_isMouseLocked_int,.text,84,4,5120,False,False,False
 1796644,jump_GuiControl_isMouseLocked_int,elf_symbol,jump_thunk,j_._ZN10GuiControl13isMouseLockedEi,GuiControl::isMouseLocked(int),jump_GuiControl_isMouseLocked_int,.text,4,1,5312,True,False,False
 1796648,GuiControl_mouseLock_int,elf_symbol,function,_ZN10GuiControl9mouseLockEi,GuiControl::mouseLock(int),GuiControl_mouseLock_int,.text,64,4,5120,False,False,False
@@ -6969,22 +6969,22 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1798792,GuiControl_GuiControl__2,elf_symbol,function,_ZN10GuiControlD0Ev,GuiControl::~GuiControl(),GuiControl_GuiControl__2,.text,32,2,5120,False,False,False
 1798824,GuiControl_invalideRect_TFloatRectangle_const_bool,elf_symbol,function,_ZN10GuiControl12invalideRectERK15TFloatRectangleb,"GuiControl::invalideRect(TFloatRectangle const&,bool)",GuiControl_invalideRect_TFloatRectangle_const_bool,.text,324,4,5120,False,False,False
 1799148,GuiControl_invalideRect_bool,elf_symbol,function,_ZN10GuiControl12invalideRectEb,GuiControl::invalideRect(bool),GuiControl_invalideRect_bool,.text,100,4,5120,False,False,False
-1799248,sub_1B7450,ida_default_sub,,,,,.text,32,1,5120,False,False,True
-1799280,sub_1B7470,ida_default_sub,,,,,.text,8,1,5120,False,False,True
+1799248,GuiControl_setFlickering,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
+1799280,GuiControl_script_repaint,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
 1799288,GuiControl_addObject_GuiControl,elf_symbol,function,_ZN10GuiControl9addObjectEPS_,GuiControl::addObject(GuiControl*),GuiControl_addObject_GuiControl,.text,308,27,5120,False,False,False
 1799596,GuiControl_removeObject_GuiControl,elf_symbol,function,_ZN10GuiControl12removeObjectEPS_,GuiControl::removeObject(GuiControl*),GuiControl_removeObject_GuiControl,.text,264,28,5120,False,False,False
 1799860,GuiControl_resize_TPoint_const_TPoint_const,elf_symbol,function,_ZN10GuiControl6resizeERK6TPointS2_,"GuiControl::resize(TPoint const&,TPoint const&)",GuiControl_resize_TPoint_const_TPoint_const,.text,488,21,5120,False,False,False
 1800348,GuiControl_createAnimation_void,elf_symbol,function,_ZN10GuiControl15createAnimationEv,GuiControl::createAnimation(void),GuiControl_createAnimation_void,.text,192,4,5120,False,False,False
 1800540,jump_GuiControl_createAnimation_void,elf_symbol,jump_thunk,j_._ZN10GuiControl15createAnimationEv,GuiControl::createAnimation(void),jump_GuiControl_createAnimation_void,.text,4,1,5312,True,False,False
 1800544,GuiControl_stopAnimations_void,elf_symbol,function,_ZN10GuiControl14stopAnimationsEv,GuiControl::stopAnimations(void),GuiControl_stopAnimations_void,.text,212,4,5120,False,False,False
-1800756,sub_1B7A34,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+1800756,GuiControl_setIsInAnimation,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 1800772,jump_GuiControl_stopAnimations_void,elf_symbol,jump_thunk,j_._ZN10GuiControl14stopAnimationsEv,GuiControl::stopAnimations(void),jump_GuiControl_stopAnimations_void,.text,4,1,5312,True,False,False
 1800776,GuiControl_stopInOutAnimations_void,elf_symbol,function,_ZN10GuiControl19stopInOutAnimationsEv,GuiControl::stopInOutAnimations(void),GuiControl_stopInOutAnimations_void,.text,244,4,5120,False,False,False
-1801020,sub_1B7B3C,ida_default_sub,,,,,.text,40,1,5120,False,False,True
-1801060,sub_1B7B64,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+1801020,GuiControl_setVisible,ida_named_non_elf,,,,,.text,40,1,5120,False,False,False
+1801060,GuiControl_setIsInOutAnimation,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 1801076,jump_GuiControl_stopInOutAnimations_void,elf_symbol,jump_thunk,j_._ZN10GuiControl19stopInOutAnimationsEv,GuiControl::stopInOutAnimations(void),jump_GuiControl_stopInOutAnimations_void,.text,4,1,5312,True,False,False
-1801080,sub_1B7B78,ida_default_sub,,,,,.text,44,1,5120,False,False,True
-1801124,sub_1B7BA4,ida_default_sub,,,,,.text,44,1,5120,False,False,True
+1801080,GuiControl_script_show,ida_named_non_elf,,,,,.text,44,1,5120,False,False,False
+1801124,GuiControl_script_hide,ida_named_non_elf,,,,,.text,44,1,5120,False,False,False
 1801168,GuiControl_renderCache_TPoint_const,elf_symbol,function,_ZN10GuiControl11renderCacheERK6TPoint,GuiControl::renderCache(TPoint const&),GuiControl_renderCache_TPoint_const,.text,1284,4,5120,False,False,False
 1802464,GuiControl_onRenderWithColors_TPoint_const,elf_symbol,function,_ZN10GuiControl18onRenderWithColorsERK6TPoint,GuiControl::onRenderWithColors(TPoint const&),GuiControl_onRenderWithColors_TPoint_const,.text,440,4,5120,False,False,False
 1802904,GuiControl_setBitmapCache_bool,elf_symbol,function,_ZN10GuiControl14setBitmapCacheEb,GuiControl::setBitmapCache(bool),GuiControl_setBitmapCache_bool,.text,116,4,5120,False,False,False
@@ -6995,7 +6995,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1804368,GuiControl_onMouseLeave_GuiEvent_const,elf_symbol,function,_ZN10GuiControl12onMouseLeaveERK8GuiEvent,GuiControl::onMouseLeave(GuiEvent const&),GuiControl_onMouseLeave_GuiEvent_const,.text,200,20,5120,False,False,False
 1804568,GuiControl_onLoseFirstResponder_void,elf_symbol,function,_ZN10GuiControl20onLoseFirstResponderEv,GuiControl::onLoseFirstResponder(void),GuiControl_onLoseFirstResponder_void,.text,84,28,5120,False,False,False
 1804652,GuiControl_setFirstResponder_void,elf_symbol,function,_ZN10GuiControl17setFirstResponderEv,GuiControl::setFirstResponder(void),GuiControl_setFirstResponder_void,.text,304,4,5120,False,False,False
-1804956,sub_1B8A9C,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+1804956,GuiControl_script_makeFirstResponder,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 1804972,GuiControl_onMouseDown_GuiEvent_const,elf_symbol,function,_ZN10GuiControl11onMouseDownERK8GuiEvent,GuiControl::onMouseDown(GuiEvent const&),GuiControl_onMouseDown_GuiEvent_const,.text,672,13,5120,False,False,False
 1805644,GuiControl_showtop_void,elf_symbol,function,_ZN10GuiControl7showtopEv,GuiControl::showtop(void),GuiControl_showtop_void,.text,80,25,5120,False,False,False
 1805724,GuiControl_makeFirstResponder_bool,elf_symbol,function,_ZN10GuiControl18makeFirstResponderEb,GuiControl::makeFirstResponder(bool),GuiControl_makeFirstResponder_bool,.text,16,25,5120,False,False,False
@@ -7014,7 +7014,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1810508,GuiControl_renderText_GuiControlProfile_TPoint_const_TString_const_ColorI_const,elf_symbol,function,_ZN10GuiControl10renderTextEP17GuiControlProfileRK6TPointRK7TStringRK6ColorI,"GuiControl::renderText(GuiControlProfile *,TPoint const&,TString const&,ColorI const&)",GuiControl_renderText_GuiControlProfile_TPoint_const_TString_const_ColorI_const,.text,44,4,5120,False,False,False
 1810552,GuiControl_updateUseColors_void,elf_symbol,function,_ZN10GuiControl15updateUseColorsEv,GuiControl::updateUseColors(void),GuiControl_updateUseColors_void,.text,76,4,5120,False,False,False
 1810628,GuiControl_setColor_ColorF_const,elf_symbol,function,_ZN10GuiControl8setColorERK6ColorF,GuiControl::setColor(ColorF const&),GuiControl_setColor_ColorF_const,.text,44,4,5120,False,False,False
-1810672,sub_1BA0F0,ida_default_sub,,,,,.text,116,1,5120,False,False,True
+1810672,GuiControl_setColor,ida_named_non_elf,,,,,.text,116,1,5120,False,False,False
 1810792,GuiControl_setRed_float,elf_symbol,function,_ZN10GuiControl6setRedEf,GuiControl::setRed(float),GuiControl_setRed_float,.text,64,4,5120,False,False,False
 1810856,jump_GuiControl_setRed_float,elf_symbol,jump_thunk,j_._ZN10GuiControl6setRedEf,GuiControl::setRed(float),jump_GuiControl_setRed_float,.text,4,1,5312,True,False,False
 1810860,GuiControl_setGreen_float,elf_symbol,function,_ZN10GuiControl8setGreenEf,GuiControl::setGreen(float),GuiControl_setGreen_float,.text,64,4,5120,False,False,False
@@ -7028,9 +7028,9 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1811132,GuiControl_setRotation_float,elf_symbol,function,_ZN10GuiControl11setRotationEf,GuiControl::setRotation(float),GuiControl_setRotation_float,.text,40,4,5120,False,False,False
 1811172,jump_GuiControl_setRotation_float,elf_symbol,jump_thunk,j_._ZN10GuiControl11setRotationEf,GuiControl::setRotation(float),jump_GuiControl_setRotation_float,.text,4,1,5312,True,False,False
 1811176,GuiControl_setRotationCenter_TPoint_const,elf_symbol,function,_ZN10GuiControl17setRotationCenterERK6TPoint,GuiControl::setRotationCenter(TPoint const&),GuiControl_setRotationCenter_TPoint_const,.text,72,4,5120,False,False,False
-1811248,sub_1BA330,ida_default_sub,,,,,.text,60,1,5120,False,False,True
+1811248,GuiControl_setRotationCenter,ida_named_non_elf,,,,,.text,60,1,5120,False,False,False
 1811308,GuiControl_getCursorString_void,elf_symbol,function,_ZNK10GuiControl15getCursorStringEv,GuiControl::getCursorString(void),GuiControl_getCursorString_void,.text,44,4,5120,False,False,False
-1811352,sub_1BA398,ida_default_sub,,,,,.text,32,1,5120,False,False,True
+1811352,GuiControl_getCursor,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
 1811384,GuiControl_setCursorString_TString_const,elf_symbol,function,_ZN10GuiControl15setCursorStringERK7TString,GuiControl::setCursorString(TString const&),GuiControl_setCursorString_TString_const,.text,92,4,5120,False,False,False
 1811476,jump_GuiControl_setCursorString_TString_const,elf_symbol,jump_thunk,j_._ZN10GuiControl15setCursorStringERK7TString,GuiControl::setCursorString(TString const&),jump_GuiControl_setCursorString_TString_const,.text,4,1,5312,True,False,False
 1811480,guiControl_initStaticVars_void,elf_symbol,function,_Z25guiControl_initStaticVarsv,guiControl_initStaticVars(void),guiControl_initStaticVars_void,.text,88,4,5120,False,False,False

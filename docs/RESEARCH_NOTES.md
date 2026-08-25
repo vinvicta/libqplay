@@ -51,15 +51,15 @@ ambiguous.
 
 The follow-up inventory keeps the coverage boundary explicit. IDA reports
 11,272 function starts in this database. The translated ELF rows account for
-8,096 function starts and the remaining rows are 1,774 default `sub_` names
-plus 1,402 names that IDA created without a matching ELF symbol. The 505
+8,096 function starts and the remaining rows are 1,667 default `sub_` names
+plus 1,509 names that IDA created without a matching ELF symbol. The 505
 remaining ELF rows are data symbols. `symbols/libqplay.function_inventory.csv`
 and its JSON counterpart record every function start, its size, segment,
 incoming references, flags, and source category. The `sub_` rows are not
 missing from the archive; they are unnamed because this stripped portion of
 the file provides no reliable semantic name for them.
 
-A focused follow-up pass did recover reliable behavior names for 338 of those
+A focused follow-up pass did recover reliable behavior names for 445 of those
 IDA-created functions. The labels cover the two server-login callbacks, the
 packet-190 server-list completion wrapper, file-download bookkeeping, the
 inbound handler-table loader and clearer, weapon and encrypted-script updates,
@@ -119,6 +119,18 @@ tile-coordinate scaling, ordinary-object clamping, layer remapping, and the
 vtable position calls. The `z` getter at `0x169a08` was a referenced code
 pointer without a function boundary in IDA, so it was defined from the property
 table reference before being labeled.
+
+The `GuiControlProperties` constructor at `0x1b45c8` registers 55 properties
+from `0x3806a0`, which provides a particularly useful render-path map. Its
+callbacks expose bounds, extent, client dimensions, clipping, color, profile,
+visibility, animation state, sizing, and position. The companion script table
+at `0x3810f0` contains 28 entries, including control lookup, coordinate
+conversion, resize, repaint, visibility, and responder operations. Eleven
+formerly unnamed callbacks from that table now carry script-prefixed labels.
+The `minextent` and `minsize` entries share their callback pair. The table
+entry that decodes to `showhint` contains the same one-byte encoded terminator
+quirk seen in other old script tables, so the name is treated as an inferred
+table name with the encoding anomaly documented.
 
 The latest native audit extends the same evidence standard beyond the packet
 core. It labels the `TGraalConnection` and `THTTPRequest` accessors used by

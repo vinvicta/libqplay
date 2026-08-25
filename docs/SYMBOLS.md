@@ -28,9 +28,9 @@ The translation count is the number of ELF symbol records handled by the
 script. IDA's function survey also reports compiler-generated functions and
 other analysis-created entries, so its total function count is not expected
 to equal 8,601. After the follow-up semantic pass, the original ARM64
-database reports 11,272 total functions, 9,498 with names, and 1,774 default
+database reports 11,272 total functions, 9,605 with names, and 1,667 default
 `sub_` names. Those figures describe the IDA database; the 8,601 count
-describes the reproducible symbol import and rename pass. The 338 semantic labels
+describes the reproducible symbol import and rename pass. The 445 semantic labels
 are recorded separately in `artifacts/ida_semantic_labels.json`, alongside
 the earlier inferred `TClient_setSSLParameters_scriptCallback` label. None of
 these semantic labels is part of the 8,601 original ELF symbol records.
@@ -101,8 +101,8 @@ land on IDA functions. IDA's analysis adds 11,272 function starts in total:
 | Function source | Count |
 | --- | ---: |
 | Backed by a translated ELF symbol | 8,096 |
-| IDA default `sub_` names | 1,774 |
-| Named by IDA but not backed by an ELF record | 1,402 |
+| IDA default `sub_` names | 1,667 |
+| Named by IDA but not backed by an ELF record | 1,509 |
 | Total IDA functions | 11,272 |
 
 The complete address-level inventory is in
@@ -144,6 +144,17 @@ properties, including their coordinate clamping and vtable forwarding behavior.
 The `z` getter was initially present as a code pointer without an IDA function
 boundary, so the boundary at `0x169a08` was defined from the property table
 reference before applying its label.
+
+The `GuiControlProperties` constructor at `0x1b45c8` registers 55 properties
+from the table at `0x3806a0`. That table accounts for the bounds, extent,
+client size, clipping, profile, color, visibility, animation, sizing, and
+position accessors now labeled in the IDA database. The companion function
+table at `0x3810f0` registers 28 script functions. Eleven of its formerly
+unnamed wrappers are now labeled, including coordinate conversion, control
+lookup, resize, repaint, show or hide, and first-responder helpers. The
+`minextent` and `minsize` properties intentionally share one getter and setter
+pair, and the table's encoded `showhint` terminator is recorded as an encoding
+artifact rather than treated as a different property name.
 
 The inventory was generated from the active ARM64 database by
 `tools/export_function_inventory.py`. It waits for auto-analysis, joins each

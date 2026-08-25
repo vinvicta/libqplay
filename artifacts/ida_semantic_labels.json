@@ -8,10 +8,10 @@
   "policy": "These aliases are analysis labels, not recovered source names. The evidence is recorded so a later pass can correct a label without confusing it with an imported ELF symbol.",
   "inventory_after_labels": {
     "total_functions": 11272,
-    "ida_default_sub_functions": 1774,
-    "ida_named_non_elf_functions": 1402,
-    "named_function_total": 9498,
-    "new_labels_in_this_pass": 338
+    "ida_default_sub_functions": 1667,
+    "ida_named_non_elf_functions": 1509,
+    "named_function_total": 9605,
+    "new_labels_in_this_pass": 445
   },
   "labels": [
     {
@@ -2041,6 +2041,648 @@
       "name": "TLevelObject_getLayer",
       "confidence": "high",
       "evidence": ["The TLevelObject property table at 0x37b048 registers layer with this getter", "Maps the internal layer value at object offset +160 into the script-visible layer numbering"]
+    },
+    {
+      "va": "0x1b2748",
+      "name": "GuiControl_getAcceptDropFiles",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers acceptdropfiles with this getter"]
+    },
+    {
+      "va": "0x1b2750",
+      "name": "GuiControl_setAcceptDropFiles",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers acceptdropfiles with this setter"]
+    },
+    {
+      "va": "0x1b2758",
+      "name": "GuiControl_getActive",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers active with this getter"]
+    },
+    {
+      "va": "0x1b2760",
+      "name": "GuiControl_getAlpha",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers alpha with this getter"]
+    },
+    {
+      "va": "0x1b2768",
+      "name": "GuiControl_getAreaClickPriority",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers areaclickpriority with this getter"]
+    },
+    {
+      "va": "0x1b2770",
+      "name": "GuiControl_setAreaClickPriority",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers areaclickpriority with this setter"]
+    },
+    {
+      "va": "0x1b2794",
+      "name": "GuiControl_getAwake",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers awake with this getter"]
+    },
+    {
+      "va": "0x1b278c",
+      "name": "GuiControl_getBitmapCache",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers bitmapcache with this getter"]
+    },
+    {
+      "va": "0x1b279c",
+      "name": "GuiControl_getBlue",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers blue with this getter"]
+    },
+    {
+      "va": "0x1b3630",
+      "name": "GuiControl_getBounds",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers bounds with this getter"]
+    },
+    {
+      "va": "0x1b35ec",
+      "name": "GuiControl_setBounds",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers bounds with this setter"]
+    },
+    {
+      "va": "0x1b27a4",
+      "name": "GuiControl_getCanMove",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers canmove with this getter"]
+    },
+    {
+      "va": "0x1b27ac",
+      "name": "GuiControl_setCanMove",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers canmove with this setter"]
+    },
+    {
+      "va": "0x1b27b4",
+      "name": "GuiControl_getCanResize",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers canresize with this getter"]
+    },
+    {
+      "va": "0x1b27bc",
+      "name": "GuiControl_setCanResize",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers canresize with this setter"]
+    },
+    {
+      "va": "0x1b33f0",
+      "name": "GuiControl_getClientExtent",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers clientextent with this getter"]
+    },
+    {
+      "va": "0x1b3350",
+      "name": "GuiControl_setClientExtent",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers clientextent with this setter"]
+    },
+    {
+      "va": "0x1b27c4",
+      "name": "GuiControl_getClientHeight",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers clientheight with this getter"]
+    },
+    {
+      "va": "0x1b27cc",
+      "name": "GuiControl_setClientHeight",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers clientheight with this setter"]
+    },
+    {
+      "va": "0x1b2810",
+      "name": "GuiControl_getClientWidth",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers clientwidth with this getter"]
+    },
+    {
+      "va": "0x1b2818",
+      "name": "GuiControl_setClientWidth",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers clientwidth with this setter"]
+    },
+    {
+      "va": "0x1b285c",
+      "name": "GuiControl_getClipChildren",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers clipchildren with this getter"]
+    },
+    {
+      "va": "0x1b2864",
+      "name": "GuiControl_setClipChildren",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers clipchildren with this setter"]
+    },
+    {
+      "va": "0x1b286c",
+      "name": "GuiControl_getClipMove",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers clipmove with this getter"]
+    },
+    {
+      "va": "0x1b2874",
+      "name": "GuiControl_setClipMove",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers clipmove with this setter"]
+    },
+    {
+      "va": "0x1b287c",
+      "name": "GuiControl_getClipToBounds",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers cliptobounds with this getter"]
+    },
+    {
+      "va": "0x1b2884",
+      "name": "GuiControl_setClipToBounds",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers cliptobounds with this setter"]
+    },
+    {
+      "va": "0x1b3558",
+      "name": "GuiControl_getColor",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers color with this getter"]
+    },
+    {
+      "va": "0x1ba0f0",
+      "name": "GuiControl_setColor",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers color with this setter"]
+    },
+    {
+      "va": "0x1ba398",
+      "name": "GuiControl_getCursor",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers cursor with this getter"]
+    },
+    {
+      "va": "0x1b288c",
+      "name": "GuiControl_getEditing",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers editing with this getter"]
+    },
+    {
+      "va": "0x1b2894",
+      "name": "GuiControl_setEditing",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers editing with this setter"]
+    },
+    {
+      "va": "0x1b2974",
+      "name": "GuiControl_getMode",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers mode with this getter"]
+    },
+    {
+      "va": "0x1b3438",
+      "name": "GuiControl_getExtent",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers extent with this getter"]
+    },
+    {
+      "va": "0x1b32bc",
+      "name": "GuiControl_setExtent",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers extent with this setter"]
+    },
+    {
+      "va": "0x1b289c",
+      "name": "GuiControl_getFastChildRender",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers fastchildrender with this getter"]
+    },
+    {
+      "va": "0x1b28a4",
+      "name": "GuiControl_setFastChildRender",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers fastchildrender with this setter"]
+    },
+    {
+      "va": "0x1b28ac",
+      "name": "GuiControl_getFirstResponder",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers firstresponder with this getter"]
+    },
+    {
+      "va": "0x1b34d4",
+      "name": "GuiControl_setFirstResponder",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers firstresponder with this setter"]
+    },
+    {
+      "va": "0x1b28b4",
+      "name": "GuiControl_getFlickering",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers flickering with this getter"]
+    },
+    {
+      "va": "0x1b7450",
+      "name": "GuiControl_setFlickering",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers flickering with this setter"]
+    },
+    {
+      "va": "0x1b28bc",
+      "name": "GuiControl_getFlickerBaseTime",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers flickerbasetime with this getter"]
+    },
+    {
+      "va": "0x1b28c4",
+      "name": "GuiControl_setFlickerBaseTime",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers flickerbasetime with this setter"]
+    },
+    {
+      "va": "0x1b28cc",
+      "name": "GuiControl_getFlickerTime",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers flickertime with this getter"]
+    },
+    {
+      "va": "0x1b28d4",
+      "name": "GuiControl_setFlickerTime",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers flickertime with this setter"]
+    },
+    {
+      "va": "0x1b28dc",
+      "name": "GuiControl_getGreen",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers green with this getter"]
+    },
+    {
+      "va": "0x1b28e4",
+      "name": "GuiControl_getHeight",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers height with this getter"]
+    },
+    {
+      "va": "0x1b28ec",
+      "name": "GuiControl_setHeight",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers height with this setter"]
+    },
+    {
+      "va": "0x1b3100",
+      "name": "GuiControl_getHint",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers hint with this getter"]
+    },
+    {
+      "va": "0x1b30f8",
+      "name": "GuiControl_setHint",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers hint with this setter"]
+    },
+    {
+      "va": "0x1b2934",
+      "name": "GuiControl_getHintTime",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers hinttime with this getter"]
+    },
+    {
+      "va": "0x1b293c",
+      "name": "GuiControl_setHintTime",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers hinttime with this setter"]
+    },
+    {
+      "va": "0x1b2f9c",
+      "name": "GuiControl_getHorizSizing",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers horizsizing with this getter"]
+    },
+    {
+      "va": "0x1b306c",
+      "name": "GuiControl_setHorizSizing",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers horizsizing with this setter"]
+    },
+    {
+      "va": "0x1b2944",
+      "name": "GuiControl_getIsInAnimation",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers isinanimation with this getter"]
+    },
+    {
+      "va": "0x1b7a34",
+      "name": "GuiControl_setIsInAnimation",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers isinanimation with this setter"]
+    },
+    {
+      "va": "0x1b7b64",
+      "name": "GuiControl_setIsInOutAnimation",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers isininoutanimation with this setter"]
+    },
+    {
+      "va": "0x1b2964",
+      "name": "GuiControl_getLockMouseDown",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers lockmousedown with this getter"]
+    },
+    {
+      "va": "0x1b296c",
+      "name": "GuiControl_setLockMouseDown",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers lockmousedown with this setter"]
+    },
+    {
+      "va": "0x1b33cc",
+      "name": "GuiControl_getMinExtent",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers minextent and minsize with this shared getter"]
+    },
+    {
+      "va": "0x1b3230",
+      "name": "GuiControl_setMinExtent",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers minextent and minsize with this shared setter"]
+    },
+    {
+      "va": "0x1b2ab4",
+      "name": "GuiControl_getParent",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers parent with this getter"]
+    },
+    {
+      "va": "0x1b3414",
+      "name": "GuiControl_getPosition",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers position with this getter"]
+    },
+    {
+      "va": "0x1b3308",
+      "name": "GuiControl_setPosition",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers position with this setter"]
+    },
+    {
+      "va": "0x1b3f68",
+      "name": "GuiControl_getProfile",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers profile with this getter"]
+    },
+    {
+      "va": "0x1b3494",
+      "name": "GuiControl_setProfile",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers profile with this setter"]
+    },
+    {
+      "va": "0x1b297c",
+      "name": "GuiControl_getRed",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers red with this getter"]
+    },
+    {
+      "va": "0x1b2984",
+      "name": "GuiControl_getResizeWidth",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers resizewidth with this getter"]
+    },
+    {
+      "va": "0x1b298c",
+      "name": "GuiControl_setResizeWidth",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers resizewidth with this setter"]
+    },
+    {
+      "va": "0x1b29a4",
+      "name": "GuiControl_getResizeHeight",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers resizeheight with this getter"]
+    },
+    {
+      "va": "0x1b29ac",
+      "name": "GuiControl_setResizeHeight",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers resizeheight with this setter"]
+    },
+    {
+      "va": "0x1b29c4",
+      "name": "GuiControl_getRotation",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers rotation with this getter"]
+    },
+    {
+      "va": "0x1b345c",
+      "name": "GuiControl_getRotationCenter",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers rotationcenter with this getter"]
+    },
+    {
+      "va": "0x1ba330",
+      "name": "GuiControl_setRotationCenter",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers rotationcenter with this setter"]
+    },
+    {
+      "va": "0x1b29cc",
+      "name": "GuiControl_getScrollLineX",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers scrolllinex with this getter"]
+    },
+    {
+      "va": "0x1b29d4",
+      "name": "GuiControl_setScrollLineX",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers scrolllinex with this setter"]
+    },
+    {
+      "va": "0x1b29e4",
+      "name": "GuiControl_getScrollLineY",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers scrollliney with this getter"]
+    },
+    {
+      "va": "0x1b29ec",
+      "name": "GuiControl_setScrollLineY",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers scrollliney with this setter"]
+    },
+    {
+      "va": "0x1b2a0c",
+      "name": "GuiControl_getShowHint",
+      "confidence": "high",
+      "evidence": ["The GuiControlProperties table entry at 0x380f40 is the showhint property after accounting for its encoded terminator marker"]
+    },
+    {
+      "va": "0x1b2a14",
+      "name": "GuiControl_setShowHint",
+      "confidence": "high",
+      "evidence": ["The GuiControlProperties table entry at 0x380f40 is the showhint property after accounting for its encoded terminator marker"]
+    },
+    {
+      "va": "0x1b29fc",
+      "name": "GuiControl_getAlwaysOnTop",
+      "confidence": "high",
+      "evidence": ["The GuiControlProperties table entry at 0x380f70 stores the literal alwaysOnTop property name"]
+    },
+    {
+      "va": "0x1b2a04",
+      "name": "GuiControl_setAlwaysOnTop",
+      "confidence": "high",
+      "evidence": ["The GuiControlProperties table entry at 0x380f70 stores the literal alwaysOnTop property name"]
+    },
+    {
+      "va": "0x1b3130",
+      "name": "GuiControl_getStyle",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers style with this getter"]
+    },
+    {
+      "va": "0x1b6988",
+      "name": "GuiControl_setStyle",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers style with this setter"]
+    },
+    {
+      "va": "0x1b2a1c",
+      "name": "GuiControl_getUseOwnProfile",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers useownprofile with this getter"]
+    },
+    {
+      "va": "0x1b2a2c",
+      "name": "GuiControl_setUseOwnProfile",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers useownprofile with this setter"]
+    },
+    {
+      "va": "0x1b2f5c",
+      "name": "GuiControl_getVertSizing",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers vertsizing with this getter"]
+    },
+    {
+      "va": "0x1b2fec",
+      "name": "GuiControl_setVertSizing",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers vertsizing with this setter"]
+    },
+    {
+      "va": "0x1b2a4c",
+      "name": "GuiControl_getVisible",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers visible with this getter"]
+    },
+    {
+      "va": "0x1b7b3c",
+      "name": "GuiControl_setVisible",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers visible with this setter"]
+    },
+    {
+      "va": "0x1b2a54",
+      "name": "GuiControl_getWidth",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers width with this getter"]
+    },
+    {
+      "va": "0x1b2a5c",
+      "name": "GuiControl_setWidth",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers width with this setter"]
+    },
+    {
+      "va": "0x1b2aa4",
+      "name": "GuiControl_getX",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers x with this getter"]
+    },
+    {
+      "va": "0x1b3c34",
+      "name": "GuiControl_setX",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers x with this setter"]
+    },
+    {
+      "va": "0x1b2aac",
+      "name": "GuiControl_getY",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers y with this getter"]
+    },
+    {
+      "va": "0x1b3bf0",
+      "name": "GuiControl_setY",
+      "confidence": "high",
+      "evidence": ["GuiControlProperties table at 0x3806a0 registers y with this setter"]
+    },
+    {
+      "va": "0x1b3518",
+      "name": "GuiControl_script_addControl",
+      "confidence": "high",
+      "evidence": ["GuiControl script-function table at 0x3810f0 registers addcontrol with this wrapper"]
+    },
+    {
+      "va": "0x1b3274",
+      "name": "GuiControl_script_findControl",
+      "confidence": "high",
+      "evidence": ["GuiControl script-function table at 0x3810f0 registers findcontrol with this wrapper"]
+    },
+    {
+      "va": "0x1b36c8",
+      "name": "GuiControl_script_globalToLocalCoord",
+      "confidence": "high",
+      "evidence": ["GuiControl script-function table at 0x3810f0 registers globaltolocalcoord with this wrapper"]
+    },
+    {
+      "va": "0x1b7ba4",
+      "name": "GuiControl_script_hide",
+      "confidence": "high",
+      "evidence": ["GuiControl script-function table at 0x3810f0 registers hide with this wrapper"]
+    },
+    {
+      "va": "0x1b3654",
+      "name": "GuiControl_script_localToGlobalCoord",
+      "confidence": "high",
+      "evidence": ["GuiControl script-function table at 0x3810f0 registers localtoglobalcoord with this wrapper"]
+    },
+    {
+      "va": "0x1b8a9c",
+      "name": "GuiControl_script_makeFirstResponder",
+      "confidence": "high",
+      "evidence": ["GuiControl script-function table at 0x3810f0 registers makefirstresponder with this wrapper"]
+    },
+    {
+      "va": "0x1b2abc",
+      "name": "GuiControl_script_resize",
+      "confidence": "high",
+      "evidence": ["GuiControl script-function table at 0x3810f0 registers resize with this wrapper"]
+    },
+    {
+      "va": "0x1b7470",
+      "name": "GuiControl_script_repaint",
+      "confidence": "high",
+      "evidence": ["GuiControl script-function table at 0x3810f0 registers repaint with this wrapper"]
+    },
+    {
+      "va": "0x1b7b78",
+      "name": "GuiControl_script_show",
+      "confidence": "high",
+      "evidence": ["GuiControl script-function table at 0x3810f0 registers show with this wrapper"]
+    },
+    {
+      "va": "0x1b2af4",
+      "name": "GuiControl_script_showTop",
+      "confidence": "high",
+      "evidence": ["GuiControl script-function table at 0x3810f0 registers showtop with this wrapper"]
+    },
+    {
+      "va": "0x1b2b14",
+      "name": "GuiControl_script_showAlwaysOnTop",
+      "confidence": "high",
+      "evidence": ["GuiControl script-function table at 0x3810f0 registers showalwaysontop with this wrapper"]
     }
   ],
   "network_contacted": false
