@@ -51,15 +51,15 @@ ambiguous.
 
 The follow-up inventory keeps the coverage boundary explicit. IDA reports
 11,271 function starts in this database. The translated ELF rows account for
-8,096 function starts and the remaining rows are 1,861 default `sub_` names
-plus 1,314 names that IDA created without a matching ELF symbol. The 505
+8,096 function starts and the remaining rows are 1,835 default `sub_` names
+plus 1,340 names that IDA created without a matching ELF symbol. The 505
 remaining ELF rows are data symbols. `symbols/libqplay.function_inventory.csv`
 and its JSON counterpart record every function start, its size, segment,
 incoming references, flags, and source category. The `sub_` rows are not
 missing from the archive; they are unnamed because this stripped portion of
 the file provides no reliable semantic name for them.
 
-A focused follow-up pass did recover reliable behavior names for 250 of those
+A focused follow-up pass did recover reliable behavior names for 276 of those
 IDA-created functions. The labels cover the two server-login callbacks, the
 packet-190 server-list completion wrapper, file-download bookkeeping, the
 inbound handler-table loader and clearer, weapon and encrypted-script updates,
@@ -85,6 +85,15 @@ animation path. Most of these aliases preserve the proven field offset or
 virtual slot instead of inventing a source-level member name. This makes the
 inventory more useful for tracing TLS and resource loading while keeping the
 remaining uncertainty explicit.
+
+The same pass now covers the client network-thread entry point and the
+script-facing update-package bridge. The package helpers expose the global
+base package, the active download count, aggregate byte counters, metadata
+such as NAME, VERSION, PLATFORM, MODE, and DESCRIPTION, and the two wrappers
+that call `TUpdatePackage::update(false)` or `TUpdatePackage::update(true)`.
+The undocumented package fields remain offset-based aliases, so they can be
+corrected later without implying a source member name that the binary does not
+prove.
 
 The translated symbols changed the pace of the rest of the investigation.
 Instead of guessing from strings, the connector and login flow could be
@@ -431,6 +440,19 @@ requests with the native packet 102 file parser. Its multi-packet mode uses
 the sequence 68, 84, 102, 69, while the final replay uses one packet 102 per
 file. It does not claim to reproduce a complete production package
 installation sequence.
+
+The follow-up IDA pass names the package bridge around this path. The network
+thread entry is `TClient_networkThreadMain` at `0x208920`. The script-facing
+accessors begin with `TClient_getBasePackage` at `0x208a70` and
+`TClient_getDownloadingPackageCount` at `0x208a80`; package metadata accessors
+cover the parsed NAME, VERSION, PLATFORM, MODE, filename, and DESCRIPTION
+fields. `TClient_getTotalDownloadBytes` at `0x208c94` and
+`TClient_getDownloadedBytes` at `0x208d08` aggregate the same per-package
+fields used by the download progress UI. The wrappers at `0x20993c` and
+`0x209944` call `TUpdatePackage::update(false)` and
+`TUpdatePackage::update(true)`, respectively. This is static evidence of the
+native bridge, not proof that the old package server still provides compatible
+update contents.
 
 The decoded built-in `StartScript_GraalGui` bytecode contains the GUI setup but
 does not contain `onPackagesDownloaded`. That explains why adding a minimal

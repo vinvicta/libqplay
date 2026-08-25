@@ -8,10 +8,10 @@
   "policy": "These aliases are analysis labels, not recovered source names. The evidence is recorded so a later pass can correct a label without confusing it with an imported ELF symbol.",
   "inventory_after_labels": {
     "total_functions": 11271,
-    "ida_default_sub_functions": 1861,
-    "ida_named_non_elf_functions": 1314,
-    "named_function_total": 9410,
-    "new_labels_in_this_pass": 250
+    "ida_default_sub_functions": 1835,
+    "ida_named_non_elf_functions": 1340,
+    "named_function_total": 9436,
+    "new_labels_in_this_pass": 276
   },
   "labels": [
     {
@@ -1513,6 +1513,162 @@
       "name": "TSocket_recvPlain",
       "confidence": "high",
       "evidence": ["Receives on the plain socket descriptor when socket state is 5", "Maps transient errno values to native error codes"]
+    },
+    {
+      "va": "0x208920",
+      "name": "TClient_networkThreadMain",
+      "confidence": "high",
+      "evidence": ["Sets the client network-thread running flag", "Drains incoming packages, processes and sends outgoing packages, sleeps, and clears the flag on shutdown"]
+    },
+    {
+      "va": "0x208a70",
+      "name": "TClient_getBasePackage",
+      "confidence": "high",
+      "evidence": ["Returns the global basepackage TUpdatePackage pointer"]
+    },
+    {
+      "va": "0x208a80",
+      "name": "TClient_getDownloadingPackageCount",
+      "confidence": "high",
+      "evidence": ["Returns the count of the global downloadingpackages list"]
+    },
+    {
+      "va": "0x208a94",
+      "name": "TUpdatePackage_getDownloadComplete",
+      "confidence": "high",
+      "evidence": ["Reads TUpdatePackage byte field +248", "The aggregate progress helper uses it to select the completed-package path"]
+    },
+    {
+      "va": "0x208a9c",
+      "name": "TUpdatePackage_getDownloadBytesField228",
+      "confidence": "high",
+      "evidence": ["Reads TUpdatePackage dword field +228", "The aggregate progress helper uses it as the in-progress byte count"]
+    },
+    {
+      "va": "0x208aa4",
+      "name": "TUpdatePackage_getFileCount",
+      "confidence": "high",
+      "evidence": ["Reads the count field from the object at TUpdatePackage offset +200", "The object is the package file-list container in the parser"]
+    },
+    {
+      "va": "0x208ab0",
+      "name": "TUpdatePackage_getDwordField236",
+      "confidence": "high",
+      "evidence": ["Reads TUpdatePackage dword field +236", "The source member name was not recovered"]
+    },
+    {
+      "va": "0x208ab8",
+      "name": "TUpdatePackage_getDwordField232",
+      "confidence": "high",
+      "evidence": ["Reads TUpdatePackage dword field +232", "The source member name was not recovered"]
+    },
+    {
+      "va": "0x208ac0",
+      "name": "TUpdatePackage_getByteField249",
+      "confidence": "high",
+      "evidence": ["Reads TUpdatePackage byte field +249", "The source member name was not recovered"]
+    },
+    {
+      "va": "0x208ac8",
+      "name": "TUpdatePackage_getDoubleField216",
+      "confidence": "high",
+      "evidence": ["Reads TUpdatePackage double field +216", "The source member name was not recovered"]
+    },
+    {
+      "va": "0x208ad0",
+      "name": "TUpdatePackage_getQwordField128",
+      "confidence": "high",
+      "evidence": ["Reads TUpdatePackage qword field +128", "The source member name was not recovered"]
+    },
+    {
+      "va": "0x208ad8",
+      "name": "TUpdatePackage_getProtectOverwrite",
+      "confidence": "high",
+      "evidence": ["Reads TUpdatePackage byte field +209", "TUpdatePackage_load sets this field for the PROTECTOVERWRITE directive"]
+    },
+    {
+      "va": "0x208ae0",
+      "name": "TUpdatePackage_getTotalBytesField224",
+      "confidence": "high",
+      "evidence": ["Reads TUpdatePackage dword field +224", "The aggregate progress helpers use it as the package total when complete and in the global total"]
+    },
+    {
+      "va": "0x208ae8",
+      "name": "TUpdatePackage_getUseChecksum",
+      "confidence": "high",
+      "evidence": ["Reads TUpdatePackage byte field +208", "TUpdatePackage_load sets this field for the USECHECKSUM directive"]
+    },
+    {
+      "va": "0x208af0",
+      "name": "TUpdatePackage_getVersion",
+      "confidence": "high",
+      "evidence": ["Returns TUpdatePackage double field +152", "TUpdatePackage_load populates it from the VERSION directive"]
+    },
+    {
+      "va": "0x208af8",
+      "name": "TUpdatePackage_getPlatform",
+      "confidence": "high",
+      "evidence": ["Copies the TUpdatePackage TString at +168", "TUpdatePackage_load populates it from the PLATFORM directive"]
+    },
+    {
+      "va": "0x208b28",
+      "name": "TUpdatePackage_getName",
+      "confidence": "high",
+      "evidence": ["Copies the TUpdatePackage TString at +144", "TUpdatePackage_load populates it from NAME and copies it into the package base name"]
+    },
+    {
+      "va": "0x208b58",
+      "name": "TUpdatePackage_getMode",
+      "confidence": "high",
+      "evidence": ["Copies the TUpdatePackage TString at +184", "TUpdatePackage_load populates it from the MODE directive"]
+    },
+    {
+      "va": "0x208b88",
+      "name": "TUpdatePackage_getStringField240",
+      "confidence": "high",
+      "evidence": ["Copies the TUpdatePackage TString at +240", "The field is cleared by the destructor but its source member name was not recovered"]
+    },
+    {
+      "va": "0x208bb8",
+      "name": "TUpdatePackage_getFilename",
+      "confidence": "high",
+      "evidence": ["Copies the TUpdatePackage TString at +136", "The field is used by the cache lookup and package-full-filename path"]
+    },
+    {
+      "va": "0x208be8",
+      "name": "TUpdatePackage_getDescription",
+      "confidence": "high",
+      "evidence": ["Copies the TUpdatePackage TString at +160", "TUpdatePackage_load populates it from the DESCRIPTION block"]
+    },
+    {
+      "va": "0x208c94",
+      "name": "TClient_getTotalDownloadBytes",
+      "confidence": "high",
+      "evidence": ["Sums TUpdatePackage field +224 across the global downloadingpackages list", "Returns aggregate download size"]
+    },
+    {
+      "va": "0x208d08",
+      "name": "TClient_getDownloadedBytes",
+      "confidence": "high",
+      "evidence": ["Sums field +224 for completed packages and field +228 for active packages", "Returns aggregate download progress"]
+    },
+    {
+      "va": "0x208ed4",
+      "name": "TClient_canDownloadUpdatePackage",
+      "confidence": "high",
+      "evidence": ["Returns true when no client exists or the client is not already downloading a .gupd file", "Acts as a package-download eligibility check"]
+    },
+    {
+      "va": "0x20993c",
+      "name": "TUpdatePackage_updateNoForce",
+      "confidence": "high",
+      "evidence": ["Forwards to TUpdatePackage_update_bool with false"]
+    },
+    {
+      "va": "0x209944",
+      "name": "TUpdatePackage_updateForce",
+      "confidence": "high",
+      "evidence": ["Forwards to TUpdatePackage_update_bool with true"]
     }
   ],
   "network_contacted": false
