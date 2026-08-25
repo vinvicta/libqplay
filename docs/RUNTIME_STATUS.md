@@ -78,6 +78,16 @@ This is the short handoff view. The full reasoning and command history are in
     `fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`.
     This is a local translated-ARM64 result, not a release APK or a physical
     ARM64-device result.
+19. A fresh run of the same ARM64 loading candidate was repeated on a clean
+    app-data directory after the configured Android 36 emulator was started
+    without wiping its device state. Android loaded the ARM64-only package
+    through translation, the local connector responder saw one `/con.png`
+    request, and the game responder saw two `14900` connections. Both
+    connections completed the `fd`/`fc` exchange and encrypted login result;
+    the client then requested `basepackage.gupd`. The bounded responder did
+    not return a base package or map, so the screen ended on the stock
+    disconnect artwork. The package, native library, captures, and screenshot
+    hashes are in `artifacts/arm64_loopback_handshake_replay.json`.
 19. The corrected offline parser reproduces the native raw-digest RSA check.
     The saved connector response passes with the embedded key, so the RSA
     bypass used by the first replay is not required for that fixture.

@@ -158,6 +158,9 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/bytecode_loading_clear_replay.json` records the direct
   original-stream script patch, package signature check, and local protocol
   replay hashes.
+* `artifacts/arm64_loopback_handshake_replay.json` records a fresh
+  handshake-only replay of the ARM64 loading candidate, including the
+  connector request, both game captures, and the remaining disconnect state.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.
 * `symbols/libqplay.symbols.json` is the machine-readable equivalent.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.

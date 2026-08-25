@@ -228,6 +228,22 @@ pics1.png                              fe2dff5c4af86179d0cf83306a40c7e7b92d728a9
 The exact file name is important. A different map name or the earlier warp
 body can exercise a different client path and produce a misleading failure.
 
+## Fresh handshake replay
+
+The loading candidate was repeated on 2026-08-25 with its app data cleared,
+the Android 36 x86_64 emulator restarted without a device wipe, and only
+loopback responders enabled. The package was ARM64-only, so Android again
+used its native translation layer. The connector responder saw one request
+for `/con.png`, and the game responder saw two connections on port 14900.
+Both connections completed the `fd`/`fc` exchange and encrypted login result.
+The client then requested `basepackage.gupd` on each connection.
+
+This run deliberately stopped before returning a base package or map. The
+post-handshake screen therefore showed the stock disconnect/loading artwork,
+not a rendered world. It is a fresh transport and script-dispatch checkpoint,
+not a replacement for the complete render replay above. Hashes and frame
+metadata are kept in `artifacts/arm64_loopback_handshake_replay.json`.
+
 ## What the local evidence proves
 
 On the available Android 36 x86_64 emulator, Android loaded the ARM64

@@ -1,0 +1,79 @@
+{
+  "date": "2026-08-25",
+  "scope": "127.0.0.1-only replay on an Android 36 x86_64 emulator using translated ARM64 native code",
+  "candidate": {
+    "apk_filename": "GraalClassic_arm64_repaired_debug_signed.apk",
+    "apk_sha256": "b1c52234b10fb5a4a2c6c58e85370ccab710b1c355574d295df30b5ed6edddcc",
+    "abi": "arm64-v8a",
+    "native_library_sha256": "89a7cf3a10d9da9fb00f50e6917ce10402c1147bcf5738a176c26b32868ba858",
+    "x86_64_library_in_apk": false,
+    "loading_state_patch": "force the existing non-premium startup branch at 0x15ca7c",
+    "loopback_resolver_patch": "resolveHost at 0x206108 returns 127.0.0.1"
+  },
+  "emulator": {
+    "api_level": 36,
+    "host_abi": "x86_64",
+    "translated_abi": "arm64-v8a",
+    "device": "emulator-5554",
+    "primary_cpu_abi": "arm64-v8a",
+    "adb_reverse_ports": [18080, 14900]
+  },
+  "connector": {
+    "response_bytes": 16446,
+    "response_sha256": "73996942d493a8db4b7b6238dcc9d6e4bb68a91b48ba5946db4cff9252bc4b7c",
+    "requests_seen": 1,
+    "request_path": "/con.png",
+    "network_contacted": false
+  },
+  "game_responder": {
+    "port": 14900,
+    "synthetic_login_type": 54,
+    "basepackage_response": false,
+    "connections": [
+      {
+        "capture_bytes": 555,
+        "capture_sha256": "4d87de24e9594fb250af0dc5bf7f6e4a706769015c29d09fdcc4a765142c477b",
+        "server_output_bytes": 269,
+        "server_output_sha256": "f18816149b3634d9471762a00b139a5425056879bd8cabe383c32039afcc4df5",
+        "decrypted_client_frames": [
+          {"sequence": 4, "type": 253, "body_bytes": 200},
+          {"sequence": 5, "type": 37, "body_ascii": "en"},
+          {"sequence": 6, "type": 23, "body_ascii": "basepackage.gupd"},
+          {"sequence": 7, "type": 23, "body_ascii": "basepackage.gupd"},
+          {"sequence": 8, "type": 23, "body_ascii": "guigames_graymessage2.png"}
+        ]
+      },
+      {
+        "capture_bytes": 524,
+        "capture_sha256": "48cabc16b5762ff190b80314e026d38155f1a0fb37e137c22bd29e586e6c4adc",
+        "server_output_bytes": 269,
+        "server_output_sha256": "f18816149b3634d9471762a00b139a5425056879bd8cabe383c32039afcc4df5",
+        "decrypted_client_frames": [
+          {"sequence": 4, "type": 253, "body_bytes": 200},
+          {"sequence": 5, "type": 37, "body_ascii": "en"},
+          {"sequence": 6, "type": 23, "body_ascii": "basepackage.gupd"},
+          {"sequence": 7, "type": 23, "body_ascii": "basepackage.gupd"}
+        ]
+      }
+    ]
+  },
+  "runtime_observations": [
+    "Android loaded the ARM64-only package through its native translation layer.",
+    "The app loaded libqplay.so, initialized OpenGL, and logged the connector start.",
+    "The connector request reached the local responder and the saved package was accepted.",
+    "Both game connections completed the fd/fc exchange and encrypted login result.",
+    "The app reached the game protocol's basepackage requests before the bounded responder stopped.",
+    "The post-handshake screenshot remained on the stock disconnect/loading artwork because no basepackage or map frames were served.",
+    "No live connector, game server, account, or external endpoint was contacted."
+  ],
+  "not_proven": [
+    "A complete map and resource replay for this exact APK hash.",
+    "A rendered-world result from this handshake-only run.",
+    "Behavior on a physical ARM64 device.",
+    "Compatibility with the current live service."
+  ],
+  "screenshot": {
+    "sha256": "ab82b0d6e720fdcf2c9f6611aced0a57bd03079131cffb6a322f88e70fe23828",
+    "interpretation": "stock Graal Online Classic artwork with the disconnect message visible after the responder stopped at the basepackage boundary"
+  }
+}
