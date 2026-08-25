@@ -28,9 +28,9 @@ The translation count is the number of ELF symbol records handled by the
 script. IDA's function survey also reports compiler-generated functions and
 other analysis-created entries, so its total function count is not expected
 to equal 8,601. After the follow-up semantic pass, the original ARM64
-database reports 11,271 total functions, 9,299 with names, and 1,972 default
+database reports 11,271 total functions, 9,410 with names, and 1,861 default
 `sub_` names. Those figures describe the IDA database; the 8,601 count
-describes the reproducible symbol import and rename pass. The 139 semantic labels
+describes the reproducible symbol import and rename pass. The 250 semantic labels
 are recorded separately in `artifacts/ida_semantic_labels.json`, alongside
 the earlier inferred `TClient_setSSLParameters_scriptCallback` label. None of
 these semantic labels is part of the 8,601 original ELF symbol records.
@@ -83,7 +83,11 @@ use exact offset-based names such as `TClient_setPlayerStateFlag2328` or
 `TClient_getConnectionString8288`. That is deliberate. The instructions prove
 the field offset or virtual slot, but they do not recover the original C++
 member name. Keeping the uncertainty visible makes these aliases safer to use
-in later patches.
+in later patches. The current pass also covers the `TGraalConnection` and
+`THTTPRequest` TLS or HTTP property bridge, `TSocket` policy and plain-I/O
+helpers, and `TGaniObject` or `TGaniParam` field accessors. Those names use the
+same offset-based convention where the binary proves a field but not its source
+member name.
 
 ## Complete function inventory
 
@@ -94,8 +98,8 @@ land on IDA functions. IDA's analysis adds 11,271 function starts in total:
 | Function source | Count |
 | --- | ---: |
 | Backed by a translated ELF symbol | 8,096 |
-| IDA default `sub_` names | 1,972 |
-| Named by IDA but not backed by an ELF record | 1,203 |
+| IDA default `sub_` names | 1,861 |
+| Named by IDA but not backed by an ELF record | 1,314 |
 | Total IDA functions | 11,271 |
 
 The complete address-level inventory is in

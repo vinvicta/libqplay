@@ -41,7 +41,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 861168,plt_TShowImg_showImage_TString_const,elf_symbol,plt_thunk,._ZN8TShowImg9showImageERK7TString,TShowImg::showImage(TString const&),plt_TShowImg_showImage_TString_const,.plt,16,4,5312,True,False,False
 861184,plt_strtofloat_TString_const,elf_symbol,plt_thunk,._Z10strtofloatRK7TString,strtofloat(TString const&),plt_strtofloat_TString_const,.plt,16,65,5312,True,False,False
 861200,plt_THTMLPage_setProfile_GuiControlProfile,elf_symbol,plt_thunk,._ZN9THTMLPage10setProfileEP17GuiControlProfile,THTMLPage::setProfile(GuiControlProfile *),plt_THTMLPage_setProfile_GuiControlProfile,.plt,16,4,5312,True,False,False
-861216,plt_TIdentification_getSystemID_int,elf_symbol,plt_thunk,._ZN15TIdentification11getSystemIDEi,TIdentification::getSystemID(int),plt_TIdentification_getSystemID_int,.plt,16,1,5248,True,False,False
+861216,plt_TIdentification_getSystemID_int,elf_symbol,plt_thunk,._ZN15TIdentification11getSystemIDEi,TIdentification::getSystemID(int),plt_TIdentification_getSystemID_int,.plt,16,1,5312,True,False,False
 861232,plt_TScriptMachine_checkStackSpace_int_bool,elf_symbol,plt_thunk,._ZN14TScriptMachine15checkStackSpaceEib,"TScriptMachine::checkStackSpace(int,bool)",plt_TScriptMachine_checkStackSpace_int_bool,.plt,16,35,5312,True,False,False
 861248,plt_TFileScripting_getScriptWriteBitmapFilename_TString_const,elf_symbol,plt_thunk,._ZN14TFileScripting28getScriptWriteBitmapFilenameERK7TString,TFileScripting::getScriptWriteBitmapFilename(TString const&),plt_TFileScripting_getScriptWriteBitmapFilename_TString_const,.plt,16,7,5312,True,False,False
 861264,plt_GuiControl_setColor_ColorF_const,elf_symbol,plt_thunk,._ZN10GuiControl8setColorERK6ColorF,GuiControl::setColor(ColorF const&),plt_GuiControl_setColor_ColorF_const,.plt,16,1,5312,True,False,False
@@ -5251,9 +5251,9 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1425956,TAdventure_initStaticScriptVars_void,elf_symbol,function,_Z31TAdventure_initStaticScriptVarsv,TAdventure_initStaticScriptVars(void),TAdventure_initStaticScriptVars_void,.text,4,4,5120,False,False,False
 1425960,TAdventure_openSecureURL_TString_const,elf_symbol,function,_ZN10TAdventure13openSecureURLERK7TString,TAdventure::openSecureURL(TString const&),TAdventure_openSecureURL_TString_const,.text,432,4,5120,False,False,False
 1426392,TAdventure_setChat_TString_const,elf_symbol,function,_ZN10TAdventure7setChatERK7TString,TAdventure::setChat(TString const&),TAdventure_setChat_TString_const,.text,584,4,5120,False,False,False
-1426976,sub_15C620,ida_default_sub,,,,,.text,12,1,5120,False,False,True
-1426988,sub_15C62C,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1427004,sub_15C63C,ida_default_sub,,,,,.text,144,1,5120,False,False,True
+1426976,TClientEnvironment_clearStaticString38D428,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
+1426988,TClientEnvironment_clearStaticString38D460,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1427004,TClientEnvironment_getBuildTimestampString,ida_named_non_elf,,,,,.text,144,1,5120,False,False,False
 1427148,TClientEnvironment_setHomeDirectory_char_const,elf_symbol,function,_ZN18TClientEnvironment16setHomeDirectoryEPKc,TClientEnvironment::setHomeDirectory(char const*),TClientEnvironment_setHomeDirectory_char_const,.text,284,4,5120,False,False,False
 1427432,TClientEnvironment_initEnvironment_bool,elf_symbol,function,_ZN18TClientEnvironment15initEnvironmentEb,TClientEnvironment::initEnvironment(bool),TClientEnvironment_initEnvironment_bool,.text,544,4,5120,False,False,False
 1427976,TClientEnvironment_sigcheck_TString_const_bool,elf_symbol,function,_ZN18TClientEnvironment8sigcheckERK7TStringb,"TClientEnvironment::sigcheck(TString const&,bool)",TClientEnvironment_sigcheck_TString_const_bool,.text,244,4,5120,False,False,False
@@ -5277,62 +5277,62 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1430440,TClientEnvironment_BuildTime_void,elf_symbol,function,_ZN18TClientEnvironment9BuildTimeEv,TClientEnvironment::BuildTime(void),TClientEnvironment_BuildTime_void,.text,68,4,5120,False,False,False
 1430508,TClientEnvironment_TimeExpired_void,elf_symbol,function,_ZN18TClientEnvironment11TimeExpiredEv,TClientEnvironment::TimeExpired(void),TClientEnvironment_TimeExpired_void,.text,132,4,5120,False,False,False
 1430648,TClientEnvironment_initStaticScriptVars_void,elf_symbol,function,_Z39TClientEnvironment_initStaticScriptVarsv,TClientEnvironment_initStaticScriptVars(void),TClientEnvironment_initStaticScriptVars_void,.text,56,4,5120,False,False,False
-1430704,sub_15D4B0,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1430720,sub_15D4C0,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1430736,sub_15D4D0,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1430744,sub_15D4D8,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1430752,sub_15D4E0,ida_default_sub,,,,,.text,24,1,5120,False,False,True
-1430776,sub_15D4F8,ida_default_sub,,,,,.text,28,1,5120,False,False,True
-1430804,sub_15D514,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1430812,sub_15D51C,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1430820,sub_15D524,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1430828,sub_15D52C,ida_default_sub,,,,,.text,32,1,5120,False,False,True
-1430860,sub_15D54C,ida_default_sub,,,,,.text,68,1,5120,False,False,True
-1430928,sub_15D590,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1430936,sub_15D598,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1430944,sub_15D5A0,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1430952,sub_15D5A8,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1430960,sub_15D5B0,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1430968,sub_15D5B8,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1430976,sub_15D5C0,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1430984,sub_15D5C8,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1430992,sub_15D5D0,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1431000,sub_15D5D8,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1431008,sub_15D5E0,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1431016,sub_15D5E8,ida_default_sub,,,,,.text,52,1,5120,False,False,True
-1431068,sub_15D61C,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1431076,sub_15D624,ida_default_sub,,,,,.text,20,2,5120,False,False,True
-1431096,sub_15D638,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1431104,sub_15D640,ida_default_sub,,,,,.text,44,1,5120,False,False,True
-1431148,sub_15D66C,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1431156,sub_15D674,ida_default_sub,,,,,.text,44,1,5120,False,False,True
-1431200,sub_15D6A0,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1431208,sub_15D6A8,ida_default_sub,,,,,.text,44,1,5120,False,False,True
-1431252,sub_15D6D4,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1431260,sub_15D6DC,ida_default_sub,,,,,.text,44,1,5120,False,False,True
+1430704,TGaniObject_getEnableMovieReposition,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1430720,TGaniObject_setEnableMovieReposition,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1430736,TGaniObject_getField280,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1430744,TGaniObject_getField292,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1430752,TGaniObject_getChildField748,ida_named_non_elf,,,,,.text,24,1,5120,False,False,False
+1430776,TGaniObject_getChildVisibilityInverted,ida_named_non_elf,,,,,.text,28,1,5120,False,False,False
+1430804,TGaniObject_getChildField144,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1430812,TGaniObject_getField320,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1430820,TGaniObject_getField448,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1430828,TGaniObject_callVirtual504,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
+1430860,TGaniObject_callVirtual512Direction,ida_named_non_elf,,,,,.text,68,1,5120,False,False,False
+1430928,TGaniObject_getField576,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1430936,TGaniObject_getFloatField460,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1430944,TGaniObject_setFloatField460,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1430952,TGaniObject_getFloatField464,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1430960,TGaniObject_setFloatField464,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1430968,TGaniObject_getFloatField468,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1430976,TGaniObject_setFloatField468,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1430984,TGaniObject_getByteField472,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1430992,TGaniObject_setByteField472,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1431000,TGaniObject_getFloatField456,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1431008,TGaniObject_setFloatField456,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1431016,TGaniObject_setFloatFields484_496,ida_named_non_elf,,,,,.text,52,1,5120,False,False,False
+1431068,TGaniObject_getByteField500,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1431076,TGaniObject_setByteField500Clamped,ida_named_non_elf,,,,,.text,20,2,5120,False,False,False
+1431096,TGaniObject_getFloatField484,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1431104,TGaniObject_setFloatField484Clamped,ida_named_non_elf,,,,,.text,44,1,5120,False,False,False
+1431148,TGaniObject_getFloatField488,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1431156,TGaniObject_setFloatField488Clamped,ida_named_non_elf,,,,,.text,44,1,5120,False,False,False
+1431200,TGaniObject_getFloatField492,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1431208,TGaniObject_setFloatField492Clamped,ida_named_non_elf,,,,,.text,44,1,5120,False,False,False
+1431252,TGaniObject_getFloatField496,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1431260,TGaniObject_setFloatField496Clamped,ida_named_non_elf,,,,,.text,44,1,5120,False,False,False
 1431304,TGaniObject_getBlockingRectangle_void,elf_symbol,function,_ZN11TGaniObject20getBlockingRectangleEv,TGaniObject::getBlockingRectangle(void),TGaniObject_getBlockingRectangle_void,.text,132,5,5120,False,False,False
 1431436,TGaniObject_setz_double,elf_symbol,function,_ZN11TGaniObject4setzEd,TGaniObject::setz(double),TGaniObject_setz_double,.text,28,9,5120,False,False,False
 1431464,TGaniObject_getRotationCenter_TPlayer,elf_symbol,function,_ZN11TGaniObject17getRotationCenterEP7TPlayer,TGaniObject::getRotationCenter(TPlayer *),TGaniObject_getRotationCenter_TPlayer,.text,136,5,5120,False,False,False
 1431604,TGaniObject_getOrderPoint_void,elf_symbol,function,_ZN11TGaniObject13getOrderPointEv,TGaniObject::getOrderPoint(void),TGaniObject_getOrderPoint_void,.text,136,5,5120,False,False,False
 1431740,TGaniObject_getLevelVisible_void,elf_symbol,function,_ZN11TGaniObject15getLevelVisibleEv,TGaniObject::getLevelVisible(void),TGaniObject_getLevelVisible_void,.text,8,5,5120,False,False,False
 1431748,TGaniParam_writeObject_TGraalVar,elf_symbol,function,_ZN10TGaniParam11writeObjectEP9TGraalVar,TGaniParam::writeObject(TGraalVar *),TGaniParam_writeObject_TGraalVar,.text,116,2,5120,False,False,False
-1431864,sub_15D938,ida_default_sub,,,,,.text,12,1,5120,False,False,True
-1431876,sub_15D944,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1431892,sub_15D954,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+1431864,TGaniParam_clearStaticString38D4E8,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
+1431876,TGaniParam_clearStaticString38D4F0,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1431892,TGaniParam_clearStaticString38D4F8,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 1431908,TGaniParam_TGaniParam,elf_symbol,function,_ZN10TGaniParamD2Ev,TGaniParam::~TGaniParam(),TGaniParam_TGaniParam,.text,68,6,5120,False,False,False
 1431976,TGaniParam_TGaniParam__2,elf_symbol,function,_ZN10TGaniParamD0Ev,TGaniParam::~TGaniParam(),TGaniParam_TGaniParam__2,.text,32,2,5120,False,False,False
-1432008,sub_15D9C8,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1432016,sub_15D9D0,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-1432024,sub_15D9D8,ida_default_sub,,,,,.text,48,1,5120,False,False,True
-1432072,sub_15DA08,ida_default_sub,,,,,.text,48,1,5120,False,False,True
-1432120,sub_15DA38,ida_default_sub,,,,,.text,48,2,5120,False,False,True
-1432168,sub_15DA68,ida_default_sub,,,,,.text,48,2,5120,False,False,True
-1432216,sub_15DA98,ida_default_sub,,,,,.text,48,1,5120,False,False,True
+1432008,TGaniParam_setStringField400,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1432016,TGaniParam_setStringField392,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+1432024,TGaniParam_getStringField400,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
+1432072,TGaniParam_getStringField392,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
+1432120,TGaniParam_getStringField384,ida_named_non_elf,,,,,.text,48,2,5120,False,False,False
+1432168,TGaniParam_getStringField376,ida_named_non_elf,,,,,.text,48,2,5120,False,False,False
+1432216,TGaniParam_getStringField304,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
 1432264,TGaniObject_getSoundReplacement_TString_const,elf_symbol,function,_ZN11TGaniObject19getSoundReplacementERK7TString,TGaniObject::getSoundReplacement(TString const&),TGaniObject_getSoundReplacement_TString_const,.text,44,3,5120,False,False,False
-1432308,sub_15DAF4,ida_default_sub,,,,,.text,32,2,5120,False,False,True
+1432308,TGaniParam_setStringField384IfNonempty,ida_named_non_elf,,,,,.text,32,2,5120,False,False,False
 1432340,TGaniParam_writeFloat_double,elf_symbol,function,_ZN10TGaniParam10writeFloatEd,TGaniParam::writeFloat(double),TGaniParam_writeFloat_double,.text,76,2,5120,False,False,False
-1432416,sub_15DB60,ida_default_sub,,,,,.text,48,1,5120,False,False,True
-1432464,sub_15DB90,ida_default_sub,,,,,.text,36,1,5120,False,False,True
+1432416,TGaniParam_setPointField476,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
+1432464,TGaniParam_getPointField476,ida_named_non_elf,,,,,.text,36,1,5120,False,False,False
 1432500,TColorVar_writeFloat_double,elf_symbol,function,_ZN9TColorVar10writeFloatEd,TColorVar::writeFloat(double),TColorVar_writeFloat_double,.text,148,5,5120,False,False,False
 1432656,TColorVar_writeString_TString_const,elf_symbol,function,_ZN9TColorVar11writeStringERK7TString,TColorVar::writeString(TString const&),TColorVar_writeString_TString_const,.text,112,2,5120,False,False,False
 1432768,TGaniObject_receiveEvent_TString_const_script_event_TGraalVar,elf_symbol,function,_ZN11TGaniObject12receiveEventERK7TString12script_eventP9TGraalVar,"TGaniObject::receiveEvent(TString const&,script_event,TGraalVar *)",TGaniObject_receiveEvent_TString_const_script_event_TGraalVar,.text,352,7,5120,False,False,False
@@ -5341,7 +5341,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1433936,TGaniObject_getDrawPosition_TPlayer_TFloatPoint_const,elf_symbol,function,_ZN11TGaniObject15getDrawPositionEP7TPlayerRK11TFloatPoint,"TGaniObject::getDrawPosition(TPlayer *,TFloatPoint const&)",TGaniObject_getDrawPosition_TPlayer_TFloatPoint_const,.text,208,7,5120,False,False,False
 1434144,TGaniObject_setBody_TString_const,elf_symbol,function,_ZN11TGaniObject7setBodyERK7TString,TGaniObject::setBody(TString const&),TGaniObject_setBody_TString_const,.text,212,9,5120,False,False,False
 1434356,TGaniObject_setLevelVisible_bool,elf_symbol,function,_ZN11TGaniObject15setLevelVisibleEb,TGaniObject::setLevelVisible(bool),TGaniObject_setLevelVisible_bool,.text,80,8,5120,False,False,False
-1434436,sub_15E344,ida_default_sub,,,,,.text,52,2,5120,False,False,True
+1434436,TGaniObject_callVirtual496IfNonempty,ida_named_non_elf,,,,,.text,52,2,5120,False,False,False
 1434488,TGaniObject_setlocalx_double_bool,elf_symbol,function,_ZN11TGaniObject9setlocalxEdb,"TGaniObject::setlocalx(double,bool)",TGaniObject_setlocalx_double_bool,.text,36,6,5120,False,False,False
 1434524,TGaniObject_setlocaly_double_bool,elf_symbol,function,_ZN11TGaniObject9setlocalyEdb,"TGaniObject::setlocaly(double,bool)",TGaniObject_setlocaly_double_bool,.text,36,6,5120,False,False,False
 1434560,TGaniParamProperties_TGaniParamProperties_void,elf_symbol,function,_ZN20TGaniParamPropertiesC2Ev,TGaniParamProperties::TGaniParamProperties(void),TGaniParamProperties_TGaniParamProperties_void,.text,144,5,5120,False,False,False
@@ -8425,30 +8425,30 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2091832,TGraalConnection_setSSLVerifyCert_TString_const,elf_symbol,function,_ZN16TGraalConnection16setSSLVerifyCertERK7TString,TGraalConnection::setSSLVerifyCert(TString const&),TGraalConnection_setSSLVerifyCert_TString_const,.text,72,4,5120,False,False,False
 2091904,TGraalConnection_getSSLError_void,elf_symbol,function,_ZNK16TGraalConnection11getSSLErrorEv,TGraalConnection::getSSLError(void),TGraalConnection_getSSLError_void,.text,24,4,5120,False,False,False
 2091928,TGraalConnection_connectToServer_TString_const_TString_const,elf_symbol,function,_ZN16TGraalConnection15connectToServerERK7TStringS2_,"TGraalConnection::connectToServer(TString const&,TString const&)",TGraalConnection_connectToServer_TString_const_TString_const,.text,172,4,5120,False,False,False
-2092104,sub_1FEC48,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-2092112,sub_1FEC50,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-2092120,sub_1FEC58,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-2092128,sub_1FEC60,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-2092136,sub_1FEC68,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-2092144,sub_1FEC70,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-2092152,sub_1FEC78,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-2092160,sub_1FEC80,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-2092176,sub_1FEC90,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-2092192,sub_1FECA0,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+2092104,TGraalConnection_getByte228,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+2092112,TGraalConnection_setByte228,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+2092120,TGraalConnection_getDword304,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+2092128,TGraalConnection_getByte240,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+2092136,TGraalConnection_getDouble312,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+2092144,TGraalConnection_getDword176,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+2092152,TGraalConnection_getDword244,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+2092160,THTTPRequest_getRequestCount,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+2092176,THTTPRequest_getLastRequestTime,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+2092192,THTTPRequest_getLastWebDownloadTime,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 2092208,THTTPRequest_expandPath_TString_const,elf_symbol,function,_ZN12THTTPRequest10expandPathERK7TString,THTTPRequest::expandPath(TString const&),THTTPRequest_expandPath_TString_const,.text,584,5,5120,False,False,False
 2092792,THTTPRequest_unexpandPath_TString_const,elf_symbol,function,_ZN12THTTPRequest12unexpandPathERK7TString,THTTPRequest::unexpandPath(TString const&),THTTPRequest_unexpandPath_TString_const,.text,340,2,5120,False,False,False
-2093132,sub_1FF04C,ida_default_sub,,,,,.text,48,1,5120,False,False,True
-2093180,sub_1FF07C,ida_default_sub,,,,,.text,48,1,5120,False,False,True
-2093228,sub_1FF0AC,ida_default_sub,,,,,.text,48,1,5120,False,False,True
-2093276,sub_1FF0DC,ida_default_sub,,,,,.text,48,1,5120,False,False,True
-2093324,sub_1FF10C,ida_default_sub,,,,,.text,48,1,5120,False,False,True
-2093372,sub_1FF13C,ida_default_sub,,,,,.text,48,1,5120,False,False,True
-2093420,sub_1FF16C,ida_default_sub,,,,,.text,52,1,5120,False,False,True
-2093472,sub_1FF1A0,ida_default_sub,,,,,.text,48,1,5120,False,False,True
-2093520,sub_1FF1D0,ida_default_sub,,,,,.text,48,1,5120,False,False,True
-2093568,sub_1FF200,ida_default_sub,,,,,.text,48,1,5120,False,False,True
-2093616,sub_1FF230,ida_default_sub,,,,,.text,48,1,5120,False,False,True
-2093664,sub_1FF260,ida_default_sub,,,,,.text,172,1,5120,False,False,True
+2093132,THTTPRequest_getStringField200,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
+2093180,THTTPRequest_getStringField256,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
+2093228,THTTPRequest_getStringField248,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
+2093276,THTTPRequest_getStringField280,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
+2093324,THTTPRequest_getStringField264,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
+2093372,THTTPRequest_getStringField216,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
+2093420,THTTPRequest_getConnectionField8,ida_named_non_elf,,,,,.text,52,1,5120,False,False,False
+2093472,THTTPRequest_getStringField184,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
+2093520,THTTPRequest_getStringField296,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
+2093568,THTTPRequest_getStringField288,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
+2093616,THTTPRequest_getStringField168,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
+2093664,THTTPRequest_getGlobalHttpProperty,ida_named_non_elf,,,,,.text,172,1,5120,False,False,False
 2093836,THTTPRequestProperties_THTTPRequestProperties_void,elf_symbol,function,_ZN22THTTPRequestPropertiesC2Ev,THTTPRequestProperties::THTTPRequestProperties(void),THTTPRequestProperties_THTTPRequestProperties_void,.text,156,5,5120,False,False,False
 2093992,THTTPRequest_checkKeepConnection_void,elf_symbol,function,_ZN12THTTPRequest19checkKeepConnectionEv,THTTPRequest::checkKeepConnection(void),THTTPRequest_checkKeepConnection_void,.text,100,4,5120,False,False,False
 2094092,THTTPRequest_clearRequest_void,elf_symbol,function,_ZN12THTTPRequest12clearRequestEv,THTTPRequest::clearRequest(void),THTTPRequest_clearRequest_void,.text,488,4,5120,False,False,False
@@ -8458,7 +8458,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2095128,THTTPRequest_removeFromRequests_void,elf_symbol,function,_ZN12THTTPRequest18removeFromRequestsEv,THTTPRequest::removeFromRequests(void),THTTPRequest_removeFromRequests_void,.text,68,4,5120,False,False,False
 2095196,THTTPRequest_setSendRequest_void,elf_symbol,function,_ZN12THTTPRequest14setSendRequestEv,THTTPRequest::setSendRequest(void),THTTPRequest_setSendRequest_void,.text,92,4,5120,False,False,False
 2095288,THTTPRequest_THTTPRequest_TString_const_TString_const_int_TString_const_TString_const_bool,elf_symbol,function,_ZN12THTTPRequestC1ERK7TStringS2_iS2_S2_b,"THTTPRequest::THTTPRequest(TString const&,TString const&,int,TString const&,TString const&,bool)",THTTPRequest_THTTPRequest_TString_const_TString_const_int_TString_const_TString_const_bool,.text,472,5,5120,False,False,False
-2095760,sub_1FFA90,ida_default_sub,,,,,.text,328,1,5120,False,False,True
+2095760,THTTPRequest_findOrCreateStatic,ida_named_non_elf,,,,,.text,328,1,5120,False,False,False
 2096088,THTTPRequest_setIsOpen_bool,elf_symbol,function,_ZN12THTTPRequest9setIsOpenEb,THTTPRequest::setIsOpen(bool),THTTPRequest_setIsOpen_bool,.text,76,4,5120,False,False,False
 2096164,THTTPRequest_THTTPRequest,elf_symbol,function,_ZN12THTTPRequestD1Ev,THTTPRequest::~THTTPRequest(),THTTPRequest_THTTPRequest,.text,252,6,5120,False,False,False
 2096416,THTTPRequest_THTTPRequest__2,elf_symbol,function,_ZN12THTTPRequestD0Ev,THTTPRequest::~THTTPRequest(),THTTPRequest_THTTPRequest__2,.text,32,2,5120,False,False,False
@@ -8469,11 +8469,11 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2099824,THTTPRequest_read_void,elf_symbol,function,_ZN12THTTPRequest4readEv,THTTPRequest::read(void),THTTPRequest_read_void,.text,676,2,5120,False,False,False
 2100500,THTTPRequest_getDownloadProgress_void,elf_symbol,function,_ZN12THTTPRequest19getDownloadProgressEv,THTTPRequest::getDownloadProgress(void),THTTPRequest_getDownloadProgress_void,.text,48,2,5120,False,False,False
 2100548,THTTPRequest_extractHTTPHostPortFile_TString_const_TString_int_TString_bool,elf_symbol,function,_ZN12THTTPRequest23extractHTTPHostPortFileERK7TStringRS0_RiS3_Rb,"THTTPRequest::extractHTTPHostPortFile(TString const&,TString&,int &,TString&,bool &)",THTTPRequest_extractHTTPHostPortFile_TString_const_TString_int_TString_bool,.text,596,2,5120,False,False,False
-2101144,sub_200F98,ida_default_sub,,,,,.text,372,1,5120,False,False,True
-2101516,sub_20110C,ida_default_sub,,,,,.text,236,1,5120,False,False,True
+2101144,THTTPRequest_findOrCreateFromUrl,ida_named_non_elf,,,,,.text,372,1,5120,False,False,False
+2101516,THTTPRequest_findStaticFromUrl,ida_named_non_elf,,,,,.text,236,1,5120,False,False,False
 2101752,THTTPRequest_requestURLFile_TString_const_bool,elf_symbol,function,_ZN12THTTPRequest14requestURLFileERK7TStringb,"THTTPRequest::requestURLFile(TString const&,bool)",THTTPRequest_requestURLFile_TString_const_bool,.text,476,2,5120,False,False,False
 2102228,THTTPRequest_requestURLAsGameFile_TString_const_TString_const_uint_bool,elf_symbol,function,_ZN12THTTPRequest20requestURLAsGameFileERK7TStringS2_jb,"THTTPRequest::requestURLAsGameFile(TString const&,TString const&,uint,bool)",THTTPRequest_requestURLAsGameFile_TString_const_TString_const_uint_bool,.text,532,2,5120,False,False,False
-2102760,sub_2015E8,ida_default_sub,,,,,.text,252,1,5120,False,False,True
+2102760,THTTPRequest_requestGameFileIfAllowed,ida_named_non_elf,,,,,.text,252,1,5120,False,False,False
 2103012,THTTPRequest_getAbsoluteLinkURL_TString_const_TString_const_bool,elf_symbol,function,_ZN12THTTPRequest18getAbsoluteLinkURLERK7TStringS2_b,"THTTPRequest::getAbsoluteLinkURL(TString const&,TString const&,bool)",THTTPRequest_getAbsoluteLinkURL_TString_const_TString_const_bool,.text,876,4,5120,False,False,False
 2103888,THTTPRequest_isDownloadingFiles_void,elf_symbol,function,_ZN12THTTPRequest18isDownloadingFilesEv,THTTPRequest::isDownloadingFiles(void),THTTPRequest_isDownloadingFiles_void,.text,184,4,5120,False,False,False
 2104072,THTTPRequest_getDownloadFile_TString_const,elf_symbol,function,_ZN12THTTPRequest15getDownloadFileERK7TString,THTTPRequest::getDownloadFile(TString const&),THTTPRequest_getDownloadFile_TString_const,.text,228,4,5120,False,False,False
@@ -8488,17 +8488,17 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2107884,non_virtual_thunk_to_THTTPRequestProperties_THTTPRequestProperties,elf_symbol,function,_ZThn16_N22THTTPRequestPropertiesD1Ev,`non-virtual thunk to'THTTPRequestProperties::~THTTPRequestProperties(),non_virtual_thunk_to_THTTPRequestProperties_THTTPRequestProperties,.text,8,2,5120,False,False,False
 2107892,THTTPRequestProperties_THTTPRequestProperties__2,elf_symbol,function,_ZN22THTTPRequestPropertiesD0Ev,THTTPRequestProperties::~THTTPRequestProperties(),THTTPRequestProperties_THTTPRequestProperties__2,.text,56,3,5120,False,False,False
 2107948,non_virtual_thunk_to_THTTPRequestProperties_THTTPRequestProperties__2,elf_symbol,function,_ZThn16_N22THTTPRequestPropertiesD0Ev,`non-virtual thunk to'THTTPRequestProperties::~THTTPRequestProperties(),non_virtual_thunk_to_THTTPRequestProperties_THTTPRequestProperties__2,.text,8,2,5120,False,False,False
-2107960,sub_202A38,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-2107976,sub_202A48,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-2107992,sub_202A58,ida_default_sub,,,,,.text,32,1,5120,False,False,True
-2108024,sub_202A78,ida_default_sub,,,,,.text,20,1,5120,False,False,True
-2108044,sub_202A8C,ida_default_sub,,,,,.text,20,1,5120,False,False,True
-2108064,sub_202AA0,ida_default_sub,,,,,.text,56,1,5120,False,False,True
-2108120,sub_202AD8,ida_default_sub,,,,,.text,56,1,5120,False,False,True
-2108176,sub_202B10,ida_default_sub,,,,,.text,56,1,5120,False,False,True
-2108232,sub_202B48,ida_default_sub,,,,,.text,56,1,5120,False,False,True
-2108288,sub_202B80,ida_default_sub,,,,,.text,48,1,5120,False,False,True
-2108336,sub_202BB0,ida_default_sub,,,,,.text,92,1,5120,False,False,True
+2107960,TServerList_setRemoveVarsOnLogout,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+2107976,TServerList_getAllowLoginReconnect,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+2107992,TServerList_setAllowLoginReconnect,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
+2108024,TServerList_setServerStartParams,ida_named_non_elf,,,,,.text,20,1,5120,False,False,False
+2108044,TServerList_setServerStartConnect,ida_named_non_elf,,,,,.text,20,1,5120,False,False,False
+2108064,TServerList_getServerStartParams,ida_named_non_elf,,,,,.text,56,1,5120,False,False,False
+2108120,TServerList_getServerStartConnect,ida_named_non_elf,,,,,.text,56,1,5120,False,False,False
+2108176,TServerList_getServerName,ida_named_non_elf,,,,,.text,56,1,5120,False,False,False
+2108232,TServerList_getServerNameCopy,ida_named_non_elf,,,,,.text,56,1,5120,False,False,False
+2108288,TClient_sendServerWarpFromScript,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
+2108336,TClient_getSocketIp,ida_named_non_elf,,,,,.text,92,1,5120,False,False,False
 2108428,TServerList_createTClient_TString_const,elf_symbol,function,_ZN11TServerList13createTClientERK7TString,TServerList::createTClient(TString const&),TServerList_createTClient_TString_const,.text,88,2,5120,False,False,False
 2108516,TServerList_setProtocolString_TString_const,elf_symbol,function,_ZN11TServerList17setProtocolStringERK7TString,TServerList::setProtocolString(TString const&),TServerList_setProtocolString_TString_const,.text,604,4,5120,False,False,False
 2109120,TServerList_isLoginServer_void,elf_symbol,function,_ZN11TServerList13isLoginServerEv,TServerList::isLoginServer(void),TServerList_isLoginServer_void,.text,112,4,5120,False,False,False
@@ -8516,23 +8516,23 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2113012,TServerList_enterNextConnectorMode_int,elf_symbol,function,_ZN11TServerList22enterNextConnectorModeEi,TServerList::enterNextConnectorMode(int),TServerList_enterNextConnectorMode_int,.text,1568,4,5120,False,False,False
 2114592,TServerList_login_void,elf_symbol,function,_ZN11TServerList5loginEv,TServerList::login(void),TServerList_login_void,.text,104,4,5120,False,False,False
 2114696,TServerList_handleServerWarp_void,elf_symbol,function,_ZN11TServerList16handleServerWarpEv,TServerList::handleServerWarp(void),TServerList_handleServerWarp_void,.text,424,4,5120,False,False,False
-2115120,sub_204630,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-2115128,sub_204638,ida_default_sub,,,,,.text,24,1,5120,False,False,True
-2115152,sub_204650,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-2115160,sub_204658,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-2115168,sub_204660,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-2115176,sub_204668,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-2115184,sub_204670,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-2115192,sub_204678,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-2115208,sub_204688,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-2115224,sub_204698,ida_default_sub,,,,,.text,48,1,5120,False,False,True
-2115272,sub_2046C8,ida_default_sub,,,,,.text,48,1,5120,False,False,True
-2115320,sub_2046F8,ida_default_sub,,,,,.text,48,1,5120,False,False,True
-2115368,sub_204728,ida_default_sub,,,,,.text,48,1,5120,False,False,True
-2115416,sub_204758,ida_default_sub,,,,,.text,48,1,5120,False,False,True
-2115464,sub_204788,ida_default_sub,,,,,.text,48,1,5120,False,False,True
-2115512,sub_2047B8,ida_default_sub,,,,,.text,48,1,5120,False,False,True
-2115560,sub_2047E8,ida_default_sub,,,,,.text,48,1,5120,False,False,True
+2115120,TSocket_getByte140,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+2115128,TSocket_getListCountField168,ida_named_non_elf,,,,,.text,24,1,5120,False,False,False
+2115152,TSocket_getField208,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+2115160,TSocket_getDword192,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+2115168,TSocket_setStringField232,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+2115176,TSocket_setStringField224,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+2115184,TSocket_setStringField200,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+2115192,TSocket_setAllowedPortsBind,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+2115208,TSocket_setAllowedSocketsConnect,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+2115224,TSocket_getStringField216,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
+2115272,TSocket_getStringField232,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
+2115320,TSocket_getStringField224,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
+2115368,TSocket_getStringField200,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
+2115416,TSocket_getStringField184,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
+2115464,TSocket_getStringField144,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
+2115512,TSocket_getStringField152,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
+2115560,TSocket_getStringField160,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
 2115608,TSocket_setSocket_TSocketConnection,elf_symbol,function,_ZN7TSocket9setSocketEP17TSocketConnection,TSocket::setSocket(TSocketConnection *),TSocket_setSocket_TSocketConnection,.text,124,2,5120,False,False,False
 2115732,TSocket_sendOutgoing_void,elf_symbol,function,_ZN7TSocket12sendOutgoingEv,TSocket::sendOutgoing(void),TSocket_sendOutgoing_void,.text,124,2,5120,False,False,False
 2115856,TSocketProperties_TSocketProperties_void,elf_symbol,function,_ZN17TSocketPropertiesC1Ev,TSocketProperties::TSocketProperties(void),TSocketProperties_TSocketProperties_void,.text,176,5,5120,False,False,False
@@ -8548,9 +8548,9 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2117032,TSocket_isConnected_void,elf_symbol,function,_ZN7TSocket11isConnectedEv,TSocket::isConnected(void),TSocket_isConnected_void,.text,56,4,5120,False,False,False
 2117088,jump_TSocket_isConnected_void,elf_symbol,jump_thunk,j_._ZN7TSocket11isConnectedEv,TSocket::isConnected(void),jump_TSocket_isConnected_void,.text,4,1,5312,True,False,False
 2117092,TSocket_getError_void,elf_symbol,function,_ZN7TSocket8getErrorEv,TSocket::getError(void),TSocket_getError_void,.text,104,4,5120,False,False,False
-2117196,sub_204E4C,ida_default_sub,,,,,.text,32,1,5120,False,False,True
+2117196,TSocket_getError,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
 2117228,TSocket_getIP_void,elf_symbol,function,_ZN7TSocket5getIPEv,TSocket::getIP(void),TSocket_getIP_void,.text,60,4,5120,False,False,False
-2117288,sub_204EA8,ida_default_sub,,,,,.text,32,1,5120,False,False,True
+2117288,TSocket_getIP,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
 2117320,TSocket_connect_TString_const_int,elf_symbol,function,_ZN7TSocket7connectERK7TStringi,"TSocket::connect(TString const&,int)",TSocket_connect_TString_const_int,.text,596,4,5120,False,False,False
 2117916,jump_TSocket_connect_TString_const_int,elf_symbol,jump_thunk,j_._ZN7TSocket7connectERK7TStringi,"TSocket::connect(TString const&,int)",jump_TSocket_connect_TString_const_int,.text,4,1,5312,True,False,False
 2117920,TSocket_setEnableSSL_bool,elf_symbol,function,_ZN7TSocket12setEnableSSLEb,TSocket::setEnableSSL(bool),TSocket_setEnableSSL_bool,.text,40,4,5120,False,False,False
@@ -8568,7 +8568,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2118376,TSocket_close_void,elf_symbol,function,_ZN7TSocket5closeEv,TSocket::close(void),TSocket_close_void,.text,60,4,5120,False,False,False
 2118436,jump_TSocket_close_void,elf_symbol,jump_thunk,j_._ZN7TSocket5closeEv,TSocket::close(void),jump_TSocket_close_void,.text,4,1,5312,True,False,False
 2118440,TSocket_checkDataPackages_void,elf_symbol,function,_ZN7TSocket17checkDataPackagesEv,TSocket::checkDataPackages(void),TSocket_checkDataPackages_void,.text,376,4,5120,False,False,False
-2118816,sub_2054A0,ida_default_sub,,,,,.text,36,1,5120,False,False,True
+2118816,TSocket_setStringField216AndCheckData,ida_named_non_elf,,,,,.text,36,1,5120,False,False,False
 2118852,TSocket_read_void,elf_symbol,function,_ZN7TSocket4readEv,TSocket::read(void),TSocket_read_void,.text,548,2,5120,False,False,False
 2119400,TSocket_initStaticScriptVars_void,elf_symbol,function,_Z28TSocket_initStaticScriptVarsv,TSocket_initStaticScriptVars(void),TSocket_initStaticScriptVars_void,.text,152,4,5120,False,False,False
 2119552,TSocket_preDestroy_void,elf_symbol,function,_ZN7TSocket10preDestroyEv,TSocket::preDestroy(void),TSocket_preDestroy_void,.text,32,2,5120,False,False,False
@@ -8581,10 +8581,10 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2121392,non_virtual_thunk_to_TSocketProperties_TSocketProperties,elf_symbol,function,_ZThn16_N17TSocketPropertiesD1Ev,`non-virtual thunk to'TSocketProperties::~TSocketProperties(),non_virtual_thunk_to_TSocketProperties_TSocketProperties,.text,8,2,5120,False,False,False
 2121400,TSocketProperties_TSocketProperties__2,elf_symbol,function,_ZN17TSocketPropertiesD0Ev,TSocketProperties::~TSocketProperties(),TSocketProperties_TSocketProperties__2,.text,56,3,5120,False,False,False
 2121456,non_virtual_thunk_to_TSocketProperties_TSocketProperties__2,elf_symbol,function,_ZThn16_N17TSocketPropertiesD0Ev,`non-virtual thunk to'TSocketProperties::~TSocketProperties(),non_virtual_thunk_to_TSocketProperties_TSocketProperties__2,.text,8,2,5120,False,False,False
-2121464,sub_205EF8,ida_default_sub,,,,,.text,212,1,5120,False,False,True
-2121676,sub_205FCC,ida_default_sub,,,,,.text,68,2,5120,False,False,True
-2121744,sub_206010,ida_default_sub,,,,,.text,112,2,5120,False,False,True
-2121856,sub_206080,ida_default_sub,,,,,.text,136,1,5120,False,False,True
+2121464,TSocket_cacheHostAddress,ida_named_non_elf,,,,,.text,212,1,5120,False,False,False
+2121676,TSocket_logSocketMessage,ida_named_non_elf,,,,,.text,68,2,5120,False,False,False
+2121744,TSocket_sendPlain,ida_named_non_elf,,,,,.text,112,2,5120,False,False,False
+2121856,TSocket_recvPlain,ida_named_non_elf,,,,,.text,136,1,5120,False,False,False
 2121992,resolveHost_TString_const,elf_symbol,function,_Z11resolveHostRK7TString,resolveHost(TString const&),resolveHost_TString_const,.text,300,4,5120,False,False,False
 2122304,TSocketConnection_TSocketConnection_void,elf_symbol,function,_ZN17TSocketConnectionC2Ev,TSocketConnection::TSocketConnection(void),TSocketConnection_TSocketConnection_void,.text,120,5,5120,False,False,False
 2122424,TSocketConnection_hasError_void,elf_symbol,function,_ZNK17TSocketConnection8hasErrorEv,TSocketConnection::hasError(void),TSocketConnection_hasError_void,.text,20,4,5120,False,False,False

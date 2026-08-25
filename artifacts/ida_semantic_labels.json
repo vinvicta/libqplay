@@ -8,10 +8,10 @@
   "policy": "These aliases are analysis labels, not recovered source names. The evidence is recorded so a later pass can correct a label without confusing it with an imported ELF symbol.",
   "inventory_after_labels": {
     "total_functions": 11271,
-    "ida_default_sub_functions": 1972,
-    "ida_named_non_elf_functions": 1203,
-    "named_function_total": 9299,
-    "new_labels_in_this_pass": 139
+    "ida_default_sub_functions": 1861,
+    "ida_named_non_elf_functions": 1314,
+    "named_function_total": 9410,
+    "new_labels_in_this_pass": 250
   },
   "labels": [
     {
@@ -847,6 +847,672 @@
       "name": "TClient_processTextControlAction",
       "confidence": "high",
       "evidence": ["Handles getstats through QEngine stats output", "Otherwise sends receivetext to the active weapon with parsed arguments"]
+    },
+    {
+      "va": "0x1fec48",
+      "name": "TGraalConnection_getByte228",
+      "confidence": "high",
+      "evidence": ["Reads TGraalConnection byte field +228", "The original member name was not recovered"]
+    },
+    {
+      "va": "0x1fec50",
+      "name": "TGraalConnection_setByte228",
+      "confidence": "high",
+      "evidence": ["Writes TGraalConnection byte field +228", "The original member name was not recovered"]
+    },
+    {
+      "va": "0x1fec58",
+      "name": "TGraalConnection_getDword304",
+      "confidence": "high",
+      "evidence": ["Reads TGraalConnection dword field +304", "The original member name was not recovered"]
+    },
+    {
+      "va": "0x1fec60",
+      "name": "TGraalConnection_getByte240",
+      "confidence": "high",
+      "evidence": ["Reads TGraalConnection byte field +240", "The original member name was not recovered"]
+    },
+    {
+      "va": "0x1fec68",
+      "name": "TGraalConnection_getDouble312",
+      "confidence": "high",
+      "evidence": ["Reads TGraalConnection double field +312", "The original member name was not recovered"]
+    },
+    {
+      "va": "0x1fec70",
+      "name": "TGraalConnection_getDword176",
+      "confidence": "high",
+      "evidence": ["Reads TGraalConnection dword field +176", "The original member name was not recovered"]
+    },
+    {
+      "va": "0x1fec78",
+      "name": "TGraalConnection_getDword244",
+      "confidence": "high",
+      "evidence": ["Reads TGraalConnection dword field +244", "The original member name was not recovered"]
+    },
+    {
+      "va": "0x1fec80",
+      "name": "THTTPRequest_getRequestCount",
+      "confidence": "high",
+      "evidence": ["Returns data_THTTPRequest_httprequests"]
+    },
+    {
+      "va": "0x1fec90",
+      "name": "THTTPRequest_getLastRequestTime",
+      "confidence": "high",
+      "evidence": ["Returns data_THTTPRequest_lastrequesttime"]
+    },
+    {
+      "va": "0x1feca0",
+      "name": "THTTPRequest_getLastWebDownloadTime",
+      "confidence": "high",
+      "evidence": ["Returns data_THTTPRequest_lastwebdownloadtime"]
+    },
+    {
+      "va": "0x1ff04c",
+      "name": "THTTPRequest_getStringField200",
+      "confidence": "high",
+      "evidence": ["Copies TString field THTTPRequest+200 into the script return value"]
+    },
+    {
+      "va": "0x1ff07c",
+      "name": "THTTPRequest_getStringField256",
+      "confidence": "high",
+      "evidence": ["Copies TString field THTTPRequest+256 into the script return value"]
+    },
+    {
+      "va": "0x1ff0ac",
+      "name": "THTTPRequest_getStringField248",
+      "confidence": "high",
+      "evidence": ["Copies TString field THTTPRequest+248 into the script return value"]
+    },
+    {
+      "va": "0x1ff0dc",
+      "name": "THTTPRequest_getStringField280",
+      "confidence": "high",
+      "evidence": ["Copies TString field THTTPRequest+280 into the script return value"]
+    },
+    {
+      "va": "0x1ff10c",
+      "name": "THTTPRequest_getStringField264",
+      "confidence": "high",
+      "evidence": ["Copies TString field THTTPRequest+264 into the script return value"]
+    },
+    {
+      "va": "0x1ff13c",
+      "name": "THTTPRequest_getStringField216",
+      "confidence": "high",
+      "evidence": ["Copies TString field THTTPRequest+216 into the script return value"]
+    },
+    {
+      "va": "0x1ff16c",
+      "name": "THTTPRequest_getConnectionField8",
+      "confidence": "high",
+      "evidence": ["Reads THTTPRequest field +232", "Copies the connection object's TString field +8 into the script return value"]
+    },
+    {
+      "va": "0x1ff1a0",
+      "name": "THTTPRequest_getStringField184",
+      "confidence": "high",
+      "evidence": ["Copies TString field THTTPRequest+184 into the script return value"]
+    },
+    {
+      "va": "0x1ff1d0",
+      "name": "THTTPRequest_getStringField296",
+      "confidence": "high",
+      "evidence": ["Copies TString field THTTPRequest+296 into the script return value"]
+    },
+    {
+      "va": "0x1ff200",
+      "name": "THTTPRequest_getStringField288",
+      "confidence": "high",
+      "evidence": ["Copies TString field THTTPRequest+288 into the script return value"]
+    },
+    {
+      "va": "0x1ff230",
+      "name": "THTTPRequest_getStringField168",
+      "confidence": "high",
+      "evidence": ["Copies TString field THTTPRequest+168 into the script return value"]
+    },
+    {
+      "va": "0x1ff260",
+      "name": "THTTPRequest_getGlobalHttpProperty",
+      "confidence": "high",
+      "evidence": ["Builds HTTP_<name>_<index>_<suffix>", "Looks up a script global and casts it to TProperties"]
+    },
+    {
+      "va": "0x1ffa90",
+      "name": "THTTPRequest_findOrCreateStatic",
+      "confidence": "high",
+      "evidence": ["Builds a static HTTP_<host>_<port>_<suffix> key", "Reuses an existing THTTPRequest or creates one and starts a pending request"]
+    },
+    {
+      "va": "0x200f98",
+      "name": "THTTPRequest_findOrCreateFromUrl",
+      "confidence": "high",
+      "evidence": ["Parses an HTTP URL and builds its static request key", "Reuses or creates a THTTPRequest and stores it in the script universe"]
+    },
+    {
+      "va": "0x20110c",
+      "name": "THTTPRequest_findStaticFromUrl",
+      "confidence": "high",
+      "evidence": ["Parses an HTTP URL and builds its static request key", "Returns the existing TProperties-backed request without creating one"]
+    },
+    {
+      "va": "0x2015e8",
+      "name": "THTTPRequest_requestGameFileIfAllowed",
+      "confidence": "high",
+      "evidence": ["Rejects the connector pseudo-file and disallowed extensions", "Requests the stripped filename as a game file"]
+    },
+    {
+      "va": "0x202a38",
+      "name": "TServerList_setRemoveVarsOnLogout",
+      "confidence": "high",
+      "evidence": ["Stores the script value in data_TServerList_removevarsonlogout"]
+    },
+    {
+      "va": "0x202a48",
+      "name": "TServerList_getAllowLoginReconnect",
+      "confidence": "high",
+      "evidence": ["Returns data_TServerList_allowloginreconnect"]
+    },
+    {
+      "va": "0x202a58",
+      "name": "TServerList_setAllowLoginReconnect",
+      "confidence": "high",
+      "evidence": ["Stores data_TServerList_allowloginreconnect", "Resets data_TServerList_allowpreloginreconnects to -1"]
+    },
+    {
+      "va": "0x202a78",
+      "name": "TServerList_setServerStartParams",
+      "confidence": "high",
+      "evidence": ["Assigns the supplied string to data_TServerList_serverstartparams"]
+    },
+    {
+      "va": "0x202a8c",
+      "name": "TServerList_setServerStartConnect",
+      "confidence": "high",
+      "evidence": ["Assigns the supplied string to data_TServerList_serverstartconnect"]
+    },
+    {
+      "va": "0x202aa0",
+      "name": "TServerList_getServerStartParams",
+      "confidence": "high",
+      "evidence": ["Returns a copy of data_TServerList_serverstartparams"]
+    },
+    {
+      "va": "0x202ad8",
+      "name": "TServerList_getServerStartConnect",
+      "confidence": "high",
+      "evidence": ["Returns a copy of data_TServerList_serverstartconnect"]
+    },
+    {
+      "va": "0x202b10",
+      "name": "TServerList_getServerName",
+      "confidence": "high",
+      "evidence": ["Returns a copy of data_TServerList_servername"]
+    },
+    {
+      "va": "0x202b48",
+      "name": "TServerList_getServerNameCopy",
+      "confidence": "high",
+      "evidence": ["Returns another copy of data_TServerList_servername through the script callback ABI"]
+    },
+    {
+      "va": "0x202b80",
+      "name": "TClient_sendServerWarpFromScript",
+      "confidence": "high",
+      "evidence": ["Checks for a nonempty string", "Sends it through TClient_sendServerWarp on data_TClient_client"]
+    },
+    {
+      "va": "0x202bb0",
+      "name": "TClient_getSocketIp",
+      "confidence": "high",
+      "evidence": ["Reads the active socket from data_TClient_client", "Returns its IP or an empty string"]
+    },
+    {
+      "va": "0x15c620",
+      "name": "TClientEnvironment_clearStaticString38D428",
+      "confidence": "high",
+      "evidence": ["Clears the static TString stored at 0x38d428"]
+    },
+    {
+      "va": "0x15c62c",
+      "name": "TClientEnvironment_clearStaticString38D460",
+      "confidence": "high",
+      "evidence": ["Clears the static TString stored at 0x38d460"]
+    },
+    {
+      "va": "0x15c63c",
+      "name": "TClientEnvironment_getBuildTimestampString",
+      "confidence": "high",
+      "evidence": ["Builds a timestamp from the literals Jul 4 2019 and 09:35:12"]
+    },
+    {
+      "va": "0x15d4b0",
+      "name": "TGaniObject_getEnableMovieReposition",
+      "confidence": "high",
+      "evidence": ["Returns data_TGaniObject_enableganimoviereposition"]
+    },
+    {
+      "va": "0x15d4c0",
+      "name": "TGaniObject_setEnableMovieReposition",
+      "confidence": "high",
+      "evidence": ["Stores the argument in data_TGaniObject_enableganimoviereposition"]
+    },
+    {
+      "va": "0x15d4d0",
+      "name": "TGaniObject_getField280",
+      "confidence": "high",
+      "evidence": ["Reads TGaniObject field +280"]
+    },
+    {
+      "va": "0x15d4d8",
+      "name": "TGaniObject_getField292",
+      "confidence": "high",
+      "evidence": ["Reads TGaniObject dword field +292"]
+    },
+    {
+      "va": "0x15d4e0",
+      "name": "TGaniObject_getChildField748",
+      "confidence": "high",
+      "evidence": ["Reads the child pointer at +144", "Returns its dword field +748 or zero"]
+    },
+    {
+      "va": "0x15d4f8",
+      "name": "TGaniObject_getChildVisibilityInverted",
+      "confidence": "high",
+      "evidence": ["Reads the child pointer at +144", "Returns the inverse of its byte field +288 or zero"]
+    },
+    {
+      "va": "0x15d514",
+      "name": "TGaniObject_getChildField144",
+      "confidence": "high",
+      "evidence": ["Returns TGaniObject child pointer field +144"]
+    },
+    {
+      "va": "0x15d51c",
+      "name": "TGaniObject_getField320",
+      "confidence": "high",
+      "evidence": ["Reads TGaniObject field +320"]
+    },
+    {
+      "va": "0x15d524",
+      "name": "TGaniObject_getField448",
+      "confidence": "high",
+      "evidence": ["Reads TGaniObject field +448"]
+    },
+    {
+      "va": "0x15d52c",
+      "name": "TGaniObject_callVirtual504",
+      "confidence": "high",
+      "evidence": ["Invokes the receiver virtual method at vtable offset +504"]
+    },
+    {
+      "va": "0x15d54c",
+      "name": "TGaniObject_callVirtual512Direction",
+      "confidence": "high",
+      "evidence": ["Normalizes the direction to 0 through 3", "Invokes the receiver virtual method at vtable offset +512"]
+    },
+    {
+      "va": "0x15d590",
+      "name": "TGaniObject_getField576",
+      "confidence": "high",
+      "evidence": ["Reads TGaniObject field +576"]
+    },
+    {
+      "va": "0x15d598",
+      "name": "TGaniObject_getFloatField460",
+      "confidence": "high",
+      "evidence": ["Reads TGaniObject float field +460"]
+    },
+    {
+      "va": "0x15d5a0",
+      "name": "TGaniObject_setFloatField460",
+      "confidence": "high",
+      "evidence": ["Writes TGaniObject float field +460"]
+    },
+    {
+      "va": "0x15d5a8",
+      "name": "TGaniObject_getFloatField464",
+      "confidence": "high",
+      "evidence": ["Reads TGaniObject float field +464"]
+    },
+    {
+      "va": "0x15d5b0",
+      "name": "TGaniObject_setFloatField464",
+      "confidence": "high",
+      "evidence": ["Writes TGaniObject float field +464"]
+    },
+    {
+      "va": "0x15d5b8",
+      "name": "TGaniObject_getFloatField468",
+      "confidence": "high",
+      "evidence": ["Reads TGaniObject float field +468"]
+    },
+    {
+      "va": "0x15d5c0",
+      "name": "TGaniObject_setFloatField468",
+      "confidence": "high",
+      "evidence": ["Writes TGaniObject float field +468"]
+    },
+    {
+      "va": "0x15d5c8",
+      "name": "TGaniObject_getByteField472",
+      "confidence": "high",
+      "evidence": ["Reads TGaniObject byte field +472"]
+    },
+    {
+      "va": "0x15d5d0",
+      "name": "TGaniObject_setByteField472",
+      "confidence": "high",
+      "evidence": ["Writes TGaniObject byte field +472"]
+    },
+    {
+      "va": "0x15d5d8",
+      "name": "TGaniObject_getFloatField456",
+      "confidence": "high",
+      "evidence": ["Reads TGaniObject float field +456"]
+    },
+    {
+      "va": "0x15d5e0",
+      "name": "TGaniObject_setFloatField456",
+      "confidence": "high",
+      "evidence": ["Writes TGaniObject float field +456"]
+    },
+    {
+      "va": "0x15d5e8",
+      "name": "TGaniObject_setFloatFields484_496",
+      "confidence": "high",
+      "evidence": ["Writes four float values to TGaniObject fields +484, +488, +492, and +496"]
+    },
+    {
+      "va": "0x15d61c",
+      "name": "TGaniObject_getByteField500",
+      "confidence": "high",
+      "evidence": ["Reads TGaniObject byte field +500"]
+    },
+    {
+      "va": "0x15d624",
+      "name": "TGaniObject_setByteField500Clamped",
+      "confidence": "high",
+      "evidence": ["Stores a value at TGaniObject+500", "Values above 3 are replaced with zero"]
+    },
+    {
+      "va": "0x15d638",
+      "name": "TGaniObject_getFloatField484",
+      "confidence": "high",
+      "evidence": ["Reads TGaniObject float field +484"]
+    },
+    {
+      "va": "0x15d640",
+      "name": "TGaniObject_setFloatField484Clamped",
+      "confidence": "high",
+      "evidence": ["Writes TGaniObject float field +484", "Clamps the value to the inclusive range 0 through 1"]
+    },
+    {
+      "va": "0x15d66c",
+      "name": "TGaniObject_getFloatField488",
+      "confidence": "high",
+      "evidence": ["Reads TGaniObject float field +488"]
+    },
+    {
+      "va": "0x15d674",
+      "name": "TGaniObject_setFloatField488Clamped",
+      "confidence": "high",
+      "evidence": ["Writes TGaniObject float field +488", "Clamps the value to the inclusive range 0 through 1"]
+    },
+    {
+      "va": "0x15d6a0",
+      "name": "TGaniObject_getFloatField492",
+      "confidence": "high",
+      "evidence": ["Reads TGaniObject float field +492"]
+    },
+    {
+      "va": "0x15d6a8",
+      "name": "TGaniObject_setFloatField492Clamped",
+      "confidence": "high",
+      "evidence": ["Writes TGaniObject float field +492", "Clamps the value to the inclusive range 0 through 1"]
+    },
+    {
+      "va": "0x15d6d4",
+      "name": "TGaniObject_getFloatField496",
+      "confidence": "high",
+      "evidence": ["Reads TGaniObject float field +496"]
+    },
+    {
+      "va": "0x15d6dc",
+      "name": "TGaniObject_setFloatField496Clamped",
+      "confidence": "high",
+      "evidence": ["Writes TGaniObject float field +496", "Clamps the value to the inclusive range 0 through 1"]
+    },
+    {
+      "va": "0x15d938",
+      "name": "TGaniParam_clearStaticString38D4E8",
+      "confidence": "high",
+      "evidence": ["Clears the static TString stored at 0x38d4e8"]
+    },
+    {
+      "va": "0x15d944",
+      "name": "TGaniParam_clearStaticString38D4F0",
+      "confidence": "high",
+      "evidence": ["Clears the static TString stored at 0x38d4f0"]
+    },
+    {
+      "va": "0x15d954",
+      "name": "TGaniParam_clearStaticString38D4F8",
+      "confidence": "high",
+      "evidence": ["Clears the static TString stored at 0x38d4f8"]
+    },
+    {
+      "va": "0x15d9c8",
+      "name": "TGaniParam_setStringField400",
+      "confidence": "high",
+      "evidence": ["Assigns a string to TGaniParam field +400"]
+    },
+    {
+      "va": "0x15d9d0",
+      "name": "TGaniParam_setStringField392",
+      "confidence": "high",
+      "evidence": ["Assigns a string to TGaniParam field +392"]
+    },
+    {
+      "va": "0x15d9d8",
+      "name": "TGaniParam_getStringField400",
+      "confidence": "high",
+      "evidence": ["Copies TGaniParam field +400 into the script return value"]
+    },
+    {
+      "va": "0x15da08",
+      "name": "TGaniParam_getStringField392",
+      "confidence": "high",
+      "evidence": ["Copies TGaniParam field +392 into the script return value"]
+    },
+    {
+      "va": "0x15da38",
+      "name": "TGaniParam_getStringField384",
+      "confidence": "high",
+      "evidence": ["Copies TGaniParam field +384 into the script return value"]
+    },
+    {
+      "va": "0x15da68",
+      "name": "TGaniParam_getStringField376",
+      "confidence": "high",
+      "evidence": ["Copies TGaniParam field +376 into the script return value"]
+    },
+    {
+      "va": "0x15da98",
+      "name": "TGaniParam_getStringField304",
+      "confidence": "high",
+      "evidence": ["Copies TGaniParam field +304 into the script return value"]
+    },
+    {
+      "va": "0x15daf4",
+      "name": "TGaniParam_setStringField384IfNonempty",
+      "confidence": "high",
+      "evidence": ["Assigns a nonempty input string to TGaniParam field +384"]
+    },
+    {
+      "va": "0x15db60",
+      "name": "TGaniParam_setPointField476",
+      "confidence": "high",
+      "evidence": ["Parses a point string", "Stores the result at TGaniParam+476"]
+    },
+    {
+      "va": "0x15db90",
+      "name": "TGaniParam_getPointField476",
+      "confidence": "high",
+      "evidence": ["Serializes TGaniParam point field +476 into the script return value"]
+    },
+    {
+      "va": "0x15e344",
+      "name": "TGaniObject_callVirtual496IfNonempty",
+      "confidence": "high",
+      "evidence": ["Checks for a nonempty input string", "Invokes the receiver virtual method at vtable offset +496"]
+    },
+    {
+      "va": "0x204630",
+      "name": "TSocket_getByte140",
+      "confidence": "high",
+      "evidence": ["Reads TSocket byte field +140"]
+    },
+    {
+      "va": "0x204638",
+      "name": "TSocket_getListCountField168",
+      "confidence": "high",
+      "evidence": ["Reads the count from the pointer at TSocket+168", "Returns zero when the pointer is absent"]
+    },
+    {
+      "va": "0x204650",
+      "name": "TSocket_getField208",
+      "confidence": "high",
+      "evidence": ["Reads TSocket pointer field +208"]
+    },
+    {
+      "va": "0x204658",
+      "name": "TSocket_getDword192",
+      "confidence": "high",
+      "evidence": ["Reads TSocket dword field +192"]
+    },
+    {
+      "va": "0x204660",
+      "name": "TSocket_setStringField232",
+      "confidence": "high",
+      "evidence": ["Assigns a string to TSocket field +232"]
+    },
+    {
+      "va": "0x204668",
+      "name": "TSocket_setStringField224",
+      "confidence": "high",
+      "evidence": ["Assigns a string to TSocket field +224"]
+    },
+    {
+      "va": "0x204670",
+      "name": "TSocket_setStringField200",
+      "confidence": "high",
+      "evidence": ["Assigns a string to TSocket field +200"]
+    },
+    {
+      "va": "0x204678",
+      "name": "TSocket_setAllowedPortsBind",
+      "confidence": "high",
+      "evidence": ["Assigns the supplied string to data_TSocket_allowedportsbind"]
+    },
+    {
+      "va": "0x204688",
+      "name": "TSocket_setAllowedSocketsConnect",
+      "confidence": "high",
+      "evidence": ["Assigns the supplied string to data_TSocket_allowedsocketsconnect"]
+    },
+    {
+      "va": "0x204698",
+      "name": "TSocket_getStringField216",
+      "confidence": "high",
+      "evidence": ["Copies TString field TSocket+216 into the script return value"]
+    },
+    {
+      "va": "0x2046c8",
+      "name": "TSocket_getStringField232",
+      "confidence": "high",
+      "evidence": ["Copies TString field TSocket+232 into the script return value"]
+    },
+    {
+      "va": "0x2046f8",
+      "name": "TSocket_getStringField224",
+      "confidence": "high",
+      "evidence": ["Copies TString field TSocket+224 into the script return value"]
+    },
+    {
+      "va": "0x204728",
+      "name": "TSocket_getStringField200",
+      "confidence": "high",
+      "evidence": ["Copies TString field TSocket+200 into the script return value"]
+    },
+    {
+      "va": "0x204758",
+      "name": "TSocket_getStringField184",
+      "confidence": "high",
+      "evidence": ["Copies TString field TSocket+184 into the script return value"]
+    },
+    {
+      "va": "0x204788",
+      "name": "TSocket_getStringField144",
+      "confidence": "high",
+      "evidence": ["Copies TString field TSocket+144 into the script return value"]
+    },
+    {
+      "va": "0x2047b8",
+      "name": "TSocket_getStringField152",
+      "confidence": "high",
+      "evidence": ["Copies TString field TSocket+152 into the script return value"]
+    },
+    {
+      "va": "0x2047e8",
+      "name": "TSocket_getStringField160",
+      "confidence": "high",
+      "evidence": ["Copies TString field TSocket+160 into the script return value"]
+    },
+    {
+      "va": "0x204e4c",
+      "name": "TSocket_getError",
+      "confidence": "high",
+      "evidence": ["Forwards the callback to TSocket_getError_void"]
+    },
+    {
+      "va": "0x204ea8",
+      "name": "TSocket_getIP",
+      "confidence": "high",
+      "evidence": ["Forwards the callback to TSocket_getIP_void"]
+    },
+    {
+      "va": "0x2054a0",
+      "name": "TSocket_setStringField216AndCheckData",
+      "confidence": "high",
+      "evidence": ["Stores a string at TSocket+216", "Calls TSocket_checkDataPackages_void"]
+    },
+    {
+      "va": "0x205ef8",
+      "name": "TSocket_cacheHostAddress",
+      "confidence": "high",
+      "evidence": ["Resolves an IPv4 address with inet_addr", "Caches it by case-insensitive host hash and records its timestamp"]
+    },
+    {
+      "va": "0x205fcc",
+      "name": "TSocket_logSocketMessage",
+      "confidence": "high",
+      "evidence": ["Formats the supplied message", "Sends it through TLog_echo"]
+    },
+    {
+      "va": "0x206010",
+      "name": "TSocket_sendPlain",
+      "confidence": "high",
+      "evidence": ["Sends on the plain socket descriptor when socket state is 5", "Maps EPIPE and zero-length results to native error codes"]
+    },
+    {
+      "va": "0x206080",
+      "name": "TSocket_recvPlain",
+      "confidence": "high",
+      "evidence": ["Receives on the plain socket descriptor when socket state is 5", "Maps transient errno values to native error codes"]
     }
   ],
   "network_contacted": false

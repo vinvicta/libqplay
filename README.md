@@ -163,12 +163,13 @@ proves the local native TLS path, not a current live certificate or service.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.
 * `symbols/libqplay.function_inventory.csv` and
   `symbols/libqplay.function_inventory.json` cover all 11,271 IDA function
-  starts, including the 1,972 remaining analysis-created `sub_` entries that have no
+  starts, including the 1,861 remaining analysis-created `sub_` entries that have no
   surviving ELF name.
 * `symbols/libqplay.function_inventory.summary.json` records the input hash
   and the boundary between translated symbols and IDA-created functions.
-* `artifacts/ida_semantic_labels.json` records 139 evidence-backed names
-  applied to formerly unnamed login, file-download, handler-table, and UI helpers.
+* `artifacts/ida_semantic_labels.json` records 250 evidence-backed names
+  applied to formerly unnamed login, file-download, handler-table, UI, TLS,
+  HTTP, socket, and animation helpers.
 * `artifacts/inbound_handler_table.json` records the native handler-index table,
   its current function targets, and the observed packet-to-index pairs.
 * `artifacts/premium_option.json` records the complete marker bytes and the

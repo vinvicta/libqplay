@@ -51,15 +51,15 @@ ambiguous.
 
 The follow-up inventory keeps the coverage boundary explicit. IDA reports
 11,271 function starts in this database. The translated ELF rows account for
-8,096 function starts and the remaining rows are 1,972 default `sub_` names
-plus 1,203 names that IDA created without a matching ELF symbol. The 505
+8,096 function starts and the remaining rows are 1,861 default `sub_` names
+plus 1,314 names that IDA created without a matching ELF symbol. The 505
 remaining ELF rows are data symbols. `symbols/libqplay.function_inventory.csv`
 and its JSON counterpart record every function start, its size, segment,
 incoming references, flags, and source category. The `sub_` rows are not
 missing from the archive; they are unnamed because this stripped portion of
 the file provides no reliable semantic name for them.
 
-A focused follow-up pass did recover reliable behavior names for 139 of those
+A focused follow-up pass did recover reliable behavior names for 250 of those
 IDA-created functions. The labels cover the two server-login callbacks, the
 packet-190 server-list completion wrapper, file-download bookkeeping, the
 inbound handler-table loader and clearer, weapon and encrypted-script updates,
@@ -76,6 +76,15 @@ download. The labels are applied in the IDB and reflected in the function
 inventory, but they are not presented as original ELF symbols. The complete
 list with confidence and evidence is in
 `artifacts/ida_semantic_labels.json`.
+
+The latest native audit extends the same evidence standard beyond the packet
+core. It labels the `TGraalConnection` and `THTTPRequest` accessors used by
+the connector and request registry, the `TSocket` policy, error, address, and
+plain-I/O helpers, and the `TGaniObject` or `TGaniParam` accessors used by the
+animation path. Most of these aliases preserve the proven field offset or
+virtual slot instead of inventing a source-level member name. This makes the
+inventory more useful for tracing TLS and resource loading while keeping the
+remaining uncertainty explicit.
 
 The translated symbols changed the pace of the rest of the investigation.
 Instead of guessing from strings, the connector and login flow could be
