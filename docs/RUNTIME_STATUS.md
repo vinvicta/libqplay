@@ -198,8 +198,14 @@ This is the short handoff view. The full reasoning and command history are in
 34. The same offline pass recovered three sound wrappers at `0xe0af8`,
     `0xe0bf8`, and `0xe0c08`. Vtable relocations identify the first as
     `TSounds_isMusicPlaying`; the other two access the exported
-    `TSounds::soundoffscreendistance` global. They are recorded as unapplied
-    candidates, bringing the plan to 22 entries.
+    `TSounds::soundoffscreendistance` global.
+35. A follow-up relocation check corrected the next table interpretation.
+    `0xe0c18` uses the `TSounds::soundplayer` slot at `0x3757e0` and matches
+    `getmusicfilename`. The property pair at `0xe0c84` and `0xe0c70` uses
+    `TSounds::disabledsoundeffects` through slot `0x374cb0` and calls the
+    comma-text getter and setter. These three names are recorded as unapplied
+    candidates, bringing the plan to 25 entries. No live endpoint was
+    contacted.
 
 ## Not verified
 

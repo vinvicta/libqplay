@@ -174,11 +174,13 @@ lists, the restart state, the `TDrawTexture::textures` list, `curanis`,
 `TOptions::windowpos`, and `displayedgif`. The ELF relocation records tie the
 latter four routines to their global objects. The adjacent sound wrappers also
 cover `TSounds::isMusicPlaying` and the exported
-`TSounds::soundoffscreendistance` getter and setter. The proposed names are
-still kept in
+`TSounds::soundoffscreendistance` getter and setter. A follow-up read of the
+same registration block identified `TSounds_getMusicFilename` and the getter
+and setter for `TSounds::disabledsoundeffects`. The proposed names are still
+kept in
 `artifacts/native_callback_candidates.json` as candidates, not counted among
 the 467 applied labels, until the same names are written to IDA and included
-in a fresh inventory export.
+in a fresh inventory export. The candidate plan now contains 25 entries.
 
 When the IDA bridge is available, run
 `tools/ida_apply_native_callback_candidates.py` in review mode first. It

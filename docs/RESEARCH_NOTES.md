@@ -1106,4 +1106,17 @@ wrapper reads `TSounds::soundplayer` and calls the address-point-adjusted
 boolean. The adjacent `0xe0bf8` and `0xe0c08` routines load and store the
 exported `TSounds::soundoffscreendistance` double through the relocation at
 `0x3754b0`. These are recorded under `sound_wrappers` in the candidate
-artifact, bringing the unapplied plan to 22 entries.
+artifact.
+
+A closer read of the next three table entries corrected an earlier address
+interpretation. The GOT slot used by `0xe0c18` is `0x3757e0`, which resolves to
+`TSounds::soundplayer`, not `TServerList::servername`. The wrapper reads the
+player's filename field and lowercases it, matching the script-facing
+`getmusicfilename` entry and the exported `TSounds::getMusicFilename` helper.
+The adjacent property entry uses GOT slot `0x374cb0`, which resolves to
+`TSounds::disabledsoundeffects`. Its getter at `0xe0c84` calls
+`TStringList::GetCommaText2`, and its setter at `0xe0c70` calls
+`TStringList::SetCommaText2`. These three high-confidence names are recorded
+under `sound_table_followup`. They bring the unapplied candidate plan to 25
+entries. The previous TServerList interpretation was not applied to IDA and is
+not retained in the candidate artifact.

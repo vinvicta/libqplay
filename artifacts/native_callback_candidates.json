@@ -233,5 +233,43 @@
       ]
     }
   ],
+  "sound_table_followup": [
+    {
+      "va": "0xe0c18",
+      "current_ida_name": "sub_E0C18",
+      "proposed_name": "TSounds_getMusicFilename",
+      "confidence": "high",
+      "evidence": [
+        "The TSounds_initStaticScriptVars property and function data begins at 0x376018 and places this callback at 0x376180",
+        "The GOT slot at 0x3757e0 resolves to TSounds::soundplayer",
+        "The body reads the sound-player filename field at object offset 0x10, passes it through TFiles::lowerCaseFilename, and returns an empty TString when no player exists",
+        "The exported TSounds::getMusicFilename implementation reads the same sound-player field, and the registered script name is getmusicfilename"
+      ]
+    },
+    {
+      "va": "0xe0c70",
+      "current_ida_name": "sub_E0C70",
+      "proposed_name": "TSounds_setDisabledSoundEffects",
+      "confidence": "high",
+      "evidence": [
+        "The TSounds property table begins at 0x376018 and stores this callback in the setter slot at 0x376030",
+        "The GOT slot at 0x374cb0 resolves to TSounds::disabledsoundeffects",
+        "The body forwards its TString argument to TStringList::SetCommaText2 on that global",
+        "The encoded property name in the table corresponds to disabledsoundeffects"
+      ]
+    },
+    {
+      "va": "0xe0c84",
+      "current_ida_name": "sub_E0C84",
+      "proposed_name": "TSounds_getDisabledSoundEffects",
+      "confidence": "high",
+      "evidence": [
+        "The TSounds property table begins at 0x376018 and stores this callback in the getter slot at 0x376028",
+        "The GOT slot at 0x374cb0 resolves to TSounds::disabledsoundeffects",
+        "The body returns TStringList::GetCommaText2 from that global through the script callback return convention",
+        "The encoded property name in the table corresponds to disabledsoundeffects"
+      ]
+    }
+  ],
   "network_contacted": false
 }
