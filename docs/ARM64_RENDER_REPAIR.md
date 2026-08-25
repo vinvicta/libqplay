@@ -260,6 +260,31 @@ green world and HUD. Together, these observations narrow the failure to the
 loading-versus-game draw decision under translation. They do not show a
 missing map, a failed game socket, or a general ARM64 resource-loader failure.
 
+## Held-connection encrypted-level replay
+
+On 2026-08-25 the same ARM64-only diagnostic APK was run again with a private
+fixture root built from local cached Graal4 files. The map fixture was copied
+under the exact requested name `classiciphone.gmap`. Its own level names were
+`main_aa-02.nw`, `main_ab-01.nw`, and `main_ab-02.nw`, so the local level helper
+re-keyed one cached `black.nw-14900.code` container into three matching files.
+The decoded board stream was preserved, while the encrypted container headers
+were rewritten for the requested names and the local server signature.
+
+The client made the first connection for the server-warp stage, then made a
+second connection and requested the map, `login.gupd`, all three encrypted
+level containers, `pics1.png`, and the package metadata files. The responder
+sent packet 49 again after the map response, which is required by this client
+to finish the pending map transition. It then held the socket open long enough
+to capture the rendered frame and observed packet-24 heartbeats.
+
+The screen showed the green tiled world, player HUD, and status icons while the
+second game socket was still open. This is a stronger local resource-path
+check than the earlier post-disconnect screenshot, but the data still comes
+from a local cache and not from the live service. The complete metadata and
+hash record is in
+`artifacts/arm64_local_fixture_render_replay.json`. Raw captures and fixture
+bodies remain private.
+
 ## Limitations and next validation
 
 This work uses a local synthetic connector and game responder. It does not

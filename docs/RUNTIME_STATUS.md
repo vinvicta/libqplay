@@ -208,6 +208,20 @@ This is the short handoff view. The full reasoning and command history are in
     `setmusicvolume` at `0xe1350`; their wrappers forward to the exported
     sound methods. The expanded plan now contains 27 entries. No live endpoint was
     contacted.
+36. A held-connection replay on 2026-08-25 repeated the ARM64 test with the
+    local cached map and package files copied into a private fixture root. The
+    map was served under `classiciphone.gmap`, and three matching encrypted
+    containers were generated from the local `black.nw-14900.code` fixture for
+    `main_aa-02.nw`, `main_ab-01.nw`, and `main_ab-02.nw`. The ARM64-only APK
+    completed two encrypted game connections, accepted the map, package
+    metadata, tile sheet, and all three containers, and kept sending packet-24
+    heartbeats. The screenshot was taken while the second socket was still
+    open. It shows the green tiled world, player HUD, and status icons. The
+    screenshot hash is
+    `fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`.
+    Packet and fixture hashes are recorded in
+    `artifacts/arm64_local_fixture_render_replay.json`. The fixtures are local
+    compatibility inputs, not a claim about the live server revision.
 
 ## Not verified
 

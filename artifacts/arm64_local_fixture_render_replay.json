@@ -1,0 +1,162 @@
+{
+  "artifact": "arm64_local_fixture_render_replay",
+  "date": "2026-08-25",
+  "scope": "loopback-only diagnostic replay",
+  "purpose": "Confirm that the ARM64 diagnostic build can complete the local game protocol, load encrypted level containers, and enter the normal render path.",
+  "client": {
+    "package": "com.quattroplay.GraalClassic",
+    "version_name": "1.8",
+    "version_code": 6158,
+    "apk_sha256": "b1c52234b10fb5a4a2c6c58e85370ccab710b1c355574d295df30b5ed6edddcc",
+    "native_abi": "arm64-v8a",
+    "native_library_sha256": "89a7cf3a10d9da9fb00f50e6917ce10402c1147bcf5738a176c26b32868ba858",
+    "script_original_sha256": "4919f3c82efd4359b992bb69acf6397bda47964c5d0355e88734dbf029b8df8b",
+    "script_loaded_sha256": "3c8286ece57d96ecf088f6ba01b6a6094f6d317dda451369392bfa731aa0fb2f",
+    "diagnostic_sites": [
+      {
+        "address": "0x206108",
+        "purpose": "route the legacy resolver to the loopback responder"
+      },
+      {
+        "address": "0x15ca7c",
+        "purpose": "take the existing initialization branch that clears the loading byte"
+      }
+    ],
+    "rsa_package_result": "native package-signature branch left unchanged"
+  },
+  "emulator": {
+    "avd": "medium_phone",
+    "android_api": 36,
+    "host_abi": "x86_64",
+    "execution": "Android ARM64 translation layer",
+    "reverse_ports": {
+      "18080": "127.0.0.1 connector responder",
+      "14900": "127.0.0.1 game responder"
+    }
+  },
+  "connector": {
+    "request_count": 1,
+    "response_sha256": "73996942d493a8db4b7b6238dcc9d6e4bb68a91b48ba5946db4cff9252bc4b7c",
+    "request_capture": {
+      "size": 186,
+      "sha256": "3586b24ea8f0b90b722bc988c4a7e126ee8e0664f2b06d1cb6e7ab8338e6759f"
+    },
+    "transport": "local HTTP responder only"
+  },
+  "game_responder": {
+    "port": 14900,
+    "connections": 2,
+    "key_exchange": "fd client exchange, fc server key setup, encrypted login type 54",
+    "server_control_frames": [
+      {
+        "connection": 1,
+        "frames": [178]
+      },
+      {
+        "connection": 2,
+        "frames": [9, 190, 49]
+      }
+    ],
+    "resource_requests": [
+      "basepackage.gupd",
+      "classiciphone.gmap",
+      "login.gupd",
+      "main_aa-02.nw",
+      "main_ab-01.nw",
+      "main_ab-02.nw",
+      "pics1.png",
+      "levels.gupd",
+      "sounds.gupd",
+      "videocompression.gupd",
+      "fonts.gupd",
+      "images.gupd"
+    ],
+    "resource_responses": [
+      {
+        "requested": "classiciphone.gmap",
+        "served_bytes": 25310,
+        "served_sha256": "708023ce3cd6441a96ff1ddead038d5a4409df83dd1cdfdf4e8e7b12610e02f7",
+        "provenance": "local main.gmap fixture renamed for this protocol test"
+      },
+      {
+        "requested": "main_aa-02.nw",
+        "served_as": "main_aa-02.nw-14900.code",
+        "served_bytes": 300,
+        "served_sha256": "887f9aa2a2a44dfa4d9a5da9c98a4a8d0998798609c6cca8f530286945369177"
+      },
+      {
+        "requested": "main_ab-01.nw",
+        "served_as": "main_ab-01.nw-14900.code",
+        "served_bytes": 300,
+        "served_sha256": "23b6919682d05c7db550995f8f7ab000a1e2efdf6ec37d2d11f417f32c200d32"
+      },
+      {
+        "requested": "main_ab-02.nw",
+        "served_as": "main_ab-02.nw-14900.code",
+        "served_bytes": 300,
+        "served_sha256": "f001f9da7d67dc209a607aacb769dd37a7b2c2f79bd67e037350680a5037f821"
+      },
+      {
+        "requested": "pics1.png",
+        "served_bytes": 222897,
+        "served_sha256": "fe2dff5c4af86179d0cf83306a40c7e7b92d728a99f1f73a5ec2cf9c897764eb"
+      }
+    ],
+    "captures": {
+      "connection_1_in": {
+        "size": 572,
+        "sha256": "78050058abaa3eb9cc66c3ae8170f45684a9cdc33948e108017c8b3dd565219a"
+      },
+      "connection_1_out": {
+        "size": 877,
+        "sha256": "2b2ac47838aaae56b0dbf0c96fe6ed961e85a2f2de90a5665b74f8808c3effb8"
+      },
+      "connection_2_in": {
+        "size": 805,
+        "sha256": "481a39c41f7d9ef804efee7e63b6573161bc1a61a64e4cb5b4eb5a6b987314f3"
+      },
+      "connection_2_out": {
+        "size": 261636,
+        "sha256": "75b8bfbef1949f46efa9b629717a429c7e744a9835bc1b8d29fadae599be741a"
+      }
+    }
+  },
+  "render_result": {
+    "observed": true,
+    "screen": "green tiled world with player HUD and status icons",
+    "screenshot_sha256": "fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e",
+    "captured_while_game_socket_was_open": true,
+    "heartbeat_frames_observed": true
+  },
+  "fixture_provenance": {
+    "target_revision_match": false,
+    "description": "The map and package files came from local cached Graal4 data outside this repository. The level containers were generated privately by re-keying a local black.nw-14900.code container while preserving its decoded board stream.",
+    "source_level_sha256": "7acaf6788f5cabeef9b349ea531552c2956b71710daf6efe6cfd63b497b76641",
+    "generated_level_sha256": {
+      "main_aa-02.nw-14900.code": "887f9aa2a2a44dfa4d9a5da9c98a4a8d0998798609c6cca8f530286945369177",
+      "main_ab-01.nw-14900.code": "23b6919682d05c7db550995f8f7ab000a1e2efdf6ec37d2d11f417f32c200d32",
+      "main_ab-02.nw-14900.code": "f001f9da7d67dc209a607aacb769dd37a7b2c2f79bd67e037350680a5037f821"
+    },
+    "package_hashes": {
+      "basepackage.gupd": "e0e0c0c77a576152a7f4d3c145aa6154c22e95ae89a89635b6e64740897d16bb",
+      "login.gupd": "92e0b3486155a9b17bb15b52bb09535d3eca4bc8ddb0aaf1d342ee62c440921b",
+      "levels.gupd": "5a84efdb8dee59805c3288520eace08cbe566621dd1b9162fa15f3faf69d815d",
+      "sounds.gupd": "da37ec80f23b7f851daac2be36937085d9197e6918555795eacee9e60478bc18",
+      "videocompression.gupd": "3cacc6e8a38a14dbd39d9948e8d88c5e0dbe2e346f44cd3b99d0bf33ba4e16e4",
+      "fonts.gupd": "b07696d5ffe3901e794a988bd0aed1e8f6a26064071155e7102709e50519764b",
+      "images.gupd": "1eb1db69e12abbc5039de39240052f4ab343cabeaaffdd4684ea5d6eb8838e80"
+    }
+  },
+  "what_this_proves": [
+    "The ARM64 diagnostic build can complete the encrypted local game handshake.",
+    "The native resource path accepts the map, package metadata, tile sheet, and encrypted level containers.",
+    "The normal translated ARM64 render path can display the world and HUD when the loading-state candidate is present."
+  ],
+  "not_proven": [
+    "A live connector or game-server login.",
+    "That these cached fixtures match the APK's original server revision.",
+    "That the loading-state candidate is the correct production repair on physical ARM64 hardware.",
+    "That the current service still accepts the 2019 client and its trust or package chain."
+  ],
+  "raw_data_policy": "Raw packet captures, APKs, certificates, keys, maps, images, and level bodies remain outside the repository. This artifact records metadata and hashes only."
+}

@@ -1128,3 +1128,28 @@ The callback at `0x0e1350` is registered as `setmusicvolume`, loads two doubles,
 and tail-calls `TSounds::setMusicVolume`. They are included in the candidate
 artifact as `TSounds_stopSounds` and `TSounds_setMusicVolume`, bringing the
 unapplied plan to 27 entries.
+
+## Held-connection ARM64 resource replay
+
+The runtime path was revisited after the offline sound-table pass. The earlier
+fixture staging directory had been cleaned up, so a private fixture root was
+rebuilt from local cached Graal4 data. The map was copied under the protocol
+name `classiciphone.gmap`. Because that map names three `main_*.nw` levels, the
+local level helper re-keyed one cached `black.nw-14900.code` container into
+matching `main_aa-02.nw-14900.code`, `main_ab-01.nw-14900.code`, and
+`main_ab-02.nw-14900.code` files. No fixture body was added to the repository.
+
+The ARM64-only diagnostic APK then made two game connections through the
+x86_64 emulator's ARM64 translation layer. The second connection accepted the
+map, `login.gupd`, all three encrypted level containers, `pics1.png`, and the
+remaining package metadata. The responder sent the map transition again after
+the map file, and the client continued with packet-24 heartbeats. A screenshot
+taken while the socket was open shows the green tiled world, HUD, and status
+icons. The screenshot SHA-256 is
+`fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`.
+
+This closes the local resource-loader and draw-path gap for a matching set of
+encrypted test containers. It does not establish that the local cache matches
+the APK's original server revision, and it does not prove live authentication.
+The packet, fixture, and capture hashes are kept in
+`artifacts/arm64_local_fixture_render_replay.json`.

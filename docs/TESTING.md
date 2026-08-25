@@ -534,6 +534,26 @@ fixture does not require bypassing the native package-signature result. It
 does not validate the current service, and the certificate and loopback
 patches remain diagnostic controls.
 
+## Held-connection encrypted-level replay
+
+The latest ARM64 checkpoint used the same local-only responder with a private
+fixture root. The map was copied under `classiciphone.gmap`, and the level
+helper re-keyed a cached `black.nw-14900.code` container into matching files
+for the three level names emitted by that map. The responder sent packet 49
+again after the map response, served the encrypted containers through packet
+102, and held the second connection open while the emulator was captured.
+
+The client accepted the map, `login.gupd`, all three level containers,
+`pics1.png`, and the package metadata, then sent packet-24 heartbeats. The
+captured frame showed the green tiled world, HUD, and status icons. The
+screen hash was
+`fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`.
+
+This test uses cached local inputs and does not claim that they match the live
+server's revision. The full capture and fixture hash record is in
+`artifacts/arm64_local_fixture_render_replay.json`. Keep the raw captures and
+fixture bodies private.
+
 ## What counts as a successful test
 
 There are four separate milestones:
