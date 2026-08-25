@@ -175,6 +175,11 @@ This is the short handoff view. The full reasoning and command history are in
     call sites, the two post-startup setter paths, the `sigcheck` clear, the
     render-loop branch, and packet-190's no-write behavior. The active IDB has
     matching comments at those addresses.
+32. The latest file-scripting checkpoint added 22 labels from the table at
+    `0x376bd0`, installed by `TFileScripting_initStaticScriptVars` at
+    `0xfd1d0`. The cumulative semantic-label artifact now contains 467 entries,
+    while the complete IDA inventory remains 11,272 functions. The next zlib
+    and static-state names are recorded separately as un-applied candidates.
 
 ## Not verified
 

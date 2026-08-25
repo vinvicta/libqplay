@@ -171,6 +171,10 @@ proves the local native TLS path, not a current live certificate or service.
   applied to formerly unnamed login, file-download, handler-table, UI, TLS,
   HTTP, socket, animation, sound, network-thread, update-package, and JNI
   bridge helpers.
+* `artifacts/native_callback_candidates.json` records the next table-backed
+  callback names recovered from the zlib stream bridge and native static-state
+  helpers. These remain clearly marked as candidates until they are applied to
+  the IDA database.
 * `artifacts/inbound_handler_table.json` records the native handler-index table,
   its current function targets, and the observed packet-to-index pairs.
 * `artifacts/premium_option.json` records the complete marker bytes and the

@@ -22,6 +22,7 @@ import ida_idaapi
 import ida_name
 import ida_nalt
 import ida_segment
+import ida_xref
 import idautils
 
 
@@ -63,7 +64,16 @@ def function_flags(func):
 
 def count_xrefs_to(ea):
     try:
-        return sum(1 for _ in idautils.XrefsTo(ea, 0))
+        # xrefblk_t walks the database's native sorted xref list directly.
+        # This is substantially cheaper than constructing an idautils
+        # iterator for every one of the 11,000-plus functions.
+        block = ida_xref.xrefblk_t()
+        count = 0
+        if block.first_to(ea, 0):
+            count = 1
+            while block.next_to():
+                count += 1
+        return count
     except Exception:
         return None
 

@@ -11,7 +11,11 @@
     "ida_default_sub_functions": 1645,
     "ida_named_non_elf_functions": 1531,
     "named_function_total": 9627,
-    "new_labels_in_this_pass": 467
+    "semantic_label_total": 467
+  },
+  "latest_checkpoint": {
+    "name": "file-scripting resource bridges",
+    "labels_added": 22
   },
   "labels": [
     {

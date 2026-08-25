@@ -30,9 +30,10 @@ other analysis-created entries, so its total function count is not expected
 to equal 8,601. After the follow-up semantic pass, the original ARM64
 database reports 11,272 total functions, 9,627 with names, and 1,645 default
 `sub_` names. Those figures describe the IDA database; the 8,601 count
-describes the reproducible symbol import and rename pass. The 467 semantic labels
-are recorded separately in `artifacts/ida_semantic_labels.json`, alongside
-the earlier inferred `TClient_setSSLParameters_scriptCallback` label. None of
+describes the reproducible symbol import and rename pass. The artifact contains
+467 cumulative evidence-backed labels in `artifacts/ida_semantic_labels.json`.
+The IDB also retains the earlier inferred
+`TClient_setSSLParameters_scriptCallback` label outside that artifact. None of
 these semantic labels is part of the 8,601 original ELF symbol records.
 
 ## Naming policy
@@ -164,6 +165,15 @@ filename escaping, timestamps, folder enumeration, file content, default
 viewers, deletion, and resource decompression. The wrappers distinguish
 ordinary filesystem paths from packaged level resources, so this table is
 useful when tracing startup resource lookup and updates.
+
+A fallback disassembly pass also recovered the seven callback roles installed
+by `TStream_fillZipFunctions` at `0xf0e98`: open, read, write, tell, seek,
+close, and error. It also identified several compiler-generated static-state
+helpers for `TFiles`, `TClient`, `TSocket`, `TServerFlying`, resource link
+lists, and the restart state. These are kept in
+`artifacts/native_callback_candidates.json` as candidates, not counted among
+the 467 applied labels, until the same names are written to IDA and included
+in a fresh inventory export.
 
 The inventory was generated from the active ARM64 database by
 `tools/export_function_inventory.py`. It waits for auto-analysis, joins each

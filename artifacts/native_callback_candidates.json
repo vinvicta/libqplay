@@ -1,0 +1,161 @@
+{
+  "binary": {
+    "architecture": "arm64-v8a",
+    "libqplay_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "idb": "GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so.i64"
+  },
+  "status": "candidates_not_yet_applied_to_ida",
+  "purpose": "High-confidence names recovered from the native callback tables and compiler-generated initialization helpers. These entries are deliberately separate from ida_semantic_labels.json until the IDA database is updated.",
+  "source": [
+    "TStream_fillZipFunctions_zlib_filefunc_def_s at 0xf0e98",
+    "ARM64 disassembly of the callback bodies and nearby static initialization code",
+    "symbols/libqplay.function_inventory.json from the saved IDA database"
+  ],
+  "callbacks": [
+    {
+      "va": "0xf04ec",
+      "current_ida_name": "nullsub_2",
+      "proposed_name": "TStream_zipOpenFile",
+      "confidence": "high",
+      "evidence": [
+        "TStream_fillZipFunctions stores this address in the zopen_file slot at offset 0",
+        "The body is a single return and preserves the incoming opaque stream handle"
+      ]
+    },
+    {
+      "va": "0xf075c",
+      "current_ida_name": "sub_F075C",
+      "proposed_name": "TStream_zipReadFile",
+      "confidence": "high",
+      "evidence": [
+        "TStream_fillZipFunctions stores this address in the zread_file slot at offset 8",
+        "The wrapper calls TStream_read_void_int and returns the requested size on success, otherwise zero"
+      ]
+    },
+    {
+      "va": "0xf0564",
+      "current_ida_name": "sub_F0564",
+      "proposed_name": "TStream_zipWriteFile",
+      "confidence": "high",
+      "evidence": [
+        "TStream_fillZipFunctions stores this address in the zwrite_file slot at offset 16",
+        "The body appends the supplied bytes to the stream buffer and advances its position and end fields"
+      ]
+    },
+    {
+      "va": "0xf04f0",
+      "current_ida_name": "sub_F04F0",
+      "proposed_name": "TStream_zipTellFile",
+      "confidence": "high",
+      "evidence": [
+        "TStream_fillZipFunctions stores this address in the ztell_file slot at offset 24",
+        "The body returns the current stream position"
+      ]
+    },
+    {
+      "va": "0xf04f8",
+      "current_ida_name": "sub_F04F8",
+      "proposed_name": "TStream_zipSeekFile",
+      "confidence": "high",
+      "evidence": [
+        "TStream_fillZipFunctions stores this address in the zseek_file slot at offset 32",
+        "The body implements origin zero, current-position, and end-relative seeks and returns -1 for an invalid origin"
+      ]
+    },
+    {
+      "va": "0xf0548",
+      "current_ida_name": "sub_F0548",
+      "proposed_name": "TStream_zipCloseFile",
+      "confidence": "high",
+      "evidence": [
+        "TStream_fillZipFunctions stores this address in the zclose_file slot at offset 40",
+        "The body returns zero without taking ownership of the stream"
+      ]
+    },
+    {
+      "va": "0xf0550",
+      "current_ida_name": "sub_F0550",
+      "proposed_name": "TStream_zipErrorFile",
+      "confidence": "high",
+      "evidence": [
+        "TStream_fillZipFunctions stores this address in the zerror_file slot at offset 48",
+        "The body returns zero, indicating no stream error"
+      ]
+    },
+    {
+      "va": "0xf0558",
+      "current_ida_name": "sub_F0558",
+      "proposed_name": "TStream_clearStaticString38CA10",
+      "confidence": "medium",
+      "evidence": [
+        "The body calls TString::clear on the native static object at 0x38ca10",
+        "The callback sits immediately beside the zlib stream helpers"
+      ]
+    },
+    {
+      "va": "0xe04d4",
+      "current_ida_name": "sub_E04D4",
+      "proposed_name": "TFiles_clearStaticPaths",
+      "confidence": "high",
+      "evidence": [
+        "The body clears TFiles::sdcardpath, baseuserfolder, basedatafolder2, and basedatafolder"
+      ]
+    },
+    {
+      "va": "0xe05ec",
+      "current_ida_name": "sub_E05EC",
+      "proposed_name": "TClient_clearStaticStrings",
+      "confidence": "high",
+      "evidence": [
+        "The body clears the login account, current package and file, disconnect reason, ghost message, warp, and server-level strings"
+      ]
+    },
+    {
+      "va": "0xe0680",
+      "current_ida_name": "sub_E0680",
+      "proposed_name": "TSocket_clearStaticStrings",
+      "confidence": "high",
+      "evidence": [
+        "The body clears TSocket::allowedportsbind and TSocket::allowedsocketsconnect"
+      ]
+    },
+    {
+      "va": "0xe06a8",
+      "current_ida_name": "sub_E06A8",
+      "proposed_name": "TServerFlying_clearStaticStrings",
+      "confidence": "high",
+      "evidence": [
+        "The body clears three adjacent TString objects used by TServerFlying::animate"
+      ]
+    },
+    {
+      "va": "0xe06d8",
+      "current_ida_name": "sub_E06D8",
+      "proposed_name": "TFiles_resetStaticPathPointers",
+      "confidence": "high",
+      "evidence": [
+        "The body zeros the four TFiles static TString pointers used by the path state"
+      ]
+    },
+    {
+      "va": "0xe070c",
+      "current_ida_name": "sub_E070C",
+      "proposed_name": "TResource_initializeLinkLists",
+      "confidence": "high",
+      "evidence": [
+        "The body allocates two 0x28-byte THashList objects",
+        "The objects are stored in TResourceFileLink::links and TResourceObjectLink::links"
+      ]
+    },
+    {
+      "va": "0xe0814",
+      "current_ida_name": "sub_E0814",
+      "proposed_name": "TClientEnvironment_clearRestartState",
+      "confidence": "high",
+      "evidence": [
+        "The body zeros fullexepath, servername_saveforrestart, and serveraddr_saveforrestart"
+      ]
+    }
+  ],
+  "network_contacted": false
+}

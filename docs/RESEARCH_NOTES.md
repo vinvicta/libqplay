@@ -59,8 +59,8 @@ incoming references, flags, and source category. The `sub_` rows are not
 missing from the archive; they are unnamed because this stripped portion of
 the file provides no reliable semantic name for them.
 
-A focused follow-up pass did recover reliable behavior names for 467 of those
-IDA-created functions. The labels cover the two server-login callbacks, the
+The cumulative follow-up artifact now records reliable behavior names for 467
+of those IDA-created functions. The labels cover the two server-login callbacks, the
 packet-190 server-list completion wrapper, file-download bookkeeping, the
 inbound handler-table loader and clearer, weapon and encrypted-script updates,
 level and map transitions, player login and logout, NPC movement and
@@ -142,6 +142,19 @@ viewers, deletion, and decompression. The bodies also preserve an important
 runtime distinction: paths with explicit filesystem components use `TFiles`,
 while packaged level content is resolved through `TResourceFunctions` and
 `TResourceObject`.
+
+The next native naming anchor is the zlib bridge. The disassembly of
+`TStream_fillZipFunctions` at `0xf0e98` writes seven function pointers into
+the standard callback layout. The targets at `0xf075c`, `0xf0564`, `0xf04f0`,
+`0xf04f8`, `0xf0548`, and `0xf0550` are respectively the read, write, tell,
+seek, close, and error callbacks. The slot at `0xf04ec` is an identity open
+callback that returns the opaque stream handle. This explains how packaged
+resource decompression can use the in-memory `TStream` implementation without
+opening a second file descriptor. Nearby compiler-generated helpers clear
+static path, client, socket, and flying-object strings, initialize the two
+resource-link hash lists, and clear restart state. The complete candidate list
+is kept separate in `artifacts/native_callback_candidates.json` until the IDA
+bridge accepts the corresponding rename batch.
 
 The latest native audit extends the same evidence standard beyond the packet
 core. It labels the `TGraalConnection` and `THTTPRequest` accessors used by
