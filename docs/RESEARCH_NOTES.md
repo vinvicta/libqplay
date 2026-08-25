@@ -59,7 +59,7 @@ incoming references, flags, and source category. The `sub_` rows are not
 missing from the archive; they are unnamed because this stripped portion of
 the file provides no reliable semantic name for them.
 
-A focused follow-up pass did recover reliable behavior names for 311 of those
+A focused follow-up pass did recover reliable behavior names for 317 of those
 IDA-created functions. The labels cover the two server-login callbacks, the
 packet-190 server-list completion wrapper, file-download bookkeeping, the
 inbound handler-table loader and clearer, weapon and encrypted-script updates,
@@ -86,6 +86,19 @@ keyboard, device-model, and OS-version paths. `JNI_onScriptFunctionCall` at
 resolving the Java video method. The two cache-string setters at `0x2401f4`
 and `0x240204` remain unnamed because their semantic caller names are not yet
 proven.
+
+The sound subsystem provided another useful static naming anchor. The native
+`THashList::encodesimple` routine at `0xe9f60` transforms registered script
+names before they enter the encoded hash table. Applying that transform in
+reverse to the `TSounds_initStaticScriptVars` table identifies the wrappers
+for `play2`, `playlooped`, `playlooped2`, `setsoundpitch`, and
+`setsoundpitchbynote`. Their bodies confirm the names: the first group either
+uses the active action NPC or explicit world coordinates, and the pitch helper
+converts note and octave strings into a twelve-tone frequency ratio. The
+neighboring wrapper at `0xe2008` is labeled `TSounds_script_play` from the
+play and `play2` table pair plus its action-NPC-centered behavior. This is a
+semantic alias, not a claim that the stripped function retained a C++ source
+symbol.
 
 The latest native audit extends the same evidence standard beyond the packet
 core. It labels the `TGraalConnection` and `THTTPRequest` accessors used by

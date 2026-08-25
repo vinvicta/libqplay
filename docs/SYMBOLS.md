@@ -30,7 +30,7 @@ other analysis-created entries, so its total function count is not expected
 to equal 8,601. After the follow-up semantic pass, the original ARM64
 database reports 11,271 total functions, 9,471 with names, and 1,800 default
 `sub_` names. Those figures describe the IDA database; the 8,601 count
-describes the reproducible symbol import and rename pass. The 311 semantic labels
+describes the reproducible symbol import and rename pass. The 317 semantic labels
 are recorded separately in `artifacts/ida_semantic_labels.json`, alongside
 the earlier inferred `TClient_setSSLParameters_scriptCallback` label. None of
 these semantic labels is part of the 8,601 original ELF symbol records.
@@ -101,8 +101,8 @@ land on IDA functions. IDA's analysis adds 11,271 function starts in total:
 | Function source | Count |
 | --- | ---: |
 | Backed by a translated ELF symbol | 8,096 |
-| IDA default `sub_` names | 1,800 |
-| Named by IDA but not backed by an ELF record | 1,375 |
+| IDA default `sub_` names | 1,794 |
+| Named by IDA but not backed by an ELF record | 1,381 |
 | Total IDA functions | 11,271 |
 
 The complete address-level inventory is in
@@ -121,6 +121,14 @@ URL, keyboard, and device-information bridges, plus
 `JNI_setVideoPlayerRectangle` at `0x242df0`. Two string-cache setters at
 `0x2401f4` and `0x240204` remain address-based `sub_` entries because their
 caller contract is not yet recovered.
+
+The sound script table is also partly recovered. The wrappers at
+`0xe1e0c`, `0xe22e8`, `0xe24c4`, `0xe2858`, and `0xe2a7c` now carry
+script-prefixed aliases for `play2`, `playlooped2`, `playlooped`,
+`setsoundpitchbynote`, and `setsoundpitch`. The adjacent `0xe2008` wrapper is
+labeled `TSounds_script_play` from its position in the play overload pair and
+its action-NPC-centered behavior. The table names are encoded with the native
+`THashList::encodesimple` transform, which is recorded in the research notes.
 
 The inventory was generated from the active ARM64 database by
 `tools/export_function_inventory.py`. It waits for auto-analysis, joins each

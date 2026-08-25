@@ -3653,16 +3653,16 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 924944,TSounds_playsimple_TString_const,elf_symbol,function,_ZN7TSounds10playsimpleERK7TString,TSounds::playsimple(TString const&),TSounds_playsimple_TString_const,.text,80,4,5120,False,False,False
 925024,TSounds_playsimple_TString_const_double,elf_symbol,function,_ZN7TSounds10playsimpleERK7TStringd,"TSounds::playsimple(TString const&,double)",TSounds_playsimple_TString_const_double,.text,84,4,5120,False,False,False
 925108,TSounds_playsimple_TString_const_double_double,elf_symbol,function,_ZN7TSounds10playsimpleERK7TStringdd,"TSounds::playsimple(TString const&,double,double)",TSounds_playsimple_TString_const_double_double,.text,88,4,5120,False,False,False
-925196,sub_E1E0C,ida_default_sub,,,,,.text,508,1,5120,False,False,True
-925704,sub_E2008,ida_default_sub,,,,,.text,636,1,5120,False,False,True
+925196,TSounds_script_play2,ida_named_non_elf,,,,,.text,508,1,5120,False,False,False
+925704,TSounds_script_play,ida_named_non_elf,,,,,.text,636,1,5120,False,False,False
 926340,TSounds_playabs_TString_const_bool_double_double,elf_symbol,function,_ZN7TSounds7playabsERK7TStringbdd,"TSounds::playabs(TString const&,bool,double,double)",TSounds_playabs_TString_const_bool_double_double,.text,12,1,5120,False,False,False
 926352,TSounds_playsimplelooped_TString_const_double_double,elf_symbol,function,_ZN7TSounds16playsimpleloopedERK7TStringdd,"TSounds::playsimplelooped(TString const&,double,double)",TSounds_playsimplelooped_TString_const_double_double,.text,88,4,5120,False,False,False
-926440,sub_E22E8,ida_default_sub,,,,,.text,476,1,5120,False,False,True
-926916,sub_E24C4,ida_default_sub,,,,,.text,256,1,5120,False,False,True
+926440,TSounds_script_playLooped2,ida_named_non_elf,,,,,.text,476,1,5120,False,False,False
+926916,TSounds_script_playLooped,ida_named_non_elf,,,,,.text,256,1,5120,False,False,False
 927172,TSounds_play_TString_const_double_double,elf_symbol,function,_ZN7TSounds4playERK7TStringdd,"TSounds::play(TString const&,double,double)",TSounds_play_TString_const_double_double,.text,612,4,5120,False,False,False
 927784,TSounds_setSoundPitch_TString_const_float,elf_symbol,function,_ZN7TSounds13setSoundPitchERK7TStringf,"TSounds::setSoundPitch(TString const&,float)",TSounds_setSoundPitch_TString_const_float,.text,48,4,5120,False,False,False
-927832,sub_E2858,ida_default_sub,,,,,.text,548,1,5120,False,False,True
-928380,sub_E2A7C,ida_default_sub,,,,,.text,12,1,5120,False,False,True
+927832,TSounds_script_setSoundPitchByNote,ida_named_non_elf,,,,,.text,548,1,5120,False,False,False
+928380,TSounds_script_setSoundPitch,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 928392,TSounds_initStaticVars_void,elf_symbol,function,_Z22TSounds_initStaticVarsv,TSounds_initStaticVars(void),TSounds_initStaticVars_void,.text,76,4,5120,False,False,False
 928468,TSounds_initStaticScriptVars_void,elf_symbol,function,_Z28TSounds_initStaticScriptVarsv,TSounds_initStaticScriptVars(void),TSounds_initStaticScriptVars_void,.text,56,4,5120,False,False,False
 928524,sub_E2B0C,ida_default_sub,,,,,.text,16,2,5120,False,False,True
