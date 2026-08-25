@@ -59,7 +59,7 @@ incoming references, flags, and source category. The `sub_` rows are not
 missing from the archive; they are unnamed because this stripped portion of
 the file provides no reliable semantic name for them.
 
-A focused follow-up pass did recover reliable behavior names for 317 of those
+A focused follow-up pass did recover reliable behavior names for 323 of those
 IDA-created functions. The labels cover the two server-login callbacks, the
 packet-190 server-list completion wrapper, file-download bookkeeping, the
 inbound handler-table loader and clearer, weapon and encrypted-script updates,
@@ -99,6 +99,15 @@ neighboring wrapper at `0xe2008` is labeled `TSounds_script_play` from the
 play and `play2` table pair plus its action-NPC-centered behavior. This is a
 semantic alias, not a claim that the stripped function retained a C++ source
 symbol.
+
+The same encoded-table method recovered the environment wrappers. The
+`TEncryption_initStaticScriptVars` table at `0x376498` maps `md5` to
+`0xe5d6c`, where the wrapper calls `TEncryption::getMD5Digest`. The game
+environment table maps `adventure_quit` to `0xe9d1c`, which sets
+`closeapplication`, and maps both `getclassicversion` and
+`getgamesubversion` to `0xe9d30`, which returns `googleplay`. The
+identification table maps `adventure_getosid`, `adventure_getnetworkid`, and
+`adventure_getsystemid` to wrappers around the corresponding native methods.
 
 The latest native audit extends the same evidence standard beyond the packet
 core. It labels the `TGraalConnection` and `THTTPRequest` accessors used by

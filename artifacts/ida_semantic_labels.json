@@ -8,10 +8,10 @@
   "policy": "These aliases are analysis labels, not recovered source names. The evidence is recorded so a later pass can correct a label without confusing it with an imported ELF symbol.",
   "inventory_after_labels": {
     "total_functions": 11271,
-    "ida_default_sub_functions": 1794,
-    "ida_named_non_elf_functions": 1381,
-    "named_function_total": 9477,
-    "new_labels_in_this_pass": 317
+    "ida_default_sub_functions": 1788,
+    "ida_named_non_elf_functions": 1387,
+    "named_function_total": 9483,
+    "new_labels_in_this_pass": 323
   },
   "labels": [
     {
@@ -1915,6 +1915,42 @@
       "name": "TSounds_script_setSoundPitchByNote",
       "confidence": "high",
       "evidence": ["The encoded script-function table entry at 0x376468 decodes to setsoundpitchbynote", "Parses note names and octave numbers, then applies the twelve-tone frequency ratio"]
+    },
+    {
+      "va": "0xe5d6c",
+      "name": "TEncryption_script_md5",
+      "confidence": "high",
+      "evidence": ["The encoded script-function table entry at 0x3764f8 decodes to md5", "Forwards the supplied TString to TEncryption::getMD5Digest"]
+    },
+    {
+      "va": "0xe9d1c",
+      "name": "TGameEnvironment_script_adventureQuit",
+      "confidence": "high",
+      "evidence": ["The encoded script-function table entry at 0x3767b0 decodes to adventure_quit", "Sets TGameEnvironment::closeapplication to 1"]
+    },
+    {
+      "va": "0xe9d30",
+      "name": "TGameEnvironment_script_getGooglePlay",
+      "confidence": "high",
+      "evidence": ["The same wrapper is registered for getclassicversion and getgamesubversion", "Returns the literal googleplay"]
+    },
+    {
+      "va": "0xec6d8",
+      "name": "TIdentification_script_getOSID",
+      "confidence": "high",
+      "evidence": ["The encoded script-function table entry at 0x3768d0 decodes to adventure_getosid", "Calls TIdentification::getOSID"]
+    },
+    {
+      "va": "0xec270",
+      "name": "TIdentification_script_getNetworkID",
+      "confidence": "high",
+      "evidence": ["The encoded script-function table entry at 0x376900 decodes to adventure_getnetworkid", "Calls TIdentification::getNetworkID"]
+    },
+    {
+      "va": "0xec7ac",
+      "name": "TIdentification_script_getSystemID",
+      "confidence": "high",
+      "evidence": ["The encoded script-function table entry at 0x376930 decodes to adventure_getsystemid", "Calls TIdentification::getSystemID with the native selector"]
     }
   ],
   "network_contacted": false

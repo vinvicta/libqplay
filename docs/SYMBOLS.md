@@ -28,9 +28,9 @@ The translation count is the number of ELF symbol records handled by the
 script. IDA's function survey also reports compiler-generated functions and
 other analysis-created entries, so its total function count is not expected
 to equal 8,601. After the follow-up semantic pass, the original ARM64
-database reports 11,271 total functions, 9,471 with names, and 1,800 default
+database reports 11,271 total functions, 9,483 with names, and 1,788 default
 `sub_` names. Those figures describe the IDA database; the 8,601 count
-describes the reproducible symbol import and rename pass. The 317 semantic labels
+describes the reproducible symbol import and rename pass. The 323 semantic labels
 are recorded separately in `artifacts/ida_semantic_labels.json`, alongside
 the earlier inferred `TClient_setSSLParameters_scriptCallback` label. None of
 these semantic labels is part of the 8,601 original ELF symbol records.
@@ -101,8 +101,8 @@ land on IDA functions. IDA's analysis adds 11,271 function starts in total:
 | Function source | Count |
 | --- | ---: |
 | Backed by a translated ELF symbol | 8,096 |
-| IDA default `sub_` names | 1,794 |
-| Named by IDA but not backed by an ELF record | 1,381 |
+| IDA default `sub_` names | 1,788 |
+| Named by IDA but not backed by an ELF record | 1,387 |
 | Total IDA functions | 11,271 |
 
 The complete address-level inventory is in
@@ -129,6 +129,12 @@ script-prefixed aliases for `play2`, `playlooped2`, `playlooped`,
 labeled `TSounds_script_play` from its position in the play overload pair and
 its action-NPC-centered behavior. The table names are encoded with the native
 `THashList::encodesimple` transform, which is recorded in the research notes.
+
+The environment tables now also expose the remaining script wrappers in this
+region: `md5`, `adventure_quit`, the shared `googleplay` version helper, and
+the OS, network, and system identification calls. These aliases preserve the
+script-facing names with a `script` component so they are not confused with
+the underlying C++ methods.
 
 The inventory was generated from the active ARM64 database by
 `tools/export_function_inventory.py`. It waits for auto-analysis, joins each

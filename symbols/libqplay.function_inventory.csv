@@ -3757,7 +3757,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 940968,TEncryption_des_decryptmemory_uchar_const_uchar_uint,elf_symbol,function,_ZN11TEncryption17des_decryptmemoryEPKhPhj,"TEncryption::des_decryptmemory(uchar const*,uchar *,uint)",TEncryption_des_decryptmemory_uchar_const_uchar_uint,.text,124,4,5120,False,False,False
 941092,TEncryption_des_decrypt_TString_const_TString_const,elf_symbol,function,_ZN11TEncryption11des_decryptERK7TStringS2_,"TEncryption::des_decrypt(TString const&,TString const&)",TEncryption_des_decrypt_TString_const_TString_const,.text,236,5,5120,False,False,False
 941328,TEncryption_getMD5Digest_TString_const,elf_symbol,function,_ZN11TEncryption12getMD5DigestERK7TString,TEncryption::getMD5Digest(TString const&),TEncryption_getMD5Digest_TString_const,.text,92,4,5120,False,False,False
-941420,sub_E5D6C,ida_default_sub,,,,,.text,32,1,5120,False,False,True
+941420,TEncryption_script_md5,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
 941452,TEncryption_getencode_TString_const_TString_const,elf_symbol,function,_ZN11TEncryption9getencodeERK7TStringS2_,"TEncryption::getencode(TString const&,TString const&)",TEncryption_getencode_TString_const_TString_const,.text,520,1,5120,False,False,False
 941972,TEncryption_getdecode_TString_const_TString_const,elf_symbol,function,_ZN11TEncryption9getdecodeERK7TStringS2_,"TEncryption::getdecode(TString const&,TString const&)",TEncryption_getdecode_TString_const_TString_const,.text,364,1,5120,False,False,False
 942336,TEncryption_saveCodedFile_TStream_TString_const,elf_symbol,function,_ZN11TEncryption13saveCodedFileEP7TStreamRK7TString,"TEncryption::saveCodedFile(TStream *,TString const&)",TEncryption_saveCodedFile_TStream_TString_const,.text,492,4,5120,False,False,False
@@ -3819,8 +3819,8 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 957688,sub_E9CF8,ida_default_sub,,,,,.text,20,1,5120,False,False,True
 957708,TGameEnvironment_isPremiumVersion_void,elf_symbol,function,_ZN16TGameEnvironment16isPremiumVersionEv,TGameEnvironment::isPremiumVersion(void),TGameEnvironment_isPremiumVersion_void,.text,8,2,5120,False,False,False
 957716,TGameEnvironment_isDemoVersion_void,elf_symbol,function,_ZN16TGameEnvironment13isDemoVersionEv,TGameEnvironment::isDemoVersion(void),TGameEnvironment_isDemoVersion_void,.text,8,2,5120,False,False,False
-957724,sub_E9D1C,ida_default_sub,,,,,.text,20,1,5120,False,False,True
-957744,sub_E9D30,ida_default_sub,,,,,.text,52,2,5120,False,False,True
+957724,TGameEnvironment_script_adventureQuit,ida_named_non_elf,,,,,.text,20,1,5120,False,False,False
+957744,TGameEnvironment_script_getGooglePlay,ida_named_non_elf,,,,,.text,52,2,5120,False,False,False
 957796,TGameEnvironment_getPremiumOption_void,elf_symbol,function,_ZN16TGameEnvironment16getPremiumOptionEv,TGameEnvironment::getPremiumOption(void),TGameEnvironment_getPremiumOption_void,.text,104,5,5120,False,False,False
 957900,TGameEnvironment_getApplicationIdentifier_void,elf_symbol,function,_ZN16TGameEnvironment24getApplicationIdentifierEv,TGameEnvironment::getApplicationIdentifier(void),TGameEnvironment_getApplicationIdentifier_void,.text,52,4,5120,False,False,False
 957952,TGameEnvironment_initStaticVars_void,elf_symbol,function,_Z31TGameEnvironment_initStaticVarsv,TGameEnvironment_initStaticVars(void),TGameEnvironment_initStaticVars_void,.text,284,4,5120,False,False,False
@@ -3900,16 +3900,16 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 967000,TIdentification_getMacAddressBuffer_void,elf_symbol,function,_ZN15TIdentification19getMacAddressBufferEv,TIdentification::getMacAddressBuffer(void),TIdentification_getMacAddressBuffer_void,.text,116,4,5120,False,False,False
 967116,TIdentification_retrieveMACAddress_bool,elf_symbol,function,_ZN15TIdentification18retrieveMACAddressEb,TIdentification::retrieveMACAddress(bool),TIdentification_retrieveMACAddress_bool,.text,80,4,5120,False,False,False
 967196,TIdentification_getNetworkID_void,elf_symbol,function,_ZN15TIdentification12getNetworkIDEv,TIdentification::getNetworkID(void),TIdentification_getNetworkID_void,.text,84,4,5120,False,False,False
-967280,sub_EC270,ida_default_sub,,,,,.text,32,1,5120,False,False,True
+967280,TIdentification_script_getNetworkID,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
 967312,TIdentification_getCookieFilename_void,elf_symbol,function,_ZN15TIdentification17getCookieFilenameEv,TIdentification::getCookieFilename(void),TIdentification_getCookieFilename_void,.text,344,4,5120,False,False,False
 967656,TIdentification_getCookie_void,elf_symbol,function,_ZN15TIdentification9getCookieEv,TIdentification::getCookie(void),TIdentification_getCookie_void,.text,156,4,5120,False,False,False
 967812,TIdentification_generateCookie_void,elf_symbol,function,_ZN15TIdentification14generateCookieEv,TIdentification::generateCookie(void),TIdentification_generateCookie_void,.text,104,4,5120,False,False,False
 967916,TIdentification_setCookie_TString_const,elf_symbol,function,_ZN15TIdentification9setCookieERK7TString,TIdentification::setCookie(TString const&),TIdentification_setCookie_TString_const,.text,172,4,5120,False,False,False
 968088,TIdentification_getHarddiskID_void,elf_symbol,function,_ZN15TIdentification13getHarddiskIDEv,TIdentification::getHarddiskID(void),TIdentification_getHarddiskID_void,.text,132,4,5120,False,False,False
 968220,TIdentification_getOSID_void,elf_symbol,function,_ZN15TIdentification7getOSIDEv,TIdentification::getOSID(void),TIdentification_getOSID_void,.text,188,4,5120,False,False,False
-968408,sub_EC6D8,ida_default_sub,,,,,.text,32,1,5120,False,False,True
+968408,TIdentification_script_getOSID,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
 968440,TIdentification_getSystemID_int,elf_symbol,function,_ZN15TIdentification11getSystemIDEi,TIdentification::getSystemID(int),TIdentification_getSystemID_int,.text,180,4,5120,False,False,False
-968620,sub_EC7AC,ida_default_sub,,,,,.text,32,1,5120,False,False,True
+968620,TIdentification_script_getSystemID,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
 968652,TIdentification_initStaticScriptVars_void,elf_symbol,function,_Z36TIdentification_initStaticScriptVarsv,TIdentification_initStaticScriptVars(void),TIdentification_initStaticScriptVars_void,.text,20,4,5120,False,False,False
 968672,TList_setCapacity_int,elf_symbol,function,_ZN5TList11setCapacityEi,TList::setCapacity(int),TList_setCapacity_int,.text,124,4,5120,False,False,False
 968796,TList_Add_void,elf_symbol,function,_ZN5TList3AddEPv,TList::Add(void *),TList_Add_void,.text,92,4,5120,False,False,False
