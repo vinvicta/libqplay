@@ -269,6 +269,28 @@
         "The body returns TStringList::GetCommaText2 from that global through the script callback return convention",
         "The encoded property name in the table corresponds to disabledsoundeffects"
       ]
+    },
+    {
+      "va": "0xe0fa8",
+      "current_ida_name": "sub_E0FA8",
+      "proposed_name": "TSounds_stopSounds",
+      "confidence": "high",
+      "evidence": [
+        "The TSounds_initStaticScriptVars function table at 0x3760d8 registers this callback under the encoded script name stopsounds",
+        "The body moves the incoming boolean to the second argument, forces the first argument to true, and tail-calls TSounds::stopSFXs(bool, bool)",
+        "The short wrapper is distinct from the exported TSounds::stopSFXs implementation and is used as the script-facing stop-all-sounds entry"
+      ]
+    },
+    {
+      "va": "0xe1350",
+      "current_ida_name": "sub_E1350",
+      "proposed_name": "TSounds_setMusicVolume",
+      "confidence": "high",
+      "evidence": [
+        "The TSounds_initStaticScriptVars function table at 0x376228 registers this callback under the encoded script name setmusicvolume",
+        "The wrapper loads two double arguments from the script callback buffers and tail-calls TSounds::setMusicVolume(double, double)",
+        "The callback is the function target in the table record at 0x376240"
+      ]
     }
   ],
   "network_contacted": false

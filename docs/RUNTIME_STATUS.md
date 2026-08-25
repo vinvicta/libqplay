@@ -204,7 +204,9 @@ This is the short handoff view. The full reasoning and command history are in
     `getmusicfilename`. The property pair at `0xe0c84` and `0xe0c70` uses
     `TSounds::disabledsoundeffects` through slot `0x374cb0` and calls the
     comma-text getter and setter. These three names are recorded as unapplied
-    candidates, bringing the plan to 25 entries. No live endpoint was
+    candidates. The same table supplies `stopsounds` at `0xe0fa8` and
+    `setmusicvolume` at `0xe1350`; their wrappers forward to the exported
+    sound methods. The expanded plan now contains 27 entries. No live endpoint was
     contacted.
 
 ## Not verified

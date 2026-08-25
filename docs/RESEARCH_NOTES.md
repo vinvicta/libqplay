@@ -1120,3 +1120,11 @@ The adjacent property entry uses GOT slot `0x374cb0`, which resolves to
 under `sound_table_followup`. They bring the unapplied candidate plan to 25
 entries. The previous TServerList interpretation was not applied to IDA and is
 not retained in the candidate artifact.
+
+The same table also gives two short wrappers with unambiguous roles. The
+callback at `0x0e0fa8` is registered as `stopsounds`; it forces the first
+`TSounds::stopSFXs` flag and forwards the caller's boolean as the second flag.
+The callback at `0x0e1350` is registered as `setmusicvolume`, loads two doubles,
+and tail-calls `TSounds::setMusicVolume`. They are included in the candidate
+artifact as `TSounds_stopSounds` and `TSounds_setMusicVolume`, bringing the
+unapplied plan to 27 entries.
