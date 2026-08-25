@@ -9,6 +9,7 @@
   "source": [
     "TStream_fillZipFunctions_zlib_filefunc_def_s at 0xf0e98",
     "ARM64 disassembly of the callback bodies and nearby static initialization code",
+    "AArch64 ELF relocation records for the referenced global objects",
     "symbols/libqplay.function_inventory.json from the saved IDA database"
   ],
   "callbacks": [
@@ -154,6 +155,48 @@
       "confidence": "high",
       "evidence": [
         "The body zeros fullexepath, servername_saveforrestart, and serveraddr_saveforrestart"
+      ]
+    }
+  ],
+  "static_initializers": [
+    {
+      "va": "0xe0770",
+      "current_ida_name": "sub_E0770",
+      "proposed_name": "TDrawTexture_initializeTexturesList",
+      "confidence": "high",
+      "evidence": [
+        "The GOT relocation at 0x3756b8 resolves to TDrawTexture::textures",
+        "The body allocates and initializes a 0x18-byte list object and stores it in that global"
+      ]
+    },
+    {
+      "va": "0xe083c",
+      "current_ida_name": "sub_E083C",
+      "proposed_name": "clearCurAnis",
+      "confidence": "high",
+      "evidence": [
+        "The GOT relocation at 0x375a48 resolves to the 248-byte global curanis",
+        "The body writes zero across the complete object, including its final eight bytes"
+      ]
+    },
+    {
+      "va": "0xe08e4",
+      "current_ida_name": "sub_E08E4",
+      "proposed_name": "TOptions_initializeWindowPosition",
+      "confidence": "high",
+      "evidence": [
+        "The GOT relocation at 0x375ed8 resolves to TOptions::windowpos",
+        "The body initializes both position coordinates to -1"
+      ]
+    },
+    {
+      "va": "0xe08fc",
+      "current_ida_name": "sub_E08FC",
+      "proposed_name": "initializeDisplayedGif",
+      "confidence": "high",
+      "evidence": [
+        "The GOT relocation at 0x374cd8 resolves to the global displayedgif",
+        "The body initializes that pointer to null with a single zero store"
       ]
     }
   ],

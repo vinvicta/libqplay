@@ -180,6 +180,11 @@ This is the short handoff view. The full reasoning and command history are in
     `0xfd1d0`. The cumulative semantic-label artifact now contains 467 entries,
     while the complete IDA inventory remains 11,272 functions. The next zlib
     and static-state names are recorded separately as un-applied candidates.
+33. An offline ARM64 disassembly pass tied four more static initializers to
+    ELF relocation targets: `TDrawTexture::textures`, `curanis`,
+    `TOptions::windowpos`, and `displayedgif`. The proposed names remain
+    unapplied until the IDA bridge returns, so the public inventory and the
+    applied-label count are unchanged.
 
 ## Not verified
 

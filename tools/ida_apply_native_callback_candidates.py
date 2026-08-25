@@ -1,4 +1,4 @@
-"""Review or apply native callback candidates in the active IDA database.
+"""Review or apply native callback and static-state candidates in IDA.
 
 Run this from the IDA Pro MCP bridge with ``py_exec_file``. The default mode is
 review-only. Set ``APPLY_RENAMES = True`` after checking the printed plan. The
@@ -13,6 +13,7 @@ import ida_auto
 import ida_bytes
 import ida_funcs
 import ida_idaapi
+import ida_kernwin
 import ida_name
 
 
@@ -26,7 +27,7 @@ def load_candidates():
         document = json.load(handle)
     if document.get("status") != "candidates_not_yet_applied_to_ida":
         raise RuntimeError("candidate artifact status is not an unapplied plan")
-    return document["callbacks"]
+    return document["callbacks"] + document.get("static_initializers", [])
 
 
 def resolve_candidate(candidate):
@@ -34,8 +35,14 @@ def resolve_candidate(candidate):
     ea = ida_name.get_name_ea(ida_idaapi.BADADDR, current_name)
     if ea == ida_idaapi.BADADDR:
         return None, "current IDA name was not found"
-    if ida_funcs.get_func(ea) is None:
+    function = ida_funcs.get_func(ea)
+    if function is None:
         return None, "resolved address is not a function"
+    expected_ea = ida_kernwin.str2ea(candidate["va"])
+    if expected_ea == ida_idaapi.BADADDR:
+        return None, "candidate VA could not be resolved by IDA"
+    if function.start_ea != expected_ea:
+        return None, "current name resolves to a different function than the candidate VA"
     return ea, None
 
 

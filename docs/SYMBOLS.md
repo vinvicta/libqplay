@@ -170,15 +170,18 @@ A fallback disassembly pass also recovered the seven callback roles installed
 by `TStream_fillZipFunctions` at `0xf0e98`: open, read, write, tell, seek,
 close, and error. It also identified several compiler-generated static-state
 helpers for `TFiles`, `TClient`, `TSocket`, `TServerFlying`, resource link
-lists, and the restart state. These are kept in
+lists, the restart state, the `TDrawTexture::textures` list, `curanis`,
+`TOptions::windowpos`, and `displayedgif`. The ELF relocation records tie the
+latter four routines to their global objects, but the proposed names are still kept in
 `artifacts/native_callback_candidates.json` as candidates, not counted among
 the 467 applied labels, until the same names are written to IDA and included
 in a fresh inventory export.
 
 When the IDA bridge is available, run
 `tools/ida_apply_native_callback_candidates.py` in review mode first. It
-resolves the existing names, reports missing functions, and only writes the
-proposed names and evidence comments when `APPLY_RENAMES` is explicitly enabled.
+resolves the existing names, checks each expected function address, reports
+missing or mismatched functions, and only writes the proposed names and
+evidence comments when `APPLY_RENAMES` is explicitly enabled.
 
 The inventory was generated from the active ARM64 database by
 `tools/export_function_inventory.py`. It waits for auto-analysis, joins each

@@ -1076,3 +1076,26 @@ invokes `universe.onServerListerConnect`, and sets
 `TServerList::allowpreloginreconnects` to `-1`; it does not write the native
 loading byte. The address-level evidence is in
 `artifacts/loading_state_ownership.json`.
+
+## Offline static-initializer follow-up
+
+The IDA bridge did not answer during the next bounded health probe, so the
+symbol pass continued against the original ARM64 ELF and a local AArch64
+disassembler. Four compiler-generated routines in the early text region have
+now been tied to named global objects through the ELF relocation table rather
+than by proximity alone.
+
+* `0xe0770` creates the 0x18-byte list object stored in
+  `TDrawTexture::textures` through the relocation at `0x3756b8`.
+* `0xe083c` clears the complete 248-byte `curanis` object referenced through
+  the relocation at `0x375a48`.
+* `0xe08e4` sets both coordinates of `TOptions::windowpos` to `-1`, using the
+  relocation at `0x375ed8`.
+* `0xe08fc` initializes the `displayedgif` pointer to null through the
+  relocation at `0x374cd8`.
+
+These observations are recorded in
+`artifacts/native_callback_candidates.json` under `static_initializers`.
+The application script now reviews both candidate groups, but remains
+review-only by default. No IDA names or comments were changed during this
+offline pass, and no network endpoint was contacted.
