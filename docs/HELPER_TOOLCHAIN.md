@@ -26,6 +26,14 @@ cd /tmp/GScript.Go-HexaParser
 go test ./...
 ```
 
+The pinned checkouts have been restored in `/tmp` for this continuation. The
+current desktop thread does not have the `go` executable on its `PATH`, so the
+Go test result above remains the earlier Go 1.22.2 result rather than a new
+run. The C `contool` utility does build with the available compiler, and its
+`conn-extract` output reproduces the recorded archive hash
+`fc937afa039dff52ff4ae7f2e3ad809d75c19f5698875d862e5646644446b2b5` from the
+saved local response.
+
 The complete test run passed. The `gsbyte` package completed in about 7.5
 seconds, and the other packages reported no test files. The test run needed a
 writable Go build cache and the declared ANTLR and `x/exp` modules. It did not
