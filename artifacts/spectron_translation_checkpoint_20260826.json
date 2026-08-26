@@ -77,8 +77,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v40.i64",
-    "sha256": "6772706f004620089eb4def0d79bdebc77ce821e1340f92e798f7b0c1292d45d"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v41.i64",
+    "sha256": "b9527ad01e544f2a3e9afdd4defb46bfb625465f2581b86bfda7e7084ed41914"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -167,7 +167,8 @@
     "The thirty-fifth database revision also contains the separately reviewed GS2 script-state, top-level action, and incoming-event dispatch anchors.",
     "The thirty-sixth database revision also contains the separately reviewed GS2 scheduler, action-loop, event-object cleanup, and class-list replacement anchors.",
     "The thirty-seventh database revision also contains the separately reviewed event-object and catcher-list constructor, destructor, registration, and receive-path anchors.",
-    "The thirty-eighth database revision also contains the separately reviewed GS2 script-action constructor and destructor anchors."
+    "The thirty-eighth database revision also contains the separately reviewed GS2 script-action constructor and destructor anchors.",
+    "The thirty-ninth database revision also contains the separately reviewed GS2 stack-entry float, string, and object conversion anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -339,6 +340,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_socket_state_verify_v20.json",
     "verified_name_count": 5
+  },
+  "stack_entry_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "artifacts/spectron_stack_entry_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "196ceda39467f86ad51e6573f13ef28817023bad802a15eaf47dbcd55e6d09b3",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_stack_entry_verify_v41.json",
+    "verified_name_count": 3
   },
   "translation": {
     "ambiguous_functions": 1019,

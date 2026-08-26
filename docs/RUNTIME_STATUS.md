@@ -731,6 +731,12 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_script_action_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+101. Clean IDA review added three high-confidence `TScriptStackEntry` anchors
+     for float, string, and object conversion. All three reopened successfully
+     in the v41 disposable copy. See
+     `artifacts/spectron_stack_entry_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

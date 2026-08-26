@@ -101,6 +101,8 @@ def main() -> None:
     parser.add_argument("--event-object-verification", type=Path)
     parser.add_argument("--script-action-anchors", type=Path)
     parser.add_argument("--script-action-verification", type=Path)
+    parser.add_argument("--stack-entry-anchors", type=Path)
+    parser.add_argument("--stack-entry-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1176,6 +1178,34 @@ def main() -> None:
         result["script_action_anchors"] = script_action
         result["interpretation"].append(
             "The thirty-eighth database revision also contains the separately reviewed GS2 script-action constructor and destructor anchors."
+        )
+    stack_entry = None
+    if args.stack_entry_anchors or args.stack_entry_verification:
+        if not args.stack_entry_anchors or not args.stack_entry_verification:
+            raise ValueError(
+                "stack-entry anchors and stack-entry verification must be supplied together"
+            )
+        stack_entry_document = load(args.stack_entry_anchors)
+        stack_entry_verification = load(args.stack_entry_verification)
+        if stack_entry_document.get("artifact") != "spectron_stack_entry_manual_translation_anchors_20260826":
+            raise ValueError("unexpected stack-entry anchor artifact")
+        if not stack_entry_verification.get("verified"):
+            raise ValueError("stack-entry anchor reopen verification did not pass")
+        expected_stack_entry = len(stack_entry_document["anchors"])
+        if stack_entry_verification["verified_name_count"] != expected_stack_entry:
+            raise ValueError("stack-entry verification count differs from artifact")
+        stack_entry = {
+            "anchor_path": str(args.stack_entry_anchors),
+            "anchor_sha256": sha256_path(args.stack_entry_anchors),
+            "reopen_verification": str(args.stack_entry_verification),
+            "anchor_count": expected_stack_entry,
+            "verified_name_count": stack_entry_verification["verified_name_count"],
+            "reopen_failure_count": stack_entry_verification["failure_count"],
+        }
+    if stack_entry is not None:
+        result["stack_entry_anchors"] = stack_entry
+        result["interpretation"].append(
+            "The thirty-ninth database revision also contains the separately reviewed GS2 stack-entry float, string, and object conversion anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
