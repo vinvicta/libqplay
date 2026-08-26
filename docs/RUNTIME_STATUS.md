@@ -255,6 +255,12 @@ This is the short handoff view. The full reasoning and command history are in
     level-link properties, 17 tile-layer getter or setter targets, and the
     `updateboard` callback. The review-only candidate set now contains 277
     entries. No IDA names changed and no endpoint was contacted.
+42. A complete offline scan of direct `TScriptProperty::addProps` and
+    `addFuncs` calls found 70 property tables and 62 function tables. Their
+    1,455 declared records resolve to 1,779 unique callback targets. The map
+    identifies 825 exact new names with saved boundaries, 18 exact pointers
+    without boundaries, and 63 names requiring review. No IDA names changed
+    and no endpoint was contacted.
 
 ## Not verified
 

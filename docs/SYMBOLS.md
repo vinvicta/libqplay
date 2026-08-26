@@ -266,6 +266,21 @@ constructors are `TProjectileProperties` at `0x19ecac` and
 These three groups add 35 unique targets, raising the review-only set to 277.
 They remain unapplied until the IDA bridge is available.
 
+The complete registration scan is in `artifacts/script_table_inventory.json`.
+It finds 70 property tables and 62 function tables through direct calls to the
+two imported `TScriptProperty` registration stubs. The tables contain 678
+property records and 776 static function records, plus one dynamic Android
+registration slot. The records resolve to 1,779 unique callback targets.
+
+The inventory distinguishes 411 names already present in the semantic-label
+artifact, 258 in the curated callback candidate artifact, 204 existing
+non-default IDA names, 825 exact new names with saved function boundaries, 18
+exact pointers without saved boundaries, and 63 names that still need human
+review because of the old zero-byte encoding behavior. The exact bounded set
+has a review-only IDA applier in
+`tools/ida_apply_script_table_inventory.py`; it is not enabled while the IDA
+bridge is unavailable.
+
 When the IDA bridge is available, run
 `tools/ida_apply_native_callback_candidates.py` in review mode first. It
 resolves the existing names, checks each expected function address, reports

@@ -1327,6 +1327,39 @@ The three new groups add 35 unique native targets, raising the review-only
 candidate set from 242 to 277. No IDA names were changed during this pass, and
 no live endpoint was contacted.
 
+## Full static script-table inventory
+
+The table work was expanded from individual server classes into a complete
+offline scan of the library's direct calls to the imported
+`TScriptProperty::addProps` and `TScriptProperty::addFuncs` stubs. The scan
+found 132 registration calls: 70 property tables and 62 function tables. Their
+declared counts cover 678 property records and 777 function slots. One Android
+`onAddScriptFunction` path is dynamic and has no static table pointer, leaving
+776 function records that can be decoded directly from the binary.
+
+Every static record uses a 0x30-byte stride. The first field points to the
+script name, the property records keep their getter and setter at offsets
+0x10 and 0x18, and function records keep their callback at offset 0x18. The
+name decoder preserves ordinary literal strings and applies the inverse of
+`THashList::encodesimple` to transformed strings. It records the raw bytes and
+does not silently fill in names when a historical zero-byte replacement makes
+the result uncertain.
+
+Across those records there are 1,779 unique callback targets. The existing
+semantic-label artifact covers 411 of them, the curated callback artifact
+covers another 258, and 204 already have non-default names in the saved IDA
+inventory. The remaining 906 targets are split into 825 exact names with
+saved function boundaries, 18 exact callback pointers without saved boundaries,
+and 63 records whose names need a small human review. The full record map and
+these coverage states are in `artifacts/script_table_inventory.json`.
+
+`tools/generate_script_table_inventory.py` reproduces the map from the local
+ARM64 library and saved inventory without contacting a network. The companion
+`tools/ida_apply_script_table_inventory.py` builds a review-only rename plan
+for the 825 exact, bounded targets. It leaves uncertain names and missing
+function boundaries untouched. The IDA bridge was unavailable during this
+scan, so no database names were changed.
+
 ## Held-connection ARM64 resource replay
 
 The runtime path was revisited after the offline sound-table pass. The earlier

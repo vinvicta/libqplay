@@ -182,6 +182,13 @@ proves the local native TLS path, not a current live certificate or service.
   the native library. The current review-only set contains 242 entries. These
   remain clearly marked as candidates until they are applied to the IDA
   database.
+* `artifacts/script_table_inventory.json` records all 132 static registration
+  calls, 1,455 declared property and function records, and 1,779 unique
+  callback targets. It separates 825 exact bounded rename candidates from
+  18 exact missing boundaries and 63 names that need review.
+* `tools/generate_script_table_inventory.py` rebuilds that inventory offline;
+  `tools/ida_apply_script_table_inventory.py` creates a review-only IDA rename
+  plan for the exact bounded subset.
 * `artifacts/inbound_handler_table.json` records the native handler-index table,
   its current function targets, and the observed packet-to-index pairs.
 * `artifacts/premium_option.json` records the complete marker bytes and the
