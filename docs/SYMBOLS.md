@@ -353,9 +353,10 @@ spatial-query predicates, a player draw-list predicate, a scroll-control
 property resolver, and the actionnpc or activeplayer script-object resolver.
 The final eleven cover the flex-style animation previous-state helper, a
 generic draw-distance comparator, and the nine YAJL callbacks used by
-`TGraalVar::readJSON`. Twenty-seven candidates are high-confidence. The
-draw-distance comparator is medium-confidence because its class owner and
-direct call site were not recovered. These aliases are analysis roles, not
+`TGraalVar::readJSON`. All 28 candidates are now high-confidence role
+assignments. IDA evidence ties the comparator at `0x20ac18` to both
+`getnearestplayers` and `findnearestplayers`, which sort the runtime universe
+list before returning their results. These aliases are analysis roles, not
 recovered ELF names, and are not included in the applied semantic-label count.
 The generator verifies that the role list covers all 28 entries in the
 application or engine queue, with no missing or extra addresses.

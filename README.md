@@ -113,7 +113,7 @@ The exact result is in `artifacts/ida_translation_validation.json`.
 
 The validated names and boundaries were also persisted into a separate local
 IDA 9.3 database copy at
-`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_all.i64`. A
+`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_all_v2.i64`. A
 close-and-reopen check found all 1,211 expected names, 11,297 functions, and
 459 remaining default `sub_` entries. The 56 MB database is intentionally not
 committed to the public repository; its hash and verification status are in
@@ -254,8 +254,9 @@ proves the local native TLS path, not a current live certificate or service.
   function profile from the saved inventories and ELF section metadata.
 * `artifacts/unresolved_function_candidates.json` records 28 behavior-based
   role aliases for profiler, image-I/O, animation-lexer, spatial-query, UI,
-  script-object, folder-loader, and JSON-parser helpers. Twenty-seven are
-  high-confidence and one generic comparator is medium-confidence. They remain
+  script-object, folder-loader, and JSON-parser helpers. All 28 are
+  high-confidence role assignments, including the nearest-player comparator
+  cross-referenced from both nearest-player script wrappers. They remain
   review-only until they are applied to the matching IDA database. The
   generator also checks that the 28 roles cover the complete application or
   engine queue in the unresolved profile.
@@ -289,6 +290,8 @@ proves the local native TLS path, not a current live certificate or service.
   IDALIB and returns control to the database closer so a disposable copy can
   be saved. `tools/ida_verify_all_translations.py` reopens the copy and checks
   every prepared name and boundary without changing it.
+* `tools/ida_dump_function_evidence.py` emits read-only disassembly, incoming
+  references, and pseudocode for selected role-review functions.
 * `tools/` contains IDAPython, parsing, replay, and diagnostic patch helpers.
   `tools/encode_connector_query.py` reproduces the captured connector query
   without opening a socket. `tools/conpack_legacy_zip_compat.patch` records

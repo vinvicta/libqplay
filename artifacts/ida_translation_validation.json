@@ -10,13 +10,13 @@
     "live_ida_database_changed": false,
     "persistence_scope": "saved disposable database copy reopened and verified in a separate IDALIB process",
     "persistent_database": {
-      "path": "analysis/libqplay_translated_all.i64",
-      "sha256": "f901f73e25e97d072c79bcabc3931ff179bcd2cdd24fa0f120d5ff690719e505",
+      "path": "analysis/libqplay_translated_all_v2.i64",
+      "sha256": "0306a53f164fc9f860f24eb248039a94172959053daa6464d4a1effe35026a89",
       "format": "packed IDA 9.3 database",
       "close_reopen_verified": true,
       "inventory": {
         "path": "analysis/libqplay.function_inventory.json",
-        "sha256": "5166475d6070d9a31000d9a40309c551d950a82dffa5e03e3e794ba0cd465249",
+        "sha256": "2f9f4d2ddeeac15f52c64e5c5868190937f3559283ce19738ed576eeaa885e28",
         "total_functions": 11297,
         "functions_backed_by_elf_symbols": 8096,
         "ida_default_sub_functions": 459,

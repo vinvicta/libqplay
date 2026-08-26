@@ -207,13 +207,14 @@ CANDIDATES = [
     },
     {
         "ea": 0x20AC18,
-        "proposed_name": "compareObjectsByDistance",
-        "confidence": "medium",
-        "role": "Object comparator using draw-distance and priority tie-breaks",
+        "proposed_name": "GSFunctionsInitstaticscriptvars_compareNearestPlayers",
+        "confidence": "high",
+        "role": "Nearest-player list comparator used by getnearestplayers and findnearestplayers",
         "evidence": [
             "The body accepts two object pointers, calls each object's virtual position accessors at offsets 0x148 and 0x158, and computes squared distance from the shared draw reference at 0x390bd8.",
             "It returns -1, 0, or 1 and uses the object field at offset 0x2ec as a tie-breaker, which is consistent with a sort comparator.",
-            "IDA recorded four incoming references, but the saved static scan did not recover a direct BL call site, so the alias intentionally avoids assigning a class owner.",
+            "GSFunctionsInitstaticscriptvars_script_getnearestplayers at 0x20b580 and GSFunctionsInitstaticscriptvars_script_findnearestplayers at 0x20bb88 both pass this address to TList::Sort.",
+            "Both wrappers copy the runtime universe list from object offset 0xd8 before sorting, so this role is the comparator for the nearest-player script results.",
         ],
     },
     {

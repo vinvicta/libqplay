@@ -105,8 +105,8 @@ def main():
     for item in candidates["candidates"]:
         confidence = item["confidence"]
         confidence_counts[confidence] = confidence_counts.get(confidence, 0) + 1
-    check("high-confidence candidates", confidence_counts.get("high", 0), 27)
-    check("medium-confidence candidates", confidence_counts.get("medium", 0), 1)
+    check("high-confidence candidates", confidence_counts.get("high", 0), 28)
+    check("medium-confidence candidates", confidence_counts.get("medium", 0), 0)
 
     table_summary = script_tables["summary"]
     check("script-table input hash", script_tables["binary"]["sha256"], primary_hash)
@@ -181,7 +181,7 @@ def main():
     check(
         "IDA validation persisted-copy hash",
         ida_validation["database"]["persistent_database"]["sha256"],
-        "f901f73e25e97d072c79bcabc3931ff179bcd2cdd24fa0f120d5ff690719e505",
+        "0306a53f164fc9f860f24eb248039a94172959053daa6464d4a1effe35026a89",
     )
     check(
         "IDA validation persisted inventory total",
@@ -196,7 +196,7 @@ def main():
     check(
         "IDA validation persisted inventory hash",
         ida_validation["database"]["persistent_database"]["inventory"]["sha256"],
-        "5166475d6070d9a31000d9a40309c551d950a82dffa5e03e3e794ba0cd465249",
+        "2f9f4d2ddeeac15f52c64e5c5868190937f3559283ce19738ed576eeaa885e28",
     )
     check(
         "IDA validation pass failures",

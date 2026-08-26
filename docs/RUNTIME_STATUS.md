@@ -298,9 +298,10 @@ This is the short handoff view. The full reasoning and command history are in
     review-only role artifact to 28 entries. The new entries cover the flex-style
     animation previous-state helper at `0xe01d0`, the generic draw-distance
     comparator at `0x20ac18`, and the nine YAJL callbacks installed at
-    `0x387e20` for `TGraalVar::readJSON`. Twenty-seven candidates are marked
-    high-confidence; the comparator is medium-confidence because its class
-    owner and direct call site remain unresolved. No IDA names changed and no
+    `0x387e20` for `TGraalVar::readJSON`. All 28 candidates are marked
+    high-confidence role assignments. IDA evidence now ties the comparator at
+    `0x20ac18` to both nearest-player script wrappers, which sort the runtime
+    universe list before returning their results. No IDA names changed and no
     endpoint was contacted. The generator also verifies that those 28 roles
     cover every entry in the application or engine profile category.
 47. The four naming passes were exercised together in IDA 9.3 IDALIB against a

@@ -1438,9 +1438,12 @@ entries as role candidates. The helper at `0xe01d0` is the flex-style
 `yy_get_previous_state` equivalent used by `lex_load`: it walks the animation
 scanner's DFA tables and updates the generated lexer state. The comparator at
 `0x20ac18` accepts two objects, computes their squared draw distance, and uses
-field `0x2ec` as a priority tie-breaker. Its behavior is clear, but its class
-owner and direct call site are not, so that candidate is marked medium
-confidence. The other nine addresses are the complete YAJL callback set at
+field `0x2ec` as a priority tie-breaker. IDA now ties it to both
+`GSFunctionsInitstaticscriptvars_script_getnearestplayers` at `0x20b580` and
+`GSFunctionsInitstaticscriptvars_script_findnearestplayers` at `0x20bb88`.
+Each wrapper passes the comparator to `TList::Sort` after copying the runtime
+universe list, so the role is a nearest-player result comparator. The other
+nine addresses are the complete YAJL callback set at
 `0x387e20`, passed to `yajl_alloc` by `TGraalVar::readJSON` at `0x22e2c0`:
 null, boolean, number, string, start-map, map-key, end-map, start-array, and
 end-array. Their callback slots provide stronger evidence than their local
@@ -1503,13 +1506,16 @@ is in `artifacts/ida_translation_validation.json`; no database, APK, asset,
 certificate, or network response was added to the repository.
 
 The validation was then repeated through IDALIB's normal database closer. The
-translated disposable copy was saved as a packed IDA 9.3 database and reopened
-in a separate read-only process. That process verified all 1,211 prepared
-names, the 20 newly created script callback boundaries, 11,297 total function
-starts, and 459 remaining default `sub_` entries. The local 56 MB handoff copy
-is at `/home/v/Desktop/graal-decomp/analysis/libqplay_translated_all.i64` and
+first trial used the example runner's rollback option and correctly discarded
+the changes, so the final run explicitly enabled save-on-close with `-p true`.
+The translated disposable copy was saved as a packed IDA 9.3 database and
+reopened in a separate read-only process. That process verified all 1,211
+prepared names, the 20 newly created script callback boundaries, 11,297 total
+function starts, and 459 remaining default `sub_` entries. The local 56 MB
+handoff copy is at
+`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_all_v2.i64` and
 has SHA-256
-`f901f73e25e97d072c79bcabc3931ff179bcd2cdd24fa0f120d5ff690719e505`.
+`0306a53f164fc9f860f24eb248039a94172959053daa6464d4a1effe35026a89`.
 It remains outside the public repository because it is a generated database,
 while the hash and verification status are kept in the public artifact.
 
@@ -1517,7 +1523,8 @@ An inventory export from that saved copy reports 8,096 ELF-backed functions,
 2,742 named non-ELF functions, and 459 remaining default names. This is the
 strongest local symbol-coverage count so far because it was generated after
 the boundary and rename passes had been persisted, then checked against the
-same input hash.
+same input hash. The inventory JSON has SHA-256
+`2f9f4d2ddeeac15f52c64e5c5868190937f3559283ce19738ed576eeaa885e28`.
 
 ## Packaged ARM64 replay revalidation
 
