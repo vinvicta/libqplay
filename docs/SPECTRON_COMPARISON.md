@@ -165,6 +165,63 @@ address or source-name translation for the remaining original `sub_` entries.
 The exact counts and the single obfuscated match are recorded in
 `artifacts/spectron_function_signature_match.json`.
 
+## Cross-build semantic translation
+
+The byte-identical test is intentionally strict. It is useful for ruling out
+unsafe address copying, but it leaves a better option for the named 1.8
+functions: compare normalized function structure in a clean IDA pass. The
+exporter `tools/ida_export_function_features.py` records instruction and
+basic-block counts, normalized mnemonic shape, register shape, string
+references, and direct call names. PC-relative addresses and relocation
+details are removed from the comparison so a rebuilt function can still be
+recognized when its layout moved.
+
+The matcher `tools/match_spectron_semantic_functions.py` used the original
+v4 translated database and the supplied Spectron ARM64 library. The original
+database contains 11,297 function starts and the Spectron library contains
+11,678. The first pass maps 3,700 named 1.8 functions to unique Spectron
+targets. Of those, 3,641 are high confidence and were applied to a disposable
+Spectron IDA copy, while 59 medium-confidence rows remain review-only. There
+are 1,019 ambiguous rows and 614 unmatched rows, so the pass does not pretend
+to translate every function.
+
+The method has a built-in validation set because 1,010 function names are
+shared between the two builds. The unique semantic matcher reproduced 396
+shared-name matches with zero wrong matches. This does not prove every
+obfuscated match, but it is a useful measured check on the normalization
+rules. The output uses a `v18_` prefix, keeps both original and target
+addresses, and never copies an original address into the 2.2 image.
+
+The verified database copies are local because packed IDA databases are too
+large for this repository:
+
+* `analysis/spectron_libqplay_translated_v1.i64` contains the 3,641 automated
+  high-confidence labels.
+* `analysis/spectron_libqplay_translated_v2.i64` adds four reviewed context
+  anchors for the premium marker, loading-screen getter, connecting window,
+  and JNI loop.
+
+The second copy was reopened and checked. Its SHA-256 is
+`fab82bedbafb864513dfbfc144f657d7542816d2ff883abe1a55c16753f55618`.
+The translation map, checkpoint, manual evidence, and IDA scripts are
+`artifacts/spectron_semantic_function_translation_20260826.json`,
+`artifacts/spectron_translation_checkpoint_20260826.json`,
+`artifacts/spectron_manual_translation_anchors_20260826.json`,
+`tools/ida_export_function_features.py`,
+`tools/match_spectron_semantic_functions.py`,
+`tools/ida_apply_spectron_translation.py`,
+`tools/ida_apply_spectron_manual_anchors.py`, and
+`tools/ida_verify_spectron_manual_anchors.py`.
+
+The manual anchors are deliberately labeled as cross-build correspondences,
+not restored debug symbols. For example, the Spectron premium getter is the
+function that builds the same encoded `a9a` marker and is called by the
+translated sigcheck path. The loading getter is the one-byte accessor paired
+with the mapped setter and called by Spectron's JNI render loop. The
+connecting-window candidate owns the `Connecting to the server...` and
+`StartConnectMessage` strings. The JNI loop itself retains the exact exported
+name `Java_com_quattroplay_GraalClassic_Natives_QPlayLoop`.
+
 ## Java observations
 
 The Java dex files still use the normal Graal activity and renderer bridge:
@@ -202,6 +259,18 @@ This runtime observation is separate from the static URL extraction above:
 the analysis did not open the recovered WebTop URL or contact a remote service
 as part of the static comparison. A playable world was not verified for the
 modded package.
+
+A later direct launch of the supplied APK provides an important correction to
+the runtime picture. After Start was tapped, the process died with
+`SIGSEGV`, fault address `0x0`, at `libxposed.so+0x84348`, with the caller
+reported as `Java_com_WebTop_onmsg+104`. The stripped hook library was checked
+in IDA at that address. It is the selected `crash` command path in the WebTop
+dispatcher: a null store followed by a loop. The qplay scoped-storage write
+failures appeared in the same log, but they were not shown to cause the crash.
+This run had normal emulator networking, so it is not a no-network control,
+and it does not establish a playable-world result. The exact observation and
+the static correlation are in
+`artifacts/spectron_runtime_crash_control_20260826.json`.
 
 ## What this changes for the original client
 

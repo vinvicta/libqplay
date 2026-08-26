@@ -196,6 +196,30 @@ profile. The complete record is in
 `artifacts/static_library_role_audit_20260826.json` and the combined residual
 accounting is in `artifacts/ida_residual_profile.json`.
 
+The supplied Spectron 2.2 package can be compared at the function level even
+though its application C++ symbols are obfuscated. A normalized IDA feature
+export and matcher map 3,700 named 1.8 functions to unique Spectron ARM64
+targets, with 3,641 high-confidence labels applied and 59 medium-confidence
+rows left for review. A validation set of 396 shared-name matches produced no
+wrong unique matches. The saved local copies are
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v1.i64`
+and `/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v2.i64`;
+the latter adds four reviewed
+context anchors for the premium marker, loading getter, connecting window,
+and JNI loop. These are `v18_` semantic labels, not claims that original
+debug symbols survived in the 2.2 build. The map and evidence are in
+`artifacts/spectron_semantic_function_translation_20260826.json`,
+`artifacts/spectron_manual_translation_anchors_20260826.json`, and
+`artifacts/spectron_translation_checkpoint_20260826.json`.
+
+The first direct emulator launch of the supplied Spectron package also found
+a separate modding-layer problem. After Start was tapped, `libxposed.so`
+crashed at its statically confirmed WebTop `crash` command branch. The same
+run logged qplay scoped-storage write failures, but the crash was not shown to
+come from qplay. This was not a no-network or playable-world test, and the
+observation is recorded in
+`artifacts/spectron_runtime_crash_control_20260826.json`.
+
 I also made a second local handoff copy directly from the active desktop IDA
 snapshot. The source snapshot hash is
 `56da88101fe904ca298dcadf31e90433a69c43818c681ccb72364c66ac99eaa4`, and the
@@ -278,6 +302,15 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/spectron_function_signature_match.json` records the exact
   function-byte comparison against Spectron. It found one obfuscated match
   and no usable source-name transfer.
+* `artifacts/spectron_semantic_function_translation_20260826.json` records
+  the normalized-function translation map, its confidence counts, and the
+  shared-name validation set.
+* `artifacts/spectron_manual_translation_anchors_20260826.json` records the
+  four reviewed Spectron context anchors.
+* `artifacts/spectron_translation_checkpoint_20260826.json` records the
+  close-and-reopen check for the persisted Spectron IDA copy.
+* `artifacts/spectron_runtime_crash_control_20260826.json` records the local
+  WebTop crash-branch observation and its IDA correlation.
 * `docs/TESTING.md` describes local-only reproduction without contacting a
   live game service.
 * `artifacts/helper_toolchain_replay.json` records the verified HexaParser and
@@ -480,6 +513,13 @@ proves the local native TLS path, not a current live certificate or service.
   `tools/match_spectron_function_signatures.py` checks whether the supplied
   Spectron ARM64 build offers any exact, unambiguous source-name matches for
   the original IDA default functions.
+  `tools/ida_export_function_features.py` exports address-independent IDA
+  function features for cross-build comparison.
+  `tools/match_spectron_semantic_functions.py` builds the reviewed 1.8 to
+  Spectron semantic map.
+  `tools/ida_apply_spectron_translation.py` and
+  `tools/ida_apply_spectron_manual_anchors.py` write separate disposable IDA
+  copies, while the matching verification scripts reopen and check them.
   `tools/decode_game_server_tls_certificate.py` decodes the separate
   game-server certificate from the recovered connector script without opening
   a socket. `tools/encode_game_server_tls_certificate.py` prepares a

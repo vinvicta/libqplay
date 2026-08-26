@@ -50,6 +50,18 @@ def main():
     )
     spectron_signature = load_json("artifacts/spectron_function_signature_match.json")
     spectron_hooks = load_json("artifacts/spectron_hook_analysis.json")
+    spectron_semantic = load_json(
+        "artifacts/spectron_semantic_function_translation_20260826.json"
+    )
+    spectron_checkpoint = load_json(
+        "artifacts/spectron_translation_checkpoint_20260826.json"
+    )
+    spectron_manual = load_json(
+        "artifacts/spectron_manual_translation_anchors_20260826.json"
+    )
+    spectron_runtime = load_json(
+        "artifacts/spectron_runtime_crash_control_20260826.json"
+    )
 
     checks = []
 
@@ -769,6 +781,60 @@ def main():
         spectron_hooks["webtop"]["recovered_url"],
         "https://spectronnative-page.onrender.com?device=NOID",
     )
+    check(
+        "Spectron semantic artifact",
+        spectron_semantic["artifact"],
+        "spectron_semantic_function_translation",
+    )
+    check("Spectron semantic network", spectron_semantic["network_contacted"], False)
+    check(
+        "Spectron semantic original hash",
+        spectron_semantic["inputs"]["original_binary_sha256"],
+        "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    )
+    check(
+        "Spectron semantic binary hash",
+        spectron_semantic["inputs"]["spectron_binary_sha256"],
+        "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    )
+    check("Spectron semantic original functions", spectron_semantic["summary"]["original_functions"], 11297)
+    check("Spectron semantic target functions", spectron_semantic["summary"]["spectron_functions"], 11678)
+    check("Spectron semantic mapped functions", spectron_semantic["summary"]["mapped_functions"], 3700)
+    check("Spectron semantic high confidence", spectron_semantic["summary"]["mapped_high_confidence"], 3641)
+    check("Spectron semantic medium confidence", spectron_semantic["summary"]["mapped_medium_confidence"], 59)
+    check("Spectron semantic ambiguous functions", spectron_semantic["summary"]["ambiguous_functions"], 1019)
+    check("Spectron semantic unmatched functions", spectron_semantic["summary"]["unmatched_functions"], 614)
+    check("Spectron shared-name validation total", spectron_semantic["validation"]["shared_name_functions"], 396)
+    check("Spectron shared-name validation correct", spectron_semantic["validation"]["shared_name_unique_correct"], 396)
+    check("Spectron shared-name validation wrong", spectron_semantic["validation"]["shared_name_unique_wrong"], 0)
+    check(
+        "Spectron checkpoint artifact",
+        spectron_checkpoint["artifact"],
+        "spectron_translation_checkpoint_20260826",
+    )
+    check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
+    check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11678)
+    check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
+    check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
+    check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
+    check(
+        "Spectron manual artifact",
+        spectron_manual["artifact"],
+        "spectron_manual_translation_anchors_20260826",
+    )
+    check("Spectron manual network", spectron_manual["network_contacted"], False)
+    check("Spectron manual anchor count", len(spectron_manual["anchors"]), 4)
+    check(
+        "Spectron runtime artifact",
+        spectron_runtime["artifact"],
+        "spectron_runtime_crash_control_20260826",
+    )
+    check("Spectron runtime network audit", spectron_runtime["network_audited"], False)
+    check("Spectron runtime network marker", spectron_runtime["network_contacted"], None)
+    check("Spectron runtime signal", spectron_runtime["observed"]["signal"], "SIGSEGV")
+    check("Spectron runtime fault address", spectron_runtime["observed"]["fault_address"], "0x0")
+    check("Spectron runtime faulting address", spectron_runtime["static_correlation"]["faulting_ea"], "0x84348")
+    check("Spectron runtime static correlation", spectron_runtime["static_correlation"]["correlation_status"], "confirmed-by-IDA")
 
     for document in (
         overlay,
@@ -788,6 +854,9 @@ def main():
         tls_expiry,
         spectron_signature,
         spectron_hooks,
+        spectron_semantic,
+        spectron_checkpoint,
+        spectron_manual,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

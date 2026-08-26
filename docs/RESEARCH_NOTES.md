@@ -2040,3 +2040,80 @@ The machine-readable record is
 are `tools/generate_static_library_role_audit.py`,
 `tools/ida_apply_static_library_aliases.py`, and
 `tools/ida_verify_static_library_aliases.py`.
+
+## Spectron runtime crash control
+
+I installed the supplied `spectron_client_1.0.2.apk` beside the original
+package on the Android 36 x86_64 emulator and launched
+`com.quattroplay.GraalClassiC/com.quattroplay.GraalClassic.QPlayActivity`.
+The custom menu appeared. After tapping Start, the process died at
+`2026-08-26 12:17:35.134` with `SIGSEGV` and fault address `0x0`.
+
+The native backtrace pointed to `libxposed.so+0x84348`, called from
+`Java_com_WebTop_onmsg+104` at `0x85d9c`. I checked the supplied stripped
+`libxposed.so` in a clean IDA process. The dispatcher at `0x842e4` compares
+the WebTop message with `crash` at `0x84338`, and the selected path reaches
+`0x84348`, where it stores through a null address and loops. This explains
+the exact runtime death as an intentional modding-layer command rather than
+a qplay TLS or renderer crash.
+
+The same run logged qplay failures while writing external scoped-storage
+assets, including
+`.../files/levels/images/classiciphone/classiciphone_pics5c.png`. Those
+failures are recorded as a separate observation. The run had ordinary
+emulator networking enabled, but network contact was not independently
+audited, so it is not a no-network control and does not establish a playable
+world. The structured record is
+`artifacts/spectron_runtime_crash_control_20260826.json`.
+
+## Spectron semantic translation pass
+
+The supplied Spectron ARM64 library is a separate 2.2 rebuild. Its
+application C++ names are mostly obfuscated, so direct symbol transfer is
+not possible. I added `tools/ida_export_function_features.py`, a read-only
+IDAPython exporter that records normalized instruction shape, register shape,
+basic blocks, strings, and direct call names. PC-relative addresses are
+removed from the feature keys so the comparison is not tied to the original
+layout.
+
+`tools/match_spectron_semantic_functions.py` compared the original v4
+translated database with the Spectron ARM64 library. The original has 11,297
+function starts and Spectron has 11,678. The matcher produced 3,700 unique
+target mappings for named 1.8 functions: 3,641 high-confidence rows and 59
+medium-confidence rows. It left 1,019 functions ambiguous and 614 without a
+usable target. The automated labels use the `v18_` prefix and retain both
+addresses and the obfuscated target name in the map.
+
+The 1,010 shared-name functions provide an internal validation set. The
+unique matcher reproduced 396 of those names with zero wrong matches. That
+supports the feature normalization, but it is not a license to treat every
+obfuscated row as proven. Ambiguous and medium-confidence rows remain
+review-only.
+
+I applied the 3,641 high-confidence labels to
+`analysis/spectron_libqplay_translated_v1.i64`, then added four separately
+reviewed context anchors to
+`analysis/spectron_libqplay_translated_v2.i64`:
+
+* `TGameEnvironment_getPremiumOption_void` maps to the Spectron function
+  that builds the same encoded `a9a` marker and is called by sigcheck.
+* `TClientEnvironment_getLoadingScreenEnabled_void` maps to the getter for
+  the byte written by the paired translated setter and read by QPlayLoop.
+* `TGUIScriptLoader_showConnectingWindow_void` maps to the function owning
+  the Connecting and StartConnectMessage string set, with matching block and
+  call counts.
+* `Java_com_quattroplay_GraalClassic_Natives_QPlayLoop` retains its exact
+  exported JNI name in both builds and remains a direct runtime anchor.
+
+The second database was reopened and all four manual anchors verified. Its
+SHA-256 is
+`fab82bedbafb864513dfbfc144f657d7542816d2ff883abe1a55c16753f55618`.
+The map, checkpoint, manual evidence, and application scripts are
+`artifacts/spectron_semantic_function_translation_20260826.json`,
+`artifacts/spectron_translation_checkpoint_20260826.json`,
+`artifacts/spectron_manual_translation_anchors_20260826.json`,
+`tools/ida_export_function_features.py`,
+`tools/match_spectron_semantic_functions.py`,
+`tools/ida_apply_spectron_translation.py`,
+`tools/ida_apply_spectron_manual_anchors.py`, and
+`tools/ida_verify_spectron_manual_anchors.py`.

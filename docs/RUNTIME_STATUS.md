@@ -423,6 +423,32 @@ This is the short handoff view. The full reasoning and command history are in
     `089e588389206929cbcbd7d1d65dd477e0c69eed0841b430636bb7c947594ac3`.
     Details are in `artifacts/static_library_role_audit_20260826.json`.
 
+60. A direct run of the supplied Spectron 2.2 APK reached its custom menu,
+    then died after Start with `SIGSEGV` at `libxposed.so+0x84348`, fault
+    address `0x0`, called from `Java_com_WebTop_onmsg+104`. IDA confirms that
+    address is the intentional WebTop `crash` command path, which stores
+    through null and loops. The same run logged qplay failures writing an
+    external scoped-storage asset, but that was not shown to cause the crash.
+    The emulator had ordinary networking enabled, so this is not a
+    no-network or playable-world result. See
+    `artifacts/spectron_runtime_crash_control_20260826.json`.
+
+61. A normalized IDA feature pass translated the named original 1.8
+    functions to the supplied Spectron ARM64 rebuild. It found 3,700 unique
+    targets, with 3,641 high-confidence labels applied and 59 medium-
+    confidence rows held for review. The shared-name validation set produced
+    396 correct unique matches and zero wrong matches. The persisted Spectron
+    copy at
+    `/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v2.i64`
+    adds four manual context anchors for the premium marker, loading getter,
+    connecting window, and JNI loop. Its SHA-256 is
+    `fab82bedbafb864513dfbfc144f657d7542816d2ff883abe1a55c16753f55618`.
+    These are `v18_` analysis labels and reviewed correspondences, not a
+    claim that original debug symbols survived in Spectron. See
+    `artifacts/spectron_semantic_function_translation_20260826.json`,
+    `artifacts/spectron_manual_translation_anchors_20260826.json`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
