@@ -68,6 +68,9 @@ def main():
     spectron_core_anchors = load_json(
         "artifacts/spectron_core_manual_translation_anchors_20260826.json"
     )
+    spectron_runtime_path_anchors = load_json(
+        "artifacts/spectron_runtime_path_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -864,6 +867,16 @@ def main():
     check("Spectron core-anchor semantic overlap", spectron_core_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron core-anchor default targets", spectron_core_anchors["summary"]["target_default_name_count"], 2)
     check(
+        "Spectron runtime-path artifact",
+        spectron_runtime_path_anchors["artifact"],
+        "spectron_runtime_path_manual_translation_anchors_20260826",
+    )
+    check("Spectron runtime-path network", spectron_runtime_path_anchors["network_contacted"], False)
+    check("Spectron runtime-path total", spectron_runtime_path_anchors["summary"]["anchor_count"], 13)
+    check("Spectron runtime-path high confidence", spectron_runtime_path_anchors["summary"]["high_confidence_count"], 13)
+    check("Spectron runtime-path semantic overlap", spectron_runtime_path_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron runtime-path default targets", spectron_runtime_path_anchors["summary"]["target_default_name_count"], 9)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -875,6 +888,7 @@ def main():
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
     check("Spectron checkpoint network anchor count", spectron_checkpoint["network_anchors"]["verified_name_count"], 6)
     check("Spectron checkpoint core anchor count", spectron_checkpoint["core_anchors"]["verified_name_count"], 16)
+    check("Spectron checkpoint runtime-path anchor count", spectron_checkpoint["runtime_path_anchors"]["verified_name_count"], 13)
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -939,6 +953,7 @@ def main():
         spectron_exact_names,
         spectron_network_anchors,
         spectron_core_anchors,
+        spectron_runtime_path_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

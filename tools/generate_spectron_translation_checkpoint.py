@@ -33,6 +33,8 @@ def main() -> None:
     parser.add_argument("--network-verification", type=Path)
     parser.add_argument("--core-anchors", type=Path)
     parser.add_argument("--core-verification", type=Path)
+    parser.add_argument("--runtime-path-anchors", type=Path)
+    parser.add_argument("--runtime-path-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -156,6 +158,34 @@ def main() -> None:
         result["core_anchors"] = core
         result["interpretation"].append(
             "The fourth database revision also contains the separately reviewed resource, rendering, GUI, scripting, and client context anchors."
+        )
+    runtime_path = None
+    if args.runtime_path_anchors or args.runtime_path_verification:
+        if not args.runtime_path_anchors or not args.runtime_path_verification:
+            raise ValueError(
+                "runtime-path anchors and runtime-path verification must be supplied together"
+            )
+        runtime_path_document = load(args.runtime_path_anchors)
+        runtime_path_verification = load(args.runtime_path_verification)
+        if runtime_path_document.get("artifact") != "spectron_runtime_path_manual_translation_anchors_20260826":
+            raise ValueError("unexpected runtime-path anchor artifact")
+        if not runtime_path_verification.get("verified"):
+            raise ValueError("runtime-path anchor reopen verification did not pass")
+        expected_runtime_path = len(runtime_path_document["anchors"])
+        if runtime_path_verification["verified_name_count"] != expected_runtime_path:
+            raise ValueError("runtime-path verification count differs from artifact")
+        runtime_path = {
+            "anchor_path": str(args.runtime_path_anchors),
+            "anchor_sha256": sha256_path(args.runtime_path_anchors),
+            "reopen_verification": str(args.runtime_path_verification),
+            "anchor_count": expected_runtime_path,
+            "verified_name_count": runtime_path_verification["verified_name_count"],
+            "reopen_failure_count": runtime_path_verification["failure_count"],
+        }
+    if runtime_path is not None:
+        result["runtime_path_anchors"] = runtime_path
+        result["interpretation"].append(
+            "The fifth database revision also contains the separately reviewed map-entry, file-delivery, script, text-control, and server-list context anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

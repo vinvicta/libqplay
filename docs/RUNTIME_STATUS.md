@@ -486,6 +486,13 @@ This is the short handoff view. The full reasoning and command history are in
     copy. See `artifacts/spectron_core_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+66. Clean IDA review added 13 high-confidence runtime-path anchors for map
+    entry, file chunks and completion, text controls, encrypted scripts,
+    disconnects, server warps, the server-list loop, and client static state.
+    All 13 names reopened successfully in the v5 disposable copy. See
+    `artifacts/spectron_runtime_path_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

@@ -13,8 +13,8 @@
     "default_sub_function_count": 1843,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v4.i64",
-    "sha256": "3d4f217fcd20e21839957f4bd68a5fefa3998294fb6eebe93df760dd06e966b3"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v5.i64",
+    "sha256": "2c059f8bc96b90e46542f3fb3d05a6cd5a99af112acd516751f42b1bf4c0e421"
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
@@ -29,7 +29,8 @@
     "The medium-confidence, ambiguous, and unmatched functions remain review-only and were not silently renamed.",
     "The second database revision also contains the separately reviewed manual context anchors.",
     "The third database revision also contains the separately reviewed connector and socket context anchors.",
-    "The fourth database revision also contains the separately reviewed resource, rendering, GUI, scripting, and client context anchors."
+    "The fourth database revision also contains the separately reviewed resource, rendering, GUI, scripting, and client context anchors.",
+    "The fifth database revision also contains the separately reviewed map-entry, file-delivery, script, text-control, and server-list context anchors."
   ],
   "manual_anchors": {
     "anchor_count": 4,
@@ -48,6 +49,14 @@
     "verified_name_count": 6
   },
   "network_contacted": false,
+  "runtime_path_anchors": {
+    "anchor_count": 13,
+    "anchor_path": "artifacts/spectron_runtime_path_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "ec1dc01329c55e2467e12e6fd756ec57ceb7b285e415462ef75fbb1e7411dc00",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_runtime_path_anchor_verification_20260826.json",
+    "verified_name_count": 13
+  },
   "schema_version": 1,
   "scope": "persisted high-confidence 1.8-to-Spectron ARM64 semantic labels",
   "translation": {
