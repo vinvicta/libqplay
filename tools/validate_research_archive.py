@@ -209,6 +209,20 @@ def main():
         ida_validation["database"]["persistent_database"]["inventory"]["sha256"],
         "2f9f4d2ddeeac15f52c64e5c5868190937f3559283ce19738ed576eeaa885e28",
     )
+    active_copy = ida_validation["database"]["active_snapshot_copy"]
+    check(
+        "IDA active snapshot source hash",
+        active_copy["source_sha256"],
+        "56da88101fe904ca298dcadf31e90433a69c43818c681ccb72364c66ac99eaa4",
+    )
+    check("IDA active snapshot source functions", active_copy["source_function_count"], 11272)
+    check("IDA active snapshot source defaults", active_copy["source_default_sub_count"], 1645)
+    check("IDA active snapshot live marker", active_copy["live_ida_database_changed"], False)
+    check("IDA active snapshot close and reopen", active_copy["close_reopen_verified"], True)
+    check("IDA active snapshot verified names", active_copy["verified_name_count"], 1211)
+    check("IDA active snapshot verified functions", active_copy["verified_function_count"], 11297)
+    check("IDA active snapshot verified defaults", active_copy["verified_default_sub_count"], 459)
+    check("IDA active snapshot verification failures", active_copy["verification_failures"], 0)
     check(
         "IDA validation pass failures",
         sum(item["failures"] for item in ida_validation["passes"]),

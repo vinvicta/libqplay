@@ -22,6 +22,22 @@
         "ida_default_sub_functions": 459,
         "ida_named_non_elf_functions": 2742
       }
+    },
+    "active_snapshot_copy": {
+      "source_path": "GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so.i64",
+      "source_sha256": "56da88101fe904ca298dcadf31e90433a69c43818c681ccb72364c66ac99eaa4",
+      "source_function_count": 11272,
+      "source_default_sub_count": 1645,
+      "live_ida_database_changed": false,
+      "translated_path": "analysis/libqplay_translated_from_active.i64",
+      "translated_sha256_after_final_reopen": "1b72e100a755939c973ff1c4dcba2c8a9915a454f5f89c4c5d781bd74add421e",
+      "format": "packed IDA 9.3 database",
+      "close_reopen_verified": true,
+      "verified_name_count": 1211,
+      "verified_function_count": 11297,
+      "verified_default_sub_count": 459,
+      "verification_failures": 0,
+      "save_environment": "temporary clean IDA 9.3 view with the MCP plugin disabled"
     }
   },
   "passes": [
@@ -61,6 +77,8 @@
     "The five native callbacks without saved IDA boundaries were created from exact ELF .eh_frame FDE ranges.",
     "Two script-table FDE starts were inside larger saved IDA functions. The boundary pass split those ranges before adding the callback functions.",
     "IDALIB closed and repacked the translated copy, and a separate read-only verifier reopened it with all 1,211 expected names intact.",
-    "The original IDA database was not overwritten because its active unpacked state remained locked by the desktop session."
+    "The original IDA database was not overwritten because its active unpacked state remained locked by the desktop session.",
+    "The active desktop snapshot was copied by hash to a separate local database and translated there. The permanent local copy is analysis/libqplay_translated_from_active.i64.",
+    "A temporary clean IDA view was needed for save and close because the installed MCP plugin caused the IDALIB database writer to terminate before saving."
   ]
 }

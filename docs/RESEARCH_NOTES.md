@@ -1526,6 +1526,29 @@ the boundary and rename passes had been persisted, then checked against the
 same input hash. The inventory JSON has SHA-256
 `2f9f4d2ddeeac15f52c64e5c5868190937f3559283ce19738ed576eeaa885e28`.
 
+### Handoff copy from the active desktop snapshot
+
+The public validation above was originally built from a disposable copy. To
+remove any ambiguity about its relationship to the user's open IDA file, I
+also hashed the active desktop database before touching it, copied that exact
+snapshot, and ran the same four passes in the copy. The source snapshot was
+`GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so.i64` with SHA-256
+`56da88101fe904ca298dcadf31e90433a69c43818c681ccb72364c66ac99eaa4`.
+
+The saved handoff copy is
+`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active.i64`.
+A clean IDA 9.3 process saved it as a packed database, then a separate clean
+process reopened it and verified all 1,211 prepared names. The reopened copy
+contained 11,297 function starts and 459 default `sub_` names, with zero
+verification failures. The active desktop database remained unchanged.
+
+The installed MCP plugin caused the IDALIB writer to stop before saving when
+it was present in the headless environment. The final handoff therefore used
+a temporary clean IDA view with that plugin disabled. This did not alter the
+installed IDA files or the desktop session. The machine-readable details are
+in `artifacts/ida_translation_validation.json`, and the reusable save helper
+is `tools/ida_apply_all_translations_save.py`.
+
 ## Packaged ARM64 replay revalidation
 
 The complete local replay was repeated on 2026-08-25 using the packaged

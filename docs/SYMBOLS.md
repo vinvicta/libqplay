@@ -131,6 +131,20 @@ The saved-copy hash and the close-and-reopen verification are in
 `artifacts/ida_translation_validation.json`; the exact residual list is in
 `artifacts/ida_residual_profile.json`.
 
+To make the handoff from the user's desktop session explicit, I also copied
+the exact active snapshot before applying the same pass. Its source database
+had SHA-256
+`56da88101fe904ca298dcadf31e90433a69c43818c681ccb72364c66ac99eaa4`.
+The translated local copy is
+`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active.i64`.
+A clean IDA 9.3 save and a separate reopen verified all 1,211 names, 11,297
+function starts, and 459 remaining default names. The copy is intentionally
+local and ignored by the public repository. Its SHA-256 after the final
+reopen was
+`1b72e100a755939c973ff1c4dcba2c8a9915a454f5f89c4c5d781bd74add421e`.
+IDA may update database metadata when that file is opened again, so the hash
+is an audit checkpoint rather than a content-addressed release identifier.
+
 The sound script table is also partly recovered. The wrappers at
 `0xe1e0c`, `0xe22e8`, `0xe24c4`, `0xe2858`, and `0xe2a7c` now carry
 script-prefixed aliases for `play2`, `playlooped2`, `playlooped`,

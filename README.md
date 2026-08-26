@@ -144,6 +144,16 @@ the same IDA artifact. Exporting that saved copy produced a private inventory
 with 8,096 ELF-backed functions, 2,742 named non-ELF functions, and 459
 remaining defaults.
 
+I also made a second local handoff copy directly from the active desktop IDA
+snapshot. The source snapshot hash is
+`56da88101fe904ca298dcadf31e90433a69c43818c681ccb72364c66ac99eaa4`, and the
+translated copy is
+`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active.i64`.
+It was saved and reopened in a clean IDA 9.3 environment with all 1,211 names
+verified. The active desktop database was not changed. Both generated IDA
+databases are local handoff files and are intentionally outside this public
+repository.
+
 A clean 2026-08-25 revalidation of the same signed ARM64-only diagnostic APK
 was also completed from fresh app data. After the Android compatibility
 warning was dismissed, the local responders saw one connector request and two
@@ -265,7 +275,9 @@ proves the local native TLS path, not a current live certificate or service.
   IDALIB audit of the expanded callback naming pass. It includes the five
   native FDE ranges, the twenty script-table FDE ranges, the two split
   functions, zero apply failures, and the hash of the persisted translated
-  database copy. The live desktop IDA database was not changed.
+  database copy. It also records the exact hash of the active desktop IDB
+  snapshot and the separate translated handoff copy made from it. The live
+  desktop IDA database was not changed.
 * `artifacts/native_callback_candidates.json` records the next table-backed
   callback, static-state, sound-wrapper, and server-object names recovered from
   the native library. The current review set contains 277 entries. They remain
@@ -334,6 +346,10 @@ proves the local native TLS path, not a current live certificate or service.
   IDALIB and returns control to the database closer so a disposable copy can
   be saved. `tools/ida_verify_all_translations.py` reopens the copy and checks
   every prepared name and boundary without changing it.
+* `tools/ida_apply_all_translations_save.py` applies the complete pass and
+  explicitly writes a new packed `.i64` output. It refuses to overwrite an
+  existing output and is useful when the IDA installation has a plugin that
+  interferes with normal IDALIB save and close handling.
 * `tools/ida_dump_function_evidence.py` emits read-only disassembly, incoming
   references, pseudocode, string references, and raw instruction windows for
   selected role-review functions. Compact mode is useful for large functions.
