@@ -342,6 +342,12 @@ application or engine queue, with no missing or extra addresses.
 `tools/ida_apply_unresolved_function_candidates.py` keeps the IDA step
 review-only.
 
+For a quick consistency check across the published summaries, run
+`python3 tools/validate_research_archive.py`. It confirms that the artifacts
+refer to the same ARM64 input hash, that the function and callback partitions
+still add up, and that the role candidates cover the full 28-entry application
+or engine queue. It is offline and does not require IDA.
+
 When the IDA bridge is available, run
 `tools/ida_apply_native_callback_candidates.py` in review mode first. It
 resolves the existing names, checks each expected function address, reports

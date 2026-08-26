@@ -218,6 +218,9 @@ proves the local native TLS path, not a current live certificate or service.
 * `tools/generate_unresolved_function_candidates.py` rebuilds that candidate
   artifact, while `tools/ida_apply_unresolved_function_candidates.py` provides
   a review-only IDA applier.
+* `tools/validate_research_archive.py` checks the published count partitions,
+  input hashes, candidate coverage, and offline-only markers without needing
+  IDA or a network connection.
 * `artifacts/inbound_handler_table.json` records the native handler-index table,
   its current function targets, and the observed packet-to-index pairs.
 * `artifacts/premium_option.json` records the complete marker bytes and the

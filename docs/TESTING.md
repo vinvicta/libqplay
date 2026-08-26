@@ -441,6 +441,16 @@ deleted or retained privately. Never commit login envelopes or account data.
 
 ## Useful checks
 
+Before relying on a published count or hash, validate the archive summaries:
+
+```bash
+python3 tools/validate_research_archive.py
+```
+
+This check is local-only. It reads the checked-in JSON artifacts, verifies the
+shared ARM64 input hash and count partitions, and confirms that no artifact
+claims to have contacted a network.
+
 Validate a connector body without opening a socket:
 
 ```bash
