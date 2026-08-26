@@ -26,18 +26,15 @@ cd /tmp/GScript.Go-HexaParser
 go test ./...
 ```
 
-The pinned checkouts have been restored in `/tmp` for this continuation. The
-current desktop thread does not have the `go` executable on its `PATH`, so the
-Go test result above remains the earlier Go 1.22.2 result rather than a new
-run. The C `contool` utility does build with the available compiler, and its
-`conn-extract` output reproduces the recorded archive hash
-`fc937afa039dff52ff4ae7f2e3ad809d75c19f5698875d862e5646644446b2b5` from the
-saved local response.
+The pinned checkouts have been restored in `/tmp` for this continuation. A
+fresh run on 2026-08-26 used the local Go 1.22.2 toolchain with temporary
+module and build caches. The declared ANTLR and `x/exp` modules were fetched
+into those temporary caches; the run did not contact a game or connector
+service.
 
-The complete test run passed. The `gsbyte` package completed in about 7.5
-seconds, and the other packages reported no test files. The test run needed a
-writable Go build cache and the declared ANTLR and `x/exp` modules. It did not
-need any changes to the repository.
+The complete test run passed. The `gsbyte` package completed in about 7.1
+seconds, and the other packages reported no test files. No source changes
+were made to the helper checkout.
 
 The tool can decompile the archived connector script produced by the local
 connector parser:
@@ -53,6 +50,10 @@ The output is 552 lines and 25,677 bytes. Its SHA-256 in this run was:
 ```text
 cf60e41536ddebed89ca1c3b3342476763b3d28c1cc9fff29e211931a080afa5
 ```
+
+The same command was rerun during the 2026-08-26 check and produced the same
+hash. This makes the decompiler output deterministic for the archived
+connector stream.
 
 The generated source made the connector logic easier to review. It exposes
 the `getPremiumOption()` switch, the Classic endpoint list, the NewGraal login
@@ -81,12 +82,26 @@ round-trip source retained the nested `LoginBackground.addcontrol(this)` call.
 The complete generated connector source first stopped with a parser error at
 line 469, beginning at `function onAppleMessageBoxButton(title, buttonindex)`.
 Inspection showed that the generated text was missing one closing brace after
-`printDisconnectError`. Adding that brace produced a 552-line, 25,683-byte
+`printDisconnectError`. The public helper
+`tools/repair_hexaparser_source.py` now checks for that exact malformed block
+and inserts only the missing brace. It produced a 552-line, 25,683-byte
 source file with SHA-256
 `a30f9eca136e3b8ff827bfb1bfe13fb442bd2e882963bf9863cd8de5f2669e68`. The
 repaired source compiled successfully to a 16,141-byte bytecode file with
 SHA-256
 `67b70c449f87d6e3b71ef0fe92ba73fff9fe5fe7a1ad63aedb34e9daf4a7b752`.
+
+The repair command is:
+
+```bash
+python3 tools/repair_hexaparser_source.py \
+  /tmp/StartScript_Connector.hexaparser.gs2 \
+  /tmp/StartScript_Connector.repaired.gs2 \
+  --report /tmp/StartScript_Connector.repair.json
+```
+
+The helper refuses an already repaired source and refuses to overwrite its
+input, which keeps a future decompiler comparison honest.
 
 That compile result is a useful source and parser milestone, but it is not a
 runtime replacement for the archived script. The original ARM64 client
@@ -97,6 +112,17 @@ flow when given the raw recompiled bytecode. A later two-port negative control
 showed the more precise behavior: the raw output opened three connections to
 the alternate `14896` listener, but opened none to the expected `14900`
 listener and never completed the normal resource replay.
+
+The fresh compiler check also decoded the rebuilt stream for a structural
+comparison. After ignoring the compiler's trailing `0x0a`, the original
+stream has record lengths `4/553/8293/6699`, while the rebuilt stream has
+`4/553/8271/7280`. The original instruction count is 3,143 and the rebuilt
+count is 3,582. The function names remain recognizable, but the rebuilt
+instruction layout is not a bytecode-preserving round trip. The raw output's
+`14896` connections are consistent with the recovered Classic server-list
+literal, while the larger record and instruction differences are the reason
+the rebuilt stream remains a source experiment rather than a runtime
+replacement.
 
 ## HexaParser literal-order adapter
 
@@ -127,10 +153,14 @@ needs an operand swap. The earlier swap experiment remains a false lead.
 `tools/reverse_hexaparser_literals.py` is a deliberately narrow adapter. It
 reverses comma-separated brace literals that begin and end on one source line,
 while skipping bodies that look like statement blocks or function calls. The
-missing closing brace described above must still be repaired before applying
-the adapter. A complete local round trip was:
+source should first be passed through
+`tools/repair_hexaparser_source.py`. A complete local round trip was:
 
 ```bash
+python3 tools/repair_hexaparser_source.py \
+  /tmp/StartScript_Connector.hexaparser.gs2 \
+  /tmp/StartScript_Connector.repaired.gs2
+
 python3 tools/reverse_hexaparser_literals.py \
   /tmp/StartScript_Connector.repaired.gs2 \
   /tmp/StartScript_Connector.native-order.gs2

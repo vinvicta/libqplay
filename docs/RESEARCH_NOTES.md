@@ -1634,3 +1634,41 @@ database hash, and this accounting are in
 `artifacts/ida_residual_profile.json`. The generator is
 `tools/generate_ida_residual_profile.py`; it reads only repository JSON and
 does not execute the native library or access a network.
+
+## Fresh HexaParser rerun
+
+The supplied HexaParser checkout was rerun on 2026-08-26 at commit
+`ad9bd3657feece825b5f5a888f5db34ffe37afb9`. The local Go 1.22.2 toolchain
+passed `go test ./...`, including the `gsbyte` package. Its two declared
+modules were fetched into temporary caches for this check. That network use
+was limited to the Go module proxy; no game, connector, or other service
+endpoint was contacted.
+
+Decompiling the saved `StartScript_Connector` stream again produced the exact
+previous 552-line source hash
+`cf60e41536ddebed89ca1c3b3342476763b3d28c1cc9fff29e211931a080afa5`.
+The output has one known malformed block after `printDisconnectError`. The
+new offline helper `tools/repair_hexaparser_source.py` checks for that exact
+sequence and inserts only its missing brace. The repaired source hash is
+`a30f9eca136e3b8ff827bfb1bfe13fb442bd2e882963bf9863cd8de5f2669e68`, and it
+compiles to the same 16,141-byte result with hash
+`67b70c449f87d6e3b71ef0fe92ba73fff9fe5fe7a1ad63aedb34e9daf4a7b752`.
+
+The rebuilt stream was parsed once more for a layout comparison. Ignoring
+the compiler's trailing `0x0a`, the original record lengths are
+`4/553/8293/6699` and the rebuilt lengths are `4/553/8271/7280`. The original
+has 3,143 instructions; the rebuilt stream has 3,582. The source names remain
+recognizable, but this is not a bytecode-preserving round trip. The
+`14896` connections seen in the negative control are consistent with the
+recovered Classic server-list literal, which assigns the `loginclassic...`
+list after the Android-only `loginclassicweb...` list. That observation does
+not support another handler-order swap. The clean rebuilt-stream control
+still failed to reproduce the expected `14900` resource replay, so the
+original stream plus the direct loading-state insertion remains the tested
+compatibility path.
+
+The fresh hashes, record lengths, command result, and network scope are in
+`artifacts/helper_toolchain_replay.json`. The source repair is intentionally
+separate from `tools/reverse_hexaparser_literals.py`: the first fixes syntax,
+while the second handles the observed same-line literal ordering for static
+comparison.

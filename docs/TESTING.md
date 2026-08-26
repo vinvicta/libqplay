@@ -303,11 +303,15 @@ bytecode was repacked with those fields and reached the game responder.
 
 ## Rebuilding the connector script
 
-The recovered source first needs the missing closing brace documented in
-`docs/HELPER_TOOLCHAIN.md`. After that parser repair, apply the observed
-HexaParser literal-order adapter before compiling:
+The recovered source first needs the one-brace repair emitted by the pinned
+HexaParser decompiler. Run the checked helper, then apply the observed
+literal-order adapter before compiling:
 
 ```bash
+python3 tools/repair_hexaparser_source.py \
+  /tmp/StartScript_Connector.hexaparser.gs2 \
+  /tmp/StartScript_Connector.repaired.gs2
+
 python3 tools/reverse_hexaparser_literals.py \
   /tmp/StartScript_Connector.repaired.gs2 \
   /tmp/StartScript_Connector.native-order.gs2

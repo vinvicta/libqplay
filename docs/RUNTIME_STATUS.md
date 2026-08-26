@@ -88,15 +88,15 @@ This is the short handoff view. The full reasoning and command history are in
     not return a base package or map, so the screen ended on the stock
     disconnect artwork. The package, native library, captures, and screenshot
     hashes are in `artifacts/arm64_loopback_handshake_replay.json`.
-19. The corrected offline parser reproduces the native raw-digest RSA check.
+20. The corrected offline parser reproduces the native raw-digest RSA check.
     The saved connector response passes with the embedded key, so the RSA
     bypass used by the first replay is not required for that fixture.
-20. A private package-preserving x86_64 candidate was built with the original
+21. A private package-preserving x86_64 candidate was built with the original
     RSA bytes, the certificate diagnostic, loopback transport patches, and the
     fixed local handshake key. Its APK SHA-256 is
     `e794a8c096de46d14e2a98142fd8082c003d4b05e30fd9735e187c365d8e86ab`.
     It remains a private candidate and has not been rerun in this continuation.
-21. A matching ARM64-only package-preserving candidate was also built with
+22. A matching ARM64-only package-preserving candidate was also built with
     the loading-state candidate. Its APK SHA-256 is
     `dad598e0cec03b501ff8cc30648ad843346fa3a331db3087ffa54ff92938af3a`,
     and its native SHA-256 is
@@ -109,35 +109,35 @@ This is the short handoff view. The full reasoning and command history are in
     `fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`.
     The native RSA bypass was not used. This remains a translated-ARM64
     loopback result, not a physical-device or live-service result.
-22. The trust-bundle replacement tool was checked against the original ARM64,
+23. The trust-bundle replacement tool was checked against the original ARM64,
     armeabi, x86, and x86_64 libraries. A one-certificate standard PEM bundle
     encoded at each architecture-specific offset and decoded byte-for-byte.
     These checks were offline and did not establish compatibility with a live
     endpoint.
-23. The IDA audit of the nonblocking connector path confirms that status 4
+24. The IDA audit of the nonblocking connector path confirms that status 4
     `EINPROGRESS` completion reaches `TSocketConnection_setStatus_int` with
     status 5, which starts CyaSSL when SSL is enabled. The earlier blocking-I/O
     experiment remains rejected because it froze the renderer.
-24. The decoded connector script carries a second TLS configuration for the
+25. The decoded connector script carries a second TLS configuration for the
     game server. Its `setSSLParameters` certificate is a 718-byte DER object
     with SHA-256
     `2e6425395e91baab7be95d9918de198684bcb718800bff07113e7f336d06ce56`, the
     same expired Eurocenter Games certificate as connector trust-bundle entry
     0. The native callback uses `NakFpz15` and enables `RC4-SHA` with
     `SSLv23`; this is documented offline in `artifacts/game_server_tls.json`.
-25. The offline encoder
+26. The offline encoder
     `tools/encode_game_server_tls_certificate.py` prepares a replacement for
     script string 143, rejects private-key or multi-certificate PEM input, and
     reproduces the original literal byte-for-byte when fed the recovered
     certificate. It does not disable verification or contact a network.
-26. The source-level helper
+27. The source-level helper
     `tools/replace_game_server_tls_source.py` finds both recovered
     `setSSLParameters` certificate calls, validates their existing DER values,
     and writes a separate GS2 source file. Feeding it the recovered
     certificate gives an identity source and the same 16,141-byte compiled
     bytecode. A 1,072-character offline test certificate also compiles to
     16,253 bytes. These are compiler and transform checks only.
-27. A private ARM64-only package retained the native connector RSA branch,
+28. A private ARM64-only package retained the native connector RSA branch,
     replaced the historical trust bundle with a SAN-matching local certificate,
     routed the hostname to loopback, and moved only the HTTPS port to `18443`
     for ADB reverse. Native TLS delivered the 16,446-byte connector fixture.
@@ -150,13 +150,13 @@ This is the short handoff view. The full reasoning and command history are in
     its screenshot matches the earlier replay at
     `fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`.
     The responder was loopback-only and no live service was contacted.
-28. The recovered GS2 source was checked for the separate game-server TLS
+29. The recovered GS2 source was checked for the separate game-server TLS
     literal. The Classic branch sets `usessl` to false, the NewGraal login
     function guards `setSSLParameters` with that flag, and a final assignment
     also clears it. The stale `NakFpz15` certificate is therefore not active
     in the main Classic login path, although it remains relevant to other
     legacy modes or modified scripts.
-29. `tools/patch_connector_bytecode_loading_clear.py` inserts the original
+30. `tools/patch_connector_bytecode_loading_clear.py` inserts the original
     VM's six-byte `loadingscreenenabled = false` sequence into `onServerLogin`
     immediately before the reconnection reset. The patched stream grows from
     15,581 to 15,587 bytes and from 3,143 to 3,146 instructions. A Kahn-signed
@@ -167,7 +167,7 @@ This is the short handoff view. The full reasoning and command history are in
     proves script loading and protocol/resource progress, not a final visible
     world transition. Hashes and scope are in
     `artifacts/bytecode_loading_clear_replay.json`.
-30. The direct script patch was then combined with the existing native
+31. The direct script patch was then combined with the existing native
     non-premium branch candidate at `0x15ca7c`. The private translated-ARM64
     run again made two `14900` connections, received the map and three level
     files, and sent heartbeats. This time the renderer displayed the green
@@ -180,26 +180,26 @@ This is the short handoff view. The full reasoning and command history are in
     Because two changes are present, this confirms compatibility of the
     direct script patch but leaves the native branch as the variable tied to
     the visual transition.
-31. The IDA ownership audit is now captured in
+32. The IDA ownership audit is now captured in
     `artifacts/loading_state_ownership.json`. It lists the three native getter
     call sites, the two post-startup setter paths, the `sigcheck` clear, the
     render-loop branch, and packet-190's no-write behavior. The active IDB has
     matching comments at those addresses.
-32. The latest file-scripting checkpoint added 22 labels from the table at
+33. The latest file-scripting checkpoint added 22 labels from the table at
     `0x376bd0`, installed by `TFileScripting_initStaticScriptVars` at
     `0xfd1d0`. The cumulative semantic-label artifact now contains 467 entries,
     while the complete IDA inventory remains 11,272 functions. The next zlib
     and static-state names are recorded separately as un-applied candidates.
-33. An offline ARM64 disassembly pass tied four more static initializers to
+34. An offline ARM64 disassembly pass tied four more static initializers to
     ELF relocation targets: `TDrawTexture::textures`, `curanis`,
     `TOptions::windowpos`, and `displayedgif`. The proposed names remain
     unapplied until the IDA bridge returns, so the public inventory and the
     applied-label count are unchanged.
-34. The same offline pass recovered three sound wrappers at `0xe0af8`,
+35. The same offline pass recovered three sound wrappers at `0xe0af8`,
     `0xe0bf8`, and `0xe0c08`. Vtable relocations identify the first as
     `TSounds_isMusicPlaying`; the other two access the exported
     `TSounds::soundoffscreendistance` global.
-35. A follow-up relocation check corrected the next table interpretation.
+36. A follow-up relocation check corrected the next table interpretation.
     `0xe0c18` uses the `TSounds::soundplayer` slot at `0x3757e0` and matches
     `getmusicfilename`. The property pair at `0xe0c84` and `0xe0c70` uses
     `TSounds::disabledsoundeffects` through slot `0x374cb0` and calls the
@@ -208,7 +208,7 @@ This is the short handoff view. The full reasoning and command history are in
     `setmusicvolume` at `0xe1350`; their wrappers forward to the exported
     sound methods. The expanded plan now contains 27 entries. No live endpoint was
     contacted.
-36. A held-connection replay on 2026-08-25 repeated the ARM64 test with the
+37. A held-connection replay on 2026-08-25 repeated the ARM64 test with the
     local cached map and package files copied into a private fixture root. The
     map was served under `classiciphone.gmap`, and three matching encrypted
     containers were generated from the local `black.nw-14900.code` fixture for
@@ -222,7 +222,7 @@ This is the short handoff view. The full reasoning and command history are in
     Packet and fixture hashes are recorded in
     `artifacts/arm64_local_fixture_render_replay.json`. The fixtures are local
     compatibility inputs, not a claim about the live server revision.
-37. The latest offline symbol pass recovered the six `TServerLevel` property
+38. The latest offline symbol pass recovered the six `TServerLevel` property
     accessors and eighteen server-level script wrappers registered from
     `0x37fce0` and `0x37fe00`. Their names decode to level dimensions, zone
     flags, map-part lookup, NPC queries, bomb and explosion operations,
@@ -231,31 +231,31 @@ This is the short handoff view. The full reasoning and command history are in
     names are recorded as unapplied candidates, raising the review-only native
     set from 27 to 51 entries. The IDA bridge timed out again, so no IDB names
     were changed and no endpoint was contacted.
-38. The next table audit covered `TServerPlayerProperties` at `0x18b9bc`.
+39. The next table audit covered `TServerPlayerProperties` at `0x18b9bc`.
     It registered 52 properties and six script functions from `0x37ce00` and
     `0x37d7c0`. Shared getter and setter targets were deduplicated, the
     existing `TServerPlayer::setNick` ELF jump was left alone, and the one
     callback without an IDA function boundary at `0x18aa68` was retained with
     a review note. The unapplied candidate set now contains 125 unique native
     addresses. No endpoint was contacted.
-39. The NPC constructor at `0x183c18` was audited next. Its 26 properties and
+40. The NPC constructor at `0x183c18` was audited next. Its 26 properties and
     57 script functions are registered from `0x37be28` and `0x37c308`. Four
     callback pointers lack saved IDA function boundaries, and two inherited
     ELF jump targets were left unchanged. The remaining 94 unique native
     targets are recorded as unapplied candidates, raising the review-only set
     to 219. No endpoint was contacted.
-40. The compact server-object property constructors were audited offline.
+41. The compact server-object property constructors were audited offline.
     Weapon, bomb, explosion, chest, extra, flying-object, and sign tables add
     23 unique getter or setter targets, raising the review-only candidate set
     to 242. Carry and leap constructors initialize metadata only and do not
     register script properties in this build. No IDA names changed and no
     endpoint was contacted.
-41. The projectile, level-link, and tile-layer tables were audited offline.
+42. The projectile, level-link, and tile-layer tables were audited offline.
     They add 35 unique targets, including 10 projectile properties, 7
     level-link properties, 17 tile-layer getter or setter targets, and the
     `updateboard` callback. The review-only candidate set now contains 277
     entries. No IDA names changed and no endpoint was contacted.
-42. A complete offline scan of direct `TScriptProperty::addProps` and
+43. A complete offline scan of direct `TScriptProperty::addProps` and
     `addFuncs` calls found 70 property tables and 62 function tables. Their
     1,455 declared records, comprising 1,454 static records and one dynamic
     Android registration slot, resolve to 1,779 unique callback targets. The map
@@ -265,12 +265,12 @@ This is the short handoff view. The full reasoning and command history are in
     endpoint was contacted. Each of the 20 pointers also has an ELF `.eh_frame` range;
     `tools/ida_apply_script_table_boundaries.py` keeps those boundary changes
     separate from the ordinary rename pass.
-43. The translation overlay accounts for 886 of the saved default `sub_`
+44. The translation overlay accounts for 886 of the saved default `sub_`
     functions through exact table names and another 271 through curated
     callback evidence. The remaining 488 default functions stay explicitly
     unresolved. No speculative names were added and no endpoint was
     contacted.
-44. The unresolved-function profile separates those 488 default entries into
+45. The unresolved-function profile separates those 488 default entries into
     335 likely static third-party functions, 104 compiler-generated cleanup
     wrappers, 19 ELF init/fini entries, one compiler branch veneer, one PLT
     resolver slot, and 28 application or engine entries. The cleanup wrappers
@@ -285,7 +285,7 @@ This is the short handoff view. The full reasoning and command history are in
     at `0x24840c` and `0x249580` from their exported callers. These are triage
     categories only. No speculative source names were added and no endpoint
     was contacted.
-45. A follow-up offline disassembly pass produced seventeen high-confidence
+46. A follow-up offline disassembly pass produced seventeen high-confidence
     review-only role candidates. The first four are at `0xf9028`, `0xf9060`,
     `0xf9944`, and `0x213088`, covering the profiler comparator, function-tree
     formatter, profiler reset recursion, and recursive `TGraalVar::loadFolder`
@@ -294,7 +294,7 @@ This is the short handoff view. The full reasoning and command history are in
     predicate, the scroll-control property resolver, and the script-object
     resolver. The candidate artifact does not claim that these aliases exist in
     the ELF, and no IDA names changed or endpoint was contacted.
-46. A final structural pass added eleven more role candidates, bringing the
+47. A final structural pass added eleven more role candidates, bringing the
     review-only role artifact to 28 entries. The new entries cover the flex-style
     animation previous-state helper at `0xe01d0`, the generic draw-distance
     comparator at `0x20ac18`, and the nine YAJL callbacks installed at
@@ -304,7 +304,7 @@ This is the short handoff view. The full reasoning and command history are in
     universe list before returning their results. No IDA names changed and no
     endpoint was contacted. The generator also verifies that those 28 roles
     cover every entry in the application or engine profile category.
-47. The four naming passes were exercised together in IDA 9.3 IDALIB against a
+48. The four naming passes were exercised together in IDA 9.3 IDALIB against a
     disposable copy. All 277 native candidates, 886 bounded script-table
     names, 20 FDE-backed script callbacks, and 28 application or engine roles
     resolved with zero failures. The run added 25 function starts and split
@@ -314,7 +314,7 @@ This is the short handoff view. The full reasoning and command history are in
     11,297 function starts, and 459 remaining default `sub_` entries. The
     result and saved-copy hash are in
     `artifacts/ida_translation_validation.json`.
-48. A clean 2026-08-25 revalidation used the packaged ARM64-only diagnostic
+49. A clean 2026-08-25 revalidation used the packaged ARM64-only diagnostic
     APK from fresh app data. After the Android compatibility warning was
     dismissed, the connector responder saw one request and the game responder
     saw two connections. The client completed encrypted login, accepted the
@@ -325,6 +325,14 @@ This is the short handoff view. The full reasoning and command history are in
     that placeholder and all raw fixtures stayed outside the repository. The
     package, capture, fixture, and screenshot hashes are in
     `artifacts/arm64_diagnostic_apk_revalidation_20260825.json`.
+50. A fresh 2026-08-26 HexaParser check passed `go test ./...` at the pinned
+    commit using Go 1.22.2. Repeated decompilation produced the same source
+    hash, and `tools/repair_hexaparser_source.py` reproduced the known valid
+    source repair and 16,141-byte compiler output. The rebuilt stream still
+    differs from the original in record lengths and instruction count, so it
+    remains a source-level cross-check rather than a runtime replacement. The
+    Go module proxy was the only network used for this check. Details are in
+    `artifacts/helper_toolchain_replay.json`.
 
 ## Not verified
 

@@ -1,5 +1,6 @@
 {
   "date": "2026-08-24",
+  "latest_verification_date": "2026-08-26",
   "hexaparser": {
     "repository_commit": "ad9bd3657feece825b5f5a888f5db34ffe37afb9",
     "go_version": "go1.22.2",
@@ -11,6 +12,28 @@
     "recompiled_bytecode_sha256": "67b70c449f87d6e3b71ef0fe92ba73fff9fe5fe7a1ad63aedb34e9daf4a7b752",
     "runtime_replay_result": "connector_requested_but_expected_14900_flow_not_reached",
     "runtime_note": "The first single-port run stopped before a game socket. A later two-port negative control showed that the raw output can open the alternate 14896 path, but it does not reproduce the expected 14900 replay."
+  },
+  "hexaparser_fresh_check": {
+    "date": "2026-08-26",
+    "repository_commit": "ad9bd3657feece825b5f5a888f5db34ffe37afb9",
+    "go_version": "go1.22.2",
+    "test_command": "go test ./...",
+    "test_result": "passed",
+    "raw_decompiled_source_sha256": "cf60e41536ddebed89ca1c3b3342476763b3d28c1cc9fff29e211931a080afa5",
+    "repaired_source_sha256": "a30f9eca136e3b8ff827bfb1bfe13fb442bd2e882963bf9863cd8de5f2669e68",
+    "recompiled_bytecode_bytes": 16141,
+    "recompiled_bytecode_sha256": "67b70c449f87d6e3b71ef0fe92ba73fff9fe5fe7a1ad63aedb34e9daf4a7b752",
+    "recompiled_record_lengths_without_trailing_0a": {
+      "1": 4,
+      "2": 553,
+      "3": 8271,
+      "4": 7280
+    },
+    "original_instruction_count": 3143,
+    "recompiled_instruction_count": 3582,
+    "dependency_modules_fetched": true,
+    "game_or_connector_service_contacted": false,
+    "network_scope": "Go module proxy only"
   },
   "literal_order_repair": {
     "adapter": "tools/reverse_hexaparser_literals.py",

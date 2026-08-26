@@ -313,8 +313,10 @@ proves the local native TLS path, not a current live certificate or service.
   `tools/encode_connector_query.py` reproduces the captured connector query
   without opening a socket. `tools/conpack_legacy_zip_compat.patch` records
   the small source change needed for the old client's ZIP reader, and
-  `tools/reverse_hexaparser_literals.py` records the narrow compiler adapter,
-  and `tools/patch_connector_bytecode_loading_clear.py` preserves the original
+  `tools/repair_hexaparser_source.py` repairs the one known malformed block in
+  pinned HexaParser output, while `tools/reverse_hexaparser_literals.py`
+  records the narrow compiler adapter. `tools/patch_connector_bytecode_loading_clear.py`
+  preserves the original
   VM stream while adding the tested login-time loading clear.
   `tools/patch_gs2_success_loading_clear.py` records the equivalent source
   edit for readable GS2 experiments; its compiled output remains unverified.
