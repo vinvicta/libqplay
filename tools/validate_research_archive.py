@@ -134,6 +134,9 @@ def main():
     spectron_input_window_anchors = load_json(
         "artifacts/spectron_input_window_manual_translation_anchors_20260826.json"
     )
+    spectron_visual_helper_anchors = load_json(
+        "artifacts/spectron_visual_helper_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -1150,6 +1153,16 @@ def main():
     check("Spectron input/window semantic overlap", spectron_input_window_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron input/window default targets", spectron_input_window_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron visual helper artifact",
+        spectron_visual_helper_anchors["artifact"],
+        "spectron_visual_helper_manual_translation_anchors_20260826",
+    )
+    check("Spectron visual helper network", spectron_visual_helper_anchors["network_contacted"], False)
+    check("Spectron visual helper total", spectron_visual_helper_anchors["summary"]["anchor_count"], 11)
+    check("Spectron visual helper high confidence", spectron_visual_helper_anchors["summary"]["high_confidence_count"], 11)
+    check("Spectron visual helper semantic overlap", spectron_visual_helper_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron visual helper default targets", spectron_visual_helper_anchors["summary"]["target_default_name_count"], 5)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -1182,7 +1195,8 @@ def main():
     check("Spectron checkpoint HTML atom anchor count", spectron_checkpoint["html_atom_anchors"]["verified_name_count"], 5)
     check("Spectron checkpoint player helper anchor count", spectron_checkpoint["player_helper_anchors"]["verified_name_count"], 5)
     check("Spectron checkpoint input/window anchor count", spectron_checkpoint["input_window_anchors"]["verified_name_count"], 8)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "a309f9556b21ea43585455a08f5ec0a3291aa60e44d34b475f02672e4341c476")
+    check("Spectron checkpoint visual helper anchor count", spectron_checkpoint["visual_helper_anchors"]["verified_name_count"], 11)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "03ce132e9b5953523e6b01c13a1e4e4fa2a540b752127ef87e240a17e403d04d")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -1269,6 +1283,7 @@ def main():
         spectron_html_atom_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
+        spectron_visual_helper_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

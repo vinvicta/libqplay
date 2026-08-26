@@ -75,6 +75,8 @@ def main() -> None:
     parser.add_argument("--player-helper-verification", type=Path)
     parser.add_argument("--input-window-anchors", type=Path)
     parser.add_argument("--input-window-verification", type=Path)
+    parser.add_argument("--visual-helper-anchors", type=Path)
+    parser.add_argument("--visual-helper-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -786,6 +788,34 @@ def main() -> None:
         result["input_window_anchors"] = input_window
         result["interpretation"].append(
             "The twenty-fifth database revision also contains the separately reviewed input and window bridge helper anchors."
+        )
+    visual_helper = None
+    if args.visual_helper_anchors or args.visual_helper_verification:
+        if not args.visual_helper_anchors or not args.visual_helper_verification:
+            raise ValueError(
+                "visual helper anchors and visual helper verification must be supplied together"
+            )
+        visual_helper_document = load(args.visual_helper_anchors)
+        visual_helper_verification = load(args.visual_helper_verification)
+        if visual_helper_document.get("artifact") != "spectron_visual_helper_manual_translation_anchors_20260826":
+            raise ValueError("unexpected visual helper anchor artifact")
+        if not visual_helper_verification.get("verified"):
+            raise ValueError("visual helper anchor reopen verification did not pass")
+        expected_visual_helper = len(visual_helper_document["anchors"])
+        if visual_helper_verification["verified_name_count"] != expected_visual_helper:
+            raise ValueError("visual helper verification count differs from artifact")
+        visual_helper = {
+            "anchor_path": str(args.visual_helper_anchors),
+            "anchor_sha256": sha256_path(args.visual_helper_anchors),
+            "reopen_verification": str(args.visual_helper_verification),
+            "anchor_count": expected_visual_helper,
+            "verified_name_count": visual_helper_verification["verified_name_count"],
+            "reopen_failure_count": visual_helper_verification["failure_count"],
+        }
+    if visual_helper is not None:
+        result["visual_helper_anchors"] = visual_helper
+        result["interpretation"].append(
+            "The twenty-sixth database revision also contains the separately reviewed animation, particle, and show-image helper anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

@@ -69,8 +69,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v25.i64",
-    "sha256": "a309f9556b21ea43585455a08f5ec0a3291aa60e44d34b475f02672e4341c476"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v26.i64",
+    "sha256": "03ce132e9b5953523e6b01c13a1e4e4fa2a540b752127ef87e240a17e403d04d"
   },
   "html_atom_anchors": {
     "anchor_count": 5,
@@ -138,7 +138,8 @@
     "The twenty-second database revision also contains the separately reviewed TServerNPC blocking, draw-mode, visibility, bow, and pelt helper anchors.",
     "The twenty-third database revision also contains the separately reviewed THTMLAtom constructor and buffer accessor anchors.",
     "The twenty-fourth database revision also contains the separately reviewed compact TPlayer attachment, update, freeze, and sprite helper anchors.",
-    "The twenty-fifth database revision also contains the separately reviewed input and window bridge helper anchors."
+    "The twenty-fifth database revision also contains the separately reviewed input and window bridge helper anchors.",
+    "The twenty-sixth database revision also contains the separately reviewed animation, particle, and show-image helper anchors."
   ],
   "login_helper_anchors": {
     "anchor_count": 8,
@@ -247,5 +248,13 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_update_protocol_anchor_verification_20260826.json",
     "verified_name_count": 5
+  },
+  "visual_helper_anchors": {
+    "anchor_count": 11,
+    "anchor_path": "artifacts/spectron_visual_helper_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "852d00b825d5a984230359808f2e8531902847c717ae4ea18eefe40e56182adf",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_visual_helper_verify_v26.json",
+    "verified_name_count": 11
   }
 }
