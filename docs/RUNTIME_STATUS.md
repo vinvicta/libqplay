@@ -303,6 +303,13 @@ This is the short handoff view. The full reasoning and command history are in
     owner and direct call site remain unresolved. No IDA names changed and no
     endpoint was contacted. The generator also verifies that those 28 roles
     cover every entry in the application or engine profile category.
+47. The four naming passes were exercised together in IDA 9.3 IDALIB against a
+    disposable copy. All 277 native candidates, 886 bounded script-table
+    names, 20 FDE-backed script callbacks, and 28 application or engine roles
+    resolved with zero failures. The run added 25 function starts and split
+    two previously merged ranges at exact FDE starts. The active desktop IDA
+    database remained locked and was not overwritten. The result is in
+    `artifacts/ida_translation_validation.json`.
 
 ## Not verified
 
@@ -315,6 +322,9 @@ This is the short handoff view. The full reasoning and command history are in
   transition on a physical ARM64 device. The embedded marker statically
   decodes to `classic`, and the ordinary translated ARM64 run remains on the
   title or loading image, while both diagnostics display the world.
+* Whether the expanded callback labels should be persisted into the active
+  desktop IDA database. The disposable-copy IDALIB validation passed, but the
+  active unpacked database remained locked during this pass.
 * Whether an unmodified x86_64 build clears its loading state without the
   getter override present in several historical diagnostic APKs.
 * Whether the live server sends the same completion sequence as the local

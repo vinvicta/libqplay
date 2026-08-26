@@ -1,6 +1,9 @@
 """Small regression tests for the static script-name decoder."""
 
-from generate_script_table_inventory import decode_script_name
+from generate_script_table_inventory import (
+    decode_script_name,
+    disambiguate_proposed_names,
+)
 
 
 def encode_table_name(name):
@@ -32,6 +35,26 @@ def check(name):
     assert exact, name
 
 
+def check_name_disambiguation():
+    callbacks = [
+        {
+            "va": "0x100",
+            "proposed_name": "TPlayer_script_findweapon",
+            "roles": [{"owner": "TPlayerProperties_TPlayerProperties_void"}],
+        },
+        {
+            "va": "0x200",
+            "proposed_name": "TPlayer_script_findweapon",
+            "roles": [{"owner": "TPlayer_initStaticScriptVars_void"}],
+        },
+    ]
+    disambiguate_proposed_names(callbacks)
+    assert [item["proposed_name"] for item in callbacks] == [
+        "TPlayerProperties_script_findweapon",
+        "TPlayer_script_findweapon",
+    ]
+
+
 def main():
     for name in (
         "communityname",
@@ -41,6 +64,7 @@ def main():
         "$pref::graal::defaultfontsize",
     ):
         check(name)
+    check_name_disambiguation()
     print("script table decoder tests: ok")
 
 

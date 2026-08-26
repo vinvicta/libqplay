@@ -24,6 +24,7 @@ def main():
     profile = load_json("artifacts/unresolved_function_profile.json")
     candidates = load_json("artifacts/unresolved_function_candidates.json")
     script_tables = load_json("artifacts/script_table_inventory.json")
+    ida_validation = load_json("artifacts/ida_translation_validation.json")
 
     checks = []
 
@@ -122,6 +123,13 @@ def main():
         906,
     )
     check("script-table exact target total", table_summary["exact_untranslated_targets"], 906)
+    proposed_names = [
+        item["proposed_name"]
+        for item in script_tables["unique_callbacks"]
+        if item.get("status") in {"untranslated_default_sub", "no_function_boundary"}
+        and item.get("proposed_name")
+    ]
+    check("script-table proposed-name uniqueness", len(set(proposed_names)), len(proposed_names))
     check(
         "script-table table registration total",
         table_summary["function_tables"] + table_summary["property_tables"],
@@ -136,7 +144,50 @@ def main():
         table_summary["unique_callback_targets"],
     )
 
-    for document in (overlay, profile, candidates, script_tables, labels):
+    check(
+        "IDA validation input hash",
+        ida_validation["binary"]["libqplay_sha256"],
+        primary_hash,
+    )
+    check(
+        "IDA validation source function total",
+        ida_validation["database"]["source_saved_function_count"],
+        11272,
+    )
+    check(
+        "IDA validation function total",
+        ida_validation["database"]["validated_function_count"],
+        11297,
+    )
+    check(
+        "IDA validation default sub total",
+        ida_validation["database"]["validated_default_sub_count"],
+        459,
+    )
+    check(
+        "IDA validation live database marker",
+        ida_validation["database"]["live_ida_database_changed"],
+        False,
+    )
+    check(
+        "IDA validation pass failures",
+        sum(item["failures"] for item in ida_validation["passes"]),
+        0,
+    )
+    check(
+        "IDA validation renamed total",
+        sum(item["renamed"] for item in ida_validation["passes"]),
+        1211,
+    )
+
+    for document in (
+        overlay,
+        profile,
+        candidates,
+        script_tables,
+        labels,
+        ida_validation,
+    ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
     print("research archive validation: ok (%d checks)" % len(checks))

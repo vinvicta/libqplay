@@ -43580,7 +43580,7 @@
       "eh_frame_boundary": null,
       "has_function_boundary": true,
       "name": null,
-      "proposed_name": "TPlayer_script_findweapon",
+      "proposed_name": "TPlayerProperties_script_findweapon",
       "roles": [
         {
           "kind": "functions",

@@ -101,6 +101,16 @@ startup loading-state gate, rather than a missing map or failed resource
 download, while leaving the production meaning of the entitlement branch
 unverified.
 
+The expanded callback naming pass has also been exercised in IDA 9.3's
+IDALIB mode on a disposable copy of the database. It resolved and checked all
+277 curated native callback names, 886 bounded script-table names, 20
+`.eh_frame`-backed script callbacks, and 28 application or engine role names
+with zero mismatches. The pass added 25 function starts, including two
+splits where IDA had merged a callback into a larger neighboring function.
+This validates the addresses and names, but the desktop IDA session's active
+unpacked database was still locked, so its live database was not overwritten.
+The exact result is in `artifacts/ida_translation_validation.json`.
+
 The game has not yet been verified against a live game server. The local test
 proves that the x86_64 native client and the patched ARM64 library can reach a
 rendered world through a bounded loopback responder. Live endpoint
@@ -183,6 +193,11 @@ proves the local native TLS path, not a current live certificate or service.
   applied to formerly unnamed login, file-download, handler-table, UI, TLS,
   HTTP, socket, animation, sound, network-thread, update-package, and JNI
   bridge helpers.
+* `artifacts/ida_translation_validation.json` records the disposable-copy
+  IDALIB audit of the expanded callback naming pass. It includes the five
+  native FDE ranges, the twenty script-table FDE ranges, the two split
+  functions, and zero apply failures. The live desktop IDA database was not
+  changed.
 * `artifacts/native_callback_candidates.json` records the next table-backed
   callback, static-state, sound-wrapper, and server-object names recovered from
   the native library. The current review-only set contains 277 entries. These
@@ -198,8 +213,9 @@ proves the local native TLS path, not a current live certificate or service.
   `tools/ida_apply_script_table_inventory.py` creates a review-only IDA rename
   plan for the exact bounded subset, while
   `tools/ida_apply_script_table_boundaries.py` handles the 20
-  `.eh_frame`-backed boundaries separately. The decoder regression check is
-  in `tools/test_script_table_inventory.py`.
+  `.eh_frame`-backed boundaries separately. The boundary pass also handles the
+  two saved IDA ranges that contain an independently proven callback start.
+  The decoder regression check is in `tools/test_script_table_inventory.py`.
 * `artifacts/symbol_translation_overlay.json` joins the saved 1,645 default
   `sub_` functions with 886 exact script-table names and 271 curated callback
   candidates. It leaves the remaining 488 default functions explicit instead
@@ -235,8 +251,12 @@ proves the local native TLS path, not a current live certificate or service.
 * `tools/export_inbound_handler_table.py` reproduces the handler-table export
   from the active IDA database.
 * `tools/ida_apply_native_callback_candidates.py` reviews and optionally applies
-  the prepared callback, static-state, and sound-wrapper names once the IDA
-  bridge is ready.
+  the prepared callback, static-state, and sound-wrapper names from the IDA
+  bridge or IDALIB.
+* `tools/ida_apply_all_translations.py` runs the native, exact script-table,
+  FDE-boundary, and unresolved-role passes in one IDA session. It is
+  review-only by default; enable both switches only after checking the
+  individual plans.
 * `tools/` contains IDAPython, parsing, replay, and diagnostic patch helpers.
   `tools/encode_connector_query.py` reproduces the captured connector query
   without opening a socket. `tools/conpack_legacy_zip_compat.patch` records

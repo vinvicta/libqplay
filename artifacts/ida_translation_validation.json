@@ -1,0 +1,51 @@
+{
+  "binary": {
+    "architecture": "arm64-v8a",
+    "libqplay_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8"
+  },
+  "database": {
+    "source_saved_function_count": 11272,
+    "validated_function_count": 11297,
+    "validated_default_sub_count": 459,
+    "live_ida_database_changed": false,
+    "persistence_scope": "single IDALIB process on a disposable database copy"
+  },
+  "passes": [
+    {
+      "name": "native callback candidates",
+      "candidates": 277,
+      "boundaries_added": 5,
+      "renamed": 277,
+      "failures": 0
+    },
+    {
+      "name": "exact script-table candidates",
+      "candidates": 886,
+      "boundaries_added": 0,
+      "renamed": 886,
+      "failures": 0
+    },
+    {
+      "name": "script-table FDE boundaries",
+      "candidates": 20,
+      "boundaries_added": 20,
+      "functions_split": 2,
+      "renamed": 20,
+      "failures": 0
+    },
+    {
+      "name": "unresolved application and engine roles",
+      "candidates": 28,
+      "boundaries_added": 0,
+      "renamed": 28,
+      "failures": 0
+    }
+  ],
+  "status": "validated_in_memory_on_disposable_copy",
+  "network_contacted": false,
+  "notes": [
+    "The five native callbacks without saved IDA boundaries were created from exact ELF .eh_frame FDE ranges.",
+    "Two script-table FDE starts were inside larger saved IDA functions. The boundary pass split those ranges before adding the callback functions.",
+    "The original IDA database was not overwritten because its active unpacked state remained locked by the desktop session."
+  ]
+}

@@ -790,6 +790,7 @@
     },
     {
       "va": "0x18aa68",
+      "function_boundary": {"start_va": "0x18aa68", "end_va": "0x18aa88", "source": "ELF .eh_frame FDE"},
       "current_ida_name": "sub_18AA68",
       "proposed_name": "TServerPlayer_script_PMsWaiting",
       "confidence": "high",
@@ -940,6 +941,7 @@
     },
     {
       "va": "0x180e50",
+      "function_boundary": {"start_va": "0x180e50", "end_va": "0x180e74", "source": "ELF .eh_frame FDE"},
       "current_ida_name": "sub_180E50",
       "proposed_name": "TServerNPC_getNPCsIndex",
       "confidence": "high",
@@ -1046,6 +1048,7 @@
     },
     {
       "va": "0x18402c",
+      "function_boundary": {"start_va": "0x18402c", "end_va": "0x184050", "source": "ELF .eh_frame FDE"},
       "current_ida_name": "sub_18402C",
       "proposed_name": "TServerNPC_getWidth",
       "confidence": "high",
@@ -1477,6 +1480,7 @@
     },
     {
       "va": "0x181d58",
+      "function_boundary": {"start_va": "0x181d58", "end_va": "0x181df8", "source": "ELF .eh_frame FDE"},
       "current_ida_name": "sub_181D58",
       "proposed_name": "TServerNPC_script_hideImgs",
       "confidence": "high",
@@ -1709,6 +1713,7 @@
     },
     {
       "va": "0x1a4e98",
+      "function_boundary": {"start_va": "0x1a4e98", "end_va": "0x1a4f14", "source": "ELF .eh_frame FDE"},
       "current_ida_name": "sub_1A4E98",
       "proposed_name": "TServerLevel_script_testNPC",
       "confidence": "high",

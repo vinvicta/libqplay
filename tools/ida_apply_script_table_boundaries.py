@@ -2,9 +2,11 @@
 
 The complete script-table inventory contains 20 exact callback addresses that
 the saved IDA function inventory did not mark as function starts. Each one has
-an ELF .eh_frame FDE beginning at the callback address. The default mode only
-writes a review plan. Set APPLY_BOUNDARIES and APPLY_RENAMES explicitly after
-checking the plan inside IDA.
+an ELF .eh_frame FDE beginning at the callback address. Two are inside a
+larger function range saved by IDA, so the apply mode can split that range at
+the independently proven FDE start before adding the callback function. The
+default mode only writes a review plan. Set APPLY_BOUNDARIES and
+APPLY_RENAMES explicitly after checking the plan inside IDA.
 """
 
 import json
@@ -79,21 +81,82 @@ def resolve_or_define(candidate):
     start = int(candidate["va"], 16)
     end = int(candidate["eh_frame_boundary"]["end_va"], 16)
     if end <= start:
-        return None, "the .eh_frame range is invalid"
+        return None, "the .eh_frame range is invalid", False, False
 
     function = ida_funcs.get_func(start)
+    boundary_added = False
+    split_existing = False
     if function is None:
         if not APPLY_BOUNDARIES:
-            return None, "the .eh_frame range is ready but APPLY_BOUNDARIES is false"
+            return (
+                None,
+                "the .eh_frame range is ready but APPLY_BOUNDARIES is false",
+                False,
+                False,
+            )
         if not ida_funcs.add_func(start, end):
-            return None, "IDA rejected the .eh_frame function range"
+            return None, "IDA rejected the .eh_frame function range", False, False
         function = ida_funcs.get_func(start)
+        boundary_added = True
+    elif function.start_ea != start:
+        if function.end_ea < end:
+            return (
+                None,
+                "the containing IDA function ends before the .eh_frame range",
+                False,
+                False,
+            )
+        if not APPLY_BOUNDARIES:
+            return (
+                None,
+                "the .eh_frame start is inside an existing function; "
+                "APPLY_BOUNDARIES is false",
+                False,
+                False,
+            )
+        old_start = function.start_ea
+        old_end = function.end_ea
+        if not ida_funcs.set_func_end(old_start, start):
+            return (
+                None,
+                "IDA rejected the split at the .eh_frame function start",
+                False,
+                False,
+            )
+        function = ida_funcs.get_func(start)
+        if function is None:
+            if not ida_funcs.add_func(start, end):
+                ida_funcs.set_func_end(old_start, old_end)
+                return (
+                    None,
+                    "IDA rejected the .eh_frame function after the split",
+                    False,
+                    False,
+                )
+            function = ida_funcs.get_func(start)
+        if function is None:
+            ida_funcs.set_func_end(old_start, old_end)
+            return (
+                None,
+                "IDA did not expose the split function after boundary creation",
+                False,
+                False,
+            )
+        split_existing = True
+        boundary_added = True
 
     if function is None:
-        return None, "IDA did not expose the function after boundary creation"
+        return (
+            None,
+            "IDA did not expose the function after boundary creation",
+            False,
+            split_existing,
+        )
     if function.start_ea != start:
-        return None, "IDA resolved a different function start"
-    return function, None
+        return None, "IDA resolved a different function start", False, split_existing
+    if function.end_ea != end:
+        return None, "IDA resolved a different function end", False, split_existing
+    return function, None, boundary_added, split_existing
 
 
 def proposed_name_is_available(ea, proposed_name):
@@ -105,6 +168,7 @@ def apply_candidates(candidates):
     plan = []
     failures = []
     boundaries_added = 0
+    functions_split = 0
     renamed = 0
     comments = 0
 
@@ -118,8 +182,7 @@ def apply_candidates(candidates):
             "function_end": None,
             "roles": candidate.get("roles", []),
         }
-        had_function = ida_funcs.get_func(int(candidate["va"], 16)) is not None
-        function, error = resolve_or_define(candidate)
+        function, error, boundary_added, split_existing = resolve_or_define(candidate)
         if error:
             item["error"] = error
             failures.append(item)
@@ -128,8 +191,12 @@ def apply_candidates(candidates):
 
         item["function_start"] = int(function.start_ea)
         item["function_end"] = int(function.end_ea)
-        if not had_function:
+        item["boundary_added"] = boundary_added
+        item["split_existing_function"] = split_existing
+        if boundary_added:
             boundaries_added += 1
+        if split_existing:
+            functions_split += 1
 
         available, existing_ea = proposed_name_is_available(
             function.start_ea, candidate["proposed_name"]
@@ -160,6 +227,7 @@ def apply_candidates(candidates):
         "candidate_count": len(candidates),
         "resolved_count": len(candidates) - len(failures),
         "boundaries_added": boundaries_added,
+        "functions_split": functions_split,
         "renamed_count": renamed,
         "comments_added": comments,
         "failures": failures,
@@ -183,6 +251,7 @@ print(
             "candidate_count": result["candidate_count"],
             "resolved_count": result["resolved_count"],
             "boundaries_added": result["boundaries_added"],
+            "functions_split": result["functions_split"],
             "renamed_count": result["renamed_count"],
             "comments_added": result["comments_added"],
             "failure_count": len(result["failures"]),

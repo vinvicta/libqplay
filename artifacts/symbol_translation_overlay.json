@@ -9887,7 +9887,7 @@
         ],
         "script_status": "untranslated_default_sub"
       },
-      "proposed_name": "TPlayer_script_findweapon",
+      "proposed_name": "TPlayerProperties_script_findweapon",
       "segment": ".text",
       "size": 160,
       "source": "exact_script_table"

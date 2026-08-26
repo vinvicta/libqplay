@@ -298,12 +298,75 @@ def owner_prefix(caller_name: str) -> str:
     return first
 
 
+def owner_specific_prefix(caller_name: str) -> str:
+    """Return a stable class-like prefix for resolving name collisions."""
+
+    base = caller_name
+    for suffix in ("_void", "__"):
+        if suffix in base:
+            base = base.split(suffix, 1)[0]
+    first = base.split("_", 1)[0]
+    if first in {"gsfunctions", "main"}:
+        return owner_prefix(caller_name)
+    return first
+
+
 def proposed_name(owner: str, kind: str, role: str, script_name: str) -> str:
     prefix = owner_prefix(owner)
     safe_name = sanitize_name(script_name)
     if kind == "properties":
         return f"{prefix}_{role}_{safe_name}"
     return f"{prefix}_script_{safe_name}"
+
+
+def replace_name_prefix(name: str, prefix: str) -> str:
+    """Replace only the generated owner prefix, preserving the script role."""
+
+    for marker in ("_script_", "_get_", "_set_"):
+        marker_index = name.find(marker)
+        if marker_index >= 0:
+            return prefix + name[marker_index:]
+    return prefix + "_" + name.rsplit("_", 1)[-1]
+
+
+def disambiguate_proposed_names(callbacks: list[dict]) -> None:
+    """Make generated names unique while keeping collisions easy to review."""
+
+    by_name: dict[str, list[dict]] = defaultdict(list)
+    for callback in callbacks:
+        name = callback.get("proposed_name")
+        if name:
+            by_name[name].append(callback)
+
+    used = {
+        callback.get("proposed_name")
+        for callback in callbacks
+        if callback.get("proposed_name")
+    }
+    for original_name, entries in sorted(by_name.items()):
+        if len(entries) < 2:
+            continue
+        # Keep the original spelling available for the first owner that does
+        # not need a more specific prefix. This is deterministic for a static
+        # address map and avoids an arbitrary numeric suffix in the common case.
+        used.discard(original_name)
+        for entry in sorted(entries, key=lambda item: int(item["va"], 16)):
+            owners = sorted({role["owner"] for role in entry.get("roles", [])})
+            replacement = None
+            for owner in owners:
+                candidate = replace_name_prefix(
+                    original_name, owner_specific_prefix(owner)
+                )
+                if candidate not in used:
+                    replacement = candidate
+                    break
+            if replacement is None:
+                suffix = 2
+                while f"{original_name}_{suffix}" in used:
+                    suffix += 1
+                replacement = f"{original_name}_{suffix}"
+            entry["proposed_name"] = replacement
+            used.add(replacement)
 
 
 def coverage_for_target(
@@ -467,7 +530,9 @@ def build_unique_callbacks(tables: list[dict]) -> list[dict]:
                     entry["proposed_name"] = callback["proposed_name"]
                 if not record["script_name_exact"]:
                     entry["name_review_required"] = True
-    return [grouped[target] for target in sorted(grouped)]
+    callbacks = [grouped[target] for target in sorted(grouped)]
+    disambiguate_proposed_names(callbacks)
+    return callbacks
 
 
 def generate(args: argparse.Namespace) -> dict:

@@ -286,6 +286,17 @@ bridge is unavailable. Each missing boundary has a matching ELF `.eh_frame`
 range, and `tools/ida_apply_script_table_boundaries.py` provides a separate
 review-only boundary and rename pass for those 20 callbacks.
 
+The four apply passes were then run together in IDA 9.3 IDALIB against a
+disposable copy of the database. All 277 native callback candidates, 886
+bounded script-table names, 20 FDE-backed script callbacks, and 28 unresolved
+application or engine roles resolved at the expected addresses with zero
+failures. Five native callback ranges and all twenty script-table ranges were
+created from ELF unwind evidence. Two of the latter required shortening a
+larger saved IDA function at the exact FDE start before adding the callback.
+This is a validation of the names and ranges, not a claim that the active
+desktop IDA database was changed. The result is recorded in
+`artifacts/ida_translation_validation.json`.
+
 The saved function inventory has 1,645 IDA-created default `sub_` functions.
 `artifacts/symbol_translation_overlay.json` maps 886 of them to exact
 script-table names and 271 to curated callback candidates, leaving 488
@@ -353,6 +364,12 @@ When the IDA bridge is available, run
 resolves the existing names, checks each expected function address, reports
 missing or mismatched functions, and only writes the proposed names and
 evidence comments when `APPLY_RENAMES` is explicitly enabled.
+
+For the complete pass, `tools/ida_apply_all_translations.py` runs the four
+appliers in one session. Its two switches are both false by default. Set
+`APPLY_BOUNDARIES = True` and `APPLY_RENAMES = True` only after reviewing the
+reports. The boundary switch is required for the five native FDE ranges and
+the twenty script-table ranges, including the two intentional function splits.
 
 The inventory was generated from the active ARM64 database by
 `tools/export_function_inventory.py`. It waits for auto-analysis, joins each

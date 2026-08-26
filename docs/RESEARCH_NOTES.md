@@ -1468,3 +1468,36 @@ four-byte branch veneer at `0x1f94fc`, which targets the exact
 structural classification rather than recovery of an original ELF source name,
 but it removes noise from the manual queue and leaves 28 application or engine
 entries for follow-up.
+
+## Disposable IDA translation validation
+
+The IDA bridge remained unavailable, but the local installation includes IDA
+9.3's IDALIB interface. I copied the packed ARM64 database to a private
+temporary directory and ran the native callback, exact script-table, FDE
+boundary, and unresolved-role appliers together in one process. Keeping the
+passes in one process matters because the IDALIB command wrapper does not
+reopen its unpacked state with the same labels after the process exits.
+
+The in-memory audit checked the final name and function start for every one of
+277 native callback candidates, 886 bounded script-table candidates, 20
+script-table callbacks without saved boundaries, and 28 unresolved application
+or engine roles. It found zero mismatches. The native pass created five exact
+`.eh_frame` ranges. The script-table boundary pass created all twenty ranges,
+including two callbacks that began inside larger saved IDA functions. It
+shortened those two larger ranges at the exact FDE starts before creating the
+callbacks. The final temporary database contained 11,297 function starts and
+459 remaining `sub_` names.
+
+The run also exposed one naming collision that the generator now handles
+deterministically. Both `0x16ca18` and `0x16db28` came from a `findweapon`
+script slot and initially proposed `TPlayer_script_findweapon`. The constructor
+owned target is now labeled `TPlayerProperties_script_findweapon`, while the
+static initializer keeps `TPlayer_script_findweapon`. The generator regression
+test and the archive validator check that the 906 exact proposed names stay
+unique.
+
+This validates the address map, the FDE ranges, the collision handling, and the
+IDAPython scripts without modifying the user's active IDA database. The active
+unpacked database was still locked by the desktop session. The compact result
+is in `artifacts/ida_translation_validation.json`; no database, APK, asset,
+certificate, or network response was added to the repository.
