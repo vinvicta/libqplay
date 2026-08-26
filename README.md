@@ -310,6 +310,16 @@ All eight reopened successfully. The evidence is in
 `artifacts/spectron_login_helper_manual_translation_anchors_20260826.json`,
 and the v13 database SHA-256 is recorded in the checkpoint.
 
+A fourteenth disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v14.i64`,
+adds one reviewed client encryption-in tail-thunk anchor. The source and
+target both load the global client object, check it, and forward the string to
+the connection encryption-in parser. The target already had a mangled
+function boundary, and the raw bytes are recorded as an additional integrity
+check. It reopened successfully. The evidence is in
+`artifacts/spectron_parse_wrapper_manual_translation_anchor_20260826.json`,
+and the v14 database SHA-256 is recorded in the checkpoint.
+
 The first direct emulator launch of the supplied Spectron package also found
 a separate modding-layer problem. After Start was tapped, `libxposed.so`
 crashed at its statically confirmed WebTop `crash` command branch. The same
@@ -434,6 +444,9 @@ proves the local native TLS path, not a current live certificate or service.
   records the eight reviewed client inbound and state-transition anchors.
 * `artifacts/spectron_login_helper_manual_translation_anchors_20260826.json`
   records the eight reviewed login, event, and small client-state anchors.
+* `artifacts/spectron_parse_wrapper_manual_translation_anchor_20260826.json`
+  records the reviewed client encryption-in tail-thunk anchor and its raw
+  bytes.
 * `artifacts/spectron_translation_checkpoint_20260826.json` records the
   close-and-reopen check for the persisted Spectron IDA copy.
 * `artifacts/spectron_runtime_crash_control_20260826.json` records the local
@@ -671,6 +684,8 @@ proves the local native TLS path, not a current live certificate or service.
   reviewed client inbound and state-transition roles and target shape checks.
   The `tools/generate_spectron_login_helper_anchors.py` generator records
   reviewed login, event, and small client-state roles and target shape checks.
+  The `tools/generate_spectron_parse_wrapper_anchor.py` generator records the
+  reviewed client encryption-in tail-thunk and its raw byte check.
   `tools/ida_apply_spectron_translation.py` and
   `tools/ida_apply_spectron_manual_anchors.py` write separate disposable IDA
   copies, while the matching verification scripts reopen and check them. The

@@ -51,6 +51,8 @@ def main() -> None:
     parser.add_argument("--client-inbound-verification", type=Path)
     parser.add_argument("--login-helper-anchors", type=Path)
     parser.add_argument("--login-helper-verification", type=Path)
+    parser.add_argument("--parse-wrapper-anchors", type=Path)
+    parser.add_argument("--parse-wrapper-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -426,6 +428,34 @@ def main() -> None:
         result["login_helper_anchors"] = login_helper
         result["interpretation"].append(
             "The thirteenth database revision also contains the separately reviewed login, event, and small client state helper anchors."
+        )
+    parse_wrapper = None
+    if args.parse_wrapper_anchors or args.parse_wrapper_verification:
+        if not args.parse_wrapper_anchors or not args.parse_wrapper_verification:
+            raise ValueError(
+                "parse-wrapper anchors and parse-wrapper verification must be supplied together"
+            )
+        parse_wrapper_document = load(args.parse_wrapper_anchors)
+        parse_wrapper_verification = load(args.parse_wrapper_verification)
+        if parse_wrapper_document.get("artifact") != "spectron_parse_wrapper_manual_translation_anchor_20260826":
+            raise ValueError("unexpected parse-wrapper anchor artifact")
+        if not parse_wrapper_verification.get("verified"):
+            raise ValueError("parse-wrapper anchor reopen verification did not pass")
+        expected_parse_wrapper = len(parse_wrapper_document["anchors"])
+        if parse_wrapper_verification["verified_name_count"] != expected_parse_wrapper:
+            raise ValueError("parse-wrapper verification count differs from artifact")
+        parse_wrapper = {
+            "anchor_path": str(args.parse_wrapper_anchors),
+            "anchor_sha256": sha256_path(args.parse_wrapper_anchors),
+            "reopen_verification": str(args.parse_wrapper_verification),
+            "anchor_count": expected_parse_wrapper,
+            "verified_name_count": parse_wrapper_verification["verified_name_count"],
+            "reopen_failure_count": parse_wrapper_verification["failure_count"],
+        }
+    if parse_wrapper is not None:
+        result["parse_wrapper_anchors"] = parse_wrapper
+        result["interpretation"].append(
+            "The fourteenth database revision also contains the separately reviewed client encryption-in tail-thunk anchor."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

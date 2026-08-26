@@ -553,6 +553,14 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_login_helper_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+75. A focused IDA check added one high-confidence client encryption-in
+    tail-thunk anchor below the semantic matcher minimum-size threshold. The
+    target function already had a mangled boundary, and its raw bytes were
+    checked as well. The name reopened successfully in the v14 disposable
+    copy. See
+    `artifacts/spectron_parse_wrapper_manual_translation_anchor_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
