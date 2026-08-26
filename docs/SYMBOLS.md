@@ -198,9 +198,10 @@ The callback bodies provide an unusually complete cross-check. The property
 accessors read layer dimensions, zone flags, and the layer-list count. The
 function wrappers call the exported `TServerLevel` methods for bombs,
 explosions, projectiles, tiles, and collision tests, or delete entries from
-the corresponding object lists. The `reflectarrow` record has the known
-encoded-zero terminator anomaly, while the short names `removeexplo` and
-`testexplo` are preserved exactly as stored by the client.
+the corresponding object lists. The raw `reflectarrow` record contains the
+known encoded-zero sentinel, which `THashList::codesimplefix0` now repairs.
+The short names `removeexplo` and `testexplo` are preserved exactly as stored
+by the client.
 
 The twenty-four proposed names are kept separate in
 `artifacts/native_callback_candidates.json`. They bring the review-only
@@ -234,9 +235,10 @@ jumps that are already named. Four callback pointers, at `0x180e50`,
 37 property targets and all 57 script targets are recorded in
 `artifacts/native_callback_candidates.json` under the two NPC groups.
 
-The encoded terminator anomaly appears in several NPC names, including
-`peltwithbush`, `peltwithsign`, `peltwithvase`, `canbecarried`, and `showtext`.
-Those spellings are supported by their table position and callback context.
+Several NPC records, including `peltwithbush`, `peltwithsign`, `peltwithvase`,
+`canbecarried`, and `showtext`, contain the old encoded-zero sentinel. The
+decoder repairs those bytes, while table position and callback context provide
+additional cross-checks for the spellings.
 The 94 new NPC candidates bring the review-only set to 219.
 
 The smaller server-object constructors provide another compact set of exact
@@ -267,7 +269,7 @@ These three groups add 35 unique targets, raising the review-only set to 277.
 They remain unapplied until the IDA bridge is available.
 
 The complete registration scan is in `artifacts/script_table_inventory.json`.
-It finds 70 property tables and 62 function tables through direct calls to the
+The scan finds 70 property tables and 62 function tables through direct calls to the
 two imported `TScriptProperty` registration stubs. The tables contain 678
 property records and 776 static function records, plus one dynamic Android
 registration slot. The records resolve to 1,779 unique callback targets.
@@ -276,8 +278,9 @@ The inventory distinguishes 411 names already present in the semantic-label
 artifact, 258 in the curated callback candidate artifact, 204 existing
 non-default IDA names, 886 exact new names with saved function boundaries, and
 20 exact pointers without saved boundaries. The decoder models the old
-zero-byte encoding behavior, so all 1,455 static record names are recovered
-exactly. The exact bounded set has a review-only IDA applier in
+zero-byte encoding behavior, so all 1,454 static record names are recovered
+exactly. The remaining declared slot is the dynamic Android registration path.
+The exact bounded set has a review-only IDA applier in
 `tools/ida_apply_script_table_inventory.py`; it is not enabled while the IDA
 bridge is unavailable. Each missing boundary has a matching ELF `.eh_frame`
 range, and `tools/ida_apply_script_table_boundaries.py` provides a separate

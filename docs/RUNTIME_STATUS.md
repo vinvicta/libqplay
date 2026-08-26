@@ -257,11 +257,12 @@ This is the short handoff view. The full reasoning and command history are in
     entries. No IDA names changed and no endpoint was contacted.
 42. A complete offline scan of direct `TScriptProperty::addProps` and
     `addFuncs` calls found 70 property tables and 62 function tables. Their
-    1,455 declared records resolve to 1,779 unique callback targets. The map
+    1,455 declared records, comprising 1,454 static records and one dynamic
+    Android registration slot, resolve to 1,779 unique callback targets. The map
     identifies 886 exact new names with saved boundaries and 20 exact
     pointers without boundaries. The native zero-byte repair is modeled, so
-    all 1,455 record names are exact. No IDA names changed and no endpoint
-    was contacted. Each of the 20 pointers also has an ELF `.eh_frame` range;
+    all 1,454 static record names are exact. No IDA names changed and no
+    endpoint was contacted. Each of the 20 pointers also has an ELF `.eh_frame` range;
     `tools/ida_apply_script_table_boundaries.py` keeps those boundary changes
     separate from the ordinary rename pass.
 43. The translation overlay accounts for 886 of the saved default `sub_`

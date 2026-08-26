@@ -1175,13 +1175,14 @@ and each body reaches the corresponding exported server-level method or list.
 | `testnpc` | `0x1a4e98` | Calls `isOnNPC` and returns the matching NPC index. |
 | `tiletype` | `0x1a45a8` | Directly forwards to `TServerLevel::getTileType`. |
 
-Two bytes in the encoded `reflectarrow` record decode to zero under the normal
-formula. The table stores nonzero replacements instead, so a literal decoder
-reports two unknown characters even though the callback behavior and the
-expected script name are clear. This is the same old string-table terminator
-quirk seen in the GUI tables. The exact legacy names `removeexplo` and
-`testexplo` are retained rather than silently expanding them to modern-sounding
-spellings.
+In the initial pass, two bytes in the encoded `reflectarrow` record decoded to
+zero under the normal formula. The table stores nonzero replacements instead,
+so that first literal decoder reported two unknown characters even though the
+callback behavior and expected script name were clear. This is the same old
+string-table terminator quirk seen in the GUI tables. The decoder now models
+`THashList::codesimplefix0` and restores those bytes, so the current inventory
+treats `reflectarrow` as exact. The legacy names `removeexplo` and `testexplo`
+are retained rather than silently expanding them to modern-sounding spellings.
 
 These twenty-four names are now in
 `artifacts/native_callback_candidates.json` under
@@ -1213,9 +1214,9 @@ Those shared targets are represented as one candidate each, so the batch does
 not assign two incompatible names to the same native function. The `nick`
 getter at `0x18acec` is included, while its setter is already a surviving ELF
 jump to `TServerPlayer::setNick` at `0x18e164` and is intentionally not
-duplicated. The `attachedtoobject` name contains the familiar encoded-zero
-terminator marker, so the recovered spelling is based on the table context and
-the paired setter rather than on the literal bytes alone.
+duplicated. The raw `attachedtoobject` record contains the familiar encoded-zero
+sentinel. The decoder now applies `THashList::codesimplefix0` and restores the
+spelling exactly; the table context and paired setter remain useful cross-checks.
 
 The six function entries decode to `isguildpm`, `ismasspm`, `pmswaiting`,
 `openexternalhistory`, `openexternalpm`, and `showprofile`. Their callback
@@ -1329,8 +1330,8 @@ no live endpoint was contacted.
 
 ## Full static script-table inventory
 
-The table work was expanded from individual server classes into a complete
-offline scan of the library's direct calls to the imported
+I broadened the audit from individual server classes into a complete offline
+scan of the library's direct calls to the imported
 `TScriptProperty::addProps` and `TScriptProperty::addFuncs` stubs. The scan
 found 132 registration calls: 70 property tables and 62 function tables. Their
 declared counts cover 678 property records and 777 function slots. One Android
@@ -1344,7 +1345,9 @@ name decoder preserves ordinary literal strings and applies the inverse of
 `THashList::encodesimple` to transformed strings. It also models
 `THashList::codesimplefix0`, which restores encoded zero bytes represented by
 the old table sentinel. The raw bytes remain in the inventory as evidence,
-but all 1,455 static record names now decode exactly.
+but all 1,454 statically decoded record names now decode exactly. The 1,455th
+declared slot is the dynamic Android registration path and has no static table
+pointer.
 
 Across those records there are 1,779 unique callback targets. The existing
 semantic-label artifact covers 411 of them, the curated callback artifact
@@ -1354,9 +1357,9 @@ saved function boundaries and 20 exact callback pointers without saved
 boundaries. The full record map and these coverage states are in
 `artifacts/script_table_inventory.json`.
 
-The ELF `.eh_frame` section contains a function descriptor for each of those
-20 pointers, with an FDE beginning at the callback address and ending at the
-next proven code boundary. The inventory retains those start and end values as
+The ELF `.eh_frame` section contains an FDE beginning at each of those 20
+callback addresses and ending at the next proven code boundary. The inventory
+retains those start and end values as
 independent boundary evidence. The regular rename applier intentionally skips
 these entries; `tools/ida_apply_script_table_boundaries.py` provides a separate
 review-only path that can define the ranges first and then apply the exact
