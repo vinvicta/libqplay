@@ -75,6 +75,53 @@ def array_entries(blob: bytes, sections: dict[str, dict[str, int]], name: str) -
     ]
 
 
+def sign_extend(value: int, bits: int) -> int:
+    return value - (1 << bits) if value & (1 << (bits - 1)) else value
+
+
+def branch_target(pc: int, instruction: int) -> int:
+    return pc + sign_extend(instruction & 0x03FFFFFF, 26) * 4
+
+
+def cleanup_wrapper_kind(
+    item: dict[str, object], blob: bytes, symbol_names: dict[int, str]
+) -> tuple[str, str] | None:
+    """Recognize fixed-global compiler cleanup thunks by instruction shape."""
+
+    size = value(item["size"])
+    if size not in (12, 16):
+        return None
+    ea = value(item["ea"])
+    words = [
+        struct.unpack_from("<I", blob, ea + offset)[0]
+        for offset in range(0, size, 4)
+    ]
+    if (words[0] & 0x9F00001F) != 0x90000000:
+        return None
+    if any((word & 0xFFC003FF) != 0x91000000 for word in words[1:-1]):
+        return None
+    if (words[-1] & 0xFC000000) != 0x14000000:
+        return None
+
+    target = branch_target(ea + size - 4, words[-1])
+    demangled = symbol_names.get(target)
+    targets = {
+        "TString::clear(void)": (
+            "tstring_static_cleanup_wrapper",
+            "The function computes a fixed global TString address and tail-calls TString::clear; it is a compiler-generated static cleanup wrapper without an independent source body.",
+        ),
+        "TStringList::~TStringList()": (
+            "tstringlist_static_cleanup_wrapper",
+            "The function computes a fixed global TStringList address and tail-calls its destructor; it is a compiler-generated static cleanup wrapper without an independent source body.",
+        ),
+        "TGraalVar::~TGraalVar()": (
+            "tgraalvar_static_cleanup_wrapper",
+            "The function computes a fixed global TGraalVar address and tail-calls its destructor; it is a compiler-generated static cleanup wrapper without an independent source body.",
+        ),
+    }
+    return targets.get(demangled)
+
+
 def region_definitions() -> list[dict[str, object]]:
     """Return static-library gaps and isolated helpers with family evidence.
 
@@ -156,11 +203,20 @@ def region_definitions() -> list[dict[str, object]]:
     ]
 
 
-def classify(ea: int, init_fini: set[int]) -> tuple[str, str]:
+def classify(
+    item: dict[str, object],
+    init_fini: set[int],
+    blob: bytes,
+    symbol_names: dict[int, str],
+) -> tuple[str, str]:
+    ea = value(item["ea"])
     if ea == 0xD2170:
         return "plt0_resolver", "The first 20-byte .plt entry is the AArch64 resolver slot, not an imported function."
     if ea in init_fini:
         return "init_or_fini_array_entry", "The address is referenced by the ELF .init_array or .fini_array."
+    cleanup = cleanup_wrapper_kind(item, blob, symbol_names)
+    if cleanup is not None:
+        return cleanup
     for region in region_definitions():
         extra_addresses = {
             int(address) for address in region.get("additional_addresses", [])
@@ -185,6 +241,11 @@ def generate(args: argparse.Namespace) -> dict[str, object]:
     inventory = json.loads(Path(args.inventory).read_text(encoding="utf-8"))
     overlay = json.loads(Path(args.overlay).read_text(encoding="utf-8"))
     symbols = json.loads(Path(args.symbols).read_text(encoding="utf-8"))
+    symbol_names = {
+        value(item["ea"]): str(item.get("demangled") or "")
+        for item in symbols
+        if item.get("kind") == "plt_thunk"
+    }
     unresolved = [
         dict(item, ea=value(item["ea"]))
         for item in overlay["unresolved_default_sub_functions"]
@@ -192,7 +253,7 @@ def generate(args: argparse.Namespace) -> dict[str, object]:
 
     groups: dict[str, dict[str, object]] = {}
     for item in unresolved:
-        category, evidence = classify(item["ea"], init_fini)
+        category, evidence = classify(item, init_fini, blob, symbol_names)
         group = groups.setdefault(
             category,
             {

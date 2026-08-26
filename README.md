@@ -175,8 +175,10 @@ proves the local native TLS path, not a current live certificate or service.
   and the boundary between translated symbols and IDA-created functions.
 * `artifacts/unresolved_function_profile.json` profiles the 488 default
   `sub_` entries that still lack source names. It separates likely static
-  library internals, init/fini array entries, the PLT resolver slot, and the
-  remaining application or engine code.
+  library internals, compiler-generated cleanup wrappers, init/fini array
+  entries, the PLT resolver slot, and the remaining application or engine code.
+  The current profile identifies 104 cleanup wrappers and leaves 31
+  application or engine entries in the unresolved queue.
 * `artifacts/ida_semantic_labels.json` records 467 evidence-backed names
   applied to formerly unnamed login, file-download, handler-table, UI, TLS,
   HTTP, socket, animation, sound, network-thread, update-package, and JNI

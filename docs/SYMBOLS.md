@@ -302,13 +302,17 @@ bzip2, 3 in GIF support, 2 in YAJL, 1 in the shared LibTomCrypt DES core, and
 outside the main contiguous GPC gap, which is called by `gpc_tristrip_clip`
 and formats the library's `gpc malloc failure` diagnostic for tristrip node
 creation. Another 19 are addresses referenced by
-the ELF `.init_array` or `.fini_array`, and one is the 20-byte AArch64 PLT
-resolver slot. That leaves 135 application or engine entries without a safe
-source-name recovery. The profile records the address and size of every one,
-but deliberately does not turn library-region membership into guessed source
-names. This keeps the complete symbol translation separate from the harder
-problem of naming compiler-created or static functions whose original names
-were never stored in the APK.
+the ELF `.init_array` or `.fini_array`. Another 104 are compiler-generated
+static cleanup wrappers. Their fixed global-object address and tail target
+make the family unambiguous: 97 call `TString::clear`, 5 call
+`TStringList::~TStringList`, and 2 call `TGraalVar::~TGraalVar`. These wrappers
+do not have an independent source body to recover. One more entry is the
+20-byte AArch64 PLT resolver slot. That leaves 31 application or engine
+entries without a safe source-name recovery. The profile records the address
+and size of every one, but deliberately does not turn library-region
+membership into guessed source names. This keeps the complete symbol
+translation separate from the harder problem of naming compiler-created or
+static functions whose original names were never stored in the APK.
 
 `tools/generate_unresolved_function_profile.py` rebuilds this report from the
 saved inventory, overlay, symbol export, and ELF section data. It is a

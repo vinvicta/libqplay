@@ -1430,3 +1430,11 @@ saved inventory and unresolved profile. The companion
 `tools/ida_apply_unresolved_function_candidates.py` is deliberately disabled
 by default and is intended for review once the IDA bridge is available. No IDA
 names changed during this pass, and no endpoint was contacted.
+
+The same profile pass also recognized 104 compiler-generated cleanup wrappers
+that had been mixed into the application queue. Each wrapper computes a fixed
+global object address and tail-calls a known destructor or clear method. The
+targets are `TString::clear` for 97 entries, `TStringList::~TStringList` for 5,
+and `TGraalVar::~TGraalVar` for 2. This is a structural classification rather
+than recovery of an original ELF source name, but it removes noise from the
+manual queue and leaves 31 application or engine entries for follow-up.

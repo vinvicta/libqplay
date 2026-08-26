@@ -271,14 +271,16 @@ This is the short handoff view. The full reasoning and command history are in
     unresolved. No speculative names were added and no endpoint was
     contacted.
 44. The unresolved-function profile separates those 488 default entries into
-    333 likely static third-party functions, 19 ELF init/fini entries, one PLT
-    resolver slot, and 135 application or engine entries. The GPC count now
-    includes `0xe01a0`, which is called by `gpc_tristrip_clip` and formats the
-    library's `gpc malloc failure` diagnostic. It also identifies the shared
-    DES core at `0x246b50` and two minizip helpers at `0x24840c` and
-    `0x249580` from their exported callers. The report records these as triage
-    categories only. No speculative source names were added and no endpoint
-    was contacted.
+    333 likely static third-party functions, 104 compiler-generated cleanup
+    wrappers, 19 ELF init/fini entries, one PLT resolver slot, and 31
+    application or engine entries. The cleanup wrappers have proven tail
+    targets: 97 call `TString::clear`, 5 call `TStringList::~TStringList`, and
+    2 call `TGraalVar::~TGraalVar`. The GPC count includes `0xe01a0`, which is
+    called by `gpc_tristrip_clip` and formats the library's `gpc malloc failure`
+    diagnostic. The report also identifies the shared DES core at `0x246b50`
+    and two minizip helpers at `0x24840c` and `0x249580` from their exported
+    callers. These are triage categories only. No speculative source names
+    were added and no endpoint was contacted.
 45. A follow-up offline disassembly pass produced four high-confidence
     review-only role candidates at `0xf9028`, `0xf9060`, `0xf9944`, and
     `0x213088`. They cover the profiler comparator, function-tree formatter,

@@ -4,7 +4,7 @@
   "categories": [
     {
       "category": "app_or_engine_unknown",
-      "count": 135,
+      "count": 31,
       "entries": [
         {
           "current_ida_name": "sub_E01D0",
@@ -25,156 +25,6 @@
           "size": 128
         },
         {
-          "current_ida_name": "sub_E2B0C",
-          "ea": "0xe2b0c",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_E3754",
-          "ea": "0xe3754",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_E6C00",
-          "ea": "0xe6c00",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_E6C0C",
-          "ea": "0xe6c0c",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_E857C",
-          "ea": "0xe857c",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_E8588",
-          "ea": "0xe8588",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_E8598",
-          "ea": "0xe8598",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_E9220",
-          "ea": "0xe9220",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_ECE3C",
-          "ea": "0xece3c",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_ECE48",
-          "ea": "0xece48",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_ECE58",
-          "ea": "0xece58",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_ECE68",
-          "ea": "0xece68",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_F0F3C",
-          "ea": "0xf0f3c",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_F0F48",
-          "ea": "0xf0f48",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_F0F58",
-          "ea": "0xf0f58",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_F0F68",
-          "ea": "0xf0f68",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_F0F78",
-          "ea": "0xf0f78",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_F0F88",
-          "ea": "0xf0f88",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_F0F98",
-          "ea": "0xf0f98",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_F0FA8",
-          "ea": "0xf0fa8",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_F0FB8",
-          "ea": "0xf0fb8",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_F0FC8",
-          "ea": "0xf0fc8",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_F5150",
-          "ea": "0xf5150",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_F515C",
-          "ea": "0xf515c",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_F516C",
-          "ea": "0xf516c",
-          "segment": ".text",
-          "size": 16
-        },
-        {
           "current_ida_name": "sub_F9028",
           "ea": "0xf9028",
           "segment": ".text",
@@ -191,60 +41,6 @@
           "ea": "0xf9944",
           "segment": ".text",
           "size": 512
-        },
-        {
-          "current_ida_name": "sub_102778",
-          "ea": "0x102778",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_103BD0",
-          "ea": "0x103bd0",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_10512C",
-          "ea": "0x10512c",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_10CE30",
-          "ea": "0x10ce30",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_114F34",
-          "ea": "0x114f34",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_114F40",
-          "ea": "0x114f40",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_114F50",
-          "ea": "0x114f50",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_114F60",
-          "ea": "0x114f60",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_114F70",
-          "ea": "0x114f70",
-          "segment": ".text",
-          "size": 16
         },
         {
           "current_ida_name": "sub_150A30",
@@ -283,224 +79,14 @@
           "size": 100
         },
         {
-          "current_ida_name": "sub_15AE70",
-          "ea": "0x15ae70",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_15AE7C",
-          "ea": "0x15ae7c",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_15AE8C",
-          "ea": "0x15ae8c",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_15AE9C",
-          "ea": "0x15ae9c",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_165938",
-          "ea": "0x165938",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_165944",
-          "ea": "0x165944",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_16C8A4",
-          "ea": "0x16c8a4",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_16C8B0",
-          "ea": "0x16c8b0",
-          "segment": ".text",
-          "size": 16
-        },
-        {
           "current_ida_name": "sub_17B9BC",
           "ea": "0x17b9bc",
           "segment": ".text",
           "size": 72
         },
         {
-          "current_ida_name": "sub_17BA04",
-          "ea": "0x17ba04",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_17BA14",
-          "ea": "0x17ba14",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_17BA24",
-          "ea": "0x17ba24",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_180BC0",
-          "ea": "0x180bc0",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_180BCC",
-          "ea": "0x180bcc",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_180BDC",
-          "ea": "0x180bdc",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_180BEC",
-          "ea": "0x180bec",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_180BFC",
-          "ea": "0x180bfc",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_180C0C",
-          "ea": "0x180c0c",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_18AD1C",
-          "ea": "0x18ad1c",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_18AD28",
-          "ea": "0x18ad28",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_18AD38",
-          "ea": "0x18ad38",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_18AD48",
-          "ea": "0x18ad48",
-          "segment": ".text",
-          "size": 16
-        },
-        {
           "current_ida_name": "sub_1925E4",
           "ea": "0x1925e4",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_19F9CC",
-          "ea": "0x19f9cc",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_19F9D8",
-          "ea": "0x19f9d8",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_19F9E8",
-          "ea": "0x19f9e8",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_19F9F8",
-          "ea": "0x19f9f8",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_19FA08",
-          "ea": "0x19fa08",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_19FA18",
-          "ea": "0x19fa18",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_19FA28",
-          "ea": "0x19fa28",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_19FA38",
-          "ea": "0x19fa38",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_19FA48",
-          "ea": "0x19fa48",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_19FA58",
-          "ea": "0x19fa58",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_19FA68",
-          "ea": "0x19fa68",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_19FA78",
-          "ea": "0x19fa78",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_19FA88",
-          "ea": "0x19fa88",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_19FA98",
-          "ea": "0x19fa98",
           "segment": ".text",
           "size": 16
         },
@@ -523,94 +109,10 @@
           "size": 136
         },
         {
-          "current_ida_name": "sub_1ABEB0",
-          "ea": "0x1abeb0",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_1AC9B0",
-          "ea": "0x1ac9b0",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_1ADFC4",
-          "ea": "0x1adfc4",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_1ADFD0",
-          "ea": "0x1adfd0",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_1B2FDC",
-          "ea": "0x1b2fdc",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_1BC80C",
-          "ea": "0x1bc80c",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_1C008C",
-          "ea": "0x1c008c",
-          "segment": ".text",
-          "size": 16
-        },
-        {
           "current_ida_name": "sub_1C042C",
           "ea": "0x1c042c",
           "segment": ".text",
           "size": 60
-        },
-        {
-          "current_ida_name": "sub_1C5C54",
-          "ea": "0x1c5c54",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_1CE384",
-          "ea": "0x1ce384",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_1CF1DC",
-          "ea": "0x1cf1dc",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_1D9198",
-          "ea": "0x1d9198",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_1DCAFC",
-          "ea": "0x1dcafc",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_1E006C",
-          "ea": "0x1e006c",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_1E0E58",
-          "ea": "0x1e0e58",
-          "segment": ".text",
-          "size": 12
         },
         {
           "current_ida_name": "sub_1F94FC",
@@ -625,106 +127,16 @@
           "size": 320
         },
         {
-          "current_ida_name": "sub_20ADBC",
-          "ea": "0x20adbc",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_20FA90",
-          "ea": "0x20fa90",
-          "segment": ".text",
-          "size": 12
-        },
-        {
           "current_ida_name": "sub_213088",
           "ea": "0x213088",
           "segment": ".text",
           "size": 756
         },
         {
-          "current_ida_name": "sub_214758",
-          "ea": "0x214758",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_214764",
-          "ea": "0x214764",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_214774",
-          "ea": "0x214774",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_214784",
-          "ea": "0x214784",
-          "segment": ".text",
-          "size": 16
-        },
-        {
           "current_ida_name": "sub_217E68",
           "ea": "0x217e68",
           "segment": ".text",
           "size": 68
-        },
-        {
-          "current_ida_name": "sub_224728",
-          "ea": "0x224728",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_224734",
-          "ea": "0x224734",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_226CCC",
-          "ea": "0x226ccc",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_226CD8",
-          "ea": "0x226cd8",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_22B15C",
-          "ea": "0x22b15c",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_22B16C",
-          "ea": "0x22b16c",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_22B1DC",
-          "ea": "0x22b1dc",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_22B1E8",
-          "ea": "0x22b1e8",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_22D9F0",
-          "ea": "0x22d9f0",
-          "segment": ".text",
-          "size": 12
         },
         {
           "current_ida_name": "sub_22D9FC",
@@ -779,46 +191,10 @@
           "ea": "0x22e12c",
           "segment": ".text",
           "size": 324
-        },
-        {
-          "current_ida_name": "sub_22EC18",
-          "ea": "0x22ec18",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_2309D0",
-          "ea": "0x2309d0",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_2343D4",
-          "ea": "0x2343d4",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_2383F0",
-          "ea": "0x2383f0",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "current_ida_name": "sub_2383FC",
-          "ea": "0x2383fc",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "current_ida_name": "sub_23840C",
-          "ea": "0x23840c",
-          "segment": ".text",
-          "size": 16
         }
       ],
       "evidence": "No source name or safe library-region classification was recovered.",
-      "total_bytes": 9028
+      "total_bytes": 7508
     },
     {
       "category": "bzip2_static_internal",
@@ -2909,6 +2285,26 @@
       "total_bytes": 20
     },
     {
+      "category": "tgraalvar_static_cleanup_wrapper",
+      "count": 2,
+      "entries": [
+        {
+          "current_ida_name": "sub_20FA90",
+          "ea": "0x20fa90",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_22EC18",
+          "ea": "0x22ec18",
+          "segment": ".text",
+          "size": 16
+        }
+      ],
+      "evidence": "The function computes a fixed global TGraalVar address and tail-calls its destructor; it is a compiler-generated static cleanup wrapper without an independent source body.",
+      "total_bytes": 28
+    },
+    {
       "category": "tomcrypt_des_static_internal",
       "count": 1,
       "entries": [
@@ -2921,6 +2317,634 @@
       ],
       "evidence": "0x246b50 is called by the exported DES and 3DES ECB routines and contains their shared 16-round block transform.",
       "total_bytes": 612
+    },
+    {
+      "category": "tstring_static_cleanup_wrapper",
+      "count": 97,
+      "entries": [
+        {
+          "current_ida_name": "sub_E3754",
+          "ea": "0xe3754",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_E6C00",
+          "ea": "0xe6c00",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_E6C0C",
+          "ea": "0xe6c0c",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_E857C",
+          "ea": "0xe857c",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_E8588",
+          "ea": "0xe8588",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_E8598",
+          "ea": "0xe8598",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_ECE3C",
+          "ea": "0xece3c",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_ECE48",
+          "ea": "0xece48",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_ECE58",
+          "ea": "0xece58",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_ECE68",
+          "ea": "0xece68",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_F0F3C",
+          "ea": "0xf0f3c",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_F0F48",
+          "ea": "0xf0f48",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_F0F58",
+          "ea": "0xf0f58",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_F0F68",
+          "ea": "0xf0f68",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_F0F78",
+          "ea": "0xf0f78",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_F0F88",
+          "ea": "0xf0f88",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_F0F98",
+          "ea": "0xf0f98",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_F0FA8",
+          "ea": "0xf0fa8",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_F0FB8",
+          "ea": "0xf0fb8",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_F0FC8",
+          "ea": "0xf0fc8",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_F5150",
+          "ea": "0xf5150",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_F515C",
+          "ea": "0xf515c",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_F516C",
+          "ea": "0xf516c",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_102778",
+          "ea": "0x102778",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_103BD0",
+          "ea": "0x103bd0",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_10512C",
+          "ea": "0x10512c",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_10CE30",
+          "ea": "0x10ce30",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_114F34",
+          "ea": "0x114f34",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_114F40",
+          "ea": "0x114f40",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_114F50",
+          "ea": "0x114f50",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_114F60",
+          "ea": "0x114f60",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_114F70",
+          "ea": "0x114f70",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_15AE70",
+          "ea": "0x15ae70",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_15AE7C",
+          "ea": "0x15ae7c",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_15AE8C",
+          "ea": "0x15ae8c",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_15AE9C",
+          "ea": "0x15ae9c",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_165938",
+          "ea": "0x165938",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_165944",
+          "ea": "0x165944",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_16C8A4",
+          "ea": "0x16c8a4",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_16C8B0",
+          "ea": "0x16c8b0",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_17BA04",
+          "ea": "0x17ba04",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_17BA14",
+          "ea": "0x17ba14",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_17BA24",
+          "ea": "0x17ba24",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_180BC0",
+          "ea": "0x180bc0",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_180BCC",
+          "ea": "0x180bcc",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_180BDC",
+          "ea": "0x180bdc",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_180BEC",
+          "ea": "0x180bec",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_180BFC",
+          "ea": "0x180bfc",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_180C0C",
+          "ea": "0x180c0c",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_18AD1C",
+          "ea": "0x18ad1c",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_18AD28",
+          "ea": "0x18ad28",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_18AD38",
+          "ea": "0x18ad38",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_18AD48",
+          "ea": "0x18ad48",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_19F9CC",
+          "ea": "0x19f9cc",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_19F9D8",
+          "ea": "0x19f9d8",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_19F9E8",
+          "ea": "0x19f9e8",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_19F9F8",
+          "ea": "0x19f9f8",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_19FA08",
+          "ea": "0x19fa08",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_19FA18",
+          "ea": "0x19fa18",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_19FA28",
+          "ea": "0x19fa28",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_19FA38",
+          "ea": "0x19fa38",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_19FA48",
+          "ea": "0x19fa48",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_19FA58",
+          "ea": "0x19fa58",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_19FA68",
+          "ea": "0x19fa68",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_19FA78",
+          "ea": "0x19fa78",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_19FA88",
+          "ea": "0x19fa88",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_19FA98",
+          "ea": "0x19fa98",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_1ABEB0",
+          "ea": "0x1abeb0",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_1AC9B0",
+          "ea": "0x1ac9b0",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_1ADFC4",
+          "ea": "0x1adfc4",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_1ADFD0",
+          "ea": "0x1adfd0",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_1B2FDC",
+          "ea": "0x1b2fdc",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_1BC80C",
+          "ea": "0x1bc80c",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_1C008C",
+          "ea": "0x1c008c",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_1C5C54",
+          "ea": "0x1c5c54",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_1CF1DC",
+          "ea": "0x1cf1dc",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_1D9198",
+          "ea": "0x1d9198",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_1DCAFC",
+          "ea": "0x1dcafc",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_1E006C",
+          "ea": "0x1e006c",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_1E0E58",
+          "ea": "0x1e0e58",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_20ADBC",
+          "ea": "0x20adbc",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_214758",
+          "ea": "0x214758",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_214764",
+          "ea": "0x214764",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_214774",
+          "ea": "0x214774",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_214784",
+          "ea": "0x214784",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_224728",
+          "ea": "0x224728",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_224734",
+          "ea": "0x224734",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_226CCC",
+          "ea": "0x226ccc",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_226CD8",
+          "ea": "0x226cd8",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_22B1DC",
+          "ea": "0x22b1dc",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_22B1E8",
+          "ea": "0x22b1e8",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_22D9F0",
+          "ea": "0x22d9f0",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_2309D0",
+          "ea": "0x2309d0",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_2343D4",
+          "ea": "0x2343d4",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_2383F0",
+          "ea": "0x2383f0",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "current_ida_name": "sub_2383FC",
+          "ea": "0x2383fc",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_23840C",
+          "ea": "0x23840c",
+          "segment": ".text",
+          "size": 16
+        }
+      ],
+      "evidence": "The function computes a fixed global TString address and tail-calls TString::clear; it is a compiler-generated static cleanup wrapper without an independent source body.",
+      "total_bytes": 1412
+    },
+    {
+      "category": "tstringlist_static_cleanup_wrapper",
+      "count": 5,
+      "entries": [
+        {
+          "current_ida_name": "sub_E2B0C",
+          "ea": "0xe2b0c",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_E9220",
+          "ea": "0xe9220",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_1CE384",
+          "ea": "0x1ce384",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_22B15C",
+          "ea": "0x22b15c",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "current_ida_name": "sub_22B16C",
+          "ea": "0x22b16c",
+          "segment": ".text",
+          "size": 16
+        }
+      ],
+      "evidence": "The function computes a fixed global TStringList address and tail-calls its destructor; it is a compiler-generated static cleanup wrapper without an independent source body.",
+      "total_bytes": 80
     },
     {
       "category": "yajl_static_internal",
@@ -3038,11 +3062,11 @@
   "category_summary": [
     {
       "category": "app_or_engine_unknown",
-      "count": 135,
+      "count": 31,
       "evidence": "No source name or safe library-region classification was recovered.",
       "first_ea": "0xe01d0",
-      "last_ea": "0x23840c",
-      "total_bytes": 9028
+      "last_ea": "0x22e12c",
+      "total_bytes": 7508
     },
     {
       "category": "bzip2_static_internal",
@@ -3117,12 +3141,36 @@
       "total_bytes": 20
     },
     {
+      "category": "tgraalvar_static_cleanup_wrapper",
+      "count": 2,
+      "evidence": "The function computes a fixed global TGraalVar address and tail-calls its destructor; it is a compiler-generated static cleanup wrapper without an independent source body.",
+      "first_ea": "0x20fa90",
+      "last_ea": "0x22ec18",
+      "total_bytes": 28
+    },
+    {
       "category": "tomcrypt_des_static_internal",
       "count": 1,
       "evidence": "0x246b50 is called by the exported DES and 3DES ECB routines and contains their shared 16-round block transform.",
       "first_ea": "0x246b50",
       "last_ea": "0x246b50",
       "total_bytes": 612
+    },
+    {
+      "category": "tstring_static_cleanup_wrapper",
+      "count": 97,
+      "evidence": "The function computes a fixed global TString address and tail-calls TString::clear; it is a compiler-generated static cleanup wrapper without an independent source body.",
+      "first_ea": "0xe3754",
+      "last_ea": "0x23840c",
+      "total_bytes": 1412
+    },
+    {
+      "category": "tstringlist_static_cleanup_wrapper",
+      "count": 5,
+      "evidence": "The function computes a fixed global TStringList address and tail-calls its destructor; it is a compiler-generated static cleanup wrapper without an independent source body.",
+      "first_ea": "0xe2b0c",
+      "last_ea": "0x22b16c",
+      "total_bytes": 80
     },
     {
       "category": "yajl_static_internal",
