@@ -1,0 +1,101 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both create a result array, resolve the input array and search value, compare float, string, and object entries, and append each matching index.",
+        "Both preserve the same 26-block loop, input-stack handling, and result type assignment. The target grows from 520 to 580 bytes around changed string wrappers."
+      ],
+      "match_kind": "manual-string-search-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x21d2a4",
+      "original_metrics": {
+        "basic_block_count": 26,
+        "instruction_count": 130,
+        "mnemonic_hash": "e448a7c93b06ad06fd181b0ab2143d1a48a4f91750c437d02999a8c82beb02a6",
+        "register_shape_hash": "b34c127bd2283108c0a1f5a8ff5ece3e1ce0c3fdec3bc32987f386d8a22afe6f",
+        "shape_hash": "6671a39fc6a714cebe81a58bd522aacf00d4ae4c41a2c65eb7fe3baf9ac8791d",
+        "size": 520
+      },
+      "original_name": "TScriptMachine_indicesOf_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptMachine_indicesOf_void",
+      "semantic_match_already_present": false,
+      "source_basis": "all matching array indices",
+      "spectron_current_name": "_ZN10mTAogaaEip10FKXPOaUSjnEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x2253b4",
+      "spectron_metrics": {
+        "basic_block_count": 26,
+        "instruction_count": 145,
+        "mnemonic_hash": "a161162e29a044e1cc7f4b45ac1708c82e76fb01418d6b61cc51d80f72ef55fa",
+        "register_shape_hash": "954d0bf83bc47f19cf47d32cd62799aa3cbfc59368bacf8d1ee7ef5bdf9b2123",
+        "shape_hash": "814248b95c7a195074b78e49ded11b6d6fb4fe035432bf0bebfca290cd36b153",
+        "size": 580
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both create a result array, consume the source and search strings, validate their lengths, and scan the source with a byte comparison for every occurrence.",
+        "Both append each matching offset and return an array-valued result in the same script-machine sequence. The target expands the implementation from 276 to 388 bytes for changed string wrappers."
+      ],
+      "match_kind": "manual-string-search-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x21d4b8",
+      "original_metrics": {
+        "basic_block_count": 15,
+        "instruction_count": 69,
+        "mnemonic_hash": "e209b02cf4087d1b6aca220c8d04d0e8a2e80add90f31e85995ee7ce46329e6b",
+        "register_shape_hash": "88d510420987f09a077c64fe7461afd6ebf86197a4e01ec71d0dddcfc013215a",
+        "shape_hash": "b441b2ab908cc6ef86101bafdd1251f449e6cf9569e935232b2fac48ba65b181",
+        "size": 276
+      },
+      "original_name": "TScriptMachine_getPositions_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptMachine_getPositions_void",
+      "semantic_match_already_present": false,
+      "source_basis": "substring position array",
+      "spectron_current_name": "_ZN10mTAogaaEip10FVxPOaf9YmEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x225600",
+      "spectron_metrics": {
+        "basic_block_count": 21,
+        "instruction_count": 97,
+        "mnemonic_hash": "e4b7cd64feb48c9d0af31db987d96462c5941a4c8fec5e8b680f33e1ba108f5a",
+        "register_shape_hash": "c82535a04b6704020f8cd254cbb8057244c3d0d7508730583662093ed858dccf",
+        "shape_hash": "f510f2b54ad1877d5656345b1fe641d53dbad402b9108f30c3a506897d6ba0b8",
+        "size": 388
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_string_search_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v3.json",
+    "spectron_features_sha256": "031afed73611783e0b16be71009e20118fc90a56e5d03e5ec04526f654f5cf27"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The changed-size rows rely on result-array construction, search loops, class-local sequence, and pseudocode behavior rather than byte identity."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for all-index and substring-position search",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 2,
+    "high_confidence_count": 2,
+    "new_context_anchor_count": 2,
+    "target_default_name_count": 0
+  }
+}

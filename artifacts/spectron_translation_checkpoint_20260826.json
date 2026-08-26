@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v43.i64",
-    "sha256": "28c062661c587455a8177ffbbd2f3cb9715223db80e3ddee953729e29568f8d2"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v44.i64",
+    "sha256": "a8be3d80ea5f1adb780d714ca960ec88891bd65b2c2d828414a2c096de29b276"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -178,7 +178,8 @@
     "The thirty-eighth database revision also contains the separately reviewed GS2 script-action constructor and destructor anchors.",
     "The thirty-ninth database revision also contains the separately reviewed GS2 stack-entry float, string, and object conversion anchors.",
     "The fortieth database revision also contains the separately reviewed execution restoration, character extraction, and action-context lookup anchors.",
-    "The forty-first database revision also contains the separately reviewed GS2 single-cell, two-dimensional, and replacement array mutation anchors."
+    "The forty-first database revision also contains the separately reviewed GS2 single-cell, two-dimensional, and replacement array mutation anchors.",
+    "The forty-second database revision also contains the separately reviewed GS2 all-index and substring-position search anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -366,6 +367,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_stack_entry_verify_v41.json",
     "verified_name_count": 3
+  },
+  "string_search_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "artifacts/spectron_string_search_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "913ce6dbc7adad21fb1ee9d301382009da52fda6b84bf29c91e8df9b3aed3603",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_string_search_verify_v44.json",
+    "verified_name_count": 2
   },
   "translation": {
     "ambiguous_functions": 1019,

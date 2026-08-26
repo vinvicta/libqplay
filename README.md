@@ -558,6 +558,13 @@ and replacement writes. All three reopened successfully. The evidence is in
 `artifacts/spectron_array_mutation_manual_translation_anchors_20260826.json`,
 and the v43 database SHA-256 is recorded in the checkpoint.
 
+A forty-second disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v44.i64`,
+adds two reviewed string-search anchors for all matching indices and
+substring positions. Both reopened successfully. The evidence is in
+`artifacts/spectron_string_search_manual_translation_anchors_20260826.json`,
+and the v44 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and

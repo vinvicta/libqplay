@@ -107,6 +107,8 @@ def main() -> None:
     parser.add_argument("--machine-helper-verification", type=Path)
     parser.add_argument("--array-mutation-anchors", type=Path)
     parser.add_argument("--array-mutation-verification", type=Path)
+    parser.add_argument("--string-search-anchors", type=Path)
+    parser.add_argument("--string-search-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1266,6 +1268,34 @@ def main() -> None:
         result["array_mutation_anchors"] = array_mutation
         result["interpretation"].append(
             "The forty-first database revision also contains the separately reviewed GS2 single-cell, two-dimensional, and replacement array mutation anchors."
+        )
+    string_search = None
+    if args.string_search_anchors or args.string_search_verification:
+        if not args.string_search_anchors or not args.string_search_verification:
+            raise ValueError(
+                "string-search anchors and string-search verification must be supplied together"
+            )
+        string_search_document = load(args.string_search_anchors)
+        string_search_verification = load(args.string_search_verification)
+        if string_search_document.get("artifact") != "spectron_string_search_manual_translation_anchors_20260826":
+            raise ValueError("unexpected string-search anchor artifact")
+        if not string_search_verification.get("verified"):
+            raise ValueError("string-search anchor reopen verification did not pass")
+        expected_string_search = len(string_search_document["anchors"])
+        if string_search_verification["verified_name_count"] != expected_string_search:
+            raise ValueError("string-search verification count differs from artifact")
+        string_search = {
+            "anchor_path": str(args.string_search_anchors),
+            "anchor_sha256": sha256_path(args.string_search_anchors),
+            "reopen_verification": str(args.string_search_verification),
+            "anchor_count": expected_string_search,
+            "verified_name_count": string_search_verification["verified_name_count"],
+            "reopen_failure_count": string_search_verification["failure_count"],
+        }
+    if string_search is not None:
+        result["string_search_anchors"] = string_search
+        result["interpretation"].append(
+            "The forty-second database revision also contains the separately reviewed GS2 all-index and substring-position search anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
