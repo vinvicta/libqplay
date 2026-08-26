@@ -67,6 +67,8 @@ def main() -> None:
     parser.add_argument("--socket-state-verification", type=Path)
     parser.add_argument("--http-request-state-anchors", type=Path)
     parser.add_argument("--http-request-state-verification", type=Path)
+    parser.add_argument("--npc-helper-anchors", type=Path)
+    parser.add_argument("--npc-helper-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -666,6 +668,34 @@ def main() -> None:
         result["http_request_state_anchors"] = http_request_state
         result["interpretation"].append(
             "The twenty-first database revision also contains the separately reviewed HTTP request counters and download-state anchors."
+        )
+    npc_helper = None
+    if args.npc_helper_anchors or args.npc_helper_verification:
+        if not args.npc_helper_anchors or not args.npc_helper_verification:
+            raise ValueError(
+                "NPC helper anchors and NPC helper verification must be supplied together"
+            )
+        npc_helper_document = load(args.npc_helper_anchors)
+        npc_helper_verification = load(args.npc_helper_verification)
+        if npc_helper_document.get("artifact") != "spectron_npc_helper_manual_translation_anchors_20260826":
+            raise ValueError("unexpected NPC helper anchor artifact")
+        if not npc_helper_verification.get("verified"):
+            raise ValueError("NPC helper anchor reopen verification did not pass")
+        expected_npc_helper = len(npc_helper_document["anchors"])
+        if npc_helper_verification["verified_name_count"] != expected_npc_helper:
+            raise ValueError("NPC helper verification count differs from artifact")
+        npc_helper = {
+            "anchor_path": str(args.npc_helper_anchors),
+            "anchor_sha256": sha256_path(args.npc_helper_anchors),
+            "reopen_verification": str(args.npc_helper_verification),
+            "anchor_count": expected_npc_helper,
+            "verified_name_count": npc_helper_verification["verified_name_count"],
+            "reopen_failure_count": npc_helper_verification["failure_count"],
+        }
+    if npc_helper is not None:
+        result["npc_helper_anchors"] = npc_helper
+        result["interpretation"].append(
+            "The twenty-second database revision also contains the separately reviewed TServerNPC blocking, draw-mode, visibility, bow, and pelt helper anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

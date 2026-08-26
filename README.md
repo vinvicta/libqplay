@@ -381,6 +381,14 @@ reopened successfully. The evidence is in
 `artifacts/spectron_http_request_state_manual_translation_anchors_20260826.json`,
 and the v21 database SHA-256 is recorded in the checkpoint.
 
+A twenty-second disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v22.i64`,
+adds 15 reviewed `TServerNPC` helper anchors. They cover blocking modes,
+draw-layer modes, level visibility, bow assignment, and five pelt predicates.
+All 15 reopened successfully. The evidence is in
+`artifacts/spectron_npc_helper_manual_translation_anchors_20260826.json`,
+and the v22 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
@@ -529,6 +537,9 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/spectron_http_request_state_manual_translation_anchors_20260826.json`
   records the four reviewed request counter, timestamp, and download-state
   helpers.
+* `artifacts/spectron_npc_helper_manual_translation_anchors_20260826.json`
+  records the 15 reviewed `TServerNPC` blocking, draw-mode, visibility, bow,
+  and pelt helpers.
 * `artifacts/spectron_socket_behavior_comparison_20260826.json` records the
   static comparison of the changed SSL setup, connect, and read bodies.
 * `artifacts/spectron_translation_checkpoint_20260826.json` records the
@@ -789,6 +800,9 @@ proves the local native TLS path, not a current live certificate or service.
   The `tools/generate_spectron_http_request_state_anchors.py` generator records
   reviewed request counter, timestamp, and download-state roles with exact
   hash checks.
+  The `tools/generate_spectron_npc_helper_anchors.py` generator records
+  reviewed `TServerNPC` helper roles with exact hash checks and IDA-context
+  evidence.
   The `tools/generate_spectron_socket_behavior_comparison.py` generator
   records changed-size socket behavior without forcing an exact-match label.
   `tools/ida_apply_spectron_translation.py` and

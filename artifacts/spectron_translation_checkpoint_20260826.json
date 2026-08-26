@@ -69,8 +69,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v21.i64",
-    "sha256": "ab2c0ebb20066e28896a6774aa7da1eaa857f55f21c81d427165add8705c9dc6"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v22.i64",
+    "sha256": "5632ecb9a4fef83373c2a21b6a8ca96708e05252a6acedba802cc321e47a0bc0"
   },
   "http_request_anchors": {
     "anchor_count": 12,
@@ -118,7 +118,8 @@
     "The eighteenth database revision also contains the separately reviewed client connection-state and encrypted-file helper anchors.",
     "The nineteenth database revision also contains the separately reviewed HTTP request field, lifecycle, and outbound-buffer anchors.",
     "The twentieth database revision also contains the separately reviewed socket status and address helper anchors.",
-    "The twenty-first database revision also contains the separately reviewed HTTP request counters and download-state anchors."
+    "The twenty-first database revision also contains the separately reviewed HTTP request counters and download-state anchors.",
+    "The twenty-second database revision also contains the separately reviewed TServerNPC blocking, draw-mode, visibility, bow, and pelt helper anchors."
   ],
   "login_helper_anchors": {
     "anchor_count": 8,
@@ -153,6 +154,14 @@
     "verified_name_count": 6
   },
   "network_contacted": false,
+  "npc_helper_anchors": {
+    "anchor_count": 15,
+    "anchor_path": "artifacts/spectron_npc_helper_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "b8d9a22e621efbb1f2cc435610a1550a46f679f0a7fa728b391b7d2e421128a1",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_npc_helper_verify_v22.json",
+    "verified_name_count": 15
+  },
   "parse_wrapper_anchors": {
     "anchor_count": 1,
     "anchor_path": "artifacts/spectron_parse_wrapper_manual_translation_anchor_20260826.json",

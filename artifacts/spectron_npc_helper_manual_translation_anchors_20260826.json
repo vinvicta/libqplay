@@ -1,0 +1,425 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies clear the transient blocking field, invert the boolean argument, and store it in the same two blocking-state fields.",
+        "The source callback record is the setisblocking entry in the TServerNPC script-function table."
+      ],
+      "match_kind": "manual-npc-helper-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 1,
+      "original_ea": "0x180834",
+      "original_instruction_count": 6,
+      "original_name": "TServerNPC_setIsBlocking",
+      "original_size": 24,
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_setIsBlocking",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC blocking-state setter",
+      "spectron_basic_block_count": 1,
+      "spectron_current_name": "sub_184D9C",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184d9c",
+      "spectron_instruction_count": 6,
+      "spectron_size": 24,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies clear the same block mode and local-block flags.",
+        "The source callback record decodes to blockagain and points into the TServerNPC script-function table."
+      ],
+      "match_kind": "manual-npc-helper-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 1,
+      "original_ea": "0x1809b8",
+      "original_instruction_count": 5,
+      "original_name": "TServerNPC_script_blockAgain",
+      "original_size": 20,
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_script_blockAgain",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC block-again script helper",
+      "spectron_basic_block_count": 1,
+      "spectron_current_name": "sub_184F20",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184f20",
+      "spectron_instruction_count": 5,
+      "spectron_size": 20,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies clear the same block mode and local-block flag, then set the local-only marker.",
+        "The source callback record decodes to blockagainlocal and occupies the matching script table slot."
+      ],
+      "match_kind": "manual-npc-helper-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 1,
+      "original_ea": "0x1809cc",
+      "original_instruction_count": 5,
+      "original_name": "TServerNPC_script_blockAgainLocal",
+      "original_size": 20,
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_script_blockAgainLocal",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC local block-again script helper",
+      "spectron_basic_block_count": 1,
+      "spectron_current_name": "sub_184F34",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184f34",
+      "spectron_instruction_count": 5,
+      "spectron_size": 20,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies set the no-block mode and clear the local marker with the same three stores.",
+        "The source callback record decodes to dontblock in the same TServerNPC script-function table."
+      ],
+      "match_kind": "manual-npc-helper-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 1,
+      "original_ea": "0x180a1c",
+      "original_instruction_count": 5,
+      "original_name": "TServerNPC_script_dontBlock",
+      "original_size": 20,
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_script_dontBlock",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC dont-block script helper",
+      "spectron_basic_block_count": 1,
+      "spectron_current_name": "sub_184F84",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184f84",
+      "spectron_instruction_count": 5,
+      "spectron_size": 20,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies set the no-block and local-only fields with the same two stores.",
+        "The source callback record decodes to dontblocklocal and occupies the matching script table slot."
+      ],
+      "match_kind": "manual-npc-helper-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 1,
+      "original_ea": "0x180a30",
+      "original_instruction_count": 4,
+      "original_name": "TServerNPC_script_dontBlockLocal",
+      "original_size": 16,
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_script_dontBlockLocal",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC local dont-block script helper",
+      "spectron_basic_block_count": 1,
+      "spectron_current_name": "sub_184F98",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184f98",
+      "spectron_instruction_count": 4,
+      "spectron_size": 16,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies store draw mode eight in the same object field and return the object.",
+        "The source callback record decodes to drawaslight."
+      ],
+      "match_kind": "manual-npc-helper-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 1,
+      "original_ea": "0x180a40",
+      "original_instruction_count": 3,
+      "original_name": "TServerNPC_script_drawAsLight",
+      "original_size": 12,
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_script_drawAsLight",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC draw-mode script helper",
+      "spectron_basic_block_count": 1,
+      "spectron_current_name": "sub_184FA8",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184fa8",
+      "spectron_instruction_count": 3,
+      "spectron_size": 12,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies store draw mode one in the same object field and return the object.",
+        "The source callback record decodes to drawoverplayer."
+      ],
+      "match_kind": "manual-npc-helper-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 1,
+      "original_ea": "0x180a4c",
+      "original_instruction_count": 3,
+      "original_name": "TServerNPC_script_drawOverPlayer",
+      "original_size": 12,
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_script_drawOverPlayer",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC draw-over-player script helper",
+      "spectron_basic_block_count": 1,
+      "spectron_current_name": "sub_184FB4",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184fb4",
+      "spectron_instruction_count": 3,
+      "spectron_size": 12,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies store draw mode negative one in the same object field and return the object.",
+        "The source callback record decodes to drawunderplayer."
+      ],
+      "match_kind": "manual-npc-helper-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 1,
+      "original_ea": "0x180a58",
+      "original_instruction_count": 3,
+      "original_name": "TServerNPC_script_drawUnderPlayer",
+      "original_size": 12,
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_script_drawUnderPlayer",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC draw-under-player script helper",
+      "spectron_basic_block_count": 1,
+      "spectron_current_name": "sub_184FC0",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184fc0",
+      "spectron_instruction_count": 3,
+      "spectron_size": 12,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies read the level-visibility override byte and return either the object visibility byte or the override value.",
+        "The same three-call target context and identical normalized body hashes distinguish this accessor from generic byte getters."
+      ],
+      "match_kind": "manual-npc-helper-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 3,
+      "original_ea": "0x180ac0",
+      "original_instruction_count": 5,
+      "original_name": "TServerNPC_getLevelVisible_void",
+      "original_size": 20,
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_getLevelVisible_void",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC level-visibility accessor",
+      "spectron_basic_block_count": 3,
+      "spectron_current_name": "_ZN10LBgVgaqANQ10ex97IaxDtAEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x185028",
+      "spectron_instruction_count": 5,
+      "spectron_size": 20,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies gate the assignment on the same Graal 2002 mode flag and copy the string into the bow-image field.",
+        "The source callback record decodes to setbow."
+      ],
+      "match_kind": "manual-npc-helper-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 4,
+      "original_ea": "0x180adc",
+      "original_instruction_count": 7,
+      "original_name": "TServerNPC_script_setBow",
+      "original_size": 28,
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_script_setBow",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC bow-image script setter",
+      "spectron_basic_block_count": 4,
+      "spectron_current_name": "sub_185044",
+      "spectron_default_name": true,
+      "spectron_ea": "0x185044",
+      "spectron_instruction_count": 7,
+      "spectron_size": 28,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies compare the pelt string field at the same logical object offset with the black-stone literal.",
+        "The source callback record decodes to peltwithblackstone and is a read-only property getter."
+      ],
+      "match_kind": "manual-npc-helper-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 2,
+      "original_ea": "0x180c1c",
+      "original_instruction_count": 5,
+      "original_name": "TServerNPC_getPeltWithBlackStone",
+      "original_size": 20,
+      "original_string_refs": [
+        "blackstone"
+      ],
+      "proposed_name": "v18_TServerNPC_getPeltWithBlackStone",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC pelt-with-black-stone predicate",
+      "spectron_basic_block_count": 2,
+      "spectron_current_name": "sub_185184",
+      "spectron_default_name": true,
+      "spectron_ea": "0x185184",
+      "spectron_instruction_count": 5,
+      "spectron_size": 20,
+      "spectron_string_refs": [
+        "blackstone"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies compare the pelt string field at the same logical object offset with the stone literal.",
+        "The source callback record decodes to peltwithstone and is a read-only property getter."
+      ],
+      "match_kind": "manual-npc-helper-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 2,
+      "original_ea": "0x180c30",
+      "original_instruction_count": 5,
+      "original_name": "TServerNPC_getPeltWithStone",
+      "original_size": 20,
+      "original_string_refs": [
+        "stone"
+      ],
+      "proposed_name": "v18_TServerNPC_getPeltWithStone",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC pelt-with-stone predicate",
+      "spectron_basic_block_count": 2,
+      "spectron_current_name": "sub_185198",
+      "spectron_default_name": true,
+      "spectron_ea": "0x185198",
+      "spectron_instruction_count": 5,
+      "spectron_size": 20,
+      "spectron_string_refs": [
+        "stone"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies compare the pelt string field at the same logical object offset with the vase literal.",
+        "The source callback record decodes to peltwithvase after accounting for the encoded terminator byte."
+      ],
+      "match_kind": "manual-npc-helper-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 2,
+      "original_ea": "0x180c44",
+      "original_instruction_count": 5,
+      "original_name": "TServerNPC_getPeltWithVase",
+      "original_size": 20,
+      "original_string_refs": [
+        "vase"
+      ],
+      "proposed_name": "v18_TServerNPC_getPeltWithVase",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC pelt-with-vase predicate",
+      "spectron_basic_block_count": 2,
+      "spectron_current_name": "sub_1851AC",
+      "spectron_default_name": true,
+      "spectron_ea": "0x1851ac",
+      "spectron_instruction_count": 5,
+      "spectron_size": 20,
+      "spectron_string_refs": [
+        "vase"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies compare the pelt string field at the same logical object offset with the sign literal.",
+        "The source callback record decodes to peltwithsign after accounting for the encoded terminator byte."
+      ],
+      "match_kind": "manual-npc-helper-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 2,
+      "original_ea": "0x180c58",
+      "original_instruction_count": 5,
+      "original_name": "TServerNPC_getPeltWithSign",
+      "original_size": 20,
+      "original_string_refs": [
+        "sign"
+      ],
+      "proposed_name": "v18_TServerNPC_getPeltWithSign",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC pelt-with-sign predicate",
+      "spectron_basic_block_count": 2,
+      "spectron_current_name": "sub_1851C0",
+      "spectron_default_name": true,
+      "spectron_ea": "0x1851c0",
+      "spectron_instruction_count": 5,
+      "spectron_size": 20,
+      "spectron_string_refs": [
+        "sign"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies compare the pelt string field at the same logical object offset with the bush literal.",
+        "The source callback record decodes to peltwithbush after accounting for the encoded terminator byte."
+      ],
+      "match_kind": "manual-npc-helper-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 2,
+      "original_ea": "0x180c6c",
+      "original_instruction_count": 5,
+      "original_name": "TServerNPC_getPeltWithBush",
+      "original_size": 20,
+      "original_string_refs": [
+        "bush"
+      ],
+      "proposed_name": "v18_TServerNPC_getPeltWithBush",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC pelt-with-bush predicate",
+      "spectron_basic_block_count": 2,
+      "spectron_current_name": "sub_1851D4",
+      "spectron_default_name": true,
+      "spectron_ea": "0x1851d4",
+      "spectron_instruction_count": 5,
+      "spectron_size": 20,
+      "spectron_string_refs": [
+        "bush"
+      ]
+    }
+  ],
+  "artifact": "spectron_npc_helper_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v3.json",
+    "spectron_features_sha256": "031afed73611783e0b16be71009e20118fc90a56e5d03e5ec04526f654f5cf27"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The target bodies preserve the original NPC blocking, draw-mode, visibility, bow, and pelt helper behavior with exact normalized function hashes."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for TServerNPC blocking, draw-mode, bow, visibility, and pelt helpers",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 15,
+    "high_confidence_count": 15,
+    "new_context_anchor_count": 15,
+    "target_default_name_count": 14
+  }
+}
