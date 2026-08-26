@@ -85,6 +85,8 @@ def main() -> None:
     parser.add_argument("--render-gui-verification", type=Path)
     parser.add_argument("--json-folder-anchors", type=Path)
     parser.add_argument("--json-folder-verification", type=Path)
+    parser.add_argument("--resource-object-anchors", type=Path)
+    parser.add_argument("--resource-object-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -936,6 +938,34 @@ def main() -> None:
         result["json_folder_anchors"] = json_folder
         result["interpretation"].append(
             "The thirtieth database revision also contains the separately reviewed image callbacks, recursive folder-loader helper, and YAJL JSON callback anchors."
+        )
+    resource_object = None
+    if args.resource_object_anchors or args.resource_object_verification:
+        if not args.resource_object_anchors or not args.resource_object_verification:
+            raise ValueError(
+                "resource-object anchors and resource-object verification must be supplied together"
+            )
+        resource_object_document = load(args.resource_object_anchors)
+        resource_object_verification = load(args.resource_object_verification)
+        if resource_object_document.get("artifact") != "spectron_resource_object_manual_translation_anchors_20260826":
+            raise ValueError("unexpected resource-object anchor artifact")
+        if not resource_object_verification.get("verified"):
+            raise ValueError("resource-object anchor reopen verification did not pass")
+        expected_resource_object = len(resource_object_document["anchors"])
+        if resource_object_verification["verified_name_count"] != expected_resource_object:
+            raise ValueError("resource-object verification count differs from artifact")
+        resource_object = {
+            "anchor_path": str(args.resource_object_anchors),
+            "anchor_sha256": sha256_path(args.resource_object_anchors),
+            "reopen_verification": str(args.resource_object_verification),
+            "anchor_count": expected_resource_object,
+            "verified_name_count": resource_object_verification["verified_name_count"],
+            "reopen_failure_count": resource_object_verification["failure_count"],
+        }
+    if resource_object is not None:
+        result["resource_object_anchors"] = resource_object
+        result["interpretation"].append(
+            "The thirty-first database revision also contains the separately reviewed resource comparator, link, alternative, and stream-materialization anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

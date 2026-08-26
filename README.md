@@ -461,6 +461,17 @@ evidence is in
 `artifacts/spectron_json_folder_manual_translation_anchors_20260826.json`,
 and the v30 database SHA-256 is recorded in the checkpoint.
 
+A thirty-first disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v33.i64`,
+adds 11 reviewed resource-object anchors. They cover the resource insertion
+path, filename comparator, file and object link classes, encoded-file keys,
+resource-object construction, size and loadability checks, alternative
+selection, and stream materialization. These functions changed size in
+Spectron, but their class-local behavior and callers preserve the 1.8 roles.
+All 11 reopened successfully. The evidence is in
+`artifacts/spectron_resource_object_manual_translation_anchors_20260826.json`,
+and the v33 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
