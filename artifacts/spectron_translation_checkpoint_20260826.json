@@ -48,6 +48,14 @@
     "reopen_verification": "/tmp/spectron_connection_helper_verify_v16.json",
     "verified_name_count": 18
   },
+  "connection_state_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "artifacts/spectron_connection_state_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "81a74b28a1bc13d65fbe330c01c8359fceab14a714fb3218d13713816c2c30d4",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_connection_state_verify_v18.json",
+    "verified_name_count": 5
+  },
   "core_anchors": {
     "anchor_count": 16,
     "anchor_path": "artifacts/spectron_core_manual_translation_anchors_20260826.json",
@@ -61,8 +69,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v17.i64",
-    "sha256": "acb84b3675ece2e5e040ac2eb16b3a15cec4607ecf8b3c5741115074d2954197"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v18.i64",
+    "sha256": "c724dfd0fc8bf61ccf0d9b58742bff9a035af022b7a70a2a8f8bd8f73189f7d2"
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
@@ -90,7 +98,8 @@
     "The fourteenth database revision also contains the separately reviewed client encryption-in tail-thunk anchor.",
     "The fifteenth database revision also contains the separately reviewed player and download lookup helper anchors.",
     "The sixteenth database revision also contains the separately reviewed connection, packet-state, SSL, and low-level field anchors.",
-    "The seventeenth database revision also contains the separately reviewed compact client state and forwarding anchors."
+    "The seventeenth database revision also contains the separately reviewed compact client state and forwarding anchors.",
+    "The eighteenth database revision also contains the separately reviewed client connection-state and encrypted-file helper anchors."
   ],
   "login_helper_anchors": {
     "anchor_count": 8,

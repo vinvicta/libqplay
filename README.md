@@ -348,6 +348,15 @@ successfully. The evidence is in
 `artifacts/spectron_client_state_helper_manual_translation_anchors_20260826.json`,
 and the v17 database SHA-256 is recorded in the checkpoint.
 
+An eighteenth disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v18.i64`,
+adds five reviewed client connection-state anchors. They cover three
+connection-string accessors, the encrypted-file-key continuation wrapper, and
+the encrypted server-level save wrapper. All five reopened successfully. The
+evidence is in
+`artifacts/spectron_connection_state_manual_translation_anchors_20260826.json`,
+and the v18 database SHA-256 is recorded in the checkpoint.
+
 The first direct emulator launch of the supplied Spectron package also found
 a separate modding-layer problem. After Start was tapped, `libxposed.so`
 crashed at its statically confirmed WebTop `crash` command branch. The same
@@ -481,6 +490,8 @@ proves the local native TLS path, not a current live certificate or service.
   records the 18 reviewed connection, SSL, and low-level field anchors.
 * `artifacts/spectron_client_state_helper_manual_translation_anchors_20260826.json`
   records the seven reviewed compact client-state and forwarding anchors.
+* `artifacts/spectron_connection_state_manual_translation_anchors_20260826.json`
+  records the five reviewed connection-string and encrypted-file helpers.
 * `artifacts/spectron_translation_checkpoint_20260826.json` records the
   close-and-reopen check for the persisted Spectron IDA copy.
 * `artifacts/spectron_runtime_crash_control_20260826.json` records the local
@@ -726,6 +737,9 @@ proves the local native TLS path, not a current live certificate or service.
   reviewed connection, SSL, and low-level field roles and exact shape checks.
   The `tools/generate_spectron_client_state_helper_anchors.py` generator
   records reviewed compact client-state and forwarding roles and exact shape
+  checks.
+  The `tools/generate_spectron_connection_state_anchors.py` generator records
+  reviewed client connection-state and encrypted-file roles with exact hash
   checks.
   `tools/ida_apply_spectron_translation.py` and
   `tools/ida_apply_spectron_manual_anchors.py` write separate disposable IDA

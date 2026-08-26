@@ -59,6 +59,8 @@ def main() -> None:
     parser.add_argument("--connection-helper-verification", type=Path)
     parser.add_argument("--client-state-helper-anchors", type=Path)
     parser.add_argument("--client-state-helper-verification", type=Path)
+    parser.add_argument("--connection-state-anchors", type=Path)
+    parser.add_argument("--connection-state-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -546,6 +548,34 @@ def main() -> None:
         result["client_state_helper_anchors"] = client_state_helper
         result["interpretation"].append(
             "The seventeenth database revision also contains the separately reviewed compact client state and forwarding anchors."
+        )
+    connection_state = None
+    if args.connection_state_anchors or args.connection_state_verification:
+        if not args.connection_state_anchors or not args.connection_state_verification:
+            raise ValueError(
+                "connection-state anchors and connection-state verification must be supplied together"
+            )
+        connection_state_document = load(args.connection_state_anchors)
+        connection_state_verification = load(args.connection_state_verification)
+        if connection_state_document.get("artifact") != "spectron_connection_state_manual_translation_anchors_20260826":
+            raise ValueError("unexpected connection-state anchor artifact")
+        if not connection_state_verification.get("verified"):
+            raise ValueError("connection-state anchor reopen verification did not pass")
+        expected_connection_state = len(connection_state_document["anchors"])
+        if connection_state_verification["verified_name_count"] != expected_connection_state:
+            raise ValueError("connection-state verification count differs from artifact")
+        connection_state = {
+            "anchor_path": str(args.connection_state_anchors),
+            "anchor_sha256": sha256_path(args.connection_state_anchors),
+            "reopen_verification": str(args.connection_state_verification),
+            "anchor_count": expected_connection_state,
+            "verified_name_count": connection_state_verification["verified_name_count"],
+            "reopen_failure_count": connection_state_verification["failure_count"],
+        }
+    if connection_state is not None:
+        result["connection_state_anchors"] = connection_state
+        result["interpretation"].append(
+            "The eighteenth database revision also contains the separately reviewed client connection-state and encrypted-file helper anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
