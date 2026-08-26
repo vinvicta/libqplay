@@ -49,6 +49,8 @@ def main() -> None:
     parser.add_argument("--client-request-verification", type=Path)
     parser.add_argument("--client-inbound-anchors", type=Path)
     parser.add_argument("--client-inbound-verification", type=Path)
+    parser.add_argument("--login-helper-anchors", type=Path)
+    parser.add_argument("--login-helper-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -396,6 +398,34 @@ def main() -> None:
         result["client_inbound_anchors"] = client_inbound
         result["interpretation"].append(
             "The twelfth database revision also contains the separately reviewed client inbound and state-transition anchors."
+        )
+    login_helper = None
+    if args.login_helper_anchors or args.login_helper_verification:
+        if not args.login_helper_anchors or not args.login_helper_verification:
+            raise ValueError(
+                "login-helper anchors and login-helper verification must be supplied together"
+            )
+        login_helper_document = load(args.login_helper_anchors)
+        login_helper_verification = load(args.login_helper_verification)
+        if login_helper_document.get("artifact") != "spectron_login_helper_manual_translation_anchors_20260826":
+            raise ValueError("unexpected login-helper anchor artifact")
+        if not login_helper_verification.get("verified"):
+            raise ValueError("login-helper anchor reopen verification did not pass")
+        expected_login_helper = len(login_helper_document["anchors"])
+        if login_helper_verification["verified_name_count"] != expected_login_helper:
+            raise ValueError("login-helper verification count differs from artifact")
+        login_helper = {
+            "anchor_path": str(args.login_helper_anchors),
+            "anchor_sha256": sha256_path(args.login_helper_anchors),
+            "reopen_verification": str(args.login_helper_verification),
+            "anchor_count": expected_login_helper,
+            "verified_name_count": login_helper_verification["verified_name_count"],
+            "reopen_failure_count": login_helper_verification["failure_count"],
+        }
+    if login_helper is not None:
+        result["login_helper_anchors"] = login_helper
+        result["interpretation"].append(
+            "The thirteenth database revision also contains the separately reviewed login, event, and small client state helper anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
