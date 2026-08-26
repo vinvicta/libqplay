@@ -182,6 +182,10 @@ proves the local native TLS path, not a current live certificate or service.
 * `docs/SPECTRON_COMPARISON.md` records the supplied modded APK comparison.
 * `artifacts/spectron_native_compare.json` records the offline ELF, symbol,
   section, and embedded-string comparison for the two ARM64 native builds.
+* `artifacts/spectron_hook_analysis.json` records the Spectron WebTop URL,
+  its nine obfuscated qplay lookups, three explicit hook installations, and
+  the six native dispatcher commands. The URL was recovered offline and was
+  not contacted.
 * `artifacts/spectron_function_signature_match.json` records the exact
   function-byte comparison against Spectron. It found one obfuscated match
   and no usable source-name transfer.
@@ -291,7 +295,8 @@ proves the local native TLS path, not a current live certificate or service.
   be saved. `tools/ida_verify_all_translations.py` reopens the copy and checks
   every prepared name and boundary without changing it.
 * `tools/ida_dump_function_evidence.py` emits read-only disassembly, incoming
-  references, and pseudocode for selected role-review functions.
+  references, pseudocode, string references, and raw instruction windows for
+  selected role-review functions. Compact mode is useful for large functions.
 * `tools/` contains IDAPython, parsing, replay, and diagnostic patch helpers.
   `tools/encode_connector_query.py` reproduces the captured connector query
   without opening a socket. `tools/conpack_legacy_zip_compat.patch` records

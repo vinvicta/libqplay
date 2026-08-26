@@ -69,6 +69,22 @@ The `onmsg` entry point dispatches through an object method, while
 with a custom WebTop or hook bridge, but it does not by itself identify a
 game-server endpoint.
 
+The hook path can be followed statically. The library constructor at `0x864b0`
+starts a worker at `0x862d4`; that worker waits for `libqplay.so`, then the
+resolver at `0x80fe4` performs nine `dlsym` lookups. The generic hook wrapper at
+`0x7deec` delegates to an ARM64 inline-hook backend at `0xa6068`. Three of the
+resolved exports are explicitly hooked: two obfuscated qplay functions receive
+the replacements at `0x7ffdc` and `0x804d8`, and `_Z16DetectFridaLoop1bbb`
+receives `0x80fbc`. The target names and relative addresses are recorded in
+`artifacts/spectron_hook_analysis.json`.
+
+The six command names compared by the native WebTop dispatcher at `0x842e4`
+are `crash`, `freeze`, `abort`, `load_menu`, `setscript`, and `gs2call`.
+The first three deliberately write through address zero, spin, or call
+`abort`; the others forward WebTop payloads into native helpers. This is a
+remote-control and modding interface with destructive commands, not an old
+client compatibility patch.
+
 The stripped `libxposed.so` was also decompiled far enough to resolve the
 WebTop URL builder. `Java_com_WebTop_getMainUrl` is exported at relative
 address `0x85f84` and appears at `0x185f84` in the Ghidra image. It decrypts a

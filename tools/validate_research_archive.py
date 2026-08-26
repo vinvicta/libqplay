@@ -29,6 +29,7 @@ def main():
         "artifacts/arm64_diagnostic_apk_revalidation_20260825.json"
     )
     spectron_signature = load_json("artifacts/spectron_function_signature_match.json")
+    spectron_hooks = load_json("artifacts/spectron_hook_analysis.json")
 
     checks = []
 
@@ -276,6 +277,37 @@ def main():
         spectron_signature["summary"]["usable_source_name_matches"],
         0,
     )
+    check(
+        "Spectron hook artifact",
+        spectron_hooks["schema_version"],
+        1,
+    )
+    check("Spectron hook network", spectron_hooks["network_contacted"], False)
+    check(
+        "Spectron hook APK hash",
+        spectron_hooks["inputs"]["spectron_apk_sha256"],
+        "5b10289ad2b67fba77f5f4159d51cdbeaf4ca2710fb1459da69c8d4b1af5149c",
+    )
+    check(
+        "Spectron hook export count",
+        len(spectron_hooks["hook_loader"]["resolved_qplay_exports"]),
+        9,
+    )
+    check(
+        "Spectron installed hook count",
+        len(spectron_hooks["hook_loader"]["installed_hooks"]),
+        3,
+    )
+    check(
+        "Spectron dispatcher command count",
+        len(spectron_hooks["webtop_dispatcher"]["commands"]),
+        6,
+    )
+    check(
+        "Spectron recovered URL",
+        spectron_hooks["webtop"]["recovered_url"],
+        "https://spectronnative-page.onrender.com?device=NOID",
+    )
 
     for document in (
         overlay,
@@ -286,6 +318,7 @@ def main():
         ida_validation,
         arm64_revalidation,
         spectron_signature,
+        spectron_hooks,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
