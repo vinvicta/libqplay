@@ -453,9 +453,11 @@ This is the short handoff view. The full reasoning and command history are in
     branches for `crash`, `freeze`, and `abort`. After Start, its process
     remained alive and qplay reached activation, OpenGL initialization,
     login-server connection, two server-warps, and Connected. The custom menu
-    still remained visible and no playable world rendered during the bounded
-    observation window. This isolates the intentional WebTop death but does
-    not solve the remaining game-entry path. The APK hash is
+    then led through the welcome and tutorial dialogs. After advancing them,
+    the client rendered a stable local in-game scene with the player, map
+    furniture, HUD controls, and status icons. This isolates the intentional
+    WebTop death and demonstrates local game entry for the supplied 2.2
+    package. It does not establish live-service compatibility. The APK hash is
     `d8b44281f2c2a3e8ab6f40358e28d017052a967cdf2a5b9b0c3383535ef07de3`.
     See `artifacts/spectron_webtop_safe_runtime_20260826.json`.
 

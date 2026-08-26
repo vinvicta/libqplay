@@ -857,7 +857,7 @@ def main():
     )
     check("Spectron safe runtime process", spectron_safe_runtime["observed"]["process_alive_at_check"], True)
     check("Spectron safe runtime fatal crash", spectron_safe_runtime["observed"]["fatal_crash_observed"], False)
-    check("Spectron safe runtime world", spectron_safe_runtime["observed"]["world_rendered"], False)
+    check("Spectron safe runtime world", spectron_safe_runtime["observed"]["world_rendered"], True)
     check("Spectron safe runtime patch count", len(spectron_safe_runtime["patches"]), 3)
 
     for document in (

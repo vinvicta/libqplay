@@ -2078,10 +2078,13 @@ patched ARM64 hook library SHA-256 is
 `ba6023c42e501c9f1dae17f7d65973d09b399f4f4c8f1acf1e43487b1b01a50c`.
 After Start, the process stayed alive and qplay logged activation, OpenGL
 initialization, login-server connection, two server-warps, and Connected.
-The custom green menu remained visible, so this control isolates the
-intentional crash without proving game entry or a playable world. The
-emulator had ordinary networking enabled, but network contact was not
-independently audited. The structured record is
+The custom green menu then led to a welcome dialog and several tutorial
+dialogs. After advancing those dialogs, the client rendered a stable local
+game scene with the player, map furniture, HUD controls, and status icons.
+The emulator had ordinary networking enabled, but network contact was not
+independently audited. This proves local game entry for the supplied 2.2
+package under the safe WebTop control, not live-service compatibility. The
+structured record is
 `artifacts/spectron_webtop_safe_runtime_20260826.json`.
 
 ## Spectron semantic translation pass

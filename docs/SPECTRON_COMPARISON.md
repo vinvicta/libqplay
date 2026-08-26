@@ -284,11 +284,13 @@ patched ARM64 `libxposed.so` has SHA-256
 On the same emulator, the safe control stayed alive after Start and reached
 the qplay messages `GraalClassic has been activated!`, `Initialized OpenGL`,
 `Connecting to the login server...`, two `Serverwarp...` messages, and
-`Connected.` The custom green menu remained visible and no playable world was
-rendered during the observation window. This is a useful isolation result:
-the destructive WebTop bridge command is a real blocker, but disabling it is
-not by itself the game-entry fix. Network contact was not independently
-audited. The build and runtime record is in
+`Connected.` The custom green menu first appeared, followed by the welcome
+and tutorial dialogs. After those dialogs were advanced, the client rendered
+a stable in-game scene with the player, map furniture, HUD controls, and
+status icons. This is a stronger isolation result: the destructive WebTop
+bridge command is a real blocker, and once it is skipped the supplied 2.2
+client reaches local game entry in this environment. Network contact was not
+independently audited. The build and runtime record is in
 `artifacts/spectron_webtop_safe_runtime_20260826.json`; the standalone byte
 patch is reproducible with `tools/patch_spectron_webtop_safe_commands.py`.
 

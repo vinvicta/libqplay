@@ -23,7 +23,7 @@
       1200,
       650
     ],
-    "observation_window_seconds": 36
+    "observation_window_description": "The process was followed through the welcome dialog, tutorial dialogs, and a stable in-game scene."
   },
   "observed": {
     "process_alive_at_check": true,
@@ -38,9 +38,11 @@
       "Connected.",
       "New GUI Guilds Active!"
     ],
-    "screen_state": "The custom green Graal Classic menu remained visible with Edit Profile and Start.",
-    "world_rendered": false,
-    "screenshot_sha256": "41bc7965d097ca7341660e2ff5cbbd3ea7709fa78f5e9727a8fa27aa2f696423"
+    "screen_state": "After the welcome and tutorial dialogs were advanced, the game scene remained visible with the player, map furniture, HUD controls, and status icons.",
+    "welcome_dialog_seen": true,
+    "tutorial_dialogs_advanced": true,
+    "world_rendered": true,
+    "screenshot_sha256": "7e27bf7b6b34398c62f3388efba39a9bbffe0ccaf57ebe0a314edfab2d48f60d"
   },
   "patches": [
     {
@@ -67,7 +69,7 @@
   ],
   "interpretation": [
     "The safe command control removes the previously confirmed WebTop SIGSEGV and leaves the native process alive through the observed qplay connection milestones.",
-    "The control did not render a playable world during the observation window, so it isolates the crash but does not solve the remaining menu or game-entry behavior.",
+    "The control rendered a stable local in-game scene after the welcome and tutorial dialogs were advanced, so it both isolates the crash and demonstrates the remaining game-entry path in this environment.",
     "The qplay Connected log is a local runtime observation only. Network contact and live-service compatibility were not independently audited."
   ]
 }

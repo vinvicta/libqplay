@@ -223,9 +223,11 @@ observation is recorded in
 A private signed Spectron control then disabled only the ARM64 WebTop
 `crash`, `freeze`, and `abort` branches. The process stayed alive through
 qplay activation, OpenGL setup, login-server connection, two server-warps,
-and Connected, but the custom menu remained visible and no playable world
-rendered. This isolates the intentional bridge crash without claiming that
-the game-entry path is fixed. The control APK and runtime record are
+and Connected. After the welcome and tutorial dialogs were advanced, it
+rendered a stable local in-game scene with the player, map furniture, HUD
+controls, and status icons. This isolates the intentional bridge crash and
+demonstrates local game entry for the supplied 2.2 package. It does not claim
+live-service compatibility. The control APK and runtime record are
 documented in `artifacts/spectron_webtop_safe_runtime_20260826.json`.
 
 I also made a second local handoff copy directly from the active desktop IDA
