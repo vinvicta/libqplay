@@ -1360,7 +1360,8 @@ next proven code boundary. The inventory retains those start and end values as
 independent boundary evidence. The regular rename applier intentionally skips
 these entries; `tools/ida_apply_script_table_boundaries.py` provides a separate
 review-only path that can define the ranges first and then apply the exact
-names.
+names. `tools/test_script_table_inventory.py` covers ordinary encoded names,
+sentinel-bearing names, and the `$pref::` form used by the client.
 
 `tools/generate_script_table_inventory.py` reproduces the map from the local
 ARM64 library and saved inventory without contacting a network. The companion
