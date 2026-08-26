@@ -45,6 +45,10 @@ def load_candidates():
         "server_extra_properties",
         "server_flying_properties",
         "server_sign_properties",
+        "projectile_properties",
+        "server_level_link_properties",
+        "tiles_layer_properties",
+        "tiles_layer_functions",
     )
     return [candidate for group in groups for candidate in document.get(group, [])]
 

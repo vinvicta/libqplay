@@ -1302,6 +1302,31 @@ The seven new groups are stored in
 raising the review-only candidate set from 219 to 242. No IDA names were
 changed during this pass, and no live endpoint was contacted.
 
+## Projectile, level-link, and tile-layer tables
+
+The following constructor pass covered the remaining compact property tables
+near the level-object code. `TProjectileProperties::TProjectileProperties` at
+`0x19ecac` registers ten read-only records from `0x37f6d8`: `x`, `y`, `z`,
+`angle`, `speed`, `zspeed`, `horiz`, `fromplayer`, `fromplayerid`, and
+`params`.
+
+`TServerLevelLinkProperties::TServerLevelLinkProperties` at `0x1a0494`
+registers seven read-only records from `0x37f9b0`: `destlevel`, `destx`,
+`desty`, `height`, `width`, `x`, and `y`. These names describe the link object,
+not the similarly named properties on `TServerLevel` itself, so the proposed
+native names retain the class prefix.
+
+`TTilesLayerProperties::TTilesLayerProperties` at `0x1a0df4` installs nine
+records from `0x37fb00` and one script function from `0x37fcb0`. The properties
+are `alpha`, `blue`, `green`, `layerindex`, `offset`, `red`, `x`, `y`, and `z`.
+All except `layerindex` have setters in the table. The function record decodes
+to `updateboard` and points to `0x19fbf0`, so it is kept under a separate
+script-function group rather than being mistaken for a property callback.
+
+The three new groups add 35 unique native targets, raising the review-only
+candidate set from 242 to 277. No IDA names were changed during this pass, and
+no live endpoint was contacted.
+
 ## Held-connection ARM64 resource replay
 
 The runtime path was revisited after the offline sound-table pass. The earlier

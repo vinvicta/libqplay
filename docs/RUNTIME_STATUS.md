@@ -250,6 +250,11 @@ This is the short handoff view. The full reasoning and command history are in
     to 242. Carry and leap constructors initialize metadata only and do not
     register script properties in this build. No IDA names changed and no
     endpoint was contacted.
+41. The projectile, level-link, and tile-layer tables were audited offline.
+    They add 35 unique targets, including 10 projectile properties, 7
+    level-link properties, 17 tile-layer getter or setter targets, and the
+    `updateboard` callback. The review-only candidate set now contains 277
+    entries. No IDA names changed and no endpoint was contacted.
 
 ## Not verified
 

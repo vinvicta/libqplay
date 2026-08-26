@@ -253,6 +253,19 @@ metadata-only constructors. The seven new candidate groups add 23 unique
 native targets, raising the review-only set from 219 to 242. They remain
 unapplied until the IDA bridge is available.
 
+The projectile table at `0x37f6d8` contributes ten read-only names, including
+`x`, `y`, `z`, `angle`, `speed`, `zspeed`, `fromplayer`, `fromplayerid`, and
+`params`. The level-link table at `0x37f9b0` contributes seven read-only names:
+`destlevel`, `destx`, `desty`, `height`, `width`, `x`, and `y`. Their
+constructors are `TProjectileProperties` at `0x19ecac` and
+`TServerLevelLinkProperties` at `0x1a0494`.
+
+`TTilesLayerProperties` at `0x1a0df4` registers nine properties from
+`0x37fb00` and one function from `0x37fcb0`. The function name is
+`updateboard`; eight properties have setters and `layerindex` is read-only.
+These three groups add 35 unique targets, raising the review-only set to 277.
+They remain unapplied until the IDA bridge is available.
+
 When the IDA bridge is available, run
 `tools/ida_apply_native_callback_candidates.py` in review mode first. It
 resolves the existing names, checks each expected function address, reports

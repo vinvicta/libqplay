@@ -12,7 +12,8 @@
     "AArch64 ELF relocation records for the referenced global objects",
     "AArch64 vtable relocation records for TSoundPlayer and TSoundPlayerJava",
     "symbols/libqplay.function_inventory.json from the saved IDA database",
-    "TServerLevelProperties constructor and script tables at 0x1a1128, 0x37fce0, and 0x37fe00"
+    "TServerLevelProperties constructor and script tables at 0x1a1128, 0x37fce0, and 0x37fe00",
+    "TProjectileProperties, TServerLevelLinkProperties, and TTilesLayerProperties constructors and tables"
   ],
   "callbacks": [
     {
@@ -1969,6 +1970,364 @@
       "evidence": [
         "The one-record TServerSignProperties table at 0x38b298 decodes to text and points to this setter",
         "The callback is the write half of the same text property record as 0x23ffc4"
+      ]
+    }
+  ],
+  "projectile_properties": [
+    {
+      "va": "0x19eb88",
+      "current_ida_name": "sub_19EB88",
+      "proposed_name": "TProjectile_getX",
+      "confidence": "high",
+      "evidence": [
+        "The first record in the TProjectileProperties table at 0x37f6d8 decodes to x and points to this getter",
+        "The record has no setter callback"
+      ]
+    },
+    {
+      "va": "0x19ebbc",
+      "current_ida_name": "sub_19EBBC",
+      "proposed_name": "TProjectile_getY",
+      "confidence": "high",
+      "evidence": [
+        "The second record in the TProjectileProperties table at 0x37f708 decodes to y and points to this getter",
+        "The record has no setter callback"
+      ]
+    },
+    {
+      "va": "0x19ebf0",
+      "current_ida_name": "sub_19EBF0",
+      "proposed_name": "TProjectile_getZ",
+      "confidence": "high",
+      "evidence": [
+        "The third record in the TProjectileProperties table at 0x37f738 decodes to z and points to this getter",
+        "The record has no setter callback"
+      ]
+    },
+    {
+      "va": "0x19ec10",
+      "current_ida_name": "sub_19EC10",
+      "proposed_name": "TProjectile_getAngle",
+      "confidence": "high",
+      "evidence": [
+        "The fourth record in the TProjectileProperties table at 0x37f768 decodes to angle and points to this getter",
+        "The record has no setter callback"
+      ]
+    },
+    {
+      "va": "0x19ec18",
+      "current_ida_name": "sub_19EC18",
+      "proposed_name": "TProjectile_getSpeed",
+      "confidence": "high",
+      "evidence": [
+        "The fifth record in the TProjectileProperties table at 0x37f798 decodes to speed and points to this getter",
+        "The record has no setter callback"
+      ]
+    },
+    {
+      "va": "0x19ec20",
+      "current_ida_name": "sub_19EC20",
+      "proposed_name": "TProjectile_getZSpeed",
+      "confidence": "high",
+      "evidence": [
+        "The sixth record in the TProjectileProperties table at 0x37f7c8 decodes to zspeed and points to this getter",
+        "The record has no setter callback"
+      ]
+    },
+    {
+      "va": "0x19ec28",
+      "current_ida_name": "sub_19EC28",
+      "proposed_name": "TProjectile_getHoriz",
+      "confidence": "high",
+      "evidence": [
+        "The seventh record in the TProjectileProperties table at 0x37f7f8 decodes to horiz and points to this getter",
+        "The record has no setter callback"
+      ]
+    },
+    {
+      "va": "0x19ec30",
+      "current_ida_name": "sub_19EC30",
+      "proposed_name": "TProjectile_getFromPlayer",
+      "confidence": "high",
+      "evidence": [
+        "The eighth record in the TProjectileProperties table at 0x37f828 decodes to fromplayer and points to this getter",
+        "The record has no setter callback"
+      ]
+    },
+    {
+      "va": "0x19ec38",
+      "current_ida_name": "sub_19EC38",
+      "proposed_name": "TProjectile_getFromPlayerId",
+      "confidence": "high",
+      "evidence": [
+        "The ninth record in the TProjectileProperties table at 0x37f858 decodes to fromplayerid and points to this getter",
+        "The record has no setter callback"
+      ]
+    },
+    {
+      "va": "0x19ec40",
+      "current_ida_name": "sub_19EC40",
+      "proposed_name": "TProjectile_getParams",
+      "confidence": "high",
+      "evidence": [
+        "The tenth record in the TProjectileProperties table at 0x37f888 decodes to params and points to this getter",
+        "The record has no setter callback"
+      ]
+    }
+  ],
+  "server_level_link_properties": [
+    {
+      "va": "0x19faa8",
+      "current_ida_name": "sub_19FAA8",
+      "proposed_name": "TServerLevelLink_getDestLevel",
+      "confidence": "high",
+      "evidence": [
+        "The first record in the TServerLevelLinkProperties table at 0x37f9b0 decodes to destlevel and points to this getter",
+        "The record has no setter callback"
+      ]
+    },
+    {
+      "va": "0x19fd88",
+      "current_ida_name": "sub_19FD88",
+      "proposed_name": "TServerLevelLink_getDestX",
+      "confidence": "high",
+      "evidence": [
+        "The second record in the TServerLevelLinkProperties table at 0x37f9e0 decodes to destx and points to this getter",
+        "The record has no setter callback"
+      ]
+    },
+    {
+      "va": "0x19fcdc",
+      "current_ida_name": "sub_19FCDC",
+      "proposed_name": "TServerLevelLink_getDestY",
+      "confidence": "high",
+      "evidence": [
+        "The third record in the TServerLevelLinkProperties table at 0x37fa10 decodes to desty and points to this getter",
+        "The record has no setter callback"
+      ]
+    },
+    {
+      "va": "0x19f890",
+      "current_ida_name": "sub_19F890",
+      "proposed_name": "TServerLevelLink_getHeight",
+      "confidence": "high",
+      "evidence": [
+        "The fourth record in the TServerLevelLinkProperties table at 0x37fa40 decodes to height and points to this getter",
+        "The record has no setter callback"
+      ]
+    },
+    {
+      "va": "0x19f898",
+      "current_ida_name": "sub_19F898",
+      "proposed_name": "TServerLevelLink_getWidth",
+      "confidence": "high",
+      "evidence": [
+        "The fifth record in the TServerLevelLinkProperties table at 0x37fa70 decodes to width and points to this getter",
+        "The record has no setter callback"
+      ]
+    },
+    {
+      "va": "0x19f8a0",
+      "current_ida_name": "sub_19F8A0",
+      "proposed_name": "TServerLevelLink_getX",
+      "confidence": "high",
+      "evidence": [
+        "The sixth record in the TServerLevelLinkProperties table at 0x37faa0 decodes to x and points to this getter",
+        "The record has no setter callback"
+      ]
+    },
+    {
+      "va": "0x19f8a8",
+      "current_ida_name": "sub_19F8A8",
+      "proposed_name": "TServerLevelLink_getY",
+      "confidence": "high",
+      "evidence": [
+        "The seventh record in the TServerLevelLinkProperties table at 0x37fad0 decodes to y and points to this getter",
+        "The record has no setter callback"
+      ]
+    }
+  ],
+  "tiles_layer_properties": [
+    {
+      "va": "0x19f8b0",
+      "current_ida_name": "sub_19F8B0",
+      "proposed_name": "TTilesLayer_getAlpha",
+      "confidence": "high",
+      "evidence": [
+        "The first record in the TTilesLayerProperties table at 0x37fb00 decodes to alpha and points to this getter",
+        "The paired setter at 0x19f8b8 is stored in the same record"
+      ]
+    },
+    {
+      "va": "0x19f8b8",
+      "current_ida_name": "sub_19F8B8",
+      "proposed_name": "TTilesLayer_setAlpha",
+      "confidence": "high",
+      "evidence": [
+        "The first record in the TTilesLayerProperties table at 0x37fb00 decodes to alpha and points to this setter",
+        "The callback is the write half of the same alpha property record as 0x19f8b0"
+      ]
+    },
+    {
+      "va": "0x19f8c0",
+      "current_ida_name": "sub_19F8C0",
+      "proposed_name": "TTilesLayer_getBlue",
+      "confidence": "high",
+      "evidence": [
+        "The second record in the TTilesLayerProperties table at 0x37fb30 decodes to blue and points to this getter",
+        "The paired setter at 0x19f8c8 is stored in the same record"
+      ]
+    },
+    {
+      "va": "0x19f8c8",
+      "current_ida_name": "sub_19F8C8",
+      "proposed_name": "TTilesLayer_setBlue",
+      "confidence": "high",
+      "evidence": [
+        "The second record in the TTilesLayerProperties table at 0x37fb30 decodes to blue and points to this setter",
+        "The callback is the write half of the same blue property record as 0x19f8c0"
+      ]
+    },
+    {
+      "va": "0x19f8d0",
+      "current_ida_name": "sub_19F8D0",
+      "proposed_name": "TTilesLayer_getGreen",
+      "confidence": "high",
+      "evidence": [
+        "The third record in the TTilesLayerProperties table at 0x37fb60 decodes to green and points to this getter",
+        "The paired setter at 0x19f8d8 is stored in the same record"
+      ]
+    },
+    {
+      "va": "0x19f8d8",
+      "current_ida_name": "sub_19F8D8",
+      "proposed_name": "TTilesLayer_setGreen",
+      "confidence": "high",
+      "evidence": [
+        "The third record in the TTilesLayerProperties table at 0x37fb60 decodes to green and points to this setter",
+        "The callback is the write half of the same green property record as 0x19f8d0"
+      ]
+    },
+    {
+      "va": "0x19f8e0",
+      "current_ida_name": "sub_19F8E0",
+      "proposed_name": "TTilesLayer_getLayerIndex",
+      "confidence": "high",
+      "evidence": [
+        "The fourth record in the TTilesLayerProperties table at 0x37fb90 decodes to layerindex and points to this getter",
+        "The record has no setter callback"
+      ]
+    },
+    {
+      "va": "0x19fbcc",
+      "current_ida_name": "sub_19FBCC",
+      "proposed_name": "TTilesLayer_getOffset",
+      "confidence": "high",
+      "evidence": [
+        "The fifth record in the TTilesLayerProperties table at 0x37fbc0 decodes to offset and points to this getter",
+        "The paired setter at 0x19fb98 is stored in the same record"
+      ]
+    },
+    {
+      "va": "0x19fb98",
+      "current_ida_name": "sub_19FB98",
+      "proposed_name": "TTilesLayer_setOffset",
+      "confidence": "high",
+      "evidence": [
+        "The fifth record in the TTilesLayerProperties table at 0x37fbc0 decodes to offset and points to this setter",
+        "The callback is the write half of the same offset property record as 0x19fbcc"
+      ]
+    },
+    {
+      "va": "0x19f8e8",
+      "current_ida_name": "sub_19F8E8",
+      "proposed_name": "TTilesLayer_getRed",
+      "confidence": "high",
+      "evidence": [
+        "The sixth record in the TTilesLayerProperties table at 0x37fbf0 decodes to red and points to this getter",
+        "The paired setter at 0x19f8f0 is stored in the same record"
+      ]
+    },
+    {
+      "va": "0x19f8f0",
+      "current_ida_name": "sub_19F8F0",
+      "proposed_name": "TTilesLayer_setRed",
+      "confidence": "high",
+      "evidence": [
+        "The sixth record in the TTilesLayerProperties table at 0x37fbf0 decodes to red and points to this setter",
+        "The callback is the write half of the same red property record as 0x19f8e8"
+      ]
+    },
+    {
+      "va": "0x19f8f8",
+      "current_ida_name": "sub_19F8F8",
+      "proposed_name": "TTilesLayer_getX",
+      "confidence": "high",
+      "evidence": [
+        "The seventh record in the TTilesLayerProperties table at 0x37fc20 decodes to x and points to this getter",
+        "The paired setter at 0x19f900 is stored in the same record"
+      ]
+    },
+    {
+      "va": "0x19f900",
+      "current_ida_name": "sub_19F900",
+      "proposed_name": "TTilesLayer_setX",
+      "confidence": "high",
+      "evidence": [
+        "The seventh record in the TTilesLayerProperties table at 0x37fc20 decodes to x and points to this setter",
+        "The callback is the write half of the same x property record as 0x19f8f8"
+      ]
+    },
+    {
+      "va": "0x19f908",
+      "current_ida_name": "sub_19F908",
+      "proposed_name": "TTilesLayer_getY",
+      "confidence": "high",
+      "evidence": [
+        "The eighth record in the TTilesLayerProperties table at 0x37fc50 decodes to y and points to this getter",
+        "The paired setter at 0x19f910 is stored in the same record"
+      ]
+    },
+    {
+      "va": "0x19f910",
+      "current_ida_name": "sub_19F910",
+      "proposed_name": "TTilesLayer_setY",
+      "confidence": "high",
+      "evidence": [
+        "The eighth record in the TTilesLayerProperties table at 0x37fc50 decodes to y and points to this setter",
+        "The callback is the write half of the same y property record as 0x19f908"
+      ]
+    },
+    {
+      "va": "0x19f918",
+      "current_ida_name": "sub_19F918",
+      "proposed_name": "TTilesLayer_getZ",
+      "confidence": "high",
+      "evidence": [
+        "The ninth record in the TTilesLayerProperties table at 0x37fc80 decodes to z and points to this getter",
+        "The paired setter at 0x19f920 is stored in the same record"
+      ]
+    },
+    {
+      "va": "0x19f920",
+      "current_ida_name": "sub_19F920",
+      "proposed_name": "TTilesLayer_setZ",
+      "confidence": "high",
+      "evidence": [
+        "The ninth record in the TTilesLayerProperties table at 0x37fc80 decodes to z and points to this setter",
+        "The callback is the write half of the same z property record as 0x19f918"
+      ]
+    }
+  ],
+  "tiles_layer_functions": [
+    {
+      "va": "0x19fbf0",
+      "current_ida_name": "sub_19FBF0",
+      "proposed_name": "TTilesLayer_script_updateBoard",
+      "confidence": "high",
+      "evidence": [
+        "The one-record TTilesLayer script-function table at 0x37fcb0 decodes to updateboard and points to this callback",
+        "The TTilesLayerProperties constructor at 0x1a0df4 installs the function with TScriptProperty::addFuncs"
       ]
     }
   ],
