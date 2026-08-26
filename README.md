@@ -255,6 +255,16 @@ serialization. All 11 reopened successfully. The evidence is in
 `artifacts/spectron_client_action_manual_translation_anchors_20260826.json`,
 and the v7 database SHA-256 is recorded in the checkpoint.
 
+An eighth disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v8.i64`,
+adds 29 reviewed outbound client serializers covering level entry, file and
+image requests, uploads, scripts, chat, flags, extras, and deletion or warp
+commands. Twenty-eight are new context labels and one corroborates a target
+already present in the strict semantic map. All 29 reopened successfully. The
+evidence is in
+`artifacts/spectron_client_outbound_manual_translation_anchors_20260826.json`,
+and the v8 database SHA-256 is recorded in the checkpoint.
+
 The first direct emulator launch of the supplied Spectron package also found
 a separate modding-layer problem. After Start was tapped, `libxposed.so`
 crashed at its statically confirmed WebTop `crash` command branch. The same
@@ -364,6 +374,9 @@ proves the local native TLS path, not a current live certificate or service.
   1,008 exact one-to-one names shared by both builds.
 * `artifacts/spectron_network_manual_translation_anchors_20260826.json`
   records the six reviewed connector and socket anchors.
+* `artifacts/spectron_client_outbound_manual_translation_anchors_20260826.json`
+  records the 29 reviewed remaining outbound client serializers, including
+  their target signature cues and source-to-target evidence.
 * `artifacts/spectron_translation_checkpoint_20260826.json` records the
   close-and-reopen check for the persisted Spectron IDA copy.
 * `artifacts/spectron_runtime_crash_control_20260826.json` records the local
@@ -587,6 +600,9 @@ proves the local native TLS path, not a current live certificate or service.
   reviewed download, update, server-modify, CRC, and modification-time roles.
   The `tools/generate_spectron_client_action_anchors.py` generator records
   reviewed action-packet serializers and their preserved format strings.
+  The `tools/generate_spectron_client_outbound_anchors.py` generator records
+  the remaining reviewed outbound client serializers and their target
+  signatures.
   `tools/ida_apply_spectron_translation.py` and
   `tools/ida_apply_spectron_manual_anchors.py` write separate disposable IDA
   copies, while the matching verification scripts reopen and check them. The

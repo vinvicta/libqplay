@@ -1,0 +1,857 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target mangled signature retains two floating-point coordinates and a string reference.",
+        "Its body rounds both coordinates, appends the level text, and dispatches through the same client send slot.",
+        "It is the immediate target neighbor before the separately anchored level-warp modification-time helper."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 12,
+      "original_ea": "0x1f3e28",
+      "original_instruction_count": 110,
+      "original_name": "TClient_sendLevelWarp_double_double_TString_const",
+      "original_size": 440,
+      "original_string_refs": [
+        "onSendLevelWarp"
+      ],
+      "proposed_name": "v18_TClient_sendLevelWarp_double_double_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "level-warp packet serialization",
+      "spectron_basic_block_count": 21,
+      "spectron_current_name": "_ZN10w6qzgacqqy10jQQHxaB3uYEddRK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1f76b0",
+      "spectron_instruction_count": 172,
+      "spectron_size": 688,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target mangled signature retains a string reference followed by two floating-point coordinates.",
+        "Its body calls the two reviewed level-warp serializers, resolves level resources, and preserves the player level-entry path.",
+        "The source and target both have 26 basic blocks, which is a useful control-flow check for this larger helper."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 26,
+      "original_ea": "0x1f4238",
+      "original_instruction_count": 275,
+      "original_name": "TClient_sendLevelLinking_TString_const_double_double",
+      "original_size": 1104,
+      "original_string_refs": [],
+      "proposed_name": "v18_TClient_sendLevelLinking_TString_const_double_double",
+      "semantic_match_already_present": false,
+      "source_basis": "level-linking packet and server-level transition",
+      "spectron_basic_block_count": 26,
+      "spectron_current_name": "_ZN10w6qzgacqqy10bQC6xathbjERK10C8THgaTQxFdd",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1f7c88",
+      "spectron_instruction_count": 290,
+      "spectron_size": 1160,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target is a no-argument method in the same outbound level-packet cluster.",
+        "Its body builds the compact enter-level packet and dispatches it through the client send slot.",
+        "Its position follows level linking and precedes file download requests in the same order as the readable client methods."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 5,
+      "original_ea": "0x1f4688",
+      "original_instruction_count": 45,
+      "original_name": "TClient_sendEnterLevel_void",
+      "original_size": 180,
+      "original_string_refs": [
+        "onSendEnterLevel"
+      ],
+      "proposed_name": "v18_TClient_sendEnterLevel_void",
+      "semantic_match_already_present": false,
+      "source_basis": "enter-level packet serialization",
+      "spectron_basic_block_count": 9,
+      "spectron_current_name": "_ZN10w6qzgacqqy10qdB6xa_V9iEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1f8110",
+      "spectron_instruction_count": 94,
+      "spectron_size": 384,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target mangled signature retains three string references.",
+        "Its body preserves compact and long-string encoding before dispatching the file request.",
+        "It is the first file request helper after the target enter-level serializer and keeps the same client class context."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 14,
+      "original_ea": "0x1f473c",
+      "original_instruction_count": 87,
+      "original_name": "TClient_sendDownloadFile_TString_const_TString_const_TString_const",
+      "original_size": 348,
+      "original_string_refs": [
+        "onSendDownloadFile"
+      ],
+      "proposed_name": "v18_TClient_sendDownloadFile_TString_const_TString_const_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "file-download request serialization",
+      "spectron_basic_block_count": 27,
+      "spectron_current_name": "_ZN10w6qzgacqqy10inV3xabTUgERK10C8THgaTQxFS2_S2_",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1f8290",
+      "spectron_instruction_count": 159,
+      "spectron_size": 644,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target is the first one-string serializer in the upload sequence.",
+        "Its body preserves the connector diagnostic branch and normal client packet dispatch.",
+        "Its placement follows the three-string download request and matches the source method order."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 8,
+      "original_ea": "0x1f4898",
+      "original_instruction_count": 45,
+      "original_name": "TClient_sendUploadStart_TString_const",
+      "original_size": 180,
+      "original_string_refs": [
+        "onSendUploadStart"
+      ],
+      "proposed_name": "v18_TClient_sendUploadStart_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "upload-start packet serialization",
+      "spectron_basic_block_count": 15,
+      "spectron_current_name": "_ZN10w6qzgacqqy10RYCHxaSojYERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1f8514",
+      "spectron_instruction_count": 105,
+      "spectron_size": 428,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target mangled signature retains a string, an integer, and a second string reference.",
+        "Its body encodes compact and long string data before sending the same save-file request.",
+        "The target is between upload-start and upload-end helpers in the same outbound method sequence."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 14,
+      "original_ea": "0x1f494c",
+      "original_instruction_count": 109,
+      "original_name": "TClient_sendSaveFile_TString_const_int_TString_const",
+      "original_size": 436,
+      "original_string_refs": [
+        "onSendSaveFile"
+      ],
+      "proposed_name": "v18_TClient_sendSaveFile_TString_const_int_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "save-file packet serialization",
+      "spectron_basic_block_count": 14,
+      "spectron_current_name": "_ZN10w6qzgacqqy10tVKHxa34pYERK10C8THgaTQxFiS2_",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1f86c0",
+      "spectron_instruction_count": 138,
+      "spectron_size": 552,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target is the one-string serializer immediately after the save-file helper.",
+        "Its body preserves the same output-mode checks and one-string packet dispatch.",
+        "The target method order matches the complete upload sequence in the readable 1.8 client."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 8,
+      "original_ea": "0x1f4b00",
+      "original_instruction_count": 45,
+      "original_name": "TClient_sendUploadEnd_TString_const",
+      "original_size": 180,
+      "original_string_refs": [
+        "onSendUploadEnd"
+      ],
+      "proposed_name": "v18_TClient_sendUploadEnd_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "upload-end packet serialization",
+      "spectron_basic_block_count": 15,
+      "spectron_current_name": "_ZN10w6qzgacqqy10t3IHxaxwoYERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1f88e8",
+      "spectron_instruction_count": 105,
+      "spectron_size": 428,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target is the one-string image request helper after the upload sequence.",
+        "Its body preserves URL and resource handling before sending the image request.",
+        "The target remains in the same outbound method cluster and uses the common client send slot."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 10,
+      "original_ea": "0x1f4bb4",
+      "original_instruction_count": 81,
+      "original_name": "TClient_sendWantImage_TString_const",
+      "original_size": 324,
+      "original_string_refs": [
+        "onSendWantImage"
+      ],
+      "proposed_name": "v18_TClient_sendWantImage_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "image request packet serialization",
+      "spectron_basic_block_count": 17,
+      "spectron_current_name": "_ZN10w6qzgacqqy10yA23xatN0gERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1f8a94",
+      "spectron_instruction_count": 137,
+      "spectron_size": 556,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target have exactly the same size, instruction count, block count, and .gmap or .gupd discriminator set.",
+        "The target selects the corresponding image-update path after checking resource extensions.",
+        "The target is adjacent to the reviewed CRC and modification-time helpers, completing the image-update request family."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 4,
+      "original_ea": "0x1f52b8",
+      "original_instruction_count": 39,
+      "original_name": "TClient_sendWantImageUpdate_TString_const",
+      "original_size": 156,
+      "original_string_refs": [
+        ".gmap",
+        ".gupd"
+      ],
+      "proposed_name": "v18_TClient_sendWantImageUpdate_TString_const",
+      "semantic_match_already_present": true,
+      "source_basis": "image-update request selection",
+      "spectron_basic_block_count": 4,
+      "spectron_current_name": "_ZN10w6qzgacqqy10t3H3xaxGJgERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1f943c",
+      "spectron_instruction_count": 39,
+      "spectron_size": 156,
+      "spectron_string_refs": [
+        ".gmap",
+        ".gupd"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target mangled signature retains a string reference and an unsigned integer.",
+        "Its body builds the script request with the same string and revision fields used by the source helper.",
+        "It is the first of the target's adjacent gani, weapon, and class request methods."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 8,
+      "original_ea": "0x1f5354",
+      "original_instruction_count": 87,
+      "original_name": "TClient_sendWantGaniScript_TString_const_uint",
+      "original_size": 348,
+      "original_string_refs": [
+        "onSendWantGaniScript",
+        "su"
+      ],
+      "proposed_name": "v18_TClient_sendWantGaniScript_TString_const_uint",
+      "semantic_match_already_present": false,
+      "source_basis": "gani-script request serialization",
+      "spectron_basic_block_count": 15,
+      "spectron_current_name": "_ZN10w6qzgacqqy10iYRayaj0KmERK10C8THgaTQxFj",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1f94d8",
+      "spectron_instruction_count": 145,
+      "spectron_size": 588,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target is the one-string script request between the target gani and class helpers.",
+        "Its body preserves compact string encoding and client packet dispatch.",
+        "The ordered request family and matching one-string signature distinguish this role from the two revision-bearing helpers."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 8,
+      "original_ea": "0x1f54b0",
+      "original_instruction_count": 45,
+      "original_name": "TClient_sendWantWeaponScript_TString_const",
+      "original_size": 180,
+      "original_string_refs": [
+        "onSendWantWeaponScript"
+      ],
+      "proposed_name": "v18_TClient_sendWantWeaponScript_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "weapon-script request serialization",
+      "spectron_basic_block_count": 15,
+      "spectron_current_name": "_ZN10w6qzgacqqy10Nsh8xaZiAkERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1f9724",
+      "spectron_instruction_count": 105,
+      "spectron_size": 428,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target mangled signature retains a string reference and an unsigned integer.",
+        "Its body preserves the class request's compact string and revision fields.",
+        "It is the second revision-bearing member of the adjacent gani, weapon, and class request family."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 8,
+      "original_ea": "0x1f5564",
+      "original_instruction_count": 87,
+      "original_name": "TClient_sendWantClassScript_TString_const_uint",
+      "original_size": 348,
+      "original_string_refs": [
+        "onSendWantClassScript",
+        "su"
+      ],
+      "proposed_name": "v18_TClient_sendWantClassScript_TString_const_uint",
+      "semantic_match_already_present": false,
+      "source_basis": "class-script request serialization",
+      "spectron_basic_block_count": 15,
+      "spectron_current_name": "_ZN10w6qzgacqqy10N8r0fa3h_4ERK10C8THgaTQxFj",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1f98d0",
+      "spectron_instruction_count": 145,
+      "spectron_size": 588,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target is the next one-string outbound helper after the script request family.",
+        "Its body preserves the long-string escape path and common packet dispatch.",
+        "Its position and signature match the source chat serializer before the player-state actions."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 15,
+      "original_ea": "0x1f56c0",
+      "original_instruction_count": 103,
+      "original_name": "TClient_sendToAllChat_TString_const",
+      "original_size": 412,
+      "original_string_refs": [
+        "onSendToAllChat"
+      ],
+      "proposed_name": "v18_TClient_sendToAllChat_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "all-chat packet serialization",
+      "spectron_basic_block_count": 25,
+      "spectron_current_name": "_ZN10w6qzgacqqy10K_Z9xaxM0lERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1f9b1c",
+      "spectron_instruction_count": 149,
+      "spectron_size": 596,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target mangled signature retains a server-player object pointer.",
+        "Its body obtains the player state and sends the same compact object-backed packet.",
+        "The target follows the all-chat helper and precedes the no-argument carry-throw action in the same order."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 6,
+      "original_ea": "0x1f585c",
+      "original_instruction_count": 52,
+      "original_name": "TClient_sendIsPKer_TServerPlayer",
+      "original_size": 208,
+      "original_string_refs": [
+        "onSendIsPKer"
+      ],
+      "proposed_name": "v18_TClient_sendIsPKer_TServerPlayer",
+      "semantic_match_already_present": false,
+      "source_basis": "player PK-state packet serialization",
+      "spectron_basic_block_count": 10,
+      "spectron_current_name": "_ZN10w6qzgacqqy10tSuUgarA8PEP10MpGzgariDy",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1f9d70",
+      "spectron_instruction_count": 103,
+      "spectron_size": 420,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target is a no-argument outbound action method.",
+        "Its body constructs the carry-throw packet and dispatches it through the client send slot.",
+        "Its target position follows the player PK-state helper exactly as the source method order does."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 5,
+      "original_ea": "0x1f592c",
+      "original_instruction_count": 46,
+      "original_name": "TClient_sendCarryThrow_void",
+      "original_size": 184,
+      "original_string_refs": [
+        "onSendCarryThrown"
+      ],
+      "proposed_name": "v18_TClient_sendCarryThrow_void",
+      "semantic_match_already_present": false,
+      "source_basis": "carry-throw packet serialization",
+      "spectron_basic_block_count": 9,
+      "spectron_current_name": "_ZN10w6qzgacqqy10gEu9xasoBlEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1f9f14",
+      "spectron_instruction_count": 94,
+      "spectron_size": 388,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target mangled signature retains two floating-point coordinates.",
+        "Its body rounds both coordinates and emits the same two-field removal packet.",
+        "It follows the bomb placement helper and precedes fire-spying in the target action cluster."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 9,
+      "original_ea": "0x1f6108",
+      "original_instruction_count": 88,
+      "original_name": "TClient_sendRemoveBomb_double_double",
+      "original_size": 356,
+      "original_string_refs": [
+        "ff",
+        "onSendDelBomb"
+      ],
+      "proposed_name": "v18_TClient_sendRemoveBomb_double_double",
+      "semantic_match_already_present": false,
+      "source_basis": "bomb-removal packet serialization",
+      "spectron_basic_block_count": 13,
+      "spectron_current_name": "_ZN10w6qzgacqqy10REidya8iOoEdd",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1faad0",
+      "spectron_instruction_count": 143,
+      "spectron_size": 580,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target mangled signature retains two integer parameters.",
+        "Its body packs the same integer pair into the compact fire-spying representation.",
+        "The target follows bomb removal and precedes the preload-level helper in the source and target method order."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 5,
+      "original_ea": "0x1f6278",
+      "original_instruction_count": 50,
+      "original_name": "TClient_sendFireSpying_int_int",
+      "original_size": 204,
+      "original_string_refs": [
+        "onSendFireSpying"
+      ],
+      "proposed_name": "v18_TClient_sendFireSpying_int_int",
+      "semantic_match_already_present": false,
+      "source_basis": "fire-spying packet serialization",
+      "spectron_basic_block_count": 9,
+      "spectron_current_name": "_ZN10w6qzgacqqy10_1gdyanXMoEii",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1fad20",
+      "spectron_instruction_count": 108,
+      "spectron_size": 440,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target mangled signature retains a server-level object pointer.",
+        "Its body reads the level filename, encodes the level identifier, and dispatches the same preload packet.",
+        "The target sits directly after fire-spying and preserves the optional connector diagnostic branch."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 9,
+      "original_ea": "0x1f6344",
+      "original_instruction_count": 97,
+      "original_name": "TClient_sendPreloadLevel_TServerLevel",
+      "original_size": 388,
+      "original_string_refs": [
+        "onSendPreloadLevel",
+        "su"
+      ],
+      "proposed_name": "v18_TClient_sendPreloadLevel_TServerLevel",
+      "semantic_match_already_present": false,
+      "source_basis": "preload-level packet serialization",
+      "spectron_basic_block_count": 19,
+      "spectron_current_name": "_ZN10w6qzgacqqy10Hbo9xauYvlEP10zF9VgaBKxR",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1faed8",
+      "spectron_instruction_count": 175,
+      "spectron_size": 700,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target is the first of two adjacent one-string property serializers.",
+        "Its body preserves the diagnostic and normal packet paths for player properties.",
+        "Its target order matches the player-properties method before the NPC-properties method in the source."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 8,
+      "original_ea": "0x1f64c8",
+      "original_instruction_count": 45,
+      "original_name": "TClient_sendPlayerProperties_TString_const",
+      "original_size": 180,
+      "original_string_refs": [
+        "onSendPlayerProperties"
+      ],
+      "proposed_name": "v18_TClient_sendPlayerProperties_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "player-properties packet serialization",
+      "spectron_basic_block_count": 15,
+      "spectron_current_name": "_ZN10w6qzgacqqy10pnp8xaiYGkERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1fb194",
+      "spectron_instruction_count": 105,
+      "spectron_size": 428,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target is the second adjacent one-string property serializer.",
+        "Its body preserves the same diagnostic and normal packet paths with the NPC-specific packet selector.",
+        "The paired target position distinguishes it from the preceding player-properties helper."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 8,
+      "original_ea": "0x1f657c",
+      "original_instruction_count": 45,
+      "original_name": "TClient_sendNPCProperties_TString_const",
+      "original_size": 180,
+      "original_string_refs": [
+        "onSendNPCProperties"
+      ],
+      "proposed_name": "v18_TClient_sendNPCProperties_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC-properties packet serialization",
+      "spectron_basic_block_count": 15,
+      "spectron_current_name": "_ZN10w6qzgacqqy10kS55xaiyKiERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1fb340",
+      "spectron_instruction_count": 105,
+      "spectron_size": 428,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target retains the client. prefix check before serializing the flag value.",
+        "Its body preserves the diagnostic and normal one-string packet paths.",
+        "It is the first member of the adjacent flag and unset-flag pair, matching the source method order."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 9,
+      "original_ea": "0x1f6630",
+      "original_instruction_count": 59,
+      "original_name": "TClient_sendFlag_TString_const",
+      "original_size": 236,
+      "original_string_refs": [
+        "client.",
+        "onSendFlag"
+      ],
+      "proposed_name": "v18_TClient_sendFlag_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "client flag packet serialization",
+      "spectron_basic_block_count": 16,
+      "spectron_current_name": "_ZN10w6qzgacqqy10P937xa16okERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1fb4ec",
+      "spectron_instruction_count": 116,
+      "spectron_size": 472,
+      "spectron_string_refs": [
+        "client."
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target retains the client. prefix check before serializing the unset value.",
+        "Its body has the same one-string diagnostic and normal paths as the source unset-flag helper.",
+        "Its paired position after the flag serializer and distinct target function establish the separate role."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 9,
+      "original_ea": "0x1f671c",
+      "original_instruction_count": 59,
+      "original_name": "TClient_sendUnsetFlag_TString_const",
+      "original_size": 236,
+      "original_string_refs": [
+        "client.",
+        "onSendUnsetFlag"
+      ],
+      "proposed_name": "v18_TClient_sendUnsetFlag_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "client unset-flag packet serialization",
+      "spectron_basic_block_count": 16,
+      "spectron_current_name": "_ZN10w6qzgacqqy10I3b8xaMLvkERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1fb6c4",
+      "spectron_instruction_count": 116,
+      "spectron_size": 472,
+      "spectron_string_refs": [
+        "client."
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target mangled signature retains two floating-point values and an integer.",
+        "Its body serializes the same three-field extra-item action through the client send slot.",
+        "It is the first of the adjacent extra, take-extra, and remove-extra target helpers."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 10,
+      "original_ea": "0x1f7198",
+      "original_instruction_count": 110,
+      "original_name": "TClient_sendExtra_double_double_int",
+      "original_size": 444,
+      "original_string_refs": [
+        "ddi",
+        "onSendExtra"
+      ],
+      "proposed_name": "v18_TClient_sendExtra_double_double_int",
+      "semantic_match_already_present": false,
+      "source_basis": "extra-item pickup packet serialization",
+      "spectron_basic_block_count": 16,
+      "spectron_current_name": "_ZN10w6qzgacqqy10WVodyawAToEddi",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1fc440",
+      "spectron_instruction_count": 165,
+      "spectron_size": 660,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target mangled signature retains the same two floating-point values and integer as the source take-extra helper.",
+        "Its body is the paired action serializer with the distinct target packet selector.",
+        "Its position directly after the extra helper matches the source method order."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 10,
+      "original_ea": "0x1f7360",
+      "original_instruction_count": 110,
+      "original_name": "TClient_sendTakeExtra_double_double_int",
+      "original_size": 444,
+      "original_string_refs": [
+        "ddi",
+        "onSendTakeExtra"
+      ],
+      "proposed_name": "v18_TClient_sendTakeExtra_double_double_int",
+      "semantic_match_already_present": false,
+      "source_basis": "extra-item take packet serialization",
+      "spectron_basic_block_count": 16,
+      "spectron_current_name": "_ZN10w6qzgacqqy10x42cyarcBoEddi",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1fc6e0",
+      "spectron_instruction_count": 165,
+      "spectron_size": 660,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target mangled signature retains two floating-point coordinates.",
+        "Its body serializes the paired removal action with the same coordinate encoding.",
+        "It is the third member of the contiguous extra-action helper cluster."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 9,
+      "original_ea": "0x1f7528",
+      "original_instruction_count": 98,
+      "original_name": "TClient_sendRemoveExtra_double_double",
+      "original_size": 396,
+      "original_string_refs": [
+        "onSendRemoveExtra"
+      ],
+      "proposed_name": "v18_TClient_sendRemoveExtra_double_double",
+      "semantic_match_already_present": false,
+      "source_basis": "extra-item removal packet serialization",
+      "spectron_basic_block_count": 15,
+      "spectron_current_name": "_ZN10w6qzgacqqy10pYadyawQHoEdd",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1fc980",
+      "spectron_instruction_count": 154,
+      "spectron_size": 616,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target mangled signature retains two integer parameters.",
+        "Its body serializes the same chest coordinates or identifiers and dispatches the action packet.",
+        "Its target position immediately precedes the separately anchored shot helper."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 5,
+      "original_ea": "0x1f76c0",
+      "original_instruction_count": 64,
+      "original_name": "TClient_sendOpenChest_int_int",
+      "original_size": 260,
+      "original_string_refs": [
+        "onSendOpenChest"
+      ],
+      "proposed_name": "v18_TClient_sendOpenChest_int_int",
+      "semantic_match_already_present": false,
+      "source_basis": "open-chest packet serialization",
+      "spectron_basic_block_count": 9,
+      "spectron_current_name": "_ZN10w6qzgacqqy10BUGcyafIhoEii",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1fcbf0",
+      "spectron_instruction_count": 116,
+      "spectron_size": 472,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target mangled signature retains a weapon object pointer in the action cluster.",
+        "Its body reads the object fields needed for the same delete-weapon packet.",
+        "It is followed by the distinct NPC-deletion target and then the player-hurt and weapon-hit helpers."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 6,
+      "original_ea": "0x1f7a00",
+      "original_instruction_count": 40,
+      "original_name": "TClient_sendDeleteWeapon_TServerWeapon",
+      "original_size": 160,
+      "original_string_refs": [
+        "onSendDeleteWeapon"
+      ],
+      "proposed_name": "v18_TClient_sendDeleteWeapon_TServerWeapon",
+      "semantic_match_already_present": false,
+      "source_basis": "weapon-deletion packet serialization",
+      "spectron_basic_block_count": 10,
+      "spectron_current_name": "_ZN10w6qzgacqqy10EKG7xaTz4jEP10pTy_fadYe4",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1fd0e0",
+      "spectron_instruction_count": 103,
+      "spectron_size": 416,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target mangled signature retains an NPC object pointer.",
+        "Its body serializes the object-backed delete action and uses the preceding weapon-delete helper where needed.",
+        "Its target order matches the source NPC-deletion method immediately before player hurt."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 9,
+      "original_ea": "0x1f7aa0",
+      "original_instruction_count": 57,
+      "original_name": "TClient_sendDeleteNPC_TServerNPC",
+      "original_size": 232,
+      "original_string_refs": [
+        "onSendDeleteNPC"
+      ],
+      "proposed_name": "v18_TClient_sendDeleteNPC_TServerNPC",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC-deletion packet serialization",
+      "spectron_basic_block_count": 14,
+      "spectron_current_name": "_ZN10w6qzgacqqy10mtd6xaoXQiEP10LBgVgaqANQ",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1fd280",
+      "spectron_instruction_count": 109,
+      "spectron_size": 444,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target is the one-string serializer between weapon-hit and explosion helpers, matching the source order.",
+        "Its body preserves the compact warp text path and client send dispatch.",
+        "The target remains in the same outbound action cluster and is separate from the inbound server-warp handler."
+      ],
+      "match_kind": "manual-client-outbound-protocol-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 11,
+      "original_ea": "0x1f8178",
+      "original_instruction_count": 68,
+      "original_name": "TClient_sendServerWarp_TString_const",
+      "original_size": 272,
+      "original_string_refs": [
+        "onSendServerWarp"
+      ],
+      "proposed_name": "v18_TClient_sendServerWarp_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "server-warp packet serialization",
+      "spectron_basic_block_count": 18,
+      "spectron_current_name": "_ZN10w6qzgacqqy10krLoLaAwruERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1fdbe0",
+      "spectron_instruction_count": 126,
+      "spectron_size": 512,
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_client_outbound_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v3.json",
+    "spectron_features_sha256": "031afed73611783e0b16be71009e20118fc90a56e5d03e5ec04526f654f5cf27"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "These rows describe local outbound packet serialization logic and do not establish compatibility with an external service."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for remaining client outbound packet serializers",
+  "summary": {
+    "already_in_semantic_map": 1,
+    "anchor_count": 29,
+    "high_confidence_count": 29,
+    "new_context_anchor_count": 28,
+    "target_default_name_count": 0
+  }
+}

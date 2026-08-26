@@ -8,6 +8,14 @@
     "reopen_verification": "/tmp/spectron_client_action_anchor_verification_20260826.json",
     "verified_name_count": 11
   },
+  "client_outbound_anchors": {
+    "anchor_count": 29,
+    "anchor_path": "artifacts/spectron_client_outbound_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "89ddebbeda96dee08459e45f554dadb4e8f4d0c82e1bf196d416595e2387d580",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_client_outbound_anchor_verification_20260826.json",
+    "verified_name_count": 29
+  },
   "core_anchors": {
     "anchor_count": 16,
     "anchor_path": "artifacts/spectron_core_manual_translation_anchors_20260826.json",
@@ -21,8 +29,8 @@
     "default_sub_function_count": 1843,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v7.i64",
-    "sha256": "dff0fadfadfbbd4cb815b013ad589965545acb6b521518af091b61e89b266a64"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v8.i64",
+    "sha256": "29e9eed59176cdf495705a88e1d193000f59d46eefba5f151e9d213d8ec4f58d"
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
@@ -40,7 +48,8 @@
     "The fourth database revision also contains the separately reviewed resource, rendering, GUI, scripting, and client context anchors.",
     "The fifth database revision also contains the separately reviewed map-entry, file-delivery, script, text-control, and server-list context anchors.",
     "The sixth database revision also contains the separately reviewed download-queue, update-request, server-modify, and image-checksum context anchors.",
-    "The seventh database revision also contains the separately reviewed client action packet serializer anchors."
+    "The seventh database revision also contains the separately reviewed client action packet serializer anchors.",
+    "The eighth database revision also contains the separately reviewed remaining client outbound packet serializer anchors."
   ],
   "manual_anchors": {
     "anchor_count": 4,

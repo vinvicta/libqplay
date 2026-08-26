@@ -77,6 +77,9 @@ def main():
     spectron_client_action_anchors = load_json(
         "artifacts/spectron_client_action_manual_translation_anchors_20260826.json"
     )
+    spectron_client_outbound_anchors = load_json(
+        "artifacts/spectron_client_outbound_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -903,6 +906,16 @@ def main():
     check("Spectron client-action semantic overlap", spectron_client_action_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron client-action default targets", spectron_client_action_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron client-outbound artifact",
+        spectron_client_outbound_anchors["artifact"],
+        "spectron_client_outbound_manual_translation_anchors_20260826",
+    )
+    check("Spectron client-outbound network", spectron_client_outbound_anchors["network_contacted"], False)
+    check("Spectron client-outbound total", spectron_client_outbound_anchors["summary"]["anchor_count"], 29)
+    check("Spectron client-outbound high confidence", spectron_client_outbound_anchors["summary"]["high_confidence_count"], 29)
+    check("Spectron client-outbound semantic overlap", spectron_client_outbound_anchors["summary"]["already_in_semantic_map"], 1)
+    check("Spectron client-outbound default targets", spectron_client_outbound_anchors["summary"]["target_default_name_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -917,6 +930,7 @@ def main():
     check("Spectron checkpoint runtime-path anchor count", spectron_checkpoint["runtime_path_anchors"]["verified_name_count"], 13)
     check("Spectron checkpoint update-protocol anchor count", spectron_checkpoint["update_protocol_anchors"]["verified_name_count"], 5)
     check("Spectron checkpoint client-action anchor count", spectron_checkpoint["client_action_anchors"]["verified_name_count"], 11)
+    check("Spectron checkpoint client-outbound anchor count", spectron_checkpoint["client_outbound_anchors"]["verified_name_count"], 29)
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -984,6 +998,7 @@ def main():
         spectron_runtime_path_anchors,
         spectron_update_protocol_anchors,
         spectron_client_action_anchors,
+        spectron_client_outbound_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

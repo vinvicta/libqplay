@@ -507,6 +507,14 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_client_action_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+69. Clean IDA review added 29 high-confidence outbound client anchors for
+    level entry, file and image requests, uploads, scripts, chat, flags,
+    extras, object deletion, and server warp. Twenty-eight are new context
+    labels and one corroborates an existing semantic match. All 29 names
+    reopened successfully in the v8 disposable copy. See
+    `artifacts/spectron_client_outbound_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

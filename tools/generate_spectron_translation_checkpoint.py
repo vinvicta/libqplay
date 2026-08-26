@@ -39,6 +39,8 @@ def main() -> None:
     parser.add_argument("--update-protocol-verification", type=Path)
     parser.add_argument("--client-action-anchors", type=Path)
     parser.add_argument("--client-action-verification", type=Path)
+    parser.add_argument("--client-outbound-anchors", type=Path)
+    parser.add_argument("--client-outbound-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -246,6 +248,34 @@ def main() -> None:
         result["client_action_anchors"] = client_action
         result["interpretation"].append(
             "The seventh database revision also contains the separately reviewed client action packet serializer anchors."
+        )
+    client_outbound = None
+    if args.client_outbound_anchors or args.client_outbound_verification:
+        if not args.client_outbound_anchors or not args.client_outbound_verification:
+            raise ValueError(
+                "client-outbound anchors and client-outbound verification must be supplied together"
+            )
+        client_outbound_document = load(args.client_outbound_anchors)
+        client_outbound_verification = load(args.client_outbound_verification)
+        if client_outbound_document.get("artifact") != "spectron_client_outbound_manual_translation_anchors_20260826":
+            raise ValueError("unexpected client-outbound anchor artifact")
+        if not client_outbound_verification.get("verified"):
+            raise ValueError("client-outbound anchor reopen verification did not pass")
+        expected_client_outbound = len(client_outbound_document["anchors"])
+        if client_outbound_verification["verified_name_count"] != expected_client_outbound:
+            raise ValueError("client-outbound verification count differs from artifact")
+        client_outbound = {
+            "anchor_path": str(args.client_outbound_anchors),
+            "anchor_sha256": sha256_path(args.client_outbound_anchors),
+            "reopen_verification": str(args.client_outbound_verification),
+            "anchor_count": expected_client_outbound,
+            "verified_name_count": client_outbound_verification["verified_name_count"],
+            "reopen_failure_count": client_outbound_verification["failure_count"],
+        }
+    if client_outbound is not None:
+        result["client_outbound_anchors"] = client_outbound
+        result["interpretation"].append(
+            "The eighth database revision also contains the separately reviewed remaining client outbound packet serializer anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
