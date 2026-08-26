@@ -773,6 +773,12 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_script_object_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+108. Clean IDA review added two high-confidence GS2 script-state anchors for
+     profiling and player-flag updates. Both reopened successfully in the v48
+     disposable copy. See
+     `artifacts/spectron_script_state_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

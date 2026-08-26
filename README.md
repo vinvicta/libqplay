@@ -588,6 +588,13 @@ creation. Both reopened successfully. The evidence is in
 `artifacts/spectron_script_object_manual_translation_anchors_20260826.json`,
 and the v47 database SHA-256 is recorded in the checkpoint.
 
+A forty-sixth disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v48.i64`,
+adds two reviewed script-state anchors for profiling and player-flag updates.
+Both reopened successfully. The evidence is in
+`artifacts/spectron_script_state_manual_translation_anchors_20260826.json`,
+and the v48 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
