@@ -412,6 +412,17 @@ This is the short handoff view. The full reasoning and command history are in
     default `sub_` functions. The full evidence and database hash are in
     `artifacts/cyassl_static_role_audit_20260826.json`.
 
+59. A second static-library audit resolved 27 more high-confidence aliases:
+    14 zlib routines, 4 bzip2 routines, 2 minizip helpers, 1 GPC helper, 2
+    CyaSSL ASN.1 helpers, 1 LibTomCrypt DES routine, and 3 YAJL allocator
+    callbacks. It corrected five stale family classifications from the
+    address-boundary profile and corrected the earlier zlib `lm_init` guess
+    at `0x288908` to `_tr_init`. A clean reopen of
+    `analysis/libqplay_translated_all_v4.i64` verified all 27 names and
+    reduced the default-name count from 448 to 421. The database hash is
+    `089e588389206929cbcbd7d1d65dd477e0c69eed0841b430636bb7c947594ac3`.
+    Details are in `artifacts/static_library_role_audit_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
@@ -423,9 +434,10 @@ This is the short handoff view. The full reasoning and command history are in
   transition on a physical ARM64 device. The embedded marker statically
   decodes to `classic`, and the ordinary translated ARM64 run remains on the
   title or loading image, while both diagnostics display the world.
-* Whether any of the expanded callback or CyaSSL aliases should be persisted
-  into the active desktop IDA database. The disposable-copy IDALIB validations
-  passed, but the active unpacked database remained locked during these passes.
+* Whether any of the expanded callback, CyaSSL, or static-library aliases
+  should be persisted into the active desktop IDA database. The disposable-
+  copy IDALIB validations passed, but the active unpacked database remained
+  locked during these passes.
 * Whether an unmodified x86_64 build clears its loading state without the
   getter override present in several historical diagnostic APKs.
 * Whether the live server sends the same completion sequence as the local

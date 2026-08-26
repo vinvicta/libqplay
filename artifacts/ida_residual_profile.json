@@ -146,8 +146,170 @@
     "source": "artifacts/unresolved_function_candidates.json"
   },
   "applied_static_role_aliases": {
-    "count": 11,
+    "count": 38,
     "entries": [
+      {
+        "confidence": "high",
+        "ea": "0xe02ac",
+        "proposed_name": "bzip2_mainGtU",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x152b0c",
+        "proposed_name": "gpc_build_lmt",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x246b50",
+        "proposed_name": "LibTomCrypt_desfunc",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x24840c",
+        "proposed_name": "minizip_unz64local_GetCurrentFileInfoInternal",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x249580",
+        "proposed_name": "minizip_unz64local_CheckCurrentFileCoherencyHeader",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x2751c0",
+        "proposed_name": "bzip2_sendMTFValues",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x27d6f0",
+        "proposed_name": "bzip2_fallbackSort",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x27e0e4",
+        "proposed_name": "bzip2_mainSort",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x27fd34",
+        "proposed_name": "zlib_deflate_fast",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x2806e8",
+        "proposed_name": "zlib_deflate_stored",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x280d70",
+        "proposed_name": "zlib_deflate_slow",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x286a30",
+        "proposed_name": "zlib_inflate_table",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x2874a8",
+        "proposed_name": "zlib_send_tree",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x287a48",
+        "proposed_name": "zlib_compress_block",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x287eac",
+        "proposed_name": "zlib_build_tree",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x288908",
+        "proposed_name": "zlib_tr_init",
+        "source_match": "exact-source-role-with-prefix"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x288998",
+        "proposed_name": "zlib_tr_stored_block",
+        "source_match": "exact-source-role-with-prefix"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x288b28",
+        "proposed_name": "zlib_tr_align",
+        "source_match": "exact-source-role-with-prefix"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x288e5c",
+        "proposed_name": "zlib_tr_flush_block",
+        "source_match": "exact-source-role-with-prefix"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x2899ac",
+        "proposed_name": "zlib_tr_tally",
+        "source_match": "exact-source-role-with-prefix"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x289b80",
+        "proposed_name": "zlib_zcalloc",
+        "source_match": "exact-source-role-with-prefix"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x289b88",
+        "proposed_name": "zlib_zcfree",
+        "source_match": "exact-source-role-with-prefix"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x2af788",
+        "proposed_name": "yajl_internal_realloc",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x2af794",
+        "proposed_name": "yajl_internal_free",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x2af79c",
+        "proposed_name": "yajl_internal_malloc",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x2b3be8",
+        "proposed_name": "CyaInt_GetLength",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x2b3c64",
+        "proposed_name": "CyaInt_GetName",
+        "source_match": "exact-source-role"
+      },
       {
         "confidence": "high",
         "ea": "0x2b6384",
@@ -215,47 +377,15 @@
         "source_match": "exact-source-role"
       }
     ],
-    "source": "artifacts/cyassl_static_role_audit_20260826.json"
+    "sources": [
+      "artifacts/cyassl_static_role_audit_20260826.json",
+      "artifacts/static_library_role_audit_20260826.json"
+    ]
   },
   "artifact": "ida_persisted_residual_profile",
   "binary": "private original ARM64 libqplay.so",
   "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
   "categories": [
-    {
-      "category": "bzip2_static_internal",
-      "count": 4,
-      "entries": [
-        {
-          "category": "bzip2_static_internal",
-          "current_ida_name": "sub_E02AC",
-          "ea": "0xe02ac",
-          "segment": ".text",
-          "size": 424
-        },
-        {
-          "category": "bzip2_static_internal",
-          "current_ida_name": "sub_2751C0",
-          "ea": "0x2751c0",
-          "segment": ".text",
-          "size": 15216
-        },
-        {
-          "category": "bzip2_static_internal",
-          "current_ida_name": "sub_27D6F0",
-          "ea": "0x27d6f0",
-          "segment": ".text",
-          "size": 2548
-        },
-        {
-          "category": "bzip2_static_internal",
-          "current_ida_name": "sub_27E0E4",
-          "ea": "0x27e0e4",
-          "segment": ".text",
-          "size": 5336
-        }
-      ],
-      "total_bytes": 23524
-    },
     {
       "category": "freetype_static_internal",
       "count": 144,
@@ -1272,36 +1402,8 @@
       "total_bytes": 90960
     },
     {
-      "category": "gif_static_internal",
-      "count": 3,
-      "entries": [
-        {
-          "category": "gif_static_internal",
-          "current_ida_name": "sub_2AF788",
-          "ea": "0x2af788",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "category": "gif_static_internal",
-          "current_ida_name": "sub_2AF794",
-          "ea": "0x2af794",
-          "segment": ".text",
-          "size": 8
-        },
-        {
-          "category": "gif_static_internal",
-          "current_ida_name": "sub_2AF79C",
-          "ea": "0x2af79c",
-          "segment": ".text",
-          "size": 8
-        }
-      ],
-      "total_bytes": 28
-    },
-    {
       "category": "gpc_static_internal",
-      "count": 4,
+      "count": 3,
       "entries": [
         {
           "category": "gpc_static_internal",
@@ -1323,16 +1425,9 @@
           "ea": "0x152898",
           "segment": ".text",
           "size": 628
-        },
-        {
-          "category": "gpc_static_internal",
-          "current_ida_name": "sub_152B0C",
-          "ea": "0x152b0c",
-          "segment": ".text",
-          "size": 2404
         }
       ],
-      "total_bytes": 4768
+      "total_bytes": 2364
     },
     {
       "category": "init_or_fini_array_entry",
@@ -2532,27 +2627,6 @@
       "total_bytes": 104008
     },
     {
-      "category": "minizip_static_internal",
-      "count": 2,
-      "entries": [
-        {
-          "category": "minizip_static_internal",
-          "current_ida_name": "sub_24840C",
-          "ea": "0x24840c",
-          "segment": ".text",
-          "size": 4468
-        },
-        {
-          "category": "minizip_static_internal",
-          "current_ida_name": "sub_249580",
-          "ea": "0x249580",
-          "segment": ".text",
-          "size": 3920
-        }
-      ],
-      "total_bytes": 8388
-    },
-    {
       "category": "plt0_resolver",
       "count": 1,
       "entries": [
@@ -2586,20 +2660,6 @@
         }
       ],
       "total_bytes": 28
-    },
-    {
-      "category": "tomcrypt_des_static_internal",
-      "count": 1,
-      "entries": [
-        {
-          "category": "tomcrypt_des_static_internal",
-          "current_ida_name": "sub_246B50",
-          "ea": "0x246b50",
-          "segment": ".text",
-          "size": 612
-        }
-      ],
-      "total_bytes": 612
     },
     {
       "category": "tstring_static_cleanup_wrapper",
@@ -3328,143 +3388,9 @@
         }
       ],
       "total_bytes": 80
-    },
-    {
-      "category": "yajl_static_internal",
-      "count": 2,
-      "entries": [
-        {
-          "category": "yajl_static_internal",
-          "current_ida_name": "sub_2B3BE8",
-          "ea": "0x2b3be8",
-          "segment": ".text",
-          "size": 124
-        },
-        {
-          "category": "yajl_static_internal",
-          "current_ida_name": "sub_2B3C64",
-          "ea": "0x2b3c64",
-          "segment": ".text",
-          "size": 1820
-        }
-      ],
-      "total_bytes": 1944
-    },
-    {
-      "category": "zlib_static_internal",
-      "count": 14,
-      "entries": [
-        {
-          "category": "zlib_static_internal",
-          "current_ida_name": "sub_27FD34",
-          "ea": "0x27fd34",
-          "segment": ".text",
-          "size": 2484
-        },
-        {
-          "category": "zlib_static_internal",
-          "current_ida_name": "sub_2806E8",
-          "ea": "0x2806e8",
-          "segment": ".text",
-          "size": 1672
-        },
-        {
-          "category": "zlib_static_internal",
-          "current_ida_name": "sub_280D70",
-          "ea": "0x280d70",
-          "segment": ".text",
-          "size": 2856
-        },
-        {
-          "category": "zlib_static_internal",
-          "current_ida_name": "sub_286A30",
-          "ea": "0x286a30",
-          "segment": ".text",
-          "size": 2680
-        },
-        {
-          "category": "zlib_static_internal",
-          "current_ida_name": "sub_2874A8",
-          "ea": "0x2874a8",
-          "segment": ".text",
-          "size": 1440
-        },
-        {
-          "category": "zlib_static_internal",
-          "current_ida_name": "sub_287A48",
-          "ea": "0x287a48",
-          "segment": ".text",
-          "size": 1124
-        },
-        {
-          "category": "zlib_static_internal",
-          "current_ida_name": "sub_287EAC",
-          "ea": "0x287eac",
-          "segment": ".text",
-          "size": 2652
-        },
-        {
-          "category": "zlib_static_internal",
-          "current_ida_name": "sub_288908",
-          "ea": "0x288908",
-          "segment": ".text",
-          "size": 144
-        },
-        {
-          "category": "zlib_static_internal",
-          "current_ida_name": "sub_288998",
-          "ea": "0x288998",
-          "segment": ".text",
-          "size": 400
-        },
-        {
-          "category": "zlib_static_internal",
-          "current_ida_name": "sub_288B28",
-          "ea": "0x288b28",
-          "segment": ".text",
-          "size": 820
-        },
-        {
-          "category": "zlib_static_internal",
-          "current_ida_name": "sub_288E5C",
-          "ea": "0x288e5c",
-          "segment": ".text",
-          "size": 2896
-        },
-        {
-          "category": "zlib_static_internal",
-          "current_ida_name": "sub_2899AC",
-          "ea": "0x2899ac",
-          "segment": ".text",
-          "size": 196
-        },
-        {
-          "category": "zlib_static_internal",
-          "current_ida_name": "sub_289B80",
-          "ea": "0x289b80",
-          "segment": ".text",
-          "size": 8
-        },
-        {
-          "category": "zlib_static_internal",
-          "current_ida_name": "sub_289B88",
-          "ea": "0x289b88",
-          "segment": ".text",
-          "size": 8
-        }
-      ],
-      "total_bytes": 19380
     }
   ],
   "category_summary": [
-    {
-      "category": "bzip2_static_internal",
-      "count": 4,
-      "evidence": "The entries sit between exported BZ2 routines and the zlib CRC transition; 0xe02ac is the unrolled byte and halfword comparison helper called by the bundled bzip2 decode loop at 0x27e0e4.",
-      "first_ea": "0xe02ac",
-      "last_ea": "0x27e0e4",
-      "total_bytes": 23524
-    },
     {
       "category": "freetype_static_internal",
       "count": 144,
@@ -3474,20 +3400,12 @@
       "total_bytes": 90960
     },
     {
-      "category": "gif_static_internal",
-      "count": 3,
-      "evidence": "The entries sit between FreeLastSavedImage and the YAJL buffer code.",
-      "first_ea": "0x2af788",
-      "last_ea": "0x2af79c",
-      "total_bytes": 28
-    },
-    {
       "category": "gpc_static_internal",
-      "count": 4,
+      "count": 3,
       "evidence": "The main gap ends at gpc_free_polygon and follows TBitmap::readTGA; 0xe01a0 is called by gpc_tristrip_clip at 0x15504c and formats the gpc malloc failure diagnostic for tristrip node creation.",
       "first_ea": "0xe01a0",
-      "last_ea": "0x152b0c",
-      "total_bytes": 4768
+      "last_ea": "0x152898",
+      "total_bytes": 2364
     },
     {
       "category": "init_or_fini_array_entry",
@@ -3506,14 +3424,6 @@
       "total_bytes": 104008
     },
     {
-      "category": "minizip_static_internal",
-      "count": 2,
-      "evidence": "0x24840c is shared by the central-directory APIs, while 0x249580 is called by unzOpenCurrentFile3; both are internal minizip helpers between exported APIs.",
-      "first_ea": "0x24840c",
-      "last_ea": "0x249580",
-      "total_bytes": 8388
-    },
-    {
       "category": "plt0_resolver",
       "count": 1,
       "evidence": "The first 20-byte .plt entry is the AArch64 resolver slot, not an imported function.",
@@ -3530,14 +3440,6 @@
       "total_bytes": 28
     },
     {
-      "category": "tomcrypt_des_static_internal",
-      "count": 1,
-      "evidence": "0x246b50 is called by the exported DES and 3DES ECB routines and contains their shared 16-round block transform.",
-      "first_ea": "0x246b50",
-      "last_ea": "0x246b50",
-      "total_bytes": 612
-    },
-    {
       "category": "tstring_static_cleanup_wrapper",
       "count": 97,
       "evidence": "The function computes a fixed global TString address and tail-calls TString::clear; it is a compiler-generated static cleanup wrapper without an independent source body.",
@@ -3552,31 +3454,15 @@
       "first_ea": "0xe2b0c",
       "last_ea": "0x22b16c",
       "total_bytes": 80
-    },
-    {
-      "category": "yajl_static_internal",
-      "count": 2,
-      "evidence": "The entries are in the final YAJL string-validation gap before CyaSSL RSA code.",
-      "first_ea": "0x2b3be8",
-      "last_ea": "0x2b3c64",
-      "total_bytes": 1944
-    },
-    {
-      "category": "zlib_static_internal",
-      "count": 14,
-      "evidence": "The region is bracketed by crc32_combine64 and adler32_combine64.",
-      "first_ea": "0x27fd34",
-      "last_ea": "0x289b88",
-      "total_bytes": 19380
     }
   ],
   "database": {
-    "close_reopen_verified": false,
-    "default_sub_function_count": 448,
+    "close_reopen_verified": true,
+    "default_sub_function_count": 421,
     "format": "packed IDA 9.3 database",
     "function_count": 11297,
-    "path": "analysis/libqplay_translated_all_v3.i64",
-    "sha256": "1db52b8b2169250852fcd1a5a2acfda859b81038e92b47158029ecc886356874"
+    "path": "analysis/libqplay_translated_all_v4.i64",
+    "sha256": "089e588389206929cbcbd7d1d65dd477e0c69eed0841b430636bb7c947594ac3"
   },
   "ida_reclassified_functions": [
     {
@@ -3592,7 +3478,7 @@
     "unresolved_default_sub_function_count": 488
   },
   "purpose": "Account for every default sub_ function left in the persisted IDA translation copy without inventing source names.",
-  "remaining_default_sub_function_count": 448,
+  "remaining_default_sub_function_count": 421,
   "residual_default_sub_functions": [
     {
       "category": "plt0_resolver",
@@ -3607,13 +3493,6 @@
       "ea": "0xe01a0",
       "segment": ".text",
       "size": 48
-    },
-    {
-      "category": "bzip2_static_internal",
-      "current_ida_name": "sub_E02AC",
-      "ea": "0xe02ac",
-      "segment": ".text",
-      "size": 424
     },
     {
       "category": "jpeg_static_internal",
@@ -4006,13 +3885,6 @@
       "ea": "0x152898",
       "segment": ".text",
       "size": 628
-    },
-    {
-      "category": "gpc_static_internal",
-      "current_ida_name": "sub_152B0C",
-      "ea": "0x152b0c",
-      "segment": ".text",
-      "size": 2404
     },
     {
       "category": "tstring_static_cleanup_wrapper",
@@ -4503,27 +4375,6 @@
       "ea": "0x23840c",
       "segment": ".text",
       "size": 16
-    },
-    {
-      "category": "tomcrypt_des_static_internal",
-      "current_ida_name": "sub_246B50",
-      "ea": "0x246b50",
-      "segment": ".text",
-      "size": 612
-    },
-    {
-      "category": "minizip_static_internal",
-      "current_ida_name": "sub_24840C",
-      "ea": "0x24840c",
-      "segment": ".text",
-      "size": 4468
-    },
-    {
-      "category": "minizip_static_internal",
-      "current_ida_name": "sub_249580",
-      "ea": "0x249580",
-      "segment": ".text",
-      "size": 3920
     },
     {
       "category": "freetype_static_internal",
@@ -5532,125 +5383,6 @@
       "ea": "0x27336c",
       "segment": ".text",
       "size": 2220
-    },
-    {
-      "category": "bzip2_static_internal",
-      "current_ida_name": "sub_2751C0",
-      "ea": "0x2751c0",
-      "segment": ".text",
-      "size": 15216
-    },
-    {
-      "category": "bzip2_static_internal",
-      "current_ida_name": "sub_27D6F0",
-      "ea": "0x27d6f0",
-      "segment": ".text",
-      "size": 2548
-    },
-    {
-      "category": "bzip2_static_internal",
-      "current_ida_name": "sub_27E0E4",
-      "ea": "0x27e0e4",
-      "segment": ".text",
-      "size": 5336
-    },
-    {
-      "category": "zlib_static_internal",
-      "current_ida_name": "sub_27FD34",
-      "ea": "0x27fd34",
-      "segment": ".text",
-      "size": 2484
-    },
-    {
-      "category": "zlib_static_internal",
-      "current_ida_name": "sub_2806E8",
-      "ea": "0x2806e8",
-      "segment": ".text",
-      "size": 1672
-    },
-    {
-      "category": "zlib_static_internal",
-      "current_ida_name": "sub_280D70",
-      "ea": "0x280d70",
-      "segment": ".text",
-      "size": 2856
-    },
-    {
-      "category": "zlib_static_internal",
-      "current_ida_name": "sub_286A30",
-      "ea": "0x286a30",
-      "segment": ".text",
-      "size": 2680
-    },
-    {
-      "category": "zlib_static_internal",
-      "current_ida_name": "sub_2874A8",
-      "ea": "0x2874a8",
-      "segment": ".text",
-      "size": 1440
-    },
-    {
-      "category": "zlib_static_internal",
-      "current_ida_name": "sub_287A48",
-      "ea": "0x287a48",
-      "segment": ".text",
-      "size": 1124
-    },
-    {
-      "category": "zlib_static_internal",
-      "current_ida_name": "sub_287EAC",
-      "ea": "0x287eac",
-      "segment": ".text",
-      "size": 2652
-    },
-    {
-      "category": "zlib_static_internal",
-      "current_ida_name": "sub_288908",
-      "ea": "0x288908",
-      "segment": ".text",
-      "size": 144
-    },
-    {
-      "category": "zlib_static_internal",
-      "current_ida_name": "sub_288998",
-      "ea": "0x288998",
-      "segment": ".text",
-      "size": 400
-    },
-    {
-      "category": "zlib_static_internal",
-      "current_ida_name": "sub_288B28",
-      "ea": "0x288b28",
-      "segment": ".text",
-      "size": 820
-    },
-    {
-      "category": "zlib_static_internal",
-      "current_ida_name": "sub_288E5C",
-      "ea": "0x288e5c",
-      "segment": ".text",
-      "size": 2896
-    },
-    {
-      "category": "zlib_static_internal",
-      "current_ida_name": "sub_2899AC",
-      "ea": "0x2899ac",
-      "segment": ".text",
-      "size": 196
-    },
-    {
-      "category": "zlib_static_internal",
-      "current_ida_name": "sub_289B80",
-      "ea": "0x289b80",
-      "segment": ".text",
-      "size": 8
-    },
-    {
-      "category": "zlib_static_internal",
-      "current_ida_name": "sub_289B88",
-      "ea": "0x289b88",
-      "segment": ".text",
-      "size": 8
     },
     {
       "category": "jpeg_static_internal",
@@ -6694,48 +6426,16 @@
       "ea": "0x2acb20",
       "segment": ".text",
       "size": 1508
-    },
-    {
-      "category": "gif_static_internal",
-      "current_ida_name": "sub_2AF788",
-      "ea": "0x2af788",
-      "segment": ".text",
-      "size": 12
-    },
-    {
-      "category": "gif_static_internal",
-      "current_ida_name": "sub_2AF794",
-      "ea": "0x2af794",
-      "segment": ".text",
-      "size": 8
-    },
-    {
-      "category": "gif_static_internal",
-      "current_ida_name": "sub_2AF79C",
-      "ea": "0x2af79c",
-      "segment": ".text",
-      "size": 8
-    },
-    {
-      "category": "yajl_static_internal",
-      "current_ida_name": "sub_2B3BE8",
-      "ea": "0x2b3be8",
-      "segment": ".text",
-      "size": 124
-    },
-    {
-      "category": "yajl_static_internal",
-      "current_ida_name": "sub_2B3C64",
-      "ea": "0x2b3c64",
-      "segment": ".text",
-      "size": 1820
     }
   ],
   "schema_version": 1,
   "source_artifacts": {
     "profile": "artifacts/unresolved_function_profile.json",
     "role_candidates": "artifacts/unresolved_function_candidates.json",
-    "static_role_aliases": "artifacts/cyassl_static_role_audit_20260826.json",
+    "static_role_aliases": [
+      "artifacts/cyassl_static_role_audit_20260826.json",
+      "artifacts/static_library_role_audit_20260826.json"
+    ],
     "validation": "artifacts/ida_translation_validation.json"
   },
   "translation_limit": "These entries are IDA-created functions with no surviving source name in the APK. Library-family evidence is recorded where available, but family membership is not converted into a guessed source symbol."

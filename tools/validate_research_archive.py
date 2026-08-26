@@ -27,6 +27,9 @@ def main():
     ida_validation = load_json("artifacts/ida_translation_validation.json")
     ida_residual = load_json("artifacts/ida_residual_profile.json")
     cyassl_roles = load_json("artifacts/cyassl_static_role_audit_20260826.json")
+    static_library_roles = load_json(
+        "artifacts/static_library_role_audit_20260826.json"
+    )
     arm64_revalidation = load_json(
         "artifacts/arm64_diagnostic_apk_revalidation_20260825.json"
     )
@@ -382,23 +385,23 @@ def main():
     check(
         "IDA residual database hash",
         ida_residual["database"]["sha256"],
-        "1db52b8b2169250852fcd1a5a2acfda859b81038e92b47158029ecc886356874",
+        "089e588389206929cbcbd7d1d65dd477e0c69eed0841b430636bb7c947594ac3",
     )
     check(
         "IDA residual database path",
         ida_residual["database"]["path"],
-        "analysis/libqplay_translated_all_v3.i64",
+        "analysis/libqplay_translated_all_v4.i64",
     )
     check("IDA residual function total", ida_residual["database"]["function_count"], 11297)
     check(
         "IDA residual default total",
         ida_residual["remaining_default_sub_function_count"],
-        448,
+        421,
     )
     check(
         "IDA residual entry total",
         len(ida_residual["residual_default_sub_functions"]),
-        448,
+        421,
     )
     check(
         "IDA residual role removal total",
@@ -408,12 +411,12 @@ def main():
     check(
         "IDA residual static CyaSSL alias total",
         ida_residual["applied_static_role_aliases"]["count"],
-        11,
+        38,
     )
     check(
         "IDA residual category partition",
         sum(item["count"] for item in ida_residual["category_summary"]),
-        448,
+        421,
     )
     check(
         "IDA residual category names",
@@ -422,7 +425,7 @@ def main():
         set(),
     )
     residual_addresses = [item["ea"] for item in ida_residual["residual_default_sub_functions"]]
-    check("IDA residual address uniqueness", len(set(residual_addresses)), 448)
+    check("IDA residual address uniqueness", len(set(residual_addresses)), 421)
 
     check(
         "CyaSSL static role artifact",
@@ -455,6 +458,115 @@ def main():
     check("CyaSSL static role verification report failures", cyassl_roles["verification"]["failure_count"], 0)
     alias_addresses = [item["va"] for item in cyassl_roles["aliases"]]
     check("CyaSSL static role address uniqueness", len(set(alias_addresses)), 11)
+
+    check(
+        "static-library role artifact",
+        static_library_roles["artifact"],
+        "static_library_role_audit_20260826",
+    )
+    check(
+        "static-library role status",
+        static_library_roles["status"],
+        "aliases_applied_to_persisted_copy",
+    )
+    check("static-library role network", static_library_roles["network_contacted"], False)
+    check("static-library role input hash", static_library_roles["binary_sha256"], primary_hash)
+    check("static-library role count", static_library_roles["alias_count"], 27)
+    check(
+        "static-library role high-confidence count",
+        static_library_roles["confidence_counts"]["high"],
+        27,
+    )
+    check(
+        "static-library role family counts",
+        static_library_roles["family_counts"],
+        {
+            "bzip2": 4,
+            "cyassl": 2,
+            "gpc": 1,
+            "minizip": 2,
+            "tomcrypt": 1,
+            "yajl": 3,
+            "zlib": 14,
+        },
+    )
+    check(
+        "static-library role correction count",
+        len(static_library_roles["classification_corrections"]),
+        5,
+    )
+    check(
+        "static-library role database path",
+        static_library_roles["database"]["path"],
+        "analysis/libqplay_translated_all_v4.i64",
+    )
+    check(
+        "static-library role database hash",
+        static_library_roles["database"]["sha256"],
+        "089e588389206929cbcbd7d1d65dd477e0c69eed0841b430636bb7c947594ac3",
+    )
+    check(
+        "static-library role inventory hash",
+        static_library_roles["database"]["inventory_sha256"],
+        "5d25001293e816e7a2d91261ba9140b9f891df952b3427fd67343c643ed87496",
+    )
+    check("static-library role function total", static_library_roles["database"]["function_count"], 11297)
+    check(
+        "static-library role defaults before",
+        static_library_roles["database"]["default_sub_function_count_before"],
+        448,
+    )
+    check(
+        "static-library role defaults after",
+        static_library_roles["database"]["default_sub_function_count_after"],
+        421,
+    )
+    check(
+        "static-library role verification names",
+        static_library_roles["database"]["verified_name_count"],
+        27,
+    )
+    check(
+        "static-library role verification failures",
+        static_library_roles["database"]["verification_failures"],
+        0,
+    )
+    check(
+        "static-library role application renamed",
+        static_library_roles["application"]["renamed_count"],
+        27,
+    )
+    check(
+        "static-library role application comments",
+        static_library_roles["application"]["comments_added"],
+        27,
+    )
+    check(
+        "static-library role application failures",
+        static_library_roles["application"]["failure_count"],
+        0,
+    )
+    check(
+        "static-library role verification status",
+        static_library_roles["verification"]["status"],
+        "ok",
+    )
+    check(
+        "static-library role verification names report",
+        static_library_roles["verification"]["verified_name_count"],
+        27,
+    )
+    check(
+        "static-library role verification failures report",
+        static_library_roles["verification"]["failure_count"],
+        0,
+    )
+    static_alias_addresses = [item["va"] for item in static_library_roles["aliases"]]
+    check(
+        "static-library role address uniqueness",
+        len(set(static_alias_addresses)),
+        27,
+    )
 
     check(
         "ARM64 revalidation artifact",
@@ -666,6 +778,7 @@ def main():
         labels,
         ida_validation,
         ida_residual,
+        static_library_roles,
         arm64_revalidation,
         arm64_native_only,
         arm64_native_stock,

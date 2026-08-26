@@ -1989,3 +1989,54 @@ control proves the production entitlement meaning of that branch, live
 service compatibility, or behavior on a physical ARM64 device. The complete
 hash and capture record is in
 `artifacts/arm64_native_verification_working_control_20260826.json`.
+
+## Static library role audit
+
+After the CyaSSL pass, I reviewed the remaining unnamed routines whose
+callers and bodies placed them inside bundled third-party libraries. This
+second audit resolved 27 entries across seven families: 14 zlib routines, 4
+bzip2 routines, 2 minizip helpers, 1 GPC helper, 2 CyaSSL ASN.1 helpers, 1
+LibTomCrypt DES routine, and 3 YAJL allocator callbacks. Every alias is a
+high-confidence source-role match. These are analysis names applied to a
+disposable IDA copy. They do not claim that the original stripped ELF
+contained those source names.
+
+The zlib group includes the three deflate strategies, the inflate table
+builder, the dynamic-tree emitters, the block helpers, and the allocator
+callbacks. One earlier role guess was corrected during this pass:
+`0x288908` is zlib `_tr_init`, not `lm_init`. Its body initializes the pending
+tree descriptors, bit state, frequency tables, and end-block code, while the
+actual `lm_init` role initializes the sliding-window and hash state elsewhere.
+The bzip2 entries are the two sorting paths, `mainGtU`, and
+`sendMTFValues`. The minizip entries are the central-directory information
+helper and the current-file header coherency helper. The GPC entry is
+`build_lmt`, identified by its seven-argument edge-table construction and
+the literal error messages it uses. The DES entry contains the initial and
+final permutations, all 16 rounds, and the S-box lookups. The YAJL entries
+are the direct `malloc`, `free`, and `realloc` callbacks installed by the
+default allocator setup.
+
+The address-boundary profile had five stale family classifications. The two
+CyaSSL ASN.1 helpers had been placed in a YAJL bucket, and the three YAJL
+allocator callbacks had been placed in a GIF bucket. The decompiled behavior,
+callback installation sites, and source comparisons corrected those entries.
+The source comparisons used the relevant [zlib sources](https://github.com/madler/zlib/blob/develop/trees.c),
+[bzip2 block-sort source](https://sources.debian.org/src/bzip2/1.0.5-1%2Blenny1/blocksort.c/),
+[minizip source](https://github.com/madler/zlib/blob/develop/contrib/minizip/unzip.c),
+[GPC source](https://github.com/rickbrew/GeneralPolygonClipper/blob/main/gpc.c),
+[CyaSSL ASN.1 source](https://nest-open-source.googlesource.com/nest-yale-lock/1.2/freertos/%2B/b9a7305351d35e2d3076d0b4ab3ec121f0aa8d52/FreeRTOS-Plus/Source/CyaSSL/ctaocrypt/src/asn.c),
+[LibTomCrypt DES source](https://android.googlesource.com/platform/external/dropbear/+/refs/heads/donut-release/libtomcrypt/src/ciphers/des.c),
+and [YAJL allocator source](https://sources.debian.org/src/yajl/2.1.0-3/src/yajl_alloc.c).
+
+The aliases were applied to `analysis/libqplay_translated_all_v4.i64`. A
+clean IDA 9.3 reopen verified all 27 names and comments, retained 11,297
+functions, and reduced the default-name count from 448 to 421. The final
+database SHA-256 is
+`089e588389206929cbcbd7d1d65dd477e0c69eed0841b430636bb7c947594ac3`, and
+the exported inventory SHA-256 is
+`5d25001293e816e7a2d91261ba9140b9f891df952b3427fd67343c643ed87496`.
+The machine-readable record is
+`artifacts/static_library_role_audit_20260826.json`. The reusable helpers
+are `tools/generate_static_library_role_audit.py`,
+`tools/ida_apply_static_library_aliases.py`, and
+`tools/ida_verify_static_library_aliases.py`.

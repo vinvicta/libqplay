@@ -19,8 +19,10 @@ copy was persisted. It contains 11,272 functions and 1,645 default `sub_`
 names. After the callback, script-table, and role passes, the base saved copy
 at `/home/v/Desktop/graal-decomp/analysis/libqplay_translated_all_v2.i64`
 contained 11,297 functions and 459 default names. A follow-up CyaSSL alias
-pass was saved as `/home/v/Desktop/graal-decomp/analysis/libqplay_translated_all_v3.i64`;
-that latest copy contains 11,297 functions and 448 default names.
+pass was saved as `/home/v/Desktop/graal-decomp/analysis/libqplay_translated_all_v3.i64`
+with 448 default names. The next static-library pass was saved as
+`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_all_v4.i64` and
+contains 11,297 functions and 421 default names.
 
 The count is accounted for exactly:
 
@@ -28,15 +30,18 @@ The count is accounted for exactly:
 488 pre-persistence unresolved entries
 - 28 applied application or engine role aliases
 - 11 applied CyaSSL static role aliases
+- 27 applied static-library role aliases
 -  1 compiler branch veneer reclassified as a named thunk
-=448 residual default entries
+=421 residual default entries
 ```
 
 The 28 application and engine role aliases are behavior-based names, not
 recovered ELF source names. The CyaSSL pass adds seven high-confidence source
 role matches and four descriptive aliases for routines whose behavior is
-clear but whose exact source name is not preserved. The aliases are recorded
-in `artifacts/cyassl_static_role_audit_20260826.json`.
+clear but whose exact source name is not preserved. The next pass adds 27
+high-confidence source-role aliases across seven bundled libraries. The two
+audit records are `artifacts/cyassl_static_role_audit_20260826.json` and
+`artifacts/static_library_role_audit_20260826.json`.
 The branch veneer at `0x1f94fc` was reclassified as
 `j_TCachedStream_get_minfilecachesize` when IDA rebuilt the saved copy. The
 active desktop IDA database remained locked and was not changed.
@@ -71,25 +76,87 @@ comparison links, and persisted database hash are in
 are `tools/ida_apply_cyassl_static_aliases.py` and
 `tools/ida_verify_cyassl_static_aliases.py`.
 
+## Static library role pass
+
+The next pass covered the small residual gaps where the code matched a named
+upstream routine closely enough to use a source-role alias. Every entry below
+was applied to the v4 disposable database, saved, reopened, and verified. The
+prefixes on the aliases identify the library family. They are analysis names,
+not claims that those source names survived in the stripped ELF.
+
+| Family | Address | Latest IDA alias | Source role |
+| --- | --- | --- | --- |
+| zlib | `0x27fd34` | `zlib_deflate_fast` | `deflate_fast` |
+| zlib | `0x2806e8` | `zlib_deflate_stored` | `deflate_stored` |
+| zlib | `0x280d70` | `zlib_deflate_slow` | `deflate_slow` |
+| zlib | `0x286a30` | `zlib_inflate_table` | `inflate_table` |
+| zlib | `0x2874a8` | `zlib_send_tree` | `send_tree` |
+| zlib | `0x287a48` | `zlib_compress_block` | `compress_block` |
+| zlib | `0x287eac` | `zlib_build_tree` | `build_tree` |
+| zlib | `0x288908` | `zlib_tr_init` | `_tr_init` |
+| zlib | `0x288998` | `zlib_tr_stored_block` | `_tr_stored_block` |
+| zlib | `0x288b28` | `zlib_tr_align` | `_tr_align` |
+| zlib | `0x288e5c` | `zlib_tr_flush_block` | `_tr_flush_block` |
+| zlib | `0x2899ac` | `zlib_tr_tally` | `_tr_tally` |
+| zlib | `0x289b80` | `zlib_zcalloc` | `zcalloc` |
+| zlib | `0x289b88` | `zlib_zcfree` | `zcfree` |
+| bzip2 | `0x0e02ac` | `bzip2_mainGtU` | `mainGtU` |
+| bzip2 | `0x2751c0` | `bzip2_sendMTFValues` | `sendMTFValues` |
+| bzip2 | `0x27d6f0` | `bzip2_fallbackSort` | `fallbackSort` |
+| bzip2 | `0x27e0e4` | `bzip2_mainSort` | `mainSort` |
+| minizip | `0x24840c` | `minizip_unz64local_GetCurrentFileInfoInternal` | `unz64local_GetCurrentFileInfoInternal` |
+| minizip | `0x249580` | `minizip_unz64local_CheckCurrentFileCoherencyHeader` | `unz64local_CheckCurrentFileCoherencyHeader` |
+| GPC | `0x152b0c` | `gpc_build_lmt` | `build_lmt` |
+| CyaSSL | `0x2b3be8` | `CyaInt_GetLength` | `GetLength` |
+| CyaSSL | `0x2b3c64` | `CyaInt_GetName` | `GetName` |
+| LibTomCrypt | `0x246b50` | `LibTomCrypt_desfunc` | `desfunc` |
+| YAJL | `0x2af788` | `yajl_internal_realloc` | `yajl_internal_realloc` |
+| YAJL | `0x2af794` | `yajl_internal_free` | `yajl_internal_free` |
+| YAJL | `0x2af79c` | `yajl_internal_malloc` | `yajl_internal_malloc` |
+
+The zlib comparison was especially useful for avoiding a misleading name.
+`0x288908` initializes the tree descriptors and the first block, so it is
+`_tr_init`; it does not initialize the sliding-window match state of
+`lm_init`. The bzip2 routines match the source call order from
+`BZ2_blockSort` and `BZ2_compressBlock`, while the minizip routines match the
+central-directory and local-header helpers. GPC `build_lmt` is identified by
+its seven-argument shape and the literal allocation diagnostics for edge
+table, scanbeam, and LMT insertion. The complete decompilation evidence,
+callers, sizes, and source links are in
+`artifacts/static_library_role_audit_20260826.json`.
+
+Five address-only family classifications in the historical unresolved profile
+were corrected during this pass. The three callbacks at `0x2af788`,
+`0x2af794`, and `0x2af79c` are YAJL's default realloc, free, and malloc
+callbacks. The two routines at `0x2b3be8` and `0x2b3c64` are CyaSSL's DER
+length and certificate subject-name helpers. The old profile is preserved as
+the pre-persistence snapshot, and the correction is recorded in the new role
+artifact rather than silently rewriting history.
+
+The application report renamed all 27 functions and added 27 evidence
+comments with zero failures. A clean reopen found all 27 names at their
+expected function starts, retained 11,297 total functions, and reduced the
+default-name count from 448 to 421. The v4 database hash is
+`089e588389206929cbcbd7d1d65dd477e0c69eed0841b430636bb7c947594ac3`, and the
+exported inventory hash is
+`5d25001293e816e7a2d91261ba9140b9f891df952b3427fd67343c643ed87496`.
+The reusable scripts are `tools/generate_static_library_role_audit.py`,
+`tools/ida_apply_static_library_aliases.py`, and
+`tools/ida_verify_static_library_aliases.py`.
+
 ## Categories
 
 | Category | Count | Interpretation |
 | --- | ---: | --- |
 | libjpeg static internals | 150 | Unnamed functions inside the bundled JPEG implementation |
 | FreeType static internals | 144 | Unnamed functions inside the bundled font implementation |
-| zlib static internals | 14 | Unnamed compression and checksum helpers |
-| bzip2 static internals | 4 | Unnamed decompression helpers |
-| General Polygon Clipper internals | 4 | Unnamed polygon clipping and allocation helpers |
-| GIF support internals | 3 | Unnamed GIF decoder helpers |
-| YAJL static internals | 2 | Unnamed JSON parser helpers |
-| LibTomCrypt DES internal | 1 | Shared DES block transform |
-| minizip static internals | 2 | Unnamed archive and central-directory helpers |
+| General Polygon Clipper internals | 3 | Unnamed polygon clipping and allocation helpers |
 | init or fini array entries | 19 | Lifecycle functions referenced by ELF initialization arrays |
 | `TString` cleanup wrappers | 97 | Compiler-generated fixed-global cleanup thunks |
 | `TStringList` cleanup wrappers | 5 | Compiler-generated fixed-global destructor thunks |
 | `TGraalVar` cleanup wrappers | 2 | Compiler-generated fixed-global destructor thunks |
 | AArch64 PLT resolver | 1 | The resolver slot, not an imported application function |
-| **Total** | **448** | **All remaining default functions in the latest saved copy** |
+| **Total** | **421** | **All remaining default functions in the latest saved copy** |
 
 The largest groups are recognizable from their position between exported
 third-party routines, their call graph, and their strings. That proves a
@@ -100,12 +167,12 @@ to name.
 
 ## Machine-readable record
 
-`artifacts/ida_residual_profile.json` contains every one of the 448 residual
+`artifacts/ida_residual_profile.json` contains every one of the 421 residual
 addresses, sizes, current IDA names, segments, and family classifications. It
-also records the 28 application role aliases, the 11 CyaSSL aliases, the
-reclassified branch veneer, the latest persisted database hash, and the
-evidence used for each category. The eleven CyaSSL addresses are therefore
-not counted as residual defaults anymore.
+also records the 28 application role aliases, the 11 CyaSSL aliases, the 27
+static-library aliases, the reclassified branch veneer, the latest persisted
+database hash, and the evidence used for each category. None of those 38
+static-role addresses is counted as a residual default anymore.
 
 The earlier `artifacts/unresolved_function_profile.json` remains in the
 archive because it documents the pre-persistence 488-entry queue. The
@@ -119,9 +186,9 @@ Rebuild the final report offline with:
 python3 tools/generate_ida_residual_profile.py
 ```
 
-The generator reads only the public profile, role-candidate artifact, and
-CyaSSL role audit. It does not load the native library, execute APK code, or
-contact a network.
+The generator reads only the public profile, role-candidate artifact, and the
+two static-role audit files. It does not load the native library, execute APK
+code, or contact a network.
 
 ## Cross-ABI check
 
@@ -138,15 +205,16 @@ already have their ARM64 counterparts named in the main export inventory.
 This check provides negative evidence only. The other ABI layouts are
 different, so their addresses cannot be copied into the ARM64 IDA database.
 It does, however, rule out the simplest path to recovering additional names
-for the 448 residual entries.
+for the 421 residual entries.
 
 ## Practical conclusion
 
-There are no remaining application, engine, or CyaSSL certificate and TLS
-roles in the residual queue. The 28 application roles and all eleven CyaSSL
-roles have evidence-backed aliases in the latest persisted copy. The 448
-remaining defaults are compiler-generated lifecycle code, other library
-internals, cleanup thunks, or the PLT resolver. Assigning names such as
-`jpeg_internal_17` would make the IDA view look fuller but would not be a
-translation of a source symbol. They remain explicitly classified and
-addressable instead.
+There are no remaining application, engine, CyaSSL, zlib, bzip2, minizip,
+YAJL, GPC edge-table, or LibTomCrypt DES roles in the residual queue. The 28
+application roles, eleven earlier CyaSSL roles, and 27 new static-library
+roles have evidence-backed aliases in the latest persisted copy. The 421
+remaining defaults are FreeType or JPEG internals, three still-uncertain GPC
+helpers, compiler-generated lifecycle code, cleanup thunks, or the PLT
+resolver. Assigning names such as `jpeg_internal_17` would make the IDA view
+look fuller but would not be a translation of a source symbol. They remain
+explicitly classified and addressable instead.

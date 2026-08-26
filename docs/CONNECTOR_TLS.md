@@ -64,6 +64,14 @@ record paths are labeled `CyaInt_PRF`, `CyaInt_TLSRecordMac`, and
 marked descriptive rather than exact source-name matches. The full call-site
 evidence is in `artifacts/cyassl_static_role_audit_20260826.json`.
 
+The follow-up static-library pass also identified two ASN.1 helpers that sit
+below this TLS path. `CyaInt_GetLength` at `0x2b3be8` parses DER short and
+long-form lengths, and `CyaInt_GetName` at `0x2b3c64` builds the slash-delimited
+subject or issuer name used by the certificate decoder. Both are high-
+confidence source-role matches to the historical CyaSSL `GetLength` and
+`GetName` helpers. They are recorded with the other 27 aliases in
+`artifacts/static_library_role_audit_20260826.json`.
+
 ## Local validity control
 
 The paired control used identical ARM64 native code, hostname routing, port,

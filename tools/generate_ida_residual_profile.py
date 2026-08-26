@@ -3,11 +3,12 @@
 
 The public unresolved-function profile describes the 488 default functions in
 the pre-persistence inventory. The role-candidate pass names 28 application or
-engine entries, a follow-up CyaSSL pass names 11 static TLS and crypto roles,
-and IDA reclassifies one compiler branch veneer as a thunk when the saved copy
-is reopened. This helper subtracts those known changes and emits the exact
-448 defaults left in the latest persisted database. It only reads JSON files
-and performs no network operation.
+engine entries, the first CyaSSL pass names 11 static TLS and crypto roles, and
+the next static-library pass names 27 zlib, bzip2, minizip, GPC, CyaSSL,
+LibTomCrypt, and YAJL roles. IDA reclassifies one compiler branch veneer as a
+thunk when the saved copy is reopened. This helper subtracts those known
+changes and emits the exact residual count in the latest persisted database.
+It only reads JSON files and performs no network operation.
 """
 
 from __future__ import annotations
@@ -19,7 +20,10 @@ from pathlib import Path
 
 DEFAULT_PROFILE = "artifacts/unresolved_function_profile.json"
 DEFAULT_ROLES = "artifacts/unresolved_function_candidates.json"
-DEFAULT_STATIC_ROLES = "artifacts/cyassl_static_role_audit_20260826.json"
+DEFAULT_STATIC_ROLES = [
+    "artifacts/cyassl_static_role_audit_20260826.json",
+    "artifacts/static_library_role_audit_20260826.json",
+]
 DEFAULT_OUTPUT = "artifacts/ida_residual_profile.json"
 
 REANALYZED_FUNCTIONS = {
@@ -42,12 +46,27 @@ def load(path: str) -> dict:
     return json.loads(Path(path).read_text(encoding="utf-8"))
 
 
-def generate(profile: dict, roles: dict, static_roles: dict | None = None) -> dict:
+def generate(
+    profile: dict,
+    roles: dict,
+    static_roles: list[dict] | dict | None = None,
+) -> dict:
     role_by_ea = {address(item["va"]): item for item in roles["candidates"]}
-    static_by_ea = {
-        address(item["va"]): item
-        for item in (static_roles or {}).get("aliases", [])
-    }
+    if static_roles is None:
+        static_documents = []
+    elif isinstance(static_roles, dict):
+        static_documents = [static_roles]
+    else:
+        static_documents = list(static_roles)
+    static_by_ea = {}
+    static_sources = []
+    for document in static_documents:
+        static_sources.append(document["artifact"])
+        for item in document.get("aliases", []):
+            ea = address(item["va"])
+            if ea in static_by_ea:
+                raise ValueError(f"duplicate static role address: 0x{ea:x}")
+            static_by_ea[ea] = item
     profile_entries = [
         entry
         for group in profile["categories"]
@@ -120,8 +139,11 @@ def generate(profile: dict, roles: dict, static_roles: dict | None = None) -> di
     residual.sort(key=lambda item: address(item["ea"]))
     if len(removed_roles) != roles["candidate_count"]:
         raise ValueError("role removal count does not match candidate artifact")
-    if static_roles is not None and len(removed_static_roles) != static_roles["alias_count"]:
-        raise ValueError("static CyaSSL alias removal count does not match audit artifact")
+    expected_static_count = sum(
+        document["alias_count"] for document in static_documents
+    )
+    if len(removed_static_roles) != expected_static_count:
+        raise ValueError("static role removal count does not match audit artifacts")
     expected = profile["unresolved_default_sub_function_count"] - len(
         removed_roles
     ) - len(removed_static_roles) - len(removed_reanalyzed)
@@ -159,13 +181,14 @@ def generate(profile: dict, roles: dict, static_roles: dict | None = None) -> di
             }
         )
 
-    if static_roles is not None:
+    if static_documents:
+        latest_static = static_documents[-1]
         database = {
-            "path": static_roles["database"]["path"],
-            "sha256": static_roles["database"]["sha256"],
-            "format": static_roles["database"]["format"],
-            "close_reopen_verified": static_roles["database"]["close_reopen_verified"],
-            "function_count": static_roles["database"]["function_count"],
+            "path": latest_static["database"]["path"],
+            "sha256": latest_static["database"]["sha256"],
+            "format": latest_static["database"]["format"],
+            "close_reopen_verified": latest_static["database"]["close_reopen_verified"],
+            "function_count": latest_static["database"]["function_count"],
             "default_sub_function_count": len(residual),
         }
     else:
@@ -201,7 +224,9 @@ def generate(profile: dict, roles: dict, static_roles: dict | None = None) -> di
             "entries": sorted(removed_roles, key=lambda item: address(item["ea"])),
         },
         "applied_static_role_aliases": {
-            "source": "artifacts/cyassl_static_role_audit_20260826.json",
+            "sources": [
+                f"artifacts/{artifact}.json" for artifact in static_sources
+            ],
             "count": len(removed_static_roles),
             "entries": sorted(
                 removed_static_roles, key=lambda item: address(item["ea"])
@@ -221,7 +246,9 @@ def generate(profile: dict, roles: dict, static_roles: dict | None = None) -> di
         "source_artifacts": {
             "profile": "artifacts/unresolved_function_profile.json",
             "role_candidates": "artifacts/unresolved_function_candidates.json",
-            "static_role_aliases": "artifacts/cyassl_static_role_audit_20260826.json",
+            "static_role_aliases": [
+                f"artifacts/{artifact}.json" for artifact in static_sources
+            ],
             "validation": "artifacts/ida_translation_validation.json",
         },
         "network_contacted": False,
@@ -233,14 +260,24 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--profile", default=DEFAULT_PROFILE)
     parser.add_argument("--roles", default=DEFAULT_ROLES)
-    parser.add_argument("--static-roles", default=DEFAULT_STATIC_ROLES)
+    parser.add_argument(
+        "--static-roles",
+        action="append",
+        default=None,
+        help="static role audit JSON; may be supplied more than once",
+    )
     parser.add_argument("--output", default=DEFAULT_OUTPUT)
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
-    result = generate(load(args.profile), load(args.roles), load(args.static_roles))
+    static_paths = args.static_roles or DEFAULT_STATIC_ROLES
+    result = generate(
+        load(args.profile),
+        load(args.roles),
+        [load(path) for path in static_paths],
+    )
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(
