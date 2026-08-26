@@ -1555,3 +1555,82 @@ capture hashes, fixture provenance, patch fingerprint, and the screenshot
 hash, is in
 `artifacts/arm64_diagnostic_apk_revalidation_20260825.json`. Raw captures,
 the diagnostic APK, certificates, keys, and fixture bodies remain private.
+
+## Spectron hook bridge deep pass
+
+The supplied Spectron package was then followed beyond its package metadata.
+Its `libxposed.so` constructor at `0x864b0` starts a worker at `0x862d4`. The
+worker waits for `libqplay.so`, and the resolver at `0x80fe4` uses `dlopen` and
+`dlsym` to look up nine obfuscated qplay exports. The generic wrapper at
+`0x7deec` hands each target to the ARM64 inline-hook backend at `0xa6068`.
+The backend changes page permissions with `mprotect`, builds a trampoline,
+and patches the target entry. This is a complete native hook layer, not only
+a WebView helper.
+
+Three resolved targets receive explicit replacement functions. The slot at
+`off_12B040` points to qplay `0x18446c` and is replaced by `0x7ffdc`, which
+calls the original and then dispatches registered callbacks. The slot at
+`off_12B030` points to qplay `0x227c80` and is replaced by `0x804d8`, which
+dispatches through a registration list before calling the original. The final
+`DetectFridaLoop1bbb` lookup resolves qplay `0x24a2e8` and is replaced by
+`0x80fbc`. The remaining six lookups are resolved and stored but are not
+explicitly replaced in the visible installation sequence. Their exact
+mangled names, addresses, sizes, and slots are in
+`artifacts/spectron_hook_analysis.json`.
+
+The two qplay functions selected for callback dispatch are not connector
+certificate routines. The first is a string and registry lookup that builds a
+`::` key, searches a list, and recurses through a parent relationship. The
+second is an obfuscated function whose exported size is known, but IDA did
+not create a boundary in the Spectron image. The anti-Frida export is
+explicitly named by its symbol. Nothing in this hook set provides a proven
+address or source-name mapping for the original 1.8 ARM64 database.
+
+The WebTop JNI path is separate from the qplay hook loader. The exported
+`Java_com_WebTop_getMainUrl` at `0x85f84` decodes the device fragment `NOID`
+and formats `https://spectronnative-page.onrender.com?device=%s`, returning
+`https://spectronnative-page.onrender.com?device=NOID` for the supplied
+package. The dispatcher at `0x842e4` compares six command strings:
+`crash`, `freeze`, `abort`, `load_menu`, `setscript`, and `gs2call`. The first
+three are destructive controls. The other three forward WebTop data to native
+helpers. The URL was reconstructed from the local binary and was not opened.
+
+The detailed pass confirms that Spectron is a separate 2.2 modding layer with
+obfuscated qplay exports, a generic inline-hook engine, an anti-Frida hook,
+and a remote-control WebTop bridge. It is useful for understanding what a
+working modified package adds, but it is not a safe source of direct 1.8
+patch addresses. The static result and the no-network marker are preserved in
+`artifacts/spectron_hook_analysis.json` and
+`docs/SPECTRON_COMPARISON.md`.
+
+## Persisted residual-function audit
+
+The four IDALIB passes were followed by a close-and-reopen export of the
+translated disposable database. The original pre-persistence queue contained
+488 default `sub_` entries. The 28 high-confidence application or engine role
+aliases were applied and verified, and IDA reclassified the four-byte branch
+veneer at `0x1f94fc` as the named thunk
+`j_TCachedStream_get_minfilecachesize`. The persisted copy therefore contains
+11,297 function starts and 459 default names.
+
+The final 459 are fully categorized: 335 bundled-library internals, 19 ELF
+initialization or finalization entries, 104 fixed-global cleanup wrappers, and
+one AArch64 PLT resolver slot. The library breakdown is 150 libjpeg, 144
+FreeType, 14 zlib, 11 CyaSSL or bundled crypto, 4 GPC, 4 bzip2, 3 GIF, 2
+YAJL, 1 LibTomCrypt DES, and 2 minizip. The cleanup breakdown is 97
+`TString::clear` wrappers, 5 `TStringList` destructor wrappers, and 2
+`TGraalVar` destructor wrappers. No application or engine function remains in
+the final residual queue.
+
+The original APK's `armeabi`, `x86`, and `x86_64` libraries were also checked.
+After grouping ABI-specific C++ mangling differences by demangled function
+stem, the other copies added no application or engine source stem missing from
+ARM64. Their raw extra names are compiler-runtime or 32-bit ABI variants.
+Because the layouts differ, this does not permit address copying. It does
+rule out the simplest cross-ABI route to more ARM64 source names.
+
+The exact residual addresses, sizes, category evidence, applied role list,
+database hash, and this accounting are in
+`artifacts/ida_residual_profile.json`. The generator is
+`tools/generate_ida_residual_profile.py`; it reads only repository JSON and
+does not execute the native library or access a network.
