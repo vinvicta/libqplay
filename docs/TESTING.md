@@ -290,6 +290,52 @@ The responder is hard-coded to `127.0.0.1`. Stop both responders and remove
 the reverse mappings after the test. Do not publish the self-signed private
 key, the debug APK, or captured login data.
 
+## Native-verification working control
+
+The manual chain above is useful when each edit needs to be inspected. The
+same test can be built with one helper while keeping the important security
+checks intact:
+
+```bash
+python3 tools/build_arm64_trust_control.py \
+  /path/to/GraalOnline+Classic_1.8_APKPure.apk \
+  /tmp/GraalClassic_arm64_native_verified.apk \
+  --bundle /tmp/graal-valid-con.crt \
+  --port 18443 \
+  --zipalign /path/to/android-sdk/build-tools/35.0.1/zipalign \
+  --apksigner /path/to/android-sdk/build-tools/35.0.1/apksigner \
+  --keystore /path/to/debug.keystore \
+  --force-nonpremium-loading \
+  --report /tmp/GraalClassic_arm64_native_verified.json
+```
+
+The helper never applies the connector RSA bypass. It also leaves the native
+certificate parser and hostname verification enabled. The default form does
+not touch the loading branch, which makes it a useful transport-only control.
+`--force-nonpremium-loading` selects the tested startup path that clears the
+native loading flag at `0x15cac8`; it is included here only to reproduce the
+local rendered-world control.
+
+On 2026-08-26 the working form used a one-certificate SAN-matching test chain
+valid from 2025-01-01 through 2035-01-01. It sent the expected connector
+request, completed the two local game connections, loaded the map, level
+containers, and image assets, continued packet-24 heartbeats, and displayed
+the tiled world and HUD. The APK SHA-256 was
+`183ef83ed2772872288c1aa639e0501b5a645df395b0f89887a38ce56c0266f0`; its
+ARM64 native library SHA-256 was
+`7cffcbd8380d5e19324eb6d392e6cd942ce696b9470bbaaa74b037827ebecee7`.
+
+The paired transport-only build used the same trust bundle, responder, and
+fixtures but restored the original loading branch. It made the same connector
+and resource requests and continued heartbeats, but remained on the title or
+loading artwork. Its APK SHA-256 was
+`2dcc8687743bc9c3caf5b995f051e64cb67c39ddad16f4408ba3ea4c67624b76` and its
+native SHA-256 was
+`614e43bbf92c7b8fc5bc550584956eed2dcb62fa01879721df5e6e02576247cb`.
+This is the cleanest local separation so far between connector trust and the
+later loading-state decision. The full record is in
+`artifacts/arm64_native_verification_working_control_20260826.json`.
+
 ## Certificate validity control
 
 Static extraction shows that the original native connector trust bundle

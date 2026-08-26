@@ -41,6 +41,9 @@ def main():
     elf_symbol_audit = load_json("artifacts/elf_symbol_table_audit_20260826.json")
     tls_parser = load_json("artifacts/connector_tls_parser_analysis_20260826.json")
     tls_expiry = load_json("artifacts/connector_tls_expiry_control_20260826.json")
+    native_verified = load_json(
+        "artifacts/arm64_native_verification_working_control_20260826.json"
+    )
     spectron_signature = load_json("artifacts/spectron_function_signature_match.json")
     spectron_hooks = load_json("artifacts/spectron_hook_analysis.json")
 
@@ -144,6 +147,71 @@ def main():
     check("TLS expiry valid HTTP", tls_expiry["valid_control_run"]["http_request_observed"], True)
     check("TLS expiry expired no HTTP", tls_expiry["expired_run"]["http_request_observed"], False)
     check("TLS expiry expired no handshake", tls_expiry["expired_run"]["tls_handshake_completed"], False)
+
+    check(
+        "native-verification artifact",
+        native_verified["artifact"],
+        "arm64_native_verification_working_control_20260826",
+    )
+    check("native-verification network", native_verified["network_contacted"], False)
+    check(
+        "native-verification input APK",
+        native_verified["builder"]["input_apk_sha256"],
+        "6d6c0428fe890d0f18fb1ce572798d7a8a95853b10078f693026164d6a5f56d7",
+    )
+    check(
+        "native-verification native RSA",
+        native_verified["builder"]["native_rsa_bypass_applied"],
+        False,
+    )
+    check(
+        "native-verification certificate path",
+        native_verified["builder"]["native_certificate_verification_preserved"],
+        True,
+    )
+    check(
+        "native-verification loading branch",
+        native_verified["builder"]["loading_branch_patch"]["address"],
+        "0x15ca7c",
+    )
+    check(
+        "native-verification connector requests",
+        native_verified["connector"]["request_count"],
+        1,
+    )
+    check(
+        "native-verification game connections",
+        native_verified["game_responder"]["connections"],
+        2,
+    )
+    check(
+        "native-verification resource set",
+        native_verified["game_responder"]["resource_requests"],
+        [
+            "basepackage.gupd",
+            "guigames_graymessage2.png",
+            "classiciphone.gmap",
+            "main_aa-02.nw",
+            "main_ab-01.nw",
+            "main_ab-02.nw",
+            "pics1.png",
+        ],
+    )
+    check(
+        "native-verification render",
+        native_verified["render_result"]["observed"],
+        True,
+    )
+    check(
+        "native-verification screenshot",
+        native_verified["render_result"]["screenshot_sha256"],
+        "fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e",
+    )
+    check(
+        "native-verification stock control render",
+        native_verified["isolation_comparison"]["control_render_observed"],
+        False,
+    )
 
     check("semantic-label input hash", labels["binary"]["libqplay_sha256"], primary_hash)
     check("semantic-label function total", labels["inventory_after_labels"]["total_functions"], 11272)

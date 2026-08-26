@@ -381,6 +381,28 @@ This is the short handoff view. The full reasoning and command history are in
     The full comparison is in
     `artifacts/connector_tls_expiry_control_20260826.json`.
 
+55. A new reproducible builder, `tools/build_arm64_trust_control.py`, was
+    added for the native-verification path. It replaces only the historical
+    trust bundle, routes the connector to loopback, moves the connector to
+    port `18443`, and installs the deterministic local responder key. The
+    RSA result branch and native certificate validation remain unchanged. An
+    optional flag selects the already-tested native loading-state branch.
+56. The optional working control was run on the same Android 36 x86_64
+    emulator using ARM64 translation. With a SAN-matching test certificate
+    valid from 2025 through 2035, the package made one native HTTPS connector
+    request, opened two encrypted game connections, received the map, three
+    level containers, and image assets, continued heartbeat traffic, and
+    displayed the tiled world and HUD. Its APK SHA-256 is
+    `183ef83ed2772872288c1aa639e0501b5a645df395b0f89887a38ce56c0266f0` and
+    its native SHA-256 is
+    `7cffcbd8380d5e19324eb6d392e6cd942ce696b9470bbaaa74b037827ebecee7`.
+57. The default transport-only form of the same builder kept the stock
+    loading branch. It made the same connector and resource requests and
+    continued heartbeats, but remained on the title/loading artwork. This
+    pairs the stale-trust result with the independent loading-state result.
+    The complete comparison is in
+    `artifacts/arm64_native_verification_working_control_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

@@ -1875,3 +1875,45 @@ correct next production experiment remains a private package with an
 authorized current chain and the native verification routine left enabled.
 The loopback port, resolver, responder key, and loading-state edits are test
 controls only. No live endpoint was contacted.
+
+## Native-verification working control
+
+The validity control showed that an expired certificate stops the connector
+before HTTP, while a valid SAN-matching certificate reaches the request. I
+followed that with a package that kept the native RSA result branch and the
+native certificate verifier intact all the way through the game replay.
+
+The new `tools/build_arm64_trust_control.py` helper starts from the original
+APK, retains only the ARM64 library, replaces the old native trust bundle,
+routes the connector hostname to loopback, moves the HTTPS port to `18443`,
+and installs the fixed output RC4 key used by the local responder. It never
+applies the RSA bypass. Its optional `--force-nonpremium-loading` switch
+applies the previously isolated branch edit at `0x15ca7c`.
+
+The working package used the valid one-certificate test chain from the
+earlier control. The chain covered `con.quattroplay.com` and was valid from
+2025-01-01 through 2035-01-01. The native library produced by the full chain
+was `7cffcbd8380d5e19324eb6d392e6cd942ce696b9470bbaaa74b037827ebecee7`, and
+the signed ARM64 package was
+`183ef83ed2772872288c1aa639e0501b5a645df395b0f89887a38ce56c0266f0`.
+
+The local TLS responder saw the same request shape as the earlier valid
+control: `/con.png`, host `con.quattroplay.com:18443`, and user agent
+`Graal/6.15401`. The client then opened two encrypted game connections. The
+responder sent the server-warp and completion frames, returned
+`basepackage.gupd`, `guigames_graymessage2.png`, `classiciphone.gmap`, three
+encrypted level containers, and `pics1.png`, then observed packet-24
+heartbeats. The final screenshot showed the tiled world, player HUD, and
+status icons. Its SHA-256 was
+`fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`.
+
+The paired form with the same valid trust chain and transport edits, but
+without the loading-branch edit, made the same connector and resource
+requests and kept sending heartbeats. It stayed on the title/loading artwork.
+That makes the result useful as a two-part isolation: the trust replacement
+fixes the pre-HTTP connector failure, while the native startup branch controls
+the observed transition into the translated ARM64 game draw path. Neither
+control proves the production entitlement meaning of that branch, live
+service compatibility, or behavior on a physical ARM64 device. The complete
+hash and capture record is in
+`artifacts/arm64_native_verification_working_control_20260826.json`.

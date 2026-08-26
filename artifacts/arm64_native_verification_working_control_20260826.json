@@ -1,0 +1,138 @@
+{
+  "artifact": "arm64_native_verification_working_control_20260826",
+  "date": "2026-08-26",
+  "scope": "127.0.0.1-only replay on an Android 36 x86_64 emulator using translated ARM64 native code",
+  "purpose": "Verify the connector with a replacement trust bundle while keeping native certificate and RSA checks enabled, then compare the tested loading-state candidate.",
+  "builder": {
+    "tool": "tools/build_arm64_trust_control.py",
+    "input_apk_sha256": "6d6c0428fe890d0f18fb1ce572798d7a8a95853b10078f693026164d6a5f56d7",
+    "input_native_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "trust_bundle_sha256": "a55c4ec36f6c5708948d6f1e257b7782153ea85032b184fe7180adc00d347f75",
+    "trust_bundle_bytes": 1099,
+    "trust_bundle_certificate_count": 1,
+    "encoded_trust_bytes": 1468,
+    "encoded_trust_sha256": "e4124f15db59ba55de2c5a19be8b92a966761a8175b88e498f8c18959e404f12",
+    "intermediate_native_sha256": {
+      "trust_bundle": "db05908f40b560006da1abf66fb465ea47247a5a5338fbc95e13bec1d6f5e8ee",
+      "loopback_resolver": "dd9170ea3d000343eda98ec96336f54f571a849e0a5bf3a5dfdd95ddbe72f696",
+      "connector_port": "cf3b50b472cd0475d5b8d93d3731a7ab622bd6df366de08531969289cc59ed96",
+      "fixed_output_key": "614e43bbf92c7b8fc5bc550584956eed2dcb62fa01879721df5e6e02576247cb"
+    },
+    "output_native_sha256": "7cffcbd8380d5e19324eb6d392e6cd942ce696b9470bbaaa74b037827ebecee7",
+    "output_apk_sha256": "183ef83ed2772872288c1aa639e0501b5a645df395b0f89887a38ce56c0266f0",
+    "package_abi": "arm64-v8a",
+    "connector_port": 18443,
+    "connector_script_sha256": "4919f3c82efd4359b992bb69acf6397bda47964c5d0355e88734dbf029b8df8",
+    "connector_script_unchanged": true,
+    "native_rsa_bypass_applied": false,
+    "native_certificate_verification_preserved": true,
+    "loading_branch_patch": {
+      "applied": true,
+      "address": "0x15ca7c",
+      "original_bytes": "2d 02 00 54",
+      "replacement_bytes": "11 00 00 14",
+      "description": "select the existing startup path that clears the loading flag"
+    },
+    "patches": [
+      "patch_graalweb_trust_bundle.py",
+      "patch_localhost_resolver_test.py",
+      "patch_connector_tls_port_test.py",
+      "patch_fixed_output_rc4_key_test.py",
+      "patch_force_no_premium_loading_test.py"
+    ],
+    "deterministic_zip_timestamps": true
+  },
+  "emulator": {
+    "device": "emulator-5554",
+    "android_api": 36,
+    "host_abi": "x86_64",
+    "translated_abi": "arm64-v8a",
+    "adb_reverse_ports": {
+      "18443": "127.0.0.1 connector TLS responder",
+      "14900": "127.0.0.1 game responder"
+    }
+  },
+  "connector": {
+    "request_count": 1,
+    "request_bytes": 186,
+    "request_path": "/con.png",
+    "host_header": "con.quattroplay.com:18443",
+    "user_agent": "Graal/6.15401",
+    "response_bytes": 16446,
+    "response_sha256": "73996942d493a8db4b7b6238dcc9d6e4bb68a91b48ba5946db4cff9252bc4b7c",
+    "tls_certificate_validity": "2025-01-01 through 2035-01-01",
+    "native_http_after_tls": true
+  },
+  "game_responder": {
+    "port": 14900,
+    "connections": 2,
+    "server_control_frames": [
+      {
+        "connection": 1,
+        "frames": [178]
+      },
+      {
+        "connection": 2,
+        "frames": [9, 190, 49, 49]
+      }
+    ],
+    "resource_requests": [
+      "basepackage.gupd",
+      "guigames_graymessage2.png",
+      "classiciphone.gmap",
+      "main_aa-02.nw",
+      "main_ab-01.nw",
+      "main_ab-02.nw",
+      "pics1.png"
+    ],
+    "captures": {
+      "connection_1_in": {
+        "bytes": 557,
+        "sha256": "42205a9984c76c6a8fd613bd05b26bd7255f05bcf68ad8b882ef4a3e4c9f471b"
+      },
+      "connection_1_out": {
+        "bytes": 10541,
+        "sha256": "9df8c9fffa15783f83658f8f8befac545dee681d1ef66c34ed40324bbb1135c7"
+      },
+      "connection_2_in": {
+        "bytes": 820,
+        "sha256": "d2dc6beb0d992fb58e6463667c0e1865593d5a685d7b9da41243f6dac9fdb676"
+      },
+      "connection_2_out": {
+        "bytes": 249688,
+        "sha256": "9c063394617bb06f64be0bbbdcf7f13f325d51c4803c8e97fa9b1314b44ec86e"
+      }
+    },
+    "heartbeat_frames_observed": true
+  },
+  "render_result": {
+    "observed": true,
+    "screen": "green tiled world with player HUD and status icons",
+    "screenshot_bytes": 71633,
+    "screenshot_sha256": "fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e",
+    "captured_while_game_socket_was_open": true
+  },
+  "runtime_log_milestones": [
+    "Connecting to the login server...",
+    "Serverwarp..."
+  ],
+  "isolation_comparison": {
+    "control": "same valid trust bundle, resolver, port, RC4 key, script, and fixtures with the stock loading branch",
+    "control_native_sha256": "614e43bbf92c7b8fc5bc550584956eed2dcb62fa01879721df5e6e02576247cb",
+    "control_apk_sha256": "2dcc8687743bc9c3caf5b995f051e64cb67c39ddad16f4408ba3ea4c67624b76",
+    "control_connector_http_observed": true,
+    "control_game_resource_replay_observed": true,
+    "control_render_observed": false,
+    "control_screenshot_sha256": "70e6573244e58125d4092d8265c8acc4e2074dd866bd9cd5897ddf079d39e135",
+    "interpretation": "The valid trust bundle fixes the pre-HTTP connector failure. The separate loading branch still controls whether the translated ARM64 client leaves the title artwork."
+  },
+  "not_proven": [
+    "A live connector or game-server login.",
+    "That the self-signed test certificate represents the current service chain.",
+    "That the loading branch is the intended production entitlement behavior.",
+    "Behavior on a physical ARM64 device.",
+    "That the synthetic map and resource fixtures match a historical server revision."
+  ],
+  "network_contacted": false,
+  "raw_data_policy": "The APK, test certificate, private key, emulator logs, packet captures, map, image, and level bodies remain outside the repository."
+}

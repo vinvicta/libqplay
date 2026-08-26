@@ -135,6 +135,17 @@ HTTP in the translated ARM64 path. It is still a local control, not a live
 service test. See `artifacts/connector_tls_expiry_control_20260826.json` and
 the certificate validity section in `docs/TESTING.md`.
 
+The valid trust bundle was then used in a working local control that kept the
+native RSA check and native certificate verification enabled. With the
+loopback transport edits, the fixed responder key, and the tested native
+loading-state branch, the ARM64 package made one connector request, opened
+two game connections, loaded the map and resources, continued heartbeats,
+and displayed the tiled world with its HUD. The matching package with the
+stock loading branch made the same connector and resource requests but stayed
+on the title artwork. This separates the stale trust failure from the later
+loading-state gate. The builder and hashes are in
+`artifacts/arm64_native_verification_working_control_20260826.json`.
+
 The ARM64 IDA audit now identifies the local screen split more precisely. The
 native loading byte at `0x37a549` starts at `1`; the successful `classic`
 premium-option path skips the native clear at `0x15cac8`; and the packet-190
@@ -236,6 +247,8 @@ proves the local native TLS path, not a current live certificate or service.
   handler-table diagnostics from release-ready repairs.
 * `docs/HELPER_TOOLCHAIN.md` records the pinned GS2 and connector-helper
   checks, including their reproducible hashes and current limitations.
+* `docs/CONNECTOR_TLS.md` records the native trust path, certificate date
+  checks, and the paired validity control.
 * `docs/SPECTRON_COMPARISON.md` records the supplied modded APK comparison.
 * `artifacts/spectron_native_compare.json` records the offline ELF, symbol,
   section, and embedded-string comparison for the two ARM64 native builds.
@@ -273,6 +286,9 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/connector_tls_expiry_control_20260826.json` records the paired
   valid and expired certificate control, including the no-HTTP handshake
   failure and the matching successful request.
+* `artifacts/arm64_native_verification_working_control_20260826.json` records
+  the valid-trust, native-verification working control and its stock-loading
+  comparison.
 * `artifacts/connector_tls_parser_analysis_20260826.json` records the native
   CyaSSL validity call chain and the recovered `notBefore` and `notAfter`
   error mapping.
@@ -402,6 +418,8 @@ proves the local native TLS path, not a current live certificate or service.
   branch for a matched loading-state control.
   `tools/build_arm64_loopback_apk.py` applies the complete private diagnostic
   chain, packages only ARM64, signs it locally, and writes build hashes.
+  `tools/build_arm64_trust_control.py` builds the narrower native-verification
+  control with a caller-supplied trust bundle and an optional loading branch.
   `tools/patch_gs2_success_loading_clear.py` records the equivalent source
   edit for readable GS2 experiments; its compiled output remains unverified.
   `tools/decode_graalweb_cert_bundle.py` recovers certificate metadata from
