@@ -1,0 +1,171 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both clear the saved execution-object field and return the machine pointer.",
+        "Both are exact normalized two-instruction, one-block helpers; the target field offset moves from 144 to 152 with the changed machine layout."
+      ],
+      "match_kind": "manual-machine-helper-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x218bd0",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 2,
+        "mnemonic_hash": "e88ac18880489bf96ab741ee4f342cae66af2d87e596e1ba25f46280c6a685df",
+        "register_shape_hash": "1e174755c6180313efb0305545bad00c607e88aee539bdb5239b8a5929c1077d",
+        "shape_hash": "82e9e61bc3525b12d235a2d4345312dcb831d4c3890ab9cdb7067aafe8735670",
+        "size": 8
+      },
+      "original_name": "TScriptMachine_restoreExecutionVariables_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptMachine_restoreExecutionVariables_void",
+      "semantic_match_already_present": false,
+      "source_basis": "execution-variable restoration",
+      "spectron_current_name": "_ZN10mTAogaaEip10vlUlPaO01OEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x2202fc",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 2,
+        "mnemonic_hash": "e88ac18880489bf96ab741ee4f342cae66af2d87e596e1ba25f46280c6a685df",
+        "register_shape_hash": "1e174755c6180313efb0305545bad00c607e88aee539bdb5239b8a5929c1077d",
+        "shape_hash": "82e9e61bc3525b12d235a2d4345312dcb831d4c3890ab9cdb7067aafe8735670",
+        "size": 8
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both consume the next indexed input value, convert it to an integer position, and return an empty string for a negative or out-of-range index.",
+        "Both load one character from the source string, assign it to the result string, and decrement the remaining input count. The target preserves the same nine-block body and only changes wrapper offsets and calls."
+      ],
+      "match_kind": "manual-machine-helper-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x21ca00",
+      "original_metrics": {
+        "basic_block_count": 9,
+        "instruction_count": 53,
+        "mnemonic_hash": "822f1730669abb6184f1d8ada2f7bc1aab2d58197fdce0671839e177e934f33e",
+        "register_shape_hash": "de56296b4893bceed09299d74b96ad4550971c3c5ddaa67e5dbb1b6addb28cdf",
+        "shape_hash": "47c01d1438d45666efc6187966300002d150db3fb450f255168444b5e2745986",
+        "size": 212
+      },
+      "original_name": "TScriptMachine_charAt_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptMachine_charAt_void",
+      "semantic_match_already_present": false,
+      "source_basis": "script string character extraction",
+      "spectron_current_name": "_ZN10mTAogaaEip10nVJygaSeQxEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x224af0",
+      "spectron_metrics": {
+        "basic_block_count": 9,
+        "instruction_count": 53,
+        "mnemonic_hash": "93674f8c7ac838bc7e42839dbe279d1c86400bf991dffa2a86c2b51fba638a93",
+        "register_shape_hash": "8e92907d679ac08273a655885a90e07c056d769c038bf45eff54dfd16d90fba1",
+        "shape_hash": "080ffe4367b7ac39610aa490f3d1ffd8fc4e42e9264b3ae14d4ab93d30fe41c2",
+        "size": 212
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both scan the action variable list backwards, dynamic-cast each non-null value to the server-player property type, and stop at the first match.",
+        "Both initialize the global action-player slot from the executing player and replace it with the matched value while preserving the exact 8-block loop shape and normalized hashes."
+      ],
+      "match_kind": "manual-machine-helper-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x21df18",
+      "original_metrics": {
+        "basic_block_count": 8,
+        "instruction_count": 42,
+        "mnemonic_hash": "6e38880e1c172321a62f4ac7aac73118e6809757f4ed4792feed4377cbac5e97",
+        "register_shape_hash": "0e7452bd69c5569793496122a9d607e2153b8c0fad748b28ece5afdb6a62b14b",
+        "shape_hash": "7d7674663693c853a2a5bf84294af0f0a6133ccae1ffad79701643a9bb3323c9",
+        "size": 168
+      },
+      "original_name": "TScriptMachine_findActionPlayer_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptMachine_findActionPlayer_void",
+      "semantic_match_already_present": false,
+      "source_basis": "action player lookup",
+      "spectron_current_name": "_ZN10mTAogaaEip10Q80oPa6zFREv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x2261fc",
+      "spectron_metrics": {
+        "basic_block_count": 8,
+        "instruction_count": 42,
+        "mnemonic_hash": "6e38880e1c172321a62f4ac7aac73118e6809757f4ed4792feed4377cbac5e97",
+        "register_shape_hash": "0e7452bd69c5569793496122a9d607e2153b8c0fad748b28ece5afdb6a62b14b",
+        "shape_hash": "7d7674663693c853a2a5bf84294af0f0a6133ccae1ffad79701643a9bb3323c9",
+        "size": 168
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both scan the action variable list backwards, dynamic-cast each non-null value to the server-NPC property type, and stop at the first match.",
+        "Both initialize the global action-NPC slot from the executing NPC and replace it with the matched value while preserving the exact 8-block loop shape and normalized hashes."
+      ],
+      "match_kind": "manual-machine-helper-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x21dfc0",
+      "original_metrics": {
+        "basic_block_count": 8,
+        "instruction_count": 42,
+        "mnemonic_hash": "6e38880e1c172321a62f4ac7aac73118e6809757f4ed4792feed4377cbac5e97",
+        "register_shape_hash": "0e7452bd69c5569793496122a9d607e2153b8c0fad748b28ece5afdb6a62b14b",
+        "shape_hash": "7d7674663693c853a2a5bf84294af0f0a6133ccae1ffad79701643a9bb3323c9",
+        "size": 168
+      },
+      "original_name": "TScriptMachine_findActionNPC_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptMachine_findActionNPC_void",
+      "semantic_match_already_present": false,
+      "source_basis": "action NPC lookup",
+      "spectron_current_name": "_ZN10mTAogaaEip10HvBoPapajREv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x2262a4",
+      "spectron_metrics": {
+        "basic_block_count": 8,
+        "instruction_count": 42,
+        "mnemonic_hash": "6e38880e1c172321a62f4ac7aac73118e6809757f4ed4792feed4377cbac5e97",
+        "register_shape_hash": "0e7452bd69c5569793496122a9d607e2153b8c0fad748b28ece5afdb6a62b14b",
+        "shape_hash": "7d7674663693c853a2a5bf84294af0f0a6133ccae1ffad79701643a9bb3323c9",
+        "size": 168
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_machine_helper_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v3.json",
+    "spectron_features_sha256": "031afed73611783e0b16be71009e20118fc90a56e5d03e5ec04526f654f5cf27"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The changed-size character helper relies on its input-count and string-index behavior, while the action lookups are exact normalized matches with preserved global-slot roles."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for execution restoration, character extraction, and action-context lookup",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 4,
+    "high_confidence_count": 4,
+    "new_context_anchor_count": 4,
+    "target_default_name_count": 0
+  }
+}

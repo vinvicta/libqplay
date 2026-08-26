@@ -737,6 +737,12 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_stack_entry_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+102. Clean IDA review added four high-confidence machine-helper anchors for
+     execution restoration, character extraction, and action-context lookup.
+     All four reopened successfully in the v42 disposable copy. See
+     `artifacts/spectron_machine_helper_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

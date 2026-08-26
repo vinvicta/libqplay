@@ -103,6 +103,8 @@ def main() -> None:
     parser.add_argument("--script-action-verification", type=Path)
     parser.add_argument("--stack-entry-anchors", type=Path)
     parser.add_argument("--stack-entry-verification", type=Path)
+    parser.add_argument("--machine-helper-anchors", type=Path)
+    parser.add_argument("--machine-helper-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1206,6 +1208,34 @@ def main() -> None:
         result["stack_entry_anchors"] = stack_entry
         result["interpretation"].append(
             "The thirty-ninth database revision also contains the separately reviewed GS2 stack-entry float, string, and object conversion anchors."
+        )
+    machine_helper = None
+    if args.machine_helper_anchors or args.machine_helper_verification:
+        if not args.machine_helper_anchors or not args.machine_helper_verification:
+            raise ValueError(
+                "machine-helper anchors and machine-helper verification must be supplied together"
+            )
+        machine_helper_document = load(args.machine_helper_anchors)
+        machine_helper_verification = load(args.machine_helper_verification)
+        if machine_helper_document.get("artifact") != "spectron_machine_helper_manual_translation_anchors_20260826":
+            raise ValueError("unexpected machine-helper anchor artifact")
+        if not machine_helper_verification.get("verified"):
+            raise ValueError("machine-helper anchor reopen verification did not pass")
+        expected_machine_helper = len(machine_helper_document["anchors"])
+        if machine_helper_verification["verified_name_count"] != expected_machine_helper:
+            raise ValueError("machine-helper verification count differs from artifact")
+        machine_helper = {
+            "anchor_path": str(args.machine_helper_anchors),
+            "anchor_sha256": sha256_path(args.machine_helper_anchors),
+            "reopen_verification": str(args.machine_helper_verification),
+            "anchor_count": expected_machine_helper,
+            "verified_name_count": machine_helper_verification["verified_name_count"],
+            "reopen_failure_count": machine_helper_verification["failure_count"],
+        }
+    if machine_helper is not None:
+        result["machine_helper_anchors"] = machine_helper
+        result["interpretation"].append(
+            "The fortieth database revision also contains the separately reviewed execution restoration, character extraction, and action-context lookup anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

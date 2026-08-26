@@ -77,8 +77,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v41.i64",
-    "sha256": "b9527ad01e544f2a3e9afdd4defb46bfb625465f2581b86bfda7e7084ed41914"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v42.i64",
+    "sha256": "ade60a5719a41f9769ddd33fd539031cf69dbc31c49feee70bc48557c9e6e46d"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -168,7 +168,8 @@
     "The thirty-sixth database revision also contains the separately reviewed GS2 scheduler, action-loop, event-object cleanup, and class-list replacement anchors.",
     "The thirty-seventh database revision also contains the separately reviewed event-object and catcher-list constructor, destructor, registration, and receive-path anchors.",
     "The thirty-eighth database revision also contains the separately reviewed GS2 script-action constructor and destructor anchors.",
-    "The thirty-ninth database revision also contains the separately reviewed GS2 stack-entry float, string, and object conversion anchors."
+    "The thirty-ninth database revision also contains the separately reviewed GS2 stack-entry float, string, and object conversion anchors.",
+    "The fortieth database revision also contains the separately reviewed execution restoration, character extraction, and action-context lookup anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -193,6 +194,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_lookup_helper_verify_v15_retry.json",
     "verified_name_count": 3
+  },
+  "machine_helper_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "artifacts/spectron_machine_helper_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "8034ca70cb7deb9f084c9cc99e7c106eec0e7c47c6000190df4e63c26831cbab",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_machine_helper_verify_v42.json",
+    "verified_name_count": 4
   },
   "manual_anchors": {
     "anchor_count": 4,
