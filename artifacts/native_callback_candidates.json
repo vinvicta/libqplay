@@ -817,6 +817,672 @@
       "evidence": ["The function record at 0x37d8b0 decodes to showprofile and stores this callback at +0x18", "The callback is part of the six-entry TServerPlayer script-function table"]
     }
   ],
+  "server_npc_properties": [
+    {
+      "va": "0x1866dc",
+      "current_ida_name": "sub_1866DC",
+      "proposed_name": "TServerNPC_getActionPlayer",
+      "confidence": "high",
+      "evidence": ["The TServerNPCProperties record at 0x37be28 decodes to actionplayer and stores this address in its getter slot"]
+    },
+    {
+      "va": "0x1807b0",
+      "current_ida_name": "sub_1807B0",
+      "proposed_name": "TServerNPC_getHeartsOrHP",
+      "confidence": "high",
+      "evidence": ["The records at 0x37be58 and 0x37bee8 decode to hearts and hp and share this getter"]
+    },
+    {
+      "va": "0x180c94",
+      "current_ida_name": "sub_180C94",
+      "proposed_name": "TServerNPC_setHeartsOrHP",
+      "confidence": "high",
+      "evidence": ["The hearts and hp records at 0x37be58 and 0x37bee8 share this setter"]
+    },
+    {
+      "va": "0x184050",
+      "current_ida_name": "sub_184050",
+      "proposed_name": "TServerNPC_getHeight",
+      "confidence": "high",
+      "evidence": ["The record at 0x37be88 decodes to height and stores this address in its getter slot"]
+    },
+    {
+      "va": "0x180af8",
+      "current_ida_name": "sub_180AF8",
+      "proposed_name": "TServerNPC_getHorseImg",
+      "confidence": "high",
+      "evidence": ["The horseimg record at 0x37beb8 stores this address in its getter slot and pairs it with 0x180ad4"]
+    },
+    {
+      "va": "0x180ad4",
+      "current_ida_name": "sub_180AD4",
+      "proposed_name": "TServerNPC_setHorseImg",
+      "confidence": "high",
+      "evidence": ["The horseimg record at 0x37beb8 stores this address in its setter slot"]
+    },
+    {
+      "va": "0x1807d0",
+      "current_ida_name": "sub_1807D0",
+      "proposed_name": "TServerNPC_getHurtDX",
+      "confidence": "high",
+      "evidence": ["The record at 0x37bf18 decodes to hurtdx and stores this address in its getter slot"]
+    },
+    {
+      "va": "0x1807d8",
+      "current_ida_name": "sub_1807D8",
+      "proposed_name": "TServerNPC_setHurtDX",
+      "confidence": "high",
+      "evidence": ["The hurtdx record at 0x37bf18 stores this address in its setter slot"]
+    },
+    {
+      "va": "0x1807fc",
+      "current_ida_name": "sub_1807FC",
+      "proposed_name": "TServerNPC_getHurtDY",
+      "confidence": "high",
+      "evidence": ["The record at 0x37bf48 decodes to hurtdy and stores this address in its getter slot"]
+    },
+    {
+      "va": "0x180804",
+      "current_ida_name": "sub_180804",
+      "proposed_name": "TServerNPC_setHurtDY",
+      "confidence": "high",
+      "evidence": ["The hurtdy record at 0x37bf48 stores this address in its setter slot"]
+    },
+    {
+      "va": "0x180b28",
+      "current_ida_name": "sub_180B28",
+      "proposed_name": "TServerNPC_getImage",
+      "confidence": "high",
+      "evidence": ["The record at 0x37bf78 decodes to image and stores this address in its getter slot", "The existing setter is the ELF jump TServerNPC::setImageName and is intentionally not duplicated"]
+    },
+    {
+      "va": "0x180828",
+      "current_ida_name": "sub_180828",
+      "proposed_name": "TServerNPC_getIsBlocking",
+      "confidence": "high",
+      "evidence": ["The record at 0x37bfa8 decodes to isblocking and stores this address in its getter slot"]
+    },
+    {
+      "va": "0x180834",
+      "current_ida_name": "sub_180834",
+      "proposed_name": "TServerNPC_setIsBlocking",
+      "confidence": "high",
+      "evidence": ["The isblocking record at 0x37bfa8 stores this address in its setter slot"]
+    },
+    {
+      "va": "0x18084c",
+      "current_ida_name": "sub_18084C",
+      "proposed_name": "TServerNPC_getIsBlockingProjectiles",
+      "confidence": "high",
+      "evidence": ["The record at 0x37bfd8 decodes to isblockingprojectiles and stores this address in its getter slot"]
+    },
+    {
+      "va": "0x180854",
+      "current_ida_name": "sub_180854",
+      "proposed_name": "TServerNPC_setIsBlockingProjectiles",
+      "confidence": "high",
+      "evidence": ["The isblockingprojectiles record at 0x37bfd8 stores this address in its setter slot"]
+    },
+    {
+      "va": "0x18085c",
+      "current_ida_name": "sub_18085C",
+      "proposed_name": "TServerNPC_getLayer",
+      "confidence": "high",
+      "evidence": ["The record at 0x37c008 decodes to layer and stores this address in its getter slot"]
+    },
+    {
+      "va": "0x18087c",
+      "current_ida_name": "sub_18087C",
+      "proposed_name": "TServerNPC_setLayer",
+      "confidence": "high",
+      "evidence": ["The layer record at 0x37c008 stores this address in its setter slot"]
+    },
+    {
+      "va": "0x180e50",
+      "current_ida_name": "sub_180E50",
+      "proposed_name": "TServerNPC_getNPCsIndex",
+      "confidence": "high",
+      "review_note": "The callback pointer is present in the property record, but the saved IDA inventory did not contain a function boundary at this address.",
+      "evidence": ["The record at 0x37c038 decodes to npcsindex and stores this address in its getter slot", "The missing boundary is a database issue, not a missing property name"]
+    },
+    {
+      "va": "0x180c80",
+      "current_ida_name": "sub_180C80",
+      "proposed_name": "TServerNPC_getPeltWithNPC",
+      "confidence": "high",
+      "evidence": ["The record at 0x37c068 decodes to peltwithnpc and stores this address in its getter slot"]
+    },
+    {
+      "va": "0x180c6c",
+      "current_ida_name": "sub_180C6C",
+      "proposed_name": "TServerNPC_getPeltWithBush",
+      "confidence": "high",
+      "evidence": ["The record at 0x37c098 decodes to peltwithbush after accounting for the encoded terminator byte", "The callback is the read-only pelt-with-bush property getter"]
+    },
+    {
+      "va": "0x180c58",
+      "current_ida_name": "sub_180C58",
+      "proposed_name": "TServerNPC_getPeltWithSign",
+      "confidence": "high",
+      "evidence": ["The record at 0x37c0c8 decodes to peltwithsign after accounting for the encoded terminator byte", "The callback is the read-only pelt-with-sign property getter"]
+    },
+    {
+      "va": "0x180c44",
+      "current_ida_name": "sub_180C44",
+      "proposed_name": "TServerNPC_getPeltWithVase",
+      "confidence": "high",
+      "evidence": ["The record at 0x37c0f8 decodes to peltwithvase after accounting for the encoded terminator byte", "The callback is the read-only pelt-with-vase property getter"]
+    },
+    {
+      "va": "0x180c30",
+      "current_ida_name": "sub_180C30",
+      "proposed_name": "TServerNPC_getPeltWithStone",
+      "confidence": "high",
+      "evidence": ["The record at 0x37c128 decodes to peltwithstone and stores this address in its getter slot"]
+    },
+    {
+      "va": "0x180c1c",
+      "current_ida_name": "sub_180C1C",
+      "proposed_name": "TServerNPC_getPeltWithBlackStone",
+      "confidence": "high",
+      "evidence": ["The record at 0x37c158 decodes to peltwithblackstone and stores this address in its getter slot"]
+    },
+    {
+      "va": "0x1808b0",
+      "current_ida_name": "sub_1808B0",
+      "proposed_name": "TServerNPC_getSave",
+      "confidence": "high",
+      "evidence": ["The record at 0x37c188 decodes to save and stores this address in its getter slot"]
+    },
+    {
+      "va": "0x1808b8",
+      "current_ida_name": "sub_1808B8",
+      "proposed_name": "TServerNPC_getShieldPower",
+      "confidence": "high",
+      "evidence": ["The record at 0x37c1b8 decodes to shieldpower and stores this address in its getter slot"]
+    },
+    {
+      "va": "0x1808d8",
+      "current_ida_name": "sub_1808D8",
+      "proposed_name": "TServerNPC_setShieldPower",
+      "confidence": "high",
+      "evidence": ["The shieldpower record at 0x37c1b8 stores this address in its setter slot"]
+    },
+    {
+      "va": "0x18235c",
+      "current_ida_name": "sub_18235C",
+      "proposed_name": "TServerNPC_setSprite",
+      "confidence": "high",
+      "evidence": ["The sprite record at 0x37c1e8 stores this address in its setter slot", "The existing getter is the ELF jump TGaniObject::getGaniOldSprite and is intentionally not duplicated"]
+    },
+    {
+      "va": "0x180900",
+      "current_ida_name": "sub_180900",
+      "proposed_name": "TServerNPC_getSwordPower",
+      "confidence": "high",
+      "evidence": ["The record at 0x37c218 decodes to swordpower and stores this address in its getter slot"]
+    },
+    {
+      "va": "0x180920",
+      "current_ida_name": "sub_180920",
+      "proposed_name": "TServerNPC_setSwordPower",
+      "confidence": "high",
+      "evidence": ["The swordpower record at 0x37c218 stores this address in its setter slot"]
+    },
+    {
+      "va": "0x1809b0",
+      "current_ida_name": "sub_1809B0",
+      "proposed_name": "TServerNPC_getVisible",
+      "confidence": "high",
+      "evidence": ["The record at 0x37c248 decodes to visible and stores this address in its getter slot"]
+    },
+    {
+      "va": "0x185794",
+      "current_ida_name": "sub_185794",
+      "proposed_name": "TServerNPC_setVisible",
+      "confidence": "high",
+      "evidence": ["The visible record at 0x37c248 stores this address in its setter slot"]
+    },
+    {
+      "va": "0x18402c",
+      "current_ida_name": "sub_18402C",
+      "proposed_name": "TServerNPC_getWidth",
+      "confidence": "high",
+      "review_note": "The callback pointer is present in the property record, but the saved IDA inventory did not contain a function boundary at this address.",
+      "evidence": ["The record at 0x37c278 decodes to width and stores this address in its getter slot", "The missing boundary is a database issue, not a missing property name"]
+    },
+    {
+      "va": "0x180948",
+      "current_ida_name": "sub_180948",
+      "proposed_name": "TServerNPC_getX",
+      "confidence": "high",
+      "evidence": ["The record at 0x37c2a8 decodes to x and stores this address in its getter slot"]
+    },
+    {
+      "va": "0x186bd0",
+      "current_ida_name": "sub_186BD0",
+      "proposed_name": "TServerNPC_setX",
+      "confidence": "high",
+      "evidence": ["The x record at 0x37c2a8 stores this address in its setter slot"]
+    },
+    {
+      "va": "0x18097c",
+      "current_ida_name": "sub_18097C",
+      "proposed_name": "TServerNPC_getY",
+      "confidence": "high",
+      "evidence": ["The record at 0x37c2d8 decodes to y and stores this address in its getter slot"]
+    },
+    {
+      "va": "0x186b68",
+      "current_ida_name": "sub_186B68",
+      "proposed_name": "TServerNPC_setY",
+      "confidence": "high",
+      "evidence": ["The y record at 0x37c2d8 stores this address in its setter slot"]
+    }
+  ],
+  "server_npc_functions": [
+    {
+      "va": "0x182228",
+      "current_ida_name": "sub_182228",
+      "proposed_name": "TServerNPC_script_destroy",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c308 decodes to destroy and stores this callback at +0x18", "The record belongs to the 57-entry TServerNPC script-function table"]
+    },
+    {
+      "va": "0x1809b8",
+      "current_ida_name": "sub_1809B8",
+      "proposed_name": "TServerNPC_script_blockAgain",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c338 decodes to blockagain and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x1809cc",
+      "current_ida_name": "sub_1809CC",
+      "proposed_name": "TServerNPC_script_blockAgainLocal",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c368 decodes to blockagainlocal and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x1809e0",
+      "current_ida_name": "sub_1809E0",
+      "proposed_name": "TServerNPC_script_canBeCarried",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c398 decodes to canbecarried after accounting for the encoded terminator byte", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x1809ec",
+      "current_ida_name": "sub_1809EC",
+      "proposed_name": "TServerNPC_script_cannotBeCarried",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c3c8 decodes to cannotbecarried and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x1809f4",
+      "current_ida_name": "sub_1809F4",
+      "proposed_name": "TServerNPC_script_canBePushed",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c3f8 decodes to canbepushed and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x180a00",
+      "current_ida_name": "sub_180A00",
+      "proposed_name": "TServerNPC_script_cannotBePushed",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c428 decodes to cannotbepushed and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x180a08",
+      "current_ida_name": "sub_180A08",
+      "proposed_name": "TServerNPC_script_canBePulled",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c458 decodes to canbepulled and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x180a14",
+      "current_ida_name": "sub_180A14",
+      "proposed_name": "TServerNPC_script_cannotBePulled",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c488 decodes to cannotbepulled and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x182174",
+      "current_ida_name": "sub_182174",
+      "proposed_name": "TServerNPC_script_carryObject",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c4b8 decodes to carryobject and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x182584",
+      "current_ida_name": "sub_182584",
+      "proposed_name": "TServerNPC_script_changeImgColors",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c4e8 decodes to changeimgcolors and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x18286c",
+      "current_ida_name": "sub_18286C",
+      "proposed_name": "TServerNPC_script_changeImgMode",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c518 decodes to changeimgmode and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x180ec0",
+      "current_ida_name": "sub_180EC0",
+      "proposed_name": "TServerNPC_script_changeImgPart",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c548 decodes to changeimgpart and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x181110",
+      "current_ida_name": "sub_181110",
+      "proposed_name": "TServerNPC_script_changeImgVis",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c578 decodes to changeimgvis and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x1827e4",
+      "current_ida_name": "sub_1827E4",
+      "proposed_name": "TServerNPC_script_changeImgZoom",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c5a8 decodes to changeimgzoom and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x180a1c",
+      "current_ida_name": "sub_180A1C",
+      "proposed_name": "TServerNPC_script_dontBlock",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c5d8 decodes to dontblock and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x180a30",
+      "current_ida_name": "sub_180A30",
+      "proposed_name": "TServerNPC_script_dontBlockLocal",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c608 decodes to dontblocklocal and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x180a40",
+      "current_ida_name": "sub_180A40",
+      "proposed_name": "TServerNPC_script_drawAsLight",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c638 decodes to drawaslight and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x180a4c",
+      "current_ida_name": "sub_180A4C",
+      "proposed_name": "TServerNPC_script_drawOverPlayer",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c668 decodes to drawoverplayer and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x180a58",
+      "current_ida_name": "sub_180A58",
+      "proposed_name": "TServerNPC_script_drawUnderPlayer",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c698 decodes to drawunderplayer and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x185688",
+      "current_ida_name": "sub_185688",
+      "proposed_name": "TServerNPC_script_hide",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c6c8 decodes to hide and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x18576c",
+      "current_ida_name": "sub_18576C",
+      "proposed_name": "TServerNPC_script_hideLocal",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c6f8 decodes to hidelocal and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x18462c",
+      "current_ida_name": "sub_18462C",
+      "proposed_name": "TServerNPC_script_hurt",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c728 decodes to hurt and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x1843e0",
+      "current_ida_name": "sub_1843E0",
+      "proposed_name": "TServerNPC_script_lay",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c758 decodes to lay and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x1810e0",
+      "current_ida_name": "sub_1810E0",
+      "proposed_name": "TServerNPC_script_message",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c788 decodes to message and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x188d78",
+      "current_ida_name": "sub_188D78",
+      "proposed_name": "TServerNPC_script_move",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c7b8 decodes to move and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x180adc",
+      "current_ida_name": "sub_180ADC",
+      "proposed_name": "TServerNPC_script_setBow",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c7e8 decodes to setbow and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x185480",
+      "current_ida_name": "sub_185480",
+      "proposed_name": "TServerNPC_script_setCharAni",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c818 decodes to setcharani and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x18108c",
+      "current_ida_name": "sub_18108C",
+      "proposed_name": "TServerNPC_script_setCharGender",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c848 decodes to setchargender and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x185708",
+      "current_ida_name": "sub_185708",
+      "proposed_name": "TServerNPC_script_setImg",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c878 decodes to setimg and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x185510",
+      "current_ida_name": "sub_185510",
+      "proposed_name": "TServerNPC_script_setImgPart",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c8a8 decodes to setimgpart and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x180a64",
+      "current_ida_name": "sub_180A64",
+      "proposed_name": "TServerNPC_script_setShape",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c8d8 decodes to setshape and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x180f1c",
+      "current_ida_name": "sub_180F1C",
+      "proposed_name": "TServerNPC_script_setShape2",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c908 decodes to setshape2 and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x180a88",
+      "current_ida_name": "sub_180A88",
+      "proposed_name": "TServerNPC_script_setZoomEffect",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c938 decodes to setzoomeffect and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x184d00",
+      "current_ida_name": "sub_184D00",
+      "proposed_name": "TServerNPC_script_shootArrow",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c968 decodes to shootarrow and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x184204",
+      "current_ida_name": "sub_184204",
+      "proposed_name": "TServerNPC_script_shootBall",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c998 decodes to shootball and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x184e90",
+      "current_ida_name": "sub_184E90",
+      "proposed_name": "TServerNPC_script_shootFireball",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c9c8 decodes to shootfireball and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x185020",
+      "current_ida_name": "sub_185020",
+      "proposed_name": "TServerNPC_script_shootFireblast",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37c9f8 decodes to shootfireblast and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x184074",
+      "current_ida_name": "sub_184074",
+      "proposed_name": "TServerNPC_script_shootNuke",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37ca28 decodes to shootnuke and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x18562c",
+      "current_ida_name": "sub_18562C",
+      "proposed_name": "TServerNPC_script_show",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37ca58 decodes to show and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x186224",
+      "current_ida_name": "sub_186224",
+      "proposed_name": "TServerNPC_script_showCharacter",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37ca88 decodes to showcharacter and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x1856b0",
+      "current_ida_name": "sub_1856B0",
+      "proposed_name": "TServerNPC_script_showLocal",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37cab8 decodes to showlocal and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x181df8",
+      "current_ida_name": "sub_181DF8",
+      "proposed_name": "TServerNPC_script_showAni",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37cae8 decodes to showani and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x18309c",
+      "current_ida_name": "sub_18309C",
+      "proposed_name": "TServerNPC_script_showAni2",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37cb18 decodes to showani2 and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x182f44",
+      "current_ida_name": "sub_182F44",
+      "proposed_name": "TServerNPC_script_showImg",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37cb48 decodes to showimg and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x182c84",
+      "current_ida_name": "sub_182C84",
+      "proposed_name": "TServerNPC_script_showImg2",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37cb78 decodes to showimg2 and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x1828f4",
+      "current_ida_name": "sub_1828F4",
+      "proposed_name": "TServerNPC_script_showPoly",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37cba8 decodes to showpoly and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x182a08",
+      "current_ida_name": "sub_182A08",
+      "proposed_name": "TServerNPC_script_showPoly2",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37cbd8 decodes to showpoly2 and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x182ddc",
+      "current_ida_name": "sub_182DDC",
+      "proposed_name": "TServerNPC_script_showText",
+      "confidence": "high",
+      "review_note": "The encoded showtext record contains the same zero-terminator replacement seen in other old script tables.",
+      "evidence": ["The function record at 0x37cc08 decodes to showtext after accounting for the encoded terminator byte", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x182b1c",
+      "current_ida_name": "sub_182B1C",
+      "proposed_name": "TServerNPC_script_showText2",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37cc38 decodes to showtext2 and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x189538",
+      "current_ida_name": "sub_189538",
+      "proposed_name": "TServerNPC_script_take",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37cc68 decodes to take and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x189414",
+      "current_ida_name": "sub_189414",
+      "proposed_name": "TServerNPC_script_take2",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37cc98 decodes to take2 and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x181ffc",
+      "current_ida_name": "sub_181FFC",
+      "proposed_name": "TServerNPC_script_throwCarry",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37ccc8 decodes to throwcarry and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x180aa8",
+      "current_ida_name": "sub_180AA8",
+      "proposed_name": "TServerNPC_script_timeEverywhere",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37ccf8 decodes to timereverywhere and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x182664",
+      "current_ida_name": "sub_182664",
+      "proposed_name": "TServerNPC_script_findImg",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37cd28 decodes to findimg and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x180e74",
+      "current_ida_name": "sub_180E74",
+      "proposed_name": "TServerNPC_script_hideImg",
+      "confidence": "high",
+      "evidence": ["The function record at 0x37cd58 decodes to hideimg and stores this callback at +0x18", "The record belongs to the TServerNPC script-function table installed at 0x183c18"]
+    },
+    {
+      "va": "0x181d58",
+      "current_ida_name": "sub_181D58",
+      "proposed_name": "TServerNPC_script_hideImgs",
+      "confidence": "high",
+      "review_note": "The callback pointer is present in the function record, but the saved IDA inventory did not contain a function boundary at this address.",
+      "evidence": ["The function record at 0x37cd88 decodes to hideimgs and stores this callback at +0x18", "The missing boundary is a database issue, not a missing script name"]
+    }
+  ],
   "server_level_properties": [
     {
       "va": "0x19f948",

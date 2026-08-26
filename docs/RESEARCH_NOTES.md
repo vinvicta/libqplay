@@ -1229,6 +1229,44 @@ The new player entries are stored under `server_player_properties` and
 review-only candidate set from 51 to 125. No IDA names were changed during
 this pass, and no live endpoint was contacted.
 
+## TServerNPC property and function tables
+
+The NPC constructor at `0x183c18` installs 26 property records from
+`0x37be28` and 57 script functions from `0x37c308`. The property table covers
+action-player lookup, health and dimensions, horse and hurt state, image and
+layer state, collision flags, pelt checks, save state, weapon power, visibility,
+and coordinates. The function table covers carry and push rules, image and
+shape changes, drawing modes, movement and messaging, weapon and projectile
+actions, display helpers, inventory operations, and image lookup or hiding.
+
+Three table callbacks did not have function boundaries in the saved IDA
+inventory: `npcsindex` at `0x180e50`, `width` at `0x18402c`, and `hideimgs` at
+`0x181d58`. They are still recorded because the registration pointers are
+authoritative. The application helper will report those three for boundary
+recovery instead of pretending a rename was applied.
+
+Two other targets already have surviving ELF names and are not duplicated:
+the `image` setter is the `TServerNPC::setImageName` jump at `0x18547c`, and
+the `sprite` getter is the `TGaniObject::getGaniOldSprite` jump at `0x180c90`.
+The other 37 property accessors and all 57 script callbacks are new
+review-only candidates. Encoded table bytes with a zero terminator replacement
+occur in `peltwithbush`, `peltwithsign`, `peltwithvase`, `canbecarried`, and
+`showtext`; the surrounding records recover the intended spellings without
+changing the original bytes.
+
+The NPC function names are preserved in their script-facing form: `destroy`,
+the carry and blocking predicates, `carryobject`, the `changeimg*` family,
+`drawaslight`, `drawoverplayer`, `drawunderplayer`, the show and hide helpers,
+the `set*` family, projectile helpers such as `shootfireblast` and `shootnuke`,
+the `showani`, `showimg`, `showpoly`, and `showtext` overloads, `take` and
+`take2`, `throwcarry`, `timereverywhere`, `findimg`, `hideimg`, and `hideimgs`.
+The full address map is kept in the candidate artifact so the names can be
+reviewed against the table without relying on a long prose list.
+
+The new NPC groups add 94 unique addresses and raise the review-only native
+candidate set from 125 to 219. No IDA names were changed during this pass, and
+no live endpoint was contacted.
+
 ## Held-connection ARM64 resource replay
 
 The runtime path was revisited after the offline sound-table pass. The earlier

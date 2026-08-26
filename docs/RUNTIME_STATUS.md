@@ -238,6 +238,12 @@ This is the short handoff view. The full reasoning and command history are in
     callback without an IDA function boundary at `0x18aa68` was retained with
     a review note. The unapplied candidate set now contains 125 unique native
     addresses. No endpoint was contacted.
+39. The NPC constructor at `0x183c18` was audited next. Its 26 properties and
+    57 script functions are registered from `0x37be28` and `0x37c308`. Three
+    callback pointers lack saved IDA function boundaries, and two inherited
+    ELF jump targets were left unchanged. The remaining 94 unique native
+    targets are recorded as unapplied candidates, raising the review-only set
+    to 219. No endpoint was contacted.
 
 ## Not verified
 

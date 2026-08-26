@@ -224,6 +224,21 @@ The six player callbacks decode to `isguildpm`, `ismasspm`, `pmswaiting`,
 the saved inventory, so the application helper will report it for manual
 boundary recovery. The 74 new candidates bring the review-only set to 125.
 
+The NPC constructor at `0x183c18` adds 26 properties from `0x37be28` and 57
+script callbacks from `0x37c308`. Their names cover the NPC's health, image,
+layer, collision, pelt, weapon, visibility, movement, carry, drawing,
+projectile, and show or hide behavior. The property table shares its hearts
+and HP accessors, and its image and sprite targets include two inherited ELF
+jumps that are already named. Three callback pointers, at `0x180e50`,
+`0x18402c`, and `0x181d58`, still need IDA function boundaries. The remaining
+37 property targets and all 57 script targets are recorded in
+`artifacts/native_callback_candidates.json` under the two NPC groups.
+
+The encoded terminator anomaly appears in several NPC names, including
+`peltwithbush`, `peltwithsign`, `peltwithvase`, `canbecarried`, and `showtext`.
+Those spellings are supported by their table position and callback context.
+The 94 new NPC candidates bring the review-only set to 219.
+
 When the IDA bridge is available, run
 `tools/ida_apply_native_callback_candidates.py` in review mode first. It
 resolves the existing names, checks each expected function address, reports

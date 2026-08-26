@@ -34,6 +34,8 @@ def load_candidates():
         "sound_table_followup",
         "server_player_properties",
         "server_player_functions",
+        "server_npc_properties",
+        "server_npc_functions",
         "server_level_properties",
         "server_level_functions",
     )
