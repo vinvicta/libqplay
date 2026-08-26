@@ -77,8 +77,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v34.i64",
-    "sha256": "b082b63ff1be3ab1f1d029093b0a7907a62daaea6a136da406e6cb4c15ee2e49"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v35.i64",
+    "sha256": "a019e59e27e5e5b3a3e561d4708cdadb3b2c0e8c747b05b22edff749d2eb4a34"
   },
   "html_atom_anchors": {
     "anchor_count": 5,
@@ -153,7 +153,8 @@
     "The twenty-ninth database revision also contains the separately reviewed texture, OpenGL, drawing-panel, GUI-control, markup, and scrolling helper anchors.",
     "The thirtieth database revision also contains the separately reviewed image callbacks, recursive folder-loader helper, and YAJL JSON callback anchors.",
     "The thirty-first database revision also contains the separately reviewed resource comparator, link, alternative, and stream-materialization anchors.",
-    "The thirty-second database revision also contains the separately reviewed GS2 script-machine construction, resolution, assignment, and comparison anchors."
+    "The thirty-second database revision also contains the separately reviewed GS2 script-machine construction, resolution, assignment, and comparison anchors.",
+    "The thirty-third database revision also contains the separately reviewed TScriptSpace event, class-transition, event-state, and timeout anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -277,6 +278,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_script_runtime_verify_v27.json",
     "verified_name_count": 12
+  },
+  "script_space_anchors": {
+    "anchor_count": 8,
+    "anchor_path": "artifacts/spectron_script_space_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "32f2b00cd0b4171e2e1f26623b9af7d51e7ac1cdd9ac7df57825c3f1d47e30f5",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_script_space_verify_v35.json",
+    "verified_name_count": 8
   },
   "socket_state_anchors": {
     "anchor_count": 5,

@@ -89,6 +89,8 @@ def main() -> None:
     parser.add_argument("--resource-object-verification", type=Path)
     parser.add_argument("--script-machine-anchors", type=Path)
     parser.add_argument("--script-machine-verification", type=Path)
+    parser.add_argument("--script-space-anchors", type=Path)
+    parser.add_argument("--script-space-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -996,6 +998,34 @@ def main() -> None:
         result["script_machine_anchors"] = script_machine
         result["interpretation"].append(
             "The thirty-second database revision also contains the separately reviewed GS2 script-machine construction, resolution, assignment, and comparison anchors."
+        )
+    script_space = None
+    if args.script_space_anchors or args.script_space_verification:
+        if not args.script_space_anchors or not args.script_space_verification:
+            raise ValueError(
+                "script-space anchors and script-space verification must be supplied together"
+            )
+        script_space_document = load(args.script_space_anchors)
+        script_space_verification = load(args.script_space_verification)
+        if script_space_document.get("artifact") != "spectron_script_space_manual_translation_anchors_20260826":
+            raise ValueError("unexpected script-space anchor artifact")
+        if not script_space_verification.get("verified"):
+            raise ValueError("script-space anchor reopen verification did not pass")
+        expected_script_space = len(script_space_document["anchors"])
+        if script_space_verification["verified_name_count"] != expected_script_space:
+            raise ValueError("script-space verification count differs from artifact")
+        script_space = {
+            "anchor_path": str(args.script_space_anchors),
+            "anchor_sha256": sha256_path(args.script_space_anchors),
+            "reopen_verification": str(args.script_space_verification),
+            "anchor_count": expected_script_space,
+            "verified_name_count": script_space_verification["verified_name_count"],
+            "reopen_failure_count": script_space_verification["failure_count"],
+        }
+    if script_space is not None:
+        result["script_space_anchors"] = script_space
+        result["interpretation"].append(
+            "The thirty-third database revision also contains the separately reviewed TScriptSpace event, class-transition, event-state, and timeout anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

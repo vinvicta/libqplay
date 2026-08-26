@@ -690,6 +690,14 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_script_machine_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+95. Clean IDA review added eight high-confidence TScriptSpace event anchors
+    for error cleanup, event registration, class leave handling, event-state
+    lookup, and timeout scheduling. All eight reopened successfully in the v35
+    disposable copy. The changed-size rows are supported by class-local order
+    and decompiled behavior. See
+    `artifacts/spectron_script_space_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

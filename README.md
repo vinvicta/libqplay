@@ -482,6 +482,16 @@ semantics. All seven reopened successfully. The evidence is in
 `artifacts/spectron_script_machine_manual_translation_anchors_20260826.json`,
 and the v34 database SHA-256 is recorded in the checkpoint.
 
+A thirty-third disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v35.i64`,
+adds eight reviewed `TScriptSpace` anchors. They cover event-catcher
+registration, class leave transitions, pending leave processing, event-state
+lookup, and timeout scheduling. The changed-size target bodies preserve the
+same event lists, class-depth checks, timeout normalization, and state
+cleanup. All eight reopened successfully. The evidence is in
+`artifacts/spectron_script_space_manual_translation_anchors_20260826.json`,
+and the v35 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
