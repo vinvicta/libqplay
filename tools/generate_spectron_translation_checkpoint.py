@@ -97,6 +97,8 @@ def main() -> None:
     parser.add_argument("--script-dispatch-verification", type=Path)
     parser.add_argument("--script-scheduler-anchors", type=Path)
     parser.add_argument("--script-scheduler-verification", type=Path)
+    parser.add_argument("--event-object-anchors", type=Path)
+    parser.add_argument("--event-object-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1116,6 +1118,34 @@ def main() -> None:
         result["script_scheduler_anchors"] = script_scheduler
         result["interpretation"].append(
             "The thirty-sixth database revision also contains the separately reviewed GS2 scheduler, action-loop, event-object cleanup, and class-list replacement anchors."
+        )
+    event_object = None
+    if args.event_object_anchors or args.event_object_verification:
+        if not args.event_object_anchors or not args.event_object_verification:
+            raise ValueError(
+                "event-object anchors and event-object verification must be supplied together"
+            )
+        event_object_document = load(args.event_object_anchors)
+        event_object_verification = load(args.event_object_verification)
+        if event_object_document.get("artifact") != "spectron_event_object_manual_translation_anchors_20260826":
+            raise ValueError("unexpected event-object anchor artifact")
+        if not event_object_verification.get("verified"):
+            raise ValueError("event-object anchor reopen verification did not pass")
+        expected_event_object = len(event_object_document["anchors"])
+        if event_object_verification["verified_name_count"] != expected_event_object:
+            raise ValueError("event-object verification count differs from artifact")
+        event_object = {
+            "anchor_path": str(args.event_object_anchors),
+            "anchor_sha256": sha256_path(args.event_object_anchors),
+            "reopen_verification": str(args.event_object_verification),
+            "anchor_count": expected_event_object,
+            "verified_name_count": event_object_verification["verified_name_count"],
+            "reopen_failure_count": event_object_verification["failure_count"],
+        }
+    if event_object is not None:
+        result["event_object_anchors"] = event_object
+        result["interpretation"].append(
+            "The thirty-seventh database revision also contains the separately reviewed event-object and catcher-list constructor, destructor, registration, and receive-path anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

@@ -77,8 +77,16 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v38.i64",
-    "sha256": "a6981e19c2ac9e3862a21285f2b23eafec6eb21693fa72f3bed922f6544072f7"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v39.i64",
+    "sha256": "2a15e694bf0935c07ef45869388dcff311b61d5cef8e850ddd379e040ff2b016"
+  },
+  "event_object_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "artifacts/spectron_event_object_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "b163e46676d62883222a0b82bb847165cead85eac4b665b79a5bd21598b030da",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_event_object_verify_v39.json",
+    "verified_name_count": 6
   },
   "html_atom_anchors": {
     "anchor_count": 5,
@@ -157,7 +165,8 @@
     "The thirty-third database revision also contains the separately reviewed TScriptSpace event, class-transition, event-state, and timeout anchors.",
     "The thirty-fourth database revision also contains the separately reviewed GS2 function-invocation, action-dispatch, caller-wake-up, and action-cleanup anchors.",
     "The thirty-fifth database revision also contains the separately reviewed GS2 script-state, top-level action, and incoming-event dispatch anchors.",
-    "The thirty-sixth database revision also contains the separately reviewed GS2 scheduler, action-loop, event-object cleanup, and class-list replacement anchors."
+    "The thirty-sixth database revision also contains the separately reviewed GS2 scheduler, action-loop, event-object cleanup, and class-list replacement anchors.",
+    "The thirty-seventh database revision also contains the separately reviewed event-object and catcher-list constructor, destructor, registration, and receive-path anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
