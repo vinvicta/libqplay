@@ -176,9 +176,9 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/unresolved_function_profile.json` profiles the 488 default
   `sub_` entries that still lack source names. It separates likely static
   library internals, compiler-generated cleanup wrappers, init/fini array
-  entries, the PLT resolver slot, and the remaining application or engine code.
-  The current profile identifies 104 cleanup wrappers and leaves 31
-  application or engine entries in the unresolved queue.
+  entries, a compiler branch veneer, the PLT resolver slot, and the remaining
+  application or engine code. The current profile identifies 104 cleanup
+  wrappers and leaves 28 application or engine entries in the unresolved queue.
 * `artifacts/ida_semantic_labels.json` records 467 evidence-backed names
   applied to formerly unnamed login, file-download, handler-table, UI, TLS,
   HTTP, socket, animation, sound, network-thread, update-package, and JNI
@@ -208,9 +208,10 @@ proves the local native TLS path, not a current live certificate or service.
   the saved function, script-table, and candidate inventories.
 * `tools/generate_unresolved_function_profile.py` rebuilds the unresolved
   function profile from the saved inventories and ELF section metadata.
-* `artifacts/unresolved_function_candidates.json` records four high-confidence
-  role aliases for profiler and folder-loader helpers. They remain review-only
-  until they are applied to the matching IDA database.
+* `artifacts/unresolved_function_candidates.json` records seventeen
+  high-confidence role aliases for profiler, image-I/O, animation-lexer,
+  spatial-query, UI, script-object, and folder-loader helpers. They remain
+  review-only until they are applied to the matching IDA database.
 * `tools/generate_unresolved_function_candidates.py` rebuilds that candidate
   artifact, while `tools/ida_apply_unresolved_function_candidates.py` provides
   a review-only IDA applier.

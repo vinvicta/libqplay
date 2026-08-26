@@ -4,25 +4,13 @@
   "categories": [
     {
       "category": "app_or_engine_unknown",
-      "count": 31,
+      "count": 28,
       "entries": [
         {
           "current_ida_name": "sub_E01D0",
           "ea": "0xe01d0",
           "segment": ".text",
           "size": 220
-        },
-        {
-          "current_ida_name": "sub_E02AC",
-          "ea": "0xe02ac",
-          "segment": ".text",
-          "size": 424
-        },
-        {
-          "current_ida_name": "sub_E0454",
-          "ea": "0xe0454",
-          "segment": ".text",
-          "size": 128
         },
         {
           "current_ida_name": "sub_F9028",
@@ -115,12 +103,6 @@
           "size": 60
         },
         {
-          "current_ida_name": "sub_1F94FC",
-          "ea": "0x1f94fc",
-          "segment": ".text",
-          "size": 4
-        },
-        {
           "current_ida_name": "sub_20AC18",
           "ea": "0x20ac18",
           "segment": ".text",
@@ -194,12 +176,18 @@
         }
       ],
       "evidence": "No source name or safe library-region classification was recovered.",
-      "total_bytes": 7508
+      "total_bytes": 6952
     },
     {
       "category": "bzip2_static_internal",
-      "count": 3,
+      "count": 4,
       "entries": [
+        {
+          "current_ida_name": "sub_E02AC",
+          "ea": "0xe02ac",
+          "segment": ".text",
+          "size": 424
+        },
         {
           "current_ida_name": "sub_2751C0",
           "ea": "0x2751c0",
@@ -219,8 +207,22 @@
           "size": 5336
         }
       ],
-      "evidence": "The entries sit between exported BZ2 routines and the zlib CRC transition.",
-      "total_bytes": 23100
+      "evidence": "The entries sit between exported BZ2 routines and the zlib CRC transition; 0xe02ac is the unrolled byte and halfword comparison helper called by the bundled bzip2 decode loop at 0x27e0e4.",
+      "total_bytes": 23524
+    },
+    {
+      "category": "compiler_branch_island",
+      "count": 1,
+      "entries": [
+        {
+          "current_ida_name": "sub_1F94FC",
+          "ea": "0x1f94fc",
+          "segment": ".text",
+          "size": 4
+        }
+      ],
+      "evidence": "0x1f94fc is a four-byte unconditional branch to the exact script-table getter TCachedStream_get_minfilecachesize at 0x1fa4fc. It is a compiler-generated veneer, not an independent source function.",
+      "total_bytes": 4
     },
     {
       "category": "cyassl_static_internal",
@@ -1350,8 +1352,14 @@
     },
     {
       "category": "jpeg_static_internal",
-      "count": 149,
+      "count": 150,
       "entries": [
+        {
+          "current_ida_name": "sub_E0454",
+          "ea": "0xe0454",
+          "segment": ".text",
+          "size": 128
+        },
         {
           "current_ida_name": "sub_28A2F4",
           "ea": "0x28a2f4",
@@ -2247,8 +2255,8 @@
           "size": 1508
         }
       ],
-      "evidence": "The entries occupy the static gaps in the contiguous JPEG implementation region.",
-      "total_bytes": 103880
+      "evidence": "The entries occupy the static gaps in the contiguous JPEG implementation region; 0xe0454 is called by the marker parser at 0x28db2c and 0x28dd94 and decodes a JPEG marker into the library's image state.",
+      "total_bytes": 104008
     },
     {
       "category": "minizip_static_internal",
@@ -3062,19 +3070,27 @@
   "category_summary": [
     {
       "category": "app_or_engine_unknown",
-      "count": 31,
+      "count": 28,
       "evidence": "No source name or safe library-region classification was recovered.",
       "first_ea": "0xe01d0",
       "last_ea": "0x22e12c",
-      "total_bytes": 7508
+      "total_bytes": 6952
     },
     {
       "category": "bzip2_static_internal",
-      "count": 3,
-      "evidence": "The entries sit between exported BZ2 routines and the zlib CRC transition.",
-      "first_ea": "0x2751c0",
+      "count": 4,
+      "evidence": "The entries sit between exported BZ2 routines and the zlib CRC transition; 0xe02ac is the unrolled byte and halfword comparison helper called by the bundled bzip2 decode loop at 0x27e0e4.",
+      "first_ea": "0xe02ac",
       "last_ea": "0x27e0e4",
-      "total_bytes": 23100
+      "total_bytes": 23524
+    },
+    {
+      "category": "compiler_branch_island",
+      "count": 1,
+      "evidence": "0x1f94fc is a four-byte unconditional branch to the exact script-table getter TCachedStream_get_minfilecachesize at 0x1fa4fc. It is a compiler-generated veneer, not an independent source function.",
+      "first_ea": "0x1f94fc",
+      "last_ea": "0x1f94fc",
+      "total_bytes": 4
     },
     {
       "category": "cyassl_static_internal",
@@ -3118,11 +3134,11 @@
     },
     {
       "category": "jpeg_static_internal",
-      "count": 149,
-      "evidence": "The entries occupy the static gaps in the contiguous JPEG implementation region.",
-      "first_ea": "0x28a2f4",
+      "count": 150,
+      "evidence": "The entries occupy the static gaps in the contiguous JPEG implementation region; 0xe0454 is called by the marker parser at 0x28db2c and 0x28dd94 and decodes a JPEG marker into the library's image state.",
+      "first_ea": "0xe0454",
       "last_ea": "0x2acb20",
-      "total_bytes": 103880
+      "total_bytes": 104008
     },
     {
       "category": "minizip_static_internal",
@@ -3246,9 +3262,12 @@
       "start": "0x250e94"
     },
     {
+      "additional_addresses": [
+        "0xe02ac"
+      ],
       "category": "bzip2_static_internal",
       "end_exclusive": "0x27fd34",
-      "evidence": "The entries sit between exported BZ2 routines and the zlib CRC transition.",
+      "evidence": "The entries sit between exported BZ2 routines and the zlib CRC transition; 0xe02ac is the unrolled byte and halfword comparison helper called by the bundled bzip2 decode loop at 0x27e0e4.",
       "family": "bzip2",
       "start": "0x2751c0"
     },
@@ -3260,9 +3279,12 @@
       "start": "0x27fd34"
     },
     {
+      "additional_addresses": [
+        "0xe0454"
+      ],
       "category": "jpeg_static_internal",
       "end_exclusive": "0x2af170",
-      "evidence": "The entries occupy the static gaps in the contiguous JPEG implementation region.",
+      "evidence": "The entries occupy the static gaps in the contiguous JPEG implementation region; 0xe0454 is called by the marker parser at 0x28db2c and 0x28dd94 and decodes a JPEG marker into the library's image state.",
       "family": "libjpeg",
       "start": "0x28a2f4"
     },
@@ -3303,6 +3325,14 @@
       "category": "minizip_static_internal",
       "evidence": "0x24840c is shared by the central-directory APIs, while 0x249580 is called by unzOpenCurrentFile3; both are internal minizip helpers between exported APIs.",
       "family": "minizip"
+    },
+    {
+      "additional_addresses": [
+        "0x1f94fc"
+      ],
+      "category": "compiler_branch_island",
+      "evidence": "0x1f94fc is a four-byte unconditional branch to the exact script-table getter TCachedStream_get_minfilecachesize at 0x1fa4fc. It is a compiler-generated veneer, not an independent source function.",
+      "family": "compiler-generated branch veneer"
     }
   ],
   "source_artifacts": {

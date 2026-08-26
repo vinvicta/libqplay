@@ -64,6 +64,136 @@ CANDIDATES = [
             "The body calls TFiles::getFolder and creates TGraalVar entries with filesize and isfolder properties.",
         ],
     },
+    {
+        "ea": 0x150A30,
+        "proposed_name": "TBitmap_GIF_streamRead",
+        "confidence": "high",
+        "role": "GIF decoder read callback backed by a TStream",
+        "evidence": [
+            "TBitmap::readGIF passes 0x150a30 to DGifOpen at 0x150a68.",
+            "The callback loads the TStream pointer from the GIF user-data field at offset 0x68 and tail-calls TStream::read.",
+        ],
+    },
+    {
+        "ea": 0x150EA0,
+        "proposed_name": "TBitmap_JPEG_noopFlush",
+        "confidence": "high",
+        "role": "No-op JPEG flush callback",
+        "evidence": [
+            "TBitmap::writeJPEG assigns 0x150ea0 to the JFFLUSH global at 0x15125c.",
+            "The body is the two-instruction callback that returns zero without changing the stream state.",
+        ],
+    },
+    {
+        "ea": 0x150EA8,
+        "proposed_name": "TBitmap_JPEG_noopError",
+        "confidence": "high",
+        "role": "No-op JPEG error callback",
+        "evidence": [
+            "TBitmap::readJPEG assigns 0x150ea8 to the JFERROR global at 0x151008.",
+            "TBitmap::writeJPEG assigns the same callback at 0x151268, and the body returns zero without changing the error state.",
+        ],
+    },
+    {
+        "ea": 0x150EB0,
+        "proposed_name": "TBitmap_JPEG_outputMessage",
+        "confidence": "high",
+        "role": "JPEG error-manager output callback",
+        "evidence": [
+            "TBitmap::readJPEG installs 0x150eb0 in the JPEG error manager at 0x151048.",
+            "The body obtains the manager's message text, formats it through TLog::printf, and returns through the libjpeg error callback convention.",
+        ],
+    },
+    {
+        "ea": 0x150F20,
+        "proposed_name": "TBitmap_JPEG_errorExit",
+        "confidence": "high",
+        "role": "JPEG fatal-error callback that performs the saved jump",
+        "evidence": [
+            "TBitmap::readJPEG installs 0x150f20 as the first JPEG error-manager callback at 0x15103c.",
+            "The body invokes the manager's error callback, then longjmps through the saved jump buffer with status two.",
+        ],
+    },
+    {
+        "ea": 0x150F44,
+        "proposed_name": "TBitmap_JPEG_streamWrite",
+        "confidence": "high",
+        "role": "JPEG destination write callback backed by a TStream",
+        "evidence": [
+            "TBitmap::writeJPEG assigns 0x150f44 to the JFWRITE global at 0x151250.",
+            "The callback appends the requested bytes with TString::addbuffer, updates the destination counters, and returns the number of bytes written.",
+        ],
+    },
+    {
+        "ea": 0x17B9BC,
+        "proposed_name": "TPlayer_getDrawObjectListPredicate",
+        "confidence": "high",
+        "role": "Draw-object tree predicate used while building a player draw list",
+        "evidence": [
+            "TPlayer::getDrawObjectList passes 0x17b9bc to TBSPTree::findObject at 0x17dff4.",
+            "The callback updates the object's draw-search marker at offset 0x388 and invokes the object virtual update slot at offset 0x138.",
+        ],
+    },
+    {
+        "ea": 0x1925E4,
+        "proposed_name": "ani_lexer_fatalExit",
+        "confidence": "high",
+        "role": "Generated animation lexer fatal-exit helper",
+        "evidence": [
+            "The generated animation scanner APIs and loadGaniFromString call 0x1925e4 as their fatal path.",
+            "The body calls exit with status two and has no independent application state or return path.",
+        ],
+    },
+    {
+        "ea": 0x19FC88,
+        "proposed_name": "TServerLevel_getNPCTileTypePredicate",
+        "confidence": "high",
+        "role": "BSP-tree predicate for TServerLevel::getNPCTileType",
+        "evidence": [
+            "TServerLevel::getNPCTileType passes 0x19fc88 to TBSPTree::findObject at 0x1a420c.",
+            "The callback reads the query coordinates from the shared level context, calls TServerNPC::getTileType, stores the result, and returns whether a type was found.",
+        ],
+    },
+    {
+        "ea": 0x19FCBC,
+        "proposed_name": "TServerLevel_isOnNPCPredicate",
+        "confidence": "high",
+        "role": "BSP-tree predicate for TServerLevel::isOnNPC",
+        "evidence": [
+            "TServerLevel::isOnNPC passes 0x19fcbc to the object-tree search at 0x1a4d60.",
+            "The callback loads the saved coordinates and flag from the shared level context and tail-calls TServerNPC::isOnNPC.",
+        ],
+    },
+    {
+        "ea": 0x19FE34,
+        "proposed_name": "TServerLevel_collectOnNPCPredicate",
+        "confidence": "high",
+        "role": "BSP-tree predicate that collects NPCs matching TServerLevel::getOnNPC",
+        "evidence": [
+            "TServerLevel::getOnNPC passes 0x19fe34 to the object-tree search at 0x1a5030 and 0x1a505c.",
+            "The callback tests each NPC with TServerNPC::isOnNPC and appends matching objects to the result list at the shared context offset 0x100.",
+        ],
+    },
+    {
+        "ea": 0x1C042C,
+        "proposed_name": "GuiScrollCtrl_readScriptObjectProperties",
+        "confidence": "high",
+        "role": "Scroll-control helper that resolves a script object to TProperties",
+        "evidence": [
+            "GuiScrollCtrl::findHitControl calls 0x1c042c at four scrollbar-related sites.",
+            "The helper reads a TGraalVar object and dynamic-casts it to TProperties before the caller reads the resulting property data.",
+        ],
+    },
+    {
+        "ea": 0x217E68,
+        "proposed_name": "TScriptMachine_getActionNpcOrActivePlayerObject",
+        "confidence": "high",
+        "role": "Script-object resolver for actionnpc with activeplayer fallback",
+        "evidence": [
+            "TScriptMachine::resolveObjectMember calls 0x217e68 at 0x219610 and 0x219850.",
+            "The helper returns the actionnpc object field, or the activeplayer object field when actionnpc is marked as using the active player context.",
+        ],
+    },
 ]
 
 

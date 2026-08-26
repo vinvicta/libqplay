@@ -151,7 +151,8 @@ def region_definitions() -> list[dict[str, object]]:
             "start": 0x2751C0,
             "end": 0x27FD34,
             "family": "bzip2",
-            "evidence": "The entries sit between exported BZ2 routines and the zlib CRC transition.",
+            "additional_addresses": [0xE02AC],
+            "evidence": "The entries sit between exported BZ2 routines and the zlib CRC transition; 0xe02ac is the unrolled byte and halfword comparison helper called by the bundled bzip2 decode loop at 0x27e0e4.",
         },
         {
             "category": "zlib_static_internal",
@@ -165,7 +166,8 @@ def region_definitions() -> list[dict[str, object]]:
             "start": 0x28A2F4,
             "end": 0x2AF170,
             "family": "libjpeg",
-            "evidence": "The entries occupy the static gaps in the contiguous JPEG implementation region.",
+            "additional_addresses": [0xE0454],
+            "evidence": "The entries occupy the static gaps in the contiguous JPEG implementation region; 0xe0454 is called by the marker parser at 0x28db2c and 0x28dd94 and decodes a JPEG marker into the library's image state.",
         },
         {
             "category": "gif_static_internal",
@@ -199,6 +201,12 @@ def region_definitions() -> list[dict[str, object]]:
             "additional_addresses": [0x24840C, 0x249580],
             "family": "minizip",
             "evidence": "0x24840c is shared by the central-directory APIs, while 0x249580 is called by unzOpenCurrentFile3; both are internal minizip helpers between exported APIs.",
+        },
+        {
+            "category": "compiler_branch_island",
+            "additional_addresses": [0x1F94FC],
+            "family": "compiler-generated branch veneer",
+            "evidence": "0x1f94fc is a four-byte unconditional branch to the exact script-table getter TCachedStream_get_minfilecachesize at 0x1fa4fc. It is a compiler-generated veneer, not an independent source function.",
         },
     ]
 

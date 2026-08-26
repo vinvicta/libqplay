@@ -1,7 +1,7 @@
 {
   "binary": "private original ARM64 libqplay.so",
   "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
-  "candidate_count": 4,
+  "candidate_count": 17,
   "candidates": [
     {
       "confidence": "high",
@@ -59,6 +59,188 @@
       "segment": ".text",
       "size": 756,
       "va": "0x213088",
+      "xrefs_to": 2
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_150A30",
+      "evidence": [
+        "TBitmap::readGIF passes 0x150a30 to DGifOpen at 0x150a68.",
+        "The callback loads the TStream pointer from the GIF user-data field at offset 0x68 and tail-calls TStream::read."
+      ],
+      "proposed_name": "TBitmap_GIF_streamRead",
+      "role": "GIF decoder read callback backed by a TStream",
+      "segment": ".text",
+      "size": 8,
+      "va": "0x150a30",
+      "xrefs_to": 2
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_150EA0",
+      "evidence": [
+        "TBitmap::writeJPEG assigns 0x150ea0 to the JFFLUSH global at 0x15125c.",
+        "The body is the two-instruction callback that returns zero without changing the stream state."
+      ],
+      "proposed_name": "TBitmap_JPEG_noopFlush",
+      "role": "No-op JPEG flush callback",
+      "segment": ".text",
+      "size": 8,
+      "va": "0x150ea0",
+      "xrefs_to": 1
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_150EA8",
+      "evidence": [
+        "TBitmap::readJPEG assigns 0x150ea8 to the JFERROR global at 0x151008.",
+        "TBitmap::writeJPEG assigns the same callback at 0x151268, and the body returns zero without changing the error state."
+      ],
+      "proposed_name": "TBitmap_JPEG_noopError",
+      "role": "No-op JPEG error callback",
+      "segment": ".text",
+      "size": 8,
+      "va": "0x150ea8",
+      "xrefs_to": 2
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_150EB0",
+      "evidence": [
+        "TBitmap::readJPEG installs 0x150eb0 in the JPEG error manager at 0x151048.",
+        "The body obtains the manager's message text, formats it through TLog::printf, and returns through the libjpeg error callback convention."
+      ],
+      "proposed_name": "TBitmap_JPEG_outputMessage",
+      "role": "JPEG error-manager output callback",
+      "segment": ".text",
+      "size": 112,
+      "va": "0x150eb0",
+      "xrefs_to": 1
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_150F20",
+      "evidence": [
+        "TBitmap::readJPEG installs 0x150f20 as the first JPEG error-manager callback at 0x15103c.",
+        "The body invokes the manager's error callback, then longjmps through the saved jump buffer with status two."
+      ],
+      "proposed_name": "TBitmap_JPEG_errorExit",
+      "role": "JPEG fatal-error callback that performs the saved jump",
+      "segment": ".text",
+      "size": 32,
+      "va": "0x150f20",
+      "xrefs_to": 2
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_150F44",
+      "evidence": [
+        "TBitmap::writeJPEG assigns 0x150f44 to the JFWRITE global at 0x151250.",
+        "The callback appends the requested bytes with TString::addbuffer, updates the destination counters, and returns the number of bytes written."
+      ],
+      "proposed_name": "TBitmap_JPEG_streamWrite",
+      "role": "JPEG destination write callback backed by a TStream",
+      "segment": ".text",
+      "size": 100,
+      "va": "0x150f44",
+      "xrefs_to": 2
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_17B9BC",
+      "evidence": [
+        "TPlayer::getDrawObjectList passes 0x17b9bc to TBSPTree::findObject at 0x17dff4.",
+        "The callback updates the object's draw-search marker at offset 0x388 and invokes the object virtual update slot at offset 0x138."
+      ],
+      "proposed_name": "TPlayer_getDrawObjectListPredicate",
+      "role": "Draw-object tree predicate used while building a player draw list",
+      "segment": ".text",
+      "size": 72,
+      "va": "0x17b9bc",
+      "xrefs_to": 2
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_1925E4",
+      "evidence": [
+        "The generated animation scanner APIs and loadGaniFromString call 0x1925e4 as their fatal path.",
+        "The body calls exit with status two and has no independent application state or return path."
+      ],
+      "proposed_name": "ani_lexer_fatalExit",
+      "role": "Generated animation lexer fatal-exit helper",
+      "segment": ".text",
+      "size": 16,
+      "va": "0x1925e4",
+      "xrefs_to": 9
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_19FC88",
+      "evidence": [
+        "TServerLevel::getNPCTileType passes 0x19fc88 to TBSPTree::findObject at 0x1a420c.",
+        "The callback reads the query coordinates from the shared level context, calls TServerNPC::getTileType, stores the result, and returns whether a type was found."
+      ],
+      "proposed_name": "TServerLevel_getNPCTileTypePredicate",
+      "role": "BSP-tree predicate for TServerLevel::getNPCTileType",
+      "segment": ".text",
+      "size": 52,
+      "va": "0x19fc88",
+      "xrefs_to": 4
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_19FCBC",
+      "evidence": [
+        "TServerLevel::isOnNPC passes 0x19fcbc to the object-tree search at 0x1a4d60.",
+        "The callback loads the saved coordinates and flag from the shared level context and tail-calls TServerNPC::isOnNPC."
+      ],
+      "proposed_name": "TServerLevel_isOnNPCPredicate",
+      "role": "BSP-tree predicate for TServerLevel::isOnNPC",
+      "segment": ".text",
+      "size": 32,
+      "va": "0x19fcbc",
+      "xrefs_to": 4
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_19FE34",
+      "evidence": [
+        "TServerLevel::getOnNPC passes 0x19fe34 to the object-tree search at 0x1a5030 and 0x1a505c.",
+        "The callback tests each NPC with TServerNPC::isOnNPC and appends matching objects to the result list at the shared context offset 0x100."
+      ],
+      "proposed_name": "TServerLevel_collectOnNPCPredicate",
+      "role": "BSP-tree predicate that collects NPCs matching TServerLevel::getOnNPC",
+      "segment": ".text",
+      "size": 136,
+      "va": "0x19fe34",
+      "xrefs_to": 4
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_1C042C",
+      "evidence": [
+        "GuiScrollCtrl::findHitControl calls 0x1c042c at four scrollbar-related sites.",
+        "The helper reads a TGraalVar object and dynamic-casts it to TProperties before the caller reads the resulting property data."
+      ],
+      "proposed_name": "GuiScrollCtrl_readScriptObjectProperties",
+      "role": "Scroll-control helper that resolves a script object to TProperties",
+      "segment": ".text",
+      "size": 60,
+      "va": "0x1c042c",
+      "xrefs_to": 4
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_217E68",
+      "evidence": [
+        "TScriptMachine::resolveObjectMember calls 0x217e68 at 0x219610 and 0x219850.",
+        "The helper returns the actionnpc object field, or the activeplayer object field when actionnpc is marked as using the active player context."
+      ],
+      "proposed_name": "TScriptMachine_getActionNpcOrActivePlayerObject",
+      "role": "Script-object resolver for actionnpc with activeplayer fallback",
+      "segment": ".text",
+      "size": 68,
+      "va": "0x217e68",
       "xrefs_to": 2
     }
   ],

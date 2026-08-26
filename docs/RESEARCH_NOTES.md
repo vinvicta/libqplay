@@ -1423,7 +1423,17 @@ recursively clears the profiler tree after the dump. The helper at `0x213088`
 is the recursive worker used by `TGraalVar::loadFolder`; it enumerates folders,
 creates `TGraalVar` entries, and records file size and folder state.
 
-`artifacts/unresolved_function_candidates.json` stores these four proposed
+A second call-site pass added thirteen more role candidates. Six belong to the
+TBitmap GIF and JPEG stream or error callback setup at `0x150a30` through
+`0x150f44`. The remaining entries are the generated animation lexer fatal path
+at `0x1925e4`, three TServerLevel spatial-query predicates at `0x19fc88`,
+`0x19fcbc`, and `0x19fe34`, the player draw-list predicate at `0x17b9bc`,
+the scroll-control property resolver at `0x1c042c`, and the actionnpc or
+activeplayer script-object resolver at `0x217e68`. Their roles are supported by
+callback assignments, direct call sites, or the nearby exported method. They
+are still analysis aliases, not recovered source names.
+
+`artifacts/unresolved_function_candidates.json` stores all seventeen proposed
 roles with their call-site evidence, function sizes, and input hash.
 `tools/generate_unresolved_function_candidates.py` regenerates it from the
 saved inventory and unresolved profile. The companion
@@ -1435,6 +1445,10 @@ The same profile pass also recognized 104 compiler-generated cleanup wrappers
 that had been mixed into the application queue. Each wrapper computes a fixed
 global object address and tail-calls a known destructor or clear method. The
 targets are `TString::clear` for 97 entries, `TStringList::~TStringList` for 5,
-and `TGraalVar::~TGraalVar` for 2. This is a structural classification rather
-than recovery of an original ELF source name, but it removes noise from the
-manual queue and leaves 31 application or engine entries for follow-up.
+and `TGraalVar::~TGraalVar` for 2. The same profile now classifies the isolated
+bzip2 helper at `0xe02ac`, the JPEG marker helper at `0xe0454`, and the
+four-byte branch veneer at `0x1f94fc`, which targets the exact
+`TCachedStream_get_minfilecachesize` callback at `0x1fa4fc`. This is a
+structural classification rather than recovery of an original ELF source name,
+but it removes noise from the manual queue and leaves 28 application or engine
+entries for follow-up.

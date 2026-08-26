@@ -271,22 +271,29 @@ This is the short handoff view. The full reasoning and command history are in
     unresolved. No speculative names were added and no endpoint was
     contacted.
 44. The unresolved-function profile separates those 488 default entries into
-    333 likely static third-party functions, 104 compiler-generated cleanup
-    wrappers, 19 ELF init/fini entries, one PLT resolver slot, and 31
-    application or engine entries. The cleanup wrappers have proven tail
-    targets: 97 call `TString::clear`, 5 call `TStringList::~TStringList`, and
-    2 call `TGraalVar::~TGraalVar`. The GPC count includes `0xe01a0`, which is
-    called by `gpc_tristrip_clip` and formats the library's `gpc malloc failure`
-    diagnostic. The report also identifies the shared DES core at `0x246b50`
-    and two minizip helpers at `0x24840c` and `0x249580` from their exported
-    callers. These are triage categories only. No speculative source names
-    were added and no endpoint was contacted.
-45. A follow-up offline disassembly pass produced four high-confidence
-    review-only role candidates at `0xf9028`, `0xf9060`, `0xf9944`, and
-    `0x213088`. They cover the profiler comparator, function-tree formatter,
-    profiler reset recursion, and recursive `TGraalVar::loadFolder` worker.
-    The candidate artifact does not claim that these aliases exist in the ELF,
-    and no IDA names changed or endpoint was contacted.
+    335 likely static third-party functions, 104 compiler-generated cleanup
+    wrappers, 19 ELF init/fini entries, one compiler branch veneer, one PLT
+    resolver slot, and 28 application or engine entries. The cleanup wrappers
+    have proven tail targets: 97 call `TString::clear`, 5 call
+    `TStringList::~TStringList`, and 2 call `TGraalVar::~TGraalVar`. The GPC
+    count includes `0xe01a0`, which is called by `gpc_tristrip_clip` and
+    formats the library's `gpc malloc failure` diagnostic. The bzip2 and JPEG
+    families now also include the isolated helpers at `0xe02ac` and `0xe0454`.
+    The branch veneer at `0x1f94fc` targets the exact
+    `TCachedStream_get_minfilecachesize` callback at `0x1fa4fc`. The report
+    also identifies the shared DES core at `0x246b50` and two minizip helpers
+    at `0x24840c` and `0x249580` from their exported callers. These are triage
+    categories only. No speculative source names were added and no endpoint
+    was contacted.
+45. A follow-up offline disassembly pass produced seventeen high-confidence
+    review-only role candidates. The first four are at `0xf9028`, `0xf9060`,
+    `0xf9944`, and `0x213088`, covering the profiler comparator, function-tree
+    formatter, profiler reset recursion, and recursive `TGraalVar::loadFolder`
+    worker. Thirteen more cover the TBitmap GIF and JPEG callbacks, animation
+    lexer fatal handling, TServerLevel spatial predicates, the player draw-list
+    predicate, the scroll-control property resolver, and the script-object
+    resolver. The candidate artifact does not claim that these aliases exist in
+    the ELF, and no IDA names changed or endpoint was contacted.
 
 ## Not verified
 
