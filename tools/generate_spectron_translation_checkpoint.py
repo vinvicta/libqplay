@@ -69,6 +69,8 @@ def main() -> None:
     parser.add_argument("--http-request-state-verification", type=Path)
     parser.add_argument("--npc-helper-anchors", type=Path)
     parser.add_argument("--npc-helper-verification", type=Path)
+    parser.add_argument("--html-atom-anchors", type=Path)
+    parser.add_argument("--html-atom-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -696,6 +698,34 @@ def main() -> None:
         result["npc_helper_anchors"] = npc_helper
         result["interpretation"].append(
             "The twenty-second database revision also contains the separately reviewed TServerNPC blocking, draw-mode, visibility, bow, and pelt helper anchors."
+        )
+    html_atom = None
+    if args.html_atom_anchors or args.html_atom_verification:
+        if not args.html_atom_anchors or not args.html_atom_verification:
+            raise ValueError(
+                "HTML atom anchors and HTML atom verification must be supplied together"
+            )
+        html_atom_document = load(args.html_atom_anchors)
+        html_atom_verification = load(args.html_atom_verification)
+        if html_atom_document.get("artifact") != "spectron_html_atom_manual_translation_anchors_20260826":
+            raise ValueError("unexpected HTML atom anchor artifact")
+        if not html_atom_verification.get("verified"):
+            raise ValueError("HTML atom anchor reopen verification did not pass")
+        expected_html_atom = len(html_atom_document["anchors"])
+        if html_atom_verification["verified_name_count"] != expected_html_atom:
+            raise ValueError("HTML atom verification count differs from artifact")
+        html_atom = {
+            "anchor_path": str(args.html_atom_anchors),
+            "anchor_sha256": sha256_path(args.html_atom_anchors),
+            "reopen_verification": str(args.html_atom_verification),
+            "anchor_count": expected_html_atom,
+            "verified_name_count": html_atom_verification["verified_name_count"],
+            "reopen_failure_count": html_atom_verification["failure_count"],
+        }
+    if html_atom is not None:
+        result["html_atom_anchors"] = html_atom
+        result["interpretation"].append(
+            "The twenty-third database revision also contains the separately reviewed THTMLAtom constructor and buffer accessor anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

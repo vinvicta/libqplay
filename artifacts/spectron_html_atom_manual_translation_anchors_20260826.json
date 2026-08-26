@@ -1,0 +1,155 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both constructors clear the same atom fields, retain the page pointer, and call the atom clear routine.",
+        "The source and target preserve the same 12-byte, three-instruction, single-block normalized body."
+      ],
+      "match_kind": "manual-html-atom-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 2,
+      "original_ea": "0x1cf240",
+      "original_instruction_count": 3,
+      "original_name": "THTMLAtom_THTMLAtom_THTMLPage",
+      "original_size": 12,
+      "original_string_refs": [],
+      "proposed_name": "v18_THTMLAtom_THTMLAtom_THTMLPage",
+      "semantic_match_already_present": false,
+      "source_basis": "HTML atom constructor",
+      "spectron_basic_block_count": 2,
+      "spectron_current_name": "_ZN10S2m6gab0Y_C1EP10AS80gaE4zW",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1d3e94",
+      "spectron_instruction_count": 3,
+      "spectron_size": 12,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies store the supplied buffer start and length in the same two atom fields.",
+        "The source and target preserve the same 12-byte, three-instruction, single-block normalized body in the THTMLAtom accessor sequence."
+      ],
+      "match_kind": "manual-html-atom-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 1,
+      "original_ea": "0x1cf274",
+      "original_instruction_count": 3,
+      "original_name": "THTMLAtom_setTextInBuffer_uint_int",
+      "original_size": 12,
+      "original_string_refs": [],
+      "proposed_name": "v18_THTMLAtom_setTextInBuffer_uint_int",
+      "semantic_match_already_present": false,
+      "source_basis": "HTML atom buffer start and length setter",
+      "spectron_basic_block_count": 1,
+      "spectron_current_name": "_ZN10S2m6gab0Y_10Vqz6gakq8_Eji",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1d3ec8",
+      "spectron_instruction_count": 3,
+      "spectron_size": 12,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies store the supplied length in the same atom field and return the object.",
+        "The source and target preserve the same 8-byte, two-instruction, single-block normalized body beside the other buffer accessors."
+      ],
+      "match_kind": "manual-html-atom-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 1,
+      "original_ea": "0x1cf280",
+      "original_instruction_count": 2,
+      "original_name": "THTMLAtom_setLengthInBuffer_int",
+      "original_size": 8,
+      "original_string_refs": [],
+      "proposed_name": "v18_THTMLAtom_setLengthInBuffer_int",
+      "semantic_match_already_present": false,
+      "source_basis": "HTML atom buffer length setter",
+      "spectron_basic_block_count": 1,
+      "spectron_current_name": "_ZN10S2m6gab0Y_10Cpq6gahQ0_Ei",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1d3ed4",
+      "spectron_instruction_count": 2,
+      "spectron_size": 8,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies return the unsigned length field at the same logical atom offset.",
+        "The source and target preserve the same 8-byte, two-instruction, single-block normalized body."
+      ],
+      "match_kind": "manual-html-atom-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 1,
+      "original_ea": "0x1cf290",
+      "original_instruction_count": 2,
+      "original_name": "THTMLAtom_getLengthInBuffer_void",
+      "original_size": 8,
+      "original_string_refs": [],
+      "proposed_name": "v18_THTMLAtom_getLengthInBuffer_void",
+      "semantic_match_already_present": false,
+      "source_basis": "HTML atom buffer length accessor",
+      "spectron_basic_block_count": 1,
+      "spectron_current_name": "_ZNK10S2m6gab0Y_10sVs6ga2W2_Ev",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1d3ee4",
+      "spectron_instruction_count": 2,
+      "spectron_size": 8,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies return the sum of the same buffer start and length fields.",
+        "The source and target preserve the same 16-byte, four-instruction, single-block normalized body at the end of the buffer accessor sequence."
+      ],
+      "match_kind": "manual-html-atom-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 1,
+      "original_ea": "0x1cf298",
+      "original_instruction_count": 4,
+      "original_name": "THTMLAtom_getEndInBuffer_void",
+      "original_size": 16,
+      "original_string_refs": [],
+      "proposed_name": "v18_THTMLAtom_getEndInBuffer_void",
+      "semantic_match_already_present": false,
+      "source_basis": "HTML atom buffer end accessor",
+      "spectron_basic_block_count": 1,
+      "spectron_current_name": "_ZNK10S2m6gab0Y_10EWu6gaZD4_Ev",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1d3eec",
+      "spectron_instruction_count": 4,
+      "spectron_size": 16,
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_html_atom_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v3.json",
+    "spectron_features_sha256": "031afed73611783e0b16be71009e20118fc90a56e5d03e5ec04526f654f5cf27"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The target constructor and buffer accessors preserve the original THTMLAtom field layout and local behavior with exact normalized function hashes."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for THTMLAtom construction and buffer accessors",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 5,
+    "high_confidence_count": 5,
+    "new_context_anchor_count": 5,
+    "target_default_name_count": 0
+  }
+}

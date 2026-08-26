@@ -389,6 +389,14 @@ All 15 reopened successfully. The evidence is in
 `artifacts/spectron_npc_helper_manual_translation_anchors_20260826.json`,
 and the v22 database SHA-256 is recorded in the checkpoint.
 
+A twenty-third disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v23.i64`,
+adds five reviewed `THTMLAtom` anchors. They cover construction, buffer start
+and length storage, and buffer-length or buffer-end accessors. All five
+reopened successfully. The evidence is in
+`artifacts/spectron_html_atom_manual_translation_anchors_20260826.json`,
+and the v23 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
@@ -540,6 +548,8 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/spectron_npc_helper_manual_translation_anchors_20260826.json`
   records the 15 reviewed `TServerNPC` blocking, draw-mode, visibility, bow,
   and pelt helpers.
+* `artifacts/spectron_html_atom_manual_translation_anchors_20260826.json`
+  records the five reviewed `THTMLAtom` constructor and buffer helpers.
 * `artifacts/spectron_socket_behavior_comparison_20260826.json` records the
   static comparison of the changed SSL setup, connect, and read bodies.
 * `artifacts/spectron_translation_checkpoint_20260826.json` records the
@@ -803,6 +813,8 @@ proves the local native TLS path, not a current live certificate or service.
   The `tools/generate_spectron_npc_helper_anchors.py` generator records
   reviewed `TServerNPC` helper roles with exact hash checks and IDA-context
   evidence.
+  The `tools/generate_spectron_html_atom_anchors.py` generator records
+  reviewed `THTMLAtom` construction and buffer roles with exact hash checks.
   The `tools/generate_spectron_socket_behavior_comparison.py` generator
   records changed-size socket behavior without forcing an exact-match label.
   `tools/ida_apply_spectron_translation.py` and

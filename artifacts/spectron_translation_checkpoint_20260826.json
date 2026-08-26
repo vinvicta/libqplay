@@ -69,8 +69,16 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v22.i64",
-    "sha256": "5632ecb9a4fef83373c2a21b6a8ca96708e05252a6acedba802cc321e47a0bc0"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v23.i64",
+    "sha256": "ee5ce543cb188e0b16b8479b2d19dd76c7ac0e636852d8446a022ce1a5e8da33"
+  },
+  "html_atom_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "artifacts/spectron_html_atom_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "46fa5e7f34a48447486e825832426ce2342245a31b74a6b2863421764eaba663",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_html_atom_verify_v23.json",
+    "verified_name_count": 5
   },
   "http_request_anchors": {
     "anchor_count": 12,
@@ -119,7 +127,8 @@
     "The nineteenth database revision also contains the separately reviewed HTTP request field, lifecycle, and outbound-buffer anchors.",
     "The twentieth database revision also contains the separately reviewed socket status and address helper anchors.",
     "The twenty-first database revision also contains the separately reviewed HTTP request counters and download-state anchors.",
-    "The twenty-second database revision also contains the separately reviewed TServerNPC blocking, draw-mode, visibility, bow, and pelt helper anchors."
+    "The twenty-second database revision also contains the separately reviewed TServerNPC blocking, draw-mode, visibility, bow, and pelt helper anchors.",
+    "The twenty-third database revision also contains the separately reviewed THTMLAtom constructor and buffer accessor anchors."
   ],
   "login_helper_anchors": {
     "anchor_count": 8,
