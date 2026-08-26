@@ -111,6 +111,18 @@ This validates the addresses and names, but the desktop IDA session's active
 unpacked database was still locked, so its live database was not overwritten.
 The exact result is in `artifacts/ida_translation_validation.json`.
 
+A clean 2026-08-25 revalidation of the same signed ARM64-only diagnostic APK
+was also completed from fresh app data. After the Android compatibility
+warning was dismissed, the local responders saw one connector request and two
+game connections. The client accepted the map, three encrypted level
+containers, and the tile sheet, kept its heartbeat alive, and displayed the
+green tiled world with its HUD and status icons. The minimal responder needed
+one temporary GUI placeholder for `guigames_graymessage2.png`; it was copied
+from a local APK and remains outside this repository. This confirms that the
+documented diagnostic chain is repeatable, but it does not add live-service or
+physical-device coverage. See
+`artifacts/arm64_diagnostic_apk_revalidation_20260825.json`.
+
 The game has not yet been verified against a live game server. The local test
 proves that the x86_64 native client and the patched ARM64 library can reach a
 rendered world through a bounded loopback responder. Live endpoint
@@ -174,6 +186,9 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/arm64_local_fixture_render_replay.json` records the held-
   connection replay that loaded matching encrypted level containers and
   captured the rendered ARM64 world through emulator translation.
+* `artifacts/arm64_diagnostic_apk_revalidation_20260825.json` records the
+  fresh packaged-APK revalidation, including signature metadata, responder
+  captures, fixture hashes, and the clean rendered-world result.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.
 * `symbols/libqplay.symbols.json` is the machine-readable equivalent.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.

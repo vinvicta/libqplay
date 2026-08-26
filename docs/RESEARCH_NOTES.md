@@ -1501,3 +1501,33 @@ IDAPython scripts without modifying the user's active IDA database. The active
 unpacked database was still locked by the desktop session. The compact result
 is in `artifacts/ida_translation_validation.json`; no database, APK, asset,
 certificate, or network response was added to the repository.
+
+## Packaged ARM64 replay revalidation
+
+The complete local replay was repeated on 2026-08-25 using the packaged
+ARM64-only diagnostic APK, rather than only its extracted native library. The
+APK installed successfully after the Android 36 compatibility warning was
+dismissed. Android loaded `libqplay.so` through its ARM64 translation layer on
+the x86_64 emulator, initialized OpenGL, and produced no fatal native crash.
+
+The connector responder saw one `/con.png` request. The first game connection
+received the server-warp control packet and the second received the connecting
+completion and map transition sequence. Both connections completed the
+`fd`/`fc` exchange and encrypted login. The second connection then requested
+`classiciphone.gmap`, three encrypted level containers, and `pics1.png`. The
+responder sent packet 49 once more after the map response, and packet-24
+heartbeats continued while the socket stayed open.
+
+The screenshot again showed the green tiled world, player HUD, and status
+icons. This run used the exact signed APK hash and native hash from the
+earlier successful replay, so it is a repeatability check rather than a new
+binary claim. The bounded responder used a minimal synthetic basepackage and
+therefore needed a local GUI image copied under the requested
+`guigames_graymessage2.png` name. That placeholder was not treated as a
+historical game asset and was not added to the repository.
+
+The full metadata record, including package-signature results, responder
+capture hashes, fixture provenance, patch fingerprint, and the screenshot
+hash, is in
+`artifacts/arm64_diagnostic_apk_revalidation_20260825.json`. Raw captures,
+the diagnostic APK, certificates, keys, and fixture bodies remain private.

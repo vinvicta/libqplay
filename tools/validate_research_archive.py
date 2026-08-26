@@ -25,6 +25,9 @@ def main():
     candidates = load_json("artifacts/unresolved_function_candidates.json")
     script_tables = load_json("artifacts/script_table_inventory.json")
     ida_validation = load_json("artifacts/ida_translation_validation.json")
+    arm64_revalidation = load_json(
+        "artifacts/arm64_diagnostic_apk_revalidation_20260825.json"
+    )
 
     checks = []
 
@@ -180,6 +183,53 @@ def main():
         1211,
     )
 
+    check(
+        "ARM64 revalidation artifact",
+        arm64_revalidation["artifact"],
+        "arm64_diagnostic_apk_revalidation_20260825",
+    )
+    check("ARM64 revalidation network", arm64_revalidation["network_contacted"], False)
+    check(
+        "ARM64 revalidation APK hash",
+        arm64_revalidation["client"]["apk_sha256"],
+        "b1c52234b10fb5a4a2c6c58e85370ccab710b1c355574d295df30b5ed6edddcc",
+    )
+    check(
+        "ARM64 revalidation native hash",
+        arm64_revalidation["client"]["native_library_sha256"],
+        "89a7cf3a10d9da9fb00f50e6917ce10402c1147bcf5738a176c26b32868ba858",
+    )
+    check(
+        "ARM64 revalidation connector requests",
+        arm64_revalidation["runtime"]["connector"]["request_count"],
+        1,
+    )
+    check(
+        "ARM64 revalidation game connections",
+        arm64_revalidation["runtime"]["game"]["connections"],
+        2,
+    )
+    check(
+        "ARM64 revalidation rendered world",
+        arm64_revalidation["runtime"]["render_result"]["observed"],
+        True,
+    )
+    check(
+        "ARM64 revalidation screenshot",
+        arm64_revalidation["runtime"]["render_result"]["screenshot_sha256"],
+        "fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e",
+    )
+    check(
+        "ARM64 revalidation fixture revision",
+        arm64_revalidation["fixture_provenance"]["target_revision_match"],
+        False,
+    )
+    check(
+        "ARM64 revalidation placeholder marker",
+        arm64_revalidation["fixture_provenance"]["placeholder"]["not_a_target_revision_file"],
+        True,
+    )
+
     for document in (
         overlay,
         profile,
@@ -187,6 +237,7 @@ def main():
         script_tables,
         labels,
         ida_validation,
+        arm64_revalidation,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

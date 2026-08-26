@@ -285,6 +285,28 @@ hash record is in
 `artifacts/arm64_local_fixture_render_replay.json`. Raw captures and fixture
 bodies remain private.
 
+## Packaged APK revalidation
+
+The same packaged ARM64-only diagnostic APK was rerun from clean app data on
+2026-08-25. After dismissing Android's compatibility warning, the package
+loaded `libqplay.so` through the x86_64 emulator's ARM64 translation layer,
+initialized OpenGL, made one connector request, and opened two game
+connections. The responder observed the expected encrypted login, map
+transition, three level-file requests, tile-sheet request, and continuing
+heartbeats. The client again displayed the green tiled world, player HUD, and
+status icons while the game socket was open.
+
+This replay used the same APK SHA-256
+`b1c52234b10fb5a4a2c6c58e85370ccab710b1c355574d295df30b5ed6edddcc` and
+native SHA-256
+`89a7cf3a10d9da9fb00f50e6917ce10402c1147bcf5738a176c26b32868ba858` as the
+earlier successful run. The minimal responder requested one GUI image that
+was not present in the small fixture, so a local APK image was copied under
+the name `guigames_graymessage2.png`. That file is explicitly marked as a
+placeholder, and all raw data stayed outside the repository. See
+`artifacts/arm64_diagnostic_apk_revalidation_20260825.json` for the exact
+capture and fixture hashes.
+
 ## Limitations and next validation
 
 This work uses a local synthetic connector and game responder. It does not

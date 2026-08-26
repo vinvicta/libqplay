@@ -1,0 +1,187 @@
+{
+  "artifact": "arm64_diagnostic_apk_revalidation_20260825",
+  "date": "2026-08-25",
+  "scope": "127.0.0.1-only revalidation on an Android 36 x86_64 emulator using translated ARM64 native code",
+  "purpose": "Repeat the complete local replay from clean app data with the packaged ARM64 diagnostic APK and record the observed runtime boundary.",
+  "network_contacted": false,
+  "client": {
+    "package": "com.quattroplay.GraalClassic",
+    "version_name": "1.8",
+    "version_code": 6158,
+    "target_sdk": 26,
+    "packaged_abis": [
+      "arm64-v8a"
+    ],
+    "apk_sha256": "b1c52234b10fb5a4a2c6c58e85370ccab710b1c355574d295df30b5ed6edddcc",
+    "native_library_sha256": "89a7cf3a10d9da9fb00f50e6917ce10402c1147bcf5738a176c26b32868ba858",
+    "signature_verification": {
+      "v1": true,
+      "v2": true,
+      "v3": true,
+      "v3_1": false,
+      "v4": false,
+      "source_stamp": false
+    }
+  },
+  "emulator": {
+    "device": "emulator-5554",
+    "avd": "medium_phone",
+    "android_api": 36,
+    "host_abi": "x86_64",
+    "translated_abi": "arm64-v8a",
+    "execution": "Android ARM64 translation layer",
+    "reverse_ports": {
+      "18080": "127.0.0.1 connector responder",
+      "14900": "127.0.0.1 game responder"
+    }
+  },
+  "runtime": {
+    "compatibility_warning_dismissed": true,
+    "berberis_loaded": true,
+    "opengl_initialized": true,
+    "stopped_cleanly": true,
+    "fatal_native_crash_observed": false,
+    "connector": {
+      "request_count": 1,
+      "request_path": "/con.png",
+      "request_bytes": 186,
+      "request_sha256": "3586b24ea8f0b90b722bc988c4a7e126ee8e0664f2b06d1cb6e7ab8338e6759f",
+      "response_bytes": 16446,
+      "response_sha256": "73996942d493a8db4b7b6238dcc9d6e4bb68a91b48ba5946db4cff9252bc4b7c",
+      "transport": "local HTTP responder only",
+      "rsa_package_branch": "left unchanged"
+    },
+    "game": {
+      "port": 14900,
+      "connections": 2,
+      "server_signature": 73,
+      "encrypted_login_type": 54,
+      "server_control_frames": [
+        {
+          "connection": 1,
+          "frames": [
+            178
+          ]
+        },
+        {
+          "connection": 2,
+          "frames": [
+            9,
+            190,
+            49
+          ],
+          "frame_after_map_response": 49
+        }
+      ],
+      "resource_requests": [
+        "basepackage.gupd",
+        "guigames_graymessage2.png",
+        "classiciphone.gmap",
+        "main_aa-02.nw",
+        "main_ab-01.nw",
+        "main_ab-02.nw",
+        "pics1.png"
+      ],
+      "heartbeat_frames_observed": true,
+      "captures": {
+        "connection_1_in": {
+          "bytes": 557,
+          "sha256": "0ecd0f8f1e2d5cf30f9b166d9324962d86afc547dcdcfe09910608a18f7d6226"
+        },
+        "connection_1_out": {
+          "bytes": 10541,
+          "sha256": "b9497cbf3528451ee1996aa01dac8fa6eb3195ebc45751e6530c2ddd67a931bf"
+        },
+        "connection_2_in": {
+          "bytes": 804,
+          "sha256": "759b35ce272088ef5e4658cc0337bfefa76bf0aeed06cd80cb095ff2af3a1958"
+        },
+        "connection_2_out": {
+          "bytes": 249688,
+          "sha256": "380600df10744eb28249ae9dff354ae4f58b66e24b93b9ac657f2d050ef9f942"
+        }
+      }
+    },
+    "render_result": {
+      "observed": true,
+      "screen": "green tiled world with player HUD and status icons",
+      "screenshot_sha256": "fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e",
+      "screenshot_dimensions": "2400x1080",
+      "captured_while_game_socket_was_open": true
+    }
+  },
+  "fixture_provenance": {
+    "target_revision_match": false,
+    "map": {
+      "name": "classiciphone.gmap",
+      "bytes": 25310,
+      "sha256": "708023ce3cd6441a96ff1ddead038d5a4409df83dd1cdfdf4e8e7b12610e02f7",
+      "source": "local main.gmap fixture renamed for this protocol test"
+    },
+    "source_level_sha256": "7acaf6788f5cabeef9b349ea531552c2956b71710daf6efe6cfd63b497b76641",
+    "generated_level_containers": {
+      "main_aa-02.nw-14900.code": {
+        "bytes": 300,
+        "sha256": "887f9aa2a2a44dfa4d9a5da9c98a4a8d0998798609c6cca8f530286945369177"
+      },
+      "main_ab-01.nw-14900.code": {
+        "bytes": 300,
+        "sha256": "23b6919682d05c7db550995f8f7ab000a1e2efdf6ec37d2d11f417f32c200d32"
+      },
+      "main_ab-02.nw-14900.code": {
+        "bytes": 300,
+        "sha256": "f001f9da7d67dc209a607aacb769dd37a7b2c2f79bd67e037350680a5037f821"
+      }
+    },
+    "tile_sheet": {
+      "name": "pics1.png",
+      "bytes": 222897,
+      "sha256": "fe2dff5c4af86179d0cf83306a40c7e7b92d728a99f1f73a5ec2cf9c897764eb"
+    },
+    "placeholder": {
+      "name": "guigames_graymessage2.png",
+      "bytes": 222897,
+      "sha256": "7f172b8cbfb5a4de52f0f9ede58d87b240e16914f17f63158d9ba2f381835edc",
+      "source": "local APK GUI image copied under the requested name so the minimal responder could satisfy the client request",
+      "not_a_target_revision_file": true
+    },
+    "raw_fixture_location": "private temporary directory outside the repository"
+  },
+  "patch_fingerprint": [
+    {
+      "address": "0x15ca7c",
+      "purpose": "force the existing initialization branch that clears the loading byte"
+    },
+    {
+      "address": "0x20ab20",
+      "purpose": "skip the historical connector certificate check for the diagnostic replay"
+    },
+    {
+      "address": "0x200de0",
+      "purpose": "force the diagnostic HTTP transport path"
+    },
+    {
+      "address": "0x206108",
+      "purpose": "route the connector resolver to loopback"
+    },
+    {
+      "address": "0x1fd6b4",
+      "purpose": "route the local game handshake through the fixed diagnostic key cave"
+    }
+  ],
+  "what_this_proves": [
+    "The signed ARM64-only diagnostic APK installs and runs through Android's ARM64 translation layer on the available emulator.",
+    "The native library initializes OpenGL and reaches the connector without a native crash.",
+    "The saved connector response is accepted and the client opens two game connections.",
+    "The client completes the encrypted login exchange, accepts the map and resource responses, and continues heartbeat traffic.",
+    "The non-premium startup loading-state candidate still reaches the ordinary translated ARM64 render path and displays the world and HUD.",
+    "The earlier no-request observation was caused by the Android compatibility warning and responder timing, not by a failure to load the ARM64 library."
+  ],
+  "not_proven": [
+    "A live connector or game-server login.",
+    "That the cached map and generated level containers match the historical live-server revision.",
+    "That the loading-state candidate is the correct production repair on physical ARM64 hardware.",
+    "Behavior on a physical ARM64 device or with the unmodified trust and package-signing chain."
+  ],
+  "raw_data_policy": "Raw packet captures, APKs, certificates, keys, maps, images, level bodies, and the temporary placeholder remain outside the repository. This artifact records metadata and hashes only."
+}

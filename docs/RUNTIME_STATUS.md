@@ -310,6 +310,17 @@ This is the short handoff view. The full reasoning and command history are in
     two previously merged ranges at exact FDE starts. The active desktop IDA
     database remained locked and was not overwritten. The result is in
     `artifacts/ida_translation_validation.json`.
+48. A clean 2026-08-25 revalidation used the packaged ARM64-only diagnostic
+    APK from fresh app data. After the Android compatibility warning was
+    dismissed, the connector responder saw one request and the game responder
+    saw two connections. The client completed encrypted login, accepted the
+    map, three generated level containers, and the tile sheet, then continued
+    heartbeat traffic. The screenshot again showed the green tiled world,
+    player HUD, and status icons. The minimal responder also needed a local
+    GUI image copied under the requested `guigames_graymessage2.png` name;
+    that placeholder and all raw fixtures stayed outside the repository. The
+    package, capture, fixture, and screenshot hashes are in
+    `artifacts/arm64_diagnostic_apk_revalidation_20260825.json`.
 
 ## Not verified
 
