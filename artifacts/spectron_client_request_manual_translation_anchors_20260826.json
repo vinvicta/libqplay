@@ -1,0 +1,341 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source emits the onSendWeaponImage diagnostic event or forwards one string through the normal client send slot.",
+        "The target preserves the same one-string diagnostic and normal output paths in the first member of the client request tail.",
+        "The target mangled signature retains the const TString reference and the surrounding request order is unchanged."
+      ],
+      "match_kind": "manual-client-request-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 8,
+      "original_ea": "0x1f8480",
+      "original_instruction_count": 45,
+      "original_name": "TClient_sendWeaponImgChange_TString_const",
+      "original_size": 180,
+      "original_string_refs": [
+        "onSendWeaponImage"
+      ],
+      "proposed_name": "v18_TClient_sendWeaponImgChange_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "weapon-image request serialization",
+      "spectron_basic_block_count": 15,
+      "spectron_current_name": "_ZN10w6qzgacqqy10LF69xaTd7lERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1fe088",
+      "spectron_instruction_count": 105,
+      "spectron_size": 428,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source emits the onSendRCChat diagnostic event or forwards one string through the normal client send slot.",
+        "The target preserves the same one-string method shape immediately after the weapon-image helper.",
+        "The target method order and mangled const TString reference distinguish this request from the adjacent three-string helper."
+      ],
+      "match_kind": "manual-client-request-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 8,
+      "original_ea": "0x1f8534",
+      "original_instruction_count": 45,
+      "original_name": "TClient_sendRCChat_TString_const",
+      "original_size": 180,
+      "original_string_refs": [
+        "onSendRCChat"
+      ],
+      "proposed_name": "v18_TClient_sendRCChat_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "RC chat request serialization",
+      "spectron_basic_block_count": 15,
+      "spectron_current_name": "_ZN10w6qzgacqqy10AXO7xaRtbkERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1fe234",
+      "spectron_instruction_count": 105,
+      "spectron_size": 428,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source emits onSendRequestText with three strings in diagnostic mode and otherwise joins the same three values before normal dispatch.",
+        "The target retains three string parameters, the diagnostic path, and the temporary list used by the normal comma-text encoding.",
+        "Its position directly after the two one-string requests completes the corresponding source request order."
+      ],
+      "match_kind": "manual-client-request-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 14,
+      "original_ea": "0x1f85e8",
+      "original_instruction_count": 89,
+      "original_name": "TClient_sendRequestText_TString_const_TString_const_TString_const",
+      "original_size": 360,
+      "original_string_refs": [
+        "onSendRequestText"
+      ],
+      "proposed_name": "v18_TClient_sendRequestText_TString_const_TString_const_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "three-string request-text serialization",
+      "spectron_basic_block_count": 27,
+      "spectron_current_name": "_ZN10w6qzgacqqy10OBj7xat6LjERK10C8THgaTQxFS2_S2_",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1fe3e0",
+      "spectron_instruction_count": 162,
+      "spectron_size": 656,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source emits onSendFileDeletion in diagnostic mode and otherwise strips the path to a filename before dispatch.",
+        "The target preserves the same one-string event path and calls its file helper before normal packet output.",
+        "The target follows the set-text serializer at the same point where the source begins the file-operation request tail."
+      ],
+      "match_kind": "manual-client-request-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 8,
+      "original_ea": "0x1f88fc",
+      "original_instruction_count": 54,
+      "original_name": "TClient_sendRequestFileDeletion_TString_const",
+      "original_size": 216,
+      "original_string_refs": [
+        "onSendFileDeletion"
+      ],
+      "proposed_name": "v18_TClient_sendRequestFileDeletion_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "file-deletion request serialization",
+      "spectron_basic_block_count": 15,
+      "spectron_current_name": "_ZN10w6qzgacqqy10KAd7xaF2GjERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1fe960",
+      "spectron_instruction_count": 112,
+      "spectron_size": 456,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source emits onSendFolderDeletion in diagnostic mode and forwards one string in normal mode.",
+        "The target retains the same one-string diagnostic and normal client-send paths.",
+        "Its position after file deletion and before file rename matches the source request sequence."
+      ],
+      "match_kind": "manual-client-request-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 8,
+      "original_ea": "0x1f89d4",
+      "original_instruction_count": 45,
+      "original_name": "TClient_sendRequestFolderDeletion_TString_const",
+      "original_size": 180,
+      "original_string_refs": [
+        "onSendFolderDeletion"
+      ],
+      "proposed_name": "v18_TClient_sendRequestFolderDeletion_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "folder-deletion request serialization",
+      "spectron_basic_block_count": 15,
+      "spectron_current_name": "_ZN10w6qzgacqqy10WZb7xaNHFjERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1feb28",
+      "spectron_instruction_count": 105,
+      "spectron_size": 428,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source emits two strings in diagnostic mode and otherwise extracts, bounds, and joins both filenames before dispatch.",
+        "The target retains the two-string mangled signature and the same compact or long-string handling for both path arguments.",
+        "The target is the larger file-rename body immediately after folder deletion, matching the source method order."
+      ],
+      "match_kind": "manual-client-request-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 29,
+      "original_ea": "0x1f8a88",
+      "original_instruction_count": 146,
+      "original_name": "TClient_sendRequestFileRename_TString_const_TString_const",
+      "original_size": 584,
+      "original_string_refs": [
+        "onSendFileRename"
+      ],
+      "proposed_name": "v18_TClient_sendRequestFileRename_TString_const_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "file-rename request serialization",
+      "spectron_basic_block_count": 41,
+      "spectron_current_name": "_ZN10w6qzgacqqy10mDH6xaOjfjERK10C8THgaTQxFS2_",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1fecd4",
+      "spectron_instruction_count": 211,
+      "spectron_size": 844,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source encodes the source filename and destination string, using the long-string escape path when required.",
+        "The target preserves the same two-string normal packet and diagnostic output paths with the corresponding target signature.",
+        "The target follows file rename and precedes the update-package helper as in the source request cluster."
+      ],
+      "match_kind": "manual-client-request-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 20,
+      "original_ea": "0x1f8cd0",
+      "original_instruction_count": 100,
+      "original_name": "TClient_sendRequestFilesMove_TString_const_TString_const",
+      "original_size": 400,
+      "original_string_refs": [
+        "onSendFilesMove"
+      ],
+      "proposed_name": "v18_TClient_sendRequestFilesMove_TString_const_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "file-move request serialization",
+      "spectron_basic_block_count": 30,
+      "spectron_current_name": "_ZN10w6qzgacqqy10vVu6xa5C4iERK10C8THgaTQxFS2_",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1ff020",
+      "spectron_instruction_count": 164,
+      "spectron_size": 664,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source emits the update-package object and boolean in diagnostic mode, then encodes package files, checksums, and the update marker for normal output.",
+        "The target retains the update-package pointer and boolean signature and the same package-list, checksum, and downloads-blocked sequence.",
+        "The target is the only large object-backed helper in the request tail and sits between file moves and window-state requests."
+      ],
+      "match_kind": "manual-client-request-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 30,
+      "original_ea": "0x1f8e60",
+      "original_instruction_count": 205,
+      "original_name": "TClient_sendRequestUpdatePackage_TUpdatePackage_bool",
+      "original_size": 824,
+      "original_string_refs": [
+        "ob",
+        "onSendUpdatePackage"
+      ],
+      "proposed_name": "v18_TClient_sendRequestUpdatePackage_TUpdatePackage_bool",
+      "semantic_match_already_present": false,
+      "source_basis": "update-package request and checksum serialization",
+      "spectron_basic_block_count": 35,
+      "spectron_current_name": "_ZN10w6qzgacqqy10looaya47lmEP10RH6ygazf9xb",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1ff2b8",
+      "spectron_instruction_count": 258,
+      "spectron_size": 1032,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source emits the boolean and window name with the onSendHaveWindow diagnostic event or the compact bs normal packet.",
+        "The target preserves the bool plus string signature and the same bs diagnostic and normal output shapes.",
+        "Its location after update-package serialization and before ping matches the source request order."
+      ],
+      "match_kind": "manual-client-request-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 8,
+      "original_ea": "0x1f9198",
+      "original_instruction_count": 71,
+      "original_name": "TClient_sendHaveWindow_bool_TString_const",
+      "original_size": 284,
+      "original_string_refs": [
+        "bs",
+        "onSendHaveWindow"
+      ],
+      "proposed_name": "v18_TClient_sendHaveWindow_bool_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "window-presence request serialization",
+      "spectron_basic_block_count": 15,
+      "spectron_current_name": "_ZN10w6qzgacqqy10mxMgKaFrJxEbRK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1ff6c0",
+      "spectron_instruction_count": 128,
+      "spectron_size": 520,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source emits onSendPingAnswer with one integer or encodes the clamped integer in the compact two-character form.",
+        "The target preserves the same integer clamp, compact encoding, and diagnostic event path.",
+        "The target signature and position between window presence and window list provide an independent protocol anchor."
+      ],
+      "match_kind": "manual-client-request-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 5,
+      "original_ea": "0x1f92b4",
+      "original_instruction_count": 76,
+      "original_name": "TClient_sendPingAnswer_int",
+      "original_size": 308,
+      "original_string_refs": [
+        "onSendPingAnswer"
+      ],
+      "proposed_name": "v18_TClient_sendPingAnswer_int",
+      "semantic_match_already_present": false,
+      "source_basis": "ping-answer integer serialization",
+      "spectron_basic_block_count": 12,
+      "spectron_current_name": "_ZN10w6qzgacqqy10s5iIxacGTYEi",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1ff8c8",
+      "spectron_instruction_count": 118,
+      "spectron_size": 472,
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source emits onSendWindowList in diagnostic mode or forwards one string through the normal client send slot.",
+        "The target preserves the same one-string diagnostic and normal output paths.",
+        "It is the final member of the request tail before the target send-data and outgoing wrappers, matching the source order."
+      ],
+      "match_kind": "manual-client-request-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 8,
+      "original_ea": "0x1f93e8",
+      "original_instruction_count": 45,
+      "original_name": "TClient_sendWindowList_TString_const",
+      "original_size": 180,
+      "original_string_refs": [
+        "onSendWindowList"
+      ],
+      "proposed_name": "v18_TClient_sendWindowList_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "window-list request serialization",
+      "spectron_basic_block_count": 15,
+      "spectron_current_name": "_ZN10w6qzgacqqy10d4N8xa7J0kERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1ffaa0",
+      "spectron_instruction_count": 105,
+      "spectron_size": 428,
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_client_request_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v3.json",
+    "spectron_features_sha256": "031afed73611783e0b16be71009e20118fc90a56e5d03e5ec04526f654f5cf27"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated or default 2.2 name in the evidence row.",
+    "These rows describe local client request and window-state logic; they do not establish compatibility with an external service."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for client request and window-state serializers",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 11,
+    "high_confidence_count": 11,
+    "new_context_anchor_count": 11,
+    "target_default_name_count": 0
+  }
+}

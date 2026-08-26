@@ -45,6 +45,8 @@ def main() -> None:
     parser.add_argument("--resource-verification", type=Path)
     parser.add_argument("--script-bridge-anchors", type=Path)
     parser.add_argument("--script-bridge-verification", type=Path)
+    parser.add_argument("--client-request-anchors", type=Path)
+    parser.add_argument("--client-request-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -336,6 +338,34 @@ def main() -> None:
         result["script_bridge_anchors"] = script_bridge
         result["interpretation"].append(
             "The tenth database revision also contains the separately reviewed client script bridge anchors."
+        )
+    client_request = None
+    if args.client_request_anchors or args.client_request_verification:
+        if not args.client_request_anchors or not args.client_request_verification:
+            raise ValueError(
+                "client-request anchors and client-request verification must be supplied together"
+            )
+        client_request_document = load(args.client_request_anchors)
+        client_request_verification = load(args.client_request_verification)
+        if client_request_document.get("artifact") != "spectron_client_request_manual_translation_anchors_20260826":
+            raise ValueError("unexpected client-request anchor artifact")
+        if not client_request_verification.get("verified"):
+            raise ValueError("client-request anchor reopen verification did not pass")
+        expected_client_request = len(client_request_document["anchors"])
+        if client_request_verification["verified_name_count"] != expected_client_request:
+            raise ValueError("client-request verification count differs from artifact")
+        client_request = {
+            "anchor_path": str(args.client_request_anchors),
+            "anchor_sha256": sha256_path(args.client_request_anchors),
+            "reopen_verification": str(args.client_request_verification),
+            "anchor_count": expected_client_request,
+            "verified_name_count": client_request_verification["verified_name_count"],
+            "reopen_failure_count": client_request_verification["failure_count"],
+        }
+    if client_request is not None:
+        result["client_request_anchors"] = client_request
+        result["interpretation"].append(
+            "The eleventh database revision also contains the separately reviewed client request and window-state serializer anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

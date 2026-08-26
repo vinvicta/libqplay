@@ -282,6 +282,15 @@ successfully. The evidence is in
 `artifacts/spectron_script_bridge_manual_translation_anchors_20260826.json`,
 and the v10 database SHA-256 is recorded in the checkpoint.
 
+An eleventh disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v11.i64`,
+adds 11 reviewed client request and window-state anchors. They cover weapon
+image changes, RC chat, request text, file deletion and rename operations,
+file moves, update-package requests, window presence, ping answers, and the
+window list. All 11 reopened successfully. The evidence is in
+`artifacts/spectron_client_request_manual_translation_anchors_20260826.json`,
+and the v11 database SHA-256 is recorded in the checkpoint.
+
 The first direct emulator launch of the supplied Spectron package also found
 a separate modding-layer problem. After Start was tapped, `libxposed.so`
 crashed at its statically confirmed WebTop `crash` command branch. The same
@@ -400,6 +409,8 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/spectron_script_bridge_manual_translation_anchors_20260826.json`
   records the 13 reviewed client script bridge anchors and their target shape
   checks.
+* `artifacts/spectron_client_request_manual_translation_anchors_20260826.json`
+  records the 11 reviewed client request and window-state serializer anchors.
 * `artifacts/spectron_translation_checkpoint_20260826.json` records the
   close-and-reopen check for the persisted Spectron IDA copy.
 * `artifacts/spectron_runtime_crash_control_20260826.json` records the local
@@ -630,6 +641,9 @@ proves the local native TLS path, not a current live certificate or service.
   resource matching, stream, game-file, and encoded-key roles.
   The `tools/generate_spectron_script_bridge_anchors.py` generator records
   reviewed client script bridge roles and target shape checks.
+  The `tools/generate_spectron_client_request_anchors.py` generator records
+  reviewed client request and window-state serializer roles and target shape
+  checks.
   `tools/ida_apply_spectron_translation.py` and
   `tools/ida_apply_spectron_manual_anchors.py` write separate disposable IDA
   copies, while the matching verification scripts reopen and check them. The
