@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v49.i64",
-    "sha256": "258a6f0fe2afc8da9eba5b080e326cde15d0abbc8c70a918f098caa44adeda1b"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v50.i64",
+    "sha256": "3588a42c1687c12bf984df19af0c7e4d091df97174c7043785abb9a64c929e9b"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -192,7 +192,8 @@
     "The forty-fourth database revision also contains the separately reviewed GS2 variable-construction and legacy path-resolution anchors.",
     "The forty-fifth database revision also contains the separately reviewed GS2 script diagnostic and object-creation anchors.",
     "The forty-sixth database revision also contains the separately reviewed GS2 profiling and player-flag state anchors.",
-    "The forty-seventh database revision also contains the separately reviewed GS2 script-call and native-dispatch anchors."
+    "The forty-seventh database revision also contains the separately reviewed GS2 script-call and native-dispatch anchors.",
+    "The forty-eighth database revision also contains the separately reviewed GS2 tokenized string array anchor."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -412,6 +413,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_string_search_verify_v44.json",
     "verified_name_count": 2
+  },
+  "tokenizer_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_tokenizer_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "367cfb6ca8e93a7c6869d3ace2d1e998b447399a80b80881d030e9c05e54984e",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tokenizer_verify_v50.json",
+    "verified_name_count": 1
   },
   "translation": {
     "ambiguous_functions": 1019,

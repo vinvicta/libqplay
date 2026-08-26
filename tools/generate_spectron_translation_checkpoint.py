@@ -119,6 +119,8 @@ def main() -> None:
     parser.add_argument("--script-state-verification", type=Path)
     parser.add_argument("--execution-dispatch-anchors", type=Path)
     parser.add_argument("--execution-dispatch-verification", type=Path)
+    parser.add_argument("--tokenizer-anchors", type=Path)
+    parser.add_argument("--tokenizer-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1446,6 +1448,34 @@ def main() -> None:
         result["execution_dispatch_anchors"] = execution_dispatch
         result["interpretation"].append(
             "The forty-seventh database revision also contains the separately reviewed GS2 script-call and native-dispatch anchors."
+        )
+    tokenizer = None
+    if args.tokenizer_anchors or args.tokenizer_verification:
+        if not args.tokenizer_anchors or not args.tokenizer_verification:
+            raise ValueError(
+                "tokenizer anchors and tokenizer verification must be supplied together"
+            )
+        tokenizer_document = load(args.tokenizer_anchors)
+        tokenizer_verification = load(args.tokenizer_verification)
+        if tokenizer_document.get("artifact") != "spectron_tokenizer_manual_translation_anchors_20260826":
+            raise ValueError("unexpected tokenizer anchor artifact")
+        if not tokenizer_verification.get("verified"):
+            raise ValueError("tokenizer anchor reopen verification did not pass")
+        expected_tokenizer = len(tokenizer_document["anchors"])
+        if tokenizer_verification["verified_name_count"] != expected_tokenizer:
+            raise ValueError("tokenizer verification count differs from artifact")
+        tokenizer = {
+            "anchor_path": str(args.tokenizer_anchors),
+            "anchor_sha256": sha256_path(args.tokenizer_anchors),
+            "reopen_verification": str(args.tokenizer_verification),
+            "anchor_count": expected_tokenizer,
+            "verified_name_count": tokenizer_verification["verified_name_count"],
+            "reopen_failure_count": tokenizer_verification["failure_count"],
+        }
+    if tokenizer is not None:
+        result["tokenizer_anchors"] = tokenizer
+        result["interpretation"].append(
+            "The forty-eighth database revision also contains the separately reviewed GS2 tokenized string array anchor."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

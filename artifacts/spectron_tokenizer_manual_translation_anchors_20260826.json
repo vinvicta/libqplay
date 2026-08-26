@@ -1,0 +1,66 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both consume one stack entry, construct a tokenizer from the current value and delimiter strings, and return a type-three null value when no tokens are produced.",
+        "Both allocate an array variable sized to the token count, create one string variable per token, attach each variable to the array, set the type-three result, and clean up the temporary tokenizer. The target grows from 404 to 440 bytes around changed string and array wrappers."
+      ],
+      "match_kind": "manual-tokenizer-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x220450",
+      "original_metrics": {
+        "basic_block_count": 12,
+        "instruction_count": 101,
+        "mnemonic_hash": "d489d0de758d737b87a164e6f89dd725ecd690f20676f97c99acdfbe567d2a54",
+        "register_shape_hash": "19fa937fc985cdb9dbe40b92e7016a9a7982b3bbbdeeda67b8458e119cedb1cd",
+        "shape_hash": "85f2663e0e84daee5234a25600bdae1589fa4aab0947c3289e12e51dd7291635",
+        "size": 404
+      },
+      "original_name": "TScriptMachine_tokenizeString_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptMachine_tokenizeString_void",
+      "semantic_match_already_present": false,
+      "source_basis": "tokenized string array construction",
+      "spectron_current_name": "_ZN10mTAogaaEip10moJOOa5NhmEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x228900",
+      "spectron_metrics": {
+        "basic_block_count": 12,
+        "instruction_count": 110,
+        "mnemonic_hash": "96d191683a4815fb91efdccf268d268f9f4c09ea0a2235f777188daad193d6d9",
+        "register_shape_hash": "fce7dd9d23684d481350fb38961ca6a3ae99aceddbeba9dc5d98d34b9683e5b1",
+        "shape_hash": "c3f8cd27deea53f3a44b47b41010daa1e6406e0ad8fd14c8a441f3b5ade6f676",
+        "size": 440
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_tokenizer_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v3.json",
+    "spectron_features_sha256": "031afed73611783e0b16be71009e20118fc90a56e5d03e5ec04526f654f5cf27"
+  },
+  "interpretation": [
+    "This is a reviewed semantic correspondence, not a restored original debug symbol.",
+    "The address is valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ label preserves the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The changed-size row relies on stack transitions, token-array construction, cleanup, class-local sequence, and pseudocode behavior rather than byte identity."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchor for tokenized string array construction",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 1,
+    "high_confidence_count": 1,
+    "new_context_anchor_count": 1,
+    "target_default_name_count": 0
+  }
+}

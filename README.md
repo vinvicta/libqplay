@@ -602,6 +602,13 @@ function dispatch. Both reopened successfully. The evidence is in
 `artifacts/spectron_execution_dispatch_manual_translation_anchors_20260826.json`,
 and the v49 database SHA-256 is recorded in the checkpoint.
 
+A forty-eighth disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v50.i64`,
+adds one reviewed tokenizer anchor for tokenized string array construction. It
+reopened successfully. The evidence is in
+`artifacts/spectron_tokenizer_manual_translation_anchors_20260826.json`,
+and the v50 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
