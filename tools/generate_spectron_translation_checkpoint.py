@@ -95,6 +95,8 @@ def main() -> None:
     parser.add_argument("--script-execution-verification", type=Path)
     parser.add_argument("--script-dispatch-anchors", type=Path)
     parser.add_argument("--script-dispatch-verification", type=Path)
+    parser.add_argument("--script-scheduler-anchors", type=Path)
+    parser.add_argument("--script-scheduler-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1086,6 +1088,34 @@ def main() -> None:
         result["script_dispatch_anchors"] = script_dispatch
         result["interpretation"].append(
             "The thirty-fifth database revision also contains the separately reviewed GS2 script-state, top-level action, and incoming-event dispatch anchors."
+        )
+    script_scheduler = None
+    if args.script_scheduler_anchors or args.script_scheduler_verification:
+        if not args.script_scheduler_anchors or not args.script_scheduler_verification:
+            raise ValueError(
+                "script-scheduler anchors and script-scheduler verification must be supplied together"
+            )
+        script_scheduler_document = load(args.script_scheduler_anchors)
+        script_scheduler_verification = load(args.script_scheduler_verification)
+        if script_scheduler_document.get("artifact") != "spectron_script_scheduler_manual_translation_anchors_20260826":
+            raise ValueError("unexpected script-scheduler anchor artifact")
+        if not script_scheduler_verification.get("verified"):
+            raise ValueError("script-scheduler anchor reopen verification did not pass")
+        expected_script_scheduler = len(script_scheduler_document["anchors"])
+        if script_scheduler_verification["verified_name_count"] != expected_script_scheduler:
+            raise ValueError("script-scheduler verification count differs from artifact")
+        script_scheduler = {
+            "anchor_path": str(args.script_scheduler_anchors),
+            "anchor_sha256": sha256_path(args.script_scheduler_anchors),
+            "reopen_verification": str(args.script_scheduler_verification),
+            "anchor_count": expected_script_scheduler,
+            "verified_name_count": script_scheduler_verification["verified_name_count"],
+            "reopen_failure_count": script_scheduler_verification["failure_count"],
+        }
+    if script_scheduler is not None:
+        result["script_scheduler_anchors"] = script_scheduler
+        result["interpretation"].append(
+            "The thirty-sixth database revision also contains the separately reviewed GS2 scheduler, action-loop, event-object cleanup, and class-list replacement anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

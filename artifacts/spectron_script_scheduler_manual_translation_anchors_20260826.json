@@ -1,0 +1,256 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both walk the scheduled-event list backwards, compare event names case-insensitively, destroy matching events, and remove them from the list.",
+        "Both then mark matching pending actions as canceled when they have no argument object, preserving the same two-list cancellation policy.",
+        "The target retains the source method signature and class-local position. Its body grows from 272 to 328 bytes around the rebuilt string wrapper."
+      ],
+      "match_kind": "manual-script-scheduler-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22a204",
+      "original_metrics": {
+        "basic_block_count": 17,
+        "instruction_count": 68,
+        "mnemonic_hash": "279976ce9654bcad16d05c8b1e70efbb013dbe83ec769196e2f98f8d422a2577",
+        "register_shape_hash": "7552352d0389c87b2dfd29e062a34150663d934beddc2700eae848191e63c54b",
+        "shape_hash": "165c8e86977bd659d8a3e90027f0c1122c7a3de26749769a4748a07b872d6d4a",
+        "size": 272
+      },
+      "original_name": "TScriptSpace_cancelEvents_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptSpace_cancelEvents_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "scheduled-event cancellation",
+      "spectron_current_name": "_ZN10N67CMatrxw10hH2bMa5SK9ERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x233a68",
+      "spectron_metrics": {
+        "basic_block_count": 17,
+        "instruction_count": 82,
+        "mnemonic_hash": "2af02110e86a856269ae2f23171dcd36f35115faed0c68b5ea3ca15da7644a76",
+        "register_shape_hash": "046fe6cdeb6b9af045bd7a4c8c54b5bb7c68963f18f5f8ca38097e6431020dad",
+        "shape_hash": "c54a787fa0eba064462c32d592bb6e7dda40b67ca2bba287e5ff9227e0ec1ed8",
+        "size": 328
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both decrement the active timeout against universe time, enqueue the timeout event when it expires, and retain the remaining time otherwise.",
+        "Both walk scheduled events, unlink dead object references, enqueue due events, reschedule repeating events, and process delayed event states from the second list.",
+        "The target preserves the same loop nesting and receiveEvent calls while growing from 640 to 732 bytes for changed event and string wrappers."
+      ],
+      "match_kind": "manual-script-scheduler-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22a354",
+      "original_metrics": {
+        "basic_block_count": 28,
+        "instruction_count": 160,
+        "mnemonic_hash": "1b53d0a23efa0e8a60e272e79ee8b18e8d24063645280975a003c22ea6cd935c",
+        "register_shape_hash": "09d5d9c50cb25faec518137009ae2c406d8bae2be0907d940771c8c09a60dc15",
+        "shape_hash": "29a11a207975de4e746d1b866ee1bdad6ce68d616b24ccd1739edf0292853ede",
+        "size": 640
+      },
+      "original_name": "TScriptSpace_checkScheduledEvents_void",
+      "original_string_refs": [
+        "istimeout"
+      ],
+      "proposed_name": "v18_TScriptSpace_checkScheduledEvents_void",
+      "semantic_match_already_present": false,
+      "source_basis": "scheduled-event polling",
+      "spectron_current_name": "_ZN10N67CMatrxw10Gr_GMaW8MzEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x233bf0",
+      "spectron_metrics": {
+        "basic_block_count": 28,
+        "instruction_count": 183,
+        "mnemonic_hash": "70f17d44a872f6111ca66f042aa2a6681cada43f095d25ff5446154deb8fc14d",
+        "register_shape_hash": "09ce6c6c38863008e62f09f5978875cd47436673533f3b039873ad8453b01268",
+        "shape_hash": "5bdcd26bb8b1aec51b53337181ba5581edd4f52331f0f9aabafb138a372cafec",
+        "size": 732
+      },
+      "spectron_string_refs": [
+        "istimeout"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both reject inactive scripts, update classes and scheduled events, defer while waiting for downloads, and install event catchers after downloads complete.",
+        "Both set executing player and NPC context, profile action execution time, iterate active actions, stop on a script error state, free actions, and restore global execution state.",
+        "The target preserves the same action-loop structure and profiling table update, with 892 bytes versus 844 bytes in the source."
+      ],
+      "match_kind": "manual-script-scheduler-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22a5e0",
+      "original_metrics": {
+        "basic_block_count": 38,
+        "instruction_count": 210,
+        "mnemonic_hash": "5a61e8998d137fe6f1e08981d741c668205fbd6a725d511556f785ed3847e794",
+        "register_shape_hash": "d47b6f802845adf6aceb7239faaea38a34190f01fa620897162fce98fd17fc69",
+        "shape_hash": "e62a64599361d4e93f7b82bde4d02681a59bbb58cf24d14d1a2bd4e2e70c3205",
+        "size": 844
+      },
+      "original_name": "TScriptSpace_runScript_void",
+      "original_string_refs": [
+        "onClassesDownloaded"
+      ],
+      "proposed_name": "v18_TScriptSpace_runScript_void",
+      "semantic_match_already_present": false,
+      "source_basis": "script-space action loop",
+      "spectron_current_name": "_ZN10N67CMatrxw10_xWAgaiSGzEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x233ed8",
+      "spectron_metrics": {
+        "basic_block_count": 38,
+        "instruction_count": 222,
+        "mnemonic_hash": "9e01a433ac95d544d627a1b7acc780a472ba546a37eab88bd38a777a2aefb54d",
+        "register_shape_hash": "33795f3559f738422a07ed85b949c09d6aa88197572bd6fc4a733bd098d9aee7",
+        "shape_hash": "8e6fe19b2f247a1a5709b9179c72d025eb1c18348a00c57c79bc13b3be981b93",
+        "size": 892
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both remove the script-space catcher from the event object, decide whether the object is still globally referenced, and either retain or unregister and destroy it.",
+        "Both preserve the unknown-object guard, universe event-object hash lookup, and nulling of the script-space event-object pointer when ownership is released.",
+        "The target grows from 380 to 416 bytes because its event-object, hash, and string wrappers changed, but the ownership branches remain explicit."
+      ],
+      "match_kind": "manual-script-scheduler-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22ac2c",
+      "original_metrics": {
+        "basic_block_count": 25,
+        "instruction_count": 94,
+        "mnemonic_hash": "da4ee335d3d7f13c40551db43b81f1e40b1541db2f6fa3df971118f0315b5cf6",
+        "register_shape_hash": "24411e6a021ede5ef657e491238f0d6a0b8b1917e0a4a7eeff3820a9bbad4ccb",
+        "shape_hash": "66b431634ccf94495ea7550b98c3104f6c69293fb2d49cd25d79e7a1884b6c22",
+        "size": 380
+      },
+      "original_name": "TScriptSpace_unlinkEventObject_void",
+      "original_string_refs": [
+        "unknown_object"
+      ],
+      "proposed_name": "v18_TScriptSpace_unlinkEventObject_void",
+      "semantic_match_already_present": false,
+      "source_basis": "event-object unlinking",
+      "spectron_current_name": "_ZN10N67CMatrxw10jpuKOaZbJiEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x234554",
+      "spectron_metrics": {
+        "basic_block_count": 26,
+        "instruction_count": 103,
+        "mnemonic_hash": "43aa0b7ab1254197f250e871e1f82dc373445f74c3f867f6357792fb2a39973f",
+        "register_shape_hash": "ae64d70fcefaacbf600de786dc9d3975170353bd41228bc4c87de643d4bc6bc7",
+        "shape_hash": "4ed90ce553a9933ebd2cbd9519ffbca1dfa424ab0c7f2aa9611ebe664b263728",
+        "size": 416
+      },
+      "spectron_string_refs": [
+        "unknown_object"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both find the named event object, remove this script space as a catcher when present, and remove the event name from the locally tracked event list.",
+        "The target retains the same short two-helper behavior and target string signature, with wrapper cleanup added around the list key."
+      ],
+      "match_kind": "manual-script-scheduler-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22ada8",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "instruction_count": 15,
+        "mnemonic_hash": "8108127d5f5d2633a43100f6fc7ed9cb208ca701d2a3da86a0d80b977de7953e",
+        "register_shape_hash": "62374f0d6e4f88a1004b227adadbaf8e6de05792bb27be981f4b916388688fad",
+        "shape_hash": "da109c8401387deeb8f2ac448d2771f2ab80da30336a191833b4853bb0cabef3",
+        "size": 60
+      },
+      "original_name": "TScriptSpace_ignoreEvents_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptSpace_ignoreEvents_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "event ignore helper",
+      "spectron_current_name": "_ZN10N67CMatrxw10qFYqMasEimERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x2346f4",
+      "spectron_metrics": {
+        "basic_block_count": 3,
+        "instruction_count": 24,
+        "mnemonic_hash": "4cc67df0b83b1f7b61168f3ce1d5cbcd9e025309a420dde0a2d6477a50fac71b",
+        "register_shape_hash": "fab4f0c4a67ef62b9a3dc89a405f10e6d6e37272d79bd9a9229e6ffefda35806",
+        "shape_hash": "fea0caedf78a3685ac756253dcfb851c0a826b17dbda8bbd6df0a054325beb14",
+        "size": 96
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both leave all current classes, create the empty base script when needed, split the supplied class list, and join each class with the update flag set.",
+        "Both reinstall event catchers, trigger classUpdateAction(true), and destroy the temporary class-name list.",
+        "The target preserves the same helper order and grows only from 224 to 228 bytes around wrapper construction."
+      ],
+      "match_kind": "manual-script-scheduler-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22b07c",
+      "original_metrics": {
+        "basic_block_count": 5,
+        "instruction_count": 56,
+        "mnemonic_hash": "2fc9254f8c5c4a669fb48d5d82741cadf3fd3e429d57b413327e038dec4e389a",
+        "register_shape_hash": "acd4c294c50cb127298172563420862f7b3f4c3aea3c89b5e31ff20a1b42d1fb",
+        "shape_hash": "e225c3edee66a0db25549d497f760ca18c19cce0272385ef77c52def709d91bd",
+        "size": 224
+      },
+      "original_name": "TScriptSpace_setClasses_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptSpace_setClasses_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "script class-list replacement",
+      "spectron_current_name": "_ZN10N67CMatrxw10HsHbZaTas5ERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x234a34",
+      "spectron_metrics": {
+        "basic_block_count": 5,
+        "instruction_count": 57,
+        "mnemonic_hash": "9531648e1a482fb3a1ebc249bb6a685414acec95796e734cf31aed390d9b1c71",
+        "register_shape_hash": "b0c91e5b1ed83ddcdd9212839ed5173aed5c4837f28e3d76fc8c7efc74b6cee4",
+        "shape_hash": "698171ab10d052b37b51a30038f5e163327ff008fa47434de77be4a6dc3b692d",
+        "size": 228
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_script_scheduler_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v3.json",
+    "spectron_features_sha256": "031afed73611783e0b16be71009e20118fc90a56e5d03e5ec04526f654f5cf27"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The changed-size rows rely on class-local order, pseudocode behavior, target signatures, and caller context rather than byte identity."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for GS2 scheduling, action loops, event-object cleanup, and class-list replacement",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 6,
+    "high_confidence_count": 6,
+    "new_context_anchor_count": 6,
+    "target_default_name_count": 0
+  }
+}

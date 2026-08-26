@@ -711,6 +711,13 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_script_dispatch_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+98. Clean IDA review added six high-confidence GS2 scheduler and cleanup
+    anchors for scheduled events, the main action loop, event-object unlinking,
+    ignored events, and class replacement. All six reopened successfully in
+    the v38 disposable copy. See
+    `artifacts/spectron_script_scheduler_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

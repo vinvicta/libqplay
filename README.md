@@ -512,6 +512,15 @@ evidence is in
 `artifacts/spectron_script_dispatch_manual_translation_anchors_20260826.json`,
 and the v37 database SHA-256 is recorded in the checkpoint.
 
+A thirty-sixth disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v38.i64`,
+adds six reviewed scheduler and cleanup anchors. They cover scheduled-event
+cancellation and polling, the main script action loop, event-object unlinking,
+ignored events, and class-list replacement. All six reopened successfully.
+The evidence is in
+`artifacts/spectron_script_scheduler_manual_translation_anchors_20260826.json`,
+and the v38 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
