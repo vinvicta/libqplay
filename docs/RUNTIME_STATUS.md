@@ -682,6 +682,14 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_resource_object_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+94. Clean IDA review added seven high-confidence GS2 script-machine anchors
+    for construction, destruction, executing-object setup, member resolution,
+    assignment, and comparison. All seven reopened successfully in the v34
+    disposable copy. The constructor and destructor rows account for the
+    compiler-generated C1, C2, D1, and D2 signatures. See
+    `artifacts/spectron_script_machine_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

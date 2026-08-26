@@ -472,6 +472,16 @@ All 11 reopened successfully. The evidence is in
 `artifacts/spectron_resource_object_manual_translation_anchors_20260826.json`,
 and the v33 database SHA-256 is recorded in the checkpoint.
 
+A thirty-second disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v34.i64`,
+adds seven reviewed GS2 script-machine anchors. They cover construction and
+destruction, executing-object setup, object-member resolution, assignment,
+and numeric comparison. The source and target pseudocode preserve the same
+machine state transitions, alias resolution, type dispatch, and comparison
+semantics. All seven reopened successfully. The evidence is in
+`artifacts/spectron_script_machine_manual_translation_anchors_20260826.json`,
+and the v34 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and

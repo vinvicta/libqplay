@@ -87,6 +87,8 @@ def main() -> None:
     parser.add_argument("--json-folder-verification", type=Path)
     parser.add_argument("--resource-object-anchors", type=Path)
     parser.add_argument("--resource-object-verification", type=Path)
+    parser.add_argument("--script-machine-anchors", type=Path)
+    parser.add_argument("--script-machine-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -966,6 +968,34 @@ def main() -> None:
         result["resource_object_anchors"] = resource_object
         result["interpretation"].append(
             "The thirty-first database revision also contains the separately reviewed resource comparator, link, alternative, and stream-materialization anchors."
+        )
+    script_machine = None
+    if args.script_machine_anchors or args.script_machine_verification:
+        if not args.script_machine_anchors or not args.script_machine_verification:
+            raise ValueError(
+                "script-machine anchors and script-machine verification must be supplied together"
+            )
+        script_machine_document = load(args.script_machine_anchors)
+        script_machine_verification = load(args.script_machine_verification)
+        if script_machine_document.get("artifact") != "spectron_script_machine_manual_translation_anchors_20260826":
+            raise ValueError("unexpected script-machine anchor artifact")
+        if not script_machine_verification.get("verified"):
+            raise ValueError("script-machine anchor reopen verification did not pass")
+        expected_script_machine = len(script_machine_document["anchors"])
+        if script_machine_verification["verified_name_count"] != expected_script_machine:
+            raise ValueError("script-machine verification count differs from artifact")
+        script_machine = {
+            "anchor_path": str(args.script_machine_anchors),
+            "anchor_sha256": sha256_path(args.script_machine_anchors),
+            "reopen_verification": str(args.script_machine_verification),
+            "anchor_count": expected_script_machine,
+            "verified_name_count": script_machine_verification["verified_name_count"],
+            "reopen_failure_count": script_machine_verification["failure_count"],
+        }
+    if script_machine is not None:
+        result["script_machine_anchors"] = script_machine
+        result["interpretation"].append(
+            "The thirty-second database revision also contains the separately reviewed GS2 script-machine construction, resolution, assignment, and comparison anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

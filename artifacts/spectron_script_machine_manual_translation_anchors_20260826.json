@@ -1,0 +1,308 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "IDA identifies the source body as the TScriptMachine destructor through its alternative D2 name; it clears the call stack, releases machine-owned lists and variables, decrements the machine count, and clears the string fields.",
+        "Spectron's target is the matching mTAogaaEip D1/D2 destructor body. It preserves the same owned-list cleanup order and machine-count decrement, with one additional target string wrapper clear.",
+        "The source and target retain the same 22-block control-flow shape and sit immediately before their respective reset-stack methods."
+      ],
+      "match_kind": "manual-script-machine-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x21886c",
+      "original_metrics": {
+        "basic_block_count": 22,
+        "instruction_count": 81,
+        "mnemonic_hash": "8addcdd9441ab87511bdd02b82a2947376dad6b9a430c3aa083b9b2b7a6466ce",
+        "register_shape_hash": "21f3ccd025eec7f53bb4fcf599da9e5d064a717d3e8b0d06cf65d0b925a82529",
+        "shape_hash": "825daf8878632ed9bb01283de9fa50d84b5bd218c35c818c14bb71c9cb9d43d1",
+        "size": 324
+      },
+      "original_name": "TScriptMachine_TScriptMachine",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptMachine_TScriptMachine",
+      "semantic_match_already_present": false,
+      "source_basis": "script-machine destructor",
+      "spectron_current_name": "_ZN10mTAogaaEipD1Ev",
+      "spectron_default_name": false,
+      "spectron_ea": "0x21ff78",
+      "spectron_metrics": {
+        "basic_block_count": 22,
+        "instruction_count": 83,
+        "mnemonic_hash": "ed255ddd26c95560513378048405277927df8292deedc72cdc1371d22e09f7c5",
+        "register_shape_hash": "d8c1a2f9ec0562867ea4bb5a14b792cf1cefab1e4c72c0dd9dd7aba5d62c45d5",
+        "shape_hash": "0a328128aadf1f95dc44c73d4b293fa7eda7a892174de28dc7e6b105d290ada3",
+        "size": 332
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both constructors initialize the machine counters and stack-owned lists, create the parameter variable, set its type markers, and allocate its child list.",
+        "The source and target constructor bodies preserve the same one-block initialization structure and the same field offsets. Spectron's target carries the matching C1/C2 constructor signature."
+      ],
+      "match_kind": "manual-script-machine-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x218a3c",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 84,
+        "mnemonic_hash": "c5effdd99082a4c605329a4e78ae7b54d4a58988a008b1c321c19f0941ea5eff",
+        "register_shape_hash": "ca5429528a5fa3d3c6a9cd1560e51a2178aa13069b231628db8600bb3db24cea",
+        "shape_hash": "e83f143cdeef9f4df4971fad83307231251b5c2460e2bbee9149f8d6c8b81a47",
+        "size": 336
+      },
+      "original_name": "TScriptMachine_TScriptMachine_void",
+      "original_string_refs": [
+        "params"
+      ],
+      "proposed_name": "v18_TScriptMachine_TScriptMachine_void",
+      "semantic_match_already_present": false,
+      "source_basis": "script-machine constructor",
+      "spectron_current_name": "_ZN10mTAogaaEipC1Ev",
+      "spectron_default_name": false,
+      "spectron_ea": "0x220150",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 85,
+        "mnemonic_hash": "7043dcc0d1a4a60dddc974f06236c3ec9c0da94a91c87c76977725490ae1933c",
+        "register_shape_hash": "48a25e16259f204f46f3aab386c725d752a8ba4f2809c39ca58705a2586eb3bc",
+        "shape_hash": "7071603247dc370cf8eacc0d11daa0874258db57d5e616b17c513aa500662183",
+        "size": 340
+      },
+      "spectron_string_refs": [
+        "params"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both helpers copy the current script name into the machine's string field, set the executing and active object pointers to the supplied variable, and save the parent machine pointer.",
+        "The target remains a short one-block method in the mTAogaaEip execution-machine class and preserves the same three state assignments."
+      ],
+      "match_kind": "manual-script-machine-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x218b8c",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 17,
+        "mnemonic_hash": "1ba4589a012d9f3c76ca921e6d8a2dbe785aa79b2233dda55d3d0b5b0bff596b",
+        "register_shape_hash": "11a8436cba35bccc2af44b97971d3a9a3a777b0e830537101552cdf4b99fd3d3",
+        "shape_hash": "ed03d18c7a9194de4eecc769c94aab6071e66c87903728211feb60213f681194",
+        "size": 68
+      },
+      "original_name": "TScriptMachine_setExecutingObject_TGraalVar_TString_const_TScriptMachine",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptMachine_setExecutingObject_TGraalVar_TString_const_TScriptMachine",
+      "semantic_match_already_present": false,
+      "source_basis": "executing-object and script-name setup",
+      "spectron_current_name": "_ZN10mTAogaaEip10RGsmPaPKvPEP10G0gxgajWBwRK10C8THgaTQxFPS_",
+      "spectron_default_name": false,
+      "spectron_ea": "0x2202a4",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 22,
+        "mnemonic_hash": "7bf3ba1361aa7d8ed3e66d35d181a846fd4193ff6a56d4dbe3725f06cdb54eb3",
+        "register_shape_hash": "099355516b447f477010ce6c3daeb83f9dd543e4531fc1d002f10dfb125fa922",
+        "shape_hash": "a30f56ed13d105a3783c1834aa9166354021a71db342fdcbe6ef9115cf663ef0",
+        "size": 88
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both resolve a property or variable through an object, then search object fields, temporary and parameter variables, this and player aliases, class objects, joined classes, event objects, and the active or universe fallback paths.",
+        "The target preserves the same special names including temp, params, this, thiso, player, playero, level, join, leave, serverr, client, and clientr, with the same property and variable output parameters.",
+        "The target is the large mTAogaaEip resolver immediately before the target stack-entry helpers. Its added size comes from target string and hash wrappers, not a different role."
+      ],
+      "match_kind": "manual-script-machine-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x218e98",
+      "original_metrics": {
+        "basic_block_count": 140,
+        "instruction_count": 631,
+        "mnemonic_hash": "7b8ad2cda9b9d59e2eb2555b8b01f67c5f314e4c1a13483319c1aca02ee89729",
+        "register_shape_hash": "5988d16811497e6a9bce869921e2642d6ed632cf13fb00d773779d3c01d9a434",
+        "shape_hash": "b60088e676b655fc2aa11b2f7378f64fe8fec6abeeaec7e6c2fcd02fa187f643",
+        "size": 2572
+      },
+      "original_name": "TScriptMachine_resolveObjectMember_TGraalVar_TString_const_TScriptProperty_TGraalVar_bool",
+      "original_string_refs": [
+        "client",
+        "clientr",
+        "join",
+        "leave",
+        "level",
+        "params",
+        "player",
+        "playero",
+        "serverr",
+        "temp",
+        "this",
+        "thiso"
+      ],
+      "proposed_name": "v18_TScriptMachine_resolveObjectMember_TGraalVar_TString_const_TScriptProperty_TGraalVar_bool",
+      "semantic_match_already_present": false,
+      "source_basis": "script object-member resolution",
+      "spectron_current_name": "_ZN10mTAogaaEip10xxpwPaW5SXEP10G0gxgajWBwRK10CanTfaz6bZPP10cWWYfaxbT2PS1_b",
+      "spectron_default_name": false,
+      "spectron_ea": "0x2205c4",
+      "spectron_metrics": {
+        "basic_block_count": 176,
+        "instruction_count": 823,
+        "mnemonic_hash": "eee0aeb53cef8b2f29d98ff1489f2deded3337923a38d053959b3c434a16d9a9",
+        "register_shape_hash": "a9f60c040f598730d19564bb076db30a3931983f96a901abcd0c8505b73f0bc2",
+        "shape_hash": "12ff2d537f5655e7c5c03fc2c0dba495821f0b1a65bb6cabb328f475b56eceec",
+        "size": 3392
+      },
+      "spectron_string_refs": [
+        "client",
+        "clientr",
+        "join",
+        "leave",
+        "level",
+        "params",
+        "player",
+        "playero",
+        "serverr",
+        "temp",
+        "this",
+        "thiso"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both pop the assignment frame, resolve the destination and value stack entries, and dispatch string, float, integer, or object writes through either a property or a variable virtual method.",
+        "The target retains the same 29-block control-flow shape and the same value-type branches. Its additional instructions materialize target string temporaries for string assignment."
+      ],
+      "match_kind": "manual-script-machine-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x21a3b0",
+      "original_metrics": {
+        "basic_block_count": 29,
+        "instruction_count": 156,
+        "mnemonic_hash": "4457f7e7be76ae4f69ddff7e6a7f156a11ca2171d6519fbeed7e73bc118095fc",
+        "register_shape_hash": "5033b603040ff4ea92d577c56a8b3060ba07f4eac63ba61236d37ddb645e2b5f",
+        "shape_hash": "4d9e58ddd4cb5f2df0a293f56c4239a043dbf0e910041e5d40cce43f566519d8",
+        "size": 624
+      },
+      "original_name": "TScriptMachine_assign_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptMachine_assign_void",
+      "semantic_match_already_present": false,
+      "source_basis": "script value assignment",
+      "spectron_current_name": "_ZN10mTAogaaEip6assignEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x221ef8",
+      "spectron_metrics": {
+        "basic_block_count": 29,
+        "instruction_count": 166,
+        "mnemonic_hash": "588d24c469f94a4119e1276fad6406931a11a44405d4a42c16b6faae5c041bab",
+        "register_shape_hash": "47d5ab667661a57b4b1869e6d79f2020ba4ec447ae29e8c8e1878d7e1b74b4a2",
+        "shape_hash": "6d274acaacc5ba2edff6b5fede1fe27cc1720ef9ec2579fb564e7eb85af86d38",
+        "size": 664
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both resolve and pop the two comparison operands, then handle string, numeric, and object-backed values with the same tolerance for float comparison and the same three-way return convention.",
+        "The target preserves the 36-block comparison structure and the source's type-pair dispatch, while target string wrappers expand the body."
+      ],
+      "match_kind": "manual-script-machine-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x21a6a8",
+      "original_metrics": {
+        "basic_block_count": 36,
+        "instruction_count": 128,
+        "mnemonic_hash": "f4b83ab1d773df929bb250ac1195bc48298347d5aec94aff16689f34525726a3",
+        "register_shape_hash": "db4cb6891a3957e96fdcf82ded41d47f6995722a411b3fbf482a5e4b8469f14a",
+        "shape_hash": "9738736bdec15a879b3fa55b3287d18adef300784b7640fcebc9ae573e31bfcd",
+        "size": 512
+      },
+      "original_name": "TScriptMachine_compare_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptMachine_compare_void",
+      "semantic_match_already_present": false,
+      "source_basis": "script value comparison",
+      "spectron_current_name": "_ZN10mTAogaaEip7compareEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x222218",
+      "spectron_metrics": {
+        "basic_block_count": 36,
+        "instruction_count": 175,
+        "mnemonic_hash": "3b3a6ccc45efb8f4e49129dbd08d1f101a265ae51eb9ebd73094de89b698893d",
+        "register_shape_hash": "e0432d96a878087ba5190d812d949c7f676a26f011785019bd3665320aac8c75",
+        "shape_hash": "d8012cc4b71c0a15d46ce86f6228fa93e71545b7ada246bb129a3f8da2fde973",
+        "size": 700
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both resolve the current stack value, convert a string value when needed, compare it with the supplied double using the same tolerance, and return -1, 0, or 1 semantics.",
+        "The target is the adjacent mTAogaaEip double-taking comparison helper and retains the same nested type branches."
+      ],
+      "match_kind": "manual-script-machine-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x21a8b0",
+      "original_metrics": {
+        "basic_block_count": 12,
+        "instruction_count": 54,
+        "mnemonic_hash": "1988ead686e6c71876967bc7078572fb00e2c096241e79a0e4171fa7f07a212a",
+        "register_shape_hash": "aadb7dc2797108b170781ddbb40d8aecad1bce8a3213ac17978e5f05808821aa",
+        "shape_hash": "4d07ecfcb1b1c1606700540b6790da9de626a80a6010f8193aa3a78ec6daf8dc",
+        "size": 216
+      },
+      "original_name": "TScriptMachine_compareFloat_double",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptMachine_compareFloat_double",
+      "semantic_match_already_present": false,
+      "source_basis": "script value versus float comparison",
+      "spectron_current_name": "_ZN10mTAogaaEip10Z9kTPa5pagEd",
+      "spectron_default_name": false,
+      "spectron_ea": "0x2224e0",
+      "spectron_metrics": {
+        "basic_block_count": 13,
+        "instruction_count": 72,
+        "mnemonic_hash": "8fa085eb857492af27eae7bd2490058e7aaeb52039c81ab1219069c745ecfbd6",
+        "register_shape_hash": "65d8ed7439b64ca4f482bc40a4aa437cf4ba854fbe8aa0ef95532a07585bef99",
+        "shape_hash": "34d56d6361748cd3c15b54587ac28eef1c155b57e1ea5eff05d2d49d6ea59454",
+        "size": 288
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_script_machine_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v3.json",
+    "spectron_features_sha256": "031afed73611783e0b16be71009e20118fc90a56e5d03e5ec04526f654f5cf27"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The source destructor's alternative D2 name and the target D1/D2 pair are treated as one compiler-generated destructor body."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for GS2 script-machine construction, resolution, assignment, and comparison",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 7,
+    "high_confidence_count": 7,
+    "new_context_anchor_count": 7,
+    "target_default_name_count": 0
+  }
+}
