@@ -62,6 +62,9 @@ def main():
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
+    spectron_safe_runtime = load_json(
+        "artifacts/spectron_webtop_safe_runtime_20260826.json"
+    )
 
     checks = []
 
@@ -835,6 +838,27 @@ def main():
     check("Spectron runtime fault address", spectron_runtime["observed"]["fault_address"], "0x0")
     check("Spectron runtime faulting address", spectron_runtime["static_correlation"]["faulting_ea"], "0x84348")
     check("Spectron runtime static correlation", spectron_runtime["static_correlation"]["correlation_status"], "confirmed-by-IDA")
+    check(
+        "Spectron safe runtime artifact",
+        spectron_safe_runtime["artifact"],
+        "spectron_webtop_safe_runtime_20260826",
+    )
+    check("Spectron safe runtime network audit", spectron_safe_runtime["network_audited"], False)
+    check("Spectron safe runtime network marker", spectron_safe_runtime["network_contacted"], None)
+    check(
+        "Spectron safe runtime APK hash",
+        spectron_safe_runtime["inputs"]["output_apk_sha256"],
+        "d8b44281f2c2a3e8ab6f40358e28d017052a967cdf2a5b9b0c3383535ef07de3",
+    )
+    check(
+        "Spectron safe runtime library hash",
+        spectron_safe_runtime["inputs"]["output_libxposed_sha256"],
+        "ba6023c42e501c9f1dae17f7d65973d09b399f4f4c8f1acf1e43487b1b01a50c",
+    )
+    check("Spectron safe runtime process", spectron_safe_runtime["observed"]["process_alive_at_check"], True)
+    check("Spectron safe runtime fatal crash", spectron_safe_runtime["observed"]["fatal_crash_observed"], False)
+    check("Spectron safe runtime world", spectron_safe_runtime["observed"]["world_rendered"], False)
+    check("Spectron safe runtime patch count", len(spectron_safe_runtime["patches"]), 3)
 
     for document in (
         overlay,

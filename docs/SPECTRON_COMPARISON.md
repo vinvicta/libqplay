@@ -272,6 +272,26 @@ and it does not establish a playable-world result. The exact observation and
 the static correlation are in
 `artifacts/spectron_runtime_crash_control_20260826.json`.
 
+To isolate that fault, I built a private signed control with
+`tools/build_spectron_webtop_safe_apk.py`. It replaces only the three
+conditional branches that select `crash`, `freeze`, and `abort` with jumps to
+the next command comparison. The qplay libraries and the `load_menu`,
+`setscript`, and `gs2call` branches are unchanged. The control APK has SHA-256
+`d8b44281f2c2a3e8ab6f40358e28d017052a967cdf2a5b9b0c3383535ef07de3`, and its
+patched ARM64 `libxposed.so` has SHA-256
+`ba6023c42e501c9f1dae17f7d65973d09b399f4f4c8f1acf1e43487b1b01a50c`.
+
+On the same emulator, the safe control stayed alive after Start and reached
+the qplay messages `GraalClassic has been activated!`, `Initialized OpenGL`,
+`Connecting to the login server...`, two `Serverwarp...` messages, and
+`Connected.` The custom green menu remained visible and no playable world was
+rendered during the observation window. This is a useful isolation result:
+the destructive WebTop bridge command is a real blocker, but disabling it is
+not by itself the game-entry fix. Network contact was not independently
+audited. The build and runtime record is in
+`artifacts/spectron_webtop_safe_runtime_20260826.json`; the standalone byte
+patch is reproducible with `tools/patch_spectron_webtop_safe_commands.py`.
+
 ## What this changes for the original client
 
 The original client remains the source of truth for the 1.8 protocol. Its

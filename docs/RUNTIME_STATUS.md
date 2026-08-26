@@ -449,6 +449,16 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_manual_translation_anchors_20260826.json`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+62. A private signed Spectron control disabled only the ARM64 WebTop
+    branches for `crash`, `freeze`, and `abort`. After Start, its process
+    remained alive and qplay reached activation, OpenGL initialization,
+    login-server connection, two server-warps, and Connected. The custom menu
+    still remained visible and no playable world rendered during the bounded
+    observation window. This isolates the intentional WebTop death but does
+    not solve the remaining game-entry path. The APK hash is
+    `d8b44281f2c2a3e8ab6f40358e28d017052a967cdf2a5b9b0c3383535ef07de3`.
+    See `artifacts/spectron_webtop_safe_runtime_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

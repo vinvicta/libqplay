@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "artifact": "spectron_webtop_safe_runtime_20260826",
+  "scope": "Local emulator runtime control using the supplied Spectron APK with only the three destructive WebTop branches disabled",
+  "network_contacted": null,
+  "network_audited": false,
+  "network_scope": "The emulator had ordinary networking enabled. This control records qplay milestones but does not identify or validate a production endpoint.",
+  "inputs": {
+    "input_apk_sha256": "5b10289ad2b67fba77f5f4159d51cdbeaf4ca2710fb1459da69c8d4b1af5149c",
+    "output_apk_sha256": "d8b44281f2c2a3e8ab6f40358e28d017052a967cdf2a5b9b0c3383535ef07de3",
+    "output_libxposed_sha256": "ba6023c42e501c9f1dae17f7d65973d09b399f4f4c8f1acf1e43487b1b01a50c",
+    "apk_builder": "tools/build_spectron_webtop_safe_apk.py",
+    "patch_tool": "tools/patch_spectron_webtop_safe_commands.py",
+    "emulator": "Android API 36 x86_64 with ARM64 native translation",
+    "adb_serial": "emulator-5554",
+    "package": "com.quattroplay.GraalClassiC",
+    "activity": "com.quattroplay.GraalClassic.QPlayActivity"
+  },
+  "procedure": {
+    "package_install": "The previously installed test package was fully uninstalled because its certificate differed from the local diagnostic signing key. The supplied APK file was not modified.",
+    "launch": "Start the package with QPlayActivity.",
+    "tap_coordinates": [
+      1200,
+      650
+    ],
+    "observation_window_seconds": 36
+  },
+  "observed": {
+    "process_alive_at_check": true,
+    "foreground_activity": "com.quattroplay.GraalClassiC/com.quattroplay.GraalClassic.QPlayActivity",
+    "fatal_crash_observed": false,
+    "qplay_milestones": [
+      "GraalClassic has been activated!",
+      "Initialized OpenGL.",
+      "Connecting to the login server...",
+      "Serverwarp...",
+      "Serverwarp...",
+      "Connected.",
+      "New GUI Guilds Active!"
+    ],
+    "screen_state": "The custom green Graal Classic menu remained visible with Edit Profile and Start.",
+    "world_rendered": false,
+    "screenshot_sha256": "41bc7965d097ca7341660e2ff5cbbd3ea7709fa78f5e9727a8fa27aa2f696423"
+  },
+  "patches": [
+    {
+      "command": "crash",
+      "file_offset": "0x8433c",
+      "original": "e0000035",
+      "replacement": "07000014",
+      "target_after_skip": "0x84358"
+    },
+    {
+      "command": "freeze",
+      "file_offset": "0x84378",
+      "original": "80000035",
+      "replacement": "04000014",
+      "target_after_skip": "0x84388"
+    },
+    {
+      "command": "abort",
+      "file_offset": "0x843a8",
+      "original": "40010035",
+      "replacement": "0a000014",
+      "target_after_skip": "0x843d0"
+    }
+  ],
+  "interpretation": [
+    "The safe command control removes the previously confirmed WebTop SIGSEGV and leaves the native process alive through the observed qplay connection milestones.",
+    "The control did not render a playable world during the observation window, so it isolates the crash but does not solve the remaining menu or game-entry behavior.",
+    "The qplay Connected log is a local runtime observation only. Network contact and live-service compatibility were not independently audited."
+  ]
+}

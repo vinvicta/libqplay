@@ -220,6 +220,14 @@ come from qplay. This was not a no-network or playable-world test, and the
 observation is recorded in
 `artifacts/spectron_runtime_crash_control_20260826.json`.
 
+A private signed Spectron control then disabled only the ARM64 WebTop
+`crash`, `freeze`, and `abort` branches. The process stayed alive through
+qplay activation, OpenGL setup, login-server connection, two server-warps,
+and Connected, but the custom menu remained visible and no playable world
+rendered. This isolates the intentional bridge crash without claiming that
+the game-entry path is fixed. The control APK and runtime record are
+documented in `artifacts/spectron_webtop_safe_runtime_20260826.json`.
+
 I also made a second local handoff copy directly from the active desktop IDA
 snapshot. The source snapshot hash is
 `56da88101fe904ca298dcadf31e90433a69c43818c681ccb72364c66ac99eaa4`, and the
@@ -311,6 +319,8 @@ proves the local native TLS path, not a current live certificate or service.
   close-and-reopen check for the persisted Spectron IDA copy.
 * `artifacts/spectron_runtime_crash_control_20260826.json` records the local
   WebTop crash-branch observation and its IDA correlation.
+* `artifacts/spectron_webtop_safe_runtime_20260826.json` records the bounded
+  runtime control after disabling the three destructive WebTop branches.
 * `docs/TESTING.md` describes local-only reproduction without contacting a
   live game service.
 * `artifacts/helper_toolchain_replay.json` records the verified HexaParser and
@@ -520,6 +530,9 @@ proves the local native TLS path, not a current live certificate or service.
   `tools/ida_apply_spectron_translation.py` and
   `tools/ida_apply_spectron_manual_anchors.py` write separate disposable IDA
   copies, while the matching verification scripts reopen and check them.
+  `tools/patch_spectron_webtop_safe_commands.py` and
+  `tools/build_spectron_webtop_safe_apk.py` build the private WebTop-safe
+  runtime control without changing the supplied APK.
   `tools/decode_game_server_tls_certificate.py` decodes the separate
   game-server certificate from the recovered connector script without opening
   a socket. `tools/encode_game_server_tls_certificate.py` prepares a

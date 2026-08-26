@@ -2066,6 +2066,24 @@ audited, so it is not a no-network control and does not establish a playable
 world. The structured record is
 `artifacts/spectron_runtime_crash_control_20260826.json`.
 
+To separate the crash from the rest of the mod, I built a private signed
+control with `tools/build_spectron_webtop_safe_apk.py`. It changes only the
+three ARM64 `libxposed.so` branches that select `crash`, `freeze`, and
+`abort`, making each skip to the next dispatcher comparison. The qplay
+library and the other three WebTop command branches remain unchanged.
+
+The control APK SHA-256 is
+`d8b44281f2c2a3e8ab6f40358e28d017052a967cdf2a5b9b0c3383535ef07de3`, and its
+patched ARM64 hook library SHA-256 is
+`ba6023c42e501c9f1dae17f7d65973d09b399f4f4c8f1acf1e43487b1b01a50c`.
+After Start, the process stayed alive and qplay logged activation, OpenGL
+initialization, login-server connection, two server-warps, and Connected.
+The custom green menu remained visible, so this control isolates the
+intentional crash without proving game entry or a playable world. The
+emulator had ordinary networking enabled, but network contact was not
+independently audited. The structured record is
+`artifacts/spectron_webtop_safe_runtime_20260826.json`.
+
 ## Spectron semantic translation pass
 
 The supplied Spectron ARM64 library is a separate 2.2 rebuild. Its
