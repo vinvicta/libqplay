@@ -29,8 +29,8 @@
     "default_sub_function_count": 1843,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v9.i64",
-    "sha256": "1e63b822e0d9cd8d9d1ea7f3db5fe03e4b8dbbaf451d22fae6784106c4c34e83"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v10.i64",
+    "sha256": "ef32e71f5dda36f208fe2e61f08f1dbf849e12cc1b223c3d9b2af19e408d6b92"
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
@@ -50,7 +50,8 @@
     "The sixth database revision also contains the separately reviewed download-queue, update-request, server-modify, and image-checksum context anchors.",
     "The seventh database revision also contains the separately reviewed client action packet serializer anchors.",
     "The eighth database revision also contains the separately reviewed remaining client outbound packet serializer anchors.",
-    "The ninth database revision also contains the separately reviewed resource matching, stream, and game-file resolution anchors."
+    "The ninth database revision also contains the separately reviewed resource matching, stream, and game-file resolution anchors.",
+    "The tenth database revision also contains the separately reviewed client script bridge anchors."
   ],
   "manual_anchors": {
     "anchor_count": 4,
@@ -87,6 +88,14 @@
   },
   "schema_version": 1,
   "scope": "persisted high-confidence 1.8-to-Spectron ARM64 semantic labels",
+  "script_bridge_anchors": {
+    "anchor_count": 13,
+    "anchor_path": "artifacts/spectron_script_bridge_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "076d2e448bc9c6bf942a2b7dc812efb2c20792fc981481ff153b926c3a4258f7",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_script_bridge_anchor_verification_20260826.json",
+    "verified_name_count": 13
+  },
   "translation": {
     "ambiguous_functions": 1019,
     "high_confidence_applied": 3641,

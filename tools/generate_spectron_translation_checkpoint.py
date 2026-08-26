@@ -43,6 +43,8 @@ def main() -> None:
     parser.add_argument("--client-outbound-verification", type=Path)
     parser.add_argument("--resource-anchors", type=Path)
     parser.add_argument("--resource-verification", type=Path)
+    parser.add_argument("--script-bridge-anchors", type=Path)
+    parser.add_argument("--script-bridge-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -306,6 +308,34 @@ def main() -> None:
         result["resource_anchors"] = resource
         result["interpretation"].append(
             "The ninth database revision also contains the separately reviewed resource matching, stream, and game-file resolution anchors."
+        )
+    script_bridge = None
+    if args.script_bridge_anchors or args.script_bridge_verification:
+        if not args.script_bridge_anchors or not args.script_bridge_verification:
+            raise ValueError(
+                "script-bridge anchors and script-bridge verification must be supplied together"
+            )
+        script_bridge_document = load(args.script_bridge_anchors)
+        script_bridge_verification = load(args.script_bridge_verification)
+        if script_bridge_document.get("artifact") != "spectron_script_bridge_manual_translation_anchors_20260826":
+            raise ValueError("unexpected script-bridge anchor artifact")
+        if not script_bridge_verification.get("verified"):
+            raise ValueError("script-bridge anchor reopen verification did not pass")
+        expected_script_bridge = len(script_bridge_document["anchors"])
+        if script_bridge_verification["verified_name_count"] != expected_script_bridge:
+            raise ValueError("script-bridge verification count differs from artifact")
+        script_bridge = {
+            "anchor_path": str(args.script_bridge_anchors),
+            "anchor_sha256": sha256_path(args.script_bridge_anchors),
+            "reopen_verification": str(args.script_bridge_verification),
+            "anchor_count": expected_script_bridge,
+            "verified_name_count": script_bridge_verification["verified_name_count"],
+            "reopen_failure_count": script_bridge_verification["failure_count"],
+        }
+    if script_bridge is not None:
+        result["script_bridge_anchors"] = script_bridge
+        result["interpretation"].append(
+            "The tenth database revision also contains the separately reviewed client script bridge anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
