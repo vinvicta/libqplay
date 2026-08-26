@@ -27,11 +27,11 @@ with explicit fields.
 The translation count is the number of ELF symbol records handled by the
 script. IDA's function survey also reports compiler-generated functions and
 other analysis-created entries, so its total function count is not expected
-to equal 8,601. After the follow-up semantic pass, the original ARM64
-database reports 11,272 total functions, 9,627 with names, and 1,645 default
-`sub_` names. Those figures describe the IDA database; the 8,601 count
-describes the reproducible symbol import and rename pass. The artifact contains
-467 cumulative evidence-backed labels in `artifacts/ida_semantic_labels.json`.
+to equal 8,601. The original pre-persistence inventory reports 11,272 total
+functions, 9,627 with names, and 1,645 default `sub_` names. Those figures
+describe the original IDA snapshot; the 8,601 count describes the reproducible
+symbol import and rename pass. The artifact contains 467 cumulative
+evidence-backed labels in `artifacts/ida_semantic_labels.json`.
 The IDB also retains the earlier inferred
 `TClient_setSSLParameters_scriptCallback` label outside that artifact. None of
 these semantic labels is part of the 8,601 original ELF symbol records.
@@ -93,11 +93,12 @@ member name. It also covers the network-thread entry point and the
 update-package labels use exact field offsets for the remaining undocumented
 members.
 
-## Complete function inventory
+## Complete pre-persistence function inventory
 
 The symbol table and the IDA function list are different sets. The ELF has
 8,601 surviving records, including 505 data records. Of those records, 8,096
-land on IDA functions. IDA's analysis adds 11,272 function starts in total:
+land on IDA functions. IDA's first analysis snapshot adds 11,272 function
+starts in total:
 
 | Function source | Count |
 | --- | ---: |
@@ -106,7 +107,7 @@ land on IDA functions. IDA's analysis adds 11,272 function starts in total:
 | Named by IDA but not backed by an ELF record | 1,531 |
 | Total IDA functions | 11,272 |
 
-The complete address-level inventory is in
+The complete address-level inventory for that first snapshot is in
 `symbols/libqplay.function_inventory.csv` and
 `symbols/libqplay.function_inventory.json`. Every row records the IDA name,
 address, segment, size, incoming-reference count, thunk and library flags,
@@ -122,6 +123,13 @@ URL, keyboard, and device-information bridges, plus
 `JNI_setVideoPlayerRectangle` at `0x242df0`. Two string-cache setters at
 `0x2401f4` and `0x240204` remain address-based `sub_` entries because their
 caller contract is not yet recovered.
+
+The later persisted copy is documented separately in
+`docs/IDA_RESIDUALS.md`. It contains 11,297 function starts after the
+`.eh_frame` callback boundaries were created and leaves 459 default names.
+The saved-copy hash and the close-and-reopen verification are in
+`artifacts/ida_translation_validation.json`; the exact residual list is in
+`artifacts/ida_residual_profile.json`.
 
 The sound script table is also partly recovered. The wrappers at
 `0xe1e0c`, `0xe22e8`, `0xe24c4`, `0xe2858`, and `0xe2a7c` now carry
@@ -178,13 +186,16 @@ cover `TSounds::isMusicPlaying` and the exported
 same registration block identified `TSounds_getMusicFilename` and the getter
 and setter for `TSounds::disabledsoundeffects`. The proposed names are still
 kept in
-`artifacts/native_callback_candidates.json` as candidates, not counted among
-the 467 applied labels, until the same names are written to IDA and included
-in a fresh inventory export. The candidate plan now contains 25 entries.
+`artifacts/native_callback_candidates.json` as a review artifact, not counted
+among the 467 imported semantic labels. The native callback and script-table
+passes were later written to the persisted disposable copy and verified there
+with a fresh inventory export. The active desktop database was not changed.
+The candidate plan at this stage contained 25 entries.
 The same sound table also contributes the short `stopsounds` and
 `setmusicvolume` wrappers, bringing the candidate plan to 27 entries.
 
-The server-level property and function tables are the next unapplied group.
+The server-level property and function tables were the next group in the
+review queue.
 `TServerLevelProperties::TServerLevelProperties` at `0x1a1128` registers six
 properties from `0x37fce0`, and eighteen script functions from `0x37fe00`.
 The property names decode to `height`, `isnopkzone`, `issparringzone`,
@@ -204,9 +215,9 @@ The short names `removeexplo` and `testexplo` are preserved exactly as stored
 by the client.
 
 The twenty-four proposed names are kept separate in
-`artifacts/native_callback_candidates.json`. They bring the review-only
-native candidate set to 51 entries. The current IDA inventory and the 467
-applied semantic labels remain unchanged until the bridge can accept and
+`artifacts/native_callback_candidates.json`. They brought the review native
+candidate set to 51 entries. The current active IDA inventory and the 467
+imported semantic labels remained unchanged until the bridge could accept and
 verify the batch.
 
 The player table is the next large group. Its constructor at `0x18b9bc`
@@ -221,9 +232,9 @@ name through the `TServerPlayer::setNick` jump.
 
 The six player callbacks decode to `isguildpm`, `ismasspm`, `pmswaiting`,
 `openexternalhistory`, `openexternalpm`, and `showprofile`. The pointer at
-`0x18aa68` is present in the table but still lacks an IDA function boundary in
-the saved inventory, so the application helper will report it for manual
-boundary recovery. The 74 new candidates bring the review-only set to 125.
+`0x18aa68` was present in the table but lacked an IDA function boundary in the
+saved inventory, so the application helper reported it for manual boundary
+recovery. The 74 new candidates brought the review set to 125.
 
 The NPC constructor at `0x183c18` adds 26 properties from `0x37be28` and 57
 script callbacks from `0x37c308`. Their names cover the NPC's health, image,
@@ -231,15 +242,15 @@ layer, collision, pelt, weapon, visibility, movement, carry, drawing,
 projectile, and show or hide behavior. The property table shares its hearts
 and HP accessors, and its image and sprite targets include two inherited ELF
 jumps that are already named. Four callback pointers, at `0x180e50`,
-`0x18402c`, `0x181d58`, and `0x1a4e98`, still need IDA function boundaries. The remaining
-37 property targets and all 57 script targets are recorded in
+`0x18402c`, `0x181d58`, and `0x1a4e98`, needed IDA function boundaries. The
+remaining 37 property targets and all 57 script targets are recorded in
 `artifacts/native_callback_candidates.json` under the two NPC groups.
 
 Several NPC records, including `peltwithbush`, `peltwithsign`, `peltwithvase`,
 `canbecarried`, and `showtext`, contain the old encoded-zero sentinel. The
 decoder repairs those bytes, while table position and callback context provide
 additional cross-checks for the spellings.
-The 94 new NPC candidates bring the review-only set to 219.
+The 94 new NPC candidates brought the review set to 219.
 
 The smaller server-object constructors provide another compact set of exact
 table-backed names. `TServerWeaponProperties` at `0x190ca4` registers
@@ -252,8 +263,9 @@ and `text`, with the class prefix retained in each proposed native name.
 `TServerCarryProperties` at `0x23d694` and `TServerLeapProperties` at
 `0x23fde8` do not call `TScriptProperty::addProps` and are recorded as
 metadata-only constructors. The seven new candidate groups add 23 unique
-native targets, raising the review-only set from 219 to 242. They remain
-unapplied until the IDA bridge is available.
+native targets, raising the review set from 219 to 242. They were later
+applied and verified in the persisted disposable copy; the applier remains
+review-only for other IDA databases.
 
 The projectile table at `0x37f6d8` contributes ten read-only names, including
 `x`, `y`, `z`, `angle`, `speed`, `zspeed`, `fromplayer`, `fromplayerid`, and
@@ -265,8 +277,9 @@ constructors are `TProjectileProperties` at `0x19ecac` and
 `TTilesLayerProperties` at `0x1a0df4` registers nine properties from
 `0x37fb00` and one function from `0x37fcb0`. The function name is
 `updateboard`; eight properties have setters and `layerindex` is read-only.
-These three groups add 35 unique targets, raising the review-only set to 277.
-They remain unapplied until the IDA bridge is available.
+These three groups add 35 unique targets, raising the review set to 277. They
+were later applied and verified in the persisted disposable copy; the applier
+remains review-only for other IDA databases.
 
 The complete registration scan is in `artifacts/script_table_inventory.json`.
 The scan finds 70 property tables and 62 function tables through direct calls to the
@@ -307,8 +320,8 @@ the semantic and callback passes, and 459 remain default `sub_` entries. The
 private exported inventory is not committed, but its hash and counts are
 recorded with the persisted database metadata.
 
-The saved function inventory has 1,645 IDA-created default `sub_` functions.
-`artifacts/symbol_translation_overlay.json` maps 886 of them to exact
+The original saved function inventory has 1,645 IDA-created default `sub_`
+functions. `artifacts/symbol_translation_overlay.json` maps 886 of them to exact
 script-table names and 271 to curated callback candidates, leaving 488
 untranslated entries as an explicit work list. The overlay is generated by
 `tools/generate_symbol_translation_overlay.py` and does not claim that any
@@ -333,16 +346,24 @@ do not have an independent source body to recover. One entry is a
 four-byte compiler-generated branch veneer to the exact
 `TCachedStream_get_minfilecachesize` callback at `0x1fa4fc`, and is not an
 independent source function. One more entry is the 20-byte AArch64 PLT
-resolver slot. That leaves 28 application or engine
-entries without a safe source-name recovery. The profile records the address
-and size of every one, but deliberately does not turn library-region
-membership into guessed source names. This keeps the complete symbol
-translation separate from the harder problem of naming compiler-created or
-static functions whose original names were never stored in the APK.
+resolver slot. The pre-persistence profile therefore leaves 28 application or
+engine entries without a safe source-name recovery. Those 28 now have
+high-confidence behavior-based role aliases in the persisted copy. IDA also
+reclassified the branch veneer as a named thunk while rebuilding that copy,
+leaving 459 default functions. The final address-level accounting is in
+`docs/IDA_RESIDUALS.md` and `artifacts/ida_residual_profile.json`.
 
-`tools/generate_unresolved_function_profile.py` rebuilds this report from the
-saved inventory, overlay, symbol export, and ELF section data. It is a
-triage aid for the next analysis pass, not an IDA rename script.
+The profile records the address and size of every original unresolved entry,
+but deliberately does not turn library-region membership into guessed source
+names. This keeps the complete symbol translation separate from the harder
+problem of naming compiler-created or static functions whose original names
+were never stored in the APK.
+
+`tools/generate_unresolved_function_profile.py` rebuilds this pre-persistence
+report from the saved inventory, overlay, symbol export, and ELF section data.
+It is a triage aid, not an IDA rename script. The final 459-entry persisted
+copy report is generated by `tools/generate_ida_residual_profile.py` and
+described in `docs/IDA_RESIDUALS.md`.
 
 A separate role-candidate artifact records 28 behavior-based aliases. The
 original four cover the profiler helpers at `0xf9028`, `0xf9060`, and
@@ -360,6 +381,8 @@ list before returning their results. These aliases are analysis roles, not
 recovered ELF names, and are not included in the applied semantic-label count.
 The generator verifies that the role list covers all 28 entries in the
 application or engine queue, with no missing or extra addresses.
+The roles were applied and verified in the persisted disposable copy; the
+candidate artifact remains review-only for the locked desktop database.
 `tools/generate_unresolved_function_candidates.py` rebuilds the artifact and
 `tools/ida_apply_unresolved_function_candidates.py` keeps the IDA step
 review-only.

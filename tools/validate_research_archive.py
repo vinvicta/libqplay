@@ -25,6 +25,7 @@ def main():
     candidates = load_json("artifacts/unresolved_function_candidates.json")
     script_tables = load_json("artifacts/script_table_inventory.json")
     ida_validation = load_json("artifacts/ida_translation_validation.json")
+    ida_residual = load_json("artifacts/ida_residual_profile.json")
     arm64_revalidation = load_json(
         "artifacts/arm64_diagnostic_apk_revalidation_20260825.json"
     )
@@ -210,6 +211,44 @@ def main():
         1211,
     )
 
+    check("IDA residual artifact", ida_residual["artifact"], "ida_persisted_residual_profile")
+    check("IDA residual network", ida_residual["network_contacted"], False)
+    check("IDA residual input hash", ida_residual["binary_sha256"], primary_hash)
+    check(
+        "IDA residual database hash",
+        ida_residual["database"]["sha256"],
+        "0306a53f164fc9f860f24eb248039a94172959053daa6464d4a1effe35026a89",
+    )
+    check("IDA residual function total", ida_residual["database"]["function_count"], 11297)
+    check(
+        "IDA residual default total",
+        ida_residual["remaining_default_sub_function_count"],
+        459,
+    )
+    check(
+        "IDA residual entry total",
+        len(ida_residual["residual_default_sub_functions"]),
+        459,
+    )
+    check(
+        "IDA residual role removal total",
+        ida_residual["applied_role_aliases"]["count"],
+        28,
+    )
+    check(
+        "IDA residual category partition",
+        sum(item["count"] for item in ida_residual["category_summary"]),
+        459,
+    )
+    check(
+        "IDA residual category names",
+        {item["category"] for item in ida_residual["category_summary"]}
+        & {"app_or_engine_unknown"},
+        set(),
+    )
+    residual_addresses = [item["ea"] for item in ida_residual["residual_default_sub_functions"]]
+    check("IDA residual address uniqueness", len(set(residual_addresses)), 459)
+
     check(
         "ARM64 revalidation artifact",
         arm64_revalidation["artifact"],
@@ -316,6 +355,7 @@ def main():
         script_tables,
         labels,
         ida_validation,
+        ida_residual,
         arm64_revalidation,
         spectron_signature,
         spectron_hooks,

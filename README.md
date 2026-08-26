@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The symbol pass is complete. The ARM64 IDA database contains 8,601 translated
-and applied names with zero rename failures:
+The exported-symbol translation pass is complete. The ARM64 IDA database
+contains 8,601 translated and applied ELF names with zero rename failures:
 
 | Kind | Count |
 | --- | ---: |
@@ -104,9 +104,11 @@ unverified.
 The expanded callback naming pass has also been exercised in IDA 9.3's
 IDALIB mode on a disposable copy of the database. It resolved and checked all
 277 curated native callback names, 886 bounded script-table names, 20
-`.eh_frame`-backed script callbacks, and 28 application or engine role names
-with zero mismatches. The pass added 25 function starts, including two
-splits where IDA had merged a callback into a larger neighboring function.
+`.eh_frame`-backed script callbacks, and 28 behavior-based application or
+engine role aliases with zero mismatches. These role aliases describe proven
+function behavior; they are not recovered original ELF source names. The pass
+added 25 function starts, including two splits where IDA had merged a callback
+into a larger neighboring function.
 This validates the addresses and names, but the desktop IDA session's active
 unpacked database was still locked, so its live database was not overwritten.
 The exact result is in `artifacts/ida_translation_validation.json`.
@@ -134,8 +136,8 @@ physical-device coverage. See
 `artifacts/arm64_diagnostic_apk_revalidation_20260825.json`.
 
 The game has not yet been verified against a live game server. The local test
-proves that the x86_64 native client and the patched ARM64 library can reach a
-rendered world through a bounded loopback responder. Live endpoint
+demonstrates that the x86_64 native client and the patched ARM64 library can
+reach a rendered world through a bounded loopback responder. Live endpoint
 availability, current package signing, account authentication, and physical
 ARM64-device behavior remain open.
 
@@ -172,6 +174,8 @@ proves the local native TLS path, not a current live certificate or service.
 * `docs/PROTOCOL.md` describes the connector and NewGraal wire formats.
 * `docs/LEVEL_CONTAINER.md` describes the encrypted `.code` level container.
 * `docs/SYMBOLS.md` explains the symbol export and naming policy.
+* `docs/IDA_RESIDUALS.md` accounts for every default function left in the
+  persisted IDA copy.
 * `docs/RUNTIME_STATUS.md` lists verified milestones and open blockers.
 * `docs/ARM64_RENDER_REPAIR.md` records the ARM64 loading-state experiments
   and the successful render-boundary diagnostic.
@@ -210,17 +214,21 @@ proves the local native TLS path, not a current live certificate or service.
 * `symbols/libqplay.symbols.json` is the machine-readable equivalent.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.
 * `symbols/libqplay.function_inventory.csv` and
-  `symbols/libqplay.function_inventory.json` cover all 11,272 IDA function
-  starts, including the 1,645 remaining analysis-created `sub_` entries that have no
-  surviving ELF name.
+  `symbols/libqplay.function_inventory.json` preserve the pre-persistence
+  inventory of all 11,272 IDA function starts, including the 1,645
+  analysis-created `sub_` entries that had no surviving ELF name at that point.
 * `symbols/libqplay.function_inventory.summary.json` records the input hash
-  and the boundary between translated symbols and IDA-created functions.
+  and the boundary between translated symbols and IDA-created functions in
+  that original inventory.
 * `artifacts/unresolved_function_profile.json` profiles the 488 default
-  `sub_` entries that still lack source names. It separates likely static
-  library internals, compiler-generated cleanup wrappers, init/fini array
-  entries, a compiler branch veneer, the PLT resolver slot, and the remaining
-  application or engine code. The current profile identifies 104 cleanup
-  wrappers and leaves 28 application or engine entries in the unresolved queue.
+  `sub_` entries in the pre-persistence snapshot that lacked source names. It
+  separates likely static library internals, compiler-generated cleanup
+  wrappers, init/fini array entries, a compiler branch veneer, the PLT resolver
+  slot, and the 28 application or engine entries that were later given role
+  aliases.
+* `artifacts/ida_residual_profile.json` accounts for the final 459 default
+  `sub_` entries in the persisted 11,297-function IDA copy. It records every
+  residual address and explains why no source name is claimed for it.
 * `artifacts/ida_semantic_labels.json` records 467 evidence-backed names
   applied to formerly unnamed login, file-download, handler-table, UI, TLS,
   HTTP, socket, animation, sound, network-thread, update-package, and JNI
@@ -232,9 +240,10 @@ proves the local native TLS path, not a current live certificate or service.
   database copy. The live desktop IDA database was not changed.
 * `artifacts/native_callback_candidates.json` records the next table-backed
   callback, static-state, sound-wrapper, and server-object names recovered from
-  the native library. The current review-only set contains 277 entries. These
-  remain clearly marked as candidates until they are applied to the IDA
-  database.
+  the native library. The current review set contains 277 entries. They remain
+  clearly marked as candidates in the artifact, while all 277 were applied and
+  verified in the persisted disposable IDA copy. The locked desktop database
+  was not modified.
 * `artifacts/script_table_inventory.json` records all 132 static registration
   calls, 1,455 declared property and function records, and 1,779 unique
   callback targets. It separates 886 exact bounded rename candidates from
@@ -248,10 +257,10 @@ proves the local native TLS path, not a current live certificate or service.
   `.eh_frame`-backed boundaries separately. The boundary pass also handles the
   two saved IDA ranges that contain an independently proven callback start.
   The decoder regression check is in `tools/test_script_table_inventory.py`.
-* `artifacts/symbol_translation_overlay.json` joins the saved 1,645 default
-  `sub_` functions with 886 exact script-table names and 271 curated callback
-  candidates. It leaves the remaining 488 default functions explicit instead
-  of assigning speculative names.
+* `artifacts/symbol_translation_overlay.json` joins the pre-persistence set of
+  1,645 default `sub_` functions with 886 exact script-table names and 271
+  curated callback candidates. It leaves the remaining 488 default functions
+  explicit instead of assigning speculative names.
 * `tools/generate_symbol_translation_overlay.py` rebuilds that overlay from
   the saved function, script-table, and candidate inventories.
 * `tools/generate_unresolved_function_profile.py` rebuilds the unresolved
@@ -260,13 +269,16 @@ proves the local native TLS path, not a current live certificate or service.
   role aliases for profiler, image-I/O, animation-lexer, spatial-query, UI,
   script-object, folder-loader, and JSON-parser helpers. All 28 are
   high-confidence role assignments, including the nearest-player comparator
-  cross-referenced from both nearest-player script wrappers. They remain
-  review-only until they are applied to the matching IDA database. The
+  cross-referenced from both nearest-player script wrappers. The candidate
+  artifact remains a review input for the locked desktop database, while all
+  28 aliases were applied and verified in the persisted disposable copy. The
   generator also checks that the 28 roles cover the complete application or
   engine queue in the unresolved profile.
 * `tools/generate_unresolved_function_candidates.py` rebuilds that candidate
   artifact, while `tools/ida_apply_unresolved_function_candidates.py` provides
   a review-only IDA applier.
+* `tools/generate_ida_residual_profile.py` derives the exact 459-entry
+  residual report after the role aliases and IDA thunk reclassification.
 * `tools/validate_research_archive.py` checks the published count partitions,
   input hashes, candidate coverage, and offline-only markers without needing
   IDA or a network connection.

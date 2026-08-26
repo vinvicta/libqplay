@@ -144,8 +144,9 @@ byte-for-byte comparison is equal. Decoding either copy with the original
 native key rule produces the same six-block historical bundle, including the
 malformed AlphaSSL PEM markers. The
 Spectron package therefore does not fix the expired connector trust chain by
-embedding a newer certificate. Any working behavior in that package must come
-from its separate routing, hook, package, or service logic.
+embedding a newer certificate. Any working behavior in that package could
+instead come from its separate routing, hook, package, or service logic. The
+static comparison does not establish which of those mechanisms is decisive.
 
 The connector signing key is not different either. The 360-character
 DES-wrapped public-key text following `PjosLg8D` is byte-for-byte identical
@@ -197,7 +198,10 @@ The visible UI reached a custom green menu with `Edit Profile` and `Start`.
 The same run logged failures writing some external scoped-storage files,
 including level files. Remote HTTP and HTTPS sockets were also observed, so
 the `127.0.0.1` string is not evidence of a self-contained offline server.
-A playable world was not verified for the modded package.
+This runtime observation is separate from the static URL extraction above:
+the analysis did not open the recovered WebTop URL or contact a remote service
+as part of the static comparison. A playable world was not verified for the
+modded package.
 
 ## What this changes for the original client
 
