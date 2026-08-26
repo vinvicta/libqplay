@@ -29,6 +29,9 @@ def main():
     arm64_revalidation = load_json(
         "artifacts/arm64_diagnostic_apk_revalidation_20260825.json"
     )
+    arm64_native_only = load_json(
+        "artifacts/arm64_native_only_original_script_replay_20260826.json"
+    )
     spectron_signature = load_json("artifacts/spectron_function_signature_match.json")
     spectron_hooks = load_json("artifacts/spectron_hook_analysis.json")
 
@@ -296,6 +299,37 @@ def main():
         True,
     )
     check(
+        "ARM64 native-only artifact",
+        arm64_native_only["artifact"],
+        "arm64_native_only_original_script_replay_20260826",
+    )
+    check("ARM64 native-only network", arm64_native_only["network_contacted"], False)
+    check(
+        "ARM64 native-only APK hash",
+        arm64_native_only["client"]["apk_sha256"],
+        "b1c52234b10fb5a4a2c6c58e85370ccab710b1c355574d295df30b5ed6edddcc",
+    )
+    check(
+        "ARM64 native-only original script",
+        arm64_native_only["client"]["connector_script_loading_clear_present"],
+        False,
+    )
+    check(
+        "ARM64 native-only render",
+        arm64_native_only["isolation_result"]["native_only_candidate_rendered"],
+        True,
+    )
+    check(
+        "ARM64 native-only direct clear not required",
+        arm64_native_only["isolation_result"]["direct_script_loading_clear_required_for_render"],
+        False,
+    )
+    check(
+        "ARM64 native-only screenshot",
+        arm64_native_only["render_result"]["screenshot_sha256"],
+        "fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e",
+    )
+    check(
         "IDA validation status",
         ida_validation["status"],
         "validated_persisted_on_disposable_copy",
@@ -357,6 +391,7 @@ def main():
         ida_validation,
         ida_residual,
         arm64_revalidation,
+        arm64_native_only,
         spectron_signature,
         spectron_hooks,
     ):

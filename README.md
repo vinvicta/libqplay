@@ -92,6 +92,15 @@ initialization path at `0x15ca7c`; with the corrected map fixture, it displays
 the same world through the normal render branch. The candidate still needs
 real ARM64-device and authorized live-service validation.
 
+A follow-up isolation run served the original 15,581-byte connector script
+without the direct script-level loading assignment. The same native candidate
+still rendered the world and HUD after the map, three level containers, image,
+and heartbeat path completed. This makes the native startup branch the leading
+local explanation for the visual transition. The direct script insertion is
+compatible with the VM and useful as a control, but it is not required for
+the observed local render. See
+`artifacts/arm64_native_only_original_script_replay_20260826.json`.
+
 The ARM64 IDA audit now identifies the local screen split more precisely. The
 native loading byte at `0x37a549` starts at `1`; the successful `classic`
 premium-option path skips the native clear at `0x15cac8`; and the packet-190
@@ -210,6 +219,9 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/arm64_diagnostic_apk_revalidation_20260825.json` records the
   fresh packaged-APK revalidation, including signature metadata, responder
   captures, fixture hashes, and the clean rendered-world result.
+* `artifacts/arm64_native_only_original_script_replay_20260826.json` records
+  the native-only loading-state isolation run with the original connector
+  script and its capture hashes.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.
 * `symbols/libqplay.symbols.json` is the machine-readable equivalent.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.

@@ -178,8 +178,8 @@ This is the short handoff view. The full reasoning and command history are in
     the screenshot SHA-256 is
     `fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`.
     Because two changes are present, this confirms compatibility of the
-    direct script patch but leaves the native branch as the variable tied to
-    the visual transition.
+    direct script patch but does not isolate the visual transition. A later
+    native-only run provides that isolation.
 32. The IDA ownership audit is now captured in
     `artifacts/loading_state_ownership.json`. It lists the three native getter
     call sites, the two post-startup setter paths, the `sigcheck` clear, the
@@ -333,6 +333,16 @@ This is the short handoff view. The full reasoning and command history are in
     remains a source-level cross-check rather than a runtime replacement. The
     Go module proxy was the only network used for this check. Details are in
     `artifacts/helper_toolchain_replay.json`.
+51. A follow-up ARM64-only isolation replay served the original 15,581-byte
+    connector script with no script-level loading clear. The native candidate
+    at `0x15ca7c` still completed two game connections, loaded the map, three
+    encrypted level containers, and `pics1.png`, kept heartbeat traffic alive,
+    and displayed the green tiled world, HUD, and status icons. Its screenshot
+    hash matched the combined replay at
+    `fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`.
+    This isolates the observed local visual transition to the native startup
+    branch. The full capture metadata is in
+    `artifacts/arm64_native_only_original_script_replay_20260826.json`.
 
 ## Not verified
 
@@ -367,10 +377,11 @@ emulator, and the earlier xchg handler-table patch and packet-182 hide
 hypothesis are closed as false leads. Packet 182 maps to the process or
 window-list path, while packet 190 reaches the connecting-window completion
 wrapper. The recovered source remains useful for review, but the clean
-HexaParser output did not reach the expected game port. The original bytecode
-does reach it after a direct script-level loading clear, which keeps the
-proven VM stream intact. That path currently proves network and resource
-progress only; its bounded screenshot still shows the title/loading artwork.
+HexaParser output did not reach the expected game port. The original VM
+stream reaches the full local resource path with its original connector
+script when the native startup candidate is present, and the rendered result
+was reproduced without the direct script-level loading clear. The direct
+script insertion remains a compatible control, not the isolated render fix.
 
 The ARM64 diagnostic run establishes a narrower result. Under the available
 x86_64 emulator, Android translated the ARM64 native code far enough to make

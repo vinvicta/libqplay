@@ -98,9 +98,21 @@ startup clear at `0x15ca7c`, the same translated ARM64 fixture displayed the
 green world field, HUD, and status icons. The script package, TLS path, RSA
 branch, and game responder were otherwise unchanged. Since the combined run
 contains two edits, it confirms that the direct script patch is compatible
-with the rendering candidate but does not replace the native ownership
-finding. The native branch remains the variable tied to the visible
-title-to-world transition in this test.
+with the rendering candidate but does not by itself isolate the visual
+transition.
+
+That isolation was completed in a follow-up run. The same native-only
+candidate was paired with the original 15,581-byte connector script, with no
+script-level loading assignment inserted. It still made both game
+connections, received the map, all three encrypted level containers, and
+`pics1.png`, continued heartbeat traffic, and displayed the green world,
+HUD, and status icons. The screenshot hash was again
+`fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`. This
+isolates the visible transition to the native startup branch at `0x15ca7c` in
+the tested local environment. The direct script insertion remains a
+compatible protocol experiment, but it is not required for the observed
+render result. Full capture metadata is in
+`artifacts/arm64_native_only_original_script_replay_20260826.json`.
 
 ## x86 diagnostic scope
 

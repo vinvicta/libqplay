@@ -1672,3 +1672,31 @@ The fresh hashes, record lengths, command result, and network scope are in
 separate from `tools/reverse_hexaparser_literals.py`: the first fixes syntax,
 while the second handles the observed same-line literal ordering for static
 comparison.
+
+## Native-only loading-state isolation
+
+The earlier rendered ARM64 replay combined two changes: the direct
+`onServerLogin` bytecode insertion and the native branch edit at `0x15ca7c`.
+That proved the script insertion was compatible, but it left an avoidable
+causal ambiguity. On 2026-08-26 I repeated the loopback test with the same
+ARM64 diagnostic library and the original 15,581-byte connector script. The
+script-level loading assignment was absent.
+
+The result reached the same two game connections, accepted the synthetic
+server-warp and connecting-window frames, requested `classiciphone.gmap`,
+three encrypted level containers, and `pics1.png`, and continued sending
+heartbeat packets. A screen capture taken while the second socket remained
+open again showed the green tiled world, player HUD, and status icons. The
+capture hash was
+`fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`, matching
+the combined run.
+
+This is the cleanest local separation so far. The native branch edit at
+`0x15ca7c`, which forces the existing clear at `0x15cac8`, is sufficient to
+leave the loading artwork in this environment. The direct six-byte script
+insertion remains a valid VM compatibility experiment, but it is not needed
+for the observed render transition. The test still used loopback responders,
+the x86_64 emulator's ARM64 translation layer, and synthetic cached assets, so
+it does not establish the intended production behavior. The exact package,
+script, capture, and screenshot hashes are in
+`artifacts/arm64_native_only_original_script_replay_20260826.json`.
