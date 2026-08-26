@@ -53,6 +53,8 @@ def main() -> None:
     parser.add_argument("--login-helper-verification", type=Path)
     parser.add_argument("--parse-wrapper-anchors", type=Path)
     parser.add_argument("--parse-wrapper-verification", type=Path)
+    parser.add_argument("--lookup-helper-anchors", type=Path)
+    parser.add_argument("--lookup-helper-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -456,6 +458,34 @@ def main() -> None:
         result["parse_wrapper_anchors"] = parse_wrapper
         result["interpretation"].append(
             "The fourteenth database revision also contains the separately reviewed client encryption-in tail-thunk anchor."
+        )
+    lookup_helper = None
+    if args.lookup_helper_anchors or args.lookup_helper_verification:
+        if not args.lookup_helper_anchors or not args.lookup_helper_verification:
+            raise ValueError(
+                "lookup-helper anchors and lookup-helper verification must be supplied together"
+            )
+        lookup_helper_document = load(args.lookup_helper_anchors)
+        lookup_helper_verification = load(args.lookup_helper_verification)
+        if lookup_helper_document.get("artifact") != "spectron_lookup_helper_manual_translation_anchors_20260826":
+            raise ValueError("unexpected lookup-helper anchor artifact")
+        if not lookup_helper_verification.get("verified"):
+            raise ValueError("lookup-helper anchor reopen verification did not pass")
+        expected_lookup_helper = len(lookup_helper_document["anchors"])
+        if lookup_helper_verification["verified_name_count"] != expected_lookup_helper:
+            raise ValueError("lookup-helper verification count differs from artifact")
+        lookup_helper = {
+            "anchor_path": str(args.lookup_helper_anchors),
+            "anchor_sha256": sha256_path(args.lookup_helper_anchors),
+            "reopen_verification": str(args.lookup_helper_verification),
+            "anchor_count": expected_lookup_helper,
+            "verified_name_count": lookup_helper_verification["verified_name_count"],
+            "reopen_failure_count": lookup_helper_verification["failure_count"],
+        }
+    if lookup_helper is not None:
+        result["lookup_helper_anchors"] = lookup_helper
+        result["interpretation"].append(
+            "The fifteenth database revision also contains the separately reviewed player and download lookup helper anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
