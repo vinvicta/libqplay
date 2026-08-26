@@ -4,7 +4,7 @@
   "categories": [
     {
       "category": "app_or_engine_unknown",
-      "count": 138,
+      "count": 135,
       "entries": [
         {
           "current_ida_name": "sub_E01D0",
@@ -815,28 +815,10 @@
           "ea": "0x23840c",
           "segment": ".text",
           "size": 16
-        },
-        {
-          "current_ida_name": "sub_246B50",
-          "ea": "0x246b50",
-          "segment": ".text",
-          "size": 612
-        },
-        {
-          "current_ida_name": "sub_24840C",
-          "ea": "0x24840c",
-          "segment": ".text",
-          "size": 4468
-        },
-        {
-          "current_ida_name": "sub_249580",
-          "ea": "0x249580",
-          "segment": ".text",
-          "size": 3920
         }
       ],
       "evidence": "No source name or safe library-region classification was recovered.",
-      "total_bytes": 18028
+      "total_bytes": 9028
     },
     {
       "category": "bzip2_static_internal",
@@ -2893,6 +2875,26 @@
       "total_bytes": 103880
     },
     {
+      "category": "minizip_static_internal",
+      "count": 2,
+      "entries": [
+        {
+          "current_ida_name": "sub_24840C",
+          "ea": "0x24840c",
+          "segment": ".text",
+          "size": 4468
+        },
+        {
+          "current_ida_name": "sub_249580",
+          "ea": "0x249580",
+          "segment": ".text",
+          "size": 3920
+        }
+      ],
+      "evidence": "0x24840c is shared by the central-directory APIs, while 0x249580 is called by unzOpenCurrentFile3; both are internal minizip helpers between exported APIs.",
+      "total_bytes": 8388
+    },
+    {
       "category": "plt0_resolver",
       "count": 1,
       "entries": [
@@ -2905,6 +2907,20 @@
       ],
       "evidence": "The first 20-byte .plt entry is the AArch64 resolver slot, not an imported function.",
       "total_bytes": 20
+    },
+    {
+      "category": "tomcrypt_des_static_internal",
+      "count": 1,
+      "entries": [
+        {
+          "current_ida_name": "sub_246B50",
+          "ea": "0x246b50",
+          "segment": ".text",
+          "size": 612
+        }
+      ],
+      "evidence": "0x246b50 is called by the exported DES and 3DES ECB routines and contains their shared 16-round block transform.",
+      "total_bytes": 612
     },
     {
       "category": "yajl_static_internal",
@@ -3022,11 +3038,11 @@
   "category_summary": [
     {
       "category": "app_or_engine_unknown",
-      "count": 138,
+      "count": 135,
       "evidence": "No source name or safe library-region classification was recovered.",
       "first_ea": "0xe01d0",
-      "last_ea": "0x249580",
-      "total_bytes": 18028
+      "last_ea": "0x23840c",
+      "total_bytes": 9028
     },
     {
       "category": "bzip2_static_internal",
@@ -3085,12 +3101,28 @@
       "total_bytes": 103880
     },
     {
+      "category": "minizip_static_internal",
+      "count": 2,
+      "evidence": "0x24840c is shared by the central-directory APIs, while 0x249580 is called by unzOpenCurrentFile3; both are internal minizip helpers between exported APIs.",
+      "first_ea": "0x24840c",
+      "last_ea": "0x249580",
+      "total_bytes": 8388
+    },
+    {
       "category": "plt0_resolver",
       "count": 1,
       "evidence": "The first 20-byte .plt entry is the AArch64 resolver slot, not an imported function.",
       "first_ea": "0xd2170",
       "last_ea": "0xd2170",
       "total_bytes": 20
+    },
+    {
+      "category": "tomcrypt_des_static_internal",
+      "count": 1,
+      "evidence": "0x246b50 is called by the exported DES and 3DES ECB routines and contains their shared 16-round block transform.",
+      "first_ea": "0x246b50",
+      "last_ea": "0x246b50",
+      "total_bytes": 612
     },
     {
       "category": "yajl_static_internal",
@@ -3206,6 +3238,23 @@
       "evidence": "The entries are inside the CyaSSL certificate, crypto, and TLS implementation region.",
       "family": "CyaSSL and bundled crypto",
       "start": "0x2b6384"
+    },
+    {
+      "additional_addresses": [
+        "0x246b50"
+      ],
+      "category": "tomcrypt_des_static_internal",
+      "evidence": "0x246b50 is called by the exported DES and 3DES ECB routines and contains their shared 16-round block transform.",
+      "family": "LibTomCrypt DES"
+    },
+    {
+      "additional_addresses": [
+        "0x24840c",
+        "0x249580"
+      ],
+      "category": "minizip_static_internal",
+      "evidence": "0x24840c is shared by the central-directory APIs, while 0x249580 is called by unzOpenCurrentFile3; both are internal minizip helpers between exported APIs.",
+      "family": "minizip"
     }
   ],
   "source_artifacts": {

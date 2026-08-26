@@ -1404,3 +1404,29 @@ encrypted test containers. It does not establish that the local cache matches
 the APK's original server revision, and it does not prove live authentication.
 The packet, fixture, and capture hashes are kept in
 `artifacts/arm64_local_fixture_render_replay.json`.
+
+## Unresolved helper follow-up
+
+The unresolved profile was refined with a second offline disassembly pass. The
+small helper at `0xe01a0` is called by `gpc_tristrip_clip` and formats the GPC
+allocation failure message for tristrip node creation. The pass also isolated
+the shared LibTomCrypt DES block transform at `0x246b50`, which is called by
+the exported DES and 3DES ECB routines, and two minizip internals at
+`0x24840c` and `0x249580`, which sit behind the central-directory and current
+file APIs. These addresses are categorized by library family, but their
+original static source names were not present in the ELF.
+
+Four application or engine helpers were strong enough to record as role
+candidates. `0xf9028` compares profiler entries by non-sub total time,
+`0xf9060` recursively formats the profiler function tree, and `0xf9944`
+recursively clears the profiler tree after the dump. The helper at `0x213088`
+is the recursive worker used by `TGraalVar::loadFolder`; it enumerates folders,
+creates `TGraalVar` entries, and records file size and folder state.
+
+`artifacts/unresolved_function_candidates.json` stores these four proposed
+roles with their call-site evidence, function sizes, and input hash.
+`tools/generate_unresolved_function_candidates.py` regenerates it from the
+saved inventory and unresolved profile. The companion
+`tools/ida_apply_unresolved_function_candidates.py` is deliberately disabled
+by default and is intended for review once the IDA bridge is available. No IDA
+names changed during this pass, and no endpoint was contacted.

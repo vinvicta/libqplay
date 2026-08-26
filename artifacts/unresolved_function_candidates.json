@@ -1,0 +1,72 @@
+{
+  "binary": "private original ARM64 libqplay.so",
+  "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+  "candidate_count": 4,
+  "candidates": [
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_F9028",
+      "evidence": [
+        "TProfiler::dumpToList passes 0xf9028 to TList::Sort at 0xfa4b4.",
+        "The body reads the ProfilerRootData time fields at offsets 0x20 and 0x28 and returns their floating-point ordering."
+      ],
+      "proposed_name": "ProfilerRootData_compareNonSubTotalTime",
+      "role": "TList comparator for profiler entries ordered by non-sub total time",
+      "segment": ".text",
+      "size": 56,
+      "va": "0xf9028",
+      "xrefs_to": 1
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_F9060",
+      "evidence": [
+        "TProfiler::dumpToList calls 0xf9060 at 0xfa6b0 immediately after emitting the Function tree header.",
+        "The body walks child links, formats profiler time, invocation count, and names with the native format string, and appends rows to a TStringList.",
+        "The body calls itself while traversing nested profiler entries."
+      ],
+      "proposed_name": "ProfilerRootData_dumpFunctionTree",
+      "role": "Recursive profiler function-tree formatter",
+      "segment": ".text",
+      "size": 2220,
+      "va": "0xf9060",
+      "xrefs_to": 2
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_F9944",
+      "evidence": [
+        "TProfiler::dumpToList calls 0xf9944 at 0xfa8a8 after the function-tree output pass.",
+        "The body clears active flags and timing fields for each node and recursively visits the child chain."
+      ],
+      "proposed_name": "ProfilerRootData_resetTree",
+      "role": "Recursive profiler tree reset helper",
+      "segment": ".text",
+      "size": 512,
+      "va": "0xf9944",
+      "xrefs_to": 2
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_213088",
+      "evidence": [
+        "The helper ends exactly at the exported TGraalVar::loadFolder entry at 0x21337c.",
+        "TGraalVar::loadFolder calls it at 0x2134cc, and the helper calls itself at 0x213184 for nested folders.",
+        "The body calls TFiles::getFolder and creates TGraalVar entries with filesize and isfolder properties."
+      ],
+      "proposed_name": "TGraalVar_loadFolderRecursive",
+      "role": "Recursive folder-to-array loader used by TGraalVar::loadFolder",
+      "segment": ".text",
+      "size": 756,
+      "va": "0x213088",
+      "xrefs_to": 2
+    }
+  ],
+  "network_contacted": false,
+  "purpose": "Record high-confidence roles for selected IDA default functions without claiming recovered ELF source names.",
+  "source_artifacts": {
+    "function_inventory": "symbols/libqplay.function_inventory.json",
+    "unresolved_profile": "artifacts/unresolved_function_profile.json"
+  },
+  "status": "candidates_not_yet_applied_to_ida"
+}

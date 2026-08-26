@@ -206,6 +206,12 @@ proves the local native TLS path, not a current live certificate or service.
   the saved function, script-table, and candidate inventories.
 * `tools/generate_unresolved_function_profile.py` rebuilds the unresolved
   function profile from the saved inventories and ELF section metadata.
+* `artifacts/unresolved_function_candidates.json` records four high-confidence
+  role aliases for profiler and folder-loader helpers. They remain review-only
+  until they are applied to the matching IDA database.
+* `tools/generate_unresolved_function_candidates.py` rebuilds that candidate
+  artifact, while `tools/ida_apply_unresolved_function_candidates.py` provides
+  a review-only IDA applier.
 * `artifacts/inbound_handler_table.json` records the native handler-index table,
   its current function targets, and the observed packet-to-index pairs.
 * `artifacts/premium_option.json` records the complete marker bytes and the

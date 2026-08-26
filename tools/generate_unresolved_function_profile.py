@@ -76,10 +76,11 @@ def array_entries(blob: bytes, sections: dict[str, dict[str, int]], name: str) -
 
 
 def region_definitions() -> list[dict[str, object]]:
-    """Return static-library gaps bracketed by known symbol families.
+    """Return static-library gaps and isolated helpers with family evidence.
 
-    These are deliberately broad address regions, not guessed function names.
-    Each region describes why its entries are treated as likely vendor code.
+    These are deliberately broad address regions or explicit helper addresses,
+    not guessed function names. Each item describes why its entries are treated
+    as likely vendor code.
     """
 
     return [
@@ -140,6 +141,18 @@ def region_definitions() -> list[dict[str, object]]:
             "family": "CyaSSL and bundled crypto",
             "evidence": "The entries are inside the CyaSSL certificate, crypto, and TLS implementation region.",
         },
+        {
+            "category": "tomcrypt_des_static_internal",
+            "additional_addresses": [0x246B50],
+            "family": "LibTomCrypt DES",
+            "evidence": "0x246b50 is called by the exported DES and 3DES ECB routines and contains their shared 16-round block transform.",
+        },
+        {
+            "category": "minizip_static_internal",
+            "additional_addresses": [0x24840C, 0x249580],
+            "family": "minizip",
+            "evidence": "0x24840c is shared by the central-directory APIs, while 0x249580 is called by unzOpenCurrentFile3; both are internal minizip helpers between exported APIs.",
+        },
     ]
 
 
@@ -152,7 +165,12 @@ def classify(ea: int, init_fini: set[int]) -> tuple[str, str]:
         extra_addresses = {
             int(address) for address in region.get("additional_addresses", [])
         }
-        if ea in extra_addresses or int(region["start"]) <= ea < int(region["end"]):
+        in_region = (
+            "start" in region
+            and "end" in region
+            and int(region["start"]) <= ea < int(region["end"])
+        )
+        if ea in extra_addresses or in_region:
             return str(region["category"]), str(region["evidence"])
     return "app_or_engine_unknown", "No source name or safe library-region classification was recovered."
 
@@ -204,10 +222,11 @@ def generate(args: argparse.Namespace) -> dict[str, object]:
         item = {
             "category": region["category"],
             "family": region["family"],
-            "start": f"0x{int(region['start']):x}",
-            "end_exclusive": f"0x{int(region['end']):x}",
             "evidence": region["evidence"],
         }
+        if "start" in region and "end" in region:
+            item["start"] = f"0x{int(region['start']):x}"
+            item["end_exclusive"] = f"0x{int(region['end']):x}"
         if region.get("additional_addresses"):
             item["additional_addresses"] = [
                 f"0x{int(address):x}"
