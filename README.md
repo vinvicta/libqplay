@@ -373,6 +373,14 @@ formatted peer IP access. All five reopened successfully. The evidence is in
 `artifacts/spectron_socket_state_manual_translation_anchors_20260826.json`,
 and the v20 database SHA-256 is recorded in the checkpoint.
 
+A twenty-first disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v21.i64`,
+adds four reviewed HTTP request-state anchors. They cover request counters,
+request and download timestamps, and the file-download predicate. All four
+reopened successfully. The evidence is in
+`artifacts/spectron_http_request_state_manual_translation_anchors_20260826.json`,
+and the v21 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
@@ -518,6 +526,9 @@ proves the local native TLS path, not a current live certificate or service.
   records the 12 reviewed HTTP request field, lifecycle, and send helpers.
 * `artifacts/spectron_socket_state_manual_translation_anchors_20260826.json`
   records the five reviewed socket status, nonblocking, and IP helpers.
+* `artifacts/spectron_http_request_state_manual_translation_anchors_20260826.json`
+  records the four reviewed request counter, timestamp, and download-state
+  helpers.
 * `artifacts/spectron_socket_behavior_comparison_20260826.json` records the
   static comparison of the changed SSL setup, connect, and read bodies.
 * `artifacts/spectron_translation_checkpoint_20260826.json` records the
@@ -775,6 +786,9 @@ proves the local native TLS path, not a current live certificate or service.
   The `tools/generate_spectron_socket_state_anchors.py` generator records
   reviewed socket status, nonblocking, and address roles with exact hash
   checks.
+  The `tools/generate_spectron_http_request_state_anchors.py` generator records
+  reviewed request counter, timestamp, and download-state roles with exact
+  hash checks.
   The `tools/generate_spectron_socket_behavior_comparison.py` generator
   records changed-size socket behavior without forcing an exact-match label.
   `tools/ida_apply_spectron_translation.py` and

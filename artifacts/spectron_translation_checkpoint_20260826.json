@@ -69,8 +69,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v20.i64",
-    "sha256": "6d01c2d7fedfef870e19119d6e9bb302ac88012a80072a9cfe135d312d08c96e"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v21.i64",
+    "sha256": "ab2c0ebb20066e28896a6774aa7da1eaa857f55f21c81d427165add8705c9dc6"
   },
   "http_request_anchors": {
     "anchor_count": 12,
@@ -79,6 +79,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_http_request_verify_v19.json",
     "verified_name_count": 12
+  },
+  "http_request_state_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "artifacts/spectron_http_request_state_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "fd46ccedb4b225d7d1bc17dca1c839675efc54c8227d650d266b85dbe4d72f4a",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_http_request_state_verify_v21.json",
+    "verified_name_count": 4
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
@@ -109,7 +117,8 @@
     "The seventeenth database revision also contains the separately reviewed compact client state and forwarding anchors.",
     "The eighteenth database revision also contains the separately reviewed client connection-state and encrypted-file helper anchors.",
     "The nineteenth database revision also contains the separately reviewed HTTP request field, lifecycle, and outbound-buffer anchors.",
-    "The twentieth database revision also contains the separately reviewed socket status and address helper anchors."
+    "The twentieth database revision also contains the separately reviewed socket status and address helper anchors.",
+    "The twenty-first database revision also contains the separately reviewed HTTP request counters and download-state anchors."
   ],
   "login_helper_anchors": {
     "anchor_count": 8,
