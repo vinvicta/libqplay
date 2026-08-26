@@ -81,6 +81,8 @@ def main() -> None:
     parser.add_argument("--script-runtime-verification", type=Path)
     parser.add_argument("--core-helper-anchors", type=Path)
     parser.add_argument("--core-helper-verification", type=Path)
+    parser.add_argument("--render-gui-anchors", type=Path)
+    parser.add_argument("--render-gui-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -876,6 +878,34 @@ def main() -> None:
         result["core_helper_anchors"] = core_helper
         result["interpretation"].append(
             "The twenty-eighth database revision also contains the separately reviewed level, script, network-policy, tile, particle, and native callback helper anchors."
+        )
+    render_gui = None
+    if args.render_gui_anchors or args.render_gui_verification:
+        if not args.render_gui_anchors or not args.render_gui_verification:
+            raise ValueError(
+                "render/GUI anchors and render/GUI verification must be supplied together"
+            )
+        render_gui_document = load(args.render_gui_anchors)
+        render_gui_verification = load(args.render_gui_verification)
+        if render_gui_document.get("artifact") != "spectron_render_gui_manual_translation_anchors_20260826":
+            raise ValueError("unexpected render/GUI anchor artifact")
+        if not render_gui_verification.get("verified"):
+            raise ValueError("render/GUI anchor reopen verification did not pass")
+        expected_render_gui = len(render_gui_document["anchors"])
+        if render_gui_verification["verified_name_count"] != expected_render_gui:
+            raise ValueError("render/GUI verification count differs from artifact")
+        render_gui = {
+            "anchor_path": str(args.render_gui_anchors),
+            "anchor_sha256": sha256_path(args.render_gui_anchors),
+            "reopen_verification": str(args.render_gui_verification),
+            "anchor_count": expected_render_gui,
+            "verified_name_count": render_gui_verification["verified_name_count"],
+            "reopen_failure_count": render_gui_verification["failure_count"],
+        }
+    if render_gui is not None:
+        result["render_gui_anchors"] = render_gui
+        result["interpretation"].append(
+            "The twenty-ninth database revision also contains the separately reviewed texture, OpenGL, drawing-panel, GUI-control, markup, and scrolling helper anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

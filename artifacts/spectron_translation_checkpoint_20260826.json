@@ -77,8 +77,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v28.i64",
-    "sha256": "fd2c58ef97d63f6d4cfa55ae0e0d4bbf3e57872ab5e0e079f6e777bfbb7b35e4"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v29.i64",
+    "sha256": "2a1af1958e3bc50445a0057c57cbf537ce2a8e8f5c5dd0e28796813d406d944d"
   },
   "html_atom_anchors": {
     "anchor_count": 5,
@@ -149,7 +149,8 @@
     "The twenty-fifth database revision also contains the separately reviewed input and window bridge helper anchors.",
     "The twenty-sixth database revision also contains the separately reviewed animation, particle, and show-image helper anchors.",
     "The twenty-seventh database revision also contains the separately reviewed GS2-facing TGraalVar, TScript, TScriptSpace, and TScriptUniverse helper anchors.",
-    "The twenty-eighth database revision also contains the separately reviewed level, script, network-policy, tile, particle, and native callback helper anchors."
+    "The twenty-eighth database revision also contains the separately reviewed level, script, network-policy, tile, particle, and native callback helper anchors.",
+    "The twenty-ninth database revision also contains the separately reviewed texture, OpenGL, drawing-panel, GUI-control, markup, and scrolling helper anchors."
   ],
   "login_helper_anchors": {
     "anchor_count": 8,
@@ -207,6 +208,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_player_helper_verify_v24.json",
     "verified_name_count": 5
+  },
+  "render_gui_anchors": {
+    "anchor_count": 20,
+    "anchor_path": "artifacts/spectron_render_gui_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "c8e3de6ebfb604a395e4e914f2cfac12015b2d35ee7d737d1006c1393a314319",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_render_gui_verify_v29.json",
+    "verified_name_count": 20
   },
   "resource_anchors": {
     "anchor_count": 6,
