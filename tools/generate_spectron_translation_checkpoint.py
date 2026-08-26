@@ -55,6 +55,8 @@ def main() -> None:
     parser.add_argument("--parse-wrapper-verification", type=Path)
     parser.add_argument("--lookup-helper-anchors", type=Path)
     parser.add_argument("--lookup-helper-verification", type=Path)
+    parser.add_argument("--connection-helper-anchors", type=Path)
+    parser.add_argument("--connection-helper-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -486,6 +488,34 @@ def main() -> None:
         result["lookup_helper_anchors"] = lookup_helper
         result["interpretation"].append(
             "The fifteenth database revision also contains the separately reviewed player and download lookup helper anchors."
+        )
+    connection_helper = None
+    if args.connection_helper_anchors or args.connection_helper_verification:
+        if not args.connection_helper_anchors or not args.connection_helper_verification:
+            raise ValueError(
+                "connection-helper anchors and connection-helper verification must be supplied together"
+            )
+        connection_helper_document = load(args.connection_helper_anchors)
+        connection_helper_verification = load(args.connection_helper_verification)
+        if connection_helper_document.get("artifact") != "spectron_connection_helper_manual_translation_anchors_20260826":
+            raise ValueError("unexpected connection-helper anchor artifact")
+        if not connection_helper_verification.get("verified"):
+            raise ValueError("connection-helper anchor reopen verification did not pass")
+        expected_connection_helper = len(connection_helper_document["anchors"])
+        if connection_helper_verification["verified_name_count"] != expected_connection_helper:
+            raise ValueError("connection-helper verification count differs from artifact")
+        connection_helper = {
+            "anchor_path": str(args.connection_helper_anchors),
+            "anchor_sha256": sha256_path(args.connection_helper_anchors),
+            "reopen_verification": str(args.connection_helper_verification),
+            "anchor_count": expected_connection_helper,
+            "verified_name_count": connection_helper_verification["verified_name_count"],
+            "reopen_failure_count": connection_helper_verification["failure_count"],
+        }
+    if connection_helper is not None:
+        result["connection_helper_anchors"] = connection_helper
+        result["interpretation"].append(
+            "The sixteenth database revision also contains the separately reviewed connection, packet-state, SSL, and low-level field anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

@@ -329,6 +329,16 @@ successfully. The evidence is in
 `artifacts/spectron_lookup_helper_manual_translation_anchors_20260826.json`,
 and the v15 database SHA-256 is recorded in the checkpoint.
 
+A sixteenth disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v16.i64`,
+adds 18 reviewed connection and SSL helper anchors. They cover encryption-key
+cleanup, outgoing-list cleanup, the parser-key setter, socket-error state,
+SSL enable and configuration propagation, the SSL error getter, and seven
+low-level connection field accessors. All 18 reopened successfully. The
+evidence is in
+`artifacts/spectron_connection_helper_manual_translation_anchors_20260826.json`,
+and the v16 database SHA-256 is recorded in the checkpoint.
+
 The first direct emulator launch of the supplied Spectron package also found
 a separate modding-layer problem. After Start was tapped, `libxposed.so`
 crashed at its statically confirmed WebTop `crash` command branch. The same
@@ -458,6 +468,8 @@ proves the local native TLS path, not a current live certificate or service.
   bytes.
 * `artifacts/spectron_lookup_helper_manual_translation_anchors_20260826.json`
   records the three reviewed player and download lookup anchors.
+* `artifacts/spectron_connection_helper_manual_translation_anchors_20260826.json`
+  records the 18 reviewed connection, SSL, and low-level field anchors.
 * `artifacts/spectron_translation_checkpoint_20260826.json` records the
   close-and-reopen check for the persisted Spectron IDA copy.
 * `artifacts/spectron_runtime_crash_control_20260826.json` records the local
@@ -699,6 +711,8 @@ proves the local native TLS path, not a current live certificate or service.
   reviewed client encryption-in tail-thunk and its raw byte check.
   The `tools/generate_spectron_lookup_helper_anchors.py` generator records
   reviewed player and download lookup roles and target shape checks.
+  The `tools/generate_spectron_connection_helper_anchors.py` generator records
+  reviewed connection, SSL, and low-level field roles and exact shape checks.
   `tools/ida_apply_spectron_translation.py` and
   `tools/ida_apply_spectron_manual_anchors.py` write separate disposable IDA
   copies, while the matching verification scripts reopen and check them. The
