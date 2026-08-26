@@ -239,11 +239,17 @@ This is the short handoff view. The full reasoning and command history are in
     a review note. The unapplied candidate set now contains 125 unique native
     addresses. No endpoint was contacted.
 39. The NPC constructor at `0x183c18` was audited next. Its 26 properties and
-    57 script functions are registered from `0x37be28` and `0x37c308`. Three
+    57 script functions are registered from `0x37be28` and `0x37c308`. Four
     callback pointers lack saved IDA function boundaries, and two inherited
     ELF jump targets were left unchanged. The remaining 94 unique native
     targets are recorded as unapplied candidates, raising the review-only set
     to 219. No endpoint was contacted.
+40. The compact server-object property constructors were audited offline.
+    Weapon, bomb, explosion, chest, extra, flying-object, and sign tables add
+    23 unique getter or setter targets, raising the review-only candidate set
+    to 242. Carry and leap constructors initialize metadata only and do not
+    register script properties in this build. No IDA names changed and no
+    endpoint was contacted.
 
 ## Not verified
 

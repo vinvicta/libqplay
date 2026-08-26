@@ -1239,11 +1239,11 @@ and coordinates. The function table covers carry and push rules, image and
 shape changes, drawing modes, movement and messaging, weapon and projectile
 actions, display helpers, inventory operations, and image lookup or hiding.
 
-Three table callbacks did not have function boundaries in the saved IDA
-inventory: `npcsindex` at `0x180e50`, `width` at `0x18402c`, and `hideimgs` at
-`0x181d58`. They are still recorded because the registration pointers are
-authoritative. The application helper will report those three for boundary
-recovery instead of pretending a rename was applied.
+Four table callbacks did not have function boundaries in the saved IDA
+inventory: `npcsindex` at `0x180e50`, `width` at `0x18402c`, `hideimgs` at
+`0x181d58`, and `testnpc` at `0x1a4e98`. They are still recorded because the
+registration pointers are authoritative. The application helper will report
+those four for boundary recovery instead of pretending a rename was applied.
 
 Two other targets already have surviving ELF names and are not duplicated:
 the `image` setter is the `TServerNPC::setImageName` jump at `0x18547c`, and
@@ -1266,6 +1266,41 @@ reviewed against the table without relying on a long prose list.
 The new NPC groups add 94 unique addresses and raise the review-only native
 candidate set from 125 to 219. No IDA names were changed during this pass, and
 no live endpoint was contacted.
+
+## Smaller server-object property tables
+
+The next compact audit covered the property constructors for several of the
+objects created by `TServerLevel`. Each constructor passes an encoded table to
+`TScriptProperty::addProps`, which gives an exact script-facing name and its
+getter or setter address without relying on nearby strings.
+
+| Class | Constructor | Table | Records | Recovered properties |
+| --- | ---: | ---: | ---: | --- |
+| `TServerWeaponProperties` | `0x190ca4` | `0x37d8e0` | 1 | `isweapon` |
+| `TServerBombProperties` | `0x23d1e0` | `0x38b058` | 3 | `power`, `time`, `image` |
+| `TExplosionProperties` | `0x23ca04` | `0x38afc8` | 3 | `power`, `time`, `dir` |
+| `TServerChestProperties` | `0x23e344` | `0x38b0e8` | 2 | `isopen`, `item` |
+| `TServerExtraProperties` | `0x23e9e0` | `0x38b148` | 2 | `time`, `type` |
+| `TServerFlyingProperties` | `0x23edc8` | `0x38b1a8` | 5 | `dir`, `dx`, `dy`, `type`, `from` |
+| `TServerSignProperties` | `0x23fff4` | `0x38b298` | 1 | `text` |
+
+The bomb, flying-object, and sign records contain both getter and setter
+callbacks. The other records are read-only in this table. The candidate names
+use the class prefix because names such as `power`, `time`, and `type` recur
+across different object classes and therefore do not identify a unique native
+function on their own.
+
+Two nearby constructors are useful negative evidence. `TServerCarryProperties`
+at `0x23d694` and `TServerLeapProperties` at `0x23fde8` initialize their
+`TProperties` state and vtable pointers but do not call `addProps` in this
+revision. They therefore contribute no script-property callbacks to the
+candidate set. This keeps the table inventory faithful to what the binary
+actually registers.
+
+The seven new groups are stored in
+`artifacts/native_callback_candidates.json`. They add 23 unique native targets,
+raising the review-only candidate set from 219 to 242. No IDA names were
+changed during this pass, and no live endpoint was contacted.
 
 ## Held-connection ARM64 resource replay
 

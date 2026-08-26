@@ -229,8 +229,8 @@ script callbacks from `0x37c308`. Their names cover the NPC's health, image,
 layer, collision, pelt, weapon, visibility, movement, carry, drawing,
 projectile, and show or hide behavior. The property table shares its hearts
 and HP accessors, and its image and sprite targets include two inherited ELF
-jumps that are already named. Three callback pointers, at `0x180e50`,
-`0x18402c`, and `0x181d58`, still need IDA function boundaries. The remaining
+jumps that are already named. Four callback pointers, at `0x180e50`,
+`0x18402c`, `0x181d58`, and `0x1a4e98`, still need IDA function boundaries. The remaining
 37 property targets and all 57 script targets are recorded in
 `artifacts/native_callback_candidates.json` under the two NPC groups.
 
@@ -238,6 +238,20 @@ The encoded terminator anomaly appears in several NPC names, including
 `peltwithbush`, `peltwithsign`, `peltwithvase`, `canbecarried`, and `showtext`.
 Those spellings are supported by their table position and callback context.
 The 94 new NPC candidates bring the review-only set to 219.
+
+The smaller server-object constructors provide another compact set of exact
+table-backed names. `TServerWeaponProperties` at `0x190ca4` registers
+`isweapon` from `0x37d8e0`. The bomb, explosion, chest, extra, flying-object,
+and sign constructors register their tables at `0x38b058`, `0x38afc8`,
+`0x38b0e8`, `0x38b148`, `0x38b1a8`, and `0x38b298`. Those records recover
+`power`, `time`, `image`, `dir`, `isopen`, `item`, `type`, `dx`, `dy`, `from`,
+and `text`, with the class prefix retained in each proposed native name.
+
+`TServerCarryProperties` at `0x23d694` and `TServerLeapProperties` at
+`0x23fde8` do not call `TScriptProperty::addProps` and are recorded as
+metadata-only constructors. The seven new candidate groups add 23 unique
+native targets, raising the review-only set from 219 to 242. They remain
+unapplied until the IDA bridge is available.
 
 When the IDA bridge is available, run
 `tools/ida_apply_native_callback_candidates.py` in review mode first. It

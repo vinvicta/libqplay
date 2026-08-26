@@ -178,8 +178,8 @@ proves the local native TLS path, not a current live certificate or service.
   HTTP, socket, animation, sound, network-thread, update-package, and JNI
   bridge helpers.
 * `artifacts/native_callback_candidates.json` records the next table-backed
-  callback, static-state, sound-wrapper, and server-level names recovered from
-  the native library. The current review-only set contains 219 entries. These
+  callback, static-state, sound-wrapper, and server-object names recovered from
+  the native library. The current review-only set contains 242 entries. These
   remain clearly marked as candidates until they are applied to the IDA
   database.
 * `artifacts/inbound_handler_table.json` records the native handler-index table,

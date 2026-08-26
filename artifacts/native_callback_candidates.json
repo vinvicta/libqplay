@@ -1711,6 +1711,7 @@
       "current_ida_name": "sub_1A4E98",
       "proposed_name": "TServerLevel_script_testNPC",
       "confidence": "high",
+      "review_note": "The callback pointer is present in the function record, but the saved IDA inventory did not contain a function boundary at this address.",
       "evidence": [
         "The function record at 0x380100 decodes to testnpc",
         "The body calls TServerLevel::isOnNPC for the supplied coordinates and returns the matching NPC index"
@@ -1724,6 +1725,250 @@
       "evidence": [
         "The function record at 0x380130 decodes to tiletype",
         "The body is a direct script wrapper around TServerLevel::getTileType"
+      ]
+    }
+  ],
+  "server_weapon_properties": [
+    {
+      "va": "0x190c68",
+      "current_ida_name": "sub_190C68",
+      "proposed_name": "TServerWeapon_getIsWeapon",
+      "confidence": "high",
+      "evidence": [
+        "The TServerWeaponProperties constructor at 0x190ca4 registers the isweapon property in the one-record table at 0x37d8e0",
+        "The table points its getter at this function and has no setter, matching a read-only weapon marker"
+      ]
+    }
+  ],
+  "server_bomb_properties": [
+    {
+      "va": "0x23ce80",
+      "current_ida_name": "sub_23CE80",
+      "proposed_name": "TServerBomb_getPower",
+      "confidence": "high",
+      "evidence": [
+        "The first record in the TServerBombProperties table at 0x38b058 decodes to power and points to this getter",
+        "The paired setter at 0x23ce88 is stored in the same record"
+      ]
+    },
+    {
+      "va": "0x23ce88",
+      "current_ida_name": "sub_23CE88",
+      "proposed_name": "TServerBomb_setPower",
+      "confidence": "high",
+      "evidence": [
+        "The first record in the TServerBombProperties table at 0x38b058 decodes to power and points to this setter",
+        "The callback is the write half of the same power property record as 0x23ce80"
+      ]
+    },
+    {
+      "va": "0x23ce9c",
+      "current_ida_name": "sub_23CE9C",
+      "proposed_name": "TServerBomb_getTime",
+      "confidence": "high",
+      "evidence": [
+        "The second record in the TServerBombProperties table at 0x38b088 decodes to time and points to this getter",
+        "The paired setter at 0x23ceb0 is stored in the same record"
+      ]
+    },
+    {
+      "va": "0x23ceb0",
+      "current_ida_name": "sub_23CEB0",
+      "proposed_name": "TServerBomb_setTime",
+      "confidence": "high",
+      "evidence": [
+        "The second record in the TServerBombProperties table at 0x38b088 decodes to time and points to this setter",
+        "The callback is the write half of the same time property record as 0x23ce9c"
+      ]
+    },
+    {
+      "va": "0x23cfa0",
+      "current_ida_name": "sub_23CFA0",
+      "proposed_name": "TServerBomb_getImage",
+      "confidence": "high",
+      "evidence": [
+        "The third record in the TServerBombProperties table at 0x38b0b8 decodes to image and points to this getter",
+        "The paired setter at 0x23cf98 is stored in the same record"
+      ]
+    },
+    {
+      "va": "0x23cf98",
+      "current_ida_name": "sub_23CF98",
+      "proposed_name": "TServerBomb_setImage",
+      "confidence": "high",
+      "evidence": [
+        "The third record in the TServerBombProperties table at 0x38b0b8 decodes to image and points to this setter",
+        "The callback is the write half of the same image property record as 0x23cfa0"
+      ]
+    }
+  ],
+  "explosion_properties": [
+    {
+      "va": "0x23c850",
+      "current_ida_name": "sub_23C850",
+      "proposed_name": "TExplosion_getPower",
+      "confidence": "high",
+      "evidence": [
+        "The first record in the TExplosionProperties table at 0x38afc8 decodes to power and points to this read-only getter",
+        "The record has no setter callback"
+      ]
+    },
+    {
+      "va": "0x23c858",
+      "current_ida_name": "sub_23C858",
+      "proposed_name": "TExplosion_getTime",
+      "confidence": "high",
+      "evidence": [
+        "The second record in the TExplosionProperties table at 0x38aff8 decodes to time and points to this read-only getter",
+        "The record has no setter callback"
+      ]
+    },
+    {
+      "va": "0x23c86c",
+      "current_ida_name": "sub_23C86C",
+      "proposed_name": "TExplosion_getDir",
+      "confidence": "high",
+      "evidence": [
+        "The third record in the TExplosionProperties table at 0x38b028 decodes to dir and points to this read-only getter",
+        "The record has no setter callback"
+      ]
+    }
+  ],
+  "server_chest_properties": [
+    {
+      "va": "0x23e184",
+      "current_ida_name": "sub_23E184",
+      "proposed_name": "TServerChest_getIsOpen",
+      "confidence": "high",
+      "evidence": [
+        "The first record in the TServerChestProperties table at 0x38b0e8 decodes to isopen and points to this read-only getter",
+        "The record has no setter callback"
+      ]
+    },
+    {
+      "va": "0x23e214",
+      "current_ida_name": "sub_23E214",
+      "proposed_name": "TServerChest_getItem",
+      "confidence": "high",
+      "evidence": [
+        "The second record in the TServerChestProperties table at 0x38b118 decodes to item and points to this read-only getter",
+        "The record has no setter callback"
+      ]
+    }
+  ],
+  "server_extra_properties": [
+    {
+      "va": "0x23e6e8",
+      "current_ida_name": "sub_23E6E8",
+      "proposed_name": "TServerExtra_getTime",
+      "confidence": "high",
+      "evidence": [
+        "The first record in the TServerExtraProperties table at 0x38b148 decodes to time and points to this read-only getter",
+        "The record has no setter callback"
+      ]
+    },
+    {
+      "va": "0x23e6fc",
+      "current_ida_name": "sub_23E6FC",
+      "proposed_name": "TServerExtra_getType",
+      "confidence": "high",
+      "evidence": [
+        "The second record in the TServerExtraProperties table at 0x38b178 decodes to type and points to this read-only getter",
+        "The record has no setter callback"
+      ]
+    }
+  ],
+  "server_flying_properties": [
+    {
+      "va": "0x23ebd0",
+      "current_ida_name": "sub_23EBD0",
+      "proposed_name": "TServerFlying_getDir",
+      "confidence": "high",
+      "evidence": [
+        "The first record in the TServerFlyingProperties table at 0x38b1a8 decodes to dir and points to this read-only getter",
+        "The record has no setter callback"
+      ]
+    },
+    {
+      "va": "0x23ec34",
+      "current_ida_name": "sub_23EC34",
+      "proposed_name": "TServerFlying_getDx",
+      "confidence": "high",
+      "evidence": [
+        "The second record in the TServerFlyingProperties table at 0x38b1d8 decodes to dx and points to this getter",
+        "The paired setter at 0x23ec3c is stored in the same record"
+      ]
+    },
+    {
+      "va": "0x23ec3c",
+      "current_ida_name": "sub_23EC3C",
+      "proposed_name": "TServerFlying_setDx",
+      "confidence": "high",
+      "evidence": [
+        "The second record in the TServerFlyingProperties table at 0x38b1d8 decodes to dx and points to this setter",
+        "The callback is the write half of the same dx property record as 0x23ec34"
+      ]
+    },
+    {
+      "va": "0x23ec44",
+      "current_ida_name": "sub_23EC44",
+      "proposed_name": "TServerFlying_getDy",
+      "confidence": "high",
+      "evidence": [
+        "The third record in the TServerFlyingProperties table at 0x38b208 decodes to dy and points to this getter",
+        "The paired setter at 0x23ec4c is stored in the same record"
+      ]
+    },
+    {
+      "va": "0x23ec4c",
+      "current_ida_name": "sub_23EC4C",
+      "proposed_name": "TServerFlying_setDy",
+      "confidence": "high",
+      "evidence": [
+        "The third record in the TServerFlyingProperties table at 0x38b208 decodes to dy and points to this setter",
+        "The callback is the write half of the same dy property record as 0x23ec44"
+      ]
+    },
+    {
+      "va": "0x23ec54",
+      "current_ida_name": "sub_23EC54",
+      "proposed_name": "TServerFlying_getType",
+      "confidence": "high",
+      "evidence": [
+        "The fourth record in the TServerFlyingProperties table at 0x38b238 decodes to type and points to this read-only getter",
+        "The record has no setter callback"
+      ]
+    },
+    {
+      "va": "0x23ec5c",
+      "current_ida_name": "sub_23EC5C",
+      "proposed_name": "TServerFlying_getFrom",
+      "confidence": "high",
+      "evidence": [
+        "The fifth record in the TServerFlyingProperties table at 0x38b268 decodes to from and points to this read-only getter",
+        "The record has no setter callback"
+      ]
+    }
+  ],
+  "server_sign_properties": [
+    {
+      "va": "0x23ffc4",
+      "current_ida_name": "sub_23FFC4",
+      "proposed_name": "TServerSign_getText",
+      "confidence": "high",
+      "evidence": [
+        "The one-record TServerSignProperties table at 0x38b298 decodes to text and points to this getter",
+        "The paired setter at 0x23ffbc is stored in the same record"
+      ]
+    },
+    {
+      "va": "0x23ffbc",
+      "current_ida_name": "sub_23FFBC",
+      "proposed_name": "TServerSign_setText",
+      "confidence": "high",
+      "evidence": [
+        "The one-record TServerSignProperties table at 0x38b298 decodes to text and points to this setter",
+        "The callback is the write half of the same text property record as 0x23ffc4"
       ]
     }
   ],

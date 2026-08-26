@@ -38,6 +38,13 @@ def load_candidates():
         "server_npc_functions",
         "server_level_properties",
         "server_level_functions",
+        "server_weapon_properties",
+        "server_bomb_properties",
+        "explosion_properties",
+        "server_chest_properties",
+        "server_extra_properties",
+        "server_flying_properties",
+        "server_sign_properties",
     )
     return [candidate for group in groups for candidate in document.get(group, [])]
 
