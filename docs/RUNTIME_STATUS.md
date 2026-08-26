@@ -632,6 +632,13 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_player_helper_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+87. Clean IDA review added eight high-confidence input and window bridge
+    anchors for key state, cursor position, dimensions, canvas lookup, and
+    initialization. All eight names reopened successfully in the v25
+    disposable copy. See
+    `artifacts/spectron_input_window_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

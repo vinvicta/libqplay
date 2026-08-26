@@ -73,6 +73,8 @@ def main() -> None:
     parser.add_argument("--html-atom-verification", type=Path)
     parser.add_argument("--player-helper-anchors", type=Path)
     parser.add_argument("--player-helper-verification", type=Path)
+    parser.add_argument("--input-window-anchors", type=Path)
+    parser.add_argument("--input-window-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -756,6 +758,34 @@ def main() -> None:
         result["player_helper_anchors"] = player_helper
         result["interpretation"].append(
             "The twenty-fourth database revision also contains the separately reviewed compact TPlayer attachment, update, freeze, and sprite helper anchors."
+        )
+    input_window = None
+    if args.input_window_anchors or args.input_window_verification:
+        if not args.input_window_anchors or not args.input_window_verification:
+            raise ValueError(
+                "input/window anchors and input/window verification must be supplied together"
+            )
+        input_window_document = load(args.input_window_anchors)
+        input_window_verification = load(args.input_window_verification)
+        if input_window_document.get("artifact") != "spectron_input_window_manual_translation_anchors_20260826":
+            raise ValueError("unexpected input/window anchor artifact")
+        if not input_window_verification.get("verified"):
+            raise ValueError("input/window anchor reopen verification did not pass")
+        expected_input_window = len(input_window_document["anchors"])
+        if input_window_verification["verified_name_count"] != expected_input_window:
+            raise ValueError("input/window verification count differs from artifact")
+        input_window = {
+            "anchor_path": str(args.input_window_anchors),
+            "anchor_sha256": sha256_path(args.input_window_anchors),
+            "reopen_verification": str(args.input_window_verification),
+            "anchor_count": expected_input_window,
+            "verified_name_count": input_window_verification["verified_name_count"],
+            "reopen_failure_count": input_window_verification["failure_count"],
+        }
+    if input_window is not None:
+        result["input_window_anchors"] = input_window
+        result["interpretation"].append(
+            "The twenty-fifth database revision also contains the separately reviewed input and window bridge helper anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

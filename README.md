@@ -405,6 +405,14 @@ wrappers. All five reopened successfully. The evidence is in
 `artifacts/spectron_player_helper_manual_translation_anchors_20260826.json`,
 and the v24 database SHA-256 is recorded in the checkpoint.
 
+A twenty-fifth disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v25.i64`,
+adds eight reviewed input and window bridge anchors. They cover key-state
+access, cursor positioning, screen dimensions, canvas lookup, initialization,
+and preferred position. All eight reopened successfully. The evidence is in
+`artifacts/spectron_input_window_manual_translation_anchors_20260826.json`,
+and the v25 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
@@ -561,6 +569,8 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/spectron_player_helper_manual_translation_anchors_20260826.json`
   records the five reviewed `TPlayer` attachment, update, freeze, and sprite
   helpers.
+* `artifacts/spectron_input_window_manual_translation_anchors_20260826.json`
+  records the eight reviewed input and window bridge helpers.
 * `artifacts/spectron_socket_behavior_comparison_20260826.json` records the
   static comparison of the changed SSL setup, connect, and read bodies.
 * `artifacts/spectron_translation_checkpoint_20260826.json` records the
@@ -829,6 +839,8 @@ proves the local native TLS path, not a current live certificate or service.
   The `tools/generate_spectron_player_helper_anchors.py` generator records
   reviewed `TPlayer` attachment, update, freeze, and sprite roles with exact
   hash checks.
+  The `tools/generate_spectron_input_window_anchors.py` generator records
+  reviewed input and window bridge roles with exact hash checks.
   The `tools/generate_spectron_socket_behavior_comparison.py` generator
   records changed-size socket behavior without forcing an exact-match label.
   `tools/ida_apply_spectron_translation.py` and

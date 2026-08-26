@@ -69,8 +69,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v24.i64",
-    "sha256": "126b3d9ffb27b26e91ccd2f0dfd0d1f48c2f03dd45cf0c1ee4e731b2f9cdec9f"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v25.i64",
+    "sha256": "a309f9556b21ea43585455a08f5ec0a3291aa60e44d34b475f02672e4341c476"
   },
   "html_atom_anchors": {
     "anchor_count": 5,
@@ -95,6 +95,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_http_request_state_verify_v21.json",
     "verified_name_count": 4
+  },
+  "input_window_anchors": {
+    "anchor_count": 8,
+    "anchor_path": "artifacts/spectron_input_window_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "d79db3be99a3d80fe7b171c9b053df8a0c24871c327dc873adead283b8b901c6",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_input_window_verify_v25.json",
+    "verified_name_count": 8
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
@@ -129,7 +137,8 @@
     "The twenty-first database revision also contains the separately reviewed HTTP request counters and download-state anchors.",
     "The twenty-second database revision also contains the separately reviewed TServerNPC blocking, draw-mode, visibility, bow, and pelt helper anchors.",
     "The twenty-third database revision also contains the separately reviewed THTMLAtom constructor and buffer accessor anchors.",
-    "The twenty-fourth database revision also contains the separately reviewed compact TPlayer attachment, update, freeze, and sprite helper anchors."
+    "The twenty-fourth database revision also contains the separately reviewed compact TPlayer attachment, update, freeze, and sprite helper anchors.",
+    "The twenty-fifth database revision also contains the separately reviewed input and window bridge helper anchors."
   ],
   "login_helper_anchors": {
     "anchor_count": 8,
