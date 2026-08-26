@@ -1,0 +1,572 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "The candidate strips the encrypted extension and dispatches the same zip, WBA, font, GANI, WAV, PO, image, and map resource cases.",
+        "It preserves the khead and zone_head checks, the UpdateFile_Ganis event, and the resource-object refresh calls visible in the 1.8 body.",
+        "Both builds retain 56 basic blocks and the same distinctive extension and map-header string set, while the rebuilt 2.2 body is modestly larger."
+      ],
+      "match_kind": "manual-core-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 56,
+      "original_ea": "0xed578",
+      "original_instruction_count": 353,
+      "original_name": "TResourceFunctions_updateGameObjectsForFile_TString_const",
+      "original_size": 1432,
+      "original_strings": [
+        ".enc",
+        ".gani",
+        ".gmap",
+        ".po",
+        ".ttf",
+        ".wba",
+        ".zip",
+        "UpdateFile_Ganis",
+        "khead",
+        "oi",
+        "onPlayerChanges",
+        "zone_head"
+      ],
+      "proposed_name": "v18_TResourceFunctions_updateGameObjectsForFile_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "resource extension dispatch, map-header checks, and game-object refresh",
+      "spectron_basic_block_count": 56,
+      "spectron_current_name": "_ZN10f6WHgaQkAF10VG5ugaNoMuERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0xee558",
+      "spectron_instruction_count": 368,
+      "spectron_size": 1488,
+      "spectron_strings": [
+        ".enc",
+        ".gani",
+        ".gmap",
+        ".po",
+        ".ttf",
+        ".wba",
+        ".zip",
+        "UpdateFile_Ganis",
+        "khead",
+        "zone_head"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The candidate constructs the webfiles path, looks up or creates the resource object, and refreshes linked alternatives in the same class context.",
+        "Its callers and callees include the translated updateGameObjectsForFile role, HTTP download lookup, resource creation, and the level-file update event path.",
+        "Both builds retain 47 basic blocks and the same f6WHgaQkAF class-level relationship; the 2.2 function adds only rebuilt-body detail."
+      ],
+      "match_kind": "manual-core-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 47,
+      "original_ea": "0xee078",
+      "original_instruction_count": 298,
+      "original_name": "TResourceFunctions_updateResourceObject_TString_const_bool",
+      "original_size": 1196,
+      "original_strings": [
+        "onLevelFileUpdated",
+        "webfiles"
+      ],
+      "proposed_name": "v18_TResourceFunctions_updateResourceObject_TString_const_bool",
+      "semantic_match_already_present": false,
+      "source_basis": "webfiles path construction, resource lookup, linked-object refresh, and update notification",
+      "spectron_basic_block_count": 47,
+      "spectron_current_name": "_ZN10f6WHgaQkAF10fxivgaycXuERK10C8THgaTQxFb",
+      "spectron_default_name": false,
+      "spectron_ea": "0xef090",
+      "spectron_instruction_count": 322,
+      "spectron_size": 1296,
+      "spectron_strings": [
+        "webfiles"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The candidate initializes the same image-extension table as the 1.8 resource subsystem.",
+        "It has the same one-block static-initializer shape and the same small-string and list-construction call pattern.",
+        "The exact extension-table text is a stronger identifier here than the rebuilt address or mangled class name."
+      ],
+      "match_kind": "manual-core-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 1,
+      "original_ea": "0xeee48",
+      "original_instruction_count": 43,
+      "original_name": "TResourceFunctions_initStaticVars_void",
+      "original_size": 176,
+      "original_strings": [
+        ".dds,.gif,.mng,.png,.jp2,.jpg,.jpeg,.tga,.bmp,.dib"
+      ],
+      "proposed_name": "v18_TResourceFunctions_initStaticVars_void",
+      "semantic_match_already_present": false,
+      "source_basis": "resource extension table initialization",
+      "spectron_basic_block_count": 1,
+      "spectron_current_name": "_Z10bylygaqKvxv",
+      "spectron_default_name": false,
+      "spectron_ea": "0xf0058",
+      "spectron_instruction_count": 44,
+      "spectron_size": 180,
+      "spectron_strings": [
+        ".dds,.gif,.mng,.png,.jp2,.jpg,.jpeg,.tga,.bmp,.dib"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The candidate walks the same file and resource-object lists, extracts matching entries, and updates resources after decompression.",
+        "It owns the distinctive Unzipped, into, wildcard, and files messages and calls the same resource update and stream operations.",
+        "The target was an IDA default sub_ name, so this anchor restores a reviewed v18_ role rather than relying on an existing Spectron symbol."
+      ],
+      "match_kind": "manual-core-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 43,
+      "original_ea": "0xfca80",
+      "original_instruction_count": 321,
+      "original_name": "TFileScripting_script_decompressFile",
+      "original_size": 1292,
+      "original_strings": [
+        " into ",
+        "*",
+        "Unzipped ",
+        "files"
+      ],
+      "proposed_name": "v18_TFileScripting_script_decompressFile",
+      "semantic_match_already_present": false,
+      "source_basis": "archive extraction, resource iteration, and decompression status reporting",
+      "spectron_basic_block_count": 43,
+      "spectron_current_name": "sub_FF028",
+      "spectron_default_name": true,
+      "spectron_ea": "0xff028",
+      "spectron_instruction_count": 345,
+      "spectron_size": 1388,
+      "spectron_strings": [
+        " into ",
+        "*",
+        "Unzipped ",
+        "files"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The candidate initializes the same executable deny-list, archive list, path character tables, tileobjects path, and supported package extensions.",
+        "The exact six-string table is preserved in the rebuilt binary and the target has the same one-block static-initializer role.",
+        "This is a static role anchor, not a claim that every helper called by the initializer has also been translated."
+      ],
+      "match_kind": "manual-core-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 1,
+      "original_ea": "0xfd054",
+      "original_instruction_count": 94,
+      "original_name": "TFileScripting_initStaticVars_void",
+      "original_size": 380,
+      "original_strings": [
+        ".exe,.dll,.sh,.so,.bat,.cmd,.com,.inf,.lnk,.mdb,.msi,.ocx,.pif,.reg,.scr,.sys,.app",
+        ".zip,.wba,.ods",
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-/:%",
+        "tileobjects/",
+        "zip,gpak,app,nw,graal,gmap"
+      ],
+      "proposed_name": "v18_TFileScripting_initStaticVars_void",
+      "semantic_match_already_present": false,
+      "source_basis": "file-scripting extension, path, and allowed-folder table initialization",
+      "spectron_basic_block_count": 1,
+      "spectron_current_name": "_Z10_slS2abGk1v",
+      "spectron_default_name": false,
+      "spectron_ea": "0xff65c",
+      "spectron_instruction_count": 99,
+      "spectron_size": 400,
+      "spectron_strings": [
+        ".exe,.dll,.sh,.so,.bat,.cmd,.com,.inf,.lnk,.mdb,.msi,.ocx,.pif,.reg,.scr,.sys,.app",
+        ".zip,.wba,.ods",
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-/:%",
+        "tileobjects/",
+        "zip,gpak,app,nw,graal,gmap"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The candidate initializes the RenderGUI profiler label, clears the rendering managers, and invokes the rebuilt GUI canvas frame path.",
+        "It preserves the display-state cleanup and restart handling surrounding the render call and returns success on the same normal path.",
+        "The target has the same unique RenderGUI string and nearly the same compact control flow despite one fewer basic block."
+      ],
+      "match_kind": "manual-core-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 13,
+      "original_ea": "0x15d224",
+      "original_instruction_count": 60,
+      "original_name": "TClientEnvironment_drawGame_bool",
+      "original_size": 248,
+      "original_strings": [
+        "RenderGUI"
+      ],
+      "proposed_name": "v18_TClientEnvironment_drawGame_bool",
+      "semantic_match_already_present": false,
+      "source_basis": "RenderGUI setup, frame clearing, display-state handling, and successful return",
+      "spectron_basic_block_count": 12,
+      "spectron_current_name": "_ZN10a7qxJaHqKV10LV3BJalVDZEb",
+      "spectron_default_name": false,
+      "spectron_ea": "0x16027c",
+      "spectron_instruction_count": 57,
+      "spectron_size": 236,
+      "spectron_strings": [
+        "RenderGUI"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The candidate loads or creates StartScript_GraalGui, obtains GUIContainer, and installs the GraalControl and GraalControl3D controls.",
+        "Its pseudocode follows the same script-universe and canvas-content setup as the 1.8 function.",
+        "The four distinctive GUI strings are preserved, and both builds have the same compact 19-block versus 18-block setup role."
+      ],
+      "match_kind": "manual-core-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 19,
+      "original_ea": "0x167e88",
+      "original_instruction_count": 172,
+      "original_name": "TGUIScriptLoader_showGameGui_void",
+      "original_size": 692,
+      "original_strings": [
+        "GUIContainer",
+        "GraalControl",
+        "GraalControl3D",
+        "StartScript_GraalGui"
+      ],
+      "proposed_name": "v18_TGUIScriptLoader_showGameGui_void",
+      "semantic_match_already_present": false,
+      "source_basis": "Graal GUI script creation and GUIContainer control-tree setup",
+      "spectron_basic_block_count": 18,
+      "spectron_current_name": "_ZN10s_viIa9wbT10zKdiIaUaXSEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x16b848",
+      "spectron_instruction_count": 175,
+      "spectron_size": 700,
+      "spectron_strings": [
+        "GUIContainer",
+        "GraalControl",
+        "GraalControl3D",
+        "StartScript_GraalGui"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The candidate looks up StartConnectMessage, resolves the same GUI control, and calls the dialog hide or close vtable operation when it is active.",
+        "The target and source retain the same seven-block shape and the same single script-control identifier.",
+        "This directly anchors the UI transition that should follow a completed connection or server warp."
+      ],
+      "match_kind": "manual-core-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 7,
+      "original_ea": "0x1684f4",
+      "original_instruction_count": 42,
+      "original_name": "TGUIScriptLoader_hideConnectingWindow_void",
+      "original_size": 172,
+      "original_strings": [
+        "StartConnectMessage"
+      ],
+      "proposed_name": "v18_TGUIScriptLoader_hideConnectingWindow_void",
+      "semantic_match_already_present": false,
+      "source_basis": "StartConnectMessage lookup and connecting-dialog hide operation",
+      "spectron_basic_block_count": 7,
+      "spectron_current_name": "_ZN10s_viIa9wbT10PFnhIaXweSEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x16bed8",
+      "spectron_instruction_count": 41,
+      "spectron_size": 168,
+      "spectron_strings": [
+        "StartConnectMessage"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The candidate resolves or creates the StartScript_MessageBoxDialog object and loads the same embedded GUI script resource.",
+        "It preserves the same script-universe registration, control initialization, and dialog activation sequence.",
+        "The exact script name and matching five-block versus four-block wrapper shape make this a direct UI anchor."
+      ],
+      "match_kind": "manual-core-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 5,
+      "original_ea": "0x1685a0",
+      "original_instruction_count": 76,
+      "original_name": "TGUIScriptLoader_createMessageBoxDialog_void",
+      "original_size": 304,
+      "original_strings": [
+        "StartScript_MessageBoxDialog"
+      ],
+      "proposed_name": "v18_TGUIScriptLoader_createMessageBoxDialog_void",
+      "semantic_match_already_present": false,
+      "source_basis": "StartScript_MessageBoxDialog creation and script loading",
+      "spectron_basic_block_count": 4,
+      "spectron_current_name": "_ZN10s_viIa9wbT10CGXgIauPSREv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x16bf80",
+      "spectron_instruction_count": 75,
+      "spectron_size": 300,
+      "spectron_strings": [
+        "StartScript_MessageBoxDialog"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The candidate resolves MessageBoxDialog_Text, assigns the supplied text, resolves MessageBoxDialog, and pushes the dialog onto the GUI canvas.",
+        "It retains the same optional loading-state and cursor interactions seen in the 1.8 pseudocode.",
+        "The rebuilt target has the same 17 basic blocks and exact two-string dialog vocabulary, with only instruction-boundary changes."
+      ],
+      "match_kind": "manual-core-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 17,
+      "original_ea": "0x1686d0",
+      "original_instruction_count": 103,
+      "original_name": "TGUIScriptLoader_showMessageBox_TString_const_TString_const_bool",
+      "original_size": 412,
+      "original_strings": [
+        "MessageBoxDialog",
+        "MessageBoxDialog_Text"
+      ],
+      "proposed_name": "v18_TGUIScriptLoader_showMessageBox_TString_const_TString_const_bool",
+      "semantic_match_already_present": false,
+      "source_basis": "message-box text assignment, dialog display, and loading-state interaction",
+      "spectron_basic_block_count": 17,
+      "spectron_current_name": "_ZN10s_viIa9wbT10HG5gIazo_RERK10C8THgaTQxFS2_b",
+      "spectron_default_name": false,
+      "spectron_ea": "0x16c0ac",
+      "spectron_instruction_count": 101,
+      "spectron_size": 412,
+      "spectron_strings": [
+        "MessageBoxDialog",
+        "MessageBoxDialog_Text"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The candidate resolves or creates StartScript_Connector and loads the same connector recovery script.",
+        "The surrounding script-universe and GUI-control calls match the failed-safe connector role in the 1.8 build.",
+        "The exact script name and matching five-block versus four-block wrapper shape support the correspondence."
+      ],
+      "match_kind": "manual-core-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 5,
+      "original_ea": "0x1689c4",
+      "original_instruction_count": 75,
+      "original_name": "TGUIScriptLoader_runFailedsafeConnector_void",
+      "original_size": 300,
+      "original_strings": [
+        "StartScript_Connector"
+      ],
+      "proposed_name": "v18_TGUIScriptLoader_runFailedsafeConnector_void",
+      "semantic_match_already_present": false,
+      "source_basis": "StartScript_Connector creation and failed-safe connector activation",
+      "spectron_basic_block_count": 4,
+      "spectron_current_name": "_ZN10s_viIa9wbT10Q1JjIajldUEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x16c3a0",
+      "spectron_instruction_count": 74,
+      "spectron_size": 296,
+      "spectron_strings": [
+        "StartScript_Connector"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The candidate reads the current focused control name and compares it against ChatBar and ChatBar3D.",
+        "It preserves the same early returns for missing GUI state and the same two-control fallback check.",
+        "The target's larger rebuilt body still has the distinctive input-control strings and the same boolean result role."
+      ],
+      "match_kind": "manual-core-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 10,
+      "original_ea": "0x1690c8",
+      "original_instruction_count": 36,
+      "original_name": "TInput_graalControlHasFocus_bool",
+      "original_size": 144,
+      "original_strings": [
+        "ChatBar",
+        "ChatBar3D"
+      ],
+      "proposed_name": "v18_TInput_graalControlHasFocus_bool",
+      "semantic_match_already_present": false,
+      "source_basis": "focused-control lookup for ChatBar and ChatBar3D",
+      "spectron_basic_block_count": 9,
+      "spectron_current_name": "_ZN10GaA2gaD2MX10Jxipfa7cUzEb",
+      "spectron_default_name": false,
+      "spectron_ea": "0x16cac8",
+      "spectron_instruction_count": 57,
+      "spectron_size": 228,
+      "spectron_strings": [
+        "ChatBar",
+        "ChatBar3D"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The candidate enforces the same 20,000,000-byte limit, queues an upload object on success, and reports oversized files through the game log path.",
+        "It owns the same File, maximum-size, and bytes message fragments and retains the same list insertion role.",
+        "The target's eight-block body and matching argument shape are consistent with a rebuilt client helper rather than an unrelated file routine."
+      ],
+      "match_kind": "manual-core-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 8,
+      "original_ea": "0x1e9068",
+      "original_instruction_count": 71,
+      "original_name": "TClient_uploadFile_TString_const",
+      "original_size": 304,
+      "original_strings": [
+        " bytes)",
+        " is too big to upload (max ",
+        "File ",
+        "onFolderLog"
+      ],
+      "proposed_name": "v18_TClient_uploadFile_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "upload-size validation, upload object creation, and folder-log event",
+      "spectron_basic_block_count": 8,
+      "spectron_current_name": "_ZN10w6qzgacqqy10xIp4xabfkhERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1ed4c4",
+      "spectron_instruction_count": 83,
+      "spectron_size": 352,
+      "spectron_strings": [
+        " bytes)",
+        " is too big to upload (max ",
+        "File "
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The candidate iterates the supplied line list and sends every line to the game log channel.",
+        "It retains the same temporary string-list construction and per-line logging sequence.",
+        "The target was a default sub_ name, so the reviewed alias supplies the missing client role without transferring the old address."
+      ],
+      "match_kind": "manual-core-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 4,
+      "original_ea": "0x1f1d38",
+      "original_instruction_count": 38,
+      "original_name": "TClient_logGameEcho",
+      "original_size": 152,
+      "original_strings": [
+        "game"
+      ],
+      "proposed_name": "v18_TClient_logGameEcho",
+      "semantic_match_already_present": false,
+      "source_basis": "game-channel logging for each line in a client message",
+      "spectron_basic_block_count": 4,
+      "spectron_current_name": "sub_1F6538",
+      "spectron_default_name": true,
+      "spectron_ea": "0x1f6538",
+      "spectron_instruction_count": 39,
+      "spectron_size": 156,
+      "spectron_strings": [
+        "game"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The candidate reads the HTTP response, handles the same size guard, parses the returned script data, and invokes the script runner on successful completion.",
+        "It owns the distinctive oversized-web-file message and calls the same read, pre-parse, save, request-removal, and script-execution helpers.",
+        "Both builds retain 35 basic blocks and the same response-state fields, while the 2.2 function is expanded by the rebuilt implementation."
+      ],
+      "match_kind": "manual-core-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 35,
+      "original_ea": "0x2025a0",
+      "original_instruction_count": 266,
+      "original_name": "THTTPRequest_runScript_void",
+      "original_size": 1072,
+      "original_strings": [
+        " (size of ",
+        " bytes)",
+        "Web file is too huge, download skipped: ",
+        "files",
+        "onReceiveData"
+      ],
+      "proposed_name": "v18_THTTPRequest_runScript_void",
+      "semantic_match_already_present": false,
+      "source_basis": "web-script response parsing, size guard, script execution, and completion",
+      "spectron_basic_block_count": 35,
+      "spectron_current_name": "_ZN10ZAuvgaUl6u10_xWAgaiSGzEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x207db8",
+      "spectron_instruction_count": 289,
+      "spectron_size": 1168,
+      "spectron_strings": [
+        " (size of ",
+        " bytes)",
+        "Web file is too huge, download skipped: ",
+        "files"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The candidate resolves ServerListGui, attaches it to the same GUI container, and changes the connecting state through the server-list environment.",
+        "It calls the reviewed connecting-window and game-GUI routines in the same handoff sequence.",
+        "The exact GUI identifiers and matching 13-block shape make this a direct bridge between network completion and rendered UI state."
+      ],
+      "match_kind": "manual-core-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_basic_block_count": 13,
+      "original_ea": "0x203bd8",
+      "original_instruction_count": 85,
+      "original_name": "TServerList_showConnectingWindow_void",
+      "original_size": 344,
+      "original_strings": [
+        "GUIContainer",
+        "ServerListGui"
+      ],
+      "proposed_name": "v18_TServerList_showConnectingWindow_void",
+      "semantic_match_already_present": false,
+      "source_basis": "server-list dialog setup, connecting-window transition, and game GUI handoff",
+      "spectron_basic_block_count": 13,
+      "spectron_current_name": "_ZN10xiYWfajld110cU8hIaX5SSEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x2092a0",
+      "spectron_instruction_count": 85,
+      "spectron_size": 348,
+      "spectron_strings": [
+        "GUIContainer",
+        "ServerListGui"
+      ]
+    }
+  ],
+  "artifact": "spectron_core_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v3.json",
+    "spectron_features_sha256": "031afed73611783e0b16be71009e20118fc90a56e5d03e5ec04526f654f5cf27"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated or default 2.2 name in the evidence row.",
+    "Static initializer rows identify preserved tables and should not be read as proof that every referenced helper has also been translated."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for resources, rendering, GUI, scripting, and client support",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 16,
+    "high_confidence_count": 16,
+    "new_context_anchor_count": 16,
+    "target_default_name_count": 2
+  }
+}

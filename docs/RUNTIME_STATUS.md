@@ -476,6 +476,16 @@ This is the short handoff view. The full reasoning and command history are in
     disposable translated IDA copy and do not alter the supplied APK. See
     `artifacts/spectron_network_manual_translation_anchors_20260826.json`.
 
+65. Clean IDA review added 16 high-confidence core anchors for resource
+    refresh, decompression, rendering, GUI setup, dialog transitions, input
+    focus, uploads, game logging, web-script execution, and the server-list
+    handoff. They target Spectron addresses `0xee558`, `0xef090`, `0xf0058`,
+    `0xff028`, `0xff65c`, `0x16027c`, `0x16b848`, `0x16bed8`, `0x16bf80`,
+    `0x16c0ac`, `0x16c3a0`, `0x16cac8`, `0x1ed4c4`, `0x1f6538`, `0x207db8`,
+    and `0x2092a0`. All 16 names reopened successfully in the v4 disposable
+    copy. See `artifacts/spectron_core_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

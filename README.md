@@ -223,6 +223,14 @@ anchors are applied in the local disposable copy
 `/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v3.i64`,
 which reopened with all six names intact.
 
+A fourth disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v4.i64`,
+adds 16 reviewed core anchors for resource loading, rendering, GUI setup,
+file scripting, input focus, HTTP script execution, and client support. All
+16 reopened with their `v18_` names intact. The copy hash and evidence are
+recorded in `artifacts/spectron_core_manual_translation_anchors_20260826.json`
+and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 The first direct emulator launch of the supplied Spectron package also found
 a separate modding-layer problem. After Start was tapped, `libxposed.so`
 crashed at its statically confirmed WebTop `crash` command branch. The same
@@ -545,8 +553,10 @@ proves the local native TLS path, not a current live certificate or service.
   `tools/match_spectron_semantic_functions.py` builds the reviewed 1.8 to
   Spectron semantic map.
   `tools/generate_spectron_exact_name_anchors.py` records preserved exact
-  function names, while `tools/generate_spectron_network_anchors.py` records
-  reviewed connector and socket correspondences.
+  function names, `tools/generate_spectron_network_anchors.py` records
+  reviewed connector and socket correspondences, and
+  `tools/generate_spectron_core_anchors.py` records reviewed resource, GUI,
+  rendering, scripting, and client correspondences.
   `tools/ida_apply_spectron_translation.py` and
   `tools/ida_apply_spectron_manual_anchors.py` write separate disposable IDA
   copies, while the matching verification scripts reopen and check them. The

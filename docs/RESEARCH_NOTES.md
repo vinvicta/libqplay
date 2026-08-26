@@ -2177,3 +2177,44 @@ existing manual-anchor IDA scripts accepted its artifact type through
 `analysis/spectron_libqplay_translated_v3.i64`. A clean reopen verified all
 six names with zero failures. The resulting database SHA-256 is
 `3e85fe26f63574232b445c249775f52b53efb12a71a5e046375ea216b61d1c95`.
+
+## Spectron core anchors
+
+The next pass reviewed 16 functions that connect downloaded resources and
+client state to the visible game. The review covered two resource-refresh
+methods, two static tables, the draw boundary, the main GUI loader, connecting
+and message-box helpers, the failed-safe connector, input focus, file upload,
+game logging, web-script execution, and the server-list transition.
+
+The resource pair at Spectron `0xee558` and `0xef090` preserves the extension
+dispatch, map-header checks, `webfiles` path handling, resource lookup, and
+linked-object refresh behavior. The static initializers at `0xf0058` and
+`0xff65c` preserve the image, executable, archive, path, and package
+extension tables. The target at `0xff028` is an IDA default `sub_` function,
+but its pseudocode walks resource entries, performs decompression, refreshes
+objects, and reports `Unzipped ... into ... files`, which makes the restored
+`TFileScripting_script_decompressFile` role well supported.
+
+The rendering and GUI rows are similarly direct. Spectron `0x16027c` owns the
+`RenderGUI` profiler label, render-manager clearing, and normal success return.
+`0x16b848` loads `StartScript_GraalGui` and installs `GUIContainer`,
+`GraalControl`, and `GraalControl3D`. `0x16bed8` hides the active
+`StartConnectMessage` dialog. `0x16bf80` creates the message-box script,
+`0x16c0ac` assigns `MessageBoxDialog_Text` and displays the dialog, and
+`0x16c3a0` activates `StartScript_Connector`. The input helper at `0x16cac8`
+checks `ChatBar` and `ChatBar3D`, which ties the UI translation to keyboard
+focus behavior.
+
+The remaining rows preserve client support behavior. `0x1ed4c4` enforces the
+20,000,000-byte upload limit and queues accepted files. `0x1f6538` logs each
+line to the `game` channel. `0x207db8` reads and parses web-script responses,
+enforces the size guard, and runs accepted scripts. `0x2092a0` resolves
+`ServerListGui`, updates the GUI container, and calls the connecting and game
+GUI paths in the same transition sequence.
+
+The full evidence is in
+`artifacts/spectron_core_manual_translation_anchors_20260826.json`, generated
+by `tools/generate_spectron_core_anchors.py`. All 16 names were applied to
+`analysis/spectron_libqplay_translated_v4.i64` and verified after reopening.
+The database SHA-256 is
+`3d4f217fcd20e21839957f4bd68a5fefa3998294fb6eebe93df760dd06e966b3`.

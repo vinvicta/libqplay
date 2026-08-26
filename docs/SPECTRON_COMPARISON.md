@@ -204,6 +204,9 @@ large for this repository:
   and JNI loop.
 * `analysis/spectron_libqplay_translated_v3.i64` adds six reviewed connector
   and socket anchors on top of the v2 copy.
+* `analysis/spectron_libqplay_translated_v4.i64` adds 16 reviewed core
+  anchors for resource loading, rendering, GUI setup, scripting, input, and
+  client support on top of the v3 copy.
 
 The second copy was reopened and checked. Its SHA-256 is
 `fab82bedbafb864513dfbfc144f657d7542816d2ff883abe1a55c16753f55618`.
@@ -252,6 +255,48 @@ The third copy was reopened and checked after applying the six network
 anchors. Its SHA-256 is
 `3e85fe26f63574232b445c249775f52b53efb12a71a5e046375ea216b61d1c95`.
 The close-and-reopen result recorded six verified names with zero failures.
+
+## Spectron core anchors
+
+The next review pass focused on code that connects the network result to a
+visible game. These rows were selected from clean Spectron pseudocode, not
+from an address delta. The generator also checked the expected target string
+set before emitting the artifact. The 16 rows are:
+
+| 1.8 role | Spectron address | Preserved evidence |
+| --- | ---: | --- |
+| `TResourceFunctions_updateGameObjectsForFile_TString_const` | `0xee558` | Extension dispatch, `.enc` stripping, `khead`, `zone_head`, GANI update, and map refresh |
+| `TResourceFunctions_updateResourceObject_TString_const_bool` | `0xef090` | `webfiles` path construction, resource lookup, linked-object refresh, and update notification |
+| `TResourceFunctions_initStaticVars_void` | `0xf0058` | Exact image-extension table and one-block static initializer |
+| `TFileScripting_script_decompressFile` | `0xff028` | Resource iteration, decompression, and `Unzipped ... into ... files` reporting |
+| `TFileScripting_initStaticVars_void` | `0xff65c` | Exact executable deny-list, archive list, path characters, and package extensions |
+| `TClientEnvironment_drawGame_bool` | `0x16027c` | `RenderGUI`, frame clearing, display-state handling, and successful return |
+| `TGUIScriptLoader_showGameGui_void` | `0x16b848` | `StartScript_GraalGui`, `GUIContainer`, `GraalControl`, and `GraalControl3D` |
+| `TGUIScriptLoader_hideConnectingWindow_void` | `0x16bed8` | `StartConnectMessage` lookup and active-dialog hide operation |
+| `TGUIScriptLoader_createMessageBoxDialog_void` | `0x16bf80` | `StartScript_MessageBoxDialog` lookup or creation and script loading |
+| `TGUIScriptLoader_showMessageBox_TString_const_TString_const_bool` | `0x16c0ac` | `MessageBoxDialog_Text`, text assignment, dialog push, and loading interaction |
+| `TGUIScriptLoader_runFailedsafeConnector_void` | `0x16c3a0` | `StartScript_Connector` lookup or creation and recovery activation |
+| `TInput_graalControlHasFocus_bool` | `0x16cac8` | Focused-control checks for `ChatBar` and `ChatBar3D` |
+| `TClient_uploadFile_TString_const` | `0x1ed4c4` | 20,000,000-byte limit, upload queueing, and file log path |
+| `TClient_logGameEcho` | `0x1f6538` | Per-line logging to the `game` channel |
+| `THTTPRequest_runScript_void` | `0x207db8` | HTTP response reading, size guard, script parsing, and execution |
+| `TServerList_showConnectingWindow_void` | `0x2092a0` | `ServerListGui`, GUI container handoff, connecting state, and game GUI transition |
+
+The target functions retain 12 obfuscated C++ names and two IDA default
+`sub_` names. The two defaults are useful negative controls for the symbol
+translation problem: behavior and exact strings support the role, but there
+was no target application name to preserve. The artifact records the current
+target name, both build-specific ranges, all selected string references, and
+the evidence for every row. It is
+`artifacts/spectron_core_manual_translation_anchors_20260826.json`, generated
+by `tools/generate_spectron_core_anchors.py`.
+
+The 16 names were applied to a fresh copy of the v3 database with the existing
+manual-anchor IDA script. A clean reopen found all 16 function starts and
+reported zero failures. The resulting v4 database SHA-256 is
+`3d4f217fcd20e21839957f4bd68a5fefa3998294fb6eebe93df760dd06e966b3`.
+The checkpoint now records the four earlier context anchors, the six network
+anchors, and these 16 core anchors separately.
 
 ## Java observations
 

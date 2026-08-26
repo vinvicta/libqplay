@@ -31,6 +31,8 @@ def main() -> None:
     parser.add_argument("--manual-verification", type=Path)
     parser.add_argument("--network-anchors", type=Path)
     parser.add_argument("--network-verification", type=Path)
+    parser.add_argument("--core-anchors", type=Path)
+    parser.add_argument("--core-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -84,6 +86,27 @@ def main() -> None:
             "verified_name_count": network_verification["verified_name_count"],
             "reopen_failure_count": network_verification["failure_count"],
         }
+    core = None
+    if args.core_anchors or args.core_verification:
+        if not args.core_anchors or not args.core_verification:
+            raise ValueError("core anchors and core verification must be supplied together")
+        core_document = load(args.core_anchors)
+        core_verification = load(args.core_verification)
+        if core_document.get("artifact") != "spectron_core_manual_translation_anchors_20260826":
+            raise ValueError("unexpected core-anchor artifact")
+        if not core_verification.get("verified"):
+            raise ValueError("core-anchor reopen verification did not pass")
+        expected_core = len(core_document["anchors"])
+        if core_verification["verified_name_count"] != expected_core:
+            raise ValueError("core-anchor verification count differs from artifact")
+        core = {
+            "anchor_path": str(args.core_anchors),
+            "anchor_sha256": sha256_path(args.core_anchors),
+            "reopen_verification": str(args.core_verification),
+            "anchor_count": expected_core,
+            "verified_name_count": core_verification["verified_name_count"],
+            "reopen_failure_count": core_verification["failure_count"],
+        }
     result = {
         "schema_version": 1,
         "artifact": "spectron_translation_checkpoint_20260826",
@@ -128,6 +151,11 @@ def main() -> None:
         result["network_anchors"] = network
         result["interpretation"].append(
             "The third database revision also contains the separately reviewed connector and socket context anchors."
+        )
+    if core is not None:
+        result["core_anchors"] = core
+        result["interpretation"].append(
+            "The fourth database revision also contains the separately reviewed resource, rendering, GUI, scripting, and client context anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

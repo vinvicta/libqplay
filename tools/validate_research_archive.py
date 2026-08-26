@@ -65,6 +65,9 @@ def main():
     spectron_network_anchors = load_json(
         "artifacts/spectron_network_manual_translation_anchors_20260826.json"
     )
+    spectron_core_anchors = load_json(
+        "artifacts/spectron_core_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -851,6 +854,16 @@ def main():
     check("Spectron network-anchor high confidence", spectron_network_anchors["summary"]["high_confidence_count"], 6)
     check("Spectron network-anchor semantic overlap", spectron_network_anchors["summary"]["already_in_semantic_map"], 0)
     check(
+        "Spectron core-anchor artifact",
+        spectron_core_anchors["artifact"],
+        "spectron_core_manual_translation_anchors_20260826",
+    )
+    check("Spectron core-anchor network", spectron_core_anchors["network_contacted"], False)
+    check("Spectron core-anchor total", spectron_core_anchors["summary"]["anchor_count"], 16)
+    check("Spectron core-anchor high confidence", spectron_core_anchors["summary"]["high_confidence_count"], 16)
+    check("Spectron core-anchor semantic overlap", spectron_core_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron core-anchor default targets", spectron_core_anchors["summary"]["target_default_name_count"], 2)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -861,6 +874,7 @@ def main():
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
     check("Spectron checkpoint network anchor count", spectron_checkpoint["network_anchors"]["verified_name_count"], 6)
+    check("Spectron checkpoint core anchor count", spectron_checkpoint["core_anchors"]["verified_name_count"], 16)
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -924,6 +938,7 @@ def main():
         spectron_manual,
         spectron_exact_names,
         spectron_network_anchors,
+        spectron_core_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
