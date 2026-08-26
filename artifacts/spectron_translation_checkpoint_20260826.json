@@ -8,6 +8,14 @@
     "reopen_verification": "/tmp/spectron_client_action_anchor_verification_20260826.json",
     "verified_name_count": 11
   },
+  "client_inbound_anchors": {
+    "anchor_count": 8,
+    "anchor_path": "artifacts/spectron_client_inbound_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "589f71f77d5a690b919a55328164469a47070470e73e4d69bf2109720bb010d0",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_client_inbound_anchor_verification_20260826.json",
+    "verified_name_count": 8
+  },
   "client_outbound_anchors": {
     "anchor_count": 29,
     "anchor_path": "artifacts/spectron_client_outbound_manual_translation_anchors_20260826.json",
@@ -37,8 +45,8 @@
     "default_sub_function_count": 1843,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v11.i64",
-    "sha256": "6a34445aa580201a046e227b9ec447b73ee37251e7b716b349474e278e3d1daa"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v12.i64",
+    "sha256": "3b95170bd3689c176a15503764476a13db7c50e194ae771b7c39d9d33e1badfa"
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
@@ -60,7 +68,8 @@
     "The eighth database revision also contains the separately reviewed remaining client outbound packet serializer anchors.",
     "The ninth database revision also contains the separately reviewed resource matching, stream, and game-file resolution anchors.",
     "The tenth database revision also contains the separately reviewed client script bridge anchors.",
-    "The eleventh database revision also contains the separately reviewed client request and window-state serializer anchors."
+    "The eleventh database revision also contains the separately reviewed client request and window-state serializer anchors.",
+    "The twelfth database revision also contains the separately reviewed client inbound and state-transition anchors."
   ],
   "manual_anchors": {
     "anchor_count": 4,
