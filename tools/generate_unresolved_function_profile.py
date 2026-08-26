@@ -88,7 +88,8 @@ def region_definitions() -> list[dict[str, object]]:
             "start": 0x152200,
             "end": 0x153470,
             "family": "General Polygon Clipper",
-            "evidence": "The gap ends at gpc_free_polygon and follows TBitmap::readTGA.",
+            "additional_addresses": [0xE01A0],
+            "evidence": "The main gap ends at gpc_free_polygon and follows TBitmap::readTGA; 0xe01a0 is called by gpc_tristrip_clip at 0x15504c and formats the gpc malloc failure diagnostic for tristrip node creation.",
         },
         {
             "category": "freetype_static_internal",
@@ -148,7 +149,10 @@ def classify(ea: int, init_fini: set[int]) -> tuple[str, str]:
     if ea in init_fini:
         return "init_or_fini_array_entry", "The address is referenced by the ELF .init_array or .fini_array."
     for region in region_definitions():
-        if int(region["start"]) <= ea < int(region["end"]):
+        extra_addresses = {
+            int(address) for address in region.get("additional_addresses", [])
+        }
+        if ea in extra_addresses or int(region["start"]) <= ea < int(region["end"]):
             return str(region["category"]), str(region["evidence"])
     return "app_or_engine_unknown", "No source name or safe library-region classification was recovered."
 
@@ -197,15 +201,19 @@ def generate(args: argparse.Namespace) -> dict[str, object]:
 
     regions = []
     for region in region_definitions():
-        regions.append(
-            {
-                "category": region["category"],
-                "family": region["family"],
-                "start": f"0x{int(region['start']):x}",
-                "end_exclusive": f"0x{int(region['end']):x}",
-                "evidence": region["evidence"],
-            }
-        )
+        item = {
+            "category": region["category"],
+            "family": region["family"],
+            "start": f"0x{int(region['start']):x}",
+            "end_exclusive": f"0x{int(region['end']):x}",
+            "evidence": region["evidence"],
+        }
+        if region.get("additional_addresses"):
+            item["additional_addresses"] = [
+                f"0x{int(address):x}"
+                for address in region["additional_addresses"]
+            ]
+        regions.append(item)
 
     result = {
         "purpose": "Classify unresolved IDA default sub_ entries without assigning speculative names.",

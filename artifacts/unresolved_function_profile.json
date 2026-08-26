@@ -4,14 +4,8 @@
   "categories": [
     {
       "category": "app_or_engine_unknown",
-      "count": 139,
+      "count": 138,
       "entries": [
-        {
-          "current_ida_name": "sub_E01A0",
-          "ea": "0xe01a0",
-          "segment": ".text",
-          "size": 48
-        },
         {
           "current_ida_name": "sub_E01D0",
           "ea": "0xe01d0",
@@ -842,7 +836,7 @@
         }
       ],
       "evidence": "No source name or safe library-region classification was recovered.",
-      "total_bytes": 18076
+      "total_bytes": 18028
     },
     {
       "category": "bzip2_static_internal",
@@ -1844,8 +1838,14 @@
     },
     {
       "category": "gpc_static_internal",
-      "count": 3,
+      "count": 4,
       "entries": [
+        {
+          "current_ida_name": "sub_E01A0",
+          "ea": "0xe01a0",
+          "segment": ".text",
+          "size": 48
+        },
         {
           "current_ida_name": "sub_152200",
           "ea": "0x152200",
@@ -1865,8 +1865,8 @@
           "size": 2404
         }
       ],
-      "evidence": "The gap ends at gpc_free_polygon and follows TBitmap::readTGA.",
-      "total_bytes": 4720
+      "evidence": "The main gap ends at gpc_free_polygon and follows TBitmap::readTGA; 0xe01a0 is called by gpc_tristrip_clip at 0x15504c and formats the gpc malloc failure diagnostic for tristrip node creation.",
+      "total_bytes": 4768
     },
     {
       "category": "init_or_fini_array_entry",
@@ -3022,11 +3022,11 @@
   "category_summary": [
     {
       "category": "app_or_engine_unknown",
-      "count": 139,
+      "count": 138,
       "evidence": "No source name or safe library-region classification was recovered.",
-      "first_ea": "0xe01a0",
+      "first_ea": "0xe01d0",
       "last_ea": "0x249580",
-      "total_bytes": 18076
+      "total_bytes": 18028
     },
     {
       "category": "bzip2_static_internal",
@@ -3062,11 +3062,11 @@
     },
     {
       "category": "gpc_static_internal",
-      "count": 3,
-      "evidence": "The gap ends at gpc_free_polygon and follows TBitmap::readTGA.",
-      "first_ea": "0x152200",
+      "count": 4,
+      "evidence": "The main gap ends at gpc_free_polygon and follows TBitmap::readTGA; 0xe01a0 is called by gpc_tristrip_clip at 0x15504c and formats the gpc malloc failure diagnostic for tristrip node creation.",
+      "first_ea": "0xe01a0",
       "last_ea": "0x152b0c",
-      "total_bytes": 4720
+      "total_bytes": 4768
     },
     {
       "category": "init_or_fini_array_entry",
@@ -3149,9 +3149,12 @@
   "purpose": "Classify unresolved IDA default sub_ entries without assigning speculative names.",
   "regions": [
     {
+      "additional_addresses": [
+        "0xe01a0"
+      ],
       "category": "gpc_static_internal",
       "end_exclusive": "0x153470",
-      "evidence": "The gap ends at gpc_free_polygon and follows TBitmap::readTGA.",
+      "evidence": "The main gap ends at gpc_free_polygon and follows TBitmap::readTGA; 0xe01a0 is called by gpc_tristrip_clip at 0x15504c and formats the gpc malloc failure diagnostic for tristrip node creation.",
       "family": "General Polygon Clipper",
       "start": "0x152200"
     },

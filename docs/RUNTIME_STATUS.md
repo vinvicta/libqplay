@@ -271,10 +271,12 @@ This is the short handoff view. The full reasoning and command history are in
     unresolved. No speculative names were added and no endpoint was
     contacted.
 44. The unresolved-function profile separates those 488 default entries into
-    329 likely static third-party functions, 19 ELF init/fini entries, one PLT
-    resolver slot, and 139 application or engine entries. The report records
-    these as triage categories only. No speculative source names were added
-    and no endpoint was contacted.
+    330 likely static third-party functions, 19 ELF init/fini entries, one PLT
+    resolver slot, and 138 application or engine entries. The GPC count now
+    includes `0xe01a0`, which is called by `gpc_tristrip_clip` and formats the
+    library's `gpc malloc failure` diagnostic. The report records these as
+    triage categories only. No speculative source names were added and no
+    endpoint was contacted.
 
 ## Not verified
 
