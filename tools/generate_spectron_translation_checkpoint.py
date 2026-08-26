@@ -105,6 +105,8 @@ def main() -> None:
     parser.add_argument("--stack-entry-verification", type=Path)
     parser.add_argument("--machine-helper-anchors", type=Path)
     parser.add_argument("--machine-helper-verification", type=Path)
+    parser.add_argument("--array-mutation-anchors", type=Path)
+    parser.add_argument("--array-mutation-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1236,6 +1238,34 @@ def main() -> None:
         result["machine_helper_anchors"] = machine_helper
         result["interpretation"].append(
             "The fortieth database revision also contains the separately reviewed execution restoration, character extraction, and action-context lookup anchors."
+        )
+    array_mutation = None
+    if args.array_mutation_anchors or args.array_mutation_verification:
+        if not args.array_mutation_anchors or not args.array_mutation_verification:
+            raise ValueError(
+                "array-mutation anchors and array-mutation verification must be supplied together"
+            )
+        array_mutation_document = load(args.array_mutation_anchors)
+        array_mutation_verification = load(args.array_mutation_verification)
+        if array_mutation_document.get("artifact") != "spectron_array_mutation_manual_translation_anchors_20260826":
+            raise ValueError("unexpected array-mutation anchor artifact")
+        if not array_mutation_verification.get("verified"):
+            raise ValueError("array-mutation anchor reopen verification did not pass")
+        expected_array_mutation = len(array_mutation_document["anchors"])
+        if array_mutation_verification["verified_name_count"] != expected_array_mutation:
+            raise ValueError("array-mutation verification count differs from artifact")
+        array_mutation = {
+            "anchor_path": str(args.array_mutation_anchors),
+            "anchor_sha256": sha256_path(args.array_mutation_anchors),
+            "reopen_verification": str(args.array_mutation_verification),
+            "anchor_count": expected_array_mutation,
+            "verified_name_count": array_mutation_verification["verified_name_count"],
+            "reopen_failure_count": array_mutation_verification["failure_count"],
+        }
+    if array_mutation is not None:
+        result["array_mutation_anchors"] = array_mutation
+        result["interpretation"].append(
+            "The forty-first database revision also contains the separately reviewed GS2 single-cell, two-dimensional, and replacement array mutation anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

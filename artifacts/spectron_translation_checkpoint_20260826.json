@@ -1,4 +1,12 @@
 {
+  "array_mutation_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "artifacts/spectron_array_mutation_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "ab3df8cb82e9793014cb834e098fb6463150e9bfcf47e48dfdb6e3bab213369d",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_array_mutation_verify_v43.json",
+    "verified_name_count": 3
+  },
   "artifact": "spectron_translation_checkpoint_20260826",
   "client_action_anchors": {
     "anchor_count": 11,
@@ -77,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v42.i64",
-    "sha256": "ade60a5719a41f9769ddd33fd539031cf69dbc31c49feee70bc48557c9e6e46d"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v43.i64",
+    "sha256": "28c062661c587455a8177ffbbd2f3cb9715223db80e3ddee953729e29568f8d2"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -169,7 +177,8 @@
     "The thirty-seventh database revision also contains the separately reviewed event-object and catcher-list constructor, destructor, registration, and receive-path anchors.",
     "The thirty-eighth database revision also contains the separately reviewed GS2 script-action constructor and destructor anchors.",
     "The thirty-ninth database revision also contains the separately reviewed GS2 stack-entry float, string, and object conversion anchors.",
-    "The fortieth database revision also contains the separately reviewed execution restoration, character extraction, and action-context lookup anchors."
+    "The fortieth database revision also contains the separately reviewed execution restoration, character extraction, and action-context lookup anchors.",
+    "The forty-first database revision also contains the separately reviewed GS2 single-cell, two-dimensional, and replacement array mutation anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
