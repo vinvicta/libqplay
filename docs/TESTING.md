@@ -98,6 +98,27 @@ and signed with a local debug key, and the resulting APK had SHA-256
 This package is an offline diagnostic artifact. Do not publish it as a
 production client.
 
+The complete private chain can be rebuilt with the single offline helper:
+
+```bash
+python3 tools/build_arm64_loopback_apk.py \
+  /path/to/GraalOnline+Classic_1.8_APKPure.apk \
+  /tmp/GraalClassic_arm64_loopback.apk \
+  --zipalign /path/to/android-sdk/build-tools/35.0.1/zipalign \
+  --apksigner /path/to/android-sdk/build-tools/35.0.1/apksigner \
+  --keystore /path/to/debug.keystore \
+  --report /tmp/GraalClassic_arm64_loopback.json
+```
+
+The helper removes the other ABI directories, preserves the original
+connector script, applies the five tested native diagnostics, normalizes ZIP
+timestamps, and verifies the signed output. Its default local package uses
+the RSA result bypass. Pass `--skip-rsa-bypass` when the saved response or an
+authorized current package is already known to pass the native RSA check. The
+builder has no live-service behavior and no network side effects. The fresh
+default build and loopback replay are recorded in
+`artifacts/arm64_reproducible_builder_validation_20260826.json`.
+
 For a loading-sequence negative control, apply
 `tools/patch_loading_screen_getter_test.py` after the native diagnostic edits.
 On ARM64 it patches `TClientEnvironment::getLoadingScreenEnabled` at

@@ -355,6 +355,18 @@ This is the short handoff view. The full reasoning and command history are in
     `70e6573244e58125d4092d8265c8acc4e2074dd866bd9cd5897ddf079d39e135`.
     This is the matched negative control for item 51. Details are in
     `artifacts/arm64_native_stock_original_script_control_20260826.json`.
+53. `tools/build_arm64_loopback_apk.py` now rebuilds the complete private
+    ARM64 diagnostic package from the original APK. It keeps the connector
+    script unchanged, removes the other ABI directories, applies the five
+    tested native edits, normalizes ZIP timestamps, and verifies the signed
+    package. Two independent builds produced APK SHA-256
+    `394d9ac33fe7b81638029064f2b8ff2183405729f9b5fd94f6808facc13221fc` and
+    native SHA-256
+    `89a7cf3a10d9da9fb00f50e6917ce10402c1147bcf5738a176c26b32868ba858`.
+    Installing that freshly built package and restoring the two loopback
+    mappings reproduced the rendered-world screenshot and full resource
+    replay. Details are in
+    `artifacts/arm64_reproducible_builder_validation_20260826.json`.
 
 ## Not verified
 

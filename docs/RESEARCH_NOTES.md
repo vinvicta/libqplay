@@ -1730,3 +1730,37 @@ branch at `0x15ca7c`. The test still uses synthetic local assets, emulator
 ARM64 translation, and compatibility patches for the archived connector, so
 it does not establish production behavior. The full capture record is in
 `artifacts/arm64_native_stock_original_script_control_20260826.json`.
+
+## Reproducible diagnostic package build
+
+The individual native patch commands were already documented, but a single
+build path makes the result easier to reproduce without accidentally adding a
+different ABI or a different script. On 2026-08-26 I added
+`tools/build_arm64_loopback_apk.py`. It takes the original APK, stages only
+its ARM64 library and non-library contents, applies the compatibility edits,
+loopback HTTP and resolver redirects, deterministic output-key patch, and
+native loading-state candidate, then zipaligns and signs the result with a
+caller-supplied local keystore.
+
+The helper uses fixed ZIP timestamps and sorted entries. Two independent
+default builds therefore produced the same APK SHA-256
+`394d9ac33fe7b81638029064f2b8ff2183405729f9b5fd94f6808facc13221fc`. The
+patched native library matched the earlier tested hash
+`89a7cf3a10d9da9fb00f50e6917ce10402c1147bcf5738a176c26b32868ba858`. The
+freshly built package passed v1, v2, and v3 signature verification and the
+zip-alignment check.
+
+I installed that exact output on the Android 36 x86_64 emulator, configured
+only the temporary reverse mappings for ports 18080 and 14900, and served the
+same local connector response and cached resource fixtures. The client made
+one connector request, two game connections, requested the map, three level
+containers, and `pics1.png`, continued heartbeats, and reproduced the
+green-world screenshot with SHA-256
+`fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e`. The
+builder and replay hashes are preserved in
+`artifacts/arm64_reproducible_builder_validation_20260826.json`.
+
+This is a private loopback package, not a release client. The default build
+also applies the local RSA-result bypass so it can operate with the controlled
+fixture. The `--skip-rsa-bypass` option retains the native branch for a
+package-preserving test when the response is known to pass the native check.

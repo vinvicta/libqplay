@@ -1,0 +1,102 @@
+{
+  "artifact": "arm64_reproducible_builder_validation_20260826",
+  "date": "2026-08-26",
+  "scope": "127.0.0.1-only replay on an Android 36 x86_64 emulator using translated ARM64 native code",
+  "purpose": "Validate the reproducible ARM64 loopback APK builder and its freshly produced package.",
+  "builder": {
+    "tool": "tools/build_arm64_loopback_apk.py",
+    "input_apk_sha256": "6d6c0428fe890d0f18fb1ce572798d7a8a95853b10078f693026164d6a5f56d7",
+    "input_native_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "patches": [
+      "patch_compatibility_repairs.py",
+      "patch_force_http_parser_test.py",
+      "patch_localhost_resolver_test.py",
+      "patch_fixed_output_rc4_key_test.py",
+      "patch_force_no_premium_loading_test.py"
+    ],
+    "connector_script_unchanged": true,
+    "rsa_bypass_applied": true,
+    "output_native_sha256": "89a7cf3a10d9da9fb00f50e6917ce10402c1147bcf5738a176c26b32868ba858",
+    "output_apk_sha256": "394d9ac33fe7b81638029064f2b8ff2183405729f9b5fd94f6808facc13221fc",
+    "independent_build_hashes": [
+      "394d9ac33fe7b81638029064f2b8ff2183405729f9b5fd94f6808facc13221fc",
+      "394d9ac33fe7b81638029064f2b8ff2183405729f9b5fd94f6808facc13221fc"
+    ],
+    "package_abi": "arm64-v8a",
+    "signer": "local Android Debug certificate"
+  },
+  "emulator": {
+    "device": "emulator-5554",
+    "android_api": 36,
+    "host_abi": "x86_64",
+    "translated_abi": "arm64-v8a",
+    "adb_reverse_ports": {
+      "18080": "127.0.0.1 connector responder",
+      "14900": "127.0.0.1 game responder"
+    }
+  },
+  "connector": {
+    "request_count": 1,
+    "response_bytes": 16446,
+    "response_sha256": "73996942d493a8db4b7b6238dcc9d6e4bb68a91b48ba5946db4cff9252bc4b7c",
+    "request_capture_bytes": 186,
+    "request_capture_sha256": "3586b24ea8f0b90b722bc988c4a7e126ee8e0664f2b06d1cb6e7ab8338e6759f",
+    "request_path": "/con.png"
+  },
+  "game_responder": {
+    "port": 14900,
+    "connections": 2,
+    "server_control_frames": [
+      {
+        "connection": 1,
+        "frames": [178]
+      },
+      {
+        "connection": 2,
+        "frames": [9, 190, 49, 49]
+      }
+    ],
+    "resource_requests": [
+      "basepackage.gupd",
+      "classiciphone.gmap",
+      "main_aa-02.nw",
+      "main_ab-01.nw",
+      "main_ab-02.nw",
+      "pics1.png"
+    ],
+    "captures": {
+      "connection_1_in": {
+        "bytes": 556,
+        "sha256": "6772b90b307493ec3d355b681576d5717797061d4965feb50c76149b4bedcedc"
+      },
+      "connection_1_out": {
+        "bytes": 10541,
+        "sha256": "5000e8f80ae0c91d78864f35abddeccbe47eb6a1a8037312741df88e64517bf9"
+      },
+      "connection_2_in": {
+        "bytes": 875,
+        "sha256": "450c0eb293614b22cfcea9ca8d72aecbcbb248681bef1ae594ccdfaad758e4e7"
+      },
+      "connection_2_out": {
+        "bytes": 249688,
+        "sha256": "602b30282134c85fcf8193720a30971c08e2d96000f66dd67d7fc44f113aaedc"
+      }
+    }
+  },
+  "render_result": {
+    "observed": true,
+    "screen": "green tiled world with player HUD and status icons",
+    "screenshot_bytes": 71633,
+    "screenshot_sha256": "fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e",
+    "captured_while_game_socket_was_open": true,
+    "heartbeat_frames_observed": true
+  },
+  "not_proven": [
+    "A live connector or game-server login.",
+    "That the cached map and level fixtures match the original server revision.",
+    "That the native loading candidate is the intended production repair.",
+    "Behavior on a physical ARM64 device."
+  ],
+  "network_contacted": false,
+  "raw_data_policy": "Raw packet captures, the APK, certificates, keys, maps, images, and level bodies remain outside the repository."
+}

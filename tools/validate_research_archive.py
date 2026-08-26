@@ -35,6 +35,9 @@ def main():
     arm64_native_stock = load_json(
         "artifacts/arm64_native_stock_original_script_control_20260826.json"
     )
+    arm64_builder = load_json(
+        "artifacts/arm64_reproducible_builder_validation_20260826.json"
+    )
     spectron_signature = load_json("artifacts/spectron_function_signature_match.json")
     spectron_hooks = load_json("artifacts/spectron_hook_analysis.json")
 
@@ -369,6 +372,42 @@ def main():
         "70e6573244e58125d4092d8265c8acc4e2074dd866bd9cd5897ddf079d39e135",
     )
     check(
+        "ARM64 builder artifact",
+        arm64_builder["artifact"],
+        "arm64_reproducible_builder_validation_20260826",
+    )
+    check("ARM64 builder network", arm64_builder["network_contacted"], False)
+    check(
+        "ARM64 builder input APK",
+        arm64_builder["builder"]["input_apk_sha256"],
+        "6d6c0428fe890d0f18fb1ce572798d7a8a95853b10078f693026164d6a5f56d7",
+    )
+    check(
+        "ARM64 builder native output",
+        arm64_builder["builder"]["output_native_sha256"],
+        "89a7cf3a10d9da9fb00f50e6917ce10402c1147bcf5738a176c26b32868ba858",
+    )
+    check(
+        "ARM64 builder APK output",
+        arm64_builder["builder"]["output_apk_sha256"],
+        "394d9ac33fe7b81638029064f2b8ff2183405729f9b5fd94f6808facc13221fc",
+    )
+    check(
+        "ARM64 builder independent hashes",
+        len(set(arm64_builder["builder"]["independent_build_hashes"])),
+        1,
+    )
+    check(
+        "ARM64 builder render",
+        arm64_builder["render_result"]["observed"],
+        True,
+    )
+    check(
+        "ARM64 builder screenshot",
+        arm64_builder["render_result"]["screenshot_sha256"],
+        "fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e",
+    )
+    check(
         "IDA validation status",
         ida_validation["status"],
         "validated_persisted_on_disposable_copy",
@@ -432,6 +471,7 @@ def main():
         arm64_revalidation,
         arm64_native_only,
         arm64_native_stock,
+        arm64_builder,
         spectron_signature,
         spectron_hooks,
     ):
