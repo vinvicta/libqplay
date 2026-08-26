@@ -239,6 +239,14 @@ loop. All 13 reopened successfully. The evidence is in
 `artifacts/spectron_runtime_path_manual_translation_anchors_20260826.json`,
 and the v5 database SHA-256 is recorded in the checkpoint.
 
+A sixth disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v6.i64`,
+adds five reviewed update and protocol anchors for download queues, server
+modifications, CRC requests, and modification-time requests. All five
+reopened successfully. The evidence is in
+`artifacts/spectron_update_protocol_manual_translation_anchors_20260826.json`,
+and the v6 database SHA-256 is recorded in the checkpoint.
+
 The first direct emulator launch of the supplied Spectron package also found
 a separate modding-layer problem. After Start was tapped, `libxposed.so`
 crashed at its statically confirmed WebTop `crash` command branch. The same
@@ -567,6 +575,8 @@ proves the local native TLS path, not a current live certificate or service.
   rendering, scripting, and client correspondences. The
   `tools/generate_spectron_runtime_path_anchors.py` generator records reviewed
   map, file-delivery, encrypted-script, text-control, and server-list roles.
+  The `tools/generate_spectron_update_protocol_anchors.py` generator records
+  reviewed download, update, server-modify, CRC, and modification-time roles.
   `tools/ida_apply_spectron_translation.py` and
   `tools/ida_apply_spectron_manual_anchors.py` write separate disposable IDA
   copies, while the matching verification scripts reopen and check them. The

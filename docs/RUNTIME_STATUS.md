@@ -493,6 +493,13 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_runtime_path_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+67. Clean IDA review added five high-confidence update and protocol anchors for
+    download and update queues, server modifications, CRC requests, and
+    modification-time requests. All five names reopened successfully in the
+    v6 disposable copy. See
+    `artifacts/spectron_update_protocol_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

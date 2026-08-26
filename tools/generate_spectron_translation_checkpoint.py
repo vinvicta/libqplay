@@ -35,6 +35,8 @@ def main() -> None:
     parser.add_argument("--core-verification", type=Path)
     parser.add_argument("--runtime-path-anchors", type=Path)
     parser.add_argument("--runtime-path-verification", type=Path)
+    parser.add_argument("--update-protocol-anchors", type=Path)
+    parser.add_argument("--update-protocol-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -186,6 +188,34 @@ def main() -> None:
         result["runtime_path_anchors"] = runtime_path
         result["interpretation"].append(
             "The fifth database revision also contains the separately reviewed map-entry, file-delivery, script, text-control, and server-list context anchors."
+        )
+    update_protocol = None
+    if args.update_protocol_anchors or args.update_protocol_verification:
+        if not args.update_protocol_anchors or not args.update_protocol_verification:
+            raise ValueError(
+                "update-protocol anchors and update-protocol verification must be supplied together"
+            )
+        update_protocol_document = load(args.update_protocol_anchors)
+        update_protocol_verification = load(args.update_protocol_verification)
+        if update_protocol_document.get("artifact") != "spectron_update_protocol_manual_translation_anchors_20260826":
+            raise ValueError("unexpected update-protocol anchor artifact")
+        if not update_protocol_verification.get("verified"):
+            raise ValueError("update-protocol anchor reopen verification did not pass")
+        expected_update_protocol = len(update_protocol_document["anchors"])
+        if update_protocol_verification["verified_name_count"] != expected_update_protocol:
+            raise ValueError("update-protocol verification count differs from artifact")
+        update_protocol = {
+            "anchor_path": str(args.update_protocol_anchors),
+            "anchor_sha256": sha256_path(args.update_protocol_anchors),
+            "reopen_verification": str(args.update_protocol_verification),
+            "anchor_count": expected_update_protocol,
+            "verified_name_count": update_protocol_verification["verified_name_count"],
+            "reopen_failure_count": update_protocol_verification["failure_count"],
+        }
+    if update_protocol is not None:
+        result["update_protocol_anchors"] = update_protocol
+        result["interpretation"].append(
+            "The sixth database revision also contains the separately reviewed download-queue, update-request, server-modify, and image-checksum context anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
