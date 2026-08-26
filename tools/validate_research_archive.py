@@ -32,6 +32,9 @@ def main():
     arm64_native_only = load_json(
         "artifacts/arm64_native_only_original_script_replay_20260826.json"
     )
+    arm64_native_stock = load_json(
+        "artifacts/arm64_native_stock_original_script_control_20260826.json"
+    )
     spectron_signature = load_json("artifacts/spectron_function_signature_match.json")
     spectron_hooks = load_json("artifacts/spectron_hook_analysis.json")
 
@@ -330,6 +333,42 @@ def main():
         "fa83f17b4fe8d4ab880512f970879d09a49648714cde85add86d51280af1333e",
     )
     check(
+        "ARM64 stock-control artifact",
+        arm64_native_stock["artifact"],
+        "arm64_native_stock_original_script_control_20260826",
+    )
+    check("ARM64 stock-control network", arm64_native_stock["network_contacted"], False)
+    check(
+        "ARM64 stock-control APK hash",
+        arm64_native_stock["client"]["apk_sha256"],
+        "fd7c8676939dcf83d929fd5707536d98dbfd8bae009aec9e4f80c71dbaad0031",
+    )
+    check(
+        "ARM64 stock-control native hash",
+        arm64_native_stock["client"]["native_library_sha256"],
+        "f36ab1dc978861b26cb7ec3d9ebb9215b8450ffd73f957275a500de7f6492776",
+    )
+    check(
+        "ARM64 stock-control branch",
+        arm64_native_stock["client"]["native_loading_branch"]["bytes"],
+        "2d 02 00 54",
+    )
+    check(
+        "ARM64 stock-control resource replay",
+        arm64_native_stock["control_result"]["original_script_reached_resource_replay"],
+        True,
+    )
+    check(
+        "ARM64 stock-control render result",
+        arm64_native_stock["render_result"]["observed"],
+        False,
+    )
+    check(
+        "ARM64 stock-control screenshot",
+        arm64_native_stock["render_result"]["screenshot_sha256"],
+        "70e6573244e58125d4092d8265c8acc4e2074dd866bd9cd5897ddf079d39e135",
+    )
+    check(
         "IDA validation status",
         ida_validation["status"],
         "validated_persisted_on_disposable_copy",
@@ -392,6 +431,7 @@ def main():
         ida_residual,
         arm64_revalidation,
         arm64_native_only,
+        arm64_native_stock,
         spectron_signature,
         spectron_hooks,
     ):

@@ -1,0 +1,133 @@
+{
+  "artifact": "arm64_native_stock_original_script_control_20260826",
+  "date": "2026-08-26",
+  "scope": "127.0.0.1-only replay on an Android 36 x86_64 emulator using translated ARM64 native code",
+  "purpose": "Matched negative control for the native-only loading-state isolation replay.",
+  "client": {
+    "package": "com.quattroplay.GraalClassic",
+    "version_name": "1.8",
+    "version_code": 6158,
+    "apk_sha256": "fd7c8676939dcf83d929fd5707536d98dbfd8bae009aec9e4f80c71dbaad0031",
+    "native_abi": "arm64-v8a",
+    "native_library_sha256": "f36ab1dc978861b26cb7ec3d9ebb9215b8450ffd73f957275a500de7f6492776",
+    "connector_script_sha256": "4919f3c82efd4359b992bb69acf6397bda47964c5d0355e88734dbf029b8df8",
+    "connector_script_loading_clear_present": false,
+    "native_loading_branch": {
+      "address": "0x15ca7c",
+      "operation": "stock B.LE branch to the existing clear path",
+      "bytes": "2d 02 00 54",
+      "existing_clear_path": "0x15cac8",
+      "flag_data_va": "0x37a549",
+      "flag_got_va": "0x375e30"
+    },
+    "other_diagnostic_sites": [
+      "connector RSA result bypass retained for matched local package",
+      "expired connector trust check bypassed for the local fixture",
+      "connector HTTP parser routed to local port 18080",
+      "hostname resolver routed to 127.0.0.1",
+      "fixed outgoing RC4 key used by the local responder"
+    ]
+  },
+  "emulator": {
+    "device": "emulator-5554",
+    "android_api": 36,
+    "host_abi": "x86_64",
+    "translated_abi": "arm64-v8a",
+    "adb_reverse_ports": {
+      "18080": "127.0.0.1 connector responder",
+      "14900": "127.0.0.1 game responder"
+    }
+  },
+  "connector": {
+    "request_count": 1,
+    "response_bytes": 16446,
+    "response_sha256": "73996942d493a8db4b7b6238dcc9d6e4bb68a91b48ba5946db4cff9252bc4b7c",
+    "request_capture_bytes": 186,
+    "request_capture_sha256": "3586b24ea8f0b90b722bc988c4a7e126ee8e0664f2b06d1cb6e7ab8338e6759f",
+    "request_path": "/con.png"
+  },
+  "game_responder": {
+    "port": 14900,
+    "connections": 2,
+    "server_control_frames": [
+      {
+        "connection": 1,
+        "frames": [178]
+      },
+      {
+        "connection": 2,
+        "frames": [9, 190, 49, 49]
+      }
+    ],
+    "resource_requests": [
+      "basepackage.gupd",
+      "classiciphone.gmap",
+      "main_aa-02.nw",
+      "main_ab-01.nw",
+      "main_ab-02.nw",
+      "pics1.png"
+    ],
+    "resource_hashes": {
+      "classiciphone.gmap": {
+        "bytes": 25310,
+        "sha256": "708023ce3cd6441a96ff1ddead038d5a4409df83dd1cdfdf4e8e7b12610e02f7"
+      },
+      "main_aa-02.nw-14900.code": {
+        "bytes": 300,
+        "sha256": "887f9aa2a2a44dfa4d9a5da9c98a4a8d0998798609c6cca8f530286945369177"
+      },
+      "main_ab-01.nw-14900.code": {
+        "bytes": 300,
+        "sha256": "23b6919682d05c7db550995f8f7ab000a1e2efdf6ec37d2d11f417f32c200d32"
+      },
+      "main_ab-02.nw-14900.code": {
+        "bytes": 300,
+        "sha256": "f001f9da7d67dc209a607aacb769dd37a7b2c2f79bd67e037350680a5037f821"
+      },
+      "pics1.png": {
+        "bytes": 222897,
+        "sha256": "fe2dff5c4af86179d0cf83306a40c7e7b92d728a99f1f73a5ec2cf9c897764eb"
+      }
+    },
+    "captures": {
+      "connection_1_in": {
+        "bytes": 525,
+        "sha256": "ba7e2045cfbeb9e026b888b61d124c517f63c5d5a3b0ecea39f3a6899de16daa"
+      },
+      "connection_1_out": {
+        "bytes": 376,
+        "sha256": "cebae1af03123172bd27b6e1392350d4c09f94597e6c2bf2cb5d5e49ed923c4f"
+      },
+      "connection_2_in": {
+        "bytes": 777,
+        "sha256": "e5f4265990ea89bc7e5504e445a9f7a414bdc149c7336ebe9b8203b3c5aa2545"
+      },
+      "connection_2_out": {
+        "bytes": 249688,
+        "sha256": "48b61f21b2d10177a2227db8080df8137be1d65dfae3ef92cf87436dde0ace85"
+      }
+    }
+  },
+  "render_result": {
+    "observed": false,
+    "screen": "Graal Online Classic title/loading artwork",
+    "screenshot_bytes": 2680340,
+    "screenshot_sha256": "70e6573244e58125d4092d8265c8acc4e2074dd866bd9cd5897ddf079d39e135",
+    "captured_while_game_socket_was_open": true,
+    "heartbeat_frames_observed": true
+  },
+  "control_result": {
+    "stock_branch_preserved": true,
+    "original_script_reached_resource_replay": true,
+    "native_only_candidate_present": false,
+    "interpretation": "With the native branch restored to stock, the original connector script still reaches the full local map, level, image, and heartbeat path, but the loading artwork remains visible. This is the matched negative control for the native-only render result."
+  },
+  "not_proven": [
+    "A live connector or game-server login.",
+    "That the cached map and level fixtures match the original server revision.",
+    "That the native loading candidate is the intended production repair.",
+    "Behavior on a physical ARM64 device."
+  ],
+  "network_contacted": false,
+  "raw_data_policy": "Raw packet captures, the APK, certificates, keys, maps, images, and level bodies remain outside the repository."
+}

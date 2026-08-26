@@ -121,6 +121,20 @@ renders through the ordinary JNI branch. The first apparent failure of this
 candidate used a map name without the `.gmap` suffix and should not be used as
 evidence against it.
 
+The matched negative control starts from the same diagnostic library after the
+non-premium edit and restores the original branch:
+
+```bash
+python3 tools/patch_restore_premium_loading_test.py \
+  /tmp/libqplay.nonpremium.so \
+  /tmp/libqplay.stock-loading.so
+```
+
+With the original connector script and the same local fixtures, this control
+completed the resource and heartbeat path but kept the title/loading artwork.
+The exact package, native library, and capture hashes are in
+`artifacts/arm64_native_stock_original_script_control_20260826.json`.
+
 ## Replacing the historical trust bundle
 
 The certificate-skip patch is useful for isolating later protocol stages, but

@@ -101,6 +101,12 @@ compatible with the VM and useful as a control, but it is not required for
 the observed local render. See
 `artifacts/arm64_native_only_original_script_replay_20260826.json`.
 
+The matched stock-branch control used the same original script, responder,
+resource fixtures, and translated ARM64 package with `0x15ca7c` restored to
+`B.LE`. It completed the same resource and heartbeat path but kept showing the
+title/loading artwork. That control is recorded in
+`artifacts/arm64_native_stock_original_script_control_20260826.json`.
+
 The ARM64 IDA audit now identifies the local screen split more precisely. The
 native loading byte at `0x37a549` starts at `1`; the successful `classic`
 premium-option path skips the native clear at `0x15cac8`; and the packet-190
@@ -222,6 +228,8 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/arm64_native_only_original_script_replay_20260826.json` records
   the native-only loading-state isolation run with the original connector
   script and its capture hashes.
+* `artifacts/arm64_native_stock_original_script_control_20260826.json` records
+  the matched stock-branch negative control for that isolation run.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.
 * `symbols/libqplay.symbols.json` is the machine-readable equivalent.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.
@@ -330,6 +338,8 @@ proves the local native TLS path, not a current live certificate or service.
   records the narrow compiler adapter. `tools/patch_connector_bytecode_loading_clear.py`
   preserves the original
   VM stream while adding the tested login-time loading clear.
+  `tools/patch_restore_premium_loading_test.py` restores the stock ARM64
+  branch for a matched loading-state control.
   `tools/patch_gs2_success_loading_clear.py` records the equivalent source
   edit for readable GS2 experiments; its compiled output remains unverified.
   `tools/decode_graalweb_cert_bundle.py` recovers certificate metadata from

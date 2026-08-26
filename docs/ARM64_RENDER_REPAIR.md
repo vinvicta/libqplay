@@ -114,6 +114,17 @@ compatible protocol experiment, but it is not required for the observed
 render result. Full capture metadata is in
 `artifacts/arm64_native_only_original_script_replay_20260826.json`.
 
+A matched stock-branch control then restored the original `B.LE` bytes at
+`0x15ca7c` while keeping the same diagnostic transport patches, original
+connector script, responder, and cached assets. It completed the same two
+connections, map and level requests, image request, and heartbeat traffic,
+but the captured screen remained the title/loading artwork. This is the
+negative control that separates the native branch from the shared protocol
+and fixture path. Its hashes are in
+`artifacts/arm64_native_stock_original_script_control_20260826.json`, and the
+inverse branch helper is
+`tools/patch_restore_premium_loading_test.py`.
+
 ## x86 diagnostic scope
 
 The x86_64 comparison needs a separate qualification. Its original library

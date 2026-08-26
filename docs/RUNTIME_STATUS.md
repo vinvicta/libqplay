@@ -343,6 +343,18 @@ This is the short handoff view. The full reasoning and command history are in
     This isolates the observed local visual transition to the native startup
     branch. The full capture metadata is in
     `artifacts/arm64_native_only_original_script_replay_20260826.json`.
+52. A matched stock-branch control restored the original `B.LE` instruction at
+    `0x15ca7c` while keeping the same diagnostic transport patches, original
+    script, responder, and fixtures. It completed the same two connections,
+    map, level files, image request, and heartbeat path, but the screen stayed
+    on the title/loading artwork. Its APK SHA-256 is
+    `fd7c8676939dcf83d929fd5707536d98dbfd8bae009aec9e4f80c71dbaad0031`, its
+    native SHA-256 is
+    `f36ab1dc978861b26cb7ec3d9ebb9215b8450ffd73f957275a500de7f6492776`, and
+    its screenshot SHA-256 is
+    `70e6573244e58125d4092d8265c8acc4e2074dd866bd9cd5897ddf079d39e135`.
+    This is the matched negative control for item 51. Details are in
+    `artifacts/arm64_native_stock_original_script_control_20260826.json`.
 
 ## Not verified
 

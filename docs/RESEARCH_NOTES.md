@@ -1700,3 +1700,33 @@ the x86_64 emulator's ARM64 translation layer, and synthetic cached assets, so
 it does not establish the intended production behavior. The exact package,
 script, capture, and screenshot hashes are in
 `artifacts/arm64_native_only_original_script_replay_20260826.json`.
+
+## Matched stock-branch control
+
+To close the remaining causal gap, I repeated the native-only replay with the
+same original connector script, diagnostic transport edits, responder, map,
+level containers, image, and emulator state. The only native loading change
+was restored: `0x15ca7c` contained the original `B.LE` bytes `2d 02 00 54`,
+which leaves the branch on the path that skips the clear at `0x15cac8` for the
+decoded `classic` option.
+
+The stock branch still made one connector request and two game connections.
+It accepted the server-warp and connecting-window frames, requested
+`classiciphone.gmap`, all three encrypted level containers, and `pics1.png`,
+and continued sending packet-24 heartbeats. A screenshot taken while the
+second socket was open showed the original Graal Online Classic title/loading
+artwork rather than the tiled world. The APK hash was
+`fd7c8676939dcf83d929fd5707536d98dbfd8bae009aec9e4f80c71dbaad0031`, the
+native library hash was
+`f36ab1dc978861b26cb7ec3d9ebb9215b8450ffd73f957275a500de7f6492776`, and the
+screen capture hash was
+`70e6573244e58125d4092d8265c8acc4e2074dd866bd9cd5897ddf079d39e135`.
+
+This is a stronger comparison than the earlier handshake-only control. It
+holds the protocol and resource path constant while changing only the native
+startup branch. Together with the native-only render capture, it supports the
+conclusion that the visible local transition is controlled by the native
+branch at `0x15ca7c`. The test still uses synthetic local assets, emulator
+ARM64 translation, and compatibility patches for the archived connector, so
+it does not establish production behavior. The full capture record is in
+`artifacts/arm64_native_stock_original_script_control_20260826.json`.
