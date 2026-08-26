@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v48.i64",
-    "sha256": "b8042ef8157620ff8e9acd00a875503a5e4e0255ae7ea5cfdae15b04f81c6801"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v49.i64",
+    "sha256": "258a6f0fe2afc8da9eba5b080e326cde15d0abbc8c70a918f098caa44adeda1b"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -95,6 +95,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_event_object_verify_v39.json",
     "verified_name_count": 6
+  },
+  "execution_dispatch_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "artifacts/spectron_execution_dispatch_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "94c4c036d4e531a20231334f897f7231750350e2a35427cb5df9e01e10661cb8",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_execution_dispatch_verify_v49.json",
+    "verified_name_count": 2
   },
   "html_atom_anchors": {
     "anchor_count": 5,
@@ -183,7 +191,8 @@
     "The forty-third database revision also contains the separately reviewed GS2 next-string, indexed-string, and string-formatting helper anchors.",
     "The forty-fourth database revision also contains the separately reviewed GS2 variable-construction and legacy path-resolution anchors.",
     "The forty-fifth database revision also contains the separately reviewed GS2 script diagnostic and object-creation anchors.",
-    "The forty-sixth database revision also contains the separately reviewed GS2 profiling and player-flag state anchors."
+    "The forty-sixth database revision also contains the separately reviewed GS2 profiling and player-flag state anchors.",
+    "The forty-seventh database revision also contains the separately reviewed GS2 script-call and native-dispatch anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,

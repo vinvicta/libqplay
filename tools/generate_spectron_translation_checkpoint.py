@@ -117,6 +117,8 @@ def main() -> None:
     parser.add_argument("--script-object-verification", type=Path)
     parser.add_argument("--script-state-anchors", type=Path)
     parser.add_argument("--script-state-verification", type=Path)
+    parser.add_argument("--execution-dispatch-anchors", type=Path)
+    parser.add_argument("--execution-dispatch-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1416,6 +1418,34 @@ def main() -> None:
         result["script_state_anchors"] = script_state
         result["interpretation"].append(
             "The forty-sixth database revision also contains the separately reviewed GS2 profiling and player-flag state anchors."
+        )
+    execution_dispatch = None
+    if args.execution_dispatch_anchors or args.execution_dispatch_verification:
+        if not args.execution_dispatch_anchors or not args.execution_dispatch_verification:
+            raise ValueError(
+                "execution-dispatch anchors and execution-dispatch verification must be supplied together"
+            )
+        execution_dispatch_document = load(args.execution_dispatch_anchors)
+        execution_dispatch_verification = load(args.execution_dispatch_verification)
+        if execution_dispatch_document.get("artifact") != "spectron_execution_dispatch_manual_translation_anchors_20260826":
+            raise ValueError("unexpected execution-dispatch anchor artifact")
+        if not execution_dispatch_verification.get("verified"):
+            raise ValueError("execution-dispatch anchor reopen verification did not pass")
+        expected_execution_dispatch = len(execution_dispatch_document["anchors"])
+        if execution_dispatch_verification["verified_name_count"] != expected_execution_dispatch:
+            raise ValueError("execution-dispatch verification count differs from artifact")
+        execution_dispatch = {
+            "anchor_path": str(args.execution_dispatch_anchors),
+            "anchor_sha256": sha256_path(args.execution_dispatch_anchors),
+            "reopen_verification": str(args.execution_dispatch_verification),
+            "anchor_count": expected_execution_dispatch,
+            "verified_name_count": execution_dispatch_verification["verified_name_count"],
+            "reopen_failure_count": execution_dispatch_verification["failure_count"],
+        }
+    if execution_dispatch is not None:
+        result["execution_dispatch_anchors"] = execution_dispatch
+        result["interpretation"].append(
+            "The forty-seventh database revision also contains the separately reviewed GS2 script-call and native-dispatch anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
