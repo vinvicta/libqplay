@@ -28,6 +28,7 @@ def main():
     arm64_revalidation = load_json(
         "artifacts/arm64_diagnostic_apk_revalidation_20260825.json"
     )
+    spectron_signature = load_json("artifacts/spectron_function_signature_match.json")
 
     checks = []
 
@@ -173,6 +174,16 @@ def main():
         False,
     )
     check(
+        "IDA validation persisted-copy marker",
+        ida_validation["database"]["persistent_database"]["close_reopen_verified"],
+        True,
+    )
+    check(
+        "IDA validation persisted-copy hash",
+        ida_validation["database"]["persistent_database"]["sha256"],
+        "f901f73e25e97d072c79bcabc3931ff179bcd2cdd24fa0f120d5ff690719e505",
+    )
+    check(
         "IDA validation pass failures",
         sum(item["failures"] for item in ida_validation["passes"]),
         0,
@@ -229,6 +240,27 @@ def main():
         arm64_revalidation["fixture_provenance"]["placeholder"]["not_a_target_revision_file"],
         True,
     )
+    check(
+        "IDA validation status",
+        ida_validation["status"],
+        "validated_persisted_on_disposable_copy",
+    )
+    check(
+        "Spectron signature artifact",
+        spectron_signature["artifact"],
+        "spectron_exact_function_signature_matches",
+    )
+    check("Spectron signature network", spectron_signature["network_contacted"], False)
+    check(
+        "Spectron signature exact matches",
+        spectron_signature["summary"]["unique_exact_matches"],
+        1,
+    )
+    check(
+        "Spectron usable source matches",
+        spectron_signature["summary"]["usable_source_name_matches"],
+        0,
+    )
 
     for document in (
         overlay,
@@ -238,6 +270,7 @@ def main():
         labels,
         ida_validation,
         arm64_revalidation,
+        spectron_signature,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

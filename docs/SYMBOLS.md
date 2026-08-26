@@ -293,8 +293,12 @@ application or engine roles resolved at the expected addresses with zero
 failures. Five native callback ranges and all twenty script-table ranges were
 created from ELF unwind evidence. Two of the latter required shortening a
 larger saved IDA function at the exact FDE start before adding the callback.
-This is a validation of the names and ranges, not a claim that the active
-desktop IDA database was changed. The result is recorded in
+This first established the names and ranges in memory. A follow-up IDALIB
+run saved the disposable database as a packed IDA 9.3 copy, and a separate
+read-only process reopened it and found every one of the 1,211 expected names
+at the expected address. The final copy contains 11,297 function starts and
+459 remaining default `sub_` names. The active desktop IDA database was still
+locked and was not changed. The result and saved-copy hash are recorded in
 `artifacts/ida_translation_validation.json`.
 
 The saved function inventory has 1,645 IDA-created default `sub_` functions.

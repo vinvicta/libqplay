@@ -8,7 +8,13 @@
     "validated_function_count": 11297,
     "validated_default_sub_count": 459,
     "live_ida_database_changed": false,
-    "persistence_scope": "single IDALIB process on a disposable database copy"
+    "persistence_scope": "saved disposable database copy reopened and verified in a separate IDALIB process",
+    "persistent_database": {
+      "path": "analysis/libqplay_translated_all.i64",
+      "sha256": "f901f73e25e97d072c79bcabc3931ff179bcd2cdd24fa0f120d5ff690719e505",
+      "format": "packed IDA 9.3 database",
+      "close_reopen_verified": true
+    }
   },
   "passes": [
     {
@@ -41,11 +47,12 @@
       "failures": 0
     }
   ],
-  "status": "validated_in_memory_on_disposable_copy",
+  "status": "validated_persisted_on_disposable_copy",
   "network_contacted": false,
   "notes": [
     "The five native callbacks without saved IDA boundaries were created from exact ELF .eh_frame FDE ranges.",
     "Two script-table FDE starts were inside larger saved IDA functions. The boundary pass split those ranges before adding the callback functions.",
+    "IDALIB closed and repacked the translated copy, and a separate read-only verifier reopened it with all 1,211 expected names intact.",
     "The original IDA database was not overwritten because its active unpacked state remained locked by the desktop session."
   ]
 }

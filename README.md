@@ -111,6 +111,14 @@ This validates the addresses and names, but the desktop IDA session's active
 unpacked database was still locked, so its live database was not overwritten.
 The exact result is in `artifacts/ida_translation_validation.json`.
 
+The validated names and boundaries were also persisted into a separate local
+IDA 9.3 database copy at
+`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_all.i64`. A
+close-and-reopen check found all 1,211 expected names, 11,297 functions, and
+459 remaining default `sub_` entries. The 56 MB database is intentionally not
+committed to the public repository; its hash and verification status are in
+the same IDA artifact.
+
 A clean 2026-08-25 revalidation of the same signed ARM64-only diagnostic APK
 was also completed from fresh app data. After the Android compatibility
 warning was dismissed, the local responders saw one connector request and two
@@ -172,6 +180,9 @@ proves the local native TLS path, not a current live certificate or service.
 * `docs/SPECTRON_COMPARISON.md` records the supplied modded APK comparison.
 * `artifacts/spectron_native_compare.json` records the offline ELF, symbol,
   section, and embedded-string comparison for the two ARM64 native builds.
+* `artifacts/spectron_function_signature_match.json` records the exact
+  function-byte comparison against Spectron. It found one obfuscated match
+  and no usable source-name transfer.
 * `docs/TESTING.md` describes local-only reproduction without contacting a
   live game service.
 * `artifacts/helper_toolchain_replay.json` records the verified HexaParser and
@@ -211,8 +222,8 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/ida_translation_validation.json` records the disposable-copy
   IDALIB audit of the expanded callback naming pass. It includes the five
   native FDE ranges, the twenty script-table FDE ranges, the two split
-  functions, and zero apply failures. The live desktop IDA database was not
-  changed.
+  functions, zero apply failures, and the hash of the persisted translated
+  database copy. The live desktop IDA database was not changed.
 * `artifacts/native_callback_candidates.json` records the next table-backed
   callback, static-state, sound-wrapper, and server-object names recovered from
   the native library. The current review-only set contains 277 entries. These
@@ -272,6 +283,10 @@ proves the local native TLS path, not a current live certificate or service.
   FDE-boundary, and unresolved-role passes in one IDA session. It is
   review-only by default; enable both switches only after checking the
   individual plans.
+* `tools/ida_apply_all_translations_persist.py` runs that same pass under
+  IDALIB and returns control to the database closer so a disposable copy can
+  be saved. `tools/ida_verify_all_translations.py` reopens the copy and checks
+  every prepared name and boundary without changing it.
 * `tools/` contains IDAPython, parsing, replay, and diagnostic patch helpers.
   `tools/encode_connector_query.py` reproduces the captured connector query
   without opening a socket. `tools/conpack_legacy_zip_compat.patch` records
@@ -295,6 +310,9 @@ proves the local native TLS path, not a current live certificate or service.
   127.0.0.1-only TLS listener.
   `tools/compare_spectron_native.py` compares the supplied Spectron native
   library with the original ARM64 build without loading either one.
+  `tools/match_spectron_function_signatures.py` checks whether the supplied
+  Spectron ARM64 build offers any exact, unambiguous source-name matches for
+  the original IDA default functions.
   `tools/decode_game_server_tls_certificate.py` decodes the separate
   game-server certificate from the recovered connector script without opening
   a socket. `tools/encode_game_server_tls_certificate.py` prepares a

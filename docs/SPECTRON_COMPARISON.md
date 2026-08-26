@@ -139,6 +139,15 @@ public key recorded in `artifacts/helper_toolchain_replay.json`, SHA-256
 `35e7245d68e6ab6c84bd55061704fe2d3d16800cbe0a671aceae6c85e1301b82`. This
 rules out the Spectron key as a source of a current connector signing key.
 
+As a further check, `tools/match_spectron_function_signatures.py` compared the
+bytes and sizes of 1,305 original IDA default functions against 5,782 named
+Spectron text functions. It found one unique byte-identical match, but the
+Spectron name was itself obfuscated and did not recover a useful source name.
+The result is a negative control: the two builds do not provide a reliable
+address or source-name translation for the remaining original `sub_` entries.
+The exact counts and the single obfuscated match are recorded in
+`artifacts/spectron_function_signature_match.json`.
+
 ## Java observations
 
 The Java dex files still use the normal Graal activity and renderer bridge:

@@ -1502,6 +1502,17 @@ unpacked database was still locked by the desktop session. The compact result
 is in `artifacts/ida_translation_validation.json`; no database, APK, asset,
 certificate, or network response was added to the repository.
 
+The validation was then repeated through IDALIB's normal database closer. The
+translated disposable copy was saved as a packed IDA 9.3 database and reopened
+in a separate read-only process. That process verified all 1,211 prepared
+names, the 20 newly created script callback boundaries, 11,297 total function
+starts, and 459 remaining default `sub_` entries. The local 56 MB handoff copy
+is at `/home/v/Desktop/graal-decomp/analysis/libqplay_translated_all.i64` and
+has SHA-256
+`f901f73e25e97d072c79bcabc3931ff179bcd2cdd24fa0f120d5ff690719e505`.
+It remains outside the public repository because it is a generated database,
+while the hash and verification status are kept in the public artifact.
+
 ## Packaged ARM64 replay revalidation
 
 The complete local replay was repeated on 2026-08-25 using the packaged

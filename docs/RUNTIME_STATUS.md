@@ -308,7 +308,10 @@ This is the short handoff view. The full reasoning and command history are in
     names, 20 FDE-backed script callbacks, and 28 application or engine roles
     resolved with zero failures. The run added 25 function starts and split
     two previously merged ranges at exact FDE starts. The active desktop IDA
-    database remained locked and was not overwritten. The result is in
+    database remained locked and was not overwritten. IDALIB then saved the
+    disposable copy and a separate read-only reopen verified all 1,211 names,
+    11,297 function starts, and 459 remaining default `sub_` entries. The
+    result and saved-copy hash are in
     `artifacts/ida_translation_validation.json`.
 48. A clean 2026-08-25 revalidation used the packaged ARM64-only diagnostic
     APK from fresh app data. After the Android compatibility warning was
