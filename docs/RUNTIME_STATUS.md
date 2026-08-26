@@ -761,6 +761,12 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_string_helper_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+106. Clean IDA review added two high-confidence GS2 variable-construction
+     anchors for script variable creation and legacy path resolution. Both
+     reopened successfully in the v46 disposable copy. See
+     `artifacts/spectron_variable_construction_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

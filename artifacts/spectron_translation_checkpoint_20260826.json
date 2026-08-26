@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v45.i64",
-    "sha256": "23e333de1f861ee226bd87daaba81c9d9fd1558adc48e278b59bca9d3f912319"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v46.i64",
+    "sha256": "8afd65b7124587981a6757cb8fb5b245860df1647ef87b80384722d67cdc81bb"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -180,7 +180,8 @@
     "The fortieth database revision also contains the separately reviewed execution restoration, character extraction, and action-context lookup anchors.",
     "The forty-first database revision also contains the separately reviewed GS2 single-cell, two-dimensional, and replacement array mutation anchors.",
     "The forty-second database revision also contains the separately reviewed GS2 all-index and substring-position search anchors.",
-    "The forty-third database revision also contains the separately reviewed GS2 next-string, indexed-string, and string-formatting helper anchors."
+    "The forty-third database revision also contains the separately reviewed GS2 next-string, indexed-string, and string-formatting helper anchors.",
+    "The forty-fourth database revision also contains the separately reviewed GS2 variable-construction and legacy path-resolution anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -401,6 +402,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_update_protocol_anchor_verification_20260826.json",
     "verified_name_count": 5
+  },
+  "variable_construction_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "artifacts/spectron_variable_construction_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "c876c8cae52308f071cb9ac4da767fc9b7f05260ccc2c17ca15cfa3fb05a4a9c",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_variable_construction_verify_v46.json",
+    "verified_name_count": 2
   },
   "visual_helper_anchors": {
     "anchor_count": 11,

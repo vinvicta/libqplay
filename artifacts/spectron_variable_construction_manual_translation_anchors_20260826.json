@@ -1,0 +1,119 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both read the current stack entry, split its variable and member names, assign a type-four value when a member name is present, and otherwise assign a type-three object value.",
+        "Both preserve the same short class-local wrapper role and cleanup of the temporary member string. The target grows from 152 to 184 bytes around changed string and variable wrappers."
+      ],
+      "match_kind": "manual-variable-construction-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x21db30",
+      "original_metrics": {
+        "basic_block_count": 7,
+        "instruction_count": 38,
+        "mnemonic_hash": "3542f4dbc25526dd4757857fe0e2336bf14dd1896d0f9f0f04045ff3c69c7ca9",
+        "register_shape_hash": "b5b0625a38ae4c875bc3a8e7ebe654be1e1321fbb6603fe7bb7c8a2b96202226",
+        "shape_hash": "e9111623ff3642d050812f20279fb45b266b2e4821ea19f0bcc701e0c2650870",
+        "size": 152
+      },
+      "original_name": "TScriptMachine_makeVar_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptMachine_makeVar_void",
+      "semantic_match_already_present": false,
+      "source_basis": "script variable construction",
+      "spectron_current_name": "_ZN10mTAogaaEip10fljLOayTpjEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x225dec",
+      "spectron_metrics": {
+        "basic_block_count": 7,
+        "instruction_count": 46,
+        "mnemonic_hash": "60697cbd3661783dcb651e9feaa88e635f2ef46bbb7f2f23c973231840036406",
+        "register_shape_hash": "6dd62082e99fd897724f644188cea4ba1a995afee76976320830c06169f655be",
+        "shape_hash": "86b124951a4088fe4b9218548378a55f996391d0a3746d4abda388c6d5a32d35",
+        "size": 184
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both split dotted names, resolve this, thiso, temp, player, playero, client, clientr, and serverr roots, search the universe when requested, and fall back through the action player object.",
+        "Both then search the resolved object's variable table before calling its virtual lookup, preserve the temp-root universe fallback, and clear temporary strings. The target grows from 848 to 856 bytes while retaining the same 52-block control-flow shape."
+      ],
+      "match_kind": "manual-variable-construction-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x21dbc8",
+      "original_metrics": {
+        "basic_block_count": 52,
+        "instruction_count": 212,
+        "mnemonic_hash": "c89505fe06a9f97c0329cd9c2094bb3dfb0a7b0d91c3cfeeb2d9f7031f500ce0",
+        "register_shape_hash": "c18bd5f551dc37a1284afe5bcc3f33087b43d4748406efe1f31a901485184a6e",
+        "shape_hash": "75a08423420e326507872fb48cddff1d3b083c39d02ec9197167bf65fd6c2376",
+        "size": 848
+      },
+      "original_name": "TScriptMachine_makeOldScriptVar_TString_const_bool",
+      "original_string_refs": [
+        "client",
+        "clientr",
+        "player",
+        "playero",
+        "serverr",
+        "temp",
+        "this",
+        "thiso"
+      ],
+      "proposed_name": "v18_TScriptMachine_makeOldScriptVar_TString_const_bool",
+      "semantic_match_already_present": false,
+      "source_basis": "legacy script variable path resolution",
+      "spectron_current_name": "_ZN10mTAogaaEip10hLCogasdkpERK10C8THgaTQxFb",
+      "spectron_default_name": false,
+      "spectron_ea": "0x225ea4",
+      "spectron_metrics": {
+        "basic_block_count": 52,
+        "instruction_count": 214,
+        "mnemonic_hash": "0668046c7aeefa6ebb9b8421fda2ccc9409cc23c0a2b5ebce820fc215c04ea6e",
+        "register_shape_hash": "ebc4a713277b0964136e5027adeabc802940854b5e13643569fe8d67341486d6",
+        "shape_hash": "79c46f6b8ad382ba8625e5c1b413539e0ade821875940f41e1186cb197e90622",
+        "size": 856
+      },
+      "spectron_string_refs": [
+        "client",
+        "clientr",
+        "player",
+        "playero",
+        "serverr",
+        "temp",
+        "this",
+        "thiso"
+      ]
+    }
+  ],
+  "artifact": "spectron_variable_construction_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v3.json",
+    "spectron_features_sha256": "031afed73611783e0b16be71009e20118fc90a56e5d03e5ec04526f654f5cf27"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The changed-size rows rely on variable-type transitions, root resolution, fallback order, class-local sequence, and pseudocode behavior rather than byte identity."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for script variable construction and legacy path resolution",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 2,
+    "high_confidence_count": 2,
+    "new_context_anchor_count": 2,
+    "target_default_name_count": 0
+  }
+}

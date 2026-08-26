@@ -573,6 +573,14 @@ evidence is in
 `artifacts/spectron_string_helper_manual_translation_anchors_20260826.json`,
 and the v45 database SHA-256 is recorded in the checkpoint.
 
+A forty-fourth disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v46.i64`,
+adds two reviewed variable-construction anchors for script variable creation
+and legacy dotted-path resolution. Both reopened successfully. The evidence is
+in
+`artifacts/spectron_variable_construction_manual_translation_anchors_20260826.json`,
+and the v46 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and

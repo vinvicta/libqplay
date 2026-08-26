@@ -111,6 +111,8 @@ def main() -> None:
     parser.add_argument("--string-search-verification", type=Path)
     parser.add_argument("--string-helper-anchors", type=Path)
     parser.add_argument("--string-helper-verification", type=Path)
+    parser.add_argument("--variable-construction-anchors", type=Path)
+    parser.add_argument("--variable-construction-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1326,6 +1328,34 @@ def main() -> None:
         result["string_helper_anchors"] = string_helper
         result["interpretation"].append(
             "The forty-third database revision also contains the separately reviewed GS2 next-string, indexed-string, and string-formatting helper anchors."
+        )
+    variable_construction = None
+    if args.variable_construction_anchors or args.variable_construction_verification:
+        if not args.variable_construction_anchors or not args.variable_construction_verification:
+            raise ValueError(
+                "variable-construction anchors and variable-construction verification must be supplied together"
+            )
+        variable_construction_document = load(args.variable_construction_anchors)
+        variable_construction_verification = load(args.variable_construction_verification)
+        if variable_construction_document.get("artifact") != "spectron_variable_construction_manual_translation_anchors_20260826":
+            raise ValueError("unexpected variable-construction anchor artifact")
+        if not variable_construction_verification.get("verified"):
+            raise ValueError("variable-construction anchor reopen verification did not pass")
+        expected_variable_construction = len(variable_construction_document["anchors"])
+        if variable_construction_verification["verified_name_count"] != expected_variable_construction:
+            raise ValueError("variable-construction verification count differs from artifact")
+        variable_construction = {
+            "anchor_path": str(args.variable_construction_anchors),
+            "anchor_sha256": sha256_path(args.variable_construction_anchors),
+            "reopen_verification": str(args.variable_construction_verification),
+            "anchor_count": expected_variable_construction,
+            "verified_name_count": variable_construction_verification["verified_name_count"],
+            "reopen_failure_count": variable_construction_verification["failure_count"],
+        }
+    if variable_construction is not None:
+        result["variable_construction_anchors"] = variable_construction
+        result["interpretation"].append(
+            "The forty-fourth database revision also contains the separately reviewed GS2 variable-construction and legacy path-resolution anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
