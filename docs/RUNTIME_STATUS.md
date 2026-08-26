@@ -461,6 +461,21 @@ This is the short handoff view. The full reasoning and command history are in
     `d8b44281f2c2a3e8ab6f40358e28d017052a967cdf2a5b9b0c3383535ef07de3`.
     See `artifacts/spectron_webtop_safe_runtime_20260826.json`.
 
+63. The cross-build name audit found 1,008 one-to-one exact function names
+    shared by the original 1.8 and Spectron 2.2 feature exports. Of these,
+    396 are already covered by the strict semantic map and 612 are preserved
+    exact-name anchors that were outside its size and shape key. The inventory
+    has no ambiguous shared names and is kept separate from inferred `v18_`
+    labels. See `artifacts/spectron_exact_shared_name_anchors_20260826.json`.
+
+64. Clean IDA review added six high-confidence network context anchors for
+    connector-mode construction, HTTP download completion, CyaSSL setup,
+    socket connect, game protocol reading, and low-level socket reading. The
+    anchors target Spectron addresses `0x2094c0`, `0x205958`, `0x20c59c`,
+    `0x20ccd8`, `0x204274`, and `0x20d614`. They are available for a new
+    disposable translated IDA copy and do not alter the supplied APK. See
+    `artifacts/spectron_network_manual_translation_anchors_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

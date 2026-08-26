@@ -112,9 +112,11 @@ transfers unsafe.
 
 The offline ELF report makes that separation measurable. The original has
 6,674 dynamic-symbol table entries and 6,671 named entries; Spectron has
-6,773 and 6,770. Only 1,036 names are exact matches, mostly shared third-party
-code. A simple application-name heuristic finds 1,035 readable names in the
-original but only 28 in Spectron, where the C++ names have been obfuscated.
+6,773 and 6,770. There are 1,036 exact dynamic-name matches, mostly shared
+third-party code. A function-level feature export reduces that to 1,008
+one-to-one named function anchors. A simple application-name heuristic finds
+1,035 readable names in the original but only 28 in Spectron, where the C++
+names have been obfuscated.
 The `.text` section also moves from file offset `0x0e0170` and size
 `0x1ed970` to `0x0df800` and size `0x1fb870`. This is why an address copied from
 the translated 1.8 IDA database is not meaningful in the modded build.
@@ -185,8 +187,8 @@ Spectron IDA copy, while 59 medium-confidence rows remain review-only. There
 are 1,019 ambiguous rows and 614 unmatched rows, so the pass does not pretend
 to translate every function.
 
-The method has a built-in validation set because 1,010 function names are
-shared between the two builds. The unique semantic matcher reproduced 396
+The method has a built-in validation set because 1,008 function names occur
+once in each build. The unique semantic matcher reproduced 396 of those
 shared-name matches with zero wrong matches. This does not prove every
 obfuscated match, but it is a useful measured check on the normalization
 rules. The output uses a `v18_` prefix, keeps both original and target
@@ -200,6 +202,8 @@ large for this repository:
 * `analysis/spectron_libqplay_translated_v2.i64` adds four reviewed context
   anchors for the premium marker, loading-screen getter, connecting window,
   and JNI loop.
+* `analysis/spectron_libqplay_translated_v3.i64` adds six reviewed connector
+  and socket anchors on top of the v2 copy.
 
 The second copy was reopened and checked. Its SHA-256 is
 `fab82bedbafb864513dfbfc144f657d7542816d2ff883abe1a55c16753f55618`.
@@ -221,6 +225,33 @@ with the mapped setter and called by Spectron's JNI render loop. The
 connecting-window candidate owns the `Connecting to the server...` and
 `StartConnectMessage` strings. The JNI loop itself retains the exact exported
 name `Java_com_quattroplay_GraalClassic_Natives_QPlayLoop`.
+
+The exact-name inventory adds the 612 shared names that did not enter the
+strict semantic map. In total, 1,008 names occur once in each feature export:
+396 are already covered by the semantic map and 612 are preserved exact-name
+anchors only. The inventory contains 381 PLT or import names, 27 JNI names,
+and 600 other readable names. These rows record both build-specific addresses
+and function ranges, but they do not rename anything because the Spectron
+name is already present. The generator and artifact are
+`tools/generate_spectron_exact_name_anchors.py` and
+`artifacts/spectron_exact_shared_name_anchors_20260826.json`.
+
+I also reviewed six functions that sit directly on the connector and game
+socket path. The new anchors cover connector-mode parameter construction,
+HTTP download completion, CyaSSL setup, nonblocking socket connection, the
+game protocol reader, and the low-level socket reader. Their Spectron
+addresses are `0x2094c0`, `0x205958`, `0x20c59c`, `0x20ccd8`, `0x204274`, and
+`0x20d614`, respectively. The evidence includes matching error strings,
+parser or caller context, and the relevant control flow. These are now
+available as `v18_` labels in the third disposable IDA copy through
+`artifacts/spectron_network_manual_translation_anchors_20260826.json`.
+They narrow the remaining SSL investigation to the actual 2.2 code path
+without transferring 1.8 addresses.
+
+The third copy was reopened and checked after applying the six network
+anchors. Its SHA-256 is
+`3e85fe26f63574232b445c249775f52b53efb12a71a5e046375ea216b61d1c95`.
+The close-and-reopen result recorded six verified names with zero failures.
 
 ## Java observations
 

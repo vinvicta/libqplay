@@ -20,6 +20,10 @@ ANCHOR_PATH = Path(
         str(REPO / "artifacts/spectron_manual_translation_anchors_20260826.json"),
     )
 )
+EXPECTED_ARTIFACT = os.environ.get(
+    "SPECTRON_MANUAL_EXPECTED_ARTIFACT",
+    "spectron_manual_translation_anchors_20260826",
+)
 REPORT_PATH = Path(
     os.environ.get(
         "SPECTRON_MANUAL_VERIFY_REPORT",
@@ -31,6 +35,8 @@ REPORT_PATH = Path(
 def main() -> None:
     ida_auto.auto_wait()
     document = json.loads(ANCHOR_PATH.read_text(encoding="utf-8"))
+    if document.get("artifact") != EXPECTED_ARTIFACT:
+        raise RuntimeError("unexpected Spectron manual-anchor artifact")
     failures = []
     for anchor in document["anchors"]:
         ea = int(anchor["spectron_ea"], 16)
@@ -62,6 +68,7 @@ def main() -> None:
     result = {
         "artifact": "spectron_manual_anchor_reopen_verification",
         "anchor_path": str(ANCHOR_PATH),
+        "expected_artifact": EXPECTED_ARTIFACT,
         "anchor_count": len(document["anchors"]),
         "verified_name_count": len(document["anchors"]) - len(failures),
         "failure_count": len(failures),

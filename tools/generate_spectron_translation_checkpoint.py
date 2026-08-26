@@ -29,6 +29,8 @@ def main() -> None:
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--manual-anchors", type=Path)
     parser.add_argument("--manual-verification", type=Path)
+    parser.add_argument("--network-anchors", type=Path)
+    parser.add_argument("--network-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -60,6 +62,27 @@ def main() -> None:
             "anchor_count": expected_manual,
             "verified_name_count": manual_verification["verified_name_count"],
             "reopen_failure_count": manual_verification["failure_count"],
+        }
+    network = None
+    if args.network_anchors or args.network_verification:
+        if not args.network_anchors or not args.network_verification:
+            raise ValueError("network anchors and network verification must be supplied together")
+        network_document = load(args.network_anchors)
+        network_verification = load(args.network_verification)
+        if network_document.get("artifact") != "spectron_network_manual_translation_anchors_20260826":
+            raise ValueError("unexpected network-anchor artifact")
+        if not network_verification.get("verified"):
+            raise ValueError("network-anchor reopen verification did not pass")
+        expected_network = len(network_document["anchors"])
+        if network_verification["verified_name_count"] != expected_network:
+            raise ValueError("network-anchor verification count differs from artifact")
+        network = {
+            "anchor_path": str(args.network_anchors),
+            "anchor_sha256": sha256_path(args.network_anchors),
+            "reopen_verification": str(args.network_verification),
+            "anchor_count": expected_network,
+            "verified_name_count": network_verification["verified_name_count"],
+            "reopen_failure_count": network_verification["failure_count"],
         }
     result = {
         "schema_version": 1,
@@ -100,6 +123,11 @@ def main() -> None:
         result["manual_anchors"] = manual
         result["interpretation"].append(
             "The second database revision also contains the separately reviewed manual context anchors."
+        )
+    if network is not None:
+        result["network_anchors"] = network
+        result["interpretation"].append(
+            "The third database revision also contains the separately reviewed connector and socket context anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

@@ -59,6 +59,12 @@ def main():
     spectron_manual = load_json(
         "artifacts/spectron_manual_translation_anchors_20260826.json"
     )
+    spectron_exact_names = load_json(
+        "artifacts/spectron_exact_shared_name_anchors_20260826.json"
+    )
+    spectron_network_anchors = load_json(
+        "artifacts/spectron_network_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -811,6 +817,40 @@ def main():
     check("Spectron shared-name validation correct", spectron_semantic["validation"]["shared_name_unique_correct"], 396)
     check("Spectron shared-name validation wrong", spectron_semantic["validation"]["shared_name_unique_wrong"], 0)
     check(
+        "Spectron exact-name artifact",
+        spectron_exact_names["artifact"],
+        "spectron_exact_shared_name_anchors_20260826",
+    )
+    check("Spectron exact-name network", spectron_exact_names["network_contacted"], False)
+    check("Spectron exact-name shared total", spectron_exact_names["summary"]["shared_exact_names"], 1008)
+    check("Spectron exact-name semantic overlap", spectron_exact_names["summary"]["already_in_semantic_map"], 396)
+    check("Spectron exact-name only total", spectron_exact_names["summary"]["exact_name_anchor_only"], 612)
+    check("Spectron exact-name ambiguous total", spectron_exact_names["summary"]["ambiguous_shared_names"], 0)
+    check(
+        "Spectron exact-name JNI total",
+        spectron_exact_names["summary"]["name_class_counts"]["shared_jni_name"],
+        27,
+    )
+    check(
+        "Spectron exact-name PLT total",
+        spectron_exact_names["summary"]["name_class_counts"]["shared_plt_or_import_name"],
+        381,
+    )
+    check(
+        "Spectron exact-name readable total",
+        spectron_exact_names["summary"]["name_class_counts"]["shared_readable_name"],
+        600,
+    )
+    check(
+        "Spectron network-anchor artifact",
+        spectron_network_anchors["artifact"],
+        "spectron_network_manual_translation_anchors_20260826",
+    )
+    check("Spectron network-anchor network", spectron_network_anchors["network_contacted"], False)
+    check("Spectron network-anchor total", spectron_network_anchors["summary"]["anchor_count"], 6)
+    check("Spectron network-anchor high confidence", spectron_network_anchors["summary"]["high_confidence_count"], 6)
+    check("Spectron network-anchor semantic overlap", spectron_network_anchors["summary"]["already_in_semantic_map"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -820,6 +860,7 @@ def main():
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
+    check("Spectron checkpoint network anchor count", spectron_checkpoint["network_anchors"]["verified_name_count"], 6)
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -881,6 +922,8 @@ def main():
         spectron_semantic,
         spectron_checkpoint,
         spectron_manual,
+        spectron_exact_names,
+        spectron_network_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

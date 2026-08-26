@@ -5,8 +5,8 @@
     "default_sub_function_count": 1843,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v2.i64",
-    "sha256": "fab82bedbafb864513dfbfc144f657d7542816d2ff883abe1a55c16753f55618"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v3.i64",
+    "sha256": "3e85fe26f63574232b445c249775f52b53efb12a71a5e046375ea216b61d1c95"
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
@@ -19,7 +19,8 @@
     "The saved database contains v18_ analysis labels on the verified high-confidence target functions.",
     "The labels preserve the original 1.8 semantic names while keeping the Spectron address and obfuscated name in the map.",
     "The medium-confidence, ambiguous, and unmatched functions remain review-only and were not silently renamed.",
-    "The second database revision also contains the separately reviewed manual context anchors."
+    "The second database revision also contains the separately reviewed manual context anchors.",
+    "The third database revision also contains the separately reviewed connector and socket context anchors."
   ],
   "manual_anchors": {
     "anchor_count": 4,
@@ -28,6 +29,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_manual_anchor_verification_v2.json",
     "verified_name_count": 4
+  },
+  "network_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "artifacts/spectron_network_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "f29d1da9c9635f7ce6e47002f0e3a1d856e564dd9341b3d2e5f1f99442ed1e26",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_network_anchor_verification_20260826.json",
+    "verified_name_count": 6
   },
   "network_contacted": false,
   "schema_version": 1,

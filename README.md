@@ -200,8 +200,8 @@ The supplied Spectron 2.2 package can be compared at the function level even
 though its application C++ symbols are obfuscated. A normalized IDA feature
 export and matcher map 3,700 named 1.8 functions to unique Spectron ARM64
 targets, with 3,641 high-confidence labels applied and 59 medium-confidence
-rows left for review. A validation set of 396 shared-name matches produced no
-wrong unique matches. The saved local copies are
+rows left for review. A validation set of 396 one-to-one shared-name matches
+produced no wrong unique matches. The saved local copies are
 `/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v1.i64`
 and `/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v2.i64`;
 the latter adds four reviewed
@@ -211,6 +211,17 @@ debug symbols survived in the 2.2 build. The map and evidence are in
 `artifacts/spectron_semantic_function_translation_20260826.json`,
 `artifacts/spectron_manual_translation_anchors_20260826.json`, and
 `artifacts/spectron_translation_checkpoint_20260826.json`.
+
+An exact-name companion inventory records 1,008 one-to-one names shared by
+the two function exports. It keeps the 612 rows outside the strict semantic
+matcher separate from inferred labels, and records both build-specific
+addresses without transferring them. Six reviewed network context anchors
+cover the connector-mode, HTTP, TLS, and socket paths. Their artifacts are
+`artifacts/spectron_exact_shared_name_anchors_20260826.json` and
+`artifacts/spectron_network_manual_translation_anchors_20260826.json`. The
+anchors are applied in the local disposable copy
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v3.i64`,
+which reopened with all six names intact.
 
 The first direct emulator launch of the supplied Spectron package also found
 a separate modding-layer problem. After Start was tapped, `libxposed.so`
@@ -317,6 +328,10 @@ proves the local native TLS path, not a current live certificate or service.
   shared-name validation set.
 * `artifacts/spectron_manual_translation_anchors_20260826.json` records the
   four reviewed Spectron context anchors.
+* `artifacts/spectron_exact_shared_name_anchors_20260826.json` records the
+  1,008 exact one-to-one names shared by both builds.
+* `artifacts/spectron_network_manual_translation_anchors_20260826.json`
+  records the six reviewed connector and socket anchors.
 * `artifacts/spectron_translation_checkpoint_20260826.json` records the
   close-and-reopen check for the persisted Spectron IDA copy.
 * `artifacts/spectron_runtime_crash_control_20260826.json` records the local
@@ -529,9 +544,14 @@ proves the local native TLS path, not a current live certificate or service.
   function features for cross-build comparison.
   `tools/match_spectron_semantic_functions.py` builds the reviewed 1.8 to
   Spectron semantic map.
+  `tools/generate_spectron_exact_name_anchors.py` records preserved exact
+  function names, while `tools/generate_spectron_network_anchors.py` records
+  reviewed connector and socket correspondences.
   `tools/ida_apply_spectron_translation.py` and
   `tools/ida_apply_spectron_manual_anchors.py` write separate disposable IDA
-  copies, while the matching verification scripts reopen and check them.
+  copies, while the matching verification scripts reopen and check them. The
+  manual-anchor script accepts a different artifact type through
+  `SPECTRON_MANUAL_EXPECTED_ARTIFACT`.
   `tools/patch_spectron_webtop_safe_commands.py` and
   `tools/build_spectron_webtop_safe_apk.py` build the private WebTop-safe
   runtime control without changing the supplied APK.

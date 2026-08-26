@@ -27,6 +27,10 @@ ANCHOR_PATH = Path(
         str(REPO / "artifacts/spectron_manual_translation_anchors_20260826.json"),
     )
 )
+EXPECTED_ARTIFACT = os.environ.get(
+    "SPECTRON_MANUAL_EXPECTED_ARTIFACT",
+    "spectron_manual_translation_anchors_20260826",
+)
 APPLY = os.environ.get("SPECTRON_MANUAL_APPLY") == "1"
 SAVE_PATH = os.environ.get("SPECTRON_MANUAL_SAVE_PATH")
 REPORT_PATH = Path(
@@ -58,7 +62,7 @@ def append_comment(ea: int, anchor: dict) -> bool:
 def main() -> None:
     ida_auto.auto_wait()
     document = json.loads(ANCHOR_PATH.read_text(encoding="utf-8"))
-    if document.get("artifact") != "spectron_manual_translation_anchors_20260826":
+    if document.get("artifact") != EXPECTED_ARTIFACT:
         raise RuntimeError("unexpected Spectron manual-anchor artifact")
 
     failures = []
@@ -108,6 +112,7 @@ def main() -> None:
     result = {
         "artifact": "spectron_manual_anchor_application",
         "anchor_path": str(ANCHOR_PATH),
+        "expected_artifact": EXPECTED_ARTIFACT,
         "apply": APPLY,
         "save_path": SAVE_PATH,
         "anchor_count": len(document["anchors"]),
