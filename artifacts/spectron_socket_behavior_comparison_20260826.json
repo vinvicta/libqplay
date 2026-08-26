@@ -1,0 +1,132 @@
+{
+  "artifact": "spectron_socket_behavior_comparison_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v3.json",
+    "spectron_features_sha256": "031afed73611783e0b16be71009e20118fc90a56e5d03e5ec04526f654f5cf27"
+  },
+  "interpretation": [
+    "The changed socket functions were compared as behaviors, not renamed as exact body matches.",
+    "The 2.2 CyaSSL setup still shows the same verify-buffer, verification-mode, domain-check, nonblocking, and handshake sequence as 1.8.",
+    "This is static evidence only. It does not prove that a current live service accepts the old certificate, protocol, or client query."
+  ],
+  "network_contacted": false,
+  "pairs": [
+    {
+      "conclusion": "The changed body does not show a new certificate-pinning policy. Its static verification and handshake sequence remains the same as 1.8.",
+      "differences": [
+        "The 2.2 body is shorter and has one fewer basic block, with renamed CyaSSL, string, logging, and socket symbols.",
+        "The 2.2 error paths use the obfuscated logging helper and preserve the same context or socket cleanup decisions."
+      ],
+      "exact_shape_match": false,
+      "original_ea": "0x206450",
+      "original_name": "TSocketConnection_enableSSLOnSocket_void",
+      "original_shape": {
+        "basic_block_count": 45,
+        "instruction_count": 215,
+        "mnemonic_hash": "113b0fd4b27a6aad3a247030a0a0ca5ed397fa69c7cf029696e14a6ed15480fd",
+        "register_shape_hash": "81f8bc1a3799471251c24a68522bba9ba9d218f33e160ab2345c7da96aa20886",
+        "shape_hash": "e8bd8379adfc0bbd41af785f5fe015e850c1cf8f3cb14f23662f030d74abbbbe",
+        "size": 868
+      },
+      "role": "CyaSSL context creation, verify-buffer loading, and TLS handshake start",
+      "shared_behavior": [
+        "Both bodies require a valid descriptor and status five before starting the TLS path.",
+        "Both bodies select a cached CyaSSL context by the same per-socket mode byte and initialize the library when that context is absent.",
+        "Both bodies support SSLv3, SSLv23, TLSv1, TLSv1_1, and TLSv1_2 method selection with the same SSLv23 fallback.",
+        "Both bodies load the per-socket verify buffer, choose the same verification-mode arguments, apply the configured cipher list, optionally check the configured domain, enable nonblocking TLS, and call CyaSSL_connect."
+      ],
+      "spectron_ea": "0x20c59c",
+      "spectron_name": "_ZN10u3cBgayBVz10WzkZ1a0VchEv",
+      "spectron_shape": {
+        "basic_block_count": 44,
+        "instruction_count": 193,
+        "mnemonic_hash": "f27c7407d08e3eca64554a6fd25f9612de5d3db0a5b1caa65f29fcc02d9019cd",
+        "register_shape_hash": "2c0a7236ff2a0712720656b21f093a47b6a1e9f55eded0ecd330eafbddd2554e",
+        "shape_hash": "8c8c0ff90795018202b9e3800206d57343dd6af6746bd519e8d11be79118cdf8",
+        "size": 792
+      }
+    },
+    {
+      "conclusion": "The changed connect body preserves the nonblocking and delayed-TLS state machine. No static branch shows a new pinning decision before SSL setup.",
+      "differences": [
+        "The 2.2 body is larger and has one fewer basic block than 1.8.",
+        "The 2.2 failure paths add explicit diagnostic messages naming the connectSocket operation."
+      ],
+      "exact_shape_match": false,
+      "original_ea": "0x206bd8",
+      "original_name": "TSocketConnection_connectSocket_TString_const_int",
+      "original_shape": {
+        "basic_block_count": 21,
+        "instruction_count": 141,
+        "mnemonic_hash": "73d78ee3ec946ed5f36e317aca8c05559c7dc3c8d18a0a80505a63086274bbf4",
+        "register_shape_hash": "0b13d77bdba4e2053f44d25cc4ff420a869a7c13fb981ee1cd8ea4d3793521af",
+        "shape_hash": "833b740a700f747a11089742acd363031f583f8ea47745a82ef9a5dabca95ac9",
+        "size": 564
+      },
+      "role": "nonblocking TCP socket creation, hostname resolution, and status transition",
+      "shared_behavior": [
+        "Both bodies close an earlier socket, reset status, copy the hostname, and store the requested port.",
+        "Both bodies create an IPv4 TCP socket, set it nonblocking, accept a numeric address or resolve a hostname, and store the numeric IP field.",
+        "Both bodies use status four for in-progress connection, status five for completion, retry EINTR, and report connection failure with status two.",
+        "Both bodies run the subprocess-close and Nagle-delay hooks, then enter the SSL-on-socket helper when SSL is enabled and the TCP status is five."
+      ],
+      "spectron_ea": "0x20ccd8",
+      "spectron_name": "_ZN10u3cBgayBVz10n9sqgau8SqERK10C8THgaTQxFi",
+      "spectron_shape": {
+        "basic_block_count": 20,
+        "instruction_count": 154,
+        "mnemonic_hash": "6d19ebd493e7f1c786e3fb5a9dd9ef41b3a38ea4f28dbfb7e6f37ed101a08511",
+        "register_shape_hash": "7167c3e0181c5bc4de7a8e1141f4e691230e54e01cd453db6dd888697d4eb405",
+        "shape_hash": "fa690ab2960c9cb9e817a650e8755b563dc4b42615da0eb0a70bed9144994391",
+        "size": 628
+      }
+    },
+    {
+      "conclusion": "The changed read body preserves the receive and TLS error policy visible in 1.8. Its added diagnostic does not itself explain a connection failure.",
+      "differences": [
+        "The 2.2 body is slightly larger with the same basic-block count.",
+        "The 2.2 body adds a bytesread==0 diagnostic before closing a zero-length stream receive and uses obfuscated helper names."
+      ],
+      "exact_shape_match": false,
+      "original_ea": "0x2074d4",
+      "original_name": "TSocketConnection_read_void",
+      "original_shape": {
+        "basic_block_count": 34,
+        "instruction_count": 228,
+        "mnemonic_hash": "085bdff17df2de2f99a1c5a2350ec7a3978757d67da3fb11d593f5437714958e",
+        "register_shape_hash": "bcc2a417c40de37be4877a232bcec70d0b8f9aae465d0def16a2c73965d65b6e",
+        "shape_hash": "df43983e0415a4cc804d16dec24929b4a69e7e9e9f67d4c2398a2738b8bee883",
+        "size": 916
+      },
+      "role": "plain, UDP, and CyaSSL receive handling",
+      "shared_behavior": [
+        "Both bodies first process a pending nonblocking connection and skip reads for the same closed or connecting states.",
+        "Both bodies use recv for stream data, recvfrom for UDP data, and CyaSSL_read when the TLS object is present.",
+        "Both bodies treat the same transient receive errors as nonfatal, close on a zero-length receive, record a CyaSSL error, and close on non-ignored TLS errors.",
+        "Both bodies return the accumulated data through the script TString result and update the received-byte counter."
+      ],
+      "spectron_ea": "0x20d614",
+      "spectron_name": "_ZN10u3cBgayBVz4readEv",
+      "spectron_shape": {
+        "basic_block_count": 34,
+        "instruction_count": 231,
+        "mnemonic_hash": "6b70ce0885cbbd98d73aaa108ebdf1d6b92063ae7122d5a923948dfe2d390cac",
+        "register_shape_hash": "3bd0f3cd766ee820c04407e61b86d2c22f8533890dd59505e254ceffe18d4006",
+        "shape_hash": "24ceffee2ca83ff4a479d878dec391e1fa3819867d0aa7df8820325472680276",
+        "size": 928
+      }
+    }
+  ],
+  "schema_version": 1,
+  "scope": "static 1.8-to-Spectron ARM64 behavior comparison for changed socket and TLS paths",
+  "summary": {
+    "exact_shape_match_count": 0,
+    "instruction_count_changed": 3,
+    "pair_count": 3,
+    "size_changed_count": 3
+  }
+}

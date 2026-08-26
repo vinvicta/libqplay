@@ -116,6 +116,9 @@ def main():
     spectron_socket_state_anchors = load_json(
         "artifacts/spectron_socket_state_manual_translation_anchors_20260826.json"
     )
+    spectron_socket_behavior = load_json(
+        "artifacts/spectron_socket_behavior_comparison_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -1073,6 +1076,15 @@ def main():
     check("Spectron socket-state semantic overlap", spectron_socket_state_anchors["summary"]["already_in_semantic_map"], 1)
     check("Spectron socket-state default targets", spectron_socket_state_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron socket behavior artifact",
+        spectron_socket_behavior["artifact"],
+        "spectron_socket_behavior_comparison_20260826",
+    )
+    check("Spectron socket behavior network", spectron_socket_behavior["network_contacted"], False)
+    check("Spectron socket behavior pair count", spectron_socket_behavior["summary"]["pair_count"], 3)
+    check("Spectron socket behavior size changes", spectron_socket_behavior["summary"]["size_changed_count"], 3)
+    check("Spectron socket behavior exact matches", spectron_socket_behavior["summary"]["exact_shape_match_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -1181,6 +1193,7 @@ def main():
         spectron_connection_state_anchors,
         spectron_http_request_anchors,
         spectron_socket_state_anchors,
+        spectron_socket_behavior,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

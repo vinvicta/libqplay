@@ -601,6 +601,12 @@ This is the short handoff view. The full reasoning and command history are in
     See `artifacts/spectron_socket_state_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+82. Static comparison reviewed the three changed-size SSL setup, connect, and
+    read functions without forcing exact labels. Their decompiled verification,
+    nonblocking, and receive policies remain aligned, with added 2.2 logging
+    differences. See
+    `artifacts/spectron_socket_behavior_comparison_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

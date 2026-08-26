@@ -373,6 +373,12 @@ formatted peer IP access. All five reopened successfully. The evidence is in
 `artifacts/spectron_socket_state_manual_translation_anchors_20260826.json`,
 and the v20 database SHA-256 is recorded in the checkpoint.
 
+A focused static comparison also reviewed the three changed-size socket
+functions that were not safe exact-match rename candidates. It records the
+shared TLS verification sequence, nonblocking connect state machine, and
+receive error policy, along with the small 2.2 logging differences, in
+`artifacts/spectron_socket_behavior_comparison_20260826.json`.
+
 The first direct emulator launch of the supplied Spectron package also found
 a separate modding-layer problem. After Start was tapped, `libxposed.so`
 crashed at its statically confirmed WebTop `crash` command branch. The same
@@ -512,6 +518,8 @@ proves the local native TLS path, not a current live certificate or service.
   records the 12 reviewed HTTP request field, lifecycle, and send helpers.
 * `artifacts/spectron_socket_state_manual_translation_anchors_20260826.json`
   records the five reviewed socket status, nonblocking, and IP helpers.
+* `artifacts/spectron_socket_behavior_comparison_20260826.json` records the
+  static comparison of the changed SSL setup, connect, and read bodies.
 * `artifacts/spectron_translation_checkpoint_20260826.json` records the
   close-and-reopen check for the persisted Spectron IDA copy.
 * `artifacts/spectron_runtime_crash_control_20260826.json` records the local
@@ -767,6 +775,8 @@ proves the local native TLS path, not a current live certificate or service.
   The `tools/generate_spectron_socket_state_anchors.py` generator records
   reviewed socket status, nonblocking, and address roles with exact hash
   checks.
+  The `tools/generate_spectron_socket_behavior_comparison.py` generator
+  records changed-size socket behavior without forcing an exact-match label.
   `tools/ida_apply_spectron_translation.py` and
   `tools/ida_apply_spectron_manual_anchors.py` write separate disposable IDA
   copies, while the matching verification scripts reopen and check them. The
