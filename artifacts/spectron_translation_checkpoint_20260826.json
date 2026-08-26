@@ -69,8 +69,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v26.i64",
-    "sha256": "03ce132e9b5953523e6b01c13a1e4e4fa2a540b752127ef87e240a17e403d04d"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v27.i64",
+    "sha256": "4c50294949544e27105f6ee457153dc6d06c5c83e25ce8e539ad64e4ca8d14dd"
   },
   "html_atom_anchors": {
     "anchor_count": 5,
@@ -139,7 +139,8 @@
     "The twenty-third database revision also contains the separately reviewed THTMLAtom constructor and buffer accessor anchors.",
     "The twenty-fourth database revision also contains the separately reviewed compact TPlayer attachment, update, freeze, and sprite helper anchors.",
     "The twenty-fifth database revision also contains the separately reviewed input and window bridge helper anchors.",
-    "The twenty-sixth database revision also contains the separately reviewed animation, particle, and show-image helper anchors."
+    "The twenty-sixth database revision also contains the separately reviewed animation, particle, and show-image helper anchors.",
+    "The twenty-seventh database revision also contains the separately reviewed GS2-facing TGraalVar, TScript, TScriptSpace, and TScriptUniverse helper anchors."
   ],
   "login_helper_anchors": {
     "anchor_count": 8,
@@ -223,6 +224,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_script_bridge_anchor_verification_20260826.json",
     "verified_name_count": 13
+  },
+  "script_runtime_anchors": {
+    "anchor_count": 12,
+    "anchor_path": "artifacts/spectron_script_runtime_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "a547bc146271402e6a6754f03193ce9d6d736288ddc94059accc3be79c43cb36",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_script_runtime_verify_v27.json",
+    "verified_name_count": 12
   },
   "socket_state_anchors": {
     "anchor_count": 5,

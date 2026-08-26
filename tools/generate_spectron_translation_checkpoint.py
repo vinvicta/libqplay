@@ -77,6 +77,8 @@ def main() -> None:
     parser.add_argument("--input-window-verification", type=Path)
     parser.add_argument("--visual-helper-anchors", type=Path)
     parser.add_argument("--visual-helper-verification", type=Path)
+    parser.add_argument("--script-runtime-anchors", type=Path)
+    parser.add_argument("--script-runtime-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -816,6 +818,34 @@ def main() -> None:
         result["visual_helper_anchors"] = visual_helper
         result["interpretation"].append(
             "The twenty-sixth database revision also contains the separately reviewed animation, particle, and show-image helper anchors."
+        )
+    script_runtime = None
+    if args.script_runtime_anchors or args.script_runtime_verification:
+        if not args.script_runtime_anchors or not args.script_runtime_verification:
+            raise ValueError(
+                "script-runtime anchors and script-runtime verification must be supplied together"
+            )
+        script_runtime_document = load(args.script_runtime_anchors)
+        script_runtime_verification = load(args.script_runtime_verification)
+        if script_runtime_document.get("artifact") != "spectron_script_runtime_manual_translation_anchors_20260826":
+            raise ValueError("unexpected script-runtime anchor artifact")
+        if not script_runtime_verification.get("verified"):
+            raise ValueError("script-runtime anchor reopen verification did not pass")
+        expected_script_runtime = len(script_runtime_document["anchors"])
+        if script_runtime_verification["verified_name_count"] != expected_script_runtime:
+            raise ValueError("script-runtime verification count differs from artifact")
+        script_runtime = {
+            "anchor_path": str(args.script_runtime_anchors),
+            "anchor_sha256": sha256_path(args.script_runtime_anchors),
+            "reopen_verification": str(args.script_runtime_verification),
+            "anchor_count": expected_script_runtime,
+            "verified_name_count": script_runtime_verification["verified_name_count"],
+            "reopen_failure_count": script_runtime_verification["failure_count"],
+        }
+    if script_runtime is not None:
+        result["script_runtime_anchors"] = script_runtime
+        result["interpretation"].append(
+            "The twenty-seventh database revision also contains the separately reviewed GS2-facing TGraalVar, TScript, TScriptSpace, and TScriptUniverse helper anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

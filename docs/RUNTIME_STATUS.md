@@ -645,6 +645,13 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_visual_helper_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+89. Clean IDA review added 12 high-confidence GS2-facing script-runtime
+    anchors for array, pause, timeout, timer, event-mask, access-right, and
+    variable-cleanup behavior. All 12 names reopened successfully in the v27
+    disposable copy. See
+    `artifacts/spectron_script_runtime_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
