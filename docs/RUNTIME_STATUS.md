@@ -301,7 +301,8 @@ This is the short handoff view. The full reasoning and command history are in
     `0x387e20` for `TGraalVar::readJSON`. Twenty-seven candidates are marked
     high-confidence; the comparator is medium-confidence because its class
     owner and direct call site remain unresolved. No IDA names changed and no
-    endpoint was contacted.
+    endpoint was contacted. The generator also verifies that those 28 roles
+    cover every entry in the application or engine profile category.
 
 ## Not verified
 

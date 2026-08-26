@@ -336,6 +336,8 @@ generic draw-distance comparator, and the nine YAJL callbacks used by
 draw-distance comparator is medium-confidence because its class owner and
 direct call site were not recovered. These aliases are analysis roles, not
 recovered ELF names, and are not included in the applied semantic-label count.
+The generator verifies that the role list covers all 28 entries in the
+application or engine queue, with no missing or extra addresses.
 `tools/generate_unresolved_function_candidates.py` rebuilds the artifact and
 `tools/ida_apply_unresolved_function_candidates.py` keeps the IDA step
 review-only.

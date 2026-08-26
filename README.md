@@ -212,7 +212,9 @@ proves the local native TLS path, not a current live certificate or service.
   role aliases for profiler, image-I/O, animation-lexer, spatial-query, UI,
   script-object, folder-loader, and JSON-parser helpers. Twenty-seven are
   high-confidence and one generic comparator is medium-confidence. They remain
-  review-only until they are applied to the matching IDA database.
+  review-only until they are applied to the matching IDA database. The
+  generator also checks that the 28 roles cover the complete application or
+  engine queue in the unresolved profile.
 * `tools/generate_unresolved_function_candidates.py` rebuilds that candidate
   artifact, while `tools/ida_apply_unresolved_function_candidates.py` provides
   a review-only IDA applier.

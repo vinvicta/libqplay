@@ -401,7 +401,14 @@
     }
   ],
   "network_contacted": false,
-  "purpose": "Record behavior-based roles for selected IDA default functions without claiming recovered ELF source names; confidence is recorded per candidate.",
+  "purpose": "Record behavior-based roles for the unresolved application or engine functions without claiming recovered ELF source names; confidence is recorded per candidate.",
+  "role_candidate_coverage": {
+    "candidate_count": 28,
+    "extra": [],
+    "profile_category": "app_or_engine_unknown",
+    "profile_count": 28,
+    "uncovered": []
+  },
   "source_artifacts": {
     "function_inventory": "symbols/libqplay.function_inventory.json",
     "unresolved_profile": "artifacts/unresolved_function_profile.json"

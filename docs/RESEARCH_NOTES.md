@@ -1448,6 +1448,9 @@ instruction patterns alone.
 
 `artifacts/unresolved_function_candidates.json` stores all 28 proposed
 roles with their call-site evidence, function sizes, and input hash.
+The generator records an explicit 28-of-28 coverage check against the
+`app_or_engine_unknown` profile category, so a later profile change cannot
+silently leave a role candidate stale.
 `tools/generate_unresolved_function_candidates.py` regenerates it from the
 saved inventory and unresolved profile. The companion
 `tools/ida_apply_unresolved_function_candidates.py` is deliberately disabled

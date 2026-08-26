@@ -323,6 +323,20 @@ def generate(args: argparse.Namespace) -> dict[str, object]:
         for item in profile["categories"]
         for item in item["entries"]
     }
+    application_unknown = {
+        int(item["ea"], 0)
+        for item in profile["categories"]
+        if item["category"] == "app_or_engine_unknown"
+        for item in item["entries"]
+    }
+    candidate_addresses = {candidate["ea"] for candidate in CANDIDATES}
+    if candidate_addresses != application_unknown:
+        missing = sorted(application_unknown - candidate_addresses)
+        extra = sorted(candidate_addresses - application_unknown)
+        raise ValueError(
+            "role candidate coverage mismatch: missing=%s extra=%s"
+            % ([f"0x{ea:x}" for ea in missing], [f"0x{ea:x}" for ea in extra])
+        )
 
     candidates = []
     for candidate in CANDIDATES:
@@ -348,10 +362,17 @@ def generate(args: argparse.Namespace) -> dict[str, object]:
 
     return {
         "status": "candidates_not_yet_applied_to_ida",
-        "purpose": "Record behavior-based roles for selected IDA default functions without claiming recovered ELF source names; confidence is recorded per candidate.",
+        "purpose": "Record behavior-based roles for the unresolved application or engine functions without claiming recovered ELF source names; confidence is recorded per candidate.",
         "binary": "private original ARM64 libqplay.so",
         "binary_sha256": sha256(binary),
         "candidate_count": len(candidates),
+        "role_candidate_coverage": {
+            "profile_category": "app_or_engine_unknown",
+            "profile_count": len(application_unknown),
+            "candidate_count": len(candidate_addresses),
+            "uncovered": [],
+            "extra": [],
+        },
         "candidates": candidates,
         "source_artifacts": {
             "function_inventory": "symbols/libqplay.function_inventory.json",
