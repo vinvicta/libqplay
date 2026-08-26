@@ -109,6 +109,8 @@ def main() -> None:
     parser.add_argument("--array-mutation-verification", type=Path)
     parser.add_argument("--string-search-anchors", type=Path)
     parser.add_argument("--string-search-verification", type=Path)
+    parser.add_argument("--string-helper-anchors", type=Path)
+    parser.add_argument("--string-helper-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1296,6 +1298,34 @@ def main() -> None:
         result["string_search_anchors"] = string_search
         result["interpretation"].append(
             "The forty-second database revision also contains the separately reviewed GS2 all-index and substring-position search anchors."
+        )
+    string_helper = None
+    if args.string_helper_anchors or args.string_helper_verification:
+        if not args.string_helper_anchors or not args.string_helper_verification:
+            raise ValueError(
+                "string-helper anchors and string-helper verification must be supplied together"
+            )
+        string_helper_document = load(args.string_helper_anchors)
+        string_helper_verification = load(args.string_helper_verification)
+        if string_helper_document.get("artifact") != "spectron_string_helper_manual_translation_anchors_20260826":
+            raise ValueError("unexpected string-helper anchor artifact")
+        if not string_helper_verification.get("verified"):
+            raise ValueError("string-helper anchor reopen verification did not pass")
+        expected_string_helper = len(string_helper_document["anchors"])
+        if string_helper_verification["verified_name_count"] != expected_string_helper:
+            raise ValueError("string-helper verification count differs from artifact")
+        string_helper = {
+            "anchor_path": str(args.string_helper_anchors),
+            "anchor_sha256": sha256_path(args.string_helper_anchors),
+            "reopen_verification": str(args.string_helper_verification),
+            "anchor_count": expected_string_helper,
+            "verified_name_count": string_helper_verification["verified_name_count"],
+            "reopen_failure_count": string_helper_verification["failure_count"],
+        }
+    if string_helper is not None:
+        result["string_helper_anchors"] = string_helper
+        result["interpretation"].append(
+            "The forty-third database revision also contains the separately reviewed GS2 next-string, indexed-string, and string-formatting helper anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

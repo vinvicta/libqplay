@@ -755,6 +755,12 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_string_search_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+105. Clean IDA review added three high-confidence GS2 string-stack helper
+     anchors for next-string retrieval, indexed retrieval, and formatting. All
+     three reopened successfully in the v45 disposable copy. See
+     `artifacts/spectron_string_helper_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

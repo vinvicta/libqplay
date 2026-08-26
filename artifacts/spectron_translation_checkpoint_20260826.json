@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v44.i64",
-    "sha256": "a8be3d80ea5f1adb780d714ca960ec88891bd65b2c2d828414a2c096de29b276"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v45.i64",
+    "sha256": "23e333de1f861ee226bd87daaba81c9d9fd1558adc48e278b59bca9d3f912319"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -179,7 +179,8 @@
     "The thirty-ninth database revision also contains the separately reviewed GS2 stack-entry float, string, and object conversion anchors.",
     "The fortieth database revision also contains the separately reviewed execution restoration, character extraction, and action-context lookup anchors.",
     "The forty-first database revision also contains the separately reviewed GS2 single-cell, two-dimensional, and replacement array mutation anchors.",
-    "The forty-second database revision also contains the separately reviewed GS2 all-index and substring-position search anchors."
+    "The forty-second database revision also contains the separately reviewed GS2 all-index and substring-position search anchors.",
+    "The forty-third database revision also contains the separately reviewed GS2 next-string, indexed-string, and string-formatting helper anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -366,6 +367,14 @@
     "anchor_sha256": "196ceda39467f86ad51e6573f13ef28817023bad802a15eaf47dbcd55e6d09b3",
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_stack_entry_verify_v41.json",
+    "verified_name_count": 3
+  },
+  "string_helper_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "artifacts/spectron_string_helper_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "64fee372b714546f3d1fcab19b03b321ba6567d3dbf9fba9cf8c42d0b1786233",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_string_helper_verify_v45.json",
     "verified_name_count": 3
   },
   "string_search_anchors": {
