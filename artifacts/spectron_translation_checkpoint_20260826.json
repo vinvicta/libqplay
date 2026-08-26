@@ -69,8 +69,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v19.i64",
-    "sha256": "ecd0b6db4a8147fa3771cd02d283b022ddd959cdac17c22301e56b472efeb365"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v20.i64",
+    "sha256": "6d01c2d7fedfef870e19119d6e9bb302ac88012a80072a9cfe135d312d08c96e"
   },
   "http_request_anchors": {
     "anchor_count": 12,
@@ -108,7 +108,8 @@
     "The sixteenth database revision also contains the separately reviewed connection, packet-state, SSL, and low-level field anchors.",
     "The seventeenth database revision also contains the separately reviewed compact client state and forwarding anchors.",
     "The eighteenth database revision also contains the separately reviewed client connection-state and encrypted-file helper anchors.",
-    "The nineteenth database revision also contains the separately reviewed HTTP request field, lifecycle, and outbound-buffer anchors."
+    "The nineteenth database revision also contains the separately reviewed HTTP request field, lifecycle, and outbound-buffer anchors.",
+    "The twentieth database revision also contains the separately reviewed socket status and address helper anchors."
   ],
   "login_helper_anchors": {
     "anchor_count": 8,
@@ -176,6 +177,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_script_bridge_anchor_verification_20260826.json",
     "verified_name_count": 13
+  },
+  "socket_state_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "artifacts/spectron_socket_state_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "d144a8c5a8bb85afbcb177ddeb836faf2fffc97285761b1a1bc780fbfa68986c",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_socket_state_verify_v20.json",
+    "verified_name_count": 5
   },
   "translation": {
     "ambiguous_functions": 1019,

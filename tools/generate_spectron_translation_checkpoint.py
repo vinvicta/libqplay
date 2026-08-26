@@ -63,6 +63,8 @@ def main() -> None:
     parser.add_argument("--connection-state-verification", type=Path)
     parser.add_argument("--http-request-anchors", type=Path)
     parser.add_argument("--http-request-verification", type=Path)
+    parser.add_argument("--socket-state-anchors", type=Path)
+    parser.add_argument("--socket-state-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -606,6 +608,34 @@ def main() -> None:
         result["http_request_anchors"] = http_request
         result["interpretation"].append(
             "The nineteenth database revision also contains the separately reviewed HTTP request field, lifecycle, and outbound-buffer anchors."
+        )
+    socket_state = None
+    if args.socket_state_anchors or args.socket_state_verification:
+        if not args.socket_state_anchors or not args.socket_state_verification:
+            raise ValueError(
+                "socket-state anchors and socket-state verification must be supplied together"
+            )
+        socket_state_document = load(args.socket_state_anchors)
+        socket_state_verification = load(args.socket_state_verification)
+        if socket_state_document.get("artifact") != "spectron_socket_state_manual_translation_anchors_20260826":
+            raise ValueError("unexpected socket-state anchor artifact")
+        if not socket_state_verification.get("verified"):
+            raise ValueError("socket-state anchor reopen verification did not pass")
+        expected_socket_state = len(socket_state_document["anchors"])
+        if socket_state_verification["verified_name_count"] != expected_socket_state:
+            raise ValueError("socket-state verification count differs from artifact")
+        socket_state = {
+            "anchor_path": str(args.socket_state_anchors),
+            "anchor_sha256": sha256_path(args.socket_state_anchors),
+            "reopen_verification": str(args.socket_state_verification),
+            "anchor_count": expected_socket_state,
+            "verified_name_count": socket_state_verification["verified_name_count"],
+            "reopen_failure_count": socket_state_verification["failure_count"],
+        }
+    if socket_state is not None:
+        result["socket_state_anchors"] = socket_state
+        result["interpretation"].append(
+            "The twentieth database revision also contains the separately reviewed socket status and address helper anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
