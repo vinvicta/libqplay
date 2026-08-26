@@ -74,24 +74,22 @@ def decode_script_name(binary: bytes, va: int) -> tuple[str, str, bool]:
     exact = True
     length = len(raw)
     for index, encoded in enumerate(raw):
-        choices = [
-            chr(character)
-            for character in range(32, 127)
-            if (
-                (
-                    0xFF
-                    - (
-                        (length + 10)
-                        + 4 * (character + index)
-                        + (((character + index) >> 6) & 3)
-                    )
-                )
-                & 0xFF
-            )
-            == encoded
-        ]
-        if len(choices) == 1:
-            decoded.append(choices[0])
+        # Static tables are C strings, so encodesimple cannot leave an
+        # encoded zero byte in place. The table generator stores a sentinel
+        # instead. TScriptProperty later calls codesimplefix0, which detects
+        # that sentinel and restores the zero before decodesimple runs.
+        signed_encoded = encoded if encoded < 0x80 else encoded - 0x100
+        value = -11 - signed_encoded - length
+        sentinel_test = ((value >> 2) & 0x3F) | ((value & 3) << 6)
+        if sentinel_test == index:
+            signed_encoded = 0
+
+        value = -11 - signed_encoded - length
+        decoded_byte = (
+            (value << 6) - index + ((value >> 2) & 0x3F)
+        ) & 0xFF
+        if 32 <= decoded_byte < 127:
+            decoded.append(chr(decoded_byte))
         else:
             decoded.append("?")
             exact = False
@@ -497,6 +495,7 @@ def generate(args: argparse.Namespace) -> dict:
         "decoder": {
             "record_size": RECORD_SIZE,
             "encoded_name_helper": "THashList::encodesimple inverse",
+            "zero_byte_repair_helper": "THashList::codesimplefix0 sentinel",
             "literal_names_are_preserved": True,
             "uncertain_names_use_question_marks": True,
         },

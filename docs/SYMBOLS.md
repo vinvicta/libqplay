@@ -274,10 +274,10 @@ registration slot. The records resolve to 1,779 unique callback targets.
 
 The inventory distinguishes 411 names already present in the semantic-label
 artifact, 258 in the curated callback candidate artifact, 204 existing
-non-default IDA names, 825 exact new names with saved function boundaries, 18
-exact pointers without saved boundaries, and 63 names that still need human
-review because of the old zero-byte encoding behavior. The exact bounded set
-has a review-only IDA applier in
+non-default IDA names, 886 exact new names with saved function boundaries, and
+20 exact pointers without saved boundaries. The decoder models the old
+zero-byte encoding behavior, so all 1,455 static record names are recovered
+exactly. The exact bounded set has a review-only IDA applier in
 `tools/ida_apply_script_table_inventory.py`; it is not enabled while the IDA
 bridge is unavailable.
 

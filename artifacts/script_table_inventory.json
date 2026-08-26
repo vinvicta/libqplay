@@ -8,7 +8,8 @@
     "encoded_name_helper": "THashList::encodesimple inverse",
     "literal_names_are_preserved": true,
     "record_size": 48,
-    "uncertain_names_use_question_marks": true
+    "uncertain_names_use_question_marks": true,
+    "zero_byte_repair_helper": "THashList::codesimplefix0 sentinel"
   },
   "network_contacted": false,
   "purpose": "Complete static script-property and script-function table map. The inventory is evidence for later IDA labels and does not change the binary or contact a network.",
@@ -20,15 +21,15 @@
     "declared_function_records": 777,
     "declared_property_records": 678,
     "dynamic_table_calls": 1,
-    "exact_untranslated_targets": 843,
-    "exact_untranslated_with_function_boundary": 825,
+    "exact_untranslated_targets": 906,
+    "exact_untranslated_with_function_boundary": 886,
     "function_tables": 62,
     "property_tables": 70,
-    "records_with_uncertain_names": 97,
+    "records_with_uncertain_names": 0,
     "registration_calls": 132,
     "static_function_records": 776,
     "static_property_records": 678,
-    "targets_requiring_name_review": 63,
+    "targets_requiring_name_review": 0,
     "unique_callback_statuses": {
       "existing_named_function": 204,
       "native_callback_candidate": 258,
@@ -69,8 +70,8 @@
           "getter_va": "0xe0c84",
           "index": 0,
           "record_va": "0x376018",
-          "script_name": "disableds?undeffects",
-          "script_name_exact": false,
+          "script_name": "disabledsoundeffects",
+          "script_name_exact": true,
           "script_name_raw_hex": "50380c50481c3434f4bde4fc2018100c0c10c7c7",
           "setter_va": "0xe0c70"
         },
@@ -182,8 +183,8 @@
           ],
           "index": 3,
           "record_va": "0x376168",
-          "script_name": "getm?sicfilename",
-          "script_name_exact": false,
+          "script_name": "getmusicfilename",
+          "script_name_exact": true,
           "script_name_raw_hex": "484c0c24d504283c2c1c0c24fc2cf814"
         },
         {
@@ -308,8 +309,8 @@
           ],
           "index": 14,
           "record_va": "0x376378",
-          "script_name": "pla?",
-          "script_name_exact": false,
+          "script_name": "play",
+          "script_name_exact": true,
           "script_name_raw_hex": "303c64e5"
         },
         {
@@ -454,8 +455,8 @@
           "callbacks": [],
           "index": 3,
           "record_va": "0x376528",
-          "script_name": "checks?m",
-          "script_name_exact": false,
+          "script_name": "checksum",
+          "script_name_exact": true,
           "script_name_raw_hex": "60485054300cd51c"
         },
         {
@@ -639,8 +640,8 @@
           "callbacks": [],
           "index": 3,
           "record_va": "0x376840",
-          "script_name": "getpremium?ption",
-          "script_name_exact": false,
+          "script_name": "getpremiumoption",
+          "script_name_exact": true,
           "script_name_raw_hex": "484c0c180c3c1824f00cbdf8e30cf0f0"
         },
         {
@@ -869,6 +870,7 @@
               "current_ida_name": "sub_F6F6C",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "TTime_script_formattimestring",
               "role": "callback",
               "status": "untranslated_default_sub",
               "va": "0xf6f6c"
@@ -876,8 +878,8 @@
           ],
           "index": 3,
           "record_va": "0x376a80",
-          "script_name": "forma?timestring",
-          "script_name_exact": false,
+          "script_name": "formattimestring",
+          "script_name_exact": true,
           "script_name_raw_hex": "4c24142450d1fc24102cf0e8ec0cf40c"
         },
         {
@@ -1138,8 +1140,8 @@
           ],
           "index": 6,
           "record_va": "0x376cf0",
-          "script_name": "freeall?es?urces",
-          "script_name_exact": false,
+          "script_name": "freeallresources",
+          "script_name_exact": true,
           "script_name_raw_hex": "4c18484450201cc930f4bde3ec2418db"
         },
         {
@@ -1246,8 +1248,8 @@
           ],
           "index": 12,
           "record_va": "0x376e10",
-          "script_name": "adventure_setf?lemo?time",
-          "script_name_exact": false,
+          "script_name": "adventure_setfilemodtime",
+          "script_name_exact": true,
           "script_name_raw_hex": "5848fc3c14f8f0f8283ce81cdb10a5f008e4d791bbe4cfec"
         },
         {
@@ -1300,8 +1302,8 @@
           ],
           "index": 15,
           "record_va": "0x376ea0",
-          "script_name": "adventure_getf?lecontent",
-          "script_name_exact": false,
+          "script_name": "adventure_getfilecontent",
+          "script_name_exact": true,
           "script_name_raw_hex": "5848fc3c14f8f0f8283c181cdb10a5f0080cd7d7bbf4cbaf"
         },
         {
@@ -1318,8 +1320,8 @@
           ],
           "index": 16,
           "record_va": "0x376ed0",
-          "script_name": "adventure_setf?lecontent",
-          "script_name_exact": false,
+          "script_name": "adventure_setfilecontent",
+          "script_name_exact": true,
           "script_name_raw_hex": "5848fc3c14f8f0f8283ce81cdb10a5f0080cd7d7bbf4cbaf"
         },
         {
@@ -1336,8 +1338,8 @@
           ],
           "index": 17,
           "record_va": "0x376f00",
-          "script_name": "ad?enture_fi?eexists",
-          "script_name_exact": false,
+          "script_name": "adventure_fileexists",
+          "script_name_exact": true,
           "script_name_raw_hex": "5c4cd94018fcf4fc2c402010b11814c3fccfc7c7"
         },
         {
@@ -2305,6 +2307,7 @@
               "current_ida_name": "sub_111348",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GuiControlProfile_get_fillonlynonchildarea",
               "role": "getter",
               "status": "untranslated_default_sub",
               "va": "0x111348"
@@ -2313,6 +2316,7 @@
               "current_ida_name": "sub_111350",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GuiControlProfile_set_fillonlynonchildarea",
               "role": "setter",
               "status": "untranslated_default_sub",
               "va": "0x111350"
@@ -2321,8 +2325,8 @@
           "getter_va": "0x111348",
           "index": 16,
           "record_va": "0x377640",
-          "script_name": "fillonlyn??childarea",
-          "script_name_exact": false,
+          "script_name": "fillonlynonchildarea",
+          "script_name_exact": true,
           "script_name_raw_hex": "48382824141418df08bdb9281008f8141cd30410",
           "setter_va": "0x111350"
         },
@@ -2448,6 +2452,7 @@
               "current_ida_name": "sub_111A28",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GuiControlProfile_get_fontcolorsel",
               "role": "getter",
               "status": "untranslated_default_sub",
               "va": "0x111a28"
@@ -2456,6 +2461,7 @@
               "current_ida_name": "sub_1116E0",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GuiControlProfile_set_fontcolorsel",
               "role": "setter",
               "status": "untranslated_default_sub",
               "va": "0x1116e0"
@@ -2464,8 +2470,8 @@
           "getter_va": "0x111a28",
           "index": 21,
           "record_va": "0x377730",
-          "script_name": "fontcolo?sel",
-          "script_name_exact": false,
+          "script_name": "fontcolorsel",
+          "script_name_exact": true,
           "script_name_raw_hex": "5028280c4c182010c9f82c0c",
           "setter_va": "0x1116e0"
         },
@@ -2648,6 +2654,7 @@
               "current_ida_name": "sub_111568",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GuiControlProfile_get_fontstylestrings",
               "role": "getter",
               "status": "untranslated_default_sub",
               "va": "0x111568"
@@ -2656,6 +2663,7 @@
               "current_ida_name": "sub_1114C0",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GuiControlProfile_set_fontstylestrings",
               "role": "setter",
               "status": "untranslated_default_sub",
               "va": "0x1114c0"
@@ -2664,8 +2672,8 @@
           "getter_va": "0x111568",
           "index": 28,
           "record_va": "0x377880",
-          "script_name": "fonts?ylestrings",
-          "script_name_exact": false,
+          "script_name": "fontstylestrings",
+          "script_name_exact": true,
           "script_name_raw_hex": "4c24240808d1e81830f4ecf010f810db",
           "setter_va": "0x1114c0"
         },
@@ -2675,6 +2683,7 @@
               "current_ida_name": "sub_111538",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GuiControlProfile_get_fontstylenumbers",
               "role": "getter",
               "status": "untranslated_default_sub",
               "va": "0x111538"
@@ -2683,6 +2692,7 @@
               "current_ida_name": "sub_1114B8",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GuiControlProfile_set_fontstylenumbers",
               "role": "setter",
               "status": "untranslated_default_sub",
               "va": "0x1114b8"
@@ -2691,8 +2701,8 @@
           "getter_va": "0x111538",
           "index": 29,
           "record_va": "0x3778b0",
-          "script_name": "fonts?ylenumbers",
-          "script_name_exact": false,
+          "script_name": "fontstylenumbers",
+          "script_name_exact": true,
           "script_name_raw_hex": "4c24240808d1e8183008e8042c1ce3db",
           "setter_va": "0x1114b8"
         },
@@ -3136,6 +3146,7 @@
               "current_ida_name": "sub_111358",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GuiControlProfile_get_textgradient",
               "role": "getter",
               "status": "untranslated_default_sub",
               "va": "0x111358"
@@ -3144,6 +3155,7 @@
               "current_ida_name": "sub_111360",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GuiControlProfile_set_textgradient",
               "role": "setter",
               "status": "untranslated_default_sub",
               "va": "0x111360"
@@ -3152,8 +3164,8 @@
           "getter_va": "0x111358",
           "index": 45,
           "record_va": "0x377bb0",
-          "script_name": "te?tgradient",
-          "script_name_exact": false,
+          "script_name": "textgradient",
+          "script_name_exact": true,
           "script_name_raw_hex": "1850e10c3c0c4c3c243008ec",
           "setter_va": "0x111360"
         },
@@ -3269,8 +3281,8 @@
           ],
           "index": 0,
           "record_va": "0x377c70",
-          "script_name": "gettex?width",
-          "script_name_exact": false,
+          "script_name": "gettextwidth",
+          "script_name_exact": true,
           "script_name_raw_hex": "4c50100c44f4d1f02434f01c"
         },
         {
@@ -3868,8 +3880,8 @@
           ],
           "index": 15,
           "record_va": "0x378218",
-          "script_name": "drawtex?",
-          "script_name_exact": false,
+          "script_name": "drawtext",
+          "script_name_exact": true,
           "script_name_raw_hex": "5c2060040c44f4d1"
         }
       ],
@@ -3949,6 +3961,7 @@
               "current_ida_name": "sub_15659C",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GSFunctionsClient_get_allrenderobjecttypes",
               "role": "getter",
               "status": "untranslated_default_sub",
               "va": "0x15659c"
@@ -3957,8 +3970,8 @@
           "getter_va": "0x15659c",
           "index": 1,
           "record_va": "0x3782c8",
-          "script_name": "allrender?bjecttypes",
-          "script_name_exact": false,
+          "script_name": "allrenderobjecttypes",
+          "script_name_exact": true,
           "script_name_raw_hex": "5c2c280c3c143830f8bd300c1c20d7d3bbdb04c7",
           "setter_va": null
         },
@@ -4088,6 +4101,7 @@
               "current_ida_name": "sub_1566E8",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GSFunctionsClient_get_carriesstone",
               "role": "getter",
               "status": "untranslated_default_sub",
               "va": "0x1566e8"
@@ -4096,8 +4110,8 @@
           "getter_va": "0x1566e8",
           "index": 8,
           "record_va": "0x378418",
-          "script_name": "carries?tone",
-          "script_name_exact": false,
+          "script_name": "carriesstone",
+          "script_name_exact": true,
           "script_name_raw_hex": "5c601814344004cdf8080828",
           "setter_va": null
         },
@@ -4772,6 +4786,7 @@
               "current_ida_name": "sub_156DB8",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GSFunctionsClient_get_scriptedcontrols",
               "role": "getter",
               "status": "untranslated_default_sub",
               "va": "0x156db8"
@@ -4780,8 +4795,8 @@
           "getter_va": "0x156db8",
           "index": 40,
           "record_va": "0x378a18",
-          "script_name": "scrip?edcontrols",
-          "script_name_exact": false,
+          "script_name": "scriptedcontrols",
+          "script_name_exact": true,
           "script_name_raw_hex": "1854143414d13838380404e8ecf4fcdb",
           "setter_va": null
         },
@@ -5254,6 +5269,7 @@
               "current_ida_name": "sub_159A8C",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GSFunctionsClient_script_adventure_openserverlist",
               "role": "callback",
               "status": "untranslated_default_sub",
               "va": "0x159a8c"
@@ -5261,8 +5277,8 @@
           ],
           "index": 12,
           "record_va": "0x378e68",
-          "script_name": "adventure_openserv?rlist",
-          "script_name_exact": false,
+          "script_name": "adventure_openserverlist",
+          "script_name_exact": true,
           "script_name_raw_hex": "5848fc3c14f8f0f8283cf8f018f0d70cd3bf95c7dbe4b7af"
         },
         {
@@ -5424,6 +5440,7 @@
               "current_ida_name": "sub_1564DC",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GSFunctionsClient_script_isfullscreenmode",
               "role": "callback",
               "status": "untranslated_default_sub",
               "va": "0x1564dc"
@@ -5431,8 +5448,8 @@
           ],
           "index": 21,
           "record_va": "0x379018",
-          "script_name": "isfull?cree??ode",
-          "script_name_exact": false,
+          "script_name": "isfullscreenmode",
+          "script_name_exact": true,
           "script_name_raw_hex": "401444042420cd3cfc2c28b9b5f41c14"
         },
         {
@@ -6167,6 +6184,7 @@
               "current_ida_name": "sub_159390",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GSFunctionsClient_script_gettextwidth",
               "role": "callback",
               "status": "untranslated_default_sub",
               "va": "0x159390"
@@ -6174,8 +6192,8 @@
           ],
           "index": 61,
           "record_va": "0x379798",
-          "script_name": "gettex?width",
-          "script_name_exact": false,
+          "script_name": "gettextwidth",
+          "script_name_exact": true,
           "script_name_raw_hex": "4c50100c44f4d1f02434f01c"
         },
         {
@@ -6411,6 +6429,7 @@
               "current_ida_name": "sub_15AD28",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GSFunctionsClient_script_keydown2",
               "role": "callback",
               "status": "untranslated_default_sub",
               "va": "0x15ad28"
@@ -6418,8 +6437,8 @@
           ],
           "index": 74,
           "record_va": "0x379a08",
-          "script_name": "ke?down2",
-          "script_name_exact": false,
+          "script_name": "keydown2",
+          "script_name_exact": true,
           "script_name_raw_hex": "4054e55020fc1c09"
         },
         {
@@ -6448,6 +6467,7 @@
               "current_ida_name": "sub_158E84",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GSFunctionsClient_script_keyname2",
               "role": "callback",
               "status": "untranslated_default_sub",
               "va": "0x158e84"
@@ -6455,8 +6475,8 @@
           ],
           "index": 76,
           "record_va": "0x379a68",
-          "script_name": "ke?name2",
-          "script_name_exact": false,
+          "script_name": "keyname2",
+          "script_name_exact": true,
           "script_name_raw_hex": "4054e52858244009"
         },
         {
@@ -6789,6 +6809,7 @@
               "current_ida_name": "sub_15A2AC",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GSFunctionsClient_script_sendtext",
               "role": "callback",
               "status": "untranslated_default_sub",
               "va": "0x15a2ac"
@@ -6796,8 +6817,8 @@
           ],
           "index": 94,
           "record_va": "0x379dc8",
-          "script_name": "sendtex?",
-          "script_name_exact": false,
+          "script_name": "sendtext",
+          "script_name_exact": true,
           "script_name_raw_hex": "20542c500c44f4d1"
         },
         {
@@ -6978,6 +6999,7 @@
               "current_ida_name": "sub_158510",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GSFunctionsClient_script_setbeltcolor",
               "role": "callback",
               "status": "untranslated_default_sub",
               "va": "0x158510"
@@ -6985,8 +7007,8 @@
           ],
           "index": 104,
           "record_va": "0x379fa8",
-          "script_name": "setbel?color",
-          "script_name_exact": false,
+          "script_name": "setbeltcolor",
+          "script_name_exact": true,
           "script_name_raw_hex": "1c5010544424d1400c1404f4"
         },
         {
@@ -6996,6 +7018,7 @@
               "current_ida_name": "sub_1584C0",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GSFunctionsClient_script_setcoatcolor",
               "role": "callback",
               "status": "untranslated_default_sub",
               "va": "0x1584c0"
@@ -7003,8 +7026,8 @@
           ],
           "index": 105,
           "record_va": "0x379fd8",
-          "script_name": "setcoa?color",
-          "script_name_exact": false,
+          "script_name": "setcoatcolor",
+          "script_name_exact": true,
           "script_name_raw_hex": "1c5010501c50d1400c1404f4"
         },
         {
@@ -7033,6 +7056,7 @@
               "current_ida_name": "sub_156E64",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GSFunctionsClient_script_setfocus",
               "role": "callback",
               "status": "untranslated_default_sub",
               "va": "0x156e64"
@@ -7040,8 +7064,8 @@
           ],
           "index": 107,
           "record_va": "0x37a038",
-          "script_name": "setfoc?s",
-          "script_name_exact": false,
+          "script_name": "setfocus",
+          "script_name_exact": true,
           "script_name_raw_hex": "20541448204cd504"
         },
         {
@@ -7108,6 +7132,7 @@
               "current_ida_name": "sub_158740",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GSFunctionsClient_script_setplayerdir",
               "role": "callback",
               "status": "untranslated_default_sub",
               "va": "0x158740"
@@ -7115,8 +7140,8 @@
           ],
           "index": 111,
           "record_va": "0x37a0f8",
-          "script_name": "setplaye?dir",
-          "script_name_exact": false,
+          "script_name": "setplayerdir",
+          "script_name_exact": true,
           "script_name_raw_hex": "1c50101c2850ec38c9341cf4"
         },
         {
@@ -7259,6 +7284,7 @@
               "current_ida_name": "sub_158378",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GSFunctionsClient_script_setsword",
               "role": "callback",
               "status": "untranslated_default_sub",
               "va": "0x158378"
@@ -7266,8 +7292,8 @@
           ],
           "index": 119,
           "record_va": "0x37a278",
-          "script_name": "sets?ord",
-          "script_name_exact": false,
+          "script_name": "setsword",
+          "script_name_exact": true,
           "script_name_raw_hex": "20541414dd1c0c40"
         },
         {
@@ -7448,6 +7474,7 @@
               "current_ida_name": null,
               "has_function_boundary": false,
               "name": null,
+              "proposed_name": "GSFunctionsClient_script_adventure_uploadfile",
               "role": "callback",
               "status": "no_function_boundary",
               "va": "0x157d20"
@@ -7455,8 +7482,8 @@
           ],
           "index": 129,
           "record_va": "0x37a458",
-          "script_name": "ad?enture_up?oadfil?",
-          "script_name_exact": false,
+          "script_name": "adventure_uploadfile",
+          "script_name_exact": true,
           "script_name_raw_hex": "5c4cd94018fcf4fc2c40e4f4b1f0241408f8e895"
         },
         {
@@ -7504,6 +7531,7 @@
               "current_ida_name": "sub_157794",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GSFunctionsClient_script_wraptext",
               "role": "callback",
               "status": "untranslated_default_sub",
               "va": "0x157794"
@@ -7511,8 +7539,8 @@
           ],
           "index": 132,
           "record_va": "0x37a4e8",
-          "script_name": "wraptex?",
-          "script_name_exact": false,
+          "script_name": "wraptext",
+          "script_name_exact": true,
           "script_name_raw_hex": "102060200c44f4d1"
         },
         {
@@ -7721,8 +7749,8 @@
           "getter_va": "0x15d514",
           "index": 5,
           "record_va": "0x37a6a0",
-          "script_name": "attachedto?bject",
-          "script_name_exact": false,
+          "script_name": "attachedtoobject",
+          "script_name_exact": true,
           "script_name_raw_hex": "60100c5448303838f404bd300c1c20d7",
           "setter_va": null
         },
@@ -7767,8 +7795,8 @@
           "getter_va": "0x15da68",
           "index": 7,
           "record_va": "0x37a700",
-          "script_name": "bod?",
-          "script_name_exact": false,
+          "script_name": "body",
+          "script_name_exact": true,
           "script_name_raw_hex": "683058e5",
           "setter_va": "0x15e344"
         },
@@ -9506,6 +9534,7 @@
               "current_ida_name": "sub_16C268",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "TPlayer_get_defaultwalkspeed",
               "role": "getter",
               "status": "untranslated_default_sub",
               "va": "0x16c268"
@@ -9514,6 +9543,7 @@
               "current_ida_name": "sub_16D698",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "TPlayer_set_defaultwalkspeed",
               "role": "setter",
               "status": "untranslated_default_sub",
               "va": "0x16d698"
@@ -9522,8 +9552,8 @@
           "getter_va": "0x16c268",
           "index": 3,
           "record_va": "0x37b598",
-          "script_name": "defa?ltwalkspeed",
-          "script_name_exact": false,
+          "script_name": "defaultwalkspeed",
+          "script_name_exact": true,
           "script_name_raw_hex": "544c4454d520fcec401010ecf41c1818",
           "setter_va": "0x16d698"
         },
@@ -9818,6 +9848,7 @@
               "current_ida_name": "sub_16C484",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "TPlayer_get_isinvincible",
               "role": "getter",
               "status": "untranslated_default_sub",
               "va": "0x16c484"
@@ -9826,6 +9857,7 @@
               "current_ida_name": "sub_16CDEC",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "TPlayer_set_isinvincible",
               "role": "setter",
               "status": "untranslated_default_sub",
               "va": "0x16cdec"
@@ -9834,8 +9866,8 @@
           "getter_va": "0x16c484",
           "index": 16,
           "record_va": "0x37b808",
-          "script_name": "isin?incible",
-          "script_name_exact": false,
+          "script_name": "isinvincible",
+          "script_name_exact": true,
           "script_name_raw_hex": "44183c24d9301840243c1028",
           "setter_va": "0x16cdec"
         },
@@ -10338,8 +10370,8 @@
           ],
           "index": 1,
           "record_va": "0x37bbf8",
-          "script_name": "sho?emoticon",
-          "script_name_exact": false,
+          "script_name": "showemoticon",
+          "script_name_exact": true,
           "script_name_raw_hex": "1c4424dd442014fc24380404"
         },
         {
@@ -10410,8 +10442,8 @@
           ],
           "index": 5,
           "record_va": "0x37bcb8",
-          "script_name": "getnohi?",
-          "script_name_exact": false,
+          "script_name": "getnohit",
+          "script_name_exact": true,
           "script_name_raw_hex": "50541428203830d1"
         },
         {
@@ -10934,8 +10966,8 @@
           "getter_va": "0x180c6c",
           "index": 13,
           "record_va": "0x37c098",
-          "script_name": "peltwi?hbush",
-          "script_name_exact": false,
+          "script_name": "peltwithbush",
+          "script_name_exact": true,
           "script_name_raw_hex": "2850300cfc30d12c40f0f41c",
           "setter_va": null
         },
@@ -10953,8 +10985,8 @@
           "getter_va": "0x180c58",
           "index": 14,
           "record_va": "0x37c0c8",
-          "script_name": "peltwi?hsign",
-          "script_name_exact": false,
+          "script_name": "peltwithsign",
+          "script_name_exact": true,
           "script_name_raw_hex": "2850300cfc30d12cfc202404",
           "setter_va": null
         },
@@ -10972,8 +11004,8 @@
           "getter_va": "0x180c44",
           "index": 15,
           "record_va": "0x37c0f8",
-          "script_name": "peltwi?hvase",
-          "script_name_exact": false,
+          "script_name": "peltwithvase",
+          "script_name_exact": true,
           "script_name_raw_hex": "2850300cfc30d12cf040f428",
           "setter_va": null
         },
@@ -11294,8 +11326,8 @@
           ],
           "index": 3,
           "record_va": "0x37c398",
-          "script_name": "canbecar?ied",
-          "script_name_exact": false,
+          "script_name": "canbecarried",
+          "script_name_exact": true,
           "script_name_raw_hex": "5c60285444484c04c9202c2c"
         },
         {
@@ -12104,8 +12136,8 @@
           ],
           "index": 48,
           "record_va": "0x37cc08",
-          "script_name": "showtex?",
-          "script_name_exact": false,
+          "script_name": "showtext",
+          "script_name_exact": true,
           "script_name_raw_hex": "204828040c44f4d1"
         },
         {
@@ -12350,8 +12382,8 @@
           "getter_va": "0x18a604",
           "index": 3,
           "record_va": "0x37ce90",
-          "script_name": "attachedto?bject",
-          "script_name_exact": false,
+          "script_name": "attachedtoobject",
+          "script_name_exact": true,
           "script_name_raw_hex": "60100c5448303838f404bd300c1c20d7",
           "setter_va": "0x18ca40"
         },
@@ -14644,8 +14676,8 @@
           ],
           "index": 6,
           "record_va": "0x37ff20",
-          "script_name": "reflec?a?row",
-          "script_name_exact": false,
+          "script_name": "reflectarrow",
+          "script_name_exact": true,
           "script_name_raw_hex": "2050482c4448d148c9fc04df"
         },
         {
@@ -15209,8 +15241,8 @@
           ],
           "index": 1,
           "record_va": "0x380370",
-          "script_name": "setval?e",
-          "script_name_exact": false,
+          "script_name": "setvalue",
+          "script_name_exact": true,
           "script_name_raw_hex": "205414085828d53c"
         }
       ],
@@ -15286,6 +15318,7 @@
               "current_ida_name": "sub_1AD268",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GuiButtonBaseCtrl_get_groupnum",
               "role": "getter",
               "status": "untranslated_default_sub",
               "va": "0x1ad268"
@@ -15294,6 +15327,7 @@
               "current_ida_name": "sub_1AD270",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GuiButtonBaseCtrl_set_groupnum",
               "role": "setter",
               "status": "untranslated_default_sub",
               "va": "0x1ad270"
@@ -15302,8 +15336,8 @@
           "getter_va": "0x1ad268",
           "index": 2,
           "record_va": "0x380400",
-          "script_name": "groupn?m",
-          "script_name_exact": false,
+          "script_name": "groupnum",
+          "script_name_exact": true,
           "script_name_raw_hex": "5020280c1c20d51c",
           "setter_va": "0x1ad270"
         },
@@ -16845,8 +16879,8 @@
           "getter_va": "0x1b2a0c",
           "index": 46,
           "record_va": "0x380f40",
-          "script_name": "showhin?",
-          "script_name_exact": false,
+          "script_name": "showhint",
+          "script_name_exact": true,
           "script_name_raw_hex": "204828043c341cd1",
           "setter_va": "0x1b2a14"
         },
@@ -17109,8 +17143,8 @@
           ],
           "index": 1,
           "record_va": "0x381120",
-          "script_name": "bringtof?ont",
-          "script_name_exact": false,
+          "script_name": "bringtofront",
+          "script_name_exact": true,
           "script_name_raw_hex": "601c3c243c041434c90808ec"
         },
         {
@@ -17271,8 +17305,8 @@
           ],
           "index": 10,
           "record_va": "0x3812d0",
-          "script_name": "isfirst?esponder",
-          "script_name_exact": false,
+          "script_name": "isfirstresponder",
+          "script_name_exact": true,
           "script_name_raw_hex": "401444340c04fcc930f4fcfcfc2018df"
         },
         {
@@ -17505,8 +17539,8 @@
           ],
           "index": 23,
           "record_va": "0x381540",
-          "script_name": "sortcont?ols",
-          "script_name_exact": false,
+          "script_name": "sortcontrols",
+          "script_name_exact": true,
           "script_name_raw_hex": "1c28180c4c1818fcc90810f0"
         },
         {
@@ -17570,6 +17604,7 @@
               "current_ida_name": null,
               "has_function_boundary": false,
               "name": null,
+              "proposed_name": "GuiControl_script_tabfirst",
               "role": "callback",
               "status": "no_function_boundary",
               "va": "0x1b8a6c"
@@ -17577,8 +17612,8 @@
           ],
           "index": 27,
           "record_va": "0x381600",
-          "script_name": "tabfirs?",
-          "script_name_exact": false,
+          "script_name": "tabfirst",
+          "script_name_exact": true,
           "script_name_raw_hex": "1c645c48381008d1"
         }
       ],
@@ -17985,6 +18020,7 @@
               "current_ida_name": "sub_1BC750",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GuiMLTextCtrl_get_wordwrap",
               "role": "getter",
               "status": "untranslated_default_sub",
               "va": "0x1bc750"
@@ -17993,6 +18029,7 @@
               "current_ida_name": "sub_1BC818",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GuiMLTextCtrl_set_wordwrap",
               "role": "setter",
               "status": "untranslated_default_sub",
               "va": "0x1bc818"
@@ -18001,8 +18038,8 @@
           "getter_va": "0x1bc750",
           "index": 12,
           "record_va": "0x381940",
-          "script_name": "word?rap",
-          "script_name_exact": false,
+          "script_name": "wordwrap",
+          "script_name_exact": true,
           "script_name_raw_hex": "102c1c50dd105010",
           "setter_va": "0x1bc818"
         }
@@ -18061,6 +18098,7 @@
               "current_ida_name": "sub_1BDF1C",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GuiMLTextCtrl_script_findtext",
               "role": "callback",
               "status": "untranslated_default_sub",
               "va": "0x1bdf1c"
@@ -18068,8 +18106,8 @@
           ],
           "index": 2,
           "record_va": "0x3819d0",
-          "script_name": "findtex?",
-          "script_name_exact": false,
+          "script_name": "findtext",
+          "script_name_exact": true,
           "script_name_raw_hex": "54442c500c44f4d1"
         },
         {
@@ -18345,8 +18383,8 @@
           ],
           "index": 17,
           "record_va": "0x381ca0",
-          "script_name": "scroll?oline",
-          "script_name_exact": false,
+          "script_name": "scrolltoline",
+          "script_name_exact": true,
           "script_name_raw_hex": "1c5818202824d11018200828"
         },
         {
@@ -18455,8 +18493,8 @@
           ],
           "index": 23,
           "record_va": "0x381dc0",
-          "script_name": "trimhorizonta?ly",
-          "script_name_exact": false,
+          "script_name": "trimhorizontally",
+          "script_name_exact": true,
           "script_name_raw_hex": "1418382434140424db0404e830b1fcc3"
         }
       ],
@@ -18650,6 +18688,7 @@
               "current_ida_name": "sub_1BFFE4",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GuiScrollCtrl_get_wheelscrolllines",
               "role": "getter",
               "status": "untranslated_default_sub",
               "va": "0x1bffe4"
@@ -18658,6 +18697,7 @@
               "current_ida_name": "sub_1BFFEC",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GuiScrollCtrl_set_wheelscrolllines",
               "role": "setter",
               "status": "untranslated_default_sub",
               "va": "0x1bffec"
@@ -18666,8 +18706,8 @@
           "getter_va": "0x1bffe4",
           "index": 6,
           "record_va": "0x381f10",
-          "script_name": "wheelsc?olllines",
-          "script_name_exact": false,
+          "script_name": "wheelscrolllines",
+          "script_name_exact": true,
           "script_name_raw_hex": "08404844240440c908100c0810f818db",
           "setter_va": "0x1bffec"
         },
@@ -19138,8 +19178,8 @@
           "getter_va": "0x1c6d88",
           "index": 3,
           "record_va": "0x382270",
-          "script_name": "pass?ord",
-          "script_name_exact": false,
+          "script_name": "password",
+          "script_name_exact": true,
           "script_name_raw_hex": "2c641814dd1c0c40",
           "setter_va": "0x1c6e1c"
         },
@@ -19497,6 +19537,7 @@
               "current_ida_name": "sub_1C9748",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "TGUIAnimation_get_interval",
               "role": "getter",
               "status": "untranslated_default_sub",
               "va": "0x1c9748"
@@ -19505,6 +19546,7 @@
               "current_ida_name": "sub_1C9750",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "TGUIAnimation_set_interval",
               "role": "setter",
               "status": "untranslated_default_sub",
               "va": "0x1c9750"
@@ -19513,8 +19555,8 @@
           "getter_va": "0x1c9748",
           "index": 6,
           "record_va": "0x3824e0",
-          "script_name": "inter?al",
-          "script_name_exact": false,
+          "script_name": "interval",
+          "script_name_exact": true,
           "script_name_raw_hex": "4830144c14d95020",
           "setter_va": "0x1c9750"
         },
@@ -20030,6 +20072,7 @@
               "current_ida_name": "sub_1D91FC",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GuiPopUpMenuCtrl_script_findtext",
               "role": "callback",
               "status": "untranslated_default_sub",
               "va": "0x1d91fc"
@@ -20037,8 +20080,8 @@
           ],
           "index": 1,
           "record_va": "0x382f28",
-          "script_name": "findtex?",
-          "script_name_exact": false,
+          "script_name": "findtext",
+          "script_name_exact": true,
           "script_name_raw_hex": "54442c500c44f4d1"
         },
         {
@@ -20105,6 +20148,7 @@
               "current_ida_name": "sub_1D91E4",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GuiPopUpMenuCtrl_script_rowcount",
               "role": "callback",
               "status": "untranslated_default_sub",
               "va": "0x1d91e4"
@@ -20112,8 +20156,8 @@
           ],
           "index": 5,
           "record_va": "0x382fe8",
-          "script_name": "rowcoun?",
-          "script_name_exact": false,
+          "script_name": "rowcount",
+          "script_name_exact": true,
           "script_name_raw_hex": "242c085420041cd1"
         },
         {
@@ -21183,6 +21227,7 @@
               "current_ida_name": "sub_1DE42C",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GuiTextListCtrl_script_findtext",
               "role": "callback",
               "status": "untranslated_default_sub",
               "va": "0x1de42c"
@@ -21190,8 +21235,8 @@
           ],
           "index": 3,
           "record_va": "0x3837a0",
-          "script_name": "findtex?",
-          "script_name_exact": false,
+          "script_name": "findtext",
+          "script_name_exact": true,
           "script_name_raw_hex": "54442c500c44f4d1"
         },
         {
@@ -21510,8 +21555,8 @@
           ],
           "index": 20,
           "record_va": "0x383ad0",
-          "script_name": "rowcoun?",
-          "script_name_exact": false,
+          "script_name": "rowcount",
+          "script_name_exact": true,
           "script_name_raw_hex": "242c085420041cd1"
         },
         {
@@ -21993,6 +22038,7 @@
               "current_ida_name": "sub_1E049C",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GuiDrawingPanel_script_drawtext",
               "role": "callback",
               "status": "untranslated_default_sub",
               "va": "0x1e049c"
@@ -22000,8 +22046,8 @@
           ],
           "index": 8,
           "record_va": "0x383f80",
-          "script_name": "drawtex?",
-          "script_name_exact": false,
+          "script_name": "drawtext",
+          "script_name_exact": true,
           "script_name_raw_hex": "5c2060040c44f4d1"
         },
         {
@@ -22608,8 +22654,8 @@
           ],
           "index": 8,
           "record_va": "0x384440",
-          "script_name": "getssli?suer",
-          "script_name_exact": false,
+          "script_name": "getsslissuer",
+          "script_name_exact": true,
           "script_name_raw_hex": "4c5010100c242ccdfcf02cf4"
         },
         {
@@ -22680,8 +22726,8 @@
           ],
           "index": 12,
           "record_va": "0x384500",
-          "script_name": "requestbasefi?es",
-          "script_name_exact": false,
+          "script_name": "requestbasefiles",
+          "script_name_exact": true,
           "script_name_raw_hex": "1c4c18044004fc4040f4282010b118db"
         },
         {
@@ -22770,8 +22816,8 @@
           ],
           "index": 17,
           "record_va": "0x3845f0",
-          "script_name": "defa?ltinha?d?er",
-          "script_name_exact": false,
+          "script_name": "defaultinhandler",
+          "script_name_exact": true,
           "script_name_raw_hex": "544c4454d520fc240c2038b924b118df"
         }
       ],
@@ -22907,8 +22953,8 @@
           ],
           "index": 6,
           "record_va": "0x384740",
-          "script_name": "tclient_setdisconne?tmessage",
-          "script_name_exact": false,
+          "script_name": "tclient_setdisconnectmessage",
+          "script_name_exact": true,
           "script_name_raw_hex": "08482028340cf040ec20e01c04d714e0e0dcfc8db7cfecafabf0d3d7"
         },
         {
@@ -23339,8 +23385,8 @@
           ],
           "index": 30,
           "record_va": "0x384bc0",
-          "script_name": "tclient_setrc?og",
-          "script_name_exact": false,
+          "script_name": "tclient_setrclog",
+          "script_name_exact": true,
           "script_name_raw_hex": "14542c344018fc4cf82cecf028b1f00c"
         },
         {
@@ -23411,8 +23457,8 @@
           ],
           "index": 34,
           "record_va": "0x384c80",
-          "script_name": "tclient_setnewproj?ctile",
-          "script_name_exact": false,
+          "script_name": "tclient_setnewprojectile",
+          "script_name_exact": true,
           "script_name_raw_hex": "0c4c242c3810f444f024e4f818cbe4d7e0f09504bbe4d3ec"
         },
         {
@@ -24042,8 +24088,8 @@
           ],
           "index": 69,
           "record_va": "0x385310",
-          "script_name": "tclient_?layerwarped",
-          "script_name_exact": false,
+          "script_name": "tclient_playerwarped",
+          "script_name_exact": true,
           "script_name_raw_hex": "105028303c14f848c10c34cf1ce4cb20d7db0404"
         },
         {
@@ -24499,8 +24545,8 @@
           ],
           "index": 0,
           "record_va": "0x385738",
-          "script_name": "file?pdateignore",
-          "script_name_exact": false,
+          "script_name": "fileupdateignore",
+          "script_name_exact": true,
           "script_name_raw_hex": "4c3c2c44d5103c44f42c181cfcf4e314"
         },
         {
@@ -24900,8 +24946,8 @@
           "getter_va": "0x1fec60",
           "index": 5,
           "record_va": "0x385bd0",
-          "script_name": "do?nloadcomplete",
-          "script_name_exact": false,
+          "script_name": "downloadcomplete",
+          "script_name_exact": true,
           "script_name_raw_hex": "5424dd2024144838380408f8041cdb14",
           "setter_va": null
         },
@@ -24976,8 +25022,8 @@
           "getter_va": "0x1fec68",
           "index": 9,
           "record_va": "0x385c90",
-          "script_name": "lastda?atime",
-          "script_name_exact": false,
+          "script_name": "lastdatatime",
+          "script_name_exact": true,
           "script_name_raw_hex": "3860140c4850d148f8200c28",
           "setter_va": null
         },
@@ -25175,8 +25221,8 @@
           ],
           "index": 3,
           "record_va": "0x385ea0",
-          "script_name": "geth?tprequestforurl",
-          "script_name_exact": false,
+          "script_name": "gethttprequestforurl",
+          "script_name_exact": true,
           "script_name_raw_hex": "44480834d1fc08fc2cf8e420e4db10e8d7c7cfe4"
         },
         {
@@ -25283,8 +25329,8 @@
           ],
           "index": 9,
           "record_va": "0x385fc0",
-          "script_name": "req?e?turlasgamefil?",
-          "script_name_exact": false,
+          "script_name": "requesturlasgamefile",
+          "script_name_exact": true,
           "script_name_raw_hex": "184814d53ccdf8f0f80c34e81428f41008f8e895"
         }
       ],
@@ -26118,8 +26164,8 @@
           "getter_va": "0x208a94",
           "index": 2,
           "record_va": "0x386700",
-          "script_name": "do?nloadcomplete",
-          "script_name_exact": false,
+          "script_name": "downloadcomplete",
+          "script_name_exact": true,
           "script_name_raw_hex": "5424dd2024144838380408f8041cdb14",
           "setter_va": null
         },
@@ -26555,6 +26601,7 @@
               "current_ida_name": "sub_20A888",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "TUpdatePackage_script_getupdatepackage",
               "role": "callback",
               "status": "untranslated_default_sub",
               "va": "0x20a888"
@@ -26562,8 +26609,8 @@
           ],
           "index": 3,
           "record_va": "0x386b58",
-          "script_name": "getupdate?ackage",
-          "script_name_exact": false,
+          "script_name": "getupdatepackage",
+          "script_name_exact": true,
           "script_name_raw_hex": "484c0c04144048f830c1382c082c1014"
         },
         {
@@ -27189,6 +27236,7 @@
               "current_ida_name": "sub_20B8F8",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GSFunctionsInitstaticscriptvars_script_isobject",
               "role": "callback",
               "status": "untranslated_default_sub",
               "va": "0x20b8f8"
@@ -27196,8 +27244,8 @@
           ],
           "index": 28,
           "record_va": "0x387188",
-          "script_name": "isobjec?",
-          "script_name_exact": false,
+          "script_name": "isobject",
+          "script_name_exact": true,
           "script_name_raw_hex": "481c2858344448d1"
         },
         {
@@ -27207,6 +27255,7 @@
               "current_ida_name": "sub_20AE10",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GSFunctionsInitstaticscriptvars_script_getcallstack",
               "role": "callback",
               "status": "untranslated_default_sub",
               "va": "0x20ae10"
@@ -27214,8 +27263,8 @@
           ],
           "index": 29,
           "record_va": "0x3871b8",
-          "script_name": "getcall?tack",
-          "script_name_exact": false,
+          "script_name": "getcallstack",
+          "script_name_exact": true,
           "script_name_raw_hex": "4c501050542420cdf8403410"
         },
         {
@@ -27261,8 +27310,8 @@
           "callbacks": [],
           "index": 32,
           "record_va": "0x387248",
-          "script_name": "escapest?ing",
-          "script_name_exact": false,
+          "script_name": "escapestring",
+          "script_name_exact": true,
           "script_name_raw_hex": "54185458184004fcc9200820"
         },
         {
@@ -27281,6 +27330,7 @@
               "current_ida_name": "sub_20CD34",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "GSFunctionsInitstaticscriptvars_script_randomstring",
               "role": "callback",
               "status": "untranslated_default_sub",
               "va": "0x20cd34"
@@ -27288,8 +27338,8 @@
           ],
           "index": 34,
           "record_va": "0x3872a8",
-          "script_name": "randomst?ing",
-          "script_name_exact": false,
+          "script_name": "randomstring",
+          "script_name_exact": true,
           "script_name_raw_hex": "2060284c1c2004fcc9200820"
         },
         {
@@ -27460,8 +27510,8 @@
           "getter_va": "0x20eef8",
           "index": 4,
           "record_va": "0x387400",
-          "script_name": "ma?looplimit",
-          "script_name_exact": false,
+          "script_name": "maxlooplimit",
+          "script_name_exact": true,
           "script_name_raw_hex": "3460e12c1c18101c24101cec",
           "setter_va": "0x20ef30"
         },
@@ -27471,6 +27521,7 @@
               "current_ida_name": "sub_20D368",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "TGraalVar_get_scripterrors",
               "role": "getter",
               "status": "untranslated_default_sub",
               "va": "0x20d368"
@@ -27479,8 +27530,8 @@
           "getter_va": "0x20d368",
           "index": 5,
           "record_va": "0x387430",
-          "script_name": "scripter?ors",
-          "script_name_exact": false,
+          "script_name": "scripterrors",
+          "script_name_exact": true,
           "script_name_raw_hex": "1c58183818043c04c908f8f0",
           "setter_va": null
         },
@@ -28414,6 +28465,7 @@
               "current_ida_name": "sub_217E50",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "TCallStackEntry_get_scriptcallobject",
               "role": "getter",
               "status": "untranslated_default_sub",
               "va": "0x217e50"
@@ -28422,8 +28474,8 @@
           "getter_va": "0x217e50",
           "index": 0,
           "record_va": "0x387d60",
-          "script_name": "scrip?call?bject",
-          "script_name_exact": false,
+          "script_name": "scriptcallobject",
+          "script_name_exact": true,
           "script_name_raw_hex": "1854143414d140441410bd300c1c20d7",
           "setter_va": null
         }
@@ -28444,6 +28496,7 @@
               "current_ida_name": "sub_224540",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "TScriptProperty_get_scriptlogwritetoreadonly",
               "role": "getter",
               "status": "untranslated_default_sub",
               "va": "0x224540"
@@ -28452,6 +28505,7 @@
               "current_ida_name": "sub_224550",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "TScriptProperty_set_scriptlogwritetoreadonly",
               "role": "setter",
               "status": "untranslated_default_sub",
               "va": "0x224550"
@@ -28460,8 +28514,8 @@
           "getter_va": "0x224540",
           "index": 0,
           "record_va": "0x387d90",
-          "script_name": "scriptlogwritetorea?only",
-          "script_name_exact": false,
+          "script_name": "scriptlogwritetoreadonly",
+          "script_name_exact": true,
           "script_name_raw_hex": "104c0c2c0cf8140420dbec0cdb14d3e4d3041091cfcfd39b",
           "setter_va": "0x224550"
         }
@@ -30106,6 +30160,7 @@
               "current_ida_name": "sub_238198",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "TParticleEmitter_get_autorotation",
               "role": "getter",
               "status": "untranslated_default_sub",
               "va": "0x238198"
@@ -30114,6 +30169,7 @@
               "current_ida_name": "sub_2381A0",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "TParticleEmitter_set_autorotation",
               "role": "setter",
               "status": "untranslated_default_sub",
               "va": "0x2381a0"
@@ -30122,8 +30178,8 @@
           "getter_va": "0x238198",
           "index": 1,
           "record_va": "0x38a900",
-          "script_name": "autoro?ation",
-          "script_name_exact": false,
+          "script_name": "autorotation",
+          "script_name_exact": true,
           "script_name_raw_hex": "641010201018d148f8200404",
           "setter_va": "0x2381a0"
         },
@@ -30191,6 +30247,7 @@
               "current_ida_name": "sub_2381B8",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "TParticleEmitter_get_cliptoscreen",
               "role": "getter",
               "status": "untranslated_default_sub",
               "va": "0x2381b8"
@@ -30199,6 +30256,7 @@
               "current_ida_name": "sub_2381C0",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "TParticleEmitter_set_cliptoscreen",
               "role": "setter",
               "status": "untranslated_default_sub",
               "va": "0x2381c0"
@@ -30207,8 +30265,8 @@
           "getter_va": "0x2381b8",
           "index": 4,
           "record_va": "0x38a990",
-          "script_name": "cliptosc?een",
-          "script_name_exact": false,
+          "script_name": "cliptoscreen",
+          "script_name_exact": true,
           "script_name_raw_hex": "5c343c1c08180440c9302c04",
           "setter_va": "0x2381c0"
         },
@@ -30450,6 +30508,7 @@
               "current_ida_name": "sub_238260",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "TParticleEmitter_get_emittedparticles",
               "role": "getter",
               "status": "untranslated_default_sub",
               "va": "0x238260"
@@ -30458,8 +30517,8 @@
           "getter_va": "0x238260",
           "index": 14,
           "record_va": "0x38ab70",
-          "script_name": "emittedpartic?es",
-          "script_name_exact": false,
+          "script_name": "emittedparticles",
+          "script_name_exact": true,
           "script_name_raw_hex": "502c3808043c3c0840f8ec1428b118db",
           "setter_va": null
         },
@@ -30469,6 +30528,7 @@
               "current_ida_name": "sub_238268",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "TParticleEmitter_get_firstinfront",
               "role": "getter",
               "status": "untranslated_default_sub",
               "va": "0x238268"
@@ -30477,6 +30537,7 @@
               "current_ida_name": "sub_238270",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "TParticleEmitter_set_firstinfront",
               "role": "setter",
               "status": "untranslated_default_sub",
               "va": "0x238270"
@@ -30485,8 +30546,8 @@
           "getter_va": "0x238268",
           "index": 15,
           "record_va": "0x38aba0",
-          "script_name": "firstinf?ont",
-          "script_name_exact": false,
+          "script_name": "firstinfront",
+          "script_name_exact": true,
           "script_name_raw_hex": "5040181008301834c90808ec",
           "setter_va": "0x238270"
         },
@@ -30553,6 +30614,7 @@
               "current_ida_name": "sub_238290",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "TParticleEmitter_get_maxparticles",
               "role": "getter",
               "status": "untranslated_default_sub",
               "va": "0x238290"
@@ -30569,8 +30631,8 @@
           "getter_va": "0x238290",
           "index": 18,
           "record_va": "0x38ac30",
-          "script_name": "ma?par?icles",
-          "script_name_exact": false,
+          "script_name": "maxparticles",
+          "script_name_exact": true,
           "script_name_raw_hex": "3460e11c540cd1283c142cf0",
           "setter_va": "0x23994c"
         },
@@ -30714,6 +30776,7 @@
               "current_ida_name": "sub_2382CC",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "TParticleEmitter_get_showonground",
               "role": "getter",
               "status": "untranslated_default_sub",
               "va": "0x2382cc"
@@ -30722,6 +30785,7 @@
               "current_ida_name": "sub_2382D4",
               "has_function_boundary": true,
               "name": null,
+              "proposed_name": "TParticleEmitter_set_showonground",
               "role": "setter",
               "status": "untranslated_default_sub",
               "va": "0x2382d4"
@@ -30730,8 +30794,8 @@
           "getter_va": "0x2382cc",
           "index": 24,
           "record_va": "0x38ad50",
-          "script_name": "sho?onground",
-          "script_name_exact": false,
+          "script_name": "showonground",
+          "script_name_exact": true,
           "script_name_raw_hex": "1c4424dd1c1c34040cf0082c",
           "setter_va": "0x2382d4"
         },
@@ -31651,8 +31715,8 @@
           ],
           "index": 10,
           "record_va": "0x38b4b0",
-          "script_name": "showtapjoy?ffers",
-          "script_name_exact": false,
+          "script_name": "showtapjoyoffers",
+          "script_name_exact": true,
           "script_name_raw_hex": "184020fc044c0c2008dbbd201c1ce3db"
         },
         {
@@ -31958,8 +32022,8 @@
           ],
           "index": 27,
           "record_va": "0x38b7e0",
-          "script_name": "setdistimoregister??user",
-          "script_name_exact": false,
+          "script_name": "setdistimoregistereduser",
+          "script_name_exact": true,
           "script_name_raw_hex": "1044044028fcf41c08fcec1c1004d7cf08cf9591b7bbf0b7"
         },
         {
@@ -32138,8 +32202,8 @@
           ],
           "index": 37,
           "record_va": "0x38b9c0",
-          "script_name": "fabzat?e?lacetextur?",
-          "script_name_exact": false,
+          "script_name": "fabzatreplacetexture",
+          "script_name_exact": true,
           "script_name_raw_hex": "485850ec4cfcc930c10c34281cdb14c3cfc7cf95"
         },
         {
@@ -32316,7 +32380,6 @@
       "current_ida_name": "sub_E0C18",
       "has_function_boundary": true,
       "name": "TSounds_getMusicFilename",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -32324,8 +32387,8 @@
           "owner": "TSounds_initStaticScriptVars_void",
           "record_va": "0x376168",
           "role": "callback",
-          "script_name": "getm?sicfilename",
-          "script_name_exact": false,
+          "script_name": "getmusicfilename",
+          "script_name_exact": true,
           "table_va": "0x3760d8"
         }
       ],
@@ -32336,7 +32399,6 @@
       "current_ida_name": "sub_E0C70",
       "has_function_boundary": true,
       "name": "TSounds_setDisabledSoundEffects",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -32344,8 +32406,8 @@
           "owner": "TSounds_initStaticScriptVars_void",
           "record_va": "0x376018",
           "role": "setter",
-          "script_name": "disableds?undeffects",
-          "script_name_exact": false,
+          "script_name": "disabledsoundeffects",
+          "script_name_exact": true,
           "table_va": "0x376018"
         }
       ],
@@ -32356,7 +32418,6 @@
       "current_ida_name": "sub_E0C84",
       "has_function_boundary": true,
       "name": "TSounds_getDisabledSoundEffects",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -32364,8 +32425,8 @@
           "owner": "TSounds_initStaticScriptVars_void",
           "record_va": "0x376018",
           "role": "getter",
-          "script_name": "disableds?undeffects",
-          "script_name_exact": false,
+          "script_name": "disabledsoundeffects",
+          "script_name_exact": true,
           "table_va": "0x376018"
         }
       ],
@@ -32433,7 +32494,6 @@
       "current_ida_name": "TSounds_script_play",
       "has_function_boundary": true,
       "name": "TSounds_script_play",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -32441,8 +32501,8 @@
           "owner": "TSounds_initStaticScriptVars_void",
           "record_va": "0x376378",
           "role": "callback",
-          "script_name": "pla?",
-          "script_name_exact": false,
+          "script_name": "play",
+          "script_name_exact": true,
           "table_va": "0x3760d8"
         }
       ],
@@ -32756,16 +32816,15 @@
       "current_ida_name": "sub_F6F6C",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "TTime_script_formattimestring",
       "roles": [
         {
           "kind": "functions",
           "owner": "TTime_initStaticScriptVars_void",
           "record_va": "0x376a80",
           "role": "callback",
-          "script_name": "forma?timestring",
-          "script_name_exact": false,
+          "script_name": "formattimestring",
+          "script_name_exact": true,
           "table_va": "0x3769f0"
         }
       ],
@@ -32985,7 +33044,6 @@
       "current_ida_name": "jump_TFiles_fileExists_TString_const",
       "has_function_boundary": true,
       "name": "jump_TFiles_fileExists_TString_const",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -32993,8 +33051,8 @@
           "owner": "TFileScripting_initStaticScriptVars_void",
           "record_va": "0x376f00",
           "role": "callback",
-          "script_name": "ad?enture_fi?eexists",
-          "script_name_exact": false,
+          "script_name": "adventure_fileexists",
+          "script_name_exact": true,
           "table_va": "0x376bd0"
         }
       ],
@@ -33005,7 +33063,6 @@
       "current_ida_name": "TFileScripting_script_setFileContent",
       "has_function_boundary": true,
       "name": "TFileScripting_script_setFileContent",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -33013,8 +33070,8 @@
           "owner": "TFileScripting_initStaticScriptVars_void",
           "record_va": "0x376ed0",
           "role": "callback",
-          "script_name": "adventure_setf?lecontent",
-          "script_name_exact": false,
+          "script_name": "adventure_setfilecontent",
+          "script_name_exact": true,
           "table_va": "0x376bd0"
         }
       ],
@@ -33139,7 +33196,6 @@
       "current_ida_name": "TFileScripting_script_getFileContent",
       "has_function_boundary": true,
       "name": "TFileScripting_script_getFileContent",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -33147,8 +33203,8 @@
           "owner": "TFileScripting_initStaticScriptVars_void",
           "record_va": "0x376ea0",
           "role": "callback",
-          "script_name": "adventure_getf?lecontent",
-          "script_name_exact": false,
+          "script_name": "adventure_getfilecontent",
+          "script_name_exact": true,
           "table_va": "0x376bd0"
         }
       ],
@@ -33197,7 +33253,6 @@
       "current_ida_name": "TFileScripting_script_freeAllResources",
       "has_function_boundary": true,
       "name": "TFileScripting_script_freeAllResources",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -33205,8 +33260,8 @@
           "owner": "TFileScripting_initStaticScriptVars_void",
           "record_va": "0x376cf0",
           "role": "callback",
-          "script_name": "freeall?es?urces",
-          "script_name_exact": false,
+          "script_name": "freeallresources",
+          "script_name_exact": true,
           "table_va": "0x376bd0"
         }
       ],
@@ -33274,7 +33329,6 @@
       "current_ida_name": "TFileScripting_script_setFileModTime",
       "has_function_boundary": true,
       "name": "TFileScripting_script_setFileModTime",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -33282,8 +33336,8 @@
           "owner": "TFileScripting_initStaticScriptVars_void",
           "record_va": "0x376e10",
           "role": "callback",
-          "script_name": "adventure_setf?lemo?time",
-          "script_name_exact": false,
+          "script_name": "adventure_setfilemodtime",
+          "script_name_exact": true,
           "table_va": "0x376bd0"
         }
       ],
@@ -34301,16 +34355,15 @@
       "current_ida_name": "sub_111348",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GuiControlProfile_get_fillonlynonchildarea",
       "roles": [
         {
           "kind": "properties",
           "owner": "GuiControlProfileProperties_GuiControlProfileProperties_void",
           "record_va": "0x377640",
           "role": "getter",
-          "script_name": "fillonlyn??childarea",
-          "script_name_exact": false,
+          "script_name": "fillonlynonchildarea",
+          "script_name_exact": true,
           "table_va": "0x377340"
         }
       ],
@@ -34321,16 +34374,15 @@
       "current_ida_name": "sub_111350",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GuiControlProfile_set_fillonlynonchildarea",
       "roles": [
         {
           "kind": "properties",
           "owner": "GuiControlProfileProperties_GuiControlProfileProperties_void",
           "record_va": "0x377640",
           "role": "setter",
-          "script_name": "fillonlyn??childarea",
-          "script_name_exact": false,
+          "script_name": "fillonlynonchildarea",
+          "script_name_exact": true,
           "table_va": "0x377340"
         }
       ],
@@ -34341,16 +34393,15 @@
       "current_ida_name": "sub_111358",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GuiControlProfile_get_textgradient",
       "roles": [
         {
           "kind": "properties",
           "owner": "GuiControlProfileProperties_GuiControlProfileProperties_void",
           "record_va": "0x377bb0",
           "role": "getter",
-          "script_name": "te?tgradient",
-          "script_name_exact": false,
+          "script_name": "textgradient",
+          "script_name_exact": true,
           "table_va": "0x377340"
         }
       ],
@@ -34361,16 +34412,15 @@
       "current_ida_name": "sub_111360",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GuiControlProfile_set_textgradient",
       "roles": [
         {
           "kind": "properties",
           "owner": "GuiControlProfileProperties_GuiControlProfileProperties_void",
           "record_va": "0x377bb0",
           "role": "setter",
-          "script_name": "te?tgradient",
-          "script_name_exact": false,
+          "script_name": "textgradient",
+          "script_name_exact": true,
           "table_va": "0x377340"
         }
       ],
@@ -34599,16 +34649,15 @@
       "current_ida_name": "sub_1114B8",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GuiControlProfile_set_fontstylenumbers",
       "roles": [
         {
           "kind": "properties",
           "owner": "GuiControlProfileProperties_GuiControlProfileProperties_void",
           "record_va": "0x3778b0",
           "role": "setter",
-          "script_name": "fonts?ylenumbers",
-          "script_name_exact": false,
+          "script_name": "fontstylenumbers",
+          "script_name_exact": true,
           "table_va": "0x377340"
         }
       ],
@@ -34619,16 +34668,15 @@
       "current_ida_name": "sub_1114C0",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GuiControlProfile_set_fontstylestrings",
       "roles": [
         {
           "kind": "properties",
           "owner": "GuiControlProfileProperties_GuiControlProfileProperties_void",
           "record_va": "0x377880",
           "role": "setter",
-          "script_name": "fonts?ylestrings",
-          "script_name_exact": false,
+          "script_name": "fontstylestrings",
+          "script_name_exact": true,
           "table_va": "0x377340"
         }
       ],
@@ -34715,16 +34763,15 @@
       "current_ida_name": "sub_111538",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GuiControlProfile_get_fontstylenumbers",
       "roles": [
         {
           "kind": "properties",
           "owner": "GuiControlProfileProperties_GuiControlProfileProperties_void",
           "record_va": "0x3778b0",
           "role": "getter",
-          "script_name": "fonts?ylenumbers",
-          "script_name_exact": false,
+          "script_name": "fontstylenumbers",
+          "script_name_exact": true,
           "table_va": "0x377340"
         }
       ],
@@ -34735,16 +34782,15 @@
       "current_ida_name": "sub_111568",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GuiControlProfile_get_fontstylestrings",
       "roles": [
         {
           "kind": "properties",
           "owner": "GuiControlProfileProperties_GuiControlProfileProperties_void",
           "record_va": "0x377880",
           "role": "getter",
-          "script_name": "fonts?ylestrings",
-          "script_name_exact": false,
+          "script_name": "fontstylestrings",
+          "script_name_exact": true,
           "table_va": "0x377340"
         }
       ],
@@ -34888,16 +34934,15 @@
       "current_ida_name": "sub_1116E0",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GuiControlProfile_set_fontcolorsel",
       "roles": [
         {
           "kind": "properties",
           "owner": "GuiControlProfileProperties_GuiControlProfileProperties_void",
           "record_va": "0x377730",
           "role": "setter",
-          "script_name": "fontcolo?sel",
-          "script_name_exact": false,
+          "script_name": "fontcolorsel",
+          "script_name_exact": true,
           "table_va": "0x377340"
         }
       ],
@@ -35174,16 +35219,15 @@
       "current_ida_name": "sub_111A28",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GuiControlProfile_get_fontcolorsel",
       "roles": [
         {
           "kind": "properties",
           "owner": "GuiControlProfileProperties_GuiControlProfileProperties_void",
           "record_va": "0x377730",
           "role": "getter",
-          "script_name": "fontcolo?sel",
-          "script_name_exact": false,
+          "script_name": "fontcolorsel",
+          "script_name_exact": true,
           "table_va": "0x377340"
         }
       ],
@@ -35507,7 +35551,6 @@
       "current_ida_name": "jump_GuiControlProfile_getTextWidth_TString_const",
       "has_function_boundary": true,
       "name": "jump_GuiControlProfile_getTextWidth_TString_const",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -35515,8 +35558,8 @@
           "owner": "GuiControlProfileProperties_GuiControlProfileProperties_void",
           "record_va": "0x377c70",
           "role": "callback",
-          "script_name": "gettex?width",
-          "script_name_exact": false,
+          "script_name": "gettextwidth",
+          "script_name_exact": true,
           "table_va": "0x377c70"
         }
       ],
@@ -36039,7 +36082,6 @@
       "current_ida_name": "jump_TDrawingPanel_drawText_int_int_TString_const",
       "has_function_boundary": true,
       "name": "jump_TDrawingPanel_drawText_int_int_TString_const",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -36047,8 +36089,8 @@
           "owner": "TDrawingPanelProperties_TDrawingPanelProperties_void",
           "record_va": "0x378218",
           "role": "callback",
-          "script_name": "drawtex?",
-          "script_name_exact": false,
+          "script_name": "drawtext",
+          "script_name_exact": true,
           "table_va": "0x377f48"
         }
       ],
@@ -36287,16 +36329,15 @@
       "current_ida_name": "sub_1564DC",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GSFunctionsClient_script_isfullscreenmode",
       "roles": [
         {
           "kind": "functions",
           "owner": "gsfunctions_client_initStaticScriptVars_void",
           "record_va": "0x379018",
           "role": "callback",
-          "script_name": "isfull?cree??ode",
-          "script_name_exact": false,
+          "script_name": "isfullscreenmode",
+          "script_name_exact": true,
           "table_va": "0x378c28"
         }
       ],
@@ -36383,16 +36424,15 @@
       "current_ida_name": "sub_15659C",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GSFunctionsClient_get_allrenderobjecttypes",
       "roles": [
         {
           "kind": "properties",
           "owner": "gsfunctions_client_initStaticScriptVars_void",
           "record_va": "0x3782c8",
           "role": "getter",
-          "script_name": "allrender?bjecttypes",
-          "script_name_exact": false,
+          "script_name": "allrenderobjecttypes",
+          "script_name_exact": true,
           "table_va": "0x378298"
         }
       ],
@@ -36517,16 +36557,15 @@
       "current_ida_name": "sub_1566E8",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GSFunctionsClient_get_carriesstone",
       "roles": [
         {
           "kind": "properties",
           "owner": "gsfunctions_client_initStaticScriptVars_void",
           "record_va": "0x378418",
           "role": "getter",
-          "script_name": "carries?tone",
-          "script_name_exact": false,
+          "script_name": "carriesstone",
+          "script_name_exact": true,
           "table_va": "0x378298"
         }
       ],
@@ -37088,16 +37127,15 @@
       "current_ida_name": "sub_156DB8",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GSFunctionsClient_get_scriptedcontrols",
       "roles": [
         {
           "kind": "properties",
           "owner": "gsfunctions_client_initStaticScriptVars_void",
           "record_va": "0x378a18",
           "role": "getter",
-          "script_name": "scrip?edcontrols",
-          "script_name_exact": false,
+          "script_name": "scriptedcontrols",
+          "script_name_exact": true,
           "table_va": "0x378298"
         }
       ],
@@ -37184,16 +37222,15 @@
       "current_ida_name": "sub_156E64",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GSFunctionsClient_script_setfocus",
       "roles": [
         {
           "kind": "functions",
           "owner": "gsfunctions_client_initStaticScriptVars_void",
           "record_va": "0x37a038",
           "role": "callback",
-          "script_name": "setfoc?s",
-          "script_name_exact": false,
+          "script_name": "setfocus",
+          "script_name_exact": true,
           "table_va": "0x378c28"
         }
       ],
@@ -37811,16 +37848,15 @@
       "current_ida_name": "sub_157794",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GSFunctionsClient_script_wraptext",
       "roles": [
         {
           "kind": "functions",
           "owner": "gsfunctions_client_initStaticScriptVars_void",
           "record_va": "0x37a4e8",
           "role": "callback",
-          "script_name": "wraptex?",
-          "script_name_exact": false,
+          "script_name": "wraptext",
+          "script_name_exact": true,
           "table_va": "0x378c28"
         }
       ],
@@ -37888,16 +37924,15 @@
       "current_ida_name": null,
       "has_function_boundary": false,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GSFunctionsClient_script_adventure_uploadfile",
       "roles": [
         {
           "kind": "functions",
           "owner": "gsfunctions_client_initStaticScriptVars_void",
           "record_va": "0x37a458",
           "role": "callback",
-          "script_name": "ad?enture_up?oadfil?",
-          "script_name_exact": false,
+          "script_name": "adventure_uploadfile",
+          "script_name_exact": true,
           "table_va": "0x378c28"
         }
       ],
@@ -38060,16 +38095,15 @@
       "current_ida_name": "sub_158378",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GSFunctionsClient_script_setsword",
       "roles": [
         {
           "kind": "functions",
           "owner": "gsfunctions_client_initStaticScriptVars_void",
           "record_va": "0x37a278",
           "role": "callback",
-          "script_name": "sets?ord",
-          "script_name_exact": false,
+          "script_name": "setsword",
+          "script_name_exact": true,
           "table_va": "0x378c28"
         }
       ],
@@ -38137,16 +38171,15 @@
       "current_ida_name": "sub_1584C0",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GSFunctionsClient_script_setcoatcolor",
       "roles": [
         {
           "kind": "functions",
           "owner": "gsfunctions_client_initStaticScriptVars_void",
           "record_va": "0x379fd8",
           "role": "callback",
-          "script_name": "setcoa?color",
-          "script_name_exact": false,
+          "script_name": "setcoatcolor",
+          "script_name_exact": true,
           "table_va": "0x378c28"
         }
       ],
@@ -38157,16 +38190,15 @@
       "current_ida_name": "sub_158510",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GSFunctionsClient_script_setbeltcolor",
       "roles": [
         {
           "kind": "functions",
           "owner": "gsfunctions_client_initStaticScriptVars_void",
           "record_va": "0x379fa8",
           "role": "callback",
-          "script_name": "setbel?color",
-          "script_name_exact": false,
+          "script_name": "setbeltcolor",
+          "script_name_exact": true,
           "table_va": "0x378c28"
         }
       ],
@@ -38215,16 +38247,15 @@
       "current_ida_name": "sub_158740",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GSFunctionsClient_script_setplayerdir",
       "roles": [
         {
           "kind": "functions",
           "owner": "gsfunctions_client_initStaticScriptVars_void",
           "record_va": "0x37a0f8",
           "role": "callback",
-          "script_name": "setplaye?dir",
-          "script_name_exact": false,
+          "script_name": "setplayerdir",
+          "script_name_exact": true,
           "table_va": "0x378c28"
         }
       ],
@@ -38520,16 +38551,15 @@
       "current_ida_name": "sub_158E84",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GSFunctionsClient_script_keyname2",
       "roles": [
         {
           "kind": "functions",
           "owner": "gsfunctions_client_initStaticScriptVars_void",
           "record_va": "0x379a68",
           "role": "callback",
-          "script_name": "ke?name2",
-          "script_name_exact": false,
+          "script_name": "keyname2",
+          "script_name_exact": true,
           "table_va": "0x378c28"
         }
       ],
@@ -38673,16 +38703,15 @@
       "current_ida_name": "sub_159390",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GSFunctionsClient_script_gettextwidth",
       "roles": [
         {
           "kind": "functions",
           "owner": "gsfunctions_client_initStaticScriptVars_void",
           "record_va": "0x379798",
           "role": "callback",
-          "script_name": "gettex?width",
-          "script_name_exact": false,
+          "script_name": "gettextwidth",
+          "script_name_exact": true,
           "table_va": "0x378c28"
         }
       ],
@@ -39128,16 +39157,15 @@
       "current_ida_name": "sub_159A8C",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GSFunctionsClient_script_adventure_openserverlist",
       "roles": [
         {
           "kind": "functions",
           "owner": "gsfunctions_client_initStaticScriptVars_void",
           "record_va": "0x378e68",
           "role": "callback",
-          "script_name": "adventure_openserv?rlist",
-          "script_name_exact": false,
+          "script_name": "adventure_openserverlist",
+          "script_name_exact": true,
           "table_va": "0x378c28"
         }
       ],
@@ -39556,16 +39584,15 @@
       "current_ida_name": "sub_15A2AC",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GSFunctionsClient_script_sendtext",
       "roles": [
         {
           "kind": "functions",
           "owner": "gsfunctions_client_initStaticScriptVars_void",
           "record_va": "0x379dc8",
           "role": "callback",
-          "script_name": "sendtex?",
-          "script_name_exact": false,
+          "script_name": "sendtext",
+          "script_name_exact": true,
           "table_va": "0x378c28"
         }
       ],
@@ -39766,16 +39793,15 @@
       "current_ida_name": "sub_15AD28",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GSFunctionsClient_script_keydown2",
       "roles": [
         {
           "kind": "functions",
           "owner": "gsfunctions_client_initStaticScriptVars_void",
           "record_va": "0x379a08",
           "role": "callback",
-          "script_name": "ke?down2",
-          "script_name_exact": false,
+          "script_name": "keydown2",
+          "script_name_exact": true,
           "table_va": "0x378c28"
         }
       ],
@@ -39957,7 +39983,6 @@
       "current_ida_name": "TGaniObject_getChildField144",
       "has_function_boundary": true,
       "name": "TGaniObject_getChildField144",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -39965,8 +39990,8 @@
           "owner": "TGaniObjectProperties_TGaniObjectProperties_void",
           "record_va": "0x37a6a0",
           "role": "getter",
-          "script_name": "attachedto?bject",
-          "script_name_exact": false,
+          "script_name": "attachedtoobject",
+          "script_name_exact": true,
           "table_va": "0x37a5b0"
         }
       ],
@@ -40584,7 +40609,6 @@
       "current_ida_name": "TGaniParam_getStringField376",
       "has_function_boundary": true,
       "name": "TGaniParam_getStringField376",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -40592,8 +40616,8 @@
           "owner": "TGaniObjectProperties_TGaniObjectProperties_void",
           "record_va": "0x37a700",
           "role": "getter",
-          "script_name": "bod?",
-          "script_name_exact": false,
+          "script_name": "body",
+          "script_name_exact": true,
           "table_va": "0x37a5b0"
         },
         {
@@ -40698,7 +40722,6 @@
       "current_ida_name": "TGaniObject_callVirtual496IfNonempty",
       "has_function_boundary": true,
       "name": "TGaniObject_callVirtual496IfNonempty",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -40706,8 +40729,8 @@
           "owner": "TGaniObjectProperties_TGaniObjectProperties_void",
           "record_va": "0x37a700",
           "role": "setter",
-          "script_name": "bod?",
-          "script_name_exact": false,
+          "script_name": "body",
+          "script_name_exact": true,
           "table_va": "0x37a5b0"
         },
         {
@@ -42075,16 +42098,15 @@
       "current_ida_name": "sub_16C268",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "TPlayer_get_defaultwalkspeed",
       "roles": [
         {
           "kind": "properties",
           "owner": "TPlayerProperties_TPlayerProperties_void",
           "record_va": "0x37b598",
           "role": "getter",
-          "script_name": "defa?ltwalkspeed",
-          "script_name_exact": false,
+          "script_name": "defaultwalkspeed",
+          "script_name_exact": true,
           "table_va": "0x37b508"
         }
       ],
@@ -42275,16 +42297,15 @@
       "current_ida_name": "sub_16C484",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "TPlayer_get_isinvincible",
       "roles": [
         {
           "kind": "properties",
           "owner": "TPlayerProperties_TPlayerProperties_void",
           "record_va": "0x37b808",
           "role": "getter",
-          "script_name": "isin?incible",
-          "script_name_exact": false,
+          "script_name": "isinvincible",
+          "script_name_exact": true,
           "table_va": "0x37b508"
         }
       ],
@@ -42872,7 +42893,6 @@
       "current_ida_name": "jump_TPlayer_getNoHit_TString_const",
       "has_function_boundary": true,
       "name": "jump_TPlayer_getNoHit_TString_const",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -42880,8 +42900,8 @@
           "owner": "TPlayerProperties_TPlayerProperties_void",
           "record_va": "0x37bcb8",
           "role": "callback",
-          "script_name": "getnohi?",
-          "script_name_exact": false,
+          "script_name": "getnohit",
+          "script_name_exact": true,
           "table_va": "0x37bbc8"
         }
       ],
@@ -42968,16 +42988,15 @@
       "current_ida_name": "sub_16CDEC",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "TPlayer_set_isinvincible",
       "roles": [
         {
           "kind": "properties",
           "owner": "TPlayerProperties_TPlayerProperties_void",
           "record_va": "0x37b808",
           "role": "setter",
-          "script_name": "isin?incible",
-          "script_name_exact": false,
+          "script_name": "isinvincible",
+          "script_name_exact": true,
           "table_va": "0x37b508"
         }
       ],
@@ -43007,16 +43026,15 @@
       "current_ida_name": "sub_16D698",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "TPlayer_set_defaultwalkspeed",
       "roles": [
         {
           "kind": "properties",
           "owner": "TPlayerProperties_TPlayerProperties_void",
           "record_va": "0x37b598",
           "role": "setter",
-          "script_name": "defa?ltwalkspeed",
-          "script_name_exact": false,
+          "script_name": "defaultwalkspeed",
+          "script_name_exact": true,
           "table_va": "0x37b508"
         }
       ],
@@ -43084,7 +43102,6 @@
       "current_ida_name": "jump_TPlayer_showEmoticon2_TString_const",
       "has_function_boundary": true,
       "name": "jump_TPlayer_showEmoticon2_TString_const",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -43092,8 +43109,8 @@
           "owner": "TPlayerProperties_TPlayerProperties_void",
           "record_va": "0x37bbf8",
           "role": "callback",
-          "script_name": "sho?emoticon",
-          "script_name_exact": false,
+          "script_name": "showemoticon",
+          "script_name_exact": true,
           "table_va": "0x37bbc8"
         }
       ],
@@ -43607,7 +43624,6 @@
       "current_ida_name": "sub_1809E0",
       "has_function_boundary": true,
       "name": "TServerNPC_script_canBeCarried",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -43615,8 +43631,8 @@
           "owner": "TServerNPCProperties_TServerNPCProperties_void",
           "record_va": "0x37c398",
           "role": "callback",
-          "script_name": "canbecar?ied",
-          "script_name_exact": false,
+          "script_name": "canbecarried",
+          "script_name_exact": true,
           "table_va": "0x37c308"
         }
       ],
@@ -43988,7 +44004,6 @@
       "current_ida_name": "sub_180C44",
       "has_function_boundary": true,
       "name": "TServerNPC_getPeltWithVase",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -43996,8 +44011,8 @@
           "owner": "TServerNPCProperties_TServerNPCProperties_void",
           "record_va": "0x37c0f8",
           "role": "getter",
-          "script_name": "peltwi?hvase",
-          "script_name_exact": false,
+          "script_name": "peltwithvase",
+          "script_name_exact": true,
           "table_va": "0x37be28"
         }
       ],
@@ -44008,7 +44023,6 @@
       "current_ida_name": "sub_180C58",
       "has_function_boundary": true,
       "name": "TServerNPC_getPeltWithSign",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -44016,8 +44030,8 @@
           "owner": "TServerNPCProperties_TServerNPCProperties_void",
           "record_va": "0x37c0c8",
           "role": "getter",
-          "script_name": "peltwi?hsign",
-          "script_name_exact": false,
+          "script_name": "peltwithsign",
+          "script_name_exact": true,
           "table_va": "0x37be28"
         }
       ],
@@ -44028,7 +44042,6 @@
       "current_ida_name": "sub_180C6C",
       "has_function_boundary": true,
       "name": "TServerNPC_getPeltWithBush",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -44036,8 +44049,8 @@
           "owner": "TServerNPCProperties_TServerNPCProperties_void",
           "record_va": "0x37c098",
           "role": "getter",
-          "script_name": "peltwi?hbush",
-          "script_name_exact": false,
+          "script_name": "peltwithbush",
+          "script_name_exact": true,
           "table_va": "0x37be28"
         }
       ],
@@ -44513,7 +44526,6 @@
       "current_ida_name": "sub_182DDC",
       "has_function_boundary": true,
       "name": "TServerNPC_script_showText",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -44521,8 +44533,8 @@
           "owner": "TServerNPCProperties_TServerNPCProperties_void",
           "record_va": "0x37cc08",
           "role": "callback",
-          "script_name": "showtex?",
-          "script_name_exact": false,
+          "script_name": "showtext",
+          "script_name_exact": true,
           "table_va": "0x37c308"
         }
       ],
@@ -45122,7 +45134,6 @@
       "current_ida_name": "sub_18A604",
       "has_function_boundary": true,
       "name": "TServerPlayer_getAttachedToObject",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -45130,8 +45141,8 @@
           "owner": "TServerPlayerProperties_TServerPlayerProperties_void",
           "record_va": "0x37ce90",
           "role": "getter",
-          "script_name": "attachedto?bject",
-          "script_name_exact": false,
+          "script_name": "attachedtoobject",
+          "script_name_exact": true,
           "table_va": "0x37ce00"
         }
       ],
@@ -46488,7 +46499,6 @@
       "current_ida_name": "sub_18CA40",
       "has_function_boundary": true,
       "name": "TServerPlayer_setAttachedToObject",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -46496,8 +46506,8 @@
           "owner": "TServerPlayerProperties_TServerPlayerProperties_void",
           "record_va": "0x37ce90",
           "role": "setter",
-          "script_name": "attachedto?bject",
-          "script_name_exact": false,
+          "script_name": "attachedtoobject",
+          "script_name_exact": true,
           "table_va": "0x37ce00"
         }
       ],
@@ -47628,7 +47638,6 @@
       "current_ida_name": "sub_1A0110",
       "has_function_boundary": true,
       "name": "TServerLevel_script_reflectArrow",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -47636,8 +47645,8 @@
           "owner": "TServerLevelProperties_TServerLevelProperties_void",
           "record_va": "0x37ff20",
           "role": "callback",
-          "script_name": "reflec?a?row",
-          "script_name_exact": false,
+          "script_name": "reflectarrow",
+          "script_name_exact": true,
           "table_va": "0x37fe00"
         }
       ],
@@ -48207,7 +48216,6 @@
       "current_ida_name": "jump_GuiBitmapCtrl_setValue_int_int",
       "has_function_boundary": true,
       "name": "jump_GuiBitmapCtrl_setValue_int_int",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -48215,8 +48223,8 @@
           "owner": "GuiBitmapCtrlProperties_GuiBitmapCtrlProperties_void",
           "record_va": "0x380370",
           "role": "callback",
-          "script_name": "setval?e",
-          "script_name_exact": false,
+          "script_name": "setvalue",
+          "script_name_exact": true,
           "table_va": "0x380340"
         }
       ],
@@ -48227,16 +48235,15 @@
       "current_ida_name": "sub_1AD268",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GuiButtonBaseCtrl_get_groupnum",
       "roles": [
         {
           "kind": "properties",
           "owner": "GuiButtonBaseCtrlProperties_GuiButtonBaseCtrlProperties_void",
           "record_va": "0x380400",
           "role": "getter",
-          "script_name": "groupn?m",
-          "script_name_exact": false,
+          "script_name": "groupnum",
+          "script_name_exact": true,
           "table_va": "0x3803a0"
         }
       ],
@@ -48247,16 +48254,15 @@
       "current_ida_name": "sub_1AD270",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GuiButtonBaseCtrl_set_groupnum",
       "roles": [
         {
           "kind": "properties",
           "owner": "GuiButtonBaseCtrlProperties_GuiButtonBaseCtrlProperties_void",
           "record_va": "0x380400",
           "role": "setter",
-          "script_name": "groupn?m",
-          "script_name_exact": false,
+          "script_name": "groupnum",
+          "script_name_exact": true,
           "table_va": "0x3803a0"
         }
       ],
@@ -49596,7 +49602,6 @@
       "current_ida_name": "GuiControl_getShowHint",
       "has_function_boundary": true,
       "name": "GuiControl_getShowHint",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -49604,8 +49609,8 @@
           "owner": "GuiControlProperties_GuiControlProperties_void",
           "record_va": "0x380f40",
           "role": "getter",
-          "script_name": "showhin?",
-          "script_name_exact": false,
+          "script_name": "showhint",
+          "script_name_exact": true,
           "table_va": "0x3806a0"
         }
       ],
@@ -49616,7 +49621,6 @@
       "current_ida_name": "GuiControl_setShowHint",
       "has_function_boundary": true,
       "name": "GuiControl_setShowHint",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -49624,8 +49628,8 @@
           "owner": "GuiControlProperties_GuiControlProperties_void",
           "record_va": "0x380f40",
           "role": "setter",
-          "script_name": "showhin?",
-          "script_name_exact": false,
+          "script_name": "showhint",
+          "script_name_exact": true,
           "table_va": "0x3806a0"
         }
       ],
@@ -50442,7 +50446,6 @@
       "current_ida_name": "jump_GuiControl_bringToFront_void",
       "has_function_boundary": true,
       "name": "jump_GuiControl_bringToFront_void",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -50450,8 +50453,8 @@
           "owner": "GuiControlProperties_GuiControlProperties_void",
           "record_va": "0x381120",
           "role": "callback",
-          "script_name": "bringtof?ont",
-          "script_name_exact": false,
+          "script_name": "bringtofront",
+          "script_name_exact": true,
           "table_va": "0x3810f0"
         }
       ],
@@ -50481,7 +50484,6 @@
       "current_ida_name": "jump_GuiControl_sortControls_void",
       "has_function_boundary": true,
       "name": "jump_GuiControl_sortControls_void",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -50489,8 +50491,8 @@
           "owner": "GuiControlProperties_GuiControlProperties_void",
           "record_va": "0x381540",
           "role": "callback",
-          "script_name": "sortcont?ols",
-          "script_name_exact": false,
+          "script_name": "sortcontrols",
+          "script_name_exact": true,
           "table_va": "0x3810f0"
         }
       ],
@@ -50634,7 +50636,6 @@
       "current_ida_name": "jump_GuiControl_isFirstResponder_void",
       "has_function_boundary": true,
       "name": "jump_GuiControl_isFirstResponder_void",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -50642,8 +50643,8 @@
           "owner": "GuiControlProperties_GuiControlProperties_void",
           "record_va": "0x3812d0",
           "role": "callback",
-          "script_name": "isfirst?esponder",
-          "script_name_exact": false,
+          "script_name": "isfirstresponder",
+          "script_name_exact": true,
           "table_va": "0x3810f0"
         }
       ],
@@ -50882,16 +50883,15 @@
       "current_ida_name": null,
       "has_function_boundary": false,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GuiControl_script_tabfirst",
       "roles": [
         {
           "kind": "functions",
           "owner": "GuiControlProperties_GuiControlProperties_void",
           "record_va": "0x381600",
           "role": "callback",
-          "script_name": "tabfirs?",
-          "script_name_exact": false,
+          "script_name": "tabfirst",
+          "script_name_exact": true,
           "table_va": "0x3810f0"
         }
       ],
@@ -51301,16 +51301,15 @@
       "current_ida_name": "sub_1BC750",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GuiMLTextCtrl_get_wordwrap",
       "roles": [
         {
           "kind": "properties",
           "owner": "GuiMLTextCtrlProperties_GuiMLTextCtrlProperties_void",
           "record_va": "0x381940",
           "role": "getter",
-          "script_name": "word?rap",
-          "script_name_exact": false,
+          "script_name": "wordwrap",
+          "script_name_exact": true,
           "table_va": "0x381700"
         }
       ],
@@ -51397,16 +51396,15 @@
       "current_ida_name": "sub_1BC818",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GuiMLTextCtrl_set_wordwrap",
       "roles": [
         {
           "kind": "properties",
           "owner": "GuiMLTextCtrlProperties_GuiMLTextCtrlProperties_void",
           "record_va": "0x381940",
           "role": "setter",
-          "script_name": "word?rap",
-          "script_name_exact": false,
+          "script_name": "wordwrap",
+          "script_name_exact": true,
           "table_va": "0x381700"
         }
       ],
@@ -51806,16 +51804,15 @@
       "current_ida_name": "sub_1BDF1C",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GuiMLTextCtrl_script_findtext",
       "roles": [
         {
           "kind": "functions",
           "owner": "GuiMLTextCtrlProperties_GuiMLTextCtrlProperties_void",
           "record_va": "0x3819d0",
           "role": "callback",
-          "script_name": "findtex?",
-          "script_name_exact": false,
+          "script_name": "findtext",
+          "script_name_exact": true,
           "table_va": "0x381970"
         }
       ],
@@ -51968,7 +51965,6 @@
       "current_ida_name": "jump_GuiMLTextCtrl_scrollToLine_int",
       "has_function_boundary": true,
       "name": "jump_GuiMLTextCtrl_scrollToLine_int",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -51976,8 +51972,8 @@
           "owner": "GuiMLTextCtrlProperties_GuiMLTextCtrlProperties_void",
           "record_va": "0x381ca0",
           "role": "callback",
-          "script_name": "scroll?oline",
-          "script_name_exact": false,
+          "script_name": "scrolltoline",
+          "script_name_exact": true,
           "table_va": "0x381970"
         }
       ],
@@ -51988,7 +51984,6 @@
       "current_ida_name": "jump_GuiMLTextCtrl_trimHorizontally_void",
       "has_function_boundary": true,
       "name": "jump_GuiMLTextCtrl_trimHorizontally_void",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -51996,8 +51991,8 @@
           "owner": "GuiMLTextCtrlProperties_GuiMLTextCtrlProperties_void",
           "record_va": "0x381dc0",
           "role": "callback",
-          "script_name": "trimhorizonta?ly",
-          "script_name_exact": false,
+          "script_name": "trimhorizontally",
+          "script_name_exact": true,
           "table_va": "0x381970"
         }
       ],
@@ -52179,16 +52174,15 @@
       "current_ida_name": "sub_1BFFE4",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GuiScrollCtrl_get_wheelscrolllines",
       "roles": [
         {
           "kind": "properties",
           "owner": "GuiScrollCtrlProperties_GuiScrollCtrlProperties_void",
           "record_va": "0x381f10",
           "role": "getter",
-          "script_name": "wheelsc?olllines",
-          "script_name_exact": false,
+          "script_name": "wheelscrolllines",
+          "script_name_exact": true,
           "table_va": "0x381df0"
         }
       ],
@@ -52199,16 +52193,15 @@
       "current_ida_name": "sub_1BFFEC",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GuiScrollCtrl_set_wheelscrolllines",
       "roles": [
         {
           "kind": "properties",
           "owner": "GuiScrollCtrlProperties_GuiScrollCtrlProperties_void",
           "record_va": "0x381f10",
           "role": "setter",
-          "script_name": "wheelsc?olllines",
-          "script_name_exact": false,
+          "script_name": "wheelscrolllines",
+          "script_name_exact": true,
           "table_va": "0x381df0"
         }
       ],
@@ -52883,7 +52876,6 @@
       "current_ida_name": "jump_GuiTextEditCtrl_getPasswordText_void",
       "has_function_boundary": true,
       "name": "jump_GuiTextEditCtrl_getPasswordText_void",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -52891,8 +52883,8 @@
           "owner": "GuiTextEditCtrlProperties_GuiTextEditCtrlProperties_void",
           "record_va": "0x382270",
           "role": "getter",
-          "script_name": "pass?ord",
-          "script_name_exact": false,
+          "script_name": "password",
+          "script_name_exact": true,
           "table_va": "0x3821e0"
         }
       ],
@@ -52903,7 +52895,6 @@
       "current_ida_name": "jump_GuiTextEditCtrl_setPasswordText_bool",
       "has_function_boundary": true,
       "name": "jump_GuiTextEditCtrl_setPasswordText_bool",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -52911,8 +52902,8 @@
           "owner": "GuiTextEditCtrlProperties_GuiTextEditCtrlProperties_void",
           "record_va": "0x382270",
           "role": "setter",
-          "script_name": "pass?ord",
-          "script_name_exact": false,
+          "script_name": "password",
+          "script_name_exact": true,
           "table_va": "0x3821e0"
         }
       ],
@@ -53208,16 +53199,15 @@
       "current_ida_name": "sub_1C9748",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "TGUIAnimation_get_interval",
       "roles": [
         {
           "kind": "properties",
           "owner": "TGUIAnimationProperties_TGUIAnimationProperties_void",
           "record_va": "0x3824e0",
           "role": "getter",
-          "script_name": "inter?al",
-          "script_name_exact": false,
+          "script_name": "interval",
+          "script_name_exact": true,
           "table_va": "0x3823c0"
         }
       ],
@@ -53228,16 +53218,15 @@
       "current_ida_name": "sub_1C9750",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "TGUIAnimation_set_interval",
       "roles": [
         {
           "kind": "properties",
           "owner": "TGUIAnimationProperties_TGUIAnimationProperties_void",
           "record_va": "0x3824e0",
           "role": "setter",
-          "script_name": "inter?al",
-          "script_name_exact": false,
+          "script_name": "interval",
+          "script_name_exact": true,
           "table_va": "0x3823c0"
         }
       ],
@@ -53855,16 +53844,15 @@
       "current_ida_name": "sub_1D91E4",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GuiPopUpMenuCtrl_script_rowcount",
       "roles": [
         {
           "kind": "functions",
           "owner": "GuiPopUpMenuCtrlProperties_GuiPopUpMenuCtrlProperties_void",
           "record_va": "0x382fe8",
           "role": "callback",
-          "script_name": "rowcoun?",
-          "script_name_exact": false,
+          "script_name": "rowcount",
+          "script_name_exact": true,
           "table_va": "0x382ef8"
         }
       ],
@@ -53894,16 +53882,15 @@
       "current_ida_name": "sub_1D91FC",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GuiPopUpMenuCtrl_script_findtext",
       "roles": [
         {
           "kind": "functions",
           "owner": "GuiPopUpMenuCtrlProperties_GuiPopUpMenuCtrlProperties_void",
           "record_va": "0x382f28",
           "role": "callback",
-          "script_name": "findtex?",
-          "script_name_exact": false,
+          "script_name": "findtext",
+          "script_name_exact": true,
           "table_va": "0x382ef8"
         }
       ],
@@ -55289,16 +55276,15 @@
       "current_ida_name": "sub_1DE42C",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GuiTextListCtrl_script_findtext",
       "roles": [
         {
           "kind": "functions",
           "owner": "GuiTextListCtrlProperties_GuiTextListCtrlProperties_void",
           "record_va": "0x3837a0",
           "role": "callback",
-          "script_name": "findtex?",
-          "script_name_exact": false,
+          "script_name": "findtext",
+          "script_name_exact": true,
           "table_va": "0x383710"
         }
       ],
@@ -55347,7 +55333,6 @@
       "current_ida_name": "jump_GuiTextListCtrl_getNumEntries_void",
       "has_function_boundary": true,
       "name": "jump_GuiTextListCtrl_getNumEntries_void",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -55355,8 +55340,8 @@
           "owner": "GuiTextListCtrlProperties_GuiTextListCtrlProperties_void",
           "record_va": "0x383ad0",
           "role": "callback",
-          "script_name": "rowcoun?",
-          "script_name_exact": false,
+          "script_name": "rowcount",
+          "script_name_exact": true,
           "table_va": "0x383710"
         }
       ],
@@ -55927,16 +55912,15 @@
       "current_ida_name": "sub_1E049C",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GuiDrawingPanel_script_drawtext",
       "roles": [
         {
           "kind": "functions",
           "owner": "GuiDrawingPanelProperties_GuiDrawingPanelProperties_void",
           "record_va": "0x383f80",
           "role": "callback",
-          "script_name": "drawtex?",
-          "script_name_exact": false,
+          "script_name": "drawtext",
+          "script_name_exact": true,
           "table_va": "0x383e00"
         }
       ],
@@ -56650,7 +56634,6 @@
       "current_ida_name": "TGameEnvironment_emit_onRCChat",
       "has_function_boundary": true,
       "name": "TGameEnvironment_emit_onRCChat",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -56658,8 +56641,8 @@
           "owner": "TClient_initStaticScriptVars_void",
           "record_va": "0x384bc0",
           "role": "callback",
-          "script_name": "tclient_setrc?og",
-          "script_name_exact": false,
+          "script_name": "tclient_setrclog",
+          "script_name_exact": true,
           "table_va": "0x384620"
         }
       ],
@@ -56708,7 +56691,6 @@
       "current_ida_name": "TClient_setDisconnectReason",
       "has_function_boundary": true,
       "name": "TClient_setDisconnectReason",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -56716,8 +56698,8 @@
           "owner": "TClient_initStaticScriptVars_void",
           "record_va": "0x384740",
           "role": "callback",
-          "script_name": "tclient_setdisconne?tmessage",
-          "script_name_exact": false,
+          "script_name": "tclient_setdisconnectmessage",
+          "script_name_exact": true,
           "table_va": "0x384620"
         }
       ],
@@ -56823,7 +56805,6 @@
       "current_ida_name": "TClient_getConnectionString8304",
       "has_function_boundary": true,
       "name": "TClient_getConnectionString8304",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -56831,8 +56812,8 @@
           "owner": "TClientProperties_TClientProperties_void",
           "record_va": "0x384440",
           "role": "callback",
-          "script_name": "getssli?suer",
-          "script_name_exact": false,
+          "script_name": "getsslissuer",
+          "script_name_exact": true,
           "table_va": "0x3842c0"
         }
       ],
@@ -57213,7 +57194,6 @@
       "current_ida_name": "TClient_enterServerMapFile",
       "has_function_boundary": true,
       "name": "TClient_enterServerMapFile",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -57221,8 +57201,8 @@
           "owner": "TClient_initStaticScriptVars_void",
           "record_va": "0x385310",
           "role": "callback",
-          "script_name": "tclient_?layerwarped",
-          "script_name_exact": false,
+          "script_name": "tclient_playerwarped",
+          "script_name_exact": true,
           "table_va": "0x384620"
         }
       ],
@@ -57670,7 +57650,6 @@
       "current_ida_name": "jump_TClient_startFileDownloading_void",
       "has_function_boundary": true,
       "name": "jump_TClient_startFileDownloading_void",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -57678,8 +57657,8 @@
           "owner": "TClientProperties_TClientProperties_void",
           "record_va": "0x384500",
           "role": "callback",
-          "script_name": "requestbasefi?es",
-          "script_name_exact": false,
+          "script_name": "requestbasefiles",
+          "script_name_exact": true,
           "table_va": "0x3842c0"
         }
       ],
@@ -57861,7 +57840,6 @@
       "current_ida_name": "TClient_dispatchHandlerIndex",
       "has_function_boundary": true,
       "name": "TClient_dispatchHandlerIndex",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -57869,8 +57847,8 @@
           "owner": "TClientProperties_TClientProperties_void",
           "record_va": "0x3845f0",
           "role": "callback",
-          "script_name": "defa?ltinha?d?er",
-          "script_name_exact": false,
+          "script_name": "defaultinhandler",
+          "script_name_exact": true,
           "table_va": "0x3842c0"
         }
       ],
@@ -57919,7 +57897,6 @@
       "current_ida_name": "TClient_shootProjectile",
       "has_function_boundary": true,
       "name": "TClient_shootProjectile",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -57927,8 +57904,8 @@
           "owner": "TClient_initStaticScriptVars_void",
           "record_va": "0x384c80",
           "role": "callback",
-          "script_name": "tclient_setnewproj?ctile",
-          "script_name_exact": false,
+          "script_name": "tclient_setnewprojectile",
+          "script_name_exact": true,
           "table_va": "0x384620"
         }
       ],
@@ -58669,7 +58646,6 @@
       "current_ida_name": "jump_TFileDownload_ignore_TString_const",
       "has_function_boundary": true,
       "name": "jump_TFileDownload_ignore_TString_const",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -58677,8 +58653,8 @@
           "owner": "TFileDownload_initStaticScriptVars_void",
           "record_va": "0x385738",
           "role": "callback",
-          "script_name": "file?pdateignore",
-          "script_name_exact": false,
+          "script_name": "fileupdateignore",
+          "script_name_exact": true,
           "table_va": "0x385738"
         }
       ],
@@ -58746,7 +58722,6 @@
       "current_ida_name": "TGraalConnection_getByte240",
       "has_function_boundary": true,
       "name": "TGraalConnection_getByte240",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -58754,8 +58729,8 @@
           "owner": "THTTPRequestProperties_THTTPRequestProperties_void",
           "record_va": "0x385bd0",
           "role": "getter",
-          "script_name": "do?nloadcomplete",
-          "script_name_exact": false,
+          "script_name": "downloadcomplete",
+          "script_name_exact": true,
           "table_va": "0x385ae0"
         }
       ],
@@ -58766,7 +58741,6 @@
       "current_ida_name": "TGraalConnection_getDouble312",
       "has_function_boundary": true,
       "name": "TGraalConnection_getDouble312",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -58774,8 +58748,8 @@
           "owner": "THTTPRequestProperties_THTTPRequestProperties_void",
           "record_va": "0x385c90",
           "role": "getter",
-          "script_name": "lastda?atime",
-          "script_name_exact": false,
+          "script_name": "lastdatatime",
+          "script_name_exact": true,
           "table_va": "0x385ae0"
         }
       ],
@@ -59147,7 +59121,6 @@
       "current_ida_name": "THTTPRequest_findStaticFromUrl",
       "has_function_boundary": true,
       "name": "THTTPRequest_findStaticFromUrl",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -59155,8 +59128,8 @@
           "owner": "THTTPRequest_initStaticScriptVars_void",
           "record_va": "0x385ea0",
           "role": "callback",
-          "script_name": "geth?tprequestforurl",
-          "script_name_exact": false,
+          "script_name": "gethttprequestforurl",
+          "script_name_exact": true,
           "table_va": "0x385e10"
         }
       ],
@@ -59167,7 +59140,6 @@
       "current_ida_name": "THTTPRequest_requestGameFileIfAllowed",
       "has_function_boundary": true,
       "name": "THTTPRequest_requestGameFileIfAllowed",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -59175,8 +59147,8 @@
           "owner": "THTTPRequest_initStaticScriptVars_void",
           "record_va": "0x385fc0",
           "role": "callback",
-          "script_name": "req?e?turlasgamefil?",
-          "script_name_exact": false,
+          "script_name": "requesturlasgamefile",
+          "script_name_exact": true,
           "table_va": "0x385e10"
         }
       ],
@@ -60023,7 +59995,6 @@
       "current_ida_name": "TUpdatePackage_getDownloadComplete",
       "has_function_boundary": true,
       "name": "TUpdatePackage_getDownloadComplete",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -60031,8 +60002,8 @@
           "owner": "TUpdatePackageProperties_TUpdatePackageProperties_void",
           "record_va": "0x386700",
           "role": "getter",
-          "script_name": "do?nloadcomplete",
-          "script_name_exact": false,
+          "script_name": "downloadcomplete",
+          "script_name_exact": true,
           "table_va": "0x3866a0"
         }
       ],
@@ -60499,16 +60470,15 @@
       "current_ida_name": "sub_20A888",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "TUpdatePackage_script_getupdatepackage",
       "roles": [
         {
           "kind": "functions",
           "owner": "TUpdatePackage_initStaticScriptVars_void",
           "record_va": "0x386b58",
           "role": "callback",
-          "script_name": "getupdate?ackage",
-          "script_name_exact": false,
+          "script_name": "getupdatepackage",
+          "script_name_exact": true,
           "table_va": "0x386ac8"
         }
       ],
@@ -60652,16 +60622,15 @@
       "current_ida_name": "sub_20AE10",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GSFunctionsInitstaticscriptvars_script_getcallstack",
       "roles": [
         {
           "kind": "functions",
           "owner": "gsfunctions_initStaticScriptVars_void",
           "record_va": "0x3871b8",
           "role": "callback",
-          "script_name": "getcall?tack",
-          "script_name_exact": false,
+          "script_name": "getcallstack",
+          "script_name_exact": true,
           "table_va": "0x386c48"
         }
       ],
@@ -60976,16 +60945,15 @@
       "current_ida_name": "sub_20B8F8",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GSFunctionsInitstaticscriptvars_script_isobject",
       "roles": [
         {
           "kind": "functions",
           "owner": "gsfunctions_initStaticScriptVars_void",
           "record_va": "0x387188",
           "role": "callback",
-          "script_name": "isobjec?",
-          "script_name_exact": false,
+          "script_name": "isobject",
+          "script_name_exact": true,
           "table_va": "0x386c48"
         }
       ],
@@ -61176,16 +61144,15 @@
       "current_ida_name": "sub_20CD34",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "GSFunctionsInitstaticscriptvars_script_randomstring",
       "roles": [
         {
           "kind": "functions",
           "owner": "gsfunctions_initStaticScriptVars_void",
           "record_va": "0x3872a8",
           "role": "callback",
-          "script_name": "randomst?ing",
-          "script_name_exact": false,
+          "script_name": "randomstring",
+          "script_name_exact": true,
           "table_va": "0x386c48"
         }
       ],
@@ -61272,16 +61239,15 @@
       "current_ida_name": "sub_20D368",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "TGraalVar_get_scripterrors",
       "roles": [
         {
           "kind": "properties",
           "owner": "TGraalVarProperties_TGraalVarProperties_void",
           "record_va": "0x387430",
           "role": "getter",
-          "script_name": "scripter?ors",
-          "script_name_exact": false,
+          "script_name": "scripterrors",
+          "script_name_exact": true,
           "table_va": "0x387340"
         }
       ],
@@ -61824,7 +61790,6 @@
       "current_ida_name": "jump_TGraalVar_getMaxLoopLimit_void",
       "has_function_boundary": true,
       "name": "jump_TGraalVar_getMaxLoopLimit_void",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -61832,8 +61797,8 @@
           "owner": "TGraalVarProperties_TGraalVarProperties_void",
           "record_va": "0x387400",
           "role": "getter",
-          "script_name": "ma?looplimit",
-          "script_name_exact": false,
+          "script_name": "maxlooplimit",
+          "script_name_exact": true,
           "table_va": "0x387340"
         }
       ],
@@ -61844,7 +61809,6 @@
       "current_ida_name": "jump_TGraalVar_setMaxLoopLimit_int",
       "has_function_boundary": true,
       "name": "jump_TGraalVar_setMaxLoopLimit_int",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -61852,8 +61816,8 @@
           "owner": "TGraalVarProperties_TGraalVarProperties_void",
           "record_va": "0x387400",
           "role": "setter",
-          "script_name": "ma?looplimit",
-          "script_name_exact": false,
+          "script_name": "maxlooplimit",
+          "script_name_exact": true,
           "table_va": "0x387340"
         }
       ],
@@ -62301,16 +62265,15 @@
       "current_ida_name": "sub_217E50",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "TCallStackEntry_get_scriptcallobject",
       "roles": [
         {
           "kind": "properties",
           "owner": "TCallStackEntryProperties_TCallStackEntryProperties_void",
           "record_va": "0x387d60",
           "role": "getter",
-          "script_name": "scrip?call?bject",
-          "script_name_exact": false,
+          "script_name": "scriptcallobject",
+          "script_name_exact": true,
           "table_va": "0x387d60"
         }
       ],
@@ -62321,16 +62284,15 @@
       "current_ida_name": "sub_224540",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "TScriptProperty_get_scriptlogwritetoreadonly",
       "roles": [
         {
           "kind": "properties",
           "owner": "TScriptProperty_initStaticScriptVars_void",
           "record_va": "0x387d90",
           "role": "getter",
-          "script_name": "scriptlogwritetorea?only",
-          "script_name_exact": false,
+          "script_name": "scriptlogwritetoreadonly",
+          "script_name_exact": true,
           "table_va": "0x387d90"
         }
       ],
@@ -62341,16 +62303,15 @@
       "current_ida_name": "sub_224550",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "TScriptProperty_set_scriptlogwritetoreadonly",
       "roles": [
         {
           "kind": "properties",
           "owner": "TScriptProperty_initStaticScriptVars_void",
           "record_va": "0x387d90",
           "role": "setter",
-          "script_name": "scriptlogwritetorea?only",
-          "script_name_exact": false,
+          "script_name": "scriptlogwritetoreadonly",
+          "script_name_exact": true,
           "table_va": "0x387d90"
         }
       ],
@@ -64337,16 +64298,15 @@
       "current_ida_name": "sub_238198",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "TParticleEmitter_get_autorotation",
       "roles": [
         {
           "kind": "properties",
           "owner": "TParticleEmitterProperties_TParticleEmitterProperties_void",
           "record_va": "0x38a900",
           "role": "getter",
-          "script_name": "autoro?ation",
-          "script_name_exact": false,
+          "script_name": "autorotation",
+          "script_name_exact": true,
           "table_va": "0x38a8d0"
         }
       ],
@@ -64357,16 +64317,15 @@
       "current_ida_name": "sub_2381A0",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "TParticleEmitter_set_autorotation",
       "roles": [
         {
           "kind": "properties",
           "owner": "TParticleEmitterProperties_TParticleEmitterProperties_void",
           "record_va": "0x38a900",
           "role": "setter",
-          "script_name": "autoro?ation",
-          "script_name_exact": false,
+          "script_name": "autorotation",
+          "script_name_exact": true,
           "table_va": "0x38a8d0"
         }
       ],
@@ -64415,16 +64374,15 @@
       "current_ida_name": "sub_2381B8",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "TParticleEmitter_get_cliptoscreen",
       "roles": [
         {
           "kind": "properties",
           "owner": "TParticleEmitterProperties_TParticleEmitterProperties_void",
           "record_va": "0x38a990",
           "role": "getter",
-          "script_name": "cliptosc?een",
-          "script_name_exact": false,
+          "script_name": "cliptoscreen",
+          "script_name_exact": true,
           "table_va": "0x38a8d0"
         }
       ],
@@ -64435,16 +64393,15 @@
       "current_ida_name": "sub_2381C0",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "TParticleEmitter_set_cliptoscreen",
       "roles": [
         {
           "kind": "properties",
           "owner": "TParticleEmitterProperties_TParticleEmitterProperties_void",
           "record_va": "0x38a990",
           "role": "setter",
-          "script_name": "cliptosc?een",
-          "script_name_exact": false,
+          "script_name": "cliptoscreen",
+          "script_name_exact": true,
           "table_va": "0x38a8d0"
         }
       ],
@@ -64664,16 +64621,15 @@
       "current_ida_name": "sub_238260",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "TParticleEmitter_get_emittedparticles",
       "roles": [
         {
           "kind": "properties",
           "owner": "TParticleEmitterProperties_TParticleEmitterProperties_void",
           "record_va": "0x38ab70",
           "role": "getter",
-          "script_name": "emittedpartic?es",
-          "script_name_exact": false,
+          "script_name": "emittedparticles",
+          "script_name_exact": true,
           "table_va": "0x38a8d0"
         }
       ],
@@ -64684,16 +64640,15 @@
       "current_ida_name": "sub_238268",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "TParticleEmitter_get_firstinfront",
       "roles": [
         {
           "kind": "properties",
           "owner": "TParticleEmitterProperties_TParticleEmitterProperties_void",
           "record_va": "0x38aba0",
           "role": "getter",
-          "script_name": "firstinf?ont",
-          "script_name_exact": false,
+          "script_name": "firstinfront",
+          "script_name_exact": true,
           "table_va": "0x38a8d0"
         }
       ],
@@ -64704,16 +64659,15 @@
       "current_ida_name": "sub_238270",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "TParticleEmitter_set_firstinfront",
       "roles": [
         {
           "kind": "properties",
           "owner": "TParticleEmitterProperties_TParticleEmitterProperties_void",
           "record_va": "0x38aba0",
           "role": "setter",
-          "script_name": "firstinf?ont",
-          "script_name_exact": false,
+          "script_name": "firstinfront",
+          "script_name_exact": true,
           "table_va": "0x38a8d0"
         }
       ],
@@ -64781,16 +64735,15 @@
       "current_ida_name": "sub_238290",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "TParticleEmitter_get_maxparticles",
       "roles": [
         {
           "kind": "properties",
           "owner": "TParticleEmitterProperties_TParticleEmitterProperties_void",
           "record_va": "0x38ac30",
           "role": "getter",
-          "script_name": "ma?par?icles",
-          "script_name_exact": false,
+          "script_name": "maxparticles",
+          "script_name_exact": true,
           "table_va": "0x38a8d0"
         }
       ],
@@ -64915,16 +64868,15 @@
       "current_ida_name": "sub_2382CC",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "TParticleEmitter_get_showonground",
       "roles": [
         {
           "kind": "properties",
           "owner": "TParticleEmitterProperties_TParticleEmitterProperties_void",
           "record_va": "0x38ad50",
           "role": "getter",
-          "script_name": "sho?onground",
-          "script_name_exact": false,
+          "script_name": "showonground",
+          "script_name_exact": true,
           "table_va": "0x38a8d0"
         }
       ],
@@ -64935,16 +64887,15 @@
       "current_ida_name": "sub_2382D4",
       "has_function_boundary": true,
       "name": null,
-      "name_review_required": true,
-      "proposed_name": null,
+      "proposed_name": "TParticleEmitter_set_showonground",
       "roles": [
         {
           "kind": "properties",
           "owner": "TParticleEmitterProperties_TParticleEmitterProperties_void",
           "record_va": "0x38ad50",
           "role": "setter",
-          "script_name": "sho?onground",
-          "script_name_exact": false,
+          "script_name": "showonground",
+          "script_name_exact": true,
           "table_va": "0x38a8d0"
         }
       ],
@@ -65354,7 +65305,6 @@
       "current_ida_name": "jump_TParticleEmitter_setMaxParticles_int",
       "has_function_boundary": true,
       "name": "jump_TParticleEmitter_setMaxParticles_int",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -65362,8 +65312,8 @@
           "owner": "TParticleEmitterProperties_TParticleEmitterProperties_void",
           "record_va": "0x38ac30",
           "role": "setter",
-          "script_name": "ma?par?icles",
-          "script_name_exact": false,
+          "script_name": "maxparticles",
+          "script_name_exact": true,
           "table_va": "0x38a8d0"
         }
       ],
@@ -65982,7 +65932,6 @@
       "current_ida_name": "nullsub_12",
       "has_function_boundary": true,
       "name": "nullsub_12",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -65990,8 +65939,8 @@
           "owner": "main_android_initStaticScriptVars_void",
           "record_va": "0x38b9c0",
           "role": "callback",
-          "script_name": "fabzat?e?lacetextur?",
-          "script_name_exact": false,
+          "script_name": "fabzatreplacetexture",
+          "script_name_exact": true,
           "table_va": "0x38b2d0"
         }
       ],
@@ -66363,7 +66312,6 @@
       "current_ida_name": "JNI_setDistimoRegisteredUser",
       "has_function_boundary": true,
       "name": "JNI_setDistimoRegisteredUser",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -66371,8 +66319,8 @@
           "owner": "main_android_initStaticScriptVars_void",
           "record_va": "0x38b7e0",
           "role": "callback",
-          "script_name": "setdistimoregister??user",
-          "script_name_exact": false,
+          "script_name": "setdistimoregistereduser",
+          "script_name_exact": true,
           "table_va": "0x38b2d0"
         }
       ],
@@ -66649,7 +66597,6 @@
       "current_ida_name": "JNI_showTapJoyOffers",
       "has_function_boundary": true,
       "name": "JNI_showTapJoyOffers",
-      "name_review_required": true,
       "proposed_name": null,
       "roles": [
         {
@@ -66657,8 +66604,8 @@
           "owner": "main_android_initStaticScriptVars_void",
           "record_va": "0x38b4b0",
           "role": "callback",
-          "script_name": "showtapjoy?ffers",
-          "script_name_exact": false,
+          "script_name": "showtapjoyoffers",
+          "script_name_exact": true,
           "table_va": "0x38b2d0"
         }
       ],

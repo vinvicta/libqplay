@@ -128,9 +128,9 @@ at `0x3810f0` contains 28 entries, including control lookup, coordinate
 conversion, resize, repaint, visibility, and responder operations. Eleven
 formerly unnamed callbacks from that table now carry script-prefixed labels.
 The `minextent` and `minsize` entries share their callback pair. The table
-entry that decodes to `showhint` contains the same one-byte encoded terminator
-quirk seen in other old script tables, so the name is treated as an inferred
-table name with the encoding anomaly documented.
+entry that decodes to `showhint` uses the same one-byte encoded-zero sentinel
+seen in other old script tables. The decoder models the native
+`codesimplefix0` repair, so the script name is recovered exactly.
 
 The file-scripting table at `0x376bd0` is another strong naming anchor.
 `TFileScripting_initStaticScriptVars` at `0xfd1d0` registers 27 entries,
@@ -1341,24 +1341,25 @@ Every static record uses a 0x30-byte stride. The first field points to the
 script name, the property records keep their getter and setter at offsets
 0x10 and 0x18, and function records keep their callback at offset 0x18. The
 name decoder preserves ordinary literal strings and applies the inverse of
-`THashList::encodesimple` to transformed strings. It records the raw bytes and
-does not silently fill in names when a historical zero-byte replacement makes
-the result uncertain.
+`THashList::encodesimple` to transformed strings. It also models
+`THashList::codesimplefix0`, which restores encoded zero bytes represented by
+the old table sentinel. The raw bytes remain in the inventory as evidence,
+but all 1,455 static record names now decode exactly.
 
 Across those records there are 1,779 unique callback targets. The existing
 semantic-label artifact covers 411 of them, the curated callback artifact
 covers another 258, and 204 already have non-default names in the saved IDA
-inventory. The remaining 906 targets are split into 825 exact names with
-saved function boundaries, 18 exact callback pointers without saved boundaries,
-and 63 records whose names need a small human review. The full record map and
-these coverage states are in `artifacts/script_table_inventory.json`.
+inventory. The remaining 906 targets are split into 886 exact names with
+saved function boundaries and 20 exact callback pointers without saved
+boundaries. The full record map and these coverage states are in
+`artifacts/script_table_inventory.json`.
 
 `tools/generate_script_table_inventory.py` reproduces the map from the local
 ARM64 library and saved inventory without contacting a network. The companion
 `tools/ida_apply_script_table_inventory.py` builds a review-only rename plan
-for the 825 exact, bounded targets. It leaves uncertain names and missing
-function boundaries untouched. The IDA bridge was unavailable during this
-scan, so no database names were changed.
+for the 886 exact, bounded targets. It leaves the 20 missing function
+boundaries untouched. The IDA bridge was unavailable during this scan, so no
+database names were changed.
 
 ## Held-connection ARM64 resource replay
 

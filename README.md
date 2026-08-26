@@ -184,8 +184,9 @@ proves the local native TLS path, not a current live certificate or service.
   database.
 * `artifacts/script_table_inventory.json` records all 132 static registration
   calls, 1,455 declared property and function records, and 1,779 unique
-  callback targets. It separates 825 exact bounded rename candidates from
-  18 exact missing boundaries and 63 names that need review.
+  callback targets. It separates 886 exact bounded rename candidates from
+  20 exact callback pointers whose IDA boundaries are missing. All 906 new
+  targets have recovered script names.
 * `tools/generate_script_table_inventory.py` rebuilds that inventory offline;
   `tools/ida_apply_script_table_inventory.py` creates a review-only IDA rename
   plan for the exact bounded subset.

@@ -258,9 +258,10 @@ This is the short handoff view. The full reasoning and command history are in
 42. A complete offline scan of direct `TScriptProperty::addProps` and
     `addFuncs` calls found 70 property tables and 62 function tables. Their
     1,455 declared records resolve to 1,779 unique callback targets. The map
-    identifies 825 exact new names with saved boundaries, 18 exact pointers
-    without boundaries, and 63 names requiring review. No IDA names changed
-    and no endpoint was contacted.
+    identifies 886 exact new names with saved boundaries and 20 exact
+    pointers without boundaries. The native zero-byte repair is modeled, so
+    all 1,455 record names are exact. No IDA names changed and no endpoint
+    was contacted.
 
 ## Not verified
 
