@@ -1513,6 +1513,12 @@ has SHA-256
 It remains outside the public repository because it is a generated database,
 while the hash and verification status are kept in the public artifact.
 
+An inventory export from that saved copy reports 8,096 ELF-backed functions,
+2,742 named non-ELF functions, and 459 remaining default names. This is the
+strongest local symbol-coverage count so far because it was generated after
+the boundary and rename passes had been persisted, then checked against the
+same input hash.
+
 ## Packaged ARM64 replay revalidation
 
 The complete local replay was repeated on 2026-08-25 using the packaged

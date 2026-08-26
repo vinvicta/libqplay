@@ -301,6 +301,12 @@ at the expected address. The final copy contains 11,297 function starts and
 locked and was not changed. The result and saved-copy hash are recorded in
 `artifacts/ida_translation_validation.json`.
 
+Exporting the saved copy also gives a useful final coverage snapshot: 8,096
+functions are backed by ELF records, 2,742 have non-default IDA names from
+the semantic and callback passes, and 459 remain default `sub_` entries. The
+private exported inventory is not committed, but its hash and counts are
+recorded with the persisted database metadata.
+
 The saved function inventory has 1,645 IDA-created default `sub_` functions.
 `artifacts/symbol_translation_overlay.json` maps 886 of them to exact
 script-table names and 271 to curated callback candidates, leaving 488

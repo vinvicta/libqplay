@@ -117,7 +117,9 @@ IDA 9.3 database copy at
 close-and-reopen check found all 1,211 expected names, 11,297 functions, and
 459 remaining default `sub_` entries. The 56 MB database is intentionally not
 committed to the public repository; its hash and verification status are in
-the same IDA artifact.
+the same IDA artifact. Exporting that saved copy produced a private inventory
+with 8,096 ELF-backed functions, 2,742 named non-ELF functions, and 459
+remaining defaults.
 
 A clean 2026-08-25 revalidation of the same signed ARM64-only diagnostic APK
 was also completed from fresh app data. After the Android compatibility

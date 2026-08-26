@@ -184,6 +184,21 @@ def main():
         "f901f73e25e97d072c79bcabc3931ff179bcd2cdd24fa0f120d5ff690719e505",
     )
     check(
+        "IDA validation persisted inventory total",
+        ida_validation["database"]["persistent_database"]["inventory"]["total_functions"],
+        11297,
+    )
+    check(
+        "IDA validation persisted inventory defaults",
+        ida_validation["database"]["persistent_database"]["inventory"]["ida_default_sub_functions"],
+        459,
+    )
+    check(
+        "IDA validation persisted inventory hash",
+        ida_validation["database"]["persistent_database"]["inventory"]["sha256"],
+        "5166475d6070d9a31000d9a40309c551d950a82dffa5e03e3e794ba0cd465249",
+    )
+    check(
         "IDA validation pass failures",
         sum(item["failures"] for item in ida_validation["passes"]),
         0,
