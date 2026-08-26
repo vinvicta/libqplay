@@ -64,13 +64,21 @@
     "reopen_verification": "/tmp/spectron_core_anchor_verification_20260826.json",
     "verified_name_count": 16
   },
+  "core_helper_anchors": {
+    "anchor_count": 30,
+    "anchor_path": "artifacts/spectron_core_helper_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "740460be86d5ae8095a2a57a16e38ef35e6026e879bd77f66ad041d66a00ded6",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_core_helper_verify_v28.json",
+    "verified_name_count": 30
+  },
   "database": {
     "close_reopen_verified": true,
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v27.i64",
-    "sha256": "4c50294949544e27105f6ee457153dc6d06c5c83e25ce8e539ad64e4ca8d14dd"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v28.i64",
+    "sha256": "fd2c58ef97d63f6d4cfa55ae0e0d4bbf3e57872ab5e0e079f6e777bfbb7b35e4"
   },
   "html_atom_anchors": {
     "anchor_count": 5,
@@ -140,7 +148,8 @@
     "The twenty-fourth database revision also contains the separately reviewed compact TPlayer attachment, update, freeze, and sprite helper anchors.",
     "The twenty-fifth database revision also contains the separately reviewed input and window bridge helper anchors.",
     "The twenty-sixth database revision also contains the separately reviewed animation, particle, and show-image helper anchors.",
-    "The twenty-seventh database revision also contains the separately reviewed GS2-facing TGraalVar, TScript, TScriptSpace, and TScriptUniverse helper anchors."
+    "The twenty-seventh database revision also contains the separately reviewed GS2-facing TGraalVar, TScript, TScriptSpace, and TScriptUniverse helper anchors.",
+    "The twenty-eighth database revision also contains the separately reviewed level, script, network-policy, tile, particle, and native callback helper anchors."
   ],
   "login_helper_anchors": {
     "anchor_count": 8,

@@ -79,6 +79,8 @@ def main() -> None:
     parser.add_argument("--visual-helper-verification", type=Path)
     parser.add_argument("--script-runtime-anchors", type=Path)
     parser.add_argument("--script-runtime-verification", type=Path)
+    parser.add_argument("--core-helper-anchors", type=Path)
+    parser.add_argument("--core-helper-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -846,6 +848,34 @@ def main() -> None:
         result["script_runtime_anchors"] = script_runtime
         result["interpretation"].append(
             "The twenty-seventh database revision also contains the separately reviewed GS2-facing TGraalVar, TScript, TScriptSpace, and TScriptUniverse helper anchors."
+        )
+    core_helper = None
+    if args.core_helper_anchors or args.core_helper_verification:
+        if not args.core_helper_anchors or not args.core_helper_verification:
+            raise ValueError(
+                "core-helper anchors and core-helper verification must be supplied together"
+            )
+        core_helper_document = load(args.core_helper_anchors)
+        core_helper_verification = load(args.core_helper_verification)
+        if core_helper_document.get("artifact") != "spectron_core_helper_manual_translation_anchors_20260826":
+            raise ValueError("unexpected core-helper anchor artifact")
+        if not core_helper_verification.get("verified"):
+            raise ValueError("core-helper anchor reopen verification did not pass")
+        expected_core_helper = len(core_helper_document["anchors"])
+        if core_helper_verification["verified_name_count"] != expected_core_helper:
+            raise ValueError("core-helper verification count differs from artifact")
+        core_helper = {
+            "anchor_path": str(args.core_helper_anchors),
+            "anchor_sha256": sha256_path(args.core_helper_anchors),
+            "reopen_verification": str(args.core_helper_verification),
+            "anchor_count": expected_core_helper,
+            "verified_name_count": core_helper_verification["verified_name_count"],
+            "reopen_failure_count": core_helper_verification["failure_count"],
+        }
+    if core_helper is not None:
+        result["core_helper_anchors"] = core_helper
+        result["interpretation"].append(
+            "The twenty-eighth database revision also contains the separately reviewed level, script, network-policy, tile, particle, and native callback helper anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

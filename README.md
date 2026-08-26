@@ -430,6 +430,17 @@ cleanup. All 12 reopened successfully. The evidence is in
 `artifacts/spectron_script_runtime_manual_translation_anchors_20260826.json`,
 and the v27 database SHA-256 is recorded in the checkpoint.
 
+A twenty-eighth disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v28.i64`,
+adds 30 reviewed core-helper anchors. They cover level-object coordinates and
+rectangles, numeric arrays, NPC lists and predicates, safe-connector fallback,
+socket policy, update lookup, script command records, script-stack behavior,
+player arrays, static-variable cleanup, tile state, particle modifiers,
+explosion and bomb fields, and texture reload state. All 30 reopened
+successfully. The evidence is in
+`artifacts/spectron_core_helper_manual_translation_anchors_20260826.json`,
+and the v28 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
@@ -593,6 +604,9 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/spectron_script_runtime_manual_translation_anchors_20260826.json`
   records the 12 reviewed GS2-facing `TGraalVar`, `TScript`, `TScriptSpace`,
   and `TScriptUniverse` helpers.
+* `artifacts/spectron_core_helper_manual_translation_anchors_20260826.json`
+  records the 30 reviewed level, script, network-policy, tile, particle, and
+  native callback helpers.
 * `artifacts/spectron_socket_behavior_comparison_20260826.json` records the
   static comparison of the changed SSL setup, connect, and read bodies.
 * `artifacts/spectron_translation_checkpoint_20260826.json` records the
@@ -868,6 +882,9 @@ proves the local native TLS path, not a current live certificate or service.
   The `tools/generate_spectron_script_runtime_anchors.py` generator records
   reviewed GS2-facing script-runtime roles with exact hash checks and IDA
   pseudocode context.
+  The `tools/generate_spectron_core_helper_anchors.py` generator records
+  reviewed level, script, network-policy, tile, particle, and native callback
+  roles with exact hash checks and IDA pseudocode context.
   The `tools/generate_spectron_socket_behavior_comparison.py` generator
   records changed-size socket behavior without forcing an exact-match label.
   `tools/ida_apply_spectron_translation.py` and
