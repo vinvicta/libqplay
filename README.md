@@ -194,6 +194,12 @@ proves the local native TLS path, not a current live certificate or service.
   `tools/ida_apply_script_table_boundaries.py` handles the 20
   `.eh_frame`-backed boundaries separately. The decoder regression check is
   in `tools/test_script_table_inventory.py`.
+* `artifacts/symbol_translation_overlay.json` joins the saved 1,645 default
+  `sub_` functions with 886 exact script-table names and 271 curated callback
+  candidates. It leaves the remaining 488 default functions explicit instead
+  of assigning speculative names.
+* `tools/generate_symbol_translation_overlay.py` rebuilds that overlay from
+  the saved function, script-table, and candidate inventories.
 * `artifacts/inbound_handler_table.json` records the native handler-index table,
   its current function targets, and the observed packet-to-index pairs.
 * `artifacts/premium_option.json` records the complete marker bytes and the

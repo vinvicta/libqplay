@@ -264,6 +264,11 @@ This is the short handoff view. The full reasoning and command history are in
     was contacted. Each of the 20 pointers also has an ELF `.eh_frame` range;
     `tools/ida_apply_script_table_boundaries.py` keeps those boundary changes
     separate from the ordinary rename pass.
+43. The translation overlay accounts for 886 of the saved default `sub_`
+    functions through exact table names and another 271 through curated
+    callback evidence. The remaining 488 default functions stay explicitly
+    unresolved. No speculative names were added and no endpoint was
+    contacted.
 
 ## Not verified
 

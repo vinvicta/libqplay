@@ -1363,6 +1363,13 @@ review-only path that can define the ranges first and then apply the exact
 names. `tools/test_script_table_inventory.py` covers ordinary encoded names,
 sentinel-bearing names, and the `$pref::` form used by the client.
 
+The overlay at `artifacts/symbol_translation_overlay.json` joins the saved
+1,645 default `sub_` functions with the table evidence. It gives 886 of them
+exact script-table names and 271 of them curated callback candidates, leaving
+488 default functions without a defensible name. Those 488 entries are kept
+as an explicit work list. `tools/generate_symbol_translation_overlay.py`
+rebuilds the overlay without needing an IDA session.
+
 `tools/generate_script_table_inventory.py` reproduces the map from the local
 ARM64 library and saved inventory without contacting a network. The companion
 `tools/ida_apply_script_table_inventory.py` builds a review-only rename plan
