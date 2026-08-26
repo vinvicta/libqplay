@@ -725,6 +725,12 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_event_object_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+100. Clean IDA review added two high-confidence `TScriptAction` lifecycle
+     anchors for construction and destruction. Both reopened successfully in
+     the v40 disposable copy. See
+     `artifacts/spectron_script_action_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

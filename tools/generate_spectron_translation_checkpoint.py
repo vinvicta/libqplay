@@ -99,6 +99,8 @@ def main() -> None:
     parser.add_argument("--script-scheduler-verification", type=Path)
     parser.add_argument("--event-object-anchors", type=Path)
     parser.add_argument("--event-object-verification", type=Path)
+    parser.add_argument("--script-action-anchors", type=Path)
+    parser.add_argument("--script-action-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1146,6 +1148,34 @@ def main() -> None:
         result["event_object_anchors"] = event_object
         result["interpretation"].append(
             "The thirty-seventh database revision also contains the separately reviewed event-object and catcher-list constructor, destructor, registration, and receive-path anchors."
+        )
+    script_action = None
+    if args.script_action_anchors or args.script_action_verification:
+        if not args.script_action_anchors or not args.script_action_verification:
+            raise ValueError(
+                "script-action anchors and script-action verification must be supplied together"
+            )
+        script_action_document = load(args.script_action_anchors)
+        script_action_verification = load(args.script_action_verification)
+        if script_action_document.get("artifact") != "spectron_script_action_manual_translation_anchors_20260826":
+            raise ValueError("unexpected script-action anchor artifact")
+        if not script_action_verification.get("verified"):
+            raise ValueError("script-action anchor reopen verification did not pass")
+        expected_script_action = len(script_action_document["anchors"])
+        if script_action_verification["verified_name_count"] != expected_script_action:
+            raise ValueError("script-action verification count differs from artifact")
+        script_action = {
+            "anchor_path": str(args.script_action_anchors),
+            "anchor_sha256": sha256_path(args.script_action_anchors),
+            "reopen_verification": str(args.script_action_verification),
+            "anchor_count": expected_script_action,
+            "verified_name_count": script_action_verification["verified_name_count"],
+            "reopen_failure_count": script_action_verification["failure_count"],
+        }
+    if script_action is not None:
+        result["script_action_anchors"] = script_action
+        result["interpretation"].append(
+            "The thirty-eighth database revision also contains the separately reviewed GS2 script-action constructor and destructor anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

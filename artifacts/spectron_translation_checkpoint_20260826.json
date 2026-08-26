@@ -77,8 +77,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v39.i64",
-    "sha256": "2a15e694bf0935c07ef45869388dcff311b61d5cef8e850ddd379e040ff2b016"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v40.i64",
+    "sha256": "6772706f004620089eb4def0d79bdebc77ce821e1340f92e798f7b0c1292d45d"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -166,7 +166,8 @@
     "The thirty-fourth database revision also contains the separately reviewed GS2 function-invocation, action-dispatch, caller-wake-up, and action-cleanup anchors.",
     "The thirty-fifth database revision also contains the separately reviewed GS2 script-state, top-level action, and incoming-event dispatch anchors.",
     "The thirty-sixth database revision also contains the separately reviewed GS2 scheduler, action-loop, event-object cleanup, and class-list replacement anchors.",
-    "The thirty-seventh database revision also contains the separately reviewed event-object and catcher-list constructor, destructor, registration, and receive-path anchors."
+    "The thirty-seventh database revision also contains the separately reviewed event-object and catcher-list constructor, destructor, registration, and receive-path anchors.",
+    "The thirty-eighth database revision also contains the separately reviewed GS2 script-action constructor and destructor anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -267,6 +268,14 @@
   },
   "schema_version": 1,
   "scope": "persisted high-confidence 1.8-to-Spectron ARM64 semantic labels",
+  "script_action_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "artifacts/spectron_script_action_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "fc81b6baca81bd282af4cd853aefa40fce797de047c0e85d9476a400cfc62139",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_script_action_verify_v40.json",
+    "verified_name_count": 2
+  },
   "script_bridge_anchors": {
     "anchor_count": 13,
     "anchor_path": "artifacts/spectron_script_bridge_manual_translation_anchors_20260826.json",

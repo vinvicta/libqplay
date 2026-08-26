@@ -1,0 +1,105 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both normalize the player: event prefix, retain the event and function names, look up the event index, clone the optional argument variable, and clear the two action flags.",
+        "Both preserve the 14-block constructor shape and the same field order. The target grows from 388 to 428 bytes around changed string and variable wrappers."
+      ],
+      "match_kind": "manual-script-action-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x227164",
+      "original_metrics": {
+        "basic_block_count": 14,
+        "instruction_count": 95,
+        "mnemonic_hash": "11186c8da5c903a18cf83b68138b3aa89ddcb4ec5e0054c959ad5c167a073afb",
+        "register_shape_hash": "e7e6cc81e84b4faf41505004e0fc6c261cdcfddc309ddf76b8d8f3b30f53bf6a",
+        "shape_hash": "353edf31cb6986a6bb5e55a332c822ccaef8e17fcb8aa808e64a6bc511882803",
+        "size": 388
+      },
+      "original_name": "TScriptAction_TScriptAction_TString_const_TString_const_TGraalVar",
+      "original_string_refs": [
+        "player:"
+      ],
+      "proposed_name": "v18_TScriptAction_TScriptAction_TString_const_TString_const_TGraalVar",
+      "semantic_match_already_present": false,
+      "source_basis": "script-action constructor",
+      "spectron_current_name": "_ZN10FOb5fbmyZ8C1ERK10C8THgaTQxFRK10CanTfaz6bZP10G0gxgajWBw",
+      "spectron_default_name": false,
+      "spectron_ea": "0x22fe78",
+      "spectron_metrics": {
+        "basic_block_count": 14,
+        "instruction_count": 106,
+        "mnemonic_hash": "abd7999f5bd77ed81312a6f1f83392cd535cbfc0c3578698c0f45a78ffb2eeed",
+        "register_shape_hash": "e0ae8f4ae3727ddf4fed891e1a776d658b9123ef531ad29a8898ad1f0e8dd8f8",
+        "shape_hash": "e6271001a6cf8bc6e68326bd1563996c6a22353c37bb68a0ccb74ebb52cad1e6",
+        "size": 428
+      },
+      "spectron_string_refs": [
+        "player:"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "IDA identifies both bodies as the complete C++ destructor through their alternative D2 ABI names.",
+        "Both release the optional cloned variable and clear the function name, event name, and normalized event string in the same order across four basic blocks."
+      ],
+      "match_kind": "manual-script-action-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x2272e8",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "instruction_count": 17,
+        "mnemonic_hash": "8e44faedbccea479710de5a99047a63a70116a4aa4f09cd93e38e28005da9e97",
+        "register_shape_hash": "55c9e7bec5be96b714a5580d1cf209f2bc0af4c5aeeadc67dcd5f84ee5aedc6b",
+        "shape_hash": "ec9e6bbcb1536404223666456111fc2b0aebc1752db0de098af4aef5109353fb",
+        "size": 68
+      },
+      "original_name": "TScriptAction_TScriptAction",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptAction_TScriptAction",
+      "semantic_match_already_present": false,
+      "source_basis": "script-action complete destructor",
+      "spectron_current_name": "_ZN10FOb5fbmyZ8D2Ev",
+      "spectron_default_name": false,
+      "spectron_ea": "0x230024",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "instruction_count": 19,
+        "mnemonic_hash": "02795a2f6a4d410cc59ad2a71d14ebcf49c14c3658ee49dc1c7628be33de613b",
+        "register_shape_hash": "579881144a68e287fcc14a8927e53c3502c0411a2ca2550d13665154a5a944c0",
+        "shape_hash": "f15ced3cb64dc7d3343892dbe139009f5c097572c4e17a861b8a0eefd38d6f2e",
+        "size": 76
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_script_action_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v3.json",
+    "spectron_features_sha256": "031afed73611783e0b16be71009e20118fc90a56e5d03e5ec04526f654f5cf27"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The changed-size constructor relies on class-local order, pseudocode behavior, target signatures, and field layout rather than byte identity."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for script-action construction and destruction",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 2,
+    "high_confidence_count": 2,
+    "new_context_anchor_count": 2,
+    "target_default_name_count": 0
+  }
+}
