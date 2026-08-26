@@ -16,23 +16,60 @@ the APK does not preserve their original source names.
 
 The public inventory is an earlier snapshot taken before the disposable IDA
 copy was persisted. It contains 11,272 functions and 1,645 default `sub_`
-names. After the callback, script-table, and role passes, the saved copy at
-`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_all_v2.i64` contains
-11,297 functions and 459 default names.
+names. After the callback, script-table, and role passes, the base saved copy
+at `/home/v/Desktop/graal-decomp/analysis/libqplay_translated_all_v2.i64`
+contained 11,297 functions and 459 default names. A follow-up CyaSSL alias
+pass was saved as `/home/v/Desktop/graal-decomp/analysis/libqplay_translated_all_v3.i64`;
+that latest copy contains 11,297 functions and 448 default names.
 
 The count is accounted for exactly:
 
 ```text
 488 pre-persistence unresolved entries
 - 28 applied application or engine role aliases
+- 11 applied CyaSSL static role aliases
 -  1 compiler branch veneer reclassified as a named thunk
-=459 residual default entries
+=448 residual default entries
 ```
 
-The 28 role aliases are behavior-based names, not recovered ELF source names.
+The 28 application and engine role aliases are behavior-based names, not
+recovered ELF source names. The CyaSSL pass adds seven high-confidence source
+role matches and four descriptive aliases for routines whose behavior is
+clear but whose exact source name is not preserved. The aliases are recorded
+in `artifacts/cyassl_static_role_audit_20260826.json`.
 The branch veneer at `0x1f94fc` was reclassified as
 `j_TCachedStream_get_minfilecachesize` when IDA rebuilt the saved copy. The
 active desktop IDA database remained locked and was not changed.
+
+## CyaSSL role pass
+
+The CyaSSL gap was worth a separate pass because these routines sit directly
+on the certificate and TLS paths that matter to the runtime diagnosis. The
+IDA decompilation identified the algorithm transforms, certificate-chain
+helpers, TLS PRF, record-MAC path, Finished-message calculation, and peer
+certificate parser. Seven names match recognizable historical CyaSSL roles;
+the other four are intentionally descriptive local aliases.
+
+| Address | Latest IDA alias | Confidence | Role |
+| --- | --- | --- | --- |
+| `0x2b6384` | `CyaInt_ConfirmSignature` | High | RSA certificate-signature verification |
+| `0x2bdc74` | `CyaInt_Md5Transform` | High | MD5 compression transform |
+| `0x2c0408` | `CyaInt_ShaTransform` | High | SHA-1 compression transform |
+| `0x2c2f1c` | `CyaInt_Sha256Transform` | High | SHA-256 compression transform |
+| `0x2c47e0` | `CyaInt_ProcessBuffer` | High | PEM or DER certificate and key buffer loading |
+| `0x2c50ac` | `CyaInt_ProcessVerifyPath` | Medium | Verification-store file and directory loading |
+| `0x2c6514` | `CyaInt_PRF` | High | TLS pseudo-random function |
+| `0x2c84bc` | `CyaInt_TLSRecordMac` | Medium | Legacy TLS record-MAC callback |
+| `0x2c8710` | `CyaInt_VerifyRecordMac` | Medium | TLS CBC padding and MAC verification |
+| `0x2c8a20` | `CyaInt_ComputeFinishedVerifyData` | Medium | TLS Finished verify-data calculation |
+| `0x2ca940` | `CyaInt_ProcessPeerCerts` | High | TLS Certificate-handshake chain parser |
+
+The names are analysis aliases, not a claim that those strings survived in
+the APK. The complete evidence, call sites, function sizes, source-role
+comparison links, and persisted database hash are in
+`artifacts/cyassl_static_role_audit_20260826.json`. The reusable IDA scripts
+are `tools/ida_apply_cyassl_static_aliases.py` and
+`tools/ida_verify_cyassl_static_aliases.py`.
 
 ## Categories
 
@@ -40,7 +77,6 @@ active desktop IDA database remained locked and was not changed.
 | --- | ---: | --- |
 | libjpeg static internals | 150 | Unnamed functions inside the bundled JPEG implementation |
 | FreeType static internals | 144 | Unnamed functions inside the bundled font implementation |
-| CyaSSL static internals | 11 | Unnamed certificate, crypto, and TLS helpers |
 | zlib static internals | 14 | Unnamed compression and checksum helpers |
 | bzip2 static internals | 4 | Unnamed decompression helpers |
 | General Polygon Clipper internals | 4 | Unnamed polygon clipping and allocation helpers |
@@ -53,7 +89,7 @@ active desktop IDA database remained locked and was not changed.
 | `TStringList` cleanup wrappers | 5 | Compiler-generated fixed-global destructor thunks |
 | `TGraalVar` cleanup wrappers | 2 | Compiler-generated fixed-global destructor thunks |
 | AArch64 PLT resolver | 1 | The resolver slot, not an imported application function |
-| **Total** | **459** | **All remaining default functions in the saved copy** |
+| **Total** | **448** | **All remaining default functions in the latest saved copy** |
 
 The largest groups are recognizable from their position between exported
 third-party routines, their call graph, and their strings. That proves a
@@ -64,10 +100,12 @@ to name.
 
 ## Machine-readable record
 
-`artifacts/ida_residual_profile.json` contains every one of the 459 residual
+`artifacts/ida_residual_profile.json` contains every one of the 448 residual
 addresses, sizes, current IDA names, segments, and family classifications. It
-also records the 28 removed role aliases, the reclassified branch veneer, the
-persisted database hash, and the evidence used for each category.
+also records the 28 application role aliases, the 11 CyaSSL aliases, the
+reclassified branch veneer, the latest persisted database hash, and the
+evidence used for each category. The eleven CyaSSL addresses are therefore
+not counted as residual defaults anymore.
 
 The earlier `artifacts/unresolved_function_profile.json` remains in the
 archive because it documents the pre-persistence 488-entry queue. The
@@ -81,8 +119,9 @@ Rebuild the final report offline with:
 python3 tools/generate_ida_residual_profile.py
 ```
 
-The generator reads only the public profile and role-candidate artifacts. It
-does not load the native library, execute APK code, or contact a network.
+The generator reads only the public profile, role-candidate artifact, and
+CyaSSL role audit. It does not load the native library, execute APK code, or
+contact a network.
 
 ## Cross-ABI check
 
@@ -99,14 +138,15 @@ already have their ARM64 counterparts named in the main export inventory.
 This check provides negative evidence only. The other ABI layouts are
 different, so their addresses cannot be copied into the ARM64 IDA database.
 It does, however, rule out the simplest path to recovering additional names
-for the 459 residual entries.
+for the 448 residual entries.
 
 ## Practical conclusion
 
-There are no remaining application or engine entries in the residual queue.
-All of those 28 functions have evidence-backed role aliases in the persisted
-copy. The 459 remaining defaults are compiler-generated lifecycle code,
-library internals, cleanup thunks, or the PLT resolver. Assigning names such as
+There are no remaining application, engine, or CyaSSL certificate and TLS
+roles in the residual queue. The 28 application roles and all eleven CyaSSL
+roles have evidence-backed aliases in the latest persisted copy. The 448
+remaining defaults are compiler-generated lifecycle code, other library
+internals, cleanup thunks, or the PLT resolver. Assigning names such as
 `jpeg_internal_17` would make the IDA view look fuller but would not be a
 translation of a source symbol. They remain explicitly classified and
 addressable instead.

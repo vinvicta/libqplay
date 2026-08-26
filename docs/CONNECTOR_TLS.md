@@ -54,6 +54,16 @@ The trust-buffer loader also reaches `ParseCertRelative` through
 the decompilation-derived date mapping are in
 `artifacts/connector_tls_parser_analysis_20260826.json`.
 
+The surrounding static CyaSSL helpers are now mapped in the separate IDA
+role audit. `CyaInt_ConfirmSignature` at `0x2b6384` is the RSA certificate
+signature verifier. `CyaInt_ProcessBuffer` at `0x2c47e0` handles PEM or DER
+certificate and key buffers, and `CyaInt_ProcessPeerCerts` at `0x2ca940`
+handles the peer Certificate message during the handshake. The TLS PRF and
+record paths are labeled `CyaInt_PRF`, `CyaInt_TLSRecordMac`, and
+`CyaInt_VerifyRecordMac`. These are analysis aliases, with four of the eleven
+marked descriptive rather than exact source-name matches. The full call-site
+evidence is in `artifacts/cyassl_static_role_audit_20260826.json`.
+
 ## Local validity control
 
 The paired control used identical ARM64 native code, hostname routing, port,

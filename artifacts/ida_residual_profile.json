@@ -145,6 +145,78 @@
     ],
     "source": "artifacts/unresolved_function_candidates.json"
   },
+  "applied_static_role_aliases": {
+    "count": 11,
+    "entries": [
+      {
+        "confidence": "high",
+        "ea": "0x2b6384",
+        "proposed_name": "CyaInt_ConfirmSignature",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x2bdc74",
+        "proposed_name": "CyaInt_Md5Transform",
+        "source_match": "exact-algorithm-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x2c0408",
+        "proposed_name": "CyaInt_ShaTransform",
+        "source_match": "exact-algorithm-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x2c2f1c",
+        "proposed_name": "CyaInt_Sha256Transform",
+        "source_match": "exact-algorithm-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x2c47e0",
+        "proposed_name": "CyaInt_ProcessBuffer",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "medium",
+        "ea": "0x2c50ac",
+        "proposed_name": "CyaInt_ProcessVerifyPath",
+        "source_match": "descriptive-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x2c6514",
+        "proposed_name": "CyaInt_PRF",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "medium",
+        "ea": "0x2c84bc",
+        "proposed_name": "CyaInt_TLSRecordMac",
+        "source_match": "descriptive-role"
+      },
+      {
+        "confidence": "medium",
+        "ea": "0x2c8710",
+        "proposed_name": "CyaInt_VerifyRecordMac",
+        "source_match": "descriptive-role"
+      },
+      {
+        "confidence": "medium",
+        "ea": "0x2c8a20",
+        "proposed_name": "CyaInt_ComputeFinishedVerifyData",
+        "source_match": "descriptive-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x2ca940",
+        "proposed_name": "CyaInt_ProcessPeerCerts",
+        "source_match": "exact-source-role"
+      }
+    ],
+    "source": "artifacts/cyassl_static_role_audit_20260826.json"
+  },
   "artifact": "ida_persisted_residual_profile",
   "binary": "private original ARM64 libqplay.so",
   "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
@@ -183,90 +255,6 @@
         }
       ],
       "total_bytes": 23524
-    },
-    {
-      "category": "cyassl_static_internal",
-      "count": 11,
-      "entries": [
-        {
-          "category": "cyassl_static_internal",
-          "current_ida_name": "sub_2B6384",
-          "ea": "0x2b6384",
-          "segment": ".text",
-          "size": 628
-        },
-        {
-          "category": "cyassl_static_internal",
-          "current_ida_name": "sub_2BDC74",
-          "ea": "0x2bdc74",
-          "segment": ".text",
-          "size": 2648
-        },
-        {
-          "category": "cyassl_static_internal",
-          "current_ida_name": "sub_2C0408",
-          "ea": "0x2c0408",
-          "segment": ".text",
-          "size": 4656
-        },
-        {
-          "category": "cyassl_static_internal",
-          "current_ida_name": "sub_2C2F1C",
-          "ea": "0x2c2f1c",
-          "segment": ".text",
-          "size": 1160
-        },
-        {
-          "category": "cyassl_static_internal",
-          "current_ida_name": "sub_2C47E0",
-          "ea": "0x2c47e0",
-          "segment": ".text",
-          "size": 1364
-        },
-        {
-          "category": "cyassl_static_internal",
-          "current_ida_name": "sub_2C50AC",
-          "ea": "0x2c50ac",
-          "segment": ".text",
-          "size": 352
-        },
-        {
-          "category": "cyassl_static_internal",
-          "current_ida_name": "sub_2C6514",
-          "ea": "0x2c6514",
-          "segment": ".text",
-          "size": 2616
-        },
-        {
-          "category": "cyassl_static_internal",
-          "current_ida_name": "sub_2C84BC",
-          "ea": "0x2c84bc",
-          "segment": ".text",
-          "size": 596
-        },
-        {
-          "category": "cyassl_static_internal",
-          "current_ida_name": "sub_2C8710",
-          "ea": "0x2c8710",
-          "segment": ".text",
-          "size": 672
-        },
-        {
-          "category": "cyassl_static_internal",
-          "current_ida_name": "sub_2C8A20",
-          "ea": "0x2c8a20",
-          "segment": ".text",
-          "size": 612
-        },
-        {
-          "category": "cyassl_static_internal",
-          "current_ida_name": "sub_2CA940",
-          "ea": "0x2ca940",
-          "segment": ".text",
-          "size": 1776
-        }
-      ],
-      "total_bytes": 17080
     },
     {
       "category": "freetype_static_internal",
@@ -3478,14 +3466,6 @@
       "total_bytes": 23524
     },
     {
-      "category": "cyassl_static_internal",
-      "count": 11,
-      "evidence": "The entries are inside the CyaSSL certificate, crypto, and TLS implementation region.",
-      "first_ea": "0x2b6384",
-      "last_ea": "0x2ca940",
-      "total_bytes": 17080
-    },
-    {
       "category": "freetype_static_internal",
       "count": 144,
       "evidence": "The region is bracketed by the archive I/O helpers and the FreeType to bzip2 transition.",
@@ -3591,12 +3571,12 @@
     }
   ],
   "database": {
-    "close_reopen_verified": true,
-    "default_sub_function_count": 459,
+    "close_reopen_verified": false,
+    "default_sub_function_count": 448,
     "format": "packed IDA 9.3 database",
     "function_count": 11297,
-    "path": "analysis/libqplay_translated_all_v2.i64",
-    "sha256": "0306a53f164fc9f860f24eb248039a94172959053daa6464d4a1effe35026a89"
+    "path": "analysis/libqplay_translated_all_v3.i64",
+    "sha256": "1db52b8b2169250852fcd1a5a2acfda859b81038e92b47158029ecc886356874"
   },
   "ida_reclassified_functions": [
     {
@@ -3612,7 +3592,7 @@
     "unresolved_default_sub_function_count": 488
   },
   "purpose": "Account for every default sub_ function left in the persisted IDA translation copy without inventing source names.",
-  "remaining_default_sub_function_count": 459,
+  "remaining_default_sub_function_count": 448,
   "residual_default_sub_functions": [
     {
       "category": "plt0_resolver",
@@ -6749,89 +6729,13 @@
       "ea": "0x2b3c64",
       "segment": ".text",
       "size": 1820
-    },
-    {
-      "category": "cyassl_static_internal",
-      "current_ida_name": "sub_2B6384",
-      "ea": "0x2b6384",
-      "segment": ".text",
-      "size": 628
-    },
-    {
-      "category": "cyassl_static_internal",
-      "current_ida_name": "sub_2BDC74",
-      "ea": "0x2bdc74",
-      "segment": ".text",
-      "size": 2648
-    },
-    {
-      "category": "cyassl_static_internal",
-      "current_ida_name": "sub_2C0408",
-      "ea": "0x2c0408",
-      "segment": ".text",
-      "size": 4656
-    },
-    {
-      "category": "cyassl_static_internal",
-      "current_ida_name": "sub_2C2F1C",
-      "ea": "0x2c2f1c",
-      "segment": ".text",
-      "size": 1160
-    },
-    {
-      "category": "cyassl_static_internal",
-      "current_ida_name": "sub_2C47E0",
-      "ea": "0x2c47e0",
-      "segment": ".text",
-      "size": 1364
-    },
-    {
-      "category": "cyassl_static_internal",
-      "current_ida_name": "sub_2C50AC",
-      "ea": "0x2c50ac",
-      "segment": ".text",
-      "size": 352
-    },
-    {
-      "category": "cyassl_static_internal",
-      "current_ida_name": "sub_2C6514",
-      "ea": "0x2c6514",
-      "segment": ".text",
-      "size": 2616
-    },
-    {
-      "category": "cyassl_static_internal",
-      "current_ida_name": "sub_2C84BC",
-      "ea": "0x2c84bc",
-      "segment": ".text",
-      "size": 596
-    },
-    {
-      "category": "cyassl_static_internal",
-      "current_ida_name": "sub_2C8710",
-      "ea": "0x2c8710",
-      "segment": ".text",
-      "size": 672
-    },
-    {
-      "category": "cyassl_static_internal",
-      "current_ida_name": "sub_2C8A20",
-      "ea": "0x2c8a20",
-      "segment": ".text",
-      "size": 612
-    },
-    {
-      "category": "cyassl_static_internal",
-      "current_ida_name": "sub_2CA940",
-      "ea": "0x2ca940",
-      "segment": ".text",
-      "size": 1776
     }
   ],
   "schema_version": 1,
   "source_artifacts": {
     "profile": "artifacts/unresolved_function_profile.json",
     "role_candidates": "artifacts/unresolved_function_candidates.json",
+    "static_role_aliases": "artifacts/cyassl_static_role_audit_20260826.json",
     "validation": "artifacts/ida_translation_validation.json"
   },
   "translation_limit": "These entries are IDA-created functions with no surviving source name in the APK. Library-family evidence is recorded where available, but family membership is not converted into a guessed source symbol."

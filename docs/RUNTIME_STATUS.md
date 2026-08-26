@@ -402,6 +402,15 @@ This is the short handoff view. The full reasoning and command history are in
     pairs the stale-trust result with the independent loading-state result.
     The complete comparison is in
     `artifacts/arm64_native_verification_working_control_20260826.json`.
+58. A separate IDA 9.3 pass resolved all eleven unnamed functions in the
+    CyaSSL and bundled-crypto gap. The aliases cover RSA certificate-signature
+    verification, MD5, SHA-1, and SHA-256 transforms, PEM or DER buffer
+    loading, the TLS PRF, record-MAC handling, Finished verify-data, and peer
+    certificate parsing. Seven are high-confidence historical source-role
+    matches and four are descriptive aliases. A clean reopen verified all
+    eleven names and reduced the latest disposable copy from 459 to 448
+    default `sub_` functions. The full evidence and database hash are in
+    `artifacts/cyassl_static_role_audit_20260826.json`.
 
 ## Not verified
 
@@ -414,9 +423,9 @@ This is the short handoff view. The full reasoning and command history are in
   transition on a physical ARM64 device. The embedded marker statically
   decodes to `classic`, and the ordinary translated ARM64 run remains on the
   title or loading image, while both diagnostics display the world.
-* Whether the expanded callback labels should be persisted into the active
-  desktop IDA database. The disposable-copy IDALIB validation passed, but the
-  active unpacked database remained locked during this pass.
+* Whether any of the expanded callback or CyaSSL aliases should be persisted
+  into the active desktop IDA database. The disposable-copy IDALIB validations
+  passed, but the active unpacked database remained locked during these passes.
 * Whether an unmodified x86_64 build clears its loading state without the
   getter override present in several historical diagnostic APKs.
 * Whether the live server sends the same completion sequence as the local

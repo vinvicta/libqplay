@@ -26,6 +26,7 @@ def main():
     script_tables = load_json("artifacts/script_table_inventory.json")
     ida_validation = load_json("artifacts/ida_translation_validation.json")
     ida_residual = load_json("artifacts/ida_residual_profile.json")
+    cyassl_roles = load_json("artifacts/cyassl_static_role_audit_20260826.json")
     arm64_revalidation = load_json(
         "artifacts/arm64_diagnostic_apk_revalidation_20260825.json"
     )
@@ -381,18 +382,23 @@ def main():
     check(
         "IDA residual database hash",
         ida_residual["database"]["sha256"],
-        "0306a53f164fc9f860f24eb248039a94172959053daa6464d4a1effe35026a89",
+        "1db52b8b2169250852fcd1a5a2acfda859b81038e92b47158029ecc886356874",
+    )
+    check(
+        "IDA residual database path",
+        ida_residual["database"]["path"],
+        "analysis/libqplay_translated_all_v3.i64",
     )
     check("IDA residual function total", ida_residual["database"]["function_count"], 11297)
     check(
         "IDA residual default total",
         ida_residual["remaining_default_sub_function_count"],
-        459,
+        448,
     )
     check(
         "IDA residual entry total",
         len(ida_residual["residual_default_sub_functions"]),
-        459,
+        448,
     )
     check(
         "IDA residual role removal total",
@@ -400,9 +406,14 @@ def main():
         28,
     )
     check(
+        "IDA residual static CyaSSL alias total",
+        ida_residual["applied_static_role_aliases"]["count"],
+        11,
+    )
+    check(
         "IDA residual category partition",
         sum(item["count"] for item in ida_residual["category_summary"]),
-        459,
+        448,
     )
     check(
         "IDA residual category names",
@@ -411,7 +422,39 @@ def main():
         set(),
     )
     residual_addresses = [item["ea"] for item in ida_residual["residual_default_sub_functions"]]
-    check("IDA residual address uniqueness", len(set(residual_addresses)), 459)
+    check("IDA residual address uniqueness", len(set(residual_addresses)), 448)
+
+    check(
+        "CyaSSL static role artifact",
+        cyassl_roles["artifact"],
+        "cyassl_static_role_audit_20260826",
+    )
+    check("CyaSSL static role status", cyassl_roles["status"], "aliases_applied_to_persisted_copy")
+    check("CyaSSL static role network", cyassl_roles["network_contacted"], False)
+    check("CyaSSL static role input hash", cyassl_roles["binary_sha256"], primary_hash)
+    check("CyaSSL static role count", cyassl_roles["alias_count"], 11)
+    check("CyaSSL static role high-confidence count", cyassl_roles["confidence_counts"]["high"], 7)
+    check("CyaSSL static role medium-confidence count", cyassl_roles["confidence_counts"]["medium"], 4)
+    check("CyaSSL static role database path", cyassl_roles["database"]["path"], "analysis/libqplay_translated_all_v3.i64")
+    check(
+        "CyaSSL static role database hash",
+        cyassl_roles["database"]["sha256"],
+        "1db52b8b2169250852fcd1a5a2acfda859b81038e92b47158029ecc886356874",
+    )
+    check("CyaSSL static role database inventory hash", cyassl_roles["database"]["inventory_sha256"], "e6045dc5b63f215c51e13ec3b62472ee415dee87533e225ced04812439959a87")
+    check("CyaSSL static role function total", cyassl_roles["database"]["function_count"], 11297)
+    check("CyaSSL static role defaults before", cyassl_roles["database"]["default_sub_function_count_before"], 459)
+    check("CyaSSL static role defaults after", cyassl_roles["database"]["default_sub_function_count_after"], 448)
+    check("CyaSSL static role verification names", cyassl_roles["database"]["verified_name_count"], 11)
+    check("CyaSSL static role verification failures", cyassl_roles["database"]["verification_failures"], 0)
+    check("CyaSSL static role application renamed", cyassl_roles["application"]["renamed_count"], 11)
+    check("CyaSSL static role application comments", cyassl_roles["application"]["comments_added"], 11)
+    check("CyaSSL static role application failures", cyassl_roles["application"]["failure_count"], 0)
+    check("CyaSSL static role verification status", cyassl_roles["verification"]["status"], "ok")
+    check("CyaSSL static role verification report names", cyassl_roles["verification"]["verified_name_count"], 11)
+    check("CyaSSL static role verification report failures", cyassl_roles["verification"]["failure_count"], 0)
+    alias_addresses = [item["va"] for item in cyassl_roles["aliases"]]
+    check("CyaSSL static role address uniqueness", len(set(alias_addresses)), 11)
 
     check(
         "ARM64 revalidation artifact",

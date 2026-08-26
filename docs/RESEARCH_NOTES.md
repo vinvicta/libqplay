@@ -1660,8 +1660,8 @@ translated disposable database. The original pre-persistence queue contained
 488 default `sub_` entries. The 28 high-confidence application or engine role
 aliases were applied and verified, and IDA reclassified the four-byte branch
 veneer at `0x1f94fc` as the named thunk
-`j_TCachedStream_get_minfilecachesize`. The persisted copy therefore contains
-11,297 function starts and 459 default names.
+`j_TCachedStream_get_minfilecachesize`. The base persisted copy therefore
+contains 11,297 function starts and 459 default names.
 
 The final 459 are fully categorized: 335 bundled-library internals, 19 ELF
 initialization or finalization entries, 104 fixed-global cleanup wrappers, and
@@ -1684,6 +1684,78 @@ database hash, and this accounting are in
 `artifacts/ida_residual_profile.json`. The generator is
 `tools/generate_ida_residual_profile.py`; it reads only repository JSON and
 does not execute the native library or access a network.
+
+## CyaSSL static role audit
+
+The 11 CyaSSL entries in the base residual list were the next useful target.
+They sit in the certificate and TLS implementation between recognizable
+exported CyaSSL routines, so their callers and decompiled bodies give much
+more information than a bare library-family label. I reviewed all eleven in a
+clean IDA 9.3 IDALIB process before changing any names.
+
+The strongest match is `0x2b6384`. It selects MD5, SHA-1, or SHA-256 from the
+certificate algorithm, checks the RSA key identifier, decodes the public key,
+calls `RsaSSL_VerifyInline`, builds the expected encoded digest, and compares
+the result. That is the old CyaSSL `ConfirmSignature` role. The historical
+[CyaSSL ASN.1 implementation](https://nest-open-source.googlesource.com/nest-yale-lock/1.2/freertos/%2B/b9a7305351d35e2d3076d0b4ab3ec121f0aa8d52/FreeRTOS-Plus/Source/CyaSSL/ctaocrypt/src/asn.c)
+provides a useful source-level comparison for that sequence.
+
+The next three bodies are the bundled digest compression transforms:
+
+| Address | Alias | Evidence |
+| --- | --- | --- |
+| `0x2bdc74` | `CyaInt_Md5Transform` | 64 MD5 rounds and four-word state, called by the MD5 update and final paths |
+| `0x2c0408` | `CyaInt_ShaTransform` | 80 SHA-1 rounds and five-word state, called by the SHA-1 update and final paths |
+| `0x2c2f1c` | `CyaInt_Sha256Transform` | 64 SHA-256 rounds with the eight-word state and ARM NEON operations |
+
+The certificate-loading pair is also clear. `0x2c47e0` repeatedly calls
+`CyaInt_PemToDer`, handles more than one PEM certificate, builds the native
+three-byte-length chain representation, calls `CyaInt_AddCA`, and decodes RSA
+private keys. It is labeled `CyaInt_ProcessBuffer`, matching the historical
+CyaSSL buffer-processor role. `0x2c50ac` is a smaller path helper that calls
+`CyaInt_ProcessFile` for a named file or walks a directory with `opendir`,
+`readdir`, and `stat`. Its exact original source name is not claimed, so the
+local alias is `CyaInt_ProcessVerifyPath` with medium confidence. The old
+[ProcessBuffer history](https://code.brunner.ninja/wolfSSL/wolfssl/commit/c3c341913838ebcd3178977630772bdde4908211)
+was used as a role comparison, not as proof that this APK was built from that
+exact revision.
+
+The TLS key schedule exposes the next group. `0x2c6514` performs the repeated
+HMAC expansion and legacy MD5 plus SHA-1 XOR path, while its callers use the
+client and server Finished labels as well as the master-secret and key-block
+inputs. It is labeled `CyaInt_PRF`, matching the historical CyaSSL `PRF`
+role. The current [wolfSSL TLS source](https://code.brunner.ninja/wolfSSL/wolfssl/blame/commit/ef72bae2ffe1a6b0ab7397488d0544a850ed3608/src/tls.c)
+was useful for comparing the TLS 1.2 and legacy branches.
+
+The remaining four aliases are deliberately descriptive. `0x2c84bc` is the
+record-MAC callback stored by `CyaInt_InitSSL` at context offset 1128;
+`0x2c8710` checks CBC padding and invokes that callback; and `0x2c8a20`
+computes Finished verify-data from the accumulated MD5 and SHA-1 states, using
+`CyaInt_BuildTlsFinished` for TLS 1.2. They are labeled
+`CyaInt_TLSRecordMac`, `CyaInt_VerifyRecordMac`, and
+`CyaInt_ComputeFinishedVerifyData`. The peer certificate parser at `0x2ca940`
+reads the three-byte certificate list, parses each chain member, checks signer
+relationships, and stores the peer RSA state. It is labeled
+`CyaInt_ProcessPeerCerts`, matching the historical role name. The current
+[wolfSSL internal source](https://os.mbed.com/users/wolfSSL/code/wolfSSL/docs/tip/internal_8c_source.html)
+and [TLS source](https://os.mbed.com/users/wolfSSL/code/wolfSSL/docs/tip/tls_8c_source.html)
+were used to compare these helper roles, while the medium-confidence names
+remain explicitly local aliases.
+
+The aliases were applied to a new disposable packed IDA copy, not to the
+active desktop database. The application report resolved and renamed all 11
+entries and added 11 evidence comments with zero failures. A separate clean
+reopen found all eleven names at their expected function starts, retained
+11,297 total functions, and reduced the default-name count from 459 to 448.
+The latest database hash is
+`1db52b8b2169250852fcd1a5a2acfda859b81038e92b47158029ecc886356874`, and the
+exported inventory hash is
+`e6045dc5b63f215c51e13ec3b62472ee415dee87533e225ced04812439959a87`.
+The machine-readable record is
+`artifacts/cyassl_static_role_audit_20260826.json`; the reusable scripts are
+`tools/generate_cyassl_static_role_audit.py`,
+`tools/ida_apply_cyassl_static_aliases.py`, and
+`tools/ida_verify_cyassl_static_aliases.py`.
 
 ## Fresh HexaParser rerun
 

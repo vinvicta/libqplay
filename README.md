@@ -177,6 +177,15 @@ the same IDA artifact. Exporting that saved copy produced a private inventory
 with 8,096 ELF-backed functions, 2,742 named non-ELF functions, and 459
 remaining defaults.
 
+A follow-up static CyaSSL pass applied eleven additional behavior aliases to a
+new packed copy at
+`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_all_v3.i64`. A
+clean reopen verified all eleven names, 11,297 functions, and 448 remaining
+default `sub_` entries. Seven aliases match recognizable historical CyaSSL
+roles, while four are deliberately descriptive local names. The copy remains
+outside the public repository; the evidence and hash are in
+`artifacts/cyassl_static_role_audit_20260826.json`.
+
 I also made a second local handoff copy directly from the active desktop IDA
 snapshot. The source snapshot hash is
 `56da88101fe904ca298dcadf31e90433a69c43818c681ccb72364c66ac99eaa4`, and the
@@ -310,9 +319,13 @@ proves the local native TLS path, not a current live certificate or service.
   wrappers, init/fini array entries, a compiler branch veneer, the PLT resolver
   slot, and the 28 application or engine entries that were later given role
   aliases.
-* `artifacts/ida_residual_profile.json` accounts for the final 459 default
-  `sub_` entries in the persisted 11,297-function IDA copy. It records every
-  residual address and explains why no source name is claimed for it.
+* `artifacts/ida_residual_profile.json` accounts for the 448-entry latest
+  residual queue after the CyaSSL pass and records the earlier 459-entry base
+  count through its applied-alias accounting. It records every latest residual
+  address and explains why no source name is claimed for it.
+* `artifacts/cyassl_static_role_audit_20260826.json` records eleven static
+  CyaSSL and bundled-crypto role aliases, their IDA evidence, source-role
+  comparison links, and the verified latest database hash.
 * `artifacts/ida_semantic_labels.json` records 467 evidence-backed names
   applied to formerly unnamed login, file-download, handler-table, UI, TLS,
   HTTP, socket, animation, sound, network-thread, update-package, and JNI
@@ -363,8 +376,12 @@ proves the local native TLS path, not a current live certificate or service.
 * `tools/generate_unresolved_function_candidates.py` rebuilds that candidate
   artifact, while `tools/ida_apply_unresolved_function_candidates.py` provides
   a review-only IDA applier.
-* `tools/generate_ida_residual_profile.py` derives the exact 459-entry
-  residual report after the role aliases and IDA thunk reclassification.
+* `tools/generate_ida_residual_profile.py` derives the exact 448-entry latest
+  residual report from the base 459-entry report and the CyaSSL role audit.
+* `tools/generate_cyassl_static_role_audit.py` rebuilds the offline CyaSSL role
+  map, while `tools/ida_apply_cyassl_static_aliases.py` and
+  `tools/ida_verify_cyassl_static_aliases.py` apply and verify the separate
+  disposable-copy pass.
 * `tools/validate_research_archive.py` checks the published count partitions,
   input hashes, candidate coverage, and offline-only markers without needing
   IDA or a network connection.
