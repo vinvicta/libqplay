@@ -57,6 +57,8 @@ def main() -> None:
     parser.add_argument("--lookup-helper-verification", type=Path)
     parser.add_argument("--connection-helper-anchors", type=Path)
     parser.add_argument("--connection-helper-verification", type=Path)
+    parser.add_argument("--client-state-helper-anchors", type=Path)
+    parser.add_argument("--client-state-helper-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -516,6 +518,34 @@ def main() -> None:
         result["connection_helper_anchors"] = connection_helper
         result["interpretation"].append(
             "The sixteenth database revision also contains the separately reviewed connection, packet-state, SSL, and low-level field anchors."
+        )
+    client_state_helper = None
+    if args.client_state_helper_anchors or args.client_state_helper_verification:
+        if not args.client_state_helper_anchors or not args.client_state_helper_verification:
+            raise ValueError(
+                "client-state-helper anchors and client-state-helper verification must be supplied together"
+            )
+        client_state_helper_document = load(args.client_state_helper_anchors)
+        client_state_helper_verification = load(args.client_state_helper_verification)
+        if client_state_helper_document.get("artifact") != "spectron_client_state_helper_manual_translation_anchors_20260826":
+            raise ValueError("unexpected client-state-helper anchor artifact")
+        if not client_state_helper_verification.get("verified"):
+            raise ValueError("client-state-helper anchor reopen verification did not pass")
+        expected_client_state_helper = len(client_state_helper_document["anchors"])
+        if client_state_helper_verification["verified_name_count"] != expected_client_state_helper:
+            raise ValueError("client-state-helper verification count differs from artifact")
+        client_state_helper = {
+            "anchor_path": str(args.client_state_helper_anchors),
+            "anchor_sha256": sha256_path(args.client_state_helper_anchors),
+            "reopen_verification": str(args.client_state_helper_verification),
+            "anchor_count": expected_client_state_helper,
+            "verified_name_count": client_state_helper_verification["verified_name_count"],
+            "reopen_failure_count": client_state_helper_verification["failure_count"],
+        }
+    if client_state_helper is not None:
+        result["client_state_helper_anchors"] = client_state_helper
+        result["interpretation"].append(
+            "The seventeenth database revision also contains the separately reviewed compact client state and forwarding anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
