@@ -1,5 +1,13 @@
 {
   "artifact": "spectron_translation_checkpoint_20260826",
+  "client_action_anchors": {
+    "anchor_count": 11,
+    "anchor_path": "artifacts/spectron_client_action_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "e133f3132ec97ae043d26facfbaf910633fbacc84171cb65f318adb9dccb457c",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_client_action_anchor_verification_20260826.json",
+    "verified_name_count": 11
+  },
   "core_anchors": {
     "anchor_count": 16,
     "anchor_path": "artifacts/spectron_core_manual_translation_anchors_20260826.json",
@@ -13,8 +21,8 @@
     "default_sub_function_count": 1843,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v6.i64",
-    "sha256": "a8b96aeb48438b222828348b990ee944252e14c02763bfe097d63dc8bab4bbe3"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v7.i64",
+    "sha256": "dff0fadfadfbbd4cb815b013ad589965545acb6b521518af091b61e89b266a64"
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
@@ -31,7 +39,8 @@
     "The third database revision also contains the separately reviewed connector and socket context anchors.",
     "The fourth database revision also contains the separately reviewed resource, rendering, GUI, scripting, and client context anchors.",
     "The fifth database revision also contains the separately reviewed map-entry, file-delivery, script, text-control, and server-list context anchors.",
-    "The sixth database revision also contains the separately reviewed download-queue, update-request, server-modify, and image-checksum context anchors."
+    "The sixth database revision also contains the separately reviewed download-queue, update-request, server-modify, and image-checksum context anchors.",
+    "The seventh database revision also contains the separately reviewed client action packet serializer anchors."
   ],
   "manual_anchors": {
     "anchor_count": 4,

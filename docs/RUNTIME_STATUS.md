@@ -500,6 +500,13 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_update_protocol_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+68. Clean IDA review added 11 high-confidence client-action anchors for
+    level-warp timing, board edits, bombs, triggers, projectiles, shots,
+    damage, explosions, and four-string text packets. All 11 names reopened
+    successfully in the v7 disposable copy. See
+    `artifacts/spectron_client_action_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

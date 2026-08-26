@@ -37,6 +37,8 @@ def main() -> None:
     parser.add_argument("--runtime-path-verification", type=Path)
     parser.add_argument("--update-protocol-anchors", type=Path)
     parser.add_argument("--update-protocol-verification", type=Path)
+    parser.add_argument("--client-action-anchors", type=Path)
+    parser.add_argument("--client-action-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -216,6 +218,34 @@ def main() -> None:
         result["update_protocol_anchors"] = update_protocol
         result["interpretation"].append(
             "The sixth database revision also contains the separately reviewed download-queue, update-request, server-modify, and image-checksum context anchors."
+        )
+    client_action = None
+    if args.client_action_anchors or args.client_action_verification:
+        if not args.client_action_anchors or not args.client_action_verification:
+            raise ValueError(
+                "client-action anchors and client-action verification must be supplied together"
+            )
+        client_action_document = load(args.client_action_anchors)
+        client_action_verification = load(args.client_action_verification)
+        if client_action_document.get("artifact") != "spectron_client_action_manual_translation_anchors_20260826":
+            raise ValueError("unexpected client-action anchor artifact")
+        if not client_action_verification.get("verified"):
+            raise ValueError("client-action anchor reopen verification did not pass")
+        expected_client_action = len(client_action_document["anchors"])
+        if client_action_verification["verified_name_count"] != expected_client_action:
+            raise ValueError("client-action verification count differs from artifact")
+        client_action = {
+            "anchor_path": str(args.client_action_anchors),
+            "anchor_sha256": sha256_path(args.client_action_anchors),
+            "reopen_verification": str(args.client_action_verification),
+            "anchor_count": expected_client_action,
+            "verified_name_count": client_action_verification["verified_name_count"],
+            "reopen_failure_count": client_action_verification["failure_count"],
+        }
+    if client_action is not None:
+        result["client_action_anchors"] = client_action
+        result["interpretation"].append(
+            "The seventh database revision also contains the separately reviewed client action packet serializer anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
