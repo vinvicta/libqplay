@@ -186,10 +186,13 @@ proves the local native TLS path, not a current live certificate or service.
   calls, 1,455 declared property and function records, and 1,779 unique
   callback targets. It separates 886 exact bounded rename candidates from
   20 exact callback pointers whose IDA boundaries are missing. All 906 new
-  targets have recovered script names.
+  targets have recovered script names, and the 20 missing boundaries have
+  matching ELF `.eh_frame` ranges.
 * `tools/generate_script_table_inventory.py` rebuilds that inventory offline;
   `tools/ida_apply_script_table_inventory.py` creates a review-only IDA rename
-  plan for the exact bounded subset.
+  plan for the exact bounded subset, while
+  `tools/ida_apply_script_table_boundaries.py` handles the 20
+  `.eh_frame`-backed boundaries separately.
 * `artifacts/inbound_handler_table.json` records the native handler-index table,
   its current function targets, and the observed packet-to-index pairs.
 * `artifacts/premium_option.json` records the complete marker bytes and the

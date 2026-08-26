@@ -279,7 +279,9 @@ non-default IDA names, 886 exact new names with saved function boundaries, and
 zero-byte encoding behavior, so all 1,455 static record names are recovered
 exactly. The exact bounded set has a review-only IDA applier in
 `tools/ida_apply_script_table_inventory.py`; it is not enabled while the IDA
-bridge is unavailable.
+bridge is unavailable. Each missing boundary has a matching ELF `.eh_frame`
+range, and `tools/ida_apply_script_table_boundaries.py` provides a separate
+review-only boundary and rename pass for those 20 callbacks.
 
 When the IDA bridge is available, run
 `tools/ida_apply_native_callback_candidates.py` in review mode first. It

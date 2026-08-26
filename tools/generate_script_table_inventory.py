@@ -15,7 +15,9 @@ import csv
 import hashlib
 import json
 import pathlib
+import re
 import struct
+import subprocess
 from collections import defaultdict
 
 
@@ -192,6 +194,35 @@ def load_functions(inventory_path: pathlib.Path) -> list[dict]:
     )
 
 
+def load_unwind_ranges(binary_path: pathlib.Path) -> dict[int, dict[str, str]]:
+    """Read code ranges emitted as FDEs in the ELF .eh_frame section."""
+
+    try:
+        output = subprocess.run(
+            ["readelf", "--debug-dump=frames", "--wide", str(binary_path)],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout
+    except (OSError, subprocess.CalledProcessError):
+        return {}
+
+    ranges = {}
+    for line in output.splitlines():
+        match = re.search(r"pc=([0-9a-f]+)\.\.([0-9a-f]+)", line)
+        if not match:
+            continue
+        start = int(match.group(1), 16)
+        end = int(match.group(2), 16)
+        if end > start:
+            ranges[start] = {
+                "start_va": f"0x{start:x}",
+                "end_va": f"0x{end:x}",
+                "source": "ELF .eh_frame FDE",
+            }
+    return ranges
+
+
 def containing_function(functions: list[dict], address: int) -> dict | None:
     match = None
     for function in functions:
@@ -280,6 +311,7 @@ def coverage_for_target(
     functions_by_ea: dict[int, dict],
     semantic_by_va: dict[int, dict],
     candidate_by_va: dict[int, dict],
+    unwind_by_ea: dict[int, dict[str, str]],
 ) -> dict:
     if target in semantic_by_va:
         item = semantic_by_va[target]
@@ -299,12 +331,15 @@ def coverage_for_target(
         }
     function = functions_by_ea.get(target)
     if function is None:
-        return {
+        coverage = {
             "status": "no_function_boundary",
             "name": None,
             "current_ida_name": None,
             "has_function_boundary": False,
         }
+        if target in unwind_by_ea:
+            coverage["eh_frame_boundary"] = unwind_by_ea[target]
+        return coverage
     if function.get("is_default_sub"):
         return {
             "status": "untranslated_default_sub",
@@ -326,6 +361,7 @@ def make_table(
     functions_by_ea: dict[int, dict],
     semantic_by_va: dict[int, dict],
     candidate_by_va: dict[int, dict],
+    unwind_by_ea: dict[int, dict[str, str]],
 ) -> dict:
     table_va = registration["table_va"]
     count = registration["count"]
@@ -368,7 +404,11 @@ def make_table(
                 record[f"{role}_va"] = None
                 continue
             status = coverage_for_target(
-                target, functions_by_ea, semantic_by_va, candidate_by_va
+                target,
+                functions_by_ea,
+                semantic_by_va,
+                candidate_by_va,
+                unwind_by_ea,
             )
             callback = {
                 "role": role,
@@ -407,6 +447,7 @@ def build_unique_callbacks(tables: list[dict]) -> list[dict]:
                         "name": callback.get("name"),
                         "current_ida_name": callback.get("current_ida_name"),
                         "has_function_boundary": callback.get("has_function_boundary"),
+                        "eh_frame_boundary": callback.get("eh_frame_boundary"),
                         "proposed_name": callback.get("proposed_name"),
                         "roles": [],
                     },
@@ -438,6 +479,7 @@ def generate(args: argparse.Namespace) -> dict:
     binary = binary_path.read_bytes()
     functions = load_functions(inventory_path)
     functions_by_ea = {item["ea"]: item for item in functions}
+    unwind_by_ea = load_unwind_ranges(binary_path)
     semantic_by_va, candidate_by_va = load_maps(semantic_path, candidate_path)
     call_targets = load_call_targets(symbols_path)
     registrations = find_registration_calls(binary, functions, call_targets)
@@ -448,6 +490,7 @@ def generate(args: argparse.Namespace) -> dict:
             functions_by_ea,
             semantic_by_va,
             candidate_by_va,
+            unwind_by_ea,
         )
         for registration in registrations
     ]
@@ -498,6 +541,7 @@ def generate(args: argparse.Namespace) -> dict:
             "zero_byte_repair_helper": "THashList::codesimplefix0 sentinel",
             "literal_names_are_preserved": True,
             "uncertain_names_use_question_marks": True,
+            "unwind_boundary_source": "ELF .eh_frame FDE",
         },
         "registration_stubs": {
             "addProps_plt": f"0x{call_targets['properties']:x}",
@@ -537,6 +581,12 @@ def generate(args: argparse.Namespace) -> dict:
                 and callback.get("proposed_name")
             ),
             "targets_requiring_name_review": name_review_targets,
+            "no_function_boundary_with_eh_frame": sum(
+                1
+                for callback in unique_callbacks
+                if callback["status"] == "no_function_boundary"
+                and callback.get("eh_frame_boundary")
+            ),
         },
         "tables": tables,
         "unique_callbacks": unique_callbacks,

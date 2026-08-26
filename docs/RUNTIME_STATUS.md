@@ -261,7 +261,9 @@ This is the short handoff view. The full reasoning and command history are in
     identifies 886 exact new names with saved boundaries and 20 exact
     pointers without boundaries. The native zero-byte repair is modeled, so
     all 1,455 record names are exact. No IDA names changed and no endpoint
-    was contacted.
+    was contacted. Each of the 20 pointers also has an ELF `.eh_frame` range;
+    `tools/ida_apply_script_table_boundaries.py` keeps those boundary changes
+    separate from the ordinary rename pass.
 
 ## Not verified
 

@@ -37,6 +37,8 @@ def load_candidates(document):
             continue
         if item.get("name_review_required"):
             continue
+        if not item.get("has_function_boundary"):
+            continue
         candidates.append(item)
     return candidates
 

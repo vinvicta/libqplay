@@ -1354,6 +1354,14 @@ saved function boundaries and 20 exact callback pointers without saved
 boundaries. The full record map and these coverage states are in
 `artifacts/script_table_inventory.json`.
 
+The ELF `.eh_frame` section contains a function descriptor for each of those
+20 pointers, with an FDE beginning at the callback address and ending at the
+next proven code boundary. The inventory retains those start and end values as
+independent boundary evidence. The regular rename applier intentionally skips
+these entries; `tools/ida_apply_script_table_boundaries.py` provides a separate
+review-only path that can define the ranges first and then apply the exact
+names.
+
 `tools/generate_script_table_inventory.py` reproduces the map from the local
 ARM64 library and saved inventory without contacting a network. The companion
 `tools/ida_apply_script_table_inventory.py` builds a review-only rename plan
