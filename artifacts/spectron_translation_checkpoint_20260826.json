@@ -69,8 +69,16 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v18.i64",
-    "sha256": "c724dfd0fc8bf61ccf0d9b58742bff9a035af022b7a70a2a8f8bd8f73189f7d2"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v19.i64",
+    "sha256": "ecd0b6db4a8147fa3771cd02d283b022ddd959cdac17c22301e56b472efeb365"
+  },
+  "http_request_anchors": {
+    "anchor_count": 12,
+    "anchor_path": "artifacts/spectron_http_request_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "b0c6f303179e53c34d58260b7ccede5a30a13b2e3a694a6aa6958938f41be612",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_http_request_verify_v19.json",
+    "verified_name_count": 12
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
@@ -99,7 +107,8 @@
     "The fifteenth database revision also contains the separately reviewed player and download lookup helper anchors.",
     "The sixteenth database revision also contains the separately reviewed connection, packet-state, SSL, and low-level field anchors.",
     "The seventeenth database revision also contains the separately reviewed compact client state and forwarding anchors.",
-    "The eighteenth database revision also contains the separately reviewed client connection-state and encrypted-file helper anchors."
+    "The eighteenth database revision also contains the separately reviewed client connection-state and encrypted-file helper anchors.",
+    "The nineteenth database revision also contains the separately reviewed HTTP request field, lifecycle, and outbound-buffer anchors."
   ],
   "login_helper_anchors": {
     "anchor_count": 8,

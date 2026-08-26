@@ -61,6 +61,8 @@ def main() -> None:
     parser.add_argument("--client-state-helper-verification", type=Path)
     parser.add_argument("--connection-state-anchors", type=Path)
     parser.add_argument("--connection-state-verification", type=Path)
+    parser.add_argument("--http-request-anchors", type=Path)
+    parser.add_argument("--http-request-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -576,6 +578,34 @@ def main() -> None:
         result["connection_state_anchors"] = connection_state
         result["interpretation"].append(
             "The eighteenth database revision also contains the separately reviewed client connection-state and encrypted-file helper anchors."
+        )
+    http_request = None
+    if args.http_request_anchors or args.http_request_verification:
+        if not args.http_request_anchors or not args.http_request_verification:
+            raise ValueError(
+                "HTTP request anchors and HTTP request verification must be supplied together"
+            )
+        http_request_document = load(args.http_request_anchors)
+        http_request_verification = load(args.http_request_verification)
+        if http_request_document.get("artifact") != "spectron_http_request_manual_translation_anchors_20260826":
+            raise ValueError("unexpected HTTP request anchor artifact")
+        if not http_request_verification.get("verified"):
+            raise ValueError("HTTP request anchor reopen verification did not pass")
+        expected_http_request = len(http_request_document["anchors"])
+        if http_request_verification["verified_name_count"] != expected_http_request:
+            raise ValueError("HTTP request verification count differs from artifact")
+        http_request = {
+            "anchor_path": str(args.http_request_anchors),
+            "anchor_sha256": sha256_path(args.http_request_anchors),
+            "reopen_verification": str(args.http_request_verification),
+            "anchor_count": expected_http_request,
+            "verified_name_count": http_request_verification["verified_name_count"],
+            "reopen_failure_count": http_request_verification["failure_count"],
+        }
+    if http_request is not None:
+        result["http_request_anchors"] = http_request
+        result["interpretation"].append(
+            "The nineteenth database revision also contains the separately reviewed HTTP request field, lifecycle, and outbound-buffer anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

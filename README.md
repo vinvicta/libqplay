@@ -357,6 +357,14 @@ evidence is in
 `artifacts/spectron_connection_state_manual_translation_anchors_20260826.json`,
 and the v18 database SHA-256 is recorded in the checkpoint.
 
+A nineteenth disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v19.i64`,
+adds 12 reviewed HTTP request helpers. They cover ten request-object string
+field accessors, the deleting destructor, and the outbound-buffer sender. All
+12 reopened successfully. The evidence is in
+`artifacts/spectron_http_request_manual_translation_anchors_20260826.json`,
+and the v19 database SHA-256 is recorded in the checkpoint.
+
 The first direct emulator launch of the supplied Spectron package also found
 a separate modding-layer problem. After Start was tapped, `libxposed.so`
 crashed at its statically confirmed WebTop `crash` command branch. The same
@@ -492,6 +500,8 @@ proves the local native TLS path, not a current live certificate or service.
   records the seven reviewed compact client-state and forwarding anchors.
 * `artifacts/spectron_connection_state_manual_translation_anchors_20260826.json`
   records the five reviewed connection-string and encrypted-file helpers.
+* `artifacts/spectron_http_request_manual_translation_anchors_20260826.json`
+  records the 12 reviewed HTTP request field, lifecycle, and send helpers.
 * `artifacts/spectron_translation_checkpoint_20260826.json` records the
   close-and-reopen check for the persisted Spectron IDA copy.
 * `artifacts/spectron_runtime_crash_control_20260826.json` records the local
@@ -741,6 +751,9 @@ proves the local native TLS path, not a current live certificate or service.
   The `tools/generate_spectron_connection_state_anchors.py` generator records
   reviewed client connection-state and encrypted-file roles with exact hash
   checks.
+  The `tools/generate_spectron_http_request_anchors.py` generator records
+  reviewed HTTP request field, lifecycle, and outbound-buffer roles with exact
+  hash checks.
   `tools/ida_apply_spectron_translation.py` and
   `tools/ida_apply_spectron_manual_anchors.py` write separate disposable IDA
   copies, while the matching verification scripts reopen and check them. The
