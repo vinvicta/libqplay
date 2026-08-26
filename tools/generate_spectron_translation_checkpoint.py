@@ -71,6 +71,8 @@ def main() -> None:
     parser.add_argument("--npc-helper-verification", type=Path)
     parser.add_argument("--html-atom-anchors", type=Path)
     parser.add_argument("--html-atom-verification", type=Path)
+    parser.add_argument("--player-helper-anchors", type=Path)
+    parser.add_argument("--player-helper-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -726,6 +728,34 @@ def main() -> None:
         result["html_atom_anchors"] = html_atom
         result["interpretation"].append(
             "The twenty-third database revision also contains the separately reviewed THTMLAtom constructor and buffer accessor anchors."
+        )
+    player_helper = None
+    if args.player_helper_anchors or args.player_helper_verification:
+        if not args.player_helper_anchors or not args.player_helper_verification:
+            raise ValueError(
+                "player helper anchors and player helper verification must be supplied together"
+            )
+        player_helper_document = load(args.player_helper_anchors)
+        player_helper_verification = load(args.player_helper_verification)
+        if player_helper_document.get("artifact") != "spectron_player_helper_manual_translation_anchors_20260826":
+            raise ValueError("unexpected player helper anchor artifact")
+        if not player_helper_verification.get("verified"):
+            raise ValueError("player helper anchor reopen verification did not pass")
+        expected_player_helper = len(player_helper_document["anchors"])
+        if player_helper_verification["verified_name_count"] != expected_player_helper:
+            raise ValueError("player helper verification count differs from artifact")
+        player_helper = {
+            "anchor_path": str(args.player_helper_anchors),
+            "anchor_sha256": sha256_path(args.player_helper_anchors),
+            "reopen_verification": str(args.player_helper_verification),
+            "anchor_count": expected_player_helper,
+            "verified_name_count": player_helper_verification["verified_name_count"],
+            "reopen_failure_count": player_helper_verification["failure_count"],
+        }
+    if player_helper is not None:
+        result["player_helper_anchors"] = player_helper
+        result["interpretation"].append(
+            "The twenty-fourth database revision also contains the separately reviewed compact TPlayer attachment, update, freeze, and sprite helper anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

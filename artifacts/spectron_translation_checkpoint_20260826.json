@@ -69,8 +69,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v23.i64",
-    "sha256": "ee5ce543cb188e0b16b8479b2d19dd76c7ac0e636852d8446a022ce1a5e8da33"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v24.i64",
+    "sha256": "126b3d9ffb27b26e91ccd2f0dfd0d1f48c2f03dd45cf0c1ee4e731b2f9cdec9f"
   },
   "html_atom_anchors": {
     "anchor_count": 5,
@@ -128,7 +128,8 @@
     "The twentieth database revision also contains the separately reviewed socket status and address helper anchors.",
     "The twenty-first database revision also contains the separately reviewed HTTP request counters and download-state anchors.",
     "The twenty-second database revision also contains the separately reviewed TServerNPC blocking, draw-mode, visibility, bow, and pelt helper anchors.",
-    "The twenty-third database revision also contains the separately reviewed THTMLAtom constructor and buffer accessor anchors."
+    "The twenty-third database revision also contains the separately reviewed THTMLAtom constructor and buffer accessor anchors.",
+    "The twenty-fourth database revision also contains the separately reviewed compact TPlayer attachment, update, freeze, and sprite helper anchors."
   ],
   "login_helper_anchors": {
     "anchor_count": 8,
@@ -178,6 +179,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_parse_wrapper_verify_v14.json",
     "verified_name_count": 1
+  },
+  "player_helper_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "9367d319607990c0598e73829d7f66ef5e37cface941016d61c207935334a8de",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_player_helper_verify_v24.json",
+    "verified_name_count": 5
   },
   "resource_anchors": {
     "anchor_count": 6,

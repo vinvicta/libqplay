@@ -626,6 +626,12 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_html_atom_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+86. Clean IDA review added five high-confidence `TPlayer` helper anchors for
+    attachment state, property updates, freeze state, and sprite wrappers.
+    All five names reopened successfully in the v24 disposable copy. See
+    `artifacts/spectron_player_helper_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
