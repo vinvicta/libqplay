@@ -3,7 +3,9 @@
 
 This helper is for a bounded local replay. It binds only to 127.0.0.1,
 serves one or more copies of an archived response, and prints each request
-without writing credentials or response bodies to a repository path.
+without writing credentials or response bodies to a repository path. A client
+that closes during TLS is logged as a handshake error so certificate controls
+can distinguish TCP reachability from a completed HTTP request.
 """
 
 from __future__ import annotations
@@ -21,22 +23,29 @@ def serve_once(
     connection_timeout: float,
 ) -> None:
     raw, peer = listener.accept()
-    with context.wrap_socket(raw, server_side=True) as connection:
-        connection.settimeout(connection_timeout)
-        request = bytearray()
-        while b"\r\n\r\n" not in request and len(request) < 65536:
-            chunk = connection.recv(4096)
-            if not chunk:
-                break
-            request.extend(chunk)
-        print(f"TLS_CAPTURE_REQUEST {peer!r} {bytes(request)!r}", flush=True)
-        header = (
-            b"HTTP/1.0 200 OK\r\n"
-            b"Content-Type: image/png\r\n"
-            + f"Content-Length: {len(body)}\r\n".encode("ascii")
-            + b"Connection: close\r\n\r\n"
+    try:
+        with context.wrap_socket(raw, server_side=True) as connection:
+            connection.settimeout(connection_timeout)
+            request = bytearray()
+            while b"\r\n\r\n" not in request and len(request) < 65536:
+                chunk = connection.recv(4096)
+                if not chunk:
+                    break
+                request.extend(chunk)
+            print(f"TLS_CAPTURE_REQUEST {peer!r} {bytes(request)!r}", flush=True)
+            header = (
+                b"HTTP/1.0 200 OK\r\n"
+                b"Content-Type: image/png\r\n"
+                + f"Content-Length: {len(body)}\r\n".encode("ascii")
+                + b"Connection: close\r\n\r\n"
+            )
+            connection.sendall(header + body)
+    except ssl.SSLError as exc:
+        print(
+            f"TLS_CAPTURE_HANDSHAKE_ERROR {peer!r} {type(exc).__name__}: {exc}",
+            flush=True,
         )
-        connection.sendall(header + body)
+        raw.close()
 
 
 def main() -> None:

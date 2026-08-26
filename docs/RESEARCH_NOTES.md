@@ -1787,3 +1787,64 @@ This is a private loopback package, not a release client. The default build
 also applies the local RSA-result bypass so it can operate with the controlled
 fixture. The `--skip-rsa-bypass` option retains the native branch for a
 package-preserving test when the response is known to pass the native check.
+
+## Certificate expiry control
+
+The static trust-bundle result identified a concrete age problem: the first
+certificate in the historical GraalWeb bundle expired on 2023-07-29. Static
+evidence alone does not show whether the old native TLS code enforces the
+certificate validity dates, because a client can also reject a chain for its
+name, key usage, signature, or trust-anchor shape. I therefore built a
+minimal paired control instead of changing the production-oriented repair.
+
+Both private ARM64 packages started from the restored original library with
+the same local-only edits: a one-certificate trust bundle, hostname routing
+to `127.0.0.1`, connector port `18443`, the deterministic responder RC4 key,
+and the native loading-state candidate at `0x15ca7c`. The native certificate
+check at `0x20ab20` stayed intact in both packages. Each self-signed test
+certificate used `con.quattroplay.com` as its common name and subject
+alternative name.
+
+The expired certificate was valid from 2020-01-01 through 2021-01-01. Its PEM
+SHA-256 was
+`633e4599f946aeec39b6a050ddb75660b26205e90416d79853a0ccd87d96dace`. The
+valid control was valid from 2025-01-01 through 2035-01-01. Its PEM SHA-256
+was `a55c4ec36f6c5708948d6f1e257b7782153ea85032b184fe7180adc00d347f75`.
+The reproducible helper `tools/make_tls_validity_fixture.py` creates the same
+certificate shape with caller-selected dates. Keys are generated randomly and
+must remain outside the repository.
+
+The valid control reached the loopback TLS responder and produced:
+
+```text
+GET /con.png?... HTTP/1.0
+Host: con.quattroplay.com:18443
+User-Agent: Graal/6.15401
+```
+
+The query value is omitted from the public record. The responder then returned
+the deliberately minimal test body. The expired control reached the listener
+at the TCP layer, but the client closed during the TLS handshake. The improved
+responder recorded `SSLZeroReturnError` and no `TLS_CAPTURE_REQUEST` line.
+The client-side milestones stopped at native library activation and OpenGL
+initialization, with no connector HTTP request. This paired result is strong
+evidence that validity dates are checked before HTTP in the translated ARM64
+path. It does not establish the exact error code on a physical ARM64 device,
+and it does not show that a current service will accept a replacement chain.
+
+The exact expired control package hash is
+`e7615fcb37112cb86e8d768f51143149b98dcde83c12a5b734ca65e336f29e36`; its
+packaged native library hash is
+`16fa26de513129e480f49885008219616c8749d1ea8948082b4efccdcc5a44fe`. The
+valid control package hash is
+`183ef83ed2772872288c1aa639e0501b5a645df395b0f89887a38ce56c0266f0`; its
+packaged native library hash is
+`7cffcbd8380d5e19324eb6d392e6cd942ce696b9470bbaaa74b037827ebecee7`.
+The comparison metadata is in
+`artifacts/connector_tls_expiry_control_20260826.json`.
+
+This result strengthens the stale native trust bundle diagnosis, but the
+correct next production experiment remains a private package with an
+authorized current chain and the native verification routine left enabled.
+The loopback port, resolver, responder key, and loading-state edits are test
+controls only. No live endpoint was contacted.

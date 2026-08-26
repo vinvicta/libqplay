@@ -1,0 +1,94 @@
+{
+  "artifact": "connector_tls_expiry_control_20260826",
+  "date": "2026-08-26",
+  "scope": "127.0.0.1-only TLS comparison on an Android 36 x86_64 emulator using translated ARM64 native code",
+  "purpose": "Separate certificate-date rejection from failures that occur after the connector has sent HTTP.",
+  "client": {
+    "package": "com.quattroplay.GraalClassic",
+    "version_name": "1.8",
+    "version_code": 6158,
+    "original_native_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "expired_control_apk_sha256": "e7615fcb37112cb86e8d768f51143149b98dcde83c12a5b734ca65e336f29e36",
+    "expired_control_native_sha256": "16fa26de513129e480f49885008219616c8749d1ea8948082b4efccdcc5a44fe",
+    "valid_control_apk_sha256": "183ef83ed2772872288c1aa639e0501b5a645df395b0f89887a38ce56c0266f0",
+    "valid_control_native_sha256": "7cffcbd8380d5e19324eb6d392e6cd942ce696b9470bbaaa74b037827ebecee7",
+    "native_patches_shared_by_controls": [
+      "replace the embedded connector trust bundle",
+      "route con.quattroplay.com to 127.0.0.1",
+      "move connector HTTPS from 443 to 18443",
+      "use the deterministic local responder RC4 key",
+      "force the existing non-premium loading initialization branch"
+    ],
+    "native_cert_check_preserved": true,
+    "network_contacted": false
+  },
+  "certificates": {
+    "expired": {
+      "subject": "CN=con.quattroplay.com",
+      "san": ["con.quattroplay.com"],
+      "not_before": "2020-01-01T00:00:00Z",
+      "not_after": "2021-01-01T00:00:00Z",
+      "pem_sha256": "633e4599f946aeec39b6a050ddb75660b26205e90416d79853a0ccd87d96dace"
+    },
+    "valid_control": {
+      "subject": "CN=con.quattroplay.com",
+      "san": ["con.quattroplay.com"],
+      "not_before": "2025-01-01T00:00:00Z",
+      "not_after": "2035-01-01T00:00:00Z",
+      "pem_sha256": "a55c4ec36f6c5708948d6f1e257b7782153ea85032b184fe7180adc00d347f75"
+    }
+  },
+  "emulator": {
+    "device": "emulator-5554",
+    "android_api": 36,
+    "host_abi": "x86_64",
+    "translated_abi": "arm64-v8a",
+    "adb_reverse_port": 18443,
+    "reverse_target": "127.0.0.1:18443"
+  },
+  "expired_run": {
+    "client_pid": 13937,
+    "tcp_connection_observed": true,
+    "tls_handshake_completed": false,
+    "http_request_observed": false,
+    "http_request_count": 0,
+    "responder_observation": "TLS_CAPTURE_HANDSHAKE_ERROR from 127.0.0.1:34875: SSLZeroReturnError, TLS/SSL connection closed with EOF",
+    "client_log_milestones": [
+      "qplay library loaded",
+      "GraalClassic activated",
+      "OpenGL initialized"
+    ]
+  },
+  "valid_control_run": {
+    "client_pid": 13821,
+    "tcp_connection_observed": true,
+    "tls_handshake_completed": true,
+    "http_request_observed": true,
+    "http_request_count": 1,
+    "request_method": "GET",
+    "request_path": "/con.png",
+    "query_string": "present and intentionally omitted",
+    "host_header": "con.quattroplay.com:18443",
+    "user_agent": "Graal/6.15401",
+    "response_body_bytes": 222897,
+    "responder_observation": "TLS_CAPTURE_REQUEST from 127.0.0.1:58883",
+    "client_log_milestones": [
+      "qplay library loaded",
+      "GraalClassic activated",
+      "OpenGL initialized",
+      "Problem setting up the networking after the deliberately minimal control response"
+    ]
+  },
+  "interpretation": [
+    "The matching valid certificate reached native TLS and produced an HTTP request.",
+    "The matching expired certificate reached the local TCP listener but produced no HTTP request.",
+    "This is strong local evidence that certificate validity is checked before connector HTTP, subject to the ARM64 translation environment and generated test certificate.",
+    "The result does not identify the exact native error code or prove that every current endpoint uses the same certificate chain."
+  ],
+  "not_proven": [
+    "A live connector request or game-server login.",
+    "That the historical private key or chain is still accepted by a current service.",
+    "Behavior on a physical ARM64 device."
+  ],
+  "raw_data_policy": "The APKs, private test keys, emulator logs, and responder captures remain outside the repository."
+}

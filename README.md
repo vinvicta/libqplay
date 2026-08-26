@@ -113,6 +113,16 @@ the same APK hash and the fresh package reproduced the rendered-world replay.
 The builder keeps the original connector script and emits only the ARM64
 library, so it cannot silently select a different ABI in the emulator.
 
+The connector certificate hypothesis now has a paired local control. A
+package that trusts a SAN-matching certificate valid from 2025 to 2035 sent
+the expected `/con.png` request through native TLS. An otherwise equivalent
+package that trusts a SAN-matching certificate expired in 2021 reached the
+loopback TCP listener but closed during the TLS handshake and sent no HTTP.
+This is strong evidence that certificate validity is checked before connector
+HTTP in the translated ARM64 path. It is still a local control, not a live
+service test. See `artifacts/connector_tls_expiry_control_20260826.json` and
+the certificate validity section in `docs/TESTING.md`.
+
 The ARM64 IDA audit now identifies the local screen split more precisely. The
 native loading byte at `0x37a549` starts at `1`; the successful `classic`
 premium-option path skips the native clear at `0x15cac8`; and the packet-190
@@ -248,6 +258,9 @@ proves the local native TLS path, not a current live certificate or service.
   the matched stock-branch negative control for that isolation run.
 * `artifacts/arm64_reproducible_builder_validation_20260826.json` records the
   deterministic builder output and fresh package replay.
+* `artifacts/connector_tls_expiry_control_20260826.json` records the paired
+  valid and expired certificate control, including the no-HTTP handshake
+  failure and the matching successful request.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.
 * `symbols/libqplay.symbols.json` is the machine-readable equivalent.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.
@@ -375,11 +388,14 @@ proves the local native TLS path, not a current live certificate or service.
   diagnostic without including a private key.
   `tools/patch_graalweb_trust_bundle.py` replaces the historical trust text
   with a user-supplied certificate-only PEM bundle while leaving CyaSSL
-  verification enabled.
+  verification enabled. `tools/make_tls_validity_fixture.py` creates a
+  disposable SAN-matching certificate with explicit validity dates for a
+  loopback control.
   `tools/patch_connector_tls_port_test.py` moves only the diagnostic HTTPS
   port for a loopback ADB reverse mapping, and
   `tools/tls_capture_server.py` serves an archived response over a
-  127.0.0.1-only TLS listener.
+  127.0.0.1-only TLS listener and records handshake failures without exposing
+  a response body.
   `tools/compare_spectron_native.py` compares the supplied Spectron native
   library with the original ARM64 build without loading either one.
   `tools/match_spectron_function_signatures.py` checks whether the supplied

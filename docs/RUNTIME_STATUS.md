@@ -367,6 +367,18 @@ This is the short handoff view. The full reasoning and command history are in
     mappings reproduced the rendered-world screenshot and full resource
     replay. Details are in
     `artifacts/arm64_reproducible_builder_validation_20260826.json`.
+54. A paired native TLS validity control was run on the same Android 36
+    x86_64 emulator through ARM64 translation. The valid control trusted a
+    SAN-matching certificate valid from 2025 through 2035 and sent one
+    `GET /con.png` request through the native TLS path. The otherwise matching
+    expired control trusted a certificate that ended on 2021-01-01, reached
+    the local TCP listener, and closed during TLS with no HTTP request. The
+    expired package therefore fails before connector HTTP in this environment.
+    The expired and valid package hashes are
+    `e7615fcb37112cb86e8d768f51143149b98dcde83c12a5b734ca65e336f29e36` and
+    `183ef83ed2772872288c1aa639e0501b5a645df395b0f89887a38ce56c0266f0`.
+    The full comparison is in
+    `artifacts/connector_tls_expiry_control_20260826.json`.
 
 ## Not verified
 

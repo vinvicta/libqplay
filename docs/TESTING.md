@@ -290,6 +290,81 @@ The responder is hard-coded to `127.0.0.1`. Stop both responders and remove
 the reverse mappings after the test. Do not publish the self-signed private
 key, the debug APK, or captured login data.
 
+## Certificate validity control
+
+Static extraction shows that the original native connector trust bundle
+contains certificates that are no longer valid. To separate certificate-date
+validation from later HTTP and game-protocol problems, a paired control was
+run on 2026-08-26. Both private packages used the same original APK, the same
+ARM64 diagnostic edits, the same hostname, and the same loopback port. The
+only TLS input changed was the certificate installed in the native trust
+bundle and presented by the local responder.
+
+Create disposable self-signed fixtures with explicit dates. The certificate
+must have the exact hostname in both its common name and subject alternative
+name. Marking it as a CA keeps the fixture suitable for the trust-bundle slot
+used by this old client:
+
+```bash
+python3 tools/make_tls_validity_fixture.py \
+  --output-prefix /tmp/graal-expired-con \
+  --hostname con.quattroplay.com \
+  --not-before 2020-01-01T00:00:00Z \
+  --not-after 2021-01-01T00:00:00Z
+
+python3 tools/make_tls_validity_fixture.py \
+  --output-prefix /tmp/graal-valid-con \
+  --hostname con.quattroplay.com \
+  --not-before 2025-01-01T00:00:00Z \
+  --not-after 2035-01-01T00:00:00Z
+```
+
+For each fixture, apply the trust-bundle replacement followed by the
+loopback resolver, port, deterministic responder-key, and native loading
+candidate edits shown above. Keep the input library path separate from every
+output path. Package each final library privately as the only ARM64 native
+ABI, sign it with a local test key, and run the TLS responder with the matching
+certificate and private key:
+
+```bash
+python3 tools/tls_capture_server.py \
+  --certificate /tmp/graal-expired-con.crt \
+  --private-key /tmp/graal-expired-con.key \
+  --response /path/to/archived-response.bin \
+  --port 18443 \
+  --count 3 \
+  --accept-timeout 90
+```
+
+The responder prints `TLS_CAPTURE_REQUEST` only after the TLS handshake and
+HTTP header read have completed. It prints `TLS_CAPTURE_HANDSHAKE_ERROR` for
+a client that closes during TLS, then continues accepting the requested
+number of connections. This distinction avoids treating a TCP accept as a
+successful connector request.
+
+The exact expired fixture used in the paired run was valid from 2020-01-01
+through 2021-01-01 and had PEM SHA-256
+`633e4599f946aeec39b6a050ddb75660b26205e90416d79853a0ccd87d96dace`. The
+valid control was valid from 2025-01-01 through 2035-01-01 and had PEM
+SHA-256 `a55c4ec36f6c5708948d6f1e257b7782153ea85032b184fe7180adc00d347f75`.
+The generated keys and both APKs remained in `/tmp` and are not part of the
+repository.
+
+The expired package reached the local TCP listener, but the client closed
+with no HTTP request. The responder recorded
+`SSLZeroReturnError: TLS/SSL connection has been closed (EOF)`. The matching
+valid package completed TLS and sent `GET /con.png` with
+`Host: con.quattroplay.com:18443` and `User-Agent: Graal/6.15401`. This is
+strong local evidence that certificate validity is checked before connector
+HTTP in the translated ARM64 path. It is not proof of the exact production
+error code, current server chain, or behavior on a physical ARM64 device.
+
+The paired package and process hashes are preserved in
+`artifacts/connector_tls_expiry_control_20260826.json`. Do not replace a live
+service certificate from this test. For a production-compatible repair, use
+an authorized current certificate chain and leave the native verification
+code enabled.
+
 ## Connector replay
 
 The responder defaults to legacy-looking lowercase headers, but this is not a
