@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v46.i64",
-    "sha256": "8afd65b7124587981a6757cb8fb5b245860df1647ef87b80384722d67cdc81bb"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v47.i64",
+    "sha256": "42edc7d90f88906b11ed4949fbaae28e964c9be32093dbe4cf3e4fd7d17f8f3a"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -181,7 +181,8 @@
     "The forty-first database revision also contains the separately reviewed GS2 single-cell, two-dimensional, and replacement array mutation anchors.",
     "The forty-second database revision also contains the separately reviewed GS2 all-index and substring-position search anchors.",
     "The forty-third database revision also contains the separately reviewed GS2 next-string, indexed-string, and string-formatting helper anchors.",
-    "The forty-fourth database revision also contains the separately reviewed GS2 variable-construction and legacy path-resolution anchors."
+    "The forty-fourth database revision also contains the separately reviewed GS2 variable-construction and legacy path-resolution anchors.",
+    "The forty-fifth database revision also contains the separately reviewed GS2 script diagnostic and object-creation anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -329,6 +330,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_script_machine_verify_v34.json",
     "verified_name_count": 7
+  },
+  "script_object_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "artifacts/spectron_script_object_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "53b9cb4ad9c70d32bde21cae51f75806352455ae0e8f3d7067588eb60749e405",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_script_object_verify_v47.json",
+    "verified_name_count": 2
   },
   "script_runtime_anchors": {
     "anchor_count": 12,
