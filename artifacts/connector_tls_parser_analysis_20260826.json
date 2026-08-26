@@ -1,0 +1,73 @@
+{
+  "artifact": "connector_tls_parser_analysis_20260826",
+  "date": "2026-08-26",
+  "purpose": "Record the native CyaSSL certificate-date path recovered from clean IDA decompilation.",
+  "binary": {
+    "path": "private original ARM64 libqplay.so",
+    "sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8"
+  },
+  "database": {
+    "path": "analysis/libqplay_translated_from_active.i64",
+    "sha256": "1b72e100a755939c973ff1c4dcba2c8a9915a454f5f89c4c5d781bd74add421e",
+    "close_reopen_verified": true,
+    "tooling": "IDA 9.3 IDALIB with Hex-Rays decompiler, clean user profile"
+  },
+  "functions": [
+    {
+      "name": "CyaInt_ValidateDate_uchar_const_uchar_int",
+      "va": "0x2b53b8",
+      "behavior": "Parses UTCTime tag 23 or GeneralizedTime tag 24 and compares the resulting UTC timestamp with time(nullptr) through gmtime().",
+      "mode_zero": "Accepts a certificate time at or before the current UTC time.",
+      "mode_one": "Accepts a certificate time at or after the current UTC time."
+    },
+    {
+      "name": "CyaInt_DecodeToKey_CyaInt_DecodedCert_int",
+      "va": "0x2b56cc",
+      "behavior": "Parses the certificate public-key area and then validates the two X.509 validity fields.",
+      "not_before_call": "CyaInt_ValidateDate(..., 0)",
+      "not_after_call": "CyaInt_ValidateDate(..., 1)",
+      "not_before_failure": -140,
+      "not_after_failure_when_strict": -151
+    },
+    {
+      "name": "CyaInt_ParseCertRelative_CyaInt_DecodedCert_int_int_void",
+      "va": "0x2b65f8",
+      "behavior": "Calls CyaInt_DecodeToKey with its certificate-validation flag and continues parsing the certificate body and signature material."
+    },
+    {
+      "name": "CyaInt_CyaSSL_CertManagerVerifyBuffer_CyaInt_CYASSL_CERT_MANAGER_uchar_const_long_int",
+      "va": "0x2c4d34",
+      "behavior": "Initializes a decoded certificate from the supplied PEM or DER trust buffer, parses it through CyaInt_ParseCertRelative, frees temporary state, and returns the parser result."
+    },
+    {
+      "name": "CyaInt_ProcessReply_CyaInt_CYASSL",
+      "va": "0x2cb030",
+      "behavior": "Processes the TLS handshake records. Certificate message type 11 calls the certificate-chain helper at 0x2ca940, which reaches CyaInt_ParseCertRelative and therefore the date checks when verification is enabled."
+    },
+    {
+      "name": "CyaInt_CyaSSL_connect_CyaInt_CYASSL",
+      "va": "0x2c563c",
+      "behavior": "Runs the CyaSSL client handshake and dispatches received records through CyaInt_ProcessReply."
+    }
+  ],
+  "validity_mapping": {
+    "x509_order": ["notBefore", "notAfter"],
+    "asn1_time_tags": [23, 24],
+    "not_before_mode": 0,
+    "not_after_mode": 1,
+    "clock_basis": "UTC time from gmtime(time(nullptr))",
+    "strict_flag": "The parser passes a nonzero strict flag when certificate verification is active. In that mode the notAfter failure is retained as -151."
+  },
+  "runtime_correlation": {
+    "control_artifact": "artifacts/connector_tls_expiry_control_20260826.json",
+    "valid_control_sent_http": true,
+    "expired_control_sent_http": false,
+    "interpretation": "The static date logic explains the paired local result in which the SAN-matching expired certificate closed during TLS while the matching valid certificate reached GET /con.png."
+  },
+  "limitations": [
+    "The decompiler names are evidence-backed aliases, not a recovered CyaSSL source release.",
+    "The exact error value observed by a physical ARM64 device was not instrumented.",
+    "The test used a generated local certificate and did not contact a live service."
+  ],
+  "network_contacted": false
+}

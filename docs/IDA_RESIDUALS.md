@@ -1,11 +1,16 @@
 # Residual IDA functions
 
-The exported-symbol translation is complete for the original ARM64
-`libqplay.so`: all 8,601 surviving ELF symbol records were imported and
-renamed with no failures. IDA also creates functions for code that has no
-symbol record. Those entries are a different problem. They can be addressed
-by their virtual address, but the APK does not preserve their original source
-names.
+The exported-name translation is complete for the original ARM64
+`libqplay.so`: all 8,601 rows in the applied alias inventory were renamed with
+no failures. This is not an unstripped debug-symbol count. The APK is reported
+as stripped, with no `.symtab` or DWARF sections, and its defined dynamic
+symbol table contains 6,506 rows. The larger alias inventory keeps PLT,
+jump-thunk, and data aliases explicit. The audit is recorded in
+`artifacts/elf_symbol_table_audit_20260826.json`.
+
+IDA also creates functions for code that has no symbol record. Those entries
+are a different problem. They can be addressed by their virtual address, but
+the APK does not preserve their original source names.
 
 ## Final count
 

@@ -36,8 +36,9 @@ This is the short handoff view. The full reasoning and command history are in
 10. The original no-swap handler table routes packet 190 to the native
     connecting-window completion wrapper. The rendered world remains visible
     without the centered connecting control.
-11. The symbol translation pass applied 8,601 names to the ARM64 IDA database
-    with zero rename failures.
+11. The symbol translation pass applied 8,601 readable aliases to the ARM64
+    IDA database with zero rename failures. The APK is stripped, so this total
+    is an alias inventory rather than a debug-symbol count.
 12. An ARM64-only diagnostic build running through the x86_64 emulator's native
     translation layer completes the connector, server warp, encrypted login,
     map, three level-file requests, image request, and heartbeat path. The

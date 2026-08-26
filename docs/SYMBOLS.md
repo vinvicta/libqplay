@@ -3,9 +3,9 @@
 ## Result
 
 The original ARM64 database was processed with `tools/ida_translate_symbols.py`.
-The script reads the symbol names that survived in the ELF, demangles the C++
-names where possible, classifies the result, and applies the names back into
-IDA. The run was configured with renaming enabled and finished with:
+The script reads the names that IDA exposes from the ELF, demangles the C++
+names where possible, classifies the result, and applies readable aliases back
+into IDA. The run was configured with renaming enabled and finished with:
 
 ```json
 {
@@ -24,17 +24,25 @@ The full exports are in `symbols/`. The CSV is convenient for grep, a
 spreadsheet, or a quick address lookup. The JSON preserves the same records
 with explicit fields.
 
-The translation count is the number of ELF symbol records handled by the
-script. IDA's function survey also reports compiler-generated functions and
-other analysis-created entries, so its total function count is not expected
-to equal 8,601. The original pre-persistence inventory reports 11,272 total
-functions, 9,627 with names, and 1,645 default `sub_` names. Those figures
-describe the original IDA snapshot; the 8,601 count describes the reproducible
-symbol import and rename pass. The artifact contains 467 cumulative
-evidence-backed labels in `artifacts/ida_semantic_labels.json`.
+The 8,601 figure is an applied alias inventory, not a claim that the APK
+contains an unstripped debug symbol table. The original shared object is
+reported as stripped and has no `.symtab` or DWARF sections. Its defined
+dynamic symbol table contains 6,506 rows. The larger alias inventory includes
+separate IDA-visible PLT, jump-thunk, and data aliases, which is why it should
+not be compared directly with the dynamic row count. The complete correction
+and command-level counts are in
+`artifacts/elf_symbol_table_audit_20260826.json`.
+
+IDA's function survey also reports compiler-generated functions and other
+analysis-created entries, so its total function count is not expected to equal
+8,601. The original pre-persistence inventory reports 11,272 total functions,
+9,627 with names, and 1,645 default `sub_` names. Those figures describe the
+original IDA snapshot; the 8,601 count describes the reproducible alias import
+and rename pass. The artifact contains 467 cumulative evidence-backed labels
+in `artifacts/ida_semantic_labels.json`.
 The IDB also retains the earlier inferred
 `TClient_setSSLParameters_scriptCallback` label outside that artifact. None of
-these semantic labels is part of the 8,601 original ELF symbol records.
+these semantic labels is part of the 8,601 alias inventory rows.
 
 ## Naming policy
 
@@ -95,14 +103,16 @@ members.
 
 ## Complete pre-persistence function inventory
 
-The symbol table and the IDA function list are different sets. The ELF has
-8,601 surviving records, including 505 data records. Of those records, 8,096
-land on IDA functions. IDA's first analysis snapshot adds 11,272 function
-starts in total:
+The symbol alias export and the IDA function list are different sets. The
+alias export contains 8,601 rows, including 505 data aliases. Of those rows,
+8,096 land on IDA functions. The APK itself contributes 6,506 defined dynamic
+symbol rows, while the alias export keeps PLT and jump-thunk views separate and
+includes analysis-visible data names. IDA's first analysis snapshot adds
+11,272 function starts in total:
 
 | Function source | Count |
 | --- | ---: |
-| Backed by a translated ELF symbol | 8,096 |
+| Backed by a translated alias row | 8,096 |
 | IDA default `sub_` names | 1,645 |
 | Named by IDA but not backed by an ELF record | 1,531 |
 | Total IDA functions | 11,272 |

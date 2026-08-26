@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Profile IDA-created default functions that have no source symbol.
 
-The symbol import already covers every surviving ELF record. This helper
+The alias import already covers every translated name exposed by the ELF. This helper
 explains the remaining default ``sub_`` entries without inventing names. It
 uses the saved IDA inventory, the translation overlay, the ELF init/fini
 arrays, and address ranges bracketed by recognizable third-party symbols.

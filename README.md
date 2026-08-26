@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The exported-symbol translation pass is complete. The ARM64 IDA database
-contains 8,601 translated and applied ELF names with zero rename failures:
+The readable-name translation pass is complete. The ARM64 IDA database
+contains 8,601 applied aliases with zero rename failures:
 
 | Kind | Count |
 | --- | ---: |
@@ -24,6 +24,13 @@ contains 8,601 translated and applied ELF names with zero rename failures:
 | Data symbols | 505 |
 | Total translated symbols | 8,601 |
 
+The 8,601 total is an IDA alias inventory, not an unstripped debug-symbol
+count. The original shared object is reported as stripped, with no `.symtab`
+or DWARF sections. Its defined dynamic symbol table contains 6,506 rows. The
+larger alias inventory keeps PLT and jump-thunk names separate and includes
+data aliases. The exact audit is in
+`artifacts/elf_symbol_table_audit_20260826.json`.
+
 The old connector has a concrete compatibility problem. Its embedded
 GraalWeb certificate expired on 2023-07-29, so the original HTTPS path cannot
 be trusted by a current clock. The saved connector fixture is structurally
@@ -32,6 +39,11 @@ embedded public key. An earlier parser reported the opposite because it used
 the standard ASN.1 `DigestInfo` form. The certificate problem remains real,
 and both it and any response signed by a different key must stay separate from
 the game-server protocol.
+
+The native parser audit now explains the date part of that failure. It checks
+the X.509 `notBefore` and `notAfter` fields against the current UTC clock
+inside CyaSSL, before the connector sends HTTP. The static function map and
+paired local control are documented in `docs/CONNECTOR_TLS.md`.
 
 The decoded connector script also carries a separate stale trust literal for
 legacy branches. It installs the same expired Eurocenter Games certificate
@@ -261,13 +273,18 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/connector_tls_expiry_control_20260826.json` records the paired
   valid and expired certificate control, including the no-HTTP handshake
   failure and the matching successful request.
+* `artifacts/connector_tls_parser_analysis_20260826.json` records the native
+  CyaSSL validity call chain and the recovered `notBefore` and `notAfter`
+  error mapping.
+* `artifacts/elf_symbol_table_audit_20260826.json` records the distinction
+  between the surviving dynamic rows and the larger applied alias inventory.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.
 * `symbols/libqplay.symbols.json` is the machine-readable equivalent.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.
 * `symbols/libqplay.function_inventory.csv` and
   `symbols/libqplay.function_inventory.json` preserve the pre-persistence
   inventory of all 11,272 IDA function starts, including the 1,645
-  analysis-created `sub_` entries that had no surviving ELF name at that point.
+  analysis-created `sub_` entries that had no translated alias at that point.
 * `symbols/libqplay.function_inventory.summary.json` records the input hash
   and the boundary between translated symbols and IDA-created functions in
   that original inventory.
@@ -344,6 +361,12 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/graalweb_trust_bundle.json` records the recovered certificate
   bundle hashes, dates, and native decoder details. The PEM material itself is
   not committed.
+* `artifacts/elf_symbol_table_audit_20260826.json` records the distinction
+  between the surviving dynamic rows and the larger applied alias inventory.
+* `artifacts/connector_tls_parser_analysis_20260826.json` records the native
+  CyaSSL date-check call chain and error mapping recovered from IDA.
+* `docs/CONNECTOR_TLS.md` explains the native connector path, date logic, and
+  local validity control in one place.
 * `artifacts/diagnostic_patch_matrix.json` records exact patch sites, private
   replay hashes, and the result of each compatibility experiment.
 * `tools/export_inbound_handler_table.py` reproduces the handler-table export

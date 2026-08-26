@@ -33,9 +33,10 @@ compatibility problem.
 
 ## Symbol pass
 
-The first pass was intentionally mechanical. It extracted the surviving ELF
-symbols, demangled the C++ names, classified implementation functions, thunks,
-and data, and applied aliases to the ARM64 IDA database. The final summary is:
+The first pass was intentionally mechanical. It extracted the names that IDA
+exposed from the ELF, demangled the C++ names, classified implementation
+functions, thunks, and data, and applied readable aliases to the ARM64 IDA
+database. The final alias summary is:
 
 * translated symbols: 8,601;
 * renamed functions: 4,714;
@@ -44,20 +45,28 @@ and data, and applied aliases to the ARM64 IDA database. The final summary is:
 * data symbols: 505;
 * rename failures: 0.
 
+There is an important count distinction here. The APK's native library is
+reported as stripped. It has no `.symtab` or DWARF sections, and its defined
+dynamic symbol table contains 6,506 rows. The 8,601 figure above is the
+applied alias inventory. It includes the dynamic names that IDA exposed plus
+separate PLT, jump-thunk, and data aliases. The complete audit is in
+`artifacts/elf_symbol_table_audit_20260826.json`.
+
 The complete machine-readable result is in `symbols/`. Keeping the original
 mangled name beside the demangled name preserves a useful lookup key. A thunk
 is named separately from its target so cross-references do not become
 ambiguous.
 
 The follow-up inventory keeps the coverage boundary explicit. IDA reports
-11,272 function starts in this database. The translated ELF rows account for
-8,096 function starts and the remaining rows are 1,645 default `sub_` names
-plus 1,531 names that IDA created without a matching ELF symbol. The 505
-remaining ELF rows are data symbols. `symbols/libqplay.function_inventory.csv`
-and its JSON counterpart record every function start, its size, segment,
-incoming references, flags, and source category. The `sub_` rows are not
-missing from the archive; they are unnamed because this stripped portion of
-the file provides no reliable semantic name for them.
+11,272 function starts in this database. The alias rows account for 8,096
+function starts and the remaining rows are 1,645 default `sub_` names plus
+1,531 names that IDA created without a matching alias row. The 505 data aliases
+are included in the alias total rather than the function total.
+`symbols/libqplay.function_inventory.csv` and its JSON counterpart record
+every function start, its size, segment, incoming references, flags, and source
+category. The `sub_` rows are not missing from the archive; they are unnamed
+because this stripped portion of the file provides no reliable semantic name
+for them.
 
 The cumulative follow-up artifact now records reliable behavior names for 467
 of those IDA-created functions. The labels cover the two server-login callbacks, the
@@ -204,6 +213,24 @@ Java trust store. `TSocketConnection_setVerifyGraalWebCert` decrypts an
 embedded certificate and supplies it to the CyaSSL context. The certificate
 expired on 2023-07-29, and the verifier's date routine consults the current
 clock. That is a real compatibility failure for a current device.
+
+The date behavior is now confirmed in the native parser rather than inferred
+only from the certificate dates. `CyaInt_ValidateDate` at `0x2b53b8` accepts
+UTCTime tag 23 and GeneralizedTime tag 24, calls `time(nullptr)` and `gmtime`,
+and compares the result with the current UTC clock. `CyaInt_DecodeToKey` at
+`0x2b56cc` calls it with mode zero for `notBefore` and mode one for `notAfter`.
+Mode zero accepts a time at or before the current clock. Mode one accepts a
+time at or after the current clock. When the strict validity flag is active,
+the parser retains `-140` for a `notBefore` failure and `-151` for a
+`notAfter` failure.
+
+The handshake reaches this code through `CyaInt_CyaSSL_connect` at `0x2c563c`
+and `CyaInt_ProcessReply` at `0x2cb030`. Certificate record type 11 enters the
+chain helper at `0x2ca940`, which calls `CyaInt_ParseCertRelative` and then
+`CyaInt_DecodeToKey`. The trust-buffer loader reaches the same parser through
+`CyaInt_CyaSSL_CertManagerVerifyBuffer` at `0x2c4d34`. The complete function
+map is in `artifacts/connector_tls_parser_analysis_20260826.json`, with a
+shorter explanation in `docs/CONNECTOR_TLS.md`.
 
 The decoder was checked more closely after the first certificate extraction.
 `TEncryption_initStaticVars` at `0xe6b40` installs the standard

@@ -38,6 +38,9 @@ def main():
     arm64_builder = load_json(
         "artifacts/arm64_reproducible_builder_validation_20260826.json"
     )
+    elf_symbol_audit = load_json("artifacts/elf_symbol_table_audit_20260826.json")
+    tls_parser = load_json("artifacts/connector_tls_parser_analysis_20260826.json")
+    tls_expiry = load_json("artifacts/connector_tls_expiry_control_20260826.json")
     spectron_signature = load_json("artifacts/spectron_function_signature_match.json")
     spectron_hooks = load_json("artifacts/spectron_hook_analysis.json")
 
@@ -71,6 +74,76 @@ def main():
         inventory["total_functions"],
     )
     check("rename failures", symbols["rename_failures"], [])
+
+    check(
+        "ELF symbol audit artifact",
+        elf_symbol_audit["artifact"],
+        "elf_symbol_table_audit_20260826",
+    )
+    check(
+        "ELF symbol audit input hash",
+        elf_symbol_audit["binary"]["sha256"],
+        "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    )
+    check(
+        "ELF symbol audit dynamic total",
+        elf_symbol_audit["defined_dynamic_symbol_rows"]["total"],
+        6506,
+    )
+    check("ELF symbol audit no symtab", elf_symbol_audit["sections"]["symtab_present"], False)
+    check("ELF symbol audit no debug sections", elf_symbol_audit["sections"]["debug_sections_present"], False)
+    check(
+        "ELF symbol audit alias total",
+        elf_symbol_audit["translated_alias_inventory"]["total"],
+        8601,
+    )
+    check(
+        "ELF symbol audit alias failures",
+        elf_symbol_audit["translated_alias_inventory"]["rename_failures"],
+        0,
+    )
+
+    check(
+        "TLS parser artifact",
+        tls_parser["artifact"],
+        "connector_tls_parser_analysis_20260826",
+    )
+    check("TLS parser network", tls_parser["network_contacted"], False)
+    check("TLS parser input hash", tls_parser["binary"]["sha256"], primary_hash)
+    check("TLS parser database reopen", tls_parser["database"]["close_reopen_verified"], True)
+    parser_functions = {item["name"]: item for item in tls_parser["functions"]}
+    check("TLS parser function count", len(parser_functions), 6)
+    check(
+        "TLS parser ValidateDate address",
+        parser_functions["CyaInt_ValidateDate_uchar_const_uchar_int"]["va"],
+        "0x2b53b8",
+    )
+    check(
+        "TLS parser DecodeToKey address",
+        parser_functions["CyaInt_DecodeToKey_CyaInt_DecodedCert_int"]["va"],
+        "0x2b56cc",
+    )
+    check(
+        "TLS parser notBefore error",
+        parser_functions["CyaInt_DecodeToKey_CyaInt_DecodedCert_int"]["not_before_failure"],
+        -140,
+    )
+    check(
+        "TLS parser notAfter error",
+        parser_functions["CyaInt_DecodeToKey_CyaInt_DecodedCert_int"]["not_after_failure_when_strict"],
+        -151,
+    )
+    check(
+        "TLS parser x509 field order",
+        tls_parser["validity_mapping"]["x509_order"],
+        ["notBefore", "notAfter"],
+    )
+
+    check("TLS expiry artifact", tls_expiry["artifact"], "connector_tls_expiry_control_20260826")
+    check("TLS expiry network", tls_expiry["client"]["network_contacted"], False)
+    check("TLS expiry valid HTTP", tls_expiry["valid_control_run"]["http_request_observed"], True)
+    check("TLS expiry expired no HTTP", tls_expiry["expired_run"]["http_request_observed"], False)
+    check("TLS expiry expired no handshake", tls_expiry["expired_run"]["tls_handshake_completed"], False)
 
     check("semantic-label input hash", labels["binary"]["libqplay_sha256"], primary_hash)
     check("semantic-label function total", labels["inventory_after_labels"]["total_functions"], 11272)
@@ -486,6 +559,9 @@ def main():
         arm64_native_only,
         arm64_native_stock,
         arm64_builder,
+        elf_symbol_audit,
+        tls_parser,
+        tls_expiry,
         spectron_signature,
         spectron_hooks,
     ):

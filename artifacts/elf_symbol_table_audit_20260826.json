@@ -1,0 +1,40 @@
+{
+  "artifact": "elf_symbol_table_audit_20260826",
+  "date": "2026-08-26",
+  "purpose": "Record the symbol information that is actually present in the original ARM64 shared object.",
+  "binary": {
+    "path": "private original ARM64 libqplay.so",
+    "sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "file_report": "ELF 64-bit LSB shared object, ARM aarch64, version 1 (SYSV), dynamically linked, stripped"
+  },
+  "sections": {
+    "dynsym_present": true,
+    "dynstr_present": true,
+    "symtab_present": false,
+    "debug_sections_present": false
+  },
+  "defined_dynamic_symbol_rows": {
+    "total": 6506,
+    "FUNC": 5709,
+    "OBJECT": 788,
+    "NOTYPE": 7,
+    "SECTION": 2
+  },
+  "translated_alias_inventory": {
+    "total": 8601,
+    "function_aliases": 4714,
+    "plt_thunk_aliases": 3183,
+    "jump_thunk_aliases": 199,
+    "data_aliases": 505,
+    "rename_failures": 0,
+    "source": "symbols/libqplay.symbols.json"
+  },
+  "interpretation": [
+    "The APK does not contain a full .symtab or DWARF debug record set.",
+    "The 8601 count is the applied IDA alias inventory, which includes IDA-visible dynamic names together with separate PLT, jump-thunk, and data aliases.",
+    "The 6506 count is the defined-row total reported from the surviving dynamic symbol table and is not interchangeable with the alias inventory.",
+    "The remaining source names cannot be recovered from this APK alone when a function has no dynamic name, debug record, or reliable sibling-ABI match."
+  ],
+  "network_contacted": false,
+  "raw_command_policy": "The audit was performed against the private extracted library. The APK and native library remain outside the public repository."
+}

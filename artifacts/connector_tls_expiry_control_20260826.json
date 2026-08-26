@@ -3,6 +3,7 @@
   "date": "2026-08-26",
   "scope": "127.0.0.1-only TLS comparison on an Android 36 x86_64 emulator using translated ARM64 native code",
   "purpose": "Separate certificate-date rejection from failures that occur after the connector has sent HTTP.",
+  "network_contacted": false,
   "client": {
     "package": "com.quattroplay.GraalClassic",
     "version_name": "1.8",
