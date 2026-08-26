@@ -173,6 +173,10 @@ proves the local native TLS path, not a current live certificate or service.
   surviving ELF name.
 * `symbols/libqplay.function_inventory.summary.json` records the input hash
   and the boundary between translated symbols and IDA-created functions.
+* `artifacts/unresolved_function_profile.json` profiles the 488 default
+  `sub_` entries that still lack source names. It separates likely static
+  library internals, init/fini array entries, the PLT resolver slot, and the
+  remaining application or engine code.
 * `artifacts/ida_semantic_labels.json` records 467 evidence-backed names
   applied to formerly unnamed login, file-download, handler-table, UI, TLS,
   HTTP, socket, animation, sound, network-thread, update-package, and JNI
@@ -200,6 +204,8 @@ proves the local native TLS path, not a current live certificate or service.
   of assigning speculative names.
 * `tools/generate_symbol_translation_overlay.py` rebuilds that overlay from
   the saved function, script-table, and candidate inventories.
+* `tools/generate_unresolved_function_profile.py` rebuilds the unresolved
+  function profile from the saved inventories and ELF section metadata.
 * `artifacts/inbound_handler_table.json` records the native handler-index table,
   its current function targets, and the observed packet-to-index pairs.
 * `artifacts/premium_option.json` records the complete marker bytes and the

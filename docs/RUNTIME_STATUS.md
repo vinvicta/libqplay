@@ -270,6 +270,11 @@ This is the short handoff view. The full reasoning and command history are in
     callback evidence. The remaining 488 default functions stay explicitly
     unresolved. No speculative names were added and no endpoint was
     contacted.
+44. The unresolved-function profile separates those 488 default entries into
+    329 likely static third-party functions, 19 ELF init/fini entries, one PLT
+    resolver slot, and 139 application or engine entries. The report records
+    these as triage categories only. No speculative source names were added
+    and no endpoint was contacted.
 
 ## Not verified
 
