@@ -1,0 +1,324 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "The original callback reads the TStream pointer from GIF user data at offset 104 and forwards the requested buffer and byte count to TStream::read.",
+        "Spectron's GIF reader installs the target at its DGifOpen callback slot, and the target preserves the same two-argument forwarding body and normalized feature hashes."
+      ],
+      "match_kind": "exact-normalized-callback",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x150a30",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "instruction_count": 2,
+        "mnemonic_hash": "5ad745f382bbb4f6a961567e672de42f32e38d63a1338bb7287d21e661b2f0ac",
+        "register_shape_hash": "bd960d12a3ba5470a2db949de753a837f202b5c329a21a22fae5bfa950d17320",
+        "shape_hash": "126d29888610881fcc10aaf656c238afdfd77b99a0b46286cfbbd1b5ce01f374",
+        "size": 8
+      },
+      "original_name": "TBitmap_GIF_streamRead",
+      "original_string_refs": [],
+      "proposed_name": "v18_TBitmap_GIF_streamRead",
+      "semantic_match_already_present": false,
+      "source_basis": "GIF stream-read callback",
+      "spectron_current_name": "sub_153570",
+      "spectron_default_name": true,
+      "spectron_ea": "0x153570",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "instruction_count": 2,
+        "mnemonic_hash": "5ad745f382bbb4f6a961567e672de42f32e38d63a1338bb7287d21e661b2f0ac",
+        "register_shape_hash": "bd960d12a3ba5470a2db949de753a837f202b5c329a21a22fae5bfa950d17320",
+        "shape_hash": "126d29888610881fcc10aaf656c238afdfd77b99a0b46286cfbbd1b5ce01f374",
+        "size": 8
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The original writeJPEG path installs this two-instruction callback in the JFFLUSH slot and the callback returns zero.",
+        "Spectron's writeJPEG path installs sub_153CC8 in the same JFFLUSH slot, while the target body has the same size, instruction count, block count, and normalized hashes."
+      ],
+      "match_kind": "exact-context-callback",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x150ea0",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 2,
+        "mnemonic_hash": "2235b95b0ee764acd1a38369acf24ef6480359997e66035251a8a95bf82a49c3",
+        "register_shape_hash": "257aebb857d83dc3ba8882287479ff9e2da4d94b9f9c27027220bfdc1a56983e",
+        "shape_hash": "27c3f34bed26e3f376d8f815bf80d152302b37fc036ca3afa6d1ccc2caa0a9cc",
+        "size": 8
+      },
+      "original_name": "TBitmap_JPEG_noopFlush",
+      "original_string_refs": [],
+      "proposed_name": "v18_TBitmap_JPEG_noopFlush",
+      "semantic_match_already_present": false,
+      "source_basis": "JPEG destination flush callback",
+      "spectron_current_name": "sub_153CC8",
+      "spectron_default_name": true,
+      "spectron_ea": "0x153cc8",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 2,
+        "mnemonic_hash": "2235b95b0ee764acd1a38369acf24ef6480359997e66035251a8a95bf82a49c3",
+        "register_shape_hash": "257aebb857d83dc3ba8882287479ff9e2da4d94b9f9c27027220bfdc1a56983e",
+        "shape_hash": "27c3f34bed26e3f376d8f815bf80d152302b37fc036ca3afa6d1ccc2caa0a9cc",
+        "size": 8
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The original readJPEG and writeJPEG paths install this two-instruction callback in the JFERROR slot and the callback returns zero.",
+        "Spectron's readJPEG and writeJPEG paths install sub_153CD0 in the same JFERROR slot, and the target body has the same size, instruction count, block count, and normalized hashes."
+      ],
+      "match_kind": "exact-context-callback",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x150ea8",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 2,
+        "mnemonic_hash": "2235b95b0ee764acd1a38369acf24ef6480359997e66035251a8a95bf82a49c3",
+        "register_shape_hash": "257aebb857d83dc3ba8882287479ff9e2da4d94b9f9c27027220bfdc1a56983e",
+        "shape_hash": "27c3f34bed26e3f376d8f815bf80d152302b37fc036ca3afa6d1ccc2caa0a9cc",
+        "size": 8
+      },
+      "original_name": "TBitmap_JPEG_noopError",
+      "original_string_refs": [],
+      "proposed_name": "v18_TBitmap_JPEG_noopError",
+      "semantic_match_already_present": false,
+      "source_basis": "JPEG error callback",
+      "spectron_current_name": "sub_153CD0",
+      "spectron_default_name": true,
+      "spectron_ea": "0x153cd0",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 2,
+        "mnemonic_hash": "2235b95b0ee764acd1a38369acf24ef6480359997e66035251a8a95bf82a49c3",
+        "register_shape_hash": "257aebb857d83dc3ba8882287479ff9e2da4d94b9f9c27027220bfdc1a56983e",
+        "shape_hash": "27c3f34bed26e3f376d8f815bf80d152302b37fc036ca3afa6d1ccc2caa0a9cc",
+        "size": 8
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The original helper enumerates TFiles entries, creates TGraalVar children, writes filesize and isfolder properties, and recursively descends into folders when requested.",
+        "Spectron's loadFolder calls sub_219978 immediately after the same setup, and the target recursively calls itself while preserving the same child properties, 9999-entry guard, and 12-block control-flow shape."
+      ],
+      "match_kind": "changed-size-class-context",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x213088",
+      "original_metrics": {
+        "basic_block_count": 12,
+        "instruction_count": 187,
+        "mnemonic_hash": "d367603800ce83a085844839de744ad7d11c43b8dc45901d8e1f9b778dd6629a",
+        "register_shape_hash": "d6764d4e04c59e772cca97efd25d25a0ac8ab6aa9b2974fe85808108ca85c2f1",
+        "shape_hash": "7fcf3d5327dcebf81385f442a217f259486d31075ee421d263ade54a5c10f900",
+        "size": 756
+      },
+      "original_name": "TGraalVar_loadFolderRecursive",
+      "original_string_refs": [
+        "false",
+        "filesize",
+        "isfolder",
+        "true"
+      ],
+      "proposed_name": "v18_TGraalVar_loadFolderRecursive",
+      "semantic_match_already_present": false,
+      "source_basis": "recursive folder loader",
+      "spectron_current_name": "sub_219978",
+      "spectron_default_name": true,
+      "spectron_ea": "0x219978",
+      "spectron_metrics": {
+        "basic_block_count": 12,
+        "instruction_count": 199,
+        "mnemonic_hash": "954cf655382c4b596008a2b8700c3b3e42fb383e0fad166e428b72ec16303bb0",
+        "register_shape_hash": "42267fced5f505e441354c953d5acc52e5ce5442d1d1c0fa31311164e7e57f4c",
+        "shape_hash": "20dba0373bb0b297e3980fa1b79819b65dc8ef47ef4a7db35240be63b9215a41",
+        "size": 804
+      },
+      "spectron_string_refs": [
+        "false",
+        "filesize",
+        "isfolder",
+        "true"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The original callback copies the incoming UTF-8 text, stores it as a scalar or current object value, and advances the parser context marker.",
+        "Spectron's YAJL callback table stores sub_237598 in the string slot at 0x39af98, and its pseudocode preserves the same scalar, object, and array handling with only rebuilt string-wrapper calls added."
+      ],
+      "match_kind": "changed-size-callback-table",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22dab4",
+      "original_metrics": {
+        "basic_block_count": 9,
+        "instruction_count": 66,
+        "mnemonic_hash": "ae6c2c89e464204851dd18e0ccb3a0d6503679f1cab21edda4435483c266eda7",
+        "register_shape_hash": "ac19d217d88659c0f32aebc4787d5bc142b9bcc140b22aa2e53ce9964d9efb6d",
+        "shape_hash": "395f4fd9cb1bf41f3d63c46e8e3fd2ecf7669ec257b14123428e75fc151605d1",
+        "size": 264
+      },
+      "original_name": "TGraalVar_jsonStringCallback",
+      "original_string_refs": [],
+      "proposed_name": "v18_TGraalVar_jsonStringCallback",
+      "semantic_match_already_present": false,
+      "source_basis": "YAJL string callback",
+      "spectron_current_name": "sub_237598",
+      "spectron_default_name": true,
+      "spectron_ea": "0x237598",
+      "spectron_metrics": {
+        "basic_block_count": 9,
+        "instruction_count": 90,
+        "mnemonic_hash": "a878f3e622785b67007466553d8a4ce1bfcbc79f296de198edda404a99a44a0a",
+        "register_shape_hash": "cfe4feef1565199b8e9bffd010465163614c990dcb5b0155795ed800616ec710",
+        "shape_hash": "ca8fcdbea26ea6b147fd5bc5c07de591ad49ac0601f927d93ecc86ddcb3f1b33",
+        "size": 360
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The original callback validates numeric text, converts it to a float when possible, and stores either the float or the original text in the current TGraalVar value.",
+        "Spectron's YAJL callback table stores sub_23770C in the number slot at 0x39af90, and its pseudocode preserves the same numeric validation, scalar/object writes, and context-marker update."
+      ],
+      "match_kind": "changed-size-callback-table",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22dbbc",
+      "original_metrics": {
+        "basic_block_count": 17,
+        "instruction_count": 118,
+        "mnemonic_hash": "d9da6a282326bf498ab964bf8c12c0a4f7b27c62ecc6697f22612224adb1abae",
+        "register_shape_hash": "79bc1862975dea44f9f5a4cbb3e3b365d3617ca4227a9966ce9de8661e7ee515",
+        "shape_hash": "a2b381131fd7e04cccbef6867c3ef85906e2f5d774fd991d136e57c73ac7d798",
+        "size": 472
+      },
+      "original_name": "TGraalVar_jsonNumberCallback",
+      "original_string_refs": [],
+      "proposed_name": "v18_TGraalVar_jsonNumberCallback",
+      "semantic_match_already_present": false,
+      "source_basis": "YAJL number callback",
+      "spectron_current_name": "sub_23770C",
+      "spectron_default_name": true,
+      "spectron_ea": "0x23770c",
+      "spectron_metrics": {
+        "basic_block_count": 17,
+        "instruction_count": 121,
+        "mnemonic_hash": "314f2cf65de06b6e13b33f5bbdc22947da68bddf57c908fd2331d919a420e701",
+        "register_shape_hash": "b1c6f3bd3dce78663ae32934eb1fa3155a5cb655822dadda1fc5ac2d06c7e565",
+        "shape_hash": "b9c3bacf7b073ed5a8f56b4c228da0bae63cb94e38297d97d94b30292f82f5c5",
+        "size": 484
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The original callback creates an array TGraalVar child, marks its type and event fields, inserts it into the current array, and pushes a parser context node.",
+        "Spectron's YAJL callback table stores sub_237C78 in the start-array slot at 0x39afb8, and its pseudocode preserves the same root, array-child, and context-chain branches."
+      ],
+      "match_kind": "changed-size-callback-table",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22de60",
+      "original_metrics": {
+        "basic_block_count": 9,
+        "instruction_count": 80,
+        "mnemonic_hash": "adfd6f86ae22163a9591f719b8ec5b22f20e712875ef964f10c2b0c835a6ad20",
+        "register_shape_hash": "b5143a6700ccb88fcead0609d29f35a19259bc1f13c896cc896ce14f5cddf68f",
+        "shape_hash": "ed8cd8b1fc9a8f5f7cf60f418697ad94aa57a8b5221fa1c1c864e4989b6bcbe7",
+        "size": 324
+      },
+      "original_name": "TGraalVar_jsonStartArrayCallback",
+      "original_string_refs": [],
+      "proposed_name": "v18_TGraalVar_jsonStartArrayCallback",
+      "semantic_match_already_present": false,
+      "source_basis": "YAJL start-array callback",
+      "spectron_current_name": "sub_237C78",
+      "spectron_default_name": true,
+      "spectron_ea": "0x237c78",
+      "spectron_metrics": {
+        "basic_block_count": 9,
+        "instruction_count": 81,
+        "mnemonic_hash": "121477f304e83eedf7258c2f2cd1e0faaa4e2b9e55d641c7df2ae23665f139a0",
+        "register_shape_hash": "d89a5e21d869624165634d9a765a83244597e646c9fd2a2aa0a11c89186f3710",
+        "shape_hash": "616124f247a65a4c55d957837cbd942e74f3f5ca64980e99db51d2b654f31518",
+        "size": 328
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The original callback creates an object TGraalVar child, marks its type and event fields, inserts it into the current array when needed, and pushes a parser context node.",
+        "Spectron's YAJL callback table stores sub_2379BC in the start-map slot at 0x39afa0, and its pseudocode preserves the same root, object-child, and context-chain branches."
+      ],
+      "match_kind": "changed-size-callback-table",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22e12c",
+      "original_metrics": {
+        "basic_block_count": 8,
+        "instruction_count": 80,
+        "mnemonic_hash": "ea01d8a5485aa09aaed45378c59c0cd2d3858f0d7a44fb86841a6e5b32f94cc0",
+        "register_shape_hash": "12a2d1f695b14edf9a69f1789c55d1b0f74d0181ac6fb8dfe2974f3ba9ce7e13",
+        "shape_hash": "fd8b3ba3ddf968cd9c7783c94f473e65bb3b23ff0c0808a4b9b6d80c1f926959",
+        "size": 324
+      },
+      "original_name": "TGraalVar_jsonStartMapCallback",
+      "original_string_refs": [],
+      "proposed_name": "v18_TGraalVar_jsonStartMapCallback",
+      "semantic_match_already_present": false,
+      "source_basis": "YAJL start-map callback",
+      "spectron_current_name": "sub_2379BC",
+      "spectron_default_name": true,
+      "spectron_ea": "0x2379bc",
+      "spectron_metrics": {
+        "basic_block_count": 9,
+        "instruction_count": 76,
+        "mnemonic_hash": "acf9f62bf2c717c6d916cabbb526149393d8239b14945b36ed3827fdb50c95f9",
+        "register_shape_hash": "1443eaa0cc3ca556448facad520f41c41ac3791cb793c16b44cfa4798d68559d",
+        "shape_hash": "967335cf7196446781f7c80fe406e5248eb37ee16fffd250ac90088641af0cfb",
+        "size": 308
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_json_folder_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v3.json",
+    "spectron_features_sha256": "031afed73611783e0b16be71009e20118fc90a56e5d03e5ec04526f654f5cf27"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The GIF and JPEG callbacks are exact normalized matches. The folder and JSON callbacks are tied to their callers and the YAJL callback table because Spectron changed their wrapper bodies."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for GIF/JPEG callbacks, recursive folder loading, and YAJL JSON callbacks",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 8,
+    "changed_size_callback_table_count": 4,
+    "changed_size_context_count": 1,
+    "exact_context_count": 2,
+    "exact_normalized_count": 1,
+    "high_confidence_count": 8,
+    "new_context_anchor_count": 8,
+    "target_default_name_count": 8
+  }
+}

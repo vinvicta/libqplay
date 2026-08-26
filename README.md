@@ -451,6 +451,16 @@ successfully. The evidence is in
 `artifacts/spectron_render_gui_manual_translation_anchors_20260826.json`,
 and the v29 database SHA-256 is recorded in the checkpoint.
 
+A thirtieth disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v30.i64`,
+adds eight reviewed image-callback, folder-loader, and YAJL JSON anchors. The
+GIF and JPEG callbacks are exact normalized matches. The recursive folder
+loader and four JSON callbacks changed size, but their callers and callback
+table slots preserve the same roles. All eight reopened successfully. The
+evidence is in
+`artifacts/spectron_json_folder_manual_translation_anchors_20260826.json`,
+and the v30 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
@@ -620,6 +630,9 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/spectron_render_gui_manual_translation_anchors_20260826.json`
   records the 20 reviewed texture, OpenGL, drawing-panel, GUI-control,
   markup, and scrolling helpers.
+* `artifacts/spectron_json_folder_manual_translation_anchors_20260826.json`
+  records the eight reviewed GIF/JPEG callbacks, recursive folder-loader
+  helper, and YAJL JSON callbacks.
 * `artifacts/spectron_socket_behavior_comparison_20260826.json` records the
   static comparison of the changed SSL setup, connect, and read bodies.
 * `artifacts/spectron_translation_checkpoint_20260826.json` records the
@@ -901,6 +914,9 @@ proves the local native TLS path, not a current live certificate or service.
   The `tools/generate_spectron_render_gui_anchors.py` generator records
   reviewed texture, OpenGL, drawing-panel, GUI-control, markup, and scrolling
   roles with exact hash checks and IDA pseudocode context.
+  The `tools/generate_spectron_json_folder_anchors.py` generator records
+  reviewed image callbacks, recursive folder loading, and YAJL JSON callback
+  roles with exact hash checks or caller and callback-table context.
   The `tools/generate_spectron_socket_behavior_comparison.py` generator
   records changed-size socket behavior without forcing an exact-match label.
   `tools/ida_apply_spectron_translation.py` and

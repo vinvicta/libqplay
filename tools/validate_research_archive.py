@@ -146,6 +146,9 @@ def main():
     spectron_render_gui_anchors = load_json(
         "artifacts/spectron_render_gui_manual_translation_anchors_20260826.json"
     )
+    spectron_json_folder_anchors = load_json(
+        "artifacts/spectron_json_folder_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -1202,6 +1205,20 @@ def main():
     check("Spectron render/GUI semantic overlap", spectron_render_gui_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron render/GUI default targets", spectron_render_gui_anchors["summary"]["target_default_name_count"], 6)
     check(
+        "Spectron JSON/folder artifact",
+        spectron_json_folder_anchors["artifact"],
+        "spectron_json_folder_manual_translation_anchors_20260826",
+    )
+    check("Spectron JSON/folder network", spectron_json_folder_anchors["network_contacted"], False)
+    check("Spectron JSON/folder total", spectron_json_folder_anchors["summary"]["anchor_count"], 8)
+    check("Spectron JSON/folder high confidence", spectron_json_folder_anchors["summary"]["high_confidence_count"], 8)
+    check("Spectron JSON/folder semantic overlap", spectron_json_folder_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron JSON/folder default targets", spectron_json_folder_anchors["summary"]["target_default_name_count"], 8)
+    check("Spectron JSON/folder exact normalized", spectron_json_folder_anchors["summary"]["exact_normalized_count"], 1)
+    check("Spectron JSON/folder exact context", spectron_json_folder_anchors["summary"]["exact_context_count"], 2)
+    check("Spectron JSON/folder changed class context", spectron_json_folder_anchors["summary"]["changed_size_context_count"], 1)
+    check("Spectron JSON/folder changed callback table", spectron_json_folder_anchors["summary"]["changed_size_callback_table_count"], 4)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -1238,7 +1255,8 @@ def main():
     check("Spectron checkpoint script-runtime anchor count", spectron_checkpoint["script_runtime_anchors"]["verified_name_count"], 12)
     check("Spectron checkpoint core-helper anchor count", spectron_checkpoint["core_helper_anchors"]["verified_name_count"], 30)
     check("Spectron checkpoint render/GUI anchor count", spectron_checkpoint["render_gui_anchors"]["verified_name_count"], 20)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "2a1af1958e3bc50445a0057c57cbf537ce2a8e8f5c5dd0e28796813d406d944d")
+    check("Spectron checkpoint JSON/folder anchor count", spectron_checkpoint["json_folder_anchors"]["verified_name_count"], 8)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "f8ed0df56c8d17c244ce56751f4ec1c2e4a50d236b5fce5d3e060e46255fdb45")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -1329,6 +1347,7 @@ def main():
         spectron_script_runtime_anchors,
         spectron_core_helper_anchors,
         spectron_render_gui_anchors,
+        spectron_json_folder_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

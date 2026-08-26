@@ -666,6 +666,14 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_render_gui_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+92. Clean IDA review added eight high-confidence image-callback, recursive
+    folder-loader, and YAJL JSON anchors. All eight names reopened
+    successfully in the v30 disposable copy. The changed-size assignments
+    use their callers and callback-table slots, while the three image
+    callbacks also retain exact normalized bodies. See
+    `artifacts/spectron_json_folder_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

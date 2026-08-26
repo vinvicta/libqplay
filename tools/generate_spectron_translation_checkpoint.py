@@ -83,6 +83,8 @@ def main() -> None:
     parser.add_argument("--core-helper-verification", type=Path)
     parser.add_argument("--render-gui-anchors", type=Path)
     parser.add_argument("--render-gui-verification", type=Path)
+    parser.add_argument("--json-folder-anchors", type=Path)
+    parser.add_argument("--json-folder-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -906,6 +908,34 @@ def main() -> None:
         result["render_gui_anchors"] = render_gui
         result["interpretation"].append(
             "The twenty-ninth database revision also contains the separately reviewed texture, OpenGL, drawing-panel, GUI-control, markup, and scrolling helper anchors."
+        )
+    json_folder = None
+    if args.json_folder_anchors or args.json_folder_verification:
+        if not args.json_folder_anchors or not args.json_folder_verification:
+            raise ValueError(
+                "JSON/folder anchors and JSON/folder verification must be supplied together"
+            )
+        json_folder_document = load(args.json_folder_anchors)
+        json_folder_verification = load(args.json_folder_verification)
+        if json_folder_document.get("artifact") != "spectron_json_folder_manual_translation_anchors_20260826":
+            raise ValueError("unexpected JSON/folder anchor artifact")
+        if not json_folder_verification.get("verified"):
+            raise ValueError("JSON/folder anchor reopen verification did not pass")
+        expected_json_folder = len(json_folder_document["anchors"])
+        if json_folder_verification["verified_name_count"] != expected_json_folder:
+            raise ValueError("JSON/folder verification count differs from artifact")
+        json_folder = {
+            "anchor_path": str(args.json_folder_anchors),
+            "anchor_sha256": sha256_path(args.json_folder_anchors),
+            "reopen_verification": str(args.json_folder_verification),
+            "anchor_count": expected_json_folder,
+            "verified_name_count": json_folder_verification["verified_name_count"],
+            "reopen_failure_count": json_folder_verification["failure_count"],
+        }
+    if json_folder is not None:
+        result["json_folder_anchors"] = json_folder
+        result["interpretation"].append(
+            "The thirtieth database revision also contains the separately reviewed image callbacks, recursive folder-loader helper, and YAJL JSON callback anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
