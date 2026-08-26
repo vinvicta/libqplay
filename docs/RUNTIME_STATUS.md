@@ -698,6 +698,13 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_script_space_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+96. Clean IDA review added six high-confidence GS2 execution anchors for
+    function invocation, action dispatch, caught-object handling, suspended
+    caller wake-up, and action cleanup. All six reopened successfully in the
+    v36 disposable copy. See
+    `artifacts/spectron_script_execution_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

@@ -492,6 +492,16 @@ cleanup. All eight reopened successfully. The evidence is in
 `artifacts/spectron_script_space_manual_translation_anchors_20260826.json`,
 and the v35 database SHA-256 is recorded in the checkpoint.
 
+A thirty-fourth disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v36.i64`,
+adds six reviewed GS2 execution anchors. They cover function invocation,
+self-caught and named-object action dispatch, caught actions, suspended caller
+wake-up, and action-list cleanup. The target pseudocode preserves the same
+machine lifecycle, event lookup, typed argument construction, and cleanup
+paths. All six reopened successfully. The evidence is in
+`artifacts/spectron_script_execution_manual_translation_anchors_20260826.json`,
+and the v36 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and

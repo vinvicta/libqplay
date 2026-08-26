@@ -1,0 +1,250 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both reject invalid or busy script spaces, borrow the universe free machine, set its executing object and script name, prepare the function, push the argument variable, and execute the machine.",
+        "Both preserve the status-two suspended path, status-three return-value extraction when requested, execution-variable restoration, free-machine return, and restoration of the previous universe machine.",
+        "The target keeps the five-argument signature and the same call sequence. Its body is 500 bytes versus 532 bytes in the source because the target wrappers and inlining changed the code shape."
+      ],
+      "match_kind": "manual-script-execution-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22871c",
+      "original_metrics": {
+        "basic_block_count": 14,
+        "instruction_count": 133,
+        "mnemonic_hash": "40e813303864145e59125e18f965980449ce92c7ba7f6c76190af1fad8c1cf4a",
+        "register_shape_hash": "032649a1d8bc1e0f8e075b7a68bf09fbc0f715f972d66cc06ffdf29fade0680b",
+        "shape_hash": "d2aeb49f8febe3226bfee619cccc4bd70b02ece1ed607ce6c30727ecb2ed9a8d",
+        "size": 532
+      },
+      "original_name": "TScriptSpace_executeFunction_TScriptFunction_TGraalVar_bool_TScriptMachine",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptSpace_executeFunction_TScriptFunction_TGraalVar_bool_TScriptMachine",
+      "semantic_match_already_present": false,
+      "source_basis": "script function execution",
+      "spectron_current_name": "_ZN10N67CMatrxw10PADGMaKVtzEP10AICTfaebpZP10G0gxgajWBwbP10mTAogaaEip",
+      "spectron_default_name": false,
+      "spectron_ea": "0x23168c",
+      "spectron_metrics": {
+        "basic_block_count": 14,
+        "instruction_count": 123,
+        "mnemonic_hash": "c872fc7bacf585e5247d6a13ccdce0796c1690ba677805fc95ba5c59ed40d7fc",
+        "register_shape_hash": "da00392735b92ce3f98aed918760b99f7ba30c4262db171e3dac7383eb15dce6",
+        "shape_hash": "0a6c580cde6f6169ace542a701044ea8c3246b6b32fb35ebec04ea8b6691281b",
+        "size": 500
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both normalize an on-prefixed action name, handle the created, initialized, and initframe event set, and execute matching event functions while avoiding duplicate function calls.",
+        "Both fall back to the script and class property lookup path when no direct event function is found, then execute the resolved function with the action argument array.",
+        "The target preserves the same 41-block dispatch structure and grows only from 952 to 956 bytes, with target string and list wrappers visible in pseudocode."
+      ],
+      "match_kind": "manual-script-execution-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x228930",
+      "original_metrics": {
+        "basic_block_count": 41,
+        "instruction_count": 235,
+        "mnemonic_hash": "1851d5e73d7302c9c6dc125e3a39f2090364318d1d91a38a36b7221643460c8d",
+        "register_shape_hash": "acf1c7a0d387a02746ffe0c375974007aaaa9e9420e619feca4b82dc91cc72c0",
+        "shape_hash": "9cbf35614ebe2afefae739ed5e3786f45b2921b16f472f203b437981d126aad3",
+        "size": 952
+      },
+      "original_name": "TScriptSpace_executeActionSelfCatch_TString_const_TScriptAction",
+      "original_string_refs": [
+        "created,initialized,initframe"
+      ],
+      "proposed_name": "v18_TScriptSpace_executeActionSelfCatch_TString_const_TScriptAction",
+      "semantic_match_already_present": false,
+      "source_basis": "self-caught action dispatch",
+      "spectron_current_name": "_ZN10N67CMatrxw10A2WRfbUh_XERK10C8THgaTQxFP10FOb5fbmyZ8",
+      "spectron_default_name": false,
+      "spectron_ea": "0x231880",
+      "spectron_metrics": {
+        "basic_block_count": 41,
+        "instruction_count": 236,
+        "mnemonic_hash": "6da074375da267417f4ec90606867e627502bbf30258eaca7efee0734c7ceadf",
+        "register_shape_hash": "e88a1db209e71f7cf07fb73c8cce80f8de8d45f862ee078ec544f64a649ba0bf",
+        "shape_hash": "5634bf72163d674ecc0ea93bb9b7e0fb85092d2748722d45b531cdfaf632f67f",
+        "size": 956
+      },
+      "spectron_string_refs": [
+        "created,initialized,initframe"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both scan the current script's function list and then the active class list for an action name and case-insensitive function name match.",
+        "Both invoke the shared script-function executor with the action's argument array and release each returned variable before continuing.",
+        "The target retains the same nested scan and loop roles in the N67CMatrxw sequence, with a 472-byte body versus 456 bytes in the source."
+      ],
+      "match_kind": "manual-script-execution-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x228ce8",
+      "original_metrics": {
+        "basic_block_count": 20,
+        "instruction_count": 114,
+        "mnemonic_hash": "9cd39ccfec68d7d406c42f408de076cf0bc1ba5f5fbd64e76757a490bad4540e",
+        "register_shape_hash": "23887a78b21bd54069d0d5548016d3eb17fedd0a88d82e233dc9d52bb632f1f0",
+        "shape_hash": "3aa06df680a29ddcd8f8e82ca72d105c3b1a0124422d7eb93ea3da5d6bf19bba",
+        "size": 456
+      },
+      "original_name": "TScriptSpace_executeActionNamedObject_TScriptAction",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptSpace_executeActionNamedObject_TScriptAction",
+      "semantic_match_already_present": false,
+      "source_basis": "named-object action dispatch",
+      "spectron_current_name": "_ZN10N67CMatrxw10wI3Rfb4J5XEP10FOb5fbmyZ8",
+      "spectron_default_name": false,
+      "spectron_ea": "0x231c3c",
+      "spectron_metrics": {
+        "basic_block_count": 20,
+        "instruction_count": 118,
+        "mnemonic_hash": "238a4b494d3ebddd3d0d5a001916b1f40ad12c4df024863e13273359e022ce76",
+        "register_shape_hash": "da3c3cd9d2f4587351bccaaf7a168e1deda446972476823f09372954b850af49",
+        "shape_hash": "19dacc346bc8b4ea2ba1bdb7207759893b09c9ec6a8ac804b92f5f9740bbd543",
+        "size": 472
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both require an object and action, skip the current executing object, resolve the catching function by event and object name, and lazily create the action argument array.",
+        "Both insert a link variable for the caught object, execute the function, and release the returned value when present.",
+        "The target keeps the same compact role and expands from 188 to 256 bytes for target string and variable wrappers."
+      ],
+      "match_kind": "manual-script-execution-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x228eb0",
+      "original_metrics": {
+        "basic_block_count": 9,
+        "instruction_count": 47,
+        "mnemonic_hash": "54871a0c220cfd6b7051f830a90230ec29b4b6d288ad51d2637e741bded01b9b",
+        "register_shape_hash": "5820b17272019d6b8c6389ee5dd0e2d9fe9a992ba10c1d439150b1995538ae99",
+        "shape_hash": "b9e8eb8509dbd1750754cde7ed9712039e0968bc8556b1350b2b612526675317",
+        "size": 188
+      },
+      "original_name": "TScriptSpace_executeActionCatch_TGraalVar_TScriptAction",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptSpace_executeActionCatch_TGraalVar_TScriptAction",
+      "semantic_match_already_present": false,
+      "source_basis": "caught action dispatch",
+      "spectron_current_name": "_ZN10N67CMatrxw10hvRRfb_CVXEP10G0gxgajWBwP10FOb5fbmyZ8",
+      "spectron_default_name": false,
+      "spectron_ea": "0x231e14",
+      "spectron_metrics": {
+        "basic_block_count": 9,
+        "instruction_count": 64,
+        "mnemonic_hash": "731224a4ff6a7cd4e4992e658be8a452aa72a62a5733ecf697ce9c556706298b",
+        "register_shape_hash": "9714c47782c5c0987e3b4fef33b9ab7fe291620c53165a3e23b7f2e92d004931",
+        "shape_hash": "6799f64fe86c4c48ec52c9ce7154ba5ea0c61153e95f89b96af55b9122c8db34",
+        "size": 256
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both first update an existing saved state when found, otherwise read the object's script space and locate the matching event state using the supplied delay and event name.",
+        "Both mark the state active, create or update its stack entry, copy the current machine value when the execution status requires it, and call the object's event callback.",
+        "The target retains the same five-argument signature and wake-up sequence, with 588 bytes versus 560 bytes in the source."
+      ],
+      "match_kind": "manual-script-execution-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x228f6c",
+      "original_metrics": {
+        "basic_block_count": 19,
+        "instruction_count": 140,
+        "mnemonic_hash": "28a9b834c78f3627b24a20c5a3424f3f3d8a1c078ea6a420a3f9acdc7ee50599",
+        "register_shape_hash": "516ec3c8b6c050f4bd80283e57a98a2a95af063b9e089697da5dd68e79c4aa40",
+        "shape_hash": "76fd349e308d9ff12dc666ba304e5edc414392ffd0a1acd92d7d3ef917cdd20a",
+        "size": 560
+      },
+      "original_name": "TScriptSpace_checkCallerSuspenseWakeUp_TGraalVar_TString_const_double_int",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptSpace_checkCallerSuspenseWakeUp_TGraalVar_TString_const_double_int",
+      "semantic_match_already_present": false,
+      "source_basis": "suspended caller wake-up",
+      "spectron_current_name": "_ZN10N67CMatrxw10FIvRfbdiDXEP10G0gxgajWBwRK10C8THgaTQxFdi",
+      "spectron_default_name": false,
+      "spectron_ea": "0x231f14",
+      "spectron_metrics": {
+        "basic_block_count": 19,
+        "instruction_count": 147,
+        "mnemonic_hash": "bb6ba288e1b5933e499439dc64e4d8e2fa5f561f96d6a24655cc71088d5f5416",
+        "register_shape_hash": "c2ba7a27ce5503b33a49b4f79fe102e708d0f167c209f171b723f7c90dd8eb32",
+        "shape_hash": "502c535f712edf6c9bb574eca597f5a4d1e8e79560b44b275aff1305764b8644",
+        "size": 588
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both walk the action list at object offset 64, destroy each non-null TScriptAction object, and clear the list afterward.",
+        "The source and target bodies preserve the same 124-byte, 31-instruction, nine-block shape in the N67CMatrxw class sequence."
+      ],
+      "match_kind": "manual-script-execution-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22981c",
+      "original_metrics": {
+        "basic_block_count": 9,
+        "instruction_count": 31,
+        "mnemonic_hash": "486c1928b71128c0fdc3e9408418c06082863bef6c687d0e0d7b9ad6adfedad5",
+        "register_shape_hash": "4feae8e0fcae81bf255510068703eccea8f17b9db79c58e714f4cf61b8235ef3",
+        "shape_hash": "e2adaa68818282e7966e0c553ec1ed1a1f957595f9256b224c136b1520f31d45",
+        "size": 124
+      },
+      "original_name": "TScriptSpace_freeActions_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptSpace_freeActions_void",
+      "semantic_match_already_present": false,
+      "source_basis": "script action list cleanup",
+      "spectron_current_name": "_ZN10N67CMatrxw10oaqhMalDgeEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x232944",
+      "spectron_metrics": {
+        "basic_block_count": 9,
+        "instruction_count": 31,
+        "mnemonic_hash": "486c1928b71128c0fdc3e9408418c06082863bef6c687d0e0d7b9ad6adfedad5",
+        "register_shape_hash": "4feae8e0fcae81bf255510068703eccea8f17b9db79c58e714f4cf61b8235ef3",
+        "shape_hash": "e2adaa68818282e7966e0c553ec1ed1a1f957595f9256b224c136b1520f31d45",
+        "size": 124
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_script_execution_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v3.json",
+    "spectron_features_sha256": "031afed73611783e0b16be71009e20118fc90a56e5d03e5ec04526f654f5cf27"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The changed-size rows rely on class-local order, pseudocode behavior, target signatures, and caller context rather than byte identity."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for GS2 function invocation, action dispatch, caller wake-up, and action cleanup",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 6,
+    "high_confidence_count": 6,
+    "new_context_anchor_count": 6,
+    "target_default_name_count": 0
+  }
+}

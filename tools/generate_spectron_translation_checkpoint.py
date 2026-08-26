@@ -91,6 +91,8 @@ def main() -> None:
     parser.add_argument("--script-machine-verification", type=Path)
     parser.add_argument("--script-space-anchors", type=Path)
     parser.add_argument("--script-space-verification", type=Path)
+    parser.add_argument("--script-execution-anchors", type=Path)
+    parser.add_argument("--script-execution-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1026,6 +1028,34 @@ def main() -> None:
         result["script_space_anchors"] = script_space
         result["interpretation"].append(
             "The thirty-third database revision also contains the separately reviewed TScriptSpace event, class-transition, event-state, and timeout anchors."
+        )
+    script_execution = None
+    if args.script_execution_anchors or args.script_execution_verification:
+        if not args.script_execution_anchors or not args.script_execution_verification:
+            raise ValueError(
+                "script-execution anchors and script-execution verification must be supplied together"
+            )
+        script_execution_document = load(args.script_execution_anchors)
+        script_execution_verification = load(args.script_execution_verification)
+        if script_execution_document.get("artifact") != "spectron_script_execution_manual_translation_anchors_20260826":
+            raise ValueError("unexpected script-execution anchor artifact")
+        if not script_execution_verification.get("verified"):
+            raise ValueError("script-execution anchor reopen verification did not pass")
+        expected_script_execution = len(script_execution_document["anchors"])
+        if script_execution_verification["verified_name_count"] != expected_script_execution:
+            raise ValueError("script-execution verification count differs from artifact")
+        script_execution = {
+            "anchor_path": str(args.script_execution_anchors),
+            "anchor_sha256": sha256_path(args.script_execution_anchors),
+            "reopen_verification": str(args.script_execution_verification),
+            "anchor_count": expected_script_execution,
+            "verified_name_count": script_execution_verification["verified_name_count"],
+            "reopen_failure_count": script_execution_verification["failure_count"],
+        }
+    if script_execution is not None:
+        result["script_execution_anchors"] = script_execution
+        result["interpretation"].append(
+            "The thirty-fourth database revision also contains the separately reviewed GS2 function-invocation, action-dispatch, caller-wake-up, and action-cleanup anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
