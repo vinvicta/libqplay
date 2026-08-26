@@ -1,0 +1,168 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both check the current script and busy flag, look up or create the event state, borrow the universe free machine, and prepare either the event state or the script's main function.",
+        "Both supply NPC comma-text arguments when needed, execute the machine, detect an updated called script, wake a suspended caller, restore execution variables, return the machine to the free list, and restore the previous universe machine.",
+        "The target retains the same event-state and script-function branches. Its body grows from 844 to 960 bytes because target string and variable wrappers are materialized explicitly."
+      ],
+      "match_kind": "manual-script-dispatch-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22919c",
+      "original_metrics": {
+        "basic_block_count": 35,
+        "instruction_count": 210,
+        "mnemonic_hash": "6d40fd5adf4af7bbad7b84a3a0239136c917e101d79b6d2dc4c06d3a95c36af1",
+        "register_shape_hash": "384405a4df2b3bb795236c186683766f1af4b3fb7ef75ca0071b8fae1cbba37e",
+        "shape_hash": "4a64d7fd7c2d71cd7ff9a09d427e7f0f00bde6cecfd9de4568461106b83cc7ce",
+        "size": 844
+      },
+      "original_name": "TScriptSpace_executeScript_TString_const_TString_const_TGraalVar",
+      "original_string_refs": [
+        "Waking up script: has been updated since calling the other script, canceling: "
+      ],
+      "proposed_name": "v18_TScriptSpace_executeScript_TString_const_TString_const_TGraalVar",
+      "semantic_match_already_present": false,
+      "source_basis": "script-state execution entry",
+      "spectron_current_name": "_ZN10N67CMatrxw10uSMgPasJJKERK10C8THgaTQxFS2_P10G0gxgajWBw",
+      "spectron_default_name": false,
+      "spectron_ea": "0x232160",
+      "spectron_metrics": {
+        "basic_block_count": 35,
+        "instruction_count": 240,
+        "mnemonic_hash": "564ee0f1e88859659fbd3b9db3941daba4d637dcc748cbe5c6c2e60e9253f21d",
+        "register_shape_hash": "b03df493ea267a259fb80fa1753e60ee9baedf686adef7cd9da3267dd76ca1e0",
+        "shape_hash": "ea965f98162e7b83ebf70442ec5a11f75e0552081607142041351c4aa9aff6ff",
+        "size": 960
+      },
+      "spectron_string_refs": [
+        "Waking up script: has been updated since calling the other script, canceling: "
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both reject busy actions and scripts, update classes, resolve the action's target object or universe object, and update the executing NPC's global-player state.",
+        "Both route an existing event state through executeScript, dispatch local and caught actions, select whole-script or function events, execute the fallback script, and process pending class leaves.",
+        "The target preserves the same action-state branches and helper calls in the N67CMatrxw class. Its body grows from 820 to 1060 bytes around target string and object wrappers."
+      ],
+      "match_kind": "manual-script-dispatch-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x2294e8",
+      "original_metrics": {
+        "basic_block_count": 50,
+        "instruction_count": 204,
+        "mnemonic_hash": "e84cb2ed2f3919a1a7ef0c8ab807d9178a0483d354f31f2a4a72453fd8689484",
+        "register_shape_hash": "47ef76a25cdb3785f103505ae10c66a35c025f49975f3ac90d105dffde28d993",
+        "shape_hash": "91561dae94b1e8b0e16c34c6f4d438bc55e85b9f9f961bb1af44f8b047295a07",
+        "size": 820
+      },
+      "original_name": "TScriptSpace_executeAction_TScriptAction",
+      "original_string_refs": [
+        "istimeout",
+        "timeout"
+      ],
+      "proposed_name": "v18_TScriptSpace_executeAction_TScriptAction",
+      "semantic_match_already_present": false,
+      "source_basis": "top-level action dispatcher",
+      "spectron_current_name": "_ZN10N67CMatrxw10cLiSfbhoiYEP10FOb5fbmyZ8",
+      "spectron_default_name": false,
+      "spectron_ea": "0x232520",
+      "spectron_metrics": {
+        "basic_block_count": 54,
+        "instruction_count": 263,
+        "mnemonic_hash": "a0d6c0ed5fbae0b76d552446cb3adc23d9de698f6709bd0a90c158262e53345d",
+        "register_shape_hash": "2a0870fe37a8f87dd11f361e536a278ce81f37e110448cf4d1b7d03fb6742a65",
+        "shape_hash": "30f5070818013b69cf7bf991aa81b8f99355c0f9dd36e7d485480ecf1e993b4d",
+        "size": 1060
+      },
+      "spectron_string_refs": [
+        "istimeout",
+        "timeout"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both reject events on inactive objects, enforce the 999-event limit with the onAllRCChat exception, and report overruns through addScriptError.",
+        "Both suppress duplicate onshow and onhide events in the small queue, construct a TScriptAction with the same object, event, and argument fields, and prioritize timeout, created, and initialized actions at the front.",
+        "The target preserves duplicate detection, optional argument comparison for larger queues, activation of the script, and return of the new action. Its body grows from 988 to 1156 bytes due to target wrappers and guarded constants."
+      ],
+      "match_kind": "manual-script-dispatch-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x229898",
+      "original_metrics": {
+        "basic_block_count": 48,
+        "instruction_count": 243,
+        "mnemonic_hash": "738d3da5a5dcb25d38429801af6aca9f6813663fa06172117c67f06303a08f8e",
+        "register_shape_hash": "76a789bbcde8c06028694ed3fffa4caa519df23d9e3bec7f04aa45f666449a79",
+        "shape_hash": "b0b5dd5208198e9e2479a179dc12cad3adab809c564cdec5f93662a78e33b4e9",
+        "size": 988
+      },
+      "original_name": "TScriptSpace_receiveEvent_TString_const_TString_const_TGraalVar",
+      "original_string_refs": [
+        " (",
+        ")",
+        "Events number overrun for ",
+        "action",
+        "created",
+        "initialized",
+        "istimeout",
+        "onAllRCChat",
+        "onshow,onhide"
+      ],
+      "proposed_name": "v18_TScriptSpace_receiveEvent_TString_const_TString_const_TGraalVar",
+      "semantic_match_already_present": false,
+      "source_basis": "incoming event queue insertion",
+      "spectron_current_name": "_ZN10N67CMatrxw10rVjVga1mQQERK10C8THgaTQxFS2_P10G0gxgajWBw",
+      "spectron_default_name": false,
+      "spectron_ea": "0x2329c0",
+      "spectron_metrics": {
+        "basic_block_count": 52,
+        "instruction_count": 282,
+        "mnemonic_hash": "5ea494e88b0fd5faf9b0c91b1224233cbfdc011b6cc04b34ff0f6a8946165a55",
+        "register_shape_hash": "46d3bb4092661ac70433b4003e9abce0167906a2897bf01aab69bff0b315d77d",
+        "shape_hash": "fb9374efc5df2a397d0acf54e8b9fd5569ac725e73ffde4c0b695b750c1a551c",
+        "size": 1156
+      },
+      "spectron_string_refs": [
+        " (",
+        "Events number overrun for ",
+        "action",
+        "created",
+        "initialized",
+        "istimeout",
+        "onAllRCChat",
+        "onshow,onhide"
+      ]
+    }
+  ],
+  "artifact": "spectron_script_dispatch_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v3.json",
+    "spectron_features_sha256": "031afed73611783e0b16be71009e20118fc90a56e5d03e5ec04526f654f5cf27"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The changed-size rows rely on class-local order, pseudocode behavior, target signatures, and caller context rather than byte identity."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for GS2 script execution, action dispatch, and incoming event queueing",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 3,
+    "high_confidence_count": 3,
+    "new_context_anchor_count": 3,
+    "target_default_name_count": 0
+  }
+}

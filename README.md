@@ -502,6 +502,16 @@ paths. All six reopened successfully. The evidence is in
 `artifacts/spectron_script_execution_manual_translation_anchors_20260826.json`,
 and the v36 database SHA-256 is recorded in the checkpoint.
 
+A thirty-fifth disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v37.i64`,
+adds three reviewed top-level GS2 dispatch anchors. They cover script-state
+execution, action dispatch, and incoming event queueing. The target bodies
+preserve machine-state handling, action routing, queue limits, duplicate
+suppression, and priority insertion. All three reopened successfully. The
+evidence is in
+`artifacts/spectron_script_dispatch_manual_translation_anchors_20260826.json`,
+and the v37 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and

@@ -77,8 +77,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v36.i64",
-    "sha256": "03b2888be2ce9c992a5849126d856d94a7d010f882c095c9b26275f3e65f875f"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v37.i64",
+    "sha256": "47366d1d75b2b6cf117a605950d7f7d326b9279338cf56374277d50a555e4cd7"
   },
   "html_atom_anchors": {
     "anchor_count": 5,
@@ -155,7 +155,8 @@
     "The thirty-first database revision also contains the separately reviewed resource comparator, link, alternative, and stream-materialization anchors.",
     "The thirty-second database revision also contains the separately reviewed GS2 script-machine construction, resolution, assignment, and comparison anchors.",
     "The thirty-third database revision also contains the separately reviewed TScriptSpace event, class-transition, event-state, and timeout anchors.",
-    "The thirty-fourth database revision also contains the separately reviewed GS2 function-invocation, action-dispatch, caller-wake-up, and action-cleanup anchors."
+    "The thirty-fourth database revision also contains the separately reviewed GS2 function-invocation, action-dispatch, caller-wake-up, and action-cleanup anchors.",
+    "The thirty-fifth database revision also contains the separately reviewed GS2 script-state, top-level action, and incoming-event dispatch anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -263,6 +264,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_script_bridge_anchor_verification_20260826.json",
     "verified_name_count": 13
+  },
+  "script_dispatch_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "artifacts/spectron_script_dispatch_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "2ae26a8ee112d8dd31f17ceca8e01c5a3ea8e9e57886fdfe5b9f6891261f68f0",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_script_dispatch_verify_v37.json",
+    "verified_name_count": 3
   },
   "script_execution_anchors": {
     "anchor_count": 6,
