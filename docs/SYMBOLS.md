@@ -323,15 +323,19 @@ static functions whose original names were never stored in the APK.
 saved inventory, overlay, symbol export, and ELF section data. It is a
 triage aid for the next analysis pass, not an IDA rename script.
 
-A separate role-candidate artifact records seventeen high-confidence aliases.
-The original four cover the profiler helpers at `0xf9028`, `0xf9060`, and
+A separate role-candidate artifact records 28 behavior-based aliases. The
+original four cover the profiler helpers at `0xf9028`, `0xf9060`, and
 `0xf9944`, plus the recursive worker at `0x213088` immediately before
-`TGraalVar::loadFolder`. The other thirteen cover TBitmap GIF and JPEG stream
+`TGraalVar::loadFolder`. Thirteen more cover TBitmap GIF and JPEG stream
 callbacks, the generated animation lexer fatal path, three TServerLevel
 spatial-query predicates, a player draw-list predicate, a scroll-control
 property resolver, and the actionnpc or activeplayer script-object resolver.
-These aliases are analysis roles, not recovered ELF names, and are not
-included in the applied semantic-label count.
+The final eleven cover the flex-style animation previous-state helper, a
+generic draw-distance comparator, and the nine YAJL callbacks used by
+`TGraalVar::readJSON`. Twenty-seven candidates are high-confidence. The
+draw-distance comparator is medium-confidence because its class owner and
+direct call site were not recovered. These aliases are analysis roles, not
+recovered ELF names, and are not included in the applied semantic-label count.
 `tools/generate_unresolved_function_candidates.py` rebuilds the artifact and
 `tools/ida_apply_unresolved_function_candidates.py` keeps the IDA step
 review-only.

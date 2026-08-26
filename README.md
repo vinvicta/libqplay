@@ -208,9 +208,10 @@ proves the local native TLS path, not a current live certificate or service.
   the saved function, script-table, and candidate inventories.
 * `tools/generate_unresolved_function_profile.py` rebuilds the unresolved
   function profile from the saved inventories and ELF section metadata.
-* `artifacts/unresolved_function_candidates.json` records seventeen
-  high-confidence role aliases for profiler, image-I/O, animation-lexer,
-  spatial-query, UI, script-object, and folder-loader helpers. They remain
+* `artifacts/unresolved_function_candidates.json` records 28 behavior-based
+  role aliases for profiler, image-I/O, animation-lexer, spatial-query, UI,
+  script-object, folder-loader, and JSON-parser helpers. Twenty-seven are
+  high-confidence and one generic comparator is medium-confidence. They remain
   review-only until they are applied to the matching IDA database.
 * `tools/generate_unresolved_function_candidates.py` rebuilds that candidate
   artifact, while `tools/ida_apply_unresolved_function_candidates.py` provides

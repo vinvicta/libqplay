@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build high-confidence role candidates for selected IDA default functions.
+"""Build behavior-based role candidates for selected IDA default functions.
 
 The ELF symbol import is complete, but some compiler-created functions still
 have no source name. This small candidate set records roles proved by callers
@@ -194,6 +194,118 @@ CANDIDATES = [
             "The helper returns the actionnpc object field, or the activeplayer object field when actionnpc is marked as using the active player context.",
         ],
     },
+    {
+        "ea": 0xE01D0,
+        "proposed_name": "ani_lexer_getPreviousState",
+        "confidence": "high",
+        "role": "Flex-style animation lexer previous-state helper",
+        "evidence": [
+            "The generated lex_load routine calls 0xe01d0 at 0x194c8c, 0x194e4c, and 0x195efc after updating its scanner buffer state.",
+            "The body walks the current animation input with the DFA tables near 0x2d6000 and 0x2d7000, updates scanner state globals, and returns the next lexer state.",
+            "Its no-argument shape and table walk match the generated yy_get_previous_state helper used by flex scanners.",
+        ],
+    },
+    {
+        "ea": 0x20AC18,
+        "proposed_name": "compareObjectsByDistance",
+        "confidence": "medium",
+        "role": "Object comparator using draw-distance and priority tie-breaks",
+        "evidence": [
+            "The body accepts two object pointers, calls each object's virtual position accessors at offsets 0x148 and 0x158, and computes squared distance from the shared draw reference at 0x390bd8.",
+            "It returns -1, 0, or 1 and uses the object field at offset 0x2ec as a tie-breaker, which is consistent with a sort comparator.",
+            "IDA recorded four incoming references, but the saved static scan did not recover a direct BL call site, so the alias intentionally avoids assigning a class owner.",
+        ],
+    },
+    {
+        "ea": 0x22D9FC,
+        "proposed_name": "TGraalVar_jsonMapKeyCallback",
+        "confidence": "high",
+        "role": "YAJL map-key callback for TGraalVar::readJSON",
+        "evidence": [
+            "The callback table at 0x387e20 stores 0x22d9fc in the map_key slot, and TGraalVar::readJSON passes that table to yajl_alloc at 0x22e2c0.",
+            "The body builds a temporary key string, stores it in the current object entry, and handles the special scriptsslissuer key used by the client.",
+        ],
+    },
+    {
+        "ea": 0x22DAB4,
+        "proposed_name": "TGraalVar_jsonStringCallback",
+        "confidence": "high",
+        "role": "YAJL string-value callback for TGraalVar::readJSON",
+        "evidence": [
+            "The callback table at 0x387e20 stores 0x22dab4 in the string slot used by yajl_alloc.",
+            "The body copies the incoming string into a temporary TString and writes it into the current TGraalVar object or array entry.",
+        ],
+    },
+    {
+        "ea": 0x22DBBC,
+        "proposed_name": "TGraalVar_jsonNumberCallback",
+        "confidence": "high",
+        "role": "YAJL number callback for TGraalVar::readJSON",
+        "evidence": [
+            "The callback table at 0x387e20 stores 0x22dbbc in the number slot used by yajl_alloc.",
+            "The body copies the numeric text, checks it with isnumber2, converts it with strtofloat, and stores the value in the current TGraalVar entry while preserving a normalized string form.",
+        ],
+    },
+    {
+        "ea": 0x22DD94,
+        "proposed_name": "TGraalVar_jsonBooleanCallback",
+        "confidence": "high",
+        "role": "YAJL boolean callback for TGraalVar::readJSON",
+        "evidence": [
+            "The callback table at 0x387e20 stores 0x22dd94 in the boolean slot used by yajl_alloc.",
+            "The body converts the boolean argument to a floating value and updates the current TGraalVar entry, returning one on completion.",
+        ],
+    },
+    {
+        "ea": 0x22DE60,
+        "proposed_name": "TGraalVar_jsonStartArrayCallback",
+        "confidence": "high",
+        "role": "YAJL start-array callback for TGraalVar::readJSON",
+        "evidence": [
+            "The callback table at 0x387e20 stores 0x22de60 in the start_array slot used by yajl_alloc.",
+            "The body creates an array TGraalVar child, initializes its type marker, and links the new list node into the current parsing context.",
+        ],
+    },
+    {
+        "ea": 0x22DFA4,
+        "proposed_name": "TGraalVar_jsonEndMapCallback",
+        "confidence": "high",
+        "role": "YAJL end-map callback for TGraalVar::readJSON",
+        "evidence": [
+            "The callback table at 0x387e20 stores 0x22dfa4 in the end_map slot used by yajl_alloc.",
+            "The body removes the current object node from the parsing chain, transfers its linked-string ownership, clears the temporary string, and deletes the completed node.",
+        ],
+    },
+    {
+        "ea": 0x22E000,
+        "proposed_name": "TGraalVar_jsonEndArrayCallback",
+        "confidence": "high",
+        "role": "YAJL end-array callback for TGraalVar::readJSON",
+        "evidence": [
+            "The callback table at 0x387e20 stores 0x22e000 in the end_array slot used by yajl_alloc.",
+            "The body performs the corresponding array-node removal and ownership transfer, then clears and deletes the completed parser node.",
+        ],
+    },
+    {
+        "ea": 0x22E05C,
+        "proposed_name": "TGraalVar_jsonNullCallback",
+        "confidence": "high",
+        "role": "YAJL null callback for TGraalVar::readJSON",
+        "evidence": [
+            "The callback table at 0x387e20 stores 0x22e05c in the null slot used by yajl_alloc.",
+            "The body handles the current object or array entry and writes the null value through the TGraalVar numeric or virtual-value path.",
+        ],
+    },
+    {
+        "ea": 0x22E12C,
+        "proposed_name": "TGraalVar_jsonStartMapCallback",
+        "confidence": "high",
+        "role": "YAJL start-map callback for TGraalVar::readJSON",
+        "evidence": [
+            "The callback table at 0x387e20 stores 0x22e12c in the start_map slot used by yajl_alloc.",
+            "The body creates an object TGraalVar child, initializes its type marker, and links the new list node into the current parsing context.",
+        ],
+    },
 ]
 
 
@@ -236,7 +348,7 @@ def generate(args: argparse.Namespace) -> dict[str, object]:
 
     return {
         "status": "candidates_not_yet_applied_to_ida",
-        "purpose": "Record high-confidence roles for selected IDA default functions without claiming recovered ELF source names.",
+        "purpose": "Record behavior-based roles for selected IDA default functions without claiming recovered ELF source names; confidence is recorded per candidate.",
         "binary": "private original ARM64 libqplay.so",
         "binary_sha256": sha256(binary),
         "candidate_count": len(candidates),

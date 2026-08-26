@@ -1433,7 +1433,20 @@ activeplayer script-object resolver at `0x217e68`. Their roles are supported by
 callback assignments, direct call sites, or the nearby exported method. They
 are still analysis aliases, not recovered source names.
 
-`artifacts/unresolved_function_candidates.json` stores all seventeen proposed
+A final structural pass resolved the remaining eleven application or engine
+entries as role candidates. The helper at `0xe01d0` is the flex-style
+`yy_get_previous_state` equivalent used by `lex_load`: it walks the animation
+scanner's DFA tables and updates the generated lexer state. The comparator at
+`0x20ac18` accepts two objects, computes their squared draw distance, and uses
+field `0x2ec` as a priority tie-breaker. Its behavior is clear, but its class
+owner and direct call site are not, so that candidate is marked medium
+confidence. The other nine addresses are the complete YAJL callback set at
+`0x387e20`, passed to `yajl_alloc` by `TGraalVar::readJSON` at `0x22e2c0`:
+null, boolean, number, string, start-map, map-key, end-map, start-array, and
+end-array. Their callback slots provide stronger evidence than their local
+instruction patterns alone.
+
+`artifacts/unresolved_function_candidates.json` stores all 28 proposed
 roles with their call-site evidence, function sizes, and input hash.
 `tools/generate_unresolved_function_candidates.py` regenerates it from the
 saved inventory and unresolved profile. The companion

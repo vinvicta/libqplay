@@ -294,6 +294,14 @@ This is the short handoff view. The full reasoning and command history are in
     predicate, the scroll-control property resolver, and the script-object
     resolver. The candidate artifact does not claim that these aliases exist in
     the ELF, and no IDA names changed or endpoint was contacted.
+46. A final structural pass added eleven more role candidates, bringing the
+    review-only role artifact to 28 entries. The new entries cover the flex-style
+    animation previous-state helper at `0xe01d0`, the generic draw-distance
+    comparator at `0x20ac18`, and the nine YAJL callbacks installed at
+    `0x387e20` for `TGraalVar::readJSON`. Twenty-seven candidates are marked
+    high-confidence; the comparator is medium-confidence because its class
+    owner and direct call site remain unresolved. No IDA names changed and no
+    endpoint was contacted.
 
 ## Not verified
 
