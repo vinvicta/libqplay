@@ -41,6 +41,8 @@ def main() -> None:
     parser.add_argument("--client-action-verification", type=Path)
     parser.add_argument("--client-outbound-anchors", type=Path)
     parser.add_argument("--client-outbound-verification", type=Path)
+    parser.add_argument("--resource-anchors", type=Path)
+    parser.add_argument("--resource-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -276,6 +278,34 @@ def main() -> None:
         result["client_outbound_anchors"] = client_outbound
         result["interpretation"].append(
             "The eighth database revision also contains the separately reviewed remaining client outbound packet serializer anchors."
+        )
+    resource = None
+    if args.resource_anchors or args.resource_verification:
+        if not args.resource_anchors or not args.resource_verification:
+            raise ValueError(
+                "resource anchors and resource verification must be supplied together"
+            )
+        resource_document = load(args.resource_anchors)
+        resource_verification = load(args.resource_verification)
+        if resource_document.get("artifact") != "spectron_resource_manual_translation_anchors_20260826":
+            raise ValueError("unexpected resource anchor artifact")
+        if not resource_verification.get("verified"):
+            raise ValueError("resource anchor reopen verification did not pass")
+        expected_resource = len(resource_document["anchors"])
+        if resource_verification["verified_name_count"] != expected_resource:
+            raise ValueError("resource verification count differs from artifact")
+        resource = {
+            "anchor_path": str(args.resource_anchors),
+            "anchor_sha256": sha256_path(args.resource_anchors),
+            "reopen_verification": str(args.resource_verification),
+            "anchor_count": expected_resource,
+            "verified_name_count": resource_verification["verified_name_count"],
+            "reopen_failure_count": resource_verification["failure_count"],
+        }
+    if resource is not None:
+        result["resource_anchors"] = resource
+        result["interpretation"].append(
+            "The ninth database revision also contains the separately reviewed resource matching, stream, and game-file resolution anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

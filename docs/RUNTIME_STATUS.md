@@ -515,6 +515,13 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_client_outbound_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+70. Clean IDA review added six high-confidence resource resolver anchors for
+    encoded-key validation, wildcard matching, file-list construction, stream
+    loading, game-file existence, and game-file path lookup. All six names
+    reopened successfully in the v9 disposable copy. See
+    `artifacts/spectron_resource_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
