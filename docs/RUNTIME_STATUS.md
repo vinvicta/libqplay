@@ -1282,6 +1282,13 @@ This is the short handoff view. The full reasoning and command history are in
      See
      `artifacts/spectron_screen_panel_renderer_residual_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
+180. The next IDA pass translated seven residual screen-panel and GLES-window
+     methods. It covers the polygon-font stub, offscreen and resize hooks,
+     complete and deleting destructors, the window-backed pixel-buffer
+     factory, and the native-mode predicate. The labels reopened successfully
+     in the v120 disposable copy. See
+     `artifacts/spectron_screen_panel_window_gles_residual_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
 ## Not verified
 

@@ -1,0 +1,377 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "context_group": "TScreenPanelOpenGL residual font hook",
+      "context_order": 1,
+      "evidence": [
+        "The remaining TScreenPanelOpenGL polygon-font stub sits in the same target SU3JfaCUmR method sequence as the already translated text and font methods.",
+        "The source TWindowGLES rows form one local block of flip, resize, destructor, pixel-buffer factory, and native-mode methods. The target StGQIaOlWk class preserves that order and exposes the corresponding D1 and D0 destructor forms.",
+        "The target pixel-buffer factory allocates the same object size and forwards the same window, name, dimensions, and format arguments. The target native-mode method returns true, while the flip and resize hooks remain empty in both builds.",
+        "Every reviewed source and target pair has matching size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, register shape, and overall shape hash. The rows are not already present in the semantic translation map."
+      ],
+      "match_kind": "manual-screen-panel-window-gles-residual-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x10c5e4",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 1,
+        "mnemonic_hash": "e961e779171076bedbea9cc412e632e7f0ef162348f38175b2d26cd7f427bfe6",
+        "opcode_shape_hash": "1346ab2aeea3ca6d42b745737608b07b4c39f60cb9c9b1340e94f8809ab77f95",
+        "register_shape_hash": "d921540bdfb23372c7622b99ad13277d3551715cf5f7ba19a2cb48bdb184993a",
+        "shape_hash": "9151e4d8a215a1586fa86638f53b44bc91a21e2fb3974fefbf5b828ecf7edcfd",
+        "size": 4
+      },
+      "original_name": "TScreenPanelOpenGL_drawPolygonFont_TFont_int_int_char_const_int_int_TFontOptions_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScreenPanelOpenGL_drawPolygonFont_TFont_int_int_char_const_int_int_TFontOptions_const",
+      "semantic_match_already_present": false,
+      "source_basis": "screen-panel polygon-font hook",
+      "spectron_current_name": "_ZN10SU3JfaCUmR10zBSOfaeypVEP10TZf6gaQ3S_iiPKciiRK10KcKRganuPN",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x10ef34",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 1,
+        "mnemonic_hash": "e961e779171076bedbea9cc412e632e7f0ef162348f38175b2d26cd7f427bfe6",
+        "opcode_shape_hash": "1346ab2aeea3ca6d42b745737608b07b4c39f60cb9c9b1340e94f8809ab77f95",
+        "register_shape_hash": "d921540bdfb23372c7622b99ad13277d3551715cf5f7ba19a2cb48bdb184993a",
+        "shape_hash": "9151e4d8a215a1586fa86638f53b44bc91a21e2fb3974fefbf5b828ecf7edcfd",
+        "size": 4
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TWindowGLES residual lifecycle block",
+      "context_order": 1,
+      "evidence": [
+        "The remaining TScreenPanelOpenGL polygon-font stub sits in the same target SU3JfaCUmR method sequence as the already translated text and font methods.",
+        "The source TWindowGLES rows form one local block of flip, resize, destructor, pixel-buffer factory, and native-mode methods. The target StGQIaOlWk class preserves that order and exposes the corresponding D1 and D0 destructor forms.",
+        "The target pixel-buffer factory allocates the same object size and forwards the same window, name, dimensions, and format arguments. The target native-mode method returns true, while the flip and resize hooks remain empty in both builds.",
+        "Every reviewed source and target pair has matching size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, register shape, and overall shape hash. The rows are not already present in the semantic translation map."
+      ],
+      "match_kind": "manual-screen-panel-window-gles-residual-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x10cc10",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 1,
+        "mnemonic_hash": "e961e779171076bedbea9cc412e632e7f0ef162348f38175b2d26cd7f427bfe6",
+        "opcode_shape_hash": "1346ab2aeea3ca6d42b745737608b07b4c39f60cb9c9b1340e94f8809ab77f95",
+        "register_shape_hash": "d921540bdfb23372c7622b99ad13277d3551715cf5f7ba19a2cb48bdb184993a",
+        "shape_hash": "9151e4d8a215a1586fa86638f53b44bc91a21e2fb3974fefbf5b828ecf7edcfd",
+        "size": 4
+      },
+      "original_name": "TWindowGLES_flipOffscreen_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TWindowGLES_flipOffscreen_void",
+      "semantic_match_already_present": false,
+      "source_basis": "GLES offscreen-flip hook",
+      "spectron_current_name": "_ZN10StGQIaOlWk10cRcoIakqZXEv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x10f560",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 1,
+        "mnemonic_hash": "e961e779171076bedbea9cc412e632e7f0ef162348f38175b2d26cd7f427bfe6",
+        "opcode_shape_hash": "1346ab2aeea3ca6d42b745737608b07b4c39f60cb9c9b1340e94f8809ab77f95",
+        "register_shape_hash": "d921540bdfb23372c7622b99ad13277d3551715cf5f7ba19a2cb48bdb184993a",
+        "shape_hash": "9151e4d8a215a1586fa86638f53b44bc91a21e2fb3974fefbf5b828ecf7edcfd",
+        "size": 4
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TWindowGLES residual lifecycle block",
+      "context_order": 2,
+      "evidence": [
+        "The remaining TScreenPanelOpenGL polygon-font stub sits in the same target SU3JfaCUmR method sequence as the already translated text and font methods.",
+        "The source TWindowGLES rows form one local block of flip, resize, destructor, pixel-buffer factory, and native-mode methods. The target StGQIaOlWk class preserves that order and exposes the corresponding D1 and D0 destructor forms.",
+        "The target pixel-buffer factory allocates the same object size and forwards the same window, name, dimensions, and format arguments. The target native-mode method returns true, while the flip and resize hooks remain empty in both builds.",
+        "Every reviewed source and target pair has matching size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, register shape, and overall shape hash. The rows are not already present in the semantic translation map."
+      ],
+      "match_kind": "manual-screen-panel-window-gles-residual-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x10cc14",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 1,
+        "mnemonic_hash": "e961e779171076bedbea9cc412e632e7f0ef162348f38175b2d26cd7f427bfe6",
+        "opcode_shape_hash": "1346ab2aeea3ca6d42b745737608b07b4c39f60cb9c9b1340e94f8809ab77f95",
+        "register_shape_hash": "d921540bdfb23372c7622b99ad13277d3551715cf5f7ba19a2cb48bdb184993a",
+        "shape_hash": "9151e4d8a215a1586fa86638f53b44bc91a21e2fb3974fefbf5b828ecf7edcfd",
+        "size": 4
+      },
+      "original_name": "TWindowGLES_setSizeImpl_bool",
+      "original_string_refs": [],
+      "proposed_name": "v18_TWindowGLES_setSizeImpl_bool",
+      "semantic_match_already_present": false,
+      "source_basis": "GLES resize hook",
+      "spectron_current_name": "_ZN10StGQIaOlWk10WLjAga6eazEb",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x10f564",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 1,
+        "mnemonic_hash": "e961e779171076bedbea9cc412e632e7f0ef162348f38175b2d26cd7f427bfe6",
+        "opcode_shape_hash": "1346ab2aeea3ca6d42b745737608b07b4c39f60cb9c9b1340e94f8809ab77f95",
+        "register_shape_hash": "d921540bdfb23372c7622b99ad13277d3551715cf5f7ba19a2cb48bdb184993a",
+        "shape_hash": "9151e4d8a215a1586fa86638f53b44bc91a21e2fb3974fefbf5b828ecf7edcfd",
+        "size": 4
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TWindowGLES residual lifecycle block",
+      "context_order": 3,
+      "evidence": [
+        "The remaining TScreenPanelOpenGL polygon-font stub sits in the same target SU3JfaCUmR method sequence as the already translated text and font methods.",
+        "The source TWindowGLES rows form one local block of flip, resize, destructor, pixel-buffer factory, and native-mode methods. The target StGQIaOlWk class preserves that order and exposes the corresponding D1 and D0 destructor forms.",
+        "The target pixel-buffer factory allocates the same object size and forwards the same window, name, dimensions, and format arguments. The target native-mode method returns true, while the flip and resize hooks remain empty in both builds.",
+        "Every reviewed source and target pair has matching size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, register shape, and overall shape hash. The rows are not already present in the semantic translation map."
+      ],
+      "match_kind": "manual-screen-panel-window-gles-residual-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x10cc18",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 5,
+        "mnemonic_hash": "5eb31dfddfc34a360bea27a49637feb7a635d593087797aeda6755d6e909e11b",
+        "opcode_shape_hash": "c701d21b1a5562fffd5f238ade17b11e17b04ed2072c2501ad6dd70dc17486d0",
+        "register_shape_hash": "296cce15f42c50430a34300df1b62c1e97791266c08229aef7e8d21ad7c2ed48",
+        "shape_hash": "5d71c8e7b99b5c0b89a337a01ffdfdfa562bb96e6e70fe7e77fc8ca1d05bde3a",
+        "size": 20
+      },
+      "original_name": "TWindowGLES_TWindowGLES",
+      "original_string_refs": [],
+      "proposed_name": "v18_TWindowGLES_TWindowGLES",
+      "semantic_match_already_present": false,
+      "source_basis": "GLES complete destructor",
+      "spectron_current_name": "_ZN10StGQIaOlWkD1Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x10f568",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 5,
+        "mnemonic_hash": "5eb31dfddfc34a360bea27a49637feb7a635d593087797aeda6755d6e909e11b",
+        "opcode_shape_hash": "c701d21b1a5562fffd5f238ade17b11e17b04ed2072c2501ad6dd70dc17486d0",
+        "register_shape_hash": "296cce15f42c50430a34300df1b62c1e97791266c08229aef7e8d21ad7c2ed48",
+        "shape_hash": "5d71c8e7b99b5c0b89a337a01ffdfdfa562bb96e6e70fe7e77fc8ca1d05bde3a",
+        "size": 20
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TWindowGLES residual lifecycle block",
+      "context_order": 4,
+      "evidence": [
+        "The remaining TScreenPanelOpenGL polygon-font stub sits in the same target SU3JfaCUmR method sequence as the already translated text and font methods.",
+        "The source TWindowGLES rows form one local block of flip, resize, destructor, pixel-buffer factory, and native-mode methods. The target StGQIaOlWk class preserves that order and exposes the corresponding D1 and D0 destructor forms.",
+        "The target pixel-buffer factory allocates the same object size and forwards the same window, name, dimensions, and format arguments. The target native-mode method returns true, while the flip and resize hooks remain empty in both builds.",
+        "Every reviewed source and target pair has matching size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, register shape, and overall shape hash. The rows are not already present in the semantic translation map."
+      ],
+      "match_kind": "manual-screen-panel-window-gles-residual-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TWindowGLES_TWindowGLES"
+      ],
+      "original_ea": "0x10cc2c",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "6997dd3b5418a87bf6f5a5c521855fc9a17314be795e8b9166aafc3f4274ad31",
+        "opcode_shape_hash": "744107f9f120d79de3ec3260d0856a807bf569915749757d3f718cfa3d52a448",
+        "register_shape_hash": "1023882ef3985c66fc5b82641781f3c5acdb4eababb05670a2c9499e80aafd90",
+        "shape_hash": "ddb4f004bba90eaf41261c7a2d80153268b64d0dc9e3005db4115ce1909821c2",
+        "size": 32
+      },
+      "original_name": "TWindowGLES_TWindowGLES__2",
+      "original_string_refs": [],
+      "proposed_name": "v18_TWindowGLES_TWindowGLES__2",
+      "semantic_match_already_present": false,
+      "source_basis": "GLES deleting destructor",
+      "spectron_current_name": "_ZN10StGQIaOlWkD0Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10StGQIaOlWkD1Ev"
+      ],
+      "spectron_ea": "0x10f57c",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "6997dd3b5418a87bf6f5a5c521855fc9a17314be795e8b9166aafc3f4274ad31",
+        "opcode_shape_hash": "744107f9f120d79de3ec3260d0856a807bf569915749757d3f718cfa3d52a448",
+        "register_shape_hash": "1023882ef3985c66fc5b82641781f3c5acdb4eababb05670a2c9499e80aafd90",
+        "shape_hash": "ddb4f004bba90eaf41261c7a2d80153268b64d0dc9e3005db4115ce1909821c2",
+        "size": 32
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TWindowGLES residual lifecycle block",
+      "context_order": 5,
+      "evidence": [
+        "The remaining TScreenPanelOpenGL polygon-font stub sits in the same target SU3JfaCUmR method sequence as the already translated text and font methods.",
+        "The source TWindowGLES rows form one local block of flip, resize, destructor, pixel-buffer factory, and native-mode methods. The target StGQIaOlWk class preserves that order and exposes the corresponding D1 and D0 destructor forms.",
+        "The target pixel-buffer factory allocates the same object size and forwards the same window, name, dimensions, and format arguments. The target native-mode method returns true, while the flip and resize hooks remain empty in both builds.",
+        "Every reviewed source and target pair has matching size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, register shape, and overall shape hash. The rows are not already present in the semantic translation map."
+      ],
+      "match_kind": "manual-screen-panel-window-gles-residual-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TPixelBufferOpenGL_TPixelBufferOpenGL_TWindow_TString_const_int_int_int",
+        "plt_operator_new_ulong__2"
+      ],
+      "original_ea": "0x10cc4c",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 3,
+        "call_count": 2,
+        "instruction_count": 25,
+        "mnemonic_hash": "1ab07d364369170d144427d31bd2722d1071ea5e83acc856511716b7c9e5af6b",
+        "opcode_shape_hash": "b6162014246d354d9db1d57fd6ad67a758a6d7b8eed8c8dce144691310fbd518",
+        "register_shape_hash": "a727adf0480d0a5affbfc32b9f847aff8ce4fef9ace4bd421ff4183aae45d375",
+        "shape_hash": "db522388a8913679ea0fd93c6837372cd93fb4096887b877a8d72f7cf02ea3be",
+        "size": 100
+      },
+      "original_name": "TWindowGLES_createPixelBuffer_TString_const_int_int_int",
+      "original_string_refs": [],
+      "proposed_name": "v18_TWindowGLES_createPixelBuffer_TString_const_int_int_int",
+      "semantic_match_already_present": false,
+      "source_basis": "window-backed OpenGL pixel-buffer factory",
+      "spectron_current_name": "_ZN10StGQIaOlWk10OQhoIa5C2XERK10C8THgaTQxFiii",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10uzN1fatj75C1EP10LJyzga9PwyRK10C8THgaTQxFiii",
+        "._Znwm"
+      ],
+      "spectron_ea": "0x10f59c",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 3,
+        "call_count": 2,
+        "instruction_count": 25,
+        "mnemonic_hash": "1ab07d364369170d144427d31bd2722d1071ea5e83acc856511716b7c9e5af6b",
+        "opcode_shape_hash": "b6162014246d354d9db1d57fd6ad67a758a6d7b8eed8c8dce144691310fbd518",
+        "register_shape_hash": "a727adf0480d0a5affbfc32b9f847aff8ce4fef9ace4bd421ff4183aae45d375",
+        "shape_hash": "db522388a8913679ea0fd93c6837372cd93fb4096887b877a8d72f7cf02ea3be",
+        "size": 100
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TWindowGLES residual lifecycle block",
+      "context_order": 6,
+      "evidence": [
+        "The remaining TScreenPanelOpenGL polygon-font stub sits in the same target SU3JfaCUmR method sequence as the already translated text and font methods.",
+        "The source TWindowGLES rows form one local block of flip, resize, destructor, pixel-buffer factory, and native-mode methods. The target StGQIaOlWk class preserves that order and exposes the corresponding D1 and D0 destructor forms.",
+        "The target pixel-buffer factory allocates the same object size and forwards the same window, name, dimensions, and format arguments. The target native-mode method returns true, while the flip and resize hooks remain empty in both builds.",
+        "Every reviewed source and target pair has matching size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, register shape, and overall shape hash. The rows are not already present in the semantic translation map."
+      ],
+      "match_kind": "manual-screen-panel-window-gles-residual-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x10cd70",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "2235b95b0ee764acd1a38369acf24ef6480359997e66035251a8a95bf82a49c3",
+        "opcode_shape_hash": "8b767d3e4c1dd1a035474f20af13c2e4993128e2163c3a14742b297f1bfc4ba9",
+        "register_shape_hash": "486b1243813d63df3ed7ceb79d32e66a42ad50a5d5a941fa8e468b3942591e4b",
+        "shape_hash": "b550a1483801496324979c73eddf1524279e6d31634e6927dd7438a4e3e35fa1",
+        "size": 8
+      },
+      "original_name": "TWindowGLES_isNative_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TWindowGLES_isNative_void",
+      "semantic_match_already_present": false,
+      "source_basis": "GLES native-mode predicate",
+      "spectron_current_name": "_ZN10StGQIaOlWk10aZ9nIa7_WXEv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x10f6c0",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "2235b95b0ee764acd1a38369acf24ef6480359997e66035251a8a95bf82a49c3",
+        "opcode_shape_hash": "8b767d3e4c1dd1a035474f20af13c2e4993128e2163c3a14742b297f1bfc4ba9",
+        "register_shape_hash": "486b1243813d63df3ed7ceb79d32e66a42ad50a5d5a941fa8e468b3942591e4b",
+        "shape_hash": "b550a1483801496324979c73eddf1524279e6d31634e6927dd7438a4e3e35fa1",
+        "size": 8
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_screen_panel_window_gles_residual_manual_translation_anchors_20260826",
+  "context": {
+    "source_sequence": "The source screen-panel polygon-font stub is followed by the TWindowGLES offscreen, resize, destructor, factory, and native-mode methods.",
+    "target_classes": {
+      "SU3JfaCUmR": "one residual polygon-font hook at 0x10ef34",
+      "StGQIaOlWk": "GLES lifecycle and pixel-buffer methods at 0x10f560 through 0x10f6c0"
+    }
+  },
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v3.json",
+    "spectron_features_sha256": "031afed73611783e0b16be71009e20118fc90a56e5d03e5ec04526f654f5cf27"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve readable source roles while retaining the obfuscated target names and changed target class names in the evidence rows.",
+    "The source TWindowGLES destructor names are IDA's constructor-style aliases for D1 and D0 forms; the target's explicit D1 and D0 names resolve that ambiguity."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for the residual screen-panel polygon-font hook and TWindowGLES lifecycle methods",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 7,
+    "high_confidence_count": 7,
+    "new_context_anchor_count": 7,
+    "target_default_name_count": 0
+  }
+}

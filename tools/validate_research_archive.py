@@ -410,6 +410,9 @@ def main():
     spectron_screen_panel_renderer_residual_anchors = load_json(
         "artifacts/spectron_screen_panel_renderer_residual_manual_translation_anchors_20260826.json"
     )
+    spectron_screen_panel_window_gles_residual_anchors = load_json(
+        "artifacts/spectron_screen_panel_window_gles_residual_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2353,6 +2356,16 @@ def main():
     check("Spectron screen-panel renderer residual semantic overlap", spectron_screen_panel_renderer_residual_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron screen-panel renderer residual default targets", spectron_screen_panel_renderer_residual_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron screen-panel window GLES residual artifact",
+        spectron_screen_panel_window_gles_residual_anchors["artifact"],
+        "spectron_screen_panel_window_gles_residual_manual_translation_anchors_20260826",
+    )
+    check("Spectron screen-panel window GLES residual network", spectron_screen_panel_window_gles_residual_anchors["network_contacted"], False)
+    check("Spectron screen-panel window GLES residual total", spectron_screen_panel_window_gles_residual_anchors["summary"]["anchor_count"], 7)
+    check("Spectron screen-panel window GLES residual high confidence", spectron_screen_panel_window_gles_residual_anchors["summary"]["high_confidence_count"], 7)
+    check("Spectron screen-panel window GLES residual semantic overlap", spectron_screen_panel_window_gles_residual_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron screen-panel window GLES residual default targets", spectron_screen_panel_window_gles_residual_anchors["summary"]["target_default_name_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -2477,7 +2490,8 @@ def main():
     check("Spectron checkpoint panel virtual renderer residual anchor count", spectron_checkpoint["panel_virtual_renderer_residual_anchors"]["verified_name_count"], 23)
     check("Spectron checkpoint dummy-panel residual anchor count", spectron_checkpoint["dummy_panel_residual_anchors"]["verified_name_count"], 14)
     check("Spectron checkpoint screen-panel renderer residual anchor count", spectron_checkpoint["screen_panel_renderer_residual_anchors"]["verified_name_count"], 10)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "d57ae1011d866d392898e057f6a1cc309955755a8c5175a5ca07c66644fdaa27")
+    check("Spectron checkpoint screen-panel window GLES residual anchor count", spectron_checkpoint["screen_panel_window_gles_residual_anchors"]["verified_name_count"], 7)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "c110ed3f38aad8b12296aa81cc6d780c2911d608fba5b895e0eaee7a2f48d955")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -2656,6 +2670,7 @@ def main():
         spectron_panel_virtual_renderer_residual_anchors,
         spectron_dummy_panel_residual_anchors,
         spectron_screen_panel_renderer_residual_anchors,
+        spectron_screen_panel_window_gles_residual_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
