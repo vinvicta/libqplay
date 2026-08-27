@@ -267,6 +267,8 @@ def main() -> None:
     parser.add_argument("--font-options-font-data-residual-verification", type=Path)
     parser.add_argument("--gui-control-profile-accessor-anchors", type=Path)
     parser.add_argument("--gui-control-profile-accessor-verification", type=Path)
+    parser.add_argument("--gui-control-profile-destructor-anchors", type=Path)
+    parser.add_argument("--gui-control-profile-destructor-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3666,6 +3668,34 @@ def main() -> None:
         result["gui_control_profile_accessor_anchors"] = gui_control_profile_accessor
         result["interpretation"].append(
             "The one-hundred-twenty-third database revision also contains the separately reviewed GuiControlProfile accessor block and its explicit target-only coverage gaps."
+        )
+    gui_control_profile_destructor = None
+    if args.gui_control_profile_destructor_anchors or args.gui_control_profile_destructor_verification:
+        if not args.gui_control_profile_destructor_anchors or not args.gui_control_profile_destructor_verification:
+            raise ValueError(
+                "GUI control profile destructor anchors and GUI control profile destructor verification must be supplied together"
+            )
+        gui_control_profile_destructor_document = load(args.gui_control_profile_destructor_anchors)
+        gui_control_profile_destructor_verification = load(args.gui_control_profile_destructor_verification)
+        if gui_control_profile_destructor_document.get("artifact") != "spectron_gui_control_profile_destructor_manual_translation_anchors_20260826":
+            raise ValueError("unexpected GUI control profile destructor artifact")
+        if not gui_control_profile_destructor_verification.get("verified"):
+            raise ValueError("GUI control profile destructor reopen verification did not pass")
+        expected_gui_control_profile_destructor = len(gui_control_profile_destructor_document["anchors"])
+        if gui_control_profile_destructor_verification["verified_name_count"] != expected_gui_control_profile_destructor:
+            raise ValueError("GUI control profile destructor verification count differs from artifact")
+        gui_control_profile_destructor = {
+            "anchor_path": str(args.gui_control_profile_destructor_anchors),
+            "anchor_sha256": sha256_path(args.gui_control_profile_destructor_anchors),
+            "reopen_verification": str(args.gui_control_profile_destructor_verification),
+            "anchor_count": expected_gui_control_profile_destructor,
+            "verified_name_count": gui_control_profile_destructor_verification["verified_name_count"],
+            "reopen_failure_count": gui_control_profile_destructor_verification["failure_count"],
+        }
+    if gui_control_profile_destructor is not None:
+        result["gui_control_profile_destructor_anchors"] = gui_control_profile_destructor
+        result["interpretation"].append(
+            "The one-hundred-twenty-fourth database revision also contains the separately reviewed GuiControlProfileProperties and GuiControlProfile destructor family."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

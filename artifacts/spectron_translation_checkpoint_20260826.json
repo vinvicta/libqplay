@@ -133,8 +133,8 @@
     "default_sub_function_count": 1589,
     "format": "packed IDA 9.3 database",
     "function_count": 11679,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v123.i64",
-    "sha256": "50300d39030edb45142902407ff7651d7a436bb237fe54fe9d1aa59c8f3d7b8f"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v124.i64",
+    "sha256": "0db16cc6d06a77627a4b57048764aabb24f3a7b0c50cd9013b8b0a45c5bf0608"
   },
   "draw_texture_anchors": {
     "anchor_count": 4,
@@ -280,6 +280,14 @@
     "reopen_verification": "/tmp/spectron_gui_control_profile_verify_v123.json",
     "verified_name_count": 89
   },
+  "gui_control_profile_destructor_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "artifacts/spectron_gui_control_profile_destructor_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "39e91718d024c1afe9b06535e7e6c741edb5046a978108b9c70e2b7cfc4dc30e",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gui_control_profile_destructor_verify_v124.json",
+    "verified_name_count": 6
+  },
   "hash_family_anchors": {
     "anchor_count": 9,
     "anchor_path": "artifacts/spectron_hash_family_manual_translation_anchors_20260826.json",
@@ -338,7 +346,7 @@
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
-    "reopen_verification": "/tmp/spectron_translation_verify_v123_serial.json",
+    "reopen_verification": "/tmp/spectron_translation_verify_v124_serial.json",
     "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
     "translation_map": "artifacts/spectron_semantic_function_translation_20260826.json",
     "translation_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92"
@@ -466,7 +474,8 @@
     "The one-hundred-twentieth database revision also contains the separately reviewed screen-panel polygon-font stub and TWindowGLES lifecycle, pixel-buffer factory, destructor, and native-mode anchors.",
     "The one-hundred-twenty-first database revision also contains the separately reviewed TFont, TFontCharInfo, and TFontManager residual destructor, texture, cache, and text metric anchors.",
     "The one-hundred-twenty-second database revision also contains the separately reviewed screen-panel lifecycle, TFontOptions property, TFontData lookup, and TWindowProperties destructor anchors.",
-    "The one-hundred-twenty-third database revision also contains the separately reviewed GuiControlProfile accessor block and its explicit target-only coverage gaps."
+    "The one-hundred-twenty-third database revision also contains the separately reviewed GuiControlProfile accessor block and its explicit target-only coverage gaps.",
+    "The one-hundred-twenty-fourth database revision also contains the separately reviewed GuiControlProfileProperties and GuiControlProfile destructor family."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,

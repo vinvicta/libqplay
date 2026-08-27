@@ -1312,6 +1312,13 @@ This is the short handoff view. The full reasoning and command history are in
      and two source coverage gaps left explicit. See
      `artifacts/spectron_gui_control_profile_accessor_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
+184. The next IDA pass translated six residual `GuiControlProfileProperties`
+     and `GuiControlProfile` destructor-family methods. It covers four exact
+     properties destructor and thunk rows plus the two main profile
+     destructors with their documented 2.2 layout growth. The labels reopened
+     successfully in the v124 disposable copy. See
+     `artifacts/spectron_gui_control_profile_destructor_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
 ## Not verified
 

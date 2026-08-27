@@ -422,6 +422,9 @@ def main():
     spectron_gui_control_profile_accessor_anchors = load_json(
         "artifacts/spectron_gui_control_profile_accessor_manual_translation_anchors_20260826.json"
     )
+    spectron_gui_control_profile_destructor_anchors = load_json(
+        "artifacts/spectron_gui_control_profile_destructor_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2405,6 +2408,18 @@ def main():
     check("Spectron GUI control profile accessor semantic overlap", spectron_gui_control_profile_accessor_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron GUI control profile accessor default targets", spectron_gui_control_profile_accessor_anchors["summary"]["target_default_name_count"], 88)
     check(
+        "Spectron GUI control profile destructor artifact",
+        spectron_gui_control_profile_destructor_anchors["artifact"],
+        "spectron_gui_control_profile_destructor_manual_translation_anchors_20260826",
+    )
+    check("Spectron GUI control profile destructor network", spectron_gui_control_profile_destructor_anchors["network_contacted"], False)
+    check("Spectron GUI control profile destructor total", spectron_gui_control_profile_destructor_anchors["summary"]["anchor_count"], 6)
+    check("Spectron GUI control profile destructor high confidence", spectron_gui_control_profile_destructor_anchors["summary"]["high_confidence_count"], 6)
+    check("Spectron GUI control profile destructor semantic overlap", spectron_gui_control_profile_destructor_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron GUI control profile destructor default targets", spectron_gui_control_profile_destructor_anchors["summary"]["target_default_name_count"], 0)
+    check("Spectron GUI control profile destructor exact-shape count", spectron_gui_control_profile_destructor_anchors["summary"]["exact_shape_anchor_count"], 4)
+    check("Spectron GUI control profile destructor layout-change count", spectron_gui_control_profile_destructor_anchors["summary"]["layout_change_anchor_count"], 2)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -2534,7 +2549,8 @@ def main():
     check("Spectron checkpoint font-manager font residual anchor count", spectron_checkpoint["font_manager_font_residual_anchors"]["verified_name_count"], 9)
     check("Spectron checkpoint font-options font-data residual anchor count", spectron_checkpoint["font_options_font_data_residual_anchors"]["verified_name_count"], 16)
     check("Spectron checkpoint GUI control profile accessor anchor count", spectron_checkpoint["gui_control_profile_accessor_anchors"]["verified_name_count"], 89)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "50300d39030edb45142902407ff7651d7a436bb237fe54fe9d1aa59c8f3d7b8f")
+    check("Spectron checkpoint GUI control profile destructor anchor count", spectron_checkpoint["gui_control_profile_destructor_anchors"]["verified_name_count"], 6)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "0db16cc6d06a77627a4b57048764aabb24f3a7b0c50cd9013b8b0a45c5bf0608")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -2717,6 +2733,7 @@ def main():
         spectron_font_manager_font_residual_anchors,
         spectron_font_options_font_data_residual_anchors,
         spectron_gui_control_profile_accessor_anchors,
+        spectron_gui_control_profile_destructor_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

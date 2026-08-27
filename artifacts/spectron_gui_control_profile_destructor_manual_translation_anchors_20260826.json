@@ -1,0 +1,348 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "context_group": "GuiControlProfile destructor family",
+      "context_order": 1,
+      "evidence": [
+        "The source GuiControlProfileProperties D2 and D0 destructor forms and their two non-virtual thunks occur as one local family. Spectron keeps the same family in the XoqxgaMPJwProperties class with identical compact bodies and the same 16-byte this adjustment.",
+        "The source GuiControlProfile D2 and D0 forms occur immediately after the properties destructor family. Spectron keeps the corresponding XoqxgaMPJw D1 and D0 forms in the same class-local position.",
+        "The main profile destructor pseudocode preserves the cleanup order for the string members, resource-file-user subobjects, and the TGraalVar base. Spectron uses rebuilt wrappers and a larger profile object, adding one cleanup call and two instructions to each form.",
+        "The four properties destructor and thunk pairs have matching normalized shapes. The two main profile destructor pairs have the expected eight-byte object-layout growth and one additional cleanup call in the target; those rows are documented as layout-change anchors rather than exact byte-shape matches."
+      ],
+      "match_kind": "manual-gui-control-profile-destructor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x112914",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 7,
+        "mnemonic_hash": "2049bff17c2411839e64ccc85f3f1a80d5eeb0387e8826615f854254918b7030",
+        "opcode_shape_hash": "30a7deba9a531b4962fb053d6fd9e2857a55be1d72e43a486be89dfddbbbadd0",
+        "register_shape_hash": null,
+        "shape_hash": "d765fca85816fe1dcb414b48943a832695cd198f303433542b4443b17783b09e",
+        "size": 28
+      },
+      "original_name": "GuiControlProfileProperties_GuiControlProfileProperties",
+      "original_string_refs": [],
+      "proposed_name": "v18_GuiControlProfileProperties_GuiControlProfileProperties",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "GuiControlProfileProperties complete destructor",
+      "spectron_current_name": "_ZN20XoqxgaMPJwPropertiesD1Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x1151c8",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 7,
+        "mnemonic_hash": "2049bff17c2411839e64ccc85f3f1a80d5eeb0387e8826615f854254918b7030",
+        "opcode_shape_hash": "30a7deba9a531b4962fb053d6fd9e2857a55be1d72e43a486be89dfddbbbadd0",
+        "register_shape_hash": null,
+        "shape_hash": "d765fca85816fe1dcb414b48943a832695cd198f303433542b4443b17783b09e",
+        "size": 28
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "GuiControlProfile destructor family",
+      "context_order": 2,
+      "evidence": [
+        "The source GuiControlProfileProperties D2 and D0 destructor forms and their two non-virtual thunks occur as one local family. Spectron keeps the same family in the XoqxgaMPJwProperties class with identical compact bodies and the same 16-byte this adjustment.",
+        "The source GuiControlProfile D2 and D0 forms occur immediately after the properties destructor family. Spectron keeps the corresponding XoqxgaMPJw D1 and D0 forms in the same class-local position.",
+        "The main profile destructor pseudocode preserves the cleanup order for the string members, resource-file-user subobjects, and the TGraalVar base. Spectron uses rebuilt wrappers and a larger profile object, adding one cleanup call and two instructions to each form.",
+        "The four properties destructor and thunk pairs have matching normalized shapes. The two main profile destructor pairs have the expected eight-byte object-layout growth and one additional cleanup call in the target; those rows are documented as layout-change anchors rather than exact byte-shape matches."
+      ],
+      "match_kind": "manual-gui-control-profile-destructor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x112930",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "fee45af883c8aab5ac479e5ba4253e40305b558f26db0e542c13eed0c2982cf4",
+        "opcode_shape_hash": "6ad2b8bd2cd23c239e346de5e8d4b2bd7797d188e1a3a0f235a61cae028aaab4",
+        "register_shape_hash": null,
+        "shape_hash": "0bc3681158772cd8dce98691dfb45bc1e0470261530896876ce4015afc0cbaf2",
+        "size": 8
+      },
+      "original_name": "non_virtual_thunk_to_GuiControlProfileProperties_GuiControlProfileProperties",
+      "original_string_refs": [],
+      "proposed_name": "v18_non_virtual_thunk_to_GuiControlProfileProperties_GuiControlProfileProperties",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "GuiControlProfileProperties complete-destructor thunk",
+      "spectron_current_name": "_ZThn16_N20XoqxgaMPJwPropertiesD1Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x1151e4",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "fee45af883c8aab5ac479e5ba4253e40305b558f26db0e542c13eed0c2982cf4",
+        "opcode_shape_hash": "6ad2b8bd2cd23c239e346de5e8d4b2bd7797d188e1a3a0f235a61cae028aaab4",
+        "register_shape_hash": null,
+        "shape_hash": "0bc3681158772cd8dce98691dfb45bc1e0470261530896876ce4015afc0cbaf2",
+        "size": 8
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "GuiControlProfile destructor family",
+      "context_order": 3,
+      "evidence": [
+        "The source GuiControlProfileProperties D2 and D0 destructor forms and their two non-virtual thunks occur as one local family. Spectron keeps the same family in the XoqxgaMPJwProperties class with identical compact bodies and the same 16-byte this adjustment.",
+        "The source GuiControlProfile D2 and D0 forms occur immediately after the properties destructor family. Spectron keeps the corresponding XoqxgaMPJw D1 and D0 forms in the same class-local position.",
+        "The main profile destructor pseudocode preserves the cleanup order for the string members, resource-file-user subobjects, and the TGraalVar base. Spectron uses rebuilt wrappers and a larger profile object, adding one cleanup call and two instructions to each form.",
+        "The four properties destructor and thunk pairs have matching normalized shapes. The two main profile destructor pairs have the expected eight-byte object-layout growth and one additional cleanup call in the target; those rows are documented as layout-change anchors rather than exact byte-shape matches."
+      ],
+      "match_kind": "manual-gui-control-profile-destructor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TProperties_TProperties"
+      ],
+      "original_ea": "0x112938",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 14,
+        "mnemonic_hash": "651504a569ba54da4c9374e46d43cfdf842eb69fa77679e1b28a2aafd6448a19",
+        "opcode_shape_hash": "6862d950f588cda9695f0f44f8aaa3f1ea986def01012d29b7dde9c2ebc82d27",
+        "register_shape_hash": null,
+        "shape_hash": "ac991e0021a173ce7ee186b728f5d4bce318f192c7f1a560f3abbebacf082a34",
+        "size": 56
+      },
+      "original_name": "GuiControlProfileProperties_GuiControlProfileProperties__2",
+      "original_string_refs": [],
+      "proposed_name": "v18_GuiControlProfileProperties_GuiControlProfileProperties__2",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "GuiControlProfileProperties deleting destructor",
+      "spectron_current_name": "_ZN20XoqxgaMPJwPropertiesD0Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10c76BgaJBGAD1Ev_0"
+      ],
+      "spectron_ea": "0x1151ec",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 14,
+        "mnemonic_hash": "651504a569ba54da4c9374e46d43cfdf842eb69fa77679e1b28a2aafd6448a19",
+        "opcode_shape_hash": "6862d950f588cda9695f0f44f8aaa3f1ea986def01012d29b7dde9c2ebc82d27",
+        "register_shape_hash": null,
+        "shape_hash": "ac991e0021a173ce7ee186b728f5d4bce318f192c7f1a560f3abbebacf082a34",
+        "size": 56
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "GuiControlProfile destructor family",
+      "context_order": 4,
+      "evidence": [
+        "The source GuiControlProfileProperties D2 and D0 destructor forms and their two non-virtual thunks occur as one local family. Spectron keeps the same family in the XoqxgaMPJwProperties class with identical compact bodies and the same 16-byte this adjustment.",
+        "The source GuiControlProfile D2 and D0 forms occur immediately after the properties destructor family. Spectron keeps the corresponding XoqxgaMPJw D1 and D0 forms in the same class-local position.",
+        "The main profile destructor pseudocode preserves the cleanup order for the string members, resource-file-user subobjects, and the TGraalVar base. Spectron uses rebuilt wrappers and a larger profile object, adding one cleanup call and two instructions to each form.",
+        "The four properties destructor and thunk pairs have matching normalized shapes. The two main profile destructor pairs have the expected eight-byte object-layout growth and one additional cleanup call in the target; those rows are documented as layout-change anchors rather than exact byte-shape matches."
+      ],
+      "match_kind": "manual-gui-control-profile-destructor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x112970",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "fee45af883c8aab5ac479e5ba4253e40305b558f26db0e542c13eed0c2982cf4",
+        "opcode_shape_hash": "6ad2b8bd2cd23c239e346de5e8d4b2bd7797d188e1a3a0f235a61cae028aaab4",
+        "register_shape_hash": null,
+        "shape_hash": "0bc3681158772cd8dce98691dfb45bc1e0470261530896876ce4015afc0cbaf2",
+        "size": 8
+      },
+      "original_name": "non_virtual_thunk_to_GuiControlProfileProperties_GuiControlProfileProperties__2",
+      "original_string_refs": [],
+      "proposed_name": "v18_non_virtual_thunk_to_GuiControlProfileProperties_GuiControlProfileProperties__2",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "GuiControlProfileProperties deleting-destructor thunk",
+      "spectron_current_name": "_ZThn16_N20XoqxgaMPJwPropertiesD0Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x115224",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "fee45af883c8aab5ac479e5ba4253e40305b558f26db0e542c13eed0c2982cf4",
+        "opcode_shape_hash": "6ad2b8bd2cd23c239e346de5e8d4b2bd7797d188e1a3a0f235a61cae028aaab4",
+        "register_shape_hash": null,
+        "shape_hash": "0bc3681158772cd8dce98691dfb45bc1e0470261530896876ce4015afc0cbaf2",
+        "size": 8
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "GuiControlProfile destructor family",
+      "context_order": 5,
+      "evidence": [
+        "The source GuiControlProfileProperties D2 and D0 destructor forms and their two non-virtual thunks occur as one local family. Spectron keeps the same family in the XoqxgaMPJwProperties class with identical compact bodies and the same 16-byte this adjustment.",
+        "The source GuiControlProfile D2 and D0 forms occur immediately after the properties destructor family. Spectron keeps the corresponding XoqxgaMPJw D1 and D0 forms in the same class-local position.",
+        "The main profile destructor pseudocode preserves the cleanup order for the string members, resource-file-user subobjects, and the TGraalVar base. Spectron uses rebuilt wrappers and a larger profile object, adding one cleanup call and two instructions to each form.",
+        "The four properties destructor and thunk pairs have matching normalized shapes. The two main profile destructor pairs have the expected eight-byte object-layout growth and one additional cleanup call in the target; those rows are documented as layout-change anchors rather than exact byte-shape matches."
+      ],
+      "match_kind": "manual-gui-control-profile-destructor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TResourceFileUser_TResourceFileUser",
+        "plt_TString_clear_void"
+      ],
+      "original_ea": "0x112978",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 11,
+        "call_count": 10,
+        "instruction_count": 34,
+        "mnemonic_hash": "51d12a98d772ff2c24c2d4b554c9627535727ec97d5cea9bc5004d2f11e92732",
+        "opcode_shape_hash": "071049d9307591cd53fd1edfebd7e5a7eae882486e2ad892305bd8a1b2fccb38",
+        "register_shape_hash": null,
+        "shape_hash": "3aa27a6e5aa01c63ba537edbdd950c1c2d41adcff10e48614514528681c7ccb3",
+        "size": 136
+      },
+      "original_name": "GuiControlProfile_GuiControlProfile",
+      "original_string_refs": [],
+      "proposed_name": "v18_GuiControlProfile_GuiControlProfile",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "GuiControlProfile complete destructor",
+      "spectron_current_name": "_ZN10XoqxgaMPJwD1Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10CanTfaz6bZ5clearEv",
+        "._ZN10EXZ0IaPJruD1Ev"
+      ],
+      "spectron_ea": "0x11522c",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 12,
+        "call_count": 11,
+        "instruction_count": 36,
+        "mnemonic_hash": "43f579354c465615c153023df912e78cbe6cec69a3490f62465c584ed4b9e403",
+        "opcode_shape_hash": "80e38933a5f1b53f3ef5cc174a4069eb1ccb41cd43ad59c05f99e1b848f7085f",
+        "register_shape_hash": null,
+        "shape_hash": "6e3f9253df0274023546f488ef40d74ec0760aa9ab00e4eb9f88e98e4a719937",
+        "size": 144
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "GuiControlProfile destructor family",
+      "context_order": 6,
+      "evidence": [
+        "The source GuiControlProfileProperties D2 and D0 destructor forms and their two non-virtual thunks occur as one local family. Spectron keeps the same family in the XoqxgaMPJwProperties class with identical compact bodies and the same 16-byte this adjustment.",
+        "The source GuiControlProfile D2 and D0 forms occur immediately after the properties destructor family. Spectron keeps the corresponding XoqxgaMPJw D1 and D0 forms in the same class-local position.",
+        "The main profile destructor pseudocode preserves the cleanup order for the string members, resource-file-user subobjects, and the TGraalVar base. Spectron uses rebuilt wrappers and a larger profile object, adding one cleanup call and two instructions to each form.",
+        "The four properties destructor and thunk pairs have matching normalized shapes. The two main profile destructor pairs have the expected eight-byte object-layout growth and one additional cleanup call in the target; those rows are documented as layout-change anchors rather than exact byte-shape matches."
+      ],
+      "match_kind": "manual-gui-control-profile-destructor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TGraalVar_TGraalVar__2",
+        "plt_TResourceFileUser_TResourceFileUser",
+        "plt_TString_clear_void"
+      ],
+      "original_ea": "0x112a00",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 12,
+        "call_count": 11,
+        "instruction_count": 36,
+        "mnemonic_hash": "4287b459431fbb8fe225b9c166493af2fd5824021ee11e56c80084ca63dd1caf",
+        "opcode_shape_hash": "f3009a1c7862fb10bbf82c55240dd7949ce98a55a6aa062d43f2e3e4a37a1cfc",
+        "register_shape_hash": null,
+        "shape_hash": "ef259061bbb2207bda5546cd51f0da68a78de1310effe5f64c1208ca4d0659eb",
+        "size": 144
+      },
+      "original_name": "GuiControlProfile_GuiControlProfile__2",
+      "original_string_refs": [],
+      "proposed_name": "v18_GuiControlProfile_GuiControlProfile__2",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "GuiControlProfile deleting destructor",
+      "spectron_current_name": "_ZN10XoqxgaMPJwD0Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10CanTfaz6bZ5clearEv",
+        "._ZN10EXZ0IaPJruD1Ev",
+        "._ZN10G0gxgajWBwD2Ev"
+      ],
+      "spectron_ea": "0x1152bc",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 13,
+        "call_count": 12,
+        "instruction_count": 38,
+        "mnemonic_hash": "7d4d8220505833b49940649e421d5a27672a559f4bc19baa5b4220c6f0df75c6",
+        "opcode_shape_hash": "e7361277eb480ef85d42f144d2d7e3d08b470122f17fc1fe9c05cea37a64cda9",
+        "register_shape_hash": null,
+        "shape_hash": "0dc7bfc3e9f832e7889d9d69595daceee97a805011024331414fed87d32d1a32",
+        "size": 152
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_gui_control_profile_destructor_manual_translation_anchors_20260826",
+  "context": {
+    "layout_change": "The main XoqxgaMPJw destructor forms are eight bytes and two instructions larger than their source counterparts and include one additional cleanup call in each form.",
+    "target_classes": {
+      "XoqxgaMPJw": "profile D1 and D0 destructors at 0x11522c and 0x1152bc",
+      "XoqxgaMPJwProperties": "profile-properties D1 and D0 destructors and their 16-byte adjusted-this thunks at 0x1151c8 through 0x11522c"
+    }
+  },
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4.json",
+    "original_features_sha256": "62cccc40ea88a08d5ed0845ceeceaf194b528bdd07bdd6ff1a0350dee3b0ab82",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features.json",
+    "spectron_features_sha256": "cc1789d2d3c24f478d7863f2b07b10b4259aa2d370e363e5303000eb7b835243"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The four properties destructor rows are exact normalized-shape matches. The two main profile destructor rows are high-confidence lifecycle matches with documented target layout growth.",
+    "The proposed v18_ labels preserve the readable source destructor roles while retaining the obfuscated target names in the evidence rows."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for the GuiControlProfileProperties and GuiControlProfile destructor family",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 6,
+    "exact_shape_anchor_count": 4,
+    "high_confidence_count": 6,
+    "layout_change_anchor_count": 2,
+    "new_context_anchor_count": 6,
+    "target_default_name_count": 0
+  }
+}
