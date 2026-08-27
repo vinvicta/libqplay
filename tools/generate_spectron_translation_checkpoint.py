@@ -197,6 +197,8 @@ def main() -> None:
     parser.add_argument("--gui-stretch-modes-verification", type=Path)
     parser.add_argument("--tgui-render-colors-anchors", type=Path)
     parser.add_argument("--tgui-render-colors-verification", type=Path)
+    parser.add_argument("--thtml-definitions-defaults-anchors", type=Path)
+    parser.add_argument("--thtml-definitions-defaults-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
     parser.add_argument("--server-animation-verification", type=Path)
     parser.add_argument("--player-lifecycle-anchors", type=Path)
@@ -2728,6 +2730,68 @@ def main() -> None:
         result["tgui_render_colors_anchors"] = tgui_render_colors
         result["interpretation"].append(
             "The one-hundred-ninety-fourth database revision also contains the separately reviewed TGUIRender border-color initializer anchor."
+        )
+    thtml_definitions_defaults = None
+    if (
+        args.thtml_definitions_defaults_anchors
+        or args.thtml_definitions_defaults_verification
+    ):
+        if (
+            not args.thtml_definitions_defaults_anchors
+            or not args.thtml_definitions_defaults_verification
+        ):
+            raise ValueError(
+                "THTMLDefinitions default anchors and verification must be supplied together"
+            )
+        thtml_definitions_defaults_document = load(
+            args.thtml_definitions_defaults_anchors
+        )
+        thtml_definitions_defaults_verification = load(
+            args.thtml_definitions_defaults_verification
+        )
+        if (
+            thtml_definitions_defaults_document.get("artifact")
+            != "spectron_thtml_definitions_defaults_manual_translation_anchors_20260827"
+        ):
+            raise ValueError(
+                "unexpected THTMLDefinitions default anchor artifact"
+            )
+        if not thtml_definitions_defaults_verification.get("verified"):
+            raise ValueError(
+                "THTMLDefinitions default anchor reopen verification did not pass"
+            )
+        expected_thtml_definitions_defaults = len(
+            thtml_definitions_defaults_document["anchors"]
+        )
+        if (
+            thtml_definitions_defaults_verification["verified_name_count"]
+            != expected_thtml_definitions_defaults
+        ):
+            raise ValueError(
+                "THTMLDefinitions default verification count differs from artifact"
+            )
+        thtml_definitions_defaults = {
+            "anchor_path": str(args.thtml_definitions_defaults_anchors),
+            "anchor_sha256": sha256_path(
+                args.thtml_definitions_defaults_anchors
+            ),
+            "reopen_verification": str(
+                args.thtml_definitions_defaults_verification
+            ),
+            "anchor_count": expected_thtml_definitions_defaults,
+            "verified_name_count": thtml_definitions_defaults_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": thtml_definitions_defaults_verification[
+                "failure_count"
+            ],
+        }
+    if thtml_definitions_defaults is not None:
+        result["thtml_definitions_defaults_anchors"] = (
+            thtml_definitions_defaults
+        )
+        result["interpretation"].append(
+            "The one-hundred-ninety-fifth database revision also contains the separately reviewed THTMLDefinitions HTML-default initializer anchor."
         )
     server_animation = None
     if args.server_animation_anchors or args.server_animation_verification:

@@ -1482,6 +1482,18 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_particle_emitter_script_vars_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+254. The next IDA pass translated the `THTMLDefinitions` default initializer.
+    Source `sub_E09F4` at `0xe09f4` maps to target `sub_E0FC4` at `0xe0fc4`,
+    preserving the horizontal-line color bytes, bitmap-indent value, and
+    adjacent cleared state used by the matching HTML page consumers. The
+    normalized function shape is exact; only the recorded register-detail
+    fingerprint differs. The v195 copy has 11,694 functions, 3,641
+    high-confidence labels, and 1,224 default `sub_` names, with zero
+    semantic reopen failures. See
+    `artifacts/spectron_thtml_definitions_defaults_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_thtml_definitions_defaults_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 253. The next IDA pass translated the `TGUIRender` border-color initializer.
     Source `sub_E0984` at `0xe0984` maps to target `sub_E0F0C` at `0xe0f0c`,
     preserving five RGBA defaults used by the matching `renderBorder` paths.

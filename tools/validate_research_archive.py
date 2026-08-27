@@ -320,6 +320,9 @@ def main():
     spectron_tgui_render_colors_anchors = load_json(
         "artifacts/spectron_tgui_render_colors_manual_translation_anchors_20260827.json"
     )
+    spectron_thtml_definitions_defaults_anchors = load_json(
+        "artifacts/spectron_thtml_definitions_defaults_manual_translation_anchors_20260827.json"
+    )
     spectron_server_animation_anchors = load_json(
         "artifacts/spectron_server_animation_manual_translation_anchors_20260826.json"
     )
@@ -3031,6 +3034,59 @@ def main():
         "0xe0f0c",
     )
     check(
+        "Spectron THTMLDefinitions defaults artifact",
+        spectron_thtml_definitions_defaults_anchors["artifact"],
+        "spectron_thtml_definitions_defaults_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron THTMLDefinitions defaults network",
+        spectron_thtml_definitions_defaults_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron THTMLDefinitions defaults total",
+        spectron_thtml_definitions_defaults_anchors["summary"]["anchor_count"],
+        1,
+    )
+    check(
+        "Spectron THTMLDefinitions defaults high confidence",
+        spectron_thtml_definitions_defaults_anchors["summary"]["high_confidence_count"],
+        1,
+    )
+    check(
+        "Spectron THTMLDefinitions defaults semantic overlap",
+        spectron_thtml_definitions_defaults_anchors["summary"]["already_in_semantic_map"],
+        0,
+    )
+    check(
+        "Spectron THTMLDefinitions defaults exact-shape count",
+        spectron_thtml_definitions_defaults_anchors["summary"]["exact_shape_anchor_count"],
+        1,
+    )
+    check(
+        "Spectron THTMLDefinitions defaults layout-change count",
+        spectron_thtml_definitions_defaults_anchors["summary"]["layout_change_anchor_count"],
+        0,
+    )
+    check(
+        "Spectron THTMLDefinitions defaults register-detail difference",
+        spectron_thtml_definitions_defaults_anchors["summary"]["register_detail_only_difference_count"],
+        1,
+    )
+    check(
+        "Spectron THTMLDefinitions defaults default target",
+        spectron_thtml_definitions_defaults_anchors["summary"]["target_default_name_count"],
+        1,
+    )
+    check(
+        "Spectron THTMLDefinitions defaults target",
+        {
+            row["original_name"]: row
+            for row in spectron_thtml_definitions_defaults_anchors["anchors"]
+        }["sub_E09F4"]["spectron_ea"],
+        "0xe0fc4",
+    )
+    check(
         "Spectron server-animation artifact",
         spectron_server_animation_anchors["artifact"],
         "spectron_server_animation_manual_translation_anchors_20260826",
@@ -4178,7 +4234,7 @@ def main():
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1225)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1224)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -4370,7 +4426,8 @@ def main():
     check("Spectron checkpoint GUI alignment-tables anchor count", spectron_checkpoint["gui_alignment_tables_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint GUI stretch-modes anchor count", spectron_checkpoint["gui_stretch_modes_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint TGUIRender colors anchor count", spectron_checkpoint["tgui_render_colors_anchors"]["verified_name_count"], 1)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "62b68defbcd16bc235d1c9da05c623f610e1ebea8bda0c473f6260a600f40c27")
+    check("Spectron checkpoint THTMLDefinitions defaults anchor count", spectron_checkpoint["thtml_definitions_defaults_anchors"]["verified_name_count"], 1)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "be423f317890860401a1d7570cfeeb5783f45f0e967448656808a51cf76d30c7")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -4518,6 +4575,7 @@ def main():
         spectron_gui_alignment_tables_anchors,
         spectron_gui_stretch_modes_anchors,
         spectron_tgui_render_colors_anchors,
+        spectron_thtml_definitions_defaults_anchors,
         spectron_server_animation_anchors,
         spectron_player_lifecycle_anchors,
         spectron_player_emoticon_anchors,
