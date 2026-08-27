@@ -1428,6 +1428,18 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+214. The next IDA pass translated 30 residual `CyaInt` TLS and cryptography
+    methods. It covers verification paths, certificate and private-key
+    buffers, session and cipher accessors, protocol selectors, error helpers,
+    and master-secret derivation. Every pair matched the complete normalized
+    feature set, and every target address was the source plus `0xd590`. All 30
+    labels reopened successfully in the v155 disposable copy, which has
+    11,693 functions and 1,396 default `sub_` names. This is static evidence
+    identifying the trust and handshake code, not a claim that verification is
+    bypassed. See
+    `artifacts/spectron_cyaint_tls_residual_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 213. The next IDA pass translated the final 11 exact-shape
     `GSFunctionsClient` table callbacks. They cover Adventure window and mode
     helpers, fullscreen state, application activity, and the two URL bridges.

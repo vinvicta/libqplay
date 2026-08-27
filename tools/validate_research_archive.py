@@ -512,6 +512,9 @@ def main():
     spectron_gsfunctions_client_exact_residual_v4_anchors = load_json(
         "artifacts/spectron_gsfunctions_client_exact_residual_v4_manual_translation_anchors_20260826.json"
     )
+    spectron_cyaint_tls_residual_anchors = load_json(
+        "artifacts/spectron_cyaint_tls_residual_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2859,6 +2862,19 @@ def main():
     check("Spectron GSFunctionsClient exact residual v4 layout-change count", spectron_gsfunctions_client_exact_residual_v4_anchors["summary"]["layout_change_anchor_count"], 0)
     check("Spectron GSFunctionsClient exact residual v4 materialized targets", spectron_gsfunctions_client_exact_residual_v4_anchors["summary"]["materialized_target_function_count"], 0)
     check(
+        "Spectron CyaInt TLS residual artifact",
+        spectron_cyaint_tls_residual_anchors["artifact"],
+        "spectron_cyaint_tls_residual_manual_translation_anchors_20260826",
+    )
+    check("Spectron CyaInt TLS residual network", spectron_cyaint_tls_residual_anchors["network_contacted"], False)
+    check("Spectron CyaInt TLS residual total", spectron_cyaint_tls_residual_anchors["summary"]["anchor_count"], 30)
+    check("Spectron CyaInt TLS residual high confidence", spectron_cyaint_tls_residual_anchors["summary"]["high_confidence_count"], 30)
+    check("Spectron CyaInt TLS residual semantic overlap", spectron_cyaint_tls_residual_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron CyaInt TLS residual default targets", spectron_cyaint_tls_residual_anchors["summary"]["target_default_name_count"], 0)
+    check("Spectron CyaInt TLS residual exact-shape count", spectron_cyaint_tls_residual_anchors["summary"]["exact_shape_anchor_count"], 30)
+    check("Spectron CyaInt TLS residual layout-change count", spectron_cyaint_tls_residual_anchors["summary"]["layout_change_anchor_count"], 0)
+    check("Spectron CyaInt TLS residual relocation", spectron_cyaint_tls_residual_anchors["summary"]["constant_target_delta"], "+0xd590")
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -3018,7 +3034,8 @@ def main():
     check("Spectron checkpoint GSFunctionsClient exact residual v3 anchor count", spectron_checkpoint["gsfunctions_client_exact_residual_v3_anchors"]["verified_name_count"], 9)
     check("Spectron checkpoint GSFunctionsClient boundary residual anchor count", spectron_checkpoint["gsfunctions_client_boundary_residual_anchors"]["verified_name_count"], 12)
     check("Spectron checkpoint GSFunctionsClient exact residual v4 anchor count", spectron_checkpoint["gsfunctions_client_exact_residual_v4_anchors"]["verified_name_count"], 11)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "5464d8379812980ccd785837e6000adf82d9a965ccac563faed78ca43ac90c06")
+    check("Spectron checkpoint CyaInt TLS residual anchor count", spectron_checkpoint["cyaint_tls_residual_anchors"]["verified_name_count"], 30)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "c622c67da076477d4c82917cc18ccc92260679e1e0034a5bf029ea517456de09")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],

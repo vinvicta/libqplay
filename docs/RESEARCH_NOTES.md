@@ -5172,6 +5172,82 @@ and zero failures across 11,679 functions. The v108 database has 1,684
 remaining default `sub_` names. Its SHA-256 is
 `8350a43be6b31306954e34a17f77d742c8d1702015d671019d2bf2dd6c1bb1e1`.
 
+## 2026-08-27: Spectron CyaInt TLS residual anchors
+
+The v155 pass moves the translation work into the native TLS implementation.
+It covers 30 residual `CyaInt` methods that the broad semantic matcher had
+left unmatched even though the two builds preserve unusually strong evidence.
+The source and target functions have identical size, instruction count,
+basic-block count, branch count, call count, mnemonic hash, opcode-shape hash,
+register-shape hash, overall shape hash, and string-reference hash. The target
+addresses all equal the source addresses plus `0xd590`.
+
+| 1.8 function | Source | Spectron target | Role |
+| --- | ---: | ---: | --- |
+| `CyaInt_mp_dr_setup_CyaInt_mp_int_uint` | `0x2bb418` | `0x2c89a8` | Montgomery-reduction setup |
+| `CyaInt_CyaSSL_set_using_nonblock_CyaInt_CYASSL_int` | `0x2c3a04` | `0x2d0f94` | nonblocking mode |
+| `CyaInt_CyaSSL_get_alert_history_CyaInt_CYASSL_CyaInt_CYASSL_ALERT_HISTORY` | `0x2c3d64` | `0x2d12f4` | alert history |
+| `CyaInt_CyaSSL_ERR_error_string_n_ulong_char_ulong` | `0x2c3dd8` | `0x2d1368` | error text |
+| `CyaInt_CyaSSL_KeepArrays_CyaInt_CYASSL` | `0x2c3de4` | `0x2d1374` | array retention |
+| `CyaInt_CyaSSL_CTX_load_verify_locations_CyaInt_CYASSL_CTX_char_const_char_const` | `0x2c520c` | `0x2d279c` | verification path |
+| `CyaInt_CyaSSL_CertManagerEnableCRL_CyaInt_CYASSL_CERT_MANAGER_int` | `0x2c5354` | `0x2d28e4` | enable CRL |
+| `CyaInt_CyaSSL_CertManagerDisableCRL_CyaInt_CYASSL_CERT_MANAGER` | `0x2c5368` | `0x2d28f8` | disable CRL |
+| `CyaInt_CyaSSL_CTX_SetCACb_CyaInt_CYASSL_CTX_void_uchar_int_int` | `0x2c5494` | `0x2d2a24` | CA callback |
+| `CyaInt_CyaSSL_get_session_CyaInt_CYASSL` | `0x2c5b78` | `0x2d3108` | session getter |
+| `CyaInt_CyaSSL_set_session_CyaInt_CYASSL_CyaInt_CYASSL_SESSION` | `0x2c5c20` | `0x2d31b0` | session setter |
+| `CyaInt_CyaSSL_CTX_use_certificate_buffer_CyaInt_CYASSL_CTX_uchar_const_long_int` | `0x2c612c` | `0x2d36bc` | certificate buffer |
+| `CyaInt_CyaSSL_CTX_use_PrivateKey_buffer_CyaInt_CYASSL_CTX_uchar_const_long_int` | `0x2c6140` | `0x2d36d0` | private-key buffer |
+| `CyaInt_CyaSSL_CTX_use_certificate_chain_buffer_CyaInt_CYASSL_CTX_uchar_const_long` | `0x2c6154` | `0x2d36e4` | certificate chain |
+| `CyaInt_CyaSSL_use_certificate_buffer_CyaInt_CYASSL_uchar_const_long_int` | `0x2c616c` | `0x2d36fc` | certificate buffer |
+| `CyaInt_CyaSSL_use_PrivateKey_buffer_CyaInt_CYASSL_uchar_const_long_int` | `0x2c6184` | `0x2d3714` | private-key buffer |
+| `CyaInt_CyaSSL_use_certificate_chain_buffer_CyaInt_CYASSL_uchar_const_long` | `0x2c619c` | `0x2d372c` | certificate chain |
+| `CyaInt_CyaSSL_is_init_finished_CyaInt_CYASSL` | `0x2c61b8` | `0x2d3748` | initialization state |
+| `CyaInt_CyaSSL_X509_get_subject_name_CyaInt_CYASSL_X509` | `0x2c61d8` | `0x2d3768` | X.509 subject |
+| `CyaInt_CyaSSL_get_peer_certificate_CyaInt_CYASSL` | `0x2c6270` | `0x2d3800` | peer certificate |
+| `CyaInt_CyaSSL_get_shutdown_CyaInt_CYASSL_const` | `0x2c6284` | `0x2d3814` | shutdown state |
+| `CyaInt_CyaSSL_get_current_cipher_suite_CyaInt_CYASSL` | `0x2c6344` | `0x2d38d4` | cipher suite |
+| `CyaInt_MakeTLSv1_void` | `0x2c703c` | `0x2d45cc` | TLS 1.0 selector |
+| `CyaInt_MakeTLSv1_1_void` | `0x2c7054` | `0x2d45e4` | TLS 1.1 selector |
+| `CyaInt_c32to24_uint_uchar` | `0x2c8c84` | `0x2d6214` | 24-bit encoding |
+| `CyaInt_InitSSL_Method_CyaInt_CYASSL_METHOD_CyaInt_ProtocolVersion` | `0x2c8c9c` | `0x2d622c` | SSL method setup |
+| `CyaInt_InitCiphers_CyaInt_CYASSL` | `0x2c8d14` | `0x2d62a4` | cipher-state reset |
+| `CyaInt_MakeSSLv3_void` | `0x2c9064` | `0x2d65f4` | SSL 3.0 selector |
+| `CyaInt_SetErrorString_int_char` | `0x2cbe18` | `0x2d93a8` | error text setter |
+| `CyaInt_MakeMasterSecret_CyaInt_CYASSL` | `0x2cdad0` | `0x2db060` | master-secret derivation |
+
+The target names are C++ mangled symbols such as
+`_ZN6CyaInt25CyaSSL_set_using_nonblockEPNS_6CYASSLEi`, so they are not blank
+stripped entries. The names are obfuscated at the class and method level, but
+the `CyaInt` class and method spelling remain visible. That makes this group
+particularly useful for separating a certificate problem from a transport or
+login problem.
+
+I checked representative pairs directly in Hex-Rays. The nonblocking setter
+writes the same CyaSSL state byte at offset 999. The verification-path method
+keeps the same null guards before calling `ProcessVerifyPath`, and the
+certificate-buffer method calls `ProcessBuffer` with the same arguments. The
+protocol selector returns 259 in both builds. `InitCiphers` clears the same
+six cipher-state fields. The large `MakeMasterSecret` body preserves the same
+TLS key schedule, hash setup, derivation call, and cleanup loops, with the
+target simply dropping the source PLT prefixes from its pseudocode names.
+
+This is strong static correspondence, not proof that the old endpoint will
+accept the client. In particular, these aliases do not disable certificate
+verification. They identify the exact native functions to inspect if a future
+controlled test needs to compare trust-store loading, date validation, or
+the final certificate result.
+
+The labels are persisted with the `v18_` prefix in
+`analysis/spectron_libqplay_translated_v155.i64`. All 30 names reopened
+successfully, and the semantic reopen check still reports zero failures across
+11,693 functions. Because every target already had a non-default C++ name,
+the default `sub_` count remains 1,396. The machine-readable record is
+`artifacts/spectron_cyaint_tls_residual_manual_translation_anchors_20260826.json`,
+generated by
+`tools/generate_spectron_cyaint_tls_residual_anchors.py`. The v155 checkpoint
+is recorded in
+`artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## 2026-08-27: Spectron GSFunctionsClient exact residual anchors, batch four
 
 The v154 pass closes the `GSFunctionsClient` callback-table audit with 11
