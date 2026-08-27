@@ -207,6 +207,8 @@ def main() -> None:
     parser.add_argument("--android-tapjoy-video-verification", type=Path)
     parser.add_argument("--sounds-music-state-anchors", type=Path)
     parser.add_argument("--sounds-music-state-verification", type=Path)
+    parser.add_argument("--sounds-effect-anchors", type=Path)
+    parser.add_argument("--sounds-effect-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
     parser.add_argument("--server-animation-verification", type=Path)
     parser.add_argument("--player-lifecycle-anchors", type=Path)
@@ -2996,6 +2998,42 @@ def main() -> None:
         result["sounds_music_state_anchors"] = sounds_music_state
         result["interpretation"].append(
             "The one-hundred-ninety-ninth database revision also contains the separately reviewed TSounds music-state wrapper anchors."
+        )
+    sounds_effect = None
+    if args.sounds_effect_anchors or args.sounds_effect_verification:
+        if not args.sounds_effect_anchors or not args.sounds_effect_verification:
+            raise ValueError(
+                "sound-effect anchors and verification must be supplied together"
+            )
+        sounds_effect_document = load(args.sounds_effect_anchors)
+        sounds_effect_verification = load(args.sounds_effect_verification)
+        if (
+            sounds_effect_document.get("artifact")
+            != "spectron_sounds_effect_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected sound-effect anchor artifact")
+        if not sounds_effect_verification.get("verified"):
+            raise ValueError("sound-effect anchor reopen verification did not pass")
+        expected_sounds_effect = len(sounds_effect_document["anchors"])
+        if (
+            sounds_effect_verification["verified_name_count"]
+            != expected_sounds_effect
+        ):
+            raise ValueError("sound-effect verification count differs from artifact")
+        sounds_effect = {
+            "anchor_path": str(args.sounds_effect_anchors),
+            "anchor_sha256": sha256_path(args.sounds_effect_anchors),
+            "reopen_verification": str(args.sounds_effect_verification),
+            "anchor_count": expected_sounds_effect,
+            "verified_name_count": sounds_effect_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": sounds_effect_verification["failure_count"],
+        }
+    if sounds_effect is not None:
+        result["sounds_effect_anchors"] = sounds_effect
+        result["interpretation"].append(
+            "The two-hundredth database revision also contains the separately reviewed TSounds sound-effect constructor and cache lookup anchors."
         )
     server_animation = None
     if args.server_animation_anchors or args.server_animation_verification:
