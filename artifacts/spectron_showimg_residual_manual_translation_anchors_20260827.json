@@ -1,0 +1,1329 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "Both return the double at the same logical z-helper field position, and the target pseudocode is a direct field read."
+      ],
+      "match_kind": "manual-showimg-residual-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x2343cc",
+      "original_function_end": "0x2343d4",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "de72a41c35fa727134d1567d0cb079cdd252c263b49d89f278b4b5a2ce07b541",
+        "opcode_shape_hash": "126438d24c2b4e00b1681f8c5259eac03e8c7d857ae6231ca66ea544de712c95",
+        "register_shape_hash": "7d5db1721299635a473646ebb6c778711d7622fe3f2e3e42ff7b1a090229f0ba",
+        "shape_hash": "fdb6e988974b59e771f6857d563ee05722bcff5e0a61bb92df98d5a90f39e7da",
+        "size": 8,
+        "string_refs_hash": null
+      },
+      "original_name": "TShowImg_getz_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TShowImg_getz_void",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "double z helper immediately after the registered zoom accessors",
+      "spectron_current_name": "_ZN10eODlJaQ5OL10gkQVgaDDgREv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x23e124",
+      "spectron_function_end": "0x23e12c",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "de72a41c35fa727134d1567d0cb079cdd252c263b49d89f278b4b5a2ce07b541",
+        "opcode_shape_hash": "126438d24c2b4e00b1681f8c5259eac03e8c7d857ae6231ca66ea544de712c95",
+        "register_shape_hash": "7d5db1721299635a473646ebb6c778711d7622fe3f2e3e42ff7b1a090229f0ba",
+        "shape_hash": "fdb6e988974b59e771f6857d563ee05722bcff5e0a61bb92df98d5a90f39e7da",
+        "size": 8,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9d58"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "The source body calls the complete destructor and operator delete. The target _ZN10eODlJaQ5OLD0Ev body has the same 32-byte deleting-destructor shape and occupies the corresponding position after the complete destructor."
+      ],
+      "match_kind": "manual-showimg-residual-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TShowImg_TShowImg"
+      ],
+      "original_ea": "0x23476c",
+      "original_function_end": "0x23478c",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "6997dd3b5418a87bf6f5a5c521855fc9a17314be795e8b9166aafc3f4274ad31",
+        "opcode_shape_hash": "744107f9f120d79de3ec3260d0856a807bf569915749757d3f718cfa3d52a448",
+        "register_shape_hash": "1023882ef3985c66fc5b82641781f3c5acdb4eababb05670a2c9499e80aafd90",
+        "shape_hash": "ddb4f004bba90eaf41261c7a2d80153268b64d0dc9e3005db4115ce1909821c2",
+        "size": 32,
+        "string_refs_hash": null
+      },
+      "original_name": "TShowImg_TShowImg__2",
+      "original_string_refs": [],
+      "proposed_name": "v18_TShowImg_TShowImg__2",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TShowImg D0 deleting destructor",
+      "spectron_current_name": "_ZN10eODlJaQ5OLD0Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10eODlJaQ5OLD1Ev"
+      ],
+      "spectron_ea": "0x23e55c",
+      "spectron_function_end": "0x23e57c",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "6997dd3b5418a87bf6f5a5c521855fc9a17314be795e8b9166aafc3f4274ad31",
+        "opcode_shape_hash": "744107f9f120d79de3ec3260d0856a807bf569915749757d3f718cfa3d52a448",
+        "register_shape_hash": "1023882ef3985c66fc5b82641781f3c5acdb4eababb05670a2c9499e80aafd90",
+        "shape_hash": "ddb4f004bba90eaf41261c7a2d80153268b64d0dc9e3005db4115ce1909821c2",
+        "size": 32,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9df0"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "Both are one-instruction thunks forwarding two string arguments into the resource-object update implementation."
+      ],
+      "match_kind": "manual-showimg-residual-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x234dc4",
+      "original_function_end": "0x234dc8",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 1,
+        "mnemonic_hash": "df7e70e5021544f4834bbee64a9e3789febc4be81470df629cad6ddb03320a5c",
+        "opcode_shape_hash": "74421f1f206a1f88ce23d5a4fc4299f145f35134a154863c27d88bde0d7c7795",
+        "register_shape_hash": "3c1eee7de17644312d6af1e22e8666726d75912206d4ce8a62656747807515f6",
+        "shape_hash": "3c1eee7de17644312d6af1e22e8666726d75912206d4ce8a62656747807515f6",
+        "size": 4,
+        "string_refs_hash": null
+      },
+      "original_name": "TShowImg_onResourceFileUpdated_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TShowImg_onResourceFileUpdated_TString_const",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "resource-link update thunk after TShowImg::readString",
+      "spectron_current_name": "_ZN10eODlJaQ5OL10py0qgaE4krERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x23ec4c",
+      "spectron_function_end": "0x23ec50",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 1,
+        "mnemonic_hash": "df7e70e5021544f4834bbee64a9e3789febc4be81470df629cad6ddb03320a5c",
+        "opcode_shape_hash": "74421f1f206a1f88ce23d5a4fc4299f145f35134a154863c27d88bde0d7c7795",
+        "register_shape_hash": "3c1eee7de17644312d6af1e22e8666726d75912206d4ce8a62656747807515f6",
+        "shape_hash": "3c1eee7de17644312d6af1e22e8666726d75912206d4ce8a62656747807515f6",
+        "size": 4,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9e88"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "Both return the floating-point zero constant used for the plain tile-width case."
+      ],
+      "match_kind": "manual-showimg-residual-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x235554",
+      "original_function_end": "0x23555c",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "5f025dba2e324bd7d8b7d7c6361cc3bfc84d338713b5634c604a0106bd856682",
+        "opcode_shape_hash": "cdc2bf98c06ae14a083584779dbf9613c2d6bf6af870c561379350c9d70a41f4",
+        "register_shape_hash": "6bd0d83887edb88ac21ce48fd81d29953077d6ece233378612cdae2f50cb64c0",
+        "shape_hash": "e80ff0b917d3807f4a6ec8d63f2baa3560307cbcdf2638af81754c14c70fa6ce",
+        "size": 8,
+        "string_refs_hash": null
+      },
+      "original_name": "TShowImg_tilewidthplain_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TShowImg_tilewidthplain_void",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "plain tile-width virtual helper",
+      "spectron_current_name": "_ZN10eODlJaQ5OL10NE5cXa4mDqEv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x23f3dc",
+      "spectron_function_end": "0x23f3e4",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "5f025dba2e324bd7d8b7d7c6361cc3bfc84d338713b5634c604a0106bd856682",
+        "opcode_shape_hash": "cdc2bf98c06ae14a083584779dbf9613c2d6bf6af870c561379350c9d70a41f4",
+        "register_shape_hash": "6bd0d83887edb88ac21ce48fd81d29953077d6ece233378612cdae2f50cb64c0",
+        "shape_hash": "e80ff0b917d3807f4a6ec8d63f2baa3560307cbcdf2638af81754c14c70fa6ce",
+        "size": 8,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9e88"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "Both call the TShowImg pixel-size helper, convert the two integer components by 1/16, and return the pair through the caller buffer."
+      ],
+      "match_kind": "manual-showimg-residual-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TShowImg_pixelsize_void"
+      ],
+      "original_ea": "0x235854",
+      "original_function_end": "0x23589c",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 18,
+        "mnemonic_hash": "c247cdb492b3fcb4a7c3cad312d9986fc045aebb5ff0dbfc1cac62dc01e33e11",
+        "opcode_shape_hash": "6489f8556b38f0285c8b65a5e97896752c61a31723510b543f7ebeb1499a42cb",
+        "register_shape_hash": "c7b0fa923330ef96a135ca5d8d7be561c9725a768c711973eae37dd73e5521d4",
+        "shape_hash": "787060db52da991a4fe47987768ab8a883a6bf163708eb88b3856979f26a2c26",
+        "size": 72,
+        "string_refs_hash": null
+      },
+      "original_name": "TShowImg_tilesize_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TShowImg_tilesize_void",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "tile-size conversion helper",
+      "spectron_current_name": "_ZN10eODlJaQ5OL10pIS3IaYDSwEv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10eODlJaQ5OL10rhe4IahDaxEv"
+      ],
+      "spectron_ea": "0x23f6dc",
+      "spectron_function_end": "0x23f724",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 18,
+        "mnemonic_hash": "c247cdb492b3fcb4a7c3cad312d9986fc045aebb5ff0dbfc1cac62dc01e33e11",
+        "opcode_shape_hash": "6489f8556b38f0285c8b65a5e97896752c61a31723510b543f7ebeb1499a42cb",
+        "register_shape_hash": "c7b0fa923330ef96a135ca5d8d7be561c9725a768c711973eae37dd73e5521d4",
+        "shape_hash": "787060db52da991a4fe47987768ab8a883a6bf163708eb88b3856979f26a2c26",
+        "size": 72,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9e88"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "Both set image type 2 and forward the string to the coded-text particle-data helper."
+      ],
+      "match_kind": "manual-showimg-residual-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TShowImg_setImageType_int"
+      ],
+      "original_ea": "0x236a0c",
+      "original_function_end": "0x236a40",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 13,
+        "mnemonic_hash": "ca99fa9815b873ec004fbee5fdc4bc59e66c2c832bcb3d7a55d83dcee1e18620",
+        "opcode_shape_hash": "9d5508ef2c26f8b30643f4d73a0a9acc21588e398e09d0fcebc955c2aa069c4a",
+        "register_shape_hash": "d5bc70e15bc68d26ac1da934b1a7260c4e7cba2844b0f562941435413596616b",
+        "shape_hash": "875254ce8c1ac69ec0bb4f3385bfd95cf44db5ba666dffffd41033c0db4bfe19",
+        "size": 52,
+        "string_refs_hash": null
+      },
+      "original_name": "TShowImg_showText_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TShowImg_showText_TString_const",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "show-text wrapper",
+      "spectron_current_name": "_ZN10eODlJaQ5OL10WoSUWaLnsaERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10eODlJaQ5OL10jqR8WaJy3mEi"
+      ],
+      "spectron_ea": "0x240894",
+      "spectron_function_end": "0x2408c8",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 13,
+        "mnemonic_hash": "ca99fa9815b873ec004fbee5fdc4bc59e66c2c832bcb3d7a55d83dcee1e18620",
+        "opcode_shape_hash": "9d5508ef2c26f8b30643f4d73a0a9acc21588e398e09d0fcebc955c2aa069c4a",
+        "register_shape_hash": "d5bc70e15bc68d26ac1da934b1a7260c4e7cba2844b0f562941435413596616b",
+        "shape_hash": "875254ce8c1ac69ec0bb4f3385bfd95cf44db5ba666dffffd41033c0db4bfe19",
+        "size": 52,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9e88"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "Both set image type 3 and forward the string to the coded-polygon particle-data helper."
+      ],
+      "match_kind": "manual-showimg-residual-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TShowImg_setImageType_int"
+      ],
+      "original_ea": "0x236a9c",
+      "original_function_end": "0x236ad0",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 13,
+        "mnemonic_hash": "ca99fa9815b873ec004fbee5fdc4bc59e66c2c832bcb3d7a55d83dcee1e18620",
+        "opcode_shape_hash": "27b705ae40f353028c2defa25aa4dc026b1f3f32be0bb53a1a76e309f9f4613a",
+        "register_shape_hash": "f1e810d2efc59a6f3f15fcab59fd4c68811101e00981abd0cb075d9cbaa639f6",
+        "shape_hash": "8fb8ef375b27793af1e95a89a42f62a5d79536fb74c49dc385fad99cf0208b1f",
+        "size": 52,
+        "string_refs_hash": null
+      },
+      "original_name": "TShowImg_showPoly_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TShowImg_showPoly_TString_const",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "show-polygon wrapper",
+      "spectron_current_name": "_ZN10eODlJaQ5OL10__VUWaHpvaERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10eODlJaQ5OL10jqR8WaJy3mEi"
+      ],
+      "spectron_ea": "0x240924",
+      "spectron_function_end": "0x240958",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 13,
+        "mnemonic_hash": "ca99fa9815b873ec004fbee5fdc4bc59e66c2c832bcb3d7a55d83dcee1e18620",
+        "opcode_shape_hash": "27b705ae40f353028c2defa25aa4dc026b1f3f32be0bb53a1a76e309f9f4613a",
+        "register_shape_hash": "f1e810d2efc59a6f3f15fcab59fd4c68811101e00981abd0cb075d9cbaa639f6",
+        "shape_hash": "8fb8ef375b27793af1e95a89a42f62a5d79536fb74c49dc385fad99cf0208b1f",
+        "size": 52,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9e88"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "Both set image type 3 and forward the string to the textured coded-polygon particle-data helper, including the target's second polygon helper rather than the plain polygon helper."
+      ],
+      "match_kind": "manual-showimg-residual-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TShowImg_setImageType_int"
+      ],
+      "original_ea": "0x236ad0",
+      "original_function_end": "0x236b04",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 13,
+        "mnemonic_hash": "ca99fa9815b873ec004fbee5fdc4bc59e66c2c832bcb3d7a55d83dcee1e18620",
+        "opcode_shape_hash": "27b705ae40f353028c2defa25aa4dc026b1f3f32be0bb53a1a76e309f9f4613a",
+        "register_shape_hash": "f1e810d2efc59a6f3f15fcab59fd4c68811101e00981abd0cb075d9cbaa639f6",
+        "shape_hash": "8fb8ef375b27793af1e95a89a42f62a5d79536fb74c49dc385fad99cf0208b1f",
+        "size": 52,
+        "string_refs_hash": null
+      },
+      "original_name": "TShowImg_showTexturedPoly_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TShowImg_showTexturedPoly_TString_const",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "show-textured-polygon wrapper",
+      "spectron_current_name": "_ZN10eODlJaQ5OL10nvvZWa56leERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10eODlJaQ5OL10jqR8WaJy3mEi"
+      ],
+      "spectron_ea": "0x240958",
+      "spectron_function_end": "0x24098c",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 13,
+        "mnemonic_hash": "ca99fa9815b873ec004fbee5fdc4bc59e66c2c832bcb3d7a55d83dcee1e18620",
+        "opcode_shape_hash": "27b705ae40f353028c2defa25aa4dc026b1f3f32be0bb53a1a76e309f9f4613a",
+        "register_shape_hash": "f1e810d2efc59a6f3f15fcab59fd4c68811101e00981abd0cb075d9cbaa639f6",
+        "shape_hash": "8fb8ef375b27793af1e95a89a42f62a5d79536fb74c49dc385fad99cf0208b1f",
+        "size": 52,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9e88"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "Both set image type 4 and forward the string to the coded-animation particle-data helper."
+      ],
+      "match_kind": "manual-showimg-residual-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TShowImg_setImageType_int"
+      ],
+      "original_ea": "0x236b58",
+      "original_function_end": "0x236b8c",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 13,
+        "mnemonic_hash": "ca99fa9815b873ec004fbee5fdc4bc59e66c2c832bcb3d7a55d83dcee1e18620",
+        "opcode_shape_hash": "3be264dbac5d1e30f31bc72b90b2c4717546fe4799e46b85863ed61d0ecb74bb",
+        "register_shape_hash": "e33c1368679d0241084fc1bb414fac70af0de467c2c208c190a85671687f5084",
+        "shape_hash": "b54e51cf073a9f00f642577ac844be160b7934aec17cb9cb72a490da6dd9547c",
+        "size": 52,
+        "string_refs_hash": null
+      },
+      "original_name": "TShowImg_showAni_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TShowImg_showAni_TString_const",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "show-animation wrapper",
+      "spectron_current_name": "_ZN10eODlJaQ5OL10MtfZWaID8dERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10eODlJaQ5OL10jqR8WaJy3mEi"
+      ],
+      "spectron_ea": "0x2409e0",
+      "spectron_function_end": "0x240a14",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 13,
+        "mnemonic_hash": "ca99fa9815b873ec004fbee5fdc4bc59e66c2c832bcb3d7a55d83dcee1e18620",
+        "opcode_shape_hash": "3be264dbac5d1e30f31bc72b90b2c4717546fe4799e46b85863ed61d0ecb74bb",
+        "register_shape_hash": "e33c1368679d0241084fc1bb414fac70af0de467c2c208c190a85671687f5084",
+        "shape_hash": "b54e51cf073a9f00f642577ac844be160b7934aec17cb9cb72a490da6dd9547c",
+        "size": 52,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9e88"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "Both call the particle-data animation getter on the TShowImg subobject and preserve the caller-provided return buffer."
+      ],
+      "match_kind": "manual-showimg-residual-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TParticleDataEx_getAnimation_void"
+      ],
+      "original_ea": "0x237984",
+      "original_function_end": "0x2379a8",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 9,
+        "mnemonic_hash": "f54e1d54d3bc194389767cb6b9a4b4f51b234713852086b1e88fd7bc606fcc25",
+        "opcode_shape_hash": "65c61e0bed3f7b1ec3a5c960903b068d10501085c7c0f4286a17c70c30c1591f",
+        "register_shape_hash": "f7a97287450d69a4946d782061ce209f9307c8b74d1dd3b7d14b7b0d90897705",
+        "shape_hash": "7551f9d12f012ccb5431eb6b9b0354b716372df24ee8a7a221fdf31e1d7d5587",
+        "size": 36,
+        "string_refs_hash": null
+      },
+      "original_name": "TShowImg_getAni_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TShowImg_getAni_void",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "animation getter wrapper",
+      "spectron_current_name": "_ZN10eODlJaQ5OL10jlavgawjQuEv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZNK10tJIwIaYe8310MKKOFa0WiNEv"
+      ],
+      "spectron_ea": "0x241824",
+      "spectron_function_end": "0x241848",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 9,
+        "mnemonic_hash": "f54e1d54d3bc194389767cb6b9a4b4f51b234713852086b1e88fd7bc606fcc25",
+        "opcode_shape_hash": "65c61e0bed3f7b1ec3a5c960903b068d10501085c7c0f4286a17c70c30c1591f",
+        "register_shape_hash": "f7a97287450d69a4946d782061ce209f9307c8b74d1dd3b7d14b7b0d90897705",
+        "shape_hash": "7551f9d12f012ccb5431eb6b9b0354b716372df24ee8a7a221fdf31e1d7d5587",
+        "size": 36,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9ea0"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "Both set image type 4 and call the particle-data direction setter with the integer argument."
+      ],
+      "match_kind": "manual-showimg-residual-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TShowImg_setImageType_int"
+      ],
+      "original_ea": "0x237a58",
+      "original_function_end": "0x237a8c",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 13,
+        "mnemonic_hash": "ca99fa9815b873ec004fbee5fdc4bc59e66c2c832bcb3d7a55d83dcee1e18620",
+        "opcode_shape_hash": "3be264dbac5d1e30f31bc72b90b2c4717546fe4799e46b85863ed61d0ecb74bb",
+        "register_shape_hash": "e33c1368679d0241084fc1bb414fac70af0de467c2c208c190a85671687f5084",
+        "shape_hash": "b54e51cf073a9f00f642577ac844be160b7934aec17cb9cb72a490da6dd9547c",
+        "size": 52,
+        "string_refs_hash": null
+      },
+      "original_name": "TShowImg_setDir_int",
+      "original_string_refs": [],
+      "proposed_name": "v18_TShowImg_setDir_int",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "direction setter wrapper",
+      "spectron_current_name": "_ZN10eODlJaQ5OL10Bn9cHauvGYEi",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10eODlJaQ5OL10jqR8WaJy3mEi"
+      ],
+      "spectron_ea": "0x2418f8",
+      "spectron_function_end": "0x24192c",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 13,
+        "mnemonic_hash": "ca99fa9815b873ec004fbee5fdc4bc59e66c2c832bcb3d7a55d83dcee1e18620",
+        "opcode_shape_hash": "3be264dbac5d1e30f31bc72b90b2c4717546fe4799e46b85863ed61d0ecb74bb",
+        "register_shape_hash": "e33c1368679d0241084fc1bb414fac70af0de467c2c208c190a85671687f5084",
+        "shape_hash": "b54e51cf073a9f00f642577ac844be160b7934aec17cb9cb72a490da6dd9547c",
+        "size": 52,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9ea0"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "Both set image type 2 and assign the supplied string into the font member at the same logical class field."
+      ],
+      "match_kind": "manual-showimg-residual-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TShowImg_setImageType_int"
+      ],
+      "original_ea": "0x237a90",
+      "original_function_end": "0x237ac4",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 13,
+        "mnemonic_hash": "ca99fa9815b873ec004fbee5fdc4bc59e66c2c832bcb3d7a55d83dcee1e18620",
+        "opcode_shape_hash": "9d5508ef2c26f8b30643f4d73a0a9acc21588e398e09d0fcebc955c2aa069c4a",
+        "register_shape_hash": "d5bc70e15bc68d26ac1da934b1a7260c4e7cba2844b0f562941435413596616b",
+        "shape_hash": "875254ce8c1ac69ec0bb4f3385bfd95cf44db5ba666dffffd41033c0db4bfe19",
+        "size": 52,
+        "string_refs_hash": null
+      },
+      "original_name": "TShowImg_setFont_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TShowImg_setFont_TString_const",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "font setter wrapper",
+      "spectron_current_name": "_ZN10eODlJaQ5OL10UgsKFaUoHJERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10eODlJaQ5OL10jqR8WaJy3mEi"
+      ],
+      "spectron_ea": "0x241930",
+      "spectron_function_end": "0x241964",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 13,
+        "mnemonic_hash": "ca99fa9815b873ec004fbee5fdc4bc59e66c2c832bcb3d7a55d83dcee1e18620",
+        "opcode_shape_hash": "9d5508ef2c26f8b30643f4d73a0a9acc21588e398e09d0fcebc955c2aa069c4a",
+        "register_shape_hash": "d5bc70e15bc68d26ac1da934b1a7260c4e7cba2844b0f562941435413596616b",
+        "shape_hash": "875254ce8c1ac69ec0bb4f3385bfd95cf44db5ba666dffffd41033c0db4bfe19",
+        "size": 52,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9ea0"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "Both are one-instruction thunks that forward the image string to the class show-image implementation. The adjacent property jump thunk is a separate callback and is not confused with this method."
+      ],
+      "match_kind": "manual-showimg-residual-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x237b34",
+      "original_function_end": "0x237b38",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 1,
+        "mnemonic_hash": "df7e70e5021544f4834bbee64a9e3789febc4be81470df629cad6ddb03320a5c",
+        "opcode_shape_hash": "74421f1f206a1f88ce23d5a4fc4299f145f35134a154863c27d88bde0d7c7795",
+        "register_shape_hash": "3c1eee7de17644312d6af1e22e8666726d75912206d4ce8a62656747807515f6",
+        "shape_hash": "3c1eee7de17644312d6af1e22e8666726d75912206d4ce8a62656747807515f6",
+        "size": 4,
+        "string_refs_hash": null
+      },
+      "original_name": "TShowImg_setImage_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TShowImg_setImage_TString_const",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "image setter thunk to showImage",
+      "spectron_current_name": "_ZN10eODlJaQ5OL10kcRIFa3mlIERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x2419d4",
+      "spectron_function_end": "0x2419d8",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 1,
+        "mnemonic_hash": "df7e70e5021544f4834bbee64a9e3789febc4be81470df629cad6ddb03320a5c",
+        "opcode_shape_hash": "74421f1f206a1f88ce23d5a4fc4299f145f35134a154863c27d88bde0d7c7795",
+        "register_shape_hash": "3c1eee7de17644312d6af1e22e8666726d75912206d4ce8a62656747807515f6",
+        "shape_hash": "3c1eee7de17644312d6af1e22e8666726d75912206d4ce8a62656747807515f6",
+        "size": 4,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9ea0"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "Both return the image-index field directly from the expanded TShowImg object."
+      ],
+      "match_kind": "manual-showimg-residual-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x237b3c",
+      "original_function_end": "0x237b44",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "de72a41c35fa727134d1567d0cb079cdd252c263b49d89f278b4b5a2ce07b541",
+        "opcode_shape_hash": "126438d24c2b4e00b1681f8c5259eac03e8c7d857ae6231ca66ea544de712c95",
+        "register_shape_hash": "37f7a0d9d27d58ae794a4e5c97779a0fea989295cf3be5e100b23f8419900d68",
+        "shape_hash": "fdb6e988974b59e771f6857d563ee05722bcff5e0a61bb92df98d5a90f39e7da",
+        "size": 8,
+        "string_refs_hash": null
+      },
+      "original_name": "TShowImg_getImageIndex_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TShowImg_getImageIndex_void",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "image-index field getter",
+      "spectron_current_name": "_ZN10eODlJaQ5OL10FSUSXaJsOZEv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x2419dc",
+      "spectron_function_end": "0x2419e4",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "de72a41c35fa727134d1567d0cb079cdd252c263b49d89f278b4b5a2ce07b541",
+        "opcode_shape_hash": "126438d24c2b4e00b1681f8c5259eac03e8c7d857ae6231ca66ea544de712c95",
+        "register_shape_hash": "37f7a0d9d27d58ae794a4e5c97779a0fea989295cf3be5e100b23f8419900d68",
+        "shape_hash": "fdb6e988974b59e771f6857d563ee05722bcff5e0a61bb92df98d5a90f39e7da",
+        "size": 8,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9ea0"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "Both normalize the stored layer mode through the same 8, below-10, and above-10 cases. The complete normalized metrics match despite changed object constants."
+      ],
+      "match_kind": "manual-showimg-residual-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x237b48",
+      "original_function_end": "0x237b68",
+      "original_metrics": {
+        "basic_block_count": 3,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 8,
+        "mnemonic_hash": "7f3575b417ff9e0d57b2f0a5be9d58a0bbbbc9eca11bb23251a658c537e3ce78",
+        "opcode_shape_hash": "9efa5ce3fc97f934f69e897c7919a426a812e724138a73fb73b9b33875bf4d76",
+        "register_shape_hash": "aa75286ee16d717387549e26e42ed61914d8d0a92b74cd4291ff3adc080daef8",
+        "shape_hash": "485613e08b21ef32fd6a4115d36fc595ca29c4832dc5c8939e229e854a599225",
+        "size": 32,
+        "string_refs_hash": null
+      },
+      "original_name": "TShowImg_getLayer_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TShowImg_getLayer_void",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "layer getter normalization",
+      "spectron_current_name": "_ZN10eODlJaQ5OL10MJuWXagtP1Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x2419e8",
+      "spectron_function_end": "0x241a08",
+      "spectron_metrics": {
+        "basic_block_count": 3,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 8,
+        "mnemonic_hash": "7f3575b417ff9e0d57b2f0a5be9d58a0bbbbc9eca11bb23251a658c537e3ce78",
+        "opcode_shape_hash": "9efa5ce3fc97f934f69e897c7919a426a812e724138a73fb73b9b33875bf4d76",
+        "register_shape_hash": "aa75286ee16d717387549e26e42ed61914d8d0a92b74cd4291ff3adc080daef8",
+        "shape_hash": "485613e08b21ef32fd6a4115d36fc595ca29c4832dc5c8939e229e854a599225",
+        "size": 32,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9ea0"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "Both set image type 3 and forward the TGraalVar object to the polygon particle-data setter."
+      ],
+      "match_kind": "manual-showimg-residual-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TShowImg_setImageType_int"
+      ],
+      "original_ea": "0x237c78",
+      "original_function_end": "0x237cac",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 13,
+        "mnemonic_hash": "ca99fa9815b873ec004fbee5fdc4bc59e66c2c832bcb3d7a55d83dcee1e18620",
+        "opcode_shape_hash": "27b705ae40f353028c2defa25aa4dc026b1f3f32be0bb53a1a76e309f9f4613a",
+        "register_shape_hash": "f1e810d2efc59a6f3f15fcab59fd4c68811101e00981abd0cb075d9cbaa639f6",
+        "shape_hash": "8fb8ef375b27793af1e95a89a42f62a5d79536fb74c49dc385fad99cf0208b1f",
+        "size": 52,
+        "string_refs_hash": null
+      },
+      "original_name": "TShowImg_setPolygon_TGraalVar",
+      "original_string_refs": [],
+      "proposed_name": "v18_TShowImg_setPolygon_TGraalVar",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "polygon variable setter wrapper",
+      "spectron_current_name": "_ZN10eODlJaQ5OL10hoANFa0dkMEP10G0gxgajWBw",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10eODlJaQ5OL10jqR8WaJy3mEi"
+      ],
+      "spectron_ea": "0x241b18",
+      "spectron_function_end": "0x241b4c",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 13,
+        "mnemonic_hash": "ca99fa9815b873ec004fbee5fdc4bc59e66c2c832bcb3d7a55d83dcee1e18620",
+        "opcode_shape_hash": "27b705ae40f353028c2defa25aa4dc026b1f3f32be0bb53a1a76e309f9f4613a",
+        "register_shape_hash": "f1e810d2efc59a6f3f15fcab59fd4c68811101e00981abd0cb075d9cbaa639f6",
+        "shape_hash": "8fb8ef375b27793af1e95a89a42f62a5d79536fb74c49dc385fad99cf0208b1f",
+        "size": 52,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9ea0"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "Both set image type 2 and assign the string into the style member at the same logical class field."
+      ],
+      "match_kind": "manual-showimg-residual-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TShowImg_setImageType_int"
+      ],
+      "original_ea": "0x237cb0",
+      "original_function_end": "0x237ce4",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 13,
+        "mnemonic_hash": "ca99fa9815b873ec004fbee5fdc4bc59e66c2c832bcb3d7a55d83dcee1e18620",
+        "opcode_shape_hash": "9d5508ef2c26f8b30643f4d73a0a9acc21588e398e09d0fcebc955c2aa069c4a",
+        "register_shape_hash": "d5bc70e15bc68d26ac1da934b1a7260c4e7cba2844b0f562941435413596616b",
+        "shape_hash": "875254ce8c1ac69ec0bb4f3385bfd95cf44db5ba666dffffd41033c0db4bfe19",
+        "size": 52,
+        "string_refs_hash": null
+      },
+      "original_name": "TShowImg_setStyle_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TShowImg_setStyle_TString_const",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "style setter wrapper",
+      "spectron_current_name": "_ZN10eODlJaQ5OL10l7cPgaSEHLERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10eODlJaQ5OL10jqR8WaJy3mEi"
+      ],
+      "spectron_ea": "0x241b50",
+      "spectron_function_end": "0x241b84",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 13,
+        "mnemonic_hash": "ca99fa9815b873ec004fbee5fdc4bc59e66c2c832bcb3d7a55d83dcee1e18620",
+        "opcode_shape_hash": "9d5508ef2c26f8b30643f4d73a0a9acc21588e398e09d0fcebc955c2aa069c4a",
+        "register_shape_hash": "d5bc70e15bc68d26ac1da934b1a7260c4e7cba2844b0f562941435413596616b",
+        "shape_hash": "875254ce8c1ac69ec0bb4f3385bfd95cf44db5ba666dffffd41033c0db4bfe19",
+        "size": 52,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9ea0"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "Both set image type 2 and assign the string into the text member at the same logical class field."
+      ],
+      "match_kind": "manual-showimg-residual-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TShowImg_setImageType_int"
+      ],
+      "original_ea": "0x237ce8",
+      "original_function_end": "0x237d1c",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 13,
+        "mnemonic_hash": "ca99fa9815b873ec004fbee5fdc4bc59e66c2c832bcb3d7a55d83dcee1e18620",
+        "opcode_shape_hash": "9d5508ef2c26f8b30643f4d73a0a9acc21588e398e09d0fcebc955c2aa069c4a",
+        "register_shape_hash": "d5bc70e15bc68d26ac1da934b1a7260c4e7cba2844b0f562941435413596616b",
+        "shape_hash": "875254ce8c1ac69ec0bb4f3385bfd95cf44db5ba666dffffd41033c0db4bfe19",
+        "size": 52,
+        "string_refs_hash": null
+      },
+      "original_name": "TShowImg_setText_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TShowImg_setText_TString_const",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "text setter wrapper",
+      "spectron_current_name": "_ZN10eODlJaQ5OL10AceLgadzlIERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10eODlJaQ5OL10jqR8WaJy3mEi"
+      ],
+      "spectron_ea": "0x241b88",
+      "spectron_function_end": "0x241bbc",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 13,
+        "mnemonic_hash": "ca99fa9815b873ec004fbee5fdc4bc59e66c2c832bcb3d7a55d83dcee1e18620",
+        "opcode_shape_hash": "9d5508ef2c26f8b30643f4d73a0a9acc21588e398e09d0fcebc955c2aa069c4a",
+        "register_shape_hash": "d5bc70e15bc68d26ac1da934b1a7260c4e7cba2844b0f562941435413596616b",
+        "shape_hash": "875254ce8c1ac69ec0bb4f3385bfd95cf44db5ba666dffffd41033c0db4bfe19",
+        "size": 52,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9ea0"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "Both return the attach-to-owner byte directly. The target pseudocode reads the expanded object's corresponding byte field."
+      ],
+      "match_kind": "manual-showimg-residual-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x237d7c",
+      "original_function_end": "0x237d84",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "050e5f3007e7006215593eadfd2ad3f4231bec310597de275e694f838fb2ebf5",
+        "opcode_shape_hash": "126438d24c2b4e00b1681f8c5259eac03e8c7d857ae6231ca66ea544de712c95",
+        "register_shape_hash": "23ed6478c360254d28de46c6cdd7dce78fcbe251be4361b2018dca996bd4062b",
+        "shape_hash": "e1c8f04a92b31b3779c1d5837fc90f34714c5c7953475296cc365cc5a3c1a133",
+        "size": 8,
+        "string_refs_hash": null
+      },
+      "original_name": "TShowImg_getAttachToOwner_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TShowImg_getAttachToOwner_void",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "attach-to-owner flag getter",
+      "spectron_current_name": "_ZN10eODlJaQ5OL10myF7XaBz3bEv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x241c1c",
+      "spectron_function_end": "0x241c24",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "050e5f3007e7006215593eadfd2ad3f4231bec310597de275e694f838fb2ebf5",
+        "opcode_shape_hash": "126438d24c2b4e00b1681f8c5259eac03e8c7d857ae6231ca66ea544de712c95",
+        "register_shape_hash": "23ed6478c360254d28de46c6cdd7dce78fcbe251be4361b2018dca996bd4062b",
+        "shape_hash": "e1c8f04a92b31b3779c1d5837fc90f34714c5c7953475296cc365cc5a3c1a133",
+        "size": 8,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9ea0"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "Both allocate the properties object, call its constructor, store the singleton pointer, and return the singleton address. The complete normalized metrics match."
+      ],
+      "match_kind": "manual-showimg-residual-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TShowImgProperties_TShowImgProperties_void",
+        "plt_operator_new_ulong__2"
+      ],
+      "original_ea": "0x2380f4",
+      "original_function_end": "0x238124",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 3,
+        "call_count": 2,
+        "instruction_count": 12,
+        "mnemonic_hash": "a847648536bddf8726a71604127ef35f6f8d823158f713ca5da0e64eb34efe47",
+        "opcode_shape_hash": "613512b8a79283d3e57b3fd1662ef3f58514d8312a824242cb61eb475725287b",
+        "register_shape_hash": "78b63b4cee762973d306ffc48e17fa27d9d004dd048d4a47597fed71711dcbdd",
+        "shape_hash": "1060cf0d56d1cb899b911799e675d9b84ad64784ad73fe5d591d8128baaf4e69",
+        "size": 48,
+        "string_refs_hash": null
+      },
+      "original_name": "TShowImg_initStaticScriptVars_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TShowImg_initStaticScriptVars_void",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TShowImg property singleton initializer",
+      "spectron_current_name": "_Z10soSA2abnDNv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN20eODlJaQ5OLPropertiesC1Ev",
+        "._Znwm"
+      ],
+      "spectron_ea": "0x241f94",
+      "spectron_function_end": "0x241fc4",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 3,
+        "call_count": 2,
+        "instruction_count": 12,
+        "mnemonic_hash": "a847648536bddf8726a71604127ef35f6f8d823158f713ca5da0e64eb34efe47",
+        "opcode_shape_hash": "613512b8a79283d3e57b3fd1662ef3f58514d8312a824242cb61eb475725287b",
+        "register_shape_hash": "78b63b4cee762973d306ffc48e17fa27d9d004dd048d4a47597fed71711dcbdd",
+        "shape_hash": "1060cf0d56d1cb899b911799e675d9b84ad64784ad73fe5d591d8128baaf4e69",
+        "size": 48,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9ea0"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "The source alternative symbol identifies this as the D1 complete destructor, while the target retains the equivalent D2 spelling. Both reset the two vtables and destroy the TProperties base object."
+      ],
+      "match_kind": "manual-showimg-residual-layout-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x238124",
+      "original_function_end": "0x238140",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 7,
+        "mnemonic_hash": "2049bff17c2411839e64ccc85f3f1a80d5eeb0387e8826615f854254918b7030",
+        "opcode_shape_hash": "30a7deba9a531b4962fb053d6fd9e2857a55be1d72e43a486be89dfddbbbadd0",
+        "register_shape_hash": "2d19d1afe969c334ba155654d1d53251417069ba7142db674cb4e601a70112e6",
+        "shape_hash": "d765fca85816fe1dcb414b48943a832695cd198f303433542b4443b17783b09e",
+        "size": 28,
+        "string_refs_hash": null
+      },
+      "original_name": "TShowImgProperties_TShowImgProperties",
+      "original_string_refs": [],
+      "proposed_name": "v18_TShowImgProperties_TShowImgProperties",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "TShowImgProperties complete destructor role",
+      "spectron_current_name": "_ZN20eODlJaQ5OLPropertiesD2Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x241fc4",
+      "spectron_function_end": "0x241fe0",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 7,
+        "mnemonic_hash": "2049bff17c2411839e64ccc85f3f1a80d5eeb0387e8826615f854254918b7030",
+        "opcode_shape_hash": "3ff919a166325951fcbdb28469b1aa6ebc1df1d5cf00fdad6d0bdf2207bdd864",
+        "register_shape_hash": "2d19d1afe969c334ba155654d1d53251417069ba7142db674cb4e601a70112e6",
+        "shape_hash": "bcfbe0f4be8474c88590ed417e78de0ff2604c08094dffd995402ea05beb1c0d",
+        "size": 28,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9ea0"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "Both reset the properties vtables, destroy the TProperties base object, and release the allocation. The target keeps the D0 role in its retained C++ symbol, while vtable literal normalization prevents an exact opcode-shape claim."
+      ],
+      "match_kind": "manual-showimg-residual-layout-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TProperties_TProperties"
+      ],
+      "original_ea": "0x238148",
+      "original_function_end": "0x238180",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 14,
+        "mnemonic_hash": "651504a569ba54da4c9374e46d43cfdf842eb69fa77679e1b28a2aafd6448a19",
+        "opcode_shape_hash": "6862d950f588cda9695f0f44f8aaa3f1ea986def01012d29b7dde9c2ebc82d27",
+        "register_shape_hash": "7708026b1296dfaa3f1dd6ad3147e6b13d29404f7dad15a95aeb31638688eded",
+        "shape_hash": "ac991e0021a173ce7ee186b728f5d4bce318f192c7f1a560f3abbebacf082a34",
+        "size": 56,
+        "string_refs_hash": null
+      },
+      "original_name": "TShowImgProperties_TShowImgProperties__2",
+      "original_string_refs": [],
+      "proposed_name": "v18_TShowImgProperties_TShowImgProperties__2",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "TShowImgProperties D0 deleting destructor role",
+      "spectron_current_name": "_ZN20eODlJaQ5OLPropertiesD0Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10c76BgaJBGAD1Ev_0"
+      ],
+      "spectron_ea": "0x241fe8",
+      "spectron_function_end": "0x242020",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 14,
+        "mnemonic_hash": "651504a569ba54da4c9374e46d43cfdf842eb69fa77679e1b28a2aafd6448a19",
+        "opcode_shape_hash": "ca96c5b35a347b2b7daf55c59fb64aa00e153aae0ba6c9f4d8dde3ae5906ed54",
+        "register_shape_hash": "7708026b1296dfaa3f1dd6ad3147e6b13d29404f7dad15a95aeb31638688eded",
+        "shape_hash": "b8db56a3bc8daa83a3462c3f3ed073116ab2d502bb22c60e5033037557d0839a",
+        "size": 56,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9ea0"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "Both subtract 16 from the adjusted this pointer and branch to the complete properties destructor. The two-instruction thunk fingerprint is exact."
+      ],
+      "match_kind": "manual-showimg-residual-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x238140",
+      "original_function_end": "0x238148",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "fee45af883c8aab5ac479e5ba4253e40305b558f26db0e542c13eed0c2982cf4",
+        "opcode_shape_hash": "6ad2b8bd2cd23c239e346de5e8d4b2bd7797d188e1a3a0f235a61cae028aaab4",
+        "register_shape_hash": "559db5624fdc12566a5c619d32373adb1728d542bf3a41a6f6e1cd8096c1df13",
+        "shape_hash": "0bc3681158772cd8dce98691dfb45bc1e0470261530896876ce4015afc0cbaf2",
+        "size": 8,
+        "string_refs_hash": null
+      },
+      "original_name": "non_virtual_thunk_to_TShowImgProperties_TShowImgProperties",
+      "original_string_refs": [],
+      "proposed_name": "v18_non_virtual_thunk_to_TShowImgProperties_TShowImgProperties",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TShowImgProperties D1 non-virtual thunk",
+      "spectron_current_name": "_ZThn16_N20eODlJaQ5OLPropertiesD1Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x241fe0",
+      "spectron_function_end": "0x241fe8",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "fee45af883c8aab5ac479e5ba4253e40305b558f26db0e542c13eed0c2982cf4",
+        "opcode_shape_hash": "6ad2b8bd2cd23c239e346de5e8d4b2bd7797d188e1a3a0f235a61cae028aaab4",
+        "register_shape_hash": "559db5624fdc12566a5c619d32373adb1728d542bf3a41a6f6e1cd8096c1df13",
+        "shape_hash": "0bc3681158772cd8dce98691dfb45bc1e0470261530896876ce4015afc0cbaf2",
+        "size": 8,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9ea0"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target methods occupy the same TShowImg class-local implementation cluster after the translated property callbacks, list methods, and render helpers.",
+        "The target name retains the obfuscated eODlJaQ5OL class or its adjacent properties-class destructor role. The anchor preserves that original name in the evidence row and adds only a readable v18_ analysis alias.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static analysis overlay and does not modify the APK.",
+        "Both subtract 16 from the adjusted this pointer and branch to the deleting properties destructor. The two-instruction thunk fingerprint is exact."
+      ],
+      "match_kind": "manual-showimg-residual-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x238180",
+      "original_function_end": "0x238188",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "fee45af883c8aab5ac479e5ba4253e40305b558f26db0e542c13eed0c2982cf4",
+        "opcode_shape_hash": "6ad2b8bd2cd23c239e346de5e8d4b2bd7797d188e1a3a0f235a61cae028aaab4",
+        "register_shape_hash": "559db5624fdc12566a5c619d32373adb1728d542bf3a41a6f6e1cd8096c1df13",
+        "shape_hash": "0bc3681158772cd8dce98691dfb45bc1e0470261530896876ce4015afc0cbaf2",
+        "size": 8,
+        "string_refs_hash": null
+      },
+      "original_name": "non_virtual_thunk_to_TShowImgProperties_TShowImgProperties__2",
+      "original_string_refs": [],
+      "proposed_name": "v18_non_virtual_thunk_to_TShowImgProperties_TShowImgProperties__2",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TShowImgProperties D0 non-virtual thunk",
+      "spectron_current_name": "_ZThn16_N20eODlJaQ5OLPropertiesD0Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x242020",
+      "spectron_function_end": "0x242028",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "fee45af883c8aab5ac479e5ba4253e40305b558f26db0e542c13eed0c2982cf4",
+        "opcode_shape_hash": "6ad2b8bd2cd23c239e346de5e8d4b2bd7797d188e1a3a0f235a61cae028aaab4",
+        "register_shape_hash": "559db5624fdc12566a5c619d32373adb1728d542bf3a41a6f6e1cd8096c1df13",
+        "shape_hash": "0bc3681158772cd8dce98691dfb45bc1e0470261530896876ce4015afc0cbaf2",
+        "size": 8,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x9ea0"
+    }
+  ],
+  "artifact": "spectron_showimg_residual_manual_translation_anchors_20260827",
+  "context": {
+    "layout_change_roles": [
+      "TShowImgProperties complete destructor",
+      "TShowImgProperties deleting destructor"
+    ],
+    "source_class": "TShowImg and TShowImgProperties",
+    "target_class": "eODlJaQ5OL and eODlJaQ5OLProperties",
+    "target_class_method_cluster": "0x23e124..0x242020"
+  },
+  "inputs": {
+    "original_binary": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so",
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_current.json",
+    "original_features_sha256": "243341ad40e912500365b6d7eb5b69f9f3b9d6200f5c825629cfc56d4343ac07",
+    "spectron_binary": "/tmp/spectron-libqplay-inspect/lib/arm64-v8a/libqplay.so",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v165.json",
+    "spectron_features_sha256": "72e5f57d7cf8b9e5e8d2b3781df4320ff0e8df4cb06275775c0a24b388843a49"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The exact rows match the complete normalized function feature set. The two properties-class destructor rows preserve lifecycle role and all common metrics, but changed vtable literals alter opcode and overall-shape hashes.",
+    "The short show-text, polygon, animation, direction, font, style, and text wrappers were assigned by their target pseudocode calls and exact normalized fingerprints, not by address order alone.",
+    "The v18_ aliases are scoped to the exact hashed Spectron library in the inputs and are an IDA analysis overlay only."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for residual TShowImg methods and properties-class lifecycle callbacks",
+  "summary": {
+    "address_delta_groups": {
+      "+0x9d58": 1,
+      "+0x9df0": 1,
+      "+0x9e88": 7,
+      "+0x9ea0": 15
+    },
+    "anchor_count": 24,
+    "exact_shape_anchor_count": 22,
+    "high_confidence_count": 24,
+    "layout_change_anchor_count": 2,
+    "new_context_anchor_count": 24,
+    "target_default_name_count": 0
+  }
+}

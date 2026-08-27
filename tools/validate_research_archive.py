@@ -227,6 +227,9 @@ def main():
     spectron_showimg_property_anchors = load_json(
         "artifacts/spectron_showimg_property_manual_translation_anchors_20260827.json"
     )
+    spectron_showimg_residual_anchors = load_json(
+        "artifacts/spectron_showimg_residual_manual_translation_anchors_20260827.json"
+    )
     spectron_particle_emitter_anchors = load_json(
         "artifacts/spectron_particle_emitter_manual_translation_anchors_20260826.json"
     )
@@ -1878,6 +1881,17 @@ def main():
     check("Spectron ShowImg property existing context count", spectron_showimg_property_anchors["summary"]["existing_context_count"], 8)
     check("Spectron ShowImg property shared target count", spectron_showimg_property_anchors["summary"]["shared_target_context_count"], 1)
     check(
+        "Spectron ShowImg residual artifact",
+        spectron_showimg_residual_anchors["artifact"],
+        "spectron_showimg_residual_manual_translation_anchors_20260827",
+    )
+    check("Spectron ShowImg residual network", spectron_showimg_residual_anchors["network_contacted"], False)
+    check("Spectron ShowImg residual total", spectron_showimg_residual_anchors["summary"]["anchor_count"], 24)
+    check("Spectron ShowImg residual high confidence", spectron_showimg_residual_anchors["summary"]["high_confidence_count"], 24)
+    check("Spectron ShowImg residual exact-shape count", spectron_showimg_residual_anchors["summary"]["exact_shape_anchor_count"], 22)
+    check("Spectron ShowImg residual layout-change count", spectron_showimg_residual_anchors["summary"]["layout_change_anchor_count"], 2)
+    check("Spectron ShowImg residual default targets", spectron_showimg_residual_anchors["summary"]["target_default_name_count"], 0)
+    check(
         "Spectron particle-emitter artifact",
         spectron_particle_emitter_anchors["artifact"],
         "spectron_particle_emitter_manual_translation_anchors_20260826",
@@ -3093,6 +3107,7 @@ def main():
     check("Spectron checkpoint particle anchor count", spectron_checkpoint["particle_anchors"]["verified_name_count"], 5)
     check("Spectron checkpoint ShowImg anchor count", spectron_checkpoint["showimg_anchors"]["verified_name_count"], 3)
     check("Spectron checkpoint ShowImg property anchor count", spectron_checkpoint["showimg_property_anchors"]["verified_name_count"], 85)
+    check("Spectron checkpoint ShowImg residual anchor count", spectron_checkpoint["showimg_residual_anchors"]["verified_name_count"], 24)
     check("Spectron checkpoint particle-emitter anchor count", spectron_checkpoint["particle_emitter_anchors"]["verified_name_count"], 2)
     check("Spectron checkpoint server-animation anchor count", spectron_checkpoint["server_animation_anchors"]["verified_name_count"], 3)
     check("Spectron checkpoint player-lifecycle anchor count", spectron_checkpoint["player_lifecycle_anchors"]["verified_name_count"], 2)
@@ -3198,7 +3213,7 @@ def main():
     check("Spectron checkpoint TServerPlayer property-block anchor count", spectron_checkpoint["tserverplayer_property_block_anchors"]["verified_name_count"], 39)
     check("Spectron checkpoint TServerPlayer residual anchor count", spectron_checkpoint["tserverplayer_residual_anchors"]["verified_name_count"], 25)
     check("Spectron checkpoint TServerPlayer tail anchor count", spectron_checkpoint["tserverplayer_tail_anchors"]["verified_name_count"], 7)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "284432daf4efd99359cd41c2dc436f554c65b43f4e1d579bab4b3030fb72c153")
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "31b96a52e45a605de9aa2c881ea9061c33afda1b2dfac5773c1a420ea7caec77")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -3315,6 +3330,7 @@ def main():
         spectron_tiles_update_anchors,
         spectron_particle_anchors,
         spectron_showimg_anchors,
+        spectron_showimg_residual_anchors,
         spectron_particle_emitter_anchors,
         spectron_server_animation_anchors,
         spectron_player_lifecycle_anchors,

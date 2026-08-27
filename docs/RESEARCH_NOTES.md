@@ -5172,6 +5172,110 @@ and zero failures across 11,679 functions. The v108 database has 1,684
 remaining default `sub_` names. Its SHA-256 is
 `8350a43be6b31306954e34a17f77d742c8d1702015d671019d2bf2dd6c1bb1e1`.
 
+## 2026-08-27: Spectron TShowImg residual class methods
+
+The v166 pass closes the named `TShowImg` methods that remained after the
+property callback registry and the earlier visual-helper anchors. This batch
+is useful because it reaches the class's small accessors, script-facing
+wrappers, resource update path, and destructor family. It also provides a
+clean test of the class-local translation model: the Spectron implementation
+cluster is relocated and reordered, but the surrounding roles remain
+recognizable.
+
+The source and target ARM64 library hashes are
+`9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8` and
+`f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219`.
+Addresses in this note apply only to those exact files.
+
+### Selection and verification
+
+The review began with the remaining non-PLT source names in the `TShowImg`
+class-local range. Each candidate was checked against the target's adjacent
+`eODlJaQ5OL` implementation cluster, its call and return behavior, and the
+normalized ARM64 feature record. For ordinary methods, an exact row requires
+matching size, instruction count, basic-block count, branch count, call
+count, mnemonic hash, opcode-shape hash, register-shape hash, overall-shape
+hash, and string-reference digest.
+
+| Result | Rows | Review rule |
+| --- | ---: | --- |
+| exact normalized match | 22 | all recorded normalized metrics agree |
+| layout-aware lifecycle match | 2 | destructor role and common metrics agree, while vtable literals change |
+| target functions with default `sub_` names before the pass | 0 | all 24 retained obfuscated C++ names |
+| manual anchor rows | 24 | all reopened successfully after labeling |
+
+The two exceptions are the complete and deleting `TShowImgProperties`
+destructor roles. The source database exposes the complete destructor under
+the constructor-like local alias `TShowImgProperties_TShowImgProperties`,
+although its alternative ELF name is the D1 destructor. Spectron exposes the
+corresponding lifecycle body as `_ZN20eODlJaQ5OLPropertiesD2Ev`. The D0 row
+also changes its vtable literals. In both cases, the destructor sequence,
+base cleanup, and common function metrics identify the role, but the changed
+vtable constants make an exact opcode and overall-shape claim inappropriate.
+The two non-virtual thunks remain exact because their adjusted-this branches
+match directly.
+
+### Complete residual table
+
+The table below lists every row in the v166 artifact. The target name is the
+original obfuscated C++ name before the readable `v18_` analysis alias was
+applied.
+
+| Source role | 1.8 address | Spectron address | Target name before alias | Match basis |
+| --- | ---: | ---: | --- | --- |
+| `TShowImg_getz_void` | `0x2343cc` | `0x23e124` | `_ZN10eODlJaQ5OL10gkQVgaDDgREv` | exact direct double field read |
+| `TShowImg_TShowImg__2` | `0x23476c` | `0x23e55c` | `_ZN10eODlJaQ5OLD0Ev` | exact D0 deleting destructor |
+| `TShowImg_onResourceFileUpdated_TString_const` | `0x234dc4` | `0x23ec4c` | `_ZN10eODlJaQ5OL10py0qgaE4krERK10C8THgaTQxF` | exact two-argument update thunk |
+| `TShowImg_tilewidthplain_void` | `0x235554` | `0x23f3dc` | `_ZN10eODlJaQ5OL10NE5cXa4mDqEv` | exact zero-return helper |
+| `TShowImg_tilesize_void` | `0x235854` | `0x23f6dc` | `_ZN10eODlJaQ5OL10pIS3IaYDSwEv` | exact pixel-size and `1/16` conversion |
+| `TShowImg_showText_TString_const` | `0x236a0c` | `0x240894` | `_ZN10eODlJaQ5OL10WoSUWaLnsaERK10C8THgaTQxF` | exact type 2 and coded text wrapper |
+| `TShowImg_showPoly_TString_const` | `0x236a9c` | `0x240924` | `_ZN10eODlJaQ5OL10__VUWaHpvaERK10C8THgaTQxF` | exact type 3 and coded polygon wrapper |
+| `TShowImg_showTexturedPoly_TString_const` | `0x236ad0` | `0x240958` | `_ZN10eODlJaQ5OL10nvvZWa56leERK10C8THgaTQxF` | exact textured polygon wrapper |
+| `TShowImg_showAni_TString_const` | `0x236b58` | `0x2409e0` | `_ZN10eODlJaQ5OL10MtfZWaID8dERK10C8THgaTQxF` | exact type 4 coded animation wrapper |
+| `TShowImg_getAni_void` | `0x237984` | `0x241824` | `_ZN10eODlJaQ5OL10jlavgawjQuEv` | exact particle animation getter |
+| `TShowImg_setDir_int` | `0x237a58` | `0x2418f8` | `_ZN10eODlJaQ5OL10Bn9cHauvGYEi` | exact direction wrapper |
+| `TShowImg_setFont_TString_const` | `0x237a90` | `0x241930` | `_ZN10eODlJaQ5OL10UgsKFaUoHJERK10C8THgaTQxF` | exact type 2 font assignment |
+| `TShowImg_setImage_TString_const` | `0x237b34` | `0x2419d4` | `_ZN10eODlJaQ5OL10kcRIFa3mlIERK10C8THgaTQxF` | exact thunk to `showImage` |
+| `TShowImg_getImageIndex_void` | `0x237b3c` | `0x2419dc` | `_ZN10eODlJaQ5OL10FSUSXaJsOZEv` | exact image-index getter |
+| `TShowImg_getLayer_void` | `0x237b48` | `0x2419e8` | `_ZN10eODlJaQ5OL10MJuWXagtP1Ev` | exact layer normalization |
+| `TShowImg_setPolygon_TGraalVar` | `0x237c78` | `0x241b18` | `_ZN10eODlJaQ5OL10hoANFa0dkMEP10G0gxgajWBw` | exact type 3 polygon wrapper |
+| `TShowImg_setStyle_TString_const` | `0x237cb0` | `0x241b50` | `_ZN10eODlJaQ5OL10l7cPgaSEHLERK10C8THgaTQxF` | exact style assignment |
+| `TShowImg_setText_TString_const` | `0x237ce8` | `0x241b88` | `_ZN10eODlJaQ5OL10AceLgadzlIERK10C8THgaTQxF` | exact text assignment |
+| `TShowImg_getAttachToOwner_void` | `0x237d7c` | `0x241c1c` | `_ZN10eODlJaQ5OL10myF7XaBz3bEv` | exact attach-owner byte getter |
+| `TShowImg_initStaticScriptVars_void` | `0x2380f4` | `0x241f94` | `_Z10soSA2abnDNv` | exact property singleton initialization |
+| `TShowImgProperties` complete destructor role | `0x238124` | `0x241fc4` | `_ZN20eODlJaQ5OLPropertiesD2Ev` | layout-aware D1/D2 lifecycle match |
+| `TShowImgProperties` D0 deleting destructor role | `0x238148` | `0x241fe8` | `_ZN20eODlJaQ5OLPropertiesD0Ev` | layout-aware destructor match |
+| properties D1 non-virtual thunk | `0x238140` | `0x241fe0` | `_ZThn16_N20eODlJaQ5OLPropertiesD1Ev` | exact adjusted-this thunk |
+| properties D0 non-virtual thunk | `0x238180` | `0x242020` | `_ZThn16_N20eODlJaQ5OLPropertiesD0Ev` | exact adjusted-this thunk |
+
+The behavior checks are consistent with the source pseudocode. The four
+`show*` wrappers select image types 2, 3, 3, and 4 before passing the coded
+text, polygon, textured polygon, or animation string into the target particle
+data helper. `setDir` keeps the type 4 path. `setFont`, `setStyle`, and
+`setText` write the same member slots. `tilesize` calls the pixel-size helper
+and divides both integer components by 16. `setImage` is a short forwarding
+thunk, and `getLayer` retains the source normalization for below and above
+values. These checks reduce the chance that a short wrapper was matched only
+because it happened to have the same instruction count.
+
+The four code-delta groups are `+0x9d58` for one row, `+0x9df0` for one,
+`+0x9e88` for seven, and `+0x9ea0` for 15. The groups reflect target class
+layout and linker ordering, not a single translation constant. The target
+names were all non-default before the pass, so the v166 database keeps the
+same 1,264 default `sub_` names while gaining 24 readable aliases.
+
+The machine-readable record is
+`artifacts/spectron_showimg_residual_manual_translation_anchors_20260827.json`,
+generated by `tools/generate_spectron_showimg_residual_anchors.py`. The
+checkpoint records the same artifact and the v166 database hash. All 24
+manual anchors reopened successfully. The full semantic reopen check reports
+zero failures across 11,694 functions, with 3,641 high-confidence labels and
+1,264 default `sub_` names. The saved IDA database is
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v166.i64`
+with SHA-256
+`31b96a52e45a605de9aa2c881ea9061c33afda1b2dfac5773c1a420ea7caec77`.
+This is an IDA analysis overlay only. No APK or native code was modified.
+
 ## 2026-08-27: Spectron TShowImg property callback table
 
 The v165 pass translates the property callbacks registered by

@@ -1428,6 +1428,18 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+224. The next IDA pass translated the remaining 24 named `TShowImg` methods
+    and `TShowImgProperties` destructor-family rows. Twenty-two pairs match
+    the complete normalized feature set, while the two properties-class
+    destructor bodies are documented as layout-aware lifecycle matches because
+    their vtable literals changed. The target functions all retained
+    obfuscated C++ names before the pass, so the default `sub_` count remains
+    1,264. All 24 labels reopened successfully in the v166 disposable copy,
+    which has 11,694 functions and 3,641 high-confidence labels. See
+    `artifacts/spectron_showimg_residual_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_showimg_residual_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 223. The next IDA pass translated the 85 reviewed `TShowImg` property
     callbacks from the identical 48-name registration tables. The source
     table is at `0x389fa0`, the Spectron table is at `0x39d0f0`, and each

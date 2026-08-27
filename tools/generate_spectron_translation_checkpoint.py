@@ -137,6 +137,8 @@ def main() -> None:
     parser.add_argument("--showimg-verification", type=Path)
     parser.add_argument("--showimg-property-anchors", type=Path)
     parser.add_argument("--showimg-property-verification", type=Path)
+    parser.add_argument("--showimg-residual-anchors", type=Path)
+    parser.add_argument("--showimg-residual-verification", type=Path)
     parser.add_argument("--particle-emitter-anchors", type=Path)
     parser.add_argument("--particle-emitter-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
@@ -1926,6 +1928,34 @@ def main() -> None:
         result["showimg_property_anchors"] = showimg_property
         result["interpretation"].append(
             "The one-hundred-sixty-fifth database revision also contains the separately reviewed complete TShowImg property callback table anchors."
+        )
+    showimg_residual = None
+    if args.showimg_residual_anchors or args.showimg_residual_verification:
+        if not args.showimg_residual_anchors or not args.showimg_residual_verification:
+            raise ValueError(
+                "ShowImg residual anchors and ShowImg residual verification must be supplied together"
+            )
+        showimg_residual_document = load(args.showimg_residual_anchors)
+        showimg_residual_verification = load(args.showimg_residual_verification)
+        if showimg_residual_document.get("artifact") != "spectron_showimg_residual_manual_translation_anchors_20260827":
+            raise ValueError("unexpected ShowImg residual anchor artifact")
+        if not showimg_residual_verification.get("verified"):
+            raise ValueError("ShowImg residual anchor reopen verification did not pass")
+        expected_showimg_residual = len(showimg_residual_document["anchors"])
+        if showimg_residual_verification["verified_name_count"] != expected_showimg_residual:
+            raise ValueError("ShowImg residual verification count differs from artifact")
+        showimg_residual = {
+            "anchor_path": str(args.showimg_residual_anchors),
+            "anchor_sha256": sha256_path(args.showimg_residual_anchors),
+            "reopen_verification": str(args.showimg_residual_verification),
+            "anchor_count": expected_showimg_residual,
+            "verified_name_count": showimg_residual_verification["verified_name_count"],
+            "reopen_failure_count": showimg_residual_verification["failure_count"],
+        }
+    if showimg_residual is not None:
+        result["showimg_residual_anchors"] = showimg_residual
+        result["interpretation"].append(
+            "The one-hundred-sixty-sixth database revision also contains the separately reviewed residual TShowImg wrappers, helpers, and properties-class lifecycle anchors."
         )
     particle_emitter = None
     if args.particle_emitter_anchors or args.particle_emitter_verification:

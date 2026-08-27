@@ -3444,6 +3444,75 @@ functions. The v108 database has 1,684 remaining default `sub_` names. Its
 SHA-256 is
 `8350a43be6b31306954e34a17f77d742c8d1702015d671019d2bf2dd6c1bb1e1`.
 
+## Spectron TShowImg residual class methods
+
+The v166 pass closes the remaining named `TShowImg` rows that were not
+covered by the property callback table or the earlier visual-helper pass. It
+uses the source and target class-local order as context, then checks the
+normalized ARM64 function features and the decompiled behavior. The target
+cluster runs from `0x23e124` through `0x242020` and retains the obfuscated
+`eODlJaQ5OL` C++ symbols, so these aliases make the existing names readable
+without treating a stripped binary as if it still had source symbols.
+
+Twenty-two rows match the complete normalized feature set. The two
+`TShowImgProperties` destructor rows have the same lifecycle role and common
+metrics, but vtable literals differ between the builds. They are therefore
+marked as layout-aware rather than exact-shape matches. The four code-delta
+groups are `+0x9d58` for one row, `+0x9df0` for one, `+0x9e88` for seven, and
+`+0x9ea0` for 15. This is another small example of why the translation pass
+uses class and behavior evidence instead of one global address offset.
+
+| 1.8 method or role | Source | Spectron target | Target name before alias | Evidence |
+| --- | ---: | ---: | --- | --- |
+| `TShowImg_getz_void` | `0x2343cc` | `0x23e124` | `_ZN10eODlJaQ5OL10gkQVgaDDgREv` | direct double read of the z-helper field |
+| `TShowImg_TShowImg__2` | `0x23476c` | `0x23e55c` | `_ZN10eODlJaQ5OLD0Ev` | D0 deleting destructor, exact shape |
+| `TShowImg_onResourceFileUpdated_TString_const` | `0x234dc4` | `0x23ec4c` | `_ZN10eODlJaQ5OL10py0qgaE4krERK10C8THgaTQxF` | two-argument resource-update thunk |
+| `TShowImg_tilewidthplain_void` | `0x235554` | `0x23f3dc` | `_ZN10eODlJaQ5OL10NE5cXa4mDqEv` | zero-return plain tile-width helper |
+| `TShowImg_tilesize_void` | `0x235854` | `0x23f6dc` | `_ZN10eODlJaQ5OL10pIS3IaYDSwEv` | pixelsize call and 1/16 conversion |
+| `TShowImg_showText_TString_const` | `0x236a0c` | `0x240894` | `_ZN10eODlJaQ5OL10WoSUWaLnsaERK10C8THgaTQxF` | image type 2 and coded text |
+| `TShowImg_showPoly_TString_const` | `0x236a9c` | `0x240924` | `_ZN10eODlJaQ5OL10__VUWaHpvaERK10C8THgaTQxF` | image type 3 and coded polygon |
+| `TShowImg_showTexturedPoly_TString_const` | `0x236ad0` | `0x240958` | `_ZN10eODlJaQ5OL10nvvZWa56leERK10C8THgaTQxF` | image type 3 and textured coded polygon |
+| `TShowImg_showAni_TString_const` | `0x236b58` | `0x2409e0` | `_ZN10eODlJaQ5OL10MtfZWaID8dERK10C8THgaTQxF` | image type 4 and coded animation |
+| `TShowImg_getAni_void` | `0x237984` | `0x241824` | `_ZN10eODlJaQ5OL10jlavgawjQuEv` | particle animation getter |
+| `TShowImg_setDir_int` | `0x237a58` | `0x2418f8` | `_ZN10eODlJaQ5OL10Bn9cHauvGYEi` | direction wrapper with image type 4 |
+| `TShowImg_setFont_TString_const` | `0x237a90` | `0x241930` | `_ZN10eODlJaQ5OL10UgsKFaUoHJERK10C8THgaTQxF` | type 2 and font member assignment |
+| `TShowImg_setImage_TString_const` | `0x237b34` | `0x2419d4` | `_ZN10eODlJaQ5OL10kcRIFa3mlIERK10C8THgaTQxF` | four-byte thunk to `showImage` |
+| `TShowImg_getImageIndex_void` | `0x237b3c` | `0x2419dc` | `_ZN10eODlJaQ5OL10FSUSXaJsOZEv` | image-index field getter |
+| `TShowImg_getLayer_void` | `0x237b48` | `0x2419e8` | `_ZN10eODlJaQ5OL10MJuWXagtP1Ev` | layer normalization for below and above |
+| `TShowImg_setPolygon_TGraalVar` | `0x237c78` | `0x241b18` | `_ZN10eODlJaQ5OL10hoANFa0dkMEP10G0gxgajWBw` | type 3 and polygon variable wrapper |
+| `TShowImg_setStyle_TString_const` | `0x237cb0` | `0x241b50` | `_ZN10eODlJaQ5OL10l7cPgaSEHLERK10C8THgaTQxF` | style member assignment |
+| `TShowImg_setText_TString_const` | `0x237ce8` | `0x241b88` | `_ZN10eODlJaQ5OL10AceLgadzlIERK10C8THgaTQxF` | text member assignment |
+| `TShowImg_getAttachToOwner_void` | `0x237d7c` | `0x241c1c` | `_ZN10eODlJaQ5OL10myF7XaBz3bEv` | attach-to-owner byte getter |
+| `TShowImg_initStaticScriptVars_void` | `0x2380f4` | `0x241f94` | `_Z10soSA2abnDNv` | properties singleton initialization |
+| `TShowImgProperties` complete destructor role | `0x238124` | `0x241fc4` | `_ZN20eODlJaQ5OLPropertiesD2Ev` | D1 source and D2 target lifecycle row, layout-aware |
+| `TShowImgProperties` D0 deleting destructor role | `0x238148` | `0x241fe8` | `_ZN20eODlJaQ5OLPropertiesD0Ev` | deleting destructor lifecycle row, layout-aware |
+| properties D1 non-virtual thunk | `0x238140` | `0x241fe0` | `_ZThn16_N20eODlJaQ5OLPropertiesD1Ev` | adjusted-this thunk, exact shape |
+| properties D0 non-virtual thunk | `0x238180` | `0x242020` | `_ZThn16_N20eODlJaQ5OLPropertiesD0Ev` | adjusted-this thunk, exact shape |
+
+Several of the wrapper matches are useful behavioral anchors, not just
+short-function coincidences. `showText`, `showPoly`, `showTexturedPoly`, and
+`showAni` set the same image type values as the source before forwarding the
+coded string. `setDir` keeps the type 4 path, while `setFont`, `setStyle`, and
+`setText` store into the corresponding members at the same object offsets.
+`tilesize` still calls the pixel-size helper and scales both returned integer
+components by `1/16`. The target `setImage` is the same kind of short thunk
+as the source and forwards into the main image setter. The two properties
+destructor rows are the only places where lifecycle evidence is deliberately
+combined with common normalized metrics because vtable constants are a
+layout-sensitive detail.
+
+Before the pass, every target function in this table already had a meaningful
+obfuscated C++ name. The aliases are therefore an analysis overlay and do not
+change the target binary. The complete machine-readable evidence is in
+`artifacts/spectron_showimg_residual_manual_translation_anchors_20260827.json`,
+generated by `tools/generate_spectron_showimg_residual_anchors.py`. All 24
+labels reopened successfully. The full semantic check still reports zero
+failures across 11,694 functions, with 3,641 high-confidence labels and 1,264
+default `sub_` names. The saved database is
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v166.i64`
+with SHA-256
+`31b96a52e45a605de9aa2c881ea9061c33afda1b2dfac5773c1a420ea7caec77`.
+
 ## Spectron TShowImg property callback table
 
 The `TShowImgProperties` registry gives a direct translation anchor for the
