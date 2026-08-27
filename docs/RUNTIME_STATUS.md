@@ -947,6 +947,12 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_server_level_interaction_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+135. Clean IDA review added seven high-confidence exact server-level lifecycle,
+     script-test, and animation helper anchors. All seven reopened successfully
+     in the v75 disposable copy. See
+     `artifacts/spectron_server_level_lifecycle_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

@@ -169,6 +169,8 @@ def main() -> None:
     parser.add_argument("--server-level-property-verification", type=Path)
     parser.add_argument("--server-level-interaction-anchors", type=Path)
     parser.add_argument("--server-level-interaction-verification", type=Path)
+    parser.add_argument("--server-level-lifecycle-anchors", type=Path)
+    parser.add_argument("--server-level-lifecycle-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2196,6 +2198,34 @@ def main() -> None:
         result["server_level_interaction_anchors"] = server_level_interaction
         result["interpretation"].append(
             "The seventy-second database revision also contains the separately reviewed server-level interaction, level-link coordinate, and indexed-object removal anchors."
+        )
+    server_level_lifecycle = None
+    if args.server_level_lifecycle_anchors or args.server_level_lifecycle_verification:
+        if not args.server_level_lifecycle_anchors or not args.server_level_lifecycle_verification:
+            raise ValueError(
+                "server-level lifecycle anchors and server-level lifecycle verification must be supplied together"
+            )
+        server_level_lifecycle_document = load(args.server_level_lifecycle_anchors)
+        server_level_lifecycle_verification = load(args.server_level_lifecycle_verification)
+        if server_level_lifecycle_document.get("artifact") != "spectron_server_level_lifecycle_manual_translation_anchors_20260826":
+            raise ValueError("unexpected server-level lifecycle anchor artifact")
+        if not server_level_lifecycle_verification.get("verified"):
+            raise ValueError("server-level lifecycle anchor reopen verification did not pass")
+        expected_server_level_lifecycle = len(server_level_lifecycle_document["anchors"])
+        if server_level_lifecycle_verification["verified_name_count"] != expected_server_level_lifecycle:
+            raise ValueError("server-level lifecycle verification count differs from artifact")
+        server_level_lifecycle = {
+            "anchor_path": str(args.server_level_lifecycle_anchors),
+            "anchor_sha256": sha256_path(args.server_level_lifecycle_anchors),
+            "reopen_verification": str(args.server_level_lifecycle_verification),
+            "anchor_count": expected_server_level_lifecycle,
+            "verified_name_count": server_level_lifecycle_verification["verified_name_count"],
+            "reopen_failure_count": server_level_lifecycle_verification["failure_count"],
+        }
+    if server_level_lifecycle is not None:
+        result["server_level_lifecycle_anchors"] = server_level_lifecycle
+        result["interpretation"].append(
+            "The seventy-third database revision also contains the separately reviewed server-level deleting-destructor, script-test, and animation helper anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

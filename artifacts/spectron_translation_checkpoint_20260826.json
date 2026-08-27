@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v74.i64",
-    "sha256": "39cf3f36e09056c034713f8384476d269681315df4ee6b6cbe497cb54720113d"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v75.i64",
+    "sha256": "3aaba8fe22c5f8d92c48e58bcaf0290254b28893e405edf600e9525f00eefe07"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -217,7 +217,8 @@
     "The sixty-ninth database revision also contains the separately reviewed compact server-NPC accessor anchors.",
     "The seventieth database revision also contains the separately reviewed server-NPC complete and deleting destructor anchors.",
     "The seventy-first database revision also contains the separately reviewed compact server-level property and level-link destination anchors.",
-    "The seventy-second database revision also contains the separately reviewed server-level interaction, level-link coordinate, and indexed-object removal anchors."
+    "The seventy-second database revision also contains the separately reviewed server-level interaction, level-link coordinate, and indexed-object removal anchors.",
+    "The seventy-third database revision also contains the separately reviewed server-level deleting-destructor, script-test, and animation helper anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -549,6 +550,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_server_level_interaction_verification_v74.json",
     "verified_name_count": 5
+  },
+  "server_level_lifecycle_anchors": {
+    "anchor_count": 7,
+    "anchor_path": "artifacts/spectron_server_level_lifecycle_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "968a3f858cd378174629d3f96048180b50b99a6a89ef2e0a5e3c5ec6898e319a",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_server_level_lifecycle_verification_v75.json",
+    "verified_name_count": 7
   },
   "server_level_property_anchors": {
     "anchor_count": 8,

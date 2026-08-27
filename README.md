@@ -796,6 +796,13 @@ The evidence is in
 `artifacts/spectron_server_level_interaction_manual_translation_anchors_20260826.json`,
 and the v74 database SHA-256 is recorded in the checkpoint.
 
+A seventy-third disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v75.i64`,
+adds seven reviewed server-level lifecycle, script-test, and animation helper
+anchors. All seven reopened successfully. The evidence is in
+`artifacts/spectron_server_level_lifecycle_manual_translation_anchors_20260826.json`,
+and the v75 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
