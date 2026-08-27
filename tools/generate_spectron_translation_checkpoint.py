@@ -261,6 +261,8 @@ def main() -> None:
     parser.add_argument("--screen-panel-renderer-residual-verification", type=Path)
     parser.add_argument("--screen-panel-window-gles-residual-anchors", type=Path)
     parser.add_argument("--screen-panel-window-gles-residual-verification", type=Path)
+    parser.add_argument("--font-manager-font-residual-anchors", type=Path)
+    parser.add_argument("--font-manager-font-residual-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3576,6 +3578,34 @@ def main() -> None:
         result["screen_panel_window_gles_residual_anchors"] = screen_panel_window_gles_residual
         result["interpretation"].append(
             "The one-hundred-twentieth database revision also contains the separately reviewed screen-panel polygon-font stub and TWindowGLES lifecycle, pixel-buffer factory, destructor, and native-mode anchors."
+        )
+    font_manager_font_residual = None
+    if args.font_manager_font_residual_anchors or args.font_manager_font_residual_verification:
+        if not args.font_manager_font_residual_anchors or not args.font_manager_font_residual_verification:
+            raise ValueError(
+                "font-manager font residual anchors and font-manager font residual verification must be supplied together"
+            )
+        font_manager_font_residual_document = load(args.font_manager_font_residual_anchors)
+        font_manager_font_residual_verification = load(args.font_manager_font_residual_verification)
+        if font_manager_font_residual_document.get("artifact") != "spectron_font_manager_font_residual_manual_translation_anchors_20260826":
+            raise ValueError("unexpected font-manager font residual anchor artifact")
+        if not font_manager_font_residual_verification.get("verified"):
+            raise ValueError("font-manager font residual anchor reopen verification did not pass")
+        expected_font_manager_font_residual = len(font_manager_font_residual_document["anchors"])
+        if font_manager_font_residual_verification["verified_name_count"] != expected_font_manager_font_residual:
+            raise ValueError("font-manager font residual verification count differs from artifact")
+        font_manager_font_residual = {
+            "anchor_path": str(args.font_manager_font_residual_anchors),
+            "anchor_sha256": sha256_path(args.font_manager_font_residual_anchors),
+            "reopen_verification": str(args.font_manager_font_residual_verification),
+            "anchor_count": expected_font_manager_font_residual,
+            "verified_name_count": font_manager_font_residual_verification["verified_name_count"],
+            "reopen_failure_count": font_manager_font_residual_verification["failure_count"],
+        }
+    if font_manager_font_residual is not None:
+        result["font_manager_font_residual_anchors"] = font_manager_font_residual
+        result["interpretation"].append(
+            "The one-hundred-twenty-first database revision also contains the separately reviewed TFont, TFontCharInfo, and TFontManager residual destructor, texture, cache, and text metric anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

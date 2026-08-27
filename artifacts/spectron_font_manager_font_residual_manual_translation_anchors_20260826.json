@@ -1,0 +1,509 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "context_group": "TFont residual methods",
+      "context_order": 1,
+      "evidence": [
+        "The target TZf6gaQ3S_ class preserves the source TFont method order around the destructor, texture binding, and text-metric accessors. The target D0 destructor and texture method sit beside already translated TFont methods.",
+        "The target DFeOfaFXSU class preserves the source TFontCharInfo deleting-destructor position and calls its matching destructor before operator delete.",
+        "The three TFont metric methods retain the same size calculation, zero-size fallback, high-precision timestamp update, and source metric field selection. The target changes only the class and global symbol names.",
+        "The TFontManager methods keep the same font lookup, renderability check, metric dispatch, and font-cache clearing behavior. The target class-local order and exact normalized shapes confirm the role despite obfuscated names.",
+        "Every reviewed source and target pair has matching size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, register shape, and overall shape hash. The rows are not already present in the semantic translation map."
+      ],
+      "match_kind": "manual-font-manager-font-residual-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TFont_TFont"
+      ],
+      "original_ea": "0x10ce3c",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "6997dd3b5418a87bf6f5a5c521855fc9a17314be795e8b9166aafc3f4274ad31",
+        "opcode_shape_hash": "744107f9f120d79de3ec3260d0856a807bf569915749757d3f718cfa3d52a448",
+        "register_shape_hash": "1023882ef3985c66fc5b82641781f3c5acdb4eababb05670a2c9499e80aafd90",
+        "shape_hash": "ddb4f004bba90eaf41261c7a2d80153268b64d0dc9e3005db4115ce1909821c2",
+        "size": 32
+      },
+      "original_name": "TFont_TFont__2",
+      "original_string_refs": [],
+      "proposed_name": "v18_TFont_TFont__2",
+      "semantic_match_already_present": false,
+      "source_basis": "font deleting destructor",
+      "spectron_current_name": "_ZN10TZf6gaQ3S_D0Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10TZf6gaQ3S_D2Ev"
+      ],
+      "spectron_ea": "0x10f780",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "6997dd3b5418a87bf6f5a5c521855fc9a17314be795e8b9166aafc3f4274ad31",
+        "opcode_shape_hash": "744107f9f120d79de3ec3260d0856a807bf569915749757d3f718cfa3d52a448",
+        "register_shape_hash": "1023882ef3985c66fc5b82641781f3c5acdb4eababb05670a2c9499e80aafd90",
+        "shape_hash": "ddb4f004bba90eaf41261c7a2d80153268b64d0dc9e3005db4115ce1909821c2",
+        "size": 32
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TFontCharInfo residual lifecycle",
+      "context_order": 1,
+      "evidence": [
+        "The target TZf6gaQ3S_ class preserves the source TFont method order around the destructor, texture binding, and text-metric accessors. The target D0 destructor and texture method sit beside already translated TFont methods.",
+        "The target DFeOfaFXSU class preserves the source TFontCharInfo deleting-destructor position and calls its matching destructor before operator delete.",
+        "The three TFont metric methods retain the same size calculation, zero-size fallback, high-precision timestamp update, and source metric field selection. The target changes only the class and global symbol names.",
+        "The TFontManager methods keep the same font lookup, renderability check, metric dispatch, and font-cache clearing behavior. The target class-local order and exact normalized shapes confirm the role despite obfuscated names.",
+        "Every reviewed source and target pair has matching size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, register shape, and overall shape hash. The rows are not already present in the semantic translation map."
+      ],
+      "match_kind": "manual-font-manager-font-residual-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TFontCharInfo_TFontCharInfo"
+      ],
+      "original_ea": "0x10d018",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "6997dd3b5418a87bf6f5a5c521855fc9a17314be795e8b9166aafc3f4274ad31",
+        "opcode_shape_hash": "744107f9f120d79de3ec3260d0856a807bf569915749757d3f718cfa3d52a448",
+        "register_shape_hash": "1023882ef3985c66fc5b82641781f3c5acdb4eababb05670a2c9499e80aafd90",
+        "shape_hash": "ddb4f004bba90eaf41261c7a2d80153268b64d0dc9e3005db4115ce1909821c2",
+        "size": 32
+      },
+      "original_name": "TFontCharInfo_TFontCharInfo__2",
+      "original_string_refs": [],
+      "proposed_name": "v18_TFontCharInfo_TFontCharInfo__2",
+      "semantic_match_already_present": false,
+      "source_basis": "font-character-info deleting destructor",
+      "spectron_current_name": "_ZN10DFeOfaFXSUD0Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10DFeOfaFXSUD2Ev"
+      ],
+      "spectron_ea": "0x10f968",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "6997dd3b5418a87bf6f5a5c521855fc9a17314be795e8b9166aafc3f4274ad31",
+        "opcode_shape_hash": "744107f9f120d79de3ec3260d0856a807bf569915749757d3f718cfa3d52a448",
+        "register_shape_hash": "1023882ef3985c66fc5b82641781f3c5acdb4eababb05670a2c9499e80aafd90",
+        "shape_hash": "ddb4f004bba90eaf41261c7a2d80153268b64d0dc9e3005db4115ce1909821c2",
+        "size": 32
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TFont residual methods",
+      "context_order": 2,
+      "evidence": [
+        "The target TZf6gaQ3S_ class preserves the source TFont method order around the destructor, texture binding, and text-metric accessors. The target D0 destructor and texture method sit beside already translated TFont methods.",
+        "The target DFeOfaFXSU class preserves the source TFontCharInfo deleting-destructor position and calls its matching destructor before operator delete.",
+        "The three TFont metric methods retain the same size calculation, zero-size fallback, high-precision timestamp update, and source metric field selection. The target changes only the class and global symbol names.",
+        "The TFontManager methods keep the same font lookup, renderability check, metric dispatch, and font-cache clearing behavior. The target class-local order and exact normalized shapes confirm the role despite obfuscated names.",
+        "Every reviewed source and target pair has matching size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, register shape, and overall shape hash. The rows are not already present in the semantic translation map."
+      ],
+      "match_kind": "manual-font-manager-font-residual-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x10d998",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 3,
+        "call_count": 0,
+        "instruction_count": 5,
+        "mnemonic_hash": "d134816c3aea828461dccf3e4853021ae72fac83a594df6f841cdf645938eb55",
+        "opcode_shape_hash": "b04effcf45e5daab571e63ff7fdea36161eee356399d67d0fe7255fafc8747f9",
+        "register_shape_hash": "c79c197f0f1f36c05080cc4cf222f0c0146c6886ccc11e4ec7561f5d906738a7",
+        "shape_hash": "a5d5e3da22f05070a9226b4f30b1a9f799bee20131b85cf48d1533ead1634645",
+        "size": 20
+      },
+      "original_name": "TFont_bindTexture_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TFont_bindTexture_void",
+      "semantic_match_already_present": false,
+      "source_basis": "font texture bind wrapper",
+      "spectron_current_name": "_ZN10TZf6gaQ3S_10AJfYga4QiTEv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x110364",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 3,
+        "call_count": 0,
+        "instruction_count": 5,
+        "mnemonic_hash": "d134816c3aea828461dccf3e4853021ae72fac83a594df6f841cdf645938eb55",
+        "opcode_shape_hash": "b04effcf45e5daab571e63ff7fdea36161eee356399d67d0fe7255fafc8747f9",
+        "register_shape_hash": "c79c197f0f1f36c05080cc4cf222f0c0146c6886ccc11e4ec7561f5d906738a7",
+        "shape_hash": "a5d5e3da22f05070a9226b4f30b1a9f799bee20131b85cf48d1533ead1634645",
+        "size": 20
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TFont residual methods",
+      "context_order": 3,
+      "evidence": [
+        "The target TZf6gaQ3S_ class preserves the source TFont method order around the destructor, texture binding, and text-metric accessors. The target D0 destructor and texture method sit beside already translated TFont methods.",
+        "The target DFeOfaFXSU class preserves the source TFontCharInfo deleting-destructor position and calls its matching destructor before operator delete.",
+        "The three TFont metric methods retain the same size calculation, zero-size fallback, high-precision timestamp update, and source metric field selection. The target changes only the class and global symbol names.",
+        "The TFontManager methods keep the same font lookup, renderability check, metric dispatch, and font-cache clearing behavior. The target class-local order and exact normalized shapes confirm the role despite obfuscated names.",
+        "Every reviewed source and target pair has matching size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, register shape, and overall shape hash. The rows are not already present in the semantic translation map."
+      ],
+      "match_kind": "manual-font-manager-font-residual-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x10da0c",
+      "original_metrics": {
+        "basic_block_count": 3,
+        "branch_count": 2,
+        "call_count": 0,
+        "instruction_count": 22,
+        "mnemonic_hash": "994dca7c9ee2bff2c4274ff3c5bd071a70c1c54056d0863024a0a26c070fd68c",
+        "opcode_shape_hash": "7046104de402b8f2896b50bedb941ec6a727886b20bf6474e5870805917aa57a",
+        "register_shape_hash": "0d6e672f780cf22a15fa07da6350fa6459ed3ff28c2afbe912ae37faf5bb42a5",
+        "shape_hash": "06173cecf9c80e4d7000a554b2258f132099b4d6b9e2c5f79f46adcfea890247",
+        "size": 88
+      },
+      "original_name": "TFont_getTextAscend_int",
+      "original_string_refs": [],
+      "proposed_name": "v18_TFont_getTextAscend_int",
+      "semantic_match_already_present": false,
+      "source_basis": "font ascent metric calculation",
+      "spectron_current_name": "_ZN10TZf6gaQ3S_10LYJq4aMh6kEi",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x1103d8",
+      "spectron_metrics": {
+        "basic_block_count": 3,
+        "branch_count": 2,
+        "call_count": 0,
+        "instruction_count": 22,
+        "mnemonic_hash": "994dca7c9ee2bff2c4274ff3c5bd071a70c1c54056d0863024a0a26c070fd68c",
+        "opcode_shape_hash": "7046104de402b8f2896b50bedb941ec6a727886b20bf6474e5870805917aa57a",
+        "register_shape_hash": "0d6e672f780cf22a15fa07da6350fa6459ed3ff28c2afbe912ae37faf5bb42a5",
+        "shape_hash": "06173cecf9c80e4d7000a554b2258f132099b4d6b9e2c5f79f46adcfea890247",
+        "size": 88
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TFont residual methods",
+      "context_order": 4,
+      "evidence": [
+        "The target TZf6gaQ3S_ class preserves the source TFont method order around the destructor, texture binding, and text-metric accessors. The target D0 destructor and texture method sit beside already translated TFont methods.",
+        "The target DFeOfaFXSU class preserves the source TFontCharInfo deleting-destructor position and calls its matching destructor before operator delete.",
+        "The three TFont metric methods retain the same size calculation, zero-size fallback, high-precision timestamp update, and source metric field selection. The target changes only the class and global symbol names.",
+        "The TFontManager methods keep the same font lookup, renderability check, metric dispatch, and font-cache clearing behavior. The target class-local order and exact normalized shapes confirm the role despite obfuscated names.",
+        "Every reviewed source and target pair has matching size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, register shape, and overall shape hash. The rows are not already present in the semantic translation map."
+      ],
+      "match_kind": "manual-font-manager-font-residual-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x10da64",
+      "original_metrics": {
+        "basic_block_count": 3,
+        "branch_count": 2,
+        "call_count": 0,
+        "instruction_count": 22,
+        "mnemonic_hash": "994dca7c9ee2bff2c4274ff3c5bd071a70c1c54056d0863024a0a26c070fd68c",
+        "opcode_shape_hash": "7046104de402b8f2896b50bedb941ec6a727886b20bf6474e5870805917aa57a",
+        "register_shape_hash": "0d6e672f780cf22a15fa07da6350fa6459ed3ff28c2afbe912ae37faf5bb42a5",
+        "shape_hash": "06173cecf9c80e4d7000a554b2258f132099b4d6b9e2c5f79f46adcfea890247",
+        "size": 88
+      },
+      "original_name": "TFont_getTextDescend_int",
+      "original_string_refs": [],
+      "proposed_name": "v18_TFont_getTextDescend_int",
+      "semantic_match_already_present": false,
+      "source_basis": "font descent metric calculation",
+      "spectron_current_name": "_ZN10TZf6gaQ3S_10jiiq4a5_JkEi",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x110430",
+      "spectron_metrics": {
+        "basic_block_count": 3,
+        "branch_count": 2,
+        "call_count": 0,
+        "instruction_count": 22,
+        "mnemonic_hash": "994dca7c9ee2bff2c4274ff3c5bd071a70c1c54056d0863024a0a26c070fd68c",
+        "opcode_shape_hash": "7046104de402b8f2896b50bedb941ec6a727886b20bf6474e5870805917aa57a",
+        "register_shape_hash": "0d6e672f780cf22a15fa07da6350fa6459ed3ff28c2afbe912ae37faf5bb42a5",
+        "shape_hash": "06173cecf9c80e4d7000a554b2258f132099b4d6b9e2c5f79f46adcfea890247",
+        "size": 88
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TFontManager residual methods",
+      "context_order": 1,
+      "evidence": [
+        "The target TZf6gaQ3S_ class preserves the source TFont method order around the destructor, texture binding, and text-metric accessors. The target D0 destructor and texture method sit beside already translated TFont methods.",
+        "The target DFeOfaFXSU class preserves the source TFontCharInfo deleting-destructor position and calls its matching destructor before operator delete.",
+        "The three TFont metric methods retain the same size calculation, zero-size fallback, high-precision timestamp update, and source metric field selection. The target changes only the class and global symbol names.",
+        "The TFontManager methods keep the same font lookup, renderability check, metric dispatch, and font-cache clearing behavior. The target class-local order and exact normalized shapes confirm the role despite obfuscated names.",
+        "Every reviewed source and target pair has matching size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, register shape, and overall shape hash. The rows are not already present in the semantic translation map."
+      ],
+      "match_kind": "manual-font-manager-font-residual-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x10e374",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 5,
+        "mnemonic_hash": "1464b1b1e385068517f97c7284226b454fa97994fa323683c8515141256c2395",
+        "opcode_shape_hash": "c5c1e0856ba6b14f53ae86e4a650616ac48231736162f353d6221a20991cb8ae",
+        "register_shape_hash": "8e3f1a4ebea95212cb187c73fc6353212502152b721732d6033d0e4090ec753c",
+        "shape_hash": "fe3d573ffe456e747bda971d2070279e0bf5e4922888cbad1be1f22bda12c58d",
+        "size": 20
+      },
+      "original_name": "TFontManager_freeResources_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TFontManager_freeResources_void",
+      "semantic_match_already_present": false,
+      "source_basis": "font-cache resource clear",
+      "spectron_current_name": "_ZN10Kv6ugas5Mu10wgSQgaCg5MEv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x110d44",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 5,
+        "mnemonic_hash": "1464b1b1e385068517f97c7284226b454fa97994fa323683c8515141256c2395",
+        "opcode_shape_hash": "c5c1e0856ba6b14f53ae86e4a650616ac48231736162f353d6221a20991cb8ae",
+        "register_shape_hash": "8e3f1a4ebea95212cb187c73fc6353212502152b721732d6033d0e4090ec753c",
+        "shape_hash": "fe3d573ffe456e747bda971d2070279e0bf5e4922888cbad1be1f22bda12c58d",
+        "size": 20
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TFontManager residual methods",
+      "context_order": 2,
+      "evidence": [
+        "The target TZf6gaQ3S_ class preserves the source TFont method order around the destructor, texture binding, and text-metric accessors. The target D0 destructor and texture method sit beside already translated TFont methods.",
+        "The target DFeOfaFXSU class preserves the source TFontCharInfo deleting-destructor position and calls its matching destructor before operator delete.",
+        "The three TFont metric methods retain the same size calculation, zero-size fallback, high-precision timestamp update, and source metric field selection. The target changes only the class and global symbol names.",
+        "The TFontManager methods keep the same font lookup, renderability check, metric dispatch, and font-cache clearing behavior. The target class-local order and exact normalized shapes confirm the role despite obfuscated names.",
+        "Every reviewed source and target pair has matching size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, register shape, and overall shape hash. The rows are not already present in the semantic translation map."
+      ],
+      "match_kind": "manual-font-manager-font-residual-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TFontManager_findFont_TString_const_int_TString_const",
+        "plt_TFont_canRender_void",
+        "plt_TFont_clampFontSize_int",
+        "plt_TFont_getTextHeight_int"
+      ],
+      "original_ea": "0x10f438",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 8,
+        "call_count": 4,
+        "instruction_count": 27,
+        "mnemonic_hash": "a5c0ca9faade374e90b16a55d6de9fb9b6ba19dc8b3ce925c3037d1c8d7d6ffc",
+        "opcode_shape_hash": "059ffbf769f0bf59e60aceb08e687920508c78efde15b90532a855e54e320241",
+        "register_shape_hash": "ee6fcbfc431a4a1a45975eb1ca7926cd14eaf4dcf996e23ead353fc2d45f4a1e",
+        "shape_hash": "5f7f82742fb39ab0d7ad7bab8ade8aefbe0c8088c06070f28afbeb4e199f0998",
+        "size": 108
+      },
+      "original_name": "TFontManager_getTextHeight_TString_const_int_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TFontManager_getTextHeight_TString_const_int_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "font-manager text-height helper",
+      "spectron_current_name": "_ZN10Kv6ugas5Mu10edf6gaIpS_ERK10C8THgaTQxFiS2_",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10Kv6ugas5Mu10ypK5ga7Er_ERK10C8THgaTQxFiS2_",
+        "._ZN10TZf6gaQ3S_10XK8OfabZDVEv",
+        "._ZN10TZf6gaQ3S_10edf6gaIpS_Ei",
+        "._ZN10TZf6gaQ3S_10vg75gavJL_ERi"
+      ],
+      "spectron_ea": "0x111cfc",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 8,
+        "call_count": 4,
+        "instruction_count": 27,
+        "mnemonic_hash": "a5c0ca9faade374e90b16a55d6de9fb9b6ba19dc8b3ce925c3037d1c8d7d6ffc",
+        "opcode_shape_hash": "059ffbf769f0bf59e60aceb08e687920508c78efde15b90532a855e54e320241",
+        "register_shape_hash": "ee6fcbfc431a4a1a45975eb1ca7926cd14eaf4dcf996e23ead353fc2d45f4a1e",
+        "shape_hash": "5f7f82742fb39ab0d7ad7bab8ade8aefbe0c8088c06070f28afbeb4e199f0998",
+        "size": 108
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TFontManager residual methods",
+      "context_order": 3,
+      "evidence": [
+        "The target TZf6gaQ3S_ class preserves the source TFont method order around the destructor, texture binding, and text-metric accessors. The target D0 destructor and texture method sit beside already translated TFont methods.",
+        "The target DFeOfaFXSU class preserves the source TFontCharInfo deleting-destructor position and calls its matching destructor before operator delete.",
+        "The three TFont metric methods retain the same size calculation, zero-size fallback, high-precision timestamp update, and source metric field selection. The target changes only the class and global symbol names.",
+        "The TFontManager methods keep the same font lookup, renderability check, metric dispatch, and font-cache clearing behavior. The target class-local order and exact normalized shapes confirm the role despite obfuscated names.",
+        "Every reviewed source and target pair has matching size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, register shape, and overall shape hash. The rows are not already present in the semantic translation map."
+      ],
+      "match_kind": "manual-font-manager-font-residual-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TFontManager_findFont_TString_const_int_TString_const",
+        "plt_TFont_canRender_void",
+        "plt_TFont_clampFontSize_int",
+        "plt_TFont_getTextAscend_int"
+      ],
+      "original_ea": "0x10f4a4",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 8,
+        "call_count": 4,
+        "instruction_count": 27,
+        "mnemonic_hash": "a5c0ca9faade374e90b16a55d6de9fb9b6ba19dc8b3ce925c3037d1c8d7d6ffc",
+        "opcode_shape_hash": "059ffbf769f0bf59e60aceb08e687920508c78efde15b90532a855e54e320241",
+        "register_shape_hash": "ee6fcbfc431a4a1a45975eb1ca7926cd14eaf4dcf996e23ead353fc2d45f4a1e",
+        "shape_hash": "5f7f82742fb39ab0d7ad7bab8ade8aefbe0c8088c06070f28afbeb4e199f0998",
+        "size": 108
+      },
+      "original_name": "TFontManager_getTextAscent_TString_const_int_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TFontManager_getTextAscent_TString_const_int_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "font-manager text-ascent helper",
+      "spectron_current_name": "_ZN10Kv6ugas5Mu10hOb6gaTxP_ERK10C8THgaTQxFiS2_",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10Kv6ugas5Mu10ypK5ga7Er_ERK10C8THgaTQxFiS2_",
+        "._ZN10TZf6gaQ3S_10LYJq4aMh6kEi",
+        "._ZN10TZf6gaQ3S_10XK8OfabZDVEv",
+        "._ZN10TZf6gaQ3S_10vg75gavJL_ERi"
+      ],
+      "spectron_ea": "0x111d68",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 8,
+        "call_count": 4,
+        "instruction_count": 27,
+        "mnemonic_hash": "a5c0ca9faade374e90b16a55d6de9fb9b6ba19dc8b3ce925c3037d1c8d7d6ffc",
+        "opcode_shape_hash": "059ffbf769f0bf59e60aceb08e687920508c78efde15b90532a855e54e320241",
+        "register_shape_hash": "ee6fcbfc431a4a1a45975eb1ca7926cd14eaf4dcf996e23ead353fc2d45f4a1e",
+        "shape_hash": "5f7f82742fb39ab0d7ad7bab8ade8aefbe0c8088c06070f28afbeb4e199f0998",
+        "size": 108
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TFontManager residual methods",
+      "context_order": 4,
+      "evidence": [
+        "The target TZf6gaQ3S_ class preserves the source TFont method order around the destructor, texture binding, and text-metric accessors. The target D0 destructor and texture method sit beside already translated TFont methods.",
+        "The target DFeOfaFXSU class preserves the source TFontCharInfo deleting-destructor position and calls its matching destructor before operator delete.",
+        "The three TFont metric methods retain the same size calculation, zero-size fallback, high-precision timestamp update, and source metric field selection. The target changes only the class and global symbol names.",
+        "The TFontManager methods keep the same font lookup, renderability check, metric dispatch, and font-cache clearing behavior. The target class-local order and exact normalized shapes confirm the role despite obfuscated names.",
+        "Every reviewed source and target pair has matching size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, register shape, and overall shape hash. The rows are not already present in the semantic translation map."
+      ],
+      "match_kind": "manual-font-manager-font-residual-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TFontManager_findFont_TString_const_int_TString_const",
+        "plt_TFont_canRender_void",
+        "plt_TFont_clampFontSize_int",
+        "plt_TFont_getTextDescend_int"
+      ],
+      "original_ea": "0x10f510",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 8,
+        "call_count": 4,
+        "instruction_count": 27,
+        "mnemonic_hash": "a5c0ca9faade374e90b16a55d6de9fb9b6ba19dc8b3ce925c3037d1c8d7d6ffc",
+        "opcode_shape_hash": "059ffbf769f0bf59e60aceb08e687920508c78efde15b90532a855e54e320241",
+        "register_shape_hash": "ee6fcbfc431a4a1a45975eb1ca7926cd14eaf4dcf996e23ead353fc2d45f4a1e",
+        "shape_hash": "5f7f82742fb39ab0d7ad7bab8ade8aefbe0c8088c06070f28afbeb4e199f0998",
+        "size": 108
+      },
+      "original_name": "TFontManager_getTextDescent_TString_const_int_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TFontManager_getTextDescent_TString_const_int_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "font-manager text-descent helper",
+      "spectron_current_name": "_ZN10Kv6ugas5Mu10UOd6gaBeR_ERK10C8THgaTQxFiS2_",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10Kv6ugas5Mu10ypK5ga7Er_ERK10C8THgaTQxFiS2_",
+        "._ZN10TZf6gaQ3S_10XK8OfabZDVEv",
+        "._ZN10TZf6gaQ3S_10jiiq4a5_JkEi",
+        "._ZN10TZf6gaQ3S_10vg75gavJL_ERi"
+      ],
+      "spectron_ea": "0x111dd4",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 8,
+        "call_count": 4,
+        "instruction_count": 27,
+        "mnemonic_hash": "a5c0ca9faade374e90b16a55d6de9fb9b6ba19dc8b3ce925c3037d1c8d7d6ffc",
+        "opcode_shape_hash": "059ffbf769f0bf59e60aceb08e687920508c78efde15b90532a855e54e320241",
+        "register_shape_hash": "ee6fcbfc431a4a1a45975eb1ca7926cd14eaf4dcf996e23ead353fc2d45f4a1e",
+        "shape_hash": "5f7f82742fb39ab0d7ad7bab8ade8aefbe0c8088c06070f28afbeb4e199f0998",
+        "size": 108
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_font_manager_font_residual_manual_translation_anchors_20260826",
+  "context": {
+    "source_sequence": "The source TFont and TFontCharInfo destructor and metric rows are followed by the TFontManager cache and text metric helpers.",
+    "target_classes": {
+      "DFeOfaFXSU": "font-character-info deleting destructor at 0x10f968",
+      "Kv6ugas5Mu": "font-cache clear and text metric helpers at 0x110d44 and 0x111cfc through 0x111dd4",
+      "TZf6gaQ3S_": "font destructor, texture, and text metric methods at 0x10f780 and 0x110364 through 0x110430"
+    }
+  },
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v3.json",
+    "spectron_features_sha256": "031afed73611783e0b16be71009e20118fc90a56e5d03e5ec04526f654f5cf27"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve readable source roles while retaining the obfuscated target names and changed target class names in the evidence rows.",
+    "The renamed target time global and font wrappers are expected 2.2 implementation changes; the method roles and class-local order are unchanged."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for residual TFont, TFontCharInfo, and TFontManager methods",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 9,
+    "high_confidence_count": 9,
+    "new_context_anchor_count": 9,
+    "target_default_name_count": 0
+  }
+}

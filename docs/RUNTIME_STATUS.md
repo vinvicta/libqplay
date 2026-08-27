@@ -1289,6 +1289,13 @@ This is the short handoff view. The full reasoning and command history are in
      in the v120 disposable copy. See
      `artifacts/spectron_screen_panel_window_gles_residual_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
+181. The next IDA pass translated nine residual font and font-manager methods.
+     It covers font and character-info deleting destructors, texture binding,
+     ascent and descent calculations, font-cache cleanup, and manager text
+     metric helpers. The labels reopened successfully in the v121 disposable
+     copy. See
+     `artifacts/spectron_font_manager_font_residual_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
 ## Not verified
 
