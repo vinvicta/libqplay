@@ -674,6 +674,13 @@ the main emission path. Both reopened successfully. The evidence is in
 `artifacts/spectron_particle_emitter_manual_translation_anchors_20260826.json`,
 and the v58 database SHA-256 is recorded in the checkpoint.
 
+A fifty-seventh disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v59.i64`,
+adds three reviewed server-animation anchors for explosions, carried objects,
+and flying projectiles. All three reopened successfully. The evidence is in
+`artifacts/spectron_server_animation_manual_translation_anchors_20260826.json`,
+and the v59 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and

@@ -846,6 +846,12 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_particle_emitter_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+119. Clean IDA review added three high-confidence server-animation anchors for
+     explosion, carry, and flying projectile behavior. All three reopened
+     successfully in the v59 disposable copy. See
+     `artifacts/spectron_server_animation_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

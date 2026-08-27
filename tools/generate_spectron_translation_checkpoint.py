@@ -137,6 +137,8 @@ def main() -> None:
     parser.add_argument("--showimg-verification", type=Path)
     parser.add_argument("--particle-emitter-anchors", type=Path)
     parser.add_argument("--particle-emitter-verification", type=Path)
+    parser.add_argument("--server-animation-anchors", type=Path)
+    parser.add_argument("--server-animation-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1716,6 +1718,34 @@ def main() -> None:
         result["particle_emitter_anchors"] = particle_emitter
         result["interpretation"].append(
             "The fifty-sixth database revision also contains the separately reviewed particle-emitter initializer and emission anchors."
+        )
+    server_animation = None
+    if args.server_animation_anchors or args.server_animation_verification:
+        if not args.server_animation_anchors or not args.server_animation_verification:
+            raise ValueError(
+                "server-animation anchors and server-animation verification must be supplied together"
+            )
+        server_animation_document = load(args.server_animation_anchors)
+        server_animation_verification = load(args.server_animation_verification)
+        if server_animation_document.get("artifact") != "spectron_server_animation_manual_translation_anchors_20260826":
+            raise ValueError("unexpected server-animation anchor artifact")
+        if not server_animation_verification.get("verified"):
+            raise ValueError("server-animation anchor reopen verification did not pass")
+        expected_server_animation = len(server_animation_document["anchors"])
+        if server_animation_verification["verified_name_count"] != expected_server_animation:
+            raise ValueError("server-animation verification count differs from artifact")
+        server_animation = {
+            "anchor_path": str(args.server_animation_anchors),
+            "anchor_sha256": sha256_path(args.server_animation_anchors),
+            "reopen_verification": str(args.server_animation_verification),
+            "anchor_count": expected_server_animation,
+            "verified_name_count": server_animation_verification["verified_name_count"],
+            "reopen_failure_count": server_animation_verification["failure_count"],
+        }
+    if server_animation is not None:
+        result["server_animation_anchors"] = server_animation
+        result["interpretation"].append(
+            "The fifty-seventh database revision also contains the separately reviewed explosion, carry, and flying server-animation anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
