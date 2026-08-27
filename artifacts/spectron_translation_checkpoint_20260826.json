@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v75.i64",
-    "sha256": "3aaba8fe22c5f8d92c48e58bcaf0290254b28893e405edf600e9525f00eefe07"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v76.i64",
+    "sha256": "0be95bd5c5aa4f7e5a6309e85255f798da63ed62363edf843013584579fe3a3e"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -218,7 +218,8 @@
     "The seventieth database revision also contains the separately reviewed server-NPC complete and deleting destructor anchors.",
     "The seventy-first database revision also contains the separately reviewed compact server-level property and level-link destination anchors.",
     "The seventy-second database revision also contains the separately reviewed server-level interaction, level-link coordinate, and indexed-object removal anchors.",
-    "The seventy-third database revision also contains the separately reviewed server-level deleting-destructor, script-test, and animation helper anchors."
+    "The seventy-third database revision also contains the separately reviewed server-level deleting-destructor, script-test, and animation helper anchors.",
+    "The seventy-fourth database revision also contains the separately reviewed server-level side-level position, directional lookup, and flower hook anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -566,6 +567,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_server_level_property_verification_v73.json",
     "verified_name_count": 8
+  },
+  "server_level_side_helpers_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "artifacts/spectron_server_level_side_helpers_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "23ecfef8ca8f549ec29eb1754824bca9794903c17e4b29500944838a86a0b0b4",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_server_level_side_helpers_verification_v76.json",
+    "verified_name_count": 4
   },
   "server_npc_state_anchors": {
     "anchor_count": 7,

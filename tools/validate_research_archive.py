@@ -278,6 +278,9 @@ def main():
     spectron_server_level_lifecycle_anchors = load_json(
         "artifacts/spectron_server_level_lifecycle_manual_translation_anchors_20260826.json"
     )
+    spectron_server_level_side_helpers_anchors = load_json(
+        "artifacts/spectron_server_level_side_helpers_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -1778,6 +1781,16 @@ def main():
     check("Spectron server-level-lifecycle semantic overlap", spectron_server_level_lifecycle_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron server-level-lifecycle default targets", spectron_server_level_lifecycle_anchors["summary"]["target_default_name_count"], 3)
     check(
+        "Spectron server-level-side-helpers artifact",
+        spectron_server_level_side_helpers_anchors["artifact"],
+        "spectron_server_level_side_helpers_manual_translation_anchors_20260826",
+    )
+    check("Spectron server-level-side-helpers network", spectron_server_level_side_helpers_anchors["network_contacted"], False)
+    check("Spectron server-level-side-helpers total", spectron_server_level_side_helpers_anchors["summary"]["anchor_count"], 4)
+    check("Spectron server-level-side-helpers high confidence", spectron_server_level_side_helpers_anchors["summary"]["high_confidence_count"], 4)
+    check("Spectron server-level-side-helpers semantic overlap", spectron_server_level_side_helpers_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron server-level-side-helpers default targets", spectron_server_level_side_helpers_anchors["summary"]["target_default_name_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -1858,7 +1871,8 @@ def main():
     check("Spectron checkpoint server-level-property anchor count", spectron_checkpoint["server_level_property_anchors"]["verified_name_count"], 8)
     check("Spectron checkpoint server-level-interaction anchor count", spectron_checkpoint["server_level_interaction_anchors"]["verified_name_count"], 5)
     check("Spectron checkpoint server-level-lifecycle anchor count", spectron_checkpoint["server_level_lifecycle_anchors"]["verified_name_count"], 7)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "3aaba8fe22c5f8d92c48e58bcaf0290254b28893e405edf600e9525f00eefe07")
+    check("Spectron checkpoint server-level-side-helpers anchor count", spectron_checkpoint["server_level_side_helpers_anchors"]["verified_name_count"], 4)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "0be95bd5c5aa4f7e5a6309e85255f798da63ed62363edf843013584579fe3a3e")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -1993,6 +2007,7 @@ def main():
         spectron_server_level_property_anchors,
         spectron_server_level_interaction_anchors,
         spectron_server_level_lifecycle_anchors,
+        spectron_server_level_side_helpers_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

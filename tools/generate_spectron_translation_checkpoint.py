@@ -171,6 +171,8 @@ def main() -> None:
     parser.add_argument("--server-level-interaction-verification", type=Path)
     parser.add_argument("--server-level-lifecycle-anchors", type=Path)
     parser.add_argument("--server-level-lifecycle-verification", type=Path)
+    parser.add_argument("--server-level-side-helpers-anchors", type=Path)
+    parser.add_argument("--server-level-side-helpers-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2226,6 +2228,34 @@ def main() -> None:
         result["server_level_lifecycle_anchors"] = server_level_lifecycle
         result["interpretation"].append(
             "The seventy-third database revision also contains the separately reviewed server-level deleting-destructor, script-test, and animation helper anchors."
+        )
+    server_level_side_helpers = None
+    if args.server_level_side_helpers_anchors or args.server_level_side_helpers_verification:
+        if not args.server_level_side_helpers_anchors or not args.server_level_side_helpers_verification:
+            raise ValueError(
+                "server-level side-helper anchors and server-level side-helper verification must be supplied together"
+            )
+        server_level_side_helpers_document = load(args.server_level_side_helpers_anchors)
+        server_level_side_helpers_verification = load(args.server_level_side_helpers_verification)
+        if server_level_side_helpers_document.get("artifact") != "spectron_server_level_side_helpers_manual_translation_anchors_20260826":
+            raise ValueError("unexpected server-level side-helper anchor artifact")
+        if not server_level_side_helpers_verification.get("verified"):
+            raise ValueError("server-level side-helper anchor reopen verification did not pass")
+        expected_server_level_side_helpers = len(server_level_side_helpers_document["anchors"])
+        if server_level_side_helpers_verification["verified_name_count"] != expected_server_level_side_helpers:
+            raise ValueError("server-level side-helper verification count differs from artifact")
+        server_level_side_helpers = {
+            "anchor_path": str(args.server_level_side_helpers_anchors),
+            "anchor_sha256": sha256_path(args.server_level_side_helpers_anchors),
+            "reopen_verification": str(args.server_level_side_helpers_verification),
+            "anchor_count": expected_server_level_side_helpers,
+            "verified_name_count": server_level_side_helpers_verification["verified_name_count"],
+            "reopen_failure_count": server_level_side_helpers_verification["failure_count"],
+        }
+    if server_level_side_helpers is not None:
+        result["server_level_side_helpers_anchors"] = server_level_side_helpers
+        result["interpretation"].append(
+            "The seventy-fourth database revision also contains the separately reviewed server-level side-level position, directional lookup, and flower hook anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

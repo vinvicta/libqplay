@@ -1,0 +1,176 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both accept a server-level object and two output integers, search the active player's cached side-level grid, and return the matching row and column or -1, -1 when the level is not present.",
+        "The target preserves the same class-local side-level lookup position and expands the cached grid traversal from the 1.8 three-by-three arrangement to the seven-by-seven Spectron arrangement.",
+        "The target pseudocode compares the candidate object against the active-player side-level slots and writes the discovered grid coordinates through the two output pointers, matching the source role despite the expanded layout and rebuilt field references."
+      ],
+      "match_kind": "manual-server-level-side-helper-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1a92a0",
+      "original_metrics": {
+        "basic_block_count": 21,
+        "instruction_count": 64,
+        "mnemonic_hash": "347406438ab58ba045bfd021d05850ea52243571ad022a255064f24ed4e2af54",
+        "register_shape_hash": "8c3fe4f46c5c32b2107bd3dccd9aa49105bc11492221a1144bf98c39eecabf87",
+        "shape_hash": "34a0f3575c8ab6b105d3c8d65f5e97582d43801c81f446c6ddd3403fa87e7177",
+        "size": 256
+      },
+      "original_name": "TServerLevel_getSideLevelPos_int_int",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerLevel_getSideLevelPos_int_int",
+      "semantic_match_already_present": false,
+      "source_basis": "server-level side-level position lookup",
+      "spectron_current_name": "_ZN10zF9VgaBKxR10LiM2RarfX4EPiS0_",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1ae1d8",
+      "spectron_metrics": {
+        "basic_block_count": 29,
+        "instruction_count": 133,
+        "mnemonic_hash": "b04bcf0f6d5fe732da74cb8bd5755b34ad199be44e94bf13088b4db20655fc88",
+        "register_shape_hash": "2a3f4527cde97fc6e49e081b5766713b086514be55a009e737616d15e17dfa45",
+        "shape_hash": "d0a5bfc169e13055a6991ce9f20a4648a886d2b5601a4edd88c6928a6a384ada",
+        "size": 532
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both use the active player's map position, the server-level grid position, and the input movement vector to select a neighboring side-level slot.",
+        "Both return the cached side-level object when the calculated row and column are in range and return null otherwise. The target expands the valid side-level range and uses the seven-entry stride introduced by the Spectron layout.",
+        "The target keeps the source method's four-direction switch and current-level-relative coordinate calculation, with only the obfuscated fields, rebuilt globals, and expanded bounds changed."
+      ],
+      "match_kind": "manual-server-level-side-helper-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1a93a0",
+      "original_metrics": {
+        "basic_block_count": 9,
+        "instruction_count": 53,
+        "mnemonic_hash": "30c0d8247776d7d26f3e21d1c47e3484b8184619b6d5b06d9479796487e511b7",
+        "register_shape_hash": "cc1e52cc66ca26c682df79d1e9aa945bbcd385726dacad0ef3b8d31c22be6780",
+        "shape_hash": "230a332155f228912d16b3fdf5311ab375031bce19fce5922f7512b07b6680df",
+        "size": 212
+      },
+      "original_name": "TServerLevel_getSideLevelInDirection_int",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerLevel_getSideLevelInDirection_int",
+      "semantic_match_already_present": false,
+      "source_basis": "directional side-level lookup",
+      "spectron_current_name": "_ZN10zF9VgaBKxR10rRAVgazC3QEi",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1ae3ec",
+      "spectron_metrics": {
+        "basic_block_count": 20,
+        "instruction_count": 100,
+        "mnemonic_hash": "86eb936ab610c3e0b923c1e343b3ddd3a241593930f35fafeca60b4851f936c8",
+        "register_shape_hash": "af934db104de9d392139920db064b21aafafae01b219c8ed027a66630595637f",
+        "shape_hash": "4043de53c993c71e5c61c2cc4372f7d533cbe1205f50df051d439f514a450a35",
+        "size": 408
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both are server-level void methods with an empty body in the reviewed ARM64 libraries.",
+        "The target method follows the two side-level helpers and occupies the corresponding no-op hook position immediately before animateObjects in the same class-local cluster.",
+        "All exported body metrics match exactly: four bytes, one instruction, one basic block, and identical normalized hashes."
+      ],
+      "match_kind": "manual-server-level-side-helper-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1a9480",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 1,
+        "mnemonic_hash": "e961e779171076bedbea9cc412e632e7f0ef162348f38175b2d26cd7f427bfe6",
+        "register_shape_hash": "d921540bdfb23372c7622b99ad13277d3551715cf5f7ba19a2cb48bdb184993a",
+        "shape_hash": "9151e4d8a215a1586fa86638f53b44bc91a21e2fb3974fefbf5b828ecf7edcfd",
+        "size": 4
+      },
+      "original_name": "TServerLevel_calcFlowers_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerLevel_calcFlowers_void",
+      "semantic_match_already_present": false,
+      "source_basis": "server-level flower calculation hook",
+      "spectron_current_name": "_ZN10zF9VgaBKxR10VicXmbBYpVEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1ae584",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 1,
+        "mnemonic_hash": "e961e779171076bedbea9cc412e632e7f0ef162348f38175b2d26cd7f427bfe6",
+        "register_shape_hash": "d921540bdfb23372c7622b99ad13277d3551715cf5f7ba19a2cb48bdb184993a",
+        "shape_hash": "9151e4d8a215a1586fa86638f53b44bc91a21e2fb3974fefbf5b828ecf7edcfd",
+        "size": 4
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both are server-level void methods with an empty body in the reviewed ARM64 libraries.",
+        "The target method is the second adjacent no-op hook in the corresponding class-local cluster and is followed by the already translated animateObjects method.",
+        "All exported body metrics match exactly: four bytes, one instruction, one basic block, and identical normalized hashes."
+      ],
+      "match_kind": "manual-server-level-side-helper-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1a9484",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 1,
+        "mnemonic_hash": "e961e779171076bedbea9cc412e632e7f0ef162348f38175b2d26cd7f427bfe6",
+        "register_shape_hash": "d921540bdfb23372c7622b99ad13277d3551715cf5f7ba19a2cb48bdb184993a",
+        "shape_hash": "9151e4d8a215a1586fa86638f53b44bc91a21e2fb3974fefbf5b828ecf7edcfd",
+        "size": 4
+      },
+      "original_name": "TServerLevel_animateFlowers_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerLevel_animateFlowers_void",
+      "semantic_match_already_present": false,
+      "source_basis": "server-level flower animation hook",
+      "spectron_current_name": "_ZN10zF9VgaBKxR10uLrpmbFY0sEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1ae588",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 1,
+        "mnemonic_hash": "e961e779171076bedbea9cc412e632e7f0ef162348f38175b2d26cd7f427bfe6",
+        "register_shape_hash": "d921540bdfb23372c7622b99ad13277d3551715cf5f7ba19a2cb48bdb184993a",
+        "shape_hash": "9151e4d8a215a1586fa86638f53b44bc91a21e2fb3974fefbf5b828ecf7edcfd",
+        "size": 4
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_server_level_side_helpers_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v1_saved.json",
+    "spectron_features_sha256": "a8d58f85502362316ee99a0f79c2cd7a4ad5d6fac94aca0ee75bd0d2965fc2a1"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The side-level matches rely on direct pseudocode and the preserved class-local lookup order, with the target's seven-by-seven grid expansion recorded as an intentional version difference.",
+    "The flower matches are exact body matches and remain separate hooks even though both are no-ops in these builds."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for server-level side-level and flower helper methods",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 4,
+    "high_confidence_count": 4,
+    "new_context_anchor_count": 4,
+    "target_default_name_count": 0
+  }
+}

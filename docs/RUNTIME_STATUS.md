@@ -953,6 +953,14 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_server_level_lifecycle_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+136. Clean IDA review added four high-confidence server-level side-level and
+     flower-hook anchors. The side-level methods preserve the source lookup
+     roles across Spectron's expanded grid, and the two flower hooks are exact
+     empty-body matches. All four reopened successfully in the v76 disposable
+     copy. See
+     `artifacts/spectron_server_level_side_helpers_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

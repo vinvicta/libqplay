@@ -803,6 +803,16 @@ anchors. All seven reopened successfully. The evidence is in
 `artifacts/spectron_server_level_lifecycle_manual_translation_anchors_20260826.json`,
 and the v75 database SHA-256 is recorded in the checkpoint.
 
+A seventy-fourth disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v76.i64`,
+adds four reviewed server-level side-level and flower-hook anchors. The two
+side-level methods preserve the source position and directional lookup roles
+while using Spectron's expanded seven-by-seven grid. The two adjacent flower
+hooks are exact empty-body matches. All four reopened successfully. The
+evidence is in
+`artifacts/spectron_server_level_side_helpers_manual_translation_anchors_20260826.json`,
+and the v76 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
