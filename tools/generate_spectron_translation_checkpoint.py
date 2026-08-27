@@ -161,6 +161,8 @@ def main() -> None:
     parser.add_argument("--server-player-state-verification", type=Path)
     parser.add_argument("--server-npc-state-anchors", type=Path)
     parser.add_argument("--server-npc-state-verification", type=Path)
+    parser.add_argument("--npc-accessor-anchors", type=Path)
+    parser.add_argument("--npc-accessor-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2076,6 +2078,34 @@ def main() -> None:
         result["server_npc_state_anchors"] = server_npc_state
         result["interpretation"].append(
             "The sixty-eighth database revision also contains the separately reviewed server-NPC construction, shape, naming, default-image, movement, and property anchors."
+        )
+    npc_accessor = None
+    if args.npc_accessor_anchors or args.npc_accessor_verification:
+        if not args.npc_accessor_anchors or not args.npc_accessor_verification:
+            raise ValueError(
+                "NPC accessor anchors and NPC accessor verification must be supplied together"
+            )
+        npc_accessor_document = load(args.npc_accessor_anchors)
+        npc_accessor_verification = load(args.npc_accessor_verification)
+        if npc_accessor_document.get("artifact") != "spectron_npc_accessor_manual_translation_anchors_20260826":
+            raise ValueError("unexpected NPC accessor anchor artifact")
+        if not npc_accessor_verification.get("verified"):
+            raise ValueError("NPC accessor anchor reopen verification did not pass")
+        expected_npc_accessor = len(npc_accessor_document["anchors"])
+        if npc_accessor_verification["verified_name_count"] != expected_npc_accessor:
+            raise ValueError("NPC accessor verification count differs from artifact")
+        npc_accessor = {
+            "anchor_path": str(args.npc_accessor_anchors),
+            "anchor_sha256": sha256_path(args.npc_accessor_anchors),
+            "reopen_verification": str(args.npc_accessor_verification),
+            "anchor_count": expected_npc_accessor,
+            "verified_name_count": npc_accessor_verification["verified_name_count"],
+            "reopen_failure_count": npc_accessor_verification["failure_count"],
+        }
+    if npc_accessor is not None:
+        result["npc_accessor_anchors"] = npc_accessor
+        result["interpretation"].append(
+            "The sixty-ninth database revision also contains the separately reviewed compact server-NPC accessor anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

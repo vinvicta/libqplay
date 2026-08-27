@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v70.i64",
-    "sha256": "c384c10b3a0cdd69925df8017a3a870de64aa4942923d59a12bc88c5bbc690b4"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v71.i64",
+    "sha256": "307ad12c6bcf4f1aec20e8145daf3b41037a63f5834d84950e7cf399c1859da0"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -213,7 +213,8 @@
     "The sixty-fifth database revision also contains the separately reviewed player draw-rectangle and visual setter anchors.",
     "The sixty-sixth database revision also contains the separately reviewed player movement, item, and hurt-handling anchors.",
     "The sixty-seventh database revision also contains the separately reviewed server-player state, property, level, nickname, and weapon-image anchors.",
-    "The sixty-eighth database revision also contains the separately reviewed server-NPC construction, shape, naming, default-image, movement, and property anchors."
+    "The sixty-eighth database revision also contains the separately reviewed server-NPC construction, shape, naming, default-image, movement, and property anchors.",
+    "The sixty-ninth database revision also contains the separately reviewed compact server-NPC accessor anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -264,6 +265,14 @@
     "verified_name_count": 6
   },
   "network_contacted": false,
+  "npc_accessor_anchors": {
+    "anchor_count": 17,
+    "anchor_path": "artifacts/spectron_npc_accessor_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "bcc6ecba88a08493a8c00ec71c272f7afea0a41330df27074c3f10e14439f027",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_npc_accessor_verification_v71.json",
+    "verified_name_count": 17
+  },
   "npc_helper_anchors": {
     "anchor_count": 15,
     "anchor_path": "artifacts/spectron_npc_helper_manual_translation_anchors_20260826.json",

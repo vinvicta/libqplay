@@ -1,0 +1,643 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both are one-block virtual getters for the same hearts or HP property; the vtable coordinate shifts from 560 to 568 bytes in the rebuilt target.",
+        "The source callback records at 0x37be58 and 0x37bee8 decode to hearts and hp and share this getter. The target has the matching two callback-table references at 0x38eec8 and 0x38ef58.",
+        "The target keeps the same compact 32-byte body and class-local position at the start of the server-NPC accessor cluster."
+      ],
+      "match_kind": "manual-npc-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1807b0",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "c8c33891ccb7393508fd8257610ad23af3b682c9b21248a638a18be3c2a00340",
+        "register_shape_hash": "8682ce5c3ae5c4bbd445afede896fc88b89f75e36d3b6b100705fe1aa7f33a52",
+        "shape_hash": "619209c0e319901b3d897cfca35e546809a806fa37a226eb859edd541807427d",
+        "size": 32
+      },
+      "original_name": "TServerNPC_getHeartsOrHP",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_getHeartsOrHP",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC hearts or HP getter",
+      "spectron_current_name": "sub_184D18",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184d18",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "c8c33891ccb7393508fd8257610ad23af3b682c9b21248a638a18be3c2a00340",
+        "register_shape_hash": "8682ce5c3ae5c4bbd445afede896fc88b89f75e36d3b6b100705fe1aa7f33a52",
+        "shape_hash": "619209c0e319901b3d897cfca35e546809a806fa37a226eb859edd541807427d",
+        "size": 32
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both read one double from the horizontal hurt-displacement field, shifting the logical field from offset 1208 to 1256 bytes.",
+        "The source callback record at 0x37bf18 decodes to hurtdx and points to this getter; the target remains the next eight-byte accessor in the same cluster.",
+        "The source and target preserve the one-block, eight-byte body and the adjacent setter relationship."
+      ],
+      "match_kind": "manual-npc-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1807d0",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 2,
+        "mnemonic_hash": "de72a41c35fa727134d1567d0cb079cdd252c263b49d89f278b4b5a2ce07b541",
+        "register_shape_hash": "7d5db1721299635a473646ebb6c778711d7622fe3f2e3e42ff7b1a090229f0ba",
+        "shape_hash": "fdb6e988974b59e771f6857d563ee05722bcff5e0a61bb92df98d5a90f39e7da",
+        "size": 8
+      },
+      "original_name": "TServerNPC_getHurtDX",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_getHurtDX",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC horizontal hurt displacement getter",
+      "spectron_current_name": "sub_184D38",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184d38",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 2,
+        "mnemonic_hash": "de72a41c35fa727134d1567d0cb079cdd252c263b49d89f278b4b5a2ce07b541",
+        "register_shape_hash": "7d5db1721299635a473646ebb6c778711d7622fe3f2e3e42ff7b1a090229f0ba",
+        "shape_hash": "fdb6e988974b59e771f6857d563ee05722bcff5e0a61bb92df98d5a90f39e7da",
+        "size": 8
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both clamp the incoming horizontal hurt displacement to the inclusive range -1.0 through 1.0 and store it in the same logical field.",
+        "The source hurtdx callback record at 0x37bf18 stores this address in its setter slot, directly pairing it with the reviewed getter.",
+        "The target preserves the four-block, 36-byte setter body with only the rebuilt field offset changing from 1208 to 1256 bytes."
+      ],
+      "match_kind": "manual-npc-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1807d8",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "instruction_count": 9,
+        "mnemonic_hash": "919be8d10c5f6557268f6786a94b966bad69a2a19bab801d7bd79383d5e10ae9",
+        "register_shape_hash": "bb3714a4f39d1b90fdef26d02a171ac319dd1b26c1d0ad352942e1f7cfd9310d",
+        "shape_hash": "65ab743bbc827678973b06f295cb83e21cfabd0aee484a23d0b866af6d9081b4",
+        "size": 36
+      },
+      "original_name": "TServerNPC_setHurtDX",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_setHurtDX",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC horizontal hurt displacement setter",
+      "spectron_current_name": "sub_184D40",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184d40",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "instruction_count": 9,
+        "mnemonic_hash": "919be8d10c5f6557268f6786a94b966bad69a2a19bab801d7bd79383d5e10ae9",
+        "register_shape_hash": "bb3714a4f39d1b90fdef26d02a171ac319dd1b26c1d0ad352942e1f7cfd9310d",
+        "shape_hash": "65ab743bbc827678973b06f295cb83e21cfabd0aee484a23d0b866af6d9081b4",
+        "size": 36
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both read one double from the vertical hurt-displacement field, shifting the logical field from offset 1216 to 1264 bytes.",
+        "The source callback record at 0x37bf48 decodes to hurtdy and points to this getter; the target keeps the matching accessor order after getHurtDX and setHurtDX.",
+        "The source and target preserve the one-block, eight-byte body and the adjacent setter relationship."
+      ],
+      "match_kind": "manual-npc-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1807fc",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 2,
+        "mnemonic_hash": "de72a41c35fa727134d1567d0cb079cdd252c263b49d89f278b4b5a2ce07b541",
+        "register_shape_hash": "7d5db1721299635a473646ebb6c778711d7622fe3f2e3e42ff7b1a090229f0ba",
+        "shape_hash": "fdb6e988974b59e771f6857d563ee05722bcff5e0a61bb92df98d5a90f39e7da",
+        "size": 8
+      },
+      "original_name": "TServerNPC_getHurtDY",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_getHurtDY",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC vertical hurt displacement getter",
+      "spectron_current_name": "sub_184D64",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184d64",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 2,
+        "mnemonic_hash": "de72a41c35fa727134d1567d0cb079cdd252c263b49d89f278b4b5a2ce07b541",
+        "register_shape_hash": "7d5db1721299635a473646ebb6c778711d7622fe3f2e3e42ff7b1a090229f0ba",
+        "shape_hash": "fdb6e988974b59e771f6857d563ee05722bcff5e0a61bb92df98d5a90f39e7da",
+        "size": 8
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both clamp the incoming vertical hurt displacement to the inclusive range -1.0 through 1.0 and store it in the same logical field.",
+        "The source hurtdy callback record at 0x37bf48 stores this address in its setter slot, directly pairing it with the reviewed getter.",
+        "The target preserves the four-block, 36-byte setter body with only the rebuilt field offset changing from 1216 to 1264 bytes."
+      ],
+      "match_kind": "manual-npc-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x180804",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "instruction_count": 9,
+        "mnemonic_hash": "919be8d10c5f6557268f6786a94b966bad69a2a19bab801d7bd79383d5e10ae9",
+        "register_shape_hash": "bb3714a4f39d1b90fdef26d02a171ac319dd1b26c1d0ad352942e1f7cfd9310d",
+        "shape_hash": "65ab743bbc827678973b06f295cb83e21cfabd0aee484a23d0b866af6d9081b4",
+        "size": 36
+      },
+      "original_name": "TServerNPC_setHurtDY",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_setHurtDY",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC vertical hurt displacement setter",
+      "spectron_current_name": "sub_184D6C",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184d6c",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "instruction_count": 9,
+        "mnemonic_hash": "919be8d10c5f6557268f6786a94b966bad69a2a19bab801d7bd79383d5e10ae9",
+        "register_shape_hash": "bb3714a4f39d1b90fdef26d02a171ac319dd1b26c1d0ad352942e1f7cfd9310d",
+        "shape_hash": "65ab743bbc827678973b06f295cb83e21cfabd0aee484a23d0b866af6d9081b4",
+        "size": 36
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both return the inverse of the blocking byte, shifting the primary byte from offset 741 to 765 and preserving the one-block body.",
+        "The source callback record at 0x37bfa8 decodes to isblocking and stores this address in its getter slot.",
+        "The target follows the reviewed blocking setter at 0x184d9c in the same callback and accessor neighborhood."
+      ],
+      "match_kind": "manual-npc-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x180828",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 3,
+        "mnemonic_hash": "79be8e5005c02aefc1d45dbfe52cd795eb463d2b170903fed48ab3d78f24a756",
+        "register_shape_hash": "2d3d499651f4fa8e449ababa0f783c6fdf6946f1927dd00dc17d89ff56a4f866",
+        "shape_hash": "9b2e18d8486323846797200d406894c56f6f9c29a829fa6d5c6e538e5416128d",
+        "size": 12
+      },
+      "original_name": "TServerNPC_getIsBlocking",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_getIsBlocking",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC blocking-state getter",
+      "spectron_current_name": "sub_184D90",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184d90",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 3,
+        "mnemonic_hash": "79be8e5005c02aefc1d45dbfe52cd795eb463d2b170903fed48ab3d78f24a756",
+        "register_shape_hash": "2d3d499651f4fa8e449ababa0f783c6fdf6946f1927dd00dc17d89ff56a4f866",
+        "shape_hash": "9b2e18d8486323846797200d406894c56f6f9c29a829fa6d5c6e538e5416128d",
+        "size": 12
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both read the projectile-blocking byte directly, shifting its logical field from offset 1060 to 1108 bytes.",
+        "The source callback record at 0x37bfd8 decodes to isblockingprojectiles and stores this address in its getter slot.",
+        "The target keeps the adjacent getter and setter order around the previously reviewed blocking-state helper."
+      ],
+      "match_kind": "manual-npc-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x18084c",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 2,
+        "mnemonic_hash": "050e5f3007e7006215593eadfd2ad3f4231bec310597de275e694f838fb2ebf5",
+        "register_shape_hash": "23ed6478c360254d28de46c6cdd7dce78fcbe251be4361b2018dca996bd4062b",
+        "shape_hash": "e1c8f04a92b31b3779c1d5837fc90f34714c5c7953475296cc365cc5a3c1a133",
+        "size": 8
+      },
+      "original_name": "TServerNPC_getIsBlockingProjectiles",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_getIsBlockingProjectiles",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC projectile-blocking getter",
+      "spectron_current_name": "sub_184DB4",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184db4",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 2,
+        "mnemonic_hash": "050e5f3007e7006215593eadfd2ad3f4231bec310597de275e694f838fb2ebf5",
+        "register_shape_hash": "23ed6478c360254d28de46c6cdd7dce78fcbe251be4361b2018dca996bd4062b",
+        "shape_hash": "e1c8f04a92b31b3779c1d5837fc90f34714c5c7953475296cc365cc5a3c1a133",
+        "size": 8
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both store the boolean argument directly in the projectile-blocking byte, shifting the logical field from offset 1060 to 1108 bytes.",
+        "The source is the setter slot of the isblockingprojectiles callback record at 0x37bfd8.",
+        "The source and target preserve the one-block, eight-byte body and the getter-setter adjacency."
+      ],
+      "match_kind": "manual-npc-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x180854",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 2,
+        "mnemonic_hash": "9a4a4e4503ab3fe781ea7f4588220ac65d3efe29062d5ada3324d903d92f0701",
+        "register_shape_hash": "f79cbc9be4f88878cb8134aef39f21c135f0e8f30a2987c226fb9f9959b36f8a",
+        "shape_hash": "81e6c3e35a5dec484e48f0e580668f7ca66dbcd901e7f3d04370c915960f440c",
+        "size": 8
+      },
+      "original_name": "TServerNPC_setIsBlockingProjectiles",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_setIsBlockingProjectiles",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC projectile-blocking setter",
+      "spectron_current_name": "sub_184DBC",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184dbc",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 2,
+        "mnemonic_hash": "9a4a4e4503ab3fe781ea7f4588220ac65d3efe29062d5ada3324d903d92f0701",
+        "register_shape_hash": "f79cbc9be4f88878cb8134aef39f21c135f0e8f30a2987c226fb9f9959b36f8a",
+        "shape_hash": "81e6c3e35a5dec484e48f0e580668f7ca66dbcd901e7f3d04370c915960f440c",
+        "size": 8
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both normalize the same stored layer value, returning 3 for layer 8, layer plus 1 below 10, and layer minus 6 otherwise.",
+        "The source callback record at 0x37c008 decodes to layer and stores this address in its getter slot.",
+        "The target preserves the exact three-block, 32-byte body and the same class-local position immediately before setLayer."
+      ],
+      "match_kind": "manual-npc-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x18085c",
+      "original_metrics": {
+        "basic_block_count": 3,
+        "instruction_count": 8,
+        "mnemonic_hash": "7f3575b417ff9e0d57b2f0a5be9d58a0bbbbc9eca11bb23251a658c537e3ce78",
+        "register_shape_hash": "aa75286ee16d717387549e26e42ed61914d8d0a92b74cd4291ff3adc080daef8",
+        "shape_hash": "485613e08b21ef32fd6a4115d36fc595ca29c4832dc5c8939e229e854a599225",
+        "size": 32
+      },
+      "original_name": "TServerNPC_getLayer",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_getLayer",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC layer normalization getter",
+      "spectron_current_name": "sub_184DC4",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184dc4",
+      "spectron_metrics": {
+        "basic_block_count": 3,
+        "instruction_count": 8,
+        "mnemonic_hash": "7f3575b417ff9e0d57b2f0a5be9d58a0bbbbc9eca11bb23251a658c537e3ce78",
+        "register_shape_hash": "aa75286ee16d717387549e26e42ed61914d8d0a92b74cd4291ff3adc080daef8",
+        "shape_hash": "485613e08b21ef32fd6a4115d36fc595ca29c4832dc5c8939e229e854a599225",
+        "size": 32
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both return the NPC save-variable pointer, shifting the logical field from offset 1152 to 1200 bytes.",
+        "The source callback record at 0x37c188 decodes to save and stores this address in its getter slot.",
+        "The target remains the one-block, eight-byte getter immediately before the shield-power pair."
+      ],
+      "match_kind": "manual-npc-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1808b0",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 2,
+        "mnemonic_hash": "de72a41c35fa727134d1567d0cb079cdd252c263b49d89f278b4b5a2ce07b541",
+        "register_shape_hash": "37f7a0d9d27d58ae794a4e5c97779a0fea989295cf3be5e100b23f8419900d68",
+        "shape_hash": "fdb6e988974b59e771f6857d563ee05722bcff5e0a61bb92df98d5a90f39e7da",
+        "size": 8
+      },
+      "original_name": "TServerNPC_getSave",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_getSave",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC save-variable getter",
+      "spectron_current_name": "sub_184E18",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184e18",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 2,
+        "mnemonic_hash": "de72a41c35fa727134d1567d0cb079cdd252c263b49d89f278b4b5a2ce07b541",
+        "register_shape_hash": "37f7a0d9d27d58ae794a4e5c97779a0fea989295cf3be5e100b23f8419900d68",
+        "shape_hash": "fdb6e988974b59e771f6857d563ee05722bcff5e0a61bb92df98d5a90f39e7da",
+        "size": 8
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both forward the shield-power getter through the NPC vtable, shifting the virtual coordinate from 672 to 680 bytes.",
+        "The source callback record at 0x37c1b8 decodes to shieldpower and stores this address in its getter slot.",
+        "The target is the matching one-block, 32-byte virtual wrapper followed by the clamping setter."
+      ],
+      "match_kind": "manual-npc-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1808b8",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "1f8976cbebbcec73339cb21293aca58bd88cbbec5b304d35d8ab37161e576b07",
+        "register_shape_hash": "68eb71f5a40bbbcf5d0d90b5044cc6abfcf5e6d2eb87ca5b733f528b1888fe88",
+        "shape_hash": "5cad158ac806efec1362057d98b8236dc066f18d97833eca4ee6fca5a29f3407",
+        "size": 32
+      },
+      "original_name": "TServerNPC_getShieldPower",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_getShieldPower",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC shield-power virtual getter",
+      "spectron_current_name": "sub_184E20",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184e20",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "1f8976cbebbcec73339cb21293aca58bd88cbbec5b304d35d8ab37161e576b07",
+        "register_shape_hash": "68eb71f5a40bbbcf5d0d90b5044cc6abfcf5e6d2eb87ca5b733f528b1888fe88",
+        "shape_hash": "5cad158ac806efec1362057d98b8236dc066f18d97833eca4ee6fca5a29f3407",
+        "size": 32
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both clamp negative shield power to zero, truncate nonnegative input to an unsigned integer, and forward through the shield-power setter slot.",
+        "The source shieldpower callback record at 0x37c1b8 stores this address in its setter slot.",
+        "The target shifts the setter virtual coordinate from 680 to 688 bytes while preserving the one-block, 40-byte wrapper."
+      ],
+      "match_kind": "manual-npc-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1808d8",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 10,
+        "mnemonic_hash": "e5faf8669c63a43fdddc34b876cb3e5b98c0f98313d6b1c22d227e2ea0cf6f68",
+        "register_shape_hash": "765e4698c7b2951af492913ea4774b627902fac0494f7d868894e68fe4f1c4a3",
+        "shape_hash": "1af7d1d3ffa06f3ba00a219fc0d825c3df838c7e7396bafc7eb56de11b8db135",
+        "size": 40
+      },
+      "original_name": "TServerNPC_setShieldPower",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_setShieldPower",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC shield-power virtual setter",
+      "spectron_current_name": "sub_184E40",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184e40",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 10,
+        "mnemonic_hash": "e5faf8669c63a43fdddc34b876cb3e5b98c0f98313d6b1c22d227e2ea0cf6f68",
+        "register_shape_hash": "765e4698c7b2951af492913ea4774b627902fac0494f7d868894e68fe4f1c4a3",
+        "shape_hash": "1af7d1d3ffa06f3ba00a219fc0d825c3df838c7e7396bafc7eb56de11b8db135",
+        "size": 40
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both forward the sword-power getter through the NPC vtable, shifting the virtual coordinate from 656 to 664 bytes.",
+        "The source callback record at 0x37c218 decodes to swordpower and stores this address in its getter slot.",
+        "The target is the matching one-block, 32-byte virtual wrapper followed by the clamping setter."
+      ],
+      "match_kind": "manual-npc-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x180900",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "1f8976cbebbcec73339cb21293aca58bd88cbbec5b304d35d8ab37161e576b07",
+        "register_shape_hash": "68eb71f5a40bbbcf5d0d90b5044cc6abfcf5e6d2eb87ca5b733f528b1888fe88",
+        "shape_hash": "5cad158ac806efec1362057d98b8236dc066f18d97833eca4ee6fca5a29f3407",
+        "size": 32
+      },
+      "original_name": "TServerNPC_getSwordPower",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_getSwordPower",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC sword-power virtual getter",
+      "spectron_current_name": "sub_184E68",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184e68",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "1f8976cbebbcec73339cb21293aca58bd88cbbec5b304d35d8ab37161e576b07",
+        "register_shape_hash": "68eb71f5a40bbbcf5d0d90b5044cc6abfcf5e6d2eb87ca5b733f528b1888fe88",
+        "shape_hash": "5cad158ac806efec1362057d98b8236dc066f18d97833eca4ee6fca5a29f3407",
+        "size": 32
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both clamp negative sword power to zero, truncate nonnegative input to an unsigned integer, and forward through the sword-power setter slot.",
+        "The source swordpower callback record at 0x37c218 stores this address in its setter slot.",
+        "The target shifts the setter virtual coordinate from 664 to 672 bytes while preserving the one-block, 40-byte wrapper."
+      ],
+      "match_kind": "manual-npc-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x180920",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 10,
+        "mnemonic_hash": "e5faf8669c63a43fdddc34b876cb3e5b98c0f98313d6b1c22d227e2ea0cf6f68",
+        "register_shape_hash": "765e4698c7b2951af492913ea4774b627902fac0494f7d868894e68fe4f1c4a3",
+        "shape_hash": "1af7d1d3ffa06f3ba00a219fc0d825c3df838c7e7396bafc7eb56de11b8db135",
+        "size": 40
+      },
+      "original_name": "TServerNPC_setSwordPower",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_setSwordPower",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC sword-power virtual setter",
+      "spectron_current_name": "sub_184E88",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184e88",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 10,
+        "mnemonic_hash": "e5faf8669c63a43fdddc34b876cb3e5b98c0f98313d6b1c22d227e2ea0cf6f68",
+        "register_shape_hash": "765e4698c7b2951af492913ea4774b627902fac0494f7d868894e68fe4f1c4a3",
+        "shape_hash": "1af7d1d3ffa06f3ba00a219fc0d825c3df838c7e7396bafc7eb56de11b8db135",
+        "size": 40
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both call the inherited local-X getter and add the same map-cell contribution from the NPC tile coordinate shifted left by six bits.",
+        "The source callback record at 0x37c2a8 decodes to x and stores this address in its getter slot.",
+        "The target preserves the one-block, 52-byte body and the exact X accessor position before getY."
+      ],
+      "match_kind": "manual-npc-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x180948",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 13,
+        "mnemonic_hash": "6e37758e1cb73e38c66d34e2a4f465b918722bb1d006fa351824a2bacbb7a9b3",
+        "register_shape_hash": "c40e4c0e9085a59b65f5f3a8479d657e7ec7a3b2807d25b865d8f1c6594dc6c6",
+        "shape_hash": "a4fe739ff26b90299ba016d5e7df4ca70e13adccae9e0c6bcb6f194542b5c278",
+        "size": 52
+      },
+      "original_name": "TServerNPC_getX",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_getX",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC global X coordinate getter",
+      "spectron_current_name": "sub_184EB0",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184eb0",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 13,
+        "mnemonic_hash": "6e37758e1cb73e38c66d34e2a4f465b918722bb1d006fa351824a2bacbb7a9b3",
+        "register_shape_hash": "c40e4c0e9085a59b65f5f3a8479d657e7ec7a3b2807d25b865d8f1c6594dc6c6",
+        "shape_hash": "a4fe739ff26b90299ba016d5e7df4ca70e13adccae9e0c6bcb6f194542b5c278",
+        "size": 52
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both call the inherited local-Y getter and add the same map-cell contribution from the NPC tile coordinate shifted left by six bits.",
+        "The source callback record at 0x37c2d8 decodes to y and stores this address in its getter slot.",
+        "The target preserves the one-block, 52-byte body and the exact Y accessor position between getX and getVisible."
+      ],
+      "match_kind": "manual-npc-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x18097c",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 13,
+        "mnemonic_hash": "6e37758e1cb73e38c66d34e2a4f465b918722bb1d006fa351824a2bacbb7a9b3",
+        "register_shape_hash": "c40e4c0e9085a59b65f5f3a8479d657e7ec7a3b2807d25b865d8f1c6594dc6c6",
+        "shape_hash": "a4fe739ff26b90299ba016d5e7df4ca70e13adccae9e0c6bcb6f194542b5c278",
+        "size": 52
+      },
+      "original_name": "TServerNPC_getY",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_getY",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC global Y coordinate getter",
+      "spectron_current_name": "sub_184EE4",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184ee4",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 13,
+        "mnemonic_hash": "6e37758e1cb73e38c66d34e2a4f465b918722bb1d006fa351824a2bacbb7a9b3",
+        "register_shape_hash": "c40e4c0e9085a59b65f5f3a8479d657e7ec7a3b2807d25b865d8f1c6594dc6c6",
+        "shape_hash": "a4fe739ff26b90299ba016d5e7df4ca70e13adccae9e0c6bcb6f194542b5c278",
+        "size": 52
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both read the NPC visibility byte directly, shifting the logical field from offset 1008 to 1032 bytes.",
+        "The source callback record at 0x37c248 decodes to visible and stores this address in its getter slot.",
+        "The target preserves the one-block, eight-byte body and the end position of the compact accessor cluster before the script helpers."
+      ],
+      "match_kind": "manual-npc-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1809b0",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 2,
+        "mnemonic_hash": "050e5f3007e7006215593eadfd2ad3f4231bec310597de275e694f838fb2ebf5",
+        "register_shape_hash": "23ed6478c360254d28de46c6cdd7dce78fcbe251be4361b2018dca996bd4062b",
+        "shape_hash": "e1c8f04a92b31b3779c1d5837fc90f34714c5c7953475296cc365cc5a3c1a133",
+        "size": 8
+      },
+      "original_name": "TServerNPC_getVisible",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_getVisible",
+      "semantic_match_already_present": false,
+      "source_basis": "NPC visibility getter",
+      "spectron_current_name": "sub_184F18",
+      "spectron_default_name": true,
+      "spectron_ea": "0x184f18",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 2,
+        "mnemonic_hash": "050e5f3007e7006215593eadfd2ad3f4231bec310597de275e694f838fb2ebf5",
+        "register_shape_hash": "23ed6478c360254d28de46c6cdd7dce78fcbe251be4361b2018dca996bd4062b",
+        "shape_hash": "e1c8f04a92b31b3779c1d5837fc90f34714c5c7953475296cc365cc5a3c1a133",
+        "size": 8
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_npc_accessor_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v1_saved.json",
+    "spectron_features_sha256": "a8d58f85502362316ee99a0f79c2cd7a4ad5d6fac94aca0ee75bd0d2965fc2a1"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The correspondence relies on callback-table records, exact accessor order, matching local behavior, field and vtable-coordinate shifts, and compact body shapes rather than target names alone."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for compact server-NPC property accessors",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 17,
+    "high_confidence_count": 17,
+    "new_context_anchor_count": 17,
+    "target_default_name_count": 17
+  }
+}

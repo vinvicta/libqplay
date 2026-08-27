@@ -765,6 +765,14 @@ reopened successfully. The evidence is in
 `artifacts/spectron_server_npc_state_manual_translation_anchors_20260826.json`,
 and the v70 database SHA-256 is recorded in the checkpoint.
 
+A sixty-ninth disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v71.i64`,
+adds 17 reviewed compact server-NPC accessor anchors for hurt displacement,
+blocking, layer, save state, power, coordinates, and visibility. All 17
+reopened successfully. The evidence is in
+`artifacts/spectron_npc_accessor_manual_translation_anchors_20260826.json`,
+and the v71 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
