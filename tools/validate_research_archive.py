@@ -389,6 +389,9 @@ def main():
     spectron_window_residual_anchors = load_json(
         "artifacts/spectron_window_residual_manual_translation_anchors_20260826.json"
     )
+    spectron_sound_runtime_anchors = load_json(
+        "artifacts/spectron_sound_runtime_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2260,6 +2263,16 @@ def main():
     check("Spectron window residual semantic overlap", spectron_window_residual_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron window residual default targets", spectron_window_residual_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron sound-runtime artifact",
+        spectron_sound_runtime_anchors["artifact"],
+        "spectron_sound_runtime_manual_translation_anchors_20260826",
+    )
+    check("Spectron sound-runtime network", spectron_sound_runtime_anchors["network_contacted"], False)
+    check("Spectron sound-runtime total", spectron_sound_runtime_anchors["summary"]["anchor_count"], 3)
+    check("Spectron sound-runtime high confidence", spectron_sound_runtime_anchors["summary"]["high_confidence_count"], 3)
+    check("Spectron sound-runtime semantic overlap", spectron_sound_runtime_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron sound-runtime default targets", spectron_sound_runtime_anchors["summary"]["target_default_name_count"], 1)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -2377,7 +2390,8 @@ def main():
     check("Spectron checkpoint panel/bitmap anchor count", spectron_checkpoint["panel_bitmap_anchors"]["verified_name_count"], 4)
     check("Spectron checkpoint GIF decoder anchor count", spectron_checkpoint["gif_decoder_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint window residual anchor count", spectron_checkpoint["window_residual_anchors"]["verified_name_count"], 2)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "d8c782e2040a57c3bae8e406c90e0d94d7bc32fef82b203a33621fcd0a6c9209")
+    check("Spectron checkpoint sound-runtime anchor count", spectron_checkpoint["sound_runtime_anchors"]["verified_name_count"], 3)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "b8d25d41ea73f217003a7e39799ce9f124f2452c12f4df694b22c3caf4c70b37")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -2549,6 +2563,7 @@ def main():
         spectron_panel_bitmap_anchors,
         spectron_gif_decoder_anchors,
         spectron_window_residual_anchors,
+        spectron_sound_runtime_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

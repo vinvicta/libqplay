@@ -245,6 +245,8 @@ def main() -> None:
     parser.add_argument("--gif-decoder-verification", type=Path)
     parser.add_argument("--window-residual-anchors", type=Path)
     parser.add_argument("--window-residual-verification", type=Path)
+    parser.add_argument("--sound-runtime-anchors", type=Path)
+    parser.add_argument("--sound-runtime-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3336,6 +3338,34 @@ def main() -> None:
         result["window_residual_anchors"] = window_residual
         result["interpretation"].append(
             "The one-hundred-tenth database revision also contains the separately reviewed TWindow close-query and pixel-buffer factory anchors."
+        )
+    sound_runtime = None
+    if args.sound_runtime_anchors or args.sound_runtime_verification:
+        if not args.sound_runtime_anchors or not args.sound_runtime_verification:
+            raise ValueError(
+                "sound-runtime anchors and sound-runtime verification must be supplied together"
+            )
+        sound_runtime_document = load(args.sound_runtime_anchors)
+        sound_runtime_verification = load(args.sound_runtime_verification)
+        if sound_runtime_document.get("artifact") != "spectron_sound_runtime_manual_translation_anchors_20260826":
+            raise ValueError("unexpected sound-runtime anchor artifact")
+        if not sound_runtime_verification.get("verified"):
+            raise ValueError("sound-runtime anchor reopen verification did not pass")
+        expected_sound_runtime = len(sound_runtime_document["anchors"])
+        if sound_runtime_verification["verified_name_count"] != expected_sound_runtime:
+            raise ValueError("sound-runtime verification count differs from artifact")
+        sound_runtime = {
+            "anchor_path": str(args.sound_runtime_anchors),
+            "anchor_sha256": sha256_path(args.sound_runtime_anchors),
+            "reopen_verification": str(args.sound_runtime_verification),
+            "anchor_count": expected_sound_runtime,
+            "verified_name_count": sound_runtime_verification["verified_name_count"],
+            "reopen_failure_count": sound_runtime_verification["failure_count"],
+        }
+    if sound_runtime is not None:
+        result["sound_runtime_anchors"] = sound_runtime
+        result["interpretation"].append(
+            "The one-hundred-eleventh database revision also contains the separately reviewed sound-manager dispatch, note-pitch, and Java playback anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

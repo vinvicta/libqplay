@@ -1231,6 +1231,15 @@ This is the short handoff view. The full reasoning and command history are in
      See
      `artifacts/spectron_window_residual_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
+173. The next IDA pass translated three residual sound-runtime methods covering
+     sound dispatch and caching, note-based pitch calculation, and Java sound
+     playback. The labels reopened successfully in the v113 disposable copy.
+     The target keeps the source extension, cache, `powf`, and
+     `startSound([BII)V` responsibilities. Its missing `steps` special case
+     and the unresolved sound-effect constructor remain explicit differences.
+     See
+     `artifacts/spectron_sound_runtime_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
 ## Not verified
 
