@@ -131,6 +131,8 @@ def main() -> None:
     parser.add_argument("--static-json-tiles-verification", type=Path)
     parser.add_argument("--tiles-update-anchors", type=Path)
     parser.add_argument("--tiles-update-verification", type=Path)
+    parser.add_argument("--particle-anchors", type=Path)
+    parser.add_argument("--particle-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1626,6 +1628,34 @@ def main() -> None:
         result["tiles_update_anchors"] = tiles_update
         result["interpretation"].append(
             "The fifty-third database revision also contains the separately reviewed tile selection, definition-update, temporary-tile, and screen-rendering anchors."
+        )
+    particle = None
+    if args.particle_anchors or args.particle_verification:
+        if not args.particle_anchors or not args.particle_verification:
+            raise ValueError(
+                "particle anchors and particle verification must be supplied together"
+            )
+        particle_document = load(args.particle_anchors)
+        particle_verification = load(args.particle_verification)
+        if particle_document.get("artifact") != "spectron_particle_manual_translation_anchors_20260826":
+            raise ValueError("unexpected particle anchor artifact")
+        if not particle_verification.get("verified"):
+            raise ValueError("particle anchor reopen verification did not pass")
+        expected_particle = len(particle_document["anchors"])
+        if particle_verification["verified_name_count"] != expected_particle:
+            raise ValueError("particle verification count differs from artifact")
+        particle = {
+            "anchor_path": str(args.particle_anchors),
+            "anchor_sha256": sha256_path(args.particle_anchors),
+            "reopen_verification": str(args.particle_verification),
+            "anchor_count": expected_particle,
+            "verified_name_count": particle_verification["verified_name_count"],
+            "reopen_failure_count": particle_verification["failure_count"],
+        }
+    if particle is not None:
+        result["particle_anchors"] = particle
+        result["interpretation"].append(
+            "The fifty-fourth database revision also contains the separately reviewed particle animation, appearance, and polygon anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
