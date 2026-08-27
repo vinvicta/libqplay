@@ -914,6 +914,13 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_server_player_state_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+130. Clean IDA review added seven high-confidence server-NPC state anchors for
+     construction, shape callbacks, log naming, default images, movement
+     updates, and encoded properties. All seven reopened successfully in the
+     v70 disposable copy. See
+     `artifacts/spectron_server_npc_state_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

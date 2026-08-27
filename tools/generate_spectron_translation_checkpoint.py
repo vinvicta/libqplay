@@ -159,6 +159,8 @@ def main() -> None:
     parser.add_argument("--player-movement-verification", type=Path)
     parser.add_argument("--server-player-state-anchors", type=Path)
     parser.add_argument("--server-player-state-verification", type=Path)
+    parser.add_argument("--server-npc-state-anchors", type=Path)
+    parser.add_argument("--server-npc-state-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2046,6 +2048,34 @@ def main() -> None:
         result["server_player_state_anchors"] = server_player_state
         result["interpretation"].append(
             "The sixty-seventh database revision also contains the separately reviewed server-player state, property, level, nickname, and weapon-image anchors."
+        )
+    server_npc_state = None
+    if args.server_npc_state_anchors or args.server_npc_state_verification:
+        if not args.server_npc_state_anchors or not args.server_npc_state_verification:
+            raise ValueError(
+                "server-NPC-state anchors and server-NPC-state verification must be supplied together"
+            )
+        server_npc_state_document = load(args.server_npc_state_anchors)
+        server_npc_state_verification = load(args.server_npc_state_verification)
+        if server_npc_state_document.get("artifact") != "spectron_server_npc_state_manual_translation_anchors_20260826":
+            raise ValueError("unexpected server-NPC-state anchor artifact")
+        if not server_npc_state_verification.get("verified"):
+            raise ValueError("server-NPC-state anchor reopen verification did not pass")
+        expected_server_npc_state = len(server_npc_state_document["anchors"])
+        if server_npc_state_verification["verified_name_count"] != expected_server_npc_state:
+            raise ValueError("server-NPC-state verification count differs from artifact")
+        server_npc_state = {
+            "anchor_path": str(args.server_npc_state_anchors),
+            "anchor_sha256": sha256_path(args.server_npc_state_anchors),
+            "reopen_verification": str(args.server_npc_state_verification),
+            "anchor_count": expected_server_npc_state,
+            "verified_name_count": server_npc_state_verification["verified_name_count"],
+            "reopen_failure_count": server_npc_state_verification["failure_count"],
+        }
+    if server_npc_state is not None:
+        result["server_npc_state_anchors"] = server_npc_state
+        result["interpretation"].append(
+            "The sixty-eighth database revision also contains the separately reviewed server-NPC construction, shape, naming, default-image, movement, and property anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v69.i64",
-    "sha256": "3772800d76e7e1cbc252dc7169a4c15c1ff342dc38bbc8cb43904d2739df360e"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v70.i64",
+    "sha256": "c384c10b3a0cdd69925df8017a3a870de64aa4942923d59a12bc88c5bbc690b4"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -212,7 +212,8 @@
     "The sixty-fourth database revision also contains the separately reviewed player attribute reset and weapon-state anchors.",
     "The sixty-fifth database revision also contains the separately reviewed player draw-rectangle and visual setter anchors.",
     "The sixty-sixth database revision also contains the separately reviewed player movement, item, and hurt-handling anchors.",
-    "The sixty-seventh database revision also contains the separately reviewed server-player state, property, level, nickname, and weapon-image anchors."
+    "The sixty-seventh database revision also contains the separately reviewed server-player state, property, level, nickname, and weapon-image anchors.",
+    "The sixty-eighth database revision also contains the separately reviewed server-NPC construction, shape, naming, default-image, movement, and property anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -520,6 +521,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_server_animation_verification_v59.json",
     "verified_name_count": 3
+  },
+  "server_npc_state_anchors": {
+    "anchor_count": 7,
+    "anchor_path": "artifacts/spectron_server_npc_state_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "e645f2c158a657eb421be61547bcc3b2c72521c38c3ab67ba40ca92481792ae2",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_server_npc_state_verification_v70.json",
+    "verified_name_count": 7
   },
   "server_player_state_anchors": {
     "anchor_count": 6,

@@ -1,0 +1,359 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both update the NPC shape width and height, create or clear the shape script variable, accept the array only when it contains at least width times height entries, and mark the object changed.",
+        "The source IDA comment identifies the callback record at 0x37c908 as setshape2 and places it in the TServerNPC script-function table installed at 0x183c18.",
+        "The target was default-named sub_185484 in the feature export, but its pseudocode preserves the same ten-block callback behavior and the distinctive shape literal."
+      ],
+      "match_kind": "manual-server-npc-state-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x180f1c",
+      "original_metrics": {
+        "basic_block_count": 10,
+        "instruction_count": 91,
+        "mnemonic_hash": "1a51b20bf7896b88eb1a0638426e77fd39eb82d0b13826dc735a635498ecf105",
+        "register_shape_hash": "a4963b02708018cb9e5de28cdc9330a59cce03ebf153c662b2fc261b9044bc98",
+        "shape_hash": "4ddf892281fc42ced3815b27094d0e04c44597febf56c5e70245beb09cf54b04",
+        "size": 368
+      },
+      "original_name": "TServerNPC_script_setShape2",
+      "original_string_refs": [
+        "shape"
+      ],
+      "proposed_name": "v18_TServerNPC_script_setShape2",
+      "semantic_match_already_present": false,
+      "source_basis": "server-NPC script shape callback",
+      "spectron_current_name": "sub_185484",
+      "spectron_default_name": true,
+      "spectron_ea": "0x185484",
+      "spectron_metrics": {
+        "basic_block_count": 10,
+        "instruction_count": 98,
+        "mnemonic_hash": "10683dde5d7252fcce167ace473e81ac444b10422b45ac7ca3c891fce921c2af",
+        "register_shape_hash": "a5ee3f64c701ea88e2aa59baf1c949b04a6857c0a5a9c8352883f1315ec99fd1",
+        "shape_hash": "10b3b3d087b47a350e82090360e6034c9fefb5f552cd987b683180854e22317b",
+        "size": 396
+      },
+      "spectron_string_refs": [
+        "shape"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both call the server-player constructor, install the NPC vtables, initialize the same dimensions and state flags, allocate the same small helper object, and create the save variable.",
+        "The target exposes both C1 and C2 constructor entry names at the same function body, while the source has the readable TServerNPC constructor name.",
+        "The exact four-block constructor shape and save literal identify the corresponding target despite shifted fields and rebuilt wrappers."
+      ],
+      "match_kind": "manual-server-npc-state-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x183cc8",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "instruction_count": 137,
+        "mnemonic_hash": "b351e5748c0c417199f6bcdb30ad2f8b344dc01999c152b09c68a3ab608c81f8",
+        "register_shape_hash": "807280fb90c1da7dd098356299961c0bb271272b7397173ad237124275b2da96",
+        "shape_hash": "d95fc2fef6594c4502269111d5a8476bb6ff1e31254000da9f7b7c3a1d8aa78d",
+        "size": 552
+      },
+      "original_name": "TServerNPC_TServerNPC_int",
+      "original_string_refs": [
+        "save"
+      ],
+      "proposed_name": "v18_TServerNPC_TServerNPC_int",
+      "semantic_match_already_present": false,
+      "source_basis": "server-NPC constructor and save variable initialization",
+      "spectron_current_name": "_ZN10LBgVgaqANQC2Ei",
+      "spectron_default_name": false,
+      "spectron_ea": "0x188340",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "instruction_count": 150,
+        "mnemonic_hash": "504446b582937fc093fb91b75b347f382eb63ccdeac8be669c4dad3e1aa2ca05",
+        "register_shape_hash": "c1925546a37c90701e0812786a3c6706a5b0bd6eabedd350cc61cac5c26dedb0",
+        "shape_hash": "333ff02c156cef2c44619da0343e9f5df5c5ad7bdbf89cd56ada6ef3124a3ee7",
+        "size": 604
+      },
+      "spectron_string_refs": [
+        "save"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both construct a descriptive name for attached NPCs, weapons, projectiles, GANI objects, and unknown objects before appending level, cell, and coordinate context.",
+        "The source and target preserve the same role-specific labels, including Gani, Projectile, Weapon, head0, and unknown, plus the same level and position formatting fragments.",
+        "The target adds one block for rebuilt wrapper handling but retains the same class-local role and the complete distinctive string set."
+      ],
+      "match_kind": "manual-server-npc-state-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x181458",
+      "original_metrics": {
+        "basic_block_count": 62,
+        "instruction_count": 345,
+        "mnemonic_hash": "30c088427eb05f17dfba4b3fcaa1a5dedc07d12de309409c29cdec2ca55f9fd0",
+        "register_shape_hash": "2ff43e9221f04b2b8cd8c9b46c1eaa63269cd2eabb3cfae832be3c8f1f154e2c",
+        "shape_hash": "ed100bdc3649e5dc2e13b9d11ae1b4488a466f982e3b70e356c5fb8bbaad0a8d",
+        "size": 1404
+      },
+      "original_name": "TServerNPC_getLogName_void",
+      "original_string_refs": [
+        " (in level ",
+        " at pos (",
+        " attr[",
+        "))",
+        ", ",
+        "Gani",
+        "Gani ",
+        "Projectile",
+        "Weapon ",
+        "]",
+        "head0",
+        "unknown"
+      ],
+      "proposed_name": "v18_TServerNPC_getLogName_void",
+      "semantic_match_already_present": false,
+      "source_basis": "role-aware server-NPC log name construction",
+      "spectron_current_name": "_ZN10LBgVgaqANQ10XmPXfa5PW1Ev",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1859ec",
+      "spectron_metrics": {
+        "basic_block_count": 63,
+        "instruction_count": 388,
+        "mnemonic_hash": "d13754d07c960f496acf2cbb804271ec28d374d25bdc10a73c059c0dc02abd42",
+        "register_shape_hash": "21f731878e8611faa3dd526279345bd0aa02e04b86c28ea1ef1068e4602cea55",
+        "shape_hash": "95ac1b2a262702766a9df202a3e90c390b904a3b0f04ac9b11f6d95eaf423f9a",
+        "size": 1572
+      },
+      "spectron_string_refs": [
+        " (in level ",
+        " at pos (",
+        " attr[",
+        "))",
+        ", ",
+        "Gani",
+        "Gani ",
+        "Projectile",
+        "Weapon ",
+        "]",
+        "head0",
+        "unknown"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both choose defaults based on water state, select the corresponding animation, assign sword, shield, head, and body images, and write the same five color defaults with color 5 set to 18.",
+        "The four default image literals are preserved exactly in both functions and occur in the same class-local initialization role.",
+        "The target retains the exact twelve-block shape even though its string wrappers and field offsets were rebuilt for the 2.2 object layout."
+      ],
+      "match_kind": "manual-server-npc-state-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x185fd0",
+      "original_metrics": {
+        "basic_block_count": 12,
+        "instruction_count": 147,
+        "mnemonic_hash": "be79c0c330e8715717f78bd40863689b1c769ecbf3a1d97de39866d2ea8e2bc4",
+        "register_shape_hash": "0c7e5fba53dc2c27c88acfa4163c5858090ffaeb678af87f0e076d27dc655b50",
+        "shape_hash": "ddbc8389306ea6d05341c1aef5965898c4ee795331acd83fb78ff5dd37b20ead",
+        "size": 596
+      },
+      "original_name": "TServerNPC_setDefaultImageNames_void",
+      "original_string_refs": [
+        "body.png",
+        "head26.png",
+        "shield1.png",
+        "sword1.png"
+      ],
+      "proposed_name": "v18_TServerNPC_setDefaultImageNames_void",
+      "semantic_match_already_present": false,
+      "source_basis": "server-NPC default image names and colors",
+      "spectron_current_name": "_ZN10LBgVgaqANQ10Lkz7IadlZzEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x18a678",
+      "spectron_metrics": {
+        "basic_block_count": 12,
+        "instruction_count": 141,
+        "mnemonic_hash": "2b1716e5f8a664e50f93121843dacb80ee794a56e30b450fafa4dafdfc76a1ee",
+        "register_shape_hash": "0406012ddd80d135b302a494c89c17e102bc0f4bfeb91c028d4eac44c54382b0",
+        "shape_hash": "dc7db652534c09822c098b7850896b91fb559f4804601ece4853c700ecea16de",
+        "size": 572
+      },
+      "spectron_string_refs": [
+        "body.png",
+        "head26.png",
+        "shield1.png",
+        "sword1.png"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both remove the NPC from the movement list, reject the legacy server path, check the action level, test the default gani and water state, reset animation when needed, and play movement sound when the flag is set.",
+        "The def literal and exact ten-block control-flow shape are preserved in the target.",
+        "The correspondence is supported by the adjacent server-NPC movement methods and the same class-local state fields, not by an obfuscated name alone."
+      ],
+      "match_kind": "manual-server-npc-state-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x186c38",
+      "original_metrics": {
+        "basic_block_count": 10,
+        "instruction_count": 68,
+        "mnemonic_hash": "04fcf8d39031d76b62e58b6f7cf0ae5ad144a400ba78b83df2b9c288eb755100",
+        "register_shape_hash": "351d51fbe33b3734b1b9d6c5598216db42910e70b6e8f513c57f22497cc7009c",
+        "shape_hash": "c52d797e76ea69107a56e9b645849b3b0af88f3c8a23dccf62bff5fbca71b0ae",
+        "size": 272
+      },
+      "original_name": "TServerNPC_serverMovedNPC_bool",
+      "original_string_refs": [
+        "def"
+      ],
+      "proposed_name": "v18_TServerNPC_serverMovedNPC_bool",
+      "semantic_match_already_present": false,
+      "source_basis": "server-NPC movement update and animation reset",
+      "spectron_current_name": "_ZN10LBgVgaqANQ10W9g1Ia82GuEb",
+      "spectron_default_name": false,
+      "spectron_ea": "0x18b3b0",
+      "spectron_metrics": {
+        "basic_block_count": 10,
+        "instruction_count": 79,
+        "mnemonic_hash": "c20a81074ad5a762f0022842d480e3ae754aa5dfb9abcd4f1dc8e3392e6d1295",
+        "register_shape_hash": "bc8077142433920664b8a708471d105748f3f76433f73847fea90822996eb5f2",
+        "shape_hash": "c3c74dd7a346ddbe6294878ebad8fd427be3fdafd73164e5cbc4bfd8d823da01",
+        "size": 316
+      },
+      "spectron_string_refs": [
+        "def"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both parse the compact encoded NPC property stream with the same branches for images, head and body, weapon, GANI, movement, attachments, map and position, status, and event or hit-detection state.",
+        "The target retains the distinctive #c#, image-extension, def, head0.png, and sparringzone literals and calls the same adjacent NPC state paths.",
+        "The one-block difference from 180 to 181 is consistent with rebuilt string, list, and event wrappers in the target; the large parser role and branch sequence remain aligned."
+      ],
+      "match_kind": "manual-server-npc-state-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x186d48",
+      "original_metrics": {
+        "basic_block_count": 180,
+        "instruction_count": 1338,
+        "mnemonic_hash": "9852203d07cdb07ee025b93bda7e4dffb41e446ad95e6e8c43eaacab8e8c9409",
+        "register_shape_hash": "6f4815ee0092205c95ab13e1850cad6148cc4024aa10a4594ec2b8e4a03d0d6c",
+        "shape_hash": "ba841279ede93adfa2f8a18e20687c9d99bb5f0c5ba5dae6f04927e2972b5bb4",
+        "size": 5364
+      },
+      "original_name": "TServerNPC_setProperties_TString_const",
+      "original_string_refs": [
+        "#c#",
+        ".gif",
+        ".png",
+        "def",
+        "head",
+        "head0.png",
+        "sparringzone"
+      ],
+      "proposed_name": "v18_TServerNPC_setProperties_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "encoded server-NPC property parser",
+      "spectron_current_name": "_ZN10LBgVgaqANQ10Q3v7IaUAWzERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x18b4ec",
+      "spectron_metrics": {
+        "basic_block_count": 181,
+        "instruction_count": 1347,
+        "mnemonic_hash": "192c37a8a72092fa7513dc89979d861b5ffa0eb499a413afabf19f985a811b8f",
+        "register_shape_hash": "4048bac279a8bcedec2b2f5a591a32e7511fffa2b4d95de405a743a51a45fc5d",
+        "shape_hash": "535f0a28137f51f83ee2c5f33ebccbc7c690b92671ad9bb4cf5f1d53504e29b0",
+        "size": 5400
+      },
+      "spectron_string_refs": [
+        "#c#",
+        ".gif",
+        ".png",
+        "def",
+        "head",
+        "head0.png",
+        "sparringzone"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both consume the queued NPC movement state, calculate the current step, update positions, select bomy idle, kick, and walk animations, and finish the movement sequence.",
+        "Both invoke the movementfinished event when the queue reaches its terminal state and preserve all five distinctive movement literals.",
+        "The exact 91-block shape and adjacent server-NPC movement context make this a stable role correspondence despite target wrapper changes."
+      ],
+      "match_kind": "manual-server-npc-state-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x188260",
+      "original_metrics": {
+        "basic_block_count": 91,
+        "instruction_count": 489,
+        "mnemonic_hash": "e0ef99e9d362256c271cecb0a35c332f37f1f3d5638c2a7bb40924c136ba04fd",
+        "register_shape_hash": "b91d8efaa9db62370e98770a309b9df7e64cdd2db976df087d23bf0ae0a3b187",
+        "shape_hash": "4fe69572efdd892e31b0b81cedd586c924ff0039a7aba251d6f49bfa2fedb4d8",
+        "size": 1968
+      },
+      "original_name": "TServerNPC_doNPCMove_void",
+      "original_string_refs": [
+        "bomy_",
+        "bomy_idle",
+        "bomy_kick",
+        "bomy_walk",
+        "movementfinished"
+      ],
+      "proposed_name": "v18_TServerNPC_doNPCMove_void",
+      "semantic_match_already_present": false,
+      "source_basis": "server-NPC movement queue and completion event",
+      "spectron_current_name": "_ZN10LBgVgaqANQ10aQS6IasKozEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x18ca28",
+      "spectron_metrics": {
+        "basic_block_count": 91,
+        "instruction_count": 496,
+        "mnemonic_hash": "a99057b7cfeea452b8288c3911c451fb08e1ae3823396c7c278b3e8eb4b6d323",
+        "register_shape_hash": "1c8c484e9b9f01bf1d5754fd1cab8bdd065bc792f5f7f23badba6b78a789db17",
+        "shape_hash": "6d4e63bdf5f491805273be24186ea03ae5a0c687360fb513846a22817d24e9f0",
+        "size": 1992
+      },
+      "spectron_string_refs": [
+        "bomy_",
+        "bomy_idle",
+        "bomy_kick",
+        "bomy_walk",
+        "movementfinished"
+      ]
+    }
+  ],
+  "artifact": "spectron_server_npc_state_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v1_saved.json",
+    "spectron_features_sha256": "a8d58f85502362316ee99a0f79c2cd7a4ad5d6fac94aca0ee75bd0d2965fc2a1"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The correspondence relies on preserved server-NPC state machines, callback-table context, distinctive literals, compatible block counts, and reviewed pseudocode rather than byte identity."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for server-NPC construction, shape callbacks, log naming, defaults, movement, and properties",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 7,
+    "high_confidence_count": 7,
+    "new_context_anchor_count": 7,
+    "target_default_name_count": 1
+  }
+}

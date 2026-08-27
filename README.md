@@ -757,6 +757,14 @@ weapon-image parsing. All six reopened successfully. The evidence is in
 `artifacts/spectron_server_player_state_manual_translation_anchors_20260826.json`,
 and the v69 database SHA-256 is recorded in the checkpoint.
 
+A sixty-eighth disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v70.i64`,
+adds seven reviewed server-NPC anchors for construction, shape callbacks, log
+naming, default images, movement updates, and encoded properties. All seven
+reopened successfully. The evidence is in
+`artifacts/spectron_server_npc_state_manual_translation_anchors_20260826.json`,
+and the v70 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
