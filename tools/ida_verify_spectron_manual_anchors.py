@@ -52,6 +52,18 @@ def main() -> None:
                 }
             )
             continue
+        if anchor.get("spectron_function_end"):
+            expected_end = int(anchor["spectron_function_end"], 16)
+            if function.end_ea != expected_end:
+                failures.append(
+                    {
+                        "spectron_ea": anchor["spectron_ea"],
+                        "expected_function_end": anchor["spectron_function_end"],
+                        "actual_function_end": "0x%x" % function.end_ea,
+                        "error": "function boundary mismatch",
+                    }
+                )
+                continue
         if actual_name != expected_name or actual_ea != ea:
             failures.append(
                 {
