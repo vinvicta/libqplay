@@ -313,6 +313,8 @@ def main() -> None:
     parser.add_argument("--update-package-properties-residual-verification", type=Path)
     parser.add_argument("--gsfunctions-math-string-residual-anchors", type=Path)
     parser.add_argument("--gsfunctions-math-string-residual-verification", type=Path)
+    parser.add_argument("--gsfunctions-callback-residual-anchors", type=Path)
+    parser.add_argument("--gsfunctions-callback-residual-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -4356,6 +4358,34 @@ def main() -> None:
         result["gsfunctions_math_string_residual_anchors"] = gsfunctions_math_string_residual
         result["interpretation"].append(
             "The one-hundred-forty-sixth database revision also contains the separately reviewed GSFunctions math and string residual family."
+        )
+    gsfunctions_callback_residual = None
+    if args.gsfunctions_callback_residual_anchors or args.gsfunctions_callback_residual_verification:
+        if not args.gsfunctions_callback_residual_anchors or not args.gsfunctions_callback_residual_verification:
+            raise ValueError(
+                "GSFunctions callback residual anchors and verification must be supplied together"
+            )
+        gsfunctions_callback_residual_document = load(args.gsfunctions_callback_residual_anchors)
+        gsfunctions_callback_residual_verification = load(args.gsfunctions_callback_residual_verification)
+        if gsfunctions_callback_residual_document.get("artifact") != "spectron_gsfunctions_callback_residual_manual_translation_anchors_20260826":
+            raise ValueError("unexpected GSFunctions callback residual artifact")
+        if not gsfunctions_callback_residual_verification.get("verified"):
+            raise ValueError("GSFunctions callback residual reopen verification did not pass")
+        expected_gsfunctions_callback_residual = len(gsfunctions_callback_residual_document["anchors"])
+        if gsfunctions_callback_residual_verification["verified_name_count"] != expected_gsfunctions_callback_residual:
+            raise ValueError("GSFunctions callback residual verification count differs from artifact")
+        gsfunctions_callback_residual = {
+            "anchor_path": str(args.gsfunctions_callback_residual_anchors),
+            "anchor_sha256": sha256_path(args.gsfunctions_callback_residual_anchors),
+            "reopen_verification": str(args.gsfunctions_callback_residual_verification),
+            "anchor_count": expected_gsfunctions_callback_residual,
+            "verified_name_count": gsfunctions_callback_residual_verification["verified_name_count"],
+            "reopen_failure_count": gsfunctions_callback_residual_verification["failure_count"],
+        }
+    if gsfunctions_callback_residual is not None:
+        result["gsfunctions_callback_residual_anchors"] = gsfunctions_callback_residual
+        result["interpretation"].append(
+            "The one-hundred-forty-seventh database revision also contains the separately reviewed remaining GSFunctions callback family."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

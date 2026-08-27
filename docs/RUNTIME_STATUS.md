@@ -1428,6 +1428,19 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+207. The next IDA pass translated 13 remaining GSFunctions callbacks using
+    the preserved static script-table order and normalized function shape.
+    They cover `getstringkeys`, `callnpc`, map coordinates, image dimensions,
+    empty-global cleanup, arcsine and arccosine, `aindexof`, `echo`, `trace`,
+    and `findpathinarray`. Eight pairs are exact normalized-shape matches and
+    five are high-confidence layout-change matches. The target
+    `getstringkeys` pointer at `0x2111d8` had no IDA function boundary, so its
+    `0x2111d8..0x211424` range was materialized before labeling. All 13 labels
+    reopened successfully in the v148 disposable copy, which has 11,681
+    functions and 1,457 default `sub_` names. See
+    `artifacts/spectron_gsfunctions_callback_residual_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 206. The next IDA pass translated six exact-shape GSFunctions callbacks:
     `degtorad`, `radtodeg`, temporary-string cleanup, case-insensitive
     comparison, `uppercase`, and `lowercase`. It also materialized the
