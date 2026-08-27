@@ -1,0 +1,207 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both methods attach the font object, clamp glyph dimensions, clear the previous glyph bitmap and texture, choose the UTF-8 path when enabled, copy the glyph pixels row by row, construct the same `Font ` and code-name texture key, and fall back to a raw bitmap allocation when needed.",
+        "The target preserves the distinctive `Font ` and `#` literals and the same 14-block structure. It is 716 bytes and 178 instructions, compared with 688 bytes and 171 instructions in 1.8.",
+        "The target class-local method has the same arguments, field offsets, bitmap dimensions, palette setup, texture creation, and final pixel-copy path. The expanded target string and bitmap wrappers explain the small body increase."
+      ],
+      "match_kind": "manual-font-bitmap-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x10d038",
+      "original_metrics": {
+        "basic_block_count": 14,
+        "instruction_count": 171,
+        "mnemonic_hash": "3b61cc6d465c4ed95842c7593f8d8c7ad58e0a16896faf58ad787a0d5a1f0c31",
+        "register_shape_hash": "a80374e07a215f0b74449d9056660948ba47af446ca7f97cbad80a6c6c254881",
+        "shape_hash": "2d42387b86030265d13bd579f8d0e188bb776587e8ec5d6ae928c9d00f8a8030",
+        "size": 688
+      },
+      "original_name": "TFontCharInfo_setData_TFont_uchar_const_int_int_int_int_int_int",
+      "original_string_refs": [
+        "#",
+        "Font "
+      ],
+      "proposed_name": "v18_TFontCharInfo_setData_TFont_uchar_const_int_int_int_int_int_int",
+      "semantic_match_already_present": false,
+      "source_basis": "font glyph bitmap and texture setup",
+      "spectron_current_name": "_ZN10DFeOfaFXSU10u6glKaa0vBEP10TZf6gaQ3S_PKhiiiiii",
+      "spectron_default_name": false,
+      "spectron_ea": "0x10f988",
+      "spectron_metrics": {
+        "basic_block_count": 14,
+        "instruction_count": 178,
+        "mnemonic_hash": "42e3d07b86c0e87fdc21b4f0fb205d5cd20ccbac76efbcbd49269adcaf953cb3",
+        "register_shape_hash": "cce9700c5a883d9652d5c681135527d17344ab5b7134249fbe58f229b40880c4",
+        "shape_hash": "90995f4c16eaa4506b529c1d134ab5745e08ff8d47782582ec1c7a0afe78da26",
+        "size": 716
+      },
+      "spectron_string_refs": [
+        "#",
+        "Font "
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both generate the font atlas by walking character data, placing glyphs into the texture, reporting when a glyph cannot fit, and logging the resulting graphics texture dimensions.",
+        "The target retains all four distinctive literals: ` in texture of `, `, size `, `Couldn't fit font `, and `graphics`. Both bodies have 26 blocks. The target is 1052 bytes and 261 instructions, compared with 1016 bytes and 252 instructions in 1.8.",
+        "The target preserves the same atlas placement branches and calls the corresponding font-character setup method. This is a direct class-local translation with wrapper expansion."
+      ],
+      "match_kind": "manual-font-bitmap-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x10d4cc",
+      "original_metrics": {
+        "basic_block_count": 26,
+        "instruction_count": 252,
+        "mnemonic_hash": "29927247644126b32bc6c1a5752d83c27b7c23855c88b5e639c9e5515073246e",
+        "register_shape_hash": "658c76e625270edc3aeab037778aa8464bc360e34e92e2b79af52321c9728bf5",
+        "shape_hash": "1bc2ca78095630066200e19ad58d814dda520d5e79fde6586767e1228ed287f8",
+        "size": 1016
+      },
+      "original_name": "TFont_generateFontBitmap_void",
+      "original_string_refs": [
+        " in texture of ",
+        ", size ",
+        "Couldn't fit font ",
+        "graphics"
+      ],
+      "proposed_name": "v18_TFont_generateFontBitmap_void",
+      "semantic_match_already_present": false,
+      "source_basis": "font atlas generation and placement",
+      "spectron_current_name": "_ZN10TZf6gaQ3S_10fl7q4asNqlEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x10fe58",
+      "spectron_metrics": {
+        "basic_block_count": 26,
+        "instruction_count": 261,
+        "mnemonic_hash": "30f207067e2425428944ecfe632acf877f3a4f7b26dd2017ddbce4f875e412f7",
+        "register_shape_hash": "e38d3f9cd5d68d06df3968210a65c836c476033da5d76c203db5f37133e753a1",
+        "shape_hash": "13163c7bb1fb861dad07b50ce4a3ed7c5ba075e82b91b4fde0c8fd4822c0823c",
+        "size": 1052
+      },
+      "spectron_string_refs": [
+        " in texture of ",
+        ", size ",
+        "Couldn't fit font ",
+        "graphics"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both load a font from a system or resource path, choose a file stream or memory stream, initialize FreeType once, attempt the matching face constructor, release failed streams, clear the face on error, and report the same graphics error message.",
+        "The target retains `Failed to load font ` and `graphics`. The source has 36 blocks, 256 instructions, and 1032 bytes. The target has 34 blocks, 208 instructions, and 840 bytes because target resource and FreeType wrapper paths fold several source branches together.",
+        "The target still uses the same font path fields, resource update and download boundary, stream lifetime, FreeType initialization, and error cleanup. The semantic evidence is stronger than the changed block count."
+      ],
+      "match_kind": "manual-font-bitmap-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x110ca0",
+      "original_metrics": {
+        "basic_block_count": 36,
+        "instruction_count": 256,
+        "mnemonic_hash": "015b18a9aed1874bf306227d79278d3e3adf95b2df201629e31c1db201671c9a",
+        "register_shape_hash": "5de7a20b9026b92e492d42ea77eb9f1378157963cc373a956b2bac5fcc5bb97e",
+        "shape_hash": "2337eba4c8df1d6fb4b975e350a84f3970885ec8b76b8505869d246105ea8ff9",
+        "size": 1032
+      },
+      "original_name": "TFontData_load_void",
+      "original_string_refs": [
+        "Failed to load font ",
+        "graphics"
+      ],
+      "proposed_name": "v18_TFontData_load_void",
+      "semantic_match_already_present": false,
+      "source_basis": "font resource, stream, and FreeType loading",
+      "spectron_current_name": "_ZN10fUWH_a_9zm4loadEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x113540",
+      "spectron_metrics": {
+        "basic_block_count": 34,
+        "instruction_count": 208,
+        "mnemonic_hash": "7d61809b52cf4674edfaee50d783ec32f0daafa2b5b61a7f7d55aba4ebb23006",
+        "register_shape_hash": "ae6b39213e8cd7cc11a3281425e3df7b18b7cf89c5a16fa0e30973b73b4eb65d",
+        "shape_hash": "c994a1bb241fabbeb379b29086afa1f131fa04be73be7ed7ee5b36b5df20ce26",
+        "size": 840
+      },
+      "spectron_string_refs": [
+        "Failed to load font ",
+        "graphics"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both reject resources that cannot be loaded, create the guarded `LoadBitmap` profiler entry, obtain and validate the stream, guess a file type when the extension is absent, load the bitmap, retry with the guessed type when necessary, and force a redownload after failure.",
+        "The target preserves `LoadBitmap`, `Failed to load `, and `graphics`. Both bodies have 25 blocks. The source is 808 bytes and 199 instructions; the target is 932 bytes and 229 instructions.",
+        "The target keeps the same resource-object and stream fields, profiler push and pop, bitmap allocation, retry branch, error cleanup, and redownload call. The changed helper names are wrapper substitutions only."
+      ],
+      "match_kind": "manual-font-bitmap-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x115464",
+      "original_metrics": {
+        "basic_block_count": 25,
+        "instruction_count": 199,
+        "mnemonic_hash": "bc6eca96dff1b8973b1e55b013f539f3c33c4dc436f58087ce553431be78af4a",
+        "register_shape_hash": "dbf0c41089f1324eae97a876913d3593035e8e6eb21be362f3e1140744076225",
+        "shape_hash": "3ff7c1ed43145465787dcf5ed144153d281036b050c0bee856b9e852312e5fd8",
+        "size": 808
+      },
+      "original_name": "TBitmapLoader_load_TResourceObject",
+      "original_string_refs": [
+        "Failed to load ",
+        "LoadBitmap",
+        "graphics"
+      ],
+      "proposed_name": "v18_TBitmapLoader_load_TResourceObject",
+      "semantic_match_already_present": false,
+      "source_basis": "resource bitmap loading and retry",
+      "spectron_current_name": "_ZN10kM00HafgtE4loadEP10bNZvga2Awv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x117e4c",
+      "spectron_metrics": {
+        "basic_block_count": 25,
+        "instruction_count": 229,
+        "mnemonic_hash": "3b61da0ed42a3d43508437007c7a8087fec71f680f8e5b04aa02733d552f0b64",
+        "register_shape_hash": "f898f6fad199fe6d7d55c821859c3fbad41860128814b310823f855a2c2ed782",
+        "shape_hash": "a148a9c5bc73a2f5d797a3ac795966298f3147710c1f46d66b8719d78752c868",
+        "size": 932
+      },
+      "spectron_string_refs": [
+        "Failed to load ",
+        "LoadBitmap",
+        "graphics"
+      ]
+    }
+  ],
+  "artifact": "spectron_font_bitmap_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v1_saved.json",
+    "spectron_features_sha256": "a8d58f85502362316ee99a0f79c2cd7a4ad5d6fac94aca0ee75bd0d2965fc2a1"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The correspondences are supported by direct Hex-Rays pseudocode, distinctive font and bitmap literals, shared field use, class-local calls, and close control-flow metrics.",
+    "The target font-resource loader has a smaller block count because target resource and FreeType wrappers fold source branches together. That explicit version difference is recorded rather than hidden.",
+    "Changed byte sizes and instruction counts are recorded as version differences. No exact byte identity is claimed."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for glyph data, font atlases, font resources, and bitmap loading",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 4,
+    "high_confidence_count": 4,
+    "new_context_anchor_count": 4,
+    "target_default_name_count": 0
+  }
+}

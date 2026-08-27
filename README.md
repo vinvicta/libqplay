@@ -930,6 +930,15 @@ version difference. All five labels reopened successfully, and the v88
 database SHA-256 is recorded in the checkpoint. The evidence is in
 `artifacts/spectron_static_utility_manual_translation_anchors_20260826.json`.
 
+A v89 disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v89.i64`,
+adds four high-confidence font and bitmap anchors. They cover glyph data setup,
+font atlas generation, font resource loading, and bitmap resource loading with
+retry behavior. The target preserves the distinctive font, texture, profiler,
+and graphics messages. All four labels reopened successfully, and the v89
+database SHA-256 is recorded in the checkpoint. The evidence is in
+`artifacts/spectron_font_bitmap_manual_translation_anchors_20260826.json`.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
@@ -1112,6 +1121,9 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/spectron_static_utility_manual_translation_anchors_20260826.json`
   records the five reviewed statistics, profiler, GUI-style, ZIP-resource,
   and translation utility anchors.
+* `artifacts/spectron_font_bitmap_manual_translation_anchors_20260826.json`
+  records the four reviewed glyph, font-atlas, font-resource, and bitmap-loader
+  anchors.
 * `artifacts/spectron_json_folder_manual_translation_anchors_20260826.json`
   records the eight reviewed GIF/JPEG callbacks, recursive folder-loader
   helper, and YAJL JSON callbacks.
@@ -1411,6 +1423,9 @@ proves the local native TLS path, not a current live certificate or service.
   The `tools/generate_spectron_static_utility_anchors.py` generator records
   the reviewed statistics, profiler, GUI-style, ZIP-resource, and translation
   roles with exact metric and literal checks.
+  The `tools/generate_spectron_font_bitmap_anchors.py` generator records the
+  reviewed glyph, font-atlas, font-resource, and bitmap-loader roles with exact
+  metric and literal checks.
   The `tools/generate_spectron_socket_behavior_comparison.py` generator
   records changed-size socket behavior without forcing an exact-match label.
   `tools/ida_apply_spectron_translation.py` and

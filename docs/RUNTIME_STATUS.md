@@ -1048,6 +1048,14 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_static_utility_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+149. Clean IDA review added four high-confidence font and bitmap anchors. The
+     set covers glyph setup, font atlas generation, font resource loading, and
+     bitmap loading with retry behavior. All four reopened successfully in
+     the v89 disposable copy. The full semantic-label reopen check still
+     passed with zero failures. See
+     `artifacts/spectron_font_bitmap_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

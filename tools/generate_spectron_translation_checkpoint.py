@@ -197,6 +197,8 @@ def main() -> None:
     parser.add_argument("--resource-parser-verification", type=Path)
     parser.add_argument("--static-utility-anchors", type=Path)
     parser.add_argument("--static-utility-verification", type=Path)
+    parser.add_argument("--font-bitmap-anchors", type=Path)
+    parser.add_argument("--font-bitmap-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2616,6 +2618,34 @@ def main() -> None:
         result["static_utility_anchors"] = static_utility
         result["interpretation"].append(
             "The eighty-sixth database revision also contains the separately reviewed statistics, profiler, GUI-style, ZIP-resource, and translation utility anchors."
+        )
+    font_bitmap = None
+    if args.font_bitmap_anchors or args.font_bitmap_verification:
+        if not args.font_bitmap_anchors or not args.font_bitmap_verification:
+            raise ValueError(
+                "font-bitmap anchors and font-bitmap verification must be supplied together"
+            )
+        font_bitmap_document = load(args.font_bitmap_anchors)
+        font_bitmap_verification = load(args.font_bitmap_verification)
+        if font_bitmap_document.get("artifact") != "spectron_font_bitmap_manual_translation_anchors_20260826":
+            raise ValueError("unexpected font-bitmap anchor artifact")
+        if not font_bitmap_verification.get("verified"):
+            raise ValueError("font-bitmap anchor reopen verification did not pass")
+        expected_font_bitmap = len(font_bitmap_document["anchors"])
+        if font_bitmap_verification["verified_name_count"] != expected_font_bitmap:
+            raise ValueError("font-bitmap verification count differs from artifact")
+        font_bitmap = {
+            "anchor_path": str(args.font_bitmap_anchors),
+            "anchor_sha256": sha256_path(args.font_bitmap_anchors),
+            "reopen_verification": str(args.font_bitmap_verification),
+            "anchor_count": expected_font_bitmap,
+            "verified_name_count": font_bitmap_verification["verified_name_count"],
+            "reopen_failure_count": font_bitmap_verification["failure_count"],
+        }
+    if font_bitmap is not None:
+        result["font_bitmap_anchors"] = font_bitmap
+        result["interpretation"].append(
+            "The eighty-seventh database revision also contains the separately reviewed font glyph, atlas, font-resource, and bitmap-loader anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

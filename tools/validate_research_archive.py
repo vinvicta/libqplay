@@ -317,6 +317,9 @@ def main():
     spectron_static_utility_anchors = load_json(
         "artifacts/spectron_static_utility_manual_translation_anchors_20260826.json"
     )
+    spectron_font_bitmap_anchors = load_json(
+        "artifacts/spectron_font_bitmap_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -1948,6 +1951,16 @@ def main():
     check("Spectron static-utility semantic overlap", spectron_static_utility_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron static-utility default targets", spectron_static_utility_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron font-bitmap artifact",
+        spectron_font_bitmap_anchors["artifact"],
+        "spectron_font_bitmap_manual_translation_anchors_20260826",
+    )
+    check("Spectron font-bitmap network", spectron_font_bitmap_anchors["network_contacted"], False)
+    check("Spectron font-bitmap total", spectron_font_bitmap_anchors["summary"]["anchor_count"], 4)
+    check("Spectron font-bitmap high confidence", spectron_font_bitmap_anchors["summary"]["high_confidence_count"], 4)
+    check("Spectron font-bitmap semantic overlap", spectron_font_bitmap_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron font-bitmap default targets", spectron_font_bitmap_anchors["summary"]["target_default_name_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -2041,7 +2054,8 @@ def main():
     check("Spectron checkpoint TPlayer-core anchor count", spectron_checkpoint["tplayer_core_anchors"]["verified_name_count"], 2)
     check("Spectron checkpoint resource-parser anchor count", spectron_checkpoint["resource_parser_anchors"]["verified_name_count"], 3)
     check("Spectron checkpoint static-utility anchor count", spectron_checkpoint["static_utility_anchors"]["verified_name_count"], 5)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "0b27f7a9e63f114eb4db2d59dd677c77002c03ab018c6dc75b53eb4d30f18249")
+    check("Spectron checkpoint font-bitmap anchor count", spectron_checkpoint["font_bitmap_anchors"]["verified_name_count"], 4)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "733ada106f4a4cf74ca88ec309d4b0ae617d601767b197c1acbae4caf51ff1d0")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -2189,6 +2203,7 @@ def main():
         spectron_tplayer_core_anchors,
         spectron_resource_parser_anchors,
         spectron_static_utility_anchors,
+        spectron_font_bitmap_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
