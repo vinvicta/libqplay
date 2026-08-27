@@ -1240,6 +1240,13 @@ This is the short handoff view. The full reasoning and command history are in
      See
      `artifacts/spectron_sound_runtime_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
+174. The next IDA pass translated ten residual `TPixelBuffer` methods covering
+     field setters, pointer clearing, lazy pixel allocation, and the base
+     texture hooks. The labels reopened successfully in the v114 disposable
+     copy. The three empty base hooks and the indirect rectangle update remain
+     explicitly separate from the derived OpenGL implementation. See
+     `artifacts/spectron_pixelbuffer_residual_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
 ## Not verified
 

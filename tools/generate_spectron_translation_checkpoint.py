@@ -247,6 +247,8 @@ def main() -> None:
     parser.add_argument("--window-residual-verification", type=Path)
     parser.add_argument("--sound-runtime-anchors", type=Path)
     parser.add_argument("--sound-runtime-verification", type=Path)
+    parser.add_argument("--pixelbuffer-residual-anchors", type=Path)
+    parser.add_argument("--pixelbuffer-residual-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3366,6 +3368,34 @@ def main() -> None:
         result["sound_runtime_anchors"] = sound_runtime
         result["interpretation"].append(
             "The one-hundred-eleventh database revision also contains the separately reviewed sound-manager dispatch, note-pitch, and Java playback anchors."
+        )
+    pixelbuffer_residual = None
+    if args.pixelbuffer_residual_anchors or args.pixelbuffer_residual_verification:
+        if not args.pixelbuffer_residual_anchors or not args.pixelbuffer_residual_verification:
+            raise ValueError(
+                "pixelbuffer residual anchors and pixelbuffer residual verification must be supplied together"
+            )
+        pixelbuffer_residual_document = load(args.pixelbuffer_residual_anchors)
+        pixelbuffer_residual_verification = load(args.pixelbuffer_residual_verification)
+        if pixelbuffer_residual_document.get("artifact") != "spectron_pixelbuffer_residual_manual_translation_anchors_20260826":
+            raise ValueError("unexpected pixelbuffer residual anchor artifact")
+        if not pixelbuffer_residual_verification.get("verified"):
+            raise ValueError("pixelbuffer residual anchor reopen verification did not pass")
+        expected_pixelbuffer_residual = len(pixelbuffer_residual_document["anchors"])
+        if pixelbuffer_residual_verification["verified_name_count"] != expected_pixelbuffer_residual:
+            raise ValueError("pixelbuffer residual verification count differs from artifact")
+        pixelbuffer_residual = {
+            "anchor_path": str(args.pixelbuffer_residual_anchors),
+            "anchor_sha256": sha256_path(args.pixelbuffer_residual_anchors),
+            "reopen_verification": str(args.pixelbuffer_residual_verification),
+            "anchor_count": expected_pixelbuffer_residual,
+            "verified_name_count": pixelbuffer_residual_verification["verified_name_count"],
+            "reopen_failure_count": pixelbuffer_residual_verification["failure_count"],
+        }
+    if pixelbuffer_residual is not None:
+        result["pixelbuffer_residual_anchors"] = pixelbuffer_residual
+        result["interpretation"].append(
+            "The one-hundred-twelfth database revision also contains the separately reviewed TPixelBuffer field, allocation, and base texture-hook anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
