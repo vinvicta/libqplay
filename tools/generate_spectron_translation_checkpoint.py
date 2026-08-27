@@ -201,6 +201,8 @@ def main() -> None:
     parser.add_argument("--font-bitmap-verification", type=Path)
     parser.add_argument("--mng-animation-anchors", type=Path)
     parser.add_argument("--mng-animation-verification", type=Path)
+    parser.add_argument("--script-machine-tail-anchors", type=Path)
+    parser.add_argument("--script-machine-tail-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2676,6 +2678,34 @@ def main() -> None:
         result["mng_animation_anchors"] = mng_animation
         result["interpretation"].append(
             "The eighty-eighth database revision also contains the separately reviewed MNG animation-step decoder anchor."
+        )
+    script_machine_tail = None
+    if args.script_machine_tail_anchors or args.script_machine_tail_verification:
+        if not args.script_machine_tail_anchors or not args.script_machine_tail_verification:
+            raise ValueError(
+                "script-machine-tail anchors and script-machine-tail verification must be supplied together"
+            )
+        script_machine_tail_document = load(args.script_machine_tail_anchors)
+        script_machine_tail_verification = load(args.script_machine_tail_verification)
+        if script_machine_tail_document.get("artifact") != "spectron_script_machine_tail_manual_translation_anchors_20260826":
+            raise ValueError("unexpected script-machine-tail anchor artifact")
+        if not script_machine_tail_verification.get("verified"):
+            raise ValueError("script-machine-tail anchor reopen verification did not pass")
+        expected_script_machine_tail = len(script_machine_tail_document["anchors"])
+        if script_machine_tail_verification["verified_name_count"] != expected_script_machine_tail:
+            raise ValueError("script-machine-tail verification count differs from artifact")
+        script_machine_tail = {
+            "anchor_path": str(args.script_machine_tail_anchors),
+            "anchor_sha256": sha256_path(args.script_machine_tail_anchors),
+            "reopen_verification": str(args.script_machine_tail_verification),
+            "anchor_count": expected_script_machine_tail,
+            "verified_name_count": script_machine_tail_verification["verified_name_count"],
+            "reopen_failure_count": script_machine_tail_verification["failure_count"],
+        }
+    if script_machine_tail is not None:
+        result["script_machine_tail_anchors"] = script_machine_tail
+        result["interpretation"].append(
+            "The eighty-ninth database revision also contains the separately reviewed script-machine parameter-preparation and native callback-dispatch anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

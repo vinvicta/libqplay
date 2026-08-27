@@ -1064,6 +1064,14 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_mng_animation_manual_translation_anchor_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+151. The following IDA pass translated two adjacent script-machine methods:
+     function-parameter preparation and native callback dispatch. The target
+     keeps the same stack conversions, callback packing, and result updates,
+     while adding newer string handling and an `e` parameter type. Both labels
+     reopened successfully in the v91 disposable copy. See
+     `artifacts/spectron_script_machine_tail_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

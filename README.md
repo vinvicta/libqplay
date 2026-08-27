@@ -948,6 +948,15 @@ as a rebuild difference. The label reopened successfully, and the v90 database
 SHA-256 is recorded in the checkpoint. The evidence is in
 `artifacts/spectron_mng_animation_manual_translation_anchor_20260826.json`.
 
+A v91 disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v91.i64`,
+adds two high-confidence script-machine anchors. They cover function-parameter
+conversion and native callback dispatch. The target keeps the same stack type
+conversions, callback packing, and result-slot updates, while adding newer
+string handling and an `e` parameter type. Both labels reopened successfully,
+and the v91 database SHA-256 is recorded in the checkpoint. The evidence is in
+`artifacts/spectron_script_machine_tail_manual_translation_anchors_20260826.json`.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
@@ -1135,6 +1144,8 @@ proves the local native TLS path, not a current live certificate or service.
   anchors.
 * `artifacts/spectron_mng_animation_manual_translation_anchor_20260826.json`
   records the reviewed MNG animation-step decoder anchor.
+* `artifacts/spectron_script_machine_tail_manual_translation_anchors_20260826.json`
+  records the two reviewed script-machine parameter and native callback anchors.
 * `artifacts/spectron_json_folder_manual_translation_anchors_20260826.json`
   records the eight reviewed GIF/JPEG callbacks, recursive folder-loader
   helper, and YAJL JSON callbacks.
@@ -1440,6 +1451,9 @@ proves the local native TLS path, not a current live certificate or service.
   The `tools/generate_spectron_mng_animation_anchor.py` generator records the
   reviewed MNG animation-step decoder with exact metric, call-count, and
   adjacent-cluster checks.
+  The `tools/generate_spectron_script_machine_tail_anchors.py` generator records
+  the reviewed script-machine parameter and native callback roles with exact
+  metric, call-count, and adjacency checks.
   The `tools/generate_spectron_socket_behavior_comparison.py` generator
   records changed-size socket behavior without forcing an exact-match label.
   `tools/ida_apply_spectron_translation.py` and
