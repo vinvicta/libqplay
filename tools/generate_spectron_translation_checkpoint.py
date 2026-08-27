@@ -135,6 +135,8 @@ def main() -> None:
     parser.add_argument("--particle-verification", type=Path)
     parser.add_argument("--showimg-anchors", type=Path)
     parser.add_argument("--showimg-verification", type=Path)
+    parser.add_argument("--showimg-property-anchors", type=Path)
+    parser.add_argument("--showimg-property-verification", type=Path)
     parser.add_argument("--particle-emitter-anchors", type=Path)
     parser.add_argument("--particle-emitter-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
@@ -1896,6 +1898,34 @@ def main() -> None:
         result["showimg_anchors"] = showimg
         result["interpretation"].append(
             "The fifty-fifth database revision also contains the separately reviewed TShowImg serialization and network-property anchors."
+        )
+    showimg_property = None
+    if args.showimg_property_anchors or args.showimg_property_verification:
+        if not args.showimg_property_anchors or not args.showimg_property_verification:
+            raise ValueError(
+                "ShowImg property anchors and ShowImg property verification must be supplied together"
+            )
+        showimg_property_document = load(args.showimg_property_anchors)
+        showimg_property_verification = load(args.showimg_property_verification)
+        if showimg_property_document.get("artifact") != "spectron_showimg_property_manual_translation_anchors_20260827":
+            raise ValueError("unexpected ShowImg property anchor artifact")
+        if not showimg_property_verification.get("verified"):
+            raise ValueError("ShowImg property anchor reopen verification did not pass")
+        expected_showimg_property = len(showimg_property_document["anchors"])
+        if showimg_property_verification["verified_name_count"] != expected_showimg_property:
+            raise ValueError("ShowImg property verification count differs from artifact")
+        showimg_property = {
+            "anchor_path": str(args.showimg_property_anchors),
+            "anchor_sha256": sha256_path(args.showimg_property_anchors),
+            "reopen_verification": str(args.showimg_property_verification),
+            "anchor_count": expected_showimg_property,
+            "verified_name_count": showimg_property_verification["verified_name_count"],
+            "reopen_failure_count": showimg_property_verification["failure_count"],
+        }
+    if showimg_property is not None:
+        result["showimg_property_anchors"] = showimg_property
+        result["interpretation"].append(
+            "The one-hundred-sixty-fifth database revision also contains the separately reviewed complete TShowImg property callback table anchors."
         )
     particle_emitter = None
     if args.particle_emitter_anchors or args.particle_emitter_verification:

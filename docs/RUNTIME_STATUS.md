@@ -1428,6 +1428,20 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+223. The next IDA pass translated the 85 reviewed `TShowImg` property
+    callbacks from the identical 48-name registration tables. The source
+    table is at `0x389fa0`, the Spectron table is at `0x39d0f0`, and each
+    record is `0x30` bytes with getter and setter pointers at `+0x10` and
+    `+0x18`. Eighty-four rows match complete normalized fingerprints, and
+    the `code` getter is a documented layout change. The three null setters
+    are `actor`, `imageindex`, and `emitter`; the `code` setter preserves the
+    existing `v18_TGaniParam_writeFloat_double` alias. All 85 rows reopened
+    successfully in the v165 disposable copy, which has 11,694 functions,
+    3,641 high-confidence labels, and 1,264 default `sub_` names. See
+    `artifacts/spectron_showimg_property_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_showimg_property_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 222. The next IDA pass translated the final seven named `TServerPlayer` rows:
     the attached-object setter, nickname cleanup, D0 deleting destructor,
     both static initializers, and the local X and Y setters. The attachment

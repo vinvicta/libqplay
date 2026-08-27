@@ -3444,6 +3444,76 @@ functions. The v108 database has 1,684 remaining default `sub_` names. Its
 SHA-256 is
 `8350a43be6b31306954e34a17f77d742c8d1702015d671019d2bf2dd6c1bb1e1`.
 
+## Spectron TShowImg property callback table
+
+The `TShowImgProperties` registry gives a direct translation anchor for the
+show-image API. The source table is at `0x389fa0`; the obfuscated Spectron
+table for `eODlJaQ5OL` is at `0x39d0f0`. Both tables use `0x30`-byte records.
+The name pointer is at record offset `+0x0`, flags at `+0x8`, the getter at
+`+0x10`, and the setter at `+0x18`. The common metadata pointer and trailing
+fields are retained in the machine-readable record as well.
+
+The decoded property names are identical and remain in the same 48-slot order:
+
+```text
+actor, ani, dir, playerlook, image, polygon, dimension, font,
+shadowoffset, shadowcolor, style, text, textshadow, alpha, blue, code,
+green, height, imageindex, layer, mode, parth, partw, partx, party,
+position, red, rotation, rotationcenter, spin, stretchx, stretchy,
+useowncenter, width, x, y, z, zoom, attachoffset, attachtoowner,
+emitter, uniqueparticle, angle, lifetime, movementvector, speed, zangle,
+sound
+```
+
+That gives 96 possible getter and setter slots. Ninety-three are non-null.
+The three null setters are `actor`, `imageindex`, and `emitter`. The table
+review produced 85 high-confidence source-to-target rows. Eight rows were
+already represented by earlier semantic or manual aliases, while the other
+rows received readable `v18_TShowImg_` labels in the v165 disposable IDA
+copy.
+
+| Property role | 1.8 callback | Source | Spectron target | Evidence |
+| --- | --- | ---: | ---: | --- |
+| actor getter | `TShowImg_get_actor` | `0x2340f8` | `0x23de98` | direct table pointer, exact 8-byte shape |
+| alpha setter | `TShowImg_set_alpha` | `0x234108` | `0x23dea8` | direct pointer and clamped float store |
+| dimension setter | `TShowImg_setDimension_int` | `0x237a54` | `0x2418f4` | direct pointer, exact shape |
+| position getter | `TShowImg_get_position` | `0x237858` | `0x2416f8` | direct pointer, exact shape |
+| stretchx setter | `TShowImg_set_stretchx` | `0x234e38` | `0x23ecc0` | table role resolves reordered body |
+| attachoffset setter | `TShowImg_set_attachoffset` | `0x2380b8` | `0x241f58` | table role resolves reordered body |
+| sound setter | `TShowImg_set_sound` | `0x234410` | `0x23e168` | direct pointer and member update |
+| code getter | `TShowImg_get_code` | `0x234140` | `0x23e40c` | virtual slot preserved, wrapper grew |
+| code setter | `TShowImg_set_code` | `0x234168` | `0x23e3c0` | shared target `v18_TGaniParam_writeFloat_double` |
+
+Eighty-four rows have identical complete normalized fingerprints. The exact
+fields include size, instruction count, basic-block count, branches, calls,
+mnemonic hash, opcode shape, register shape, overall shape, and string
+references. Their address deltas fall into six groups: `+0x9d58` for 53 rows,
+`+0x9da0` for six, `+0x9df0` for two, `+0x9e88` for two, `+0x9ea0` for 21,
+and `+0xa2cc` for the `code` getter. This spread is a useful warning against
+copying symbols by source address plus one global constant.
+
+The `code` getter is the one layout-aware row. The 1.8 callback is a 40-byte
+wrapper around virtual slot `+184`. Spectron's 76-byte callback still uses
+that slot, then converts the returned value and performs the target string
+cleanup sequence. Its setter record points at the already translated
+`v18_TGaniParam_writeFloat_double` implementation rather than at a unique
+`TShowImg` body. Keeping that existing name preserves the shared target
+context and avoids pretending that one native body implements only one
+property role.
+
+The full review is stored in
+`artifacts/spectron_showimg_property_manual_translation_anchors_20260827.json`.
+The table-driven generator is
+`tools/generate_spectron_showimg_property_anchors.py`, and
+`tools/ida_dump_property_table.py` provides the read-only IDA table dump used
+to verify the decoded names and callback fields. The labels are persisted in
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v165.i64`,
+whose SHA-256 is
+`284432daf4efd99359cd41c2dc436f554c65b43f4e1d579bab4b3030fb72c153`.
+The 85-row manual reopen check and the full semantic reopen check both report
+zero failures. This is an analysis overlay only. It does not modify the
+Spectron APK or change runtime behavior.
+
 ## Spectron TServerPlayer lifecycle and property-runtime tail
 
 The v164 pass closes the seven named `TServerPlayer` rows that were still

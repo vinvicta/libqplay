@@ -224,6 +224,9 @@ def main():
     spectron_showimg_anchors = load_json(
         "artifacts/spectron_showimg_manual_translation_anchors_20260826.json"
     )
+    spectron_showimg_property_anchors = load_json(
+        "artifacts/spectron_showimg_property_manual_translation_anchors_20260827.json"
+    )
     spectron_particle_emitter_anchors = load_json(
         "artifacts/spectron_particle_emitter_manual_translation_anchors_20260826.json"
     )
@@ -1859,6 +1862,22 @@ def main():
     check("Spectron ShowImg semantic overlap", spectron_showimg_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron ShowImg default targets", spectron_showimg_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron ShowImg property artifact",
+        spectron_showimg_property_anchors["artifact"],
+        "spectron_showimg_property_manual_translation_anchors_20260827",
+    )
+    check("Spectron ShowImg property network", spectron_showimg_property_anchors["network_contacted"], False)
+    check("Spectron ShowImg property count", spectron_showimg_property_anchors["summary"]["property_count"], 48)
+    check("Spectron ShowImg property non-null callbacks", spectron_showimg_property_anchors["summary"]["non_null_callback_count"], 93)
+    check("Spectron ShowImg property total", spectron_showimg_property_anchors["summary"]["anchor_count"], 85)
+    check("Spectron ShowImg property high confidence", spectron_showimg_property_anchors["summary"]["high_confidence_count"], 85)
+    check("Spectron ShowImg property semantic overlap", spectron_showimg_property_anchors["summary"]["already_in_semantic_map"], 8)
+    check("Spectron ShowImg property default targets", spectron_showimg_property_anchors["summary"]["target_default_name_count"], 69)
+    check("Spectron ShowImg property exact-shape count", spectron_showimg_property_anchors["summary"]["exact_shape_anchor_count"], 84)
+    check("Spectron ShowImg property layout-change count", spectron_showimg_property_anchors["summary"]["layout_change_anchor_count"], 1)
+    check("Spectron ShowImg property existing context count", spectron_showimg_property_anchors["summary"]["existing_context_count"], 8)
+    check("Spectron ShowImg property shared target count", spectron_showimg_property_anchors["summary"]["shared_target_context_count"], 1)
+    check(
         "Spectron particle-emitter artifact",
         spectron_particle_emitter_anchors["artifact"],
         "spectron_particle_emitter_manual_translation_anchors_20260826",
@@ -3016,7 +3035,7 @@ def main():
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1333)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1264)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -3073,6 +3092,7 @@ def main():
     check("Spectron checkpoint tiles-update anchor count", spectron_checkpoint["tiles_update_anchors"]["verified_name_count"], 8)
     check("Spectron checkpoint particle anchor count", spectron_checkpoint["particle_anchors"]["verified_name_count"], 5)
     check("Spectron checkpoint ShowImg anchor count", spectron_checkpoint["showimg_anchors"]["verified_name_count"], 3)
+    check("Spectron checkpoint ShowImg property anchor count", spectron_checkpoint["showimg_property_anchors"]["verified_name_count"], 85)
     check("Spectron checkpoint particle-emitter anchor count", spectron_checkpoint["particle_emitter_anchors"]["verified_name_count"], 2)
     check("Spectron checkpoint server-animation anchor count", spectron_checkpoint["server_animation_anchors"]["verified_name_count"], 3)
     check("Spectron checkpoint player-lifecycle anchor count", spectron_checkpoint["player_lifecycle_anchors"]["verified_name_count"], 2)
@@ -3178,7 +3198,7 @@ def main():
     check("Spectron checkpoint TServerPlayer property-block anchor count", spectron_checkpoint["tserverplayer_property_block_anchors"]["verified_name_count"], 39)
     check("Spectron checkpoint TServerPlayer residual anchor count", spectron_checkpoint["tserverplayer_residual_anchors"]["verified_name_count"], 25)
     check("Spectron checkpoint TServerPlayer tail anchor count", spectron_checkpoint["tserverplayer_tail_anchors"]["verified_name_count"], 7)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "321b0d07651f463e128399cc3e0e0f56669394cd6ba97ed1c13224b6a5462cc5")
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "284432daf4efd99359cd41c2dc436f554c65b43f4e1d579bab4b3030fb72c153")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
