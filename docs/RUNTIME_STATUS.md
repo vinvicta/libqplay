@@ -1428,6 +1428,14 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+202. The next IDA pass translated 20 exact-shape `TClient` and
+    `TUpdatePackage` accessors, covering the base-package pointer, download
+    counters, package flags and numeric fields, and six string getters. All
+    20 labels reopened successfully in the v142 disposable copy. They replace
+    20 default `sub_` names, leaving 1,475. See
+    `artifacts/spectron_update_package_accessor_residual_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 201. The next IDA pass translated seven exact-shape client-thread helpers:
     socket locking, incoming reads, incoming and outgoing queue cleanup,
     the thread-disable guard, and outgoing sends. All seven labels reopened

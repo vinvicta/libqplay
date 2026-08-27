@@ -3444,6 +3444,43 @@ functions. The v108 database has 1,684 remaining default `sub_` names. Its
 SHA-256 is
 `8350a43be6b31306954e34a17f77d742c8d1702015d671019d2bf2dd6c1bb1e1`.
 
+## Spectron TClient and TUpdatePackage accessor residual anchors
+
+The v142 pass translated the ordered accessor block from the client base
+package through the update-package description field.
+
+| 1.8 role | Source | Spectron target | Target | Evidence |
+| --- | ---: | --- | ---: | --- |
+| base-package pointer | `0x208a70` | `sub_20EC08` | `0x20ec08` | global pointer read |
+| download-list count | `0x208a80` | `sub_20EC18` | `0x20ec18` | list count read |
+| completion byte | `0x208a94` | `sub_20EC2C` | `0x20ec2c` | field +248 |
+| downloaded bytes | `0x208a9c` | `sub_20EC34` | `0x20ec34` | field +228 |
+| file-list count | `0x208aa4` | `sub_20EC3C` | `0x20ec3c` | nested count at +200 |
+| dword field | `0x208ab0` | `sub_20EC48` | `0x20ec48` | field +236 |
+| dword field | `0x208ab8` | `sub_20EC50` | `0x20ec50` | field +232 |
+| byte field | `0x208ac0` | `sub_20EC58` | `0x20ec58` | field +249 |
+| double field | `0x208ac8` | `sub_20EC60` | `0x20ec60` | field +216 |
+| qword field | `0x208ad0` | `sub_20EC68` | `0x20ec68` | field +128 |
+| protect-overwrite flag | `0x208ad8` | `sub_20EC70` | `0x20ec70` | `PROTECTOVERWRITE` |
+| total bytes | `0x208ae0` | `sub_20EC78` | `0x20ec78` | field +224 |
+| checksum flag | `0x208ae8` | `sub_20EC80` | `0x20ec80` | `USECHECKSUM` |
+| version value | `0x208af0` | `sub_20EC88` | `0x20ec88` | `VERSION` |
+| platform string | `0x208af8` | `sub_20EC90` | `0x20ec90` | `TString` copy |
+| package name | `0x208b28` | `sub_20ECC0` | `0x20ecc0` | `TString` copy |
+| package mode | `0x208b58` | `sub_20ECF0` | `0x20ecf0` | `TString` copy |
+| auxiliary string | `0x208b88` | `sub_20ED20` | `0x20ed20` | field +240 |
+| package filename | `0x208bb8` | `sub_20ED50` | `0x20ed50` | `TString` copy |
+| description string | `0x208be8` | `sub_20ED80` | `0x20ed80` | `TString` copy |
+
+All twenty pairs have identical normalized metrics and hashes. The target
+functions were default `sub_` entries, so these aliases remove twenty
+default names. The six string getters retain the same output initialization
+and embedded-field assignment through `C8THgaTQxF::operator=`. The field
+names that remain offset-based are intentionally conservative.
+
+Evidence is stored in
+`artifacts/spectron_update_package_accessor_residual_manual_translation_anchors_20260826.json`.
+
 ## Spectron client-thread residual anchors
 
 The v141 pass translated seven client-thread helpers that were still unnamed
