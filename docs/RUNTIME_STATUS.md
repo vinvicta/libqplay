@@ -1471,6 +1471,17 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_client_environment_restart_state_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+245. The next IDA pass translated `TParticleEmitter_initStaticScriptVars_void`.
+    Source `0x23b348` maps to target `0x2451f4`, which constructs the target
+    modifier and emitter property classes already matched to the 1.8
+    constructors. The pair is an exact normalized-shape match with 76 bytes,
+    19 instructions, one block, five branches, four calls, and one return.
+    The v186 copy has 11,694 functions, 3,641 high-confidence labels, and
+    1,233 default `sub_` names, with zero semantic reopen failures. See
+    `artifacts/spectron_particle_emitter_script_vars_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_particle_emitter_script_vars_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 243. The next IDA pass translated two `TClientEnvironment` profiler cleanup
     callbacks. Source `0x15c620` maps to target `0x15f678`, where the target
     `runTimers` method registers the callback with `atexit`; source `0x15c62c`

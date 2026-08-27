@@ -293,6 +293,9 @@ def main():
     spectron_particle_emitter_anchors = load_json(
         "artifacts/spectron_particle_emitter_manual_translation_anchors_20260826.json"
     )
+    spectron_particle_emitter_script_vars_anchors = load_json(
+        "artifacts/spectron_particle_emitter_script_vars_manual_translation_anchors_20260827.json"
+    )
     spectron_server_animation_anchors = load_json(
         "artifacts/spectron_server_animation_manual_translation_anchors_20260826.json"
     )
@@ -2587,6 +2590,49 @@ def main():
     check("Spectron particle-emitter semantic overlap", spectron_particle_emitter_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron particle-emitter default targets", spectron_particle_emitter_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron particle-emitter script-vars artifact",
+        spectron_particle_emitter_script_vars_anchors["artifact"],
+        "spectron_particle_emitter_script_vars_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron particle-emitter script-vars network",
+        spectron_particle_emitter_script_vars_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron particle-emitter script-vars total",
+        spectron_particle_emitter_script_vars_anchors["summary"]["anchor_count"],
+        1,
+    )
+    check(
+        "Spectron particle-emitter script-vars high confidence",
+        spectron_particle_emitter_script_vars_anchors["summary"]["high_confidence_count"],
+        1,
+    )
+    check(
+        "Spectron particle-emitter script-vars semantic overlap",
+        spectron_particle_emitter_script_vars_anchors["summary"]["already_in_semantic_map"],
+        0,
+    )
+    check(
+        "Spectron particle-emitter script-vars exact-shape count",
+        spectron_particle_emitter_script_vars_anchors["summary"]["exact_shape_anchor_count"],
+        1,
+    )
+    check(
+        "Spectron particle-emitter script-vars default targets",
+        spectron_particle_emitter_script_vars_anchors["summary"]["target_default_name_count"],
+        0,
+    )
+    check(
+        "Spectron particle-emitter script-vars target",
+        {
+            row["original_name"]: row
+            for row in spectron_particle_emitter_script_vars_anchors["anchors"]
+        }["TParticleEmitter_initStaticScriptVars_void"]["spectron_ea"],
+        "0x2451f4",
+    )
+    check(
         "Spectron server-animation artifact",
         spectron_server_animation_anchors["artifact"],
         "spectron_server_animation_manual_translation_anchors_20260826",
@@ -3917,7 +3963,8 @@ def main():
     check("Spectron checkpoint client-environment graphics anchor count", spectron_checkpoint["client_environment_graphics_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint client-environment static-clear anchor count", spectron_checkpoint["client_environment_static_clear_anchors"]["verified_name_count"], 2)
     check("Spectron checkpoint client-environment restart-state anchor count", spectron_checkpoint["client_environment_restart_state_anchors"]["verified_name_count"], 1)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "f4d5cb02e81a9f106244a8b48c37b5b3ed78a3f2163d0245945b4e4929ae8b52")
+    check("Spectron checkpoint particle-emitter script-vars anchor count", spectron_checkpoint["particle_emitter_script_vars_anchors"]["verified_name_count"], 1)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "c26614cddb2d45084daed23699bf9eef3d45ef8fe86b4c0214eaf535d267bf5a")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -4056,6 +4103,7 @@ def main():
         spectron_client_environment_static_clear_anchors,
         spectron_client_environment_restart_state_anchors,
         spectron_particle_emitter_anchors,
+        spectron_particle_emitter_script_vars_anchors,
         spectron_server_animation_anchors,
         spectron_player_lifecycle_anchors,
         spectron_player_emoticon_anchors,

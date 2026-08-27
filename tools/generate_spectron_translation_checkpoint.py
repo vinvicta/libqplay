@@ -179,6 +179,8 @@ def main() -> None:
     parser.add_argument("--client-environment-restart-state-verification", type=Path)
     parser.add_argument("--particle-emitter-anchors", type=Path)
     parser.add_argument("--particle-emitter-verification", type=Path)
+    parser.add_argument("--particle-emitter-script-vars-anchors", type=Path)
+    parser.add_argument("--particle-emitter-script-vars-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
     parser.add_argument("--server-animation-verification", type=Path)
     parser.add_argument("--player-lifecycle-anchors", type=Path)
@@ -2302,6 +2304,66 @@ def main() -> None:
         result["particle_emitter_anchors"] = particle_emitter
         result["interpretation"].append(
             "The fifty-sixth database revision also contains the separately reviewed particle-emitter initializer and emission anchors."
+        )
+    particle_emitter_script_vars = None
+    if (
+        args.particle_emitter_script_vars_anchors
+        or args.particle_emitter_script_vars_verification
+    ):
+        if (
+            not args.particle_emitter_script_vars_anchors
+            or not args.particle_emitter_script_vars_verification
+        ):
+            raise ValueError(
+                "particle-emitter script-vars anchors and verification must be supplied together"
+            )
+        particle_emitter_script_vars_document = load(
+            args.particle_emitter_script_vars_anchors
+        )
+        particle_emitter_script_vars_verification = load(
+            args.particle_emitter_script_vars_verification
+        )
+        if (
+            particle_emitter_script_vars_document.get("artifact")
+            != "spectron_particle_emitter_script_vars_manual_translation_anchors_20260827"
+        ):
+            raise ValueError(
+                "unexpected particle-emitter script-vars anchor artifact"
+            )
+        if not particle_emitter_script_vars_verification.get("verified"):
+            raise ValueError(
+                "particle-emitter script-vars anchor reopen verification did not pass"
+            )
+        expected_particle_emitter_script_vars = len(
+            particle_emitter_script_vars_document["anchors"]
+        )
+        if (
+            particle_emitter_script_vars_verification["verified_name_count"]
+            != expected_particle_emitter_script_vars
+        ):
+            raise ValueError(
+                "particle-emitter script-vars verification count differs from artifact"
+            )
+        particle_emitter_script_vars = {
+            "anchor_path": str(args.particle_emitter_script_vars_anchors),
+            "anchor_sha256": sha256_path(
+                args.particle_emitter_script_vars_anchors
+            ),
+            "reopen_verification": str(
+                args.particle_emitter_script_vars_verification
+            ),
+            "anchor_count": expected_particle_emitter_script_vars,
+            "verified_name_count": particle_emitter_script_vars_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": particle_emitter_script_vars_verification[
+                "failure_count"
+            ],
+        }
+    if particle_emitter_script_vars is not None:
+        result["particle_emitter_script_vars_anchors"] = particle_emitter_script_vars
+        result["interpretation"].append(
+            "The one-hundred-eighty-sixth database revision also contains the separately reviewed particle-emitter script-property initializer anchor."
         )
     server_animation = None
     if args.server_animation_anchors or args.server_animation_verification:
