@@ -440,6 +440,9 @@ def main():
     spectron_guicontrol_event_dispatch_residual_anchors = load_json(
         "artifacts/spectron_guicontrol_event_dispatch_residual_manual_translation_anchors_20260826.json"
     )
+    spectron_guicontrol_initialization_residual_anchors = load_json(
+        "artifacts/spectron_guicontrol_initialization_residual_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2492,6 +2495,18 @@ def main():
     check("Spectron GuiControl event dispatch residual exact-shape count", spectron_guicontrol_event_dispatch_residual_anchors["summary"]["exact_shape_anchor_count"], 2)
     check("Spectron GuiControl event dispatch residual layout-change count", spectron_guicontrol_event_dispatch_residual_anchors["summary"]["layout_change_anchor_count"], 6)
     check(
+        "Spectron GuiControl initialization residual artifact",
+        spectron_guicontrol_initialization_residual_anchors["artifact"],
+        "spectron_guicontrol_initialization_residual_manual_translation_anchors_20260826",
+    )
+    check("Spectron GuiControl initialization residual network", spectron_guicontrol_initialization_residual_anchors["network_contacted"], False)
+    check("Spectron GuiControl initialization residual total", spectron_guicontrol_initialization_residual_anchors["summary"]["anchor_count"], 2)
+    check("Spectron GuiControl initialization residual high confidence", spectron_guicontrol_initialization_residual_anchors["summary"]["high_confidence_count"], 2)
+    check("Spectron GuiControl initialization residual semantic overlap", spectron_guicontrol_initialization_residual_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron GuiControl initialization residual default targets", spectron_guicontrol_initialization_residual_anchors["summary"]["target_default_name_count"], 0)
+    check("Spectron GuiControl initialization residual exact-shape count", spectron_guicontrol_initialization_residual_anchors["summary"]["exact_shape_anchor_count"], 0)
+    check("Spectron GuiControl initialization residual layout-change count", spectron_guicontrol_initialization_residual_anchors["summary"]["layout_change_anchor_count"], 2)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -2627,7 +2642,8 @@ def main():
     check("Spectron checkpoint GuiControl event and sizing residual anchor count", spectron_checkpoint["gui_control_event_sizing_residual_anchors"]["verified_name_count"], 8)
     check("Spectron checkpoint GuiControl style and bounds residual anchor count", spectron_checkpoint["gui_control_style_bounds_residual_anchors"]["verified_name_count"], 12)
     check("Spectron checkpoint GuiControl event dispatch residual anchor count", spectron_checkpoint["gui_control_event_dispatch_residual_anchors"]["verified_name_count"], 8)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "f2f0e0e125d868a43ed9aba2caf46025bd65df9254669fc6aa3caeef0771c0bf")
+    check("Spectron checkpoint GuiControl initialization residual anchor count", spectron_checkpoint["gui_control_initialization_residual_anchors"]["verified_name_count"], 2)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "1113a2703e11e58c61ff69510de89d938801ca3c405ca03c7a0fab3faa5b574d")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -2816,6 +2832,7 @@ def main():
         spectron_guicontrol_event_sizing_residual_anchors,
         spectron_guicontrol_style_bounds_residual_anchors,
         spectron_guicontrol_event_dispatch_residual_anchors,
+        spectron_guicontrol_initialization_residual_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

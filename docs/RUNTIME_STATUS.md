@@ -1361,6 +1361,13 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_guicontrol_event_dispatch_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+190. The next IDA pass translated two residual `GuiControl` initialization
+    methods. It covers the complete field and child-list initializer and the
+    parameterized C2 constructor. The labels reopened successfully in the
+    v130 disposable copy, which retains 1,514 default `sub_` functions. See
+    `artifacts/spectron_guicontrol_initialization_residual_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

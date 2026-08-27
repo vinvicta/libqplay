@@ -279,6 +279,8 @@ def main() -> None:
     parser.add_argument("--gui-control-style-bounds-residual-verification", type=Path)
     parser.add_argument("--gui-control-event-dispatch-residual-anchors", type=Path)
     parser.add_argument("--gui-control-event-dispatch-residual-verification", type=Path)
+    parser.add_argument("--gui-control-initialization-residual-anchors", type=Path)
+    parser.add_argument("--gui-control-initialization-residual-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3846,6 +3848,34 @@ def main() -> None:
         result["gui_control_event_dispatch_residual_anchors"] = gui_control_event_dispatch_residual
         result["interpretation"].append(
             "The one-hundred-twenty-ninth database revision also contains the separately reviewed GuiControl event-dispatch residual family."
+        )
+    gui_control_initialization_residual = None
+    if args.gui_control_initialization_residual_anchors or args.gui_control_initialization_residual_verification:
+        if not args.gui_control_initialization_residual_anchors or not args.gui_control_initialization_residual_verification:
+            raise ValueError(
+                "GUI control initialization residual anchors and verification must be supplied together"
+            )
+        gui_control_initialization_residual_document = load(args.gui_control_initialization_residual_anchors)
+        gui_control_initialization_residual_verification = load(args.gui_control_initialization_residual_verification)
+        if gui_control_initialization_residual_document.get("artifact") != "spectron_guicontrol_initialization_residual_manual_translation_anchors_20260826":
+            raise ValueError("unexpected GUI control initialization residual artifact")
+        if not gui_control_initialization_residual_verification.get("verified"):
+            raise ValueError("GUI control initialization residual reopen verification did not pass")
+        expected_gui_control_initialization_residual = len(gui_control_initialization_residual_document["anchors"])
+        if gui_control_initialization_residual_verification["verified_name_count"] != expected_gui_control_initialization_residual:
+            raise ValueError("GUI control initialization residual verification count differs from artifact")
+        gui_control_initialization_residual = {
+            "anchor_path": str(args.gui_control_initialization_residual_anchors),
+            "anchor_sha256": sha256_path(args.gui_control_initialization_residual_anchors),
+            "reopen_verification": str(args.gui_control_initialization_residual_verification),
+            "anchor_count": expected_gui_control_initialization_residual,
+            "verified_name_count": gui_control_initialization_residual_verification["verified_name_count"],
+            "reopen_failure_count": gui_control_initialization_residual_verification["failure_count"],
+        }
+    if gui_control_initialization_residual is not None:
+        result["gui_control_initialization_residual_anchors"] = gui_control_initialization_residual
+        result["interpretation"].append(
+            "The one-hundred-thirtieth database revision also contains the separately reviewed GuiControl initialization and parameterized-constructor residual family."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
