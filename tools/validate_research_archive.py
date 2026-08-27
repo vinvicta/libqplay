@@ -239,6 +239,9 @@ def main():
     spectron_files_anchors = load_json(
         "artifacts/spectron_files_manual_translation_anchors_20260827.json"
     )
+    spectron_encryption_anchors = load_json(
+        "artifacts/spectron_encryption_manual_translation_anchors_20260827.json"
+    )
     spectron_particle_emitter_anchors = load_json(
         "artifacts/spectron_particle_emitter_manual_translation_anchors_20260826.json"
     )
@@ -1934,6 +1937,17 @@ def main():
     check("Spectron files layout-change count", spectron_files_anchors["summary"]["layout_change_anchor_count"], 0)
     check("Spectron files default targets", spectron_files_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron encryption artifact",
+        spectron_encryption_anchors["artifact"],
+        "spectron_encryption_manual_translation_anchors_20260827",
+    )
+    check("Spectron encryption network", spectron_encryption_anchors["network_contacted"], False)
+    check("Spectron encryption total", spectron_encryption_anchors["summary"]["anchor_count"], 9)
+    check("Spectron encryption high confidence", spectron_encryption_anchors["summary"]["high_confidence_count"], 9)
+    check("Spectron encryption exact-shape count", spectron_encryption_anchors["summary"]["exact_shape_anchor_count"], 9)
+    check("Spectron encryption layout-change count", spectron_encryption_anchors["summary"]["layout_change_anchor_count"], 0)
+    check("Spectron encryption default targets", spectron_encryption_anchors["summary"]["target_default_name_count"], 1)
+    check(
         "Spectron particle-emitter artifact",
         spectron_particle_emitter_anchors["artifact"],
         "spectron_particle_emitter_manual_translation_anchors_20260826",
@@ -3091,7 +3105,7 @@ def main():
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1256)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1255)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -3258,7 +3272,8 @@ def main():
     check("Spectron checkpoint server-object scalar anchor count", spectron_checkpoint["server_object_scalar_anchors"]["verified_name_count"], 12)
     check("Spectron checkpoint compression anchor count", spectron_checkpoint["compression_anchors"]["verified_name_count"], 5)
     check("Spectron checkpoint files anchor count", spectron_checkpoint["files_anchors"]["verified_name_count"], 6)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "0904e8d1b0f8f97a2536cd34a44f12974365f427f4c590c89e83efc1ca570d53")
+    check("Spectron checkpoint encryption anchor count", spectron_checkpoint["encryption_anchors"]["verified_name_count"], 9)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "3464dc1d4195ae163bf8648b0de26d4e3d51c6722a27e4bd0600fd912d44d4e8")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -3379,6 +3394,7 @@ def main():
         spectron_server_object_scalar_anchors,
         spectron_compression_anchors,
         spectron_files_anchors,
+        spectron_encryption_anchors,
         spectron_particle_emitter_anchors,
         spectron_server_animation_anchors,
         spectron_player_lifecycle_anchors,

@@ -145,6 +145,8 @@ def main() -> None:
     parser.add_argument("--compression-verification", type=Path)
     parser.add_argument("--files-anchors", type=Path)
     parser.add_argument("--files-verification", type=Path)
+    parser.add_argument("--encryption-anchors", type=Path)
+    parser.add_argument("--encryption-verification", type=Path)
     parser.add_argument("--particle-emitter-anchors", type=Path)
     parser.add_argument("--particle-emitter-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
@@ -2046,6 +2048,34 @@ def main() -> None:
         result["files_anchors"] = files
         result["interpretation"].append(
             "The one-hundred-sixty-ninth database revision also contains the separately reviewed exact-shape TFiles helper anchors."
+        )
+    encryption = None
+    if args.encryption_anchors or args.encryption_verification:
+        if not args.encryption_anchors or not args.encryption_verification:
+            raise ValueError(
+                "encryption anchors and encryption verification must be supplied together"
+            )
+        encryption_document = load(args.encryption_anchors)
+        encryption_verification = load(args.encryption_verification)
+        if encryption_document.get("artifact") != "spectron_encryption_manual_translation_anchors_20260827":
+            raise ValueError("unexpected encryption anchor artifact")
+        if not encryption_verification.get("verified"):
+            raise ValueError("encryption anchor reopen verification did not pass")
+        expected_encryption = len(encryption_document["anchors"])
+        if encryption_verification["verified_name_count"] != expected_encryption:
+            raise ValueError("encryption verification count differs from artifact")
+        encryption = {
+            "anchor_path": str(args.encryption_anchors),
+            "anchor_sha256": sha256_path(args.encryption_anchors),
+            "reopen_verification": str(args.encryption_verification),
+            "anchor_count": expected_encryption,
+            "verified_name_count": encryption_verification["verified_name_count"],
+            "reopen_failure_count": encryption_verification["failure_count"],
+        }
+    if encryption is not None:
+        result["encryption_anchors"] = encryption
+        result["interpretation"].append(
+            "The one-hundred-seventieth database revision also contains the separately reviewed exact-shape TEncryption wrapper anchors."
         )
     particle_emitter = None
     if args.particle_emitter_anchors or args.particle_emitter_verification:
