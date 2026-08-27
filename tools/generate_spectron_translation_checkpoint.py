@@ -165,6 +165,8 @@ def main() -> None:
     parser.add_argument("--server-list-connection-verification", type=Path)
     parser.add_argument("--server-list-state-anchors", type=Path)
     parser.add_argument("--server-list-state-verification", type=Path)
+    parser.add_argument("--http-request-cleanup-anchors", type=Path)
+    parser.add_argument("--http-request-cleanup-verification", type=Path)
     parser.add_argument("--particle-emitter-anchors", type=Path)
     parser.add_argument("--particle-emitter-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
@@ -5286,6 +5288,34 @@ def main() -> None:
         result["server_list_state_anchors"] = server_list_state
         result["interpretation"].append(
             "The v179 database revision also contains the separately reviewed server-list boolean and start-parameter state anchors."
+        )
+    http_request_cleanup = None
+    if args.http_request_cleanup_anchors or args.http_request_cleanup_verification:
+        if not args.http_request_cleanup_anchors or not args.http_request_cleanup_verification:
+            raise ValueError(
+                "HTTP request cleanup anchors and verification must be supplied together"
+            )
+        http_request_cleanup_document = load(args.http_request_cleanup_anchors)
+        http_request_cleanup_verification = load(args.http_request_cleanup_verification)
+        if http_request_cleanup_document.get("artifact") != "spectron_http_request_cleanup_manual_translation_anchors_20260827":
+            raise ValueError("unexpected HTTP request cleanup anchor artifact")
+        if not http_request_cleanup_verification.get("verified"):
+            raise ValueError("HTTP request cleanup anchor reopen verification did not pass")
+        expected_http_request_cleanup = len(http_request_cleanup_document["anchors"])
+        if http_request_cleanup_verification["verified_name_count"] != expected_http_request_cleanup:
+            raise ValueError("HTTP request cleanup verification count differs from artifact")
+        http_request_cleanup = {
+            "anchor_path": str(args.http_request_cleanup_anchors),
+            "anchor_sha256": sha256_path(args.http_request_cleanup_anchors),
+            "reopen_verification": str(args.http_request_cleanup_verification),
+            "anchor_count": expected_http_request_cleanup,
+            "verified_name_count": http_request_cleanup_verification["verified_name_count"],
+            "reopen_failure_count": http_request_cleanup_verification["failure_count"],
+        }
+    if http_request_cleanup is not None:
+        result["http_request_cleanup_anchors"] = http_request_cleanup
+        result["interpretation"].append(
+            "The v180 database revision also contains the separately reviewed HTTP request cleanup and properties destructor anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

@@ -1460,6 +1460,21 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_static_callback_role_correction.py`, and
     `tools/ida_dump_function_data_refs.py`.
 
+239. The next network-focused IDA pass translated the remaining request reset
+    method and the four request-properties destructor ABI entries. The source
+    `THTTPRequest_clearRequest_void` role maps to target `0x204d5c`, which
+    retains the keep-alive check, socket release, `data` variable removal,
+    response-stream reset, counters, flags, and temporary-string cleanup. The
+    target body is slightly shorter, so it is recorded as a layout change.
+    The four adjacent properties rows are the complete D2 destructor, deleting
+    D0 destructor, and their adjusted-this thunks. The source constructor-like
+    labels are classified by their bodies and target D2 or D0 ABI names. All
+    five aliases reopened successfully in the v180 copy, which has 11,694
+    functions, 3,641 high-confidence labels, and 1,240 default `sub_` names.
+    See `artifacts/spectron_http_request_cleanup_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_http_request_cleanup_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 238. The next IDA pass translated four exact-shape server-list state methods
     in the Spectron 2.2 build. The aliases cover the remove-vars-on-logout
     setter, allow-login-reconnect getter, and server-start parameter and

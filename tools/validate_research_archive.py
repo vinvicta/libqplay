@@ -272,6 +272,9 @@ def main():
     spectron_server_list_state_anchors = load_json(
         "artifacts/spectron_server_list_state_manual_translation_anchors_20260827.json"
     )
+    spectron_http_request_cleanup_anchors = load_json(
+        "artifacts/spectron_http_request_cleanup_manual_translation_anchors_20260827.json"
+    )
     spectron_particle_emitter_anchors = load_json(
         "artifacts/spectron_particle_emitter_manual_translation_anchors_20260826.json"
     )
@@ -2263,6 +2266,60 @@ def main():
         "0x208304",
     )
     check(
+        "Spectron HTTP cleanup artifact",
+        spectron_http_request_cleanup_anchors["artifact"],
+        "spectron_http_request_cleanup_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron HTTP cleanup network",
+        spectron_http_request_cleanup_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron HTTP cleanup total",
+        spectron_http_request_cleanup_anchors["summary"]["anchor_count"],
+        5,
+    )
+    check(
+        "Spectron HTTP cleanup high confidence",
+        spectron_http_request_cleanup_anchors["summary"]["high_confidence_count"],
+        5,
+    )
+    check(
+        "Spectron HTTP cleanup exact-shape count",
+        spectron_http_request_cleanup_anchors["summary"]["exact_shape_anchor_count"],
+        4,
+    )
+    check(
+        "Spectron HTTP cleanup layout-change count",
+        spectron_http_request_cleanup_anchors["summary"]["layout_change_anchor_count"],
+        1,
+    )
+    check(
+        "Spectron HTTP cleanup default targets",
+        spectron_http_request_cleanup_anchors["summary"]["target_default_name_count"],
+        0,
+    )
+    http_cleanup_anchors = {
+        row["original_name"]: row
+        for row in spectron_http_request_cleanup_anchors["anchors"]
+    }
+    check(
+        "Spectron HTTP cleanup target",
+        http_cleanup_anchors["THTTPRequest_clearRequest_void"]["spectron_ea"],
+        "0x204d5c",
+    )
+    check(
+        "Spectron HTTP properties D2 target",
+        http_cleanup_anchors["THTTPRequestProperties_THTTPRequestProperties"]["spectron_ea"],
+        "0x208248",
+    )
+    check(
+        "Spectron HTTP properties D0 target",
+        http_cleanup_anchors["THTTPRequestProperties_THTTPRequestProperties__2"]["spectron_ea"],
+        "0x20826c",
+    )
+    check(
         "Spectron particle-emitter artifact",
         spectron_particle_emitter_anchors["artifact"],
         "spectron_particle_emitter_manual_translation_anchors_20260826",
@@ -3597,7 +3654,8 @@ def main():
     check("Spectron checkpoint HTTP response anchor count", spectron_checkpoint["http_request_receive_anchors"]["verified_name_count"], 2)
     check("Spectron checkpoint server-list connection anchor count", spectron_checkpoint["server_list_connection_anchors"]["verified_name_count"], 5)
     check("Spectron checkpoint server-list state anchor count", spectron_checkpoint["server_list_state_anchors"]["verified_name_count"], 4)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "c4f8361f9fa8d138358215b3d63ef4ada9755aa8cd0e60302d077002f400b37b")
+    check("Spectron checkpoint HTTP cleanup anchor count", spectron_checkpoint["http_request_cleanup_anchors"]["verified_name_count"], 5)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "a01af52c52de0c5d203d15ee0eb839b6a30ff13094a08474668c71773a0f17a2")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -3729,6 +3787,7 @@ def main():
         spectron_http_request_receive_anchors,
         spectron_server_list_connection_anchors,
         spectron_server_list_state_anchors,
+        spectron_http_request_cleanup_anchors,
         spectron_particle_emitter_anchors,
         spectron_server_animation_anchors,
         spectron_player_lifecycle_anchors,
