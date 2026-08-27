@@ -147,6 +147,8 @@ def main() -> None:
     parser.add_argument("--player-level-entry-verification", type=Path)
     parser.add_argument("--player-side-level-anchors", type=Path)
     parser.add_argument("--player-side-level-verification", type=Path)
+    parser.add_argument("--player-map-position-anchors", type=Path)
+    parser.add_argument("--player-map-position-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1866,6 +1868,34 @@ def main() -> None:
         result["player_side_level_anchors"] = player_side_level
         result["interpretation"].append(
             "The sixty-first database revision also contains the separately reviewed player side-level grid and lookup anchors."
+        )
+    player_map_position = None
+    if args.player_map_position_anchors or args.player_map_position_verification:
+        if not args.player_map_position_anchors or not args.player_map_position_verification:
+            raise ValueError(
+                "player-map-position anchors and player-map-position verification must be supplied together"
+            )
+        player_map_position_document = load(args.player_map_position_anchors)
+        player_map_position_verification = load(args.player_map_position_verification)
+        if player_map_position_document.get("artifact") != "spectron_player_map_position_manual_translation_anchors_20260826":
+            raise ValueError("unexpected player-map-position anchor artifact")
+        if not player_map_position_verification.get("verified"):
+            raise ValueError("player-map-position anchor reopen verification did not pass")
+        expected_player_map_position = len(player_map_position_document["anchors"])
+        if player_map_position_verification["verified_name_count"] != expected_player_map_position:
+            raise ValueError("player-map-position verification count differs from artifact")
+        player_map_position = {
+            "anchor_path": str(args.player_map_position_anchors),
+            "anchor_sha256": sha256_path(args.player_map_position_anchors),
+            "reopen_verification": str(args.player_map_position_verification),
+            "anchor_count": expected_player_map_position,
+            "verified_name_count": player_map_position_verification["verified_name_count"],
+            "reopen_failure_count": player_map_position_verification["failure_count"],
+        }
+    if player_map_position is not None:
+        result["player_map_position_anchors"] = player_map_position
+        result["interpretation"].append(
+            "The sixty-second database revision also contains the separately reviewed player map-position and map-link anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

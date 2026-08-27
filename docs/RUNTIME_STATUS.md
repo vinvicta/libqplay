@@ -876,6 +876,12 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_player_side_level_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+124. Clean IDA review added two high-confidence player map-position anchors for
+     active-map refresh and map-link checks. Both reopened successfully in the
+     v64 disposable copy. See
+     `artifacts/spectron_player_map_position_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

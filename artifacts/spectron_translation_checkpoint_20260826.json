@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v63.i64",
-    "sha256": "9bf7ae63884225e0ef3abab3f9733a1dde9c5c3eae4fdf24b5c83ec41fad076b"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v64.i64",
+    "sha256": "f53c37fbdbc66d1774c24ac7fcb30d9a68cb4aca569ac8d7cb81aaf81c12510e"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -206,7 +206,8 @@
     "The fifty-eighth database revision also contains the separately reviewed player start-level and periodic-update anchors.",
     "The fifty-ninth database revision also contains the separately reviewed player emoticon-coordinate getter anchors.",
     "The sixtieth database revision also contains the separately reviewed player main-level and server-level entry anchors.",
-    "The sixty-first database revision also contains the separately reviewed player side-level grid and lookup anchors."
+    "The sixty-first database revision also contains the separately reviewed player side-level grid and lookup anchors.",
+    "The sixty-second database revision also contains the separately reviewed player map-position and map-link anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -319,6 +320,14 @@
     "anchor_sha256": "1fdc678fc14955ba1227b29fa912ad85de581bc599eaf6379498a54bc2125adf",
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_player_lifecycle_verification_v60.json",
+    "verified_name_count": 2
+  },
+  "player_map_position_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "artifacts/spectron_player_map_position_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "35636132aa45687d7d03edddf5ac9939152c337dce55bfcb8dc4f26ad7180e3a",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_player_map_position_verification_v64.json",
     "verified_name_count": 2
   },
   "player_side_level_anchors": {
