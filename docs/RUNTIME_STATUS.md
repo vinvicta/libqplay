@@ -1268,6 +1268,13 @@ This is the short handoff view. The full reasoning and command history are in
      copy. See
      `artifacts/spectron_panel_virtual_renderer_residual_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
+178. The next IDA pass translated 14 residual methods at the panel-interface
+     and dummy-panel boundary. It covers three empty `TPanelInterface` hooks,
+     the `TDummyPanel` draw and clipping hooks, the zero-return panel factory,
+     and the complete or deleting destructor pair. The labels reopened
+     successfully in the v118 disposable copy. See
+     `artifacts/spectron_dummy_panel_residual_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
 ## Not verified
 

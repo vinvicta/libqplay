@@ -255,6 +255,8 @@ def main() -> None:
     parser.add_argument("--animation-palette-residual-verification", type=Path)
     parser.add_argument("--panel-virtual-renderer-residual-anchors", type=Path)
     parser.add_argument("--panel-virtual-renderer-residual-verification", type=Path)
+    parser.add_argument("--dummy-panel-residual-anchors", type=Path)
+    parser.add_argument("--dummy-panel-residual-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3486,6 +3488,34 @@ def main() -> None:
         result["panel_virtual_renderer_residual_anchors"] = panel_virtual_renderer_residual
         result["interpretation"].append(
             "The one-hundred-seventeenth database revision also contains the separately reviewed panel-interface virtual hooks, panel-port tail hooks, and graphic-operation texture flush loop."
+        )
+    dummy_panel_residual = None
+    if args.dummy_panel_residual_anchors or args.dummy_panel_residual_verification:
+        if not args.dummy_panel_residual_anchors or not args.dummy_panel_residual_verification:
+            raise ValueError(
+                "dummy-panel residual anchors and dummy-panel residual verification must be supplied together"
+            )
+        dummy_panel_residual_document = load(args.dummy_panel_residual_anchors)
+        dummy_panel_residual_verification = load(args.dummy_panel_residual_verification)
+        if dummy_panel_residual_document.get("artifact") != "spectron_dummy_panel_residual_manual_translation_anchors_20260826":
+            raise ValueError("unexpected dummy-panel residual anchor artifact")
+        if not dummy_panel_residual_verification.get("verified"):
+            raise ValueError("dummy-panel residual anchor reopen verification did not pass")
+        expected_dummy_panel_residual = len(dummy_panel_residual_document["anchors"])
+        if dummy_panel_residual_verification["verified_name_count"] != expected_dummy_panel_residual:
+            raise ValueError("dummy-panel residual verification count differs from artifact")
+        dummy_panel_residual = {
+            "anchor_path": str(args.dummy_panel_residual_anchors),
+            "anchor_sha256": sha256_path(args.dummy_panel_residual_anchors),
+            "reopen_verification": str(args.dummy_panel_residual_verification),
+            "anchor_count": expected_dummy_panel_residual,
+            "verified_name_count": dummy_panel_residual_verification["verified_name_count"],
+            "reopen_failure_count": dummy_panel_residual_verification["failure_count"],
+        }
+    if dummy_panel_residual is not None:
+        result["dummy_panel_residual_anchors"] = dummy_panel_residual
+        result["interpretation"].append(
+            "The one-hundred-eighteenth database revision also contains the separately reviewed residual TPanelInterface hooks and TDummyPanel virtual and lifecycle block."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

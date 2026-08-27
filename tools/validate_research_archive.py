@@ -404,6 +404,9 @@ def main():
     spectron_panel_virtual_renderer_residual_anchors = load_json(
         "artifacts/spectron_panel_virtual_renderer_residual_manual_translation_anchors_20260826.json"
     )
+    spectron_dummy_panel_residual_anchors = load_json(
+        "artifacts/spectron_dummy_panel_residual_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2327,6 +2330,16 @@ def main():
     check("Spectron panel virtual renderer residual default targets", spectron_panel_virtual_renderer_residual_anchors["summary"]["target_default_name_count"], 0)
     check("Spectron panel virtual renderer residual target-only gap", spectron_panel_virtual_renderer_residual_anchors["context"]["target_only_inserted_method"]["spectron_ea"], "0x100980")
     check(
+        "Spectron dummy-panel residual artifact",
+        spectron_dummy_panel_residual_anchors["artifact"],
+        "spectron_dummy_panel_residual_manual_translation_anchors_20260826",
+    )
+    check("Spectron dummy-panel residual network", spectron_dummy_panel_residual_anchors["network_contacted"], False)
+    check("Spectron dummy-panel residual total", spectron_dummy_panel_residual_anchors["summary"]["anchor_count"], 14)
+    check("Spectron dummy-panel residual high confidence", spectron_dummy_panel_residual_anchors["summary"]["high_confidence_count"], 14)
+    check("Spectron dummy-panel residual semantic overlap", spectron_dummy_panel_residual_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron dummy-panel residual default targets", spectron_dummy_panel_residual_anchors["summary"]["target_default_name_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -2449,7 +2462,8 @@ def main():
     check("Spectron checkpoint pixelbuffer bitmap-lifecycle anchor count", spectron_checkpoint["pixelbuffer_bitmap_lifecycle_anchors"]["verified_name_count"], 4)
     check("Spectron checkpoint animation-palette residual anchor count", spectron_checkpoint["animation_palette_residual_anchors"]["verified_name_count"], 4)
     check("Spectron checkpoint panel virtual renderer residual anchor count", spectron_checkpoint["panel_virtual_renderer_residual_anchors"]["verified_name_count"], 23)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "82f78696b705112585e04e2b3c522b88bed026d9d281bc4fdc9a7fff085ad5c4")
+    check("Spectron checkpoint dummy-panel residual anchor count", spectron_checkpoint["dummy_panel_residual_anchors"]["verified_name_count"], 14)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "de9c45f75c839c7cbbe802544129f2021e29f1aec02f0543d374df89a777fbbf")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -2626,6 +2640,7 @@ def main():
         spectron_pixelbuffer_bitmap_lifecycle_anchors,
         spectron_animation_palette_residual_anchors,
         spectron_panel_virtual_renderer_residual_anchors,
+        spectron_dummy_panel_residual_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
