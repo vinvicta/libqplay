@@ -177,6 +177,8 @@ def main() -> None:
     parser.add_argument("--server-level-storage-verification", type=Path)
     parser.add_argument("--hidden-testnpc-anchors", type=Path)
     parser.add_argument("--hidden-testnpc-verification", type=Path)
+    parser.add_argument("--level-map-lookup-anchors", type=Path)
+    parser.add_argument("--level-map-lookup-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2316,6 +2318,34 @@ def main() -> None:
         result["hidden_testnpc_anchors"] = hidden_testnpc
         result["interpretation"].append(
             "The seventy-sixth database revision also contains the separately reviewed hidden Spectron testnpc callback boundary and exact body anchor."
+        )
+    level_map_lookup = None
+    if args.level_map_lookup_anchors or args.level_map_lookup_verification:
+        if not args.level_map_lookup_anchors or not args.level_map_lookup_verification:
+            raise ValueError(
+                "level-map lookup anchors and level-map lookup verification must be supplied together"
+            )
+        level_map_lookup_document = load(args.level_map_lookup_anchors)
+        level_map_lookup_verification = load(args.level_map_lookup_verification)
+        if level_map_lookup_document.get("artifact") != "spectron_level_map_lookup_manual_translation_anchors_20260826":
+            raise ValueError("unexpected level-map lookup anchor artifact")
+        if not level_map_lookup_verification.get("verified"):
+            raise ValueError("level-map lookup anchor reopen verification did not pass")
+        expected_level_map_lookup = len(level_map_lookup_document["anchors"])
+        if level_map_lookup_verification["verified_name_count"] != expected_level_map_lookup:
+            raise ValueError("level-map lookup verification count differs from artifact")
+        level_map_lookup = {
+            "anchor_path": str(args.level_map_lookup_anchors),
+            "anchor_sha256": sha256_path(args.level_map_lookup_anchors),
+            "reopen_verification": str(args.level_map_lookup_verification),
+            "anchor_count": expected_level_map_lookup,
+            "verified_name_count": level_map_lookup_verification["verified_name_count"],
+            "reopen_failure_count": level_map_lookup_verification["failure_count"],
+        }
+    if level_map_lookup is not None:
+        result["level_map_lookup_anchors"] = level_map_lookup
+        result["interpretation"].append(
+            "The seventy-seventh database revision also contains the separately reviewed level lookup, link serialization, map selection, and GMAP loading anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

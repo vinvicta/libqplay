@@ -1,0 +1,252 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both normalize the requested filename, reject an empty normalized value, iterate the global level list, compare each level name at offset 128, and return the matching level or null.",
+        "The target pseudocode uses RUnvgavJ0u for the same lowercase filename helper, iterates QYZugaRKGu::yOs_IafR9s, and compares each candidate's offset-128 name before returning it.",
+        "The target keeps the source nine-block lookup shape and differs by only eight bytes because the 2.2 string wrapper and obfuscated list accessors expand the body slightly."
+      ],
+      "match_kind": "manual-level-map-lookup-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1a02e4",
+      "original_metrics": {
+        "basic_block_count": 9,
+        "instruction_count": 52,
+        "mnemonic_hash": "1333a8f9d9560d5c7a104d338cae8bcdbeab1377fb2313deb092e5d0e0d76719",
+        "register_shape_hash": "0ee04598066fbcd053463eedacd9f60ccc0110465becb017238eb3c6a1a94285",
+        "shape_hash": "74fc6fe3aadcfd57d97d3003cedb264e6e803b8a270624e42a3634c0c91258d7",
+        "size": 208
+      },
+      "original_name": "getLevel_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_getLevel_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "active server-level lookup by normalized filename",
+      "spectron_current_name": "_Z10OEizxa5ijRRK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1a4fbc",
+      "spectron_metrics": {
+        "basic_block_count": 9,
+        "instruction_count": 54,
+        "mnemonic_hash": "2da7452ef33b1c8bd93d1449474f8587c4cb375a9a708866da99afaf58e65caa",
+        "register_shape_hash": "15f6cdeac9d2adee965f6d5f3479410e51326b460b5cb0d1c24a0900cf0803b9",
+        "shape_hash": "acd1debf40d174d106bffb14a03e114e247a0aece2ba27bd2877e74086cd18ce",
+        "size": 216
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both accept a level name and a string-list-like level collection, return -1 for an empty name or missing list, and return the collection index for the normalized name.",
+        "The target is the thin wrapper at the corresponding level-list helper position. It validates the same inputs and forwards to vuuHgangcF::JtTLgaLhUI, the obfuscated indexOf equivalent.",
+        "The target is 72 bytes smaller and has one additional block because Spectron moved lowercase normalization into its callers and kept this method as a compact index wrapper. This is a semantic role match, not a byte-for-byte claim."
+      ],
+      "match_kind": "manual-level-map-lookup-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1a03b4",
+      "original_metrics": {
+        "basic_block_count": 5,
+        "instruction_count": 30,
+        "mnemonic_hash": "d74bcbb0145309002a1e8b0154427f98cb9544beefba1f1f47b2ae3189cb445b",
+        "register_shape_hash": "eb8da778c97eff966b92d0b8b5198f43339d59f1153d9c9099f319e7162fb50e",
+        "shape_hash": "6d4e558bfa71b1631af9a50af8092c3d1deed2ab0b08230b915d2db6a2e0ab19",
+        "size": 120
+      },
+      "original_name": "getLevelPos_TString_const_TStringList",
+      "original_string_refs": [],
+      "proposed_name": "v18_getLevelPos_TString_const_TStringList",
+      "semantic_match_already_present": false,
+      "source_basis": "normalized level-name index lookup",
+      "spectron_current_name": "_Z10x_WogaefBpRK10CanTfaz6bZP10vuuHgangcF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1a5094",
+      "spectron_metrics": {
+        "basic_block_count": 6,
+        "instruction_count": 12,
+        "mnemonic_hash": "44ccf06472ba3f24bf47bc5f321e20179498733c37fbfbc9a47a58edc9d2e86b",
+        "register_shape_hash": "e8ed0ecc26e77648806a1a6cc3e7f14348d49c356b67b94ba5869eb473f724fd",
+        "shape_hash": "a4a59e2e96477685b8ab8e986a88aca51d0feecb45fe969116c567d67c152906",
+        "size": 48
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both build the link representation from the prefix at offset 112, four floating-point coordinates at offsets 120 through 144, and the two space-separated level fields at offsets 152 and 160.",
+        "Both remove spaces from the two level fields, append them to the coordinate string, replace comma decimal separators with periods, and prepend the link prefix before returning the output string.",
+        "The target preserves the source sixteen-block serialization shape and differs by 24 bytes because its renamed string methods and rebuilt wrappers use different instruction expansion."
+      ],
+      "match_kind": "manual-level-map-lookup-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1a08e8",
+      "original_metrics": {
+        "basic_block_count": 16,
+        "instruction_count": 284,
+        "mnemonic_hash": "9c811f657803b6e55d04a2608a723434341817a6c5ec18fb330d9a495f9472f8",
+        "register_shape_hash": "e016af24d5a29458430df6b7dd37a4f0a17bc439407785c30311576628587355",
+        "shape_hash": "853518da4edb1e553f25a84ba667fac469aaa96f9ed2e130dd30f0532f6a2d58",
+        "size": 1140
+      },
+      "original_name": "TServerLevelLink_getTStringRepresentation_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerLevelLink_getTStringRepresentation_void",
+      "semantic_match_already_present": false,
+      "source_basis": "server-level link serialization",
+      "spectron_current_name": "_ZN10yO8PSaf1tK10kI9vmbZMFyEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1a5580",
+      "spectron_metrics": {
+        "basic_block_count": 16,
+        "instruction_count": 290,
+        "mnemonic_hash": "cb8e152be8a572a6842cc6e4a7f7bab81de0e9dfbd70c982e172efa02d766dc8",
+        "register_shape_hash": "3cd87dd09e97882da0d3125f332a6f7b4650f778e95b4cb19108951e749ee2d7",
+        "shape_hash": "220576d82e3b9e39a9c39eedc71f7ea138343da5eeb098cf2d2446f5c6451b39",
+        "size": 1164
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both reject a missing player, normalize the requested map name, search the global map list by the map name at offset 128 or by its alias list at offset 312, and clear the player's cached map when no entry matches.",
+        "Both leave the player unchanged when the selected map is already cached. When the map changes, both store the new map and call the update-map-position method for every loaded server level before returning true.",
+        "The target preserves the source sixteen-block state transition and moves the player map pointer from the older offset 216 to the Spectron offset 219. The 40-byte size increase reflects changed wrappers and fields."
+      ],
+      "match_kind": "manual-level-map-lookup-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1a8404",
+      "original_metrics": {
+        "basic_block_count": 16,
+        "instruction_count": 82,
+        "mnemonic_hash": "91a6eaa4aa08c0347ef516fe2be7a5e591dfbcf874fb5b652a5cb8ebe5027bf5",
+        "register_shape_hash": "3eca0d90e93fc8f888de2cc9376001d3af3b225306add5fc17268dcde0bb4820",
+        "shape_hash": "16f8620bd047691bf0dcc504ea9ad25f37758d00d4b7d8bdef7247ea87e4c7d8",
+        "size": 328
+      },
+      "original_name": "checkForNewMap_TPlayer_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_checkForNewMap_TPlayer_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "player current-map selection and level-position refresh",
+      "spectron_current_name": "_Z10Ga8KmbJugLP10W6NzgawMJyRK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1ad124",
+      "spectron_metrics": {
+        "basic_block_count": 16,
+        "instruction_count": 92,
+        "mnemonic_hash": "25f9d3530d88c6f027e6bf52eaa50e1a905019f625574f0133fc719e9379883e",
+        "register_shape_hash": "85544a91ed103b4791154773ab051ce583130d6e1b848b474b72382a8317b8eb",
+        "shape_hash": "c44b90a0c4d388cf841f811729168474468ac3f3c5ec5715b32420909fa5c8be",
+        "size": 368
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both normalize the input filename, append .gmap when it has no extension, search the global map list, optionally clear an existing map, and resolve a missing game file through the resource and download helpers.",
+        "Both allocate a 0x198-byte server-level object for a new map, load the GMAP data, add the map to the global list, update the download record, and then refresh either the active player's side levels and board state or the affected loaded levels.",
+        "The target pseudocode calls the target checkForNewMap, side-level, map-position, board, and buffer methods in the same order as the source. It preserves the 35-block state machine and .gmap literal while expanding by 148 bytes."
+      ],
+      "match_kind": "manual-level-map-lookup-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1a8e88",
+      "original_metrics": {
+        "basic_block_count": 35,
+        "instruction_count": 176,
+        "mnemonic_hash": "9627414e2a1e77694eb4ae09abc0974bb962078ffd084642a0c724314089bb7f",
+        "register_shape_hash": "341c3dde8ae98547c4d8581c0bef1262a694a0d64be41747667c3869db5ffd6a",
+        "shape_hash": "960ca0f2e02783fdc702a4cea3429bbdfa55698ed1e84ac6e7f317b56cac7839",
+        "size": 704
+      },
+      "original_name": "LoadGraalMap_TPlayer_TString_const_bool",
+      "original_string_refs": [
+        ".gmap"
+      ],
+      "proposed_name": "v18_LoadGraalMap_TPlayer_TString_const_bool",
+      "semantic_match_already_present": false,
+      "source_basis": "GMAP file resolution, loading, and map refresh",
+      "spectron_current_name": "_Z10B0Ozga8wKyP10W6NzgawMJyRK10C8THgaTQxFb",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1add28",
+      "spectron_metrics": {
+        "basic_block_count": 35,
+        "instruction_count": 213,
+        "mnemonic_hash": "36d731f72b5628a016ea2468f63684aff336f1606f054bbf506ff1fc9232c4d9",
+        "register_shape_hash": "9e601f6e2e5035443f72f4a31db2b7989954b7dfcb01954d11618c7c05e9084f",
+        "shape_hash": "c018dbe0accd8acd54c7bb4774e05929ba372977897e0a3579f6df1126a1acf2",
+        "size": 852
+      },
+      "spectron_string_refs": [
+        ".gmap"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both normalize the requested map filename, compare it against the normalized filename field at offset 120 for every global map, and return an existing object before loading or creating anything.",
+        "On a miss, both call the GMAP loader with the active player and false, then optionally allocate a 0x198-byte server-level object when the caller permits creation and the map list has at most 999 entries.",
+        "Both mark the placeholder as a map, add the same built-in alias to its alias list, append it to the global map list, and return it. The target preserves the ten-block shape and is only four bytes larger."
+      ],
+      "match_kind": "manual-level-map-lookup-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1a9148",
+      "original_metrics": {
+        "basic_block_count": 10,
+        "instruction_count": 86,
+        "mnemonic_hash": "c4da9fdad4edb82cacbbdaa9064ce12492b2eeff6eec401057d0e081d6cb45a3",
+        "register_shape_hash": "42804f746ccf5122646533c5fac3215f2a08b4d4aef22e881ca9e2bc95646389",
+        "shape_hash": "eaf753e688a8838038844b5824cbdfa215e9f02b6d22298f729ab814c0795448",
+        "size": 344
+      },
+      "original_name": "getMap_TString_const_bool",
+      "original_string_refs": [],
+      "proposed_name": "v18_getMap_TString_const_bool",
+      "semantic_match_already_present": false,
+      "source_basis": "map lookup and optional placeholder construction",
+      "spectron_current_name": "_Z10sFYSSauERMRK10C8THgaTQxFb",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1ae07c",
+      "spectron_metrics": {
+        "basic_block_count": 10,
+        "instruction_count": 87,
+        "mnemonic_hash": "157c2e53b144e560b66eb3ad721fb944734a07e63cfb9048f27541d2c24bc937",
+        "register_shape_hash": "2a659c35d3f8c51c226efa94f156a9a1c9e35a1ce5f082af9077a1e13ded9fee",
+        "shape_hash": "eb362b1c081d562387f4607804752cce2a8c11f588f0b8bcd976a9560f39c4b2",
+        "size": 348
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_level_map_lookup_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v1_saved.json",
+    "spectron_features_sha256": "a8d58f85502362316ee99a0f79c2cd7a4ad5d6fac94aca0ee75bd0d2965fc2a1"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The level lookup, link serialization, map selection, and GMAP loading matches are supported by direct pseudocode, class-local ordering, shared field offsets, preserved control-flow shapes, and the shared .gmap literal where applicable.",
+    "Changed byte sizes and the thin getLevelPos wrapper are recorded as version differences. No exact byte identity is claimed for these six pairs."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for level lookup, link serialization, map selection, and GMAP loading",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 6,
+    "high_confidence_count": 6,
+    "new_context_anchor_count": 6,
+    "target_default_name_count": 0
+  }
+}

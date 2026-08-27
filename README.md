@@ -830,6 +830,15 @@ hashes match the 1.8 callback exactly. The boundary addition and verification
 are recorded in
 `artifacts/spectron_hidden_testnpc_manual_translation_anchor_20260826.json`.
 
+A seventy-seventh disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v79.i64`,
+adds six reviewed level and map helper labels. The set covers normalized level
+lookup, level-list indexing, link serialization, current-map selection, GMAP
+loading, and optional map placeholder construction. All six reopened
+successfully. The evidence is in
+`artifacts/spectron_level_map_lookup_manual_translation_anchors_20260826.json`,
+and the v79 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and

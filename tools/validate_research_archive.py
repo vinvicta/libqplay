@@ -287,6 +287,9 @@ def main():
     spectron_hidden_testnpc_anchors = load_json(
         "artifacts/spectron_hidden_testnpc_manual_translation_anchor_20260826.json"
     )
+    spectron_level_map_lookup_anchors = load_json(
+        "artifacts/spectron_level_map_lookup_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -1818,6 +1821,16 @@ def main():
     check("Spectron hidden-testnpc default targets", spectron_hidden_testnpc_anchors["summary"]["target_default_name_count"], 1)
     check("Spectron hidden-testnpc materialized boundary", spectron_hidden_testnpc_anchors["summary"]["target_boundary_materialized_count"], 1)
     check(
+        "Spectron level-map-lookup artifact",
+        spectron_level_map_lookup_anchors["artifact"],
+        "spectron_level_map_lookup_manual_translation_anchors_20260826",
+    )
+    check("Spectron level-map-lookup network", spectron_level_map_lookup_anchors["network_contacted"], False)
+    check("Spectron level-map-lookup total", spectron_level_map_lookup_anchors["summary"]["anchor_count"], 6)
+    check("Spectron level-map-lookup high confidence", spectron_level_map_lookup_anchors["summary"]["high_confidence_count"], 6)
+    check("Spectron level-map-lookup semantic overlap", spectron_level_map_lookup_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron level-map-lookup default targets", spectron_level_map_lookup_anchors["summary"]["target_default_name_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -1901,7 +1914,8 @@ def main():
     check("Spectron checkpoint server-level-side-helpers anchor count", spectron_checkpoint["server_level_side_helpers_anchors"]["verified_name_count"], 4)
     check("Spectron checkpoint server-level-storage anchor count", spectron_checkpoint["server_level_storage_anchors"]["verified_name_count"], 4)
     check("Spectron checkpoint hidden-testnpc anchor count", spectron_checkpoint["hidden_testnpc_anchors"]["verified_name_count"], 1)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "07a1209c24090df3908bbb8ec4805cb043d58a7739243a2424f70867e842561c")
+    check("Spectron checkpoint level-map-lookup anchor count", spectron_checkpoint["level_map_lookup_anchors"]["verified_name_count"], 6)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "6f60bbda2b7e5f2b5f5c3630611938c113932308d57538120ca9857fd405b85b")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -2039,6 +2053,7 @@ def main():
         spectron_server_level_side_helpers_anchors,
         spectron_server_level_storage_anchors,
         spectron_hidden_testnpc_anchors,
+        spectron_level_map_lookup_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
