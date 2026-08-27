@@ -1089,6 +1089,13 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_ani_lexer_fatal_manual_translation_anchor_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+154. The next IDA pass translated eight double and short numeric-array string
+     methods: indexed setters, indexed reads, comma-separated reads, and
+     string-list writes. The labels reopened successfully in the v94 disposable
+     copy. See
+     `artifacts/spectron_number_array_string_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

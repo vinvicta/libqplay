@@ -207,6 +207,8 @@ def main() -> None:
     parser.add_argument("--script-stream-profile-verification", type=Path)
     parser.add_argument("--ani-lexer-anchors", type=Path)
     parser.add_argument("--ani-lexer-verification", type=Path)
+    parser.add_argument("--number-array-string-anchors", type=Path)
+    parser.add_argument("--number-array-string-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2766,6 +2768,34 @@ def main() -> None:
         result["ani_lexer_anchors"] = ani_lexer
         result["interpretation"].append(
             "The ninety-first database revision also contains the separately reviewed generated animation-lexer fatal-exit callback anchor."
+        )
+    number_array_string = None
+    if args.number_array_string_anchors or args.number_array_string_verification:
+        if not args.number_array_string_anchors or not args.number_array_string_verification:
+            raise ValueError(
+                "number-array string anchors and number-array string verification must be supplied together"
+            )
+        number_array_string_document = load(args.number_array_string_anchors)
+        number_array_string_verification = load(args.number_array_string_verification)
+        if number_array_string_document.get("artifact") != "spectron_number_array_string_manual_translation_anchors_20260826":
+            raise ValueError("unexpected number-array string anchor artifact")
+        if not number_array_string_verification.get("verified"):
+            raise ValueError("number-array string anchor reopen verification did not pass")
+        expected_number_array_string = len(number_array_string_document["anchors"])
+        if number_array_string_verification["verified_name_count"] != expected_number_array_string:
+            raise ValueError("number-array string verification count differs from artifact")
+        number_array_string = {
+            "anchor_path": str(args.number_array_string_anchors),
+            "anchor_sha256": sha256_path(args.number_array_string_anchors),
+            "reopen_verification": str(args.number_array_string_verification),
+            "anchor_count": expected_number_array_string,
+            "verified_name_count": number_array_string_verification["verified_name_count"],
+            "reopen_failure_count": number_array_string_verification["failure_count"],
+        }
+    if number_array_string is not None:
+        result["number_array_string_anchors"] = number_array_string
+        result["interpretation"].append(
+            "The ninety-second database revision also contains the separately reviewed double and short numeric-array string-conversion anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

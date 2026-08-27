@@ -332,6 +332,9 @@ def main():
     spectron_ani_lexer_anchors = load_json(
         "artifacts/spectron_ani_lexer_fatal_manual_translation_anchor_20260826.json"
     )
+    spectron_number_array_string_anchors = load_json(
+        "artifacts/spectron_number_array_string_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2013,6 +2016,16 @@ def main():
     check("Spectron animation-lexer semantic overlap", spectron_ani_lexer_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron animation-lexer default targets", spectron_ani_lexer_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron number-array-string artifact",
+        spectron_number_array_string_anchors["artifact"],
+        "spectron_number_array_string_manual_translation_anchors_20260826",
+    )
+    check("Spectron number-array-string network", spectron_number_array_string_anchors["network_contacted"], False)
+    check("Spectron number-array-string total", spectron_number_array_string_anchors["summary"]["anchor_count"], 8)
+    check("Spectron number-array-string high confidence", spectron_number_array_string_anchors["summary"]["high_confidence_count"], 8)
+    check("Spectron number-array-string semantic overlap", spectron_number_array_string_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron number-array-string default targets", spectron_number_array_string_anchors["summary"]["target_default_name_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -2111,7 +2124,8 @@ def main():
     check("Spectron checkpoint script-machine-tail anchor count", spectron_checkpoint["script_machine_tail_anchors"]["verified_name_count"], 2)
     check("Spectron checkpoint script-stream-profile anchor count", spectron_checkpoint["script_stream_profile_anchors"]["verified_name_count"], 2)
     check("Spectron checkpoint animation-lexer anchor count", spectron_checkpoint["ani_lexer_anchors"]["verified_name_count"], 1)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "f48b51d672bd6d7cd57316f09312b9e90d22144ef61ddf473b6cabfb9d66722c")
+    check("Spectron checkpoint number-array-string anchor count", spectron_checkpoint["number_array_string_anchors"]["verified_name_count"], 8)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "44e98e90efabe2ed93ea5b7c9b53797a12aa4c4147e34891f0403a0d5ec1daae")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -2264,6 +2278,7 @@ def main():
         spectron_script_machine_tail_anchors,
         spectron_script_stream_profile_anchors,
         spectron_ani_lexer_anchors,
+        spectron_number_array_string_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
