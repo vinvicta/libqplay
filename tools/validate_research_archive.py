@@ -356,6 +356,9 @@ def main():
     spectron_texture_anchors = load_json(
         "artifacts/spectron_texture_manual_translation_anchors_20260826.json"
     )
+    spectron_drawing_panel_texture_anchors = load_json(
+        "artifacts/spectron_drawing_panel_texture_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2117,6 +2120,16 @@ def main():
     check("Spectron texture semantic overlap", spectron_texture_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron texture default targets", spectron_texture_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron drawing-panel texture artifact",
+        spectron_drawing_panel_texture_anchors["artifact"],
+        "spectron_drawing_panel_texture_manual_translation_anchors_20260826",
+    )
+    check("Spectron drawing-panel texture network", spectron_drawing_panel_texture_anchors["network_contacted"], False)
+    check("Spectron drawing-panel texture total", spectron_drawing_panel_texture_anchors["summary"]["anchor_count"], 5)
+    check("Spectron drawing-panel texture high confidence", spectron_drawing_panel_texture_anchors["summary"]["high_confidence_count"], 5)
+    check("Spectron drawing-panel texture semantic overlap", spectron_drawing_panel_texture_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron drawing-panel texture default targets", spectron_drawing_panel_texture_anchors["summary"]["target_default_name_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -2223,7 +2236,8 @@ def main():
     check("Spectron checkpoint hash-family anchor count", spectron_checkpoint["hash_family_anchors"]["verified_name_count"], 9)
     check("Spectron checkpoint options anchor count", spectron_checkpoint["options_anchors"]["verified_name_count"], 7)
     check("Spectron checkpoint texture anchor count", spectron_checkpoint["texture_anchors"]["verified_name_count"], 10)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "8944246d7b9b491cecbeec2298383defe1d624a6643d654fdc28894885c15913")
+    check("Spectron checkpoint drawing-panel texture anchor count", spectron_checkpoint["drawing_panel_texture_anchors"]["verified_name_count"], 5)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "387015ee8aa3b32836bec8914d471f111ea310780a9da2dd2d5349fcde98f650")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -2384,6 +2398,7 @@ def main():
         spectron_hash_family_anchors,
         spectron_options_anchors,
         spectron_texture_anchors,
+        spectron_drawing_panel_texture_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

@@ -223,6 +223,8 @@ def main() -> None:
     parser.add_argument("--options-verification", type=Path)
     parser.add_argument("--texture-anchors", type=Path)
     parser.add_argument("--texture-verification", type=Path)
+    parser.add_argument("--drawing-panel-texture-anchors", type=Path)
+    parser.add_argument("--drawing-panel-texture-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3006,6 +3008,34 @@ def main() -> None:
         result["texture_anchors"] = texture
         result["interpretation"].append(
             "The ninety-ninth database revision also contains the separately reviewed TTexture bitmap access, GPU texture lifecycle, Graal lookup, and static registry anchors."
+        )
+    drawing_panel_texture = None
+    if args.drawing_panel_texture_anchors or args.drawing_panel_texture_verification:
+        if not args.drawing_panel_texture_anchors or not args.drawing_panel_texture_verification:
+            raise ValueError(
+                "drawing-panel texture anchors and drawing-panel texture verification must be supplied together"
+            )
+        drawing_panel_texture_document = load(args.drawing_panel_texture_anchors)
+        drawing_panel_texture_verification = load(args.drawing_panel_texture_verification)
+        if drawing_panel_texture_document.get("artifact") != "spectron_drawing_panel_texture_manual_translation_anchors_20260826":
+            raise ValueError("unexpected drawing-panel texture anchor artifact")
+        if not drawing_panel_texture_verification.get("verified"):
+            raise ValueError("drawing-panel texture anchor reopen verification did not pass")
+        expected_drawing_panel_texture = len(drawing_panel_texture_document["anchors"])
+        if drawing_panel_texture_verification["verified_name_count"] != expected_drawing_panel_texture:
+            raise ValueError("drawing-panel texture verification count differs from artifact")
+        drawing_panel_texture = {
+            "anchor_path": str(args.drawing_panel_texture_anchors),
+            "anchor_sha256": sha256_path(args.drawing_panel_texture_anchors),
+            "reopen_verification": str(args.drawing_panel_texture_verification),
+            "anchor_count": expected_drawing_panel_texture,
+            "verified_name_count": drawing_panel_texture_verification["verified_name_count"],
+            "reopen_failure_count": drawing_panel_texture_verification["failure_count"],
+        }
+    if drawing_panel_texture is not None:
+        result["drawing_panel_texture_anchors"] = drawing_panel_texture
+        result["interpretation"].append(
+            "The one-hundredth database revision also contains the separately reviewed TDrawingPanelTexture destructor, constructor, and texture-dimension anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

@@ -1155,6 +1155,13 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_texture_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+162. The next IDA pass translated five `TDrawingPanelTexture` methods covering
+     both destructors, the window-backed constructor, and GPU texture width
+     and height accessors. The labels reopened successfully in the v102
+     disposable copy. See
+     `artifacts/spectron_drawing_panel_texture_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
