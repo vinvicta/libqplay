@@ -209,6 +209,8 @@ def main() -> None:
     parser.add_argument("--ani-lexer-verification", type=Path)
     parser.add_argument("--number-array-string-anchors", type=Path)
     parser.add_argument("--number-array-string-verification", type=Path)
+    parser.add_argument("--client-environment-clock-anchors", type=Path)
+    parser.add_argument("--client-environment-clock-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2796,6 +2798,34 @@ def main() -> None:
         result["number_array_string_anchors"] = number_array_string
         result["interpretation"].append(
             "The ninety-second database revision also contains the separately reviewed double and short numeric-array string-conversion anchors."
+        )
+    client_environment_clock = None
+    if args.client_environment_clock_anchors or args.client_environment_clock_verification:
+        if not args.client_environment_clock_anchors or not args.client_environment_clock_verification:
+            raise ValueError(
+                "client-environment clock anchors and client-environment clock verification must be supplied together"
+            )
+        client_environment_clock_document = load(args.client_environment_clock_anchors)
+        client_environment_clock_verification = load(args.client_environment_clock_verification)
+        if client_environment_clock_document.get("artifact") != "spectron_client_environment_clock_manual_translation_anchors_20260826":
+            raise ValueError("unexpected client-environment clock anchor artifact")
+        if not client_environment_clock_verification.get("verified"):
+            raise ValueError("client-environment clock anchor reopen verification did not pass")
+        expected_client_environment_clock = len(client_environment_clock_document["anchors"])
+        if client_environment_clock_verification["verified_name_count"] != expected_client_environment_clock:
+            raise ValueError("client-environment clock verification count differs from artifact")
+        client_environment_clock = {
+            "anchor_path": str(args.client_environment_clock_anchors),
+            "anchor_sha256": sha256_path(args.client_environment_clock_anchors),
+            "reopen_verification": str(args.client_environment_clock_verification),
+            "anchor_count": expected_client_environment_clock,
+            "verified_name_count": client_environment_clock_verification["verified_name_count"],
+            "reopen_failure_count": client_environment_clock_verification["failure_count"],
+        }
+    if client_environment_clock is not None:
+        result["client_environment_clock_anchors"] = client_environment_clock
+        result["interpretation"].append(
+            "The ninety-third database revision also contains the separately reviewed client-environment build-time and expiry helpers."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

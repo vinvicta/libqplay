@@ -1096,6 +1096,13 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_number_array_string_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+155. The next IDA pass translated the client-environment build-time and
+     time-expiry helpers. The source uses a fixed 2019-02-13 date and 15-day
+     window, while Spectron reads both values from globals. Both labels
+     reopened successfully in the v95 disposable copy. See
+     `artifacts/spectron_client_environment_clock_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
