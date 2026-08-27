@@ -1253,6 +1253,12 @@ This is the short handoff view. The full reasoning and command history are in
      disposable copy. See
      `artifacts/spectron_pixelbuffer_bitmap_lifecycle_correction_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
+176. The next IDA pass translated four image-animation and palette residual
+     methods covering the two zero-return base hooks and the MNG or palette
+     deleting destructors. The labels reopened successfully in the v116
+     disposable copy. See
+     `artifacts/spectron_animation_palette_residual_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
 ## Not verified
 

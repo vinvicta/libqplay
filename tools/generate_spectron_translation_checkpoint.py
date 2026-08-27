@@ -251,6 +251,8 @@ def main() -> None:
     parser.add_argument("--pixelbuffer-residual-verification", type=Path)
     parser.add_argument("--pixelbuffer-bitmap-lifecycle-anchors", type=Path)
     parser.add_argument("--pixelbuffer-bitmap-lifecycle-verification", type=Path)
+    parser.add_argument("--animation-palette-residual-anchors", type=Path)
+    parser.add_argument("--animation-palette-residual-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3426,6 +3428,34 @@ def main() -> None:
         result["pixelbuffer_bitmap_lifecycle_anchors"] = pixelbuffer_bitmap_lifecycle
         result["interpretation"].append(
             "The one-hundred-thirteenth database revision also contains the separately reviewed TPixelBuffer and TBitmap destructor pairs that correct the earlier medium-confidence class collision."
+        )
+    animation_palette_residual = None
+    if args.animation_palette_residual_anchors or args.animation_palette_residual_verification:
+        if not args.animation_palette_residual_anchors or not args.animation_palette_residual_verification:
+            raise ValueError(
+                "animation-palette residual anchors and animation-palette residual verification must be supplied together"
+            )
+        animation_palette_residual_document = load(args.animation_palette_residual_anchors)
+        animation_palette_residual_verification = load(args.animation_palette_residual_verification)
+        if animation_palette_residual_document.get("artifact") != "spectron_animation_palette_residual_manual_translation_anchors_20260826":
+            raise ValueError("unexpected animation-palette residual anchor artifact")
+        if not animation_palette_residual_verification.get("verified"):
+            raise ValueError("animation-palette residual anchor reopen verification did not pass")
+        expected_animation_palette_residual = len(animation_palette_residual_document["anchors"])
+        if animation_palette_residual_verification["verified_name_count"] != expected_animation_palette_residual:
+            raise ValueError("animation-palette residual verification count differs from artifact")
+        animation_palette_residual = {
+            "anchor_path": str(args.animation_palette_residual_anchors),
+            "anchor_sha256": sha256_path(args.animation_palette_residual_anchors),
+            "reopen_verification": str(args.animation_palette_residual_verification),
+            "anchor_count": expected_animation_palette_residual,
+            "verified_name_count": animation_palette_residual_verification["verified_name_count"],
+            "reopen_failure_count": animation_palette_residual_verification["failure_count"],
+        }
+    if animation_palette_residual is not None:
+        result["animation_palette_residual_anchors"] = animation_palette_residual
+        result["interpretation"].append(
+            "The one-hundred-fourteenth database revision also contains the separately reviewed image-animation base hooks and MNG or palette deleting-destructor anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
