@@ -1137,6 +1137,15 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_hash_family_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+160. The next IDA pass translated seven `TOptions` methods covering GUI-style
+     change events, decoded nickname, account, and password getters, account
+     persistence, and the options refresh timer. The labels reopened
+     successfully in the v100 disposable copy. The two style targets were
+     default `sub_` names before translation, and the target account setter
+     uses `accountname_new` where 1.8 uses `accountname`. See
+     `artifacts/spectron_options_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

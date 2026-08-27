@@ -1,0 +1,407 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target K7FLgag3II methods remain in the same options-class order as the translated filename, load, save, password-load, and nickname setters.",
+        "The external and default GUI-style setters preserve change suppression, global value assignment, universe-event dispatch, and temporary event-name cleanup. Their target bodies differ only through rebuilt string operations and target-specific globals and literals.",
+        "The nickname, account-name, and password getters preserve null-global handling and decode the corresponding stored hash-list slot. The target makes the temporary C8THgaTQxF copy and cleanup explicit.",
+        "The account-name setter preserves lowercasing, guest and guest_ filtering, cookie handling, recent-account list removal and insertion, five-entry trimming, and registry persistence. The target replaces the source accountname literal with accountname_new.",
+        "The options timer preserves the three stored-value refreshes and uniqueness operations. The target uses explicit CanTfaz6bZ conversion and assignment wrappers."
+      ],
+      "match_kind": "manual-options-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TGraalVar_invokeEvent_TString_const_char_const",
+        "plt_TString_clear_void",
+        "plt_TString_operator_assign_TString_const",
+        "plt_TString_operator_lshift_char_const",
+        "plt_operator_assign_TString_const_TString_const"
+      ],
+      "original_ea": "0x16a4f0",
+      "original_metrics": {
+        "basic_block_count": 7,
+        "instruction_count": 46,
+        "mnemonic_hash": "028f1e05e05a0ddf8a14a872c47db01421b2360d28810ac4620bad9fe3f4dcf8",
+        "register_shape_hash": null,
+        "shape_hash": "6ea10a8add7bc21ffd866d4330e563990aa9f5ca37c05792dcc7acbbdf7eb67b",
+        "size": 184
+      },
+      "original_name": "TOptions_set_pref__video__externalguistyle",
+      "original_string_refs": [
+        "onExternalStyleChanges"
+      ],
+      "proposed_name": "v18_TOptions_set_pref__video__externalguistyle",
+      "semantic_match_already_present": false,
+      "source_basis": "options external GUI style setter",
+      "spectron_current_name": "sub_16DF48",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSERKS_",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10G0gxgajWBw10BRcLgaJqkIERK10C8THgaTQxFPKcz",
+        "._ZN10KKhLga4xoI10kEiLgawipIERK10C8THgaTQxF",
+        "._ZN10KKhLga4xoI10tJOiUaYhrZERK10C8THgaTQxF",
+        "._ZeqRK10C8THgaTQxFS1_"
+      ],
+      "spectron_ea": "0x16df48",
+      "spectron_metrics": {
+        "basic_block_count": 7,
+        "instruction_count": 60,
+        "mnemonic_hash": "f5d7aa893dbe36d0ff64513dc9f726a31e92dbdceeda2f6aaea25146477e0354",
+        "register_shape_hash": null,
+        "shape_hash": "334bc9102784e987d87ad88c696a418624e56846ea5615890c01dfd7062f6435",
+        "size": 244
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target K7FLgag3II methods remain in the same options-class order as the translated filename, load, save, password-load, and nickname setters.",
+        "The external and default GUI-style setters preserve change suppression, global value assignment, universe-event dispatch, and temporary event-name cleanup. Their target bodies differ only through rebuilt string operations and target-specific globals and literals.",
+        "The nickname, account-name, and password getters preserve null-global handling and decode the corresponding stored hash-list slot. The target makes the temporary C8THgaTQxF copy and cleanup explicit.",
+        "The account-name setter preserves lowercasing, guest and guest_ filtering, cookie handling, recent-account list removal and insertion, five-entry trimming, and registry persistence. The target replaces the source accountname literal with accountname_new.",
+        "The options timer preserves the three stored-value refreshes and uniqueness operations. The target uses explicit CanTfaz6bZ conversion and assignment wrappers."
+      ],
+      "match_kind": "manual-options-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TGraalVar_invokeEvent_TString_const_char_const",
+        "plt_TString_clear_void",
+        "plt_TString_operator_assign_TString_const",
+        "plt_TString_operator_lshift_char_const",
+        "plt_operator_assign_TString_const_TString_const"
+      ],
+      "original_ea": "0x16a5a8",
+      "original_metrics": {
+        "basic_block_count": 7,
+        "instruction_count": 46,
+        "mnemonic_hash": "028f1e05e05a0ddf8a14a872c47db01421b2360d28810ac4620bad9fe3f4dcf8",
+        "register_shape_hash": null,
+        "shape_hash": "6ea10a8add7bc21ffd866d4330e563990aa9f5ca37c05792dcc7acbbdf7eb67b",
+        "size": 184
+      },
+      "original_name": "TOptions_set_pref__video__defaultguistyle",
+      "original_string_refs": [
+        "onDefaultStyleChanges"
+      ],
+      "proposed_name": "v18_TOptions_set_pref__video__defaultguistyle",
+      "semantic_match_already_present": false,
+      "source_basis": "options default GUI style setter",
+      "spectron_current_name": "sub_16E03C",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSERKS_",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10G0gxgajWBw10BRcLgaJqkIERK10C8THgaTQxFPKcz",
+        "._ZN10KKhLga4xoI10kEiLgawipIERK10C8THgaTQxF",
+        "._ZN10KKhLga4xoI10tJOiUaYhrZERK10C8THgaTQxF",
+        "._ZeqRK10C8THgaTQxFS1_"
+      ],
+      "spectron_ea": "0x16e03c",
+      "spectron_metrics": {
+        "basic_block_count": 7,
+        "instruction_count": 60,
+        "mnemonic_hash": "f5d7aa893dbe36d0ff64513dc9f726a31e92dbdceeda2f6aaea25146477e0354",
+        "register_shape_hash": null,
+        "shape_hash": "334bc9102784e987d87ad88c696a418624e56846ea5615890c01dfd7062f6435",
+        "size": 244
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target K7FLgag3II methods remain in the same options-class order as the translated filename, load, save, password-load, and nickname setters.",
+        "The external and default GUI-style setters preserve change suppression, global value assignment, universe-event dispatch, and temporary event-name cleanup. Their target bodies differ only through rebuilt string operations and target-specific globals and literals.",
+        "The nickname, account-name, and password getters preserve null-global handling and decode the corresponding stored hash-list slot. The target makes the temporary C8THgaTQxF copy and cleanup explicit.",
+        "The account-name setter preserves lowercasing, guest and guest_ filtering, cookie handling, recent-account list removal and insertion, five-entry trimming, and registry persistence. The target replaces the source accountname literal with accountname_new.",
+        "The options timer preserves the three stored-value refreshes and uniqueness operations. The target uses explicit CanTfaz6bZ conversion and assignment wrappers."
+      ],
+      "match_kind": "manual-options-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_THashList_decodesimple_TString_const"
+      ],
+      "original_ea": "0x16b8ec",
+      "original_metrics": {
+        "basic_block_count": 3,
+        "instruction_count": 16,
+        "mnemonic_hash": "ed321a032a07e044a55565cfed460f3c1ce932b6c383f0feccdf946df28675d0",
+        "register_shape_hash": null,
+        "shape_hash": "1fa5773675291f0aaf7c06bc3d7ce3090b6846dc555f6e924e448726c0c62cae",
+        "size": 64
+      },
+      "original_name": "TOptions_getGraalNickName_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TOptions_getGraalNickName_void",
+      "semantic_match_already_present": false,
+      "source_basis": "options decoded nickname getter",
+      "spectron_current_name": "_ZN10K7FLgag3II10M2jjMa_tSfEv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSER10CanTfaz6bZ",
+        "._ZN10KKhLga4xoI10kEiLgawipIERK10C8THgaTQxF"
+      ],
+      "spectron_ea": "0x16f3bc",
+      "spectron_metrics": {
+        "basic_block_count": 3,
+        "instruction_count": 27,
+        "mnemonic_hash": "3457aa1302a495ed75b85ccce6003006f19598c5851d5ba234e991b8ba849411",
+        "register_shape_hash": null,
+        "shape_hash": "0c0d047608b834f68a1c588beb311e371dc167dd64f7b0617b1cc5092e3cbebf",
+        "size": 108
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target K7FLgag3II methods remain in the same options-class order as the translated filename, load, save, password-load, and nickname setters.",
+        "The external and default GUI-style setters preserve change suppression, global value assignment, universe-event dispatch, and temporary event-name cleanup. Their target bodies differ only through rebuilt string operations and target-specific globals and literals.",
+        "The nickname, account-name, and password getters preserve null-global handling and decode the corresponding stored hash-list slot. The target makes the temporary C8THgaTQxF copy and cleanup explicit.",
+        "The account-name setter preserves lowercasing, guest and guest_ filtering, cookie handling, recent-account list removal and insertion, five-entry trimming, and registry persistence. The target replaces the source accountname literal with accountname_new.",
+        "The options timer preserves the three stored-value refreshes and uniqueness operations. The target uses explicit CanTfaz6bZ conversion and assignment wrappers."
+      ],
+      "match_kind": "manual-options-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_THashList_decodesimple_TString_const"
+      ],
+      "original_ea": "0x16bc24",
+      "original_metrics": {
+        "basic_block_count": 3,
+        "instruction_count": 17,
+        "mnemonic_hash": "2f99c784bafc8c7b5945a51c526f06fe43269fdaf4c1f31619cf35b1cf49e44e",
+        "register_shape_hash": null,
+        "shape_hash": "fbcdcab0cec7c7885d55884a889eb0bd31cacd543b45b5aa8cb3dcb1410da16f",
+        "size": 68
+      },
+      "original_name": "TOptions_getGraalAccountName_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TOptions_getGraalAccountName_void",
+      "semantic_match_already_present": false,
+      "source_basis": "options decoded account-name getter",
+      "spectron_current_name": "_ZN10K7FLgag3II10rq3iMaRuEfEv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSER10CanTfaz6bZ",
+        "._ZN10KKhLga4xoI10kEiLgawipIERK10C8THgaTQxF"
+      ],
+      "spectron_ea": "0x16f720",
+      "spectron_metrics": {
+        "basic_block_count": 3,
+        "instruction_count": 28,
+        "mnemonic_hash": "6cab6f169a51577e8c76cf716da6583df78f1655283acae5d2a005bfe67e034b",
+        "register_shape_hash": null,
+        "shape_hash": "017034c831698aa9f02499bd1b1e8850b74ec6fc2effd01fce080fd5d4eca358",
+        "size": 112
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target K7FLgag3II methods remain in the same options-class order as the translated filename, load, save, password-load, and nickname setters.",
+        "The external and default GUI-style setters preserve change suppression, global value assignment, universe-event dispatch, and temporary event-name cleanup. Their target bodies differ only through rebuilt string operations and target-specific globals and literals.",
+        "The nickname, account-name, and password getters preserve null-global handling and decode the corresponding stored hash-list slot. The target makes the temporary C8THgaTQxF copy and cleanup explicit.",
+        "The account-name setter preserves lowercasing, guest and guest_ filtering, cookie handling, recent-account list removal and insertion, five-entry trimming, and registry persistence. The target replaces the source accountname literal with accountname_new.",
+        "The options timer preserves the three stored-value refreshes and uniqueness operations. The target uses explicit CanTfaz6bZ conversion and assignment wrappers."
+      ],
+      "match_kind": "manual-options-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TFiles_setRegistryValue_TString_const_TString_const",
+        "plt_TOptions_setGraalAccountNameSimple_TString_const",
+        "plt_TStringList_Delete_int",
+        "plt_TStringList_GetCommaText_void",
+        "plt_TStringList_Insert_int_TString_const",
+        "plt_TStringList_Remove_TString_const",
+        "plt_TString_clear_void",
+        "plt_TString_lower_void",
+        "plt_TString_operator_assign_TString_const",
+        "plt_TString_operator_lshift_char_const",
+        "plt_TString_starts_TString_const",
+        "plt_operator_ne_TString_const_char_const"
+      ],
+      "original_ea": "0x16bcd8",
+      "original_metrics": {
+        "basic_block_count": 10,
+        "instruction_count": 101,
+        "mnemonic_hash": "337e379ff166a2aa8f8488355c8baf8a7645de17207f4c59b29ba44fea2c04d8",
+        "register_shape_hash": null,
+        "shape_hash": "a52a4863b44b5d7306fdbdfcb8ee2d32288696a6b074afe41f69902293b2d8d1",
+        "size": 408
+      },
+      "original_name": "TOptions_setGraalAccountName_TString_const",
+      "original_string_refs": [
+        "accountname",
+        "cookie",
+        "guest",
+        "guest_"
+      ],
+      "proposed_name": "v18_TOptions_setGraalAccountName_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "options account-name persistence and recent-account list",
+      "spectron_current_name": "_ZN10K7FLgag3II10Ij0iMakTBfERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSERKS_",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10CanTfaz6bZ5clearEv",
+        "._ZN10CanTfaz6bZaSERK10C8THgaTQxF",
+        "._ZN10K7FLgag3II10RofLgaAzmIERK10C8THgaTQxF",
+        "._ZN10vuuHgangcF6DeleteEi",
+        "._ZN10vuuHgangcF6InsertEiRK10CanTfaz6bZ",
+        "._ZN10vuuHgangcF6RemoveERK10CanTfaz6bZ",
+        "._ZN10wiULgacZUI10uBXwKafLkLERK10C8THgaTQxFS2_",
+        "._ZNK10C8THgaTQxF10fEtHgarybFERKS_",
+        "._ZNK10C8THgaTQxF5lowerEv",
+        "._ZNK10vuuHgangcF10LzrhKaQOhyEv",
+        "._ZneRK10C8THgaTQxFPKc"
+      ],
+      "spectron_ea": "0x16f800",
+      "spectron_metrics": {
+        "basic_block_count": 10,
+        "instruction_count": 119,
+        "mnemonic_hash": "e6b00038d76d788c5c78c484f92b4404297d99a96380d584dfee665366d809a0",
+        "register_shape_hash": null,
+        "shape_hash": "ffb15187dc025b058df40210cee1645ff2817b4e3f482d803f8fd44c5cd48236",
+        "size": 480
+      },
+      "spectron_string_refs": [
+        "accountname_new",
+        "cookie",
+        "guest",
+        "guest_"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target K7FLgag3II methods remain in the same options-class order as the translated filename, load, save, password-load, and nickname setters.",
+        "The external and default GUI-style setters preserve change suppression, global value assignment, universe-event dispatch, and temporary event-name cleanup. Their target bodies differ only through rebuilt string operations and target-specific globals and literals.",
+        "The nickname, account-name, and password getters preserve null-global handling and decode the corresponding stored hash-list slot. The target makes the temporary C8THgaTQxF copy and cleanup explicit.",
+        "The account-name setter preserves lowercasing, guest and guest_ filtering, cookie handling, recent-account list removal and insertion, five-entry trimming, and registry persistence. The target replaces the source accountname literal with accountname_new.",
+        "The options timer preserves the three stored-value refreshes and uniqueness operations. The target uses explicit CanTfaz6bZ conversion and assignment wrappers."
+      ],
+      "match_kind": "manual-options-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_THashList_decodesimple_TString_const"
+      ],
+      "original_ea": "0x16be70",
+      "original_metrics": {
+        "basic_block_count": 3,
+        "instruction_count": 17,
+        "mnemonic_hash": "2f99c784bafc8c7b5945a51c526f06fe43269fdaf4c1f31619cf35b1cf49e44e",
+        "register_shape_hash": null,
+        "shape_hash": "f01ee111e8fd765cd95c2ee0699d960d0b476d6f57cd76abc5e59235c614e519",
+        "size": 68
+      },
+      "original_name": "TOptions_getGraalPassWord_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TOptions_getGraalPassWord_void",
+      "semantic_match_already_present": false,
+      "source_basis": "options decoded password getter",
+      "spectron_current_name": "_ZN10K7FLgag3II10rWDnMaMcvjEv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSER10CanTfaz6bZ",
+        "._ZN10KKhLga4xoI10kEiLgawipIERK10C8THgaTQxF"
+      ],
+      "spectron_ea": "0x16f9e0",
+      "spectron_metrics": {
+        "basic_block_count": 3,
+        "instruction_count": 28,
+        "mnemonic_hash": "6cab6f169a51577e8c76cf716da6583df78f1655283acae5d2a005bfe67e034b",
+        "register_shape_hash": null,
+        "shape_hash": "3f142d069fe300bbcab62eb9a41629dad9932ddb0c3330be13e94bff22b9fbae",
+        "size": 112
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target K7FLgag3II methods remain in the same options-class order as the translated filename, load, save, password-load, and nickname setters.",
+        "The external and default GUI-style setters preserve change suppression, global value assignment, universe-event dispatch, and temporary event-name cleanup. Their target bodies differ only through rebuilt string operations and target-specific globals and literals.",
+        "The nickname, account-name, and password getters preserve null-global handling and decode the corresponding stored hash-list slot. The target makes the temporary C8THgaTQxF copy and cleanup explicit.",
+        "The account-name setter preserves lowercasing, guest and guest_ filtering, cookie handling, recent-account list removal and insertion, five-entry trimming, and registry persistence. The target replaces the source accountname literal with accountname_new.",
+        "The options timer preserves the three stored-value refreshes and uniqueness operations. The target uses explicit CanTfaz6bZ conversion and assignment wrappers."
+      ],
+      "match_kind": "manual-options-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TString_clear_void",
+        "plt_TString_makeUnique_void",
+        "plt_TString_operator_assign_TString_const"
+      ],
+      "original_ea": "0x16bf24",
+      "original_metrics": {
+        "basic_block_count": 3,
+        "instruction_count": 33,
+        "mnemonic_hash": "573eb2c2bfbbf3eaf089bd8786078ba4267e9250609cc3e91c0ae6c033008c2e",
+        "register_shape_hash": null,
+        "shape_hash": "f59e132fe088200239a89db90409e45d51a060c94383d8f7fcdc5bc76d563743",
+        "size": 132
+      },
+      "original_name": "TOptions_runOptionsTimer_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TOptions_runOptionsTimer_void",
+      "semantic_match_already_present": false,
+      "source_basis": "options stored-value refresh timer",
+      "spectron_current_name": "_ZN10K7FLgag3II10odHnMaSYxjEv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10CanTfaz6bZ10gwFWfaPxY0Ev",
+        "._ZN10CanTfaz6bZaSERK10C8THgaTQxF"
+      ],
+      "spectron_ea": "0x16fac0",
+      "spectron_metrics": {
+        "basic_block_count": 3,
+        "instruction_count": 39,
+        "mnemonic_hash": "44ef7662b836c7ecb7f1798aee862cb9892999674ddbeea4542c0c375c1cf579",
+        "register_shape_hash": null,
+        "shape_hash": "a17051bae37d9d4cce4ff51a97c77962dede1b888307f508c730a3fe60e7491b",
+        "size": 156
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_options_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4.json",
+    "original_features_sha256": "62cccc40ea88a08d5ed0845ceeceaf194b528bdd07bdd6ff1a0350dee3b0ab82",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features.json",
+    "spectron_features_sha256": "cc1789d2d3c24f478d7863f2b07b10b4259aa2d370e363e5303000eb7b835243"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 roles while keeping the obfuscated target names and wrapper differences in the evidence rows.",
+    "The target's accountname_new literal, explicit string wrappers, and default-style sub_ targets are recorded as target-version differences."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for TOptions style setters, decoded account getters, account persistence, and timer refresh",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 7,
+    "high_confidence_count": 7,
+    "new_context_anchor_count": 7,
+    "target_default_name_count": 2
+  }
+}

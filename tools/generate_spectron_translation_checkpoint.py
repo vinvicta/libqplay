@@ -219,6 +219,8 @@ def main() -> None:
     parser.add_argument("--tstringlist-extended-verification", type=Path)
     parser.add_argument("--hash-family-anchors", type=Path)
     parser.add_argument("--hash-family-verification", type=Path)
+    parser.add_argument("--options-anchors", type=Path)
+    parser.add_argument("--options-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2946,6 +2948,34 @@ def main() -> None:
         result["hash_family_anchors"] = hash_family
         result["interpretation"].append(
             "The ninety-seventh database revision also contains the separately reviewed THashList lookup, assignment, sorting, and THashStrings value and serialization anchors."
+        )
+    options = None
+    if args.options_anchors or args.options_verification:
+        if not args.options_anchors or not args.options_verification:
+            raise ValueError(
+                "options anchors and options verification must be supplied together"
+            )
+        options_document = load(args.options_anchors)
+        options_verification = load(args.options_verification)
+        if options_document.get("artifact") != "spectron_options_manual_translation_anchors_20260826":
+            raise ValueError("unexpected options anchor artifact")
+        if not options_verification.get("verified"):
+            raise ValueError("options anchor reopen verification did not pass")
+        expected_options = len(options_document["anchors"])
+        if options_verification["verified_name_count"] != expected_options:
+            raise ValueError("options verification count differs from artifact")
+        options = {
+            "anchor_path": str(args.options_anchors),
+            "anchor_sha256": sha256_path(args.options_anchors),
+            "reopen_verification": str(args.options_verification),
+            "anchor_count": expected_options,
+            "verified_name_count": options_verification["verified_name_count"],
+            "reopen_failure_count": options_verification["failure_count"],
+        }
+    if options is not None:
+        result["options_anchors"] = options
+        result["interpretation"].append(
+            "The ninety-eighth database revision also contains the separately reviewed TOptions GUI-style setter, decoded credential getter, account persistence, and timer-refresh anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

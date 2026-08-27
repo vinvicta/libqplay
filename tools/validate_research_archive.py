@@ -350,6 +350,9 @@ def main():
     spectron_hash_family_anchors = load_json(
         "artifacts/spectron_hash_family_manual_translation_anchors_20260826.json"
     )
+    spectron_options_anchors = load_json(
+        "artifacts/spectron_options_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2091,6 +2094,16 @@ def main():
     check("Spectron hash-family semantic overlap", spectron_hash_family_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron hash-family default targets", spectron_hash_family_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron options artifact",
+        spectron_options_anchors["artifact"],
+        "spectron_options_manual_translation_anchors_20260826",
+    )
+    check("Spectron options network", spectron_options_anchors["network_contacted"], False)
+    check("Spectron options total", spectron_options_anchors["summary"]["anchor_count"], 7)
+    check("Spectron options high confidence", spectron_options_anchors["summary"]["high_confidence_count"], 7)
+    check("Spectron options semantic overlap", spectron_options_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron options default targets", spectron_options_anchors["summary"]["target_default_name_count"], 2)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -2195,7 +2208,8 @@ def main():
     check("Spectron checkpoint TStringList comma anchor count", spectron_checkpoint["tstringlist_comma_anchors"]["verified_name_count"], 4)
     check("Spectron checkpoint extended TStringList anchor count", spectron_checkpoint["tstringlist_extended_anchors"]["verified_name_count"], 7)
     check("Spectron checkpoint hash-family anchor count", spectron_checkpoint["hash_family_anchors"]["verified_name_count"], 9)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "0760c6fb90cd51a7f575eb46bedcb07f8d72eb6885055b48f2305aedd7ef276b")
+    check("Spectron checkpoint options anchor count", spectron_checkpoint["options_anchors"]["verified_name_count"], 7)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "3b438b39ec6f02fe7a8059c1abe8172338b0d1cee936522ce9e23611f4f94b5d")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -2354,6 +2368,7 @@ def main():
         spectron_tstringlist_comma_anchors,
         spectron_tstringlist_extended_anchors,
         spectron_hash_family_anchors,
+        spectron_options_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
