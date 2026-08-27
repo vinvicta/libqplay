@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v60.i64",
-    "sha256": "9254878f5c135452260508068fa54f3ca6821d6cbd506af49dc14fd08bea4ab2"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v61.i64",
+    "sha256": "cfac89e2ddc58e14b0eac9be2eaf052b8cc1373d47036c33ea96b441544ac079"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -203,7 +203,8 @@
     "The fifty-fifth database revision also contains the separately reviewed TShowImg serialization and network-property anchors.",
     "The fifty-sixth database revision also contains the separately reviewed particle-emitter initializer and emission anchors.",
     "The fifty-seventh database revision also contains the separately reviewed explosion, carry, and flying server-animation anchors.",
-    "The fifty-eighth database revision also contains the separately reviewed player start-level and periodic-update anchors."
+    "The fifty-eighth database revision also contains the separately reviewed player start-level and periodic-update anchors.",
+    "The fifty-ninth database revision also contains the separately reviewed player emoticon-coordinate getter anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -284,6 +285,14 @@
     "anchor_sha256": "d832a2ef862d9c53e6572cf3e066199f7cb7aeaa068ee17ef30d77934036f9f6",
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_particle_emitter_verification_v58.json",
+    "verified_name_count": 2
+  },
+  "player_emoticon_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "artifacts/spectron_player_emoticon_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "b0b04a4164dd7a71b9a18b3d2385bba8d22205bc8b91555a555618bffd5ee2d2",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_player_emoticon_verification_v61.json",
     "verified_name_count": 2
   },
   "player_helper_anchors": {

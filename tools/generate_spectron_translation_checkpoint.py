@@ -141,6 +141,8 @@ def main() -> None:
     parser.add_argument("--server-animation-verification", type=Path)
     parser.add_argument("--player-lifecycle-anchors", type=Path)
     parser.add_argument("--player-lifecycle-verification", type=Path)
+    parser.add_argument("--player-emoticon-anchors", type=Path)
+    parser.add_argument("--player-emoticon-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1776,6 +1778,34 @@ def main() -> None:
         result["player_lifecycle_anchors"] = player_lifecycle
         result["interpretation"].append(
             "The fifty-eighth database revision also contains the separately reviewed player start-level and periodic-update anchors."
+        )
+    player_emoticon = None
+    if args.player_emoticon_anchors or args.player_emoticon_verification:
+        if not args.player_emoticon_anchors or not args.player_emoticon_verification:
+            raise ValueError(
+                "player-emoticon anchors and player-emoticon verification must be supplied together"
+            )
+        player_emoticon_document = load(args.player_emoticon_anchors)
+        player_emoticon_verification = load(args.player_emoticon_verification)
+        if player_emoticon_document.get("artifact") != "spectron_player_emoticon_manual_translation_anchors_20260826":
+            raise ValueError("unexpected player-emoticon anchor artifact")
+        if not player_emoticon_verification.get("verified"):
+            raise ValueError("player-emoticon anchor reopen verification did not pass")
+        expected_player_emoticon = len(player_emoticon_document["anchors"])
+        if player_emoticon_verification["verified_name_count"] != expected_player_emoticon:
+            raise ValueError("player-emoticon verification count differs from artifact")
+        player_emoticon = {
+            "anchor_path": str(args.player_emoticon_anchors),
+            "anchor_sha256": sha256_path(args.player_emoticon_anchors),
+            "reopen_verification": str(args.player_emoticon_verification),
+            "anchor_count": expected_player_emoticon,
+            "verified_name_count": player_emoticon_verification["verified_name_count"],
+            "reopen_failure_count": player_emoticon_verification["failure_count"],
+        }
+    if player_emoticon is not None:
+        result["player_emoticon_anchors"] = player_emoticon
+        result["interpretation"].append(
+            "The fifty-ninth database revision also contains the separately reviewed player emoticon-coordinate getter anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
