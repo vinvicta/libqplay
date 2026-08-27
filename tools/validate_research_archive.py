@@ -473,6 +473,9 @@ def main():
     spectron_player_list_residual_anchors = load_json(
         "artifacts/spectron_player_list_residual_manual_translation_anchors_20260826.json"
     )
+    spectron_client_thread_residual_anchors = load_json(
+        "artifacts/spectron_client_thread_residual_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2657,6 +2660,18 @@ def main():
     check("Spectron player-list residual exact-shape count", spectron_player_list_residual_anchors["summary"]["exact_shape_anchor_count"], 2)
     check("Spectron player-list residual layout-change count", spectron_player_list_residual_anchors["summary"]["layout_change_anchor_count"], 1)
     check(
+        "Spectron client-thread residual artifact",
+        spectron_client_thread_residual_anchors["artifact"],
+        "spectron_client_thread_residual_manual_translation_anchors_20260826",
+    )
+    check("Spectron client-thread residual network", spectron_client_thread_residual_anchors["network_contacted"], False)
+    check("Spectron client-thread residual total", spectron_client_thread_residual_anchors["summary"]["anchor_count"], 7)
+    check("Spectron client-thread residual high confidence", spectron_client_thread_residual_anchors["summary"]["high_confidence_count"], 7)
+    check("Spectron client-thread residual semantic overlap", spectron_client_thread_residual_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron client-thread residual default targets", spectron_client_thread_residual_anchors["summary"]["target_default_name_count"], 0)
+    check("Spectron client-thread residual exact-shape count", spectron_client_thread_residual_anchors["summary"]["exact_shape_anchor_count"], 7)
+    check("Spectron client-thread residual layout-change count", spectron_client_thread_residual_anchors["summary"]["layout_change_anchor_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -2803,7 +2818,8 @@ def main():
     check("Spectron checkpoint socket-cache residual anchor count", spectron_checkpoint["socket_cache_residual_anchors"]["verified_name_count"], 5)
     check("Spectron checkpoint URL-cache residual anchor count", spectron_checkpoint["url_cache_residual_anchors"]["verified_name_count"], 5)
     check("Spectron checkpoint player-list residual anchor count", spectron_checkpoint["player_list_residual_anchors"]["verified_name_count"], 3)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "45a774f4240b145c575dd7ff2e92d8b15d1bec215e64c98386d81519b039729b")
+    check("Spectron checkpoint client-thread residual anchor count", spectron_checkpoint["client_thread_residual_anchors"]["verified_name_count"], 7)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "88c9abdbc6997eac4ee321d695df1170f17cc394b2ee0906370e2f5e726cb6b7")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],

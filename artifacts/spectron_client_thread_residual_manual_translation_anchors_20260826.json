@@ -1,0 +1,443 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "context_group": "TClient thread synchronization and package cleanup residual block",
+      "context_order": 1,
+      "evidence": [
+        "The source rows are the remaining client-thread synchronization, package cleanup, and send helpers at 0x208344, 0x208350, 0x20835c, 0x208478, 0x20858c, 0x2087a0, and 0x2088f8. Spectron preserves their local sequence at 0x20e4e0, 0x20e4ec, 0x20e4f8, 0x20e614, 0x20e728, 0x20e93c, and 0x20ea94.",
+        "The lock and unlock wrappers call pthread_mutex_lock and pthread_mutex_unlock on the same client-socket mutex role. The target exposes that mutex as LN3ikbwOEH through E3UikbICwH and Tqmikbou3G.",
+        "readIncomingData locks the client socket, calls the connection read method, and unlocks it. Spectron keeps the same three-step wrapper through E3UikbICwH, psSDxavq9U::read, and Tqmikbou3G.",
+        "The incoming and outgoing clear helpers lock their list mutex, walk each stored package, clear its embedded string, delete the package, clear the list, and unlock. Spectron retains the same loop and cleanup through vy1JgaKVkH and C8THgaTQxF wrappers.",
+        "disableClientThread returns the running byte and calls the thread-destroy helper only when the flag is set. sendOutgoingPackages uses the same lock, connection-send, and unlock wrapper as the source.",
+        "All seven pairs have identical size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, and overall shape. The target functions already have non-default obfuscated names."
+      ],
+      "match_kind": "manual-client-thread-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x208344",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 3,
+        "mnemonic_hash": "a14b03d1635c2b9f9297612b275d59d6a79faf4bc1b2fa4941d6c697f656bfc2",
+        "opcode_shape_hash": "0aedb6b758a3c84ba1576f4bde50b3016ddc866b7882dd4edf0f7330f21ae509",
+        "register_shape_hash": null,
+        "shape_hash": "2f36dcf7372f861adc4607d01cefb474419aa392e0fdd3d07c8a29eebaf9bc8f",
+        "size": 12
+      },
+      "original_name": "lockClientSocket_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_lockClientSocket_void",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "client-thread helper lockClientSocket_void",
+      "spectron_current_name": "_Z10E3UikbICwHv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x20e4e0",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 3,
+        "mnemonic_hash": "a14b03d1635c2b9f9297612b275d59d6a79faf4bc1b2fa4941d6c697f656bfc2",
+        "opcode_shape_hash": "0aedb6b758a3c84ba1576f4bde50b3016ddc866b7882dd4edf0f7330f21ae509",
+        "register_shape_hash": null,
+        "shape_hash": "2f36dcf7372f861adc4607d01cefb474419aa392e0fdd3d07c8a29eebaf9bc8f",
+        "size": 12
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x619c"
+    },
+    {
+      "confidence": "high",
+      "context_group": "TClient thread synchronization and package cleanup residual block",
+      "context_order": 2,
+      "evidence": [
+        "The source rows are the remaining client-thread synchronization, package cleanup, and send helpers at 0x208344, 0x208350, 0x20835c, 0x208478, 0x20858c, 0x2087a0, and 0x2088f8. Spectron preserves their local sequence at 0x20e4e0, 0x20e4ec, 0x20e4f8, 0x20e614, 0x20e728, 0x20e93c, and 0x20ea94.",
+        "The lock and unlock wrappers call pthread_mutex_lock and pthread_mutex_unlock on the same client-socket mutex role. The target exposes that mutex as LN3ikbwOEH through E3UikbICwH and Tqmikbou3G.",
+        "readIncomingData locks the client socket, calls the connection read method, and unlocks it. Spectron keeps the same three-step wrapper through E3UikbICwH, psSDxavq9U::read, and Tqmikbou3G.",
+        "The incoming and outgoing clear helpers lock their list mutex, walk each stored package, clear its embedded string, delete the package, clear the list, and unlock. Spectron retains the same loop and cleanup through vy1JgaKVkH and C8THgaTQxF wrappers.",
+        "disableClientThread returns the running byte and calls the thread-destroy helper only when the flag is set. sendOutgoingPackages uses the same lock, connection-send, and unlock wrapper as the source.",
+        "All seven pairs have identical size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, and overall shape. The target functions already have non-default obfuscated names."
+      ],
+      "match_kind": "manual-client-thread-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x208350",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 3,
+        "mnemonic_hash": "a14b03d1635c2b9f9297612b275d59d6a79faf4bc1b2fa4941d6c697f656bfc2",
+        "opcode_shape_hash": "0aedb6b758a3c84ba1576f4bde50b3016ddc866b7882dd4edf0f7330f21ae509",
+        "register_shape_hash": null,
+        "shape_hash": "2f36dcf7372f861adc4607d01cefb474419aa392e0fdd3d07c8a29eebaf9bc8f",
+        "size": 12
+      },
+      "original_name": "unlockClientSocket_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_unlockClientSocket_void",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "client-thread helper unlockClientSocket_void",
+      "spectron_current_name": "_Z10Tqmikbou3Gv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x20e4ec",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 3,
+        "mnemonic_hash": "a14b03d1635c2b9f9297612b275d59d6a79faf4bc1b2fa4941d6c697f656bfc2",
+        "opcode_shape_hash": "0aedb6b758a3c84ba1576f4bde50b3016ddc866b7882dd4edf0f7330f21ae509",
+        "register_shape_hash": null,
+        "shape_hash": "2f36dcf7372f861adc4607d01cefb474419aa392e0fdd3d07c8a29eebaf9bc8f",
+        "size": 12
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x619c"
+    },
+    {
+      "confidence": "high",
+      "context_group": "TClient thread synchronization and package cleanup residual block",
+      "context_order": 3,
+      "evidence": [
+        "The source rows are the remaining client-thread synchronization, package cleanup, and send helpers at 0x208344, 0x208350, 0x20835c, 0x208478, 0x20858c, 0x2087a0, and 0x2088f8. Spectron preserves their local sequence at 0x20e4e0, 0x20e4ec, 0x20e4f8, 0x20e614, 0x20e728, 0x20e93c, and 0x20ea94.",
+        "The lock and unlock wrappers call pthread_mutex_lock and pthread_mutex_unlock on the same client-socket mutex role. The target exposes that mutex as LN3ikbwOEH through E3UikbICwH and Tqmikbou3G.",
+        "readIncomingData locks the client socket, calls the connection read method, and unlocks it. Spectron keeps the same three-step wrapper through E3UikbICwH, psSDxavq9U::read, and Tqmikbou3G.",
+        "The incoming and outgoing clear helpers lock their list mutex, walk each stored package, clear its embedded string, delete the package, clear the list, and unlock. Spectron retains the same loop and cleanup through vy1JgaKVkH and C8THgaTQxF wrappers.",
+        "disableClientThread returns the running byte and calls the thread-destroy helper only when the flag is set. sendOutgoingPackages uses the same lock, connection-send, and unlock wrapper as the source.",
+        "All seven pairs have identical size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, and overall shape. The target functions already have non-default obfuscated names."
+      ],
+      "match_kind": "manual-client-thread-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TGraalConnection_read_void",
+        "plt_lockClientSocket_void"
+      ],
+      "original_ea": "0x20835c",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 3,
+        "call_count": 2,
+        "instruction_count": 10,
+        "mnemonic_hash": "73f015a1e1a7482bba622cd665ca65a2c125d20403bf26bd1b99feb669162200",
+        "opcode_shape_hash": "16f5db4e359471bbb5a981bfb54163978893738e0e313b45c5ad5e8364530424",
+        "register_shape_hash": null,
+        "shape_hash": "7a0d145d98e72aa997422f84575e6f268246fdd218b8ecc70515ac6a081f9a09",
+        "size": 40
+      },
+      "original_name": "readIncomingData_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_readIncomingData_void",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "client-thread helper readIncomingData_void",
+      "spectron_current_name": "_Z10LK7hkb_7RGv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._Z10E3UikbICwHv",
+        "._ZN10psSDxavq9U4readEv"
+      ],
+      "spectron_ea": "0x20e4f8",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 3,
+        "call_count": 2,
+        "instruction_count": 10,
+        "mnemonic_hash": "73f015a1e1a7482bba622cd665ca65a2c125d20403bf26bd1b99feb669162200",
+        "opcode_shape_hash": "16f5db4e359471bbb5a981bfb54163978893738e0e313b45c5ad5e8364530424",
+        "register_shape_hash": null,
+        "shape_hash": "7a0d145d98e72aa997422f84575e6f268246fdd218b8ecc70515ac6a081f9a09",
+        "size": 40
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x619c"
+    },
+    {
+      "confidence": "high",
+      "context_group": "TClient thread synchronization and package cleanup residual block",
+      "context_order": 4,
+      "evidence": [
+        "The source rows are the remaining client-thread synchronization, package cleanup, and send helpers at 0x208344, 0x208350, 0x20835c, 0x208478, 0x20858c, 0x2087a0, and 0x2088f8. Spectron preserves their local sequence at 0x20e4e0, 0x20e4ec, 0x20e4f8, 0x20e614, 0x20e728, 0x20e93c, and 0x20ea94.",
+        "The lock and unlock wrappers call pthread_mutex_lock and pthread_mutex_unlock on the same client-socket mutex role. The target exposes that mutex as LN3ikbwOEH through E3UikbICwH and Tqmikbou3G.",
+        "readIncomingData locks the client socket, calls the connection read method, and unlocks it. Spectron keeps the same three-step wrapper through E3UikbICwH, psSDxavq9U::read, and Tqmikbou3G.",
+        "The incoming and outgoing clear helpers lock their list mutex, walk each stored package, clear its embedded string, delete the package, clear the list, and unlock. Spectron retains the same loop and cleanup through vy1JgaKVkH and C8THgaTQxF wrappers.",
+        "disableClientThread returns the running byte and calls the thread-destroy helper only when the flag is set. sendOutgoingPackages uses the same lock, connection-send, and unlock wrapper as the source.",
+        "All seven pairs have identical size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, and overall shape. The target functions already have non-default obfuscated names."
+      ],
+      "match_kind": "manual-client-thread-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        ".pthread_mutex_lock",
+        "plt_TList_Clear_void",
+        "plt_TList_operator_index_int",
+        "plt_TString_clear_void",
+        "plt_operator_delete_void__2"
+      ],
+      "original_ea": "0x208478",
+      "original_metrics": {
+        "basic_block_count": 7,
+        "branch_count": 7,
+        "call_count": 5,
+        "instruction_count": 36,
+        "mnemonic_hash": "7bff4567b698c842e65a884232e2b17ebfd9ea87c543d93465d83d0b69b675f4",
+        "opcode_shape_hash": "bd67f3b370335c0af7b025ecaf6d56a1a7b69771c913a019b37d660e1d6b1c3d",
+        "register_shape_hash": null,
+        "shape_hash": "0e895320700cf0ee0a7e5d52634bde2ebe9adb555a81e59eaf5df0c6416f7e18",
+        "size": 144
+      },
+      "original_name": "clearIncomingPackages_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_clearIncomingPackages_void",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "client-thread helper clearIncomingPackages_void",
+      "spectron_current_name": "_Z10d5ahkbYW3Fv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10vy1JgaKVkH5ClearEv",
+        "._ZNK10vy1JgaKVkHixEi",
+        "._ZdlPv",
+        ".pthread_mutex_lock"
+      ],
+      "spectron_ea": "0x20e614",
+      "spectron_metrics": {
+        "basic_block_count": 7,
+        "branch_count": 7,
+        "call_count": 5,
+        "instruction_count": 36,
+        "mnemonic_hash": "7bff4567b698c842e65a884232e2b17ebfd9ea87c543d93465d83d0b69b675f4",
+        "opcode_shape_hash": "bd67f3b370335c0af7b025ecaf6d56a1a7b69771c913a019b37d660e1d6b1c3d",
+        "register_shape_hash": null,
+        "shape_hash": "0e895320700cf0ee0a7e5d52634bde2ebe9adb555a81e59eaf5df0c6416f7e18",
+        "size": 144
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x619c"
+    },
+    {
+      "confidence": "high",
+      "context_group": "TClient thread synchronization and package cleanup residual block",
+      "context_order": 5,
+      "evidence": [
+        "The source rows are the remaining client-thread synchronization, package cleanup, and send helpers at 0x208344, 0x208350, 0x20835c, 0x208478, 0x20858c, 0x2087a0, and 0x2088f8. Spectron preserves their local sequence at 0x20e4e0, 0x20e4ec, 0x20e4f8, 0x20e614, 0x20e728, 0x20e93c, and 0x20ea94.",
+        "The lock and unlock wrappers call pthread_mutex_lock and pthread_mutex_unlock on the same client-socket mutex role. The target exposes that mutex as LN3ikbwOEH through E3UikbICwH and Tqmikbou3G.",
+        "readIncomingData locks the client socket, calls the connection read method, and unlocks it. Spectron keeps the same three-step wrapper through E3UikbICwH, psSDxavq9U::read, and Tqmikbou3G.",
+        "The incoming and outgoing clear helpers lock their list mutex, walk each stored package, clear its embedded string, delete the package, clear the list, and unlock. Spectron retains the same loop and cleanup through vy1JgaKVkH and C8THgaTQxF wrappers.",
+        "disableClientThread returns the running byte and calls the thread-destroy helper only when the flag is set. sendOutgoingPackages uses the same lock, connection-send, and unlock wrapper as the source.",
+        "All seven pairs have identical size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, and overall shape. The target functions already have non-default obfuscated names."
+      ],
+      "match_kind": "manual-client-thread-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        ".pthread_mutex_lock",
+        "plt_TList_Clear_void",
+        "plt_TList_operator_index_int",
+        "plt_TString_clear_void",
+        "plt_operator_delete_void__2"
+      ],
+      "original_ea": "0x20858c",
+      "original_metrics": {
+        "basic_block_count": 7,
+        "branch_count": 7,
+        "call_count": 5,
+        "instruction_count": 36,
+        "mnemonic_hash": "7bff4567b698c842e65a884232e2b17ebfd9ea87c543d93465d83d0b69b675f4",
+        "opcode_shape_hash": "bd67f3b370335c0af7b025ecaf6d56a1a7b69771c913a019b37d660e1d6b1c3d",
+        "register_shape_hash": null,
+        "shape_hash": "0e895320700cf0ee0a7e5d52634bde2ebe9adb555a81e59eaf5df0c6416f7e18",
+        "size": 144
+      },
+      "original_name": "clearOutgoingPackages_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_clearOutgoingPackages_void",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "client-thread helper clearOutgoingPackages_void",
+      "spectron_current_name": "_Z10A0fhkbd57Fv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10vy1JgaKVkH5ClearEv",
+        "._ZNK10vy1JgaKVkHixEi",
+        "._ZdlPv",
+        ".pthread_mutex_lock"
+      ],
+      "spectron_ea": "0x20e728",
+      "spectron_metrics": {
+        "basic_block_count": 7,
+        "branch_count": 7,
+        "call_count": 5,
+        "instruction_count": 36,
+        "mnemonic_hash": "7bff4567b698c842e65a884232e2b17ebfd9ea87c543d93465d83d0b69b675f4",
+        "opcode_shape_hash": "bd67f3b370335c0af7b025ecaf6d56a1a7b69771c913a019b37d660e1d6b1c3d",
+        "register_shape_hash": null,
+        "shape_hash": "0e895320700cf0ee0a7e5d52634bde2ebe9adb555a81e59eaf5df0c6416f7e18",
+        "size": 144
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x619c"
+    },
+    {
+      "confidence": "high",
+      "context_group": "TClient thread synchronization and package cleanup residual block",
+      "context_order": 6,
+      "evidence": [
+        "The source rows are the remaining client-thread synchronization, package cleanup, and send helpers at 0x208344, 0x208350, 0x20835c, 0x208478, 0x20858c, 0x2087a0, and 0x2088f8. Spectron preserves their local sequence at 0x20e4e0, 0x20e4ec, 0x20e4f8, 0x20e614, 0x20e728, 0x20e93c, and 0x20ea94.",
+        "The lock and unlock wrappers call pthread_mutex_lock and pthread_mutex_unlock on the same client-socket mutex role. The target exposes that mutex as LN3ikbwOEH through E3UikbICwH and Tqmikbou3G.",
+        "readIncomingData locks the client socket, calls the connection read method, and unlocks it. Spectron keeps the same three-step wrapper through E3UikbICwH, psSDxavq9U::read, and Tqmikbou3G.",
+        "The incoming and outgoing clear helpers lock their list mutex, walk each stored package, clear its embedded string, delete the package, clear the list, and unlock. Spectron retains the same loop and cleanup through vy1JgaKVkH and C8THgaTQxF wrappers.",
+        "disableClientThread returns the running byte and calls the thread-destroy helper only when the flag is set. sendOutgoingPackages uses the same lock, connection-send, and unlock wrapper as the source.",
+        "All seven pairs have identical size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, and overall shape. The target functions already have non-default obfuscated names."
+      ],
+      "match_kind": "manual-client-thread-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x2087a0",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 3,
+        "call_count": 0,
+        "instruction_count": 6,
+        "mnemonic_hash": "b66cb097ee0d9964d833c015d442329f452459e166834cae5ce29dc14c80606f",
+        "opcode_shape_hash": "f2eb8050aa728dfabf6aef955cc45aae67887dfcf328554b534993a4b7b0f7c5",
+        "register_shape_hash": null,
+        "shape_hash": "186a305fa50fa09dce707b1592662f0890501c16559da5387711d4acbba63e8c",
+        "size": 24
+      },
+      "original_name": "disableClientThread_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_disableClientThread_void",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "client-thread helper disableClientThread_void",
+      "spectron_current_name": "_Z10wlXykbJx0Uv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x20e93c",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 3,
+        "call_count": 0,
+        "instruction_count": 6,
+        "mnemonic_hash": "b66cb097ee0d9964d833c015d442329f452459e166834cae5ce29dc14c80606f",
+        "opcode_shape_hash": "f2eb8050aa728dfabf6aef955cc45aae67887dfcf328554b534993a4b7b0f7c5",
+        "register_shape_hash": null,
+        "shape_hash": "186a305fa50fa09dce707b1592662f0890501c16559da5387711d4acbba63e8c",
+        "size": 24
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x619c"
+    },
+    {
+      "confidence": "high",
+      "context_group": "TClient thread synchronization and package cleanup residual block",
+      "context_order": 7,
+      "evidence": [
+        "The source rows are the remaining client-thread synchronization, package cleanup, and send helpers at 0x208344, 0x208350, 0x20835c, 0x208478, 0x20858c, 0x2087a0, and 0x2088f8. Spectron preserves their local sequence at 0x20e4e0, 0x20e4ec, 0x20e4f8, 0x20e614, 0x20e728, 0x20e93c, and 0x20ea94.",
+        "The lock and unlock wrappers call pthread_mutex_lock and pthread_mutex_unlock on the same client-socket mutex role. The target exposes that mutex as LN3ikbwOEH through E3UikbICwH and Tqmikbou3G.",
+        "readIncomingData locks the client socket, calls the connection read method, and unlocks it. Spectron keeps the same three-step wrapper through E3UikbICwH, psSDxavq9U::read, and Tqmikbou3G.",
+        "The incoming and outgoing clear helpers lock their list mutex, walk each stored package, clear its embedded string, delete the package, clear the list, and unlock. Spectron retains the same loop and cleanup through vy1JgaKVkH and C8THgaTQxF wrappers.",
+        "disableClientThread returns the running byte and calls the thread-destroy helper only when the flag is set. sendOutgoingPackages uses the same lock, connection-send, and unlock wrapper as the source.",
+        "All seven pairs have identical size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, and overall shape. The target functions already have non-default obfuscated names."
+      ],
+      "match_kind": "manual-client-thread-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TGraalConnection_sendOutgoing_void",
+        "plt_lockClientSocket_void"
+      ],
+      "original_ea": "0x2088f8",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 3,
+        "call_count": 2,
+        "instruction_count": 10,
+        "mnemonic_hash": "73f015a1e1a7482bba622cd665ca65a2c125d20403bf26bd1b99feb669162200",
+        "opcode_shape_hash": "16f5db4e359471bbb5a981bfb54163978893738e0e313b45c5ad5e8364530424",
+        "register_shape_hash": null,
+        "shape_hash": "7a0d145d98e72aa997422f84575e6f268246fdd218b8ecc70515ac6a081f9a09",
+        "size": 40
+      },
+      "original_name": "sendOutgoingPackages_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_sendOutgoingPackages_void",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "client-thread helper sendOutgoingPackages_void",
+      "spectron_current_name": "_Z10aC0C_aG7qiv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._Z10E3UikbICwHv",
+        "._ZN10psSDxavq9U10da7AgaaEQzEv"
+      ],
+      "spectron_ea": "0x20ea94",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 3,
+        "call_count": 2,
+        "instruction_count": 10,
+        "mnemonic_hash": "73f015a1e1a7482bba622cd665ca65a2c125d20403bf26bd1b99feb669162200",
+        "opcode_shape_hash": "16f5db4e359471bbb5a981bfb54163978893738e0e313b45c5ad5e8364530424",
+        "register_shape_hash": null,
+        "shape_hash": "7a0d145d98e72aa997422f84575e6f268246fdd218b8ecc70515ac6a081f9a09",
+        "size": 40
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x619c"
+    }
+  ],
+  "artifact": "spectron_client_thread_residual_manual_translation_anchors_20260826",
+  "context": {
+    "following_target_boundary": "0x20ec08 TUpdatePackage accessor block",
+    "source_class": "TClient and client-thread helpers",
+    "source_sequence": "0x208344 lockClientSocket through 0x2088f8 sendOutgoingPackages, with existing mapped package and thread methods between the residual rows",
+    "target_class": "w6qzgacqqy, vy1JgaKVkH, and related obfuscated helpers",
+    "target_only_boundaries": [
+      "0x20e520 addIncomingClientPackage",
+      "0x20e5a4 getNextClientPackages",
+      "0x20e6a4 sendClientPackage",
+      "0x20e87c enableClientThread",
+      "0x20e8ac destroyClientThread",
+      "0x20e9dc processOutgoingPackages",
+      "0x20eabc networkThreadMain"
+    ],
+    "target_sequence": "0x20e4e0 lock, 0x20e4ec unlock, 0x20e4f8 read, 0x20e614 incoming clear, 0x20e728 outgoing clear, 0x20e93c disable, and 0x20ea94 send"
+  },
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4.json",
+    "original_features_sha256": "62cccc40ea88a08d5ed0845ceeceaf194b528bdd07bdd6ff1a0350dee3b0ab82",
+    "semantic_map": "/tmp/spectron_semantic_map.json",
+    "semantic_map_sha256": "c0906607542480e1fbe33e9e0bf5030581efd55ee71987cf0a7ca792b68664fc",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features.json",
+    "spectron_features_sha256": "cc1789d2d3c24f478d7863f2b07b10b4259aa2d370e363e5303000eb7b835243"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable source client-thread roles while retaining the target obfuscated names in the evidence rows.",
+    "All seven pairs are exact normalized-shape matches. The cleanup helpers retain the package loop, embedded-string cleanup, list clear, and mutex release sequence.",
+    "Existing package-queue, thread lifecycle, and network-loop anchors remain explicit neighboring boundaries."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for residual client-thread synchronization and package helpers",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 7,
+    "exact_shape_anchor_count": 7,
+    "high_confidence_count": 7,
+    "layout_change_anchor_count": 0,
+    "new_context_anchor_count": 7,
+    "target_default_name_count": 0
+  }
+}

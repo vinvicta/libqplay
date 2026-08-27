@@ -80,6 +80,14 @@
     "reopen_verification": "/tmp/spectron_client_state_helper_verify_v17.json",
     "verified_name_count": 7
   },
+  "client_thread_residual_anchors": {
+    "anchor_count": 7,
+    "anchor_path": "artifacts/spectron_client_thread_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "175780fb8f383c13cbf271bd157bad0367ddb11c64069f90d90c78fff519a47e",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_client_thread_verify_v141.json",
+    "verified_name_count": 7
+  },
   "client_var_core_anchors": {
     "anchor_count": 3,
     "anchor_path": "artifacts/spectron_client_var_core_manual_translation_anchors_20260826.json",
@@ -133,8 +141,8 @@
     "default_sub_function_count": 1495,
     "format": "packed IDA 9.3 database",
     "function_count": 11679,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v140.i64",
-    "sha256": "45a774f4240b145c575dd7ff2e92d8b15d1bec215e64c98386d81519b039729b"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v141.i64",
+    "sha256": "88c9abdbc6997eac4ee321d695df1170f17cc394b2ee0906370e2f5e726cb6b7"
   },
   "draw_texture_anchors": {
     "anchor_count": 4,
@@ -402,7 +410,7 @@
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
-    "reopen_verification": "/tmp/spectron_translation_verify_v140_serial.json",
+    "reopen_verification": "/tmp/spectron_translation_verify_v141_serial.json",
     "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
     "translation_map": "artifacts/spectron_semantic_function_translation_20260826.json",
     "translation_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92"
@@ -547,7 +555,8 @@
     "The one-hundred-thirty-seventh database revision also contains the separately reviewed TSocketProperties destructor family.",
     "The one-hundred-thirty-eighth database revision also contains the separately reviewed socket-cache support residual family.",
     "The one-hundred-thirty-ninth database revision also contains the separately reviewed URL-cache support residual family.",
-    "The one-hundred-fortieth database revision also contains the separately reviewed TPlayerList residual family."
+    "The one-hundred-fortieth database revision also contains the separately reviewed TPlayerList residual family.",
+    "The one-hundred-forty-first database revision also contains the separately reviewed client-thread residual family."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,

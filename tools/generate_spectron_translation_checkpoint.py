@@ -301,6 +301,8 @@ def main() -> None:
     parser.add_argument("--url-cache-residual-verification", type=Path)
     parser.add_argument("--player-list-residual-anchors", type=Path)
     parser.add_argument("--player-list-residual-verification", type=Path)
+    parser.add_argument("--client-thread-residual-anchors", type=Path)
+    parser.add_argument("--client-thread-residual-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -4176,6 +4178,34 @@ def main() -> None:
         result["player_list_residual_anchors"] = player_list_residual
         result["interpretation"].append(
             "The one-hundred-fortieth database revision also contains the separately reviewed TPlayerList residual family."
+        )
+    client_thread_residual = None
+    if args.client_thread_residual_anchors or args.client_thread_residual_verification:
+        if not args.client_thread_residual_anchors or not args.client_thread_residual_verification:
+            raise ValueError(
+                "client-thread residual anchors and verification must be supplied together"
+            )
+        client_thread_residual_document = load(args.client_thread_residual_anchors)
+        client_thread_residual_verification = load(args.client_thread_residual_verification)
+        if client_thread_residual_document.get("artifact") != "spectron_client_thread_residual_manual_translation_anchors_20260826":
+            raise ValueError("unexpected client-thread residual artifact")
+        if not client_thread_residual_verification.get("verified"):
+            raise ValueError("client-thread residual reopen verification did not pass")
+        expected_client_thread_residual = len(client_thread_residual_document["anchors"])
+        if client_thread_residual_verification["verified_name_count"] != expected_client_thread_residual:
+            raise ValueError("client-thread residual verification count differs from artifact")
+        client_thread_residual = {
+            "anchor_path": str(args.client_thread_residual_anchors),
+            "anchor_sha256": sha256_path(args.client_thread_residual_anchors),
+            "reopen_verification": str(args.client_thread_residual_verification),
+            "anchor_count": expected_client_thread_residual,
+            "verified_name_count": client_thread_residual_verification["verified_name_count"],
+            "reopen_failure_count": client_thread_residual_verification["failure_count"],
+        }
+    if client_thread_residual is not None:
+        result["client_thread_residual_anchors"] = client_thread_residual
+        result["interpretation"].append(
+            "The one-hundred-forty-first database revision also contains the separately reviewed client-thread residual family."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

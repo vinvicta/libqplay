@@ -1428,6 +1428,14 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+201. The next IDA pass translated seven exact-shape client-thread helpers:
+    socket locking, incoming reads, incoming and outgoing queue cleanup,
+    the thread-disable guard, and outgoing sends. All seven labels reopened
+    successfully in the v141 disposable copy, which retains 1,495 default
+    `sub_` functions. See
+    `artifacts/spectron_client_thread_residual_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 200. The next IDA pass translated three residual `TPlayerList` methods:
     the staff-guild setter, static initializer, and empty static-script
     initializer. All three labels reopened successfully in the v140

@@ -3444,6 +3444,31 @@ functions. The v108 database has 1,684 remaining default `sub_` names. Its
 SHA-256 is
 `8350a43be6b31306954e34a17f77d742c8d1702015d671019d2bf2dd6c1bb1e1`.
 
+## Spectron client-thread residual anchors
+
+The v141 pass translated seven client-thread helpers that were still unnamed
+in the combined record.
+
+| 1.8 role | Source | Spectron symbol | Target | Main evidence |
+| --- | ---: | --- | ---: | --- |
+| socket lock | `0x208344` | `_Z10E3UikbICwHv` | `0x20e4e0` | same pthread mutex |
+| socket unlock | `0x208350` | `_Z10Tqmikbou3Gv` | `0x20e4ec` | same pthread mutex |
+| incoming reader | `0x20835c` | `_Z10LK7hkb_7RGv` | `0x20e4f8` | lock, read, unlock |
+| incoming queue clear | `0x208478` | `_Z10d5ahkbYW3Fv` | `0x20e614` | package cleanup loop |
+| outgoing queue clear | `0x20858c` | `_Z10A0fhkbd57Fv` | `0x20e728` | package cleanup loop |
+| thread disable guard | `0x2087a0` | `_Z10wlXykbJx0Uv` | `0x20e93c` | running flag and destroy |
+| outgoing sender | `0x2088f8` | `_Z10aC0C_aG7qiv` | `0x20ea94` | lock, send, unlock |
+
+All seven pairs have identical normalized metrics and hashes. The two queue
+clear helpers preserve the package-pointer walk, embedded `TString` cleanup,
+deallocation, list clear, and mutex release. The target class and list names
+are obfuscated, but their call sequence is the same as the source. All target
+names were already non-default, so this batch leaves the default `sub_` count
+unchanged.
+
+Evidence is stored in
+`artifacts/spectron_client_thread_residual_manual_translation_anchors_20260826.json`.
+
 ## Spectron TPlayerList residual anchors
 
 The v140 pass translated the last uncovered player-list support rows before
