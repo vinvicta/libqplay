@@ -305,6 +305,9 @@ def main():
     spectron_options_window_position_anchors = load_json(
         "artifacts/spectron_options_window_position_manual_translation_anchors_20260827.json"
     )
+    spectron_displayed_gif_anchors = load_json(
+        "artifacts/spectron_displayed_gif_manual_translation_anchors_20260827.json"
+    )
     spectron_server_animation_anchors = load_json(
         "artifacts/spectron_server_animation_manual_translation_anchors_20260826.json"
     )
@@ -2776,6 +2779,54 @@ def main():
         "0xe0b3c",
     )
     check(
+        "Spectron displayed-GIF artifact",
+        spectron_displayed_gif_anchors["artifact"],
+        "spectron_displayed_gif_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron displayed-GIF network",
+        spectron_displayed_gif_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron displayed-GIF total",
+        spectron_displayed_gif_anchors["summary"]["anchor_count"],
+        1,
+    )
+    check(
+        "Spectron displayed-GIF high confidence",
+        spectron_displayed_gif_anchors["summary"]["high_confidence_count"],
+        1,
+    )
+    check(
+        "Spectron displayed-GIF semantic overlap",
+        spectron_displayed_gif_anchors["summary"]["already_in_semantic_map"],
+        0,
+    )
+    check(
+        "Spectron displayed-GIF exact-shape count",
+        spectron_displayed_gif_anchors["summary"]["exact_shape_anchor_count"],
+        0,
+    )
+    check(
+        "Spectron displayed-GIF layout-change count",
+        spectron_displayed_gif_anchors["summary"]["layout_change_anchor_count"],
+        1,
+    )
+    check(
+        "Spectron displayed-GIF default target",
+        spectron_displayed_gif_anchors["summary"]["target_default_name_count"],
+        1,
+    )
+    check(
+        "Spectron displayed-GIF target",
+        {
+            row["original_name"]: row
+            for row in spectron_displayed_gif_anchors["anchors"]
+        }["initializeDisplayedGif"]["spectron_ea"],
+        "0xe0b80",
+    )
+    check(
         "Spectron server-animation artifact",
         spectron_server_animation_anchors["artifact"],
         "spectron_server_animation_manual_translation_anchors_20260826",
@@ -3923,7 +3974,7 @@ def main():
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1230)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1229)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -4110,7 +4161,8 @@ def main():
     check("Spectron checkpoint resource link-lists anchor count", spectron_checkpoint["resource_link_lists_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint clear-cur-anis anchor count", spectron_checkpoint["clear_cur_anis_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint options window-position anchor count", spectron_checkpoint["options_window_position_anchors"]["verified_name_count"], 1)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "fd4a5a88b1d959ab3a3465b4f080355211f7dcb68d53781f41f8f0dcc2ae538b")
+    check("Spectron checkpoint displayed-GIF anchor count", spectron_checkpoint["displayed_gif_anchors"]["verified_name_count"], 1)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "6786c5996c4b41c0f4e1825b7e5df7d4a5ed828f586adca1b1d9592a4ab625ee")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -4253,6 +4305,7 @@ def main():
         spectron_resource_link_lists_anchors,
         spectron_clear_cur_anis_anchors,
         spectron_options_window_position_anchors,
+        spectron_displayed_gif_anchors,
         spectron_server_animation_anchors,
         spectron_player_lifecycle_anchors,
         spectron_player_emoticon_anchors,

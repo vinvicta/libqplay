@@ -1,0 +1,215 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "context_group": "displayed GIF state and draw consumers",
+      "evidence": [
+        "The source callback initializeDisplayedGif at 0xe08fc is referenced by source static-initializer table slot 0x35d268 and stores null through displayedgif_ptr at 0x374cd8 into displayedgif at 0x38ede8 before returning its address.",
+        "The target function sub_E0B80 at 0xe0b80 is referenced by target static-initializer table slot 0x36f9f8 and initializes DiZVgajboR through DiZVgajboR_ptr at 0x387d08 before returning its address.",
+        "The source displayedgif global and target DiZVgajboR global are consumed by the same translated player, server-player, explosion, bomb, carry, and extra-object draw families, including the same pointer-indirection pattern.",
+        "The source cleanup callback sub_E05E0 at 0xe05e0 is referenced by cleanup table slot 0x35d2e0 and clears displayedgif. The target cleanup callback sub_DFED4 at 0xdfed4 is referenced by slot 0x36fdd8 and clears DiZVgajboR before clearing the neighboring target-only CanTfaz6bZ object at qword_3A26A8.",
+        "The target callback also initializes qword_3A26A8 as an empty CanTfaz6bZ string. This target-only neighboring field explains the additional assignment call and larger body while the displayed-GIF pointer remains the returned state value."
+      ],
+      "match_kind": "manual-displayed-gif-layout-anchor",
+      "metric_differences": [
+        "size",
+        "instruction_count",
+        "branch_count",
+        "call_count",
+        "mnemonic_hash",
+        "opcode_shape_hash",
+        "register_shape_hash",
+        "register_detail_hash",
+        "shape_hash"
+      ],
+      "name_action": "rename-with-v18-prefix",
+      "original_cleanup_ea": "0xe05e0",
+      "original_cleanup_table_ea": "0x35d2e0",
+      "original_direct_call_names": [],
+      "original_ea": "0xe08fc",
+      "original_function_end": "0xe090c",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 4,
+        "mnemonic_hash": "d0a9767856549f8f7b86ae1959d4c89c6d056ca503ab67d3ef98ebf5cb63939c",
+        "opcode_shape_hash": "40f2ed7e07d6a07ff24e0cf4238186de4ce5d91432b07e9e0964c1271d51ce83",
+        "register_detail_hash": "81d35d4f189a2f8b621d3d6c72299ea7bc7933653495b9f29573ed05131127f0",
+        "register_shape_hash": "b053cfc8421409ea2ed856ddafccb87adbdcda1b3a194baf9c5f6c61fcafe645",
+        "return_count": 1,
+        "shape_hash": "3ad3aa7a4d1b83e4b973109490ea84436e6e43fdcf0bc1e70af6337e79ea00e4",
+        "size": 16,
+        "string_refs_hash": null
+      },
+      "original_name": "initializeDisplayedGif",
+      "original_static_initializer_table_ea": "0x35d268",
+      "original_string_refs": [],
+      "proposed_name": "v18_initializeDisplayedGif",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "shared displayed-GIF static initializer and cleanup",
+      "source_consumers": [
+        {
+          "ea": "0x17ba34",
+          "name": "TPlayer_drawSpriteAbsoluteOffset_int_int_int_int_int"
+        },
+        {
+          "ea": "0x17c57c",
+          "name": "TPlayer_drawStatusBar_void"
+        },
+        {
+          "ea": "0x17ff04",
+          "name": "TPlayer_draw_TPlayer"
+        },
+        {
+          "ea": "0x18bfac",
+          "name": "TServerPlayer_drawCarry_TPlayer"
+        },
+        {
+          "ea": "0x18d0fc",
+          "name": "TServerPlayer_draw_TPlayer"
+        },
+        {
+          "ea": "0x23c910",
+          "name": "TExplosion_draw_TPlayer"
+        },
+        {
+          "ea": "0x23d02c",
+          "name": "TServerBomb_draw_TPlayer"
+        },
+        {
+          "ea": "0x23d4d8",
+          "name": "TServerCarry_draw_TPlayer"
+        },
+        {
+          "ea": "0x23e7cc",
+          "name": "TServerExtra_draw_TPlayer"
+        }
+      ],
+      "source_fields": [
+        {
+          "address": "0x38ede8",
+          "name": "displayedgif",
+          "pointer_slot": "0x374cd8",
+          "role": "shared displayed-GIF state"
+        }
+      ],
+      "spectron_cleanup_ea": "0xdfed4",
+      "spectron_cleanup_table_ea": "0x36fdd8",
+      "spectron_consumers": [
+        {
+          "ea": "0x17fddc",
+          "name": "v18_TPlayer_drawSpriteAbsoluteOffset_int_int_int_int_int"
+        },
+        {
+          "ea": "0x180924",
+          "name": "v18_TPlayer_drawStatusBar_void"
+        },
+        {
+          "ea": "0x18446c",
+          "name": "v18_TPlayer_draw_TPlayer"
+        },
+        {
+          "ea": "0x19085c",
+          "name": "v18_TServerPlayer_drawCarry_TPlayer"
+        },
+        {
+          "ea": "0x1919fc",
+          "name": "v18_TServerPlayer_draw_TPlayer"
+        },
+        {
+          "ea": "0x2467c0",
+          "name": "v18_TExplosion_draw_TPlayer"
+        },
+        {
+          "ea": "0x246f44",
+          "name": "v18_TServerBomb_draw_TPlayer"
+        },
+        {
+          "ea": "0x2473f0",
+          "name": "v18_TServerCarry_draw_TPlayer"
+        },
+        {
+          "ea": "0x248754",
+          "name": "v18_TServerExtra_draw_TPlayer"
+        }
+      ],
+      "spectron_current_name": "sub_E0B80",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [
+        "._ZN10CanTfaz6bZaSEPKc"
+      ],
+      "spectron_ea": "0xe0b80",
+      "spectron_fields": [
+        {
+          "address": "0x3a26c8",
+          "name": "DiZVgajboR",
+          "pointer_slot": "0x387d08",
+          "role": "shared displayed-GIF state"
+        }
+      ],
+      "spectron_function_end": "0xe0bbc",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 13,
+        "mnemonic_hash": "0ff48cd718adfd03fa0a4764faca4511fbc00e2646c096be4378d3a10b8cac26",
+        "opcode_shape_hash": "7879852f2ef6d8568bb4f07660e06252a8bf57bb0761a6616c02037e28d9d556",
+        "register_detail_hash": "d962cc05a16e3e1a53bbca0b4845f24d677a7533205d7ffd9980f06d8f28c140",
+        "register_shape_hash": "3050f25ecce16863219b731191066cce1a46f9c9c055818ff6e76db04e4ec7db",
+        "return_count": 1,
+        "shape_hash": "c4d6f67a46584278cd455842439443e09fef738dd3f5fcae5190bff0f863fbc9",
+        "size": 60,
+        "string_refs_hash": null
+      },
+      "spectron_static_initializer_table_ea": "0x36f9f8",
+      "spectron_string_refs": [],
+      "target_delta": "+0x284",
+      "target_only_field": {
+        "name": "qword_3A26A8",
+        "role": "adjacent string initialized to empty and cleared during teardown",
+        "type": "CanTfaz6bZ"
+      }
+    }
+  ],
+  "artifact": "spectron_displayed_gif_manual_translation_anchors_20260827",
+  "context": {
+    "resolution": "matching initializer and cleanup state, pointer indirection, draw-consumer family, and target-only adjacent string initialization",
+    "source_cleanup_table": "0x35d2e0",
+    "source_state": "displayedgif",
+    "source_static_initializer_table": "0x35d268",
+    "spectron_cleanup_table": "0x36fdd8",
+    "spectron_static_initializer_table": "0x36f9f8",
+    "target_state": "DiZVgajboR"
+  },
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_current.json",
+    "original_features_sha256": "243341ad40e912500365b6d7eb5b69f9f3b9d6200f5c825629cfc56d4343ac07",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v186.json",
+    "spectron_features_sha256": "73a99e76b953588e334c6162f655b082d6de20479736c2777a4c8b56625107ae"
+  },
+  "interpretation": [
+    "This is a reviewed semantic correspondence, not a restored original debug symbol.",
+    "The target keeps the shared displayed-GIF state but initializes an adjacent CanTfaz6bZ field in the same callback, which accounts for the larger implementation.",
+    "The v18_ alias preserves the readable source role while the evidence retains the obfuscated target global, pointer slot, cleanup callback, and default name.",
+    "The alias is valid only for the exact hashed Spectron library recorded in this artifact. It changes the IDA analysis copy only; no APK or native library is modified."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchor for the displayed-GIF static initializer",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 1,
+    "exact_shape_anchor_count": 0,
+    "high_confidence_count": 1,
+    "layout_change_anchor_count": 1,
+    "new_context_anchor_count": 1,
+    "target_default_name_count": 1
+  }
+}

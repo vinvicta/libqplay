@@ -1482,6 +1482,18 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_particle_emitter_script_vars_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+249. The next IDA pass translated `initializeDisplayedGif`. Source `0xe08fc`
+    maps to target `0xe0b80`, where the target `DiZVgajboR` global preserves
+    the shared displayed-GIF state used by the player, server-player,
+    explosion, bomb, carry, and extra-object draw paths. The target initializer
+    also initializes a neighboring `CanTfaz6bZ` string, so the pair is recorded
+    as a high-confidence layout-change match. The v190 copy has 11,694
+    functions, 3,641 high-confidence labels, and 1,229 default `sub_` names,
+    with zero semantic reopen failures. See
+    `artifacts/spectron_displayed_gif_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_displayed_gif_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 248. The next IDA pass translated `TOptions_initializeWindowPosition`. Source
     `0xe08e4` maps to target `0xe0b3c`, where the obfuscated `K7FLgag3II`
     options class stores the same two `-1` window-position defaults in

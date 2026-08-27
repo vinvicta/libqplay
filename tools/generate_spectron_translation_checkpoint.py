@@ -187,6 +187,8 @@ def main() -> None:
     parser.add_argument("--clear-cur-anis-verification", type=Path)
     parser.add_argument("--options-window-position-anchors", type=Path)
     parser.add_argument("--options-window-position-verification", type=Path)
+    parser.add_argument("--displayed-gif-anchors", type=Path)
+    parser.add_argument("--displayed-gif-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
     parser.add_argument("--server-animation-verification", type=Path)
     parser.add_argument("--player-lifecycle-anchors", type=Path)
@@ -2512,6 +2514,44 @@ def main() -> None:
         result["options_window_position_anchors"] = options_window_position
         result["interpretation"].append(
             "The one-hundred-eighty-ninth database revision also contains the separately reviewed TOptions window-position initializer anchor."
+        )
+    displayed_gif = None
+    if args.displayed_gif_anchors or args.displayed_gif_verification:
+        if not args.displayed_gif_anchors or not args.displayed_gif_verification:
+            raise ValueError(
+                "displayed-GIF anchors and verification must be supplied together"
+            )
+        displayed_gif_document = load(args.displayed_gif_anchors)
+        displayed_gif_verification = load(args.displayed_gif_verification)
+        if (
+            displayed_gif_document.get("artifact")
+            != "spectron_displayed_gif_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected displayed-GIF anchor artifact")
+        if not displayed_gif_verification.get("verified"):
+            raise ValueError("displayed-GIF anchor reopen verification did not pass")
+        expected_displayed_gif = len(displayed_gif_document["anchors"])
+        if (
+            displayed_gif_verification["verified_name_count"]
+            != expected_displayed_gif
+        ):
+            raise ValueError(
+                "displayed-GIF verification count differs from artifact"
+            )
+        displayed_gif = {
+            "anchor_path": str(args.displayed_gif_anchors),
+            "anchor_sha256": sha256_path(args.displayed_gif_anchors),
+            "reopen_verification": str(args.displayed_gif_verification),
+            "anchor_count": expected_displayed_gif,
+            "verified_name_count": displayed_gif_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": displayed_gif_verification["failure_count"],
+        }
+    if displayed_gif is not None:
+        result["displayed_gif_anchors"] = displayed_gif
+        result["interpretation"].append(
+            "The one-hundred-ninetieth database revision also contains the separately reviewed displayed-GIF state initializer anchor."
         )
     server_animation = None
     if args.server_animation_anchors or args.server_animation_verification:
