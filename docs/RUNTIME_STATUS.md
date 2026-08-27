@@ -1204,6 +1204,13 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_drawing_panel_residual_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+169. The next IDA pass translated four HTML color and image-animation methods
+     covering dual-list color registry construction, animation construction,
+     complete destruction, and deleting-destruction delegation. The labels
+     reopened successfully in the v109 disposable copy. See
+     `artifacts/spectron_image_html_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

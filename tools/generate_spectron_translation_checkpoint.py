@@ -237,6 +237,8 @@ def main() -> None:
     parser.add_argument("--window-input-verification", type=Path)
     parser.add_argument("--drawing-panel-residual-anchors", type=Path)
     parser.add_argument("--drawing-panel-residual-verification", type=Path)
+    parser.add_argument("--image-html-anchors", type=Path)
+    parser.add_argument("--image-html-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3216,6 +3218,34 @@ def main() -> None:
         result["drawing_panel_residual_anchors"] = drawing_panel_residual
         result["interpretation"].append(
             "The one-hundred-sixth database revision also contains the separately reviewed TDrawingPanel residual constructor, image, filter, and palette anchors."
+        )
+    image_html = None
+    if args.image_html_anchors or args.image_html_verification:
+        if not args.image_html_anchors or not args.image_html_verification:
+            raise ValueError(
+                "image/html anchors and image/html verification must be supplied together"
+            )
+        image_html_document = load(args.image_html_anchors)
+        image_html_verification = load(args.image_html_verification)
+        if image_html_document.get("artifact") != "spectron_image_html_manual_translation_anchors_20260826":
+            raise ValueError("unexpected image/html anchor artifact")
+        if not image_html_verification.get("verified"):
+            raise ValueError("image/html anchor reopen verification did not pass")
+        expected_image_html = len(image_html_document["anchors"])
+        if image_html_verification["verified_name_count"] != expected_image_html:
+            raise ValueError("image/html verification count differs from artifact")
+        image_html = {
+            "anchor_path": str(args.image_html_anchors),
+            "anchor_sha256": sha256_path(args.image_html_anchors),
+            "reopen_verification": str(args.image_html_verification),
+            "anchor_count": expected_image_html,
+            "verified_name_count": image_html_verification["verified_name_count"],
+            "reopen_failure_count": image_html_verification["failure_count"],
+        }
+    if image_html is not None:
+        result["image_html_anchors"] = image_html
+        result["interpretation"].append(
+            "The one-hundred-seventh database revision also contains the separately reviewed HTML color registry and image-animation lifecycle anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
