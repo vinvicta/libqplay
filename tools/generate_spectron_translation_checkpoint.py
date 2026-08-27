@@ -149,6 +149,8 @@ def main() -> None:
     parser.add_argument("--encryption-verification", type=Path)
     parser.add_argument("--tlist-anchors", type=Path)
     parser.add_argument("--tlist-verification", type=Path)
+    parser.add_argument("--sounds-anchors", type=Path)
+    parser.add_argument("--sounds-verification", type=Path)
     parser.add_argument("--particle-emitter-anchors", type=Path)
     parser.add_argument("--particle-emitter-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
@@ -2106,6 +2108,34 @@ def main() -> None:
         result["tlist_anchors"] = tlist
         result["interpretation"].append(
             "The one-hundred-seventy-first database revision also contains the separately reviewed exact-shape TList helper anchors."
+        )
+    sounds = None
+    if args.sounds_anchors or args.sounds_verification:
+        if not args.sounds_anchors or not args.sounds_verification:
+            raise ValueError(
+                "sound anchors and sound verification must be supplied together"
+            )
+        sounds_document = load(args.sounds_anchors)
+        sounds_verification = load(args.sounds_verification)
+        if sounds_document.get("artifact") != "spectron_sounds_manual_translation_anchors_20260827":
+            raise ValueError("unexpected sound anchor artifact")
+        if not sounds_verification.get("verified"):
+            raise ValueError("sound anchor reopen verification did not pass")
+        expected_sounds = len(sounds_document["anchors"])
+        if sounds_verification["verified_name_count"] != expected_sounds:
+            raise ValueError("sound verification count differs from artifact")
+        sounds = {
+            "anchor_path": str(args.sounds_anchors),
+            "anchor_sha256": sha256_path(args.sounds_anchors),
+            "reopen_verification": str(args.sounds_verification),
+            "anchor_count": expected_sounds,
+            "verified_name_count": sounds_verification["verified_name_count"],
+            "reopen_failure_count": sounds_verification["failure_count"],
+        }
+    if sounds is not None:
+        result["sounds_anchors"] = sounds
+        result["interpretation"].append(
+            "The one-hundred-seventy-second database revision also contains the separately reviewed exact-shape TSounds helper anchors."
         )
     particle_emitter = None
     if args.particle_emitter_anchors or args.particle_emitter_verification:

@@ -1428,6 +1428,17 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+230. The next IDA pass translated eight exact-shape `TSounds` methods:
+     offscreen-distance state, disabled-effects comma text, stop-sounds,
+     resource cleanup, MIDI shutdown, and absolute playback. All eight labels
+     reopened successfully in the v172 disposable copy, which has 11,694
+     functions, 3,641 high-confidence labels, and 1,250 default `sub_` names.
+     The address deltas remain class-local groups at `+0xbb0`, `+0xbd4`, and
+     `+0xbe8`. See
+     `artifacts/spectron_sounds_manual_translation_anchors_20260827.json`,
+     `tools/generate_spectron_sounds_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 229. The next IDA pass translated six exact-shape `TList` methods: indexed
      replacement, repeated-value removal, full-list append, signed and
      unsigned indexed access, and the qsort thunk. All six labels reopened
