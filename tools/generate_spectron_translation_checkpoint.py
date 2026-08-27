@@ -291,6 +291,8 @@ def main() -> None:
     parser.add_argument("--tsocket-receive-residual-verification", type=Path)
     parser.add_argument("--tsocket-lifecycle-residual-anchors", type=Path)
     parser.add_argument("--tsocket-lifecycle-residual-verification", type=Path)
+    parser.add_argument("--tsocket-host-residual-anchors", type=Path)
+    parser.add_argument("--tsocket-host-residual-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -4026,6 +4028,34 @@ def main() -> None:
         result["tsocket_lifecycle_residual_anchors"] = tsocket_lifecycle_residual
         result["interpretation"].append(
             "The one-hundred-thirty-fifth database revision also contains the separately reviewed TSocket lifecycle residual family."
+        )
+    tsocket_host_residual = None
+    if args.tsocket_host_residual_anchors or args.tsocket_host_residual_verification:
+        if not args.tsocket_host_residual_anchors or not args.tsocket_host_residual_verification:
+            raise ValueError(
+                "TSocket host residual anchors and verification must be supplied together"
+            )
+        tsocket_host_residual_document = load(args.tsocket_host_residual_anchors)
+        tsocket_host_residual_verification = load(args.tsocket_host_residual_verification)
+        if tsocket_host_residual_document.get("artifact") != "spectron_tsocket_host_residual_manual_translation_anchors_20260826":
+            raise ValueError("unexpected TSocket host residual artifact")
+        if not tsocket_host_residual_verification.get("verified"):
+            raise ValueError("TSocket host residual reopen verification did not pass")
+        expected_tsocket_host_residual = len(tsocket_host_residual_document["anchors"])
+        if tsocket_host_residual_verification["verified_name_count"] != expected_tsocket_host_residual:
+            raise ValueError("TSocket host residual verification count differs from artifact")
+        tsocket_host_residual = {
+            "anchor_path": str(args.tsocket_host_residual_anchors),
+            "anchor_sha256": sha256_path(args.tsocket_host_residual_anchors),
+            "reopen_verification": str(args.tsocket_host_residual_verification),
+            "anchor_count": expected_tsocket_host_residual,
+            "verified_name_count": tsocket_host_residual_verification["verified_name_count"],
+            "reopen_failure_count": tsocket_host_residual_verification["failure_count"],
+        }
+    if tsocket_host_residual is not None:
+        result["tsocket_host_residual_anchors"] = tsocket_host_residual
+        result["interpretation"].append(
+            "The one-hundred-thirty-sixth database revision also contains the separately reviewed TSocket host and logging residual family."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

@@ -3444,6 +3444,39 @@ functions. The v108 database has 1,684 remaining default `sub_` names. Its
 SHA-256 is
 `8350a43be6b31306954e34a17f77d742c8d1702015d671019d2bf2dd6c1bb1e1`.
 
+## Spectron TSocket host and logging residual anchors
+
+The v136 pass translated three helpers in the host and logging region. The
+plain send and receive functions immediately nearby were already represented
+by canonical semantic-map labels.
+
+| 1.8 role | Source | Spectron symbol | Target | Main evidence |
+| --- | ---: | --- | ---: | --- |
+| `TSocket_cacheHostAddress` | `0x205ef8` | `sub_20C020` | `0x20c020` | cached IPv4 object and timestamp |
+| `TSocket_logSocketMessage` | `0x205fcc` | `sub_20C018` | `0x20c018` | CyaSSL logging callback |
+| `resolveHost_TString_const` | `0x206108` | `_Z10dsmb2ajvasRK10C8THgaTQxF` | `0x20c20c` | cached lookup and gethostbyname |
+
+The cache writer and resolver retain the same cached-host fields, address
+validity flag, case-insensitive lookup, and timestamp handling. The source
+and target bodies grow from 212 to 244 bytes for the cache writer and from
+300 to 344 bytes for the resolver as target string and container wrappers are
+made explicit.
+
+The logging row is a deliberate callback-factoring match. The source method
+formats a temporary string and calls `TLog_echo`. Spectron uses the small
+target helper at `0x20c018` as the callback passed to
+`CyaSSL_SetLoggingCb`, and that helper forwards the message into the target
+logger. Its 8-byte thunk is therefore recorded as a layout-change anchor,
+not rejected because its body is much smaller.
+
+The target-only helper at `0x20c008` clears a separate global string object.
+The already translated `v18_TSocket_sendPlain` at `0x20c114` and
+`v18_TSocket_recvPlain` at `0x20c184` are explicit neighboring boundaries.
+All three new labels reopened successfully in the v136 disposable copy, and
+the full translation check still reports zero failures across 11,679
+functions. Evidence is stored in
+`artifacts/spectron_tsocket_host_residual_manual_translation_anchors_20260826.json`.
+
 ## Spectron TSocket lifecycle residual anchors
 
 The v135 pass translated four remaining methods in the ordered `TSocket`

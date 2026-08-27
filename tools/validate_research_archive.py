@@ -458,6 +458,9 @@ def main():
     spectron_tsocket_lifecycle_residual_anchors = load_json(
         "artifacts/spectron_tsocket_lifecycle_residual_manual_translation_anchors_20260826.json"
     )
+    spectron_tsocket_host_residual_anchors = load_json(
+        "artifacts/spectron_tsocket_host_residual_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2582,13 +2585,25 @@ def main():
     check("Spectron TSocket lifecycle residual exact-shape count", spectron_tsocket_lifecycle_residual_anchors["summary"]["exact_shape_anchor_count"], 1)
     check("Spectron TSocket lifecycle residual layout-change count", spectron_tsocket_lifecycle_residual_anchors["summary"]["layout_change_anchor_count"], 3)
     check(
+        "Spectron TSocket host residual artifact",
+        spectron_tsocket_host_residual_anchors["artifact"],
+        "spectron_tsocket_host_residual_manual_translation_anchors_20260826",
+    )
+    check("Spectron TSocket host residual network", spectron_tsocket_host_residual_anchors["network_contacted"], False)
+    check("Spectron TSocket host residual total", spectron_tsocket_host_residual_anchors["summary"]["anchor_count"], 3)
+    check("Spectron TSocket host residual high confidence", spectron_tsocket_host_residual_anchors["summary"]["high_confidence_count"], 3)
+    check("Spectron TSocket host residual semantic overlap", spectron_tsocket_host_residual_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron TSocket host residual default targets", spectron_tsocket_host_residual_anchors["summary"]["target_default_name_count"], 2)
+    check("Spectron TSocket host residual exact-shape count", spectron_tsocket_host_residual_anchors["summary"]["exact_shape_anchor_count"], 0)
+    check("Spectron TSocket host residual layout-change count", spectron_tsocket_host_residual_anchors["summary"]["layout_change_anchor_count"], 3)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11679)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1497)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1495)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -2723,7 +2738,8 @@ def main():
     check("Spectron checkpoint TSocket SSL residual anchor count", spectron_checkpoint["tsocket_ssl_residual_anchors"]["verified_name_count"], 4)
     check("Spectron checkpoint TSocket receive residual anchor count", spectron_checkpoint["tsocket_receive_residual_anchors"]["verified_name_count"], 2)
     check("Spectron checkpoint TSocket lifecycle residual anchor count", spectron_checkpoint["tsocket_lifecycle_residual_anchors"]["verified_name_count"], 4)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "66f9607ed18bcd93ebbee727c3f42299fd05c7c17fa5659746afd52bd9e3598f")
+    check("Spectron checkpoint TSocket host residual anchor count", spectron_checkpoint["tsocket_host_residual_anchors"]["verified_name_count"], 3)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "fbd9c0aaacb910343fda7807264cb8c66c25a9f8b9f8f394950e620479678723")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -2918,6 +2934,7 @@ def main():
         spectron_tsocket_ssl_residual_anchors,
         spectron_tsocket_receive_residual_anchors,
         spectron_tsocket_lifecycle_residual_anchors,
+        spectron_tsocket_host_residual_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
