@@ -1368,6 +1368,14 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_guicontrol_initialization_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+191. The next IDA pass resolved the remaining `GuiControl_create_TString_const`
+    factory ambiguity. The source and target wrappers have identical
+    normalized metrics and both allocate `0x1c8` bytes before calling the
+    parameterized constructor. The label reopened successfully in the v131
+    disposable copy, which retains 1,514 default `sub_` functions. See
+    `artifacts/spectron_guicontrol_create_residual_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
