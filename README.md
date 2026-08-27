@@ -733,6 +733,14 @@ successfully. The evidence is in
 `artifacts/spectron_player_weapon_state_manual_translation_anchors_20260826.json`,
 and the v66 database SHA-256 is recorded in the checkpoint.
 
+A sixty-fifth disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v67.i64`,
+adds five reviewed player draw-state and visual setter anchors for the draw
+rectangle, head, body, sword, and shield paths. All five reopened successfully.
+The evidence is in
+`artifacts/spectron_player_visual_setter_manual_translation_anchors_20260826.json`,
+and the v67 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and

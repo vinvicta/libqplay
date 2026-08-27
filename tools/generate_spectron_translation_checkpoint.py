@@ -153,6 +153,8 @@ def main() -> None:
     parser.add_argument("--player-link-traversal-verification", type=Path)
     parser.add_argument("--player-weapon-state-anchors", type=Path)
     parser.add_argument("--player-weapon-state-verification", type=Path)
+    parser.add_argument("--player-visual-setter-anchors", type=Path)
+    parser.add_argument("--player-visual-setter-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1956,6 +1958,34 @@ def main() -> None:
         result["player_weapon_state_anchors"] = player_weapon_state
         result["interpretation"].append(
             "The sixty-fourth database revision also contains the separately reviewed player attribute reset and weapon-state anchors."
+        )
+    player_visual_setter = None
+    if args.player_visual_setter_anchors or args.player_visual_setter_verification:
+        if not args.player_visual_setter_anchors or not args.player_visual_setter_verification:
+            raise ValueError(
+                "player-visual-setter anchors and player-visual-setter verification must be supplied together"
+            )
+        player_visual_setter_document = load(args.player_visual_setter_anchors)
+        player_visual_setter_verification = load(args.player_visual_setter_verification)
+        if player_visual_setter_document.get("artifact") != "spectron_player_visual_setter_manual_translation_anchors_20260826":
+            raise ValueError("unexpected player-visual-setter anchor artifact")
+        if not player_visual_setter_verification.get("verified"):
+            raise ValueError("player-visual-setter anchor reopen verification did not pass")
+        expected_player_visual_setter = len(player_visual_setter_document["anchors"])
+        if player_visual_setter_verification["verified_name_count"] != expected_player_visual_setter:
+            raise ValueError("player-visual-setter verification count differs from artifact")
+        player_visual_setter = {
+            "anchor_path": str(args.player_visual_setter_anchors),
+            "anchor_sha256": sha256_path(args.player_visual_setter_anchors),
+            "reopen_verification": str(args.player_visual_setter_verification),
+            "anchor_count": expected_player_visual_setter,
+            "verified_name_count": player_visual_setter_verification["verified_name_count"],
+            "reopen_failure_count": player_visual_setter_verification["failure_count"],
+        }
+    if player_visual_setter is not None:
+        result["player_visual_setter_anchors"] = player_visual_setter
+        result["interpretation"].append(
+            "The sixty-fifth database revision also contains the separately reviewed player draw-rectangle and visual setter anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v66.i64",
-    "sha256": "b17096b3ce92774fdfdf90b2a21c52dad8111ad7d09bd2b705fa0d3371ecd25b"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v67.i64",
+    "sha256": "b35de4695b4ccc607722b5d049df1b3838f20dcd2e010d9bafda5c47ca105b97"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -209,7 +209,8 @@
     "The sixty-first database revision also contains the separately reviewed player side-level grid and lookup anchors.",
     "The sixty-second database revision also contains the separately reviewed player map-position and map-link anchors.",
     "The sixty-third database revision also contains the separately reviewed player level-animation and link-traversal anchors.",
-    "The sixty-fourth database revision also contains the separately reviewed player attribute reset and weapon-state anchors."
+    "The sixty-fourth database revision also contains the separately reviewed player attribute reset and weapon-state anchors.",
+    "The sixty-fifth database revision also contains the separately reviewed player draw-rectangle and visual setter anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -347,6 +348,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_player_side_level_verification_v63.json",
     "verified_name_count": 4
+  },
+  "player_visual_setter_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "artifacts/spectron_player_visual_setter_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "363784eeda35f8155abb74592d343e6b3707275c11561918148e246485c0186b",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_player_visual_setter_verification_v67.json",
+    "verified_name_count": 5
   },
   "player_weapon_state_anchors": {
     "anchor_count": 4,
