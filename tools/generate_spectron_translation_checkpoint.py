@@ -233,6 +233,8 @@ def main() -> None:
     parser.add_argument("--color-manager-verification", type=Path)
     parser.add_argument("--font-runtime-anchors", type=Path)
     parser.add_argument("--font-runtime-verification", type=Path)
+    parser.add_argument("--window-input-anchors", type=Path)
+    parser.add_argument("--window-input-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3156,6 +3158,34 @@ def main() -> None:
         result["font_runtime_anchors"] = font_runtime
         result["interpretation"].append(
             "The one-hundred-fourth database revision also contains the separately reviewed TFont, TFontManager, TFontOptions, and TFontData residual anchors."
+        )
+    window_input = None
+    if args.window_input_anchors or args.window_input_verification:
+        if not args.window_input_anchors or not args.window_input_verification:
+            raise ValueError(
+                "window-input anchors and window-input verification must be supplied together"
+            )
+        window_input_document = load(args.window_input_anchors)
+        window_input_verification = load(args.window_input_verification)
+        if window_input_document.get("artifact") != "spectron_window_input_manual_translation_anchors_20260826":
+            raise ValueError("unexpected window-input anchor artifact")
+        if not window_input_verification.get("verified"):
+            raise ValueError("window-input anchor reopen verification did not pass")
+        expected_window_input = len(window_input_document["anchors"])
+        if window_input_verification["verified_name_count"] != expected_window_input:
+            raise ValueError("window-input verification count differs from artifact")
+        window_input = {
+            "anchor_path": str(args.window_input_anchors),
+            "anchor_sha256": sha256_path(args.window_input_anchors),
+            "reopen_verification": str(args.window_input_verification),
+            "anchor_count": expected_window_input,
+            "verified_name_count": window_input_verification["verified_name_count"],
+            "reopen_failure_count": window_input_verification["failure_count"],
+        }
+    if window_input is not None:
+        result["window_input_anchors"] = window_input
+        result["interpretation"].append(
+            "The one-hundred-fifth database revision also contains the separately reviewed TWindow mouse and key event dispatch anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

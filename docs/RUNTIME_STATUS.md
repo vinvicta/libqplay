@@ -1190,6 +1190,13 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_font_runtime_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+167. The next IDA pass translated two `TWindow` input methods covering mouse
+     normalization, cursor adjustment, key normalization, control bindings,
+     and control-key events. The labels reopened successfully in the v107
+     disposable copy. See
+     `artifacts/spectron_window_input_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
