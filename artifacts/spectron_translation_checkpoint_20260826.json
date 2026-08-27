@@ -162,11 +162,11 @@
   },
   "database": {
     "close_reopen_verified": true,
-    "default_sub_function_count": 1244,
+    "default_sub_function_count": 1240,
     "format": "packed IDA 9.3 database",
     "function_count": 11694,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v178.i64",
-    "sha256": "4bc213e88a767e49efdef3c7d0ce160d946446846cfff53b6461bcc7654391c1"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v179.i64",
+    "sha256": "c4f8361f9fa8d138358215b3d63ef4ada9755aa8cd0e60302d077002f400b37b"
   },
   "draw_texture_anchors": {
     "anchor_count": 4,
@@ -530,7 +530,7 @@
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
-    "reopen_verification": "/tmp/spectron_translation_verify_v178.json",
+    "reopen_verification": "/tmp/spectron_translation_verify_v179.json",
     "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
     "translation_map": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_semantic_function_translation_20260826.json",
     "translation_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92"
@@ -711,7 +711,8 @@
     "The one-hundred-sixty-third database revision also contains the separately reviewed TServerPlayer registration-table callback anchors.",
     "The one-hundred-sixty-fourth database revision also contains the separately reviewed TServerPlayer lifecycle, static-initializer, attachment, and coordinate-tail anchors.",
     "The v177 database revision also contains the separately reviewed HTTP response read and data-parser anchors.",
-    "The v178 database revision also contains the separately reviewed server-list getter and connection-handoff anchors."
+    "The v178 database revision also contains the separately reviewed server-list getter and connection-handoff anchors.",
+    "The v179 database revision also contains the separately reviewed server-list boolean and start-parameter state anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -1195,6 +1196,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_server_list_connection_verify_v178.json",
     "verified_name_count": 5
+  },
+  "server_list_state_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "artifacts/spectron_server_list_state_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "e80ca1c0772c7ced96683838a6df0d91dfa37a8c01f4a5c1b6f0f7ab02d05f5f",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_server_list_state_verify_v179.json",
+    "verified_name_count": 4
   },
   "server_npc_state_anchors": {
     "anchor_count": 7,

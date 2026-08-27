@@ -163,6 +163,8 @@ def main() -> None:
     parser.add_argument("--http-request-receive-verification", type=Path)
     parser.add_argument("--server-list-connection-anchors", type=Path)
     parser.add_argument("--server-list-connection-verification", type=Path)
+    parser.add_argument("--server-list-state-anchors", type=Path)
+    parser.add_argument("--server-list-state-verification", type=Path)
     parser.add_argument("--particle-emitter-anchors", type=Path)
     parser.add_argument("--particle-emitter-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
@@ -5256,6 +5258,34 @@ def main() -> None:
         result["server_list_connection_anchors"] = server_list_connection
         result["interpretation"].append(
             "The v178 database revision also contains the separately reviewed server-list getter and connection-handoff anchors."
+        )
+    server_list_state = None
+    if args.server_list_state_anchors or args.server_list_state_verification:
+        if not args.server_list_state_anchors or not args.server_list_state_verification:
+            raise ValueError(
+                "server-list state anchors and verification must be supplied together"
+            )
+        server_list_state_document = load(args.server_list_state_anchors)
+        server_list_state_verification = load(args.server_list_state_verification)
+        if server_list_state_document.get("artifact") != "spectron_server_list_state_manual_translation_anchors_20260827":
+            raise ValueError("unexpected server-list state anchor artifact")
+        if not server_list_state_verification.get("verified"):
+            raise ValueError("server-list state anchor reopen verification did not pass")
+        expected_server_list_state = len(server_list_state_document["anchors"])
+        if server_list_state_verification["verified_name_count"] != expected_server_list_state:
+            raise ValueError("server-list state verification count differs from artifact")
+        server_list_state = {
+            "anchor_path": str(args.server_list_state_anchors),
+            "anchor_sha256": sha256_path(args.server_list_state_anchors),
+            "reopen_verification": str(args.server_list_state_verification),
+            "anchor_count": expected_server_list_state,
+            "verified_name_count": server_list_state_verification["verified_name_count"],
+            "reopen_failure_count": server_list_state_verification["failure_count"],
+        }
+    if server_list_state is not None:
+        result["server_list_state_anchors"] = server_list_state
+        result["interpretation"].append(
+            "The v179 database revision also contains the separately reviewed server-list boolean and start-parameter state anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

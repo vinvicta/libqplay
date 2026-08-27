@@ -1460,6 +1460,20 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_static_callback_role_correction.py`, and
     `tools/ida_dump_function_data_refs.py`.
 
+238. The next IDA pass translated four exact-shape server-list state methods
+    in the Spectron 2.2 build. The aliases cover the remove-vars-on-logout
+    setter, allow-login-reconnect getter, and server-start parameter and
+    connection setters at targets `0x2082b0`, `0x2082c0`, `0x2082f0`, and
+    `0x208304`. Pseudocode ties them to
+    `xiYWfajld1::x7tqLaYXTv`, `xiYWfajld1::mLqqLax7Qv`,
+    `xiYWfajld1::OcLpLarkhv`, and `xiYWfajld1::Jq54MaebUU`; the latter three
+    are corroborated by already translated neighboring methods. All four
+    aliases reopened successfully in the v179 copy, which has 11,694
+    functions, 3,641 high-confidence labels, and 1,240 default `sub_` names.
+    See `artifacts/spectron_server_list_state_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_server_list_state_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 237. The next IDA pass translated five server-list anchors in the Spectron
     2.2 build. Four exact-shape getters map the server-start parameters,
     server-start connection text, and both server-name callback forms to
