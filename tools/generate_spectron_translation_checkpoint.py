@@ -205,6 +205,8 @@ def main() -> None:
     parser.add_argument("--script-machine-tail-verification", type=Path)
     parser.add_argument("--script-stream-profile-anchors", type=Path)
     parser.add_argument("--script-stream-profile-verification", type=Path)
+    parser.add_argument("--ani-lexer-anchors", type=Path)
+    parser.add_argument("--ani-lexer-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2736,6 +2738,34 @@ def main() -> None:
         result["script_stream_profile_anchors"] = script_stream_profile
         result["interpretation"].append(
             "The ninetieth database revision also contains the separately reviewed script stream parser and function/class profiler anchors."
+        )
+    ani_lexer = None
+    if args.ani_lexer_anchors or args.ani_lexer_verification:
+        if not args.ani_lexer_anchors or not args.ani_lexer_verification:
+            raise ValueError(
+                "animation-lexer anchors and animation-lexer verification must be supplied together"
+            )
+        ani_lexer_document = load(args.ani_lexer_anchors)
+        ani_lexer_verification = load(args.ani_lexer_verification)
+        if ani_lexer_document.get("artifact") != "spectron_ani_lexer_fatal_manual_translation_anchor_20260826":
+            raise ValueError("unexpected animation-lexer anchor artifact")
+        if not ani_lexer_verification.get("verified"):
+            raise ValueError("animation-lexer anchor reopen verification did not pass")
+        expected_ani_lexer = len(ani_lexer_document["anchors"])
+        if ani_lexer_verification["verified_name_count"] != expected_ani_lexer:
+            raise ValueError("animation-lexer verification count differs from artifact")
+        ani_lexer = {
+            "anchor_path": str(args.ani_lexer_anchors),
+            "anchor_sha256": sha256_path(args.ani_lexer_anchors),
+            "reopen_verification": str(args.ani_lexer_verification),
+            "anchor_count": expected_ani_lexer,
+            "verified_name_count": ani_lexer_verification["verified_name_count"],
+            "reopen_failure_count": ani_lexer_verification["failure_count"],
+        }
+    if ani_lexer is not None:
+        result["ani_lexer_anchors"] = ani_lexer
+        result["interpretation"].append(
+            "The ninety-first database revision also contains the separately reviewed generated animation-lexer fatal-exit callback anchor."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

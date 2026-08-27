@@ -1081,6 +1081,14 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_script_stream_profile_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+153. The next IDA pass translated the generated animation-lexer fatal
+     callback. The target is called by the already translated lexer and has
+     the same compact exit-wrapper shape, but calls `exit(0)` instead of the
+     source's `exit(2)`. The label reopened successfully in the v93 disposable
+     copy. See
+     `artifacts/spectron_ani_lexer_fatal_manual_translation_anchor_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

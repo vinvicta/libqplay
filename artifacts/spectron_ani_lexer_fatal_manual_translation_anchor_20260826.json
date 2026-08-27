@@ -1,0 +1,189 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source helper is a no-return four-instruction wrapper that calls `exit(2)`. The target helper is also a no-return four-instruction wrapper with one direct exit call, but the target calls `exit(0)`. The status change is recorded explicitly.",
+        "The source helper is called by `lex_load_TGraalAni`. The target generated lexer at `0x1979cc` calls `_ZN10QYZugaRKGu10RzQ_IaWQttEv`, the target helper at `0x19af5c`, and keeps the corresponding previous-state callback in the same scanner state machine.",
+        "Both fatal wrappers measure 16 bytes, 4 instructions, and 1 basic block with no string references. The target helper is relocated after `loadGaniFromString`, so the direct generated-lexer call relationship is stronger evidence than a simple address shift."
+      ],
+      "match_kind": "manual-animation-lexer-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        ".exit"
+      ],
+      "original_ea": "0x1925e4",
+      "original_exit_status": 2,
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 4,
+        "mnemonic_hash": "eb964a41d0ff6c5081c54864ad4ccae646e7658e384fd6f1a54ebd640251af81",
+        "register_shape_hash": "7b3a9ab59cc506abb8a88feb5e5e82b2b94df22526c7fa37c2f291cd45e983bc",
+        "shape_hash": "edd7705e38ab7976b4722852594312abfdb4567385563c269f8253cd159c46ca",
+        "size": 16
+      },
+      "original_name": "ani_lexer_fatalExit",
+      "original_string_refs": [],
+      "proposed_name": "v18_ani_lexer_fatalExit",
+      "semantic_match_already_present": false,
+      "source_basis": "generated animation lexer fatal-exit callback",
+      "spectron_current_name": "_ZN10QYZugaRKGu10RzQ_IaWQttEv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        ".exit"
+      ],
+      "spectron_ea": "0x19af5c",
+      "spectron_exit_status": 0,
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 4,
+        "mnemonic_hash": "eb964a41d0ff6c5081c54864ad4ccae646e7658e384fd6f1a54ebd640251af81",
+        "register_shape_hash": "8cae423f2261de2b367479466953ea1f91388be066728063fe98e53c88a0eb11",
+        "shape_hash": "1a26fa6d28a8a846d08cf235f0662f79a5d85a592ed9a58a5a955eda77a9c980",
+        "size": 16
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_ani_lexer_fatal_manual_translation_anchor_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v1_saved.json",
+    "spectron_features_sha256": "a8d58f85502362316ee99a0f79c2cd7a4ad5d6fac94aca0ee75bd0d2965fc2a1"
+  },
+  "interpretation": [
+    "This is a reviewed semantic correspondence, not a restored original debug symbol.",
+    "The address is valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ label preserves the readable 1.8 role while keeping the obfuscated 2.2 name and changed exit status in the evidence row.",
+    "The generated lexer context is included to show that the target helper is called from the already translated target scanner. The existing lex_load anchor is not duplicated here.",
+    "The target's exit(0) status is a behavioral difference from the source exit(2). This anchor identifies the callback role and does not claim identical process termination status."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchor for the generated animation lexer fatal-exit callback",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 1,
+    "high_confidence_count": 1,
+    "new_context_anchor_count": 1,
+    "target_default_name_count": 0
+  },
+  "supporting_context": {
+    "existing_translation_artifact": "spectron_resource_parser_manual_translation_anchors_20260826",
+    "original_lexer": {
+      "direct_call_names": [
+        ".__errno",
+        ".clearerr",
+        ".ferror",
+        ".fread",
+        ".fwrite",
+        ".getc",
+        ".strlen",
+        "ani_lexer_fatalExit",
+        "ani_lexer_getPreviousState",
+        "plt_TGraalActorMod_TGraalActorMod_void",
+        "plt_TGraalActor_TGraalActor_int",
+        "plt_TGraalAniSprite_TGraalAniSprite_int",
+        "plt_TGraalAniSprite_setimg_TString_const",
+        "plt_TGraalAniStep_TGraalAniStep",
+        "plt_TGraalAniStep_TGraalAniStep_void",
+        "plt_TGraalAni_getSprite_int",
+        "plt_TList_Add_void",
+        "plt_TStringList_Tokenize_TString_const_TString_const",
+        "plt_TString_clear_void",
+        "plt_TString_indexOf_char",
+        "plt_TString_operator_assign_TString_const",
+        "plt_TString_operator_lshift_char_const",
+        "plt_TString_starts_TString_const",
+        "plt_TString_subString_int",
+        "plt_TString_subString_int_int",
+        "plt_TString_trim_void",
+        "plt_ani_create_buffer_sFILE_int",
+        "plt_anialloc_ulong",
+        "plt_anirealloc_void_ulong",
+        "plt_anirestart_sFILE",
+        "plt_operator_assign_TString_const_char_const",
+        "plt_operator_delete_void__2",
+        "plt_operator_new_ulong__2",
+        "plt_strtofloat_TString_const",
+        "plt_strtoint_TString_const"
+      ],
+      "ea": "0x192ec8",
+      "metrics": {
+        "basic_block_count": 651,
+        "instruction_count": 3184,
+        "mnemonic_hash": "91b75c01bff4cbd0aee97baf74e4f01414c3c73104903eb20e7e979c84b69a42",
+        "register_shape_hash": "3d85d65d78cd2b0da28ba085591805bcba52c3321a75d2d2496591262e5c7a15",
+        "shape_hash": "73b82f79d831f651ed248370d93f5c1afd0f49819e56883e8a4135b441340de2",
+        "size": 12748
+      },
+      "name": "lex_load_TGraalAni",
+      "string_refs": [
+        "ATTR",
+        "PARAM",
+        "edcb`_][ZWVUSQPNMKJFEDCBA@?>=<;:86/,)($\"!"
+      ]
+    },
+    "spectron_lexer": {
+      "direct_call_names": [
+        "._Z10GDrLlb1RwVP7__sFILE",
+        "._Z10JAGOlbyrfYPvm",
+        "._Z10Msu4gaSeoZRK10C8THgaTQxF",
+        "._Z10Sx3llbgBaAP7__sFILEi",
+        "._Z10mDuKlbInJUm",
+        "._Z10nak8fakACbRK10C8THgaTQxF",
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSERKS_",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10CanTfaz6bZaSEPKc",
+        "._ZN10CanTfaz6bZaSERK10C8THgaTQxF",
+        "._ZN10JQknDa08eK10rhRo6anrw_ERK10C8THgaTQxF",
+        "._ZN10JQknDa08eKC2Ei",
+        "._ZN10Kc8uganwOu10M5XOFaCauNEi",
+        "._ZN10QYZugaRKGu10RzQ_IaWQttEv",
+        "._ZN10VxSu6advA4C2Ei",
+        "._ZN10k3yv6au694C2Ev",
+        "._ZN10vuuHgangcF10q316gaulx0ERK10C8THgaTQxFS2_",
+        "._ZN10vy1JgaKVkH3AddEPv",
+        "._ZN10xqXr6a2B71C1Ev",
+        "._ZN10xqXr6a2B71D1Ev",
+        "._ZNK10C8THgaTQxF10JtTLgaLhUIEc",
+        "._ZNK10C8THgaTQxF10QgaLgaQfiIEi",
+        "._ZNK10C8THgaTQxF10QgaLgaQfiIEii",
+        "._ZNK10C8THgaTQxF10_xFPgaiz4LEv",
+        "._ZNK10C8THgaTQxF10fEtHgarybFERKS_",
+        "._ZdlPv",
+        "._ZeqRK10C8THgaTQxFPKc",
+        "._Znwm",
+        ".__errno",
+        ".clearerr",
+        ".ferror",
+        ".fread",
+        ".fwrite",
+        ".getc",
+        ".strlen",
+        "v18_ani_lexer_getPreviousState"
+      ],
+      "ea": "0x1979cc",
+      "metrics": {
+        "basic_block_count": 651,
+        "instruction_count": 3188,
+        "mnemonic_hash": "8c540abbc0fc29937cdbc63221189cec4a7424faa6f6047730dbc391cf85eb25",
+        "register_shape_hash": "e1b14e4544a8e4027df3495a16a7817475b83ef100982f3c158fedcac8df4d49",
+        "shape_hash": "79fa45eec4f73ad053fa3bdf09a914df39c0194a4dc0cb2a9cc12deda087037f",
+        "size": 12768
+      },
+      "name": "_Z10Qe7BkbfIGXP10Kc8uganwOu",
+      "string_refs": [
+        "ATTR",
+        "PARAM",
+        "edcb`_][ZWVUSQPNMKJFEDCBA@?>=<;:86/,)($\"!"
+      ]
+    }
+  }
+}
