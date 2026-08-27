@@ -191,6 +191,8 @@ def main() -> None:
     parser.add_argument("--displayed-gif-verification", type=Path)
     parser.add_argument("--gui-button-types-anchors", type=Path)
     parser.add_argument("--gui-button-types-verification", type=Path)
+    parser.add_argument("--gui-alignment-tables-anchors", type=Path)
+    parser.add_argument("--gui-alignment-tables-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
     parser.add_argument("--server-animation-verification", type=Path)
     parser.add_argument("--player-lifecycle-anchors", type=Path)
@@ -2594,6 +2596,50 @@ def main() -> None:
         result["gui_button_types_anchors"] = gui_button_types
         result["interpretation"].append(
             "The one-hundred-ninety-first database revision also contains the separately reviewed GUI button-type table initializer anchor."
+        )
+    gui_alignment_tables = None
+    if args.gui_alignment_tables_anchors or args.gui_alignment_tables_verification:
+        if not args.gui_alignment_tables_anchors or not args.gui_alignment_tables_verification:
+            raise ValueError(
+                "GUI alignment-table anchors and verification must be supplied together"
+            )
+        gui_alignment_tables_document = load(args.gui_alignment_tables_anchors)
+        gui_alignment_tables_verification = load(args.gui_alignment_tables_verification)
+        if (
+            gui_alignment_tables_document.get("artifact")
+            != "spectron_gui_alignment_tables_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected GUI alignment-table anchor artifact")
+        if not gui_alignment_tables_verification.get("verified"):
+            raise ValueError(
+                "GUI alignment-table anchor reopen verification did not pass"
+            )
+        expected_gui_alignment_tables = len(
+            gui_alignment_tables_document["anchors"]
+        )
+        if (
+            gui_alignment_tables_verification["verified_name_count"]
+            != expected_gui_alignment_tables
+        ):
+            raise ValueError(
+                "GUI alignment-table verification count differs from artifact"
+            )
+        gui_alignment_tables = {
+            "anchor_path": str(args.gui_alignment_tables_anchors),
+            "anchor_sha256": sha256_path(args.gui_alignment_tables_anchors),
+            "reopen_verification": str(args.gui_alignment_tables_verification),
+            "anchor_count": expected_gui_alignment_tables,
+            "verified_name_count": gui_alignment_tables_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": gui_alignment_tables_verification[
+                "failure_count"
+            ],
+        }
+    if gui_alignment_tables is not None:
+        result["gui_alignment_tables_anchors"] = gui_alignment_tables
+        result["interpretation"].append(
+            "The one-hundred-ninety-second database revision also contains the separately reviewed GuiGraalCtrl horizontal and vertical alignment-table initializer anchor."
         )
     server_animation = None
     if args.server_animation_anchors or args.server_animation_verification:

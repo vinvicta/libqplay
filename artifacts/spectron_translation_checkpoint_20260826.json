@@ -194,11 +194,11 @@
   },
   "database": {
     "close_reopen_verified": true,
-    "default_sub_function_count": 1228,
+    "default_sub_function_count": 1227,
     "format": "packed IDA 9.3 database",
     "function_count": 11694,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v191.i64",
-    "sha256": "954bce45a8c01d94a27dffcc75d5173798b5637459ad8c0d1358961ce2527f26"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v192.i64",
+    "sha256": "fa7c62af8d8aa0608d58792573ade2a0de41c373b844b7adf76d9f8e296b9c48"
   },
   "displayed_gif_anchors": {
     "anchor_count": 1,
@@ -432,6 +432,14 @@
     "reopen_verification": "/tmp/spectron_gsfunctions_randomstring_verify_v149.json",
     "verified_name_count": 1
   },
+  "gui_alignment_tables_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_gui_alignment_tables_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "b8e8f3fba0573a5c3af775e6056e5ad01b84fb6efa20f94d2267907bcb6d1e7a",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gui_alignment_tables_verification_20260827.json",
+    "verified_name_count": 1
+  },
   "gui_button_types_anchors": {
     "anchor_count": 1,
     "anchor_path": "artifacts/spectron_gui_button_types_manual_translation_anchors_20260827.json",
@@ -594,7 +602,7 @@
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
-    "reopen_verification": "/tmp/spectron_translation_verify_v191.json",
+    "reopen_verification": "/tmp/spectron_translation_verify_v192.json",
     "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
     "translation_map": "artifacts/spectron_semantic_function_translation_20260826.json",
     "translation_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92"
@@ -676,6 +684,7 @@
     "The one-hundred-eighty-ninth database revision also contains the separately reviewed TOptions window-position initializer anchor.",
     "The one-hundred-ninetieth database revision also contains the separately reviewed displayed-GIF state initializer anchor.",
     "The one-hundred-ninety-first database revision also contains the separately reviewed GUI button-type table initializer anchor.",
+    "The one-hundred-ninety-second database revision also contains the separately reviewed GuiGraalCtrl horizontal and vertical alignment-table initializer anchor.",
     "The fifty-seventh database revision also contains the separately reviewed explosion, carry, and flying server-animation anchors.",
     "The fifty-eighth database revision also contains the separately reviewed player start-level and periodic-update anchors.",
     "The fifty-ninth database revision also contains the separately reviewed player emoticon-coordinate getter anchors.",

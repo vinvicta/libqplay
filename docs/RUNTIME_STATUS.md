@@ -1482,6 +1482,18 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_particle_emitter_script_vars_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+251. The next IDA pass translated the `GuiGraalCtrl` alignment-table
+    initializer. Source `sub_E0930` at `0xe0930` maps to target `sub_E0DAC`
+    at `0xe0dac`, preserving the five-entry horizontal and vertical tables,
+    their static-initializer slots, and the nearby `GuiGraalCtrl` property
+    record. The target adds one adjacent `CanTfaz6bZ` string and cleanup
+    callback, so this is a high-confidence layout-change match. The v192 copy
+    has 11,694 functions, 3,641 high-confidence labels, and 1,227 default
+    `sub_` names, with zero semantic reopen failures. See
+    `artifacts/spectron_gui_alignment_tables_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_gui_alignment_tables_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 250. The next IDA pass translated the `GuiButtonBaseCtrl` button-type table
     initializer. Source `sub_E090C` at `0xe090c` maps to target `sub_E0D10`
     at `0xe0d10`, preserving the three-entry `PushButton`, `ToggleButton`,
