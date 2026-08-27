@@ -3444,6 +3444,31 @@ functions. The v108 database has 1,684 remaining default `sub_` names. Its
 SHA-256 is
 `8350a43be6b31306954e34a17f77d742c8d1702015d671019d2bf2dd6c1bb1e1`.
 
+## Spectron update-package event and lookup residual anchors
+
+The v144 pass translated six remaining package-state helpers.
+
+| 1.8 role | Source | Spectron target | Target | Evidence |
+| --- | ---: | --- | ---: | --- |
+| failed-package event | `0x209260` | `_Z10PPxXSam4HQRK10C8THgaTQxF` | `0x20f3f8` | `.gupd` check and event |
+| downloading-package lookup | `0x209310` | `_Z10e3y_Sao6eTRK10C8THgaTQxF` | `0x20f4e4` | nested package-file scan |
+| privileged-package lookup | `0x209414` | `_Z10k1gxobOWBfRK10C8THgaTQxF` | `0x20f5e8` | nested package-file scan |
+| no-force update wrapper | `0x20993c` | `sub_20FB10` | `0x20fb10` | constant false |
+| force update wrapper | `0x209944` | `sub_20FB18` | `0x20fb18` | constant true |
+| downloaded-package event | `0x20a798` | `_Z10by20SakLuURK10C8THgaTQxF` | `0x210958` | load, `.gupd` check, event |
+
+The two containment lookups preserve lowercasing, list traversal, nested file
+iteration, normalized comparison, and temporary-string cleanup. The force
+wrappers preserve their boolean constants. The event wrappers grow in
+Spectron because the target rebuilds temporary strings and event calls
+through additional wrappers, but their `.gupd` and `onPackagesDownloaded`
+behavior remains visible.
+
+Four pairs have exact normalized shapes and two are documented layout-change
+pairs. The force wrappers were the only default target entries, so this batch
+removes two default `sub_` names. Evidence is stored in
+`artifacts/spectron_update_package_wrapper_residual_manual_translation_anchors_20260826.json`.
+
 ## Spectron TUpdatePackage deleting-destructor residual anchor
 
 The v143 pass closed the one remaining lifecycle row after the accessor

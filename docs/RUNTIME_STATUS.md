@@ -1428,6 +1428,14 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+204. The next IDA pass translated six update-package event and lookup helpers:
+    failure and download-complete notifications, downloading and privileged
+    package containment, and force or no-force wrappers. All six labels
+    reopened successfully in the v144 disposable copy. Two default target
+    names were replaced, leaving 1,473. See
+    `artifacts/spectron_update_package_wrapper_residual_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 203. The next IDA pass translated one exact-shape `TUpdatePackage` deleting
     destructor. Its source label is constructor-like, but the body calls the
     constructor entry followed by `operator delete`. The label reopened

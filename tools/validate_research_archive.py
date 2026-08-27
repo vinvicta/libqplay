@@ -482,6 +482,9 @@ def main():
     spectron_update_package_destructor_residual_anchors = load_json(
         "artifacts/spectron_update_package_destructor_residual_manual_translation_anchors_20260826.json"
     )
+    spectron_update_package_wrapper_residual_anchors = load_json(
+        "artifacts/spectron_update_package_wrapper_residual_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2702,13 +2705,25 @@ def main():
     check("Spectron update-package destructor residual exact-shape count", spectron_update_package_destructor_residual_anchors["summary"]["exact_shape_anchor_count"], 1)
     check("Spectron update-package destructor residual layout-change count", spectron_update_package_destructor_residual_anchors["summary"]["layout_change_anchor_count"], 0)
     check(
+        "Spectron update-package wrapper residual artifact",
+        spectron_update_package_wrapper_residual_anchors["artifact"],
+        "spectron_update_package_wrapper_residual_manual_translation_anchors_20260826",
+    )
+    check("Spectron update-package wrapper residual network", spectron_update_package_wrapper_residual_anchors["network_contacted"], False)
+    check("Spectron update-package wrapper residual total", spectron_update_package_wrapper_residual_anchors["summary"]["anchor_count"], 6)
+    check("Spectron update-package wrapper residual high confidence", spectron_update_package_wrapper_residual_anchors["summary"]["high_confidence_count"], 6)
+    check("Spectron update-package wrapper residual semantic overlap", spectron_update_package_wrapper_residual_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron update-package wrapper residual default targets", spectron_update_package_wrapper_residual_anchors["summary"]["target_default_name_count"], 2)
+    check("Spectron update-package wrapper residual exact-shape count", spectron_update_package_wrapper_residual_anchors["summary"]["exact_shape_anchor_count"], 4)
+    check("Spectron update-package wrapper residual layout-change count", spectron_update_package_wrapper_residual_anchors["summary"]["layout_change_anchor_count"], 2)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11679)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1475)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1473)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -2851,7 +2866,8 @@ def main():
     check("Spectron checkpoint client-thread residual anchor count", spectron_checkpoint["client_thread_residual_anchors"]["verified_name_count"], 7)
     check("Spectron checkpoint update-package accessor residual anchor count", spectron_checkpoint["update_package_accessor_residual_anchors"]["verified_name_count"], 20)
     check("Spectron checkpoint update-package destructor residual anchor count", spectron_checkpoint["update_package_destructor_residual_anchors"]["verified_name_count"], 1)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "0ff80f9687ea4115fd861d8319f1c1ee6fb9b3292d830659af242a6c01ce0e15")
+    check("Spectron checkpoint update-package wrapper residual anchor count", spectron_checkpoint["update_package_wrapper_residual_anchors"]["verified_name_count"], 6)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "fecbafa39ffeca37580a23828e71b4a0d3be317029bd896548d02d7ae61799f6")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
