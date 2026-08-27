@@ -1296,6 +1296,14 @@ This is the short handoff view. The full reasoning and command history are in
      copy. See
      `artifacts/spectron_font_manager_font_residual_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
+182. The next IDA pass translated 16 residual screen-panel, font-option,
+     font-data, and window-properties methods. It covers the screen-panel
+     native predicate and destructor pair, six font-option accessors, the
+     font-data deleting destructor and hash-list helpers, and the
+     window-properties destructor family with both adjusted-this thunks. The
+     labels reopened successfully in the v122 disposable copy. See
+     `artifacts/spectron_font_options_font_data_residual_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
 ## Not verified
 

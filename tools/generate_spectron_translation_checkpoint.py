@@ -263,6 +263,8 @@ def main() -> None:
     parser.add_argument("--screen-panel-window-gles-residual-verification", type=Path)
     parser.add_argument("--font-manager-font-residual-anchors", type=Path)
     parser.add_argument("--font-manager-font-residual-verification", type=Path)
+    parser.add_argument("--font-options-font-data-residual-anchors", type=Path)
+    parser.add_argument("--font-options-font-data-residual-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3606,6 +3608,34 @@ def main() -> None:
         result["font_manager_font_residual_anchors"] = font_manager_font_residual
         result["interpretation"].append(
             "The one-hundred-twenty-first database revision also contains the separately reviewed TFont, TFontCharInfo, and TFontManager residual destructor, texture, cache, and text metric anchors."
+        )
+    font_options_font_data_residual = None
+    if args.font_options_font_data_residual_anchors or args.font_options_font_data_residual_verification:
+        if not args.font_options_font_data_residual_anchors or not args.font_options_font_data_residual_verification:
+            raise ValueError(
+                "font-options font-data residual anchors and font-options font-data residual verification must be supplied together"
+            )
+        font_options_font_data_residual_document = load(args.font_options_font_data_residual_anchors)
+        font_options_font_data_residual_verification = load(args.font_options_font_data_residual_verification)
+        if font_options_font_data_residual_document.get("artifact") != "spectron_font_options_font_data_residual_manual_translation_anchors_20260826":
+            raise ValueError("unexpected font-options font-data residual anchor artifact")
+        if not font_options_font_data_residual_verification.get("verified"):
+            raise ValueError("font-options font-data residual anchor reopen verification did not pass")
+        expected_font_options_font_data_residual = len(font_options_font_data_residual_document["anchors"])
+        if font_options_font_data_residual_verification["verified_name_count"] != expected_font_options_font_data_residual:
+            raise ValueError("font-options font-data residual verification count differs from artifact")
+        font_options_font_data_residual = {
+            "anchor_path": str(args.font_options_font_data_residual_anchors),
+            "anchor_sha256": sha256_path(args.font_options_font_data_residual_anchors),
+            "reopen_verification": str(args.font_options_font_data_residual_verification),
+            "anchor_count": expected_font_options_font_data_residual,
+            "verified_name_count": font_options_font_data_residual_verification["verified_name_count"],
+            "reopen_failure_count": font_options_font_data_residual_verification["failure_count"],
+        }
+    if font_options_font_data_residual is not None:
+        result["font_options_font_data_residual_anchors"] = font_options_font_data_residual
+        result["interpretation"].append(
+            "The one-hundred-twenty-second database revision also contains the separately reviewed screen-panel lifecycle, TFontOptions property, TFontData lookup, and TWindowProperties destructor anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

@@ -416,6 +416,9 @@ def main():
     spectron_font_manager_font_residual_anchors = load_json(
         "artifacts/spectron_font_manager_font_residual_manual_translation_anchors_20260826.json"
     )
+    spectron_font_options_font_data_residual_anchors = load_json(
+        "artifacts/spectron_font_options_font_data_residual_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2379,12 +2382,23 @@ def main():
     check("Spectron font-manager font residual semantic overlap", spectron_font_manager_font_residual_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron font-manager font residual default targets", spectron_font_manager_font_residual_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron font-options font-data residual artifact",
+        spectron_font_options_font_data_residual_anchors["artifact"],
+        "spectron_font_options_font_data_residual_manual_translation_anchors_20260826",
+    )
+    check("Spectron font-options font-data residual network", spectron_font_options_font_data_residual_anchors["network_contacted"], False)
+    check("Spectron font-options font-data residual total", spectron_font_options_font_data_residual_anchors["summary"]["anchor_count"], 16)
+    check("Spectron font-options font-data residual high confidence", spectron_font_options_font_data_residual_anchors["summary"]["high_confidence_count"], 16)
+    check("Spectron font-options font-data residual semantic overlap", spectron_font_options_font_data_residual_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron font-options font-data residual default targets", spectron_font_options_font_data_residual_anchors["summary"]["target_default_name_count"], 6)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11679)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1677)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -2505,7 +2519,8 @@ def main():
     check("Spectron checkpoint screen-panel renderer residual anchor count", spectron_checkpoint["screen_panel_renderer_residual_anchors"]["verified_name_count"], 10)
     check("Spectron checkpoint screen-panel window GLES residual anchor count", spectron_checkpoint["screen_panel_window_gles_residual_anchors"]["verified_name_count"], 7)
     check("Spectron checkpoint font-manager font residual anchor count", spectron_checkpoint["font_manager_font_residual_anchors"]["verified_name_count"], 9)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "b331d230f59f5229f98c69747b501e7015a4a979fb50bf2e7d3f40ab48021fae")
+    check("Spectron checkpoint font-options font-data residual anchor count", spectron_checkpoint["font_options_font_data_residual_anchors"]["verified_name_count"], 16)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "6163a6d7dcb2b510ec8664f72e40965ee31b56bc8d177a2c2ed1f969664a5c85")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -2686,6 +2701,7 @@ def main():
         spectron_screen_panel_renderer_residual_anchors,
         spectron_screen_panel_window_gles_residual_anchors,
         spectron_font_manager_font_residual_anchors,
+        spectron_font_options_font_data_residual_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
