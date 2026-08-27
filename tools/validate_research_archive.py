@@ -293,6 +293,9 @@ def main():
     spectron_gani_constructor_anchors = load_json(
         "artifacts/spectron_gani_constructor_manual_translation_anchor_20260826.json"
     )
+    spectron_gani_helper_anchors = load_json(
+        "artifacts/spectron_gani_helper_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -1844,6 +1847,16 @@ def main():
     check("Spectron Gani-constructor semantic overlap", spectron_gani_constructor_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron Gani-constructor default targets", spectron_gani_constructor_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron Gani-helper artifact",
+        spectron_gani_helper_anchors["artifact"],
+        "spectron_gani_helper_manual_translation_anchors_20260826",
+    )
+    check("Spectron Gani-helper network", spectron_gani_helper_anchors["network_contacted"], False)
+    check("Spectron Gani-helper total", spectron_gani_helper_anchors["summary"]["anchor_count"], 2)
+    check("Spectron Gani-helper high confidence", spectron_gani_helper_anchors["summary"]["high_confidence_count"], 2)
+    check("Spectron Gani-helper semantic overlap", spectron_gani_helper_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron Gani-helper default targets", spectron_gani_helper_anchors["summary"]["target_default_name_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -1929,7 +1942,8 @@ def main():
     check("Spectron checkpoint hidden-testnpc anchor count", spectron_checkpoint["hidden_testnpc_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint level-map-lookup anchor count", spectron_checkpoint["level_map_lookup_anchors"]["verified_name_count"], 6)
     check("Spectron checkpoint Gani-constructor anchor count", spectron_checkpoint["gani_constructor_anchors"]["verified_name_count"], 1)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "ec6f4f26293f1025b1e016e0ac5f2ae13ed0f5d3d69d93d5a12be8b02e7993c6")
+    check("Spectron checkpoint Gani-helper anchor count", spectron_checkpoint["gani_helper_anchors"]["verified_name_count"], 2)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "bae4704ca2a47e0cbacde2e7c309ae5200e44f0f2c1ea0887dd560518ee2c14e")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],

@@ -848,6 +848,16 @@ random-seed and encoded-buffer state. The label reopened successfully, with
 the evidence in
 `artifacts/spectron_gani_constructor_manual_translation_anchor_20260826.json`.
 
+A v81 disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v81.i64`,
+adds two smaller Gani helpers. The first translates the color-variable string
+setter, including its named-color lookup, integer fallback, and virtual color
+assignment. The second translates sprite image-name selection, including the
+child-Gani walk, indexed image lookup, body fields, global sprites and tiles
+filenames, and the type switch. Both labels reopened successfully. The
+evidence is in
+`artifacts/spectron_gani_helper_manual_translation_anchors_20260826.json`.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and

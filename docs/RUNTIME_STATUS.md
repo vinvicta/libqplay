@@ -990,6 +990,12 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_gani_constructor_manual_translation_anchor_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+141. Clean IDA review added two high-confidence Gani helper anchors for the
+     color-variable string setter and sprite image-name selection. Both
+     reopened successfully in the v81 disposable copy. See
+     `artifacts/spectron_gani_helper_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

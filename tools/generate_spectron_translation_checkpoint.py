@@ -181,6 +181,8 @@ def main() -> None:
     parser.add_argument("--level-map-lookup-verification", type=Path)
     parser.add_argument("--gani-constructor-anchors", type=Path)
     parser.add_argument("--gani-constructor-verification", type=Path)
+    parser.add_argument("--gani-helper-anchors", type=Path)
+    parser.add_argument("--gani-helper-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2376,6 +2378,34 @@ def main() -> None:
         result["gani_constructor_anchors"] = gani_constructor
         result["interpretation"].append(
             "The seventy-eighth database revision also contains the separately reviewed TGaniObject server-level constructor anchor."
+        )
+    gani_helper = None
+    if args.gani_helper_anchors or args.gani_helper_verification:
+        if not args.gani_helper_anchors or not args.gani_helper_verification:
+            raise ValueError(
+                "Gani helper anchors and Gani helper verification must be supplied together"
+            )
+        gani_helper_document = load(args.gani_helper_anchors)
+        gani_helper_verification = load(args.gani_helper_verification)
+        if gani_helper_document.get("artifact") != "spectron_gani_helper_manual_translation_anchors_20260826":
+            raise ValueError("unexpected Gani helper anchor artifact")
+        if not gani_helper_verification.get("verified"):
+            raise ValueError("Gani helper anchor reopen verification did not pass")
+        expected_gani_helper = len(gani_helper_document["anchors"])
+        if gani_helper_verification["verified_name_count"] != expected_gani_helper:
+            raise ValueError("Gani helper verification count differs from artifact")
+        gani_helper = {
+            "anchor_path": str(args.gani_helper_anchors),
+            "anchor_sha256": sha256_path(args.gani_helper_anchors),
+            "reopen_verification": str(args.gani_helper_verification),
+            "anchor_count": expected_gani_helper,
+            "verified_name_count": gani_helper_verification["verified_name_count"],
+            "reopen_failure_count": gani_helper_verification["failure_count"],
+        }
+    if gani_helper is not None:
+        result["gani_helper_anchors"] = gani_helper
+        result["interpretation"].append(
+            "The seventy-ninth database revision also contains the separately reviewed Gani color setter and sprite image-name helper anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
