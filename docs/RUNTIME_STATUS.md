@@ -1428,6 +1428,15 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+206. The next IDA pass translated six exact-shape GSFunctions callbacks:
+    `degtorad`, `radtodeg`, temporary-string cleanup, case-insensitive
+    comparison, `uppercase`, and `lowercase`. It also materialized the
+    script-table `radtodeg` range. All six labels reopened successfully in
+    the v146 disposable copy, which has 11,680 functions and 1,469 default
+    `sub_` names. See
+    `artifacts/spectron_gsfunctions_math_string_residual_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 205. The next IDA pass translated five exact-shape `TUpdatePackageProperties`
     lifecycle helpers: the uninstall jump thunk, complete and deleting
     destructors, and both non-virtual thunks. All five labels reopened

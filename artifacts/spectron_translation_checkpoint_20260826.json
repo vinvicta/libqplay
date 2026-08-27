@@ -138,11 +138,11 @@
   },
   "database": {
     "close_reopen_verified": true,
-    "default_sub_function_count": 1473,
+    "default_sub_function_count": 1469,
     "format": "packed IDA 9.3 database",
-    "function_count": 11679,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v145.i64",
-    "sha256": "3b26ba1e6a150a8aebef18c46372843615523a76a813af5eba231c924a459f59"
+    "function_count": 11680,
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v146.i64",
+    "sha256": "a868b16b549a8e70c40d5ded8f487228674d3295f9d41fe35c3bc03449b05556"
   },
   "draw_texture_anchors": {
     "anchor_count": 4,
@@ -280,6 +280,14 @@
     "reopen_verification": "/tmp/spectron_gif_decoder_verify_v111.json",
     "verified_name_count": 1
   },
+  "gsfunctions_math_string_residual_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "artifacts/spectron_gsfunctions_math_string_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "37ac5b21ac6be418a48e9b12e1c8c0abf3d24ae68c81f6ea0e5bd0dbe943cd2d",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gsfunctions_math_string_verify_v146.json",
+    "verified_name_count": 6
+  },
   "gui_control_create_residual_anchors": {
     "anchor_count": 1,
     "anchor_path": "artifacts/spectron_guicontrol_create_residual_manual_translation_anchors_20260826.json",
@@ -410,7 +418,7 @@
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
-    "reopen_verification": "/tmp/spectron_translation_verify_v145_serial.json",
+    "reopen_verification": "/tmp/spectron_translation_verify_v146_serial.json",
     "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
     "translation_map": "artifacts/spectron_semantic_function_translation_20260826.json",
     "translation_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92"
@@ -560,7 +568,8 @@
     "The one-hundred-forty-second database revision also contains the separately reviewed update-package accessor residual family.",
     "The one-hundred-forty-third database revision also contains the separately reviewed update-package destructor residual family.",
     "The one-hundred-forty-fourth database revision also contains the separately reviewed update-package event and lookup wrapper residual family.",
-    "The one-hundred-forty-fifth database revision also contains the separately reviewed update-package-properties residual family."
+    "The one-hundred-forty-fifth database revision also contains the separately reviewed update-package-properties residual family.",
+    "The one-hundred-forty-sixth database revision also contains the separately reviewed GSFunctions math and string residual family."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,

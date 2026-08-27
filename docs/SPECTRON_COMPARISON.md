@@ -3444,6 +3444,28 @@ functions. The v108 database has 1,684 remaining default `sub_` names. Its
 SHA-256 is
 `8350a43be6b31306954e34a17f77d742c8d1702015d671019d2bf2dd6c1bb1e1`.
 
+## Spectron GSFunctions math and string residual anchors
+
+The v146 pass translated six callbacks from the GSFunctions script table.
+
+| 1.8 role | Source | Spectron target | Target | Evidence |
+| --- | ---: | --- | ---: | --- |
+| `degtorad` | `0x20abc8` | `sub_210DC8` | `0x210dc8` | pi divided by 180 |
+| `radtodeg` | `0x20abf0` | `sub_210DF0` | `0x210df0` | 180 divided by pi |
+| static string clearer | `0x20adbc` | `sub_210FBC` | `0x210fbc` | global `TString` cleanup |
+| compare-ignore-case jump | `0x20adcc` | `j_._ZNK10C8THgaTQxF10nVCrgaSlRrERKS_` | `0x210fcc` | target comparison thunk |
+| `uppercase` | `0x20add0` | `sub_210FD0` | `0x210fd0` | target `upper` method |
+| `lowercase` | `0x20adf0` | `sub_210FF0` | `0x210ff0` | target `lower` method |
+
+All six pairs have identical normalized metrics and hashes. The Spectron
+script table points `radtodeg` to `0x210df0`, but IDA initially saw only a
+code pointer there. The raw six-instruction body ends with `RET` at
+`0x210e04`, so the pass materialized the explicit range through `0x210e08`
+before applying the alias. Five default target names were replaced.
+
+Evidence is stored in
+`artifacts/spectron_gsfunctions_math_string_residual_manual_translation_anchors_20260826.json`.
+
 ## Spectron TUpdatePackageProperties residual anchors
 
 The v145 pass translated the complete package-properties lifecycle family.

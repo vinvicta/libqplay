@@ -1,0 +1,357 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "context_group": "GSFunctions math and string residual callback block",
+      "context_order": 1,
+      "evidence": [
+        "The source rows are the GSFunctions script callbacks degtorad, radtodeg, the shared temporary-string clearer, compareIgnoreCase, uppercase, and lowercase. Their target roles occur at 0x210dc8, the code-pointer callback at 0x210df0, and 0x210fbc through 0x210ff0.",
+        "The degtorad callback multiplies by pi and divides by 180. The radtodeg callback multiplies by 180 and divides by pi. Spectron keeps both six-instruction formulas and its script table points degtorad to 0x210dc8 and radtodeg to the raw code range 0x210df0-0x210e08.",
+        "The target radtodeg body was not initially a function boundary in IDA. The script-table pointer, the adjacent literal pool, and the RET at 0x210e04 establish the explicit 24-byte range. The artifact records that boundary so the applier can materialize it before renaming.",
+        "The shared clearer releases the same static TString used by the findpathinarray helper. The compareIgnoreCase jump forwards to the target C8THgaTQxF comparison routine, while uppercase and lowercase forward to the corresponding target string methods.",
+        "All six pairs have identical size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, register shape, and overall shape. Five target rows were default names before this batch; the compareIgnoreCase jump already had a non-default name."
+      ],
+      "match_kind": "manual-gsfunctions-math-string-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x20abc8",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 6,
+        "mnemonic_hash": "68bd6ffcb1d3355d4a25200900adf2c8ddb9a1014722bdb46df7e4f65225ab31",
+        "opcode_shape_hash": "6a133c8f3e6e00105b94e31e0361969165596515cebcce193b66e27c824b5040",
+        "register_shape_hash": "fe469be79be40349af5afb0c5d52edb285f5d3149082d3fe67e11351b79673a4",
+        "shape_hash": "0888bf9cc59db8c96fd121f6f62adfefb19d4d322de1fae364034117daeea664",
+        "size": 24
+      },
+      "original_name": "GSFunctionsInitstaticscriptvars_script_degtorad",
+      "original_string_refs": [],
+      "proposed_name": "v18_GSFunctionsInitstaticscriptvars_script_degtorad",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "GSFunctions script callback GSFunctionsInitstaticscriptvars_script_degtorad",
+      "spectron_current_name": "sub_210DC8",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x210dc8",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 6,
+        "mnemonic_hash": "68bd6ffcb1d3355d4a25200900adf2c8ddb9a1014722bdb46df7e4f65225ab31",
+        "opcode_shape_hash": "6a133c8f3e6e00105b94e31e0361969165596515cebcce193b66e27c824b5040",
+        "register_shape_hash": "fe469be79be40349af5afb0c5d52edb285f5d3149082d3fe67e11351b79673a4",
+        "shape_hash": "0888bf9cc59db8c96fd121f6f62adfefb19d4d322de1fae364034117daeea664",
+        "size": 24
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x6200"
+    },
+    {
+      "boundary_materialization": "add-function-range-before-rename",
+      "confidence": "high",
+      "context_group": "GSFunctions math and string residual callback block",
+      "context_order": 2,
+      "evidence": [
+        "The source rows are the GSFunctions script callbacks degtorad, radtodeg, the shared temporary-string clearer, compareIgnoreCase, uppercase, and lowercase. Their target roles occur at 0x210dc8, the code-pointer callback at 0x210df0, and 0x210fbc through 0x210ff0.",
+        "The degtorad callback multiplies by pi and divides by 180. The radtodeg callback multiplies by 180 and divides by pi. Spectron keeps both six-instruction formulas and its script table points degtorad to 0x210dc8 and radtodeg to the raw code range 0x210df0-0x210e08.",
+        "The target radtodeg body was not initially a function boundary in IDA. The script-table pointer, the adjacent literal pool, and the RET at 0x210e04 establish the explicit 24-byte range. The artifact records that boundary so the applier can materialize it before renaming.",
+        "The shared clearer releases the same static TString used by the findpathinarray helper. The compareIgnoreCase jump forwards to the target C8THgaTQxF comparison routine, while uppercase and lowercase forward to the corresponding target string methods.",
+        "All six pairs have identical size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, register shape, and overall shape. Five target rows were default names before this batch; the compareIgnoreCase jump already had a non-default name."
+      ],
+      "match_kind": "manual-gsfunctions-math-string-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x20abf0",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 6,
+        "mnemonic_hash": "68bd6ffcb1d3355d4a25200900adf2c8ddb9a1014722bdb46df7e4f65225ab31",
+        "opcode_shape_hash": "6a133c8f3e6e00105b94e31e0361969165596515cebcce193b66e27c824b5040",
+        "register_shape_hash": "fe469be79be40349af5afb0c5d52edb285f5d3149082d3fe67e11351b79673a4",
+        "shape_hash": "0888bf9cc59db8c96fd121f6f62adfefb19d4d322de1fae364034117daeea664",
+        "size": 24
+      },
+      "original_name": "GSFunctionsInitstaticscriptvars_script_radtodeg",
+      "original_string_refs": [],
+      "proposed_name": "v18_GSFunctionsInitstaticscriptvars_script_radtodeg",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "GSFunctions script callback GSFunctionsInitstaticscriptvars_script_radtodeg",
+      "spectron_boundary_source": "script-table code pointer at 0x399f00 and raw RET at 0x210e04",
+      "spectron_current_name": "sub_210DF0",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x210df0",
+      "spectron_function_end": "0x210e08",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 6,
+        "mnemonic_hash": "68bd6ffcb1d3355d4a25200900adf2c8ddb9a1014722bdb46df7e4f65225ab31",
+        "opcode_shape_hash": "6a133c8f3e6e00105b94e31e0361969165596515cebcce193b66e27c824b5040",
+        "register_shape_hash": "fe469be79be40349af5afb0c5d52edb285f5d3149082d3fe67e11351b79673a4",
+        "shape_hash": "0888bf9cc59db8c96fd121f6f62adfefb19d4d322de1fae364034117daeea664",
+        "size": 24
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x6200"
+    },
+    {
+      "confidence": "high",
+      "context_group": "GSFunctions math and string residual callback block",
+      "context_order": 3,
+      "evidence": [
+        "The source rows are the GSFunctions script callbacks degtorad, radtodeg, the shared temporary-string clearer, compareIgnoreCase, uppercase, and lowercase. Their target roles occur at 0x210dc8, the code-pointer callback at 0x210df0, and 0x210fbc through 0x210ff0.",
+        "The degtorad callback multiplies by pi and divides by 180. The radtodeg callback multiplies by 180 and divides by pi. Spectron keeps both six-instruction formulas and its script table points degtorad to 0x210dc8 and radtodeg to the raw code range 0x210df0-0x210e08.",
+        "The target radtodeg body was not initially a function boundary in IDA. The script-table pointer, the adjacent literal pool, and the RET at 0x210e04 establish the explicit 24-byte range. The artifact records that boundary so the applier can materialize it before renaming.",
+        "The shared clearer releases the same static TString used by the findpathinarray helper. The compareIgnoreCase jump forwards to the target C8THgaTQxF comparison routine, while uppercase and lowercase forward to the corresponding target string methods.",
+        "All six pairs have identical size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, register shape, and overall shape. Five target rows were default names before this batch; the compareIgnoreCase jump already had a non-default name."
+      ],
+      "match_kind": "manual-gsfunctions-math-string-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x20adbc",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 3,
+        "mnemonic_hash": "56998d0d7766df3754b3359731cdae8de12cbb6a3328ba101ea61195dcf709c7",
+        "opcode_shape_hash": "40cb28e57e553d225ba0114768c6ed640ad895e7c737f6d87357a8f102a8be84",
+        "register_shape_hash": "2801a52b417ccb0f487ad7c367a271e140254aa16ede715a19eb72dbdb516f3f",
+        "shape_hash": "4ae68c9b1ecc9e6cb5da51a2b4d49f3e815c433d468da8145d8c7c07f698a2e5",
+        "size": 16
+      },
+      "original_name": "sub_20ADBC",
+      "original_string_refs": [],
+      "proposed_name": "v18_sub_20ADBC",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "GSFunctions script callback sub_20ADBC",
+      "spectron_current_name": "sub_210FBC",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x210fbc",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 3,
+        "mnemonic_hash": "56998d0d7766df3754b3359731cdae8de12cbb6a3328ba101ea61195dcf709c7",
+        "opcode_shape_hash": "40cb28e57e553d225ba0114768c6ed640ad895e7c737f6d87357a8f102a8be84",
+        "register_shape_hash": "2801a52b417ccb0f487ad7c367a271e140254aa16ede715a19eb72dbdb516f3f",
+        "shape_hash": "4ae68c9b1ecc9e6cb5da51a2b4d49f3e815c433d468da8145d8c7c07f698a2e5",
+        "size": 16
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x6200"
+    },
+    {
+      "confidence": "high",
+      "context_group": "GSFunctions math and string residual callback block",
+      "context_order": 4,
+      "evidence": [
+        "The source rows are the GSFunctions script callbacks degtorad, radtodeg, the shared temporary-string clearer, compareIgnoreCase, uppercase, and lowercase. Their target roles occur at 0x210dc8, the code-pointer callback at 0x210df0, and 0x210fbc through 0x210ff0.",
+        "The degtorad callback multiplies by pi and divides by 180. The radtodeg callback multiplies by 180 and divides by pi. Spectron keeps both six-instruction formulas and its script table points degtorad to 0x210dc8 and radtodeg to the raw code range 0x210df0-0x210e08.",
+        "The target radtodeg body was not initially a function boundary in IDA. The script-table pointer, the adjacent literal pool, and the RET at 0x210e04 establish the explicit 24-byte range. The artifact records that boundary so the applier can materialize it before renaming.",
+        "The shared clearer releases the same static TString used by the findpathinarray helper. The compareIgnoreCase jump forwards to the target C8THgaTQxF comparison routine, while uppercase and lowercase forward to the corresponding target string methods.",
+        "All six pairs have identical size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, register shape, and overall shape. Five target rows were default names before this batch; the compareIgnoreCase jump already had a non-default name."
+      ],
+      "match_kind": "manual-gsfunctions-math-string-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x20adcc",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 1,
+        "mnemonic_hash": "df7e70e5021544f4834bbee64a9e3789febc4be81470df629cad6ddb03320a5c",
+        "opcode_shape_hash": "74421f1f206a1f88ce23d5a4fc4299f145f35134a154863c27d88bde0d7c7795",
+        "register_shape_hash": "3c1eee7de17644312d6af1e22e8666726d75912206d4ce8a62656747807515f6",
+        "shape_hash": "3c1eee7de17644312d6af1e22e8666726d75912206d4ce8a62656747807515f6",
+        "size": 4
+      },
+      "original_name": "jump_TString_compareIgnoreCase_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_jump_TString_compareIgnoreCase_TString_const",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "GSFunctions script callback jump_TString_compareIgnoreCase_TString_const",
+      "spectron_current_name": "j_._ZNK10C8THgaTQxF10nVCrgaSlRrERKS_",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x210fcc",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 1,
+        "mnemonic_hash": "df7e70e5021544f4834bbee64a9e3789febc4be81470df629cad6ddb03320a5c",
+        "opcode_shape_hash": "74421f1f206a1f88ce23d5a4fc4299f145f35134a154863c27d88bde0d7c7795",
+        "register_shape_hash": "3c1eee7de17644312d6af1e22e8666726d75912206d4ce8a62656747807515f6",
+        "shape_hash": "3c1eee7de17644312d6af1e22e8666726d75912206d4ce8a62656747807515f6",
+        "size": 4
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x6200"
+    },
+    {
+      "confidence": "high",
+      "context_group": "GSFunctions math and string residual callback block",
+      "context_order": 5,
+      "evidence": [
+        "The source rows are the GSFunctions script callbacks degtorad, radtodeg, the shared temporary-string clearer, compareIgnoreCase, uppercase, and lowercase. Their target roles occur at 0x210dc8, the code-pointer callback at 0x210df0, and 0x210fbc through 0x210ff0.",
+        "The degtorad callback multiplies by pi and divides by 180. The radtodeg callback multiplies by 180 and divides by pi. Spectron keeps both six-instruction formulas and its script table points degtorad to 0x210dc8 and radtodeg to the raw code range 0x210df0-0x210e08.",
+        "The target radtodeg body was not initially a function boundary in IDA. The script-table pointer, the adjacent literal pool, and the RET at 0x210e04 establish the explicit 24-byte range. The artifact records that boundary so the applier can materialize it before renaming.",
+        "The shared clearer releases the same static TString used by the findpathinarray helper. The compareIgnoreCase jump forwards to the target C8THgaTQxF comparison routine, while uppercase and lowercase forward to the corresponding target string methods.",
+        "All six pairs have identical size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, register shape, and overall shape. Five target rows were default names before this batch; the compareIgnoreCase jump already had a non-default name."
+      ],
+      "match_kind": "manual-gsfunctions-math-string-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TString_upper_void"
+      ],
+      "original_ea": "0x20add0",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "f8674fd115db69e342b0522c5ab191a85d3d5983728451a92136d84b2a6afbb6",
+        "opcode_shape_hash": "921a053341345bfba5092f6bf6b3ecb4d61601ce83af7dc0bae76e2d3de4bdf1",
+        "register_shape_hash": "54ba2bd202a2a9458e96cf1e2ae73767aa882cc53f6250da2ca952b3ebe8b1ca",
+        "shape_hash": "ca788e0a2eccdc06385b17ea365d3c6a5381b8680d389a5a99af7f4b0393cc8d",
+        "size": 32
+      },
+      "original_name": "GSFunctionsInitstaticscriptvars_script_uppercase",
+      "original_string_refs": [],
+      "proposed_name": "v18_GSFunctionsInitstaticscriptvars_script_uppercase",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "GSFunctions script callback GSFunctionsInitstaticscriptvars_script_uppercase",
+      "spectron_current_name": "sub_210FD0",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [
+        "._ZNK10C8THgaTQxF5upperEv"
+      ],
+      "spectron_ea": "0x210fd0",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "f8674fd115db69e342b0522c5ab191a85d3d5983728451a92136d84b2a6afbb6",
+        "opcode_shape_hash": "921a053341345bfba5092f6bf6b3ecb4d61601ce83af7dc0bae76e2d3de4bdf1",
+        "register_shape_hash": "54ba2bd202a2a9458e96cf1e2ae73767aa882cc53f6250da2ca952b3ebe8b1ca",
+        "shape_hash": "ca788e0a2eccdc06385b17ea365d3c6a5381b8680d389a5a99af7f4b0393cc8d",
+        "size": 32
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x6200"
+    },
+    {
+      "confidence": "high",
+      "context_group": "GSFunctions math and string residual callback block",
+      "context_order": 6,
+      "evidence": [
+        "The source rows are the GSFunctions script callbacks degtorad, radtodeg, the shared temporary-string clearer, compareIgnoreCase, uppercase, and lowercase. Their target roles occur at 0x210dc8, the code-pointer callback at 0x210df0, and 0x210fbc through 0x210ff0.",
+        "The degtorad callback multiplies by pi and divides by 180. The radtodeg callback multiplies by 180 and divides by pi. Spectron keeps both six-instruction formulas and its script table points degtorad to 0x210dc8 and radtodeg to the raw code range 0x210df0-0x210e08.",
+        "The target radtodeg body was not initially a function boundary in IDA. The script-table pointer, the adjacent literal pool, and the RET at 0x210e04 establish the explicit 24-byte range. The artifact records that boundary so the applier can materialize it before renaming.",
+        "The shared clearer releases the same static TString used by the findpathinarray helper. The compareIgnoreCase jump forwards to the target C8THgaTQxF comparison routine, while uppercase and lowercase forward to the corresponding target string methods.",
+        "All six pairs have identical size, instruction count, basic-block count, branch count, call count, mnemonic hash, opcode shape, register shape, and overall shape. Five target rows were default names before this batch; the compareIgnoreCase jump already had a non-default name."
+      ],
+      "match_kind": "manual-gsfunctions-math-string-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TString_lower_void"
+      ],
+      "original_ea": "0x20adf0",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "f8674fd115db69e342b0522c5ab191a85d3d5983728451a92136d84b2a6afbb6",
+        "opcode_shape_hash": "921a053341345bfba5092f6bf6b3ecb4d61601ce83af7dc0bae76e2d3de4bdf1",
+        "register_shape_hash": "54ba2bd202a2a9458e96cf1e2ae73767aa882cc53f6250da2ca952b3ebe8b1ca",
+        "shape_hash": "ca788e0a2eccdc06385b17ea365d3c6a5381b8680d389a5a99af7f4b0393cc8d",
+        "size": 32
+      },
+      "original_name": "GSFunctionsInitstaticscriptvars_script_lowercase",
+      "original_string_refs": [],
+      "proposed_name": "v18_GSFunctionsInitstaticscriptvars_script_lowercase",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "GSFunctions script callback GSFunctionsInitstaticscriptvars_script_lowercase",
+      "spectron_current_name": "sub_210FF0",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [
+        "._ZNK10C8THgaTQxF5lowerEv"
+      ],
+      "spectron_ea": "0x210ff0",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "f8674fd115db69e342b0522c5ab191a85d3d5983728451a92136d84b2a6afbb6",
+        "opcode_shape_hash": "921a053341345bfba5092f6bf6b3ecb4d61601ce83af7dc0bae76e2d3de4bdf1",
+        "register_shape_hash": "54ba2bd202a2a9458e96cf1e2ae73767aa882cc53f6250da2ca952b3ebe8b1ca",
+        "shape_hash": "ca788e0a2eccdc06385b17ea365d3c6a5381b8680d389a5a99af7f4b0393cc8d",
+        "size": 32
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x6200"
+    }
+  ],
+  "artifact": "spectron_gsfunctions_math_string_residual_manual_translation_anchors_20260826",
+  "context": {
+    "following_target_boundary": "0x211010 GSFunctions getcallstack helper already mapped",
+    "source_class": "GSFunctions script callback table",
+    "source_sequence": "0x20abc8 degtorad, 0x20abf0 radtodeg, 0x20adbc shared clearer, 0x20adcc compareIgnoreCase jump, and 0x20add0 through 0x20adf0 case conversion callbacks",
+    "target_class": "obfuscated target string and script helpers",
+    "target_only_boundaries": [
+      "0x210de0 through 0x210dec literal pool",
+      "0x210e18 compareNearestPlayers already mapped"
+    ],
+    "target_sequence": "0x210dc8 degtorad, 0x210df0 radtodeg raw range, and 0x210fbc through 0x210ff0 string helpers"
+  },
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_current.json",
+    "original_features_sha256": "243341ad40e912500365b6d7eb5b69f9f3b9d6200f5c825629cfc56d4343ac07",
+    "semantic_map": "/tmp/spectron_semantic_map.json",
+    "semantic_map_sha256": "c0906607542480e1fbe33e9e0bf5030581efd55ee71987cf0a7ca792b68664fc",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_radtodeg.json",
+    "spectron_features_sha256": "11304c765b6544908b1265d79a5f69b0daaa319fae8113386cd3ce17d95410db"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable source script roles while retaining the target obfuscated or default names in the evidence rows.",
+    "The radtodeg target function is materialized from an independently reviewed script-table code pointer and explicit raw-code range before the alias is applied.",
+    "All six pairs are exact normalized-shape matches. The five default target names include the newly materialized radtodeg boundary."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for residual GSFunctions math and string callbacks",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 6,
+    "exact_shape_anchor_count": 6,
+    "high_confidence_count": 6,
+    "layout_change_anchor_count": 0,
+    "materialized_target_function_count": 1,
+    "new_context_anchor_count": 6,
+    "target_default_name_count": 5
+  }
+}

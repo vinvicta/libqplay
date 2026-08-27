@@ -82,6 +82,23 @@ def main() -> None:
             "actual_name_before": actual_before,
             "confidence": anchor["confidence"],
         }
+        boundary_added = False
+        if function is None and anchor.get("spectron_function_end"):
+            if not APPLY:
+                item["error"] = "the reviewed function boundary is ready but apply mode is disabled"
+                failures.append(item)
+                plan.append(item)
+                continue
+            end_ea = int(anchor["spectron_function_end"], 16)
+            if end_ea <= ea or not ida_funcs.add_func(ea, end_ea):
+                item["error"] = "IDA rejected the reviewed function boundary"
+                failures.append(item)
+                plan.append(item)
+                continue
+            function = ida_funcs.get_func(ea)
+            boundary_added = function is not None and function.start_ea == ea
+            item["spectron_function_end"] = anchor["spectron_function_end"]
+            item["boundary_added"] = boundary_added
         if function is None or function.start_ea != ea:
             item["error"] = "address is not the expected Spectron function start"
             failures.append(item)
