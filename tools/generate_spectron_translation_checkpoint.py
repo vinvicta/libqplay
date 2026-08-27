@@ -239,6 +239,8 @@ def main() -> None:
     parser.add_argument("--drawing-panel-residual-verification", type=Path)
     parser.add_argument("--image-html-anchors", type=Path)
     parser.add_argument("--image-html-verification", type=Path)
+    parser.add_argument("--panel-bitmap-anchors", type=Path)
+    parser.add_argument("--panel-bitmap-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3246,6 +3248,34 @@ def main() -> None:
         result["image_html_anchors"] = image_html
         result["interpretation"].append(
             "The one-hundred-seventh database revision also contains the separately reviewed HTML color registry and image-animation lifecycle anchors."
+        )
+    panel_bitmap = None
+    if args.panel_bitmap_anchors or args.panel_bitmap_verification:
+        if not args.panel_bitmap_anchors or not args.panel_bitmap_verification:
+            raise ValueError(
+                "panel/bitmap anchors and panel/bitmap verification must be supplied together"
+            )
+        panel_bitmap_document = load(args.panel_bitmap_anchors)
+        panel_bitmap_verification = load(args.panel_bitmap_verification)
+        if panel_bitmap_document.get("artifact") != "spectron_panel_bitmap_manual_translation_anchors_20260826":
+            raise ValueError("unexpected panel/bitmap anchor artifact")
+        if not panel_bitmap_verification.get("verified"):
+            raise ValueError("panel/bitmap anchor reopen verification did not pass")
+        expected_panel_bitmap = len(panel_bitmap_document["anchors"])
+        if panel_bitmap_verification["verified_name_count"] != expected_panel_bitmap:
+            raise ValueError("panel/bitmap verification count differs from artifact")
+        panel_bitmap = {
+            "anchor_path": str(args.panel_bitmap_anchors),
+            "anchor_sha256": sha256_path(args.panel_bitmap_anchors),
+            "reopen_verification": str(args.panel_bitmap_verification),
+            "anchor_count": expected_panel_bitmap,
+            "verified_name_count": panel_bitmap_verification["verified_name_count"],
+            "reopen_failure_count": panel_bitmap_verification["failure_count"],
+        }
+    if panel_bitmap is not None:
+        result["panel_bitmap_anchors"] = panel_bitmap
+        result["interpretation"].append(
+            "The one-hundred-eighth database revision also contains the separately reviewed panel-interface construction and bitmap-loader dispatch, lookup, and redownload anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
