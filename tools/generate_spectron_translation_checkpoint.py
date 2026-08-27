@@ -135,6 +135,8 @@ def main() -> None:
     parser.add_argument("--particle-verification", type=Path)
     parser.add_argument("--showimg-anchors", type=Path)
     parser.add_argument("--showimg-verification", type=Path)
+    parser.add_argument("--particle-emitter-anchors", type=Path)
+    parser.add_argument("--particle-emitter-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1686,6 +1688,34 @@ def main() -> None:
         result["showimg_anchors"] = showimg
         result["interpretation"].append(
             "The fifty-fifth database revision also contains the separately reviewed TShowImg serialization and network-property anchors."
+        )
+    particle_emitter = None
+    if args.particle_emitter_anchors or args.particle_emitter_verification:
+        if not args.particle_emitter_anchors or not args.particle_emitter_verification:
+            raise ValueError(
+                "particle-emitter anchors and particle-emitter verification must be supplied together"
+            )
+        particle_emitter_document = load(args.particle_emitter_anchors)
+        particle_emitter_verification = load(args.particle_emitter_verification)
+        if particle_emitter_document.get("artifact") != "spectron_particle_emitter_manual_translation_anchors_20260826":
+            raise ValueError("unexpected particle-emitter anchor artifact")
+        if not particle_emitter_verification.get("verified"):
+            raise ValueError("particle-emitter anchor reopen verification did not pass")
+        expected_particle_emitter = len(particle_emitter_document["anchors"])
+        if particle_emitter_verification["verified_name_count"] != expected_particle_emitter:
+            raise ValueError("particle-emitter verification count differs from artifact")
+        particle_emitter = {
+            "anchor_path": str(args.particle_emitter_anchors),
+            "anchor_sha256": sha256_path(args.particle_emitter_anchors),
+            "reopen_verification": str(args.particle_emitter_verification),
+            "anchor_count": expected_particle_emitter,
+            "verified_name_count": particle_emitter_verification["verified_name_count"],
+            "reopen_failure_count": particle_emitter_verification["failure_count"],
+        }
+    if particle_emitter is not None:
+        result["particle_emitter_anchors"] = particle_emitter
+        result["interpretation"].append(
+            "The fifty-sixth database revision also contains the separately reviewed particle-emitter initializer and emission anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

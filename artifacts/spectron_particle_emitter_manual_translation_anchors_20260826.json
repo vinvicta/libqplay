@@ -1,0 +1,114 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both construct the same three static lists for particle lifetime modes, particle variables, and modifier modes.",
+        "The three complete list literals are present in both functions and the target keeps the same one-block initializer role. Its 224-byte body versus 212 bytes reflects rebuilt string-list wrappers rather than a changed data model."
+      ],
+      "match_kind": "manual-particle-emitter-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x23b274",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 52,
+        "mnemonic_hash": "b185d2c60c42cf33a3351ca057934f64ebec9cc4437f623cf5ebfa8a234fd7b0",
+        "register_shape_hash": "f7852212a540a85b8a29e2e7a7256bda986cc16dc29395a4a882bec4369fe227",
+        "shape_hash": "45618e93fb5167378951ea37280ff90c981fef2bc13f0e28398404591b22f18b",
+        "size": 212
+      },
+      "original_name": "TParticleEmitter_initStaticVars_void",
+      "original_string_refs": [
+        "once,impulse,range",
+        "replace,add,multiply",
+        "x,y,z,movex,movey,movez,angle,zangle,speed,rotation,spin,stretchx,stretchy,red,green,blue,alpha,zoom"
+      ],
+      "proposed_name": "v18_TParticleEmitter_initStaticVars_void",
+      "semantic_match_already_present": false,
+      "source_basis": "particle-emitter static variable lists",
+      "spectron_current_name": "_Z10F60yIafy45v",
+      "spectron_default_name": false,
+      "spectron_ea": "0x245114",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 55,
+        "mnemonic_hash": "857a8a573821af3091fbecc5aa56013317e4606ac40385fb73bd4a860cd82c42",
+        "register_shape_hash": "86c7c2d1d87687c41d39a88e04cc9b270056659e783eee06ff571a7b523c78c9",
+        "shape_hash": "3116b6bd1be3f0506dec5e5e5768195bad886dd4dc9ea960002ad4e0ca578ab7",
+        "size": 224
+      },
+      "spectron_string_refs": [
+        "once,impulse,range",
+        "replace,add,multiply",
+        "x,y,z,movex,movey,movez,angle,zangle,speed,rotation,spin,stretchx,stretchy,red,green,blue,alpha,zoom"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both guard on the owner, disabled state, available templates, and maximum particle count, then profile the operation with the same Particles_Emit literal and cap the per-call emission count.",
+        "Both choose a random template, obtain or reuse a particle, copy the template, set its parent, lifetime, position, angle and velocity, apply offsets and modifiers, optionally play a particle sound, and add the particle to the emitter.",
+        "The target retains the same 44-block control-flow shape and all distinctive state offsets. Its 1216-byte body versus 1212 bytes reflects wrapper and call-target changes in the rebuilt library."
+      ],
+      "match_kind": "manual-particle-emitter-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x23b394",
+      "original_metrics": {
+        "basic_block_count": 44,
+        "instruction_count": 302,
+        "mnemonic_hash": "0d611d41f7c6057a44effc9c311e56e96e3d980d5dd505a4ecebb83fd95a027a",
+        "register_shape_hash": "7ab55ef08e1e4a78f3a057ca6de6cb5cfc2804983e2e644ff4b1acbe9b10686a",
+        "shape_hash": "5709af8edd0f6f1d0a6f031e9b731767cb62d6b44ad86b81396935fa19403e74",
+        "size": 1212
+      },
+      "original_name": "TParticleEmitter_emit_T3DFloatPoint_const_uint_bool",
+      "original_string_refs": [
+        "Particles_Emit"
+      ],
+      "proposed_name": "v18_TParticleEmitter_emit_T3DFloatPoint_const_uint_bool",
+      "semantic_match_already_present": false,
+      "source_basis": "particle-emitter emission and initialization flow",
+      "spectron_current_name": "_ZN10pdnkJaZ8KK10KiaPgaqhFLERK10V6P7faBscbjb",
+      "spectron_default_name": false,
+      "spectron_ea": "0x245240",
+      "spectron_metrics": {
+        "basic_block_count": 44,
+        "instruction_count": 303,
+        "mnemonic_hash": "37623d7b322349f86c99f08973d574d3a65760120916642aee42178cd6c37da6",
+        "register_shape_hash": "77c89c58f7071f2902b638d69a91f65d665e4a0299e29bcb0776cf46194074da",
+        "shape_hash": "3234c2f66feadcd10dc3c9052697ecd91339d714930f6b9a0dbde4643319da6b",
+        "size": 1216
+      },
+      "spectron_string_refs": [
+        "Particles_Emit"
+      ]
+    }
+  ],
+  "artifact": "spectron_particle_emitter_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v1_saved.json",
+    "spectron_features_sha256": "a8d58f85502362316ee99a0f79c2cd7a4ad5d6fac94aca0ee75bd0d2965fc2a1"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The correspondence relies on exact particle-list literals, the shared Particles_Emit profiler label, matching basic-block counts, preserved field offsets, and reviewed pseudocode behavior rather than byte identity."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for particle-emitter initialization and emission",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 2,
+    "high_confidence_count": 2,
+    "new_context_anchor_count": 2,
+    "target_default_name_count": 0
+  }
+}

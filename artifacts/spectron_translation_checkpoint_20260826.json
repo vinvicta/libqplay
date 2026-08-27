@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v57.i64",
-    "sha256": "4ea4e394195d1d7218b67c4e86c8edd45e68ebd0db4b38f3d948f6ae1f60b79c"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v58.i64",
+    "sha256": "0a3ede671e58cb9a2585eb3388aff048d44ddd5588f1fa674ea4e6bc718003be"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -200,7 +200,8 @@
     "The fifty-second database revision also contains the separately reviewed static-variable, JSON-serialization, and tile-definition anchors.",
     "The fifty-third database revision also contains the separately reviewed tile selection, definition-update, temporary-tile, and screen-rendering anchors.",
     "The fifty-fourth database revision also contains the separately reviewed particle animation, appearance, and polygon anchors.",
-    "The fifty-fifth database revision also contains the separately reviewed TShowImg serialization and network-property anchors."
+    "The fifty-fifth database revision also contains the separately reviewed TShowImg serialization and network-property anchors.",
+    "The fifty-sixth database revision also contains the separately reviewed particle-emitter initializer and emission anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -274,6 +275,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_particle_verification_v56.json",
     "verified_name_count": 5
+  },
+  "particle_emitter_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "artifacts/spectron_particle_emitter_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "d832a2ef862d9c53e6572cf3e066199f7cb7aeaa068ee17ef30d77934036f9f6",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_particle_emitter_verification_v58.json",
+    "verified_name_count": 2
   },
   "player_helper_anchors": {
     "anchor_count": 5,
