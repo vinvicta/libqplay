@@ -332,6 +332,9 @@ def main():
     spectron_android_tapjoy_video_anchors = load_json(
         "artifacts/spectron_android_tapjoy_video_state_manual_translation_anchors_20260827.json"
     )
+    spectron_sounds_music_state_anchors = load_json(
+        "artifacts/spectron_sounds_music_state_manual_translation_anchors_20260827.json"
+    )
     spectron_server_animation_anchors = load_json(
         "artifacts/spectron_server_animation_manual_translation_anchors_20260826.json"
     )
@@ -3253,6 +3256,60 @@ def main():
         "0xe0438",
     )
     check(
+        "Spectron sounds music-state artifact",
+        spectron_sounds_music_state_anchors["artifact"],
+        "spectron_sounds_music_state_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron sounds music-state network",
+        spectron_sounds_music_state_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron sounds music-state total",
+        spectron_sounds_music_state_anchors["summary"]["anchor_count"],
+        3,
+    )
+    check(
+        "Spectron sounds music-state high confidence",
+        spectron_sounds_music_state_anchors["summary"]["high_confidence_count"],
+        3,
+    )
+    check(
+        "Spectron sounds music-state semantic overlap",
+        spectron_sounds_music_state_anchors["summary"]["already_in_semantic_map"],
+        0,
+    )
+    check(
+        "Spectron sounds music-state exact-shape count",
+        spectron_sounds_music_state_anchors["summary"]["exact_shape_anchor_count"],
+        3,
+    )
+    check(
+        "Spectron sounds music-state target default count",
+        spectron_sounds_music_state_anchors["summary"]["target_default_name_count"],
+        1,
+    )
+    sounds_music_state_targets = {
+        row["original_name"]: row
+        for row in spectron_sounds_music_state_anchors["anchors"]
+    }
+    check(
+        "Spectron sounds isMusicPlaying target",
+        sounds_music_state_targets["TSounds_isMusicPlaying"]["spectron_ea"],
+        "0xe16a8",
+    )
+    check(
+        "Spectron sounds getMusicPos target",
+        sounds_music_state_targets["TSounds_getMusicPos_void"]["spectron_ea"],
+        "0xe16ec",
+    )
+    check(
+        "Spectron sounds getMusicLen target",
+        sounds_music_state_targets["TSounds_getMusicLen_void"]["spectron_ea"],
+        "0xe172c",
+    )
+    check(
         "Spectron server-animation artifact",
         spectron_server_animation_anchors["artifact"],
         "spectron_server_animation_manual_translation_anchors_20260826",
@@ -4400,7 +4457,7 @@ def main():
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1220)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1219)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -4596,7 +4653,8 @@ def main():
     check("Spectron checkpoint TClient static strings anchor count", spectron_checkpoint["tclient_static_strings_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint TSocket static strings anchor count", spectron_checkpoint["tsocket_static_strings_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint Android TapJoy/video anchor count", spectron_checkpoint["android_tapjoy_video_anchors"]["verified_name_count"], 2)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "8f0f2b7d7ef3593c95316c88c8ca5c9b7b9e1a1481cdf9da8bc9e02adcfb1ee3")
+    check("Spectron checkpoint sounds music-state anchor count", spectron_checkpoint["sounds_music_state_anchors"]["verified_name_count"], 3)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "023b4f6f9254d607adb9aafe0936eb3da608dad6049688446d5496a76a6a9148")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],

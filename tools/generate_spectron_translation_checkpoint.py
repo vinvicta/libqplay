@@ -205,6 +205,8 @@ def main() -> None:
     parser.add_argument("--tsocket-static-strings-verification", type=Path)
     parser.add_argument("--android-tapjoy-video-anchors", type=Path)
     parser.add_argument("--android-tapjoy-video-verification", type=Path)
+    parser.add_argument("--sounds-music-state-anchors", type=Path)
+    parser.add_argument("--sounds-music-state-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
     parser.add_argument("--server-animation-verification", type=Path)
     parser.add_argument("--player-lifecycle-anchors", type=Path)
@@ -2951,6 +2953,49 @@ def main() -> None:
         result["android_tapjoy_video_anchors"] = android_tapjoy_video
         result["interpretation"].append(
             "The one-hundred-ninety-eighth database revision also contains the separately reviewed Android TapJoy and video state reset and cleanup anchors."
+        )
+    sounds_music_state = None
+    if args.sounds_music_state_anchors or args.sounds_music_state_verification:
+        if (
+            not args.sounds_music_state_anchors
+            or not args.sounds_music_state_verification
+        ):
+            raise ValueError(
+                "sound music-state anchors and verification must be supplied together"
+            )
+        sounds_music_state_document = load(args.sounds_music_state_anchors)
+        sounds_music_state_verification = load(
+            args.sounds_music_state_verification
+        )
+        if (
+            sounds_music_state_document.get("artifact")
+            != "spectron_sounds_music_state_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected sound music-state anchor artifact")
+        if not sounds_music_state_verification.get("verified"):
+            raise ValueError("sound music-state anchor reopen verification did not pass")
+        expected_sounds_music_state = len(sounds_music_state_document["anchors"])
+        if (
+            sounds_music_state_verification["verified_name_count"]
+            != expected_sounds_music_state
+        ):
+            raise ValueError("sound music-state verification count differs from artifact")
+        sounds_music_state = {
+            "anchor_path": str(args.sounds_music_state_anchors),
+            "anchor_sha256": sha256_path(args.sounds_music_state_anchors),
+            "reopen_verification": str(args.sounds_music_state_verification),
+            "anchor_count": expected_sounds_music_state,
+            "verified_name_count": sounds_music_state_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": sounds_music_state_verification[
+                "failure_count"
+            ],
+        }
+    if sounds_music_state is not None:
+        result["sounds_music_state_anchors"] = sounds_music_state
+        result["interpretation"].append(
+            "The one-hundred-ninety-ninth database revision also contains the separately reviewed TSounds music-state wrapper anchors."
         )
     server_animation = None
     if args.server_animation_anchors or args.server_animation_verification:

@@ -1482,6 +1482,19 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_particle_emitter_script_vars_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+258. The next IDA pass resolved the three `TSounds` music-state wrappers that
+    the broad matcher had left ambiguous. Source `0xe0af8`, `0xe0b3c`, and
+    `0xe0b7c` map to target `0xe16a8`, `0xe16ec`, and `0xe172c`; the sound
+    player global, callback-table references, and virtual slots `+56`, `+80`,
+    and `+88` distinguish them from unrelated shape-compatible wrappers.
+    The normalized shape fingerprints agree, with only register-detail
+    fingerprints differing. All three aliases reopened successfully in the
+    v199 copy, which has 11,694 functions, 3,641 high-confidence labels, and
+    1,219 default `sub_` names, with zero semantic reopen failures. See
+    `artifacts/spectron_sounds_music_state_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_sounds_music_state_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 257. The next IDA pass resolved the corrected Android, TapJoy, and video
     static-state pair. Source `sub_E0AD0` at `0xe0ad0` maps to target
     `sub_E1640` at `0xe1640`, while the corrected source cleanup role at
