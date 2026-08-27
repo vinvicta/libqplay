@@ -225,6 +225,8 @@ def main() -> None:
     parser.add_argument("--texture-verification", type=Path)
     parser.add_argument("--drawing-panel-texture-anchors", type=Path)
     parser.add_argument("--drawing-panel-texture-verification", type=Path)
+    parser.add_argument("--draw-texture-anchors", type=Path)
+    parser.add_argument("--draw-texture-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3036,6 +3038,34 @@ def main() -> None:
         result["drawing_panel_texture_anchors"] = drawing_panel_texture
         result["interpretation"].append(
             "The one-hundredth database revision also contains the separately reviewed TDrawingPanelTexture destructor, constructor, and texture-dimension anchors."
+        )
+    draw_texture = None
+    if args.draw_texture_anchors or args.draw_texture_verification:
+        if not args.draw_texture_anchors or not args.draw_texture_verification:
+            raise ValueError(
+                "draw-texture anchors and draw-texture verification must be supplied together"
+            )
+        draw_texture_document = load(args.draw_texture_anchors)
+        draw_texture_verification = load(args.draw_texture_verification)
+        if draw_texture_document.get("artifact") != "spectron_draw_texture_manual_translation_anchors_20260826":
+            raise ValueError("unexpected draw-texture anchor artifact")
+        if not draw_texture_verification.get("verified"):
+            raise ValueError("draw-texture anchor reopen verification did not pass")
+        expected_draw_texture = len(draw_texture_document["anchors"])
+        if draw_texture_verification["verified_name_count"] != expected_draw_texture:
+            raise ValueError("draw-texture verification count differs from artifact")
+        draw_texture = {
+            "anchor_path": str(args.draw_texture_anchors),
+            "anchor_sha256": sha256_path(args.draw_texture_anchors),
+            "reopen_verification": str(args.draw_texture_verification),
+            "anchor_count": expected_draw_texture,
+            "verified_name_count": draw_texture_verification["verified_name_count"],
+            "reopen_failure_count": draw_texture_verification["failure_count"],
+        }
+    if draw_texture is not None:
+        result["draw_texture_anchors"] = draw_texture
+        result["interpretation"].append(
+            "The one-hundred-first database revision also contains the separately reviewed TDrawTexture static initializer, registry cleanup, reload, and bind anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

@@ -1162,6 +1162,13 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_drawing_panel_texture_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+163. The next IDA pass translated four `TDrawTexture` methods covering static
+     texture-list initialization, global cleanup, full reload, and OpenGL
+     binding. The labels reopened successfully in the v103 disposable copy.
+     The static initializer was a default `sub_` target before translation.
+     See `artifacts/spectron_draw_texture_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
