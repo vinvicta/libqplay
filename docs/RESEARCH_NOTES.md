@@ -5172,6 +5172,85 @@ and zero failures across 11,679 functions. The v108 database has 1,684
 remaining default `sub_` names. Its SHA-256 is
 `8350a43be6b31306954e34a17f77d742c8d1702015d671019d2bf2dd6c1bb1e1`.
 
+## 2026-08-27: Spectron panel virtual and renderer residual anchors
+
+The v117 pass reviewed the remaining compact panel-interface virtual methods
+around the already translated drawing-panel code, three panel-port tail hooks,
+and the graphic-operation texture flush loop. This group is useful because it
+joins small methods that are ambiguous by body shape alone to larger class
+clusters whose order and behavior are clear.
+
+| 1.8 function | Source | Spectron target | Evidence |
+| --- | ---: | ---: | --- |
+| `TPanelInterface_isNative_void` | `0xfe308` | `0x100970` | zero-return base predicate |
+| `TPanelInterface_drawTextureStretched_TPixelBuffer_float_float_float_float_int_int_int_int` | `0xfe310` | `0x100978` | empty texture-stretch hook |
+| `TPanelInterface_setArrays_int_int_float_const_float_const_float_const_float_const_void_const` | `0xfe314` | `0x10097c` | empty array setup hook |
+| `TPanelInterface_drawElements_int_int_int_void_const` | `0xfe318` | `0x100984` | empty indexed-draw hook |
+| `TPanelInterface_requestState_int_int` | `0xfe31c` | `0x100988` | empty state request hook |
+| `TPanelInterface_clearStates_void` | `0xfe320` | `0x10098c` | empty state clear hook |
+| `TPanelInterface_setBlendMode_int` | `0xfe324` | `0x100990` | empty blend-mode hook |
+| `TPanelInterface_setBlendColor_ColorF_const` | `0xfe328` | `0x100994` | empty blend-color hook |
+| `TPanelInterface_setAlphaReference_float` | `0xfe32c` | `0x100998` | empty alpha-reference hook |
+| `TPanelInterface_canUseShader_void` | `0xfe330` | `0x10099c` | zero-return shader predicate |
+| `TPanelInterface_setShader_TOpenGLShaderProgram` | `0xfe338` | `0x1009a4` | empty shader-selection hook |
+| `TPanelInterface_clearShader_void` | `0xfe33c` | `0x1009a8` | empty shader-clear hook |
+| `TPanelInterface_reloadDefaultShaders_void` | `0xfe340` | `0x1009ac` | empty shader-reload hook |
+| `TPanelInterface_freeResources_void` | `0xfe344` | `0x1009b0` | empty resource-release hook |
+| `TPanelInterface_getProjMatrix_void` | `0xfe348` | `0x1009b4` | identity projection matrix |
+| `TPanelInterface_getModelMatrix_void` | `0xfe398` | `0x100a04` | identity model matrix |
+| `TPanelInterface_setProjMatrix_MatrixF_const` | `0xfe3e8` | `0x100a54` | empty projection setter |
+| `TPanelInterface_setModelMatrix_MatrixF_const` | `0xfe3ec` | `0x100a58` | empty model setter |
+| `TDrawingPanelPort_flushTexture_void` | `0xfe3f0` | `0x100a5c` | empty inherited flush hook |
+| `TPanelInterface_captureScreen_int_int_int_int_uchar_int_int` | `0x102760` | `0x104dc8` | zero-return capture hook |
+| `TDrawingPanelPort_setPixels_uchar_int_int` | `0x102768` | `0x104dd0` | empty pixel setter hook |
+| `TDrawingPanelPort_getPixels_void` | `0x10276c` | `0x104dd4` | zero-return pixel getter |
+| `TGraphicOperation_flushTextures_void` | `0x1030a4` | `0x10570c` | drawing-panel flush loop |
+
+The first 18 rows form a contiguous source `TPanelInterface` block. The
+target `oMhmIajzmW` block has the same method order and matching signatures,
+but it also contains one four-byte method at `0x100980`, between the source
+`setArrays` and `drawElements` positions. Its mangled signature adds two
+integer arguments to the array-style hook, so it is recorded as a target-only
+2.2 method rather than being forced into a source role. The alignment skips
+that one target method and then resumes exactly at `drawElements`.
+
+This is more than a position-only match. Every reviewed source and target pair
+has the same size, instruction count, basic-block count, branch count, call
+count, mnemonic hash, opcode shape, register shape, and overall shape hash.
+The source identity matrix getters and zero-return predicates have matching
+target pseudocode. The other base methods are empty in both builds, which is
+consistent with their role as a portable interface rather than an OpenGL
+implementation.
+
+The source `TDrawingPanelPort_flushTexture_void` follows the base block. The
+target `OYYKfaPU7R` method at `0x100a5c` occupies the same inherited slot and
+is immediately followed by the previously translated panel-port methods. The
+later source tail contains a screen-capture hook followed by the pixel setter
+and getter. Spectron keeps that same local trio at `0x104dc8` through
+`0x104dd4`, split between the `oMhmIajzmW` base and `OYYKfaPU7R` derived
+classes. All three bodies are exact shape matches.
+
+The larger renderer row is the most useful operational result. The source
+`TGraphicOperation_flushTextures_void` walks
+`data_TGraphicOperation_drawingpanels`, obtains each panel through
+`TList::operator[]`, and calls the panel vtable at byte offset 320. The target
+`s40xgamwex::C2xOKaWf8Z` at `0x10570c` performs the same loop against
+`s40xgamwex::NYGMKaOLzY`, uses `vy1JgaKVkH::operator[]`, and dispatches the
+same flush responsibility at byte offset 328. The eight-byte difference is a
+target class-layout change, not a different operation. This ties the readable
+flush label to the renderer's drawing-panel lifecycle and gives us a concrete
+place to inspect if texture updates fail during a real device run.
+
+The machine-readable record is
+`artifacts/spectron_panel_virtual_renderer_residual_manual_translation_anchors_20260826.json`,
+generated by
+`tools/generate_spectron_panel_virtual_renderer_residual_anchors.py`. All 23
+labels reopened with zero failures in the serial v117 IDA check. The full
+semantic translation reopen check still passed with 3,641 high-confidence map
+labels and zero failures across 11,679 functions. The v117 database has 1,683
+remaining default `sub_` names. Its SHA-256 is
+`82f78696b705112585e04e2b3c522b88bed026d9d281bc4fdc9a7fff085ad5c4`.
+
 ## 2026-08-27: Spectron animation and palette residual anchors
 
 The v116 pass reviewed four residual image-animation and palette methods.

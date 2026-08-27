@@ -1259,6 +1259,15 @@ This is the short handoff view. The full reasoning and command history are in
      disposable copy. See
      `artifacts/spectron_animation_palette_residual_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
+177. The next IDA pass translated 23 panel and renderer residual methods. It
+     covers the 18 panel-interface base hooks, the inherited panel-port flush
+     hook, screen-capture and pixel hooks, and the graphic-operation texture
+     flush loop. The target has one explicit 2.2-only panel hook inserted
+     after `setArrays`; it remains unlabeled because there is no 1.8 source
+     counterpart. The labels reopened successfully in the v117 disposable
+     copy. See
+     `artifacts/spectron_panel_virtual_renderer_residual_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
 ## Not verified
 
