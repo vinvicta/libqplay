@@ -2873,6 +2873,92 @@ labels reopened with zero failures in
 `analysis/spectron_libqplay_translated_v84.i64`. Its database SHA-256 is
 `5ea5746f052d6940b6b7facae87de3875e381828847c57d9c03ac782d867984c`.
 
+## Spectron Gani lifecycle anchors
+
+The v85 pass filled in the remaining Gani object and TGraalAni lifecycle
+surface with 50 high-confidence anchors. These were selected from direct
+Hex-Rays comparisons, not from proximity alone. The target functions retain
+the same class-local order, field offsets, virtual slots, destructor pairing,
+or exact wrapper shape as the 1.8 functions.
+
+The object and dispatch surface is:
+
+| 1.8 role | Source | Spectron target | Main evidence |
+| --- | ---: | ---: | --- |
+| `TGaniObject_clearChatWrapped_void` | `0x16526c` | `0x168a5c` | text-token child cleanup |
+| GaniObject D1 destructor | `0x1652ac` | `0x168af8` | owner, child lists, strings, base teardown |
+| GaniObject D0 destructor | `0x1654e0` | `0x168d48` | destructor and delete |
+| `TLevelObject_getlocalx_void` | `0x1656c0` | `0x168ecc` | field offset 112 |
+| `TLevelObject_getlocaly_void` | `0x1656c8` | `0x168ed4` | field offset 120 |
+| `TLevelObject_setAttachedTo_TServerPlayer` | `0x1656d0` | `0x168edc` | field offset 144 |
+| `TGaniObject_onNewAnimation_void` | `0x1656d8` | `0x168ee4` | no-op virtual hook |
+| `TGaniObject_onGaniAttributeChanged_int` | `0x1656dc` | `0x168ee8` | no-op virtual hook |
+| `TGaniObject_onGaniStepChanged_void` | `0x1656e0` | `0x168eec` | no-op virtual hook |
+| `TGaniObject_getdir_void` and setter | `0x1656e4`, `0x1656ec` | `0x168ef0`, `0x168ef8` | direction field offset 260 |
+| `TGaniObject_onUpdateColors_void` | `0x1656f4` | `0x168f00` | no-op virtual hook |
+| Gani parameter property D1 pair | `0x1656f8`, `0x165714` | `0x168f04`, `0x168f20` | base destructor and thunk |
+| Gani object property D1 pair | `0x16571c`, `0x165738` | `0x168f28`, `0x168f44` | base destructor and thunk |
+| Gani parameter property D0 pair | `0x165740`, `0x165778` | `0x168f4c`, `0x168f84` | delete pair |
+| Gani object property D0 pair | `0x165780`, `0x1657b8` | `0x168f8c`, `0x168fc4` | delete pair |
+| `TGaniObject_receiveEvent_script_event` | `0x1657c0` | `0x168fcc` | virtual dispatch slot 128 |
+| TColorVar D1 and D0 | `0x165824`, `0x165838` | `0x169030`, `0x169044` | Graal-variable base teardown |
+| Gani event base thunk and wrapper | `0x165868`, `0x16586c` | `0x169074`, `0x169078` | temporary event and forwarding |
+
+The source destructor display at `0x1652ac` looks like a constructor because
+of the old IDA name, but its alternative name is `_ZN11TGaniObjectD1Ev` and
+its pseudocode performs destruction. The target D2 body at `0x168af8` performs
+the same visibility, owner, child-list, chat, string, lookup, and base cleanup.
+It grows from 564 to 592 bytes, while the D0 wrapper remains an exact 32-byte
+match. The property and TColorVar destructor pairs also preserve their source
+metrics exactly.
+
+The animation-state and resource surface is:
+
+| 1.8 role | Source | Spectron target | Main evidence |
+| --- | ---: | ---: | --- |
+| continuous getter and setter | `0x1658c4`, `0x1658cc` | `0x1690d0`, `0x1690d8` | byte offset 201 |
+| loop getter and setter | `0x1658d4`, `0x1658dc` | `0x1690e0`, `0x1690e8` | byte offset 200 |
+| movie getter and setter | `0x1658e4`, `0x1658ec` | `0x1690f0`, `0x1690f8` | byte offset 172 |
+| singledirection getter | `0x1658f4` | `0x169100` | byte offset 202 |
+| `setbackto` setter and getter | `0x165954`, `0x16595c` | `0x169160`, `0x169168` | string field offset 208 |
+| `TGraalAni_clear_void` | `0x165a8c` | `0x1692bc` | sprite, step, owner, script reset |
+| TGraalAni D0 destructor | `0x165db8` | `0x16956c` | destructor and delete |
+| owner Add and Remove | `0x1660f4`, `0x1660fc` | `0x1698a8`, `0x1698b0` | owner-list operations |
+| `TGraalAni_loadScriptEncrypted_void` | `0x1661b0` | `0x169964` | coded file, `gani::`, CRC, request |
+| `TGraalAni_saveScriptEncrypted_TString_const` | `0x166360` | `0x169b6c` | coded stream and local save |
+| `TGraalAni_calcGaniType_void` | `0x166444` | `0x169c6c` | `def`, `bomy_walk`, 31-name loop |
+| `TGraalAni_TGraalAni_TString_const` | `0x16653c` | `0x169d84` | `sprites`, `steps`, list setup |
+| `TGraalAni_removeGraalAnis_void` | `0x166860` | `0x16a114` | global cache clear |
+| `TGraalAni_loadAni_TString_const_bool` | `0x1668a8` | `0x16a15c` | cache, `.gani`, reload, rectangle |
+| `TGraalAni_initStaticVars_void` | `0x166cbc` | `0x16a5f0` | global hash-list setup |
+| `TGraalAni_initStaticScriptVars_void` | `0x166cec` | `0x16a620` | property registration |
+| TGraalAni property D1 pair | `0x166d30`, `0x166d4c` | `0x16a664`, `0x16a680` | base destructor and thunk |
+| TGraalAni property D0 pair | `0x166d54`, `0x166d8c` | `0x16a688`, `0x16a6c0` | delete pair |
+
+The seven short flag accessors were previously named only `sub_1690D0` through
+`sub_169100` in the target. Their pseudocode reads or writes the same byte
+offsets as 1.8, so the v85 database now gives them readable v18 labels. The
+`setbackto` pair similarly retains the same string field and hidden return
+object. `TGraalAni_clear` keeps all 25 source blocks even though target wrapper
+calls reduce the body from 552 to 428 bytes.
+
+The encrypted script loader preserves the local-file test, `gani::` class
+construction, script-universe insertion, CRC path, and WantGaniScript request.
+The saver keeps the four-block coded stream writer. The constructor creates the
+same sprite and step arrays, while `loadAni` keeps the cache lookup, `.gani`
+resource path, server request, reload, script load, and visible-rectangle
+calculation.
+
+The machine-readable record is
+`artifacts/spectron_gani_lifecycle_manual_translation_anchors_20260826.json`,
+generated by `tools/generate_spectron_gani_lifecycle_anchors.py`. All 50 labels
+reopened with zero failures in
+`analysis/spectron_libqplay_translated_v85.i64`. The full translation check
+also reopened all 3,641 high-confidence semantic labels with zero failures.
+The v85 database has 11,679 functions and 1,688 default `sub_` names after
+the nine short target accessors were labeled. Its SHA-256 is
+`5ba0fe1662dc09dc2a0ed20cc917184ccbb971b6c1ee09be66459c8f8f9e3ef6`.
+
 ## Java observations
 
 The Java dex files still use the normal Graal activity and renderer bridge:

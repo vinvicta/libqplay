@@ -4509,6 +4509,100 @@ labels reopened with zero failures in a serial v84 IDA check. The database
 SHA-256 is
 `5ea5746f052d6940b6b7facae87de3875e381828847c57d9c03ac782d867984c`.
 
+## 2026-08-26: Spectron Gani lifecycle anchors
+
+The v85 pass reviewed 50 smaller functions that fill in the Gani object and
+TGraalAni lifecycle around the larger runtime methods. This pass is useful for
+two reasons. It translates the short methods that the broad matcher left
+unmatched, and it clarifies several misleading IDA display names. In
+particular, the source entries named `TGaniObject_TGaniObject`,
+`TGaniParamProperties_TGaniParamProperties`, and
+`TGraalAniProperties_TGraalAniProperties` have alternative D1 destructor
+names and destructor pseudocode. The v85 labels use the destructor role rather
+than repeating the constructor-shaped display name.
+
+The object-side correspondences are:
+
+| 1.8 role | Source | Spectron target | Evidence |
+| --- | ---: | ---: | --- |
+| `TGaniObject_clearChatWrapped_void` | `0x16526c` | `0x168a5c` | text-token child release |
+| `TGaniObject` D1 destructor | `0x1652ac` | `0x168af8` | visibility, owner, child lists, strings, base teardown |
+| `TGaniObject` D0 destructor | `0x1654e0` | `0x168d48` | destructor plus delete |
+| `TLevelObject_getlocalx_void` | `0x1656c0` | `0x168ecc` | local x at offset 112 |
+| `TLevelObject_getlocaly_void` | `0x1656c8` | `0x168ed4` | local y at offset 120 |
+| `TLevelObject_setAttachedTo_TServerPlayer` | `0x1656d0` | `0x168edc` | attached pointer at offset 144 |
+| `TGaniObject_onNewAnimation_void` | `0x1656d8` | `0x168ee4` | empty virtual hook |
+| `TGaniObject_onGaniAttributeChanged_int` | `0x1656dc` | `0x168ee8` | empty virtual hook |
+| `TGaniObject_onGaniStepChanged_void` | `0x1656e0` | `0x168eec` | empty virtual hook |
+| `TGaniObject_getdir_void` | `0x1656e4` | `0x168ef0` | direction at offset 260 |
+| `TGaniObject_setdir_int` | `0x1656ec` | `0x168ef8` | direction at offset 260 |
+| `TGaniObject_onUpdateColors_void` | `0x1656f4` | `0x168f00` | empty virtual hook |
+| `TGaniParamProperties` D1 and thunk | `0x1656f8`, `0x165714` | `0x168f04`, `0x168f20` | base destructor and adjusted this |
+| `TGaniObjectProperties` D1 and thunk | `0x16571c`, `0x165738` | `0x168f28`, `0x168f44` | base destructor and adjusted this |
+| `TGaniParamProperties` D0 and thunk | `0x165740`, `0x165778` | `0x168f4c`, `0x168f84` | delete pair |
+| `TGaniObjectProperties` D0 and thunk | `0x165780`, `0x1657b8` | `0x168f8c`, `0x168fc4` | delete pair |
+| `TGaniObject_receiveEvent_script_event` | `0x1657c0` | `0x168fcc` | empty prefix and virtual slot 128 |
+| `TColorVar` D1 and D0 | `0x165824`, `0x165838` | `0x169030`, `0x169044` | common Graal-variable base teardown |
+| `TGaniObject_receiveEvent` base thunk and string wrapper | `0x165868`, `0x16586c` | `0x169074`, `0x169078` | same temporary event and forwarding slot |
+
+The source and target object helpers preserve exact size, instruction, and
+block metrics except for the main GaniObject D1 destructor. That destructor
+grows from 564 to 592 bytes and from 34 to 38 blocks because Spectron routes
+the same cleanup through rebuilt string, list, script, and ShowImg wrappers.
+The target pseudocode still performs the same cleanup in the same order. The
+property and color-variable rows retain exact wrapper metrics, including the
+non-virtual thunks.
+
+The animation-side correspondences fill in the state and resource path:
+
+| 1.8 role | Source | Spectron target | Evidence |
+| --- | ---: | ---: | --- |
+| `TGraalAni_get_continuous` and setter | `0x1658c4`, `0x1658cc` | `0x1690d0`, `0x1690d8` | byte offset 201 |
+| `TGraalAni_get_loop` and setter | `0x1658d4`, `0x1658dc` | `0x1690e0`, `0x1690e8` | byte offset 200 |
+| `TGraalAni_get_movie` and setter | `0x1658e4`, `0x1658ec` | `0x1690f0`, `0x1690f8` | byte offset 172 |
+| `TGraalAni_get_singledirection` | `0x1658f4` | `0x169100` | byte offset 202 |
+| `TGraalAni_set_setbackto` and getter | `0x165954`, `0x16595c` | `0x169160`, `0x169168` | string at offset 208 |
+| `TGraalAni_clear_void` | `0x165a8c` | `0x1692bc` | sprite, step, owner, and script state reset |
+| `TGraalAni` D0 destructor | `0x165db8` | `0x16956c` | destructor plus delete |
+| `TGraalAni_addOwner_TGaniObject` | `0x1660f4` | `0x1698a8` | owner-list Add |
+| `TGraalAni_removeOwner_TGaniObject` | `0x1660fc` | `0x1698b0` | owner-list Remove |
+| `TGraalAni_loadScriptEncrypted_void` | `0x1661b0` | `0x169964` | coded filename, `gani::`, CRC, WantGaniScript |
+| `TGraalAni_saveScriptEncrypted_TString_const` | `0x166360` | `0x169b6c` | coded stream and local save |
+| `TGraalAni_calcGaniType_void` | `0x166444` | `0x169c6c` | `def`, `bomy_walk`, and 31-name loop |
+| `TGraalAni_TGraalAni_TString_const` | `0x16653c` | `0x169d84` | lists, `sprites`, `steps`, and clear |
+| `TGraalAni_removeGraalAnis_void` | `0x166860` | `0x16a114` | global cache clear |
+| `TGraalAni_loadAni_TString_const_bool` | `0x1668a8` | `0x16a15c` | cache, `.gani`, reload, script, rectangle |
+| `TGraalAni_initStaticVars_void` | `0x166cbc` | `0x16a5f0` | global hash-list allocation |
+| `TGraalAni_initStaticScriptVars_void` | `0x166cec` | `0x16a620` | property registration |
+| `TGraalAniProperties` D1 and thunk | `0x166d30`, `0x166d4c` | `0x16a664`, `0x16a680` | base destructor and adjusted this |
+| `TGraalAniProperties` D0 and thunk | `0x166d54`, `0x166d8c` | `0x16a688`, `0x16a6c0` | delete pair |
+
+The seven flag accessors are especially useful because they are exact byte
+offset matches even though the target names are only `sub_1690D0` through
+`sub_169100`. The target `setbackto` pair also preserves the hidden return
+object behavior and the 208-byte string field. The larger `clear` method keeps
+all 25 source blocks while shrinking from 552 to 428 bytes as target container
+wrappers fold some operations together.
+
+The script and resource methods preserve their important boundaries. The
+encrypted loader retains the `gani::` class prefix, local-file check, script
+universe insertion, CRC path, and WantGaniScript request. The encrypted saver
+keeps the four-block coded-stream writer. The type classifier still tests
+`def` and `bomy_walk` and walks 31 names. The constructor still creates the
+same sprite and step child arrays, while `loadAni` keeps the cache lookup,
+`.gani` load, server request, reload, script load, and visible-rectangle
+calculation.
+
+The machine-readable evidence is in
+`artifacts/spectron_gani_lifecycle_manual_translation_anchors_20260826.json`,
+generated by `tools/generate_spectron_gani_lifecycle_anchors.py`. All 50
+labels reopened with zero failures in a serial v85 IDA check. The full
+translation reopen check also passed with 3,641 high-confidence map labels and
+zero failures. Naming the nine target `sub_` accessors reduced the default
+sub-function count from 1,697 to 1,688 without changing the 11,679-function
+database. The database SHA-256 is
+`5ba0fe1662dc09dc2a0ed20cc917184ccbb971b6c1ee09be66459c8f8f9e3ef6`.
+
 ## 2026-08-26: Spectron render and GUI helper anchors
 
 The v29 pass reviewed 20 compact texture, OpenGL, drawing-panel, GUI-control,

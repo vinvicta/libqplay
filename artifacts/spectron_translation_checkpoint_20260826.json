@@ -82,11 +82,11 @@
   },
   "database": {
     "close_reopen_verified": true,
-    "default_sub_function_count": 1697,
+    "default_sub_function_count": 1688,
     "format": "packed IDA 9.3 database",
     "function_count": 11679,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v84.i64",
-    "sha256": "5ea5746f052d6940b6b7facae87de3875e381828847c57d9c03ac782d867984c"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v85.i64",
+    "sha256": "5ba0fe1662dc09dc2a0ed20cc917184ccbb971b6c1ee09be66459c8f8f9e3ef6"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -127,6 +127,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_gani_helper_verify_v81.json",
     "verified_name_count": 2
+  },
+  "gani_lifecycle_anchors": {
+    "anchor_count": 50,
+    "anchor_path": "artifacts/spectron_gani_lifecycle_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "e0cc99d0da6198c3e7df948730d5a7165eb055d33ee411f606e92d59da5b7f5d",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gani_lifecycle_verify_v85.json",
+    "verified_name_count": 50
   },
   "gani_render_anchors": {
     "anchor_count": 3,
@@ -186,7 +194,7 @@
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
-    "reopen_verification": "/tmp/spectron_translation_verify_v84.json",
+    "reopen_verification": "/tmp/spectron_translation_verify_v85.json",
     "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
     "translation_map": "artifacts/spectron_semantic_function_translation_20260826.json",
     "translation_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92"
@@ -275,7 +283,8 @@
     "The seventy-ninth database revision also contains the separately reviewed Gani color setter and sprite image-name helper anchors.",
     "The eightieth database revision also contains the separately reviewed Gani matrix, parameter, and animation-start anchors.",
     "The eighty-first database revision also contains the separately reviewed Gani parameter serializer, reload, and player draw anchors.",
-    "The eighty-second database revision also contains the separately reviewed Gani frame-property and animation-playback anchors."
+    "The eighty-second database revision also contains the separately reviewed Gani frame-property and animation-playback anchors.",
+    "The eighty-third database revision also contains the separately reviewed Gani object teardown, virtual surface, animation state, ownership, script-cache, loading, and property anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,

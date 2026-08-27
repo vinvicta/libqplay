@@ -1014,6 +1014,16 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_gani_frame_playback_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+145. Clean IDA review added 50 high-confidence Gani lifecycle anchors. The set
+     covers GaniObject teardown, inherited accessors, virtual hooks, property
+     destructor pairs, event forwarding, TColorVar cleanup, animation flags,
+     owner-list operations, encrypted script loading and saving, type
+     classification, construction, cache cleanup, resource loading, and
+     static property setup. All 50 reopened successfully in the v85 disposable
+     copy. The full semantic-label reopen check also passed with zero failures.
+     See `artifacts/spectron_gani_lifecycle_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

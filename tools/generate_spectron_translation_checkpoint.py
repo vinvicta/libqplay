@@ -189,6 +189,8 @@ def main() -> None:
     parser.add_argument("--gani-render-verification", type=Path)
     parser.add_argument("--gani-frame-playback-anchors", type=Path)
     parser.add_argument("--gani-frame-playback-verification", type=Path)
+    parser.add_argument("--gani-lifecycle-anchors", type=Path)
+    parser.add_argument("--gani-lifecycle-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2496,6 +2498,34 @@ def main() -> None:
         result["gani_frame_playback_anchors"] = gani_frame_playback
         result["interpretation"].append(
             "The eighty-second database revision also contains the separately reviewed Gani frame-property and animation-playback anchors."
+        )
+    gani_lifecycle = None
+    if args.gani_lifecycle_anchors or args.gani_lifecycle_verification:
+        if not args.gani_lifecycle_anchors or not args.gani_lifecycle_verification:
+            raise ValueError(
+                "Gani lifecycle anchors and Gani lifecycle verification must be supplied together"
+            )
+        gani_lifecycle_document = load(args.gani_lifecycle_anchors)
+        gani_lifecycle_verification = load(args.gani_lifecycle_verification)
+        if gani_lifecycle_document.get("artifact") != "spectron_gani_lifecycle_manual_translation_anchors_20260826":
+            raise ValueError("unexpected Gani lifecycle anchor artifact")
+        if not gani_lifecycle_verification.get("verified"):
+            raise ValueError("Gani lifecycle anchor reopen verification did not pass")
+        expected_gani_lifecycle = len(gani_lifecycle_document["anchors"])
+        if gani_lifecycle_verification["verified_name_count"] != expected_gani_lifecycle:
+            raise ValueError("Gani lifecycle verification count differs from artifact")
+        gani_lifecycle = {
+            "anchor_path": str(args.gani_lifecycle_anchors),
+            "anchor_sha256": sha256_path(args.gani_lifecycle_anchors),
+            "reopen_verification": str(args.gani_lifecycle_verification),
+            "anchor_count": expected_gani_lifecycle,
+            "verified_name_count": gani_lifecycle_verification["verified_name_count"],
+            "reopen_failure_count": gani_lifecycle_verification["failure_count"],
+        }
+    if gani_lifecycle is not None:
+        result["gani_lifecycle_anchors"] = gani_lifecycle
+        result["interpretation"].append(
+            "The eighty-third database revision also contains the separately reviewed Gani object teardown, virtual surface, animation state, ownership, script-cache, loading, and property anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

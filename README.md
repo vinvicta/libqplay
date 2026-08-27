@@ -885,6 +885,19 @@ successfully. The evidence is in
 `artifacts/spectron_gani_frame_playback_manual_translation_anchors_20260826.json`,
 and the v84 database SHA-256 is recorded in the checkpoint.
 
+A v85 disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v85.i64`,
+adds 50 high-confidence Gani lifecycle anchors. The set covers Gani object
+teardown, inherited coordinate and attachment accessors, virtual hooks,
+property destructor pairs, event forwarding, color-variable cleanup, animation
+flags, the `setbackto` string, owner-list operations, encrypted script loading
+and saving, type classification, constructor state, cache cleanup, resource
+loading, and static property setup. The target keeps the same field offsets,
+virtual slots, class-local ordering, or exact wrapper shape for each reviewed
+role. All 50 labels reopened successfully. The evidence is in
+`artifacts/spectron_gani_lifecycle_manual_translation_anchors_20260826.json`,
+and the v85 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
@@ -1056,6 +1069,9 @@ proves the local native TLS path, not a current live certificate or service.
   markup, and scrolling helpers.
 * `artifacts/spectron_gani_frame_playback_manual_translation_anchors_20260826.json`
   records the two reviewed Gani frame-property and animation-playback anchors.
+* `artifacts/spectron_gani_lifecycle_manual_translation_anchors_20260826.json`
+  records the 50 reviewed Gani object, animation state, ownership, loading,
+  and property lifecycle anchors.
 * `artifacts/spectron_json_folder_manual_translation_anchors_20260826.json`
   records the eight reviewed GIF/JPEG callbacks, recursive folder-loader
   helper, and YAJL JSON callbacks.
@@ -1343,6 +1359,9 @@ proves the local native TLS path, not a current live certificate or service.
   The `tools/generate_spectron_json_folder_anchors.py` generator records
   reviewed image callbacks, recursive folder loading, and YAJL JSON callback
   roles with exact hash checks or caller and callback-table context.
+  The `tools/generate_spectron_gani_lifecycle_anchors.py` generator records
+  the reviewed Gani object and TGraalAni teardown, virtual, state, ownership,
+  script-cache, loading, and property roles.
   The `tools/generate_spectron_socket_behavior_comparison.py` generator
   records changed-size socket behavior without forcing an exact-match label.
   `tools/ida_apply_spectron_translation.py` and
