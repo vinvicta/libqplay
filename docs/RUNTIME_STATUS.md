@@ -1146,6 +1146,15 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_options_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+161. The next IDA pass translated ten `TTexture` methods covering bitmap
+     dimensions, GPU texture creation and dimensions, construction and
+     destruction, Graal bitmap lookup, registry cleanup, and static registry
+     initialization. The labels reopened successfully in the v101 disposable
+     copy. The target preserves the lazy-load and registry behavior while
+     exposing typed string wrappers and extra Graal overloads. See
+     `artifacts/spectron_texture_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

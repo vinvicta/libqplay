@@ -221,6 +221,8 @@ def main() -> None:
     parser.add_argument("--hash-family-verification", type=Path)
     parser.add_argument("--options-anchors", type=Path)
     parser.add_argument("--options-verification", type=Path)
+    parser.add_argument("--texture-anchors", type=Path)
+    parser.add_argument("--texture-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2976,6 +2978,34 @@ def main() -> None:
         result["options_anchors"] = options
         result["interpretation"].append(
             "The ninety-eighth database revision also contains the separately reviewed TOptions GUI-style setter, decoded credential getter, account persistence, and timer-refresh anchors."
+        )
+    texture = None
+    if args.texture_anchors or args.texture_verification:
+        if not args.texture_anchors or not args.texture_verification:
+            raise ValueError(
+                "texture anchors and texture verification must be supplied together"
+            )
+        texture_document = load(args.texture_anchors)
+        texture_verification = load(args.texture_verification)
+        if texture_document.get("artifact") != "spectron_texture_manual_translation_anchors_20260826":
+            raise ValueError("unexpected texture anchor artifact")
+        if not texture_verification.get("verified"):
+            raise ValueError("texture anchor reopen verification did not pass")
+        expected_texture = len(texture_document["anchors"])
+        if texture_verification["verified_name_count"] != expected_texture:
+            raise ValueError("texture verification count differs from artifact")
+        texture = {
+            "anchor_path": str(args.texture_anchors),
+            "anchor_sha256": sha256_path(args.texture_anchors),
+            "reopen_verification": str(args.texture_verification),
+            "anchor_count": expected_texture,
+            "verified_name_count": texture_verification["verified_name_count"],
+            "reopen_failure_count": texture_verification["failure_count"],
+        }
+    if texture is not None:
+        result["texture_anchors"] = texture
+        result["interpretation"].append(
+            "The ninety-ninth database revision also contains the separately reviewed TTexture bitmap access, GPU texture lifecycle, Graal lookup, and static registry anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

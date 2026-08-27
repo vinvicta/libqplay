@@ -109,8 +109,8 @@
     "default_sub_function_count": 1686,
     "format": "packed IDA 9.3 database",
     "function_count": 11679,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v100.i64",
-    "sha256": "3b438b39ec6f02fe7a8059c1abe8172338b0d1cee936522ce9e23611f4f94b5d"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v101.i64",
+    "sha256": "8944246d7b9b491cecbeec2298383defe1d624a6643d654fdc28894885c15913"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -234,7 +234,7 @@
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
-    "reopen_verification": "/tmp/spectron_translation_verify_v100_serial.json",
+    "reopen_verification": "/tmp/spectron_translation_verify_v101_serial.json",
     "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
     "translation_map": "artifacts/spectron_semantic_function_translation_20260826.json",
     "translation_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92"
@@ -339,7 +339,8 @@
     "The ninety-fifth database revision also contains the separately reviewed TStringList comma parser, constructor, and serializer anchors.",
     "The ninety-sixth database revision also contains the separately reviewed TStringList assignment, key/value, serialization, file-output, and tokenizer anchors.",
     "The ninety-seventh database revision also contains the separately reviewed THashList lookup, assignment, sorting, and THashStrings value and serialization anchors.",
-    "The ninety-eighth database revision also contains the separately reviewed TOptions GUI-style setter, decoded credential getter, account persistence, and timer-refresh anchors."
+    "The ninety-eighth database revision also contains the separately reviewed TOptions GUI-style setter, decoded credential getter, account persistence, and timer-refresh anchors.",
+    "The ninety-ninth database revision also contains the separately reviewed TTexture bitmap access, GPU texture lifecycle, Graal lookup, and static registry anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -831,6 +832,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_string_search_verify_v44.json",
     "verified_name_count": 2
+  },
+  "texture_anchors": {
+    "anchor_count": 10,
+    "anchor_path": "artifacts/spectron_texture_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "256106f557f6cffc81d9d27e5c6875b11ec6f5847dcf67773fb2f1a60758f6f9",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_texture_verify_v101.json",
+    "verified_name_count": 10
   },
   "tiles_update_anchors": {
     "anchor_count": 8,
