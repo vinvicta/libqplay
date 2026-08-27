@@ -1,0 +1,389 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both require an action-capable player, use the facing direction to test the adjacent tile, and reject coordinates outside the 64 by 64 level range.",
+        "Both build the pulled trigger action with the facing direction and send the same client notification when a client exists.",
+        "The target expands direction handling into explicit switches and routes the action through rebuilt array, string, player, and client wrappers while preserving the pulled literal and coordinate flow."
+      ],
+      "match_kind": "manual-player-movement-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x197e2c",
+      "original_metrics": {
+        "basic_block_count": 8,
+        "instruction_count": 167,
+        "mnemonic_hash": "10c8b09957c7731d441eaed8ba76f949e8124fb0be739f2f31c40d7dc55f0525",
+        "register_shape_hash": "15c0843004d1b5df8036b0b8c643bf575301b867cb3affa72963cb0cd4c7f1c1",
+        "shape_hash": "650776768d07bfa38c89793f1cfb69a39ce817b4b43adfd644801faa57c6ae42",
+        "size": 668
+      },
+      "original_name": "TPlayer_pullStones_void",
+      "original_string_refs": [
+        "pulled"
+      ],
+      "proposed_name": "v18_TPlayer_pullStones_void",
+      "semantic_match_already_present": false,
+      "source_basis": "pull-stone trigger and client notification",
+      "spectron_current_name": "_ZN10W6NzgawMJy10VNJBwaM8l2Ev",
+      "spectron_default_name": false,
+      "spectron_ea": "0x19c954",
+      "spectron_metrics": {
+        "basic_block_count": 20,
+        "instruction_count": 185,
+        "mnemonic_hash": "0d5a4168139a9fa7a64b6c164ee0aca80098e4c1c7804bc1ffc907b709f39389",
+        "register_shape_hash": "afa4a65e344ee7e10280dd418db9fba8d120f7ae6eb01879559f58afe86973ca",
+        "shape_hash": "ff2c1e9999a8aa44ab92310307e5e5c111aa97c15c79729861e6928070d2d956",
+        "size": 748
+      },
+      "spectron_string_refs": [
+        "pulled"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both require an action-capable player, calculate the facing-dependent push position, and reject positions outside the 64 by 64 level range.",
+        "Both build the pushed trigger action with the current direction and send the same client notification after dispatching the local action.",
+        "The target makes direction offsets explicit and uses rebuilt array, string, player, and client wrappers, but keeps the pushed literal and the source coordinate checks."
+      ],
+      "match_kind": "manual-player-movement-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1980d0",
+      "original_metrics": {
+        "basic_block_count": 8,
+        "instruction_count": 137,
+        "mnemonic_hash": "a008f72b4a9e027b060fef3cd52ad01b6214d9ee7e55d6251665e214c28048e2",
+        "register_shape_hash": "5eb5cc05f654a6fbec5126dea950a79c5259805c9394b8e3555c3ff800a2a034",
+        "shape_hash": "7d3a0ac37396b41a22bd8fc7125fb1336001e6ee537e574ad002c858bfdcc1b7",
+        "size": 548
+      },
+      "original_name": "TPlayer_moveStones_void",
+      "original_string_refs": [
+        "pushed"
+      ],
+      "proposed_name": "v18_TPlayer_moveStones_void",
+      "semantic_match_already_present": false,
+      "source_basis": "push-stone trigger and client notification",
+      "spectron_current_name": "_ZN10W6NzgawMJy10hPIBwaJjl2Ev",
+      "spectron_default_name": false,
+      "spectron_ea": "0x19cc50",
+      "spectron_metrics": {
+        "basic_block_count": 20,
+        "instruction_count": 156,
+        "mnemonic_hash": "bb3a5208c3a021803f18d587624f1f55707708a59869f5185391af3a2b17f0d3",
+        "register_shape_hash": "bbdb55d8ff2a892f7a84895dc05b4107451c5ee28936bfedd024fd530080f8eb",
+        "shape_hash": "ac7831ea5be47165558039bf35d3da1691a8fe2cd2708085db3b396567f93aef",
+        "size": 632
+      },
+      "spectron_string_refs": [
+        "pushed"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both reject the legacy server branch and players without an action level before testing the tile one and a half units ahead of the player.",
+        "Both require tile type 21 and then test the second jump position against a wall, returning the inverse of that wall result.",
+        "The target preserves the same two tile probes and facing offsets through explicit switches, with shifted player fields and rebuilt level wrappers."
+      ],
+      "match_kind": "manual-player-movement-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x198300",
+      "original_metrics": {
+        "basic_block_count": 6,
+        "instruction_count": 106,
+        "mnemonic_hash": "ccafa8aaa3e8e1a6f9dd2b36340621beb36e26a507288edb0b20ff2b57722143",
+        "register_shape_hash": "494cdbc29be4463ceff8fb7dd065f3a7e78c14f72734998710fe2b6f90d48d11",
+        "shape_hash": "f9cfffff833c9d06d227198eb084bece095f03dd0e1961d18da2f806662cce42",
+        "size": 428
+      },
+      "original_name": "TPlayer_canJump_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TPlayer_canJump_void",
+      "semantic_match_already_present": false,
+      "source_basis": "jump tile and wall availability test",
+      "spectron_current_name": "_ZN10W6NzgawMJy10fKQBwaAZr2Ev",
+      "spectron_default_name": false,
+      "spectron_ea": "0x19ced8",
+      "spectron_metrics": {
+        "basic_block_count": 18,
+        "instruction_count": 128,
+        "mnemonic_hash": "c19c0ebfde0899b3055c181dd878625ee66726714f1f7b6cfc090c9761b8512e",
+        "register_shape_hash": "ea339503726799f8ba2887592544682ba68c910365aa8fa8c3562fc73776fac3",
+        "shape_hash": "e4be89027964175e06ad4fb8a1571c3c4ab7eac552bf3ed536f31b1b2756c9ea",
+        "size": 524
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both are the large movement dispatcher with the same sound literals, movement-direction state, action-mode transitions, and player interaction branches.",
+        "The target calls the reviewed pull, push, can-jump, link, and action-mode helpers from the same movement state machine, alongside the corresponding water, wall, animation, and NPC interaction paths.",
+        "The target grows by a small number of blocks because direction arithmetic and wrapper calls were rebuilt, while the distinctive five-literal set and class-local call graph remain intact."
+      ],
+      "match_kind": "manual-player-movement-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x198bb8",
+      "original_metrics": {
+        "basic_block_count": 233,
+        "instruction_count": 1366,
+        "mnemonic_hash": "17561980b2fd83a879c30356c75ca81bba4dcadb66a02a246fe544d08d4e9a22",
+        "register_shape_hash": "eb95c002da7ce09046cedea076daae08ca98fea0f30314bd46eac39fd3e41c4b",
+        "shape_hash": "51dec7abcd6d2fca14a3d7c54e5dc70c09725b40121c90d3daf7e192a5933bf7",
+        "size": 5464
+      },
+      "original_name": "TPlayer_movementAction_int",
+      "original_string_refs": [
+        "jump.wav",
+        "steps",
+        "steps2",
+        "stonemove.wav",
+        "water"
+      ],
+      "proposed_name": "v18_TPlayer_movementAction_int",
+      "semantic_match_already_present": false,
+      "source_basis": "main player movement and interaction state machine",
+      "spectron_current_name": "_ZN10W6NzgawMJy10RIGCwapy92Ei",
+      "spectron_default_name": false,
+      "spectron_ea": "0x19d7f8",
+      "spectron_metrics": {
+        "basic_block_count": 240,
+        "instruction_count": 1359,
+        "mnemonic_hash": "1af526f518c745f61ff79d348414d09feec519e49d4a091bbd159501a29a8e0f",
+        "register_shape_hash": "7433b852e659db553b13bb0ef71523f7e864bb05c5042ff6ff0588081926eadc",
+        "shape_hash": "b018349925666eb0921c1212747c100fa251df93020fdbd214ec29807535b103",
+        "size": 5436
+      },
+      "spectron_string_refs": [
+        "jump.wav",
+        "steps",
+        "steps2",
+        "stonemove.wav",
+        "water"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both reject the legacy server branch and implement the same item cases for hearts, shields, swords, power, light, gloves, and the encoded state check.",
+        "Both use the same shield and sword prefix tests, inventory thresholds, special sword and shield cases, and case 19 count threshold.",
+        "The target copies the player strings into temporary rebuilt wrappers before testing them, which reduces the block count slightly while preserving all distinctive item literals and branches."
+      ],
+      "match_kind": "manual-player-movement-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x19ad78",
+      "original_metrics": {
+        "basic_block_count": 51,
+        "instruction_count": 339,
+        "mnemonic_hash": "5973230fd3f3a6d509d38ca039db2bb9fed3df5a67514f82be71c3bd8aa97fd5",
+        "register_shape_hash": "880911faa6953975a61f5617a280d6f9f7f0dfcfeecb5c688205bb1bb60dbd1b",
+        "shape_hash": "387f5a3a025777edd7628ff100825ae56fc93d2fa7854ab79cb1b1ae481d6afe",
+        "size": 1384
+      },
+      "original_name": "TPlayer_itemAvailable_int",
+      "original_string_refs": [
+        "shield",
+        "shield1.",
+        "shield2.",
+        "shield3.",
+        "sword",
+        "sword1.",
+        "sword2.",
+        "sword3.",
+        "sword4."
+      ],
+      "proposed_name": "v18_TPlayer_itemAvailable_int",
+      "semantic_match_already_present": false,
+      "source_basis": "inventory and weapon availability query",
+      "spectron_current_name": "_ZN10W6NzgawMJy10ifslwaynFPEi",
+      "spectron_default_name": false,
+      "spectron_ea": "0x19f9a0",
+      "spectron_metrics": {
+        "basic_block_count": 49,
+        "instruction_count": 358,
+        "mnemonic_hash": "af43eabec6eaa54e3ae84acc42833ffca78c581ddc8858a265b7907037f9869d",
+        "register_shape_hash": "89bffeadbdbb8cce78df48165f7aaeaac9f806aeada7d94b68be9d1fd9dae42e",
+        "shape_hash": "7536f21aab9fc54717a3bc1290a33d306f290003e783f69d960440ea5c242cc1",
+        "size": 1452
+      },
+      "spectron_string_refs": [
+        "shield",
+        "shield1.",
+        "shield2.",
+        "shield3.",
+        "sword",
+        "sword1.",
+        "sword2.",
+        "sword3.",
+        "sword4."
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both switch on the facing direction, update the horizontal and vertical animation coordinates from direction-specific tables, decrement the jump counter, and leave jump mode when the counter reaches zero.",
+        "Both use the same four directional cases and the same two coordinate setter vtable slots, with only the target field offsets and wrapper names shifted.",
+        "The exact eleven-block shape and the matching counter and action-mode behavior make this a stable class-local correspondence."
+      ],
+      "match_kind": "manual-player-movement-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x19bbd8",
+      "original_metrics": {
+        "basic_block_count": 11,
+        "instruction_count": 111,
+        "mnemonic_hash": "4133bfcd4a5ebf6abce7b5b96f027bd85d2a7f23269c0b72e784ebfb4446faf1",
+        "register_shape_hash": "939dd06612da2ba6f5d643edfa6a27b792c828faaa750f69c95f855d7d69c837",
+        "shape_hash": "f70623a9265aa666eb5138246525a1140ef48e72ef7c08ef34ed31074f5f5859",
+        "size": 456
+      },
+      "original_name": "TPlayer_animateJumping_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TPlayer_animateJumping_void",
+      "semantic_match_already_present": false,
+      "source_basis": "directional jump animation frame update",
+      "spectron_current_name": "_ZN10W6NzgawMJy10kiUQwa6Y6eEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1a0844",
+      "spectron_metrics": {
+        "basic_block_count": 11,
+        "instruction_count": 112,
+        "mnemonic_hash": "61e34746f855149ba2c2caff0ecf1118cd33e56fc87884f1442a385d1c99ecc6",
+        "register_shape_hash": "015695728395fcd43e39c1e42d022d6a1d0ac351826d9d77ce20b696449450da",
+        "shape_hash": "d19c0b3d6160a2e52c55ca7b067225f3ce2cdc677cd165c011400bb4826cd5fd",
+        "size": 460
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both implement the same consumable cases, decrement the corresponding inventory counts, remove power or light state, and clear the selected item when required.",
+        "Both preserve the shield and sword downgrade paths, protected prefix checks, previous-image storage, replacement PNG names, and selected-index updates.",
+        "The target keeps the complete fourteen-literal weapon and shield set, shifts player fields and wrappers, and reduces the control-flow count by two blocks without changing the item transitions."
+      ],
+      "match_kind": "manual-player-movement-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x19c9e0",
+      "original_metrics": {
+        "basic_block_count": 72,
+        "instruction_count": 593,
+        "mnemonic_hash": "07728bd37b8762bfa1b5915161e871df2b3fbf9413c9cf0738bfa9876f1a433d",
+        "register_shape_hash": "a4bd8d6c7c84090abdd5d48424abb720f4b1c92fe68ffc2708f139ac783c2ce2",
+        "shape_hash": "f65dd82dc8b17713beb0ad630e5cffe8527ef3e4e07a9a4eeede7541f820de24",
+        "size": 2416
+      },
+      "original_name": "TPlayer_loseItem_int",
+      "original_string_refs": [
+        "shield",
+        "shield1.",
+        "shield1.png",
+        "shield2.",
+        "shield2.png",
+        "shield3.",
+        "sword",
+        "sword1.",
+        "sword1.png",
+        "sword2.",
+        "sword2.png",
+        "sword3.",
+        "sword3.png",
+        "sword4."
+      ],
+      "proposed_name": "v18_TPlayer_loseItem_int",
+      "semantic_match_already_present": false,
+      "source_basis": "inventory consumption and weapon or shield downgrade",
+      "spectron_current_name": "_ZN10W6NzgawMJy10UbLlwaHjVPEi",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1a1650",
+      "spectron_metrics": {
+        "basic_block_count": 70,
+        "instruction_count": 595,
+        "mnemonic_hash": "64f1ce15e0d850593d5403d67db47d5e59ac367d8cfdd0d6b3b123ce9572e1ce",
+        "register_shape_hash": "416d618ac33cd3e58d391869d8456568d1101adbf32f5f3214f43d8e89df18d3",
+        "shape_hash": "aaf0c616219234e30ad2de85f72537ff49ba34e38a7d7d00e9f8060aa69d2952",
+        "size": 2420
+      },
+      "spectron_string_refs": [
+        "shield",
+        "shield1.",
+        "shield1.png",
+        "shield2.",
+        "shield2.png",
+        "shield3.",
+        "sword",
+        "sword1.",
+        "sword1.png",
+        "sword2.",
+        "sword2.png",
+        "sword3.",
+        "sword3.png",
+        "sword4."
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both reject the legacy server branch, invulnerability, and the client ghost-mode case before starting the hurt animation and setting hurt action state.",
+        "Both reduce power, store and normalize the knockback vector, build the damage, image, and optional attacker arguments, and dispatch the same event index.",
+        "The exact seventeen-block shape and matching square-root normalization identify the target despite rebuilt event-array and string wrappers and shifted fields."
+      ],
+      "match_kind": "manual-player-movement-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x19dfa4",
+      "original_metrics": {
+        "basic_block_count": 17,
+        "instruction_count": 111,
+        "mnemonic_hash": "c910137784c653b9e29a2d5f1424298498c15a029e120a4147ac1fdd23b69301",
+        "register_shape_hash": "1d8cb7c4226be9cfcd3d4467839b73e339144f9e3c8d50eac8833a87d83b5c48",
+        "shape_hash": "12eab4c0053c3bd24c6d16ca2f65f854441140ae645ee808e7be5787fd8829ed",
+        "size": 444
+      },
+      "original_name": "TPlayer_hurtPlayer_double_double_double_TString_const_TServerPlayer",
+      "original_string_refs": [],
+      "proposed_name": "v18_TPlayer_hurtPlayer_double_double_double_TString_const_TServerPlayer",
+      "semantic_match_already_present": false,
+      "source_basis": "player damage, knockback, and hurt event dispatch",
+      "spectron_current_name": "_ZN10W6NzgawMJy10iPzUgaQKcQEdddRK10C8THgaTQxFP10MpGzgariDy",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1a2c60",
+      "spectron_metrics": {
+        "basic_block_count": 17,
+        "instruction_count": 118,
+        "mnemonic_hash": "660b3afe53d7eaefa3939331dc1d01818773d9b6ec25be9b6474c465fb8ac2d8",
+        "register_shape_hash": "886e448b48987dd95f35ea3a4ff4ede3f997188902628543e9679d440442264e",
+        "shape_hash": "f5e3af875e7e2c41507844b524a494ef09c41ca2a3061d590556436229ec3757",
+        "size": 472
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_player_movement_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v1_saved.json",
+    "spectron_features_sha256": "a8d58f85502362316ee99a0f79c2cd7a4ad5d6fac94aca0ee75bd0d2965fc2a1"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The correspondence relies on the preserved movement state machine, item literals, hurt-event flow, compatible block counts, and reviewed pseudocode rather than byte identity."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for player movement, item availability, item loss, and hurt handling",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 8,
+    "high_confidence_count": 8,
+    "new_context_anchor_count": 8,
+    "target_default_name_count": 0
+  }
+}

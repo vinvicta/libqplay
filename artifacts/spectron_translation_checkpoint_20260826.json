@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v67.i64",
-    "sha256": "b35de4695b4ccc607722b5d049df1b3838f20dcd2e010d9bafda5c47ca105b97"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v68.i64",
+    "sha256": "5daae0f4a60036947f12748aa7b5ef89312b0fe3ac71aa10477d9bfe84f5bf75"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -210,7 +210,8 @@
     "The sixty-second database revision also contains the separately reviewed player map-position and map-link anchors.",
     "The sixty-third database revision also contains the separately reviewed player level-animation and link-traversal anchors.",
     "The sixty-fourth database revision also contains the separately reviewed player attribute reset and weapon-state anchors.",
-    "The sixty-fifth database revision also contains the separately reviewed player draw-rectangle and visual setter anchors."
+    "The sixty-fifth database revision also contains the separately reviewed player draw-rectangle and visual setter anchors.",
+    "The sixty-sixth database revision also contains the separately reviewed player movement, item, and hurt-handling anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -340,6 +341,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_player_map_position_verification_v64.json",
     "verified_name_count": 2
+  },
+  "player_movement_anchors": {
+    "anchor_count": 8,
+    "anchor_path": "artifacts/spectron_player_movement_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "7b58c19f8f92f0bf7459ed1d03e273166ccb8cbaae29d9988403353a82fca58c",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_player_movement_verification_v68.json",
+    "verified_name_count": 8
   },
   "player_side_level_anchors": {
     "anchor_count": 4,

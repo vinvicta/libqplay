@@ -155,6 +155,8 @@ def main() -> None:
     parser.add_argument("--player-weapon-state-verification", type=Path)
     parser.add_argument("--player-visual-setter-anchors", type=Path)
     parser.add_argument("--player-visual-setter-verification", type=Path)
+    parser.add_argument("--player-movement-anchors", type=Path)
+    parser.add_argument("--player-movement-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1986,6 +1988,34 @@ def main() -> None:
         result["player_visual_setter_anchors"] = player_visual_setter
         result["interpretation"].append(
             "The sixty-fifth database revision also contains the separately reviewed player draw-rectangle and visual setter anchors."
+        )
+    player_movement = None
+    if args.player_movement_anchors or args.player_movement_verification:
+        if not args.player_movement_anchors or not args.player_movement_verification:
+            raise ValueError(
+                "player-movement anchors and player-movement verification must be supplied together"
+            )
+        player_movement_document = load(args.player_movement_anchors)
+        player_movement_verification = load(args.player_movement_verification)
+        if player_movement_document.get("artifact") != "spectron_player_movement_manual_translation_anchors_20260826":
+            raise ValueError("unexpected player-movement anchor artifact")
+        if not player_movement_verification.get("verified"):
+            raise ValueError("player-movement anchor reopen verification did not pass")
+        expected_player_movement = len(player_movement_document["anchors"])
+        if player_movement_verification["verified_name_count"] != expected_player_movement:
+            raise ValueError("player-movement verification count differs from artifact")
+        player_movement = {
+            "anchor_path": str(args.player_movement_anchors),
+            "anchor_sha256": sha256_path(args.player_movement_anchors),
+            "reopen_verification": str(args.player_movement_verification),
+            "anchor_count": expected_player_movement,
+            "verified_name_count": player_movement_verification["verified_name_count"],
+            "reopen_failure_count": player_movement_verification["failure_count"],
+        }
+    if player_movement is not None:
+        result["player_movement_anchors"] = player_movement
+        result["interpretation"].append(
+            "The sixty-sixth database revision also contains the separately reviewed player movement, item, and hurt-handling anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

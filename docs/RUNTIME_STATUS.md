@@ -900,6 +900,13 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_player_visual_setter_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+128. Clean IDA review added eight high-confidence player movement and
+     interaction anchors for stone actions, jump checks, movement dispatch,
+     item availability and loss, jump animation, and hurt handling. All eight
+     reopened successfully in the v68 disposable copy. See
+     `artifacts/spectron_player_movement_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
