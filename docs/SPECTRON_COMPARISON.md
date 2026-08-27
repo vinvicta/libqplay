@@ -3444,6 +3444,79 @@ functions. The v108 database has 1,684 remaining default `sub_` names. Its
 SHA-256 is
 `8350a43be6b31306954e34a17f77d742c8d1702015d671019d2bf2dd6c1bb1e1`.
 
+## Spectron TServerPlayer registration-table residuals
+
+The v163 pass resolves the next 25 `TServerPlayer` callbacks through the
+registration data rather than through target address order. The source
+`TServerPlayerProperties` table starts at `0x37ce00`; the Spectron table starts
+at `0x38fe60`. Both contain 52 records of `0x30` bytes, and their decoded
+property names are identical and in the same order. The getter pointer is at
+record offset `+0x10` and the setter pointer is at `+0x18`. The companion
+six-entry script-function tables are at `0x37d7c0` and `0x390820`, with the
+callback pointer at `+0x18`.
+
+This direct pointer evidence is important because the target reorders several
+image and text methods. The table records still identify the target callback
+even when the target body is far from the source-order neighbor.
+
+| 1.8 callback | Source | Spectron target | Registration evidence | New alias |
+| --- | ---: | ---: | --- | --- |
+| `TServerPlayer_script_PMsWaiting` | `0x18aa68` | `0x18f2c8` | function `pmswaiting`, index 2 | `v18_TServerPlayer_script_PMsWaiting` |
+| `TServerPlayer_script_openExternalHistory` | `0x18aa88` | `0x18f2e8` | function `openexternalhistory`, index 3 | `v18_TServerPlayer_script_openExternalHistory` |
+| `TServerPlayer_script_openExternalPM` | `0x18aa90` | `0x18f2f0` | function `openexternalpm`, index 4 | `v18_TServerPlayer_script_openExternalPM` |
+| `TServerPlayer_setSwordImg` | `0x18aac4` | `0x18f4b8` | property `swordimg`, index 48, setter | `v18_TServerPlayer_setSwordImg` |
+| `TServerPlayer_setShieldImg` | `0x18aacc` | `0x18f4c0` | property `shieldimg`, index 46, setter | `v18_TServerPlayer_setShieldImg` |
+| `TServerPlayer_setHorseImg` | `0x18aad4` | `0x18f324` | property `horseimg`, index 18, setter | `v18_TServerPlayer_setHorseImg` |
+| `TServerPlayer_getSwordImg` | `0x18aadc` | `0x18f4c8` | property `swordimg`, index 48, getter | `v18_TServerPlayer_getSwordImg` |
+| `TServerPlayer_getShieldImg` | `0x18ab0c` | `0x18f4f8` | property `shieldimg`, index 46, getter | `v18_TServerPlayer_getShieldImg` |
+| `TServerPlayer_getPlatform` | `0x18ab3c` | `0x18f32c` | property `platform`, index 40, getter | `v18_TServerPlayer_getPlatform` |
+| `TServerPlayer_getLevelName` | `0x18ab6c` | `0x18f528` | property `levelname`, index 34, getter | `v18_TServerPlayer_getLevelName` |
+| `TServerPlayer_getLanguage` | `0x18ab9c` | `0x18f35c` | property `language`, index 32, getter | `v18_TServerPlayer_getLanguage` |
+| `TServerPlayer_getHorseImg` | `0x18abcc` | `0x18f38c` | property `horseimg`, index 18, getter | `v18_TServerPlayer_getHorseImg` |
+| `TServerPlayer_getHeadOrHeadImg` | `0x18abfc` | `0x18f558` | properties `head` and `headimg`, indices 14 and 15, shared getter | `v18_TServerPlayer_getHeadOrHeadImg` |
+| `TServerPlayer_getGuild` | `0x18ac2c` | `0x18f3bc` | property `guild`, index 13, getter | `v18_TServerPlayer_getGuild` |
+| `TServerPlayer_getCommunityName` | `0x18ac5c` | `0x18f3ec` | property `communityname`, index 7, getter | `v18_TServerPlayer_getCommunityName` |
+| `TServerPlayer_getAccount` | `0x18ac8c` | `0x18f41c` | property `account`, index 0, getter | `v18_TServerPlayer_getAccount` |
+| `TServerPlayer_getChat` | `0x18acbc` | `0x18f44c` | property `chat`, index 6, getter | `v18_TServerPlayer_getChat` |
+| `TServerPlayer_getNick` | `0x18acec` | `0x18f47c` | property `nick`, index 38, getter | `v18_TServerPlayer_getNick` |
+| `TServerPlayer_getLanguageDomain` | `0x18ae24` | `0x18f654` | property `languagedomain`, index 33, getter | `v18_TServerPlayer_getLanguageDomain` |
+| `TServerPlayer_getHeadset` | `0x18ae48` | `0x18f678` | property `headset`, index 16, getter | `v18_TServerPlayer_getHeadset` |
+| `TServerPlayer_setChatOffset` | `0x18ae9c` | `0x18f6e4` | property `chatoffset`, index 8, setter | `v18_TServerPlayer_setChatOffset` |
+| `TServerPlayer_getChatOffset` | `0x18aec8` | `0x18f710` | property `chatoffset`, index 8, getter | `v18_TServerPlayer_getChatOffset` |
+| `TServerPlayer_script_showProfile` | `0x18aeec` | `0x18f734` | function `showprofile`, index 5 | `v18_TServerPlayer_script_showProfile` |
+| `TServerPlayer_setDarts` | `0x18b178` | `0x18fa44` | property `darts`, index 9, setter | `v18_TServerPlayer_setDarts` |
+| `TServerPlayer_setBombs` | `0x18b1a0` | `0x18fa6c` | property `bombs`, index 4, setter | `v18_TServerPlayer_setBombs` |
+
+The three script callbacks at `0x18f2c8..0x18f2f8` needed explicit target
+function boundaries before they could be labeled. Their target bodies then
+matched the 1.8 normalized fingerprints exactly. The other 20 exact-shape
+rows also matched every recorded metric. The headset getter and show-profile
+callback are high-confidence layout changes: their registration slots, string
+or event roles, and surrounding class context match, but the target bodies
+grow from 84 to 108 bytes and from 104 to 160 bytes respectively.
+
+Two nearby methods were intentionally kept out of the new alias list because
+their target bodies already have aliases from shared implementations:
+
+| 1.8 context row | Source | Spectron target | Existing alias |
+| --- | ---: | ---: | --- |
+| `TServerPlayer_getPlayersIndex` | `0x18ad58` | `0x18f588` | `v18_TServerNPC_getNPCsIndex` |
+| `TServerPlayer_getLogName_void` | `0x18af54` | `0x18f804` | `v18_TGraalAni_getLogName_void` |
+
+The address relocation is therefore recorded per row. It is not safe to infer
+one global offset for this class from the reordered methods. All 25 target
+functions had default names before the pass. The target aliases were applied
+in the v163 packed IDA copy at
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v163.i64`.
+The new anchor check and the full semantic reopen check both reported zero
+failures. The database contains 11,694 functions, 1,334 default `sub_` names,
+and 3,641 high-confidence semantic labels. Its SHA-256 is
+`a71091ea191f50791b1f5c74d11beb104b96fc828b80fee65ec4609ff9f2d6cb`.
+The complete table inventory, layout-change notes, shared context, and input
+hashes are in
+`artifacts/spectron_tserverplayer_residual_manual_translation_anchors_20260826.json`,
+generated by `tools/generate_spectron_tserverplayer_residual_anchors.py`.
+
 ## Spectron TServerPlayer property block
 
 The v161 pass translates a large ordered property block from the readable 1.8

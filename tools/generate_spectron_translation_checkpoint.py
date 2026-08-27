@@ -341,6 +341,8 @@ def main() -> None:
     parser.add_argument("--tplayer-flag-setter-verification", type=Path)
     parser.add_argument("--tserverplayer-property-block-anchors", type=Path)
     parser.add_argument("--tserverplayer-property-block-verification", type=Path)
+    parser.add_argument("--tserverplayer-residual-anchors", type=Path)
+    parser.add_argument("--tserverplayer-residual-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -4776,6 +4778,34 @@ def main() -> None:
         result["tserverplayer_property_block_anchors"] = tserverplayer_property_block
         result["interpretation"].append(
             "The one-hundred-sixty-first database revision also contains the separately reviewed exact-shape TServerPlayer property block."
+        )
+    tserverplayer_residual = None
+    if args.tserverplayer_residual_anchors or args.tserverplayer_residual_verification:
+        if not args.tserverplayer_residual_anchors or not args.tserverplayer_residual_verification:
+            raise ValueError(
+                "TServerPlayer residual anchors and verification must be supplied together"
+            )
+        tserverplayer_residual_document = load(args.tserverplayer_residual_anchors)
+        tserverplayer_residual_verification = load(args.tserverplayer_residual_verification)
+        if tserverplayer_residual_document.get("artifact") != "spectron_tserverplayer_residual_manual_translation_anchors_20260826":
+            raise ValueError("unexpected TServerPlayer residual artifact")
+        if not tserverplayer_residual_verification.get("verified"):
+            raise ValueError("TServerPlayer residual reopen verification did not pass")
+        expected_tserverplayer_residual = len(tserverplayer_residual_document["anchors"])
+        if tserverplayer_residual_verification["verified_name_count"] != expected_tserverplayer_residual:
+            raise ValueError("TServerPlayer residual verification count differs from artifact")
+        tserverplayer_residual = {
+            "anchor_path": str(args.tserverplayer_residual_anchors),
+            "anchor_sha256": sha256_path(args.tserverplayer_residual_anchors),
+            "reopen_verification": str(args.tserverplayer_residual_verification),
+            "anchor_count": expected_tserverplayer_residual,
+            "verified_name_count": tserverplayer_residual_verification["verified_name_count"],
+            "reopen_failure_count": tserverplayer_residual_verification["failure_count"],
+        }
+    if tserverplayer_residual is not None:
+        result["tserverplayer_residual_anchors"] = tserverplayer_residual
+        result["interpretation"].append(
+            "The one-hundred-sixty-third database revision also contains the separately reviewed TServerPlayer registration-table callback anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

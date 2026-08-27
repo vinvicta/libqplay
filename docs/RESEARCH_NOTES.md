@@ -5172,6 +5172,102 @@ and zero failures across 11,679 functions. The v108 database has 1,684
 remaining default `sub_` names. Its SHA-256 is
 `8350a43be6b31306954e34a17f77d742c8d1702015d671019d2bf2dd6c1bb1e1`.
 
+## 2026-08-27: Spectron TServerPlayer registration-table residuals
+
+The v163 pass resolves the next group of residual `TServerPlayer` methods by
+reading the static registration tables in both libraries. This is a stronger
+anchor than copying the source address order because the Spectron build moves
+several image and text methods around inside the obfuscated `MpGzgariDy`
+class.
+
+The source property table begins at `0x37ce00` and the target table begins at
+`0x38fe60`. Each has 52 records of `0x30` bytes. The name pointer is at record
+offset `+0x0`, the flags are at `+0x8`, the getter is at `+0x10`, and the
+setter is at `+0x18`. The shared property-name list is:
+
+`account`, `ap`, `attached`, `attachedtoobject`, `bombs`, `isbuddy`, `chat`,
+`communityname`, `chatoffset`, `darts`, `fullhearts`, `glovepower`, `gralats`,
+`guild`, `head`, `headimg`, `headset`, `hearts`, `horseimg`, `hp`, `id`,
+`isadmin`, `isblocking`, `ischannel`, `ischannelopen`, `ischanneluser`,
+`isexternal`, `isfemale`, `isignored`, `isignoring`, `isloggedin`, `ismale`,
+`language`, `languagedomain`, `levelname`, `maxhp`, `messagebubble`, `mp`,
+`nick`, `paused`, `platform`, `playerlisticon`, `playersindex`, `rating`,
+`ratingd`, `rupees`, `shieldimg`, `shieldpower`, `swordimg`, `swordpower`,
+`x`, and `y`.
+
+The companion script-function tables begin at `0x37d7c0` and `0x390820` and
+contain the same six decoded names: `isguildpm`, `ismasspm`, `pmswaiting`,
+`openexternalhistory`, `openexternalpm`, and `showprofile`. Their callback
+pointer is the `+0x18` field in each `0x30`-byte record.
+
+The 25 new aliases are:
+
+| Source method | 1.8 address | Spectron address | Table proof |
+| --- | ---: | ---: | --- |
+| `TServerPlayer_script_PMsWaiting` | `0x18aa68` | `0x18f2c8` | `pmswaiting`, function index 2 |
+| `TServerPlayer_script_openExternalHistory` | `0x18aa88` | `0x18f2e8` | `openexternalhistory`, function index 3 |
+| `TServerPlayer_script_openExternalPM` | `0x18aa90` | `0x18f2f0` | `openexternalpm`, function index 4 |
+| `TServerPlayer_setSwordImg` | `0x18aac4` | `0x18f4b8` | `swordimg`, property index 48, setter |
+| `TServerPlayer_setShieldImg` | `0x18aacc` | `0x18f4c0` | `shieldimg`, property index 46, setter |
+| `TServerPlayer_setHorseImg` | `0x18aad4` | `0x18f324` | `horseimg`, property index 18, setter |
+| `TServerPlayer_getSwordImg` | `0x18aadc` | `0x18f4c8` | `swordimg`, property index 48, getter |
+| `TServerPlayer_getShieldImg` | `0x18ab0c` | `0x18f4f8` | `shieldimg`, property index 46, getter |
+| `TServerPlayer_getPlatform` | `0x18ab3c` | `0x18f32c` | `platform`, property index 40, getter |
+| `TServerPlayer_getLevelName` | `0x18ab6c` | `0x18f528` | `levelname`, property index 34, getter |
+| `TServerPlayer_getLanguage` | `0x18ab9c` | `0x18f35c` | `language`, property index 32, getter |
+| `TServerPlayer_getHorseImg` | `0x18abcc` | `0x18f38c` | `horseimg`, property index 18, getter |
+| `TServerPlayer_getHeadOrHeadImg` | `0x18abfc` | `0x18f558` | `head` and `headimg`, indices 14 and 15, shared getter |
+| `TServerPlayer_getGuild` | `0x18ac2c` | `0x18f3bc` | `guild`, property index 13, getter |
+| `TServerPlayer_getCommunityName` | `0x18ac5c` | `0x18f3ec` | `communityname`, property index 7, getter |
+| `TServerPlayer_getAccount` | `0x18ac8c` | `0x18f41c` | `account`, property index 0, getter |
+| `TServerPlayer_getChat` | `0x18acbc` | `0x18f44c` | `chat`, property index 6, getter |
+| `TServerPlayer_getNick` | `0x18acec` | `0x18f47c` | `nick`, property index 38, getter |
+| `TServerPlayer_getLanguageDomain` | `0x18ae24` | `0x18f654` | `languagedomain`, property index 33, getter |
+| `TServerPlayer_getHeadset` | `0x18ae48` | `0x18f678` | `headset`, property index 16, getter |
+| `TServerPlayer_setChatOffset` | `0x18ae9c` | `0x18f6e4` | `chatoffset`, property index 8, setter |
+| `TServerPlayer_getChatOffset` | `0x18aec8` | `0x18f710` | `chatoffset`, property index 8, getter |
+| `TServerPlayer_script_showProfile` | `0x18aeec` | `0x18f734` | `showprofile`, function index 5 |
+| `TServerPlayer_setDarts` | `0x18b178` | `0x18fa44` | `darts`, property index 9, setter |
+| `TServerPlayer_setBombs` | `0x18b1a0` | `0x18fa6c` | `bombs`, property index 4, setter |
+
+The three first target callbacks required boundary materialization. IDA now
+records `0x18f2c8..0x18f2e8`, `0x18f2e8..0x18f2f0`, and
+`0x18f2f0..0x18f2f8` as separate functions. Their shapes are 32/8/3/3/0,
+8/2/1/1/0, and 8/2/1/1/0 for bytes, instructions, basic blocks, branches,
+and calls. The table entries independently distinguish the two identical
+eight-byte callbacks.
+
+Twenty-three rows have identical complete normalized fingerprints, including
+the string-reference digest. Two are controlled layout changes. The headset
+getter grows from 84 bytes, 20 instructions, four branches, and three calls to
+108 bytes, 27 instructions, six branches, and five calls. The show-profile
+callback grows from 104 bytes, 26 instructions, three blocks, five branches,
+and three calls to 160 bytes, 39 instructions, three blocks, nine branches,
+and seven calls. Both retain the expected registration slot. The headset row
+also retains the `head` string reference, while the show-profile row retains
+the profile event role even though the target no longer exposes the same
+literal through IDA's data-reference pass.
+
+Two related source rows are preserved as shared context. Source
+`TServerPlayer_getPlayersIndex` at `0x18ad58` points to target `0x18f588`,
+which already carries `v18_TServerNPC_getNPCsIndex`. Source
+`TServerPlayer_getLogName_void` at `0x18af54` points to target `0x18f804`,
+which already carries `v18_TGraalAni_getLogName_void`. The artifact checks the
+shared target names and complete fingerprints, but intentionally does not
+rename either target a second time.
+
+All 25 new target functions had default names before application. The aliases
+were applied and reopened in
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v163.i64`.
+The database contains 11,694 functions and 1,334 remaining default `sub_`
+names. The full semantic map still contains 3,641 high-confidence labels and
+reopens with zero failures. The database SHA-256 is
+`a71091ea191f50791b1f5c74d11beb104b96fc828b80fee65ec4609ff9f2d6cb`.
+The generator is
+`tools/generate_spectron_tserverplayer_residual_anchors.py`, and the complete
+review record is
+`artifacts/spectron_tserverplayer_residual_manual_translation_anchors_20260826.json`.
+
 ## 2026-08-27: Spectron TServerPlayer property block
 
 The v161 pass revisits the residual `TServerPlayer` methods as an ordered

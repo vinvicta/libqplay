@@ -1428,6 +1428,21 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+221. The next IDA pass translated 25 residual `TServerPlayer` callbacks from
+    the shared 52-entry property table and six-entry script-function table.
+    The source and target tables preserve the same decoded names, which
+    resolves the target reorder around image and text accessors. Twenty-three
+    pairs have exact normalized fingerprints. The headset getter and
+    show-profile callback are high-confidence layout changes, and three small
+    script callbacks were given explicit target boundaries before labeling.
+    Two shared implementations, the player index and log name helpers, kept
+    their existing aliases. All 25 labels reopened successfully in the v163
+    disposable copy, which has 11,694 functions and 1,334 default `sub_`
+    names. See
+    `artifacts/spectron_tserverplayer_residual_manual_translation_anchors_20260826.json`,
+    `tools/generate_spectron_tserverplayer_residual_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 220. The next IDA pass translated 39 exact-shape residual methods from the
     ordered `TServerPlayer` property block. Four existing v18 labels were used
     as sequence checkpoints for the paused, combat, attachment, chat, and MP
