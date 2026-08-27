@@ -331,6 +331,8 @@ def main() -> None:
     parser.add_argument("--cyaint-tls-residual-verification", type=Path)
     parser.add_argument("--cyaint-tls-residual-v2-anchors", type=Path)
     parser.add_argument("--cyaint-tls-residual-v2-verification", type=Path)
+    parser.add_argument("--tserverplayer-accessor-anchors", type=Path)
+    parser.add_argument("--tserverplayer-accessor-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -4626,6 +4628,34 @@ def main() -> None:
         result["cyaint_tls_residual_v2_anchors"] = cyaint_tls_residual_v2
         result["interpretation"].append(
             "The one-hundred-fifty-sixth database revision also contains the separately reviewed second exact-shape CyaInt TLS and cryptography residual batch."
+        )
+    tserverplayer_accessor = None
+    if args.tserverplayer_accessor_anchors or args.tserverplayer_accessor_verification:
+        if not args.tserverplayer_accessor_anchors or not args.tserverplayer_accessor_verification:
+            raise ValueError(
+                "TServerPlayer accessor anchors and verification must be supplied together"
+            )
+        tserverplayer_accessor_document = load(args.tserverplayer_accessor_anchors)
+        tserverplayer_accessor_verification = load(args.tserverplayer_accessor_verification)
+        if tserverplayer_accessor_document.get("artifact") != "spectron_tserverplayer_accessor_manual_translation_anchors_20260826":
+            raise ValueError("unexpected TServerPlayer accessor artifact")
+        if not tserverplayer_accessor_verification.get("verified"):
+            raise ValueError("TServerPlayer accessor reopen verification did not pass")
+        expected_tserverplayer_accessor = len(tserverplayer_accessor_document["anchors"])
+        if tserverplayer_accessor_verification["verified_name_count"] != expected_tserverplayer_accessor:
+            raise ValueError("TServerPlayer accessor verification count differs from artifact")
+        tserverplayer_accessor = {
+            "anchor_path": str(args.tserverplayer_accessor_anchors),
+            "anchor_sha256": sha256_path(args.tserverplayer_accessor_anchors),
+            "reopen_verification": str(args.tserverplayer_accessor_verification),
+            "anchor_count": expected_tserverplayer_accessor,
+            "verified_name_count": tserverplayer_accessor_verification["verified_name_count"],
+            "reopen_failure_count": tserverplayer_accessor_verification["failure_count"],
+        }
+    if tserverplayer_accessor is not None:
+        result["tserverplayer_accessor_anchors"] = tserverplayer_accessor
+        result["interpretation"].append(
+            "The one-hundred-fifty-seventh database revision also contains the separately reviewed exact-shape TServerPlayer scalar accessor block."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

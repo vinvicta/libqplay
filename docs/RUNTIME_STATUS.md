@@ -1428,6 +1428,15 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+216. The next IDA pass translated the 37-function scalar getter and setter
+    block at the front of `TServerPlayer`. The target `MpGzgariDy` block keeps
+    the same alternating order and exact normalized fingerprints. Its code
+    addresses are source plus `0x47e8`, and its object fields are source plus
+    24 bytes. All 37 labels reopened successfully in the v157 disposable copy,
+    which has 11,693 functions and 1,396 default `sub_` names. See
+    `artifacts/spectron_tserverplayer_accessor_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 215. The follow-up IDA pass translated the remaining 53 exact-shape `CyaInt`
     methods. Combined with the preceding 30-row batch, every one of the 266
     named `CyaInt` methods in the original feature export now has a reviewed

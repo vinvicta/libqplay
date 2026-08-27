@@ -518,6 +518,9 @@ def main():
     spectron_cyaint_tls_residual_v2_anchors = load_json(
         "artifacts/spectron_cyaint_tls_residual_v2_manual_translation_anchors_20260826.json"
     )
+    spectron_tserverplayer_accessor_anchors = load_json(
+        "artifacts/spectron_tserverplayer_accessor_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2892,6 +2895,20 @@ def main():
     check("Spectron CyaInt TLS residual v2 layout-change count", spectron_cyaint_tls_residual_v2_anchors["summary"]["layout_change_anchor_count"], 0)
     check("Spectron CyaInt TLS residual v2 relocation", spectron_cyaint_tls_residual_v2_anchors["summary"]["constant_target_delta"], "+0xd590")
     check(
+        "Spectron TServerPlayer accessor artifact",
+        spectron_tserverplayer_accessor_anchors["artifact"],
+        "spectron_tserverplayer_accessor_manual_translation_anchors_20260826",
+    )
+    check("Spectron TServerPlayer accessor network", spectron_tserverplayer_accessor_anchors["network_contacted"], False)
+    check("Spectron TServerPlayer accessor total", spectron_tserverplayer_accessor_anchors["summary"]["anchor_count"], 37)
+    check("Spectron TServerPlayer accessor high confidence", spectron_tserverplayer_accessor_anchors["summary"]["high_confidence_count"], 37)
+    check("Spectron TServerPlayer accessor semantic overlap", spectron_tserverplayer_accessor_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron TServerPlayer accessor default targets", spectron_tserverplayer_accessor_anchors["summary"]["target_default_name_count"], 0)
+    check("Spectron TServerPlayer accessor exact-shape count", spectron_tserverplayer_accessor_anchors["summary"]["exact_shape_anchor_count"], 37)
+    check("Spectron TServerPlayer accessor layout-change count", spectron_tserverplayer_accessor_anchors["summary"]["layout_change_anchor_count"], 0)
+    check("Spectron TServerPlayer accessor address relocation", spectron_tserverplayer_accessor_anchors["summary"]["constant_target_delta"], "+0x47e8")
+    check("Spectron TServerPlayer accessor field relocation", spectron_tserverplayer_accessor_anchors["summary"]["constant_field_offset_delta"], 24)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -3053,7 +3070,8 @@ def main():
     check("Spectron checkpoint GSFunctionsClient exact residual v4 anchor count", spectron_checkpoint["gsfunctions_client_exact_residual_v4_anchors"]["verified_name_count"], 11)
     check("Spectron checkpoint CyaInt TLS residual anchor count", spectron_checkpoint["cyaint_tls_residual_anchors"]["verified_name_count"], 30)
     check("Spectron checkpoint CyaInt TLS residual v2 anchor count", spectron_checkpoint["cyaint_tls_residual_v2_anchors"]["verified_name_count"], 53)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "addc91603c90f9dff6653fcf9d18dd636731237585549f4461efe7a6f7a6bd91")
+    check("Spectron checkpoint TServerPlayer accessor anchor count", spectron_checkpoint["tserverplayer_accessor_anchors"]["verified_name_count"], 37)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "6daaa47e8ee98b08a5e447e86790b3e05f5828fa0cfb0d9e97f99e7b857ca3fc")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
