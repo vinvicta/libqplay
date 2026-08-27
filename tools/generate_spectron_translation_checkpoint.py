@@ -193,6 +193,8 @@ def main() -> None:
     parser.add_argument("--gui-button-types-verification", type=Path)
     parser.add_argument("--gui-alignment-tables-anchors", type=Path)
     parser.add_argument("--gui-alignment-tables-verification", type=Path)
+    parser.add_argument("--gui-stretch-modes-anchors", type=Path)
+    parser.add_argument("--gui-stretch-modes-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
     parser.add_argument("--server-animation-verification", type=Path)
     parser.add_argument("--player-lifecycle-anchors", type=Path)
@@ -2640,6 +2642,48 @@ def main() -> None:
         result["gui_alignment_tables_anchors"] = gui_alignment_tables
         result["interpretation"].append(
             "The one-hundred-ninety-second database revision also contains the separately reviewed GuiGraalCtrl horizontal and vertical alignment-table initializer anchor."
+        )
+    gui_stretch_modes = None
+    if args.gui_stretch_modes_anchors or args.gui_stretch_modes_verification:
+        if not args.gui_stretch_modes_anchors or not args.gui_stretch_modes_verification:
+            raise ValueError(
+                "GUI stretch-mode anchors and verification must be supplied together"
+            )
+        gui_stretch_modes_document = load(args.gui_stretch_modes_anchors)
+        gui_stretch_modes_verification = load(args.gui_stretch_modes_verification)
+        if (
+            gui_stretch_modes_document.get("artifact")
+            != "spectron_gui_stretch_modes_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected GUI stretch-mode anchor artifact")
+        if not gui_stretch_modes_verification.get("verified"):
+            raise ValueError(
+                "GUI stretch-mode anchor reopen verification did not pass"
+            )
+        expected_gui_stretch_modes = len(gui_stretch_modes_document["anchors"])
+        if (
+            gui_stretch_modes_verification["verified_name_count"]
+            != expected_gui_stretch_modes
+        ):
+            raise ValueError(
+                "GUI stretch-mode verification count differs from artifact"
+            )
+        gui_stretch_modes = {
+            "anchor_path": str(args.gui_stretch_modes_anchors),
+            "anchor_sha256": sha256_path(args.gui_stretch_modes_anchors),
+            "reopen_verification": str(args.gui_stretch_modes_verification),
+            "anchor_count": expected_gui_stretch_modes,
+            "verified_name_count": gui_stretch_modes_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": gui_stretch_modes_verification[
+                "failure_count"
+            ],
+        }
+    if gui_stretch_modes is not None:
+        result["gui_stretch_modes_anchors"] = gui_stretch_modes
+        result["interpretation"].append(
+            "The one-hundred-ninety-third database revision also contains the separately reviewed GuiStretchCtrl mode-table initializer anchor."
         )
     server_animation = None
     if args.server_animation_anchors or args.server_animation_verification:

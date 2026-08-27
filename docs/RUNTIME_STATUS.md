@@ -1482,6 +1482,18 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_particle_emitter_script_vars_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+252. The next IDA pass translated the `GuiStretchCtrl` mode-table initializer.
+    Source `sub_E0960` at `0xe0960` maps to target `sub_E0E54` at `0xe0e54`,
+    preserving the `alwaysOn`, `alwaysOff`, and `dynamic` table and the
+    adjacent three-record `GuiStretchCtrl` property table. The target adds
+    one adjacent `CanTfaz6bZ` string and cleanup callback, so this is a
+    high-confidence layout-change match. The v193 copy has 11,694 functions,
+    3,641 high-confidence labels, and 1,226 default `sub_` names, with zero
+    semantic reopen failures. See
+    `artifacts/spectron_gui_stretch_modes_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_gui_stretch_modes_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 251. The next IDA pass translated the `GuiGraalCtrl` alignment-table
     initializer. Source `sub_E0930` at `0xe0930` maps to target `sub_E0DAC`
     at `0xe0dac`, preserving the five-entry horizontal and vertical tables,
