@@ -616,6 +616,14 @@ reopened successfully. The evidence is in
 `artifacts/spectron_script_executor_manual_translation_anchors_20260826.json`,
 and the v51 database SHA-256 is recorded in the checkpoint.
 
+A fiftieth disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v52.i64`,
+adds nine reviewed GS2 script-property anchors covering typed reads, typed
+writes, property construction, cloning, and property or function registration.
+All nine reopened successfully. The evidence is in
+`artifacts/spectron_script_property_manual_translation_anchors_20260826.json`,
+and the v52 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and

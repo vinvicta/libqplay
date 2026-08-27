@@ -123,6 +123,8 @@ def main() -> None:
     parser.add_argument("--tokenizer-verification", type=Path)
     parser.add_argument("--script-executor-anchors", type=Path)
     parser.add_argument("--script-executor-verification", type=Path)
+    parser.add_argument("--script-property-anchors", type=Path)
+    parser.add_argument("--script-property-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1506,6 +1508,34 @@ def main() -> None:
         result["script_executor_anchors"] = script_executor
         result["interpretation"].append(
             "The forty-ninth database revision also contains the separately reviewed GS2 bytecode execution-loop anchor."
+        )
+    script_property = None
+    if args.script_property_anchors or args.script_property_verification:
+        if not args.script_property_anchors or not args.script_property_verification:
+            raise ValueError(
+                "script-property anchors and script-property verification must be supplied together"
+            )
+        script_property_document = load(args.script_property_anchors)
+        script_property_verification = load(args.script_property_verification)
+        if script_property_document.get("artifact") != "spectron_script_property_manual_translation_anchors_20260826":
+            raise ValueError("unexpected script-property anchor artifact")
+        if not script_property_verification.get("verified"):
+            raise ValueError("script-property anchor reopen verification did not pass")
+        expected_script_property = len(script_property_document["anchors"])
+        if script_property_verification["verified_name_count"] != expected_script_property:
+            raise ValueError("script-property verification count differs from artifact")
+        script_property = {
+            "anchor_path": str(args.script_property_anchors),
+            "anchor_sha256": sha256_path(args.script_property_anchors),
+            "reopen_verification": str(args.script_property_verification),
+            "anchor_count": expected_script_property,
+            "verified_name_count": script_property_verification["verified_name_count"],
+            "reopen_failure_count": script_property_verification["failure_count"],
+        }
+    if script_property is not None:
+        result["script_property_anchors"] = script_property
+        result["interpretation"].append(
+            "The fiftieth database revision also contains the separately reviewed GS2 typed property access and registration anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

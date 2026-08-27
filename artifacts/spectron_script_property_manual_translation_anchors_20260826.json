@@ -1,0 +1,385 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both dispatch on the same property type letters b, c, d, f, i, o, s, and u, with a separate universe-object calling convention.",
+        "Both convert boolean, numeric, object, and string results into the supplied string object, preserve the true and false literals, and return an empty string for unsupported or missing accessors. The target grows from 516 to 552 bytes while retaining 29 basic blocks."
+      ],
+      "match_kind": "manual-script-property-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x224ac0",
+      "original_metrics": {
+        "basic_block_count": 29,
+        "instruction_count": 125,
+        "mnemonic_hash": "34e79282a45d603e5a4cd00feab85fd3b5a56955492bb8b65c85dc4fa98989f3",
+        "register_shape_hash": "37c7fc1ac5c1d760cf7c0ef87608fb6902b4494578f27415b43ab832864319b5",
+        "shape_hash": "4655c8d94f130a1a079e2d994fb863ec958e92caee2ef9ff711fbbc10c8da540",
+        "size": 516
+      },
+      "original_name": "TScriptProperty_readString_TGraalVar",
+      "original_string_refs": [
+        "false",
+        "true"
+      ],
+      "proposed_name": "v18_TScriptProperty_readString_TGraalVar",
+      "semantic_match_already_present": false,
+      "source_basis": "script property string read conversion",
+      "spectron_current_name": "_ZN10cWWYfaxbT210VkenganG9nEP10G0gxgajWBw",
+      "spectron_default_name": false,
+      "spectron_ea": "0x22d168",
+      "spectron_metrics": {
+        "basic_block_count": 29,
+        "instruction_count": 134,
+        "mnemonic_hash": "a45e59d9db0f5250dc3dcf3ebf6f3c12c11b6a464f51d186030a29c1030fd4b0",
+        "register_shape_hash": "8a0fbb628b061df40681008411766b6e3515d5873ebf6204bff01772c4044648",
+        "shape_hash": "179ceb4d3792602f455f4228ac5bd948d9cd5a4c0ed76299d99e346ae991dcb3",
+        "size": 552
+      },
+      "spectron_string_refs": [
+        "false",
+        "true"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both dispatch the incoming floating-point value through the same property type table, including boolean, string, double, float, integer, object, and unsigned-integer cases.",
+        "Both handle the universe object separately, normalize small values to the string '0', and report writes to read-only properties through the script-space error path. The target grows from 1252 to 1320 bytes while retaining 61 basic blocks."
+      ],
+      "match_kind": "manual-script-property-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x224cc4",
+      "original_metrics": {
+        "basic_block_count": 61,
+        "instruction_count": 310,
+        "mnemonic_hash": "8452dcd67c4411f9c01a6346bb77f8ce3e14b6ab9f964678ea797995f3f1e6f5",
+        "register_shape_hash": "5eb2e562566f6336eff1ae59372609c2e21ed614ba6dc6ef63c74db25d50344d",
+        "shape_hash": "9fbc424d8fbe9fc90f471c075189c6fbb4ba03678b14e74cf987c72062e03603",
+        "size": 1252
+      },
+      "original_name": "TScriptProperty_writeFloat_TGraalVar_double",
+      "original_string_refs": [
+        " (",
+        ")",
+        "0",
+        "Write to read-only var "
+      ],
+      "proposed_name": "v18_TScriptProperty_writeFloat_TGraalVar_double",
+      "semantic_match_already_present": false,
+      "source_basis": "script property floating-point write conversion",
+      "spectron_current_name": "_ZN10cWWYfaxbT210JGEjIaHQ8TEP10G0gxgajWBwd",
+      "spectron_default_name": false,
+      "spectron_ea": "0x22d390",
+      "spectron_metrics": {
+        "basic_block_count": 61,
+        "instruction_count": 327,
+        "mnemonic_hash": "91824bc6a409bcf83711de5fab86206ebc633e33bfcb2c7c033ce285d5964ce6",
+        "register_shape_hash": "498197af3712b55e0c52fd630c3bf4b6fd954b4095cabc81873ff5d62b4492a2",
+        "shape_hash": "9255896202937bf44710825229148ad124aa80e1561d5db8ef64db5cb643195f",
+        "size": 1320
+      },
+      "spectron_string_refs": [
+        " (",
+        "0",
+        "Write to read-only var "
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both parse a string input according to the same property type letters, including boolean text, numeric conversion, object forwarding, and direct string assignment.",
+        "Both preserve the universe-object and ordinary-object branches, forward read-only writes to the owning object when available, and otherwise build the same diagnostic. The target grows from 1092 to 1196 bytes while retaining 43 basic blocks."
+      ],
+      "match_kind": "manual-script-property-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x2251b0",
+      "original_metrics": {
+        "basic_block_count": 43,
+        "instruction_count": 270,
+        "mnemonic_hash": "9ace8c3435fc522e25f3291245800f071e89347c92b71ee2f2c18e1983eda6fe",
+        "register_shape_hash": "cb4832cc12aaf6a10341dc8ffb0cc8db51240d49bcc2e8d8816dd2223525bc60",
+        "shape_hash": "fe5e5154a823c261b1a3c1416c880fbcd5e60f12eeaf054e8fe8d916d9ed1ef6",
+        "size": 1092
+      },
+      "original_name": "TScriptProperty_writeString_TGraalVar_TString_const",
+      "original_string_refs": [
+        " (",
+        ")",
+        "Write to read-only var ",
+        "false",
+        "true"
+      ],
+      "proposed_name": "v18_TScriptProperty_writeString_TGraalVar_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "script property string write conversion",
+      "spectron_current_name": "_ZN10cWWYfaxbT210m6pngaXzjoEP10G0gxgajWBwRK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x22d8c0",
+      "spectron_metrics": {
+        "basic_block_count": 43,
+        "instruction_count": 296,
+        "mnemonic_hash": "2d9e45520cf591c16c84e9fd47692a17bcd0887f625f0cc72b4b9b08c6038e82",
+        "register_shape_hash": "67acc1d61f2105b3a99bcae42d7d3b65f29371cf8718773fbb18e545a67d1d2d",
+        "shape_hash": "ab0451e5d3e582f6d4bf76531f32b8978ba2c81fddf553bb8807aeaefa55e95a",
+        "size": 1196
+      },
+      "spectron_string_refs": [
+        " (",
+        "Write to read-only var ",
+        "false",
+        "true"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both dispatch an incoming Graal variable through the same typed property cases, using float, object, string, and scalar conversion helpers as appropriate.",
+        "Both create a temporary property object for unresolved access, forward read-only writes to the owning object when possible, and use the same script-space diagnostic fallback. The target grows from 1344 to 1620 bytes while retaining 61 basic blocks."
+      ],
+      "match_kind": "manual-script-property-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x2255f4",
+      "original_metrics": {
+        "basic_block_count": 61,
+        "instruction_count": 333,
+        "mnemonic_hash": "e9b2668fb82e575ac7b3de50bebb096860508d19ba6d0effc2185163f7f5625f",
+        "register_shape_hash": "f21d650e45aa8245df76faca1cf8c98614f9a67dc0e3d73a8b8f508b6ed21760",
+        "shape_hash": "d0956a1babe5e9b27681b796c042a0d622f67f0b5a3f57039cc5b23ec43d67e1",
+        "size": 1344
+      },
+      "original_name": "TScriptProperty_writeObject_TGraalVar_TGraalVar",
+      "original_string_refs": [
+        " (",
+        ")",
+        "Write to read-only var "
+      ],
+      "proposed_name": "v18_TScriptProperty_writeObject_TGraalVar_TGraalVar",
+      "semantic_match_already_present": false,
+      "source_basis": "script property object write conversion",
+      "spectron_current_name": "_ZN10cWWYfaxbT210Cu3DMaoyjxEP10G0gxgajWBwS1_",
+      "spectron_default_name": false,
+      "spectron_ea": "0x22dd6c",
+      "spectron_metrics": {
+        "basic_block_count": 61,
+        "instruction_count": 402,
+        "mnemonic_hash": "c3866edc2d89189d396821519aa42567fcbcad425dc485829b90bf64948ca553",
+        "register_shape_hash": "620bc0a310e031c0d136936dd2c9c6f83c083016f6e574b5cf8ec8be09248b52",
+        "shape_hash": "6636be69d3c538f798337fd8fb221bcbd87e8b1c49cface92f7c7a54a426f374",
+        "size": 1620
+      },
+      "spectron_string_refs": [
+        " (",
+        "Write to read-only var "
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both construct the property base object from a string name and encoded-name flag, initialize the same accessor and ownership fields, and install the property vtable.",
+        "Both normalize the name through the encoded or lowercase path before storing it, with four basic blocks in each decompilation. The target expands from 160 to 224 bytes because its string and hash helpers are inlined differently."
+      ],
+      "match_kind": "manual-script-property-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x225f68",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "instruction_count": 40,
+        "mnemonic_hash": "bfb925703811df25d6d1623455ebd82bd5b54ad8f4695a1b0cd9051afc9f51f8",
+        "register_shape_hash": "84e168eee2fd65d9ae93f203002c6f2aa2a93805907cfdb0c3059858eea5e640",
+        "shape_hash": "cbebfce06303e61f864778483e2433027b5b50b40a123d6c9709fd6bd5c0ba6e",
+        "size": 160
+      },
+      "original_name": "TScriptProperty_TScriptProperty_TString_const_bool",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptProperty_TScriptProperty_TString_const_bool",
+      "semantic_match_already_present": false,
+      "source_basis": "script property construction",
+      "spectron_current_name": "_ZN10cWWYfaxbT2C2ERK10C8THgaTQxFb",
+      "spectron_default_name": false,
+      "spectron_ea": "0x22e86c",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "instruction_count": 56,
+        "mnemonic_hash": "d373fdcbecdaa2b16fd0548af5047eb7eeca8af09bb315fe76f40d4435df3fd4",
+        "register_shape_hash": "17491bda3966c7221464c82ea1c77dec05599a2c4092863c57a002b404a330ec",
+        "shape_hash": "ef237b63237a2de3fe67a922aa70f43d283312465c414cf81ba1034f5938122b",
+        "size": 224
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both allocate a new property object, copy the base name and all accessor fields, and preserve the type, flags, owning properties object, and function metadata.",
+        "The clone remains a single straight-line block in both builds and changes only from 152 to 148 bytes, with the target retaining the expected clone symbol fragment."
+      ],
+      "match_kind": "manual-script-property-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x226008",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 38,
+        "mnemonic_hash": "67e33f8e14d7d1ae9e27b01e7b9ae5ff01d695377bf817e95bcc6db2c8d92977",
+        "register_shape_hash": "ce79bf3846aef9dad670ca5bc0159bc9a020efabad9025a369dad2502abfd323",
+        "shape_hash": "79bcd7ea4c0011949901344646f586abb9cf7b8bbefa6fe233b39412c34305b7",
+        "size": 152
+      },
+      "original_name": "TScriptProperty_clone_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptProperty_clone_void",
+      "semantic_match_already_present": false,
+      "source_basis": "script property clone",
+      "spectron_current_name": "_ZN10cWWYfaxbT25cloneEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x22e94c",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 37,
+        "mnemonic_hash": "aa4ceacfbce72a4e00cd2e6909208147629b0f1c0dbc9e38cd1382fe1b0d8a9d",
+        "register_shape_hash": "c966954d1a7390e994268663d7aac389343f4d56126942554c06e0986013a873",
+        "shape_hash": "1df3a80cd71d274e0e9b3d6ee929c2db7e90b11070ac46a989de2300d1affa43",
+        "size": 148
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both iterate property definitions, select encoded or case-insensitive lookup, replace typed property subclasses, create the universe property table when needed, and update inherited property metadata.",
+        "Both lower unresolved names before creating the base property and then call the property setter with the supplied read accessor and metadata. The target grows from 948 to 1336 bytes while preserving the two registration paths."
+      ],
+      "match_kind": "manual-script-property-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x2260dc",
+      "original_metrics": {
+        "basic_block_count": 32,
+        "instruction_count": 237,
+        "mnemonic_hash": "bdfeb338bcf6c73d913908574cbb92e4a7956ff7ce7cc80bdb8d6689a469fdcc",
+        "register_shape_hash": "4925158ca13cdeda0d31f18d2df49712ff762690eb8a99972327a627e684a8a1",
+        "shape_hash": "3c3582001b2e36b7280e4ab6eae105d59db766e691c3228561bfe3435c0bb983",
+        "size": 948
+      },
+      "original_name": "TScriptProperty_addProps_TProperties_TPropertyPropDef_int",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptProperty_addProps_TProperties_TPropertyPropDef_int",
+      "semantic_match_already_present": false,
+      "source_basis": "script property definition registration",
+      "spectron_current_name": "_ZN10cWWYfaxbT210hFWn2apYKCEP10c76BgaJBGAP10C7do2a8u_Ci",
+      "spectron_default_name": false,
+      "spectron_ea": "0x22ea1c",
+      "spectron_metrics": {
+        "basic_block_count": 38,
+        "instruction_count": 334,
+        "mnemonic_hash": "1f3a2b28f1ea07b49b4efc57665a11e38df1e92630040cd364c31d18ed84c63f",
+        "register_shape_hash": "7488773653f707b502fad6f8a8bb70512949dffb0c0a85a30b16a84a2fb6fb31",
+        "shape_hash": "42aba3d501f3148b419ceb56bed8d22e3b2b034c2d2d5b4e8c1e63e306123c4c",
+        "size": 1336
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both initialize the owning properties object, function type, setter and getter pointers, encoded-name flag, and the same adventure_ and tclient_ prefix guards.",
+        "Both derive the real property name, classify the property as client or adventure scoped, and enable the same readonly behavior when the caller did not force it. The source and target each have 28 basic blocks and 500 bytes of function body."
+      ],
+      "match_kind": "manual-script-property-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x2264b4",
+      "original_metrics": {
+        "basic_block_count": 28,
+        "instruction_count": 122,
+        "mnemonic_hash": "6efcbc7b9d130aa06d99f9bc255f9ab3d324d4349a3c238feb8d953617695ae9",
+        "register_shape_hash": "b5b4e5a430120435135f8fcd30719ed49d176ebf9167385254a4b27eeee97307",
+        "shape_hash": "4fd1f7b9c0b7d8c4113addd6967114ba52d2fe87f508e7b81a697c9a08864df6",
+        "size": 500
+      },
+      "original_name": "TScriptProperty_setFunction_TProperties_char_TString_const_void_TString_const_bool",
+      "original_string_refs": [
+        "adventure_",
+        "tclient_"
+      ],
+      "proposed_name": "v18_TScriptProperty_setFunction_TProperties_char_TString_const_void_TString_const_bool",
+      "semantic_match_already_present": false,
+      "source_basis": "script property function metadata registration",
+      "spectron_current_name": "_ZN10cWWYfaxbT210mVBJ2aXvZUEP10c76BgaJBGAcRK10C8THgaTQxFPvS4_b",
+      "spectron_default_name": false,
+      "spectron_ea": "0x22ef54",
+      "spectron_metrics": {
+        "basic_block_count": 28,
+        "instruction_count": 122,
+        "mnemonic_hash": "dc78915d2f01e0c15ccf0d2aa632d531e319ff37a8821d3c439c51f4589dfc8f",
+        "register_shape_hash": "5b0aebc1feb5360178eaf3186bae8991d7f8385db57d02f752a058b96b67cbd0",
+        "shape_hash": "f66191ea98afc2c0fc14f36b407a439a3680259e90d475f3176624033ebb52d9",
+        "size": 500
+      },
+      "spectron_string_refs": [
+        "adventure_",
+        "tclient_"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both iterate function definitions, choose encoded or case-insensitive lookup, create a base property when absent, and attach the function metadata through the shared setter.",
+        "Both lower unresolved names, register the resulting property in the universe table when needed, and propagate the highest property scope. The target grows from 660 to 1016 bytes while retaining the same registration loop structure."
+      ],
+      "match_kind": "manual-script-property-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x2266a8",
+      "original_metrics": {
+        "basic_block_count": 17,
+        "instruction_count": 165,
+        "mnemonic_hash": "17da5688cf250850928e6be3e59eb3127b55b9ffe2370d8c25bc87a2e5cc7227",
+        "register_shape_hash": "f33b5dcee4cb466c712e704311d461f086407e3322d35816cffbff72aab1e249",
+        "shape_hash": "9bcec80a9bb571b13760e169500c13a20f4d4eb393f70c5354db901795f152e9",
+        "size": 660
+      },
+      "original_name": "TScriptProperty_addFuncs_TProperties_TPropertyFuncDef_int",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptProperty_addFuncs_TProperties_TPropertyFuncDef_int",
+      "semantic_match_already_present": false,
+      "source_basis": "script property function definition registration",
+      "spectron_current_name": "_ZN10cWWYfaxbT210DpbOGacdQCEP10c76BgaJBGAP10sXw2GaJkKPi",
+      "spectron_default_name": false,
+      "spectron_ea": "0x22f148",
+      "spectron_metrics": {
+        "basic_block_count": 23,
+        "instruction_count": 254,
+        "mnemonic_hash": "eb7f702a7525e596846f6d1e4989e2a1f89bba0c64c7b414b49f4aaaa5ee4a02",
+        "register_shape_hash": "d31478749a00b3d54a392a3b61e4680419f7a375620cb31cba09333d249a0554",
+        "shape_hash": "a5b7e1c57ef406fb0e38aabe2c816d67e78fcb26fe0c20b3062eb286b8b4fa1b",
+        "size": 1016
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_script_property_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v1_saved.json",
+    "spectron_features_sha256": "a8d58f85502362316ee99a0f79c2cd7a4ad5d6fac94aca0ee75bd0d2965fc2a1"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The changed-size rows rely on typed dispatch, conversion behavior, registration loops, matching diagnostics, control-flow shape, and pseudocode behavior rather than byte identity."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for typed script properties and registration",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 9,
+    "high_confidence_count": 9,
+    "new_context_anchor_count": 9,
+    "target_default_name_count": 0
+  }
+}
