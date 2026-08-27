@@ -169,6 +169,8 @@ def main() -> None:
     parser.add_argument("--http-request-cleanup-verification", type=Path)
     parser.add_argument("--tsocket-residual-anchors", type=Path)
     parser.add_argument("--tsocket-residual-verification", type=Path)
+    parser.add_argument("--game-environment-anchors", type=Path)
+    parser.add_argument("--game-environment-verification", type=Path)
     parser.add_argument("--particle-emitter-anchors", type=Path)
     parser.add_argument("--particle-emitter-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
@@ -5346,6 +5348,34 @@ def main() -> None:
         result["tsocket_residual_anchors"] = tsocket_residual
         result["interpretation"].append(
             "The v181 database revision also contains the separately reviewed TSocket client-list, destructor, error, and IP anchors."
+        )
+    game_environment = None
+    if args.game_environment_anchors or args.game_environment_verification:
+        if not args.game_environment_anchors or not args.game_environment_verification:
+            raise ValueError(
+                "game-environment anchors and verification must be supplied together"
+            )
+        game_environment_document = load(args.game_environment_anchors)
+        game_environment_verification = load(args.game_environment_verification)
+        if game_environment_document.get("artifact") != "spectron_game_environment_manual_translation_anchors_20260827":
+            raise ValueError("unexpected game-environment anchor artifact")
+        if not game_environment_verification.get("verified"):
+            raise ValueError("game-environment anchor reopen verification did not pass")
+        expected_game_environment = len(game_environment_document["anchors"])
+        if game_environment_verification["verified_name_count"] != expected_game_environment:
+            raise ValueError("game-environment verification count differs from artifact")
+        game_environment = {
+            "anchor_path": str(args.game_environment_anchors),
+            "anchor_sha256": sha256_path(args.game_environment_anchors),
+            "reopen_verification": str(args.game_environment_verification),
+            "anchor_count": expected_game_environment,
+            "verified_name_count": game_environment_verification["verified_name_count"],
+            "reopen_failure_count": game_environment_verification["failure_count"],
+        }
+    if game_environment is not None:
+        result["game_environment_anchors"] = game_environment
+        result["interpretation"].append(
+            "The v182 database revision also contains the separately reviewed TGameEnvironment property callback and startup-state anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

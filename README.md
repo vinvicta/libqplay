@@ -2535,6 +2535,9 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/spectron_tsocket_residual_manual_translation_anchors_20260827.json`
   records the four reviewed residual socket client-list, destructor, error,
   and IP adapter roles.
+* `artifacts/spectron_game_environment_manual_translation_anchors_20260827.json`
+  records the four reviewed `TGameEnvironment` startup and property callback
+  roles, including the target registration-table evidence.
 * `artifacts/spectron_npc_helper_manual_translation_anchors_20260826.json`
   records the 15 reviewed `TServerNPC` blocking, draw-mode, visibility, bow,
   and pelt helpers.
@@ -2912,6 +2915,10 @@ proves the local native TLS path, not a current live certificate or service.
   The `tools/generate_spectron_tsocket_residual_anchors.py` generator records
   the residual socket client-list, destructor, error, and IP adapter roles with
   normalized metrics, target class context, and the clients-string evidence.
+  The `tools/generate_spectron_game_environment_anchors.py` generator records
+  the four TGameEnvironment startup and property callback roles with target
+  registration-table evidence, normalized metrics, and the adventure-quit
+  layout change.
   The `tools/generate_spectron_npc_helper_anchors.py` generator records
   reviewed `TServerNPC` helper roles with exact hash checks and IDA-context
   evidence.

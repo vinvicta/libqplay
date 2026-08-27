@@ -278,6 +278,9 @@ def main():
     spectron_tsocket_residual_anchors = load_json(
         "artifacts/spectron_tsocket_residual_manual_translation_anchors_20260827.json"
     )
+    spectron_game_environment_anchors = load_json(
+        "artifacts/spectron_game_environment_manual_translation_anchors_20260827.json"
+    )
     spectron_particle_emitter_anchors = load_json(
         "artifacts/spectron_particle_emitter_manual_translation_anchors_20260826.json"
     )
@@ -2382,6 +2385,65 @@ def main():
         "0x20ad78",
     )
     check(
+        "Spectron game-environment artifact",
+        spectron_game_environment_anchors["artifact"],
+        "spectron_game_environment_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron game-environment network",
+        spectron_game_environment_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron game-environment total",
+        spectron_game_environment_anchors["summary"]["anchor_count"],
+        4,
+    )
+    check(
+        "Spectron game-environment high confidence",
+        spectron_game_environment_anchors["summary"]["high_confidence_count"],
+        4,
+    )
+    check(
+        "Spectron game-environment exact-shape count",
+        spectron_game_environment_anchors["summary"]["exact_shape_anchor_count"],
+        3,
+    )
+    check(
+        "Spectron game-environment layout-change count",
+        spectron_game_environment_anchors["summary"]["layout_change_anchor_count"],
+        1,
+    )
+    check(
+        "Spectron game-environment default targets",
+        spectron_game_environment_anchors["summary"]["target_default_name_count"],
+        2,
+    )
+    game_environment = {
+        row["original_name"]: row
+        for row in spectron_game_environment_anchors["anchors"]
+    }
+    check(
+        "Spectron all-players-count target",
+        game_environment["TGameEnvironment_getAllPlayersCount"]["spectron_ea"],
+        "0xea84c",
+    )
+    check(
+        "Spectron premium-version target",
+        game_environment["TGameEnvironment_isPremiumVersion_void"]["spectron_ea"],
+        "0xea860",
+    )
+    check(
+        "Spectron demo-version target",
+        game_environment["TGameEnvironment_isDemoVersion_void"]["spectron_ea"],
+        "0xea868",
+    )
+    check(
+        "Spectron adventure-quit target",
+        game_environment["TGameEnvironment_script_adventureQuit"]["spectron_ea"],
+        "0xea870",
+    )
+    check(
         "Spectron particle-emitter artifact",
         spectron_particle_emitter_anchors["artifact"],
         "spectron_particle_emitter_manual_translation_anchors_20260826",
@@ -3539,7 +3601,7 @@ def main():
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1238)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1236)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -3718,7 +3780,8 @@ def main():
     check("Spectron checkpoint server-list state anchor count", spectron_checkpoint["server_list_state_anchors"]["verified_name_count"], 4)
     check("Spectron checkpoint HTTP cleanup anchor count", spectron_checkpoint["http_request_cleanup_anchors"]["verified_name_count"], 5)
     check("Spectron checkpoint TSocket residual anchor count", spectron_checkpoint["tsocket_residual_anchors"]["verified_name_count"], 4)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "b8a14b0070e9dc9b23e9d7456088ef62f061247cfa3d8048f6c5e0e4b9e2857f")
+    check("Spectron checkpoint game-environment anchor count", spectron_checkpoint["game_environment_anchors"]["verified_name_count"], 4)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "b9baaa06cc61480f4fcfd83b7579c7631e1aa4ffadd2c62337720d9e8a531460")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -3852,6 +3915,7 @@ def main():
         spectron_server_list_state_anchors,
         spectron_http_request_cleanup_anchors,
         spectron_tsocket_residual_anchors,
+        spectron_game_environment_anchors,
         spectron_particle_emitter_anchors,
         spectron_server_animation_anchors,
         spectron_player_lifecycle_anchors,

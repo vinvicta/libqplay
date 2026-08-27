@@ -1460,6 +1460,19 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_static_callback_role_correction.py`, and
     `tools/ida_dump_function_data_refs.py`.
 
+241. The next IDA pass translated four small `TGameEnvironment` startup and
+    property callbacks in the obfuscated `QYZugaRKGu` class. The target
+    registration table decodes `allplayerscount`, `adventure_quit`,
+    `ispremiumversion`, and `isdemoversion`, pointing to `0xea84c`, `0xea870`,
+    `0xea860`, and `0xea868`. Three pairs are exact normalized matches; the
+    quit callback adds one target-only exit flag and is recorded as a layout
+    change. All four aliases reopened successfully in the v182 copy, which
+    has 11,694 functions, 3,641 high-confidence labels, and 1,236 default
+    `sub_` names. See
+    `artifacts/spectron_game_environment_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_game_environment_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 240. The next network-focused IDA pass translated four residual `TSocket`
     methods. The client-list cleanup at target `0x20ab0c` preserves the
     `"clients"` hash lookup, variable removal, callback, and client-pointer
