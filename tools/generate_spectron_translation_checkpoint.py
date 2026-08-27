@@ -199,6 +199,8 @@ def main() -> None:
     parser.add_argument("--tgui-render-colors-verification", type=Path)
     parser.add_argument("--thtml-definitions-defaults-anchors", type=Path)
     parser.add_argument("--thtml-definitions-defaults-verification", type=Path)
+    parser.add_argument("--tclient-static-strings-anchors", type=Path)
+    parser.add_argument("--tclient-static-strings-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
     parser.add_argument("--server-animation-verification", type=Path)
     parser.add_argument("--player-lifecycle-anchors", type=Path)
@@ -2792,6 +2794,57 @@ def main() -> None:
         )
         result["interpretation"].append(
             "The one-hundred-ninety-fifth database revision also contains the separately reviewed THTMLDefinitions HTML-default initializer anchor."
+        )
+    tclient_static_strings = None
+    if args.tclient_static_strings_anchors or args.tclient_static_strings_verification:
+        if (
+            not args.tclient_static_strings_anchors
+            or not args.tclient_static_strings_verification
+        ):
+            raise ValueError(
+                "TClient static-string anchors and verification must be supplied together"
+            )
+        tclient_static_strings_document = load(args.tclient_static_strings_anchors)
+        tclient_static_strings_verification = load(
+            args.tclient_static_strings_verification
+        )
+        if (
+            tclient_static_strings_document.get("artifact")
+            != "spectron_tclient_static_strings_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected TClient static-string anchor artifact")
+        if not tclient_static_strings_verification.get("verified"):
+            raise ValueError(
+                "TClient static-string anchor reopen verification did not pass"
+            )
+        expected_tclient_static_strings = len(
+            tclient_static_strings_document["anchors"]
+        )
+        if (
+            tclient_static_strings_verification["verified_name_count"]
+            != expected_tclient_static_strings
+        ):
+            raise ValueError(
+                "TClient static-string verification count differs from artifact"
+            )
+        tclient_static_strings = {
+            "anchor_path": str(args.tclient_static_strings_anchors),
+            "anchor_sha256": sha256_path(args.tclient_static_strings_anchors),
+            "reopen_verification": str(
+                args.tclient_static_strings_verification
+            ),
+            "anchor_count": expected_tclient_static_strings,
+            "verified_name_count": tclient_static_strings_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": tclient_static_strings_verification[
+                "failure_count"
+            ],
+        }
+    if tclient_static_strings is not None:
+        result["tclient_static_strings_anchors"] = tclient_static_strings
+        result["interpretation"].append(
+            "The one-hundred-ninety-sixth database revision also contains the separately reviewed TClient static-string initializer anchor."
         )
     server_animation = None
     if args.server_animation_anchors or args.server_animation_verification:

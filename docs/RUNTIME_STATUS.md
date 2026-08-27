@@ -1482,6 +1482,17 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_particle_emitter_script_vars_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+255. The next IDA pass translated the `TClient` static-string initializer.
+    Source `sub_E0A2C` at `0xe0a2c` maps to target `sub_E1118` at `0xe1118`,
+    preserving all eleven client string fields and their order. The target
+    adds one `CanTfaz6bZ` string with matching cleanup evidence, so this is a
+    high-confidence layout-change match. The v196 copy has 11,694 functions,
+    3,641 high-confidence labels, and 1,223 default `sub_` names, with zero
+    semantic reopen failures. See
+    `artifacts/spectron_tclient_static_strings_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_tclient_static_strings_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 254. The next IDA pass translated the `THTMLDefinitions` default initializer.
     Source `sub_E09F4` at `0xe09f4` maps to target `sub_E0FC4` at `0xe0fc4`,
     preserving the horizontal-line color bytes, bitmap-indent value, and
