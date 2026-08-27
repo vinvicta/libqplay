@@ -1183,6 +1183,13 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_color_manager_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+166. The next IDA pass translated six font and resource methods covering TFont
+     construction and texture creation, TFontManager file lookup and static
+     registries, UTF-8 range registration, and TFontData construction. The
+     labels reopened successfully in the v106 disposable copy. See
+     `artifacts/spectron_font_runtime_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

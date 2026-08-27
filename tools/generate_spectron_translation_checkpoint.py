@@ -231,6 +231,8 @@ def main() -> None:
     parser.add_argument("--bitmap-array-holder-verification", type=Path)
     parser.add_argument("--color-manager-anchors", type=Path)
     parser.add_argument("--color-manager-verification", type=Path)
+    parser.add_argument("--font-runtime-anchors", type=Path)
+    parser.add_argument("--font-runtime-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3126,6 +3128,34 @@ def main() -> None:
         result["color_manager_anchors"] = color_manager
         result["interpretation"].append(
             "The one-hundred-third database revision also contains the separately reviewed TColorManager activation, stack-state, cleanup, pop, and initialization anchors."
+        )
+    font_runtime = None
+    if args.font_runtime_anchors or args.font_runtime_verification:
+        if not args.font_runtime_anchors or not args.font_runtime_verification:
+            raise ValueError(
+                "font-runtime anchors and font-runtime verification must be supplied together"
+            )
+        font_runtime_document = load(args.font_runtime_anchors)
+        font_runtime_verification = load(args.font_runtime_verification)
+        if font_runtime_document.get("artifact") != "spectron_font_runtime_manual_translation_anchors_20260826":
+            raise ValueError("unexpected font-runtime anchor artifact")
+        if not font_runtime_verification.get("verified"):
+            raise ValueError("font-runtime anchor reopen verification did not pass")
+        expected_font_runtime = len(font_runtime_document["anchors"])
+        if font_runtime_verification["verified_name_count"] != expected_font_runtime:
+            raise ValueError("font-runtime verification count differs from artifact")
+        font_runtime = {
+            "anchor_path": str(args.font_runtime_anchors),
+            "anchor_sha256": sha256_path(args.font_runtime_anchors),
+            "reopen_verification": str(args.font_runtime_verification),
+            "anchor_count": expected_font_runtime,
+            "verified_name_count": font_runtime_verification["verified_name_count"],
+            "reopen_failure_count": font_runtime_verification["failure_count"],
+        }
+    if font_runtime is not None:
+        result["font_runtime_anchors"] = font_runtime
+        result["interpretation"].append(
+            "The one-hundred-fourth database revision also contains the separately reviewed TFont, TFontManager, TFontOptions, and TFontData residual anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

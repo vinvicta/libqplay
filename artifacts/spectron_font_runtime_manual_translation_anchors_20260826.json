@@ -1,0 +1,367 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target TZf6gaQ3S_, Kv6ugas5Mu, KcKRganuPN, and fUWH_a_9zm methods remain in the same local class order as the source TFont, TFontManager, TFontOptions, and TFontData methods.",
+        "The TFont constructor preserves the hash-list base, 256-character-info initialization loop, vtable installation, and field defaults. The target adds an explicit CanTfaz6bZ conversion around its rebuilt string wrapper.",
+        "The font-texture method preserves the generate-bitmap guard, Font-name construction, texture creation, texture flags, upload call, and timestamp update. The target uses the already translated font bitmap and texture helpers.",
+        "The font-file resolver preserves the .ttf and it.ttf fallback order, system-font lookup, resource lookup, and empty-result behavior. Its smaller target body reflects changed string and resource wrappers rather than a different role.",
+        "The font-manager initializer preserves publication of the font hash list and missing-font list. The target initializes the system-font path in a different startup path, so that version difference is recorded instead of hidden.",
+        "The UTF-8 range helper preserves validation, path normalization, range allocation, and list insertion. The font-data constructor preserves lower-case name construction, base initialization, source-name storage, and its 0x18-byte data list."
+      ],
+      "match_kind": "manual-font-runtime-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TFontCharInfo_TFontCharInfo_void",
+        "plt_THashListObject_THashListObject_TString_const"
+      ],
+      "original_ea": "0x10d348",
+      "original_metrics": {
+        "basic_block_count": 3,
+        "instruction_count": 39,
+        "mnemonic_hash": "ebaa9da527ee71d2784102e139f7aaa338f0069456b7e02a5adcf8ea1e903862",
+        "register_shape_hash": null,
+        "shape_hash": "8f0866745b6efbb12837546f42392226f9eefc7b215f90d5d0f1629bba366dd5",
+        "size": 156
+      },
+      "original_name": "TFont_TFont_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TFont_TFont_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "font object construction and glyph-cache initialization",
+      "spectron_current_name": "_ZN10TZf6gaQ3S_C1ERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10CanTfaz6bZ5clearEv",
+        "._ZN10CanTfaz6bZaSERK10C8THgaTQxF",
+        "._ZN10DFeOfaFXSUC2Ev",
+        "._ZN10J7zOgaf09KC2ERK10CanTfaz6bZ"
+      ],
+      "spectron_ea": "0x10fcb4",
+      "spectron_metrics": {
+        "basic_block_count": 3,
+        "instruction_count": 47,
+        "mnemonic_hash": "7ba88faafbbf2bfebe51d52d0d171fc7ddfbffd845a37b3902185d1ed8fdee9d",
+        "register_shape_hash": null,
+        "shape_hash": "a690aa2d36acd76fff39f931dfac965dd12a58027a74dc161755a060e9dbf9d8",
+        "size": 188
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target TZf6gaQ3S_, Kv6ugas5Mu, KcKRganuPN, and fUWH_a_9zm methods remain in the same local class order as the source TFont, TFontManager, TFontOptions, and TFontData methods.",
+        "The TFont constructor preserves the hash-list base, 256-character-info initialization loop, vtable installation, and field defaults. The target adds an explicit CanTfaz6bZ conversion around its rebuilt string wrapper.",
+        "The font-texture method preserves the generate-bitmap guard, Font-name construction, texture creation, texture flags, upload call, and timestamp update. The target uses the already translated font bitmap and texture helpers.",
+        "The font-file resolver preserves the .ttf and it.ttf fallback order, system-font lookup, resource lookup, and empty-result behavior. Its smaller target body reflects changed string and resource wrappers rather than a different role.",
+        "The font-manager initializer preserves publication of the font hash list and missing-font list. The target initializes the system-font path in a different startup path, so that version difference is recorded instead of hidden.",
+        "The UTF-8 range helper preserves validation, path normalization, range allocation, and list insertion. The font-data constructor preserves lower-case name construction, base initialization, source-name storage, and its 0x18-byte data list."
+      ],
+      "match_kind": "manual-font-runtime-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TFont_generateFontBitmap_void",
+        "plt_TString_clear_void",
+        "plt_TString_operator_assign_TString_const",
+        "plt_TString_operator_lshift_TString_const",
+        "plt_TString_operator_lshift_char_const",
+        "plt_TTexture_createGraalTexture_TString_const"
+      ],
+      "original_ea": "0x10d8c4",
+      "original_metrics": {
+        "basic_block_count": 3,
+        "instruction_count": 52,
+        "mnemonic_hash": "ae8102a359e8f1ced6a7152e398913f42532c14bd3b9d38bc9313e6186627c12",
+        "register_shape_hash": null,
+        "shape_hash": "d0142bd06defeff346e4c5df2f6ec4a0bfb588b7fdbf9bc429f9088cb52768c7",
+        "size": 212
+      },
+      "original_name": "TFont_makeFontTexture_void",
+      "original_string_refs": [
+        "Font "
+      ],
+      "proposed_name": "v18_TFont_makeFontTexture_void",
+      "semantic_match_already_present": false,
+      "source_basis": "font bitmap generation and texture upload",
+      "spectron_current_name": "_ZN10TZf6gaQ3S_10MdTr4al43lEv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSER10CanTfaz6bZ",
+        "._ZN10C8THgaTQxFaSERKS_",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10C8THgaTQxFlsERKS_",
+        "._ZN10TZf6gaQ3S_10fl7q4asNqlEv",
+        "._ZN10_WevgakbUu10vDdFEaX4hPERK10C8THgaTQxF"
+      ],
+      "spectron_ea": "0x110274",
+      "spectron_metrics": {
+        "basic_block_count": 3,
+        "instruction_count": 59,
+        "mnemonic_hash": "ec6772589666d3997e1f57487811791653144e3013e561ffa1c5d7cd64092d0d",
+        "register_shape_hash": null,
+        "shape_hash": "46b0b6205a8526b65e6f287f6ed24845858b41e054b459512167e7940d587823",
+        "size": 240
+      },
+      "spectron_string_refs": [
+        "Font "
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target TZf6gaQ3S_, Kv6ugas5Mu, KcKRganuPN, and fUWH_a_9zm methods remain in the same local class order as the source TFont, TFontManager, TFontOptions, and TFontData methods.",
+        "The TFont constructor preserves the hash-list base, 256-character-info initialization loop, vtable installation, and field defaults. The target adds an explicit CanTfaz6bZ conversion around its rebuilt string wrapper.",
+        "The font-texture method preserves the generate-bitmap guard, Font-name construction, texture creation, texture flags, upload call, and timestamp update. The target uses the already translated font bitmap and texture helpers.",
+        "The font-file resolver preserves the .ttf and it.ttf fallback order, system-font lookup, resource lookup, and empty-result behavior. Its smaller target body reflects changed string and resource wrappers rather than a different role.",
+        "The font-manager initializer preserves publication of the font hash list and missing-font list. The target initializes the system-font path in a different startup path, so that version difference is recorded instead of hidden.",
+        "The UTF-8 range helper preserves validation, path normalization, range allocation, and list insertion. The font-data constructor preserves lower-case name construction, base initialization, source-name storage, and its 0x18-byte data list."
+      ],
+      "match_kind": "manual-font-runtime-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TFiles_fileExists_TString_const",
+        "plt_TFontManager_getFontBaseName_TString_const",
+        "plt_TFontManager_getStyleFileAddition_TString_const",
+        "plt_TResourceFunctions_getGameFile_TString_const_bool",
+        "plt_TString_clear_void",
+        "plt_TString_operator_assign_TString_const",
+        "plt_TString_operator_lshift_TString_const",
+        "plt_TString_operator_lshift_char_const",
+        "plt_operator_assign_TString_const_char_const"
+      ],
+      "original_ea": "0x10e998",
+      "original_metrics": {
+        "basic_block_count": 15,
+        "instruction_count": 207,
+        "mnemonic_hash": "419e9e10e89212d76a720453f644bbadcad0ab089e32f5d4aadf4ea9ae83b0d4",
+        "register_shape_hash": null,
+        "shape_hash": "efe1abad0c7f3cddb021e9b691629427ddf062f8f4aebe8bea9b99fc6a453161",
+        "size": 828
+      },
+      "original_name": "TFontManager_findFontFile_TString_const_TString_const",
+      "original_string_refs": [
+        ".ttf",
+        "it.ttf"
+      ],
+      "proposed_name": "v18_TFontManager_findFontFile_TString_const_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "font file search and resource fallback",
+      "spectron_current_name": "_ZN10Kv6ugas5Mu10aDqxfbC0JGERK10C8THgaTQxFS2_",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSERKS_",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10C8THgaTQxFlsERKS_",
+        "._ZN10Kv6ugas5Mu10F_uyfbmHDHERK10C8THgaTQxF",
+        "._ZN10Kv6ugas5Mu10R9Hyfb3LOHERK10C8THgaTQxF",
+        "._ZN10f6WHgaQkAF10r3WHgaBiAFERK10C8THgaTQxFb",
+        "._ZeqRK10C8THgaTQxFPKc"
+      ],
+      "spectron_ea": "0x111368",
+      "spectron_metrics": {
+        "basic_block_count": 10,
+        "instruction_count": 140,
+        "mnemonic_hash": "56311e7824b95ec8da73ad9856bbec10320d805055e8d572e103a100cabb827f",
+        "register_shape_hash": null,
+        "shape_hash": "c97e1f52e7dc21c79c85729a28d81b86fec55182f99e4b18adc2d69f46657eee",
+        "size": 560
+      },
+      "spectron_string_refs": [
+        ".ttf",
+        "it.ttf"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target TZf6gaQ3S_, Kv6ugas5Mu, KcKRganuPN, and fUWH_a_9zm methods remain in the same local class order as the source TFont, TFontManager, TFontOptions, and TFontData methods.",
+        "The TFont constructor preserves the hash-list base, 256-character-info initialization loop, vtable installation, and field defaults. The target adds an explicit CanTfaz6bZ conversion around its rebuilt string wrapper.",
+        "The font-texture method preserves the generate-bitmap guard, Font-name construction, texture creation, texture flags, upload call, and timestamp update. The target uses the already translated font bitmap and texture helpers.",
+        "The font-file resolver preserves the .ttf and it.ttf fallback order, system-font lookup, resource lookup, and empty-result behavior. Its smaller target body reflects changed string and resource wrappers rather than a different role.",
+        "The font-manager initializer preserves publication of the font hash list and missing-font list. The target initializes the system-font path in a different startup path, so that version difference is recorded instead of hidden.",
+        "The UTF-8 range helper preserves validation, path normalization, range allocation, and list insertion. The font-data constructor preserves lower-case name construction, base initialization, source-name storage, and its 0x18-byte data list."
+      ],
+      "match_kind": "manual-font-runtime-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_THashList_THashList_void__2",
+        "plt_TStringList_TStringList_void",
+        "plt_TString_operator_lshift_char_const",
+        "plt_operator_new_ulong__2"
+      ],
+      "original_ea": "0x10f660",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 29,
+        "mnemonic_hash": "89ddccbeec079c3e31861ac6b1f290140b5377f9bf643b8b90e31e3b7f3dc1d9",
+        "register_shape_hash": null,
+        "shape_hash": "e4dd799a3547917b3c4f1440fe9bb250cbf0c063649e0725c26e5afbaa02a103",
+        "size": 116
+      },
+      "original_name": "TFontManager_initStaticVars_void",
+      "original_string_refs": [
+        "/system/fonts/"
+      ],
+      "proposed_name": "v18_TFontManager_initStaticVars_void",
+      "semantic_match_already_present": false,
+      "source_basis": "font manager static registry initialization",
+      "spectron_current_name": "_Z10vVWN2a5aDYv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10KKhLga4xoIC1Ev",
+        "._ZN10vuuHgangcFC2Ev",
+        "._Znwm"
+      ],
+      "spectron_ea": "0x111f24",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 19,
+        "mnemonic_hash": "48a6ed95944251e6239bdae08357809503e6b180010ddd8c9117f8242edf00a0",
+        "register_shape_hash": null,
+        "shape_hash": "74837c3d2ff00b944009b61dd8b7906bcb9433740118124165b809f8f0d04cfb",
+        "size": 76
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target TZf6gaQ3S_, Kv6ugas5Mu, KcKRganuPN, and fUWH_a_9zm methods remain in the same local class order as the source TFont, TFontManager, TFontOptions, and TFontData methods.",
+        "The TFont constructor preserves the hash-list base, 256-character-info initialization loop, vtable installation, and field defaults. The target adds an explicit CanTfaz6bZ conversion around its rebuilt string wrapper.",
+        "The font-texture method preserves the generate-bitmap guard, Font-name construction, texture creation, texture flags, upload call, and timestamp update. The target uses the already translated font bitmap and texture helpers.",
+        "The font-file resolver preserves the .ttf and it.ttf fallback order, system-font lookup, resource lookup, and empty-result behavior. Its smaller target body reflects changed string and resource wrappers rather than a different role.",
+        "The font-manager initializer preserves publication of the font hash list and missing-font list. The target initializes the system-font path in a different startup path, so that version difference is recorded instead of hidden.",
+        "The UTF-8 range helper preserves validation, path normalization, range allocation, and list insertion. The font-data constructor preserves lower-case name construction, base initialization, source-name storage, and its 0x18-byte data list."
+      ],
+      "match_kind": "manual-font-runtime-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TFiles_extractFilename_TString_const",
+        "plt_TList_Add_void",
+        "plt_TString_clear_void",
+        "plt_TString_operator_assign_TString_const",
+        "plt_TString_starts_TString_const",
+        "plt_operator_new_ulong__2"
+      ],
+      "original_ea": "0x10f81c",
+      "original_metrics": {
+        "basic_block_count": 6,
+        "instruction_count": 58,
+        "mnemonic_hash": "c093c161003e297f43b34d65db373925675dbe9e01f5d2fdcf9b2330ece5049c",
+        "register_shape_hash": null,
+        "shape_hash": "92c20cb520c4f4f96a19bf78771e3ebc0f2e490def62c5062740709216b3013d",
+        "size": 232
+      },
+      "original_name": "TFontOptions_script_addutf8fontrange",
+      "original_string_refs": [],
+      "proposed_name": "v18_TFontOptions_script_addutf8fontrange",
+      "semantic_match_already_present": false,
+      "source_basis": "UTF-8 font range validation and registration",
+      "spectron_current_name": "sub_1120B8",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSERKS_",
+        "._ZN10vy1JgaKVkH3AddEPv",
+        "._ZN10wiULgacZUI10_RVvga7htvERK10C8THgaTQxF",
+        "._Znwm"
+      ],
+      "spectron_ea": "0x1120b8",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "instruction_count": 50,
+        "mnemonic_hash": "e84b67f41b26023a81bd724212cf0ea93d756ab81b1ec7117bb47a1e30b41c1a",
+        "register_shape_hash": null,
+        "shape_hash": "972ff812b61fb22ddd2c7a8fcd308a862b95c87110d1aadc9f09a10ff31e096f",
+        "size": 200
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target TZf6gaQ3S_, Kv6ugas5Mu, KcKRganuPN, and fUWH_a_9zm methods remain in the same local class order as the source TFont, TFontManager, TFontOptions, and TFontData methods.",
+        "The TFont constructor preserves the hash-list base, 256-character-info initialization loop, vtable installation, and field defaults. The target adds an explicit CanTfaz6bZ conversion around its rebuilt string wrapper.",
+        "The font-texture method preserves the generate-bitmap guard, Font-name construction, texture creation, texture flags, upload call, and timestamp update. The target uses the already translated font bitmap and texture helpers.",
+        "The font-file resolver preserves the .ttf and it.ttf fallback order, system-font lookup, resource lookup, and empty-result behavior. Its smaller target body reflects changed string and resource wrappers rather than a different role.",
+        "The font-manager initializer preserves publication of the font hash list and missing-font list. The target initializes the system-font path in a different startup path, so that version difference is recorded instead of hidden.",
+        "The UTF-8 range helper preserves validation, path normalization, range allocation, and list insertion. The font-data constructor preserves lower-case name construction, base initialization, source-name storage, and its 0x18-byte data list."
+      ],
+      "match_kind": "manual-font-runtime-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TFiles_lowerCaseFilename_TString_const",
+        "plt_THashListObject_THashListObject_TString_const",
+        "plt_TString_clear_void",
+        "plt_TString_operator_assign_TString_const",
+        "plt_operator_new_ulong__2"
+      ],
+      "original_ea": "0x110c00",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 40,
+        "mnemonic_hash": "62b28f2177e1d30b2d368563c50c4c8906f32c3943a0dcfedc0457b006bc1188",
+        "register_shape_hash": null,
+        "shape_hash": "768ec433843cc9acf15a035453ae06c99395c502c4a12c4891cb4c561d60d5ec",
+        "size": 160
+      },
+      "original_name": "TFontData_TFontData_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TFontData_TFontData_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "font data object and glyph-data list construction",
+      "spectron_current_name": "_ZN10fUWH_a_9zmC2ERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSERKS_",
+        "._ZN10CanTfaz6bZ5clearEv",
+        "._ZN10CanTfaz6bZaSERK10C8THgaTQxF",
+        "._ZN10J7zOgaf09KC2ERK10CanTfaz6bZ",
+        "._ZN10wiULgacZUI10RUnvgavJ0uERK10C8THgaTQxF",
+        "._Znwm"
+      ],
+      "spectron_ea": "0x11347c",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "instruction_count": 49,
+        "mnemonic_hash": "44b5ededc35a73c2a24d7da2a7a2224bc26d68fc675934ff201ffaa7013a462f",
+        "register_shape_hash": null,
+        "shape_hash": "020e09e186c6c66d788f2aed22c64595bd9c498895d985cb35bb01a1c2be0139",
+        "size": 196
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_font_runtime_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4.json",
+    "original_features_sha256": "62cccc40ea88a08d5ed0845ceeceaf194b528bdd07bdd6ff1a0350dee3b0ab82",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features.json",
+    "spectron_features_sha256": "cc1789d2d3c24f478d7863f2b07b10b4259aa2d370e363e5303000eb7b835243"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve readable 1.8 font and resource roles while keeping the obfuscated target names and wrapper differences in the evidence rows.",
+    "The target keeps the same font search, texture construction, UTF-8 range, and font-data ownership roles, with version-specific wrapper and initialization differences recorded explicitly."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for TFont, TFontManager, TFontOptions, and TFontData residual methods",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 6,
+    "high_confidence_count": 6,
+    "new_context_anchor_count": 6,
+    "target_default_name_count": 1
+  }
+}
