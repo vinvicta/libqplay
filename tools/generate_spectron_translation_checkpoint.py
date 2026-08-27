@@ -153,6 +153,8 @@ def main() -> None:
     parser.add_argument("--sounds-verification", type=Path)
     parser.add_argument("--hash-container-anchors", type=Path)
     parser.add_argument("--hash-container-verification", type=Path)
+    parser.add_argument("--tstring-anchors", type=Path)
+    parser.add_argument("--tstring-verification", type=Path)
     parser.add_argument("--particle-emitter-anchors", type=Path)
     parser.add_argument("--particle-emitter-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
@@ -2166,6 +2168,34 @@ def main() -> None:
         result["hash_container_anchors"] = hash_container
         result["interpretation"].append(
             "The one-hundred-seventy-third database revision also contains the separately reviewed exact-shape THashList and THashStrings anchors."
+        )
+    tstring = None
+    if args.tstring_anchors or args.tstring_verification:
+        if not args.tstring_anchors or not args.tstring_verification:
+            raise ValueError(
+                "TString anchors and TString verification must be supplied together"
+            )
+        tstring_document = load(args.tstring_anchors)
+        tstring_verification = load(args.tstring_verification)
+        if tstring_document.get("artifact") != "spectron_tstring_manual_translation_anchors_20260827":
+            raise ValueError("unexpected TString anchor artifact")
+        if not tstring_verification.get("verified"):
+            raise ValueError("TString anchor reopen verification did not pass")
+        expected_tstring = len(tstring_document["anchors"])
+        if tstring_verification["verified_name_count"] != expected_tstring:
+            raise ValueError("TString verification count differs from artifact")
+        tstring = {
+            "anchor_path": str(args.tstring_anchors),
+            "anchor_sha256": sha256_path(args.tstring_anchors),
+            "reopen_verification": str(args.tstring_verification),
+            "anchor_count": expected_tstring,
+            "verified_name_count": tstring_verification["verified_name_count"],
+            "reopen_failure_count": tstring_verification["failure_count"],
+        }
+    if tstring is not None:
+        result["tstring_anchors"] = tstring
+        result["interpretation"].append(
+            "The one-hundred-seventy-fourth database revision also contains the separately reviewed exact-shape TString helper anchors."
         )
     particle_emitter = None
     if args.particle_emitter_anchors or args.particle_emitter_verification:

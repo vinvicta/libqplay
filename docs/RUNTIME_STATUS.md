@@ -1428,6 +1428,17 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+232. The next IDA pass translated six exact-shape `TString` methods: signed,
+    unsigned, and 64-bit integer insertion, prefix testing, and the bounded
+    and unbounded case-insensitive comparison thunks. All six labels reopened
+    successfully in the v174 disposable copy, which has 11,694 functions,
+    3,641 high-confidence labels, and 1,250 default `sub_` names. The local
+    address deltas are `+0x14d8` for the insertion trio and `+0x1720` for the
+    prefix and comparison cluster. See
+    `artifacts/spectron_tstring_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_tstring_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 231. The next IDA pass translated five exact-shape hash-container methods:
      two `THashList` lifecycle and iterator helpers plus three `THashStrings`
      count, lifecycle, and membership helpers. All five labels reopened

@@ -1,0 +1,372 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target rows are corresponding overloads in the TString and C8THgaTQxF class-local clusters. The target retains an obfuscated C++ class name, so the readable alias is an analysis translation rather than recovered target debug information.",
+        "The complete normalized ARM64 feature record matches for every row. The comparison includes size, instruction count, control-flow counts, mnemonic, opcode, register, overall-shape, and string-reference fields.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static IDA analysis overlay and does not modify the APK or native library.",
+        "Both forward the signed integer to the internal addint helper with the same default formatting arguments and return the destination TString.",
+        "The target operator<< int overload is the first member in the ordered integer insertion trio."
+      ],
+      "match_kind": "manual-tstring-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TString_addint_int_int_int_bool_bool"
+      ],
+      "original_ea": "0xf14c8",
+      "original_function_end": "0xf14f8",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "9962feca8866565c61ff68b7f82e979e21fb123019fe16d025d655730701a9bc",
+        "opcode_shape_hash": "a3e41970f7db2ff2579588280cd8518452deeeff80d38e80e985c8f809ea9d7a",
+        "register_shape_hash": "2e401e79de571b8a8b9005804aae6d7c49c87a8d8ae69d3c94e9a54abd81e621",
+        "shape_hash": "e545b6ad1b64761c4ce5bb10a7a9663a06d13b8001d73062284dd47a4fea1bad",
+        "size": 48,
+        "string_refs_hash": null
+      },
+      "original_name": "TString_operator_lshift_int",
+      "original_string_refs": [],
+      "proposed_name": "v18_TString_operator_lshift_int",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TString signed-integer insertion overload",
+      "spectron_current_name": "_ZN10C8THgaTQxFlsEi",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF10bhKcJa1xkEEiiibb"
+      ],
+      "spectron_ea": "0xf29a0",
+      "spectron_function_end": "0xf29d0",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "9962feca8866565c61ff68b7f82e979e21fb123019fe16d025d655730701a9bc",
+        "opcode_shape_hash": "a3e41970f7db2ff2579588280cd8518452deeeff80d38e80e985c8f809ea9d7a",
+        "register_shape_hash": "2e401e79de571b8a8b9005804aae6d7c49c87a8d8ae69d3c94e9a54abd81e621",
+        "shape_hash": "e545b6ad1b64761c4ce5bb10a7a9663a06d13b8001d73062284dd47a4fea1bad",
+        "size": 48,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x14d8"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target rows are corresponding overloads in the TString and C8THgaTQxF class-local clusters. The target retains an obfuscated C++ class name, so the readable alias is an analysis translation rather than recovered target debug information.",
+        "The complete normalized ARM64 feature record matches for every row. The comparison includes size, instruction count, control-flow counts, mnemonic, opcode, register, overall-shape, and string-reference fields.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static IDA analysis overlay and does not modify the APK or native library.",
+        "Both forward the unsigned integer to the internal addunsignedint helper with the same default formatting arguments and return the destination TString.",
+        "The target unsigned operator<< overload follows the signed overload in the same C8THgaTQxF cluster."
+      ],
+      "match_kind": "manual-tstring-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TString_addunsignedint_uint_int_int_bool_bool"
+      ],
+      "original_ea": "0xf1614",
+      "original_function_end": "0xf1644",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "9962feca8866565c61ff68b7f82e979e21fb123019fe16d025d655730701a9bc",
+        "opcode_shape_hash": "a3e41970f7db2ff2579588280cd8518452deeeff80d38e80e985c8f809ea9d7a",
+        "register_shape_hash": "2e401e79de571b8a8b9005804aae6d7c49c87a8d8ae69d3c94e9a54abd81e621",
+        "shape_hash": "e545b6ad1b64761c4ce5bb10a7a9663a06d13b8001d73062284dd47a4fea1bad",
+        "size": 48,
+        "string_refs_hash": null
+      },
+      "original_name": "TString_operator_lshift_uint",
+      "original_string_refs": [],
+      "proposed_name": "v18_TString_operator_lshift_uint",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TString unsigned-integer insertion overload",
+      "spectron_current_name": "_ZN10C8THgaTQxFlsEj",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF10UzpcJaT72DEjiibb"
+      ],
+      "spectron_ea": "0xf2aec",
+      "spectron_function_end": "0xf2b1c",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "9962feca8866565c61ff68b7f82e979e21fb123019fe16d025d655730701a9bc",
+        "opcode_shape_hash": "a3e41970f7db2ff2579588280cd8518452deeeff80d38e80e985c8f809ea9d7a",
+        "register_shape_hash": "2e401e79de571b8a8b9005804aae6d7c49c87a8d8ae69d3c94e9a54abd81e621",
+        "shape_hash": "e545b6ad1b64761c4ce5bb10a7a9663a06d13b8001d73062284dd47a4fea1bad",
+        "size": 48,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x14d8"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target rows are corresponding overloads in the TString and C8THgaTQxF class-local clusters. The target retains an obfuscated C++ class name, so the readable alias is an analysis translation rather than recovered target debug information.",
+        "The complete normalized ARM64 feature record matches for every row. The comparison includes size, instruction count, control-flow counts, mnemonic, opcode, register, overall-shape, and string-reference fields.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static IDA analysis overlay and does not modify the APK or native library.",
+        "Both forward the 64-bit unsigned value to the internal addunsignedlongint helper with the same default formatting arguments and return the destination TString.",
+        "The target 64-bit operator<< overload closes the ordered integer insertion trio."
+      ],
+      "match_kind": "manual-tstring-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TString_addunsignedlongint_ulong_long_int_int_bool_bool"
+      ],
+      "original_ea": "0xf174c",
+      "original_function_end": "0xf177c",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "9962feca8866565c61ff68b7f82e979e21fb123019fe16d025d655730701a9bc",
+        "opcode_shape_hash": "a3e41970f7db2ff2579588280cd8518452deeeff80d38e80e985c8f809ea9d7a",
+        "register_shape_hash": "2e401e79de571b8a8b9005804aae6d7c49c87a8d8ae69d3c94e9a54abd81e621",
+        "shape_hash": "e545b6ad1b64761c4ce5bb10a7a9663a06d13b8001d73062284dd47a4fea1bad",
+        "size": 48,
+        "string_refs_hash": null
+      },
+      "original_name": "TString_operator_lshift_ulong_long",
+      "original_string_refs": [],
+      "proposed_name": "v18_TString_operator_lshift_ulong_long",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TString unsigned-long-long insertion overload",
+      "spectron_current_name": "_ZN10C8THgaTQxFlsEy",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF10LIscJapM5DEyiibb"
+      ],
+      "spectron_ea": "0xf2c24",
+      "spectron_function_end": "0xf2c54",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "9962feca8866565c61ff68b7f82e979e21fb123019fe16d025d655730701a9bc",
+        "opcode_shape_hash": "a3e41970f7db2ff2579588280cd8518452deeeff80d38e80e985c8f809ea9d7a",
+        "register_shape_hash": "2e401e79de571b8a8b9005804aae6d7c49c87a8d8ae69d3c94e9a54abd81e621",
+        "shape_hash": "e545b6ad1b64761c4ce5bb10a7a9663a06d13b8001d73062284dd47a4fea1bad",
+        "size": 48,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x14d8"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target rows are corresponding overloads in the TString and C8THgaTQxF class-local clusters. The target retains an obfuscated C++ class name, so the readable alias is an analysis translation rather than recovered target debug information.",
+        "The complete normalized ARM64 feature record matches for every row. The comparison includes size, instruction count, control-flow counts, mnemonic, opcode, register, overall-shape, and string-reference fields.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static IDA analysis overlay and does not modify the APK or native library.",
+        "Both treat a null or empty prefix as true, reject a longer prefix than the input, and compare the prefix bytes with memcmp.",
+        "The target fEtHgarybF method retains the same seven-block prefix-check body in the later C8THgaTQxF string-comparison cluster."
+      ],
+      "match_kind": "manual-tstring-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        ".memcmp"
+      ],
+      "original_ea": "0xf2fa0",
+      "original_function_end": "0xf3014",
+      "original_metrics": {
+        "basic_block_count": 7,
+        "branch_count": 6,
+        "call_count": 1,
+        "instruction_count": 29,
+        "mnemonic_hash": "514a93f0f0b75167866152739da6782f02da978f4316f8b3e12c4240bc27e8a8",
+        "opcode_shape_hash": "465a25577ada579900d01a93f0621ef0297da34bce66f189b894be99e350ffff",
+        "register_shape_hash": "3a13db6005a86d3ff20422c3c377a7f439bf1e78015d08d9b2468ef033aa72af",
+        "shape_hash": "31867afaea35cd1473aef7986c0f855693d3d5870739df7832bd7d463f1d8acf",
+        "size": 116,
+        "string_refs_hash": null
+      },
+      "original_name": "TString_starts_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TString_starts_TString_const",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TString prefix predicate",
+      "spectron_current_name": "_ZNK10C8THgaTQxF10fEtHgarybFERKS_",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        ".memcmp"
+      ],
+      "spectron_ea": "0xf46c0",
+      "spectron_function_end": "0xf4734",
+      "spectron_metrics": {
+        "basic_block_count": 7,
+        "branch_count": 6,
+        "call_count": 1,
+        "instruction_count": 29,
+        "mnemonic_hash": "514a93f0f0b75167866152739da6782f02da978f4316f8b3e12c4240bc27e8a8",
+        "opcode_shape_hash": "465a25577ada579900d01a93f0621ef0297da34bce66f189b894be99e350ffff",
+        "register_shape_hash": "3a13db6005a86d3ff20422c3c377a7f439bf1e78015d08d9b2468ef033aa72af",
+        "shape_hash": "31867afaea35cd1473aef7986c0f855693d3d5870739df7832bd7d463f1d8acf",
+        "size": 116,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x1720"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target rows are corresponding overloads in the TString and C8THgaTQxF class-local clusters. The target retains an obfuscated C++ class name, so the readable alias is an analysis translation rather than recovered target debug information.",
+        "The complete normalized ARM64 feature record matches for every row. The comparison includes size, instruction count, control-flow counts, mnemonic, opcode, register, overall-shape, and string-reference fields.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static IDA analysis overlay and does not modify the APK or native library.",
+        "Both are one-instruction thunks that forward the two C strings directly to libc strcasecmp.",
+        "The target strcasecmp method is the first of the adjacent case-insensitive comparison thunks."
+      ],
+      "match_kind": "manual-tstring-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0xf3538",
+      "original_function_end": "0xf353c",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 1,
+        "mnemonic_hash": "df7e70e5021544f4834bbee64a9e3789febc4be81470df629cad6ddb03320a5c",
+        "opcode_shape_hash": "74421f1f206a1f88ce23d5a4fc4299f145f35134a154863c27d88bde0d7c7795",
+        "register_shape_hash": "3c1eee7de17644312d6af1e22e8666726d75912206d4ce8a62656747807515f6",
+        "shape_hash": "3c1eee7de17644312d6af1e22e8666726d75912206d4ce8a62656747807515f6",
+        "size": 4,
+        "string_refs_hash": null
+      },
+      "original_name": "TString_strcasecmp_char_const_char_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TString_strcasecmp_char_const_char_const",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TString case-insensitive comparison thunk",
+      "spectron_current_name": "_ZN10C8THgaTQxF10strcasecmpEPKcS1_",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0xf4c58",
+      "spectron_function_end": "0xf4c5c",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 1,
+        "mnemonic_hash": "df7e70e5021544f4834bbee64a9e3789febc4be81470df629cad6ddb03320a5c",
+        "opcode_shape_hash": "74421f1f206a1f88ce23d5a4fc4299f145f35134a154863c27d88bde0d7c7795",
+        "register_shape_hash": "3c1eee7de17644312d6af1e22e8666726d75912206d4ce8a62656747807515f6",
+        "shape_hash": "3c1eee7de17644312d6af1e22e8666726d75912206d4ce8a62656747807515f6",
+        "size": 4,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x1720"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target rows are corresponding overloads in the TString and C8THgaTQxF class-local clusters. The target retains an obfuscated C++ class name, so the readable alias is an analysis translation rather than recovered target debug information.",
+        "The complete normalized ARM64 feature record matches for every row. The comparison includes size, instruction count, control-flow counts, mnemonic, opcode, register, overall-shape, and string-reference fields.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static IDA analysis overlay and does not modify the APK or native library.",
+        "Both forward the two C strings and the integer bound to libc strncasecmp.",
+        "The target strncasecmp method follows the unbounded comparison thunk and retains the same short wrapper role."
+      ],
+      "match_kind": "manual-tstring-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0xf35e4",
+      "original_function_end": "0xf35ec",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "999dac7cb92d153a25970f2b3243105e0fea8df45121cc4d7fa72ea4cdf74180",
+        "opcode_shape_hash": "2456147ebe081bcc2ccf2d8096dc6e123e0316e24e5132d35cd039134ab626f5",
+        "register_shape_hash": "b2355d94c4f16b8dd026874ff708f4b9375e0abda8e59ce4080e70c9b7bb7604",
+        "shape_hash": "79085085d77c6d5a49adda72dd09c958369ec50fbc6a501b77fd0a9cf63faf55",
+        "size": 8,
+        "string_refs_hash": null
+      },
+      "original_name": "TString_strncasecmp_char_const_char_const_int",
+      "original_string_refs": [],
+      "proposed_name": "v18_TString_strncasecmp_char_const_char_const_int",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TString bounded case-insensitive comparison thunk",
+      "spectron_current_name": "_ZN10C8THgaTQxF11strncasecmpEPKcS1_i",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0xf4d04",
+      "spectron_function_end": "0xf4d0c",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "999dac7cb92d153a25970f2b3243105e0fea8df45121cc4d7fa72ea4cdf74180",
+        "opcode_shape_hash": "2456147ebe081bcc2ccf2d8096dc6e123e0316e24e5132d35cd039134ab626f5",
+        "register_shape_hash": "b2355d94c4f16b8dd026874ff708f4b9375e0abda8e59ce4080e70c9b7bb7604",
+        "shape_hash": "79085085d77c6d5a49adda72dd09c958369ec50fbc6a501b77fd0a9cf63faf55",
+        "size": 8,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x1720"
+    }
+  ],
+  "artifact": "spectron_tstring_manual_translation_anchors_20260827",
+  "context": {
+    "resolution": "overload order, wrapper behavior, target pseudocode, and exact normalized function features",
+    "source_classes": [
+      "TString"
+    ],
+    "target_class_clusters": [
+      "C8THgaTQxF"
+    ]
+  },
+  "inputs": {
+    "original_binary": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so",
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_current.json",
+    "original_features_sha256": "243341ad40e912500365b6d7eb5b69f9f3b9d6200f5c825629cfc56d4343ac07",
+    "spectron_binary": "/tmp/spectron-libqplay-inspect/lib/arm64-v8a/libqplay.so",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v173.json",
+    "spectron_features_sha256": "df9742ebdcc42df0286bad96d37f514d27b18f9490e10e86f671f448f8b08f45"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "Every row matches the complete normalized function feature set. Repeated numeric insertion and comparison wrappers are resolved by their overload order and target pseudocode behavior.",
+    "The v18_ aliases are scoped to the exact hashed Spectron library in the inputs and are an IDA analysis overlay only."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for TString numeric insertion, prefix, and case-insensitive comparison helpers",
+  "summary": {
+    "address_delta_groups": {
+      "+0x14d8": 3,
+      "+0x1720": 3
+    },
+    "anchor_count": 6,
+    "exact_shape_anchor_count": 6,
+    "high_confidence_count": 6,
+    "layout_change_anchor_count": 0,
+    "new_context_anchor_count": 6,
+    "target_default_name_count": 0
+  }
+}
