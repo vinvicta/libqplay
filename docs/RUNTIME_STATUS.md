@@ -1110,6 +1110,15 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_client_var_core_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+157. The next IDA pass translated four `TStringList` comma-text methods covering
+     quoted parsing, construction, single-quote serialization, and double-quote
+     serialization. The labels reopened successfully in the v97 disposable
+     copy. The target constructor carries an additional byte flag, and the
+     rebuilt string wrapper makes the parser and serializer call counts differ,
+     so these are semantic anchors rather than exact byte matches. See
+     `artifacts/spectron_tstringlist_comma_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
