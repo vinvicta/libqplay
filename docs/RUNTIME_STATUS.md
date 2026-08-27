@@ -1197,6 +1197,13 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_window_input_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+168. The next IDA pass translated six `TDrawingPanel` methods covering both
+     constructors, image wrappers, named image filters, and named palette
+     selection. The labels reopened successfully in the v108 disposable copy.
+     See
+     `artifacts/spectron_drawing_panel_residual_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

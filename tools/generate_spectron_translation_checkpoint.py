@@ -235,6 +235,8 @@ def main() -> None:
     parser.add_argument("--font-runtime-verification", type=Path)
     parser.add_argument("--window-input-anchors", type=Path)
     parser.add_argument("--window-input-verification", type=Path)
+    parser.add_argument("--drawing-panel-residual-anchors", type=Path)
+    parser.add_argument("--drawing-panel-residual-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3186,6 +3188,34 @@ def main() -> None:
         result["window_input_anchors"] = window_input
         result["interpretation"].append(
             "The one-hundred-fifth database revision also contains the separately reviewed TWindow mouse and key event dispatch anchors."
+        )
+    drawing_panel_residual = None
+    if args.drawing_panel_residual_anchors or args.drawing_panel_residual_verification:
+        if not args.drawing_panel_residual_anchors or not args.drawing_panel_residual_verification:
+            raise ValueError(
+                "drawing-panel residual anchors and drawing-panel residual verification must be supplied together"
+            )
+        drawing_panel_residual_document = load(args.drawing_panel_residual_anchors)
+        drawing_panel_residual_verification = load(args.drawing_panel_residual_verification)
+        if drawing_panel_residual_document.get("artifact") != "spectron_drawing_panel_residual_manual_translation_anchors_20260826":
+            raise ValueError("unexpected drawing-panel residual anchor artifact")
+        if not drawing_panel_residual_verification.get("verified"):
+            raise ValueError("drawing-panel residual anchor reopen verification did not pass")
+        expected_drawing_panel_residual = len(drawing_panel_residual_document["anchors"])
+        if drawing_panel_residual_verification["verified_name_count"] != expected_drawing_panel_residual:
+            raise ValueError("drawing-panel residual verification count differs from artifact")
+        drawing_panel_residual = {
+            "anchor_path": str(args.drawing_panel_residual_anchors),
+            "anchor_sha256": sha256_path(args.drawing_panel_residual_anchors),
+            "reopen_verification": str(args.drawing_panel_residual_verification),
+            "anchor_count": expected_drawing_panel_residual,
+            "verified_name_count": drawing_panel_residual_verification["verified_name_count"],
+            "reopen_failure_count": drawing_panel_residual_verification["failure_count"],
+        }
+    if drawing_panel_residual is not None:
+        result["drawing_panel_residual_anchors"] = drawing_panel_residual
+        result["interpretation"].append(
+            "The one-hundred-sixth database revision also contains the separately reviewed TDrawingPanel residual constructor, image, filter, and palette anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
