@@ -229,6 +229,8 @@ def main() -> None:
     parser.add_argument("--draw-texture-verification", type=Path)
     parser.add_argument("--bitmap-array-holder-anchors", type=Path)
     parser.add_argument("--bitmap-array-holder-verification", type=Path)
+    parser.add_argument("--color-manager-anchors", type=Path)
+    parser.add_argument("--color-manager-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3096,6 +3098,34 @@ def main() -> None:
         result["bitmap_array_holder_anchors"] = bitmap_array_holder
         result["interpretation"].append(
             "The one-hundred-second database revision also contains the separately reviewed TBitmapArrayHolder constructor, rectangle discovery, lookup, and registry anchors."
+        )
+    color_manager = None
+    if args.color_manager_anchors or args.color_manager_verification:
+        if not args.color_manager_anchors or not args.color_manager_verification:
+            raise ValueError(
+                "color-manager anchors and color-manager verification must be supplied together"
+            )
+        color_manager_document = load(args.color_manager_anchors)
+        color_manager_verification = load(args.color_manager_verification)
+        if color_manager_document.get("artifact") != "spectron_color_manager_manual_translation_anchors_20260826":
+            raise ValueError("unexpected color-manager anchor artifact")
+        if not color_manager_verification.get("verified"):
+            raise ValueError("color-manager anchor reopen verification did not pass")
+        expected_color_manager = len(color_manager_document["anchors"])
+        if color_manager_verification["verified_name_count"] != expected_color_manager:
+            raise ValueError("color-manager verification count differs from artifact")
+        color_manager = {
+            "anchor_path": str(args.color_manager_anchors),
+            "anchor_sha256": sha256_path(args.color_manager_anchors),
+            "reopen_verification": str(args.color_manager_verification),
+            "anchor_count": expected_color_manager,
+            "verified_name_count": color_manager_verification["verified_name_count"],
+            "reopen_failure_count": color_manager_verification["failure_count"],
+        }
+    if color_manager is not None:
+        result["color_manager_anchors"] = color_manager
+        result["interpretation"].append(
+            "The one-hundred-third database revision also contains the separately reviewed TColorManager activation, stack-state, cleanup, pop, and initialization anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
