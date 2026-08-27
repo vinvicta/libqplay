@@ -1,0 +1,154 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both select output by show-image mode, emit the same @ text, # polygon, % textured-polygon, and & animation prefixes, and encode the same tile and gani fields.",
+        "Both preserve the part-index and animation-parameter branches, including the zero-value fallback and five-value color or parameter loop. The target keeps the same class-local method and grows from 980 to 1132 bytes with one fewer basic block."
+      ],
+      "match_kind": "manual-showimg-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x2349e0",
+      "original_metrics": {
+        "basic_block_count": 34,
+        "instruction_count": 241,
+        "mnemonic_hash": "2e13aad710b16b2a7ddc2205cc9beb3bdc06e5b928582593b025c3f412eb1b51",
+        "register_shape_hash": "a22ff25808a0ce1d18592dbbd8eeb1d9d0b4cb62cb7f5a35992a86fbe1edf057",
+        "shape_hash": "ef703777b6e7f1e4419e03139741f7f10827040720cf553cb07c58acb5a250d1",
+        "size": 980
+      },
+      "original_name": "TShowImg_readString_void",
+      "original_string_refs": [
+        "#",
+        "%",
+        "&",
+        "0",
+        "@"
+      ],
+      "proposed_name": "v18_TShowImg_readString_void",
+      "semantic_match_already_present": false,
+      "source_basis": "show-image wire string encoder",
+      "spectron_current_name": "_ZN10eODlJaQ5OL10VkenganG9nEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x23e7d0",
+      "spectron_metrics": {
+        "basic_block_count": 33,
+        "instruction_count": 279,
+        "mnemonic_hash": "266fb41275e5f50e8d371bbc3cf4dfc331690e3e3a58b9445798122ab46f8eb1",
+        "register_shape_hash": "0595026fca4662ae1a1eb7582b8099893bcebd62f2fa21225979ad5900e4dba6",
+        "shape_hash": "458478fa54836f0cc039afa26d905a7a779d7b2bb9ab993386dce78b0e53cdf3",
+        "size": 1132
+      },
+      "spectron_string_refs": [
+        "#",
+        "%",
+        "&",
+        "0",
+        "@"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both dispatch the first encoded character to showPoly, showTexturedPoly, showAni, or showText and use ATTR and PARAM prefixes to route attribute and parameter strings to the sprite path.",
+        "Both fall back to the image path for empty, numeric, or unrecognized values and retain the same 27-block dispatcher. The target is 580 bytes versus 592 in the source after wrapper rebuilding."
+      ],
+      "match_kind": "manual-showimg-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x236b8c",
+      "original_metrics": {
+        "basic_block_count": 27,
+        "instruction_count": 145,
+        "mnemonic_hash": "232692a217eb5b9c7e7baf90e0a746db9fd679791ca506d3bbca16ac01574b73",
+        "register_shape_hash": "e5b9b0f5419939a1c5ed49a7dca37fa58047930874d87e3b6d2ab5dc5366dbb4",
+        "shape_hash": "9b7d9898270d5acc01ed01958ff877fb65ee44f3c58206c41ec85965462e02a9",
+        "size": 592
+      },
+      "original_name": "TShowImg_writeString_TString_const",
+      "original_string_refs": [
+        "ATTR",
+        "PARAM"
+      ],
+      "proposed_name": "v18_TShowImg_writeString_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "show-image wire string dispatcher",
+      "spectron_current_name": "_ZN10eODlJaQ5OL10m6pngaXzjoERK10CanTfaz6bZ",
+      "spectron_default_name": false,
+      "spectron_ea": "0x240a14",
+      "spectron_metrics": {
+        "basic_block_count": 27,
+        "instruction_count": 143,
+        "mnemonic_hash": "68cf59ed2ac57696892a5a6fef1b3d7b5f208dfb859ecd77ab9f8da6ad6fa54c",
+        "register_shape_hash": "df8b65781e7bb0d29873c60038d8d447ca942d120dd31589fab9f75c8688605b",
+        "shape_hash": "a30322da23f1ddf65d1c544100f64aadce01746479ae776fe0adef10747ed082",
+        "size": 580
+      },
+      "spectron_string_refs": [
+        "ATTR",
+        "PARAM"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both reject a missing player, switch over network property indexes 0 through 8, encode the image and image-part fields, and clamp numeric values into the same one-byte wire representation.",
+        "Both use player-relative coordinates for the low image modes, preserve the rotation, alpha, color, speed, and layer calculations, and return the encoded string through the caller buffer. The target adds one basic block and grows from 1256 to 1288 bytes."
+      ],
+      "match_kind": "manual-showimg-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x2372d8",
+      "original_metrics": {
+        "basic_block_count": 58,
+        "instruction_count": 313,
+        "mnemonic_hash": "bf0ced5d69902bff02883aa3a80ee411a6079a2854fc932508ee5eb92f794f04",
+        "register_shape_hash": "5807cfee96c96918fb298fc51c1c4a9dea525632cbbb54ea174eedc1c40ac01f",
+        "shape_hash": "8136d3f1ef3f9e803e153720e51dee7b7d892de26d4c3155aa898c6d37a0bf64",
+        "size": 1256
+      },
+      "original_name": "TShowImg_getNetProperty_TServerPlayer_int",
+      "original_string_refs": [],
+      "proposed_name": "v18_TShowImg_getNetProperty_TServerPlayer_int",
+      "semantic_match_already_present": false,
+      "source_basis": "show-image network property encoder",
+      "spectron_current_name": "_ZN10eODlJaQ5OL10fAkcNaaWZ_EP10MpGzgariDyi",
+      "spectron_default_name": false,
+      "spectron_ea": "0x241154",
+      "spectron_metrics": {
+        "basic_block_count": 59,
+        "instruction_count": 321,
+        "mnemonic_hash": "8607ad6a4067d3ca6242d44019a89c4067f24b3f4d8b20cd77c9468a4b165ed1",
+        "register_shape_hash": "8e0d3f300b872adf62ecc61fe613a0ce55107c9b215b76cad14606fe29a05a61",
+        "shape_hash": "ab10a746b32709d39fc85baf5eb4469114cba7224df0efe20dee4bd78b5de5a5",
+        "size": 1288
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_showimg_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v1_saved.json",
+    "spectron_features_sha256": "a8d58f85502362316ee99a0f79c2cd7a4ad5d6fac94aca0ee75bd0d2965fc2a1"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The changed-size rows rely on class-local order, wire-format prefixes, field offsets, preserved property-index branches, and pseudocode behavior rather than byte identity."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for TShowImg serialization and network properties",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 3,
+    "high_confidence_count": 3,
+    "new_context_anchor_count": 3,
+    "target_default_name_count": 0
+  }
+}

@@ -834,6 +834,12 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_particle_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+117. Clean IDA review added three high-confidence `TShowImg` anchors for
+     mode-prefixed wire strings and indexed network-property encoding. All
+     three reopened successfully in the v57 disposable copy. See
+     `artifacts/spectron_showimg_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

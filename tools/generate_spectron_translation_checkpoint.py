@@ -133,6 +133,8 @@ def main() -> None:
     parser.add_argument("--tiles-update-verification", type=Path)
     parser.add_argument("--particle-anchors", type=Path)
     parser.add_argument("--particle-verification", type=Path)
+    parser.add_argument("--showimg-anchors", type=Path)
+    parser.add_argument("--showimg-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1656,6 +1658,34 @@ def main() -> None:
         result["particle_anchors"] = particle
         result["interpretation"].append(
             "The fifty-fourth database revision also contains the separately reviewed particle animation, appearance, and polygon anchors."
+        )
+    showimg = None
+    if args.showimg_anchors or args.showimg_verification:
+        if not args.showimg_anchors or not args.showimg_verification:
+            raise ValueError(
+                "ShowImg anchors and ShowImg verification must be supplied together"
+            )
+        showimg_document = load(args.showimg_anchors)
+        showimg_verification = load(args.showimg_verification)
+        if showimg_document.get("artifact") != "spectron_showimg_manual_translation_anchors_20260826":
+            raise ValueError("unexpected ShowImg anchor artifact")
+        if not showimg_verification.get("verified"):
+            raise ValueError("ShowImg anchor reopen verification did not pass")
+        expected_showimg = len(showimg_document["anchors"])
+        if showimg_verification["verified_name_count"] != expected_showimg:
+            raise ValueError("ShowImg verification count differs from artifact")
+        showimg = {
+            "anchor_path": str(args.showimg_anchors),
+            "anchor_sha256": sha256_path(args.showimg_anchors),
+            "reopen_verification": str(args.showimg_verification),
+            "anchor_count": expected_showimg,
+            "verified_name_count": showimg_verification["verified_name_count"],
+            "reopen_failure_count": showimg_verification["failure_count"],
+        }
+    if showimg is not None:
+        result["showimg_anchors"] = showimg
+        result["interpretation"].append(
+            "The fifty-fifth database revision also contains the separately reviewed TShowImg serialization and network-property anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

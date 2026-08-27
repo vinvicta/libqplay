@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v56.i64",
-    "sha256": "592fc346da450b304540618a4c14f8ab1a0cff048e4efc59acb3a5fb33a147d0"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v57.i64",
+    "sha256": "4ea4e394195d1d7218b67c4e86c8edd45e68ebd0db4b38f3d948f6ae1f60b79c"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -199,7 +199,8 @@
     "The fifty-first database revision also contains the separately reviewed GS2 universe, class, and zipped-script anchors.",
     "The fifty-second database revision also contains the separately reviewed static-variable, JSON-serialization, and tile-definition anchors.",
     "The fifty-third database revision also contains the separately reviewed tile selection, definition-update, temporary-tile, and screen-rendering anchors.",
-    "The fifty-fourth database revision also contains the separately reviewed particle animation, appearance, and polygon anchors."
+    "The fifty-fourth database revision also contains the separately reviewed particle animation, appearance, and polygon anchors.",
+    "The fifty-fifth database revision also contains the separately reviewed TShowImg serialization and network-property anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -419,6 +420,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_script_universe_verification_v53.json",
     "verified_name_count": 8
+  },
+  "showimg_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "artifacts/spectron_showimg_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "85caeb5e18ade6da695b4bb81f9d4878ae4f1d1222eb1e116b3d018fd9be0e04",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_showimg_verification_v57.json",
+    "verified_name_count": 3
   },
   "socket_state_anchors": {
     "anchor_count": 5,

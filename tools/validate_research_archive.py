@@ -221,6 +221,9 @@ def main():
     spectron_particle_anchors = load_json(
         "artifacts/spectron_particle_manual_translation_anchors_20260826.json"
     )
+    spectron_showimg_anchors = load_json(
+        "artifacts/spectron_showimg_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -1531,6 +1534,16 @@ def main():
     check("Spectron particle semantic overlap", spectron_particle_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron particle default targets", spectron_particle_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron ShowImg artifact",
+        spectron_showimg_anchors["artifact"],
+        "spectron_showimg_manual_translation_anchors_20260826",
+    )
+    check("Spectron ShowImg network", spectron_showimg_anchors["network_contacted"], False)
+    check("Spectron ShowImg total", spectron_showimg_anchors["summary"]["anchor_count"], 3)
+    check("Spectron ShowImg high confidence", spectron_showimg_anchors["summary"]["high_confidence_count"], 3)
+    check("Spectron ShowImg semantic overlap", spectron_showimg_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron ShowImg default targets", spectron_showimg_anchors["summary"]["target_default_name_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -1592,7 +1605,8 @@ def main():
     check("Spectron checkpoint static/JSON/tiles anchor count", spectron_checkpoint["static_json_tiles_anchors"]["verified_name_count"], 3)
     check("Spectron checkpoint tiles-update anchor count", spectron_checkpoint["tiles_update_anchors"]["verified_name_count"], 8)
     check("Spectron checkpoint particle anchor count", spectron_checkpoint["particle_anchors"]["verified_name_count"], 5)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "592fc346da450b304540618a4c14f8ab1a0cff048e4efc59acb3a5fb33a147d0")
+    check("Spectron checkpoint ShowImg anchor count", spectron_checkpoint["showimg_anchors"]["verified_name_count"], 3)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "4ea4e394195d1d7218b67c4e86c8edd45e68ebd0db4b38f3d948f6ae1f60b79c")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -1708,6 +1722,7 @@ def main():
         spectron_static_json_tiles_anchors,
         spectron_tiles_update_anchors,
         spectron_particle_anchors,
+        spectron_showimg_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
