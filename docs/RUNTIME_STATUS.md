@@ -1482,6 +1482,18 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_particle_emitter_script_vars_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+260. The next IDA pass resolved the remaining short `TSounds` control
+    callbacks. Source `TSounds_setMusicVolume` at `0xe1350` maps exactly to
+    target `sub_E1F28` at `0xe1f28`; source `TSounds_updateMusic_void` at
+    `0xe1888` maps to target `0xe2470`. The update row is distinguished from
+    the stop-MIDI wrapper by its sound-player virtual slot `+48` instead of
+    `+72`. Both aliases reopened successfully in the v201 copy, which has
+    11,694 functions, 3,641 high-confidence labels, and 1,218 default
+    `sub_` names, with zero semantic reopen failures. See
+    `artifacts/spectron_sounds_control_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_sounds_control_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 259. The next IDA pass resolved the `TSoundEffect` constructor and
     `TSounds_getSoundEffect_TString_const` cache lookup. Source `0xe0dc0`
     maps to target `0xe1970`, and source `0xe0e48` maps to target `0xe1a1c`.

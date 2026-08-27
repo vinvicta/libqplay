@@ -338,6 +338,9 @@ def main():
     spectron_sounds_effect_anchors = load_json(
         "artifacts/spectron_sounds_effect_manual_translation_anchors_20260827.json"
     )
+    spectron_sounds_control_anchors = load_json(
+        "artifacts/spectron_sounds_control_manual_translation_anchors_20260827.json"
+    )
     spectron_server_animation_anchors = load_json(
         "artifacts/spectron_server_animation_manual_translation_anchors_20260826.json"
     )
@@ -3371,6 +3374,55 @@ def main():
         "0xe1a1c",
     )
     check(
+        "Spectron sounds control artifact",
+        spectron_sounds_control_anchors["artifact"],
+        "spectron_sounds_control_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron sounds control network",
+        spectron_sounds_control_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron sounds control total",
+        spectron_sounds_control_anchors["summary"]["anchor_count"],
+        2,
+    )
+    check(
+        "Spectron sounds control high confidence",
+        spectron_sounds_control_anchors["summary"]["high_confidence_count"],
+        2,
+    )
+    check(
+        "Spectron sounds control semantic overlap",
+        spectron_sounds_control_anchors["summary"]["already_in_semantic_map"],
+        0,
+    )
+    check(
+        "Spectron sounds control exact-shape count",
+        spectron_sounds_control_anchors["summary"]["exact_shape_anchor_count"],
+        2,
+    )
+    check(
+        "Spectron sounds control full-feature count",
+        spectron_sounds_control_anchors["summary"]["full_metric_exact_count"],
+        1,
+    )
+    sounds_control_targets = {
+        row["original_name"]: row
+        for row in spectron_sounds_control_anchors["anchors"]
+    }
+    check(
+        "Spectron sounds setMusicVolume target",
+        sounds_control_targets["TSounds_setMusicVolume"]["spectron_ea"],
+        "0xe1f28",
+    )
+    check(
+        "Spectron sounds updateMusic target",
+        sounds_control_targets["TSounds_updateMusic_void"]["spectron_ea"],
+        "0xe2470",
+    )
+    check(
         "Spectron server-animation artifact",
         spectron_server_animation_anchors["artifact"],
         "spectron_server_animation_manual_translation_anchors_20260826",
@@ -4518,7 +4570,7 @@ def main():
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1219)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1218)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -4716,7 +4768,8 @@ def main():
     check("Spectron checkpoint Android TapJoy/video anchor count", spectron_checkpoint["android_tapjoy_video_anchors"]["verified_name_count"], 2)
     check("Spectron checkpoint sounds music-state anchor count", spectron_checkpoint["sounds_music_state_anchors"]["verified_name_count"], 3)
     check("Spectron checkpoint sounds effect anchor count", spectron_checkpoint["sounds_effect_anchors"]["verified_name_count"], 2)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "604ebbe701eca3e90de161f10ac01d8bcbbd201f6ae5761bd0eefcc0c0294df3")
+    check("Spectron checkpoint sounds control anchor count", spectron_checkpoint["sounds_control_anchors"]["verified_name_count"], 2)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "17db3651520fac5f9ef448f8b70be215cc6c1c36255ffa0aa21f65436a032c03")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],

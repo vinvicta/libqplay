@@ -209,6 +209,8 @@ def main() -> None:
     parser.add_argument("--sounds-music-state-verification", type=Path)
     parser.add_argument("--sounds-effect-anchors", type=Path)
     parser.add_argument("--sounds-effect-verification", type=Path)
+    parser.add_argument("--sounds-control-anchors", type=Path)
+    parser.add_argument("--sounds-control-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
     parser.add_argument("--server-animation-verification", type=Path)
     parser.add_argument("--player-lifecycle-anchors", type=Path)
@@ -3034,6 +3036,42 @@ def main() -> None:
         result["sounds_effect_anchors"] = sounds_effect
         result["interpretation"].append(
             "The two-hundredth database revision also contains the separately reviewed TSounds sound-effect constructor and cache lookup anchors."
+        )
+    sounds_control = None
+    if args.sounds_control_anchors or args.sounds_control_verification:
+        if not args.sounds_control_anchors or not args.sounds_control_verification:
+            raise ValueError(
+                "sound control anchors and verification must be supplied together"
+            )
+        sounds_control_document = load(args.sounds_control_anchors)
+        sounds_control_verification = load(args.sounds_control_verification)
+        if (
+            sounds_control_document.get("artifact")
+            != "spectron_sounds_control_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected sound control anchor artifact")
+        if not sounds_control_verification.get("verified"):
+            raise ValueError("sound control anchor reopen verification did not pass")
+        expected_sounds_control = len(sounds_control_document["anchors"])
+        if (
+            sounds_control_verification["verified_name_count"]
+            != expected_sounds_control
+        ):
+            raise ValueError("sound control verification count differs from artifact")
+        sounds_control = {
+            "anchor_path": str(args.sounds_control_anchors),
+            "anchor_sha256": sha256_path(args.sounds_control_anchors),
+            "reopen_verification": str(args.sounds_control_verification),
+            "anchor_count": expected_sounds_control,
+            "verified_name_count": sounds_control_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": sounds_control_verification["failure_count"],
+        }
+    if sounds_control is not None:
+        result["sounds_control_anchors"] = sounds_control
+        result["interpretation"].append(
+            "The two-hundred-first database revision also contains the separately reviewed TSounds volume and music-update control anchors."
         )
     server_animation = None
     if args.server_animation_anchors or args.server_animation_verification:
