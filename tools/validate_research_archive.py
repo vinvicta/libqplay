@@ -329,6 +329,9 @@ def main():
     spectron_tsocket_static_strings_anchors = load_json(
         "artifacts/spectron_tsocket_static_state_manual_translation_anchors_20260827.json"
     )
+    spectron_android_tapjoy_video_anchors = load_json(
+        "artifacts/spectron_android_tapjoy_video_state_manual_translation_anchors_20260827.json"
+    )
     spectron_server_animation_anchors = load_json(
         "artifacts/spectron_server_animation_manual_translation_anchors_20260826.json"
     )
@@ -3189,6 +3192,67 @@ def main():
         "0xe12dc",
     )
     check(
+        "Spectron Android TapJoy/video artifact",
+        spectron_android_tapjoy_video_anchors["artifact"],
+        "spectron_android_tapjoy_video_state_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron Android TapJoy/video network",
+        spectron_android_tapjoy_video_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron Android TapJoy/video total",
+        spectron_android_tapjoy_video_anchors["summary"]["anchor_count"],
+        2,
+    )
+    check(
+        "Spectron Android TapJoy/video high confidence",
+        spectron_android_tapjoy_video_anchors["summary"]["high_confidence_count"],
+        2,
+    )
+    check(
+        "Spectron Android TapJoy/video semantic overlap",
+        spectron_android_tapjoy_video_anchors["summary"]["already_in_semantic_map"],
+        0,
+    )
+    check(
+        "Spectron Android TapJoy/video layout-change count",
+        spectron_android_tapjoy_video_anchors["summary"]["layout_change_anchor_count"],
+        2,
+    )
+    check(
+        "Spectron Android TapJoy/video source default count",
+        spectron_android_tapjoy_video_anchors["summary"]["source_default_name_count"],
+        1,
+    )
+    check(
+        "Spectron Android TapJoy/video target default count",
+        spectron_android_tapjoy_video_anchors["summary"]["target_default_name_count"],
+        2,
+    )
+    check(
+        "Spectron Android TapJoy/video state field count",
+        spectron_android_tapjoy_video_anchors["summary"]["state_field_count"],
+        7,
+    )
+    android_tapjoy_video_targets = {
+        row["original_name"]: row
+        for row in spectron_android_tapjoy_video_anchors["anchors"]
+    }
+    check(
+        "Spectron Android TapJoy/video initializer target",
+        android_tapjoy_video_targets["sub_E0AD0"]["spectron_ea"],
+        "0xe1640",
+    )
+    check(
+        "Spectron Android TapJoy/video cleanup target",
+        android_tapjoy_video_targets["TServerFlying_clearStaticStrings"][
+            "spectron_ea"
+        ],
+        "0xe0438",
+    )
+    check(
         "Spectron server-animation artifact",
         spectron_server_animation_anchors["artifact"],
         "spectron_server_animation_manual_translation_anchors_20260826",
@@ -4336,7 +4400,7 @@ def main():
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1222)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1220)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -4531,7 +4595,8 @@ def main():
     check("Spectron checkpoint THTMLDefinitions defaults anchor count", spectron_checkpoint["thtml_definitions_defaults_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint TClient static strings anchor count", spectron_checkpoint["tclient_static_strings_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint TSocket static strings anchor count", spectron_checkpoint["tsocket_static_strings_anchors"]["verified_name_count"], 1)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "8be87e35fedd96c6961e725a5b8f12de9e381a1e25abb35fd6193e64c404002d")
+    check("Spectron checkpoint Android TapJoy/video anchor count", spectron_checkpoint["android_tapjoy_video_anchors"]["verified_name_count"], 2)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "8f0f2b7d7ef3593c95316c88c8ca5c9b7b9e1a1481cdf9da8bc9e02adcfb1ee3")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],

@@ -203,6 +203,8 @@ def main() -> None:
     parser.add_argument("--tclient-static-strings-verification", type=Path)
     parser.add_argument("--tsocket-static-strings-anchors", type=Path)
     parser.add_argument("--tsocket-static-strings-verification", type=Path)
+    parser.add_argument("--android-tapjoy-video-anchors", type=Path)
+    parser.add_argument("--android-tapjoy-video-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
     parser.add_argument("--server-animation-verification", type=Path)
     parser.add_argument("--player-lifecycle-anchors", type=Path)
@@ -2898,6 +2900,57 @@ def main() -> None:
         result["tsocket_static_strings_anchors"] = tsocket_static_strings
         result["interpretation"].append(
             "The one-hundred-ninety-seventh database revision also contains the separately reviewed TSocket static-string initializer anchor."
+        )
+    android_tapjoy_video = None
+    if args.android_tapjoy_video_anchors or args.android_tapjoy_video_verification:
+        if (
+            not args.android_tapjoy_video_anchors
+            or not args.android_tapjoy_video_verification
+        ):
+            raise ValueError(
+                "Android TapJoy/video anchors and verification must be supplied together"
+            )
+        android_tapjoy_video_document = load(args.android_tapjoy_video_anchors)
+        android_tapjoy_video_verification = load(
+            args.android_tapjoy_video_verification
+        )
+        if (
+            android_tapjoy_video_document.get("artifact")
+            != "spectron_android_tapjoy_video_state_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected Android TapJoy/video anchor artifact")
+        if not android_tapjoy_video_verification.get("verified"):
+            raise ValueError(
+                "Android TapJoy/video anchor reopen verification did not pass"
+            )
+        expected_android_tapjoy_video = len(
+            android_tapjoy_video_document["anchors"]
+        )
+        if (
+            android_tapjoy_video_verification["verified_name_count"]
+            != expected_android_tapjoy_video
+        ):
+            raise ValueError(
+                "Android TapJoy/video verification count differs from artifact"
+            )
+        android_tapjoy_video = {
+            "anchor_path": str(args.android_tapjoy_video_anchors),
+            "anchor_sha256": sha256_path(args.android_tapjoy_video_anchors),
+            "reopen_verification": str(
+                args.android_tapjoy_video_verification
+            ),
+            "anchor_count": expected_android_tapjoy_video,
+            "verified_name_count": android_tapjoy_video_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": android_tapjoy_video_verification[
+                "failure_count"
+            ],
+        }
+    if android_tapjoy_video is not None:
+        result["android_tapjoy_video_anchors"] = android_tapjoy_video
+        result["interpretation"].append(
+            "The one-hundred-ninety-eighth database revision also contains the separately reviewed Android TapJoy and video state reset and cleanup anchors."
         )
     server_animation = None
     if args.server_animation_anchors or args.server_animation_verification:

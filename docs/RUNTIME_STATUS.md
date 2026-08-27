@@ -1482,6 +1482,19 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_particle_emitter_script_vars_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+257. The next IDA pass resolved the corrected Android, TapJoy, and video
+    static-state pair. Source `sub_E0AD0` at `0xe0ad0` maps to target
+    `sub_E1640` at `0xe1640`, while the corrected source cleanup role at
+    `0xe06a8` maps to target `sub_E0438` at `0xe0438`. The seven mapped
+    fields cover the TapJoy strings, video callback state, and cached video
+    rectangle. Target-only `qword_3A59C8` is documented separately because
+    it is initialized and cleared only by the target pair. The v198 copy has
+    11,694 functions, 3,641 high-confidence labels, and 1,220 default
+    `sub_` names, with zero semantic reopen failures. See
+    `artifacts/spectron_android_tapjoy_video_state_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_android_tapjoy_video_state_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 256. The next IDA pass translated the `TSocket` static-string initializer.
     Source `sub_E0AB4` at `0xe0ab4` maps to target `sub_E12DC` at `0xe12dc`,
     preserving the two allowed-connection and allowed-port string fields and
