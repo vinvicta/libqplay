@@ -167,6 +167,8 @@ def main() -> None:
     parser.add_argument("--npc-destructor-verification", type=Path)
     parser.add_argument("--server-level-property-anchors", type=Path)
     parser.add_argument("--server-level-property-verification", type=Path)
+    parser.add_argument("--server-level-interaction-anchors", type=Path)
+    parser.add_argument("--server-level-interaction-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2166,6 +2168,34 @@ def main() -> None:
         result["server_level_property_anchors"] = server_level_property
         result["interpretation"].append(
             "The seventy-first database revision also contains the separately reviewed compact server-level property and level-link destination anchors."
+        )
+    server_level_interaction = None
+    if args.server_level_interaction_anchors or args.server_level_interaction_verification:
+        if not args.server_level_interaction_anchors or not args.server_level_interaction_verification:
+            raise ValueError(
+                "server-level interaction anchors and server-level interaction verification must be supplied together"
+            )
+        server_level_interaction_document = load(args.server_level_interaction_anchors)
+        server_level_interaction_verification = load(args.server_level_interaction_verification)
+        if server_level_interaction_document.get("artifact") != "spectron_server_level_interaction_manual_translation_anchors_20260826":
+            raise ValueError("unexpected server-level interaction anchor artifact")
+        if not server_level_interaction_verification.get("verified"):
+            raise ValueError("server-level interaction anchor reopen verification did not pass")
+        expected_server_level_interaction = len(server_level_interaction_document["anchors"])
+        if server_level_interaction_verification["verified_name_count"] != expected_server_level_interaction:
+            raise ValueError("server-level interaction verification count differs from artifact")
+        server_level_interaction = {
+            "anchor_path": str(args.server_level_interaction_anchors),
+            "anchor_sha256": sha256_path(args.server_level_interaction_anchors),
+            "reopen_verification": str(args.server_level_interaction_verification),
+            "anchor_count": expected_server_level_interaction,
+            "verified_name_count": server_level_interaction_verification["verified_name_count"],
+            "reopen_failure_count": server_level_interaction_verification["failure_count"],
+        }
+    if server_level_interaction is not None:
+        result["server_level_interaction_anchors"] = server_level_interaction
+        result["interpretation"].append(
+            "The seventy-second database revision also contains the separately reviewed server-level interaction, level-link coordinate, and indexed-object removal anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

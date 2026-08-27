@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v73.i64",
-    "sha256": "e38d67d4a9920b462b00c851186a19e93f2f4ed9f9abef957272476402ac52e7"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v74.i64",
+    "sha256": "39cf3f36e09056c034713f8384476d269681315df4ee6b6cbe497cb54720113d"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -216,7 +216,8 @@
     "The sixty-eighth database revision also contains the separately reviewed server-NPC construction, shape, naming, default-image, movement, and property anchors.",
     "The sixty-ninth database revision also contains the separately reviewed compact server-NPC accessor anchors.",
     "The seventieth database revision also contains the separately reviewed server-NPC complete and deleting destructor anchors.",
-    "The seventy-first database revision also contains the separately reviewed compact server-level property and level-link destination anchors."
+    "The seventy-first database revision also contains the separately reviewed compact server-level property and level-link destination anchors.",
+    "The seventy-second database revision also contains the separately reviewed server-level interaction, level-link coordinate, and indexed-object removal anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -540,6 +541,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_server_animation_verification_v59.json",
     "verified_name_count": 3
+  },
+  "server_level_interaction_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "artifacts/spectron_server_level_interaction_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "c789c2d750f0dadc747b93f5215b78db335715acdce2cc52ef87497eb92cf506",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_server_level_interaction_verification_v74.json",
+    "verified_name_count": 5
   },
   "server_level_property_anchors": {
     "anchor_count": 8,

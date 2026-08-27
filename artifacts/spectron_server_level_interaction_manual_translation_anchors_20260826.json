@@ -1,0 +1,223 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both return the explicit destination Y value unless it is the playerx or playery token, in which case they forward the matching active-player coordinate; they fall back to numeric string conversion when no active player exists.",
+        "The source callback record at 0x37fa10 decodes to desty and has no setter; the target keeps the corresponding level-link getter and the playerx and playery literals.",
+        "All exported body metrics match exactly: 172 bytes, 43 instructions, seven blocks, and identical normalized hashes."
+      ],
+      "match_kind": "manual-server-level-interaction-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x19fcdc",
+      "original_metrics": {
+        "basic_block_count": 7,
+        "instruction_count": 43,
+        "mnemonic_hash": "2d5a01336c89d719f1f067791d98581d930bb71c45f2e452980e4ae8b61053ac",
+        "register_shape_hash": "38996d47e85cb590b5cb8385cc2785c021b8a8962f82106baac8058296997f39",
+        "shape_hash": "f3c484e05cbd786412698ff0131590856176c48350e67f221080f9fb5ea92f48",
+        "size": 172
+      },
+      "original_name": "TServerLevelLink_getDestY",
+      "original_string_refs": [
+        "playerx",
+        "playery"
+      ],
+      "proposed_name": "v18_TServerLevelLink_getDestY",
+      "semantic_match_already_present": false,
+      "source_basis": "server-level-link destination Y getter",
+      "spectron_current_name": "sub_1A49B4",
+      "spectron_default_name": true,
+      "spectron_ea": "0x1a49b4",
+      "spectron_metrics": {
+        "basic_block_count": 7,
+        "instruction_count": 43,
+        "mnemonic_hash": "2d5a01336c89d719f1f067791d98581d930bb71c45f2e452980e4ae8b61053ac",
+        "register_shape_hash": "38996d47e85cb590b5cb8385cc2785c021b8a8962f82106baac8058296997f39",
+        "shape_hash": "f3c484e05cbd786412698ff0131590856176c48350e67f221080f9fb5ea92f48",
+        "size": 172
+      },
+      "spectron_string_refs": [
+        "playerx",
+        "playery"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both return the explicit destination X value unless it is the playerx or playery token, in which case they forward the matching active-player coordinate; they fall back to numeric string conversion when no active player exists.",
+        "The source callback record at 0x37f9e0 decodes to destx and has no setter; the target keeps the corresponding level-link getter and the playerx and playery literals.",
+        "All exported body metrics match exactly: 172 bytes, 43 instructions, seven blocks, and identical normalized hashes."
+      ],
+      "match_kind": "manual-server-level-interaction-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x19fd88",
+      "original_metrics": {
+        "basic_block_count": 7,
+        "instruction_count": 43,
+        "mnemonic_hash": "2d5a01336c89d719f1f067791d98581d930bb71c45f2e452980e4ae8b61053ac",
+        "register_shape_hash": "38996d47e85cb590b5cb8385cc2785c021b8a8962f82106baac8058296997f39",
+        "shape_hash": "f3c484e05cbd786412698ff0131590856176c48350e67f221080f9fb5ea92f48",
+        "size": 172
+      },
+      "original_name": "TServerLevelLink_getDestX",
+      "original_string_refs": [
+        "playerx",
+        "playery"
+      ],
+      "proposed_name": "v18_TServerLevelLink_getDestX",
+      "semantic_match_already_present": false,
+      "source_basis": "server-level-link destination X getter",
+      "spectron_current_name": "sub_1A4A60",
+      "spectron_default_name": true,
+      "spectron_ea": "0x1a4a60",
+      "spectron_metrics": {
+        "basic_block_count": 7,
+        "instruction_count": 43,
+        "mnemonic_hash": "2d5a01336c89d719f1f067791d98581d930bb71c45f2e452980e4ae8b61053ac",
+        "register_shape_hash": "38996d47e85cb590b5cb8385cc2785c021b8a8962f82106baac8058296997f39",
+        "shape_hash": "f3c484e05cbd786412698ff0131590856176c48350e67f221080f9fb5ea92f48",
+        "size": 172
+      },
+      "spectron_string_refs": [
+        "playerx",
+        "playery"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both reject negative or out-of-range indexes, delete the indexed explosion from the same logical list, and invoke the removed object's virtual cleanup path.",
+        "The source callback record at 0x37ffb0 decodes exactly to the legacy script name removeexplo; the target keeps the matching indexed-list callback reference.",
+        "All exported body metrics match exactly: 100 bytes, 25 instructions, five blocks, and identical normalized hashes."
+      ],
+      "match_kind": "manual-server-level-interaction-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x19ff84",
+      "original_metrics": {
+        "basic_block_count": 5,
+        "instruction_count": 25,
+        "mnemonic_hash": "4683faef53b93b083dc2692a5aa4530e47e07382b29f9c7802b499da486778f5",
+        "register_shape_hash": "91fc724bd44d21a7a571ab27911e678a01a1930f96579a8ef1eed8009b87ad88",
+        "shape_hash": "5b5075febdf95a6721fe4da7d0b23b602326eabdb11500f9970ef90d626ab387",
+        "size": 100
+      },
+      "original_name": "TServerLevel_script_removeExplo",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerLevel_script_removeExplo",
+      "semantic_match_already_present": false,
+      "source_basis": "server-level indexed explosion removal",
+      "spectron_current_name": "sub_1A4C5C",
+      "spectron_default_name": true,
+      "spectron_ea": "0x1a4c5c",
+      "spectron_metrics": {
+        "basic_block_count": 5,
+        "instruction_count": 25,
+        "mnemonic_hash": "4683faef53b93b083dc2692a5aa4530e47e07382b29f9c7802b499da486778f5",
+        "register_shape_hash": "91fc724bd44d21a7a571ab27911e678a01a1930f96579a8ef1eed8009b87ad88",
+        "shape_hash": "5b5075febdf95a6721fe4da7d0b23b602326eabdb11500f9970ef90d626ab387",
+        "size": 100
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both reject negative or out-of-range indexes, delete the indexed bomb from the action-player level list, read its coordinates, notify the client with the remove-bomb packet when a client exists, and release the removed object.",
+        "The source callback record at 0x37ff80 decodes to removebomb; the target has the matching callback reference at 0x392ff8.",
+        "The target changes the body from 196 bytes and 10 blocks to 196 bytes and eight blocks. Its pseudocode preserves the same list, coordinate, notification, and cleanup phases with rebuilt wrappers."
+      ],
+      "match_kind": "manual-server-level-interaction-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x19ffe8",
+      "original_metrics": {
+        "basic_block_count": 10,
+        "instruction_count": 51,
+        "mnemonic_hash": "e148693e2971ce9ab688e3b03f5655ec5402a62c6f31156a86293c4c37435455",
+        "register_shape_hash": "dd99f552c8b33ab27d1db764d540c99a9a42960e28c294d22bf3ce313f2d504c",
+        "shape_hash": "31387128e43762da8a364a0147f3f1e33c1f1af1a30969886e997460c901468e",
+        "size": 196
+      },
+      "original_name": "TServerLevel_script_removeBomb",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerLevel_script_removeBomb",
+      "semantic_match_already_present": false,
+      "source_basis": "server-level indexed bomb removal and client notification",
+      "spectron_current_name": "sub_1A4CC0",
+      "spectron_default_name": true,
+      "spectron_ea": "0x1a4cc0",
+      "spectron_metrics": {
+        "basic_block_count": 8,
+        "instruction_count": 49,
+        "mnemonic_hash": "64ab233612f0c90966d39ef87ec86953476abc85f9adad2bacafae939ce176be",
+        "register_shape_hash": "7b2c9e8738da2b5ab543985a4b59ae49916a596e65685ac0125c106c6cb3b4c9",
+        "shape_hash": "3156e126f67c94a6818c2c744b2069c0f21c68c2f688ebfd8036debb9450bf2c",
+        "size": 196
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both reject negative or out-of-range indexes, delete the indexed arrow from the same logical list, and invoke the removed object's virtual cleanup path.",
+        "The source callback record at 0x37ff50 decodes to removearrow; the target keeps the matching callback reference at 0x392fc8.",
+        "All exported body metrics match exactly: 100 bytes, 25 instructions, five blocks, and identical normalized hashes."
+      ],
+      "match_kind": "manual-server-level-interaction-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1a00ac",
+      "original_metrics": {
+        "basic_block_count": 5,
+        "instruction_count": 25,
+        "mnemonic_hash": "4683faef53b93b083dc2692a5aa4530e47e07382b29f9c7802b499da486778f5",
+        "register_shape_hash": "91fc724bd44d21a7a571ab27911e678a01a1930f96579a8ef1eed8009b87ad88",
+        "shape_hash": "5b5075febdf95a6721fe4da7d0b23b602326eabdb11500f9970ef90d626ab387",
+        "size": 100
+      },
+      "original_name": "TServerLevel_script_removeArrow",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerLevel_script_removeArrow",
+      "semantic_match_already_present": false,
+      "source_basis": "server-level indexed arrow removal",
+      "spectron_current_name": "sub_1A4D84",
+      "spectron_default_name": true,
+      "spectron_ea": "0x1a4d84",
+      "spectron_metrics": {
+        "basic_block_count": 5,
+        "instruction_count": 25,
+        "mnemonic_hash": "4683faef53b93b083dc2692a5aa4530e47e07382b29f9c7802b499da486778f5",
+        "register_shape_hash": "91fc724bd44d21a7a571ab27911e678a01a1930f96579a8ef1eed8009b87ad88",
+        "shape_hash": "5b5075febdf95a6721fe4da7d0b23b602326eabdb11500f9970ef90d626ab387",
+        "size": 100
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_server_level_interaction_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v1_saved.json",
+    "spectron_features_sha256": "a8d58f85502362316ee99a0f79c2cd7a4ad5d6fac94aca0ee75bd0d2965fc2a1"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The exact rows are supported by matching body hashes, callback-table references, and direct pseudocode. The bomb-removal row is a reviewed context match because its rebuilt target reduces the block count while preserving the state transitions."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for server-level NPC predicates, level-link coordinates, and indexed object removal",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 5,
+    "high_confidence_count": 5,
+    "new_context_anchor_count": 5,
+    "target_default_name_count": 5
+  }
+}

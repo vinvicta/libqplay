@@ -941,6 +941,12 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_server_level_property_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+134. Clean IDA review added five high-confidence server-level interaction
+     anchors for level-link coordinates and indexed explosion, bomb, and arrow
+     removal. All five reopened successfully in the v74 disposable copy. See
+     `artifacts/spectron_server_level_interaction_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

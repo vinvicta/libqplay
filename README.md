@@ -788,6 +788,14 @@ eight reopened successfully. The evidence is in
 `artifacts/spectron_server_level_property_manual_translation_anchors_20260826.json`,
 and the v73 database SHA-256 is recorded in the checkpoint.
 
+A seventy-second disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v74.i64`,
+adds five reviewed server-level interaction anchors for level-link coordinates
+and indexed explosion, bomb, and arrow removal. All five reopened successfully.
+The evidence is in
+`artifacts/spectron_server_level_interaction_manual_translation_anchors_20260826.json`,
+and the v74 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
