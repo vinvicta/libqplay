@@ -1428,6 +1428,17 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+225. The next IDA pass translated 12 exact-shape methods in the server-object
+    cluster: the `TServerBomb` time, order-point, and image helpers, the
+    `TServerChest` open setter, six `TServerFlying` scalar accessors plus its
+    order-point helper, and the `TExplosion` constructor. Eight target bodies
+    had default `sub_` names before the pass. All 12 labels reopened
+    successfully in the v167 disposable copy, which has 11,694 functions,
+    3,641 high-confidence labels, and 1,256 default `sub_` names. See
+    `artifacts/spectron_server_object_scalar_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_server_object_scalar_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 224. The next IDA pass translated the remaining 24 named `TShowImg` methods
     and `TShowImgProperties` destructor-family rows. Twenty-two pairs match
     the complete normalized feature set, while the two properties-class

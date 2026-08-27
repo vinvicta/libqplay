@@ -154,11 +154,11 @@
   },
   "database": {
     "close_reopen_verified": true,
-    "default_sub_function_count": 1264,
+    "default_sub_function_count": 1256,
     "format": "packed IDA 9.3 database",
     "function_count": 11694,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v166.i64",
-    "sha256": "31b96a52e45a605de9aa2c881ea9061c33afda1b2dfac5773c1a420ea7caec77"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v167.i64",
+    "sha256": "99e9466a62544d22433484e73013683ff716f2308956066c83650abc6f449387"
   },
   "draw_texture_anchors": {
     "anchor_count": 4,
@@ -1175,6 +1175,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_showimg_residual_verify_v166.json",
     "verified_name_count": 24
+  },
+  "server_object_scalar_anchors": {
+    "anchor_count": 12,
+    "anchor_path": "artifacts/spectron_server_object_scalar_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "a7ab81f6673cf8699ad3dff26247af6a4ad209e5a35bd03af9883bfdf7e09e60",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_server_object_scalar_verify_v167.json",
+    "verified_name_count": 12
   },
   "socket_cache_residual_anchors": {
     "anchor_count": 5,

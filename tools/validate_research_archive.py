@@ -230,6 +230,9 @@ def main():
     spectron_showimg_residual_anchors = load_json(
         "artifacts/spectron_showimg_residual_manual_translation_anchors_20260827.json"
     )
+    spectron_server_object_scalar_anchors = load_json(
+        "artifacts/spectron_server_object_scalar_manual_translation_anchors_20260827.json"
+    )
     spectron_particle_emitter_anchors = load_json(
         "artifacts/spectron_particle_emitter_manual_translation_anchors_20260826.json"
     )
@@ -1892,6 +1895,17 @@ def main():
     check("Spectron ShowImg residual layout-change count", spectron_showimg_residual_anchors["summary"]["layout_change_anchor_count"], 2)
     check("Spectron ShowImg residual default targets", spectron_showimg_residual_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron server-object scalar artifact",
+        spectron_server_object_scalar_anchors["artifact"],
+        "spectron_server_object_scalar_manual_translation_anchors_20260827",
+    )
+    check("Spectron server-object scalar network", spectron_server_object_scalar_anchors["network_contacted"], False)
+    check("Spectron server-object scalar total", spectron_server_object_scalar_anchors["summary"]["anchor_count"], 12)
+    check("Spectron server-object scalar high confidence", spectron_server_object_scalar_anchors["summary"]["high_confidence_count"], 12)
+    check("Spectron server-object scalar exact-shape count", spectron_server_object_scalar_anchors["summary"]["exact_shape_anchor_count"], 12)
+    check("Spectron server-object scalar layout-change count", spectron_server_object_scalar_anchors["summary"]["layout_change_anchor_count"], 0)
+    check("Spectron server-object scalar default targets", spectron_server_object_scalar_anchors["summary"]["target_default_name_count"], 8)
+    check(
         "Spectron particle-emitter artifact",
         spectron_particle_emitter_anchors["artifact"],
         "spectron_particle_emitter_manual_translation_anchors_20260826",
@@ -3049,7 +3063,7 @@ def main():
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1264)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1256)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -3213,7 +3227,8 @@ def main():
     check("Spectron checkpoint TServerPlayer property-block anchor count", spectron_checkpoint["tserverplayer_property_block_anchors"]["verified_name_count"], 39)
     check("Spectron checkpoint TServerPlayer residual anchor count", spectron_checkpoint["tserverplayer_residual_anchors"]["verified_name_count"], 25)
     check("Spectron checkpoint TServerPlayer tail anchor count", spectron_checkpoint["tserverplayer_tail_anchors"]["verified_name_count"], 7)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "31b96a52e45a605de9aa2c881ea9061c33afda1b2dfac5773c1a420ea7caec77")
+    check("Spectron checkpoint server-object scalar anchor count", spectron_checkpoint["server_object_scalar_anchors"]["verified_name_count"], 12)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "99e9466a62544d22433484e73013683ff716f2308956066c83650abc6f449387")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -3331,6 +3346,7 @@ def main():
         spectron_particle_anchors,
         spectron_showimg_anchors,
         spectron_showimg_residual_anchors,
+        spectron_server_object_scalar_anchors,
         spectron_particle_emitter_anchors,
         spectron_server_animation_anchors,
         spectron_player_lifecycle_anchors,

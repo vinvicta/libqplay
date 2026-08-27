@@ -139,6 +139,8 @@ def main() -> None:
     parser.add_argument("--showimg-property-verification", type=Path)
     parser.add_argument("--showimg-residual-anchors", type=Path)
     parser.add_argument("--showimg-residual-verification", type=Path)
+    parser.add_argument("--server-object-scalar-anchors", type=Path)
+    parser.add_argument("--server-object-scalar-verification", type=Path)
     parser.add_argument("--particle-emitter-anchors", type=Path)
     parser.add_argument("--particle-emitter-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
@@ -1956,6 +1958,34 @@ def main() -> None:
         result["showimg_residual_anchors"] = showimg_residual
         result["interpretation"].append(
             "The one-hundred-sixty-sixth database revision also contains the separately reviewed residual TShowImg wrappers, helpers, and properties-class lifecycle anchors."
+        )
+    server_object_scalar = None
+    if args.server_object_scalar_anchors or args.server_object_scalar_verification:
+        if not args.server_object_scalar_anchors or not args.server_object_scalar_verification:
+            raise ValueError(
+                "server-object scalar anchors and server-object scalar verification must be supplied together"
+            )
+        server_object_scalar_document = load(args.server_object_scalar_anchors)
+        server_object_scalar_verification = load(args.server_object_scalar_verification)
+        if server_object_scalar_document.get("artifact") != "spectron_server_object_scalar_manual_translation_anchors_20260827":
+            raise ValueError("unexpected server-object scalar anchor artifact")
+        if not server_object_scalar_verification.get("verified"):
+            raise ValueError("server-object scalar anchor reopen verification did not pass")
+        expected_server_object_scalar = len(server_object_scalar_document["anchors"])
+        if server_object_scalar_verification["verified_name_count"] != expected_server_object_scalar:
+            raise ValueError("server-object scalar verification count differs from artifact")
+        server_object_scalar = {
+            "anchor_path": str(args.server_object_scalar_anchors),
+            "anchor_sha256": sha256_path(args.server_object_scalar_anchors),
+            "reopen_verification": str(args.server_object_scalar_verification),
+            "anchor_count": expected_server_object_scalar,
+            "verified_name_count": server_object_scalar_verification["verified_name_count"],
+            "reopen_failure_count": server_object_scalar_verification["failure_count"],
+        }
+    if server_object_scalar is not None:
+        result["server_object_scalar_anchors"] = server_object_scalar
+        result["interpretation"].append(
+            "The one-hundred-sixty-seventh database revision also contains the separately reviewed exact-shape server-object scalar and constructor anchors."
         )
     particle_emitter = None
     if args.particle_emitter_anchors or args.particle_emitter_verification:
