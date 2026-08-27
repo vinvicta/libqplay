@@ -804,6 +804,14 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_script_property_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+113. Clean IDA review added eight high-confidence GS2 script-universe anchors
+     for global variables, static objects, class loading, and zipped script
+     packages. All eight reopened successfully in the v53 disposable copy.
+     The zip compiler is represented as an IDA split function, with its short
+     entry range and large associated instruction set recorded in the artifact.
+     See `artifacts/spectron_script_universe_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

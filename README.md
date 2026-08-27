@@ -624,6 +624,16 @@ All nine reopened successfully. The evidence is in
 `artifacts/spectron_script_property_manual_translation_anchors_20260826.json`,
 and the v52 database SHA-256 is recorded in the checkpoint.
 
+A fifty-first disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v53.i64`,
+adds eight reviewed GS2 script-universe anchors covering global variables,
+static objects, class loading, and zipped script packages. All eight reopened
+successfully. The zip compiler is an IDA split function, so its artifact keeps
+the short entry range and records the large associated instruction set. The
+evidence is in
+`artifacts/spectron_script_universe_manual_translation_anchors_20260826.json`,
+and the v53 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and

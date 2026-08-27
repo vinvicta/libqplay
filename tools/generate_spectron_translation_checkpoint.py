@@ -125,6 +125,8 @@ def main() -> None:
     parser.add_argument("--script-executor-verification", type=Path)
     parser.add_argument("--script-property-anchors", type=Path)
     parser.add_argument("--script-property-verification", type=Path)
+    parser.add_argument("--script-universe-anchors", type=Path)
+    parser.add_argument("--script-universe-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1536,6 +1538,34 @@ def main() -> None:
         result["script_property_anchors"] = script_property
         result["interpretation"].append(
             "The fiftieth database revision also contains the separately reviewed GS2 typed property access and registration anchors."
+        )
+    script_universe = None
+    if args.script_universe_anchors or args.script_universe_verification:
+        if not args.script_universe_anchors or not args.script_universe_verification:
+            raise ValueError(
+                "script-universe anchors and script-universe verification must be supplied together"
+            )
+        script_universe_document = load(args.script_universe_anchors)
+        script_universe_verification = load(args.script_universe_verification)
+        if script_universe_document.get("artifact") != "spectron_script_universe_manual_translation_anchors_20260826":
+            raise ValueError("unexpected script-universe anchor artifact")
+        if not script_universe_verification.get("verified"):
+            raise ValueError("script-universe anchor reopen verification did not pass")
+        expected_script_universe = len(script_universe_document["anchors"])
+        if script_universe_verification["verified_name_count"] != expected_script_universe:
+            raise ValueError("script-universe verification count differs from artifact")
+        script_universe = {
+            "anchor_path": str(args.script_universe_anchors),
+            "anchor_sha256": sha256_path(args.script_universe_anchors),
+            "reopen_verification": str(args.script_universe_verification),
+            "anchor_count": expected_script_universe,
+            "verified_name_count": script_universe_verification["verified_name_count"],
+            "reopen_failure_count": script_universe_verification["failure_count"],
+        }
+    if script_universe is not None:
+        result["script_universe_anchors"] = script_universe
+        result["interpretation"].append(
+            "The fifty-first database revision also contains the separately reviewed GS2 universe, class, and zipped-script anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

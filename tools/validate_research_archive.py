@@ -209,6 +209,9 @@ def main():
     spectron_script_property_anchors = load_json(
         "artifacts/spectron_script_property_manual_translation_anchors_20260826.json"
     )
+    spectron_script_universe_anchors = load_json(
+        "artifacts/spectron_script_universe_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -1479,6 +1482,16 @@ def main():
     check("Spectron script-property semantic overlap", spectron_script_property_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron script-property default targets", spectron_script_property_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron script-universe artifact",
+        spectron_script_universe_anchors["artifact"],
+        "spectron_script_universe_manual_translation_anchors_20260826",
+    )
+    check("Spectron script-universe network", spectron_script_universe_anchors["network_contacted"], False)
+    check("Spectron script-universe total", spectron_script_universe_anchors["summary"]["anchor_count"], 8)
+    check("Spectron script-universe high confidence", spectron_script_universe_anchors["summary"]["high_confidence_count"], 8)
+    check("Spectron script-universe semantic overlap", spectron_script_universe_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron script-universe default targets", spectron_script_universe_anchors["summary"]["target_default_name_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -1536,7 +1549,8 @@ def main():
     check("Spectron checkpoint tokenizer anchor count", spectron_checkpoint["tokenizer_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint script-executor anchor count", spectron_checkpoint["script_executor_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint script-property anchor count", spectron_checkpoint["script_property_anchors"]["verified_name_count"], 9)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "b4ae7f8b981ded05bca5a811276aad0f9756ed2662b34d14d77befe7bd56b17d")
+    check("Spectron checkpoint script-universe anchor count", spectron_checkpoint["script_universe_anchors"]["verified_name_count"], 8)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "a8b0e0611f2148be755691539ffa2cf6607c2ed00caf5ff6fe21f4ba2a1e5c80")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -1648,6 +1662,7 @@ def main():
         spectron_tokenizer_anchors,
         spectron_script_executor_anchors,
         spectron_script_property_anchors,
+        spectron_script_universe_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
