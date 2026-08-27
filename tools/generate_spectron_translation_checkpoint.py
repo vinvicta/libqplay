@@ -185,6 +185,8 @@ def main() -> None:
     parser.add_argument("--gani-helper-verification", type=Path)
     parser.add_argument("--gani-runtime-anchors", type=Path)
     parser.add_argument("--gani-runtime-verification", type=Path)
+    parser.add_argument("--gani-render-anchors", type=Path)
+    parser.add_argument("--gani-render-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2436,6 +2438,34 @@ def main() -> None:
         result["gani_runtime_anchors"] = gani_runtime
         result["interpretation"].append(
             "The eightieth database revision also contains the separately reviewed Gani matrix, parameter, and animation-start anchors."
+        )
+    gani_render = None
+    if args.gani_render_anchors or args.gani_render_verification:
+        if not args.gani_render_anchors or not args.gani_render_verification:
+            raise ValueError(
+                "Gani render anchors and Gani render verification must be supplied together"
+            )
+        gani_render_document = load(args.gani_render_anchors)
+        gani_render_verification = load(args.gani_render_verification)
+        if gani_render_document.get("artifact") != "spectron_gani_render_manual_translation_anchors_20260826":
+            raise ValueError("unexpected Gani render anchor artifact")
+        if not gani_render_verification.get("verified"):
+            raise ValueError("Gani render anchor reopen verification did not pass")
+        expected_gani_render = len(gani_render_document["anchors"])
+        if gani_render_verification["verified_name_count"] != expected_gani_render:
+            raise ValueError("Gani render verification count differs from artifact")
+        gani_render = {
+            "anchor_path": str(args.gani_render_anchors),
+            "anchor_sha256": sha256_path(args.gani_render_anchors),
+            "reopen_verification": str(args.gani_render_verification),
+            "anchor_count": expected_gani_render,
+            "verified_name_count": gani_render_verification["verified_name_count"],
+            "reopen_failure_count": gani_render_verification["failure_count"],
+        }
+    if gani_render is not None:
+        result["gani_render_anchors"] = gani_render
+        result["interpretation"].append(
+            "The eighty-first database revision also contains the separately reviewed Gani parameter serializer, reload, and player draw anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

@@ -299,6 +299,9 @@ def main():
     spectron_gani_runtime_anchors = load_json(
         "artifacts/spectron_gani_runtime_manual_translation_anchors_20260826.json"
     )
+    spectron_gani_render_anchors = load_json(
+        "artifacts/spectron_gani_render_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -1870,6 +1873,16 @@ def main():
     check("Spectron Gani-runtime semantic overlap", spectron_gani_runtime_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron Gani-runtime default targets", spectron_gani_runtime_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron Gani-render artifact",
+        spectron_gani_render_anchors["artifact"],
+        "spectron_gani_render_manual_translation_anchors_20260826",
+    )
+    check("Spectron Gani-render network", spectron_gani_render_anchors["network_contacted"], False)
+    check("Spectron Gani-render total", spectron_gani_render_anchors["summary"]["anchor_count"], 3)
+    check("Spectron Gani-render high confidence", spectron_gani_render_anchors["summary"]["high_confidence_count"], 3)
+    check("Spectron Gani-render semantic overlap", spectron_gani_render_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron Gani-render default targets", spectron_gani_render_anchors["summary"]["target_default_name_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -1957,7 +1970,8 @@ def main():
     check("Spectron checkpoint Gani-constructor anchor count", spectron_checkpoint["gani_constructor_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint Gani-helper anchor count", spectron_checkpoint["gani_helper_anchors"]["verified_name_count"], 2)
     check("Spectron checkpoint Gani-runtime anchor count", spectron_checkpoint["gani_runtime_anchors"]["verified_name_count"], 4)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "2e57b6470fc9dd985cfa3f633ef63cbde493f60f13075da12a8ddfdd263d3fec")
+    check("Spectron checkpoint Gani-render anchor count", spectron_checkpoint["gani_render_anchors"]["verified_name_count"], 3)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "d9655d74b7e8e1c7cbcaed47d8840ee6274d61fb45fb2c2e75c8875a3b6d862c")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
