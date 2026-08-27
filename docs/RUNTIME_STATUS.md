@@ -1428,6 +1428,15 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+233. The next IDA pass translated the exact-shape `TString_clear_void` method.
+    The target class-qualified name and sibling method cluster resolve the
+    otherwise identical-shape `CanTfaz6bZ::clear` collision. The alias reopened
+    successfully in the v175 disposable copy, which has 11,694 functions,
+    3,641 high-confidence labels, and 1,250 default `sub_` names. See
+    `artifacts/spectron_tstring_clear_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_tstring_clear_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 232. The next IDA pass translated six exact-shape `TString` methods: signed,
     unsigned, and 64-bit integer insertion, prefix testing, and the bounded
     and unbounded case-insensitive comparison thunks. All six labels reopened
