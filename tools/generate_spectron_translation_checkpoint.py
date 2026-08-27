@@ -287,6 +287,8 @@ def main() -> None:
     parser.add_argument("--tsocket-accessor-residual-verification", type=Path)
     parser.add_argument("--tsocket-ssl-residual-anchors", type=Path)
     parser.add_argument("--tsocket-ssl-residual-verification", type=Path)
+    parser.add_argument("--tsocket-receive-residual-anchors", type=Path)
+    parser.add_argument("--tsocket-receive-residual-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3966,6 +3968,34 @@ def main() -> None:
         result["tsocket_ssl_residual_anchors"] = tsocket_ssl_residual
         result["interpretation"].append(
             "The one-hundred-thirty-third database revision also contains the separately reviewed TSocket SSL configuration and outgoing-buffer residual family."
+        )
+    tsocket_receive_residual = None
+    if args.tsocket_receive_residual_anchors or args.tsocket_receive_residual_verification:
+        if not args.tsocket_receive_residual_anchors or not args.tsocket_receive_residual_verification:
+            raise ValueError(
+                "TSocket receive residual anchors and verification must be supplied together"
+            )
+        tsocket_receive_residual_document = load(args.tsocket_receive_residual_anchors)
+        tsocket_receive_residual_verification = load(args.tsocket_receive_residual_verification)
+        if tsocket_receive_residual_document.get("artifact") != "spectron_tsocket_receive_residual_manual_translation_anchors_20260826":
+            raise ValueError("unexpected TSocket receive residual artifact")
+        if not tsocket_receive_residual_verification.get("verified"):
+            raise ValueError("TSocket receive residual reopen verification did not pass")
+        expected_tsocket_receive_residual = len(tsocket_receive_residual_document["anchors"])
+        if tsocket_receive_residual_verification["verified_name_count"] != expected_tsocket_receive_residual:
+            raise ValueError("TSocket receive residual verification count differs from artifact")
+        tsocket_receive_residual = {
+            "anchor_path": str(args.tsocket_receive_residual_anchors),
+            "anchor_sha256": sha256_path(args.tsocket_receive_residual_anchors),
+            "reopen_verification": str(args.tsocket_receive_residual_verification),
+            "anchor_count": expected_tsocket_receive_residual,
+            "verified_name_count": tsocket_receive_residual_verification["verified_name_count"],
+            "reopen_failure_count": tsocket_receive_residual_verification["failure_count"],
+        }
+    if tsocket_receive_residual is not None:
+        result["tsocket_receive_residual_anchors"] = tsocket_receive_residual
+        result["interpretation"].append(
+            "The one-hundred-thirty-fourth database revision also contains the separately reviewed TSocket receive and data-package residual family."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

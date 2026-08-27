@@ -1391,6 +1391,13 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_tsocket_ssl_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+194. The next IDA pass translated two residual `TSocket` receive methods:
+    package splitting and native reads. The labels reopened successfully in
+    the v134 disposable copy, which retains 1,497 default `sub_` functions.
+    See
+    `artifacts/spectron_tsocket_receive_residual_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
