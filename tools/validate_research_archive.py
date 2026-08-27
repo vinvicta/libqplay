@@ -326,6 +326,9 @@ def main():
     spectron_script_machine_tail_anchors = load_json(
         "artifacts/spectron_script_machine_tail_manual_translation_anchors_20260826.json"
     )
+    spectron_script_stream_profile_anchors = load_json(
+        "artifacts/spectron_script_stream_profile_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -1987,6 +1990,16 @@ def main():
     check("Spectron script-machine-tail semantic overlap", spectron_script_machine_tail_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron script-machine-tail default targets", spectron_script_machine_tail_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron script-stream-profile artifact",
+        spectron_script_stream_profile_anchors["artifact"],
+        "spectron_script_stream_profile_manual_translation_anchors_20260826",
+    )
+    check("Spectron script-stream-profile network", spectron_script_stream_profile_anchors["network_contacted"], False)
+    check("Spectron script-stream-profile total", spectron_script_stream_profile_anchors["summary"]["anchor_count"], 2)
+    check("Spectron script-stream-profile high confidence", spectron_script_stream_profile_anchors["summary"]["high_confidence_count"], 2)
+    check("Spectron script-stream-profile semantic overlap", spectron_script_stream_profile_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron script-stream-profile default targets", spectron_script_stream_profile_anchors["summary"]["target_default_name_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -2083,7 +2096,8 @@ def main():
     check("Spectron checkpoint font-bitmap anchor count", spectron_checkpoint["font_bitmap_anchors"]["verified_name_count"], 4)
     check("Spectron checkpoint MNG-animation anchor count", spectron_checkpoint["mng_animation_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint script-machine-tail anchor count", spectron_checkpoint["script_machine_tail_anchors"]["verified_name_count"], 2)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "1626932aed2ab1d56d21a788f71ed8587ec3d1041b473978a09ee1cb808f3aec")
+    check("Spectron checkpoint script-stream-profile anchor count", spectron_checkpoint["script_stream_profile_anchors"]["verified_name_count"], 2)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "b6e314fe73ccbd43815c32fe690208460140593230aa99251fdb3b7f977641a1")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -2234,6 +2248,7 @@ def main():
         spectron_font_bitmap_anchors,
         spectron_mng_animation_anchors,
         spectron_script_machine_tail_anchors,
+        spectron_script_stream_profile_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

@@ -1072,6 +1072,15 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_script_machine_tail_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+152. The next IDA pass translated the remaining script stream parser and
+     function/class profile printer. The target keeps the GS2 record walk,
+     `public.` handling, function registration, timing, sorting, and `Class `
+     output. It uses rebuilt wrappers and long-double profile temporaries, and
+     does not expose the source's separate percent literal reference. Both
+     labels reopened successfully in the v92 disposable copy. See
+     `artifacts/spectron_script_stream_profile_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

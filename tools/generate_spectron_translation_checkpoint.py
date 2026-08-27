@@ -203,6 +203,8 @@ def main() -> None:
     parser.add_argument("--mng-animation-verification", type=Path)
     parser.add_argument("--script-machine-tail-anchors", type=Path)
     parser.add_argument("--script-machine-tail-verification", type=Path)
+    parser.add_argument("--script-stream-profile-anchors", type=Path)
+    parser.add_argument("--script-stream-profile-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2706,6 +2708,34 @@ def main() -> None:
         result["script_machine_tail_anchors"] = script_machine_tail
         result["interpretation"].append(
             "The eighty-ninth database revision also contains the separately reviewed script-machine parameter-preparation and native callback-dispatch anchors."
+        )
+    script_stream_profile = None
+    if args.script_stream_profile_anchors or args.script_stream_profile_verification:
+        if not args.script_stream_profile_anchors or not args.script_stream_profile_verification:
+            raise ValueError(
+                "script-stream-profile anchors and script-stream-profile verification must be supplied together"
+            )
+        script_stream_profile_document = load(args.script_stream_profile_anchors)
+        script_stream_profile_verification = load(args.script_stream_profile_verification)
+        if script_stream_profile_document.get("artifact") != "spectron_script_stream_profile_manual_translation_anchors_20260826":
+            raise ValueError("unexpected script-stream-profile anchor artifact")
+        if not script_stream_profile_verification.get("verified"):
+            raise ValueError("script-stream-profile anchor reopen verification did not pass")
+        expected_script_stream_profile = len(script_stream_profile_document["anchors"])
+        if script_stream_profile_verification["verified_name_count"] != expected_script_stream_profile:
+            raise ValueError("script-stream-profile verification count differs from artifact")
+        script_stream_profile = {
+            "anchor_path": str(args.script_stream_profile_anchors),
+            "anchor_sha256": sha256_path(args.script_stream_profile_anchors),
+            "reopen_verification": str(args.script_stream_profile_verification),
+            "anchor_count": expected_script_stream_profile,
+            "verified_name_count": script_stream_profile_verification["verified_name_count"],
+            "reopen_failure_count": script_stream_profile_verification["failure_count"],
+        }
+    if script_stream_profile is not None:
+        result["script_stream_profile_anchors"] = script_stream_profile
+        result["interpretation"].append(
+            "The ninetieth database revision also contains the separately reviewed script stream parser and function/class profiler anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
