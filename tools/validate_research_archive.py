@@ -275,6 +275,9 @@ def main():
     spectron_http_request_cleanup_anchors = load_json(
         "artifacts/spectron_http_request_cleanup_manual_translation_anchors_20260827.json"
     )
+    spectron_tsocket_residual_anchors = load_json(
+        "artifacts/spectron_tsocket_residual_manual_translation_anchors_20260827.json"
+    )
     spectron_particle_emitter_anchors = load_json(
         "artifacts/spectron_particle_emitter_manual_translation_anchors_20260826.json"
     )
@@ -2320,6 +2323,65 @@ def main():
         "0x20826c",
     )
     check(
+        "Spectron TSocket residual artifact",
+        spectron_tsocket_residual_anchors["artifact"],
+        "spectron_tsocket_residual_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron TSocket residual network",
+        spectron_tsocket_residual_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron TSocket residual total",
+        spectron_tsocket_residual_anchors["summary"]["anchor_count"],
+        4,
+    )
+    check(
+        "Spectron TSocket residual high confidence",
+        spectron_tsocket_residual_anchors["summary"]["high_confidence_count"],
+        4,
+    )
+    check(
+        "Spectron TSocket residual exact-shape count",
+        spectron_tsocket_residual_anchors["summary"]["exact_shape_anchor_count"],
+        3,
+    )
+    check(
+        "Spectron TSocket residual layout-change count",
+        spectron_tsocket_residual_anchors["summary"]["layout_change_anchor_count"],
+        1,
+    )
+    check(
+        "Spectron TSocket residual default targets",
+        spectron_tsocket_residual_anchors["summary"]["target_default_name_count"],
+        2,
+    )
+    tsocket_residual = {
+        row["original_name"]: row
+        for row in spectron_tsocket_residual_anchors["anchors"]
+    }
+    check(
+        "Spectron TSocket client-list target",
+        tsocket_residual["TSocket_removeFromClientList_void"]["spectron_ea"],
+        "0x20ab0c",
+    )
+    check(
+        "Spectron TSocket D0 target",
+        tsocket_residual["TSocket_TSocket__2"]["spectron_ea"],
+        "0x20ac44",
+    )
+    check(
+        "Spectron TSocket error adapter target",
+        tsocket_residual["TSocket_getError"]["spectron_ea"],
+        "0x20ad1c",
+    )
+    check(
+        "Spectron TSocket IP adapter target",
+        tsocket_residual["TSocket_getIP"]["spectron_ea"],
+        "0x20ad78",
+    )
+    check(
         "Spectron particle-emitter artifact",
         spectron_particle_emitter_anchors["artifact"],
         "spectron_particle_emitter_manual_translation_anchors_20260826",
@@ -3477,7 +3539,7 @@ def main():
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1240)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1238)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -3655,7 +3717,8 @@ def main():
     check("Spectron checkpoint server-list connection anchor count", spectron_checkpoint["server_list_connection_anchors"]["verified_name_count"], 5)
     check("Spectron checkpoint server-list state anchor count", spectron_checkpoint["server_list_state_anchors"]["verified_name_count"], 4)
     check("Spectron checkpoint HTTP cleanup anchor count", spectron_checkpoint["http_request_cleanup_anchors"]["verified_name_count"], 5)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "a01af52c52de0c5d203d15ee0eb839b6a30ff13094a08474668c71773a0f17a2")
+    check("Spectron checkpoint TSocket residual anchor count", spectron_checkpoint["tsocket_residual_anchors"]["verified_name_count"], 4)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "b8a14b0070e9dc9b23e9d7456088ef62f061247cfa3d8048f6c5e0e4b9e2857f")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -3788,6 +3851,7 @@ def main():
         spectron_server_list_connection_anchors,
         spectron_server_list_state_anchors,
         spectron_http_request_cleanup_anchors,
+        spectron_tsocket_residual_anchors,
         spectron_particle_emitter_anchors,
         spectron_server_animation_anchors,
         spectron_player_lifecycle_anchors,

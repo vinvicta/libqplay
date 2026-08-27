@@ -1460,6 +1460,20 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_static_callback_role_correction.py`, and
     `tools/ida_dump_function_data_refs.py`.
 
+240. The next network-focused IDA pass translated four residual `TSocket`
+    methods. The client-list cleanup at target `0x20ab0c` preserves the
+    `"clients"` hash lookup, variable removal, callback, and client-pointer
+    reset with a small layout change. The source deleting-destructor label
+    maps to target D0 at `0x20ac44`, and the source error and IP property
+    adapters map to default target functions `0x20ad1c` and `0x20ad78`.
+    Those two wrappers match the exact normalized shape and call the already
+    translated target error and IP methods. All four aliases reopened
+    successfully in the v181 copy, which has 11,694 functions, 3,641
+    high-confidence labels, and 1,238 default `sub_` names. See
+    `artifacts/spectron_tsocket_residual_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_tsocket_residual_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 239. The next network-focused IDA pass translated the remaining request reset
     method and the four request-properties destructor ABI entries. The source
     `THTTPRequest_clearRequest_void` role maps to target `0x204d5c`, which

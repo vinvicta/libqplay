@@ -167,6 +167,8 @@ def main() -> None:
     parser.add_argument("--server-list-state-verification", type=Path)
     parser.add_argument("--http-request-cleanup-anchors", type=Path)
     parser.add_argument("--http-request-cleanup-verification", type=Path)
+    parser.add_argument("--tsocket-residual-anchors", type=Path)
+    parser.add_argument("--tsocket-residual-verification", type=Path)
     parser.add_argument("--particle-emitter-anchors", type=Path)
     parser.add_argument("--particle-emitter-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
@@ -5316,6 +5318,34 @@ def main() -> None:
         result["http_request_cleanup_anchors"] = http_request_cleanup
         result["interpretation"].append(
             "The v180 database revision also contains the separately reviewed HTTP request cleanup and properties destructor anchors."
+        )
+    tsocket_residual = None
+    if args.tsocket_residual_anchors or args.tsocket_residual_verification:
+        if not args.tsocket_residual_anchors or not args.tsocket_residual_verification:
+            raise ValueError(
+                "TSocket residual anchors and verification must be supplied together"
+            )
+        tsocket_residual_document = load(args.tsocket_residual_anchors)
+        tsocket_residual_verification = load(args.tsocket_residual_verification)
+        if tsocket_residual_document.get("artifact") != "spectron_tsocket_residual_manual_translation_anchors_20260827":
+            raise ValueError("unexpected TSocket residual anchor artifact")
+        if not tsocket_residual_verification.get("verified"):
+            raise ValueError("TSocket residual anchor reopen verification did not pass")
+        expected_tsocket_residual = len(tsocket_residual_document["anchors"])
+        if tsocket_residual_verification["verified_name_count"] != expected_tsocket_residual:
+            raise ValueError("TSocket residual verification count differs from artifact")
+        tsocket_residual = {
+            "anchor_path": str(args.tsocket_residual_anchors),
+            "anchor_sha256": sha256_path(args.tsocket_residual_anchors),
+            "reopen_verification": str(args.tsocket_residual_verification),
+            "anchor_count": expected_tsocket_residual,
+            "verified_name_count": tsocket_residual_verification["verified_name_count"],
+            "reopen_failure_count": tsocket_residual_verification["failure_count"],
+        }
+    if tsocket_residual is not None:
+        result["tsocket_residual_anchors"] = tsocket_residual
+        result["interpretation"].append(
+            "The v181 database revision also contains the separately reviewed TSocket client-list, destructor, error, and IP anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

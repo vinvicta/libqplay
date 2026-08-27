@@ -1,0 +1,293 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "context_order": 1,
+      "evidence": [
+        "The source and target rows occupy the same local XJLBgarMnA or TSocket method cluster after the socket constructor and before the connection and SSL methods.",
+        "The source removeFromClientList method looks up the clients hash entry, removes this socket from the associated client variable, invokes the related cleanup callback when present, and clears the client pointer. The target nZIBgaeslA method preserves that clients-string lookup and cleanup sequence through KKhLga4xoI and G0gxgajWBw, then clears the same client field.",
+        "The source remove method is 160 bytes, 40 instructions, 8 basic blocks, 13 branches, and 7 calls. The target is 152 bytes, 37 instructions, 7 basic blocks, 11 branches, and 6 calls. Both retain the distinctive clients string reference, so this row is recorded as a high-confidence layout-context match.",
+        "The source TSocket_TSocket__2 body is the deleting destructor wrapper. The target XJLBgarMnA D0 destructor at 0x20ac44 calls the target complete destructor and operator delete, and the complete normalized feature record matches.",
+        "The source TSocket_getError and TSocket_getIP rows are one-block property adapters that call the underlying TSocket_getError_void and TSocket_getIP_void methods. The target sub_20AD1C and sub_20AD78 rows have the same complete normalized shape and call the already translated target gLmBgarL2z and YgoBgaY13z methods respectively."
+      ],
+      "match_kind": "manual-tsocket-client-list-layout-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TGraalVar_indexOfObject_TGraalVar",
+        "plt_THashList_getHashcode_TString_const",
+        "plt_THashList_getObject_uint_TString_const",
+        "plt_TString_clear_void",
+        "plt_TString_operator_lshift_char_const"
+      ],
+      "original_ea": "0x204c34",
+      "original_function_end": "0x204cd4",
+      "original_metrics": {
+        "basic_block_count": 8,
+        "branch_count": 13,
+        "call_count": 7,
+        "instruction_count": 40,
+        "mnemonic_hash": "f2ef742e0ad458963851ff252488399d55c70f0e3b4adc130e10a3a0aafb4ccc",
+        "opcode_shape_hash": "0006bae2defa2632b4117a2d8394c6cb8824b427462cbad4af041c8412bdd5ce",
+        "register_shape_hash": "40ebf8bcc1d59c959873923e6a74acf83a42494584859c39488ce90a216016ab",
+        "return_count": 1,
+        "shape_hash": "5b5251d4cbfbad25c17acb2e4ac2581186c56ca8a0898c6e4ab5c09644a2596d",
+        "size": 160,
+        "string_refs_hash": "8f4d9088121acfab37f4a5875ef93c8a89e1489f1fc3b4367a1ce950a44f23e8"
+      },
+      "original_name": "TSocket_removeFromClientList_void",
+      "original_string_refs": [
+        "clients"
+      ],
+      "proposed_name": "v18_TSocket_removeFromClientList_void",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "socket removal from the client's clients list",
+      "spectron_current_name": "_ZN10XJLBgarMnA10nZIBgaeslAEv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10G0gxgajWBw10lJVsMaKaXnEPS_",
+        "._ZN10KKhLga4xoI10TBCvgay5cvEjRK10C8THgaTQxF",
+        "._ZN10KKhLga4xoI10g4ouMaaIbpERK10C8THgaTQxF"
+      ],
+      "spectron_ea": "0x20ab0c",
+      "spectron_function_end": "0x20aba4",
+      "spectron_metrics": {
+        "basic_block_count": 7,
+        "branch_count": 11,
+        "call_count": 6,
+        "instruction_count": 37,
+        "mnemonic_hash": "ccffd741371e4e70104d2c2b3b3fd97dadc5a26f1c7895e08e1860803a50e037",
+        "opcode_shape_hash": "94dd40a5eecafad9e5801c12d5ec42d7cb3dfd6cb064e4462678a585522ff074",
+        "register_shape_hash": "3f7217840faa0dffdc2e7be4797060bb1260926d92b2e394834959b31cfb3ebc",
+        "return_count": 1,
+        "shape_hash": "607011b7624f8c2e7b58dd369e8d353207ca97fabf3e5cd16af9c0af3a7c842b",
+        "size": 152,
+        "string_refs_hash": "8f4d9088121acfab37f4a5875ef93c8a89e1489f1fc3b4367a1ce950a44f23e8"
+      },
+      "spectron_string_refs": [
+        "clients"
+      ],
+      "target_class": "XJLBgarMnA"
+    },
+    {
+      "confidence": "high",
+      "context_order": 2,
+      "evidence": [
+        "The source and target rows occupy the same local XJLBgarMnA or TSocket method cluster after the socket constructor and before the connection and SSL methods.",
+        "The source removeFromClientList method looks up the clients hash entry, removes this socket from the associated client variable, invokes the related cleanup callback when present, and clears the client pointer. The target nZIBgaeslA method preserves that clients-string lookup and cleanup sequence through KKhLga4xoI and G0gxgajWBw, then clears the same client field.",
+        "The source remove method is 160 bytes, 40 instructions, 8 basic blocks, 13 branches, and 7 calls. The target is 152 bytes, 37 instructions, 7 basic blocks, 11 branches, and 6 calls. Both retain the distinctive clients string reference, so this row is recorded as a high-confidence layout-context match.",
+        "The source TSocket_TSocket__2 body is the deleting destructor wrapper. The target XJLBgarMnA D0 destructor at 0x20ac44 calls the target complete destructor and operator delete, and the complete normalized feature record matches.",
+        "The source TSocket_getError and TSocket_getIP rows are one-block property adapters that call the underlying TSocket_getError_void and TSocket_getIP_void methods. The target sub_20AD1C and sub_20AD78 rows have the same complete normalized shape and call the already translated target gLmBgarL2z and YgoBgaY13z methods respectively."
+      ],
+      "match_kind": "manual-tsocket-exact-shape-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TSocket_TSocket"
+      ],
+      "original_ea": "0x204d74",
+      "original_function_end": "0x204d94",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "6997dd3b5418a87bf6f5a5c521855fc9a17314be795e8b9166aafc3f4274ad31",
+        "opcode_shape_hash": "744107f9f120d79de3ec3260d0856a807bf569915749757d3f718cfa3d52a448",
+        "register_shape_hash": "1023882ef3985c66fc5b82641781f3c5acdb4eababb05670a2c9499e80aafd90",
+        "return_count": 0,
+        "shape_hash": "ddb4f004bba90eaf41261c7a2d80153268b64d0dc9e3005db4115ce1909821c2",
+        "size": 32,
+        "string_refs_hash": null
+      },
+      "original_name": "TSocket_TSocket__2",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_TSocket__2",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TSocket deleting destructor",
+      "spectron_current_name": "_ZN10XJLBgarMnAD0Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10XJLBgarMnAD2Ev"
+      ],
+      "spectron_ea": "0x20ac44",
+      "spectron_function_end": "0x20ac64",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "6997dd3b5418a87bf6f5a5c521855fc9a17314be795e8b9166aafc3f4274ad31",
+        "opcode_shape_hash": "744107f9f120d79de3ec3260d0856a807bf569915749757d3f718cfa3d52a448",
+        "register_shape_hash": "1023882ef3985c66fc5b82641781f3c5acdb4eababb05670a2c9499e80aafd90",
+        "return_count": 0,
+        "shape_hash": "ddb4f004bba90eaf41261c7a2d80153268b64d0dc9e3005db4115ce1909821c2",
+        "size": 32,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_class": "XJLBgarMnA"
+    },
+    {
+      "confidence": "high",
+      "context_order": 3,
+      "evidence": [
+        "The source and target rows occupy the same local XJLBgarMnA or TSocket method cluster after the socket constructor and before the connection and SSL methods.",
+        "The source removeFromClientList method looks up the clients hash entry, removes this socket from the associated client variable, invokes the related cleanup callback when present, and clears the client pointer. The target nZIBgaeslA method preserves that clients-string lookup and cleanup sequence through KKhLga4xoI and G0gxgajWBw, then clears the same client field.",
+        "The source remove method is 160 bytes, 40 instructions, 8 basic blocks, 13 branches, and 7 calls. The target is 152 bytes, 37 instructions, 7 basic blocks, 11 branches, and 6 calls. Both retain the distinctive clients string reference, so this row is recorded as a high-confidence layout-context match.",
+        "The source TSocket_TSocket__2 body is the deleting destructor wrapper. The target XJLBgarMnA D0 destructor at 0x20ac44 calls the target complete destructor and operator delete, and the complete normalized feature record matches.",
+        "The source TSocket_getError and TSocket_getIP rows are one-block property adapters that call the underlying TSocket_getError_void and TSocket_getIP_void methods. The target sub_20AD1C and sub_20AD78 rows have the same complete normalized shape and call the already translated target gLmBgarL2z and YgoBgaY13z methods respectively."
+      ],
+      "match_kind": "manual-tsocket-exact-shape-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TSocket_getError_void"
+      ],
+      "original_ea": "0x204e4c",
+      "original_function_end": "0x204e6c",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "f8674fd115db69e342b0522c5ab191a85d3d5983728451a92136d84b2a6afbb6",
+        "opcode_shape_hash": "921a053341345bfba5092f6bf6b3ecb4d61601ce83af7dc0bae76e2d3de4bdf1",
+        "register_shape_hash": "54ba2bd202a2a9458e96cf1e2ae73767aa882cc53f6250da2ca952b3ebe8b1ca",
+        "return_count": 1,
+        "shape_hash": "ca788e0a2eccdc06385b17ea365d3c6a5381b8680d389a5a99af7f4b0393cc8d",
+        "size": 32,
+        "string_refs_hash": null
+      },
+      "original_name": "TSocket_getError",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_getError",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "socket error property adapter",
+      "spectron_current_name": "sub_20AD1C",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [
+        "._ZN10XJLBgarMnA10gLmBgarL2zEv"
+      ],
+      "spectron_ea": "0x20ad1c",
+      "spectron_function_end": "0x20ad3c",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "f8674fd115db69e342b0522c5ab191a85d3d5983728451a92136d84b2a6afbb6",
+        "opcode_shape_hash": "921a053341345bfba5092f6bf6b3ecb4d61601ce83af7dc0bae76e2d3de4bdf1",
+        "register_shape_hash": "54ba2bd202a2a9458e96cf1e2ae73767aa882cc53f6250da2ca952b3ebe8b1ca",
+        "return_count": 1,
+        "shape_hash": "ca788e0a2eccdc06385b17ea365d3c6a5381b8680d389a5a99af7f4b0393cc8d",
+        "size": 32,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_class": "XJLBgarMnA"
+    },
+    {
+      "confidence": "high",
+      "context_order": 4,
+      "evidence": [
+        "The source and target rows occupy the same local XJLBgarMnA or TSocket method cluster after the socket constructor and before the connection and SSL methods.",
+        "The source removeFromClientList method looks up the clients hash entry, removes this socket from the associated client variable, invokes the related cleanup callback when present, and clears the client pointer. The target nZIBgaeslA method preserves that clients-string lookup and cleanup sequence through KKhLga4xoI and G0gxgajWBw, then clears the same client field.",
+        "The source remove method is 160 bytes, 40 instructions, 8 basic blocks, 13 branches, and 7 calls. The target is 152 bytes, 37 instructions, 7 basic blocks, 11 branches, and 6 calls. Both retain the distinctive clients string reference, so this row is recorded as a high-confidence layout-context match.",
+        "The source TSocket_TSocket__2 body is the deleting destructor wrapper. The target XJLBgarMnA D0 destructor at 0x20ac44 calls the target complete destructor and operator delete, and the complete normalized feature record matches.",
+        "The source TSocket_getError and TSocket_getIP rows are one-block property adapters that call the underlying TSocket_getError_void and TSocket_getIP_void methods. The target sub_20AD1C and sub_20AD78 rows have the same complete normalized shape and call the already translated target gLmBgarL2z and YgoBgaY13z methods respectively."
+      ],
+      "match_kind": "manual-tsocket-exact-shape-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TSocket_getIP_void"
+      ],
+      "original_ea": "0x204ea8",
+      "original_function_end": "0x204ec8",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "f8674fd115db69e342b0522c5ab191a85d3d5983728451a92136d84b2a6afbb6",
+        "opcode_shape_hash": "921a053341345bfba5092f6bf6b3ecb4d61601ce83af7dc0bae76e2d3de4bdf1",
+        "register_shape_hash": "54ba2bd202a2a9458e96cf1e2ae73767aa882cc53f6250da2ca952b3ebe8b1ca",
+        "return_count": 1,
+        "shape_hash": "ca788e0a2eccdc06385b17ea365d3c6a5381b8680d389a5a99af7f4b0393cc8d",
+        "size": 32,
+        "string_refs_hash": null
+      },
+      "original_name": "TSocket_getIP",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_getIP",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "socket IP property adapter",
+      "spectron_current_name": "sub_20AD78",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [
+        "._ZN10XJLBgarMnA10YgoBgaY13zEv"
+      ],
+      "spectron_ea": "0x20ad78",
+      "spectron_function_end": "0x20ad98",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "f8674fd115db69e342b0522c5ab191a85d3d5983728451a92136d84b2a6afbb6",
+        "opcode_shape_hash": "921a053341345bfba5092f6bf6b3ecb4d61601ce83af7dc0bae76e2d3de4bdf1",
+        "register_shape_hash": "54ba2bd202a2a9458e96cf1e2ae73767aa882cc53f6250da2ca952b3ebe8b1ca",
+        "return_count": 1,
+        "shape_hash": "ca788e0a2eccdc06385b17ea365d3c6a5381b8680d389a5a99af7f4b0393cc8d",
+        "size": 32,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_class": "XJLBgarMnA"
+    }
+  ],
+  "artifact": "spectron_tsocket_residual_manual_translation_anchors_20260827",
+  "context": {
+    "existing_context": {
+      "target_complete_destructor": "0x20aba4",
+      "target_error_method": "0x20acb4",
+      "target_ip_method": "0x20ad3c"
+    },
+    "layout_change": "The removeFromClientList target is eight bytes and three instructions shorter, with one fewer block, two fewer branches, and one fewer direct call. The destructor and two property adapters are exact normalized-shape matches.",
+    "source_cluster": "0x204c34 through 0x204ec8",
+    "spectron_cluster": "0x20ab0c through 0x20ad98",
+    "target_class": "XJLBgarMnA"
+  },
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_current.json",
+    "original_features_sha256": "243341ad40e912500365b6d7eb5b69f9f3b9d6200f5c825629cfc56d4343ac07",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v180.json",
+    "spectron_features_sha256": "817553823544128463aa37430d3cd61f9e65512d4dd29172ef67fedcf9d045ca"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The removeFromClientList role is established by the clients string, hash-list lookup, client-variable cleanup, and target class context despite the small implementation change.",
+    "The source constructor-like TSocket_TSocket__2 name is documented as the D0 deleting destructor because its body calls the complete destructor and operator delete.",
+    "The two default target wrapper names are translated as readable overlays while the underlying target error and IP methods remain separately identified in the existing socket map."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for residual TSocket client-list, destructor, error, and IP methods",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 4,
+    "exact_shape_anchor_count": 3,
+    "high_confidence_count": 4,
+    "layout_change_anchor_count": 1,
+    "new_context_anchor_count": 4,
+    "target_default_name_count": 2
+  }
+}
