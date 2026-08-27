@@ -1,0 +1,175 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both clear the player side-level string grid, reset the cached level pointers and availability flag, then derive neighboring level names from the current level position.",
+        "Both use the level width and height to visit the same neighboring coordinate pattern, resolve available level objects, lower-case the current filename, and cache the current level pointer.",
+        "The target expands the side-level grid from the 1.8 three-by-three layout to a seven-by-seven layout and replaces several wrapper calls, which reduces the block count from 30 to 26 while preserving the role and class-local position."
+      ],
+      "match_kind": "manual-player-side-level-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x16e3d0",
+      "original_metrics": {
+        "basic_block_count": 30,
+        "instruction_count": 153,
+        "mnemonic_hash": "29c6c9e6ccb5042fdfa64ec08fb061d3cdef3990e5fb6456362ac985b36620b1",
+        "register_shape_hash": "a61a1a1e706b7affc58dd006d18d2ac1b1da01a6debeef0ec9bd76778c8cfd06",
+        "shape_hash": "e74acc4cee8b2b677077003a810603b713808d257f81ce61ddcaac1c19fcbaa6",
+        "size": 612
+      },
+      "original_name": "TPlayer_setSideLevels_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TPlayer_setSideLevels_void",
+      "semantic_match_already_present": false,
+      "source_basis": "side-level grid reset and neighboring level selection",
+      "spectron_current_name": "_ZN10W6NzgawMJy10MKZNwa6yFcEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1720d0",
+      "spectron_metrics": {
+        "basic_block_count": 26,
+        "instruction_count": 205,
+        "mnemonic_hash": "1c43b8e3e04f49baf34592d52210faf1ae5629fc2c9aca2725535218b5a689c8",
+        "register_shape_hash": "5dbc15468880ba37846f4fa9dbcfc5f88111fd37a0f25a7500c41991b93371ef",
+        "shape_hash": "3735b901b13e38998a74600372db4cb0a12cbf059b9724b09ffb213b00d1524f",
+        "size": 820
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both collect the old and newly selected side-level objects, call the side-level grid setup, and remove temporary objects from levels that are no longer needed.",
+        "Both destroy objects from removed levels, preserve the same three-by-three side-level traversal concept, create missing side levels only when a client is present, mark them as side levels, load them, add them to the global level list, and send preload packets.",
+        "The target uses a seven-by-seven side-level grid and rebuilt list and level wrappers, accounting for the smaller 38-block body while preserving the direct call from the reviewed main level-entry method."
+      ],
+      "match_kind": "manual-player-side-level-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x16e634",
+      "original_metrics": {
+        "basic_block_count": 46,
+        "instruction_count": 237,
+        "mnemonic_hash": "2e069ec49a19494d33ff10699b2b3621386fcbaddc7bde2c3ecd17d514d7094e",
+        "register_shape_hash": "0c1cf805db1ccb2fe462fa68d6add0cb39163762064f9a69ed634e8a23967bd5",
+        "shape_hash": "3f2dfa1eced9b2d98b1fd4f52080d16701f0c40fc2d2948703e32a1e16589e05",
+        "size": 948
+      },
+      "original_name": "TPlayer_loadSideLevels_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TPlayer_loadSideLevels_void",
+      "semantic_match_already_present": false,
+      "source_basis": "side-level object reuse, cleanup, and preload",
+      "spectron_current_name": "_ZN10W6NzgawMJy10NgRNwaNqycEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x172404",
+      "spectron_metrics": {
+        "basic_block_count": 38,
+        "instruction_count": 198,
+        "mnemonic_hash": "976f527c4771701d5269f6f128eb4a0c36552b5ce10b02be5dca25a4de39b67b",
+        "register_shape_hash": "0ca8d5308241959f89f3ee42012cfc11e2403b79fc956ce26baf8e3bc7e95b1a",
+        "shape_hash": "5991c30e4e4c275956db0c6fec207c09593034db753854cff33f443839333279",
+        "size": 792
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both convert signed tile offsets into a side-level row and column, reject coordinates outside the available side-level range, and return the selected cached level object or null.",
+        "The target stores the expanded grid with a seven-entry stride instead of the source three-entry stride and delegates each coordinate boundary conversion to two new target-only helpers immediately above this method.",
+        "The target preserves the source method\u2019s class-local order and lookup result while reducing the body to four blocks because the repeated boundary arithmetic was split into those helper methods."
+      ],
+      "match_kind": "manual-player-side-level-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x16e9e8",
+      "original_metrics": {
+        "basic_block_count": 9,
+        "instruction_count": 26,
+        "mnemonic_hash": "f7a0a584bb280d567fd26fe7ccb990caf7da0ec19ef0b91191b2b7f489b6f797",
+        "register_shape_hash": "4a5dccfc24da752516a55034e555c144392b18365784b80521a7955882370432",
+        "shape_hash": "805285699fea25a6a4c1a51bf9f2266e8e7257317fc73bddaa104fbb644ae7f5",
+        "size": 104
+      },
+      "original_name": "TPlayer_getSideLevel_int_int",
+      "original_string_refs": [],
+      "proposed_name": "v18_TPlayer_getSideLevel_int_int",
+      "semantic_match_already_present": false,
+      "source_basis": "side-level coordinate lookup with bounds rejection",
+      "spectron_current_name": "_ZN10W6NzgawMJy10KcGULan7hVEii",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1727e0",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "instruction_count": 29,
+        "mnemonic_hash": "c4f2c1c4c8f4a1dbd09b332c3ea7f427c8ee8df108ab10917367463fdb1169db",
+        "register_shape_hash": "1006ff824c31c5ab3bb103cd44f54861d9a7ae90641c43d0b3cafe576def80be",
+        "shape_hash": "3b191e2eaeb977a8288df5e40b4381096e5afec022a785bd38f4634b5015c405",
+        "size": 116
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both select the side-level row or column for one of the four directions, clamp invalid directions, and scan outward through the available side-level entries until a cached level is found.",
+        "Both return true on the first occupied side-level slot and false when the directional range is exhausted. The target uses the expanded seven-entry grid and the same directional constant table with renamed target fields.",
+        "The target preserves the source method\u2019s neighboring position, occupancy semantics, and switch structure while reducing the body from 20 to 16 blocks through rebuilt wrappers and shared target constants."
+      ],
+      "match_kind": "manual-player-side-level-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x16ea50",
+      "original_metrics": {
+        "basic_block_count": 20,
+        "instruction_count": 62,
+        "mnemonic_hash": "aaed7ab5f829d52c1ba06062b80867786eac427d94cc47f801d51f67aad2f3c2",
+        "register_shape_hash": "4c8cad967022bee929fb6ee13c36bff4b63995646d1f43610db5249a96fdd715",
+        "shape_hash": "cd82d2a0afac3b07e2f5361f74b64b80fadc8493e7ff32f7a2dbd8ada39387d1",
+        "size": 264
+      },
+      "original_name": "TPlayer_SideLevelInDirection_int",
+      "original_string_refs": [],
+      "proposed_name": "v18_TPlayer_SideLevelInDirection_int",
+      "semantic_match_already_present": false,
+      "source_basis": "directional side-level occupancy lookup",
+      "spectron_current_name": "_ZN10W6NzgawMJy10HbDSwauAzgEi",
+      "spectron_default_name": false,
+      "spectron_ea": "0x172854",
+      "spectron_metrics": {
+        "basic_block_count": 16,
+        "instruction_count": 57,
+        "mnemonic_hash": "389dd74718cff7aa73b0969ca52ec6d3decb8cf91e2f305a5739ea99adce150f",
+        "register_shape_hash": "d96b8f6f3d14918ec037c4c1866a564258a6300dd417a12eeed2f35e58204c63",
+        "shape_hash": "60a3a3df34e3d160263d935094424b6aab8fc927f9b8574eb91936050bbb297f",
+        "size": 236
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_player_side_level_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v1_saved.json",
+    "spectron_features_sha256": "a8d58f85502362316ee99a0f79c2cd7a4ad5d6fac94aca0ee75bd0d2965fc2a1"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The target adds two boundary-normalization helpers between the grid loader and the side-level lookup methods. They are target-only helpers and are intentionally not given a 1.8 name."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for player side-level grid setup, loading, and lookup",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 4,
+    "high_confidence_count": 4,
+    "new_context_anchor_count": 4,
+    "target_default_name_count": 0
+  }
+}

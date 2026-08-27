@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v62.i64",
-    "sha256": "888c0ef9c1f5f83a45f30a4429a7e2ea7dd8126e04bdf09d50ec08cdfc0a09b3"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v63.i64",
+    "sha256": "9bf7ae63884225e0ef3abab3f9733a1dde9c5c3eae4fdf24b5c83ec41fad076b"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -205,7 +205,8 @@
     "The fifty-seventh database revision also contains the separately reviewed explosion, carry, and flying server-animation anchors.",
     "The fifty-eighth database revision also contains the separately reviewed player start-level and periodic-update anchors.",
     "The fifty-ninth database revision also contains the separately reviewed player emoticon-coordinate getter anchors.",
-    "The sixtieth database revision also contains the separately reviewed player main-level and server-level entry anchors."
+    "The sixtieth database revision also contains the separately reviewed player main-level and server-level entry anchors.",
+    "The sixty-first database revision also contains the separately reviewed player side-level grid and lookup anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -319,6 +320,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_player_lifecycle_verification_v60.json",
     "verified_name_count": 2
+  },
+  "player_side_level_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "artifacts/spectron_player_side_level_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "1c6b13c3930b0235f639c94daea7e2c8b5f6e1eb5e192917df261bd35ae0c369",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_player_side_level_verification_v63.json",
+    "verified_name_count": 4
   },
   "render_gui_anchors": {
     "anchor_count": 20,

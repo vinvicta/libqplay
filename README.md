@@ -702,6 +702,14 @@ transitions. Both reopened successfully. The evidence is in
 `artifacts/spectron_player_level_entry_manual_translation_anchors_20260826.json`,
 and the v62 database SHA-256 is recorded in the checkpoint.
 
+A sixty-first disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v63.i64`,
+adds four reviewed player side-level anchors for grid setup, level loading,
+coordinate lookup, and directional occupancy. All four reopened successfully.
+The evidence is in
+`artifacts/spectron_player_side_level_manual_translation_anchors_20260826.json`,
+and the v63 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and

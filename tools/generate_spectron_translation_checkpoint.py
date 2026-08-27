@@ -145,6 +145,8 @@ def main() -> None:
     parser.add_argument("--player-emoticon-verification", type=Path)
     parser.add_argument("--player-level-entry-anchors", type=Path)
     parser.add_argument("--player-level-entry-verification", type=Path)
+    parser.add_argument("--player-side-level-anchors", type=Path)
+    parser.add_argument("--player-side-level-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1836,6 +1838,34 @@ def main() -> None:
         result["player_level_entry_anchors"] = player_level_entry
         result["interpretation"].append(
             "The sixtieth database revision also contains the separately reviewed player main-level and server-level entry anchors."
+        )
+    player_side_level = None
+    if args.player_side_level_anchors or args.player_side_level_verification:
+        if not args.player_side_level_anchors or not args.player_side_level_verification:
+            raise ValueError(
+                "player-side-level anchors and player-side-level verification must be supplied together"
+            )
+        player_side_level_document = load(args.player_side_level_anchors)
+        player_side_level_verification = load(args.player_side_level_verification)
+        if player_side_level_document.get("artifact") != "spectron_player_side_level_manual_translation_anchors_20260826":
+            raise ValueError("unexpected player-side-level anchor artifact")
+        if not player_side_level_verification.get("verified"):
+            raise ValueError("player-side-level anchor reopen verification did not pass")
+        expected_player_side_level = len(player_side_level_document["anchors"])
+        if player_side_level_verification["verified_name_count"] != expected_player_side_level:
+            raise ValueError("player-side-level verification count differs from artifact")
+        player_side_level = {
+            "anchor_path": str(args.player_side_level_anchors),
+            "anchor_sha256": sha256_path(args.player_side_level_anchors),
+            "reopen_verification": str(args.player_side_level_verification),
+            "anchor_count": expected_player_side_level,
+            "verified_name_count": player_side_level_verification["verified_name_count"],
+            "reopen_failure_count": player_side_level_verification["failure_count"],
+        }
+    if player_side_level is not None:
+        result["player_side_level_anchors"] = player_side_level
+        result["interpretation"].append(
+            "The sixty-first database revision also contains the separately reviewed player side-level grid and lookup anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
