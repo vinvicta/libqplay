@@ -446,6 +446,9 @@ def main():
     spectron_guicontrol_create_residual_anchors = load_json(
         "artifacts/spectron_guicontrol_create_residual_manual_translation_anchors_20260826.json"
     )
+    spectron_tsocket_accessor_residual_anchors = load_json(
+        "artifacts/spectron_tsocket_accessor_residual_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2522,13 +2525,25 @@ def main():
     check("Spectron GuiControl create residual exact-shape count", spectron_guicontrol_create_residual_anchors["summary"]["exact_shape_anchor_count"], 1)
     check("Spectron GuiControl create residual layout-change count", spectron_guicontrol_create_residual_anchors["summary"]["layout_change_anchor_count"], 0)
     check(
+        "Spectron TSocket accessor residual artifact",
+        spectron_tsocket_accessor_residual_anchors["artifact"],
+        "spectron_tsocket_accessor_residual_manual_translation_anchors_20260826",
+    )
+    check("Spectron TSocket accessor residual network", spectron_tsocket_accessor_residual_anchors["network_contacted"], False)
+    check("Spectron TSocket accessor residual total", spectron_tsocket_accessor_residual_anchors["summary"]["anchor_count"], 19)
+    check("Spectron TSocket accessor residual high confidence", spectron_tsocket_accessor_residual_anchors["summary"]["high_confidence_count"], 19)
+    check("Spectron TSocket accessor residual semantic overlap", spectron_tsocket_accessor_residual_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron TSocket accessor residual default targets", spectron_tsocket_accessor_residual_anchors["summary"]["target_default_name_count"], 17)
+    check("Spectron TSocket accessor residual exact-shape count", spectron_tsocket_accessor_residual_anchors["summary"]["exact_shape_anchor_count"], 18)
+    check("Spectron TSocket accessor residual layout-change count", spectron_tsocket_accessor_residual_anchors["summary"]["layout_change_anchor_count"], 1)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11679)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1514)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1497)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -2659,7 +2674,8 @@ def main():
     check("Spectron checkpoint GuiControl event dispatch residual anchor count", spectron_checkpoint["gui_control_event_dispatch_residual_anchors"]["verified_name_count"], 8)
     check("Spectron checkpoint GuiControl initialization residual anchor count", spectron_checkpoint["gui_control_initialization_residual_anchors"]["verified_name_count"], 2)
     check("Spectron checkpoint GuiControl create residual anchor count", spectron_checkpoint["gui_control_create_residual_anchors"]["verified_name_count"], 1)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "0a9e38bcc80186b86ed83b5f6c92cad4101f8a2d7746e7379b2a192a02e8b603")
+    check("Spectron checkpoint TSocket accessor residual anchor count", spectron_checkpoint["tsocket_accessor_residual_anchors"]["verified_name_count"], 19)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "56d799699ce321c4e212fb2e9c9ca0e7d8fed8a349da89dc733972d8f4e8bef9")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -2850,6 +2866,7 @@ def main():
         spectron_guicontrol_event_dispatch_residual_anchors,
         spectron_guicontrol_initialization_residual_anchors,
         spectron_guicontrol_create_residual_anchors,
+        spectron_tsocket_accessor_residual_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

@@ -283,6 +283,8 @@ def main() -> None:
     parser.add_argument("--gui-control-initialization-residual-verification", type=Path)
     parser.add_argument("--gui-control-create-residual-anchors", type=Path)
     parser.add_argument("--gui-control-create-residual-verification", type=Path)
+    parser.add_argument("--tsocket-accessor-residual-anchors", type=Path)
+    parser.add_argument("--tsocket-accessor-residual-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3906,6 +3908,34 @@ def main() -> None:
         result["gui_control_create_residual_anchors"] = gui_control_create_residual
         result["interpretation"].append(
             "The one-hundred-thirty-first database revision also contains the separately reviewed GuiControl factory-wrapper residual anchor."
+        )
+    tsocket_accessor_residual = None
+    if args.tsocket_accessor_residual_anchors or args.tsocket_accessor_residual_verification:
+        if not args.tsocket_accessor_residual_anchors or not args.tsocket_accessor_residual_verification:
+            raise ValueError(
+                "TSocket accessor residual anchors and verification must be supplied together"
+            )
+        tsocket_accessor_residual_document = load(args.tsocket_accessor_residual_anchors)
+        tsocket_accessor_residual_verification = load(args.tsocket_accessor_residual_verification)
+        if tsocket_accessor_residual_document.get("artifact") != "spectron_tsocket_accessor_residual_manual_translation_anchors_20260826":
+            raise ValueError("unexpected TSocket accessor residual artifact")
+        if not tsocket_accessor_residual_verification.get("verified"):
+            raise ValueError("TSocket accessor residual reopen verification did not pass")
+        expected_tsocket_accessor_residual = len(tsocket_accessor_residual_document["anchors"])
+        if tsocket_accessor_residual_verification["verified_name_count"] != expected_tsocket_accessor_residual:
+            raise ValueError("TSocket accessor residual verification count differs from artifact")
+        tsocket_accessor_residual = {
+            "anchor_path": str(args.tsocket_accessor_residual_anchors),
+            "anchor_sha256": sha256_path(args.tsocket_accessor_residual_anchors),
+            "reopen_verification": str(args.tsocket_accessor_residual_verification),
+            "anchor_count": expected_tsocket_accessor_residual,
+            "verified_name_count": tsocket_accessor_residual_verification["verified_name_count"],
+            "reopen_failure_count": tsocket_accessor_residual_verification["failure_count"],
+        }
+    if tsocket_accessor_residual is not None:
+        result["tsocket_accessor_residual_anchors"] = tsocket_accessor_residual
+        result["interpretation"].append(
+            "The one-hundred-thirty-second database revision also contains the separately reviewed TSocket accessor, output, and factory residual family."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

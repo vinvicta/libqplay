@@ -1,0 +1,1019 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "context_group": "TSocket residual accessor and factory block",
+      "context_order": 1,
+      "evidence": [
+        "The source TSocket accessor block runs from 0x204630 through 0x2047e8. Spectron keeps the same ordered field-accessor block at 0x20a508 through 0x20a6c0, a fixed +0x5ed8 delta inside the obfuscated XJLBgarMnA class.",
+        "The reviewed rows cover byte, dword, list-count, string-field, and allowed-socket accessors. The target bodies retain the same field roles and normalized metrics. The allowed-port setter changes only through the target C8THgaTQxF string wrapper and its obfuscated global field.",
+        "TSocket_sendOutgoing_void at 0x204894 maps to 0x20a76c. Both bodies check the connection object and error state, send positive-length buffered data, and remove the transmitted prefix. The target replaces the named TSocketConnection and TString helpers with u3cBgayBVz and C8THgaTQxF wrappers.",
+        "TSocket_create_TString_const at 0x204a70 maps to 0x20a948. Both factories allocate 0xf0 bytes, call the parameterized socket constructor, and return the object. The class-specific XJLBgarMnA constructor call resolves the factory role among generic allocator candidates.",
+        "Eighteen reviewed pairs have exact normalized metrics, including mnemonic hash, opcode shape, register shape, and overall shape hash. The allowed-port setter is the only layout-change row. None of these functions has string references."
+      ],
+      "match_kind": "manual-tsocket-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x204630",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "050e5f3007e7006215593eadfd2ad3f4231bec310597de275e694f838fb2ebf5",
+        "opcode_shape_hash": "126438d24c2b4e00b1681f8c5259eac03e8c7d857ae6231ca66ea544de712c95",
+        "register_shape_hash": null,
+        "shape_hash": "e1c8f04a92b31b3779c1d5837fc90f34714c5c7953475296cc365cc5a3c1a133",
+        "size": 8
+      },
+      "original_name": "TSocket_getByte140",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_getByte140",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TSocket accessor, output, or factory method TSocket_getByte140",
+      "spectron_current_name": "sub_20A508",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x20a508",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "050e5f3007e7006215593eadfd2ad3f4231bec310597de275e694f838fb2ebf5",
+        "opcode_shape_hash": "126438d24c2b4e00b1681f8c5259eac03e8c7d857ae6231ca66ea544de712c95",
+        "register_shape_hash": null,
+        "shape_hash": "e1c8f04a92b31b3779c1d5837fc90f34714c5c7953475296cc365cc5a3c1a133",
+        "size": 8
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TSocket residual accessor and factory block",
+      "context_order": 2,
+      "evidence": [
+        "The source TSocket accessor block runs from 0x204630 through 0x2047e8. Spectron keeps the same ordered field-accessor block at 0x20a508 through 0x20a6c0, a fixed +0x5ed8 delta inside the obfuscated XJLBgarMnA class.",
+        "The reviewed rows cover byte, dword, list-count, string-field, and allowed-socket accessors. The target bodies retain the same field roles and normalized metrics. The allowed-port setter changes only through the target C8THgaTQxF string wrapper and its obfuscated global field.",
+        "TSocket_sendOutgoing_void at 0x204894 maps to 0x20a76c. Both bodies check the connection object and error state, send positive-length buffered data, and remove the transmitted prefix. The target replaces the named TSocketConnection and TString helpers with u3cBgayBVz and C8THgaTQxF wrappers.",
+        "TSocket_create_TString_const at 0x204a70 maps to 0x20a948. Both factories allocate 0xf0 bytes, call the parameterized socket constructor, and return the object. The class-specific XJLBgarMnA constructor call resolves the factory role among generic allocator candidates.",
+        "Eighteen reviewed pairs have exact normalized metrics, including mnemonic hash, opcode shape, register shape, and overall shape hash. The allowed-port setter is the only layout-change row. None of these functions has string references."
+      ],
+      "match_kind": "manual-tsocket-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x204638",
+      "original_metrics": {
+        "basic_block_count": 3,
+        "branch_count": 3,
+        "call_count": 0,
+        "instruction_count": 6,
+        "mnemonic_hash": "9490a059c6fffd0bcde76a16c813482e3f78287e3c9089131017e0bdaed46004",
+        "opcode_shape_hash": "98ff2a53ee509e40fe733cc2bb583c01be15d4c334c1ea86018e7f4b9972c5cd",
+        "register_shape_hash": null,
+        "shape_hash": "be102d6374e02c55d3f4698d38fc21f0c664d8d4163fbd2dc28971d3e06b092b",
+        "size": 24
+      },
+      "original_name": "TSocket_getListCountField168",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_getListCountField168",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TSocket accessor, output, or factory method TSocket_getListCountField168",
+      "spectron_current_name": "sub_20A510",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x20a510",
+      "spectron_metrics": {
+        "basic_block_count": 3,
+        "branch_count": 3,
+        "call_count": 0,
+        "instruction_count": 6,
+        "mnemonic_hash": "9490a059c6fffd0bcde76a16c813482e3f78287e3c9089131017e0bdaed46004",
+        "opcode_shape_hash": "98ff2a53ee509e40fe733cc2bb583c01be15d4c334c1ea86018e7f4b9972c5cd",
+        "register_shape_hash": null,
+        "shape_hash": "be102d6374e02c55d3f4698d38fc21f0c664d8d4163fbd2dc28971d3e06b092b",
+        "size": 24
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TSocket residual accessor and factory block",
+      "context_order": 3,
+      "evidence": [
+        "The source TSocket accessor block runs from 0x204630 through 0x2047e8. Spectron keeps the same ordered field-accessor block at 0x20a508 through 0x20a6c0, a fixed +0x5ed8 delta inside the obfuscated XJLBgarMnA class.",
+        "The reviewed rows cover byte, dword, list-count, string-field, and allowed-socket accessors. The target bodies retain the same field roles and normalized metrics. The allowed-port setter changes only through the target C8THgaTQxF string wrapper and its obfuscated global field.",
+        "TSocket_sendOutgoing_void at 0x204894 maps to 0x20a76c. Both bodies check the connection object and error state, send positive-length buffered data, and remove the transmitted prefix. The target replaces the named TSocketConnection and TString helpers with u3cBgayBVz and C8THgaTQxF wrappers.",
+        "TSocket_create_TString_const at 0x204a70 maps to 0x20a948. Both factories allocate 0xf0 bytes, call the parameterized socket constructor, and return the object. The class-specific XJLBgarMnA constructor call resolves the factory role among generic allocator candidates.",
+        "Eighteen reviewed pairs have exact normalized metrics, including mnemonic hash, opcode shape, register shape, and overall shape hash. The allowed-port setter is the only layout-change row. None of these functions has string references."
+      ],
+      "match_kind": "manual-tsocket-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x204650",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "de72a41c35fa727134d1567d0cb079cdd252c263b49d89f278b4b5a2ce07b541",
+        "opcode_shape_hash": "126438d24c2b4e00b1681f8c5259eac03e8c7d857ae6231ca66ea544de712c95",
+        "register_shape_hash": null,
+        "shape_hash": "fdb6e988974b59e771f6857d563ee05722bcff5e0a61bb92df98d5a90f39e7da",
+        "size": 8
+      },
+      "original_name": "TSocket_getField208",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_getField208",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TSocket accessor, output, or factory method TSocket_getField208",
+      "spectron_current_name": "sub_20A528",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x20a528",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "de72a41c35fa727134d1567d0cb079cdd252c263b49d89f278b4b5a2ce07b541",
+        "opcode_shape_hash": "126438d24c2b4e00b1681f8c5259eac03e8c7d857ae6231ca66ea544de712c95",
+        "register_shape_hash": null,
+        "shape_hash": "fdb6e988974b59e771f6857d563ee05722bcff5e0a61bb92df98d5a90f39e7da",
+        "size": 8
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TSocket residual accessor and factory block",
+      "context_order": 4,
+      "evidence": [
+        "The source TSocket accessor block runs from 0x204630 through 0x2047e8. Spectron keeps the same ordered field-accessor block at 0x20a508 through 0x20a6c0, a fixed +0x5ed8 delta inside the obfuscated XJLBgarMnA class.",
+        "The reviewed rows cover byte, dword, list-count, string-field, and allowed-socket accessors. The target bodies retain the same field roles and normalized metrics. The allowed-port setter changes only through the target C8THgaTQxF string wrapper and its obfuscated global field.",
+        "TSocket_sendOutgoing_void at 0x204894 maps to 0x20a76c. Both bodies check the connection object and error state, send positive-length buffered data, and remove the transmitted prefix. The target replaces the named TSocketConnection and TString helpers with u3cBgayBVz and C8THgaTQxF wrappers.",
+        "TSocket_create_TString_const at 0x204a70 maps to 0x20a948. Both factories allocate 0xf0 bytes, call the parameterized socket constructor, and return the object. The class-specific XJLBgarMnA constructor call resolves the factory role among generic allocator candidates.",
+        "Eighteen reviewed pairs have exact normalized metrics, including mnemonic hash, opcode shape, register shape, and overall shape hash. The allowed-port setter is the only layout-change row. None of these functions has string references."
+      ],
+      "match_kind": "manual-tsocket-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x204658",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "de72a41c35fa727134d1567d0cb079cdd252c263b49d89f278b4b5a2ce07b541",
+        "opcode_shape_hash": "126438d24c2b4e00b1681f8c5259eac03e8c7d857ae6231ca66ea544de712c95",
+        "register_shape_hash": null,
+        "shape_hash": "fdb6e988974b59e771f6857d563ee05722bcff5e0a61bb92df98d5a90f39e7da",
+        "size": 8
+      },
+      "original_name": "TSocket_getDword192",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_getDword192",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TSocket accessor, output, or factory method TSocket_getDword192",
+      "spectron_current_name": "sub_20A530",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x20a530",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "de72a41c35fa727134d1567d0cb079cdd252c263b49d89f278b4b5a2ce07b541",
+        "opcode_shape_hash": "126438d24c2b4e00b1681f8c5259eac03e8c7d857ae6231ca66ea544de712c95",
+        "register_shape_hash": null,
+        "shape_hash": "fdb6e988974b59e771f6857d563ee05722bcff5e0a61bb92df98d5a90f39e7da",
+        "size": 8
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TSocket residual accessor and factory block",
+      "context_order": 5,
+      "evidence": [
+        "The source TSocket accessor block runs from 0x204630 through 0x2047e8. Spectron keeps the same ordered field-accessor block at 0x20a508 through 0x20a6c0, a fixed +0x5ed8 delta inside the obfuscated XJLBgarMnA class.",
+        "The reviewed rows cover byte, dword, list-count, string-field, and allowed-socket accessors. The target bodies retain the same field roles and normalized metrics. The allowed-port setter changes only through the target C8THgaTQxF string wrapper and its obfuscated global field.",
+        "TSocket_sendOutgoing_void at 0x204894 maps to 0x20a76c. Both bodies check the connection object and error state, send positive-length buffered data, and remove the transmitted prefix. The target replaces the named TSocketConnection and TString helpers with u3cBgayBVz and C8THgaTQxF wrappers.",
+        "TSocket_create_TString_const at 0x204a70 maps to 0x20a948. Both factories allocate 0xf0 bytes, call the parameterized socket constructor, and return the object. The class-specific XJLBgarMnA constructor call resolves the factory role among generic allocator candidates.",
+        "Eighteen reviewed pairs have exact normalized metrics, including mnemonic hash, opcode shape, register shape, and overall shape hash. The allowed-port setter is the only layout-change row. None of these functions has string references."
+      ],
+      "match_kind": "manual-tsocket-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x204660",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "1d26f84dc9c0a74b7a4f0eb562553d370c916171bf5e6b5e022b9e232491c44f",
+        "opcode_shape_hash": "db183759614fc357707de89c3600a188ba38623482617aa0c55c60052efd353a",
+        "register_shape_hash": null,
+        "shape_hash": "98a55d35974b80bc873f758d6a6d1949f301ed0b78edb49cdd9b093ab80d61e2",
+        "size": 8
+      },
+      "original_name": "TSocket_setStringField232",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_setStringField232",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TSocket accessor, output, or factory method TSocket_setStringField232",
+      "spectron_current_name": "sub_20A538",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x20a538",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "1d26f84dc9c0a74b7a4f0eb562553d370c916171bf5e6b5e022b9e232491c44f",
+        "opcode_shape_hash": "db183759614fc357707de89c3600a188ba38623482617aa0c55c60052efd353a",
+        "register_shape_hash": null,
+        "shape_hash": "98a55d35974b80bc873f758d6a6d1949f301ed0b78edb49cdd9b093ab80d61e2",
+        "size": 8
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TSocket residual accessor and factory block",
+      "context_order": 6,
+      "evidence": [
+        "The source TSocket accessor block runs from 0x204630 through 0x2047e8. Spectron keeps the same ordered field-accessor block at 0x20a508 through 0x20a6c0, a fixed +0x5ed8 delta inside the obfuscated XJLBgarMnA class.",
+        "The reviewed rows cover byte, dword, list-count, string-field, and allowed-socket accessors. The target bodies retain the same field roles and normalized metrics. The allowed-port setter changes only through the target C8THgaTQxF string wrapper and its obfuscated global field.",
+        "TSocket_sendOutgoing_void at 0x204894 maps to 0x20a76c. Both bodies check the connection object and error state, send positive-length buffered data, and remove the transmitted prefix. The target replaces the named TSocketConnection and TString helpers with u3cBgayBVz and C8THgaTQxF wrappers.",
+        "TSocket_create_TString_const at 0x204a70 maps to 0x20a948. Both factories allocate 0xf0 bytes, call the parameterized socket constructor, and return the object. The class-specific XJLBgarMnA constructor call resolves the factory role among generic allocator candidates.",
+        "Eighteen reviewed pairs have exact normalized metrics, including mnemonic hash, opcode shape, register shape, and overall shape hash. The allowed-port setter is the only layout-change row. None of these functions has string references."
+      ],
+      "match_kind": "manual-tsocket-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x204668",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "1d26f84dc9c0a74b7a4f0eb562553d370c916171bf5e6b5e022b9e232491c44f",
+        "opcode_shape_hash": "db183759614fc357707de89c3600a188ba38623482617aa0c55c60052efd353a",
+        "register_shape_hash": null,
+        "shape_hash": "98a55d35974b80bc873f758d6a6d1949f301ed0b78edb49cdd9b093ab80d61e2",
+        "size": 8
+      },
+      "original_name": "TSocket_setStringField224",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_setStringField224",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TSocket accessor, output, or factory method TSocket_setStringField224",
+      "spectron_current_name": "sub_20A540",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x20a540",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "1d26f84dc9c0a74b7a4f0eb562553d370c916171bf5e6b5e022b9e232491c44f",
+        "opcode_shape_hash": "db183759614fc357707de89c3600a188ba38623482617aa0c55c60052efd353a",
+        "register_shape_hash": null,
+        "shape_hash": "98a55d35974b80bc873f758d6a6d1949f301ed0b78edb49cdd9b093ab80d61e2",
+        "size": 8
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TSocket residual accessor and factory block",
+      "context_order": 7,
+      "evidence": [
+        "The source TSocket accessor block runs from 0x204630 through 0x2047e8. Spectron keeps the same ordered field-accessor block at 0x20a508 through 0x20a6c0, a fixed +0x5ed8 delta inside the obfuscated XJLBgarMnA class.",
+        "The reviewed rows cover byte, dword, list-count, string-field, and allowed-socket accessors. The target bodies retain the same field roles and normalized metrics. The allowed-port setter changes only through the target C8THgaTQxF string wrapper and its obfuscated global field.",
+        "TSocket_sendOutgoing_void at 0x204894 maps to 0x20a76c. Both bodies check the connection object and error state, send positive-length buffered data, and remove the transmitted prefix. The target replaces the named TSocketConnection and TString helpers with u3cBgayBVz and C8THgaTQxF wrappers.",
+        "TSocket_create_TString_const at 0x204a70 maps to 0x20a948. Both factories allocate 0xf0 bytes, call the parameterized socket constructor, and return the object. The class-specific XJLBgarMnA constructor call resolves the factory role among generic allocator candidates.",
+        "Eighteen reviewed pairs have exact normalized metrics, including mnemonic hash, opcode shape, register shape, and overall shape hash. The allowed-port setter is the only layout-change row. None of these functions has string references."
+      ],
+      "match_kind": "manual-tsocket-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x204670",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "1d26f84dc9c0a74b7a4f0eb562553d370c916171bf5e6b5e022b9e232491c44f",
+        "opcode_shape_hash": "db183759614fc357707de89c3600a188ba38623482617aa0c55c60052efd353a",
+        "register_shape_hash": null,
+        "shape_hash": "98a55d35974b80bc873f758d6a6d1949f301ed0b78edb49cdd9b093ab80d61e2",
+        "size": 8
+      },
+      "original_name": "TSocket_setStringField200",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_setStringField200",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TSocket accessor, output, or factory method TSocket_setStringField200",
+      "spectron_current_name": "sub_20A548",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x20a548",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "1d26f84dc9c0a74b7a4f0eb562553d370c916171bf5e6b5e022b9e232491c44f",
+        "opcode_shape_hash": "db183759614fc357707de89c3600a188ba38623482617aa0c55c60052efd353a",
+        "register_shape_hash": null,
+        "shape_hash": "98a55d35974b80bc873f758d6a6d1949f301ed0b78edb49cdd9b093ab80d61e2",
+        "size": 8
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TSocket residual accessor and factory block",
+      "context_order": 8,
+      "evidence": [
+        "The source TSocket accessor block runs from 0x204630 through 0x2047e8. Spectron keeps the same ordered field-accessor block at 0x20a508 through 0x20a6c0, a fixed +0x5ed8 delta inside the obfuscated XJLBgarMnA class.",
+        "The reviewed rows cover byte, dword, list-count, string-field, and allowed-socket accessors. The target bodies retain the same field roles and normalized metrics. The allowed-port setter changes only through the target C8THgaTQxF string wrapper and its obfuscated global field.",
+        "TSocket_sendOutgoing_void at 0x204894 maps to 0x20a76c. Both bodies check the connection object and error state, send positive-length buffered data, and remove the transmitted prefix. The target replaces the named TSocketConnection and TString helpers with u3cBgayBVz and C8THgaTQxF wrappers.",
+        "TSocket_create_TString_const at 0x204a70 maps to 0x20a948. Both factories allocate 0xf0 bytes, call the parameterized socket constructor, and return the object. The class-specific XJLBgarMnA constructor call resolves the factory role among generic allocator candidates.",
+        "Eighteen reviewed pairs have exact normalized metrics, including mnemonic hash, opcode shape, register shape, and overall shape hash. The allowed-port setter is the only layout-change row. None of these functions has string references."
+      ],
+      "match_kind": "manual-tsocket-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x204678",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 4,
+        "mnemonic_hash": "a14cb04967b1641ebeeff59f21a1a695ae30347c2dffe464e4a3195cfc56b7cf",
+        "opcode_shape_hash": "2f1c7b8f9cf276eea18873da92796051557c900805664c26c433dc49374c189c",
+        "register_shape_hash": null,
+        "shape_hash": "7c73eba892599c8baf7b03c5267284772b7279f640838aaddfb851b89429d44e",
+        "size": 16
+      },
+      "original_name": "TSocket_setAllowedPortsBind",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_setAllowedPortsBind",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "TSocket accessor, output, or factory method TSocket_setAllowedPortsBind",
+      "spectron_current_name": "sub_20A550",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x20a550",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 4,
+        "mnemonic_hash": "a14cb04967b1641ebeeff59f21a1a695ae30347c2dffe464e4a3195cfc56b7cf",
+        "opcode_shape_hash": "a4632d4fa5e04dbba095504885072b1eb10cd71fe76c137ae7d62788c18db3c5",
+        "register_shape_hash": null,
+        "shape_hash": "f19eb7ca65af0ee04f6242347e8780e5f235210f0dce9bfb9f7b2c2a40807cf1",
+        "size": 16
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TSocket residual accessor and factory block",
+      "context_order": 9,
+      "evidence": [
+        "The source TSocket accessor block runs from 0x204630 through 0x2047e8. Spectron keeps the same ordered field-accessor block at 0x20a508 through 0x20a6c0, a fixed +0x5ed8 delta inside the obfuscated XJLBgarMnA class.",
+        "The reviewed rows cover byte, dword, list-count, string-field, and allowed-socket accessors. The target bodies retain the same field roles and normalized metrics. The allowed-port setter changes only through the target C8THgaTQxF string wrapper and its obfuscated global field.",
+        "TSocket_sendOutgoing_void at 0x204894 maps to 0x20a76c. Both bodies check the connection object and error state, send positive-length buffered data, and remove the transmitted prefix. The target replaces the named TSocketConnection and TString helpers with u3cBgayBVz and C8THgaTQxF wrappers.",
+        "TSocket_create_TString_const at 0x204a70 maps to 0x20a948. Both factories allocate 0xf0 bytes, call the parameterized socket constructor, and return the object. The class-specific XJLBgarMnA constructor call resolves the factory role among generic allocator candidates.",
+        "Eighteen reviewed pairs have exact normalized metrics, including mnemonic hash, opcode shape, register shape, and overall shape hash. The allowed-port setter is the only layout-change row. None of these functions has string references."
+      ],
+      "match_kind": "manual-tsocket-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x204688",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 4,
+        "mnemonic_hash": "a14cb04967b1641ebeeff59f21a1a695ae30347c2dffe464e4a3195cfc56b7cf",
+        "opcode_shape_hash": "a4632d4fa5e04dbba095504885072b1eb10cd71fe76c137ae7d62788c18db3c5",
+        "register_shape_hash": null,
+        "shape_hash": "f19eb7ca65af0ee04f6242347e8780e5f235210f0dce9bfb9f7b2c2a40807cf1",
+        "size": 16
+      },
+      "original_name": "TSocket_setAllowedSocketsConnect",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_setAllowedSocketsConnect",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TSocket accessor, output, or factory method TSocket_setAllowedSocketsConnect",
+      "spectron_current_name": "sub_20A560",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x20a560",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 4,
+        "mnemonic_hash": "a14cb04967b1641ebeeff59f21a1a695ae30347c2dffe464e4a3195cfc56b7cf",
+        "opcode_shape_hash": "a4632d4fa5e04dbba095504885072b1eb10cd71fe76c137ae7d62788c18db3c5",
+        "register_shape_hash": null,
+        "shape_hash": "f19eb7ca65af0ee04f6242347e8780e5f235210f0dce9bfb9f7b2c2a40807cf1",
+        "size": 16
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TSocket residual accessor and factory block",
+      "context_order": 10,
+      "evidence": [
+        "The source TSocket accessor block runs from 0x204630 through 0x2047e8. Spectron keeps the same ordered field-accessor block at 0x20a508 through 0x20a6c0, a fixed +0x5ed8 delta inside the obfuscated XJLBgarMnA class.",
+        "The reviewed rows cover byte, dword, list-count, string-field, and allowed-socket accessors. The target bodies retain the same field roles and normalized metrics. The allowed-port setter changes only through the target C8THgaTQxF string wrapper and its obfuscated global field.",
+        "TSocket_sendOutgoing_void at 0x204894 maps to 0x20a76c. Both bodies check the connection object and error state, send positive-length buffered data, and remove the transmitted prefix. The target replaces the named TSocketConnection and TString helpers with u3cBgayBVz and C8THgaTQxF wrappers.",
+        "TSocket_create_TString_const at 0x204a70 maps to 0x20a948. Both factories allocate 0xf0 bytes, call the parameterized socket constructor, and return the object. The class-specific XJLBgarMnA constructor call resolves the factory role among generic allocator candidates.",
+        "Eighteen reviewed pairs have exact normalized metrics, including mnemonic hash, opcode shape, register shape, and overall shape hash. The allowed-port setter is the only layout-change row. None of these functions has string references."
+      ],
+      "match_kind": "manual-tsocket-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TString_operator_assign_TString_const"
+      ],
+      "original_ea": "0x204698",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "81dd519f96871a37777e8fac495ac7c683ae54236a41cc1428f078f3d69b5fe6",
+        "opcode_shape_hash": "af152fb4f9b23cfdc7f715132e55b357152c251e8155598e87701d1819fa104b",
+        "register_shape_hash": null,
+        "shape_hash": "6a612c3e6821872c1cd8fcf103bf35cfd82a9f653df4bbbf9ba94f3a69f0a87b",
+        "size": 48
+      },
+      "original_name": "TSocket_getStringField216",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_getStringField216",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TSocket accessor, output, or factory method TSocket_getStringField216",
+      "spectron_current_name": "sub_20A570",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxFaSERKS_"
+      ],
+      "spectron_ea": "0x20a570",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "81dd519f96871a37777e8fac495ac7c683ae54236a41cc1428f078f3d69b5fe6",
+        "opcode_shape_hash": "af152fb4f9b23cfdc7f715132e55b357152c251e8155598e87701d1819fa104b",
+        "register_shape_hash": null,
+        "shape_hash": "6a612c3e6821872c1cd8fcf103bf35cfd82a9f653df4bbbf9ba94f3a69f0a87b",
+        "size": 48
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TSocket residual accessor and factory block",
+      "context_order": 11,
+      "evidence": [
+        "The source TSocket accessor block runs from 0x204630 through 0x2047e8. Spectron keeps the same ordered field-accessor block at 0x20a508 through 0x20a6c0, a fixed +0x5ed8 delta inside the obfuscated XJLBgarMnA class.",
+        "The reviewed rows cover byte, dword, list-count, string-field, and allowed-socket accessors. The target bodies retain the same field roles and normalized metrics. The allowed-port setter changes only through the target C8THgaTQxF string wrapper and its obfuscated global field.",
+        "TSocket_sendOutgoing_void at 0x204894 maps to 0x20a76c. Both bodies check the connection object and error state, send positive-length buffered data, and remove the transmitted prefix. The target replaces the named TSocketConnection and TString helpers with u3cBgayBVz and C8THgaTQxF wrappers.",
+        "TSocket_create_TString_const at 0x204a70 maps to 0x20a948. Both factories allocate 0xf0 bytes, call the parameterized socket constructor, and return the object. The class-specific XJLBgarMnA constructor call resolves the factory role among generic allocator candidates.",
+        "Eighteen reviewed pairs have exact normalized metrics, including mnemonic hash, opcode shape, register shape, and overall shape hash. The allowed-port setter is the only layout-change row. None of these functions has string references."
+      ],
+      "match_kind": "manual-tsocket-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TString_operator_assign_TString_const"
+      ],
+      "original_ea": "0x2046c8",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "81dd519f96871a37777e8fac495ac7c683ae54236a41cc1428f078f3d69b5fe6",
+        "opcode_shape_hash": "af152fb4f9b23cfdc7f715132e55b357152c251e8155598e87701d1819fa104b",
+        "register_shape_hash": null,
+        "shape_hash": "6a612c3e6821872c1cd8fcf103bf35cfd82a9f653df4bbbf9ba94f3a69f0a87b",
+        "size": 48
+      },
+      "original_name": "TSocket_getStringField232",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_getStringField232",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TSocket accessor, output, or factory method TSocket_getStringField232",
+      "spectron_current_name": "sub_20A5A0",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxFaSERKS_"
+      ],
+      "spectron_ea": "0x20a5a0",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "81dd519f96871a37777e8fac495ac7c683ae54236a41cc1428f078f3d69b5fe6",
+        "opcode_shape_hash": "af152fb4f9b23cfdc7f715132e55b357152c251e8155598e87701d1819fa104b",
+        "register_shape_hash": null,
+        "shape_hash": "6a612c3e6821872c1cd8fcf103bf35cfd82a9f653df4bbbf9ba94f3a69f0a87b",
+        "size": 48
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TSocket residual accessor and factory block",
+      "context_order": 12,
+      "evidence": [
+        "The source TSocket accessor block runs from 0x204630 through 0x2047e8. Spectron keeps the same ordered field-accessor block at 0x20a508 through 0x20a6c0, a fixed +0x5ed8 delta inside the obfuscated XJLBgarMnA class.",
+        "The reviewed rows cover byte, dword, list-count, string-field, and allowed-socket accessors. The target bodies retain the same field roles and normalized metrics. The allowed-port setter changes only through the target C8THgaTQxF string wrapper and its obfuscated global field.",
+        "TSocket_sendOutgoing_void at 0x204894 maps to 0x20a76c. Both bodies check the connection object and error state, send positive-length buffered data, and remove the transmitted prefix. The target replaces the named TSocketConnection and TString helpers with u3cBgayBVz and C8THgaTQxF wrappers.",
+        "TSocket_create_TString_const at 0x204a70 maps to 0x20a948. Both factories allocate 0xf0 bytes, call the parameterized socket constructor, and return the object. The class-specific XJLBgarMnA constructor call resolves the factory role among generic allocator candidates.",
+        "Eighteen reviewed pairs have exact normalized metrics, including mnemonic hash, opcode shape, register shape, and overall shape hash. The allowed-port setter is the only layout-change row. None of these functions has string references."
+      ],
+      "match_kind": "manual-tsocket-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TString_operator_assign_TString_const"
+      ],
+      "original_ea": "0x2046f8",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "81dd519f96871a37777e8fac495ac7c683ae54236a41cc1428f078f3d69b5fe6",
+        "opcode_shape_hash": "af152fb4f9b23cfdc7f715132e55b357152c251e8155598e87701d1819fa104b",
+        "register_shape_hash": null,
+        "shape_hash": "6a612c3e6821872c1cd8fcf103bf35cfd82a9f653df4bbbf9ba94f3a69f0a87b",
+        "size": 48
+      },
+      "original_name": "TSocket_getStringField224",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_getStringField224",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TSocket accessor, output, or factory method TSocket_getStringField224",
+      "spectron_current_name": "sub_20A5D0",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxFaSERKS_"
+      ],
+      "spectron_ea": "0x20a5d0",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "81dd519f96871a37777e8fac495ac7c683ae54236a41cc1428f078f3d69b5fe6",
+        "opcode_shape_hash": "af152fb4f9b23cfdc7f715132e55b357152c251e8155598e87701d1819fa104b",
+        "register_shape_hash": null,
+        "shape_hash": "6a612c3e6821872c1cd8fcf103bf35cfd82a9f653df4bbbf9ba94f3a69f0a87b",
+        "size": 48
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TSocket residual accessor and factory block",
+      "context_order": 13,
+      "evidence": [
+        "The source TSocket accessor block runs from 0x204630 through 0x2047e8. Spectron keeps the same ordered field-accessor block at 0x20a508 through 0x20a6c0, a fixed +0x5ed8 delta inside the obfuscated XJLBgarMnA class.",
+        "The reviewed rows cover byte, dword, list-count, string-field, and allowed-socket accessors. The target bodies retain the same field roles and normalized metrics. The allowed-port setter changes only through the target C8THgaTQxF string wrapper and its obfuscated global field.",
+        "TSocket_sendOutgoing_void at 0x204894 maps to 0x20a76c. Both bodies check the connection object and error state, send positive-length buffered data, and remove the transmitted prefix. The target replaces the named TSocketConnection and TString helpers with u3cBgayBVz and C8THgaTQxF wrappers.",
+        "TSocket_create_TString_const at 0x204a70 maps to 0x20a948. Both factories allocate 0xf0 bytes, call the parameterized socket constructor, and return the object. The class-specific XJLBgarMnA constructor call resolves the factory role among generic allocator candidates.",
+        "Eighteen reviewed pairs have exact normalized metrics, including mnemonic hash, opcode shape, register shape, and overall shape hash. The allowed-port setter is the only layout-change row. None of these functions has string references."
+      ],
+      "match_kind": "manual-tsocket-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TString_operator_assign_TString_const"
+      ],
+      "original_ea": "0x204728",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "81dd519f96871a37777e8fac495ac7c683ae54236a41cc1428f078f3d69b5fe6",
+        "opcode_shape_hash": "af152fb4f9b23cfdc7f715132e55b357152c251e8155598e87701d1819fa104b",
+        "register_shape_hash": null,
+        "shape_hash": "6a612c3e6821872c1cd8fcf103bf35cfd82a9f653df4bbbf9ba94f3a69f0a87b",
+        "size": 48
+      },
+      "original_name": "TSocket_getStringField200",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_getStringField200",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TSocket accessor, output, or factory method TSocket_getStringField200",
+      "spectron_current_name": "sub_20A600",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxFaSERKS_"
+      ],
+      "spectron_ea": "0x20a600",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "81dd519f96871a37777e8fac495ac7c683ae54236a41cc1428f078f3d69b5fe6",
+        "opcode_shape_hash": "af152fb4f9b23cfdc7f715132e55b357152c251e8155598e87701d1819fa104b",
+        "register_shape_hash": null,
+        "shape_hash": "6a612c3e6821872c1cd8fcf103bf35cfd82a9f653df4bbbf9ba94f3a69f0a87b",
+        "size": 48
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TSocket residual accessor and factory block",
+      "context_order": 14,
+      "evidence": [
+        "The source TSocket accessor block runs from 0x204630 through 0x2047e8. Spectron keeps the same ordered field-accessor block at 0x20a508 through 0x20a6c0, a fixed +0x5ed8 delta inside the obfuscated XJLBgarMnA class.",
+        "The reviewed rows cover byte, dword, list-count, string-field, and allowed-socket accessors. The target bodies retain the same field roles and normalized metrics. The allowed-port setter changes only through the target C8THgaTQxF string wrapper and its obfuscated global field.",
+        "TSocket_sendOutgoing_void at 0x204894 maps to 0x20a76c. Both bodies check the connection object and error state, send positive-length buffered data, and remove the transmitted prefix. The target replaces the named TSocketConnection and TString helpers with u3cBgayBVz and C8THgaTQxF wrappers.",
+        "TSocket_create_TString_const at 0x204a70 maps to 0x20a948. Both factories allocate 0xf0 bytes, call the parameterized socket constructor, and return the object. The class-specific XJLBgarMnA constructor call resolves the factory role among generic allocator candidates.",
+        "Eighteen reviewed pairs have exact normalized metrics, including mnemonic hash, opcode shape, register shape, and overall shape hash. The allowed-port setter is the only layout-change row. None of these functions has string references."
+      ],
+      "match_kind": "manual-tsocket-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TString_operator_assign_TString_const"
+      ],
+      "original_ea": "0x204758",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "81dd519f96871a37777e8fac495ac7c683ae54236a41cc1428f078f3d69b5fe6",
+        "opcode_shape_hash": "af152fb4f9b23cfdc7f715132e55b357152c251e8155598e87701d1819fa104b",
+        "register_shape_hash": null,
+        "shape_hash": "6a612c3e6821872c1cd8fcf103bf35cfd82a9f653df4bbbf9ba94f3a69f0a87b",
+        "size": 48
+      },
+      "original_name": "TSocket_getStringField184",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_getStringField184",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TSocket accessor, output, or factory method TSocket_getStringField184",
+      "spectron_current_name": "sub_20A630",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxFaSERKS_"
+      ],
+      "spectron_ea": "0x20a630",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "81dd519f96871a37777e8fac495ac7c683ae54236a41cc1428f078f3d69b5fe6",
+        "opcode_shape_hash": "af152fb4f9b23cfdc7f715132e55b357152c251e8155598e87701d1819fa104b",
+        "register_shape_hash": null,
+        "shape_hash": "6a612c3e6821872c1cd8fcf103bf35cfd82a9f653df4bbbf9ba94f3a69f0a87b",
+        "size": 48
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TSocket residual accessor and factory block",
+      "context_order": 15,
+      "evidence": [
+        "The source TSocket accessor block runs from 0x204630 through 0x2047e8. Spectron keeps the same ordered field-accessor block at 0x20a508 through 0x20a6c0, a fixed +0x5ed8 delta inside the obfuscated XJLBgarMnA class.",
+        "The reviewed rows cover byte, dword, list-count, string-field, and allowed-socket accessors. The target bodies retain the same field roles and normalized metrics. The allowed-port setter changes only through the target C8THgaTQxF string wrapper and its obfuscated global field.",
+        "TSocket_sendOutgoing_void at 0x204894 maps to 0x20a76c. Both bodies check the connection object and error state, send positive-length buffered data, and remove the transmitted prefix. The target replaces the named TSocketConnection and TString helpers with u3cBgayBVz and C8THgaTQxF wrappers.",
+        "TSocket_create_TString_const at 0x204a70 maps to 0x20a948. Both factories allocate 0xf0 bytes, call the parameterized socket constructor, and return the object. The class-specific XJLBgarMnA constructor call resolves the factory role among generic allocator candidates.",
+        "Eighteen reviewed pairs have exact normalized metrics, including mnemonic hash, opcode shape, register shape, and overall shape hash. The allowed-port setter is the only layout-change row. None of these functions has string references."
+      ],
+      "match_kind": "manual-tsocket-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TString_operator_assign_TString_const"
+      ],
+      "original_ea": "0x204788",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "81dd519f96871a37777e8fac495ac7c683ae54236a41cc1428f078f3d69b5fe6",
+        "opcode_shape_hash": "af152fb4f9b23cfdc7f715132e55b357152c251e8155598e87701d1819fa104b",
+        "register_shape_hash": null,
+        "shape_hash": "6a612c3e6821872c1cd8fcf103bf35cfd82a9f653df4bbbf9ba94f3a69f0a87b",
+        "size": 48
+      },
+      "original_name": "TSocket_getStringField144",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_getStringField144",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TSocket accessor, output, or factory method TSocket_getStringField144",
+      "spectron_current_name": "sub_20A660",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxFaSERKS_"
+      ],
+      "spectron_ea": "0x20a660",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "81dd519f96871a37777e8fac495ac7c683ae54236a41cc1428f078f3d69b5fe6",
+        "opcode_shape_hash": "af152fb4f9b23cfdc7f715132e55b357152c251e8155598e87701d1819fa104b",
+        "register_shape_hash": null,
+        "shape_hash": "6a612c3e6821872c1cd8fcf103bf35cfd82a9f653df4bbbf9ba94f3a69f0a87b",
+        "size": 48
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TSocket residual accessor and factory block",
+      "context_order": 16,
+      "evidence": [
+        "The source TSocket accessor block runs from 0x204630 through 0x2047e8. Spectron keeps the same ordered field-accessor block at 0x20a508 through 0x20a6c0, a fixed +0x5ed8 delta inside the obfuscated XJLBgarMnA class.",
+        "The reviewed rows cover byte, dword, list-count, string-field, and allowed-socket accessors. The target bodies retain the same field roles and normalized metrics. The allowed-port setter changes only through the target C8THgaTQxF string wrapper and its obfuscated global field.",
+        "TSocket_sendOutgoing_void at 0x204894 maps to 0x20a76c. Both bodies check the connection object and error state, send positive-length buffered data, and remove the transmitted prefix. The target replaces the named TSocketConnection and TString helpers with u3cBgayBVz and C8THgaTQxF wrappers.",
+        "TSocket_create_TString_const at 0x204a70 maps to 0x20a948. Both factories allocate 0xf0 bytes, call the parameterized socket constructor, and return the object. The class-specific XJLBgarMnA constructor call resolves the factory role among generic allocator candidates.",
+        "Eighteen reviewed pairs have exact normalized metrics, including mnemonic hash, opcode shape, register shape, and overall shape hash. The allowed-port setter is the only layout-change row. None of these functions has string references."
+      ],
+      "match_kind": "manual-tsocket-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TString_operator_assign_TString_const"
+      ],
+      "original_ea": "0x2047b8",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "81dd519f96871a37777e8fac495ac7c683ae54236a41cc1428f078f3d69b5fe6",
+        "opcode_shape_hash": "af152fb4f9b23cfdc7f715132e55b357152c251e8155598e87701d1819fa104b",
+        "register_shape_hash": null,
+        "shape_hash": "6a612c3e6821872c1cd8fcf103bf35cfd82a9f653df4bbbf9ba94f3a69f0a87b",
+        "size": 48
+      },
+      "original_name": "TSocket_getStringField152",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_getStringField152",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TSocket accessor, output, or factory method TSocket_getStringField152",
+      "spectron_current_name": "sub_20A690",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxFaSERKS_"
+      ],
+      "spectron_ea": "0x20a690",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "81dd519f96871a37777e8fac495ac7c683ae54236a41cc1428f078f3d69b5fe6",
+        "opcode_shape_hash": "af152fb4f9b23cfdc7f715132e55b357152c251e8155598e87701d1819fa104b",
+        "register_shape_hash": null,
+        "shape_hash": "6a612c3e6821872c1cd8fcf103bf35cfd82a9f653df4bbbf9ba94f3a69f0a87b",
+        "size": 48
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TSocket residual accessor and factory block",
+      "context_order": 17,
+      "evidence": [
+        "The source TSocket accessor block runs from 0x204630 through 0x2047e8. Spectron keeps the same ordered field-accessor block at 0x20a508 through 0x20a6c0, a fixed +0x5ed8 delta inside the obfuscated XJLBgarMnA class.",
+        "The reviewed rows cover byte, dword, list-count, string-field, and allowed-socket accessors. The target bodies retain the same field roles and normalized metrics. The allowed-port setter changes only through the target C8THgaTQxF string wrapper and its obfuscated global field.",
+        "TSocket_sendOutgoing_void at 0x204894 maps to 0x20a76c. Both bodies check the connection object and error state, send positive-length buffered data, and remove the transmitted prefix. The target replaces the named TSocketConnection and TString helpers with u3cBgayBVz and C8THgaTQxF wrappers.",
+        "TSocket_create_TString_const at 0x204a70 maps to 0x20a948. Both factories allocate 0xf0 bytes, call the parameterized socket constructor, and return the object. The class-specific XJLBgarMnA constructor call resolves the factory role among generic allocator candidates.",
+        "Eighteen reviewed pairs have exact normalized metrics, including mnemonic hash, opcode shape, register shape, and overall shape hash. The allowed-port setter is the only layout-change row. None of these functions has string references."
+      ],
+      "match_kind": "manual-tsocket-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TString_operator_assign_TString_const"
+      ],
+      "original_ea": "0x2047e8",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "81dd519f96871a37777e8fac495ac7c683ae54236a41cc1428f078f3d69b5fe6",
+        "opcode_shape_hash": "af152fb4f9b23cfdc7f715132e55b357152c251e8155598e87701d1819fa104b",
+        "register_shape_hash": null,
+        "shape_hash": "6a612c3e6821872c1cd8fcf103bf35cfd82a9f653df4bbbf9ba94f3a69f0a87b",
+        "size": 48
+      },
+      "original_name": "TSocket_getStringField160",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_getStringField160",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TSocket accessor, output, or factory method TSocket_getStringField160",
+      "spectron_current_name": "sub_20A6C0",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxFaSERKS_"
+      ],
+      "spectron_ea": "0x20a6c0",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "81dd519f96871a37777e8fac495ac7c683ae54236a41cc1428f078f3d69b5fe6",
+        "opcode_shape_hash": "af152fb4f9b23cfdc7f715132e55b357152c251e8155598e87701d1819fa104b",
+        "register_shape_hash": null,
+        "shape_hash": "6a612c3e6821872c1cd8fcf103bf35cfd82a9f653df4bbbf9ba94f3a69f0a87b",
+        "size": 48
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TSocket residual accessor and factory block",
+      "context_order": 18,
+      "evidence": [
+        "The source TSocket accessor block runs from 0x204630 through 0x2047e8. Spectron keeps the same ordered field-accessor block at 0x20a508 through 0x20a6c0, a fixed +0x5ed8 delta inside the obfuscated XJLBgarMnA class.",
+        "The reviewed rows cover byte, dword, list-count, string-field, and allowed-socket accessors. The target bodies retain the same field roles and normalized metrics. The allowed-port setter changes only through the target C8THgaTQxF string wrapper and its obfuscated global field.",
+        "TSocket_sendOutgoing_void at 0x204894 maps to 0x20a76c. Both bodies check the connection object and error state, send positive-length buffered data, and remove the transmitted prefix. The target replaces the named TSocketConnection and TString helpers with u3cBgayBVz and C8THgaTQxF wrappers.",
+        "TSocket_create_TString_const at 0x204a70 maps to 0x20a948. Both factories allocate 0xf0 bytes, call the parameterized socket constructor, and return the object. The class-specific XJLBgarMnA constructor call resolves the factory role among generic allocator candidates.",
+        "Eighteen reviewed pairs have exact normalized metrics, including mnemonic hash, opcode shape, register shape, and overall shape hash. The allowed-port setter is the only layout-change row. None of these functions has string references."
+      ],
+      "match_kind": "manual-tsocket-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TSocketConnection_hasError_void",
+        "plt_TSocketConnection_sendData_void_const_int"
+      ],
+      "original_ea": "0x204894",
+      "original_metrics": {
+        "basic_block_count": 8,
+        "branch_count": 7,
+        "call_count": 2,
+        "instruction_count": 31,
+        "mnemonic_hash": "98dc81b84d7712be752e63c19f7733a084cd0ff9c62aa60af21b6d2a9b913395",
+        "opcode_shape_hash": "9d820ea14b402e68c8463479060314d171fe44f8d430935ad4f75e7b64089da8",
+        "register_shape_hash": null,
+        "shape_hash": "7511996750ed2528ca45f8c9ef8b30209725433b5da471ce030d2ecf13e3e3d7",
+        "size": 124
+      },
+      "original_name": "TSocket_sendOutgoing_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_sendOutgoing_void",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TSocket accessor, output, or factory method TSocket_sendOutgoing_void",
+      "spectron_current_name": "_ZN10XJLBgarMnA10da7AgaaEQzEv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10u3cBgayBVz10Y33yga716xEPKvi",
+        "._ZNK10u3cBgayBVz10nq1pgaTOvqEv"
+      ],
+      "spectron_ea": "0x20a76c",
+      "spectron_metrics": {
+        "basic_block_count": 8,
+        "branch_count": 7,
+        "call_count": 2,
+        "instruction_count": 31,
+        "mnemonic_hash": "98dc81b84d7712be752e63c19f7733a084cd0ff9c62aa60af21b6d2a9b913395",
+        "opcode_shape_hash": "9d820ea14b402e68c8463479060314d171fe44f8d430935ad4f75e7b64089da8",
+        "register_shape_hash": null,
+        "shape_hash": "7511996750ed2528ca45f8c9ef8b30209725433b5da471ce030d2ecf13e3e3d7",
+        "size": 124
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TSocket residual accessor and factory block",
+      "context_order": 19,
+      "evidence": [
+        "The source TSocket accessor block runs from 0x204630 through 0x2047e8. Spectron keeps the same ordered field-accessor block at 0x20a508 through 0x20a6c0, a fixed +0x5ed8 delta inside the obfuscated XJLBgarMnA class.",
+        "The reviewed rows cover byte, dword, list-count, string-field, and allowed-socket accessors. The target bodies retain the same field roles and normalized metrics. The allowed-port setter changes only through the target C8THgaTQxF string wrapper and its obfuscated global field.",
+        "TSocket_sendOutgoing_void at 0x204894 maps to 0x20a76c. Both bodies check the connection object and error state, send positive-length buffered data, and remove the transmitted prefix. The target replaces the named TSocketConnection and TString helpers with u3cBgayBVz and C8THgaTQxF wrappers.",
+        "TSocket_create_TString_const at 0x204a70 maps to 0x20a948. Both factories allocate 0xf0 bytes, call the parameterized socket constructor, and return the object. The class-specific XJLBgarMnA constructor call resolves the factory role among generic allocator candidates.",
+        "Eighteen reviewed pairs have exact normalized metrics, including mnemonic hash, opcode shape, register shape, and overall shape hash. The allowed-port setter is the only layout-change row. None of these functions has string references."
+      ],
+      "match_kind": "manual-tsocket-accessor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TSocket_TSocket_TString_const",
+        "plt_operator_new_ulong__2"
+      ],
+      "original_ea": "0x204a70",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 3,
+        "call_count": 2,
+        "instruction_count": 12,
+        "mnemonic_hash": "2159812d4ac81af54d516201491e6cde9e14bb69957486d8fa4ea107f0be201d",
+        "opcode_shape_hash": "c47626faf82f548369cf49d25e383671b668c64c6332911aaa8e1a8ad5f428a1",
+        "register_shape_hash": null,
+        "shape_hash": "41ada6f06926bf848eb01205d978f94d896eabccfbc0547294e6aa393aa6f686",
+        "size": 48
+      },
+      "original_name": "TSocket_create_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_create_TString_const",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TSocket accessor, output, or factory method TSocket_create_TString_const",
+      "spectron_current_name": "_Z20XJLBgarMnAE7Bm2aaHDBRK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10XJLBgarMnAC2ERK10C8THgaTQxF",
+        "._Znwm"
+      ],
+      "spectron_ea": "0x20a948",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 3,
+        "call_count": 2,
+        "instruction_count": 12,
+        "mnemonic_hash": "2159812d4ac81af54d516201491e6cde9e14bb69957486d8fa4ea107f0be201d",
+        "opcode_shape_hash": "c47626faf82f548369cf49d25e383671b668c64c6332911aaa8e1a8ad5f428a1",
+        "register_shape_hash": null,
+        "shape_hash": "41ada6f06926bf848eb01205d978f94d896eabccfbc0547294e6aa393aa6f686",
+        "size": 48
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_tsocket_accessor_residual_manual_translation_anchors_20260826",
+  "context": {
+    "factory_source": "0x204a70",
+    "factory_target": "0x20a948",
+    "layout_change_source": "0x204678",
+    "layout_change_target": "0x20a550",
+    "source_sequence": "0x204630 through 0x2047e8 accessors, 0x204894 sendOutgoing, and 0x204a70 create",
+    "target_class": "XJLBgarMnA",
+    "target_delta": "+0x5ed8",
+    "target_sequence": "0x20a508 through 0x20a6c0 accessors, 0x20a76c sendOutgoing, and 0x20a948 create"
+  },
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4.json",
+    "original_features_sha256": "62cccc40ea88a08d5ed0845ceeceaf194b528bdd07bdd6ff1a0350dee3b0ab82",
+    "semantic_map": "/tmp/spectron_semantic_map.json",
+    "semantic_map_sha256": "c0906607542480e1fbe33e9e0bf5030581efd55ee71987cf0a7ca792b68664fc",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features.json",
+    "spectron_features_sha256": "cc1789d2d3c24f478d7863f2b07b10b4259aa2d370e363e5303000eb7b835243"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable source method names while retaining the obfuscated target context in the evidence rows.",
+    "The target names are resolved by the fixed class-local delta, exact normalized shapes, field roles, and the socket factory call graph.",
+    "The allowed-port setter is recorded as a layout-change anchor because Spectron replaces the source TString global with an obfuscated string wrapper and field."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for the residual TSocket accessor and factory block",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 19,
+    "exact_shape_anchor_count": 18,
+    "high_confidence_count": 19,
+    "layout_change_anchor_count": 1,
+    "new_context_anchor_count": 19,
+    "target_default_name_count": 17
+  }
+}
