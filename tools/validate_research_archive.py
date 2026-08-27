@@ -257,6 +257,9 @@ def main():
     spectron_tstring_clear_anchors = load_json(
         "artifacts/spectron_tstring_clear_manual_translation_anchors_20260827.json"
     )
+    spectron_static_clear_anchors = load_json(
+        "artifacts/spectron_static_clear_manual_translation_anchors_20260827.json"
+    )
     spectron_particle_emitter_anchors = load_json(
         "artifacts/spectron_particle_emitter_manual_translation_anchors_20260826.json"
     )
@@ -2018,6 +2021,22 @@ def main():
     check("Spectron TString clear layout-change count", spectron_tstring_clear_anchors["summary"]["layout_change_anchor_count"], 0)
     check("Spectron TString clear default targets", spectron_tstring_clear_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron static-clear artifact",
+        spectron_static_clear_anchors["artifact"],
+        "spectron_static_clear_manual_translation_anchors_20260827",
+    )
+    check("Spectron static-clear network", spectron_static_clear_anchors["network_contacted"], False)
+    check("Spectron static-clear total", spectron_static_clear_anchors["summary"]["anchor_count"], 2)
+    check("Spectron static-clear high confidence", spectron_static_clear_anchors["summary"]["high_confidence_count"], 2)
+    check("Spectron static-clear exact-shape count", spectron_static_clear_anchors["summary"]["exact_shape_anchor_count"], 0)
+    check("Spectron static-clear layout-change count", spectron_static_clear_anchors["summary"]["layout_change_anchor_count"], 2)
+    check("Spectron static-clear default targets", spectron_static_clear_anchors["summary"]["target_default_name_count"], 2)
+    check(
+        "Spectron static-clear delta groups",
+        spectron_static_clear_anchors["summary"]["address_delta_groups"],
+        {"-0x428": 1, "-0x4c4": 1},
+    )
+    check(
         "Spectron particle-emitter artifact",
         spectron_particle_emitter_anchors["artifact"],
         "spectron_particle_emitter_manual_translation_anchors_20260826",
@@ -3175,7 +3194,7 @@ def main():
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1250)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1248)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -3348,7 +3367,8 @@ def main():
     check("Spectron checkpoint hash-container anchor count", spectron_checkpoint["hash_container_anchors"]["verified_name_count"], 5)
     check("Spectron checkpoint TString anchor count", spectron_checkpoint["tstring_anchors"]["verified_name_count"], 6)
     check("Spectron checkpoint TString clear anchor count", spectron_checkpoint["tstring_clear_anchors"]["verified_name_count"], 1)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "b414cf0d0d025c85c0cb4ddab2ea9987ecfbd6484da7ca4846b0ed3588d35c49")
+    check("Spectron checkpoint static-clear anchor count", spectron_checkpoint["static_clear_anchors"]["verified_name_count"], 2)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "0c5b0f55006fd4a22c6044a6addfcaa07346e1b1cec1f092676a06701ba12e7c")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -3475,6 +3495,7 @@ def main():
         spectron_hash_container_anchors,
         spectron_tstring_anchors,
         spectron_tstring_clear_anchors,
+        spectron_static_clear_anchors,
         spectron_particle_emitter_anchors,
         spectron_server_animation_anchors,
         spectron_player_lifecycle_anchors,

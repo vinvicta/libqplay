@@ -1437,6 +1437,18 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_tstring_clear_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+234. The next IDA pass translated two static cleanup callbacks:
+    `TClient_clearStaticStrings` and `TSocket_clearStaticStrings`. Their
+    target classes are `w6qzgacqqy` and `XJLBgarMnA`, established by the
+    surrounding client and socket method families. The target bodies add one
+    target-only string cleanup apiece, so both rows are recorded as reviewed
+    layout-change anchors. Both aliases reopened successfully in the v176
+    disposable copy, which has 11,694 functions, 3,641 high-confidence labels,
+    and 1,248 default `sub_` names. See
+    `artifacts/spectron_static_clear_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_static_clear_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 232. The next IDA pass translated six exact-shape `TString` methods: signed,
     unsigned, and 64-bit integer insertion, prefix testing, and the bounded
     and unbounded case-insensitive comparison thunks. All six labels reopened

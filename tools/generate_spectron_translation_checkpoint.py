@@ -157,6 +157,8 @@ def main() -> None:
     parser.add_argument("--tstring-verification", type=Path)
     parser.add_argument("--tstring-clear-anchors", type=Path)
     parser.add_argument("--tstring-clear-verification", type=Path)
+    parser.add_argument("--static-clear-anchors", type=Path)
+    parser.add_argument("--static-clear-verification", type=Path)
     parser.add_argument("--particle-emitter-anchors", type=Path)
     parser.add_argument("--particle-emitter-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
@@ -2226,6 +2228,34 @@ def main() -> None:
         result["tstring_clear_anchors"] = tstring_clear
         result["interpretation"].append(
             "The one-hundred-seventy-fifth database revision also contains the separately reviewed exact-shape TString clear anchor."
+        )
+    static_clear = None
+    if args.static_clear_anchors or args.static_clear_verification:
+        if not args.static_clear_anchors or not args.static_clear_verification:
+            raise ValueError(
+                "static-clear anchors and static-clear verification must be supplied together"
+            )
+        static_clear_document = load(args.static_clear_anchors)
+        static_clear_verification = load(args.static_clear_verification)
+        if static_clear_document.get("artifact") != "spectron_static_clear_manual_translation_anchors_20260827":
+            raise ValueError("unexpected static-clear anchor artifact")
+        if not static_clear_verification.get("verified"):
+            raise ValueError("static-clear anchor reopen verification did not pass")
+        expected_static_clear = len(static_clear_document["anchors"])
+        if static_clear_verification["verified_name_count"] != expected_static_clear:
+            raise ValueError("static-clear verification count differs from artifact")
+        static_clear = {
+            "anchor_path": str(args.static_clear_anchors),
+            "anchor_sha256": sha256_path(args.static_clear_anchors),
+            "reopen_verification": str(args.static_clear_verification),
+            "anchor_count": expected_static_clear,
+            "verified_name_count": static_clear_verification["verified_name_count"],
+            "reopen_failure_count": static_clear_verification["failure_count"],
+        }
+    if static_clear is not None:
+        result["static_clear_anchors"] = static_clear
+        result["interpretation"].append(
+            "The one-hundred-seventy-sixth database revision also contains the separately reviewed TClient and TSocket static cleanup layout anchors."
         )
     particle_emitter = None
     if args.particle_emitter_anchors or args.particle_emitter_verification:
