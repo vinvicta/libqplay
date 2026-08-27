@@ -5252,6 +5252,41 @@ video-related globals rather than the known flying-object state. Leaving that
 row unresolved is safer than assigning a plausible-looking but unsupported
 class name.
 
+## 2026-08-27: Static callback role correction
+
+The unresolved third static cleanup required a second look at data references.
+The source review artifact had proposed `TServerFlying_clearStaticStrings` at
+`0xe06a8`, with the evidence that it cleared three adjacent `TString`
+objects used by `TServerFlying::animate`. That last part is not supported by
+the IDA database. The function clears `0x391210`, `0x391218`, and `0x391238`.
+
+The first two globals are read by the TapJoy secret and application-ID setup
+and connector paths. The third is read by the video-player open, loaded, and
+finished paths. The companion source reset at `0xe0ad0` clears those same
+objects and zeros the video rectangle values at `0x391228`, `0x39122c`,
+`0x391230`, and `0x391234`. The source `TServerFlying::animate` function at
+`0x23eeb0` has no data references to any of the three globals. Its class
+property object is instead `TServerFlying_properties` at `0x3911f8`, used by
+the constructor and static script-variable initializer.
+
+The corrected descriptive source role is
+`Android_TapJoy_video_clearStaticStrings`. This is intentionally a component
+description rather than a claim about an original symbol. The corresponding
+2.2 target remains open. Target `gId5RaV8_6` is established by the translated
+constructor, properties constructor, animate method, and destructor family,
+but no matching target static string group was found. Target `sub_E0220` uses
+the request globals at `0x3a4d38`, `0x3a4d40`, `0x3a4d48`, and `0x3a4d50`.
+Target `sub_E0438` uses the video and Android runtime group at `0x3a58d0`,
+`0x3a58d8`, `0x3a58e0`, `0x3a5920`, and `0x3a59c8`. Neither routine is a
+supported flying-object mapping.
+
+The old candidate and symbol overlay are kept as historical inputs. The
+correction supersedes their class-role interpretation for future work without
+altering the original automatic map. The machine-readable record is
+`artifacts/spectron_static_callback_role_correction_20260827.json`, generated
+by `tools/generate_spectron_static_callback_role_correction.py`. The supporting
+read-only IDA helper is `tools/ida_dump_function_data_refs.py`.
+
 ## 2026-08-27: Spectron TString helper family
 
 The v174 pass translates six `TString` helpers that were still outside the

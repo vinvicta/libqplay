@@ -1449,6 +1449,17 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_static_clear_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+235. A follow-up IDA data-reference audit corrected the older review role for
+    source callback `0xe06a8`. Its three cleared objects belong to the old
+    Android TapJoy and video state group, and `TServerFlying::animate` has zero
+    references to them. The descriptive source role is
+    `Android_TapJoy_video_clearStaticStrings`. No target alias was applied:
+    target `0xe0220` is request state and target `0xe0438` is a separate video
+    and Android runtime group. See
+    `artifacts/spectron_static_callback_role_correction_20260827.json`,
+    `tools/generate_spectron_static_callback_role_correction.py`, and
+    `tools/ida_dump_function_data_refs.py`.
+
 232. The next IDA pass translated six exact-shape `TString` methods: signed,
     unsigned, and 64-bit integer insertion, prefix testing, and the bounded
     and unbounded case-insensitive comparison thunks. All six labels reopened

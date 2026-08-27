@@ -3533,6 +3533,44 @@ in this pass. Nearby target callbacks at `0xe0220` and `0xe0438` clear other
 global groups tied to request and video state. Assigning either one to the
 flying-object class without isolating its target globals would be speculative.
 
+## Static callback role correction
+
+A direct data-reference review corrected the role of the third source callback.
+The old review row proposed `TServerFlying_clearStaticStrings` for `0xe06a8`
+because it cleared three `TString` objects near other server-object state. The
+function actually clears these process-wide objects:
+
+| Source global | Observed role evidence |
+| --- | --- |
+| `0x391210` | TapJoy secret or shared Android string cache, read by the TapJoy setup and connector paths |
+| `0x391218` | TapJoy application-ID string cache, read by the application-ID setter and connector |
+| `0x391238` | Video-player string or state cache, read by the video open and completion paths |
+
+The companion reset at `0xe0ad0` clears the same three objects and also zeros
+the four cached video rectangle integers at `0x391228` through `0x391234`.
+`TServerFlying::animate` at `0x23eeb0` has zero data references to
+`0x391210`, `0x391218`, and `0x391238`. Its known class property global is
+`TServerFlying_properties` at `0x3911f8`, which is a separate object used by
+the constructor and static script-variable initializer.
+
+The corrected descriptive source role is
+`Android_TapJoy_video_clearStaticStrings`. It is a behavior label, not a
+recovered ELF symbol. The target remains unresolved. The target class is
+`gId5RaV8_6`, with its constructor at `0x248dec`, properties constructor at
+`0x248d50`, and animate method at `0x248e38`. The nearby target cleanup at
+`0xe0220` clears request and `THTTPRequest` state at `0x3a4d38` through
+`0x3a4d50`. The cleanup at `0xe0438` clears a different group at `0x3a58d0`,
+`0x3a58d8`, `0x3a58e0`, `0x3a5920`, and `0x3a59c8`, which is used by video,
+Frida-detection, and Android input paths. Neither target is a valid
+`TServerFlying` assignment.
+
+The historical candidate and symbol overlay stay unchanged so the original
+review remains reproducible. The correction and its feature hashes are in
+`artifacts/spectron_static_callback_role_correction_20260827.json`, generated
+by `tools/generate_spectron_static_callback_role_correction.py`. The read-only
+IDA helper `tools/ida_dump_function_data_refs.py` records the data-reference
+evidence used to separate these similar cleanup routines.
+
 ## Spectron TString helper family
 
 The v174 pass resolves six short `TString` helpers that remained outside the

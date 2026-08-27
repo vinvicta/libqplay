@@ -44,6 +44,14 @@ The IDB also retains the earlier inferred
 `TClient_setSSLParameters_scriptCallback` label outside that artifact. None of
 these semantic labels is part of the 8,601 alias inventory rows.
 
+One older native callback review label has since been corrected. The source
+function at `0xe06a8` was initially described as
+`TServerFlying_clearStaticStrings`, but its cleared globals are used by the
+TapJoy and video paths, not by `TServerFlying::animate`. The descriptive role
+`Android_TapJoy_video_clearStaticStrings` is recorded as a source-only
+correction, and no 2.2 target is assigned to it. See
+`artifacts/spectron_static_callback_role_correction_20260827.json`.
+
 ## Naming policy
 
 The native names are kept close to their demangled ELF form. Characters that

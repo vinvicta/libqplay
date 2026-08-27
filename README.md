@@ -1666,6 +1666,18 @@ global groups associated with request and video state. The flying-object
 callback remains a separate investigation item until its target globals are
 isolated.
 
+A follow-up data-reference audit corrected the source role behind that open
+item. The 1.8 function at `0xe06a8` clears the old Android TapJoy secret,
+TapJoy application-ID, and video-player state strings. `TServerFlying::animate`
+does not reference any of those three globals, while its known property global
+is separate at `0x3911f8`. The descriptive source-only replacement is
+`Android_TapJoy_video_clearStaticStrings`. No Spectron target was assigned:
+`0xe0220` clears request state and `0xe0438` clears a different video and
+Android runtime group. The historical candidate and overlay remain unchanged
+for reproducibility, and the correction is recorded in
+`artifacts/spectron_static_callback_role_correction_20260827.json`, generated
+by `tools/generate_spectron_static_callback_role_correction.py`.
+
 A v165 disposable copy,
 `/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v165.i64`,
 translates the `TShowImg` property callback registry. The source
@@ -2476,6 +2488,9 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/spectron_static_clear_manual_translation_anchors_20260827.json`
   records the two reviewed TClient and TSocket static cleanup layout anchors
   from the v176 pass.
+* `artifacts/spectron_static_callback_role_correction_20260827.json` records
+  the corrected source role for the old third static callback and the two
+  rejected Spectron target candidates. It does not assign a target alias.
 * `artifacts/spectron_resource_parser_manual_translation_anchors_20260826.json`
   records the three reviewed Gani lexer, cached-resource path, and
   update-package parser anchors.
@@ -2794,6 +2809,12 @@ proves the local native TLS path, not a current live certificate or service.
   The `tools/generate_spectron_static_clear_anchors.py` generator records the
   reviewed TClient and TSocket static cleanup callbacks, including their
   target-only fields and layout changes.
+  The `tools/generate_spectron_static_callback_role_correction.py` generator
+  records the data-reference correction for the old third static callback and
+  keeps its unresolved target status explicit.
+  The `tools/ida_dump_function_data_refs.py` helper prints read-only data
+  references for selected IDA functions or an address range. It is useful for
+  separating similar static cleanup groups in stripped builds.
   The `tools/generate_spectron_tplayer_core_anchors.py` generator records the
   reviewed TPlayer network-property serializer and constructor roles with
   exact metric and literal checks.

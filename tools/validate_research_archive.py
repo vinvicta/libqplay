@@ -260,6 +260,9 @@ def main():
     spectron_static_clear_anchors = load_json(
         "artifacts/spectron_static_clear_manual_translation_anchors_20260827.json"
     )
+    spectron_static_callback_role_correction = load_json(
+        "artifacts/spectron_static_callback_role_correction_20260827.json"
+    )
     spectron_particle_emitter_anchors = load_json(
         "artifacts/spectron_particle_emitter_manual_translation_anchors_20260826.json"
     )
@@ -2037,6 +2040,56 @@ def main():
         {"-0x428": 1, "-0x4c4": 1},
     )
     check(
+        "Spectron static callback correction artifact",
+        spectron_static_callback_role_correction["artifact"],
+        "spectron_static_callback_role_correction_20260827",
+    )
+    check(
+        "Spectron static callback correction network",
+        spectron_static_callback_role_correction["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron static callback correction source claims",
+        spectron_static_callback_role_correction["summary"]["source_claims_corrected"],
+        1,
+    )
+    check(
+        "Spectron static callback correction source globals",
+        spectron_static_callback_role_correction["summary"]["source_global_group_count"],
+        3,
+    )
+    check(
+        "Spectron static callback correction target rejections",
+        spectron_static_callback_role_correction["summary"]["target_candidates_rejected"],
+        2,
+    )
+    check(
+        "Spectron static callback correction target assignments",
+        spectron_static_callback_role_correction["summary"]["target_assignments"],
+        0,
+    )
+    check(
+        "Spectron static callback correction animate refs",
+        spectron_static_callback_role_correction["summary"]["source_animate_forbidden_group_refs"],
+        0,
+    )
+    check(
+        "Spectron static callback correction old role",
+        spectron_static_callback_role_correction["historical_candidate"]["candidate_proposed_name"],
+        "TServerFlying_clearStaticStrings",
+    )
+    check(
+        "Spectron static callback correction new role",
+        spectron_static_callback_role_correction["corrected_source_role"]["recommended_descriptive_name"],
+        "Android_TapJoy_video_clearStaticStrings",
+    )
+    check(
+        "Spectron static callback correction target status",
+        spectron_static_callback_role_correction["target_review"]["target_assignment_status"],
+        "unresolved",
+    )
+    check(
         "Spectron particle-emitter artifact",
         spectron_particle_emitter_anchors["artifact"],
         "spectron_particle_emitter_manual_translation_anchors_20260826",
@@ -3496,6 +3549,7 @@ def main():
         spectron_tstring_anchors,
         spectron_tstring_clear_anchors,
         spectron_static_clear_anchors,
+        spectron_static_callback_role_correction,
         spectron_particle_emitter_anchors,
         spectron_server_animation_anchors,
         spectron_player_lifecycle_anchors,
