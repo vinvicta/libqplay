@@ -1428,6 +1428,18 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+215. The follow-up IDA pass translated the remaining 53 exact-shape `CyaInt`
+    methods. Combined with the preceding 30-row batch, every one of the 266
+    named `CyaInt` methods in the original feature export now has a reviewed
+    semantic target or existing map entry. The second batch covers RSA
+    verification and decryption, TLS I/O callbacks, verification-mode setters,
+    DTLS and timeout helpers, TLS 1.0 through 1.2 client methods, OCSP and
+    X.509 accessors, and TLS mutex wrappers. All 53 labels reopened
+    successfully in the v156 disposable copy, which has 11,693 functions and
+    1,396 default `sub_` names. See
+    `artifacts/spectron_cyaint_tls_residual_v2_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 214. The next IDA pass translated 30 residual `CyaInt` TLS and cryptography
     methods. It covers verification paths, certificate and private-key
     buffers, session and cipher accessors, protocol selectors, error helpers,

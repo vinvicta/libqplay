@@ -329,6 +329,8 @@ def main() -> None:
     parser.add_argument("--gsfunctions-client-exact-residual-v4-verification", type=Path)
     parser.add_argument("--cyaint-tls-residual-anchors", type=Path)
     parser.add_argument("--cyaint-tls-residual-verification", type=Path)
+    parser.add_argument("--cyaint-tls-residual-v2-anchors", type=Path)
+    parser.add_argument("--cyaint-tls-residual-v2-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -4596,6 +4598,34 @@ def main() -> None:
         result["cyaint_tls_residual_anchors"] = cyaint_tls_residual
         result["interpretation"].append(
             "The one-hundred-fifty-fifth database revision also contains the separately reviewed exact-shape CyaInt TLS and cryptography residual batch."
+        )
+    cyaint_tls_residual_v2 = None
+    if args.cyaint_tls_residual_v2_anchors or args.cyaint_tls_residual_v2_verification:
+        if not args.cyaint_tls_residual_v2_anchors or not args.cyaint_tls_residual_v2_verification:
+            raise ValueError(
+                "CyaInt TLS residual v2 anchors and verification must be supplied together"
+            )
+        cyaint_tls_residual_v2_document = load(args.cyaint_tls_residual_v2_anchors)
+        cyaint_tls_residual_v2_verification = load(args.cyaint_tls_residual_v2_verification)
+        if cyaint_tls_residual_v2_document.get("artifact") != "spectron_cyaint_tls_residual_v2_manual_translation_anchors_20260826":
+            raise ValueError("unexpected CyaInt TLS residual v2 artifact")
+        if not cyaint_tls_residual_v2_verification.get("verified"):
+            raise ValueError("CyaInt TLS residual v2 reopen verification did not pass")
+        expected_cyaint_tls_residual_v2 = len(cyaint_tls_residual_v2_document["anchors"])
+        if cyaint_tls_residual_v2_verification["verified_name_count"] != expected_cyaint_tls_residual_v2:
+            raise ValueError("CyaInt TLS residual v2 verification count differs from artifact")
+        cyaint_tls_residual_v2 = {
+            "anchor_path": str(args.cyaint_tls_residual_v2_anchors),
+            "anchor_sha256": sha256_path(args.cyaint_tls_residual_v2_anchors),
+            "reopen_verification": str(args.cyaint_tls_residual_v2_verification),
+            "anchor_count": expected_cyaint_tls_residual_v2,
+            "verified_name_count": cyaint_tls_residual_v2_verification["verified_name_count"],
+            "reopen_failure_count": cyaint_tls_residual_v2_verification["failure_count"],
+        }
+    if cyaint_tls_residual_v2 is not None:
+        result["cyaint_tls_residual_v2_anchors"] = cyaint_tls_residual_v2
+        result["interpretation"].append(
+            "The one-hundred-fifty-sixth database revision also contains the separately reviewed second exact-shape CyaInt TLS and cryptography residual batch."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

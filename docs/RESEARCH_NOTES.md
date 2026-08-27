@@ -5172,6 +5172,102 @@ and zero failures across 11,679 functions. The v108 database has 1,684
 remaining default `sub_` names. Its SHA-256 is
 `8350a43be6b31306954e34a17f77d742c8d1702015d671019d2bf2dd6c1bb1e1`.
 
+## 2026-08-27: Spectron CyaInt TLS residual anchors, batch two
+
+The v156 pass finishes the CyaInt residual work with 53 more exact-shape
+anchors. These rows were not accepted merely because they sat at a convenient
+offset. Each source address plus `0xd590` resolves to a target function whose
+retained C++ mangled name identifies the same method, and the complete feature
+fingerprint is identical in both builds.
+
+| 1.8 function | Source | Spectron target | Role |
+| --- | ---: | ---: | --- |
+| `CyaInt_CheckRunTimeSettings_void` | `0x2b8bb0` | `0x2c6140` | runtime settings |
+| `CyaInt_RsaPrivateDecrypt_uchar_const_uint_uchar_uint_CyaInt_RsaKey` | `0x2bfbf0` | `0x2cd180` | RSA private decrypt |
+| `CyaInt_RsaSSL_Verify_uchar_const_uint_uchar_uint_CyaInt_RsaKey` | `0x2bffa4` | `0x2cd534` | RSA signature verify |
+| `CyaInt_RsaEncryptSize_CyaInt_RsaKey` | `0x2c0404` | `0x2cd994` | RSA size query |
+| `CyaInt_CyaSSL_SetIORecv_CyaInt_CYASSL_CTX_int_CyaInt_CYASSL_char_int_void` | `0x2c386c` | `0x2d0dfc` | receive callback |
+| `CyaInt_CyaSSL_SetIOSend_CyaInt_CYASSL_CTX_int_CyaInt_CYASSL_char_int_void` | `0x2c3874` | `0x2d0e04` | send callback |
+| `CyaInt_CyaSSL_SetIOReadCtx_CyaInt_CYASSL_void` | `0x2c387c` | `0x2d0e0c` | read context |
+| `CyaInt_CyaSSL_SetIOWriteCtx_CyaInt_CYASSL_void` | `0x2c3884` | `0x2d0e14` | write context |
+| `CyaInt_CyaSSL_SetIOReadFlags_CyaInt_CYASSL_int` | `0x2c388c` | `0x2d0e1c` | read flags |
+| `CyaInt_CyaSSL_SetIOWriteFlags_CyaInt_CYASSL_int` | `0x2c3894` | `0x2d0e24` | write flags |
+| `CyaInt_CyaSSL_CTX_free_CyaInt_CYASSL_CTX` | `0x2c395c` | `0x2d0eec` | context free |
+| `CyaInt_CyaSSL_free_CyaInt_CYASSL` | `0x2c39cc` | `0x2d0f5c` | TLS object free |
+| `CyaInt_CyaSSL_get_fd_CyaInt_CYASSL_const` | `0x2c39fc` | `0x2d0f8c` | file descriptor |
+| `CyaInt_CyaSSL_get_using_nonblock_CyaInt_CYASSL` | `0x2c3a14` | `0x2d0fa4` | nonblocking getter |
+| `CyaInt_CyaSSL_dtls_CyaInt_CYASSL` | `0x2c3a1c` | `0x2d0fac` | DTLS mode |
+| `CyaInt_CyaSSL_dtls_set_peer_CyaInt_CYASSL_void_uint` | `0x2c3a24` | `0x2d0fb4` | DTLS peer setter |
+| `CyaInt_CyaSSL_dtls_get_peer_CyaInt_CYASSL_void_uint` | `0x2c3a2c` | `0x2d0fbc` | DTLS peer getter |
+| `CyaInt_CyaSSL_GetObjectSize_void` | `0x2c3a34` | `0x2d0fc4` | object size |
+| `CyaInt_CyaSSL_send_CyaInt_CYASSL_void_const_int_int` | `0x2c3c34` | `0x2d11c4` | TLS send |
+| `CyaInt_CyaSSL_recv_CyaInt_CYASSL_void_int_int` | `0x2c3c64` | `0x2d11f4` | TLS receive |
+| `CyaInt_CyaSSL_want_read_CyaInt_CYASSL` | `0x2c3d80` | `0x2d1310` | read wait state |
+| `CyaInt_CyaSSL_want_write_CyaInt_CYASSL` | `0x2c3d90` | `0x2d1320` | write wait state |
+| `CyaInt_CyaSSL_pending_CyaInt_CYASSL` | `0x2c3f14` | `0x2d14a4` | pending bytes |
+| `CyaInt_CyaSSL_CTX_set_group_messages_CyaInt_CYASSL_CTX` | `0x2c3f1c` | `0x2d14ac` | context grouping |
+| `CyaInt_CyaSSL_set_group_messages_CyaInt_CYASSL` | `0x2c3f3c` | `0x2d14cc` | connection grouping |
+| `CyaInt_CyaSSL_CTX_check_private_key_CyaInt_CYASSL_CTX` | `0x2c5380` | `0x2d2910` | private-key check |
+| `CyaInt_CyaSSL_CTX_set_verify_CyaInt_CYASSL_CTX_int_int_int_CyaInt_CYASSL_X509_STORE_CTX` | `0x2c541c` | `0x2d29ac` | context verify mode |
+| `CyaInt_CyaSSL_set_verify_CyaInt_CYASSL_int_int_int_CyaInt_CYASSL_X509_STORE_CTX` | `0x2c5458` | `0x2d29e8` | connection verify mode |
+| `CyaInt_CyaSSL_load_error_strings_void` | `0x2c54a8` | `0x2d2a38` | error strings |
+| `CyaInt_CyaSSL_dtls_get_current_timeout_CyaInt_CYASSL` | `0x2c5578` | `0x2d2b08` | DTLS timeout |
+| `CyaInt_CyaSSL_dtls_got_timeout_CyaInt_CYASSL` | `0x2c5580` | `0x2d2b10` | timeout notification |
+| `CyaInt_CyaSSLv3_client_method_void` | `0x2c5588` | `0x2d2b18` | SSL 3.0 method |
+| `CyaInt_CyaSSL_flush_sessions_CyaInt_CYASSL_CTX_long` | `0x2c5950` | `0x2d2ee0` | session flush |
+| `CyaInt_CyaSSL_set_timeout_CyaInt_CYASSL_uint` | `0x2c5954` | `0x2d2ee4` | connection timeout |
+| `CyaInt_CyaSSL_CTX_set_timeout_CyaInt_CYASSL_CTX_uint` | `0x2c596c` | `0x2d2efc` | context timeout |
+| `CyaInt_CyaSSL_set_compression_CyaInt_CYASSL` | `0x2c5e4c` | `0x2d33dc` | compression setting |
+| `CyaInt_CyaSSL_X509_get_issuer_name_CyaInt_CYASSL_X509` | `0x2c61d4` | `0x2d3764` | X.509 issuer |
+| `CyaInt_CyaSSL_session_reused_CyaInt_CYASSL` | `0x2c629c` | `0x2d382c` | session reuse |
+| `CyaInt_CyaSSL_get_current_cipher_CyaInt_CYASSL` | `0x2c6360` | `0x2d38f0` | current cipher |
+| `CyaInt_CyaSSL_get_cipher_CyaInt_CYASSL` | `0x2c64d8` | `0x2d3a68` | cipher name |
+| `CyaInt_CyaSSL_X509_free_CyaInt_CYASSL_X509` | `0x2c64f0` | `0x2d3a80` | X.509 free |
+| `CyaInt_CyaSSL_X509_get_subjectCN_CyaInt_CYASSL_X509` | `0x2c64f4` | `0x2d3a84` | X.509 subject CN |
+| `CyaInt_CyaSSL_CTX_OCSP_set_options_CyaInt_CYASSL_CTX_long` | `0x2c6504` | `0x2d3a94` | OCSP options |
+| `CyaInt_CyaSSL_CTX_OCSP_set_override_url_CyaInt_CYASSL_CTX_char_const` | `0x2c650c` | `0x2d3a9c` | OCSP override URL |
+| `CyaInt_MakeTLSv1_2_void` | `0x2c706c` | `0x2d45fc` | TLS 1.2 selector |
+| `CyaInt_CyaTLSv1_client_method_void` | `0x2c7d44` | `0x2d52d4` | TLS 1.0 method |
+| `CyaInt_CyaTLSv1_1_client_method_void` | `0x2c7d7c` | `0x2d530c` | TLS 1.1 method |
+| `CyaInt_CyaTLSv1_2_client_method_void` | `0x2c7db4` | `0x2d5344` | TLS 1.2 method |
+| `CyaInt_LowResTimer_void` | `0x2c906c` | `0x2d65fc` | low-resolution timer |
+| `CyaInt_InitMutex_int` | `0x2ccbc4` | `0x2da154` | mutex initialization |
+| `CyaInt_FreeMutex_int` | `0x2cccbc` | `0x2da24c` | mutex release |
+| `CyaInt_LockMutex_int` | `0x2cccc4` | `0x2da254` | mutex lock |
+| `CyaInt_UnLockMutex_int` | `0x2ccccc` | `0x2da25c` | mutex unlock |
+
+The RSA verifier is a particularly useful checkpoint. Both builds allocate a
+copy of the input, call the inline verifier, enforce the caller's output-size
+limit, clear the temporary buffer, and free it. The target only replaces the
+source PLT-prefixed calls with direct CyaInt method names. The I/O setter pair
+stores the callback pointers at the same CyaSSL object fields. The two
+verification-mode methods preserve the same flag decoding into offsets 360,
+361, 362, and 392. The TLS 1.2 client-method constructor still allocates a
+four-byte method object, obtains the protocol selector, and initializes it.
+
+The X.509 issuer accessor is a one-instruction null body in both exports, and
+the mutex lock wrapper returns zero in both. Those tiny rows still matter: a
+single missing function can make a class-local audit look incomplete, and the
+exact target names confirm that they are intentional stubs rather than lost
+IDA boundaries.
+
+This second batch is deliberately kept separate from the first 30-row CyaInt
+artifact. The generator checks the prior artifact for duplicate source or
+target addresses, checks the semantic map for overlap, and records the prior
+artifact hash. All 53 rows are new, exact-shape, high-confidence anchors.
+The v156 copy reopened all 53 names successfully, and the full semantic map
+reopen check remains clean.
+
+The v156 labels are persisted in
+`analysis/spectron_libqplay_translated_v156.i64`. The database has 11,693
+functions and 1,396 default `sub_` names because every target already had a
+non-default C++ symbol. Its SHA-256 is
+`addc91603c90f9dff6653fcf9d18dd636731237585549f4461efe7a6f7a6bd91`. The
+machine-readable record is
+`artifacts/spectron_cyaint_tls_residual_v2_manual_translation_anchors_20260826.json`,
+generated by
+`tools/generate_spectron_cyaint_tls_residual_v2_anchors.py`.
+
 ## 2026-08-27: Spectron CyaInt TLS residual anchors
 
 The v155 pass moves the translation work into the native TLS implementation.
