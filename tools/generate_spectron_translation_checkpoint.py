@@ -317,6 +317,8 @@ def main() -> None:
     parser.add_argument("--gsfunctions-callback-residual-verification", type=Path)
     parser.add_argument("--gsfunctions-randomstring-residual-anchors", type=Path)
     parser.add_argument("--gsfunctions-randomstring-residual-verification", type=Path)
+    parser.add_argument("--gsfunctions-client-exact-residual-anchors", type=Path)
+    parser.add_argument("--gsfunctions-client-exact-residual-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -4416,6 +4418,34 @@ def main() -> None:
         result["gsfunctions_randomstring_residual_anchors"] = gsfunctions_randomstring_residual
         result["interpretation"].append(
             "The one-hundred-forty-ninth database revision also contains the separately reviewed GSFunctions randomstring callback."
+        )
+    gsfunctions_client_exact_residual = None
+    if args.gsfunctions_client_exact_residual_anchors or args.gsfunctions_client_exact_residual_verification:
+        if not args.gsfunctions_client_exact_residual_anchors or not args.gsfunctions_client_exact_residual_verification:
+            raise ValueError(
+                "GSFunctions client exact residual anchors and verification must be supplied together"
+            )
+        gsfunctions_client_exact_residual_document = load(args.gsfunctions_client_exact_residual_anchors)
+        gsfunctions_client_exact_residual_verification = load(args.gsfunctions_client_exact_residual_verification)
+        if gsfunctions_client_exact_residual_document.get("artifact") != "spectron_gsfunctions_client_exact_residual_manual_translation_anchors_20260826":
+            raise ValueError("unexpected GSFunctions client exact residual artifact")
+        if not gsfunctions_client_exact_residual_verification.get("verified"):
+            raise ValueError("GSFunctions client exact residual reopen verification did not pass")
+        expected_gsfunctions_client_exact_residual = len(gsfunctions_client_exact_residual_document["anchors"])
+        if gsfunctions_client_exact_residual_verification["verified_name_count"] != expected_gsfunctions_client_exact_residual:
+            raise ValueError("GSFunctions client exact residual verification count differs from artifact")
+        gsfunctions_client_exact_residual = {
+            "anchor_path": str(args.gsfunctions_client_exact_residual_anchors),
+            "anchor_sha256": sha256_path(args.gsfunctions_client_exact_residual_anchors),
+            "reopen_verification": str(args.gsfunctions_client_exact_residual_verification),
+            "anchor_count": expected_gsfunctions_client_exact_residual,
+            "verified_name_count": gsfunctions_client_exact_residual_verification["verified_name_count"],
+            "reopen_failure_count": gsfunctions_client_exact_residual_verification["failure_count"],
+        }
+    if gsfunctions_client_exact_residual is not None:
+        result["gsfunctions_client_exact_residual_anchors"] = gsfunctions_client_exact_residual
+        result["interpretation"].append(
+            "The one-hundred-fiftieth database revision also contains the separately reviewed exact-shape GSFunctionsClient callback batch."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

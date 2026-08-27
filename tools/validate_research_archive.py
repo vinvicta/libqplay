@@ -497,6 +497,9 @@ def main():
     spectron_gsfunctions_randomstring_residual_anchors = load_json(
         "artifacts/spectron_gsfunctions_randomstring_residual_manual_translation_anchors_20260826.json"
     )
+    spectron_gsfunctions_client_exact_residual_anchors = load_json(
+        "artifacts/spectron_gsfunctions_client_exact_residual_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2779,13 +2782,26 @@ def main():
     check("Spectron GSFunctions randomstring residual exact-shape count", spectron_gsfunctions_randomstring_residual_anchors["summary"]["exact_shape_anchor_count"], 0)
     check("Spectron GSFunctions randomstring residual layout-change count", spectron_gsfunctions_randomstring_residual_anchors["summary"]["layout_change_anchor_count"], 1)
     check(
+        "Spectron GSFunctionsClient exact residual artifact",
+        spectron_gsfunctions_client_exact_residual_anchors["artifact"],
+        "spectron_gsfunctions_client_exact_residual_manual_translation_anchors_20260826",
+    )
+    check("Spectron GSFunctionsClient exact residual network", spectron_gsfunctions_client_exact_residual_anchors["network_contacted"], False)
+    check("Spectron GSFunctionsClient exact residual total", spectron_gsfunctions_client_exact_residual_anchors["summary"]["anchor_count"], 20)
+    check("Spectron GSFunctionsClient exact residual high confidence", spectron_gsfunctions_client_exact_residual_anchors["summary"]["high_confidence_count"], 20)
+    check("Spectron GSFunctionsClient exact residual semantic overlap", spectron_gsfunctions_client_exact_residual_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron GSFunctionsClient exact residual default targets", spectron_gsfunctions_client_exact_residual_anchors["summary"]["target_default_name_count"], 20)
+    check("Spectron GSFunctionsClient exact residual exact-shape count", spectron_gsfunctions_client_exact_residual_anchors["summary"]["exact_shape_anchor_count"], 20)
+    check("Spectron GSFunctionsClient exact residual layout-change count", spectron_gsfunctions_client_exact_residual_anchors["summary"]["layout_change_anchor_count"], 0)
+    check("Spectron GSFunctionsClient exact residual materialized targets", spectron_gsfunctions_client_exact_residual_anchors["summary"]["materialized_target_function_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11681)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1456)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1436)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -2933,7 +2949,8 @@ def main():
     check("Spectron checkpoint GSFunctions math-string residual anchor count", spectron_checkpoint["gsfunctions_math_string_residual_anchors"]["verified_name_count"], 6)
     check("Spectron checkpoint GSFunctions callback residual anchor count", spectron_checkpoint["gsfunctions_callback_residual_anchors"]["verified_name_count"], 13)
     check("Spectron checkpoint GSFunctions randomstring residual anchor count", spectron_checkpoint["gsfunctions_randomstring_residual_anchors"]["verified_name_count"], 1)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "12de3cc80150cba753609346f881cec872df68966f47634befff579dcf9590b1")
+    check("Spectron checkpoint GSFunctionsClient exact residual anchor count", spectron_checkpoint["gsfunctions_client_exact_residual_anchors"]["verified_name_count"], 20)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "da6942a1bd21c3d56b602f33106803736391e6e6e4224de9108f96e674cb0cf6")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
