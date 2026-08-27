@@ -175,6 +175,8 @@ def main() -> None:
     parser.add_argument("--server-level-side-helpers-verification", type=Path)
     parser.add_argument("--server-level-storage-anchors", type=Path)
     parser.add_argument("--server-level-storage-verification", type=Path)
+    parser.add_argument("--hidden-testnpc-anchors", type=Path)
+    parser.add_argument("--hidden-testnpc-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2286,6 +2288,34 @@ def main() -> None:
         result["server_level_storage_anchors"] = server_level_storage
         result["interpretation"].append(
             "The seventy-fifth database revision also contains the separately reviewed server-level constructor, encrypted storage, and player-enter dispatch anchors."
+        )
+    hidden_testnpc = None
+    if args.hidden_testnpc_anchors or args.hidden_testnpc_verification:
+        if not args.hidden_testnpc_anchors or not args.hidden_testnpc_verification:
+            raise ValueError(
+                "hidden testnpc anchors and hidden testnpc verification must be supplied together"
+            )
+        hidden_testnpc_document = load(args.hidden_testnpc_anchors)
+        hidden_testnpc_verification = load(args.hidden_testnpc_verification)
+        if hidden_testnpc_document.get("artifact") != "spectron_hidden_testnpc_manual_translation_anchor_20260826":
+            raise ValueError("unexpected hidden testnpc anchor artifact")
+        if not hidden_testnpc_verification.get("verified"):
+            raise ValueError("hidden testnpc anchor reopen verification did not pass")
+        expected_hidden_testnpc = len(hidden_testnpc_document["anchors"])
+        if hidden_testnpc_verification["verified_name_count"] != expected_hidden_testnpc:
+            raise ValueError("hidden testnpc verification count differs from artifact")
+        hidden_testnpc = {
+            "anchor_path": str(args.hidden_testnpc_anchors),
+            "anchor_sha256": sha256_path(args.hidden_testnpc_anchors),
+            "reopen_verification": str(args.hidden_testnpc_verification),
+            "anchor_count": expected_hidden_testnpc,
+            "verified_name_count": hidden_testnpc_verification["verified_name_count"],
+            "reopen_failure_count": hidden_testnpc_verification["failure_count"],
+        }
+    if hidden_testnpc is not None:
+        result["hidden_testnpc_anchors"] = hidden_testnpc
+        result["interpretation"].append(
+            "The seventy-sixth database revision also contains the separately reviewed hidden Spectron testnpc callback boundary and exact body anchor."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

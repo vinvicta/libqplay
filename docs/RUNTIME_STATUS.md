@@ -969,6 +969,13 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_server_level_storage_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+138. Clean IDA review recovered the unnamed Spectron `testnpc` callback body at
+     `0x1a9bb0` to `0x1a9c2c`, added its explicit function boundary, and applied
+     one exact high-confidence label. It reopened successfully in the v78
+     disposable copy. See
+     `artifacts/spectron_hidden_testnpc_manual_translation_anchor_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
