@@ -1,0 +1,143 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both initialize and use the same PlayerTimer_AnimateLevel profiler scope, walk the side-level objects, animate each available level, animate the active level, and close the profiler scope.",
+        "The target iterates the expanded seven-by-seven side-level grid instead of the source three-by-three grid and uses rebuilt profiler and level wrappers, which accounts for the two extra blocks.",
+        "The distinctive profiler literal and the class-local position immediately after map-link helpers make this a direct correspondence."
+      ],
+      "match_kind": "manual-player-link-traversal-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x16f090",
+      "original_metrics": {
+        "basic_block_count": 16,
+        "instruction_count": 60,
+        "mnemonic_hash": "5d5f28e5ed7672c72b25907b5d5c7d2e30f70335a4e86f1fcb043aa2d1b195c0",
+        "register_shape_hash": "97290f53b30af00909eeab6510b2d52097c28fb4216861094fdccc3d7203aa6b",
+        "shape_hash": "d00bc79b7036ee4a508b46d99fde9ba6711f3b9df545f3b18c59c0ec65683c70",
+        "size": 248
+      },
+      "original_name": "TPlayer_animateLevel_void",
+      "original_string_refs": [
+        "PlayerTimer_AnimateLevel"
+      ],
+      "proposed_name": "v18_TPlayer_animateLevel_void",
+      "semantic_match_already_present": false,
+      "source_basis": "side-level and active-level animation update",
+      "spectron_current_name": "_ZN10W6NzgawMJy10ac5QwaUZgfEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x172e78",
+      "spectron_metrics": {
+        "basic_block_count": 18,
+        "instruction_count": 99,
+        "mnemonic_hash": "409e4f7d06c1d8f26fd08118a481d9bd5c2a0e919a425a2483550ce6f7f17bdf",
+        "register_shape_hash": "429da411cb8fe887a5d05f02d96dd5e18dfd8378a15be24a9ac24a2c3442c892",
+        "shape_hash": "c7b28e60f6daf942f5f837e899d8127e7e781040e974e739f43fc03ed62940ea",
+        "size": 404
+      },
+      "spectron_string_refs": [
+        "PlayerTimer_AnimateLevel"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both require an active map and reject attached players, derive the side-level row and column from the inherited X and Y coordinates, and ignore the center cell.",
+        "Both test the selected side-level pointer and cached filename, calculate the position relative to the side-level origin, and send the level-link packet when a client exists.",
+        "The target delegates coordinate normalization to the two target-only side-level helpers added by the seven-by-seven layout, reducing the body from 17 to 12 blocks while preserving the same class-local link path."
+      ],
+      "match_kind": "manual-player-link-traversal-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x16f1b8",
+      "original_metrics": {
+        "basic_block_count": 17,
+        "instruction_count": 93,
+        "mnemonic_hash": "29ef04936976dc87b99c649ef31d1642df12c684bb208ed3ac2a82bb3fe547f0",
+        "register_shape_hash": "e296af94788b793e970235b4e8ea5d5b851332343ab594f6eab3aecb99b7c561",
+        "shape_hash": "b5b0db77ad61b4fdc413eb1570324b86804353631eb849aad4cb52cf58be008b",
+        "size": 372
+      },
+      "original_name": "TPlayer_testForMapLinks_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TPlayer_testForMapLinks_void",
+      "semantic_match_already_present": false,
+      "source_basis": "nearby side-level link detection and client notification",
+      "spectron_current_name": "_ZN10W6NzgawMJy10ilACwavb42Ev",
+      "spectron_default_name": false,
+      "spectron_ea": "0x17303c",
+      "spectron_metrics": {
+        "basic_block_count": 12,
+        "instruction_count": 91,
+        "mnemonic_hash": "d191c68ba1631fce9e73319ffc6d08681fc34c0257c52245cc690e195114aa40",
+        "register_shape_hash": "c5587cbc4ccbd81ddfe160bb4d884dc93c34ea392469c4316a42907b549b7ad1",
+        "shape_hash": "4284e7b91a2d830bcb5dce7b417629885e79b16405872337490e59ace49251af",
+        "size": 364
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both reject missing player state, disallowed links, attached players, and failed nearby map-link checks before scanning the active level object list.",
+        "Both preserve the four edge-direction cases, movement-vector and direction checks, obstacle bounds checks, calculated link destinations, and final client level-link notification.",
+        "The target expands the direction arithmetic into explicit switches and routes string and client operations through rebuilt wrappers, producing 102 blocks versus 90 while retaining the complete source state machine and class-local order."
+      ],
+      "match_kind": "manual-player-link-traversal-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x16f338",
+      "original_metrics": {
+        "basic_block_count": 90,
+        "instruction_count": 377,
+        "mnemonic_hash": "9772bc25b70c210f592f07b80610fb52207fcd79c331b4f129f52e87860a7d15",
+        "register_shape_hash": "d40cb29fc96b67019cfdd65386129c6a8d4b23056d8676404a724b02483fcea9",
+        "shape_hash": "cc17bb5ba321f148fe1a93cb2c3b61686e213e0ebdb22206496228d01cc8b1c0",
+        "size": 1508
+      },
+      "original_name": "TPlayer_testForLinks_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TPlayer_testForLinks_void",
+      "semantic_match_already_present": false,
+      "source_basis": "general map-link and level-object traversal state machine",
+      "spectron_current_name": "_ZN10W6NzgawMJy10BViCwabxQ2Ev",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1731a8",
+      "spectron_metrics": {
+        "basic_block_count": 102,
+        "instruction_count": 395,
+        "mnemonic_hash": "31114d00640ab7abaa7109463f4bfd4274e38564b27a09b2deda059500bf9b85",
+        "register_shape_hash": "939f3e07c57117e4017f970d7c451f1200caa43bc037449786e99d69a2d608ca",
+        "shape_hash": "9249da6c33a12c415af33e41f824f48510e891f0bd7d186b36c7778a66628163",
+        "size": 1588
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_player_link_traversal_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v1_saved.json",
+    "spectron_features_sha256": "a8d58f85502362316ee99a0f79c2cd7a4ad5d6fac94aca0ee75bd0d2965fc2a1"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The target expands the side-level grid and splits coordinate normalization into target-only helpers, while preserving the animation and level-link state machines reviewed here."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for player level animation and map-link traversal",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 3,
+    "high_confidence_count": 3,
+    "new_context_anchor_count": 3,
+    "target_default_name_count": 0
+  }
+}

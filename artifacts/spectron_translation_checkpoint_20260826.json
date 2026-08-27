@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v64.i64",
-    "sha256": "f53c37fbdbc66d1774c24ac7fcb30d9a68cb4aca569ac8d7cb81aaf81c12510e"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v65.i64",
+    "sha256": "0d7f9660341da422888acfc948d0cd6fa2ade6bdbcbbe95d4d5326a39dc7ca44"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -207,7 +207,8 @@
     "The fifty-ninth database revision also contains the separately reviewed player emoticon-coordinate getter anchors.",
     "The sixtieth database revision also contains the separately reviewed player main-level and server-level entry anchors.",
     "The sixty-first database revision also contains the separately reviewed player side-level grid and lookup anchors.",
-    "The sixty-second database revision also contains the separately reviewed player map-position and map-link anchors."
+    "The sixty-second database revision also contains the separately reviewed player map-position and map-link anchors.",
+    "The sixty-third database revision also contains the separately reviewed player level-animation and link-traversal anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -321,6 +322,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_player_lifecycle_verification_v60.json",
     "verified_name_count": 2
+  },
+  "player_link_traversal_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "artifacts/spectron_player_link_traversal_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "f72a2162ccb726e38d19f551a7ca5badb13f5d398cd7fa0b2fd8bdb8925408a1",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_player_link_traversal_verification_v65.json",
+    "verified_name_count": 3
   },
   "player_map_position_anchors": {
     "anchor_count": 2,

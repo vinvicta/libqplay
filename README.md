@@ -717,6 +717,14 @@ map-link checks. Both reopened successfully. The evidence is in
 `artifacts/spectron_player_map_position_manual_translation_anchors_20260826.json`,
 and the v64 database SHA-256 is recorded in the checkpoint.
 
+A sixty-third disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v65.i64`,
+adds three reviewed player link-traversal anchors for level animation, nearby
+map links, and general object-link traversal. All three reopened successfully.
+The evidence is in
+`artifacts/spectron_player_link_traversal_manual_translation_anchors_20260826.json`,
+and the v65 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and

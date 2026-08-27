@@ -149,6 +149,8 @@ def main() -> None:
     parser.add_argument("--player-side-level-verification", type=Path)
     parser.add_argument("--player-map-position-anchors", type=Path)
     parser.add_argument("--player-map-position-verification", type=Path)
+    parser.add_argument("--player-link-traversal-anchors", type=Path)
+    parser.add_argument("--player-link-traversal-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1896,6 +1898,34 @@ def main() -> None:
         result["player_map_position_anchors"] = player_map_position
         result["interpretation"].append(
             "The sixty-second database revision also contains the separately reviewed player map-position and map-link anchors."
+        )
+    player_link_traversal = None
+    if args.player_link_traversal_anchors or args.player_link_traversal_verification:
+        if not args.player_link_traversal_anchors or not args.player_link_traversal_verification:
+            raise ValueError(
+                "player-link-traversal anchors and player-link-traversal verification must be supplied together"
+            )
+        player_link_traversal_document = load(args.player_link_traversal_anchors)
+        player_link_traversal_verification = load(args.player_link_traversal_verification)
+        if player_link_traversal_document.get("artifact") != "spectron_player_link_traversal_manual_translation_anchors_20260826":
+            raise ValueError("unexpected player-link-traversal anchor artifact")
+        if not player_link_traversal_verification.get("verified"):
+            raise ValueError("player-link-traversal anchor reopen verification did not pass")
+        expected_player_link_traversal = len(player_link_traversal_document["anchors"])
+        if player_link_traversal_verification["verified_name_count"] != expected_player_link_traversal:
+            raise ValueError("player-link-traversal verification count differs from artifact")
+        player_link_traversal = {
+            "anchor_path": str(args.player_link_traversal_anchors),
+            "anchor_sha256": sha256_path(args.player_link_traversal_anchors),
+            "reopen_verification": str(args.player_link_traversal_verification),
+            "anchor_count": expected_player_link_traversal,
+            "verified_name_count": player_link_traversal_verification["verified_name_count"],
+            "reopen_failure_count": player_link_traversal_verification["failure_count"],
+        }
+    if player_link_traversal is not None:
+        result["player_link_traversal_anchors"] = player_link_traversal
+        result["interpretation"].append(
+            "The sixty-third database revision also contains the separately reviewed player level-animation and link-traversal anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

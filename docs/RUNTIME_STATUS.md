@@ -882,6 +882,12 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_player_map_position_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+125. Clean IDA review added three high-confidence player link-traversal anchors
+     for level animation, nearby map links, and general object-link traversal.
+     All three reopened successfully in the v65 disposable copy. See
+     `artifacts/spectron_player_link_traversal_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
