@@ -1428,6 +1428,15 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+213. The next IDA pass translated the final 11 exact-shape
+    `GSFunctionsClient` table callbacks. They cover Adventure window and mode
+    helpers, fullscreen state, application activity, and the two URL bridges.
+    Each target pointer matched the `+0x13010` table-field relocation, and all
+    11 labels reopened successfully in the v154 disposable copy, which has
+    11,693 functions and 1,396 default `sub_` names. See
+    `artifacts/spectron_gsfunctions_client_exact_residual_v4_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 212. The next IDA pass materialized and translated 12 `GSFunctionsClient`
     callbacks whose Spectron table pointers landed in code that IDA had left
     unbounded. Raw ARM64 control flow established every range, including 17
