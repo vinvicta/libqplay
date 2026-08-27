@@ -5172,6 +5172,72 @@ and zero failures across 11,679 functions. The v108 database has 1,684
 remaining default `sub_` names. Its SHA-256 is
 `8350a43be6b31306954e34a17f77d742c8d1702015d671019d2bf2dd6c1bb1e1`.
 
+## 2026-08-27: Spectron TPlayer scalar getter block
+
+The v159 pass follows the setter block with its matching 21-function getter
+block. These methods cover local X and Y, health, maximum health, gralats,
+bombs, arrows, glove power, sword power, shield power, alignment, magic
+points, carry sprite, weapon and movement flags, enabled features, and the
+paused, dead, hurt, hidden, and sword-hidden flags.
+
+| 1.8 getter | Source | Spectron target | Target symbol | Source storage | Target storage |
+| --- | ---: | ---: | --- | ---: | ---: |
+| `TPlayer_getlocalx_void` | `0x17afd8` | `0x17f37c` | `_ZNK10W6NzgawMJy10Qi2VgaCyrREv` | 1488 | 1512 |
+| `TPlayer_getlocaly_void` | `0x17b020` | `0x17f3c4` | `_ZNK10W6NzgawMJy10qCgWga1ADREv` | 1504 | 1528 |
+| `TPlayer_getHP_void` | `0x17b068` | `0x17f40c` | `_ZN10W6NzgawMJy10Lm1UgaOLAQEv` | 1120 | 1144 |
+| `TPlayer_getMaxHP_void` | `0x17b0b0` | `0x17f454` | `_ZN10W6NzgawMJy10BwUDLa39aHEv` | 1136 | 1160 |
+| `TPlayer_getGralats_void` | `0x17b100` | `0x17f4a4` | `_ZN10W6NzgawMJy10CPrDLa90NGEv` | 1152 | 1176 |
+| `TPlayer_getBombsCount_void` | `0x17b150` | `0x17f4f4` | `_ZN10W6NzgawMJy10c8FDLaz3ZGEv` | 1168 | 1192 |
+| `TPlayer_getArrows_void` | `0x17b1a0` | `0x17f544` | `_ZN10W6NzgawMJy10bzl1LagLK0Ev` | 1184 | 1208 |
+| `TPlayer_getGlovePower_void` | `0x17b1f0` | `0x17f594` | `_ZN10W6NzgawMJy10m410Lagmu0Ev` | 1200 | 1224 |
+| `TPlayer_getSwordPower_void` | `0x17b240` | `0x17f5e4` | `_ZN10W6NzgawMJy10BBd0Lag3N_Ev` | 1216 | 1240 |
+| `TPlayer_getShieldPower_void` | `0x17b290` | `0x17f634` | `_ZN10W6NzgawMJy10mFbtwaoqaWEv` | 1232 | 1256 |
+| `TPlayer_getAlignment_void` | `0x17b2e0` | `0x17f684` | `_ZN10W6NzgawMJy10DuT_Lapiw_Ev` | 1248 | 1272 |
+| `TPlayer_getMagicPoints_void` | `0x17b330` | `0x17f6d4` | `_ZN10W6NzgawMJy10EYG_LaFLl_Ev` | 1264 | 1288 |
+| `TPlayer_getCarrySprite_void` | `0x17b380` | `0x17f724` | `_ZN10W6NzgawMJy10Bp9swagx8VEv` | 1280 | 1304 |
+| `TPlayer_getWeaponsEnabled_void` | `0x17b3d0` | `0x17f774` | `_ZN10W6NzgawMJy10sSM0LawJg0Ev` | 1296 | 1320 |
+| `TPlayer_getDefaultMovement_void` | `0x17b3f8` | `0x17f79c` | `_ZN10W6NzgawMJy10_aK0La2se0Ev` | 1312 | 1336 |
+| `TPlayer_getEnabledFeatures_void` | `0x17b420` | `0x17f7c4` | `_ZN10W6NzgawMJy10v3qmgaznunEv` | 1328 | 1352 |
+| `TPlayer_getPaused_void` | `0x17b470` | `0x17f814` | `_ZN10W6NzgawMJy10YXBswaeyGVEv` | 1344 | 1368 |
+| `TPlayer_getDead_void` | `0x17b498` | `0x17f83c` | `_ZN10W6NzgawMJy10pLeswaA1mVEv` | 1352 | 1376 |
+| `TPlayer_getIsHurt_void` | `0x17b4c0` | `0x17f864` | `_ZN10W6NzgawMJy10d2dswarqmVEv` | 1360 | 1384 |
+| `TPlayer_getHidden_void` | `0x17b4e8` | `0x17f88c` | `_ZN10W6NzgawMJy10GfKrwaWwXUEv` | 1376 | 1400 |
+| `TPlayer_getSwordHidden_void` | `0x17b510` | `0x17f8b4` | `_ZN10W6NzgawMJy10ZORrwaAT2UEv` | 1408 | 1432 |
+
+The source and target blocks preserve the full order and have a constant
+`+0x43a4` code relocation. The first three scalar or vector-style getters
+are 72 bytes with 18 instructions. The next ten four-byte getters are 80
+bytes with 20 instructions, the two small movement getters are 40 bytes with
+10 instructions, the enabled-features getter is 80 bytes, and the final six
+byte-valued flag getters are 40 bytes. All 21 pairs match the complete
+normalized metric set, including basic blocks, branches, call count, mnemonic
+shape, opcode shape, register shape, overall shape, and string-reference hash.
+
+The decompilation shows a guarded decode in both builds. Each method checks
+the encoded pointer, returns zero when it is absent, and otherwise XORs the
+stored value with the corresponding per-object mask byte. The target storage
+pointer and mask offsets are exactly 24 bytes above the source offsets across
+this block. For example, the health getter reads source pointer and mask
+offsets 1120 and 1128, while the target reads 1144 and 1152. The final
+visibility getters use the same operation on byte fields.
+
+The next source function is the separate
+`TPlayerProperties_TPlayerProperties` constructor at `0x17b538`. The next
+target function is the separate `W6NzgawMJyProperties` destructor at
+`0x17f8dc`. That class boundary, the exact fingerprints, and the field-offset
+relationship make the block a high-confidence semantic translation rather
+than an address-only guess.
+
+All 21 target functions were renamed to `v18_` aliases in the v159 packed IDA
+copy. A serial reopen check found all 21 names, and the full semantic reopen
+check still passed with 3,641 high-confidence map labels and zero failures
+across 11,693 functions. The v159 database has 1,396 default `sub_` names and
+SHA-256
+`75cd77b15f4c27b4f73f7a39797f76459c42cb8d6abf3b75c3ba99fbddea914d`.
+The machine-readable evidence is in
+`artifacts/spectron_tplayer_scalar_getter_manual_translation_anchors_20260826.json`,
+generated by `tools/generate_spectron_tplayer_scalar_getter_anchors.py`.
+
 ## 2026-08-27: Spectron TPlayer scalar setter block
 
 The v158 pass translates the next compact block in the largest remaining

@@ -335,6 +335,8 @@ def main() -> None:
     parser.add_argument("--tserverplayer-accessor-verification", type=Path)
     parser.add_argument("--tplayer-scalar-setter-anchors", type=Path)
     parser.add_argument("--tplayer-scalar-setter-verification", type=Path)
+    parser.add_argument("--tplayer-scalar-getter-anchors", type=Path)
+    parser.add_argument("--tplayer-scalar-getter-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -4686,6 +4688,34 @@ def main() -> None:
         result["tplayer_scalar_setter_anchors"] = tplayer_scalar_setter
         result["interpretation"].append(
             "The one-hundred-fifty-eighth database revision also contains the separately reviewed exact-shape TPlayer scalar setter block."
+        )
+    tplayer_scalar_getter = None
+    if args.tplayer_scalar_getter_anchors or args.tplayer_scalar_getter_verification:
+        if not args.tplayer_scalar_getter_anchors or not args.tplayer_scalar_getter_verification:
+            raise ValueError(
+                "TPlayer scalar getter anchors and verification must be supplied together"
+            )
+        tplayer_scalar_getter_document = load(args.tplayer_scalar_getter_anchors)
+        tplayer_scalar_getter_verification = load(args.tplayer_scalar_getter_verification)
+        if tplayer_scalar_getter_document.get("artifact") != "spectron_tplayer_scalar_getter_manual_translation_anchors_20260826":
+            raise ValueError("unexpected TPlayer scalar getter artifact")
+        if not tplayer_scalar_getter_verification.get("verified"):
+            raise ValueError("TPlayer scalar getter reopen verification did not pass")
+        expected_tplayer_scalar_getter = len(tplayer_scalar_getter_document["anchors"])
+        if tplayer_scalar_getter_verification["verified_name_count"] != expected_tplayer_scalar_getter:
+            raise ValueError("TPlayer scalar getter verification count differs from artifact")
+        tplayer_scalar_getter = {
+            "anchor_path": str(args.tplayer_scalar_getter_anchors),
+            "anchor_sha256": sha256_path(args.tplayer_scalar_getter_anchors),
+            "reopen_verification": str(args.tplayer_scalar_getter_verification),
+            "anchor_count": expected_tplayer_scalar_getter,
+            "verified_name_count": tplayer_scalar_getter_verification["verified_name_count"],
+            "reopen_failure_count": tplayer_scalar_getter_verification["failure_count"],
+        }
+    if tplayer_scalar_getter is not None:
+        result["tplayer_scalar_getter_anchors"] = tplayer_scalar_getter
+        result["interpretation"].append(
+            "The one-hundred-fifty-ninth database revision also contains the separately reviewed exact-shape TPlayer scalar getter block."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
