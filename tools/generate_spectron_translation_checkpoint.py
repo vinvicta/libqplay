@@ -193,6 +193,8 @@ def main() -> None:
     parser.add_argument("--gani-lifecycle-verification", type=Path)
     parser.add_argument("--tplayer-core-anchors", type=Path)
     parser.add_argument("--tplayer-core-verification", type=Path)
+    parser.add_argument("--resource-parser-anchors", type=Path)
+    parser.add_argument("--resource-parser-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2556,6 +2558,34 @@ def main() -> None:
         result["tplayer_core_anchors"] = tplayer_core
         result["interpretation"].append(
             "The eighty-fourth database revision also contains the separately reviewed TPlayer network-property serializer and constructor anchors."
+        )
+    resource_parser = None
+    if args.resource_parser_anchors or args.resource_parser_verification:
+        if not args.resource_parser_anchors or not args.resource_parser_verification:
+            raise ValueError(
+                "resource-parser anchors and resource-parser verification must be supplied together"
+            )
+        resource_parser_document = load(args.resource_parser_anchors)
+        resource_parser_verification = load(args.resource_parser_verification)
+        if resource_parser_document.get("artifact") != "spectron_resource_parser_manual_translation_anchors_20260826":
+            raise ValueError("unexpected resource-parser anchor artifact")
+        if not resource_parser_verification.get("verified"):
+            raise ValueError("resource-parser anchor reopen verification did not pass")
+        expected_resource_parser = len(resource_parser_document["anchors"])
+        if resource_parser_verification["verified_name_count"] != expected_resource_parser:
+            raise ValueError("resource-parser verification count differs from artifact")
+        resource_parser = {
+            "anchor_path": str(args.resource_parser_anchors),
+            "anchor_sha256": sha256_path(args.resource_parser_anchors),
+            "reopen_verification": str(args.resource_parser_verification),
+            "anchor_count": expected_resource_parser,
+            "verified_name_count": resource_parser_verification["verified_name_count"],
+            "reopen_failure_count": resource_parser_verification["failure_count"],
+        }
+    if resource_parser is not None:
+        result["resource_parser_anchors"] = resource_parser
+        result["interpretation"].append(
+            "The eighty-fifth database revision also contains the separately reviewed Gani lexer, cached-resource path, and update-package parser anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

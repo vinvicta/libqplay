@@ -311,6 +311,9 @@ def main():
     spectron_tplayer_core_anchors = load_json(
         "artifacts/spectron_tplayer_core_manual_translation_anchors_20260826.json"
     )
+    spectron_resource_parser_anchors = load_json(
+        "artifacts/spectron_resource_parser_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -1922,6 +1925,16 @@ def main():
     check("Spectron TPlayer-core semantic overlap", spectron_tplayer_core_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron TPlayer-core default targets", spectron_tplayer_core_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron resource-parser artifact",
+        spectron_resource_parser_anchors["artifact"],
+        "spectron_resource_parser_manual_translation_anchors_20260826",
+    )
+    check("Spectron resource-parser network", spectron_resource_parser_anchors["network_contacted"], False)
+    check("Spectron resource-parser total", spectron_resource_parser_anchors["summary"]["anchor_count"], 3)
+    check("Spectron resource-parser high confidence", spectron_resource_parser_anchors["summary"]["high_confidence_count"], 3)
+    check("Spectron resource-parser semantic overlap", spectron_resource_parser_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron resource-parser default targets", spectron_resource_parser_anchors["summary"]["target_default_name_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -2013,7 +2026,8 @@ def main():
     check("Spectron checkpoint Gani-frame-playback anchor count", spectron_checkpoint["gani_frame_playback_anchors"]["verified_name_count"], 2)
     check("Spectron checkpoint Gani-lifecycle anchor count", spectron_checkpoint["gani_lifecycle_anchors"]["verified_name_count"], 50)
     check("Spectron checkpoint TPlayer-core anchor count", spectron_checkpoint["tplayer_core_anchors"]["verified_name_count"], 2)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "92dbca0dbff23332208b4f7411576fbad2a46bed14c1e1d998c69618fc141e12")
+    check("Spectron checkpoint resource-parser anchor count", spectron_checkpoint["resource_parser_anchors"]["verified_name_count"], 3)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "fd1ec34b138c0cc18d21d32ba88e865725bde77e5acaa72fa10d80de575afa2d")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -2159,6 +2173,7 @@ def main():
         spectron_gani_frame_playback_anchors,
         spectron_gani_lifecycle_anchors,
         spectron_tplayer_core_anchors,
+        spectron_resource_parser_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

@@ -909,6 +909,16 @@ and `android`. Both labels reopened successfully, and the v86 database
 SHA-256 is recorded in the checkpoint. The evidence is in
 `artifacts/spectron_tplayer_core_manual_translation_anchors_20260826.json`.
 
+A v87 disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v87.i64`,
+adds three high-confidence parser and resource anchors. They cover the
+generated Gani lexer, cached-resource download path selection, and the
+update-package directive parser. The target preserves the parser state
+machine, all 53 resource path literals, and all 19 package directive
+literals. All three labels reopened successfully, and the v87 database
+SHA-256 is recorded in the checkpoint. The evidence is in
+`artifacts/spectron_resource_parser_manual_translation_anchors_20260826.json`.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
@@ -1085,6 +1095,9 @@ proves the local native TLS path, not a current live certificate or service.
   and property lifecycle anchors.
 * `artifacts/spectron_tplayer_core_manual_translation_anchors_20260826.json`
   records the two reviewed TPlayer network-property and constructor anchors.
+* `artifacts/spectron_resource_parser_manual_translation_anchors_20260826.json`
+  records the three reviewed Gani lexer, cached-resource path, and
+  update-package parser anchors.
 * `artifacts/spectron_json_folder_manual_translation_anchors_20260826.json`
   records the eight reviewed GIF/JPEG callbacks, recursive folder-loader
   helper, and YAJL JSON callbacks.
@@ -1378,6 +1391,9 @@ proves the local native TLS path, not a current live certificate or service.
   The `tools/generate_spectron_tplayer_core_anchors.py` generator records the
   reviewed TPlayer network-property serializer and constructor roles with
   exact metric and literal checks.
+  The `tools/generate_spectron_resource_parser_anchors.py` generator records
+  the reviewed Gani lexer, cached-resource path, and update-package parser
+  roles with exact metric and literal checks.
   The `tools/generate_spectron_socket_behavior_comparison.py` generator
   records changed-size socket behavior without forcing an exact-match label.
   `tools/ida_apply_spectron_translation.py` and
