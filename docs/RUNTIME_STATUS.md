@@ -1275,6 +1275,13 @@ This is the short handoff view. The full reasoning and command history are in
      successfully in the v118 disposable copy. See
      `artifacts/spectron_dummy_panel_residual_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
+179. The next IDA pass translated ten residual concrete renderer methods. It
+     covers the OpenGL pixel-buffer texture predicate, projection and model
+     matrix copies, the triangle-strip hook, shader hooks, and alpha-reference
+     wrapper. The labels reopened successfully in the v119 disposable copy.
+     See
+     `artifacts/spectron_screen_panel_renderer_residual_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
 ## Not verified
 

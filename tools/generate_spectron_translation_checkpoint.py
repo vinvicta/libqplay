@@ -257,6 +257,8 @@ def main() -> None:
     parser.add_argument("--panel-virtual-renderer-residual-verification", type=Path)
     parser.add_argument("--dummy-panel-residual-anchors", type=Path)
     parser.add_argument("--dummy-panel-residual-verification", type=Path)
+    parser.add_argument("--screen-panel-renderer-residual-anchors", type=Path)
+    parser.add_argument("--screen-panel-renderer-residual-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3516,6 +3518,34 @@ def main() -> None:
         result["dummy_panel_residual_anchors"] = dummy_panel_residual
         result["interpretation"].append(
             "The one-hundred-eighteenth database revision also contains the separately reviewed residual TPanelInterface hooks and TDummyPanel virtual and lifecycle block."
+        )
+    screen_panel_renderer_residual = None
+    if args.screen_panel_renderer_residual_anchors or args.screen_panel_renderer_residual_verification:
+        if not args.screen_panel_renderer_residual_anchors or not args.screen_panel_renderer_residual_verification:
+            raise ValueError(
+                "screen-panel renderer residual anchors and screen-panel renderer residual verification must be supplied together"
+            )
+        screen_panel_renderer_residual_document = load(args.screen_panel_renderer_residual_anchors)
+        screen_panel_renderer_residual_verification = load(args.screen_panel_renderer_residual_verification)
+        if screen_panel_renderer_residual_document.get("artifact") != "spectron_screen_panel_renderer_residual_manual_translation_anchors_20260826":
+            raise ValueError("unexpected screen-panel renderer residual anchor artifact")
+        if not screen_panel_renderer_residual_verification.get("verified"):
+            raise ValueError("screen-panel renderer residual anchor reopen verification did not pass")
+        expected_screen_panel_renderer_residual = len(screen_panel_renderer_residual_document["anchors"])
+        if screen_panel_renderer_residual_verification["verified_name_count"] != expected_screen_panel_renderer_residual:
+            raise ValueError("screen-panel renderer residual verification count differs from artifact")
+        screen_panel_renderer_residual = {
+            "anchor_path": str(args.screen_panel_renderer_residual_anchors),
+            "anchor_sha256": sha256_path(args.screen_panel_renderer_residual_anchors),
+            "reopen_verification": str(args.screen_panel_renderer_residual_verification),
+            "anchor_count": expected_screen_panel_renderer_residual,
+            "verified_name_count": screen_panel_renderer_residual_verification["verified_name_count"],
+            "reopen_failure_count": screen_panel_renderer_residual_verification["failure_count"],
+        }
+    if screen_panel_renderer_residual is not None:
+        result["screen_panel_renderer_residual_anchors"] = screen_panel_renderer_residual
+        result["interpretation"].append(
+            "The one-hundred-nineteenth database revision also contains the separately reviewed residual pixel-buffer texture predicate and concrete screen-panel matrix, shader, triangle-strip, and alpha-reference methods."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
