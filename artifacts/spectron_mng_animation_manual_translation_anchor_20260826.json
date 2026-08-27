@@ -1,0 +1,80 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both routines decode a TMNGAnimationStep through the same pass offset and pass length helpers, channel and color-mode branches, row-copy loops, and pixel-buffer cleanup. The direct calls are the step pixel accessor, the pass geometry helpers, and memcpy.",
+        "The source is 16,324 bytes and 4,081 instructions with 504 basic blocks. The target is also 16,324 bytes and 4,081 instructions, with 505 blocks. Both feature records contain exactly four direct calls and no string references.",
+        "The target sits immediately after the translated TMNGAnimationStep constructor and pixel accessor in the same image-animation cluster. Its one extra basic block and renamed helper calls are normal rebuild differences, while the large body and control-flow shape remain aligned."
+      ],
+      "match_kind": "manual-image-animation-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        ".memcpy",
+        "plt_TMNGAnimationStep_getPixelBits_void",
+        "plt_png_getpasslength_int_int_int_int",
+        "plt_png_getpassoffset_int_int_int_int"
+      ],
+      "original_ea": "0x11b7a0",
+      "original_metrics": {
+        "basic_block_count": 504,
+        "instruction_count": 4081,
+        "mnemonic_hash": "c3b8772ea838a23a4e4bbf4373cd645d9d3ee3e1729dc75ad68f15c2fe4cbd13",
+        "register_shape_hash": "0fd7dbd7dee734e9ba33f2731c3dc3007577f5b971ffc5da514517cb069cfede",
+        "shape_hash": "66ad4ed27cd57df0aa3f57d8432cd9d0f42fc844fe18c8bd464e95ddb531d714",
+        "size": 16324
+      },
+      "original_name": "TMNGAnimation_decode_TMNGAnimationStep",
+      "original_string_refs": [],
+      "proposed_name": "v18_TMNGAnimation_decode_TMNGAnimationStep",
+      "semantic_match_already_present": false,
+      "source_basis": "MNG animation-step decoder and pixel-pass reconstruction",
+      "spectron_current_name": "_ZN10_5EhmbQbtm10yVYfmb2R2kEP10FZpembCtKj",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._Z10MvXplboGrDiiii",
+        "._Z10WhSplbShnDiiii",
+        "._ZN10FZpembCtKj10oJUhmbNkGmEv",
+        ".memcpy"
+      ],
+      "spectron_ea": "0x11e2d0",
+      "spectron_metrics": {
+        "basic_block_count": 505,
+        "instruction_count": 4081,
+        "mnemonic_hash": "238174284da8077171a8dbb4da486d34205f8cb859ba7fb99de92bb1fc290b65",
+        "register_shape_hash": "cb15a558b00b8c4b5bcad005b7d154465ef37b9bc050cba2120f160c3e5c1786",
+        "shape_hash": "8b34c61aaa53d0292074144eba582ab8ff36240da51c68bec8174ac140c53a1d",
+        "size": 16324
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_mng_animation_manual_translation_anchor_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v1_saved.json",
+    "spectron_features_sha256": "a8d58f85502362316ee99a0f79c2cd7a4ad5d6fac94aca0ee75bd0d2965fc2a1"
+  },
+  "interpretation": [
+    "This is a reviewed semantic correspondence, not a restored original debug symbol.",
+    "The address is valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ label preserves the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The assignment is supported by direct Hex-Rays pseudocode, identical size and instruction count, matching four-call structure, the shared memcpy operation, and the adjacent translated MNG helper cluster.",
+    "The one-block difference is recorded as a rebuild difference. No exact byte identity is claimed."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchor for the MNG animation-step decoder",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 1,
+    "high_confidence_count": 1,
+    "new_context_anchor_count": 1,
+    "target_default_name_count": 0
+  }
+}

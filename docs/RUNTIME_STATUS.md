@@ -1056,6 +1056,14 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_font_bitmap_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+150. The next IDA pass translated the large MNG animation-step decoder. The
+     source and target both contain 4,081 instructions and 16,324 bytes, with
+     matching pixel-pass helpers and four-call structure. The target has one
+     additional basic block as a rebuild difference. The label reopened
+     successfully in the v90 disposable copy. See
+     `artifacts/spectron_mng_animation_manual_translation_anchor_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

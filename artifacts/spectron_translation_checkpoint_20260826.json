@@ -85,8 +85,8 @@
     "default_sub_function_count": 1688,
     "format": "packed IDA 9.3 database",
     "function_count": 11679,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v89.i64",
-    "sha256": "733ada106f4a4cf74ca88ec309d4b0ae617d601767b197c1acbae4caf51ff1d0"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v90.i64",
+    "sha256": "ffd09f3d579539492b3ab27f199e3c2212a6a59062242085c5bf7ca4775335b8"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -202,7 +202,7 @@
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
-    "reopen_verification": "/tmp/spectron_translation_verify_v89.json",
+    "reopen_verification": "/tmp/spectron_translation_verify_v90.json",
     "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
     "translation_map": "artifacts/spectron_semantic_function_translation_20260826.json",
     "translation_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92"
@@ -296,7 +296,8 @@
     "The eighty-fourth database revision also contains the separately reviewed TPlayer network-property serializer and constructor anchors.",
     "The eighty-fifth database revision also contains the separately reviewed Gani lexer, cached-resource path, and update-package parser anchors.",
     "The eighty-sixth database revision also contains the separately reviewed statistics, profiler, GUI-style, ZIP-resource, and translation utility anchors.",
-    "The eighty-seventh database revision also contains the separately reviewed font glyph, atlas, font-resource, and bitmap-loader anchors."
+    "The eighty-seventh database revision also contains the separately reviewed font glyph, atlas, font-resource, and bitmap-loader anchors.",
+    "The eighty-eighth database revision also contains the separately reviewed MNG animation-step decoder anchor."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -345,6 +346,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_manual_anchor_verification_v2.json",
     "verified_name_count": 4
+  },
+  "mng_animation_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_mng_animation_manual_translation_anchor_20260826.json",
+    "anchor_sha256": "39a02f30e2b9bf68462becdc28732ae4a34844b5476d53643ccfd76294352ee3",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_mng_animation_verify_v90.json",
+    "verified_name_count": 1
   },
   "network_anchors": {
     "anchor_count": 6,

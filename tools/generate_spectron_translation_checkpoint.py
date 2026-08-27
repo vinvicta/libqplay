@@ -199,6 +199,8 @@ def main() -> None:
     parser.add_argument("--static-utility-verification", type=Path)
     parser.add_argument("--font-bitmap-anchors", type=Path)
     parser.add_argument("--font-bitmap-verification", type=Path)
+    parser.add_argument("--mng-animation-anchors", type=Path)
+    parser.add_argument("--mng-animation-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2646,6 +2648,34 @@ def main() -> None:
         result["font_bitmap_anchors"] = font_bitmap
         result["interpretation"].append(
             "The eighty-seventh database revision also contains the separately reviewed font glyph, atlas, font-resource, and bitmap-loader anchors."
+        )
+    mng_animation = None
+    if args.mng_animation_anchors or args.mng_animation_verification:
+        if not args.mng_animation_anchors or not args.mng_animation_verification:
+            raise ValueError(
+                "MNG animation anchors and MNG animation verification must be supplied together"
+            )
+        mng_animation_document = load(args.mng_animation_anchors)
+        mng_animation_verification = load(args.mng_animation_verification)
+        if mng_animation_document.get("artifact") != "spectron_mng_animation_manual_translation_anchor_20260826":
+            raise ValueError("unexpected MNG animation anchor artifact")
+        if not mng_animation_verification.get("verified"):
+            raise ValueError("MNG animation anchor reopen verification did not pass")
+        expected_mng_animation = len(mng_animation_document["anchors"])
+        if mng_animation_verification["verified_name_count"] != expected_mng_animation:
+            raise ValueError("MNG animation verification count differs from artifact")
+        mng_animation = {
+            "anchor_path": str(args.mng_animation_anchors),
+            "anchor_sha256": sha256_path(args.mng_animation_anchors),
+            "reopen_verification": str(args.mng_animation_verification),
+            "anchor_count": expected_mng_animation,
+            "verified_name_count": mng_animation_verification["verified_name_count"],
+            "reopen_failure_count": mng_animation_verification["failure_count"],
+        }
+    if mng_animation is not None:
+        result["mng_animation_anchors"] = mng_animation
+        result["interpretation"].append(
+            "The eighty-eighth database revision also contains the separately reviewed MNG animation-step decoder anchor."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
