@@ -2544,6 +2544,9 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/spectron_client_environment_static_clear_manual_translation_anchors_20260827.json`
   records the two exact-shape profiler-string cleanup callbacks registered by
   the translated `runTimers` and `drawGame` methods.
+* `artifacts/spectron_client_environment_restart_state_manual_translation_anchors_20260827.json`
+  records the high-confidence layout-change match for the saved-restart state
+  cleanup callback and its target field and initializer evidence.
 * `artifacts/spectron_npc_helper_manual_translation_anchors_20260826.json`
   records the 15 reviewed `TServerNPC` blocking, draw-mode, visibility, bow,
   and pelt helpers.
@@ -2931,6 +2934,9 @@ proves the local native TLS path, not a current live certificate or service.
   The `tools/generate_spectron_client_environment_static_clear_anchors.py`
   generator records the two exact-shape profiler cleanup callbacks with
   caller-local `atexit` registration and target-object evidence.
+  The `tools/generate_spectron_client_environment_restart_state_anchors.py`
+  generator records the saved-restart cleanup callback with target class,
+  initializer, field, and layout-change evidence.
   The `tools/generate_spectron_npc_helper_anchors.py` generator records
   reviewed `TServerNPC` helper roles with exact hash checks and IDA-context
   evidence.

@@ -1460,6 +1460,17 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_static_callback_role_correction.py`, and
     `tools/ida_dump_function_data_refs.py`.
 
+244. The next IDA pass translated the named `TClientEnvironment_clearRestartState`
+    callback. Source `0xe0814` maps to target `0xdfdb4`, whose cleanup-table
+    slot, `a7qxJaHqKV` field set, `sub_E0970` initializer, and restart-path
+    uses identify the same saved-restart state. The target adds one
+    `CanTfaz6bZ` cleanup, so this is recorded as a layout change. The v185
+    copy has 11,694 functions, 3,641 high-confidence labels, and 1,233
+    default `sub_` names, with zero semantic reopen failures. See
+    `artifacts/spectron_client_environment_restart_state_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_client_environment_restart_state_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 243. The next IDA pass translated two `TClientEnvironment` profiler cleanup
     callbacks. Source `0x15c620` maps to target `0x15f678`, where the target
     `runTimers` method registers the callback with `atexit`; source `0x15c62c`

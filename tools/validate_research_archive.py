@@ -287,6 +287,9 @@ def main():
     spectron_client_environment_static_clear_anchors = load_json(
         "artifacts/spectron_client_environment_static_clear_manual_translation_anchors_20260827.json"
     )
+    spectron_client_environment_restart_state_anchors = load_json(
+        "artifacts/spectron_client_environment_restart_state_manual_translation_anchors_20260827.json"
+    )
     spectron_particle_emitter_anchors = load_json(
         "artifacts/spectron_particle_emitter_manual_translation_anchors_20260826.json"
     )
@@ -2531,6 +2534,49 @@ def main():
         "0x15f684",
     )
     check(
+        "Spectron client-environment restart-state artifact",
+        spectron_client_environment_restart_state_anchors["artifact"],
+        "spectron_client_environment_restart_state_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron client-environment restart-state network",
+        spectron_client_environment_restart_state_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron client-environment restart-state total",
+        spectron_client_environment_restart_state_anchors["summary"]["anchor_count"],
+        1,
+    )
+    check(
+        "Spectron client-environment restart-state high confidence",
+        spectron_client_environment_restart_state_anchors["summary"]["high_confidence_count"],
+        1,
+    )
+    check(
+        "Spectron client-environment restart-state exact-shape count",
+        spectron_client_environment_restart_state_anchors["summary"]["exact_shape_anchor_count"],
+        0,
+    )
+    check(
+        "Spectron client-environment restart-state layout-change count",
+        spectron_client_environment_restart_state_anchors["summary"]["layout_change_anchor_count"],
+        1,
+    )
+    check(
+        "Spectron client-environment restart-state default target",
+        spectron_client_environment_restart_state_anchors["summary"]["target_default_name_count"],
+        1,
+    )
+    check(
+        "Spectron client-environment restart-state target",
+        {
+            row["original_name"]: row
+            for row in spectron_client_environment_restart_state_anchors["anchors"]
+        }["TClientEnvironment_clearRestartState"]["spectron_ea"],
+        "0xdfdb4",
+    )
+    check(
         "Spectron particle-emitter artifact",
         spectron_particle_emitter_anchors["artifact"],
         "spectron_particle_emitter_manual_translation_anchors_20260826",
@@ -3688,7 +3734,7 @@ def main():
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1234)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1233)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -3870,7 +3916,8 @@ def main():
     check("Spectron checkpoint game-environment anchor count", spectron_checkpoint["game_environment_anchors"]["verified_name_count"], 4)
     check("Spectron checkpoint client-environment graphics anchor count", spectron_checkpoint["client_environment_graphics_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint client-environment static-clear anchor count", spectron_checkpoint["client_environment_static_clear_anchors"]["verified_name_count"], 2)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "9bf8f68133ac77f7001e314e678a2b5955ecb7d161b6c1dbf69165f657289dc6")
+    check("Spectron checkpoint client-environment restart-state anchor count", spectron_checkpoint["client_environment_restart_state_anchors"]["verified_name_count"], 1)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "f4d5cb02e81a9f106244a8b48c37b5b3ed78a3f2163d0245945b4e4929ae8b52")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -4007,6 +4054,7 @@ def main():
         spectron_game_environment_anchors,
         spectron_client_environment_graphics_anchors,
         spectron_client_environment_static_clear_anchors,
+        spectron_client_environment_restart_state_anchors,
         spectron_particle_emitter_anchors,
         spectron_server_animation_anchors,
         spectron_player_lifecycle_anchors,

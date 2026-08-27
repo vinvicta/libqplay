@@ -175,6 +175,8 @@ def main() -> None:
     parser.add_argument("--client-environment-graphics-verification", type=Path)
     parser.add_argument("--client-environment-static-clear-anchors", type=Path)
     parser.add_argument("--client-environment-static-clear-verification", type=Path)
+    parser.add_argument("--client-environment-restart-state-anchors", type=Path)
+    parser.add_argument("--client-environment-restart-state-verification", type=Path)
     parser.add_argument("--particle-emitter-anchors", type=Path)
     parser.add_argument("--particle-emitter-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
@@ -5485,6 +5487,68 @@ def main() -> None:
         )
         result["interpretation"].append(
             "The v184 database revision also contains the separately reviewed TClientEnvironment profiler-string cleanup anchors."
+        )
+    client_environment_restart_state = None
+    if (
+        args.client_environment_restart_state_anchors
+        or args.client_environment_restart_state_verification
+    ):
+        if (
+            not args.client_environment_restart_state_anchors
+            or not args.client_environment_restart_state_verification
+        ):
+            raise ValueError(
+                "client-environment restart-state anchors and verification must be supplied together"
+            )
+        client_environment_restart_state_document = load(
+            args.client_environment_restart_state_anchors
+        )
+        client_environment_restart_state_verification = load(
+            args.client_environment_restart_state_verification
+        )
+        if (
+            client_environment_restart_state_document.get("artifact")
+            != "spectron_client_environment_restart_state_manual_translation_anchors_20260827"
+        ):
+            raise ValueError(
+                "unexpected client-environment restart-state anchor artifact"
+            )
+        if not client_environment_restart_state_verification.get("verified"):
+            raise ValueError(
+                "client-environment restart-state anchor reopen verification did not pass"
+            )
+        expected_client_environment_restart_state = len(
+            client_environment_restart_state_document["anchors"]
+        )
+        if (
+            client_environment_restart_state_verification["verified_name_count"]
+            != expected_client_environment_restart_state
+        ):
+            raise ValueError(
+                "client-environment restart-state verification count differs from artifact"
+            )
+        client_environment_restart_state = {
+            "anchor_path": str(args.client_environment_restart_state_anchors),
+            "anchor_sha256": sha256_path(
+                args.client_environment_restart_state_anchors
+            ),
+            "reopen_verification": str(
+                args.client_environment_restart_state_verification
+            ),
+            "anchor_count": expected_client_environment_restart_state,
+            "verified_name_count": client_environment_restart_state_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": client_environment_restart_state_verification[
+                "failure_count"
+            ],
+        }
+    if client_environment_restart_state is not None:
+        result["client_environment_restart_state_anchors"] = (
+            client_environment_restart_state
+        )
+        result["interpretation"].append(
+            "The v185 database revision also contains the separately reviewed TClientEnvironment saved-restart cleanup anchor."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
