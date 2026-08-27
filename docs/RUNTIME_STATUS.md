@@ -1169,6 +1169,13 @@ This is the short handoff view. The full reasoning and command history are in
      See `artifacts/spectron_draw_texture_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+164. The next IDA pass translated five `TBitmapArrayHolder` methods covering
+     construction, destruction, rectangle discovery, lazy rectangle lookup,
+     and bitmap-array registry initialization. The labels reopened
+     successfully in the v104 disposable copy. See
+     `artifacts/spectron_bitmap_array_holder_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

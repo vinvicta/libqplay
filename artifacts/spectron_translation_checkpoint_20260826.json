@@ -16,6 +16,14 @@
     "verified_name_count": 3
   },
   "artifact": "spectron_translation_checkpoint_20260826",
+  "bitmap_array_holder_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "artifacts/spectron_bitmap_array_holder_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "bdbeb8c5d27d16f1a7d3ea7807528ef4d581c95ddc6e18415c4a37245f41d3ba",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_bitmap_array_holder_verify_v104.json",
+    "verified_name_count": 5
+  },
   "client_action_anchors": {
     "anchor_count": 11,
     "anchor_path": "artifacts/spectron_client_action_manual_translation_anchors_20260826.json",
@@ -109,8 +117,8 @@
     "default_sub_function_count": 1685,
     "format": "packed IDA 9.3 database",
     "function_count": 11679,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v103.i64",
-    "sha256": "bb0cb110ad0926c183bccc00d71d084ba5f5220945f56d70950d0f7bb300808e"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v104.i64",
+    "sha256": "a2f163408c9fb6e29863efd888d98597ae87cdb514335fdc27647e4b9f5f0fe1"
   },
   "draw_texture_anchors": {
     "anchor_count": 4,
@@ -250,7 +258,7 @@
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
-    "reopen_verification": "/tmp/spectron_translation_verify_v103_serial.json",
+    "reopen_verification": "/tmp/spectron_translation_verify_v104_serial.json",
     "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
     "translation_map": "artifacts/spectron_semantic_function_translation_20260826.json",
     "translation_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92"
@@ -358,7 +366,8 @@
     "The ninety-eighth database revision also contains the separately reviewed TOptions GUI-style setter, decoded credential getter, account persistence, and timer-refresh anchors.",
     "The ninety-ninth database revision also contains the separately reviewed TTexture bitmap access, GPU texture lifecycle, Graal lookup, and static registry anchors.",
     "The one-hundredth database revision also contains the separately reviewed TDrawingPanelTexture destructor, constructor, and texture-dimension anchors.",
-    "The one-hundred-first database revision also contains the separately reviewed TDrawTexture static initializer, registry cleanup, reload, and bind anchors."
+    "The one-hundred-first database revision also contains the separately reviewed TDrawTexture static initializer, registry cleanup, reload, and bind anchors.",
+    "The one-hundred-second database revision also contains the separately reviewed TBitmapArrayHolder constructor, rectangle discovery, lookup, and registry anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,

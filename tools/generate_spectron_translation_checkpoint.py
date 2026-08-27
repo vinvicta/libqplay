@@ -227,6 +227,8 @@ def main() -> None:
     parser.add_argument("--drawing-panel-texture-verification", type=Path)
     parser.add_argument("--draw-texture-anchors", type=Path)
     parser.add_argument("--draw-texture-verification", type=Path)
+    parser.add_argument("--bitmap-array-holder-anchors", type=Path)
+    parser.add_argument("--bitmap-array-holder-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3066,6 +3068,34 @@ def main() -> None:
         result["draw_texture_anchors"] = draw_texture
         result["interpretation"].append(
             "The one-hundred-first database revision also contains the separately reviewed TDrawTexture static initializer, registry cleanup, reload, and bind anchors."
+        )
+    bitmap_array_holder = None
+    if args.bitmap_array_holder_anchors or args.bitmap_array_holder_verification:
+        if not args.bitmap_array_holder_anchors or not args.bitmap_array_holder_verification:
+            raise ValueError(
+                "bitmap-array holder anchors and bitmap-array holder verification must be supplied together"
+            )
+        bitmap_array_holder_document = load(args.bitmap_array_holder_anchors)
+        bitmap_array_holder_verification = load(args.bitmap_array_holder_verification)
+        if bitmap_array_holder_document.get("artifact") != "spectron_bitmap_array_holder_manual_translation_anchors_20260826":
+            raise ValueError("unexpected bitmap-array holder anchor artifact")
+        if not bitmap_array_holder_verification.get("verified"):
+            raise ValueError("bitmap-array holder anchor reopen verification did not pass")
+        expected_bitmap_array_holder = len(bitmap_array_holder_document["anchors"])
+        if bitmap_array_holder_verification["verified_name_count"] != expected_bitmap_array_holder:
+            raise ValueError("bitmap-array holder verification count differs from artifact")
+        bitmap_array_holder = {
+            "anchor_path": str(args.bitmap_array_holder_anchors),
+            "anchor_sha256": sha256_path(args.bitmap_array_holder_anchors),
+            "reopen_verification": str(args.bitmap_array_holder_verification),
+            "anchor_count": expected_bitmap_array_holder,
+            "verified_name_count": bitmap_array_holder_verification["verified_name_count"],
+            "reopen_failure_count": bitmap_array_holder_verification["failure_count"],
+        }
+    if bitmap_array_holder is not None:
+        result["bitmap_array_holder_anchors"] = bitmap_array_holder
+        result["interpretation"].append(
+            "The one-hundred-second database revision also contains the separately reviewed TBitmapArrayHolder constructor, rectangle discovery, lookup, and registry anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
