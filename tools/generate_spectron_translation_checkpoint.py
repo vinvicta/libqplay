@@ -187,6 +187,8 @@ def main() -> None:
     parser.add_argument("--gani-runtime-verification", type=Path)
     parser.add_argument("--gani-render-anchors", type=Path)
     parser.add_argument("--gani-render-verification", type=Path)
+    parser.add_argument("--gani-frame-playback-anchors", type=Path)
+    parser.add_argument("--gani-frame-playback-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2466,6 +2468,34 @@ def main() -> None:
         result["gani_render_anchors"] = gani_render
         result["interpretation"].append(
             "The eighty-first database revision also contains the separately reviewed Gani parameter serializer, reload, and player draw anchors."
+        )
+    gani_frame_playback = None
+    if args.gani_frame_playback_anchors or args.gani_frame_playback_verification:
+        if not args.gani_frame_playback_anchors or not args.gani_frame_playback_verification:
+            raise ValueError(
+                "Gani frame and playback anchors and Gani frame and playback verification must be supplied together"
+            )
+        gani_frame_playback_document = load(args.gani_frame_playback_anchors)
+        gani_frame_playback_verification = load(args.gani_frame_playback_verification)
+        if gani_frame_playback_document.get("artifact") != "spectron_gani_frame_playback_manual_translation_anchors_20260826":
+            raise ValueError("unexpected Gani frame and playback anchor artifact")
+        if not gani_frame_playback_verification.get("verified"):
+            raise ValueError("Gani frame and playback anchor reopen verification did not pass")
+        expected_gani_frame_playback = len(gani_frame_playback_document["anchors"])
+        if gani_frame_playback_verification["verified_name_count"] != expected_gani_frame_playback:
+            raise ValueError("Gani frame and playback verification count differs from artifact")
+        gani_frame_playback = {
+            "anchor_path": str(args.gani_frame_playback_anchors),
+            "anchor_sha256": sha256_path(args.gani_frame_playback_anchors),
+            "reopen_verification": str(args.gani_frame_playback_verification),
+            "anchor_count": expected_gani_frame_playback,
+            "verified_name_count": gani_frame_playback_verification["verified_name_count"],
+            "reopen_failure_count": gani_frame_playback_verification["failure_count"],
+        }
+    if gani_frame_playback is not None:
+        result["gani_frame_playback_anchors"] = gani_frame_playback
+        result["interpretation"].append(
+            "The eighty-second database revision also contains the separately reviewed Gani frame-property and animation-playback anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

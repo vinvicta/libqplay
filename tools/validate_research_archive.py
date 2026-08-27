@@ -302,6 +302,9 @@ def main():
     spectron_gani_render_anchors = load_json(
         "artifacts/spectron_gani_render_manual_translation_anchors_20260826.json"
     )
+    spectron_gani_frame_playback_anchors = load_json(
+        "artifacts/spectron_gani_frame_playback_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -1883,6 +1886,16 @@ def main():
     check("Spectron Gani-render semantic overlap", spectron_gani_render_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron Gani-render default targets", spectron_gani_render_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron Gani-frame-playback artifact",
+        spectron_gani_frame_playback_anchors["artifact"],
+        "spectron_gani_frame_playback_manual_translation_anchors_20260826",
+    )
+    check("Spectron Gani-frame-playback network", spectron_gani_frame_playback_anchors["network_contacted"], False)
+    check("Spectron Gani-frame-playback total", spectron_gani_frame_playback_anchors["summary"]["anchor_count"], 2)
+    check("Spectron Gani-frame-playback high confidence", spectron_gani_frame_playback_anchors["summary"]["high_confidence_count"], 2)
+    check("Spectron Gani-frame-playback semantic overlap", spectron_gani_frame_playback_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron Gani-frame-playback default targets", spectron_gani_frame_playback_anchors["summary"]["target_default_name_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -1971,7 +1984,8 @@ def main():
     check("Spectron checkpoint Gani-helper anchor count", spectron_checkpoint["gani_helper_anchors"]["verified_name_count"], 2)
     check("Spectron checkpoint Gani-runtime anchor count", spectron_checkpoint["gani_runtime_anchors"]["verified_name_count"], 4)
     check("Spectron checkpoint Gani-render anchor count", spectron_checkpoint["gani_render_anchors"]["verified_name_count"], 3)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "d9655d74b7e8e1c7cbcaed47d8840ee6274d61fb45fb2c2e75c8875a3b6d862c")
+    check("Spectron checkpoint Gani-frame-playback anchor count", spectron_checkpoint["gani_frame_playback_anchors"]["verified_name_count"], 2)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "5ea5746f052d6940b6b7facae87de3875e381828847c57d9c03ac782d867984c")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -2111,6 +2125,10 @@ def main():
         spectron_hidden_testnpc_anchors,
         spectron_level_map_lookup_anchors,
         spectron_gani_constructor_anchors,
+        spectron_gani_helper_anchors,
+        spectron_gani_runtime_anchors,
+        spectron_gani_render_anchors,
+        spectron_gani_frame_playback_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

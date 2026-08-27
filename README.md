@@ -874,6 +874,17 @@ player draw dispatcher. All three labels reopened successfully. The evidence
 is in
 `artifacts/spectron_gani_render_manual_translation_anchors_20260826.json`.
 
+A v84 disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v84.i64`,
+adds two larger Gani runtime anchors. The frame setter preserves the complete
+actor-property pipeline, including movement modifiers, equipment, sprite
+selectors, text fields, colors, zoom, and text-style flags. The playback
+method preserves child-object updates, frame looping, active-player action
+handling, sound-resource lookup, and the audio bridge. Both labels reopened
+successfully. The evidence is in
+`artifacts/spectron_gani_frame_playback_manual_translation_anchors_20260826.json`,
+and the v84 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
@@ -1043,6 +1054,8 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/spectron_render_gui_manual_translation_anchors_20260826.json`
   records the 20 reviewed texture, OpenGL, drawing-panel, GUI-control,
   markup, and scrolling helpers.
+* `artifacts/spectron_gani_frame_playback_manual_translation_anchors_20260826.json`
+  records the two reviewed Gani frame-property and animation-playback anchors.
 * `artifacts/spectron_json_folder_manual_translation_anchors_20260826.json`
   records the eight reviewed GIF/JPEG callbacks, recursive folder-loader
   helper, and YAJL JSON callbacks.
