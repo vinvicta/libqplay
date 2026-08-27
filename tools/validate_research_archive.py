@@ -233,6 +233,9 @@ def main():
     spectron_server_object_scalar_anchors = load_json(
         "artifacts/spectron_server_object_scalar_manual_translation_anchors_20260827.json"
     )
+    spectron_compression_anchors = load_json(
+        "artifacts/spectron_compression_manual_translation_anchors_20260827.json"
+    )
     spectron_particle_emitter_anchors = load_json(
         "artifacts/spectron_particle_emitter_manual_translation_anchors_20260826.json"
     )
@@ -1906,6 +1909,17 @@ def main():
     check("Spectron server-object scalar layout-change count", spectron_server_object_scalar_anchors["summary"]["layout_change_anchor_count"], 0)
     check("Spectron server-object scalar default targets", spectron_server_object_scalar_anchors["summary"]["target_default_name_count"], 8)
     check(
+        "Spectron compression artifact",
+        spectron_compression_anchors["artifact"],
+        "spectron_compression_manual_translation_anchors_20260827",
+    )
+    check("Spectron compression network", spectron_compression_anchors["network_contacted"], False)
+    check("Spectron compression total", spectron_compression_anchors["summary"]["anchor_count"], 5)
+    check("Spectron compression high confidence", spectron_compression_anchors["summary"]["high_confidence_count"], 5)
+    check("Spectron compression exact-shape count", spectron_compression_anchors["summary"]["exact_shape_anchor_count"], 5)
+    check("Spectron compression layout-change count", spectron_compression_anchors["summary"]["layout_change_anchor_count"], 0)
+    check("Spectron compression default targets", spectron_compression_anchors["summary"]["target_default_name_count"], 0)
+    check(
         "Spectron particle-emitter artifact",
         spectron_particle_emitter_anchors["artifact"],
         "spectron_particle_emitter_manual_translation_anchors_20260826",
@@ -3228,7 +3242,8 @@ def main():
     check("Spectron checkpoint TServerPlayer residual anchor count", spectron_checkpoint["tserverplayer_residual_anchors"]["verified_name_count"], 25)
     check("Spectron checkpoint TServerPlayer tail anchor count", spectron_checkpoint["tserverplayer_tail_anchors"]["verified_name_count"], 7)
     check("Spectron checkpoint server-object scalar anchor count", spectron_checkpoint["server_object_scalar_anchors"]["verified_name_count"], 12)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "99e9466a62544d22433484e73013683ff716f2308956066c83650abc6f449387")
+    check("Spectron checkpoint compression anchor count", spectron_checkpoint["compression_anchors"]["verified_name_count"], 5)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "f128cbd323aa0e5f1a021c447f404b0f9b3778d83ab1dfffc7095b004191b4fd")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -3347,6 +3362,7 @@ def main():
         spectron_showimg_anchors,
         spectron_showimg_residual_anchors,
         spectron_server_object_scalar_anchors,
+        spectron_compression_anchors,
         spectron_particle_emitter_anchors,
         spectron_server_animation_anchors,
         spectron_player_lifecycle_anchors,

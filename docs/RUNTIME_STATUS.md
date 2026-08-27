@@ -1428,6 +1428,16 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+226. The next IDA pass translated five exact-shape `TCompression` methods:
+     both `CompressBuf` overloads, the TString decompression wrapper, and both
+     `CompressBuf2` overloads. All five labels reopened successfully in the
+     v168 disposable copy, which has 11,694 functions, 3,641 high-confidence
+     labels, and 1,256 default `sub_` names. The source and target rows share
+     the `+0xbe8` delta and the complete normalized feature record. See
+     `artifacts/spectron_compression_manual_translation_anchors_20260827.json`,
+     `tools/generate_spectron_compression_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 225. The next IDA pass translated 12 exact-shape methods in the server-object
     cluster: the `TServerBomb` time, order-point, and image helpers, the
     `TServerChest` open setter, six `TServerFlying` scalar accessors plus its

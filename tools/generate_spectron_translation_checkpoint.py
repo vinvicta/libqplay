@@ -141,6 +141,8 @@ def main() -> None:
     parser.add_argument("--showimg-residual-verification", type=Path)
     parser.add_argument("--server-object-scalar-anchors", type=Path)
     parser.add_argument("--server-object-scalar-verification", type=Path)
+    parser.add_argument("--compression-anchors", type=Path)
+    parser.add_argument("--compression-verification", type=Path)
     parser.add_argument("--particle-emitter-anchors", type=Path)
     parser.add_argument("--particle-emitter-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
@@ -1986,6 +1988,34 @@ def main() -> None:
         result["server_object_scalar_anchors"] = server_object_scalar
         result["interpretation"].append(
             "The one-hundred-sixty-seventh database revision also contains the separately reviewed exact-shape server-object scalar and constructor anchors."
+        )
+    compression = None
+    if args.compression_anchors or args.compression_verification:
+        if not args.compression_anchors or not args.compression_verification:
+            raise ValueError(
+                "compression anchors and compression verification must be supplied together"
+            )
+        compression_document = load(args.compression_anchors)
+        compression_verification = load(args.compression_verification)
+        if compression_document.get("artifact") != "spectron_compression_manual_translation_anchors_20260827":
+            raise ValueError("unexpected compression anchor artifact")
+        if not compression_verification.get("verified"):
+            raise ValueError("compression anchor reopen verification did not pass")
+        expected_compression = len(compression_document["anchors"])
+        if compression_verification["verified_name_count"] != expected_compression:
+            raise ValueError("compression verification count differs from artifact")
+        compression = {
+            "anchor_path": str(args.compression_anchors),
+            "anchor_sha256": sha256_path(args.compression_anchors),
+            "reopen_verification": str(args.compression_verification),
+            "anchor_count": expected_compression,
+            "verified_name_count": compression_verification["verified_name_count"],
+            "reopen_failure_count": compression_verification["failure_count"],
+        }
+    if compression is not None:
+        result["compression_anchors"] = compression
+        result["interpretation"].append(
+            "The one-hundred-sixty-eighth database revision also contains the separately reviewed exact-shape TCompression wrapper anchors."
         )
     particle_emitter = None
     if args.particle_emitter_anchors or args.particle_emitter_verification:
