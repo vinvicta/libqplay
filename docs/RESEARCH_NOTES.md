@@ -5124,6 +5124,93 @@ and zero failures. The v96 database has 11,679 functions and 1,688 default
 `sub_` names. Its SHA-256 is
 `343ea4a80616c6f53b1b7233ad339e44830cd084086bd4bd6204a18bdd5a1af3`.
 
+## 2026-08-26: Spectron hash-list and hash-string anchors
+
+The v99 pass reviewed nine methods from the source `THashList` and
+`THashStrings` families. The target implementations are the obfuscated
+`KKhLga4xoI` and `yL3_IaDMFt` classes. Their surrounding constructors,
+iterators, add/remove methods, and file helpers were already translated, which
+makes the local ordering useful evidence for this pass.
+
+| 1.8 function | Source | Spectron target | Evidence |
+| --- | ---: | ---: | --- |
+| `THashList_getObject_uint_TString_const` | `0xea674` | `0xeb260` | bucket chain and string equality |
+| `THashList_getObjectIgnoreCase_uint_TString_const` | `0xea700` | `0xeb3a0` | bucket chain and ASCII-folded comparison |
+| `THashList_getObjectEncoded_uint_TString_const` | `0xea7fc` | `0xeb50c` | encoded character comparison |
+| `THashStrings_getObject_TString_const` | `0xeade4` | `0xeba30` | hash lookup and key equality |
+| `THashStrings_setValue_TString_const_TString_const` | `0xeb358` | `0xebfcc` | add, replace, or remove value |
+| `THashList_Assign_THashList_bool_bool` | `0xebaa4` | `0xec840` | clear, iterate, and copy objects |
+| `THashList_getListSorted_void` | `0xebba8` | `0xec90c` | ordered iterator insertion |
+| `THashStrings_listStrings_void` | `0xebea0` | `0xecc58` | name/value list construction |
+| `THashStrings_GetCommaText2_void` | `0xebff0` | `0xecde8` | comma joining and double-quote escaping |
+
+The three lookup methods stay in the target `KKhLga4xoI` class. The
+case-sensitive string lookup changes from 140/35/9 with one call to 180/45/9
+with three calls, measured as bytes, instructions, blocks, and direct calls.
+The target makes a temporary `C8THgaTQxF` copy and comparison explicit. The
+case-insensitive method changes from 252/63/24 with no direct calls to
+364/91/31 with three calls. Both compare the bucket hash first and then fold
+ASCII letters before returning the matching object. The encoded method changes
+from 284/71/24 with no direct calls to 320/80/25 with two calls. Its target
+pseudocode retains the source's per-character transform and case fold, using
+the target string's indexed accessor.
+
+`THashStrings_getObject_TString_const` maps to
+`_ZN10yL3_IaDMFt10TBCvgay5cvERK10C8THgaTQxF`. It changes from 136/34/7 with
+two calls to 176/44/7 with four calls. Both calculate the bucket from the key,
+walk the chained entries, compare keys, and return the matching hash-string
+object. The target's extra calls are its temporary string assignment, clear,
+and obfuscated hash helper.
+
+`THashStrings_setValue_TString_const_TString_const` maps to
+`_ZN10yL3_IaDMFt10juVsfa5YWCERK10C8THgaTQxFS2_`. It changes from 280/70/11
+with seven calls to 308/77/11 with nine calls. Both insert a new object when a
+missing key has a nonempty value, suppress an unchanged write, replace an
+existing value when needed, and remove the object when the new value is empty.
+The target compares a temporary copy of the current value and uses the
+obfuscated `NYF9TaOVKR` object methods for construction, update, and removal.
+
+`THashList_Assign_THashList_bool_bool` maps to
+`_ZN10KKhLga4xoI6AssignEPS_b`. The source is 160/40/6 with nine calls, while
+the target is 104/26/4 with six calls. Both clear the destination, walk the
+source iterator, add each object, and destroy the iterator. The source has two
+boolean controls and chooses between normal and encoded insertion. Spectron's
+target signature has one boolean and retains only the normal add path. This is
+a real target-version behavior and interface difference, so the anchor records
+it instead of presenting the routines as byte-identical.
+
+`THashList_getListSorted_void` maps to
+`_ZN10KKhLga4xoI10AotaUajlqSEv`. It changes from 260/65/9 with ten calls to
+324/81/9 with fourteen calls. Both allocate a result list, iterate the hash
+objects, compare each name with the existing sorted entries, and use either
+append or indexed insertion to keep the list ordered. The target's temporary
+string conversions account for the extra calls.
+
+`THashStrings_listStrings_void` maps to
+`_ZN10yL3_IaDMFt10SpbdUardIUEv`. It changes from 272/68/7 with 14 calls to
+336/84/7 with 18 calls. Both create a `TStringList`, iterate all hash strings,
+append `name=value` for nonempty values, and append a bare name for empty
+values. The target contains the same branches through `C8THgaTQxF` and
+`vuuHgangcF` operations, but its feature export does not list the standalone
+equals literal that appears in the source record.
+
+`THashStrings_GetCommaText2_void` maps to
+`_ZN10yL3_IaDMFt10glvHgatZcFEv`. It changes from 360/90/9 with 17 calls to
+440/110/9 with 23 calls. Both join entries with commas, build `name=value`
+for nonempty values, quote and escape each entry, and quote bare names for
+empty values. The target uses `Z1ceJasAzF` for the same double-quote escaping
+role. Its standalone equals literal is visible in pseudocode but not as a
+separate feature string reference.
+
+The machine-readable record is
+`artifacts/spectron_hash_family_manual_translation_anchors_20260826.json`,
+generated by `tools/generate_spectron_hash_family_anchors.py`. All nine labels
+reopened with zero failures in the serial v99 IDA check. The full translation
+reopen check still passed with 3,641 high-confidence map labels and zero
+failures. The v99 database has 11,679 functions and 1,688 default `sub_`
+names. Its SHA-256 is
+`0760c6fb90cd51a7f575eb46bedcb07f8d72eb6885055b48f2305aedd7ef276b`.
+
 ## 2026-08-26: Spectron extended TStringList anchors
 
 The v98 pass reviewed seven more methods from the source `TStringList`

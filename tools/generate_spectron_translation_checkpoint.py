@@ -217,6 +217,8 @@ def main() -> None:
     parser.add_argument("--tstringlist-comma-verification", type=Path)
     parser.add_argument("--tstringlist-extended-anchors", type=Path)
     parser.add_argument("--tstringlist-extended-verification", type=Path)
+    parser.add_argument("--hash-family-anchors", type=Path)
+    parser.add_argument("--hash-family-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2916,6 +2918,34 @@ def main() -> None:
         result["tstringlist_extended_anchors"] = tstringlist_extended
         result["interpretation"].append(
             "The ninety-sixth database revision also contains the separately reviewed TStringList assignment, key/value, serialization, file-output, and tokenizer anchors."
+        )
+    hash_family = None
+    if args.hash_family_anchors or args.hash_family_verification:
+        if not args.hash_family_anchors or not args.hash_family_verification:
+            raise ValueError(
+                "hash-family anchors and hash-family verification must be supplied together"
+            )
+        hash_family_document = load(args.hash_family_anchors)
+        hash_family_verification = load(args.hash_family_verification)
+        if hash_family_document.get("artifact") != "spectron_hash_family_manual_translation_anchors_20260826":
+            raise ValueError("unexpected hash-family anchor artifact")
+        if not hash_family_verification.get("verified"):
+            raise ValueError("hash-family anchor reopen verification did not pass")
+        expected_hash_family = len(hash_family_document["anchors"])
+        if hash_family_verification["verified_name_count"] != expected_hash_family:
+            raise ValueError("hash-family verification count differs from artifact")
+        hash_family = {
+            "anchor_path": str(args.hash_family_anchors),
+            "anchor_sha256": sha256_path(args.hash_family_anchors),
+            "reopen_verification": str(args.hash_family_verification),
+            "anchor_count": expected_hash_family,
+            "verified_name_count": hash_family_verification["verified_name_count"],
+            "reopen_failure_count": hash_family_verification["failure_count"],
+        }
+    if hash_family is not None:
+        result["hash_family_anchors"] = hash_family
+        result["interpretation"].append(
+            "The ninety-seventh database revision also contains the separately reviewed THashList lookup, assignment, sorting, and THashStrings value and serialization anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

@@ -1128,6 +1128,15 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_tstringlist_extended_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+159. The next IDA pass translated nine `THashList` and `THashStrings` methods
+     covering bucket lookup, case folding, encoded lookup, list assignment,
+     sorting, value updates, and name/value serialization. The labels reopened
+     successfully in the v99 disposable copy. The target hash-list assignment
+     has a narrower boolean signature and omits the source encoded-add branch,
+     which is documented as a behavior difference. See
+     `artifacts/spectron_hash_family_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

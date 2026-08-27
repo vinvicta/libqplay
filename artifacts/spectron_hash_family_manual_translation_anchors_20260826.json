@@ -1,0 +1,512 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target KKhLga4xoI and yL3_IaDMFt methods remain in the same local order as the source THashList and THashStrings families, surrounded by already translated constructors, iterators, add/remove methods, and file helpers.",
+        "The three THashList lookup targets preserve bucket selection, chain traversal, hash comparison, and the case-sensitive, case-insensitive, or encoded character comparison used by their source roles.",
+        "THashStrings getObject and setValue preserve hash lookup, value comparison, insertion of missing nonempty values, replacement of existing values, and removal for empty values. Spectron makes temporary C8THgaTQxF copies explicit.",
+        "THashList assignment and sorted-list construction preserve iterator traversal, clearing, object insertion, ordered comparison, and list insertion. The target assignment signature has one bool and retains only the normal add path, while the source has a second bool for encoded insertion.",
+        "THashStrings listStrings and GetCommaText2 preserve iterator traversal, name/value assembly, empty-value handling, comma joining, and double-quote escaping. Target literal references and wrapper calls differ because of the rebuilt string representation."
+      ],
+      "match_kind": "manual-hash-family-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_operator_assign_TString_const_TString_const"
+      ],
+      "original_ea": "0xea674",
+      "original_metrics": {
+        "basic_block_count": 9,
+        "instruction_count": 35,
+        "mnemonic_hash": "5614246948a6251eb02141b36bb029859bbf47194b0af95bcef4b9896e0a4524",
+        "register_shape_hash": null,
+        "shape_hash": "09c7e3027a1e901f8de979954bd07d283bd7b813eec8e812b35c95f607f4fd85",
+        "size": 140
+      },
+      "original_name": "THashList_getObject_uint_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_THashList_getObject_uint_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "hash-list bucket lookup by string",
+      "spectron_current_name": "_ZN10KKhLga4xoI10TBCvgay5cvEjRK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSER10CanTfaz6bZ",
+        "._ZeqRK10C8THgaTQxFS1_"
+      ],
+      "spectron_ea": "0xeb260",
+      "spectron_metrics": {
+        "basic_block_count": 9,
+        "instruction_count": 45,
+        "mnemonic_hash": "f4be782e1dbffb980e8ecf318a0e67cd1c98924ea3c0c1f4bd39322ac1e2dbe0",
+        "register_shape_hash": null,
+        "shape_hash": "6a8054339955dc0d10e3dac464681731b7a5cdb264f9f50ccd6ab130f92319a4",
+        "size": 180
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target KKhLga4xoI and yL3_IaDMFt methods remain in the same local order as the source THashList and THashStrings families, surrounded by already translated constructors, iterators, add/remove methods, and file helpers.",
+        "The three THashList lookup targets preserve bucket selection, chain traversal, hash comparison, and the case-sensitive, case-insensitive, or encoded character comparison used by their source roles.",
+        "THashStrings getObject and setValue preserve hash lookup, value comparison, insertion of missing nonempty values, replacement of existing values, and removal for empty values. Spectron makes temporary C8THgaTQxF copies explicit.",
+        "THashList assignment and sorted-list construction preserve iterator traversal, clearing, object insertion, ordered comparison, and list insertion. The target assignment signature has one bool and retains only the normal add path, while the source has a second bool for encoded insertion.",
+        "THashStrings listStrings and GetCommaText2 preserve iterator traversal, name/value assembly, empty-value handling, comma joining, and double-quote escaping. Target literal references and wrapper calls differ because of the rebuilt string representation."
+      ],
+      "match_kind": "manual-hash-family-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0xea700",
+      "original_metrics": {
+        "basic_block_count": 24,
+        "instruction_count": 63,
+        "mnemonic_hash": "ba8e65b17d246a5fb14b6fb70d8fd9e0e021d53ef33a2b2cb35cef6691a56199",
+        "register_shape_hash": null,
+        "shape_hash": "f0ccf1771c8a6d3565dbaa62620dce841420fe3882584daeb388235cf4859c4a",
+        "size": 252
+      },
+      "original_name": "THashList_getObjectIgnoreCase_uint_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_THashList_getObjectIgnoreCase_uint_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "hash-list case-insensitive bucket lookup",
+      "spectron_current_name": "_ZN10KKhLga4xoI10sZ8vgajaFvEjRK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSER10CanTfaz6bZ"
+      ],
+      "spectron_ea": "0xeb3a0",
+      "spectron_metrics": {
+        "basic_block_count": 31,
+        "instruction_count": 91,
+        "mnemonic_hash": "c835020dbb5060c18aa99ddde96c45163177079bffa69d3a8d0010a37733edfd",
+        "register_shape_hash": null,
+        "shape_hash": "76b6c33e9fbf0feb29528484e2a6078c10b4e38bc5b17683755c14ef8580f9e2",
+        "size": 364
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target KKhLga4xoI and yL3_IaDMFt methods remain in the same local order as the source THashList and THashStrings families, surrounded by already translated constructors, iterators, add/remove methods, and file helpers.",
+        "The three THashList lookup targets preserve bucket selection, chain traversal, hash comparison, and the case-sensitive, case-insensitive, or encoded character comparison used by their source roles.",
+        "THashStrings getObject and setValue preserve hash lookup, value comparison, insertion of missing nonempty values, replacement of existing values, and removal for empty values. Spectron makes temporary C8THgaTQxF copies explicit.",
+        "THashList assignment and sorted-list construction preserve iterator traversal, clearing, object insertion, ordered comparison, and list insertion. The target assignment signature has one bool and retains only the normal add path, while the source has a second bool for encoded insertion.",
+        "THashStrings listStrings and GetCommaText2 preserve iterator traversal, name/value assembly, empty-value handling, comma joining, and double-quote escaping. Target literal references and wrapper calls differ because of the rebuilt string representation."
+      ],
+      "match_kind": "manual-hash-family-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0xea7fc",
+      "original_metrics": {
+        "basic_block_count": 24,
+        "instruction_count": 71,
+        "mnemonic_hash": "5412e2fe0534c2f72290b90bd5bf15e28f1c1dbf9823fab8137ce7ee0b0c9dd3",
+        "register_shape_hash": null,
+        "shape_hash": "bc77f07a5fadf1f90a8974dfe428e5e3f0dc3d89f0125407b1263a2785658e0e",
+        "size": 284
+      },
+      "original_name": "THashList_getObjectEncoded_uint_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_THashList_getObjectEncoded_uint_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "hash-list encoded bucket lookup",
+      "spectron_current_name": "_ZN10KKhLga4xoI10sZ8vgajaFvEjRK10CanTfaz6bZ",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZNK10CanTfaz6bZixEi"
+      ],
+      "spectron_ea": "0xeb50c",
+      "spectron_metrics": {
+        "basic_block_count": 25,
+        "instruction_count": 80,
+        "mnemonic_hash": "1976c2593d175e19307b11d7074b2d9b39f77b49392cd91871df25d3ad573f65",
+        "register_shape_hash": null,
+        "shape_hash": "ff556086ce6086ab983eeb83f1c3c895ae45de75a7fc5948a6d33ef0562411be",
+        "size": 320
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target KKhLga4xoI and yL3_IaDMFt methods remain in the same local order as the source THashList and THashStrings families, surrounded by already translated constructors, iterators, add/remove methods, and file helpers.",
+        "The three THashList lookup targets preserve bucket selection, chain traversal, hash comparison, and the case-sensitive, case-insensitive, or encoded character comparison used by their source roles.",
+        "THashStrings getObject and setValue preserve hash lookup, value comparison, insertion of missing nonempty values, replacement of existing values, and removal for empty values. Spectron makes temporary C8THgaTQxF copies explicit.",
+        "THashList assignment and sorted-list construction preserve iterator traversal, clearing, object insertion, ordered comparison, and list insertion. The target assignment signature has one bool and retains only the normal add path, while the source has a second bool for encoded insertion.",
+        "THashStrings listStrings and GetCommaText2 preserve iterator traversal, name/value assembly, empty-value handling, comma joining, and double-quote escaping. Target literal references and wrapper calls differ because of the rebuilt string representation."
+      ],
+      "match_kind": "manual-hash-family-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_THashList_getHashcode_TString_const",
+        "plt_operator_assign_TString_const_TString_const"
+      ],
+      "original_ea": "0xeade4",
+      "original_metrics": {
+        "basic_block_count": 7,
+        "instruction_count": 34,
+        "mnemonic_hash": "3ccfa92a38c17fc32e48c0ebd57bf5fc93613ebc5f6fc598bab13e6a6304cb5f",
+        "register_shape_hash": null,
+        "shape_hash": "2158c6554ca6b3e5ae2fe9b5a8bb96e017080a52d78c794d96b0b1e51c9b44ea",
+        "size": 136
+      },
+      "original_name": "THashStrings_getObject_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_THashStrings_getObject_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "hash-strings key lookup",
+      "spectron_current_name": "_ZN10yL3_IaDMFt10TBCvgay5cvERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSER10CanTfaz6bZ",
+        "._ZN10KKhLga4xoI10g4ouMaaIbpERK10C8THgaTQxF",
+        "._ZeqRK10C8THgaTQxFS1_"
+      ],
+      "spectron_ea": "0xeba30",
+      "spectron_metrics": {
+        "basic_block_count": 7,
+        "instruction_count": 44,
+        "mnemonic_hash": "a005e6b506a93f8f1ec7b63ad2b3a41cafa628bedcf5e709785e0015e6054616",
+        "register_shape_hash": null,
+        "shape_hash": "257b0783b41ba32ab77645fa859052088267ab1bd1631eaf872774e6a5c0837f",
+        "size": 176
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target KKhLga4xoI and yL3_IaDMFt methods remain in the same local order as the source THashList and THashStrings families, surrounded by already translated constructors, iterators, add/remove methods, and file helpers.",
+        "The three THashList lookup targets preserve bucket selection, chain traversal, hash comparison, and the case-sensitive, case-insensitive, or encoded character comparison used by their source roles.",
+        "THashStrings getObject and setValue preserve hash lookup, value comparison, insertion of missing nonempty values, replacement of existing values, and removal for empty values. Spectron makes temporary C8THgaTQxF copies explicit.",
+        "THashList assignment and sorted-list construction preserve iterator traversal, clearing, object insertion, ordered comparison, and list insertion. The target assignment signature has one bool and retains only the normal add path, while the source has a second bool for encoded insertion.",
+        "THashStrings listStrings and GetCommaText2 preserve iterator traversal, name/value assembly, empty-value handling, comma joining, and double-quote escaping. Target literal references and wrapper calls differ because of the rebuilt string representation."
+      ],
+      "match_kind": "manual-hash-family-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_THashString_THashString_TString_const_TString_const",
+        "plt_THashString_setValue_TString_const",
+        "plt_THashStrings_addObject_THashString",
+        "plt_THashStrings_getObject_TString_const",
+        "plt_THashStrings_removeObject_THashString",
+        "plt_operator_ne_TString_const_TString_const",
+        "plt_operator_new_ulong__2"
+      ],
+      "original_ea": "0xeb358",
+      "original_metrics": {
+        "basic_block_count": 11,
+        "instruction_count": 70,
+        "mnemonic_hash": "c822a781a198fd889340ed0b73781bec719fe6ef0c01e784ea10cdde76e09f09",
+        "register_shape_hash": null,
+        "shape_hash": "8677a57d755edc91cc0c705f90bb41bc5ed674fd1c84a9cc01de584218677e9a",
+        "size": 280
+      },
+      "original_name": "THashStrings_setValue_TString_const_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_THashStrings_setValue_TString_const_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "hash-strings key/value update",
+      "spectron_current_name": "_ZN10yL3_IaDMFt10juVsfa5YWCERK10C8THgaTQxFS2_",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSER10CanTfaz6bZ",
+        "._ZN10NYF9TaOVKR10juVsfa5YWCERK10C8THgaTQxF",
+        "._ZN10NYF9TaOVKRC1ERK10C8THgaTQxFS2_",
+        "._ZN10yL3_IaDMFt10TBCvgay5cvERK10C8THgaTQxF",
+        "._ZN10yL3_IaDMFt10g6yvgaX89uEP10NYF9TaOVKR",
+        "._ZN10yL3_IaDMFt9addObjectEP10NYF9TaOVKR",
+        "._ZneRK10C8THgaTQxFS1_",
+        "._Znwm"
+      ],
+      "spectron_ea": "0xebfcc",
+      "spectron_metrics": {
+        "basic_block_count": 11,
+        "instruction_count": 77,
+        "mnemonic_hash": "258b8c4b666304e40ff55cde64b2c1fdf4b08883955bad70a3fe1485fa758e9b",
+        "register_shape_hash": null,
+        "shape_hash": "be98213be0d08eae10abf93641802fc8da116bf7e8510752c8bffcd983782ed0",
+        "size": 308
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target KKhLga4xoI and yL3_IaDMFt methods remain in the same local order as the source THashList and THashStrings families, surrounded by already translated constructors, iterators, add/remove methods, and file helpers.",
+        "The three THashList lookup targets preserve bucket selection, chain traversal, hash comparison, and the case-sensitive, case-insensitive, or encoded character comparison used by their source roles.",
+        "THashStrings getObject and setValue preserve hash lookup, value comparison, insertion of missing nonempty values, replacement of existing values, and removal for empty values. Spectron makes temporary C8THgaTQxF copies explicit.",
+        "THashList assignment and sorted-list construction preserve iterator traversal, clearing, object insertion, ordered comparison, and list insertion. The target assignment signature has one bool and retains only the normal add path, while the source has a second bool for encoded insertion.",
+        "THashStrings listStrings and GetCommaText2 preserve iterator traversal, name/value assembly, empty-value handling, comma joining, and double-quote escaping. Target literal references and wrapper calls differ because of the rebuilt string representation."
+      ],
+      "match_kind": "manual-hash-family-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_THashListIterator_THashListIterator",
+        "plt_THashListIterator_THashListIterator_THashList",
+        "plt_THashListIterator_getNextObject_void",
+        "plt_THashListIterator_objectsLeft_void",
+        "plt_THashList_Clear_bool",
+        "plt_THashList_addObjectEncoded_THashListObject",
+        "plt_THashList_addObject_THashListObject"
+      ],
+      "original_ea": "0xebaa4",
+      "original_metrics": {
+        "basic_block_count": 6,
+        "instruction_count": 40,
+        "mnemonic_hash": "4b62121840ffcd6d3e3e370f7cbe33e36b12ffc6f720941bf8b5c020b7bc6779",
+        "register_shape_hash": null,
+        "shape_hash": "c03cbdeb599e142d048e54bfe6e7af8084f779a11b92d0979a51dbb97c49e6f0",
+        "size": 160
+      },
+      "original_name": "THashList_Assign_THashList_bool_bool",
+      "original_string_refs": [],
+      "proposed_name": "v18_THashList_Assign_THashList_bool_bool",
+      "semantic_match_already_present": false,
+      "source_basis": "hash-list assignment and iterator copy",
+      "spectron_current_name": "_ZN10KKhLga4xoI6AssignEPS_b",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10KKhLga4xoI5ClearEb",
+        "._ZN10KKhLga4xoI9addObjectEP10J7zOgaf09K",
+        "._ZN10R_MvgaEQlv10OGNvgaMpmvEv",
+        "._ZN10R_MvgaEQlv10svNvga4fmvEv",
+        "._ZN10R_MvgaEQlvC2EP10KKhLga4xoI",
+        "._ZN10R_MvgaEQlvD1Ev"
+      ],
+      "spectron_ea": "0xec840",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "instruction_count": 26,
+        "mnemonic_hash": "4f17889377e74944e0d48ab65bd3c05bf428dc1767bc1a8a3a421c4fe69fc73d",
+        "register_shape_hash": null,
+        "shape_hash": "f6eb2dbf64c82eb714fdeabf51c873a5081aa1617b16435307429bb7e72e1d4a",
+        "size": 104
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target KKhLga4xoI and yL3_IaDMFt methods remain in the same local order as the source THashList and THashStrings families, surrounded by already translated constructors, iterators, add/remove methods, and file helpers.",
+        "The three THashList lookup targets preserve bucket selection, chain traversal, hash comparison, and the case-sensitive, case-insensitive, or encoded character comparison used by their source roles.",
+        "THashStrings getObject and setValue preserve hash lookup, value comparison, insertion of missing nonempty values, replacement of existing values, and removal for empty values. Spectron makes temporary C8THgaTQxF copies explicit.",
+        "THashList assignment and sorted-list construction preserve iterator traversal, clearing, object insertion, ordered comparison, and list insertion. The target assignment signature has one bool and retains only the normal add path, while the source has a second bool for encoded insertion.",
+        "THashStrings listStrings and GetCommaText2 preserve iterator traversal, name/value assembly, empty-value handling, comma joining, and double-quote escaping. Target literal references and wrapper calls differ because of the rebuilt string representation."
+      ],
+      "match_kind": "manual-hash-family-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_THashListIterator_THashListIterator",
+        "plt_THashListIterator_THashListIterator_THashList",
+        "plt_THashListIterator_getNextObject_void",
+        "plt_THashListIterator_objectsLeft_void",
+        "plt_TList_Add_void",
+        "plt_TList_Insert_int_void",
+        "plt_TList_operator_index_int",
+        "plt_operator_gt_TString_const_TString_const",
+        "plt_operator_new_ulong__2"
+      ],
+      "original_ea": "0xebba8",
+      "original_metrics": {
+        "basic_block_count": 9,
+        "instruction_count": 65,
+        "mnemonic_hash": "5cba5d37de8fb00b6d52c3ff319d603cbe051b32439be631950f2bc82f5532b1",
+        "register_shape_hash": null,
+        "shape_hash": "0c337169ad3333903c170833579607154a79e8b68c04f87c2a6659218218e39f",
+        "size": 260
+      },
+      "original_name": "THashList_getListSorted_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_THashList_getListSorted_void",
+      "semantic_match_already_present": false,
+      "source_basis": "sorted hash-list object list",
+      "spectron_current_name": "_ZN10KKhLga4xoI10AotaUajlqSEv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10CanTfaz6bZ10gwFWfaPxY0Ev",
+        "._ZN10R_MvgaEQlv10OGNvgaMpmvEv",
+        "._ZN10R_MvgaEQlv10svNvga4fmvEv",
+        "._ZN10R_MvgaEQlvC2EP10KKhLga4xoI",
+        "._ZN10R_MvgaEQlvD1Ev",
+        "._ZN10vy1JgaKVkH3AddEPv",
+        "._ZN10vy1JgaKVkH6InsertEiPv",
+        "._ZNK10vy1JgaKVkHixEi",
+        "._ZgtRK10C8THgaTQxFS1_",
+        "._Znwm"
+      ],
+      "spectron_ea": "0xec90c",
+      "spectron_metrics": {
+        "basic_block_count": 9,
+        "instruction_count": 81,
+        "mnemonic_hash": "30977fe7a1a1b77e0876b76462eb1a025ddcd71aa2a4dc073bb6aa34e013ddb4",
+        "register_shape_hash": null,
+        "shape_hash": "3feacf57db56e2966103b2e32002872f118467984b23d4f707bff5c8d2a39ec5",
+        "size": 324
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target KKhLga4xoI and yL3_IaDMFt methods remain in the same local order as the source THashList and THashStrings families, surrounded by already translated constructors, iterators, add/remove methods, and file helpers.",
+        "The three THashList lookup targets preserve bucket selection, chain traversal, hash comparison, and the case-sensitive, case-insensitive, or encoded character comparison used by their source roles.",
+        "THashStrings getObject and setValue preserve hash lookup, value comparison, insertion of missing nonempty values, replacement of existing values, and removal for empty values. Spectron makes temporary C8THgaTQxF copies explicit.",
+        "THashList assignment and sorted-list construction preserve iterator traversal, clearing, object insertion, ordered comparison, and list insertion. The target assignment signature has one bool and retains only the normal add path, while the source has a second bool for encoded insertion.",
+        "THashStrings listStrings and GetCommaText2 preserve iterator traversal, name/value assembly, empty-value handling, comma joining, and double-quote escaping. Target literal references and wrapper calls differ because of the rebuilt string representation."
+      ],
+      "match_kind": "manual-hash-family-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_THashStringsIterator_THashStringsIterator_THashStrings",
+        "plt_THashStringsIterator_getNextObject_void",
+        "plt_THashStringsIterator_objectsLeft_void",
+        "plt_TStringList_Add_TString_const",
+        "plt_TStringList_TStringList_void",
+        "plt_TString_clear_void",
+        "plt_TString_operator_assign_TString_const",
+        "plt_TString_operator_lshift_TString_const",
+        "plt_TString_operator_lshift_char_const",
+        "plt_operator_new_ulong__2"
+      ],
+      "original_ea": "0xebea0",
+      "original_metrics": {
+        "basic_block_count": 7,
+        "instruction_count": 68,
+        "mnemonic_hash": "1d6fe0b001abdfea8b2f8fd83651687eabfc56c8fae621bbe8d275591ffdf5a5",
+        "register_shape_hash": null,
+        "shape_hash": "bc031833744c1bd741f25e4885cdfeafcc49fca477b36d38798ea48028641b69",
+        "size": 272
+      },
+      "original_name": "THashStrings_listStrings_void",
+      "original_string_refs": [
+        "="
+      ],
+      "proposed_name": "v18_THashStrings_listStrings_void",
+      "semantic_match_already_present": false,
+      "source_basis": "hash-strings list of name/value strings",
+      "spectron_current_name": "_ZN10yL3_IaDMFt10SpbdUardIUEv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSER10CanTfaz6bZ",
+        "._ZN10C8THgaTQxFaSERKS_",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10C8THgaTQxFlsERKS_",
+        "._ZN10Zb7cUaSFEU10OGNvgaMpmvEv",
+        "._ZN10Zb7cUaSFEU10svNvga4fmvEv",
+        "._ZN10Zb7cUaSFEUC2EP10yL3_IaDMFt",
+        "._ZN10vuuHgangcF3AddERK10C8THgaTQxF",
+        "._ZN10vuuHgangcF3AddERK10CanTfaz6bZ",
+        "._ZN10vuuHgangcFC2Ev",
+        "._Znwm"
+      ],
+      "spectron_ea": "0xecc58",
+      "spectron_metrics": {
+        "basic_block_count": 7,
+        "instruction_count": 84,
+        "mnemonic_hash": "b46159a7e53bff7f995ce641b80c1d8e2ea7f4805c4af240503dd99a1a8dcf99",
+        "register_shape_hash": null,
+        "shape_hash": "6cbc4da5c37a4c2b39cd6a33c509b566cfa4f26c6dd76576496777e85ef54134",
+        "size": 336
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target KKhLga4xoI and yL3_IaDMFt methods remain in the same local order as the source THashList and THashStrings families, surrounded by already translated constructors, iterators, add/remove methods, and file helpers.",
+        "The three THashList lookup targets preserve bucket selection, chain traversal, hash comparison, and the case-sensitive, case-insensitive, or encoded character comparison used by their source roles.",
+        "THashStrings getObject and setValue preserve hash lookup, value comparison, insertion of missing nonempty values, replacement of existing values, and removal for empty values. Spectron makes temporary C8THgaTQxF copies explicit.",
+        "THashList assignment and sorted-list construction preserve iterator traversal, clearing, object insertion, ordered comparison, and list insertion. The target assignment signature has one bool and retains only the normal add path, while the source has a second bool for encoded insertion.",
+        "THashStrings listStrings and GetCommaText2 preserve iterator traversal, name/value assembly, empty-value handling, comma joining, and double-quote escaping. Target literal references and wrapper calls differ because of the rebuilt string representation."
+      ],
+      "match_kind": "manual-hash-family-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_THashStringsIterator_THashStringsIterator_THashStrings",
+        "plt_THashStringsIterator_getNextObject_void",
+        "plt_THashStringsIterator_objectsLeft_void",
+        "plt_TString_clear_void",
+        "plt_TString_operator_assign_TString_const",
+        "plt_TString_operator_lshift_TString_const",
+        "plt_TString_operator_lshift_char_const",
+        "plt_escaped34_TString_const"
+      ],
+      "original_ea": "0xebff0",
+      "original_metrics": {
+        "basic_block_count": 9,
+        "instruction_count": 90,
+        "mnemonic_hash": "0a895911e4fee5ee3c8963337a097947d63c962c031c058a1aff22a2659dc44c",
+        "register_shape_hash": null,
+        "shape_hash": "0b9a4601724e54a6a8e512a5cabf9aa71a3994d30ca210d7bed053f435a12a33",
+        "size": 360
+      },
+      "original_name": "THashStrings_GetCommaText2_void",
+      "original_string_refs": [
+        "="
+      ],
+      "proposed_name": "v18_THashStrings_GetCommaText2_void",
+      "semantic_match_already_present": false,
+      "source_basis": "hash-strings comma serialization",
+      "spectron_current_name": "_ZN10yL3_IaDMFt10glvHgatZcFEv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._Z10Z1ceJasAzFRK10C8THgaTQxF",
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSER10CanTfaz6bZ",
+        "._ZN10C8THgaTQxFaSERKS_",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10C8THgaTQxFlsERKS_",
+        "._ZN10Zb7cUaSFEU10OGNvgaMpmvEv",
+        "._ZN10Zb7cUaSFEU10svNvga4fmvEv",
+        "._ZN10Zb7cUaSFEUC2EP10yL3_IaDMFt"
+      ],
+      "spectron_ea": "0xecde8",
+      "spectron_metrics": {
+        "basic_block_count": 9,
+        "instruction_count": 110,
+        "mnemonic_hash": "0dbf8c093fce086563ab5092316490df5df66cce0934aca00b4c624dfd2fefd0",
+        "register_shape_hash": null,
+        "shape_hash": "1dbf36ba129c396f5f0b79ff3f754fc297c6fe66053202849ec8c62b1f9aa689",
+        "size": 440
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_hash_family_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4.json",
+    "original_features_sha256": "62cccc40ea88a08d5ed0845ceeceaf194b528bdd07bdd6ff1a0350dee3b0ab82",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features.json",
+    "spectron_features_sha256": "cc1789d2d3c24f478d7863f2b07b10b4259aa2d370e363e5303000eb7b835243"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 roles while keeping the obfuscated target names and wrapper differences in the evidence rows.",
+    "The hash-list assignment target has a narrower one-bool signature and omits the source's explicit encoded-add branch, so that behavior change is preserved in the record."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for THashList lookup, assignment, sorting, and THashStrings value and serialization methods",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 9,
+    "high_confidence_count": 9,
+    "new_context_anchor_count": 9,
+    "target_default_name_count": 0
+  }
+}
