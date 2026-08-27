@@ -1460,6 +1460,23 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_static_callback_role_correction.py`, and
     `tools/ida_dump_function_data_refs.py`.
 
+237. The next IDA pass translated five server-list anchors in the Spectron
+    2.2 build. Four exact-shape getters map the server-start parameters,
+    server-start connection text, and both server-name callback forms to
+    target addresses `0x208318`, `0x208350`, `0x208388`, and `0x2083c0`.
+    Target setter and getter pairs share the globals
+    `xiYWfajld1::OcLpLarkhv` and `xiYWfajld1::Jq54MaebUU`, while both name
+    getters and the larger handoff use `xiYWfajld1::VoXXfaKA21`.
+    The fifth alias maps the source connection-attribute handoff at
+    `0x202f30` to target `0x20a1f4`. Its name, address, port, restart, tile,
+    local-player, and window-identifier responsibilities match, but its
+    larger 2.2 body is recorded as a layout change. All five aliases reopened
+    successfully in the v178 copy, which has 11,694 functions, 3,641
+    high-confidence labels, and 1,244 default `sub_` names. See
+    `artifacts/spectron_server_list_connection_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_server_list_connection_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 236. The next network-focused IDA pass translated two response-side HTTP
     methods in the obfuscated `ZAuvgaUl6u` request class:
     `THTTPRequest_read_void` at target `0x206414` and

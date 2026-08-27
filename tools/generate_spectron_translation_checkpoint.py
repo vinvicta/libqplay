@@ -161,6 +161,8 @@ def main() -> None:
     parser.add_argument("--static-clear-verification", type=Path)
     parser.add_argument("--http-request-receive-anchors", type=Path)
     parser.add_argument("--http-request-receive-verification", type=Path)
+    parser.add_argument("--server-list-connection-anchors", type=Path)
+    parser.add_argument("--server-list-connection-verification", type=Path)
     parser.add_argument("--particle-emitter-anchors", type=Path)
     parser.add_argument("--particle-emitter-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
@@ -5226,6 +5228,34 @@ def main() -> None:
         result["http_request_receive_anchors"] = http_request_receive
         result["interpretation"].append(
             "The v177 database revision also contains the separately reviewed HTTP response read and data-parser anchors."
+        )
+    server_list_connection = None
+    if args.server_list_connection_anchors or args.server_list_connection_verification:
+        if not args.server_list_connection_anchors or not args.server_list_connection_verification:
+            raise ValueError(
+                "server-list connection anchors and verification must be supplied together"
+            )
+        server_list_connection_document = load(args.server_list_connection_anchors)
+        server_list_connection_verification = load(args.server_list_connection_verification)
+        if server_list_connection_document.get("artifact") != "spectron_server_list_connection_manual_translation_anchors_20260827":
+            raise ValueError("unexpected server-list connection anchor artifact")
+        if not server_list_connection_verification.get("verified"):
+            raise ValueError("server-list connection anchor reopen verification did not pass")
+        expected_server_list_connection = len(server_list_connection_document["anchors"])
+        if server_list_connection_verification["verified_name_count"] != expected_server_list_connection:
+            raise ValueError("server-list connection verification count differs from artifact")
+        server_list_connection = {
+            "anchor_path": str(args.server_list_connection_anchors),
+            "anchor_sha256": sha256_path(args.server_list_connection_anchors),
+            "reopen_verification": str(args.server_list_connection_verification),
+            "anchor_count": expected_server_list_connection,
+            "verified_name_count": server_list_connection_verification["verified_name_count"],
+            "reopen_failure_count": server_list_connection_verification["failure_count"],
+        }
+    if server_list_connection is not None:
+        result["server_list_connection_anchors"] = server_list_connection
+        result["interpretation"].append(
+            "The v178 database revision also contains the separately reviewed server-list getter and connection-handoff anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

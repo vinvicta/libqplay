@@ -266,6 +266,9 @@ def main():
     spectron_http_request_receive_anchors = load_json(
         "artifacts/spectron_http_request_receive_manual_translation_anchors_20260827.json"
     )
+    spectron_server_list_connection_anchors = load_json(
+        "artifacts/spectron_server_list_connection_manual_translation_anchors_20260827.json"
+    )
     spectron_particle_emitter_anchors = load_json(
         "artifacts/spectron_particle_emitter_manual_translation_anchors_20260826.json"
     )
@@ -2137,6 +2140,67 @@ def main():
         "0x207bec",
     )
     check(
+        "Spectron server-list connection artifact",
+        spectron_server_list_connection_anchors["artifact"],
+        "spectron_server_list_connection_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron server-list connection network",
+        spectron_server_list_connection_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron server-list connection total",
+        spectron_server_list_connection_anchors["summary"]["anchor_count"],
+        5,
+    )
+    check(
+        "Spectron server-list connection high confidence",
+        spectron_server_list_connection_anchors["summary"]["high_confidence_count"],
+        5,
+    )
+    check(
+        "Spectron server-list connection exact-shape count",
+        spectron_server_list_connection_anchors["summary"]["exact_shape_anchor_count"],
+        4,
+    )
+    check(
+        "Spectron server-list connection layout-change count",
+        spectron_server_list_connection_anchors["summary"]["layout_change_anchor_count"],
+        1,
+    )
+    check(
+        "Spectron server-list connection default targets",
+        spectron_server_list_connection_anchors["summary"]["target_default_name_count"],
+        4,
+    )
+    server_list_anchors = {
+        row["original_name"]: row
+        for row in spectron_server_list_connection_anchors["anchors"]
+    }
+    check(
+        "Spectron server-list start-params target",
+        server_list_anchors["TServerList_getServerStartParams"]["spectron_ea"],
+        "0x208318",
+    )
+    check(
+        "Spectron server-list start-connect target",
+        server_list_anchors["TServerList_getServerStartConnect"]["spectron_ea"],
+        "0x208350",
+    )
+    check(
+        "Spectron server-list name target",
+        server_list_anchors["TServerList_getServerName"]["spectron_ea"],
+        "0x208388",
+    )
+    check(
+        "Spectron server-list handoff target",
+        server_list_anchors[
+            "TServerList_setConnectionAttributes_TString_const_TString_const_int"
+        ]["spectron_ea"],
+        "0x20a1f4",
+    )
+    check(
         "Spectron particle-emitter artifact",
         spectron_particle_emitter_anchors["artifact"],
         "spectron_particle_emitter_manual_translation_anchors_20260826",
@@ -3294,7 +3358,7 @@ def main():
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1248)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1244)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -3469,7 +3533,8 @@ def main():
     check("Spectron checkpoint TString clear anchor count", spectron_checkpoint["tstring_clear_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint static-clear anchor count", spectron_checkpoint["static_clear_anchors"]["verified_name_count"], 2)
     check("Spectron checkpoint HTTP response anchor count", spectron_checkpoint["http_request_receive_anchors"]["verified_name_count"], 2)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "d4d343a931a408cf34d6e32ca11a335711df184d7124b7d4d23a831445aa3cc2")
+    check("Spectron checkpoint server-list connection anchor count", spectron_checkpoint["server_list_connection_anchors"]["verified_name_count"], 5)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "4bc213e88a767e49efdef3c7d0ce160d946446846cfff53b6461bcc7654391c1")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -3599,6 +3664,7 @@ def main():
         spectron_static_clear_anchors,
         spectron_static_callback_role_correction,
         spectron_http_request_receive_anchors,
+        spectron_server_list_connection_anchors,
         spectron_particle_emitter_anchors,
         spectron_server_animation_anchors,
         spectron_player_lifecycle_anchors,
