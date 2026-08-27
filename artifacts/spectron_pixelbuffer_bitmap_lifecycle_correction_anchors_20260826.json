@@ -1,0 +1,245 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source pseudocode identifies the two TPixelBuffer rows as the D1 destructor and deleting-destructor pair, and the two TBitmap rows as the matching D1 and deleting-destructor pair.",
+        "The target has a separate uSjUgask_P destructor pair at 0x1074e4 and 0x107514 and a separate Fcx_gaoydV destructor pair at 0x1156f4 and 0x115724.",
+        "Each target destructor calls the corresponding target class cleanup method, restores the target vtable, and clears the class string. The deleting forms then call the matching base destructor and operator delete.",
+        "The target uSjUgask_P pair is the correction for a prior medium-confidence shape-only collision that assigned the 1.8 TPixelBuffer destructor to the Fcx_gaoydV bitmap destructor. That automatic candidate was never applied to the disposable IDA database.",
+        "The rows are recorded for the exact hashed Spectron library, and the source-to-target pairings are not treated as restored original debug symbols."
+      ],
+      "match_kind": "manual-pixelbuffer-bitmap-lifecycle-correction-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TPixelBuffer_destroyPixels_void"
+      ],
+      "original_ea": "0x104e5c",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "instruction_count": 12,
+        "mnemonic_hash": "35efb244b69bb9688f52a47ea7adbfd90e87e80d56f6e82865cbd4804ebc7306",
+        "register_shape_hash": null,
+        "shape_hash": "c62fe9be2a15282f1897b20757683efbd236614e0d9bbf7aa3875e07c8af49b3",
+        "size": 48
+      },
+      "original_name": "TPixelBuffer_TPixelBuffer",
+      "original_string_refs": [],
+      "proposed_name": "v18_TPixelBuffer_TPixelBuffer",
+      "semantic_match_already_present": false,
+      "semantic_target_already_present": false,
+      "source_basis": "TPixelBuffer D1 destructor and pixel cleanup",
+      "spectron_current_name": "_ZN10uSjUgask_PD1Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10uSjUgask_P10pSeYgan7hTEv"
+      ],
+      "spectron_ea": "0x1074e4",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "instruction_count": 12,
+        "mnemonic_hash": "35efb244b69bb9688f52a47ea7adbfd90e87e80d56f6e82865cbd4804ebc7306",
+        "register_shape_hash": null,
+        "shape_hash": "1a82be66cbdbfec5dd034bc95b0e705b52277913e23cc1ad46cbc5c5913182ad",
+        "size": 48
+      },
+      "spectron_string_refs": [],
+      "supersedes_semantic_match": {
+        "alias_name": "v18_TPixelBuffer_TPixelBuffer",
+        "basic_block_count": 2,
+        "confidence": "medium",
+        "instruction_count": 12,
+        "method": "shape_hash",
+        "original_ea": "0x104e5c",
+        "original_name": "TPixelBuffer_TPixelBuffer",
+        "shared_direct_call_count": 0,
+        "shared_direct_call_names": [],
+        "shared_string_ref_count": 0,
+        "shared_string_refs": [],
+        "size": 48,
+        "spectron_current_name": "_ZN10Fcx_gaoydVD2Ev",
+        "spectron_ea": "0x1156f4"
+      }
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source pseudocode identifies the two TPixelBuffer rows as the D1 destructor and deleting-destructor pair, and the two TBitmap rows as the matching D1 and deleting-destructor pair.",
+        "The target has a separate uSjUgask_P destructor pair at 0x1074e4 and 0x107514 and a separate Fcx_gaoydV destructor pair at 0x1156f4 and 0x115724.",
+        "Each target destructor calls the corresponding target class cleanup method, restores the target vtable, and clears the class string. The deleting forms then call the matching base destructor and operator delete.",
+        "The target uSjUgask_P pair is the correction for a prior medium-confidence shape-only collision that assigned the 1.8 TPixelBuffer destructor to the Fcx_gaoydV bitmap destructor. That automatic candidate was never applied to the disposable IDA database.",
+        "The rows are recorded for the exact hashed Spectron library, and the source-to-target pairings are not treated as restored original debug symbols."
+      ],
+      "match_kind": "manual-pixelbuffer-bitmap-lifecycle-correction-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TPixelBuffer_TPixelBuffer__2"
+      ],
+      "original_ea": "0x104e8c",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "instruction_count": 8,
+        "mnemonic_hash": "6997dd3b5418a87bf6f5a5c521855fc9a17314be795e8b9166aafc3f4274ad31",
+        "register_shape_hash": null,
+        "shape_hash": "ddb4f004bba90eaf41261c7a2d80153268b64d0dc9e3005db4115ce1909821c2",
+        "size": 32
+      },
+      "original_name": "TPixelBuffer_TPixelBuffer__2",
+      "original_string_refs": [],
+      "proposed_name": "v18_TPixelBuffer_TPixelBuffer__2",
+      "semantic_match_already_present": false,
+      "semantic_target_already_present": false,
+      "source_basis": "TPixelBuffer deleting-destructor wrapper",
+      "spectron_current_name": "_ZN10uSjUgask_PD0Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10uSjUgask_PD1Ev"
+      ],
+      "spectron_ea": "0x107514",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "instruction_count": 8,
+        "mnemonic_hash": "6997dd3b5418a87bf6f5a5c521855fc9a17314be795e8b9166aafc3f4274ad31",
+        "register_shape_hash": null,
+        "shape_hash": "ddb4f004bba90eaf41261c7a2d80153268b64d0dc9e3005db4115ce1909821c2",
+        "size": 32
+      },
+      "spectron_string_refs": [],
+      "supersedes_semantic_match": null
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source pseudocode identifies the two TPixelBuffer rows as the D1 destructor and deleting-destructor pair, and the two TBitmap rows as the matching D1 and deleting-destructor pair.",
+        "The target has a separate uSjUgask_P destructor pair at 0x1074e4 and 0x107514 and a separate Fcx_gaoydV destructor pair at 0x1156f4 and 0x115724.",
+        "Each target destructor calls the corresponding target class cleanup method, restores the target vtable, and clears the class string. The deleting forms then call the matching base destructor and operator delete.",
+        "The target uSjUgask_P pair is the correction for a prior medium-confidence shape-only collision that assigned the 1.8 TPixelBuffer destructor to the Fcx_gaoydV bitmap destructor. That automatic candidate was never applied to the disposable IDA database.",
+        "The rows are recorded for the exact hashed Spectron library, and the source-to-target pairings are not treated as restored original debug symbols."
+      ],
+      "match_kind": "manual-pixelbuffer-bitmap-lifecycle-correction-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TBitmap_deleteImage_void"
+      ],
+      "original_ea": "0x112e24",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "instruction_count": 12,
+        "mnemonic_hash": "35efb244b69bb9688f52a47ea7adbfd90e87e80d56f6e82865cbd4804ebc7306",
+        "register_shape_hash": null,
+        "shape_hash": "c62fe9be2a15282f1897b20757683efbd236614e0d9bbf7aa3875e07c8af49b3",
+        "size": 48
+      },
+      "original_name": "TBitmap_TBitmap",
+      "original_string_refs": [],
+      "proposed_name": "v18_TBitmap_TBitmap",
+      "semantic_match_already_present": false,
+      "semantic_target_already_present": true,
+      "source_basis": "TBitmap D1 destructor and image cleanup",
+      "spectron_current_name": "_ZN10Fcx_gaoydVD2Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10Fcx_gaoydV10MJw7Bag9WGEv"
+      ],
+      "spectron_ea": "0x1156f4",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "instruction_count": 12,
+        "mnemonic_hash": "35efb244b69bb9688f52a47ea7adbfd90e87e80d56f6e82865cbd4804ebc7306",
+        "register_shape_hash": null,
+        "shape_hash": "c62fe9be2a15282f1897b20757683efbd236614e0d9bbf7aa3875e07c8af49b3",
+        "size": 48
+      },
+      "spectron_string_refs": [],
+      "supersedes_semantic_match": null
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source pseudocode identifies the two TPixelBuffer rows as the D1 destructor and deleting-destructor pair, and the two TBitmap rows as the matching D1 and deleting-destructor pair.",
+        "The target has a separate uSjUgask_P destructor pair at 0x1074e4 and 0x107514 and a separate Fcx_gaoydV destructor pair at 0x1156f4 and 0x115724.",
+        "Each target destructor calls the corresponding target class cleanup method, restores the target vtable, and clears the class string. The deleting forms then call the matching base destructor and operator delete.",
+        "The target uSjUgask_P pair is the correction for a prior medium-confidence shape-only collision that assigned the 1.8 TPixelBuffer destructor to the Fcx_gaoydV bitmap destructor. That automatic candidate was never applied to the disposable IDA database.",
+        "The rows are recorded for the exact hashed Spectron library, and the source-to-target pairings are not treated as restored original debug symbols."
+      ],
+      "match_kind": "manual-pixelbuffer-bitmap-lifecycle-correction-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TBitmap_TBitmap"
+      ],
+      "original_ea": "0x112e54",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "instruction_count": 8,
+        "mnemonic_hash": "6997dd3b5418a87bf6f5a5c521855fc9a17314be795e8b9166aafc3f4274ad31",
+        "register_shape_hash": null,
+        "shape_hash": "ddb4f004bba90eaf41261c7a2d80153268b64d0dc9e3005db4115ce1909821c2",
+        "size": 32
+      },
+      "original_name": "TBitmap_TBitmap__2",
+      "original_string_refs": [],
+      "proposed_name": "v18_TBitmap_TBitmap__2",
+      "semantic_match_already_present": false,
+      "semantic_target_already_present": false,
+      "source_basis": "TBitmap deleting-destructor wrapper",
+      "spectron_current_name": "_ZN10Fcx_gaoydVD0Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10Fcx_gaoydVD2Ev"
+      ],
+      "spectron_ea": "0x115724",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "instruction_count": 8,
+        "mnemonic_hash": "6997dd3b5418a87bf6f5a5c521855fc9a17314be795e8b9166aafc3f4274ad31",
+        "register_shape_hash": null,
+        "shape_hash": "ddb4f004bba90eaf41261c7a2d80153268b64d0dc9e3005db4115ce1909821c2",
+        "size": 32
+      },
+      "spectron_string_refs": [],
+      "supersedes_semantic_match": null
+    }
+  ],
+  "artifact": "spectron_pixelbuffer_bitmap_lifecycle_correction_anchors_20260826",
+  "corrections": [
+    {
+      "new_rows": [
+        "0x104e5c -> 0x1074e4",
+        "0x112e24 -> 0x1156f4"
+      ],
+      "old_confidence": "medium",
+      "old_original_ea": "0x104e5c",
+      "old_original_name": "TPixelBuffer_TPixelBuffer",
+      "old_spectron_ea": "0x1156f4",
+      "old_spectron_name": "_ZN10Fcx_gaoydVD2Ev",
+      "reason": "shape-only matching confused two same-sized destructor bodies; class identity and cleanup callees separate the pixel-buffer and bitmap lifecycles"
+    }
+  ],
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4.json",
+    "original_features_sha256": "62cccc40ea88a08d5ed0845ceeceaf194b528bdd07bdd6ff1a0350dee3b0ab82",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features.json",
+    "spectron_features_sha256": "cc1789d2d3c24f478d7863f2b07b10b4259aa2d370e363e5303000eb7b835243"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The prior medium-confidence shape-only match remains in the original automatic report for reproducibility, but this correction artifact supersedes it for the translated IDA database.",
+    "The uSjUgask_P and Fcx_gaoydV destructor pairs are separate class lifecycles, and the target cleanup callees confirm which source destructor belongs to each pair."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 destructor anchors correcting a medium-confidence pixel-buffer and bitmap collision",
+  "summary": {
+    "already_in_semantic_map": 1,
+    "anchor_count": 4,
+    "high_confidence_count": 4,
+    "new_context_anchor_count": 4,
+    "superseded_medium_match_count": 1,
+    "target_default_name_count": 0
+  }
+}

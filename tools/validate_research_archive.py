@@ -395,6 +395,9 @@ def main():
     spectron_pixelbuffer_residual_anchors = load_json(
         "artifacts/spectron_pixelbuffer_residual_manual_translation_anchors_20260826.json"
     )
+    spectron_pixelbuffer_bitmap_lifecycle_anchors = load_json(
+        "artifacts/spectron_pixelbuffer_bitmap_lifecycle_correction_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2286,6 +2289,17 @@ def main():
     check("Spectron pixelbuffer residual semantic overlap", spectron_pixelbuffer_residual_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron pixelbuffer residual default targets", spectron_pixelbuffer_residual_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron pixelbuffer bitmap-lifecycle artifact",
+        spectron_pixelbuffer_bitmap_lifecycle_anchors["artifact"],
+        "spectron_pixelbuffer_bitmap_lifecycle_correction_anchors_20260826",
+    )
+    check("Spectron pixelbuffer bitmap-lifecycle network", spectron_pixelbuffer_bitmap_lifecycle_anchors["network_contacted"], False)
+    check("Spectron pixelbuffer bitmap-lifecycle total", spectron_pixelbuffer_bitmap_lifecycle_anchors["summary"]["anchor_count"], 4)
+    check("Spectron pixelbuffer bitmap-lifecycle high confidence", spectron_pixelbuffer_bitmap_lifecycle_anchors["summary"]["high_confidence_count"], 4)
+    check("Spectron pixelbuffer bitmap-lifecycle semantic overlap", spectron_pixelbuffer_bitmap_lifecycle_anchors["summary"]["already_in_semantic_map"], 1)
+    check("Spectron pixelbuffer bitmap-lifecycle default targets", spectron_pixelbuffer_bitmap_lifecycle_anchors["summary"]["target_default_name_count"], 0)
+    check("Spectron pixelbuffer bitmap-lifecycle superseded matches", spectron_pixelbuffer_bitmap_lifecycle_anchors["summary"]["superseded_medium_match_count"], 1)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -2405,7 +2419,8 @@ def main():
     check("Spectron checkpoint window residual anchor count", spectron_checkpoint["window_residual_anchors"]["verified_name_count"], 2)
     check("Spectron checkpoint sound-runtime anchor count", spectron_checkpoint["sound_runtime_anchors"]["verified_name_count"], 3)
     check("Spectron checkpoint pixelbuffer residual anchor count", spectron_checkpoint["pixelbuffer_residual_anchors"]["verified_name_count"], 10)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "62362bfe045dfa107edc90dc3ca501baec50eaf6477b949f9e74be888c6fd725")
+    check("Spectron checkpoint pixelbuffer bitmap-lifecycle anchor count", spectron_checkpoint["pixelbuffer_bitmap_lifecycle_anchors"]["verified_name_count"], 4)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "a0272f3a6d1a8acd0e700e6924b99a2faa93f87151f47581385cbe6bdadb932e")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -2579,6 +2594,7 @@ def main():
         spectron_window_residual_anchors,
         spectron_sound_runtime_anchors,
         spectron_pixelbuffer_residual_anchors,
+        spectron_pixelbuffer_bitmap_lifecycle_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

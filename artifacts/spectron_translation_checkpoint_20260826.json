@@ -125,8 +125,8 @@
     "default_sub_function_count": 1683,
     "format": "packed IDA 9.3 database",
     "function_count": 11679,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v114.i64",
-    "sha256": "62362bfe045dfa107edc90dc3ca501baec50eaf6477b949f9e74be888c6fd725"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v115.i64",
+    "sha256": "a0272f3a6d1a8acd0e700e6924b99a2faa93f87151f47581385cbe6bdadb932e"
   },
   "draw_texture_anchors": {
     "anchor_count": 4,
@@ -298,7 +298,7 @@
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
-    "reopen_verification": "/tmp/spectron_translation_verify_v114_serial.json",
+    "reopen_verification": "/tmp/spectron_translation_verify_v115_serial.json",
     "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
     "translation_map": "artifacts/spectron_semantic_function_translation_20260826.json",
     "translation_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92"
@@ -417,7 +417,8 @@
     "The one-hundred-ninth database revision also contains the separately reviewed GIF stream decoder and animation-step construction anchor.",
     "The one-hundred-tenth database revision also contains the separately reviewed TWindow close-query and pixel-buffer factory anchors.",
     "The one-hundred-eleventh database revision also contains the separately reviewed sound-manager dispatch, note-pitch, and Java playback anchors.",
-    "The one-hundred-twelfth database revision also contains the separately reviewed TPixelBuffer field, allocation, and base texture-hook anchors."
+    "The one-hundred-twelfth database revision also contains the separately reviewed TPixelBuffer field, allocation, and base texture-hook anchors.",
+    "The one-hundred-thirteenth database revision also contains the separately reviewed TPixelBuffer and TBitmap destructor pairs that correct the earlier medium-confidence class collision."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -555,6 +556,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_particle_emitter_verification_v58.json",
     "verified_name_count": 2
+  },
+  "pixelbuffer_bitmap_lifecycle_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "artifacts/spectron_pixelbuffer_bitmap_lifecycle_correction_anchors_20260826.json",
+    "anchor_sha256": "116bd08e8a068891720419092e516983fa5800c07a6de7886925a1679e17d24d",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_pixelbuffer_bitmap_lifecycle_verify_v115.json",
+    "verified_name_count": 4
   },
   "pixelbuffer_residual_anchors": {
     "anchor_count": 10,

@@ -1247,6 +1247,12 @@ This is the short handoff view. The full reasoning and command history are in
      explicitly separate from the derived OpenGL implementation. See
      `artifacts/spectron_pixelbuffer_residual_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
+175. The next IDA pass corrected one medium-confidence destructor collision and
+     translated four lifecycle rows for the separate `TPixelBuffer` and
+     `TBitmap` target classes. The labels reopened successfully in the v115
+     disposable copy. See
+     `artifacts/spectron_pixelbuffer_bitmap_lifecycle_correction_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
 ## Not verified
 

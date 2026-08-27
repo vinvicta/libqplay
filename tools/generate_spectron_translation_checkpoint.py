@@ -249,6 +249,8 @@ def main() -> None:
     parser.add_argument("--sound-runtime-verification", type=Path)
     parser.add_argument("--pixelbuffer-residual-anchors", type=Path)
     parser.add_argument("--pixelbuffer-residual-verification", type=Path)
+    parser.add_argument("--pixelbuffer-bitmap-lifecycle-anchors", type=Path)
+    parser.add_argument("--pixelbuffer-bitmap-lifecycle-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3396,6 +3398,34 @@ def main() -> None:
         result["pixelbuffer_residual_anchors"] = pixelbuffer_residual
         result["interpretation"].append(
             "The one-hundred-twelfth database revision also contains the separately reviewed TPixelBuffer field, allocation, and base texture-hook anchors."
+        )
+    pixelbuffer_bitmap_lifecycle = None
+    if args.pixelbuffer_bitmap_lifecycle_anchors or args.pixelbuffer_bitmap_lifecycle_verification:
+        if not args.pixelbuffer_bitmap_lifecycle_anchors or not args.pixelbuffer_bitmap_lifecycle_verification:
+            raise ValueError(
+                "pixelbuffer bitmap-lifecycle anchors and pixelbuffer bitmap-lifecycle verification must be supplied together"
+            )
+        pixelbuffer_bitmap_lifecycle_document = load(args.pixelbuffer_bitmap_lifecycle_anchors)
+        pixelbuffer_bitmap_lifecycle_verification = load(args.pixelbuffer_bitmap_lifecycle_verification)
+        if pixelbuffer_bitmap_lifecycle_document.get("artifact") != "spectron_pixelbuffer_bitmap_lifecycle_correction_anchors_20260826":
+            raise ValueError("unexpected pixelbuffer bitmap-lifecycle anchor artifact")
+        if not pixelbuffer_bitmap_lifecycle_verification.get("verified"):
+            raise ValueError("pixelbuffer bitmap-lifecycle anchor reopen verification did not pass")
+        expected_pixelbuffer_bitmap_lifecycle = len(pixelbuffer_bitmap_lifecycle_document["anchors"])
+        if pixelbuffer_bitmap_lifecycle_verification["verified_name_count"] != expected_pixelbuffer_bitmap_lifecycle:
+            raise ValueError("pixelbuffer bitmap-lifecycle verification count differs from artifact")
+        pixelbuffer_bitmap_lifecycle = {
+            "anchor_path": str(args.pixelbuffer_bitmap_lifecycle_anchors),
+            "anchor_sha256": sha256_path(args.pixelbuffer_bitmap_lifecycle_anchors),
+            "reopen_verification": str(args.pixelbuffer_bitmap_lifecycle_verification),
+            "anchor_count": expected_pixelbuffer_bitmap_lifecycle,
+            "verified_name_count": pixelbuffer_bitmap_lifecycle_verification["verified_name_count"],
+            "reopen_failure_count": pixelbuffer_bitmap_lifecycle_verification["failure_count"],
+        }
+    if pixelbuffer_bitmap_lifecycle is not None:
+        result["pixelbuffer_bitmap_lifecycle_anchors"] = pixelbuffer_bitmap_lifecycle
+        result["interpretation"].append(
+            "The one-hundred-thirteenth database revision also contains the separately reviewed TPixelBuffer and TBitmap destructor pairs that correct the earlier medium-confidence class collision."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
