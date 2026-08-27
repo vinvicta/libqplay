@@ -642,6 +642,15 @@ successfully. The evidence is in
 `artifacts/spectron_static_json_tiles_manual_translation_anchors_20260826.json`,
 and the v54 database SHA-256 is recorded in the checkpoint.
 
+A fifty-third disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v55.i64`,
+adds eight reviewed anchors across tile selection, definition updates,
+temporary-tile reconciliation, and screen rendering. All eight reopened
+successfully. The tile-block predicates were already covered by the earlier
+core-helper checkpoint and are not duplicated. The evidence is in
+`artifacts/spectron_tiles_update_manual_translation_anchors_20260826.json`,
+and the v55 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and

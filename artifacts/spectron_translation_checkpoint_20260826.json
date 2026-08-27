@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v54.i64",
-    "sha256": "01d1833774b599fec7dc4279614dd09e0cf51ccc82ec21beed38c2e532559fec"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v55.i64",
+    "sha256": "b9957326c9871659765825261e9990b9ac3db2d42d632aa180db0fc47fb85417"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -197,7 +197,8 @@
     "The forty-ninth database revision also contains the separately reviewed GS2 bytecode execution-loop anchor.",
     "The fiftieth database revision also contains the separately reviewed GS2 typed property access and registration anchors.",
     "The fifty-first database revision also contains the separately reviewed GS2 universe, class, and zipped-script anchors.",
-    "The fifty-second database revision also contains the separately reviewed static-variable, JSON-serialization, and tile-definition anchors."
+    "The fifty-second database revision also contains the separately reviewed static-variable, JSON-serialization, and tile-definition anchors.",
+    "The fifty-third database revision also contains the separately reviewed tile selection, definition-update, temporary-tile, and screen-rendering anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -449,6 +450,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_string_search_verify_v44.json",
     "verified_name_count": 2
+  },
+  "tiles_update_anchors": {
+    "anchor_count": 8,
+    "anchor_path": "artifacts/spectron_tiles_update_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "8bb4599b4d05095e99adfd54fe429a486e5216e2d1469858be6bff6f00f40547",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tiles_update_verification_v55.json",
+    "verified_name_count": 8
   },
   "tokenizer_anchors": {
     "anchor_count": 1,

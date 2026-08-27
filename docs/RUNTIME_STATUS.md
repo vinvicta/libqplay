@@ -819,6 +819,14 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_static_json_tiles_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+115. Clean IDA review added eight high-confidence anchors across tile
+     selection, definition updates, temporary-tile reconciliation, and screen
+     rendering. All eight reopened successfully in the v55 disposable copy.
+     The two tile-block predicates were already covered by the core-helper
+     artifact and were not duplicated. See
+     `artifacts/spectron_tiles_update_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

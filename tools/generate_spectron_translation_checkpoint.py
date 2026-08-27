@@ -129,6 +129,8 @@ def main() -> None:
     parser.add_argument("--script-universe-verification", type=Path)
     parser.add_argument("--static-json-tiles-anchors", type=Path)
     parser.add_argument("--static-json-tiles-verification", type=Path)
+    parser.add_argument("--tiles-update-anchors", type=Path)
+    parser.add_argument("--tiles-update-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1596,6 +1598,34 @@ def main() -> None:
         result["static_json_tiles_anchors"] = static_json_tiles
         result["interpretation"].append(
             "The fifty-second database revision also contains the separately reviewed static-variable, JSON-serialization, and tile-definition anchors."
+        )
+    tiles_update = None
+    if args.tiles_update_anchors or args.tiles_update_verification:
+        if not args.tiles_update_anchors or not args.tiles_update_verification:
+            raise ValueError(
+                "tiles-update anchors and tiles-update verification must be supplied together"
+            )
+        tiles_update_document = load(args.tiles_update_anchors)
+        tiles_update_verification = load(args.tiles_update_verification)
+        if tiles_update_document.get("artifact") != "spectron_tiles_update_manual_translation_anchors_20260826":
+            raise ValueError("unexpected tiles-update anchor artifact")
+        if not tiles_update_verification.get("verified"):
+            raise ValueError("tiles-update anchor reopen verification did not pass")
+        expected_tiles_update = len(tiles_update_document["anchors"])
+        if tiles_update_verification["verified_name_count"] != expected_tiles_update:
+            raise ValueError("tiles-update verification count differs from artifact")
+        tiles_update = {
+            "anchor_path": str(args.tiles_update_anchors),
+            "anchor_sha256": sha256_path(args.tiles_update_anchors),
+            "reopen_verification": str(args.tiles_update_verification),
+            "anchor_count": expected_tiles_update,
+            "verified_name_count": tiles_update_verification["verified_name_count"],
+            "reopen_failure_count": tiles_update_verification["failure_count"],
+        }
+    if tiles_update is not None:
+        result["tiles_update_anchors"] = tiles_update
+        result["interpretation"].append(
+            "The fifty-third database revision also contains the separately reviewed tile selection, definition-update, temporary-tile, and screen-rendering anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
