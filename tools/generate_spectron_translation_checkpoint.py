@@ -165,6 +165,8 @@ def main() -> None:
     parser.add_argument("--npc-accessor-verification", type=Path)
     parser.add_argument("--npc-destructor-anchors", type=Path)
     parser.add_argument("--npc-destructor-verification", type=Path)
+    parser.add_argument("--server-level-property-anchors", type=Path)
+    parser.add_argument("--server-level-property-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2136,6 +2138,34 @@ def main() -> None:
         result["npc_destructor_anchors"] = npc_destructor
         result["interpretation"].append(
             "The seventieth database revision also contains the separately reviewed server-NPC complete and deleting destructor anchors."
+        )
+    server_level_property = None
+    if args.server_level_property_anchors or args.server_level_property_verification:
+        if not args.server_level_property_anchors or not args.server_level_property_verification:
+            raise ValueError(
+                "server-level property anchors and server-level property verification must be supplied together"
+            )
+        server_level_property_document = load(args.server_level_property_anchors)
+        server_level_property_verification = load(args.server_level_property_verification)
+        if server_level_property_document.get("artifact") != "spectron_server_level_property_manual_translation_anchors_20260826":
+            raise ValueError("unexpected server-level property anchor artifact")
+        if not server_level_property_verification.get("verified"):
+            raise ValueError("server-level property anchor reopen verification did not pass")
+        expected_server_level_property = len(server_level_property_document["anchors"])
+        if server_level_property_verification["verified_name_count"] != expected_server_level_property:
+            raise ValueError("server-level property verification count differs from artifact")
+        server_level_property = {
+            "anchor_path": str(args.server_level_property_anchors),
+            "anchor_sha256": sha256_path(args.server_level_property_anchors),
+            "reopen_verification": str(args.server_level_property_verification),
+            "anchor_count": expected_server_level_property,
+            "verified_name_count": server_level_property_verification["verified_name_count"],
+            "reopen_failure_count": server_level_property_verification["failure_count"],
+        }
+    if server_level_property is not None:
+        result["server_level_property_anchors"] = server_level_property
+        result["interpretation"].append(
+            "The seventy-first database revision also contains the separately reviewed compact server-level property and level-link destination anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

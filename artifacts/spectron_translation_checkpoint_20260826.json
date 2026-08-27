@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v72.i64",
-    "sha256": "24ea9c5816854de6f8e157439e01f6a556009adf432d26bb8ddbcd429bac87d3"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v73.i64",
+    "sha256": "e38d67d4a9920b462b00c851186a19e93f2f4ed9f9abef957272476402ac52e7"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -215,7 +215,8 @@
     "The sixty-seventh database revision also contains the separately reviewed server-player state, property, level, nickname, and weapon-image anchors.",
     "The sixty-eighth database revision also contains the separately reviewed server-NPC construction, shape, naming, default-image, movement, and property anchors.",
     "The sixty-ninth database revision also contains the separately reviewed compact server-NPC accessor anchors.",
-    "The seventieth database revision also contains the separately reviewed server-NPC complete and deleting destructor anchors."
+    "The seventieth database revision also contains the separately reviewed server-NPC complete and deleting destructor anchors.",
+    "The seventy-first database revision also contains the separately reviewed compact server-level property and level-link destination anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -539,6 +540,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_server_animation_verification_v59.json",
     "verified_name_count": 3
+  },
+  "server_level_property_anchors": {
+    "anchor_count": 8,
+    "anchor_path": "artifacts/spectron_server_level_property_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "de2af5dff3a259ba28edbf9b5deb91dd44fe6101e959e00b0543ddbff118d5ed",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_server_level_property_verification_v73.json",
+    "verified_name_count": 8
   },
   "server_npc_state_anchors": {
     "anchor_count": 7,
