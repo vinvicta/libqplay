@@ -215,6 +215,8 @@ def main() -> None:
     parser.add_argument("--client-var-core-verification", type=Path)
     parser.add_argument("--tstringlist-comma-anchors", type=Path)
     parser.add_argument("--tstringlist-comma-verification", type=Path)
+    parser.add_argument("--tstringlist-extended-anchors", type=Path)
+    parser.add_argument("--tstringlist-extended-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2886,6 +2888,34 @@ def main() -> None:
         result["tstringlist_comma_anchors"] = tstringlist_comma
         result["interpretation"].append(
             "The ninety-fifth database revision also contains the separately reviewed TStringList comma parser, constructor, and serializer anchors."
+        )
+    tstringlist_extended = None
+    if args.tstringlist_extended_anchors or args.tstringlist_extended_verification:
+        if not args.tstringlist_extended_anchors or not args.tstringlist_extended_verification:
+            raise ValueError(
+                "extended TStringList anchors and extended TStringList verification must be supplied together"
+            )
+        tstringlist_extended_document = load(args.tstringlist_extended_anchors)
+        tstringlist_extended_verification = load(args.tstringlist_extended_verification)
+        if tstringlist_extended_document.get("artifact") != "spectron_tstringlist_extended_manual_translation_anchors_20260826":
+            raise ValueError("unexpected extended TStringList anchor artifact")
+        if not tstringlist_extended_verification.get("verified"):
+            raise ValueError("extended TStringList anchor reopen verification did not pass")
+        expected_tstringlist_extended = len(tstringlist_extended_document["anchors"])
+        if tstringlist_extended_verification["verified_name_count"] != expected_tstringlist_extended:
+            raise ValueError("extended TStringList verification count differs from artifact")
+        tstringlist_extended = {
+            "anchor_path": str(args.tstringlist_extended_anchors),
+            "anchor_sha256": sha256_path(args.tstringlist_extended_anchors),
+            "reopen_verification": str(args.tstringlist_extended_verification),
+            "anchor_count": expected_tstringlist_extended,
+            "verified_name_count": tstringlist_extended_verification["verified_name_count"],
+            "reopen_failure_count": tstringlist_extended_verification["failure_count"],
+        }
+    if tstringlist_extended is not None:
+        result["tstringlist_extended_anchors"] = tstringlist_extended
+        result["interpretation"].append(
+            "The ninety-sixth database revision also contains the separately reviewed TStringList assignment, key/value, serialization, file-output, and tokenizer anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

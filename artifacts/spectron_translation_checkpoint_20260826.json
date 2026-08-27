@@ -109,8 +109,8 @@
     "default_sub_function_count": 1688,
     "format": "packed IDA 9.3 database",
     "function_count": 11679,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v97.i64",
-    "sha256": "e7287802d3f8f7d967fd12259a45ff3c5635d78005648c0d86d698917c767c0a"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v98.i64",
+    "sha256": "1819af30ea8729c14088b398f0994c6b35af92054b433a13c14a238ad5b4b76c"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -226,7 +226,7 @@
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
-    "reopen_verification": "/tmp/spectron_translation_verify_v97_serial.json",
+    "reopen_verification": "/tmp/spectron_translation_verify_v98_serial.json",
     "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
     "translation_map": "artifacts/spectron_semantic_function_translation_20260826.json",
     "translation_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92"
@@ -328,7 +328,8 @@
     "The ninety-second database revision also contains the separately reviewed double and short numeric-array string-conversion anchors.",
     "The ninety-third database revision also contains the separately reviewed client-environment build-time and expiry helpers.",
     "The ninety-fourth database revision also contains the separately reviewed TGraalClientVar send and string-update anchors.",
-    "The ninety-fifth database revision also contains the separately reviewed TStringList comma parser, constructor, and serializer anchors."
+    "The ninety-fifth database revision also contains the separately reviewed TStringList comma parser, constructor, and serializer anchors.",
+    "The ninety-sixth database revision also contains the separately reviewed TStringList assignment, key/value, serialization, file-output, and tokenizer anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -853,6 +854,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_tstringlist_comma_verify_v97.json",
     "verified_name_count": 4
+  },
+  "tstringlist_extended_anchors": {
+    "anchor_count": 7,
+    "anchor_path": "artifacts/spectron_tstringlist_extended_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "45a7edeccf4e4548c2ad6ca7ceddb9de68edd912119a4e795ce2d1ad2b971b8b",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tstringlist_extended_verify_v98.json",
+    "verified_name_count": 7
   },
   "update_protocol_anchors": {
     "anchor_count": 5,

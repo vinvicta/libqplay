@@ -1119,6 +1119,15 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_tstringlist_comma_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+158. The next IDA pass translated seven extended `TStringList` methods covering
+     assignment, range append, key/value access, newline serialization, file
+     output, and tokenization. The labels reopened successfully in the v98
+     disposable copy. The target keeps the same list and tokenizer decisions
+     while exposing rebuilt string-wrapper calls and fewer standalone literal
+     references. See
+     `artifacts/spectron_tstringlist_extended_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
