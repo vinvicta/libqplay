@@ -121,6 +121,8 @@ def main() -> None:
     parser.add_argument("--execution-dispatch-verification", type=Path)
     parser.add_argument("--tokenizer-anchors", type=Path)
     parser.add_argument("--tokenizer-verification", type=Path)
+    parser.add_argument("--script-executor-anchors", type=Path)
+    parser.add_argument("--script-executor-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1476,6 +1478,34 @@ def main() -> None:
         result["tokenizer_anchors"] = tokenizer
         result["interpretation"].append(
             "The forty-eighth database revision also contains the separately reviewed GS2 tokenized string array anchor."
+        )
+    script_executor = None
+    if args.script_executor_anchors or args.script_executor_verification:
+        if not args.script_executor_anchors or not args.script_executor_verification:
+            raise ValueError(
+                "script-executor anchors and script-executor verification must be supplied together"
+            )
+        script_executor_document = load(args.script_executor_anchors)
+        script_executor_verification = load(args.script_executor_verification)
+        if script_executor_document.get("artifact") != "spectron_script_executor_manual_translation_anchors_20260826":
+            raise ValueError("unexpected script-executor anchor artifact")
+        if not script_executor_verification.get("verified"):
+            raise ValueError("script-executor anchor reopen verification did not pass")
+        expected_script_executor = len(script_executor_document["anchors"])
+        if script_executor_verification["verified_name_count"] != expected_script_executor:
+            raise ValueError("script-executor verification count differs from artifact")
+        script_executor = {
+            "anchor_path": str(args.script_executor_anchors),
+            "anchor_sha256": sha256_path(args.script_executor_anchors),
+            "reopen_verification": str(args.script_executor_verification),
+            "anchor_count": expected_script_executor,
+            "verified_name_count": script_executor_verification["verified_name_count"],
+            "reopen_failure_count": script_executor_verification["failure_count"],
+        }
+    if script_executor is not None:
+        result["script_executor_anchors"] = script_executor
+        result["interpretation"].append(
+            "The forty-ninth database revision also contains the separately reviewed GS2 bytecode execution-loop anchor."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
