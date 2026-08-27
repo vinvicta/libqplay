@@ -151,6 +151,8 @@ def main() -> None:
     parser.add_argument("--tlist-verification", type=Path)
     parser.add_argument("--sounds-anchors", type=Path)
     parser.add_argument("--sounds-verification", type=Path)
+    parser.add_argument("--hash-container-anchors", type=Path)
+    parser.add_argument("--hash-container-verification", type=Path)
     parser.add_argument("--particle-emitter-anchors", type=Path)
     parser.add_argument("--particle-emitter-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
@@ -2136,6 +2138,34 @@ def main() -> None:
         result["sounds_anchors"] = sounds
         result["interpretation"].append(
             "The one-hundred-seventy-second database revision also contains the separately reviewed exact-shape TSounds helper anchors."
+        )
+    hash_container = None
+    if args.hash_container_anchors or args.hash_container_verification:
+        if not args.hash_container_anchors or not args.hash_container_verification:
+            raise ValueError(
+                "hash-container anchors and hash-container verification must be supplied together"
+            )
+        hash_container_document = load(args.hash_container_anchors)
+        hash_container_verification = load(args.hash_container_verification)
+        if hash_container_document.get("artifact") != "spectron_hash_container_manual_translation_anchors_20260827":
+            raise ValueError("unexpected hash-container anchor artifact")
+        if not hash_container_verification.get("verified"):
+            raise ValueError("hash-container anchor reopen verification did not pass")
+        expected_hash_container = len(hash_container_document["anchors"])
+        if hash_container_verification["verified_name_count"] != expected_hash_container:
+            raise ValueError("hash-container verification count differs from artifact")
+        hash_container = {
+            "anchor_path": str(args.hash_container_anchors),
+            "anchor_sha256": sha256_path(args.hash_container_anchors),
+            "reopen_verification": str(args.hash_container_verification),
+            "anchor_count": expected_hash_container,
+            "verified_name_count": hash_container_verification["verified_name_count"],
+            "reopen_failure_count": hash_container_verification["failure_count"],
+        }
+    if hash_container is not None:
+        result["hash_container_anchors"] = hash_container
+        result["interpretation"].append(
+            "The one-hundred-seventy-third database revision also contains the separately reviewed exact-shape THashList and THashStrings anchors."
         )
     particle_emitter = None
     if args.particle_emitter_anchors or args.particle_emitter_verification:

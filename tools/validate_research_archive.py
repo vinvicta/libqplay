@@ -248,6 +248,9 @@ def main():
     spectron_sounds_anchors = load_json(
         "artifacts/spectron_sounds_manual_translation_anchors_20260827.json"
     )
+    spectron_hash_container_anchors = load_json(
+        "artifacts/spectron_hash_container_manual_translation_anchors_20260827.json"
+    )
     spectron_particle_emitter_anchors = load_json(
         "artifacts/spectron_particle_emitter_manual_translation_anchors_20260826.json"
     )
@@ -1976,6 +1979,17 @@ def main():
     check("Spectron sounds layout-change count", spectron_sounds_anchors["summary"]["layout_change_anchor_count"], 0)
     check("Spectron sounds default targets", spectron_sounds_anchors["summary"]["target_default_name_count"], 5)
     check(
+        "Spectron hash-container artifact",
+        spectron_hash_container_anchors["artifact"],
+        "spectron_hash_container_manual_translation_anchors_20260827",
+    )
+    check("Spectron hash-container network", spectron_hash_container_anchors["network_contacted"], False)
+    check("Spectron hash-container total", spectron_hash_container_anchors["summary"]["anchor_count"], 5)
+    check("Spectron hash-container high confidence", spectron_hash_container_anchors["summary"]["high_confidence_count"], 5)
+    check("Spectron hash-container exact-shape count", spectron_hash_container_anchors["summary"]["exact_shape_anchor_count"], 5)
+    check("Spectron hash-container layout-change count", spectron_hash_container_anchors["summary"]["layout_change_anchor_count"], 0)
+    check("Spectron hash-container default targets", spectron_hash_container_anchors["summary"]["target_default_name_count"], 0)
+    check(
         "Spectron particle-emitter artifact",
         spectron_particle_emitter_anchors["artifact"],
         "spectron_particle_emitter_manual_translation_anchors_20260826",
@@ -3303,7 +3317,8 @@ def main():
     check("Spectron checkpoint encryption anchor count", spectron_checkpoint["encryption_anchors"]["verified_name_count"], 9)
     check("Spectron checkpoint TList anchor count", spectron_checkpoint["tlist_anchors"]["verified_name_count"], 6)
     check("Spectron checkpoint sounds anchor count", spectron_checkpoint["sounds_anchors"]["verified_name_count"], 8)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "fb51afe8228075594ac0c80e0582ea2733cb38a73b8526542ebfcf1500dc23cd")
+    check("Spectron checkpoint hash-container anchor count", spectron_checkpoint["hash_container_anchors"]["verified_name_count"], 5)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "9640159d6f6080f9b0ec9c86c9fe244a68be1a43e768138f25e2b2ce49b958e5")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -3427,6 +3442,7 @@ def main():
         spectron_encryption_anchors,
         spectron_tlist_anchors,
         spectron_sounds_anchors,
+        spectron_hash_container_anchors,
         spectron_particle_emitter_anchors,
         spectron_server_animation_anchors,
         spectron_player_lifecycle_anchors,

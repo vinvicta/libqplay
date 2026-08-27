@@ -1428,6 +1428,16 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+231. The next IDA pass translated five exact-shape hash-container methods:
+     two `THashList` lifecycle and iterator helpers plus three `THashStrings`
+     count, lifecycle, and membership helpers. All five labels reopened
+     successfully in the v173 disposable copy, which has 11,694 functions,
+     3,641 high-confidence labels, and 1,250 default `sub_` names. The local
+     address deltas are `+0xbec`, `+0xc4c`, and `+0xc74`. See
+     `artifacts/spectron_hash_container_manual_translation_anchors_20260827.json`,
+     `tools/generate_spectron_hash_container_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 230. The next IDA pass translated eight exact-shape `TSounds` methods:
      offscreen-distance state, disabled-effects comma text, stop-sounds,
      resource cleanup, MIDI shutdown, and absolute playback. All eight labels
