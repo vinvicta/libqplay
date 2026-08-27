@@ -125,8 +125,8 @@
     "default_sub_function_count": 1684,
     "format": "packed IDA 9.3 database",
     "function_count": 11679,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v110.i64",
-    "sha256": "1a10cd6b7c5a586ecdd8c6f475c753dbbdc9ac5d21b74e3590758212fe8a2129"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v111.i64",
+    "sha256": "aa225a0d07cbd7f7ab3e015762c3d9ab14e4c6c46b6154b0bf11ef6852d3d64c"
   },
   "draw_texture_anchors": {
     "anchor_count": 4,
@@ -232,6 +232,14 @@
     "reopen_verification": "/tmp/spectron_gani_runtime_verify_v82_serial.json",
     "verified_name_count": 4
   },
+  "gif_decoder_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_gif_decoder_manual_translation_anchor_20260826.json",
+    "anchor_sha256": "d0f1b1b6a94889fdf4a8ece62b493fcb926fe615e7503af014b79b33e8cf3712",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gif_decoder_verify_v111.json",
+    "verified_name_count": 1
+  },
   "hash_family_anchors": {
     "anchor_count": 9,
     "anchor_path": "artifacts/spectron_hash_family_manual_translation_anchors_20260826.json",
@@ -290,7 +298,7 @@
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
-    "reopen_verification": "/tmp/spectron_translation_verify_v110_serial.json",
+    "reopen_verification": "/tmp/spectron_translation_verify_v111_serial.json",
     "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
     "translation_map": "artifacts/spectron_semantic_function_translation_20260826.json",
     "translation_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92"
@@ -405,7 +413,8 @@
     "The one-hundred-fifth database revision also contains the separately reviewed TWindow mouse and key event dispatch anchors.",
     "The one-hundred-sixth database revision also contains the separately reviewed TDrawingPanel residual constructor, image, filter, and palette anchors.",
     "The one-hundred-seventh database revision also contains the separately reviewed HTML color registry and image-animation lifecycle anchors.",
-    "The one-hundred-eighth database revision also contains the separately reviewed panel-interface construction and bitmap-loader dispatch, lookup, and redownload anchors."
+    "The one-hundred-eighth database revision also contains the separately reviewed panel-interface construction and bitmap-loader dispatch, lookup, and redownload anchors.",
+    "The one-hundred-ninth database revision also contains the separately reviewed GIF stream decoder and animation-step construction anchor."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,

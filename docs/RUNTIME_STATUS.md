@@ -1218,6 +1218,13 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_panel_bitmap_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+171. The next IDA pass translated the changed `TBitmap` GIF decoder, including
+     animation-step construction, transparency and delay handling, and the
+     target's explicit error diagnostics. The label reopened successfully in
+     the v111 disposable copy. See
+     `artifacts/spectron_gif_decoder_manual_translation_anchor_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

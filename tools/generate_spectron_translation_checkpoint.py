@@ -241,6 +241,8 @@ def main() -> None:
     parser.add_argument("--image-html-verification", type=Path)
     parser.add_argument("--panel-bitmap-anchors", type=Path)
     parser.add_argument("--panel-bitmap-verification", type=Path)
+    parser.add_argument("--gif-decoder-anchors", type=Path)
+    parser.add_argument("--gif-decoder-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3276,6 +3278,34 @@ def main() -> None:
         result["panel_bitmap_anchors"] = panel_bitmap
         result["interpretation"].append(
             "The one-hundred-eighth database revision also contains the separately reviewed panel-interface construction and bitmap-loader dispatch, lookup, and redownload anchors."
+        )
+    gif_decoder = None
+    if args.gif_decoder_anchors or args.gif_decoder_verification:
+        if not args.gif_decoder_anchors or not args.gif_decoder_verification:
+            raise ValueError(
+                "GIF decoder anchors and GIF decoder verification must be supplied together"
+            )
+        gif_decoder_document = load(args.gif_decoder_anchors)
+        gif_decoder_verification = load(args.gif_decoder_verification)
+        if gif_decoder_document.get("artifact") != "spectron_gif_decoder_manual_translation_anchor_20260826":
+            raise ValueError("unexpected GIF decoder anchor artifact")
+        if not gif_decoder_verification.get("verified"):
+            raise ValueError("GIF decoder anchor reopen verification did not pass")
+        expected_gif_decoder = len(gif_decoder_document["anchors"])
+        if gif_decoder_verification["verified_name_count"] != expected_gif_decoder:
+            raise ValueError("GIF decoder verification count differs from artifact")
+        gif_decoder = {
+            "anchor_path": str(args.gif_decoder_anchors),
+            "anchor_sha256": sha256_path(args.gif_decoder_anchors),
+            "reopen_verification": str(args.gif_decoder_verification),
+            "anchor_count": expected_gif_decoder,
+            "verified_name_count": gif_decoder_verification["verified_name_count"],
+            "reopen_failure_count": gif_decoder_verification["failure_count"],
+        }
+    if gif_decoder is not None:
+        result["gif_decoder_anchors"] = gif_decoder
+        result["interpretation"].append(
+            "The one-hundred-ninth database revision also contains the separately reviewed GIF stream decoder and animation-step construction anchor."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
