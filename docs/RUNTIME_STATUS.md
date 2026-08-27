@@ -1428,6 +1428,14 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+203. The next IDA pass translated one exact-shape `TUpdatePackage` deleting
+    destructor. Its source label is constructor-like, but the body calls the
+    constructor entry followed by `operator delete`. The label reopened
+    successfully in the v143 disposable copy, which retains 1,475 default
+    `sub_` functions. See
+    `artifacts/spectron_update_package_destructor_residual_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 202. The next IDA pass translated 20 exact-shape `TClient` and
     `TUpdatePackage` accessors, covering the base-package pointer, download
     counters, package flags and numeric fields, and six string getters. All

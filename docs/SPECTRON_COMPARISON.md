@@ -3444,6 +3444,26 @@ functions. The v108 database has 1,684 remaining default `sub_` names. Its
 SHA-256 is
 `8350a43be6b31306954e34a17f77d742c8d1702015d671019d2bf2dd6c1bb1e1`.
 
+## Spectron TUpdatePackage deleting-destructor residual anchor
+
+The v143 pass closed the one remaining lifecycle row after the accessor
+block. The source label looks constructor-like, but its body forwards to the
+constructor entry and then deletes the object, making it a deleting
+destructor.
+
+| 1.8 role | Source | Spectron target | Target | Evidence |
+| --- | ---: | --- | ---: | --- |
+| deleting destructor | `0x208eb4` | `_ZN10RH6ygazf9xD0Ev` | `0x20f04c` | cleanup plus `operator delete` |
+
+The pair has identical normalized metrics and hashes: 32 bytes, 8
+instructions, 2 basic blocks, 2 branches, and 1 call. The complete
+constructor or destructor at `0x20ef60` was already translated, so this row
+is recorded separately. The target name was already non-default, and the
+label reopened successfully in the v143 copy.
+
+Evidence is stored in
+`artifacts/spectron_update_package_destructor_residual_manual_translation_anchors_20260826.json`.
+
 ## Spectron TClient and TUpdatePackage accessor residual anchors
 
 The v142 pass translated the ordered accessor block from the client base
