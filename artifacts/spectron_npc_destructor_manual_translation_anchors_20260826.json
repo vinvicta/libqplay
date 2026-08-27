@@ -1,0 +1,103 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both are the complete server-NPC destructor body, not constructors. The source IDA alternative name is _ZN10TServerNPCD1Ev and the target D2 body exposes the matching D1 alternative.",
+        "Both clear the script-variable list and helper pointers, remove the NPC from global, universe, local-player, level, and map lists, free the image buffer, clear string and resource fields, and call the server-player destructor last.",
+        "The source and target preserve the exact 31-block body and the same cleanup ordering. Target wrapper and class names are rebuilt, while the logical fields shift with the larger 2.2 object."
+      ],
+      "match_kind": "manual-npc-destructor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1811ac",
+      "original_metrics": {
+        "basic_block_count": 31,
+        "instruction_count": 163,
+        "mnemonic_hash": "e47ecf1093e33cfb33a04103176a1080bd53c1dd0e48a00179dc5ed7694cee26",
+        "register_shape_hash": "4df97af37f1c2d95caad84368e07ab63f25ef7daa97d057d284e165f854f4744",
+        "shape_hash": "f856a3bc5050d1512a9b4313cbfaab08acfc505487483287fcc0b8bb509d05e5",
+        "size": 652
+      },
+      "original_name": "TServerNPC_TServerNPC",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_TServerNPC",
+      "semantic_match_already_present": false,
+      "source_basis": "server-NPC complete destructor",
+      "spectron_current_name": "_ZN10LBgVgaqANQD2Ev",
+      "spectron_default_name": false,
+      "spectron_ea": "0x185730",
+      "spectron_metrics": {
+        "basic_block_count": 31,
+        "instruction_count": 167,
+        "mnemonic_hash": "a2fc5e6074609690cad018fb4dc98af6105f00f78eced099813c143f098a47c5",
+        "register_shape_hash": "f6d9bf8d5f5df47612857954b802ae23fd5d43379df3f933eb80042627fe6da9",
+        "shape_hash": "f37af6c21a9aa590a4818d83348fb3879235a127292e0c46d75fb63fc5878ce7",
+        "size": 668
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both are the deleting-destructor wrapper: call the complete server-NPC destructor and then pass the object to operator delete.",
+        "The source wrapper has the readable TServerNPC_TServerNPC__2 name, while the target retains the ARM64 ABI D0 destructor name.",
+        "The source and target preserve the exact two-block, 32-byte wrapper and appear directly after the complete destructor in their class-local regions."
+      ],
+      "match_kind": "manual-npc-destructor-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x181438",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "instruction_count": 8,
+        "mnemonic_hash": "6997dd3b5418a87bf6f5a5c521855fc9a17314be795e8b9166aafc3f4274ad31",
+        "register_shape_hash": "1023882ef3985c66fc5b82641781f3c5acdb4eababb05670a2c9499e80aafd90",
+        "shape_hash": "ddb4f004bba90eaf41261c7a2d80153268b64d0dc9e3005db4115ce1909821c2",
+        "size": 32
+      },
+      "original_name": "TServerNPC_TServerNPC__2",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerNPC_TServerNPC__2",
+      "semantic_match_already_present": false,
+      "source_basis": "server-NPC deleting destructor wrapper",
+      "spectron_current_name": "_ZN10LBgVgaqANQD0Ev",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1859cc",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "instruction_count": 8,
+        "mnemonic_hash": "6997dd3b5418a87bf6f5a5c521855fc9a17314be795e8b9166aafc3f4274ad31",
+        "register_shape_hash": "1023882ef3985c66fc5b82641781f3c5acdb4eababb05670a2c9499e80aafd90",
+        "shape_hash": "ddb4f004bba90eaf41261c7a2d80153268b64d0dc9e3005db4115ce1909821c2",
+        "size": 32
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_npc_destructor_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v1_saved.json",
+    "spectron_features_sha256": "a8d58f85502362316ee99a0f79c2cd7a4ad5d6fac94aca0ee75bd0d2965fc2a1"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The correspondence relies on the C++ destructor ABI roles, matching cleanup order, class-local adjacency, compatible block counts, and reviewed pseudocode rather than byte identity."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for the server-NPC complete and deleting destructors",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 2,
+    "high_confidence_count": 2,
+    "new_context_anchor_count": 2,
+    "target_default_name_count": 0
+  }
+}

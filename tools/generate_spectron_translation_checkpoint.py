@@ -163,6 +163,8 @@ def main() -> None:
     parser.add_argument("--server-npc-state-verification", type=Path)
     parser.add_argument("--npc-accessor-anchors", type=Path)
     parser.add_argument("--npc-accessor-verification", type=Path)
+    parser.add_argument("--npc-destructor-anchors", type=Path)
+    parser.add_argument("--npc-destructor-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2106,6 +2108,34 @@ def main() -> None:
         result["npc_accessor_anchors"] = npc_accessor
         result["interpretation"].append(
             "The sixty-ninth database revision also contains the separately reviewed compact server-NPC accessor anchors."
+        )
+    npc_destructor = None
+    if args.npc_destructor_anchors or args.npc_destructor_verification:
+        if not args.npc_destructor_anchors or not args.npc_destructor_verification:
+            raise ValueError(
+                "NPC destructor anchors and NPC destructor verification must be supplied together"
+            )
+        npc_destructor_document = load(args.npc_destructor_anchors)
+        npc_destructor_verification = load(args.npc_destructor_verification)
+        if npc_destructor_document.get("artifact") != "spectron_npc_destructor_manual_translation_anchors_20260826":
+            raise ValueError("unexpected NPC destructor anchor artifact")
+        if not npc_destructor_verification.get("verified"):
+            raise ValueError("NPC destructor anchor reopen verification did not pass")
+        expected_npc_destructor = len(npc_destructor_document["anchors"])
+        if npc_destructor_verification["verified_name_count"] != expected_npc_destructor:
+            raise ValueError("NPC destructor verification count differs from artifact")
+        npc_destructor = {
+            "anchor_path": str(args.npc_destructor_anchors),
+            "anchor_sha256": sha256_path(args.npc_destructor_anchors),
+            "reopen_verification": str(args.npc_destructor_verification),
+            "anchor_count": expected_npc_destructor,
+            "verified_name_count": npc_destructor_verification["verified_name_count"],
+            "reopen_failure_count": npc_destructor_verification["failure_count"],
+        }
+    if npc_destructor is not None:
+        result["npc_destructor_anchors"] = npc_destructor
+        result["interpretation"].append(
+            "The seventieth database revision also contains the separately reviewed server-NPC complete and deleting destructor anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v71.i64",
-    "sha256": "307ad12c6bcf4f1aec20e8145daf3b41037a63f5834d84950e7cf399c1859da0"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v72.i64",
+    "sha256": "24ea9c5816854de6f8e157439e01f6a556009adf432d26bb8ddbcd429bac87d3"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -214,7 +214,8 @@
     "The sixty-sixth database revision also contains the separately reviewed player movement, item, and hurt-handling anchors.",
     "The sixty-seventh database revision also contains the separately reviewed server-player state, property, level, nickname, and weapon-image anchors.",
     "The sixty-eighth database revision also contains the separately reviewed server-NPC construction, shape, naming, default-image, movement, and property anchors.",
-    "The sixty-ninth database revision also contains the separately reviewed compact server-NPC accessor anchors."
+    "The sixty-ninth database revision also contains the separately reviewed compact server-NPC accessor anchors.",
+    "The seventieth database revision also contains the separately reviewed server-NPC complete and deleting destructor anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -272,6 +273,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_npc_accessor_verification_v71.json",
     "verified_name_count": 17
+  },
+  "npc_destructor_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "artifacts/spectron_npc_destructor_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "261f42a1cdc4d2203850cf1c07de5f910c2f48369cbbc350838fe0753e462291",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_npc_destructor_verification_v72.json",
+    "verified_name_count": 2
   },
   "npc_helper_anchors": {
     "anchor_count": 15,
