@@ -1040,6 +1040,14 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_resource_parser_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+148. Clean IDA review added five high-confidence static utility anchors. The
+     set covers engine statistics, profiler output, GUI button styles, ZIP
+     resource scanning, and translation plural rules. All five reopened
+     successfully in the v88 disposable copy. The full semantic-label reopen
+     check still passed with zero failures. See
+     `artifacts/spectron_static_utility_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

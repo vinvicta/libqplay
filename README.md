@@ -919,6 +919,17 @@ literals. All three labels reopened successfully, and the v87 database
 SHA-256 is recorded in the checkpoint. The evidence is in
 `artifacts/spectron_resource_parser_manual_translation_anchors_20260826.json`.
 
+A v88 disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v88.i64`,
+adds five high-confidence static utility anchors. They cover engine
+statistics, profiler output, GUI button-style extraction, ZIP resource
+scanning, and translation plural-rule handling. The target preserves the
+distinctive report, style, resource, and plural-form literals, with one
+explicit target-only `GRAALRELOADED-version` report line recorded as a
+version difference. All five labels reopened successfully, and the v88
+database SHA-256 is recorded in the checkpoint. The evidence is in
+`artifacts/spectron_static_utility_manual_translation_anchors_20260826.json`.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
@@ -1098,6 +1109,9 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/spectron_resource_parser_manual_translation_anchors_20260826.json`
   records the three reviewed Gani lexer, cached-resource path, and
   update-package parser anchors.
+* `artifacts/spectron_static_utility_manual_translation_anchors_20260826.json`
+  records the five reviewed statistics, profiler, GUI-style, ZIP-resource,
+  and translation utility anchors.
 * `artifacts/spectron_json_folder_manual_translation_anchors_20260826.json`
   records the eight reviewed GIF/JPEG callbacks, recursive folder-loader
   helper, and YAJL JSON callbacks.
@@ -1393,6 +1407,9 @@ proves the local native TLS path, not a current live certificate or service.
   exact metric and literal checks.
   The `tools/generate_spectron_resource_parser_anchors.py` generator records
   the reviewed Gani lexer, cached-resource path, and update-package parser
+  roles with exact metric and literal checks.
+  The `tools/generate_spectron_static_utility_anchors.py` generator records
+  the reviewed statistics, profiler, GUI-style, ZIP-resource, and translation
   roles with exact metric and literal checks.
   The `tools/generate_spectron_socket_behavior_comparison.py` generator
   records changed-size socket behavior without forcing an exact-match label.

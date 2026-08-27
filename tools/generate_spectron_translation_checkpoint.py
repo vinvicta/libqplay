@@ -195,6 +195,8 @@ def main() -> None:
     parser.add_argument("--tplayer-core-verification", type=Path)
     parser.add_argument("--resource-parser-anchors", type=Path)
     parser.add_argument("--resource-parser-verification", type=Path)
+    parser.add_argument("--static-utility-anchors", type=Path)
+    parser.add_argument("--static-utility-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2586,6 +2588,34 @@ def main() -> None:
         result["resource_parser_anchors"] = resource_parser
         result["interpretation"].append(
             "The eighty-fifth database revision also contains the separately reviewed Gani lexer, cached-resource path, and update-package parser anchors."
+        )
+    static_utility = None
+    if args.static_utility_anchors or args.static_utility_verification:
+        if not args.static_utility_anchors or not args.static_utility_verification:
+            raise ValueError(
+                "static-utility anchors and static-utility verification must be supplied together"
+            )
+        static_utility_document = load(args.static_utility_anchors)
+        static_utility_verification = load(args.static_utility_verification)
+        if static_utility_document.get("artifact") != "spectron_static_utility_manual_translation_anchors_20260826":
+            raise ValueError("unexpected static-utility anchor artifact")
+        if not static_utility_verification.get("verified"):
+            raise ValueError("static-utility anchor reopen verification did not pass")
+        expected_static_utility = len(static_utility_document["anchors"])
+        if static_utility_verification["verified_name_count"] != expected_static_utility:
+            raise ValueError("static-utility verification count differs from artifact")
+        static_utility = {
+            "anchor_path": str(args.static_utility_anchors),
+            "anchor_sha256": sha256_path(args.static_utility_anchors),
+            "reopen_verification": str(args.static_utility_verification),
+            "anchor_count": expected_static_utility,
+            "verified_name_count": static_utility_verification["verified_name_count"],
+            "reopen_failure_count": static_utility_verification["failure_count"],
+        }
+    if static_utility is not None:
+        result["static_utility_anchors"] = static_utility
+        result["interpretation"].append(
+            "The eighty-sixth database revision also contains the separately reviewed statistics, profiler, GUI-style, ZIP-resource, and translation utility anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
