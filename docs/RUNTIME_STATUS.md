@@ -1482,6 +1482,18 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_particle_emitter_script_vars_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+246. The next IDA pass translated `TResource_initializeLinkLists`. Source
+    `0xe070c` maps to target `0xe0564`, whose static-initializer table
+    slot, `KKhLga4xoI` constructor calls, and assignments to the already
+    identified `OOmzgapOmy` and `H4zIGaBY6x` resource-link lists resolve
+    the same 76-byte exact normalized initializer shape that had previously
+    collided with the particle-emitter candidate. The v187 copy has 11,694
+    functions, 3,641 high-confidence labels, and 1,232 default `sub_` names,
+    with zero semantic reopen failures. See
+    `artifacts/spectron_resource_link_lists_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_resource_link_lists_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 243. The next IDA pass translated two `TClientEnvironment` profiler cleanup
     callbacks. Source `0x15c620` maps to target `0x15f678`, where the target
     `runTimers` method registers the callback with `atexit`; source `0x15c62c`

@@ -2550,6 +2550,9 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/spectron_particle_emitter_script_vars_manual_translation_anchors_20260827.json`
   records the exact-shape particle-emitter script-property initializer and
   its independently translated target property-class evidence.
+* `artifacts/spectron_resource_link_lists_manual_translation_anchors_20260827.json`
+  records the exact-shape resource file-link and object-link list initializer,
+  including the resolved collision with the particle-emitter candidate.
 * `artifacts/spectron_npc_helper_manual_translation_anchors_20260826.json`
   records the 15 reviewed `TServerNPC` blocking, draw-mode, visibility, bow,
   and pelt helpers.
@@ -2943,6 +2946,9 @@ proves the local native TLS path, not a current live certificate or service.
   The `tools/generate_spectron_particle_emitter_script_vars_anchors.py`
   generator records the exact-shape particle-emitter script-property
   initializer with target constructor, static-table, and neighbor evidence.
+  The `tools/generate_spectron_resource_link_lists_anchors.py` generator
+  records the exact-shape resource link-list initializer with target
+  class, static-field, startup-table, and collision-resolution evidence.
   The `tools/generate_spectron_npc_helper_anchors.py` generator records
   reviewed `TServerNPC` helper roles with exact hash checks and IDA-context
   evidence.

@@ -181,6 +181,8 @@ def main() -> None:
     parser.add_argument("--particle-emitter-verification", type=Path)
     parser.add_argument("--particle-emitter-script-vars-anchors", type=Path)
     parser.add_argument("--particle-emitter-script-vars-verification", type=Path)
+    parser.add_argument("--resource-link-lists-anchors", type=Path)
+    parser.add_argument("--resource-link-lists-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
     parser.add_argument("--server-animation-verification", type=Path)
     parser.add_argument("--player-lifecycle-anchors", type=Path)
@@ -2364,6 +2366,48 @@ def main() -> None:
         result["particle_emitter_script_vars_anchors"] = particle_emitter_script_vars
         result["interpretation"].append(
             "The one-hundred-eighty-sixth database revision also contains the separately reviewed particle-emitter script-property initializer anchor."
+        )
+    resource_link_lists = None
+    if args.resource_link_lists_anchors or args.resource_link_lists_verification:
+        if not args.resource_link_lists_anchors or not args.resource_link_lists_verification:
+            raise ValueError(
+                "resource link-list anchors and verification must be supplied together"
+            )
+        resource_link_lists_document = load(args.resource_link_lists_anchors)
+        resource_link_lists_verification = load(args.resource_link_lists_verification)
+        if (
+            resource_link_lists_document.get("artifact")
+            != "spectron_resource_link_lists_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected resource link-list anchor artifact")
+        if not resource_link_lists_verification.get("verified"):
+            raise ValueError(
+                "resource link-list anchor reopen verification did not pass"
+            )
+        expected_resource_link_lists = len(resource_link_lists_document["anchors"])
+        if (
+            resource_link_lists_verification["verified_name_count"]
+            != expected_resource_link_lists
+        ):
+            raise ValueError(
+                "resource link-list verification count differs from artifact"
+            )
+        resource_link_lists = {
+            "anchor_path": str(args.resource_link_lists_anchors),
+            "anchor_sha256": sha256_path(args.resource_link_lists_anchors),
+            "reopen_verification": str(args.resource_link_lists_verification),
+            "anchor_count": expected_resource_link_lists,
+            "verified_name_count": resource_link_lists_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": resource_link_lists_verification[
+                "failure_count"
+            ],
+        }
+    if resource_link_lists is not None:
+        result["resource_link_lists_anchors"] = resource_link_lists
+        result["interpretation"].append(
+            "The one-hundred-eighty-seventh database revision also contains the separately reviewed resource file-link and object-link list initializer anchor."
         )
     server_animation = None
     if args.server_animation_anchors or args.server_animation_verification:

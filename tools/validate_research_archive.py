@@ -296,6 +296,9 @@ def main():
     spectron_particle_emitter_script_vars_anchors = load_json(
         "artifacts/spectron_particle_emitter_script_vars_manual_translation_anchors_20260827.json"
     )
+    spectron_resource_link_lists_anchors = load_json(
+        "artifacts/spectron_resource_link_lists_manual_translation_anchors_20260827.json"
+    )
     spectron_server_animation_anchors = load_json(
         "artifacts/spectron_server_animation_manual_translation_anchors_20260826.json"
     )
@@ -2633,6 +2636,49 @@ def main():
         "0x2451f4",
     )
     check(
+        "Spectron resource link-lists artifact",
+        spectron_resource_link_lists_anchors["artifact"],
+        "spectron_resource_link_lists_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron resource link-lists network",
+        spectron_resource_link_lists_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron resource link-lists total",
+        spectron_resource_link_lists_anchors["summary"]["anchor_count"],
+        1,
+    )
+    check(
+        "Spectron resource link-lists high confidence",
+        spectron_resource_link_lists_anchors["summary"]["high_confidence_count"],
+        1,
+    )
+    check(
+        "Spectron resource link-lists semantic overlap",
+        spectron_resource_link_lists_anchors["summary"]["already_in_semantic_map"],
+        0,
+    )
+    check(
+        "Spectron resource link-lists exact-shape count",
+        spectron_resource_link_lists_anchors["summary"]["exact_shape_anchor_count"],
+        1,
+    )
+    check(
+        "Spectron resource link-lists default target",
+        spectron_resource_link_lists_anchors["summary"]["target_default_name_count"],
+        1,
+    )
+    check(
+        "Spectron resource link-lists target",
+        {
+            row["original_name"]: row
+            for row in spectron_resource_link_lists_anchors["anchors"]
+        }["TResource_initializeLinkLists"]["spectron_ea"],
+        "0xe0564",
+    )
+    check(
         "Spectron server-animation artifact",
         spectron_server_animation_anchors["artifact"],
         "spectron_server_animation_manual_translation_anchors_20260826",
@@ -3780,7 +3826,7 @@ def main():
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1233)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1232)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -3964,7 +4010,8 @@ def main():
     check("Spectron checkpoint client-environment static-clear anchor count", spectron_checkpoint["client_environment_static_clear_anchors"]["verified_name_count"], 2)
     check("Spectron checkpoint client-environment restart-state anchor count", spectron_checkpoint["client_environment_restart_state_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint particle-emitter script-vars anchor count", spectron_checkpoint["particle_emitter_script_vars_anchors"]["verified_name_count"], 1)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "c26614cddb2d45084daed23699bf9eef3d45ef8fe86b4c0214eaf535d267bf5a")
+    check("Spectron checkpoint resource link-lists anchor count", spectron_checkpoint["resource_link_lists_anchors"]["verified_name_count"], 1)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "41df8f193e7e69551e85f06e2a01471fc4680d635d6d30eb0fb99efb1c0a3d8e")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -4104,6 +4151,7 @@ def main():
         spectron_client_environment_restart_state_anchors,
         spectron_particle_emitter_anchors,
         spectron_particle_emitter_script_vars_anchors,
+        spectron_resource_link_lists_anchors,
         spectron_server_animation_anchors,
         spectron_player_lifecycle_anchors,
         spectron_player_emoticon_anchors,
