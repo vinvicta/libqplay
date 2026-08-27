@@ -195,6 +195,8 @@ def main() -> None:
     parser.add_argument("--gui-alignment-tables-verification", type=Path)
     parser.add_argument("--gui-stretch-modes-anchors", type=Path)
     parser.add_argument("--gui-stretch-modes-verification", type=Path)
+    parser.add_argument("--tgui-render-colors-anchors", type=Path)
+    parser.add_argument("--tgui-render-colors-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
     parser.add_argument("--server-animation-verification", type=Path)
     parser.add_argument("--player-lifecycle-anchors", type=Path)
@@ -2684,6 +2686,48 @@ def main() -> None:
         result["gui_stretch_modes_anchors"] = gui_stretch_modes
         result["interpretation"].append(
             "The one-hundred-ninety-third database revision also contains the separately reviewed GuiStretchCtrl mode-table initializer anchor."
+        )
+    tgui_render_colors = None
+    if args.tgui_render_colors_anchors or args.tgui_render_colors_verification:
+        if not args.tgui_render_colors_anchors or not args.tgui_render_colors_verification:
+            raise ValueError(
+                "TGUIRender color anchors and verification must be supplied together"
+            )
+        tgui_render_colors_document = load(args.tgui_render_colors_anchors)
+        tgui_render_colors_verification = load(args.tgui_render_colors_verification)
+        if (
+            tgui_render_colors_document.get("artifact")
+            != "spectron_tgui_render_colors_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected TGUIRender color anchor artifact")
+        if not tgui_render_colors_verification.get("verified"):
+            raise ValueError(
+                "TGUIRender color anchor reopen verification did not pass"
+            )
+        expected_tgui_render_colors = len(tgui_render_colors_document["anchors"])
+        if (
+            tgui_render_colors_verification["verified_name_count"]
+            != expected_tgui_render_colors
+        ):
+            raise ValueError(
+                "TGUIRender color verification count differs from artifact"
+            )
+        tgui_render_colors = {
+            "anchor_path": str(args.tgui_render_colors_anchors),
+            "anchor_sha256": sha256_path(args.tgui_render_colors_anchors),
+            "reopen_verification": str(args.tgui_render_colors_verification),
+            "anchor_count": expected_tgui_render_colors,
+            "verified_name_count": tgui_render_colors_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": tgui_render_colors_verification[
+                "failure_count"
+            ],
+        }
+    if tgui_render_colors is not None:
+        result["tgui_render_colors_anchors"] = tgui_render_colors
+        result["interpretation"].append(
+            "The one-hundred-ninety-fourth database revision also contains the separately reviewed TGUIRender border-color initializer anchor."
         )
     server_animation = None
     if args.server_animation_anchors or args.server_animation_verification:

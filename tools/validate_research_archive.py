@@ -317,6 +317,9 @@ def main():
     spectron_gui_stretch_modes_anchors = load_json(
         "artifacts/spectron_gui_stretch_modes_manual_translation_anchors_20260827.json"
     )
+    spectron_tgui_render_colors_anchors = load_json(
+        "artifacts/spectron_tgui_render_colors_manual_translation_anchors_20260827.json"
+    )
     spectron_server_animation_anchors = load_json(
         "artifacts/spectron_server_animation_manual_translation_anchors_20260826.json"
     )
@@ -2980,6 +2983,54 @@ def main():
         "0xe0e54",
     )
     check(
+        "Spectron TGUIRender colors artifact",
+        spectron_tgui_render_colors_anchors["artifact"],
+        "spectron_tgui_render_colors_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron TGUIRender colors network",
+        spectron_tgui_render_colors_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron TGUIRender colors total",
+        spectron_tgui_render_colors_anchors["summary"]["anchor_count"],
+        1,
+    )
+    check(
+        "Spectron TGUIRender colors high confidence",
+        spectron_tgui_render_colors_anchors["summary"]["high_confidence_count"],
+        1,
+    )
+    check(
+        "Spectron TGUIRender colors semantic overlap",
+        spectron_tgui_render_colors_anchors["summary"]["already_in_semantic_map"],
+        0,
+    )
+    check(
+        "Spectron TGUIRender colors exact-shape count",
+        spectron_tgui_render_colors_anchors["summary"]["exact_shape_anchor_count"],
+        0,
+    )
+    check(
+        "Spectron TGUIRender colors layout-change count",
+        spectron_tgui_render_colors_anchors["summary"]["layout_change_anchor_count"],
+        1,
+    )
+    check(
+        "Spectron TGUIRender colors default target",
+        spectron_tgui_render_colors_anchors["summary"]["target_default_name_count"],
+        1,
+    )
+    check(
+        "Spectron TGUIRender colors target",
+        {
+            row["original_name"]: row
+            for row in spectron_tgui_render_colors_anchors["anchors"]
+        }["sub_E0984"]["spectron_ea"],
+        "0xe0f0c",
+    )
+    check(
         "Spectron server-animation artifact",
         spectron_server_animation_anchors["artifact"],
         "spectron_server_animation_manual_translation_anchors_20260826",
@@ -4127,7 +4178,7 @@ def main():
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1226)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1225)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -4318,7 +4369,8 @@ def main():
     check("Spectron checkpoint GUI button-types anchor count", spectron_checkpoint["gui_button_types_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint GUI alignment-tables anchor count", spectron_checkpoint["gui_alignment_tables_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint GUI stretch-modes anchor count", spectron_checkpoint["gui_stretch_modes_anchors"]["verified_name_count"], 1)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "fef77c04831227ee44dfe1edf8499744b627851daa651b5b1d77f8d92ea920c7")
+    check("Spectron checkpoint TGUIRender colors anchor count", spectron_checkpoint["tgui_render_colors_anchors"]["verified_name_count"], 1)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "62b68defbcd16bc235d1c9da05c623f610e1ebea8bda0c473f6260a600f40c27")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -4465,6 +4517,7 @@ def main():
         spectron_gui_button_types_anchors,
         spectron_gui_alignment_tables_anchors,
         spectron_gui_stretch_modes_anchors,
+        spectron_tgui_render_colors_anchors,
         spectron_server_animation_anchors,
         spectron_player_lifecycle_anchors,
         spectron_player_emoticon_anchors,

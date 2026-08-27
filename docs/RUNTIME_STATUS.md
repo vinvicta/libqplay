@@ -1482,6 +1482,17 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_particle_emitter_script_vars_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+253. The next IDA pass translated the `TGUIRender` border-color initializer.
+    Source `sub_E0984` at `0xe0984` maps to target `sub_E0F0C` at `0xe0f0c`,
+    preserving five RGBA defaults used by the matching `renderBorder` paths.
+    The target adds one adjacent `CanTfaz6bZ` string and cleanup callback, so
+    this is a high-confidence layout-change match. The v194 copy has 11,694
+    functions, 3,641 high-confidence labels, and 1,225 default `sub_` names,
+    with zero semantic reopen failures. See
+    `artifacts/spectron_tgui_render_colors_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_tgui_render_colors_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 252. The next IDA pass translated the `GuiStretchCtrl` mode-table initializer.
     Source `sub_E0960` at `0xe0960` maps to target `sub_E0E54` at `0xe0e54`,
     preserving the `alwaysOn`, `alwaysOff`, and `dynamic` table and the
