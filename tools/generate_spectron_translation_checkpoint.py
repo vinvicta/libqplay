@@ -309,6 +309,8 @@ def main() -> None:
     parser.add_argument("--update-package-destructor-residual-verification", type=Path)
     parser.add_argument("--update-package-wrapper-residual-anchors", type=Path)
     parser.add_argument("--update-package-wrapper-residual-verification", type=Path)
+    parser.add_argument("--update-package-properties-residual-anchors", type=Path)
+    parser.add_argument("--update-package-properties-residual-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -4296,6 +4298,34 @@ def main() -> None:
         result["update_package_wrapper_residual_anchors"] = update_package_wrapper_residual
         result["interpretation"].append(
             "The one-hundred-forty-fourth database revision also contains the separately reviewed update-package event and lookup wrapper residual family."
+        )
+    update_package_properties_residual = None
+    if args.update_package_properties_residual_anchors or args.update_package_properties_residual_verification:
+        if not args.update_package_properties_residual_anchors or not args.update_package_properties_residual_verification:
+            raise ValueError(
+                "update-package-properties residual anchors and verification must be supplied together"
+            )
+        update_package_properties_residual_document = load(args.update_package_properties_residual_anchors)
+        update_package_properties_residual_verification = load(args.update_package_properties_residual_verification)
+        if update_package_properties_residual_document.get("artifact") != "spectron_update_package_properties_residual_manual_translation_anchors_20260826":
+            raise ValueError("unexpected update-package-properties residual artifact")
+        if not update_package_properties_residual_verification.get("verified"):
+            raise ValueError("update-package-properties residual reopen verification did not pass")
+        expected_update_package_properties_residual = len(update_package_properties_residual_document["anchors"])
+        if update_package_properties_residual_verification["verified_name_count"] != expected_update_package_properties_residual:
+            raise ValueError("update-package-properties residual verification count differs from artifact")
+        update_package_properties_residual = {
+            "anchor_path": str(args.update_package_properties_residual_anchors),
+            "anchor_sha256": sha256_path(args.update_package_properties_residual_anchors),
+            "reopen_verification": str(args.update_package_properties_residual_verification),
+            "anchor_count": expected_update_package_properties_residual,
+            "verified_name_count": update_package_properties_residual_verification["verified_name_count"],
+            "reopen_failure_count": update_package_properties_residual_verification["failure_count"],
+        }
+    if update_package_properties_residual is not None:
+        result["update_package_properties_residual_anchors"] = update_package_properties_residual
+        result["interpretation"].append(
+            "The one-hundred-forty-fifth database revision also contains the separately reviewed update-package-properties residual family."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

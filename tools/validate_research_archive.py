@@ -485,6 +485,9 @@ def main():
     spectron_update_package_wrapper_residual_anchors = load_json(
         "artifacts/spectron_update_package_wrapper_residual_manual_translation_anchors_20260826.json"
     )
+    spectron_update_package_properties_residual_anchors = load_json(
+        "artifacts/spectron_update_package_properties_residual_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2717,6 +2720,18 @@ def main():
     check("Spectron update-package wrapper residual exact-shape count", spectron_update_package_wrapper_residual_anchors["summary"]["exact_shape_anchor_count"], 4)
     check("Spectron update-package wrapper residual layout-change count", spectron_update_package_wrapper_residual_anchors["summary"]["layout_change_anchor_count"], 2)
     check(
+        "Spectron update-package-properties residual artifact",
+        spectron_update_package_properties_residual_anchors["artifact"],
+        "spectron_update_package_properties_residual_manual_translation_anchors_20260826",
+    )
+    check("Spectron update-package-properties residual network", spectron_update_package_properties_residual_anchors["network_contacted"], False)
+    check("Spectron update-package-properties residual total", spectron_update_package_properties_residual_anchors["summary"]["anchor_count"], 5)
+    check("Spectron update-package-properties residual high confidence", spectron_update_package_properties_residual_anchors["summary"]["high_confidence_count"], 5)
+    check("Spectron update-package-properties residual semantic overlap", spectron_update_package_properties_residual_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron update-package-properties residual default targets", spectron_update_package_properties_residual_anchors["summary"]["target_default_name_count"], 0)
+    check("Spectron update-package-properties residual exact-shape count", spectron_update_package_properties_residual_anchors["summary"]["exact_shape_anchor_count"], 5)
+    check("Spectron update-package-properties residual layout-change count", spectron_update_package_properties_residual_anchors["summary"]["layout_change_anchor_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -2867,7 +2882,8 @@ def main():
     check("Spectron checkpoint update-package accessor residual anchor count", spectron_checkpoint["update_package_accessor_residual_anchors"]["verified_name_count"], 20)
     check("Spectron checkpoint update-package destructor residual anchor count", spectron_checkpoint["update_package_destructor_residual_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint update-package wrapper residual anchor count", spectron_checkpoint["update_package_wrapper_residual_anchors"]["verified_name_count"], 6)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "fecbafa39ffeca37580a23828e71b4a0d3be317029bd896548d02d7ae61799f6")
+    check("Spectron checkpoint update-package-properties residual anchor count", spectron_checkpoint["update_package_properties_residual_anchors"]["verified_name_count"], 5)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "3b26ba1e6a150a8aebef18c46372843615523a76a813af5eba231c924a459f59")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],

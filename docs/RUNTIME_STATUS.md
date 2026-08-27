@@ -1428,6 +1428,14 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+205. The next IDA pass translated five exact-shape `TUpdatePackageProperties`
+    lifecycle helpers: the uninstall jump thunk, complete and deleting
+    destructors, and both non-virtual thunks. All five labels reopened
+    successfully in the v145 disposable copy, which retains 1,473 default
+    `sub_` functions. See
+    `artifacts/spectron_update_package_properties_residual_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 204. The next IDA pass translated six update-package event and lookup helpers:
     failure and download-complete notifications, downloading and privileged
     package containment, and force or no-force wrappers. All six labels

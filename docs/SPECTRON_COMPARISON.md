@@ -3444,6 +3444,26 @@ functions. The v108 database has 1,684 remaining default `sub_` names. Its
 SHA-256 is
 `8350a43be6b31306954e34a17f77d742c8d1702015d671019d2bf2dd6c1bb1e1`.
 
+## Spectron TUpdatePackageProperties residual anchors
+
+The v145 pass translated the complete package-properties lifecycle family.
+
+| 1.8 role | Source | Spectron target | Target | Evidence |
+| --- | ---: | --- | ---: | --- |
+| uninstall jump thunk | `0x20aab8` | `j_._ZN10RH6ygazf9x10TrDxob8NUfEv` | `0x210cb4` | forwards to uninstall |
+| complete destructor | `0x20aabc` | `_ZN20RH6ygazf9xPropertiesD2Ev` | `0x210cb8` | vtable and base cleanup |
+| complete destructor thunk | `0x20aad8` | `_ZThn16_N20RH6ygazf9xPropertiesD1Ev` | `0x210cd4` | 16-byte adjustment |
+| deleting destructor | `0x20aae0` | `_ZN20RH6ygazf9xPropertiesD0Ev` | `0x210cdc` | cleanup plus delete |
+| deleting destructor thunk | `0x20ab18` | `_ZThn16_N20RH6ygazf9xPropertiesD0Ev` | `0x210d14` | 16-byte adjustment |
+
+The source labels are constructor-like because IDA retained the class stem,
+but the alternative D2 and D0 names and the vtable, base-cleanup, and delete
+sequence establish the destructor roles. All five pairs have identical
+normalized metrics and hashes. The target names were already non-default.
+
+Evidence is stored in
+`artifacts/spectron_update_package_properties_residual_manual_translation_anchors_20260826.json`.
+
 ## Spectron update-package event and lookup residual anchors
 
 The v144 pass translated six remaining package-state helpers.
