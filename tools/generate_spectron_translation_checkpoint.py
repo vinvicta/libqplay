@@ -159,6 +159,8 @@ def main() -> None:
     parser.add_argument("--tstring-clear-verification", type=Path)
     parser.add_argument("--static-clear-anchors", type=Path)
     parser.add_argument("--static-clear-verification", type=Path)
+    parser.add_argument("--http-request-receive-anchors", type=Path)
+    parser.add_argument("--http-request-receive-verification", type=Path)
     parser.add_argument("--particle-emitter-anchors", type=Path)
     parser.add_argument("--particle-emitter-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
@@ -5196,6 +5198,34 @@ def main() -> None:
         result["tserverplayer_tail_anchors"] = tserverplayer_tail
         result["interpretation"].append(
             "The one-hundred-sixty-fourth database revision also contains the separately reviewed TServerPlayer lifecycle, static-initializer, attachment, and coordinate-tail anchors."
+        )
+    http_request_receive = None
+    if args.http_request_receive_anchors or args.http_request_receive_verification:
+        if not args.http_request_receive_anchors or not args.http_request_receive_verification:
+            raise ValueError(
+                "HTTP request receive anchors and verification must be supplied together"
+            )
+        http_request_receive_document = load(args.http_request_receive_anchors)
+        http_request_receive_verification = load(args.http_request_receive_verification)
+        if http_request_receive_document.get("artifact") != "spectron_http_request_receive_manual_translation_anchors_20260827":
+            raise ValueError("unexpected HTTP request receive anchor artifact")
+        if not http_request_receive_verification.get("verified"):
+            raise ValueError("HTTP request receive anchor reopen verification did not pass")
+        expected_http_request_receive = len(http_request_receive_document["anchors"])
+        if http_request_receive_verification["verified_name_count"] != expected_http_request_receive:
+            raise ValueError("HTTP request receive verification count differs from artifact")
+        http_request_receive = {
+            "anchor_path": str(args.http_request_receive_anchors),
+            "anchor_sha256": sha256_path(args.http_request_receive_anchors),
+            "reopen_verification": str(args.http_request_receive_verification),
+            "anchor_count": expected_http_request_receive,
+            "verified_name_count": http_request_receive_verification["verified_name_count"],
+            "reopen_failure_count": http_request_receive_verification["failure_count"],
+        }
+    if http_request_receive is not None:
+        result["http_request_receive_anchors"] = http_request_receive
+        result["interpretation"].append(
+            "The v177 database revision also contains the separately reviewed HTTP response read and data-parser anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

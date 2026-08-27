@@ -165,8 +165,8 @@
     "default_sub_function_count": 1248,
     "format": "packed IDA 9.3 database",
     "function_count": 11694,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v176.i64",
-    "sha256": "0c5b0f55006fd4a22c6044a6addfcaa07346e1b1cec1f092676a06701ba12e7c"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v177.i64",
+    "sha256": "d4d343a931a408cf34d6e32ca11a335711df184d7124b7d4d23a831445aa3cc2"
   },
   "draw_texture_anchors": {
     "anchor_count": 4,
@@ -496,6 +496,14 @@
     "reopen_verification": "/tmp/spectron_http_request_verify_v19.json",
     "verified_name_count": 12
   },
+  "http_request_receive_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_http_request_receive_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "1354c3610ffc7fdac23f8d54c2b880bbbf5a94c3860f6ad482c286db20fdbe33",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_http_request_receive_verify_v177.json",
+    "verified_name_count": 2
+  },
   "http_request_state_anchors": {
     "anchor_count": 4,
     "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_http_request_state_manual_translation_anchors_20260826.json",
@@ -701,7 +709,8 @@
     "The one-hundred-sixtieth database revision also contains the separately reviewed exact-shape TPlayer flag-setter block.",
     "The one-hundred-sixty-first database revision also contains the separately reviewed exact-shape TServerPlayer property block.",
     "The one-hundred-sixty-third database revision also contains the separately reviewed TServerPlayer registration-table callback anchors.",
-    "The one-hundred-sixty-fourth database revision also contains the separately reviewed TServerPlayer lifecycle, static-initializer, attachment, and coordinate-tail anchors."
+    "The one-hundred-sixty-fourth database revision also contains the separately reviewed TServerPlayer lifecycle, static-initializer, attachment, and coordinate-tail anchors.",
+    "The v177 database revision also contains the separately reviewed HTTP response read and data-parser anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,

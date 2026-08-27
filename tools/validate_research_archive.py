@@ -263,6 +263,9 @@ def main():
     spectron_static_callback_role_correction = load_json(
         "artifacts/spectron_static_callback_role_correction_20260827.json"
     )
+    spectron_http_request_receive_anchors = load_json(
+        "artifacts/spectron_http_request_receive_manual_translation_anchors_20260827.json"
+    )
     spectron_particle_emitter_anchors = load_json(
         "artifacts/spectron_particle_emitter_manual_translation_anchors_20260826.json"
     )
@@ -2090,6 +2093,50 @@ def main():
         "unresolved",
     )
     check(
+        "Spectron HTTP response artifact",
+        spectron_http_request_receive_anchors["artifact"],
+        "spectron_http_request_receive_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron HTTP response network",
+        spectron_http_request_receive_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron HTTP response total",
+        spectron_http_request_receive_anchors["summary"]["anchor_count"],
+        2,
+    )
+    check(
+        "Spectron HTTP response high confidence",
+        spectron_http_request_receive_anchors["summary"]["high_confidence_count"],
+        2,
+    )
+    check(
+        "Spectron HTTP response layout changes",
+        spectron_http_request_receive_anchors["summary"]["layout_change_anchor_count"],
+        2,
+    )
+    check(
+        "Spectron HTTP response default targets",
+        spectron_http_request_receive_anchors["summary"]["target_default_name_count"],
+        0,
+    )
+    response_anchors = {
+        row["original_name"]: row
+        for row in spectron_http_request_receive_anchors["anchors"]
+    }
+    check(
+        "Spectron HTTP read target",
+        response_anchors["THTTPRequest_read_void"]["spectron_ea"],
+        "0x206414",
+    )
+    check(
+        "Spectron HTTP parse target",
+        response_anchors["THTTPRequest_parseData_void"]["spectron_ea"],
+        "0x207bec",
+    )
+    check(
         "Spectron particle-emitter artifact",
         spectron_particle_emitter_anchors["artifact"],
         "spectron_particle_emitter_manual_translation_anchors_20260826",
@@ -3421,7 +3468,8 @@ def main():
     check("Spectron checkpoint TString anchor count", spectron_checkpoint["tstring_anchors"]["verified_name_count"], 6)
     check("Spectron checkpoint TString clear anchor count", spectron_checkpoint["tstring_clear_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint static-clear anchor count", spectron_checkpoint["static_clear_anchors"]["verified_name_count"], 2)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "0c5b0f55006fd4a22c6044a6addfcaa07346e1b1cec1f092676a06701ba12e7c")
+    check("Spectron checkpoint HTTP response anchor count", spectron_checkpoint["http_request_receive_anchors"]["verified_name_count"], 2)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "d4d343a931a408cf34d6e32ca11a335711df184d7124b7d4d23a831445aa3cc2")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -3550,6 +3598,7 @@ def main():
         spectron_tstring_clear_anchors,
         spectron_static_clear_anchors,
         spectron_static_callback_role_correction,
+        spectron_http_request_receive_anchors,
         spectron_particle_emitter_anchors,
         spectron_server_animation_anchors,
         spectron_player_lifecycle_anchors,

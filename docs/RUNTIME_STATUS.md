@@ -1460,6 +1460,20 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_static_callback_role_correction.py`, and
     `tools/ida_dump_function_data_refs.py`.
 
+236. The next network-focused IDA pass translated two response-side HTTP
+    methods in the obfuscated `ZAuvgaUl6u` request class:
+    `THTTPRequest_read_void` at target `0x206414` and
+    `THTTPRequest_parseData_void` at target `0x207bec`. The read method keeps
+    socket receive, response-stream append, byte accounting, and timestamp
+    updates, while the parser keeps the `data` lookup, line-array construction,
+    and script callback loop. Both rows are high-confidence semantic matches
+    with explicit implementation-change notes. The aliases reopened with zero
+    failures in the v177 copy, which has 11,694 functions, 3,641 automatic
+    high-confidence labels, and 1,248 default `sub_` names. See
+    `artifacts/spectron_http_request_receive_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_http_request_receive_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 232. The next IDA pass translated six exact-shape `TString` methods: signed,
     unsigned, and 64-bit integer insertion, prefix testing, and the bounded
     and unbounded case-insensitive comparison thunks. All six labels reopened
