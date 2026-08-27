@@ -1428,6 +1428,18 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+217. The next IDA pass translated ten exact-shape scalar setters from
+    `TPlayer`: gralats, alignment, sword power, magic points, maximum health,
+    shield power, bombs, arrows, glove power, and carry sprite. The source
+    block at `0x16cec4..0x16d5cc` maps to the obfuscated `W6NzgawMJy` block at
+    `0x170ac4..0x1711cc`, with a constant `+0x3c00` code relocation. The
+    target object-layout constants are not a uniform field-offset shift, so
+    this is recorded as a class-local block mapping. All ten labels reopened
+    successfully in the v158 disposable copy, which has 11,693 functions and
+    1,396 default `sub_` names. See
+    `artifacts/spectron_tplayer_scalar_setter_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 216. The next IDA pass translated the 37-function scalar getter and setter
     block at the front of `TServerPlayer`. The target `MpGzgariDy` block keeps
     the same alternating order and exact normalized fingerprints. Its code

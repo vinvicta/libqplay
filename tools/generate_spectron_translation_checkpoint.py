@@ -333,6 +333,8 @@ def main() -> None:
     parser.add_argument("--cyaint-tls-residual-v2-verification", type=Path)
     parser.add_argument("--tserverplayer-accessor-anchors", type=Path)
     parser.add_argument("--tserverplayer-accessor-verification", type=Path)
+    parser.add_argument("--tplayer-scalar-setter-anchors", type=Path)
+    parser.add_argument("--tplayer-scalar-setter-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -4656,6 +4658,34 @@ def main() -> None:
         result["tserverplayer_accessor_anchors"] = tserverplayer_accessor
         result["interpretation"].append(
             "The one-hundred-fifty-seventh database revision also contains the separately reviewed exact-shape TServerPlayer scalar accessor block."
+        )
+    tplayer_scalar_setter = None
+    if args.tplayer_scalar_setter_anchors or args.tplayer_scalar_setter_verification:
+        if not args.tplayer_scalar_setter_anchors or not args.tplayer_scalar_setter_verification:
+            raise ValueError(
+                "TPlayer scalar setter anchors and verification must be supplied together"
+            )
+        tplayer_scalar_setter_document = load(args.tplayer_scalar_setter_anchors)
+        tplayer_scalar_setter_verification = load(args.tplayer_scalar_setter_verification)
+        if tplayer_scalar_setter_document.get("artifact") != "spectron_tplayer_scalar_setter_manual_translation_anchors_20260826":
+            raise ValueError("unexpected TPlayer scalar setter artifact")
+        if not tplayer_scalar_setter_verification.get("verified"):
+            raise ValueError("TPlayer scalar setter reopen verification did not pass")
+        expected_tplayer_scalar_setter = len(tplayer_scalar_setter_document["anchors"])
+        if tplayer_scalar_setter_verification["verified_name_count"] != expected_tplayer_scalar_setter:
+            raise ValueError("TPlayer scalar setter verification count differs from artifact")
+        tplayer_scalar_setter = {
+            "anchor_path": str(args.tplayer_scalar_setter_anchors),
+            "anchor_sha256": sha256_path(args.tplayer_scalar_setter_anchors),
+            "reopen_verification": str(args.tplayer_scalar_setter_verification),
+            "anchor_count": expected_tplayer_scalar_setter,
+            "verified_name_count": tplayer_scalar_setter_verification["verified_name_count"],
+            "reopen_failure_count": tplayer_scalar_setter_verification["failure_count"],
+        }
+    if tplayer_scalar_setter is not None:
+        result["tplayer_scalar_setter_anchors"] = tplayer_scalar_setter
+        result["interpretation"].append(
+            "The one-hundred-fifty-eighth database revision also contains the separately reviewed exact-shape TPlayer scalar setter block."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

@@ -521,6 +521,9 @@ def main():
     spectron_tserverplayer_accessor_anchors = load_json(
         "artifacts/spectron_tserverplayer_accessor_manual_translation_anchors_20260826.json"
     )
+    spectron_tplayer_scalar_setter_anchors = load_json(
+        "artifacts/spectron_tplayer_scalar_setter_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2909,6 +2912,19 @@ def main():
     check("Spectron TServerPlayer accessor address relocation", spectron_tserverplayer_accessor_anchors["summary"]["constant_target_delta"], "+0x47e8")
     check("Spectron TServerPlayer accessor field relocation", spectron_tserverplayer_accessor_anchors["summary"]["constant_field_offset_delta"], 24)
     check(
+        "Spectron TPlayer scalar setter artifact",
+        spectron_tplayer_scalar_setter_anchors["artifact"],
+        "spectron_tplayer_scalar_setter_manual_translation_anchors_20260826",
+    )
+    check("Spectron TPlayer scalar setter network", spectron_tplayer_scalar_setter_anchors["network_contacted"], False)
+    check("Spectron TPlayer scalar setter total", spectron_tplayer_scalar_setter_anchors["summary"]["anchor_count"], 10)
+    check("Spectron TPlayer scalar setter high confidence", spectron_tplayer_scalar_setter_anchors["summary"]["high_confidence_count"], 10)
+    check("Spectron TPlayer scalar setter semantic overlap", spectron_tplayer_scalar_setter_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron TPlayer scalar setter default targets", spectron_tplayer_scalar_setter_anchors["summary"]["target_default_name_count"], 0)
+    check("Spectron TPlayer scalar setter exact-shape count", spectron_tplayer_scalar_setter_anchors["summary"]["exact_shape_anchor_count"], 10)
+    check("Spectron TPlayer scalar setter layout-change count", spectron_tplayer_scalar_setter_anchors["summary"]["layout_change_anchor_count"], 0)
+    check("Spectron TPlayer scalar setter address relocation", spectron_tplayer_scalar_setter_anchors["summary"]["constant_target_delta"], "+0x3c00")
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -3071,7 +3087,8 @@ def main():
     check("Spectron checkpoint CyaInt TLS residual anchor count", spectron_checkpoint["cyaint_tls_residual_anchors"]["verified_name_count"], 30)
     check("Spectron checkpoint CyaInt TLS residual v2 anchor count", spectron_checkpoint["cyaint_tls_residual_v2_anchors"]["verified_name_count"], 53)
     check("Spectron checkpoint TServerPlayer accessor anchor count", spectron_checkpoint["tserverplayer_accessor_anchors"]["verified_name_count"], 37)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "6daaa47e8ee98b08a5e447e86790b3e05f5828fa0cfb0d9e97f99e7b857ca3fc")
+    check("Spectron checkpoint TPlayer scalar setter anchor count", spectron_checkpoint["tplayer_scalar_setter_anchors"]["verified_name_count"], 10)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "d779d88b82129c4502d0f6682449c519a698f7317b9e4b5be5af1de18d5a2444")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
