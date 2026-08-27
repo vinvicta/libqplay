@@ -80,9 +80,11 @@ def metrics(function: dict) -> dict:
     return {field: function.get(field) for field in METRIC_FIELDS}
 
 
-def existing_manual_sources(root: Path) -> set[int]:
+def existing_manual_sources(root: Path, excluded: Path | None = None) -> set[int]:
     result = set()
     for path in root.glob("*.json"):
+        if excluded is not None and path.resolve() == excluded.resolve():
+            continue
         try:
             document = load(path)
         except (OSError, json.JSONDecodeError):
