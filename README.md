@@ -725,6 +725,14 @@ The evidence is in
 `artifacts/spectron_player_link_traversal_manual_translation_anchors_20260826.json`,
 and the v65 database SHA-256 is recorded in the checkpoint.
 
+A sixty-fourth disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v66.i64`,
+adds four reviewed player weapon-state anchors for attribute reset, selected
+weapon removal and selection, and weapon lookup. All four reopened
+successfully. The evidence is in
+`artifacts/spectron_player_weapon_state_manual_translation_anchors_20260826.json`,
+and the v66 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and

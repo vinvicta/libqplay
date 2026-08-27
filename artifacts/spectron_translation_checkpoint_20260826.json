@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v65.i64",
-    "sha256": "0d7f9660341da422888acfc948d0cd6fa2ade6bdbcbbe95d4d5326a39dc7ca44"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v66.i64",
+    "sha256": "b17096b3ce92774fdfdf90b2a21c52dad8111ad7d09bd2b705fa0d3371ecd25b"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -208,7 +208,8 @@
     "The sixtieth database revision also contains the separately reviewed player main-level and server-level entry anchors.",
     "The sixty-first database revision also contains the separately reviewed player side-level grid and lookup anchors.",
     "The sixty-second database revision also contains the separately reviewed player map-position and map-link anchors.",
-    "The sixty-third database revision also contains the separately reviewed player level-animation and link-traversal anchors."
+    "The sixty-third database revision also contains the separately reviewed player level-animation and link-traversal anchors.",
+    "The sixty-fourth database revision also contains the separately reviewed player attribute reset and weapon-state anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -345,6 +346,14 @@
     "anchor_sha256": "1c6b13c3930b0235f639c94daea7e2c8b5f6e1eb5e192917df261bd35ae0c369",
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_player_side_level_verification_v63.json",
+    "verified_name_count": 4
+  },
+  "player_weapon_state_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "artifacts/spectron_player_weapon_state_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "baad02ec6e10fea95df57daa2ebe17c8ebb30589be96672d4f7e9d540af84e9c",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_player_weapon_state_verification_v66.json",
     "verified_name_count": 4
   },
   "render_gui_anchors": {

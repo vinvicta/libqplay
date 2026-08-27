@@ -151,6 +151,8 @@ def main() -> None:
     parser.add_argument("--player-map-position-verification", type=Path)
     parser.add_argument("--player-link-traversal-anchors", type=Path)
     parser.add_argument("--player-link-traversal-verification", type=Path)
+    parser.add_argument("--player-weapon-state-anchors", type=Path)
+    parser.add_argument("--player-weapon-state-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1926,6 +1928,34 @@ def main() -> None:
         result["player_link_traversal_anchors"] = player_link_traversal
         result["interpretation"].append(
             "The sixty-third database revision also contains the separately reviewed player level-animation and link-traversal anchors."
+        )
+    player_weapon_state = None
+    if args.player_weapon_state_anchors or args.player_weapon_state_verification:
+        if not args.player_weapon_state_anchors or not args.player_weapon_state_verification:
+            raise ValueError(
+                "player-weapon-state anchors and player-weapon-state verification must be supplied together"
+            )
+        player_weapon_state_document = load(args.player_weapon_state_anchors)
+        player_weapon_state_verification = load(args.player_weapon_state_verification)
+        if player_weapon_state_document.get("artifact") != "spectron_player_weapon_state_manual_translation_anchors_20260826":
+            raise ValueError("unexpected player-weapon-state anchor artifact")
+        if not player_weapon_state_verification.get("verified"):
+            raise ValueError("player-weapon-state anchor reopen verification did not pass")
+        expected_player_weapon_state = len(player_weapon_state_document["anchors"])
+        if player_weapon_state_verification["verified_name_count"] != expected_player_weapon_state:
+            raise ValueError("player-weapon-state verification count differs from artifact")
+        player_weapon_state = {
+            "anchor_path": str(args.player_weapon_state_anchors),
+            "anchor_sha256": sha256_path(args.player_weapon_state_anchors),
+            "reopen_verification": str(args.player_weapon_state_verification),
+            "anchor_count": expected_player_weapon_state,
+            "verified_name_count": player_weapon_state_verification["verified_name_count"],
+            "reopen_failure_count": player_weapon_state_verification["failure_count"],
+        }
+    if player_weapon_state is not None:
+        result["player_weapon_state_anchors"] = player_weapon_state
+        result["interpretation"].append(
+            "The sixty-fourth database revision also contains the separately reviewed player attribute reset and weapon-state anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
