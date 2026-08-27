@@ -143,6 +143,8 @@ def main() -> None:
     parser.add_argument("--server-object-scalar-verification", type=Path)
     parser.add_argument("--compression-anchors", type=Path)
     parser.add_argument("--compression-verification", type=Path)
+    parser.add_argument("--files-anchors", type=Path)
+    parser.add_argument("--files-verification", type=Path)
     parser.add_argument("--particle-emitter-anchors", type=Path)
     parser.add_argument("--particle-emitter-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
@@ -2016,6 +2018,34 @@ def main() -> None:
         result["compression_anchors"] = compression
         result["interpretation"].append(
             "The one-hundred-sixty-eighth database revision also contains the separately reviewed exact-shape TCompression wrapper anchors."
+        )
+    files = None
+    if args.files_anchors or args.files_verification:
+        if not args.files_anchors or not args.files_verification:
+            raise ValueError(
+                "files anchors and files verification must be supplied together"
+            )
+        files_document = load(args.files_anchors)
+        files_verification = load(args.files_verification)
+        if files_document.get("artifact") != "spectron_files_manual_translation_anchors_20260827":
+            raise ValueError("unexpected files anchor artifact")
+        if not files_verification.get("verified"):
+            raise ValueError("files anchor reopen verification did not pass")
+        expected_files = len(files_document["anchors"])
+        if files_verification["verified_name_count"] != expected_files:
+            raise ValueError("files verification count differs from artifact")
+        files = {
+            "anchor_path": str(args.files_anchors),
+            "anchor_sha256": sha256_path(args.files_anchors),
+            "reopen_verification": str(args.files_verification),
+            "anchor_count": expected_files,
+            "verified_name_count": files_verification["verified_name_count"],
+            "reopen_failure_count": files_verification["failure_count"],
+        }
+    if files is not None:
+        result["files_anchors"] = files
+        result["interpretation"].append(
+            "The one-hundred-sixty-ninth database revision also contains the separately reviewed exact-shape TFiles helper anchors."
         )
     particle_emitter = None
     if args.particle_emitter_anchors or args.particle_emitter_verification:

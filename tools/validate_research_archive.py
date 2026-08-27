@@ -236,6 +236,9 @@ def main():
     spectron_compression_anchors = load_json(
         "artifacts/spectron_compression_manual_translation_anchors_20260827.json"
     )
+    spectron_files_anchors = load_json(
+        "artifacts/spectron_files_manual_translation_anchors_20260827.json"
+    )
     spectron_particle_emitter_anchors = load_json(
         "artifacts/spectron_particle_emitter_manual_translation_anchors_20260826.json"
     )
@@ -1920,6 +1923,17 @@ def main():
     check("Spectron compression layout-change count", spectron_compression_anchors["summary"]["layout_change_anchor_count"], 0)
     check("Spectron compression default targets", spectron_compression_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron files artifact",
+        spectron_files_anchors["artifact"],
+        "spectron_files_manual_translation_anchors_20260827",
+    )
+    check("Spectron files network", spectron_files_anchors["network_contacted"], False)
+    check("Spectron files total", spectron_files_anchors["summary"]["anchor_count"], 6)
+    check("Spectron files high confidence", spectron_files_anchors["summary"]["high_confidence_count"], 6)
+    check("Spectron files exact-shape count", spectron_files_anchors["summary"]["exact_shape_anchor_count"], 6)
+    check("Spectron files layout-change count", spectron_files_anchors["summary"]["layout_change_anchor_count"], 0)
+    check("Spectron files default targets", spectron_files_anchors["summary"]["target_default_name_count"], 0)
+    check(
         "Spectron particle-emitter artifact",
         spectron_particle_emitter_anchors["artifact"],
         "spectron_particle_emitter_manual_translation_anchors_20260826",
@@ -3243,7 +3257,8 @@ def main():
     check("Spectron checkpoint TServerPlayer tail anchor count", spectron_checkpoint["tserverplayer_tail_anchors"]["verified_name_count"], 7)
     check("Spectron checkpoint server-object scalar anchor count", spectron_checkpoint["server_object_scalar_anchors"]["verified_name_count"], 12)
     check("Spectron checkpoint compression anchor count", spectron_checkpoint["compression_anchors"]["verified_name_count"], 5)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "f128cbd323aa0e5f1a021c447f404b0f9b3778d83ab1dfffc7095b004191b4fd")
+    check("Spectron checkpoint files anchor count", spectron_checkpoint["files_anchors"]["verified_name_count"], 6)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "0904e8d1b0f8f97a2536cd34a44f12974365f427f4c590c89e83efc1ca570d53")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -3363,6 +3378,7 @@ def main():
         spectron_showimg_residual_anchors,
         spectron_server_object_scalar_anchors,
         spectron_compression_anchors,
+        spectron_files_anchors,
         spectron_particle_emitter_anchors,
         spectron_server_animation_anchors,
         spectron_player_lifecycle_anchors,

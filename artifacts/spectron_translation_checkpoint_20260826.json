@@ -165,8 +165,8 @@
     "default_sub_function_count": 1256,
     "format": "packed IDA 9.3 database",
     "function_count": 11694,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v168.i64",
-    "sha256": "f128cbd323aa0e5f1a021c447f404b0f9b3778d83ab1dfffc7095b004191b4fd"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v169.i64",
+    "sha256": "0904e8d1b0f8f97a2536cd34a44f12974365f427f4c590c89e83efc1ca570d53"
   },
   "draw_texture_anchors": {
     "anchor_count": 4,
@@ -215,6 +215,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_execution_dispatch_verify_v49.json",
     "verified_name_count": 2
+  },
+  "files_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_files_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "54245f617665cf58fdd80ab692c27f6237631af5861a2122a05193df69a08b71",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_files_verify_v169.json",
+    "verified_name_count": 6
   },
   "font_bitmap_anchors": {
     "anchor_count": 4,
@@ -498,7 +506,7 @@
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
-    "reopen_verification": "/tmp/spectron_translation_verify_v168.json",
+    "reopen_verification": "/tmp/spectron_translation_verify_v169.json",
     "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
     "translation_map": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_semantic_function_translation_20260826.json",
     "translation_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92"
@@ -565,6 +573,7 @@
     "The one-hundred-sixty-sixth database revision also contains the separately reviewed residual TShowImg wrappers, helpers, and properties-class lifecycle anchors.",
     "The one-hundred-sixty-seventh database revision also contains the separately reviewed exact-shape server-object scalar and constructor anchors.",
     "The one-hundred-sixty-eighth database revision also contains the separately reviewed exact-shape TCompression wrapper anchors.",
+    "The one-hundred-sixty-ninth database revision also contains the separately reviewed exact-shape TFiles helper anchors.",
     "The fifty-sixth database revision also contains the separately reviewed particle-emitter initializer and emission anchors.",
     "The fifty-seventh database revision also contains the separately reviewed explosion, carry, and flying server-animation anchors.",
     "The fifty-eighth database revision also contains the separately reviewed player start-level and periodic-update anchors.",
