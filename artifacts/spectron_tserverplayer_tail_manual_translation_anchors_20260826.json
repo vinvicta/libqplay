@@ -1,0 +1,539 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "context_group": "TServerPlayer attachment and lifecycle tail",
+      "context_order": 1,
+      "evidence": [
+        "The attachment setter is the callback stored in the source and target attachedtoobject property record at index 3. The target pointer resolves to 0x1912f0, so the label does not depend on the nearby attachToNPC body.",
+        "The nickname cleanup body sits between the large draw method and the TServerPlayer destructor in both class-local layouts. It removes the encoded text token, releases the related object through the virtual path, and clears the member. Its complete normalized feature metrics match exactly.",
+        "The source row named TServerPlayer_TServerPlayer__2 is the original D0 destructor symbol _ZN13TServerPlayerD0Ev, not a second constructor. The target _ZN10MpGzgariDyD0Ev occupies the corresponding deleting-destructor role and calls the target D1 destructor.",
+        "The static variable and static script-variable initializers are an adjacent exact-shape pair immediately before the TServerPlayer property accessors in both builds. The local X and Y setters are another exact-shape pair with the same +0x4a30 relocation and the same 0x10-byte gap after the first setter."
+      ],
+      "match_kind": "manual-tserverplayer-tail-property-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_dynamicCastVar_TProperties_TGraalVar"
+      ],
+      "original_ea": "0x18ca40",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 4,
+        "call_count": 1,
+        "instruction_count": 16,
+        "mnemonic_hash": "d465ccf82b3de9dbe9427d1ccb5281dbc9f3671274c6d8a2fd23ea5f294b6d94",
+        "opcode_shape_hash": "278f51162d869fecd2be6fc8f20eeb70e1ae5e296cea80ec0823b62ba8a77a8d",
+        "register_shape_hash": "a96e401652631fcde07990de8a8aac4c4abff1feabe125c74f27fec4e1017815",
+        "shape_hash": "9879941b1589b7c1933fb7677cc4a491c2394b642b1583eecd5369350babb787",
+        "size": 64,
+        "string_refs_hash": null
+      },
+      "original_name": "TServerPlayer_setAttachedToObject",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerPlayer_setAttachedToObject",
+      "role": "attached-to-object property setter",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "attachedtoobject property record index 3 setter pointer",
+      "spectron_current_name": "sub_1912F0",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [
+        "._Z10n8NK2aKNZVP10c76BgaJBGAP10G0gxgajWBw"
+      ],
+      "spectron_ea": "0x1912f0",
+      "spectron_function_end": "0x191330",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 4,
+        "call_count": 1,
+        "instruction_count": 16,
+        "mnemonic_hash": "d465ccf82b3de9dbe9427d1ccb5281dbc9f3671274c6d8a2fd23ea5f294b6d94",
+        "opcode_shape_hash": "278f51162d869fecd2be6fc8f20eeb70e1ae5e296cea80ec0823b62ba8a77a8d",
+        "register_shape_hash": "a96e401652631fcde07990de8a8aac4c4abff1feabe125c74f27fec4e1017815",
+        "shape_hash": "9879941b1589b7c1933fb7677cc4a491c2394b642b1583eecd5369350babb787",
+        "size": 64,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "table_evidence": {
+        "property_index": 3,
+        "property_name": "attachedtoobject",
+        "record_size": "0x30",
+        "slot": "setter",
+        "source_callback_ea": "0x18ca40",
+        "source_record": {
+          "common_pointer": "0x2dce08",
+          "flags": "0x6f01",
+          "getter_ea": 1615364,
+          "index": 3,
+          "name": "attachedtoobject",
+          "name_pointer": "0x2d1a80",
+          "record_ea": "0x37ce90",
+          "setter_ea": 1624640,
+          "trailing": "0x0"
+        },
+        "table_kind": "TServerPlayerProperties",
+        "target_callback_ea": "0x1912f0",
+        "target_record": {
+          "common_pointer": "0x2ea8f0",
+          "flags": "0x6f01",
+          "getter_ea": 1633892,
+          "index": 3,
+          "name": "attachedtoobject",
+          "name_pointer": "0x2df120",
+          "record_ea": "0x38fef0",
+          "setter_ea": 1643248,
+          "trailing": "0x0"
+        }
+      },
+      "target_delta": "+0x48b0"
+    },
+    {
+      "confidence": "high",
+      "context_group": "TServerPlayer attachment and lifecycle tail",
+      "context_order": 2,
+      "evidence": [
+        "The attachment setter is the callback stored in the source and target attachedtoobject property record at index 3. The target pointer resolves to 0x1912f0, so the label does not depend on the nearby attachToNPC body.",
+        "The nickname cleanup body sits between the large draw method and the TServerPlayer destructor in both class-local layouts. It removes the encoded text token, releases the related object through the virtual path, and clears the member. Its complete normalized feature metrics match exactly.",
+        "The source row named TServerPlayer_TServerPlayer__2 is the original D0 destructor symbol _ZN13TServerPlayerD0Ev, not a second constructor. The target _ZN10MpGzgariDyD0Ev occupies the corresponding deleting-destructor role and calls the target D1 destructor.",
+        "The static variable and static script-variable initializers are an adjacent exact-shape pair immediately before the TServerPlayer property accessors in both builds. The local X and Y setters are another exact-shape pair with the same +0x4a30 relocation and the same 0x10-byte gap after the first setter."
+      ],
+      "match_kind": "manual-tserverplayer-tail-lifecycle-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TPlayer_removeTextToken_TStringList"
+      ],
+      "original_ea": "0x18dc58",
+      "original_metrics": {
+        "basic_block_count": 5,
+        "branch_count": 5,
+        "call_count": 2,
+        "instruction_count": 16,
+        "mnemonic_hash": "e6050d9d277d1fd3f66d041ecc212410bda4e2f929a4892136bbaff09fd21a26",
+        "opcode_shape_hash": "ecb45c016799af8740e6d13bd7ffea0949dea192132a2b5c96628b0d9974b71e",
+        "register_shape_hash": "409c524ac3868254333daf9245694d9087fa7cea768827d21ebab341393e6890",
+        "shape_hash": "f3d758d1db093d9cb1e8b7ccfb9940e811afe7164ce2b15864d9ebae429638ed",
+        "size": 64,
+        "string_refs_hash": null
+      },
+      "original_name": "TServerPlayer_clearNickWrapped_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerPlayer_clearNickWrapped_void",
+      "role": "nickname text-token cleanup wrapper",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "draw-to-destructor lifecycle sequence and exact normalized shape",
+      "spectron_current_name": "_ZN10MpGzgariDy10Zb7rwaMFgVEv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10W6NzgawMJy10IfIFLaSQHIEP10vuuHgangcF"
+      ],
+      "spectron_ea": "0x192558",
+      "spectron_function_end": "0x192598",
+      "spectron_metrics": {
+        "basic_block_count": 5,
+        "branch_count": 5,
+        "call_count": 2,
+        "instruction_count": 16,
+        "mnemonic_hash": "e6050d9d277d1fd3f66d041ecc212410bda4e2f929a4892136bbaff09fd21a26",
+        "opcode_shape_hash": "ecb45c016799af8740e6d13bd7ffea0949dea192132a2b5c96628b0d9974b71e",
+        "register_shape_hash": "409c524ac3868254333daf9245694d9087fa7cea768827d21ebab341393e6890",
+        "shape_hash": "f3d758d1db093d9cb1e8b7ccfb9940e811afe7164ce2b15864d9ebae429638ed",
+        "size": 64,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "table_evidence": {
+        "source_predecessor": "0x18c7ec TServerPlayer_attachToNPC_TServerNPC",
+        "table_kind": "TServerPlayer class-local lifecycle sequence",
+        "target_class": "MpGzgariDy",
+        "target_predecessor": "0x19109c v18_TServerPlayer_attachToNPC_TServerNPC"
+      },
+      "target_delta": "+0x4900"
+    },
+    {
+      "confidence": "high",
+      "context_group": "TServerPlayer attachment and lifecycle tail",
+      "context_order": 3,
+      "evidence": [
+        "The attachment setter is the callback stored in the source and target attachedtoobject property record at index 3. The target pointer resolves to 0x1912f0, so the label does not depend on the nearby attachToNPC body.",
+        "The nickname cleanup body sits between the large draw method and the TServerPlayer destructor in both class-local layouts. It removes the encoded text token, releases the related object through the virtual path, and clears the member. Its complete normalized feature metrics match exactly.",
+        "The source row named TServerPlayer_TServerPlayer__2 is the original D0 destructor symbol _ZN13TServerPlayerD0Ev, not a second constructor. The target _ZN10MpGzgariDyD0Ev occupies the corresponding deleting-destructor role and calls the target D1 destructor.",
+        "The static variable and static script-variable initializers are an adjacent exact-shape pair immediately before the TServerPlayer property accessors in both builds. The local X and Y setters are another exact-shape pair with the same +0x4a30 relocation and the same 0x10-byte gap after the first setter."
+      ],
+      "match_kind": "manual-tserverplayer-tail-lifecycle-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TServerPlayer_TServerPlayer"
+      ],
+      "original_ea": "0x18de80",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "6997dd3b5418a87bf6f5a5c521855fc9a17314be795e8b9166aafc3f4274ad31",
+        "opcode_shape_hash": "744107f9f120d79de3ec3260d0856a807bf569915749757d3f718cfa3d52a448",
+        "register_shape_hash": "1023882ef3985c66fc5b82641781f3c5acdb4eababb05670a2c9499e80aafd90",
+        "shape_hash": "ddb4f004bba90eaf41261c7a2d80153268b64d0dc9e3005db4115ce1909821c2",
+        "size": 32,
+        "string_refs_hash": null
+      },
+      "original_name": "TServerPlayer_TServerPlayer__2",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerPlayer_TServerPlayer__2",
+      "role": "D0 deleting destructor",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "source D0 destructor symbol, following clearNickWrapped and calling the D1 destructor",
+      "source_demangled_role": "TServerPlayer::~TServerPlayer() [D0]",
+      "source_symbol": "_ZN13TServerPlayerD0Ev",
+      "spectron_current_name": "_ZN10MpGzgariDyD0Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10MpGzgariDyD1Ev"
+      ],
+      "spectron_ea": "0x192780",
+      "spectron_function_end": "0x1927a0",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "6997dd3b5418a87bf6f5a5c521855fc9a17314be795e8b9166aafc3f4274ad31",
+        "opcode_shape_hash": "744107f9f120d79de3ec3260d0856a807bf569915749757d3f718cfa3d52a448",
+        "register_shape_hash": "1023882ef3985c66fc5b82641781f3c5acdb4eababb05670a2c9499e80aafd90",
+        "shape_hash": "ddb4f004bba90eaf41261c7a2d80153268b64d0dc9e3005db4115ce1909821c2",
+        "size": 32,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "table_evidence": {
+        "source_d1_call": "0x18dc98 TServerPlayer_TServerPlayer",
+        "source_demangled_role": "TServerPlayer::~TServerPlayer() [D0]",
+        "source_predecessor": "0x18dc58 TServerPlayer_clearNickWrapped_void",
+        "source_symbol": "_ZN13TServerPlayerD0Ev",
+        "table_kind": "TServerPlayer destructor lifecycle",
+        "target_d1_call": "0x192598 v18_TServerPlayer_TServerPlayer",
+        "target_predecessor": "0x192558 _ZN10MpGzgariDy10Zb7rwaMFgVEv"
+      },
+      "target_delta": "+0x4900"
+    },
+    {
+      "confidence": "high",
+      "context_group": "TServerPlayer property runtime tail",
+      "context_order": 4,
+      "evidence": [
+        "The attachment setter is the callback stored in the source and target attachedtoobject property record at index 3. The target pointer resolves to 0x1912f0, so the label does not depend on the nearby attachToNPC body.",
+        "The nickname cleanup body sits between the large draw method and the TServerPlayer destructor in both class-local layouts. It removes the encoded text token, releases the related object through the virtual path, and clears the member. Its complete normalized feature metrics match exactly.",
+        "The source row named TServerPlayer_TServerPlayer__2 is the original D0 destructor symbol _ZN13TServerPlayerD0Ev, not a second constructor. The target _ZN10MpGzgariDyD0Ev occupies the corresponding deleting-destructor role and calls the target D1 destructor.",
+        "The static variable and static script-variable initializers are an adjacent exact-shape pair immediately before the TServerPlayer property accessors in both builds. The local X and Y setters are another exact-shape pair with the same +0x4a30 relocation and the same 0x10-byte gap after the first setter."
+      ],
+      "match_kind": "manual-tserverplayer-tail-static-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_operator_new_ulong__2"
+      ],
+      "original_ea": "0x1906e8",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 17,
+        "mnemonic_hash": "8876bc8df7b9f7c505170c909788a0e0a05428d69addffac4383dd21dad20f78",
+        "opcode_shape_hash": "d27b056f3e79f589772f4fc22c33d77f07050218b00c01670e2a86cde6e84f4e",
+        "register_shape_hash": "a012bf3eacbd1cb1151c70645d907d78abaaeba445a32f8f7323184525bc14fb",
+        "shape_hash": "fe2911985b630eee44bd50f9529a2a3a1273844b4f5c7b99038c21dbb4fab5ae",
+        "size": 68,
+        "string_refs_hash": null
+      },
+      "original_name": "TServerPlayer_initStaticVars_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerPlayer_initStaticVars_void",
+      "role": "static variable initializer",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "exact static-initializer pair immediately before property accessors",
+      "spectron_current_name": "_Z10HFtL2aJzyWv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._Znwm"
+      ],
+      "spectron_ea": "0x195118",
+      "spectron_function_end": "0x19515c",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 17,
+        "mnemonic_hash": "8876bc8df7b9f7c505170c909788a0e0a05428d69addffac4383dd21dad20f78",
+        "opcode_shape_hash": "d27b056f3e79f589772f4fc22c33d77f07050218b00c01670e2a86cde6e84f4e",
+        "register_shape_hash": "a012bf3eacbd1cb1151c70645d907d78abaaeba445a32f8f7323184525bc14fb",
+        "shape_hash": "fe2911985b630eee44bd50f9529a2a3a1273844b4f5c7b99038c21dbb4fab5ae",
+        "size": 68,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "table_evidence": {
+        "pair_order": "initStaticVars, initStaticScriptVars",
+        "source_following_accessor": "0x19075c TServerPlayer_getProperty_TString_const_TGraalVar",
+        "source_predecessor": "0x19004c TServerPlayer_setWeaponImgs_TString_const",
+        "table_kind": "TServerPlayer property-runtime sequence",
+        "target_following_accessor": "0x19518c v18_TServerPlayer_getProperty_TString_const_TGraalVar",
+        "target_predecessor": "0x194a54 v18_TServerPlayer_setWeaponImgs_TString_const"
+      },
+      "target_delta": "+0x4a30"
+    },
+    {
+      "confidence": "high",
+      "context_group": "TServerPlayer property runtime tail",
+      "context_order": 5,
+      "evidence": [
+        "The attachment setter is the callback stored in the source and target attachedtoobject property record at index 3. The target pointer resolves to 0x1912f0, so the label does not depend on the nearby attachToNPC body.",
+        "The nickname cleanup body sits between the large draw method and the TServerPlayer destructor in both class-local layouts. It removes the encoded text token, releases the related object through the virtual path, and clears the member. Its complete normalized feature metrics match exactly.",
+        "The source row named TServerPlayer_TServerPlayer__2 is the original D0 destructor symbol _ZN13TServerPlayerD0Ev, not a second constructor. The target _ZN10MpGzgariDyD0Ev occupies the corresponding deleting-destructor role and calls the target D1 destructor.",
+        "The static variable and static script-variable initializers are an adjacent exact-shape pair immediately before the TServerPlayer property accessors in both builds. The local X and Y setters are another exact-shape pair with the same +0x4a30 relocation and the same 0x10-byte gap after the first setter."
+      ],
+      "match_kind": "manual-tserverplayer-tail-static-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TServerPlayerProperties_TServerPlayerProperties_void",
+        "plt_operator_new_ulong__2"
+      ],
+      "original_ea": "0x19072c",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 3,
+        "call_count": 2,
+        "instruction_count": 12,
+        "mnemonic_hash": "a847648536bddf8726a71604127ef35f6f8d823158f713ca5da0e64eb34efe47",
+        "opcode_shape_hash": "613512b8a79283d3e57b3fd1662ef3f58514d8312a824242cb61eb475725287b",
+        "register_shape_hash": "78b63b4cee762973d306ffc48e17fa27d9d004dd048d4a47597fed71711dcbdd",
+        "shape_hash": "1060cf0d56d1cb899b911799e675d9b84ad64784ad73fe5d591d8128baaf4e69",
+        "size": 48,
+        "string_refs_hash": null
+      },
+      "original_name": "TServerPlayer_initStaticScriptVars_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerPlayer_initStaticScriptVars_void",
+      "role": "static script-variable initializer",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "exact static-script initializer pair immediately before property accessors",
+      "spectron_current_name": "_Z10O36P2aSys_v",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN20MpGzgariDyPropertiesC1Ev",
+        "._Znwm"
+      ],
+      "spectron_ea": "0x19515c",
+      "spectron_function_end": "0x19518c",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 3,
+        "call_count": 2,
+        "instruction_count": 12,
+        "mnemonic_hash": "a847648536bddf8726a71604127ef35f6f8d823158f713ca5da0e64eb34efe47",
+        "opcode_shape_hash": "613512b8a79283d3e57b3fd1662ef3f58514d8312a824242cb61eb475725287b",
+        "register_shape_hash": "78b63b4cee762973d306ffc48e17fa27d9d004dd048d4a47597fed71711dcbdd",
+        "shape_hash": "1060cf0d56d1cb899b911799e675d9b84ad64784ad73fe5d591d8128baaf4e69",
+        "size": 48,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "table_evidence": {
+        "pair_order": "initStaticVars, initStaticScriptVars",
+        "source_following_accessor": "0x19075c TServerPlayer_getProperty_TString_const_TGraalVar",
+        "source_predecessor": "0x19004c TServerPlayer_setWeaponImgs_TString_const",
+        "table_kind": "TServerPlayer property-runtime sequence",
+        "target_following_accessor": "0x19518c v18_TServerPlayer_getProperty_TString_const_TGraalVar",
+        "target_predecessor": "0x194a54 v18_TServerPlayer_setWeaponImgs_TString_const"
+      },
+      "target_delta": "+0x4a30"
+    },
+    {
+      "confidence": "high",
+      "context_group": "TServerPlayer local-coordinate setters",
+      "context_order": 6,
+      "evidence": [
+        "The attachment setter is the callback stored in the source and target attachedtoobject property record at index 3. The target pointer resolves to 0x1912f0, so the label does not depend on the nearby attachToNPC body.",
+        "The nickname cleanup body sits between the large draw method and the TServerPlayer destructor in both class-local layouts. It removes the encoded text token, releases the related object through the virtual path, and clears the member. Its complete normalized feature metrics match exactly.",
+        "The source row named TServerPlayer_TServerPlayer__2 is the original D0 destructor symbol _ZN13TServerPlayerD0Ev, not a second constructor. The target _ZN10MpGzgariDyD0Ev occupies the corresponding deleting-destructor role and calls the target D1 destructor.",
+        "The static variable and static script-variable initializers are an adjacent exact-shape pair immediately before the TServerPlayer property accessors in both builds. The local X and Y setters are another exact-shape pair with the same +0x4a30 relocation and the same 0x10-byte gap after the first setter."
+      ],
+      "match_kind": "manual-tserverplayer-tail-coordinate-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TGaniObject_setlocalx_double_bool",
+        "plt_TList_operator_index_int"
+      ],
+      "original_ea": "0x1908b8",
+      "original_metrics": {
+        "basic_block_count": 12,
+        "branch_count": 11,
+        "call_count": 5,
+        "instruction_count": 74,
+        "mnemonic_hash": "1f40495b22460d29d39702d5393dc31c400eac7c7e685f2d3c8193e5ab8df7f1",
+        "opcode_shape_hash": "864e5281b61ddb54a9f874a211878e3527b8358392748f067688aa0b29046724",
+        "register_shape_hash": "966ac826988e6b6cea055ac8d5755e431d41068002b6854cba9b8288b8bd4b75",
+        "shape_hash": "96580631982d81047f410da78d98c20c78dedc434fb7c6cd4b505b05557ce875",
+        "size": 296,
+        "string_refs_hash": null
+      },
+      "original_name": "TServerPlayer_setlocalx_double_bool",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerPlayer_setlocalx_double_bool",
+      "role": "local X setter",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "paired local-coordinate setter sequence",
+      "spectron_current_name": "_ZN10MpGzgariDy10yizVgakj2QEdb",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10ieJzgaIFFy10yizVgakj2QEdb",
+        "._ZNK10vy1JgaKVkHixEi"
+      ],
+      "spectron_ea": "0x1952e8",
+      "spectron_function_end": "0x195410",
+      "spectron_metrics": {
+        "basic_block_count": 12,
+        "branch_count": 11,
+        "call_count": 5,
+        "instruction_count": 74,
+        "mnemonic_hash": "1f40495b22460d29d39702d5393dc31c400eac7c7e685f2d3c8193e5ab8df7f1",
+        "opcode_shape_hash": "864e5281b61ddb54a9f874a211878e3527b8358392748f067688aa0b29046724",
+        "register_shape_hash": "966ac826988e6b6cea055ac8d5755e431d41068002b6854cba9b8288b8bd4b75",
+        "shape_hash": "96580631982d81047f410da78d98c20c78dedc434fb7c6cd4b505b05557ce875",
+        "size": 296,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "table_evidence": {
+        "source_gap_after_first_setter": "0x10",
+        "source_pair": "0x1908b8 setlocalx, 0x1909f0 setlocaly",
+        "table_kind": "TServerPlayer local-coordinate setter sequence",
+        "target_class": "MpGzgariDy",
+        "target_gap_after_first_setter": "0x10",
+        "target_pair": "0x1952e8 setlocalx, 0x195420 setlocaly"
+      },
+      "target_delta": "+0x4a30"
+    },
+    {
+      "confidence": "high",
+      "context_group": "TServerPlayer local-coordinate setters",
+      "context_order": 7,
+      "evidence": [
+        "The attachment setter is the callback stored in the source and target attachedtoobject property record at index 3. The target pointer resolves to 0x1912f0, so the label does not depend on the nearby attachToNPC body.",
+        "The nickname cleanup body sits between the large draw method and the TServerPlayer destructor in both class-local layouts. It removes the encoded text token, releases the related object through the virtual path, and clears the member. Its complete normalized feature metrics match exactly.",
+        "The source row named TServerPlayer_TServerPlayer__2 is the original D0 destructor symbol _ZN13TServerPlayerD0Ev, not a second constructor. The target _ZN10MpGzgariDyD0Ev occupies the corresponding deleting-destructor role and calls the target D1 destructor.",
+        "The static variable and static script-variable initializers are an adjacent exact-shape pair immediately before the TServerPlayer property accessors in both builds. The local X and Y setters are another exact-shape pair with the same +0x4a30 relocation and the same 0x10-byte gap after the first setter."
+      ],
+      "match_kind": "manual-tserverplayer-tail-coordinate-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TGaniObject_setlocaly_double_bool",
+        "plt_TList_operator_index_int"
+      ],
+      "original_ea": "0x1909f0",
+      "original_metrics": {
+        "basic_block_count": 12,
+        "branch_count": 11,
+        "call_count": 5,
+        "instruction_count": 74,
+        "mnemonic_hash": "1f40495b22460d29d39702d5393dc31c400eac7c7e685f2d3c8193e5ab8df7f1",
+        "opcode_shape_hash": "864e5281b61ddb54a9f874a211878e3527b8358392748f067688aa0b29046724",
+        "register_shape_hash": "966ac826988e6b6cea055ac8d5755e431d41068002b6854cba9b8288b8bd4b75",
+        "shape_hash": "96580631982d81047f410da78d98c20c78dedc434fb7c6cd4b505b05557ce875",
+        "size": 296,
+        "string_refs_hash": null
+      },
+      "original_name": "TServerPlayer_setlocaly_double_bool",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerPlayer_setlocaly_double_bool",
+      "role": "local Y setter",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "paired local-coordinate setter sequence",
+      "spectron_current_name": "_ZN10MpGzgariDy10rysVgaGDXQEdb",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10ieJzgaIFFy10rysVgaGDXQEdb",
+        "._ZNK10vy1JgaKVkHixEi"
+      ],
+      "spectron_ea": "0x195420",
+      "spectron_function_end": "0x195548",
+      "spectron_metrics": {
+        "basic_block_count": 12,
+        "branch_count": 11,
+        "call_count": 5,
+        "instruction_count": 74,
+        "mnemonic_hash": "1f40495b22460d29d39702d5393dc31c400eac7c7e685f2d3c8193e5ab8df7f1",
+        "opcode_shape_hash": "864e5281b61ddb54a9f874a211878e3527b8358392748f067688aa0b29046724",
+        "register_shape_hash": "966ac826988e6b6cea055ac8d5755e431d41068002b6854cba9b8288b8bd4b75",
+        "shape_hash": "96580631982d81047f410da78d98c20c78dedc434fb7c6cd4b505b05557ce875",
+        "size": 296,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "table_evidence": {
+        "source_gap_after_first_setter": "0x10",
+        "source_pair": "0x1908b8 setlocalx, 0x1909f0 setlocaly",
+        "table_kind": "TServerPlayer local-coordinate setter sequence",
+        "target_class": "MpGzgariDy",
+        "target_gap_after_first_setter": "0x10",
+        "target_pair": "0x1952e8 setlocalx, 0x195420 setlocaly"
+      },
+      "target_delta": "+0x4a30"
+    }
+  ],
+  "artifact": "spectron_tserverplayer_tail_manual_translation_anchors_20260826",
+  "context": {
+    "attachment_property_index": 3,
+    "source_attachment_property_table": "0x37ce00",
+    "source_class": "TServerPlayer",
+    "source_property_accessor_following_tail": "0x19075c through 0x19084c",
+    "source_range": "0x18ca40 through 0x190b18",
+    "target_attachment_property_table": "0x38fe60",
+    "target_class": "MpGzgariDy",
+    "target_default_name_note": "Only the attachment setter target was a default sub_ name. The six other targets retained obfuscated or existing non-default names.",
+    "target_property_accessor_following_tail": "0x19518c through 0x1952e8",
+    "target_range": "0x1912f0 through 0x195548"
+  },
+  "inputs": {
+    "original_binary": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so",
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_current.json",
+    "original_features_sha256": "243341ad40e912500365b6d7eb5b69f9f3b9d6200f5c825629cfc56d4343ac07",
+    "semantic_map": "/tmp/spectron_semantic_map.json",
+    "semantic_map_sha256": "c0906607542480e1fbe33e9e0bf5030581efd55ee71987cf0a7ca792b68664fc",
+    "spectron_binary": "/tmp/spectron-libqplay-inspect/lib/arm64-v8a/libqplay.so",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v163.json",
+    "spectron_features_sha256": "83dcd621dab0caed151d3aa628c5ee1af37f949ad138fbac7979f7d0d4d5a703"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The v18_ aliases preserve the readable 1.8 roles while the artifact records the target names, complete normalized metrics, and class-local sequence evidence.",
+    "The source label TServerPlayer_TServerPlayer__2 is documented as the D0 deleting destructor because its original symbol is _ZN13TServerPlayerD0Ev.",
+    "All seven pairs are exact normalized-shape matches. The address deltas are recorded per row and are not generalized into one class-wide relocation rule."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for the final seven named TServerPlayer residual methods",
+  "shared_context": [],
+  "summary": {
+    "address_delta_groups": {
+      "+0x48b0": 1,
+      "+0x4900": 2,
+      "+0x4a30": 4
+    },
+    "already_in_semantic_map": 0,
+    "anchor_count": 7,
+    "boundary_anchor_count": 0,
+    "exact_shape_anchor_count": 7,
+    "high_confidence_count": 7,
+    "layout_change_anchor_count": 0,
+    "new_context_anchor_count": 7,
+    "target_default_name_count": 1
+  }
+}

@@ -5172,6 +5172,63 @@ and zero failures across 11,679 functions. The v108 database has 1,684
 remaining default `sub_` names. Its SHA-256 is
 `8350a43be6b31306954e34a17f77d742c8d1702015d671019d2bf2dd6c1bb1e1`.
 
+## 2026-08-27: Spectron TServerPlayer lifecycle and property-runtime tail
+
+The v164 pass closes the seven named `TServerPlayer` rows that remained after
+the registration-table work. The attachment setter is directly confirmed by
+the `attachedtoobject` property record. The cleanup, destructor, static
+initializer, and coordinate rows are supported by exact normalized metrics and
+class-local sequence evidence.
+
+| Source method | 1.8 address | Spectron address | Target name before alias | Evidence |
+| --- | ---: | ---: | --- | --- |
+| `TServerPlayer_setAttachedToObject` | `0x18ca40` | `0x1912f0` | `sub_1912F0` | property index 3 setter pointer |
+| `TServerPlayer_clearNickWrapped_void` | `0x18dc58` | `0x192558` | `_ZN10MpGzgariDy10Zb7rwaMFgVEv` | cleanup method between draw and destructor |
+| `TServerPlayer_TServerPlayer__2` | `0x18de80` | `0x192780` | `_ZN10MpGzgariDyD0Ev` | D0 deleting-destructor sequence |
+| `TServerPlayer_initStaticVars_void` | `0x1906e8` | `0x195118` | `_Z10HFtL2aJzyWv` | first static-initializer pair member |
+| `TServerPlayer_initStaticScriptVars_void` | `0x19072c` | `0x19515c` | `_Z10O36P2aSys_v` | second static-initializer pair member |
+| `TServerPlayer_setlocalx_double_bool` | `0x1908b8` | `0x1952e8` | `_ZN10MpGzgariDy10yizVgakj2QEdb` | first local-coordinate setter |
+| `TServerPlayer_setlocaly_double_bool` | `0x1909f0` | `0x195420` | `_ZN10MpGzgariDy10rysVgaGDXQEdb` | second local-coordinate setter |
+
+The property-table proof for the first row uses the same table layout as the
+v163 pass. The source record is at `0x37ce90` and the target record is at
+`0x38fef0`. Both decode to `attachedtoobject`, and their setter pointers are
+`0x18ca40` and `0x1912f0`. This is a direct callback reference, not a guess
+based on the short body appearing after `attachToNPC`.
+
+The lifecycle evidence also corrects a misleading local alias. The source
+feature row `TServerPlayer_TServerPlayer__2` is backed by the original ELF
+symbol `_ZN13TServerPlayerD0Ev`. The `__2` suffix came from the local symbol
+aliasing convention and does not mean a second constructor. The source D0
+destructor follows `clearNickWrapped` and calls the D1 destructor. Spectron's
+`_ZN10MpGzgariDyD0Ev` at `0x192780` follows the same role after the cleanup
+body and the target D1 destructor at `0x192598`.
+
+The static initializer pair is also stable in class-local order. In 1.8,
+`initStaticVars` and `initStaticScriptVars` follow
+`setWeaponImgs` at `0x19004c` and precede `getProperty` at `0x19075c`. In
+Spectron, the corresponding pair follows the translated
+`setWeaponImgs` at `0x194a54` and precedes translated `getProperty` at
+`0x19518c`. Both pairs retain 68-byte and 48-byte exact shapes.
+
+The local X and Y setters are each 296 bytes with 74 instructions, 12 basic
+blocks, 11 branches, and five calls. The source and target retain the 0x10
+byte gap after the first setter. Both target bodies keep their obfuscated
+`MpGzgariDy` names before aliasing, and both relocate by `+0x4a30`.
+
+All seven pairs match every normalized feature field, including the
+string-reference digest. Only `0x1912f0` had a default target name. The seven
+aliases were applied and reopened in
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v164.i64`.
+The database contains 11,694 functions and 1,333 default `sub_` names. The
+full semantic reopen check still reports 3,641 high-confidence labels and zero
+failures. The database SHA-256 is
+`321b0d07651f463e128399cc3e0e0f56669394cd6ba97ed1c13224b6a5462cc5`.
+The generator is
+`tools/generate_spectron_tserverplayer_tail_anchors.py`, and the complete
+review record is
+`artifacts/spectron_tserverplayer_tail_manual_translation_anchors_20260826.json`.
+
 ## 2026-08-27: Spectron TServerPlayer registration-table residuals
 
 The v163 pass resolves the next group of residual `TServerPlayer` methods by

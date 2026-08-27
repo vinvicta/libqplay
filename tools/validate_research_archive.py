@@ -536,6 +536,9 @@ def main():
     spectron_tserverplayer_residual_anchors = load_json(
         "artifacts/spectron_tserverplayer_residual_manual_translation_anchors_20260826.json"
     )
+    spectron_tserverplayer_tail_anchors = load_json(
+        "artifacts/spectron_tserverplayer_tail_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2994,13 +2997,26 @@ def main():
     check("Spectron TServerPlayer residual boundary count", spectron_tserverplayer_residual_anchors["summary"]["boundary_anchor_count"], 3)
     check("Spectron TServerPlayer residual shared context count", spectron_tserverplayer_residual_anchors["summary"]["shared_context_count"], 2)
     check(
+        "Spectron TServerPlayer tail artifact",
+        spectron_tserverplayer_tail_anchors["artifact"],
+        "spectron_tserverplayer_tail_manual_translation_anchors_20260826",
+    )
+    check("Spectron TServerPlayer tail network", spectron_tserverplayer_tail_anchors["network_contacted"], False)
+    check("Spectron TServerPlayer tail total", spectron_tserverplayer_tail_anchors["summary"]["anchor_count"], 7)
+    check("Spectron TServerPlayer tail high confidence", spectron_tserverplayer_tail_anchors["summary"]["high_confidence_count"], 7)
+    check("Spectron TServerPlayer tail semantic overlap", spectron_tserverplayer_tail_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron TServerPlayer tail default targets", spectron_tserverplayer_tail_anchors["summary"]["target_default_name_count"], 1)
+    check("Spectron TServerPlayer tail exact-shape count", spectron_tserverplayer_tail_anchors["summary"]["exact_shape_anchor_count"], 7)
+    check("Spectron TServerPlayer tail layout-change count", spectron_tserverplayer_tail_anchors["summary"]["layout_change_anchor_count"], 0)
+    check("Spectron TServerPlayer tail boundary count", spectron_tserverplayer_tail_anchors["summary"]["boundary_anchor_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1334)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1333)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -3161,7 +3177,8 @@ def main():
     check("Spectron checkpoint TPlayer flag setter anchor count", spectron_checkpoint["tplayer_flag_setter_anchors"]["verified_name_count"], 7)
     check("Spectron checkpoint TServerPlayer property-block anchor count", spectron_checkpoint["tserverplayer_property_block_anchors"]["verified_name_count"], 39)
     check("Spectron checkpoint TServerPlayer residual anchor count", spectron_checkpoint["tserverplayer_residual_anchors"]["verified_name_count"], 25)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "a71091ea191f50791b1f5c74d11beb104b96fc828b80fee65ec4609ff9f2d6cb")
+    check("Spectron checkpoint TServerPlayer tail anchor count", spectron_checkpoint["tserverplayer_tail_anchors"]["verified_name_count"], 7)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "321b0d07651f463e128399cc3e0e0f56669394cd6ba97ed1c13224b6a5462cc5")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],

@@ -343,6 +343,8 @@ def main() -> None:
     parser.add_argument("--tserverplayer-property-block-verification", type=Path)
     parser.add_argument("--tserverplayer-residual-anchors", type=Path)
     parser.add_argument("--tserverplayer-residual-verification", type=Path)
+    parser.add_argument("--tserverplayer-tail-anchors", type=Path)
+    parser.add_argument("--tserverplayer-tail-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -4806,6 +4808,34 @@ def main() -> None:
         result["tserverplayer_residual_anchors"] = tserverplayer_residual
         result["interpretation"].append(
             "The one-hundred-sixty-third database revision also contains the separately reviewed TServerPlayer registration-table callback anchors."
+        )
+    tserverplayer_tail = None
+    if args.tserverplayer_tail_anchors or args.tserverplayer_tail_verification:
+        if not args.tserverplayer_tail_anchors or not args.tserverplayer_tail_verification:
+            raise ValueError(
+                "TServerPlayer tail anchors and verification must be supplied together"
+            )
+        tserverplayer_tail_document = load(args.tserverplayer_tail_anchors)
+        tserverplayer_tail_verification = load(args.tserverplayer_tail_verification)
+        if tserverplayer_tail_document.get("artifact") != "spectron_tserverplayer_tail_manual_translation_anchors_20260826":
+            raise ValueError("unexpected TServerPlayer tail artifact")
+        if not tserverplayer_tail_verification.get("verified"):
+            raise ValueError("TServerPlayer tail reopen verification did not pass")
+        expected_tserverplayer_tail = len(tserverplayer_tail_document["anchors"])
+        if tserverplayer_tail_verification["verified_name_count"] != expected_tserverplayer_tail:
+            raise ValueError("TServerPlayer tail verification count differs from artifact")
+        tserverplayer_tail = {
+            "anchor_path": str(args.tserverplayer_tail_anchors),
+            "anchor_sha256": sha256_path(args.tserverplayer_tail_anchors),
+            "reopen_verification": str(args.tserverplayer_tail_verification),
+            "anchor_count": expected_tserverplayer_tail,
+            "verified_name_count": tserverplayer_tail_verification["verified_name_count"],
+            "reopen_failure_count": tserverplayer_tail_verification["failure_count"],
+        }
+    if tserverplayer_tail is not None:
+        result["tserverplayer_tail_anchors"] = tserverplayer_tail
+        result["interpretation"].append(
+            "The one-hundred-sixty-fourth database revision also contains the separately reviewed TServerPlayer lifecycle, static-initializer, attachment, and coordinate-tail anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
