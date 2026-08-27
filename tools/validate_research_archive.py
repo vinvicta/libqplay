@@ -434,6 +434,9 @@ def main():
     spectron_guicontrol_event_sizing_residual_anchors = load_json(
         "artifacts/spectron_guicontrol_event_sizing_residual_manual_translation_anchors_20260826.json"
     )
+    spectron_guicontrol_style_bounds_residual_anchors = load_json(
+        "artifacts/spectron_guicontrol_style_bounds_residual_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2462,13 +2465,25 @@ def main():
     check("Spectron GuiControl event and sizing residual default targets", spectron_guicontrol_event_sizing_residual_anchors["summary"]["target_default_name_count"], 3)
     check("Spectron GuiControl event and sizing residual exact-shape count", spectron_guicontrol_event_sizing_residual_anchors["summary"]["exact_shape_anchor_count"], 8)
     check(
+        "Spectron GuiControl style and bounds residual artifact",
+        spectron_guicontrol_style_bounds_residual_anchors["artifact"],
+        "spectron_guicontrol_style_bounds_residual_manual_translation_anchors_20260826",
+    )
+    check("Spectron GuiControl style and bounds residual network", spectron_guicontrol_style_bounds_residual_anchors["network_contacted"], False)
+    check("Spectron GuiControl style and bounds residual total", spectron_guicontrol_style_bounds_residual_anchors["summary"]["anchor_count"], 12)
+    check("Spectron GuiControl style and bounds residual high confidence", spectron_guicontrol_style_bounds_residual_anchors["summary"]["high_confidence_count"], 12)
+    check("Spectron GuiControl style and bounds residual semantic overlap", spectron_guicontrol_style_bounds_residual_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron GuiControl style and bounds residual default targets", spectron_guicontrol_style_bounds_residual_anchors["summary"]["target_default_name_count"], 12)
+    check("Spectron GuiControl style and bounds residual exact-shape count", spectron_guicontrol_style_bounds_residual_anchors["summary"]["exact_shape_anchor_count"], 11)
+    check("Spectron GuiControl style and bounds residual layout-change count", spectron_guicontrol_style_bounds_residual_anchors["summary"]["layout_change_anchor_count"], 1)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11679)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1526)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1514)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -2595,7 +2610,8 @@ def main():
     check("Spectron checkpoint GuiControl property residual anchor count", spectron_checkpoint["gui_control_property_residual_anchors"]["verified_name_count"], 61)
     check("Spectron checkpoint GuiControl virtual residual anchor count", spectron_checkpoint["gui_control_virtual_residual_anchors"]["verified_name_count"], 13)
     check("Spectron checkpoint GuiControl event and sizing residual anchor count", spectron_checkpoint["gui_control_event_sizing_residual_anchors"]["verified_name_count"], 8)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "a8b9293373fc4424b5a6de148a3822fd2819e21888703d1062aea3117bb1d1c5")
+    check("Spectron checkpoint GuiControl style and bounds residual anchor count", spectron_checkpoint["gui_control_style_bounds_residual_anchors"]["verified_name_count"], 12)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "d48e2c7f17fb26f72f4619589b6612cffdd862570476f3e3efa77b3b5c67d6b4")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -2782,6 +2798,7 @@ def main():
         spectron_guicontrol_property_residual_anchors,
         spectron_guicontrol_virtual_residual_anchors,
         spectron_guicontrol_event_sizing_residual_anchors,
+        spectron_guicontrol_style_bounds_residual_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
