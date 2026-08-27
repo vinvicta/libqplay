@@ -1,0 +1,117 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both reset the player action, restart and level state, freeze and carrying fields, emoticon state, and board counters before loading the initial level.",
+        "Both choose the same starting action value based on server privileges and the Games server name, apply the same no-heal and health thresholds, restore the default animation, and send the same initial level-link or spawn state.",
+        "Both update the restart position and board coordinates, and use the same Could not find the level error path with the levels log category when no level or client is available. The target preserves the 27-block shape and grows from 1004 to 1028 bytes for rebuilt wrappers and shifted player fields."
+      ],
+      "match_kind": "manual-player-lifecycle-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x178160",
+      "original_metrics": {
+        "basic_block_count": 27,
+        "instruction_count": 248,
+        "mnemonic_hash": "995a1344c88a1ab0bd4dc205a723c2cd60ad5e3fcb58df1bc7fbba902e4d5531",
+        "register_shape_hash": "1cc0831a51932d25a17c8ba83dfc03dcc50135b5594524623b1c6249443086b4",
+        "shape_hash": "b0bf7c68c08444086539b8b772a51154038f75e81d0dc139ad7657f323971f72",
+        "size": 1004
+      },
+      "original_name": "TPlayer_loadStartLevel_bool",
+      "original_string_refs": [
+        " !",
+        "Could not find the level ",
+        "Games",
+        "levels"
+      ],
+      "proposed_name": "v18_TPlayer_loadStartLevel_bool",
+      "semantic_match_already_present": false,
+      "source_basis": "player start-level reset and initial level load",
+      "spectron_current_name": "_ZN10W6NzgawMJy10QoIhLaFYvoEb",
+      "spectron_default_name": false,
+      "spectron_ea": "0x17c3e8",
+      "spectron_metrics": {
+        "basic_block_count": 27,
+        "instruction_count": 254,
+        "mnemonic_hash": "d41d6f587c8c52374e57d2128d79dc8aac1b13e2f7b298269a6b51b03bd3d6e2",
+        "register_shape_hash": "cac1712c970cf496f20a674dc610758e684b0dc206069045da18fb2029ffe755",
+        "shape_hash": "3cd9e2794d13cb44d433ee454c16d7702e189f1eba91c0c9b75a8f21b10e8cd8",
+        "size": 1028
+      },
+      "spectron_string_refs": [
+        " !",
+        "Could not find the level ",
+        "Games",
+        "levels"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both refresh the same sequence of encoded player fields, update action mode and freeze or restart counters, and maintain the same emoticon timeout path keyed by the stay animation name.",
+        "Both branch on the server mode and player state, run the server-player timer, perform key and sitting or sleeping checks, animate the player and level, update lava and map-link state, and send the same board, show-image, and movement-buffer updates.",
+        "The target preserves the source 148-block control-flow shape and differs by only 12 bytes in the 5140-byte body. Field offsets shift with the larger target player object, while the periodic-update sequence and call order remain aligned."
+      ],
+      "match_kind": "manual-player-lifecycle-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x179594",
+      "original_metrics": {
+        "basic_block_count": 148,
+        "instruction_count": 1278,
+        "mnemonic_hash": "6d43a3c10c82e6412c5e5acde8a8a15c9e5856028e367470951ba7c99fb5ab13",
+        "register_shape_hash": "b911ee25f009c7d8ebd70512e9b0950b6ce1190deaffed810b81f33caef3cac2",
+        "shape_hash": "4d8f0b7566ad6ae1ecdd88b2022dc3e68d23b4bbbdc8cea067021ac4423f32f2",
+        "size": 5128
+      },
+      "original_name": "TPlayer_timer_void",
+      "original_string_refs": [
+        "stay"
+      ],
+      "proposed_name": "v18_TPlayer_timer_void",
+      "semantic_match_already_present": false,
+      "source_basis": "player periodic update and network-state timer",
+      "spectron_current_name": "_ZN10W6NzgawMJy10CxvRIaV8ClEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x17d8cc",
+      "spectron_metrics": {
+        "basic_block_count": 148,
+        "instruction_count": 1281,
+        "mnemonic_hash": "f12451cfc439c4429db835171497bf02246a538b651cbbd24e6cbc7f837bf829",
+        "register_shape_hash": "1c628bb818921a92d47be1f44b1190b3c347883b4d6b53e9f678254a85017924",
+        "shape_hash": "f6337ffc747d9d6c2b23d8c7e1b002a1b918ca91509f62be38cddead5a101b52",
+        "size": 5140
+      },
+      "spectron_string_refs": [
+        "stay"
+      ]
+    }
+  ],
+  "artifact": "spectron_player_lifecycle_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v1_saved.json",
+    "spectron_features_sha256": "a8d58f85502362316ee99a0f79c2cd7a4ad5d6fac94aca0ee75bd0d2965fc2a1"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The correspondence relies on matching player-field patterns, class-local order, preserved basic-block counts, distinctive level and animation literals, and reviewed pseudocode behavior rather than byte identity."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for player start-level loading and periodic updates",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 2,
+    "high_confidence_count": 2,
+    "new_context_anchor_count": 2,
+    "target_default_name_count": 0
+  }
+}

@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v59.i64",
-    "sha256": "a2f9a22dfe43d846c7a354fc79c7fb44e7727d58610bfb39ebbd26b6c133e95f"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v60.i64",
+    "sha256": "9254878f5c135452260508068fa54f3ca6821d6cbd506af49dc14fd08bea4ab2"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -202,7 +202,8 @@
     "The fifty-fourth database revision also contains the separately reviewed particle animation, appearance, and polygon anchors.",
     "The fifty-fifth database revision also contains the separately reviewed TShowImg serialization and network-property anchors.",
     "The fifty-sixth database revision also contains the separately reviewed particle-emitter initializer and emission anchors.",
-    "The fifty-seventh database revision also contains the separately reviewed explosion, carry, and flying server-animation anchors."
+    "The fifty-seventh database revision also contains the separately reviewed explosion, carry, and flying server-animation anchors.",
+    "The fifty-eighth database revision also contains the separately reviewed player start-level and periodic-update anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -292,6 +293,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_player_helper_verify_v24.json",
     "verified_name_count": 5
+  },
+  "player_lifecycle_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "artifacts/spectron_player_lifecycle_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "1fdc678fc14955ba1227b29fa912ad85de581bc599eaf6379498a54bc2125adf",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_player_lifecycle_verification_v60.json",
+    "verified_name_count": 2
   },
   "render_gui_anchors": {
     "anchor_count": 20,

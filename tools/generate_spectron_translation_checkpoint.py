@@ -139,6 +139,8 @@ def main() -> None:
     parser.add_argument("--particle-emitter-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
     parser.add_argument("--server-animation-verification", type=Path)
+    parser.add_argument("--player-lifecycle-anchors", type=Path)
+    parser.add_argument("--player-lifecycle-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1746,6 +1748,34 @@ def main() -> None:
         result["server_animation_anchors"] = server_animation
         result["interpretation"].append(
             "The fifty-seventh database revision also contains the separately reviewed explosion, carry, and flying server-animation anchors."
+        )
+    player_lifecycle = None
+    if args.player_lifecycle_anchors or args.player_lifecycle_verification:
+        if not args.player_lifecycle_anchors or not args.player_lifecycle_verification:
+            raise ValueError(
+                "player-lifecycle anchors and player-lifecycle verification must be supplied together"
+            )
+        player_lifecycle_document = load(args.player_lifecycle_anchors)
+        player_lifecycle_verification = load(args.player_lifecycle_verification)
+        if player_lifecycle_document.get("artifact") != "spectron_player_lifecycle_manual_translation_anchors_20260826":
+            raise ValueError("unexpected player-lifecycle anchor artifact")
+        if not player_lifecycle_verification.get("verified"):
+            raise ValueError("player-lifecycle anchor reopen verification did not pass")
+        expected_player_lifecycle = len(player_lifecycle_document["anchors"])
+        if player_lifecycle_verification["verified_name_count"] != expected_player_lifecycle:
+            raise ValueError("player-lifecycle verification count differs from artifact")
+        player_lifecycle = {
+            "anchor_path": str(args.player_lifecycle_anchors),
+            "anchor_sha256": sha256_path(args.player_lifecycle_anchors),
+            "reopen_verification": str(args.player_lifecycle_verification),
+            "anchor_count": expected_player_lifecycle,
+            "verified_name_count": player_lifecycle_verification["verified_name_count"],
+            "reopen_failure_count": player_lifecycle_verification["failure_count"],
+        }
+    if player_lifecycle is not None:
+        result["player_lifecycle_anchors"] = player_lifecycle
+        result["interpretation"].append(
+            "The fifty-eighth database revision also contains the separately reviewed player start-level and periodic-update anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

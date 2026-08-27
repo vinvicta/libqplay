@@ -230,6 +230,9 @@ def main():
     spectron_server_animation_anchors = load_json(
         "artifacts/spectron_server_animation_manual_translation_anchors_20260826.json"
     )
+    spectron_player_lifecycle_anchors = load_json(
+        "artifacts/spectron_player_lifecycle_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -1570,6 +1573,16 @@ def main():
     check("Spectron server-animation semantic overlap", spectron_server_animation_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron server-animation default targets", spectron_server_animation_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron player-lifecycle artifact",
+        spectron_player_lifecycle_anchors["artifact"],
+        "spectron_player_lifecycle_manual_translation_anchors_20260826",
+    )
+    check("Spectron player-lifecycle network", spectron_player_lifecycle_anchors["network_contacted"], False)
+    check("Spectron player-lifecycle total", spectron_player_lifecycle_anchors["summary"]["anchor_count"], 2)
+    check("Spectron player-lifecycle high confidence", spectron_player_lifecycle_anchors["summary"]["high_confidence_count"], 2)
+    check("Spectron player-lifecycle semantic overlap", spectron_player_lifecycle_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron player-lifecycle default targets", spectron_player_lifecycle_anchors["summary"]["target_default_name_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -1634,7 +1647,8 @@ def main():
     check("Spectron checkpoint ShowImg anchor count", spectron_checkpoint["showimg_anchors"]["verified_name_count"], 3)
     check("Spectron checkpoint particle-emitter anchor count", spectron_checkpoint["particle_emitter_anchors"]["verified_name_count"], 2)
     check("Spectron checkpoint server-animation anchor count", spectron_checkpoint["server_animation_anchors"]["verified_name_count"], 3)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "a2f9a22dfe43d846c7a354fc79c7fb44e7727d58610bfb39ebbd26b6c133e95f")
+    check("Spectron checkpoint player-lifecycle anchor count", spectron_checkpoint["player_lifecycle_anchors"]["verified_name_count"], 2)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "9254878f5c135452260508068fa54f3ca6821d6cbd506af49dc14fd08bea4ab2")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -1753,6 +1767,7 @@ def main():
         spectron_showimg_anchors,
         spectron_particle_emitter_anchors,
         spectron_server_animation_anchors,
+        spectron_player_lifecycle_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
