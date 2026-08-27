@@ -179,6 +179,8 @@ def main() -> None:
     parser.add_argument("--hidden-testnpc-verification", type=Path)
     parser.add_argument("--level-map-lookup-anchors", type=Path)
     parser.add_argument("--level-map-lookup-verification", type=Path)
+    parser.add_argument("--gani-constructor-anchors", type=Path)
+    parser.add_argument("--gani-constructor-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2346,6 +2348,34 @@ def main() -> None:
         result["level_map_lookup_anchors"] = level_map_lookup
         result["interpretation"].append(
             "The seventy-seventh database revision also contains the separately reviewed level lookup, link serialization, map selection, and GMAP loading anchors."
+        )
+    gani_constructor = None
+    if args.gani_constructor_anchors or args.gani_constructor_verification:
+        if not args.gani_constructor_anchors or not args.gani_constructor_verification:
+            raise ValueError(
+                "Gani constructor anchors and Gani constructor verification must be supplied together"
+            )
+        gani_constructor_document = load(args.gani_constructor_anchors)
+        gani_constructor_verification = load(args.gani_constructor_verification)
+        if gani_constructor_document.get("artifact") != "spectron_gani_constructor_manual_translation_anchor_20260826":
+            raise ValueError("unexpected Gani constructor anchor artifact")
+        if not gani_constructor_verification.get("verified"):
+            raise ValueError("Gani constructor anchor reopen verification did not pass")
+        expected_gani_constructor = len(gani_constructor_document["anchors"])
+        if gani_constructor_verification["verified_name_count"] != expected_gani_constructor:
+            raise ValueError("Gani constructor verification count differs from artifact")
+        gani_constructor = {
+            "anchor_path": str(args.gani_constructor_anchors),
+            "anchor_sha256": sha256_path(args.gani_constructor_anchors),
+            "reopen_verification": str(args.gani_constructor_verification),
+            "anchor_count": expected_gani_constructor,
+            "verified_name_count": gani_constructor_verification["verified_name_count"],
+            "reopen_failure_count": gani_constructor_verification["failure_count"],
+        }
+    if gani_constructor is not None:
+        result["gani_constructor_anchors"] = gani_constructor
+        result["interpretation"].append(
+            "The seventy-eighth database revision also contains the separately reviewed TGaniObject server-level constructor anchor."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

@@ -983,6 +983,13 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_level_map_lookup_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+140. Clean IDA review added one high-confidence `TGaniObject` constructor
+     anchor. The target preserves the animation-parameter and color-variable
+     initialization, including the `attr` and `black` literals. It reopened
+     successfully in the v80 disposable copy. See
+     `artifacts/spectron_gani_constructor_manual_translation_anchor_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

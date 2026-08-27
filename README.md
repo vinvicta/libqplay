@@ -839,6 +839,15 @@ successfully. The evidence is in
 `artifacts/spectron_level_map_lookup_manual_translation_anchors_20260826.json`,
 and the v79 database SHA-256 is recorded in the checkpoint.
 
+An additional v80 disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v80.i64`,
+adds the reviewed `TGaniObject` constructor anchor. The target preserves the
+same animation-parameter and color-variable initialization, including the
+`attr` and `black` literals. Its larger body also records the extra Spectron
+random-seed and encoded-buffer state. The label reopened successfully, with
+the evidence in
+`artifacts/spectron_gani_constructor_manual_translation_anchor_20260826.json`.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
