@@ -813,6 +813,15 @@ evidence is in
 `artifacts/spectron_server_level_side_helpers_manual_translation_anchors_20260826.json`,
 and the v76 database SHA-256 is recorded in the checkpoint.
 
+A seventy-fifth disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v77.i64`,
+adds four reviewed server-level construction, encrypted storage, and
+player-enter dispatch anchors. The constructor, save, load, and callback
+methods preserve the source control-flow shapes and serialized-format or
+event-dispatch behavior. All four reopened successfully. The evidence is in
+`artifacts/spectron_server_level_storage_manual_translation_anchors_20260826.json`,
+and the v77 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and

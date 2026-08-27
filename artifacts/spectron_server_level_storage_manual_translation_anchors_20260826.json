@@ -1,0 +1,218 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both lower-case and store the supplied level name, initialize the same base and server-level fields, create the tile-layer and board children, and allocate the same collection slots.",
+        "Both construct the tiles child, register the arrows, bombs, chests, explosions, items, signs, links, and projectiles script children, then initialize the level trees, map coordinates, and update-map hook.",
+        "The source and target reference the same eleven child-array strings and preserve the 38-block constructor shape. The target is larger because the 2.2 wrappers and obfuscated class fields are rebuilt, so this is a semantic context anchor rather than an exact byte match."
+      ],
+      "match_kind": "manual-server-level-storage-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1a854c",
+      "original_metrics": {
+        "basic_block_count": 38,
+        "instruction_count": 580,
+        "mnemonic_hash": "f1e958a313c4a48a62bd75def8826e649615a0970acbe8e4ad4be16679ae734a",
+        "register_shape_hash": "9e400af580456d848f4a1016832fc6b157284493e5cb92ccee507e5052435ce8",
+        "shape_hash": "a960b5326e7afca1db85091123c138d54ad4417e561db2b08588f533ab3862dd",
+        "size": 2364
+      },
+      "original_name": "TServerLevel_TServerLevel_TString_const",
+      "original_string_refs": [
+        "arrows",
+        "board",
+        "bombs",
+        "chests",
+        "explos",
+        "items",
+        "links",
+        "projectiles",
+        "signs",
+        "tilelayers",
+        "tiles"
+      ],
+      "proposed_name": "v18_TServerLevel_TServerLevel_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "server-level constructor and child-array initialization",
+      "spectron_current_name": "_ZN10zF9VgaBKxRC2ERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1ad294",
+      "spectron_metrics": {
+        "basic_block_count": 38,
+        "instruction_count": 666,
+        "mnemonic_hash": "3dbc120e538b64e518a47abfb10293030cfafb0c2417377707ffcc6e7a332c58",
+        "register_shape_hash": "8b11405f6a2e801d8db8466cec6927ce4653c128bcc630e1aab4542490669a13",
+        "shape_hash": "3c87189ae3e7c081421a4da3658fbc15a4a615b1b889cdd1339051928d269e72",
+        "size": 2708
+      },
+      "spectron_string_refs": [
+        "arrows",
+        "board",
+        "bombs",
+        "chests",
+        "explos",
+        "items",
+        "links",
+        "projectiles",
+        "signs",
+        "tilelayers",
+        "tiles"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both derive the encrypted filename, build the GWEBL001 header, encode the server IP, signature, requested level version, and level name, and then serialize the level contents.",
+        "Both select the GR-V1.03 or GR-V1.05 board format, serialize every tile layer, append link and baddie data, encode sign and object records, calculate the same seeded checksum, and finish through the coded-file save routine.",
+        "The source and target preserve the 98-block control-flow shape and the same GR-V1.03, GR-V1.05, and GWEBL001 literals. The target is 84 bytes larger because its rebuilt wrappers and fields have different instruction expansion."
+      ],
+      "match_kind": "manual-server-level-storage-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1a1f50",
+      "original_metrics": {
+        "basic_block_count": 98,
+        "instruction_count": 629,
+        "mnemonic_hash": "035a6f3b8a67dcd9683d9b0adc097a14e8887d8f7f6e4a910b50b01b836e1640",
+        "register_shape_hash": "8711ce37a08861825c74738ef5665c9c3e22a23131f6920d56a209ad6ff9b754",
+        "shape_hash": "26daf9b6e9be358e352dd581a49a35faa86cf8036dcdf944b77642b90806d3ed",
+        "size": 2516
+      },
+      "original_name": "TServerLevel_SaveEncrypted_uint",
+      "original_string_refs": [
+        "GR-V1.03",
+        "GR-V1.05",
+        "GWEBL001"
+      ],
+      "proposed_name": "v18_TServerLevel_SaveEncrypted_uint",
+      "semantic_match_already_present": false,
+      "source_basis": "encrypted server-level serialization",
+      "spectron_current_name": "_ZN10zF9VgaBKxR10DXk2RaUeA4Ej",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1a6c00",
+      "spectron_metrics": {
+        "basic_block_count": 98,
+        "instruction_count": 650,
+        "mnemonic_hash": "864fafb4d70e2ff6a26512b4f70d039f8494fbdb698cce56a0037563a8218c76",
+        "register_shape_hash": "5e5fcfa174897df6f887165d70375f5b543733896477aab4643256293255924e",
+        "shape_hash": "5d99c0a66ad12d2c0a910903458328c0de138ab8a575f01560e83b2af6bc88fb",
+        "size": 2600
+      },
+      "spectron_string_refs": [
+        "GR-V1.03",
+        "GR-V1.05",
+        "GWEBL001"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both derive the level filename and checksum seed, load the coded file, validate the GWEBL001 header, server identity, signature, level name, and supported GR-V1 format.",
+        "Both handle the GR-V1.03 single-board path and the GR-V1.05 multi-layer path, then read links, baddies, NPCs, chests, and signs before releasing the coded stream.",
+        "The source and target preserve the 31-block validation and load state machine and the same four format literals. The target is 72 bytes larger because of rebuilt 2.2 wrappers and field accessors."
+      ],
+      "match_kind": "manual-server-level-storage-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1aa198",
+      "original_metrics": {
+        "basic_block_count": 31,
+        "instruction_count": 300,
+        "mnemonic_hash": "b26c1fbebfc38d3e10e3905aaaffc5b62e2f4b6c4fbb3d37dd898b7d092d4468",
+        "register_shape_hash": "a27225c52a6a40dbe04d8d520664a485abf80d20e1c5c9227cc45bd6b21abfc0",
+        "shape_hash": "858c85101eb89b97a59533b82e62b3d4f92675fbfc0fe802a1866f85ddebc427",
+        "size": 1200
+      },
+      "original_name": "TServerLevel_LoadEncrypted_void",
+      "original_string_refs": [
+        "GR-V1.03",
+        "GR-V1.04",
+        "GR-V1.05",
+        "GWEBL001"
+      ],
+      "proposed_name": "v18_TServerLevel_LoadEncrypted_void",
+      "semantic_match_already_present": false,
+      "source_basis": "encrypted server-level deserialization",
+      "spectron_current_name": "_ZN10zF9VgaBKxR10GGiB_ayk_gEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1af2a0",
+      "spectron_metrics": {
+        "basic_block_count": 31,
+        "instruction_count": 318,
+        "mnemonic_hash": "136423d2f959179dbd92b3fda86e899a6839683369f41360eed999c3c86beacd",
+        "register_shape_hash": "6832bd4b0dee0e6135f111ef533d016eaf5b95e5aef25967d9e705f89b47d412",
+        "shape_hash": "642193e51326f76bfdb0224febeb89811ad284f06c0d5a9ec2fa90abe0ca59f5",
+        "size": 1272
+      },
+      "spectron_string_refs": [
+        "GR-V1.03",
+        "GR-V1.04",
+        "GR-V1.05",
+        "GWEBL001"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both gate the callback on client and active-level state, compare the entered level name, and scan the server-level NPC list and baddie list for objects affected by the old and new coordinates.",
+        "Both invoke each object's virtual callback with the same empty event string when the coordinate windows match, and return the list result through the same final path.",
+        "The target preserves the source callback filtering and list traversal but reduces the body to 31 blocks through rebuilt wrappers and obfuscated field access. The signature retains the level string plus four integer arguments."
+      ],
+      "match_kind": "manual-server-level-storage-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1a3ee0",
+      "original_metrics": {
+        "basic_block_count": 33,
+        "instruction_count": 167,
+        "mnemonic_hash": "13335798313ed110165209371ee4ce3445a5ba201200b7c5572197916960df68",
+        "register_shape_hash": "dce1a3c3dd305b6af5650eee3771166d75224725f4a6e90003abff1de0653d3f",
+        "shape_hash": "007e0be5a4da77a685c6946bd84a52152e99b2c2ae69990c72a3d9b95704fea2",
+        "size": 668
+      },
+      "original_name": "TServerLevel_invokePlayerEnters_TString_const_int_int_int_int",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerLevel_invokePlayerEnters_TString_const_int_int_int_int",
+      "semantic_match_already_present": false,
+      "source_basis": "player-enter event dispatch across NPCs and baddies",
+      "spectron_current_name": "_ZN10zF9VgaBKxR10b9PRwaiuUfERK10C8THgaTQxFiiii",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1a8be0",
+      "spectron_metrics": {
+        "basic_block_count": 31,
+        "instruction_count": 173,
+        "mnemonic_hash": "d4edb22b2766b5050a797068beaa8844d532a006dc6f875b43866d6f41a0f95d",
+        "register_shape_hash": "70c12f99bebc34ba8dd2905edd6110f63f74bda4670c6b24e15b50168c726edb",
+        "shape_hash": "8b87daa9cc44cd43ad4ab4e76701ce56d2a73334199b6b938af2682cf5664159",
+        "size": 692
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_server_level_storage_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v1_saved.json",
+    "spectron_features_sha256": "a8d58f85502362316ee99a0f79c2cd7a4ad5d6fac94aca0ee75bd0d2965fc2a1"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The constructor, save, load, and player-enter matches are supported by direct pseudocode, preserved block counts, stable level-list and child-array roles, and the shared serialized-format literals.",
+    "Changed byte sizes are recorded as version differences. No exact byte identity is claimed for these four pairs."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for server-level construction, encrypted storage, and player-enter dispatch",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 4,
+    "high_confidence_count": 4,
+    "new_context_anchor_count": 4,
+    "target_default_name_count": 0
+  }
+}

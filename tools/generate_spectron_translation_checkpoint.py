@@ -173,6 +173,8 @@ def main() -> None:
     parser.add_argument("--server-level-lifecycle-verification", type=Path)
     parser.add_argument("--server-level-side-helpers-anchors", type=Path)
     parser.add_argument("--server-level-side-helpers-verification", type=Path)
+    parser.add_argument("--server-level-storage-anchors", type=Path)
+    parser.add_argument("--server-level-storage-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2256,6 +2258,34 @@ def main() -> None:
         result["server_level_side_helpers_anchors"] = server_level_side_helpers
         result["interpretation"].append(
             "The seventy-fourth database revision also contains the separately reviewed server-level side-level position, directional lookup, and flower hook anchors."
+        )
+    server_level_storage = None
+    if args.server_level_storage_anchors or args.server_level_storage_verification:
+        if not args.server_level_storage_anchors or not args.server_level_storage_verification:
+            raise ValueError(
+                "server-level storage anchors and server-level storage verification must be supplied together"
+            )
+        server_level_storage_document = load(args.server_level_storage_anchors)
+        server_level_storage_verification = load(args.server_level_storage_verification)
+        if server_level_storage_document.get("artifact") != "spectron_server_level_storage_manual_translation_anchors_20260826":
+            raise ValueError("unexpected server-level storage anchor artifact")
+        if not server_level_storage_verification.get("verified"):
+            raise ValueError("server-level storage anchor reopen verification did not pass")
+        expected_server_level_storage = len(server_level_storage_document["anchors"])
+        if server_level_storage_verification["verified_name_count"] != expected_server_level_storage:
+            raise ValueError("server-level storage verification count differs from artifact")
+        server_level_storage = {
+            "anchor_path": str(args.server_level_storage_anchors),
+            "anchor_sha256": sha256_path(args.server_level_storage_anchors),
+            "reopen_verification": str(args.server_level_storage_verification),
+            "anchor_count": expected_server_level_storage,
+            "verified_name_count": server_level_storage_verification["verified_name_count"],
+            "reopen_failure_count": server_level_storage_verification["failure_count"],
+        }
+    if server_level_storage is not None:
+        result["server_level_storage_anchors"] = server_level_storage
+        result["interpretation"].append(
+            "The seventy-fifth database revision also contains the separately reviewed server-level constructor, encrypted storage, and player-enter dispatch anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

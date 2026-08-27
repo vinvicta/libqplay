@@ -961,6 +961,14 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_server_level_side_helpers_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+137. Clean IDA review added four high-confidence server-level construction,
+     encrypted storage, and player-enter dispatch anchors. Their control-flow
+     shapes and serialized-format or event-dispatch roles match the 1.8
+     functions, with documented 2.2 wrapper-size changes. All four reopened
+     successfully in the v77 disposable copy. See
+     `artifacts/spectron_server_level_storage_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
