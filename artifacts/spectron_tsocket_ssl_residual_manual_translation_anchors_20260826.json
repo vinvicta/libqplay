@@ -1,0 +1,245 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "context_group": "TSocket residual SSL configuration block",
+      "context_order": 1,
+      "evidence": [
+        "The source TSocket SSL configuration methods form an ordered block at 0x205120, 0x20514c, and 0x2051a0. Spectron keeps the same order at 0x20aff0, 0x20b01c, and 0x20b070 inside XJLBgarMnA, with a fixed +0x5ed0 delta.",
+        "setEnableSSL preserves the byte-140 state comparison, connection pointer at offset 176, state write, and conditional connection update. The target replaces TSocketConnection with u3cBgayBVz but retains the same normalized body.",
+        "setSSLCipherList and setSSLProtocol preserve the socket string fields at offsets 144 and 152 and the live-connection propagation to offsets 8248 and 8256. Spectron uses C8THgaTQxF wrapper assignments.",
+        "The source send wrapper at 0x205240 appends to the outgoing string at offset 168. Target 0x20b110 does the same through C8THgaTQxF::operator<<. The existing setSSLVerifyCert and sendUDP rows at 0x20b0c4 and 0x20b11c confirm the surrounding target sequence.",
+        "All four reviewed pairs have exact size, instruction, block, branch, call, mnemonic, opcode-shape, register-shape, and overall-shape metrics. None has string references, and all target names are already non-default obfuscated symbols."
+      ],
+      "match_kind": "manual-tsocket-ssl-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x205120",
+      "original_metrics": {
+        "basic_block_count": 5,
+        "branch_count": 3,
+        "call_count": 0,
+        "instruction_count": 10,
+        "mnemonic_hash": "6168c129edfff0dd3150dd19c2619acd28005e4b53810c2895d5f235a1bc0058",
+        "opcode_shape_hash": "65fe9b2339480bb49de34eb2d0cc7b264bc88e655ad629f429c4ef088aea9135",
+        "register_shape_hash": null,
+        "shape_hash": "ef4fb0e5bb03567592fb86e10a06e03a6a792a96c6f550865f03298ee7d818aa",
+        "size": 40
+      },
+      "original_name": "TSocket_setEnableSSL_bool",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_setEnableSSL_bool",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TSocket SSL or outgoing-buffer method TSocket_setEnableSSL_bool",
+      "spectron_current_name": "_ZN10XJLBgarMnA10Sf9Aga1oSzEb",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x20aff0",
+      "spectron_metrics": {
+        "basic_block_count": 5,
+        "branch_count": 3,
+        "call_count": 0,
+        "instruction_count": 10,
+        "mnemonic_hash": "6168c129edfff0dd3150dd19c2619acd28005e4b53810c2895d5f235a1bc0058",
+        "opcode_shape_hash": "65fe9b2339480bb49de34eb2d0cc7b264bc88e655ad629f429c4ef088aea9135",
+        "register_shape_hash": null,
+        "shape_hash": "ef4fb0e5bb03567592fb86e10a06e03a6a792a96c6f550865f03298ee7d818aa",
+        "size": 40
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TSocket residual SSL configuration block",
+      "context_order": 2,
+      "evidence": [
+        "The source TSocket SSL configuration methods form an ordered block at 0x205120, 0x20514c, and 0x2051a0. Spectron keeps the same order at 0x20aff0, 0x20b01c, and 0x20b070 inside XJLBgarMnA, with a fixed +0x5ed0 delta.",
+        "setEnableSSL preserves the byte-140 state comparison, connection pointer at offset 176, state write, and conditional connection update. The target replaces TSocketConnection with u3cBgayBVz but retains the same normalized body.",
+        "setSSLCipherList and setSSLProtocol preserve the socket string fields at offsets 144 and 152 and the live-connection propagation to offsets 8248 and 8256. Spectron uses C8THgaTQxF wrapper assignments.",
+        "The source send wrapper at 0x205240 appends to the outgoing string at offset 168. Target 0x20b110 does the same through C8THgaTQxF::operator<<. The existing setSSLVerifyCert and sendUDP rows at 0x20b0c4 and 0x20b11c confirm the surrounding target sequence.",
+        "All four reviewed pairs have exact size, instruction, block, branch, call, mnemonic, opcode-shape, register-shape, and overall-shape metrics. None has string references, and all target names are already non-default obfuscated symbols."
+      ],
+      "match_kind": "manual-tsocket-ssl-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TString_operator_assign_TString_const"
+      ],
+      "original_ea": "0x20514c",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 4,
+        "call_count": 1,
+        "instruction_count": 20,
+        "mnemonic_hash": "db2cea791a12cf72210368140dc1a6f6db9c14f28a869832ea36218363eea292",
+        "opcode_shape_hash": "116a92fdefe222de0571b4a57a8bd36c0b99d7e47200417d1daa7bde9f0939b7",
+        "register_shape_hash": null,
+        "shape_hash": "99c0f913219a0bda934c04c150d5235d1cbe5286e6a46bf8c401eb119eeeffaf",
+        "size": 80
+      },
+      "original_name": "TSocket_setSSLCipherList_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_setSSLCipherList_TString_const",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TSocket SSL or outgoing-buffer method TSocket_setSSLCipherList_TString_const",
+      "spectron_current_name": "_ZN10XJLBgarMnA10ze1AgaTELzERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxFaSERKS_"
+      ],
+      "spectron_ea": "0x20b01c",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 4,
+        "call_count": 1,
+        "instruction_count": 20,
+        "mnemonic_hash": "db2cea791a12cf72210368140dc1a6f6db9c14f28a869832ea36218363eea292",
+        "opcode_shape_hash": "116a92fdefe222de0571b4a57a8bd36c0b99d7e47200417d1daa7bde9f0939b7",
+        "register_shape_hash": null,
+        "shape_hash": "99c0f913219a0bda934c04c150d5235d1cbe5286e6a46bf8c401eb119eeeffaf",
+        "size": 80
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TSocket residual SSL configuration block",
+      "context_order": 3,
+      "evidence": [
+        "The source TSocket SSL configuration methods form an ordered block at 0x205120, 0x20514c, and 0x2051a0. Spectron keeps the same order at 0x20aff0, 0x20b01c, and 0x20b070 inside XJLBgarMnA, with a fixed +0x5ed0 delta.",
+        "setEnableSSL preserves the byte-140 state comparison, connection pointer at offset 176, state write, and conditional connection update. The target replaces TSocketConnection with u3cBgayBVz but retains the same normalized body.",
+        "setSSLCipherList and setSSLProtocol preserve the socket string fields at offsets 144 and 152 and the live-connection propagation to offsets 8248 and 8256. Spectron uses C8THgaTQxF wrapper assignments.",
+        "The source send wrapper at 0x205240 appends to the outgoing string at offset 168. Target 0x20b110 does the same through C8THgaTQxF::operator<<. The existing setSSLVerifyCert and sendUDP rows at 0x20b0c4 and 0x20b11c confirm the surrounding target sequence.",
+        "All four reviewed pairs have exact size, instruction, block, branch, call, mnemonic, opcode-shape, register-shape, and overall-shape metrics. None has string references, and all target names are already non-default obfuscated symbols."
+      ],
+      "match_kind": "manual-tsocket-ssl-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TString_operator_assign_TString_const"
+      ],
+      "original_ea": "0x2051a0",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 4,
+        "call_count": 1,
+        "instruction_count": 20,
+        "mnemonic_hash": "db2cea791a12cf72210368140dc1a6f6db9c14f28a869832ea36218363eea292",
+        "opcode_shape_hash": "643fe455fbd17f5a34e9cb531890d7d60962cbb870021ea0be85e17abdfd9aab",
+        "register_shape_hash": null,
+        "shape_hash": "d29b8dc8bf31bc80a7f02690e661caf3846cb13ac624985054347a0b08792d96",
+        "size": 80
+      },
+      "original_name": "TSocket_setSSLProtocol_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_setSSLProtocol_TString_const",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TSocket SSL or outgoing-buffer method TSocket_setSSLProtocol_TString_const",
+      "spectron_current_name": "_ZN10XJLBgarMnA10S12AgafaNzERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxFaSERKS_"
+      ],
+      "spectron_ea": "0x20b070",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 4,
+        "call_count": 1,
+        "instruction_count": 20,
+        "mnemonic_hash": "db2cea791a12cf72210368140dc1a6f6db9c14f28a869832ea36218363eea292",
+        "opcode_shape_hash": "643fe455fbd17f5a34e9cb531890d7d60962cbb870021ea0be85e17abdfd9aab",
+        "register_shape_hash": null,
+        "shape_hash": "d29b8dc8bf31bc80a7f02690e661caf3846cb13ac624985054347a0b08792d96",
+        "size": 80
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "context_group": "TSocket residual SSL configuration block",
+      "context_order": 4,
+      "evidence": [
+        "The source TSocket SSL configuration methods form an ordered block at 0x205120, 0x20514c, and 0x2051a0. Spectron keeps the same order at 0x20aff0, 0x20b01c, and 0x20b070 inside XJLBgarMnA, with a fixed +0x5ed0 delta.",
+        "setEnableSSL preserves the byte-140 state comparison, connection pointer at offset 176, state write, and conditional connection update. The target replaces TSocketConnection with u3cBgayBVz but retains the same normalized body.",
+        "setSSLCipherList and setSSLProtocol preserve the socket string fields at offsets 144 and 152 and the live-connection propagation to offsets 8248 and 8256. Spectron uses C8THgaTQxF wrapper assignments.",
+        "The source send wrapper at 0x205240 appends to the outgoing string at offset 168. Target 0x20b110 does the same through C8THgaTQxF::operator<<. The existing setSSLVerifyCert and sendUDP rows at 0x20b0c4 and 0x20b11c confirm the surrounding target sequence.",
+        "All four reviewed pairs have exact size, instruction, block, branch, call, mnemonic, opcode-shape, register-shape, and overall-shape metrics. None has string references, and all target names are already non-default obfuscated symbols."
+      ],
+      "match_kind": "manual-tsocket-ssl-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x205240",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "1d26f84dc9c0a74b7a4f0eb562553d370c916171bf5e6b5e022b9e232491c44f",
+        "opcode_shape_hash": "db183759614fc357707de89c3600a188ba38623482617aa0c55c60052efd353a",
+        "register_shape_hash": null,
+        "shape_hash": "98a55d35974b80bc873f758d6a6d1949f301ed0b78edb49cdd9b093ab80d61e2",
+        "size": 8
+      },
+      "original_name": "TSocket_send_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocket_send_TString_const",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TSocket SSL or outgoing-buffer method TSocket_send_TString_const",
+      "spectron_current_name": "_ZN10XJLBgarMnA4sendERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x20b110",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 2,
+        "mnemonic_hash": "1d26f84dc9c0a74b7a4f0eb562553d370c916171bf5e6b5e022b9e232491c44f",
+        "opcode_shape_hash": "db183759614fc357707de89c3600a188ba38623482617aa0c55c60052efd353a",
+        "register_shape_hash": null,
+        "shape_hash": "98a55d35974b80bc873f758d6a6d1949f301ed0b78edb49cdd9b093ab80d61e2",
+        "size": 8
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_tsocket_ssl_residual_manual_translation_anchors_20260826",
+  "context": {
+    "existing_target_sendUDP": "0x20b11c",
+    "existing_target_setSSLVerifyCert": "0x20b0c4",
+    "source_sequence": "0x205120 setEnableSSL, 0x20514c setSSLCipherList, 0x2051a0 setSSLProtocol, and 0x205240 send",
+    "target_class": "XJLBgarMnA",
+    "target_delta": "+0x5ed0",
+    "target_sequence": "0x20aff0, 0x20b01c, 0x20b070, and 0x20b110 in XJLBgarMnA"
+  },
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4.json",
+    "original_features_sha256": "62cccc40ea88a08d5ed0845ceeceaf194b528bdd07bdd6ff1a0350dee3b0ab82",
+    "semantic_map": "/tmp/spectron_semantic_map.json",
+    "semantic_map_sha256": "c0906607542480e1fbe33e9e0bf5030581efd55ee71987cf0a7ca792b68664fc",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features.json",
+    "spectron_features_sha256": "cc1789d2d3c24f478d7863f2b07b10b4259aa2d370e363e5303000eb7b835243"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable source method names while retaining the obfuscated target context in the evidence rows.",
+    "The target names are resolved by the fixed class-local delta, exact normalized shapes, field offsets, and the adjacent translated SSL methods."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for the residual TSocket SSL configuration block",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 4,
+    "exact_shape_anchor_count": 4,
+    "high_confidence_count": 4,
+    "layout_change_anchor_count": 0,
+    "new_context_anchor_count": 4,
+    "target_default_name_count": 0
+  }
+}
