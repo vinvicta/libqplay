@@ -2553,6 +2553,9 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/spectron_resource_link_lists_manual_translation_anchors_20260827.json`
   records the exact-shape resource file-link and object-link list initializer,
   including the resolved collision with the particle-emitter candidate.
+* `artifacts/spectron_clear_cur_anis_manual_translation_anchors_20260827.json`
+  records the high-confidence 248-byte current-animation-state cleanup match,
+  including the target string-lifetime change and animation consumer evidence.
 * `artifacts/spectron_npc_helper_manual_translation_anchors_20260826.json`
   records the 15 reviewed `TServerNPC` blocking, draw-mode, visibility, bow,
   and pelt helpers.
@@ -2949,6 +2952,9 @@ proves the local native TLS path, not a current live certificate or service.
   The `tools/generate_spectron_resource_link_lists_anchors.py` generator
   records the exact-shape resource link-list initializer with target
   class, static-field, startup-table, and collision-resolution evidence.
+  The `tools/generate_spectron_clear_cur_anis_anchors.py` generator records
+  the current-animation-state cleanup correspondence with state extent,
+  initializer, cleanup-table, and target consumer evidence.
   The `tools/generate_spectron_npc_helper_anchors.py` generator records
   reviewed `TServerNPC` helper roles with exact hash checks and IDA-context
   evidence.

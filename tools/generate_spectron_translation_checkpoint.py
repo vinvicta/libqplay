@@ -183,6 +183,8 @@ def main() -> None:
     parser.add_argument("--particle-emitter-script-vars-verification", type=Path)
     parser.add_argument("--resource-link-lists-anchors", type=Path)
     parser.add_argument("--resource-link-lists-verification", type=Path)
+    parser.add_argument("--clear-cur-anis-anchors", type=Path)
+    parser.add_argument("--clear-cur-anis-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
     parser.add_argument("--server-animation-verification", type=Path)
     parser.add_argument("--player-lifecycle-anchors", type=Path)
@@ -2408,6 +2410,48 @@ def main() -> None:
         result["resource_link_lists_anchors"] = resource_link_lists
         result["interpretation"].append(
             "The one-hundred-eighty-seventh database revision also contains the separately reviewed resource file-link and object-link list initializer anchor."
+        )
+    clear_cur_anis = None
+    if args.clear_cur_anis_anchors or args.clear_cur_anis_verification:
+        if not args.clear_cur_anis_anchors or not args.clear_cur_anis_verification:
+            raise ValueError(
+                "clear-cur-anis anchors and verification must be supplied together"
+            )
+        clear_cur_anis_document = load(args.clear_cur_anis_anchors)
+        clear_cur_anis_verification = load(args.clear_cur_anis_verification)
+        if (
+            clear_cur_anis_document.get("artifact")
+            != "spectron_clear_cur_anis_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected clear-cur-anis anchor artifact")
+        if not clear_cur_anis_verification.get("verified"):
+            raise ValueError(
+                "clear-cur-anis anchor reopen verification did not pass"
+            )
+        expected_clear_cur_anis = len(clear_cur_anis_document["anchors"])
+        if (
+            clear_cur_anis_verification["verified_name_count"]
+            != expected_clear_cur_anis
+        ):
+            raise ValueError(
+                "clear-cur-anis verification count differs from artifact"
+            )
+        clear_cur_anis = {
+            "anchor_path": str(args.clear_cur_anis_anchors),
+            "anchor_sha256": sha256_path(args.clear_cur_anis_anchors),
+            "reopen_verification": str(args.clear_cur_anis_verification),
+            "anchor_count": expected_clear_cur_anis,
+            "verified_name_count": clear_cur_anis_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": clear_cur_anis_verification[
+                "failure_count"
+            ],
+        }
+    if clear_cur_anis is not None:
+        result["clear_cur_anis_anchors"] = clear_cur_anis
+        result["interpretation"].append(
+            "The one-hundred-eighty-eighth database revision also contains the separately reviewed current-animation-state cleanup anchor."
         )
     server_animation = None
     if args.server_animation_anchors or args.server_animation_verification:

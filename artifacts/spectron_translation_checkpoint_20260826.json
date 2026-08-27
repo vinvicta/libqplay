@@ -32,6 +32,14 @@
     "reopen_verification": "/tmp/spectron_bitmap_array_holder_verify_v104.json",
     "verified_name_count": 5
   },
+  "clear_cur_anis_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_clear_cur_anis_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "a6c8059459e445977bd69f54f54f9716f79e569130c9fa8442c18f5c9d749cec",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_clear_cur_anis_verification_v188.json",
+    "verified_name_count": 1
+  },
   "client_action_anchors": {
     "anchor_count": 11,
     "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_client_action_manual_translation_anchors_20260826.json",
@@ -189,8 +197,8 @@
     "default_sub_function_count": 1232,
     "format": "packed IDA 9.3 database",
     "function_count": 11694,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v187.i64",
-    "sha256": "41df8f193e7e69551e85f06e2a01471fc4680d635d6d30eb0fb99efb1c0a3d8e"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v188.i64",
+    "sha256": "237d2ba156a7aa8ed41d9d6f7a0c1c1f3dbb7b8504762ae8d3d0a399d64f949c"
   },
   "draw_texture_anchors": {
     "anchor_count": 4,
@@ -648,6 +656,7 @@
     "The fifty-sixth database revision also contains the separately reviewed particle-emitter initializer and emission anchors.",
     "The one-hundred-eighty-sixth database revision also contains the separately reviewed particle-emitter script-property initializer anchor.",
     "The one-hundred-eighty-seventh database revision also contains the separately reviewed resource file-link and object-link list initializer anchor.",
+    "The one-hundred-eighty-eighth database revision also contains the separately reviewed current-animation-state cleanup anchor.",
     "The fifty-seventh database revision also contains the separately reviewed explosion, carry, and flying server-animation anchors.",
     "The fifty-eighth database revision also contains the separately reviewed player start-level and periodic-update anchors.",
     "The fifty-ninth database revision also contains the separately reviewed player emoticon-coordinate getter anchors.",

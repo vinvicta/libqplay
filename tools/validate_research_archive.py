@@ -299,6 +299,9 @@ def main():
     spectron_resource_link_lists_anchors = load_json(
         "artifacts/spectron_resource_link_lists_manual_translation_anchors_20260827.json"
     )
+    spectron_clear_cur_anis_anchors = load_json(
+        "artifacts/spectron_clear_cur_anis_manual_translation_anchors_20260827.json"
+    )
     spectron_server_animation_anchors = load_json(
         "artifacts/spectron_server_animation_manual_translation_anchors_20260826.json"
     )
@@ -2679,6 +2682,49 @@ def main():
         "0xe0564",
     )
     check(
+        "Spectron clear-cur-anis artifact",
+        spectron_clear_cur_anis_anchors["artifact"],
+        "spectron_clear_cur_anis_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron clear-cur-anis network",
+        spectron_clear_cur_anis_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron clear-cur-anis total",
+        spectron_clear_cur_anis_anchors["summary"]["anchor_count"],
+        1,
+    )
+    check(
+        "Spectron clear-cur-anis high confidence",
+        spectron_clear_cur_anis_anchors["summary"]["high_confidence_count"],
+        1,
+    )
+    check(
+        "Spectron clear-cur-anis exact-shape count",
+        spectron_clear_cur_anis_anchors["summary"]["exact_shape_anchor_count"],
+        0,
+    )
+    check(
+        "Spectron clear-cur-anis layout-change count",
+        spectron_clear_cur_anis_anchors["summary"]["layout_change_anchor_count"],
+        1,
+    )
+    check(
+        "Spectron clear-cur-anis default target",
+        spectron_clear_cur_anis_anchors["summary"]["target_default_name_count"],
+        1,
+    )
+    check(
+        "Spectron clear-cur-anis target",
+        {
+            row["original_name"]: row
+            for row in spectron_clear_cur_anis_anchors["anchors"]
+        }["clearCurAnis"]["spectron_ea"],
+        "0xdfe08",
+    )
+    check(
         "Spectron server-animation artifact",
         spectron_server_animation_anchors["artifact"],
         "spectron_server_animation_manual_translation_anchors_20260826",
@@ -4011,7 +4057,8 @@ def main():
     check("Spectron checkpoint client-environment restart-state anchor count", spectron_checkpoint["client_environment_restart_state_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint particle-emitter script-vars anchor count", spectron_checkpoint["particle_emitter_script_vars_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint resource link-lists anchor count", spectron_checkpoint["resource_link_lists_anchors"]["verified_name_count"], 1)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "41df8f193e7e69551e85f06e2a01471fc4680d635d6d30eb0fb99efb1c0a3d8e")
+    check("Spectron checkpoint clear-cur-anis anchor count", spectron_checkpoint["clear_cur_anis_anchors"]["verified_name_count"], 1)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "237d2ba156a7aa8ed41d9d6f7a0c1c1f3dbb7b8504762ae8d3d0a399d64f949c")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -4152,6 +4199,7 @@ def main():
         spectron_particle_emitter_anchors,
         spectron_particle_emitter_script_vars_anchors,
         spectron_resource_link_lists_anchors,
+        spectron_clear_cur_anis_anchors,
         spectron_server_animation_anchors,
         spectron_player_lifecycle_anchors,
         spectron_player_emoticon_anchors,

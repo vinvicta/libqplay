@@ -1482,6 +1482,20 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_particle_emitter_script_vars_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+247. The next IDA pass translated `clearCurAnis`. Source `0xe083c` maps to
+    target `0xdfe08`, the cleanup callback for the target `RGiAvaPk9a`
+    current-animation state. The source clears a 248-byte `curanis` object
+    with vector stores. The target cleanup loop clears the corresponding 31
+    string-sized fields with `C8THgaTQxF::clear` and then clears the adjacent
+    `CanTfaz6bZ` object at `qword_3A0E70`. Its `sub_E09E0` initializer, cleanup
+    table slot, and references from the target animation consumers establish
+    the role despite the implementation change. The v188 copy has 11,694
+    functions, 3,641 high-confidence labels, and 1,231 default `sub_` names,
+    with zero semantic reopen failures. See
+    `artifacts/spectron_clear_cur_anis_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_clear_cur_anis_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 246. The next IDA pass translated `TResource_initializeLinkLists`. Source
     `0xe070c` maps to target `0xe0564`, whose static-initializer table
     slot, `KKhLga4xoI` constructor calls, and assignments to the already
