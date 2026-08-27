@@ -133,8 +133,8 @@
     "default_sub_function_count": 1529,
     "format": "packed IDA 9.3 database",
     "function_count": 11679,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v125.i64",
-    "sha256": "0b55e73e765827d37e37e7403c2f0779229a178f3deb78314e86da17d770a75b"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v126.i64",
+    "sha256": "aed7e8fe3fd07cfe33c1ea0cc13df6742dec3e9a120e06873729203d9c4404a4"
   },
   "draw_texture_anchors": {
     "anchor_count": 4,
@@ -296,6 +296,14 @@
     "reopen_verification": "/tmp/spectron_guicontrol_property_verify_v125.json",
     "verified_name_count": 61
   },
+  "gui_control_virtual_residual_anchors": {
+    "anchor_count": 13,
+    "anchor_path": "artifacts/spectron_guicontrol_virtual_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "56a22923033d515ef55cd2433bbe97de0f03ee7e39722f381d90bb7dff30da69",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_guicontrol_virtual_verify_v126.json",
+    "verified_name_count": 13
+  },
   "hash_family_anchors": {
     "anchor_count": 9,
     "anchor_path": "artifacts/spectron_hash_family_manual_translation_anchors_20260826.json",
@@ -354,7 +362,7 @@
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
-    "reopen_verification": "/tmp/spectron_translation_verify_v125_serial.json",
+    "reopen_verification": "/tmp/spectron_translation_verify_v126_serial.json",
     "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
     "translation_map": "artifacts/spectron_semantic_function_translation_20260826.json",
     "translation_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92"
@@ -484,7 +492,8 @@
     "The one-hundred-twenty-second database revision also contains the separately reviewed screen-panel lifecycle, TFontOptions property, TFontData lookup, and TWindowProperties destructor anchors.",
     "The one-hundred-twenty-third database revision also contains the separately reviewed GuiControlProfile accessor block and its explicit target-only coverage gaps.",
     "The one-hundred-twenty-fourth database revision also contains the separately reviewed GuiControlProfileProperties and GuiControlProfile destructor family.",
-    "The one-hundred-twenty-fifth database revision also contains the separately reviewed GuiControl property and script-wrapper residual family."
+    "The one-hundred-twenty-fifth database revision also contains the separately reviewed GuiControl property and script-wrapper residual family.",
+    "The one-hundred-twenty-sixth database revision also contains the separately reviewed GuiControl base and virtual-hook residual family."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,

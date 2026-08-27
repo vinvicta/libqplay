@@ -1329,6 +1329,14 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_guicontrol_property_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+186. The next IDA pass translated 13 residual `GuiControl` base and
+    virtual-hook methods. They align with the Spectron `w9XxgaJdbx` class at
+    a fixed `+0x41c0` delta, with exact normalized shapes and no string
+    references. The labels reopened successfully in the v126 disposable
+    copy without changing the default `sub_` count. See
+    `artifacts/spectron_guicontrol_virtual_residual_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
