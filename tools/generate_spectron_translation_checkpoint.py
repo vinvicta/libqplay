@@ -269,6 +269,8 @@ def main() -> None:
     parser.add_argument("--gui-control-profile-accessor-verification", type=Path)
     parser.add_argument("--gui-control-profile-destructor-anchors", type=Path)
     parser.add_argument("--gui-control-profile-destructor-verification", type=Path)
+    parser.add_argument("--gui-control-property-residual-anchors", type=Path)
+    parser.add_argument("--gui-control-property-residual-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3696,6 +3698,34 @@ def main() -> None:
         result["gui_control_profile_destructor_anchors"] = gui_control_profile_destructor
         result["interpretation"].append(
             "The one-hundred-twenty-fourth database revision also contains the separately reviewed GuiControlProfileProperties and GuiControlProfile destructor family."
+        )
+    gui_control_property_residual = None
+    if args.gui_control_property_residual_anchors or args.gui_control_property_residual_verification:
+        if not args.gui_control_property_residual_anchors or not args.gui_control_property_residual_verification:
+            raise ValueError(
+                "GUI control property residual anchors and GUI control property residual verification must be supplied together"
+            )
+        gui_control_property_residual_document = load(args.gui_control_property_residual_anchors)
+        gui_control_property_residual_verification = load(args.gui_control_property_residual_verification)
+        if gui_control_property_residual_document.get("artifact") != "spectron_guicontrol_property_residual_manual_translation_anchors_20260826":
+            raise ValueError("unexpected GUI control property residual artifact")
+        if not gui_control_property_residual_verification.get("verified"):
+            raise ValueError("GUI control property residual reopen verification did not pass")
+        expected_gui_control_property_residual = len(gui_control_property_residual_document["anchors"])
+        if gui_control_property_residual_verification["verified_name_count"] != expected_gui_control_property_residual:
+            raise ValueError("GUI control property residual verification count differs from artifact")
+        gui_control_property_residual = {
+            "anchor_path": str(args.gui_control_property_residual_anchors),
+            "anchor_sha256": sha256_path(args.gui_control_property_residual_anchors),
+            "reopen_verification": str(args.gui_control_property_residual_verification),
+            "anchor_count": expected_gui_control_property_residual,
+            "verified_name_count": gui_control_property_residual_verification["verified_name_count"],
+            "reopen_failure_count": gui_control_property_residual_verification["failure_count"],
+        }
+    if gui_control_property_residual is not None:
+        result["gui_control_property_residual_anchors"] = gui_control_property_residual
+        result["interpretation"].append(
+            "The one-hundred-twenty-fifth database revision also contains the separately reviewed GuiControl property and script-wrapper residual family."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

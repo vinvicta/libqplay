@@ -425,6 +425,9 @@ def main():
     spectron_gui_control_profile_destructor_anchors = load_json(
         "artifacts/spectron_gui_control_profile_destructor_manual_translation_anchors_20260826.json"
     )
+    spectron_guicontrol_property_residual_anchors = load_json(
+        "artifacts/spectron_guicontrol_property_residual_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2420,13 +2423,24 @@ def main():
     check("Spectron GUI control profile destructor exact-shape count", spectron_gui_control_profile_destructor_anchors["summary"]["exact_shape_anchor_count"], 4)
     check("Spectron GUI control profile destructor layout-change count", spectron_gui_control_profile_destructor_anchors["summary"]["layout_change_anchor_count"], 2)
     check(
+        "Spectron GuiControl property residual artifact",
+        spectron_guicontrol_property_residual_anchors["artifact"],
+        "spectron_guicontrol_property_residual_manual_translation_anchors_20260826",
+    )
+    check("Spectron GuiControl property residual network", spectron_guicontrol_property_residual_anchors["network_contacted"], False)
+    check("Spectron GuiControl property residual total", spectron_guicontrol_property_residual_anchors["summary"]["anchor_count"], 61)
+    check("Spectron GuiControl property residual high confidence", spectron_guicontrol_property_residual_anchors["summary"]["high_confidence_count"], 61)
+    check("Spectron GuiControl property residual semantic overlap", spectron_guicontrol_property_residual_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron GuiControl property residual default targets", spectron_guicontrol_property_residual_anchors["summary"]["target_default_name_count"], 61)
+    check("Spectron GuiControl property residual exact-shape count", spectron_guicontrol_property_residual_anchors["summary"]["exact_shape_anchor_count"], 61)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11679)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1589)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1529)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -2550,7 +2564,8 @@ def main():
     check("Spectron checkpoint font-options font-data residual anchor count", spectron_checkpoint["font_options_font_data_residual_anchors"]["verified_name_count"], 16)
     check("Spectron checkpoint GUI control profile accessor anchor count", spectron_checkpoint["gui_control_profile_accessor_anchors"]["verified_name_count"], 89)
     check("Spectron checkpoint GUI control profile destructor anchor count", spectron_checkpoint["gui_control_profile_destructor_anchors"]["verified_name_count"], 6)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "0db16cc6d06a77627a4b57048764aabb24f3a7b0c50cd9013b8b0a45c5bf0608")
+    check("Spectron checkpoint GuiControl property residual anchor count", spectron_checkpoint["gui_control_property_residual_anchors"]["verified_name_count"], 61)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "0b55e73e765827d37e37e7403c2f0779229a178f3deb78314e86da17d770a75b")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -2734,6 +2749,7 @@ def main():
         spectron_font_options_font_data_residual_anchors,
         spectron_gui_control_profile_accessor_anchors,
         spectron_gui_control_profile_destructor_anchors,
+        spectron_guicontrol_property_residual_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

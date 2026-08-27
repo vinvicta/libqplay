@@ -1320,6 +1320,15 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_gui_control_profile_destructor_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+185. The next IDA pass translated 61 residual `GuiControl` property and
+    script-wrapper methods. Their source and Spectron blocks align at a fixed
+    `+0x4500` delta, and all 61 pairs have exact normalized shape matches.
+    Seven rows inside the enclosing sequence were already mapped, while the
+    target-only helper at `0x1b7078` remains an explicit gap. The labels
+    reopened successfully in the v125 disposable copy. See
+    `artifacts/spectron_guicontrol_property_residual_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
