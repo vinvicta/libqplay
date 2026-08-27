@@ -321,6 +321,8 @@ def main() -> None:
     parser.add_argument("--gsfunctions-client-exact-residual-verification", type=Path)
     parser.add_argument("--gsfunctions-client-exact-residual-v2-anchors", type=Path)
     parser.add_argument("--gsfunctions-client-exact-residual-v2-verification", type=Path)
+    parser.add_argument("--gsfunctions-client-exact-residual-v3-anchors", type=Path)
+    parser.add_argument("--gsfunctions-client-exact-residual-v3-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -4476,6 +4478,34 @@ def main() -> None:
         result["gsfunctions_client_exact_residual_v2_anchors"] = gsfunctions_client_exact_residual_v2
         result["interpretation"].append(
             "The one-hundred-fifty-first database revision also contains the separately reviewed second exact-shape GSFunctionsClient callback batch."
+        )
+    gsfunctions_client_exact_residual_v3 = None
+    if args.gsfunctions_client_exact_residual_v3_anchors or args.gsfunctions_client_exact_residual_v3_verification:
+        if not args.gsfunctions_client_exact_residual_v3_anchors or not args.gsfunctions_client_exact_residual_v3_verification:
+            raise ValueError(
+                "GSFunctions client exact residual v3 anchors and verification must be supplied together"
+            )
+        gsfunctions_client_exact_residual_v3_document = load(args.gsfunctions_client_exact_residual_v3_anchors)
+        gsfunctions_client_exact_residual_v3_verification = load(args.gsfunctions_client_exact_residual_v3_verification)
+        if gsfunctions_client_exact_residual_v3_document.get("artifact") != "spectron_gsfunctions_client_exact_residual_v3_manual_translation_anchors_20260826":
+            raise ValueError("unexpected GSFunctions client exact residual v3 artifact")
+        if not gsfunctions_client_exact_residual_v3_verification.get("verified"):
+            raise ValueError("GSFunctions client exact residual v3 reopen verification did not pass")
+        expected_gsfunctions_client_exact_residual_v3 = len(gsfunctions_client_exact_residual_v3_document["anchors"])
+        if gsfunctions_client_exact_residual_v3_verification["verified_name_count"] != expected_gsfunctions_client_exact_residual_v3:
+            raise ValueError("GSFunctions client exact residual v3 verification count differs from artifact")
+        gsfunctions_client_exact_residual_v3 = {
+            "anchor_path": str(args.gsfunctions_client_exact_residual_v3_anchors),
+            "anchor_sha256": sha256_path(args.gsfunctions_client_exact_residual_v3_anchors),
+            "reopen_verification": str(args.gsfunctions_client_exact_residual_v3_verification),
+            "anchor_count": expected_gsfunctions_client_exact_residual_v3,
+            "verified_name_count": gsfunctions_client_exact_residual_v3_verification["verified_name_count"],
+            "reopen_failure_count": gsfunctions_client_exact_residual_v3_verification["failure_count"],
+        }
+    if gsfunctions_client_exact_residual_v3 is not None:
+        result["gsfunctions_client_exact_residual_v3_anchors"] = gsfunctions_client_exact_residual_v3
+        result["interpretation"].append(
+            "The one-hundred-fifty-second database revision also contains the separately reviewed third exact-shape GSFunctionsClient callback batch."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

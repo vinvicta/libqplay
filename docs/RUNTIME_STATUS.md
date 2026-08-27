@@ -1428,6 +1428,17 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+211. The next IDA pass translated the last nine already-bounded exact-shape
+    `GSFunctionsClient` callbacks from the current table audit. They cover the
+    Adventure nickname helper, level origin, screen dimensions, mouse-button
+    state, log output, and RPG messages. Each target pointer was confirmed by
+    the `+0x13010` table-field relocation, and every pair matched the
+    normalized code-shape fingerprints. The labels reopened successfully in
+    the v152 disposable copy, which has 11,681 functions and 1,407 default
+    `sub_` names. See
+    `artifacts/spectron_gsfunctions_client_exact_residual_v3_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 210. The next IDA pass translated a second group of 20 exact-shape
     `GSFunctionsClient` callbacks covering shooting parameters, image and
     weapon state, mouse globals, URL and key helpers, file cleanup, and
