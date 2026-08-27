@@ -812,6 +812,13 @@ This is the short handoff view. The full reasoning and command history are in
      See `artifacts/spectron_script_universe_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+114. Clean IDA review added three high-confidence anchors for static
+     script-variable construction, recursive JSON serialization, and tile
+     definition persistence. All three reopened successfully in the v54
+     disposable copy. See
+     `artifacts/spectron_static_json_tiles_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

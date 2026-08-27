@@ -1,0 +1,152 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both call the TGraalVar string constructor, mark the variable as initialized, install the static-variable vtable and properties, and attach the new variable to the global universe list.",
+        "Both preserve the same null-universe fallback, previous-list-link update, and universe count increment. The target adds rebuilt string-wrapper calls and grows from 180 to 224 bytes while retaining the five-block constructor role."
+      ],
+      "match_kind": "manual-static-json-tiles-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22d3dc",
+      "original_metrics": {
+        "basic_block_count": 5,
+        "instruction_count": 45,
+        "mnemonic_hash": "7df9825176dffc4971e53d813bd9e829c22c876478abac66a3423fd5acd711b3",
+        "register_shape_hash": "f944e376429340e707ec076034451e1d8bcb13d06ecda956d0c596dca6ea2184",
+        "shape_hash": "fb964890013d942eab7883b9231e05a28688b00021d66ec5c6755679f9a5cc72",
+        "size": 180
+      },
+      "original_name": "TStaticVar_TStaticVar_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TStaticVar_TStaticVar_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "static script variable construction",
+      "spectron_current_name": "_ZN10NgNBgaN3oAC2ERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x236ea0",
+      "spectron_metrics": {
+        "basic_block_count": 5,
+        "instruction_count": 56,
+        "mnemonic_hash": "be46d6e65258c60dfabb9034ce3216205be875a1b85c6b13d91a9bceb4cc2f3e",
+        "register_shape_hash": "50ab5cf57197261ffdcd81373dd7ca46d4373513aa5329342feb0b48ae14cf2b",
+        "shape_hash": "c12ec9f5c300170cd2c597e9cf1c0b5d0c4fbf7a81763cf3822f74ffee22b2e8",
+        "size": 224
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both select between scalar, array, and object output, filter the same initialized, actionplayer, name, and unknown_object properties, and recurse through array children and object properties.",
+        "Both preserve the same typed YAJL emission branches for booleans, strings, numbers, objects, and nulls, and retain the actionplayer, initialized, unknown_object, and xmlname literals. The target grows from 1692 to 1816 bytes but keeps the 77-block writer shape."
+      ],
+      "match_kind": "manual-static-json-tiles-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22e378",
+      "original_metrics": {
+        "basic_block_count": 77,
+        "instruction_count": 421,
+        "mnemonic_hash": "d8c7afb5c98195a1ce848d82554c824ab48f2affa843ca1d30ee6fd596f8c1ed",
+        "register_shape_hash": "25eb5aa27623795feba8d09208c6e96854fe7ad2789e5687f9330afc276ba45b",
+        "shape_hash": "a441ed837e3da5eb29394e1de3480241927e0a4022193a8735bf49dc19ea2598",
+        "size": 1692
+      },
+      "original_name": "TGraalVar_writeJSONObject_yajl_gen_t_bool",
+      "original_string_refs": [
+        "actionplayer",
+        "initialized",
+        "unknown_object",
+        "xmlname"
+      ],
+      "proposed_name": "v18_TGraalVar_writeJSONObject_yajl_gen_t_bool",
+      "semantic_match_already_present": false,
+      "source_basis": "recursive TGraalVar JSON object writer",
+      "spectron_current_name": "_ZN10G0gxgajWBw10tNsxZakQLnEP10yajl_gen_tb",
+      "spectron_default_name": false,
+      "spectron_ea": "0x237ec8",
+      "spectron_metrics": {
+        "basic_block_count": 77,
+        "instruction_count": 452,
+        "mnemonic_hash": "b34f20a15793f193fa7e560bc6badd6d63a4572b1f3b1e78c719d621801f6cf9",
+        "register_shape_hash": "55b03cf1059f07bb14d69b00df8b8f7f5e7aa6f008059a39e807bc203a13ce31",
+        "shape_hash": "afd99268e9c6da52a20bdda390f599988274fde0d8124f1c8705a94afdbb8a61",
+        "size": 1816
+      },
+      "spectron_string_refs": [
+        "actionplayer",
+        "initialized",
+        "unknown_object",
+        "xmlname"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both clear the save-pending flag, build the server-specific tiledefs text path beneath the levels directory, serialize each tile definition as comma-separated fields, and save the resulting string list.",
+        "Both retain the levels and tiledefs literals, the same five-field serialization loop, forced-directory creation, and final list destruction. The target grows from 944 to 976 bytes while retaining the four-block persistence flow."
+      ],
+      "match_kind": "manual-static-json-tiles-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22f32c",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "instruction_count": 236,
+        "mnemonic_hash": "aa6c9cc0294aad5893c503e8ab538b8f818fd92b2236eaa05f91d50c849279c4",
+        "register_shape_hash": "a0edbd568ed54433f28d490a3c63ca261bcd639c951f17f0977cb06d3e111101",
+        "shape_hash": "d1853ce2c3cf4153f73f43bb7b0105c01dd6d3868547375a5e7fb1d7ea36cad0",
+        "size": 944
+      },
+      "original_name": "TTiles_SaveTileDefinitions_void",
+      "original_string_refs": [
+        "levels",
+        "tiledefs"
+      ],
+      "proposed_name": "v18_TTiles_SaveTileDefinitions_void",
+      "semantic_match_already_present": false,
+      "source_basis": "tile-definition persistence",
+      "spectron_current_name": "_ZN10kyTzgazlOy10e0CVvaMq5sEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x238f48",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "instruction_count": 244,
+        "mnemonic_hash": "4348e19471c7e372511127985f13c20efc3b3dc3f1dab36fd25d5a10d3ed6605",
+        "register_shape_hash": "d288110d3e2bc5c82fe1b463c4a58219bf0bb9a89026b330a5ae75ae265b578d",
+        "shape_hash": "aa0d755bf49fd1b1e62c24bfd88b4639119f65931c596ae83b5d79a7462c79ee",
+        "size": 976
+      },
+      "spectron_string_refs": [
+        "levels",
+        "tiledefs"
+      ]
+    }
+  ],
+  "artifact": "spectron_static_json_tiles_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v1_saved.json",
+    "spectron_features_sha256": "a8d58f85502362316ee99a0f79c2cd7a4ad5d6fac94aca0ee75bd0d2965fc2a1"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The changed-size rows rely on class-local order, required strings, matching block structure, and pseudocode behavior rather than byte identity."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for static variables, JSON serialization, and tile-definition persistence",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 3,
+    "high_confidence_count": 3,
+    "new_context_anchor_count": 3,
+    "target_default_name_count": 0
+  }
+}

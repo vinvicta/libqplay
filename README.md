@@ -634,6 +634,14 @@ evidence is in
 `artifacts/spectron_script_universe_manual_translation_anchors_20260826.json`,
 and the v53 database SHA-256 is recorded in the checkpoint.
 
+A fifty-second disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v54.i64`,
+adds three reviewed anchors for static script-variable construction, recursive
+JSON serialization, and tile-definition persistence. All three reopened
+successfully. The evidence is in
+`artifacts/spectron_static_json_tiles_manual_translation_anchors_20260826.json`,
+and the v54 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and

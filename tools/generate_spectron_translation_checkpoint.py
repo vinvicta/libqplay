@@ -127,6 +127,8 @@ def main() -> None:
     parser.add_argument("--script-property-verification", type=Path)
     parser.add_argument("--script-universe-anchors", type=Path)
     parser.add_argument("--script-universe-verification", type=Path)
+    parser.add_argument("--static-json-tiles-anchors", type=Path)
+    parser.add_argument("--static-json-tiles-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1566,6 +1568,34 @@ def main() -> None:
         result["script_universe_anchors"] = script_universe
         result["interpretation"].append(
             "The fifty-first database revision also contains the separately reviewed GS2 universe, class, and zipped-script anchors."
+        )
+    static_json_tiles = None
+    if args.static_json_tiles_anchors or args.static_json_tiles_verification:
+        if not args.static_json_tiles_anchors or not args.static_json_tiles_verification:
+            raise ValueError(
+                "static/JSON/tiles anchors and static/JSON/tiles verification must be supplied together"
+            )
+        static_json_tiles_document = load(args.static_json_tiles_anchors)
+        static_json_tiles_verification = load(args.static_json_tiles_verification)
+        if static_json_tiles_document.get("artifact") != "spectron_static_json_tiles_manual_translation_anchors_20260826":
+            raise ValueError("unexpected static/JSON/tiles anchor artifact")
+        if not static_json_tiles_verification.get("verified"):
+            raise ValueError("static/JSON/tiles anchor reopen verification did not pass")
+        expected_static_json_tiles = len(static_json_tiles_document["anchors"])
+        if static_json_tiles_verification["verified_name_count"] != expected_static_json_tiles:
+            raise ValueError("static/JSON/tiles verification count differs from artifact")
+        static_json_tiles = {
+            "anchor_path": str(args.static_json_tiles_anchors),
+            "anchor_sha256": sha256_path(args.static_json_tiles_anchors),
+            "reopen_verification": str(args.static_json_tiles_verification),
+            "anchor_count": expected_static_json_tiles,
+            "verified_name_count": static_json_tiles_verification["verified_name_count"],
+            "reopen_failure_count": static_json_tiles_verification["failure_count"],
+        }
+    if static_json_tiles is not None:
+        result["static_json_tiles_anchors"] = static_json_tiles
+        result["interpretation"].append(
+            "The fifty-second database revision also contains the separately reviewed static-variable, JSON-serialization, and tile-definition anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

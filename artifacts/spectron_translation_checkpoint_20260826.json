@@ -85,8 +85,8 @@
     "default_sub_function_count": 1791,
     "format": "packed IDA 9.3 database",
     "function_count": 11678,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v53.i64",
-    "sha256": "a8b0e0611f2148be755691539ffa2cf6607c2ed00caf5ff6fe21f4ba2a1e5c80"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v54.i64",
+    "sha256": "01d1833774b599fec7dc4279614dd09e0cf51ccc82ec21beed38c2e532559fec"
   },
   "event_object_anchors": {
     "anchor_count": 6,
@@ -196,7 +196,8 @@
     "The forty-eighth database revision also contains the separately reviewed GS2 tokenized string array anchor.",
     "The forty-ninth database revision also contains the separately reviewed GS2 bytecode execution-loop anchor.",
     "The fiftieth database revision also contains the separately reviewed GS2 typed property access and registration anchors.",
-    "The fifty-first database revision also contains the separately reviewed GS2 universe, class, and zipped-script anchors."
+    "The fifty-first database revision also contains the separately reviewed GS2 universe, class, and zipped-script anchors.",
+    "The fifty-second database revision also contains the separately reviewed static-variable, JSON-serialization, and tile-definition anchors."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -423,6 +424,14 @@
     "anchor_sha256": "196ceda39467f86ad51e6573f13ef28817023bad802a15eaf47dbcd55e6d09b3",
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_stack_entry_verify_v41.json",
+    "verified_name_count": 3
+  },
+  "static_json_tiles_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "artifacts/spectron_static_json_tiles_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "f13a9f3e2fcda5c1169ac293c8e5fcb1c13361b3a3bc74c606532eca2bbfba4d",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_static_json_tiles_verification_v54.json",
     "verified_name_count": 3
   },
   "string_helper_anchors": {

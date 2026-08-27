@@ -212,6 +212,9 @@ def main():
     spectron_script_universe_anchors = load_json(
         "artifacts/spectron_script_universe_manual_translation_anchors_20260826.json"
     )
+    spectron_static_json_tiles_anchors = load_json(
+        "artifacts/spectron_static_json_tiles_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -1492,6 +1495,16 @@ def main():
     check("Spectron script-universe semantic overlap", spectron_script_universe_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron script-universe default targets", spectron_script_universe_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron static/JSON/tiles artifact",
+        spectron_static_json_tiles_anchors["artifact"],
+        "spectron_static_json_tiles_manual_translation_anchors_20260826",
+    )
+    check("Spectron static/JSON/tiles network", spectron_static_json_tiles_anchors["network_contacted"], False)
+    check("Spectron static/JSON/tiles total", spectron_static_json_tiles_anchors["summary"]["anchor_count"], 3)
+    check("Spectron static/JSON/tiles high confidence", spectron_static_json_tiles_anchors["summary"]["high_confidence_count"], 3)
+    check("Spectron static/JSON/tiles semantic overlap", spectron_static_json_tiles_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron static/JSON/tiles default targets", spectron_static_json_tiles_anchors["summary"]["target_default_name_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -1550,7 +1563,8 @@ def main():
     check("Spectron checkpoint script-executor anchor count", spectron_checkpoint["script_executor_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint script-property anchor count", spectron_checkpoint["script_property_anchors"]["verified_name_count"], 9)
     check("Spectron checkpoint script-universe anchor count", spectron_checkpoint["script_universe_anchors"]["verified_name_count"], 8)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "a8b0e0611f2148be755691539ffa2cf6607c2ed00caf5ff6fe21f4ba2a1e5c80")
+    check("Spectron checkpoint static/JSON/tiles anchor count", spectron_checkpoint["static_json_tiles_anchors"]["verified_name_count"], 3)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "01d1833774b599fec7dc4279614dd09e0cf51ccc82ec21beed38c2e532559fec")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -1663,6 +1677,7 @@ def main():
         spectron_script_executor_anchors,
         spectron_script_property_anchors,
         spectron_script_universe_anchors,
+        spectron_static_json_tiles_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
