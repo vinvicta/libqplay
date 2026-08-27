@@ -1337,6 +1337,14 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_guicontrol_virtual_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+187. The next IDA pass translated eight residual `GuiControl` event and sizing
+    methods. They align with the target class at a fixed `+0x4500` delta, with
+    exact normalized shapes and no string references. Six enclosing rows were
+    already mapped, and the unnamed source `sub_1B2FDC` row remains explicit.
+    The labels reopened successfully in the v127 disposable copy. See
+    `artifacts/spectron_guicontrol_event_sizing_residual_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
