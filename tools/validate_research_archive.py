@@ -284,6 +284,9 @@ def main():
     spectron_client_environment_graphics_anchors = load_json(
         "artifacts/spectron_client_environment_graphics_manual_translation_anchors_20260827.json"
     )
+    spectron_client_environment_static_clear_anchors = load_json(
+        "artifacts/spectron_client_environment_static_clear_manual_translation_anchors_20260827.json"
+    )
     spectron_particle_emitter_anchors = load_json(
         "artifacts/spectron_particle_emitter_manual_translation_anchors_20260826.json"
     )
@@ -2480,6 +2483,54 @@ def main():
         "0x15fe84",
     )
     check(
+        "Spectron client-environment static-clear artifact",
+        spectron_client_environment_static_clear_anchors["artifact"],
+        "spectron_client_environment_static_clear_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron client-environment static-clear network",
+        spectron_client_environment_static_clear_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron client-environment static-clear total",
+        spectron_client_environment_static_clear_anchors["summary"]["anchor_count"],
+        2,
+    )
+    check(
+        "Spectron client-environment static-clear high confidence",
+        spectron_client_environment_static_clear_anchors["summary"]["high_confidence_count"],
+        2,
+    )
+    check(
+        "Spectron client-environment static-clear exact-shape count",
+        spectron_client_environment_static_clear_anchors["summary"]["exact_shape_anchor_count"],
+        2,
+    )
+    check(
+        "Spectron client-environment static-clear default targets",
+        spectron_client_environment_static_clear_anchors["summary"]["target_default_name_count"],
+        2,
+    )
+    client_environment_static_clear = {
+        row["original_name"]: row
+        for row in spectron_client_environment_static_clear_anchors["anchors"]
+    }
+    check(
+        "Spectron runTimers profiler-clear target",
+        client_environment_static_clear[
+            "TClientEnvironment_clearStaticString38D428"
+        ]["spectron_ea"],
+        "0x15f678",
+    )
+    check(
+        "Spectron drawGame profiler-clear target",
+        client_environment_static_clear[
+            "TClientEnvironment_clearStaticString38D460"
+        ]["spectron_ea"],
+        "0x15f684",
+    )
+    check(
         "Spectron particle-emitter artifact",
         spectron_particle_emitter_anchors["artifact"],
         "spectron_particle_emitter_manual_translation_anchors_20260826",
@@ -3637,7 +3688,7 @@ def main():
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1236)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1234)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -3818,7 +3869,8 @@ def main():
     check("Spectron checkpoint TSocket residual anchor count", spectron_checkpoint["tsocket_residual_anchors"]["verified_name_count"], 4)
     check("Spectron checkpoint game-environment anchor count", spectron_checkpoint["game_environment_anchors"]["verified_name_count"], 4)
     check("Spectron checkpoint client-environment graphics anchor count", spectron_checkpoint["client_environment_graphics_anchors"]["verified_name_count"], 1)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "cbe7bf4090401422921c716334913ee53ebdf1dd042937651588c82b2e360de6")
+    check("Spectron checkpoint client-environment static-clear anchor count", spectron_checkpoint["client_environment_static_clear_anchors"]["verified_name_count"], 2)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "9bf8f68133ac77f7001e314e678a2b5955ecb7d161b6c1dbf69165f657289dc6")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -3954,6 +4006,7 @@ def main():
         spectron_tsocket_residual_anchors,
         spectron_game_environment_anchors,
         spectron_client_environment_graphics_anchors,
+        spectron_client_environment_static_clear_anchors,
         spectron_particle_emitter_anchors,
         spectron_server_animation_anchors,
         spectron_player_lifecycle_anchors,

@@ -1460,6 +1460,17 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_static_callback_role_correction.py`, and
     `tools/ida_dump_function_data_refs.py`.
 
+243. The next IDA pass translated two `TClientEnvironment` profiler cleanup
+    callbacks. Source `0x15c620` maps to target `0x15f678`, where the target
+    `runTimers` method registers the callback with `atexit`; source `0x15c62c`
+    maps to target `0x15f684`, registered by `drawGame`. Both target functions
+    were default-named and both are exact normalized-shape matches. The v184
+    copy has 11,694 functions, 3,641 high-confidence labels, and 1,234
+    default `sub_` names, with zero semantic reopen failures. See
+    `artifacts/spectron_client_environment_static_clear_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_client_environment_static_clear_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 242. The next IDA pass translated the remaining short
     `TClientEnvironment_initGraphics_void` wrapper. Source `0x15ce2c` maps
     to target `0x15fe84`, between the target free-graphics and window-size

@@ -173,6 +173,8 @@ def main() -> None:
     parser.add_argument("--game-environment-verification", type=Path)
     parser.add_argument("--client-environment-graphics-anchors", type=Path)
     parser.add_argument("--client-environment-graphics-verification", type=Path)
+    parser.add_argument("--client-environment-static-clear-anchors", type=Path)
+    parser.add_argument("--client-environment-static-clear-verification", type=Path)
     parser.add_argument("--particle-emitter-anchors", type=Path)
     parser.add_argument("--particle-emitter-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
@@ -5421,6 +5423,68 @@ def main() -> None:
         result["client_environment_graphics_anchors"] = client_environment_graphics
         result["interpretation"].append(
             "The v183 database revision also contains the separately reviewed TClientEnvironment graphics initializer anchor."
+        )
+    client_environment_static_clear = None
+    if (
+        args.client_environment_static_clear_anchors
+        or args.client_environment_static_clear_verification
+    ):
+        if (
+            not args.client_environment_static_clear_anchors
+            or not args.client_environment_static_clear_verification
+        ):
+            raise ValueError(
+                "client-environment static-clear anchors and verification must be supplied together"
+            )
+        client_environment_static_clear_document = load(
+            args.client_environment_static_clear_anchors
+        )
+        client_environment_static_clear_verification = load(
+            args.client_environment_static_clear_verification
+        )
+        if (
+            client_environment_static_clear_document.get("artifact")
+            != "spectron_client_environment_static_clear_manual_translation_anchors_20260827"
+        ):
+            raise ValueError(
+                "unexpected client-environment static-clear anchor artifact"
+            )
+        if not client_environment_static_clear_verification.get("verified"):
+            raise ValueError(
+                "client-environment static-clear anchor reopen verification did not pass"
+            )
+        expected_client_environment_static_clear = len(
+            client_environment_static_clear_document["anchors"]
+        )
+        if (
+            client_environment_static_clear_verification["verified_name_count"]
+            != expected_client_environment_static_clear
+        ):
+            raise ValueError(
+                "client-environment static-clear verification count differs from artifact"
+            )
+        client_environment_static_clear = {
+            "anchor_path": str(args.client_environment_static_clear_anchors),
+            "anchor_sha256": sha256_path(
+                args.client_environment_static_clear_anchors
+            ),
+            "reopen_verification": str(
+                args.client_environment_static_clear_verification
+            ),
+            "anchor_count": expected_client_environment_static_clear,
+            "verified_name_count": client_environment_static_clear_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": client_environment_static_clear_verification[
+                "failure_count"
+            ],
+        }
+    if client_environment_static_clear is not None:
+        result["client_environment_static_clear_anchors"] = (
+            client_environment_static_clear
+        )
+        result["interpretation"].append(
+            "The v184 database revision also contains the separately reviewed TClientEnvironment profiler-string cleanup anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
