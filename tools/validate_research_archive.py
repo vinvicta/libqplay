@@ -419,6 +419,9 @@ def main():
     spectron_font_options_font_data_residual_anchors = load_json(
         "artifacts/spectron_font_options_font_data_residual_manual_translation_anchors_20260826.json"
     )
+    spectron_gui_control_profile_accessor_anchors = load_json(
+        "artifacts/spectron_gui_control_profile_accessor_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2392,13 +2395,23 @@ def main():
     check("Spectron font-options font-data residual semantic overlap", spectron_font_options_font_data_residual_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron font-options font-data residual default targets", spectron_font_options_font_data_residual_anchors["summary"]["target_default_name_count"], 6)
     check(
+        "Spectron GUI control profile accessor artifact",
+        spectron_gui_control_profile_accessor_anchors["artifact"],
+        "spectron_gui_control_profile_accessor_manual_translation_anchors_20260826",
+    )
+    check("Spectron GUI control profile accessor network", spectron_gui_control_profile_accessor_anchors["network_contacted"], False)
+    check("Spectron GUI control profile accessor total", spectron_gui_control_profile_accessor_anchors["summary"]["anchor_count"], 89)
+    check("Spectron GUI control profile accessor high confidence", spectron_gui_control_profile_accessor_anchors["summary"]["high_confidence_count"], 89)
+    check("Spectron GUI control profile accessor semantic overlap", spectron_gui_control_profile_accessor_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron GUI control profile accessor default targets", spectron_gui_control_profile_accessor_anchors["summary"]["target_default_name_count"], 88)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11679)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1677)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1589)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -2520,7 +2533,8 @@ def main():
     check("Spectron checkpoint screen-panel window GLES residual anchor count", spectron_checkpoint["screen_panel_window_gles_residual_anchors"]["verified_name_count"], 7)
     check("Spectron checkpoint font-manager font residual anchor count", spectron_checkpoint["font_manager_font_residual_anchors"]["verified_name_count"], 9)
     check("Spectron checkpoint font-options font-data residual anchor count", spectron_checkpoint["font_options_font_data_residual_anchors"]["verified_name_count"], 16)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "6163a6d7dcb2b510ec8664f72e40965ee31b56bc8d177a2c2ed1f969664a5c85")
+    check("Spectron checkpoint GUI control profile accessor anchor count", spectron_checkpoint["gui_control_profile_accessor_anchors"]["verified_name_count"], 89)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "50300d39030edb45142902407ff7651d7a436bb237fe54fe9d1aa59c8f3d7b8f")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -2702,6 +2716,7 @@ def main():
         spectron_screen_panel_window_gles_residual_anchors,
         spectron_font_manager_font_residual_anchors,
         spectron_font_options_font_data_residual_anchors,
+        spectron_gui_control_profile_accessor_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

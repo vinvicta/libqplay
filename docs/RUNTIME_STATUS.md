@@ -1304,6 +1304,14 @@ This is the short handoff view. The full reasoning and command history are in
      labels reopened successfully in the v122 disposable copy. See
      `artifacts/spectron_font_options_font_data_residual_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
+183. The next IDA pass translated 89 residual `GuiControlProfile` accessors.
+     It covers scalar fields, alignment and point wrappers, font-style
+     strings, color setters and getters, background inset, resource-file
+     notification, and the profile font-color helper. The labels reopened
+     successfully in the v123 disposable copy, with the target-only method
+     and two source coverage gaps left explicit. See
+     `artifacts/spectron_gui_control_profile_accessor_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
 ## Not verified
 

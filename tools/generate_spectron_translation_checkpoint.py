@@ -265,6 +265,8 @@ def main() -> None:
     parser.add_argument("--font-manager-font-residual-verification", type=Path)
     parser.add_argument("--font-options-font-data-residual-anchors", type=Path)
     parser.add_argument("--font-options-font-data-residual-verification", type=Path)
+    parser.add_argument("--gui-control-profile-accessor-anchors", type=Path)
+    parser.add_argument("--gui-control-profile-accessor-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -3636,6 +3638,34 @@ def main() -> None:
         result["font_options_font_data_residual_anchors"] = font_options_font_data_residual
         result["interpretation"].append(
             "The one-hundred-twenty-second database revision also contains the separately reviewed screen-panel lifecycle, TFontOptions property, TFontData lookup, and TWindowProperties destructor anchors."
+        )
+    gui_control_profile_accessor = None
+    if args.gui_control_profile_accessor_anchors or args.gui_control_profile_accessor_verification:
+        if not args.gui_control_profile_accessor_anchors or not args.gui_control_profile_accessor_verification:
+            raise ValueError(
+                "GUI control profile accessor anchors and GUI control profile accessor verification must be supplied together"
+            )
+        gui_control_profile_accessor_document = load(args.gui_control_profile_accessor_anchors)
+        gui_control_profile_accessor_verification = load(args.gui_control_profile_accessor_verification)
+        if gui_control_profile_accessor_document.get("artifact") != "spectron_gui_control_profile_accessor_manual_translation_anchors_20260826":
+            raise ValueError("unexpected GUI control profile accessor artifact")
+        if not gui_control_profile_accessor_verification.get("verified"):
+            raise ValueError("GUI control profile accessor reopen verification did not pass")
+        expected_gui_control_profile_accessor = len(gui_control_profile_accessor_document["anchors"])
+        if gui_control_profile_accessor_verification["verified_name_count"] != expected_gui_control_profile_accessor:
+            raise ValueError("GUI control profile accessor verification count differs from artifact")
+        gui_control_profile_accessor = {
+            "anchor_path": str(args.gui_control_profile_accessor_anchors),
+            "anchor_sha256": sha256_path(args.gui_control_profile_accessor_anchors),
+            "reopen_verification": str(args.gui_control_profile_accessor_verification),
+            "anchor_count": expected_gui_control_profile_accessor,
+            "verified_name_count": gui_control_profile_accessor_verification["verified_name_count"],
+            "reopen_failure_count": gui_control_profile_accessor_verification["failure_count"],
+        }
+    if gui_control_profile_accessor is not None:
+        result["gui_control_profile_accessor_anchors"] = gui_control_profile_accessor
+        result["interpretation"].append(
+            "The one-hundred-twenty-third database revision also contains the separately reviewed GuiControlProfile accessor block and its explicit target-only coverage gaps."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
