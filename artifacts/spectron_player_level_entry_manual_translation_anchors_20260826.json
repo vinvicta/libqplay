@@ -1,0 +1,103 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both notify the client, derive the side-level offset, detect a changed map, clear objects from the previous level, load side levels, detach a server player when required, update map position, and stop stale weapon particles and sounds.",
+        "Both recalculate the player position relative to the new level, update board coordinates, stop outside NPC scripts, invoke player-enter callbacks, update tiles, initialize or reuse the render buffer, and resolve the restart position from the level list.",
+        "Both finish by resetting action mode for the same encoded action states. The target expands one small branch and shifts player fields for the larger 2.2 object, but retains the 56-block source shape with 57 target blocks and the same call order."
+      ],
+      "match_kind": "manual-player-level-entry-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x178558",
+      "original_metrics": {
+        "basic_block_count": 56,
+        "instruction_count": 301,
+        "mnemonic_hash": "2e5f839d170d0555c3e1638049f480319952bbd3ea0a8a88229302a50203794e",
+        "register_shape_hash": "3f6d04f1a21bd43c4039e9c9ce9fad20619b338ce318ca7c355629b4e651bef4",
+        "shape_hash": "d34d55abf64f606e34ea9bb079faa7b48a6ace6c545413cb2a1a820752593fb6",
+        "size": 1204
+      },
+      "original_name": "TPlayer_enterLevelMain_TString_const_bool",
+      "original_string_refs": [],
+      "proposed_name": "v18_TPlayer_enterLevelMain_TString_const_bool",
+      "semantic_match_already_present": false,
+      "source_basis": "main level-entry state transition and object cleanup",
+      "spectron_current_name": "_ZN10W6NzgawMJy10dFumxafpxGERK10C8THgaTQxFb",
+      "spectron_default_name": false,
+      "spectron_ea": "0x17c7f8",
+      "spectron_metrics": {
+        "basic_block_count": 57,
+        "instruction_count": 320,
+        "mnemonic_hash": "e39437a7e4ee2f49e62c7163b678b568fc58d5df3198a8760ea789cc3b7dea56",
+        "register_shape_hash": "b38957baa3df77fa493d95c4731c75bed26b59a295ef376b003e02b20a744b65",
+        "shape_hash": "a9191b1f9839e7acaef525c93acb601bf60da4183d486523ba1eb6ee0bec6557",
+        "size": 1280
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both refresh the encoded player state, ensure a positive health or power value, swap the current level name with the requested server level, and create or load the TServerLevel object when it is absent.",
+        "Both update the client or NPC server-level globals, clear the same three server-level object lists when requested, reset the attached player coordinates, and dispatch the matching server-modification routine for the requested level.",
+        "Both store the new level name and call the main level-entry method with the saved previous name. The target changes wrapper and field names for the rebuilt 2.2 layout while preserving the source and target 32-block control-flow shape."
+      ],
+      "match_kind": "manual-player-level-entry-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x178a18",
+      "original_metrics": {
+        "basic_block_count": 32,
+        "instruction_count": 219,
+        "mnemonic_hash": "850889eb1a29c4ce22e20ec2f4011daca5e1d01dc8df30ce56329b8016b56be0",
+        "register_shape_hash": "0a15f3207e75f067657548c324285c12c84498e78d5dde49520ef9ab16dd3a12",
+        "shape_hash": "f5f555a8f162b805fd9d4f55db0eab7cde5fc4fca1c8a0f50e3cf1aa40b20daa",
+        "size": 880
+      },
+      "original_name": "TPlayer_enterServerLevel_TString_const_bool",
+      "original_string_refs": [],
+      "proposed_name": "v18_TPlayer_enterServerLevel_TString_const_bool",
+      "semantic_match_already_present": false,
+      "source_basis": "server-level entry setup and server-modification handoff",
+      "spectron_current_name": "_ZN10W6NzgawMJy10XqHzwam9D0ERK10C8THgaTQxFb",
+      "spectron_default_name": false,
+      "spectron_ea": "0x17cd00",
+      "spectron_metrics": {
+        "basic_block_count": 32,
+        "instruction_count": 239,
+        "mnemonic_hash": "b0e79c19b146effcdfb0a15e7446486486181ee8afd0dd62dd9c0b64d785ade2",
+        "register_shape_hash": "c65c9f606e828a63b1a8bd9dbd1c6cc29f4fbbe68011c1d4b4444478e3f235df",
+        "shape_hash": "11e2e6130be6fc7df56dfaa76753fee9a4751e0a5a403a237fd2d35c8e30aea5",
+        "size": 960
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_player_level_entry_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v1_saved.json",
+    "spectron_features_sha256": "a8d58f85502362316ee99a0f79c2cd7a4ad5d6fac94aca0ee75bd0d2965fc2a1"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The correspondence relies on the preserved class-local call sequence, matching level-list cleanup and handoff behavior, compatible block counts, and reviewed pseudocode rather than byte identity."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for player main-level and server-level entry",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 2,
+    "high_confidence_count": 2,
+    "new_context_anchor_count": 2,
+    "target_default_name_count": 0
+  }
+}

@@ -143,6 +143,8 @@ def main() -> None:
     parser.add_argument("--player-lifecycle-verification", type=Path)
     parser.add_argument("--player-emoticon-anchors", type=Path)
     parser.add_argument("--player-emoticon-verification", type=Path)
+    parser.add_argument("--player-level-entry-anchors", type=Path)
+    parser.add_argument("--player-level-entry-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -1806,6 +1808,34 @@ def main() -> None:
         result["player_emoticon_anchors"] = player_emoticon
         result["interpretation"].append(
             "The fifty-ninth database revision also contains the separately reviewed player emoticon-coordinate getter anchors."
+        )
+    player_level_entry = None
+    if args.player_level_entry_anchors or args.player_level_entry_verification:
+        if not args.player_level_entry_anchors or not args.player_level_entry_verification:
+            raise ValueError(
+                "player-level-entry anchors and player-level-entry verification must be supplied together"
+            )
+        player_level_entry_document = load(args.player_level_entry_anchors)
+        player_level_entry_verification = load(args.player_level_entry_verification)
+        if player_level_entry_document.get("artifact") != "spectron_player_level_entry_manual_translation_anchors_20260826":
+            raise ValueError("unexpected player-level-entry anchor artifact")
+        if not player_level_entry_verification.get("verified"):
+            raise ValueError("player-level-entry anchor reopen verification did not pass")
+        expected_player_level_entry = len(player_level_entry_document["anchors"])
+        if player_level_entry_verification["verified_name_count"] != expected_player_level_entry:
+            raise ValueError("player-level-entry verification count differs from artifact")
+        player_level_entry = {
+            "anchor_path": str(args.player_level_entry_anchors),
+            "anchor_sha256": sha256_path(args.player_level_entry_anchors),
+            "reopen_verification": str(args.player_level_entry_verification),
+            "anchor_count": expected_player_level_entry,
+            "verified_name_count": player_level_entry_verification["verified_name_count"],
+            "reopen_failure_count": player_level_entry_verification["failure_count"],
+        }
+    if player_level_entry is not None:
+        result["player_level_entry_anchors"] = player_level_entry
+        result["interpretation"].append(
+            "The sixtieth database revision also contains the separately reviewed player main-level and server-level entry anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

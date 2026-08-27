@@ -864,6 +864,12 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_player_emoticon_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+122. Clean IDA review added two high-confidence player level-entry anchors for
+     main-level and server-level transitions. Both reopened successfully in
+     the v62 disposable copy. See
+     `artifacts/spectron_player_level_entry_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
