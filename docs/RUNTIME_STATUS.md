@@ -1024,6 +1024,14 @@ This is the short handoff view. The full reasoning and command history are in
      See `artifacts/spectron_gani_lifecycle_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+146. Clean IDA review added two high-confidence TPlayer core anchors. The set
+     covers the network-property serializer and integer constructor, with
+     matching property cases, field use, initialization order, and preserved
+     literals. Both reopened successfully in the v86 disposable copy. The
+     full semantic-label reopen check still passed with zero failures. See
+     `artifacts/spectron_tplayer_core_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

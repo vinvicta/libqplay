@@ -191,6 +191,8 @@ def main() -> None:
     parser.add_argument("--gani-frame-playback-verification", type=Path)
     parser.add_argument("--gani-lifecycle-anchors", type=Path)
     parser.add_argument("--gani-lifecycle-verification", type=Path)
+    parser.add_argument("--tplayer-core-anchors", type=Path)
+    parser.add_argument("--tplayer-core-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2526,6 +2528,34 @@ def main() -> None:
         result["gani_lifecycle_anchors"] = gani_lifecycle
         result["interpretation"].append(
             "The eighty-third database revision also contains the separately reviewed Gani object teardown, virtual surface, animation state, ownership, script-cache, loading, and property anchors."
+        )
+    tplayer_core = None
+    if args.tplayer_core_anchors or args.tplayer_core_verification:
+        if not args.tplayer_core_anchors or not args.tplayer_core_verification:
+            raise ValueError(
+                "TPlayer core anchors and TPlayer core verification must be supplied together"
+            )
+        tplayer_core_document = load(args.tplayer_core_anchors)
+        tplayer_core_verification = load(args.tplayer_core_verification)
+        if tplayer_core_document.get("artifact") != "spectron_tplayer_core_manual_translation_anchors_20260826":
+            raise ValueError("unexpected TPlayer core anchor artifact")
+        if not tplayer_core_verification.get("verified"):
+            raise ValueError("TPlayer core anchor reopen verification did not pass")
+        expected_tplayer_core = len(tplayer_core_document["anchors"])
+        if tplayer_core_verification["verified_name_count"] != expected_tplayer_core:
+            raise ValueError("TPlayer core verification count differs from artifact")
+        tplayer_core = {
+            "anchor_path": str(args.tplayer_core_anchors),
+            "anchor_sha256": sha256_path(args.tplayer_core_anchors),
+            "reopen_verification": str(args.tplayer_core_verification),
+            "anchor_count": expected_tplayer_core,
+            "verified_name_count": tplayer_core_verification["verified_name_count"],
+            "reopen_failure_count": tplayer_core_verification["failure_count"],
+        }
+    if tplayer_core is not None:
+        result["tplayer_core_anchors"] = tplayer_core
+        result["interpretation"].append(
+            "The eighty-fourth database revision also contains the separately reviewed TPlayer network-property serializer and constructor anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

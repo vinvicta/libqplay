@@ -1,0 +1,129 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both methods implement the large network-property switch for the player, including the same property IDs, length-prefixed string encoding, coordinate packing, animation and head filename handling, five-color serialization, level-name selection, and default-space cases.",
+        "The target retains the same class-local field offsets and packet literals `head`, three spaces, and four spaces. The target body grows from 3476 to 3668 bytes through rebuilt string and wrapper calls, while the 187 to 198 block change remains consistent with versioned helper expansion.",
+        "The target sits in the corresponding player-method cluster immediately after the status and property accessors. Its obfuscated signature is the only name-level difference, so this is a direct semantic translation rather than a proximity-only guess."
+      ],
+      "match_kind": "manual-player-core-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1712b8",
+      "original_metrics": {
+        "basic_block_count": 187,
+        "instruction_count": 867,
+        "mnemonic_hash": "a949602119ad49d5062912f9c38b26e34262226adc371fb7e6872daf597e8a9b",
+        "register_shape_hash": "41e532ba086e66faa8003c1b46f937459bfc5abb0a862a708b1a2a5930c055b3",
+        "shape_hash": "98b2664f8113507b970472200715e73f6b37e7ff34363760e3a92626b9fa5809",
+        "size": 3476
+      },
+      "original_name": "TPlayer_getNetProperty_int",
+      "original_string_refs": [
+        "   ",
+        "    ",
+        "head"
+      ],
+      "proposed_name": "v18_TPlayer_getNetProperty_int",
+      "semantic_match_already_present": false,
+      "source_basis": "TPlayer network-property packet serialization",
+      "spectron_current_name": "_ZN10W6NzgawMJy10fAkcNaaWZ_Ei",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1751b8",
+      "spectron_metrics": {
+        "basic_block_count": 198,
+        "instruction_count": 916,
+        "mnemonic_hash": "e86d76fa12f252ca6f724f92316e1d7cd7c20c1decaba438e9b3564c2b57a698",
+        "register_shape_hash": "64037dd023e0918e6d359135a82c665b9dd4e32997e8a8818080780d3ec06aaa",
+        "shape_hash": "eda7443b34cbbc8cbadf366e3ccffcd61ac2856b3ca40c06f5d70ca914b8bb51",
+        "size": 3668
+      },
+      "spectron_string_refs": [
+        "   ",
+        "    ",
+        "head"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both constructors call the server-player base constructor, install the derived vtable, initialize the repeated player property storage and translation state, publish the player properties object, and create the client and clientr child variables.",
+        "Both continue through player-variable initialization, account and nickname setup, platform-name initialization, weapon and animation defaults, and the same class-local cleanup fields. The target retains all seven constructor literals: `android`, `client`, `clientr`, `idle`, `letters.png`, `selectedlistplayers`, and `weapons`.",
+        "The target keeps the exact 46-block constructor structure. Its 4208-byte, 1044-instruction body is larger than the 3920-byte, 973-instruction source body because the target uses expanded wrappers, but the initialization order and class-local position are preserved. IDA records the target C2 name with a C1 alternative, confirming the constructor role."
+      ],
+      "match_kind": "manual-player-core-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1748f0",
+      "original_metrics": {
+        "basic_block_count": 46,
+        "instruction_count": 973,
+        "mnemonic_hash": "4caa3642b49e7f84d011dfa0503edaee254d978ccffdfb47fc5e6c3774d91382",
+        "register_shape_hash": "0f9ecff6faecef4820ae501d66ad63a5d8fe2463228d52376bdfb27068772cbd",
+        "shape_hash": "d6db05bda1dd9d37fd4df93fe5d2c50e6da8b357ef716ada431d33e8156e2802",
+        "size": 3920
+      },
+      "original_name": "TPlayer_TPlayer_int",
+      "original_string_refs": [
+        "android",
+        "client",
+        "clientr",
+        "idle",
+        "letters.png",
+        "selectedlistplayers",
+        "weapons"
+      ],
+      "proposed_name": "v18_TPlayer_TPlayer_int",
+      "semantic_match_already_present": false,
+      "source_basis": "TPlayer integer constructor and default state initialization",
+      "spectron_current_name": "_ZN10W6NzgawMJyC2Ei",
+      "spectron_default_name": false,
+      "spectron_ea": "0x178a74",
+      "spectron_metrics": {
+        "basic_block_count": 46,
+        "instruction_count": 1044,
+        "mnemonic_hash": "e5d84082b49c490c215630120bdb84897dea349c8217cfb2cc717ec8a7c747c3",
+        "register_shape_hash": "a0eb1b1c4442b17a1403c15043e7852a24d9c858097138fb8172e2a9fa0855e3",
+        "shape_hash": "546244b409ec60227b6fd3eff5a9182da9d2eb1f0f64df27adf81109fcf98cb4",
+        "size": 4208
+      },
+      "spectron_string_refs": [
+        "android",
+        "client",
+        "clientr",
+        "idle",
+        "letters.png",
+        "selectedlistplayers",
+        "weapons"
+      ]
+    }
+  ],
+  "artifact": "spectron_tplayer_core_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v1_saved.json",
+    "spectron_features_sha256": "a8d58f85502362316ee99a0f79c2cd7a4ad5d6fac94aca0ee75bd0d2965fc2a1"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The network-property correspondence is supported by direct Hex-Rays pseudocode, shared property cases, preserved packet literals, field offsets, and class-local order.",
+    "The constructor correspondence is supported by direct Hex-Rays pseudocode, the same initialization order, exact block-count parity, preserved literals, and the target C2/C1 constructor pair.",
+    "Changed byte sizes and instruction counts are recorded as version differences. No exact byte identity is claimed."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for TPlayer network-property serialization and construction",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 2,
+    "high_confidence_count": 2,
+    "new_context_anchor_count": 2,
+    "target_default_name_count": 0
+  }
+}

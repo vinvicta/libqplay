@@ -898,6 +898,17 @@ role. All 50 labels reopened successfully. The evidence is in
 `artifacts/spectron_gani_lifecycle_manual_translation_anchors_20260826.json`,
 and the v85 database SHA-256 is recorded in the checkpoint.
 
+A v86 disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v86.i64`,
+adds two high-confidence TPlayer anchors. The network-property serializer
+keeps the same property switch, packet encoding, player field offsets, and
+`head` and whitespace literals. The integer constructor keeps the complete
+player initialization order and all seven constructor literals, including
+`client`, `clientr`, `selectedlistplayers`, `weapons`, `letters.png`, `idle`,
+and `android`. Both labels reopened successfully, and the v86 database
+SHA-256 is recorded in the checkpoint. The evidence is in
+`artifacts/spectron_tplayer_core_manual_translation_anchors_20260826.json`.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and
@@ -1072,6 +1083,8 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/spectron_gani_lifecycle_manual_translation_anchors_20260826.json`
   records the 50 reviewed Gani object, animation state, ownership, loading,
   and property lifecycle anchors.
+* `artifacts/spectron_tplayer_core_manual_translation_anchors_20260826.json`
+  records the two reviewed TPlayer network-property and constructor anchors.
 * `artifacts/spectron_json_folder_manual_translation_anchors_20260826.json`
   records the eight reviewed GIF/JPEG callbacks, recursive folder-loader
   helper, and YAJL JSON callbacks.
@@ -1362,6 +1375,9 @@ proves the local native TLS path, not a current live certificate or service.
   The `tools/generate_spectron_gani_lifecycle_anchors.py` generator records
   the reviewed Gani object and TGraalAni teardown, virtual, state, ownership,
   script-cache, loading, and property roles.
+  The `tools/generate_spectron_tplayer_core_anchors.py` generator records the
+  reviewed TPlayer network-property serializer and constructor roles with
+  exact metric and literal checks.
   The `tools/generate_spectron_socket_behavior_comparison.py` generator
   records changed-size socket behavior without forcing an exact-match label.
   `tools/ida_apply_spectron_translation.py` and
