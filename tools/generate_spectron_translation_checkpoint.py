@@ -189,6 +189,8 @@ def main() -> None:
     parser.add_argument("--options-window-position-verification", type=Path)
     parser.add_argument("--displayed-gif-anchors", type=Path)
     parser.add_argument("--displayed-gif-verification", type=Path)
+    parser.add_argument("--gui-button-types-anchors", type=Path)
+    parser.add_argument("--gui-button-types-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
     parser.add_argument("--server-animation-verification", type=Path)
     parser.add_argument("--player-lifecycle-anchors", type=Path)
@@ -2552,6 +2554,46 @@ def main() -> None:
         result["displayed_gif_anchors"] = displayed_gif
         result["interpretation"].append(
             "The one-hundred-ninetieth database revision also contains the separately reviewed displayed-GIF state initializer anchor."
+        )
+    gui_button_types = None
+    if args.gui_button_types_anchors or args.gui_button_types_verification:
+        if not args.gui_button_types_anchors or not args.gui_button_types_verification:
+            raise ValueError(
+                "GUI button-type anchors and verification must be supplied together"
+            )
+        gui_button_types_document = load(args.gui_button_types_anchors)
+        gui_button_types_verification = load(args.gui_button_types_verification)
+        if (
+            gui_button_types_document.get("artifact")
+            != "spectron_gui_button_types_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected GUI button-type anchor artifact")
+        if not gui_button_types_verification.get("verified"):
+            raise ValueError(
+                "GUI button-type anchor reopen verification did not pass"
+            )
+        expected_gui_button_types = len(gui_button_types_document["anchors"])
+        if (
+            gui_button_types_verification["verified_name_count"]
+            != expected_gui_button_types
+        ):
+            raise ValueError(
+                "GUI button-type verification count differs from artifact"
+            )
+        gui_button_types = {
+            "anchor_path": str(args.gui_button_types_anchors),
+            "anchor_sha256": sha256_path(args.gui_button_types_anchors),
+            "reopen_verification": str(args.gui_button_types_verification),
+            "anchor_count": expected_gui_button_types,
+            "verified_name_count": gui_button_types_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": gui_button_types_verification["failure_count"],
+        }
+    if gui_button_types is not None:
+        result["gui_button_types_anchors"] = gui_button_types
+        result["interpretation"].append(
+            "The one-hundred-ninety-first database revision also contains the separately reviewed GUI button-type table initializer anchor."
         )
     server_animation = None
     if args.server_animation_anchors or args.server_animation_verification:

@@ -1482,6 +1482,18 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_particle_emitter_script_vars_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+250. The next IDA pass translated the `GuiButtonBaseCtrl` button-type table
+    initializer. Source `sub_E090C` at `0xe090c` maps to target `sub_E0D10`
+    at `0xe0d10`, preserving the three-entry `PushButton`, `ToggleButton`,
+    and `RadioButton` table and its property getter and setter. The target
+    initializes one neighboring `CanTfaz6bZ` string, so the pair is recorded
+    as a high-confidence layout-change match. The v191 copy has 11,694
+    functions, 3,641 high-confidence labels, and 1,228 default `sub_` names,
+    with zero semantic reopen failures. See
+    `artifacts/spectron_gui_button_types_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_gui_button_types_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 249. The next IDA pass translated `initializeDisplayedGif`. Source `0xe08fc`
     maps to target `0xe0b80`, where the target `DiZVgajboR` global preserves
     the shared displayed-GIF state used by the player, server-player,

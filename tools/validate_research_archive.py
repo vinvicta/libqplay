@@ -308,6 +308,9 @@ def main():
     spectron_displayed_gif_anchors = load_json(
         "artifacts/spectron_displayed_gif_manual_translation_anchors_20260827.json"
     )
+    spectron_gui_button_types_anchors = load_json(
+        "artifacts/spectron_gui_button_types_manual_translation_anchors_20260827.json"
+    )
     spectron_server_animation_anchors = load_json(
         "artifacts/spectron_server_animation_manual_translation_anchors_20260826.json"
     )
@@ -2827,6 +2830,54 @@ def main():
         "0xe0b80",
     )
     check(
+        "Spectron GUI button-types artifact",
+        spectron_gui_button_types_anchors["artifact"],
+        "spectron_gui_button_types_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron GUI button-types network",
+        spectron_gui_button_types_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron GUI button-types total",
+        spectron_gui_button_types_anchors["summary"]["anchor_count"],
+        1,
+    )
+    check(
+        "Spectron GUI button-types high confidence",
+        spectron_gui_button_types_anchors["summary"]["high_confidence_count"],
+        1,
+    )
+    check(
+        "Spectron GUI button-types semantic overlap",
+        spectron_gui_button_types_anchors["summary"]["already_in_semantic_map"],
+        0,
+    )
+    check(
+        "Spectron GUI button-types exact-shape count",
+        spectron_gui_button_types_anchors["summary"]["exact_shape_anchor_count"],
+        0,
+    )
+    check(
+        "Spectron GUI button-types layout-change count",
+        spectron_gui_button_types_anchors["summary"]["layout_change_anchor_count"],
+        1,
+    )
+    check(
+        "Spectron GUI button-types default target",
+        spectron_gui_button_types_anchors["summary"]["target_default_name_count"],
+        1,
+    )
+    check(
+        "Spectron GUI button-types target",
+        {
+            row["original_name"]: row
+            for row in spectron_gui_button_types_anchors["anchors"]
+        }["sub_E090C"]["spectron_ea"],
+        "0xe0d10",
+    )
+    check(
         "Spectron server-animation artifact",
         spectron_server_animation_anchors["artifact"],
         "spectron_server_animation_manual_translation_anchors_20260826",
@@ -3974,7 +4025,7 @@ def main():
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1229)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1228)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -4162,7 +4213,8 @@ def main():
     check("Spectron checkpoint clear-cur-anis anchor count", spectron_checkpoint["clear_cur_anis_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint options window-position anchor count", spectron_checkpoint["options_window_position_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint displayed-GIF anchor count", spectron_checkpoint["displayed_gif_anchors"]["verified_name_count"], 1)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "6786c5996c4b41c0f4e1825b7e5df7d4a5ed828f586adca1b1d9592a4ab625ee")
+    check("Spectron checkpoint GUI button-types anchor count", spectron_checkpoint["gui_button_types_anchors"]["verified_name_count"], 1)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "954bce45a8c01d94a27dffcc75d5173798b5637459ad8c0d1358961ce2527f26")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -4306,6 +4358,7 @@ def main():
         spectron_clear_cur_anis_anchors,
         spectron_options_window_position_anchors,
         spectron_displayed_gif_anchors,
+        spectron_gui_button_types_anchors,
         spectron_server_animation_anchors,
         spectron_player_lifecycle_anchors,
         spectron_player_emoticon_anchors,

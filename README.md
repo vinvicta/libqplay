@@ -2562,6 +2562,9 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/spectron_displayed_gif_manual_translation_anchors_20260827.json`
   records the high-confidence displayed-GIF state initializer match, including
   the shared draw-consumer family and target cleanup callback.
+* `artifacts/spectron_gui_button_types_manual_translation_anchors_20260827.json`
+  records the high-confidence GUI button-type table initializer, including the
+  preserved PushButton, ToggleButton, and RadioButton entries.
 * `artifacts/spectron_npc_helper_manual_translation_anchors_20260826.json`
   records the 15 reviewed `TServerNPC` blocking, draw-mode, visibility, bow,
   and pelt helpers.
@@ -2967,6 +2970,9 @@ proves the local native TLS path, not a current live certificate or service.
   The `tools/generate_spectron_displayed_gif_anchors.py` generator records the
   reviewed displayed-GIF state initializer with its pointer indirection,
   cleanup callback, and translated draw-consumer family.
+  The `tools/generate_spectron_gui_button_types_anchors.py` generator records
+  the reviewed GUI button-type table initializer with its property-table,
+  string-table, and target cleanup evidence.
   The `tools/generate_spectron_npc_helper_anchors.py` generator records
   reviewed `TServerNPC` helper roles with exact hash checks and IDA-context
   evidence.
