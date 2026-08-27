@@ -2556,6 +2556,9 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/spectron_clear_cur_anis_manual_translation_anchors_20260827.json`
   records the high-confidence 248-byte current-animation-state cleanup match,
   including the target string-lifetime change and animation consumer evidence.
+* `artifacts/spectron_options_window_position_manual_translation_anchors_20260827.json`
+  records the high-confidence `TOptions` window-position initializer match,
+  including the target option fields and adjacent string initialization.
 * `artifacts/spectron_npc_helper_manual_translation_anchors_20260826.json`
   records the 15 reviewed `TServerNPC` blocking, draw-mode, visibility, bow,
   and pelt helpers.
@@ -2955,6 +2958,9 @@ proves the local native TLS path, not a current live certificate or service.
   The `tools/generate_spectron_clear_cur_anis_anchors.py` generator records
   the current-animation-state cleanup correspondence with state extent,
   initializer, cleanup-table, and target consumer evidence.
+  The `tools/generate_spectron_options_window_position_anchors.py` generator
+  records the reviewed `TOptions` window-position initializer with its
+  coordinate fields, target-only string field, and static-table evidence.
   The `tools/generate_spectron_npc_helper_anchors.py` generator records
   reviewed `TServerNPC` helper roles with exact hash checks and IDA-context
   evidence.

@@ -194,11 +194,11 @@
   },
   "database": {
     "close_reopen_verified": true,
-    "default_sub_function_count": 1232,
+    "default_sub_function_count": 1230,
     "format": "packed IDA 9.3 database",
     "function_count": 11694,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v188.i64",
-    "sha256": "237d2ba156a7aa8ed41d9d6f7a0c1c1f3dbb7b8504762ae8d3d0a399d64f949c"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v189.i64",
+    "sha256": "fd4a5a88b1d959ab3a3465b4f080355211f7dcb68d53781f41f8f0dcc2ae538b"
   },
   "draw_texture_anchors": {
     "anchor_count": 4,
@@ -578,7 +578,7 @@
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
-    "reopen_verification": "/tmp/spectron_translation_verify_v187.json",
+    "reopen_verification": "/tmp/spectron_translation_verify_v189.json",
     "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
     "translation_map": "artifacts/spectron_semantic_function_translation_20260826.json",
     "translation_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92"
@@ -657,6 +657,7 @@
     "The one-hundred-eighty-sixth database revision also contains the separately reviewed particle-emitter script-property initializer anchor.",
     "The one-hundred-eighty-seventh database revision also contains the separately reviewed resource file-link and object-link list initializer anchor.",
     "The one-hundred-eighty-eighth database revision also contains the separately reviewed current-animation-state cleanup anchor.",
+    "The one-hundred-eighty-ninth database revision also contains the separately reviewed TOptions window-position initializer anchor.",
     "The fifty-seventh database revision also contains the separately reviewed explosion, carry, and flying server-animation anchors.",
     "The fifty-eighth database revision also contains the separately reviewed player start-level and periodic-update anchors.",
     "The fifty-ninth database revision also contains the separately reviewed player emoticon-coordinate getter anchors.",
@@ -875,6 +876,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_options_verify_v100.json",
     "verified_name_count": 7
+  },
+  "options_window_position_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_options_window_position_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "ec234bf382ba99eb21331245bff6da2db44054086e6adb42a006a0aef78c88bf",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_options_window_position_verification_v189.json",
+    "verified_name_count": 1
   },
   "panel_bitmap_anchors": {
     "anchor_count": 4,

@@ -185,6 +185,8 @@ def main() -> None:
     parser.add_argument("--resource-link-lists-verification", type=Path)
     parser.add_argument("--clear-cur-anis-anchors", type=Path)
     parser.add_argument("--clear-cur-anis-verification", type=Path)
+    parser.add_argument("--options-window-position-anchors", type=Path)
+    parser.add_argument("--options-window-position-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
     parser.add_argument("--server-animation-verification", type=Path)
     parser.add_argument("--player-lifecycle-anchors", type=Path)
@@ -2452,6 +2454,64 @@ def main() -> None:
         result["clear_cur_anis_anchors"] = clear_cur_anis
         result["interpretation"].append(
             "The one-hundred-eighty-eighth database revision also contains the separately reviewed current-animation-state cleanup anchor."
+        )
+    options_window_position = None
+    if (
+        args.options_window_position_anchors
+        or args.options_window_position_verification
+    ):
+        if (
+            not args.options_window_position_anchors
+            or not args.options_window_position_verification
+        ):
+            raise ValueError(
+                "options window-position anchors and verification must be supplied together"
+            )
+        options_window_position_document = load(
+            args.options_window_position_anchors
+        )
+        options_window_position_verification = load(
+            args.options_window_position_verification
+        )
+        if (
+            options_window_position_document.get("artifact")
+            != "spectron_options_window_position_manual_translation_anchors_20260827"
+        ):
+            raise ValueError(
+                "unexpected options window-position anchor artifact"
+            )
+        if not options_window_position_verification.get("verified"):
+            raise ValueError(
+                "options window-position anchor reopen verification did not pass"
+            )
+        expected_options_window_position = len(
+            options_window_position_document["anchors"]
+        )
+        if (
+            options_window_position_verification["verified_name_count"]
+            != expected_options_window_position
+        ):
+            raise ValueError(
+                "options window-position verification count differs from artifact"
+            )
+        options_window_position = {
+            "anchor_path": str(args.options_window_position_anchors),
+            "anchor_sha256": sha256_path(args.options_window_position_anchors),
+            "reopen_verification": str(
+                args.options_window_position_verification
+            ),
+            "anchor_count": expected_options_window_position,
+            "verified_name_count": options_window_position_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": options_window_position_verification[
+                "failure_count"
+            ],
+        }
+    if options_window_position is not None:
+        result["options_window_position_anchors"] = options_window_position
+        result["interpretation"].append(
+            "The one-hundred-eighty-ninth database revision also contains the separately reviewed TOptions window-position initializer anchor."
         )
     server_animation = None
     if args.server_animation_anchors or args.server_animation_verification:

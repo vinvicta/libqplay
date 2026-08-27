@@ -1482,6 +1482,18 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_particle_emitter_script_vars_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+248. The next IDA pass translated `TOptions_initializeWindowPosition`. Source
+    `0xe08e4` maps to target `0xe0b3c`, where the obfuscated `K7FLgag3II`
+    options class stores the same two `-1` window-position defaults in
+    `y3nkMaCRLg` and `dword_3A198C`. The target also initializes a neighboring
+    `CanTfaz6bZ` string, so the pair is recorded as a high-confidence
+    layout-change match. The v189 copy has 11,694 functions, 3,641
+    high-confidence labels, and 1,230 default `sub_` names, with zero semantic
+    reopen failures. See
+    `artifacts/spectron_options_window_position_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_options_window_position_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 247. The next IDA pass translated `clearCurAnis`. Source `0xe083c` maps to
     target `0xdfe08`, the cleanup callback for the target `RGiAvaPk9a`
     current-animation state. The source clears a 248-byte `curanis` object
