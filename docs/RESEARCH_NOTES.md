@@ -5172,6 +5172,104 @@ and zero failures across 11,679 functions. The v108 database has 1,684
 remaining default `sub_` names. Its SHA-256 is
 `8350a43be6b31306954e34a17f77d742c8d1702015d671019d2bf2dd6c1bb1e1`.
 
+## 2026-08-27: Spectron TServerPlayer property block
+
+The v161 pass revisits the residual `TServerPlayer` methods as an ordered
+implementation block instead of matching each short getter in isolation. The
+source range runs from `0x18a55c` through the end of `TServerPlayer_setY` at
+`0x18aa5c`. The corresponding Spectron range is `0x18edbc..0x18f2bc` in the
+obfuscated `MpGzgariDy` implementation.
+
+The four rows below were already translated and serve as sequence checkpoints:
+
+| 1.8 checkpoint | Source | Spectron checkpoint | Target alias |
+| --- | ---: | ---: | --- |
+| `TServerPlayer_setAP` | `0x18a588` | `0x18ede8` | `v18_TServerPlayer_setAP` |
+| `TServerPlayer_getAttached` | `0x18a5dc` | `0x18ee3c` | `v18_TServerPlayer_getAttached` |
+| `TServerPlayer_setChat` | `0x18a62c` | `0x18ee8c` | `v18_TServerPlayer_setChat` |
+| `TServerPlayer_setMP` | `0x18a7c4` | `0x18f024` | `v18_TServerPlayer_setMP` |
+
+The 39 newly labeled rows are:
+
+| 1.8 function | Source | Spectron target | Target name before v18 alias |
+| --- | ---: | ---: | --- |
+| `TServerPlayer_setPaused_bool` | `0x18a55c` | `0x18edbc` | `_ZN10MpGzgariDy10Gd3lMafkaiEb` |
+| `TServerPlayer_getAP` | `0x18a568` | `0x18edc8` | `sub_18EDC8` |
+| `TServerPlayer_getDarts` | `0x18a5bc` | `0x18ee1c` | `sub_18EE1C` |
+| `TServerPlayer_getAttachedToObject` | `0x18a604` | `0x18ee64` | `sub_18EE64` |
+| `TServerPlayer_getBombs` | `0x18a60c` | `0x18ee6c` | `sub_18EE6C` |
+| `TServerPlayer_getGlovePower` | `0x18a650` | `0x18eeb0` | `sub_18EEB0` |
+| `TServerPlayer_setGlovePower` | `0x18a670` | `0x18eed0` | `sub_18EED0` |
+| `TServerPlayer_getGralatsRupees` | `0x18a698` | `0x18eef8` | `sub_18EEF8` |
+| `TServerPlayer_setHeadOrHeadImg` | `0x18a6b8` | `0x18ef18` | `sub_18EF18` |
+| `TServerPlayer_getHeartsOrHP` | `0x18a6d8` | `0x18ef38` | `sub_18EF38` |
+| `TServerPlayer_getID` | `0x18a6f8` | `0x18ef58` | `sub_18EF58` |
+| `TServerPlayer_getIsAdmin` | `0x18a700` | `0x18ef60` | `sub_18EF60` |
+| `TServerPlayer_getIsBlocking` | `0x18a708` | `0x18ef68` | `sub_18EF68` |
+| `TServerPlayer_setIsBlocking` | `0x18a714` | `0x18ef74` | `sub_18EF74` |
+| `TServerPlayer_getIsBuddy` | `0x18a720` | `0x18ef80` | `sub_18EF80` |
+| `TServerPlayer_setIsBuddy` | `0x18a728` | `0x18ef88` | `sub_18EF88` |
+| `TServerPlayer_getIsChannel` | `0x18a730` | `0x18ef90` | `sub_18EF90` |
+| `TServerPlayer_getIsChannelOpen` | `0x18a738` | `0x18ef98` | `sub_18EF98` |
+| `TServerPlayer_getIsChannelUser` | `0x18a740` | `0x18efa0` | `sub_18EFA0` |
+| `TServerPlayer_getIsExternal` | `0x18a748` | `0x18efa8` | `sub_18EFA8` |
+| `TServerPlayer_getIsFemale` | `0x18a750` | `0x18efb0` | `sub_18EFB0` |
+| `TServerPlayer_getIsIgnored` | `0x18a75c` | `0x18efbc` | `sub_18EFBC` |
+| `TServerPlayer_setIsIgnored` | `0x18a764` | `0x18efc4` | `sub_18EFC4` |
+| `TServerPlayer_getIsIgnoring` | `0x18a76c` | `0x18efcc` | `sub_18EFCC` |
+| `TServerPlayer_getIsLoggedIn` | `0x18a774` | `0x18efd4` | `sub_18EFD4` |
+| `TServerPlayer_getIsMale` | `0x18a77c` | `0x18efdc` | `sub_18EFDC` |
+| `TServerPlayer_getFullHeartsMaxHP` | `0x18a784` | `0x18efe4` | `sub_18EFE4` |
+| `TServerPlayer_getMP` | `0x18a7a4` | `0x18f004` | `sub_18F004` |
+| `TServerPlayer_getPaused` | `0x18a7f8` | `0x18f058` | `sub_18F058` |
+| `TServerPlayer_setPaused` | `0x18a818` | `0x18f078` | `sub_18F078` |
+| `TServerPlayer_getPlayerListIcon` | `0x18a838` | `0x18f098` | `sub_18F098` |
+| `TServerPlayer_getRating` | `0x18a840` | `0x18f0a0` | `sub_18F0A0` |
+| `TServerPlayer_getRatingD` | `0x18a84c` | `0x18f0ac` | `sub_18F0AC` |
+| `TServerPlayer_getShieldPower` | `0x18a858` | `0x18f0b8` | `sub_18F0B8` |
+| `TServerPlayer_getSwordPower` | `0x18a878` | `0x18f0d8` | `sub_18F0D8` |
+| `TServerPlayer_getX` | `0x18a898` | `0x18f0f8` | `sub_18F0F8` |
+| `TServerPlayer_setX` | `0x18a8cc` | `0x18f12c` | `sub_18F12C` |
+| `TServerPlayer_getY` | `0x18a980` | `0x18f1e0` | `sub_18F1E0` |
+| `TServerPlayer_setY` | `0x18a9b4` | `0x18f214` | `sub_18F214` |
+
+Every new source and target pair has identical complete normalized feature
+metrics. The short scalar getters and setters range from 8 to 52 bytes,
+`getX` and `getY` are 52 bytes, and the two coordinate setters are 168 bytes.
+The corresponding basic-block, branch, call,
+mnemonic, opcode, register, overall-shape, and string-reference fingerprints
+all match. The code relocation is exactly `+0x4860` for every row, including
+the four existing checkpoints.
+
+The most useful semantic spot checks are at the ends of the range. The paused
+setter writes the same byte-valued state and forwards to the nick cleanup
+wrapper. The target cleanup method at `0x192558` is the exact counterpart of
+`TServerPlayer_clearNickWrapped_void` at `0x18dc58`: it removes the encoded
+text token, releases the object through its virtual slot, and clears the
+member. The local X and Y setters preserve the direct-set branch, the
+animation-object update, tile alignment calculation, and attached-object
+update loop. The target uses different helper class names and changed object
+storage constants, which is expected for the 2.2 layout.
+
+The target range contains 38 default `sub_` names and one surviving named C++
+member before this pass. The four existing v18 aliases provide checkpoints
+through the range, so the default rows are not being renamed from shape alone.
+The source and target gaps around the two coordinate setters also line up:
+source `0x18a974..0x18a980` matches target `0x18f1d4..0x18f1e0`, and source
+`0x18aa5c..0x18aa68` matches target `0x18f2bc..0x18f2e8`. The next visible
+method after the block is `TServerPlayer_script_PMsWaiting` at `0x18aa68`,
+with target code beginning at `0x18f2e8`.
+
+All 39 target functions were renamed to `v18_` aliases in the v161 packed IDA
+copy. A serial reopen check found all 39 names. The full semantic reopen check
+still passed with 3,641 high-confidence map labels and zero failures across
+11,693 functions, and the default `sub_` count fell to 1,358. The v161 database
+SHA-256 is
+`000eb36e5ceb7dfc75c9b8565b92c16649cb0d835232972c4ccad81ebab044d0`.
+The machine-readable evidence is in
+`artifacts/spectron_tserverplayer_property_block_manual_translation_anchors_20260826.json`,
+generated by `tools/generate_spectron_tserverplayer_property_block_anchors.py`.
+
 ## 2026-08-27: Spectron TPlayer flag-setter block
 
 The v160 pass fills the remaining compact flag-setter gap around the getter

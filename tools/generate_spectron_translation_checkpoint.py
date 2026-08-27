@@ -339,6 +339,8 @@ def main() -> None:
     parser.add_argument("--tplayer-scalar-getter-verification", type=Path)
     parser.add_argument("--tplayer-flag-setter-anchors", type=Path)
     parser.add_argument("--tplayer-flag-setter-verification", type=Path)
+    parser.add_argument("--tserverplayer-property-block-anchors", type=Path)
+    parser.add_argument("--tserverplayer-property-block-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -4746,6 +4748,34 @@ def main() -> None:
         result["tplayer_flag_setter_anchors"] = tplayer_flag_setter
         result["interpretation"].append(
             "The one-hundred-sixtieth database revision also contains the separately reviewed exact-shape TPlayer flag-setter block."
+        )
+    tserverplayer_property_block = None
+    if args.tserverplayer_property_block_anchors or args.tserverplayer_property_block_verification:
+        if not args.tserverplayer_property_block_anchors or not args.tserverplayer_property_block_verification:
+            raise ValueError(
+                "TServerPlayer property-block anchors and verification must be supplied together"
+            )
+        tserverplayer_property_block_document = load(args.tserverplayer_property_block_anchors)
+        tserverplayer_property_block_verification = load(args.tserverplayer_property_block_verification)
+        if tserverplayer_property_block_document.get("artifact") != "spectron_tserverplayer_property_block_manual_translation_anchors_20260826":
+            raise ValueError("unexpected TServerPlayer property-block artifact")
+        if not tserverplayer_property_block_verification.get("verified"):
+            raise ValueError("TServerPlayer property-block reopen verification did not pass")
+        expected_tserverplayer_property_block = len(tserverplayer_property_block_document["anchors"])
+        if tserverplayer_property_block_verification["verified_name_count"] != expected_tserverplayer_property_block:
+            raise ValueError("TServerPlayer property-block verification count differs from artifact")
+        tserverplayer_property_block = {
+            "anchor_path": str(args.tserverplayer_property_block_anchors),
+            "anchor_sha256": sha256_path(args.tserverplayer_property_block_anchors),
+            "reopen_verification": str(args.tserverplayer_property_block_verification),
+            "anchor_count": expected_tserverplayer_property_block,
+            "verified_name_count": tserverplayer_property_block_verification["verified_name_count"],
+            "reopen_failure_count": tserverplayer_property_block_verification["failure_count"],
+        }
+    if tserverplayer_property_block is not None:
+        result["tserverplayer_property_block_anchors"] = tserverplayer_property_block
+        result["interpretation"].append(
+            "The one-hundred-sixty-first database revision also contains the separately reviewed exact-shape TServerPlayer property block."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

@@ -154,11 +154,11 @@
   },
   "database": {
     "close_reopen_verified": true,
-    "default_sub_function_count": 1396,
+    "default_sub_function_count": 1358,
     "format": "packed IDA 9.3 database",
     "function_count": 11693,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v160.i64",
-    "sha256": "bc4bfdf5b0b3f82dfc9e61802c6cafdaad535b8c876a77f1e6612def5d8fa9f8"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v161.i64",
+    "sha256": "000eb36e5ceb7dfc75c9b8565b92c16649cb0d835232972c4ccad81ebab044d0"
   },
   "draw_texture_anchors": {
     "anchor_count": 4,
@@ -490,7 +490,7 @@
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
-    "reopen_verification": "/tmp/spectron_translation_verify_v160.json",
+    "reopen_verification": "/tmp/spectron_translation_verify_v161.json",
     "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
     "translation_map": "artifacts/spectron_semantic_function_translation_20260826.json",
     "translation_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92"
@@ -654,7 +654,8 @@
     "The one-hundred-fifty-seventh database revision also contains the separately reviewed exact-shape TServerPlayer scalar accessor block.",
     "The one-hundred-fifty-eighth database revision also contains the separately reviewed exact-shape TPlayer scalar setter block.",
     "The one-hundred-fifty-ninth database revision also contains the separately reviewed exact-shape TPlayer scalar getter block.",
-    "The one-hundred-sixtieth database revision also contains the separately reviewed exact-shape TPlayer flag-setter block."
+    "The one-hundred-sixtieth database revision also contains the separately reviewed exact-shape TPlayer flag-setter block.",
+    "The one-hundred-sixty-first database revision also contains the separately reviewed exact-shape TServerPlayer property block."
   ],
   "json_folder_anchors": {
     "anchor_count": 8,
@@ -1291,6 +1292,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_tserverplayer_accessor_verify_v157.json",
     "verified_name_count": 37
+  },
+  "tserverplayer_property_block_anchors": {
+    "anchor_count": 39,
+    "anchor_path": "artifacts/spectron_tserverplayer_property_block_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "64ee6f268ca71632f582a3c6a1fe2d7dbf43e887f9f7684e30ef25131ef45b89",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tserverplayer_property_block_verify_v161.json",
+    "verified_name_count": 39
   },
   "tsocket_accessor_residual_anchors": {
     "anchor_count": 19,

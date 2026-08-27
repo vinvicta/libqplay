@@ -1428,6 +1428,17 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+220. The next IDA pass translated 39 exact-shape residual methods from the
+    ordered `TServerPlayer` property block. Four existing v18 labels were used
+    as sequence checkpoints for the paused, combat, attachment, chat, and MP
+    rows. The new source range `0x18a55c..0x18aa5c` maps to
+    `0x18edbc..0x18f2bc` in `MpGzgariDy`, with a constant `+0x4860` code
+    relocation. The pass replaced 38 default target names. All 39 labels
+    reopened successfully in the v161 disposable copy, which has 11,693
+    functions and 1,358 default `sub_` names. See
+    `artifacts/spectron_tserverplayer_property_block_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 219. The next IDA pass translated seven exact-shape TPlayer flag setters:
     six boolean setters and the integer enabled-features setter. The six
     boolean rows form a contiguous source block at `0x17b59c..0x17b7b8`,
