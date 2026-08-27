@@ -1482,6 +1482,17 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_particle_emitter_script_vars_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+256. The next IDA pass translated the `TSocket` static-string initializer.
+    Source `sub_E0AB4` at `0xe0ab4` maps to target `sub_E12DC` at `0xe12dc`,
+    preserving the two allowed-connection and allowed-port string fields and
+    their static callback relationship. Spectron adds one `CanTfaz6bZ` string
+    with matching cleanup evidence, so this is a high-confidence layout-change
+    match. The v197 copy has 11,694 functions, 3,641 high-confidence labels,
+    and 1,222 default `sub_` names, with zero semantic reopen failures. See
+    `artifacts/spectron_tsocket_static_state_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_tsocket_static_state_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 255. The next IDA pass translated the `TClient` static-string initializer.
     Source `sub_E0A2C` at `0xe0a2c` maps to target `sub_E1118` at `0xe1118`,
     preserving all eleven client string fields and their order. The target

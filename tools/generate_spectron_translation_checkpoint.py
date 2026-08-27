@@ -201,6 +201,8 @@ def main() -> None:
     parser.add_argument("--thtml-definitions-defaults-verification", type=Path)
     parser.add_argument("--tclient-static-strings-anchors", type=Path)
     parser.add_argument("--tclient-static-strings-verification", type=Path)
+    parser.add_argument("--tsocket-static-strings-anchors", type=Path)
+    parser.add_argument("--tsocket-static-strings-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
     parser.add_argument("--server-animation-verification", type=Path)
     parser.add_argument("--player-lifecycle-anchors", type=Path)
@@ -2845,6 +2847,57 @@ def main() -> None:
         result["tclient_static_strings_anchors"] = tclient_static_strings
         result["interpretation"].append(
             "The one-hundred-ninety-sixth database revision also contains the separately reviewed TClient static-string initializer anchor."
+        )
+    tsocket_static_strings = None
+    if args.tsocket_static_strings_anchors or args.tsocket_static_strings_verification:
+        if (
+            not args.tsocket_static_strings_anchors
+            or not args.tsocket_static_strings_verification
+        ):
+            raise ValueError(
+                "TSocket static-string anchors and verification must be supplied together"
+            )
+        tsocket_static_strings_document = load(args.tsocket_static_strings_anchors)
+        tsocket_static_strings_verification = load(
+            args.tsocket_static_strings_verification
+        )
+        if (
+            tsocket_static_strings_document.get("artifact")
+            != "spectron_tsocket_static_state_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected TSocket static-string anchor artifact")
+        if not tsocket_static_strings_verification.get("verified"):
+            raise ValueError(
+                "TSocket static-string anchor reopen verification did not pass"
+            )
+        expected_tsocket_static_strings = len(
+            tsocket_static_strings_document["anchors"]
+        )
+        if (
+            tsocket_static_strings_verification["verified_name_count"]
+            != expected_tsocket_static_strings
+        ):
+            raise ValueError(
+                "TSocket static-string verification count differs from artifact"
+            )
+        tsocket_static_strings = {
+            "anchor_path": str(args.tsocket_static_strings_anchors),
+            "anchor_sha256": sha256_path(args.tsocket_static_strings_anchors),
+            "reopen_verification": str(
+                args.tsocket_static_strings_verification
+            ),
+            "anchor_count": expected_tsocket_static_strings,
+            "verified_name_count": tsocket_static_strings_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": tsocket_static_strings_verification[
+                "failure_count"
+            ],
+        }
+    if tsocket_static_strings is not None:
+        result["tsocket_static_strings_anchors"] = tsocket_static_strings
+        result["interpretation"].append(
+            "The one-hundred-ninety-seventh database revision also contains the separately reviewed TSocket static-string initializer anchor."
         )
     server_animation = None
     if args.server_animation_anchors or args.server_animation_verification:

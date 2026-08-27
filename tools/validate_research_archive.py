@@ -326,6 +326,9 @@ def main():
     spectron_tclient_static_strings_anchors = load_json(
         "artifacts/spectron_tclient_static_strings_manual_translation_anchors_20260827.json"
     )
+    spectron_tsocket_static_strings_anchors = load_json(
+        "artifacts/spectron_tsocket_static_state_manual_translation_anchors_20260827.json"
+    )
     spectron_server_animation_anchors = load_json(
         "artifacts/spectron_server_animation_manual_translation_anchors_20260826.json"
     )
@@ -3138,6 +3141,54 @@ def main():
         "0xe1118",
     )
     check(
+        "Spectron TSocket static strings artifact",
+        spectron_tsocket_static_strings_anchors["artifact"],
+        "spectron_tsocket_static_state_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron TSocket static strings network",
+        spectron_tsocket_static_strings_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron TSocket static strings total",
+        spectron_tsocket_static_strings_anchors["summary"]["anchor_count"],
+        1,
+    )
+    check(
+        "Spectron TSocket static strings high confidence",
+        spectron_tsocket_static_strings_anchors["summary"]["high_confidence_count"],
+        1,
+    )
+    check(
+        "Spectron TSocket static strings semantic overlap",
+        spectron_tsocket_static_strings_anchors["summary"]["already_in_semantic_map"],
+        0,
+    )
+    check(
+        "Spectron TSocket static strings layout-change count",
+        spectron_tsocket_static_strings_anchors["summary"]["layout_change_anchor_count"],
+        1,
+    )
+    check(
+        "Spectron TSocket static strings field count",
+        spectron_tsocket_static_strings_anchors["summary"]["field_count"],
+        2,
+    )
+    check(
+        "Spectron TSocket static strings default target",
+        spectron_tsocket_static_strings_anchors["summary"]["target_default_name_count"],
+        1,
+    )
+    check(
+        "Spectron TSocket static strings target",
+        {
+            row["original_name"]: row
+            for row in spectron_tsocket_static_strings_anchors["anchors"]
+        }["sub_E0AB4"]["spectron_ea"],
+        "0xe12dc",
+    )
+    check(
         "Spectron server-animation artifact",
         spectron_server_animation_anchors["artifact"],
         "spectron_server_animation_manual_translation_anchors_20260826",
@@ -4285,7 +4336,7 @@ def main():
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1223)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1222)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -4479,7 +4530,8 @@ def main():
     check("Spectron checkpoint TGUIRender colors anchor count", spectron_checkpoint["tgui_render_colors_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint THTMLDefinitions defaults anchor count", spectron_checkpoint["thtml_definitions_defaults_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint TClient static strings anchor count", spectron_checkpoint["tclient_static_strings_anchors"]["verified_name_count"], 1)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "7f640cdd78f40b66d562676e6f5525dbab9586981b1a08dccf97fe0db28e8bad")
+    check("Spectron checkpoint TSocket static strings anchor count", spectron_checkpoint["tsocket_static_strings_anchors"]["verified_name_count"], 1)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "8be87e35fedd96c6961e725a5b8f12de9e381a1e25abb35fd6193e64c404002d")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
