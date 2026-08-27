@@ -295,6 +295,8 @@ def main() -> None:
     parser.add_argument("--tsocket-host-residual-verification", type=Path)
     parser.add_argument("--tsocket-properties-residual-anchors", type=Path)
     parser.add_argument("--tsocket-properties-residual-verification", type=Path)
+    parser.add_argument("--socket-cache-residual-anchors", type=Path)
+    parser.add_argument("--socket-cache-residual-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -4086,6 +4088,34 @@ def main() -> None:
         result["tsocket_properties_residual_anchors"] = tsocket_properties_residual
         result["interpretation"].append(
             "The one-hundred-thirty-seventh database revision also contains the separately reviewed TSocketProperties destructor family."
+        )
+    socket_cache_residual = None
+    if args.socket_cache_residual_anchors or args.socket_cache_residual_verification:
+        if not args.socket_cache_residual_anchors or not args.socket_cache_residual_verification:
+            raise ValueError(
+                "socket cache residual anchors and verification must be supplied together"
+            )
+        socket_cache_residual_document = load(args.socket_cache_residual_anchors)
+        socket_cache_residual_verification = load(args.socket_cache_residual_verification)
+        if socket_cache_residual_document.get("artifact") != "spectron_socket_cache_residual_manual_translation_anchors_20260826":
+            raise ValueError("unexpected socket cache residual artifact")
+        if not socket_cache_residual_verification.get("verified"):
+            raise ValueError("socket cache residual reopen verification did not pass")
+        expected_socket_cache_residual = len(socket_cache_residual_document["anchors"])
+        if socket_cache_residual_verification["verified_name_count"] != expected_socket_cache_residual:
+            raise ValueError("socket cache residual verification count differs from artifact")
+        socket_cache_residual = {
+            "anchor_path": str(args.socket_cache_residual_anchors),
+            "anchor_sha256": sha256_path(args.socket_cache_residual_anchors),
+            "reopen_verification": str(args.socket_cache_residual_verification),
+            "anchor_count": expected_socket_cache_residual,
+            "verified_name_count": socket_cache_residual_verification["verified_name_count"],
+            "reopen_failure_count": socket_cache_residual_verification["failure_count"],
+        }
+    if socket_cache_residual is not None:
+        result["socket_cache_residual_anchors"] = socket_cache_residual
+        result["interpretation"].append(
+            "The one-hundred-thirty-eighth database revision also contains the separately reviewed socket-cache support residual family."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

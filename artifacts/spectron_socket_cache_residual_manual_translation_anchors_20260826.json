@@ -1,0 +1,346 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "context_group": "socket cache support residual block",
+      "context_order": 1,
+      "evidence": [
+        "The source support block contains TSocketConnection_initStaticVars at 0x207968, TSocketConnection_initStaticScriptVars at 0x207998, IsHostAndPortInList at 0x2079ac, and the TCachedHostAddress destructor pair at 0x207c54 and 0x207c68. Spectron keeps the same local order at 0x20dab4, 0x20db00, 0x20db14, 0x20ddc0, and 0x20ddd4.",
+        "The target static initializer at 0x20dab4 creates the cached-host hash list and an additional target global object before returning. The source initializer creates the cached-host list only, so this pair is recorded as a layout change that preserves the source role while documenting the target's combined global setup.",
+        "The script-variable initializer at 0x20db00 retains the source property-registration role, but the target passes a four-entry table where the source passes two entries. IsHostAndPortInList retains wildcard matching, comma-list parsing, host pattern comparison, single-port and range checks, and the same final predicate.",
+        "The source TCachedHostAddress complete and deleting destructors clear the embedded TString field, restore the vtable, and optionally call operator delete. The target reub2aL2gs D1 and D0 functions perform the same cleanup with exact normalized shapes.",
+        "The source and target IsHostAndPortInList rows both retain the wildcard string. The target makes C8THgaTQxF, vuuHgangcF, and comparison wrappers explicit, changing 680/170/20/49/37 to 684/171/20/49/37 for bytes, instructions, blocks, branches, and calls."
+      ],
+      "match_kind": "manual-socket-cache-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_THashList_THashList_void__2",
+        "plt_operator_new_ulong__2"
+      ],
+      "original_ea": "0x207968",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 3,
+        "call_count": 2,
+        "instruction_count": 12,
+        "mnemonic_hash": "a847648536bddf8726a71604127ef35f6f8d823158f713ca5da0e64eb34efe47",
+        "opcode_shape_hash": "613512b8a79283d3e57b3fd1662ef3f58514d8312a824242cb61eb475725287b",
+        "register_shape_hash": null,
+        "shape_hash": "1060cf0d56d1cb899b911799e675d9b84ad64784ad73fe5d591d8128baaf4e69",
+        "size": 48
+      },
+      "original_name": "TSocketConnection_initStaticVars_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocketConnection_initStaticVars_void",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "socket cache support method TSocketConnection_initStaticVars_void",
+      "spectron_current_name": "_Z10OYaS2aPQb1v",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10KKhLga4xoIC1Ev",
+        "._ZN10vuuHgangcFC2Ev",
+        "._Znwm"
+      ],
+      "spectron_ea": "0x20dab4",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 5,
+        "call_count": 4,
+        "instruction_count": 19,
+        "mnemonic_hash": "48a6ed95944251e6239bdae08357809503e6b180010ddd8c9117f8242edf00a0",
+        "opcode_shape_hash": "910ce27934149a444cf1037f012d26d65e80e261cc77f96fd1545bb7d9b909ab",
+        "register_shape_hash": null,
+        "shape_hash": "74837c3d2ff00b944009b61dd8b7906bcb9433740118124165b809f8f0d04cfb",
+        "size": 76
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x614c"
+    },
+    {
+      "confidence": "high",
+      "context_group": "socket cache support residual block",
+      "context_order": 2,
+      "evidence": [
+        "The source support block contains TSocketConnection_initStaticVars at 0x207968, TSocketConnection_initStaticScriptVars at 0x207998, IsHostAndPortInList at 0x2079ac, and the TCachedHostAddress destructor pair at 0x207c54 and 0x207c68. Spectron keeps the same local order at 0x20dab4, 0x20db00, 0x20db14, 0x20ddc0, and 0x20ddd4.",
+        "The target static initializer at 0x20dab4 creates the cached-host hash list and an additional target global object before returning. The source initializer creates the cached-host list only, so this pair is recorded as a layout change that preserves the source role while documenting the target's combined global setup.",
+        "The script-variable initializer at 0x20db00 retains the source property-registration role, but the target passes a four-entry table where the source passes two entries. IsHostAndPortInList retains wildcard matching, comma-list parsing, host pattern comparison, single-port and range checks, and the same final predicate.",
+        "The source TCachedHostAddress complete and deleting destructors clear the embedded TString field, restore the vtable, and optionally call operator delete. The target reub2aL2gs D1 and D0 functions perform the same cleanup with exact normalized shapes.",
+        "The source and target IsHostAndPortInList rows both retain the wildcard string. The target makes C8THgaTQxF, vuuHgangcF, and comparison wrappers explicit, changing 680/170/20/49/37 to 684/171/20/49/37 for bytes, instructions, blocks, branches, and calls."
+      ],
+      "match_kind": "manual-socket-cache-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x207998",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 5,
+        "mnemonic_hash": "8cf9047c843e6d7d5ebebb8501f394d8be997a7dc61f4b5a8d6f83d3c69d25d7",
+        "opcode_shape_hash": "2068254bddf27ed00ea9b52150c6f7525f6240f1de30d1f20c5671794507503b",
+        "register_shape_hash": null,
+        "shape_hash": "9ea18611a038e7a06a534d8725d9384f029e49dba4080fb9aebedf3b2ce27933",
+        "size": 20
+      },
+      "original_name": "TSocketConnection_initStaticScriptVars_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TSocketConnection_initStaticScriptVars_void",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "socket cache support method TSocketConnection_initStaticScriptVars_void",
+      "spectron_current_name": "_Z10TO_L1aAs_5v",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x20db00",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 5,
+        "mnemonic_hash": "8cf9047c843e6d7d5ebebb8501f394d8be997a7dc61f4b5a8d6f83d3c69d25d7",
+        "opcode_shape_hash": "ceb4548e67f4410a473a77b49506226263a47e4fd99f0d9d4ded7fef4d2506b9",
+        "register_shape_hash": null,
+        "shape_hash": "d9284f8eef5f862595b86d5b46ffef3b66aefc2f21c9e78fcefd749b8e829d52",
+        "size": 20
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x6168"
+    },
+    {
+      "confidence": "high",
+      "context_group": "socket cache support residual block",
+      "context_order": 3,
+      "evidence": [
+        "The source support block contains TSocketConnection_initStaticVars at 0x207968, TSocketConnection_initStaticScriptVars at 0x207998, IsHostAndPortInList at 0x2079ac, and the TCachedHostAddress destructor pair at 0x207c54 and 0x207c68. Spectron keeps the same local order at 0x20dab4, 0x20db00, 0x20db14, 0x20ddc0, and 0x20ddd4.",
+        "The target static initializer at 0x20dab4 creates the cached-host hash list and an additional target global object before returning. The source initializer creates the cached-host list only, so this pair is recorded as a layout change that preserves the source role while documenting the target's combined global setup.",
+        "The script-variable initializer at 0x20db00 retains the source property-registration role, but the target passes a four-entry table where the source passes two entries. IsHostAndPortInList retains wildcard matching, comma-list parsing, host pattern comparison, single-port and range checks, and the same final predicate.",
+        "The source TCachedHostAddress complete and deleting destructors clear the embedded TString field, restore the vtable, and optionally call operator delete. The target reub2aL2gs D1 and D0 functions perform the same cleanup with exact normalized shapes.",
+        "The source and target IsHostAndPortInList rows both retain the wildcard string. The target makes C8THgaTQxF, vuuHgangcF, and comparison wrappers explicit, changing 680/170/20/49/37 to 684/171/20/49/37 for bytes, instructions, blocks, branches, and calls."
+      ],
+      "match_kind": "manual-socket-cache-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TStringList_TStringList",
+        "plt_TStringList_TStringList_TString_const",
+        "plt_TStringList_operator_index_int",
+        "plt_TString_clear_void",
+        "plt_TString_indexOf_char",
+        "plt_TString_operator_assign_TString_const",
+        "plt_TString_operator_lshift_char_const",
+        "plt_TString_operator_lshift_int",
+        "plt_TString_subString_int",
+        "plt_TString_subString_int_int",
+        "plt_operator_assign_TString_const_TString_const",
+        "plt_operator_assign_TString_const_char_const",
+        "plt_operator_ne_TString_const_TString_const",
+        "plt_patternMatches_TString_const_TString_const",
+        "plt_strtoint_TString_const"
+      ],
+      "original_ea": "0x2079ac",
+      "original_metrics": {
+        "basic_block_count": 20,
+        "branch_count": 49,
+        "call_count": 37,
+        "instruction_count": 170,
+        "mnemonic_hash": "e4a1e29d9769da8f244f819f8e6e7f084aca72f2a217b63e492c2724ec892e3d",
+        "opcode_shape_hash": "184ce40bb7402a8e0005197c7e874e5de36137aebc89769fa0255b3068536dce",
+        "register_shape_hash": null,
+        "shape_hash": "90219df2ac0d2a255baf109823f9431e6529745109c7ab62b549c296cbfd0146",
+        "size": 680
+      },
+      "original_name": "IsHostAndPortInList_TString_const_TString_const_int",
+      "original_string_refs": [
+        "*"
+      ],
+      "proposed_name": "v18_IsHostAndPortInList_TString_const_TString_const_int",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "socket cache support method IsHostAndPortInList_TString_const_TString_const_int",
+      "spectron_current_name": "_Z10mNHZ0adswrRK10C8THgaTQxFS1_i",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._Z10Msu4gaSeoZRK10C8THgaTQxF",
+        "._Z10dZTyga4HYxRK10C8THgaTQxFS1_",
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSERKS_",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10C8THgaTQxFlsEi",
+        "._ZN10vuuHgangcFC2ERK10C8THgaTQxFb",
+        "._ZN10vuuHgangcFD2Ev",
+        "._ZNK10C8THgaTQxF10JtTLgaLhUIEc",
+        "._ZNK10C8THgaTQxF10QgaLgaQfiIEi",
+        "._ZNK10C8THgaTQxF10QgaLgaQfiIEii",
+        "._ZNK10vuuHgangcFixEi",
+        "._ZeqRK10C8THgaTQxFPKc",
+        "._ZeqRK10C8THgaTQxFS1_",
+        "._ZneRK10C8THgaTQxFS1_"
+      ],
+      "spectron_ea": "0x20db14",
+      "spectron_metrics": {
+        "basic_block_count": 20,
+        "branch_count": 49,
+        "call_count": 37,
+        "instruction_count": 171,
+        "mnemonic_hash": "76356402e5998374c86e9ae48a370541c7c3191a4bec8456c02f8ae77b42275e",
+        "opcode_shape_hash": "2c03b3e28a33a534c602018770fdfab28adb4a0acf44c25539533873fb5a2710",
+        "register_shape_hash": null,
+        "shape_hash": "d8a6914e4df64b5769a913d02e3dbee601b01a71529e93ec9fd718dc9b9e9348",
+        "size": 684
+      },
+      "spectron_string_refs": [
+        "*"
+      ],
+      "target_delta": "+0x6168"
+    },
+    {
+      "confidence": "high",
+      "context_group": "socket cache support residual block",
+      "context_order": 4,
+      "evidence": [
+        "The source support block contains TSocketConnection_initStaticVars at 0x207968, TSocketConnection_initStaticScriptVars at 0x207998, IsHostAndPortInList at 0x2079ac, and the TCachedHostAddress destructor pair at 0x207c54 and 0x207c68. Spectron keeps the same local order at 0x20dab4, 0x20db00, 0x20db14, 0x20ddc0, and 0x20ddd4.",
+        "The target static initializer at 0x20dab4 creates the cached-host hash list and an additional target global object before returning. The source initializer creates the cached-host list only, so this pair is recorded as a layout change that preserves the source role while documenting the target's combined global setup.",
+        "The script-variable initializer at 0x20db00 retains the source property-registration role, but the target passes a four-entry table where the source passes two entries. IsHostAndPortInList retains wildcard matching, comma-list parsing, host pattern comparison, single-port and range checks, and the same final predicate.",
+        "The source TCachedHostAddress complete and deleting destructors clear the embedded TString field, restore the vtable, and optionally call operator delete. The target reub2aL2gs D1 and D0 functions perform the same cleanup with exact normalized shapes.",
+        "The source and target IsHostAndPortInList rows both retain the wildcard string. The target makes C8THgaTQxF, vuuHgangcF, and comparison wrappers explicit, changing 680/170/20/49/37 to 684/171/20/49/37 for bytes, instructions, blocks, branches, and calls."
+      ],
+      "match_kind": "manual-socket-cache-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x207c54",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 5,
+        "mnemonic_hash": "5eb31dfddfc34a360bea27a49637feb7a635d593087797aeda6755d6e909e11b",
+        "opcode_shape_hash": "a2fa96e2ed59f90c0cde186ca088951b7c54805496bfb8d2709e6c36635e6164",
+        "register_shape_hash": null,
+        "shape_hash": "909e34bba964f1bf938b6ad3c5ce12add52565113ab1a7a02583f278ed58b0f8",
+        "size": 20
+      },
+      "original_name": "TCachedHostAddress_TCachedHostAddress",
+      "original_string_refs": [],
+      "proposed_name": "v18_TCachedHostAddress_TCachedHostAddress",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "socket cache support method TCachedHostAddress_TCachedHostAddress",
+      "spectron_current_name": "_ZN10reub2aL2gsD1Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x20ddc0",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 5,
+        "mnemonic_hash": "5eb31dfddfc34a360bea27a49637feb7a635d593087797aeda6755d6e909e11b",
+        "opcode_shape_hash": "a2fa96e2ed59f90c0cde186ca088951b7c54805496bfb8d2709e6c36635e6164",
+        "register_shape_hash": null,
+        "shape_hash": "909e34bba964f1bf938b6ad3c5ce12add52565113ab1a7a02583f278ed58b0f8",
+        "size": 20
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x616c"
+    },
+    {
+      "confidence": "high",
+      "context_group": "socket cache support residual block",
+      "context_order": 5,
+      "evidence": [
+        "The source support block contains TSocketConnection_initStaticVars at 0x207968, TSocketConnection_initStaticScriptVars at 0x207998, IsHostAndPortInList at 0x2079ac, and the TCachedHostAddress destructor pair at 0x207c54 and 0x207c68. Spectron keeps the same local order at 0x20dab4, 0x20db00, 0x20db14, 0x20ddc0, and 0x20ddd4.",
+        "The target static initializer at 0x20dab4 creates the cached-host hash list and an additional target global object before returning. The source initializer creates the cached-host list only, so this pair is recorded as a layout change that preserves the source role while documenting the target's combined global setup.",
+        "The script-variable initializer at 0x20db00 retains the source property-registration role, but the target passes a four-entry table where the source passes two entries. IsHostAndPortInList retains wildcard matching, comma-list parsing, host pattern comparison, single-port and range checks, and the same final predicate.",
+        "The source TCachedHostAddress complete and deleting destructors clear the embedded TString field, restore the vtable, and optionally call operator delete. The target reub2aL2gs D1 and D0 functions perform the same cleanup with exact normalized shapes.",
+        "The source and target IsHostAndPortInList rows both retain the wildcard string. The target makes C8THgaTQxF, vuuHgangcF, and comparison wrappers explicit, changing 680/170/20/49/37 to 684/171/20/49/37 for bytes, instructions, blocks, branches, and calls."
+      ],
+      "match_kind": "manual-socket-cache-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TString_clear_void"
+      ],
+      "original_ea": "0x207c68",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "182bb50b6d970ecf2bf4bb327e9ab950cfe464aa6961d8346202a341c475177b",
+        "opcode_shape_hash": "c17df510e5f3f930c896978472b8a2ff90c9cd729c210ce0e1e760530ef3db74",
+        "register_shape_hash": null,
+        "shape_hash": "c96a5ba44fdba9f7b18197c6f881b61cb5c7e11644c995a629d6bb12efa462b1",
+        "size": 48
+      },
+      "original_name": "TCachedHostAddress_TCachedHostAddress__2",
+      "original_string_refs": [],
+      "proposed_name": "v18_TCachedHostAddress_TCachedHostAddress__2",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "socket cache support method TCachedHostAddress_TCachedHostAddress__2",
+      "spectron_current_name": "_ZN10reub2aL2gsD0Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10CanTfaz6bZ5clearEv"
+      ],
+      "spectron_ea": "0x20ddd4",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 12,
+        "mnemonic_hash": "182bb50b6d970ecf2bf4bb327e9ab950cfe464aa6961d8346202a341c475177b",
+        "opcode_shape_hash": "c17df510e5f3f930c896978472b8a2ff90c9cd729c210ce0e1e760530ef3db74",
+        "register_shape_hash": null,
+        "shape_hash": "c96a5ba44fdba9f7b18197c6f881b61cb5c7e11644c995a629d6bb12efa462b1",
+        "size": 48
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x616c"
+    }
+  ],
+  "artifact": "spectron_socket_cache_residual_manual_translation_anchors_20260826",
+  "context": {
+    "following_target_boundary": "0x20de04",
+    "source_class": "TSocketConnection and TCachedHostAddress",
+    "source_sequence": "0x207968 through 0x207c68 in the socket-cache support block",
+    "target_classes": [
+      "global support",
+      "reub2aL2gs"
+    ],
+    "target_delta": "+0x614c through +0x616c, with local target growth",
+    "target_global_initializer_combines": [
+      "cached-host hash list",
+      "additional target global object"
+    ],
+    "target_sequence": "0x20dab4 through 0x20ddd4 in the target cache and host-list block"
+  },
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4.json",
+    "original_features_sha256": "62cccc40ea88a08d5ed0845ceeceaf194b528bdd07bdd6ff1a0350dee3b0ab82",
+    "semantic_map": "/tmp/spectron_semantic_map.json",
+    "semantic_map_sha256": "c0906607542480e1fbe33e9e0bf5030581efd55ee71987cf0a7ca792b68664fc",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features.json",
+    "spectron_features_sha256": "cc1789d2d3c24f478d7863f2b07b10b4259aa2d370e363e5303000eb7b835243"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable source roles while retaining the target obfuscated names in the evidence rows.",
+    "The static initializer correspondence is a reviewed role match even though the target combines an additional global object setup with the source cached-host list initialization.",
+    "The cached-host destructor pairs are exact normalized-shape matches. The property-registration initializer and IsHostAndPortInList are small layout changes that preserve their source roles while exposing target differences."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for the residual socket-cache support block",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 5,
+    "exact_shape_anchor_count": 2,
+    "high_confidence_count": 5,
+    "layout_change_anchor_count": 3,
+    "new_context_anchor_count": 5,
+    "target_default_name_count": 0
+  }
+}

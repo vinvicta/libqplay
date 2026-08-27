@@ -3444,6 +3444,31 @@ functions. The v108 database has 1,684 remaining default `sub_` names. Its
 SHA-256 is
 `8350a43be6b31306954e34a17f77d742c8d1702015d671019d2bf2dd6c1bb1e1`.
 
+## Spectron socket-cache support residual anchors
+
+The v138 pass translated five support functions after `GetOwnIP`: static
+initialization, allowed-host and port matching, and the two cached-host
+destructors.
+
+| 1.8 role | Source | Spectron symbol | Target | Main evidence |
+| --- | ---: | --- | ---: | --- |
+| socket static initializer | `0x207968` | `_Z10OYaS2aPQb1v` | `0x20dab4` | cached-host and global setup |
+| script static initializer | `0x207998` | `_Z10TO_L1aAs_5v` | `0x20db00` | property registration |
+| host and port predicate | `0x2079ac` | `_Z10mNHZ0adswrRK10C8THgaTQxFS1_i` | `0x20db14` | wildcard and range checks |
+| cached-host destructor | `0x207c54` | `_ZN10reub2aL2gsD1Ev` | `0x20ddc0` | vtable and string cleanup |
+| cached-host deleting destructor | `0x207c68` | `_ZN10reub2aL2gsD0Ev` | `0x20ddd4` | cleanup plus delete |
+
+The target combines an additional global construction with the socket static
+initializer. Its script initializer also uses a four-entry table where the
+source uses two. `IsHostAndPortInList` keeps the source wildcard, host
+pattern, single-port, and inclusive-range behavior. The two cached-host
+destructors are exact normalized-shape matches.
+
+All five labels reopened successfully in the v138 disposable copy, and the
+full translation check still reports zero failures across 11,679 functions.
+Evidence is stored in
+`artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`.
+
 ## Spectron TSocketProperties destructor residual anchors
 
 The v137 pass translated the complete `TSocketProperties` destructor family.
