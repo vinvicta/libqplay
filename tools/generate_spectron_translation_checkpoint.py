@@ -183,6 +183,8 @@ def main() -> None:
     parser.add_argument("--gani-constructor-verification", type=Path)
     parser.add_argument("--gani-helper-anchors", type=Path)
     parser.add_argument("--gani-helper-verification", type=Path)
+    parser.add_argument("--gani-runtime-anchors", type=Path)
+    parser.add_argument("--gani-runtime-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2406,6 +2408,34 @@ def main() -> None:
         result["gani_helper_anchors"] = gani_helper
         result["interpretation"].append(
             "The seventy-ninth database revision also contains the separately reviewed Gani color setter and sprite image-name helper anchors."
+        )
+    gani_runtime = None
+    if args.gani_runtime_anchors or args.gani_runtime_verification:
+        if not args.gani_runtime_anchors or not args.gani_runtime_verification:
+            raise ValueError(
+                "Gani runtime anchors and Gani runtime verification must be supplied together"
+            )
+        gani_runtime_document = load(args.gani_runtime_anchors)
+        gani_runtime_verification = load(args.gani_runtime_verification)
+        if gani_runtime_document.get("artifact") != "spectron_gani_runtime_manual_translation_anchors_20260826":
+            raise ValueError("unexpected Gani runtime anchor artifact")
+        if not gani_runtime_verification.get("verified"):
+            raise ValueError("Gani runtime anchor reopen verification did not pass")
+        expected_gani_runtime = len(gani_runtime_document["anchors"])
+        if gani_runtime_verification["verified_name_count"] != expected_gani_runtime:
+            raise ValueError("Gani runtime verification count differs from artifact")
+        gani_runtime = {
+            "anchor_path": str(args.gani_runtime_anchors),
+            "anchor_sha256": sha256_path(args.gani_runtime_anchors),
+            "reopen_verification": str(args.gani_runtime_verification),
+            "anchor_count": expected_gani_runtime,
+            "verified_name_count": gani_runtime_verification["verified_name_count"],
+            "reopen_failure_count": gani_runtime_verification["failure_count"],
+        }
+    if gani_runtime is not None:
+        result["gani_runtime_anchors"] = gani_runtime
+        result["interpretation"].append(
+            "The eightieth database revision also contains the separately reviewed Gani matrix, parameter, and animation-start anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

@@ -858,6 +858,14 @@ filenames, and the type switch. Both labels reopened successfully. The
 evidence is in
 `artifacts/spectron_gani_helper_manual_translation_anchors_20260826.json`.
 
+A v82 disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v82.i64`,
+adds four Gani runtime anchors. They cover 2D draw-matrix setup, parameter
+and attribute writes, parameter and attribute reads, and the main animation
+start routine. The labels reopened successfully in a serial IDA check. The
+evidence is in
+`artifacts/spectron_gani_runtime_manual_translation_anchors_20260826.json`.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and

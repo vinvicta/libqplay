@@ -996,6 +996,12 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_gani_helper_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+142. Clean IDA review added four high-confidence Gani runtime anchors for
+     matrix setup, parameter and attribute access, and animation start. All
+     four reopened successfully in a serial check of the v82 disposable copy.
+     See `artifacts/spectron_gani_runtime_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
