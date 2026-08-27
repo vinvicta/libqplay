@@ -1428,6 +1428,17 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+229. The next IDA pass translated six exact-shape `TList` methods: indexed
+     replacement, repeated-value removal, full-list append, signed and
+     unsigned indexed access, and the qsort thunk. All six labels reopened
+     successfully in the v171 disposable copy, which has 11,694 functions,
+     3,641 high-confidence labels, and 1,255 default `sub_` names. The source
+     and target rows share the `+0xfd0` delta and the complete normalized
+     feature record. See
+     `artifacts/spectron_tlist_manual_translation_anchors_20260827.json`,
+     `tools/generate_spectron_tlist_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 228. The next IDA pass translated nine exact-shape `TEncryption` methods:
      DES encryption and decryption, the script MD5 wrapper, RSA signing, RC4
      cleanup and processing, and AES cleanup, encryption, and decryption. All

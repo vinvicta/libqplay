@@ -1,0 +1,361 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target rows are corresponding methods in the TList and vy1JgaKVkH class-local clusters. The target retains an obfuscated C++ class name, so the readable alias is an analysis translation rather than recovered target debug information.",
+        "The complete normalized ARM64 feature record matches for every row. The comparison includes size, instruction count, control-flow counts, mnemonic, opcode, register, overall-shape, and string-reference fields.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static IDA analysis overlay and does not modify the APK or native library.",
+        "Both reject negative or out-of-range indexes and store the incoming pointer into the indexed list slot.",
+        "The target Replace method is the first mutation helper in the corresponding local TList cluster."
+      ],
+      "match_kind": "manual-tlist-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0xec9f8",
+      "original_function_end": "0xeca14",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 2,
+        "call_count": 0,
+        "instruction_count": 7,
+        "mnemonic_hash": "42acecefaa5323286fbc53f3e952796a1d8ec2eb76f17ba0844604ddf0e0ab45",
+        "opcode_shape_hash": "38a9d7ce8814aaa30de19d7b26e104576594d09ddb00b87bcb387e57785b92e7",
+        "register_shape_hash": "c48531db8e95c15f0a5fb60812b6efdf96bd4b0d254a08197ca913e98f188b80",
+        "shape_hash": "865e0c05616d3c88ca728a312f4d93536ff64170e740cc315d0cbbdbc6e62001",
+        "size": 28,
+        "string_refs_hash": null
+      },
+      "original_name": "TList_Replace_int_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TList_Replace_int_void",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TList indexed replacement",
+      "spectron_current_name": "_ZN10vy1JgaKVkH7ReplaceEiPv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0xed9c8",
+      "spectron_function_end": "0xed9e4",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 2,
+        "call_count": 0,
+        "instruction_count": 7,
+        "mnemonic_hash": "42acecefaa5323286fbc53f3e952796a1d8ec2eb76f17ba0844604ddf0e0ab45",
+        "opcode_shape_hash": "38a9d7ce8814aaa30de19d7b26e104576594d09ddb00b87bcb387e57785b92e7",
+        "register_shape_hash": "c48531db8e95c15f0a5fb60812b6efdf96bd4b0d254a08197ca913e98f188b80",
+        "shape_hash": "865e0c05616d3c88ca728a312f4d93536ff64170e740cc315d0cbbdbc6e62001",
+        "size": 28,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0xfd0"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target rows are corresponding methods in the TList and vy1JgaKVkH class-local clusters. The target retains an obfuscated C++ class name, so the readable alias is an analysis translation rather than recovered target debug information.",
+        "The complete normalized ARM64 feature record matches for every row. The comparison includes size, instruction count, control-flow counts, mnemonic, opcode, register, overall-shape, and string-reference fields.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static IDA analysis overlay and does not modify the APK or native library.",
+        "Both repeatedly find the value and delete the matching index until the search returns a negative result.",
+        "The target Remove method follows the indexed replacement area and retains the same loop over indexOf and Delete."
+      ],
+      "match_kind": "manual-tlist-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TList_Delete_int",
+        "plt_TList_indexOf_void_const"
+      ],
+      "original_ea": "0xecbac",
+      "original_function_end": "0xecbf4",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 5,
+        "call_count": 2,
+        "instruction_count": 18,
+        "mnemonic_hash": "80ec45e20130086af8877094cd21ceffc7562d98fe722c3c376f3e11fea26683",
+        "opcode_shape_hash": "037cc4e85c49f3efde1c99febc13b062eb2f31db5933b111451fbc51ab56c653",
+        "register_shape_hash": "7e55251e622652f807c6f9a536156e4e74a38e01dcee43cd04541322756ae6b4",
+        "shape_hash": "95ca6f0cb5990c9b768f203e70d18f29d34d605413e3fb65bd5e36e3aeb7abe4",
+        "size": 72,
+        "string_refs_hash": null
+      },
+      "original_name": "TList_Remove_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TList_Remove_void",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TList repeated-value removal",
+      "spectron_current_name": "_ZN10vy1JgaKVkH6RemoveEPv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10vy1JgaKVkH6DeleteEi",
+        "._ZNK10vy1JgaKVkH10JtTLgaLhUIEPKv"
+      ],
+      "spectron_ea": "0xedb7c",
+      "spectron_function_end": "0xedbc4",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 5,
+        "call_count": 2,
+        "instruction_count": 18,
+        "mnemonic_hash": "80ec45e20130086af8877094cd21ceffc7562d98fe722c3c376f3e11fea26683",
+        "opcode_shape_hash": "037cc4e85c49f3efde1c99febc13b062eb2f31db5933b111451fbc51ab56c653",
+        "register_shape_hash": "7e55251e622652f807c6f9a536156e4e74a38e01dcee43cd04541322756ae6b4",
+        "shape_hash": "95ca6f0cb5990c9b768f203e70d18f29d34d605413e3fb65bd5e36e3aeb7abe4",
+        "size": 72,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0xfd0"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target rows are corresponding methods in the TList and vy1JgaKVkH class-local clusters. The target retains an obfuscated C++ class name, so the readable alias is an analysis translation rather than recovered target debug information.",
+        "The complete normalized ARM64 feature record matches for every row. The comparison includes size, instruction count, control-flow counts, mnemonic, opcode, register, overall-shape, and string-reference fields.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static IDA analysis overlay and does not modify the APK or native library.",
+        "Both check for a non-null source list and forward its complete range, from index zero through the source count, to the four-argument AddList implementation.",
+        "The target TF9BgaVKIA method is the compact bulk-copy wrapper in the same local list-helper sequence."
+      ],
+      "match_kind": "manual-tlist-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0xecd78",
+      "original_function_end": "0xecd8c",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 3,
+        "call_count": 0,
+        "instruction_count": 5,
+        "mnemonic_hash": "8387216860401239e4a72080982aa3d8db474920d293010d01c91de985828963",
+        "opcode_shape_hash": "f8179039610b65a748fb05f5cc3615d32c5f154bca767d366034022da87f6bbe",
+        "register_shape_hash": "71427443a3d1509478c093e4d98bf1549011b10ac4a4596125a3f895d9940080",
+        "shape_hash": "2e46dbf0dacbed4e5fe2393373d5cb002fed05a74117a260f36c93b7d325a458",
+        "size": 20,
+        "string_refs_hash": null
+      },
+      "original_name": "TList_AddList_TList",
+      "original_string_refs": [],
+      "proposed_name": "v18_TList_AddList_TList",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TList full-list append wrapper",
+      "spectron_current_name": "_ZN10vy1JgaKVkH10TF9BgaVKIAEPS_",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0xedd48",
+      "spectron_function_end": "0xedd5c",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 3,
+        "call_count": 0,
+        "instruction_count": 5,
+        "mnemonic_hash": "8387216860401239e4a72080982aa3d8db474920d293010d01c91de985828963",
+        "opcode_shape_hash": "f8179039610b65a748fb05f5cc3615d32c5f154bca767d366034022da87f6bbe",
+        "register_shape_hash": "71427443a3d1509478c093e4d98bf1549011b10ac4a4596125a3f895d9940080",
+        "shape_hash": "2e46dbf0dacbed4e5fe2393373d5cb002fed05a74117a260f36c93b7d325a458",
+        "size": 20,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0xfd0"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target rows are corresponding methods in the TList and vy1JgaKVkH class-local clusters. The target retains an obfuscated C++ class name, so the readable alias is an analysis translation rather than recovered target debug information.",
+        "The complete normalized ARM64 feature record matches for every row. The comparison includes size, instruction count, control-flow counts, mnemonic, opcode, register, overall-shape, and string-reference fields.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static IDA analysis overlay and does not modify the APK or native library.",
+        "Both return zero for a negative or out-of-range index and otherwise load the indexed pointer-sized list element.",
+        "The target iqwRgaITDN method is the first member of the adjacent signed and unsigned accessor pair."
+      ],
+      "match_kind": "manual-tlist-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0xecdb8",
+      "original_function_end": "0xecde4",
+      "original_metrics": {
+        "basic_block_count": 5,
+        "branch_count": 3,
+        "call_count": 0,
+        "instruction_count": 11,
+        "mnemonic_hash": "da27e0bf5ed4b6adfa2c33f8fa8583452d341016aa242cb3d2ae54663eb9957e",
+        "opcode_shape_hash": "4714a3a19f5f93076441a409ee957910ab6da6e86e8ce9815a52af13baa85e1a",
+        "register_shape_hash": "05f0df95713020f29d2a2af9bf4e0f247b61e8c89f0e3425bedb463bd9aa467c",
+        "shape_hash": "349c5bc39b4104141d21c75cee40b8cb1dd469f8d8e4441e388b245a0aac2805",
+        "size": 44,
+        "string_refs_hash": null
+      },
+      "original_name": "TList_getS32_int",
+      "original_string_refs": [],
+      "proposed_name": "v18_TList_getS32_int",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TList signed 32-bit indexed accessor",
+      "spectron_current_name": "_ZNK10vy1JgaKVkH10iqwRgaITDNEi",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0xedd88",
+      "spectron_function_end": "0xeddb4",
+      "spectron_metrics": {
+        "basic_block_count": 5,
+        "branch_count": 3,
+        "call_count": 0,
+        "instruction_count": 11,
+        "mnemonic_hash": "da27e0bf5ed4b6adfa2c33f8fa8583452d341016aa242cb3d2ae54663eb9957e",
+        "opcode_shape_hash": "4714a3a19f5f93076441a409ee957910ab6da6e86e8ce9815a52af13baa85e1a",
+        "register_shape_hash": "05f0df95713020f29d2a2af9bf4e0f247b61e8c89f0e3425bedb463bd9aa467c",
+        "shape_hash": "349c5bc39b4104141d21c75cee40b8cb1dd469f8d8e4441e388b245a0aac2805",
+        "size": 44,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0xfd0"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target rows are corresponding methods in the TList and vy1JgaKVkH class-local clusters. The target retains an obfuscated C++ class name, so the readable alias is an analysis translation rather than recovered target debug information.",
+        "The complete normalized ARM64 feature record matches for every row. The comparison includes size, instruction count, control-flow counts, mnemonic, opcode, register, overall-shape, and string-reference fields.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static IDA analysis overlay and does not modify the APK or native library.",
+        "Both use the same negative and bounds checks as getS32 and load the indexed list element when valid.",
+        "The target sULREacVQZ method immediately follows the signed accessor and is distinguished by the ordered C++ overload name."
+      ],
+      "match_kind": "manual-tlist-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0xecde4",
+      "original_function_end": "0xece10",
+      "original_metrics": {
+        "basic_block_count": 5,
+        "branch_count": 3,
+        "call_count": 0,
+        "instruction_count": 11,
+        "mnemonic_hash": "da27e0bf5ed4b6adfa2c33f8fa8583452d341016aa242cb3d2ae54663eb9957e",
+        "opcode_shape_hash": "4714a3a19f5f93076441a409ee957910ab6da6e86e8ce9815a52af13baa85e1a",
+        "register_shape_hash": "05f0df95713020f29d2a2af9bf4e0f247b61e8c89f0e3425bedb463bd9aa467c",
+        "shape_hash": "349c5bc39b4104141d21c75cee40b8cb1dd469f8d8e4441e388b245a0aac2805",
+        "size": 44,
+        "string_refs_hash": null
+      },
+      "original_name": "TList_getU32_int",
+      "original_string_refs": [],
+      "proposed_name": "v18_TList_getU32_int",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TList unsigned 32-bit indexed accessor",
+      "spectron_current_name": "_ZNK10vy1JgaKVkH10sULREacVQZEi",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0xeddb4",
+      "spectron_function_end": "0xedde0",
+      "spectron_metrics": {
+        "basic_block_count": 5,
+        "branch_count": 3,
+        "call_count": 0,
+        "instruction_count": 11,
+        "mnemonic_hash": "da27e0bf5ed4b6adfa2c33f8fa8583452d341016aa242cb3d2ae54663eb9957e",
+        "opcode_shape_hash": "4714a3a19f5f93076441a409ee957910ab6da6e86e8ce9815a52af13baa85e1a",
+        "register_shape_hash": "05f0df95713020f29d2a2af9bf4e0f247b61e8c89f0e3425bedb463bd9aa467c",
+        "shape_hash": "349c5bc39b4104141d21c75cee40b8cb1dd469f8d8e4441e388b245a0aac2805",
+        "size": 44,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0xfd0"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target rows are corresponding methods in the TList and vy1JgaKVkH class-local clusters. The target retains an obfuscated C++ class name, so the readable alias is an analysis translation rather than recovered target debug information.",
+        "The complete normalized ARM64 feature record matches for every row. The comparison includes size, instruction count, control-flow counts, mnemonic, opcode, register, overall-shape, and string-reference fields.",
+        "Addresses are valid only for the exact hashed ARM64 libraries recorded in the artifact. This is a static IDA analysis overlay and does not modify the APK or native library.",
+        "Both are four-byte thunks that forward the base pointer, element count, element size, and comparator directly to qsort.",
+        "The target qsort method closes the same TList helper cluster after the signed and unsigned accessors."
+      ],
+      "match_kind": "manual-tlist-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0xece10",
+      "original_function_end": "0xece14",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 1,
+        "mnemonic_hash": "df7e70e5021544f4834bbee64a9e3789febc4be81470df629cad6ddb03320a5c",
+        "opcode_shape_hash": "74421f1f206a1f88ce23d5a4fc4299f145f35134a154863c27d88bde0d7c7795",
+        "register_shape_hash": "3c1eee7de17644312d6af1e22e8666726d75912206d4ce8a62656747807515f6",
+        "shape_hash": "3c1eee7de17644312d6af1e22e8666726d75912206d4ce8a62656747807515f6",
+        "size": 4,
+        "string_refs_hash": null
+      },
+      "original_name": "TList_qsort_void_ulong_ulong_int_void_const_void_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TList_qsort_void_ulong_ulong_int_void_const_void_const",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TList qsort thunk",
+      "spectron_current_name": "_ZN10vy1JgaKVkH5qsortEPvmmPFiPKvS2_E",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0xedde0",
+      "spectron_function_end": "0xedde4",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 1,
+        "mnemonic_hash": "df7e70e5021544f4834bbee64a9e3789febc4be81470df629cad6ddb03320a5c",
+        "opcode_shape_hash": "74421f1f206a1f88ce23d5a4fc4299f145f35134a154863c27d88bde0d7c7795",
+        "register_shape_hash": "3c1eee7de17644312d6af1e22e8666726d75912206d4ce8a62656747807515f6",
+        "shape_hash": "3c1eee7de17644312d6af1e22e8666726d75912206d4ce8a62656747807515f6",
+        "size": 4,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0xfd0"
+    }
+  ],
+  "artifact": "spectron_tlist_manual_translation_anchors_20260827",
+  "context": {
+    "resolution": "class-local helper order, container behavior, target pseudocode, and exact normalized function features",
+    "source_classes": [
+      "TList"
+    ],
+    "target_class_clusters": [
+      "vy1JgaKVkH"
+    ]
+  },
+  "inputs": {
+    "original_binary": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so",
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_current.json",
+    "original_features_sha256": "243341ad40e912500365b6d7eb5b69f9f3b9d6200f5c825629cfc56d4343ac07",
+    "spectron_binary": "/tmp/spectron-libqplay-inspect/lib/arm64-v8a/libqplay.so",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v170.json",
+    "spectron_features_sha256": "4ee86c946eeee45c863956fb876b34aca3a0d77c86d42eddd2e127489a59e8ff"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "Every row matches the complete normalized function feature set. Repeated signed and unsigned accessor shapes are resolved by their adjacent overload order and shared list bounds behavior.",
+    "The v18_ aliases are scoped to the exact hashed Spectron library in the inputs and are an IDA analysis overlay only."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for TList mutation, access, append, and sorting helpers",
+  "summary": {
+    "address_delta_groups": {
+      "+0xfd0": 6
+    },
+    "anchor_count": 6,
+    "exact_shape_anchor_count": 6,
+    "high_confidence_count": 6,
+    "layout_change_anchor_count": 0,
+    "new_context_anchor_count": 6,
+    "target_default_name_count": 0
+  }
+}

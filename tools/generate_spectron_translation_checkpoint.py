@@ -147,6 +147,8 @@ def main() -> None:
     parser.add_argument("--files-verification", type=Path)
     parser.add_argument("--encryption-anchors", type=Path)
     parser.add_argument("--encryption-verification", type=Path)
+    parser.add_argument("--tlist-anchors", type=Path)
+    parser.add_argument("--tlist-verification", type=Path)
     parser.add_argument("--particle-emitter-anchors", type=Path)
     parser.add_argument("--particle-emitter-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
@@ -2076,6 +2078,34 @@ def main() -> None:
         result["encryption_anchors"] = encryption
         result["interpretation"].append(
             "The one-hundred-seventieth database revision also contains the separately reviewed exact-shape TEncryption wrapper anchors."
+        )
+    tlist = None
+    if args.tlist_anchors or args.tlist_verification:
+        if not args.tlist_anchors or not args.tlist_verification:
+            raise ValueError(
+                "TList anchors and TList verification must be supplied together"
+            )
+        tlist_document = load(args.tlist_anchors)
+        tlist_verification = load(args.tlist_verification)
+        if tlist_document.get("artifact") != "spectron_tlist_manual_translation_anchors_20260827":
+            raise ValueError("unexpected TList anchor artifact")
+        if not tlist_verification.get("verified"):
+            raise ValueError("TList anchor reopen verification did not pass")
+        expected_tlist = len(tlist_document["anchors"])
+        if tlist_verification["verified_name_count"] != expected_tlist:
+            raise ValueError("TList verification count differs from artifact")
+        tlist = {
+            "anchor_path": str(args.tlist_anchors),
+            "anchor_sha256": sha256_path(args.tlist_anchors),
+            "reopen_verification": str(args.tlist_verification),
+            "anchor_count": expected_tlist,
+            "verified_name_count": tlist_verification["verified_name_count"],
+            "reopen_failure_count": tlist_verification["failure_count"],
+        }
+    if tlist is not None:
+        result["tlist_anchors"] = tlist
+        result["interpretation"].append(
+            "The one-hundred-seventy-first database revision also contains the separately reviewed exact-shape TList helper anchors."
         )
     particle_emitter = None
     if args.particle_emitter_anchors or args.particle_emitter_verification:
