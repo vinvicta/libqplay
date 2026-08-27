@@ -467,6 +467,9 @@ def main():
     spectron_socket_cache_residual_anchors = load_json(
         "artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json"
     )
+    spectron_url_cache_residual_anchors = load_json(
+        "artifacts/spectron_url_cache_residual_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2627,6 +2630,18 @@ def main():
     check("Spectron socket-cache residual exact-shape count", spectron_socket_cache_residual_anchors["summary"]["exact_shape_anchor_count"], 2)
     check("Spectron socket-cache residual layout-change count", spectron_socket_cache_residual_anchors["summary"]["layout_change_anchor_count"], 3)
     check(
+        "Spectron URL-cache residual artifact",
+        spectron_url_cache_residual_anchors["artifact"],
+        "spectron_url_cache_residual_manual_translation_anchors_20260826",
+    )
+    check("Spectron URL-cache residual network", spectron_url_cache_residual_anchors["network_contacted"], False)
+    check("Spectron URL-cache residual total", spectron_url_cache_residual_anchors["summary"]["anchor_count"], 5)
+    check("Spectron URL-cache residual high confidence", spectron_url_cache_residual_anchors["summary"]["high_confidence_count"], 5)
+    check("Spectron URL-cache residual semantic overlap", spectron_url_cache_residual_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron URL-cache residual default targets", spectron_url_cache_residual_anchors["summary"]["target_default_name_count"], 0)
+    check("Spectron URL-cache residual exact-shape count", spectron_url_cache_residual_anchors["summary"]["exact_shape_anchor_count"], 3)
+    check("Spectron URL-cache residual layout-change count", spectron_url_cache_residual_anchors["summary"]["layout_change_anchor_count"], 2)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -2771,7 +2786,8 @@ def main():
     check("Spectron checkpoint TSocket host residual anchor count", spectron_checkpoint["tsocket_host_residual_anchors"]["verified_name_count"], 3)
     check("Spectron checkpoint TSocketProperties residual anchor count", spectron_checkpoint["tsocket_properties_residual_anchors"]["verified_name_count"], 4)
     check("Spectron checkpoint socket-cache residual anchor count", spectron_checkpoint["socket_cache_residual_anchors"]["verified_name_count"], 5)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "73a990ab8d29c9dd83e5542eb0130bfdb7ff80bc9e7b5f0eb3f9495354c7cfc8")
+    check("Spectron checkpoint URL-cache residual anchor count", spectron_checkpoint["url_cache_residual_anchors"]["verified_name_count"], 5)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "ffa33dac8790bd45cfabeaae38201f09954a9cb298ceb747ed3f82b76155c08a")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -2969,6 +2985,7 @@ def main():
         spectron_tsocket_host_residual_anchors,
         spectron_tsocket_properties_residual_anchors,
         spectron_socket_cache_residual_anchors,
+        spectron_url_cache_residual_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

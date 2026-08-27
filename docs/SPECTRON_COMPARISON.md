@@ -3444,6 +3444,26 @@ functions. The v108 database has 1,684 remaining default `sub_` names. Its
 SHA-256 is
 `8350a43be6b31306954e34a17f77d742c8d1702015d671019d2bf2dd6c1bb1e1`.
 
+## Spectron URL-cache support residual anchors
+
+The v139 pass translated the remaining URL-cache insertion, loading, and
+cache-entry cleanup rows.
+
+| 1.8 role | Source | Spectron symbol | Target | Main evidence |
+| --- | ---: | --- | ---: | --- |
+| URL cache insertion | `0x207d24` | `_ZN10uK2SHaPVVw10btKSHa7HFwERK10C8THgaTQxFS2_` | `0x20de90` | `.code` filter and save scheduling |
+| URL cache initializer | `0x207ebc` | `_Z10IMaXHaJGoAv` | `0x20e054` | hash-list publication |
+| URL cache load | `0x207eec` | `_ZN10uK2SHaPVVw4loadEv` | `0x20e084` | `URLCACHE.txt` parsing |
+| cache-entry destructor | `0x20815c` | `_ZN10uK2SHaPVVw10S5XSHaIaRwD2Ev` | `0x20e2f8` | string and vtable cleanup |
+| cache-entry deleting destructor | `0x20819c` | `_ZN10uK2SHaPVVw10S5XSHaIaRwD0Ev` | `0x20e338` | cleanup plus delete |
+
+The initializer and both destructor pairs are exact normalized-shape matches.
+`addURL` and `load` are modest wrapper-growth changes that preserve the
+source cache behavior, including `.code` exclusion, hashed entry lookup,
+`URLCACHE.txt`, and save scheduling. All five labels reopened successfully
+in the v139 disposable copy. Evidence is stored in
+`artifacts/spectron_url_cache_residual_manual_translation_anchors_20260826.json`.
+
 ## Spectron socket-cache support residual anchors
 
 The v138 pass translated five support functions after `GetOwnIP`: static

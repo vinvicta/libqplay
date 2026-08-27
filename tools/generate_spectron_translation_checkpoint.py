@@ -297,6 +297,8 @@ def main() -> None:
     parser.add_argument("--tsocket-properties-residual-verification", type=Path)
     parser.add_argument("--socket-cache-residual-anchors", type=Path)
     parser.add_argument("--socket-cache-residual-verification", type=Path)
+    parser.add_argument("--url-cache-residual-anchors", type=Path)
+    parser.add_argument("--url-cache-residual-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -4116,6 +4118,34 @@ def main() -> None:
         result["socket_cache_residual_anchors"] = socket_cache_residual
         result["interpretation"].append(
             "The one-hundred-thirty-eighth database revision also contains the separately reviewed socket-cache support residual family."
+        )
+    url_cache_residual = None
+    if args.url_cache_residual_anchors or args.url_cache_residual_verification:
+        if not args.url_cache_residual_anchors or not args.url_cache_residual_verification:
+            raise ValueError(
+                "URL-cache residual anchors and verification must be supplied together"
+            )
+        url_cache_residual_document = load(args.url_cache_residual_anchors)
+        url_cache_residual_verification = load(args.url_cache_residual_verification)
+        if url_cache_residual_document.get("artifact") != "spectron_url_cache_residual_manual_translation_anchors_20260826":
+            raise ValueError("unexpected URL-cache residual artifact")
+        if not url_cache_residual_verification.get("verified"):
+            raise ValueError("URL-cache residual reopen verification did not pass")
+        expected_url_cache_residual = len(url_cache_residual_document["anchors"])
+        if url_cache_residual_verification["verified_name_count"] != expected_url_cache_residual:
+            raise ValueError("URL-cache residual verification count differs from artifact")
+        url_cache_residual = {
+            "anchor_path": str(args.url_cache_residual_anchors),
+            "anchor_sha256": sha256_path(args.url_cache_residual_anchors),
+            "reopen_verification": str(args.url_cache_residual_verification),
+            "anchor_count": expected_url_cache_residual,
+            "verified_name_count": url_cache_residual_verification["verified_name_count"],
+            "reopen_failure_count": url_cache_residual_verification["failure_count"],
+        }
+    if url_cache_residual is not None:
+        result["url_cache_residual_anchors"] = url_cache_residual
+        result["interpretation"].append(
+            "The one-hundred-thirty-ninth database revision also contains the separately reviewed URL-cache support residual family."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
