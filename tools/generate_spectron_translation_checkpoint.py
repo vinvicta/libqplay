@@ -211,6 +211,8 @@ def main() -> None:
     parser.add_argument("--number-array-string-verification", type=Path)
     parser.add_argument("--client-environment-clock-anchors", type=Path)
     parser.add_argument("--client-environment-clock-verification", type=Path)
+    parser.add_argument("--client-var-core-anchors", type=Path)
+    parser.add_argument("--client-var-core-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2826,6 +2828,34 @@ def main() -> None:
         result["client_environment_clock_anchors"] = client_environment_clock
         result["interpretation"].append(
             "The ninety-third database revision also contains the separately reviewed client-environment build-time and expiry helpers."
+        )
+    client_var_core = None
+    if args.client_var_core_anchors or args.client_var_core_verification:
+        if not args.client_var_core_anchors or not args.client_var_core_verification:
+            raise ValueError(
+                "client-variable core anchors and client-variable core verification must be supplied together"
+            )
+        client_var_core_document = load(args.client_var_core_anchors)
+        client_var_core_verification = load(args.client_var_core_verification)
+        if client_var_core_document.get("artifact") != "spectron_client_var_core_manual_translation_anchors_20260826":
+            raise ValueError("unexpected client-variable core anchor artifact")
+        if not client_var_core_verification.get("verified"):
+            raise ValueError("client-variable core anchor reopen verification did not pass")
+        expected_client_var_core = len(client_var_core_document["anchors"])
+        if client_var_core_verification["verified_name_count"] != expected_client_var_core:
+            raise ValueError("client-variable core verification count differs from artifact")
+        client_var_core = {
+            "anchor_path": str(args.client_var_core_anchors),
+            "anchor_sha256": sha256_path(args.client_var_core_anchors),
+            "reopen_verification": str(args.client_var_core_verification),
+            "anchor_count": expected_client_var_core,
+            "verified_name_count": client_var_core_verification["verified_name_count"],
+            "reopen_failure_count": client_var_core_verification["failure_count"],
+        }
+    if client_var_core is not None:
+        result["client_var_core_anchors"] = client_var_core
+        result["interpretation"].append(
+            "The ninety-fourth database revision also contains the separately reviewed TGraalClientVar send and string-update anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

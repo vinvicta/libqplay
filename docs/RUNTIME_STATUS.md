@@ -1103,6 +1103,13 @@ This is the short handoff view. The full reasoning and command history are in
      `artifacts/spectron_client_environment_clock_manual_translation_anchors_20260826.json`
      and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+156. The next IDA pass translated three `TGraalClientVar` methods covering
+     flag send and unset, string change suppression, and indexed string change
+     suppression. The labels reopened successfully in the v96 disposable copy.
+     See
+     `artifacts/spectron_client_var_core_manual_translation_anchors_20260826.json`
+     and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

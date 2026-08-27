@@ -338,6 +338,9 @@ def main():
     spectron_client_environment_clock_anchors = load_json(
         "artifacts/spectron_client_environment_clock_manual_translation_anchors_20260826.json"
     )
+    spectron_client_var_core_anchors = load_json(
+        "artifacts/spectron_client_var_core_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2039,6 +2042,16 @@ def main():
     check("Spectron client-environment-clock semantic overlap", spectron_client_environment_clock_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron client-environment-clock default targets", spectron_client_environment_clock_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron client-var-core artifact",
+        spectron_client_var_core_anchors["artifact"],
+        "spectron_client_var_core_manual_translation_anchors_20260826",
+    )
+    check("Spectron client-var-core network", spectron_client_var_core_anchors["network_contacted"], False)
+    check("Spectron client-var-core total", spectron_client_var_core_anchors["summary"]["anchor_count"], 3)
+    check("Spectron client-var-core high confidence", spectron_client_var_core_anchors["summary"]["high_confidence_count"], 3)
+    check("Spectron client-var-core semantic overlap", spectron_client_var_core_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron client-var-core default targets", spectron_client_var_core_anchors["summary"]["target_default_name_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -2139,7 +2152,8 @@ def main():
     check("Spectron checkpoint animation-lexer anchor count", spectron_checkpoint["ani_lexer_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint number-array-string anchor count", spectron_checkpoint["number_array_string_anchors"]["verified_name_count"], 8)
     check("Spectron checkpoint client-environment-clock anchor count", spectron_checkpoint["client_environment_clock_anchors"]["verified_name_count"], 2)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "79f62371f6ddbecdb94c923918126b1a9c109e18bcea0771163bb41c0bd8407f")
+    check("Spectron checkpoint client-var-core anchor count", spectron_checkpoint["client_var_core_anchors"]["verified_name_count"], 3)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "343ea4a80616c6f53b1b7233ad339e44830cd084086bd4bd6204a18bdd5a1af3")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -2294,6 +2308,7 @@ def main():
         spectron_ani_lexer_anchors,
         spectron_number_array_string_anchors,
         spectron_client_environment_clock_anchors,
+        spectron_client_var_core_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
