@@ -3444,6 +3444,29 @@ functions. The v108 database has 1,684 remaining default `sub_` names. Its
 SHA-256 is
 `8350a43be6b31306954e34a17f77d742c8d1702015d671019d2bf2dd6c1bb1e1`.
 
+## Spectron TPlayerList residual anchors
+
+The v140 pass translated the last uncovered player-list support rows before
+the client-socket helpers.
+
+| 1.8 role | Source | Spectron symbol | Target | Main evidence |
+| --- | ---: | --- | ---: | --- |
+| staff-guild setter | `0x2081e4` | `_ZN10y3t2LaCUH110UpiB7az6Z_ERK10C8THgaTQxF` | `0x20e380` | comma-text list update |
+| player-list initializer | `0x208310` | `_Z10LG6O2aDeCZv` | `0x20e4ac` | allocate, construct, publish |
+| static-script initializer | `0x208340` | `_Z10ZdoB2ay_3Nv` | `0x20e4dc` | empty initializer |
+
+The setter preserves the source staff-guild list role through the target
+`vuuHgangcF` helper. The static initializer follows the same allocate,
+construct, and global-publish sequence, but the target object is 0x20 bytes
+instead of the source 0x18-byte `TStringList`, so it is classified as a layout
+change. The empty static-script initializer has an exact normalized shape.
+All three target names were already non-default. The labels reopened
+successfully in the v140 copy, and the next target function at `0x20e4e0` is
+kept as the client-socket lock boundary.
+
+Evidence is stored in
+`artifacts/spectron_player_list_residual_manual_translation_anchors_20260826.json`.
+
 ## Spectron URL-cache support residual anchors
 
 The v139 pass translated the remaining URL-cache insertion, loading, and

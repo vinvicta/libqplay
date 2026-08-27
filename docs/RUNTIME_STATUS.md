@@ -1428,6 +1428,13 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+200. The next IDA pass translated three residual `TPlayerList` methods:
+    the staff-guild setter, static initializer, and empty static-script
+    initializer. All three labels reopened successfully in the v140
+    disposable copy, which retains 1,495 default `sub_` functions. See
+    `artifacts/spectron_player_list_residual_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 199. The next IDA pass translated five residual URL-cache support methods:
     insertion, static setup, file loading, and complete and deleting
     cache-entry destructors. All five labels reopened successfully in the
