@@ -211,6 +211,8 @@ def main() -> None:
     parser.add_argument("--sounds-effect-verification", type=Path)
     parser.add_argument("--sounds-control-anchors", type=Path)
     parser.add_argument("--sounds-control-verification", type=Path)
+    parser.add_argument("--tsound-effect-methods-anchors", type=Path)
+    parser.add_argument("--tsound-effect-methods-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
     parser.add_argument("--server-animation-verification", type=Path)
     parser.add_argument("--player-lifecycle-anchors", type=Path)
@@ -3072,6 +3074,58 @@ def main() -> None:
         result["sounds_control_anchors"] = sounds_control
         result["interpretation"].append(
             "The two-hundred-first database revision also contains the separately reviewed TSounds volume and music-update control anchors."
+        )
+    tsound_effect_methods = None
+    if (
+        args.tsound_effect_methods_anchors
+        or args.tsound_effect_methods_verification
+    ):
+        if (
+            not args.tsound_effect_methods_anchors
+            or not args.tsound_effect_methods_verification
+        ):
+            raise ValueError(
+                "TSoundEffect method anchors and verification must be supplied together"
+            )
+        tsound_effect_methods_document = load(args.tsound_effect_methods_anchors)
+        tsound_effect_methods_verification = load(
+            args.tsound_effect_methods_verification
+        )
+        if (
+            tsound_effect_methods_document.get("artifact")
+            != "spectron_tsound_effect_methods_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected TSoundEffect method anchor artifact")
+        if not tsound_effect_methods_verification.get("verified"):
+            raise ValueError(
+                "TSoundEffect method anchor reopen verification did not pass"
+            )
+        expected_tsound_effect_methods = len(
+            tsound_effect_methods_document["anchors"]
+        )
+        if (
+            tsound_effect_methods_verification["verified_name_count"]
+            != expected_tsound_effect_methods
+        ):
+            raise ValueError(
+                "TSoundEffect method verification count differs from artifact"
+            )
+        tsound_effect_methods = {
+            "anchor_path": str(args.tsound_effect_methods_anchors),
+            "anchor_sha256": sha256_path(args.tsound_effect_methods_anchors),
+            "reopen_verification": str(args.tsound_effect_methods_verification),
+            "anchor_count": expected_tsound_effect_methods,
+            "verified_name_count": tsound_effect_methods_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": tsound_effect_methods_verification[
+                "failure_count"
+            ],
+        }
+    if tsound_effect_methods is not None:
+        result["tsound_effect_methods_anchors"] = tsound_effect_methods
+        result["interpretation"].append(
+            "The two-hundred-second database revision also contains the separately reviewed TSoundEffect virtual method block anchors."
         )
     server_animation = None
     if args.server_animation_anchors or args.server_animation_verification:

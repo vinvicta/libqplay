@@ -1482,6 +1482,17 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_particle_emitter_script_vars_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+261. The next IDA pass resolved the complete seven-method `TSoundEffect`
+    virtual interface. Source methods from `0xe2b24` through `0xe2b4c` map in
+    method-table order to target `fEVMgax6LJ` methods from `0xe3714` through
+    `0xe373c`. Every recorded feature matches exactly, including register
+    detail. All seven aliases reopened successfully in the v202 copy, which
+    has 11,694 functions, 3,641 high-confidence labels, and 1,218 default
+    `sub_` names, with zero semantic reopen failures. See
+    `artifacts/spectron_tsound_effect_methods_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_tsound_effect_methods_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 260. The next IDA pass resolved the remaining short `TSounds` control
     callbacks. Source `TSounds_setMusicVolume` at `0xe1350` maps exactly to
     target `sub_E1F28` at `0xe1f28`; source `TSounds_updateMusic_void` at

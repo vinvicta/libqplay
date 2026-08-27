@@ -205,8 +205,8 @@
     "default_sub_function_count": 1218,
     "format": "packed IDA 9.3 database",
     "function_count": 11694,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v201.i64",
-    "sha256": "17db3651520fac5f9ef448f8b70be215cc6c1c36255ffa0aa21f65436a032c03"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v202.i64",
+    "sha256": "87fb8ed432789f0f729d645c34fb11b6d3bfe55ebdcc96705d7beaa865c9b77d"
   },
   "displayed_gif_anchors": {
     "anchor_count": 1,
@@ -618,7 +618,7 @@
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
-    "reopen_verification": "/tmp/spectron_translation_verify_v201.json",
+    "reopen_verification": "/tmp/spectron_translation_verify_v202.json",
     "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
     "translation_map": "artifacts/spectron_semantic_function_translation_20260826.json",
     "translation_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92"
@@ -710,6 +710,7 @@
     "The one-hundred-ninety-ninth database revision also contains the separately reviewed TSounds music-state wrapper anchors.",
     "The two-hundredth database revision also contains the separately reviewed TSounds sound-effect constructor and cache lookup anchors.",
     "The two-hundred-first database revision also contains the separately reviewed TSounds volume and music-update control anchors.",
+    "The two-hundred-second database revision also contains the separately reviewed TSoundEffect virtual method block anchors.",
     "The fifty-seventh database revision also contains the separately reviewed explosion, carry, and flying server-animation anchors.",
     "The fifty-eighth database revision also contains the separately reviewed player start-level and periodic-update anchors.",
     "The fifty-ninth database revision also contains the separately reviewed player emoticon-coordinate getter anchors.",
@@ -1683,6 +1684,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_tsocket_manual_anchor_verification_v197.json",
     "verified_name_count": 1
+  },
+  "tsound_effect_methods_anchors": {
+    "anchor_count": 7,
+    "anchor_path": "artifacts/spectron_tsound_effect_methods_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "be6435ee5564418ef1c149f88315a004b5d3be79b80faad75df7e6ca5ca2cccc",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tsound_effect_methods_verification_v202.json",
+    "verified_name_count": 7
   },
   "tstring_anchors": {
     "anchor_count": 6,

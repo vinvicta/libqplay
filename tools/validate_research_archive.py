@@ -341,6 +341,9 @@ def main():
     spectron_sounds_control_anchors = load_json(
         "artifacts/spectron_sounds_control_manual_translation_anchors_20260827.json"
     )
+    spectron_tsound_effect_methods_anchors = load_json(
+        "artifacts/spectron_tsound_effect_methods_manual_translation_anchors_20260827.json"
+    )
     spectron_server_animation_anchors = load_json(
         "artifacts/spectron_server_animation_manual_translation_anchors_20260826.json"
     )
@@ -3423,6 +3426,60 @@ def main():
         "0xe2470",
     )
     check(
+        "Spectron TSoundEffect methods artifact",
+        spectron_tsound_effect_methods_anchors["artifact"],
+        "spectron_tsound_effect_methods_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron TSoundEffect methods network",
+        spectron_tsound_effect_methods_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron TSoundEffect methods total",
+        spectron_tsound_effect_methods_anchors["summary"]["anchor_count"],
+        7,
+    )
+    check(
+        "Spectron TSoundEffect methods high confidence",
+        spectron_tsound_effect_methods_anchors["summary"]["high_confidence_count"],
+        7,
+    )
+    check(
+        "Spectron TSoundEffect methods semantic overlap",
+        spectron_tsound_effect_methods_anchors["summary"]["already_in_semantic_map"],
+        0,
+    )
+    check(
+        "Spectron TSoundEffect methods exact-shape count",
+        spectron_tsound_effect_methods_anchors["summary"]["exact_shape_anchor_count"],
+        7,
+    )
+    check(
+        "Spectron TSoundEffect methods full-feature count",
+        spectron_tsound_effect_methods_anchors["summary"]["full_metric_exact_count"],
+        7,
+    )
+    check(
+        "Spectron TSoundEffect methods target default count",
+        spectron_tsound_effect_methods_anchors["summary"]["target_default_name_count"],
+        0,
+    )
+    tsound_effect_method_targets = {
+        row["original_name"]: row
+        for row in spectron_tsound_effect_methods_anchors["anchors"]
+    }
+    check(
+        "Spectron TSoundEffect hasChannel target",
+        tsound_effect_method_targets["TSoundEffect_hasChannel_void"]["spectron_ea"],
+        "0xe3714",
+    )
+    check(
+        "Spectron TSoundEffect getLength target",
+        tsound_effect_method_targets["TSoundEffect_getLength_void"]["spectron_ea"],
+        "0xe373c",
+    )
+    check(
         "Spectron server-animation artifact",
         spectron_server_animation_anchors["artifact"],
         "spectron_server_animation_manual_translation_anchors_20260826",
@@ -4769,7 +4826,8 @@ def main():
     check("Spectron checkpoint sounds music-state anchor count", spectron_checkpoint["sounds_music_state_anchors"]["verified_name_count"], 3)
     check("Spectron checkpoint sounds effect anchor count", spectron_checkpoint["sounds_effect_anchors"]["verified_name_count"], 2)
     check("Spectron checkpoint sounds control anchor count", spectron_checkpoint["sounds_control_anchors"]["verified_name_count"], 2)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "17db3651520fac5f9ef448f8b70be215cc6c1c36255ffa0aa21f65436a032c03")
+    check("Spectron checkpoint TSoundEffect methods anchor count", spectron_checkpoint["tsound_effect_methods_anchors"]["verified_name_count"], 7)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "87fb8ed432789f0f729d645c34fb11b6d3bfe55ebdcc96705d7beaa865c9b77d")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
