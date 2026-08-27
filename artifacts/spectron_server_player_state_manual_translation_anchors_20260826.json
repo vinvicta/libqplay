@@ -1,0 +1,283 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both compare the incoming head string with the player head field and assign it only when the value changed.",
+        "The target first copies the current string into a temporary rebuilt wrapper before comparing, which reduces the block count while preserving the same conditional assignment.",
+        "The target method is called by the reviewed player head setter and uses the same class-local head field offset of 384 bytes."
+      ],
+      "match_kind": "manual-server-player-state-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x18b010",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "instruction_count": 19,
+        "mnemonic_hash": "db706bbd94a648770d765111f71d205d03bd32655dd1a3e306292b53c8340beb",
+        "register_shape_hash": "1b06477abfac801904eefcd3102b4b7db3ab7cad162d185cf1d91e9b7e1d87a7",
+        "shape_hash": "33fc33328d27901503fdd853209c3cd05dee178af0f3176f74cce550d611f996",
+        "size": 76
+      },
+      "original_name": "TServerPlayer_setHead_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerPlayer_setHead_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "server-player head string setter",
+      "spectron_current_name": "_ZN10MpGzgariDy10cPsmwaERvQERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x18f8c0",
+      "spectron_metrics": {
+        "basic_block_count": 3,
+        "instruction_count": 26,
+        "mnemonic_hash": "550a051bbfa2724ba3bb39a394ec08af7143354eb477498ddcaa7eb4d5f6f2e9",
+        "register_shape_hash": "e9e5ead1c8f256eb932f22a0ecee533413f15d305b8a107d59ac1455e89aa250",
+        "shape_hash": "d14ac5ea7113c1a21a08b3067c13292fb2b33b18378bb341e1bf1cf733327b3f",
+        "size": 104
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both initialize the same movement, action, health, timing, language, status, and player-state defaults through the class vtable.",
+        "Both restore English, sword1.png, shield1.png, the default head, and the default body, while clearing level, side-level, inventory, and status fields.",
+        "The target shifts fields for the larger player object and uses rebuilt string wrappers, but keeps the exact ten-block initialization shape and distinctive default assets."
+      ],
+      "match_kind": "manual-server-player-state-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x18ba6c",
+      "original_metrics": {
+        "basic_block_count": 10,
+        "instruction_count": 255,
+        "mnemonic_hash": "4887fe71275e14a65e7a7179558873eb9f05637ea5ecd719f892d486c179fe10",
+        "register_shape_hash": "decf43857d9a8034acfb1d0675e1d6ba67670224fa45724bd68cadbb17440153",
+        "shape_hash": "07f89464ec62924455870661e8ef70387350b6bb92e88bda4583fc329075feeb",
+        "size": 1036
+      },
+      "original_name": "TServerPlayer_initPlayerVars_void",
+      "original_string_refs": [
+        "English",
+        "body.png",
+        "head26.png",
+        "shield1.png",
+        "sword1.png"
+      ],
+      "proposed_name": "v18_TServerPlayer_initPlayerVars_void",
+      "semantic_match_already_present": false,
+      "source_basis": "server-player state initialization and default assets",
+      "spectron_current_name": "_ZN10MpGzgariDy10rnVBqbkTv_Ev",
+      "spectron_default_name": false,
+      "spectron_ea": "0x190334",
+      "spectron_metrics": {
+        "basic_block_count": 10,
+        "instruction_count": 250,
+        "mnemonic_hash": "3a18ae8b2e480403c454ef68c392fe4ad35e9898889a24625b43203c9a49becb",
+        "register_shape_hash": "222eba7df048baeb1766d050f1656d812c890b155cc5444c23075c75a9dd21b3",
+        "shape_hash": "e88a6823894a5ec90802c726bc29673799090d661c94cf3f1ca0f7e271390f45",
+        "size": 1012
+      },
+      "spectron_string_refs": [
+        "English",
+        "body.png",
+        "head26.png",
+        "shield1.png",
+        "sword1.png"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both remove the player from prior level and side-level lists, inspect the level extension, and split between gmap and regular-level handling.",
+        "Both load the gmap, clamp coordinates to map bounds, add the player to the active map, resolve the current level cell, and add the player to that level list.",
+        "The regular-level branch resets side-level state, loads the named level, adds the player, and starts the loading timer when needed. The target preserves the exact 25-block shape with shifted map and list wrappers."
+      ],
+      "match_kind": "manual-server-player-state-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x18ccf8",
+      "original_metrics": {
+        "basic_block_count": 25,
+        "instruction_count": 132,
+        "mnemonic_hash": "81506139c987008a963fac6c02d25c97533a5784befd66cc1e4fac4311763c8f",
+        "register_shape_hash": "46aed4492ae9aa38f73862ecb506fce981301e7e8bb5589cdce04a58e4d8f61b",
+        "shape_hash": "324d2e469a7c3e63eeb7988f39d29483c0687d092b4f4939a37dbae7d735d5de",
+        "size": 528
+      },
+      "original_name": "TServerPlayer_playerEnteredLevel_void",
+      "original_string_refs": [
+        ".gmap"
+      ],
+      "proposed_name": "v18_TServerPlayer_playerEnteredLevel_void",
+      "semantic_match_already_present": false,
+      "source_basis": "server-player level and side-level membership update",
+      "spectron_current_name": "_ZN10MpGzgariDy10ljzVpbYj2pEv",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1915a8",
+      "spectron_metrics": {
+        "basic_block_count": 25,
+        "instruction_count": 152,
+        "mnemonic_hash": "63c994ac4a2f7a4eb6c309cca5b47d27e6ec6ec2a04db3b964729f5ad8597025",
+        "register_shape_hash": "3ecc17b8ad26649cfc9a82db0a2d1e874cf3afe3474faa155cface3081a31401",
+        "shape_hash": "9452a26dafca80eebc96e2731a6bb470a8a3c19b1ebd4941de8570ee8c193dc9",
+        "size": 608
+      },
+      "spectron_string_refs": [
+        ".gmap"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both replace the nickname, clear the cached wrapped form, derive the parenthesized guild portion when present, and update the admin-guild flag.",
+        "Both invoke the player-change event with the same oi argument shape and propagate a changed wrapped nickname to other players when the player is fully active.",
+        "The target uses rebuilt string, list, and event wrappers and stores the expanded player fields at shifted offsets, while preserving the exact 29-block control-flow shape."
+      ],
+      "match_kind": "manual-server-player-state-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x18dea0",
+      "original_metrics": {
+        "basic_block_count": 29,
+        "instruction_count": 176,
+        "mnemonic_hash": "d6107ce34024cb438b9fa9426a4f25439216325d6cc0082715f97ec8cb9891cd",
+        "register_shape_hash": "b4906db30a52706432fb752a6e461035527eded963e5f7eebf58c8bfcbf5e633",
+        "shape_hash": "e85abfbc2cd2724a05d3de90f52c61d604e17d3b8baf2b11b06801cc9cb2ab77",
+        "size": 708
+      },
+      "original_name": "TServerPlayer_setNick_TString_const",
+      "original_string_refs": [
+        "oi",
+        "onPlayerChanges"
+      ],
+      "proposed_name": "v18_TServerPlayer_setNick_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "server-player nickname normalization and change events",
+      "spectron_current_name": "_ZN10MpGzgariDy10zyGwKaIp6KERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x1927a0",
+      "spectron_metrics": {
+        "basic_block_count": 29,
+        "instruction_count": 200,
+        "mnemonic_hash": "5d5da64b010813143987e40c635634d496cbe8cf424d40f116e506f1709a3c1d",
+        "register_shape_hash": "a36c1213a26fa570e957191ca558e659ddfaaabaa621bc3a064f50ab319fc6ce",
+        "shape_hash": "32ff944cf2698199c7ad0dbbb6c15cb2a295de4b9c4b655c4374b9c774b73f25",
+        "size": 804
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both parse the compact encoded property stream with the same switch cases for nickname, power, head and body images, weapon images, GANI state, attachment, coordinates, chat, and status fields.",
+        "Both call the reviewed nickname, level-entry, movement, animation, and weapon-image paths from the property parser and dispatch player-change or hit-detection work after parsing.",
+        "The target preserves the distinctive image and setani literals and the large 263 to 265 block shape, with only rebuilt wrappers, shifted fields, and a few target-specific helper calls added."
+      ],
+      "match_kind": "manual-server-player-state-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x18e168",
+      "original_metrics": {
+        "basic_block_count": 263,
+        "instruction_count": 1814,
+        "mnemonic_hash": "7eb46fb359fdb9a5594048212844cbfaf1de0c382956addb704cb765725f95a7",
+        "register_shape_hash": "5d6a1203e0d30866d0a33e45d6f4419ee351fa102f88032c47d9bd49ffe92ce4",
+        "shape_hash": "52bcd67b66fbf89be007cd3920ed89d801e9a670e5c16ae90583b6053ea816f8",
+        "size": 7276
+      },
+      "original_name": "TServerPlayer_setProperties_TString_const",
+      "original_string_refs": [
+        ".gif",
+        ".png",
+        "head",
+        "head0.png",
+        "oi",
+        "onPlayerChanges",
+        "onRemotePlayerChats",
+        "os",
+        "setani"
+      ],
+      "proposed_name": "v18_TServerPlayer_setProperties_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "encoded server-player property parser",
+      "spectron_current_name": "_ZN10MpGzgariDy10Q3v7IaUAWzERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x192ac8",
+      "spectron_metrics": {
+        "basic_block_count": 265,
+        "instruction_count": 1856,
+        "mnemonic_hash": "86f2443f9271a54c5e7b6a53d247e5e0027bae9d3963fe7c8ae0888decb2719f",
+        "register_shape_hash": "c11de6d0abe246b3bb4d8c1e884e248d152b367f0bbc674efa08f7347a2d7957",
+        "shape_hash": "1757e556b6f7aa1241c11f15597a53d0c876f475dc4c1754e317c3d3e8a8a796",
+        "size": 7444
+      },
+      "spectron_string_refs": [
+        ".gif",
+        ".png",
+        "head",
+        "head0.png",
+        "os",
+        "setani"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both parse the compact weapon-image stream, locate or create show-image objects, and apply the same position, frame, image-part, color, zoom, and mode directives.",
+        "Both remove stale show images that were not present in the new stream and clear the temporary list at function exit.",
+        "The exact 65-block shape and matching directive loop identify the target despite rebuilt show-image, list, string, and player wrappers."
+      ],
+      "match_kind": "manual-server-player-state-context-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x19004c",
+      "original_metrics": {
+        "basic_block_count": 65,
+        "instruction_count": 422,
+        "mnemonic_hash": "132b2a7930599468d052f95617b215651563f74c356d1f0cf60b6a0d1ccf88cc",
+        "register_shape_hash": "f269d2c75efe8f6dff2937f058f4c792a5d2dfe28aaa5471f996bd1bd8d784f4",
+        "shape_hash": "16b0be0c04d3d8782ca5940a5f7200894b8641e810eb1204ec975346ef113a97",
+        "size": 1688
+      },
+      "original_name": "TServerPlayer_setWeaponImgs_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TServerPlayer_setWeaponImgs_TString_const",
+      "semantic_match_already_present": false,
+      "source_basis": "encoded player weapon show-image parser",
+      "spectron_current_name": "_ZN10MpGzgariDy10yn9_RaxvK2ERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_ea": "0x194a54",
+      "spectron_metrics": {
+        "basic_block_count": 65,
+        "instruction_count": 431,
+        "mnemonic_hash": "e975719d8c3c9a8ffdb45f37944d7a9c7f862d965941e5c9a808c7ec5358b7b1",
+        "register_shape_hash": "52e993007136005559334533adc34dd972c34642f7079a30aa462f4681fd4f71",
+        "shape_hash": "3768230c1de74289fe6913e9191891e2f5d58bc8c677821811ca1b24cac20d86",
+        "size": 1728
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_server_player_state_manual_translation_anchors_20260826",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v1_saved.json",
+    "spectron_features_sha256": "a8d58f85502362316ee99a0f79c2cd7a4ad5d6fac94aca0ee75bd0d2965fc2a1"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact.",
+    "The proposed v18_ labels preserve the readable 1.8 role while keeping the obfuscated 2.2 name in the evidence row.",
+    "The correspondence relies on the preserved server-player state machines, encoded property cases, distinctive literals, compatible block counts, and reviewed pseudocode rather than byte identity."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for server-player initialization, level membership, properties, nicknames, and weapon images",
+  "summary": {
+    "already_in_semantic_map": 0,
+    "anchor_count": 6,
+    "high_confidence_count": 6,
+    "new_context_anchor_count": 6,
+    "target_default_name_count": 0
+  }
+}

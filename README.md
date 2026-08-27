@@ -749,6 +749,14 @@ and hurt handling. All eight reopened successfully. The evidence is in
 `artifacts/spectron_player_movement_manual_translation_anchors_20260826.json`,
 and the v68 database SHA-256 is recorded in the checkpoint.
 
+A sixty-seventh disposable copy,
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v69.i64`,
+adds six reviewed server-player state anchors for default initialization, head
+updates, level membership, nickname propagation, encoded properties, and
+weapon-image parsing. All six reopened successfully. The evidence is in
+`artifacts/spectron_server_player_state_manual_translation_anchors_20260826.json`,
+and the v69 database SHA-256 is recorded in the checkpoint.
+
 A focused static comparison also reviewed the three changed-size socket
 functions that were not safe exact-match rename candidates. It records the
 shared TLS verification sequence, nonblocking connect state machine, and

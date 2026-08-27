@@ -157,6 +157,8 @@ def main() -> None:
     parser.add_argument("--player-visual-setter-verification", type=Path)
     parser.add_argument("--player-movement-anchors", type=Path)
     parser.add_argument("--player-movement-verification", type=Path)
+    parser.add_argument("--server-player-state-anchors", type=Path)
+    parser.add_argument("--server-player-state-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -2016,6 +2018,34 @@ def main() -> None:
         result["player_movement_anchors"] = player_movement
         result["interpretation"].append(
             "The sixty-sixth database revision also contains the separately reviewed player movement, item, and hurt-handling anchors."
+        )
+    server_player_state = None
+    if args.server_player_state_anchors or args.server_player_state_verification:
+        if not args.server_player_state_anchors or not args.server_player_state_verification:
+            raise ValueError(
+                "server-player-state anchors and server-player-state verification must be supplied together"
+            )
+        server_player_state_document = load(args.server_player_state_anchors)
+        server_player_state_verification = load(args.server_player_state_verification)
+        if server_player_state_document.get("artifact") != "spectron_server_player_state_manual_translation_anchors_20260826":
+            raise ValueError("unexpected server-player-state anchor artifact")
+        if not server_player_state_verification.get("verified"):
+            raise ValueError("server-player-state anchor reopen verification did not pass")
+        expected_server_player_state = len(server_player_state_document["anchors"])
+        if server_player_state_verification["verified_name_count"] != expected_server_player_state:
+            raise ValueError("server-player-state verification count differs from artifact")
+        server_player_state = {
+            "anchor_path": str(args.server_player_state_anchors),
+            "anchor_sha256": sha256_path(args.server_player_state_anchors),
+            "reopen_verification": str(args.server_player_state_verification),
+            "anchor_count": expected_server_player_state,
+            "verified_name_count": server_player_state_verification["verified_name_count"],
+            "reopen_failure_count": server_player_state_verification["failure_count"],
+        }
+    if server_player_state is not None:
+        result["server_player_state_anchors"] = server_player_state
+        result["interpretation"].append(
+            "The sixty-seventh database revision also contains the separately reviewed server-player state, property, level, nickname, and weapon-image anchors."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

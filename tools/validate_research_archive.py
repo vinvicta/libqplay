@@ -257,6 +257,9 @@ def main():
     spectron_player_movement_anchors = load_json(
         "artifacts/spectron_player_movement_manual_translation_anchors_20260826.json"
     )
+    spectron_server_player_state_anchors = load_json(
+        "artifacts/spectron_server_player_state_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -1687,6 +1690,16 @@ def main():
     check("Spectron player-movement semantic overlap", spectron_player_movement_anchors["summary"]["already_in_semantic_map"], 0)
     check("Spectron player-movement default targets", spectron_player_movement_anchors["summary"]["target_default_name_count"], 0)
     check(
+        "Spectron server-player-state artifact",
+        spectron_server_player_state_anchors["artifact"],
+        "spectron_server_player_state_manual_translation_anchors_20260826",
+    )
+    check("Spectron server-player-state network", spectron_server_player_state_anchors["network_contacted"], False)
+    check("Spectron server-player-state total", spectron_server_player_state_anchors["summary"]["anchor_count"], 6)
+    check("Spectron server-player-state high confidence", spectron_server_player_state_anchors["summary"]["high_confidence_count"], 6)
+    check("Spectron server-player-state semantic overlap", spectron_server_player_state_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron server-player-state default targets", spectron_server_player_state_anchors["summary"]["target_default_name_count"], 0)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -1760,7 +1773,8 @@ def main():
     check("Spectron checkpoint player-weapon-state anchor count", spectron_checkpoint["player_weapon_state_anchors"]["verified_name_count"], 4)
     check("Spectron checkpoint player-visual-setter anchor count", spectron_checkpoint["player_visual_setter_anchors"]["verified_name_count"], 5)
     check("Spectron checkpoint player-movement anchor count", spectron_checkpoint["player_movement_anchors"]["verified_name_count"], 8)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "5daae0f4a60036947f12748aa7b5ef89312b0fe3ac71aa10477d9bfe84f5bf75")
+    check("Spectron checkpoint server-player-state anchor count", spectron_checkpoint["server_player_state_anchors"]["verified_name_count"], 6)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "3772800d76e7e1cbc252dc7169a4c15c1ff342dc38bbc8cb43904d2739df360e")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -1888,6 +1902,7 @@ def main():
         spectron_player_weapon_state_anchors,
         spectron_player_visual_setter_anchors,
         spectron_player_movement_anchors,
+        spectron_server_player_state_anchors,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
