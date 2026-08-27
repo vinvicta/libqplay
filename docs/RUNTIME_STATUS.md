@@ -1414,6 +1414,13 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_tsocket_host_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+197. The next IDA pass translated the four-function `TSocketProperties`
+    destructor family: complete and deleting destructors plus both
+    non-virtual thunks. All four labels reopened successfully in the v137
+    disposable copy, which retains 1,495 default `sub_` functions. See
+    `artifacts/spectron_tsocket_properties_residual_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.

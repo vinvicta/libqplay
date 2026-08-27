@@ -3444,6 +3444,25 @@ functions. The v108 database has 1,684 remaining default `sub_` names. Its
 SHA-256 is
 `8350a43be6b31306954e34a17f77d742c8d1702015d671019d2bf2dd6c1bb1e1`.
 
+## Spectron TSocketProperties destructor residual anchors
+
+The v137 pass translated the complete `TSocketProperties` destructor family.
+The source constructor-like IDA labels are destructors in the underlying
+symbols, with the complete and deleting pairs each followed by a 16-byte
+non-virtual thunk.
+
+| 1.8 role | Source | Spectron symbol | Target | Main evidence |
+| --- | ---: | --- | ---: | --- |
+| complete destructor | `0x205e94` | `_ZN20XJLBgarMnAPropertiesD1Ev` | `0x20bfa0` | vtable and base cleanup |
+| complete destructor thunk | `0x205eb0` | `_ZThn16_N20XJLBgarMnAPropertiesD1Ev` | `0x20bfbc` | 16-byte this adjustment |
+| deleting destructor | `0x205eb8` | `_ZN20XJLBgarMnAPropertiesD0Ev` | `0x20bfc4` | base cleanup and delete |
+| deleting destructor thunk | `0x205ef0` | `_ZThn16_N20XJLBgarMnAPropertiesD0Ev` | `0x20bffc` | 16-byte this adjustment |
+
+All four pairs are exact normalized-shape matches. The target names were
+already non-default, and the labels reopened successfully in the v137 copy.
+Evidence is stored in
+`artifacts/spectron_tsocket_properties_residual_manual_translation_anchors_20260826.json`.
+
 ## Spectron TSocket host and logging residual anchors
 
 The v136 pass translated three helpers in the host and logging region. The
