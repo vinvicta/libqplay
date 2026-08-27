@@ -3444,6 +3444,39 @@ functions. The v108 database has 1,684 remaining default `sub_` names. Its
 SHA-256 is
 `8350a43be6b31306954e34a17f77d742c8d1702015d671019d2bf2dd6c1bb1e1`.
 
+## Spectron TSocket lifecycle residual anchors
+
+The v135 pass translated four remaining methods in the ordered `TSocket`
+lifecycle block. `checkScriptActive` sits between `bind` and `runScript`, but
+its exact match was already in the canonical semantic map and is documented
+as an existing boundary rather than duplicated here.
+
+| 1.8 role | Source | Spectron symbol | Target | Main evidence |
+| --- | ---: | --- | ---: | --- |
+| `TSocket_preDestroy_void` | `0x205780` | `_ZN10XJLBgarMnA10PWkBgafe1zEv` | `0x20b78c` | compact cleanup method |
+| `TSocket_checkAllowBind_int` | `0x2057a0` | `_ZN10XJLBgarMnA10MXSAgaXQDzEi` | `0x20b7ac` | wildcard and port-range policy |
+| `TSocket_bind_int_bool` | `0x205948` | `_ZN10XJLBgarMnA4bindEib` | `0x20b958` | connection and SSL setup |
+| `TSocket_runScript_void` | `0x205bdc` | `_ZN10XJLBgarMnA10_xWAgaiSGzEv` | `0x20bc1c` | state machine and client events |
+
+`preDestroy` is an exact normalized-shape match. The other three target
+bodies are larger because Spectron makes encoded string and temporary wrapper
+operations explicit. `checkAllowBind` still parses the allowed-port list and
+supports wildcard and range checks. `bind` still rejects disallowed ports,
+recreates the connection, applies SSL settings, and follows the bind success
+or failure event path. `runScript` retains the connect, new-client, and close
+state transitions, including insertion into `clients` and the base socket
+script call.
+
+The source-to-target deltas are `+0x600c` for `preDestroy` and
+`checkAllowBind`, `+0x6010` for `bind`, and `+0x6040` for `runScript`. The
+source bind jump at `0x205b94` and target jump at `0x20bbd4` remain separate
+boundaries, as does the target `TSocketProperties` block after `0x20bfa0`.
+
+All four labels reopened successfully in the v135 disposable copy. The full
+translation check still reports zero failures across 11,679 functions and
+1,497 default `sub_` names. Evidence is stored in
+`artifacts/spectron_tsocket_lifecycle_residual_manual_translation_anchors_20260826.json`.
+
 ## Spectron TSocket receive residual anchors
 
 The v134 pass translated the two larger receive-side `TSocket` methods. The

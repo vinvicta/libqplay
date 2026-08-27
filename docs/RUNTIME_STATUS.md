@@ -1398,6 +1398,14 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_tsocket_receive_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+195. The next IDA pass translated four residual `TSocket` lifecycle methods:
+    `preDestroy`, `checkAllowBind`, `bind`, and `runScript`. The nearby
+    `checkScriptActive` row was already present in the semantic map and was
+    preserved as a boundary. All four labels reopened successfully in the
+    v135 disposable copy, which retains 1,497 default `sub_` functions. See
+    `artifacts/spectron_tsocket_lifecycle_residual_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 ## Not verified
 
 * A live game-server login.
