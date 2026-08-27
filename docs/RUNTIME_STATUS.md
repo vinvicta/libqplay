@@ -1428,6 +1428,18 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+219. The next IDA pass translated seven exact-shape TPlayer flag setters:
+    six boolean setters and the integer enabled-features setter. The six
+    boolean rows form a contiguous source block at `0x17b59c..0x17b7b8`,
+    while `setEnabledFeatures` follows the already translated `setPaused`
+    interstitial at `0x17b8a0`. The matching obfuscated `W6NzgawMJy` targets
+    are at `0x17f940..0x17fb5c` and `0x17fc44`, with a constant `+0x43a4`
+    code relocation. All seven labels reopened successfully in the v160
+    disposable copy, which has 11,693 functions and 1,396 default `sub_`
+    names. See
+    `artifacts/spectron_tplayer_flag_setter_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 218. The next IDA pass translated 21 exact-shape scalar getters from
     `TPlayer`: local coordinates, health, inventory, combat power, movement
     flags, and visibility state. The source block at

@@ -337,6 +337,8 @@ def main() -> None:
     parser.add_argument("--tplayer-scalar-setter-verification", type=Path)
     parser.add_argument("--tplayer-scalar-getter-anchors", type=Path)
     parser.add_argument("--tplayer-scalar-getter-verification", type=Path)
+    parser.add_argument("--tplayer-flag-setter-anchors", type=Path)
+    parser.add_argument("--tplayer-flag-setter-verification", type=Path)
     args = parser.parse_args()
 
     translation = load(args.map)
@@ -4716,6 +4718,34 @@ def main() -> None:
         result["tplayer_scalar_getter_anchors"] = tplayer_scalar_getter
         result["interpretation"].append(
             "The one-hundred-fifty-ninth database revision also contains the separately reviewed exact-shape TPlayer scalar getter block."
+        )
+    tplayer_flag_setter = None
+    if args.tplayer_flag_setter_anchors or args.tplayer_flag_setter_verification:
+        if not args.tplayer_flag_setter_anchors or not args.tplayer_flag_setter_verification:
+            raise ValueError(
+                "TPlayer flag setter anchors and verification must be supplied together"
+            )
+        tplayer_flag_setter_document = load(args.tplayer_flag_setter_anchors)
+        tplayer_flag_setter_verification = load(args.tplayer_flag_setter_verification)
+        if tplayer_flag_setter_document.get("artifact") != "spectron_tplayer_flag_setter_manual_translation_anchors_20260826":
+            raise ValueError("unexpected TPlayer flag setter artifact")
+        if not tplayer_flag_setter_verification.get("verified"):
+            raise ValueError("TPlayer flag setter reopen verification did not pass")
+        expected_tplayer_flag_setter = len(tplayer_flag_setter_document["anchors"])
+        if tplayer_flag_setter_verification["verified_name_count"] != expected_tplayer_flag_setter:
+            raise ValueError("TPlayer flag setter verification count differs from artifact")
+        tplayer_flag_setter = {
+            "anchor_path": str(args.tplayer_flag_setter_anchors),
+            "anchor_sha256": sha256_path(args.tplayer_flag_setter_anchors),
+            "reopen_verification": str(args.tplayer_flag_setter_verification),
+            "anchor_count": expected_tplayer_flag_setter,
+            "verified_name_count": tplayer_flag_setter_verification["verified_name_count"],
+            "reopen_failure_count": tplayer_flag_setter_verification["failure_count"],
+        }
+    if tplayer_flag_setter is not None:
+        result["tplayer_flag_setter_anchors"] = tplayer_flag_setter
+        result["interpretation"].append(
+            "The one-hundred-sixtieth database revision also contains the separately reviewed exact-shape TPlayer flag-setter block."
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")

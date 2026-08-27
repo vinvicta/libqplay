@@ -527,6 +527,9 @@ def main():
     spectron_tplayer_scalar_getter_anchors = load_json(
         "artifacts/spectron_tplayer_scalar_getter_manual_translation_anchors_20260826.json"
     )
+    spectron_tplayer_flag_setter_anchors = load_json(
+        "artifacts/spectron_tplayer_flag_setter_manual_translation_anchors_20260826.json"
+    )
     spectron_runtime = load_json(
         "artifacts/spectron_runtime_crash_control_20260826.json"
     )
@@ -2943,6 +2946,20 @@ def main():
     check("Spectron TPlayer scalar getter storage relocation", spectron_tplayer_scalar_getter_anchors["summary"]["constant_storage_offset_delta"], 24)
     check("Spectron TPlayer scalar getter mask relocation", spectron_tplayer_scalar_getter_anchors["summary"]["constant_mask_offset_delta"], 24)
     check(
+        "Spectron TPlayer flag setter artifact",
+        spectron_tplayer_flag_setter_anchors["artifact"],
+        "spectron_tplayer_flag_setter_manual_translation_anchors_20260826",
+    )
+    check("Spectron TPlayer flag setter network", spectron_tplayer_flag_setter_anchors["network_contacted"], False)
+    check("Spectron TPlayer flag setter total", spectron_tplayer_flag_setter_anchors["summary"]["anchor_count"], 7)
+    check("Spectron TPlayer flag setter high confidence", spectron_tplayer_flag_setter_anchors["summary"]["high_confidence_count"], 7)
+    check("Spectron TPlayer flag setter semantic overlap", spectron_tplayer_flag_setter_anchors["summary"]["already_in_semantic_map"], 0)
+    check("Spectron TPlayer flag setter default targets", spectron_tplayer_flag_setter_anchors["summary"]["target_default_name_count"], 0)
+    check("Spectron TPlayer flag setter exact-shape count", spectron_tplayer_flag_setter_anchors["summary"]["exact_shape_anchor_count"], 7)
+    check("Spectron TPlayer flag setter layout-change count", spectron_tplayer_flag_setter_anchors["summary"]["layout_change_anchor_count"], 0)
+    check("Spectron TPlayer flag setter address relocation", spectron_tplayer_flag_setter_anchors["summary"]["constant_target_delta"], "+0x43a4")
+    check("Spectron TPlayer flag setter interstitial count", spectron_tplayer_flag_setter_anchors["summary"]["existing_interstitial_count"], 1)
+    check(
         "Spectron checkpoint artifact",
         spectron_checkpoint["artifact"],
         "spectron_translation_checkpoint_20260826",
@@ -3107,7 +3124,8 @@ def main():
     check("Spectron checkpoint TServerPlayer accessor anchor count", spectron_checkpoint["tserverplayer_accessor_anchors"]["verified_name_count"], 37)
     check("Spectron checkpoint TPlayer scalar setter anchor count", spectron_checkpoint["tplayer_scalar_setter_anchors"]["verified_name_count"], 10)
     check("Spectron checkpoint TPlayer scalar getter anchor count", spectron_checkpoint["tplayer_scalar_getter_anchors"]["verified_name_count"], 21)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "75cd77b15f4c27b4f73f7a39797f76459c42cb8d6abf3b75c3ba99fbddea914d")
+    check("Spectron checkpoint TPlayer flag setter anchor count", spectron_checkpoint["tplayer_flag_setter_anchors"]["verified_name_count"], 7)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "bc4bfdf5b0b3f82dfc9e61802c6cafdaad535b8c876a77f1e6612def5d8fa9f8")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
