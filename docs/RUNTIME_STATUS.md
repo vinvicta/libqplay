@@ -1428,6 +1428,16 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+208. The next IDA pass translated the remaining `randomstring` GSFunctions
+    callback. Its source table pointer at `0x3872c0` and target pointer at
+    `0x39a3e0` preserve the position immediately after `strequals`. The target
+    retains trailing-comma trimming, random list selection, and cleanup, with
+    a small 260-to-264-byte wrapper-induced layout change. The label reopened
+    successfully in the v149 disposable copy, which has 11,681 functions and
+    1,456 default `sub_` names. See
+    `artifacts/spectron_gsfunctions_randomstring_residual_manual_translation_anchors_20260826.json`
+    and `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 207. The next IDA pass translated 13 remaining GSFunctions callbacks using
     the preserved static script-table order and normalized function shape.
     They cover `getstringkeys`, `callnpc`, map coordinates, image dimensions,
