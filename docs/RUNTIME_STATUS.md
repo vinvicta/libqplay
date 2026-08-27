@@ -1460,6 +1460,18 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_static_callback_role_correction.py`, and
     `tools/ida_dump_function_data_refs.py`.
 
+242. The next IDA pass translated the remaining short
+    `TClientEnvironment_initGraphics_void` wrapper. Source `0x15ce2c` maps
+    to target `0x15fe84`, between the target free-graphics and window-size
+    methods in the obfuscated `a7qxJaHqKV` class. The pair is an exact
+    normalized-shape match: 24 bytes, six instructions, four blocks, and
+    three branches. The alias reopened successfully in the v183 copy, which
+    has 11,694 functions, 3,641 high-confidence labels, and 1,236 default
+    `sub_` names. See
+    `artifacts/spectron_client_environment_graphics_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_client_environment_graphics_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 241. The next IDA pass translated four small `TGameEnvironment` startup and
     property callbacks in the obfuscated `QYZugaRKGu` class. The target
     registration table decodes `allplayerscount`, `adventure_quit`,

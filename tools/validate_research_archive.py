@@ -281,6 +281,9 @@ def main():
     spectron_game_environment_anchors = load_json(
         "artifacts/spectron_game_environment_manual_translation_anchors_20260827.json"
     )
+    spectron_client_environment_graphics_anchors = load_json(
+        "artifacts/spectron_client_environment_graphics_manual_translation_anchors_20260827.json"
+    )
     spectron_particle_emitter_anchors = load_json(
         "artifacts/spectron_particle_emitter_manual_translation_anchors_20260826.json"
     )
@@ -2444,6 +2447,39 @@ def main():
         "0xea870",
     )
     check(
+        "Spectron client-environment graphics artifact",
+        spectron_client_environment_graphics_anchors["artifact"],
+        "spectron_client_environment_graphics_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron client-environment graphics network",
+        spectron_client_environment_graphics_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron client-environment graphics total",
+        spectron_client_environment_graphics_anchors["summary"]["anchor_count"],
+        1,
+    )
+    check(
+        "Spectron client-environment graphics high confidence",
+        spectron_client_environment_graphics_anchors["summary"]["high_confidence_count"],
+        1,
+    )
+    check(
+        "Spectron client-environment graphics exact-shape count",
+        spectron_client_environment_graphics_anchors["summary"]["exact_shape_anchor_count"],
+        1,
+    )
+    check(
+        "Spectron client-environment graphics target",
+        {
+            row["original_name"]: row
+            for row in spectron_client_environment_graphics_anchors["anchors"]
+        }["TClientEnvironment_initGraphics_void"]["spectron_ea"],
+        "0x15fe84",
+    )
+    check(
         "Spectron particle-emitter artifact",
         spectron_particle_emitter_anchors["artifact"],
         "spectron_particle_emitter_manual_translation_anchors_20260826",
@@ -3781,7 +3817,8 @@ def main():
     check("Spectron checkpoint HTTP cleanup anchor count", spectron_checkpoint["http_request_cleanup_anchors"]["verified_name_count"], 5)
     check("Spectron checkpoint TSocket residual anchor count", spectron_checkpoint["tsocket_residual_anchors"]["verified_name_count"], 4)
     check("Spectron checkpoint game-environment anchor count", spectron_checkpoint["game_environment_anchors"]["verified_name_count"], 4)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "b9baaa06cc61480f4fcfd83b7579c7631e1aa4ffadd2c62337720d9e8a531460")
+    check("Spectron checkpoint client-environment graphics anchor count", spectron_checkpoint["client_environment_graphics_anchors"]["verified_name_count"], 1)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "cbe7bf4090401422921c716334913ee53ebdf1dd042937651588c82b2e360de6")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -3916,6 +3953,7 @@ def main():
         spectron_http_request_cleanup_anchors,
         spectron_tsocket_residual_anchors,
         spectron_game_environment_anchors,
+        spectron_client_environment_graphics_anchors,
         spectron_particle_emitter_anchors,
         spectron_server_animation_anchors,
         spectron_player_lifecycle_anchors,

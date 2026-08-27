@@ -2538,6 +2538,9 @@ proves the local native TLS path, not a current live certificate or service.
 * `artifacts/spectron_game_environment_manual_translation_anchors_20260827.json`
   records the four reviewed `TGameEnvironment` startup and property callback
   roles, including the target registration-table evidence.
+* `artifacts/spectron_client_environment_graphics_manual_translation_anchors_20260827.json`
+  records the exact-shape `TClientEnvironment_initGraphics_void` wrapper
+  and its class-local neighbor evidence.
 * `artifacts/spectron_npc_helper_manual_translation_anchors_20260826.json`
   records the 15 reviewed `TServerNPC` blocking, draw-mode, visibility, bow,
   and pelt helpers.
@@ -2919,6 +2922,9 @@ proves the local native TLS path, not a current live certificate or service.
   the four TGameEnvironment startup and property callback roles with target
   registration-table evidence, normalized metrics, and the adventure-quit
   layout change.
+  The `tools/generate_spectron_client_environment_graphics_anchors.py`
+  generator records the exact-shape client-environment graphics initializer
+  with target class and neighbor evidence.
   The `tools/generate_spectron_npc_helper_anchors.py` generator records
   reviewed `TServerNPC` helper roles with exact hash checks and IDA-context
   evidence.
