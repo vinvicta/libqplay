@@ -79,6 +79,8 @@ def main() -> None:
     parser.add_argument("--gui-text-list-entry-verification", type=Path)
     parser.add_argument("--encryption-graalvar-anchors", type=Path)
     parser.add_argument("--encryption-graalvar-verification", type=Path)
+    parser.add_argument("--compact-residual-anchors", type=Path)
+    parser.add_argument("--compact-residual-verification", type=Path)
     parser.add_argument("--player-helper-anchors", type=Path)
     parser.add_argument("--player-helper-verification", type=Path)
     parser.add_argument("--input-window-anchors", type=Path)
@@ -688,6 +690,44 @@ def main() -> None:
         result["encryption_graalvar_anchors"] = encryption_graalvar
         result["interpretation"].append(
             "The two-hundred-twelfth database revision also contains the separately reviewed TEncryption and TGraalVar compact helpers."
+        )
+    compact_residual = None
+    if args.compact_residual_anchors or args.compact_residual_verification:
+        if not args.compact_residual_anchors or not args.compact_residual_verification:
+            raise ValueError(
+                "compact-residual anchors and compact-residual verification must be supplied together"
+            )
+        compact_residual_document = load(args.compact_residual_anchors)
+        compact_residual_verification = load(args.compact_residual_verification)
+        if (
+            compact_residual_document.get("artifact")
+            != "spectron_compact_residual_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected compact-residual anchor artifact")
+        if not compact_residual_verification.get("verified"):
+            raise ValueError("compact-residual anchor reopen verification did not pass")
+        expected_compact_residual = len(compact_residual_document["anchors"])
+        if (
+            compact_residual_verification["verified_name_count"]
+            != expected_compact_residual
+        ):
+            raise ValueError(
+                "compact-residual verification count differs from artifact"
+            )
+        compact_residual = {
+            "anchor_path": str(args.compact_residual_anchors),
+            "anchor_sha256": sha256_path(args.compact_residual_anchors),
+            "reopen_verification": str(args.compact_residual_verification),
+            "anchor_count": expected_compact_residual,
+            "verified_name_count": compact_residual_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": compact_residual_verification["failure_count"],
+        }
+    if compact_residual is not None:
+        result["compact_residual_anchors"] = compact_residual
+        result["interpretation"].append(
+            "The two-hundred-thirteenth database revision also contains the separately reviewed compact property, wrapper, handler, cache, and script anchors."
         )
     runtime_path = None
     if args.runtime_path_anchors or args.runtime_path_verification:

@@ -140,6 +140,9 @@ def main():
     spectron_encryption_graalvar_anchors = load_json(
         "artifacts/spectron_encryption_graalvar_manual_translation_anchors_20260827.json"
     )
+    spectron_compact_residual_anchors = load_json(
+        "artifacts/spectron_compact_residual_manual_translation_anchors_20260827.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -2143,6 +2146,24 @@ def main():
     check("Spectron encryption-GraalVar exact-shape count", spectron_encryption_graalvar_anchors["summary"]["exact_shape_anchor_count"], 3)
     check("Spectron encryption-GraalVar full-metric exact count", spectron_encryption_graalvar_anchors["summary"]["full_metric_exact_count"], 3)
     check("Spectron encryption-GraalVar default targets", spectron_encryption_graalvar_anchors["summary"]["target_default_name_count"], 0)
+    check(
+        "Spectron compact-residual artifact",
+        spectron_compact_residual_anchors["artifact"],
+        "spectron_compact_residual_manual_translation_anchors_20260827",
+    )
+    check("Spectron compact-residual network", spectron_compact_residual_anchors["network_contacted"], False)
+    check("Spectron compact-residual total", spectron_compact_residual_anchors["summary"]["anchor_count"], 13)
+    check("Spectron compact-residual high confidence", spectron_compact_residual_anchors["summary"]["high_confidence_count"], 13)
+    check("Spectron compact-residual exact-shape count", spectron_compact_residual_anchors["summary"]["exact_shape_anchor_count"], 13)
+    check("Spectron compact-residual full-metric exact count", spectron_compact_residual_anchors["summary"]["full_metric_exact_count"], 2)
+    check("Spectron compact-residual register-detail differences", spectron_compact_residual_anchors["summary"]["register_detail_difference_count"], 11)
+    check("Spectron compact-residual layout-change count", spectron_compact_residual_anchors["summary"]["layout_change_anchor_count"], 1)
+    check("Spectron compact-residual default targets", spectron_compact_residual_anchors["summary"]["target_default_name_count"], 12)
+    check(
+        "Spectron compact-residual folded canDownload note",
+        any("canDownload" in item for item in spectron_compact_residual_anchors["interpretation"]),
+        True,
+    )
     check(
         "Spectron TString artifact",
         spectron_tstring_anchors["artifact"],
@@ -4985,7 +5006,7 @@ def main():
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1210)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1198)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -5195,7 +5216,8 @@ def main():
     check("Spectron checkpoint GUI text-list anchor count", spectron_checkpoint["gui_text_list_anchors"]["verified_name_count"], 8)
     check("Spectron checkpoint GUI text-list entry anchor count", spectron_checkpoint["gui_text_list_entry_anchors"]["verified_name_count"], 3)
     check("Spectron checkpoint encryption-GraalVar anchor count", spectron_checkpoint["encryption_graalvar_anchors"]["verified_name_count"], 3)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "1eeda98f88a0816f00340f010c724695f36f66c08c6622241610ac680e30270d")
+    check("Spectron checkpoint compact-residual anchor count", spectron_checkpoint["compact_residual_anchors"]["verified_name_count"], 13)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "e6973d7c25827bc7cebf9f7f905376fd3eb6162e514f053c85b81baaa20381c5")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -5284,6 +5306,7 @@ def main():
         spectron_gui_text_list_anchors,
         spectron_gui_text_list_entry_anchors,
         spectron_encryption_graalvar_anchors,
+        spectron_compact_residual_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

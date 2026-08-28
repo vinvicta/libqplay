@@ -1536,6 +1536,25 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_encryption_graalvar_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+272. The next IDA pass resolved 13 compact residual helpers that fall below
+    the broad semantic matcher cutoff. They cover TGaniObject and TPlayer
+    properties, drawing-panel cache state, TClient inbound handlers,
+    TCachedStream cache-size setters, TFileDownload script callbacks,
+    TCallStackEntry, and TScriptUniverse. Property-table and handler-table
+    positions disambiguate the short bodies. All 13 rows match normalized
+    shape; two match every feature and 11 differ only in register detail. One
+    child-field getter records a source `+748` to target `+772` layout shift.
+    Twelve default target names were replaced because the clear-files target
+    already had an ABI name. The aliases reopened successfully in the v213
+    copy, which has 11,694 functions, 3,641 high-confidence labels, and 1,198
+    default `sub_` names, with zero semantic reopen failures. The source
+    `TFileDownload_canDownload_void` body remains a folded-body note because
+    its client-present predicate shares the translated TPlayer online target
+    and has no distinct target table entry. See
+    `artifacts/spectron_compact_residual_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_compact_residual_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 267. The next IDA pass resolved eight small `THTMLPage` methods. They cover
     font-pointer cleanup, dirty and word-wrap state, parse tags, selection,
     URL and line initialization, and tab-stop replacement. The Spectron
