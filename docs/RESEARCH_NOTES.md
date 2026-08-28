@@ -12092,6 +12092,94 @@ and the checkpoint is
 This pass changed only the disposable IDA database. It did not patch the APK
 or either native library, and it performed no DNS, HTTP, or TLS operation.
 
+## 2026-08-28: Spectron TOptions preference property aliases
+
+The v239 pass translates the remaining default callbacks in the target's
+`TOptions` preference table. This is a useful family to finish because the
+callbacks are small, repeated, and easy to misidentify if the registration
+table is ignored. The source table starts at `0x37b148`, and the canonical
+Spectron table starts at `0x38e168`. The target rows remain in the same logical
+order even though the target class and its global variables use obfuscated
+names.
+
+The mapping below records every callback renamed in this pass. Source and
+target table records are included so another analyst can start from the script
+property registration rather than relying only on address proximity.
+
+| 1.8 callback | Source | Spectron target | Source record | Target record | Property | Role |
+| --- | ---: | ---: | ---: | ---: | --- | --- |
+| `TOptions_get_graalplugincookie` | `0x16a4b8` | `0x16df10` | `0x37b148` | `0x38e168` | `graalplugincookie` | getter |
+| `TOptions_get_isgraalplugin` | `0x16a26c` | `0x16dcc4` | `0x37b178` | `0x38e198` | `isgraalplugin` | getter |
+| `TOptions_get_pref__graal__dontsavepasswords` | `0x16a27c` | `0x16dcd4` | `0x37b1a8` | `0x38e1c8` | `$pref::graal::dontsavepasswords` | getter |
+| `TOptions_set_pref__graal__dontsavepasswords` | `0x16a28c` | `0x16dce4` | `0x37b1a8` | `0x38e1c8` | `$pref::graal::dontsavepasswords` | setter |
+| `TOptions_get_pref__graal__limitnicknames` | `0x16a29c` | `0x16dcf4` | `0x37b1d8` | `0x38e1f8` | `$pref::graal::limitnicknames` | getter |
+| `TOptions_set_pref__graal__limitnicknames` | `0x16a2ac` | `0x16dd04` | `0x37b1d8` | `0x38e1f8` | `$pref::graal::limitnicknames` | setter |
+| `TOptions_get_pref__graal__nicknamelimit` | `0x16a2bc` | `0x16dd14` | `0x37b208` | `0x38e228` | `$pref::graal::nicknamelimit` | getter |
+| `TOptions_set_pref__graal__nicknamelimit` | `0x16a2cc` | `0x16dd24` | `0x37b208` | `0x38e228` | `$pref::graal::nicknamelimit` | setter |
+| `TOptions_get_drawallinsidenpcs` | `0x16a2dc` | `0x16dd34` | `0x37b238` | `0x38e258` | `drawallinsidenpcs` | getter |
+| `TOptions_set_drawallinsidenpcs` | `0x16a2ec` | `0x16dd44` | `0x37b238` | `0x38e258` | `drawallinsidenpcs` | setter |
+| `TOptions_get_lighteffectsenabled` | `0x16a2fc` | `0x16dd54` | `0x37b268` | `0x38e288` | `lighteffectsenabled` | getter |
+| `TOptions_set_lighteffectsenabled` | `0x16a30c` | `0x16dd64` | `0x37b268` | `0x38e288` | `lighteffectsenabled` | setter |
+| `TOptions_get_weathereffectsenabled` | `0x16a31c` | `0x16dd74` | `0x37b298` | `0x38e2b8` | `weathereffectsenabled` | getter |
+| `TOptions_set_weathereffectsenabled` | `0x16a32c` | `0x16dd84` | `0x37b298` | `0x38e2b8` | `weathereffectsenabled` | setter |
+| `TOptions_get_particleeffectsenabled` | `0x16a33c` | `0x16dd94` | `0x37b2c8` | `0x38e2e8` | `particleeffectsenabled` | getter |
+| `TOptions_set_particleeffectsenabled` | `0x16a34c` | `0x16dda4` | `0x37b2c8` | `0x38e2e8` | `particleeffectsenabled` | setter |
+| `TOptions_get_pref__audio__reversestereo` | `0x16a35c` | `0x16ddb4` | `0x37b2f8` | `0x38e318` | `$pref::audio::reversestereo` | getter |
+| `TOptions_set_pref__audio__reversestereo` | `0x16a36c` | `0x16ddc4` | `0x37b2f8` | `0x38e318` | `$pref::audio::reversestereo` | setter |
+| `TOptions_get_pref__audio__midivolume` | `0x16a37c` | `0x16ddd4` | `0x37b328` | `0x38e348` | `$pref::audio::midivolume` | getter |
+| `TOptions_set_pref__audio__midivolume` | `0x16a38c` | `0x16dde4` | `0x37b328` | `0x38e348` | `$pref::audio::midivolume` | setter |
+| `TOptions_get_pref__audio__mp3volume` | `0x16a39c` | `0x16ddf4` | `0x37b358` | `0x38e378` | `$pref::audio::mp3volume` | getter |
+| `TOptions_set_pref__audio__mp3volume` | `0x16a3ac` | `0x16de04` | `0x37b358` | `0x38e378` | `$pref::audio::mp3volume` | setter |
+| `TOptions_get_pref__audio__radiovolume` | `0x16a3bc` | `0x16de14` | `0x37b388` | `0x38e3a8` | `$pref::audio::radiovolume` | getter |
+| `TOptions_set_pref__audio__radiovolume` | `0x16a3cc` | `0x16de24` | `0x37b388` | `0x38e3a8` | `$pref::audio::radiovolume` | setter |
+| `TOptions_get_pref__audio__sfxvolume` | `0x16a3dc` | `0x16de34` | `0x37b3b8` | `0x38e3d8` | `$pref::audio::sfxvolume` | getter |
+| `TOptions_set_pref__audio__sfxvolume` | `0x16a3ec` | `0x16de44` | `0x37b3b8` | `0x38e3d8` | `$pref::audio::sfxvolume` | setter |
+| `TOptions_get_pref__video__defaultguistyle` | `0x16a480` | `0x16ded8` | `0x37b3e8` | `0x38e408` | `$pref::video::defaultguistyle` | getter |
+| `TOptions_get_pref__video__externalguistyle` | `0x16a448` | `0x16dea0` | `0x37b418` | `0x38e438` | `$pref::video::externalguistyle` | getter |
+| `TOptions_get_pref__video__screenshotformat` | `0x16a410` | `0x16de68` | `0x37b448` | `0x38e468` | `$pref::video::screenshotformat` | getter |
+| `TOptions_set_pref__video__screenshotformat` | `0x16a3fc` | `0x16de54` | `0x37b448` | `0x38e468` | `$pref::video::screenshotformat` | setter |
+
+The bodies fall into a few clear groups. `graalplugincookie`, the two GUI
+style getters, and the screenshot-format getter copy a global string into the
+script result. The screenshot-format setter stores the incoming script string.
+The plugin flag, password-save flag, nickname-limit flag, and rendering flags
+are direct boolean or integer accesses. The audio block follows the same
+pattern for reverse stereo and the four volume values. None of these callbacks
+performs validation, file I/O, or network I/O on its own.
+
+There are two important table details. First, getter and setter rows share one
+registration record for each property, so the record address alone is not
+enough to distinguish the callback. Second, the target setters for
+`$pref::video::defaultguistyle` and `$pref::video::externalguistyle` were
+already named and reviewed in v100 at `0x16e03c` and `0x16df48`. They were
+therefore excluded from this batch. Their getters were still default callbacks
+and are included in the table above.
+
+The source and target feature exports give a useful quality check. Every one
+of the 30 selected rows has the same normalized instruction shape, including
+the same instruction count, branch shape, call count, and return behavior.
+None has a complete metric match because the target register-detail hash is
+different for every row. The difference comes from the target's rebuilt string
+and global-access helpers, not from a different property operation. The
+artifact keeps those differences visible rather than presenting them as byte
+identity.
+
+The aliases were applied to a copy of v238 using
+`tools/ida_apply_spectron_manual_anchors.py`, generated by
+`tools/generate_spectron_options_property_anchors.py`, and reopened with
+`tools/ida_verify_spectron_manual_anchors.py`. The verification report records
+30 resolved names and zero failures. The v239 IDA database contains 11,696
+functions and 990 remaining default `sub_` names. Its SHA-256 is
+`4b83ebdffa26611933a959770f39e1d43b1ff64d796d7d28c2c04c3aec4ff021`.
+The complete evidence is in
+`artifacts/spectron_options_property_residual_manual_translation_anchors_20260828.json`,
+and the persisted database identity is in
+`artifacts/spectron_translation_checkpoint_20260828_v239.json`.
+
+This was a static IDA pass. It changed only the disposable analysis database
+and documentation. It performed no DNS, HTTP, TLS, APK, or native-library
+operation.
+
 ## 2026-08-28: Spectron TGaniObject and TGaniParam property aliases
 
 The v238 pass translates eight residual callbacks from the animation property

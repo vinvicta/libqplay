@@ -3449,6 +3449,69 @@ The database identity is recorded in
 This pass changed only the disposable IDA database and performed no DNS, HTTP,
 or TLS operation.
 
+## Spectron TOptions preference property aliases
+
+The v239 pass resolves 30 residual callbacks from the `TOptions` static
+property table. The source table starts at `0x37b148`, while the canonical
+Spectron table starts at `0x38e168`. The table names, source getter or setter
+roles, and matching decompiled global accesses provide the mapping even though
+the target's C++ names are obfuscated.
+
+| 1.8 callback | Source | Spectron target | Script name | Target record | Role |
+| --- | ---: | ---: | --- | ---: | --- |
+| `TOptions_get_graalplugincookie` | `0x16a4b8` | `0x16df10` | `graalplugincookie` | `0x38e168` | getter |
+| `TOptions_get_isgraalplugin` | `0x16a26c` | `0x16dcc4` | `isgraalplugin` | `0x38e198` | getter |
+| `TOptions_get_pref__graal__dontsavepasswords` | `0x16a27c` | `0x16dcd4` | `$pref::graal::dontsavepasswords` | `0x38e1c8` | getter |
+| `TOptions_set_pref__graal__dontsavepasswords` | `0x16a28c` | `0x16dce4` | `$pref::graal::dontsavepasswords` | `0x38e1c8` | setter |
+| `TOptions_get_pref__graal__limitnicknames` | `0x16a29c` | `0x16dcf4` | `$pref::graal::limitnicknames` | `0x38e1f8` | getter |
+| `TOptions_set_pref__graal__limitnicknames` | `0x16a2ac` | `0x16dd04` | `$pref::graal::limitnicknames` | `0x38e1f8` | setter |
+| `TOptions_get_pref__graal__nicknamelimit` | `0x16a2bc` | `0x16dd14` | `$pref::graal::nicknamelimit` | `0x38e228` | getter |
+| `TOptions_set_pref__graal__nicknamelimit` | `0x16a2cc` | `0x16dd24` | `$pref::graal::nicknamelimit` | `0x38e228` | setter |
+| `TOptions_get_drawallinsidenpcs` | `0x16a2dc` | `0x16dd34` | `drawallinsidenpcs` | `0x38e258` | getter |
+| `TOptions_set_drawallinsidenpcs` | `0x16a2ec` | `0x16dd44` | `drawallinsidenpcs` | `0x38e258` | setter |
+| `TOptions_get_lighteffectsenabled` | `0x16a2fc` | `0x16dd54` | `lighteffectsenabled` | `0x38e288` | getter |
+| `TOptions_set_lighteffectsenabled` | `0x16a30c` | `0x16dd64` | `lighteffectsenabled` | `0x38e288` | setter |
+| `TOptions_get_weathereffectsenabled` | `0x16a31c` | `0x16dd74` | `weathereffectsenabled` | `0x38e2b8` | getter |
+| `TOptions_set_weathereffectsenabled` | `0x16a32c` | `0x16dd84` | `weathereffectsenabled` | `0x38e2b8` | setter |
+| `TOptions_get_particleeffectsenabled` | `0x16a33c` | `0x16dd94` | `particleeffectsenabled` | `0x38e2e8` | getter |
+| `TOptions_set_particleeffectsenabled` | `0x16a34c` | `0x16dda4` | `particleeffectsenabled` | `0x38e2e8` | setter |
+| `TOptions_get_pref__audio__reversestereo` | `0x16a35c` | `0x16ddb4` | `$pref::audio::reversestereo` | `0x38e318` | getter |
+| `TOptions_set_pref__audio__reversestereo` | `0x16a36c` | `0x16ddc4` | `$pref::audio::reversestereo` | `0x38e318` | setter |
+| `TOptions_get_pref__audio__midivolume` | `0x16a37c` | `0x16ddd4` | `$pref::audio::midivolume` | `0x38e348` | getter |
+| `TOptions_set_pref__audio__midivolume` | `0x16a38c` | `0x16dde4` | `$pref::audio::midivolume` | `0x38e348` | setter |
+| `TOptions_get_pref__audio__mp3volume` | `0x16a39c` | `0x16ddf4` | `$pref::audio::mp3volume` | `0x38e378` | getter |
+| `TOptions_set_pref__audio__mp3volume` | `0x16a3ac` | `0x16de04` | `$pref::audio::mp3volume` | `0x38e378` | setter |
+| `TOptions_get_pref__audio__radiovolume` | `0x16a3bc` | `0x16de14` | `$pref::audio::radiovolume` | `0x38e3a8` | getter |
+| `TOptions_set_pref__audio__radiovolume` | `0x16a3cc` | `0x16de24` | `$pref::audio::radiovolume` | `0x38e3a8` | setter |
+| `TOptions_get_pref__audio__sfxvolume` | `0x16a3dc` | `0x16de34` | `$pref::audio::sfxvolume` | `0x38e3d8` | getter |
+| `TOptions_set_pref__audio__sfxvolume` | `0x16a3ec` | `0x16de44` | `$pref::audio::sfxvolume` | `0x38e3d8` | setter |
+| `TOptions_get_pref__video__defaultguistyle` | `0x16a480` | `0x16ded8` | `$pref::video::defaultguistyle` | `0x38e408` | getter |
+| `TOptions_get_pref__video__externalguistyle` | `0x16a448` | `0x16dea0` | `$pref::video::externalguistyle` | `0x38e438` | getter |
+| `TOptions_get_pref__video__screenshotformat` | `0x16a410` | `0x16de68` | `$pref::video::screenshotformat` | `0x38e468` | getter |
+| `TOptions_set_pref__video__screenshotformat` | `0x16a3fc` | `0x16de54` | `$pref::video::screenshotformat` | `0x38e468` | setter |
+
+The first two rows expose plugin state. The Graal preference rows cover the
+password-save switch, nickname validation, and nickname length. The rendering
+rows cover NPC drawing, light, weather, and particles. The audio rows cover
+reverse stereo and MIDI, MP3, radio, and SFX volume. The final rows copy or
+store the default GUI style, external GUI style, and screenshot format strings.
+
+The target setters for `defaultguistyle` and `externalguistyle` were already
+translated in the earlier v100 options pass at `0x16e03c` and `0x16df48`, so
+they are not duplicated in this batch. The remaining 30 target callbacks all
+started with default `sub_` names. Their normalized ARM64 instruction shape
+matches the source rows, while the register-detail hash differs in each case
+because the target uses rebuilt string and global-access helpers. This is a
+translation record, not a claim that the two binaries are byte-identical.
+
+The aliases are materialized in
+`analysis/spectron_libqplay_translated_v239.i64`. The machine-readable record
+is `artifacts/spectron_options_property_residual_manual_translation_anchors_20260828.json`,
+generated by `tools/generate_spectron_options_property_anchors.py`. The v239
+checkpoint is `artifacts/spectron_translation_checkpoint_20260828_v239.json`.
+The clean reopen verified all 30 names. No DNS, HTTP, TLS, APK, or native
+library operation was part of this pass.
+
 ## Spectron TGaniObject and TGaniParam property aliases
 
 The v238 pass resolves eight residual target callbacks from the animation

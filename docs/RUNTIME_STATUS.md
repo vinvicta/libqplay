@@ -568,6 +568,20 @@ This is the short handoff view. The full reasoning and command history are in
      `tools/generate_spectron_gani_property_anchors.py`, and
      `artifacts/spectron_translation_checkpoint_20260828_v238.json`.
 
+63i. The v239 IDA checkpoint adds 30 high-confidence aliases from the
+     residual `TOptions` preference table: 17 getters and 13 setters covering
+     plugin state, nickname rules, rendering effects, audio preferences, and
+     screenshot format. Two video-style setters were already translated and
+     were left unchanged. All 30 selected rows match the normalized ARM64
+     instruction shape; each retains a target register-detail difference. The
+     clean reopen has 11,696 functions and 990 remaining default `sub_` names.
+     The database SHA-256 is
+     `4b83ebdffa26611933a959770f39e1d43b1ff64d796d7d28c2c04c3aec4ff021`.
+     See
+     `artifacts/spectron_options_property_residual_manual_translation_anchors_20260828.json`,
+     `tools/generate_spectron_options_property_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260828_v239.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The
