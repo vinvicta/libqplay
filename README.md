@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v281 Spectron database. It
-contains 11,696 functions and 609 remaining default `sub_` names. The v263
+The current documented translation frontier is the v282 Spectron database. It
+contains 11,696 functions and 602 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -81,6 +81,10 @@ array realization and access, pool release, and manager teardown. Nine match
 normalized features, six match the complete feature set, and two retain an
 explicit call-layout difference caused by source PLT calls versus target
 exports.
+The v282 revision adds eight high-confidence libjpeg one-pass color-quantizer
+labels. They cover the plain, ordered-dither, and Floyd-Steinberg row paths,
+the start and finish callbacks, and the new-color-map error callback. All
+eight match normalized features, and seven match the complete feature set.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -113,6 +117,8 @@ The current v280 database is kept locally as
 `analysis/spectron_libqplay_translated_v280.i64`.
 The current v281 database is kept locally as
 `analysis/spectron_libqplay_translated_v281.i64`.
+The current v282 database is kept locally as
+`analysis/spectron_libqplay_translated_v282.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -283,6 +289,15 @@ The checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v281.json`; it records
 the reopened database with 609 remaining default names.
 
+The v282 libjpeg one-pass quantizer evidence is in
+`artifacts/spectron_jpeg_one_pass_quantizer_manual_translation_anchors_20260828.json`.
+It labels the eight callbacks and row quantizers assigned or selected by the
+target `v18_jinit_1pass_quantizer_jpeg_decompress_struct` initializer at
+`0x2a2f88`. All eight rows match normalized ARM64 features, and seven match
+the complete feature set. The checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v282.json`; it records
+the reopened database with 602 remaining default names.
+
 The latest checkpoints are
 `artifacts/spectron_translation_checkpoint_20260828_v263_corrected.json` and
 `artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json`,
@@ -304,10 +319,11 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v278.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v279.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v280.json`, and
-`artifacts/spectron_translation_checkpoint_20260828_v281.json`. The reviewed
+`artifacts/spectron_translation_checkpoint_20260828_v281.json`, and
+`artifacts/spectron_translation_checkpoint_20260828_v282.json`. The reviewed
 legacy, Android, script-table, runtime, property, zlib, and libjpeg labels
-through v281 were reopened and verified with zero failures. That includes
-the eleven v281 memory-manager labels added in the latest pass.
+through v282 were reopened and verified with zero failures. That includes the
+eight v282 one-pass quantizer labels added in the latest pass.
 These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or
 TLS service.

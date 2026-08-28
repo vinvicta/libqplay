@@ -554,6 +554,12 @@ def main():
     spectron_checkpoint_v281 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v281.json"
     )
+    spectron_jquant1_anchors = load_json(
+        "artifacts/spectron_jpeg_one_pass_quantizer_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v282 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v282.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -12214,6 +12220,90 @@ def main():
         11,
     )
     check(
+        "Spectron libjpeg jquant1 artifact",
+        spectron_jquant1_anchors["artifact"],
+        "spectron_jpeg_one_pass_quantizer_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron libjpeg jquant1 network",
+        spectron_jquant1_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron libjpeg jquant1 anchor count",
+        spectron_jquant1_anchors["summary"]["anchor_count"],
+        8,
+    )
+    check(
+        "Spectron libjpeg jquant1 unique target count",
+        spectron_jquant1_anchors["summary"]["unique_target_count"],
+        8,
+    )
+    check(
+        "Spectron libjpeg jquant1 high-confidence count",
+        spectron_jquant1_anchors["summary"]["high_confidence_count"],
+        8,
+    )
+    check(
+        "Spectron libjpeg jquant1 normalized count",
+        spectron_jquant1_anchors["summary"]["normalized_shape_exact_count"],
+        8,
+    )
+    check(
+        "Spectron libjpeg jquant1 exact count",
+        spectron_jquant1_anchors["summary"]["full_metric_exact_count"],
+        7,
+    )
+    jquant1_rows = {
+        row["spectron_ea"]: row for row in spectron_jquant1_anchors["anchors"]
+    }
+    jquant1_expected = {
+        "0x2a23b4": "v18_jpeg_color_quantize",
+        "0x2a2440": "v18_jpeg_color_quantize3",
+        "0x2a24c0": "v18_jpeg_quantize3_ord_dither",
+        "0x2a25a8": "v18_jpeg_finish_pass_1_quant",
+        "0x2a25ac": "v18_jpeg_new_color_map_1_quant",
+        "0x2a25d4": "v18_jpeg_quantize_fs_dither",
+        "0x2a27b4": "v18_jpeg_quantize_ord_dither",
+        "0x2a28cc": "v18_jpeg_start_pass_1_quant",
+    }
+    for target_ea, expected_name in jquant1_expected.items():
+        check(
+            "Spectron libjpeg jquant1 target " + target_ea,
+            jquant1_rows[target_ea]["proposed_name"],
+            expected_name,
+        )
+    check(
+        "Spectron v282 checkpoint artifact",
+        spectron_checkpoint_v282["artifact"],
+        "spectron_translation_checkpoint_20260828_v282",
+    )
+    check(
+        "Spectron v282 checkpoint parent",
+        spectron_checkpoint_v282["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v281",
+    )
+    check(
+        "Spectron v282 checkpoint database hash",
+        spectron_checkpoint_v282["database"]["sha256"],
+        "1018a84b243ac4e29b26ebe227b7e76252cdfc85f9951e982003aed7c6f35887",
+    )
+    check(
+        "Spectron v282 checkpoint function count",
+        spectron_checkpoint_v282["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v282 checkpoint default sub count",
+        spectron_checkpoint_v282["database"]["default_sub_function_count"],
+        602,
+    )
+    check(
+        "Spectron v282 checkpoint jquant1 count",
+        spectron_checkpoint_v282["jquant1_anchors"]["verified_name_count"],
+        8,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -12542,6 +12632,8 @@ def main():
         spectron_checkpoint_v280,
         spectron_jmemmgr_anchors,
         spectron_checkpoint_v281,
+        spectron_jquant1_anchors,
+        spectron_checkpoint_v282,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
