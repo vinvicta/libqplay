@@ -98,6 +98,9 @@ def main():
     spectron_checkpoint_v229 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v229.json"
     )
+    spectron_checkpoint_v230 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v230.json"
+    )
     spectron_manual = load_json(
         "artifacts/spectron_manual_translation_anchors_20260826.json"
     )
@@ -232,6 +235,9 @@ def main():
     )
     spectron_gui_drawing_panel_script_anchors = load_json(
         "artifacts/spectron_gui_drawing_panel_script_manual_translation_anchors_20260828.json"
+    )
+    spectron_tclient_script_property_anchors = load_json(
+        "artifacts/spectron_tclient_script_property_manual_translation_anchors_20260828.json"
     )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
@@ -3225,6 +3231,65 @@ def main():
         "Spectron filter-rectangle target",
         drawing_panel_script_by_name["GuiDrawingPanel_script_filterrectangle"]["spectron_ea"],
         "0x1e3fe8",
+    )
+    check(
+        "Spectron TClient script-property artifact",
+        spectron_tclient_script_property_anchors["artifact"],
+        "spectron_tclient_script_property_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron TClient script-property network",
+        spectron_tclient_script_property_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron TClient script-property total",
+        spectron_tclient_script_property_anchors["summary"]["anchor_count"],
+        5,
+    )
+    check(
+        "Spectron TClient script-property high confidence",
+        spectron_tclient_script_property_anchors["summary"]["high_confidence_count"],
+        5,
+    )
+    check(
+        "Spectron TClient script-property exact-shape count",
+        spectron_tclient_script_property_anchors["summary"]["normalized_shape_exact_count"],
+        3,
+    )
+    check(
+        "Spectron TClient script-property full-metric count",
+        spectron_tclient_script_property_anchors["summary"]["full_metric_exact_count"],
+        2,
+    )
+    check(
+        "Spectron TClient script-property layout-change count",
+        spectron_tclient_script_property_anchors["summary"]["layout_change_count"],
+        2,
+    )
+    check(
+        "Spectron TClient script-property default targets",
+        spectron_tclient_script_property_anchors["summary"]["target_default_name_count"],
+        5,
+    )
+    tclient_script_property_by_name = {
+        row["original_name"]: row
+        for row in spectron_tclient_script_property_anchors["anchors"]
+    }
+    check(
+        "Spectron TClient download-size target",
+        tclient_script_property_by_name["TClient_setBigFileSizeAndContinue"]["spectron_ea"],
+        "0x1ef660",
+    )
+    check(
+        "Spectron server-list connect target",
+        tclient_script_property_by_name["TGUIScriptLoader_finishServerListConnect"]["spectron_ea"],
+        "0x1efb64",
+    )
+    check(
+        "Spectron TClient set-weapon target",
+        tclient_script_property_by_name["TClient_addWeaponForActivePlayer"]["spectron_ea"],
+        "0x1eff94",
     )
     check(
         "Spectron TString artifact",
@@ -6561,6 +6626,31 @@ def main():
         3,
     )
     check(
+        "Spectron v230 checkpoint artifact",
+        spectron_checkpoint_v230["artifact"],
+        "spectron_translation_checkpoint_20260828_v230",
+    )
+    check(
+        "Spectron v230 checkpoint parent",
+        spectron_checkpoint_v230["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v229",
+    )
+    check(
+        "Spectron v230 checkpoint database hash",
+        spectron_checkpoint_v230["database"]["sha256"],
+        "220e9fe71bb8e93472ed7892b4b16363559e1d24a3733bb876fd6abb393023ba",
+    )
+    check(
+        "Spectron v230 checkpoint default sub count",
+        spectron_checkpoint_v230["database"]["default_sub_function_count"],
+        1079,
+    )
+    check(
+        "Spectron v230 checkpoint TClient script-property count",
+        spectron_checkpoint_v230["tclient_script_property_anchors"]["verified_name_count"],
+        5,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -6666,6 +6756,7 @@ def main():
         spectron_gui_text_list_selection_script_anchors,
         spectron_mrandom_property_residual_anchors,
         spectron_gui_drawing_panel_script_anchors,
+        spectron_tclient_script_property_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,
