@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v301 Spectron database. It
-contains 11,695 functions and 490 remaining default `sub_` names. The v263
+The current documented translation frontier is the v302 Spectron database. It
+contains 11,695 functions and 481 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -187,6 +187,12 @@ builder called during face loading. Ten pairs match the complete recorded
 feature set, while two differ only in register allocation detail. Every pair
 matches the normalized control-flow shape. The target now has 490 remaining
 default `sub_` names.
+The v302 revision adds nine high-confidence FreeType gray-raster labels. They
+cover the outline move and line callbacks, conic and cubic curve reduction,
+banded glyph conversion, scanline coverage, and span output. Seven pairs match
+the complete recorded feature set, while the other two differ only in register
+allocation detail. Every pair matches the normalized control-flow shape. The
+target now has 481 remaining default `sub_` names.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -259,6 +265,8 @@ The current v300 database is kept locally as
 `analysis/spectron_libqplay_translated_v300.i64`.
 The current v301 database is kept locally as
 `analysis/spectron_libqplay_translated_v301.i64`.
+The current v302 database is kept locally as
+`analysis/spectron_libqplay_translated_v302.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -655,6 +663,25 @@ with zero failures. The v301 checkpoint is
 11,695 functions and 490 remaining default names. Its database SHA-256 is
 `385ff0bf22b942386ac6857321529201857ac190668dca6c7e673107be8350ca`.
 
+The v302 FreeType gray-raster evidence is in
+`artifacts/spectron_freetype_gray_internal_manual_translation_anchors_20260828.json`.
+It translates nine internal helpers in the gray raster worker. The original
+outline callback table at `0x35e4e8` identifies `gray_move_to`, `gray_line_to`,
+`gray_render_conic`, and `gray_render_cubic`. The worker call graph then
+identifies `gray_convert_glyph`, `gray_convert_glyph_inner`,
+`gray_render_scanline`, `gray_render_line`, and `gray_render_span`. Seven
+pairs match the complete feature record, while the span writer and inner
+conversion helper differ only in register allocation detail. All nine match
+the normalized control-flow shape, and all nine names reopened with zero
+failures. The v302 checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v302.json`; it records
+11,695 functions and 481 remaining default names. Its database SHA-256 is
+`71ab01a1215b46848c4ae511fbd065432be83d357d80a2f17a1efa045d814ab5`.
+
+The upstream references for the v302 pass are FreeType's
+[`ftgrays.c`](https://android.googlesource.com/platform/external/freetype/+/2689da543c08133100124cab3ab19523b04f2f3d/src/smooth/ftgrays.c)
+and [`ftimage.h`](https://android.googlesource.com/platform/external/freetype/+/8483e21a1fdc252bd234eb55c6b63c17551933ee/include/freetype/ftimage.h).
+
 The upstream references for this pass are FreeType's
 [`ftsmooth.c`](https://android.googlesource.com/platform/external/freetype/+/2689da543c08133100124cab3ab19523b04f2f3d/src/smooth/ftsmooth.c),
 [`ftgrays.c`](https://android.googlesource.com/platform/external/freetype/+/2689da543c08133100124cab3ab19523b04f2f3d/src/smooth/ftgrays.c),
@@ -704,13 +731,14 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v298.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v299.json`, followed by
 `artifacts/spectron_translation_checkpoint_20260828_v300.json`, followed by
-`artifacts/spectron_translation_checkpoint_20260828_v301.json`. The reviewed
+`artifacts/spectron_translation_checkpoint_20260828_v301.json`, followed by
+`artifacts/spectron_translation_checkpoint_20260828_v302.json`. The reviewed
 legacy, Android, script-table, runtime, property, zlib, libjpeg, GIF, and
-FreeType labels through v301 were reopened and verified with zero failures.
+FreeType labels through v302 were reopened and verified with zero failures.
 That includes the v297 forward-DCT literal-pool boundary repair, the v298
 FreeType base cleanup aliases, the v299 SFNT service aliases, the v300 SFNT
-interface aliases, and the v301 smooth-renderer aliases added in the latest
-passes.
+interface aliases, the v301 smooth-renderer aliases, and the v302 gray-raster
+aliases added in the latest passes.
 These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or
 TLS service.

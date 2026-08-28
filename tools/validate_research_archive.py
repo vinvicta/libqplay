@@ -674,6 +674,12 @@ def main():
     spectron_checkpoint_v301 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v301.json"
     )
+    spectron_freetype_gray_internal_anchors = load_json(
+        "artifacts/spectron_freetype_gray_internal_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v302 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v302.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -14189,6 +14195,157 @@ def main():
         12,
     )
     check(
+        "Spectron FreeType gray internal artifact",
+        spectron_freetype_gray_internal_anchors["artifact"],
+        "spectron_freetype_gray_internal_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron FreeType gray internal network",
+        spectron_freetype_gray_internal_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron FreeType gray internal anchor count",
+        spectron_freetype_gray_internal_anchors["summary"]["anchor_count"],
+        9,
+    )
+    check(
+        "Spectron FreeType gray internal high-confidence count",
+        spectron_freetype_gray_internal_anchors["summary"][
+            "high_confidence_count"
+        ],
+        9,
+    )
+    check(
+        "Spectron FreeType gray internal normalized count",
+        spectron_freetype_gray_internal_anchors["summary"][
+            "normalized_shape_exact_count"
+        ],
+        9,
+    )
+    check(
+        "Spectron FreeType gray internal full-match count",
+        spectron_freetype_gray_internal_anchors["summary"][
+            "full_metric_exact_count"
+        ],
+        7,
+    )
+    freetype_gray_internal_rows = {
+        row["spectron_ea"]: row
+        for row in spectron_freetype_gray_internal_anchors["anchors"]
+    }
+    freetype_gray_internal_expected = {
+        "0x268ad0": (
+            "v18_gray_render_span",
+            "gray raster span callback",
+            ["register_detail_hash"],
+        ),
+        "0x268fd4": (
+            "v18_gray_convert_glyph_inner",
+            "gray glyph conversion inner helper",
+            ["register_detail_hash"],
+        ),
+        "0x269118": (
+            "v18_gray_move_to",
+            "gray outline move callback",
+            [],
+        ),
+        "0x2692b4": (
+            "v18_gray_convert_glyph",
+            "gray glyph conversion helper",
+            [],
+        ),
+        "0x26a3e8": (
+            "v18_gray_render_scanline",
+            "gray scanline renderer",
+            [],
+        ),
+        "0x26a92c": (
+            "v18_gray_render_line",
+            "gray line renderer",
+            [],
+        ),
+        "0x26b12c": (
+            "v18_gray_render_cubic",
+            "gray cubic Bézier renderer",
+            [],
+        ),
+        "0x26b4bc": (
+            "v18_gray_render_conic",
+            "gray conic Bézier renderer",
+            [],
+        ),
+        "0x26b75c": (
+            "v18_gray_line_to",
+            "gray outline line callback",
+            [],
+        ),
+    }
+    check(
+        "Spectron FreeType gray internal target set",
+        set(freetype_gray_internal_rows),
+        set(freetype_gray_internal_expected),
+    )
+    for target_ea, (expected_name, expected_role, expected_differences) in freetype_gray_internal_expected.items():
+        row = freetype_gray_internal_rows[target_ea]
+        check(
+            "Spectron FreeType gray internal name " + target_ea,
+            row["proposed_name"],
+            expected_name,
+        )
+        check(
+            "Spectron FreeType gray internal role " + target_ea,
+            row["source_role"],
+            expected_role,
+        )
+        check(
+            "Spectron FreeType gray internal metrics " + target_ea,
+            row["metric_differences"],
+            expected_differences,
+        )
+        check(
+            "Spectron FreeType gray internal normalized " + target_ea,
+            row["normalized_shape_equal"],
+            True,
+        )
+    check(
+        "Spectron v302 checkpoint artifact",
+        spectron_checkpoint_v302["artifact"],
+        "spectron_translation_checkpoint_20260828_v302",
+    )
+    check(
+        "Spectron v302 checkpoint parent",
+        spectron_checkpoint_v302["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v301",
+    )
+    check(
+        "Spectron v302 checkpoint parent path",
+        spectron_checkpoint_v302["parent_checkpoint"]["path"],
+        "artifacts/spectron_translation_checkpoint_20260828_v301.json",
+    )
+    check(
+        "Spectron v302 checkpoint database hash",
+        spectron_checkpoint_v302["database"]["sha256"],
+        "71ab01a1215b46848c4ae511fbd065432be83d357d80a2f17a1efa045d814ab5",
+    )
+    check(
+        "Spectron v302 checkpoint function count",
+        spectron_checkpoint_v302["database"]["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v302 checkpoint default sub count",
+        spectron_checkpoint_v302["database"]["default_sub_function_count"],
+        481,
+    )
+    check(
+        "Spectron v302 checkpoint FreeType gray internal count",
+        spectron_checkpoint_v302["freetype_gray_internal_anchors"][
+            "verified_name_count"
+        ],
+        9,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -14547,6 +14704,8 @@ def main():
         spectron_checkpoint_v300,
         spectron_freetype_smooth_anchors,
         spectron_checkpoint_v301,
+        spectron_freetype_gray_internal_anchors,
+        spectron_checkpoint_v302,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

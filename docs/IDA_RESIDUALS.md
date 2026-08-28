@@ -49,8 +49,8 @@ active desktop IDA database remained locked and was not changed.
 ## Spectron FreeType continuation
 
 The source-side count above is preserved as its own historical inventory. It
-is not the current count for the stripped Spectron 2.2 target. The v301
-Spectron copy has 11,695 functions and 490 remaining default `sub_` names.
+is not the current count for the stripped Spectron 2.2 target. The v302
+Spectron copy has 11,695 functions and 481 remaining default `sub_` names.
 The v298 pass removed two names from the unresolved target queue by identifying
 the FreeType base helpers at target `0x25e304` and `0x260300` as
 `v18_destroy_size` and `v18_destroy_face`.
@@ -106,6 +106,18 @@ The machine-readable record is
 All 12 names reopened with zero failures, and the v301 checkpoint and
 database hash are recorded in
 `artifacts/spectron_translation_checkpoint_20260828_v301.json`.
+
+The v302 pass removes nine more defaults from the FreeType queue. The original
+gray outline callback table at `0x35e4e8` identifies the move, line, conic,
+and cubic callbacks. The worker call graph identifies the band conversion,
+scanline, line, and span helpers used by `gray_raster_render`. Seven pairs
+match complete feature metrics, while the span writer and inner conversion
+helper differ only in register allocation detail. All nine match normalized
+ARM64 shape. The machine-readable record is
+`artifacts/spectron_freetype_gray_internal_manual_translation_anchors_20260828.json`.
+All nine names reopened with zero failures, and the v302 checkpoint and
+database hash are recorded in
+`artifacts/spectron_translation_checkpoint_20260828_v302.json`.
 
 ## CyaSSL role pass
 
