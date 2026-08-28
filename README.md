@@ -100,6 +100,10 @@ The v285 revision adds six high-confidence libjpeg color-deconverter labels.
 They cover YCbCr-to-RGB, direct component interleave, grayscale-to-RGB,
 YCCK-to-CMYK, the empty pass callback, and grayscale copy. All six match the
 complete recorded feature set.
+The v286 revision adds one high-confidence libjpeg inverse-DCT manager label.
+It identifies the start-pass callback that selects the per-component IDCT
+method and rebuilds the matching multiplier tables. Its normalized metrics
+match, with only register allocation detail differing.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -140,6 +144,8 @@ The current v284 database is kept locally as
 `analysis/spectron_libqplay_translated_v284.i64`.
 The current v285 database is kept locally as
 `analysis/spectron_libqplay_translated_v285.i64`.
+The current v286 database is kept locally as
+`analysis/spectron_libqplay_translated_v286.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -346,6 +352,15 @@ All six rows match normalized and complete ARM64 features. The checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v285.json`; it records
 the reopened database with 582 remaining default names.
 
+The v286 libjpeg inverse-DCT manager evidence is in
+`artifacts/spectron_jpeg_inverse_dct_manager_manual_translation_anchors_20260828.json`.
+It labels the start-pass callback selected by
+`v18_jinit_inverse_dct_jpeg_decompress_struct` at `0x2abc20`. The normalized
+feature set matches, with only register allocation detail differing. The
+checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v286.json`; it records
+the reopened database with 581 remaining default names.
+
 The latest checkpoints are
 `artifacts/spectron_translation_checkpoint_20260828_v263_corrected.json` and
 `artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json`,
@@ -371,10 +386,11 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v282.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v283.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v284.json`, and
-`artifacts/spectron_translation_checkpoint_20260828_v285.json`. The reviewed
+`artifacts/spectron_translation_checkpoint_20260828_v285.json`, and
+`artifacts/spectron_translation_checkpoint_20260828_v286.json`. The reviewed
 legacy, Android, script-table, runtime, property, zlib, and libjpeg labels
-through v285 were reopened and verified with zero failures. That includes the
-six v285 color-deconverter labels added in the latest pass.
+through v286 were reopened and verified with zero failures. That includes the
+v286 inverse-DCT manager label added in the latest pass.
 These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or
 TLS service.

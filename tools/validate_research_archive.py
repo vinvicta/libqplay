@@ -578,6 +578,12 @@ def main():
     spectron_checkpoint_v285 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v285.json"
     )
+    spectron_jddctmgr_anchors = load_json(
+        "artifacts/spectron_jpeg_inverse_dct_manager_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v286 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v286.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -12570,6 +12576,79 @@ def main():
         "Spectron v285 checkpoint jdcolor count",
         spectron_checkpoint_v285["jdcolor_anchors"]["verified_name_count"],
         6,
+    )
+    check(
+        "Spectron libjpeg jddctmgr artifact",
+        spectron_jddctmgr_anchors["artifact"],
+        "spectron_jpeg_inverse_dct_manager_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron libjpeg jddctmgr network",
+        spectron_jddctmgr_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron libjpeg jddctmgr anchor count",
+        spectron_jddctmgr_anchors["summary"]["anchor_count"],
+        1,
+    )
+    check(
+        "Spectron libjpeg jddctmgr unique target count",
+        spectron_jddctmgr_anchors["summary"]["unique_target_count"],
+        1,
+    )
+    check(
+        "Spectron libjpeg jddctmgr high-confidence count",
+        spectron_jddctmgr_anchors["summary"]["high_confidence_count"],
+        1,
+    )
+    check(
+        "Spectron libjpeg jddctmgr normalized count",
+        spectron_jddctmgr_anchors["summary"]["normalized_shape_exact_count"],
+        1,
+    )
+    check(
+        "Spectron libjpeg jddctmgr exact count",
+        spectron_jddctmgr_anchors["summary"]["full_metric_exact_count"],
+        0,
+    )
+    jddctmgr_rows = {
+        row["spectron_ea"]: row for row in spectron_jddctmgr_anchors["anchors"]
+    }
+    check(
+        "Spectron libjpeg jddctmgr target 0x2ab87c",
+        jddctmgr_rows["0x2ab87c"]["proposed_name"],
+        "v18_jpeg_idct_start_pass",
+    )
+    check(
+        "Spectron v286 checkpoint artifact",
+        spectron_checkpoint_v286["artifact"],
+        "spectron_translation_checkpoint_20260828_v286",
+    )
+    check(
+        "Spectron v286 checkpoint parent",
+        spectron_checkpoint_v286["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v285",
+    )
+    check(
+        "Spectron v286 checkpoint database hash",
+        spectron_checkpoint_v286["database"]["sha256"],
+        "87624a85eae15f9520bfcbf1b356121aa7af6b97db66997a66bcea5baadadae9",
+    )
+    check(
+        "Spectron v286 checkpoint function count",
+        spectron_checkpoint_v286["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v286 checkpoint default sub count",
+        spectron_checkpoint_v286["database"]["default_sub_function_count"],
+        581,
+    )
+    check(
+        "Spectron v286 checkpoint jddctmgr count",
+        spectron_checkpoint_v286["jddctmgr_anchors"]["verified_name_count"],
+        1,
     )
     check(
         "Spectron manual artifact",

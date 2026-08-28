@@ -1,0 +1,114 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "The target inverse-DCT initializer stores this routine in the public start_pass slot.",
+        "The target body selects the 1x1, 2x2, 4x4, accurate integer, fast integer, or floating-point inverse-DCT method from component scale and global DCT method state.",
+        "The target body rebuilds integer, floating-point, or fast multiplier tables when the selected method changes, matching the source manager contract.",
+        "The source and target normalized feature metrics match; only register allocation detail differs."
+      ],
+      "family": "libjpeg inverse-DCT manager",
+      "full_metric_equal": false,
+      "match_kind": "manual-libjpeg-jddctmgr-role-anchor",
+      "metric_differences": [
+        "register_detail_hash"
+      ],
+      "name_action": "rename-with-v18-prefix",
+      "normalized_shape_equal": true,
+      "operation": "selects the scaled inverse-DCT implementation for each component and rebuilds method-specific multiplier tables from the quantization tables",
+      "original_current_name": "sub_29E40C",
+      "original_default_name": true,
+      "original_direct_call_names": [],
+      "original_ea": "0x29e40c",
+      "original_function_end": "0x29e7b0",
+      "original_metrics": {
+        "basic_block_count": 31,
+        "branch_count": 20,
+        "call_count": 3,
+        "instruction_count": 233,
+        "mnemonic_hash": "f726ef097e0236408797162d089b96338e43d2f8b520dff5cc26e996f9090b91",
+        "opcode_shape_hash": "a99110023ac55497f4c9bdda36de1df0f8db967a6bf82b3b3b9015ef217e01d3",
+        "register_detail_hash": "ce6cd65dd08b860e542e9b32db17cdb3ac6912e641f16c69492e476c86cf0ec9",
+        "register_shape_hash": "de77091413174232638002e6e25793e29ad7e199f3deb3bbfadcaaef600fe916",
+        "return_count": 1,
+        "shape_hash": "ed6cea24a95474687eecdad42c1e9ebaee59bbdc023d73912aad1f438c0b5473",
+        "size": 932,
+        "string_refs_hash": null
+      },
+      "original_name": "sub_29E40C",
+      "original_string_refs": [],
+      "proposed_name": "v18_jpeg_idct_start_pass",
+      "semantic_match_already_present": false,
+      "source_basis": "libjpeg start_pass body and jinit_inverse_dct callback installation",
+      "source_component": "jinit_inverse_dct_jpeg_decompress_struct at 0x29e7b0",
+      "source_file": "jddctmgr.c",
+      "source_name": "start_pass",
+      "source_parent": "jinit_inverse_dct_jpeg_decompress_struct at 0x29e7b0",
+      "source_role": "start_pass",
+      "spectron_current_name": "sub_2AB87C",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x2ab87c",
+      "spectron_function_end": "0x2abc20",
+      "spectron_metrics": {
+        "basic_block_count": 31,
+        "branch_count": 20,
+        "call_count": 3,
+        "instruction_count": 233,
+        "mnemonic_hash": "f726ef097e0236408797162d089b96338e43d2f8b520dff5cc26e996f9090b91",
+        "opcode_shape_hash": "a99110023ac55497f4c9bdda36de1df0f8db967a6bf82b3b3b9015ef217e01d3",
+        "register_detail_hash": "fc2d9b97880fb3af0a86d72398b712cd3bfe5a9cf90c1d7d48eddd74ee6260bf",
+        "register_shape_hash": "de77091413174232638002e6e25793e29ad7e199f3deb3bbfadcaaef600fe916",
+        "return_count": 1,
+        "shape_hash": "ed6cea24a95474687eecdad42c1e9ebaee59bbdc023d73912aad1f438c0b5473",
+        "size": 932,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_component": "v18_jinit_inverse_dct_jpeg_decompress_struct at 0x2abc20",
+      "target_context": "installed as the inverse-DCT manager start-pass callback",
+      "target_install_sites": [
+        "0x2abc5c"
+      ],
+      "target_parent": "v18_jinit_inverse_dct_jpeg_decompress_struct at 0x2abc20"
+    }
+  ],
+  "artifact": "spectron_jpeg_inverse_dct_manager_manual_translation_anchors_20260828",
+  "context": {
+    "name_policy": "v18-prefixed semantic role because source and target candidates retained IDA auto-generated names",
+    "reference_source": "https://github.com/libjpeg-turbo/libjpeg-turbo/blob/main/src/jddctmgr.c",
+    "role_resolution": "inverse-DCT manager callback slot, reviewed pseudocode, and normalized plus register-detail-only ARM64 feature metrics",
+    "source_controller": "jinit_inverse_dct_jpeg_decompress_struct at 0x29e7b0",
+    "source_source_file": "jddctmgr.c",
+    "target_controller": "v18_jinit_inverse_dct_jpeg_decompress_struct at 0x2abc20",
+    "target_source_file": "jddctmgr.c"
+  },
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_current.json",
+    "original_features_sha256": "243341ad40e912500365b6d7eb5b69f9f3b9d6200f5c825629cfc56d4343ac07",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b423221",
+    "spectron_features": "/tmp/spectron_features_v285_current.json",
+    "spectron_features_sha256": "63fc08ddbdc8f949207816aa87c9ebed71ba3196dd391087d2764105c9a4ca59"
+  },
+  "interpretation": [
+    "This is a reviewed libjpeg role label, not a restored original debug symbol, because the source and target start-pass routines retained IDA auto-generated names.",
+    "The target initializer and body preserve the source inverse-DCT manager contract, including per-component method selection and multiplier-table setup.",
+    "The normalized feature fields match exactly; the only difference is register allocation detail in this compiler build."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchor for the libjpeg inverse-DCT manager start-pass routine",
+  "summary": {
+    "anchor_count": 1,
+    "full_metric_exact_count": 0,
+    "high_confidence_count": 1,
+    "inverse_dct_manager_role_count": 1,
+    "normalized_shape_exact_count": 1,
+    "register_detail_difference_count": 1,
+    "source_default_name_count": 1,
+    "target_default_name_count": 1,
+    "unique_target_count": 1
+  }
+}
