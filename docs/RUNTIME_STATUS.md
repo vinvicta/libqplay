@@ -595,6 +595,17 @@ This is the short handoff view. The full reasoning and command history are in
      `tools/generate_spectron_particle_emitter_property_anchors.py`, and
      `artifacts/spectron_translation_checkpoint_20260828_v240.json`.
 
+63k. The v241 IDA checkpoint adds three high-confidence aliases from the
+     residual `TParticleEmitter` script-function table: `addglobalmodifier`,
+     `addlocalmodifier`, and `addemitmodifier`. All three source and target
+     bodies match the complete feature metrics. The clean reopen has 11,696
+     functions and 945 remaining default `sub_` names. The database SHA-256 is
+     `c154d03a1b28e31a06faa87876d1108c7acb971c884e4ae984cbe273573ba09e`.
+     See
+     `artifacts/spectron_particle_emitter_script_manual_translation_anchors_20260828.json`,
+     `tools/generate_spectron_particle_emitter_script_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260828_v241.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The

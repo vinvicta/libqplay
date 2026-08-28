@@ -299,6 +299,12 @@ def main():
     spectron_checkpoint_v240 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v240.json"
     )
+    spectron_particle_emitter_script_anchors = load_json(
+        "artifacts/spectron_particle_emitter_script_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v241 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v241.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -7664,6 +7670,95 @@ def main():
         42,
     )
     check(
+        "Spectron v241 particle-emitter script artifact",
+        spectron_particle_emitter_script_anchors["artifact"],
+        "spectron_particle_emitter_script_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v241 particle-emitter script network",
+        spectron_particle_emitter_script_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v241 particle-emitter script anchor count",
+        spectron_particle_emitter_script_anchors["summary"]["anchor_count"],
+        3,
+    )
+    check(
+        "Spectron v241 particle-emitter script high confidence",
+        spectron_particle_emitter_script_anchors["summary"]["high_confidence_count"],
+        3,
+    )
+    check(
+        "Spectron v241 particle-emitter script target default count",
+        spectron_particle_emitter_script_anchors["summary"]["target_default_name_count"],
+        3,
+    )
+    check(
+        "Spectron v241 particle-emitter script normalized shape count",
+        spectron_particle_emitter_script_anchors["summary"]["normalized_shape_exact_count"],
+        3,
+    )
+    check(
+        "Spectron v241 particle-emitter script full metric count",
+        spectron_particle_emitter_script_anchors["summary"]["full_metric_exact_count"],
+        3,
+    )
+    check(
+        "Spectron v241 particle-emitter script layout count",
+        spectron_particle_emitter_script_anchors["summary"]["layout_change_count"],
+        0,
+    )
+    check(
+        "Spectron v241 particle-emitter script register-detail count",
+        spectron_particle_emitter_script_anchors["summary"]["register_detail_difference_count"],
+        0,
+    )
+    particle_script_rows = {
+        row["original_name"]: row
+        for row in spectron_particle_emitter_script_anchors["anchors"]
+    }
+    check(
+        "Spectron v241 addglobalmodifier target",
+        particle_script_rows["TParticleEmitter_script_addglobalmodifier"]["spectron_ea"],
+        "0x2432b4",
+    )
+    check(
+        "Spectron v241 addemitmodifier target",
+        particle_script_rows["TParticleEmitter_script_addemitmodifier"]["spectron_ea"],
+        "0x24348c",
+    )
+    check(
+        "Spectron v241 checkpoint artifact",
+        spectron_checkpoint_v241["artifact"],
+        "spectron_translation_checkpoint_20260828_v241",
+    )
+    check(
+        "Spectron v241 checkpoint parent",
+        spectron_checkpoint_v241["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v240",
+    )
+    check(
+        "Spectron v241 checkpoint database hash",
+        spectron_checkpoint_v241["database"]["sha256"],
+        "c154d03a1b28e31a06faa87876d1108c7acb971c884e4ae984cbe273573ba09e",
+    )
+    check(
+        "Spectron v241 checkpoint function count",
+        spectron_checkpoint_v241["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v241 checkpoint default sub count",
+        spectron_checkpoint_v241["database"]["default_sub_function_count"],
+        945,
+    )
+    check(
+        "Spectron v241 checkpoint anchor count",
+        spectron_checkpoint_v241["particle_emitter_script_anchors"]["verified_name_count"],
+        3,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -7780,6 +7875,7 @@ def main():
         spectron_gani_property_anchors,
         spectron_options_property_anchors,
         spectron_particle_emitter_property_anchors,
+        spectron_particle_emitter_script_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,
