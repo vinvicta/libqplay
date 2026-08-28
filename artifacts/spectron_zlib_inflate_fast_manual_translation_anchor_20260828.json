@@ -1,0 +1,124 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source default function at 0x28a2f4 is the helper called from inflate at 0x28566c.",
+        "The target default function at 0x297764 is the helper called from v18_inflate at 0x292adc.",
+        "Both bodies contain the zlib invalid literal/length, invalid distance, and invalid distance too far back strings.",
+        "Both bodies decode literal/length and distance Huffman tables and copy backreferences into the output window, which identifies the inflate_fast role.",
+        "The complete recorded feature metrics match except for register allocation detail, and the target remained a default sub_ name before this pass."
+      ],
+      "family": "zlib",
+      "full_metric_equal": false,
+      "match_kind": "manual-zlib-internal-role-exact-anchor",
+      "metric_differences": [
+        "register_detail_hash"
+      ],
+      "name_action": "rename-with-v18-prefix",
+      "normalized_shape_equal": true,
+      "operation": "decodes literal/length and distance Huffman entries, then copies matched bytes into the output window",
+      "original_current_name": "sub_28A2F4",
+      "original_default_name": true,
+      "original_direct_call_names": [],
+      "original_ea": "0x28a2f4",
+      "original_function_end": "0x28ad98",
+      "original_metrics": {
+        "basic_block_count": 135,
+        "branch_count": 50,
+        "call_count": 0,
+        "instruction_count": 678,
+        "mnemonic_hash": "a229edc8d806f3879550a025204a011e57f0f0b049f79fd7fb6175df72836f0d",
+        "opcode_shape_hash": "6659986cacda628050ec81a8f8214c33b2ee6a9bb76a1cf80dbaa377f887b9bf",
+        "register_detail_hash": "4ccbea60865d2c3f01392539b6fd5525ae3292c8d2d363e43058e227a4a87f22",
+        "register_shape_hash": "fd969b275c6423afc89857af6239fb5ee18e4808a7a444d9aa4abc3d1aa2881b",
+        "return_count": 1,
+        "shape_hash": "a73bdb148177186cd8920faad847ab9bcc25bece97d6303aae4fca55b37794bb",
+        "size": 2724,
+        "string_refs_hash": "3e6764750fe920235be76d5b37ce323252b42231c6f7df20e7ec744c89f0980d"
+      },
+      "original_name": "sub_28A2F4",
+      "original_string_refs": [
+        "invalid distance code",
+        "invalid distance too far back",
+        "invalid literal/length code"
+      ],
+      "proposed_name": "v18_zlib_inflate_fast",
+      "semantic_match_already_present": false,
+      "source_basis": "zlib inflate call-site, error strings, Huffman decode body, and cross-build metrics",
+      "source_call_site": "0x28566c",
+      "source_component": "1.8 zlib inflate implementation",
+      "source_name": "zlib_inflate_fast",
+      "source_parent": "inflate at 0x284198",
+      "source_references": [
+        "https://github.com/madler/zlib/blob/develop/inflate.c"
+      ],
+      "source_role": "zlib inflate_fast hot loop",
+      "spectron_current_name": "sub_297764",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x297764",
+      "spectron_function_end": "0x298208",
+      "spectron_metrics": {
+        "basic_block_count": 135,
+        "branch_count": 50,
+        "call_count": 0,
+        "instruction_count": 678,
+        "mnemonic_hash": "a229edc8d806f3879550a025204a011e57f0f0b049f79fd7fb6175df72836f0d",
+        "opcode_shape_hash": "6659986cacda628050ec81a8f8214c33b2ee6a9bb76a1cf80dbaa377f887b9bf",
+        "register_detail_hash": "8838531e6e90faaa01b7ebbcb7c1ac061096b02bf8c5890c0dda65dbd373a683",
+        "register_shape_hash": "fd969b275c6423afc89857af6239fb5ee18e4808a7a444d9aa4abc3d1aa2881b",
+        "return_count": 1,
+        "shape_hash": "a73bdb148177186cd8920faad847ab9bcc25bece97d6303aae4fca55b37794bb",
+        "size": 2724,
+        "string_refs_hash": "3e6764750fe920235be76d5b37ce323252b42231c6f7df20e7ec744c89f0980d"
+      },
+      "spectron_string_refs": [
+        "invalid distance code",
+        "invalid distance too far back",
+        "invalid literal/length code"
+      ],
+      "target_call_site": "0x292adc",
+      "target_component": "Spectron zlib inflate implementation",
+      "target_parent": "v18_inflate at 0x291608"
+    }
+  ],
+  "artifact": "spectron_zlib_inflate_fast_manual_translation_anchor_20260828",
+  "context": {
+    "role_resolution": "call-site plus zlib error strings, Huffman decode, backreference copy loop, and feature metrics",
+    "source_call_site": "0x28566c",
+    "source_current_name": "sub_28A2F4",
+    "source_parent": "inflate at 0x284198",
+    "source_role_name_policy": "zlib_inflate_fast is an inferred role because the source function itself retained a default IDA name",
+    "target_call_site": "0x292adc",
+    "target_current_name": "sub_297764",
+    "target_parent": "v18_inflate at 0x291608"
+  },
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_current.json",
+    "original_features_sha256": "243341ad40e912500365b6d7eb5b69f9f3b9d6200f5c825629cfc56d4343ac07",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b423221",
+    "spectron_features": "/tmp/spectron_features_v271_current.json",
+    "spectron_features_sha256": "8a10b5463ed9163f40ac3d94a3d9d2b170a9d8907f92a15e31ba3b702e3e42ad"
+  },
+  "interpretation": [
+    "This is a reviewed semantic role label, not a restored original debug symbol, because both source and target databases retain default names at these addresses.",
+    "The target label is supported by the matching caller position, zlib error strings, Huffman decoder and backreference copy logic, and complete feature metrics.",
+    "The target body differs from the source only in register allocation detail, so the v18 prefix records the source-version context without claiming an original exported name."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchor for the residual zlib inflate_fast helper",
+  "summary": {
+    "anchor_count": 1,
+    "full_metric_exact_count": 0,
+    "high_confidence_count": 1,
+    "inflate_fast_count": 1,
+    "normalized_shape_exact_count": 1,
+    "register_detail_difference_count": 1,
+    "source_default_name_count": 1,
+    "target_default_name_count": 1,
+    "unique_target_count": 1
+  }
+}

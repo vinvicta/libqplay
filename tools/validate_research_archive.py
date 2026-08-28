@@ -494,6 +494,12 @@ def main():
     spectron_checkpoint_v271 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v271.json"
     )
+    spectron_zlib_inflate_fast_anchor = load_json(
+        "artifacts/spectron_zlib_inflate_fast_manual_translation_anchor_20260828.json"
+    )
+    spectron_checkpoint_v272 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v272.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -11313,6 +11319,85 @@ def main():
         2,
     )
     check(
+        "Spectron zlib inflate_fast artifact",
+        spectron_zlib_inflate_fast_anchor["artifact"],
+        "spectron_zlib_inflate_fast_manual_translation_anchor_20260828",
+    )
+    check(
+        "Spectron zlib inflate_fast network",
+        spectron_zlib_inflate_fast_anchor["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron zlib inflate_fast anchor count",
+        spectron_zlib_inflate_fast_anchor["summary"]["anchor_count"],
+        1,
+    )
+    check(
+        "Spectron zlib inflate_fast high-confidence count",
+        spectron_zlib_inflate_fast_anchor["summary"]["high_confidence_count"],
+        1,
+    )
+    check(
+        "Spectron zlib inflate_fast target default count",
+        spectron_zlib_inflate_fast_anchor["summary"]["target_default_name_count"],
+        1,
+    )
+    check(
+        "Spectron zlib inflate_fast normalized count",
+        spectron_zlib_inflate_fast_anchor["summary"]["normalized_shape_exact_count"],
+        1,
+    )
+    zlib_inflate_fast_rows = {
+        row["spectron_ea"]: row
+        for row in spectron_zlib_inflate_fast_anchor["anchors"]
+    }
+    check(
+        "Spectron zlib inflate_fast target",
+        zlib_inflate_fast_rows["0x297764"]["proposed_name"],
+        "v18_zlib_inflate_fast",
+    )
+    check(
+        "Spectron zlib inflate_fast source current name",
+        zlib_inflate_fast_rows["0x297764"]["original_current_name"],
+        "sub_28A2F4",
+    )
+    check(
+        "Spectron zlib inflate_fast target current name",
+        zlib_inflate_fast_rows["0x297764"]["spectron_current_name"],
+        "sub_297764",
+    )
+    check(
+        "Spectron v272 checkpoint artifact",
+        spectron_checkpoint_v272["artifact"],
+        "spectron_translation_checkpoint_20260828_v272",
+    )
+    check(
+        "Spectron v272 checkpoint parent",
+        spectron_checkpoint_v272["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v271",
+    )
+    check(
+        "Spectron v272 checkpoint database hash",
+        spectron_checkpoint_v272["database"]["sha256"],
+        "976eb158d621ac25c65c79ab0939de80e5965a7e45b1bf9f322dddcd6125763c",
+    )
+    check(
+        "Spectron v272 checkpoint function count",
+        spectron_checkpoint_v272["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v272 checkpoint default sub count",
+        spectron_checkpoint_v272["database"]["default_sub_function_count"],
+        669,
+    )
+    check(
+        "Spectron v272 checkpoint zlib count",
+        spectron_checkpoint_v272["zlib_inflate_fast_anchor"]["verified_name_count"],
+        1,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -11621,6 +11706,8 @@ def main():
         spectron_runtime_callback_residual_anchors,
         spectron_tplayer_quattro_zoom_property_labels,
         spectron_checkpoint_v271,
+        spectron_zlib_inflate_fast_anchor,
+        spectron_checkpoint_v272,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

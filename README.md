@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v271 Spectron database. It
-contains 11,696 functions and 670 remaining default `sub_` names. The v263
+The current documented translation frontier is the v272 Spectron database. It
+contains 11,696 functions and 669 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -36,7 +36,10 @@ two target-only TPlayer property labels for the Quattro zoom-culling getter
 and setter. These names come from target tables, Java method strings,
 retained callers, installation sites, and reviewed pseudocode. They are
 labels for this stripped 2.2 library, not claims that original debug symbols
-were recovered.
+were recovered. The v272 revision adds one high-confidence zlib
+`inflate_fast` role label at target `0x297764`. Both source and target
+databases kept default names at that address, so the artifact records the
+inferred library role separately from the current IDA names.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -45,9 +48,10 @@ The saved databases are
 `analysis/spectron_libqplay_translated_v267.i64`,
 `analysis/spectron_libqplay_translated_v268.i64`, and the v269 frontier in
 `analysis/spectron_libqplay_translated_v269.i64`. The v270 database is kept
-locally as `analysis/spectron_libqplay_translated_v270.i64`, and the current
-v271 database is kept locally as
-`analysis/spectron_libqplay_translated_v271.i64`. Their hashes and reopen
+locally as `analysis/spectron_libqplay_translated_v270.i64`, and the v271
+database is kept locally as
+`analysis/spectron_libqplay_translated_v271.i64`. The current v272 database is
+kept locally as `analysis/spectron_libqplay_translated_v272.i64`. Their hashes and reopen
 reports are recorded in their checkpoints because packed IDA files are
 intentionally excluded from the public repository.
 
@@ -116,6 +120,16 @@ counterpart is claimed for that property. The v271 checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v271.json`; it records
 the reopened database with 11,696 functions and 670 remaining default names.
 
+The v272 zlib evidence is in
+`artifacts/spectron_zlib_inflate_fast_manual_translation_anchor_20260828.json`.
+It records the source default helper at `0x28a2f4` and the target default
+helper at `0x297764`, both called from their respective `inflate` routines.
+The bodies share the zlib error strings, Huffman decode path, backreference
+copy loop, and every recorded feature metric except register allocation
+detail. The v272 checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v272.json`; it records
+the reopened database with 669 remaining default names.
+
 The latest checkpoints are
 `artifacts/spectron_translation_checkpoint_20260828_v263_corrected.json` and
 `artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json`,
@@ -126,12 +140,14 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v267.json`,
 `artifacts/spectron_translation_checkpoint_20260828_v268.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v269.json`, followed by
-`artifacts/spectron_translation_checkpoint_20260828_v270.json` and
-`artifacts/spectron_translation_checkpoint_20260828_v271.json`. All four
+`artifacts/spectron_translation_checkpoint_20260828_v270.json`,
+`artifacts/spectron_translation_checkpoint_20260828_v271.json`, and
+`artifacts/spectron_translation_checkpoint_20260828_v272.json`. All four
 newly reviewed legacy names, the six corrected target-only names, the
 package-signature label, the v269 TGraalVar labels, the v270 script-table
-labels, the nine v271 runtime callback labels, and the two v271 property
-labels were reopened and verified with zero failures. These passes were
+labels, the nine v271 runtime callback labels, the two v271 property labels,
+and the v272 zlib role label were reopened and verified with zero failures.
+These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or
 TLS service.
 
