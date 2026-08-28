@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v272 Spectron database. It
-contains 11,696 functions and 669 remaining default `sub_` names. The v263
+The current documented translation frontier is the v273 Spectron database. It
+contains 11,696 functions and 663 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -40,6 +40,10 @@ were recovered. The v272 revision adds one high-confidence zlib
 `inflate_fast` role label at target `0x297764`. Both source and target
 databases kept default names at that address, so the artifact records the
 inferred library role separately from the current IDA names.
+The v273 revision adds six high-confidence libjpeg source and destination
+callback labels. They are tied to the target `jpeg_stdio_dest` and
+`jpeg_stdio_src` installation sites, with exact or normalized source-target
+feature matches.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -51,7 +55,9 @@ The saved databases are
 locally as `analysis/spectron_libqplay_translated_v270.i64`, and the v271
 database is kept locally as
 `analysis/spectron_libqplay_translated_v271.i64`. The current v272 database is
-kept locally as `analysis/spectron_libqplay_translated_v272.i64`. Their hashes and reopen
+kept locally as `analysis/spectron_libqplay_translated_v272.i64`. The current
+v273 database is kept locally as
+`analysis/spectron_libqplay_translated_v273.i64`. Their hashes and reopen
 reports are recorded in their checkpoints because packed IDA files are
 intentionally excluded from the public repository.
 
@@ -130,6 +136,16 @@ detail. The v272 checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v272.json`; it records
 the reopened database with 669 remaining default names.
 
+The v273 libjpeg evidence is in
+`artifacts/spectron_jpeg_io_manual_translation_anchors_20260828.json`.
+It labels the three destination callbacks installed by
+`v18_jpeg_stdio_dest` and the three source callbacks installed by
+`v18_jpeg_stdio_src`. Their bodies implement the standard libjpeg buffer
+initialization, refill, skip, flush, and final-write operations. The v273
+checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v273.json`; it records
+the reopened database with 663 remaining default names.
+
 The latest checkpoints are
 `artifacts/spectron_translation_checkpoint_20260828_v263_corrected.json` and
 `artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json`,
@@ -142,11 +158,13 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v269.json`, followed by
 `artifacts/spectron_translation_checkpoint_20260828_v270.json`,
 `artifacts/spectron_translation_checkpoint_20260828_v271.json`, and
-`artifacts/spectron_translation_checkpoint_20260828_v272.json`. All four
+`artifacts/spectron_translation_checkpoint_20260828_v272.json`, and
+`artifacts/spectron_translation_checkpoint_20260828_v273.json`. All four
 newly reviewed legacy names, the six corrected target-only names, the
 package-signature label, the v269 TGraalVar labels, the v270 script-table
 labels, the nine v271 runtime callback labels, the two v271 property labels,
-and the v272 zlib role label were reopened and verified with zero failures.
+the v272 zlib role label, and the six v273 libjpeg callback labels were
+reopened and verified with zero failures.
 These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or
 TLS service.

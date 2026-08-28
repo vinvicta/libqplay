@@ -500,6 +500,12 @@ def main():
     spectron_checkpoint_v272 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v272.json"
     )
+    spectron_jpeg_io_anchors = load_json(
+        "artifacts/spectron_jpeg_io_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v273 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v273.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -11398,6 +11404,98 @@ def main():
         1,
     )
     check(
+        "Spectron libjpeg I/O artifact",
+        spectron_jpeg_io_anchors["artifact"],
+        "spectron_jpeg_io_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron libjpeg I/O network",
+        spectron_jpeg_io_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron libjpeg I/O anchor count",
+        spectron_jpeg_io_anchors["summary"]["anchor_count"],
+        6,
+    )
+    check(
+        "Spectron libjpeg I/O unique target count",
+        spectron_jpeg_io_anchors["summary"]["unique_target_count"],
+        6,
+    )
+    check(
+        "Spectron libjpeg I/O high-confidence count",
+        spectron_jpeg_io_anchors["summary"]["high_confidence_count"],
+        6,
+    )
+    check(
+        "Spectron libjpeg I/O normalized count",
+        spectron_jpeg_io_anchors["summary"]["normalized_shape_exact_count"],
+        6,
+    )
+    check(
+        "Spectron libjpeg I/O exact count",
+        spectron_jpeg_io_anchors["summary"]["full_metric_exact_count"],
+        2,
+    )
+    check(
+        "Spectron libjpeg I/O destination count",
+        spectron_jpeg_io_anchors["summary"]["destination_callback_count"],
+        3,
+    )
+    check(
+        "Spectron libjpeg I/O source count",
+        spectron_jpeg_io_anchors["summary"]["source_callback_count"],
+        3,
+    )
+    jpeg_io_rows = {
+        row["spectron_ea"]: row for row in spectron_jpeg_io_anchors["anchors"]
+    }
+    jpeg_io_expected = {
+        "0x298e64": "v18_jpeg_init_destination",
+        "0x298ea0": "v18_jpeg_empty_output_buffer",
+        "0x298f14": "v18_jpeg_term_destination",
+        "0x29902c": "v18_jpeg_init_source",
+        "0x29903c": "v18_jpeg_fill_input_buffer",
+        "0x2990f8": "v18_jpeg_skip_input_data",
+    }
+    for target_ea, expected_name in jpeg_io_expected.items():
+        check(
+            "Spectron libjpeg I/O target " + target_ea,
+            jpeg_io_rows[target_ea]["proposed_name"],
+            expected_name,
+        )
+    check(
+        "Spectron v273 checkpoint artifact",
+        spectron_checkpoint_v273["artifact"],
+        "spectron_translation_checkpoint_20260828_v273",
+    )
+    check(
+        "Spectron v273 checkpoint parent",
+        spectron_checkpoint_v273["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v272",
+    )
+    check(
+        "Spectron v273 checkpoint database hash",
+        spectron_checkpoint_v273["database"]["sha256"],
+        "054b633f56a9aaee6d99048666c209831563a6e32046adab17ea48224d46807f",
+    )
+    check(
+        "Spectron v273 checkpoint function count",
+        spectron_checkpoint_v273["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v273 checkpoint default sub count",
+        spectron_checkpoint_v273["database"]["default_sub_function_count"],
+        663,
+    )
+    check(
+        "Spectron v273 checkpoint libjpeg count",
+        spectron_checkpoint_v273["jpeg_io_anchors"]["verified_name_count"],
+        6,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -11708,6 +11806,8 @@ def main():
         spectron_checkpoint_v271,
         spectron_zlib_inflate_fast_anchor,
         spectron_checkpoint_v272,
+        spectron_jpeg_io_anchors,
+        spectron_checkpoint_v273,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
