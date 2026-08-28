@@ -1,0 +1,160 @@
+{
+  "artifact": "spectron_target_only_callback_labels_20260828",
+  "context": {
+    "mapping_boundary": "These labels describe target behavior only. They are not 1.8-to-Spectron correspondences and are excluded from the source mapping count.",
+    "resolution": "decoded target property names, direct table-record xrefs, function boundaries, target metrics, and reviewed pseudocode",
+    "target_components": [
+      "w6qzgacqqy property tables",
+      "TClient property ABI"
+    ]
+  },
+  "inputs": {
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v232_current.json",
+    "spectron_features_sha256": "01ac7ba7e24b4f591cd11d6b9b16a742197666c6f459cdad849898c5ad930f95"
+  },
+  "interpretation": [
+    "The spectron_ prefix marks a target-specific descriptive label rather than a restored 1.8 symbol.",
+    "The two debug-handler callbacks copy bounded integer arrays into separate target globals.",
+    "The tclient_setotherplayerprops callback is an ABI adapter around the separately translated updateGlobalPlayer implementation.",
+    "No source counterpart is counted for any row in this artifact."
+  ],
+  "labels": [
+    {
+      "confidence": "high",
+      "current_name": "sub_1F00F8",
+      "evidence": [
+        "The decoded target property-table record for setdebugdatahandlers is at 0x398670.",
+        "The record points to this callback through the target xref at 0x398688.",
+        "Target pseudocode shows that it zeros the 1024-byte debug-handler table and copies at most 256 integer values from the array-like callback argument.",
+        "No 1.8 source registration or source address is claimed for this row."
+      ],
+      "function_end": "0x1f01e0",
+      "match_kind": "reviewed-target-only-callback-label",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "zeros the 1024-byte debug-handler table and copies at most 256 integer values from the array-like callback argument",
+      "proposed_name": "spectron_setdebugdatahandlers",
+      "script_name": "setdebugdatahandlers",
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated",
+      "target_callback_xref": "0x398688",
+      "target_default_name": true,
+      "target_direct_call_names": [
+        ".memcpy"
+      ],
+      "target_ea": "0x1f00f8",
+      "target_global": "w6qzgacqqy::kr8GxaAIUX",
+      "target_metrics": {
+        "basic_block_count": 8,
+        "branch_count": 6,
+        "call_count": 3,
+        "instruction_count": 58,
+        "mnemonic_hash": "6c59846939e2fc772e769161db1e8f9153d7639ff141d60535b7a89995e62661",
+        "opcode_shape_hash": "7986db698fa45af7243cdbd8eb302928524c394c8b4f4964446bd00281c331d1",
+        "register_detail_hash": "779af6bdfd8eb078a1b4b07fd55b7008bf64745e386241ab80358b05be499b53",
+        "register_shape_hash": "9206dc18dacfafb0b0b46547ba8fc675d138fc764f4f8f6879afae59c3c78c9e",
+        "return_count": 2,
+        "shape_hash": "6ee97267ad9f20a326d7f4a08c9ab73a11831c08f5518581228f0d96571a9d6e",
+        "size": 232,
+        "string_refs_hash": null
+      },
+      "target_property_table_record": "0x398670",
+      "target_role": "debug-handler table",
+      "target_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "current_name": "sub_1F0010",
+      "evidence": [
+        "The decoded target property-table record for adventure_setdebugdatahandlersauthorization is at 0x3986a0.",
+        "The record points to this callback through the target xref at 0x3986b8.",
+        "Target pseudocode shows that it zeros the 1024-byte debug-handler authorization table and copies at most 256 integer values from the array-like callback argument.",
+        "No 1.8 source registration or source address is claimed for this row."
+      ],
+      "function_end": "0x1f00f8",
+      "match_kind": "reviewed-target-only-callback-label",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "zeros the 1024-byte debug-handler authorization table and copies at most 256 integer values from the array-like callback argument",
+      "proposed_name": "spectron_adventure_setdebugdatahandlersauthorization",
+      "script_name": "adventure_setdebugdatahandlersauthorization",
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated",
+      "target_callback_xref": "0x3986b8",
+      "target_default_name": true,
+      "target_direct_call_names": [
+        ".memcpy"
+      ],
+      "target_ea": "0x1f0010",
+      "target_global": "w6qzgacqqy::nz6Gxas8SX",
+      "target_metrics": {
+        "basic_block_count": 8,
+        "branch_count": 6,
+        "call_count": 3,
+        "instruction_count": 58,
+        "mnemonic_hash": "6c59846939e2fc772e769161db1e8f9153d7639ff141d60535b7a89995e62661",
+        "opcode_shape_hash": "7986db698fa45af7243cdbd8eb302928524c394c8b4f4964446bd00281c331d1",
+        "register_detail_hash": "8386505b5eedfaae92bf3f26b7a211cd724d7def05092fc844c2581499d235b2",
+        "register_shape_hash": "9206dc18dacfafb0b0b46547ba8fc675d138fc764f4f8f6879afae59c3c78c9e",
+        "return_count": 2,
+        "shape_hash": "6ee97267ad9f20a326d7f4a08c9ab73a11831c08f5518581228f0d96571a9d6e",
+        "size": 232,
+        "string_refs_hash": null
+      },
+      "target_property_table_record": "0x3986a0",
+      "target_role": "debug-handler authorization table",
+      "target_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "current_name": "sub_1F2160",
+      "evidence": [
+        "The decoded target property-table record for tclient_setotherplayerprops is at 0x398430.",
+        "The record points to this callback through the target xref at 0x398448.",
+        "Target pseudocode shows that it checks that the result value is positive and then forwards the callback to the translated updateGlobalPlayer body.",
+        "No 1.8 source registration or source address is claimed for this row."
+      ],
+      "function_end": "0x1f2170",
+      "match_kind": "reviewed-target-only-callback-label",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "checks that the result value is positive and then forwards the callback to the translated updateGlobalPlayer body",
+      "proposed_name": "spectron_tclient_setotherplayerprops_adapter",
+      "script_name": "tclient_setotherplayerprops",
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated",
+      "target_callback_xref": "0x398448",
+      "target_default_name": true,
+      "target_direct_call_names": [],
+      "target_ea": "0x1f2160",
+      "target_global": null,
+      "target_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 2,
+        "call_count": 0,
+        "instruction_count": 4,
+        "mnemonic_hash": "844ea4570b8023f8f38da6d0c902512cd2efdb0cadf9403b5708135ce83b27ee",
+        "opcode_shape_hash": "8df76dcd510c099e584f6f691e4849a83a94091647bbc3b42af4914e69819df2",
+        "register_detail_hash": "198624267572897c60e928f77acdabd01c6358f2b3d803398457caa3775bf756",
+        "register_shape_hash": "198624267572897c60e928f77acdabd01c6358f2b3d803398457caa3775bf756",
+        "return_count": 1,
+        "shape_hash": "6056e64f6b7426c1662cd4203f8270673aeb047bc3176e85046b35c5b2623c97",
+        "size": 16,
+        "string_refs_hash": null
+      },
+      "target_property_table_record": "0x398430",
+      "target_role": "TClient property ABI adapter",
+      "target_string_refs": []
+    }
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed descriptive labels for three Spectron 2.2 property callbacks without a demonstrated 1.8 source counterpart",
+  "summary": {
+    "adapter_count": 1,
+    "debug_handler_count": 2,
+    "high_confidence_count": 3,
+    "label_count": 3,
+    "source_counterpart_count": 0,
+    "target_default_name_count": 3,
+    "target_only_count": 3
+  }
+}

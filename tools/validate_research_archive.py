@@ -107,6 +107,9 @@ def main():
     spectron_checkpoint_v232 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v232.json"
     )
+    spectron_checkpoint_v233 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v233.json"
+    )
     spectron_manual = load_json(
         "artifacts/spectron_manual_translation_anchors_20260826.json"
     )
@@ -250,6 +253,9 @@ def main():
     )
     spectron_tclient_handler_anchors = load_json(
         "artifacts/spectron_tclient_handler_manual_translation_anchors_20260828.json"
+    )
+    spectron_target_only_labels = load_json(
+        "artifacts/spectron_target_only_callback_labels_20260828.json"
     )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
@@ -6843,6 +6849,94 @@ def main():
         2,
     )
     check(
+        "Spectron v233 target-only label artifact",
+        spectron_target_only_labels["artifact"],
+        "spectron_target_only_callback_labels_20260828",
+    )
+    check(
+        "Spectron v233 target-only label network",
+        spectron_target_only_labels["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v233 target-only label count",
+        spectron_target_only_labels["summary"]["label_count"],
+        3,
+    )
+    check(
+        "Spectron v233 target-only high-confidence count",
+        spectron_target_only_labels["summary"]["high_confidence_count"],
+        3,
+    )
+    check(
+        "Spectron v233 target-only default count",
+        spectron_target_only_labels["summary"]["target_default_name_count"],
+        3,
+    )
+    check(
+        "Spectron v233 target-only source counterpart count",
+        spectron_target_only_labels["summary"]["source_counterpart_count"],
+        0,
+    )
+    check(
+        "Spectron v233 target-only debug-handler count",
+        spectron_target_only_labels["summary"]["debug_handler_count"],
+        2,
+    )
+    check(
+        "Spectron v233 target-only adapter count",
+        spectron_target_only_labels["summary"]["adapter_count"],
+        1,
+    )
+    target_only_rows = {
+        row["script_name"]: row for row in spectron_target_only_labels["labels"]
+    }
+    check(
+        "Spectron v233 debug-handler target",
+        target_only_rows["setdebugdatahandlers"]["target_ea"],
+        "0x1f00f8",
+    )
+    check(
+        "Spectron v233 debug-handler authorization target",
+        target_only_rows["adventure_setdebugdatahandlersauthorization"]["target_ea"],
+        "0x1f0010",
+    )
+    check(
+        "Spectron v233 other-player adapter target",
+        target_only_rows["tclient_setotherplayerprops"]["target_ea"],
+        "0x1f2160",
+    )
+    check(
+        "Spectron v233 target-only source mappings",
+        [row["source_counterpart"] for row in spectron_target_only_labels["labels"]],
+        [None, None, None],
+    )
+    check(
+        "Spectron v233 checkpoint artifact",
+        spectron_checkpoint_v233["artifact"],
+        "spectron_translation_checkpoint_20260828_v233",
+    )
+    check(
+        "Spectron v233 checkpoint parent",
+        spectron_checkpoint_v233["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v232",
+    )
+    check(
+        "Spectron v233 checkpoint database hash",
+        spectron_checkpoint_v233["database"]["sha256"],
+        "21fa935e68dd605c0549656df3a3b832d0c91e080b7d703b2042132ba078ddd6",
+    )
+    check(
+        "Spectron v233 checkpoint default sub count",
+        spectron_checkpoint_v233["database"]["default_sub_function_count"],
+        1068,
+    )
+    check(
+        "Spectron v233 checkpoint target-only count",
+        spectron_checkpoint_v233["target_only_callback_labels"]["verified_name_count"],
+        3,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -6951,6 +7045,7 @@ def main():
         spectron_tclient_script_property_anchors,
         spectron_file_cache_property_anchors,
         spectron_tclient_handler_anchors,
+        spectron_target_only_labels,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

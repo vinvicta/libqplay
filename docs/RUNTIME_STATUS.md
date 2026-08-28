@@ -491,6 +491,19 @@ This is the short handoff view. The full reasoning and command history are in
      `tools/generate_spectron_tclient_handler_anchors.py`, and
      `artifacts/spectron_translation_checkpoint_20260828_v232.json`.
 
+63c. The v233 IDA checkpoint gives three target-only property callbacks
+     descriptive `spectron_` labels without claiming 1.8 counterparts. The
+     two debug-handler callbacks copy at most 256 integers into separate
+     1024-byte target globals. The third is a positive-result ABI adapter for
+     the already translated `v18_TClient_updateGlobalPlayer` body. The clean
+     reopen has 11,694 functions and 1,068 remaining default `sub_` names. The
+     database SHA-256 is
+     `21fa935e68dd605c0549656df3a3b832d0c91e080b7d703b2042132ba078ddd6`.
+     See
+     `artifacts/spectron_target_only_callback_labels_20260828.json`,
+     `tools/generate_spectron_target_only_labels.py`, and
+     `artifacts/spectron_translation_checkpoint_20260828_v233.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The

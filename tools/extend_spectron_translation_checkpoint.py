@@ -59,7 +59,11 @@ def main() -> None:
         raise ValueError("unexpected anchor artifact")
     if not verification.get("verified"):
         raise ValueError("the anchor reopen verification did not pass")
-    expected_count = anchors["summary"]["anchor_count"]
+    expected_count = anchors["summary"].get("anchor_count")
+    if expected_count is None:
+        expected_count = anchors["summary"].get("label_count")
+    if expected_count is None:
+        raise ValueError("anchor artifact has neither anchor_count nor label_count")
     if verification.get("verified_name_count") != expected_count:
         raise ValueError("anchor verification count differs from anchor artifact")
     if verification.get("failure_count") != 0:
