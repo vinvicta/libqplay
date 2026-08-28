@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v304 Spectron database. It
-contains 11,695 functions and 456 remaining default `sub_` names. The v263
+The current documented translation frontier is the v305 Spectron database. It
+contains 11,695 functions and 448 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -206,6 +206,12 @@ slot and face lifecycle callbacks, and one covers the interpreter's current
 scaling-ratio helper. All six match normalized ARM64 shape. Five match the
 complete recorded feature set; `tt_face_init` differs only in register
 allocation detail. The target now has 456 remaining default `sub_` names.
+The v305 revision adds eight high-confidence FreeType TrueType interpreter
+labels. Seven are the remaining `Round_*` callbacks selected by
+`Compute_Round`, and the eighth is `Compute_Funcs`, which selects projection
+and movement callbacks. All eight match normalized ARM64 shape. Seven match
+the complete recorded feature set; `Compute_Funcs` differs only in register
+allocation detail. The target now has 448 remaining default `sub_` names.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -284,6 +290,8 @@ The current v303 database is kept locally as
 `analysis/spectron_libqplay_translated_v303.i64`.
 The current v304 database is kept locally as
 `analysis/spectron_libqplay_translated_v304.i64`.
+The current v305 database is kept locally as
+`analysis/spectron_libqplay_translated_v305.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -742,6 +750,37 @@ and [`ttinterp.c`](https://android.googlesource.com/platform/external/freetype/+
 The checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v304.json`.
 
+The v305 FreeType TrueType rounding evidence is in
+`artifacts/spectron_freetype_tt_rounding_manual_translation_anchors_20260828.json`.
+It translates the seven remaining rounding callbacks from the source's
+`Round_*` family, plus `Compute_Funcs`. The seven rounding helpers implement
+grid, half-grid, downward, upward, double-grid, super, and precise super-45
+modes. `Compute_Funcs` installs the projection and movement callbacks for the
+active graphics state.
+
+| 1.8 role | Source | Spectron target | Applied label | Match |
+| --- | ---: | ---: | --- | --- |
+| `Round_To_Grid` | `0x25fe38` | `0x26d2a8` | `v18_Round_To_Grid` | exact metrics |
+| `Round_To_Half_Grid` | `0x25fe7c` | `0x26d2ec` | `v18_Round_To_Half_Grid` | exact metrics |
+| `Round_Down_To_Grid` | `0x25feb8` | `0x26d328` | `v18_Round_Down_To_Grid` | exact metrics |
+| `Round_Up_To_Grid` | `0x25fef4` | `0x26d364` | `v18_Round_Up_To_Grid` | exact metrics |
+| `Round_To_Double_Grid` | `0x25ff38` | `0x26d3a8` | `v18_Round_To_Double_Grid` | exact metrics |
+| `Round_Super` | `0x25ff7c` | `0x26d3ec` | `v18_Round_Super` | exact metrics |
+| `Round_Super_45` | `0x25ffe8` | `0x26d458` | `v18_Round_Super_45` | exact metrics |
+| `Compute_Funcs` | `0x260050` | `0x26d4c0` | `v18_Compute_Funcs` | normalized shape, register-detail difference |
+
+The source and target pseudocode preserve the same arithmetic, callback
+selection, and `0xd470` address displacement. All eight names reopened with
+zero failures, and the broad regression still verifies all 3,641 earlier
+high-confidence aliases. The v305 checkpoint records 11,695 functions with
+448 remaining default names. Its database SHA-256 is
+`28920bb7cd08c4b94bc16b82bd3a4770e9873b55af3ff2269bec87755876c931`.
+
+The upstream reference for the v305 pass is FreeType's
+[`ttinterp.c`](https://android.googlesource.com/platform/external/freetype/+/f720f0dbcf012d6c984dbbefa0875ef9840458c6/src/truetype/ttinterp.c).
+The checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v305.json`.
+
 The upstream references for the v303 pass are FreeType's
 [`ttdriver.c`](https://android.googlesource.com/platform/external/freetype/+/6da2e02232e1bcf31cfb78894d46c7902b90ee9f/src/truetype/ttdriver.c),
 [`ttpload.c`](https://android.googlesource.com/platform/external/freetype/+/75b4fbd0462ad4544ffc447213777d1f0d536c1a/src/truetype/ttpload.c),
@@ -804,14 +843,16 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v301.json`, followed by
 `artifacts/spectron_translation_checkpoint_20260828_v302.json`, followed by
 `artifacts/spectron_translation_checkpoint_20260828_v303.json`, followed by
-`artifacts/spectron_translation_checkpoint_20260828_v304.json`. The reviewed
+`artifacts/spectron_translation_checkpoint_20260828_v304.json`, followed by
+`artifacts/spectron_translation_checkpoint_20260828_v305.json`. The reviewed
 legacy, Android, script-table, runtime, property, zlib, libjpeg, GIF, and
-FreeType labels through v304 were reopened and verified with zero failures.
+FreeType labels through v305 were reopened and verified with zero failures.
 That includes the v297 forward-DCT literal-pool boundary repair, the v298
 FreeType base cleanup aliases, the v299 SFNT service aliases, the v300 SFNT
 interface aliases, the v301 smooth-renderer aliases, and the v302 gray-raster
-aliases, the v303 TrueType driver and interpreter aliases, and the v304
-TrueType runtime aliases added in the latest passes.
+aliases, the v303 TrueType driver and interpreter aliases, the v304 TrueType
+runtime aliases, and the v305 TrueType rounding aliases added in the latest
+passes.
 These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or
 TLS service.

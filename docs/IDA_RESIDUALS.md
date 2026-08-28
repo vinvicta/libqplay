@@ -49,8 +49,8 @@ active desktop IDA database remained locked and was not changed.
 ## Spectron FreeType continuation
 
 The source-side count above is preserved as its own historical inventory. It
-is not the current count for the stripped Spectron 2.2 target. The v304
-Spectron copy has 11,695 functions and 456 remaining default `sub_` names.
+is not the current count for the stripped Spectron 2.2 target. The v305
+Spectron copy has 11,695 functions and 448 remaining default `sub_` names.
 The v298 pass removed two names from the unresolved target queue by identifying
 the FreeType base helpers at target `0x25e304` and `0x260300` as
 `v18_destroy_size` and `v18_destroy_face`.
@@ -147,6 +147,19 @@ The v304 checkpoint and database hash are recorded in
 `artifacts/spectron_translation_checkpoint_20260828_v304.json`; the persisted
 database hash is
 `8c2e1b1591fbb80bb3d874c3dfa4708d6e7d4bfc503748a70c519f07202494c4`.
+
+The v305 pass removes eight more defaults from the FreeType queue. Seven are
+the remaining TrueType `Round_*` callbacks selected by `Compute_Round`, and
+the eighth is `Compute_Funcs`, which selects the projection and movement
+callbacks. All eight pairs match normalized ARM64 shape. Seven match the
+complete feature record, while `Compute_Funcs` differs only in
+register-allocation detail. All eight names reopened with zero failures. The
+machine-readable record is
+`artifacts/spectron_freetype_tt_rounding_manual_translation_anchors_20260828.json`.
+The v305 checkpoint and database hash are recorded in
+`artifacts/spectron_translation_checkpoint_20260828_v305.json`; the persisted
+database hash is
+`28920bb7cd08c4b94bc16b82bd3a4770e9873b55af3ff2269bec87755876c931`.
 
 ## CyaSSL role pass
 

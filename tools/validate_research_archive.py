@@ -692,6 +692,12 @@ def main():
     spectron_checkpoint_v304 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v304.json"
     )
+    spectron_freetype_tt_rounding_anchors = load_json(
+        "artifacts/spectron_freetype_tt_rounding_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v305 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v305.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -14729,6 +14735,180 @@ def main():
         6,
     )
     check(
+        "Spectron FreeType TrueType rounding artifact",
+        spectron_freetype_tt_rounding_anchors["artifact"],
+        "spectron_freetype_tt_rounding_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron FreeType TrueType rounding network",
+        spectron_freetype_tt_rounding_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron FreeType TrueType rounding anchor count",
+        spectron_freetype_tt_rounding_anchors["summary"]["anchor_count"],
+        8,
+    )
+    check(
+        "Spectron FreeType TrueType rounding high-confidence count",
+        spectron_freetype_tt_rounding_anchors["summary"]["high_confidence_count"],
+        8,
+    )
+    check(
+        "Spectron FreeType TrueType rounding normalized count",
+        spectron_freetype_tt_rounding_anchors["summary"][
+            "normalized_shape_exact_count"
+        ],
+        8,
+    )
+    check(
+        "Spectron FreeType TrueType rounding full-match count",
+        spectron_freetype_tt_rounding_anchors["summary"]["full_metric_exact_count"],
+        7,
+    )
+    freetype_tt_rounding_rows = {
+        row["spectron_ea"]: row
+        for row in spectron_freetype_tt_rounding_anchors["anchors"]
+    }
+    freetype_tt_rounding_expected = {
+        "0x26d2a8": (
+            "0x25fe38",
+            "v18_Round_To_Grid",
+            "TrueType grid-rounding callback",
+            [],
+            True,
+        ),
+        "0x26d2ec": (
+            "0x25fe7c",
+            "v18_Round_To_Half_Grid",
+            "TrueType half-grid rounding callback",
+            [],
+            True,
+        ),
+        "0x26d328": (
+            "0x25feb8",
+            "v18_Round_Down_To_Grid",
+            "TrueType downward grid-rounding callback",
+            [],
+            True,
+        ),
+        "0x26d364": (
+            "0x25fef4",
+            "v18_Round_Up_To_Grid",
+            "TrueType upward grid-rounding callback",
+            [],
+            True,
+        ),
+        "0x26d3a8": (
+            "0x25ff38",
+            "v18_Round_To_Double_Grid",
+            "TrueType double-grid rounding callback",
+            [],
+            True,
+        ),
+        "0x26d3ec": (
+            "0x25ff7c",
+            "v18_Round_Super",
+            "TrueType super-rounding callback",
+            [],
+            True,
+        ),
+        "0x26d458": (
+            "0x25ffe8",
+            "v18_Round_Super_45",
+            "TrueType precise super-rounding callback",
+            [],
+            True,
+        ),
+        "0x26d4c0": (
+            "0x260050",
+            "v18_Compute_Funcs",
+            "TrueType interpreter callback selector",
+            ["register_detail_hash"],
+            False,
+        ),
+    }
+    check(
+        "Spectron FreeType TrueType rounding target set",
+        set(freetype_tt_rounding_rows),
+        set(freetype_tt_rounding_expected),
+    )
+    for target_ea, (
+        source_ea,
+        expected_name,
+        expected_role,
+        expected_differences,
+        expected_full_match,
+    ) in freetype_tt_rounding_expected.items():
+        row = freetype_tt_rounding_rows[target_ea]
+        check(
+            "Spectron FreeType TrueType rounding source " + target_ea,
+            row["original_ea"],
+            source_ea,
+        )
+        check(
+            "Spectron FreeType TrueType rounding name " + target_ea,
+            row["proposed_name"],
+            expected_name,
+        )
+        check(
+            "Spectron FreeType TrueType rounding role " + target_ea,
+            row["source_role"],
+            expected_role,
+        )
+        check(
+            "Spectron FreeType TrueType rounding metrics " + target_ea,
+            row["metric_differences"],
+            expected_differences,
+        )
+        check(
+            "Spectron FreeType TrueType rounding normalized " + target_ea,
+            row["normalized_shape_equal"],
+            True,
+        )
+        check(
+            "Spectron FreeType TrueType rounding full metrics " + target_ea,
+            row["full_metric_equal"],
+            expected_full_match,
+        )
+    check(
+        "Spectron v305 checkpoint artifact",
+        spectron_checkpoint_v305["artifact"],
+        "spectron_translation_checkpoint_20260828_v305",
+    )
+    check(
+        "Spectron v305 checkpoint parent",
+        spectron_checkpoint_v305["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v304",
+    )
+    check(
+        "Spectron v305 checkpoint parent path",
+        spectron_checkpoint_v305["parent_checkpoint"]["path"],
+        "artifacts/spectron_translation_checkpoint_20260828_v304.json",
+    )
+    check(
+        "Spectron v305 checkpoint database hash",
+        spectron_checkpoint_v305["database"]["sha256"],
+        "28920bb7cd08c4b94bc16b82bd3a4770e9873b55af3ff2269bec87755876c931",
+    )
+    check(
+        "Spectron v305 checkpoint function count",
+        spectron_checkpoint_v305["database"]["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v305 checkpoint default sub count",
+        spectron_checkpoint_v305["database"]["default_sub_function_count"],
+        448,
+    )
+    check(
+        "Spectron v305 checkpoint TrueType rounding count",
+        spectron_checkpoint_v305["freetype_tt_rounding_anchors"][
+            "verified_name_count"
+        ],
+        8,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -15093,6 +15273,8 @@ def main():
         spectron_checkpoint_v303,
         spectron_freetype_tt_runtime_anchors,
         spectron_checkpoint_v304,
+        spectron_freetype_tt_rounding_anchors,
+        spectron_checkpoint_v305,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
