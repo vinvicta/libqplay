@@ -644,6 +644,12 @@ def main():
     spectron_checkpoint_v296 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v296.json"
     )
+    spectron_fdct_literal_pool_repair = load_json(
+        "artifacts/spectron_fdct_literal_pool_boundary_repair_20260828.json"
+    )
+    spectron_checkpoint_v297 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v297.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -13571,6 +13577,99 @@ def main():
         1,
     )
     check(
+        "Spectron FDCT literal-pool repair artifact",
+        spectron_fdct_literal_pool_repair["artifact"],
+        "spectron_fdct_literal_pool_boundary_repair_20260828",
+    )
+    check(
+        "Spectron FDCT literal-pool repair network",
+        spectron_fdct_literal_pool_repair["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron FDCT literal-pool repair pool count",
+        spectron_fdct_literal_pool_repair["summary"]["pool_count"],
+        1,
+    )
+    check(
+        "Spectron FDCT literal-pool repair removed function count",
+        spectron_fdct_literal_pool_repair["summary"][
+            "phantom_function_count_removed"
+        ],
+        1,
+    )
+    check(
+        "Spectron FDCT literal-pool repair data item count",
+        spectron_fdct_literal_pool_repair["summary"]["data_item_count_created"],
+        4,
+    )
+    check(
+        "Spectron FDCT literal-pool repair byte preservation",
+        spectron_fdct_literal_pool_repair["summary"]["bytes_changed"],
+        False,
+    )
+    check(
+        "Spectron FDCT literal-pool repair reopen failures",
+        spectron_fdct_literal_pool_repair["summary"]["reopen_failure_count"],
+        0,
+    )
+    check(
+        "Spectron FDCT literal-pool repair start",
+        spectron_fdct_literal_pool_repair["pool"]["target_start"],
+        "0x2b9870",
+    )
+    check(
+        "Spectron FDCT literal-pool repair real neighbor",
+        spectron_fdct_literal_pool_repair["pool"]["real_function_after_pool"][
+            "name"
+        ],
+        "v18_jpeg_fdct_ifast_int",
+    )
+    check(
+        "Spectron v297 checkpoint artifact",
+        spectron_checkpoint_v297["artifact"],
+        "spectron_translation_checkpoint_20260828_v297",
+    )
+    check(
+        "Spectron v297 checkpoint parent",
+        spectron_checkpoint_v297["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v296",
+    )
+    check(
+        "Spectron v297 checkpoint parent path",
+        spectron_checkpoint_v297["parent_checkpoint"]["path"],
+        "artifacts/spectron_translation_checkpoint_20260828_v296.json",
+    )
+    check(
+        "Spectron v297 checkpoint database hash",
+        spectron_checkpoint_v297["database"]["sha256"],
+        "c4f0175e2839ed6143413d67e1cfef35daf973bcdbb26181ad1879c355f6b3c1",
+    )
+    check(
+        "Spectron v297 checkpoint function count",
+        spectron_checkpoint_v297["database"]["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v297 checkpoint default sub count",
+        spectron_checkpoint_v297["database"]["default_sub_function_count"],
+        530,
+    )
+    check(
+        "Spectron v297 checkpoint repair pool count",
+        spectron_checkpoint_v297["fdct_literal_pool_boundary_repair"][
+            "pool_count"
+        ],
+        1,
+    )
+    check(
+        "Spectron v297 checkpoint repair reopen failures",
+        spectron_checkpoint_v297["fdct_literal_pool_boundary_repair"][
+            "reopen_failure_count"
+        ],
+        0,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -13919,6 +14018,8 @@ def main():
         spectron_checkpoint_v295,
         spectron_gif_lzw_line_decoder_anchors,
         spectron_checkpoint_v296,
+        spectron_fdct_literal_pool_repair,
+        spectron_checkpoint_v297,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

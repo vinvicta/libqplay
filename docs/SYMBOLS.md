@@ -928,6 +928,15 @@ the real integer forward-DCT functions at source `0x2ac440` and target
 a later IDA boundary repair so the function inventory does not count data as
 callable code.
 
+The v297 repair removes the target phantom function at `0x2b9870` and defines
+the four 16-byte vectors as `xmmword_2B9870`, `xmmword_2B9880`,
+`xmmword_2B9890`, and `xmmword_2B98A0`. The real target function
+`v18_jpeg_fdct_ifast_int` remains at `0x2b98b0`. The raw 64-byte interval is
+unchanged, and the reopened repaired database no longer counts the pool as a
+function. The repair artifact is
+`artifacts/spectron_fdct_literal_pool_boundary_repair_20260828.json`; the v297
+checkpoint records 11,695 functions and 530 remaining default `sub_` names.
+
 ## Current Spectron libjpeg compressor preprocessing and downsampling labels
 
 The v295 pass translated ten retained routines from the compressor-side
