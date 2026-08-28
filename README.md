@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v305 Spectron database. It
-contains 11,695 functions and 448 remaining default `sub_` names. The v263
+The current documented translation frontier is the v306 Spectron database. It
+contains 11,695 functions and 442 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -212,6 +212,11 @@ labels. Seven are the remaining `Round_*` callbacks selected by
 and movement callbacks. All eight match normalized ARM64 shape. Seven match
 the complete recorded feature set; `Compute_Funcs` differs only in register
 allocation detail. The target now has 448 remaining default `sub_` names.
+The v306 revision adds six high-confidence FreeType TrueType opcode-state
+labels. Four cover the `SZP0`, `SZP1`, `SZP2`, and `SZPS` zone-pointer
+handlers, while two cover the `AlignRP` and `UTP` point-state handlers. All
+six match the complete recorded feature set, and the target now has 442
+remaining default `sub_` names.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -292,6 +297,8 @@ The current v304 database is kept locally as
 `analysis/spectron_libqplay_translated_v304.i64`.
 The current v305 database is kept locally as
 `analysis/spectron_libqplay_translated_v305.i64`.
+The current v306 database is kept locally as
+`analysis/spectron_libqplay_translated_v306.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -781,6 +788,35 @@ The upstream reference for the v305 pass is FreeType's
 The checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v305.json`.
 
+The v306 FreeType TrueType opcode-state evidence is in
+`artifacts/spectron_freetype_tt_opcode_state_manual_translation_anchors_20260828.json`.
+It translates the four zone-pointer opcode handlers `SZP0`, `SZP1`, `SZP2`,
+and `SZPS`, followed by the point-state handlers `AlignRP` and `UTP`.
+
+| 1.8 role | Source | Spectron target | Applied label | Match |
+| --- | ---: | ---: | --- | --- |
+| `Ins_SZP0` | `0x2602a4` | `0x26d714` | `v18_Ins_SZP0` | exact metrics |
+| `Ins_SZP1` | `0x2602fc` | `0x26d76c` | `v18_Ins_SZP1` | exact metrics |
+| `Ins_SZP2` | `0x260354` | `0x26d7c4` | `v18_Ins_SZP2` | exact metrics |
+| `Ins_SZPS` | `0x2603ac` | `0x26d81c` | `v18_Ins_SZPS` | exact metrics |
+| `Ins_ALIGNRP` | `0x260468` | `0x26d8d8` | `v18_Ins_ALIGNRP` | exact metrics |
+| `Ins_UTP` | `0x260590` | `0x26da00` | `v18_Ins_UTP` | exact metrics |
+
+The target handlers are reached from the parallel `TT_RunIns` opcode
+dispatcher. The four `SZP` callbacks update the interpreter's zone pointers
+and graphics-state selectors. `AlignRP` projects the reference point and
+moves the selected points, while `UTP` clears touch state according to the
+free vector. The source and target functions preserve the `0xd470`
+displacement and all recorded feature metrics. All six names reopened with
+zero failures, and the v306 checkpoint records 11,695 functions with 442
+remaining default names. Its database SHA-256 is
+`4a4eb58f2245daf73e262e87c447370e9e8da96329e5a0ab19ca8e2740ad91df`.
+
+The upstream reference for the v306 pass is FreeType's
+[`ttinterp.c`](https://android.googlesource.com/platform/external/freetype/+/f720f0dbcf012d6c984dbbefa0875ef9840458c6/src/truetype/ttinterp.c).
+The checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v306.json`.
+
 The upstream references for the v303 pass are FreeType's
 [`ttdriver.c`](https://android.googlesource.com/platform/external/freetype/+/6da2e02232e1bcf31cfb78894d46c7902b90ee9f/src/truetype/ttdriver.c),
 [`ttpload.c`](https://android.googlesource.com/platform/external/freetype/+/75b4fbd0462ad4544ffc447213777d1f0d536c1a/src/truetype/ttpload.c),
@@ -844,15 +880,16 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v302.json`, followed by
 `artifacts/spectron_translation_checkpoint_20260828_v303.json`, followed by
 `artifacts/spectron_translation_checkpoint_20260828_v304.json`, followed by
-`artifacts/spectron_translation_checkpoint_20260828_v305.json`. The reviewed
+`artifacts/spectron_translation_checkpoint_20260828_v305.json`, followed by
+`artifacts/spectron_translation_checkpoint_20260828_v306.json`. The reviewed
 legacy, Android, script-table, runtime, property, zlib, libjpeg, GIF, and
-FreeType labels through v305 were reopened and verified with zero failures.
+FreeType labels through v306 were reopened and verified with zero failures.
 That includes the v297 forward-DCT literal-pool boundary repair, the v298
 FreeType base cleanup aliases, the v299 SFNT service aliases, the v300 SFNT
 interface aliases, the v301 smooth-renderer aliases, and the v302 gray-raster
 aliases, the v303 TrueType driver and interpreter aliases, the v304 TrueType
 runtime aliases, and the v305 TrueType rounding aliases added in the latest
-passes.
+passes, and the v306 TrueType opcode-state aliases added in the latest pass.
 These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or
 TLS service.
