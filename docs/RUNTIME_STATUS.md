@@ -1523,6 +1523,19 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_gui_text_list_entry_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+271. The next IDA pass resolved three compact encryption and script-variable
+    helpers. `TEncryption_initStaticScriptVars_void` maps to the target
+    property-registration bridge with the same 15-entry count. The
+    `TGraalVar_isPaused_void` and `TGraalVar_setProtectedObject_int` methods
+    map into the target `G0gxgajWBw` class and preserve receiver offsets `+17`
+    and `+18`. All three target ABI names received `v18_` aliases and reopened
+    successfully in the v212 copy, which has 11,694 functions, 3,641
+    high-confidence labels, and 1,210 default `sub_` names, with zero semantic
+    reopen failures. See
+    `artifacts/spectron_encryption_graalvar_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_encryption_graalvar_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 267. The next IDA pass resolved eight small `THTMLPage` methods. They cover
     font-pointer cleanup, dirty and word-wrap state, parse tags, selection,
     URL and line initialization, and tab-stop replacement. The Spectron

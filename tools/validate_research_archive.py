@@ -137,6 +137,9 @@ def main():
     spectron_gui_text_list_entry_anchors = load_json(
         "artifacts/spectron_gui_text_list_entry_manual_translation_anchors_20260827.json"
     )
+    spectron_encryption_graalvar_anchors = load_json(
+        "artifacts/spectron_encryption_graalvar_manual_translation_anchors_20260827.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -2129,6 +2132,17 @@ def main():
     check("Spectron GUI text-list entry exact-shape count", spectron_gui_text_list_entry_anchors["summary"]["exact_shape_anchor_count"], 3)
     check("Spectron GUI text-list entry full-metric exact count", spectron_gui_text_list_entry_anchors["summary"]["full_metric_exact_count"], 3)
     check("Spectron GUI text-list entry default targets", spectron_gui_text_list_entry_anchors["summary"]["target_default_name_count"], 3)
+    check(
+        "Spectron encryption-GraalVar artifact",
+        spectron_encryption_graalvar_anchors["artifact"],
+        "spectron_encryption_graalvar_manual_translation_anchors_20260827",
+    )
+    check("Spectron encryption-GraalVar network", spectron_encryption_graalvar_anchors["network_contacted"], False)
+    check("Spectron encryption-GraalVar total", spectron_encryption_graalvar_anchors["summary"]["anchor_count"], 3)
+    check("Spectron encryption-GraalVar high confidence", spectron_encryption_graalvar_anchors["summary"]["high_confidence_count"], 3)
+    check("Spectron encryption-GraalVar exact-shape count", spectron_encryption_graalvar_anchors["summary"]["exact_shape_anchor_count"], 3)
+    check("Spectron encryption-GraalVar full-metric exact count", spectron_encryption_graalvar_anchors["summary"]["full_metric_exact_count"], 3)
+    check("Spectron encryption-GraalVar default targets", spectron_encryption_graalvar_anchors["summary"]["target_default_name_count"], 0)
     check(
         "Spectron TString artifact",
         spectron_tstring_anchors["artifact"],
@@ -5180,7 +5194,8 @@ def main():
     check("Spectron checkpoint HTML page anchor count", spectron_checkpoint["html_page_anchors"]["verified_name_count"], 8)
     check("Spectron checkpoint GUI text-list anchor count", spectron_checkpoint["gui_text_list_anchors"]["verified_name_count"], 8)
     check("Spectron checkpoint GUI text-list entry anchor count", spectron_checkpoint["gui_text_list_entry_anchors"]["verified_name_count"], 3)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "5fe1b5504cbca2cd774a0e7a2e6ef20c6f073bcf880c22b929688ec05f9489d2")
+    check("Spectron checkpoint encryption-GraalVar anchor count", spectron_checkpoint["encryption_graalvar_anchors"]["verified_name_count"], 3)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "1eeda98f88a0816f00340f010c724695f36f66c08c6622241610ac680e30270d")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -5268,6 +5283,7 @@ def main():
         spectron_html_page_anchors,
         spectron_gui_text_list_anchors,
         spectron_gui_text_list_entry_anchors,
+        spectron_encryption_graalvar_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

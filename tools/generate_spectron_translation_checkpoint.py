@@ -77,6 +77,8 @@ def main() -> None:
     parser.add_argument("--gui-text-list-verification", type=Path)
     parser.add_argument("--gui-text-list-entry-anchors", type=Path)
     parser.add_argument("--gui-text-list-entry-verification", type=Path)
+    parser.add_argument("--encryption-graalvar-anchors", type=Path)
+    parser.add_argument("--encryption-graalvar-verification", type=Path)
     parser.add_argument("--player-helper-anchors", type=Path)
     parser.add_argument("--player-helper-verification", type=Path)
     parser.add_argument("--input-window-anchors", type=Path)
@@ -655,6 +657,37 @@ def main() -> None:
         result["gui_text_list_entry_anchors"] = gui_text_list_entry
         result["interpretation"].append(
             "The two-hundred-eleventh database revision also contains the separately reviewed small GuiTextListEntry property anchors."
+        )
+    encryption_graalvar = None
+    if args.encryption_graalvar_anchors or args.encryption_graalvar_verification:
+        if not args.encryption_graalvar_anchors or not args.encryption_graalvar_verification:
+            raise ValueError(
+                "encryption-GraalVar anchors and encryption-GraalVar verification must be supplied together"
+            )
+        encryption_graalvar_document = load(args.encryption_graalvar_anchors)
+        encryption_graalvar_verification = load(args.encryption_graalvar_verification)
+        if (
+            encryption_graalvar_document.get("artifact")
+            != "spectron_encryption_graalvar_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected encryption-GraalVar anchor artifact")
+        if not encryption_graalvar_verification.get("verified"):
+            raise ValueError("encryption-GraalVar anchor reopen verification did not pass")
+        expected_encryption_graalvar = len(encryption_graalvar_document["anchors"])
+        if encryption_graalvar_verification["verified_name_count"] != expected_encryption_graalvar:
+            raise ValueError("encryption-GraalVar verification count differs from artifact")
+        encryption_graalvar = {
+            "anchor_path": str(args.encryption_graalvar_anchors),
+            "anchor_sha256": sha256_path(args.encryption_graalvar_anchors),
+            "reopen_verification": str(args.encryption_graalvar_verification),
+            "anchor_count": expected_encryption_graalvar,
+            "verified_name_count": encryption_graalvar_verification["verified_name_count"],
+            "reopen_failure_count": encryption_graalvar_verification["failure_count"],
+        }
+    if encryption_graalvar is not None:
+        result["encryption_graalvar_anchors"] = encryption_graalvar
+        result["interpretation"].append(
+            "The two-hundred-twelfth database revision also contains the separately reviewed TEncryption and TGraalVar compact helpers."
         )
     runtime_path = None
     if args.runtime_path_anchors or args.runtime_path_verification:
