@@ -1611,6 +1611,19 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_server_object_lifecycle_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+277. The next IDA pass resolved 39 residual `GuiMLTextCtrl` rows in the
+    stripped Spectron library. The pass covers field and HTML-page accessors,
+    script line and text wrappers, selection state, reflow, mouse input, the
+    style hook, and the control and property destructor entries. Twenty-seven
+    rows match every recorded feature metric, 30 preserve normalized shape,
+    and nine are explicit layout-change correspondences caused by rebuilt
+    string-wrapper or base-control code. All 39 aliases reopened successfully
+    in v218, which has 11,694 functions, 3,641 high-confidence labels, and
+    1,165 remaining default `sub_` names. See
+    `artifacts/spectron_gui_ml_text_residual_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_gui_ml_text_residual_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 267. The next IDA pass resolved eight small `THTMLPage` methods. They cover
     font-pointer cleanup, dirty and word-wrap state, parse tags, selection,
     URL and line initialization, and tab-stop replacement. The Spectron

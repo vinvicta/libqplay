@@ -155,6 +155,9 @@ def main():
     spectron_server_object_lifecycle_anchors = load_json(
         "artifacts/spectron_server_object_lifecycle_manual_translation_anchors_20260827.json"
     )
+    spectron_gui_ml_text_residual_anchors = load_json(
+        "artifacts/spectron_gui_ml_text_residual_manual_translation_anchors_20260827.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -2335,6 +2338,60 @@ def main():
         "Spectron server-object lifecycle Sign destructor target",
         server_object_by_name["TServerSign_TServerSign"]["spectron_ea"],
         "0x24a11c",
+    )
+    check(
+        "Spectron GuiMLTextCtrl residual artifact",
+        spectron_gui_ml_text_residual_anchors["artifact"],
+        "spectron_gui_ml_text_residual_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron GuiMLTextCtrl residual network",
+        spectron_gui_ml_text_residual_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron GuiMLTextCtrl residual total",
+        spectron_gui_ml_text_residual_anchors["summary"]["anchor_count"],
+        39,
+    )
+    check(
+        "Spectron GuiMLTextCtrl residual high confidence",
+        spectron_gui_ml_text_residual_anchors["summary"]["high_confidence_count"],
+        39,
+    )
+    check(
+        "Spectron GuiMLTextCtrl residual exact-shape count",
+        spectron_gui_ml_text_residual_anchors["summary"]["exact_shape_anchor_count"],
+        30,
+    )
+    check(
+        "Spectron GuiMLTextCtrl residual full-metric exact count",
+        spectron_gui_ml_text_residual_anchors["summary"]["full_metric_exact_count"],
+        27,
+    )
+    check(
+        "Spectron GuiMLTextCtrl residual layout-change count",
+        spectron_gui_ml_text_residual_anchors["summary"]["layout_change_anchor_count"],
+        9,
+    )
+    check(
+        "Spectron GuiMLTextCtrl residual default targets",
+        spectron_gui_ml_text_residual_anchors["summary"]["target_default_name_count"],
+        26,
+    )
+    gui_ml_by_name = {
+        row["original_name"]: row
+        for row in spectron_gui_ml_text_residual_anchors["anchors"]
+    }
+    check(
+        "Spectron GuiMLTextCtrl mouse-down target",
+        gui_ml_by_name["GuiMLTextCtrl_onMouseDown_GuiEvent_const"]["spectron_ea"],
+        "0x1c2ad8",
+    )
+    check(
+        "Spectron GuiMLTextCtrl property destructor target",
+        gui_ml_by_name["GuiMLTextCtrlProperties_GuiMLTextCtrlProperties__2"]["spectron_ea"],
+        "0x1c4724",
     )
     check(
         "Spectron TString artifact",
@@ -5178,7 +5235,7 @@ def main():
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1191)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1165)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -5393,7 +5450,8 @@ def main():
     check("Spectron checkpoint MRandom anchor count", spectron_checkpoint["mrandom_anchors"]["verified_name_count"], 29)
     check("Spectron checkpoint residual TStringList anchor count", spectron_checkpoint["tstringlist_residual_anchors"]["verified_name_count"], 4)
     check("Spectron checkpoint server-object lifecycle anchor count", spectron_checkpoint["server_object_lifecycle_anchors"]["verified_name_count"], 49)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "f6a40e8f1849fa008b64af1cdf31a47375ae521a6edcb8afc333af9fa00a9840")
+    check("Spectron checkpoint GuiMLTextCtrl residual anchor count", spectron_checkpoint["gui_ml_text_residual_anchors"]["verified_name_count"], 39)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "d82c297a781db70c75d56b9dad679db224127653c55a5c312542ab698e5b53b5")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -5487,6 +5545,7 @@ def main():
         spectron_mrandom_anchors,
         spectron_tstringlist_residual_anchors,
         spectron_server_object_lifecycle_anchors,
+        spectron_gui_ml_text_residual_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

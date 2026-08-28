@@ -89,6 +89,8 @@ def main() -> None:
     parser.add_argument("--tstringlist-residual-verification", type=Path)
     parser.add_argument("--server-object-lifecycle-anchors", type=Path)
     parser.add_argument("--server-object-lifecycle-verification", type=Path)
+    parser.add_argument("--gui-ml-text-residual-anchors", type=Path)
+    parser.add_argument("--gui-ml-text-residual-verification", type=Path)
     parser.add_argument("--player-helper-anchors", type=Path)
     parser.add_argument("--player-helper-verification", type=Path)
     parser.add_argument("--input-window-anchors", type=Path)
@@ -890,6 +892,44 @@ def main() -> None:
         result["server_object_lifecycle_anchors"] = server_object_lifecycle
         result["interpretation"].append(
             "The two-hundred-seventeenth database revision also contains the separately reviewed residual Explosion, Bomb, Chest, Extra, Flying, Leap, and Sign lifecycle anchors."
+        )
+    gui_ml_text_residual = None
+    if args.gui_ml_text_residual_anchors or args.gui_ml_text_residual_verification:
+        if not args.gui_ml_text_residual_anchors or not args.gui_ml_text_residual_verification:
+            raise ValueError(
+                "GuiMLTextCtrl residual anchors and verification must be supplied together"
+            )
+        gui_ml_text_residual_document = load(args.gui_ml_text_residual_anchors)
+        gui_ml_text_residual_verification = load(args.gui_ml_text_residual_verification)
+        if (
+            gui_ml_text_residual_document.get("artifact")
+            != "spectron_gui_ml_text_residual_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected GuiMLTextCtrl residual anchor artifact")
+        if not gui_ml_text_residual_verification.get("verified"):
+            raise ValueError("GuiMLTextCtrl residual anchor reopen verification did not pass")
+        expected_gui_ml_text_residual = len(gui_ml_text_residual_document["anchors"])
+        if (
+            gui_ml_text_residual_verification["verified_name_count"]
+            != expected_gui_ml_text_residual
+        ):
+            raise ValueError("GuiMLTextCtrl residual verification count differs from artifact")
+        gui_ml_text_residual = {
+            "anchor_path": str(args.gui_ml_text_residual_anchors),
+            "anchor_sha256": sha256_path(args.gui_ml_text_residual_anchors),
+            "reopen_verification": str(args.gui_ml_text_residual_verification),
+            "anchor_count": expected_gui_ml_text_residual,
+            "verified_name_count": gui_ml_text_residual_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": gui_ml_text_residual_verification[
+                "failure_count"
+            ],
+        }
+    if gui_ml_text_residual is not None:
+        result["gui_ml_text_residual_anchors"] = gui_ml_text_residual
+        result["interpretation"].append(
+            "The two-hundred-eighteenth database revision also contains the separately reviewed residual GuiMLTextCtrl accessors, script wrappers, input handlers, reflow path, and property destructors."
         )
     runtime_path = None
     if args.runtime_path_anchors or args.runtime_path_verification:
