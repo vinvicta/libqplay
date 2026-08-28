@@ -1482,6 +1482,18 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_particle_emitter_script_vars_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+264. The next IDA pass resolved 18 short Java sound interface methods.
+    Fourteen `TSoundPlayer` base methods map to the `gqiNgaG64J` target table,
+    two `TSoundEffectJava` capability methods map to `QPh5pbnC3y`, and two
+    `TSoundPlayerJava` capability methods map to `ohGYZakbFK`. Every recorded
+    feature matches exactly, and the method-table order and decompiled stub
+    behavior agree. All 18 aliases reopened successfully in the v205 copy,
+    which has 11,694 functions, 3,641 high-confidence labels, and 1,218
+    default `sub_` names, with zero semantic reopen failures. See
+    `artifacts/spectron_sound_base_interface_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_sound_base_interface_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 263. The next IDA pass resolved the two Java sound deleting-destructor
     wrappers. Source `TSoundEffectJava_TSoundEffectJava__2` at `0xe2c14` maps
     to `QPh5pbnC3yD0Ev` at `0xe3804`; source

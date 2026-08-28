@@ -217,6 +217,8 @@ def main() -> None:
     parser.add_argument("--sound-java-small-methods-verification", type=Path)
     parser.add_argument("--sound-java-destructor-anchors", type=Path)
     parser.add_argument("--sound-java-destructor-verification", type=Path)
+    parser.add_argument("--sound-base-interface-anchors", type=Path)
+    parser.add_argument("--sound-base-interface-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
     parser.add_argument("--server-animation-verification", type=Path)
     parser.add_argument("--player-lifecycle-anchors", type=Path)
@@ -3230,6 +3232,50 @@ def main() -> None:
         result["sound_java_destructor_anchors"] = sound_java_destructors
         result["interpretation"].append(
             "The two-hundred-fourth database revision also contains the separately reviewed Java sound deleting-destructor anchors."
+        )
+    sound_base_interface = None
+    if args.sound_base_interface_anchors or args.sound_base_interface_verification:
+        if not args.sound_base_interface_anchors or not args.sound_base_interface_verification:
+            raise ValueError(
+                "sound base-interface anchors and verification must be supplied together"
+            )
+        sound_base_interface_document = load(args.sound_base_interface_anchors)
+        sound_base_interface_verification = load(
+            args.sound_base_interface_verification
+        )
+        if (
+            sound_base_interface_document.get("artifact")
+            != "spectron_sound_base_interface_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected sound base-interface anchor artifact")
+        if not sound_base_interface_verification.get("verified"):
+            raise ValueError(
+                "sound base-interface anchor reopen verification did not pass"
+            )
+        expected_sound_base_interface = len(sound_base_interface_document["anchors"])
+        if (
+            sound_base_interface_verification["verified_name_count"]
+            != expected_sound_base_interface
+        ):
+            raise ValueError(
+                "sound base-interface verification count differs from artifact"
+            )
+        sound_base_interface = {
+            "anchor_path": str(args.sound_base_interface_anchors),
+            "anchor_sha256": sha256_path(args.sound_base_interface_anchors),
+            "reopen_verification": str(args.sound_base_interface_verification),
+            "anchor_count": expected_sound_base_interface,
+            "verified_name_count": sound_base_interface_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": sound_base_interface_verification[
+                "failure_count"
+            ],
+        }
+    if sound_base_interface is not None:
+        result["sound_base_interface_anchors"] = sound_base_interface
+        result["interpretation"].append(
+            "The two-hundred-fifth database revision also contains the separately reviewed TSoundPlayer and Java sound capability interface anchors."
         )
     server_animation = None
     if args.server_animation_anchors or args.server_animation_verification:
