@@ -98,6 +98,51 @@ and signed with a local debug key, and the resulting APK had SHA-256
 This package is an offline diagnostic artifact. Do not publish it as a
 production client.
 
+## Spectron 2.2 local loopback package
+
+The supplied Spectron package uses `cong.quattroplay.com` rather than the
+original `con.quattroplay.com`, and its native offsets are different. Build a
+certificate for the target hostname, keeping the private key outside the
+repository:
+
+```bash
+python3 tools/make_tls_validity_fixture.py \
+  --output-prefix /tmp/graal-valid-cong \
+  --hostname cong.quattroplay.com \
+  --not-before 2025-01-01T00:00:00Z \
+  --not-after 2035-01-01T00:00:00Z
+```
+
+Then build the target-specific package:
+
+```bash
+python3 tools/build_spectron_loopback_apk.py \
+  /path/to/spectron_client_1.0.2.apk \
+  /tmp/spectron_loopback_diagnostic.apk \
+  --bundle /tmp/graal-valid-cong.crt \
+  --port 18443 \
+  --zipalign /path/to/android-sdk/build-tools/35.0.1/zipalign \
+  --apksigner /path/to/android-sdk/build-tools/35.0.1/apksigner \
+  --keystore /path/to/debug.keystore \
+  --report /tmp/spectron_loopback_diagnostic.json
+```
+
+The builder checks the exact supplied APK, qplay, and libxposed hashes before
+writing. It keeps only `arm64-v8a`, removes the original signing metadata,
+stores `resources.arsc` uncompressed, normalizes ZIP timestamps, aligns the
+package, and verifies the resulting signature. It preserves the connector
+script and native certificate and hostname verification. The fixed RC4 key is
+only for the private responder, and the default WebTop edit skips the
+destructive `crash`, `freeze`, and `abort` commands found in the supplied
+package. Use `--keep-webtop-commands` for an unmodified WebTop control.
+
+The exact target byte guards are in
+`artifacts/spectron_loopback_patch_audit_20260828.json`. The target resolver
+is patched at `0x20c20c`, the HTTPS defaults at `0x2065e0` and `0x206764`, the
+trust text at `0x2ea9e0`, and the outgoing-key trampoline uses `0x1c4000` for
+the code cave and resumes the target function at `0x202fec`. The build check
+is offline and does not resolve or contact `cong.quattroplay.com`.
+
 The complete private chain can be rebuilt with the single offline helper:
 
 ```bash

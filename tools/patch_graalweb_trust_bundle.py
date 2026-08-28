@@ -32,12 +32,19 @@ DES_KEY = b"jhOdx9SY"
 EXPECTED_TEXT_SHA256 = (
     "c87ea7bc32005cca699fb724ab455926fd852a1bd40ce0985aadf31a994878a0"
 )
-CERT_OFFSETS = {
+CERT_OFFSETS_BY_VARIANT = {
+    "original": {
     "arm64-v8a": 0x2DCEF8,
     "x86_64": 0x2FCA80,
     "x86": 0x2ECB08,
     "armeabi": 0x21A438,
+    },
+    "spectron": {
+        "arm64-v8a": 0x2EA9E0,
+    },
 }
+# Kept as a compatibility alias for code that used the original offsets.
+CERT_OFFSETS = CERT_OFFSETS_BY_VARIANT["original"]
 PEM_CERTIFICATE = re.compile(
     rb"-----BEGIN CERTIFICATE-----.*?-----END CERTIFICATE-----\r?\n?",
     re.DOTALL,
@@ -105,14 +112,20 @@ def encode_native_bundle(bundle: bytes) -> bytes:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--arch", choices=sorted(CERT_OFFSETS), required=True)
+    parser.add_argument("--variant", choices=sorted(CERT_OFFSETS_BY_VARIANT), default="original")
+    parser.add_argument("--arch", choices=("arm64-v8a", "armeabi", "x86", "x86_64"), required=True)
     parser.add_argument("--bundle", type=Path, required=True)
     parser.add_argument("input", type=Path)
     parser.add_argument("output", type=Path)
     args = parser.parse_args()
 
     blob = bytearray(args.input.read_bytes())
-    offset = CERT_OFFSETS[args.arch]
+    offsets = CERT_OFFSETS_BY_VARIANT[args.variant]
+    if args.arch not in offsets:
+        raise SystemExit(
+            f"{args.variant} has no trust-bundle slot for architecture {args.arch}"
+        )
+    offset = offsets[args.arch]
     expected = bytes(blob[offset : offset + CERT_TEXT_LENGTH])
     if len(expected) != CERT_TEXT_LENGTH or sha256(expected) != EXPECTED_TEXT_SHA256:
         raise SystemExit(

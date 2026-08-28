@@ -1,0 +1,81 @@
+{
+  "artifact": "spectron_loopback_patch_audit_20260828",
+  "https_port_patches": [
+    {
+      "file_offset": "0x2065e0",
+      "original": "61378052",
+      "replacement": "computed ARM64 MOV W1,18443"
+    },
+    {
+      "file_offset": "0x206764",
+      "original": "61378052",
+      "replacement": "computed ARM64 MOV W1,18443"
+    }
+  ],
+  "input": {
+    "apk_sha256": "5b10289ad2b67fba77f5f4159d51cdbeaf4ca2710fb1459da69c8d4b1af5149c",
+    "arm64_libqplay_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "arm64_libxposed_sha256": "0300bf22966ff43a03495292493530e8e048032a808f80132e5360d8f8bdf456",
+    "file_offsets_equal_virtual_addresses": true,
+    "trust_text_length": 12820,
+    "trust_text_sha256": "c87ea7bc32005cca699fb724ab455926fd852a1bd40ce0985aadf31a994878a0"
+  },
+  "network_contacted": false,
+  "preserved": [
+    "Spectron connector script and endpoint host strings",
+    "native TLS peer and hostname verification",
+    "game-server protocol implementation",
+    "original APK contents outside the selected ARM64 libraries"
+  ],
+  "rc4_patch": {
+    "cave_file_offset": "0x1c4000",
+    "cave_input_sha256": "38723a2e5e8a17aa7950dc008209944e898f69a7bd10a23c839d341e935fd5ca",
+    "cave_length": 128,
+    "function_file_offset": "0x202fe8",
+    "original_function_prefix": "ffc300d1f35300a9f55b01a9",
+    "purpose": "local responder only",
+    "resume_file_offset": "0x202fec",
+    "test_key": "0123456789abcdef"
+  },
+  "resolver_patch": {
+    "file_offset": "0x20c20c",
+    "function": "resolveHost",
+    "original": "ff0301d1f35300a9f55b01a9",
+    "replacement": "e00f80520020a072c0035fd6",
+    "result": "127.0.0.1"
+  },
+  "trust_patch": {
+    "encoded_text_length": 12820,
+    "encoding": "native DES-ECB with bit-reversed jhOdx9SY, then Base64",
+    "file_offset": "0x2ea9e0",
+    "verification": "CyaSSL certificate and hostname verification remain enabled"
+  },
+  "warning": "Private loopback diagnostic plan only. It is not a production endpoint repair or a live-service result.",
+  "webtop_safe_patch": {
+    "input_sha256": "0300bf22966ff43a03495292493530e8e048032a808f80132e5360d8f8bdf456",
+    "patches": [
+      {
+        "branch_target": "0x84358",
+        "command": "crash",
+        "file_offset": "0x8433c",
+        "original": "e0000035",
+        "replacement": "07000014"
+      },
+      {
+        "branch_target": "0x84388",
+        "command": "freeze",
+        "file_offset": "0x84378",
+        "original": "80000035",
+        "replacement": "04000014"
+      },
+      {
+        "branch_target": "0x843D0",
+        "command": "abort",
+        "file_offset": "0x843a8",
+        "original": "40010035",
+        "replacement": "0a000014"
+      }
+    ],
+    "purpose": "prevent the supplied WebTop control from terminating the private test client"
+  }
+}

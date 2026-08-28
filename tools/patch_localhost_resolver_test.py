@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Route legacy hostname resolution to the emulator's local proxy.
+"""Route a legacy hostname resolution call to the local test responder.
 
 The patch replaces only ``resolveHost`` with ``127.0.0.1`` (network byte
-order). It supports the original x86_64 and ARM64 libraries. Combined with
-the HTTP parser diagnostic and an ADB reverse mapping, it lets a read-only
-local capture server observe the connector request without modifying the
-original APK or the remote service.
+order). It supports the original x86_64 and ARM64 libraries plus the supplied
+Spectron ARM64 library. Combined with the HTTP parser diagnostic and an ADB
+reverse mapping, it lets a read-only local capture server observe the
+connector request without modifying the original APK or the remote service.
 """
 
 from pathlib import Path
@@ -13,7 +13,8 @@ import argparse
 import hashlib
 
 
-PATCHES = {
+PATCH_VARIANTS = {
+    "original": {
     "x86_64": (
         0x21D8D0,
         bytes.fromhex("48 8b 07 48 85 c0 74"),
@@ -24,17 +25,34 @@ PATCHES = {
         bytes.fromhex("ff 83 00 d1 f3 53 00 a9 f5 7b 01 a9"),
         bytes.fromhex("e0 0f 80 52 00 20 a0 72 c0 03 5f d6"),
     ),
+    },
+    "spectron": {
+        "arm64-v8a": (
+            0x20C20C,
+            bytes.fromhex("ff 03 01 d1 f3 53 00 a9 f5 5b 01 a9"),
+            bytes.fromhex("e0 0f 80 52 00 20 a0 72 c0 03 5f d6"),
+        ),
+    },
 }
+
+# Kept as a compatibility alias for callers that imported the original map.
+PATCHES = PATCH_VARIANTS["original"]
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--arch", choices=sorted(PATCHES), default="x86_64")
+    parser.add_argument("--variant", choices=sorted(PATCH_VARIANTS), default="original")
+    parser.add_argument("--arch", choices=("arm64-v8a", "armeabi", "x86", "x86_64"), default="x86_64")
     parser.add_argument("input", type=Path)
     parser.add_argument("output", type=Path)
     args = parser.parse_args()
 
-    function_va, original_prefix, patch_prefix = PATCHES[args.arch]
+    patches = PATCH_VARIANTS[args.variant]
+    if args.arch not in patches:
+        raise SystemExit(
+            f"{args.variant} has no resolver patch for architecture {args.arch}"
+        )
+    function_va, original_prefix, patch_prefix = patches[args.arch]
     blob = bytearray(args.input.read_bytes())
     actual = blob[function_va : function_va + len(original_prefix)]
     if actual != original_prefix:

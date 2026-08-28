@@ -35,14 +35,31 @@ EXPECTED_CAVE = bytes.fromhex(
     "0f 1f 84"
 ) + bytes(CAVE_CAPACITY - 19)
 
-ARM64_PATCH_SITE = 0x1FD6B4
+ORIGINAL_ARM64_PATCH_SITE = 0x1FD6B4
 ARM64_ORIGINAL_PREFIX = bytes.fromhex(
     "ff c3 00 d1 f3 53 00 a9 f5 5b 01 a9"
 )
-ARM64_RESUME_SITE = ARM64_PATCH_SITE + 4
-ARM64_CAVE_VA = 0x1F2DCC
+ORIGINAL_ARM64_CAVE_VA = 0x1F2DCC
 ARM64_CAVE_CAPACITY = 128
 ARM64_EXPECTED_CAVE = bytes(ARM64_CAVE_CAPACITY)
+SPECTRON_ARM64_PATCH_SITE = 0x202FE8
+SPECTRON_ARM64_CAVE_VA = 0x1C4000
+
+
+ARM64_VARIANTS = {
+    "original": {
+        "patch_site": ORIGINAL_ARM64_PATCH_SITE,
+        "cave_va": ORIGINAL_ARM64_CAVE_VA,
+        "expected_prefix": ARM64_ORIGINAL_PREFIX,
+        "expected_cave": ARM64_EXPECTED_CAVE,
+    },
+    "spectron": {
+        "patch_site": SPECTRON_ARM64_PATCH_SITE,
+        "cave_va": SPECTRON_ARM64_CAVE_VA,
+        "expected_prefix": ARM64_ORIGINAL_PREFIX,
+        "expected_cave": ARM64_EXPECTED_CAVE,
+    },
+}
 
 
 def rel32(site: int, target: int) -> bytes:
@@ -106,7 +123,7 @@ def arm64_str_w(source: int, base: int, offset: int) -> bytes:
     )
 
 
-def build_arm64_cave() -> bytes:
+def build_arm64_cave(cave_va: int, resume_site: int) -> bytes:
     """Build a trampoline that rewrites the existing key backing buffer."""
 
     key_low = int.from_bytes(OUTPUT_KEY[:8], "little")
@@ -116,7 +133,7 @@ def build_arm64_cave() -> bytes:
     # Re-run it here, then resume at the original second instruction.
     code += struct.pack("<I", 0xD100C3FF)  # SUB SP, SP, #0x30
     # Keep x0-x3 untouched. The original function has not saved them yet.
-    code += arm64_cbz_x(2, ARM64_CAVE_VA + len(code), ARM64_RESUME_SITE)
+    code += arm64_cbz_x(2, cave_va + len(code), resume_site)
     code += struct.pack("<I", 0xF9400044)  # LDR X4, [X2]
     code += arm64_mov_imm64(5, key_low)
     code += arm64_mov_imm64(6, key_high)
@@ -124,7 +141,7 @@ def build_arm64_cave() -> bytes:
     code += arm64_str_w(7, 4, 0)  # length = 16
     code += arm64_str_x(5, 4, 8)
     code += arm64_str_x(6, 4, 16)
-    code += arm64_branch(ARM64_CAVE_VA + len(code), ARM64_RESUME_SITE)
+    code += arm64_branch(cave_va + len(code), resume_site)
     if len(code) > ARM64_CAVE_CAPACITY:
         raise ValueError(f"ARM64 trampoline is {len(code)} bytes")
     return code.ljust(ARM64_CAVE_CAPACITY, b"\x00")
@@ -168,25 +185,34 @@ def patch_x86(blob: bytearray) -> None:
     )
 
 
-def patch_arm64(blob: bytearray) -> None:
-    actual = blob[ARM64_PATCH_SITE : ARM64_PATCH_SITE + len(ARM64_ORIGINAL_PREFIX)]
-    if actual != ARM64_ORIGINAL_PREFIX:
+def patch_arm64(blob: bytearray, variant: str) -> tuple[int, int]:
+    config = ARM64_VARIANTS[variant]
+    patch_site = config["patch_site"]
+    cave_va = config["cave_va"]
+    expected_prefix = config["expected_prefix"]
+    expected_cave = config["expected_cave"]
+    actual = blob[patch_site : patch_site + len(expected_prefix)]
+    if actual != expected_prefix:
         raise SystemExit(
-            f"unexpected bytes at 0x{ARM64_PATCH_SITE:x}: {actual.hex(' ')}"
+            f"unexpected bytes at 0x{patch_site:x}: {actual.hex(' ')}"
         )
-    cave = blob[ARM64_CAVE_VA : ARM64_CAVE_VA + ARM64_CAVE_CAPACITY]
-    if cave != ARM64_EXPECTED_CAVE:
+    cave = blob[cave_va : cave_va + ARM64_CAVE_CAPACITY]
+    if cave != expected_cave:
         raise SystemExit(
-            f"unexpected ARM64 code cave at 0x{ARM64_CAVE_VA:x}: {cave.hex(' ')}"
+            f"unexpected ARM64 code cave at 0x{cave_va:x}: {cave.hex(' ')}"
         )
-    blob[ARM64_CAVE_VA : ARM64_CAVE_VA + ARM64_CAVE_CAPACITY] = build_arm64_cave()
-    blob[ARM64_PATCH_SITE : ARM64_PATCH_SITE + 4] = arm64_branch(
-        ARM64_PATCH_SITE, ARM64_CAVE_VA
+    blob[cave_va : cave_va + ARM64_CAVE_CAPACITY] = build_arm64_cave(
+        cave_va, patch_site + 4
     )
+    blob[patch_site : patch_site + 4] = arm64_branch(
+        patch_site, cave_va
+    )
+    return patch_site, cave_va
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
+    parser.add_argument("--variant", choices=sorted(ARM64_VARIANTS), default="original")
     parser.add_argument("--arch", choices=("x86_64", "arm64-v8a"), default="x86_64")
     parser.add_argument("input", type=Path)
     parser.add_argument("output", type=Path)
@@ -198,9 +224,7 @@ def main() -> None:
         patch_site = CALL_SITE
         cave_va = CAVE_VA
     else:
-        patch_arm64(blob)
-        patch_site = ARM64_PATCH_SITE
-        cave_va = ARM64_CAVE_VA
+        patch_site, cave_va = patch_arm64(blob, args.variant)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_bytes(blob)
     print(

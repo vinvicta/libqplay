@@ -24,6 +24,8 @@ the title or loading image after network and resource work has completed.
 | Delayed TLS path audit | Recheck `O_NONBLOCK`, status 4 to 5 completion, `SO_ERROR`, and the status setter's SSL call in IDA | The delayed path does start CyaSSL through `TSocketConnection_setStatus_int`; no blocking-I/O repair is justified | False lead closed |
 | Longer connect poll | Change the x86_64 zero-second poll timeout to five seconds | The client still stayed on the splash screen | Not the complete cause |
 | HTTP transport redirect | Force the recognized HTTPS parser result to port 80 with SSL disabled | The local HTTP request was received, but transport alone did not advance the client | Not a repair |
+| Spectron endpoint audit | Compare the native connector fragments instead of reusing 1.8 host assumptions | Spectron selects `cong.quattroplay.com` and `cong2.quattroplay.com`, while paths and transport modes remain the same | Static finding, live status unknown |
+| Spectron local loopback package | Use target-specific trust, resolver, HTTPS-port, and fixed-key patches with `tools/build_spectron_loopback_apk.py` | The exact supplied APK built, aligned, and passed APK signature verification; no runtime claim was made because no emulator was connected for this build check | Private offline diagnostic only |
 | Native RSA path retained | Leave the RSA branch at its original bytes and use the saved response, which passes the native raw-digest check | The package-preserving ARM64 candidate retained original bytes `dc 00 00 35` and completed a fresh translated-ARM64 loopback replay without the RSA bypass | Verified local package test, live service still open |
 | RSA result bypass | Accept a response that fails the native package-signature check at ARM64 `0x22c5c8` or x86_64 `0x245009` | Used by the early replay before the raw wolfSSL format was identified. The saved archived fixture passes without it | Unnecessary for the saved fixture, diagnostic only for mismatched packages |
 | Controlled connector key | Replace the encrypted embedded key at ARM64 `0x2e1798` or x86_64 `0x3003d8` in a private library copy, then sign a local package with the matching test key | The generated 16,446-byte package passed the native wolfSSL raw-digest RSA check without bypassing the result branch | Diagnostic only |
@@ -70,6 +72,15 @@ The matching package has SHA-256
 `d26035d9569789c2d6a60fb52673e91877a58e221117ca987a08dcbd674045be`.
 The private test key is not committed, and no runtime APK using this key was
 treated as a production build.
+
+The Spectron package has its own checked offset map. The target trust bundle is
+at `0x2ea9e0`, the resolver entry is at `0x20c20c`, and the two HTTPS port
+instructions are at `0x2065e0` and `0x206764`. Its outgoing-key diagnostic
+uses the 128-byte zero-filled cave at `0x1c4000` and the target
+`setEncryptionOut` entry at `0x202fe8`. These offsets are guarded against the
+exact target library hash and are not interchangeable with the 1.8 values.
+The target-specific plan and byte guards are recorded in
+`artifacts/spectron_loopback_patch_audit_20260828.json`.
 
 ## Loading-state diagnostics
 

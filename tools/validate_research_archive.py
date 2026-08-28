@@ -49,6 +49,9 @@ def main():
     spectron_connector_endpoints = load_json(
         "artifacts/spectron_connector_endpoint_audit_20260827.json"
     )
+    spectron_loopback_patch_audit = load_json(
+        "artifacts/spectron_loopback_patch_audit_20260828.json"
+    )
     tls_parser = load_json("artifacts/connector_tls_parser_analysis_20260826.json")
     tls_expiry = load_json("artifacts/connector_tls_expiry_control_20260826.json")
     native_verified = load_json(
@@ -900,6 +903,57 @@ def main():
         "Spectron connector endpoint retry fragment",
         spectron_connector_endpoints["spectron"]["fragments"]["retry_host"]["decoded"],
         "cong2",
+    )
+
+    check(
+        "Spectron loopback patch artifact",
+        spectron_loopback_patch_audit["artifact"],
+        "spectron_loopback_patch_audit_20260828",
+    )
+    check(
+        "Spectron loopback patch network",
+        spectron_loopback_patch_audit["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron loopback APK hash",
+        spectron_loopback_patch_audit["input"]["apk_sha256"],
+        "5b10289ad2b67fba77f5f4159d51cdbeaf4ca2710fb1459da69c8d4b1af5149c",
+    )
+    check(
+        "Spectron loopback native hash",
+        spectron_loopback_patch_audit["input"]["arm64_libqplay_sha256"],
+        "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    )
+    check(
+        "Spectron loopback resolver offset",
+        spectron_loopback_patch_audit["resolver_patch"]["file_offset"],
+        "0x20c20c",
+    )
+    check(
+        "Spectron loopback resolver replacement",
+        spectron_loopback_patch_audit["resolver_patch"]["replacement"],
+        "e00f80520020a072c0035fd6",
+    )
+    check(
+        "Spectron loopback HTTPS port offsets",
+        [item["file_offset"] for item in spectron_loopback_patch_audit["https_port_patches"]],
+        ["0x2065e0", "0x206764"],
+    )
+    check(
+        "Spectron loopback trust offset",
+        spectron_loopback_patch_audit["trust_patch"]["file_offset"],
+        "0x2ea9e0",
+    )
+    check(
+        "Spectron loopback RC4 cave",
+        spectron_loopback_patch_audit["rc4_patch"]["cave_input_sha256"],
+        "38723a2e5e8a17aa7950dc008209944e898f69a7bd10a23c839d341e935fd5ca",
+    )
+    check(
+        "Spectron loopback WebTop patch count",
+        len(spectron_loopback_patch_audit["webtop_safe_patch"]["patches"]),
+        3,
     )
 
     check(
@@ -5640,6 +5694,7 @@ def main():
         elf_symbol_audit,
         spectron_symbol_audit,
         spectron_connector_endpoints,
+        spectron_loopback_patch_audit,
         tls_parser,
         tls_expiry,
         spectron_signature,

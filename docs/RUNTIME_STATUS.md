@@ -2359,6 +2359,32 @@ This is the short handoff view. The full reasoning and command history are in
     `artifacts/spectron_url_cache_residual_manual_translation_anchors_20260826.json`
     and `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+## Spectron 2.2 package check
+
+The target-specific local builder is now complete at the byte and APK
+packaging level. It uses `cong.quattroplay.com` as the preserved hostname,
+patches the target trust text at `0x2ea9e0`, routes the target resolver at
+`0x20c20c` to loopback, and moves the two HTTPS parser defaults at `0x2065e0`
+and `0x206764` to port `18443`. Its deterministic outgoing-key trampoline
+uses the zero-filled cave at `0x1c4000` and resumes the target
+`setEncryptionOut` body at `0x202fec`. Native certificate peer and hostname
+verification remain enabled.
+
+The supplied Spectron APK was rebuilt as an ARM64-only private package. The
+builder also skipped the three destructive WebTop commands that caused the
+earlier `libxposed.so` crash control. `zipalign` and APK signature verification
+passed. The resulting APK SHA-256 is
+`45f469692cb6ee2e8d0f1529d8b0871dafdf718e2c8b6e345cb5082e40257751`, and the
+patched ARM64 qplay SHA-256 is
+`45a7f97df9b40cdac6fbd42dc715bbabf3bbdb9b33876990e232133a8818941e`.
+The reproducible builder is `tools/build_spectron_loopback_apk.py`, and the
+byte-level guards are in
+`artifacts/spectron_loopback_patch_audit_20260828.json`.
+
+This does not yet count as a Spectron runtime result. No emulator was
+connected for this package check, and no DNS lookup, TLS connection, or HTTP
+request was made to `cong`, `cong2`, or any other external service.
+
 ## Not verified
 
 * A live game-server login.
