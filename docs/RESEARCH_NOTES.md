@@ -12092,6 +12092,96 @@ and the checkpoint is
 This pass changed only the disposable IDA database. It did not patch the APK
 or either native library, and it performed no DNS, HTTP, or TLS operation.
 
+## 2026-08-28: Spectron TParticleEmitter property aliases
+
+The v240 pass translates the remaining default callbacks in the
+`TParticleEmitterProperties` table. The source table begins at `0x38a8d0` and
+the canonical Spectron table begins at `0x39da20`. Each record is 0x30 bytes,
+with the encoded property name at the first field and the getter and setter
+callbacks at offsets `+0x10` and `+0x18`. This gives a direct mapping even
+though the target class and helper symbols are obfuscated.
+
+The 42 newly named callbacks are listed below. The table records are included
+because they make the result reproducible and distinguish a real registration
+match from a nearby short function that merely happens to have the same size.
+
+| 1.8 callback | Source | Spectron target | Source record | Target record | Property | Role |
+| --- | ---: | ---: | ---: | ---: | --- | --- |
+| `TParticleEmitter_get_attachposition` | `0x238188` | `0x242028` | `0x38a8d0` | `0x39da20` | `attachposition` | getter |
+| `TParticleEmitter_set_attachposition` | `0x238190` | `0x242030` | `0x38a8d0` | `0x39da20` | `attachposition` | setter |
+| `TParticleEmitter_get_autorotation` | `0x238198` | `0x242038` | `0x38a900` | `0x39da50` | `autorotation` | getter |
+| `TParticleEmitter_set_autorotation` | `0x2381a0` | `0x242040` | `0x38a900` | `0x39da50` | `autorotation` | setter |
+| `TParticleEmitter_get_checkbelowterrain` | `0x2381a8` | `0x242048` | `0x38a930` | `0x39da80` | `checkbelowterrain` | getter |
+| `TParticleEmitter_set_checkbelowterrain` | `0x2381b0` | `0x242050` | `0x38a930` | `0x39da80` | `checkbelowterrain` | setter |
+| `TParticleEmitter_get_clippingbox` | `0x2385b8` | `0x242458` | `0x38a960` | `0x39dab0` | `clippingbox` | getter |
+| `TParticleEmitter_get_cliptoscreen` | `0x2381b8` | `0x242058` | `0x38a990` | `0x39dae0` | `cliptoscreen` | getter |
+| `TParticleEmitter_set_cliptoscreen` | `0x2381c0` | `0x242060` | `0x38a990` | `0x39dae0` | `cliptoscreen` | setter |
+| `TParticleEmitter_get_continueafterdestroy` | `0x2381c8` | `0x242068` | `0x38a9c0` | `0x39db10` | `continueafterdestroy` | getter |
+| `TParticleEmitter_set_continueafterdestroy` | `0x2381d0` | `0x242070` | `0x38a9c0` | `0x39db10` | `continueafterdestroy` | setter |
+| `TParticleEmitter_get_currentparticlecount` | `0x2381d8` | `0x242078` | `0x38a9f0` | `0x39db40` | `currentparticlecount` | getter |
+| `TParticleEmitter_get_delaymax` | `0x2381e0` | `0x242080` | `0x38aa20` | `0x39db70` | `delaymax` | getter |
+| `TParticleEmitter_get_delaymin` | `0x238210` | `0x2420b0` | `0x38aa50` | `0x39dba0` | `delaymin` | getter |
+| `TParticleEmitter_get_emissionoffset` | `0x238548` | `0x2423e8` | `0x38aae0` | `0x39dc30` | `emissionoffset` | getter |
+| `TParticleEmitter_set_emissionoffset` | `0x238514` | `0x2423b4` | `0x38aae0` | `0x39dc30` | `emissionoffset` | setter |
+| `TParticleEmitter_get_emitatterrainheight` | `0x238240` | `0x2420e0` | `0x38ab10` | `0x39dc60` | `emitatterrainheight` | getter |
+| `TParticleEmitter_set_emitatterrainheight` | `0x238248` | `0x2420e8` | `0x38ab10` | `0x39dc60` | `emitatterrainheight` | setter |
+| `TParticleEmitter_get_emitautomatically` | `0x238250` | `0x2420f0` | `0x38ab40` | `0x39dc90` | `emitautomatically` | getter |
+| `TParticleEmitter_set_emitautomatically` | `0x238258` | `0x2420f8` | `0x38ab40` | `0x39dc90` | `emitautomatically` | setter |
+| `TParticleEmitter_get_emittedparticles` | `0x238260` | `0x242100` | `0x38ab70` | `0x39dcc0` | `emittedparticles` | getter |
+| `TParticleEmitter_get_firstinfront` | `0x238268` | `0x242108` | `0x38aba0` | `0x39dcf0` | `firstinfront` | getter |
+| `TParticleEmitter_set_firstinfront` | `0x238270` | `0x242110` | `0x38aba0` | `0x39dcf0` | `firstinfront` | setter |
+| `TParticleEmitter_get_forceaboveterrain` | `0x238278` | `0x242118` | `0x38abd0` | `0x39dd20` | `forceaboveterrain` | getter |
+| `TParticleEmitter_set_forceaboveterrain` | `0x238280` | `0x242120` | `0x38abd0` | `0x39dd20` | `forceaboveterrain` | setter |
+| `TParticleEmitter_get_isfrozen` | `0x238288` | `0x242128` | `0x38ac00` | `0x39dd50` | `isfrozen` | getter |
+| `TParticleEmitter_get_maxparticles` | `0x238290` | `0x242130` | `0x38ac30` | `0x39dd80` | `maxparticles` | getter |
+| `TParticleEmitter_get_movementfactor` | `0x238298` | `0x242138` | `0x38ac60` | `0x39ddb0` | `movementfactor` | getter |
+| `TParticleEmitter_set_movementfactor` | `0x2382a0` | `0x242140` | `0x38ac60` | `0x39ddb0` | `movementfactor` | setter |
+| `TParticleEmitter_get_noclipping` | `0x2382a8` | `0x242148` | `0x38ac90` | `0x39dde0` | `noclipping` | getter |
+| `TParticleEmitter_set_noclipping` | `0x2382b0` | `0x242150` | `0x38ac90` | `0x39dde0` | `noclipping` | setter |
+| `TParticleEmitter_get_nrofparticles` | `0x2382b8` | `0x242158` | `0x38acc0` | `0x39de10` | `nrofparticles` | getter |
+| `TParticleEmitter_get_particle` | `0x23841c` | `0x2422bc` | `0x38acf0` | `0x39de40` | `particle` | getter |
+| `TParticleEmitter_get_particletypes` | `0x2382c0` | `0x242160` | `0x38ad20` | `0x39de70` | `particletypes` | getter |
+| `TParticleEmitter_get_showonground` | `0x2382cc` | `0x24216c` | `0x38ad50` | `0x39dea0` | `showonground` | getter |
+| `TParticleEmitter_set_showonground` | `0x2382d4` | `0x242174` | `0x38ad50` | `0x39dea0` | `showonground` | setter |
+| `TParticleEmitter_get_showontop` | `0x2382dc` | `0x24217c` | `0x38ad80` | `0x39ded0` | `showontop` | getter |
+| `TParticleEmitter_set_showontop` | `0x2382e4` | `0x242184` | `0x38ad80` | `0x39ded0` | `showontop` | setter |
+| `TParticleEmitter_get_switchyandzaxis` | `0x2382ec` | `0x24218c` | `0x38adb0` | `0x39df00` | `switchyandzaxis` | getter |
+| `TParticleEmitter_set_switchyandzaxis` | `0x2382f4` | `0x242194` | `0x38adb0` | `0x39df00` | `switchyandzaxis` | setter |
+| `TParticleEmitter_get_wraptoclippingbox` | `0x2382fc` | `0x24219c` | `0x38ade0` | `0x39df30` | `wraptoclippingbox` | getter |
+| `TParticleEmitter_set_wraptoclippingbox` | `0x238304` | `0x2421a4` | `0x38ade0` | `0x39df30` | `wraptoclippingbox` | setter |
+
+The callbacks divide naturally into direct scalar accessors and a few object
+or indexed helpers. The boolean properties control placement, terrain tests,
+clipping, automatic emission, draw order, and axis behavior. The integer
+properties expose current, configured, emitted, maximum, and particle-type
+counts. `delaymax` and `delaymin` are floating-point values. `emissionoffset`
+and `clippingbox` use point or box objects, and `particle` performs the
+script-indexed lookup. The source and target pseudocode show the same field
+access or helper dispatch in each selected row.
+
+The full table also explains the nine entries that were not part of this
+pass. Earlier work already named the `clippingbox`, `delaymax`, and `delaymin`
+setters, the `dropemitter` and `dropwateremitter` getters, and the bounded
+setters for `isfrozen`, `maxparticles`, `nrofparticles`, and `particletypes`.
+Leaving those names intact avoids creating duplicate aliases for callbacks
+that were already reviewed.
+
+The feature comparison is unusually strong here. All 42 selected rows match
+the complete recorded metrics, including size, instruction count, basic-block
+and branch shape, direct call count, normalized hashes, string references, and
+register detail. The aliases were applied to a copy of v239 and reopened with
+zero failures. The v240 database contains 11,696 functions and 948 remaining
+default `sub_` names. Its SHA-256 is
+`32225a918d1ac903ae68f624937fe4d4296afe75fec63448ff6aa60b96c6cd72`.
+
+The machine-readable artifact is
+`artifacts/spectron_particle_emitter_property_manual_translation_anchors_20260828.json`,
+generated by `tools/generate_spectron_particle_emitter_property_anchors.py`.
+The database identity is recorded in
+`artifacts/spectron_translation_checkpoint_20260828_v240.json`. This was a
+static IDA pass only. It performed no DNS, HTTP, TLS, APK, or native-library
+operation.
+
 ## 2026-08-28: Spectron TOptions preference property aliases
 
 The v239 pass translates the remaining default callbacks in the target's

@@ -293,6 +293,12 @@ def main():
     spectron_checkpoint_v239 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v239.json"
     )
+    spectron_particle_emitter_property_anchors = load_json(
+        "artifacts/spectron_particle_emitter_property_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v240 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v240.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -7554,6 +7560,110 @@ def main():
         30,
     )
     check(
+        "Spectron v240 particle-emitter property artifact",
+        spectron_particle_emitter_property_anchors["artifact"],
+        "spectron_particle_emitter_property_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v240 particle-emitter property network",
+        spectron_particle_emitter_property_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v240 particle-emitter property anchor count",
+        spectron_particle_emitter_property_anchors["summary"]["anchor_count"],
+        42,
+    )
+    check(
+        "Spectron v240 particle-emitter property high confidence",
+        spectron_particle_emitter_property_anchors["summary"]["high_confidence_count"],
+        42,
+    )
+    check(
+        "Spectron v240 particle-emitter property target default count",
+        spectron_particle_emitter_property_anchors["summary"]["target_default_name_count"],
+        42,
+    )
+    check(
+        "Spectron v240 particle-emitter property normalized shape count",
+        spectron_particle_emitter_property_anchors["summary"]["normalized_shape_exact_count"],
+        42,
+    )
+    check(
+        "Spectron v240 particle-emitter property full metric count",
+        spectron_particle_emitter_property_anchors["summary"]["full_metric_exact_count"],
+        42,
+    )
+    check(
+        "Spectron v240 particle-emitter property layout count",
+        spectron_particle_emitter_property_anchors["summary"]["layout_change_count"],
+        0,
+    )
+    check(
+        "Spectron v240 particle-emitter property register-detail count",
+        spectron_particle_emitter_property_anchors["summary"]["register_detail_difference_count"],
+        0,
+    )
+    check(
+        "Spectron v240 particle-emitter property getter count",
+        spectron_particle_emitter_property_anchors["summary"]["getter_count"],
+        26,
+    )
+    check(
+        "Spectron v240 particle-emitter property setter count",
+        spectron_particle_emitter_property_anchors["summary"]["setter_count"],
+        16,
+    )
+    check(
+        "Spectron v240 particle-emitter preexisting target aliases",
+        spectron_particle_emitter_property_anchors["summary"]["preexisting_target_alias_count"],
+        9,
+    )
+    particle_rows = {
+        row["original_name"]: row
+        for row in spectron_particle_emitter_property_anchors["anchors"]
+    }
+    check(
+        "Spectron v240 particle-emitter attach getter target",
+        particle_rows["TParticleEmitter_get_attachposition"]["spectron_ea"],
+        "0x242028",
+    )
+    check(
+        "Spectron v240 particle-emitter particle getter target",
+        particle_rows["TParticleEmitter_get_particle"]["spectron_ea"],
+        "0x2422bc",
+    )
+    check(
+        "Spectron v240 checkpoint artifact",
+        spectron_checkpoint_v240["artifact"],
+        "spectron_translation_checkpoint_20260828_v240",
+    )
+    check(
+        "Spectron v240 checkpoint parent",
+        spectron_checkpoint_v240["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v239",
+    )
+    check(
+        "Spectron v240 checkpoint database hash",
+        spectron_checkpoint_v240["database"]["sha256"],
+        "32225a918d1ac903ae68f624937fe4d4296afe75fec63448ff6aa60b96c6cd72",
+    )
+    check(
+        "Spectron v240 checkpoint function count",
+        spectron_checkpoint_v240["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v240 checkpoint default sub count",
+        spectron_checkpoint_v240["database"]["default_sub_function_count"],
+        948,
+    )
+    check(
+        "Spectron v240 checkpoint anchor count",
+        spectron_checkpoint_v240["particle_emitter_property_anchors"]["verified_name_count"],
+        42,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -7669,6 +7779,7 @@ def main():
         spectron_level_object_property_anchors,
         spectron_gani_property_anchors,
         spectron_options_property_anchors,
+        spectron_particle_emitter_property_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,
