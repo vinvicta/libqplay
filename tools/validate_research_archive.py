@@ -335,6 +335,12 @@ def main():
     spectron_checkpoint_v246 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v246.json"
     )
+    spectron_tiles_layer_property_anchors = load_json(
+        "artifacts/spectron_tiles_layer_property_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v247 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v247.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -8264,6 +8270,105 @@ def main():
         2,
     )
     check(
+        "Spectron v247 tiles-layer property artifact",
+        spectron_tiles_layer_property_anchors["artifact"],
+        "spectron_tiles_layer_property_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v247 tiles-layer property network",
+        spectron_tiles_layer_property_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v247 tiles-layer property anchor count",
+        spectron_tiles_layer_property_anchors["summary"]["anchor_count"],
+        17,
+    )
+    check(
+        "Spectron v247 tiles-layer property high confidence",
+        spectron_tiles_layer_property_anchors["summary"]["high_confidence_count"],
+        17,
+    )
+    check(
+        "Spectron v247 tiles-layer property target default count",
+        spectron_tiles_layer_property_anchors["summary"]["target_default_name_count"],
+        17,
+    )
+    check(
+        "Spectron v247 tiles-layer property normalized shape count",
+        spectron_tiles_layer_property_anchors["summary"]["normalized_shape_exact_count"],
+        17,
+    )
+    check(
+        "Spectron v247 tiles-layer property full metric count",
+        spectron_tiles_layer_property_anchors["summary"]["full_metric_exact_count"],
+        17,
+    )
+    check(
+        "Spectron v247 tiles-layer property layout count",
+        spectron_tiles_layer_property_anchors["summary"]["layout_change_count"],
+        0,
+    )
+    check(
+        "Spectron v247 tiles-layer property register-detail count",
+        spectron_tiles_layer_property_anchors["summary"]["register_detail_difference_count"],
+        0,
+    )
+    check(
+        "Spectron v247 tiles-layer property getter count",
+        spectron_tiles_layer_property_anchors["summary"]["getter_count"],
+        9,
+    )
+    check(
+        "Spectron v247 tiles-layer property setter count",
+        spectron_tiles_layer_property_anchors["summary"]["setter_count"],
+        8,
+    )
+    tiles_layer_rows = {
+        row["original_name"]: row
+        for row in spectron_tiles_layer_property_anchors["anchors"]
+    }
+    check(
+        "Spectron v247 tiles-layer offset setter target",
+        tiles_layer_rows["TTilesLayer_setOffset"]["spectron_ea"],
+        "0x1a4870",
+    )
+    check(
+        "Spectron v247 tiles-layer Z setter target",
+        tiles_layer_rows["TTilesLayer_setZ"]["spectron_ea"],
+        "0x1a45f0",
+    )
+    check(
+        "Spectron v247 checkpoint artifact",
+        spectron_checkpoint_v247["artifact"],
+        "spectron_translation_checkpoint_20260828_v247",
+    )
+    check(
+        "Spectron v247 checkpoint parent",
+        spectron_checkpoint_v247["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v246",
+    )
+    check(
+        "Spectron v247 checkpoint database hash",
+        spectron_checkpoint_v247["database"]["sha256"],
+        "3e0c053b6dc847f21a437e4e77883481a37e5ecc128b3e47971ecd72ed050b4d",
+    )
+    check(
+        "Spectron v247 checkpoint function count",
+        spectron_checkpoint_v247["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v247 checkpoint default sub count",
+        spectron_checkpoint_v247["database"]["default_sub_function_count"],
+        882,
+    )
+    check(
+        "Spectron v247 checkpoint anchor count",
+        spectron_checkpoint_v247["tiles_layer_property_anchors"]["verified_name_count"],
+        17,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -8386,6 +8491,7 @@ def main():
         spectron_server_npc_property_anchors,
         spectron_server_npc_script_anchors,
         spectron_server_npc_showimg_anchors,
+        spectron_tiles_layer_property_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

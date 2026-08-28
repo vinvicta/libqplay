@@ -668,6 +668,18 @@ This is the short handoff view. The full reasoning and command history are in
      `tools/generate_spectron_server_npc_showimg_anchors.py`, and
      `artifacts/spectron_translation_checkpoint_20260828_v246.json`.
 
+63q. The v247 IDA checkpoint completes the residual `TTilesLayer` property
+     table with 17 high-confidence aliases covering color channels, layer
+     index, offset, and X/Y/Z coordinates. Every row matches the complete
+     ARM64 feature metrics, including the larger offset wrappers. The clean
+     reopen has 11,696 functions and 882 remaining default `sub_` names. The
+     database SHA-256 is
+     `3e0c053b6dc847f21a437e4e77883481a37e5ecc128b3e47971ecd72ed050b4d`.
+     See
+     `artifacts/spectron_tiles_layer_property_manual_translation_anchors_20260828.json`,
+     `tools/generate_spectron_tiles_layer_property_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260828_v247.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The
