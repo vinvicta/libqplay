@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v292 Spectron database. It
-contains 11,696 functions and 556 remaining default `sub_` names. The v263
+The current documented translation frontier is the v293 Spectron database. It
+contains 11,696 functions and 550 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -135,6 +135,13 @@ The v292 revision adds five high-confidence libjpeg compressor Huffman
 encoder labels. They identify the gather-statistics encoder, normal encoder,
 both finish-pass callbacks, and the start-pass dispatcher. All five match
 normalized feature shape, and two match the complete recorded feature set.
+The v293 revision adds six high-confidence libjpeg compressor controller
+labels. They identify the `jcmainct.c` row-processing and pass-start
+callbacks, plus the `jcmaster.c` initial setup, pass startup, pass finish, and
+per-pass preparation callbacks. All six match normalized feature shape, and
+five match the complete recorded feature set. The two compressor callbacks
+with the same upstream static names use a `c_` qualifier so they remain
+distinct from the decompressor callbacks already translated in this archive.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -189,6 +196,8 @@ The current v291 database is kept locally as
 `analysis/spectron_libqplay_translated_v291.i64`.
 The current v292 database is kept locally as
 `analysis/spectron_libqplay_translated_v292.i64`.
+The current v293 database is kept locally as
+`analysis/spectron_libqplay_translated_v293.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -468,6 +477,18 @@ shape, and two match the complete recorded feature set. The checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v292.json`; it records
 the reopened database with 556 remaining default names.
 
+The v293 libjpeg compressor-controller evidence is in
+`artifacts/spectron_jpeg_main_master_controller_manual_translation_anchors_20260828.json`.
+It labels six routines around the target
+`v18_jinit_c_main_controller_jpeg_compress_struct_int` at `0x2b2c2c` and
+`v18_jinit_c_master_control_jpeg_compress_struct_int` at `0x2b44c8`. The
+`jcmainct.c` rows are `process_data_simple_main` and `start_pass_main`. The
+`jcmaster.c` rows are `initial_setup`, `pass_startup`, `finish_pass_master`,
+and `prepare_for_pass`. All six match normalized feature shape, and five
+match the complete recorded feature set. The checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v293.json`; it records
+the reopened database with 550 remaining default names.
+
 The latest checkpoints are
 `artifacts/spectron_translation_checkpoint_20260828_v263_corrected.json` and
 `artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json`,
@@ -500,10 +521,11 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v289.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v290.json`, followed by
 `artifacts/spectron_translation_checkpoint_20260828_v291.json`, followed by
-`artifacts/spectron_translation_checkpoint_20260828_v292.json`. The reviewed
+`artifacts/spectron_translation_checkpoint_20260828_v292.json`, followed by
+`artifacts/spectron_translation_checkpoint_20260828_v293.json`. The reviewed
 legacy, Android, script-table, runtime, property, zlib, and libjpeg labels
-through v292 were reopened and verified with zero failures. That includes the
-v292 compressor Huffman encoder labels added in the latest pass.
+through v293 were reopened and verified with zero failures. That includes the
+v293 compressor controller labels added in the latest pass.
 These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or
 TLS service.
