@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v273 Spectron database. It
-contains 11,696 functions and 663 remaining default `sub_` names. The v263
+The current documented translation frontier is the v274 Spectron database. It
+contains 11,696 functions and 659 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -44,6 +44,11 @@ The v273 revision adds six high-confidence libjpeg source and destination
 callback labels. They are tied to the target `jpeg_stdio_dest` and
 `jpeg_stdio_src` installation sites, with exact or normalized source-target
 feature matches.
+The v274 revision adds four high-confidence libjpeg input-controller labels.
+They are tied to the `consume_input`, `reset_input_controller`,
+`start_input_pass`, and `finish_input_pass` slots installed by the target
+`jinit_input_controller` routine, with exact or normalized source-target
+feature matches.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -60,6 +65,8 @@ v273 database is kept locally as
 `analysis/spectron_libqplay_translated_v273.i64`. Their hashes and reopen
 reports are recorded in their checkpoints because packed IDA files are
 intentionally excluded from the public repository.
+The current v274 database is kept locally as
+`analysis/spectron_libqplay_translated_v274.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -146,6 +153,17 @@ checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v273.json`; it records
 the reopened database with 663 remaining default names.
 
+The v274 libjpeg controller evidence is in
+`artifacts/spectron_jpeg_input_controller_manual_translation_anchors_20260828.json`.
+It labels the four callbacks installed by the stripped target's
+`jinit_input_controller` routine. The source and target bodies match in
+normalized feature shape, with two complete metric matches and two
+register-allocation-only differences. The role names follow the standard
+[libjpeg-turbo `jdinput.c` controller contract](https://github.com/libjpeg-turbo/libjpeg-turbo/blob/main/src/jdinput.c).
+The v274 checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v274.json`; it records
+the reopened database with 659 remaining default names.
+
 The latest checkpoints are
 `artifacts/spectron_translation_checkpoint_20260828_v263_corrected.json` and
 `artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json`,
@@ -159,11 +177,13 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v270.json`,
 `artifacts/spectron_translation_checkpoint_20260828_v271.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v272.json`, and
-`artifacts/spectron_translation_checkpoint_20260828_v273.json`. All four
+`artifacts/spectron_translation_checkpoint_20260828_v273.json`, and
+`artifacts/spectron_translation_checkpoint_20260828_v274.json`. All four
 newly reviewed legacy names, the six corrected target-only names, the
 package-signature label, the v269 TGraalVar labels, the v270 script-table
 labels, the nine v271 runtime callback labels, the two v271 property labels,
-the v272 zlib role label, and the six v273 libjpeg callback labels were
+the v272 zlib role label, the six v273 libjpeg callback labels, and the four
+v274 libjpeg controller labels were
 reopened and verified with zero failures.
 These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or

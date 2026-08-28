@@ -506,6 +506,12 @@ def main():
     spectron_checkpoint_v273 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v273.json"
     )
+    spectron_jdinput_controller_anchors = load_json(
+        "artifacts/spectron_jpeg_input_controller_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v274 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v274.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -11496,6 +11502,87 @@ def main():
         6,
     )
     check(
+        "Spectron libjpeg jdinput controller artifact",
+        spectron_jdinput_controller_anchors["artifact"],
+        "spectron_jpeg_input_controller_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron libjpeg jdinput controller network",
+        spectron_jdinput_controller_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron libjpeg jdinput controller anchor count",
+        spectron_jdinput_controller_anchors["summary"]["anchor_count"],
+        4,
+    )
+    check(
+        "Spectron libjpeg jdinput controller unique target count",
+        spectron_jdinput_controller_anchors["summary"]["unique_target_count"],
+        4,
+    )
+    check(
+        "Spectron libjpeg jdinput controller high-confidence count",
+        spectron_jdinput_controller_anchors["summary"]["high_confidence_count"],
+        4,
+    )
+    check(
+        "Spectron libjpeg jdinput controller normalized count",
+        spectron_jdinput_controller_anchors["summary"]["normalized_shape_exact_count"],
+        4,
+    )
+    check(
+        "Spectron libjpeg jdinput controller exact count",
+        spectron_jdinput_controller_anchors["summary"]["full_metric_exact_count"],
+        2,
+    )
+    jdinput_rows = {
+        row["spectron_ea"]: row
+        for row in spectron_jdinput_controller_anchors["anchors"]
+    }
+    jdinput_expected = {
+        "0x2992b4": "v18_jpeg_finish_input_pass",
+        "0x2992c8": "v18_jpeg_reset_input_controller",
+        "0x299320": "v18_jpeg_start_input_pass",
+        "0x2997e8": "v18_jpeg_consume_markers",
+    }
+    for target_ea, expected_name in jdinput_expected.items():
+        check(
+            "Spectron libjpeg jdinput controller target " + target_ea,
+            jdinput_rows[target_ea]["proposed_name"],
+            expected_name,
+        )
+    check(
+        "Spectron v274 checkpoint artifact",
+        spectron_checkpoint_v274["artifact"],
+        "spectron_translation_checkpoint_20260828_v274",
+    )
+    check(
+        "Spectron v274 checkpoint parent",
+        spectron_checkpoint_v274["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v273",
+    )
+    check(
+        "Spectron v274 checkpoint database hash",
+        spectron_checkpoint_v274["database"]["sha256"],
+        "0f9298e5426fde565eaa76b46e31c8241dcc640f0ea27937d3ccd4d31230bc13",
+    )
+    check(
+        "Spectron v274 checkpoint function count",
+        spectron_checkpoint_v274["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v274 checkpoint default sub count",
+        spectron_checkpoint_v274["database"]["default_sub_function_count"],
+        659,
+    )
+    check(
+        "Spectron v274 checkpoint jdinput count",
+        spectron_checkpoint_v274["jdinput_controller_anchors"]["verified_name_count"],
+        4,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -11808,6 +11895,8 @@ def main():
         spectron_checkpoint_v272,
         spectron_jpeg_io_anchors,
         spectron_checkpoint_v273,
+        spectron_jdinput_controller_anchors,
+        spectron_checkpoint_v274,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
