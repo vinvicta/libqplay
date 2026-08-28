@@ -311,6 +311,12 @@ def main():
     spectron_checkpoint_v242 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v242.json"
     )
+    spectron_player_translation_property_anchors = load_json(
+        "artifacts/spectron_player_translation_property_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v243 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v243.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -7864,6 +7870,105 @@ def main():
         22,
     )
     check(
+        "Spectron v243 player-translation property artifact",
+        spectron_player_translation_property_anchors["artifact"],
+        "spectron_player_translation_property_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v243 player-translation property network",
+        spectron_player_translation_property_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v243 player-translation property anchor count",
+        spectron_player_translation_property_anchors["summary"]["anchor_count"],
+        9,
+    )
+    check(
+        "Spectron v243 player-translation property high confidence",
+        spectron_player_translation_property_anchors["summary"]["high_confidence_count"],
+        9,
+    )
+    check(
+        "Spectron v243 player-translation property target default count",
+        spectron_player_translation_property_anchors["summary"]["target_default_name_count"],
+        9,
+    )
+    check(
+        "Spectron v243 player-translation property normalized shape count",
+        spectron_player_translation_property_anchors["summary"]["normalized_shape_exact_count"],
+        9,
+    )
+    check(
+        "Spectron v243 player-translation property full metric count",
+        spectron_player_translation_property_anchors["summary"]["full_metric_exact_count"],
+        0,
+    )
+    check(
+        "Spectron v243 player-translation property layout count",
+        spectron_player_translation_property_anchors["summary"]["layout_change_count"],
+        0,
+    )
+    check(
+        "Spectron v243 player-translation property register-detail count",
+        spectron_player_translation_property_anchors["summary"]["register_detail_difference_count"],
+        9,
+    )
+    check(
+        "Spectron v243 player-translation property getter count",
+        spectron_player_translation_property_anchors["summary"]["getter_count"],
+        6,
+    )
+    check(
+        "Spectron v243 player-translation property setter count",
+        spectron_player_translation_property_anchors["summary"]["setter_count"],
+        3,
+    )
+    player_translation_rows = {
+        row["original_name"]: row
+        for row in spectron_player_translation_property_anchors["anchors"]
+    }
+    check(
+        "Spectron v243 selected-list players target",
+        player_translation_rows["TPlayer_get_selectedlistplayers"]["spectron_ea"],
+        "0x170280",
+    )
+    check(
+        "Spectron v243 language target",
+        player_translation_rows["TTranslations_get_pref__graal__language"]["spectron_ea"],
+        "0x195bf4",
+    )
+    check(
+        "Spectron v243 checkpoint artifact",
+        spectron_checkpoint_v243["artifact"],
+        "spectron_translation_checkpoint_20260828_v243",
+    )
+    check(
+        "Spectron v243 checkpoint parent",
+        spectron_checkpoint_v243["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v242",
+    )
+    check(
+        "Spectron v243 checkpoint database hash",
+        spectron_checkpoint_v243["database"]["sha256"],
+        "11d1275fbfca6b7500f430742de9e84f933d53462967e88fa61255ebad3e8e38",
+    )
+    check(
+        "Spectron v243 checkpoint function count",
+        spectron_checkpoint_v243["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v243 checkpoint default sub count",
+        spectron_checkpoint_v243["database"]["default_sub_function_count"],
+        914,
+    )
+    check(
+        "Spectron v243 checkpoint anchor count",
+        spectron_checkpoint_v243["player_translation_property_anchors"]["verified_name_count"],
+        9,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -7982,6 +8087,7 @@ def main():
         spectron_particle_emitter_property_anchors,
         spectron_particle_emitter_script_anchors,
         spectron_world_object_property_anchors,
+        spectron_player_translation_property_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,
