@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v283 Spectron database. It
-contains 11,696 functions and 594 remaining default `sub_` names. The v263
+The current documented translation frontier is the v284 Spectron database. It
+contains 11,696 functions and 587 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -90,6 +90,12 @@ labels. They cover the histogram prescan, palette selection, inverse-map
 filling, non-dithered mapping, Floyd-Steinberg mapping, pass callbacks, and
 box updates. All nine match normalized features, and eight match the complete
 feature set.
+The v284 revision adds seven high-confidence libjpeg coefficient-controller
+labels. They cover full-buffer and single-MCU input, normal and smoothed
+output, pass setup, and one-pass decompression. All seven match normalized
+features, and six match the complete feature set. The coefficient-controller
+`start_input_pass` label is disambiguated because another file-local libjpeg
+function with the same source name was already translated from `jdinput.c`.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -126,6 +132,8 @@ The current v282 database is kept locally as
 `analysis/spectron_libqplay_translated_v282.i64`.
 The current v283 database is kept locally as
 `analysis/spectron_libqplay_translated_v283.i64`.
+The current v284 database is kept locally as
+`analysis/spectron_libqplay_translated_v284.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -315,6 +323,15 @@ feature set. The checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v283.json`; it records
 the reopened database with 594 remaining default names.
 
+The v284 libjpeg coefficient-controller evidence is in
+`artifacts/spectron_jpeg_coefficient_controller_manual_translation_anchors_20260828.json`.
+It labels the seven retained callbacks around
+`v18_jinit_d_coef_controller_jpeg_decompress_struct_int` at `0x2aad18`.
+All seven rows match normalized ARM64 features, and six match the complete
+feature set. The checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v284.json`; it records
+the reopened database with 587 remaining default names.
+
 The latest checkpoints are
 `artifacts/spectron_translation_checkpoint_20260828_v263_corrected.json` and
 `artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json`,
@@ -338,10 +355,11 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v280.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v281.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v282.json`, and
-`artifacts/spectron_translation_checkpoint_20260828_v283.json`. The reviewed
+`artifacts/spectron_translation_checkpoint_20260828_v283.json`, and
+`artifacts/spectron_translation_checkpoint_20260828_v284.json`. The reviewed
 legacy, Android, script-table, runtime, property, zlib, and libjpeg labels
-through v283 were reopened and verified with zero failures. That includes the
-nine v283 two-pass quantizer labels added in the latest pass.
+through v284 were reopened and verified with zero failures. That includes the
+seven v284 coefficient-controller labels added in the latest pass.
 These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or
 TLS service.

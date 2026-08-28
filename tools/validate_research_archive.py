@@ -566,6 +566,12 @@ def main():
     spectron_checkpoint_v283 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v283.json"
     )
+    spectron_jdcoefct_anchors = load_json(
+        "artifacts/spectron_jpeg_coefficient_controller_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v284 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v284.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -12393,6 +12399,89 @@ def main():
         "Spectron v283 checkpoint jquant2 count",
         spectron_checkpoint_v283["jquant2_anchors"]["verified_name_count"],
         9,
+    )
+    check(
+        "Spectron libjpeg jdcoefct artifact",
+        spectron_jdcoefct_anchors["artifact"],
+        "spectron_jpeg_coefficient_controller_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron libjpeg jdcoefct network",
+        spectron_jdcoefct_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron libjpeg jdcoefct anchor count",
+        spectron_jdcoefct_anchors["summary"]["anchor_count"],
+        7,
+    )
+    check(
+        "Spectron libjpeg jdcoefct unique target count",
+        spectron_jdcoefct_anchors["summary"]["unique_target_count"],
+        7,
+    )
+    check(
+        "Spectron libjpeg jdcoefct high-confidence count",
+        spectron_jdcoefct_anchors["summary"]["high_confidence_count"],
+        7,
+    )
+    check(
+        "Spectron libjpeg jdcoefct normalized count",
+        spectron_jdcoefct_anchors["summary"]["normalized_shape_exact_count"],
+        7,
+    )
+    check(
+        "Spectron libjpeg jdcoefct exact count",
+        spectron_jdcoefct_anchors["summary"]["full_metric_exact_count"],
+        6,
+    )
+    jdcoefct_rows = {
+        row["spectron_ea"]: row for row in spectron_jdcoefct_anchors["anchors"]
+    }
+    jdcoefct_expected = {
+        "0x2a9b2c": "v18_jpeg_dummy_consume_data",
+        "0x2a9b34": "v18_jpeg_consume_data",
+        "0x2a9e38": "v18_jpeg_start_output_pass",
+        "0x2a9ff0": "v18_jpeg_decompress_smooth_data",
+        "0x2aa768": "v18_jpeg_decompress_data",
+        "0x2aa980": "v18_jpeg_coef_start_input_pass",
+        "0x2aa9e0": "v18_jpeg_decompress_onepass",
+    }
+    for target_ea, expected_name in jdcoefct_expected.items():
+        check(
+            "Spectron libjpeg jdcoefct target " + target_ea,
+            jdcoefct_rows[target_ea]["proposed_name"],
+            expected_name,
+        )
+    check(
+        "Spectron v284 checkpoint artifact",
+        spectron_checkpoint_v284["artifact"],
+        "spectron_translation_checkpoint_20260828_v284",
+    )
+    check(
+        "Spectron v284 checkpoint parent",
+        spectron_checkpoint_v284["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v283",
+    )
+    check(
+        "Spectron v284 checkpoint database hash",
+        spectron_checkpoint_v284["database"]["sha256"],
+        "75ec25ac82f7724c4332611be2e8bfdea2dc1453f825b0bd0e845e53cfed8bf7",
+    )
+    check(
+        "Spectron v284 checkpoint function count",
+        spectron_checkpoint_v284["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v284 checkpoint default sub count",
+        spectron_checkpoint_v284["database"]["default_sub_function_count"],
+        587,
+    )
+    check(
+        "Spectron v284 checkpoint jdcoefct count",
+        spectron_checkpoint_v284["jdcoefct_anchors"]["verified_name_count"],
+        7,
     )
     check(
         "Spectron manual artifact",
