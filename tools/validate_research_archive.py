@@ -395,6 +395,12 @@ def main():
     spectron_checkpoint_v256 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v256.json"
     )
+    spectron_guiscrollctrl_property_anchors = load_json(
+        "artifacts/spectron_guiscrollctrl_property_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v257 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v257.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -9514,6 +9520,138 @@ def main():
         2,
     )
     check(
+        "Spectron v257 GuiScrollCtrl property artifact",
+        spectron_guiscrollctrl_property_anchors["artifact"],
+        "spectron_guiscrollctrl_property_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v257 GuiScrollCtrl property network",
+        spectron_guiscrollctrl_property_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v257 GuiScrollCtrl property anchor count",
+        spectron_guiscrollctrl_property_anchors["summary"]["anchor_count"],
+        11,
+    )
+    check(
+        "Spectron v257 GuiScrollCtrl property registration row count",
+        spectron_guiscrollctrl_property_anchors["summary"]["registration_row_count"],
+        11,
+    )
+    check(
+        "Spectron v257 GuiScrollCtrl property unique target count",
+        spectron_guiscrollctrl_property_anchors["summary"]["unique_target_count"],
+        11,
+    )
+    check(
+        "Spectron v257 GuiScrollCtrl property high confidence",
+        spectron_guiscrollctrl_property_anchors["summary"]["high_confidence_count"],
+        11,
+    )
+    check(
+        "Spectron v257 GuiScrollCtrl property target default count",
+        spectron_guiscrollctrl_property_anchors["summary"]["target_default_name_count"],
+        11,
+    )
+    check(
+        "Spectron v257 GuiScrollCtrl property normalized shape count",
+        spectron_guiscrollctrl_property_anchors["summary"]["normalized_shape_exact_count"],
+        11,
+    )
+    check(
+        "Spectron v257 GuiScrollCtrl property full metric count",
+        spectron_guiscrollctrl_property_anchors["summary"]["full_metric_exact_count"],
+        9,
+    )
+    check(
+        "Spectron v257 GuiScrollCtrl property layout count",
+        spectron_guiscrollctrl_property_anchors["summary"]["layout_change_count"],
+        0,
+    )
+    check(
+        "Spectron v257 GuiScrollCtrl property register-detail count",
+        spectron_guiscrollctrl_property_anchors["summary"]["register_detail_difference_count"],
+        2,
+    )
+    check(
+        "Spectron v257 GuiScrollCtrl property getter count",
+        spectron_guiscrollctrl_property_anchors["summary"]["getter_count"],
+        8,
+    )
+    check(
+        "Spectron v257 GuiScrollCtrl property setter count",
+        spectron_guiscrollctrl_property_anchors["summary"]["setter_count"],
+        3,
+    )
+    guiscrollctrl_property_rows = spectron_guiscrollctrl_property_anchors["anchors"]
+    check(
+        "Spectron v257 GuiScrollCtrl childmargin target",
+        next(
+            row["spectron_ea"]
+            for row in guiscrollctrl_property_rows
+            if row["original_name"] == "GuiScrollCtrl_get_childmargin"
+        ),
+        "0x1c4b08",
+    )
+    check(
+        "Spectron v257 GuiScrollCtrl scrollbar target",
+        next(
+            row["spectron_ea"]
+            for row in guiscrollctrl_property_rows
+            if row["original_name"] == "GuiScrollCtrl_get_hscrollbar"
+        ),
+        "0x1c4ab8",
+    )
+    check(
+        "Spectron v257 GuiScrollCtrl scrollpos target",
+        next(
+            row["spectron_ea"]
+            for row in guiscrollctrl_property_rows
+            if row["original_name"] == "GuiScrollCtrl_get_scrollpos"
+        ),
+        "0x1c4b2c",
+    )
+    check(
+        "Spectron v257 GuiScrollCtrl vscrollbar target",
+        next(
+            row["spectron_ea"]
+            for row in guiscrollctrl_property_rows
+            if row["original_name"] == "GuiScrollCtrl_get_vscrollbar"
+        ),
+        "0x1c4a78",
+    )
+    check(
+        "Spectron v257 checkpoint artifact",
+        spectron_checkpoint_v257["artifact"],
+        "spectron_translation_checkpoint_20260828_v257",
+    )
+    check(
+        "Spectron v257 checkpoint parent",
+        spectron_checkpoint_v257["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v256",
+    )
+    check(
+        "Spectron v257 checkpoint database hash",
+        spectron_checkpoint_v257["database"]["sha256"],
+        "91201c29da6a4798a7f1918c2f11fa848cb66848615079beaaf29d04b022d82e",
+    )
+    check(
+        "Spectron v257 checkpoint function count",
+        spectron_checkpoint_v257["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v257 checkpoint default sub count",
+        spectron_checkpoint_v257["database"]["default_sub_function_count"],
+        764,
+    )
+    check(
+        "Spectron v257 checkpoint anchor count",
+        spectron_checkpoint_v257["guiscrollctrl_property_anchors"]["verified_name_count"],
+        11,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -9646,6 +9784,7 @@ def main():
         spectron_gui_bitmap_button_property_anchors,
         spectron_guicontrol_property_tail_anchors,
         spectron_guigraalctrl_isrendering_anchors,
+        spectron_guiscrollctrl_property_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

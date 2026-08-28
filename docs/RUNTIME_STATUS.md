@@ -797,6 +797,19 @@ This is the short handoff view. The full reasoning and command history are in
      `tools/generate_spectron_guigraalctrl_isrendering_anchors.py`, and
      `artifacts/spectron_translation_checkpoint_20260828_v256.json`.
 
+63aa. The v257 IDA checkpoint translates 11 residual `GuiScrollCtrl` property
+      callbacks covering child margin, constant thumb height, both scrollbar
+      names, scroll position, tile, wheel-scroll lines, and first-responder
+      state. All 11 rows match normalized ARM64 shape, and nine match the full
+      metric set. The two scrollbar getters retain only register-detail
+      differences. The clean reopen has 11,696 functions and 764 remaining
+      default `sub_` names. The database SHA-256 is
+      `91201c29da6a4798a7f1918c2f11fa848cb66848615079beaaf29d04b022d82e`.
+      See
+      `artifacts/spectron_guiscrollctrl_property_manual_translation_anchors_20260828.json`,
+      `tools/generate_spectron_guiscrollctrl_property_anchors.py`, and
+      `artifacts/spectron_translation_checkpoint_20260828_v257.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The
