@@ -71,6 +71,9 @@ def main():
     spectron_checkpoint_v220 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v220.json"
     )
+    spectron_checkpoint_v221 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v221.json"
+    )
     spectron_manual = load_json(
         "artifacts/spectron_manual_translation_anchors_20260826.json"
     )
@@ -178,6 +181,9 @@ def main():
     )
     spectron_gui_text_list_residual_anchors = load_json(
         "artifacts/spectron_gui_text_list_residual_manual_translation_anchors_20260828.json"
+    )
+    spectron_gui_drawing_showimg_property_anchors = load_json(
+        "artifacts/spectron_gui_drawing_showimg_property_manual_translation_anchors_20260828.json"
     )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
@@ -2688,6 +2694,70 @@ def main():
         "Spectron GUI text-list profile setter target",
         gui_text_list_residual_by_name["GuiTextListEntry_set_profile"]["spectron_ea"],
         "0x1e16e8",
+    )
+    check(
+        "Spectron GUI drawing/ShowImg property artifact",
+        spectron_gui_drawing_showimg_property_anchors["artifact"],
+        "spectron_gui_drawing_showimg_property_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron GUI drawing/ShowImg property network",
+        spectron_gui_drawing_showimg_property_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron GUI drawing/ShowImg property total",
+        spectron_gui_drawing_showimg_property_anchors["summary"]["anchor_count"],
+        16,
+    )
+    check(
+        "Spectron GUI drawing/ShowImg property high confidence",
+        spectron_gui_drawing_showimg_property_anchors["summary"]["high_confidence_count"],
+        16,
+    )
+    check(
+        "Spectron GUI drawing/ShowImg property exact-shape count",
+        spectron_gui_drawing_showimg_property_anchors["summary"]["normalized_shape_exact_count"],
+        16,
+    )
+    check(
+        "Spectron GUI drawing/ShowImg property full-metric count",
+        spectron_gui_drawing_showimg_property_anchors["summary"]["full_metric_exact_count"],
+        15,
+    )
+    check(
+        "Spectron GUI drawing/ShowImg property default targets",
+        spectron_gui_drawing_showimg_property_anchors["summary"]["target_default_name_count"],
+        16,
+    )
+    drawing_showimg_by_name = {
+        row["original_name"]: row
+        for row in spectron_gui_drawing_showimg_property_anchors["anchors"]
+    }
+    check(
+        "Spectron GUI drawing partx target",
+        drawing_showimg_by_name["GuiDrawingPanel_get_partx"]["spectron_ea"],
+        "0x1e3f24",
+    )
+    check(
+        "Spectron GUI available-filters target",
+        drawing_showimg_by_name["GuiDrawingPanel_get_availablefilters"]["spectron_ea"],
+        "0x1e3f84",
+    )
+    check(
+        "Spectron GUI ShowImg offsetx target",
+        drawing_showimg_by_name["GuiShowImgCtrl_get_offsetx"]["spectron_ea"],
+        "0x1e4d3c",
+    )
+    check(
+        "Spectron GUI ShowImg animation setter target",
+        drawing_showimg_by_name["GuiShowImgCtrl_set_ani"]["spectron_ea"],
+        "0x1e4fc4",
+    )
+    check(
+        "Spectron GUI drawing/ShowImg target-only review count",
+        len(spectron_gui_drawing_showimg_property_anchors["reviewed_target_only_rows"]),
+        2,
     )
     check(
         "Spectron TString artifact",
@@ -5799,6 +5869,31 @@ def main():
         10,
     )
     check(
+        "Spectron v221 checkpoint artifact",
+        spectron_checkpoint_v221["artifact"],
+        "spectron_translation_checkpoint_20260828_v221",
+    )
+    check(
+        "Spectron v221 checkpoint parent",
+        spectron_checkpoint_v221["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v220",
+    )
+    check(
+        "Spectron v221 checkpoint database hash",
+        spectron_checkpoint_v221["database"]["sha256"],
+        "8fccf4d07bcb149f4a682144c450b8ae36fe854a15dcc6e5491ea19c85c4e1f6",
+    )
+    check(
+        "Spectron v221 checkpoint default sub count",
+        spectron_checkpoint_v221["database"]["default_sub_function_count"],
+        1109,
+    )
+    check(
+        "Spectron v221 checkpoint property count",
+        spectron_checkpoint_v221["gui_drawing_showimg_property_anchors"]["verified_name_count"],
+        16,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -5895,6 +5990,7 @@ def main():
         spectron_tstringlist_residual_anchors,
         spectron_server_object_lifecycle_anchors,
         spectron_gui_ml_text_residual_anchors,
+        spectron_gui_drawing_showimg_property_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

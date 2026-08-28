@@ -11986,3 +11986,65 @@ The checkpoint is
 
 This pass changed only the disposable IDA database and performed no DNS,
 HTTP, or TLS operation.
+
+## 2026-08-28: Residual Spectron drawing-panel and ShowImg properties
+
+The v221 review moved one class block farther through the stripped Spectron
+database. It covered six `GuiDrawingPanel` property callbacks and ten
+`GuiShowImgCtrl` callbacks that still had default `sub_` names. This was a
+deliberately narrow pass: the source property tables, target property tables,
+class-local order, and target pseudocode were reviewed before any alias was
+applied.
+
+| Source role | Source | Spectron target | Target name before alias | Reviewed operation |
+| --- | ---: | ---: | --- | --- |
+| `GuiDrawingPanel_get_partx` | `0x1e0030` | `0x1e3f24` | `sub_1E3F24` | panel `partx` at `+172` |
+| `GuiDrawingPanel_get_party` | `0x1e003c` | `0x1e3f30` | `sub_1E3F30` | panel `party` at `+176` |
+| `GuiDrawingPanel_get_partw` | `0x1e0048` | `0x1e3f3c` | `sub_1E3F3C` | panel `partw` at `+180` |
+| `GuiDrawingPanel_get_parth` | `0x1e0054` | `0x1e3f48` | `sub_1E3F48` | panel `parth` at `+184` |
+| `GuiDrawingPanel_get_enablecache` | `0x1e0060` | `0x1e3f54` | `sub_1E3F54` | cache flag at `+140` |
+| `GuiDrawingPanel_get_availablefilters` | `0x1e0090` | `0x1e3f84` | `sub_1E3F84` | available-filter list |
+| `GuiShowImgCtrl_get_offsetx` | `0x1e0e48` | `0x1e4d3c` | `sub_1E4D3C` | control `offsetx` at `+472` |
+| `GuiShowImgCtrl_get_offsety` | `0x1e0e50` | `0x1e4d44` | `sub_1E4D44` | control `offsety` at `+476` |
+| `GuiShowImgCtrl_set_layer` | `0x1e0e64` | `0x1e4d58` | `sub_1E4D58` | owned-image layer setter |
+| `GuiShowImgCtrl_get_layer` | `0x1e0e6c` | `0x1e4d60` | `sub_1E4D60` | owned-image layer getter |
+| `GuiShowImgCtrl_get_dir` | `0x1e0e74` | `0x1e4d68` | `sub_1E4D68` | particle direction getter |
+| `GuiShowImgCtrl_get_ani` | `0x1e0e80` | `0x1e4d74` | `sub_1E4D74` | animation-string getter |
+| `GuiShowImgCtrl_set_dir` | `0x1e1088` | `0x1e4f7c` | `sub_1E4F7C` | direction setter and player-look reset |
+| `GuiShowImgCtrl_set_ani` | `0x1e10d0` | `0x1e4fc4` | `sub_1E4FC4` | animation setter and player-look reset |
+| `GuiShowImgCtrl_set_offsety` | `0x1e1564` | `0x1e5434` | `sub_1E5434` | offset write and position refresh |
+| `GuiShowImgCtrl_set_offsetx` | `0x1e156c` | `0x1e543c` | `sub_1E543C` | offset write and position refresh |
+
+The first five drawing-panel rows are direct receiver-field reads. The sixth
+builds the same available-filter variable list as the source, although the
+target calls its rebuilt string and script-variable classes by obfuscated
+names. The target `GuiShowImgCtrl` getters preserve the same control offsets
+and owned-image forwarding. The two setter pairs also retain the important
+side effect from 1.8: changing direction or animation clears player-look
+mode, while changing either display offset recomputes the image position.
+
+Every row matches the normalized ARM64 shape record. Fifteen rows match all
+recorded metrics. The single remaining metric difference is the target's
+rebuilt wrapper or register-detail representation, not a behavioral
+disagreement. The target component names in this block are `V8fxgahcBw` for
+the drawing panel and `VGk7faT0Ma` for the show-image control.
+
+Two nearby target functions were reviewed and intentionally left without a
+1.8 alias. `0x1e3f60` clears the target drawing-panel filter-name string and
+is called from the target render routine. `0x1e4d4c` clears a target
+ShowImg animation string and is likewise called from rendering. Neither has
+a demonstrated source counterpart, so assigning a familiar 1.8 name would
+make the database less honest.
+
+The v221 disposable database applies the 16 `v18_` aliases and reopens with
+zero rename failures. It contains 11,694 functions and 1,109 default `sub_`
+names. Its SHA-256 is
+`8fccf4d07bcb149f4a682144c450b8ae36fe854a15dcc6e5491ea19c85c4e1f6`.
+The generator is
+`tools/generate_spectron_gui_residual_property_anchors.py`, the evidence is
+`artifacts/spectron_gui_drawing_showimg_property_manual_translation_anchors_20260828.json`,
+and the checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v221.json`.
+
+This pass changed only the disposable IDA database. It did not patch the APK
+or either native library, and it performed no DNS, HTTP, or TLS operation.

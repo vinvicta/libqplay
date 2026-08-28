@@ -90,7 +90,9 @@ def main() -> None:
     }
     result["interpretation"] = list(result.get("interpretation", []))
     result["interpretation"].append(
-        "The v219 database revision also contains the separately reviewed residual GUI text-list property anchors."
+        "This database revision also contains the separately reviewed anchor group recorded under "
+        + args.checkpoint_key
+        + "."
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(

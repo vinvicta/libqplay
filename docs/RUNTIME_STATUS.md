@@ -1644,6 +1644,18 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_gui_text_list_residual_anchors.py`, and
     `/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v220.i64`.
 
+280. The v221 IDA pass resolved 16 residual drawing-panel and ShowImg GUI
+    property callbacks. Six cover panel rectangle, cache, and filter
+    properties, while ten cover ShowImg offsets, layer, direction, animation,
+    and image-position refresh behavior. All 16 rows match normalized shape,
+    15 match the complete metric set, and all names reopened successfully.
+    The v221 copy has 11,694 functions and 1,109 remaining default `sub_`
+    names. Two nearby target-only cleanup helpers were reviewed and left
+    unaliased because no 1.8 counterpart was demonstrated. See
+    `artifacts/spectron_gui_drawing_showimg_property_manual_translation_anchors_20260828.json`,
+    `tools/generate_spectron_gui_residual_property_anchors.py`, and
+    `/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v221.i64`.
+
 267. The next IDA pass resolved eight small `THTMLPage` methods. They cover
     font-pointer cleanup, dirty and word-wrap state, parse tags, selection,
     URL and line initialization, and tab-stop replacement. The Spectron
