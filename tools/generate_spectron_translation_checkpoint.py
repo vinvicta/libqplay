@@ -87,6 +87,8 @@ def main() -> None:
     parser.add_argument("--mrandom-verification", type=Path)
     parser.add_argument("--tstringlist-residual-anchors", type=Path)
     parser.add_argument("--tstringlist-residual-verification", type=Path)
+    parser.add_argument("--server-object-lifecycle-anchors", type=Path)
+    parser.add_argument("--server-object-lifecycle-verification", type=Path)
     parser.add_argument("--player-helper-anchors", type=Path)
     parser.add_argument("--player-helper-verification", type=Path)
     parser.add_argument("--input-window-anchors", type=Path)
@@ -850,6 +852,44 @@ def main() -> None:
         result["tstringlist_residual_anchors"] = tstringlist_residual
         result["interpretation"].append(
             "The two-hundred-sixteenth database revision also contains the separately reviewed residual TStringList destructor, removal, case-insensitive lookup, and indexed-access anchors."
+        )
+    server_object_lifecycle = None
+    if args.server_object_lifecycle_anchors or args.server_object_lifecycle_verification:
+        if not args.server_object_lifecycle_anchors or not args.server_object_lifecycle_verification:
+            raise ValueError(
+                "server-object lifecycle anchors and server-object lifecycle verification must be supplied together"
+            )
+        server_object_lifecycle_document = load(args.server_object_lifecycle_anchors)
+        server_object_lifecycle_verification = load(args.server_object_lifecycle_verification)
+        if (
+            server_object_lifecycle_document.get("artifact")
+            != "spectron_server_object_lifecycle_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected server-object lifecycle anchor artifact")
+        if not server_object_lifecycle_verification.get("verified"):
+            raise ValueError("server-object lifecycle anchor reopen verification did not pass")
+        expected_server_object_lifecycle = len(server_object_lifecycle_document["anchors"])
+        if (
+            server_object_lifecycle_verification["verified_name_count"]
+            != expected_server_object_lifecycle
+        ):
+            raise ValueError("server-object lifecycle verification count differs from artifact")
+        server_object_lifecycle = {
+            "anchor_path": str(args.server_object_lifecycle_anchors),
+            "anchor_sha256": sha256_path(args.server_object_lifecycle_anchors),
+            "reopen_verification": str(args.server_object_lifecycle_verification),
+            "anchor_count": expected_server_object_lifecycle,
+            "verified_name_count": server_object_lifecycle_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": server_object_lifecycle_verification[
+                "failure_count"
+            ],
+        }
+    if server_object_lifecycle is not None:
+        result["server_object_lifecycle_anchors"] = server_object_lifecycle
+        result["interpretation"].append(
+            "The two-hundred-seventeenth database revision also contains the separately reviewed residual Explosion, Bomb, Chest, Extra, Flying, Leap, and Sign lifecycle anchors."
         )
     runtime_path = None
     if args.runtime_path_anchors or args.runtime_path_verification:

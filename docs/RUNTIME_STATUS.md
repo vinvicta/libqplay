@@ -1597,6 +1597,20 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_tstringlist_residual_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+276. The next IDA pass resolved 49 residual methods across the contiguous
+    `TExplosion`, `TServerBomb`, `TServerChest`, `TServerExtra`,
+    `TServerFlying`, `TServerLeap`, and `TServerSign` blocks. The rows cover
+    compact getters, level-bound constructors, native and script-property
+    initializers, property destructors, object destructors, and deleting
+    destructor wrappers. All 49 rows match normalized shape; nine match every
+    feature and 40 differ only in register detail. Seven default target names
+    were replaced. The aliases reopened successfully in the v217 copy, which
+    has 11,694 functions, 3,641 high-confidence labels, and 1,191 default
+    `sub_` names, with zero semantic reopen failures. See
+    `artifacts/spectron_server_object_lifecycle_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_server_object_lifecycle_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 267. The next IDA pass resolved eight small `THTMLPage` methods. They cover
     font-pointer cleanup, dirty and word-wrap state, parse tags, selection,
     URL and line initialization, and tab-stop replacement. The Spectron
