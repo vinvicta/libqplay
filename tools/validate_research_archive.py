@@ -485,6 +485,15 @@ def main():
     spectron_checkpoint_v270 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v270.json"
     )
+    spectron_runtime_callback_residual_anchors = load_json(
+        "artifacts/spectron_runtime_callback_residual_manual_translation_anchors_20260828.json"
+    )
+    spectron_tplayer_quattro_zoom_property_labels = load_json(
+        "artifacts/spectron_tplayer_quattro_zoom_property_target_only_labels_20260828.json"
+    )
+    spectron_checkpoint_v271 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v271.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -11146,6 +11155,164 @@ def main():
         17,
     )
     check(
+        "Spectron runtime callback residual artifact",
+        spectron_runtime_callback_residual_anchors["artifact"],
+        "spectron_runtime_callback_residual_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron runtime callback residual network",
+        spectron_runtime_callback_residual_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron runtime callback residual anchor count",
+        spectron_runtime_callback_residual_anchors["summary"]["anchor_count"],
+        9,
+    )
+    check(
+        "Spectron runtime callback residual unique target count",
+        spectron_runtime_callback_residual_anchors["summary"]["unique_target_count"],
+        9,
+    )
+    check(
+        "Spectron runtime callback residual high-confidence count",
+        spectron_runtime_callback_residual_anchors["summary"]["high_confidence_count"],
+        9,
+    )
+    check(
+        "Spectron runtime callback residual exact count",
+        spectron_runtime_callback_residual_anchors["summary"]["exact_metric_match_count"],
+        9,
+    )
+    check(
+        "Spectron runtime callback residual default count",
+        spectron_runtime_callback_residual_anchors["summary"]["target_default_name_count"],
+        8,
+    )
+    check(
+        "Spectron runtime callback residual TStream count",
+        spectron_runtime_callback_residual_anchors["summary"]["tstream_count"],
+        4,
+    )
+    check(
+        "Spectron runtime callback residual zlib count",
+        spectron_runtime_callback_residual_anchors["summary"]["zlib_count"],
+        2,
+    )
+    check(
+        "Spectron runtime callback residual YAJL count",
+        spectron_runtime_callback_residual_anchors["summary"]["yajl_count"],
+        3,
+    )
+    runtime_callback_rows = {
+        row["spectron_ea"]: row
+        for row in spectron_runtime_callback_residual_anchors["anchors"]
+    }
+    check(
+        "Spectron runtime callback TStream tell target",
+        runtime_callback_rows["0xf19cc"]["proposed_name"],
+        "v18_TStream_zipTellFile",
+    )
+    check(
+        "Spectron runtime callback zlib calloc target",
+        runtime_callback_rows["0x296ff0"]["proposed_name"],
+        "v18_zlib_zcalloc",
+    )
+    check(
+        "Spectron runtime callback YAJL malloc target",
+        runtime_callback_rows["0x2bcd20"]["proposed_name"],
+        "v18_yajl_internal_malloc",
+    )
+    check(
+        "Spectron TPlayer Quattro property artifact",
+        spectron_tplayer_quattro_zoom_property_labels["artifact"],
+        "spectron_tplayer_quattro_zoom_property_target_only_labels_20260828",
+    )
+    check(
+        "Spectron TPlayer Quattro property network",
+        spectron_tplayer_quattro_zoom_property_labels["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron TPlayer Quattro property label count",
+        spectron_tplayer_quattro_zoom_property_labels["summary"]["label_count"],
+        2,
+    )
+    check(
+        "Spectron TPlayer Quattro property high-confidence count",
+        spectron_tplayer_quattro_zoom_property_labels["summary"]["high_confidence_count"],
+        2,
+    )
+    check(
+        "Spectron TPlayer Quattro property default count",
+        spectron_tplayer_quattro_zoom_property_labels["summary"]["target_default_name_count"],
+        2,
+    )
+    check(
+        "Spectron TPlayer Quattro property source counterpart count",
+        spectron_tplayer_quattro_zoom_property_labels["summary"]["source_counterpart_count"],
+        0,
+    )
+    check(
+        "Spectron TPlayer Quattro property getter count",
+        spectron_tplayer_quattro_zoom_property_labels["summary"]["getter_count"],
+        1,
+    )
+    check(
+        "Spectron TPlayer Quattro property setter count",
+        spectron_tplayer_quattro_zoom_property_labels["summary"]["setter_count"],
+        1,
+    )
+    quattro_rows = {
+        row["target_ea"]: row
+        for row in spectron_tplayer_quattro_zoom_property_labels["labels"]
+    }
+    check(
+        "Spectron TPlayer Quattro getter target",
+        quattro_rows["0x170334"]["proposed_name"],
+        "spectron_TPlayer_get_useQuattroZoomFactorCulling",
+    )
+    check(
+        "Spectron TPlayer Quattro setter target",
+        quattro_rows["0x170344"]["proposed_name"],
+        "spectron_TPlayer_set_useQuattroZoomFactorCulling",
+    )
+    check(
+        "Spectron v271 checkpoint artifact",
+        spectron_checkpoint_v271["artifact"],
+        "spectron_translation_checkpoint_20260828_v271",
+    )
+    check(
+        "Spectron v271 checkpoint parent",
+        spectron_checkpoint_v271["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v270",
+    )
+    check(
+        "Spectron v271 checkpoint database hash",
+        spectron_checkpoint_v271["database"]["sha256"],
+        "9ce571f635b79dfc95faf97b80242e52003620367c5edf30ee5c3fb028616e14",
+    )
+    check(
+        "Spectron v271 checkpoint function count",
+        spectron_checkpoint_v271["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v271 checkpoint default sub count",
+        spectron_checkpoint_v271["database"]["default_sub_function_count"],
+        670,
+    )
+    check(
+        "Spectron v271 checkpoint runtime count",
+        spectron_checkpoint_v271["runtime_callback_residual_anchors"]["verified_name_count"],
+        9,
+    )
+    check(
+        "Spectron v271 checkpoint property count",
+        spectron_checkpoint_v271["tplayer_quattro_zoom_property_labels"]["verified_name_count"],
+        2,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -11451,6 +11618,9 @@ def main():
         spectron_checkpoint_v269,
         spectron_script_table_surface_anchors,
         spectron_checkpoint_v270,
+        spectron_runtime_callback_residual_anchors,
+        spectron_tplayer_quattro_zoom_property_labels,
+        spectron_checkpoint_v271,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

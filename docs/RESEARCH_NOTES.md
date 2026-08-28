@@ -12589,6 +12589,105 @@ This pass changed only the local IDA copy, JSON evidence, and public
 documentation. It did not modify the APK or native library and did not
 contact a DNS, HTTP, TLS, Google Play, Firebase, or game-server endpoint.
 
+## 2026-08-28: Spectron runtime callback residuals and Quattro zoom property
+
+The v271 pass reviewed the next residual default names by following the code
+that installs each callback. This is useful for small helper functions because
+several unrelated wrappers can share the same instruction shape. The final
+pass adds nine exact source-to-target callback anchors and two target-only
+property labels, reducing the v270 residual count from 680 to 670.
+
+### TStream zlib file callbacks
+
+The target function at `0xf2374`,
+`v18_TStream_fillZipFunctions_zlib_filefunc_def_s`, fills a zlib file-function
+table. Its callback slots provide an independent role check:
+
+| 1.8 role | Source | Spectron target | Applied label | Target slot |
+| --- | ---: | ---: | --- | --- |
+| `TStream_zipOpenFile` | `0xf04ec` | `0xf19c8` | `v18_TStream_zipOpenFile` | zopen, `0x00` |
+| `TStream_zipTellFile` | `0xf04f0` | `0xf19cc` | `v18_TStream_zipTellFile` | ztell, `0x18` |
+| `TStream_zipCloseFile` | `0xf0548` | `0xf1a24` | `v18_TStream_zipCloseFile` | zclose, `0x28` |
+| `TStream_zipErrorFile` | `0xf0550` | `0xf1a2c` | `v18_TStream_zipErrorFile` | zerror, `0x30` |
+
+The target's first slot points to the one-instruction no-op at `0xf19c8`,
+which keeps the opaque stream handle contract. The target tell callback at
+`0xf19cc` returns the current stream position. The close and error callbacks
+at `0xf1a24` and `0xf1a2c` return zero. Each source and target pair has the
+same complete recorded ARM64 metric set, including the one-instruction
+no-op and the two-instruction wrappers where applicable.
+
+### zlib and YAJL allocators
+
+The target zlib initializers install a two-function allocator pair. The
+target `v18_deflateInit2` at `0x290edc` and `v18_inflateInit2` at `0x291484`
+both reference the same target functions:
+
+| 1.8 role | Source | Spectron target | Applied label | Installation |
+| --- | ---: | ---: | --- | --- |
+| `zlib_zcalloc` | `0x289b80` | `0x296ff0` | `v18_zlib_zcalloc` | zalloc field in both initializers |
+| `zlib_zcfree` | `0x289b88` | `0x296ff8` | `v18_zlib_zcfree` | zfree field in both initializers |
+
+The target zalloc body computes `a2 * a3` and calls the target allocator.
+The zfree body forwards to free. The YAJL default allocator table at
+`0x2bcd28`, initialized by
+`v18_yajl_set_default_alloc_funcs_yajl_alloc_funcs`, provides the remaining
+three anchors:
+
+| 1.8 role | Source | Spectron target | Applied label | YAJL field |
+| --- | ---: | ---: | --- | --- |
+| `yajl_internal_realloc` | `0x2af788` | `0x2bcd0c` | `v18_yajl_internal_realloc` | realloc |
+| `yajl_internal_free` | `0x2af794` | `0x2bcd18` | `v18_yajl_internal_free` | free |
+| `yajl_internal_malloc` | `0x2af79c` | `0x2bcd20` | `v18_yajl_internal_malloc` | malloc |
+
+All five allocator pairs match the complete recorded source and target
+feature metrics. The installation sites also distinguish the YAJL trio from
+the nearby zlib helpers, which is why these names are treated as exact
+runtime-role anchors rather than broad similarity guesses.
+
+### Target-only Quattro zoom-culling property
+
+The target TPlayer initialization function at `0x17d854`,
+`v18_TPlayer_initStaticScriptVars_void`, registers a property table containing
+record `0x38ee08`. That record points to the readable target literal at
+`0x2e27c0`,
+`Quattro::Rendering::Quattro2D::useQuattroZoomFactorCulling`, and has flags
+`0x6200`. Its getter field points to `0x170334` and its setter field points to
+`0x170344`.
+
+| Target address | Applied label | Role | Reviewed operation |
+| ---: | --- | --- | --- |
+| `0x170334` | `spectron_TPlayer_get_useQuattroZoomFactorCulling` | getter | returns the byte in the target TPlayer global |
+| `0x170344` | `spectron_TPlayer_set_useQuattroZoomFactorCulling` | setter | stores and returns the incoming byte |
+
+The source inventory and source binary do not contain the exact target
+property literal or a matching source property record, so no 1.8 counterpart
+is claimed. A broad metric search did find the setter's shape in an unrelated
+source callback, but the target property record proves that this is a TPlayer
+property setter. That candidate was rejected rather than silently assigning a
+wrong cross-build name.
+
+The runtime callback artifact is
+`artifacts/spectron_runtime_callback_residual_manual_translation_anchors_20260828.json`
+with SHA-256
+`7238ce66cc64bad76c1d7add582e5a25c73b0905aeee46e365322dff15c24af0`. The
+target-only property artifact is
+`artifacts/spectron_tplayer_quattro_zoom_property_target_only_labels_20260828.json`
+with SHA-256
+`a0fbc203d2318dd484e75f66c88477249bf07c0f46b59bb69291546f49bf1786`. The
+reopened v271 IDA database contains 11,696 functions and 670 default names;
+its SHA-256 is
+`9ce571f635b79dfc95faf97b80242e52003620367c5edf30ee5c3fb028616e14`. The
+checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v271.json` with
+SHA-256
+`724e0ff09b9daaa041843cc56cb430f15955d4269b38fbeef52f0652acc60570`.
+
+The nine callback aliases and two property labels reopened with zero
+failures. This pass changed only the local IDA copy, evidence artifacts, and
+documentation. It did not modify the APK or native library and did not
+contact a DNS, HTTP, TLS, Google Play, Firebase, or game-server endpoint.
+
 ## 2026-08-28: Spectron TBodyPanel bodycacheperplayer alias
 
 The v261 pass translates the last unnamed callback in the server and player

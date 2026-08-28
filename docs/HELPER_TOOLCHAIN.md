@@ -5,6 +5,16 @@ were cloned with Git and tested locally at fixed commits. Their source is not
 vendored into this repository, and no private key files from either checkout
 were copied into the research archive.
 
+## Current checkout
+
+On 2026-08-28, the pinned commits were also cloned with Git into
+`/home/v/Desktop/graal-decomp/vendor/GScript.Go-HexaParser` and
+`/home/v/Desktop/graal-decomp/vendor/Moreno.kahn`. These are working
+checkouts for this investigation and are still separate from the public
+archive. The current shell does not have a `go` executable, so this pass does
+not claim a new Go test run. The historical test results below remain tied to
+the earlier environment where Go 1.22.2 was available.
+
 ## HexaParser
 
 Repository: `MorenoLand/GScript.Go-HexaParser`

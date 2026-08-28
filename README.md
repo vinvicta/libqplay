@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v270 Spectron database. It
-contains 11,696 functions and 680 remaining default `sub_` names. The v263
+The current documented translation frontier is the v271 Spectron database. It
+contains 11,696 functions and 670 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -30,8 +30,11 @@ one target-layout match, plus a target-only `loadvarsfromarray` callback whose
 encoded table name decodes exactly. The v270 revision adds 17 script-table
 callback anchors across the GUI, TGraalVar, and TTiles surfaces. It also
 corrects the earlier dialog assignment: target `0x1b5cf8` is `pushdialog`,
-while target `0x1b58c4` is `popdialog`. These names come from target tables,
-Java method strings, retained callers, and reviewed pseudocode. They are
+while target `0x1b58c4` is `popdialog`. The v271 revision adds nine exact
+runtime callback anchors for the TStream, zlib, and YAJL helper blocks, plus
+two target-only TPlayer property labels for the Quattro zoom-culling getter
+and setter. These names come from target tables, Java method strings,
+retained callers, installation sites, and reviewed pseudocode. They are
 labels for this stripped 2.2 library, not claims that original debug symbols
 were recovered.
 The saved databases are
@@ -42,9 +45,11 @@ The saved databases are
 `analysis/spectron_libqplay_translated_v267.i64`,
 `analysis/spectron_libqplay_translated_v268.i64`, and the v269 frontier in
 `analysis/spectron_libqplay_translated_v269.i64`. The v270 database is kept
-locally as `analysis/spectron_libqplay_translated_v270.i64`; its hash and
-reopen report are recorded in the v270 checkpoint because packed IDA files
-are intentionally excluded from the public repository.
+locally as `analysis/spectron_libqplay_translated_v270.i64`, and the current
+v271 database is kept locally as
+`analysis/spectron_libqplay_translated_v271.i64`. Their hashes and reopen
+reports are recorded in their checkpoints because packed IDA files are
+intentionally excluded from the public repository.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -98,6 +103,19 @@ wrappers. The artifact also records the correction to the earlier
 `0x1b5cf8` label. The v270 checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v270.json`.
 
+The v271 runtime callback evidence is in
+`artifacts/spectron_runtime_callback_residual_manual_translation_anchors_20260828.json`.
+It records nine exact source-to-target anchors: four TStream zlib file
+callbacks, two zlib allocator callbacks, and three YAJL allocator callbacks.
+The target-only TPlayer property evidence is in
+`artifacts/spectron_tplayer_quattro_zoom_property_target_only_labels_20260828.json`.
+It labels the getter at `0x170334` and setter at `0x170344` for the readable
+target property
+`Quattro::Rendering::Quattro2D::useQuattroZoomFactorCulling`. No 1.8 source
+counterpart is claimed for that property. The v271 checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v271.json`; it records
+the reopened database with 11,696 functions and 670 remaining default names.
+
 The latest checkpoints are
 `artifacts/spectron_translation_checkpoint_20260828_v263_corrected.json` and
 `artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json`,
@@ -108,9 +126,11 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v267.json`,
 `artifacts/spectron_translation_checkpoint_20260828_v268.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v269.json`, followed by
-`artifacts/spectron_translation_checkpoint_20260828_v270.json`. All four
+`artifacts/spectron_translation_checkpoint_20260828_v270.json` and
+`artifacts/spectron_translation_checkpoint_20260828_v271.json`. All four
 newly reviewed legacy names, the six corrected target-only names, the
-package-signature label, the v269 TGraalVar labels, and the v270 script-table
+package-signature label, the v269 TGraalVar labels, the v270 script-table
+labels, the nine v271 runtime callback labels, and the two v271 property
 labels were reopened and verified with zero failures. These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or
 TLS service.
@@ -167,7 +187,7 @@ The complete metadata is in
 responder, certificate key, APK, captures, and game assets remain private.
 
 The v235 entry below is a historical checkpoint in the IDA translation
-series. The current series reaches
+series. At that point, the current series reached
 `analysis/spectron_libqplay_translated_v268.i64`. The v235 pass adds 12
 high-confidence aliases from the GSFunctionsClient and GuiControl property
 tables. They cover five carried-object getters, four screen-relative mouse
