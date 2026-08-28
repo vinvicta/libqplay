@@ -122,6 +122,11 @@ RGB-to-grayscale converters, CMYK-to-YCCK conversion, and the compressor-side
 grayscale and direct-copy paths. All six match the complete recorded feature
 set. The two duplicate file-local role names use a `c_` qualifier so they do
 not collide with the decompressor-side `jdcolor.c` labels.
+The v290 revision adds five high-confidence libjpeg compressor coefficient
+controller labels. They identify the iMCU-row reset helper, pass-through,
+full-buffer, and crank-destination data paths, plus the pass dispatcher. All
+five match normalized feature shape, and four match the complete recorded
+feature set.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -170,6 +175,8 @@ The current v288 database is kept locally as
 `analysis/spectron_libqplay_translated_v288.i64`.
 The current v289 database is kept locally as
 `analysis/spectron_libqplay_translated_v289.i64`.
+The current v290 database is kept locally as
+`analysis/spectron_libqplay_translated_v290.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -418,6 +425,17 @@ labels. The checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v289.json`; it records
 the reopened database with 569 remaining default names.
 
+The v290 libjpeg compressor coefficient-controller evidence is in
+`artifacts/spectron_jpeg_compressor_coefficient_controller_manual_translation_anchors_20260828.json`.
+It labels five routines around
+`v18_jinit_c_coef_controller_jpeg_compress_struct_int` at `0x2afe2c`: the
+iMCU-row reset helper, pass-through compressor, virtual-buffer output path,
+full-buffer first pass, and start-pass dispatcher. All five match normalized
+ARM64 feature shape, and four match the complete recorded feature set. The
+checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v290.json`; it records
+the reopened database with 564 remaining default names.
+
 The latest checkpoints are
 `artifacts/spectron_translation_checkpoint_20260828_v263_corrected.json` and
 `artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json`,
@@ -446,11 +464,12 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v285.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v286.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v287.json`, and
-`artifacts/spectron_translation_checkpoint_20260828_v288.json`, and
-`artifacts/spectron_translation_checkpoint_20260828_v289.json`. The reviewed
+`artifacts/spectron_translation_checkpoint_20260828_v288.json`,
+`artifacts/spectron_translation_checkpoint_20260828_v289.json`, and
+`artifacts/spectron_translation_checkpoint_20260828_v290.json`. The reviewed
 legacy, Android, script-table, runtime, property, zlib, and libjpeg labels
-through v289 were reopened and verified with zero failures. That includes the
-v289 compressor color-converter labels added in the latest pass.
+through v290 were reopened and verified with zero failures. That includes the
+v290 compressor coefficient-controller labels added in the latest pass.
 These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or
 TLS service.

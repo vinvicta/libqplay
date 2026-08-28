@@ -602,6 +602,12 @@ def main():
     spectron_checkpoint_v289 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v289.json"
     )
+    spectron_jccoefct_anchors = load_json(
+        "artifacts/spectron_jpeg_compressor_coefficient_controller_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v290 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v290.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -12924,6 +12930,92 @@ def main():
         6,
     )
     check(
+        "Spectron libjpeg jccoefct artifact",
+        spectron_jccoefct_anchors["artifact"],
+        "spectron_jpeg_compressor_coefficient_controller_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron libjpeg jccoefct network",
+        spectron_jccoefct_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron libjpeg jccoefct anchor count",
+        spectron_jccoefct_anchors["summary"]["anchor_count"],
+        5,
+    )
+    check(
+        "Spectron libjpeg jccoefct unique target count",
+        spectron_jccoefct_anchors["summary"]["unique_target_count"],
+        5,
+    )
+    check(
+        "Spectron libjpeg jccoefct high-confidence count",
+        spectron_jccoefct_anchors["summary"]["high_confidence_count"],
+        5,
+    )
+    check(
+        "Spectron libjpeg jccoefct normalized count",
+        spectron_jccoefct_anchors["summary"]["normalized_shape_exact_count"],
+        5,
+    )
+    check(
+        "Spectron libjpeg jccoefct exact count",
+        spectron_jccoefct_anchors["summary"]["full_metric_exact_count"],
+        4,
+    )
+    jccoefct_rows = {
+        row["spectron_ea"]: row for row in spectron_jccoefct_anchors["anchors"]
+    }
+    jccoefct_expected = {
+        "0x2aefc0": "v18_jpeg_start_iMCU_row",
+        "0x2af024": "v18_jpeg_compress_output",
+        "0x2af2b0": "v18_jpeg_compress_data",
+        "0x2af804": "v18_jpeg_start_pass_coef",
+        "0x2af93c": "v18_jpeg_compress_first_pass",
+    }
+    for target_ea, expected_name in jccoefct_expected.items():
+        check(
+            "Spectron libjpeg jccoefct target " + target_ea,
+            jccoefct_rows[target_ea]["proposed_name"],
+            expected_name,
+        )
+    check(
+        "Spectron jccoefct start-pass metric exception",
+        jccoefct_rows["0x2af804"]["metric_differences"],
+        ["register_detail_hash"],
+    )
+    check(
+        "Spectron v290 checkpoint artifact",
+        spectron_checkpoint_v290["artifact"],
+        "spectron_translation_checkpoint_20260828_v290",
+    )
+    check(
+        "Spectron v290 checkpoint parent",
+        spectron_checkpoint_v290["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v289",
+    )
+    check(
+        "Spectron v290 checkpoint database hash",
+        spectron_checkpoint_v290["database"]["sha256"],
+        "5a74d5d6915311fedf66eb33f1c7a6901baad8ad47653ae1c445698eccbf37e7",
+    )
+    check(
+        "Spectron v290 checkpoint function count",
+        spectron_checkpoint_v290["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v290 checkpoint default sub count",
+        spectron_checkpoint_v290["database"]["default_sub_function_count"],
+        564,
+    )
+    check(
+        "Spectron v290 checkpoint jccoefct count",
+        spectron_checkpoint_v290["jccoefct_anchors"]["verified_name_count"],
+        5,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -13258,6 +13350,8 @@ def main():
         spectron_checkpoint_v283,
         spectron_jccolor_anchors,
         spectron_checkpoint_v289,
+        spectron_jccoefct_anchors,
+        spectron_checkpoint_v290,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
