@@ -365,6 +365,12 @@ def main():
     spectron_checkpoint_v251 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v251.json"
     )
+    spectron_tgui_animation_property_residual_anchors = load_json(
+        "artifacts/spectron_tgui_animation_property_residual_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v252 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v252.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -8864,6 +8870,129 @@ def main():
         2,
     )
     check(
+        "Spectron v252 TGUIAnimation property artifact",
+        spectron_tgui_animation_property_residual_anchors["artifact"],
+        "spectron_tgui_animation_property_residual_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v252 TGUIAnimation property network",
+        spectron_tgui_animation_property_residual_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v252 TGUIAnimation property anchor count",
+        spectron_tgui_animation_property_residual_anchors["summary"]["anchor_count"],
+        17,
+    )
+    check(
+        "Spectron v252 TGUIAnimation property registration row count",
+        spectron_tgui_animation_property_residual_anchors["summary"]["registration_row_count"],
+        17,
+    )
+    check(
+        "Spectron v252 TGUIAnimation property unique target count",
+        spectron_tgui_animation_property_residual_anchors["summary"]["unique_target_count"],
+        17,
+    )
+    check(
+        "Spectron v252 TGUIAnimation property high confidence",
+        spectron_tgui_animation_property_residual_anchors["summary"]["high_confidence_count"],
+        17,
+    )
+    check(
+        "Spectron v252 TGUIAnimation property target default count",
+        spectron_tgui_animation_property_residual_anchors["summary"]["target_default_name_count"],
+        17,
+    )
+    check(
+        "Spectron v252 TGUIAnimation property normalized shape count",
+        spectron_tgui_animation_property_residual_anchors["summary"]["normalized_shape_exact_count"],
+        17,
+    )
+    check(
+        "Spectron v252 TGUIAnimation property full metric count",
+        spectron_tgui_animation_property_residual_anchors["summary"]["full_metric_exact_count"],
+        17,
+    )
+    check(
+        "Spectron v252 TGUIAnimation property layout count",
+        spectron_tgui_animation_property_residual_anchors["summary"]["layout_change_count"],
+        0,
+    )
+    check(
+        "Spectron v252 TGUIAnimation property register-detail count",
+        spectron_tgui_animation_property_residual_anchors["summary"]["register_detail_difference_count"],
+        0,
+    )
+    check(
+        "Spectron v252 TGUIAnimation property getter count",
+        spectron_tgui_animation_property_residual_anchors["summary"]["getter_count"],
+        10,
+    )
+    check(
+        "Spectron v252 TGUIAnimation property setter count",
+        spectron_tgui_animation_property_residual_anchors["summary"]["setter_count"],
+        7,
+    )
+    tgui_animation_rows = spectron_tgui_animation_property_residual_anchors["anchors"]
+    check(
+        "Spectron v252 currenttime target",
+        next(
+            row["spectron_ea"]
+            for row in tgui_animation_rows
+            if row["original_name"] == "TGUIAnimation_get_currenttime"
+        ),
+        "0x1ce298",
+    )
+    check(
+        "Spectron v252 bounds setter target",
+        next(
+            row["spectron_ea"]
+            for row in tgui_animation_rows
+            if row["original_name"] == "TGUIAnimation_set_bounds"
+        ),
+        "0x1ceb50",
+    )
+    check(
+        "Spectron v252 transition getter target",
+        next(
+            row["spectron_ea"]
+            for row in tgui_animation_rows
+            if row["original_name"] == "TGUIAnimation_get_transition"
+        ),
+        "0x1ce69c",
+    )
+    check(
+        "Spectron v252 checkpoint artifact",
+        spectron_checkpoint_v252["artifact"],
+        "spectron_translation_checkpoint_20260828_v252",
+    )
+    check(
+        "Spectron v252 checkpoint parent",
+        spectron_checkpoint_v252["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v251",
+    )
+    check(
+        "Spectron v252 checkpoint database hash",
+        spectron_checkpoint_v252["database"]["sha256"],
+        "90a0d433ed61969714d1c853823693ce4286e2d785e159535e7f68e06548af4b",
+    )
+    check(
+        "Spectron v252 checkpoint function count",
+        spectron_checkpoint_v252["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v252 checkpoint default sub count",
+        spectron_checkpoint_v252["database"]["default_sub_function_count"],
+        797,
+    )
+    check(
+        "Spectron v252 checkpoint anchor count",
+        spectron_checkpoint_v252["tgui_animation_property_residual_anchors"]["verified_name_count"],
+        17,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -8991,6 +9120,7 @@ def main():
         spectron_gani_property_residual_anchors,
         spectron_drawing_panel_property_residual_anchors,
         spectron_tplayer_findweapon_anchors,
+        spectron_tgui_animation_property_residual_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

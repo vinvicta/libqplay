@@ -735,6 +735,20 @@ This is the short handoff view. The full reasoning and command history are in
      `tools/generate_spectron_tplayer_findweapon_anchors.py`, and
      `artifacts/spectron_translation_checkpoint_20260828_v251.json`.
 
+63v. The v252 IDA checkpoint translates 17 residual `TGUIAnimationProperties`
+     callbacks, with ten getters and seven setters. The source and target
+     tables retain the same twelve property names and order, and the selected
+     callbacks cover current time, amplitude, bounds, delay, duration,
+     interval, sound, tab-first-on-show, timing, and transition. All 17 rows
+     match the normalized shape and complete ARM64 feature metrics. The clean
+     reopen has 11,696 functions and 797 remaining default `sub_` names. The
+     database SHA-256 is
+     `90a0d433ed61969714d1c853823693ce4286e2d785e159535e7f68e06548af4b`.
+     See
+     `artifacts/spectron_tgui_animation_property_residual_manual_translation_anchors_20260828.json`,
+     `tools/generate_spectron_tgui_animation_property_residual_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260828_v252.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The
