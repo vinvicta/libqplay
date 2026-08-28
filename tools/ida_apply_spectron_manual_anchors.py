@@ -139,6 +139,12 @@ def main() -> None:
         item["name_action"] = anchor.get("name_action", "rename-with-v18-prefix")
         plan.append(item)
 
+    verified_name_count = sum(
+        item.get("actual_name_after") == item["proposed_name"]
+        for item in plan
+        if "proposed_name" in item
+    )
+
     result = {
         "artifact": "spectron_manual_anchor_application",
         "anchor_path": str(ANCHOR_PATH),
@@ -147,6 +153,8 @@ def main() -> None:
         "save_path": SAVE_PATH,
         "anchor_count": len(document["anchors"]),
         "resolved_count": len(document["anchors"]) - len(failures),
+        "verified_name_count": verified_name_count,
+        "verified": not failures and verified_name_count == len(document["anchors"]),
         "renamed_count": renamed,
         "comments_added": comments,
         "failure_count": len(failures),

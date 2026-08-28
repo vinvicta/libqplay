@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v307 Spectron database. It
-contains 11,695 functions and 436 remaining default `sub_` names. The v263
+The current documented translation frontier is the v308 Spectron database. It
+contains 11,695 functions and 425 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -222,6 +222,15 @@ cover the `MDRP` and `MIRP` relative-point handlers, two cover the `Normalize`
 and `TT_Done_Context` helpers, and two cover the `MINDEX` and `IP` opcode
 handlers. All six match the complete recorded feature set, and the target
 now has 436 remaining default `sub_` names.
+The v308 revision adds eleven high-confidence FreeType TrueType runtime-tail
+labels. They cover the `ENDF`, `FDEF`, `IDEF`, `DELTAP`, `DELTAC`, `SHC`,
+`SHP`, and `ISECT` opcode handlers, the `tt_size_done` destructor, the
+`Dual_Project` callback, and `TT_Load_Context`. All eleven match normalized
+ARM64 shape, nine match the complete recorded feature set, and two differ
+only in register allocation detail. The pass also corrects target `0x26bab0`
+from the earlier `v18_TT_DotFix14` label to `v18_Project` after the
+`Compute_Funcs` callback topology was checked. The target now has 425
+remaining default `sub_` names.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -306,6 +315,8 @@ The current v306 database is kept locally as
 `analysis/spectron_libqplay_translated_v306.i64`.
 The current v307 database is kept locally as
 `analysis/spectron_libqplay_translated_v307.i64`.
+The current v308 database is kept locally as
+`analysis/spectron_libqplay_translated_v308.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -855,6 +866,38 @@ The upstream reference for the v307 pass is FreeType's
 The checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v307.json`.
 
+The v308 FreeType TrueType runtime-tail evidence is in
+`artifacts/spectron_freetype_tt_runtime_tail_manual_translation_anchors_20260828.json`.
+It translates eleven default target names from the next contiguous block.
+Eight are opcode handlers: `ENDF`, `FDEF`, `IDEF`, `DELTAP`, `DELTAC`, `SHC`,
+`SHP`, and `ISECT`. The remaining three are `tt_size_done`, `Dual_Project`,
+and `TT_Load_Context`. Their source and target functions share the same
+`0xd470` displacement. All eleven match normalized feature shape, nine match
+the complete recorded ARM64 feature set, and the two remaining pairs differ
+only in register allocation detail. The reopened v308 database contains
+11,695 functions and 425 remaining default names.
+
+The same pass corrects the earlier projection label at target `0x26bab0`.
+The source helper at `0x25e640` is installed by `Compute_Funcs` as the
+`func_project` callback. Its arithmetic includes the operation implemented by
+`TT_DotFix14`, but its callback role is `Project`. The correction is recorded
+separately in
+`artifacts/spectron_freetype_tt_projection_name_correction_20260828.json` so
+the historical v307 artifact remains reproducible. The target now carries
+`v18_Project` at that address.
+
+The machine-readable checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v308.json`. Both the new
+aliases and the correction were reopened and verified with zero failures, and
+the full regression still verifies all 3,641 earlier high-confidence aliases.
+The v308 database SHA-256 is
+`2ac5e911c27e2cc07642c7b8433d54b708a536062114b4b2bea3609524c3bab8`.
+
+The upstream references for the v308 pass are FreeType's
+[`ttinterp.c`](https://android.googlesource.com/platform/external/freetype/+/f720f0dbcf012d6c984dbbefa0875ef9840458c6/src/truetype/ttinterp.c)
+and
+[`ttobjs.c`](https://android.googlesource.com/platform/external/freetype/+/3053d1b9db55099918843889e4809ce97483ca9f/src/truetype/ttobjs.c).
+
 The upstream references for the v303 pass are FreeType's
 [`ttdriver.c`](https://android.googlesource.com/platform/external/freetype/+/6da2e02232e1bcf31cfb78894d46c7902b90ee9f/src/truetype/ttdriver.c),
 [`ttpload.c`](https://android.googlesource.com/platform/external/freetype/+/75b4fbd0462ad4544ffc447213777d1f0d536c1a/src/truetype/ttpload.c),
@@ -920,16 +963,18 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v304.json`, followed by
 `artifacts/spectron_translation_checkpoint_20260828_v305.json`, followed by
 `artifacts/spectron_translation_checkpoint_20260828_v306.json`, followed by
-`artifacts/spectron_translation_checkpoint_20260828_v307.json`. The reviewed
+`artifacts/spectron_translation_checkpoint_20260828_v307.json`, followed by
+`artifacts/spectron_translation_checkpoint_20260828_v308.json`. The reviewed
 legacy, Android, script-table, runtime, property, zlib, libjpeg, GIF, and
-FreeType labels through v307 were reopened and verified with zero failures.
+FreeType labels through v308 were reopened and verified with zero failures.
 That includes the v297 forward-DCT literal-pool boundary repair, the v298
 FreeType base cleanup aliases, the v299 SFNT service aliases, the v300 SFNT
 interface aliases, the v301 smooth-renderer aliases, and the v302 gray-raster
 aliases, the v303 TrueType driver and interpreter aliases, the v304 TrueType
 runtime aliases, and the v305 TrueType rounding aliases added in the latest
-passes, the v306 TrueType opcode-state aliases, and the v307 TrueType core
-aliases added in the latest passes.
+passes, the v306 TrueType opcode-state aliases, the v307 TrueType core
+aliases, and the v308 TrueType runtime-tail aliases and projection correction
+added in the latest passes.
 These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or
 TLS service.

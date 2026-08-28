@@ -97,6 +97,12 @@ def main() -> None:
         item["actual_name_after"] = ida_name.get_name(ea)
         plan.append(item)
 
+    verified_name_count = sum(
+        item.get("actual_name_after") == item["restored_name"]
+        for item in plan
+        if "restored_name" in item
+    )
+
     result = {
         "artifact": "spectron_name_correction_application",
         "correction_path": str(CORRECTION_PATH),
@@ -105,6 +111,8 @@ def main() -> None:
         "save_path": SAVE_PATH,
         "correction_count": len(document.get("corrections", [])),
         "resolved_count": len(document.get("corrections", [])) - len(failures),
+        "verified_name_count": verified_name_count,
+        "verified": not failures and verified_name_count == len(document.get("corrections", [])),
         "renamed_count": renamed,
         "comments_added": comments,
         "failure_count": len(failures),

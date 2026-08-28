@@ -49,8 +49,8 @@ active desktop IDA database remained locked and was not changed.
 ## Spectron FreeType continuation
 
 The source-side count above is preserved as its own historical inventory. It
-is not the current count for the stripped Spectron 2.2 target. The v307
-Spectron copy has 11,695 functions and 436 remaining default `sub_` names.
+is not the current count for the stripped Spectron 2.2 target. The v308
+Spectron copy has 11,695 functions and 425 remaining default `sub_` names.
 The v298 pass removed two names from the unresolved target queue by identifying
 the FreeType base helpers at target `0x25e304` and `0x260300` as
 `v18_destroy_size` and `v18_destroy_face`.
@@ -187,6 +187,28 @@ The v307 checkpoint and database hash are recorded in
 `artifacts/spectron_translation_checkpoint_20260828_v307.json`; the persisted
 database hash is
 `2f9136831860bd73c73b966212134aea033a819d9f96520f6a0d887158f36b9c`.
+
+The v308 pass removes eleven more defaults from the FreeType queue. Eight are
+TrueType opcode handlers: `ENDF`, `FDEF`, `IDEF`, `DELTAP`, `DELTAC`, `SHC`,
+`SHP`, and `ISECT`. The other three are `tt_size_done`, `Dual_Project`, and
+`TT_Load_Context`. Their source and target pseudocode, dispatcher or callback
+topology, and the same `0xd470` block displacement support the role mapping.
+All eleven match normalized ARM64 shape. Nine match the complete recorded
+feature set, while `FDEF` and `IDEF` differ only in register allocation
+detail. All eleven names reopened with zero failures. The machine-readable
+record is
+`artifacts/spectron_freetype_tt_runtime_tail_manual_translation_anchors_20260828.json`.
+
+The same pass corrects the earlier target label at `0x26bab0`. The source
+helper at `0x25e640` is installed by `Compute_Funcs` in the `func_project`
+slot, so its semantic role is `Project`; the `TT_DotFix14` arithmetic is an
+implementation detail inside that callback. The correction from
+`v18_TT_DotFix14` to `v18_Project` is kept in the separate record
+`artifacts/spectron_freetype_tt_projection_name_correction_20260828.json`.
+The v308 checkpoint and database hash are recorded in
+`artifacts/spectron_translation_checkpoint_20260828_v308.json`; the persisted
+database hash is
+`2ac5e911c27e2cc07642c7b8433d54b708a536062114b4b2bea3609524c3bab8`.
 
 ## CyaSSL role pass
 

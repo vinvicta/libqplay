@@ -710,6 +710,15 @@ def main():
     spectron_checkpoint_v307 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v307.json"
     )
+    spectron_freetype_tt_runtime_tail_anchors = load_json(
+        "artifacts/spectron_freetype_tt_runtime_tail_manual_translation_anchors_20260828.json"
+    )
+    spectron_freetype_tt_projection_correction = load_json(
+        "artifacts/spectron_freetype_tt_projection_name_correction_20260828.json"
+    )
+    spectron_checkpoint_v308 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v308.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -15249,6 +15258,267 @@ def main():
         6,
     )
     check(
+        "Spectron FreeType TrueType runtime-tail artifact",
+        spectron_freetype_tt_runtime_tail_anchors["artifact"],
+        "spectron_freetype_tt_runtime_tail_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron FreeType TrueType runtime-tail network",
+        spectron_freetype_tt_runtime_tail_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron FreeType TrueType runtime-tail anchor count",
+        spectron_freetype_tt_runtime_tail_anchors["summary"]["anchor_count"],
+        11,
+    )
+    check(
+        "Spectron FreeType TrueType runtime-tail high-confidence count",
+        spectron_freetype_tt_runtime_tail_anchors["summary"][
+            "high_confidence_count"
+        ],
+        11,
+    )
+    check(
+        "Spectron FreeType TrueType runtime-tail normalized count",
+        spectron_freetype_tt_runtime_tail_anchors["summary"][
+            "normalized_shape_exact_count"
+        ],
+        11,
+    )
+    check(
+        "Spectron FreeType TrueType runtime-tail full-match count",
+        spectron_freetype_tt_runtime_tail_anchors["summary"][
+            "full_metric_exact_count"
+        ],
+        9,
+    )
+    check(
+        "Spectron FreeType TrueType runtime-tail register-detail count",
+        spectron_freetype_tt_runtime_tail_anchors["summary"][
+            "register_detail_only_difference_count"
+        ],
+        2,
+    )
+    freetype_tt_runtime_tail_rows = {
+        row["spectron_ea"]: row
+        for row in spectron_freetype_tt_runtime_tail_anchors["anchors"]
+    }
+    freetype_tt_runtime_tail_expected = {
+        "0x26ea94": (
+            "0x261624",
+            "v18_Ins_ENDF",
+            "TrueType ENDF function-definition return opcode handler",
+            [],
+            True,
+        ),
+        "0x26eb50": (
+            "0x2616e0",
+            "v18_tt_size_done",
+            "TrueType size-object destructor",
+            [],
+            True,
+        ),
+        "0x26ec88": (
+            "0x261818",
+            "v18_Dual_Project",
+            "TrueType dual-vector projection callback",
+            [],
+            True,
+        ),
+        "0x26ed14": (
+            "0x2618a4",
+            "v18_Ins_FDEF",
+            "TrueType FDEF function-definition opcode handler",
+            ["register_detail_hash"],
+            False,
+        ),
+        "0x26ee44": (
+            "0x2619d4",
+            "v18_Ins_IDEF",
+            "TrueType IDEF instruction-definition opcode handler",
+            ["register_detail_hash"],
+            False,
+        ),
+        "0x26f1fc": (
+            "0x261d8c",
+            "v18_Ins_DELTAP",
+            "TrueType DELTAP point-adjustment opcode handler",
+            [],
+            True,
+        ),
+        "0x26f434": (
+            "0x261fc4",
+            "v18_Ins_DELTAC",
+            "TrueType DELTAC control-value adjustment opcode handler",
+            [],
+            True,
+        ),
+        "0x26f664": (
+            "0x2621f4",
+            "v18_TT_Load_Context",
+            "TrueType execution-context loader",
+            [],
+            True,
+        ),
+        "0x26fa58": (
+            "0x2625e8",
+            "v18_Ins_SHC",
+            "TrueType SHC contour-shift opcode handler",
+            [],
+            True,
+        ),
+        "0x26fcd4": (
+            "0x262864",
+            "v18_Ins_SHP",
+            "TrueType SHP point-shift opcode handler",
+            [],
+            True,
+        ),
+        "0x26fee4": (
+            "0x262a74",
+            "v18_Ins_ISECT",
+            "TrueType ISECT intersection-point opcode handler",
+            [],
+            True,
+        ),
+    }
+    check(
+        "Spectron FreeType TrueType runtime-tail target set",
+        set(freetype_tt_runtime_tail_rows),
+        set(freetype_tt_runtime_tail_expected),
+    )
+    for target_ea, (
+        source_ea,
+        expected_name,
+        expected_role,
+        expected_differences,
+        expected_full_match,
+    ) in freetype_tt_runtime_tail_expected.items():
+        row = freetype_tt_runtime_tail_rows[target_ea]
+        check(
+            "Spectron FreeType TrueType runtime-tail source " + target_ea,
+            row["original_ea"],
+            source_ea,
+        )
+        check(
+            "Spectron FreeType TrueType runtime-tail name " + target_ea,
+            row["proposed_name"],
+            expected_name,
+        )
+        check(
+            "Spectron FreeType TrueType runtime-tail role " + target_ea,
+            row["source_role"],
+            expected_role,
+        )
+        check(
+            "Spectron FreeType TrueType runtime-tail metrics " + target_ea,
+            row["metric_differences"],
+            expected_differences,
+        )
+        check(
+            "Spectron FreeType TrueType runtime-tail normalized " + target_ea,
+            row["normalized_shape_equal"],
+            True,
+        )
+        check(
+            "Spectron FreeType TrueType runtime-tail full metrics " + target_ea,
+            row["full_metric_equal"],
+            expected_full_match,
+        )
+    check(
+        "Spectron FreeType TrueType projection correction artifact",
+        spectron_freetype_tt_projection_correction["artifact"],
+        "spectron_freetype_tt_projection_name_correction_20260828",
+    )
+    check(
+        "Spectron FreeType TrueType projection correction network",
+        spectron_freetype_tt_projection_correction["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron FreeType TrueType projection correction count",
+        spectron_freetype_tt_projection_correction["summary"]["correction_count"],
+        1,
+    )
+    projection_correction = spectron_freetype_tt_projection_correction[
+        "corrections"
+    ][0]
+    check(
+        "Spectron FreeType TrueType projection correction target",
+        projection_correction["target_ea"],
+        "0x26bab0",
+    )
+    check(
+        "Spectron FreeType TrueType projection correction old name",
+        projection_correction["current_name"],
+        "v18_TT_DotFix14",
+    )
+    check(
+        "Spectron FreeType TrueType projection correction new name",
+        projection_correction["restored_name"],
+        "v18_Project",
+    )
+    check(
+        "Spectron FreeType TrueType projection correction source",
+        projection_correction["source_ea"],
+        "0x25e640",
+    )
+    check(
+        "Spectron FreeType TrueType projection correction metrics",
+        projection_correction["metric_differences"],
+        [],
+    )
+    check(
+        "Spectron v308 checkpoint artifact",
+        spectron_checkpoint_v308["artifact"],
+        "spectron_translation_checkpoint_20260828_v308",
+    )
+    check(
+        "Spectron v308 checkpoint parent",
+        spectron_checkpoint_v308["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v307",
+    )
+    check(
+        "Spectron v308 checkpoint parent path",
+        spectron_checkpoint_v308["parent_checkpoint"]["path"],
+        "artifacts/spectron_translation_checkpoint_20260828_v307.json",
+    )
+    check(
+        "Spectron v308 checkpoint database hash",
+        spectron_checkpoint_v308["database"]["sha256"],
+        "2ac5e911c27e2cc07642c7b8433d54b708a536062114b4b2bea3609524c3bab8",
+    )
+    check(
+        "Spectron v308 checkpoint database close-reopen",
+        spectron_checkpoint_v308["database"]["close_reopen_verified"],
+        True,
+    )
+    check(
+        "Spectron v308 checkpoint function count",
+        spectron_checkpoint_v308["database"]["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v308 checkpoint default sub count",
+        spectron_checkpoint_v308["database"]["default_sub_function_count"],
+        425,
+    )
+    check(
+        "Spectron v308 checkpoint TrueType runtime-tail count",
+        spectron_checkpoint_v308["freetype_tt_runtime_tail_anchors"][
+            "verified_name_count"
+        ],
+        11,
+    )
+    check(
+        "Spectron v308 checkpoint projection correction count",
+        spectron_checkpoint_v308["freetype_tt_projection_name_correction"][
+            "verified_name_count"
+        ],
+        1,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -15619,6 +15889,9 @@ def main():
         spectron_checkpoint_v306,
         spectron_freetype_tt_opcode_core_anchors,
         spectron_checkpoint_v307,
+        spectron_freetype_tt_runtime_tail_anchors,
+        spectron_freetype_tt_projection_correction,
+        spectron_checkpoint_v308,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
