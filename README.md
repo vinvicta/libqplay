@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v284 Spectron database. It
-contains 11,696 functions and 587 remaining default `sub_` names. The v263
+The current documented translation frontier is the v287 Spectron database. It
+contains 11,696 functions and 579 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -104,6 +104,13 @@ The v286 revision adds one high-confidence libjpeg inverse-DCT manager label.
 It identifies the start-pass callback that selects the per-component IDCT
 method and rebuilds the matching multiplier tables. Its normalized metrics
 match, with only register allocation detail differing.
+The v287 revision adds two high-confidence libjpeg baseline-Huffman decoder
+labels. They identify the entropy start-pass callback and the baseline MCU
+decoder callback in the target `jinit_huff_decoder` initializer. The
+start-pass row is an exact feature match. The MCU decoder has matching
+instruction count, mnemonic sequence, control-flow counts, and reviewed
+pseudocode; one relocated `PAGEOFF` operand lands in a different coarse
+operand bucket, so that exception is recorded in the artifact.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -146,6 +153,8 @@ The current v285 database is kept locally as
 `analysis/spectron_libqplay_translated_v285.i64`.
 The current v286 database is kept locally as
 `analysis/spectron_libqplay_translated_v286.i64`.
+The current v287 database is kept locally as
+`analysis/spectron_libqplay_translated_v287.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -361,6 +370,17 @@ checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v286.json`; it records
 the reopened database with 581 remaining default names.
 
+The v287 libjpeg baseline-Huffman evidence is in
+`artifacts/spectron_jpeg_baseline_huffman_manual_translation_anchors_20260828.json`.
+It labels the `start_pass_huff_decoder` and `decode_mcu` callbacks installed
+by `v18_jinit_huff_decoder_jpeg_decompress_struct` at `0x2ad09c`. The
+start-pass row matches the complete feature set. The MCU decoder preserves
+the same instruction count, mnemonic sequence, control-flow counts, and
+reviewed pseudocode, with one explicitly recorded relocated `PAGEOFF`
+operand-bucket difference. The checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v287.json`; it records
+the reopened database with 579 remaining default names.
+
 The latest checkpoints are
 `artifacts/spectron_translation_checkpoint_20260828_v263_corrected.json` and
 `artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json`,
@@ -387,10 +407,11 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v283.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v284.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v285.json`, and
-`artifacts/spectron_translation_checkpoint_20260828_v286.json`. The reviewed
+`artifacts/spectron_translation_checkpoint_20260828_v286.json`, and
+`artifacts/spectron_translation_checkpoint_20260828_v287.json`. The reviewed
 legacy, Android, script-table, runtime, property, zlib, and libjpeg labels
-through v286 were reopened and verified with zero failures. That includes the
-v286 inverse-DCT manager label added in the latest pass.
+through v287 were reopened and verified with zero failures. That includes the
+v287 baseline-Huffman decoder labels added in the latest pass.
 These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or
 TLS service.
