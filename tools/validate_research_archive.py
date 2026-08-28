@@ -12286,7 +12286,7 @@ def main():
     check(
         "Spectron v282 checkpoint database hash",
         spectron_checkpoint_v282["database"]["sha256"],
-        "1018a84b243ac4e29b26ebe227b7e76252cdfc85f9951e982003aed7c6f35887",
+        "97e6e0fe4b2cac011692a6ed945fbabf89f4c5d66eb8a2ccc635f8c1f914308c",
     )
     check(
         "Spectron v282 checkpoint function count",

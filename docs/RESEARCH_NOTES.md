@@ -12673,7 +12673,7 @@ applied to a copy of the v281 IDA database and reopened with zero failures.
 The broad high-confidence map still verified all 3,641 prior aliases with
 zero failures. The v282 database contains 11,696 functions and 602 remaining
 default `sub_` names. Its post-reopen SHA-256 is
-`1018a84b243ac4e29b26ebe227b7e76252cdfc85f9951e982003aed7c6f35887`. The
+`97e6e0fe4b2cac011692a6ed945fbabf89f4c5d66eb8a2ccc635f8c1f914308c`. The
 checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v282.json`.
 
