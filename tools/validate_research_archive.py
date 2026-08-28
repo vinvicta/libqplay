@@ -596,6 +596,12 @@ def main():
     spectron_checkpoint_v288 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v288.json"
     )
+    spectron_jccolor_anchors = load_json(
+        "artifacts/spectron_jpeg_compressor_color_converter_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v289 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v289.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -12836,6 +12842,88 @@ def main():
         4,
     )
     check(
+        "Spectron libjpeg jccolor artifact",
+        spectron_jccolor_anchors["artifact"],
+        "spectron_jpeg_compressor_color_converter_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron libjpeg jccolor network",
+        spectron_jccolor_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron libjpeg jccolor anchor count",
+        spectron_jccolor_anchors["summary"]["anchor_count"],
+        6,
+    )
+    check(
+        "Spectron libjpeg jccolor unique target count",
+        spectron_jccolor_anchors["summary"]["unique_target_count"],
+        6,
+    )
+    check(
+        "Spectron libjpeg jccolor high-confidence count",
+        spectron_jccolor_anchors["summary"]["high_confidence_count"],
+        6,
+    )
+    check(
+        "Spectron libjpeg jccolor normalized count",
+        spectron_jccolor_anchors["summary"]["normalized_shape_exact_count"],
+        6,
+    )
+    check(
+        "Spectron libjpeg jccolor exact count",
+        spectron_jccolor_anchors["summary"]["full_metric_exact_count"],
+        6,
+    )
+    jccolor_rows = {
+        row["spectron_ea"]: row for row in spectron_jccolor_anchors["anchors"]
+    }
+    jccolor_expected = {
+        "0x2aff7c": "v18_jpeg_rgb_ycc_start",
+        "0x2b0040": "v18_jpeg_rgb_ycc_convert",
+        "0x2b0114": "v18_jpeg_rgb_gray_convert",
+        "0x2b018c": "v18_jpeg_cmyk_ycck_convert",
+        "0x2b0290": "v18_jpeg_c_grayscale_convert",
+        "0x2b02dc": "v18_jpeg_c_null_convert",
+    }
+    for target_ea, expected_name in jccolor_expected.items():
+        check(
+            "Spectron libjpeg jccolor target " + target_ea,
+            jccolor_rows[target_ea]["proposed_name"],
+            expected_name,
+        )
+    check(
+        "Spectron v289 checkpoint artifact",
+        spectron_checkpoint_v289["artifact"],
+        "spectron_translation_checkpoint_20260828_v289",
+    )
+    check(
+        "Spectron v289 checkpoint parent",
+        spectron_checkpoint_v289["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v288",
+    )
+    check(
+        "Spectron v289 checkpoint database hash",
+        spectron_checkpoint_v289["database"]["sha256"],
+        "15b16bb239ebe1e4eccc22629d68a31a8275feff61be37b2a408e19db20ea9bb",
+    )
+    check(
+        "Spectron v289 checkpoint function count",
+        spectron_checkpoint_v289["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v289 checkpoint default sub count",
+        spectron_checkpoint_v289["database"]["default_sub_function_count"],
+        569,
+    )
+    check(
+        "Spectron v289 checkpoint jccolor count",
+        spectron_checkpoint_v289["jccolor_anchors"]["verified_name_count"],
+        6,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -13168,6 +13256,8 @@ def main():
         spectron_checkpoint_v282,
         spectron_jquant2_anchors,
         spectron_checkpoint_v283,
+        spectron_jccolor_anchors,
+        spectron_checkpoint_v289,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
