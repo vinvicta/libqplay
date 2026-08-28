@@ -46,6 +46,25 @@ The branch veneer at `0x1f94fc` was reclassified as
 `j_TCachedStream_get_minfilecachesize` when IDA rebuilt the saved copy. The
 active desktop IDA database remained locked and was not changed.
 
+## Spectron FreeType continuation
+
+The source-side count above is preserved as its own historical inventory. It
+is not the current count for the stripped Spectron 2.2 target. The v298
+Spectron copy has 11,695 functions and 528 remaining default `sub_` names.
+This pass removed two names from the unresolved target queue by identifying
+the FreeType base helpers at target `0x25e304` and `0x260300` as
+`v18_destroy_size` and `v18_destroy_face`.
+
+The first helper is the size-list destructor used by FreeType's
+`FT_List_Finalize` path. The second releases a face and its associated glyph
+slots, sizes, stream, driver callbacks, and internal storage. Both bodies
+match the corresponding 1.8 functions in normalized ARM64 feature shape, and
+the `destroy_face` difference is limited to register allocation detail. The
+machine-readable record is
+`artifacts/spectron_freetype_base_cleanup_manual_translation_anchors_20260828.json`.
+The v298 checkpoint and database hash are recorded in
+`artifacts/spectron_translation_checkpoint_20260828_v298.json`.
+
 ## CyaSSL role pass
 
 The CyaSSL gap was worth a separate pass because these routines sit directly

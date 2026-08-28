@@ -650,6 +650,12 @@ def main():
     spectron_checkpoint_v297 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v297.json"
     )
+    spectron_freetype_base_cleanup_anchors = load_json(
+        "artifacts/spectron_freetype_base_cleanup_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v298 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v298.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -13670,6 +13676,94 @@ def main():
         0,
     )
     check(
+        "Spectron FreeType base cleanup artifact",
+        spectron_freetype_base_cleanup_anchors["artifact"],
+        "spectron_freetype_base_cleanup_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron FreeType base cleanup network",
+        spectron_freetype_base_cleanup_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron FreeType base cleanup anchor count",
+        spectron_freetype_base_cleanup_anchors["summary"]["anchor_count"],
+        2,
+    )
+    check(
+        "Spectron FreeType base cleanup high-confidence count",
+        spectron_freetype_base_cleanup_anchors["summary"]["high_confidence_count"],
+        2,
+    )
+    check(
+        "Spectron FreeType base cleanup normalized count",
+        spectron_freetype_base_cleanup_anchors["summary"][
+            "normalized_shape_exact_count"
+        ],
+        2,
+    )
+    freetype_cleanup_rows = {
+        row["spectron_ea"]: row
+        for row in spectron_freetype_base_cleanup_anchors["anchors"]
+    }
+    check(
+        "Spectron FreeType destroy_size target",
+        freetype_cleanup_rows["0x25e304"]["proposed_name"],
+        "v18_destroy_size",
+    )
+    check(
+        "Spectron FreeType destroy_face target",
+        freetype_cleanup_rows["0x260300"]["proposed_name"],
+        "v18_destroy_face",
+    )
+    check(
+        "Spectron FreeType destroy_size metrics",
+        freetype_cleanup_rows["0x25e304"]["metric_differences"],
+        [],
+    )
+    check(
+        "Spectron FreeType destroy_face metrics",
+        freetype_cleanup_rows["0x260300"]["metric_differences"],
+        ["register_detail_hash"],
+    )
+    check(
+        "Spectron v298 checkpoint artifact",
+        spectron_checkpoint_v298["artifact"],
+        "spectron_translation_checkpoint_20260828_v298",
+    )
+    check(
+        "Spectron v298 checkpoint parent",
+        spectron_checkpoint_v298["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v297",
+    )
+    check(
+        "Spectron v298 checkpoint parent path",
+        spectron_checkpoint_v298["parent_checkpoint"]["path"],
+        "artifacts/spectron_translation_checkpoint_20260828_v297.json",
+    )
+    check(
+        "Spectron v298 checkpoint database hash",
+        spectron_checkpoint_v298["database"]["sha256"],
+        "1de475653381e7ddf9b17cfadf43d816a29babfdb40b87bbf1f7825e0866c26d",
+    )
+    check(
+        "Spectron v298 checkpoint function count",
+        spectron_checkpoint_v298["database"]["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v298 checkpoint default sub count",
+        spectron_checkpoint_v298["database"]["default_sub_function_count"],
+        528,
+    )
+    check(
+        "Spectron v298 checkpoint FreeType cleanup count",
+        spectron_checkpoint_v298["freetype_base_cleanup_anchors"][
+            "verified_name_count"
+        ],
+        2,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -14020,6 +14114,8 @@ def main():
         spectron_checkpoint_v296,
         spectron_fdct_literal_pool_repair,
         spectron_checkpoint_v297,
+        spectron_freetype_base_cleanup_anchors,
+        spectron_checkpoint_v298,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
