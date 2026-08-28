@@ -80,6 +80,9 @@ def main():
     spectron_checkpoint_v223 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v223.json"
     )
+    spectron_checkpoint_v224 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v224.json"
+    )
     spectron_manual = load_json(
         "artifacts/spectron_manual_translation_anchors_20260826.json"
     )
@@ -196,6 +199,9 @@ def main():
     )
     spectron_gui_context_menu_property_anchors = load_json(
         "artifacts/spectron_gui_context_menu_property_manual_translation_anchors_20260828.json"
+    )
+    spectron_gui_array_popup_residual_anchors = load_json(
+        "artifacts/spectron_gui_array_popup_residual_manual_translation_anchors_20260828.json"
     )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
@@ -2878,6 +2884,70 @@ def main():
         "Spectron GUI context-menu width target",
         context_menu_by_name["GuiContextMenuCtrl_get_width"]["spectron_ea"],
         "0x1dc9ac",
+    )
+    check(
+        "Spectron GUI array/popup residual artifact",
+        spectron_gui_array_popup_residual_anchors["artifact"],
+        "spectron_gui_array_popup_residual_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron GUI array/popup residual network",
+        spectron_gui_array_popup_residual_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron GUI array/popup residual total",
+        spectron_gui_array_popup_residual_anchors["summary"]["anchor_count"],
+        6,
+    )
+    check(
+        "Spectron GUI array/popup residual high confidence",
+        spectron_gui_array_popup_residual_anchors["summary"]["high_confidence_count"],
+        6,
+    )
+    check(
+        "Spectron GUI array/popup residual exact-shape count",
+        spectron_gui_array_popup_residual_anchors["summary"]["normalized_shape_exact_count"],
+        5,
+    )
+    check(
+        "Spectron GUI array/popup residual full-metric count",
+        spectron_gui_array_popup_residual_anchors["summary"]["full_metric_exact_count"],
+        5,
+    )
+    check(
+        "Spectron GUI array/popup residual layout-change count",
+        spectron_gui_array_popup_residual_anchors["summary"]["layout_change_count"],
+        1,
+    )
+    check(
+        "Spectron GUI array/popup residual default targets",
+        spectron_gui_array_popup_residual_anchors["summary"]["target_default_name_count"],
+        6,
+    )
+    array_popup_by_name = {
+        row["original_name"]: row
+        for row in spectron_gui_array_popup_residual_anchors["anchors"]
+    }
+    check(
+        "Spectron GUI array allow-multiple target",
+        array_popup_by_name["GuiArrayCtrl_get_allowmultipleselections"]["spectron_ea"],
+        "0x1dab5c",
+    )
+    check(
+        "Spectron GUI context rows target",
+        array_popup_by_name["GuiContextMenuCtrl_get_rows"]["spectron_ea"],
+        "0x1dd334",
+    )
+    check(
+        "Spectron GUI popup rowcount target",
+        array_popup_by_name["GuiPopUpMenuCtrl_script_rowcount"]["spectron_ea"],
+        "0x1ddf20",
+    )
+    check(
+        "Spectron GUI array/popup target-only review count",
+        len(spectron_gui_array_popup_residual_anchors["reviewed_target_only_rows"]),
+        1,
     )
     check(
         "Spectron TString artifact",
@@ -6064,6 +6134,31 @@ def main():
         5,
     )
     check(
+        "Spectron v224 checkpoint artifact",
+        spectron_checkpoint_v224["artifact"],
+        "spectron_translation_checkpoint_20260828_v224",
+    )
+    check(
+        "Spectron v224 checkpoint parent",
+        spectron_checkpoint_v224["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v223",
+    )
+    check(
+        "Spectron v224 checkpoint database hash",
+        spectron_checkpoint_v224["database"]["sha256"],
+        "aed4f3fe539b4616519dfefdda98c5eed7a7357efd740ed9bc44cfcaa24d0547",
+    )
+    check(
+        "Spectron v224 checkpoint default sub count",
+        spectron_checkpoint_v224["database"]["default_sub_function_count"],
+        1095,
+    )
+    check(
+        "Spectron v224 checkpoint residual count",
+        spectron_checkpoint_v224["gui_array_popup_residual_anchors"]["verified_name_count"],
+        6,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -6163,6 +6258,7 @@ def main():
         spectron_gui_drawing_showimg_property_anchors,
         spectron_gui_browser_property_anchors,
         spectron_gui_context_menu_property_anchors,
+        spectron_gui_array_popup_residual_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

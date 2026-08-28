@@ -12049,6 +12049,49 @@ and the checkpoint is
 This pass changed only the disposable IDA database. It did not patch the APK
 or either native library, and it performed no DNS, HTTP, or TLS operation.
 
+## 2026-08-28: Residual Spectron array and popup GUI callbacks
+
+The v224 review covered six small callbacks spanning the array, context-menu,
+and popup-menu controls. Their table positions made the compact functions
+reviewable even where the same eight-byte getter shape appears throughout the
+client.
+
+| Source role | Source | Spectron target | Target name before alias | Reviewed operation |
+| --- | ---: | ---: | --- | --- |
+| `GuiArrayCtrl_get_allowmultipleselections` | `0x1d5f04` | `0x1dab5c` | `sub_1DAB5C` | byte at `+480` |
+| `GuiContextMenuCtrl_get_rows` | `0x1d85ac` | `0x1dd334` | `sub_1DD334` | `rows` lookup in owned hash list |
+| `GuiPopUpMenuCtrl_script_forceonaction` | `0x1d9104` | `0x1dde40` | `sub_1DDE40` | virtual slot `832` |
+| `GuiPopUpMenuCtrl_script_forceclose` | `0x1d9124` | `0x1dde60` | `sub_1DDE60` | virtual slot `904` |
+| `GuiPopUpMenuCtrl_script_rowcount` | `0x1d91e4` | `0x1ddf20` | `sub_1DDF20` | embedded text-list count |
+| `GuiPopUpMenuCtrl_script_getselected` | `0x1d91f0` | `0x1ddf2c` | `sub_1DDF2C` | embedded text-list selected ID |
+
+The array getter reads the same selection-policy byte. The context-menu rows
+getter creates the same `rows` key, computes the same hash, and looks it up in
+the owned profile list. Its target uses rebuilt `C8THgaTQxF` and hash-list
+helpers, so its normalized instruction fields differ, but the table role and
+decompiled behavior are unambiguous. The two force callbacks preserve their
+virtual slots. The row-count and selected-ID callbacks still route through the
+embedded text list.
+
+Five rows match the normalized ARM64 feature fields and the complete recorded
+metric set. The rows lookup is recorded as one explicit wrapper-change row,
+not as an exact instruction match. All six target functions started with
+default `sub_` names, and all six aliases reopened with zero rename failures.
+
+The v224 disposable database contains 11,694 functions and 1,095 default
+`sub_` names. Its SHA-256 is
+`aed4f3fe539b4616519dfefdda98c5eed7a7357efd740ed9bc44cfcaa24d0547`.
+The target-only helper at `0x1dded4` clears a temporary string during the
+popup icon-size path and remains unaliased because no 1.8 counterpart was
+demonstrated. The generator is
+`tools/generate_spectron_gui_array_popup_residual_anchors.py`, the evidence is
+`artifacts/spectron_gui_array_popup_residual_manual_translation_anchors_20260828.json`,
+and the checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v224.json`.
+
+This pass changed only the disposable IDA database. It did not patch the APK
+or either native library, and it performed no DNS, HTTP, or TLS operation.
+
 ## 2026-08-28: Residual Spectron GuiContextMenuCtrl callbacks
 
 The v223 review resolved five more default-named target functions in the

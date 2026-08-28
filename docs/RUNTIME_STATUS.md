@@ -1673,6 +1673,15 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_gui_context_menu_property_anchors.py`, and
     `/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v223.i64`.
 
+283. The v224 IDA pass resolved six residual array and popup GUI callbacks.
+    Five rows match the complete recorded feature set, and the context-menu
+    rows lookup is a high-confidence wrapper-change correspondence. All six
+    names reopened successfully. The v224 copy has 11,694 functions and
+    1,095 remaining default `sub_` names. See
+    `artifacts/spectron_gui_array_popup_residual_manual_translation_anchors_20260828.json`,
+    `tools/generate_spectron_gui_array_popup_residual_anchors.py`, and
+    `/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v224.i64`.
+
 267. The next IDA pass resolved eight small `THTMLPage` methods. They cover
     font-pointer cleanup, dirty and word-wrap state, parse tags, selection,
     URL and line initialization, and tab-stop replacement. The Spectron
