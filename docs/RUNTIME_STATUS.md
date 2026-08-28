@@ -749,6 +749,18 @@ This is the short handoff view. The full reasoning and command history are in
      `tools/generate_spectron_tgui_animation_property_residual_anchors.py`, and
      `artifacts/spectron_translation_checkpoint_20260828_v252.json`.
 
+63w. The v253 IDA checkpoint translates five distinct `GuiBitmapCtrl`
+     callbacks across six registration rows. The `tile` and `wrap` entries
+     share one getter, so the batch contains four getters and one setter. All
+     five rows match the complete ARM64 feature metrics. The clean reopen has
+     11,696 functions and 792 remaining default `sub_` names. The database
+     SHA-256 is
+     `924bca24389cf9c6f8d07ade1f6a7b31726c8bc7991f7fdbacf6e94967a5028c`.
+     See
+     `artifacts/spectron_gui_bitmap_property_manual_translation_anchors_20260828.json`,
+     `tools/generate_spectron_gui_bitmap_property_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260828_v253.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The
