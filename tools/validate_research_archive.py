@@ -110,6 +110,9 @@ def main():
     spectron_checkpoint_v233 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v233.json"
     )
+    spectron_checkpoint_v234 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v234.json"
+    )
     spectron_manual = load_json(
         "artifacts/spectron_manual_translation_anchors_20260826.json"
     )
@@ -256,6 +259,9 @@ def main():
     )
     spectron_target_only_labels = load_json(
         "artifacts/spectron_target_only_callback_labels_20260828.json"
+    )
+    spectron_tclient_playerhurt_anchor = load_json(
+        "artifacts/spectron_tclient_playerhurt_property_manual_translation_anchor_20260828.json"
     )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
@@ -6937,6 +6943,87 @@ def main():
         3,
     )
     check(
+        "Spectron v234 player-hurt artifact",
+        spectron_tclient_playerhurt_anchor["artifact"],
+        "spectron_tclient_playerhurt_property_manual_translation_anchor_20260828",
+    )
+    check(
+        "Spectron v234 player-hurt network",
+        spectron_tclient_playerhurt_anchor["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v234 player-hurt anchor count",
+        spectron_tclient_playerhurt_anchor["summary"]["anchor_count"],
+        1,
+    )
+    check(
+        "Spectron v234 player-hurt boundary recovery count",
+        spectron_tclient_playerhurt_anchor["summary"]["boundary_recovery_count"],
+        1,
+    )
+    check(
+        "Spectron v234 player-hurt high confidence",
+        spectron_tclient_playerhurt_anchor["summary"]["high_confidence_count"],
+        1,
+    )
+    playerhurt = spectron_tclient_playerhurt_anchor["anchors"][0]
+    check(
+        "Spectron v234 player-hurt source",
+        playerhurt["original_ea"],
+        "0x1ed158",
+    )
+    check(
+        "Spectron v234 player-hurt target",
+        playerhurt["spectron_ea"],
+        "0x1f1b08",
+    )
+    check(
+        "Spectron v234 player-hurt target boundary",
+        playerhurt["spectron_function_end"],
+        "0x1f1b94",
+    )
+    check(
+        "Spectron v234 player-hurt table record",
+        playerhurt["target_script_table_record"],
+        "0x398010",
+    )
+    check(
+        "Spectron v234 player-hurt alias",
+        playerhurt["proposed_name"],
+        "v18_TClient_script_tclient_setplayerhurt",
+    )
+    check(
+        "Spectron v234 checkpoint artifact",
+        spectron_checkpoint_v234["artifact"],
+        "spectron_translation_checkpoint_20260828_v234",
+    )
+    check(
+        "Spectron v234 checkpoint parent",
+        spectron_checkpoint_v234["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v233",
+    )
+    check(
+        "Spectron v234 checkpoint database hash",
+        spectron_checkpoint_v234["database"]["sha256"],
+        "c7dda722fbab84a403ed8ba21351af98dc01e181c640c5048c126b2ff4f669b2",
+    )
+    check(
+        "Spectron v234 checkpoint function count",
+        spectron_checkpoint_v234["database"]["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v234 checkpoint default sub count",
+        spectron_checkpoint_v234["database"]["default_sub_function_count"],
+        1068,
+    )
+    check(
+        "Spectron v234 checkpoint player-hurt count",
+        spectron_checkpoint_v234["tclient_playerhurt_property_anchor"]["verified_name_count"],
+        1,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -7046,6 +7133,7 @@ def main():
         spectron_file_cache_property_anchors,
         spectron_tclient_handler_anchors,
         spectron_target_only_labels,
+        spectron_tclient_playerhurt_anchor,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

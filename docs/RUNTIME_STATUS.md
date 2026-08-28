@@ -504,6 +504,19 @@ This is the short handoff view. The full reasoning and command history are in
      `tools/generate_spectron_target_only_labels.py`, and
      `artifacts/spectron_translation_checkpoint_20260828_v233.json`.
 
+63d. The v234 IDA checkpoint recovers the missing target function boundary for
+     the `tclient_setplayerhurt` property callback. The source callback at
+     `0x1ed158` maps through the target table record at `0x398010` to the
+     materialized target range `0x1f1b08-0x1f1b94`, now named
+     `v18_TClient_script_tclient_setplayerhurt`. A clean reopen verified the
+     boundary and alias. The database has 11,695 functions and 1,068
+     remaining default `sub_` names, with SHA-256
+     `c7dda722fbab84a403ed8ba21351af98dc01e181c640c5048c126b2ff4f669b2`.
+     See
+     `artifacts/spectron_tclient_playerhurt_property_manual_translation_anchor_20260828.json`,
+     `tools/generate_spectron_tclient_playerhurt_anchor.py`, and
+     `artifacts/spectron_translation_checkpoint_20260828_v234.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The

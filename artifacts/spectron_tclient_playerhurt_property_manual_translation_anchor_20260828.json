@@ -1,0 +1,80 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "full_metric_equal": false,
+      "match_kind": "manual-tclient-property-boundary-anchor",
+      "metric_comparison_status": "target boundary was absent from the v232 feature export, so target feature metrics will be captured after IDA materializes the reviewed range",
+      "name_action": "add-reviewed-boundary-and-rename-with-v18-prefix",
+      "normalized_shape_equal": false,
+      "operation": "guards a scripted player-hurt request and forwards eligible requests to the client hurtPlayer routine",
+      "original_direct_call_names": [
+        "plt_TPlayer_getNoHurt_void"
+      ],
+      "original_ea": "0x1ed158",
+      "original_function_end": "0x1ed1e4",
+      "original_metrics": {
+        "basic_block_count": 7,
+        "branch_count": 7,
+        "call_count": 1,
+        "instruction_count": 35,
+        "mnemonic_hash": "2b649c4de75dcd1a49f66b85e4add4da8df8ba978b70d60d3bd4002c8b9680db",
+        "opcode_shape_hash": "2899be3e275e246d5d56c9ba73ec437772a19834c9096c7c3cf3057594e56fac",
+        "register_detail_hash": "ca0161ba230ff6b6d9ee4aeeb456c56927b18e3f1d9ec2c252cf86a4ed4cb689",
+        "register_shape_hash": "a9bc26b02bde3c2f2c4b1f143b660277cacc216d2d3781c6f46e133adabd49c9",
+        "return_count": 1,
+        "shape_hash": "86c25d4356f662d9c5702d0de74a5df7a4a26b43fb37c361ed5d8ab0fdb7d87d",
+        "size": 140,
+        "string_refs_hash": null
+      },
+      "original_name": "TClient_script_tclient_setplayerhurt",
+      "original_string_refs": [],
+      "proposed_name": "v18_TClient_script_tclient_setplayerhurt",
+      "source_basis": "matching tclient_setplayerhurt property registration, active-player guard, no-hurt check, and hurtPlayer tail call",
+      "source_component": "TClient script-property table",
+      "source_script_table_record": "0x384fb0",
+      "spectron_current_name": "loc_1F1B08",
+      "spectron_default_name": true,
+      "spectron_ea": "0x1f1b08",
+      "spectron_function_end": "0x1f1b94",
+      "target_callback_xref": "0x398028",
+      "target_component": "obfuscated TClient property callback",
+      "target_evidence": [
+        "The target property-table record at 0x398010 names tclient_setplayerhurt and stores the callback pointer at 0x398028.",
+        "The target raw entry at 0x1f1b08 checks the active-player singleton, object state, and the target no-hurt byte before returning or continuing.",
+        "The continuation calls the target no-hurt virtual helper, preserves the script arguments, and tail-branches to v18_TClient_hurtPlayer at 0x1f1b90.",
+        "The next known target function begins at 0x1f1b94, so 0x1f1b08-0x1f1b94 is the recovered callback boundary."
+      ],
+      "target_script_table_record": "0x398010"
+    }
+  ],
+  "artifact": "spectron_tclient_playerhurt_property_manual_translation_anchor_20260828",
+  "context": {
+    "resolution": "decoded property name, direct callback pointer, raw ARM64 control flow, source callback behavior, and recovered target boundary",
+    "source_component": "TClient script-property table",
+    "target_boundary_reason": "IDA had no function boundary at the callback pointer, while the raw control flow and next known function identify the complete range",
+    "target_component": "obfuscated TClient property callback"
+  },
+  "inputs": {
+    "original_features": "/tmp/original_features_current.json",
+    "original_features_sha256": "243341ad40e912500365b6d7eb5b69f9f3b9d6200f5c825629cfc56d4343ac07",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219"
+  },
+  "interpretation": [
+    "The target callback is a reviewed 1.8-to-Spectron semantic anchor, not a byte-for-byte claim.",
+    "The target boundary is intentionally materialized from direct property-table and control-flow evidence.",
+    "Target layout changes are expected because the active-player singleton and no-hurt field moved in the rebuilt library."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron anchor requiring target function-boundary recovery for tclient_setplayerhurt",
+  "summary": {
+    "anchor_count": 1,
+    "boundary_recovery_count": 1,
+    "full_metric_exact_count": 0,
+    "high_confidence_count": 1,
+    "layout_change_count": 1,
+    "normalized_shape_exact_count": 0,
+    "target_default_name_count": 1
+  }
+}

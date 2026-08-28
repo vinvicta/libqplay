@@ -49,6 +49,7 @@ def main() -> None:
         "--checkpoint-key",
         default="gui_text_list_entry_property_anchors",
     )
+    parser.add_argument("--function-count", type=int)
     parser.add_argument("--default-sub-function-count", required=True, type=int)
     args = parser.parse_args()
 
@@ -84,6 +85,8 @@ def main() -> None:
         "sha256": sha256_path(args.database),
         "default_sub_function_count": args.default_sub_function_count,
     }
+    if args.function_count is not None:
+        result["database"]["function_count"] = args.function_count
     result[args.checkpoint_key] = {
         "anchor_path": str(args.anchors),
         "anchor_sha256": sha256_path(args.anchors),
