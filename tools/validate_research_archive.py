@@ -257,6 +257,9 @@ def main():
     spectron_hash_container_anchors = load_json(
         "artifacts/spectron_hash_container_manual_translation_anchors_20260827.json"
     )
+    spectron_hash_lifecycle_anchors = load_json(
+        "artifacts/spectron_hash_lifecycle_manual_translation_anchors_20260827.json"
+    )
     spectron_tstring_anchors = load_json(
         "artifacts/spectron_tstring_manual_translation_anchors_20260827.json"
     )
@@ -2100,6 +2103,18 @@ def main():
     check("Spectron hash-container exact-shape count", spectron_hash_container_anchors["summary"]["exact_shape_anchor_count"], 5)
     check("Spectron hash-container layout-change count", spectron_hash_container_anchors["summary"]["layout_change_anchor_count"], 0)
     check("Spectron hash-container default targets", spectron_hash_container_anchors["summary"]["target_default_name_count"], 0)
+    check(
+        "Spectron hash-lifecycle artifact",
+        spectron_hash_lifecycle_anchors["artifact"],
+        "spectron_hash_lifecycle_manual_translation_anchors_20260827",
+    )
+    check("Spectron hash-lifecycle network", spectron_hash_lifecycle_anchors["network_contacted"], False)
+    check("Spectron hash-lifecycle total", spectron_hash_lifecycle_anchors["summary"]["anchor_count"], 6)
+    check("Spectron hash-lifecycle high confidence", spectron_hash_lifecycle_anchors["summary"]["high_confidence_count"], 6)
+    check("Spectron hash-lifecycle exact-shape count", spectron_hash_lifecycle_anchors["summary"]["exact_shape_anchor_count"], 6)
+    check("Spectron hash-lifecycle full-metric exact count", spectron_hash_lifecycle_anchors["summary"]["full_metric_exact_count"], 5)
+    check("Spectron hash-lifecycle register-detail difference count", spectron_hash_lifecycle_anchors["summary"]["register_detail_difference_count"], 1)
+    check("Spectron hash-lifecycle default targets", spectron_hash_lifecycle_anchors["summary"]["target_default_name_count"], 0)
     check(
         "Spectron TString artifact",
         spectron_tstring_anchors["artifact"],
@@ -5113,6 +5128,7 @@ def main():
     check("Spectron checkpoint TList anchor count", spectron_checkpoint["tlist_anchors"]["verified_name_count"], 6)
     check("Spectron checkpoint sounds anchor count", spectron_checkpoint["sounds_anchors"]["verified_name_count"], 8)
     check("Spectron checkpoint hash-container anchor count", spectron_checkpoint["hash_container_anchors"]["verified_name_count"], 5)
+    check("Spectron checkpoint hash-lifecycle anchor count", spectron_checkpoint["hash_lifecycle_anchors"]["verified_name_count"], 6)
     check("Spectron checkpoint TString anchor count", spectron_checkpoint["tstring_anchors"]["verified_name_count"], 6)
     check("Spectron checkpoint TString clear anchor count", spectron_checkpoint["tstring_clear_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint static-clear anchor count", spectron_checkpoint["static_clear_anchors"]["verified_name_count"], 2)
@@ -5149,7 +5165,7 @@ def main():
     check("Spectron checkpoint sound base-interface anchor count", spectron_checkpoint["sound_base_interface_anchors"]["verified_name_count"], 18)
     check("Spectron checkpoint HTML page anchor count", spectron_checkpoint["html_page_anchors"]["verified_name_count"], 8)
     check("Spectron checkpoint GUI text-list anchor count", spectron_checkpoint["gui_text_list_anchors"]["verified_name_count"], 8)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "9689b137d9e9688ad7669f531ecde91308d812390dc493a2434ba5b22c6a4f4a")
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "b4bb37f4af6e3ce32f71329de3d3292f4620b84f380d5f2726a1626161bd739a")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -5277,6 +5293,7 @@ def main():
         spectron_sounds_anchors,
         spectron_sounds_tail_anchors,
         spectron_hash_container_anchors,
+        spectron_hash_lifecycle_anchors,
         spectron_tstring_anchors,
         spectron_tstring_clear_anchors,
         spectron_static_clear_anchors,

@@ -157,6 +157,8 @@ def main() -> None:
     parser.add_argument("--sounds-verification", type=Path)
     parser.add_argument("--hash-container-anchors", type=Path)
     parser.add_argument("--hash-container-verification", type=Path)
+    parser.add_argument("--hash-lifecycle-anchors", type=Path)
+    parser.add_argument("--hash-lifecycle-verification", type=Path)
     parser.add_argument("--tstring-anchors", type=Path)
     parser.add_argument("--tstring-verification", type=Path)
     parser.add_argument("--tstring-clear-anchors", type=Path)
@@ -2300,6 +2302,37 @@ def main() -> None:
         result["hash_container_anchors"] = hash_container
         result["interpretation"].append(
             "The one-hundred-seventy-third database revision also contains the separately reviewed exact-shape THashList and THashStrings anchors."
+        )
+    hash_lifecycle = None
+    if args.hash_lifecycle_anchors or args.hash_lifecycle_verification:
+        if not args.hash_lifecycle_anchors or not args.hash_lifecycle_verification:
+            raise ValueError(
+                "hash-lifecycle anchors and hash-lifecycle verification must be supplied together"
+            )
+        hash_lifecycle_document = load(args.hash_lifecycle_anchors)
+        hash_lifecycle_verification = load(args.hash_lifecycle_verification)
+        if (
+            hash_lifecycle_document.get("artifact")
+            != "spectron_hash_lifecycle_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected hash-lifecycle anchor artifact")
+        if not hash_lifecycle_verification.get("verified"):
+            raise ValueError("hash-lifecycle anchor reopen verification did not pass")
+        expected_hash_lifecycle = len(hash_lifecycle_document["anchors"])
+        if hash_lifecycle_verification["verified_name_count"] != expected_hash_lifecycle:
+            raise ValueError("hash-lifecycle verification count differs from artifact")
+        hash_lifecycle = {
+            "anchor_path": str(args.hash_lifecycle_anchors),
+            "anchor_sha256": sha256_path(args.hash_lifecycle_anchors),
+            "reopen_verification": str(args.hash_lifecycle_verification),
+            "anchor_count": expected_hash_lifecycle,
+            "verified_name_count": hash_lifecycle_verification["verified_name_count"],
+            "reopen_failure_count": hash_lifecycle_verification["failure_count"],
+        }
+    if hash_lifecycle is not None:
+        result["hash_lifecycle_anchors"] = hash_lifecycle
+        result["interpretation"].append(
+            "The two-hundred-tenth database revision also contains the separately reviewed hash-container constructor, iterator, and value-setter anchors."
         )
     tstring = None
     if args.tstring_anchors or args.tstring_verification:

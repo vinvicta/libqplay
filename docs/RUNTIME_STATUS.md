@@ -1495,6 +1495,22 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_gui_text_list_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+269. The next IDA pass resolved six small hash-container lifecycle helpers.
+    They cover the `THashListObject` and `THashListLink` constructors, the
+    `THashString` value setter, both `THashListIterator` lifecycle methods,
+    and `THashStringsIterator_use_THashStrings`. Their target pseudocode
+    preserves the source field writes, iterator registration and removal, and
+    next-object search across the obfuscated `J7zOgaf09K`, `U1slUah2F0`,
+    `NYF9TaOVKR`, `R_MvgaEQlv`, and `Zb7cUaSFEU` classes. Five rows match every
+    recorded feature. The remaining constructor differs only in register
+    detail, while its normalized shape matches. All six aliases reopened
+    successfully in the v210 copy, which has 11,694 functions, 3,641
+    high-confidence labels, and 1,213 default `sub_` names, with zero semantic
+    reopen failures. See
+    `artifacts/spectron_hash_lifecycle_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_hash_lifecycle_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 267. The next IDA pass resolved eight small `THTMLPage` methods. They cover
     font-pointer cleanup, dirty and word-wrap state, parse tags, selection,
     URL and line initialization, and tab-stop replacement. The Spectron
