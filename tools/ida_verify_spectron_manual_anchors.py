@@ -14,16 +14,17 @@ import ida_name
 
 
 REPO = Path("/home/v/Desktop/graal-decomp/libqplay")
+ANCHOR_OVERRIDE = os.environ.get("SPECTRON_MANUAL_ANCHORS")
 ANCHOR_PATH = Path(
-    os.environ.get(
+    ANCHOR_OVERRIDE
+    or os.environ.get(
         "SPECTRON_MANUAL_ANCHOR_PATH",
         str(REPO / "artifacts/spectron_manual_translation_anchors_20260826.json"),
     )
 )
-EXPECTED_ARTIFACT = os.environ.get(
-    "SPECTRON_MANUAL_EXPECTED_ARTIFACT",
-    "spectron_manual_translation_anchors_20260826",
-)
+EXPECTED_ARTIFACT = os.environ.get("SPECTRON_MANUAL_EXPECTED_ARTIFACT")
+if EXPECTED_ARTIFACT is None and not ANCHOR_OVERRIDE:
+    EXPECTED_ARTIFACT = "spectron_manual_translation_anchors_20260826"
 REPORT_PATH = Path(
     os.environ.get(
         "SPECTRON_MANUAL_VERIFY_REPORT",
@@ -35,15 +36,17 @@ REPORT_PATH = Path(
 def main() -> None:
     ida_auto.auto_wait()
     document = json.loads(ANCHOR_PATH.read_text(encoding="utf-8"))
-    if document.get("artifact") != EXPECTED_ARTIFACT:
+    if EXPECTED_ARTIFACT and document.get("artifact") != EXPECTED_ARTIFACT:
         raise RuntimeError("unexpected Spectron manual-anchor artifact")
+    anchors = document["anchors"]
     failures = []
-    for anchor in document["anchors"]:
+    verified_name_count = 0
+    for anchor in anchors:
         ea = int(anchor["spectron_ea"], 16)
         expected_name = anchor["proposed_name"]
         actual_ea = ida_name.get_name_ea(ida_idaapi.BADADDR, expected_name)
-        actual_name = ida_name.get_name(ea)
         function = ida_funcs.get_func(ea)
+        actual_name = ida_name.get_name(ea)
         if function is None or function.start_ea != ea:
             failures.append(
                 {
@@ -76,13 +79,16 @@ def main() -> None:
                     "error": "anchor name mismatch",
                 }
             )
+        else:
+            verified_name_count += 1
 
     result = {
         "artifact": "spectron_manual_anchor_reopen_verification",
         "anchor_path": str(ANCHOR_PATH),
         "expected_artifact": EXPECTED_ARTIFACT,
-        "anchor_count": len(document["anchors"]),
-        "verified_name_count": len(document["anchors"]) - len(failures),
+        "anchor_count": len(anchors),
+        "verified_name_count": verified_name_count,
+        "function_count": ida_funcs.get_func_qty(),
         "failure_count": len(failures),
         "failures": failures,
         "verified": not failures,

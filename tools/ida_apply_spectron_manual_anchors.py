@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Apply reviewed manual 1.8-to-Spectron context anchors to an IDA copy.
+"""Apply a reviewed semantic-anchor artifact to a new Spectron IDA copy.
 
-The default mode is review-only. Set ``SPECTRON_MANUAL_APPLY=1`` and provide
-``SPECTRON_MANUAL_SAVE_PATH`` to save a new packed database. Existing files
-are never overwritten.
+The original context-anchor interface remains supported.  The newer
+``SPECTRON_MANUAL_ANCHORS`` variable is a short alias for the anchor path and
+is useful for the successive FreeType evidence batches.
 """
 
 from __future__ import annotations
@@ -21,16 +21,17 @@ import ida_name
 
 
 REPO = Path("/home/v/Desktop/graal-decomp/libqplay")
+ANCHOR_OVERRIDE = os.environ.get("SPECTRON_MANUAL_ANCHORS")
 ANCHOR_PATH = Path(
-    os.environ.get(
+    ANCHOR_OVERRIDE
+    or os.environ.get(
         "SPECTRON_MANUAL_ANCHOR_PATH",
         str(REPO / "artifacts/spectron_manual_translation_anchors_20260826.json"),
     )
 )
-EXPECTED_ARTIFACT = os.environ.get(
-    "SPECTRON_MANUAL_EXPECTED_ARTIFACT",
-    "spectron_manual_translation_anchors_20260826",
-)
+EXPECTED_ARTIFACT = os.environ.get("SPECTRON_MANUAL_EXPECTED_ARTIFACT")
+if EXPECTED_ARTIFACT is None and not ANCHOR_OVERRIDE:
+    EXPECTED_ARTIFACT = "spectron_manual_translation_anchors_20260826"
 APPLY = os.environ.get("SPECTRON_MANUAL_APPLY") == "1"
 SAVE_PATH = os.environ.get("SPECTRON_MANUAL_SAVE_PATH")
 REPORT_PATH = Path(
@@ -42,16 +43,27 @@ REPORT_PATH = Path(
 
 
 def append_comment(ea: int, anchor: dict) -> bool:
-    comment = (
-        "Reviewed 1.8-to-Spectron anchor: "
-        + anchor["original_name"]
-        + " at "
-        + anchor["original_ea"]
-        + "; basis="
-        + anchor["source_basis"]
-        + "; confidence="
-        + anchor["confidence"]
-    )
+    if "source_name" in anchor:
+        comment = (
+            "Manual cross-build FreeType anchor from original 1.8: "
+            + anchor["source_name"]
+            + "; role="
+            + anchor["source_role"]
+            + "; source="
+            + anchor["source_file"]
+            + "; exact ARM64 feature metrics"
+        )
+    else:
+        comment = (
+            "Reviewed 1.8-to-Spectron anchor: "
+            + anchor["original_name"]
+            + " at "
+            + anchor["original_ea"]
+            + "; basis="
+            + anchor["source_basis"]
+            + "; confidence="
+            + anchor["confidence"]
+        )
     existing = ida_bytes.get_cmt(ea, False) or ""
     if comment in existing:
         return False
@@ -62,14 +74,15 @@ def append_comment(ea: int, anchor: dict) -> bool:
 def main() -> None:
     ida_auto.auto_wait()
     document = json.loads(ANCHOR_PATH.read_text(encoding="utf-8"))
-    if document.get("artifact") != EXPECTED_ARTIFACT:
+    if EXPECTED_ARTIFACT and document.get("artifact") != EXPECTED_ARTIFACT:
         raise RuntimeError("unexpected Spectron manual-anchor artifact")
-
+    anchors = document["anchors"]
     failures = []
     renamed = 0
     comments = 0
     plan = []
-    for anchor in document["anchors"]:
+
+    for anchor in anchors:
         ea = int(anchor["spectron_ea"], 16)
         proposed_name = anchor["proposed_name"]
         function = ida_funcs.get_func(ea)
@@ -77,10 +90,10 @@ def main() -> None:
         item = {
             "spectron_ea": anchor["spectron_ea"],
             "original_ea": anchor["original_ea"],
-            "original_name": anchor["original_name"],
+            "original_name": anchor.get("original_name", anchor.get("source_name")),
             "proposed_name": proposed_name,
             "actual_name_before": actual_before,
-            "confidence": anchor["confidence"],
+            "confidence": anchor.get("confidence"),
         }
         boundary_added = False
         if function is None and anchor.get("spectron_function_end"):

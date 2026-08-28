@@ -680,6 +680,12 @@ def main():
     spectron_checkpoint_v302 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v302.json"
     )
+    spectron_freetype_tt_interpreter_anchors = load_json(
+        "artifacts/spectron_freetype_tt_interpreter_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v303 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v303.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -14346,6 +14352,217 @@ def main():
         9,
     )
     check(
+        "Spectron FreeType TrueType interpreter artifact",
+        spectron_freetype_tt_interpreter_anchors["artifact"],
+        "spectron_freetype_tt_interpreter_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron FreeType TrueType interpreter network",
+        spectron_freetype_tt_interpreter_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron FreeType TrueType interpreter anchor count",
+        spectron_freetype_tt_interpreter_anchors["summary"]["anchor_count"],
+        19,
+    )
+    check(
+        "Spectron FreeType TrueType interpreter high-confidence count",
+        spectron_freetype_tt_interpreter_anchors["summary"][
+            "high_confidence_count"
+        ],
+        19,
+    )
+    check(
+        "Spectron FreeType TrueType interpreter normalized count",
+        spectron_freetype_tt_interpreter_anchors["summary"][
+            "normalized_shape_exact_count"
+        ],
+        19,
+    )
+    check(
+        "Spectron FreeType TrueType interpreter full-match count",
+        spectron_freetype_tt_interpreter_anchors["summary"][
+            "full_metric_exact_count"
+        ],
+        19,
+    )
+    freetype_tt_interpreter_rows = {
+        row["spectron_ea"]: row
+        for row in spectron_freetype_tt_interpreter_anchors["anchors"]
+    }
+    freetype_tt_interpreter_expected = {
+        "0x26b790": (
+            "0x25e320",
+            "v18_tt_get_kerning",
+            "TrueType kerning driver wrapper",
+        ),
+        "0x26b7cc": (
+            "0x25e35c",
+            "v18_tt_face_get_location",
+            "TrueType loca-table glyph location helper",
+        ),
+        "0x26b954": (
+            "0x25e4e4",
+            "v18_tt_size_init",
+            "TrueType size object initializer",
+        ),
+        "0x26b974": (
+            "0x25e504",
+            "v18_TT_MulFix14",
+            "14-bit fixed-point multiplication helper",
+        ),
+        "0x26b9f0": (
+            "0x25e580",
+            "v18_Direct_Move_X",
+            "current-coordinate x movement helper",
+        ),
+        "0x26ba20": (
+            "0x25e5b0",
+            "v18_Direct_Move_Y",
+            "current-coordinate y movement helper",
+        ),
+        "0x26ba54": (
+            "0x25e5e4",
+            "v18_Direct_Move_Orig_X",
+            "original-coordinate x movement helper",
+        ),
+        "0x26ba6c": (
+            "0x25e5fc",
+            "v18_Direct_Move_Orig_Y",
+            "original-coordinate y movement helper",
+        ),
+        "0x26ba88": (
+            "0x25e618",
+            "v18_Round_None",
+            "no-op TrueType rounding mode",
+        ),
+        "0x26bab0": (
+            "0x25e640",
+            "v18_TT_DotFix14",
+            "14-bit fixed-point vector dot product",
+        ),
+        "0x26bb3c": (
+            "0x25e6cc",
+            "v18_Project_x",
+            "x-axis projection helper",
+        ),
+        "0x26bb44": (
+            "0x25e6d4",
+            "v18_Project_y",
+            "y-axis projection helper",
+        ),
+        "0x26bb4c": (
+            "0x25e6dc",
+            "v18_Ins_NPUSHW",
+            "TrueType NPUSHW opcode handler",
+        ),
+        "0x26bbe0": (
+            "0x25e770",
+            "v18_Ins_PUSHW",
+            "TrueType PUSHW opcode handler",
+        ),
+        "0x26bc68": (
+            "0x25e7f8",
+            "v18_Ins_GC",
+            "TrueType GC opcode handler",
+        ),
+        "0x26bd00": (
+            "0x25e890",
+            "v18_Ins_SCFS",
+            "TrueType SCFS opcode handler",
+        ),
+        "0x26bdc0": (
+            "0x25e950",
+            "v18_Ins_GETINFO",
+            "TrueType GETINFO opcode handler",
+        ),
+        "0x26be18": (
+            "0x25e9a8",
+            "v18_Ins_MD",
+            "TrueType MD opcode handler",
+        ),
+        "0x26c240": (
+            "0x25edd0",
+            "v18_Ins_IUP",
+            "TrueType IUP opcode handler",
+        ),
+    }
+    check(
+        "Spectron FreeType TrueType interpreter target set",
+        set(freetype_tt_interpreter_rows),
+        set(freetype_tt_interpreter_expected),
+    )
+    for target_ea, (source_ea, expected_name, expected_role) in freetype_tt_interpreter_expected.items():
+        row = freetype_tt_interpreter_rows[target_ea]
+        check(
+            "Spectron FreeType TrueType interpreter source " + target_ea,
+            row["original_ea"],
+            source_ea,
+        )
+        check(
+            "Spectron FreeType TrueType interpreter name " + target_ea,
+            row["proposed_name"],
+            expected_name,
+        )
+        check(
+            "Spectron FreeType TrueType interpreter role " + target_ea,
+            row["source_role"],
+            expected_role,
+        )
+        check(
+            "Spectron FreeType TrueType interpreter metrics " + target_ea,
+            row["metric_differences"],
+            [],
+        )
+        check(
+            "Spectron FreeType TrueType interpreter normalized " + target_ea,
+            row["normalized_shape_equal"],
+            True,
+        )
+        check(
+            "Spectron FreeType TrueType interpreter full metrics " + target_ea,
+            row["full_metric_equal"],
+            True,
+        )
+    check(
+        "Spectron v303 checkpoint artifact",
+        spectron_checkpoint_v303["artifact"],
+        "spectron_translation_checkpoint_20260828_v303",
+    )
+    check(
+        "Spectron v303 checkpoint parent",
+        spectron_checkpoint_v303["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v302",
+    )
+    check(
+        "Spectron v303 checkpoint parent path",
+        spectron_checkpoint_v303["parent_checkpoint"]["path"],
+        "artifacts/spectron_translation_checkpoint_20260828_v302.json",
+    )
+    check(
+        "Spectron v303 checkpoint database hash",
+        spectron_checkpoint_v303["database"]["sha256"],
+        "36ebf8b934351b45aea6ba5664c93f0d7b66b8b7a3d7ed49980e030226d6c47c",
+    )
+    check(
+        "Spectron v303 checkpoint function count",
+        spectron_checkpoint_v303["database"]["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v303 checkpoint default sub count",
+        spectron_checkpoint_v303["database"]["default_sub_function_count"],
+        462,
+    )
+    check(
+        "Spectron v303 checkpoint TrueType interpreter count",
+        spectron_checkpoint_v303["freetype_tt_interpreter_anchors"][
+            "verified_name_count"
+        ],
+        19,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -14706,6 +14923,8 @@ def main():
         spectron_checkpoint_v301,
         spectron_freetype_gray_internal_anchors,
         spectron_checkpoint_v302,
+        spectron_freetype_tt_interpreter_anchors,
+        spectron_checkpoint_v303,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
