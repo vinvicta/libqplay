@@ -479,6 +479,18 @@ This is the short handoff view. The full reasoning and command history are in
      `tools/generate_spectron_file_cache_property_anchors.py`, and
      `artifacts/spectron_translation_checkpoint_20260828_v231.json`.
 
+63b. The v232 IDA checkpoint corrected a false feature-shape match in the
+     inbound handler table and added two high-confidence aliases. Handler
+     slot 10 maps `TClient_handleServerLoginPacket` to `0x1f37e0`, and slot 48
+     maps `TClient_processServerModifies` to `0x1eefa0`. The earlier alias at
+     `0xecba0` was removed because that address is a retained
+     `yL3_IaDMFt` hash-container export; its original dynamic name was
+     restored. The checkpoint has 11,694 functions and 1,071 remaining
+     default `sub_` names. See
+     `artifacts/spectron_tclient_handler_manual_translation_anchors_20260828.json`,
+     `tools/generate_spectron_tclient_handler_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260828_v232.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The

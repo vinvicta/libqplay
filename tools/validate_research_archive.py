@@ -104,6 +104,9 @@ def main():
     spectron_checkpoint_v231 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v231.json"
     )
+    spectron_checkpoint_v232 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v232.json"
+    )
     spectron_manual = load_json(
         "artifacts/spectron_manual_translation_anchors_20260826.json"
     )
@@ -244,6 +247,9 @@ def main():
     )
     spectron_file_cache_property_anchors = load_json(
         "artifacts/spectron_file_cache_property_manual_translation_anchors_20260828.json"
+    )
+    spectron_tclient_handler_anchors = load_json(
+        "artifacts/spectron_tclient_handler_manual_translation_anchors_20260828.json"
     )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
@@ -6746,6 +6752,97 @@ def main():
         6,
     )
     check(
+        "Spectron v232 TClient handler artifact",
+        spectron_tclient_handler_anchors["artifact"],
+        "spectron_tclient_handler_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v232 TClient handler network",
+        spectron_tclient_handler_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v232 TClient handler anchor count",
+        spectron_tclient_handler_anchors["summary"]["anchor_count"],
+        2,
+    )
+    check(
+        "Spectron v232 TClient handler correction count",
+        spectron_tclient_handler_anchors["summary"]["correction_count"],
+        1,
+    )
+    check(
+        "Spectron v232 TClient handler high-confidence count",
+        spectron_tclient_handler_anchors["summary"]["high_confidence_count"],
+        2,
+    )
+    check(
+        "Spectron v232 TClient handler target defaults",
+        spectron_tclient_handler_anchors["summary"]["target_default_name_count"],
+        2,
+    )
+    check(
+        "Spectron v232 TClient handler normalized exact count",
+        spectron_tclient_handler_anchors["summary"]["normalized_shape_exact_count"],
+        0,
+    )
+    check(
+        "Spectron v232 TClient handler layout count",
+        spectron_tclient_handler_anchors["summary"]["layout_change_count"],
+        2,
+    )
+    handler_rows = {
+        row["original_name"]: row
+        for row in spectron_tclient_handler_anchors["anchors"]
+    }
+    check(
+        "Spectron v232 server-login target",
+        handler_rows["TClient_handleServerLoginPacket"]["spectron_ea"],
+        "0x1f37e0",
+    )
+    check(
+        "Spectron v232 server-modifies target",
+        handler_rows["TClient_processServerModifies"]["spectron_ea"],
+        "0x1eefa0",
+    )
+    correction = spectron_tclient_handler_anchors["corrections"][0]
+    check("Spectron v232 correction target", correction["target_ea"], "0xecba0")
+    check(
+        "Spectron v232 correction old alias",
+        correction["current_name"],
+        "v18_TClient_processServerModifies",
+    )
+    check(
+        "Spectron v232 correction restored symbol",
+        correction["restored_name"],
+        "_ZN10yL3_IaDMFt10XEm8Ta8FEQEP10vuuHgangcFRK10C8THgaTQxF",
+    )
+    check(
+        "Spectron v232 checkpoint artifact",
+        spectron_checkpoint_v232["artifact"],
+        "spectron_translation_checkpoint_20260828_v232",
+    )
+    check(
+        "Spectron v232 checkpoint parent",
+        spectron_checkpoint_v232["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v231",
+    )
+    check(
+        "Spectron v232 checkpoint database hash",
+        spectron_checkpoint_v232["database"]["sha256"],
+        "51b76f3945f282bc62c1fb72a5749115315db1e6d5fac5e04ef4208c816a3bf6",
+    )
+    check(
+        "Spectron v232 checkpoint default sub count",
+        spectron_checkpoint_v232["database"]["default_sub_function_count"],
+        1071,
+    )
+    check(
+        "Spectron v232 checkpoint TClient handler count",
+        spectron_checkpoint_v232["tclient_handler_anchors"]["verified_name_count"],
+        2,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -6853,6 +6950,7 @@ def main():
         spectron_gui_drawing_panel_script_anchors,
         spectron_tclient_script_property_anchors,
         spectron_file_cache_property_anchors,
+        spectron_tclient_handler_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

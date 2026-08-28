@@ -1,0 +1,220 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target registration records at 0x3699b0 and 0x37c780 occupy the same handler-table index 10.",
+        "Both bodies require a non-empty packet, decode byte one minus 32, store the result as the server signature, and notify the game environment with onServerLogin.",
+        "The target expands the TString and event wrappers, so its 192-byte body is larger than the 136-byte source body, but the handler role is fixed by the table slot and preserved event string.",
+        "The direct table and pseudocode evidence is primary because the target expands the source operation and changes the recorded feature hashes."
+      ],
+      "full_metric_equal": false,
+      "handler_index": 10,
+      "match_kind": "manual-tclient-handler-table-anchor",
+      "metric_differences": [
+        "size",
+        "instruction_count",
+        "branch_count",
+        "call_count",
+        "mnemonic_hash",
+        "opcode_shape_hash",
+        "register_shape_hash",
+        "shape_hash",
+        "string_refs_hash",
+        "register_detail_hash"
+      ],
+      "name_action": "rename-with-v18-prefix",
+      "normalized_shape_equal": false,
+      "original_direct_call_names": [
+        "plt_TGraalVar_invokeEvent_TString_const",
+        "plt_TString_clear_void",
+        "plt_TString_operator_index_int",
+        "plt_TString_operator_lshift_char_const"
+      ],
+      "original_ea": "0x1edf04",
+      "original_function_end": "0x1edf8c",
+      "original_metrics": {
+        "basic_block_count": 5,
+        "branch_count": 7,
+        "call_count": 4,
+        "instruction_count": 33,
+        "mnemonic_hash": "68c899b22577284ac4d77a7925aa05790c83e9c65030f0f43e896d006b0d8e4a",
+        "opcode_shape_hash": "1a89a3a62541826e1ab4e19ca165223b3537b362f0d89f75eefc079e88306d93",
+        "register_detail_hash": "1ce8e6b28e17d3a2861b0eadc2e2bc732538f2572e4881509314049a7de09f34",
+        "register_shape_hash": "d32ba6815a3acc57a716bff50905120f4c5bd8e181452065f215ebdcb35a5bd2",
+        "return_count": 1,
+        "shape_hash": "e526839418be529a039c47f772e44d8793cb60bb5665a38bf566887833b1e521",
+        "size": 136,
+        "string_refs_hash": "ed94af8d99bf0454bfaf16fd161ff9164c5f6b21bd3470401cd503ccb9cb1909"
+      },
+      "original_name": "TClient_handleServerLoginPacket",
+      "original_string_refs": [
+        "onServerLogin"
+      ],
+      "proposed_name": "v18_TClient_handleServerLoginPacket",
+      "semantic_match_already_present": false,
+      "source_basis": "handler-table index 10, server-signature decode, and onServerLogin event dispatch",
+      "source_component": "TClient inbound handler table",
+      "source_handler_table_record": "0x3699b0",
+      "spectron_current_name": "sub_1F37E0",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10G0gxgajWBw10BRcLgaJqkIERK10C8THgaTQxF",
+        "._ZN10KKhLga4xoI10kEiLgawipIERK10C8THgaTQxF",
+        "._ZN10KKhLga4xoI10tJOiUaYhrZERK10C8THgaTQxF",
+        "._ZNK10C8THgaTQxFixEi"
+      ],
+      "spectron_ea": "0x1f37e0",
+      "spectron_function_end": "0x1f38a0",
+      "spectron_metrics": {
+        "basic_block_count": 5,
+        "branch_count": 11,
+        "call_count": 8,
+        "instruction_count": 47,
+        "mnemonic_hash": "7845ccb8f28439d9bb777208b721631bb7684b4a07dd513a9f5112ebf3ddf6a5",
+        "opcode_shape_hash": "adcb6863d19d040fc839c5b5a8a0e41ea488e8a60560a257cb075dc10a4cb099",
+        "register_detail_hash": "38b9526dc45ee6aa6ccf401984acdd99b5ae97492b1709c7f542ed2b1a9a45ff",
+        "register_shape_hash": "c80d5d1605310457629283fb7e5f85869649711a8ca58dc15815f6ca3b7f858c",
+        "return_count": 1,
+        "shape_hash": "6b556c6f5f95c60d6bdf4ccef04f71ee2b9a483d39484a24841b2138c3d40dae",
+        "size": 192,
+        "string_refs_hash": "cfc0c0607a3380f7975346b30c14af8284f5493d9781b0ed847f499f01b4768e"
+      },
+      "spectron_string_refs": [
+        "++"
+      ],
+      "target_component": "w6qzgacqqy inbound handler table",
+      "target_handler_table_record": "0x37c780"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target registration records at 0x369ae0 and 0x37c8b0 occupy the same handler-table index 48.",
+        "The source clears the leader state, checks the active player's pending transition, and chooses enterServerLevel or doServerModifies; the target preserves that same branch and final pending-state clear.",
+        "The target body is 252 bytes versus 184 bytes in the source because target string and object wrappers are expanded, so normalized feature hashes are not used as the primary proof.",
+        "The direct table and pseudocode evidence is primary because the target expands the source operation and changes the recorded feature hashes."
+      ],
+      "full_metric_equal": false,
+      "handler_index": 48,
+      "match_kind": "manual-tclient-handler-table-anchor",
+      "metric_differences": [
+        "size",
+        "instruction_count",
+        "basic_block_count",
+        "branch_count",
+        "call_count",
+        "return_count",
+        "mnemonic_hash",
+        "opcode_shape_hash",
+        "register_shape_hash",
+        "shape_hash",
+        "register_detail_hash"
+      ],
+      "name_action": "rename-with-v18-prefix",
+      "normalized_shape_equal": false,
+      "original_direct_call_names": [
+        "plt_TPlayer_doServerModifies_TServerLevel_TString_const",
+        "plt_TPlayer_enterServerLevel_TString_const_bool",
+        "plt_operator_assign_TString_const_TString_const"
+      ],
+      "original_ea": "0x1eab78",
+      "original_function_end": "0x1eac30",
+      "original_metrics": {
+        "basic_block_count": 8,
+        "branch_count": 8,
+        "call_count": 3,
+        "instruction_count": 46,
+        "mnemonic_hash": "e1afa21ea722b71fccdfde976065988fda333ebb393974130404550a8b41c1a3",
+        "opcode_shape_hash": "293bceb81214bea52c816a00e072679374095a0c75b7497119a9c666a00702a6",
+        "register_detail_hash": "7a9d8ae17a0b8ebaa20297338d709f78ee32bc3b26b3edf7a8718c637f4fca1a",
+        "register_shape_hash": "e6f2c406da9fd7e87770a076ec71d514bf54c29d1b489ad0acf3d710f07e7cef",
+        "return_count": 1,
+        "shape_hash": "a359b63e0f7103f0d26e53e5b0c67305865d3fc1ec4d120603de27060a334645",
+        "size": 184,
+        "string_refs_hash": null
+      },
+      "original_name": "TClient_processServerModifies",
+      "original_string_refs": [],
+      "proposed_name": "v18_TClient_processServerModifies",
+      "semantic_match_already_present": false,
+      "source_basis": "handler-table index 48 and direct server-modification transition behavior",
+      "source_component": "TClient inbound handler table",
+      "source_handler_table_record": "0x369ae0",
+      "spectron_current_name": "sub_1EEFA0",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSER10CanTfaz6bZ",
+        "._ZN10W6NzgawMJy10NJ_ywaho3_EP10zF9VgaBKxRRK10C8THgaTQxF",
+        "._ZN10W6NzgawMJy10XqHzwam9D0ERK10C8THgaTQxFb",
+        "._ZeqRK10C8THgaTQxFS1_"
+      ],
+      "spectron_ea": "0x1eefa0",
+      "spectron_function_end": "0x1ef09c",
+      "spectron_metrics": {
+        "basic_block_count": 7,
+        "branch_count": 10,
+        "call_count": 5,
+        "instruction_count": 63,
+        "mnemonic_hash": "ede0d093d45d20931c9a036180d1b22537975341c0fc38e6dfedc23eb0c67291",
+        "opcode_shape_hash": "251c5f7c56c0df126c4906c750658e9fb438e080836bc8b790a27418dae1b988",
+        "register_detail_hash": "89ad51952bb183171db9a2d1f18bd66c385eea57e9686d383bfd8991893fc0a7",
+        "register_shape_hash": "a9b6d959644df1b6637f375861fdda4e26c1e36e455294359bfdda1f653ab4d8",
+        "return_count": 2,
+        "shape_hash": "d93b281b6cede7db0d444803b01c607d8617473fc49b0d2b3c6ee40261339ef3",
+        "size": 252,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_component": "w6qzgacqqy inbound handler table",
+      "target_handler_table_record": "0x37c8b0"
+    }
+  ],
+  "artifact": "spectron_tclient_handler_manual_translation_anchors_20260828",
+  "context": {
+    "correction_policy": "restore the target's retained dynamic symbol before applying the corrected readable alias elsewhere",
+    "primary_evidence": "same decoded handler index, table record, direct Hex-Rays behavior, and surrounding translated handler rows",
+    "source_table_base": "0x369960",
+    "table_entry_count": 85,
+    "table_entry_stride": 8,
+    "target_table_base": "0x37c730"
+  },
+  "corrections": [
+    {
+      "current_name": "v18_TClient_processServerModifies",
+      "reason": "A feature-shape collision assigned this hash-container method to TClient_processServerModifies. Its yL3_IaDMFt export and iterator body identify it as a THashStrings method, while the actual TClient handler-table slot 48 points to 0x1eefa0.",
+      "restored_name": "_ZN10yL3_IaDMFt10XEm8Ta8FEQEP10vuuHgangcFRK10C8THgaTQxF",
+      "source": "Spectron dynamic symbol table audit and target pseudocode",
+      "target_ea": "0xecba0"
+    }
+  ],
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_current.json",
+    "original_features_sha256": "243341ad40e912500365b6d7eb5b69f9f3b9d6200f5c825629cfc56d4343ac07",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v231_current.json",
+    "spectron_features_sha256": "d6d8e5bd1b41084e7dbb2482650233b15b8727b8041011f4d56b8b81563a7c2a"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The handler-table index is stronger evidence than a broad shape key when compiler-generated bodies collide.",
+    "The prior processServerModifies row at 0xecba0 is superseded by this correction; that address is restored to its retained yL3_IaDMFt dynamic symbol.",
+    "The corrected readable alias belongs at target 0x1eefa0, the target pointer stored in handler-table slot 48.",
+    "No APK, native library, external endpoint, or live service was modified or contacted."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron anchors for the TClient inbound handler table, including a correction to a prior feature-shape collision",
+  "summary": {
+    "anchor_count": 2,
+    "correction_count": 1,
+    "full_metric_exact_count": 0,
+    "high_confidence_count": 2,
+    "layout_change_count": 2,
+    "normalized_shape_exact_count": 0,
+    "target_default_name_count": 2
+  }
+}
