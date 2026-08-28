@@ -353,6 +353,12 @@ def main():
     spectron_checkpoint_v249 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v249.json"
     )
+    spectron_drawing_panel_property_residual_anchors = load_json(
+        "artifacts/spectron_drawing_panel_property_residual_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v250 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v250.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -8619,6 +8625,130 @@ def main():
         29,
     )
     check(
+        "Spectron v250 drawing-panel property artifact",
+        spectron_drawing_panel_property_residual_anchors["artifact"],
+        "spectron_drawing_panel_property_residual_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v250 drawing-panel property network",
+        spectron_drawing_panel_property_residual_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v250 drawing-panel property anchor count",
+        spectron_drawing_panel_property_residual_anchors["summary"]["anchor_count"],
+        10,
+    )
+    check(
+        "Spectron v250 drawing-panel registration row count",
+        spectron_drawing_panel_property_residual_anchors["summary"]["registration_row_count"],
+        12,
+    )
+    check(
+        "Spectron v250 drawing-panel unique target count",
+        spectron_drawing_panel_property_residual_anchors["summary"]["unique_target_count"],
+        10,
+    )
+    check(
+        "Spectron v250 drawing-panel high confidence",
+        spectron_drawing_panel_property_residual_anchors["summary"]["high_confidence_count"],
+        10,
+    )
+    check(
+        "Spectron v250 drawing-panel target default count",
+        spectron_drawing_panel_property_residual_anchors["summary"]["target_default_name_count"],
+        10,
+    )
+    check(
+        "Spectron v250 drawing-panel normalized shape count",
+        spectron_drawing_panel_property_residual_anchors["summary"]["normalized_shape_exact_count"],
+        10,
+    )
+    check(
+        "Spectron v250 drawing-panel full metric count",
+        spectron_drawing_panel_property_residual_anchors["summary"]["full_metric_exact_count"],
+        8,
+    )
+    check(
+        "Spectron v250 drawing-panel layout count",
+        spectron_drawing_panel_property_residual_anchors["summary"]["layout_change_count"],
+        0,
+    )
+    check(
+        "Spectron v250 drawing-panel register-detail count",
+        spectron_drawing_panel_property_residual_anchors["summary"]["register_detail_difference_count"],
+        2,
+    )
+    check(
+        "Spectron v250 drawing-panel getter count",
+        spectron_drawing_panel_property_residual_anchors["summary"]["getter_count"],
+        8,
+    )
+    check(
+        "Spectron v250 drawing-panel setter count",
+        spectron_drawing_panel_property_residual_anchors["summary"]["setter_count"],
+        1,
+    )
+    check(
+        "Spectron v250 drawing-panel callback count",
+        spectron_drawing_panel_property_residual_anchors["summary"]["callback_count"],
+        1,
+    )
+    check(
+        "Spectron v250 drawing-panel duplicate count",
+        spectron_drawing_panel_property_residual_anchors["summary"]["duplicate_registration_count"],
+        2,
+    )
+    drawing_panel_residual_rows = spectron_drawing_panel_property_residual_anchors["anchors"]
+    check(
+        "Spectron v250 drawing-panel profile setter target",
+        next(
+            row["spectron_ea"]
+            for row in drawing_panel_residual_rows
+            if row["script_name"] == "profile"
+        ),
+        "0x11ce58",
+    )
+    check(
+        "Spectron v250 drawing-panel stretched target",
+        next(
+            row["spectron_ea"]
+            for row in drawing_panel_residual_rows
+            if row["script_name"] == "drawimagestretched"
+        ),
+        "0x11ad8c",
+    )
+    check(
+        "Spectron v250 checkpoint artifact",
+        spectron_checkpoint_v250["artifact"],
+        "spectron_translation_checkpoint_20260828_v250",
+    )
+    check(
+        "Spectron v250 checkpoint parent",
+        spectron_checkpoint_v250["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v249",
+    )
+    check(
+        "Spectron v250 checkpoint database hash",
+        spectron_checkpoint_v250["database"]["sha256"],
+        "d9fa44a190b1b5014dd9e56651fd416c0e1923cba4e2cd8e361314a9ba7a046f",
+    )
+    check(
+        "Spectron v250 checkpoint function count",
+        spectron_checkpoint_v250["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v250 checkpoint default sub count",
+        spectron_checkpoint_v250["database"]["default_sub_function_count"],
+        816,
+    )
+    check(
+        "Spectron v250 checkpoint anchor count",
+        spectron_checkpoint_v250["drawing_panel_property_residual_anchors"]["verified_name_count"],
+        10,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -8744,6 +8874,7 @@ def main():
         spectron_tiles_layer_property_anchors,
         spectron_player_property_anchors,
         spectron_gani_property_residual_anchors,
+        spectron_drawing_panel_property_residual_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

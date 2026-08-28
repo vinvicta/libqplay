@@ -707,6 +707,20 @@ This is the short handoff view. The full reasoning and command history are in
      `tools/generate_spectron_gani_property_residual_anchors.py`, and
      `artifacts/spectron_translation_checkpoint_20260828_v249.json`.
 
+63t. The v250 IDA checkpoint translates 12 residual `TDrawingPanel` property
+     and script-table rows to 10 distinct target callbacks. The `height` and
+     `parth` rows share one getter, as do `partw` and `width`; the existing
+     `enablecache` setter is preserved rather than renamed again. Eight
+     callback anchors match the complete ARM64 metric set, and the two
+     wrapper differences are limited to target register allocation. The clean
+     reopen has 11,696 functions and 816 remaining default `sub_` names. The
+     database SHA-256 is
+     `d9fa44a190b1b5014dd9e56651fd416c0e1923cba4e2cd8e361314a9ba7a046f`.
+     See
+     `artifacts/spectron_drawing_panel_property_residual_manual_translation_anchors_20260828.json`,
+     `tools/generate_spectron_drawing_panel_property_residual_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260828_v250.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The
