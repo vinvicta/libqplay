@@ -413,6 +413,12 @@ def main():
     spectron_checkpoint_v259 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v259.json"
     )
+    spectron_tgraalvar_property_residual_anchors = load_json(
+        "artifacts/spectron_tgraalvar_property_residual_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v260 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v260.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -9910,6 +9916,120 @@ def main():
         9,
     )
     check(
+        "Spectron v260 TGraalVar property artifact",
+        spectron_tgraalvar_property_residual_anchors["artifact"],
+        "spectron_tgraalvar_property_residual_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v260 TGraalVar property network",
+        spectron_tgraalvar_property_residual_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v260 TGraalVar property anchor count",
+        spectron_tgraalvar_property_residual_anchors["summary"]["anchor_count"],
+        4,
+    )
+    check(
+        "Spectron v260 TGraalVar property registration row count",
+        spectron_tgraalvar_property_residual_anchors["summary"]["registration_row_count"],
+        4,
+    )
+    check(
+        "Spectron v260 TGraalVar property unique target count",
+        spectron_tgraalvar_property_residual_anchors["summary"]["unique_target_count"],
+        4,
+    )
+    check(
+        "Spectron v260 TGraalVar property high confidence",
+        spectron_tgraalvar_property_residual_anchors["summary"]["high_confidence_count"],
+        4,
+    )
+    check(
+        "Spectron v260 TGraalVar property target default count",
+        spectron_tgraalvar_property_residual_anchors["summary"]["target_default_name_count"],
+        4,
+    )
+    check(
+        "Spectron v260 TGraalVar property normalized shape count",
+        spectron_tgraalvar_property_residual_anchors["summary"]["normalized_shape_exact_count"],
+        2,
+    )
+    check(
+        "Spectron v260 TGraalVar property full metric count",
+        spectron_tgraalvar_property_residual_anchors["summary"]["full_metric_exact_count"],
+        2,
+    )
+    check(
+        "Spectron v260 TGraalVar property layout count",
+        spectron_tgraalvar_property_residual_anchors["summary"]["layout_change_count"],
+        2,
+    )
+    check(
+        "Spectron v260 TGraalVar property register-detail count",
+        spectron_tgraalvar_property_residual_anchors["summary"]["register_detail_difference_count"],
+        2,
+    )
+    check(
+        "Spectron v260 TGraalVar property getter count",
+        spectron_tgraalvar_property_residual_anchors["summary"]["getter_count"],
+        2,
+    )
+    check(
+        "Spectron v260 TGraalVar property setter count",
+        spectron_tgraalvar_property_residual_anchors["summary"]["setter_count"],
+        2,
+    )
+    tgraalvar_property_rows = spectron_tgraalvar_property_residual_anchors["anchors"]
+    check(
+        "Spectron v260 TGraalVar name setter target",
+        next(
+            row["spectron_ea"]
+            for row in tgraalvar_property_rows
+            if row["original_name"] == "TGraalVar_set_name"
+        ),
+        "0x21376c",
+    )
+    check(
+        "Spectron v260 TGraalVar joinedclasses target",
+        next(
+            row["spectron_ea"]
+            for row in tgraalvar_property_rows
+            if row["original_name"] == "TGraalVar_get_joinedclasses"
+        ),
+        "0x21675c",
+    )
+    check(
+        "Spectron v260 checkpoint artifact",
+        spectron_checkpoint_v260["artifact"],
+        "spectron_translation_checkpoint_20260828_v260",
+    )
+    check(
+        "Spectron v260 checkpoint parent",
+        spectron_checkpoint_v260["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v259",
+    )
+    check(
+        "Spectron v260 checkpoint database hash",
+        spectron_checkpoint_v260["database"]["sha256"],
+        "a8d0c87f225ba9cd5490e7616ea05d983d48c80b8ef07ec7a8da2b91e675e944",
+    )
+    check(
+        "Spectron v260 checkpoint function count",
+        spectron_checkpoint_v260["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v260 checkpoint default sub count",
+        spectron_checkpoint_v260["database"]["default_sub_function_count"],
+        744,
+    )
+    check(
+        "Spectron v260 checkpoint anchor count",
+        spectron_checkpoint_v260["tgraalvar_property_residual_anchors"]["verified_name_count"],
+        4,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -10045,6 +10165,7 @@ def main():
         spectron_guiscrollctrl_property_anchors,
         spectron_guistretchctrl_property_anchors,
         spectron_guitexteditctrl_property_anchors,
+        spectron_tgraalvar_property_residual_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

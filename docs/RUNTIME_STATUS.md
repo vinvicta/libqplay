@@ -833,6 +833,18 @@ This is the short handoff view. The full reasoning and command history are in
       `tools/generate_spectron_guitexteditctrl_property_anchors.py`, and
       `artifacts/spectron_translation_checkpoint_20260828_v259.json`.
 
+63ad. The v260 IDA checkpoint translates four residual `TGraalVar` property
+      callbacks covering the name setter, paused-state getter and setter, and
+      joined-classes getter. The pause pair matches the complete ARM64 feature
+      metrics. The name setter and joined-classes getter retain rebuilt-wrapper
+      shape differences. The clean reopen has 11,696 functions and 744
+      remaining default `sub_` names. The database SHA-256 is
+      `a8d0c87f225ba9cd5490e7616ea05d983d48c80b8ef07ec7a8da2b91e675e944`.
+      See
+      `artifacts/spectron_tgraalvar_property_residual_manual_translation_anchors_20260828.json`,
+      `tools/generate_spectron_tgraalvar_property_residual_anchors.py`, and
+      `artifacts/spectron_translation_checkpoint_20260828_v260.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The
