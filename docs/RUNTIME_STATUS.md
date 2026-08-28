@@ -680,6 +680,19 @@ This is the short handoff view. The full reasoning and command history are in
      `tools/generate_spectron_tiles_layer_property_anchors.py`, and
      `artifacts/spectron_translation_checkpoint_20260828_v247.json`.
 
+63r. The v248 IDA checkpoint translates 30 residual main `TPlayer` property
+     registrations to 27 distinct target callbacks. The duplicate rows are
+     intentional: `hearts` and `hp`, `shield` and `shieldimg`, and `sword` and
+     `swordimg` share getters in the registration table. All 30 rows match
+     normalized ARM64 shape, seven match the complete metric set, and none
+     introduce a layout change. The clean reopen has 11,696 functions and 855
+     remaining default `sub_` names. The database SHA-256 is
+     `780a8ac4584699546ef14a692bd520f13389f5c3918f45b37e33256718028165`.
+     See
+     `artifacts/spectron_player_property_manual_translation_anchors_20260828.json`,
+     `tools/generate_spectron_player_property_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260828_v248.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The
