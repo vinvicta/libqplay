@@ -821,6 +821,18 @@ This is the short handoff view. The full reasoning and command history are in
       `tools/generate_spectron_guistretchctrl_property_anchors.py`, and
       `artifacts/spectron_translation_checkpoint_20260828_v258.json`.
 
+63ac. The v259 IDA checkpoint translates nine residual `GuiTextEditCtrl`
+      property callbacks covering denied sound, history size, input type,
+      cursor visibility, tab completion, and the text getter. All nine rows
+      match the complete ARM64 feature metrics, with no layout or register-detail
+      differences. The clean reopen has 11,696 functions and 748 remaining
+      default `sub_` names. The database SHA-256 is
+      `9b5a46e16dbf912a7e67583b8f626f52878bcbb30225e3674793d3b8ef5114d9`.
+      See
+      `artifacts/spectron_guitexteditctrl_property_manual_translation_anchors_20260828.json`,
+      `tools/generate_spectron_guitexteditctrl_property_anchors.py`, and
+      `artifacts/spectron_translation_checkpoint_20260828_v259.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The

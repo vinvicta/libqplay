@@ -407,6 +407,12 @@ def main():
     spectron_checkpoint_v258 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v258.json"
     )
+    spectron_guitexteditctrl_property_anchors = load_json(
+        "artifacts/spectron_guitexteditctrl_property_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v259 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v259.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -9781,6 +9787,129 @@ def main():
         7,
     )
     check(
+        "Spectron v259 GuiTextEditCtrl property artifact",
+        spectron_guitexteditctrl_property_anchors["artifact"],
+        "spectron_guitexteditctrl_property_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v259 GuiTextEditCtrl property network",
+        spectron_guitexteditctrl_property_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v259 GuiTextEditCtrl property anchor count",
+        spectron_guitexteditctrl_property_anchors["summary"]["anchor_count"],
+        9,
+    )
+    check(
+        "Spectron v259 GuiTextEditCtrl property registration row count",
+        spectron_guitexteditctrl_property_anchors["summary"]["registration_row_count"],
+        9,
+    )
+    check(
+        "Spectron v259 GuiTextEditCtrl property unique target count",
+        spectron_guitexteditctrl_property_anchors["summary"]["unique_target_count"],
+        9,
+    )
+    check(
+        "Spectron v259 GuiTextEditCtrl property high confidence",
+        spectron_guitexteditctrl_property_anchors["summary"]["high_confidence_count"],
+        9,
+    )
+    check(
+        "Spectron v259 GuiTextEditCtrl property target default count",
+        spectron_guitexteditctrl_property_anchors["summary"]["target_default_name_count"],
+        9,
+    )
+    check(
+        "Spectron v259 GuiTextEditCtrl property normalized shape count",
+        spectron_guitexteditctrl_property_anchors["summary"]["normalized_shape_exact_count"],
+        9,
+    )
+    check(
+        "Spectron v259 GuiTextEditCtrl property full metric count",
+        spectron_guitexteditctrl_property_anchors["summary"]["full_metric_exact_count"],
+        9,
+    )
+    check(
+        "Spectron v259 GuiTextEditCtrl property layout count",
+        spectron_guitexteditctrl_property_anchors["summary"]["layout_change_count"],
+        0,
+    )
+    check(
+        "Spectron v259 GuiTextEditCtrl property register-detail count",
+        spectron_guitexteditctrl_property_anchors["summary"]["register_detail_difference_count"],
+        0,
+    )
+    check(
+        "Spectron v259 GuiTextEditCtrl property getter count",
+        spectron_guitexteditctrl_property_anchors["summary"]["getter_count"],
+        6,
+    )
+    check(
+        "Spectron v259 GuiTextEditCtrl property setter count",
+        spectron_guitexteditctrl_property_anchors["summary"]["setter_count"],
+        3,
+    )
+    guitexteditctrl_property_rows = spectron_guitexteditctrl_property_anchors["anchors"]
+    check(
+        "Spectron v259 GuiTextEditCtrl deniedsound target",
+        next(
+            row["spectron_ea"]
+            for row in guitexteditctrl_property_rows
+            if row["original_name"] == "GuiTextEditCtrl_get_deniedsound"
+        ),
+        "0x1cb4fc",
+    )
+    check(
+        "Spectron v259 GuiTextEditCtrl inputtype target",
+        next(
+            row["spectron_ea"]
+            for row in guitexteditctrl_property_rows
+            if row["original_name"] == "GuiTextEditCtrl_get_inputtype"
+        ),
+        "0x1cb95c",
+    )
+    check(
+        "Spectron v259 GuiTextEditCtrl tabcomplete target",
+        next(
+            row["spectron_ea"]
+            for row in guitexteditctrl_property_rows
+            if row["original_name"] == "GuiTextEditCtrl_set_tabcomplete"
+        ),
+        "0x1cb498",
+    )
+    check(
+        "Spectron v259 checkpoint artifact",
+        spectron_checkpoint_v259["artifact"],
+        "spectron_translation_checkpoint_20260828_v259",
+    )
+    check(
+        "Spectron v259 checkpoint parent",
+        spectron_checkpoint_v259["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v258",
+    )
+    check(
+        "Spectron v259 checkpoint database hash",
+        spectron_checkpoint_v259["database"]["sha256"],
+        "9b5a46e16dbf912a7e67583b8f626f52878bcbb30225e3674793d3b8ef5114d9",
+    )
+    check(
+        "Spectron v259 checkpoint function count",
+        spectron_checkpoint_v259["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v259 checkpoint default sub count",
+        spectron_checkpoint_v259["database"]["default_sub_function_count"],
+        748,
+    )
+    check(
+        "Spectron v259 checkpoint anchor count",
+        spectron_checkpoint_v259["guitexteditctrl_property_anchors"]["verified_name_count"],
+        9,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -9915,6 +10044,7 @@ def main():
         spectron_guigraalctrl_isrendering_anchors,
         spectron_guiscrollctrl_property_anchors,
         spectron_guistretchctrl_property_anchors,
+        spectron_guitexteditctrl_property_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,
