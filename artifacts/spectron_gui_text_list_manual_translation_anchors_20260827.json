@@ -1,0 +1,542 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies read the cell-size value at receiver offset +472, write it to the TPoint result pointer, and return the value.",
+        "The target pseudocode identifies the same u0eyga1eqx class family used by the list and sorting methods below.",
+        "The source and target class-context references are 0x367298, 0x3687f8 and 0x37a068, 0x37b5c8."
+      ],
+      "match_kind": "manual-gui-text-list-exact-small-method",
+      "metric_differences": [],
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x1d8fec",
+      "original_function_end": "0x1d8ff8",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 3,
+        "mnemonic_hash": "db6a3f3737240d450e2d861958d70659d245a2172b0db5e30be5567df8945742",
+        "opcode_shape_hash": "aff1d57a756f4d04496fd138a65b8ec6a13e9cd6c82b93f56acd52d5d0240390",
+        "register_detail_hash": "e0a9edaf51d8c2b98716094164bfb41d12fa8dd437c15252ae8b03ca101aee12",
+        "register_shape_hash": "c01db8bd0e059d2244d528836e5f13322a90647e0d99aa7d8b9537766618a0b3",
+        "return_count": 1,
+        "shape_hash": "0e68d43ad92079b4ce4de8b9467039f556434f14a15a8eb3c3226bca1a12d570",
+        "size": 12,
+        "string_refs_hash": null
+      },
+      "original_name": "GuiTextListCtrl_getCellSize_TPoint",
+      "original_string_refs": [],
+      "proposed_name": "v18_GuiTextListCtrl_getCellSize_TPoint",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "GuiTextListCtrl cell-size getter",
+      "source_component": "GuiTextListCtrl",
+      "source_context": [
+        "0x367298",
+        "0x3687f8"
+      ],
+      "spectron_context": [
+        "0x37a068",
+        "0x37b5c8"
+      ],
+      "spectron_current_name": "_ZN10u0eyga1eqx10H8ZnobYTN7ER10eY2wgaf6pw",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x1ddd28",
+      "spectron_function_end": "0x1ddd34",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 3,
+        "mnemonic_hash": "db6a3f3737240d450e2d861958d70659d245a2172b0db5e30be5567df8945742",
+        "opcode_shape_hash": "aff1d57a756f4d04496fd138a65b8ec6a13e9cd6c82b93f56acd52d5d0240390",
+        "register_detail_hash": "e0a9edaf51d8c2b98716094164bfb41d12fa8dd437c15252ae8b03ca101aee12",
+        "register_shape_hash": "c01db8bd0e059d2244d528836e5f13322a90647e0d99aa7d8b9537766618a0b3",
+        "return_count": 1,
+        "shape_hash": "0e68d43ad92079b4ce4de8b9467039f556434f14a15a8eb3c3226bca1a12d570",
+        "size": 12,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_component": "u0eyga1eqx",
+      "target_delta": "+0x4d3c"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies write the sort-column value to receiver offset +552 and return the receiver.",
+        "The source and target pointers occur in the corresponding GuiTextListCtrl property table records for sortcolumn.",
+        "The source and target property-table references are 0x383698 and 0x3966f8."
+      ],
+      "match_kind": "manual-gui-text-list-exact-small-method",
+      "metric_differences": [],
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x1dc960",
+      "original_function_end": "0x1dc96c",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 3,
+        "mnemonic_hash": "3afc16e99038dcbe515a4838282539826c3462e14024221d35c417df3af4c39d",
+        "opcode_shape_hash": "3adf4803fc43f0741a459566e427a9c5e251d110ede47b3ce5ccf6fb2afd472b",
+        "register_detail_hash": "a1559e3c4c57399b22d365ed41978cda074a6efaf26c75308f35b9e59776c8a3",
+        "register_shape_hash": "79cfe1a0bf40d177afd375a43e5320b823ac841a2e59102523767062a89c8c5a",
+        "return_count": 1,
+        "shape_hash": "e5b5b669a9705a461de619f5a44823ab669ac21d8538b1ef4cb76ceb56f118fb",
+        "size": 12,
+        "string_refs_hash": null
+      },
+      "original_name": "GuiTextListCtrl_set_sortcolumn",
+      "original_string_refs": [],
+      "proposed_name": "v18_GuiTextListCtrl_set_sortcolumn",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "GuiTextListCtrl sort-column property setter",
+      "source_component": "GuiTextListCtrl",
+      "source_context": [
+        "0x383698"
+      ],
+      "spectron_context": [
+        "0x3966f8"
+      ],
+      "spectron_current_name": "sub_1E06FC",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x1e06fc",
+      "spectron_function_end": "0x1e0708",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 3,
+        "mnemonic_hash": "3afc16e99038dcbe515a4838282539826c3462e14024221d35c417df3af4c39d",
+        "opcode_shape_hash": "3adf4803fc43f0741a459566e427a9c5e251d110ede47b3ce5ccf6fb2afd472b",
+        "register_detail_hash": "a1559e3c4c57399b22d365ed41978cda074a6efaf26c75308f35b9e59776c8a3",
+        "register_shape_hash": "79cfe1a0bf40d177afd375a43e5320b823ac841a2e59102523767062a89c8c5a",
+        "return_count": 1,
+        "shape_hash": "e5b5b669a9705a461de619f5a44823ab669ac21d8538b1ef4cb76ceb56f118fb",
+        "size": 12,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_component": "u0eyga1eqx",
+      "target_delta": "+0x3d9c"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both wrappers test the same guard byte at receiver offset +204 and call the class clear method only when the control is not in the guarded state.",
+        "The source and target pointers occur in the matching GuiTextListCtrl script-function table entry for clearrows.",
+        "The source and target script-table references are 0x383758 and 0x3967b8."
+      ],
+      "match_kind": "manual-gui-text-list-exact-small-method",
+      "metric_differences": [],
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x1de504",
+      "original_function_end": "0x1de514",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 3,
+        "call_count": 0,
+        "instruction_count": 4,
+        "mnemonic_hash": "62506d35687bc01d5b3bbf4b8f27551885df6ac935a256279f0ab52874245990",
+        "opcode_shape_hash": "a34a29d90e4c955377f6bb509eb4cee7fb3a1d4749b4def461363a3a18c70d42",
+        "register_detail_hash": "4f45a113b18f58a9de0a4baf45cec4b10fa9f6befbd19bfdab53f97f790be263",
+        "register_shape_hash": "55404346fca33d290a80e74333153ca7d04d0b9d3c7bd7c2fc96c8aa69d6af3b",
+        "return_count": 1,
+        "shape_hash": "7d5d98a47de8490219b777509b9bfefe5b4b5d6b03c6e7c1dcd30e22d5907244",
+        "size": 16,
+        "string_refs_hash": null
+      },
+      "original_name": "GuiTextListCtrl_script_clearrows",
+      "original_string_refs": [],
+      "proposed_name": "v18_GuiTextListCtrl_script_clearrows",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "GuiTextListCtrl clear-rows script wrapper",
+      "source_component": "GuiTextListCtrl",
+      "source_context": [
+        "0x383758"
+      ],
+      "spectron_context": [
+        "0x3967b8"
+      ],
+      "spectron_current_name": "sub_1E22A0",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x1e22a0",
+      "spectron_function_end": "0x1e22b0",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 3,
+        "call_count": 0,
+        "instruction_count": 4,
+        "mnemonic_hash": "62506d35687bc01d5b3bbf4b8f27551885df6ac935a256279f0ab52874245990",
+        "opcode_shape_hash": "a34a29d90e4c955377f6bb509eb4cee7fb3a1d4749b4def461363a3a18c70d42",
+        "register_detail_hash": "4f45a113b18f58a9de0a4baf45cec4b10fa9f6befbd19bfdab53f97f790be263",
+        "register_shape_hash": "55404346fca33d290a80e74333153ca7d04d0b9d3c7bd7c2fc96c8aa69d6af3b",
+        "return_count": 1,
+        "shape_hash": "7d5d98a47de8490219b777509b9bfefe5b4b5d6b03c6e7c1dcd30e22d5907244",
+        "size": 16,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_component": "u0eyga1eqx",
+      "target_delta": "+0x3d9c"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both wrappers set the default sort mode field at receiver offset +540 when it is zero, then call the class sort method.",
+        "The source and target pointers occur in the matching GuiTextListCtrl script-function table entry for sort.",
+        "The source and target script-table references are 0x383c98 and 0x396cf8."
+      ],
+      "match_kind": "manual-gui-text-list-exact-small-method",
+      "metric_differences": [],
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x1de6c8",
+      "original_function_end": "0x1de6dc",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 2,
+        "call_count": 0,
+        "instruction_count": 5,
+        "mnemonic_hash": "efc9f78f8d7f12c3d6c33d4f4b7920cc260b6965c7dea5d52baffe4a413ec553",
+        "opcode_shape_hash": "c76e4578f5c546b6861a7ef90f48cb58384f3c89979b939efc0dfdacb1e9f0f4",
+        "register_detail_hash": "efe2c5f31f843672d51cfeb5ddd56fb038eba67432f1a7f0b5ced7700ce01899",
+        "register_shape_hash": "4cb18d63f24077dab83677325d9b57996cf9e28dbf17ca63ccf657ccb9c53b47",
+        "return_count": 0,
+        "shape_hash": "c97dc6ceee86ffcc1fc0ef6c506ba31bef29b4e8e02e41fc0fb8e10ad8300d75",
+        "size": 20,
+        "string_refs_hash": null
+      },
+      "original_name": "GuiTextListCtrl_script_sort",
+      "original_string_refs": [],
+      "proposed_name": "v18_GuiTextListCtrl_script_sort",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "GuiTextListCtrl default sort script wrapper",
+      "source_component": "GuiTextListCtrl",
+      "source_context": [
+        "0x383c98"
+      ],
+      "spectron_context": [
+        "0x396cf8"
+      ],
+      "spectron_current_name": "sub_1E2464",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x1e2464",
+      "spectron_function_end": "0x1e2478",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 2,
+        "call_count": 0,
+        "instruction_count": 5,
+        "mnemonic_hash": "efc9f78f8d7f12c3d6c33d4f4b7920cc260b6965c7dea5d52baffe4a413ec553",
+        "opcode_shape_hash": "c76e4578f5c546b6861a7ef90f48cb58384f3c89979b939efc0dfdacb1e9f0f4",
+        "register_detail_hash": "efe2c5f31f843672d51cfeb5ddd56fb038eba67432f1a7f0b5ced7700ce01899",
+        "register_shape_hash": "4cb18d63f24077dab83677325d9b57996cf9e28dbf17ca63ccf657ccb9c53b47",
+        "return_count": 0,
+        "shape_hash": "c97dc6ceee86ffcc1fc0ef6c506ba31bef29b4e8e02e41fc0fb8e10ad8300d75",
+        "size": 20,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_component": "u0eyga1eqx",
+      "target_delta": "+0x3d9c"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies set sort mode 2 at +540, invert the requested direction into +544, store the requested column at +552, and call the common sort method.",
+        "The target ABI name and pseudocode identify the u0eyga1eqx sort overload with the same int and bool arguments.",
+        "The corresponding call-site references are 0x22510 in the source and 0x1c428 in Spectron."
+      ],
+      "match_kind": "manual-gui-text-list-exact-small-method",
+      "metric_differences": [],
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x1de6dc",
+      "original_function_end": "0x1de6f8",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 7,
+        "mnemonic_hash": "b996a62050423f90ddb44eb707bc129fcb7d576afe4a3682e52ec67c1012fc78",
+        "opcode_shape_hash": "4cd2c4d718d225b7eab56f4a51b7af8ec8223b1024a6053892b26efd98fcab16",
+        "register_detail_hash": "a9b5e8195f2bf4e5a411f98c4cabdf3c2eb7a1d694bfee494ef0606a71883221",
+        "register_shape_hash": "7ea1f1d11ce7375b619c3d1fed06efc0cda1bd4ed3a041711c454aad0038811c",
+        "return_count": 0,
+        "shape_hash": "9c361e23613006d4bb96750f9dbac5dc3bfe43dc8648d3316af7ade1cc49254e",
+        "size": 28,
+        "string_refs_hash": null
+      },
+      "original_name": "GuiTextListCtrl_sort_int_bool",
+      "original_string_refs": [],
+      "proposed_name": "v18_GuiTextListCtrl_sort_int_bool",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "GuiTextListCtrl text sort setter",
+      "source_component": "GuiTextListCtrl",
+      "source_context": [
+        "0x22510"
+      ],
+      "spectron_context": [
+        "0x1c428"
+      ],
+      "spectron_current_name": "_ZN10u0eyga1eqx4sortEib",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x1e2478",
+      "spectron_function_end": "0x1e2494",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 7,
+        "mnemonic_hash": "b996a62050423f90ddb44eb707bc129fcb7d576afe4a3682e52ec67c1012fc78",
+        "opcode_shape_hash": "4cd2c4d718d225b7eab56f4a51b7af8ec8223b1024a6053892b26efd98fcab16",
+        "register_detail_hash": "a9b5e8195f2bf4e5a411f98c4cabdf3c2eb7a1d694bfee494ef0606a71883221",
+        "register_shape_hash": "7ea1f1d11ce7375b619c3d1fed06efc0cda1bd4ed3a041711c454aad0038811c",
+        "return_count": 0,
+        "shape_hash": "9c361e23613006d4bb96750f9dbac5dc3bfe43dc8648d3316af7ade1cc49254e",
+        "size": 28,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_component": "u0eyga1eqx",
+      "target_delta": "+0x3d9c"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies set numerical sort mode 1 at +540, invert the requested direction into +544, store the requested column at +552, and call the common sort method.",
+        "The target ABI name and pseudocode identify the matching u0eyga1eqx numerical-sort overload.",
+        "The corresponding call-site references are 0x2c350 in the source and 0x210a8 in Spectron."
+      ],
+      "match_kind": "manual-gui-text-list-exact-small-method",
+      "metric_differences": [],
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x1de6f8",
+      "original_function_end": "0x1de714",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 7,
+        "mnemonic_hash": "b996a62050423f90ddb44eb707bc129fcb7d576afe4a3682e52ec67c1012fc78",
+        "opcode_shape_hash": "e3b8f3ff857e09332dfecce9a5e3fc5669c643ae7191864676073e1ddd4df538",
+        "register_detail_hash": "a48c2235c3a407dbbb5311b748954277787d71695ac262890a52957e905c7b4e",
+        "register_shape_hash": "b81ea1bfbeeb4568adfb4eecc3ce21686a654996584fdcbb3a16273e9bdc3d74",
+        "return_count": 0,
+        "shape_hash": "1732ebc722426fba9a1a6a542662a573ab0f5a933cbaa7a34deee0bb0b471bee",
+        "size": 28,
+        "string_refs_hash": null
+      },
+      "original_name": "GuiTextListCtrl_sortNumerical_int_bool",
+      "original_string_refs": [],
+      "proposed_name": "v18_GuiTextListCtrl_sortNumerical_int_bool",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "GuiTextListCtrl numerical sort setter",
+      "source_component": "GuiTextListCtrl",
+      "source_context": [
+        "0x2c350"
+      ],
+      "spectron_context": [
+        "0x210a8"
+      ],
+      "spectron_current_name": "_ZN10u0eyga1eqx10_ThCQaUFPSEib",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x1e2494",
+      "spectron_function_end": "0x1e24b0",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 7,
+        "mnemonic_hash": "b996a62050423f90ddb44eb707bc129fcb7d576afe4a3682e52ec67c1012fc78",
+        "opcode_shape_hash": "e3b8f3ff857e09332dfecce9a5e3fc5669c643ae7191864676073e1ddd4df538",
+        "register_detail_hash": "a48c2235c3a407dbbb5311b748954277787d71695ac262890a52957e905c7b4e",
+        "register_shape_hash": "b81ea1bfbeeb4568adfb4eecc3ce21686a654996584fdcbb3a16273e9bdc3d74",
+        "return_count": 0,
+        "shape_hash": "1732ebc722426fba9a1a6a542662a573ab0f5a933cbaa7a34deee0bb0b471bee",
+        "size": 28,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_component": "u0eyga1eqx",
+      "target_delta": "+0x3d9c"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both wrappers test the guard byte at receiver offset +204 and call removeEntry with the row identifier only when the guard is clear.",
+        "The source and target pointers occur in the matching GuiTextListCtrl script-function table entry for removerowbyid.",
+        "The source and target script-table references are 0x383ab8 and 0x396b18."
+      ],
+      "match_kind": "manual-gui-text-list-exact-small-method",
+      "metric_differences": [],
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x1df564",
+      "original_function_end": "0x1df574",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 3,
+        "call_count": 0,
+        "instruction_count": 4,
+        "mnemonic_hash": "62506d35687bc01d5b3bbf4b8f27551885df6ac935a256279f0ab52874245990",
+        "opcode_shape_hash": "a34a29d90e4c955377f6bb509eb4cee7fb3a1d4749b4def461363a3a18c70d42",
+        "register_detail_hash": "ebc0ea860817a1c64773c2a37af6b95f3af854500bbfb6aef3ec8644b941e715",
+        "register_shape_hash": "257f3200757c90e25fa7bbc35000f868e8a350cd54894fbba020514e11b65410",
+        "return_count": 1,
+        "shape_hash": "7d5d98a47de8490219b777509b9bfefe5b4b5d6b03c6e7c1dcd30e22d5907244",
+        "size": 16,
+        "string_refs_hash": null
+      },
+      "original_name": "GuiTextListCtrl_script_removerowbyid",
+      "original_string_refs": [],
+      "proposed_name": "v18_GuiTextListCtrl_script_removerowbyid",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "GuiTextListCtrl remove-row script wrapper",
+      "source_component": "GuiTextListCtrl",
+      "source_context": [
+        "0x383ab8"
+      ],
+      "spectron_context": [
+        "0x396b18"
+      ],
+      "spectron_current_name": "sub_1E33A8",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x1e33a8",
+      "spectron_function_end": "0x1e33b8",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 3,
+        "call_count": 0,
+        "instruction_count": 4,
+        "mnemonic_hash": "62506d35687bc01d5b3bbf4b8f27551885df6ac935a256279f0ab52874245990",
+        "opcode_shape_hash": "a34a29d90e4c955377f6bb509eb4cee7fb3a1d4749b4def461363a3a18c70d42",
+        "register_detail_hash": "ebc0ea860817a1c64773c2a37af6b95f3af854500bbfb6aef3ec8644b941e715",
+        "register_shape_hash": "257f3200757c90e25fa7bbc35000f868e8a350cd54894fbba020514e11b65410",
+        "return_count": 1,
+        "shape_hash": "7d5d98a47de8490219b777509b9bfefe5b4b5d6b03c6e7c1dcd30e22d5907244",
+        "size": 16,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_component": "u0eyga1eqx",
+      "target_delta": "+0x3e44"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies load the column-offset list from receiver offset +520 and append the integer argument through the list Add method.",
+        "The target ABI name and pseudocode identify the same u0eyga1eqx class and rebuilt list type.",
+        "The source and target class-context references are 0x374008 and 0x382ea8."
+      ],
+      "match_kind": "manual-gui-text-list-exact-small-method",
+      "metric_differences": [],
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x1df690",
+      "original_function_end": "0x1df69c",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 3,
+        "mnemonic_hash": "404b06428300e2f7625b870f9e5ae9dfc84da74e8733d0c23efbf7faca8b8d66",
+        "opcode_shape_hash": "e900f83963d06f90e0b6b1aa00a9ed3319e326a8f395960982f291e3fd1ff2ff",
+        "register_detail_hash": "129b32d1afbad8239e1872a62e7f8ad3aaa0ebaa17b6989a84681a063f40d7e4",
+        "register_shape_hash": "1df9eaec6c3367927732a909c53883b410512be124a538853f763a578cd7f671",
+        "return_count": 0,
+        "shape_hash": "e661e735a1bf1f3c86503006b9ed052b17e633643f2f5e684882069e6356325a",
+        "size": 12,
+        "string_refs_hash": null
+      },
+      "original_name": "GuiTextListCtrl_addColumnOffset_int",
+      "original_string_refs": [],
+      "proposed_name": "v18_GuiTextListCtrl_addColumnOffset_int",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "GuiTextListCtrl column-offset append helper",
+      "source_component": "GuiTextListCtrl",
+      "source_context": [
+        "0x374008"
+      ],
+      "spectron_context": [
+        "0x382ea8"
+      ],
+      "spectron_current_name": "_ZN10u0eyga1eqx10_jHwgaC36vEi",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x1e34d4",
+      "spectron_function_end": "0x1e34e0",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 1,
+        "call_count": 0,
+        "instruction_count": 3,
+        "mnemonic_hash": "404b06428300e2f7625b870f9e5ae9dfc84da74e8733d0c23efbf7faca8b8d66",
+        "opcode_shape_hash": "e900f83963d06f90e0b6b1aa00a9ed3319e326a8f395960982f291e3fd1ff2ff",
+        "register_detail_hash": "129b32d1afbad8239e1872a62e7f8ad3aaa0ebaa17b6989a84681a063f40d7e4",
+        "register_shape_hash": "1df9eaec6c3367927732a909c53883b410512be124a538853f763a578cd7f671",
+        "return_count": 0,
+        "shape_hash": "e661e735a1bf1f3c86503006b9ed052b17e633643f2f5e684882069e6356325a",
+        "size": 12,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_component": "u0eyga1eqx",
+      "target_delta": "+0x3e44"
+    }
+  ],
+  "artifact": "spectron_gui_text_list_manual_translation_anchors_20260827",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_current.json",
+    "original_features_sha256": "243341ad40e912500365b6d7eb5b69f9f3b9d6200f5c825629cfc56d4343ac07",
+    "semantic_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "semantic_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v186.json",
+    "spectron_features_sha256": "73a99e76b953588e334c6162f655b082d6de20479736c2777a4c8b56625107ae"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The exact feature match is supported by the shared target class family, receiver-field behavior, and preserved script-table or call-site context.",
+    "The addresses are valid only in the exact hashed Spectron library named in this artifact."
+  ],
+  "method": {
+    "address_policy": "both build-specific addresses are retained; no original address is copied into Spectron",
+    "class_evidence": "all target ABI names belong to the u0eyga1eqx obfuscated class family or its IDA-demangled form",
+    "selection": "reviewed class-local pairing plus exact size, instruction, block, branch, call, return, normalized mnemonic, opcode, register, and string-reference metrics",
+    "size_note": "the eight methods are below the normal 32-byte semantic-matcher threshold"
+  },
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for eight small GuiTextListCtrl methods",
+  "summary": {
+    "anchor_count": 8,
+    "exact_normalized_count": 8,
+    "high_confidence_count": 8,
+    "new_context_anchor_count": 8,
+    "target_default_name_count": 4
+  }
+}

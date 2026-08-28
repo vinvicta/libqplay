@@ -131,6 +131,9 @@ def main():
     spectron_html_page_anchors = load_json(
         "artifacts/spectron_html_page_manual_translation_anchors_20260827.json"
     )
+    spectron_gui_text_list_anchors = load_json(
+        "artifacts/spectron_gui_text_list_manual_translation_anchors_20260827.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -4939,7 +4942,7 @@ def main():
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1217)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1213)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -5145,7 +5148,8 @@ def main():
     check("Spectron checkpoint sound Java D1 anchor count", spectron_checkpoint["sound_java_d1_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint sound base-interface anchor count", spectron_checkpoint["sound_base_interface_anchors"]["verified_name_count"], 18)
     check("Spectron checkpoint HTML page anchor count", spectron_checkpoint["html_page_anchors"]["verified_name_count"], 8)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "8fdd5acca704b5ca0e4bdd54747a60ce132ddb671fa493f4b4ffe8e2e88906a8")
+    check("Spectron checkpoint GUI text-list anchor count", spectron_checkpoint["gui_text_list_anchors"]["verified_name_count"], 8)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "9689b137d9e9688ad7669f531ecde91308d812390dc493a2434ba5b22c6a4f4a")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -5231,6 +5235,7 @@ def main():
         spectron_npc_helper_anchors,
         spectron_html_atom_anchors,
         spectron_html_page_anchors,
+        spectron_gui_text_list_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,
