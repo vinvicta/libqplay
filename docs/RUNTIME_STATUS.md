@@ -1511,6 +1511,18 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_hash_lifecycle_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+270. The next IDA pass resolved three small `GuiTextListEntry` property
+    helpers: the flickertime getter and setter and the profile fallback getter.
+    Their target pseudocode is identical to the source, including the `+144`,
+    `+200`, and `+208` receiver fields, and their callback references occupy
+    the matching property-table slots. All three target `sub_` names were
+    replaced by `v18_` aliases and reopened successfully in the v211 copy,
+    which has 11,694 functions, 3,641 high-confidence labels, and 1,210
+    default `sub_` names, with zero semantic reopen failures. See
+    `artifacts/spectron_gui_text_list_entry_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_gui_text_list_entry_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 267. The next IDA pass resolved eight small `THTMLPage` methods. They cover
     font-pointer cleanup, dirty and word-wrap state, parse tags, selection,
     URL and line initialization, and tab-stop replacement. The Spectron

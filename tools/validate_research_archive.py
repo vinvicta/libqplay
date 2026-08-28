@@ -134,6 +134,9 @@ def main():
     spectron_gui_text_list_anchors = load_json(
         "artifacts/spectron_gui_text_list_manual_translation_anchors_20260827.json"
     )
+    spectron_gui_text_list_entry_anchors = load_json(
+        "artifacts/spectron_gui_text_list_entry_manual_translation_anchors_20260827.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -2115,6 +2118,17 @@ def main():
     check("Spectron hash-lifecycle full-metric exact count", spectron_hash_lifecycle_anchors["summary"]["full_metric_exact_count"], 5)
     check("Spectron hash-lifecycle register-detail difference count", spectron_hash_lifecycle_anchors["summary"]["register_detail_difference_count"], 1)
     check("Spectron hash-lifecycle default targets", spectron_hash_lifecycle_anchors["summary"]["target_default_name_count"], 0)
+    check(
+        "Spectron GUI text-list entry artifact",
+        spectron_gui_text_list_entry_anchors["artifact"],
+        "spectron_gui_text_list_entry_manual_translation_anchors_20260827",
+    )
+    check("Spectron GUI text-list entry network", spectron_gui_text_list_entry_anchors["network_contacted"], False)
+    check("Spectron GUI text-list entry total", spectron_gui_text_list_entry_anchors["summary"]["anchor_count"], 3)
+    check("Spectron GUI text-list entry high confidence", spectron_gui_text_list_entry_anchors["summary"]["high_confidence_count"], 3)
+    check("Spectron GUI text-list entry exact-shape count", spectron_gui_text_list_entry_anchors["summary"]["exact_shape_anchor_count"], 3)
+    check("Spectron GUI text-list entry full-metric exact count", spectron_gui_text_list_entry_anchors["summary"]["full_metric_exact_count"], 3)
+    check("Spectron GUI text-list entry default targets", spectron_gui_text_list_entry_anchors["summary"]["target_default_name_count"], 3)
     check(
         "Spectron TString artifact",
         spectron_tstring_anchors["artifact"],
@@ -4957,7 +4971,7 @@ def main():
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1213)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1210)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -5165,7 +5179,8 @@ def main():
     check("Spectron checkpoint sound base-interface anchor count", spectron_checkpoint["sound_base_interface_anchors"]["verified_name_count"], 18)
     check("Spectron checkpoint HTML page anchor count", spectron_checkpoint["html_page_anchors"]["verified_name_count"], 8)
     check("Spectron checkpoint GUI text-list anchor count", spectron_checkpoint["gui_text_list_anchors"]["verified_name_count"], 8)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "b4bb37f4af6e3ce32f71329de3d3292f4620b84f380d5f2726a1626161bd739a")
+    check("Spectron checkpoint GUI text-list entry anchor count", spectron_checkpoint["gui_text_list_entry_anchors"]["verified_name_count"], 3)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "5fe1b5504cbca2cd774a0e7a2e6ef20c6f073bcf880c22b929688ec05f9489d2")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -5252,6 +5267,7 @@ def main():
         spectron_html_atom_anchors,
         spectron_html_page_anchors,
         spectron_gui_text_list_anchors,
+        spectron_gui_text_list_entry_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

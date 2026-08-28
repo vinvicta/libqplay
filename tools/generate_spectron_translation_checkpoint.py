@@ -75,6 +75,8 @@ def main() -> None:
     parser.add_argument("--html-page-verification", type=Path)
     parser.add_argument("--gui-text-list-anchors", type=Path)
     parser.add_argument("--gui-text-list-verification", type=Path)
+    parser.add_argument("--gui-text-list-entry-anchors", type=Path)
+    parser.add_argument("--gui-text-list-entry-verification", type=Path)
     parser.add_argument("--player-helper-anchors", type=Path)
     parser.add_argument("--player-helper-verification", type=Path)
     parser.add_argument("--input-window-anchors", type=Path)
@@ -622,6 +624,37 @@ def main() -> None:
         result["gui_text_list_anchors"] = gui_text_list
         result["interpretation"].append(
             "The two-hundred-ninth database revision also contains the separately reviewed small GuiTextListCtrl method-family anchors."
+        )
+    gui_text_list_entry = None
+    if args.gui_text_list_entry_anchors or args.gui_text_list_entry_verification:
+        if not args.gui_text_list_entry_anchors or not args.gui_text_list_entry_verification:
+            raise ValueError(
+                "GUI text-list entry anchors and GUI text-list entry verification must be supplied together"
+            )
+        gui_text_list_entry_document = load(args.gui_text_list_entry_anchors)
+        gui_text_list_entry_verification = load(args.gui_text_list_entry_verification)
+        if (
+            gui_text_list_entry_document.get("artifact")
+            != "spectron_gui_text_list_entry_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected GUI text-list entry anchor artifact")
+        if not gui_text_list_entry_verification.get("verified"):
+            raise ValueError("GUI text-list entry anchor reopen verification did not pass")
+        expected_gui_text_list_entry = len(gui_text_list_entry_document["anchors"])
+        if gui_text_list_entry_verification["verified_name_count"] != expected_gui_text_list_entry:
+            raise ValueError("GUI text-list entry verification count differs from artifact")
+        gui_text_list_entry = {
+            "anchor_path": str(args.gui_text_list_entry_anchors),
+            "anchor_sha256": sha256_path(args.gui_text_list_entry_anchors),
+            "reopen_verification": str(args.gui_text_list_entry_verification),
+            "anchor_count": expected_gui_text_list_entry,
+            "verified_name_count": gui_text_list_entry_verification["verified_name_count"],
+            "reopen_failure_count": gui_text_list_entry_verification["failure_count"],
+        }
+    if gui_text_list_entry is not None:
+        result["gui_text_list_entry_anchors"] = gui_text_list_entry
+        result["interpretation"].append(
+            "The two-hundred-eleventh database revision also contains the separately reviewed small GuiTextListEntry property anchors."
         )
     runtime_path = None
     if args.runtime_path_anchors or args.runtime_path_verification:
