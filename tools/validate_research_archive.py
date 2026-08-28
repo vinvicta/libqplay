@@ -542,6 +542,12 @@ def main():
     spectron_checkpoint_v279 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v279.json"
     )
+    spectron_jerror_anchors = load_json(
+        "artifacts/spectron_jpeg_error_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v280 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v280.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -12029,6 +12035,87 @@ def main():
         9,
     )
     check(
+        "Spectron libjpeg jerror artifact",
+        spectron_jerror_anchors["artifact"],
+        "spectron_jpeg_error_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron libjpeg jerror network",
+        spectron_jerror_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron libjpeg jerror anchor count",
+        spectron_jerror_anchors["summary"]["anchor_count"],
+        5,
+    )
+    check(
+        "Spectron libjpeg jerror unique target count",
+        spectron_jerror_anchors["summary"]["unique_target_count"],
+        5,
+    )
+    check(
+        "Spectron libjpeg jerror high-confidence count",
+        spectron_jerror_anchors["summary"]["high_confidence_count"],
+        5,
+    )
+    check(
+        "Spectron libjpeg jerror normalized count",
+        spectron_jerror_anchors["summary"]["normalized_shape_exact_count"],
+        5,
+    )
+    check(
+        "Spectron libjpeg jerror exact count",
+        spectron_jerror_anchors["summary"]["full_metric_exact_count"],
+        4,
+    )
+    jerror_rows = {
+        row["spectron_ea"]: row for row in spectron_jerror_anchors["anchors"]
+    }
+    jerror_expected = {
+        "0x29ff1c": "v18_jpeg_emit_message",
+        "0x29ff94": "v18_jpeg_reset_error_mgr",
+        "0x29ffa4": "v18_jpeg_format_message",
+        "0x2a008c": "v18_jpeg_output_message",
+        "0x2a00d4": "v18_jpeg_error_exit",
+    }
+    for target_ea, expected_name in jerror_expected.items():
+        check(
+            "Spectron libjpeg jerror target " + target_ea,
+            jerror_rows[target_ea]["proposed_name"],
+            expected_name,
+        )
+    check(
+        "Spectron v280 checkpoint artifact",
+        spectron_checkpoint_v280["artifact"],
+        "spectron_translation_checkpoint_20260828_v280",
+    )
+    check(
+        "Spectron v280 checkpoint parent",
+        spectron_checkpoint_v280["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v279",
+    )
+    check(
+        "Spectron v280 checkpoint database hash",
+        spectron_checkpoint_v280["database"]["sha256"],
+        "b87e3bc5ecf33c2df89d57987b7bdf80255efc3289eed8dfe976d67e24d1ff13",
+    )
+    check(
+        "Spectron v280 checkpoint function count",
+        spectron_checkpoint_v280["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v280 checkpoint default sub count",
+        spectron_checkpoint_v280["database"]["default_sub_function_count"],
+        620,
+    )
+    check(
+        "Spectron v280 checkpoint jerror count",
+        spectron_checkpoint_v280["jerror_anchors"]["verified_name_count"],
+        5,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -12353,6 +12440,8 @@ def main():
         spectron_checkpoint_v278,
         spectron_jdsample_anchors,
         spectron_checkpoint_v279,
+        spectron_jerror_anchors,
+        spectron_checkpoint_v280,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

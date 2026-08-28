@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v279 Spectron database. It
-contains 11,696 functions and 625 remaining default `sub_` names. The v263
+The current documented translation frontier is the v280 Spectron database. It
+contains 11,696 functions and 620 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -71,6 +71,10 @@ cover the start and row-processing callbacks, full-size and unused-component
 paths, horizontal and vertical 2:1 expansion, fancy interpolation, generic
 integral expansion, and the simple h2v2 path. All nine match the complete
 recorded ARM64 feature set.
+The v280 revision adds five high-confidence libjpeg error-handler labels.
+They cover message emission, error-state reset, message formatting, stderr
+output, and fatal exit handling. Four are complete metric matches, and one
+differs only in register allocation detail.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -99,6 +103,8 @@ The current v278 database is kept locally as
 `analysis/spectron_libqplay_translated_v278.i64`.
 The current v279 database is kept locally as
 `analysis/spectron_libqplay_translated_v279.i64`.
+The current v280 database is kept locally as
+`analysis/spectron_libqplay_translated_v280.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -252,6 +258,15 @@ complete recorded ARM64 feature set. The v279 checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v279.json`; it records
 the reopened database with 625 remaining default names.
 
+The v280 libjpeg error-handling evidence is in
+`artifacts/spectron_jpeg_error_manual_translation_anchors_20260828.json`.
+It labels the five callbacks installed by the target
+`v18_jpeg_std_error` routine at `0x2a00fc`. The rows cover the standard
+`emit_message`, `reset_error_mgr`, `format_message`, `output_message`, and
+`error_exit` roles. The v280 checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v280.json`; it records
+the reopened database with 620 remaining default names.
+
 The latest checkpoints are
 `artifacts/spectron_translation_checkpoint_20260828_v263_corrected.json` and
 `artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json`,
@@ -271,7 +286,8 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v276.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v277.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v278.json`, and
-`artifacts/spectron_translation_checkpoint_20260828_v279.json`. All four
+`artifacts/spectron_translation_checkpoint_20260828_v279.json`, and
+`artifacts/spectron_translation_checkpoint_20260828_v280.json`. All four
 newly reviewed legacy names, the six corrected target-only names, the
 package-signature label, the v269 TGraalVar labels, the v270 script-table
 labels, the nine v271 runtime callback labels, the two v271 property labels,
@@ -279,8 +295,8 @@ the v272 zlib role label, the six v273 libjpeg callback labels, the four
 v274 libjpeg controller labels, the nine v275 libjpeg marker-reader labels,
 the seven v276 libjpeg output-pipeline labels, the five v277 libjpeg
 progressive-Huffman labels, the four v278 libjpeg postprocessing labels, and
-the nine v279 libjpeg upsampler labels were reopened and verified with zero
-failures.
+the nine v279 libjpeg upsampler labels, and the five v280 libjpeg
+error-handler labels were reopened and verified with zero failures.
 These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or
 TLS service.
