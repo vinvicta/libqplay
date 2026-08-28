@@ -608,6 +608,12 @@ def main():
     spectron_checkpoint_v290 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v290.json"
     )
+    spectron_jcdctmgr_anchors = load_json(
+        "artifacts/spectron_jpeg_forward_dct_manager_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v291 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v291.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -13016,6 +13022,90 @@ def main():
         5,
     )
     check(
+        "Spectron libjpeg jcdctmgr artifact",
+        spectron_jcdctmgr_anchors["artifact"],
+        "spectron_jpeg_forward_dct_manager_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron libjpeg jcdctmgr network",
+        spectron_jcdctmgr_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron libjpeg jcdctmgr anchor count",
+        spectron_jcdctmgr_anchors["summary"]["anchor_count"],
+        3,
+    )
+    check(
+        "Spectron libjpeg jcdctmgr unique target count",
+        spectron_jcdctmgr_anchors["summary"]["unique_target_count"],
+        3,
+    )
+    check(
+        "Spectron libjpeg jcdctmgr high-confidence count",
+        spectron_jcdctmgr_anchors["summary"]["high_confidence_count"],
+        3,
+    )
+    check(
+        "Spectron libjpeg jcdctmgr normalized count",
+        spectron_jcdctmgr_anchors["summary"]["normalized_shape_exact_count"],
+        3,
+    )
+    check(
+        "Spectron libjpeg jcdctmgr exact count",
+        spectron_jcdctmgr_anchors["summary"]["full_metric_exact_count"],
+        2,
+    )
+    jcdctmgr_rows = {
+        row["spectron_ea"]: row for row in spectron_jcdctmgr_anchors["anchors"]
+    }
+    jcdctmgr_expected = {
+        "0x2b0660": "v18_jpeg_start_pass_fdctmgr",
+        "0x2b0aa8": "v18_jpeg_forward_DCT",
+        "0x2b0c10": "v18_jpeg_forward_DCT_float",
+    }
+    for target_ea, expected_name in jcdctmgr_expected.items():
+        check(
+            "Spectron libjpeg jcdctmgr target " + target_ea,
+            jcdctmgr_rows[target_ea]["proposed_name"],
+            expected_name,
+        )
+    check(
+        "Spectron jcdctmgr start-pass metric exception",
+        jcdctmgr_rows["0x2b0660"]["metric_differences"],
+        ["register_detail_hash"],
+    )
+    check(
+        "Spectron v291 checkpoint artifact",
+        spectron_checkpoint_v291["artifact"],
+        "spectron_translation_checkpoint_20260828_v291",
+    )
+    check(
+        "Spectron v291 checkpoint parent",
+        spectron_checkpoint_v291["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v290",
+    )
+    check(
+        "Spectron v291 checkpoint database hash",
+        spectron_checkpoint_v291["database"]["sha256"],
+        "9933c9b80f7962b4e3666ad5f6eee22b42487e8027d2691fb9e36abd6d1e76a4",
+    )
+    check(
+        "Spectron v291 checkpoint function count",
+        spectron_checkpoint_v291["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v291 checkpoint default sub count",
+        spectron_checkpoint_v291["database"]["default_sub_function_count"],
+        561,
+    )
+    check(
+        "Spectron v291 checkpoint jcdctmgr count",
+        spectron_checkpoint_v291["jcdctmgr_anchors"]["verified_name_count"],
+        3,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -13352,6 +13442,8 @@ def main():
         spectron_checkpoint_v289,
         spectron_jccoefct_anchors,
         spectron_checkpoint_v290,
+        spectron_jcdctmgr_anchors,
+        spectron_checkpoint_v291,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
