@@ -619,6 +619,30 @@ This is the short handoff view. The full reasoning and command history are in
      `tools/generate_spectron_world_object_property_anchors.py`, and
      `artifacts/spectron_translation_checkpoint_20260828_v242.json`.
 
+63m. The v243 IDA checkpoint adds nine high-confidence aliases from the
+     residual `TPlayer` auxiliary property table and `TTranslations` table.
+     The batch contains six getters and three setters. All nine rows match
+     normalized ARM64 instruction shape; their only recorded difference is
+     register-detail allocation. The clean reopen has 11,696 functions and
+     914 remaining default `sub_` names. The database SHA-256 is
+     `11d1275fbfca6b7500f430742de9e84f933d53462967e88fa61255ebad3e8e38`.
+     See
+     `artifacts/spectron_player_translation_property_manual_translation_anchors_20260828.json`,
+     `tools/generate_spectron_player_translation_property_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260828_v243.json`.
+
+63n. The v244 IDA checkpoint adds six high-confidence aliases from the
+     residual `TServerNPC` property table. They cover horse and NPC image
+     accessors, the `peltwithnpc` flag, and X/Y coordinate setters. All six
+     rows match normalized ARM64 instruction shape, and two match the complete
+     feature metrics. The clean reopen has 11,696 functions and 908 remaining
+     default `sub_` names. The database SHA-256 is
+     `10ea7f378ae0fafa155d45da163a116477240c01970e4e61b1e7dba1efd8b942`.
+     See
+     `artifacts/spectron_server_npc_property_manual_translation_anchors_20260828.json`,
+     `tools/generate_spectron_server_npc_property_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260828_v244.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The

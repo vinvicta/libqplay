@@ -317,6 +317,12 @@ def main():
     spectron_checkpoint_v243 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v243.json"
     )
+    spectron_server_npc_property_anchors = load_json(
+        "artifacts/spectron_server_npc_property_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v244 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v244.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -7969,6 +7975,105 @@ def main():
         9,
     )
     check(
+        "Spectron v244 server-NPC property artifact",
+        spectron_server_npc_property_anchors["artifact"],
+        "spectron_server_npc_property_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v244 server-NPC property network",
+        spectron_server_npc_property_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v244 server-NPC property anchor count",
+        spectron_server_npc_property_anchors["summary"]["anchor_count"],
+        6,
+    )
+    check(
+        "Spectron v244 server-NPC property high confidence",
+        spectron_server_npc_property_anchors["summary"]["high_confidence_count"],
+        6,
+    )
+    check(
+        "Spectron v244 server-NPC property target default count",
+        spectron_server_npc_property_anchors["summary"]["target_default_name_count"],
+        6,
+    )
+    check(
+        "Spectron v244 server-NPC property normalized shape count",
+        spectron_server_npc_property_anchors["summary"]["normalized_shape_exact_count"],
+        6,
+    )
+    check(
+        "Spectron v244 server-NPC property full metric count",
+        spectron_server_npc_property_anchors["summary"]["full_metric_exact_count"],
+        2,
+    )
+    check(
+        "Spectron v244 server-NPC property layout count",
+        spectron_server_npc_property_anchors["summary"]["layout_change_count"],
+        0,
+    )
+    check(
+        "Spectron v244 server-NPC property register-detail count",
+        spectron_server_npc_property_anchors["summary"]["register_detail_difference_count"],
+        4,
+    )
+    check(
+        "Spectron v244 server-NPC property getter count",
+        spectron_server_npc_property_anchors["summary"]["getter_count"],
+        3,
+    )
+    check(
+        "Spectron v244 server-NPC property setter count",
+        spectron_server_npc_property_anchors["summary"]["setter_count"],
+        3,
+    )
+    server_npc_rows = {
+        row["original_name"]: row
+        for row in spectron_server_npc_property_anchors["anchors"]
+    }
+    check(
+        "Spectron v244 horse-image getter target",
+        server_npc_rows["TServerNPC_getHorseImg"]["spectron_ea"],
+        "0x185060",
+    )
+    check(
+        "Spectron v244 NPC Y setter target",
+        server_npc_rows["TServerNPC_setY"]["spectron_ea"],
+        "0x18b2e0",
+    )
+    check(
+        "Spectron v244 checkpoint artifact",
+        spectron_checkpoint_v244["artifact"],
+        "spectron_translation_checkpoint_20260828_v244",
+    )
+    check(
+        "Spectron v244 checkpoint parent",
+        spectron_checkpoint_v244["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v243",
+    )
+    check(
+        "Spectron v244 checkpoint database hash",
+        spectron_checkpoint_v244["database"]["sha256"],
+        "10ea7f378ae0fafa155d45da163a116477240c01970e4e61b1e7dba1efd8b942",
+    )
+    check(
+        "Spectron v244 checkpoint function count",
+        spectron_checkpoint_v244["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v244 checkpoint default sub count",
+        spectron_checkpoint_v244["database"]["default_sub_function_count"],
+        908,
+    )
+    check(
+        "Spectron v244 checkpoint anchor count",
+        spectron_checkpoint_v244["server_npc_property_anchors"]["verified_name_count"],
+        6,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -8088,6 +8193,7 @@ def main():
         spectron_particle_emitter_script_anchors,
         spectron_world_object_property_anchors,
         spectron_player_translation_property_anchors,
+        spectron_server_npc_property_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,
