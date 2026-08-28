@@ -643,6 +643,18 @@ This is the short handoff view. The full reasoning and command history are in
      `tools/generate_spectron_server_npc_property_anchors.py`, and
      `artifacts/spectron_translation_checkpoint_20260828_v244.json`.
 
+63o. The v245 IDA checkpoint adds seven high-confidence aliases from the
+     residual `TServerNPC` script-function table. They cover the carry, push,
+     pull, and `timereverywhere` policy callbacks. All seven rows match
+     normalized ARM64 instruction shape; their only recorded difference is
+     register-detail allocation. The clean reopen has 11,696 functions and
+     901 remaining default `sub_` names. The database SHA-256 is
+     `108d94cfb65b8e35d121e75d766b27c9490b82e501787eb0738a355c167f4a13`.
+     See
+     `artifacts/spectron_server_npc_script_manual_translation_anchors_20260828.json`,
+     `tools/generate_spectron_server_npc_script_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260828_v245.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The

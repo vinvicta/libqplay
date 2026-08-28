@@ -323,6 +323,12 @@ def main():
     spectron_checkpoint_v244 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v244.json"
     )
+    spectron_server_npc_script_anchors = load_json(
+        "artifacts/spectron_server_npc_script_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v245 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v245.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -8074,6 +8080,95 @@ def main():
         6,
     )
     check(
+        "Spectron v245 server-NPC script artifact",
+        spectron_server_npc_script_anchors["artifact"],
+        "spectron_server_npc_script_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v245 server-NPC script network",
+        spectron_server_npc_script_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v245 server-NPC script anchor count",
+        spectron_server_npc_script_anchors["summary"]["anchor_count"],
+        7,
+    )
+    check(
+        "Spectron v245 server-NPC script high confidence",
+        spectron_server_npc_script_anchors["summary"]["high_confidence_count"],
+        7,
+    )
+    check(
+        "Spectron v245 server-NPC script target default count",
+        spectron_server_npc_script_anchors["summary"]["target_default_name_count"],
+        7,
+    )
+    check(
+        "Spectron v245 server-NPC script normalized shape count",
+        spectron_server_npc_script_anchors["summary"]["normalized_shape_exact_count"],
+        7,
+    )
+    check(
+        "Spectron v245 server-NPC script full metric count",
+        spectron_server_npc_script_anchors["summary"]["full_metric_exact_count"],
+        0,
+    )
+    check(
+        "Spectron v245 server-NPC script layout count",
+        spectron_server_npc_script_anchors["summary"]["layout_change_count"],
+        0,
+    )
+    check(
+        "Spectron v245 server-NPC script register-detail count",
+        spectron_server_npc_script_anchors["summary"]["register_detail_difference_count"],
+        7,
+    )
+    server_npc_script_rows = {
+        row["original_name"]: row
+        for row in spectron_server_npc_script_anchors["anchors"]
+    }
+    check(
+        "Spectron v245 can-be-carried target",
+        server_npc_script_rows["TServerNPC_script_canBeCarried"]["spectron_ea"],
+        "0x184f48",
+    )
+    check(
+        "Spectron v245 time-everywhere target",
+        server_npc_script_rows["TServerNPC_script_timeEverywhere"]["spectron_ea"],
+        "0x185010",
+    )
+    check(
+        "Spectron v245 checkpoint artifact",
+        spectron_checkpoint_v245["artifact"],
+        "spectron_translation_checkpoint_20260828_v245",
+    )
+    check(
+        "Spectron v245 checkpoint parent",
+        spectron_checkpoint_v245["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v244",
+    )
+    check(
+        "Spectron v245 checkpoint database hash",
+        spectron_checkpoint_v245["database"]["sha256"],
+        "108d94cfb65b8e35d121e75d766b27c9490b82e501787eb0738a355c167f4a13",
+    )
+    check(
+        "Spectron v245 checkpoint function count",
+        spectron_checkpoint_v245["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v245 checkpoint default sub count",
+        spectron_checkpoint_v245["database"]["default_sub_function_count"],
+        901,
+    )
+    check(
+        "Spectron v245 checkpoint anchor count",
+        spectron_checkpoint_v245["server_npc_script_anchors"]["verified_name_count"],
+        7,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -8194,6 +8289,7 @@ def main():
         spectron_world_object_property_anchors,
         spectron_player_translation_property_anchors,
         spectron_server_npc_property_anchors,
+        spectron_server_npc_script_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,
