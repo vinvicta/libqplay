@@ -389,6 +389,12 @@ def main():
     spectron_checkpoint_v255 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v255.json"
     )
+    spectron_guigraalctrl_isrendering_anchors = load_json(
+        "artifacts/spectron_guigraalctrl_isrendering_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v256 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v256.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -9394,6 +9400,120 @@ def main():
         4,
     )
     check(
+        "Spectron v256 GuiGraalCtrl isrendering artifact",
+        spectron_guigraalctrl_isrendering_anchors["artifact"],
+        "spectron_guigraalctrl_isrendering_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v256 GuiGraalCtrl isrendering network",
+        spectron_guigraalctrl_isrendering_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v256 GuiGraalCtrl isrendering anchor count",
+        spectron_guigraalctrl_isrendering_anchors["summary"]["anchor_count"],
+        2,
+    )
+    check(
+        "Spectron v256 GuiGraalCtrl isrendering registration row count",
+        spectron_guigraalctrl_isrendering_anchors["summary"]["registration_row_count"],
+        2,
+    )
+    check(
+        "Spectron v256 GuiGraalCtrl isrendering unique target count",
+        spectron_guigraalctrl_isrendering_anchors["summary"]["unique_target_count"],
+        2,
+    )
+    check(
+        "Spectron v256 GuiGraalCtrl isrendering high confidence",
+        spectron_guigraalctrl_isrendering_anchors["summary"]["high_confidence_count"],
+        2,
+    )
+    check(
+        "Spectron v256 GuiGraalCtrl isrendering target default count",
+        spectron_guigraalctrl_isrendering_anchors["summary"]["target_default_name_count"],
+        2,
+    )
+    check(
+        "Spectron v256 GuiGraalCtrl isrendering normalized shape count",
+        spectron_guigraalctrl_isrendering_anchors["summary"]["normalized_shape_exact_count"],
+        2,
+    )
+    check(
+        "Spectron v256 GuiGraalCtrl isrendering full metric count",
+        spectron_guigraalctrl_isrendering_anchors["summary"]["full_metric_exact_count"],
+        2,
+    )
+    check(
+        "Spectron v256 GuiGraalCtrl isrendering layout count",
+        spectron_guigraalctrl_isrendering_anchors["summary"]["layout_change_count"],
+        0,
+    )
+    check(
+        "Spectron v256 GuiGraalCtrl isrendering register-detail count",
+        spectron_guigraalctrl_isrendering_anchors["summary"]["register_detail_difference_count"],
+        0,
+    )
+    check(
+        "Spectron v256 GuiGraalCtrl isrendering getter count",
+        spectron_guigraalctrl_isrendering_anchors["summary"]["getter_count"],
+        1,
+    )
+    check(
+        "Spectron v256 GuiGraalCtrl isrendering setter count",
+        spectron_guigraalctrl_isrendering_anchors["summary"]["setter_count"],
+        1,
+    )
+    guigraalctrl_isrendering_rows = spectron_guigraalctrl_isrendering_anchors["anchors"]
+    check(
+        "Spectron v256 GuiGraalCtrl isrendering getter target",
+        next(
+            row["spectron_ea"]
+            for row in guigraalctrl_isrendering_rows
+            if row["original_name"] == "GuiGraalCtrl_get_isrendering"
+        ),
+        "0x1bf7ac",
+    )
+    check(
+        "Spectron v256 GuiGraalCtrl isrendering setter target",
+        next(
+            row["spectron_ea"]
+            for row in guigraalctrl_isrendering_rows
+            if row["original_name"] == "GuiGraalCtrl_set_isrendering"
+        ),
+        "0x1bf7b4",
+    )
+    check(
+        "Spectron v256 checkpoint artifact",
+        spectron_checkpoint_v256["artifact"],
+        "spectron_translation_checkpoint_20260828_v256",
+    )
+    check(
+        "Spectron v256 checkpoint parent",
+        spectron_checkpoint_v256["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v255",
+    )
+    check(
+        "Spectron v256 checkpoint database hash",
+        spectron_checkpoint_v256["database"]["sha256"],
+        "51cc802c6c5ae38aa70bf09119f3caef12fe4e6907403d9a54211e79e110731c",
+    )
+    check(
+        "Spectron v256 checkpoint function count",
+        spectron_checkpoint_v256["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v256 checkpoint default sub count",
+        spectron_checkpoint_v256["database"]["default_sub_function_count"],
+        775,
+    )
+    check(
+        "Spectron v256 checkpoint anchor count",
+        spectron_checkpoint_v256["guigraalctrl_isrendering_anchors"]["verified_name_count"],
+        2,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -9525,6 +9645,7 @@ def main():
         spectron_gui_bitmap_property_anchors,
         spectron_gui_bitmap_button_property_anchors,
         spectron_guicontrol_property_tail_anchors,
+        spectron_guigraalctrl_isrendering_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

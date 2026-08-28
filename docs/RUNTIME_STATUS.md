@@ -786,6 +786,17 @@ This is the short handoff view. The full reasoning and command history are in
      `tools/generate_spectron_guicontrol_property_tail_anchors.py`, and
      `artifacts/spectron_translation_checkpoint_20260828_v255.json`.
 
+63z. The v256 IDA checkpoint translates the two remaining `GuiGraalCtrl`
+     callbacks for the `isrendering` property. The getter and setter both
+     match the complete ARM64 feature metrics, with no layout or register-detail
+     differences. The clean reopen has 11,696 functions and 775 remaining
+     default `sub_` names. The database SHA-256 is
+     `51cc802c6c5ae38aa70bf09119f3caef12fe4e6907403d9a54211e79e110731c`.
+     See
+     `artifacts/spectron_guigraalctrl_isrendering_manual_translation_anchors_20260828.json`,
+     `tools/generate_spectron_guigraalctrl_isrendering_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260828_v256.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The
