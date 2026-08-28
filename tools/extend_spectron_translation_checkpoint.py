@@ -40,12 +40,22 @@ def main() -> None:
     parser.add_argument("--verification", required=True, type=Path)
     parser.add_argument("--database", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--anchor-artifact", default=ANCHOR_ARTIFACT)
+    parser.add_argument(
+        "--checkpoint-artifact",
+        default="spectron_translation_checkpoint_20260828",
+    )
+    parser.add_argument(
+        "--checkpoint-key",
+        default="gui_text_list_entry_property_anchors",
+    )
+    parser.add_argument("--default-sub-function-count", required=True, type=int)
     args = parser.parse_args()
 
     parent = load(args.parent)
     anchors = load(args.anchors)
     verification = load(args.verification)
-    if anchors.get("artifact") != ANCHOR_ARTIFACT:
+    if anchors.get("artifact") != args.anchor_artifact:
         raise ValueError("unexpected anchor artifact")
     if not verification.get("verified"):
         raise ValueError("the anchor reopen verification did not pass")
@@ -58,7 +68,7 @@ def main() -> None:
         raise ValueError("database path is not a regular file")
 
     result = json.loads(json.dumps(parent))
-    result["artifact"] = "spectron_translation_checkpoint_20260828"
+    result["artifact"] = args.checkpoint_artifact
     result["parent_checkpoint"] = {
         "path": str(args.parent),
         "sha256": sha256_path(args.parent),
@@ -68,9 +78,9 @@ def main() -> None:
         **parent["database"],
         "path": str(args.database),
         "sha256": sha256_path(args.database),
-        "default_sub_function_count": 1135,
+        "default_sub_function_count": args.default_sub_function_count,
     }
-    result["gui_text_list_entry_property_anchors"] = {
+    result[args.checkpoint_key] = {
         "anchor_path": str(args.anchors),
         "anchor_sha256": sha256_path(args.anchors),
         "reopen_verification": str(args.verification),

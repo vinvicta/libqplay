@@ -1634,6 +1634,16 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_gui_text_list_entry_property_anchors.py`, and
     `/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v219.i64`.
 
+279. The v220 IDA pass resolved ten adjacent GUI text-list methods covering
+    sort-order getters and setters, hint and geometry accessors, and the
+    script-facing profile setter. All ten rows match normalized shape, four
+    match the complete metric set, and all ten names reopened successfully.
+    The v220 copy has 11,694 functions and 1,125 remaining default `sub_`
+    names. See
+    `artifacts/spectron_gui_text_list_residual_manual_translation_anchors_20260828.json`,
+    `tools/generate_spectron_gui_text_list_residual_anchors.py`, and
+    `/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v220.i64`.
+
 267. The next IDA pass resolved eight small `THTMLPage` methods. They cover
     font-pointer cleanup, dirty and word-wrap state, parse tags, selection,
     URL and line initialization, and tab-stop replacement. The Spectron
