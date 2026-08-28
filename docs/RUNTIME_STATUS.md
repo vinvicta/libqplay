@@ -468,6 +468,17 @@ This is the short handoff view. The full reasoning and command history are in
     has no ambiguous shared names and is kept separate from inferred `v18_`
     labels. See `artifacts/spectron_exact_shared_name_anchors_20260826.json`.
 
+63a. The v231 IDA checkpoint added six high-confidence aliases from the
+     password, cache, and file-download property tables. All six target
+     functions match the normalized source shape, and a clean serial reopen
+     verified every name. The checkpoint has 11,694 functions and 1,073
+     remaining default `sub_` names. Three target-only rows for debug-handler
+     callbacks and an ABI wrapper remain explicitly separate from the source
+     mappings. See
+     `artifacts/spectron_file_cache_property_manual_translation_anchors_20260828.json`,
+     `tools/generate_spectron_file_cache_property_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260828_v231.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The

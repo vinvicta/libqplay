@@ -101,6 +101,9 @@ def main():
     spectron_checkpoint_v230 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v230.json"
     )
+    spectron_checkpoint_v231 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v231.json"
+    )
     spectron_manual = load_json(
         "artifacts/spectron_manual_translation_anchors_20260826.json"
     )
@@ -238,6 +241,9 @@ def main():
     )
     spectron_tclient_script_property_anchors = load_json(
         "artifacts/spectron_tclient_script_property_manual_translation_anchors_20260828.json"
+    )
+    spectron_file_cache_property_anchors = load_json(
+        "artifacts/spectron_file_cache_property_manual_translation_anchors_20260828.json"
     )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
@@ -3290,6 +3296,70 @@ def main():
         "Spectron TClient set-weapon target",
         tclient_script_property_by_name["TClient_addWeaponForActivePlayer"]["spectron_ea"],
         "0x1eff94",
+    )
+    check(
+        "Spectron file-cache property artifact",
+        spectron_file_cache_property_anchors["artifact"],
+        "spectron_file_cache_property_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron file-cache property network",
+        spectron_file_cache_property_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron file-cache property total",
+        spectron_file_cache_property_anchors["summary"]["anchor_count"],
+        6,
+    )
+    check(
+        "Spectron file-cache property high confidence",
+        spectron_file_cache_property_anchors["summary"]["high_confidence_count"],
+        6,
+    )
+    check(
+        "Spectron file-cache property exact-shape count",
+        spectron_file_cache_property_anchors["summary"]["normalized_shape_exact_count"],
+        6,
+    )
+    check(
+        "Spectron file-cache property full-metric count",
+        spectron_file_cache_property_anchors["summary"]["full_metric_exact_count"],
+        1,
+    )
+    check(
+        "Spectron file-cache property layout-change count",
+        spectron_file_cache_property_anchors["summary"]["layout_change_count"],
+        0,
+    )
+    check(
+        "Spectron file-cache property default targets",
+        spectron_file_cache_property_anchors["summary"]["target_default_name_count"],
+        6,
+    )
+    check(
+        "Spectron file-cache property target-only count",
+        len(spectron_file_cache_property_anchors["reviewed_target_only_rows"]),
+        3,
+    )
+    file_cache_property_by_name = {
+        row["original_name"]: row
+        for row in spectron_file_cache_property_anchors["anchors"]
+    }
+    check(
+        "Spectron password getter target",
+        file_cache_property_by_name["TClient_getGraalPassword"]["spectron_ea"],
+        "0x1f01e4",
+    )
+    check(
+        "Spectron minimum cache getter target",
+        file_cache_property_by_name["TCachedStream_get_minfilecachesize"]["spectron_ea"],
+        "0x1ffcac",
+    )
+    check(
+        "Spectron last-download getter target",
+        file_cache_property_by_name["TFileDownload_get_lastdownloadfile"]["spectron_ea"],
+        "0x201420",
     )
     check(
         "Spectron TString artifact",
@@ -6651,6 +6721,31 @@ def main():
         5,
     )
     check(
+        "Spectron v231 checkpoint artifact",
+        spectron_checkpoint_v231["artifact"],
+        "spectron_translation_checkpoint_20260828_v231",
+    )
+    check(
+        "Spectron v231 checkpoint parent",
+        spectron_checkpoint_v231["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v230",
+    )
+    check(
+        "Spectron v231 checkpoint database hash",
+        spectron_checkpoint_v231["database"]["sha256"],
+        "329596637abe0446019eb80c952e4536157bed027dce3c5f40fc6b8a68cf2fa2",
+    )
+    check(
+        "Spectron v231 checkpoint default sub count",
+        spectron_checkpoint_v231["database"]["default_sub_function_count"],
+        1073,
+    )
+    check(
+        "Spectron v231 checkpoint file-cache property count",
+        spectron_checkpoint_v231["file_cache_property_anchors"]["verified_name_count"],
+        6,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -6757,6 +6852,7 @@ def main():
         spectron_mrandom_property_residual_anchors,
         spectron_gui_drawing_panel_script_anchors,
         spectron_tclient_script_property_anchors,
+        spectron_file_cache_property_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,
