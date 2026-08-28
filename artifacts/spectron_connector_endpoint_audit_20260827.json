@@ -1,0 +1,281 @@
+{
+  "analysis": "offline connector URL fragment decode and cross-build comparison",
+  "artifact": "spectron_connector_endpoint_audit_20260827",
+  "build_literals": {
+    "original_1.8": {
+      "build": "Jul  4 2019 09:35:48",
+      "version": "6.15401"
+    },
+    "spectron_2.2": {
+      "build": "Oct 30 2022 12:58:55",
+      "revision_parameter": "2.22",
+      "version": "6.171"
+    }
+  },
+  "comparison": {
+    "domain_unchanged": true,
+    "original_hosts": [
+      "con.quattroplay.com",
+      "con2.quattroplay.com"
+    ],
+    "paths_unchanged": true,
+    "scheme_by_mode_unchanged": true,
+    "spectron_hosts": [
+      "cong.quattroplay.com",
+      "cong2.quattroplay.com"
+    ],
+    "target_first_host": "cong",
+    "target_host_change": "The Spectron build changes the connector host pair from con/con2 to cong/cong2.",
+    "target_retry_host": "cong2"
+  },
+  "decoder": {
+    "formula": "value = -11 - signed_encoded - length; decoded = ((value << 6) - index + ((value >> 2) & 0x3f)) & 0xff",
+    "sentinel_repair": "If the recovered encoded index equals the loop index, the native fix helper supplies a zero byte before decodesimple runs.",
+    "source_functions": {
+      "codesimplefix0": "0xea2c0",
+      "decodesimple": "0xea100"
+    }
+  },
+  "interpretation": [
+    "The 1.8 build decodes con.quattroplay.com and con2.quattroplay.com.",
+    "The Spectron build decodes cong.quattroplay.com and cong2.quattroplay.com.",
+    "Modes 1 and 2 still use HTTPS, while mode 3 still uses HTTP.",
+    "The host change is a static finding. This audit does not resolve DNS, contact a service, or prove that either hostname is currently live.",
+    "The target's unchanged native trust material remains a separate compatibility concern for its HTTPS modes."
+  ],
+  "native_evidence": {
+    "original": {
+      "connector_mode": "0x203df4",
+      "requestURLAsGameFile": "0x2013d4",
+      "sendRequest": "0x1ffde8"
+    },
+    "spectron": {
+      "connector_mode": "0x2094c0",
+      "requestURLAsGameFile": "0x206bc4",
+      "sendRequest": "0x205730"
+    }
+  },
+  "network_contacted": false,
+  "original": {
+    "connector_function": {
+      "address": "0x203df4",
+      "name": "TServerList_enterNextConnectorMode_int"
+    },
+    "endpoints": [
+      {
+        "first": "https://con.quattroplay.com/con.png",
+        "host": "con.quattroplay.com",
+        "mode": 1,
+        "path": "/con.png",
+        "retry": "https://con2.quattroplay.com/con.png",
+        "retry_host": "con2.quattroplay.com",
+        "scheme": "https://",
+        "transport": "HTTPS"
+      },
+      {
+        "first": "https://con.quattroplay.com/con.gs",
+        "host": "con.quattroplay.com",
+        "mode": 2,
+        "path": "/con.gs",
+        "retry": "https://con2.quattroplay.com/con.gs",
+        "retry_host": "con2.quattroplay.com",
+        "scheme": "https://",
+        "transport": "HTTPS"
+      },
+      {
+        "first": "http://con.quattroplay.com/conf.gs",
+        "host": "con.quattroplay.com",
+        "mode": 3,
+        "path": "/conf.gs",
+        "retry": "http://con2.quattroplay.com/conf.gs",
+        "retry_host": "con2.quattroplay.com",
+        "scheme": "http://",
+        "transport": "HTTP"
+      }
+    ],
+    "fragments": {
+      "conf_path": {
+        "decoded": "/conf.gs",
+        "length": 8,
+        "offset": "0x2dc538",
+        "origin": "original_1.8 connector data",
+        "raw_hex": "315c282844213804",
+        "sentinel_repaired_indexes": []
+      },
+      "domain": {
+        "decoded": ".quattroplay.com",
+        "length": 16,
+        "offset": "0x2dc508",
+        "origin": "original_1.8 connector data",
+        "raw_hex": "2d1c085404d1040c041038d3fd24f0f4",
+        "sentinel_repaired_indexes": [
+          5
+        ]
+      },
+      "first_host": {
+        "decoded": "con",
+        "length": 3,
+        "offset": "0x2dc500",
+        "origin": "original_1.8 connector data",
+        "raw_hex": "653131",
+        "sentinel_repaired_indexes": []
+      },
+      "http_scheme": {
+        "decoded": "http://",
+        "length": 7,
+        "offset": "0x2dc4e0",
+        "origin": "original_1.8 connector data",
+        "raw_hex": "4d191521f61e1a",
+        "sentinel_repaired_indexes": []
+      },
+      "https_scheme": {
+        "decoded": "https://",
+        "length": 8,
+        "offset": "0x2dc4e8",
+        "origin": "original_1.8 connector data",
+        "raw_hex": "4c18142010f11915",
+        "sentinel_repaired_indexes": []
+      },
+      "mode2_path_literal": {
+        "decoded": "/con.gs",
+        "length": 7,
+        "offset": null,
+        "origin": "original_1.8 connector inline literal",
+        "raw_hex": "325d2929263d09",
+        "sentinel_repaired_indexes": []
+      },
+      "png_path": {
+        "decoded": "/con.png",
+        "length": 8,
+        "offset": "0x2dc520",
+        "origin": "original_1.8 connector data",
+        "raw_hex": "315c282825181c34",
+        "sentinel_repaired_indexes": []
+      },
+      "retry_host": {
+        "decoded": "con2",
+        "length": 4,
+        "offset": "0x2dc4f8",
+        "origin": "original_1.8 connector data",
+        "raw_hex": "6430301d",
+        "sentinel_repaired_indexes": []
+      }
+    },
+    "input": {
+      "path": "libqplay.so",
+      "sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+      "size": 3657208
+    }
+  },
+  "spectron": {
+    "connector_function": {
+      "address": "0x2094c0",
+      "name": "TServerList_enterNextConnectorMode_int"
+    },
+    "endpoints": [
+      {
+        "first": "https://cong.quattroplay.com/con.png",
+        "host": "cong.quattroplay.com",
+        "mode": 1,
+        "path": "/con.png",
+        "retry": "https://cong2.quattroplay.com/con.png",
+        "retry_host": "cong2.quattroplay.com",
+        "scheme": "https://",
+        "transport": "HTTPS"
+      },
+      {
+        "first": "https://cong.quattroplay.com/con.gs",
+        "host": "cong.quattroplay.com",
+        "mode": 2,
+        "path": "/con.gs",
+        "retry": "https://cong2.quattroplay.com/con.gs",
+        "retry_host": "cong2.quattroplay.com",
+        "scheme": "https://",
+        "transport": "HTTPS"
+      },
+      {
+        "first": "http://cong.quattroplay.com/conf.gs",
+        "host": "cong.quattroplay.com",
+        "mode": 3,
+        "path": "/conf.gs",
+        "retry": "http://cong2.quattroplay.com/conf.gs",
+        "retry_host": "cong2.quattroplay.com",
+        "scheme": "http://",
+        "transport": "HTTP"
+      }
+    ],
+    "fragments": {
+      "conf_path": {
+        "decoded": "/conf.gs",
+        "length": 8,
+        "offset": "0x2e9ee0",
+        "origin": "spectron_2.2 connector data",
+        "raw_hex": "315c282844213804",
+        "sentinel_repaired_indexes": []
+      },
+      "domain": {
+        "decoded": ".quattroplay.com",
+        "length": 16,
+        "offset": "0x2e9eb0",
+        "origin": "spectron_2.2 connector data",
+        "raw_hex": "2d1c085404d1040c041038d3fd24f0f4",
+        "sentinel_repaired_indexes": [
+          5
+        ]
+      },
+      "first_host": {
+        "decoded": "cong",
+        "length": 4,
+        "offset": "0x2e9ea8",
+        "origin": "spectron_2.2 connector data",
+        "raw_hex": "64303048",
+        "sentinel_repaired_indexes": []
+      },
+      "http_scheme": {
+        "decoded": "http://",
+        "length": 7,
+        "offset": "0x2e9e88",
+        "origin": "spectron_2.2 connector data",
+        "raw_hex": "4d191521f61e1a",
+        "sentinel_repaired_indexes": []
+      },
+      "https_scheme": {
+        "decoded": "https://",
+        "length": 8,
+        "offset": "0x2e9e90",
+        "origin": "spectron_2.2 connector data",
+        "raw_hex": "4c18142010f11915",
+        "sentinel_repaired_indexes": []
+      },
+      "mode2_path_literal": {
+        "decoded": "/con.gs",
+        "length": 7,
+        "offset": null,
+        "origin": "spectron_2.2 connector inline literal",
+        "raw_hex": "325d2929263d09",
+        "sentinel_repaired_indexes": []
+      },
+      "png_path": {
+        "decoded": "/con.png",
+        "length": 8,
+        "offset": "0x2e9ec8",
+        "origin": "spectron_2.2 connector data",
+        "raw_hex": "315c282825181c34",
+        "sentinel_repaired_indexes": []
+      },
+      "retry_host": {
+        "decoded": "cong2",
+        "length": 5,
+        "offset": "0x2e9ea0",
+        "origin": "spectron_2.2 connector data",
+        "raw_hex": "632f2f4718",
+        "sentinel_repaired_indexes": []
+      }
+    },
+    "input": {
+      "path": "libqplay.so",
+      "sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+      "size": 3736872
+    }
+  }
+}

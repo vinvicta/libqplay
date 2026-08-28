@@ -46,6 +46,9 @@ def main():
     spectron_symbol_audit = load_json(
         "artifacts/spectron_symbol_table_audit_20260827.json"
     )
+    spectron_connector_endpoints = load_json(
+        "artifacts/spectron_connector_endpoint_audit_20260827.json"
+    )
     tls_parser = load_json("artifacts/connector_tls_parser_analysis_20260826.json")
     tls_expiry = load_json("artifacts/connector_tls_expiry_control_20260826.json")
     native_verified = load_json(
@@ -829,6 +832,74 @@ def main():
         "Spectron dynamic complete named rows",
         len(spectron_symbol_audit["spectron"]["named_symbols"]),
         6770,
+    )
+
+    check(
+        "Spectron connector endpoint artifact",
+        spectron_connector_endpoints["artifact"],
+        "spectron_connector_endpoint_audit_20260827",
+    )
+    check(
+        "Spectron connector endpoint network",
+        spectron_connector_endpoints["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron connector endpoint original hash",
+        spectron_connector_endpoints["original"]["input"]["sha256"],
+        "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    )
+    check(
+        "Spectron connector endpoint target hash",
+        spectron_connector_endpoints["spectron"]["input"]["sha256"],
+        "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    )
+    check(
+        "Spectron connector endpoint original first hosts",
+        [row["first"] for row in spectron_connector_endpoints["original"]["endpoints"]],
+        [
+            "https://con.quattroplay.com/con.png",
+            "https://con.quattroplay.com/con.gs",
+            "http://con.quattroplay.com/conf.gs",
+        ],
+    )
+    check(
+        "Spectron connector endpoint target first hosts",
+        [row["first"] for row in spectron_connector_endpoints["spectron"]["endpoints"]],
+        [
+            "https://cong.quattroplay.com/con.png",
+            "https://cong.quattroplay.com/con.gs",
+            "http://cong.quattroplay.com/conf.gs",
+        ],
+    )
+    check(
+        "Spectron connector endpoint target retry hosts",
+        [row["retry"] for row in spectron_connector_endpoints["spectron"]["endpoints"]],
+        [
+            "https://cong2.quattroplay.com/con.png",
+            "https://cong2.quattroplay.com/con.gs",
+            "http://cong2.quattroplay.com/conf.gs",
+        ],
+    )
+    check(
+        "Spectron connector endpoint domain unchanged",
+        spectron_connector_endpoints["comparison"]["domain_unchanged"],
+        True,
+    )
+    check(
+        "Spectron connector endpoint paths unchanged",
+        spectron_connector_endpoints["comparison"]["paths_unchanged"],
+        True,
+    )
+    check(
+        "Spectron connector endpoint host fragment",
+        spectron_connector_endpoints["spectron"]["fragments"]["first_host"]["decoded"],
+        "cong",
+    )
+    check(
+        "Spectron connector endpoint retry fragment",
+        spectron_connector_endpoints["spectron"]["fragments"]["retry_host"]["decoded"],
+        "cong2",
     )
 
     check(
@@ -5568,6 +5639,7 @@ def main():
         arm64_builder,
         elf_symbol_audit,
         spectron_symbol_audit,
+        spectron_connector_endpoints,
         tls_parser,
         tls_expiry,
         spectron_signature,
