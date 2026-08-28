@@ -305,6 +305,12 @@ def main():
     spectron_checkpoint_v241 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v241.json"
     )
+    spectron_world_object_property_anchors = load_json(
+        "artifacts/spectron_world_object_property_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v242 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v242.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -7759,6 +7765,105 @@ def main():
         3,
     )
     check(
+        "Spectron v242 world-object property artifact",
+        spectron_world_object_property_anchors["artifact"],
+        "spectron_world_object_property_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v242 world-object property network",
+        spectron_world_object_property_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v242 world-object property anchor count",
+        spectron_world_object_property_anchors["summary"]["anchor_count"],
+        22,
+    )
+    check(
+        "Spectron v242 world-object property high confidence",
+        spectron_world_object_property_anchors["summary"]["high_confidence_count"],
+        22,
+    )
+    check(
+        "Spectron v242 world-object property target default count",
+        spectron_world_object_property_anchors["summary"]["target_default_name_count"],
+        22,
+    )
+    check(
+        "Spectron v242 world-object property normalized shape count",
+        spectron_world_object_property_anchors["summary"]["normalized_shape_exact_count"],
+        22,
+    )
+    check(
+        "Spectron v242 world-object property full metric count",
+        spectron_world_object_property_anchors["summary"]["full_metric_exact_count"],
+        8,
+    )
+    check(
+        "Spectron v242 world-object property layout count",
+        spectron_world_object_property_anchors["summary"]["layout_change_count"],
+        0,
+    )
+    check(
+        "Spectron v242 world-object property register-detail count",
+        spectron_world_object_property_anchors["summary"]["register_detail_difference_count"],
+        14,
+    )
+    check(
+        "Spectron v242 world-object property getter count",
+        spectron_world_object_property_anchors["summary"]["getter_count"],
+        19,
+    )
+    check(
+        "Spectron v242 world-object property setter count",
+        spectron_world_object_property_anchors["summary"]["setter_count"],
+        3,
+    )
+    world_object_rows = {
+        row["original_name"]: row
+        for row in spectron_world_object_property_anchors["anchors"]
+    }
+    check(
+        "Spectron v242 projectile X target",
+        world_object_rows["TProjectile_getX"]["spectron_ea"],
+        "0x1a3860",
+    )
+    check(
+        "Spectron v242 level-link Y target",
+        world_object_rows["TServerLevelLink_getY"]["spectron_ea"],
+        "0x1a4578",
+    )
+    check(
+        "Spectron v242 checkpoint artifact",
+        spectron_checkpoint_v242["artifact"],
+        "spectron_translation_checkpoint_20260828_v242",
+    )
+    check(
+        "Spectron v242 checkpoint parent",
+        spectron_checkpoint_v242["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v241",
+    )
+    check(
+        "Spectron v242 checkpoint database hash",
+        spectron_checkpoint_v242["database"]["sha256"],
+        "6d8eb4e0dcacddce087564e3f14a7b355472cebac32f6854c007e98c740f5f44",
+    )
+    check(
+        "Spectron v242 checkpoint function count",
+        spectron_checkpoint_v242["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v242 checkpoint default sub count",
+        spectron_checkpoint_v242["database"]["default_sub_function_count"],
+        923,
+    )
+    check(
+        "Spectron v242 checkpoint anchor count",
+        spectron_checkpoint_v242["world_object_property_anchors"]["verified_name_count"],
+        22,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -7876,6 +7981,7 @@ def main():
         spectron_options_property_anchors,
         spectron_particle_emitter_property_anchors,
         spectron_particle_emitter_script_anchors,
+        spectron_world_object_property_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,
