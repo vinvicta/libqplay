@@ -359,6 +359,12 @@ def main():
     spectron_checkpoint_v250 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v250.json"
     )
+    spectron_tplayer_findweapon_anchors = load_json(
+        "artifacts/spectron_tplayer_findweapon_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v251 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v251.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -8749,6 +8755,115 @@ def main():
         10,
     )
     check(
+        "Spectron v251 TPlayer findweapon artifact",
+        spectron_tplayer_findweapon_anchors["artifact"],
+        "spectron_tplayer_findweapon_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v251 TPlayer findweapon network",
+        spectron_tplayer_findweapon_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v251 TPlayer findweapon anchor count",
+        spectron_tplayer_findweapon_anchors["summary"]["anchor_count"],
+        2,
+    )
+    check(
+        "Spectron v251 TPlayer findweapon registration row count",
+        spectron_tplayer_findweapon_anchors["summary"]["registration_row_count"],
+        2,
+    )
+    check(
+        "Spectron v251 TPlayer findweapon unique target count",
+        spectron_tplayer_findweapon_anchors["summary"]["unique_target_count"],
+        2,
+    )
+    check(
+        "Spectron v251 TPlayer findweapon high confidence",
+        spectron_tplayer_findweapon_anchors["summary"]["high_confidence_count"],
+        2,
+    )
+    check(
+        "Spectron v251 TPlayer findweapon target default count",
+        spectron_tplayer_findweapon_anchors["summary"]["target_default_name_count"],
+        2,
+    )
+    check(
+        "Spectron v251 TPlayer findweapon normalized shape count",
+        spectron_tplayer_findweapon_anchors["summary"]["normalized_shape_exact_count"],
+        0,
+    )
+    check(
+        "Spectron v251 TPlayer findweapon full metric count",
+        spectron_tplayer_findweapon_anchors["summary"]["full_metric_exact_count"],
+        0,
+    )
+    check(
+        "Spectron v251 TPlayer findweapon layout count",
+        spectron_tplayer_findweapon_anchors["summary"]["layout_change_count"],
+        2,
+    )
+    check(
+        "Spectron v251 TPlayer findweapon register-detail count",
+        spectron_tplayer_findweapon_anchors["summary"]["register_detail_difference_count"],
+        2,
+    )
+    check(
+        "Spectron v251 TPlayer findweapon callback count",
+        spectron_tplayer_findweapon_anchors["summary"]["callback_count"],
+        2,
+    )
+    findweapon_rows = spectron_tplayer_findweapon_anchors["anchors"]
+    check(
+        "Spectron v251 property findweapon target",
+        next(
+            row["spectron_ea"]
+            for row in findweapon_rows
+            if row["original_name"] == "TPlayerProperties_script_findweapon"
+        ),
+        "0x1705f0",
+    )
+    check(
+        "Spectron v251 static findweapon target",
+        next(
+            row["spectron_ea"]
+            for row in findweapon_rows
+            if row["original_name"] == "TPlayer_script_findweapon"
+        ),
+        "0x171728",
+    )
+    check(
+        "Spectron v251 checkpoint artifact",
+        spectron_checkpoint_v251["artifact"],
+        "spectron_translation_checkpoint_20260828_v251",
+    )
+    check(
+        "Spectron v251 checkpoint parent",
+        spectron_checkpoint_v251["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v250",
+    )
+    check(
+        "Spectron v251 checkpoint database hash",
+        spectron_checkpoint_v251["database"]["sha256"],
+        "7ab7b98f01f2a4e5241187e1f5864006a7b8b21f6fa163e61fc3c76081a65e9c",
+    )
+    check(
+        "Spectron v251 checkpoint function count",
+        spectron_checkpoint_v251["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v251 checkpoint default sub count",
+        spectron_checkpoint_v251["database"]["default_sub_function_count"],
+        814,
+    )
+    check(
+        "Spectron v251 checkpoint anchor count",
+        spectron_checkpoint_v251["tplayer_findweapon_anchors"]["verified_name_count"],
+        2,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -8875,6 +8990,7 @@ def main():
         spectron_player_property_anchors,
         spectron_gani_property_residual_anchors,
         spectron_drawing_panel_property_residual_anchors,
+        spectron_tplayer_findweapon_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

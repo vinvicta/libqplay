@@ -721,6 +721,20 @@ This is the short handoff view. The full reasoning and command history are in
      `tools/generate_spectron_drawing_panel_property_residual_anchors.py`, and
      `artifacts/spectron_translation_checkpoint_20260828_v250.json`.
 
+63u. The v251 IDA checkpoint translates both `findweapon` callbacks. The
+     property callback maps to `0x1705f0`, and the active-player static callback
+     maps to `0x171728`. Both target bodies search the weapon list and compare
+     names, but they retain distinct calling contexts. Their rebuilt target
+     string and player-layout helpers produce larger bodies, so the aliases
+     are semantic matches with metric differences recorded explicitly. The
+     clean reopen has 11,696 functions and 814 remaining default `sub_` names.
+     The database SHA-256 is
+     `7ab7b98f01f2a4e5241187e1f5864006a7b8b21f6fa163e61fc3c76081a65e9c`.
+     See
+     `artifacts/spectron_tplayer_findweapon_manual_translation_anchors_20260828.json`,
+     `tools/generate_spectron_tplayer_findweapon_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260828_v251.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The
