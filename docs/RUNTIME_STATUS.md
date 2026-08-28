@@ -1482,6 +1482,19 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_particle_emitter_script_vars_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+263. The next IDA pass resolved the two Java sound deleting-destructor
+    wrappers. Source `TSoundEffectJava_TSoundEffectJava__2` at `0xe2c14` maps
+    to `QPh5pbnC3yD0Ev` at `0xe3804`; source
+    `TSoundPlayerJava_TSoundPlayerJava__2` at `0xe360c` maps to
+    `ohGYZakbFKD0Ev` at `0xe4190`. The constructor-shaped source names are
+    deleting destructors because both bodies call the complete destructor and
+    then `operator delete`. Both aliases reopened successfully in the v204
+    copy, which has 11,694 functions, 3,641 high-confidence labels, and 1,218
+    default `sub_` names, with zero semantic reopen failures. See
+    `artifacts/spectron_sound_java_destructor_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_sound_java_destructor_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 262. The next IDA pass resolved seven small Java sound bridge methods. The
     two `TSoundPlayerJava` rows map to target class `ohGYZakbFK`, and the five
     `TSoundEffectJava` rows map to target class `QPh5pbnC3y`. Their source and

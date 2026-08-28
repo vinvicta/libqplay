@@ -215,6 +215,8 @@ def main() -> None:
     parser.add_argument("--tsound-effect-methods-verification", type=Path)
     parser.add_argument("--sound-java-small-methods-anchors", type=Path)
     parser.add_argument("--sound-java-small-methods-verification", type=Path)
+    parser.add_argument("--sound-java-destructor-anchors", type=Path)
+    parser.add_argument("--sound-java-destructor-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
     parser.add_argument("--server-animation-verification", type=Path)
     parser.add_argument("--player-lifecycle-anchors", type=Path)
@@ -3182,6 +3184,52 @@ def main() -> None:
         result["sound_java_small_methods_anchors"] = sound_java_small_methods
         result["interpretation"].append(
             "The two-hundred-third database revision also contains the separately reviewed TSoundPlayerJava and TSoundEffectJava small-method anchors."
+        )
+    sound_java_destructors = None
+    if args.sound_java_destructor_anchors or args.sound_java_destructor_verification:
+        if not args.sound_java_destructor_anchors or not args.sound_java_destructor_verification:
+            raise ValueError(
+                "sound Java destructor anchors and verification must be supplied together"
+            )
+        sound_java_destructors_document = load(args.sound_java_destructor_anchors)
+        sound_java_destructors_verification = load(
+            args.sound_java_destructor_verification
+        )
+        if (
+            sound_java_destructors_document.get("artifact")
+            != "spectron_sound_java_destructor_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected sound Java destructor anchor artifact")
+        if not sound_java_destructors_verification.get("verified"):
+            raise ValueError(
+                "sound Java destructor anchor reopen verification did not pass"
+            )
+        expected_sound_java_destructors = len(
+            sound_java_destructors_document["anchors"]
+        )
+        if (
+            sound_java_destructors_verification["verified_name_count"]
+            != expected_sound_java_destructors
+        ):
+            raise ValueError(
+                "sound Java destructor verification count differs from artifact"
+            )
+        sound_java_destructors = {
+            "anchor_path": str(args.sound_java_destructor_anchors),
+            "anchor_sha256": sha256_path(args.sound_java_destructor_anchors),
+            "reopen_verification": str(args.sound_java_destructor_verification),
+            "anchor_count": expected_sound_java_destructors,
+            "verified_name_count": sound_java_destructors_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": sound_java_destructors_verification[
+                "failure_count"
+            ],
+        }
+    if sound_java_destructors is not None:
+        result["sound_java_destructor_anchors"] = sound_java_destructors
+        result["interpretation"].append(
+            "The two-hundred-fourth database revision also contains the separately reviewed Java sound deleting-destructor anchors."
         )
     server_animation = None
     if args.server_animation_anchors or args.server_animation_verification:
