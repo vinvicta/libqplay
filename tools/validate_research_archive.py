@@ -425,6 +425,12 @@ def main():
     spectron_checkpoint_v261 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v261.json"
     )
+    spectron_residual_property_anchors = load_json(
+        "artifacts/spectron_residual_property_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v262 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v262.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -10136,6 +10142,129 @@ def main():
         1,
     )
     check(
+        "Spectron v262 residual property artifact",
+        spectron_residual_property_anchors["artifact"],
+        "spectron_residual_property_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v262 residual property network",
+        spectron_residual_property_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v262 residual property anchor count",
+        spectron_residual_property_anchors["summary"]["anchor_count"],
+        6,
+    )
+    check(
+        "Spectron v262 residual property registration row count",
+        spectron_residual_property_anchors["summary"]["registration_row_count"],
+        6,
+    )
+    check(
+        "Spectron v262 residual property unique target count",
+        spectron_residual_property_anchors["summary"]["unique_target_count"],
+        6,
+    )
+    check(
+        "Spectron v262 residual property high confidence",
+        spectron_residual_property_anchors["summary"]["high_confidence_count"],
+        6,
+    )
+    check(
+        "Spectron v262 residual property target default count",
+        spectron_residual_property_anchors["summary"]["target_default_name_count"],
+        6,
+    )
+    check(
+        "Spectron v262 residual property normalized shape count",
+        spectron_residual_property_anchors["summary"]["normalized_shape_exact_count"],
+        6,
+    )
+    check(
+        "Spectron v262 residual property full metric count",
+        spectron_residual_property_anchors["summary"]["full_metric_exact_count"],
+        2,
+    )
+    check(
+        "Spectron v262 residual property layout count",
+        spectron_residual_property_anchors["summary"]["layout_change_count"],
+        0,
+    )
+    check(
+        "Spectron v262 residual property register-detail count",
+        spectron_residual_property_anchors["summary"]["register_detail_difference_count"],
+        4,
+    )
+    check(
+        "Spectron v262 residual property getter count",
+        spectron_residual_property_anchors["summary"]["getter_count"],
+        3,
+    )
+    check(
+        "Spectron v262 residual property setter count",
+        spectron_residual_property_anchors["summary"]["setter_count"],
+        3,
+    )
+    residual_property_rows = spectron_residual_property_anchors["anchors"]
+    check(
+        "Spectron v262 stylesection getter target",
+        next(
+            row["spectron_ea"]
+            for row in residual_property_rows
+            if row["original_name"] == "GuiButtonCtrl_get_stylesection"
+        ),
+        "0x1b21a8",
+    )
+    check(
+        "Spectron v262 script-log getter target",
+        next(
+            row["spectron_ea"]
+            for row in residual_property_rows
+            if row["original_name"] == "TScriptProperty_get_scriptlogwritetoreadonly"
+        ),
+        "0x22cba0",
+    )
+    check(
+        "Spectron v262 waterheight setter target",
+        next(
+            row["spectron_ea"]
+            for row in residual_property_rows
+            if row["original_name"] == "TTiles_set_waterheight"
+        ),
+        "0x238ec0",
+    )
+    check(
+        "Spectron v262 checkpoint artifact",
+        spectron_checkpoint_v262["artifact"],
+        "spectron_translation_checkpoint_20260828_v262",
+    )
+    check(
+        "Spectron v262 checkpoint parent",
+        spectron_checkpoint_v262["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v261",
+    )
+    check(
+        "Spectron v262 checkpoint database hash",
+        spectron_checkpoint_v262["database"]["sha256"],
+        "6ec4091d8781101661216a2b99f6414cc3f5a07c556185eb40de2e203351d67e",
+    )
+    check(
+        "Spectron v262 checkpoint function count",
+        spectron_checkpoint_v262["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v262 checkpoint default sub count",
+        spectron_checkpoint_v262["database"]["default_sub_function_count"],
+        737,
+    )
+    check(
+        "Spectron v262 checkpoint anchor count",
+        spectron_checkpoint_v262["residual_property_anchors"]["verified_name_count"],
+        6,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -10273,6 +10402,7 @@ def main():
         spectron_guitexteditctrl_property_anchors,
         spectron_tgraalvar_property_residual_anchors,
         spectron_tbodypanel_bodycacheperplayer_anchor,
+        spectron_residual_property_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

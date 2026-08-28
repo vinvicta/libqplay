@@ -856,6 +856,18 @@ This is the short handoff view. The full reasoning and command history are in
       `tools/generate_spectron_tbodypanel_bodycacheperplayer_anchor.py`, and
       `artifacts/spectron_translation_checkpoint_20260828_v261.json`.
 
+63af. The v262 IDA checkpoint translates six callbacks from three short
+      residual property runs: button style section, script-log write-to-read-only,
+      and tile water height. All six rows match normalized ARM64 shape. The
+      style-section pair matches the full metric set, while the other four rows
+      retain only register-detail differences. The clean reopen has 11,696
+      functions and 737 remaining default `sub_` names. The database SHA-256 is
+      `6ec4091d8781101661216a2b99f6414cc3f5a07c556185eb40de2e203351d67e`.
+      See
+      `artifacts/spectron_residual_property_manual_translation_anchors_20260828.json`,
+      `tools/generate_spectron_residual_property_anchors.py`, and
+      `artifacts/spectron_translation_checkpoint_20260828_v262.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The
