@@ -219,6 +219,8 @@ def main() -> None:
     parser.add_argument("--sound-java-small-methods-verification", type=Path)
     parser.add_argument("--sound-java-destructor-anchors", type=Path)
     parser.add_argument("--sound-java-destructor-verification", type=Path)
+    parser.add_argument("--sound-java-d1-anchors", type=Path)
+    parser.add_argument("--sound-java-d1-verification", type=Path)
     parser.add_argument("--sound-base-interface-anchors", type=Path)
     parser.add_argument("--sound-base-interface-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
@@ -3270,6 +3272,42 @@ def main() -> None:
         result["sound_java_destructor_anchors"] = sound_java_destructors
         result["interpretation"].append(
             "The two-hundred-fourth database revision also contains the separately reviewed Java sound deleting-destructor anchors."
+        )
+    sound_java_d1 = None
+    if args.sound_java_d1_anchors or args.sound_java_d1_verification:
+        if not args.sound_java_d1_anchors or not args.sound_java_d1_verification:
+            raise ValueError(
+                "sound Java D1 anchors and verification must be supplied together"
+            )
+        sound_java_d1_document = load(args.sound_java_d1_anchors)
+        sound_java_d1_verification = load(args.sound_java_d1_verification)
+        if (
+            sound_java_d1_document.get("artifact")
+            != "spectron_sound_java_d1_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected sound Java D1 anchor artifact")
+        if not sound_java_d1_verification.get("verified"):
+            raise ValueError("sound Java D1 anchor reopen verification did not pass")
+        expected_sound_java_d1 = len(sound_java_d1_document["anchors"])
+        if (
+            sound_java_d1_verification["verified_name_count"]
+            != expected_sound_java_d1
+        ):
+            raise ValueError("sound Java D1 verification count differs from artifact")
+        sound_java_d1 = {
+            "anchor_path": str(args.sound_java_d1_anchors),
+            "anchor_sha256": sha256_path(args.sound_java_d1_anchors),
+            "reopen_verification": str(args.sound_java_d1_verification),
+            "anchor_count": expected_sound_java_d1,
+            "verified_name_count": sound_java_d1_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": sound_java_d1_verification["failure_count"],
+        }
+    if sound_java_d1 is not None:
+        result["sound_java_d1_anchors"] = sound_java_d1
+        result["interpretation"].append(
+            "The two-hundred-seventh database revision also contains the separately reviewed TSoundPlayerJava complete D1 destructor anchor."
         )
     sound_base_interface = None
     if args.sound_base_interface_anchors or args.sound_base_interface_verification:

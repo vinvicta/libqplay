@@ -353,6 +353,9 @@ def main():
     spectron_sound_java_destructor_anchors = load_json(
         "artifacts/spectron_sound_java_destructor_manual_translation_anchors_20260827.json"
     )
+    spectron_sound_java_d1_anchors = load_json(
+        "artifacts/spectron_sound_java_d1_manual_translation_anchors_20260827.json"
+    )
     spectron_sound_base_interface_anchors = load_json(
         "artifacts/spectron_sound_base_interface_manual_translation_anchors_20260827.json"
     )
@@ -3682,6 +3685,55 @@ def main():
             target_ea,
         )
     check(
+        "Spectron Java sound D1 artifact",
+        spectron_sound_java_d1_anchors["artifact"],
+        "spectron_sound_java_d1_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron Java sound D1 network",
+        spectron_sound_java_d1_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron Java sound D1 total",
+        spectron_sound_java_d1_anchors["summary"]["anchor_count"],
+        1,
+    )
+    check(
+        "Spectron Java sound D1 high confidence",
+        spectron_sound_java_d1_anchors["summary"]["high_confidence_count"],
+        1,
+    )
+    check(
+        "Spectron Java sound D1 semantic overlap",
+        spectron_sound_java_d1_anchors["summary"]["already_in_semantic_map"],
+        0,
+    )
+    check(
+        "Spectron Java sound D1 exact-shape count",
+        spectron_sound_java_d1_anchors["summary"]["exact_shape_anchor_count"],
+        1,
+    )
+    check(
+        "Spectron Java sound D1 full-feature count",
+        spectron_sound_java_d1_anchors["summary"]["full_metric_exact_count"],
+        0,
+    )
+    check(
+        "Spectron Java sound D1 register-detail difference count",
+        spectron_sound_java_d1_anchors["summary"]["register_detail_difference_count"],
+        1,
+    )
+    sound_java_d1_targets = {
+        row["original_name"]: row
+        for row in spectron_sound_java_d1_anchors["anchors"]
+    }
+    check(
+        "Spectron Java sound D1 target",
+        sound_java_d1_targets["TSoundPlayerJava_TSoundPlayerJava"]["spectron_ea"],
+        "0xe417c",
+    )
+    check(
         "Spectron sound base-interface artifact",
         spectron_sound_base_interface_anchors["artifact"],
         "spectron_sound_base_interface_manual_translation_anchors_20260827",
@@ -5087,8 +5139,9 @@ def main():
     check("Spectron checkpoint TSoundEffect methods anchor count", spectron_checkpoint["tsound_effect_methods_anchors"]["verified_name_count"], 7)
     check("Spectron checkpoint sound Java small-method anchor count", spectron_checkpoint["sound_java_small_methods_anchors"]["verified_name_count"], 7)
     check("Spectron checkpoint sound Java destructor anchor count", spectron_checkpoint["sound_java_destructor_anchors"]["verified_name_count"], 2)
+    check("Spectron checkpoint sound Java D1 anchor count", spectron_checkpoint["sound_java_d1_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint sound base-interface anchor count", spectron_checkpoint["sound_base_interface_anchors"]["verified_name_count"], 18)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "f909721bba6d7d22b56727328f18382f71d57ce3d539686d450e6d910fa5aabd")
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "dff2f079771c58100c2dd745f48dbecdde881f461598021b890b67e2fa0665f9")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -5294,6 +5347,7 @@ def main():
         spectron_gif_decoder_anchors,
         spectron_window_residual_anchors,
         spectron_sound_runtime_anchors,
+        spectron_sound_java_d1_anchors,
         spectron_pixelbuffer_residual_anchors,
         spectron_pixelbuffer_bitmap_lifecycle_anchors,
         spectron_animation_palette_residual_anchors,

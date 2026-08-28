@@ -1482,6 +1482,18 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_particle_emitter_script_vars_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+266. The next IDA pass resolved the complete `TSoundPlayerJava` D1 destructor.
+    Source `0xe35c8` maps to target `ohGYZakbFKD1Ev` at `0xe417c`, directly
+    before the D0 destructor already translated at `0xe4190`. Both bodies
+    install their class vtable and clear the embedded string without deleting
+    the object. The normalized shape matches with only register detail
+    differing. The alias reopened successfully in the v207 copy, which has
+    11,694 functions, 3,641 high-confidence labels, and 1,217 default `sub_`
+    names, with zero semantic reopen failures. See
+    `artifacts/spectron_sound_java_d1_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_sound_java_d1_anchor.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 265. The next IDA pass resolved three remaining `TSounds` tail methods.
     `TSounds_stopSFX_TString_const` at `0xe0ea4` maps to target `0xe1a78`,
     `TSounds_script_setSoundPitch` at `0xe2a7c` maps to target `0xe366c`, and
