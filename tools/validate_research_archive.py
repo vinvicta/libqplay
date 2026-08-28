@@ -149,6 +149,9 @@ def main():
     spectron_mrandom_anchors = load_json(
         "artifacts/spectron_mrandom_family_manual_translation_anchors_20260827.json"
     )
+    spectron_tstringlist_residual_anchors = load_json(
+        "artifacts/spectron_tstringlist_residual_manual_translation_anchors_20260827.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -2216,6 +2219,60 @@ def main():
         "Spectron MRandom LCG class target",
         spectron_mrandom_anchors["context"]["target_classes"][1],
         "Vx2_xajLEd",
+    )
+    check(
+        "Spectron residual TStringList artifact",
+        spectron_tstringlist_residual_anchors["artifact"],
+        "spectron_tstringlist_residual_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron residual TStringList network",
+        spectron_tstringlist_residual_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron residual TStringList total",
+        spectron_tstringlist_residual_anchors["summary"]["anchor_count"],
+        4,
+    )
+    check(
+        "Spectron residual TStringList high confidence",
+        spectron_tstringlist_residual_anchors["summary"]["high_confidence_count"],
+        4,
+    )
+    check(
+        "Spectron residual TStringList exact-shape count",
+        spectron_tstringlist_residual_anchors["summary"]["exact_shape_anchor_count"],
+        3,
+    )
+    check(
+        "Spectron residual TStringList full-metric exact count",
+        spectron_tstringlist_residual_anchors["summary"]["full_metric_exact_count"],
+        3,
+    )
+    check(
+        "Spectron residual TStringList layout-change count",
+        spectron_tstringlist_residual_anchors["summary"]["layout_change_anchor_count"],
+        1,
+    )
+    check(
+        "Spectron residual TStringList default targets",
+        spectron_tstringlist_residual_anchors["summary"]["target_default_name_count"],
+        0,
+    )
+    check(
+        "Spectron residual TStringList target class",
+        spectron_tstringlist_residual_anchors["context"]["target_class"],
+        "vuuHgangcF",
+    )
+    residual_tstringlist_by_name = {
+        row["original_name"]: row
+        for row in spectron_tstringlist_residual_anchors["anchors"]
+    }
+    check(
+        "Spectron residual TStringList case-insensitive target",
+        residual_tstringlist_by_name["TStringList_indexOfIgnoreCase_TString_const"]["spectron_ea"],
+        "0xf6f9c",
     )
     check(
         "Spectron TString artifact",
@@ -5272,7 +5329,8 @@ def main():
     check("Spectron checkpoint compact-residual anchor count", spectron_checkpoint["compact_residual_anchors"]["verified_name_count"], 13)
     check("Spectron checkpoint T2DMatrixManager anchor count", spectron_checkpoint["t2d_matrix_manager_anchors"]["verified_name_count"], 4)
     check("Spectron checkpoint MRandom anchor count", spectron_checkpoint["mrandom_anchors"]["verified_name_count"], 29)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "76c43334d5e5afae29a5dc51067056ebe0118bbae6366fd64908c62d317b9186")
+    check("Spectron checkpoint residual TStringList anchor count", spectron_checkpoint["tstringlist_residual_anchors"]["verified_name_count"], 4)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "ab792c07ded18a61682da7a191aefd1fc9d7714f480e70685ca2386ff42089f1")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -5364,6 +5422,7 @@ def main():
         spectron_compact_residual_anchors,
         spectron_t2d_matrix_manager_anchors,
         spectron_mrandom_anchors,
+        spectron_tstringlist_residual_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

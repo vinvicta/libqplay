@@ -85,6 +85,8 @@ def main() -> None:
     parser.add_argument("--t2d-matrix-manager-verification", type=Path)
     parser.add_argument("--mrandom-anchors", type=Path)
     parser.add_argument("--mrandom-verification", type=Path)
+    parser.add_argument("--tstringlist-residual-anchors", type=Path)
+    parser.add_argument("--tstringlist-residual-verification", type=Path)
     parser.add_argument("--player-helper-anchors", type=Path)
     parser.add_argument("--player-helper-verification", type=Path)
     parser.add_argument("--input-window-anchors", type=Path)
@@ -810,6 +812,44 @@ def main() -> None:
         result["mrandom_anchors"] = mrandom
         result["interpretation"].append(
             "The two-hundred-fifteenth database revision also contains the separately reviewed MRandomGenerator, MRandomLCG, and MRandomR250 class-block anchors."
+        )
+    tstringlist_residual = None
+    if args.tstringlist_residual_anchors or args.tstringlist_residual_verification:
+        if not args.tstringlist_residual_anchors or not args.tstringlist_residual_verification:
+            raise ValueError(
+                "residual TStringList anchors and residual TStringList verification must be supplied together"
+            )
+        tstringlist_residual_document = load(args.tstringlist_residual_anchors)
+        tstringlist_residual_verification = load(args.tstringlist_residual_verification)
+        if (
+            tstringlist_residual_document.get("artifact")
+            != "spectron_tstringlist_residual_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected residual TStringList anchor artifact")
+        if not tstringlist_residual_verification.get("verified"):
+            raise ValueError("residual TStringList anchor reopen verification did not pass")
+        expected_tstringlist_residual = len(tstringlist_residual_document["anchors"])
+        if (
+            tstringlist_residual_verification["verified_name_count"]
+            != expected_tstringlist_residual
+        ):
+            raise ValueError("residual TStringList verification count differs from artifact")
+        tstringlist_residual = {
+            "anchor_path": str(args.tstringlist_residual_anchors),
+            "anchor_sha256": sha256_path(args.tstringlist_residual_anchors),
+            "reopen_verification": str(args.tstringlist_residual_verification),
+            "anchor_count": expected_tstringlist_residual,
+            "verified_name_count": tstringlist_residual_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": tstringlist_residual_verification[
+                "failure_count"
+            ],
+        }
+    if tstringlist_residual is not None:
+        result["tstringlist_residual_anchors"] = tstringlist_residual
+        result["interpretation"].append(
+            "The two-hundred-sixteenth database revision also contains the separately reviewed residual TStringList destructor, removal, case-insensitive lookup, and indexed-access anchors."
         )
     runtime_path = None
     if args.runtime_path_anchors or args.runtime_path_verification:

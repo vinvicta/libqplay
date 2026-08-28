@@ -1584,6 +1584,19 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_mrandom_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+275. The next IDA pass resolved the four remaining reviewed `TStringList`
+    methods: the deleting destructor wrapper, repeated-value removal,
+    case-insensitive lookup, and indexed string access. The target block is
+    the obfuscated `vuuHgangcF` class and its rebuilt `CanTfaz6bZ` and
+    `C8THgaTQxF` string wrappers. Three rows match every recorded feature
+    metric. The case-insensitive lookup is a reviewed layout-change row
+    because Spectron adds temporary wrapper conversion and cleanup. The
+    aliases reopened successfully in the v216 copy, with zero semantic
+    reopen failures. See
+    `artifacts/spectron_tstringlist_residual_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_tstringlist_residual_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 267. The next IDA pass resolved eight small `THTMLPage` methods. They cover
     font-pointer cleanup, dirty and word-wrap state, parse tags, selection,
     URL and line initialization, and tab-stop replacement. The Spectron
