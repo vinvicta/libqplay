@@ -548,6 +548,12 @@ def main():
     spectron_checkpoint_v280 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v280.json"
     )
+    spectron_jmemmgr_anchors = load_json(
+        "artifacts/spectron_jpeg_memory_manager_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v281 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v281.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -12116,6 +12122,98 @@ def main():
         5,
     )
     check(
+        "Spectron libjpeg jmemmgr artifact",
+        spectron_jmemmgr_anchors["artifact"],
+        "spectron_jpeg_memory_manager_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron libjpeg jmemmgr network",
+        spectron_jmemmgr_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron libjpeg jmemmgr anchor count",
+        spectron_jmemmgr_anchors["summary"]["anchor_count"],
+        11,
+    )
+    check(
+        "Spectron libjpeg jmemmgr unique target count",
+        spectron_jmemmgr_anchors["summary"]["unique_target_count"],
+        11,
+    )
+    check(
+        "Spectron libjpeg jmemmgr high-confidence count",
+        spectron_jmemmgr_anchors["summary"]["high_confidence_count"],
+        11,
+    )
+    check(
+        "Spectron libjpeg jmemmgr normalized count",
+        spectron_jmemmgr_anchors["summary"]["normalized_shape_exact_count"],
+        9,
+    )
+    check(
+        "Spectron libjpeg jmemmgr exact count",
+        spectron_jmemmgr_anchors["summary"]["full_metric_exact_count"],
+        6,
+    )
+    check(
+        "Spectron libjpeg jmemmgr layout difference count",
+        spectron_jmemmgr_anchors["summary"]["layout_difference_count"],
+        2,
+    )
+    jmemmgr_rows = {
+        row["spectron_ea"]: row for row in spectron_jmemmgr_anchors["anchors"]
+    }
+    jmemmgr_expected = {
+        "0x2a0168": "v18_jpeg_alloc_small",
+        "0x2a0368": "v18_jpeg_alloc_large",
+        "0x2a04c8": "v18_jpeg_alloc_sarray",
+        "0x2a05d8": "v18_jpeg_alloc_barray",
+        "0x2a0970": "v18_jpeg_realize_virt_arrays",
+        "0x2a0d20": "v18_jpeg_request_virt_sarray",
+        "0x2a0f3c": "v18_jpeg_request_virt_barray",
+        "0x2a1158": "v18_jpeg_access_virt_barray",
+        "0x2a12c0": "v18_jpeg_access_virt_sarray",
+        "0x2a1640": "v18_jpeg_free_pool",
+        "0x2a19a4": "v18_jpeg_self_destruct",
+    }
+    for target_ea, expected_name in jmemmgr_expected.items():
+        check(
+            "Spectron libjpeg jmemmgr target " + target_ea,
+            jmemmgr_rows[target_ea]["proposed_name"],
+            expected_name,
+        )
+    check(
+        "Spectron v281 checkpoint artifact",
+        spectron_checkpoint_v281["artifact"],
+        "spectron_translation_checkpoint_20260828_v281",
+    )
+    check(
+        "Spectron v281 checkpoint parent",
+        spectron_checkpoint_v281["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v280",
+    )
+    check(
+        "Spectron v281 checkpoint database hash",
+        spectron_checkpoint_v281["database"]["sha256"],
+        "6b59348c18a8346c3d915a2d536616dfa5aba43ed4605a7bcf0e09f252f8db13",
+    )
+    check(
+        "Spectron v281 checkpoint function count",
+        spectron_checkpoint_v281["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v281 checkpoint default sub count",
+        spectron_checkpoint_v281["database"]["default_sub_function_count"],
+        609,
+    )
+    check(
+        "Spectron v281 checkpoint jmemmgr count",
+        spectron_checkpoint_v281["jmemmgr_anchors"]["verified_name_count"],
+        11,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -12442,6 +12540,8 @@ def main():
         spectron_checkpoint_v279,
         spectron_jerror_anchors,
         spectron_checkpoint_v280,
+        spectron_jmemmgr_anchors,
+        spectron_checkpoint_v281,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

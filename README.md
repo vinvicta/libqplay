@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v280 Spectron database. It
-contains 11,696 functions and 620 remaining default `sub_` names. The v263
+The current documented translation frontier is the v281 Spectron database. It
+contains 11,696 functions and 609 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -75,6 +75,12 @@ The v280 revision adds five high-confidence libjpeg error-handler labels.
 They cover message emission, error-state reset, message formatting, stderr
 output, and fatal exit handling. Four are complete metric matches, and one
 differs only in register allocation detail.
+The v281 revision adds eleven high-confidence libjpeg memory-manager labels.
+They cover small and large allocation, sample and coefficient arrays, virtual
+array realization and access, pool release, and manager teardown. Nine match
+normalized features, six match the complete feature set, and two retain an
+explicit call-layout difference caused by source PLT calls versus target
+exports.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -105,6 +111,8 @@ The current v279 database is kept locally as
 `analysis/spectron_libqplay_translated_v279.i64`.
 The current v280 database is kept locally as
 `analysis/spectron_libqplay_translated_v280.i64`.
+The current v281 database is kept locally as
+`analysis/spectron_libqplay_translated_v281.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -267,6 +275,14 @@ It labels the five callbacks installed by the target
 `artifacts/spectron_translation_checkpoint_20260828_v280.json`; it records
 the reopened database with 620 remaining default names.
 
+The v281 libjpeg memory-manager evidence is in
+`artifacts/spectron_jpeg_memory_manager_manual_translation_anchors_20260828.json`.
+It labels the eleven methods assigned by the target
+`v18_jinit_memory_mgr_jpeg_common_struct` initializer at `0x2a21b8`.
+The checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v281.json`; it records
+the reopened database with 609 remaining default names.
+
 The latest checkpoints are
 `artifacts/spectron_translation_checkpoint_20260828_v263_corrected.json` and
 `artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json`,
@@ -287,16 +303,11 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v277.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v278.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v279.json`, and
-`artifacts/spectron_translation_checkpoint_20260828_v280.json`. All four
-newly reviewed legacy names, the six corrected target-only names, the
-package-signature label, the v269 TGraalVar labels, the v270 script-table
-labels, the nine v271 runtime callback labels, the two v271 property labels,
-the v272 zlib role label, the six v273 libjpeg callback labels, the four
-v274 libjpeg controller labels, the nine v275 libjpeg marker-reader labels,
-the seven v276 libjpeg output-pipeline labels, the five v277 libjpeg
-progressive-Huffman labels, the four v278 libjpeg postprocessing labels, and
-the nine v279 libjpeg upsampler labels, and the five v280 libjpeg
-error-handler labels were reopened and verified with zero failures.
+`artifacts/spectron_translation_checkpoint_20260828_v280.json`, and
+`artifacts/spectron_translation_checkpoint_20260828_v281.json`. The reviewed
+legacy, Android, script-table, runtime, property, zlib, and libjpeg labels
+through v281 were reopened and verified with zero failures. That includes
+the eleven v281 memory-manager labels added in the latest pass.
 These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or
 TLS service.
