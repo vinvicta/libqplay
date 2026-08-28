@@ -71,7 +71,7 @@
     "reopen_verification": "/tmp/spectron_array_mutation_verify_v43.json",
     "verified_name_count": 3
   },
-  "artifact": "spectron_translation_checkpoint_20260828_v293",
+  "artifact": "spectron_translation_checkpoint_20260828_v294",
   "bitmap_array_holder_anchors": {
     "anchor_count": 5,
     "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_bitmap_array_holder_manual_translation_anchors_20260826.json",
@@ -250,11 +250,11 @@
   },
   "database": {
     "close_reopen_verified": true,
-    "default_sub_function_count": 550,
+    "default_sub_function_count": 542,
     "format": "packed IDA 9.3 database",
     "function_count": 11696,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v293.i64",
-    "sha256": "98aca07125910b711ab08522d8513d60d75dbf253c627a73f025a7d2a7213590"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v294.i64",
+    "sha256": "3c01779252a8df94532b47f36c0e2b366d339338db950124f900be6036ae8efd"
   },
   "displayed_gif_anchors": {
     "anchor_count": 1,
@@ -1291,7 +1291,8 @@
     "The v292 residual pass reduced the default sub_ count to 556 while preserving all prior verified aliases and runtime labels.",
     "The v293 database adds six high-confidence libjpeg jcmainct and jcmaster role anchors: process_data_simple_main, start_pass_main, initial_setup, pass_startup, finish_pass_master, and prepare_for_pass.",
     "The target compressor main and master initializers preserve the source callback relationships for row processing, deferred headers, entropy pass completion, and per-pass module setup.",
-    "The v293 residual pass reduced the default sub_ count to 550 while preserving all prior verified aliases and runtime labels."
+    "The v293 residual pass reduced the default sub_ count to 550 while preserving all prior verified aliases and runtime labels.",
+    "This database revision also contains the separately reviewed anchor group recorded under jpeg_progressive_huffman_encoder_anchors."
   ],
   "jccoefct_anchors": {
     "anchor_count": 5,
@@ -1444,6 +1445,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_jpeg_main_master_controller_verification_v293_rebuilt.json",
     "verified_name_count": 6
+  },
+  "jpeg_progressive_huffman_encoder_anchors": {
+    "anchor_count": 8,
+    "anchor_path": "artifacts/spectron_jpeg_progressive_huffman_encoder_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "824380a75088900a39afce93ac9e2fa2dd9ee40a0aa1842193efb62f20953b7f",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_v294_anchor_verify.json",
+    "verified_name_count": 8
   },
   "jquant1_anchors": {
     "anchor_count": 8,
@@ -1623,9 +1632,9 @@
     "verified_name_count": 23
   },
   "parent_checkpoint": {
-    "artifact": "spectron_translation_checkpoint_20260828_v292",
-    "path": "artifacts/spectron_translation_checkpoint_20260828_v292.json",
-    "sha256": "ffad728237c5b88e46a2345a0048b6e89ed505dfc4c0e2dbd275fa47df10bb40"
+    "artifact": "spectron_translation_checkpoint_20260828_v293",
+    "path": "artifacts/spectron_translation_checkpoint_20260828_v293.json",
+    "sha256": "438dab3b7b194a029d0b1ebebcbe4bc99dbb65de80aaed650f292bf8e8eab996"
   },
   "parse_wrapper_anchors": {
     "anchor_count": 1,
