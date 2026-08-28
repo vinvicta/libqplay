@@ -517,6 +517,19 @@ This is the short handoff view. The full reasoning and command history are in
      `tools/generate_spectron_tclient_playerhurt_anchor.py`, and
      `artifacts/spectron_translation_checkpoint_20260828_v234.json`.
 
+63e. The v235 IDA checkpoint adds 12 high-confidence aliases from the
+     GSFunctionsClient and GuiControl property tables. The rows cover five
+     carried-object getters, four screen-relative mouse accessors, and three
+     GuiControl callbacks. All 12 match normalized instruction shape, and the
+     three GuiControl rows match the complete recorded metric set. The clean
+     reopen has 11,695 functions and 1,056 remaining default `sub_` names. The
+     database SHA-256 is
+     `b58d447613b039f930e5ecd179a56a0e5ad19958715445f0663272dc830e0719`.
+     See
+     `artifacts/spectron_gsfunctions_property_manual_translation_anchors_20260828.json`,
+     `tools/generate_spectron_gsfunctions_property_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260828_v235.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The

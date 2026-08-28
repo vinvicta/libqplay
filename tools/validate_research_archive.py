@@ -113,6 +113,9 @@ def main():
     spectron_checkpoint_v234 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v234.json"
     )
+    spectron_checkpoint_v235 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v235.json"
+    )
     spectron_manual = load_json(
         "artifacts/spectron_manual_translation_anchors_20260826.json"
     )
@@ -262,6 +265,9 @@ def main():
     )
     spectron_tclient_playerhurt_anchor = load_json(
         "artifacts/spectron_tclient_playerhurt_property_manual_translation_anchor_20260828.json"
+    )
+    spectron_gsfunctions_property_anchors = load_json(
+        "artifacts/spectron_gsfunctions_property_manual_translation_anchors_20260828.json"
     )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
@@ -7024,6 +7030,105 @@ def main():
         1,
     )
     check(
+        "Spectron v235 GSFunctions property artifact",
+        spectron_gsfunctions_property_anchors["artifact"],
+        "spectron_gsfunctions_property_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v235 GSFunctions property network",
+        spectron_gsfunctions_property_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v235 GSFunctions property anchor count",
+        spectron_gsfunctions_property_anchors["summary"]["anchor_count"],
+        12,
+    )
+    check(
+        "Spectron v235 GSFunctions property high confidence",
+        spectron_gsfunctions_property_anchors["summary"]["high_confidence_count"],
+        12,
+    )
+    check(
+        "Spectron v235 GSFunctions property target default count",
+        spectron_gsfunctions_property_anchors["summary"]["target_default_name_count"],
+        12,
+    )
+    check(
+        "Spectron v235 GSFunctions property normalized shape count",
+        spectron_gsfunctions_property_anchors["summary"]["normalized_shape_exact_count"],
+        12,
+    )
+    check(
+        "Spectron v235 GSFunctions property full metric count",
+        spectron_gsfunctions_property_anchors["summary"]["full_metric_exact_count"],
+        3,
+    )
+    check(
+        "Spectron v235 GSFunctions property layout count",
+        spectron_gsfunctions_property_anchors["summary"]["layout_change_count"],
+        0,
+    )
+    check(
+        "Spectron v235 GSFunctions property register-detail count",
+        spectron_gsfunctions_property_anchors["summary"]["register_detail_difference_count"],
+        9,
+    )
+    property_rows = {
+        row["original_name"]: row
+        for row in spectron_gsfunctions_property_anchors["anchors"]
+    }
+    check(
+        "Spectron v235 carries-bush target",
+        property_rows["GSFunctionsClient_get_carriesbush"]["spectron_ea"],
+        "0x159414",
+    )
+    check(
+        "Spectron v235 mouse-y target",
+        property_rows["GSFunctionsClient_get_mousescreeny"]["spectron_ea"],
+        "0x15a000",
+    )
+    check(
+        "Spectron v235 client-height target",
+        property_rows["GuiControl_setClientHeight"]["spectron_ea"],
+        "0x1b6ccc",
+    )
+    check(
+        "Spectron v235 animation target",
+        property_rows["GuiControl_getIsInAnimation"]["spectron_ea"],
+        "0x1b6e44",
+    )
+    check(
+        "Spectron v235 checkpoint artifact",
+        spectron_checkpoint_v235["artifact"],
+        "spectron_translation_checkpoint_20260828_v235",
+    )
+    check(
+        "Spectron v235 checkpoint parent",
+        spectron_checkpoint_v235["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v234",
+    )
+    check(
+        "Spectron v235 checkpoint database hash",
+        spectron_checkpoint_v235["database"]["sha256"],
+        "b58d447613b039f930e5ecd179a56a0e5ad19958715445f0663272dc830e0719",
+    )
+    check(
+        "Spectron v235 checkpoint function count",
+        spectron_checkpoint_v235["database"]["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v235 checkpoint default sub count",
+        spectron_checkpoint_v235["database"]["default_sub_function_count"],
+        1056,
+    )
+    check(
+        "Spectron v235 checkpoint property count",
+        spectron_checkpoint_v235["gsfunctions_property_anchors"]["verified_name_count"],
+        12,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -7134,6 +7239,7 @@ def main():
         spectron_tclient_handler_anchors,
         spectron_target_only_labels,
         spectron_tclient_playerhurt_anchor,
+        spectron_gsfunctions_property_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,
