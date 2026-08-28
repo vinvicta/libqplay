@@ -1664,6 +1664,15 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_gui_browser_property_anchors.py`, and
     `/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v222.i64`.
 
+282. The v223 IDA pass resolved five residual `GuiContextMenuCtrl` callbacks
+    for popup height, close, open state, and width. All five rows match the
+    complete recorded feature set, and all names reopened successfully. The
+    v223 copy has 11,694 functions and 1,101 remaining default `sub_` names.
+    See
+    `artifacts/spectron_gui_context_menu_property_manual_translation_anchors_20260828.json`,
+    `tools/generate_spectron_gui_context_menu_property_anchors.py`, and
+    `/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v223.i64`.
+
 267. The next IDA pass resolved eight small `THTMLPage` methods. They cover
     font-pointer cleanup, dirty and word-wrap state, parse tags, selection,
     URL and line initialization, and tab-stop replacement. The Spectron

@@ -12049,6 +12049,41 @@ and the checkpoint is
 This pass changed only the disposable IDA database. It did not patch the APK
 or either native library, and it performed no DNS, HTTP, or TLS operation.
 
+## 2026-08-28: Residual Spectron GuiContextMenuCtrl callbacks
+
+The v223 review resolved five more default-named target functions in the
+context-menu class block. The source table places the callbacks immediately
+before `GuiContextMenuCtrl_set_width`, and the target preserves that local
+order in its obfuscated `c3fygag7qx` class family.
+
+| Source role | Source | Spectron target | Target name before alias | Reviewed operation |
+| --- | ---: | ---: | --- | --- |
+| `GuiContextMenuCtrl_get_maxpopupheight` | `0x1d7cac` | `0x1dc974` | `sub_1DC974` | field at `+480` |
+| `GuiContextMenuCtrl_set_maxpopupheight` | `0x1d7cb4` | `0x1dc97c` | `sub_1DC97C` | field at `+480` |
+| `GuiContextMenuCtrl_script_close` | `0x1d7cbc` | `0x1dc984` | `sub_1DC984` | virtual slot `888` |
+| `GuiContextMenuCtrl_script_isopen` | `0x1d7cdc` | `0x1dc9a4` | `sub_1DC9A4` | byte at `+460` |
+| `GuiContextMenuCtrl_get_width` | `0x1d7ce4` | `0x1dc9ac` | `sub_1DC9AC` | owned-control field at `+352` |
+
+The first two rows are direct reads and writes of the maximum popup-height
+field. The close callback dispatches the same virtual slot as the source,
+and the open-state getter reads the same byte. The width getter follows the
+owned control pointer and reads the same `+352` field. All five rows match
+the normalized ARM64 feature fields and the complete recorded metric set.
+
+The v223 disposable database applies five `v18_` aliases and reopens with
+zero rename failures. It contains 11,694 functions and 1,101 default `sub_`
+names. Its SHA-256 is
+`c0d1c3257745f841a4b24393828905c83a0ba8778f312d1471fae8f48969fe05`.
+The generator is
+`tools/generate_spectron_gui_context_menu_property_anchors.py`, the evidence
+is
+`artifacts/spectron_gui_context_menu_property_manual_translation_anchors_20260828.json`,
+and the checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v223.json`.
+
+This pass changed only the disposable IDA database. It did not patch the APK
+or either native library, and it performed no DNS, HTTP, or TLS operation.
+
 ## 2026-08-28: Residual Spectron GuiBrowserCtrl getters
 
 The v222 review finished the three small property getters still carrying

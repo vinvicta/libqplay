@@ -77,6 +77,9 @@ def main():
     spectron_checkpoint_v222 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v222.json"
     )
+    spectron_checkpoint_v223 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v223.json"
+    )
     spectron_manual = load_json(
         "artifacts/spectron_manual_translation_anchors_20260826.json"
     )
@@ -190,6 +193,9 @@ def main():
     )
     spectron_gui_browser_property_anchors = load_json(
         "artifacts/spectron_gui_browser_property_manual_translation_anchors_20260828.json"
+    )
+    spectron_gui_context_menu_property_anchors = load_json(
+        "artifacts/spectron_gui_context_menu_property_manual_translation_anchors_20260828.json"
     )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
@@ -2818,6 +2824,60 @@ def main():
         "Spectron GUI browser text target",
         browser_by_name["GuiBrowserCtrl_get_text"]["spectron_ea"],
         "0x1e581c",
+    )
+    check(
+        "Spectron GUI context-menu property artifact",
+        spectron_gui_context_menu_property_anchors["artifact"],
+        "spectron_gui_context_menu_property_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron GUI context-menu property network",
+        spectron_gui_context_menu_property_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron GUI context-menu property total",
+        spectron_gui_context_menu_property_anchors["summary"]["anchor_count"],
+        5,
+    )
+    check(
+        "Spectron GUI context-menu property high confidence",
+        spectron_gui_context_menu_property_anchors["summary"]["high_confidence_count"],
+        5,
+    )
+    check(
+        "Spectron GUI context-menu property exact-shape count",
+        spectron_gui_context_menu_property_anchors["summary"]["normalized_shape_exact_count"],
+        5,
+    )
+    check(
+        "Spectron GUI context-menu property full-metric count",
+        spectron_gui_context_menu_property_anchors["summary"]["full_metric_exact_count"],
+        5,
+    )
+    check(
+        "Spectron GUI context-menu property default targets",
+        spectron_gui_context_menu_property_anchors["summary"]["target_default_name_count"],
+        5,
+    )
+    context_menu_by_name = {
+        row["original_name"]: row
+        for row in spectron_gui_context_menu_property_anchors["anchors"]
+    }
+    check(
+        "Spectron GUI context-menu max-height getter target",
+        context_menu_by_name["GuiContextMenuCtrl_get_maxpopupheight"]["spectron_ea"],
+        "0x1dc974",
+    )
+    check(
+        "Spectron GUI context-menu close target",
+        context_menu_by_name["GuiContextMenuCtrl_script_close"]["spectron_ea"],
+        "0x1dc984",
+    )
+    check(
+        "Spectron GUI context-menu width target",
+        context_menu_by_name["GuiContextMenuCtrl_get_width"]["spectron_ea"],
+        "0x1dc9ac",
     )
     check(
         "Spectron TString artifact",
@@ -5979,6 +6039,31 @@ def main():
         3,
     )
     check(
+        "Spectron v223 checkpoint artifact",
+        spectron_checkpoint_v223["artifact"],
+        "spectron_translation_checkpoint_20260828_v223",
+    )
+    check(
+        "Spectron v223 checkpoint parent",
+        spectron_checkpoint_v223["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v222",
+    )
+    check(
+        "Spectron v223 checkpoint database hash",
+        spectron_checkpoint_v223["database"]["sha256"],
+        "c0d1c3257745f841a4b24393828905c83a0ba8778f312d1471fae8f48969fe05",
+    )
+    check(
+        "Spectron v223 checkpoint default sub count",
+        spectron_checkpoint_v223["database"]["default_sub_function_count"],
+        1101,
+    )
+    check(
+        "Spectron v223 checkpoint property count",
+        spectron_checkpoint_v223["gui_context_menu_property_anchors"]["verified_name_count"],
+        5,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -6077,6 +6162,7 @@ def main():
         spectron_gui_ml_text_residual_anchors,
         spectron_gui_drawing_showimg_property_anchors,
         spectron_gui_browser_property_anchors,
+        spectron_gui_context_menu_property_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,
