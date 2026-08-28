@@ -3449,6 +3449,38 @@ The database identity is recorded in
 This pass changed only the disposable IDA database and performed no DNS, HTTP,
 or TLS operation.
 
+## Spectron TGaniObject and TGaniParam property aliases
+
+The v238 pass resolves eight residual target callbacks from the animation
+property tables. The source table begins at `0x37a5b0`. Spectron adds an
+`adventure_getbuildtime` row before the corresponding block, so its `ani` row
+begins at `0x38d5d0` and the selected rows follow from there.
+
+| 1.8 callback | Source | Spectron target | Script name | Target record |
+| --- | ---: | ---: | --- | ---: |
+| `TGaniParam_getStringField304` | `0x15da98` | `0x160cf0` | `aniparams` | `0x38d600` |
+| `TGaniObject_getField292` | `0x15d4d8` | `0x160568` | `anistep` | `0x38d630` |
+| `TGaniObject_getField320` | `0x15d51c` | `0x1605ac` | `attr` | `0x38d6f0` |
+| `TGaniParam_getStringField376` | `0x15da68` | `0x160cc0` | `body` | `0x38d720` |
+| `TGaniObject_getField448` | `0x15d524` | `0x1605b4` | `colors` | `0x38d780` |
+| `TGaniObject_getField576` | `0x15d590` | `0x160620` | `gmap` | `0x38d7e0` |
+| `TGaniObject_getEnableMovieReposition` | `0x15d4b0` | `0x160540` | `enableganimoviereposition` | `0x38db70` |
+| `TGaniObject_setEnableMovieReposition` | `0x15d4c0` | `0x160550` | `enableganimoviereposition` | `0x38db70` |
+
+The `body` getter is also registered under `bodyimg` in both builds and points
+to the same function. Its setter was already translated. The other rows are
+direct field copies, and the movie-reposition pair reads and writes a single
+global flag. Five rows match the complete feature metrics, one has only a
+register-detail difference, and the two global wrappers use a different
+target instruction form while preserving the same operation.
+
+The aliases are materialized in
+`analysis/spectron_libqplay_translated_v238.i64`. The machine-readable record
+is `artifacts/spectron_gani_property_manual_translation_anchors_20260828.json`,
+and the persisted checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v238.json`. The clean
+reopen verified all eight names. No network operation was part of this pass.
+
 ## Spectron TLevelObject property aliases
 
 The v237 pass resolves the target's remaining level-object property callbacks

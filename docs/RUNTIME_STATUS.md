@@ -554,6 +554,20 @@ This is the short handoff view. The full reasoning and command history are in
      `tools/generate_spectron_level_object_property_anchors.py`, and
      `artifacts/spectron_translation_checkpoint_20260828_v237.json`.
 
+63h. The v238 IDA checkpoint adds eight high-confidence aliases from the
+     residual `TGaniObject` and `TGaniParam` property tables. The `body` and
+     `bodyimg` registrations share one getter, and the target `body` setter
+     was already translated. Five rows match the complete feature metrics,
+     one keeps normalized shape with a register-detail change, and two global
+     movie-reposition wrappers preserve their behavior with target instruction
+     form changes. The clean reopen has 11,696 functions and 1,020 remaining
+     default `sub_` names. The database SHA-256 is
+     `b9e8068236409064bb27bde0f3f564398cc3ed7c664bc46af6eb5c5ce801f6a3`.
+     See
+     `artifacts/spectron_gani_property_manual_translation_anchors_20260828.json`,
+     `tools/generate_spectron_gani_property_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260828_v238.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The

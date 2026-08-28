@@ -281,6 +281,12 @@ def main():
     spectron_checkpoint_v237 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v237.json"
     )
+    spectron_gani_property_anchors = load_json(
+        "artifacts/spectron_gani_property_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v238 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v238.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -7339,6 +7345,105 @@ def main():
         7,
     )
     check(
+        "Spectron v238 Gani property artifact",
+        spectron_gani_property_anchors["artifact"],
+        "spectron_gani_property_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v238 Gani property network",
+        spectron_gani_property_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v238 Gani property anchor count",
+        spectron_gani_property_anchors["summary"]["anchor_count"],
+        8,
+    )
+    check(
+        "Spectron v238 Gani property high confidence",
+        spectron_gani_property_anchors["summary"]["high_confidence_count"],
+        8,
+    )
+    check(
+        "Spectron v238 Gani property target default count",
+        spectron_gani_property_anchors["summary"]["target_default_name_count"],
+        8,
+    )
+    check(
+        "Spectron v238 Gani property normalized shape count",
+        spectron_gani_property_anchors["summary"]["normalized_shape_exact_count"],
+        6,
+    )
+    check(
+        "Spectron v238 Gani property full metric count",
+        spectron_gani_property_anchors["summary"]["full_metric_exact_count"],
+        5,
+    )
+    check(
+        "Spectron v238 Gani property layout count",
+        spectron_gani_property_anchors["summary"]["layout_change_count"],
+        2,
+    )
+    check(
+        "Spectron v238 Gani property register-detail count",
+        spectron_gani_property_anchors["summary"]["register_detail_difference_count"],
+        3,
+    )
+    check(
+        "Spectron v238 Gani duplicate registration count",
+        spectron_gani_property_anchors["summary"]["duplicate_registration_count"],
+        1,
+    )
+    gani_rows = {
+        row["original_name"]: row
+        for row in spectron_gani_property_anchors["anchors"]
+    }
+    check(
+        "Spectron v238 Gani body target",
+        gani_rows["TGaniParam_getStringField376"]["spectron_ea"],
+        "0x160cc0",
+    )
+    check(
+        "Spectron v238 Gani enable setter target",
+        gani_rows["TGaniObject_setEnableMovieReposition"]["spectron_ea"],
+        "0x160550",
+    )
+    check(
+        "Spectron v238 Gani duplicate body registration",
+        gani_rows["TGaniParam_getStringField376"]["additional_registrations"][0]["script_name"],
+        "bodyimg",
+    )
+    check(
+        "Spectron v238 checkpoint artifact",
+        spectron_checkpoint_v238["artifact"],
+        "spectron_translation_checkpoint_20260828_v238",
+    )
+    check(
+        "Spectron v238 checkpoint parent",
+        spectron_checkpoint_v238["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v237",
+    )
+    check(
+        "Spectron v238 checkpoint database hash",
+        spectron_checkpoint_v238["database"]["sha256"],
+        "b9e8068236409064bb27bde0f3f564398cc3ed7c664bc46af6eb5c5ce801f6a3",
+    )
+    check(
+        "Spectron v238 checkpoint function count",
+        spectron_checkpoint_v238["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v238 checkpoint default sub count",
+        spectron_checkpoint_v238["database"]["default_sub_function_count"],
+        1020,
+    )
+    check(
+        "Spectron v238 checkpoint anchor count",
+        spectron_checkpoint_v238["gani_property_anchors"]["verified_name_count"],
+        8,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -7452,6 +7557,7 @@ def main():
         spectron_gsfunctions_property_anchors,
         spectron_time_files_input_anchors,
         spectron_level_object_property_anchors,
+        spectron_gani_property_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,
