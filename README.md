@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v276 Spectron database. It
-contains 11,696 functions and 643 remaining default `sub_` names. The v263
+The current documented translation frontier is the v277 Spectron database. It
+contains 11,696 functions and 638 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -57,6 +57,11 @@ The v276 revision adds seven high-confidence libjpeg output-pipeline labels.
 They cover the two master-decompress output-pass callbacks and the five
 merged-upsampler start, wrapper, and conversion routines. All seven have
 complete source-target feature matches.
+The v277 revision adds five high-confidence progressive-Huffman decoder
+labels. They cover the start-pass dispatcher and the DC/AC first and
+successive-approximation MCU decoders. All five preserve normalized source
+target shape, with one complete metric match and four register-allocation-only
+differences.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -79,6 +84,8 @@ The current v275 database is kept locally as
 `analysis/spectron_libqplay_translated_v275.i64`.
 The current v276 database is kept locally as
 `analysis/spectron_libqplay_translated_v276.i64`.
+The current v277 database is kept locally as
+`analysis/spectron_libqplay_translated_v277.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -201,6 +208,17 @@ set. The v276 checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v276.json`; it records
 the reopened database with 643 remaining default names.
 
+The v277 libjpeg progressive-Huffman evidence is in
+`artifacts/spectron_jpeg_progressive_huffman_manual_translation_anchors_20260828.json`.
+It labels `start_pass_phuff_decoder`, `decode_mcu_AC_refine`,
+`decode_mcu_AC_first`, `decode_mcu_DC_refine`, and `decode_mcu_DC_first`.
+The target `v18_jinit_phuff_decoder_jpeg_decompress_struct` initializer at
+`0x29ea4c` installs the start-pass callback. Its dispatcher chooses the four
+MCU decoders from the scan's DC or AC mode and its first or refinement state.
+The v277 checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v277.json`; it records
+the reopened database with 638 remaining default names.
+
 The latest checkpoints are
 `artifacts/spectron_translation_checkpoint_20260828_v263_corrected.json` and
 `artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json`,
@@ -217,13 +235,15 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v273.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v274.json`,
 `artifacts/spectron_translation_checkpoint_20260828_v275.json`, and
-`artifacts/spectron_translation_checkpoint_20260828_v276.json`. All four
+`artifacts/spectron_translation_checkpoint_20260828_v276.json`, and
+`artifacts/spectron_translation_checkpoint_20260828_v277.json`. All four
 newly reviewed legacy names, the six corrected target-only names, the
 package-signature label, the v269 TGraalVar labels, the v270 script-table
 labels, the nine v271 runtime callback labels, the two v271 property labels,
 the v272 zlib role label, the six v273 libjpeg callback labels, the four
 v274 libjpeg controller labels, and the nine v275 libjpeg marker-reader labels
-and seven v276 libjpeg output-pipeline labels were
+and seven v276 libjpeg output-pipeline labels, and five v277 libjpeg
+progressive-Huffman labels were
 reopened and verified with zero failures.
 These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or

@@ -524,6 +524,12 @@ def main():
     spectron_checkpoint_v276 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v276.json"
     )
+    spectron_jdphuff_anchors = load_json(
+        "artifacts/spectron_jpeg_progressive_huffman_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v277 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v277.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -11765,6 +11771,87 @@ def main():
         7,
     )
     check(
+        "Spectron libjpeg jdphuff artifact",
+        spectron_jdphuff_anchors["artifact"],
+        "spectron_jpeg_progressive_huffman_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron libjpeg jdphuff network",
+        spectron_jdphuff_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron libjpeg jdphuff anchor count",
+        spectron_jdphuff_anchors["summary"]["anchor_count"],
+        5,
+    )
+    check(
+        "Spectron libjpeg jdphuff unique target count",
+        spectron_jdphuff_anchors["summary"]["unique_target_count"],
+        5,
+    )
+    check(
+        "Spectron libjpeg jdphuff high-confidence count",
+        spectron_jdphuff_anchors["summary"]["high_confidence_count"],
+        5,
+    )
+    check(
+        "Spectron libjpeg jdphuff normalized count",
+        spectron_jdphuff_anchors["summary"]["normalized_shape_exact_count"],
+        5,
+    )
+    check(
+        "Spectron libjpeg jdphuff exact count",
+        spectron_jdphuff_anchors["summary"]["full_metric_exact_count"],
+        1,
+    )
+    jdphuff_rows = {
+        row["spectron_ea"]: row for row in spectron_jdphuff_anchors["anchors"]
+    }
+    jdphuff_expected = {
+        "0x29d9a8": "v18_jpeg_start_pass_phuff_decoder",
+        "0x29ddcc": "v18_jpeg_decode_mcu_AC_refine",
+        "0x29e2ac": "v18_jpeg_decode_mcu_AC_first",
+        "0x29e5c4": "v18_jpeg_decode_mcu_DC_refine",
+        "0x29e768": "v18_jpeg_decode_mcu_DC_first",
+    }
+    for target_ea, expected_name in jdphuff_expected.items():
+        check(
+            "Spectron libjpeg jdphuff target " + target_ea,
+            jdphuff_rows[target_ea]["proposed_name"],
+            expected_name,
+        )
+    check(
+        "Spectron v277 checkpoint artifact",
+        spectron_checkpoint_v277["artifact"],
+        "spectron_translation_checkpoint_20260828_v277",
+    )
+    check(
+        "Spectron v277 checkpoint parent",
+        spectron_checkpoint_v277["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v276",
+    )
+    check(
+        "Spectron v277 checkpoint database hash",
+        spectron_checkpoint_v277["database"]["sha256"],
+        "633510a1e4fe2f112bf4e5ce73532d894bedda0d67a519a5eceec66078e2318c",
+    )
+    check(
+        "Spectron v277 checkpoint function count",
+        spectron_checkpoint_v277["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v277 checkpoint default sub count",
+        spectron_checkpoint_v277["database"]["default_sub_function_count"],
+        638,
+    )
+    check(
+        "Spectron v277 checkpoint jdphuff count",
+        spectron_checkpoint_v277["jdphuff_anchors"]["verified_name_count"],
+        5,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -12083,6 +12170,8 @@ def main():
         spectron_checkpoint_v275,
         spectron_jdmaster_jdmerge_anchors,
         spectron_checkpoint_v276,
+        spectron_jdphuff_anchors,
+        spectron_checkpoint_v277,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
