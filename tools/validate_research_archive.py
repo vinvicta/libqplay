@@ -275,6 +275,12 @@ def main():
     spectron_checkpoint_v236 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v236.json"
     )
+    spectron_level_object_property_anchors = load_json(
+        "artifacts/spectron_level_object_property_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v237 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v237.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -7239,6 +7245,100 @@ def main():
         22,
     )
     check(
+        "Spectron v237 level-object artifact",
+        spectron_level_object_property_anchors["artifact"],
+        "spectron_level_object_property_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v237 level-object network",
+        spectron_level_object_property_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v237 level-object anchor count",
+        spectron_level_object_property_anchors["summary"]["anchor_count"],
+        7,
+    )
+    check(
+        "Spectron v237 level-object high confidence",
+        spectron_level_object_property_anchors["summary"]["high_confidence_count"],
+        7,
+    )
+    check(
+        "Spectron v237 level-object target default count",
+        spectron_level_object_property_anchors["summary"]["target_default_name_count"],
+        7,
+    )
+    check(
+        "Spectron v237 level-object normalized shape count",
+        spectron_level_object_property_anchors["summary"]["normalized_shape_exact_count"],
+        7,
+    )
+    check(
+        "Spectron v237 level-object full metric count",
+        spectron_level_object_property_anchors["summary"]["full_metric_exact_count"],
+        7,
+    )
+    check(
+        "Spectron v237 level-object layout count",
+        spectron_level_object_property_anchors["summary"]["layout_change_count"],
+        0,
+    )
+    check(
+        "Spectron v237 level-object boundary recovery count",
+        spectron_level_object_property_anchors["summary"]["boundary_recovery_count"],
+        1,
+    )
+    level_object_rows = {
+        row["original_name"]: row
+        for row in spectron_level_object_property_anchors["anchors"]
+    }
+    check(
+        "Spectron v237 level-object z target",
+        level_object_rows["TLevelObject_getZ"]["spectron_ea"],
+        "0x16d460",
+    )
+    check(
+        "Spectron v237 level-object z boundary",
+        level_object_rows["TLevelObject_getZ"]["spectron_function_end"],
+        "0x16d480",
+    )
+    check(
+        "Spectron v237 level-object z metric exact",
+        level_object_rows["TLevelObject_getZ"]["full_metric_equal"],
+        True,
+    )
+    check(
+        "Spectron v237 checkpoint artifact",
+        spectron_checkpoint_v237["artifact"],
+        "spectron_translation_checkpoint_20260828_v237",
+    )
+    check(
+        "Spectron v237 checkpoint parent",
+        spectron_checkpoint_v237["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v236",
+    )
+    check(
+        "Spectron v237 checkpoint database hash",
+        spectron_checkpoint_v237["database"]["sha256"],
+        "5229c4d4d67261076bd57c46c8331426ac775afdac6a578f409764b68e5ef872",
+    )
+    check(
+        "Spectron v237 checkpoint function count",
+        spectron_checkpoint_v237["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v237 checkpoint default sub count",
+        spectron_checkpoint_v237["database"]["default_sub_function_count"],
+        1028,
+    )
+    check(
+        "Spectron v237 checkpoint anchor count",
+        spectron_checkpoint_v237["level_object_property_anchors"]["verified_name_count"],
+        7,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -7351,6 +7451,7 @@ def main():
         spectron_tclient_playerhurt_anchor,
         spectron_gsfunctions_property_anchors,
         spectron_time_files_input_anchors,
+        spectron_level_object_property_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

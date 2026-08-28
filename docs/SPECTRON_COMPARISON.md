@@ -3449,6 +3449,45 @@ The database identity is recorded in
 This pass changed only the disposable IDA database and performed no DNS, HTTP,
 or TLS operation.
 
+## Spectron TLevelObject property aliases
+
+The v237 pass resolves the target's remaining level-object property callbacks
+and materializes the missing `z` getter boundary. The source property table is
+at `0x37b048`; the canonical target `.data` copy starts at `0x38e068`.
+
+| 1.8 callback | Source | Spectron target | Script name | Target record |
+| --- | ---: | ---: | --- | ---: |
+| `TLevelObject_getLevel` | `0x1698b0` | `0x16d308` | `level` | `0x38e068` |
+| `TLevelObject_getX` | `0x1698b8` | `0x16d310` | `x` | `0x38e098` |
+| `TLevelObject_setX` | `0x1698ec` | `0x16d344` | `x` | `0x38e098` |
+| `TLevelObject_getY` | `0x169960` | `0x16d3b8` | `y` | `0x38e0c8` |
+| `TLevelObject_setY` | `0x169994` | `0x16d3ec` | `y` | `0x38e0c8` |
+| `TLevelObject_getZ` | `0x169a08-0x169a28` | `0x16d460-0x16d480` | `z` | `0x38e0f8` |
+| `TLevelObject_getLayer` | `0x169a28` | `0x16d480` | `layer` | `0x38e128` |
+
+The level getter returns the owning level. The x and y accessors preserve the
+64-pixels-per-tile conversion, ordinary-object clamping, and vtable position
+dispatch. The layer getter keeps the source mapping from internal layer values
+to script-visible values. The target's `TLevelObject_setZ` callback was already
+translated in an earlier pass and sits immediately after the recovered getter.
+
+IDA had no function boundary for the target z callback in v236. The property
+row points directly to `0x16d460`, where the raw code contains eight complete
+instructions and returns at `0x16d47c`. The next known function starts at
+`0x16d480`, establishing the reviewed range. Once materialized, the target
+feature export matched all source metrics for this getter. The other six rows
+also match every recorded feature field, giving seven complete metric matches
+in total.
+
+The aliases are materialized in
+`analysis/spectron_libqplay_translated_v237.i64`. The machine-readable anchor
+record is
+`artifacts/spectron_level_object_property_manual_translation_anchors_20260828.json`,
+and the persisted checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v237.json`. The clean
+reopen verified all seven names and the recovered boundary. No network
+operation was part of this pass.
+
 ## Spectron identification, time, file, and input callback aliases
 
 The v236 pass uses decoded registration rows to translate 22 target callbacks

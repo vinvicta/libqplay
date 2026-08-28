@@ -543,6 +543,17 @@ This is the short handoff view. The full reasoning and command history are in
      `tools/generate_spectron_time_files_input_anchors.py`, and
      `artifacts/spectron_translation_checkpoint_20260828_v236.json`.
 
+63g. The v237 IDA checkpoint adds seven high-confidence `TLevelObject`
+     property aliases and materializes the missing target `z` getter boundary
+     at `0x16d460-0x16d480`. All seven rows match the complete recorded feature
+     metrics. The clean reopen has 11,696 functions and 1,028 remaining
+     default `sub_` names. The database SHA-256 is
+     `5229c4d4d67261076bd57c46c8331426ac775afdac6a578f409764b68e5ef872`.
+     See
+     `artifacts/spectron_level_object_property_manual_translation_anchors_20260828.json`,
+     `tools/generate_spectron_level_object_property_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260828_v237.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The
