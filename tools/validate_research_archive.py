@@ -686,6 +686,12 @@ def main():
     spectron_checkpoint_v303 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v303.json"
     )
+    spectron_freetype_tt_runtime_anchors = load_json(
+        "artifacts/spectron_freetype_tt_runtime_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v304 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v304.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -14563,6 +14569,166 @@ def main():
         19,
     )
     check(
+        "Spectron FreeType TrueType runtime artifact",
+        spectron_freetype_tt_runtime_anchors["artifact"],
+        "spectron_freetype_tt_runtime_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron FreeType TrueType runtime network",
+        spectron_freetype_tt_runtime_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron FreeType TrueType runtime anchor count",
+        spectron_freetype_tt_runtime_anchors["summary"]["anchor_count"],
+        6,
+    )
+    check(
+        "Spectron FreeType TrueType runtime high-confidence count",
+        spectron_freetype_tt_runtime_anchors["summary"]["high_confidence_count"],
+        6,
+    )
+    check(
+        "Spectron FreeType TrueType runtime normalized count",
+        spectron_freetype_tt_runtime_anchors["summary"][
+            "normalized_shape_exact_count"
+        ],
+        6,
+    )
+    check(
+        "Spectron FreeType TrueType runtime full-match count",
+        spectron_freetype_tt_runtime_anchors["summary"]["full_metric_exact_count"],
+        5,
+    )
+    freetype_tt_runtime_rows = {
+        row["spectron_ea"]: row
+        for row in spectron_freetype_tt_runtime_anchors["anchors"]
+    }
+    freetype_tt_runtime_expected = {
+        "0x26c0f4": (
+            "0x25ec84",
+            "v18_Direct_Move_Orig",
+            "original-coordinate direct movement helper",
+            [],
+            True,
+        ),
+        "0x26c184": (
+            "0x25ed14",
+            "v18_Direct_Move",
+            "current-coordinate direct movement helper",
+            [],
+            True,
+        ),
+        "0x26c964": (
+            "0x25f4f4",
+            "v18_tt_slot_init",
+            "TrueType slot initializer",
+            [],
+            True,
+        ),
+        "0x26c970": (
+            "0x25f500",
+            "v18_tt_face_done",
+            "TrueType face teardown",
+            [],
+            True,
+        ),
+        "0x26cab8": (
+            "0x25f648",
+            "v18_tt_face_init",
+            "TrueType face initializer",
+            ["register_detail_hash"],
+            False,
+        ),
+        "0x26d1fc": (
+            "0x25fd8c",
+            "v18_Current_Ratio",
+            "TrueType interpreter scaling-ratio helper",
+            [],
+            True,
+        ),
+    }
+    check(
+        "Spectron FreeType TrueType runtime target set",
+        set(freetype_tt_runtime_rows),
+        set(freetype_tt_runtime_expected),
+    )
+    for target_ea, (
+        source_ea,
+        expected_name,
+        expected_role,
+        expected_differences,
+        expected_full_match,
+    ) in freetype_tt_runtime_expected.items():
+        row = freetype_tt_runtime_rows[target_ea]
+        check(
+            "Spectron FreeType TrueType runtime source " + target_ea,
+            row["original_ea"],
+            source_ea,
+        )
+        check(
+            "Spectron FreeType TrueType runtime name " + target_ea,
+            row["proposed_name"],
+            expected_name,
+        )
+        check(
+            "Spectron FreeType TrueType runtime role " + target_ea,
+            row["source_role"],
+            expected_role,
+        )
+        check(
+            "Spectron FreeType TrueType runtime metrics " + target_ea,
+            row["metric_differences"],
+            expected_differences,
+        )
+        check(
+            "Spectron FreeType TrueType runtime normalized " + target_ea,
+            row["normalized_shape_equal"],
+            True,
+        )
+        check(
+            "Spectron FreeType TrueType runtime full metrics " + target_ea,
+            row["full_metric_equal"],
+            expected_full_match,
+        )
+    check(
+        "Spectron v304 checkpoint artifact",
+        spectron_checkpoint_v304["artifact"],
+        "spectron_translation_checkpoint_20260828_v304",
+    )
+    check(
+        "Spectron v304 checkpoint parent",
+        spectron_checkpoint_v304["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v303",
+    )
+    check(
+        "Spectron v304 checkpoint parent path",
+        spectron_checkpoint_v304["parent_checkpoint"]["path"],
+        "artifacts/spectron_translation_checkpoint_20260828_v303.json",
+    )
+    check(
+        "Spectron v304 checkpoint database hash",
+        spectron_checkpoint_v304["database"]["sha256"],
+        "8c2e1b1591fbb80bb3d874c3dfa4708d6e7d4bfc503748a70c519f07202494c4",
+    )
+    check(
+        "Spectron v304 checkpoint function count",
+        spectron_checkpoint_v304["database"]["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v304 checkpoint default sub count",
+        spectron_checkpoint_v304["database"]["default_sub_function_count"],
+        456,
+    )
+    check(
+        "Spectron v304 checkpoint TrueType runtime count",
+        spectron_checkpoint_v304["freetype_tt_runtime_anchors"][
+            "verified_name_count"
+        ],
+        6,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -14925,6 +15091,8 @@ def main():
         spectron_checkpoint_v302,
         spectron_freetype_tt_interpreter_anchors,
         spectron_checkpoint_v303,
+        spectron_freetype_tt_runtime_anchors,
+        spectron_checkpoint_v304,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

@@ -49,8 +49,8 @@ active desktop IDA database remained locked and was not changed.
 ## Spectron FreeType continuation
 
 The source-side count above is preserved as its own historical inventory. It
-is not the current count for the stripped Spectron 2.2 target. The v303
-Spectron copy has 11,695 functions and 462 remaining default `sub_` names.
+is not the current count for the stripped Spectron 2.2 target. The v304
+Spectron copy has 11,695 functions and 456 remaining default `sub_` names.
 The v298 pass removed two names from the unresolved target queue by identifying
 the FreeType base helpers at target `0x25e304` and `0x260300` as
 `v18_destroy_size` and `v18_destroy_face`.
@@ -133,6 +133,20 @@ The v303 checkpoint and database hash are recorded in
 `artifacts/spectron_translation_checkpoint_20260828_v303.json`; the persisted
 database hash is
 `36ebf8b934351b45aea6ba5664c93f0d7b66b8b7a3d7ed49980e030226d6c47c`.
+
+The v304 pass removes six more defaults from the FreeType queue. Two are the
+interpreter's current and original-coordinate movement helpers,
+`Direct_Move` and `Direct_Move_Orig`. Three are the TrueType slot initializer
+and face lifecycle callbacks, `tt_slot_init`, `tt_face_done`, and
+`tt_face_init`. The sixth is the interpreter's `Current_Ratio` scaling helper.
+All six pairs match normalized ARM64 shape. Five match the complete feature
+record, while `tt_face_init` differs only in register-allocation detail. All
+six names reopened with zero failures. The machine-readable record is
+`artifacts/spectron_freetype_tt_runtime_manual_translation_anchors_20260828.json`.
+The v304 checkpoint and database hash are recorded in
+`artifacts/spectron_translation_checkpoint_20260828_v304.json`; the persisted
+database hash is
+`8c2e1b1591fbb80bb3d874c3dfa4708d6e7d4bfc503748a70c519f07202494c4`.
 
 ## CyaSSL role pass
 
