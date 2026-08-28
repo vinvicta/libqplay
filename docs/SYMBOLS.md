@@ -108,7 +108,7 @@ and reviewed pseudocode:
 | `0x24b4ec` | `spectron_deeplink_getdeeplinkdata` | Java `GetIntentData` byte payload |
 | `0x24b61c` | `spectron_notifications_getpushnotificationdata` | Java `GetPushNotificationData` byte payload |
 | `0x24b74c` | `spectron_getandroidversionname` | Android version-name wrapper |
-| `0x24b958` | `spectron_quattro_android_getinstallerpackagename` | package-signature string walk |
+| `0x24b958` | `spectron_quattro_android_getinstallerpackagename` | installer-package lookup |
 | `0x24bfcc` | `spectron_googleplayservicesavailable` | Google Play availability |
 | `0x24cb68` | `spectron_getandroidversioncode` | Android version-code wrapper |
 | `0x24cd60` | `spectron_deeplink_cleardeeplinkdata` | clear intent data |
@@ -145,6 +145,47 @@ Both IDA applications were reopened and verified with zero failures. The
 corrected Android security evidence and its v267 checkpoint are listed below.
 The current saved databases and their checkpoint records are listed in the
 README current-status section.
+
+## Current Spectron TGraalVar script-runtime labels
+
+The v269 pass reaches the small TGraalVar script callback block that remained
+unnamed after the broader function translation. These rows are stronger than
+address proximity alone because the source and target callback cells can be
+checked directly in the corresponding tables.
+
+| 1.8 callback | Source | Spectron target | Applied label | Source callback cell | Target callback cell | Match |
+| --- | ---: | ---: | --- | ---: | ---: | --- |
+| `TGraalVar_script_clearvars` | `0x20d26c` | `0x21362c` | `v18_TGraalVar_script_clearvars` | `0x3875c8` | `0x39a718` | exact metrics |
+| `TGraalVar_script_savejsontostring` | `0x20d4dc` | `0x2137ec` | `v18_TGraalVar_script_savejsontostring` | `0x387b98` | `0x39ace8` | exact metrics |
+| `TGraalVar_script_parsejson` | `0x20d500` | `0x213810` | `v18_TGraalVar_script_parsejson` | `0x387d18` | `0x39ae68` | exact metrics |
+| `TGraalVar_script_loadini` | `0x20d50c` | `0x21381c` | `v18_TGraalVar_script_loadini` | `0x3879b8` | `0x39ab08` | exact metrics |
+| `TGraalVar_script_addnamedstring` | `0x20d3e8` | `0x2138b0` | `v18_TGraalVar_script_addnamedstring` | `0x387508` | `0x39a628` | layout change |
+
+The four exact rows are short forwarding wrappers. `clearvars` dispatches to
+virtual slot +56. `savejsontostring` calls the target JSON writer,
+`parsejson` calls the target JSON reader when the result is non-null, and
+`loadini` forwards the constant enabled flag `1` to the target INI helper.
+The `addnamedstring` body keeps the source variable lookup and assignment to
+result offset +8, but the target adds a named-string temporary and uses the
+target `CanTfaz6bZ` wrapper. Its table adjacency and decoded `addnamedstring`
+record make the semantic match high confidence even though its size grows
+from 72 to 120 bytes.
+
+One nearby callback is target-specific. The target row at `0x39aa90` decodes
+to `loadvarsfromarray` and points through callback cell `0x39aaa8` to
+`0x218870`, now labeled
+`spectron_TGraalVar_script_loadvarsfromarray_TGraalVar`. Its body creates a
+string list, reads each non-null array member through the target virtual
+`readString` slot, and passes the list to the adjacent
+`v18_TGraalVar_loadVarsFromArray_TStringList` implementation. No matching 1.8
+script callback is claimed for this target-only label.
+
+The machine-readable records are
+`artifacts/spectron_tgraalvar_script_runtime_manual_translation_anchors_20260828.json`
+and
+`artifacts/spectron_tgraalvar_target_only_labels_20260828.json`. The v269 IDA
+copy reopened with all five cross-build names and the target-only name
+verified, with zero failures.
 
 ## Current Spectron Android security labels
 

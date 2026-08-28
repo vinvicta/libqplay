@@ -1,0 +1,92 @@
+{
+  "artifact": "spectron_tgraalvar_target_only_labels_20260828",
+  "context": {
+    "adjacent_target_rows": [
+      "0x39aa60 loadvars",
+      "0x39aa90 loadvarsfromarray",
+      "0x39aac0 loadfolder"
+    ],
+    "mapping_boundary": "This is a target-only descriptive label. It does not assert that a matching 1.8 script callback was found.",
+    "target_callback_xref": "0x39aaa8",
+    "target_name_pointer": "0x2ee208",
+    "target_table_record": "0x39aa90",
+    "target_table_record_size": "0x30"
+  },
+  "inputs": {
+    "spectron_binary": "/tmp/spectron-2.2-arm64/libqplay.so",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b423221",
+    "spectron_features": "/tmp/spectron_features_v268_final.json",
+    "spectron_features_sha256": "b97138d63da2b9b18104ffd7d74a53c5bf9912f0847046f184836fea74cdc76b"
+  },
+  "interpretation": [
+    "The spectron_ prefix marks a target-specific descriptive label rather than a restored source symbol.",
+    "The decoded table name, exact callback cell, adjacent loadvars row, virtual readString call, and final loadVarsFromArray call make the target role high confidence.",
+    "The absence of a demonstrated 1.8 callback counterpart is kept explicit so the target-only label is not mistaken for a cross-build mapping."
+  ],
+  "labels": [
+    {
+      "adjacent_loadvars_implementation": "0x2187bc",
+      "adjacent_loadvars_name": "v18_TGraalVar_loadVarsFromArray_TStringList",
+      "adjacent_loadvars_veneer": "0x2187b8",
+      "confidence": "high",
+      "current_name": "sub_218870",
+      "evidence": [
+        "The target table record at 0x39aa90 contains the encoded name pointer 0x2ee208 and callback cell 0x39aaa8, which points to sub_218870.",
+        "The target table-name decoder produces the exact ASCII name loadvarsfromarray from the 17-byte encoded string.",
+        "The body allocates vuuHgangcF, reads the source array at a2+56, calls the target virtual readString slot +184 for each child, and adds each result to the new list.",
+        "The body then calls the adjacent target loadVarsFromArray implementation at 0x2187bc through G0gxgajWBw::YyvaMa69r8, establishing the wrapper's script-runtime role.",
+        "No original 1.8 script callback address is claimed. The source database contains loadVarsFromArray as a method, but this target wrapper's callback identity and body are recorded separately."
+      ],
+      "function_end": "0x218954",
+      "match_kind": "reviewed-target-only-tgraalvar-script-label",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "allocates a target string-list object, walks the source variable array at a2+56, converts each non-null child through virtual slot +184 (readString), adds the converted value to the list, and feeds that list to loadVarsFromArray",
+      "proposed_name": "spectron_TGraalVar_script_loadvarsfromarray_TGraalVar",
+      "script_name": "loadvarsfromarray",
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated",
+      "target_callback_xref": "0x39aaa8",
+      "target_default_name": true,
+      "target_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10CanTfaz6bZ10gwFWfaPxY0Ev",
+        "._ZN10CanTfaz6bZ5clearEv",
+        "._ZN10G0gxgajWBw10YyvaMa69r8EP10vuuHgangcF",
+        "._ZN10vuuHgangcF3AddERK10C8THgaTQxF",
+        "._ZN10vuuHgangcFC2Ev",
+        "._ZNK10vy1JgaKVkHixEi",
+        "._Znwm"
+      ],
+      "target_ea": "0x218870",
+      "target_function_table_record": "0x39aa90",
+      "target_metrics": {
+        "basic_block_count": 8,
+        "branch_count": 14,
+        "call_count": 10,
+        "instruction_count": 57,
+        "mnemonic_hash": "599eb1f2afa81244f7c510a6248ad4182cd552d4fc24041f88012ea3a0c77e38",
+        "opcode_shape_hash": "2f8bba946313fd20b23c610c170367bdba8781048699524156291631b4e4c3d5",
+        "register_detail_hash": "86fd1ba1bf25c272e6a79131ae61cee1c137b3301760248e5b89681e2ca03a57",
+        "register_shape_hash": "39319ddbcf80f0334d6fa633fc93e6cdcc3e71d90e9b0a20f191e0c1232a31c2",
+        "return_count": 1,
+        "shape_hash": "2b4a4244316c1539c76e4c7822d706dec5d29ad6f09dee8ab30832e201e9a4dc",
+        "size": 228,
+        "string_refs_hash": null
+      },
+      "target_name_pointer": "0x2ee208",
+      "target_name_raw_hex": "33235747fb4b03fb2bf7ff032fe7e223be",
+      "target_name_raw_length": 17,
+      "target_string_refs": []
+    }
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed target-only label for the Spectron TGraalVar loadvarsfromarray script callback",
+  "summary": {
+    "high_confidence_count": 1,
+    "label_count": 1,
+    "source_counterpart_count": 0,
+    "target_default_name_count": 1,
+    "target_only_count": 1
+  }
+}

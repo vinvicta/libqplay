@@ -470,6 +470,15 @@ def main():
     spectron_checkpoint_v268 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v268.json"
     )
+    spectron_tgraalvar_script_runtime_anchors = load_json(
+        "artifacts/spectron_tgraalvar_script_runtime_manual_translation_anchors_20260828.json"
+    )
+    spectron_tgraalvar_target_only_labels = load_json(
+        "artifacts/spectron_tgraalvar_target_only_labels_20260828.json"
+    )
+    spectron_checkpoint_v269 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v269.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -10892,6 +10901,136 @@ def main():
         1,
     )
     check(
+        "Spectron TGraalVar script-runtime artifact",
+        spectron_tgraalvar_script_runtime_anchors["artifact"],
+        "spectron_tgraalvar_script_runtime_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron TGraalVar script-runtime network",
+        spectron_tgraalvar_script_runtime_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron TGraalVar script-runtime total",
+        spectron_tgraalvar_script_runtime_anchors["summary"]["anchor_count"],
+        5,
+    )
+    check(
+        "Spectron TGraalVar script-runtime high confidence",
+        spectron_tgraalvar_script_runtime_anchors["summary"]["high_confidence_count"],
+        5,
+    )
+    check(
+        "Spectron TGraalVar script-runtime semantic overlap",
+        spectron_tgraalvar_script_runtime_anchors["summary"]["already_in_semantic_map"],
+        0,
+    )
+    check(
+        "Spectron TGraalVar script-runtime exact count",
+        spectron_tgraalvar_script_runtime_anchors["summary"]["exact_shape_anchor_count"],
+        4,
+    )
+    check(
+        "Spectron TGraalVar script-runtime layout count",
+        spectron_tgraalvar_script_runtime_anchors["summary"]["layout_change_anchor_count"],
+        1,
+    )
+    check(
+        "Spectron TGraalVar script-runtime default count",
+        spectron_tgraalvar_script_runtime_anchors["summary"]["target_default_name_count"],
+        5,
+    )
+    script_runtime_rows = {
+        row["spectron_ea"]: row
+        for row in spectron_tgraalvar_script_runtime_anchors["anchors"]
+    }
+    check(
+        "Spectron TGraalVar clearvars target",
+        script_runtime_rows["0x21362c"]["proposed_name"],
+        "v18_TGraalVar_script_clearvars",
+    )
+    check(
+        "Spectron TGraalVar addnamedstring match kind",
+        script_runtime_rows["0x2138b0"]["match_kind"],
+        "manual-tgraalvar-script-runtime-layout-anchor",
+    )
+    check(
+        "Spectron TGraalVar script-runtime exact rows",
+        sum(row["exact_metric_match"] for row in script_runtime_rows.values()),
+        4,
+    )
+    check(
+        "Spectron TGraalVar target-only artifact",
+        spectron_tgraalvar_target_only_labels["artifact"],
+        "spectron_tgraalvar_target_only_labels_20260828",
+    )
+    check(
+        "Spectron TGraalVar target-only network",
+        spectron_tgraalvar_target_only_labels["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron TGraalVar target-only total",
+        spectron_tgraalvar_target_only_labels["summary"]["label_count"],
+        1,
+    )
+    check(
+        "Spectron TGraalVar target-only default count",
+        spectron_tgraalvar_target_only_labels["summary"]["target_default_name_count"],
+        1,
+    )
+    target_only_row = spectron_tgraalvar_target_only_labels["labels"][0]
+    check(
+        "Spectron TGraalVar target-only address",
+        target_only_row["target_ea"],
+        "0x218870",
+    )
+    check(
+        "Spectron TGraalVar target-only decoded name",
+        target_only_row["script_name"],
+        "loadvarsfromarray",
+    )
+    check(
+        "Spectron TGraalVar target-only label",
+        target_only_row["proposed_name"],
+        "spectron_TGraalVar_script_loadvarsfromarray_TGraalVar",
+    )
+    check(
+        "Spectron v269 checkpoint artifact",
+        spectron_checkpoint_v269["artifact"],
+        "spectron_translation_checkpoint_20260828_v269",
+    )
+    check(
+        "Spectron v269 checkpoint parent",
+        spectron_checkpoint_v269["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v268",
+    )
+    check(
+        "Spectron v269 checkpoint database hash",
+        spectron_checkpoint_v269["database"]["sha256"],
+        "26b5b1d498d924771172b33c68bb551e373e408ef1054d65b5ba386bec6e0eaf",
+    )
+    check(
+        "Spectron v269 checkpoint function count",
+        spectron_checkpoint_v269["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v269 checkpoint default sub count",
+        spectron_checkpoint_v269["database"]["default_sub_function_count"],
+        696,
+    )
+    check(
+        "Spectron v269 checkpoint script-runtime count",
+        spectron_checkpoint_v269["tgraalvar_script_runtime_anchors"]["verified_name_count"],
+        5,
+    )
+    check(
+        "Spectron v269 checkpoint target-only count",
+        spectron_checkpoint_v269["tgraalvar_target_only_labels"]["verified_name_count"],
+        1,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -11192,6 +11331,9 @@ def main():
         spectron_android_package_identity_labels,
         spectron_checkpoint_v267,
         spectron_checkpoint_v268,
+        spectron_tgraalvar_script_runtime_anchors,
+        spectron_tgraalvar_target_only_labels,
+        spectron_checkpoint_v269,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
