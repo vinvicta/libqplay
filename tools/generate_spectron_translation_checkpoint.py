@@ -71,6 +71,8 @@ def main() -> None:
     parser.add_argument("--npc-helper-verification", type=Path)
     parser.add_argument("--html-atom-anchors", type=Path)
     parser.add_argument("--html-atom-verification", type=Path)
+    parser.add_argument("--html-page-anchors", type=Path)
+    parser.add_argument("--html-page-verification", type=Path)
     parser.add_argument("--player-helper-anchors", type=Path)
     parser.add_argument("--player-helper-verification", type=Path)
     parser.add_argument("--input-window-anchors", type=Path)
@@ -554,6 +556,37 @@ def main() -> None:
         result["core_anchors"] = core
         result["interpretation"].append(
             "The fourth database revision also contains the separately reviewed resource, rendering, GUI, scripting, and client context anchors."
+        )
+    html_page = None
+    if args.html_page_anchors or args.html_page_verification:
+        if not args.html_page_anchors or not args.html_page_verification:
+            raise ValueError(
+                "HTML page anchors and verification must be supplied together"
+            )
+        html_page_document = load(args.html_page_anchors)
+        html_page_verification = load(args.html_page_verification)
+        if (
+            html_page_document.get("artifact")
+            != "spectron_html_page_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected HTML page anchor artifact")
+        if not html_page_verification.get("verified"):
+            raise ValueError("HTML page anchor reopen verification did not pass")
+        expected_html_page = len(html_page_document["anchors"])
+        if html_page_verification["verified_name_count"] != expected_html_page:
+            raise ValueError("HTML page verification count differs from artifact")
+        html_page = {
+            "anchor_path": str(args.html_page_anchors),
+            "anchor_sha256": sha256_path(args.html_page_anchors),
+            "reopen_verification": str(args.html_page_verification),
+            "anchor_count": expected_html_page,
+            "verified_name_count": html_page_verification["verified_name_count"],
+            "reopen_failure_count": html_page_verification["failure_count"],
+        }
+    if html_page is not None:
+        result["html_page_anchors"] = html_page
+        result["interpretation"].append(
+            "The two-hundred-eighth database revision also contains the separately reviewed small THTMLPage method-family anchors."
         )
     runtime_path = None
     if args.runtime_path_anchors or args.runtime_path_verification:

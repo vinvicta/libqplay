@@ -1482,6 +1482,17 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_particle_emitter_script_vars_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+267. The next IDA pass resolved eight small `THTMLPage` methods. They cover
+    font-pointer cleanup, dirty and word-wrap state, parse tags, selection,
+    URL and line initialization, and tab-stop replacement. The Spectron
+    targets all belong to the obfuscated `AS80gaE4zW` class family, and every
+    complete feature field matches. The aliases reopened successfully in the
+    v208 copy, which has 11,694 functions, 3,641 high-confidence labels, and
+    1,217 default `sub_` names, with zero semantic reopen failures. See
+    `artifacts/spectron_html_page_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_html_page_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 266. The next IDA pass resolved the complete `TSoundPlayerJava` D1 destructor.
     Source `0xe35c8` maps to target `ohGYZakbFKD1Ev` at `0xe417c`, directly
     before the D0 destructor already translated at `0xe4190`. Both bodies

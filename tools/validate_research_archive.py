@@ -128,6 +128,9 @@ def main():
     spectron_html_atom_anchors = load_json(
         "artifacts/spectron_html_atom_manual_translation_anchors_20260826.json"
     )
+    spectron_html_page_anchors = load_json(
+        "artifacts/spectron_html_page_manual_translation_anchors_20260827.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -5141,7 +5144,8 @@ def main():
     check("Spectron checkpoint sound Java destructor anchor count", spectron_checkpoint["sound_java_destructor_anchors"]["verified_name_count"], 2)
     check("Spectron checkpoint sound Java D1 anchor count", spectron_checkpoint["sound_java_d1_anchors"]["verified_name_count"], 1)
     check("Spectron checkpoint sound base-interface anchor count", spectron_checkpoint["sound_base_interface_anchors"]["verified_name_count"], 18)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "dff2f079771c58100c2dd745f48dbecdde881f461598021b890b67e2fa0665f9")
+    check("Spectron checkpoint HTML page anchor count", spectron_checkpoint["html_page_anchors"]["verified_name_count"], 8)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "8fdd5acca704b5ca0e4bdd54747a60ce132ddb671fa493f4b4ffe8e2e88906a8")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -5226,6 +5230,7 @@ def main():
         spectron_http_request_state_anchors,
         spectron_npc_helper_anchors,
         spectron_html_atom_anchors,
+        spectron_html_page_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,
