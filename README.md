@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v274 Spectron database. It
-contains 11,696 functions and 659 remaining default `sub_` names. The v263
+The current documented translation frontier is the v275 Spectron database. It
+contains 11,696 functions and 650 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -49,6 +49,10 @@ They are tied to the `consume_input`, `reset_input_controller`,
 `start_input_pass`, and `finish_input_pass` slots installed by the target
 `jinit_input_controller` routine, with exact or normalized source-target
 feature matches.
+The v275 revision adds nine high-confidence libjpeg marker-reader labels.
+They are tied to the target marker-reader callback table and marker-loop call
+sites, with eight complete metric matches and one register-allocation-only
+difference.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -67,6 +71,8 @@ reports are recorded in their checkpoints because packed IDA files are
 intentionally excluded from the public repository.
 The current v274 database is kept locally as
 `analysis/spectron_libqplay_translated_v274.i64`.
+The current v275 database is kept locally as
+`analysis/spectron_libqplay_translated_v275.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -164,6 +170,18 @@ The v274 checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v274.json`; it records
 the reopened database with 659 remaining default names.
 
+The v275 libjpeg marker-reader evidence is in
+`artifacts/spectron_jpeg_marker_reader_manual_translation_anchors_20260828.json`.
+It labels nine residual `jdmarker.c` roles, including SOF parsing, APP0
+inspection, DHT parsing, marker saving and skipping, marker-reader reset,
+the marker state machine, and restart-marker handling. Eight rows match the
+complete recorded feature set and one differs only in register allocation.
+The artifact also records that `get_soi`, `get_sos`, `get_dqt`, `get_dri`,
+`next_marker`, and `first_marker` are represented inside larger target
+functions instead of separate IDA function starts. The v275 checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v275.json`; it records
+the reopened database with 650 remaining default names.
+
 The latest checkpoints are
 `artifacts/spectron_translation_checkpoint_20260828_v263_corrected.json` and
 `artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json`,
@@ -178,12 +196,14 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v271.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v272.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v273.json`, and
-`artifacts/spectron_translation_checkpoint_20260828_v274.json`. All four
+`artifacts/spectron_translation_checkpoint_20260828_v274.json`, and
+`artifacts/spectron_translation_checkpoint_20260828_v275.json`. All four
 newly reviewed legacy names, the six corrected target-only names, the
 package-signature label, the v269 TGraalVar labels, the v270 script-table
 labels, the nine v271 runtime callback labels, the two v271 property labels,
-the v272 zlib role label, the six v273 libjpeg callback labels, and the four
-v274 libjpeg controller labels were
+the v272 zlib role label, the six v273 libjpeg callback labels, the four
+v274 libjpeg controller labels, and the nine v275 libjpeg marker-reader labels
+were
 reopened and verified with zero failures.
 These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or

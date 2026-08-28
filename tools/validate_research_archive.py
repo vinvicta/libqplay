@@ -512,6 +512,12 @@ def main():
     spectron_checkpoint_v274 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v274.json"
     )
+    spectron_jdmarker_anchors = load_json(
+        "artifacts/spectron_jpeg_marker_reader_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v275 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v275.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -11583,6 +11589,92 @@ def main():
         4,
     )
     check(
+        "Spectron libjpeg jdmarker artifact",
+        spectron_jdmarker_anchors["artifact"],
+        "spectron_jpeg_marker_reader_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron libjpeg jdmarker network",
+        spectron_jdmarker_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron libjpeg jdmarker anchor count",
+        spectron_jdmarker_anchors["summary"]["anchor_count"],
+        9,
+    )
+    check(
+        "Spectron libjpeg jdmarker unique target count",
+        spectron_jdmarker_anchors["summary"]["unique_target_count"],
+        9,
+    )
+    check(
+        "Spectron libjpeg jdmarker high-confidence count",
+        spectron_jdmarker_anchors["summary"]["high_confidence_count"],
+        9,
+    )
+    check(
+        "Spectron libjpeg jdmarker normalized count",
+        spectron_jdmarker_anchors["summary"]["normalized_shape_exact_count"],
+        9,
+    )
+    check(
+        "Spectron libjpeg jdmarker exact count",
+        spectron_jdmarker_anchors["summary"]["full_metric_exact_count"],
+        8,
+    )
+    jdmarker_rows = {
+        row["spectron_ea"]: row
+        for row in spectron_jdmarker_anchors["anchors"]
+    }
+    jdmarker_expected = {
+        "0x29a028": "v18_jpeg_get_sof",
+        "0x29a46c": "v18_jpeg_examine_app0",
+        "0x29a75c": "v18_jpeg_skip_variable",
+        "0x29a870": "v18_jpeg_reset_marker_reader",
+        "0x29a894": "v18_jpeg_get_dht",
+        "0x29ac74": "v18_jpeg_save_marker",
+        "0x29afac": "v18_jpeg_get_interesting_appn",
+        "0x29b20c": "v18_jpeg_read_markers",
+        "0x29bf90": "v18_jpeg_read_restart_marker",
+    }
+    for target_ea, expected_name in jdmarker_expected.items():
+        check(
+            "Spectron libjpeg jdmarker target " + target_ea,
+            jdmarker_rows[target_ea]["proposed_name"],
+            expected_name,
+        )
+    check(
+        "Spectron v275 checkpoint artifact",
+        spectron_checkpoint_v275["artifact"],
+        "spectron_translation_checkpoint_20260828_v275",
+    )
+    check(
+        "Spectron v275 checkpoint parent",
+        spectron_checkpoint_v275["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v274",
+    )
+    check(
+        "Spectron v275 checkpoint database hash",
+        spectron_checkpoint_v275["database"]["sha256"],
+        "d16670d36212d270fc1ac476aae6ab5cb540ed4d209c50a8981edf2804dff9ee",
+    )
+    check(
+        "Spectron v275 checkpoint function count",
+        spectron_checkpoint_v275["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v275 checkpoint default sub count",
+        spectron_checkpoint_v275["database"]["default_sub_function_count"],
+        650,
+    )
+    check(
+        "Spectron v275 checkpoint jdmarker count",
+        spectron_checkpoint_v275["jdmarker_anchors"]["verified_name_count"],
+        9,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -11897,6 +11989,8 @@ def main():
         spectron_checkpoint_v273,
         spectron_jdinput_controller_anchors,
         spectron_checkpoint_v274,
+        spectron_jdmarker_anchors,
+        spectron_checkpoint_v275,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
