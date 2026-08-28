@@ -95,6 +95,9 @@ def main():
     spectron_checkpoint_v228 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v228.json"
     )
+    spectron_checkpoint_v229 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v229.json"
+    )
     spectron_manual = load_json(
         "artifacts/spectron_manual_translation_anchors_20260826.json"
     )
@@ -226,6 +229,9 @@ def main():
     )
     spectron_mrandom_property_residual_anchors = load_json(
         "artifacts/spectron_mrandom_property_residual_manual_translation_anchors_20260828.json"
+    )
+    spectron_gui_drawing_panel_script_anchors = load_json(
+        "artifacts/spectron_gui_drawing_panel_script_manual_translation_anchors_20260828.json"
     )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
@@ -3165,6 +3171,60 @@ def main():
         "Spectron MRandom randfloat target",
         mrandom_by_name["MRandomGenerator_script_randfloat"]["spectron_ea"],
         "0x1e7138",
+    )
+    check(
+        "Spectron drawing-panel script artifact",
+        spectron_gui_drawing_panel_script_anchors["artifact"],
+        "spectron_gui_drawing_panel_script_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron drawing-panel script network",
+        spectron_gui_drawing_panel_script_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron drawing-panel script total",
+        spectron_gui_drawing_panel_script_anchors["summary"]["anchor_count"],
+        3,
+    )
+    check(
+        "Spectron drawing-panel script high confidence",
+        spectron_gui_drawing_panel_script_anchors["summary"]["high_confidence_count"],
+        3,
+    )
+    check(
+        "Spectron drawing-panel script exact-shape count",
+        spectron_gui_drawing_panel_script_anchors["summary"]["normalized_shape_exact_count"],
+        3,
+    )
+    check(
+        "Spectron drawing-panel script full-metric count",
+        spectron_gui_drawing_panel_script_anchors["summary"]["full_metric_exact_count"],
+        3,
+    )
+    check(
+        "Spectron drawing-panel script default targets",
+        spectron_gui_drawing_panel_script_anchors["summary"]["target_default_name_count"],
+        3,
+    )
+    drawing_panel_script_by_name = {
+        row["original_name"]: row
+        for row in spectron_gui_drawing_panel_script_anchors["anchors"]
+    }
+    check(
+        "Spectron set-draw-palette target",
+        drawing_panel_script_by_name["GuiDrawingPanel_script_setdrawpalette"]["spectron_ea"],
+        "0x1e3fd8",
+    )
+    check(
+        "Spectron mask-image target",
+        drawing_panel_script_by_name["GuiDrawingPanel_script_maskimage"]["spectron_ea"],
+        "0x1e3fe0",
+    )
+    check(
+        "Spectron filter-rectangle target",
+        drawing_panel_script_by_name["GuiDrawingPanel_script_filterrectangle"]["spectron_ea"],
+        "0x1e3fe8",
     )
     check(
         "Spectron TString artifact",
@@ -6476,6 +6536,31 @@ def main():
         4,
     )
     check(
+        "Spectron v229 checkpoint artifact",
+        spectron_checkpoint_v229["artifact"],
+        "spectron_translation_checkpoint_20260828_v229",
+    )
+    check(
+        "Spectron v229 checkpoint parent",
+        spectron_checkpoint_v229["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v228",
+    )
+    check(
+        "Spectron v229 checkpoint database hash",
+        spectron_checkpoint_v229["database"]["sha256"],
+        "a2f715b293c1bd6bd0a29d8299ad6d492af6e23a8459b549486de756dcab79c8",
+    )
+    check(
+        "Spectron v229 checkpoint default sub count",
+        spectron_checkpoint_v229["database"]["default_sub_function_count"],
+        1084,
+    )
+    check(
+        "Spectron v229 checkpoint drawing-panel script count",
+        spectron_checkpoint_v229["gui_drawing_panel_script_anchors"]["verified_name_count"],
+        3,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -6580,6 +6665,7 @@ def main():
         spectron_gui_progress_getter_anchor,
         spectron_gui_text_list_selection_script_anchors,
         spectron_mrandom_property_residual_anchors,
+        spectron_gui_drawing_panel_script_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,
