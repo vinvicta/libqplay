@@ -9,6 +9,9 @@ import json
 from pathlib import Path
 
 
+ARTIFACT = "spectron_android_security_target_only_labels_corrected_20260828"
+
+
 SPECS = (
     (
         "0x24a1d8",
@@ -22,9 +25,9 @@ SPECS = (
         "0x2500ec",
         "0x39e488",
         "0x39e4a8",
-        "spectron_android_getjavaclassexists",
-        "getjavaclassexists",
-        "the target resolves a Java class through the JNI bridge and returns whether the lookup succeeded",
+        "spectron_android_getstaticjavafuncexists",
+        "getstaticjavafuncexists",
+        "the target resolves a Java static method through the JNI bridge and returns whether the lookup succeeded",
     ),
     (
         "0x2501f0",
@@ -33,6 +36,14 @@ SPECS = (
         "spectron_android_getjavafuncexists",
         "getjavafuncexists",
         "the target resolves a Java method using the requested class and method strings and returns whether the lookup succeeded",
+    ),
+    (
+        "0x250090",
+        "0x39e4b8",
+        "0x39e4d8",
+        "spectron_android_getjavaclassexists",
+        "getjavaclassexists",
+        "the target resolves a Java class through the JNI bridge and returns whether the lookup succeeded",
     ),
     (
         "0x24a188",
@@ -104,7 +115,7 @@ def make_label(target: dict, spec: tuple[str, ...]) -> dict:
         evidence[0] = (
             f"The helper is called from the retained DetectFridaLoop1 body at {callback_xref}; it has no script-table record."
         )
-    return {
+    result = {
         "target_ea": target_ea,
         "current_name": target["name"],
         "function_end": target["end_ea"],
@@ -124,6 +135,9 @@ def make_label(target: dict, spec: tuple[str, ...]) -> dict:
         "evidence": evidence,
         "name_action": "rename-with-spectron-prefix",
     }
+    if target_ea == "0x2500ec":
+        result["accepted_current_names"] = ["spectron_android_getjavaclassexists"]
+    return result
 
 
 def main() -> None:
@@ -131,6 +145,7 @@ def main() -> None:
     parser.add_argument("--spectron-features", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--spectron-binary-sha256", required=True)
+    parser.add_argument("--artifact", default=ARTIFACT)
     args = parser.parse_args()
 
     spectron = by_ea(load(args.spectron_features))
@@ -146,7 +161,7 @@ def main() -> None:
 
     result = {
         "schema_version": 1,
-        "artifact": "spectron_android_security_target_only_labels_20260828",
+        "artifact": args.artifact,
         "scope": "reviewed target-only labels for Spectron Android helpers and anti-instrumentation callbacks",
         "network_contacted": False,
         "inputs": {
@@ -174,6 +189,7 @@ def main() -> None:
             "The spectron_ prefix marks a target-specific descriptive label.",
             "The Frida-related names describe observed control flow and retained callers. They do not claim that the anti-instrumentation code is the only reason the client may fail to start.",
             "The Android helper names come from the target script table and are kept separate from the larger 22-row bridge artifact.",
+            "This corrected artifact separates getstaticjavafuncexists at 0x2500ec from getjavaclassexists at 0x250090; the earlier v266 artifact had those two table roles reversed.",
         ],
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)

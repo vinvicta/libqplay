@@ -13,22 +13,27 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current checked-in translation frontier is the v266 Spectron database. It
-contains 11,696 functions and 704 remaining default `sub_` names. The v263
+The current checked-in translation frontier is the v268 Spectron database. It
+contains 11,696 functions and 702 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas.popdialog`, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
 JNI bridge block. The v265 revision added four high-confidence legacy Android
 anchors for the TapJoy credential setters, the TapJoy connector, and the
-Android ID helper. The v266 revision added five target-only Android and
-anti-instrumentation labels. These names come from target tables, Java method
-strings, retained callers, and reviewed pseudocode. They are labels for this
-stripped 2.2 library, not claims that original debug symbols were recovered.
+Android ID helper. The v266 revision added an initial five target-only Android
+and anti-instrumentation labels. The v267 revision corrects a table-indexing
+error in that set and adds the missed `getjavaclassexists` callback, leaving
+six reviewed target-only labels. The v268 revision resolves the separate
+`quattro::android::getsignature` package-signature helper. These names come
+from target tables, Java method strings, retained callers, and reviewed
+pseudocode. They are labels for this stripped 2.2 library, not claims that
+original debug symbols were recovered.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
 `analysis/spectron_libqplay_translated_v265.i64`, and
-`analysis/spectron_libqplay_translated_v266.i64`.
+`analysis/spectron_libqplay_translated_v266.i64`, with the corrected frontier
+in `analysis/spectron_libqplay_translated_v268.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -38,9 +43,13 @@ credential slots and `connectToTapJoyService([B[B)Z` path back to their 1.8
 callbacks. The target Android ID helper is also now labeled from its matching
 1.8 body. The v266 target-only set records `getandroidabi`, Java class and
 method existence helpers, the Frida action setter, and a nanosleep loop called
-by the retained Frida detection routines. The Frida labels describe observed
-control flow and do not by themselves identify the reason a client fails to
-start.
+by the retained Frida detection routines. The correction distinguishes
+`getstaticjavafuncexists` at `0x2500EC` from `getjavaclassexists` at
+`0x250090`, which the initial v266 artifact had reversed. The v268 pass also
+labels the package-signature helper at `0x24A9EC` after decoding its
+`getPackageInfo`, `signatures[0]`, and `toCharsString` path. The Frida labels
+describe observed control flow and do not by themselves identify the reason
+a client fails to start.
 
 Two bridge registrations still need a dedicated review. The table calls one
 callback `getinstallerpackagename`, while its body walks through a package
@@ -53,10 +62,14 @@ The latest checkpoints are
 `artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json`,
 followed by
 `artifacts/spectron_translation_checkpoint_20260828_v265.json` and
-`artifacts/spectron_translation_checkpoint_20260828_v266.json`. All four
-newly reviewed legacy names and all five target-only names were reopened and
-verified with zero failures. These passes were static and offline. They did
-not modify the APK or contact a DNS, HTTP, or TLS service.
+`artifacts/spectron_translation_checkpoint_20260828_v266.json`, followed by
+the corrected
+`artifacts/spectron_translation_checkpoint_20260828_v267.json` and
+`artifacts/spectron_translation_checkpoint_20260828_v268.json`. All four
+newly reviewed legacy names, the six corrected target-only names, and the
+package-signature label were reopened and verified with zero failures. These
+passes were static and offline. They did not modify the APK or contact a DNS,
+HTTP, or TLS service.
 
 The latest Spectron audit corrects a useful shorthand in the earlier notes.
 The 2.2 `libqplay.so` is stripped of its static `.symtab` and DWARF data, but

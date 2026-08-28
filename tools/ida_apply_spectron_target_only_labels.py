@@ -89,7 +89,12 @@ def main() -> None:
             failures.append(item)
             plan.append(item)
             continue
-        if actual_before not in {label["current_name"], label["proposed_name"]}:
+        accepted_current_names = set(label.get("accepted_current_names", []))
+        if actual_before not in {
+            label["current_name"],
+            label["proposed_name"],
+            *accepted_current_names,
+        }:
             item["error"] = "target name is neither the expected default nor the reviewed label"
             failures.append(item)
             plan.append(item)
