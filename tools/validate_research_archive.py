@@ -377,6 +377,12 @@ def main():
     spectron_checkpoint_v253 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v253.json"
     )
+    spectron_gui_bitmap_button_property_anchors = load_json(
+        "artifacts/spectron_gui_bitmap_button_property_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v254 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v254.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -9127,6 +9133,129 @@ def main():
         5,
     )
     check(
+        "Spectron v254 bitmap-button property artifact",
+        spectron_gui_bitmap_button_property_anchors["artifact"],
+        "spectron_gui_bitmap_button_property_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v254 bitmap-button property network",
+        spectron_gui_bitmap_button_property_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v254 bitmap-button property anchor count",
+        spectron_gui_bitmap_button_property_anchors["summary"]["anchor_count"],
+        11,
+    )
+    check(
+        "Spectron v254 bitmap-button property registration row count",
+        spectron_gui_bitmap_button_property_anchors["summary"]["registration_row_count"],
+        11,
+    )
+    check(
+        "Spectron v254 bitmap-button property unique target count",
+        spectron_gui_bitmap_button_property_anchors["summary"]["unique_target_count"],
+        11,
+    )
+    check(
+        "Spectron v254 bitmap-button property high confidence",
+        spectron_gui_bitmap_button_property_anchors["summary"]["high_confidence_count"],
+        11,
+    )
+    check(
+        "Spectron v254 bitmap-button property target default count",
+        spectron_gui_bitmap_button_property_anchors["summary"]["target_default_name_count"],
+        11,
+    )
+    check(
+        "Spectron v254 bitmap-button property normalized shape count",
+        spectron_gui_bitmap_button_property_anchors["summary"]["normalized_shape_exact_count"],
+        11,
+    )
+    check(
+        "Spectron v254 bitmap-button property full metric count",
+        spectron_gui_bitmap_button_property_anchors["summary"]["full_metric_exact_count"],
+        9,
+    )
+    check(
+        "Spectron v254 bitmap-button property layout count",
+        spectron_gui_bitmap_button_property_anchors["summary"]["layout_change_count"],
+        0,
+    )
+    check(
+        "Spectron v254 bitmap-button property register-detail count",
+        spectron_gui_bitmap_button_property_anchors["summary"]["register_detail_difference_count"],
+        2,
+    )
+    check(
+        "Spectron v254 bitmap-button property getter count",
+        spectron_gui_bitmap_button_property_anchors["summary"]["getter_count"],
+        6,
+    )
+    check(
+        "Spectron v254 bitmap-button property setter count",
+        spectron_gui_bitmap_button_property_anchors["summary"]["setter_count"],
+        5,
+    )
+    bitmap_button_rows = spectron_gui_bitmap_button_property_anchors["anchors"]
+    check(
+        "Spectron v254 mouseover bitmap target",
+        next(
+            row["spectron_ea"]
+            for row in bitmap_button_rows
+            if row["original_name"] == "GuiBitmapButtonCtrl_get_mouseoverbitmap"
+        ),
+        "0x1b00dc",
+    )
+    check(
+        "Spectron v254 button type setter target",
+        next(
+            row["spectron_ea"]
+            for row in bitmap_button_rows
+            if row["original_name"] == "GuiButtonBaseCtrl_set_buttontype"
+        ),
+        "0x1b1478",
+    )
+    check(
+        "Spectron v254 group number setter target",
+        next(
+            row["spectron_ea"]
+            for row in bitmap_button_rows
+            if row["original_name"] == "GuiButtonBaseCtrl_set_groupnum"
+        ),
+        "0x1b1430",
+    )
+    check(
+        "Spectron v254 checkpoint artifact",
+        spectron_checkpoint_v254["artifact"],
+        "spectron_translation_checkpoint_20260828_v254",
+    )
+    check(
+        "Spectron v254 checkpoint parent",
+        spectron_checkpoint_v254["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v253",
+    )
+    check(
+        "Spectron v254 checkpoint database hash",
+        spectron_checkpoint_v254["database"]["sha256"],
+        "078918adcdeadc3fa6a894d07e0f9b1929dacaeb2043de3f9952ed8e2f9289e8",
+    )
+    check(
+        "Spectron v254 checkpoint function count",
+        spectron_checkpoint_v254["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v254 checkpoint default sub count",
+        spectron_checkpoint_v254["database"]["default_sub_function_count"],
+        781,
+    )
+    check(
+        "Spectron v254 checkpoint anchor count",
+        spectron_checkpoint_v254["gui_bitmap_button_property_anchors"]["verified_name_count"],
+        11,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -9256,6 +9385,7 @@ def main():
         spectron_tplayer_findweapon_anchors,
         spectron_tgui_animation_property_residual_anchors,
         spectron_gui_bitmap_property_anchors,
+        spectron_gui_bitmap_button_property_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,
