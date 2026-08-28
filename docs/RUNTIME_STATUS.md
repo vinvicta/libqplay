@@ -1482,6 +1482,20 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_particle_emitter_script_vars_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+265. The next IDA pass resolved three remaining `TSounds` tail methods.
+    `TSounds_stopSFX_TString_const` at `0xe0ea4` maps to target `0xe1a78`,
+    `TSounds_script_setSoundPitch` at `0xe2a7c` maps to target `0xe366c`, and
+    `TSounds_initStaticVars_void` at `0xe2a88` maps to target `0xe3678`.
+    The first two are exact complete feature matches. The initializer keeps
+    the same one-block allocation order and call structure, with the target
+    second helper allocation changing from `0x18` to `0x20`. All three
+    aliases reopened successfully in the v206 copy, which has 11,694
+    functions, 3,641 high-confidence labels, and 1,217 default `sub_` names,
+    with zero semantic reopen failures. See
+    `artifacts/spectron_sounds_tail_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_sounds_tail_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 264. The next IDA pass resolved 18 short Java sound interface methods.
     Fourteen `TSoundPlayer` base methods map to the `gqiNgaG64J` target table,
     two `TSoundEffectJava` capability methods map to `QPh5pbnC3y`, and two

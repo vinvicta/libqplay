@@ -341,6 +341,9 @@ def main():
     spectron_sounds_control_anchors = load_json(
         "artifacts/spectron_sounds_control_manual_translation_anchors_20260827.json"
     )
+    spectron_sounds_tail_anchors = load_json(
+        "artifacts/spectron_sounds_tail_manual_translation_anchors_20260827.json"
+    )
     spectron_tsound_effect_methods_anchors = load_json(
         "artifacts/spectron_tsound_effect_methods_manual_translation_anchors_20260827.json"
     )
@@ -3435,6 +3438,75 @@ def main():
         "0xe2470",
     )
     check(
+        "Spectron sounds tail artifact",
+        spectron_sounds_tail_anchors["artifact"],
+        "spectron_sounds_tail_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron sounds tail network",
+        spectron_sounds_tail_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron sounds tail total",
+        spectron_sounds_tail_anchors["summary"]["anchor_count"],
+        3,
+    )
+    check(
+        "Spectron sounds tail high confidence",
+        spectron_sounds_tail_anchors["summary"]["high_confidence_count"],
+        3,
+    )
+    check(
+        "Spectron sounds tail semantic overlap",
+        spectron_sounds_tail_anchors["summary"]["already_in_semantic_map"],
+        1,
+    )
+    check(
+        "Spectron sounds tail new context count",
+        spectron_sounds_tail_anchors["summary"]["new_context_anchor_count"],
+        2,
+    )
+    check(
+        "Spectron sounds tail exact-shape count",
+        spectron_sounds_tail_anchors["summary"]["exact_shape_anchor_count"],
+        2,
+    )
+    check(
+        "Spectron sounds tail full-feature count",
+        spectron_sounds_tail_anchors["summary"]["full_metric_exact_count"],
+        2,
+    )
+    check(
+        "Spectron sounds tail layout-change count",
+        spectron_sounds_tail_anchors["summary"]["layout_change_anchor_count"],
+        1,
+    )
+    check(
+        "Spectron sounds tail register-detail difference count",
+        spectron_sounds_tail_anchors["summary"]["register_detail_difference_count"],
+        1,
+    )
+    check(
+        "Spectron sounds tail target default count",
+        spectron_sounds_tail_anchors["summary"]["target_default_name_count"],
+        1,
+    )
+    sounds_tail_targets = {
+        row["original_name"]: row
+        for row in spectron_sounds_tail_anchors["anchors"]
+    }
+    for source_name, target_ea in {
+        "TSounds_stopSFX_TString_const": "0xe1a78",
+        "TSounds_script_setSoundPitch": "0xe366c",
+        "TSounds_initStaticVars_void": "0xe3678",
+    }.items():
+        check(
+            "Spectron sounds tail target " + source_name,
+            sounds_tail_targets[source_name]["spectron_ea"],
+            target_ea,
+        )
+    check(
         "Spectron TSoundEffect methods artifact",
         spectron_tsound_effect_methods_anchors["artifact"],
         "spectron_tsound_effect_methods_manual_translation_anchors_20260827",
@@ -4812,7 +4884,7 @@ def main():
     )
     check("Spectron checkpoint network", spectron_checkpoint["network_contacted"], False)
     check("Spectron checkpoint database function count", spectron_checkpoint["database"]["function_count"], 11694)
-    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1218)
+    check("Spectron checkpoint database default sub count", spectron_checkpoint["database"]["default_sub_function_count"], 1217)
     check("Spectron checkpoint database reopen", spectron_checkpoint["database"]["close_reopen_verified"], True)
     check("Spectron checkpoint high labels", spectron_checkpoint["translation"]["high_confidence_applied"], 3641)
     check("Spectron checkpoint manual anchor count", spectron_checkpoint["manual_anchors"]["verified_name_count"], 4)
@@ -5011,11 +5083,12 @@ def main():
     check("Spectron checkpoint sounds music-state anchor count", spectron_checkpoint["sounds_music_state_anchors"]["verified_name_count"], 3)
     check("Spectron checkpoint sounds effect anchor count", spectron_checkpoint["sounds_effect_anchors"]["verified_name_count"], 2)
     check("Spectron checkpoint sounds control anchor count", spectron_checkpoint["sounds_control_anchors"]["verified_name_count"], 2)
+    check("Spectron checkpoint sounds tail anchor count", spectron_checkpoint["sounds_tail_anchors"]["verified_name_count"], 3)
     check("Spectron checkpoint TSoundEffect methods anchor count", spectron_checkpoint["tsound_effect_methods_anchors"]["verified_name_count"], 7)
     check("Spectron checkpoint sound Java small-method anchor count", spectron_checkpoint["sound_java_small_methods_anchors"]["verified_name_count"], 7)
     check("Spectron checkpoint sound Java destructor anchor count", spectron_checkpoint["sound_java_destructor_anchors"]["verified_name_count"], 2)
     check("Spectron checkpoint sound base-interface anchor count", spectron_checkpoint["sound_base_interface_anchors"]["verified_name_count"], 18)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "cc2ce413b073ec7735a890074a7fc6870bf4baba838a7594d49e12c91a01e143")
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "f909721bba6d7d22b56727328f18382f71d57ce3d539686d450e6d910fa5aabd")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -5139,6 +5212,7 @@ def main():
         spectron_encryption_anchors,
         spectron_tlist_anchors,
         spectron_sounds_anchors,
+        spectron_sounds_tail_anchors,
         spectron_hash_container_anchors,
         spectron_tstring_anchors,
         spectron_tstring_clear_anchors,

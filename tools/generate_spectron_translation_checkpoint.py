@@ -211,6 +211,8 @@ def main() -> None:
     parser.add_argument("--sounds-effect-verification", type=Path)
     parser.add_argument("--sounds-control-anchors", type=Path)
     parser.add_argument("--sounds-control-verification", type=Path)
+    parser.add_argument("--sounds-tail-anchors", type=Path)
+    parser.add_argument("--sounds-tail-verification", type=Path)
     parser.add_argument("--tsound-effect-methods-anchors", type=Path)
     parser.add_argument("--tsound-effect-methods-verification", type=Path)
     parser.add_argument("--sound-java-small-methods-anchors", type=Path)
@@ -3080,6 +3082,42 @@ def main() -> None:
         result["sounds_control_anchors"] = sounds_control
         result["interpretation"].append(
             "The two-hundred-first database revision also contains the separately reviewed TSounds volume and music-update control anchors."
+        )
+    sounds_tail = None
+    if args.sounds_tail_anchors or args.sounds_tail_verification:
+        if not args.sounds_tail_anchors or not args.sounds_tail_verification:
+            raise ValueError(
+                "sound tail anchors and verification must be supplied together"
+            )
+        sounds_tail_document = load(args.sounds_tail_anchors)
+        sounds_tail_verification = load(args.sounds_tail_verification)
+        if (
+            sounds_tail_document.get("artifact")
+            != "spectron_sounds_tail_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected sound tail anchor artifact")
+        if not sounds_tail_verification.get("verified"):
+            raise ValueError("sound tail anchor reopen verification did not pass")
+        expected_sounds_tail = len(sounds_tail_document["anchors"])
+        if (
+            sounds_tail_verification["verified_name_count"]
+            != expected_sounds_tail
+        ):
+            raise ValueError("sound tail verification count differs from artifact")
+        sounds_tail = {
+            "anchor_path": str(args.sounds_tail_anchors),
+            "anchor_sha256": sha256_path(args.sounds_tail_anchors),
+            "reopen_verification": str(args.sounds_tail_verification),
+            "anchor_count": expected_sounds_tail,
+            "verified_name_count": sounds_tail_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": sounds_tail_verification["failure_count"],
+        }
+    if sounds_tail is not None:
+        result["sounds_tail_anchors"] = sounds_tail
+        result["interpretation"].append(
+            "The two-hundred-sixth database revision also contains the separately reviewed TSounds stop-SFX, script-pitch, and sound-cache static-initializer anchors."
         )
     tsound_effect_methods = None
     if (
