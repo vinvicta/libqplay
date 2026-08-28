@@ -13,10 +13,10 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current checked-in translation frontier is the v269 Spectron database. It
-contains 11,696 functions and 696 remaining default `sub_` names. The v263
+The current documented translation frontier is the v270 Spectron database. It
+contains 11,696 functions and 680 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
-`GuiCanvas.popdialog`, `TGraalVar` trigger, and Facebook graph upload
+`GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
 JNI bridge block. The v265 revision added four high-confidence legacy Android
 anchors for the TapJoy credential setters, the TapJoy connector, and the
@@ -27,18 +27,24 @@ six reviewed target-only labels. The v268 revision resolves the separate
 `quattro::android::getsignature` package-signature helper. The v269 revision
 adds five reviewed TGraalVar script callbacks, four exact metric matches and
 one target-layout match, plus a target-only `loadvarsfromarray` callback whose
-encoded table name decodes exactly. These names come from target tables, Java
-method strings, retained callers, and reviewed pseudocode. They are labels for
-this stripped 2.2 library, not claims that original debug symbols were
-recovered.
+encoded table name decodes exactly. The v270 revision adds 17 script-table
+callback anchors across the GUI, TGraalVar, and TTiles surfaces. It also
+corrects the earlier dialog assignment: target `0x1b5cf8` is `pushdialog`,
+while target `0x1b58c4` is `popdialog`. These names come from target tables,
+Java method strings, retained callers, and reviewed pseudocode. They are
+labels for this stripped 2.2 library, not claims that original debug symbols
+were recovered.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
 `analysis/spectron_libqplay_translated_v265.i64`,
 `analysis/spectron_libqplay_translated_v266.i64`,
 `analysis/spectron_libqplay_translated_v267.i64`,
-`analysis/spectron_libqplay_translated_v268.i64`, and the current frontier in
-`analysis/spectron_libqplay_translated_v269.i64`.
+`analysis/spectron_libqplay_translated_v268.i64`, and the v269 frontier in
+`analysis/spectron_libqplay_translated_v269.i64`. The v270 database is kept
+locally as `analysis/spectron_libqplay_translated_v270.i64`; its hash and
+reopen report are recorded in the v270 checkpoint because packed IDA files
+are intentionally excluded from the public repository.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -81,6 +87,17 @@ database and all six newly reviewed names were reopened with zero failures.
 The v269 checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v269.json`.
 
+The v270 script-table evidence is in
+`artifacts/spectron_script_table_surface_manual_translation_anchors_20260828.json`.
+It covers `pushdialog`, `popdialog`, `iscursoron`, the first-responder and
+repaint callbacks, the scroll-to-top and scroll-to-bottom callbacks, six
+TGraalVar script functions, and four TTiles callbacks. Twelve rows match the
+complete recorded feature set, three preserve the normalized body shape with
+register-detail changes, and two are layout changes caused by rebuilt target
+wrappers. The artifact also records the correction to the earlier
+`0x1b5cf8` label. The v270 checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v270.json`.
+
 The latest checkpoints are
 `artifacts/spectron_translation_checkpoint_20260828_v263_corrected.json` and
 `artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json`,
@@ -90,11 +107,13 @@ followed by
 the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v267.json`,
 `artifacts/spectron_translation_checkpoint_20260828_v268.json`, and
-`artifacts/spectron_translation_checkpoint_20260828_v269.json`. All four
+`artifacts/spectron_translation_checkpoint_20260828_v269.json`, followed by
+`artifacts/spectron_translation_checkpoint_20260828_v270.json`. All four
 newly reviewed legacy names, the six corrected target-only names, the
-package-signature label, and the v269 TGraalVar labels were reopened and
-verified with zero failures. These passes were static and offline. They did
-not modify the APK or contact a DNS, HTTP, or TLS service.
+package-signature label, the v269 TGraalVar labels, and the v270 script-table
+labels were reopened and verified with zero failures. These passes were
+static and offline. They did not modify the APK or contact a DNS, HTTP, or
+TLS service.
 
 The latest Spectron audit corrects a useful shorthand in the earlier notes.
 The 2.2 `libqplay.so` is stripped of its static `.symtab` and DWARF data, but

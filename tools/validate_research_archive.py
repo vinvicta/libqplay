@@ -479,6 +479,12 @@ def main():
     spectron_checkpoint_v269 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v269.json"
     )
+    spectron_script_table_surface_anchors = load_json(
+        "artifacts/spectron_script_table_surface_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v270 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v270.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -11031,6 +11037,115 @@ def main():
         1,
     )
     check(
+        "Spectron script-table surface artifact",
+        spectron_script_table_surface_anchors["artifact"],
+        "spectron_script_table_surface_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron script-table surface network",
+        spectron_script_table_surface_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron script-table surface anchor count",
+        spectron_script_table_surface_anchors["summary"]["anchor_count"],
+        17,
+    )
+    check(
+        "Spectron script-table surface unique target count",
+        spectron_script_table_surface_anchors["summary"]["unique_target_count"],
+        17,
+    )
+    check(
+        "Spectron script-table surface high-confidence count",
+        spectron_script_table_surface_anchors["summary"]["high_confidence_count"],
+        17,
+    )
+    check(
+        "Spectron script-table surface target default count",
+        spectron_script_table_surface_anchors["summary"]["target_default_name_count"],
+        16,
+    )
+    check(
+        "Spectron script-table surface normalized exact count",
+        spectron_script_table_surface_anchors["summary"]["normalized_shape_exact_count"],
+        15,
+    )
+    check(
+        "Spectron script-table surface full metric exact count",
+        spectron_script_table_surface_anchors["summary"]["full_metric_exact_count"],
+        12,
+    )
+    check(
+        "Spectron script-table surface layout change count",
+        spectron_script_table_surface_anchors["summary"]["layout_change_count"],
+        2,
+    )
+    check(
+        "Spectron script-table surface correction count",
+        spectron_script_table_surface_anchors["summary"]["correction_count"],
+        1,
+    )
+    script_table_surface_rows = {
+        row["spectron_ea"]: row
+        for row in spectron_script_table_surface_anchors["anchors"]
+    }
+    check(
+        "Spectron script-table pushdialog target",
+        script_table_surface_rows["0x1b5cf8"]["proposed_name"],
+        "v18_GuiCanvas_script_pushdialog",
+    )
+    check(
+        "Spectron script-table pushdialog correction",
+        script_table_surface_rows["0x1b5cf8"]["corrected_from"],
+        "v18_GuiCanvas_script_popdialog",
+    )
+    check(
+        "Spectron script-table popdialog target",
+        script_table_surface_rows["0x1b58c4"]["proposed_name"],
+        "v18_GuiCanvas_script_popdialog",
+    )
+    check(
+        "Spectron script-table objecttype target",
+        script_table_surface_rows["0x2141e4"]["proposed_name"],
+        "v18_TGraalVar_script_objecttype",
+    )
+    check(
+        "Spectron script-table gettileset target",
+        script_table_surface_rows["0x238edc"]["proposed_name"],
+        "v18_TTiles_script_gettileset",
+    )
+    check(
+        "Spectron v270 checkpoint artifact",
+        spectron_checkpoint_v270["artifact"],
+        "spectron_translation_checkpoint_20260828_v270",
+    )
+    check(
+        "Spectron v270 checkpoint parent",
+        spectron_checkpoint_v270["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v269",
+    )
+    check(
+        "Spectron v270 checkpoint database hash",
+        spectron_checkpoint_v270["database"]["sha256"],
+        "cc36148be4302e46bcc0a30bee43e4dd873ff7b25b93a6b49f74db7cfbfbb789",
+    )
+    check(
+        "Spectron v270 checkpoint function count",
+        spectron_checkpoint_v270["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v270 checkpoint default sub count",
+        spectron_checkpoint_v270["database"]["default_sub_function_count"],
+        680,
+    )
+    check(
+        "Spectron v270 checkpoint script-table count",
+        spectron_checkpoint_v270["script_table_surface_anchors"]["verified_name_count"],
+        17,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -11334,6 +11449,8 @@ def main():
         spectron_tgraalvar_script_runtime_anchors,
         spectron_tgraalvar_target_only_labels,
         spectron_checkpoint_v269,
+        spectron_script_table_surface_anchors,
+        spectron_checkpoint_v270,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

@@ -12213,33 +12213,34 @@ function without pretending that a 1.8 symbol survived.
 
 ### The popdialog correction
 
-One candidate needed to be corrected before it was saved as a final label. An
-early review paired target `0x1b5cf8` with the 1.8
-`TGUIScriptLoader_showMessageBox` function because both paths mention
-`MessageBoxDialog`. That was too broad. The target script table at
-`0x3935f8` points directly to `0x1b5cf8`, and the encoded target string at
-`0x2e5f18` decodes to `popdialog`. The corresponding source record is at
-`0x3805b0`, with callback `0x1b15f0`, and its decoded script name is also
-`popdialog`.
+The earlier review attached the `popdialog` name to target `0x1b5cf8` because
+its rebuilt dialog path mentions `MessageBoxDialog` and
+`MessageBoxDialog_Window`. The table evidence shows that assignment was
+wrong. The target row whose owner record begins at `0x3935d0` stores its
+script name pointer at `0x3935e0`, which decodes to `pushdialog`, and its
+callback cell at `0x3935f8` points to `0x1b5cf8`.
 
-The target body explains the distinction. It checks the dialog name, resolves
-`MessageBoxDialog_Window`, performs the pop or close transition, and updates
-the dialog state. It does not assign the text field. The actual target
-`TGUIScriptLoader_showMessageBox` implementation remains at `0x16c0ac`, where
-the earlier translated label already records the `MessageBoxDialog_Text`
-assignment. The final target label is therefore
-`v18_GuiCanvas_script_popdialog`, not a second copy of the message-box method.
-This correction is preserved in the generated anchor artifact instead of
-being hidden in the final IDA name.
+The next target row begins at `0x393600`. Its name pointer at `0x393610`
+decodes to `popdialog`, and its callback cell at `0x393628` points to
+`0x1b58c4`. The compact target body at `0x1b58c4` walks the canvas list and
+invokes the pop-dialog helper, matching the source `popdialog` callback at
+`0x1b15f0`. The larger target body at `0x1b5cf8` is the rebuilt push-dialog
+path and now carries `v18_GuiCanvas_script_pushdialog`.
 
-### v263 corrected cross-build anchors
+The source table makes the same distinction: `pushdialog` is registered at
+`0x380580` with callback cell `0x380598`, while `popdialog` is registered at
+`0x3805b0` with callback cell `0x3805c8`. The old v263 artifact remains as a
+historical record of the mistaken label. The v270 script-table artifact is
+the corrected record used by the current IDA revision.
+
+### v263 historical cross-build anchors
 
 The other two reviewed correspondences are the `TGraalVar` script trigger and
 the Facebook graph upload callback:
 
 | 1.8 role | Source | Spectron target | Final target label | Evidence |
 | --- | ---: | ---: | --- | --- |
-| `GuiCanvas_script_popdialog` | `0x1b15f0` | `0x1b5cf8` | `v18_GuiCanvas_script_popdialog` | `popdialog` table row and `MessageBoxDialog_Window` state transition |
+| `GuiCanvas_script_popdialog` | `0x1b15f0` | `0x1b5cf8` | historical `v18_GuiCanvas_script_popdialog` | superseded by the v270 table correction |
 | `TGraalVar_script_trigger` | `0x210374` | `0x216a64` | `v18_TGraalVar_script_trigger` | `unknown_object` check, universe ownership, script-space delivery, and virtual dispatch |
 | `MainAndroid_script_requestnewfacebookgraph2` | `0x246104` | `0x253544` | `v18_MainAndroid_script_requestnewfacebookgraph2` | resource loading, base64 conversion, list replacement, and Java `requestNewFacebookGraph2` call |
 
@@ -12520,6 +12521,71 @@ The checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v269.json`.
 
 This pass changed only disposable IDA databases, JSON evidence, and public
+documentation. It did not modify the APK or native library and did not
+contact a DNS, HTTP, TLS, Google Play, Firebase, or game-server endpoint.
+
+## 2026-08-28: Spectron script-table surface and dialog correction
+
+The v270 pass returned to the target's encoded script-function tables and
+translated the remaining default callback names that had direct 1.8 table
+counterparts. The target record layout is slightly different from the 1.8
+layout: the target keeps the script-name pointer at offset `0x10` and the
+callback at offset `0x28`, while the source callback is at offset `0x18`.
+That difference is why target table cells are recorded alongside the function
+addresses below.
+
+| 1.8 callback | Source | Spectron target | Applied label | Source cell | Target cell | Result |
+| --- | ---: | ---: | --- | ---: | ---: | --- |
+| `GuiCanvas_script_pushdialog` | `0x1b1a24` | `0x1b5cf8` | `v18_GuiCanvas_script_pushdialog` | `0x380598` | `0x3935f8` | corrected layout match |
+| `GuiCanvas_script_popdialog` | `0x1b15f0` | `0x1b58c4` | `v18_GuiCanvas_script_popdialog` | `0x3805c8` | `0x393628` | normalized shape |
+| `GuiCanvas_script_iscursoron` | `0x1af0cc` | `0x1b3284` | `v18_GuiCanvas_script_iscursoron` | `0x3805f8` | `0x393658` | normalized shape |
+| `GuiControl_script_makeFirstResponder` | `0x1b8a9c` | `0x1bd324` | `v18_GuiControl_script_makeFirstResponder` | `0x381378` | `0x3943d8` | exact metrics |
+| `GuiControl_script_repaint` | `0x1b7470` | `0x1bbc30` | `v18_GuiControl_script_repaint` | `0x381498` | `0x3944f8` | exact metrics |
+| `GuiScrollCtrl_script_scrolltobottom` | `0x1c198c` | `0x1c6468` | `v18_GuiScrollCtrl_script_scrolltobottom` | `0x382018` | `0x395078` | exact metrics |
+| `GuiScrollCtrl_script_scrolltotop` | `0x1c1980` | `0x1c645c` | `v18_GuiScrollCtrl_script_scrolltotop` | `0x382048` | `0x3950a8` | exact metrics |
+| `TGraalVar_script_ignoreevent` | `0x20d59c` | `0x2139c8` | `v18_TGraalVar_script_ignoreevent` | `0x3877a8` | `0x39a8f8` | exact metrics |
+| `TGraalVar_script_ignoreevents` | `0x20d58c` | `0x2139b8` | `v18_TGraalVar_script_ignoreevents` | `0x3877d8` | `0x39a928` | exact metrics |
+| `TGraalVar_script_objecttype` | `0x20dd34` | `0x2141e4` | `v18_TGraalVar_script_objecttype` | `0x387a48` | `0x39ab98` | exact metrics |
+| `TGraalVar_script_sortascending` | `0x210ce0` | `0x21743c` | `v18_TGraalVar_script_sortascending` | `0x387bf8` | `0x39ad48` | exact metrics |
+| `TGraalVar_script_sortdescending` | `0x210cd8` | `0x217434` | `v18_TGraalVar_script_sortdescending` | `0x387c28` | `0x39ad78` | exact metrics |
+| `TGraalVar_script_timershow` | `0x20eea4` | `0x215370` | `v18_TGraalVar_script_timershow` | `0x387cb8` | `0x39ae08` | exact metrics |
+| `TTiles_script_gettileset` | `0x22f2dc` | `0x238edc` | `v18_TTiles_script_gettileset` | `0x387ec0` | `0x39b010` | layout change |
+| `TTiles_script_gettilesettype` | `0x22f2ac` | `0x238ea0` | `v18_TTiles_script_gettilesettype` | `0x387ef0` | `0x39b040` | normalized shape |
+| `TTiles_script_addtiledef` | `0x230034` | `0x239d60` | `v18_TTiles_script_addtiledef` | `0x387f50` | `0x39b0a0` | exact metrics |
+| `TTiles_script_addtiledef2` | `0x230020` | `0x239d4c` | `v18_TTiles_script_addtiledef2` | `0x387f80` | `0x39b0d0` | exact metrics |
+
+The table also resolved a real correction rather than merely adding names.
+The old v263 review put `v18_GuiCanvas_script_popdialog` on `0x1b5cf8`
+because the function contains message-box strings. The target row at
+`0x3935e0` actually decodes to `pushdialog`, and its callback cell is
+`0x3935f8`. The next row at `0x393610` decodes to `popdialog` and points from
+`0x393628` to `0x1b58c4`. The latter body is the compact canvas-list pop
+loop, so the current labels are `v18_GuiCanvas_script_pushdialog` at
+`0x1b5cf8` and `v18_GuiCanvas_script_popdialog` at `0x1b58c4`.
+
+Twelve rows match the complete recorded feature set. Three preserve the
+normalized instruction shape with register-detail changes. The two layout
+rows are the rebuilt push-dialog wrapper and the target string-wrapper
+conversion used by `gettileset`. All 17 were reopened and verified with zero
+failures. The machine-readable artifact is
+`artifacts/spectron_script_table_surface_manual_translation_anchors_20260828.json`,
+generated by `tools/generate_spectron_script_table_surface_anchors.py`. Its
+SHA-256 is
+`92b2678bd50a6a1411bff737f22a8e738d68d87648b06d867af1b012e6696e5b`.
+
+### v270 database verification
+
+The reopened v270 IDA database contains 11,696 functions and 680 remaining
+default `sub_` names. The broad high-confidence semantic map still verifies,
+and the new script-table artifact verifies all 17 names with zero failures.
+The packed database is kept local because IDA database files are excluded
+from the public archive. Its final post-reopen SHA-256 is
+`cc36148be4302e46bcc0a30bee43e4dd873ff7b25b93a6b49f74db7cfbfbb789`.
+The v270 checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v270.json`, with SHA-256
+`b21ae4450e8c1109c534129693bf14749add7f4099898c2e5023b42216d64441`.
+
+This pass changed only the local IDA copy, JSON evidence, and public
 documentation. It did not modify the APK or native library and did not
 contact a DNS, HTTP, TLS, Google Play, Firebase, or game-server endpoint.
 
