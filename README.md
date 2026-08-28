@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v278 Spectron database. It
-contains 11,696 functions and 634 remaining default `sub_` names. The v263
+The current documented translation frontier is the v279 Spectron database. It
+contains 11,696 functions and 625 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -66,6 +66,11 @@ The v278 revision adds four high-confidence libjpeg postprocessing labels.
 They cover the post-controller start-pass switch, one-pass quantization, and
 the first and second passes of two-pass quantization. All four preserve
 normalized source-target shape, with three complete metric matches.
+The v279 revision adds nine high-confidence libjpeg upsampler labels. They
+cover the start and row-processing callbacks, full-size and unused-component
+paths, horizontal and vertical 2:1 expansion, fancy interpolation, generic
+integral expansion, and the simple h2v2 path. All nine match the complete
+recorded ARM64 feature set.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -92,6 +97,8 @@ The current v277 database is kept locally as
 `analysis/spectron_libqplay_translated_v277.i64`.
 The current v278 database is kept locally as
 `analysis/spectron_libqplay_translated_v278.i64`.
+The current v279 database is kept locally as
+`analysis/spectron_libqplay_translated_v279.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -234,6 +241,17 @@ one-pass quantization, or the two two-pass handlers. The v278 checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v278.json`; it records
 the reopened database with 634 remaining default names.
 
+The v279 libjpeg upsampler evidence is in
+`artifacts/spectron_jpeg_upsampler_manual_translation_anchors_20260828.json`.
+It labels the nine routines selected by the target
+`v18_jinit_upsampler_jpeg_decompress_struct` initializer at `0x29fc9c`.
+Those roles cover the public start and row callbacks, full-size and no-op
+component handlers, simple and fancy h2v1 expansion, fancy h1v2 expansion,
+generic integral expansion, and simple h2v2 expansion. Every row matches the
+complete recorded ARM64 feature set. The v279 checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v279.json`; it records
+the reopened database with 625 remaining default names.
+
 The latest checkpoints are
 `artifacts/spectron_translation_checkpoint_20260828_v263_corrected.json` and
 `artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json`,
@@ -252,15 +270,17 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v275.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v276.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v277.json`, and
-`artifacts/spectron_translation_checkpoint_20260828_v278.json`. All four
+`artifacts/spectron_translation_checkpoint_20260828_v278.json`, and
+`artifacts/spectron_translation_checkpoint_20260828_v279.json`. All four
 newly reviewed legacy names, the six corrected target-only names, the
 package-signature label, the v269 TGraalVar labels, the v270 script-table
 labels, the nine v271 runtime callback labels, the two v271 property labels,
 the v272 zlib role label, the six v273 libjpeg callback labels, the four
-v274 libjpeg controller labels, and the nine v275 libjpeg marker-reader labels
-and seven v276 libjpeg output-pipeline labels, and five v277 libjpeg
-progressive-Huffman labels, and four v278 libjpeg postprocessing labels were
-reopened and verified with zero failures.
+v274 libjpeg controller labels, the nine v275 libjpeg marker-reader labels,
+the seven v276 libjpeg output-pipeline labels, the five v277 libjpeg
+progressive-Huffman labels, the four v278 libjpeg postprocessing labels, and
+the nine v279 libjpeg upsampler labels were reopened and verified with zero
+failures.
 These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or
 TLS service.
