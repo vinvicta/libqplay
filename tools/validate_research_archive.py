@@ -704,6 +704,12 @@ def main():
     spectron_checkpoint_v306 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v306.json"
     )
+    spectron_freetype_tt_opcode_core_anchors = load_json(
+        "artifacts/spectron_freetype_tt_opcode_core_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v307 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v307.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -15079,6 +15085,170 @@ def main():
         6,
     )
     check(
+        "Spectron FreeType TrueType opcode-core artifact",
+        spectron_freetype_tt_opcode_core_anchors["artifact"],
+        "spectron_freetype_tt_opcode_core_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron FreeType TrueType opcode-core network",
+        spectron_freetype_tt_opcode_core_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron FreeType TrueType opcode-core anchor count",
+        spectron_freetype_tt_opcode_core_anchors["summary"]["anchor_count"],
+        6,
+    )
+    check(
+        "Spectron FreeType TrueType opcode-core high-confidence count",
+        spectron_freetype_tt_opcode_core_anchors["summary"][
+            "high_confidence_count"
+        ],
+        6,
+    )
+    check(
+        "Spectron FreeType TrueType opcode-core normalized count",
+        spectron_freetype_tt_opcode_core_anchors["summary"][
+            "normalized_shape_exact_count"
+        ],
+        6,
+    )
+    check(
+        "Spectron FreeType TrueType opcode-core full-match count",
+        spectron_freetype_tt_opcode_core_anchors["summary"][
+            "full_metric_exact_count"
+        ],
+        6,
+    )
+    freetype_tt_opcode_core_rows = {
+        row["spectron_ea"]: row
+        for row in spectron_freetype_tt_opcode_core_anchors["anchors"]
+    }
+    freetype_tt_opcode_core_expected = {
+        "0x26dad0": (
+            "0x260660",
+            "v18_Ins_MDRP",
+            "TrueType MDRP direct-relative-point opcode handler",
+            [],
+            True,
+        ),
+        "0x26dd50": (
+            "0x2608e0",
+            "v18_Ins_MIRP",
+            "TrueType MIRP indirect-relative-point opcode handler",
+            [],
+            True,
+        ),
+        "0x26e034": (
+            "0x260bc4",
+            "v18_Normalize",
+            "TrueType unit-vector normalization helper",
+            [],
+            True,
+        ),
+        "0x26e1ec": (
+            "0x260d7c",
+            "v18_Ins_MINDEX",
+            "TrueType MINDEX stack-reordering opcode handler",
+            [],
+            True,
+        ),
+        "0x26e270": (
+            "0x260e00",
+            "v18_TT_Done_Context",
+            "TrueType execution-context destructor",
+            [],
+            True,
+        ),
+        "0x26e2fc": (
+            "0x260e8c",
+            "v18_Ins_IP",
+            "TrueType IP interpolate-point opcode handler",
+            [],
+            True,
+        ),
+    }
+    check(
+        "Spectron FreeType TrueType opcode-core target set",
+        set(freetype_tt_opcode_core_rows),
+        set(freetype_tt_opcode_core_expected),
+    )
+    for target_ea, (
+        source_ea,
+        expected_name,
+        expected_role,
+        expected_differences,
+        expected_full_match,
+    ) in freetype_tt_opcode_core_expected.items():
+        row = freetype_tt_opcode_core_rows[target_ea]
+        check(
+            "Spectron FreeType TrueType opcode-core source " + target_ea,
+            row["original_ea"],
+            source_ea,
+        )
+        check(
+            "Spectron FreeType TrueType opcode-core name " + target_ea,
+            row["proposed_name"],
+            expected_name,
+        )
+        check(
+            "Spectron FreeType TrueType opcode-core role " + target_ea,
+            row["source_role"],
+            expected_role,
+        )
+        check(
+            "Spectron FreeType TrueType opcode-core metrics " + target_ea,
+            row["metric_differences"],
+            expected_differences,
+        )
+        check(
+            "Spectron FreeType TrueType opcode-core normalized " + target_ea,
+            row["normalized_shape_equal"],
+            True,
+        )
+        check(
+            "Spectron FreeType TrueType opcode-core full metrics " + target_ea,
+            row["full_metric_equal"],
+            expected_full_match,
+        )
+    check(
+        "Spectron v307 checkpoint artifact",
+        spectron_checkpoint_v307["artifact"],
+        "spectron_translation_checkpoint_20260828_v307",
+    )
+    check(
+        "Spectron v307 checkpoint parent",
+        spectron_checkpoint_v307["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v306",
+    )
+    check(
+        "Spectron v307 checkpoint parent path",
+        spectron_checkpoint_v307["parent_checkpoint"]["path"],
+        "artifacts/spectron_translation_checkpoint_20260828_v306.json",
+    )
+    check(
+        "Spectron v307 checkpoint database hash",
+        spectron_checkpoint_v307["database"]["sha256"],
+        "2f9136831860bd73c73b966212134aea033a819d9f96520f6a0d887158f36b9c",
+    )
+    check(
+        "Spectron v307 checkpoint function count",
+        spectron_checkpoint_v307["database"]["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v307 checkpoint default sub count",
+        spectron_checkpoint_v307["database"]["default_sub_function_count"],
+        436,
+    )
+    check(
+        "Spectron v307 checkpoint TrueType opcode-core count",
+        spectron_checkpoint_v307["freetype_tt_opcode_core_anchors"][
+            "verified_name_count"
+        ],
+        6,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -15447,6 +15617,8 @@ def main():
         spectron_checkpoint_v305,
         spectron_freetype_tt_opcode_state_anchors,
         spectron_checkpoint_v306,
+        spectron_freetype_tt_opcode_core_anchors,
+        spectron_checkpoint_v307,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
