@@ -401,6 +401,12 @@ def main():
     spectron_checkpoint_v257 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v257.json"
     )
+    spectron_guistretchctrl_property_anchors = load_json(
+        "artifacts/spectron_guistretchctrl_property_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v258 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v258.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -9652,6 +9658,129 @@ def main():
         11,
     )
     check(
+        "Spectron v258 GuiStretchCtrl property artifact",
+        spectron_guistretchctrl_property_anchors["artifact"],
+        "spectron_guistretchctrl_property_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v258 GuiStretchCtrl property network",
+        spectron_guistretchctrl_property_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v258 GuiStretchCtrl property anchor count",
+        spectron_guistretchctrl_property_anchors["summary"]["anchor_count"],
+        7,
+    )
+    check(
+        "Spectron v258 GuiStretchCtrl property registration row count",
+        spectron_guistretchctrl_property_anchors["summary"]["registration_row_count"],
+        7,
+    )
+    check(
+        "Spectron v258 GuiStretchCtrl property unique target count",
+        spectron_guistretchctrl_property_anchors["summary"]["unique_target_count"],
+        7,
+    )
+    check(
+        "Spectron v258 GuiStretchCtrl property high confidence",
+        spectron_guistretchctrl_property_anchors["summary"]["high_confidence_count"],
+        7,
+    )
+    check(
+        "Spectron v258 GuiStretchCtrl property target default count",
+        spectron_guistretchctrl_property_anchors["summary"]["target_default_name_count"],
+        7,
+    )
+    check(
+        "Spectron v258 GuiStretchCtrl property normalized shape count",
+        spectron_guistretchctrl_property_anchors["summary"]["normalized_shape_exact_count"],
+        7,
+    )
+    check(
+        "Spectron v258 GuiStretchCtrl property full metric count",
+        spectron_guistretchctrl_property_anchors["summary"]["full_metric_exact_count"],
+        7,
+    )
+    check(
+        "Spectron v258 GuiStretchCtrl property layout count",
+        spectron_guistretchctrl_property_anchors["summary"]["layout_change_count"],
+        0,
+    )
+    check(
+        "Spectron v258 GuiStretchCtrl property register-detail count",
+        spectron_guistretchctrl_property_anchors["summary"]["register_detail_difference_count"],
+        0,
+    )
+    check(
+        "Spectron v258 GuiStretchCtrl property getter count",
+        spectron_guistretchctrl_property_anchors["summary"]["getter_count"],
+        5,
+    )
+    check(
+        "Spectron v258 GuiStretchCtrl property setter count",
+        spectron_guistretchctrl_property_anchors["summary"]["setter_count"],
+        2,
+    )
+    guistretchctrl_property_rows = spectron_guistretchctrl_property_anchors["anchors"]
+    check(
+        "Spectron v258 GuiStretchCtrl clientextent target",
+        next(
+            row["spectron_ea"]
+            for row in guistretchctrl_property_rows
+            if row["original_name"] == "GuiStretchCtrl_get_clientextent"
+        ),
+        "0x1c9d08",
+    )
+    check(
+        "Spectron v258 GuiTextCtrl maxchars target",
+        next(
+            row["spectron_ea"]
+            for row in guistretchctrl_property_rows
+            if row["original_name"] == "GuiTextCtrl_get_maxchars"
+        ),
+        "0x1ca6d8",
+    )
+    check(
+        "Spectron v258 GuiTextCtrl text setter target",
+        next(
+            row["spectron_ea"]
+            for row in guistretchctrl_property_rows
+            if row["original_name"] == "GuiTextCtrl_set_text"
+        ),
+        "0x1ca710",
+    )
+    check(
+        "Spectron v258 checkpoint artifact",
+        spectron_checkpoint_v258["artifact"],
+        "spectron_translation_checkpoint_20260828_v258",
+    )
+    check(
+        "Spectron v258 checkpoint parent",
+        spectron_checkpoint_v258["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v257",
+    )
+    check(
+        "Spectron v258 checkpoint database hash",
+        spectron_checkpoint_v258["database"]["sha256"],
+        "7e7aa1628bd8f9123540346c06455d7b2e1aca803092f4ba3466cd4974f2bbd8",
+    )
+    check(
+        "Spectron v258 checkpoint function count",
+        spectron_checkpoint_v258["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v258 checkpoint default sub count",
+        spectron_checkpoint_v258["database"]["default_sub_function_count"],
+        757,
+    )
+    check(
+        "Spectron v258 checkpoint anchor count",
+        spectron_checkpoint_v258["guistretchctrl_property_anchors"]["verified_name_count"],
+        7,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -9785,6 +9914,7 @@ def main():
         spectron_guicontrol_property_tail_anchors,
         spectron_guigraalctrl_isrendering_anchors,
         spectron_guiscrollctrl_property_anchors,
+        spectron_guistretchctrl_property_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,
