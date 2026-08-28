@@ -693,6 +693,20 @@ This is the short handoff view. The full reasoning and command history are in
      `tools/generate_spectron_player_property_anchors.py`, and
      `artifacts/spectron_translation_checkpoint_20260828_v248.json`.
 
+63s. The v249 IDA checkpoint translates 30 residual `TGaniObject` and
+     `TGaniParam` property registrations to 29 distinct target callbacks. The
+     `head` and `headimg` rows share one getter. Twenty-six callback anchors
+     match normalized ARM64 shape, eight match the complete metric set, and
+     three retain target-shape changes. The target zoom accessor uses encoded
+     backing storage, while the rotation-center setter is a shorter rebuilt
+     wrapper. The clean reopen has 11,696 functions and 826 remaining default
+     `sub_` names. The database SHA-256 is
+     `50377973defadbbf25181fdad93a1fcc4a06480f20bcdbd180dd9a63dc27defa`.
+     See
+     `artifacts/spectron_gani_property_residual_manual_translation_anchors_20260828.json`,
+     `tools/generate_spectron_gani_property_residual_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260828_v249.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The

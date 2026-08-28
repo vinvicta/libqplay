@@ -1,0 +1,2236 @@
+{
+  "android_tapjoy_video_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "artifacts/spectron_android_tapjoy_video_state_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "8541126ca3159a4850ad9337cd26dc807ae07d9759f6726ba41a84332317be19",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_android_tapjoy_video_verification_v198.json",
+    "verified_name_count": 2
+  },
+  "ani_lexer_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_ani_lexer_fatal_manual_translation_anchor_20260826.json",
+    "anchor_sha256": "181a95ff75cc54b9b7f43510a7effe2faf1ee336c9dfd56ae04240913140b130",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_ani_lexer_fatal_verify_v93.json",
+    "verified_name_count": 1
+  },
+  "animation_palette_residual_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_animation_palette_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "b07240a3cfea7dad9c6d6b6fdea1cc772c2a2aa1caf2ecbad1453225871f4266",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_animation_palette_residual_verify_v116.json",
+    "verified_name_count": 4
+  },
+  "array_mutation_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_array_mutation_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "ab3df8cb82e9793014cb834e098fb6463150e9bfcf47e48dfdb6e3bab213369d",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_array_mutation_verify_v43.json",
+    "verified_name_count": 3
+  },
+  "artifact": "spectron_translation_checkpoint_20260828_v249",
+  "bitmap_array_holder_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_bitmap_array_holder_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "bdbeb8c5d27d16f1a7d3ea7807528ef4d581c95ddc6e18415c4a37245f41d3ba",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_bitmap_array_holder_verify_v104.json",
+    "verified_name_count": 5
+  },
+  "clear_cur_anis_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_clear_cur_anis_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "a6c8059459e445977bd69f54f54f9716f79e569130c9fa8442c18f5c9d749cec",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_clear_cur_anis_verification_v188.json",
+    "verified_name_count": 1
+  },
+  "client_action_anchors": {
+    "anchor_count": 11,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_client_action_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "e133f3132ec97ae043d26facfbaf910633fbacc84171cb65f318adb9dccb457c",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_client_action_anchor_verification_20260826.json",
+    "verified_name_count": 11
+  },
+  "client_environment_clock_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_client_environment_clock_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "e235383660abf55d199fc4114e38f646c6bffb385d151f06333b4a2f1166d9c9",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_client_environment_clock_verify_v95.json",
+    "verified_name_count": 2
+  },
+  "client_environment_graphics_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_client_environment_graphics_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "5604b36d2481a8efa6b1926d5dfbed0fd8bcd45322bd36d8d1ecc49befea8c1a",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_client_environment_graphics_verification_20260827.json",
+    "verified_name_count": 1
+  },
+  "client_environment_restart_state_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_client_environment_restart_state_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "b8a52d65773bb77f48b6d2d9936d55241b2c98f548f503aa9301e31701fd76d8",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_client_environment_restart_state_verification_20260827.json",
+    "verified_name_count": 1
+  },
+  "client_environment_static_clear_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "artifacts/spectron_client_environment_static_clear_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "e275d682bb3cd2ef8105121e6a6f7c457d8464a32d3eb93c91155555da0d3601",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_client_environment_static_clear_verification_20260827.json",
+    "verified_name_count": 2
+  },
+  "client_inbound_anchors": {
+    "anchor_count": 8,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_client_inbound_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "589f71f77d5a690b919a55328164469a47070470e73e4d69bf2109720bb010d0",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_client_inbound_anchor_verification_20260826.json",
+    "verified_name_count": 8
+  },
+  "client_outbound_anchors": {
+    "anchor_count": 29,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_client_outbound_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "89ddebbeda96dee08459e45f554dadb4e8f4d0c82e1bf196d416595e2387d580",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_client_outbound_anchor_verification_20260826.json",
+    "verified_name_count": 29
+  },
+  "client_request_anchors": {
+    "anchor_count": 11,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_client_request_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "a6dde6ca2230a5148b554a43174e47eba55955cbd5d8214f337aa6f9f1a26222",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_client_request_anchor_verification_20260826.json",
+    "verified_name_count": 11
+  },
+  "client_state_helper_anchors": {
+    "anchor_count": 7,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_client_state_helper_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "d13e84435d9f4c8331e88afb66636aeda1928696caf034d435fe74c57e3a6bf4",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_client_state_helper_verify_v17.json",
+    "verified_name_count": 7
+  },
+  "client_thread_residual_anchors": {
+    "anchor_count": 7,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_client_thread_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "175780fb8f383c13cbf271bd157bad0367ddb11c64069f90d90c78fff519a47e",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_client_thread_verify_v141.json",
+    "verified_name_count": 7
+  },
+  "client_var_core_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_client_var_core_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "b8ac69866f986fb44bfd4e943e8a2388be5bb0c1ba131d20e1176a35843b7be6",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_client_var_core_verify_v96.json",
+    "verified_name_count": 3
+  },
+  "color_manager_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_color_manager_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "cccd9506fe962d22da815b44c2a022a2f85724aa304914292f193e7567f16c90",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_color_manager_verify_v105.json",
+    "verified_name_count": 5
+  },
+  "compact_residual_anchors": {
+    "anchor_count": 13,
+    "anchor_path": "artifacts/spectron_compact_residual_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "4bb0ce3d64a3c5495690bb34d28c1155501cd5f66fb8dd128ab36e3217720a4d",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_compact_residual_verify_v213.json",
+    "verified_name_count": 13
+  },
+  "compression_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_compression_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "1ad892cf231c396348be34d240da5e92caf001d144ad59885395941bd50c778a",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_compression_verify_v168.json",
+    "verified_name_count": 5
+  },
+  "connection_helper_anchors": {
+    "anchor_count": 18,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_connection_helper_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "043b6a6f600e8a1e506202cc325a49fea1510152dbc69647e5e788a08db41c45",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_connection_helper_verify_v16.json",
+    "verified_name_count": 18
+  },
+  "connection_state_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_connection_state_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "81a74b28a1bc13d65fbe330c01c8359fceab14a714fb3218d13713816c2c30d4",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_connection_state_verify_v18.json",
+    "verified_name_count": 5
+  },
+  "core_anchors": {
+    "anchor_count": 16,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_core_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "0ee47d5ebf916a53a4b59aaba9a3e0d437682abd1dcb553511ab11164a378ebb",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_core_anchor_verification_20260826.json",
+    "verified_name_count": 16
+  },
+  "core_helper_anchors": {
+    "anchor_count": 30,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_core_helper_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "740460be86d5ae8095a2a57a16e38ef35e6026e879bd77f66ad041d66a00ded6",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_core_helper_verify_v28.json",
+    "verified_name_count": 30
+  },
+  "cyaint_tls_residual_anchors": {
+    "anchor_count": 30,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_cyaint_tls_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "b6d0e9332cafce3a4654e1bed77efaf069f46ca27c5f2052b8e4fb3a08dd12b5",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_cyaint_tls_residual_verify_v155.json",
+    "verified_name_count": 30
+  },
+  "cyaint_tls_residual_v2_anchors": {
+    "anchor_count": 53,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_cyaint_tls_residual_v2_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "9f275d40b850c87fa11968cc2cb3257b48f7de6112a7f2f787c0e9e102021aac",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_cyaint_tls_residual_v2_verify_v156.json",
+    "verified_name_count": 53
+  },
+  "database": {
+    "close_reopen_verified": true,
+    "default_sub_function_count": 826,
+    "format": "packed IDA 9.3 database",
+    "function_count": 11696,
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v249.i64",
+    "sha256": "50377973defadbbf25181fdad93a1fcc4a06480f20bcdbd180dd9a63dc27defa"
+  },
+  "displayed_gif_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_displayed_gif_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "c54b86477ce022f1938daf7c882a365d337e478800101fc5c782bfb6f759f315",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_displayed_gif_verification_v190.json",
+    "verified_name_count": 1
+  },
+  "draw_texture_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_draw_texture_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "75b29e19502e5c198ca0b152ec86fb7ac59696b82408055b5113cb4c4c2ca962",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_draw_texture_verify_v103.json",
+    "verified_name_count": 4
+  },
+  "drawing_panel_residual_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_drawing_panel_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "dc09334d4edf5936b2adad952393e6976782be0dc1858289d684d70bfd94a68e",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_drawing_panel_residual_verify_v108.json",
+    "verified_name_count": 6
+  },
+  "drawing_panel_texture_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_drawing_panel_texture_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "ebc776e7941659e6a61f71827babd041dcf9f6943c29902bd32d6bfa8769f491",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_drawing_panel_texture_verify_v102.json",
+    "verified_name_count": 5
+  },
+  "dummy_panel_residual_anchors": {
+    "anchor_count": 14,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_dummy_panel_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "050f7b7bb129e56aabd7247edd59bce94812d42fb3638bb2bdd8c7d81d3d3611",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_dummy_panel_residual_verify_v118.json",
+    "verified_name_count": 14
+  },
+  "encryption_anchors": {
+    "anchor_count": 9,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_encryption_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "c84add01a73fdee5c0c446ee936513859b18ffb0e075e0696b4fe211719fe92b",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_encryption_verify_v170.json",
+    "verified_name_count": 9
+  },
+  "encryption_graalvar_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "artifacts/spectron_encryption_graalvar_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "843dbd29a2c36d2215bb97e61dd5e6ef85652a8b059e98c72bbbe68621f4784b",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_encryption_graalvar_verify_v212.json",
+    "verified_name_count": 3
+  },
+  "event_object_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_event_object_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "b163e46676d62883222a0b82bb847165cead85eac4b665b79a5bd21598b030da",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_event_object_verify_v39.json",
+    "verified_name_count": 6
+  },
+  "execution_dispatch_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_execution_dispatch_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "94c4c036d4e531a20231334f897f7231750350e2a35427cb5df9e01e10661cb8",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_execution_dispatch_verify_v49.json",
+    "verified_name_count": 2
+  },
+  "file_cache_property_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "artifacts/spectron_file_cache_property_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "2379d12b04485d7be1110e72569c8c66ea1b971460d140e03267a8baccbcd823",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_file_cache_property_verify_v231.json",
+    "verified_name_count": 6
+  },
+  "files_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_files_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "54245f617665cf58fdd80ab692c27f6237631af5861a2122a05193df69a08b71",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_files_verify_v169.json",
+    "verified_name_count": 6
+  },
+  "font_bitmap_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_font_bitmap_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "e051d73b79956a47245b4e168ce9bd846865f87840740c94cbd29206a67fce4f",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_font_bitmap_verify_v89.json",
+    "verified_name_count": 4
+  },
+  "font_manager_font_residual_anchors": {
+    "anchor_count": 9,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_font_manager_font_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "4ad3e5622b73228166b029dccc010a60758d2bc3b498fd982464364769cf4212",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_font_manager_font_verify_v121.json",
+    "verified_name_count": 9
+  },
+  "font_options_font_data_residual_anchors": {
+    "anchor_count": 16,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_font_options_font_data_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "1bf69080524d67eda5a20eee1218e643a50223c3a0f38a354e3e0128ed477545",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_font_options_font_data_verify_v122.json",
+    "verified_name_count": 16
+  },
+  "font_runtime_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_font_runtime_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "4c4cccce6f9c191fc2a8bfd1897983204b43f8911babb2d9fca83f783985a4d9",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_font_runtime_verify_v106.json",
+    "verified_name_count": 6
+  },
+  "game_environment_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "artifacts/spectron_game_environment_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "9deda659414a012477b1b476f162783ec3e6326e9d5b4538ae9615fdb154fd99",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_game_environment_anchor_verification_20260827.json",
+    "verified_name_count": 4
+  },
+  "gani_constructor_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_gani_constructor_manual_translation_anchor_20260826.json",
+    "anchor_sha256": "3e944eefda9e9b76ed87d6e9a7b3775f45e292a125ab69d52686b8f3b3ee65ea",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gani_constructor_verify_v80.json",
+    "verified_name_count": 1
+  },
+  "gani_frame_playback_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_gani_frame_playback_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "d583abeeaebc7c3d8322b1e300dc1096771886aad7268c42cf1bf2cea25e6e0d",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gani_frame_playback_verify_v84.json",
+    "verified_name_count": 2
+  },
+  "gani_helper_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_gani_helper_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "542232ce38a8472d5ee1f51e826be37d486f73821e92fbd4f21659798392441c",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gani_helper_verify_v81.json",
+    "verified_name_count": 2
+  },
+  "gani_lifecycle_anchors": {
+    "anchor_count": 50,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_gani_lifecycle_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "e0cc99d0da6198c3e7df948730d5a7165eb055d33ee411f606e92d59da5b7f5d",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gani_lifecycle_verify_v85.json",
+    "verified_name_count": 50
+  },
+  "gani_property_anchors": {
+    "anchor_count": 8,
+    "anchor_path": "artifacts/spectron_gani_property_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "7f81cd788c62ec13af2471f583c002536155d913939ed967e36d83278b9456d9",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gani_property_verify_v238.json",
+    "verified_name_count": 8
+  },
+  "gani_property_residual_anchors": {
+    "anchor_count": 29,
+    "anchor_path": "artifacts/spectron_gani_property_residual_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "d3e0d5dd34062b73e2b6def83ae99a81f49174b111f4b4da0c8ad3bcc76facd2",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gani_property_residual_verification_v249.json",
+    "verified_name_count": 29
+  },
+  "gani_render_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_gani_render_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "de135732666eb202935184f902c2ec2425133e8dbe6aae3f7732e5c7a77bb035",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gani_render_verify_v83.json",
+    "verified_name_count": 3
+  },
+  "gani_runtime_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_gani_runtime_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "7ebcde5af56a63050062d7449cc95d840a273fb20036948d6647896e13e1efa1",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gani_runtime_verify_v82_serial.json",
+    "verified_name_count": 4
+  },
+  "gif_decoder_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_gif_decoder_manual_translation_anchor_20260826.json",
+    "anchor_sha256": "d0f1b1b6a94889fdf4a8ece62b493fcb926fe615e7503af014b79b33e8cf3712",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gif_decoder_verify_v111.json",
+    "verified_name_count": 1
+  },
+  "gsfunctions_callback_residual_anchors": {
+    "anchor_count": 13,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_gsfunctions_callback_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "7c1164534d9ab19ae2bae37fecb7db8b06f6f7ca6471288ad363cb65888f1384",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gsfunctions_callback_verify_v148.json",
+    "verified_name_count": 13
+  },
+  "gsfunctions_client_boundary_residual_anchors": {
+    "anchor_count": 12,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_gsfunctions_client_boundary_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "7121a6f1f5411abeca60ec82702f36969a37ff21d6f74fd14ab0f62829b5cdff",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gsfunctions_client_boundary_verify_v153.json",
+    "verified_name_count": 12
+  },
+  "gsfunctions_client_exact_residual_anchors": {
+    "anchor_count": 20,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_gsfunctions_client_exact_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "5a247530ebc8bb54c2fc1955d18e28883770e918207ff89c2a6b385b356239d5",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gsfunctions_client_exact_verify_v150.json",
+    "verified_name_count": 20
+  },
+  "gsfunctions_client_exact_residual_v2_anchors": {
+    "anchor_count": 20,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_gsfunctions_client_exact_residual_v2_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "0946d64de40737cb9d136c45e71d5113feb7dbcc1af79d32a9b9835d2a47f68e",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gsfunctions_client_exact_v2_verify_v151_retry.json",
+    "verified_name_count": 20
+  },
+  "gsfunctions_client_exact_residual_v3_anchors": {
+    "anchor_count": 9,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_gsfunctions_client_exact_residual_v3_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "9e1a263429b3383c0a6c4297747c05ce7492f700eea2f47a1772aced3842e6f7",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gsfunctions_client_exact_v3_verify_v152.json",
+    "verified_name_count": 9
+  },
+  "gsfunctions_client_exact_residual_v4_anchors": {
+    "anchor_count": 11,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_gsfunctions_client_exact_residual_v4_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "484ffa2b0a0c1c7cd11e3f170ea3fe2b14e488187bcf50e84c178621664a3548",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gsfunctions_client_exact_v4_verify_v154.json",
+    "verified_name_count": 11
+  },
+  "gsfunctions_math_string_residual_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_gsfunctions_math_string_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "37ac5b21ac6be418a48e9b12e1c8c0abf3d24ae68c81f6ea0e5bd0dbe943cd2d",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gsfunctions_math_string_verify_v146.json",
+    "verified_name_count": 6
+  },
+  "gsfunctions_property_anchors": {
+    "anchor_count": 12,
+    "anchor_path": "artifacts/spectron_gsfunctions_property_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "b6652561c949dfcc9c1cb0bd0621ebda4b9263fd7a5879ad08f389868492d300",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gsfunctions_property_verify_v235.json",
+    "verified_name_count": 12
+  },
+  "gsfunctions_randomstring_residual_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_gsfunctions_randomstring_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "3dc4883d5920addff8358780f37dab6291589181a4cdde93a5351fe5cb2b15e9",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gsfunctions_randomstring_verify_v149.json",
+    "verified_name_count": 1
+  },
+  "gui_alignment_tables_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_gui_alignment_tables_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "b8e8f3fba0573a5c3af775e6056e5ad01b84fb6efa20f94d2267907bcb6d1e7a",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gui_alignment_tables_verification_20260827.json",
+    "verified_name_count": 1
+  },
+  "gui_array_popup_residual_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "artifacts/spectron_gui_array_popup_residual_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "c0f3c3d585a9cad938eed29cd28cfcf1ea3e84693e7bcf7c0f0b4df1158e78dc",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gui_array_popup_residual_verify_v224.json",
+    "verified_name_count": 6
+  },
+  "gui_browser_property_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "artifacts/spectron_gui_browser_property_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "ff1d92d1ed65c0c9a880341e896051176f46db3a7479596c8d437197e4f8f4e9",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gui_browser_property_verify_v222.json",
+    "verified_name_count": 3
+  },
+  "gui_button_types_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_gui_button_types_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "4b152c96179be12a7fc1b18c44a552a4f44cf20f2d467761fa90b921cc063360",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gui_button_types_verification_v191.json",
+    "verified_name_count": 1
+  },
+  "gui_context_menu_property_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "artifacts/spectron_gui_context_menu_property_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "ebf6585f9392301136b4a4c520aa8bd5e9d492b70c07e4402bca9b3beeeda176",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gui_context_menu_property_verify_v223.json",
+    "verified_name_count": 5
+  },
+  "gui_control_create_residual_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_guicontrol_create_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "9b7e028195005ffb6ff154652d083acc8181f08e3b7db7e256256a7ab71f5f1a",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_guicontrol_create_verify_v131.json",
+    "verified_name_count": 1
+  },
+  "gui_control_event_dispatch_residual_anchors": {
+    "anchor_count": 8,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_guicontrol_event_dispatch_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "d461eef73f5998a19d9bb9ece2169a65c0726c80dea879415e683bf323c56a53",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_guicontrol_event_dispatch_verify_v129.json",
+    "verified_name_count": 8
+  },
+  "gui_control_event_sizing_residual_anchors": {
+    "anchor_count": 8,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_guicontrol_event_sizing_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "b131c3a6574b207711a28ddf983dbe1bb47f17b31e50c74da34f350b775eb3d0",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_guicontrol_event_sizing_verify_v127.json",
+    "verified_name_count": 8
+  },
+  "gui_control_initialization_residual_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_guicontrol_initialization_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "426160505310a928b9af1e79b18b93c06db36969c6204be307fe9f4e905cb527",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_guicontrol_initialization_verify_v130.json",
+    "verified_name_count": 2
+  },
+  "gui_control_profile_accessor_anchors": {
+    "anchor_count": 89,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_gui_control_profile_accessor_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "9dee86cf9f801b9d8d74b85c128815233f42e3c11bf4f10971251ec2125ca8fe",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gui_control_profile_verify_v123.json",
+    "verified_name_count": 89
+  },
+  "gui_control_profile_destructor_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_gui_control_profile_destructor_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "39e91718d024c1afe9b06535e7e6c741edb5046a978108b9c70e2b7cfc4dc30e",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gui_control_profile_destructor_verify_v124.json",
+    "verified_name_count": 6
+  },
+  "gui_control_property_residual_anchors": {
+    "anchor_count": 61,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_guicontrol_property_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "34175178c581c619e97297ea06f76673534e60a8751517f8f0209b14df84f650",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_guicontrol_property_verify_v125.json",
+    "verified_name_count": 61
+  },
+  "gui_control_style_bounds_residual_anchors": {
+    "anchor_count": 12,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_guicontrol_style_bounds_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "dc6c47778d468b09e53ced25fa393110f90f43c60e4ca185bbb6b33a707ce717",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_guicontrol_style_bounds_verify_v128.json",
+    "verified_name_count": 12
+  },
+  "gui_control_virtual_residual_anchors": {
+    "anchor_count": 13,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_guicontrol_virtual_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "56a22923033d515ef55cd2433bbe97de0f03ee7e39722f381d90bb7dff30da69",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_guicontrol_virtual_verify_v126.json",
+    "verified_name_count": 13
+  },
+  "gui_drawing_panel_script_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "artifacts/spectron_gui_drawing_panel_script_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "397157acb13669631e2521a32d7e54f86da999bb792f578b9ea4415d5bad055f",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gui_drawing_panel_script_verify_v229.json",
+    "verified_name_count": 3
+  },
+  "gui_drawing_showimg_property_anchors": {
+    "anchor_count": 16,
+    "anchor_path": "artifacts/spectron_gui_drawing_showimg_property_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "a25f398300ebc5a0f740e7fbe33883934c6e803a7bc294e8bb9cbad978642988",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gui_residual_property_verify_v221.json",
+    "verified_name_count": 16
+  },
+  "gui_ml_text_residual_anchors": {
+    "anchor_count": 39,
+    "anchor_path": "artifacts/spectron_gui_ml_text_residual_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "f309cabce022057c99f123fb281bc88170ef0648edba96e33fa3288d104f02e0",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gui_ml_residual_verify_v218.json",
+    "verified_name_count": 39
+  },
+  "gui_popup_rows_anchor": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_gui_popup_rows_manual_translation_anchor_20260828.json",
+    "anchor_sha256": "7bd8259251ce38f56b786b5d973235a015441c75ba11dae47a15500508c0066d",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gui_popup_rows_verify_v225.json",
+    "verified_name_count": 1
+  },
+  "gui_progress_getter_anchor": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_gui_progress_getter_manual_translation_anchor_20260828.json",
+    "anchor_sha256": "7a7f5a9a3058b941389dd8c970af7fae673d5c1633d6bbe4368f14ac391157ea",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gui_progress_getter_verify_v226.json",
+    "verified_name_count": 1
+  },
+  "gui_stretch_modes_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_gui_stretch_modes_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "8372b46e89679fa0e2dd812cbcfed3b43a1c9b5af726e5faca7516789d9ad950",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gui_stretch_modes_verification_20260827.json",
+    "verified_name_count": 1
+  },
+  "gui_text_list_anchors": {
+    "anchor_count": 8,
+    "anchor_path": "artifacts/spectron_gui_text_list_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "1c8af1e352c9d3693d4d05c48fc2b10737d376076d42dd89e229b046111b1a37",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gui_text_list_anchor_verification_20260827.json",
+    "verified_name_count": 8
+  },
+  "gui_text_list_entry_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "artifacts/spectron_gui_text_list_entry_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "bb009d3fbb7ce99c3d4030964f8187d194017981a4d8655e408640b218146cec",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gui_text_list_entry_verify_v211.json",
+    "verified_name_count": 3
+  },
+  "gui_text_list_entry_property_anchors": {
+    "anchor_count": 30,
+    "anchor_path": "artifacts/spectron_gui_text_list_entry_property_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "ca5b7c3691b5893f0a24f4a5b3583d3c6357bb1a1c6ba9c505500e2fa161ded0",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gui_text_list_entry_property_verify_v219.json",
+    "verified_name_count": 30
+  },
+  "gui_text_list_residual_anchors": {
+    "anchor_count": 10,
+    "anchor_path": "artifacts/spectron_gui_text_list_residual_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "fa4e2ca31af47cd7f875e22a7ae41c23074917e2ec73282f5cf4002f31ab8c23",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gui_text_list_residual_verify_v220.json",
+    "verified_name_count": 10
+  },
+  "gui_text_list_selection_script_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "artifacts/spectron_gui_text_list_selection_script_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "dbb3e74894933f8f80e042f134c03cb429b0e22e524498143e08e654bab56184",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_gui_text_list_selection_script_verify_v227.json",
+    "verified_name_count": 2
+  },
+  "hash_container_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_hash_container_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "49050e0f6f182df1e1ccf7c8d3a45697aae11470ea17e189b121788aa6e8861a",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_hash_container_verify_v173.json",
+    "verified_name_count": 5
+  },
+  "hash_family_anchors": {
+    "anchor_count": 9,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_hash_family_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "727dd8373ac584a098f381cf2c925313e058485a41a1aa98f541a02ab1cd73d8",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_hash_family_verify_v99.json",
+    "verified_name_count": 9
+  },
+  "hash_lifecycle_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "artifacts/spectron_hash_lifecycle_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "e4117ad030aafeb189a1ef8e85db4b6cb77c4ee54476c4f77bf09b5cae2fe3cd",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_hash_lifecycle_verify_v210.json",
+    "verified_name_count": 6
+  },
+  "hidden_testnpc_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_hidden_testnpc_manual_translation_anchor_20260826.json",
+    "anchor_sha256": "29fbda68889eef19de270e1f245dd0f547bf032780759c716a1e498d0e132283",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_hidden_testnpc_verification_v78.json",
+    "verified_name_count": 1
+  },
+  "html_atom_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_html_atom_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "46fa5e7f34a48447486e825832426ce2342245a31b74a6b2863421764eaba663",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_html_atom_verify_v23.json",
+    "verified_name_count": 5
+  },
+  "html_page_anchors": {
+    "anchor_count": 8,
+    "anchor_path": "artifacts/spectron_html_page_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "bacbe410ac05b9403452b45d67b0bf7106e5727a6f76aaeeb8af123acb21f24d",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_html_page_anchor_verification_20260827.json",
+    "verified_name_count": 8
+  },
+  "http_request_anchors": {
+    "anchor_count": 12,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_http_request_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "b0c6f303179e53c34d58260b7ccede5a30a13b2e3a694a6aa6958938f41be612",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_http_request_verify_v19.json",
+    "verified_name_count": 12
+  },
+  "http_request_cleanup_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "artifacts/spectron_http_request_cleanup_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "1f0e124931560cc4df2918b6557a2169f57658723ed9a7b4f1177d4f40fb3a02",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_http_request_cleanup_verify_v180.json",
+    "verified_name_count": 5
+  },
+  "http_request_receive_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_http_request_receive_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "1354c3610ffc7fdac23f8d54c2b880bbbf5a94c3860f6ad482c286db20fdbe33",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_http_request_receive_verify_v177.json",
+    "verified_name_count": 2
+  },
+  "http_request_state_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_http_request_state_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "fd46ccedb4b225d7d1bc17dca1c839675efc54c8227d650d266b85dbe4d72f4a",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_http_request_state_verify_v21.json",
+    "verified_name_count": 4
+  },
+  "image_html_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_image_html_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "143f33d5666a6508b4aba837d489166452b5613dbf9bacbf32cf0d856ed5f702",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_image_html_verify_v109.json",
+    "verified_name_count": 4
+  },
+  "input_window_anchors": {
+    "anchor_count": 8,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_input_window_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "d79db3be99a3d80fe7b171c9b053df8a0c24871c327dc873adead283b8b901c6",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_input_window_verify_v25.json",
+    "verified_name_count": 8
+  },
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "reopen_verification": "/tmp/spectron_translation_verify_v218.json",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "translation_map": "artifacts/spectron_semantic_function_translation_20260826.json",
+    "translation_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92"
+  },
+  "interpretation": [
+    "The saved database contains v18_ analysis labels on the verified high-confidence target functions.",
+    "The labels preserve the original 1.8 semantic names while keeping the Spectron address and obfuscated name in the map.",
+    "The medium-confidence, ambiguous, and unmatched functions remain review-only and were not silently renamed.",
+    "The second database revision also contains the separately reviewed manual context anchors.",
+    "The third database revision also contains the separately reviewed connector and socket context anchors.",
+    "The fourth database revision also contains the separately reviewed resource, rendering, GUI, scripting, and client context anchors.",
+    "The two-hundred-eighth database revision also contains the separately reviewed small THTMLPage method-family anchors.",
+    "The two-hundred-ninth database revision also contains the separately reviewed small GuiTextListCtrl method-family anchors.",
+    "The two-hundred-eleventh database revision also contains the separately reviewed small GuiTextListEntry property anchors.",
+    "The two-hundred-twelfth database revision also contains the separately reviewed TEncryption and TGraalVar compact helpers.",
+    "The two-hundred-thirteenth database revision also contains the separately reviewed compact property, wrapper, handler, cache, and script anchors.",
+    "The two-hundred-fourteenth database revision also contains the separately reviewed T2DMatrixManager method block.",
+    "The two-hundred-fifteenth database revision also contains the separately reviewed MRandomGenerator, MRandomLCG, and MRandomR250 class-block anchors.",
+    "The two-hundred-sixteenth database revision also contains the separately reviewed residual TStringList destructor, removal, case-insensitive lookup, and indexed-access anchors.",
+    "The two-hundred-seventeenth database revision also contains the separately reviewed residual Explosion, Bomb, Chest, Extra, Flying, Leap, and Sign lifecycle anchors.",
+    "The two-hundred-eighteenth database revision also contains the separately reviewed residual GuiMLTextCtrl accessors, script wrappers, input handlers, reflow path, and property destructors.",
+    "The fifth database revision also contains the separately reviewed map-entry, file-delivery, script, text-control, and server-list context anchors.",
+    "The sixth database revision also contains the separately reviewed download-queue, update-request, server-modify, and image-checksum context anchors.",
+    "The seventh database revision also contains the separately reviewed client action packet serializer anchors.",
+    "The eighth database revision also contains the separately reviewed remaining client outbound packet serializer anchors.",
+    "The ninth database revision also contains the separately reviewed resource matching, stream, and game-file resolution anchors.",
+    "The tenth database revision also contains the separately reviewed client script bridge anchors.",
+    "The eleventh database revision also contains the separately reviewed client request and window-state serializer anchors.",
+    "The twelfth database revision also contains the separately reviewed client inbound and state-transition anchors.",
+    "The thirteenth database revision also contains the separately reviewed login, event, and small client state helper anchors.",
+    "The fourteenth database revision also contains the separately reviewed client encryption-in tail-thunk anchor.",
+    "The fifteenth database revision also contains the separately reviewed player and download lookup helper anchors.",
+    "The sixteenth database revision also contains the separately reviewed connection, packet-state, SSL, and low-level field anchors.",
+    "The seventeenth database revision also contains the separately reviewed compact client state and forwarding anchors.",
+    "The eighteenth database revision also contains the separately reviewed client connection-state and encrypted-file helper anchors.",
+    "The nineteenth database revision also contains the separately reviewed HTTP request field, lifecycle, and outbound-buffer anchors.",
+    "The twentieth database revision also contains the separately reviewed socket status and address helper anchors.",
+    "The twenty-first database revision also contains the separately reviewed HTTP request counters and download-state anchors.",
+    "The twenty-second database revision also contains the separately reviewed TServerNPC blocking, draw-mode, visibility, bow, and pelt helper anchors.",
+    "The twenty-third database revision also contains the separately reviewed THTMLAtom constructor and buffer accessor anchors.",
+    "The twenty-fourth database revision also contains the separately reviewed compact TPlayer attachment, update, freeze, and sprite helper anchors.",
+    "The twenty-fifth database revision also contains the separately reviewed input and window bridge helper anchors.",
+    "The twenty-sixth database revision also contains the separately reviewed animation, particle, and show-image helper anchors.",
+    "The twenty-seventh database revision also contains the separately reviewed GS2-facing TGraalVar, TScript, TScriptSpace, and TScriptUniverse helper anchors.",
+    "The twenty-eighth database revision also contains the separately reviewed level, script, network-policy, tile, particle, and native callback helper anchors.",
+    "The twenty-ninth database revision also contains the separately reviewed texture, OpenGL, drawing-panel, GUI-control, markup, and scrolling helper anchors.",
+    "The thirtieth database revision also contains the separately reviewed image callbacks, recursive folder-loader helper, and YAJL JSON callback anchors.",
+    "The thirty-first database revision also contains the separately reviewed resource comparator, link, alternative, and stream-materialization anchors.",
+    "The thirty-second database revision also contains the separately reviewed GS2 script-machine construction, resolution, assignment, and comparison anchors.",
+    "The thirty-third database revision also contains the separately reviewed TScriptSpace event, class-transition, event-state, and timeout anchors.",
+    "The thirty-fourth database revision also contains the separately reviewed GS2 function-invocation, action-dispatch, caller-wake-up, and action-cleanup anchors.",
+    "The thirty-fifth database revision also contains the separately reviewed GS2 script-state, top-level action, and incoming-event dispatch anchors.",
+    "The thirty-sixth database revision also contains the separately reviewed GS2 scheduler, action-loop, event-object cleanup, and class-list replacement anchors.",
+    "The thirty-seventh database revision also contains the separately reviewed event-object and catcher-list constructor, destructor, registration, and receive-path anchors.",
+    "The thirty-eighth database revision also contains the separately reviewed GS2 script-action constructor and destructor anchors.",
+    "The thirty-ninth database revision also contains the separately reviewed GS2 stack-entry float, string, and object conversion anchors.",
+    "The fortieth database revision also contains the separately reviewed execution restoration, character extraction, and action-context lookup anchors.",
+    "The forty-first database revision also contains the separately reviewed GS2 single-cell, two-dimensional, and replacement array mutation anchors.",
+    "The forty-second database revision also contains the separately reviewed GS2 all-index and substring-position search anchors.",
+    "The forty-third database revision also contains the separately reviewed GS2 next-string, indexed-string, and string-formatting helper anchors.",
+    "The forty-fourth database revision also contains the separately reviewed GS2 variable-construction and legacy path-resolution anchors.",
+    "The forty-fifth database revision also contains the separately reviewed GS2 script diagnostic and object-creation anchors.",
+    "The forty-sixth database revision also contains the separately reviewed GS2 profiling and player-flag state anchors.",
+    "The forty-seventh database revision also contains the separately reviewed GS2 script-call and native-dispatch anchors.",
+    "The forty-eighth database revision also contains the separately reviewed GS2 tokenized string array anchor.",
+    "The forty-ninth database revision also contains the separately reviewed GS2 bytecode execution-loop anchor.",
+    "The fiftieth database revision also contains the separately reviewed GS2 typed property access and registration anchors.",
+    "The fifty-first database revision also contains the separately reviewed GS2 universe, class, and zipped-script anchors.",
+    "The fifty-second database revision also contains the separately reviewed static-variable, JSON-serialization, and tile-definition anchors.",
+    "The fifty-third database revision also contains the separately reviewed tile selection, definition-update, temporary-tile, and screen-rendering anchors.",
+    "The fifty-fourth database revision also contains the separately reviewed particle animation, appearance, and polygon anchors.",
+    "The fifty-fifth database revision also contains the separately reviewed TShowImg serialization and network-property anchors.",
+    "The one-hundred-sixty-fifth database revision also contains the separately reviewed complete TShowImg property callback table anchors.",
+    "The one-hundred-sixty-sixth database revision also contains the separately reviewed residual TShowImg wrappers, helpers, and properties-class lifecycle anchors.",
+    "The one-hundred-sixty-seventh database revision also contains the separately reviewed exact-shape server-object scalar and constructor anchors.",
+    "The one-hundred-sixty-eighth database revision also contains the separately reviewed exact-shape TCompression wrapper anchors.",
+    "The one-hundred-sixty-ninth database revision also contains the separately reviewed exact-shape TFiles helper anchors.",
+    "The one-hundred-seventieth database revision also contains the separately reviewed exact-shape TEncryption wrapper anchors.",
+    "The one-hundred-seventy-first database revision also contains the separately reviewed exact-shape TList helper anchors.",
+    "The one-hundred-seventy-second database revision also contains the separately reviewed exact-shape TSounds helper anchors.",
+    "The one-hundred-seventy-third database revision also contains the separately reviewed exact-shape THashList and THashStrings anchors.",
+    "The two-hundred-tenth database revision also contains the separately reviewed hash-container constructor, iterator, and value-setter anchors.",
+    "The one-hundred-seventy-fourth database revision also contains the separately reviewed exact-shape TString helper anchors.",
+    "The one-hundred-seventy-fifth database revision also contains the separately reviewed exact-shape TString clear anchor.",
+    "The one-hundred-seventy-sixth database revision also contains the separately reviewed TClient and TSocket static cleanup layout anchors.",
+    "The fifty-sixth database revision also contains the separately reviewed particle-emitter initializer and emission anchors.",
+    "The one-hundred-eighty-sixth database revision also contains the separately reviewed particle-emitter script-property initializer anchor.",
+    "The one-hundred-eighty-seventh database revision also contains the separately reviewed resource file-link and object-link list initializer anchor.",
+    "The one-hundred-eighty-eighth database revision also contains the separately reviewed current-animation-state cleanup anchor.",
+    "The one-hundred-eighty-ninth database revision also contains the separately reviewed TOptions window-position initializer anchor.",
+    "The one-hundred-ninetieth database revision also contains the separately reviewed displayed-GIF state initializer anchor.",
+    "The one-hundred-ninety-first database revision also contains the separately reviewed GUI button-type table initializer anchor.",
+    "The one-hundred-ninety-second database revision also contains the separately reviewed GuiGraalCtrl horizontal and vertical alignment-table initializer anchor.",
+    "The one-hundred-ninety-third database revision also contains the separately reviewed GuiStretchCtrl mode-table initializer anchor.",
+    "The one-hundred-ninety-fourth database revision also contains the separately reviewed TGUIRender border-color initializer anchor.",
+    "The one-hundred-ninety-fifth database revision also contains the separately reviewed THTMLDefinitions HTML-default initializer anchor.",
+    "The one-hundred-ninety-sixth database revision also contains the separately reviewed TClient static-string initializer anchor.",
+    "The one-hundred-ninety-seventh database revision also contains the separately reviewed TSocket static-string initializer anchor.",
+    "The one-hundred-ninety-eighth database revision also contains the separately reviewed Android TapJoy and video state reset and cleanup anchors.",
+    "The one-hundred-ninety-ninth database revision also contains the separately reviewed TSounds music-state wrapper anchors.",
+    "The two-hundredth database revision also contains the separately reviewed TSounds sound-effect constructor and cache lookup anchors.",
+    "The two-hundred-first database revision also contains the separately reviewed TSounds volume and music-update control anchors.",
+    "The two-hundred-sixth database revision also contains the separately reviewed TSounds stop-SFX, script-pitch, and sound-cache static-initializer anchors.",
+    "The two-hundred-second database revision also contains the separately reviewed TSoundEffect virtual method block anchors.",
+    "The two-hundred-third database revision also contains the separately reviewed TSoundPlayerJava and TSoundEffectJava small-method anchors.",
+    "The two-hundred-fourth database revision also contains the separately reviewed Java sound deleting-destructor anchors.",
+    "The two-hundred-seventh database revision also contains the separately reviewed TSoundPlayerJava complete D1 destructor anchor.",
+    "The two-hundred-fifth database revision also contains the separately reviewed TSoundPlayer and Java sound capability interface anchors.",
+    "The fifty-seventh database revision also contains the separately reviewed explosion, carry, and flying server-animation anchors.",
+    "The fifty-eighth database revision also contains the separately reviewed player start-level and periodic-update anchors.",
+    "The fifty-ninth database revision also contains the separately reviewed player emoticon-coordinate getter anchors.",
+    "The sixtieth database revision also contains the separately reviewed player main-level and server-level entry anchors.",
+    "The sixty-first database revision also contains the separately reviewed player side-level grid and lookup anchors.",
+    "The sixty-second database revision also contains the separately reviewed player map-position and map-link anchors.",
+    "The sixty-third database revision also contains the separately reviewed player level-animation and link-traversal anchors.",
+    "The sixty-fourth database revision also contains the separately reviewed player attribute reset and weapon-state anchors.",
+    "The sixty-fifth database revision also contains the separately reviewed player draw-rectangle and visual setter anchors.",
+    "The sixty-sixth database revision also contains the separately reviewed player movement, item, and hurt-handling anchors.",
+    "The sixty-seventh database revision also contains the separately reviewed server-player state, property, level, nickname, and weapon-image anchors.",
+    "The sixty-eighth database revision also contains the separately reviewed server-NPC construction, shape, naming, default-image, movement, and property anchors.",
+    "The sixty-ninth database revision also contains the separately reviewed compact server-NPC accessor anchors.",
+    "The seventieth database revision also contains the separately reviewed server-NPC complete and deleting destructor anchors.",
+    "The seventy-first database revision also contains the separately reviewed compact server-level property and level-link destination anchors.",
+    "The seventy-second database revision also contains the separately reviewed server-level interaction, level-link coordinate, and indexed-object removal anchors.",
+    "The seventy-third database revision also contains the separately reviewed server-level deleting-destructor, script-test, and animation helper anchors.",
+    "The seventy-fourth database revision also contains the separately reviewed server-level side-level position, directional lookup, and flower hook anchors.",
+    "The seventy-fifth database revision also contains the separately reviewed server-level constructor, encrypted storage, and player-enter dispatch anchors.",
+    "The seventy-sixth database revision also contains the separately reviewed hidden Spectron testnpc callback boundary and exact body anchor.",
+    "The seventy-seventh database revision also contains the separately reviewed level lookup, link serialization, map selection, and GMAP loading anchors.",
+    "The seventy-eighth database revision also contains the separately reviewed TGaniObject server-level constructor anchor.",
+    "The seventy-ninth database revision also contains the separately reviewed Gani color setter and sprite image-name helper anchors.",
+    "The eightieth database revision also contains the separately reviewed Gani matrix, parameter, and animation-start anchors.",
+    "The eighty-first database revision also contains the separately reviewed Gani parameter serializer, reload, and player draw anchors.",
+    "The eighty-second database revision also contains the separately reviewed Gani frame-property and animation-playback anchors.",
+    "The eighty-third database revision also contains the separately reviewed Gani object teardown, virtual surface, animation state, ownership, script-cache, loading, and property anchors.",
+    "The eighty-fourth database revision also contains the separately reviewed TPlayer network-property serializer and constructor anchors.",
+    "The eighty-fifth database revision also contains the separately reviewed Gani lexer, cached-resource path, and update-package parser anchors.",
+    "The eighty-sixth database revision also contains the separately reviewed statistics, profiler, GUI-style, ZIP-resource, and translation utility anchors.",
+    "The eighty-seventh database revision also contains the separately reviewed font glyph, atlas, font-resource, and bitmap-loader anchors.",
+    "The eighty-eighth database revision also contains the separately reviewed MNG animation-step decoder anchor.",
+    "The eighty-ninth database revision also contains the separately reviewed script-machine parameter-preparation and native callback-dispatch anchors.",
+    "The ninetieth database revision also contains the separately reviewed script stream parser and function/class profiler anchors.",
+    "The ninety-first database revision also contains the separately reviewed generated animation-lexer fatal-exit callback anchor.",
+    "The ninety-second database revision also contains the separately reviewed double and short numeric-array string-conversion anchors.",
+    "The ninety-third database revision also contains the separately reviewed client-environment build-time and expiry helpers.",
+    "The ninety-fourth database revision also contains the separately reviewed TGraalClientVar send and string-update anchors.",
+    "The ninety-fifth database revision also contains the separately reviewed TStringList comma parser, constructor, and serializer anchors.",
+    "The ninety-sixth database revision also contains the separately reviewed TStringList assignment, key/value, serialization, file-output, and tokenizer anchors.",
+    "The ninety-seventh database revision also contains the separately reviewed THashList lookup, assignment, sorting, and THashStrings value and serialization anchors.",
+    "The ninety-eighth database revision also contains the separately reviewed TOptions GUI-style setter, decoded credential getter, account persistence, and timer-refresh anchors.",
+    "The ninety-ninth database revision also contains the separately reviewed TTexture bitmap access, GPU texture lifecycle, Graal lookup, and static registry anchors.",
+    "The one-hundredth database revision also contains the separately reviewed TDrawingPanelTexture destructor, constructor, and texture-dimension anchors.",
+    "The one-hundred-first database revision also contains the separately reviewed TDrawTexture static initializer, registry cleanup, reload, and bind anchors.",
+    "The one-hundred-second database revision also contains the separately reviewed TBitmapArrayHolder constructor, rectangle discovery, lookup, and registry anchors.",
+    "The one-hundred-third database revision also contains the separately reviewed TColorManager activation, stack-state, cleanup, pop, and initialization anchors.",
+    "The one-hundred-fourth database revision also contains the separately reviewed TFont, TFontManager, TFontOptions, and TFontData residual anchors.",
+    "The one-hundred-fifth database revision also contains the separately reviewed TWindow mouse and key event dispatch anchors.",
+    "The one-hundred-sixth database revision also contains the separately reviewed TDrawingPanel residual constructor, image, filter, and palette anchors.",
+    "The one-hundred-seventh database revision also contains the separately reviewed HTML color registry and image-animation lifecycle anchors.",
+    "The one-hundred-eighth database revision also contains the separately reviewed panel-interface construction and bitmap-loader dispatch, lookup, and redownload anchors.",
+    "The one-hundred-ninth database revision also contains the separately reviewed GIF stream decoder and animation-step construction anchor.",
+    "The one-hundred-tenth database revision also contains the separately reviewed TWindow close-query and pixel-buffer factory anchors.",
+    "The one-hundred-eleventh database revision also contains the separately reviewed sound-manager dispatch, note-pitch, and Java playback anchors.",
+    "The one-hundred-twelfth database revision also contains the separately reviewed TPixelBuffer field, allocation, and base texture-hook anchors.",
+    "The one-hundred-thirteenth database revision also contains the separately reviewed TPixelBuffer and TBitmap destructor pairs that correct the earlier medium-confidence class collision.",
+    "The one-hundred-fourteenth database revision also contains the separately reviewed image-animation base hooks and MNG or palette deleting-destructor anchors.",
+    "The one-hundred-seventeenth database revision also contains the separately reviewed panel-interface virtual hooks, panel-port tail hooks, and graphic-operation texture flush loop.",
+    "The one-hundred-eighteenth database revision also contains the separately reviewed residual TPanelInterface hooks and TDummyPanel virtual and lifecycle block.",
+    "The one-hundred-nineteenth database revision also contains the separately reviewed residual pixel-buffer texture predicate and concrete screen-panel matrix, shader, triangle-strip, and alpha-reference methods.",
+    "The one-hundred-twentieth database revision also contains the separately reviewed screen-panel polygon-font stub and TWindowGLES lifecycle, pixel-buffer factory, destructor, and native-mode anchors.",
+    "The one-hundred-twenty-first database revision also contains the separately reviewed TFont, TFontCharInfo, and TFontManager residual destructor, texture, cache, and text metric anchors.",
+    "The one-hundred-twenty-second database revision also contains the separately reviewed screen-panel lifecycle, TFontOptions property, TFontData lookup, and TWindowProperties destructor anchors.",
+    "The one-hundred-twenty-third database revision also contains the separately reviewed GuiControlProfile accessor block and its explicit target-only coverage gaps.",
+    "The one-hundred-twenty-fourth database revision also contains the separately reviewed GuiControlProfileProperties and GuiControlProfile destructor family.",
+    "The one-hundred-twenty-fifth database revision also contains the separately reviewed GuiControl property and script-wrapper residual family.",
+    "The one-hundred-twenty-sixth database revision also contains the separately reviewed GuiControl base and virtual-hook residual family.",
+    "The one-hundred-twenty-seventh database revision also contains the separately reviewed GuiControl event and sizing residual family.",
+    "The one-hundred-twenty-eighth database revision also contains the separately reviewed GuiControl style and bounds residual family.",
+    "The one-hundred-twenty-ninth database revision also contains the separately reviewed GuiControl event-dispatch residual family.",
+    "The one-hundred-thirtieth database revision also contains the separately reviewed GuiControl initialization and parameterized-constructor residual family.",
+    "The one-hundred-thirty-first database revision also contains the separately reviewed GuiControl factory-wrapper residual anchor.",
+    "The one-hundred-thirty-second database revision also contains the separately reviewed TSocket accessor, output, and factory residual family.",
+    "The one-hundred-thirty-third database revision also contains the separately reviewed TSocket SSL configuration and outgoing-buffer residual family.",
+    "The one-hundred-thirty-fourth database revision also contains the separately reviewed TSocket receive and data-package residual family.",
+    "The one-hundred-thirty-fifth database revision also contains the separately reviewed TSocket lifecycle residual family.",
+    "The one-hundred-thirty-sixth database revision also contains the separately reviewed TSocket host and logging residual family.",
+    "The one-hundred-thirty-seventh database revision also contains the separately reviewed TSocketProperties destructor family.",
+    "The one-hundred-thirty-eighth database revision also contains the separately reviewed socket-cache support residual family.",
+    "The one-hundred-thirty-ninth database revision also contains the separately reviewed URL-cache support residual family.",
+    "The one-hundred-fortieth database revision also contains the separately reviewed TPlayerList residual family.",
+    "The one-hundred-forty-first database revision also contains the separately reviewed client-thread residual family.",
+    "The one-hundred-forty-second database revision also contains the separately reviewed update-package accessor residual family.",
+    "The one-hundred-forty-third database revision also contains the separately reviewed update-package destructor residual family.",
+    "The one-hundred-forty-fourth database revision also contains the separately reviewed update-package event and lookup wrapper residual family.",
+    "The one-hundred-forty-fifth database revision also contains the separately reviewed update-package-properties residual family.",
+    "The one-hundred-forty-sixth database revision also contains the separately reviewed GSFunctions math and string residual family.",
+    "The one-hundred-forty-seventh database revision also contains the separately reviewed remaining GSFunctions callback family.",
+    "The one-hundred-forty-ninth database revision also contains the separately reviewed GSFunctions randomstring callback.",
+    "The one-hundred-fiftieth database revision also contains the separately reviewed exact-shape GSFunctionsClient callback batch.",
+    "The one-hundred-fifty-first database revision also contains the separately reviewed second exact-shape GSFunctionsClient callback batch.",
+    "The one-hundred-fifty-second database revision also contains the separately reviewed third exact-shape GSFunctionsClient callback batch.",
+    "The one-hundred-fifty-third database revision also contains the separately reviewed raw-boundary GSFunctionsClient callbacks.",
+    "The one-hundred-fifty-fourth database revision also contains the separately reviewed fourth exact-shape GSFunctionsClient callback batch.",
+    "The one-hundred-fifty-fifth database revision also contains the separately reviewed exact-shape CyaInt TLS and cryptography residual batch.",
+    "The one-hundred-fifty-sixth database revision also contains the separately reviewed second exact-shape CyaInt TLS and cryptography residual batch.",
+    "The one-hundred-fifty-seventh database revision also contains the separately reviewed exact-shape TServerPlayer scalar accessor block.",
+    "The one-hundred-fifty-eighth database revision also contains the separately reviewed exact-shape TPlayer scalar setter block.",
+    "The one-hundred-fifty-ninth database revision also contains the separately reviewed exact-shape TPlayer scalar getter block.",
+    "The one-hundred-sixtieth database revision also contains the separately reviewed exact-shape TPlayer flag-setter block.",
+    "The one-hundred-sixty-first database revision also contains the separately reviewed exact-shape TServerPlayer property block.",
+    "The one-hundred-sixty-third database revision also contains the separately reviewed TServerPlayer registration-table callback anchors.",
+    "The one-hundred-sixty-fourth database revision also contains the separately reviewed TServerPlayer lifecycle, static-initializer, attachment, and coordinate-tail anchors.",
+    "The v177 database revision also contains the separately reviewed HTTP response read and data-parser anchors.",
+    "The v178 database revision also contains the separately reviewed server-list getter and connection-handoff anchors.",
+    "The v179 database revision also contains the separately reviewed server-list boolean and start-parameter state anchors.",
+    "The v180 database revision also contains the separately reviewed HTTP request cleanup and properties destructor anchors.",
+    "The v181 database revision also contains the separately reviewed TSocket client-list, destructor, error, and IP anchors.",
+    "The v182 database revision also contains the separately reviewed TGameEnvironment property callback and startup-state anchors.",
+    "The v183 database revision also contains the separately reviewed TClientEnvironment graphics initializer anchor.",
+    "The v184 database revision also contains the separately reviewed TClientEnvironment profiler-string cleanup anchors.",
+    "The v185 database revision also contains the separately reviewed TClientEnvironment saved-restart cleanup anchor.",
+    "The v219 database revision also contains the separately reviewed residual GUI text-list property anchors.",
+    "The v219 database revision also contains the separately reviewed residual GUI text-list property anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under gui_drawing_showimg_property_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under gui_browser_property_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under gui_context_menu_property_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under gui_array_popup_residual_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under gui_popup_rows_anchor.",
+    "This database revision also contains the separately reviewed anchor group recorded under gui_progress_getter_anchor.",
+    "This database revision also contains the separately reviewed anchor group recorded under gui_text_list_selection_script_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under mrandom_property_residual_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under gui_drawing_panel_script_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under tclient_script_property_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under file_cache_property_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under tclient_handler_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under target_only_callback_labels.",
+    "This database revision also contains the separately reviewed anchor group recorded under tclient_playerhurt_property_anchor.",
+    "This database revision also contains the separately reviewed anchor group recorded under gsfunctions_property_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under time_files_input_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under level_object_property_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under gani_property_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under options_property_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under particle_emitter_property_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under particle_emitter_script_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under world_object_property_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under player_translation_property_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under server_npc_property_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under server_npc_script_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under server_npc_showimg_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under tiles_layer_property_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under player_property_anchors.",
+    "This database revision also contains the separately reviewed anchor group recorded under gani_property_residual_anchors."
+  ],
+  "json_folder_anchors": {
+    "anchor_count": 8,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_json_folder_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "2d0255d5ad452a219043a8671b1fc0fafd37ae012e8f58a3efe901ade6a6d93f",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_json_folder_verify_v30.json",
+    "verified_name_count": 8
+  },
+  "level_map_lookup_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_level_map_lookup_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "cc350b1316a6c29591ba9e999663d3efd5e559cbc17739e9b7884254bc729924",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_level_map_lookup_verify_v79.json",
+    "verified_name_count": 6
+  },
+  "level_object_property_anchors": {
+    "anchor_count": 7,
+    "anchor_path": "artifacts/spectron_level_object_property_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "532c4125285feff5acc3c15526e2b2738346e6ccfe94a638d60b0e3e8d8d42bc",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_level_object_property_verify_v237_stability.json",
+    "verified_name_count": 7
+  },
+  "login_helper_anchors": {
+    "anchor_count": 8,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_login_helper_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "28c69983164f81db8a49897888c8ef81ac8978599a3ff4e6ab7a863cc86f3745",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_login_helper_verify_v13.json",
+    "verified_name_count": 8
+  },
+  "lookup_helper_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_lookup_helper_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "b6a6256b76389655ae9a9f61e27562a5195697e6cb5ea04dab25c7ae47e730b3",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_lookup_helper_verify_v15_retry.json",
+    "verified_name_count": 3
+  },
+  "machine_helper_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_machine_helper_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "8034ca70cb7deb9f084c9cc99e7c106eec0e7c47c6000190df4e63c26831cbab",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_machine_helper_verify_v42.json",
+    "verified_name_count": 4
+  },
+  "manual_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "b8c5ebf65ce250854a57c5899b06064ff17cff96206e7a51dbe8e6c7807675d0",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_manual_anchor_verification_v2.json",
+    "verified_name_count": 4
+  },
+  "mng_animation_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_mng_animation_manual_translation_anchor_20260826.json",
+    "anchor_sha256": "39a02f30e2b9bf68462becdc28732ae4a34844b5476d53643ccfd76294352ee3",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_mng_animation_verify_v90.json",
+    "verified_name_count": 1
+  },
+  "mrandom_anchors": {
+    "anchor_count": 29,
+    "anchor_path": "artifacts/spectron_mrandom_family_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "a4c9303e9cf478072f3dfaade627789e4ffff21639a77450cfe025298c5188b3",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_mrandom_verify_v215.json",
+    "verified_name_count": 29
+  },
+  "mrandom_property_residual_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "artifacts/spectron_mrandom_property_residual_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "154e8b645df1edadcc5e3818dd42426d8fa3dc218abd53e395d7cf8abb1716c2",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_mrandom_property_residual_verify_v228.json",
+    "verified_name_count": 4
+  },
+  "network_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_network_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "f29d1da9c9635f7ce6e47002f0e3a1d856e564dd9341b3d2e5f1f99442ed1e26",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_network_anchor_verification_20260826.json",
+    "verified_name_count": 6
+  },
+  "network_contacted": false,
+  "npc_accessor_anchors": {
+    "anchor_count": 17,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_npc_accessor_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "bcc6ecba88a08493a8c00ec71c272f7afea0a41330df27074c3f10e14439f027",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_npc_accessor_verification_v71.json",
+    "verified_name_count": 17
+  },
+  "npc_destructor_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_npc_destructor_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "261f42a1cdc4d2203850cf1c07de5f910c2f48369cbbc350838fe0753e462291",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_npc_destructor_verification_v72.json",
+    "verified_name_count": 2
+  },
+  "npc_helper_anchors": {
+    "anchor_count": 15,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_npc_helper_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "b8d9a22e621efbb1f2cc435610a1550a46f679f0a7fa728b391b7d2e421128a1",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_npc_helper_verify_v22.json",
+    "verified_name_count": 15
+  },
+  "number_array_string_anchors": {
+    "anchor_count": 8,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_number_array_string_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "03fec3bfd1f6487899e6cb6d122c0c19253d95c37750bf61dfbfc8e84544ebb7",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_number_array_string_verify_v94.json",
+    "verified_name_count": 8
+  },
+  "options_anchors": {
+    "anchor_count": 7,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_options_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "769103193a6ed99956fb567561550b5c7fd2c40431a674128462e04bb929c6f8",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_options_verify_v100.json",
+    "verified_name_count": 7
+  },
+  "options_property_anchors": {
+    "anchor_count": 30,
+    "anchor_path": "artifacts/spectron_options_property_residual_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "6fffb45dc477bb6e61e5ee401899fb835731d87f1c26d7c1511b52adfe5b5986",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_options_property_verify_v239.json",
+    "verified_name_count": 30
+  },
+  "options_window_position_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_options_window_position_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "ec234bf382ba99eb21331245bff6da2db44054086e6adb42a006a0aef78c88bf",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_options_window_position_verification_v189.json",
+    "verified_name_count": 1
+  },
+  "panel_bitmap_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_panel_bitmap_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "7012f45d224314d1205774e00ee5d93cb3b885d08d46e5adcddb447dcc767fe9",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_panel_bitmap_verify_v110.json",
+    "verified_name_count": 4
+  },
+  "panel_virtual_renderer_residual_anchors": {
+    "anchor_count": 23,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_panel_virtual_renderer_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "2c4c032383d1a6e63bd50eada56f960e65e259387345a636e8ad1013725414f1",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_panel_virtual_renderer_residual_verify_v117.json",
+    "verified_name_count": 23
+  },
+  "parent_checkpoint": {
+    "artifact": "spectron_translation_checkpoint_20260828_v248",
+    "path": "artifacts/spectron_translation_checkpoint_20260828_v248.json",
+    "sha256": "53e161c1d7f79599cd20ff317fb78d5b01ea424da31eee597e8cfa7ab6a0777d"
+  },
+  "parse_wrapper_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_parse_wrapper_manual_translation_anchor_20260826.json",
+    "anchor_sha256": "586d2ea9b35f4ad66caadd881b4d5e3cba18e40dae15fa3be40dad6639ca27c7",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_parse_wrapper_verify_v14.json",
+    "verified_name_count": 1
+  },
+  "particle_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_particle_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "7b00e0891db292ce738b121403bc2356ae5f2551d63bf5ffb3c679da0d07fd71",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_particle_verification_v56.json",
+    "verified_name_count": 5
+  },
+  "particle_emitter_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_particle_emitter_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "d832a2ef862d9c53e6572cf3e066199f7cb7aeaa068ee17ef30d77934036f9f6",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_particle_emitter_verification_v58.json",
+    "verified_name_count": 2
+  },
+  "particle_emitter_property_anchors": {
+    "anchor_count": 42,
+    "anchor_path": "artifacts/spectron_particle_emitter_property_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "b121c604f5baa95e1189fb09c8d8733b98139a51b1ad6a86f94f30e74a8cf57f",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_particle_emitter_property_verify_v240.json",
+    "verified_name_count": 42
+  },
+  "particle_emitter_script_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "artifacts/spectron_particle_emitter_script_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "324fa8d2494cb58a91c9a732c7bcf884368e871be84ee3b62b74ac977949497a",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_particle_emitter_script_verify_v241.json",
+    "verified_name_count": 3
+  },
+  "particle_emitter_script_vars_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_particle_emitter_script_vars_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "e42c226ba0ac727b7a12612004d363d992ebb848b4e0777e13c132373a7dc110",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_particle_emitter_script_vars_verification_v186_retry.json",
+    "verified_name_count": 1
+  },
+  "pixelbuffer_bitmap_lifecycle_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_pixelbuffer_bitmap_lifecycle_correction_anchors_20260826.json",
+    "anchor_sha256": "116bd08e8a068891720419092e516983fa5800c07a6de7886925a1679e17d24d",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_pixelbuffer_bitmap_lifecycle_verify_v115.json",
+    "verified_name_count": 4
+  },
+  "pixelbuffer_residual_anchors": {
+    "anchor_count": 10,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_pixelbuffer_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "20b3093a17fb4d0ffe767836adccda6f63c74a9873f7cd05a0421335d451dfce",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_pixelbuffer_residual_verify_v114.json",
+    "verified_name_count": 10
+  },
+  "player_emoticon_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_player_emoticon_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "b0b04a4164dd7a71b9a18b3d2385bba8d22205bc8b91555a555618bffd5ee2d2",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_player_emoticon_verification_v61.json",
+    "verified_name_count": 2
+  },
+  "player_helper_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_player_helper_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "9367d319607990c0598e73829d7f66ef5e37cface941016d61c207935334a8de",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_player_helper_verify_v24.json",
+    "verified_name_count": 5
+  },
+  "player_level_entry_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_player_level_entry_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "986356fdfc1bf1fbf50121ede7082d3a0c24a0fa5c1178bd6b5037d4b38d0949",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_player_level_entry_verification_v62.json",
+    "verified_name_count": 2
+  },
+  "player_lifecycle_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_player_lifecycle_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "1fdc678fc14955ba1227b29fa912ad85de581bc599eaf6379498a54bc2125adf",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_player_lifecycle_verification_v60.json",
+    "verified_name_count": 2
+  },
+  "player_link_traversal_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_player_link_traversal_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "f72a2162ccb726e38d19f551a7ca5badb13f5d398cd7fa0b2fd8bdb8925408a1",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_player_link_traversal_verification_v65.json",
+    "verified_name_count": 3
+  },
+  "player_list_residual_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_player_list_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "5673c63e12ffaabd26f23e48d56f020fca4e292378b0ff5471eee62769e28f75",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_player_list_verify_v140.json",
+    "verified_name_count": 3
+  },
+  "player_map_position_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_player_map_position_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "35636132aa45687d7d03edddf5ac9939152c337dce55bfcb8dc4f26ad7180e3a",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_player_map_position_verification_v64.json",
+    "verified_name_count": 2
+  },
+  "player_movement_anchors": {
+    "anchor_count": 8,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_player_movement_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "7b58c19f8f92f0bf7459ed1d03e273166ccb8cbaae29d9988403353a82fca58c",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_player_movement_verification_v68.json",
+    "verified_name_count": 8
+  },
+  "player_property_anchors": {
+    "anchor_count": 30,
+    "anchor_path": "artifacts/spectron_player_property_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "e80812b8b75cecc2ffe3393aecfaa1225d17689f542b93ccdf3b4825d7d48791",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_player_property_verification_v248.json",
+    "verified_name_count": 30
+  },
+  "player_side_level_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_player_side_level_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "1c6b13c3930b0235f639c94daea7e2c8b5f6e1eb5e192917df261bd35ae0c369",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_player_side_level_verification_v63.json",
+    "verified_name_count": 4
+  },
+  "player_translation_property_anchors": {
+    "anchor_count": 9,
+    "anchor_path": "artifacts/spectron_player_translation_property_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "ce652e4bf1e5288f8ad64b6254c411cfc4ad734682ff3fec20fb36002e859c9d",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_player_translation_property_verification_v243_serial.json",
+    "verified_name_count": 9
+  },
+  "player_visual_setter_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_player_visual_setter_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "363784eeda35f8155abb74592d343e6b3707275c11561918148e246485c0186b",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_player_visual_setter_verification_v67.json",
+    "verified_name_count": 5
+  },
+  "player_weapon_state_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_player_weapon_state_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "baad02ec6e10fea95df57daa2ebe17c8ebb30589be96672d4f7e9d540af84e9c",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_player_weapon_state_verification_v66.json",
+    "verified_name_count": 4
+  },
+  "render_gui_anchors": {
+    "anchor_count": 20,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_render_gui_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "c8e3de6ebfb604a395e4e914f2cfac12015b2d35ee7d737d1006c1393a314319",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_render_gui_verify_v29.json",
+    "verified_name_count": 20
+  },
+  "resource_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_resource_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "96d99f57203b01253c7f13e5e04e1091393782808d7a2f01e7e9d0f78bbc37be",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_resource_anchor_verification_20260826.json",
+    "verified_name_count": 6
+  },
+  "resource_link_lists_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_resource_link_lists_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "55fa3cc0910f7ca64d1ecd1111c18c6dfc452eddf152841700ab7754040af720",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_resource_link_lists_verification_v187.json",
+    "verified_name_count": 1
+  },
+  "resource_object_anchors": {
+    "anchor_count": 11,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_resource_object_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "0d5ba7476a32627cd1f78776ae32478193c470c1489ced3c3f6845b55e31addc",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_resource_object_verify_v33.json",
+    "verified_name_count": 11
+  },
+  "resource_parser_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_resource_parser_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "2a33a643f0e0137aea38b930df20e92eb2965915cdfbe4a2c637afe646298aaf",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_resource_parser_verify_v87.json",
+    "verified_name_count": 3
+  },
+  "runtime_path_anchors": {
+    "anchor_count": 13,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_runtime_path_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "ec1dc01329c55e2467e12e6fd756ec57ceb7b285e415462ef75fbb1e7411dc00",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_runtime_path_anchor_verification_20260826.json",
+    "verified_name_count": 13
+  },
+  "schema_version": 1,
+  "scope": "persisted high-confidence 1.8-to-Spectron ARM64 semantic labels",
+  "screen_panel_renderer_residual_anchors": {
+    "anchor_count": 10,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_screen_panel_renderer_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "67d1bd356fdd7ea36f359f401a11a6d5a19cc6797ec8776740588c41b7ec20fa",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_screen_panel_renderer_verify_v119.json",
+    "verified_name_count": 10
+  },
+  "screen_panel_window_gles_residual_anchors": {
+    "anchor_count": 7,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_screen_panel_window_gles_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "fbe23100d64321d81c01cd0de6c5c070297529e20e032cc806cfc52b15b2e7f4",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_screen_panel_window_gles_verify_v120.json",
+    "verified_name_count": 7
+  },
+  "script_action_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_script_action_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "fc81b6baca81bd282af4cd853aefa40fce797de047c0e85d9476a400cfc62139",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_script_action_verify_v40.json",
+    "verified_name_count": 2
+  },
+  "script_bridge_anchors": {
+    "anchor_count": 13,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_script_bridge_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "076d2e448bc9c6bf942a2b7dc812efb2c20792fc981481ff153b926c3a4258f7",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_script_bridge_anchor_verification_20260826.json",
+    "verified_name_count": 13
+  },
+  "script_dispatch_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_script_dispatch_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "2ae26a8ee112d8dd31f17ceca8e01c5a3ea8e9e57886fdfe5b9f6891261f68f0",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_script_dispatch_verify_v37.json",
+    "verified_name_count": 3
+  },
+  "script_execution_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_script_execution_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "c9ee0bc891a7307992cdbdf4f0664365c8c25ff5cb8d3941df40ab7ebd0c98b3",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_script_execution_verify_v36.json",
+    "verified_name_count": 6
+  },
+  "script_executor_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_script_executor_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "eff449fb4185162d2cb73ea5f903a93e1afd715237e528c30358b40c2f40d034",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_script_executor_verify_v51.json",
+    "verified_name_count": 1
+  },
+  "script_machine_anchors": {
+    "anchor_count": 7,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_script_machine_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "bb2bdf6d11b31ceb4ba10b798563e637c824ffc085743cc3ccb32ee3c164ef13",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_script_machine_verify_v34.json",
+    "verified_name_count": 7
+  },
+  "script_machine_tail_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_script_machine_tail_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "82b96c11752a7cd3b697e922a718d5590b58ccb02daa8b41da8e1743e9fa9bb9",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_script_machine_tail_verify_v91.json",
+    "verified_name_count": 2
+  },
+  "script_object_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_script_object_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "53b9cb4ad9c70d32bde21cae51f75806352455ae0e8f3d7067588eb60749e405",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_script_object_verify_v47.json",
+    "verified_name_count": 2
+  },
+  "script_property_anchors": {
+    "anchor_count": 9,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_script_property_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "971568384c9d7a36ebc59c1e52544cc8386de97d83dbd4ccad9d611ad6e81737",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_script_property_verification_v52.json",
+    "verified_name_count": 9
+  },
+  "script_runtime_anchors": {
+    "anchor_count": 12,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_script_runtime_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "a547bc146271402e6a6754f03193ce9d6d736288ddc94059accc3be79c43cb36",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_script_runtime_verify_v27.json",
+    "verified_name_count": 12
+  },
+  "script_scheduler_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_script_scheduler_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "b61010beebc83b339103a92d99fc1d342eae77a366227a29edbe37ba8d1aba97",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_script_scheduler_verify_v38.json",
+    "verified_name_count": 6
+  },
+  "script_space_anchors": {
+    "anchor_count": 8,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_script_space_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "32f2b00cd0b4171e2e1f26623b9af7d51e7ac1cdd9ac7df57825c3f1d47e30f5",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_script_space_verify_v35.json",
+    "verified_name_count": 8
+  },
+  "script_state_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_script_state_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "5142f2e95f9905769eb7c3c422a95e70f05fe22b50c9579316b2379be46c7930",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_script_state_verify_v48.json",
+    "verified_name_count": 2
+  },
+  "script_stream_profile_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_script_stream_profile_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "c153bc44cc8f3eaaa7b0b1a1e3e795ee5923dd43488b9642c0db5d62c6c948e8",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_script_stream_profile_verify_v92.json",
+    "verified_name_count": 2
+  },
+  "script_universe_anchors": {
+    "anchor_count": 8,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_script_universe_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "0e0be3ad8b0c54272c35dd8787cfceb39c02f89b397d3fa3dabb6bfb9307e760",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_script_universe_verification_v53.json",
+    "verified_name_count": 8
+  },
+  "server_animation_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_server_animation_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "45dea895feefde14d651602c74c3fe13efbbc986ae40b14280582eb4773e55e8",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_server_animation_verification_v59.json",
+    "verified_name_count": 3
+  },
+  "server_level_interaction_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_server_level_interaction_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "c789c2d750f0dadc747b93f5215b78db335715acdce2cc52ef87497eb92cf506",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_server_level_interaction_verification_v74.json",
+    "verified_name_count": 5
+  },
+  "server_level_lifecycle_anchors": {
+    "anchor_count": 7,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_server_level_lifecycle_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "968a3f858cd378174629d3f96048180b50b99a6a89ef2e0a5e3c5ec6898e319a",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_server_level_lifecycle_verification_v75.json",
+    "verified_name_count": 7
+  },
+  "server_level_property_anchors": {
+    "anchor_count": 8,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_server_level_property_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "de2af5dff3a259ba28edbf9b5deb91dd44fe6101e959e00b0543ddbff118d5ed",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_server_level_property_verification_v73.json",
+    "verified_name_count": 8
+  },
+  "server_level_side_helpers_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_server_level_side_helpers_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "23ecfef8ca8f549ec29eb1754824bca9794903c17e4b29500944838a86a0b0b4",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_server_level_side_helpers_verification_v76.json",
+    "verified_name_count": 4
+  },
+  "server_level_storage_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_server_level_storage_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "5ac287b15358d45912f968a683bb6904eb58f34a22c7fd72bea0c904776672b8",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_server_level_storage_verification_v77.json",
+    "verified_name_count": 4
+  },
+  "server_list_connection_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "artifacts/spectron_server_list_connection_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "5d65cf0fbd8bfecc18462bfbe282c5e51d760e08ef7fbcd85cfab87d9e7e600b",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_server_list_connection_verify_v178.json",
+    "verified_name_count": 5
+  },
+  "server_list_state_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "artifacts/spectron_server_list_state_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "e80ca1c0772c7ced96683838a6df0d91dfa37a8c01f4a5c1b6f0f7ab02d05f5f",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_server_list_state_verify_v179.json",
+    "verified_name_count": 4
+  },
+  "server_npc_property_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "artifacts/spectron_server_npc_property_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "551ddd1bb09696c64e3fc0e05c1da17f9752e3aa51b7c95dde4b128fffc6cda2",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_server_npc_property_verification_v244.json",
+    "verified_name_count": 6
+  },
+  "server_npc_script_anchors": {
+    "anchor_count": 7,
+    "anchor_path": "artifacts/spectron_server_npc_script_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "1c84c60128b974925805ae242e8d705494a2574b185d7702c9d500b426a25767",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_server_npc_script_verification_v245.json",
+    "verified_name_count": 7
+  },
+  "server_npc_showimg_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "artifacts/spectron_server_npc_showimg_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "23337972708d43152eb2201cc55b98fb7b839ab2b0eea56594051846dc68c119",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_server_npc_showimg_verification_v246.json",
+    "verified_name_count": 2
+  },
+  "server_npc_state_anchors": {
+    "anchor_count": 7,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_server_npc_state_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "e645f2c158a657eb421be61547bcc3b2c72521c38c3ab67ba40ca92481792ae2",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_server_npc_state_verification_v70.json",
+    "verified_name_count": 7
+  },
+  "server_object_lifecycle_anchors": {
+    "anchor_count": 49,
+    "anchor_path": "artifacts/spectron_server_object_lifecycle_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "f1b47d869fc035d41868a6ef6986a184f2a2fe61c2cbb4e889a714ca68968cfc",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_server_object_lifecycle_verify_v217.json",
+    "verified_name_count": 49
+  },
+  "server_object_scalar_anchors": {
+    "anchor_count": 12,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_server_object_scalar_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "a7ab81f6673cf8699ad3dff26247af6a4ad209e5a35bd03af9883bfdf7e09e60",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_server_object_scalar_verify_v167.json",
+    "verified_name_count": 12
+  },
+  "server_player_state_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_server_player_state_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "6fa87ba65e12fd97148f8f109b21bc5e0bab17f2397378fe6c4f9c9898d82d6f",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_server_player_state_verification_v69.json",
+    "verified_name_count": 6
+  },
+  "showimg_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_showimg_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "85caeb5e18ade6da695b4bb81f9d4878ae4f1d1222eb1e116b3d018fd9be0e04",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_showimg_verification_v57.json",
+    "verified_name_count": 3
+  },
+  "showimg_property_anchors": {
+    "anchor_count": 85,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_showimg_property_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "508b88936632f6ed3b02a54d8fdb4ba7871b77683bae0c4ce1868ae4fcb515ab",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_showimg_property_verify_v165.json",
+    "verified_name_count": 85
+  },
+  "showimg_residual_anchors": {
+    "anchor_count": 24,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_showimg_residual_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "6baee109b80fca21baf9627b5bdaaad9a43e5fcc05868599779e55fc06067b21",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_showimg_residual_verify_v166.json",
+    "verified_name_count": 24
+  },
+  "socket_cache_residual_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_socket_cache_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "003176684ad9891d4bb295f5c4e7eca11d7550eed62f1973da84280789c2f4fb",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_socket_cache_verify_v138.json",
+    "verified_name_count": 5
+  },
+  "socket_state_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_socket_state_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "d144a8c5a8bb85afbcb177ddeb836faf2fffc97285761b1a1bc780fbfa68986c",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_socket_state_verify_v20.json",
+    "verified_name_count": 5
+  },
+  "sound_base_interface_anchors": {
+    "anchor_count": 18,
+    "anchor_path": "artifacts/spectron_sound_base_interface_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "8a97db94b00c61622291e76781b10edfb1a18bd6d385b13a6199087e8d1edc81",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_sound_base_interface_verification_v205.json",
+    "verified_name_count": 18
+  },
+  "sound_java_d1_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_sound_java_d1_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "9db743805572ace6510141e91d324efb32dbc0461e8da52191eec9badaa34b00",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_sound_java_d1_anchor_verification_20260827.json",
+    "verified_name_count": 1
+  },
+  "sound_java_destructor_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "artifacts/spectron_sound_java_destructor_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "ed901883ed49ffa3daaa7f8beca4e37304a02a57e4193d1ba7636a69197d3e0b",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_sound_java_destructor_verification_v204.json",
+    "verified_name_count": 2
+  },
+  "sound_java_small_methods_anchors": {
+    "anchor_count": 7,
+    "anchor_path": "artifacts/spectron_sound_java_small_methods_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "e41e9da3cb8a865481acf4485267245a68b6ae310600a660a30f3be55c5ae544",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_sound_java_small_methods_verification_v203.json",
+    "verified_name_count": 7
+  },
+  "sound_runtime_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_sound_runtime_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "23eb4acfa0765c1882841455ab0e0ba35de6235e864996ae8c51a88c809a0b5f",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_sound_runtime_verify_v113.json",
+    "verified_name_count": 3
+  },
+  "sounds_anchors": {
+    "anchor_count": 8,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_sounds_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "78691434d5b9cdf518195648fe3b2c1cd737896b87dc258873a997ea91d67f29",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_sounds_verify_v172.json",
+    "verified_name_count": 8
+  },
+  "sounds_control_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "artifacts/spectron_sounds_control_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "9d767140aaaab92884823df78ec53b8082b9b80f4a1b49d80f2ccc7036e29726",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_sounds_control_verification_v201.json",
+    "verified_name_count": 2
+  },
+  "sounds_effect_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "artifacts/spectron_sounds_effect_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "2f97b87decaffb430ffd53606401299f09f4e389b1b72ec1d259255bd56f97de",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_sounds_effect_verification_v200.json",
+    "verified_name_count": 2
+  },
+  "sounds_music_state_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "artifacts/spectron_sounds_music_state_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "433b0dcd5704b06d0427205d71c0a0138337a6081d4a9b65f7f7cc2930ab1bbf",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_sounds_music_state_verification_v199.json",
+    "verified_name_count": 3
+  },
+  "sounds_tail_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "artifacts/spectron_sounds_tail_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "08b515dc45d6b968e629504774ca4482f11c4818a669a0d785900b0d92b55118",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_sounds_tail_anchor_verification_20260827.json",
+    "verified_name_count": 3
+  },
+  "stack_entry_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_stack_entry_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "196ceda39467f86ad51e6573f13ef28817023bad802a15eaf47dbcd55e6d09b3",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_stack_entry_verify_v41.json",
+    "verified_name_count": 3
+  },
+  "static_clear_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "artifacts/spectron_static_clear_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "d4bddcd7343e4ed7929e5947697eb2dddf6c8b88a51eb2ba40e373475abe6bf9",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_static_clear_verify_v176.json",
+    "verified_name_count": 2
+  },
+  "static_json_tiles_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_static_json_tiles_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "f13a9f3e2fcda5c1169ac293c8e5fcb1c13361b3a3bc74c606532eca2bbfba4d",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_static_json_tiles_verification_v54.json",
+    "verified_name_count": 3
+  },
+  "static_utility_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_static_utility_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "6ccf323938a4ebd4018dc1456d1dc9d01403858d56bd57745b56f87fd293d20a",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_static_utility_verify_v88.json",
+    "verified_name_count": 5
+  },
+  "string_helper_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_string_helper_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "64fee372b714546f3d1fcab19b03b321ba6567d3dbf9fba9cf8c42d0b1786233",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_string_helper_verify_v45.json",
+    "verified_name_count": 3
+  },
+  "string_search_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_string_search_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "913ce6dbc7adad21fb1ee9d301382009da52fda6b84bf29c91e8df9b3aed3603",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_string_search_verify_v44.json",
+    "verified_name_count": 2
+  },
+  "t2d_matrix_manager_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "artifacts/spectron_t2d_matrix_manager_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "70edd766fd172a30d51cff4fc6edb6a3e421a111e143e8c6db2f67fa4af9e591",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_t2d_matrix_manager_verify_v214.json",
+    "verified_name_count": 4
+  },
+  "target_only_callback_labels": {
+    "anchor_count": 3,
+    "anchor_path": "artifacts/spectron_target_only_callback_labels_20260828.json",
+    "anchor_sha256": "a5def3fddc35e6fdebf2fed0b6c6a6a7fd271e0c645db799cabde3b96ea94ad2",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_target_only_label_verify_v233.json",
+    "verified_name_count": 3
+  },
+  "tclient_handler_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "artifacts/spectron_tclient_handler_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "c0d2753c1d4cdb1e469a3484b015f79ad138532d02e4c9c2b90d42801a3b923c",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tclient_handler_anchor_verify_v232.json",
+    "verified_name_count": 2
+  },
+  "tclient_playerhurt_property_anchor": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_tclient_playerhurt_property_manual_translation_anchor_20260828.json",
+    "anchor_sha256": "64a036acd233acd9757ac04c9104688d49f656767e13f7cccf4c790a6985a205",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tclient_playerhurt_verify_v234.json",
+    "verified_name_count": 1
+  },
+  "tclient_script_property_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "artifacts/spectron_tclient_script_property_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "a4047ef6c0f4c1c1fabbce8cba3af5081f7fbb625f0665bc122cea49b46634b0",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tclient_script_property_verify_v230.json",
+    "verified_name_count": 5
+  },
+  "tclient_static_strings_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_tclient_static_strings_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "b1b2be6b442950521f726901cebbc71f8667f6bb4505dad119eade4f345fb201",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tclient_static_strings_verification_20260827.json",
+    "verified_name_count": 1
+  },
+  "texture_anchors": {
+    "anchor_count": 10,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_texture_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "256106f557f6cffc81d9d27e5c6875b11ec6f5847dcf67773fb2f1a60758f6f9",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_texture_verify_v101.json",
+    "verified_name_count": 10
+  },
+  "tgui_render_colors_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_tgui_render_colors_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "634cfd905e53b4bdac49b530101d9d3a735a538ec6be0d99c8c018cf8908368e",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tgui_render_colors_verification_20260827.json",
+    "verified_name_count": 1
+  },
+  "thtml_definitions_defaults_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_thtml_definitions_defaults_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "451f024123a37cf57065e9ee86f0ac65b04f30a1e4edd875696e77c33b16ec66",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_thtml_definitions_defaults_verification_20260827.json",
+    "verified_name_count": 1
+  },
+  "tiles_layer_property_anchors": {
+    "anchor_count": 17,
+    "anchor_path": "artifacts/spectron_tiles_layer_property_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "4cd1b850b6b31a0cc53e5f1844ef3160f50dbb43a3ff019bb8c2c7fe7c5bf1ba",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tiles_layer_property_verification_v247.json",
+    "verified_name_count": 17
+  },
+  "tiles_update_anchors": {
+    "anchor_count": 8,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tiles_update_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "8bb4599b4d05095e99adfd54fe429a486e5216e2d1469858be6bff6f00f40547",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tiles_update_verification_v55.json",
+    "verified_name_count": 8
+  },
+  "time_files_input_anchors": {
+    "anchor_count": 22,
+    "anchor_path": "artifacts/spectron_time_files_input_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "728047b4ee7e8209a845233c9f099d2a1029db8c12f7d0d9afb0f6e3cde1b75e",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_time_files_input_verify_v236.json",
+    "verified_name_count": 22
+  },
+  "tlist_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tlist_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "d49edcabd371adfa8a3412eb8b0329595dd64037ebb0dfbb679bce4f18e28265",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tlist_verify_v171.json",
+    "verified_name_count": 6
+  },
+  "tokenizer_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tokenizer_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "367cfb6ca8e93a7c6869d3ace2d1e998b447399a80b80881d030e9c05e54984e",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tokenizer_verify_v50.json",
+    "verified_name_count": 1
+  },
+  "tplayer_core_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tplayer_core_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "5d4ab3b28f71c512e0a41e63b01a1a4eb81fb92aedcbfe20162c6cbb4ed49f02",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tplayer_core_verify_v86.json",
+    "verified_name_count": 2
+  },
+  "tplayer_flag_setter_anchors": {
+    "anchor_count": 7,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tplayer_flag_setter_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "9e6b83338823d8d12f6172ec67af92a6c2deca465f74ff2c3f0b2a9945b58c93",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tplayer_flag_setter_verify_v160.json",
+    "verified_name_count": 7
+  },
+  "tplayer_scalar_getter_anchors": {
+    "anchor_count": 21,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tplayer_scalar_getter_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "58a84bd019e98cced2fcb794ff0052af150c7a0c1297f713905f26c15c698dc4",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tplayer_scalar_getter_verify_v159.json",
+    "verified_name_count": 21
+  },
+  "tplayer_scalar_setter_anchors": {
+    "anchor_count": 10,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tplayer_scalar_setter_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "dfd834e861efc7d46a00f6df316274e795b276c3f88194d9878457e71643a29f",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tplayer_scalar_setter_verify_v158.json",
+    "verified_name_count": 10
+  },
+  "translation": {
+    "ambiguous_functions": 1019,
+    "high_confidence_applied": 3641,
+    "mapped_functions": 3700,
+    "medium_confidence_review_only": 59,
+    "reopen_failure_count": 0,
+    "unique_spectron_targets": 3700,
+    "unmatched_functions": 614
+  },
+  "tserverplayer_accessor_anchors": {
+    "anchor_count": 37,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tserverplayer_accessor_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "53c5c958783cb6263c47b93659b5b358c233ec9086f9cbf46554f4191ab4bc8f",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tserverplayer_accessor_verify_v157.json",
+    "verified_name_count": 37
+  },
+  "tserverplayer_property_block_anchors": {
+    "anchor_count": 39,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tserverplayer_property_block_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "64ee6f268ca71632f582a3c6a1fe2d7dbf43e887f9f7684e30ef25131ef45b89",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tserverplayer_property_block_verify_v161.json",
+    "verified_name_count": 39
+  },
+  "tserverplayer_residual_anchors": {
+    "anchor_count": 25,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tserverplayer_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "d2445e08bacec79728809eb175168a3865f7b2ef21b3cc51df4facf969b69a1d",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tserverplayer_residual_verify_v163.json",
+    "verified_name_count": 25
+  },
+  "tserverplayer_tail_anchors": {
+    "anchor_count": 7,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tserverplayer_tail_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "a29f7639729df46107696f69a99971efa73a1b3f62e2ddb53e85abaebfbec244",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tserverplayer_tail_verify_v164_serial.json",
+    "verified_name_count": 7
+  },
+  "tsocket_accessor_residual_anchors": {
+    "anchor_count": 19,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tsocket_accessor_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "3814842816d41782d36a970057a88a595f97de86dbf738518277c80a3d42ba77",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tsocket_accessor_verify_v132.json",
+    "verified_name_count": 19
+  },
+  "tsocket_host_residual_anchors": {
+    "anchor_count": 3,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tsocket_host_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "b0f8ea16861a820ff42a282ab56eacaa206f088e66c52c01ad478e307ed00e12",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tsocket_host_verify_v136.json",
+    "verified_name_count": 3
+  },
+  "tsocket_lifecycle_residual_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tsocket_lifecycle_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "48f4e54de043d6ada208bc290820de665854b620992850011ed9cdbc253d8f40",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tsocket_lifecycle_verify_v135.json",
+    "verified_name_count": 4
+  },
+  "tsocket_properties_residual_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tsocket_properties_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "9893616f0ffd2504439b4d27012c42673e35eb41457b98226d044e65d8560701",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tsocket_properties_verify_v137.json",
+    "verified_name_count": 4
+  },
+  "tsocket_receive_residual_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tsocket_receive_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "ebd98fe1d90073e84fc4ee1f8d5b825d8188d172d4622fc002f140430038adf5",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tsocket_receive_verify_v134.json",
+    "verified_name_count": 2
+  },
+  "tsocket_residual_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "artifacts/spectron_tsocket_residual_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "614296a9fead7ea0c43fd4266065c26ea2337a907f0774c41b95bc0f21137f45",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tsocket_residual_verify_v181.json",
+    "verified_name_count": 4
+  },
+  "tsocket_ssl_residual_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tsocket_ssl_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "cce55d6781387741df99a3435a51361a97190abe8f27621eaa826557af10b9cf",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tsocket_ssl_verify_v133.json",
+    "verified_name_count": 4
+  },
+  "tsocket_static_strings_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "artifacts/spectron_tsocket_static_state_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "ce19b052b7be566708e930832534d76fdfb77d7aef73c983500f442a4f78eb99",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tsocket_manual_anchor_verification_v197.json",
+    "verified_name_count": 1
+  },
+  "tsound_effect_methods_anchors": {
+    "anchor_count": 7,
+    "anchor_path": "artifacts/spectron_tsound_effect_methods_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "be6435ee5564418ef1c149f88315a004b5d3be79b80faad75df7e6ca5ca2cccc",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tsound_effect_methods_verification_v202.json",
+    "verified_name_count": 7
+  },
+  "tstring_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tstring_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "519ddb3bc05088d5d08b01444615e35321b945047d821d2ca1ad3cc52302cb02",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tstring_verify_v174.json",
+    "verified_name_count": 6
+  },
+  "tstring_clear_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tstring_clear_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "8e6b7b0c4304b4fbcb2954442307799fb5f0a5fdce0110e3d5300ebbc9b44a3c",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tstring_clear_verify_v175.json",
+    "verified_name_count": 1
+  },
+  "tstringlist_comma_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tstringlist_comma_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "242ffca49d6dd40cb48f221bc154743c1da0e8fdaef2f1b1fbd01f763748c022",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tstringlist_comma_verify_v97.json",
+    "verified_name_count": 4
+  },
+  "tstringlist_extended_anchors": {
+    "anchor_count": 7,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tstringlist_extended_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "45a7edeccf4e4548c2ad6ca7ceddb9de68edd912119a4e795ce2d1ad2b971b8b",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tstringlist_extended_verify_v98.json",
+    "verified_name_count": 7
+  },
+  "tstringlist_residual_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "artifacts/spectron_tstringlist_residual_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "9190e9fe51eaa8b32b10407b98ba3a4097ac25b7a497b5efbdf23d847095e69d",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_tstringlist_verify_v216.json",
+    "verified_name_count": 4
+  },
+  "update_package_accessor_residual_anchors": {
+    "anchor_count": 20,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_update_package_accessor_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "f1fd6ac3bdb74b3c5ba93e5b344b4118b9fab2424513fdafef682920cb41f973",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_update_package_accessor_verify_v142.json",
+    "verified_name_count": 20
+  },
+  "update_package_destructor_residual_anchors": {
+    "anchor_count": 1,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_update_package_destructor_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "ad52375f7debde4d49d15cc4bdde9930219973694b13fafdbbc7cbf1691471f7",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_update_package_destructor_verify_v143.json",
+    "verified_name_count": 1
+  },
+  "update_package_properties_residual_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_update_package_properties_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "9bf54abd4047826af6c78e0d4aca5869fd14737bc91195ce788c2ec893ca7410",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_update_package_properties_verify_v145.json",
+    "verified_name_count": 5
+  },
+  "update_package_wrapper_residual_anchors": {
+    "anchor_count": 6,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_update_package_wrapper_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "1cfcdef6d3af739b4c316fcdcc173e5f90a517bd139a329c0e321485fb890e22",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_update_package_wrapper_verify_v144.json",
+    "verified_name_count": 6
+  },
+  "update_protocol_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_update_protocol_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "4ec887c3350119e6d235a331f245f84e274e2dda7e15bd1b2a833024d4c8a746",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_update_protocol_anchor_verification_20260826.json",
+    "verified_name_count": 5
+  },
+  "url_cache_residual_anchors": {
+    "anchor_count": 5,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_url_cache_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "d435721a859c08af2966d5db1478dd3b9f1f7cf3eb67c4d9eac87ba1e9dfde96",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_url_cache_verify_v139.json",
+    "verified_name_count": 5
+  },
+  "variable_construction_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_variable_construction_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "c876c8cae52308f071cb9ac4da767fc9b7f05260ccc2c17ca15cfa3fb05a4a9c",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_variable_construction_verify_v46.json",
+    "verified_name_count": 2
+  },
+  "visual_helper_anchors": {
+    "anchor_count": 11,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_visual_helper_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "852d00b825d5a984230359808f2e8531902847c717ae4ea18eefe40e56182adf",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_visual_helper_verify_v26.json",
+    "verified_name_count": 11
+  },
+  "window_input_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_window_input_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "f8c3cd255aeb2340fab54f7e38b48872ad09125ba1e4a58b7ad2b4fd71831419",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_window_input_verify_v107.json",
+    "verified_name_count": 2
+  },
+  "window_residual_anchors": {
+    "anchor_count": 2,
+    "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_window_residual_manual_translation_anchors_20260826.json",
+    "anchor_sha256": "aabe6848177236a834b7c28b0fe2fe4ff6b7c1bff808b0635b9527a81bc65760",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_window_residual_verify_v112.json",
+    "verified_name_count": 2
+  },
+  "world_object_property_anchors": {
+    "anchor_count": 22,
+    "anchor_path": "artifacts/spectron_world_object_property_manual_translation_anchors_20260828.json",
+    "anchor_sha256": "b638de84c3ec182eff934e208ca2741c7d868722535b0a6ebec3c66639ebc396",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_world_object_property_verification_v242.json",
+    "verified_name_count": 22
+  }
+}

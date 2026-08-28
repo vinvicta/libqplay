@@ -347,6 +347,12 @@ def main():
     spectron_checkpoint_v248 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v248.json"
     )
+    spectron_gani_property_residual_anchors = load_json(
+        "artifacts/spectron_gani_property_residual_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v249 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v249.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -8493,6 +8499,126 @@ def main():
         30,
     )
     check(
+        "Spectron v249 Gani residual artifact",
+        spectron_gani_property_residual_anchors["artifact"],
+        "spectron_gani_property_residual_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v249 Gani residual network",
+        spectron_gani_property_residual_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v249 Gani residual anchor count",
+        spectron_gani_property_residual_anchors["summary"]["anchor_count"],
+        29,
+    )
+    check(
+        "Spectron v249 Gani residual registration row count",
+        spectron_gani_property_residual_anchors["summary"]["registration_row_count"],
+        30,
+    )
+    check(
+        "Spectron v249 Gani residual unique target count",
+        spectron_gani_property_residual_anchors["summary"]["unique_target_count"],
+        29,
+    )
+    check(
+        "Spectron v249 Gani residual high confidence",
+        spectron_gani_property_residual_anchors["summary"]["high_confidence_count"],
+        29,
+    )
+    check(
+        "Spectron v249 Gani residual target default count",
+        spectron_gani_property_residual_anchors["summary"]["target_default_name_count"],
+        29,
+    )
+    check(
+        "Spectron v249 Gani residual normalized shape count",
+        spectron_gani_property_residual_anchors["summary"]["normalized_shape_exact_count"],
+        26,
+    )
+    check(
+        "Spectron v249 Gani residual full metric count",
+        spectron_gani_property_residual_anchors["summary"]["full_metric_exact_count"],
+        8,
+    )
+    check(
+        "Spectron v249 Gani residual layout count",
+        spectron_gani_property_residual_anchors["summary"]["layout_change_count"],
+        3,
+    )
+    check(
+        "Spectron v249 Gani residual register-detail count",
+        spectron_gani_property_residual_anchors["summary"]["register_detail_difference_count"],
+        21,
+    )
+    check(
+        "Spectron v249 Gani residual getter count",
+        spectron_gani_property_residual_anchors["summary"]["getter_count"],
+        17,
+    )
+    check(
+        "Spectron v249 Gani residual setter count",
+        spectron_gani_property_residual_anchors["summary"]["setter_count"],
+        12,
+    )
+    check(
+        "Spectron v249 Gani residual duplicate count",
+        spectron_gani_property_residual_anchors["summary"]["duplicate_registration_count"],
+        1,
+    )
+    gani_residual_rows = spectron_gani_property_residual_anchors["anchors"]
+    check(
+        "Spectron v249 Gani ani target",
+        next(row["spectron_ea"] for row in gani_residual_rows if row["script_name"] == "ani"),
+        "0x160560",
+    )
+    check(
+        "Spectron v249 Gani head target",
+        next(row["spectron_ea"] for row in gani_residual_rows if row["script_name"] == "head"),
+        "0x160c90",
+    )
+    check(
+        "Spectron v249 Gani zoom setter target",
+        next(
+            row["spectron_ea"]
+            for row in gani_residual_rows
+            if row["script_name"] == "zoom" and row["property_role"] == "setter"
+        ),
+        "0x161530",
+    )
+    check(
+        "Spectron v249 checkpoint artifact",
+        spectron_checkpoint_v249["artifact"],
+        "spectron_translation_checkpoint_20260828_v249",
+    )
+    check(
+        "Spectron v249 checkpoint parent",
+        spectron_checkpoint_v249["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v248",
+    )
+    check(
+        "Spectron v249 checkpoint database hash",
+        spectron_checkpoint_v249["database"]["sha256"],
+        "50377973defadbbf25181fdad93a1fcc4a06480f20bcdbd180dd9a63dc27defa",
+    )
+    check(
+        "Spectron v249 checkpoint function count",
+        spectron_checkpoint_v249["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v249 checkpoint default sub count",
+        spectron_checkpoint_v249["database"]["default_sub_function_count"],
+        826,
+    )
+    check(
+        "Spectron v249 checkpoint anchor count",
+        spectron_checkpoint_v249["gani_property_residual_anchors"]["verified_name_count"],
+        29,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -8617,6 +8743,7 @@ def main():
         spectron_server_npc_showimg_anchors,
         spectron_tiles_layer_property_anchors,
         spectron_player_property_anchors,
+        spectron_gani_property_residual_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

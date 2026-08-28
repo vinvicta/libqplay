@@ -12092,6 +12092,96 @@ and the checkpoint is
 This pass changed only the disposable IDA database. It did not patch the APK
 or either native library, and it performed no DNS, HTTP, or TLS operation.
 
+## 2026-08-28: Spectron residual TGaniObject and TGaniParam property aliases
+
+The v249 pass translates the remaining callback functions in the main
+animation property table. The source `TGaniObjectProperties` table starts at
+`0x37a5b0`, while the corresponding Spectron `.data` copy starts at
+`0x38d5d0`. The table order and decoded script names provide the primary
+correspondence, with decompiled behavior and ARM64 feature metrics used as
+independent checks.
+
+| 1.8 callback | Source | Spectron target | Script name | Source record | Target record | Role |
+| --- | ---: | ---: | --- | ---: | ---: | --- |
+| `TGaniObject_getField280` | `0x15d4d0` | `0x160560` | `ani` | `0x37a5b0` | `0x38d5d0` | getter |
+| `TGaniParam_getStringField304` | `0x15da98` | `0x160cf0` | `aniparams` | `0x37a5e0` | `0x38d600` | getter |
+| `TGaniObject_getField292` | `0x15d4d8` | `0x160568` | `anistep` | `0x37a610` | `0x38d630` | getter |
+| `TGaniObject_getChildField748` | `0x15d4e0` | `0x160570` | `attachid` | `0x37a640` | `0x38d660` | getter |
+| `TGaniObject_getChildVisibilityInverted` | `0x15d4f8` | `0x160588` | `attachtype` | `0x37a670` | `0x38d690` | getter |
+| `TGaniObject_getChildField144` | `0x15d514` | `0x1605a4` | `attachedtoobject` | `0x37a6a0` | `0x38d6c0` | getter |
+| `TGaniObject_getField320` | `0x15d51c` | `0x1605ac` | `attr` | `0x37a6d0` | `0x38d6f0` | getter |
+| `TGaniParam_getStringField376` | `0x15da68` | `0x160cc0` | `body` | `0x37a700` | `0x38d720` | getter |
+| `TGaniParam_getStringField376` | `0x15da68` | `0x160cc0` | `bodyimg` | `0x37a730` | `0x38d750` | getter |
+| `TGaniObject_getField448` | `0x15d524` | `0x1605b4` | `colors` | `0x37a760` | `0x38d780` | getter |
+| `TGaniObject_callVirtual504` | `0x15d52c` | `0x1605bc` | `dir` | `0x37a790` | `0x38d7b0` | getter |
+| `TGaniObject_getField576` | `0x15d590` | `0x160620` | `gmap` | `0x37a7c0` | `0x38d7e0` | getter |
+| `TGaniParam_getStringField384` | `0x15da38` | `0x160c90` | `head` | `0x37a7f0` | `0x38d810` | getter |
+| `TGaniParam_getStringField384` | `0x15da38` | `0x160c90` | `headimg` | `0x37a820` | `0x38d840` | getter |
+| `TGaniParam_getStringField392` | `0x15da08` | `0x160c60` | `shield` | `0x37a880` | `0x38d8a0` | getter |
+| `TGaniParam_getStringField400` | `0x15d9d8` | `0x160c30` | `sword` | `0x37a8b0` | `0x38d8d0` | getter |
+| `TGaniObject_getFloatField460` | `0x15d598` | `0x160628` | `rotation` | `0x37a8e0` | `0x38d900` | getter |
+| `TGaniObject_setFloatField460` | `0x15d5a0` | `0x160630` | `rotation` | `0x37a8e0` | `0x38d900` | setter |
+| `TGaniParam_getPointField476` | `0x15db90` | `0x160c0c` | `rotationcenter` | `0x37a910` | `0x38d930` | getter |
+| `TGaniParam_setPointField476` | `0x15db60` | `0x160be0` | `rotationcenter` | `0x37a910` | `0x38d930` | setter |
+| `TGaniObject_getFloatField464` | `0x15d5a8` | `0x160638` | `stretchx` | `0x37a940` | `0x38d960` | getter |
+| `TGaniObject_setFloatField464` | `0x15d5b0` | `0x160640` | `stretchx` | `0x37a940` | `0x38d960` | setter |
+| `TGaniObject_getFloatField468` | `0x15d5b8` | `0x160648` | `stretchy` | `0x37a970` | `0x38d990` | getter |
+| `TGaniObject_setFloatField468` | `0x15d5c0` | `0x160650` | `stretchy` | `0x37a970` | `0x38d990` | setter |
+| `TGaniObject_getByteField472` | `0x15d5c8` | `0x160658` | `useowncenter` | `0x37a9a0` | `0x38d9c0` | getter |
+| `TGaniObject_setByteField472` | `0x15d5d0` | `0x160660` | `useowncenter` | `0x37a9a0` | `0x38d9c0` | setter |
+| `TGaniObject_getFloatField456` | `0x15d5d8` | `0x160668` | `zoom` | `0x37a9d0` | `0x38d9f0` | getter |
+| `TGaniObject_setFloatField456` | `0x15d5e0` | `0x161530` | `zoom` | `0x37a9d0` | `0x38d9f0` | setter |
+| `TGaniObject_getFloatField484` | `0x15d638` | `0x160708` | `red` | `0x37aa00` | `0x38da20` | getter |
+| `TGaniObject_setFloatField484Clamped` | `0x15d640` | `0x160710` | `red` | `0x37aa00` | `0x38da20` | setter |
+| `TGaniObject_getFloatField488` | `0x15d66c` | `0x16073c` | `green` | `0x37aa30` | `0x38da50` | getter |
+| `TGaniObject_setFloatField488Clamped` | `0x15d674` | `0x160744` | `green` | `0x37aa30` | `0x38da50` | setter |
+| `TGaniObject_getFloatField492` | `0x15d6a0` | `0x160770` | `blue` | `0x37aa60` | `0x38da80` | getter |
+| `TGaniObject_setFloatField492Clamped` | `0x15d6a8` | `0x160778` | `blue` | `0x37aa60` | `0x38da80` | setter |
+| `TGaniObject_getFloatField496` | `0x15d6d4` | `0x1607a4` | `alpha` | `0x37aa90` | `0x38dab0` | getter |
+| `TGaniObject_setFloatField496Clamped` | `0x15d6dc` | `0x1607ac` | `alpha` | `0x37aa90` | `0x38dab0` | setter |
+| `TGaniObject_getByteField500` | `0x15d61c` | `0x1606ec` | `mode` | `0x37aac0` | `0x38dae0` | getter |
+
+The table has 30 rows in this residual group. Twenty-nine target callback
+functions needed names; the `head` and `headimg` rows share one callback at
+`0x160c90`, just as they share `0x15da38` in the source. The artifact records
+that duplicate registration explicitly rather than inventing a second
+function. The previously translated rows for `body`, `bodyimg`, and
+`enableganimoviereposition` are not repeated in this batch.
+
+The first eight callback anchors are complete metric matches. They cover the
+`ani`, `attachedtoobject`, and `dir` accessors plus the string callbacks for
+`head`, `shield`, and `sword`, including the shield and sword setters. The
+remaining 18 normalized matches differ only in register-detail allocation.
+Three target bodies have larger structural differences. The
+`rotationcenter` setter is 44 bytes in Spectron instead of 48 bytes in 1.8,
+because its rebuilt point-string helper has a shorter wrapper. The target zoom
+getter expands from an 8-byte direct float load to an 80-byte decode of an
+encoded allocation at the object field beginning at `+456`. Its setter expands
+from 8 bytes to 164 bytes because it allocates and updates that encoded value.
+These are still high-confidence semantic matches because the table rows and
+decompiled property behavior agree, but they are not presented as byte-level
+equivalences.
+
+The rebuilt target object also relocates the apparent backing fields for
+rotation, rotation center, stretch, center selection, and color effects. For
+example, the target rotation accessor reads `+472` where the 1.8 accessor reads
+`+460`, and the target color fields run through `+496`, `+500`, `+504`, and
+`+508`. The source field-offset names are retained in the aliases because
+they describe the proven 1.8 operation, while the target pseudocode remains
+available for the relocated layout.
+
+The aliases are recorded in
+`artifacts/spectron_gani_property_residual_manual_translation_anchors_20260828.json`,
+generated by `tools/generate_spectron_gani_property_residual_anchors.py`. The
+disposable database is
+`analysis/spectron_libqplay_translated_v249.i64`, with 11,696 functions and
+826 remaining default `sub_` names. Its SHA-256 is
+`50377973defadbbf25181fdad93a1fcc4a06480f20bcdbd180dd9a63dc27defa`.
+The v249 checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v249.json`. A clean
+serial reopen verified all 29 renamed callbacks with zero failures. This was
+an offline IDA pass with no DNS, HTTP, TLS, APK, or native-library operation.
+
 ## 2026-08-28: Spectron TPlayer property aliases
 
 The v248 pass translates the residual main `TPlayer` property registration
