@@ -12092,6 +12092,81 @@ and the checkpoint is
 This pass changed only the disposable IDA database. It did not patch the APK
 or either native library, and it performed no DNS, HTTP, or TLS operation.
 
+## 2026-08-28: Spectron identification, time, file, and input callbacks
+
+The v236 pass follows the next compact group of stripped target callbacks
+through their decoded script registrations. It covers the identification,
+time, file-scripting, control-binding, and hardware-keyboard tables. The
+target addresses below come from the `.data` copy of the tables. The target
+also keeps a duplicate `.data.rel.ro` copy, but using one canonical copy avoids
+making the same callback look like two separate registrations in later tools.
+
+| 1.8 callback | Source | Spectron target | Source record | Target record | Script name |
+| --- | ---: | ---: | ---: | ---: | --- |
+| `TIdentification_script_getOSID` | `0xec6d8` | `0xed694` | `0x3768d0` | `0x3898d8` | `adventure_getosid` |
+| `TIdentification_script_getNetworkID` | `0xec270` | `0xed0b8` | `0x376900` | `0x389908` | `adventure_getnetworkid` |
+| `TIdentification_script_getSystemID` | `0xec7ac` | `0xed77c` | `0x376930` | `0x389938` | `adventure_getsystemid` |
+| `TTime_script_adventure_getframetick` | `0xf6e58` | `0xf87d0` | `0x3769f0` | `0x3899f8` | `adventure_getframetick` |
+| `TTime_script_adventure_setframetick` | `0xf6e68` | `0xf87e0` | `0x376a20` | `0x389a28` | `adventure_setframetick` |
+| `TFileScripting_script_getScriptAccessFile` | `0xfc880` | `0xfee28` | `0x376bd0` | `0x389be0` | `getscriptaccessfile` |
+| `TFileScripting_script_escapeFilename` | `0xfbba4` | `0xfe124` | `0x376c30` | `0x389c40` | `escapefilename` |
+| `TFileScripting_script_removeEscapesFromFilename` | `0xfbeec` | `0xfe46c` | `0x376c60` | `0x389c70` | `removeescapesfromfilename` |
+| `TFileScripting_script_freeAllResources` | `0xfbe68` | `0xfe3e8` | `0x376cf0` | `0x389d00` | `freeallresources` |
+| `TFileScripting_script_findFiles` | `0xfbe20` | `0xfe3a0` | `0x376d20` | `0x389d30` | `findfiles` |
+| `TFileScripting_script_extractFileExt` | `0xfbb84` | `0xfe104` | `0x376d50` | `0x389d60` | `extractfileext` |
+| `TFileScripting_script_getExtension` | `0xfbb64` | `0xfe0e4` | `0x376d80` | `0x389d90` | `getextension` |
+| `TFileScripting_script_setFileModTime` | `0xfc540` | `0xfeac0` | `0x376e10` | `0x389e20` | `adventure_setfilemodtime` |
+| `TFileScripting_script_extractFileBase` | `0xfbc5c` | `0xfe1dc` | `0x376ff0` | `0x38a000` | `extractfilebase` |
+| `TFileScripting_script_extractFilename` | `0xfbb44` | `0xfe0c4` | `0x377020` | `0x38a030` | `extractfilename` |
+| `TFileScripting_script_extractFilepath` | `0xfbb24` | `0xfe0a4` | `0x377050` | `0x38a060` | `extractfilepath` |
+| `TControlBinding_getAction` | `0x168b10` | `0x16c4e8` | `0x37ae98` | `0x38deb8` | `action` |
+| `TControlBinding_getKeycode` | `0x168b18` | `0x16c4f0` | `0x37aec8` | `0x38dee8` | `keycode` |
+| `TControlBinding_getKeytext` | `0x168e40` | `0x16c840` | `0x37aef8` | `0x38df18` | `keytext` |
+| `TControlBinding_getSlot` | `0x168b20` | `0x16c4f8` | `0x37af28` | `0x38df48` | `slot` |
+| `TInput_getHardwareKeyboardEnabled` | `0x168af0` | `0x16c4c8` | `0x37af58` | `0x38df78` | `enablehardwarekeyboard` |
+| `TInput_setHardwareKeyboardEnabled` | `0x168b00` | `0x16c4d8` | `0x37af58` | `0x38df78` | `enablehardwarekeyboard` |
+
+The identification wrappers are straightforward. The OS and network rows call
+their corresponding native identifier methods, while the system row passes an
+integer selector. The frame-tick getter reads the same global value as the
+source and the setter stores the incoming script value. The getter has a
+second registration in each build: source `getFrameTick` at `0x376a50` and
+target `getframetick` at `0x389a58` point to the same callback. That duplicate
+registration is recorded in the anchor artifact instead of producing a false
+second alias.
+
+The file wrappers were checked in source and target pseudocode. The thin rows
+forward to the script-access filename, escaping, unescaping, extension, base,
+filename, and filepath helpers. `freeallresources` calls the client resource
+cleanup path. `findfiles` obtains a matching file list, converts it into a
+script value, and releases the temporary list. Both versions of
+`adventure_setfilemodtime` choose between an explicit file path and a packaged
+level resource before updating UTC metadata. The target implementation is
+larger, 364 bytes versus 324 bytes in 1.8, and its extra wrapper calls account
+for the only non-matching normalized shape in the group. This is why the
+artifact marks it as an expanded-body anchor rather than an exact-shape alias.
+
+The control-binding rows read action at object offset +112, keycode at +120,
+and slot at +116. The keytext row resolves that keycode through the target
+key-description helper. The hardware-keyboard pair reads and writes one global
+flag. These simple fields are useful cross-checks because the target class
+names are obfuscated but the property names and table positions survive.
+
+Feature comparison gives 21 normalized-shape matches and 17 complete metric
+matches. Five rows differ only in register detail, and one is the expanded
+timestamp wrapper. All 22 target entries were default `sub_` names before the
+pass. They were renamed with the `v18_` prefix in a copy of v235 and verified
+after a clean IDA reopen. The v236 database contains 11,695 functions and
+1,034 remaining default `sub_` names, with SHA-256
+`04b1c4438c1d9473f949a1e27d8cf60b1d1199fddac80440a23429c8e5b1f44a`.
+
+The reproducible record is
+`artifacts/spectron_time_files_input_manual_translation_anchors_20260828.json`,
+generated by `tools/generate_spectron_time_files_input_anchors.py`. The
+reopen report verified all 22 names with zero failures. The checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v236.json`. No DNS, HTTP,
+TLS, APK, or native-library operation was part of this pass.
+
 ## 2026-08-28: Spectron GSFunctionsClient and GuiControl property aliases
 
 The v235 pass follows 12 rows in the target's decoded GSFunctionsClient and

@@ -269,6 +269,12 @@ def main():
     spectron_gsfunctions_property_anchors = load_json(
         "artifacts/spectron_gsfunctions_property_manual_translation_anchors_20260828.json"
     )
+    spectron_time_files_input_anchors = load_json(
+        "artifacts/spectron_time_files_input_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v236 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v236.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -7129,6 +7135,110 @@ def main():
         12,
     )
     check(
+        "Spectron v236 time-files-input artifact",
+        spectron_time_files_input_anchors["artifact"],
+        "spectron_time_files_input_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v236 time-files-input network",
+        spectron_time_files_input_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v236 time-files-input anchor count",
+        spectron_time_files_input_anchors["summary"]["anchor_count"],
+        22,
+    )
+    check(
+        "Spectron v236 time-files-input high confidence",
+        spectron_time_files_input_anchors["summary"]["high_confidence_count"],
+        22,
+    )
+    check(
+        "Spectron v236 time-files-input target default count",
+        spectron_time_files_input_anchors["summary"]["target_default_name_count"],
+        22,
+    )
+    check(
+        "Spectron v236 time-files-input normalized shape count",
+        spectron_time_files_input_anchors["summary"]["normalized_shape_exact_count"],
+        21,
+    )
+    check(
+        "Spectron v236 time-files-input full metric count",
+        spectron_time_files_input_anchors["summary"]["full_metric_exact_count"],
+        17,
+    )
+    check(
+        "Spectron v236 time-files-input layout count",
+        spectron_time_files_input_anchors["summary"]["layout_change_count"],
+        1,
+    )
+    check(
+        "Spectron v236 time-files-input register-detail count",
+        spectron_time_files_input_anchors["summary"]["register_detail_difference_count"],
+        5,
+    )
+    check(
+        "Spectron v236 time-files-input expanded body count",
+        spectron_time_files_input_anchors["summary"]["expanded_body_count"],
+        1,
+    )
+    check(
+        "Spectron v236 time-files-input additional registration count",
+        spectron_time_files_input_anchors["summary"]["additional_registration_count"],
+        1,
+    )
+    time_files_rows = {
+        row["original_name"]: row
+        for row in spectron_time_files_input_anchors["anchors"]
+    }
+    check(
+        "Spectron v236 identification target",
+        time_files_rows["TIdentification_script_getOSID"]["spectron_ea"],
+        "0xed694",
+    )
+    check(
+        "Spectron v236 set-file-mod-time target",
+        time_files_rows["TFileScripting_script_setFileModTime"]["spectron_ea"],
+        "0xfeac0",
+    )
+    check(
+        "Spectron v236 hardware-keyboard target",
+        time_files_rows["TInput_getHardwareKeyboardEnabled"]["spectron_ea"],
+        "0x16c4c8",
+    )
+    check(
+        "Spectron v236 checkpoint artifact",
+        spectron_checkpoint_v236["artifact"],
+        "spectron_translation_checkpoint_20260828_v236",
+    )
+    check(
+        "Spectron v236 checkpoint parent",
+        spectron_checkpoint_v236["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v235",
+    )
+    check(
+        "Spectron v236 checkpoint database hash",
+        spectron_checkpoint_v236["database"]["sha256"],
+        "04b1c4438c1d9473f949a1e27d8cf60b1d1199fddac80440a23429c8e5b1f44a",
+    )
+    check(
+        "Spectron v236 checkpoint function count",
+        spectron_checkpoint_v236["database"]["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v236 checkpoint default sub count",
+        spectron_checkpoint_v236["database"]["default_sub_function_count"],
+        1034,
+    )
+    check(
+        "Spectron v236 checkpoint anchor count",
+        spectron_checkpoint_v236["time_files_input_anchors"]["verified_name_count"],
+        22,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -7240,6 +7350,7 @@ def main():
         spectron_target_only_labels,
         spectron_tclient_playerhurt_anchor,
         spectron_gsfunctions_property_anchors,
+        spectron_time_files_input_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

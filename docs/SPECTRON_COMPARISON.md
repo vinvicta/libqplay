@@ -3449,6 +3449,68 @@ The database identity is recorded in
 This pass changed only the disposable IDA database and performed no DNS, HTTP,
 or TLS operation.
 
+## Spectron identification, time, file, and input callback aliases
+
+The v236 pass uses decoded registration rows to translate 22 target callbacks
+that IDA initially displayed as `sub_` functions. The address pairs below are
+semantic correspondences between the 1.8 IDB and the stripped Spectron target.
+The target records are from the `.data` copy of the script tables. A duplicate
+`.data.rel.ro` copy exists, but it is not used as the canonical target address
+in this archive.
+
+| 1.8 callback | Source | Spectron target | Script name | Target table record |
+| --- | ---: | ---: | --- | ---: |
+| `TIdentification_script_getOSID` | `0xec6d8` | `0xed694` | `adventure_getosid` | `0x3898d8` |
+| `TIdentification_script_getNetworkID` | `0xec270` | `0xed0b8` | `adventure_getnetworkid` | `0x389908` |
+| `TIdentification_script_getSystemID` | `0xec7ac` | `0xed77c` | `adventure_getsystemid` | `0x389938` |
+| `TTime_script_adventure_getframetick` | `0xf6e58` | `0xf87d0` | `adventure_getframetick` | `0x3899f8` |
+| `TTime_script_adventure_setframetick` | `0xf6e68` | `0xf87e0` | `adventure_setframetick` | `0x389a28` |
+| `TFileScripting_script_getScriptAccessFile` | `0xfc880` | `0xfee28` | `getscriptaccessfile` | `0x389be0` |
+| `TFileScripting_script_escapeFilename` | `0xfbba4` | `0xfe124` | `escapefilename` | `0x389c40` |
+| `TFileScripting_script_removeEscapesFromFilename` | `0xfbeec` | `0xfe46c` | `removeescapesfromfilename` | `0x389c70` |
+| `TFileScripting_script_freeAllResources` | `0xfbe68` | `0xfe3e8` | `freeallresources` | `0x389d00` |
+| `TFileScripting_script_findFiles` | `0xfbe20` | `0xfe3a0` | `findfiles` | `0x389d30` |
+| `TFileScripting_script_extractFileExt` | `0xfbb84` | `0xfe104` | `extractfileext` | `0x389d60` |
+| `TFileScripting_script_getExtension` | `0xfbb64` | `0xfe0e4` | `getextension` | `0x389d90` |
+| `TFileScripting_script_setFileModTime` | `0xfc540` | `0xfeac0` | `adventure_setfilemodtime` | `0x389e20` |
+| `TFileScripting_script_extractFileBase` | `0xfbc5c` | `0xfe1dc` | `extractfilebase` | `0x38a000` |
+| `TFileScripting_script_extractFilename` | `0xfbb44` | `0xfe0c4` | `extractfilename` | `0x38a030` |
+| `TFileScripting_script_extractFilepath` | `0xfbb24` | `0xfe0a4` | `extractfilepath` | `0x38a060` |
+| `TControlBinding_getAction` | `0x168b10` | `0x16c4e8` | `action` | `0x38deb8` |
+| `TControlBinding_getKeycode` | `0x168b18` | `0x16c4f0` | `keycode` | `0x38dee8` |
+| `TControlBinding_getKeytext` | `0x168e40` | `0x16c840` | `keytext` | `0x38df18` |
+| `TControlBinding_getSlot` | `0x168b20` | `0x16c4f8` | `slot` | `0x38df48` |
+| `TInput_getHardwareKeyboardEnabled` | `0x168af0` | `0x16c4c8` | `enablehardwarekeyboard` | `0x38df78` |
+| `TInput_setHardwareKeyboardEnabled` | `0x168b00` | `0x16c4d8` | `enablehardwarekeyboard` | `0x38df78` |
+
+The identification callbacks call the corresponding native ID methods. The
+time callbacks access one global frame-tick value. The target getter is also
+registered as `getframetick`, matching the source's second `getFrameTick` row;
+the duplicate registration points to the same callback in each build.
+
+The file callbacks preserve the old wrapper roles. They resolve script-access
+paths, escape and unescape filenames, clean resources, enumerate files, split
+path components, and update UTC modification times. The target
+`setFileModTime` implementation is expanded from 324 to 364 bytes, but both
+decompilations choose between an explicit filesystem path and a packaged level
+resource before applying the timestamp. It remains a high-confidence semantic
+anchor, with its metric differences visible in the JSON artifact.
+
+The control-binding getters read the action, keycode, key text, and slot
+fields. The key-text path calls the native key-description helper. The final
+getter and setter access the global hardware-keyboard flag. Across all 22 rows,
+21 match the normalized instruction shape and 17 match the complete feature
+record. Five have only register-detail changes, and one is the expanded file
+timestamp wrapper.
+
+The aliases are materialized in
+`analysis/spectron_libqplay_translated_v236.i64`. The machine-readable anchor
+record is
+`artifacts/spectron_time_files_input_manual_translation_anchors_20260828.json`,
+and the persisted checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v236.json`. The clean
+reopen verified all 22 names. No network operation was part of this pass.
+
 ## Spectron GSFunctionsClient and GuiControl property aliases
 
 The v235 pass adds 12 high-confidence aliases from the decoded GSFunctionsClient

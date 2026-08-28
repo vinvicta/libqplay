@@ -530,6 +530,19 @@ This is the short handoff view. The full reasoning and command history are in
      `tools/generate_spectron_gsfunctions_property_anchors.py`, and
      `artifacts/spectron_translation_checkpoint_20260828_v235.json`.
 
+63f. The v236 IDA checkpoint adds 22 high-confidence aliases from the
+     identification, time, file-scripting, control-binding, and
+     hardware-keyboard tables. The clean reopen has 11,695 functions and
+     1,034 remaining default `sub_` names. Twenty-one rows match normalized
+     ARM64 instruction shape and 17 match the complete metric set. The target
+     `setFileModTime` body is expanded, so its semantic match is recorded with
+     the metric differences visible. The database SHA-256 is
+     `04b1c4438c1d9473f949a1e27d8cf60b1d1199fddac80440a23429c8e5b1f44a`.
+     See
+     `artifacts/spectron_time_files_input_manual_translation_anchors_20260828.json`,
+     `tools/generate_spectron_time_files_input_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260828_v236.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The
