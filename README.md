@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v291 Spectron database. It
-contains 11,696 functions and 561 remaining default `sub_` names. The v263
+The current documented translation frontier is the v292 Spectron database. It
+contains 11,696 functions and 556 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -131,6 +131,10 @@ The v291 revision adds three high-confidence libjpeg forward-DCT manager
 labels. They identify the forward-DCT start-pass routine, the shared integer
 quantization path, and the floating-point quantization path. All three match
 normalized feature shape, and two match the complete recorded feature set.
+The v292 revision adds five high-confidence libjpeg compressor Huffman
+encoder labels. They identify the gather-statistics encoder, normal encoder,
+both finish-pass callbacks, and the start-pass dispatcher. All five match
+normalized feature shape, and two match the complete recorded feature set.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -183,6 +187,8 @@ The current v290 database is kept locally as
 `analysis/spectron_libqplay_translated_v290.i64`.
 The current v291 database is kept locally as
 `analysis/spectron_libqplay_translated_v291.i64`.
+The current v292 database is kept locally as
+`analysis/spectron_libqplay_translated_v292.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -452,6 +458,16 @@ two match the complete recorded feature set. The checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v291.json`; it records
 the reopened database with 561 remaining default names.
 
+The v292 libjpeg compressor Huffman encoder evidence is in
+`artifacts/spectron_jpeg_huffman_encoder_manual_translation_anchors_20260828.json`.
+It labels five routines around
+`v18_jinit_huff_encoder_jpeg_compress_struct` at `0x2b2a2c`: the
+gather-statistics encoder, normal entropy encoder, two finish-pass callbacks,
+and the start-pass dispatcher. All five match normalized ARM64 feature
+shape, and two match the complete recorded feature set. The checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v292.json`; it records
+the reopened database with 556 remaining default names.
+
 The latest checkpoints are
 `artifacts/spectron_translation_checkpoint_20260828_v263_corrected.json` and
 `artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json`,
@@ -483,10 +499,11 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v288.json`,
 `artifacts/spectron_translation_checkpoint_20260828_v289.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v290.json`, followed by
-`artifacts/spectron_translation_checkpoint_20260828_v291.json`. The reviewed
+`artifacts/spectron_translation_checkpoint_20260828_v291.json`, followed by
+`artifacts/spectron_translation_checkpoint_20260828_v292.json`. The reviewed
 legacy, Android, script-table, runtime, property, zlib, and libjpeg labels
-through v291 were reopened and verified with zero failures. That includes the
-v291 forward-DCT manager labels added in the latest pass.
+through v292 were reopened and verified with zero failures. That includes the
+v292 compressor Huffman encoder labels added in the latest pass.
 These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or
 TLS service.
