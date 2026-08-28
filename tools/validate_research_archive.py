@@ -74,6 +74,9 @@ def main():
     spectron_checkpoint_v221 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v221.json"
     )
+    spectron_checkpoint_v222 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v222.json"
+    )
     spectron_manual = load_json(
         "artifacts/spectron_manual_translation_anchors_20260826.json"
     )
@@ -184,6 +187,9 @@ def main():
     )
     spectron_gui_drawing_showimg_property_anchors = load_json(
         "artifacts/spectron_gui_drawing_showimg_property_manual_translation_anchors_20260828.json"
+    )
+    spectron_gui_browser_property_anchors = load_json(
+        "artifacts/spectron_gui_browser_property_manual_translation_anchors_20260828.json"
     )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
@@ -2758,6 +2764,60 @@ def main():
         "Spectron GUI drawing/ShowImg target-only review count",
         len(spectron_gui_drawing_showimg_property_anchors["reviewed_target_only_rows"]),
         2,
+    )
+    check(
+        "Spectron GUI browser property artifact",
+        spectron_gui_browser_property_anchors["artifact"],
+        "spectron_gui_browser_property_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron GUI browser property network",
+        spectron_gui_browser_property_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron GUI browser property total",
+        spectron_gui_browser_property_anchors["summary"]["anchor_count"],
+        3,
+    )
+    check(
+        "Spectron GUI browser property high confidence",
+        spectron_gui_browser_property_anchors["summary"]["high_confidence_count"],
+        3,
+    )
+    check(
+        "Spectron GUI browser property exact-shape count",
+        spectron_gui_browser_property_anchors["summary"]["normalized_shape_exact_count"],
+        3,
+    )
+    check(
+        "Spectron GUI browser property full-metric count",
+        spectron_gui_browser_property_anchors["summary"]["full_metric_exact_count"],
+        3,
+    )
+    check(
+        "Spectron GUI browser property default targets",
+        spectron_gui_browser_property_anchors["summary"]["target_default_name_count"],
+        3,
+    )
+    browser_by_name = {
+        row["original_name"]: row
+        for row in spectron_gui_browser_property_anchors["anchors"]
+    }
+    check(
+        "Spectron GUI browser allowzoom target",
+        browser_by_name["GuiBrowserCtrl_get_allowzoom"]["spectron_ea"],
+        "0x1e57e4",
+    )
+    check(
+        "Spectron GUI browser URL target",
+        browser_by_name["GuiBrowserCtrl_get_url"]["spectron_ea"],
+        "0x1e57ec",
+    )
+    check(
+        "Spectron GUI browser text target",
+        browser_by_name["GuiBrowserCtrl_get_text"]["spectron_ea"],
+        "0x1e581c",
     )
     check(
         "Spectron TString artifact",
@@ -5894,6 +5954,31 @@ def main():
         16,
     )
     check(
+        "Spectron v222 checkpoint artifact",
+        spectron_checkpoint_v222["artifact"],
+        "spectron_translation_checkpoint_20260828_v222",
+    )
+    check(
+        "Spectron v222 checkpoint parent",
+        spectron_checkpoint_v222["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v221",
+    )
+    check(
+        "Spectron v222 checkpoint database hash",
+        spectron_checkpoint_v222["database"]["sha256"],
+        "858a8ded6274a0bc186fdbade4beab3951e6e5d6b6814b467afa4b4626431b6f",
+    )
+    check(
+        "Spectron v222 checkpoint default sub count",
+        spectron_checkpoint_v222["database"]["default_sub_function_count"],
+        1106,
+    )
+    check(
+        "Spectron v222 checkpoint property count",
+        spectron_checkpoint_v222["gui_browser_property_anchors"]["verified_name_count"],
+        3,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -5991,6 +6076,7 @@ def main():
         spectron_server_object_lifecycle_anchors,
         spectron_gui_ml_text_residual_anchors,
         spectron_gui_drawing_showimg_property_anchors,
+        spectron_gui_browser_property_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

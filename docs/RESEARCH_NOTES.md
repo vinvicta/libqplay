@@ -12048,3 +12048,35 @@ and the checkpoint is
 
 This pass changed only the disposable IDA database. It did not patch the APK
 or either native library, and it performed no DNS, HTTP, or TLS operation.
+
+## 2026-08-28: Residual Spectron GuiBrowserCtrl getters
+
+The v222 review finished the three small property getters still carrying
+default names in the target browser-control block. The source table places
+these callbacks in the order allow-zoom, URL, and text. The target table in
+the obfuscated `VGEwBaTQ4a` class points to the same roles.
+
+| Source role | Source | Spectron target | Target name before alias | Reviewed operation |
+| --- | ---: | ---: | --- | --- |
+| `GuiBrowserCtrl_get_allowzoom` | `0x1e1914` | `0x1e57e4` | `sub_1E57E4` | byte at `+472` |
+| `GuiBrowserCtrl_get_url` | `0x1e191c` | `0x1e57ec` | `sub_1E57EC` | string copy from `+464` |
+| `GuiBrowserCtrl_get_text` | `0x1e194c` | `0x1e581c` | `sub_1E581C` | string copy from `+456` |
+
+IDA pseudocode confirms the same field reads and string-return convention in
+both builds. The target replaces the source `TString` helper with its
+obfuscated `C8THgaTQxF` wrapper, but the feature records still match exactly:
+size, instruction count, control-flow shape, register shape, and all other
+recorded fields. All three target functions began as default `sub_` names.
+
+The v222 disposable database applies the three `v18_` aliases and reopens
+with zero rename failures. It contains 11,694 functions and 1,106 default
+`sub_` names. Its SHA-256 is
+`858a8ded6274a0bc186fdbade4beab3951e6e5d6b6814b467afa4b4626431b6f`.
+The generator is
+`tools/generate_spectron_gui_browser_property_anchors.py`, the evidence is
+`artifacts/spectron_gui_browser_property_manual_translation_anchors_20260828.json`,
+and the checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v222.json`.
+
+This pass changed only the disposable IDA database. It did not patch the APK
+or either native library, and it performed no DNS, HTTP, or TLS operation.
