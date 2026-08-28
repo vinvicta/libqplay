@@ -1,0 +1,349 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source registration or callback context is at 0x3805b0.",
+        "The target registration or callback context is at 0x3935f8.",
+        "Reviewed pseudocode preserves the same role: the target is the popdialog script callback registered in the GuiCanvas function table; it recognizes MessageBoxDialog, resolves MessageBoxDialog_Window, performs the close or pop transition, and updates the dialog state.",
+        "The target callback was a default IDA name before this pass.",
+        "The target uses a rebuilt wrapper or helper sequence, so the metric differences are recorded explicitly."
+      ],
+      "full_metric_equal": false,
+      "match_kind": "manual-gui-android-semantic-anchor",
+      "metric_differences": [
+        "size",
+        "instruction_count",
+        "basic_block_count",
+        "branch_count",
+        "call_count",
+        "return_count",
+        "mnemonic_hash",
+        "opcode_shape_hash",
+        "register_shape_hash",
+        "shape_hash",
+        "string_refs_hash",
+        "register_detail_hash"
+      ],
+      "name_action": "rename-with-v18-prefix",
+      "normalized_shape_equal": false,
+      "operation": "the target is the popdialog script callback registered in the GuiCanvas function table; it recognizes MessageBoxDialog, resolves MessageBoxDialog_Window, performs the close or pop transition, and updates the dialog state",
+      "original_direct_call_names": [
+        "plt_GuiCanvas_popDialogControl_void",
+        "plt_TList_operator_index_int"
+      ],
+      "original_ea": "0x1b15f0",
+      "original_function_end": "0x1b1650",
+      "original_metrics": {
+        "basic_block_count": 3,
+        "branch_count": 3,
+        "call_count": 2,
+        "instruction_count": 24,
+        "mnemonic_hash": "26a558fe765d04de7c402f5a743001ff4784a07ce84401a90ea433c04d44238d",
+        "opcode_shape_hash": "2b8b1b7c5e6aef4ec06d3a6f1c4f19029045ac8ace989db6e3be6c45eee92456",
+        "register_detail_hash": "6d6f76fec1d56a78fda2db7f2e55454a6381b92f6fc55ce9ba13c8e29fbca019",
+        "register_shape_hash": "092297a97fe86ec1b6b1d9add9e438e27b2624016dc4b376a2dc177d2107ba0d",
+        "return_count": 1,
+        "shape_hash": "fe9688ae12da072cd014ba00dae87ce55be6e43d9269ad75ff55eec5efef8ea8",
+        "size": 96,
+        "string_refs_hash": null
+      },
+      "original_name": "GuiCanvas_script_popdialog",
+      "original_string_refs": [],
+      "proposed_name": "v18_GuiCanvas_script_popdialog",
+      "source_basis": "registration context, target Java method strings, callback role, reviewed pseudocode, and cross-build feature comparison",
+      "source_component": "original GUI or Android-facing callback",
+      "source_table_context": "0x3805b0",
+      "spectron_current_name": "sub_1B5CF8",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [
+        "._Z10n8NK2aKNZVP10c76BgaJBGAP10G0gxgajWBw",
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10CanTfaz6bZ10gwFWfaPxY0Ev",
+        "._ZN10G0gxgajWBw10LfDmgaVDEnEv",
+        "._ZN10KKhLga4xoI10TBCvgay5cvEjRK10C8THgaTQxF",
+        "._ZN10KKhLga4xoI10g4ouMaaIbpERK10C8THgaTQxF",
+        "._ZN10SsrLga3IwI10YuBgIaK9zREP10w9XxgaJdbx",
+        "._ZN10XCASBayqxt10dx4OHaCqAtERK10C8THgaTQxF",
+        "._ZNK10C8THgaTQxF10fEtHgarybFERKS_"
+      ],
+      "spectron_ea": "0x1b5cf8",
+      "spectron_function_end": "0x1b5f4c",
+      "spectron_metrics": {
+        "basic_block_count": 22,
+        "branch_count": 41,
+        "call_count": 24,
+        "instruction_count": 149,
+        "mnemonic_hash": "b8765713ff9dd36a653eec259c7e1e78daebde14359af7a61686efd3e4a29170",
+        "opcode_shape_hash": "582b27066deae1e9fc05d31901f03875915101d645a10222e754dc981fe604b1",
+        "register_detail_hash": "23d8d82482f1b804ead9d6b127281ac19255190106b09492c86d67f4e4d60c55",
+        "register_shape_hash": "a3b0dc9c69b35e8ab5d976c2a527177ac408f467bab248bf81b43e40d61edddf",
+        "return_count": 2,
+        "shape_hash": "ee655c612efd2f24e969fd896e7770d06a0e24c3b9b266abc4d75b175c417d80",
+        "size": 596,
+        "string_refs_hash": "d50399fd2525d45957e2255d993760dc415a94c8add3ed668e1495dd79cc5794"
+      },
+      "spectron_string_refs": [
+        "MessageBoxDialog",
+        "MessageBoxDialog_Window"
+      ],
+      "target_component": "Spectron rebuilt GUI or Android-facing callback",
+      "target_table_context": "0x3935f8"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source registration or callback context is at 0x387cd0.",
+        "The target registration or callback context is at 0x39ae38.",
+        "Reviewed pseudocode preserves the same role: the target preserves the unknown_object check, universe ownership test, script-space event delivery, virtual dispatch, and temporary-array cleanup while using rebuilt obfuscated helper methods.",
+        "The target callback was a default IDA name before this pass.",
+        "The target uses a rebuilt wrapper or helper sequence, so the metric differences are recorded explicitly."
+      ],
+      "full_metric_equal": false,
+      "match_kind": "manual-gui-android-semantic-anchor",
+      "metric_differences": [
+        "size",
+        "instruction_count",
+        "basic_block_count",
+        "branch_count",
+        "call_count",
+        "mnemonic_hash",
+        "opcode_shape_hash",
+        "register_shape_hash",
+        "shape_hash",
+        "register_detail_hash"
+      ],
+      "name_action": "rename-with-v18-prefix",
+      "normalized_shape_equal": false,
+      "operation": "the target preserves the unknown_object check, universe ownership test, script-space event delivery, virtual dispatch, and temporary-array cleanup while using rebuilt obfuscated helper methods",
+      "original_direct_call_names": [
+        "plt_TGraalVar_activateScript_void",
+        "plt_TGraalVar_createScriptSpace_void",
+        "plt_TGraalVar_invokeEvent_TString_const_TGraalVar",
+        "plt_TScriptEnvironment_makeArrayVar_bool",
+        "plt_TScriptSpace_catchEvent_TString_const_TString_const_TString_const",
+        "plt_TString_clear_void",
+        "plt_TString_operator_lshift_char_const",
+        "plt_operator_ne_TString_const_char_const"
+      ],
+      "original_ea": "0x210374",
+      "original_function_end": "0x210510",
+      "original_metrics": {
+        "basic_block_count": 15,
+        "branch_count": 26,
+        "call_count": 15,
+        "instruction_count": 102,
+        "mnemonic_hash": "7da498aa81f5984c895f5ae00186dfb88ae2accdba87b2c1ee43cea7c97e90d0",
+        "opcode_shape_hash": "5932acadb4ad19e4ba4c749689d70eb9066f935ee9f4002e56f613151974c7f3",
+        "register_detail_hash": "bf47337847ec419baead0ce9d81b4ee7bdc8d42931cc252bf000ec87c517c751",
+        "register_shape_hash": "4cad4f1574028fb2878a1537db42f6143f4f55cbdd8bd69dd3ff4679985ddb15",
+        "return_count": 1,
+        "shape_hash": "54061a5d015172fb0b0b252830ac329084304191420c2f48624dc4a0f3e6ed55",
+        "size": 412,
+        "string_refs_hash": "c0dcbe8941510899e009853c9c7478e0486dd8c629761c74a2febf54fc39921b"
+      },
+      "original_name": "TGraalVar_script_trigger",
+      "original_string_refs": [
+        "unknown_object"
+      ],
+      "proposed_name": "v18_TGraalVar_script_trigger",
+      "source_basis": "registration context, target Java method strings, callback role, reviewed pseudocode, and cross-build feature comparison",
+      "source_component": "original GUI or Android-facing callback",
+      "source_table_context": "0x387cd0",
+      "spectron_current_name": "sub_216A64",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10CanTfaz6bZ10gwFWfaPxY0Ev",
+        "._ZN10D6TlgajP1m10BPMlga2GWmEb",
+        "._ZN10G0gxgajWBw10BRcLgaJqkIERK10C8THgaTQxFPS_",
+        "._ZN10G0gxgajWBw10Qf4pga_byqEv",
+        "._ZN10G0gxgajWBw10zLOVfaKjf0Ev",
+        "._ZN10N67CMatrxw10vcTVfae3i0ERK10C8THgaTQxFS2_S2_",
+        "._ZneRK10C8THgaTQxFPKc"
+      ],
+      "spectron_ea": "0x216a64",
+      "spectron_function_end": "0x216c1c",
+      "spectron_metrics": {
+        "basic_block_count": 16,
+        "branch_count": 29,
+        "call_count": 18,
+        "instruction_count": 110,
+        "mnemonic_hash": "9468c170b1adf7f83df220ac42f24a045cd4b89f1e4d36059b2f81c7e3bbb213",
+        "opcode_shape_hash": "e2604bd003138b5b2d333b7c5599ab89882afaf80df4ffe33a9c092001061d6d",
+        "register_detail_hash": "677d7cd3f220ee1094736d05097089d4a6caffa5538b16337b784c8d4817c945",
+        "register_shape_hash": "398965101118cf3a6de52008a1a67bae5dc4d2bddf517de8e0c41aefa16a2aa8",
+        "return_count": 1,
+        "shape_hash": "8e5a05a5c43247f2f1be1f658c4c56f3accecb804c21c4013fadb888f512cb6b",
+        "size": 440,
+        "string_refs_hash": "c0dcbe8941510899e009853c9c7478e0486dd8c629761c74a2febf54fc39921b"
+      },
+      "spectron_string_refs": [
+        "unknown_object"
+      ],
+      "target_component": "Spectron rebuilt GUI or Android-facing callback",
+      "target_table_context": "0x39ae38"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source registration or callback context is at 0x38b6d8.",
+        "The target registration or callback context is at 0x39eab0.",
+        "Reviewed pseudocode preserves the same role: the target scans image or file entries, loads game resources, base64-encodes them, replaces the list entries, and calls Java requestNewFacebookGraph2.",
+        "The target callback was a default IDA name before this pass.",
+        "The target uses a rebuilt wrapper or helper sequence, so the metric differences are recorded explicitly."
+      ],
+      "full_metric_equal": false,
+      "match_kind": "manual-gui-android-semantic-anchor",
+      "metric_differences": [
+        "size",
+        "instruction_count",
+        "branch_count",
+        "call_count",
+        "mnemonic_hash",
+        "opcode_shape_hash",
+        "register_shape_hash",
+        "shape_hash",
+        "register_detail_hash"
+      ],
+      "name_action": "rename-with-v18-prefix",
+      "normalized_shape_equal": false,
+      "operation": "the target scans image or file entries, loads game resources, base64-encodes them, replaces the list entries, and calls Java requestNewFacebookGraph2",
+      "original_direct_call_names": [
+        "plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID",
+        "plt_TEncryption_base64encode_TString_const",
+        "plt_TLog_printf_char_const",
+        "plt_TResourceFunctions_getGameFile_TString_const_bool",
+        "plt_TStream_LoadFromFile_TString_const",
+        "plt_TStringList_GetCommaText2_void",
+        "plt_TStringList_Replace_int_TString_const",
+        "plt_TStringList_TStringList",
+        "plt_TStringList_TStringList_TString_const",
+        "plt_TStringList_operator_index_int",
+        "plt_TString_clear_void",
+        "plt_TString_operator_assign_TString_const",
+        "plt_TString_operator_lshift_TString_const",
+        "plt_TString_operator_lshift_char_const",
+        "plt_TString_starts_TString_const",
+        "plt_TString_subString_int"
+      ],
+      "original_ea": "0x246104",
+      "original_function_end": "0x246628",
+      "original_metrics": {
+        "basic_block_count": 34,
+        "branch_count": 72,
+        "call_count": 51,
+        "instruction_count": 327,
+        "mnemonic_hash": "85cb9ef74d403a33efd350e5b5a6427b3206a2803e88156d56f92af9a5a0e8ff",
+        "opcode_shape_hash": "2e27335499ce85ea9e1a4683a6294a670f0eca65378b2c7f072fe199e9aab9f5",
+        "register_detail_hash": "df2f7e287fd94460e9dbe81e17f113cbd60110b6581e10d8b2aa1a3481806b52",
+        "register_shape_hash": "9623b05a5181ca879c45b7ae4017dbb208aa51a01a3ad0b77edc800df33dcd20",
+        "return_count": 2,
+        "shape_hash": "861595f0a41518e8f3cd691b50e72ddcb5ccc99d0af9de6bfd5a894ebf895aae",
+        "size": 1316,
+        "string_refs_hash": "fb41d8e05e5d981306500f4eeaa0fcdb623c4cf3925a0f612e1e4696aed10cc9"
+      },
+      "original_name": "MainAndroid_script_requestnewfacebookgraph2",
+      "original_string_refs": [
+        "([B[B[B)V",
+        "Failed to upload facebook picture, file could not be loaded: %s\n",
+        "file:",
+        "image:",
+        "requestNewFacebookGraph2"
+      ],
+      "proposed_name": "v18_MainAndroid_script_requestnewfacebookgraph2",
+      "source_basis": "registration context, target Java method strings, callback role, reviewed pseudocode, and cross-build feature comparison",
+      "source_component": "original GUI or Android-facing callback",
+      "source_table_context": "0x38b6d8",
+      "spectron_current_name": "sub_253544",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSERKS_",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10C8THgaTQxFlsERKS_",
+        "._ZN10CanTfaz6bZ5clearEv",
+        "._ZN10CanTfaz6bZaSERK10C8THgaTQxF",
+        "._ZN10cHovga0n1u10XKUSGabmOGERK10C8THgaTQxF",
+        "._ZN10f6WHgaQkAF10r3WHgaBiAFERK10C8THgaTQxFb",
+        "._ZN10nenvgaH9_u10B3xXfaLgI1ERK10C8THgaTQxF",
+        "._ZN10qjQMgaXCHJ6printfEPKcz",
+        "._ZN10vuuHgangcF7ReplaceEiRK10CanTfaz6bZ",
+        "._ZN10vuuHgangcFC2ERK10C8THgaTQxFb",
+        "._ZN10vuuHgangcFD2Ev",
+        "._ZN7_JNIEnv20CallStaticVoidMethodEP7_jclassP10_jmethodIDz",
+        "._ZNK10C8THgaTQxF10QgaLgaQfiIEi",
+        "._ZNK10C8THgaTQxF10fEtHgarybFERKS_",
+        "._ZNK10vuuHgangcF10glvHgatZcFEv",
+        "._ZNK10vuuHgangcFixEi"
+      ],
+      "spectron_ea": "0x253544",
+      "spectron_function_end": "0x253a9c",
+      "spectron_metrics": {
+        "basic_block_count": 34,
+        "branch_count": 74,
+        "call_count": 53,
+        "instruction_count": 340,
+        "mnemonic_hash": "b29b413e33a8fabcc91ae271219f9136711b1405736b9e2bc3161fca317f9674",
+        "opcode_shape_hash": "11f8af78d7e14adcdb973c1282650e0d5d52db21e9311cdb0ad3ca75083f1a5f",
+        "register_detail_hash": "e283833ec31aa5b430437ecb785ddafa194ea92d61fe6e2c9b94282c463af4b4",
+        "register_shape_hash": "0545575adeea83766b566029d40edc0a8b992e250204ef2f7b3587145da459ec",
+        "return_count": 2,
+        "shape_hash": "f449f25edbeacd0d3404d3f551fe96371b323cd96ebd183f4ab34f3cb95d63ac",
+        "size": 1368,
+        "string_refs_hash": "fb41d8e05e5d981306500f4eeaa0fcdb623c4cf3925a0f612e1e4696aed10cc9"
+      },
+      "spectron_string_refs": [
+        "([B[B[B)V",
+        "Failed to upload facebook picture, file could not be loaded: %s\n",
+        "file:",
+        "image:",
+        "requestNewFacebookGraph2"
+      ],
+      "target_component": "Spectron rebuilt GUI or Android-facing callback",
+      "target_table_context": "0x39eab0"
+    }
+  ],
+  "artifact": "spectron_gui_android_manual_translation_anchors_20260828",
+  "context": {
+    "resolution": "callback context, preserved operation, Java method strings where present, reviewed pseudocode, and cross-build feature metrics",
+    "source_components": [
+      "GuiCanvas popdialog callback",
+      "TGraalVar trigger callback",
+      "MainAndroid Facebook graph upload callback"
+    ],
+    "target_components": [
+      "Spectron GuiCanvas popdialog callback",
+      "Spectron TGraalVar trigger callback",
+      "Spectron MainAndroid Facebook graph upload callback"
+    ]
+  },
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_current.json",
+    "original_features_sha256": "243341ad40e912500365b6d7eb5b69f9f3b9d6200f5c825629cfc56d4343ac07",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b423221",
+    "spectron_features": "/tmp/spectron_features_v262_final.json",
+    "spectron_features_sha256": "0ff91a0ce2e063f491ac4fad1a1eff00cb732073746d61cba8e3f4935790b412"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not restored original debug symbols.",
+    "The Android bridge functions added or rebuilt in Spectron are documented separately as target-only labels.",
+    "The GuiCanvas row is the popdialog callback, not the TGUIScriptLoader showMessageBox method. The target specifically handles MessageBoxDialog_Window during the pop transition, so it must keep a distinct label from the showMessageBox function."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for changed GUI and Android-facing callbacks",
+  "summary": {
+    "anchor_count": 3,
+    "full_metric_exact_count": 0,
+    "high_confidence_count": 3,
+    "layout_change_count": 3,
+    "normalized_shape_exact_count": 0,
+    "register_detail_difference_count": 3,
+    "target_default_name_count": 3,
+    "unique_target_count": 3
+  }
+}

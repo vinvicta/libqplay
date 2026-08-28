@@ -13,6 +13,35 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
+The current checked-in translation frontier is the corrected v264 Spectron
+database. It contains 11,696 functions and 712 remaining default `sub_`
+names. The preceding v263 revision added three reviewed cross-build aliases
+for the `GuiCanvas.popdialog`, `TGraalVar` trigger, and Facebook graph upload
+callbacks. The v264 revision adds 22 target-only names for the Android and JNI
+bridge block. These names come from the target script table, Java method
+strings, and reviewed pseudocode. They are labels for this stripped 2.2
+library, not claims that original debug symbols were recovered. The saved
+databases are
+`analysis/spectron_libqplay_translated_v263_corrected.i64` and
+`analysis/spectron_libqplay_translated_v264_corrected.i64`.
+
+The 22 bridge labels include deep-link and push-notification accessors,
+Android version helpers, Google Play and Firebase calls, notification
+operations, signing-key setters, generic Java static helpers, and the Android
+system-property bridge. Two labels intentionally preserve a body or table
+mismatch for later review. The table calls one callback
+`getinstallerpackagename`, while its body walks through a package signature
+and calls `toCharsString()`. The table calls another `getsignature`, while its
+body reads `Settings.Secure.ANDROID_ID`. The evidence records both facts
+without silently correcting either one.
+
+The two new checkpoints are
+`artifacts/spectron_translation_checkpoint_20260828_v263_corrected.json` and
+`artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json`.
+Both IDA databases were reopened after writing. The three cross-build names
+and all 22 target-only names verified with zero failures. This pass was static
+and offline. It did not modify the APK or contact a DNS, HTTP, or TLS service.
+
 The latest Spectron audit corrects a useful shorthand in the earlier notes.
 The 2.2 `libqplay.so` is stripped of its static `.symtab` and DWARF data, but
 it still retains a large dynamic export table. The target has 6,773 dynamic
@@ -49,8 +78,9 @@ APK signature checks with output hash
 `45f469692cb6ee2e8d0f1529d8b0871dafdf718e2c8b6e345cb5082e40257751`.
 That is an offline packaging result, not a live connection result.
 
-The IDA translation series currently reaches
-`analysis/spectron_libqplay_translated_v235.i64`. The newest pass adds 12
+The v235 entry below is a historical checkpoint in the IDA translation
+series. The current series reaches
+`analysis/spectron_libqplay_translated_v264_corrected.i64`. The v235 pass adds 12
 high-confidence aliases from the GSFunctionsClient and GuiControl property
 tables. They cover five carried-object getters, four screen-relative mouse
 accessors, and three GuiControl callbacks. All 12 match the normalized

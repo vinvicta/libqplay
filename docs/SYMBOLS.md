@@ -87,6 +87,65 @@ The full inventory is in
 `tools/generate_spectron_symbol_table_audit.py` and does not load either
 library or contact a service.
 
+## Current Spectron cross-build labels
+
+The latest disposable IDA copies extend the labels beyond the retained ELF
+exports. The corrected v263 copy adds three reviewed correspondences from
+the 1.8 database. The `GuiCanvas.popdialog` callback is at target `0x1b5cf8`,
+the `TGraalVar` script trigger is at `0x216a64`, and the Facebook graph upload
+callback is at `0x253544`. Their source counterparts are `0x1b15f0`,
+`0x210374`, and `0x246104`. All three are high-confidence semantic matches,
+but their normalized feature records differ because the 2.2 build rebuilt
+several helper classes and wrappers.
+
+The v264 copy also labels 22 target-only Android bridge functions. These do
+not have a source counterpart in the current 1.8 evidence set. Their names
+are based on the target's decoded script table, exact Java method strings,
+and reviewed pseudocode:
+
+| Target address | Applied label | Evidence role |
+| ---: | --- | --- |
+| `0x24b4ec` | `spectron_deeplink_getdeeplinkdata` | Java `GetIntentData` byte payload |
+| `0x24b61c` | `spectron_notifications_getpushnotificationdata` | Java `GetPushNotificationData` byte payload |
+| `0x24b74c` | `spectron_getandroidversionname` | Android version-name wrapper |
+| `0x24b958` | `spectron_quattro_android_getinstallerpackagename` | package-signature string walk |
+| `0x24bfcc` | `spectron_googleplayservicesavailable` | Google Play availability |
+| `0x24cb68` | `spectron_getandroidversioncode` | Android version-code wrapper |
+| `0x24cd60` | `spectron_deeplink_cleardeeplinkdata` | clear intent data |
+| `0x24cdd4` | `spectron_notifications_clearpushnotificationdata` | clear push data |
+| `0x24ce48` | `spectron_registerforpushnotifications` | notification permission request |
+| `0x24cebc` | `spectron_quattro_android_googleinappreview` | Google Play review request |
+| `0x24cf30` | `spectron_clearallnotifications` | clear notification state |
+| `0x24d100` | `spectron_checkgoogleplaylicensing` | Google Play licensing check |
+| `0x24d33c` | `spectron_notifications_unsubscribetotopic` | Firebase topic unsubscribe |
+| `0x24d458` | `spectron_notifications_subscribetotopic` | Firebase topic subscribe |
+| `0x24d574` | `spectron_firebase_addeventdata` | Firebase event metadata |
+| `0x24d73c` | `spectron_firebase_logevent` | Firebase event logging |
+| `0x24d858` | `spectron_addnotification` | notification creation |
+| `0x24efb4` | `spectron_setsigningcertificate` | Java signing-certificate setter |
+| `0x24f0d0` | `spectron_setgoogleplaykey` | Java Google Play key setter |
+| `0x24fdfc` | `spectron_androidgetjavastaticint` | generic Java static integer helper |
+| `0x24fee4` | `spectron_androidgetjavastaticstring` | generic Java static string helper |
+| `0x2531ec` | `spectron_androidsystempropertyget` | Android system-property bridge |
+
+Two labels intentionally retain an observed mismatch. The script table calls
+`0x24b958` `getinstallerpackagename`, but the body walks through package
+signatures and `toCharsString()`. The table calls `0x24a9ec`
+`getsignature`, while the body reads `Settings.Secure.ANDROID_ID`. The latter
+remains the default target name `sub_24A9EC` in v264 because it was not part of
+the 22 target-only rows. Both observations are
+recorded in
+`artifacts/spectron_android_bridge_target_only_labels_20260828.json` rather
+than being silently normalized.
+
+The generated cross-build evidence is in
+`artifacts/spectron_gui_android_manual_translation_anchors_20260828.json`.
+The target-only evidence is in
+`artifacts/spectron_android_bridge_target_only_labels_20260828.json`.
+Both IDA applications were reopened and verified with zero failures. The
+current saved databases and their checkpoint records are listed in the
+README current-status section.
+
 ## Naming policy
 
 The native names are kept close to their demangled ELF form. Characters that

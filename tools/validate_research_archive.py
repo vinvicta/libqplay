@@ -431,6 +431,18 @@ def main():
     spectron_checkpoint_v262 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v262.json"
     )
+    spectron_gui_android_anchors = load_json(
+        "artifacts/spectron_gui_android_manual_translation_anchors_20260828.json"
+    )
+    spectron_android_bridge_target_only_labels = load_json(
+        "artifacts/spectron_android_bridge_target_only_labels_20260828.json"
+    )
+    spectron_checkpoint_v263_corrected = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v263_corrected.json"
+    )
+    spectron_checkpoint_v264_corrected = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -10265,6 +10277,193 @@ def main():
         6,
     )
     check(
+        "Spectron GUI and Android anchor artifact",
+        spectron_gui_android_anchors["artifact"],
+        "spectron_gui_android_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron GUI and Android anchor network",
+        spectron_gui_android_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron GUI and Android anchor count",
+        spectron_gui_android_anchors["summary"]["anchor_count"],
+        3,
+    )
+    check(
+        "Spectron GUI and Android unique target count",
+        spectron_gui_android_anchors["summary"]["unique_target_count"],
+        3,
+    )
+    check(
+        "Spectron GUI and Android high-confidence count",
+        spectron_gui_android_anchors["summary"]["high_confidence_count"],
+        3,
+    )
+    check(
+        "Spectron GUI and Android target default count",
+        spectron_gui_android_anchors["summary"]["target_default_name_count"],
+        3,
+    )
+    check(
+        "Spectron GUI and Android normalized exact count",
+        spectron_gui_android_anchors["summary"]["normalized_shape_exact_count"],
+        0,
+    )
+    check(
+        "Spectron GUI and Android full metric exact count",
+        spectron_gui_android_anchors["summary"]["full_metric_exact_count"],
+        0,
+    )
+    check(
+        "Spectron GUI and Android layout change count",
+        spectron_gui_android_anchors["summary"]["layout_change_count"],
+        3,
+    )
+    check(
+        "Spectron GUI and Android register-detail count",
+        spectron_gui_android_anchors["summary"]["register_detail_difference_count"],
+        3,
+    )
+    gui_android_rows = spectron_gui_android_anchors["anchors"]
+    check(
+        "Spectron popdialog target",
+        next(
+            row["spectron_ea"]
+            for row in gui_android_rows
+            if row["original_name"] == "GuiCanvas_script_popdialog"
+        ),
+        "0x1b5cf8",
+    )
+    check(
+        "Spectron TGraalVar trigger target",
+        next(
+            row["spectron_ea"]
+            for row in gui_android_rows
+            if row["original_name"] == "TGraalVar_script_trigger"
+        ),
+        "0x216a64",
+    )
+    check(
+        "Spectron Facebook graph target",
+        next(
+            row["spectron_ea"]
+            for row in gui_android_rows
+            if row["original_name"] == "MainAndroid_script_requestnewfacebookgraph2"
+        ),
+        "0x253544",
+    )
+    check(
+        "Spectron v263 corrected checkpoint artifact",
+        spectron_checkpoint_v263_corrected["artifact"],
+        "spectron_translation_checkpoint_20260828_v263_corrected",
+    )
+    check(
+        "Spectron v263 corrected checkpoint parent",
+        spectron_checkpoint_v263_corrected["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v262",
+    )
+    check(
+        "Spectron v263 corrected checkpoint database hash",
+        spectron_checkpoint_v263_corrected["database"]["sha256"],
+        "be53b6e48e2156630ce3ae418fe0da388fd11405ef093dad80d93e0cc06df1b0",
+    )
+    check(
+        "Spectron v263 corrected checkpoint function count",
+        spectron_checkpoint_v263_corrected["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v263 corrected checkpoint default sub count",
+        spectron_checkpoint_v263_corrected["database"]["default_sub_function_count"],
+        734,
+    )
+    check(
+        "Spectron v263 corrected checkpoint anchor count",
+        spectron_checkpoint_v263_corrected["gui_android_anchors"]["verified_name_count"],
+        3,
+    )
+    check(
+        "Spectron Android bridge target-only artifact",
+        spectron_android_bridge_target_only_labels["artifact"],
+        "spectron_android_bridge_target_only_labels_20260828",
+    )
+    check(
+        "Spectron Android bridge target-only network",
+        spectron_android_bridge_target_only_labels["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron Android bridge target-only label count",
+        spectron_android_bridge_target_only_labels["summary"]["label_count"],
+        22,
+    )
+    check(
+        "Spectron Android bridge target-only high-confidence count",
+        spectron_android_bridge_target_only_labels["summary"]["high_confidence_count"],
+        22,
+    )
+    check(
+        "Spectron Android bridge target-only default count",
+        spectron_android_bridge_target_only_labels["summary"]["target_default_name_count"],
+        22,
+    )
+    check(
+        "Spectron Android bridge target-only source counterpart count",
+        spectron_android_bridge_target_only_labels["summary"]["source_counterpart_count"],
+        0,
+    )
+    android_bridge_rows = {
+        row["target_ea"]: row
+        for row in spectron_android_bridge_target_only_labels["labels"]
+    }
+    check(
+        "Spectron Android bridge GetIntentData target",
+        android_bridge_rows["0x24b4ec"]["proposed_name"],
+        "spectron_deeplink_getdeeplinkdata",
+    )
+    check(
+        "Spectron Android bridge Java static string target",
+        android_bridge_rows["0x24fee4"]["proposed_name"],
+        "spectron_androidgetjavastaticstring",
+    )
+    check(
+        "Spectron Android bridge system property target",
+        android_bridge_rows["0x2531ec"]["proposed_name"],
+        "spectron_androidsystempropertyget",
+    )
+    check(
+        "Spectron v264 corrected checkpoint artifact",
+        spectron_checkpoint_v264_corrected["artifact"],
+        "spectron_translation_checkpoint_20260828_v264_corrected",
+    )
+    check(
+        "Spectron v264 corrected checkpoint parent",
+        spectron_checkpoint_v264_corrected["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v263_corrected",
+    )
+    check(
+        "Spectron v264 corrected checkpoint database hash",
+        spectron_checkpoint_v264_corrected["database"]["sha256"],
+        "5719066e789659c5414a832423c2f8bb0691b8fa61c8ee354ed3a9e17fbf4a69",
+    )
+    check(
+        "Spectron v264 corrected checkpoint function count",
+        spectron_checkpoint_v264_corrected["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v264 corrected checkpoint default sub count",
+        spectron_checkpoint_v264_corrected["database"]["default_sub_function_count"],
+        712,
+    )
+    check(
+        "Spectron v264 corrected checkpoint target-only count",
+        spectron_checkpoint_v264_corrected["android_bridge_target_only_labels"]["verified_name_count"],
+        22,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -10552,6 +10751,10 @@ def main():
         spectron_tsocket_properties_residual_anchors,
         spectron_socket_cache_residual_anchors,
         spectron_url_cache_residual_anchors,
+        spectron_gui_android_anchors,
+        spectron_android_bridge_target_only_labels,
+        spectron_checkpoint_v263_corrected,
+        spectron_checkpoint_v264_corrected,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
