@@ -1482,6 +1482,18 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_particle_emitter_script_vars_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+262. The next IDA pass resolved seven small Java sound bridge methods. The
+    two `TSoundPlayerJava` rows map to target class `ohGYZakbFK`, and the five
+    `TSoundEffectJava` rows map to target class `QPh5pbnC3y`. Their source and
+    target method-table records, receiver behavior, class-local order, and
+    complete ARM64 feature fingerprints agree. All seven aliases reopened
+    successfully in the v203 copy, which has 11,694 functions, 3,641
+    high-confidence labels, and 1,218 default `sub_` names, with zero
+    semantic reopen failures. See
+    `artifacts/spectron_sound_java_small_methods_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_sound_java_small_methods_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 261. The next IDA pass resolved the complete seven-method `TSoundEffect`
     virtual interface. Source methods from `0xe2b24` through `0xe2b4c` map in
     method-table order to target `fEVMgax6LJ` methods from `0xe3714` through

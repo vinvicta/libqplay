@@ -344,6 +344,9 @@ def main():
     spectron_tsound_effect_methods_anchors = load_json(
         "artifacts/spectron_tsound_effect_methods_manual_translation_anchors_20260827.json"
     )
+    spectron_sound_java_small_methods_anchors = load_json(
+        "artifacts/spectron_sound_java_small_methods_manual_translation_anchors_20260827.json"
+    )
     spectron_server_animation_anchors = load_json(
         "artifacts/spectron_server_animation_manual_translation_anchors_20260826.json"
     )
@@ -3480,6 +3483,69 @@ def main():
         "0xe373c",
     )
     check(
+        "Spectron Java sound small-method artifact",
+        spectron_sound_java_small_methods_anchors["artifact"],
+        "spectron_sound_java_small_methods_manual_translation_anchors_20260827",
+    )
+    check(
+        "Spectron Java sound small-method network",
+        spectron_sound_java_small_methods_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron Java sound small-method total",
+        spectron_sound_java_small_methods_anchors["summary"]["anchor_count"],
+        7,
+    )
+    check(
+        "Spectron Java sound small-method high confidence",
+        spectron_sound_java_small_methods_anchors["summary"]["high_confidence_count"],
+        7,
+    )
+    check(
+        "Spectron Java sound small-method semantic overlap",
+        spectron_sound_java_small_methods_anchors["summary"]["already_in_semantic_map"],
+        0,
+    )
+    check(
+        "Spectron Java sound small-method exact-shape count",
+        spectron_sound_java_small_methods_anchors["summary"]["exact_shape_anchor_count"],
+        7,
+    )
+    check(
+        "Spectron Java sound small-method full-feature count",
+        spectron_sound_java_small_methods_anchors["summary"]["full_metric_exact_count"],
+        7,
+    )
+    check(
+        "Spectron Java sound small-method layout-change count",
+        spectron_sound_java_small_methods_anchors["summary"]["layout_change_anchor_count"],
+        0,
+    )
+    check(
+        "Spectron Java sound small-method target default count",
+        spectron_sound_java_small_methods_anchors["summary"]["target_default_name_count"],
+        0,
+    )
+    sound_java_small_method_targets = {
+        row["original_name"]: row
+        for row in spectron_sound_java_small_methods_anchors["anchors"]
+    }
+    for source_name, target_ea in {
+        "TSoundPlayerJava_stopMidi_void": "0xe3748",
+        "TSoundPlayerJava_setMusicVolumeAndPan_int_int": "0xe3768",
+        "TSoundEffectJava_freeResource_void": "0xe3788",
+        "TSoundEffectJava_load_void": "0xe3790",
+        "TSoundEffectJava_setVolume_int": "0xe3794",
+        "TSoundEffectJava_setPan_int": "0xe379c",
+        "TSoundEffectJava_stop_void": "0xe37a4",
+    }.items():
+        check(
+            "Spectron Java sound target " + source_name,
+            sound_java_small_method_targets[source_name]["spectron_ea"],
+            target_ea,
+        )
+    check(
         "Spectron server-animation artifact",
         spectron_server_animation_anchors["artifact"],
         "spectron_server_animation_manual_translation_anchors_20260826",
@@ -4827,7 +4893,8 @@ def main():
     check("Spectron checkpoint sounds effect anchor count", spectron_checkpoint["sounds_effect_anchors"]["verified_name_count"], 2)
     check("Spectron checkpoint sounds control anchor count", spectron_checkpoint["sounds_control_anchors"]["verified_name_count"], 2)
     check("Spectron checkpoint TSoundEffect methods anchor count", spectron_checkpoint["tsound_effect_methods_anchors"]["verified_name_count"], 7)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "87fb8ed432789f0f729d645c34fb11b6d3bfe55ebdcc96705d7beaa865c9b77d")
+    check("Spectron checkpoint sound Java small-method anchor count", spectron_checkpoint["sound_java_small_methods_anchors"]["verified_name_count"], 7)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "c9ef630efa45cf233022f46b3f051702acf07f72d4d49c32b9621f0f7ee289b5")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],

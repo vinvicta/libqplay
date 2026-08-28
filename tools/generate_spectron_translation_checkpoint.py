@@ -213,6 +213,8 @@ def main() -> None:
     parser.add_argument("--sounds-control-verification", type=Path)
     parser.add_argument("--tsound-effect-methods-anchors", type=Path)
     parser.add_argument("--tsound-effect-methods-verification", type=Path)
+    parser.add_argument("--sound-java-small-methods-anchors", type=Path)
+    parser.add_argument("--sound-java-small-methods-verification", type=Path)
     parser.add_argument("--server-animation-anchors", type=Path)
     parser.add_argument("--server-animation-verification", type=Path)
     parser.add_argument("--player-lifecycle-anchors", type=Path)
@@ -3126,6 +3128,60 @@ def main() -> None:
         result["tsound_effect_methods_anchors"] = tsound_effect_methods
         result["interpretation"].append(
             "The two-hundred-second database revision also contains the separately reviewed TSoundEffect virtual method block anchors."
+        )
+    sound_java_small_methods = None
+    if (
+        args.sound_java_small_methods_anchors
+        or args.sound_java_small_methods_verification
+    ):
+        if (
+            not args.sound_java_small_methods_anchors
+            or not args.sound_java_small_methods_verification
+        ):
+            raise ValueError(
+                "sound Java small-method anchors and verification must be supplied together"
+            )
+        sound_java_small_methods_document = load(
+            args.sound_java_small_methods_anchors
+        )
+        sound_java_small_methods_verification = load(
+            args.sound_java_small_methods_verification
+        )
+        if (
+            sound_java_small_methods_document.get("artifact")
+            != "spectron_sound_java_small_methods_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected sound Java small-method anchor artifact")
+        if not sound_java_small_methods_verification.get("verified"):
+            raise ValueError(
+                "sound Java small-method anchor reopen verification did not pass"
+            )
+        expected_sound_java_small_methods = len(
+            sound_java_small_methods_document["anchors"]
+        )
+        if (
+            sound_java_small_methods_verification["verified_name_count"]
+            != expected_sound_java_small_methods
+        ):
+            raise ValueError(
+                "sound Java small-method verification count differs from artifact"
+            )
+        sound_java_small_methods = {
+            "anchor_path": str(args.sound_java_small_methods_anchors),
+            "anchor_sha256": sha256_path(args.sound_java_small_methods_anchors),
+            "reopen_verification": str(args.sound_java_small_methods_verification),
+            "anchor_count": expected_sound_java_small_methods,
+            "verified_name_count": sound_java_small_methods_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": sound_java_small_methods_verification[
+                "failure_count"
+            ],
+        }
+    if sound_java_small_methods is not None:
+        result["sound_java_small_methods_anchors"] = sound_java_small_methods
+        result["interpretation"].append(
+            "The two-hundred-third database revision also contains the separately reviewed TSoundPlayerJava and TSoundEffectJava small-method anchors."
         )
     server_animation = None
     if args.server_animation_anchors or args.server_animation_verification:
