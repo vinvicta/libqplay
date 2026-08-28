@@ -638,6 +638,12 @@ def main():
     spectron_checkpoint_v295 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v295.json"
     )
+    spectron_gif_lzw_line_decoder_anchors = load_json(
+        "artifacts/spectron_gif_lzw_line_decoder_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v296 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v296.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -13493,6 +13499,78 @@ def main():
         10,
     )
     check(
+        "Spectron GIF LZW line-decoder artifact",
+        spectron_gif_lzw_line_decoder_anchors["artifact"],
+        "spectron_gif_lzw_line_decoder_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron GIF LZW line-decoder network",
+        spectron_gif_lzw_line_decoder_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron GIF LZW line-decoder anchor count",
+        spectron_gif_lzw_line_decoder_anchors["summary"]["anchor_count"],
+        1,
+    )
+    check(
+        "Spectron GIF LZW line-decoder high-confidence count",
+        spectron_gif_lzw_line_decoder_anchors["summary"]["high_confidence_count"],
+        1,
+    )
+    check(
+        "Spectron GIF LZW line-decoder normalized count",
+        spectron_gif_lzw_line_decoder_anchors["summary"]["normalized_shape_exact_count"],
+        1,
+    )
+    check(
+        "Spectron GIF LZW line-decoder target",
+        spectron_gif_lzw_line_decoder_anchors["anchors"][0]["proposed_name"],
+        "v18_DGifDecompressLine",
+    )
+    check(
+        "Spectron GIF LZW line-decoder metric difference",
+        spectron_gif_lzw_line_decoder_anchors["anchors"][0]["metric_differences"],
+        ["register_detail_hash"],
+    )
+    check(
+        "Spectron v296 checkpoint artifact",
+        spectron_checkpoint_v296["artifact"],
+        "spectron_translation_checkpoint_20260828_v296",
+    )
+    check(
+        "Spectron v296 checkpoint parent",
+        spectron_checkpoint_v296["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v295",
+    )
+    check(
+        "Spectron v296 checkpoint parent path",
+        spectron_checkpoint_v296["parent_checkpoint"]["path"],
+        "artifacts/spectron_translation_checkpoint_20260828_v295.json",
+    )
+    check(
+        "Spectron v296 checkpoint database hash",
+        spectron_checkpoint_v296["database"]["sha256"],
+        "12f5465bef23235773b87f7c68339eca35246663316adfc7ae5baf11795b474e",
+    )
+    check(
+        "Spectron v296 checkpoint function count",
+        spectron_checkpoint_v296["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v296 checkpoint default sub count",
+        spectron_checkpoint_v296["database"]["default_sub_function_count"],
+        531,
+    )
+    check(
+        "Spectron v296 checkpoint GIF LZW line-decoder count",
+        spectron_checkpoint_v296["gif_lzw_line_decoder_anchors"][
+            "verified_name_count"
+        ],
+        1,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -13839,6 +13917,8 @@ def main():
         spectron_checkpoint_v294,
         spectron_jcprepct_jcsample_anchors,
         spectron_checkpoint_v295,
+        spectron_gif_lzw_line_decoder_anchors,
+        spectron_checkpoint_v296,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

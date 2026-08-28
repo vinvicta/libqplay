@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v295 Spectron database. It
-contains 11,696 functions and 532 remaining default `sub_` names. The v263
+The current documented translation frontier is the v296 Spectron database. It
+contains 11,696 functions and 531 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -154,6 +154,11 @@ and downsampling labels. They identify the two preprocessing paths, the
 preprocessing start callback, the public component dispatcher, and the
 integral, 2:1, smoothed, and full-size downsampling routines. All ten match
 the complete recorded feature set.
+The v296 revision adds one high-confidence internal GIF decoder label for
+`DGifDecompressLine`. It also records a database-boundary finding: the
+64-byte NEON constant pools at source `0x2ac400` and target `0x2b9870` are
+not functions, even though IDA initially created `sub_` entries there. The
+actual integer forward-DCT functions begin at `0x2ac440` and `0x2b98b0`.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -214,6 +219,8 @@ The current v294 database is kept locally as
 `analysis/spectron_libqplay_translated_v294.i64`.
 The current v295 database is kept locally as
 `analysis/spectron_libqplay_translated_v295.i64`.
+The current v296 database is kept locally as
+`analysis/spectron_libqplay_translated_v296.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -529,6 +536,23 @@ the complete recorded feature set. The checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v295.json`; it records
 the reopened database with 532 remaining default names.
 
+The v296 GIF decoder evidence is in
+`artifacts/spectron_gif_lzw_line_decoder_manual_translation_anchors_20260828.json`.
+It labels the internal `DGifDecompressLine` helper at target `0x2b9f90`,
+whose source counterpart is `0x2acb20`. The source and target normalized
+feature records match, with only register allocation detail differing. The
+checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v296.json`; it records
+the reopened database with 531 remaining default names.
+
+The same v296 review found that source `0x2ac400` and target `0x2b9870` are
+64-byte NEON constant pools embedded in executable `.text`, not callable
+functions. IDA had created phantom `sub_` entries because the pools are
+addressed by `ADR` instructions from the floating-point DCT routines. The
+real `jpeg_fdct_ifast` functions begin at `0x2ac440` and `0x2b98b0`. A later
+database-hygiene pass will remove those two phantom function boundaries and
+represent the pools as data.
+
 The latest checkpoints are
 `artifacts/spectron_translation_checkpoint_20260828_v263_corrected.json` and
 `artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json`,
@@ -564,10 +588,11 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v292.json`, followed by
 `artifacts/spectron_translation_checkpoint_20260828_v293.json`, followed by
 `artifacts/spectron_translation_checkpoint_20260828_v294.json`, followed by
-`artifacts/spectron_translation_checkpoint_20260828_v295.json`. The reviewed
+`artifacts/spectron_translation_checkpoint_20260828_v295.json`, followed by
+`artifacts/spectron_translation_checkpoint_20260828_v296.json`. The reviewed
 legacy, Android, script-table, runtime, property, zlib, and libjpeg labels
-through v295 were reopened and verified with zero failures. That includes the
-v295 preprocessing and downsampling labels added in the latest pass.
+through v296 were reopened and verified with zero failures. That includes the
+v296 GIF LZW line-decoder label added in the latest pass.
 These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or
 TLS service.
