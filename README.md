@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v294 Spectron database. It
-contains 11,696 functions and 542 remaining default `sub_` names. The v263
+The current documented translation frontier is the v295 Spectron database. It
+contains 11,696 functions and 532 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -149,6 +149,11 @@ end-of-band-run helper. All eight match normalized feature shape, and five
 match the complete recorded feature set. The v294 pass also refreshed the
 packed v293 database hash after IDA metadata was persisted during an evidence
 read.
+The v295 revision adds ten high-confidence libjpeg compressor preprocessing
+and downsampling labels. They identify the two preprocessing paths, the
+preprocessing start callback, the public component dispatcher, and the
+integral, 2:1, smoothed, and full-size downsampling routines. All ten match
+the complete recorded feature set.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -207,6 +212,8 @@ The current v293 database is kept locally as
 `analysis/spectron_libqplay_translated_v293.i64`.
 The current v294 database is kept locally as
 `analysis/spectron_libqplay_translated_v294.i64`.
+The current v295 database is kept locally as
+`analysis/spectron_libqplay_translated_v295.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -509,6 +516,19 @@ set. The checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v294.json`; it records
 the reopened database with 542 remaining default names.
 
+The v295 libjpeg preprocessing and downsampling evidence is in
+`artifacts/spectron_jpeg_preprocessing_downsampling_manual_translation_anchors_20260828.json`.
+It labels ten routines around the target
+`v18_jinit_c_prep_controller_jpeg_compress_struct_int` at `0x2b7eb4` and
+`v18_jinit_downsampler_jpeg_compress_struct` at `0x2b92c8`. The prep rows are
+`start_pass_prep`, `pre_process_context`, and `pre_process_data`. The
+downsampler rows are `sep_downsample`, `int_downsample`, `h2v1_downsample`,
+`h2v2_downsample`, `h2v2_smooth_downsample`, `fullsize_smooth_downsample`,
+and `fullsize_downsample`. All ten match normalized ARM64 feature shape and
+the complete recorded feature set. The checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v295.json`; it records
+the reopened database with 532 remaining default names.
+
 The latest checkpoints are
 `artifacts/spectron_translation_checkpoint_20260828_v263_corrected.json` and
 `artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json`,
@@ -543,10 +563,11 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v291.json`, followed by
 `artifacts/spectron_translation_checkpoint_20260828_v292.json`, followed by
 `artifacts/spectron_translation_checkpoint_20260828_v293.json`, followed by
-`artifacts/spectron_translation_checkpoint_20260828_v294.json`. The reviewed
+`artifacts/spectron_translation_checkpoint_20260828_v294.json`, followed by
+`artifacts/spectron_translation_checkpoint_20260828_v295.json`. The reviewed
 legacy, Android, script-table, runtime, property, zlib, and libjpeg labels
-through v294 were reopened and verified with zero failures. That includes the
-v294 progressive-Huffman compressor labels added in the latest pass.
+through v295 were reopened and verified with zero failures. That includes the
+v295 preprocessing and downsampling labels added in the latest pass.
 These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or
 TLS service.

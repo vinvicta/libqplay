@@ -12635,6 +12635,120 @@ This pass changed only the local IDA copy, evidence artifacts, and
 documentation. It did not modify the APK or native library and did not
 contact a DNS, HTTP, TLS, Google Play, Firebase, or game-server endpoint.
 
+## 2026-08-28: Spectron libjpeg compressor preprocessing and downsampling
+
+The v295 pass moved one layer earlier in the compressor pipeline, into the
+preprocessing controller and the downsampler. This is a useful boundary
+because the target still has a contiguous run of default-named functions in
+this area, while the surrounding controller initializers expose the callback
+assignments clearly.
+
+The source prep controller is
+`jinit_c_prep_controller_jpeg_compress_struct_int` at `0x2aaa44`; the target
+counterpart is `v18_jinit_c_prep_controller_jpeg_compress_struct_int` at
+`0x2b7eb4`. The source downsampler is
+`jinit_downsampler_jpeg_compress_struct` at `0x2abe58`; the target counterpart
+is `v18_jinit_downsampler_jpeg_compress_struct` at `0x2b92c8`. Every row in
+this pass is separated by `0xd470` between the source and target addresses,
+but that offset was only a starting clue. The final assignment uses target
+callback fields, caller references, decompiled behavior, and feature metrics.
+
+The source role reference is the [libjpeg-turbo `jcprepct.c` implementation](https://github.com/libjpeg-turbo/libjpeg-turbo/blob/main/src/jcprepct.c)
+and the [libjpeg-turbo `jcsample.c` implementation](https://github.com/libjpeg-turbo/libjpeg-turbo/blob/main/src/jcsample.c). The current source
+describes the same two stages seen in the binary: preprocessing manages color
+conversion buffers, input edge expansion, and iMCU row production, while
+downsampling dispatches each component through a method chosen from its
+sampling factors.
+
+### Prep-controller callbacks
+
+The target prep initializer writes the callback table in a way that resolves
+the three default names without relying on function order:
+
+* At `0x2b7efc`, it stores `sub_2B7928` in the public start-pass slot.
+* At `0x2b7fc0`, it stores `sub_2B7980` when the downsampler requests context
+  rows.
+* At `0x2b7f14`, it stores `sub_2B7C14` for the simple no-context path.
+
+The first body resets the source height counter, conversion-buffer position,
+and context counters after rejecting an unsupported buffer mode. This matches
+`start_pass_prep` at source `0x2aa4b8`.
+
+The second body color-converts input rows into a circular three-row-group
+buffer, copies the first rows above the image, copies the final rows below
+the image, and calls the downsampler with a wrapped row-group index. Its
+structure matches `pre_process_context` at source `0x2aa510`.
+
+The third body fills a simple conversion buffer, repeats the last input row
+at the bottom of the image, invokes the downsampler when the buffer is full,
+and repeats the final output row group to fill the iMCU height. This matches
+`pre_process_data` at source `0x2aa7a4`.
+
+The source and target bodies have the same complete feature record for all
+three rows: size, instruction count, basic-block count, branch count, call
+count, return count, mnemonic hash, opcode shape, register shape, overall
+shape, string references, and register-detail hash. The target pseudocode
+also shows the same structure sizes and callback offsets as the source.
+
+### Downsampler method table
+
+The target downsampler initializer first installs `sub_2B82B0` in the public
+downsample slot. Its body walks the component list and invokes the per-
+component method table, which identifies it as `sep_downsample` from source
+`0x2aae40`.
+
+The same initializer then selects these one-plane methods:
+
+| Source role | Source | Target | Target selection evidence |
+| --- | ---: | ---: | --- |
+| `int_downsample` | `0x2aaee4` | `0x2b8354` | arbitrary integral-ratio fallback at `0x2b9334` and `0x2b934c` |
+| `h2v1_downsample` | `0x2ab2f4` | `0x2b8764` | 2:1 horizontal branch at `0x2b948c` and `0x2b9494` |
+| `h2v2_downsample` | `0x2ab4a4` | `0x2b8914` | 2:1 by 2:1 branch at `0x2b9338` and `0x2b9350` |
+| `h2v2_smooth_downsample` | `0x2ab670` | `0x2b8ae0` | smoothed 2:1 by 2:1 branch at `0x2b933c` and `0x2b9354` |
+| `fullsize_smooth_downsample` | `0x2aba28` | `0x2b8e98` | smoothed full-size branch at `0x2b93c0` and `0x2b93c8` |
+| `fullsize_downsample` | `0x2abcd0` | `0x2b9140` | full-size non-smoothed branch at `0x2b947c` |
+
+The target bodies make the assignments concrete. `sub_2B8354` computes
+horizontal and vertical expansion factors, sums each source block, and uses
+the standard integral-ratio rounding. `sub_2B8764` pads the right edge and
+averages horizontal pairs with an alternating bias. `sub_2B8914` does the
+same for 2 by 2 blocks. `sub_2B8AE0` reads above, current, and below rows and
+applies the fixed-point member and neighbor weights used by the smoothed
+2:1-by-2:1 path. `sub_2B8E98` applies the corresponding full-size smoothing
+weights. `sub_2B9140` copies full-size rows and repeats the rightmost sample
+to the rounded-up output width.
+
+All seven downsampler rows have identical complete feature metrics between
+the source and target databases. The decompiler names the shared row-copy
+helper differently because the source uses a PLT wrapper while the target
+uses its exported C++ helper. That naming difference is outside the recorded
+feature fields and does not affect the exact body match.
+
+### v295 persistence and validation
+
+The machine-readable evidence is
+`artifacts/spectron_jpeg_preprocessing_downsampling_manual_translation_anchors_20260828.json`,
+generated by `tools/generate_spectron_jcprepct_jcsample_anchors.py`. It records
+ten high-confidence anchors, ten normalized-shape matches, and ten complete
+feature matches. The aliases were applied to an isolated copy of the v294
+database with `tools/ida_apply_spectron_manual_anchors.py`.
+
+The saved v295 database is
+`analysis/spectron_libqplay_translated_v295.i64`. The clean reopen report
+`/tmp/spectron_v295_anchor_verify.json` verified all ten names with zero
+failures. The broad reopen report
+`/tmp/spectron_v295_broad_verify.json` verified all 3,641 earlier
+high-confidence aliases with zero failures. The v295 database contains
+11,696 functions and 532 remaining default `sub_` names. Its final
+post-verification SHA-256 is
+`a9c756cdd96084cf9dd6fd5ce2c885acd4ea0fffafb6b1c626fafab239c5d284`.
+The checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v295.json`.
+
+This pass changed only the local IDA copy, evidence artifacts, and
+documentation. It did not modify the APK or either native library and did
+not contact a DNS, HTTP, TLS, Google Play, Firebase, or game-server endpoint.
+
 ## 2026-08-28: Spectron libjpeg progressive-Huffman compressor
 
 The v294 pass translated eight retained routines from the compressor-side
