@@ -383,6 +383,12 @@ def main():
     spectron_checkpoint_v254 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v254.json"
     )
+    spectron_guicontrol_property_tail_anchors = load_json(
+        "artifacts/spectron_guicontrol_property_tail_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v255 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v255.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -9256,6 +9262,138 @@ def main():
         11,
     )
     check(
+        "Spectron v255 GuiControl property-tail artifact",
+        spectron_guicontrol_property_tail_anchors["artifact"],
+        "spectron_guicontrol_property_tail_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron v255 GuiControl property-tail network",
+        spectron_guicontrol_property_tail_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v255 GuiControl property-tail anchor count",
+        spectron_guicontrol_property_tail_anchors["summary"]["anchor_count"],
+        4,
+    )
+    check(
+        "Spectron v255 GuiControl property-tail registration row count",
+        spectron_guicontrol_property_tail_anchors["summary"]["registration_row_count"],
+        4,
+    )
+    check(
+        "Spectron v255 GuiControl property-tail unique target count",
+        spectron_guicontrol_property_tail_anchors["summary"]["unique_target_count"],
+        4,
+    )
+    check(
+        "Spectron v255 GuiControl property-tail high confidence",
+        spectron_guicontrol_property_tail_anchors["summary"]["high_confidence_count"],
+        4,
+    )
+    check(
+        "Spectron v255 GuiControl property-tail target default count",
+        spectron_guicontrol_property_tail_anchors["summary"]["target_default_name_count"],
+        4,
+    )
+    check(
+        "Spectron v255 GuiControl property-tail normalized shape count",
+        spectron_guicontrol_property_tail_anchors["summary"]["normalized_shape_exact_count"],
+        4,
+    )
+    check(
+        "Spectron v255 GuiControl property-tail full metric count",
+        spectron_guicontrol_property_tail_anchors["summary"]["full_metric_exact_count"],
+        4,
+    )
+    check(
+        "Spectron v255 GuiControl property-tail layout count",
+        spectron_guicontrol_property_tail_anchors["summary"]["layout_change_count"],
+        0,
+    )
+    check(
+        "Spectron v255 GuiControl property-tail register-detail count",
+        spectron_guicontrol_property_tail_anchors["summary"]["register_detail_difference_count"],
+        0,
+    )
+    check(
+        "Spectron v255 GuiControl property-tail getter count",
+        spectron_guicontrol_property_tail_anchors["summary"]["getter_count"],
+        1,
+    )
+    check(
+        "Spectron v255 GuiControl property-tail setter count",
+        spectron_guicontrol_property_tail_anchors["summary"]["setter_count"],
+        3,
+    )
+    guicontrol_property_tail_rows = spectron_guicontrol_property_tail_anchors["anchors"]
+    check(
+        "Spectron v255 GuiControl cursor target",
+        next(
+            row["spectron_ea"]
+            for row in guicontrol_property_tail_rows
+            if row["original_name"] == "GuiControl_getCursor"
+        ),
+        "0x1becbc",
+    )
+    check(
+        "Spectron v255 GuiControl flickering target",
+        next(
+            row["spectron_ea"]
+            for row in guicontrol_property_tail_rows
+            if row["original_name"] == "GuiControl_setFlickering"
+        ),
+        "0x1bbc10",
+    )
+    check(
+        "Spectron v255 GuiControl animation target",
+        next(
+            row["spectron_ea"]
+            for row in guicontrol_property_tail_rows
+            if row["original_name"] == "GuiControl_setIsInAnimation"
+        ),
+        "0x1bc254",
+    )
+    check(
+        "Spectron v255 GuiControl in-out animation target",
+        next(
+            row["spectron_ea"]
+            for row in guicontrol_property_tail_rows
+            if row["original_name"] == "GuiControl_setIsInOutAnimation"
+        ),
+        "0x1bc384",
+    )
+    check(
+        "Spectron v255 checkpoint artifact",
+        spectron_checkpoint_v255["artifact"],
+        "spectron_translation_checkpoint_20260828_v255",
+    )
+    check(
+        "Spectron v255 checkpoint parent",
+        spectron_checkpoint_v255["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v254",
+    )
+    check(
+        "Spectron v255 checkpoint database hash",
+        spectron_checkpoint_v255["database"]["sha256"],
+        "41201714ed45c2e165f0199268d1863fb6d7895f8067678c6614fc786c5254b6",
+    )
+    check(
+        "Spectron v255 checkpoint function count",
+        spectron_checkpoint_v255["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v255 checkpoint default sub count",
+        spectron_checkpoint_v255["database"]["default_sub_function_count"],
+        777,
+    )
+    check(
+        "Spectron v255 checkpoint anchor count",
+        spectron_checkpoint_v255["guicontrol_property_tail_anchors"]["verified_name_count"],
+        4,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -9386,6 +9524,7 @@ def main():
         spectron_tgui_animation_property_residual_anchors,
         spectron_gui_bitmap_property_anchors,
         spectron_gui_bitmap_button_property_anchors,
+        spectron_guicontrol_property_tail_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

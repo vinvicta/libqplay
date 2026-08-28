@@ -774,6 +774,18 @@ This is the short handoff view. The full reasoning and command history are in
      `tools/generate_spectron_gui_bitmap_button_property_anchors.py`, and
      `artifacts/spectron_translation_checkpoint_20260828_v254.json`.
 
+63y. The v255 IDA checkpoint translates four residual `GuiControl` property
+     callbacks: the cursor getter and the flickering, ordinary-animation, and
+     in-or-out-animation setters. All four rows match the complete ARM64
+     feature metrics, with no layout or register-detail differences. The clean
+     reopen has 11,696 functions and 777 remaining default `sub_` names. The
+     database SHA-256 is
+     `41201714ed45c2e165f0199268d1863fb6d7895f8067678c6614fc786c5254b6`.
+     See
+     `artifacts/spectron_guicontrol_property_tail_manual_translation_anchors_20260828.json`,
+     `tools/generate_spectron_guicontrol_property_tail_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260828_v255.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The
