@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v298 Spectron database. It
-contains 11,695 functions and 528 remaining default `sub_` names. The v263
+The current documented translation frontier is the v299 Spectron database. It
+contains 11,695 functions and 523 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -168,6 +168,12 @@ identify the internal `destroy_size` and `destroy_face` helpers from
 `src/base/ftobjs.c`. Both source and target bodies match in normalized ARM64
 shape, and one is a complete feature match. The target now has 528 remaining
 default `sub_` names.
+The v299 revision adds five high-confidence FreeType SFNT service labels. They
+identify the cmap information, PostScript name, generic table loader, table
+accessor, and table-info callbacks installed in the target's service records.
+Four pairs have complete feature matches, and the remaining pair differs only
+in register allocation detail. The target now has 523 remaining default
+`sub_` names.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -234,6 +240,8 @@ The current v297 database is kept locally as
 `analysis/spectron_libqplay_translated_v297.i64`.
 The current v298 database is kept locally as
 `analysis/spectron_libqplay_translated_v298.i64`.
+The current v299 database is kept locally as
+`analysis/spectron_libqplay_translated_v299.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -590,6 +598,18 @@ high-confidence aliases. The v298 checkpoint is
 11,695 functions and 528 remaining default names. Its database SHA-256 is
 `1de475653381e7ddf9b17cfadf43d816a29babfdb40b87bbf1f7825e0866c26d`.
 
+The v299 FreeType SFNT service evidence is in
+`artifacts/spectron_freetype_sfnt_service_manual_translation_anchors_20260828.json`.
+It translates five service callbacks: `tt_get_cmap_info`, `sfnt_get_ps_name`,
+`tt_face_load_any`, `get_sfnt_table`, and `sfnt_table_info`. The callbacks are
+identified from the original service records, matching source and target
+pseudocode, and the official FreeType SFNT service definitions. Four pairs
+have complete feature matches; `get_sfnt_table` differs only in register
+allocation detail. The v299 checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v299.json`; it records
+11,695 functions and 523 remaining default names. Its database SHA-256 is
+`f6bcdeba610fbe47ba182477ccc74b5cbff727b17f9b0013395beb3902228367`.
+
 The upstream reference is
 https://android.googlesource.com/platform/external/freetype/+/donut-release/src/base/ftobjs.c.
 
@@ -631,11 +651,13 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v295.json`, followed by
 `artifacts/spectron_translation_checkpoint_20260828_v296.json`, followed by
 `artifacts/spectron_translation_checkpoint_20260828_v297.json`, and
-`artifacts/spectron_translation_checkpoint_20260828_v298.json`. The reviewed
+`artifacts/spectron_translation_checkpoint_20260828_v298.json`, and
+`artifacts/spectron_translation_checkpoint_20260828_v299.json`. The reviewed
 legacy, Android, script-table, runtime, property, zlib, libjpeg, GIF, and
-FreeType labels through v298 were reopened and verified with zero failures.
-That includes the v297 forward-DCT literal-pool boundary repair and the v298
-FreeType base cleanup aliases added in the latest passes.
+FreeType labels through v299 were reopened and verified with zero failures.
+That includes the v297 forward-DCT literal-pool boundary repair, the v298
+FreeType base cleanup aliases, and the v299 SFNT service aliases added in the
+latest passes.
 These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or
 TLS service.

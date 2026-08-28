@@ -656,6 +656,12 @@ def main():
     spectron_checkpoint_v298 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v298.json"
     )
+    spectron_freetype_sfnt_service_anchors = load_json(
+        "artifacts/spectron_freetype_sfnt_service_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v299 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v299.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -13764,6 +13770,103 @@ def main():
         2,
     )
     check(
+        "Spectron FreeType SFNT service artifact",
+        spectron_freetype_sfnt_service_anchors["artifact"],
+        "spectron_freetype_sfnt_service_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron FreeType SFNT service network",
+        spectron_freetype_sfnt_service_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron FreeType SFNT service anchor count",
+        spectron_freetype_sfnt_service_anchors["summary"]["anchor_count"],
+        5,
+    )
+    check(
+        "Spectron FreeType SFNT service high-confidence count",
+        spectron_freetype_sfnt_service_anchors["summary"][
+            "high_confidence_count"
+        ],
+        5,
+    )
+    check(
+        "Spectron FreeType SFNT service normalized count",
+        spectron_freetype_sfnt_service_anchors["summary"][
+            "normalized_shape_exact_count"
+        ],
+        5,
+    )
+    check(
+        "Spectron FreeType SFNT service full-match count",
+        spectron_freetype_sfnt_service_anchors["summary"][
+            "full_metric_exact_count"
+        ],
+        4,
+    )
+    freetype_sfnt_service_rows = {
+        row["spectron_ea"]: row
+        for row in spectron_freetype_sfnt_service_anchors["anchors"]
+    }
+    check(
+        "Spectron FreeType tt_get_cmap_info target",
+        freetype_sfnt_service_rows["0x262008"]["proposed_name"],
+        "v18_tt_get_cmap_info",
+    )
+    check(
+        "Spectron FreeType sfnt_get_ps_name target",
+        freetype_sfnt_service_rows["0x264e24"]["proposed_name"],
+        "v18_sfnt_get_ps_name",
+    )
+    check(
+        "Spectron FreeType tt_face_load_any target",
+        freetype_sfnt_service_rows["0x263aac"]["proposed_name"],
+        "v18_tt_face_load_any",
+    )
+    check(
+        "Spectron FreeType get_sfnt_table metrics",
+        freetype_sfnt_service_rows["0x2621f0"]["metric_differences"],
+        ["register_detail_hash"],
+    )
+    check(
+        "Spectron v299 checkpoint artifact",
+        spectron_checkpoint_v299["artifact"],
+        "spectron_translation_checkpoint_20260828_v299",
+    )
+    check(
+        "Spectron v299 checkpoint parent",
+        spectron_checkpoint_v299["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v298",
+    )
+    check(
+        "Spectron v299 checkpoint parent path",
+        spectron_checkpoint_v299["parent_checkpoint"]["path"],
+        "artifacts/spectron_translation_checkpoint_20260828_v298.json",
+    )
+    check(
+        "Spectron v299 checkpoint database hash",
+        spectron_checkpoint_v299["database"]["sha256"],
+        "f6bcdeba610fbe47ba182477ccc74b5cbff727b17f9b0013395beb3902228367",
+    )
+    check(
+        "Spectron v299 checkpoint function count",
+        spectron_checkpoint_v299["database"]["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v299 checkpoint default sub count",
+        spectron_checkpoint_v299["database"]["default_sub_function_count"],
+        523,
+    )
+    check(
+        "Spectron v299 checkpoint SFNT service count",
+        spectron_checkpoint_v299["freetype_sfnt_service_anchors"][
+            "verified_name_count"
+        ],
+        5,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -14116,6 +14219,8 @@ def main():
         spectron_checkpoint_v297,
         spectron_freetype_base_cleanup_anchors,
         spectron_checkpoint_v298,
+        spectron_freetype_sfnt_service_anchors,
+        spectron_checkpoint_v299,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
