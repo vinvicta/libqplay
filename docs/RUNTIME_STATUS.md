@@ -655,6 +655,19 @@ This is the short handoff view. The full reasoning and command history are in
      `tools/generate_spectron_server_npc_script_anchors.py`, and
      `artifacts/spectron_translation_checkpoint_20260828_v245.json`.
 
+63p. The v246 IDA checkpoint adds two high-confidence semantic aliases for
+     the residual `TServerNPC` `showimg` and `showimg2` callbacks. Their table
+     rows, argument shapes, image-list lookup, allocation, image assignment,
+     coordinate updates, and refresh calls align. Spectron makes the image
+     string temporary explicit, so both target bodies expand from 344 to 372
+     bytes and have recorded shape differences. The clean reopen has 11,696
+     functions and 899 remaining default `sub_` names. The database SHA-256 is
+     `a8f616f41af51ec0076cbb37e3e9393910894674036e9e732a015ef59d64e515`.
+     See
+     `artifacts/spectron_server_npc_showimg_manual_translation_anchors_20260828.json`,
+     `tools/generate_spectron_server_npc_showimg_anchors.py`, and
+     `artifacts/spectron_translation_checkpoint_20260828_v246.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The
