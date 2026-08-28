@@ -143,6 +143,9 @@ def main():
     spectron_compact_residual_anchors = load_json(
         "artifacts/spectron_compact_residual_manual_translation_anchors_20260827.json"
     )
+    spectron_t2d_matrix_manager_anchors = load_json(
+        "artifacts/spectron_t2d_matrix_manager_manual_translation_anchors_20260827.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -2163,6 +2166,23 @@ def main():
         "Spectron compact-residual folded canDownload note",
         any("canDownload" in item for item in spectron_compact_residual_anchors["interpretation"]),
         True,
+    )
+    check(
+        "Spectron T2DMatrixManager artifact",
+        spectron_t2d_matrix_manager_anchors["artifact"],
+        "spectron_t2d_matrix_manager_manual_translation_anchors_20260827",
+    )
+    check("Spectron T2DMatrixManager network", spectron_t2d_matrix_manager_anchors["network_contacted"], False)
+    check("Spectron T2DMatrixManager total", spectron_t2d_matrix_manager_anchors["summary"]["anchor_count"], 4)
+    check("Spectron T2DMatrixManager high confidence", spectron_t2d_matrix_manager_anchors["summary"]["high_confidence_count"], 4)
+    check("Spectron T2DMatrixManager exact-shape count", spectron_t2d_matrix_manager_anchors["summary"]["exact_shape_anchor_count"], 4)
+    check("Spectron T2DMatrixManager full-metric exact count", spectron_t2d_matrix_manager_anchors["summary"]["full_metric_exact_count"], 0)
+    check("Spectron T2DMatrixManager register-detail differences", spectron_t2d_matrix_manager_anchors["summary"]["register_detail_difference_count"], 4)
+    check("Spectron T2DMatrixManager default targets", spectron_t2d_matrix_manager_anchors["summary"]["target_default_name_count"], 0)
+    check(
+        "Spectron T2DMatrixManager deferred initializer",
+        spectron_t2d_matrix_manager_anchors["deferred_review"][0]["original_name"],
+        "T2DMatrixManager_initStaticVars_void",
     )
     check(
         "Spectron TString artifact",
@@ -5217,7 +5237,8 @@ def main():
     check("Spectron checkpoint GUI text-list entry anchor count", spectron_checkpoint["gui_text_list_entry_anchors"]["verified_name_count"], 3)
     check("Spectron checkpoint encryption-GraalVar anchor count", spectron_checkpoint["encryption_graalvar_anchors"]["verified_name_count"], 3)
     check("Spectron checkpoint compact-residual anchor count", spectron_checkpoint["compact_residual_anchors"]["verified_name_count"], 13)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "e6973d7c25827bc7cebf9f7f905376fd3eb6162e514f053c85b81baaa20381c5")
+    check("Spectron checkpoint T2DMatrixManager anchor count", spectron_checkpoint["t2d_matrix_manager_anchors"]["verified_name_count"], 4)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "a0b839b194114b7e7af26f14205e66a68017f38ac828af1d52f10f43f8100694")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -5307,6 +5328,7 @@ def main():
         spectron_gui_text_list_entry_anchors,
         spectron_encryption_graalvar_anchors,
         spectron_compact_residual_anchors,
+        spectron_t2d_matrix_manager_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,

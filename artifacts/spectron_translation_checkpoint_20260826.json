@@ -213,8 +213,8 @@
     "default_sub_function_count": 1198,
     "format": "packed IDA 9.3 database",
     "function_count": 11694,
-    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v213.i64",
-    "sha256": "e6973d7c25827bc7cebf9f7f905376fd3eb6162e514f053c85b81baaa20381c5"
+    "path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v214.i64",
+    "sha256": "a0b839b194114b7e7af26f14205e66a68017f38ac828af1d52f10f43f8100694"
   },
   "displayed_gif_anchors": {
     "anchor_count": 1,
@@ -666,7 +666,7 @@
   },
   "inputs": {
     "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
-    "reopen_verification": "/tmp/spectron_translation_verify_v213.json",
+    "reopen_verification": "/tmp/spectron_translation_verify_v214.json",
     "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
     "translation_map": "artifacts/spectron_semantic_function_translation_20260826.json",
     "translation_map_sha256": "aae215b1ef82f9e79f658d06e4cff9f2c7a1b1c2e92895fb287e46ea47fc3f92"
@@ -683,6 +683,7 @@
     "The two-hundred-eleventh database revision also contains the separately reviewed small GuiTextListEntry property anchors.",
     "The two-hundred-twelfth database revision also contains the separately reviewed TEncryption and TGraalVar compact helpers.",
     "The two-hundred-thirteenth database revision also contains the separately reviewed compact property, wrapper, handler, cache, and script anchors.",
+    "The two-hundred-fourteenth database revision also contains the separately reviewed T2DMatrixManager method block.",
     "The fifth database revision also contains the separately reviewed map-entry, file-delivery, script, text-control, and server-list context anchors.",
     "The sixth database revision also contains the separately reviewed download-queue, update-request, server-modify, and image-checksum context anchors.",
     "The seventh database revision also contains the separately reviewed client action packet serializer anchors.",
@@ -1590,6 +1591,14 @@
     "reopen_failure_count": 0,
     "reopen_verification": "/tmp/spectron_string_search_verify_v44.json",
     "verified_name_count": 2
+  },
+  "t2d_matrix_manager_anchors": {
+    "anchor_count": 4,
+    "anchor_path": "artifacts/spectron_t2d_matrix_manager_manual_translation_anchors_20260827.json",
+    "anchor_sha256": "70edd766fd172a30d51cff4fc6edb6a3e421a111e143e8c6db2f67fa4af9e591",
+    "reopen_failure_count": 0,
+    "reopen_verification": "/tmp/spectron_t2d_matrix_manager_verify_v214.json",
+    "verified_name_count": 4
   },
   "tclient_static_strings_anchors": {
     "anchor_count": 1,

@@ -1555,6 +1555,20 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_compact_residual_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+273. The next IDA pass resolved four methods from the compact
+    `T2DMatrixManager` block. The target ABI names place them in
+    `AUzMgaePtJ`, and the target pseudocode preserves the activation test,
+    top-entry lookup, matrix deletion loop, and pop operation. All four rows
+    match normalized shape and differ only in register detail. The aliases
+    reopened successfully in the v214 copy, which has 11,694 functions,
+    3,641 high-confidence labels, and 1,198 default `sub_` names, with zero
+    semantic reopen failures. The matching static initializer remains
+    deferred because its compact shape collides with several unrelated target
+    initializers. See
+    `artifacts/spectron_t2d_matrix_manager_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_t2d_matrix_manager_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 267. The next IDA pass resolved eight small `THTMLPage` methods. They cover
     font-pointer cleanup, dirty and word-wrap state, parse tags, selection,
     URL and line initialization, and tab-stop replacement. The Spectron

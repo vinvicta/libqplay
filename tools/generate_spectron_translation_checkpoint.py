@@ -81,6 +81,8 @@ def main() -> None:
     parser.add_argument("--encryption-graalvar-verification", type=Path)
     parser.add_argument("--compact-residual-anchors", type=Path)
     parser.add_argument("--compact-residual-verification", type=Path)
+    parser.add_argument("--t2d-matrix-manager-anchors", type=Path)
+    parser.add_argument("--t2d-matrix-manager-verification", type=Path)
     parser.add_argument("--player-helper-anchors", type=Path)
     parser.add_argument("--player-helper-verification", type=Path)
     parser.add_argument("--input-window-anchors", type=Path)
@@ -728,6 +730,53 @@ def main() -> None:
         result["compact_residual_anchors"] = compact_residual
         result["interpretation"].append(
             "The two-hundred-thirteenth database revision also contains the separately reviewed compact property, wrapper, handler, cache, and script anchors."
+        )
+    t2d_matrix_manager = None
+    if args.t2d_matrix_manager_anchors or args.t2d_matrix_manager_verification:
+        if (
+            not args.t2d_matrix_manager_anchors
+            or not args.t2d_matrix_manager_verification
+        ):
+            raise ValueError(
+                "T2DMatrixManager anchors and T2DMatrixManager verification must be supplied together"
+            )
+        t2d_matrix_manager_document = load(args.t2d_matrix_manager_anchors)
+        t2d_matrix_manager_verification = load(
+            args.t2d_matrix_manager_verification
+        )
+        if (
+            t2d_matrix_manager_document.get("artifact")
+            != "spectron_t2d_matrix_manager_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected T2DMatrixManager anchor artifact")
+        if not t2d_matrix_manager_verification.get("verified"):
+            raise ValueError(
+                "T2DMatrixManager anchor reopen verification did not pass"
+            )
+        expected_t2d_matrix_manager = len(t2d_matrix_manager_document["anchors"])
+        if (
+            t2d_matrix_manager_verification["verified_name_count"]
+            != expected_t2d_matrix_manager
+        ):
+            raise ValueError(
+                "T2DMatrixManager verification count differs from artifact"
+            )
+        t2d_matrix_manager = {
+            "anchor_path": str(args.t2d_matrix_manager_anchors),
+            "anchor_sha256": sha256_path(args.t2d_matrix_manager_anchors),
+            "reopen_verification": str(args.t2d_matrix_manager_verification),
+            "anchor_count": expected_t2d_matrix_manager,
+            "verified_name_count": t2d_matrix_manager_verification[
+                "verified_name_count"
+            ],
+            "reopen_failure_count": t2d_matrix_manager_verification[
+                "failure_count"
+            ],
+        }
+    if t2d_matrix_manager is not None:
+        result["t2d_matrix_manager_anchors"] = t2d_matrix_manager
+        result["interpretation"].append(
+            "The two-hundred-fourteenth database revision also contains the separately reviewed T2DMatrixManager method block."
         )
     runtime_path = None
     if args.runtime_path_anchors or args.runtime_path_verification:
