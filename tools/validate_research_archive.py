@@ -86,6 +86,9 @@ def main():
     spectron_checkpoint_v225 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v225.json"
     )
+    spectron_checkpoint_v226 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v226.json"
+    )
     spectron_manual = load_json(
         "artifacts/spectron_manual_translation_anchors_20260826.json"
     )
@@ -208,6 +211,9 @@ def main():
     )
     spectron_gui_popup_rows_anchor = load_json(
         "artifacts/spectron_gui_popup_rows_manual_translation_anchor_20260828.json"
+    )
+    spectron_gui_progress_getter_anchor = load_json(
+        "artifacts/spectron_gui_progress_getter_manual_translation_anchor_20260828.json"
     )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
@@ -2999,6 +3005,46 @@ def main():
         "Spectron GUI popup rows target",
         spectron_gui_popup_rows_anchor["anchors"][0]["spectron_ea"],
         "0x1de3c4",
+    )
+    check(
+        "Spectron GUI progress getter artifact",
+        spectron_gui_progress_getter_anchor["artifact"],
+        "spectron_gui_progress_getter_manual_translation_anchor_20260828",
+    )
+    check(
+        "Spectron GUI progress getter network",
+        spectron_gui_progress_getter_anchor["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron GUI progress getter total",
+        spectron_gui_progress_getter_anchor["summary"]["anchor_count"],
+        1,
+    )
+    check(
+        "Spectron GUI progress getter high confidence",
+        spectron_gui_progress_getter_anchor["summary"]["high_confidence_count"],
+        1,
+    )
+    check(
+        "Spectron GUI progress getter exact-shape count",
+        spectron_gui_progress_getter_anchor["summary"]["normalized_shape_exact_count"],
+        1,
+    )
+    check(
+        "Spectron GUI progress getter full-metric count",
+        spectron_gui_progress_getter_anchor["summary"]["full_metric_exact_count"],
+        1,
+    )
+    check(
+        "Spectron GUI progress getter default targets",
+        spectron_gui_progress_getter_anchor["summary"]["target_default_name_count"],
+        1,
+    )
+    check(
+        "Spectron GUI progress getter target",
+        spectron_gui_progress_getter_anchor["anchors"][0]["spectron_ea"],
+        "0x1dfd3c",
     )
     check(
         "Spectron TString artifact",
@@ -6235,6 +6281,31 @@ def main():
         1,
     )
     check(
+        "Spectron v226 checkpoint artifact",
+        spectron_checkpoint_v226["artifact"],
+        "spectron_translation_checkpoint_20260828_v226",
+    )
+    check(
+        "Spectron v226 checkpoint parent",
+        spectron_checkpoint_v226["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v225",
+    )
+    check(
+        "Spectron v226 checkpoint database hash",
+        spectron_checkpoint_v226["database"]["sha256"],
+        "ae8ab50751ac9f82e108fff9de5ae0274b857c44db27522821ac7c5cdefad45a",
+    )
+    check(
+        "Spectron v226 checkpoint default sub count",
+        spectron_checkpoint_v226["database"]["default_sub_function_count"],
+        1093,
+    )
+    check(
+        "Spectron v226 checkpoint progress getter count",
+        spectron_checkpoint_v226["gui_progress_getter_anchor"]["verified_name_count"],
+        1,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -6336,6 +6407,7 @@ def main():
         spectron_gui_context_menu_property_anchors,
         spectron_gui_array_popup_residual_anchors,
         spectron_gui_popup_rows_anchor,
+        spectron_gui_progress_getter_anchor,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,
