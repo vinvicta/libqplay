@@ -1569,6 +1569,21 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_t2d_matrix_manager_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+274. The next IDA pass resolved 29 methods from the compact random-generator
+    family. The shared `MRandomGenerator` constructors map to `o3AZxayNqc`,
+    the LCG block maps to `Vx2_xajLEd`, and the R250 block maps to
+    `ZwL1xarB5e`. The set includes constructors, factories, property
+    destructors and thunks, object destructors, and the process-wide
+    generator initializer. All 29 rows match normalized shape; eight match
+    every feature and 21 differ only in register detail. The aliases reopened
+    successfully in the v215 copy, which has 11,694 functions, 3,641
+    high-confidence labels, and 1,198 default `sub_` names, with zero
+    semantic reopen failures. The static initializer is now resolved by its
+    `Lry_xa0Aed` target global and contiguous `Vx2_xajLEd` class context. See
+    `artifacts/spectron_mrandom_family_manual_translation_anchors_20260827.json`,
+    `tools/generate_spectron_mrandom_anchors.py`, and
+    `artifacts/spectron_translation_checkpoint_20260826.json`.
+
 267. The next IDA pass resolved eight small `THTMLPage` methods. They cover
     font-pointer cleanup, dirty and word-wrap state, parse tags, selection,
     URL and line initialization, and tab-stop replacement. The Spectron

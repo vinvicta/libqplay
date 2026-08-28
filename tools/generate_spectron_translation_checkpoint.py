@@ -83,6 +83,8 @@ def main() -> None:
     parser.add_argument("--compact-residual-verification", type=Path)
     parser.add_argument("--t2d-matrix-manager-anchors", type=Path)
     parser.add_argument("--t2d-matrix-manager-verification", type=Path)
+    parser.add_argument("--mrandom-anchors", type=Path)
+    parser.add_argument("--mrandom-verification", type=Path)
     parser.add_argument("--player-helper-anchors", type=Path)
     parser.add_argument("--player-helper-verification", type=Path)
     parser.add_argument("--input-window-anchors", type=Path)
@@ -777,6 +779,37 @@ def main() -> None:
         result["t2d_matrix_manager_anchors"] = t2d_matrix_manager
         result["interpretation"].append(
             "The two-hundred-fourteenth database revision also contains the separately reviewed T2DMatrixManager method block."
+        )
+    mrandom = None
+    if args.mrandom_anchors or args.mrandom_verification:
+        if not args.mrandom_anchors or not args.mrandom_verification:
+            raise ValueError(
+                "MRandom anchors and MRandom verification must be supplied together"
+            )
+        mrandom_document = load(args.mrandom_anchors)
+        mrandom_verification = load(args.mrandom_verification)
+        if (
+            mrandom_document.get("artifact")
+            != "spectron_mrandom_family_manual_translation_anchors_20260827"
+        ):
+            raise ValueError("unexpected MRandom anchor artifact")
+        if not mrandom_verification.get("verified"):
+            raise ValueError("MRandom anchor reopen verification did not pass")
+        expected_mrandom = len(mrandom_document["anchors"])
+        if mrandom_verification["verified_name_count"] != expected_mrandom:
+            raise ValueError("MRandom verification count differs from artifact")
+        mrandom = {
+            "anchor_path": str(args.mrandom_anchors),
+            "anchor_sha256": sha256_path(args.mrandom_anchors),
+            "reopen_verification": str(args.mrandom_verification),
+            "anchor_count": expected_mrandom,
+            "verified_name_count": mrandom_verification["verified_name_count"],
+            "reopen_failure_count": mrandom_verification["failure_count"],
+        }
+    if mrandom is not None:
+        result["mrandom_anchors"] = mrandom
+        result["interpretation"].append(
+            "The two-hundred-fifteenth database revision also contains the separately reviewed MRandomGenerator, MRandomLCG, and MRandomR250 class-block anchors."
         )
     runtime_path = None
     if args.runtime_path_anchors or args.runtime_path_verification:

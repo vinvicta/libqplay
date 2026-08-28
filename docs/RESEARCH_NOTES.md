@@ -5859,6 +5859,78 @@ several unrelated target initializers, and none of the current candidates
 stores the `AUzMgaePtJ` matrix-list global. It remains a clear next review item
 rather than a speculative alias. No APK or native library was modified.
 
+## 2026-08-27: Spectron MRandomGenerator family
+
+The v215 pass resolves the compact random-generator family as one class
+block. The source shared `MRandomGenerator` base maps to `o3AZxayNqc`; the
+LCG implementation maps to `Vx2_xajLEd`; and the R250 implementation maps to
+`ZwL1xarB5e`. The associated property classes carry the same target prefixes.
+This family-level context is important because the short constructors,
+destructors, and thunks are otherwise easy to confuse with unrelated compact
+methods.
+
+| Source role | Source | Spectron target | Target ABI name | Source context | Target context |
+| --- | ---: | ---: | --- | ---: | ---: |
+| `MRandomGenerator_initStaticVars_void` | `0x1e3b88` | `0x1e7a58` | `_Z10Byh1xaKnHev` | `0x36ead8` | `0x383268` |
+| `MRandomGenerator_MRandomGenerator_TString_const` | `0x1e3574` | `0x1e7444` | `_ZN10o3AZxayNqcC1ERK10C8THgaTQxF` | `0x3713f0` | `0x380540` |
+| `MRandomGenerator_MRandomGenerator_void` | `0x1e35a4` | `0x1e7474` | `_ZN10o3AZxayNqcC1Ev` | `0xb7e8`, `0x1f0a8` | `0xe268`, `0x18888` |
+| `MRandomLCG_initObject_int` | `0x1e36d0` | `0x1e75a0` | `_ZN10Vx2_xajLEd10j9gLgaw2nIEi` | `0x373748` | `0x381f48` |
+| `MRandomLCG_MRandomLCG_TString_const` | `0x1e3710` | `0x1e75e0` | `_ZN10Vx2_xajLEdC1ERK10C8THgaTQxF` | `0x36ea20` | `0x380540` |
+| `MRandomLCG_create_TString_const` | `0x1e3760` | `0x1e7630` | `_Z20Vx2_xajLEdE7Bm2aaHDBRK10C8THgaTQxF` | `0x375098` | `0x387a20` |
+| `MRandomLCG_MRandomLCG_void` | `0x1e3790` | `0x1e7660` | `_ZN10Vx2_xajLEdC2Ev` | `0x372860` | `0x386a18` |
+| `MRandomLCG_MRandomLCG_int` | `0x1e3814` | `0x1e76e4` | `_ZN10Vx2_xajLEdC2Ei` | `0x36fa50` | `0x383cd8` |
+| `MRandomR250_initObject_int` | `0x1e39d8` | `0x1e78a8` | `_ZN10ZwL1xarB5e10j9gLgaw2nIEi` | `0x36f318` | `0x385108` |
+| `MRandomR250_MRandomR250_TString_const` | `0x1e3a18` | `0x1e78e8` | `_ZN10ZwL1xarB5eC1ERK10C8THgaTQxF` | `0x373a58` | `0x382f40` |
+| `MRandomR250_create_TString_const` | `0x1e3a68` | `0x1e7938` | `_Z20ZwL1xarB5eE7Bm2aaHDBRK10C8THgaTQxF` | `0x3758e0` | `0x387a70` |
+| `MRandomR250_MRandomR250_void` | `0x1e3a98` | `0x1e7968` | `_ZN10ZwL1xarB5eC1Ev` | `0xcdf0`, `0x28918` | `0xac08`, `0x25608` |
+| `MRandomR250_MRandomR250_int` | `0x1e3b1c` | `0x1e79ec` | `_ZN10ZwL1xarB5eC2Ei` | `0x168d0`, `0x20f98` | `0x16db8`, `0x1d178` |
+| `MRandomGeneratorProperties_MRandomGeneratorProperties` | `0x1e3cb8` | `0x1e7b88` | `_ZN20o3AZxayNqcPropertiesD2Ev` | class/vtable block `0x3693d0` | class/vtable block `0x37c1a0` |
+| `MRandomLCGProperties_MRandomLCGProperties` | `0x1e3cdc` | `0x1e7bac` | `_ZN20Vx2_xajLEdPropertiesD1Ev` | class/vtable block `0x3693d0` | class/vtable block `0x37c1a0` |
+| `MRandomR250Properties_MRandomR250Properties` | `0x1e3d00` | `0x1e7bd0` | `_ZN20ZwL1xarB5ePropertiesD1Ev` | class/vtable block `0x3693d0` | class/vtable block `0x37c1a0` |
+| `MRandomLCG_MRandomLCG` | `0x1e3de4` | `0x1e7cb4` | `_ZN10Vx2_xajLEdD2Ev` | LCG destructor row | LCG destructor row |
+| `MRandomR250_MRandomR250` | `0x1e3e28` | `0x1e7cf8` | `_ZN10ZwL1xarB5eD2Ev` | R250 destructor row | R250 destructor row |
+
+The remaining property and deleting-destructor thunks are retained in the
+machine-readable record. The detailed context list is carried by the
+artifact's `original_context` and `spectron_context` fields. The source and
+target class and vtable blocks establish the lifecycle order, while the
+individual decompiled bodies confirm the receiver fields, allocations, and
+base-constructor calls.
+
+The source static initializer at `0x1e3b88` allocates an LCG object with size
+`0x90`, stores it in `gRandGen`, and removes it from the garbage collector.
+Spectron does the same at `0x1e7a58`, allocating `Vx2_xajLEd`, storing it in
+`Lry_xa0Aed`, and calling `NgNBgaN3oA::nrLqgaDw7q`. The target static context
+is `0x383268`, and the target LCG class block is contiguous with the rest of
+the random family. That global reference resolved the one row that had
+previously been left as a medium-confidence shape match.
+
+The string constructor context is `0x3713f0` in the source and `0x380540` in
+Spectron. The default shared-base constructor has source xrefs at `0xb7e8`
+and `0x1f0a`, with target xrefs at `0xe268` and `0x18888`. The LCG initializer,
+string constructor, factory, default constructor, and integer constructor
+use contexts `0x373748`, `0x36ea20`, `0x375098`, `0x372860`, and `0x36fa50` in
+the source, compared with `0x381f48`, `0x380540`, `0x387a20`, `0x386a18`, and
+`0x383cd8` in Spectron. The corresponding R250 contexts are `0x36f318`,
+`0x373a58`, `0x3758e0`, `0xcdf0` and `0x28918`, and `0x168d0` and `0x20f98`,
+compared with `0x385108`, `0x382f40`, `0x387a70`, `0xac08` and `0x25608`,
+and `0x16db8` and `0x1d178`.
+
+All 29 rows match normalized shape. Eight match every recorded metric, while
+21 differ only in `register_detail_hash`. The target ABI names and direct-call
+names are retained because this rebuild renamed the `TStaticVar`, string
+wrapper, property-base, and allocator symbols.
+
+The aliases reopened successfully in
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v215.i64`.
+The database contains 11,694 functions, 3,641 high-confidence semantic
+labels, and 1,198 default `sub_` names. Its SHA-256 is
+`76c43334d5e5afae29a5dc51067056ebe0118bbae6366fd64908c62d317b9186`. The
+machine-readable record is
+`artifacts/spectron_mrandom_family_manual_translation_anchors_20260827.json`,
+generated by `tools/generate_spectron_mrandom_anchors.py`. No APK or native
+library was modified.
+
 ## 2026-08-27: Spectron THTMLPage method family
 
 The v208 pass resolves eight small methods in the HTML page renderer. The

@@ -146,6 +146,9 @@ def main():
     spectron_t2d_matrix_manager_anchors = load_json(
         "artifacts/spectron_t2d_matrix_manager_manual_translation_anchors_20260827.json"
     )
+    spectron_mrandom_anchors = load_json(
+        "artifacts/spectron_mrandom_family_manual_translation_anchors_20260827.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -2183,6 +2186,36 @@ def main():
         "Spectron T2DMatrixManager deferred initializer",
         spectron_t2d_matrix_manager_anchors["deferred_review"][0]["original_name"],
         "T2DMatrixManager_initStaticVars_void",
+    )
+    check(
+        "Spectron MRandom artifact",
+        spectron_mrandom_anchors["artifact"],
+        "spectron_mrandom_family_manual_translation_anchors_20260827",
+    )
+    check("Spectron MRandom network", spectron_mrandom_anchors["network_contacted"], False)
+    check("Spectron MRandom total", spectron_mrandom_anchors["summary"]["anchor_count"], 29)
+    check("Spectron MRandom high confidence", spectron_mrandom_anchors["summary"]["high_confidence_count"], 29)
+    check("Spectron MRandom semantic overlap", spectron_mrandom_anchors["summary"]["already_in_semantic_map"], 1)
+    check("Spectron MRandom new-context count", spectron_mrandom_anchors["summary"]["new_context_anchor_count"], 28)
+    check("Spectron MRandom exact-shape count", spectron_mrandom_anchors["summary"]["exact_shape_anchor_count"], 29)
+    check("Spectron MRandom full-metric exact count", spectron_mrandom_anchors["summary"]["full_metric_exact_count"], 8)
+    check("Spectron MRandom register-detail differences", spectron_mrandom_anchors["summary"]["register_detail_difference_count"], 21)
+    check("Spectron MRandom default targets", spectron_mrandom_anchors["summary"]["target_default_name_count"], 0)
+    check(
+        "Spectron MRandom static generator global",
+        spectron_mrandom_anchors["context"]["static_generator_global"]["target"],
+        "Lry_xa0Aed",
+    )
+    mrandom_by_name = {row["original_name"]: row for row in spectron_mrandom_anchors["anchors"]}
+    check(
+        "Spectron MRandom static initializer target",
+        mrandom_by_name["MRandomGenerator_initStaticVars_void"]["spectron_ea"],
+        "0x1e7a58",
+    )
+    check(
+        "Spectron MRandom LCG class target",
+        spectron_mrandom_anchors["context"]["target_classes"][1],
+        "Vx2_xajLEd",
     )
     check(
         "Spectron TString artifact",
@@ -5238,7 +5271,8 @@ def main():
     check("Spectron checkpoint encryption-GraalVar anchor count", spectron_checkpoint["encryption_graalvar_anchors"]["verified_name_count"], 3)
     check("Spectron checkpoint compact-residual anchor count", spectron_checkpoint["compact_residual_anchors"]["verified_name_count"], 13)
     check("Spectron checkpoint T2DMatrixManager anchor count", spectron_checkpoint["t2d_matrix_manager_anchors"]["verified_name_count"], 4)
-    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "a0b839b194114b7e7af26f14205e66a68017f38ac828af1d52f10f43f8100694")
+    check("Spectron checkpoint MRandom anchor count", spectron_checkpoint["mrandom_anchors"]["verified_name_count"], 29)
+    check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "76c43334d5e5afae29a5dc51067056ebe0118bbae6366fd64908c62d317b9186")
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -5329,6 +5363,7 @@ def main():
         spectron_encryption_graalvar_anchors,
         spectron_compact_residual_anchors,
         spectron_t2d_matrix_manager_anchors,
+        spectron_mrandom_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,
