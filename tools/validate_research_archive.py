@@ -89,6 +89,9 @@ def main():
     spectron_checkpoint_v226 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v226.json"
     )
+    spectron_checkpoint_v227 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v227.json"
+    )
     spectron_manual = load_json(
         "artifacts/spectron_manual_translation_anchors_20260826.json"
     )
@@ -214,6 +217,9 @@ def main():
     )
     spectron_gui_progress_getter_anchor = load_json(
         "artifacts/spectron_gui_progress_getter_manual_translation_anchor_20260828.json"
+    )
+    spectron_gui_text_list_selection_script_anchors = load_json(
+        "artifacts/spectron_gui_text_list_selection_script_manual_translation_anchors_20260828.json"
     )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
@@ -3045,6 +3051,60 @@ def main():
         "Spectron GUI progress getter target",
         spectron_gui_progress_getter_anchor["anchors"][0]["spectron_ea"],
         "0x1dfd3c",
+    )
+    check(
+        "Spectron GUI text-list selection script artifact",
+        spectron_gui_text_list_selection_script_anchors["artifact"],
+        "spectron_gui_text_list_selection_script_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron GUI text-list selection script network",
+        spectron_gui_text_list_selection_script_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron GUI text-list selection script total",
+        spectron_gui_text_list_selection_script_anchors["summary"]["anchor_count"],
+        2,
+    )
+    check(
+        "Spectron GUI text-list selection script high confidence",
+        spectron_gui_text_list_selection_script_anchors["summary"]["high_confidence_count"],
+        2,
+    )
+    check(
+        "Spectron GUI text-list selection script exact-shape count",
+        spectron_gui_text_list_selection_script_anchors["summary"]["normalized_shape_exact_count"],
+        0,
+    )
+    check(
+        "Spectron GUI text-list selection script full-metric count",
+        spectron_gui_text_list_selection_script_anchors["summary"]["full_metric_exact_count"],
+        0,
+    )
+    check(
+        "Spectron GUI text-list selection script layout-change count",
+        spectron_gui_text_list_selection_script_anchors["summary"]["layout_change_count"],
+        2,
+    )
+    check(
+        "Spectron GUI text-list selection script default targets",
+        spectron_gui_text_list_selection_script_anchors["summary"]["target_default_name_count"],
+        2,
+    )
+    selection_by_name = {
+        row["original_name"]: row
+        for row in spectron_gui_text_list_selection_script_anchors["anchors"]
+    }
+    check(
+        "Spectron GUI set-selected-rows target",
+        selection_by_name["GuiTextListCtrl_script_setselectedrows"]["spectron_ea"],
+        "0x1e3794",
+    )
+    check(
+        "Spectron GUI set-selected-by-IDs target",
+        selection_by_name["GuiTextListCtrl_script_setselectedbyids"]["spectron_ea"],
+        "0x1e38c8",
     )
     check(
         "Spectron TString artifact",
@@ -6306,6 +6366,31 @@ def main():
         1,
     )
     check(
+        "Spectron v227 checkpoint artifact",
+        spectron_checkpoint_v227["artifact"],
+        "spectron_translation_checkpoint_20260828_v227",
+    )
+    check(
+        "Spectron v227 checkpoint parent",
+        spectron_checkpoint_v227["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v226",
+    )
+    check(
+        "Spectron v227 checkpoint database hash",
+        spectron_checkpoint_v227["database"]["sha256"],
+        "150ad989b94e83ebcd6287aeb935961c0b4081c99856a59ce4d789ce1d275276",
+    )
+    check(
+        "Spectron v227 checkpoint default sub count",
+        spectron_checkpoint_v227["database"]["default_sub_function_count"],
+        1091,
+    )
+    check(
+        "Spectron v227 checkpoint selection count",
+        spectron_checkpoint_v227["gui_text_list_selection_script_anchors"]["verified_name_count"],
+        2,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -6408,6 +6493,7 @@ def main():
         spectron_gui_array_popup_residual_anchors,
         spectron_gui_popup_rows_anchor,
         spectron_gui_progress_getter_anchor,
+        spectron_gui_text_list_selection_script_anchors,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,
