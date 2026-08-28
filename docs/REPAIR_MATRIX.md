@@ -91,6 +91,7 @@ The target-specific plan and byte guards are recorded in
 | Original-stream script clear plus native startup clear | Combine the direct script patch with the existing branch edit at ARM64 `0x15ca7c` | The same script and native chain reached the map, level files, image path, heartbeats, and a translated-ARM64 world/HUD screenshot | Historical combined diagnostic |
 | Non-premium branch with original script | Change the conditional at ARM64 `0x15ca7c` so the existing clear at `0x15cac8` runs, while serving the original connector stream unchanged | The translated ARM64 client rendered the tiled world, HUD, and status icons with the exact `.gmap` fixture. No script-level loading clear was present | Leading isolated local candidate |
 | Stock premium branch with original script | Restore the original `B.LE` bytes at ARM64 `0x15ca7c` with `tools/patch_restore_premium_loading_test.py` | The same translated client completed the map, three level files, image request, and heartbeat path, but retained the title/loading artwork | Matched negative control |
+| Spectron 2.2 non-premium branch with original script | Change the target conditional at `0x15fad8` from `B.LE 0x15fb1c` to an unconditional branch to the existing clear block | The target-specific ARM64 package completed the same local connector and game replay, then rendered the green tiled world with the HUD and status indicators | Verified translated-ARM64 loopback control |
 | Render-boundary clear | Hook the getter call at `0x244228`, clear the flag through GOT slot `0x375e30`, then return to `0x24422c` | The translated ARM64 client rendered the same world and HUD | Control only |
 
 The native flag starts enabled at `0x37a549`. The marker decodes to
@@ -102,9 +103,14 @@ download, as the local cause of the remaining visual split.
 
 The non-premium branch is the smallest state-oriented experiment because it
 reuses the client's own initialization and leaves the render loop unchanged.
-It is still not called a production fix. The test ran through Android's
-x86_64 ARM64 translation layer, and the meaning of the premium branch needs to
-be confirmed on a physical ARM64 device and an authorized current service.
+The Spectron equivalent is at `0x15fad8`, not the earlier target path at
+`0x15faac`. The latter selects an executable-path fallback and was rejected
+after the full target pseudocode was reviewed. The target control was run
+through Android's x86_64 ARM64 translation layer. It is still not called a
+production fix, and the meaning of the premium branch needs to be confirmed on
+a physical ARM64 device and an authorized current service. The exact target
+replay is recorded in
+`artifacts/spectron_arm64_loopback_loading_replay_20260828.json`.
 
 ## Rejected handler-table repair
 

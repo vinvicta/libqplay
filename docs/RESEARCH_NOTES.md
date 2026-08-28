@@ -12049,6 +12049,71 @@ and the checkpoint is
 This pass changed only the disposable IDA database. It did not patch the APK
 or either native library, and it performed no DNS, HTTP, or TLS operation.
 
+## 2026-08-28: Spectron ARM64 loopback loading control
+
+The target-specific Spectron package check was followed by a real local
+emulator replay. The package started from the supplied
+`spectron_client_1.0.2.apk`, kept only its ARM64 libraries, and used the
+target-specific trust, resolver, port, and diagnostic RC4 edits already
+described above. The safe WebTop edit was also retained because the supplied
+`libxposed.so` selects a deliberate null-store crash for its `crash` command.
+
+The first loading-state trial exposed a useful address-selection mistake. The
+target's translated `sigcheck` routine begins at `0x15fa64`. Its branch at
+`0x15faac` tests whether the executable path is present and jumps to the path
+assignment block at `0x15fb48`. It is not the premium-condition branch. A
+control that changed this instruction left the screen unchanged.
+
+Reading the complete target function in the v268 IDA database gives the actual
+relationship:
+
+```text
+0x15fad4  CMP   W22, WZR
+0x15fad8  B.LE  0x15fb1c
+0x15fb1c  STRB  WZR, [X0]       ; gtGCDail9W, the loading flag
+0x15fb28  B     0x15fadc
+```
+
+The corrected private patch replaces the four bytes at `0x15fad8` from
+`2d 02 00 54` to `11 00 00 14`. This is the target equivalent of the 1.8
+branch control at `0x15ca7c`, but the target addresses cannot be reused from
+the older build. The new helper is
+`tools/patch_spectron_nonpremium_loading_test.py`, and the combined builder
+accepts `--force-nonpremium-loading`.
+
+The corrected package was run on the available Android 36 x86_64 emulator,
+which loaded the ARM64 library through Android's translation layer. A local
+TLS responder bound to `127.0.0.1:18443` received the native request:
+`GET /con.png`, host `cong.quattroplay.com:18443`, user agent `Graal/6.171`.
+The archived 16,446-byte response was accepted without a certificate error.
+The native RSA result branch, peer verification, and hostname verification
+were left intact.
+
+The local game responder bound to `127.0.0.1:14900`. It saw two encrypted
+connections and completed the synthetic login exchange on both. The second
+connection requested `basepackage.gupd`, `guigames_graymessage2.png`,
+`classiciphone.gmap`, `main_aa-02.nw`, `main_ab-01.nw`, `main_ab-02.nw`,
+`main_ac-01.nw`, and `main_ac-02.nw`. The client continued sending packet-24
+heartbeats. The process remained alive through the replay.
+
+With the branch untouched, the same target transport and resource path left
+the title/loading artwork visible. With the corrected branch, the translated
+ARM64 renderer displayed the green tiled world, HUD, and status indicators.
+The private package SHA-256 is
+`6988410c57bcc4874b9e6932e82d1eeba3e9a39e684a26112b54586a76022b02`, the
+patched native library SHA-256 is
+`85aafee0d551ffdf4460833adf1f87a0eb26408aedeff862bc9041a380e2dfde`, and the
+screen capture SHA-256 is
+`08dc6793c3087caec00f1194e4966b1ab4753b53eacc0a1b2a86b92ad16c596e`.
+The client capture hashes, server capture hashes, exact patch map, and all
+fixture hashes are in
+`artifacts/spectron_arm64_loopback_loading_replay_20260828.json`.
+
+This result closes the local transport and loading-state question for the
+translated emulator path. It is still not a live-service repair. The
+certificate private key, signed APK, captures, and game assets remain outside
+the repository. The ADB reverse mappings were removed after the test.
+
 ## 2026-08-28: Residual Spectron array and popup GUI callbacks
 
 The v224 review covered six small callbacks spanning the array, context-menu,
@@ -12222,16 +12287,16 @@ after reopening the database. The v264 copy contains 11,696 functions and
 712 default `sub_` names. Its SHA-256 is
 `5719066e789659c5414a832423c2f8bb0691b8fa61c8ee354ed3a9e17fbf4a69`.
 
-Two observations are deliberately left visible. The target table labels
-`0x24b958` as
-`quattro::android::getinstallerpackagename`, but the body obtains package
-information, reads `signatures[0]`, and calls `toCharsString()`. The table
-label describes the registration name, while the body is clearly a signing
-string path. Separately, `0x24a9ec` is registered as
-`quattro::android::getsignature`, but its body reads
-`Settings.Secure.ANDROID_ID`. That function remains `sub_24A9EC` for now,
-because the body and registration name need a dedicated decision rather than
-being folded into the 22-row batch.
+The v264 checkpoint deliberately preserves two observations that were still
+unresolved at that point. Its first-pass reading associated `0x24b958` with
+the signing-string path because the body obtains package information, reads
+`signatures[0]`, and calls `toCharsString()`. A later package-identity pass
+separated the registration table from the callback bodies and corrected the
+mapping: `0x24b958` is the installer-package helper, while `0x24a9ec` is the
+signing-string helper. The Android ID helper is at `0x2502f4`. The v264
+database and artifact retain the earlier uncertainty as historical evidence;
+the corrected labels are recorded in the v268 checkpoint and the later notes
+below.
 
 The target-only artifact has SHA-256
 `64118f5ae4c837b3f133b3fe9367d7d13d732d4cc1b65331b8dc361aada45df1` and is

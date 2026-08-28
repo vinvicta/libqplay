@@ -143,6 +143,34 @@ trust text at `0x2ea9e0`, and the outgoing-key trampoline uses `0x1c4000` for
 the code cave and resumes the target function at `0x202fec`. The build check
 is offline and does not resolve or contact `cong.quattroplay.com`.
 
+To include the separate loading-state control, add
+`--force-nonpremium-loading` to the same command. The builder then checks the
+target branch at `0x15fad8`, replacing `B.LE 0x15fb1c` with an unconditional
+branch to the existing loading-flag clear block. This is the target 2.2
+equivalent of the older 1.8 diagnostic at `0x15ca7c`. An earlier scratch
+attempt used `0x15faac`, but that address handles executable-path selection and
+is not the premium-condition branch.
+
+The corrected target control was run on the available Android 36 x86_64
+emulator through its ARM64 translation layer. The local TLS responder received
+`GET /con.png` with `Host: cong.quattroplay.com:18443`; the native certificate
+and hostname checks remained enabled. The game responder completed two
+encrypted connections, served `basepackage.gupd`, `classiciphone.gmap`, the
+level containers, and image resources, and observed continuing heartbeat
+frames. The stock target build stayed on the title/loading artwork. With the
+corrected branch control, the screen showed the green tiled world with the
+HUD and status indicators. The APK SHA-256 is
+`6988410c57bcc4874b9e6932e82d1eeba3e9a39e684a26112b54586a76022b02`, and the
+screen capture SHA-256 is
+`08dc6793c3087caec00f1194e4966b1ab4753b53eacc0a1b2a86b92ad16c596e`.
+The complete replay metadata is in
+`artifacts/spectron_arm64_loopback_loading_replay_20260828.json`.
+
+The test used only ADB reverse mappings for ports `18443` and `14900`, bound
+both responders to loopback, and removed the mappings when it finished. The
+private certificate key, signed APK, captures, and fixture assets are not part
+of the repository.
+
 The complete private chain can be rebuilt with the single offline helper:
 
 ```bash

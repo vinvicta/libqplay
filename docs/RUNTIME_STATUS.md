@@ -2839,9 +2839,54 @@ The reproducible builder is `tools/build_spectron_loopback_apk.py`, and the
 byte-level guards are in
 `artifacts/spectron_loopback_patch_audit_20260828.json`.
 
-This does not yet count as a Spectron runtime result. No emulator was
-connected for this package check, and no DNS lookup, TLS connection, or HTTP
-request was made to `cong`, `cong2`, or any other external service.
+This paragraph describes the packaging check itself. A separate local replay
+was run afterward, with the responder and ADB reverse mappings documented
+below. The package check did not perform a DNS lookup or contact `cong`,
+`cong2`, or any other external service.
+
+## Spectron 2.2 target loopback replay
+
+The target-specific package was then installed on the available Android 36
+x86_64 emulator. Android loaded its ARM64 library through the translation
+layer. The test used a local certificate for `cong.quattroplay.com`, forwarded
+HTTPS port `18443`, and retained the native connector RSA result branch,
+certificate verification, and hostname verification.
+
+The local TLS responder received `GET /con.png` with
+`Host: cong.quattroplay.com:18443` and `User-Agent: Graal/6.171`. The archived
+16,446-byte connector response was accepted without a certificate error. The
+game responder then observed two encrypted connections. Both completed the
+synthetic login exchange. The second connection requested the base package,
+`classiciphone.gmap`, five level resources, and continued with packet-24
+heartbeats. The process stayed alive through the replay.
+
+The unmodified target-specific build reached those same network and resource
+milestones but retained the stock title/loading artwork. The corrected
+loading control changes one instruction in the target's translated
+`TClientEnvironment::sigcheck` routine: it replaces the conditional at
+`0x15fad8` with an unconditional branch to the already present clear block at
+`0x15fb1c`. That package displayed the green tiled world with the HUD and
+status indicators.
+
+The corrected private APK SHA-256 is
+`6988410c57bcc4874b9e6932e82d1eeba3e9a39e684a26112b54586a76022b02`, and its
+ARM64 native library SHA-256 is
+`85aafee0d551ffdf4460833adf1f87a0eb26408aedeff862bc9041a380e2dfde`. The
+rendered screenshot SHA-256 is
+`08dc6793c3087caec00f1194e4966b1ab4753b53eacc0a1b2a86b92ad16c596e`.
+The client and server capture hashes, exact patch map, and fixture hashes are
+in `artifacts/spectron_arm64_loopback_loading_replay_20260828.json`.
+
+One earlier private trial changed `0x15faac`, the executable-path branch. It
+did not change the screen and is not treated as a loading fix. The corrected
+branch was identified by reading the full target pseudocode and mapping the
+same premium-condition and clear-block relationship seen in the 1.8 IDA
+database.
+
+This is a local translated-ARM64 result. It does not prove current live
+service compatibility or native rendering on a physical ARM64 device. The
+responder, certificate key, APK, captures, and game assets remain outside the
+repository, and both reverse mappings were removed after the run.
 
 ## Not verified
 

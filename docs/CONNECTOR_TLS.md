@@ -30,6 +30,13 @@ build records are in
 `artifacts/spectron_loopback_patch_audit_20260828.json` and
 `tools/build_spectron_loopback_apk.py`.
 
+That package also has a completed loopback replay record. The loading-state
+control is kept separate from the connector edits: it changes only target
+`0x15fad8` and branches to the existing clear block at `0x15fb1c`. The private
+translated-ARM64 run accepted the connector response and reached the rendered
+world. Details and hashes are in
+`artifacts/spectron_arm64_loopback_loading_replay_20260828.json`.
+
 ## Date checks recovered in CyaSSL
 
 Clean IDA decompilation of the bundled certificate parser found the date logic

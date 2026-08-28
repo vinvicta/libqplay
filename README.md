@@ -31,8 +31,9 @@ original debug symbols were recovered.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
-`analysis/spectron_libqplay_translated_v265.i64`, and
-`analysis/spectron_libqplay_translated_v266.i64`, with the corrected frontier
+`analysis/spectron_libqplay_translated_v265.i64`,
+`analysis/spectron_libqplay_translated_v266.i64`,
+`analysis/spectron_libqplay_translated_v267.i64`, and the corrected frontier
 in `analysis/spectron_libqplay_translated_v268.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
@@ -51,11 +52,13 @@ labels the package-signature helper at `0x24A9EC` after decoding its
 describe observed control flow and do not by themselves identify the reason
 a client fails to start.
 
-Two bridge registrations still need a dedicated review. The table calls one
-callback `getinstallerpackagename`, while its body walks through a package
-signature and calls `toCharsString()`. The table calls another `getsignature`,
-while its body reads `Settings.Secure.ANDROID_ID`. The latter remains the
-default target name `sub_24A9EC` until that ambiguity is resolved.
+The nearby bridge registrations are now separated by their actual bodies. The
+`getinstallerpackagename` callback calls
+`PackageManager.getInstallerPackageName(packageName)`, while
+`quattro::android::getsignature` calls `getPackageInfo`, reads
+`signatures[0]`, and returns `toCharsString()`. The Android ID helper is a
+separate target function at `0x2502F4`. This corrects an earlier swapped
+description in the notes and keeps the three behaviors distinct.
 
 The latest checkpoints are
 `artifacts/spectron_translation_checkpoint_20260828_v263_corrected.json` and
@@ -107,9 +110,24 @@ APK signature checks with output hash
 `45f469692cb6ee2e8d0f1529d8b0871dafdf718e2c8b6e345cb5082e40257751`.
 That is an offline packaging result, not a live connection result.
 
+The package was then run through a loopback-only TLS and game responder on the
+available Android 36 x86_64 emulator. The ARM64 translation layer completed
+the connector request, retained native RSA and TLS verification, opened two
+encrypted game connections, loaded the map and level resources, and rendered
+the green world with the HUD. The stock title/loading image remained when the
+target premium-condition branch was untouched. The corrected target control
+changes only the branch at `0x15fad8` so the existing clear block at `0x15fb1c`
+runs. Its private APK hash is
+`6988410c57bcc4874b9e6932e82d1eeba3e9a39e684a26112b54586a76022b02`, and its
+rendered screenshot hash is
+`08dc6793c3087caec00f1194e4966b1ab4753b53eacc0a1b2a86b92ad16c596e`.
+The complete metadata is in
+`artifacts/spectron_arm64_loopback_loading_replay_20260828.json`. The
+responder, certificate key, APK, captures, and game assets remain private.
+
 The v235 entry below is a historical checkpoint in the IDA translation
 series. The current series reaches
-`analysis/spectron_libqplay_translated_v264_corrected.i64`. The v235 pass adds 12
+`analysis/spectron_libqplay_translated_v268.i64`. The v235 pass adds 12
 high-confidence aliases from the GSFunctionsClient and GuiControl property
 tables. They cover five carried-object getters, four screen-relative mouse
 accessors, and three GuiControl callbacks. All 12 match the normalized
@@ -4947,6 +4965,9 @@ proves the local native TLS path, not a current live certificate or service.
   target, and
   `tools/build_spectron_loopback_apk.py` builds the private target-specific
   ARM64 loopback package with native verification preserved.
+  `tools/patch_spectron_nonpremium_loading_test.py` selects the existing
+  target loading-flag clear at `0x15fad8` for a separate private control, and
+  `--force-nonpremium-loading` enables it in the combined builder.
   `tools/tls_capture_server.py` serves an archived response over a
   127.0.0.1-only TLS listener and records handshake failures without exposing
   a response body.

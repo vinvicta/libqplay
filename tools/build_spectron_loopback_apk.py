@@ -30,6 +30,9 @@ import zipfile
 from pathlib import Path, PurePosixPath
 
 from patch_spectron_webtop_safe_commands import patch_bytes as patch_webtop_bytes
+from patch_spectron_nonpremium_loading_test import (
+    patch_bytes as patch_nonpremium_loading_bytes,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -134,6 +137,11 @@ def parse_args() -> argparse.Namespace:
         "--keep-webtop-commands",
         action="store_true",
         help="leave Spectron's crash, freeze, and abort branches unchanged",
+    )
+    parser.add_argument(
+        "--force-nonpremium-loading",
+        action="store_true",
+        help="select the existing target branch that clears the loading flag",
     )
     parser.add_argument("--report", type=Path)
     parser.add_argument(
@@ -255,9 +263,18 @@ def main() -> None:
             ],
         )
 
+        final_native = fixed_key
+        loading_patch_records = []
+        if args.force_nonpremium_loading:
+            final_native = work / "libqplay.nonpremium.so"
+            patched_native, loading_patch_records = patch_nonpremium_loading_bytes(
+                fixed_key.read_bytes()
+            )
+            final_native.write_bytes(patched_native)
+
         staged_native = stage / ARM64_LIB
         staged_native.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(fixed_key, staged_native)
+        shutil.copy2(final_native, staged_native)
 
         with zipfile.ZipFile(apk) as archive:
             xposed_source = archive.read(ARM64_XPOSED)
@@ -311,7 +328,7 @@ def main() -> None:
             "input_libxposed_sha256": input_xposed_sha256,
             "output_apk": str(output),
             "output_apk_sha256": sha256_file(output),
-            "output_native_sha256": sha256_file(fixed_key),
+            "output_native_sha256": sha256_file(final_native),
             "output_libxposed_sha256": sha256_bytes(xposed_bytes),
             "abi": "arm64-v8a",
             "connector_host": "cong.quattroplay.com",
@@ -323,13 +340,16 @@ def main() -> None:
             "native_certificate_verification_preserved": True,
             "webtop_safe_commands_applied": not args.keep_webtop_commands,
             "webtop_patch_records": webtop_patch_records,
+            "loading_branch_patch_applied": args.force_nonpremium_loading,
+            "loading_patch_records": loading_patch_records,
             "patches": [
                 "patch_graalweb_trust_bundle.py --variant spectron",
                 "patch_localhost_resolver_test.py --variant spectron",
                 "patch_connector_tls_port_test.py --variant spectron",
                 "patch_fixed_output_rc4_key_test.py --variant spectron",
             ]
-            + ([] if args.keep_webtop_commands else ["patch_spectron_webtop_safe_commands.py"]),
+            + ([] if args.keep_webtop_commands else ["patch_spectron_webtop_safe_commands.py"])
+            + (["patch_spectron_nonpremium_loading_test.py"] if args.force_nonpremium_loading else []),
             "warning": "Private loopback diagnostic package only. Not a production client.",
         }
         serialized = json.dumps(report, indent=2, sort_keys=True)

@@ -52,6 +52,9 @@ def main():
     spectron_loopback_patch_audit = load_json(
         "artifacts/spectron_loopback_patch_audit_20260828.json"
     )
+    spectron_arm64_loopback_loading = load_json(
+        "artifacts/spectron_arm64_loopback_loading_replay_20260828.json"
+    )
     tls_parser = load_json("artifacts/connector_tls_parser_analysis_20260826.json")
     tls_expiry = load_json("artifacts/connector_tls_expiry_control_20260826.json")
     native_verified = load_json(
@@ -1254,6 +1257,106 @@ def main():
         "Spectron loopback WebTop patch count",
         len(spectron_loopback_patch_audit["webtop_safe_patch"]["patches"]),
         3,
+    )
+
+    check(
+        "Spectron ARM64 loading replay artifact",
+        spectron_arm64_loopback_loading["artifact"],
+        "spectron_arm64_loopback_loading_replay_20260828",
+    )
+    check(
+        "Spectron ARM64 loading replay network",
+        spectron_arm64_loopback_loading["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron ARM64 loading replay source APK",
+        spectron_arm64_loopback_loading["inputs"]["source_apk_sha256"],
+        "5b10289ad2b67fba77f5f4159d51cdbeaf4ca2710fb1459da69c8d4b1af5149c",
+    )
+    check(
+        "Spectron ARM64 loading replay target DB",
+        spectron_arm64_loopback_loading["inputs"]["target_database_sha256"],
+        "00d08f743e7e01ac77b6eb8ccec266db89be0c8cc2382ebd542e23f2d80a4077",
+    )
+    check(
+        "Spectron ARM64 loading replay branch offset",
+        spectron_arm64_loopback_loading["build"]["patches"][-1]["location"],
+        "0x15fad8",
+    )
+    check(
+        "Spectron ARM64 loading replay branch bytes",
+        spectron_arm64_loopback_loading["build"]["patches"][-1]["replacement"],
+        "11000014",
+    )
+    check(
+        "Spectron ARM64 loading replay RSA branch",
+        spectron_arm64_loopback_loading["build"]["native_rsa_result_branch_preserved"],
+        True,
+    )
+    check(
+        "Spectron ARM64 loading replay TLS checks",
+        spectron_arm64_loopback_loading["build"]["native_tls_peer_and_hostname_verification_preserved"],
+        True,
+    )
+    check(
+        "Spectron ARM64 loading replay connector request",
+        spectron_arm64_loopback_loading["runtime"]["connector"]["tls_request_observed"],
+        True,
+    )
+    check(
+        "Spectron ARM64 loading replay connector host",
+        spectron_arm64_loopback_loading["runtime"]["connector"]["host_header"],
+        "cong.quattroplay.com:18443",
+    )
+    check(
+        "Spectron ARM64 loading replay certificate result",
+        spectron_arm64_loopback_loading["runtime"]["connector"]["certificate_error_observed"],
+        False,
+    )
+    check(
+        "Spectron ARM64 loading replay game connections",
+        spectron_arm64_loopback_loading["runtime"]["game"]["encrypted_connections"],
+        2,
+    )
+    check(
+        "Spectron ARM64 loading replay login",
+        spectron_arm64_loopback_loading["runtime"]["game"]["encrypted_login_completed"],
+        True,
+    )
+    check(
+        "Spectron ARM64 loading replay resource set",
+        spectron_arm64_loopback_loading["runtime"]["game"]["requested_files"],
+        [
+            "basepackage.gupd",
+            "guigames_graymessage2.png",
+            "classiciphone.gmap",
+            "main_aa-02.nw",
+            "main_ab-01.nw",
+            "main_ab-02.nw",
+            "main_ac-01.nw",
+            "main_ac-02.nw",
+        ],
+    )
+    check(
+        "Spectron ARM64 loading replay heartbeats",
+        spectron_arm64_loopback_loading["runtime"]["game"]["heartbeats_observed"],
+        True,
+    )
+    check(
+        "Spectron ARM64 loading replay rendered",
+        spectron_arm64_loopback_loading["runtime"]["process_reached_rendered_world"],
+        True,
+    )
+    check(
+        "Spectron ARM64 loading replay title state",
+        spectron_arm64_loopback_loading["runtime"]["screen"]["title_loading_artwork_present"],
+        False,
+    )
+    check(
+        "Spectron ARM64 loading replay reverse cleanup",
+        spectron_arm64_loopback_loading["runtime"]["reverse_ports_removed_after_test"],
+        True,
     )
 
     check(
@@ -10845,6 +10948,7 @@ def main():
         spectron_symbol_audit,
         spectron_connector_endpoints,
         spectron_loopback_patch_audit,
+        spectron_arm64_loopback_loading,
         tls_parser,
         tls_expiry,
         spectron_signature,
