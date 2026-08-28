@@ -845,6 +845,17 @@ This is the short handoff view. The full reasoning and command history are in
       `tools/generate_spectron_tgraalvar_property_residual_anchors.py`, and
       `artifacts/spectron_translation_checkpoint_20260828_v260.json`.
 
+63ae. The v261 IDA checkpoint translates the last unnamed callback in the
+      server and player property block, `TBodyPanel_get_bodycacheperplayer`.
+      Its normalized ARM64 shape matches the source, with only a register-detail
+      difference. The clean reopen has 11,696 functions and 743 remaining
+      default `sub_` names. The database SHA-256 is
+      `d2f88d291451b82578968bff85c7018fdba2d2c0a18ec256ac7b3368d73e77de`.
+      See
+      `artifacts/spectron_tbodypanel_bodycacheperplayer_manual_translation_anchor_20260828.json`,
+      `tools/generate_spectron_tbodypanel_bodycacheperplayer_anchor.py`, and
+      `artifacts/spectron_translation_checkpoint_20260828_v261.json`.
+
 64. Clean IDA review added six high-confidence network context anchors for
     connector-mode construction, HTTP download completion, CyaSSL setup,
     socket connect, game protocol reading, and low-level socket reading. The

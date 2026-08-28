@@ -419,6 +419,12 @@ def main():
     spectron_checkpoint_v260 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v260.json"
     )
+    spectron_tbodypanel_bodycacheperplayer_anchor = load_json(
+        "artifacts/spectron_tbodypanel_bodycacheperplayer_manual_translation_anchor_20260828.json"
+    )
+    spectron_checkpoint_v261 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v261.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -10030,6 +10036,106 @@ def main():
         4,
     )
     check(
+        "Spectron v261 TBodyPanel bodycacheperplayer artifact",
+        spectron_tbodypanel_bodycacheperplayer_anchor["artifact"],
+        "spectron_tbodypanel_bodycacheperplayer_manual_translation_anchor_20260828",
+    )
+    check(
+        "Spectron v261 TBodyPanel bodycacheperplayer network",
+        spectron_tbodypanel_bodycacheperplayer_anchor["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v261 TBodyPanel bodycacheperplayer anchor count",
+        spectron_tbodypanel_bodycacheperplayer_anchor["summary"]["anchor_count"],
+        1,
+    )
+    check(
+        "Spectron v261 TBodyPanel bodycacheperplayer registration row count",
+        spectron_tbodypanel_bodycacheperplayer_anchor["summary"]["registration_row_count"],
+        1,
+    )
+    check(
+        "Spectron v261 TBodyPanel bodycacheperplayer unique target count",
+        spectron_tbodypanel_bodycacheperplayer_anchor["summary"]["unique_target_count"],
+        1,
+    )
+    check(
+        "Spectron v261 TBodyPanel bodycacheperplayer high confidence",
+        spectron_tbodypanel_bodycacheperplayer_anchor["summary"]["high_confidence_count"],
+        1,
+    )
+    check(
+        "Spectron v261 TBodyPanel bodycacheperplayer target default count",
+        spectron_tbodypanel_bodycacheperplayer_anchor["summary"]["target_default_name_count"],
+        1,
+    )
+    check(
+        "Spectron v261 TBodyPanel bodycacheperplayer normalized shape count",
+        spectron_tbodypanel_bodycacheperplayer_anchor["summary"]["normalized_shape_exact_count"],
+        1,
+    )
+    check(
+        "Spectron v261 TBodyPanel bodycacheperplayer full metric count",
+        spectron_tbodypanel_bodycacheperplayer_anchor["summary"]["full_metric_exact_count"],
+        0,
+    )
+    check(
+        "Spectron v261 TBodyPanel bodycacheperplayer layout count",
+        spectron_tbodypanel_bodycacheperplayer_anchor["summary"]["layout_change_count"],
+        0,
+    )
+    check(
+        "Spectron v261 TBodyPanel bodycacheperplayer register-detail count",
+        spectron_tbodypanel_bodycacheperplayer_anchor["summary"]["register_detail_difference_count"],
+        1,
+    )
+    check(
+        "Spectron v261 TBodyPanel bodycacheperplayer getter count",
+        spectron_tbodypanel_bodycacheperplayer_anchor["summary"]["getter_count"],
+        1,
+    )
+    check(
+        "Spectron v261 TBodyPanel bodycacheperplayer setter count",
+        spectron_tbodypanel_bodycacheperplayer_anchor["summary"]["setter_count"],
+        0,
+    )
+    check(
+        "Spectron v261 bodycacheperplayer target",
+        spectron_tbodypanel_bodycacheperplayer_anchor["anchors"][0]["spectron_ea"],
+        "0x245e0c",
+    )
+    check(
+        "Spectron v261 checkpoint artifact",
+        spectron_checkpoint_v261["artifact"],
+        "spectron_translation_checkpoint_20260828_v261",
+    )
+    check(
+        "Spectron v261 checkpoint parent",
+        spectron_checkpoint_v261["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v260",
+    )
+    check(
+        "Spectron v261 checkpoint database hash",
+        spectron_checkpoint_v261["database"]["sha256"],
+        "d2f88d291451b82578968bff85c7018fdba2d2c0a18ec256ac7b3368d73e77de",
+    )
+    check(
+        "Spectron v261 checkpoint function count",
+        spectron_checkpoint_v261["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v261 checkpoint default sub count",
+        spectron_checkpoint_v261["database"]["default_sub_function_count"],
+        743,
+    )
+    check(
+        "Spectron v261 checkpoint anchor count",
+        spectron_checkpoint_v261["tbodypanel_bodycacheperplayer_anchor"]["verified_name_count"],
+        1,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -10166,6 +10272,7 @@ def main():
         spectron_guistretchctrl_property_anchors,
         spectron_guitexteditctrl_property_anchors,
         spectron_tgraalvar_property_residual_anchors,
+        spectron_tbodypanel_bodycacheperplayer_anchor,
         spectron_player_helper_anchors,
         spectron_input_window_anchors,
         spectron_visual_helper_anchors,
