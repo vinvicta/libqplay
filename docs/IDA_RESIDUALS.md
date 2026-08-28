@@ -49,8 +49,8 @@ active desktop IDA database remained locked and was not changed.
 ## Spectron FreeType continuation
 
 The source-side count above is preserved as its own historical inventory. It
-is not the current count for the stripped Spectron 2.2 target. The v299
-Spectron copy has 11,695 functions and 523 remaining default `sub_` names.
+is not the current count for the stripped Spectron 2.2 target. The v300
+Spectron copy has 11,695 functions and 502 remaining default `sub_` names.
 The v298 pass removed two names from the unresolved target queue by identifying
 the FreeType base helpers at target `0x25e304` and `0x260300` as
 `v18_destroy_size` and `v18_destroy_face`.
@@ -78,6 +78,20 @@ machine-readable record is
 All five names reopened with zero failures, and the v299 checkpoint and
 database hash are recorded in
 `artifacts/spectron_translation_checkpoint_20260828_v299.json`.
+
+The v300 pass removed 21 more defaults from the FreeType queue. Nineteen are
+the non-null slots in the target's `sfnt_interface` record at `0x37fb70`,
+paired with the original record at `0x36cda0`. They cover face setup and
+teardown, SFNT directory and table loading, kerning, and horizontal metrics.
+The other two are the `tt_name_entry_ascii_from_other` and
+`tt_name_entry_ascii_from_utf16` helpers called by `sfnt_load_face`. Thirteen
+pairs match the complete feature record and the remaining eight differ only
+in register allocation detail. All 21 match the normalized ARM64 shape.
+The machine-readable record is
+`artifacts/spectron_freetype_sfnt_interface_manual_translation_anchors_20260828.json`.
+All 21 names reopened with zero failures, and the v300 checkpoint and
+database hash are recorded in
+`artifacts/spectron_translation_checkpoint_20260828_v300.json`.
 
 ## CyaSSL role pass
 

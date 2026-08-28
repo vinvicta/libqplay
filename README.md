@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v299 Spectron database. It
-contains 11,695 functions and 523 remaining default `sub_` names. The v263
+The current documented translation frontier is the v300 Spectron database. It
+contains 11,695 functions and 502 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -174,6 +174,12 @@ accessor, and table-info callbacks installed in the target's service records.
 Four pairs have complete feature matches, and the remaining pair differs only
 in register allocation detail. The target now has 523 remaining default
 `sub_` names.
+The v300 revision adds 21 high-confidence FreeType SFNT labels. Nineteen are
+the still-default callbacks in the parallel `sfnt_interface` records, and two
+are the name-conversion helpers called by `sfnt_load_face`. Thirteen pairs
+match the complete recorded feature set, while the other eight differ only in
+register allocation detail. Every pair matches the normalized control-flow
+shape. The target now has 502 remaining default `sub_` names.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -242,6 +248,8 @@ The current v298 database is kept locally as
 `analysis/spectron_libqplay_translated_v298.i64`.
 The current v299 database is kept locally as
 `analysis/spectron_libqplay_translated_v299.i64`.
+The current v300 database is kept locally as
+`analysis/spectron_libqplay_translated_v300.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -610,6 +618,19 @@ allocation detail. The v299 checkpoint is
 11,695 functions and 523 remaining default names. Its database SHA-256 is
 `f6bcdeba610fbe47ba182477ccc74b5cbff727b17f9b0013395beb3902228367`.
 
+The v300 FreeType SFNT interface evidence is in
+`artifacts/spectron_freetype_sfnt_interface_manual_translation_anchors_20260828.json`.
+It translates the 19 non-null callbacks in the target's `sfnt_interface`
+record, including table-directory loading, face setup and teardown, the
+individual TrueType table loaders, kerning, and horizontal metrics. It also
+translates the two old name helpers used by `sfnt_load_face`. The original and
+target records are parallel at source `0x36cda0` and target `0x37fb70`, and
+the target's `load_any` slot at `+0x28` remains the v299 service translation.
+The v300 checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v300.json`; it records
+11,695 functions and 502 remaining default names. Its database SHA-256 is
+`d05ecd64d3430bfa54cb34120ab750a46f0d8a5dbad54180afd0da18b8e312b5`.
+
 The upstream reference is
 https://android.googlesource.com/platform/external/freetype/+/donut-release/src/base/ftobjs.c.
 
@@ -652,12 +673,13 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v296.json`, followed by
 `artifacts/spectron_translation_checkpoint_20260828_v297.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v298.json`, and
-`artifacts/spectron_translation_checkpoint_20260828_v299.json`. The reviewed
+`artifacts/spectron_translation_checkpoint_20260828_v299.json`, followed by
+`artifacts/spectron_translation_checkpoint_20260828_v300.json`. The reviewed
 legacy, Android, script-table, runtime, property, zlib, libjpeg, GIF, and
-FreeType labels through v299 were reopened and verified with zero failures.
+FreeType labels through v300 were reopened and verified with zero failures.
 That includes the v297 forward-DCT literal-pool boundary repair, the v298
-FreeType base cleanup aliases, and the v299 SFNT service aliases added in the
-latest passes.
+FreeType base cleanup aliases, the v299 SFNT service aliases, and the v300
+SFNT interface aliases added in the latest passes.
 These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or
 TLS service.

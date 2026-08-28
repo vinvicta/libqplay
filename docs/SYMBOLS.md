@@ -1019,6 +1019,68 @@ and [`ttload.c`](https://android.googlesource.com/platform/external/freetype/+/3
 checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v299.json`.
 
+## Current Spectron FreeType SFNT interface labels
+
+The v300 pass translated the 19 non-null callbacks in the target's parallel
+`sfnt_interface` record and the two internal name helpers reached by
+`sfnt_load_face`. The source record is at `0x36cda0`; the target record is at
+`0x37fb70`. The target `load_any` callback at offset `+0x28` was already
+translated in v299, so it is intentionally not repeated here.
+
+| 1.8 role | Source | SFNT slot or helper | Spectron target | Applied label | Match |
+| --- | ---: | --- | ---: | --- | --- |
+| `tt_face_goto_table` | `0x2565e8` | `sfnt_interface.goto_table` | `0x263a58` | `v18_tt_face_goto_table` | exact metrics |
+| `sfnt_init_face` | `0x257704` | `sfnt_interface.init_face` | `0x264b74` | `v18_sfnt_init_face` | normalized shape |
+| `sfnt_load_face` | `0x25a8e0` | `sfnt_interface.load_face` | `0x267d50` | `v18_sfnt_load_face` | normalized shape |
+| `sfnt_done_face` | `0x257254` | `sfnt_interface.done_face` | `0x2646c4` | `v18_sfnt_done_face` | exact metrics |
+| `tt_face_load_head` | `0x258204` | `sfnt_interface.load_head` | `0x265674` | `v18_tt_face_load_head` | normalized shape |
+| `tt_face_load_hhea` | `0x256d24` | `sfnt_interface.load_hhea` | `0x264194` | `v18_tt_face_load_hhea` | exact metrics |
+| `tt_face_load_cmap` | `0x258198` | `sfnt_interface.load_cmap` | `0x265608` | `v18_tt_face_load_cmap` | exact metrics |
+| `tt_face_load_maxp` | `0x257f64` | `sfnt_interface.load_maxp` | `0x2653d4` | `v18_tt_face_load_maxp` | exact metrics |
+| `tt_face_load_os2` | `0x256b7c` | `sfnt_interface.load_os2` | `0x263fec` | `v18_tt_face_load_os2` | normalized shape |
+| `tt_face_load_post` | `0x256b14` | `sfnt_interface.load_post` | `0x263f84` | `v18_tt_face_load_post` | normalized shape |
+| `tt_face_load_name` | `0x256960` | `sfnt_interface.load_name` | `0x263dd0` | `v18_tt_face_load_name` | normalized shape |
+| `tt_face_free_name` | `0x255fc0` | `sfnt_interface.free_name` | `0x263430` | `v18_tt_face_free_name` | exact metrics |
+| `tt_face_load_kern` | `0x257030` | `sfnt_interface.load_kern` | `0x2644a0` | `v18_tt_face_load_kern` | exact metrics |
+| `tt_face_load_gasp` | `0x256ef4` | `sfnt_interface.load_gasp` | `0x264364` | `v18_tt_face_load_gasp` | exact metrics |
+| `tt_face_load_pclt` | `0x2568fc` | `sfnt_interface.load_pclt` | `0x263d6c` | `v18_tt_face_load_pclt` | normalized shape |
+| `tt_face_get_kerning` | `0x254bb8` | `sfnt_interface.get_kerning` | `0x262028` | `v18_tt_face_get_kerning` | exact metrics |
+| `tt_face_load_font_dir` | `0x257c28` | `sfnt_interface.load_font_dir` | `0x265098` | `v18_tt_face_load_font_dir` | normalized shape |
+| `tt_face_load_hmtx` | `0x25687c` | `sfnt_interface.load_hmtx` | `0x263cec` | `v18_tt_face_load_hmtx` | exact metrics |
+| `tt_face_get_metrics` | `0x2566d8` | `sfnt_interface.get_metrics` | `0x263b48` | `v18_tt_face_get_metrics` | exact metrics |
+| `tt_name_entry_ascii_from_other` | `0x256060` | `sfnt_load_face` name helper | `0x2634d0` | `v18_tt_name_entry_ascii_from_other` | exact metrics |
+| `tt_name_entry_ascii_from_utf16` | `0x2563d0` | `sfnt_load_face` name helper | `0x263840` | `v18_tt_name_entry_ascii_from_utf16` | exact metrics |
+
+The table corrects an easy-to-make assignment mistake. Source `0x254bb8`
+does not implement `tt_face_lookup_table`; the source and target dispatch
+records place it in the `get_kerning` slot, and the body consumes a glyph pair
+and searches the loaded kern subtables. The table-directory lookup is
+`tt_face_goto_table` at source `0x2565e8` and target `0x263a58`.
+
+The source and target functions all have identical normalized feature records.
+Thirteen pairs also match the complete recorded metrics; eight differ only in
+the register-detail hash. The name helpers preserve the old FreeType roles:
+one copies non-Unicode name bytes and the other converts UTF-16BE records to
+printable ASCII. These are semantic aliases for the stripped build, not claims
+that the original static names survived in the 2.2 ELF.
+
+The source references are the Android FreeType
+[`sfnt.h`](https://android.googlesource.com/platform/external/freetype/+/75b4fbd0462ad4544ffc447213777d1f0d536c1a/include/freetype/internal/sfnt.h),
+[`sfdriver.c`](https://android.googlesource.com/platform/external/freetype/+/75b4fbd0462ad4544ffc447213777d1f0d536c1a/src/sfnt/sfdriver.c),
+[`ttload.c`](https://android.googlesource.com/platform/external/freetype/+/3053d1b9db55099918843889e4809ce97483ca9f/src/sfnt/ttload.c),
+the older [`sfobjs.c`](https://android.googlesource.com/platform/external/freetype/+/41371e1e39c8528eb0c4bc40683c736e6683e60c/src/sfnt/sfobjs.c),
+[`ttkern.c`](https://android.googlesource.com/platform/external/freetype/+/75b4fbd0462ad4544ffc447213777d1f0d536c1a/src/sfnt/ttkern.c),
+and [`ttmtx.c`](https://android.googlesource.com/platform/external/freetype/+/75b4fbd0462ad4544ffc447213777d1f0d536c1a/src/sfnt/ttmtx.c).
+The machine-readable evidence is
+`artifacts/spectron_freetype_sfnt_interface_manual_translation_anchors_20260828.json`,
+generated by `tools/generate_spectron_freetype_interface_anchors.py`. All 21
+labels reopened with zero failures. The v300 database contains 11,695
+functions and 502 remaining default `sub_` names. Its SHA-256 is
+`d05ecd64d3430bfa54cb34120ab750a46f0d8a5dbad54180afd0da18b8e312b5`.
+
+The checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v300.json`.
+
 ## Current Spectron libjpeg compressor preprocessing and downsampling labels
 
 The v295 pass translated ten retained routines from the compressor-side

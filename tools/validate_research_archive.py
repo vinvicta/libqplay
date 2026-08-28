@@ -662,6 +662,12 @@ def main():
     spectron_checkpoint_v299 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v299.json"
     )
+    spectron_freetype_sfnt_interface_anchors = load_json(
+        "artifacts/spectron_freetype_sfnt_interface_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v300 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v300.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -13867,6 +13873,140 @@ def main():
         5,
     )
     check(
+        "Spectron FreeType SFNT interface artifact",
+        spectron_freetype_sfnt_interface_anchors["artifact"],
+        "spectron_freetype_sfnt_interface_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron FreeType SFNT interface network",
+        spectron_freetype_sfnt_interface_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron FreeType SFNT interface anchor count",
+        spectron_freetype_sfnt_interface_anchors["summary"]["anchor_count"],
+        21,
+    )
+    check(
+        "Spectron FreeType SFNT interface high-confidence count",
+        spectron_freetype_sfnt_interface_anchors["summary"][
+            "high_confidence_count"
+        ],
+        21,
+    )
+    check(
+        "Spectron FreeType SFNT interface normalized count",
+        spectron_freetype_sfnt_interface_anchors["summary"][
+            "normalized_shape_exact_count"
+        ],
+        21,
+    )
+    check(
+        "Spectron FreeType SFNT interface full-match count",
+        spectron_freetype_sfnt_interface_anchors["summary"][
+            "full_metric_exact_count"
+        ],
+        13,
+    )
+    check(
+        "Spectron FreeType SFNT interface slot count",
+        spectron_freetype_sfnt_interface_anchors["summary"][
+            "interface_slot_count"
+        ],
+        19,
+    )
+    check(
+        "Spectron FreeType SFNT interface name-helper count",
+        spectron_freetype_sfnt_interface_anchors["summary"]["name_helper_count"],
+        2,
+    )
+    freetype_sfnt_interface_rows = {
+        row["spectron_ea"]: row
+        for row in spectron_freetype_sfnt_interface_anchors["anchors"]
+    }
+    freetype_sfnt_interface_expected = {
+        "0x263a58": ("v18_tt_face_goto_table", "sfnt_interface.goto_table", []),
+        "0x264b74": ("v18_sfnt_init_face", "sfnt_interface.init_face", ["register_detail_hash"]),
+        "0x267d50": ("v18_sfnt_load_face", "sfnt_interface.load_face", ["register_detail_hash"]),
+        "0x2646c4": ("v18_sfnt_done_face", "sfnt_interface.done_face", []),
+        "0x265674": ("v18_tt_face_load_head", "sfnt_interface.load_head", ["register_detail_hash"]),
+        "0x264194": ("v18_tt_face_load_hhea", "sfnt_interface.load_hhea", []),
+        "0x265608": ("v18_tt_face_load_cmap", "sfnt_interface.load_cmap", []),
+        "0x2653d4": ("v18_tt_face_load_maxp", "sfnt_interface.load_maxp", []),
+        "0x263fec": ("v18_tt_face_load_os2", "sfnt_interface.load_os2", ["register_detail_hash"]),
+        "0x263f84": ("v18_tt_face_load_post", "sfnt_interface.load_post", ["register_detail_hash"]),
+        "0x263dd0": ("v18_tt_face_load_name", "sfnt_interface.load_name", ["register_detail_hash"]),
+        "0x263430": ("v18_tt_face_free_name", "sfnt_interface.free_name", []),
+        "0x2644a0": ("v18_tt_face_load_kern", "sfnt_interface.load_kern", []),
+        "0x264364": ("v18_tt_face_load_gasp", "sfnt_interface.load_gasp", []),
+        "0x263d6c": ("v18_tt_face_load_pclt", "sfnt_interface.load_pclt", ["register_detail_hash"]),
+        "0x262028": ("v18_tt_face_get_kerning", "sfnt_interface.get_kerning", []),
+        "0x265098": ("v18_tt_face_load_font_dir", "sfnt_interface.load_font_dir", ["register_detail_hash"]),
+        "0x263cec": ("v18_tt_face_load_hmtx", "sfnt_interface.load_hmtx", []),
+        "0x263b48": ("v18_tt_face_get_metrics", "sfnt_interface.get_metrics", []),
+        "0x2634d0": ("v18_tt_name_entry_ascii_from_other", "sfnt_load_face name conversion helper", []),
+        "0x263840": ("v18_tt_name_entry_ascii_from_utf16", "sfnt_load_face name conversion helper", []),
+    }
+    check(
+        "Spectron FreeType SFNT interface target set",
+        set(freetype_sfnt_interface_rows),
+        set(freetype_sfnt_interface_expected),
+    )
+    for target_ea, (expected_name, expected_slot, expected_differences) in freetype_sfnt_interface_expected.items():
+        row = freetype_sfnt_interface_rows[target_ea]
+        check(
+            "Spectron FreeType SFNT interface name " + target_ea,
+            row["proposed_name"],
+            expected_name,
+        )
+        check(
+            "Spectron FreeType SFNT interface role " + target_ea,
+            row["interface_slot"],
+            expected_slot,
+        )
+        check(
+            "Spectron FreeType SFNT interface metrics " + target_ea,
+            row["metric_differences"],
+            expected_differences,
+        )
+    check(
+        "Spectron v300 checkpoint artifact",
+        spectron_checkpoint_v300["artifact"],
+        "spectron_translation_checkpoint_20260828_v300",
+    )
+    check(
+        "Spectron v300 checkpoint parent",
+        spectron_checkpoint_v300["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v299",
+    )
+    check(
+        "Spectron v300 checkpoint parent path",
+        spectron_checkpoint_v300["parent_checkpoint"]["path"],
+        "artifacts/spectron_translation_checkpoint_20260828_v299.json",
+    )
+    check(
+        "Spectron v300 checkpoint database hash",
+        spectron_checkpoint_v300["database"]["sha256"],
+        "d05ecd64d3430bfa54cb34120ab750a46f0d8a5dbad54180afd0da18b8e312b5",
+    )
+    check(
+        "Spectron v300 checkpoint function count",
+        spectron_checkpoint_v300["database"]["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v300 checkpoint default sub count",
+        spectron_checkpoint_v300["database"]["default_sub_function_count"],
+        502,
+    )
+    check(
+        "Spectron v300 checkpoint SFNT interface count",
+        spectron_checkpoint_v300["freetype_sfnt_interface_anchors"][
+            "verified_name_count"
+        ],
+        21,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -14221,6 +14361,8 @@ def main():
         spectron_checkpoint_v298,
         spectron_freetype_sfnt_service_anchors,
         spectron_checkpoint_v299,
+        spectron_freetype_sfnt_interface_anchors,
+        spectron_checkpoint_v300,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
