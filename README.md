@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v275 Spectron database. It
-contains 11,696 functions and 650 remaining default `sub_` names. The v263
+The current documented translation frontier is the v276 Spectron database. It
+contains 11,696 functions and 643 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -53,6 +53,10 @@ The v275 revision adds nine high-confidence libjpeg marker-reader labels.
 They are tied to the target marker-reader callback table and marker-loop call
 sites, with eight complete metric matches and one register-allocation-only
 difference.
+The v276 revision adds seven high-confidence libjpeg output-pipeline labels.
+They cover the two master-decompress output-pass callbacks and the five
+merged-upsampler start, wrapper, and conversion routines. All seven have
+complete source-target feature matches.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -73,6 +77,8 @@ The current v274 database is kept locally as
 `analysis/spectron_libqplay_translated_v274.i64`.
 The current v275 database is kept locally as
 `analysis/spectron_libqplay_translated_v275.i64`.
+The current v276 database is kept locally as
+`analysis/spectron_libqplay_translated_v276.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -182,6 +188,19 @@ functions instead of separate IDA function starts. The v275 checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v275.json`; it records
 the reopened database with 650 remaining default names.
 
+The v276 libjpeg output-pipeline evidence is in
+`artifacts/spectron_jpeg_master_merge_manual_translation_anchors_20260828.json`.
+It labels the master-decompress `prepare_for_output_pass` and
+`finish_output_pass` callbacks, then the merged-upsampler
+`start_pass_merged_upsample`, `merged_1v_upsample`, `h2v1_merged_upsample`,
+`h2v2_merged_upsample`, and `merged_2v_upsample` routines. The target
+initializer at `0x29cd30` installs the master callbacks. The initializer at
+`0x29d808` selects the one-row or two-row wrapper and its corresponding
+conversion method. All seven rows match the complete recorded ARM64 feature
+set. The v276 checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v276.json`; it records
+the reopened database with 643 remaining default names.
+
 The latest checkpoints are
 `artifacts/spectron_translation_checkpoint_20260828_v263_corrected.json` and
 `artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json`,
@@ -196,14 +215,15 @@ the corrected
 `artifacts/spectron_translation_checkpoint_20260828_v271.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v272.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v273.json`, and
-`artifacts/spectron_translation_checkpoint_20260828_v274.json`, and
-`artifacts/spectron_translation_checkpoint_20260828_v275.json`. All four
+`artifacts/spectron_translation_checkpoint_20260828_v274.json`,
+`artifacts/spectron_translation_checkpoint_20260828_v275.json`, and
+`artifacts/spectron_translation_checkpoint_20260828_v276.json`. All four
 newly reviewed legacy names, the six corrected target-only names, the
 package-signature label, the v269 TGraalVar labels, the v270 script-table
 labels, the nine v271 runtime callback labels, the two v271 property labels,
 the v272 zlib role label, the six v273 libjpeg callback labels, the four
 v274 libjpeg controller labels, and the nine v275 libjpeg marker-reader labels
-were
+and seven v276 libjpeg output-pipeline labels were
 reopened and verified with zero failures.
 These passes were
 static and offline. They did not modify the APK or contact a DNS, HTTP, or

@@ -518,6 +518,12 @@ def main():
     spectron_checkpoint_v275 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v275.json"
     )
+    spectron_jdmaster_jdmerge_anchors = load_json(
+        "artifacts/spectron_jpeg_master_merge_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v276 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v276.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -11675,6 +11681,90 @@ def main():
         9,
     )
     check(
+        "Spectron libjpeg jdmaster/jdmerge artifact",
+        spectron_jdmaster_jdmerge_anchors["artifact"],
+        "spectron_jpeg_master_merge_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron libjpeg jdmaster/jdmerge network",
+        spectron_jdmaster_jdmerge_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron libjpeg jdmaster/jdmerge anchor count",
+        spectron_jdmaster_jdmerge_anchors["summary"]["anchor_count"],
+        7,
+    )
+    check(
+        "Spectron libjpeg jdmaster/jdmerge unique target count",
+        spectron_jdmaster_jdmerge_anchors["summary"]["unique_target_count"],
+        7,
+    )
+    check(
+        "Spectron libjpeg jdmaster/jdmerge high-confidence count",
+        spectron_jdmaster_jdmerge_anchors["summary"]["high_confidence_count"],
+        7,
+    )
+    check(
+        "Spectron libjpeg jdmaster/jdmerge normalized count",
+        spectron_jdmaster_jdmerge_anchors["summary"]["normalized_shape_exact_count"],
+        7,
+    )
+    check(
+        "Spectron libjpeg jdmaster/jdmerge exact count",
+        spectron_jdmaster_jdmerge_anchors["summary"]["full_metric_exact_count"],
+        7,
+    )
+    jdmaster_jdmerge_rows = {
+        row["spectron_ea"]: row
+        for row in spectron_jdmaster_jdmerge_anchors["anchors"]
+    }
+    jdmaster_jdmerge_expected = {
+        "0x29c720": "v18_jpeg_prepare_for_output_pass",
+        "0x29c8e8": "v18_jpeg_finish_output_pass",
+        "0x29d350": "v18_jpeg_start_pass_merged_upsample",
+        "0x29d364": "v18_jpeg_merged_1v_upsample",
+        "0x29d3b4": "v18_jpeg_h2v1_merged_upsample",
+        "0x29d504": "v18_jpeg_h2v2_merged_upsample",
+        "0x29d704": "v18_jpeg_merged_2v_upsample",
+    }
+    for target_ea, expected_name in jdmaster_jdmerge_expected.items():
+        check(
+            "Spectron libjpeg jdmaster/jdmerge target " + target_ea,
+            jdmaster_jdmerge_rows[target_ea]["proposed_name"],
+            expected_name,
+        )
+    check(
+        "Spectron v276 checkpoint artifact",
+        spectron_checkpoint_v276["artifact"],
+        "spectron_translation_checkpoint_20260828_v276",
+    )
+    check(
+        "Spectron v276 checkpoint parent",
+        spectron_checkpoint_v276["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v275",
+    )
+    check(
+        "Spectron v276 checkpoint database hash",
+        spectron_checkpoint_v276["database"]["sha256"],
+        "787cdf2e8483cd7845dd29f6a488d1d746f10cfb38c43024623555bc4491f0eb",
+    )
+    check(
+        "Spectron v276 checkpoint function count",
+        spectron_checkpoint_v276["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v276 checkpoint default sub count",
+        spectron_checkpoint_v276["database"]["default_sub_function_count"],
+        643,
+    )
+    check(
+        "Spectron v276 checkpoint output-pipeline count",
+        spectron_checkpoint_v276["jdmaster_jdmerge_anchors"]["verified_name_count"],
+        7,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -11991,6 +12081,8 @@ def main():
         spectron_checkpoint_v274,
         spectron_jdmarker_anchors,
         spectron_checkpoint_v275,
+        spectron_jdmaster_jdmerge_anchors,
+        spectron_checkpoint_v276,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
