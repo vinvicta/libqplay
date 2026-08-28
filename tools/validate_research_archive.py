@@ -590,6 +590,12 @@ def main():
     spectron_checkpoint_v287 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v287.json"
     )
+    spectron_jdmainct_anchors = load_json(
+        "artifacts/spectron_jpeg_main_controller_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v288 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v288.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -12748,6 +12754,86 @@ def main():
         "Spectron v287 checkpoint jdhuff count",
         spectron_checkpoint_v287["jdhuff_anchors"]["verified_name_count"],
         2,
+    )
+    check(
+        "Spectron libjpeg jdmainct artifact",
+        spectron_jdmainct_anchors["artifact"],
+        "spectron_jpeg_main_controller_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron libjpeg jdmainct network",
+        spectron_jdmainct_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron libjpeg jdmainct anchor count",
+        spectron_jdmainct_anchors["summary"]["anchor_count"],
+        4,
+    )
+    check(
+        "Spectron libjpeg jdmainct unique target count",
+        spectron_jdmainct_anchors["summary"]["unique_target_count"],
+        4,
+    )
+    check(
+        "Spectron libjpeg jdmainct high-confidence count",
+        spectron_jdmainct_anchors["summary"]["high_confidence_count"],
+        4,
+    )
+    check(
+        "Spectron libjpeg jdmainct normalized count",
+        spectron_jdmainct_anchors["summary"]["normalized_shape_exact_count"],
+        4,
+    )
+    check(
+        "Spectron libjpeg jdmainct exact count",
+        spectron_jdmainct_anchors["summary"]["full_metric_exact_count"],
+        3,
+    )
+    jdmainct_rows = {
+        row["spectron_ea"]: row for row in spectron_jdmainct_anchors["anchors"]
+    }
+    jdmainct_expected = {
+        "0x2ad108": "v18_jpeg_process_data_simple_main",
+        "0x2ad1b0": "v18_jpeg_process_data_context_main",
+        "0x2ad530": "v18_jpeg_process_data_crank_post",
+        "0x2ad568": "v18_jpeg_start_pass_main",
+    }
+    for target_ea, expected_name in jdmainct_expected.items():
+        check(
+            "Spectron libjpeg jdmainct target " + target_ea,
+            jdmainct_rows[target_ea]["proposed_name"],
+            expected_name,
+        )
+    check(
+        "Spectron v288 checkpoint artifact",
+        spectron_checkpoint_v288["artifact"],
+        "spectron_translation_checkpoint_20260828_v288",
+    )
+    check(
+        "Spectron v288 checkpoint parent",
+        spectron_checkpoint_v288["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v287",
+    )
+    check(
+        "Spectron v288 checkpoint database hash",
+        spectron_checkpoint_v288["database"]["sha256"],
+        "99d386649d7356bf021dfd87e8e153b29e24a52f14b83504d5b7b28956c68065",
+    )
+    check(
+        "Spectron v288 checkpoint function count",
+        spectron_checkpoint_v288["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v288 checkpoint default sub count",
+        spectron_checkpoint_v288["database"]["default_sub_function_count"],
+        575,
+    )
+    check(
+        "Spectron v288 checkpoint jdmainct count",
+        spectron_checkpoint_v288["jdmainct_anchors"]["verified_name_count"],
+        4,
     )
     check(
         "Spectron manual artifact",
