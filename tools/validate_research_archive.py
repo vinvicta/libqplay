@@ -43,6 +43,9 @@ def main():
         "artifacts/arm64_reproducible_builder_validation_20260826.json"
     )
     elf_symbol_audit = load_json("artifacts/elf_symbol_table_audit_20260826.json")
+    spectron_symbol_audit = load_json(
+        "artifacts/spectron_symbol_table_audit_20260827.json"
+    )
     tls_parser = load_json("artifacts/connector_tls_parser_analysis_20260826.json")
     tls_expiry = load_json("artifacts/connector_tls_expiry_control_20260826.json")
     native_verified = load_json(
@@ -768,6 +771,64 @@ def main():
         "ELF symbol audit alias failures",
         elf_symbol_audit["translated_alias_inventory"]["rename_failures"],
         0,
+    )
+
+    check(
+        "Spectron dynamic-symbol audit artifact",
+        spectron_symbol_audit["artifact"],
+        "spectron_symbol_table_audit_20260827",
+    )
+    check("Spectron dynamic-symbol audit network", spectron_symbol_audit["network_contacted"], False)
+    check(
+        "Spectron dynamic-symbol audit original hash",
+        spectron_symbol_audit["original"]["input"]["sha256"],
+        "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    )
+    check(
+        "Spectron dynamic-symbol audit target hash",
+        spectron_symbol_audit["spectron"]["input"]["sha256"],
+        "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    )
+    target_table = spectron_symbol_audit["spectron"]["dynamic_symbol_table"]
+    check("Spectron dynamic table entries", target_table["table_entries"], 6773)
+    check("Spectron dynamic named entries", target_table["named_entries"], 6770)
+    check("Spectron dynamic defined entries", target_table["defined_entries"], 6602)
+    check(
+        "Spectron dynamic section-defined entries",
+        target_table["section_defined_entries"],
+        6595,
+    )
+    check(
+        "Spectron dynamic section-defined functions",
+        target_table["section_defined_type_counts"]["FUNC"],
+        5782,
+    )
+    target_sections = spectron_symbol_audit["spectron"]["sections"]
+    check("Spectron dynamic audit has dynsym", target_sections["selected"][".dynsym"] is not None, True)
+    check("Spectron dynamic audit has dynstr", target_sections["selected"][".dynstr"] is not None, True)
+    check("Spectron dynamic audit no symtab", target_sections["symtab_present"], False)
+    check("Spectron dynamic audit no static strtab", target_sections["static_string_table_present"], False)
+    check("Spectron dynamic audit no debug", target_sections["debug_sections_present"], False)
+    check("Spectron dynamic audit no debuglink", target_sections["gnu_debuglink_present"], False)
+    check(
+        "Spectron dynamic JNI family",
+        spectron_symbol_audit["spectron"]["export_families"]["jni"]["count"],
+        28,
+    )
+    check(
+        "Spectron dynamic CyaInt family",
+        spectron_symbol_audit["spectron"]["export_families"]["cyassl_or_cyaint"]["function_count"],
+        256,
+    )
+    check(
+        "Spectron dynamic exact-name overlap",
+        spectron_symbol_audit["exact_name_overlap"]["shared_name_count"],
+        1036,
+    )
+    check(
+        "Spectron dynamic complete named rows",
+        len(spectron_symbol_audit["spectron"]["named_symbols"]),
+        6770,
     )
 
     check(
@@ -5506,6 +5567,7 @@ def main():
         arm64_native_stock,
         arm64_builder,
         elf_symbol_audit,
+        spectron_symbol_audit,
         tls_parser,
         tls_expiry,
         spectron_signature,

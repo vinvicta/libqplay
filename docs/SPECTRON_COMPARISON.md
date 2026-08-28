@@ -167,6 +167,48 @@ address or source-name translation for the remaining original `sub_` entries.
 The exact counts and the single obfuscated match are recorded in
 `artifacts/spectron_function_signature_match.json`.
 
+## Dynamic exports in the stripped 2.2 library
+
+The word "stripped" needs one qualification for this APK. The Spectron
+library has no `.symtab`, no `.strtab`, no DWARF sections, and no
+`.gnu_debuglink`. Those are the tables that would normally carry static
+source names and compiler debug information. The dynamic tables `.dynsym` and
+`.dynstr` are still present and contain a substantial export inventory.
+
+The offline parser counts 6,773 dynamic entries in Spectron, of which 6,770
+have names. There are 6,602 non-undefined entries, 6,595 entries assigned to
+ordinary sections, and 5,782 section-defined `FUNC` entries. The equivalent
+1.8 library has 6,674 dynamic entries, 6,671 named entries, and 5,709
+section-defined functions. The complete row-level audit is in
+`artifacts/spectron_symbol_table_audit_20260827.json`.
+
+The retained names split into two useful groups. The application C++ exports
+are mostly obfuscated names such as `XJLBgarMnA` and `C8THgaTQxF`, so the
+dynamic table alone cannot restore the old class and method names. The TLS
+implementation, by contrast, still uses a recognizable `CyaInt` namespace.
+Spectron exports 256 section-defined functions in that CyaInt or CyaSSL
+family, along with 28 named JNI entry points. The target application
+connection helper is:
+
+```text
+_ZN10XJLBgarMnA7connectERK10C8THgaTQxFi
+```
+
+at `0x20ad98`, size 596. The TLS anchors include `CyaSSL_connect` at
+`0x2d2bcc`, `ValidateDate` at `0x2c2940`,
+`CyaSSL_check_domain_name` at `0x2d3358`, and
+`CyaSSL_CTX_load_verify_buffer` at `0x2d35d8`. These addresses are relative
+to the target library image and must not be copied into the 1.8 database.
+
+There are 1,036 exact dynamic-name matches between the two libraries. That
+number is useful as a shared-runtime baseline, but it does not mean that the
+obfuscated C++ names are equivalent. The new artifact stores every named
+dynamic row for both builds, which lets later work select a raw export first,
+then attach a reviewed `v18_` semantic alias only when the function body and
+call context support it. The audit is offline and contacted no endpoint.
+
+The generator is `tools/generate_spectron_symbol_table_audit.py`.
+
 ## Cross-build semantic translation
 
 The byte-identical test is intentionally strict. It is useful for ruling out
