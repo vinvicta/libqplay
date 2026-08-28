@@ -1624,6 +1624,16 @@ This is the short handoff view. The full reasoning and command history are in
     `tools/generate_spectron_gui_ml_text_residual_anchors.py`, and
     `artifacts/spectron_translation_checkpoint_20260826.json`.
 
+278. The v219 IDA pass resolved 30 residual GUI text-list property accessors.
+    The source and target property tables preserve the same order, and IDA
+    pseudocode confirms the same byte, integer, or pointer-presence operation
+    for each row. All 30 rows match the normalized and full feature metrics,
+    and all 30 names reopened successfully with zero failures. The v219 copy
+    has 11,694 functions and 1,135 remaining default `sub_` names. See
+    `artifacts/spectron_gui_text_list_entry_property_manual_translation_anchors_20260828.json`,
+    `tools/generate_spectron_gui_text_list_entry_property_anchors.py`, and
+    `/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v219.i64`.
+
 267. The next IDA pass resolved eight small `THTMLPage` methods. They cover
     font-pointer cleanup, dirty and word-wrap state, parse tags, selection,
     URL and line initialization, and tab-stop replacement. The Spectron

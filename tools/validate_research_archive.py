@@ -65,6 +65,9 @@ def main():
     spectron_checkpoint = load_json(
         "artifacts/spectron_translation_checkpoint_20260826.json"
     )
+    spectron_checkpoint_v219 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828.json"
+    )
     spectron_manual = load_json(
         "artifacts/spectron_manual_translation_anchors_20260826.json"
     )
@@ -166,6 +169,9 @@ def main():
     )
     spectron_gui_ml_text_residual_anchors = load_json(
         "artifacts/spectron_gui_ml_text_residual_manual_translation_anchors_20260827.json"
+    )
+    spectron_gui_text_list_entry_property_anchors = load_json(
+        "artifacts/spectron_gui_text_list_entry_property_manual_translation_anchors_20260828.json"
     )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
@@ -2578,6 +2584,55 @@ def main():
         "Spectron GuiMLTextCtrl property destructor target",
         gui_ml_by_name["GuiMLTextCtrlProperties_GuiMLTextCtrlProperties__2"]["spectron_ea"],
         "0x1c4724",
+    )
+    check(
+        "Spectron GUI text-list property artifact",
+        spectron_gui_text_list_entry_property_anchors["artifact"],
+        "spectron_gui_text_list_entry_property_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron GUI text-list property network",
+        spectron_gui_text_list_entry_property_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron GUI text-list property total",
+        spectron_gui_text_list_entry_property_anchors["summary"]["anchor_count"],
+        30,
+    )
+    check(
+        "Spectron GUI text-list property high confidence",
+        spectron_gui_text_list_entry_property_anchors["summary"]["high_confidence_count"],
+        30,
+    )
+    check(
+        "Spectron GUI text-list property exact-shape count",
+        spectron_gui_text_list_entry_property_anchors["summary"]["normalized_shape_exact_count"],
+        30,
+    )
+    check(
+        "Spectron GUI text-list property full-metric count",
+        spectron_gui_text_list_entry_property_anchors["summary"]["full_metric_exact_count"],
+        30,
+    )
+    check(
+        "Spectron GUI text-list property default targets",
+        spectron_gui_text_list_entry_property_anchors["summary"]["target_default_name_count"],
+        30,
+    )
+    gui_text_list_property_by_name = {
+        row["original_name"]: row
+        for row in spectron_gui_text_list_entry_property_anchors["anchors"]
+    }
+    check(
+        "Spectron GUI text-list active getter target",
+        gui_text_list_property_by_name["GuiTextListEntry_get_active"]["spectron_ea"],
+        "0x1e05c8",
+    )
+    check(
+        "Spectron GUI text-list sort-column getter target",
+        gui_text_list_property_by_name["GuiTextListCtrl_get_sortcolumn"]["spectron_ea"],
+        "0x1e06ec",
     )
     check(
         "Spectron TString artifact",
@@ -5638,6 +5693,31 @@ def main():
     check("Spectron checkpoint server-object lifecycle anchor count", spectron_checkpoint["server_object_lifecycle_anchors"]["verified_name_count"], 49)
     check("Spectron checkpoint GuiMLTextCtrl residual anchor count", spectron_checkpoint["gui_ml_text_residual_anchors"]["verified_name_count"], 39)
     check("Spectron checkpoint database hash", spectron_checkpoint["database"]["sha256"], "d82c297a781db70c75d56b9dad679db224127653c55a5c312542ab698e5b53b5")
+    check(
+        "Spectron v219 checkpoint artifact",
+        spectron_checkpoint_v219["artifact"],
+        "spectron_translation_checkpoint_20260828",
+    )
+    check(
+        "Spectron v219 checkpoint parent",
+        spectron_checkpoint_v219["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260826",
+    )
+    check(
+        "Spectron v219 checkpoint database hash",
+        spectron_checkpoint_v219["database"]["sha256"],
+        "bf219383ca3b9d99ca0fc8133b61c8204263458dc916f3f0cf846e41f9383097",
+    )
+    check(
+        "Spectron v219 checkpoint default sub count",
+        spectron_checkpoint_v219["database"]["default_sub_function_count"],
+        1135,
+    )
+    check(
+        "Spectron v219 checkpoint GUI property count",
+        spectron_checkpoint_v219["gui_text_list_entry_property_anchors"]["verified_name_count"],
+        30,
+    )
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
