@@ -668,6 +668,12 @@ def main():
     spectron_checkpoint_v300 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v300.json"
     )
+    spectron_freetype_smooth_anchors = load_json(
+        "artifacts/spectron_freetype_smooth_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v301 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v301.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -14007,6 +14013,182 @@ def main():
         21,
     )
     check(
+        "Spectron FreeType smooth artifact",
+        spectron_freetype_smooth_anchors["artifact"],
+        "spectron_freetype_smooth_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron FreeType smooth network",
+        spectron_freetype_smooth_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron FreeType smooth anchor count",
+        spectron_freetype_smooth_anchors["summary"]["anchor_count"],
+        12,
+    )
+    check(
+        "Spectron FreeType smooth high-confidence count",
+        spectron_freetype_smooth_anchors["summary"]["high_confidence_count"],
+        12,
+    )
+    check(
+        "Spectron FreeType smooth normalized count",
+        spectron_freetype_smooth_anchors["summary"][
+            "normalized_shape_exact_count"
+        ],
+        12,
+    )
+    check(
+        "Spectron FreeType smooth full-match count",
+        spectron_freetype_smooth_anchors["summary"]["full_metric_exact_count"],
+        10,
+    )
+    check(
+        "Spectron FreeType smooth callback-table count",
+        spectron_freetype_smooth_anchors["summary"][
+            "callback_table_anchor_count"
+        ],
+        11,
+    )
+    check(
+        "Spectron FreeType smooth cmap-builder count",
+        spectron_freetype_smooth_anchors["summary"][
+            "cmap_builder_anchor_count"
+        ],
+        1,
+    )
+    freetype_smooth_rows = {
+        row["spectron_ea"]: row
+        for row in spectron_freetype_smooth_anchors["anchors"]
+    }
+    freetype_smooth_expected = {
+        "0x268a64": (
+            "v18_ft_smooth_init",
+            "smooth renderer module initializer",
+            [],
+        ),
+        "0x268a9c": (
+            "v18_ft_smooth_set_mode",
+            "smooth renderer mode callback",
+            [],
+        ),
+        "0x268ac4": (
+            "v18_gray_raster_done",
+            "gray raster destructor",
+            [],
+        ),
+        "0x268bdc": (
+            "v18_gray_raster_new",
+            "gray raster constructor",
+            [],
+        ),
+        "0x268c24": (
+            "v18_ft_smooth_get_cbox",
+            "smooth renderer control-box callback",
+            [],
+        ),
+        "0x268c4c": (
+            "v18_ft_smooth_render_lcd_v",
+            "vertical LCD smooth renderer callback",
+            [],
+        ),
+        "0x268f00": (
+            "v18_gray_raster_reset",
+            "gray raster pool reset callback",
+            [],
+        ),
+        "0x268f5c": (
+            "v18_ft_smooth_transform",
+            "smooth renderer transform callback",
+            [],
+        ),
+        "0x269ce8": (
+            "v18_gray_raster_render",
+            "gray raster render callback",
+            ["register_detail_hash"],
+        ),
+        "0x269ee8": (
+            "v18_ft_smooth_render",
+            "normal smooth renderer callback",
+            [],
+        ),
+        "0x26a128": (
+            "v18_ft_smooth_render_lcd",
+            "horizontal LCD smooth renderer callback",
+            [],
+        ),
+        "0x264828": (
+            "v18_tt_face_build_cmaps",
+            "TrueType cmap builder",
+            ["register_detail_hash"],
+        ),
+    }
+    check(
+        "Spectron FreeType smooth target set",
+        set(freetype_smooth_rows),
+        set(freetype_smooth_expected),
+    )
+    for target_ea, (expected_name, expected_role, expected_differences) in freetype_smooth_expected.items():
+        row = freetype_smooth_rows[target_ea]
+        check(
+            "Spectron FreeType smooth name " + target_ea,
+            row["proposed_name"],
+            expected_name,
+        )
+        check(
+            "Spectron FreeType smooth role " + target_ea,
+            row["source_role"],
+            expected_role,
+        )
+        check(
+            "Spectron FreeType smooth metrics " + target_ea,
+            row["metric_differences"],
+            expected_differences,
+        )
+        check(
+            "Spectron FreeType smooth normalized " + target_ea,
+            row["normalized_shape_equal"],
+            True,
+        )
+    check(
+        "Spectron v301 checkpoint artifact",
+        spectron_checkpoint_v301["artifact"],
+        "spectron_translation_checkpoint_20260828_v301",
+    )
+    check(
+        "Spectron v301 checkpoint parent",
+        spectron_checkpoint_v301["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v300",
+    )
+    check(
+        "Spectron v301 checkpoint parent path",
+        spectron_checkpoint_v301["parent_checkpoint"]["path"],
+        "artifacts/spectron_translation_checkpoint_20260828_v300.json",
+    )
+    check(
+        "Spectron v301 checkpoint database hash",
+        spectron_checkpoint_v301["database"]["sha256"],
+        "385ff0bf22b942386ac6857321529201857ac190668dca6c7e673107be8350ca",
+    )
+    check(
+        "Spectron v301 checkpoint function count",
+        spectron_checkpoint_v301["database"]["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v301 checkpoint default sub count",
+        spectron_checkpoint_v301["database"]["default_sub_function_count"],
+        490,
+    )
+    check(
+        "Spectron v301 checkpoint FreeType smooth count",
+        spectron_checkpoint_v301["freetype_smooth_anchors"][
+            "verified_name_count"
+        ],
+        12,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -14363,6 +14545,8 @@ def main():
         spectron_checkpoint_v299,
         spectron_freetype_sfnt_interface_anchors,
         spectron_checkpoint_v300,
+        spectron_freetype_smooth_anchors,
+        spectron_checkpoint_v301,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

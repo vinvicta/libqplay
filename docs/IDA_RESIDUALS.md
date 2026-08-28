@@ -49,8 +49,8 @@ active desktop IDA database remained locked and was not changed.
 ## Spectron FreeType continuation
 
 The source-side count above is preserved as its own historical inventory. It
-is not the current count for the stripped Spectron 2.2 target. The v300
-Spectron copy has 11,695 functions and 502 remaining default `sub_` names.
+is not the current count for the stripped Spectron 2.2 target. The v301
+Spectron copy has 11,695 functions and 490 remaining default `sub_` names.
 The v298 pass removed two names from the unresolved target queue by identifying
 the FreeType base helpers at target `0x25e304` and `0x260300` as
 `v18_destroy_size` and `v18_destroy_face`.
@@ -92,6 +92,20 @@ The machine-readable record is
 All 21 names reopened with zero failures, and the v300 checkpoint and
 database hash are recorded in
 `artifacts/spectron_translation_checkpoint_20260828_v300.json`.
+
+The v301 pass removes 12 more defaults from the FreeType queue. Eleven are
+callback targets in the smooth renderer and gray raster records. The source
+renderer records at `0x36d1c8`, `0x36d240`, and `0x36d2b8` line up with target
+records at `0x37ff98`, `0x380010`, and `0x380088`, while the source and target
+gray raster records are at `0x35e518` and `0x371298`. The twelfth label is
+`tt_face_build_cmaps`, the cmap-construction helper called during SFNT face
+loading. Ten pairs match complete feature metrics, and the other two differ
+only in register allocation detail. All 12 match normalized ARM64 shape.
+The machine-readable record is
+`artifacts/spectron_freetype_smooth_manual_translation_anchors_20260828.json`.
+All 12 names reopened with zero failures, and the v301 checkpoint and
+database hash are recorded in
+`artifacts/spectron_translation_checkpoint_20260828_v301.json`.
 
 ## CyaSSL role pass
 
@@ -259,8 +273,8 @@ for the 421 residual entries.
 There are no remaining application, engine, CyaSSL, zlib, bzip2, minizip,
 YAJL, GPC edge-table, or LibTomCrypt DES roles in the residual queue. The 28
 application roles, eleven earlier CyaSSL roles, and 27 new static-library
-roles have evidence-backed aliases in the latest persisted copy. The 421
-remaining defaults are FreeType or JPEG internals, three still-uncertain GPC
+roles have evidence-backed aliases in the latest persisted copy. The profile's
+421 residual entries are FreeType or JPEG internals, three still-uncertain GPC
 helpers, compiler-generated lifecycle code, cleanup thunks, or the PLT
 resolver. Assigning names such as `jpeg_internal_17` would make the IDA view
 look fuller but would not be a translation of a source symbol. They remain
