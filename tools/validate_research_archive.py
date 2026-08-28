@@ -443,6 +443,18 @@ def main():
     spectron_checkpoint_v264_corrected = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v264_corrected.json"
     )
+    spectron_android_legacy_anchors = load_json(
+        "artifacts/spectron_android_legacy_manual_translation_anchors_20260828.json"
+    )
+    spectron_android_security_target_only_labels = load_json(
+        "artifacts/spectron_android_security_target_only_labels_20260828.json"
+    )
+    spectron_checkpoint_v265 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v265.json"
+    )
+    spectron_checkpoint_v266 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v266.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -10464,6 +10476,183 @@ def main():
         22,
     )
     check(
+        "Spectron Android legacy anchor artifact",
+        spectron_android_legacy_anchors["artifact"],
+        "spectron_android_legacy_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron Android legacy anchor network",
+        spectron_android_legacy_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron Android legacy anchor count",
+        spectron_android_legacy_anchors["summary"]["anchor_count"],
+        4,
+    )
+    check(
+        "Spectron Android legacy unique target count",
+        spectron_android_legacy_anchors["summary"]["unique_target_count"],
+        4,
+    )
+    check(
+        "Spectron Android legacy high-confidence count",
+        spectron_android_legacy_anchors["summary"]["high_confidence_count"],
+        4,
+    )
+    check(
+        "Spectron Android legacy target default count",
+        spectron_android_legacy_anchors["summary"]["target_default_name_count"],
+        3,
+    )
+    check(
+        "Spectron Android legacy normalized exact count",
+        spectron_android_legacy_anchors["summary"]["normalized_shape_exact_count"],
+        0,
+    )
+    check(
+        "Spectron Android legacy full metric exact count",
+        spectron_android_legacy_anchors["summary"]["full_metric_exact_count"],
+        0,
+    )
+    check(
+        "Spectron Android legacy layout change count",
+        spectron_android_legacy_anchors["summary"]["layout_change_count"],
+        4,
+    )
+    check(
+        "Spectron Android legacy register-detail count",
+        spectron_android_legacy_anchors["summary"]["register_detail_difference_count"],
+        4,
+    )
+    android_legacy_rows = {
+        row["original_name"]: row for row in spectron_android_legacy_anchors["anchors"]
+    }
+    check(
+        "Spectron TapJoy secret target",
+        android_legacy_rows["MainAndroid_script_settapjoysecret"]["spectron_ea"],
+        "0x24a240",
+    )
+    check(
+        "Spectron TapJoy application ID target",
+        android_legacy_rows["MainAndroid_script_settapjoyapplicationid"]["spectron_ea"],
+        "0x24a254",
+    )
+    check(
+        "Spectron TapJoy connector target",
+        android_legacy_rows["JNI_connectToTapJoyService"]["spectron_ea"],
+        "0x24c7e4",
+    )
+    check(
+        "Spectron Android ID target",
+        android_legacy_rows["androidGetID_void"]["spectron_ea"],
+        "0x2502f4",
+    )
+    check(
+        "Spectron v265 checkpoint artifact",
+        spectron_checkpoint_v265["artifact"],
+        "spectron_translation_checkpoint_20260828_v265",
+    )
+    check(
+        "Spectron v265 checkpoint parent",
+        spectron_checkpoint_v265["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v264_corrected",
+    )
+    check(
+        "Spectron v265 checkpoint database hash",
+        spectron_checkpoint_v265["database"]["sha256"],
+        "89eafac9cb7b6cba867fa6e39c0fd6e6814a0b45b586e5d75238b2502e566e61",
+    )
+    check(
+        "Spectron v265 checkpoint function count",
+        spectron_checkpoint_v265["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v265 checkpoint default sub count",
+        spectron_checkpoint_v265["database"]["default_sub_function_count"],
+        709,
+    )
+    check(
+        "Spectron v265 checkpoint anchor count",
+        spectron_checkpoint_v265["android_legacy_anchors"]["verified_name_count"],
+        4,
+    )
+    check(
+        "Spectron Android security target-only artifact",
+        spectron_android_security_target_only_labels["artifact"],
+        "spectron_android_security_target_only_labels_20260828",
+    )
+    check(
+        "Spectron Android security target-only network",
+        spectron_android_security_target_only_labels["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron Android security target-only label count",
+        spectron_android_security_target_only_labels["summary"]["label_count"],
+        5,
+    )
+    check(
+        "Spectron Android security target-only high-confidence count",
+        spectron_android_security_target_only_labels["summary"]["high_confidence_count"],
+        5,
+    )
+    check(
+        "Spectron Android security target-only default count",
+        spectron_android_security_target_only_labels["summary"]["target_default_name_count"],
+        5,
+    )
+    check(
+        "Spectron Android security target-only source counterpart count",
+        spectron_android_security_target_only_labels["summary"]["source_counterpart_count"],
+        0,
+    )
+    android_security_rows = {
+        row["target_ea"]: row
+        for row in spectron_android_security_target_only_labels["labels"]
+    }
+    check(
+        "Spectron getandroidabi target-only label",
+        android_security_rows["0x24a1d8"]["proposed_name"],
+        "spectron_getandroidabi",
+    )
+    check(
+        "Spectron Frida sleep-loop target-only label",
+        android_security_rows["0x24a2ac"]["proposed_name"],
+        "spectron_frida_detection_sleep_loop",
+    )
+    check(
+        "Spectron v266 checkpoint artifact",
+        spectron_checkpoint_v266["artifact"],
+        "spectron_translation_checkpoint_20260828_v266",
+    )
+    check(
+        "Spectron v266 checkpoint parent",
+        spectron_checkpoint_v266["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v265",
+    )
+    check(
+        "Spectron v266 checkpoint database hash",
+        spectron_checkpoint_v266["database"]["sha256"],
+        "1d9a96fb4db2f9ee1d6353ca2ea94deb30ae5e03085c2bf8ca1286a89f99616f",
+    )
+    check(
+        "Spectron v266 checkpoint function count",
+        spectron_checkpoint_v266["database"]["function_count"],
+        11696,
+    )
+    check(
+        "Spectron v266 checkpoint default sub count",
+        spectron_checkpoint_v266["database"]["default_sub_function_count"],
+        704,
+    )
+    check(
+        "Spectron v266 checkpoint label count",
+        spectron_checkpoint_v266["android_security_target_only_labels"]["verified_name_count"],
+        5,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -10755,6 +10944,10 @@ def main():
         spectron_android_bridge_target_only_labels,
         spectron_checkpoint_v263_corrected,
         spectron_checkpoint_v264_corrected,
+        spectron_android_legacy_anchors,
+        spectron_android_security_target_only_labels,
+        spectron_checkpoint_v265,
+        spectron_checkpoint_v266,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
