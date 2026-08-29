@@ -319,6 +319,66 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v324 TScript runtime comparison
+
+The v324 pass follows the class-local method order into `TScriptFunction`,
+`TScript`, and `TScriptEnvironment`. The target has stripped the original
+debug names, but the paired Hex-Rays bodies retain the same responsibilities.
+
+| Source role | Spectron address | Applied alias | Match class |
+| --- | ---: | --- | --- |
+| TScriptFunction constructor | `0x21b490` | `v18_TScriptFunction_TScriptFunction_TScript_TString_const_int_int` | layout change |
+| add free call-stack entry | `0x21b5f8` | `v18_TScriptFunction_addToFreeCallStackEntries_TCallStackEntry` | exact metrics |
+| clear call-stack entries | `0x21b644` | `v18_TScriptFunction_clearCallStackEntries_void` | exact metrics |
+| TScriptFunction destructor | `0x21b6c0` | `v18_TScriptFunction_TScriptFunction` | exact metrics |
+| deleting destructor | `0x21b708` | `v18_TScriptFunction_TScriptFunction__2` | layout change |
+| TScript constructor | `0x21b728` | `v18_TScript_TScript_TString_const` | layout change |
+| caught-event registration | `0x21bd1c` | `v18_TScript_addCatchedEvent_TString_const_TString_const_int` | layout change |
+| function lookup | `0x21c0dc` | `v18_TScript_getFunction_TString_const` | layout change |
+| event-function lookup | `0x21c460` | `v18_TScript_getEventFunctions_TList_TString_const` | layout change |
+| self event catchers | `0x21c5dc` | `v18_TScript_installSelfEventCatchers_TGraalVar` | layout change |
+| inherited event catchers | `0x21c758` | `v18_TScript_installEventCatchers_TGraalVar` | layout change |
+| profiler accumulation | `0x21ca08` | `v18_TScript_addFunctionProfilerTime_TString_const_double_double` | layout change |
+| bytecode optimization | `0x21cc10` | `v18_TScript_optimizeByteCode_void` | layout change |
+| encrypted script loading | `0x21db68` | `v18_TScript_loadScriptEncrypted_int_TString_const_uint` | layout change |
+| script request check | `0x21dde0` | `v18_TScript_checkRequestScript_int_TString_const_uint` | layout change |
+| static runtime variables | `0x21dff8` | `v18_TScript_initStaticVars_void` | layout change |
+| static script variables | `0x21e028` | `v18_TScript_initStaticScriptVars_void` | layout change |
+| environment property list | `0x21e618` | `v18_TScriptEnvironment_getPropertyList_TString_const` | layout change |
+| temporary variable | `0x21e848` | `v18_TScriptEnvironment_makeTempVar_void` | layout change |
+| array variable | `0x21e8bc` | `v18_TScriptEnvironment_makeArrayVar_bool` | layout change |
+| string-list to variable | `0x21e9ec` | `v18_TScriptEnvironment_makeVarFromStringList_TStringList_const_bool` | layout change |
+| comma text to variable | `0x21eaa0` | `v18_TScriptEnvironment_makeVarFromCommaText_TString_const_bool` | layout change |
+| variable to string-list | `0x21ec14` | `v18_TScriptEnvironment_makeStringListFromVar_TGraalVar` | layout change |
+| environment static setup | `0x21ed10` | `v18_TScriptEnvironment_initStaticVars_void` | layout change |
+
+The exact rows are short list operations whose normalized ARM64 records match
+the 1.8 methods completely. The other rows preserve the important decisions
+through rebuilt wrapper classes. Function and event lookup still split names,
+perform case-insensitive scans, and recurse through inherited scripts. The
+optimizer still walks the same bytecode structures, although the target's
+instruction records use a larger stride. The environment helpers still link
+variables into the active universe and preserve array and comma-text behavior.
+
+The target's environment initializer deserves the explicit layout label. The
+source packs much of its static registration into a compact helper, while the
+target constructs event-name objects and registry entries in separate stages.
+That size difference is therefore expected and is not evidence of a mistaken
+pairing.
+
+All 24 target functions were renamed and verified after reopening the fresh
+database. The v324 database has 11,707 functions, zero audited default names,
+and 6,287 translated `v18_` aliases. Its final hash is
+`975367646c22c2f21d1c7ffc8380e0b48a6c259864a1f8b192e043c3e0992e06`. The
+complete evidence is in
+`artifacts/spectron_tscript_runtime_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_runtime_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_runtime_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v324.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v324.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v324.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v324.json`.
+
 ## Spectron connector endpoint change
 
 The endpoint builder is one of the clearest differences between the two

@@ -31,6 +31,90 @@ The custom `con` tool produced the same ZIP payload as the independent
 decoder. That cross-check separated a package parsing mistake from a client
 compatibility problem.
 
+## 2026-08-29: TScript runtime translation and v324
+
+After the v323 TGraalVar continuation, the next unresolved class-local block
+was the script runtime itself. This was a useful place to keep working because
+the source names describe the behavior that matters to GS2 execution: script
+lookup, event installation, bytecode preparation, encrypted script loading,
+and construction of variables exposed to scripts.
+
+The target's class names are obfuscated and its `TString`, list, hash, and
+iterator implementations were rebuilt. I therefore treated raw symbol order
+as supporting evidence, not as proof by itself. For every row I checked the
+source and target feature records, the compact Hex-Rays body, direct-call
+families, and the surrounding class-local order. The resulting aliases are:
+
+| 1.8 source | Spectron target | Applied alias | Behavior reviewed |
+| --- | ---: | --- | --- |
+| `0x2148dc` | `0x21b490` | `v18_TScriptFunction_TScriptFunction_TScript_TString_const_int_int` | function construction and call-stack setup |
+| `0x214a24` | `0x21b5f8` | `v18_TScriptFunction_addToFreeCallStackEntries_TCallStackEntry` | unique call-stack insertion |
+| `0x214a70` | `0x21b644` | `v18_TScriptFunction_clearCallStackEntries_void` | entry destruction and list clear |
+| `0x214aec` | `0x21b6c0` | `v18_TScriptFunction_TScriptFunction` | non-deleting destructor |
+| `0x214b34` | `0x21b708` | `v18_TScriptFunction_TScriptFunction__2` | deleting destructor wrapper |
+| `0x214b54` | `0x21b728` | `v18_TScript_TScript_TString_const` | script and root-function construction |
+| `0x21510c` | `0x21bd1c` | `v18_TScript_addCatchedEvent_TString_const_TString_const_int` | caught-event registration |
+| `0x215488` | `0x21c0dc` | `v18_TScript_getFunction_TString_const` | direct and inherited lookup |
+| `0x2157f4` | `0x21c460` | `v18_TScript_getEventFunctions_TList_TString_const` | event-function collection |
+| `0x215950` | `0x21c5dc` | `v18_TScript_installSelfEventCatchers_TGraalVar` | local self-event installation |
+| `0x215a9c` | `0x21c758` | `v18_TScript_installEventCatchers_TGraalVar` | local and inherited installation |
+| `0x215cc4` | `0x21ca08` | `v18_TScript_addFunctionProfilerTime_TString_const_double_double` | profile-time accumulation |
+| `0x215eac` | `0x21cc10` | `v18_TScript_optimizeByteCode_void` | bytecode pattern rewriting |
+| `0x216de8` | `0x21db68` | `v18_TScript_loadScriptEncrypted_int_TString_const_uint` | encrypted script load and request path |
+| `0x216fa0` | `0x21dde0` | `v18_TScript_checkRequestScript_int_TString_const_uint` | script availability and result routing |
+| `0x217108` | `0x21dff8` | `v18_TScript_initStaticVars_void` | requested-class static list |
+| `0x217138` | `0x21e028` | `v18_TScript_initStaticScriptVars_void` | script-function property object |
+| `0x2176d8` | `0x21e618` | `v18_TScriptEnvironment_getPropertyList_TString_const` | global property-list lookup |
+| `0x217908` | `0x21e848` | `v18_TScriptEnvironment_makeTempVar_void` | temporary variable construction |
+| `0x2179a4` | `0x21e8bc` | `v18_TScriptEnvironment_makeArrayVar_bool` | array variable construction |
+| `0x217af0` | `0x21e9ec` | `v18_TScriptEnvironment_makeVarFromStringList_TStringList_const_bool` | list-to-variable conversion |
+| `0x217b80` | `0x21eaa0` | `v18_TScriptEnvironment_makeVarFromCommaText_TString_const_bool` | comma-text conversion |
+| `0x217cd8` | `0x21ec14` | `v18_TScriptEnvironment_makeStringListFromVar_TGraalVar` | variable-to-list conversion |
+| `0x217db4` | `0x21ed10` | `v18_TScriptEnvironment_initStaticVars_void` | event registry initialization |
+
+The three exact metric rows are the call-stack insertion, call-stack clear,
+and non-deleting destructor. The other 21 are layout-change matches. The
+target's function constructor adds wrapper calls for its rebuilt base variable
+and string types, but it still stores the owner, source-range integers, and
+call-stack list in the same relative role. The script lookup methods still
+split qualified names, use case-insensitive hash lookup, and recurse through
+inherited scripts. Event installation still filters `on` functions and walks
+the inherited lists.
+
+The optimizer is a particularly useful cross-check. Both versions walk the
+same bytecode patterns and property references, with 51 basic blocks, 32
+branches, and five direct helper calls in the target. The target uses 40-byte
+instruction records where the source uses 32-byte records, which explains the
+small metric change without changing the operation. The environment methods
+also retain the active-universe link, array construction, and comma escaping.
+The final static initializer is the largest layout change: the source uses a
+compact registration helper, while the target constructs event-name objects
+and registry entries in separate stages.
+
+This was a static translation pass only. It did not change the APK, rerun the
+loopback client, or contact the live service. The fresh v324 database contains
+11,707 functions and zero audited default names. The name audit counts 6,287
+translated `v18_` aliases, 943 retained target names, 417 target-only
+descriptive labels, seven JNI exports, and 4,053 other IDA or PLT names. The
+dynamic-symbol audit reports 4,614 source-backed aliases, 1,831 exact retained
+names, and 148 other retained target names, while the 5,782 exact function
+boundaries remain unchanged.
+
+The final database is
+`analysis/spectron_libqplay_translated_v324_tscript_runtime_final.i64` with
+SHA-256
+`975367646c22c2f21d1c7ffc8380e0b48a6c259864a1f8b192e043c3e0992e06`.
+The v324 records are
+`artifacts/spectron_tscript_runtime_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_runtime_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_runtime_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v324.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v324.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v324.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v324.json`. The reusable
+helpers are `tools/generate_spectron_tscript_runtime_anchors.py` and
+`tools/generate_spectron_translation_checkpoint_v324.py`.
+
 ## 2026-08-29: Source-side GUI boundary recovery and v321
 
 The v320 pass completed the target's retained dynamic function boundaries, but

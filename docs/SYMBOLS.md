@@ -288,6 +288,61 @@ The records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+### v324 TScript runtime aliases
+
+The v324 alias pass covers the next contiguous runtime block after the v323
+TGraalVar continuation. Each name below was applied to the stripped Spectron
+database after source and target pseudocode review. A `v18_` prefix marks a
+cross-build semantic translation. It does not imply that the old debug name
+survived in the 2.2 ELF.
+
+| Source address | Spectron address | Applied alias |
+| ---: | ---: | --- |
+| `0x2148dc` | `0x21b490` | `v18_TScriptFunction_TScriptFunction_TScript_TString_const_int_int` |
+| `0x214a24` | `0x21b5f8` | `v18_TScriptFunction_addToFreeCallStackEntries_TCallStackEntry` |
+| `0x214a70` | `0x21b644` | `v18_TScriptFunction_clearCallStackEntries_void` |
+| `0x214aec` | `0x21b6c0` | `v18_TScriptFunction_TScriptFunction` |
+| `0x214b34` | `0x21b708` | `v18_TScriptFunction_TScriptFunction__2` |
+| `0x214b54` | `0x21b728` | `v18_TScript_TScript_TString_const` |
+| `0x21510c` | `0x21bd1c` | `v18_TScript_addCatchedEvent_TString_const_TString_const_int` |
+| `0x215488` | `0x21c0dc` | `v18_TScript_getFunction_TString_const` |
+| `0x2157f4` | `0x21c460` | `v18_TScript_getEventFunctions_TList_TString_const` |
+| `0x215950` | `0x21c5dc` | `v18_TScript_installSelfEventCatchers_TGraalVar` |
+| `0x215a9c` | `0x21c758` | `v18_TScript_installEventCatchers_TGraalVar` |
+| `0x215cc4` | `0x21ca08` | `v18_TScript_addFunctionProfilerTime_TString_const_double_double` |
+| `0x215eac` | `0x21cc10` | `v18_TScript_optimizeByteCode_void` |
+| `0x216de8` | `0x21db68` | `v18_TScript_loadScriptEncrypted_int_TString_const_uint` |
+| `0x216fa0` | `0x21dde0` | `v18_TScript_checkRequestScript_int_TString_const_uint` |
+| `0x217108` | `0x21dff8` | `v18_TScript_initStaticVars_void` |
+| `0x217138` | `0x21e028` | `v18_TScript_initStaticScriptVars_void` |
+| `0x2176d8` | `0x21e618` | `v18_TScriptEnvironment_getPropertyList_TString_const` |
+| `0x217908` | `0x21e848` | `v18_TScriptEnvironment_makeTempVar_void` |
+| `0x2179a4` | `0x21e8bc` | `v18_TScriptEnvironment_makeArrayVar_bool` |
+| `0x217af0` | `0x21e9ec` | `v18_TScriptEnvironment_makeVarFromStringList_TStringList_const_bool` |
+| `0x217b80` | `0x21eaa0` | `v18_TScriptEnvironment_makeVarFromCommaText_TString_const_bool` |
+| `0x217cd8` | `0x21ec14` | `v18_TScriptEnvironment_makeStringListFromVar_TGraalVar` |
+| `0x217db4` | `0x21ed10` | `v18_TScriptEnvironment_initStaticVars_void` |
+
+There are 24 aliases in this block. Three have exact normalized feature
+records. The other 21 retain the same source responsibility through target
+wrapper classes, including script-function ownership, event recursion,
+bytecode record traversal, and variable construction. The final initializer
+has the largest size change because the target builds its event registries in
+several explicit stages rather than using the compact source helper.
+
+The v324 application report recorded 24 renames, 24 evidence comments, and no
+failures. The reopen report verified all 24 names in the 11,707-function
+database. The final database hash is
+`975367646c22c2f21d1c7ffc8380e0b48a6c259864a1f8b192e043c3e0992e06`. The
+machine-readable records are
+`artifacts/spectron_tscript_runtime_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_runtime_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_runtime_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v324.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v324.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v324.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v324.json`.
+
 ## Current Spectron cross-build labels
 
 The latest disposable IDA copies extend the labels beyond the retained ELF

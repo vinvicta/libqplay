@@ -3035,6 +3035,51 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v324 TScript runtime translation
+
+The v324 pass is a static continuation from v323. It translates 24 methods in
+the `TScriptFunction`, `TScript`, and `TScriptEnvironment` families. The group
+covers script-function construction and cleanup, direct and inherited function
+lookup, event registration and catcher installation, profiler time,
+bytecode optimization, encrypted script loading, and variable-construction
+helpers.
+
+Three methods have exact normalized metric matches. The remaining 21 are
+high-confidence layout-change matches caused by the target's rebuilt string,
+list, hash, and iterator classes. The source and target pseudocode preserve
+the same control-flow decisions. The bytecode optimizer still walks the same
+51-block, 32-branch method, with the target's larger instruction record
+explaining the metric difference. The environment static initializer is also
+explicitly a layout change because its registry setup is expanded into
+separate object constructions in the target.
+
+The application renamed all 24 target functions and added 24 evidence comments
+with zero failures. Reopening the saved database verified all 24 names. The
+v324 database contains 11,707 functions and zero audited default names. Its
+name origins are 6,287 translated `v18_` aliases, 417 target-only descriptive
+labels, 943 retained target names, seven JNI exports, and 4,053 other IDA or
+PLT names. The dynamic-symbol audit reports 4,614 source-backed aliases,
+1,831 exact retained names, 148 other retained target names, seven
+linker-boundary aliases, 169 PLT veneers, and one undefined `__sF` import
+without an in-library veneer.
+
+The final private database is
+`analysis/spectron_libqplay_translated_v324_tscript_runtime_final.i64` with
+SHA-256
+`975367646c22c2f21d1c7ffc8380e0b48a6c259864a1f8b192e043c3e0992e06`.
+The machine-readable records are
+`artifacts/spectron_tscript_runtime_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_runtime_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_runtime_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v324.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v324.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v324.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v324.json`.
+
+This pass changed only the private IDA copy and archive. It did not patch the
+APK, rerun the client, alter TLS behavior, contact a game server, or test a
+live endpoint.
+
 ## Spectron 2.2 v321 GUI boundary translation
 
 The v321 pass closes the remaining comparison gap around eleven GUI methods.

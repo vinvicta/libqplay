@@ -589,6 +589,120 @@ The expected v323 database hash is
 application and audit reports are offline records. This pass does not change
 the runtime conclusion or establish a live game-server login.
 
+### v324 TScript runtime translation
+
+The v324 pass continues from the verified v323 database and reviews 24
+`TScriptFunction`, `TScript`, and `TScriptEnvironment` methods. It is an
+offline IDA pass and does not modify the APK or contact a server. Export source
+evidence for:
+
+```text
+0x2148dc,0x214a24,0x214a70,0x214aec,0x214b34,0x214b54,
+0x21510c,0x215488,0x2157f4,0x215950,0x215a9c,0x215cc4,
+0x215eac,0x216de8,0x216fa0,0x217108,0x217138,0x2176d8,
+0x217908,0x2179a4,0x217af0,0x217b80,0x217cd8,0x217db4
+```
+
+Run the compact evidence exporter with the source list above, then repeat it
+for target addresses:
+
+```text
+0x21b490,0x21b5f8,0x21b644,0x21b6c0,0x21b708,0x21b728,
+0x21bd1c,0x21c0dc,0x21c460,0x21c5dc,0x21c758,0x21ca08,
+0x21cc10,0x21db68,0x21dde0,0x21dff8,0x21e028,0x21e618,
+0x21e848,0x21e8bc,0x21e9ec,0x21eaa0,0x21ec14,0x21ed10
+```
+
+The invocation pattern is the same as the earlier passes. Substitute the
+address list and output path for each database:
+
+```bash
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  LIBQPLAY_FUNCTION_EVIDENCE=0x2148dc,0x214a24,0x214a70,0x214aec,0x214b34,0x214b54,0x21510c,0x215488,0x2157f4,0x215950,0x215a9c,0x215cc4,0x215eac,0x216de8,0x216fa0,0x217108,0x217138,0x2176d8,0x217908,0x2179a4,0x217af0,0x217b80,0x217cd8,0x217db4 \
+  LIBQPLAY_EVIDENCE_COMPACT=1 \
+  LIBQPLAY_EVIDENCE_OUT=/tmp/graal-source-tscript-evidence.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /tmp/source-tscript-evidence.i64 \
+  -s tools/ida_dump_function_evidence.py
+```
+
+Generate the reviewed anchors from the v4 source features, the v323-derived
+target features, and the two compact evidence files:
+
+```bash
+python3 tools/generate_spectron_tscript_runtime_anchors.py \
+  --original-features /tmp/original_features_v4_v3_materialized_v2.json \
+  --spectron-features /tmp/spectron_features_v324_tscript_runtime.json \
+  --semantic-map /tmp/semantic_v323_current.json \
+  --source-evidence /tmp/graal-source-tscript-evidence.json \
+  --target-evidence /tmp/graal-target-tscript-evidence.json \
+  --original-binary-sha256 9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8 \
+  --spectron-binary-sha256 f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219 \
+  --output artifacts/spectron_tscript_runtime_manual_translation_anchors_20260829.json
+```
+
+The generator should report 24 high-confidence anchors, three exact metric
+rows, 21 layout-change rows, and pseudocode for every source and target side.
+It rejects changed raw names, duplicate addresses, missing evidence, and
+semantic matches that were already translated.
+
+Apply the aliases to a copy of the v323 database and reopen the saved result:
+
+```bash
+cp /path/to/spectron_libqplay_translated_v323_tgraalvar_runtime_continuation_final.i64 \
+  /tmp/spectron_v324_tscript_runtime.i64
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_MANUAL_APPLY=1 \
+  SPECTRON_MANUAL_ANCHORS=/path/to/artifacts/spectron_tscript_runtime_manual_translation_anchors_20260829.json \
+  SPECTRON_MANUAL_EXPECTED_ARTIFACT=spectron_tscript_runtime_manual_translation_anchors_20260829 \
+  SPECTRON_MANUAL_SAVE_PATH=/path/to/spectron_libqplay_translated_v324_tscript_runtime_final.i64 \
+  SPECTRON_MANUAL_REPORT=/tmp/spectron_tscript_runtime_manual_translation_application_20260829.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /tmp/spectron_v324_tscript_runtime.i64 \
+  -s tools/ida_apply_spectron_manual_anchors.py
+```
+
+The reopen report should show 24 verified names, 11,707 functions, and zero
+failures. Re-run the name, dynamic-boundary, and dynamic-symbol coverage
+audits. The expected v324 name origins are:
+
+```text
+ida_named_or_other       4053
+target_jni_export           7
+target_named_export       943
+target_only_descriptive   417
+translated_v18_alias     6287
+```
+
+The dynamic audit should still report 6,770 named rows, 6,600 defined rows,
+5,782 exact function starts, 482 data items, 336 other non-code items, and
+170 undefined imports. The v324 classification is 4,614 source-backed
+aliases, 1,831 exact retained names, and 148 other retained target names.
+Rebuild and validate the checkpoint with:
+
+```bash
+python3 tools/generate_spectron_translation_checkpoint_v324.py \
+  --parent-checkpoint artifacts/spectron_translation_checkpoint_20260829_v323.json \
+  --database /path/to/spectron_libqplay_translated_v324_tscript_runtime_final.i64 \
+  --anchor-artifact artifacts/spectron_tscript_runtime_manual_translation_anchors_20260829.json \
+  --application-report artifacts/spectron_tscript_runtime_manual_translation_application_20260829.json \
+  --verification-report artifacts/spectron_tscript_runtime_manual_translation_verification_20260829.json \
+  --name-audit artifacts/spectron_name_coverage_audit_v324.json \
+  --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v324.json \
+  --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v324.json \
+  --semantic-map artifacts/spectron_semantic_function_translation_v320_20260828.json \
+  --output artifacts/spectron_translation_checkpoint_20260829_v324.json
+
+python3 tools/validate_research_archive.py
+```
+
+The expected v324 database hash is
+`975367646c22c2f21d1c7ffc8380e0b48a6c259864a1f8b192e043c3e0992e06`. This
+checkpoint is static evidence only. It has not been used to claim a new
+runtime result or a live service login.
+
 The complete private chain can be rebuilt with the single offline helper:
 
 ```bash

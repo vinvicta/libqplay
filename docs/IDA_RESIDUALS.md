@@ -635,6 +635,66 @@ generators are
 `tools/generate_spectron_tgraalvar_runtime_continuation_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v323.py`.
 
+### v324 TScript runtime translation
+
+The v324 pass moves the translation frontier into the next class-local block:
+`TScriptFunction`, `TScript`, and `TScriptEnvironment`. The pairings below
+were reviewed against compact Hex-Rays output from both IDA databases. The
+target names are obfuscated exports, so the applied names retain the original
+1.8 spelling behind a `v18_` prefix.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | ---: | --- | --- |
+| `0x2148dc` | `0x21b490` | `v18_TScriptFunction_TScriptFunction_TScript_TString_const_int_int` | function construction and owner setup |
+| `0x214a24` | `0x21b5f8` | `v18_TScriptFunction_addToFreeCallStackEntries_TCallStackEntry` | unique call-stack entry insertion |
+| `0x214a70` | `0x21b644` | `v18_TScriptFunction_clearCallStackEntries_void` | call-stack destruction and clear |
+| `0x214aec` | `0x21b6c0` | `v18_TScriptFunction_TScriptFunction` | destructor body |
+| `0x214b34` | `0x21b708` | `v18_TScriptFunction_TScriptFunction__2` | deleting destructor wrapper |
+| `0x214b54` | `0x21b728` | `v18_TScript_TScript_TString_const` | script construction |
+| `0x21510c` | `0x21bd1c` | `v18_TScript_addCatchedEvent_TString_const_TString_const_int` | event-handler registration |
+| `0x215488` | `0x21c0dc` | `v18_TScript_getFunction_TString_const` | direct and inherited function lookup |
+| `0x2157f4` | `0x21c460` | `v18_TScript_getEventFunctions_TList_TString_const` | event-function collection |
+| `0x215950` | `0x21c5dc` | `v18_TScript_installSelfEventCatchers_TGraalVar` | local event-catcher installation |
+| `0x215a9c` | `0x21c758` | `v18_TScript_installEventCatchers_TGraalVar` | local and inherited catchers |
+| `0x215cc4` | `0x21ca08` | `v18_TScript_addFunctionProfilerTime_TString_const_double_double` | profiler accumulation |
+| `0x215eac` | `0x21cc10` | `v18_TScript_optimizeByteCode_void` | bytecode optimization |
+| `0x216de8` | `0x21db68` | `v18_TScript_loadScriptEncrypted_int_TString_const_uint` | encrypted script loading |
+| `0x216fa0` | `0x21dde0` | `v18_TScript_checkRequestScript_int_TString_const_uint` | script request and privilege check |
+| `0x217108` | `0x21dff8` | `v18_TScript_initStaticVars_void` | static runtime property setup |
+| `0x217138` | `0x21e028` | `v18_TScript_initStaticScriptVars_void` | static script property setup |
+| `0x2176d8` | `0x21e618` | `v18_TScriptEnvironment_getPropertyList_TString_const` | normalized property enumeration |
+| `0x217908` | `0x21e848` | `v18_TScriptEnvironment_makeTempVar_void` | temporary variable creation |
+| `0x2179a4` | `0x21e8bc` | `v18_TScriptEnvironment_makeArrayVar_bool` | array variable creation |
+| `0x217af0` | `0x21e9ec` | `v18_TScriptEnvironment_makeVarFromStringList_TStringList_const_bool` | string-list conversion |
+| `0x217b80` | `0x21eaa0` | `v18_TScriptEnvironment_makeVarFromCommaText_TString_const_bool` | comma-text conversion |
+| `0x217cd8` | `0x21ec14` | `v18_TScriptEnvironment_makeStringListFromVar_TGraalVar` | string-list export |
+| `0x217db4` | `0x21ed10` | `v18_TScriptEnvironment_initStaticVars_void` | event-name and registry initialization |
+
+Three rows have complete metric matches: the call-stack insertion, call-stack
+clear, and first destructor body. The remaining 21 rows are layout-change
+matches. The target adds wrapper calls around rebuilt `TString`, list, hash,
+and iterator classes, but the decompiled decisions remain aligned. The
+constructor and event methods preserve their object ownership and recursive
+lookup structure. The optimizer retains the same 51-block, 32-branch, five-call
+shape while the target instruction records grow from 32 to 40 bytes. The
+environment helper family preserves active-universe linking, array setup, and
+comma escaping. Its static initializer is deliberately treated as a layout
+change because the target expands the source's compact registration into
+individually constructed event-name and registry objects.
+
+All 24 aliases were applied to a fresh copy and all 24 were verified after
+reopening it. The final database has 11,707 functions and zero audited
+default names. The v324 records are
+`artifacts/spectron_tscript_runtime_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_runtime_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_runtime_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v324.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v324.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v324.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v324.json`. The reusable
+generators are `tools/generate_spectron_tscript_runtime_anchors.py` and
+`tools/generate_spectron_translation_checkpoint_v324.py`.
+
 ## CyaSSL role pass
 
 The CyaSSL gap was worth a separate pass because these routines sit directly

@@ -13,7 +13,7 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v323 Spectron database. It
+The current documented translation frontier is the v324 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -68,6 +68,19 @@ The v323 database contains 6,263 reviewed `v18_` aliases. Its complete
 dynamic-symbol audit reports 4,587 source-backed rows and 1,855 exact retained
 names, with the same 5,782 defined function boundaries and non-function item
 counts as v322.
+
+The v324 revision translates the next 24 methods in the TScript,
+TScriptFunction, and TScriptEnvironment runtime families. It covers function
+construction and call-stack cleanup, script and event lookup, event-catcher
+installation, profiling, bytecode optimization, encrypted script loading,
+static property setup, and the environment's temporary-variable and string-list
+helpers. Three rows are exact metric matches and 21 are layout-change matches
+caused by rebuilt target string and container classes. All 24 aliases are
+high-confidence, with compact Hex-Rays fingerprints and class-local order
+evidence recorded for both builds. The v324 database contains 6,287 reviewed
+`v18_` aliases. Its dynamic-symbol audit reports 4,614 source-backed rows and
+1,831 exact retained names. This is the latest static translation checkpoint;
+it has not been used for a new runtime APK replay.
 The v273 revision adds six high-confidence libjpeg source and destination
 callback labels. They are tied to the target `jpeg_stdio_dest` and
 `jpeg_stdio_src` installation sites, with exact or normalized source-target
@@ -436,6 +449,35 @@ aliases, seven linker-boundary aliases, 169 PLT veneers, and one undefined
 `artifacts/spectron_dynamic_symbol_boundaries_v323_20260829.json`,
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
+
+The v324 database is
+`analysis/spectron_libqplay_translated_v324_tscript_runtime_final.i64` with
+SHA-256
+`975367646c22c2f21d1c7ffc8380e0b48a6c259864a1f8b192e043c3e0992e06`.
+It continues from the verified v323 hash
+`588e39f73c0946aea4ed45265820c9d95a73689339c365840b308170d36d0b4d`.
+The fresh copy contains 11,707 functions and zero audited default names. Its
+name-origin counts are 6,287 translated `v18_` aliases, 417 target-only
+descriptive labels, 943 retained target names, seven JNI exports, and 4,053
+other IDA or PLT names. The dynamic-symbol audit reports 4,614 source-backed
+aliases, 1,831 exact retained names, 148 other retained target names, seven
+linker-boundary aliases, 169 PLT veneers, and one undefined `__sF` import
+without an in-library veneer.
+
+The v324 pass applies 24 aliases at target addresses `0x21b490` through
+`0x21ed10`. The three exact metric matches are the short call-stack add,
+clear, and destructor methods. The other 21 are behavior-preserving layout
+matches. The large `TScriptEnvironment_initStaticVars` body is intentionally
+classified as a layout change because the target expands the source's compact
+static registration into individually constructed event-name and registry
+objects. The records are
+`artifacts/spectron_tscript_runtime_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_runtime_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_runtime_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v324.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v324.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v324.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v324.json`.
 
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
@@ -6476,6 +6518,11 @@ proves the local native TLS path, not a current live certificate or service.
   the v323 application, reopen verification, name audit, and dynamic-symbol
   coverage. The archive validator checks the alias order, target addresses,
   counts, and no-network markers.
+  `tools/generate_spectron_tscript_runtime_anchors.py` records the v324
+  TScript, TScriptFunction, and TScriptEnvironment source and target
+  pseudocode fingerprints and reviewed aliases. `tools/generate_spectron_translation_checkpoint_v324.py`
+  records the v324 application, reopen verification, name audit, and
+  dynamic-symbol coverage.
   `tools/ida_apply_spectron_translation.py` and
   `tools/ida_apply_spectron_manual_anchors.py` write separate disposable IDA
   copies, while the matching verification scripts reopen and check them. The

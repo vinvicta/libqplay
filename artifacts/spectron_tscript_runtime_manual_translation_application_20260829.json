@@ -1,0 +1,258 @@
+{
+  "anchor_count": 24,
+  "anchor_path": "/tmp/spectron_tscript_runtime_manual_translation_anchors_20260829.json",
+  "apply": true,
+  "artifact": "spectron_manual_anchor_application",
+  "comments_added": 24,
+  "expected_artifact": "spectron_tscript_runtime_manual_translation_anchors_20260829",
+  "failure_count": 0,
+  "failures": [],
+  "plan": [
+    {
+      "actual_name_after": "v18_TScriptFunction_TScriptFunction_TScript_TString_const_int_int",
+      "actual_name_before": "_ZN10AICTfaebpZC2EP10zW2NgaU4IKRK10C8THgaTQxFii",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x2148dc",
+      "original_name": "TScriptFunction_TScriptFunction_TScript_TString_const_int_int",
+      "proposed_name": "v18_TScriptFunction_TScriptFunction_TScript_TString_const_int_int",
+      "spectron_ea": "0x21b490"
+    },
+    {
+      "actual_name_after": "v18_TScriptFunction_addToFreeCallStackEntries_TCallStackEntry",
+      "actual_name_before": "_ZN10AICTfaebpZ10h2dTfavq4YEP10l8eTfaIl5Y",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x214a24",
+      "original_name": "TScriptFunction_addToFreeCallStackEntries_TCallStackEntry",
+      "proposed_name": "v18_TScriptFunction_addToFreeCallStackEntries_TCallStackEntry",
+      "spectron_ea": "0x21b5f8"
+    },
+    {
+      "actual_name_after": "v18_TScriptFunction_clearCallStackEntries_void",
+      "actual_name_before": "_ZN10AICTfaebpZ10Yw3SfaqAWYEv",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x214a70",
+      "original_name": "TScriptFunction_clearCallStackEntries_void",
+      "proposed_name": "v18_TScriptFunction_clearCallStackEntries_void",
+      "spectron_ea": "0x21b644"
+    },
+    {
+      "actual_name_after": "v18_TScriptFunction_TScriptFunction",
+      "actual_name_before": "_ZN10AICTfaebpZD1Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x214aec",
+      "original_name": "TScriptFunction_TScriptFunction",
+      "proposed_name": "v18_TScriptFunction_TScriptFunction",
+      "spectron_ea": "0x21b6c0"
+    },
+    {
+      "actual_name_after": "v18_TScriptFunction_TScriptFunction__2",
+      "actual_name_before": "_ZN10AICTfaebpZD0Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x214b34",
+      "original_name": "TScriptFunction_TScriptFunction__2",
+      "proposed_name": "v18_TScriptFunction_TScriptFunction__2",
+      "spectron_ea": "0x21b708"
+    },
+    {
+      "actual_name_after": "v18_TScript_TScript_TString_const",
+      "actual_name_before": "_ZN10zW2NgaU4IKC1ERK10C8THgaTQxF",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x214b54",
+      "original_name": "TScript_TScript_TString_const",
+      "proposed_name": "v18_TScript_TScript_TString_const",
+      "spectron_ea": "0x21b728"
+    },
+    {
+      "actual_name_after": "v18_TScript_addCatchedEvent_TString_const_TString_const_int",
+      "actual_name_before": "_ZN10zW2NgaU4IK10lWtWfaGNO0ERK10C8THgaTQxFS2_i",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x21510c",
+      "original_name": "TScript_addCatchedEvent_TString_const_TString_const_int",
+      "proposed_name": "v18_TScript_addCatchedEvent_TString_const_TString_const_int",
+      "spectron_ea": "0x21bd1c"
+    },
+    {
+      "actual_name_after": "v18_TScript_getFunction_TString_const",
+      "actual_name_before": "_ZN10zW2NgaU4IK10EpeWfajKB0ERK10C8THgaTQxF",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x215488",
+      "original_name": "TScript_getFunction_TString_const",
+      "proposed_name": "v18_TScript_getFunction_TString_const",
+      "spectron_ea": "0x21c0dc"
+    },
+    {
+      "actual_name_after": "v18_TScript_getEventFunctions_TList_TString_const",
+      "actual_name_before": "_ZN10zW2NgaU4IK10iYjWfappG0EP10vy1JgaKVkHRK10C8THgaTQxF",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x2157f4",
+      "original_name": "TScript_getEventFunctions_TList_TString_const",
+      "proposed_name": "v18_TScript_getEventFunctions_TList_TString_const",
+      "spectron_ea": "0x21c460"
+    },
+    {
+      "actual_name_after": "v18_TScript_installSelfEventCatchers_TGraalVar",
+      "actual_name_before": "_ZN10zW2NgaU4IK10QQ5Vfadxu0EP10G0gxgajWBw",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x215950",
+      "original_name": "TScript_installSelfEventCatchers_TGraalVar",
+      "proposed_name": "v18_TScript_installSelfEventCatchers_TGraalVar",
+      "spectron_ea": "0x21c5dc"
+    },
+    {
+      "actual_name_after": "v18_TScript_installEventCatchers_TGraalVar",
+      "actual_name_before": "_ZN10zW2NgaU4IK10WKUVfagmk0EP10G0gxgajWBw",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x215a9c",
+      "original_name": "TScript_installEventCatchers_TGraalVar",
+      "proposed_name": "v18_TScript_installEventCatchers_TGraalVar",
+      "spectron_ea": "0x21c758"
+    },
+    {
+      "actual_name_after": "v18_TScript_addFunctionProfilerTime_TString_const_double_double",
+      "actual_name_before": "_ZN10zW2NgaU4IK10poCVfa8U4_ERK10C8THgaTQxFdd",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x215cc4",
+      "original_name": "TScript_addFunctionProfilerTime_TString_const_double_double",
+      "proposed_name": "v18_TScript_addFunctionProfilerTime_TString_const_double_double",
+      "spectron_ea": "0x21ca08"
+    },
+    {
+      "actual_name_after": "v18_TScript_optimizeByteCode_void",
+      "actual_name_before": "_ZN10zW2NgaU4IK10ejpZfaRUg3Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x215eac",
+      "original_name": "TScript_optimizeByteCode_void",
+      "proposed_name": "v18_TScript_optimizeByteCode_void",
+      "spectron_ea": "0x21cc10"
+    },
+    {
+      "actual_name_after": "v18_TScript_loadScriptEncrypted_int_TString_const_uint",
+      "actual_name_before": "_ZN10zW2NgaU4IK10pH_0fadms5EiRK10C8THgaTQxFj",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x216de8",
+      "original_name": "TScript_loadScriptEncrypted_int_TString_const_uint",
+      "proposed_name": "v18_TScript_loadScriptEncrypted_int_TString_const_uint",
+      "spectron_ea": "0x21db68"
+    },
+    {
+      "actual_name_after": "v18_TScript_checkRequestScript_int_TString_const_uint",
+      "actual_name_before": "_ZN10zW2NgaU4IK10rjF0faYma5EiRK10C8THgaTQxFj",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x216fa0",
+      "original_name": "TScript_checkRequestScript_int_TString_const_uint",
+      "proposed_name": "v18_TScript_checkRequestScript_int_TString_const_uint",
+      "spectron_ea": "0x21dde0"
+    },
+    {
+      "actual_name_after": "v18_TScript_initStaticVars_void",
+      "actual_name_before": "_Z10AlE0faNy94v",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x217108",
+      "original_name": "TScript_initStaticVars_void",
+      "proposed_name": "v18_TScript_initStaticVars_void",
+      "spectron_ea": "0x21dff8"
+    },
+    {
+      "actual_name_after": "v18_TScript_initStaticScriptVars_void",
+      "actual_name_before": "_Z10QSc0faUrN4v",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x217138",
+      "original_name": "TScript_initStaticScriptVars_void",
+      "proposed_name": "v18_TScript_initStaticScriptVars_void",
+      "spectron_ea": "0x21e028"
+    },
+    {
+      "actual_name_after": "v18_TScriptEnvironment_getPropertyList_TString_const",
+      "actual_name_before": "_ZN10D6TlgajP1m10nYwjIaul2TERK10C8THgaTQxF",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x2176d8",
+      "original_name": "TScriptEnvironment_getPropertyList_TString_const",
+      "proposed_name": "v18_TScriptEnvironment_getPropertyList_TString_const",
+      "spectron_ea": "0x21e618"
+    },
+    {
+      "actual_name_after": "v18_TScriptEnvironment_makeTempVar_void",
+      "actual_name_before": "_ZN10D6TlgajP1m10_ymjIa8AUTEv",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x217908",
+      "original_name": "TScriptEnvironment_makeTempVar_void",
+      "proposed_name": "v18_TScriptEnvironment_makeTempVar_void",
+      "spectron_ea": "0x21e848"
+    },
+    {
+      "actual_name_after": "v18_TScriptEnvironment_makeArrayVar_bool",
+      "actual_name_before": "_ZN10D6TlgajP1m10BPMlga2GWmEb",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x2179a4",
+      "original_name": "TScriptEnvironment_makeArrayVar_bool",
+      "proposed_name": "v18_TScriptEnvironment_makeArrayVar_bool",
+      "spectron_ea": "0x21e8bc"
+    },
+    {
+      "actual_name_after": "v18_TScriptEnvironment_makeVarFromStringList_TStringList_const_bool",
+      "actual_name_before": "_ZN10D6TlgajP1m10I4logaIb6oEPK10vuuHgangcFb",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x217af0",
+      "original_name": "TScriptEnvironment_makeVarFromStringList_TStringList_const_bool",
+      "proposed_name": "v18_TScriptEnvironment_makeVarFromStringList_TStringList_const_bool",
+      "spectron_ea": "0x21e9ec"
+    },
+    {
+      "actual_name_after": "v18_TScriptEnvironment_makeVarFromCommaText_TString_const_bool",
+      "actual_name_before": "_ZN10D6TlgajP1m10M203Ha_u_GERK10C8THgaTQxFb",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x217b80",
+      "original_name": "TScriptEnvironment_makeVarFromCommaText_TString_const_bool",
+      "proposed_name": "v18_TScriptEnvironment_makeVarFromCommaText_TString_const_bool",
+      "spectron_ea": "0x21eaa0"
+    },
+    {
+      "actual_name_after": "v18_TScriptEnvironment_makeStringListFromVar_TGraalVar",
+      "actual_name_before": "_ZN10D6TlgajP1m10aWO3HavsPGEP10G0gxgajWBw",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x217cd8",
+      "original_name": "TScriptEnvironment_makeStringListFromVar_TGraalVar",
+      "proposed_name": "v18_TScriptEnvironment_makeStringListFromVar_TGraalVar",
+      "spectron_ea": "0x21ec14"
+    },
+    {
+      "actual_name_after": "v18_TScriptEnvironment_initStaticVars_void",
+      "actual_name_before": "_Z10lke3HaOFkGv",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x217db4",
+      "original_name": "TScriptEnvironment_initStaticVars_void",
+      "proposed_name": "v18_TScriptEnvironment_initStaticVars_void",
+      "spectron_ea": "0x21ed10"
+    }
+  ],
+  "renamed_count": 24,
+  "resolved_count": 24,
+  "save_path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v324_tscript_runtime_final.i64",
+  "saved": true,
+  "verified": true,
+  "verified_name_count": 24
+}
