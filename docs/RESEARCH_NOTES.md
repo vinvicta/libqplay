@@ -261,6 +261,62 @@ This pass changed only the private IDA copy and archive. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
 
+## 2026-08-29: TDrawingPanel residuals, v343
+
+The next clean raw-symbol group is the three-entry drawing-panel block.
+Source methods at `0x117e18`, `0x118208`, and `0x11a254` line up with target
+methods at `0x11a8c8`, `0x11acb8`, and `0x11cd54` in the obfuscated
+`V8fxgahcBw` class.
+
+| 1.8 source | Spectron target | Applied alias | Direct behavior |
+| --- | ---: | --- | --- |
+| `0x117e18` `TDrawingPanel_clearCache_void` | `0x11a8c8` `_ZN10V8fxgahcBw10lAtT2agvh2Ev` | `v18_TDrawingPanel_clearCache_void` | destroy and clear operation list |
+| `0x118208` `TDrawingPanel_drawImage_int_int_TString_const` | `0x11acb8` `_ZN10V8fxgahcBw10cXs_ganY9UEiiRK10C8THgaTQxF` | `v18_TDrawingPanel_drawImage_int_int_TString_const` | allocate and queue 0x30-byte image operation |
+| `0x11a254` `TDrawingPanel_drawText_int_int_TString_const` | `0x11cd54` `_ZN10V8fxgahcBw10u9WRgaBn_NEiiRK10C8THgaTQxF` | `v18_TDrawingPanel_drawText_int_int_TString_const` | allocate and queue 0x88-byte text operation |
+
+The source and target pseudocode agrees at the important semantic points. The
+clear method walks the list stored at panel slot 15, destroys non-null entries
+through their virtual cleanup slot, and calls the list clear method. The image
+and text methods store the incoming coordinates in a local two-integer point,
+allocate their operation object, call the operation constructor, and add it to
+the panel. The target queue helper is `V8fxgahcBw::km8T2anEQ2`; the source
+helper is `plt_TDrawingPanel_addDrawingOperation_TDrawingPanelOperation`.
+
+The three bodies have identical instruction count, basic-block count, branch
+count, call count, return count, and all normalized instruction-shape digests.
+The application renamed all three target functions and added three evidence
+comments. Reopening the saved database verified all three names in the
+11,707-function IDA database.
+
+The v343 database has zero audited default names. Its name audit reports 6,435
+translated aliases, 419 target-only descriptive labels, 794 retained target
+names, seven JNI exports, and 4,052 other IDA or PLT names. Dynamic coverage
+reports 4,789 source-backed aliases, 1,682 exact retained dynamic names, and
+5,782 exact dynamic function starts.
+
+The v343 database is
+`analysis/spectron_libqplay_translated_v343_drawing_panel_residual.i64` with
+SHA-256
+`bb51b5b8ceb13acae2d5843019473ab988f0f931d2a5bce484f0ff3f32103ae8`.
+The records are
+`artifacts/spectron_drawing_panel_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_drawing_panel_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_drawing_panel_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v343_drawing_panel_residual.json`,
+`artifacts/spectron_name_coverage_audit_v343.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v343.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v343.json`,
+`artifacts/spectron_semantic_translation_v343.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v343.json`.
+The reusable helpers are
+`tools/generate_spectron_drawing_panel_core_residual_anchors.py`,
+`tools/carry_forward_spectron_semantic_translation_v343.py`, and
+`tools/generate_spectron_translation_checkpoint_v343.py`.
+
+This pass changed only the private IDA database and research archive. It did
+not patch the APK, rerun the loopback client, alter TLS behavior, contact a
+game server, or test a live endpoint.
+
 ## 2026-08-29: TInput modifier-state residuals, v342
 
 The next clean raw-symbol group is the three-entry modifier accessor block.

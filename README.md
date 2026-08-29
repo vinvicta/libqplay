@@ -13,7 +13,7 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v342 Spectron database. It
+The current documented translation frontier is the v343 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -234,6 +234,16 @@ pseudocode and exact normalized ARM64 feature matches. The v342 database
 contains 6,432 reviewed `v18_` aliases, 4,786 source-backed dynamic rows, and
 1,685 exact retained dynamic names. It is a static IDA checkpoint and has not
 been used for a new runtime APK replay.
+
+The v343 revision resolves three raw `TDrawingPanel` methods: `clearCache`,
+`drawImage`, and `drawText`. The clear method preserves list traversal,
+virtual operation cleanup, and final list clearing. The two drawing methods
+preserve point construction, operation allocation, construction, and queueing.
+All three rows have direct source and target Hex-Rays pseudocode and exact
+normalized ARM64 feature matches. The v343 database contains 6,435 reviewed
+`v18_` aliases, 4,789 source-backed dynamic rows, and 1,682 exact retained
+dynamic names. It is a static IDA checkpoint and has not been used for a new
+runtime APK replay.
 
 The v331 revision continues immediately into the static-variable runtime. It
 adds 22 high-confidence aliases for the universe initializer, the
@@ -840,6 +850,60 @@ target-only functions, with zero failures. Reopening the fresh copy verified
 all four names. This was a static translation pass only. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
+
+### v343 TDrawingPanel residual aliases
+
+The v343 pass starts from the verified v342 database and resolves three raw
+methods in the obfuscated `V8fxgahcBw` drawing-panel implementation. Direct
+compact Hex-Rays pseudocode was captured for every source and target row, and
+all three rows have exact normalized ARM64 feature matches.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | --- | --- | --- |
+| `0x117e18` `TDrawingPanel_clearCache_void` | `0x11a8c8` `_ZN10V8fxgahcBw10lAtT2agvh2Ev` | `v18_TDrawingPanel_clearCache_void` | drawing-operation list cleanup |
+| `0x118208` `TDrawingPanel_drawImage_int_int_TString_const` | `0x11acb8` `_ZN10V8fxgahcBw10cXs_ganY9UEiiRK10C8THgaTQxF` | `v18_TDrawingPanel_drawImage_int_int_TString_const` | image operation allocation and queue |
+| `0x11a254` `TDrawingPanel_drawText_int_int_TString_const` | `0x11cd54` `_ZN10V8fxgahcBw10u9WRgaBn_NEiiRK10C8THgaTQxF` | `v18_TDrawingPanel_drawText_int_int_TString_const` | text operation allocation and queue |
+
+The `clearCache` body reads the operation list from panel slot 15, walks its
+entries, invokes each non-null operation's virtual cleanup slot, and calls the
+list clear method. `drawImage` allocates 0x30 bytes, stores the two coordinates
+as a local point, constructs the image operation, and passes it to the panel's
+operation queue. `drawText` follows the same path with a 0x88-byte text
+operation. The target helper names are obfuscated, but the allocation sizes,
+argument flow, and queue calls match the source bodies exactly.
+
+All three aliases were applied to a fresh v342-derived database and verified
+after reopening. They are new context in the automatic semantic map, so they
+are recorded as reviewed anchors rather than promotions of earlier candidate
+rows.
+
+The v343 database has 11,707 functions and zero audited default names. Its
+name audit reports 6,435 translated aliases, 794 retained target names, 419
+target-only descriptive labels, seven JNI exports, and 4,052 other IDA or PLT
+names. Dynamic coverage reports 4,789 source-backed aliases, 1,682 exact
+retained dynamic names, and 5,782 exact dynamic function starts.
+
+The saved database is
+`analysis/spectron_libqplay_translated_v343_drawing_panel_residual.i64` with
+SHA-256
+`bb51b5b8ceb13acae2d5843019473ab988f0f931d2a5bce484f0ff3f32103ae8`.
+The machine-readable records are
+`artifacts/spectron_drawing_panel_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_drawing_panel_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_drawing_panel_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v343_drawing_panel_residual.json`,
+`artifacts/spectron_name_coverage_audit_v343.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v343.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v343.json`,
+`artifacts/spectron_semantic_translation_v343.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v343.json`.
+
+The reusable generators are
+`tools/generate_spectron_drawing_panel_core_residual_anchors.py`,
+`tools/carry_forward_spectron_semantic_translation_v343.py`, and
+`tools/generate_spectron_translation_checkpoint_v343.py`. This is a static
+IDA translation checkpoint. It did not patch the APK, rerun the loopback
+client, change TLS behavior, contact a game server, or test a live endpoint.
 
 ### v342 TInput modifier-state residual aliases
 

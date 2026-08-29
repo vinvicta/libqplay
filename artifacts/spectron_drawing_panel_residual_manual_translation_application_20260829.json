@@ -1,0 +1,48 @@
+{
+  "anchor_count": 3,
+  "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_drawing_panel_residual_manual_translation_anchors_20260829.json",
+  "apply": true,
+  "artifact": "spectron_manual_anchor_application",
+  "comments_added": 3,
+  "expected_artifact": "spectron_drawing_panel_residual_manual_translation_anchors_20260829",
+  "failure_count": 0,
+  "failures": [],
+  "plan": [
+    {
+      "actual_name_after": "v18_TDrawingPanel_clearCache_void",
+      "actual_name_before": "_ZN10V8fxgahcBw10lAtT2agvh2Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x117e18",
+      "original_name": "TDrawingPanel_clearCache_void",
+      "proposed_name": "v18_TDrawingPanel_clearCache_void",
+      "spectron_ea": "0x11a8c8"
+    },
+    {
+      "actual_name_after": "v18_TDrawingPanel_drawImage_int_int_TString_const",
+      "actual_name_before": "_ZN10V8fxgahcBw10cXs_ganY9UEiiRK10C8THgaTQxF",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x118208",
+      "original_name": "TDrawingPanel_drawImage_int_int_TString_const",
+      "proposed_name": "v18_TDrawingPanel_drawImage_int_int_TString_const",
+      "spectron_ea": "0x11acb8"
+    },
+    {
+      "actual_name_after": "v18_TDrawingPanel_drawText_int_int_TString_const",
+      "actual_name_before": "_ZN10V8fxgahcBw10u9WRgaBn_NEiiRK10C8THgaTQxF",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x11a254",
+      "original_name": "TDrawingPanel_drawText_int_int_TString_const",
+      "proposed_name": "v18_TDrawingPanel_drawText_int_int_TString_const",
+      "spectron_ea": "0x11cd54"
+    }
+  ],
+  "renamed_count": 3,
+  "resolved_count": 3,
+  "save_path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v343_drawing_panel_residual.i64",
+  "saved": true,
+  "verified": true,
+  "verified_name_count": 3
+}

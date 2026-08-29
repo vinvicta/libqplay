@@ -800,6 +800,61 @@ generators are
 `tools/generate_spectron_format_parameters_property_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v326.py`.
 
+### v343 TDrawingPanel residual aliases
+
+The v343 pass starts from the verified v342 database and translates three raw
+entries in the obfuscated `V8fxgahcBw` drawing-panel implementation. Direct
+compact Hex-Rays pseudocode was captured for every source and target row, and
+all three rows have exact normalized ARM64 feature matches.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | --- | --- | --- |
+| `0x117e18` `TDrawingPanel_clearCache_void` | `0x11a8c8` `_ZN10V8fxgahcBw10lAtT2agvh2Ev` | `v18_TDrawingPanel_clearCache_void` | list cleanup and virtual operation destruction |
+| `0x118208` `TDrawingPanel_drawImage_int_int_TString_const` | `0x11acb8` `_ZN10V8fxgahcBw10cXs_ganY9UEiiRK10C8THgaTQxF` | `v18_TDrawingPanel_drawImage_int_int_TString_const` | image operation construction and queueing |
+| `0x11a254` `TDrawingPanel_drawText_int_int_TString_const` | `0x11cd54` `_ZN10V8fxgahcBw10u9WRgaBn_NEiiRK10C8THgaTQxF` | `v18_TDrawingPanel_drawText_int_int_TString_const` | text operation construction and queueing |
+
+The clear method walks the operation list at object slot 15, invokes the
+virtual cleanup entry on each non-null operation, and clears the list. The
+image method allocates 0x30 bytes and the text method allocates 0x88 bytes.
+Both store the incoming coordinates in a local point, construct the matching
+operation object, and pass it to the panel queue. The target queue helper is
+`V8fxgahcBw::km8T2anEQ2`, while the source uses
+`plt_TDrawingPanel_addDrawingOperation_TDrawingPanelOperation`.
+
+The three aliases were applied to a fresh v342-derived database and verified
+after reopening. Every row is new context in the automatic semantic map, so
+the archive keeps the direct evidence and does not inflate the source mapping
+count.
+
+The v343 database contains 11,707 functions, zero audited default names,
+6,435 translated aliases, 419 target-only descriptive labels, 794 retained
+target names, seven JNI exports, and 4,052 other IDA or PLT names. Dynamic
+coverage reports 4,789 source-backed aliases, 1,682 exact retained dynamic
+names, and 5,782 exact dynamic function starts.
+
+The saved database is
+`analysis/spectron_libqplay_translated_v343_drawing_panel_residual.i64` with
+SHA-256
+`bb51b5b8ceb13acae2d5843019473ab988f0f931d2a5bce484f0ff3f32103ae8`.
+The machine-readable records are
+`artifacts/spectron_drawing_panel_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_drawing_panel_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_drawing_panel_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v343_drawing_panel_residual.json`,
+`artifacts/spectron_name_coverage_audit_v343.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v343.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v343.json`,
+`artifacts/spectron_semantic_translation_v343.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v343.json`.
+The reusable scripts are
+`tools/generate_spectron_drawing_panel_core_residual_anchors.py`,
+`tools/carry_forward_spectron_semantic_translation_v343.py`, and
+`tools/generate_spectron_translation_checkpoint_v343.py`.
+
+This is a static IDA translation checkpoint. It did not patch the APK, rerun
+the loopback client, alter TLS behavior, contact a game server, or test a
+live endpoint.
+
 ### v342 TInput modifier-state residual aliases
 
 The v342 pass starts from the verified v341 database and translates three raw

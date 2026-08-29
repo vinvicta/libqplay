@@ -425,6 +425,42 @@ records are
 `artifacts/spectron_semantic_translation_v326.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v326.json`.
 
+### v343 TDrawingPanel residual aliases
+
+The v343 pass adds three semantic aliases to the private Spectron IDA
+database. The raw target identifiers remain visible so each translated name
+can be traced back to the stripped build.
+
+| Spectron address | Raw target symbol | Applied alias | Recovered role |
+| ---: | --- | --- | --- |
+| `0x11a8c8` | `_ZN10V8fxgahcBw10lAtT2agvh2Ev` | `v18_TDrawingPanel_clearCache_void` | operation-list cleanup |
+| `0x11acb8` | `_ZN10V8fxgahcBw10cXs_ganY9UEiiRK10C8THgaTQxF` | `v18_TDrawingPanel_drawImage_int_int_TString_const` | image operation creation |
+| `0x11cd54` | `_ZN10V8fxgahcBw10u9WRgaBn_NEiiRK10C8THgaTQxF` | `v18_TDrawingPanel_drawText_int_int_TString_const` | text operation creation |
+
+The source counterparts are `0x117e18`, `0x118208`, and `0x11a254`. The
+clear method walks the list at panel slot 15, invokes virtual cleanup on each
+non-null entry, and clears the list. The image and text methods construct a
+two-integer point, allocate 0x30 and 0x88 bytes respectively, construct the
+operation, and queue it on the panel. Direct pseudocode and exact normalized
+feature records support all three rows.
+
+The v343 records are
+`artifacts/spectron_drawing_panel_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_drawing_panel_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_drawing_panel_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v343_drawing_panel_residual.json`,
+`artifacts/spectron_name_coverage_audit_v343.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v343.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v343.json`,
+`artifacts/spectron_semantic_translation_v343.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v343.json`.
+
+The v343 database has 6,435 translated `v18_` aliases, 419 target-only
+descriptive labels, 794 retained target names, seven JNI exports, 4,052
+other IDA or PLT names, 4,789 source-backed dynamic rows, and 1,682 exact
+retained dynamic names. Its hash is
+`bb51b5b8ceb13acae2d5843019473ab988f0f931d2a5bce484f0ff3f32103ae8`.
+
 ### v342 TInput modifier-state residual aliases
 
 The v342 pass adds three semantic aliases to the private Spectron IDA

@@ -3035,6 +3035,42 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v343 TDrawingPanel residuals
+
+The v343 revision is a static IDA checkpoint for three raw methods in the
+obfuscated `V8fxgahcBw` drawing-panel class. It covers operation-list cleanup,
+image operation creation, and text operation creation. Each source and target
+body has direct compact pseudocode and an exact normalized ARM64 feature match.
+
+The clear method walks the list at panel slot 15, destroys each non-null
+operation through its virtual cleanup slot, and clears the list. The image and
+text methods allocate 0x30 and 0x88 bytes respectively, construct the drawing
+operation with a local coordinate point, and queue it through the target's
+`V8fxgahcBw::km8T2anEQ2` helper.
+
+The aliases were applied to a fresh v342-derived database and verified after
+reopening. The v343 database contains 11,707 functions, zero audited default
+names, 6,435 translated aliases, 4,789 source-backed dynamic rows, and 1,682
+exact retained dynamic names. All 5,782 defined dynamic function symbols still
+resolve to exact IDA function starts.
+
+Its SHA-256 is
+`bb51b5b8ceb13acae2d5843019473ab988f0f931d2a5bce484f0ff3f32103ae8`.
+The records are
+`artifacts/spectron_drawing_panel_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_drawing_panel_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_drawing_panel_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v343_drawing_panel_residual.json`,
+`artifacts/spectron_name_coverage_audit_v343.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v343.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v343.json`,
+`artifacts/spectron_semantic_translation_v343.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v343.json`.
+
+This checkpoint did not change the verified loopback package, connector TLS
+result, or local protocol responder. No live endpoint was contacted, and no
+new runtime replay was performed for v343.
+
 ## Spectron 2.2 v342 TInput modifier-state residuals
 
 The v342 revision is a static IDA checkpoint for three raw modifier accessors

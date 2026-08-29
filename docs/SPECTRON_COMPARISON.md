@@ -319,6 +319,42 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v343 TDrawingPanel residual comparison
+
+The v343 pass compares three raw target methods in the obfuscated `V8fxgahcBw`
+drawing-panel class. Every row has direct source and target compact Hex-Rays
+pseudocode and an exact normalized ARM64 feature match.
+
+| Source role | Spectron address | Applied alias | Match class |
+| --- | ---: | --- | --- |
+| `TDrawingPanel_clearCache_void` | `0x11a8c8` | `v18_TDrawingPanel_clearCache_void` | exact list cleanup and virtual destruction |
+| `TDrawingPanel_drawImage_int_int_TString_const` | `0x11acb8` | `v18_TDrawingPanel_drawImage_int_int_TString_const` | exact 0x30-byte image operation |
+| `TDrawingPanel_drawText_int_int_TString_const` | `0x11cd54` | `v18_TDrawingPanel_drawText_int_int_TString_const` | exact 0x88-byte text operation |
+
+The clear method preserves the operation-list traversal and final clear call.
+The image and text methods preserve local point construction, allocation,
+operation construction, and queueing. All three rows are new context in the
+automatic semantic map, and no alias relies on name similarity alone.
+
+The aliases were applied and verified after reopening the v343 database. It
+has 11,707 functions, zero audited default names, 6,435 translated aliases,
+4,789 source-backed dynamic rows, 1,682 exact retained dynamic names, and
+5,782 exact dynamic function starts. Its SHA-256 is
+`bb51b5b8ceb13acae2d5843019473ab988f0f931d2a5bce484f0ff3f32103ae8`.
+The complete comparison records are
+`artifacts/spectron_drawing_panel_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_drawing_panel_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_drawing_panel_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v343_drawing_panel_residual.json`,
+`artifacts/spectron_name_coverage_audit_v343.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v343.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v343.json`,
+`artifacts/spectron_semantic_translation_v343.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v343.json`.
+
+This comparison is static evidence. It does not change the runtime diagnosis,
+patch the APK, or contact a live endpoint.
+
 ## v342 TInput modifier-state residual comparison
 
 The v342 pass compares three raw target methods in the obfuscated `GaA2gaD2MX`
