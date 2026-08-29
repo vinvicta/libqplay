@@ -1,0 +1,238 @@
+{
+  "anchor_count": 22,
+  "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tscript_var_residual_manual_translation_anchors_20260829.json",
+  "apply": true,
+  "artifact": "spectron_manual_anchor_application",
+  "comments_added": 22,
+  "expected_artifact": "spectron_tscript_var_residual_manual_translation_anchors_20260829",
+  "failure_count": 0,
+  "failures": [],
+  "plan": [
+    {
+      "actual_name_after": "v18_TScriptUniverse_initStaticScriptVars_void",
+      "actual_name_before": "_Z10NJLNuahMtwv",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22d240",
+      "original_name": "TScriptUniverse_initStaticScriptVars_void",
+      "proposed_name": "v18_TScriptUniverse_initStaticScriptVars_void",
+      "spectron_ea": "0x236d04"
+    },
+    {
+      "actual_name_after": "v18_TScriptUniverseProperties_TScriptUniverseProperties",
+      "actual_name_before": "_ZN20e4ZYfa8PV2PropertiesD1Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22d254",
+      "original_name": "TScriptUniverseProperties_TScriptUniverseProperties",
+      "proposed_name": "v18_TScriptUniverseProperties_TScriptUniverseProperties",
+      "spectron_ea": "0x236d18"
+    },
+    {
+      "actual_name_after": "v18_non_virtual_thunk_to_TScriptUniverseProperties_TScriptUniverseProperties",
+      "actual_name_before": "_ZThn16_N20e4ZYfa8PV2PropertiesD1Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22d270",
+      "original_name": "non_virtual_thunk_to_TScriptUniverseProperties_TScriptUniverseProperties",
+      "proposed_name": "v18_non_virtual_thunk_to_TScriptUniverseProperties_TScriptUniverseProperties",
+      "spectron_ea": "0x236d34"
+    },
+    {
+      "actual_name_after": "v18_TScriptUniverseProperties_TScriptUniverseProperties__2",
+      "actual_name_before": "_ZN20e4ZYfa8PV2PropertiesD0Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22d278",
+      "original_name": "TScriptUniverseProperties_TScriptUniverseProperties__2",
+      "proposed_name": "v18_TScriptUniverseProperties_TScriptUniverseProperties__2",
+      "spectron_ea": "0x236d3c"
+    },
+    {
+      "actual_name_after": "v18_non_virtual_thunk_to_TScriptUniverseProperties_TScriptUniverseProperties__2",
+      "actual_name_before": "_ZThn16_N20e4ZYfa8PV2PropertiesD0Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22d2b0",
+      "original_name": "non_virtual_thunk_to_TScriptUniverseProperties_TScriptUniverseProperties__2",
+      "proposed_name": "v18_non_virtual_thunk_to_TScriptUniverseProperties_TScriptUniverseProperties__2",
+      "spectron_ea": "0x236d74"
+    },
+    {
+      "actual_name_after": "v18_TGraalPlayersArrayVar_TGraalPlayersArrayVar",
+      "actual_name_before": "_ZN10JE42uaVwcKD1Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22d2d4",
+      "original_name": "TGraalPlayersArrayVar_TGraalPlayersArrayVar",
+      "proposed_name": "v18_TGraalPlayersArrayVar_TGraalPlayersArrayVar",
+      "spectron_ea": "0x236d98"
+    },
+    {
+      "actual_name_after": "v18_TGraalPlayersArrayVar_TGraalPlayersArrayVar__2",
+      "actual_name_before": "_ZN10JE42uaVwcKD0Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22d2e8",
+      "original_name": "TGraalPlayersArrayVar_TGraalPlayersArrayVar__2",
+      "proposed_name": "v18_TGraalPlayersArrayVar_TGraalPlayersArrayVar__2",
+      "spectron_ea": "0x236dac"
+    },
+    {
+      "actual_name_after": "v18_jump_TScriptEnvironment_destroyScriptVariable_TGraalVar__2",
+      "actual_name_before": "j_._ZN10D6TlgajP1m10R8CcIadyeOEP10G0gxgajWBw_0",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22d318",
+      "original_name": "jump_TScriptEnvironment_destroyScriptVariable_TGraalVar__2",
+      "proposed_name": "v18_jump_TScriptEnvironment_destroyScriptVariable_TGraalVar__2",
+      "spectron_ea": "0x236ddc"
+    },
+    {
+      "actual_name_after": "v18_TStaticVar_create_TString_const",
+      "actual_name_before": "_Z20NgNBgaN3oAE7Bm2aaHDBRK10C8THgaTQxF",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22d490",
+      "original_name": "TStaticVar_create_TString_const",
+      "proposed_name": "v18_TStaticVar_create_TString_const",
+      "spectron_ea": "0x236f80"
+    },
+    {
+      "actual_name_after": "v18_TStaticVar_TStaticVar",
+      "actual_name_before": "_ZN10NgNBgaN3oAD2Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22d53c",
+      "original_name": "TStaticVar_TStaticVar",
+      "proposed_name": "v18_TStaticVar_TStaticVar",
+      "spectron_ea": "0x23702c"
+    },
+    {
+      "actual_name_after": "v18_TStaticVar_TStaticVar__2",
+      "actual_name_before": "_ZN10NgNBgaN3oAD0Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22d56c",
+      "original_name": "TStaticVar_TStaticVar__2",
+      "proposed_name": "v18_TStaticVar_TStaticVar__2",
+      "spectron_ea": "0x23705c"
+    },
+    {
+      "actual_name_after": "v18_TActionScriptVar_create_TString_const",
+      "actual_name_before": "_Z20mH33wa4I1qE7Bm2aaHDBRK10C8THgaTQxF",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22d7d4",
+      "original_name": "TActionScriptVar_create_TString_const",
+      "proposed_name": "v18_TActionScriptVar_create_TString_const",
+      "spectron_ea": "0x2372c4"
+    },
+    {
+      "actual_name_after": "v18_TStaticVarProperties_TStaticVarProperties",
+      "actual_name_before": "_ZN20NgNBgaN3oAPropertiesD2Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22d8e4",
+      "original_name": "TStaticVarProperties_TStaticVarProperties",
+      "proposed_name": "v18_TStaticVarProperties_TStaticVarProperties",
+      "spectron_ea": "0x2373d4"
+    },
+    {
+      "actual_name_after": "v18_non_virtual_thunk_to_TStaticVarProperties_TStaticVarProperties",
+      "actual_name_before": "_ZThn16_N20NgNBgaN3oAPropertiesD1Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22d900",
+      "original_name": "non_virtual_thunk_to_TStaticVarProperties_TStaticVarProperties",
+      "proposed_name": "v18_non_virtual_thunk_to_TStaticVarProperties_TStaticVarProperties",
+      "spectron_ea": "0x2373f0"
+    },
+    {
+      "actual_name_after": "v18_TActionScriptVarProperties_TActionScriptVarProperties",
+      "actual_name_before": "_ZN20mH33wa4I1qPropertiesD1Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22d908",
+      "original_name": "TActionScriptVarProperties_TActionScriptVarProperties",
+      "proposed_name": "v18_TActionScriptVarProperties_TActionScriptVarProperties",
+      "spectron_ea": "0x2373f8"
+    },
+    {
+      "actual_name_after": "v18_non_virtual_thunk_to_TActionScriptVarProperties_TActionScriptVarProperties",
+      "actual_name_before": "_ZThn16_N20mH33wa4I1qPropertiesD1Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22d924",
+      "original_name": "non_virtual_thunk_to_TActionScriptVarProperties_TActionScriptVarProperties",
+      "proposed_name": "v18_non_virtual_thunk_to_TActionScriptVarProperties_TActionScriptVarProperties",
+      "spectron_ea": "0x237414"
+    },
+    {
+      "actual_name_after": "v18_TStaticVarProperties_TStaticVarProperties__2",
+      "actual_name_before": "_ZN20NgNBgaN3oAPropertiesD0Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22d92c",
+      "original_name": "TStaticVarProperties_TStaticVarProperties__2",
+      "proposed_name": "v18_TStaticVarProperties_TStaticVarProperties__2",
+      "spectron_ea": "0x23741c"
+    },
+    {
+      "actual_name_after": "v18_non_virtual_thunk_to_TStaticVarProperties_TStaticVarProperties__2",
+      "actual_name_before": "_ZThn16_N20NgNBgaN3oAPropertiesD0Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22d964",
+      "original_name": "non_virtual_thunk_to_TStaticVarProperties_TStaticVarProperties__2",
+      "proposed_name": "v18_non_virtual_thunk_to_TStaticVarProperties_TStaticVarProperties__2",
+      "spectron_ea": "0x237454"
+    },
+    {
+      "actual_name_after": "v18_TActionScriptVarProperties_TActionScriptVarProperties__2",
+      "actual_name_before": "_ZN20mH33wa4I1qPropertiesD0Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22d96c",
+      "original_name": "TActionScriptVarProperties_TActionScriptVarProperties__2",
+      "proposed_name": "v18_TActionScriptVarProperties_TActionScriptVarProperties__2",
+      "spectron_ea": "0x23745c"
+    },
+    {
+      "actual_name_after": "v18_non_virtual_thunk_to_TActionScriptVarProperties_TActionScriptVarProperties__2",
+      "actual_name_before": "_ZThn16_N20mH33wa4I1qPropertiesD0Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22d9a4",
+      "original_name": "non_virtual_thunk_to_TActionScriptVarProperties_TActionScriptVarProperties__2",
+      "proposed_name": "v18_non_virtual_thunk_to_TActionScriptVarProperties_TActionScriptVarProperties__2",
+      "spectron_ea": "0x237494"
+    },
+    {
+      "actual_name_after": "v18_TActionScriptVar_TActionScriptVar",
+      "actual_name_before": "_ZN10mH33wa4I1qD1Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22d9ac",
+      "original_name": "TActionScriptVar_TActionScriptVar",
+      "proposed_name": "v18_TActionScriptVar_TActionScriptVar",
+      "spectron_ea": "0x23749c"
+    },
+    {
+      "actual_name_after": "v18_TActionScriptVar_TActionScriptVar__2",
+      "actual_name_before": "_ZN10mH33wa4I1qD0Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22d9c0",
+      "original_name": "TActionScriptVar_TActionScriptVar__2",
+      "proposed_name": "v18_TActionScriptVar_TActionScriptVar__2",
+      "spectron_ea": "0x2374b0"
+    }
+  ],
+  "renamed_count": 22,
+  "resolved_count": 22,
+  "save_path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v331_tscript_var_residual.i64",
+  "saved": true,
+  "verified": true,
+  "verified_name_count": 22
+}

@@ -800,6 +800,84 @@ generators are
 `tools/generate_spectron_format_parameters_property_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v326.py`.
 
+### v331 static-variable runtime aliases
+
+The v331 pass continues from the verified v330 database through the next
+class-local residual block. It covers the universe static initializer, the
+`TGraalPlayersArrayVar` destructor pair, the static and action variable
+factories, and the complete property and object destructor families. The
+target names are obfuscated, so each alias is backed by source and target
+Hex-Rays pseudocode, ABI destructor form, function metrics, and local order.
+
+| Source role | Spectron address | Applied alias | Review result |
+| --- | ---: | --- | --- |
+| `TScriptUniverse_initStaticScriptVars_void` | `0x236d04` | `v18_TScriptUniverse_initStaticScriptVars_void` | same property-registration initializer |
+| `TScriptUniverseProperties_TScriptUniverseProperties` | `0x236d18` | `v18_TScriptUniverseProperties_TScriptUniverseProperties` | complete D1 destructor; register-detail change |
+| `non_virtual_thunk_to_TScriptUniverseProperties_TScriptUniverseProperties` | `0x236d34` | `v18_non_virtual_thunk_to_TScriptUniverseProperties_TScriptUniverseProperties` | exact secondary-base thunk |
+| `TScriptUniverseProperties_TScriptUniverseProperties__2` | `0x236d3c` | `v18_TScriptUniverseProperties_TScriptUniverseProperties__2` | deleting D0 destructor; register-detail change |
+| `non_virtual_thunk_to_TScriptUniverseProperties_TScriptUniverseProperties__2` | `0x236d74` | `v18_non_virtual_thunk_to_TScriptUniverseProperties_TScriptUniverseProperties__2` | exact deleting thunk |
+| `TGraalPlayersArrayVar_TGraalPlayersArrayVar` | `0x236d98` | `v18_TGraalPlayersArrayVar_TGraalPlayersArrayVar` | complete D1 destructor; register-detail change |
+| `TGraalPlayersArrayVar_TGraalPlayersArrayVar__2` | `0x236dac` | `v18_TGraalPlayersArrayVar_TGraalPlayersArrayVar__2` | deleting D0 destructor; register-detail change |
+| `jump_TScriptEnvironment_destroyScriptVariable_TGraalVar__2` | `0x236ddc` | `v18_jump_TScriptEnvironment_destroyScriptVariable_TGraalVar__2` | exact four-byte forwarder |
+| `TStaticVar_create_TString_const` | `0x236f80` | `v18_TStaticVar_create_TString_const` | exact allocator and constructor sequence |
+| `TStaticVar_TStaticVar` | `0x23702c` | `v18_TStaticVar_TStaticVar` | complete D2 destructor; register-detail change |
+| `TStaticVar_TStaticVar__2` | `0x23705c` | `v18_TStaticVar_TStaticVar__2` | exact deleting D0 destructor |
+| `TActionScriptVar_create_TString_const` | `0x2372c4` | `v18_TActionScriptVar_create_TString_const` | exact allocator and constructor sequence |
+| `TStaticVarProperties_TStaticVarProperties` | `0x2373d4` | `v18_TStaticVarProperties_TStaticVarProperties` | complete D2 destructor; register-detail change |
+| `non_virtual_thunk_to_TStaticVarProperties_TStaticVarProperties` | `0x2373f0` | `v18_non_virtual_thunk_to_TStaticVarProperties_TStaticVarProperties` | exact secondary-base thunk |
+| `TActionScriptVarProperties_TActionScriptVarProperties` | `0x2373f8` | `v18_TActionScriptVarProperties_TActionScriptVarProperties` | complete D1 destructor; register-detail change |
+| `non_virtual_thunk_to_TActionScriptVarProperties_TActionScriptVarProperties` | `0x237414` | `v18_non_virtual_thunk_to_TActionScriptVarProperties_TActionScriptVarProperties` | exact secondary-base thunk |
+| `TStaticVarProperties_TStaticVarProperties__2` | `0x23741c` | `v18_TStaticVarProperties_TStaticVarProperties__2` | deleting D0 destructor; register-detail change |
+| `non_virtual_thunk_to_TStaticVarProperties_TStaticVarProperties__2` | `0x237454` | `v18_non_virtual_thunk_to_TStaticVarProperties_TStaticVarProperties__2` | exact deleting thunk |
+| `TActionScriptVarProperties_TActionScriptVarProperties__2` | `0x23745c` | `v18_TActionScriptVarProperties_TActionScriptVarProperties__2` | deleting D0 destructor; register-detail change |
+| `non_virtual_thunk_to_TActionScriptVarProperties_TActionScriptVarProperties__2` | `0x237494` | `v18_non_virtual_thunk_to_TActionScriptVarProperties_TActionScriptVarProperties__2` | exact deleting thunk |
+| `TActionScriptVar_TActionScriptVar` | `0x23749c` | `v18_TActionScriptVar_TActionScriptVar` | complete D1 destructor; register-detail change |
+| `TActionScriptVar_TActionScriptVar__2` | `0x2374b0` | `v18_TActionScriptVar_TActionScriptVar__2` | deleting D0 destructor; register-detail change |
+
+The target initializer at `0x236d04` makes the same one-call property-table
+registration as the source. The `e4ZYfa8PV2Properties` functions reset two
+vtable pointers, call the base property destructor, and release the receiver
+for D0. The target thunks subtract 16 bytes from the secondary receiver, which
+matches the source ABI boundary exactly.
+
+The `JE42uaVwcK` pair follows the already translated array-cell method and
+calls the obfuscated `G0gxgajWBw` base destructor. The four-byte jump wrapper
+has the same one-instruction forwarding shape as the source environment
+cleanup wrapper. The `NgNBgaN3oA` and `mH33wa4I1q` factories each allocate
+`0x88` bytes, while their destructors preserve the static-variable garbage
+collector cleanup, base destruction, and `operator delete` sequence.
+
+Ten of the 22 rows have exact normalized metrics. The remaining twelve differ
+only in the register-detail hash. That difference reflects compiler register
+allocation in the obfuscated build and does not change the body shape or
+operation. All 22 rows have pseudocode on both sides, are marked high
+confidence, and were absent from the automatic semantic map before review.
+
+The application renamed all 22 functions and added 22 evidence comments with
+zero failures. Reopening the fresh copy verified all 22 names. The v331
+database has 11,707 functions and zero audited default names, with 6,362
+translated aliases, 4,706 source-backed dynamic rows, 1,755 exact retained
+target names, and 5,782 exact dynamic function starts.
+
+The private database is
+`analysis/spectron_libqplay_translated_v331_tscript_var_residual.i64` with
+SHA-256
+`f6bb72c43b0022b372d6d98e4143aa920a7e3c43cd5a89ede10e7510cd00178c`.
+The machine-readable records are
+`artifacts/spectron_tscript_var_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_var_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_var_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v331_tscript_var_residual.json`,
+`artifacts/spectron_name_coverage_audit_v331.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v331.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v331.json`,
+`artifacts/spectron_semantic_translation_v331.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v331.json`.
+
+This pass changed only the private IDA copy and the research archive. It did
+not patch the APK, rerun the loopback client, alter TLS behavior, contact a
+game server, or test a live endpoint.
+
 ### v330 TScriptUniverse residual aliases
 
 The v330 pass follows the v329 TScriptSpace work into the next raw

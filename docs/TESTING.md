@@ -937,6 +937,112 @@ The expected v326 database hash is
 checkpoint is static evidence only. It does not change the loopback runtime
 result, TLS diagnosis, or live-service boundary.
 
+### v331 static-variable residual translation
+
+The v331 pass is static IDA work only. It starts from the verified v330
+database and reviews the complete static-variable and property-destructor
+sequence. The target has raw obfuscated C++ names, so the evidence capture
+includes the surrounding translated methods as context.
+
+Capture compact pseudocode from disposable copies with:
+
+```bash
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  LIBQPLAY_FUNCTION_EVIDENCE=0x22d240,0x22d254,0x22d270,0x22d278,0x22d2b0,0x22d2b8,0x22d2d4,0x22d2e8,0x22d318,0x22d31c,0x22d338,0x22d3dc,0x22d490,0x22d4c0,0x22d53c,0x22d56c,0x22d58c,0x22d6fc,0x22d784,0x22d7d4,0x22d804,0x22d8e4,0x22d900,0x22d908,0x22d924,0x22d92c,0x22d964,0x22d96c,0x22d9a4,0x22d9ac,0x22d9c0,0x22d9f0 \
+  LIBQPLAY_EVIDENCE_COMPACT=1 \
+  LIBQPLAY_EVIDENCE_OUT=/tmp/graal-source-tscriptvar-residual.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/libqplay_translated_all_v4.i64 \
+  -s tools/ida_dump_function_evidence.py
+
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  LIBQPLAY_FUNCTION_EVIDENCE=0x236d04,0x236d18,0x236d34,0x236d3c,0x236d74,0x236d7c,0x236d98,0x236dac,0x236ddc,0x236de0,0x236dfc,0x236ea0,0x236f80,0x236fb0,0x23702c,0x23705c,0x23707c,0x2371ec,0x237274,0x2372c4,0x2372f4,0x2373d4,0x2373f0,0x2373f8,0x237414,0x23741c,0x237454,0x23745c,0x237494,0x23749c,0x2374b0,0x2374e0,0x237598 \
+  LIBQPLAY_EVIDENCE_COMPACT=1 \
+  LIBQPLAY_EVIDENCE_OUT=/tmp/graal-target-tscriptvar-residual.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/spectron_libqplay_translated_v330_tscript_universe_residual.i64 \
+  -s tools/ida_dump_function_evidence.py
+```
+
+Generate the reviewed anchor artifact from the source and v330 target feature
+exports. The generator checks the target names, function boundaries, all
+recorded normalized metrics, and the pseudocode rows before writing the
+artifact:
+
+```bash
+python3 tools/generate_spectron_tscript_var_residual_anchors.py \
+  --original-features /tmp/original_features_v4_v3_materialized_v2.json \
+  --spectron-features artifacts/spectron_features_v330_tscript_universe_residual.json \
+  --semantic-map /tmp/semantic_v330_current.json \
+  --source-evidence /tmp/graal-source-tscriptvar-residual.json \
+  --target-evidence /tmp/graal-target-tscriptvar-residual.json \
+  --original-binary-sha256 9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8 \
+  --spectron-binary-sha256 f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219 \
+  --output artifacts/spectron_tscript_var_residual_manual_translation_anchors_20260829.json
+```
+
+Apply the 22 aliases to a temporary input copy and save to a new v331 path.
+The input and output must be different because the applier refuses to
+overwrite an existing IDA database:
+
+```bash
+cp /path/to/spectron_libqplay_translated_v330_tscript_universe_residual.i64 \
+  /tmp/spectron_v331_anchor_apply_input.i64
+
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_MANUAL_ANCHORS=/path/to/libqplay/artifacts/spectron_tscript_var_residual_manual_translation_anchors_20260829.json \
+  SPECTRON_MANUAL_EXPECTED_ARTIFACT=spectron_tscript_var_residual_manual_translation_anchors_20260829 \
+  SPECTRON_MANUAL_APPLY=1 \
+  SPECTRON_MANUAL_SAVE_PATH=/path/to/spectron_libqplay_translated_v331_tscript_var_residual.i64 \
+  SPECTRON_MANUAL_REPORT=/tmp/spectron_tscript_var_residual_application_20260829.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /tmp/spectron_v331_anchor_apply_input.i64 \
+  -s tools/ida_apply_spectron_manual_anchors.py
+
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_MANUAL_ANCHORS=/path/to/libqplay/artifacts/spectron_tscript_var_residual_manual_translation_anchors_20260829.json \
+  SPECTRON_MANUAL_EXPECTED_ARTIFACT=spectron_tscript_var_residual_manual_translation_anchors_20260829 \
+  SPECTRON_MANUAL_VERIFY_REPORT=/tmp/spectron_tscript_var_residual_verification_20260829.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/spectron_libqplay_translated_v331_tscript_var_residual.i64 \
+  -s tools/ida_verify_spectron_manual_anchors.py
+```
+
+The expected application result is 22 resolved functions, 22 renames, 22
+evidence comments, zero failures, and a successful save. The reopen result is
+22 verified names in an 11,707-function database. Refresh the target feature
+export, name-origin audit, dynamic boundary audit, dynamic-symbol coverage,
+and semantic map, then rebuild the checkpoint with
+`tools/generate_spectron_translation_checkpoint_v331.py`.
+
+The v331 anchor summary is 22 high-confidence rows, ten exact metric matches,
+twelve register-detail layout rows, and pseudocode for all 44 source and
+target rows. The resulting name audit should report 6,362 translated aliases,
+419 target-only descriptive labels, 867 retained target names, seven JNI
+exports, 4,052 other IDA or PLT names, and zero default names. Dynamic
+coverage should report 4,706 source-backed aliases, 1,755 exact retained
+names, and 5,782 exact function starts. The v331 database hash is
+`f6bb72c43b0022b372d6d98e4143aa920a7e3c43cd5a89ede10e7510cd00178c`.
+
+The complete v331 records are
+`artifacts/spectron_tscript_var_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_var_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_var_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v331_tscript_var_residual.json`,
+`artifacts/spectron_name_coverage_audit_v331.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v331.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v331.json`,
+`artifacts/spectron_semantic_translation_v331.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v331.json`.
+
+This checkpoint is static evidence only. It does not patch the APK, rerun the
+loopback client, alter TLS behavior, contact a game server, or test a live
+endpoint.
+
 ### v330 TScriptUniverse residual translation
 
 The v330 pass is static IDA work only. It starts from the verified v329

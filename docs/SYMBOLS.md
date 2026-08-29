@@ -425,6 +425,57 @@ records are
 `artifacts/spectron_semantic_translation_v326.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v326.json`.
 
+### v331 static-variable residual aliases
+
+The v331 pass adds 22 semantic aliases to the private Spectron IDA database.
+The target names remain in the evidence records, while the applied `v18_`
+names make the recovered 1.8 role easy to find without pretending that the
+stripped 2.2 library retained the old debug names.
+
+| Spectron address | Original source role | Applied alias | Target family |
+| ---: | --- | --- | --- |
+| `0x236d04` | `TScriptUniverse_initStaticScriptVars_void` | `v18_TScriptUniverse_initStaticScriptVars_void` | obfuscated universe initializer |
+| `0x236d18` | `TScriptUniverseProperties_TScriptUniverseProperties` | `v18_TScriptUniverseProperties_TScriptUniverseProperties` | `e4ZYfa8PV2Properties` D1 |
+| `0x236d34` | property D1 non-virtual thunk | `v18_non_virtual_thunk_to_TScriptUniverseProperties_TScriptUniverseProperties` | secondary receiver adjustment |
+| `0x236d3c` | `TScriptUniverseProperties_TScriptUniverseProperties__2` | `v18_TScriptUniverseProperties_TScriptUniverseProperties__2` | `e4ZYfa8PV2Properties` D0 |
+| `0x236d74` | property D0 non-virtual thunk | `v18_non_virtual_thunk_to_TScriptUniverseProperties_TScriptUniverseProperties__2` | secondary receiver adjustment |
+| `0x236d98` | `TGraalPlayersArrayVar_TGraalPlayersArrayVar` | `v18_TGraalPlayersArrayVar_TGraalPlayersArrayVar` | `JE42uaVwcK` D1 |
+| `0x236dac` | `TGraalPlayersArrayVar_TGraalPlayersArrayVar__2` | `v18_TGraalPlayersArrayVar_TGraalPlayersArrayVar__2` | `JE42uaVwcK` D0 |
+| `0x236ddc` | `jump_TScriptEnvironment_destroyScriptVariable_TGraalVar__2` | `v18_jump_TScriptEnvironment_destroyScriptVariable_TGraalVar__2` | `D6TlgajP1m` forwarder |
+| `0x236f80` | `TStaticVar_create_TString_const` | `v18_TStaticVar_create_TString_const` | `NgNBgaN3oA` factory |
+| `0x23702c` | `TStaticVar_TStaticVar` | `v18_TStaticVar_TStaticVar` | `NgNBgaN3oA` D2 |
+| `0x23705c` | `TStaticVar_TStaticVar__2` | `v18_TStaticVar_TStaticVar__2` | `NgNBgaN3oA` D0 |
+| `0x2372c4` | `TActionScriptVar_create_TString_const` | `v18_TActionScriptVar_create_TString_const` | `mH33wa4I1q` factory |
+| `0x2373d4` | `TStaticVarProperties_TStaticVarProperties` | `v18_TStaticVarProperties_TStaticVarProperties` | `NgNBgaN3oAProperties` D2 |
+| `0x2373f0` | static-property D1 non-virtual thunk | `v18_non_virtual_thunk_to_TStaticVarProperties_TStaticVarProperties` | secondary receiver adjustment |
+| `0x2373f8` | `TActionScriptVarProperties_TActionScriptVarProperties` | `v18_TActionScriptVarProperties_TActionScriptVarProperties` | `mH33wa4I1qProperties` D1 |
+| `0x237414` | action-property D1 non-virtual thunk | `v18_non_virtual_thunk_to_TActionScriptVarProperties_TActionScriptVarProperties` | secondary receiver adjustment |
+| `0x23741c` | `TStaticVarProperties_TStaticVarProperties__2` | `v18_TStaticVarProperties_TStaticVarProperties__2` | `NgNBgaN3oAProperties` D0 |
+| `0x237454` | static-property D0 non-virtual thunk | `v18_non_virtual_thunk_to_TStaticVarProperties_TStaticVarProperties__2` | secondary receiver adjustment |
+| `0x23745c` | `TActionScriptVarProperties_TActionScriptVarProperties__2` | `v18_TActionScriptVarProperties_TActionScriptVarProperties__2` | `mH33wa4I1qProperties` D0 |
+| `0x237494` | action-property D0 non-virtual thunk | `v18_non_virtual_thunk_to_TActionScriptVarProperties_TActionScriptVarProperties__2` | secondary receiver adjustment |
+| `0x23749c` | `TActionScriptVar_TActionScriptVar` | `v18_TActionScriptVar_TActionScriptVar` | `mH33wa4I1q` D1 |
+| `0x2374b0` | `TActionScriptVar_TActionScriptVar__2` | `v18_TActionScriptVar_TActionScriptVar__2` | `mH33wa4I1q` D0 |
+
+The table preserves the raw target identity in the anchor artifact. Ten rows
+have exact normalized metrics. Twelve differ only in register-detail
+allocation, so they are still semantic aliases rather than byte-for-byte
+claims. All 22 names have source and target pseudocode, and all 22 were
+verified after reopening the saved IDA database.
+
+The v331 name audit reports 6,362 translated aliases, 419 target-only
+descriptive labels, 867 retained target names, seven JNI exports, 4,052 other
+IDA or PLT names, and zero default names. Dynamic coverage reports 4,706
+source-backed aliases and 1,755 exact retained dynamic names. The v331 records
+are
+`artifacts/spectron_tscript_var_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_var_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_var_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v331.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v331.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v331.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v331.json`.
+
 ### v330 TScriptUniverse residual aliases
 
 The v330 pass adds six source-backed aliases to the private Spectron IDA

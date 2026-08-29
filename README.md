@@ -13,7 +13,7 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v330 Spectron database. It
+The current documented translation frontier is the v331 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -79,7 +79,7 @@ caused by rebuilt target string and container classes. All 24 aliases are
 high-confidence, with compact Hex-Rays fingerprints and class-local order
 evidence recorded for both builds. The v324 database contains 6,287 reviewed
 `v18_` aliases. Its dynamic-symbol audit reports 4,614 source-backed rows and
-1,831 exact retained names. This is the latest static translation checkpoint;
+1,831 exact retained names. This was an earlier static translation checkpoint;
 it has not been used for a new runtime APK replay.
 
 The v325 revision adds eight high-confidence destructor-family aliases around
@@ -135,6 +135,18 @@ script-machine, and variable roles directly: `LBgVgaqANQ`, `MpGzgariDy`,
 `v18_` aliases, 4,679 source-backed dynamic rows, and 1,776 exact retained
 dynamic names. It is a static IDA checkpoint and has not been used for a new
 runtime APK replay.
+
+The v331 revision continues immediately into the static-variable runtime. It
+adds 22 high-confidence aliases for the universe initializer, the
+`TGraalPlayersArrayVar` destructor pair, the `TStaticVar` factory and
+destructor family, the `TActionScriptVar` factory and destructor family, both
+property-destructor families, and their non-virtual thunks. Every row has
+source and target Hex-Rays pseudocode. Ten rows are exact normalized feature
+matches, while twelve differ only in register-detail allocation after the
+target's obfuscation and wrapper rebuild. The v331 database contains 6,362
+reviewed `v18_` aliases, 4,706 source-backed dynamic rows, and 1,755 exact
+retained dynamic names. It is a static IDA checkpoint and has not been used
+for a new runtime APK replay.
 
 The v273 revision adds six high-confidence libjpeg source and destination
 callback labels. They are tied to the target `jpeg_stdio_dest` and
@@ -729,6 +741,88 @@ target-only functions, with zero failures. Reopening the fresh copy verified
 all four names. This was a static translation pass only. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
+
+### v331 static-variable runtime aliases
+
+The v331 pass continues from the verified v330 database into the next
+class-local block. The target functions are mostly raw obfuscated C++ names,
+but the source and target retain the same destructor ABI forms, factory call
+sequences, receiver adjustments, and method order. That combination makes
+this a much safer translation surface than name similarity alone.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | --- | --- | --- |
+| `0x22d240` | `0x236d04` `_Z10NJLNuahMtwv` | `v18_TScriptUniverse_initStaticScriptVars_void` | universe property initializer |
+| `0x22d254` | `0x236d18` `_ZN20e4ZYfa8PV2PropertiesD1Ev` | `v18_TScriptUniverseProperties_TScriptUniverseProperties` | complete property destructor |
+| `0x22d270` | `0x236d34` `_ZThn16_N20e4ZYfa8PV2PropertiesD1Ev` | `v18_non_virtual_thunk_to_TScriptUniverseProperties_TScriptUniverseProperties` | secondary-base D1 thunk |
+| `0x22d278` | `0x236d3c` `_ZN20e4ZYfa8PV2PropertiesD0Ev` | `v18_TScriptUniverseProperties_TScriptUniverseProperties__2` | deleting property destructor |
+| `0x22d2b0` | `0x236d74` `_ZThn16_N20e4ZYfa8PV2PropertiesD0Ev` | `v18_non_virtual_thunk_to_TScriptUniverseProperties_TScriptUniverseProperties__2` | secondary-base D0 thunk |
+| `0x22d2d4` | `0x236d98` `_ZN10JE42uaVwcKD1Ev` | `v18_TGraalPlayersArrayVar_TGraalPlayersArrayVar` | complete player-array destructor |
+| `0x22d2e8` | `0x236dac` `_ZN10JE42uaVwcKD0Ev` | `v18_TGraalPlayersArrayVar_TGraalPlayersArrayVar__2` | deleting player-array destructor |
+| `0x22d318` | `0x236ddc` `j_._ZN10D6TlgajP1m10R8CcIadyeOEP10G0gxgajWBw_0` | `v18_jump_TScriptEnvironment_destroyScriptVariable_TGraalVar__2` | destruction forwarder |
+| `0x22d490` | `0x236f80` `_Z20NgNBgaN3oAE7Bm2aaHDBRK10C8THgaTQxF` | `v18_TStaticVar_create_TString_const` | static-variable factory |
+| `0x22d53c` | `0x23702c` `_ZN10NgNBgaN3oAD2Ev` | `v18_TStaticVar_TStaticVar` | complete static-variable destructor |
+| `0x22d56c` | `0x23705c` `_ZN10NgNBgaN3oAD0Ev` | `v18_TStaticVar_TStaticVar__2` | deleting static-variable destructor |
+| `0x22d7d4` | `0x2372c4` `_Z20mH33wa4I1qE7Bm2aaHDBRK10C8THgaTQxF` | `v18_TActionScriptVar_create_TString_const` | action-variable factory |
+| `0x22d8e4` | `0x2373d4` `_ZN20NgNBgaN3oAPropertiesD2Ev` | `v18_TStaticVarProperties_TStaticVarProperties` | complete static-property destructor |
+| `0x22d900` | `0x2373f0` `_ZThn16_N20NgNBgaN3oAPropertiesD1Ev` | `v18_non_virtual_thunk_to_TStaticVarProperties_TStaticVarProperties` | secondary-base D1 thunk |
+| `0x22d908` | `0x2373f8` `_ZN20mH33wa4I1qPropertiesD1Ev` | `v18_TActionScriptVarProperties_TActionScriptVarProperties` | complete action-property destructor |
+| `0x22d924` | `0x237414` `_ZThn16_N20mH33wa4I1qPropertiesD1Ev` | `v18_non_virtual_thunk_to_TActionScriptVarProperties_TActionScriptVarProperties` | secondary-base D1 thunk |
+| `0x22d92c` | `0x23741c` `_ZN20NgNBgaN3oAPropertiesD0Ev` | `v18_TStaticVarProperties_TStaticVarProperties__2` | deleting static-property destructor |
+| `0x22d964` | `0x237454` `_ZThn16_N20NgNBgaN3oAPropertiesD0Ev` | `v18_non_virtual_thunk_to_TStaticVarProperties_TStaticVarProperties__2` | secondary-base D0 thunk |
+| `0x22d96c` | `0x23745c` `_ZN20mH33wa4I1qPropertiesD0Ev` | `v18_TActionScriptVarProperties_TActionScriptVarProperties__2` | deleting action-property destructor |
+| `0x22d9a4` | `0x237494` `_ZThn16_N20mH33wa4I1qPropertiesD0Ev` | `v18_non_virtual_thunk_to_TActionScriptVarProperties_TActionScriptVarProperties__2` | secondary-base D0 thunk |
+| `0x22d9ac` | `0x23749c` `_ZN10mH33wa4I1qD1Ev` | `v18_TActionScriptVar_TActionScriptVar` | complete action-variable destructor |
+| `0x22d9c0` | `0x2374b0` `_ZN10mH33wa4I1qD0Ev` | `v18_TActionScriptVar_TActionScriptVar__2` | deleting action-variable destructor |
+
+The initializer at `0x236d04` makes the same one-call registration as the
+source `TScriptUniverse_initStaticScriptVars_void`. The two
+`e4ZYfa8PV2Properties` destructor forms reset the primary and secondary
+vtable pointers, call the base property destructor, and, for D0, release the
+object. Their 16-byte thunks subtract the same secondary-base offset as the
+source.
+
+The `JE42uaVwcK` pair is the target `TGraalPlayersArrayVar` destructor family
+because it follows the already translated array-cell accessor and calls the
+target `G0gxgajWBw` base destructor. The four-byte target jump wrapper is the
+same one-instruction forwarding boundary as the source environment cleanup
+wrapper.
+
+The `NgNBgaN3oA` and `mH33wa4I1q` families preserve the source static and
+action variable lifecycle. Each factory allocates `0x88` bytes and invokes
+the corresponding constructor. Each complete destructor restores its vtable,
+performs the garbage-collector or base cleanup, and each D0 form then calls
+`operator delete`. The property families preserve the base `TProperties`
+destructor and the secondary-base thunks.
+
+Ten rows have exact normalized feature metrics. The other twelve differ only
+in the register-detail hash, which records compiler register allocation rather
+than a semantic or control-flow change. All 22 rows have compact Hex-Rays
+pseudocode on both sides, all are marked high confidence, and none was an
+automatic semantic-map promotion.
+
+The v331 database is
+`analysis/spectron_libqplay_translated_v331_tscript_var_residual.i64` with
+SHA-256
+`f6bb72c43b0022b372d6d98e4143aa920a7e3c43cd5a89ede10e7510cd00178c`.
+It contains 11,707 functions and zero audited default names, with 6,362
+translated aliases, 4,706 source-backed dynamic rows, and 1,755 exact
+retained target names. The complete records are
+`artifacts/spectron_tscript_var_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_var_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_var_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v331_tscript_var_residual.json`,
+`artifacts/spectron_name_coverage_audit_v331.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v331.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v331.json`,
+`artifacts/spectron_semantic_translation_v331.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v331.json`.
+
+The reusable helpers are
+`tools/generate_spectron_tscript_var_residual_anchors.py` and
+`tools/generate_spectron_translation_checkpoint_v331.py`. This was a static
+translation pass only. It did not patch the APK, rerun the loopback client,
+alter TLS behavior, contact a game server, or test a live endpoint.
 
 ### v330 TScriptUniverse residual aliases
 

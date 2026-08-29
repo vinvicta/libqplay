@@ -3035,6 +3035,53 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v331 static-variable runtime translation
+
+The v331 revision is a static IDA checkpoint for the class-local block that
+follows the v330 TScriptUniverse methods. It covers the universe static
+initializer, the `TGraalPlayersArrayVar` destructor pair, the `TStaticVar` and
+`TActionScriptVar` factories, and all property and object destructor forms in
+the block. It does not change the previously verified loopback package,
+connector TLS result, or local protocol responder.
+
+The target class names are obfuscated, but the bodies preserve the source
+sequence. The `e4ZYfa8PV2Properties` methods reset their vtables and call the
+base `TProperties` destructor. The `JE42uaVwcK` pair follows the translated
+array-cell accessor and calls the `G0gxgajWBw` base destructor. The
+`NgNBgaN3oA` factory allocates `0x88` bytes for a static variable, and the
+`mH33wa4I1q` factory repeats the same operation for an action variable. Their
+complete and deleting destructors preserve garbage-collector cleanup, base
+destruction, and `operator delete`.
+
+All 22 aliases were applied to a fresh v330-derived IDA database and all 22
+were verified after reopening. Ten rows are exact normalized feature matches.
+The other twelve differ only in the register-detail hash, reflecting target
+register allocation. Compact pseudocode was available for all 22 source and
+target functions, and every row is marked high confidence.
+
+The v331 database contains 11,707 functions and zero audited default names,
+with 6,362 translated `v18_` aliases, 4,706 source-backed dynamic rows, and
+1,755 exact retained target names. All 5,782 defined dynamic function symbols
+still resolve to exact IDA function starts.
+
+The database is
+`analysis/spectron_libqplay_translated_v331_tscript_var_residual.i64` with
+SHA-256
+`f6bb72c43b0022b372d6d98e4143aa920a7e3c43cd5a89ede10e7510cd00178c`.
+The records are
+`artifacts/spectron_tscript_var_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_var_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_var_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v331_tscript_var_residual.json`,
+`artifacts/spectron_name_coverage_audit_v331.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v331.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v331.json`,
+`artifacts/spectron_semantic_translation_v331.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v331.json`.
+
+This is static evidence only. No APK was patched, no live endpoint was
+contacted, and no new runtime replay was performed for v331.
+
 ## Spectron 2.2 v330 TScriptUniverse residual translation
 
 The v330 revision is a static IDA checkpoint for the next target

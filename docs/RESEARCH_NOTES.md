@@ -261,6 +261,93 @@ This pass changed only the private IDA copy and archive. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
 
+## 2026-08-29: static-variable destructor block, v331
+
+The next clean residual block begins at source `0x22d240` and target
+`0x236d04`. It is a continuation of the same script runtime, but the target
+has stripped its readable source names and replaced them with obfuscated C++
+identifiers. I reviewed the full local sequence rather than translating a
+single name in isolation.
+
+| Source boundary | Target boundary | Recovered source role | Evidence summary |
+| ---: | ---: | --- | --- |
+| `0x22d240` | `0x236d04` | `TScriptUniverse_initStaticScriptVars_void` | same one-call property initializer |
+| `0x22d254` | `0x236d18` | `TScriptUniverseProperties_TScriptUniverseProperties` | complete D1 destructor |
+| `0x22d270` | `0x236d34` | property D1 non-virtual thunk | exact receiver adjustment |
+| `0x22d278` | `0x236d3c` | `TScriptUniverseProperties_TScriptUniverseProperties__2` | deleting D0 destructor |
+| `0x22d2b0` | `0x236d74` | property D0 non-virtual thunk | exact receiver adjustment |
+| `0x22d2d4` | `0x236d98` | `TGraalPlayersArrayVar_TGraalPlayersArrayVar` | complete D1 destructor |
+| `0x22d2e8` | `0x236dac` | `TGraalPlayersArrayVar_TGraalPlayersArrayVar__2` | deleting D0 destructor |
+| `0x22d318` | `0x236ddc` | `jump_TScriptEnvironment_destroyScriptVariable_TGraalVar__2` | exact forwarding wrapper |
+| `0x22d490` | `0x236f80` | `TStaticVar_create_TString_const` | exact allocator and constructor sequence |
+| `0x22d53c` | `0x23702c` | `TStaticVar_TStaticVar` | complete D2 destructor |
+| `0x22d56c` | `0x23705c` | `TStaticVar_TStaticVar__2` | exact deleting D0 destructor |
+| `0x22d7d4` | `0x2372c4` | `TActionScriptVar_create_TString_const` | exact allocator and constructor sequence |
+| `0x22d8e4` | `0x2373d4` | `TStaticVarProperties_TStaticVarProperties` | complete D2 destructor |
+| `0x22d900` | `0x2373f0` | static-property D1 non-virtual thunk | exact receiver adjustment |
+| `0x22d908` | `0x2373f8` | `TActionScriptVarProperties_TActionScriptVarProperties` | complete D1 destructor |
+| `0x22d924` | `0x237414` | action-property D1 non-virtual thunk | exact receiver adjustment |
+| `0x22d92c` | `0x23741c` | `TStaticVarProperties_TStaticVarProperties__2` | deleting D0 destructor |
+| `0x22d964` | `0x237454` | static-property D0 non-virtual thunk | exact receiver adjustment |
+| `0x22d96c` | `0x23745c` | `TActionScriptVarProperties_TActionScriptVarProperties__2` | deleting D0 destructor |
+| `0x22d9a4` | `0x237494` | action-property D0 non-virtual thunk | exact receiver adjustment |
+| `0x22d9ac` | `0x23749c` | `TActionScriptVar_TActionScriptVar` | complete D1 destructor |
+| `0x22d9c0` | `0x2374b0` | `TActionScriptVar_TActionScriptVar__2` | deleting D0 destructor |
+
+The first pair is the universe's static-property initializer. The source
+calls `TScriptProperty::addFuncs` with a static table, while the target calls
+the obfuscated equivalent `cWWYfaxbT2::DpbOGacdQC` with the same three logical
+arguments. The target's 20-byte body differs only in register-detail
+normalization.
+
+The `e4ZYfa8PV2Properties` sequence is a complete C++ destructor quartet. The
+D1 and D0 bodies reset the primary and secondary vtable pointers, invoke the
+base `TProperties` destructor, and, for D0, call `operator delete`. Both
+non-virtual thunks subtract 16 bytes from the secondary receiver. The source
+and target thunk metrics are exact, and the destructor bodies differ only in
+register-detail allocation.
+
+The `JE42uaVwcK` pair is identified as `TGraalPlayersArrayVar` because it
+follows the already translated `getArrayCellObject` method and calls the
+obfuscated `G0gxgajWBw` base destructor. The four-byte `D6TlgajP1m` wrapper
+has the same one-instruction forwarding behavior as the source environment
+cleanup jump.
+
+The `NgNBgaN3oA` class preserves `TStaticVar`. Its factory allocates `0x88`
+bytes, its complete destructor removes the object from the universe garbage
+collector and then destroys the `TGraalVar` base, and its D0 form releases the
+object. The `mH33wa4I1q` class repeats that structure for `TActionScriptVar`.
+The two property families preserve the base `TProperties` destructor and all
+four secondary-base thunk boundaries.
+
+There are ten exact normalized feature matches and twelve rows with only a
+`register_detail_hash` difference. Every row has source and target compact
+Hex-Rays pseudocode. The broad semantic matcher had not promoted any of these
+rows before review, so the artifact records them as new manual context
+anchors rather than silently changing the automatic map.
+
+The aliases were applied to a fresh v330-derived database. All 22 renames and
+22 evidence comments succeeded, and a close and reopen verified every name.
+The resulting database has 11,707 functions, zero audited default names,
+6,362 translated aliases, 4,706 source-backed dynamic rows, 1,755 exact
+retained dynamic names, and 5,782 exact dynamic function starts.
+
+The database hash is
+`f6bb72c43b0022b372d6d98e4143aa920a7e3c43cd5a89ede10e7510cd00178c`.
+The evidence is stored in
+`artifacts/spectron_tscript_var_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_var_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_var_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v331_tscript_var_residual.json`,
+`artifacts/spectron_name_coverage_audit_v331.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v331.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v331.json`,
+`artifacts/spectron_semantic_translation_v331.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v331.json`.
+
+This was static analysis only. It did not patch the APK, rerun the loopback
+client, alter TLS behavior, contact a game server, or test a live endpoint.
+
 ## 2026-08-29: TScriptUniverse residual lifecycle block, v330
 
 The next class-local target block after the v329 TScriptSpace methods is the

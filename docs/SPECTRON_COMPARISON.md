@@ -319,6 +319,69 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v331 static-variable residual comparison
+
+The v331 pass compares the next complete class-local sequence after the v330
+universe methods. The target class names are obfuscated, but the source and
+target retain the same C++ destructor forms, secondary-base adjustments,
+factory allocation sizes, and base cleanup calls.
+
+| Source role | Spectron address | Applied alias | Match class |
+| --- | ---: | --- | --- |
+| `TScriptUniverse_initStaticScriptVars_void` | `0x236d04` | `v18_TScriptUniverse_initStaticScriptVars_void` | same property initializer |
+| `TScriptUniverseProperties_TScriptUniverseProperties` | `0x236d18` | `v18_TScriptUniverseProperties_TScriptUniverseProperties` | D1 destructor; register-detail change |
+| property D1 non-virtual thunk | `0x236d34` | `v18_non_virtual_thunk_to_TScriptUniverseProperties_TScriptUniverseProperties` | exact thunk |
+| `TScriptUniverseProperties_TScriptUniverseProperties__2` | `0x236d3c` | `v18_TScriptUniverseProperties_TScriptUniverseProperties__2` | D0 destructor; register-detail change |
+| property D0 non-virtual thunk | `0x236d74` | `v18_non_virtual_thunk_to_TScriptUniverseProperties_TScriptUniverseProperties__2` | exact thunk |
+| `TGraalPlayersArrayVar_TGraalPlayersArrayVar` | `0x236d98` | `v18_TGraalPlayersArrayVar_TGraalPlayersArrayVar` | D1 destructor; register-detail change |
+| `TGraalPlayersArrayVar_TGraalPlayersArrayVar__2` | `0x236dac` | `v18_TGraalPlayersArrayVar_TGraalPlayersArrayVar__2` | D0 destructor; register-detail change |
+| `jump_TScriptEnvironment_destroyScriptVariable_TGraalVar__2` | `0x236ddc` | `v18_jump_TScriptEnvironment_destroyScriptVariable_TGraalVar__2` | exact forwarder |
+| `TStaticVar_create_TString_const` | `0x236f80` | `v18_TStaticVar_create_TString_const` | exact factory shape |
+| `TStaticVar_TStaticVar` | `0x23702c` | `v18_TStaticVar_TStaticVar` | D2 destructor; register-detail change |
+| `TStaticVar_TStaticVar__2` | `0x23705c` | `v18_TStaticVar_TStaticVar__2` | exact D0 destructor |
+| `TActionScriptVar_create_TString_const` | `0x2372c4` | `v18_TActionScriptVar_create_TString_const` | exact factory shape |
+| `TStaticVarProperties_TStaticVarProperties` | `0x2373d4` | `v18_TStaticVarProperties_TStaticVarProperties` | D2 destructor; register-detail change |
+| static-property D1 non-virtual thunk | `0x2373f0` | `v18_non_virtual_thunk_to_TStaticVarProperties_TStaticVarProperties` | exact thunk |
+| `TActionScriptVarProperties_TActionScriptVarProperties` | `0x2373f8` | `v18_TActionScriptVarProperties_TActionScriptVarProperties` | D1 destructor; register-detail change |
+| action-property D1 non-virtual thunk | `0x237414` | `v18_non_virtual_thunk_to_TActionScriptVarProperties_TActionScriptVarProperties` | exact thunk |
+| `TStaticVarProperties_TStaticVarProperties__2` | `0x23741c` | `v18_TStaticVarProperties_TStaticVarProperties__2` | D0 destructor; register-detail change |
+| static-property D0 non-virtual thunk | `0x237454` | `v18_non_virtual_thunk_to_TStaticVarProperties_TStaticVarProperties__2` | exact thunk |
+| `TActionScriptVarProperties_TActionScriptVarProperties__2` | `0x23745c` | `v18_TActionScriptVarProperties_TActionScriptVarProperties__2` | D0 destructor; register-detail change |
+| action-property D0 non-virtual thunk | `0x237494` | `v18_non_virtual_thunk_to_TActionScriptVarProperties_TActionScriptVarProperties__2` | exact thunk |
+| `TActionScriptVar_TActionScriptVar` | `0x23749c` | `v18_TActionScriptVar_TActionScriptVar` | D1 destructor; register-detail change |
+| `TActionScriptVar_TActionScriptVar__2` | `0x2374b0` | `v18_TActionScriptVar_TActionScriptVar__2` | D0 destructor; register-detail change |
+
+The first target function is an obfuscated replacement for the source static
+property initializer. The `e4ZYfa8PV2Properties` and `JE42uaVwcK` pairs are
+identified by their vtable writes, base-destructor calls, ABI forms, and their
+position beside translated methods. The four-byte `D6TlgajP1m` wrapper is a
+direct forwarding boundary.
+
+The `NgNBgaN3oA` and `mH33wa4I1q` factories each allocate `0x88` bytes and
+call the corresponding constructor. Their complete destructors preserve the
+source garbage-collector and base cleanup, and their D0 bodies release the
+object. The property families retain all four secondary-base thunk
+boundaries. Ten rows are exact normalized feature matches; twelve differ only
+in register-detail allocation. Compact pseudocode is available for every row.
+
+The v331 database has 11,707 functions, zero audited default names, 6,362
+translated aliases, 4,706 source-backed dynamic rows, 1,755 exact retained
+target names, and 5,782 exact dynamic function starts. Its SHA-256 is
+`f6bb72c43b0022b372d6d98e4143aa920a7e3c43cd5a89ede10e7510cd00178c`.
+The complete comparison records are
+`artifacts/spectron_tscript_var_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_var_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_var_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v331_tscript_var_residual.json`,
+`artifacts/spectron_name_coverage_audit_v331.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v331.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v331.json`,
+`artifacts/spectron_semantic_translation_v331.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v331.json`.
+
+This comparison is static evidence. It does not change the runtime diagnosis,
+patch the APK, or contact a live endpoint.
+
 ## v330 TScriptUniverse residual comparison
 
 The v330 pass compares the next six source and target boundaries in the
