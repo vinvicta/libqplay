@@ -2184,3 +2184,84 @@ The generators are `tools/generate_spectron_sounds_exact_anchors_v349.py`,
 This pass changed only a disposable IDA database copy and its offline
 metadata. It did not patch the APK or native library, alter TLS, contact a
 game service, or change the runtime loading repair.
+
+## 2026-08-29: v350 layout-aware sound routines
+
+The v350 pass resolves the five larger sound rows that were intentionally
+held out of the v349 exact-shape artifact. The target pseudocode preserves the
+source role in each case, but the later build changed the string wrappers,
+collection wrappers, or Java playback branch. The aliases are therefore
+high-confidence layout-aware names, not exact feature matches.
+
+| Source | Target | Source shape | Target shape | Main change |
+| --- | --- | --- | --- | --- |
+| `TSounds_initStaticVars_void` `0xe2a88` | `0xe3678` | 76 bytes, 19 instructions, 1 block, 5 branches, 4 calls | 76, 19, 1, 5, 4 | wrapper type and shape hashes change |
+| `TSoundEffect_TSoundEffect_TString_const` `0xe0dc0` | `0xe1970` | 136 bytes, 34 instructions, 1 block, 5 branches, 4 calls | 172, 43, 1, 7, 6 | encoded-string bridge adds 9 instructions and 2 calls |
+| `TSounds_play_impl_TString_const_bool_bool_double_double` `0xe135c` | `0xe1f34` | 1,312 bytes, 328 instructions, 72 blocks, 96 branches, 42 calls | 1,328, 332, 72, 98, 44 | target string and resource wrappers add 4 instructions and 2 calls |
+| `TSounds_script_setSoundPitchByNote` `0xe2858` | `0xe3440` | 548 bytes, 135 instructions, 21 blocks, 41 branches, 26 calls | 556, 137, 21, 41, 26 | target string-list wrappers add 2 instructions |
+| `TSoundEffectJava_play_void` `0xe31d0` | `0xe3dc0` | 720 bytes, 178 instructions, 20 blocks, 26 branches, 12 calls | 676, 168, 19, 22, 9 | target removes the source `steps` branch |
+
+The static initializer at source `0xe2a88` constructs a `THashList` of size
+`0x28` and a `TStringList` of size `0x18`. Target `0xe3678` constructs
+`KKhLga4xoI` and `vuuHgangcF` instead, with target fields
+`IUKzgam4Gy::fqEVZaFC6H` and `IUKzgam4Gy::mDUVZaIfkI`. Its size and control
+flow remain identical, but the target wrapper changes make the shape hashes
+different.
+
+The source sound-effect constructor at `0xe0dc0` lowercases its input, calls
+the base `THashListObject` constructor, clears the temporary, then copies the
+original name and initializes the object fields. Target `0xe1970` performs the
+same visible initialization through `wiULgacZUI`, `CanTfaz6bZ`, and
+`J7zOgaf09K`. The extra encoded-string bridge explains the 172-byte target
+body.
+
+The source playback state machine at `0xe135c` and target `0xe1f34` both
+classify `.mid`, `.wav`, and compressed extensions using the same two string
+references, honor the disabled-effects list, clamp volume and pan, check
+player capability, request missing files, and reuse or create a sound-effect
+object. The target's `C8THgaTQxF`, `vuuHgangcF`, `KKhLga4xoI`, and
+`uq9xgaUxlx` wrappers account for the changed call and instruction counts. The
+72-block control-flow skeleton remains a useful discriminator.
+
+The note parser at source `0xe2858` and target `0xe3440` uses the literal
+`an,as,bn,cn,cs,dn,ds,en,fn,fs,gn,gs`, parses the octave after the two-letter
+note, and computes the pitch ratio with `powf`. The target substitutes
+`C8THgaTQxF` and `vuuHgangcF` helpers and calls
+`IUKzgam4Gy::wgG1Zawa1N`, but retains the 21 blocks, 26 calls, and 41 branches.
+
+The Java playback method is the only row that is shorter in the target. The
+source checks whether the path starts with `steps` before applying the
+timestamp rate limit. Target `0xe3dc0` begins at the timestamp check, then
+resolves `startSound`, chooses the full or base-data-relative path, invokes
+`CallStaticVoidMethod`, releases the local reference, and updates the loaded
+flag and current timestamp. Removing the source-only `steps` branch explains
+the one-block, four-branch, three-call reduction.
+
+The v350 anchor generator requires these direct target pseudocode markers and
+records the changed metric fields per row. It also checks that the source
+initializer was still an ambiguity and that the other four source rows were
+still unmatched in the v349 map. This keeps layout evidence separate from
+automatic shape matching.
+
+The five target aliases and review comments were already present in the v349
+database. The v350 application therefore made zero new names and zero new
+comments, resolved all five starts, and reopened with all five names verified.
+The semantic map now has 3,737 mapped pairs, 3,677 high-confidence pairs,
+1,003 ambiguities, and 604 unmatched source functions. The exact-shape v349
+count remains ten; v350 adds five layout-change rows.
+
+The v350 saved database is
+`analysis/spectron_libqplay_translated_v350_sounds_layout.i64` with SHA-256
+`056db23f2015b33134e1fc2bcb99deb5821b96c9590646eb6100c0f7d3462870`.
+The machine-readable records are the files beginning with
+`spectron_sounds_layout_`, `spectron_features_v350_`,
+`spectron_name_coverage_audit_v350`, `spectron_dynamic_symbol_`,
+`spectron_semantic_translation_v350`, and
+`spectron_translation_checkpoint_20260829_v350` under `artifacts/`.
+The generators are `tools/generate_spectron_sounds_layout_anchors_v350.py`,
+`tools/carry_forward_spectron_semantic_translation_v350.py`, and
+`tools/generate_spectron_translation_checkpoint_v350.py`.
+
+This pass changed only a disposable IDA database copy and offline metadata.
+It did not patch the APK, alter TLS, contact a game service, or change the
+loading-state repair.

@@ -3901,3 +3901,32 @@ The anchor artifact is
 The semantic map is `artifacts/spectron_semantic_translation_v349.json`, and
 the strict database checkpoint is
 `artifacts/spectron_translation_checkpoint_20260829_v349.json`.
+
+## v350 layout-aware sound aliases
+
+Five additional target functions now have explicit source-backed aliases in
+the semantic map. These are labeled as layout-aware because their target
+wrappers differ from the source build or because the target removed a source
+branch.
+
+| Target address | Alias | Source counterpart | Why it is not exact-shape |
+| ---: | --- | --- | --- |
+| `0xe3678` | `v18_TSounds_initStaticVars_void` | `TSounds_initStaticVars_void` at `0xe2a88` | target collection wrapper hashes differ |
+| `0xe1970` | `v18_TSoundEffect_TSoundEffect_TString_const` | `TSoundEffect_TSoundEffect_TString_const` at `0xe0dc0` | target adds encoded-string bridge |
+| `0xe1f34` | `v18_TSounds_play_impl_TString_const_bool_bool_double_double` | `TSounds_play_impl_TString_const_bool_bool_double_double` at `0xe135c` | target adds wrapper calls |
+| `0xe3440` | `v18_TSounds_script_setSoundPitchByNote` | `TSounds_script_setSoundPitchByNote` at `0xe2858` | target adds wrapper instructions |
+| `0xe3dc0` | `v18_TSoundEffectJava_play_void` | `TSoundEffectJava_play_void` at `0xe31d0` | target removes the `steps` branch |
+
+The target alias strings were already present in IDA before v350. The new
+semantic entries connect them to the source roles, while the raw target
+identifiers and changed feature fields remain available in the artifacts.
+This avoids treating a readable analysis alias as proof that stripped target
+debug information survived.
+
+The v350 name audit remains at 6,441 translated aliases and zero default names
+across 11,707 functions. The dynamic boundary audit remains complete at 5,782
+exact function starts. The full layout anchor record is
+`artifacts/spectron_sounds_layout_manual_translation_anchors_20260829.json`,
+with semantic carry-forward in
+`artifacts/spectron_semantic_translation_v350.json` and the strict checkpoint
+in `artifacts/spectron_translation_checkpoint_20260829_v350.json`.

@@ -4176,3 +4176,31 @@ The v349 static records are in
 copy is `analysis/spectron_libqplay_translated_v349_sounds_exact.i64` with
 SHA-256
 `ede4f9187e01c4a415181f423dd9c7b8467deb38595d399dcb19341fd9203faf`.
+
+## v350 layout-aware audio follow-up
+
+The v350 pass is also static and does not alter the working runtime repair.
+It translates the five larger sound routines whose target layouts differ from
+the source build:
+
+* `TSounds_initStaticVars_void` remains the two-collection initializer, with
+  target `KKhLga4xoI` and `vuuHgangcF` wrappers.
+* `TSoundEffect_TSoundEffect_TString_const` keeps the name normalization and
+  field initialization, with an added `CanTfaz6bZ` bridge.
+* `TSounds_play_impl_TString_const_bool_bool_double_double` keeps the sound
+  extension, cache, resource, and playback state machine.
+* `TSounds_script_setSoundPitchByNote` keeps the note table and `powf` pitch
+  calculation.
+* `TSoundEffectJava_play_void` keeps Java playback and state updates while
+  dropping the source `steps` special case.
+
+These aliases do not represent runtime patches. The loopback connector result,
+the encrypted login trace, the resource requests, the green-world diagnostic,
+the TLS verification behavior, and the live-service boundary are unchanged.
+No emulator or live endpoint was used for v350.
+
+The layout-aware checkpoint is
+`artifacts/spectron_translation_checkpoint_20260829_v350.json`. Its saved IDA
+copy is `analysis/spectron_libqplay_translated_v350_sounds_layout.i64` with
+SHA-256
+`056db23f2015b33134e1fc2bcb99deb5821b96c9590646eb6100c0f7d3462870`.

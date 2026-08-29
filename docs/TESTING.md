@@ -3808,3 +3808,115 @@ The expected v349 database SHA-256 is
 The archive validator must finish with `research archive validation: ok`.
 The five layout-change candidates above are not part of this checkpoint and
 must not be silently added to the exact-shape count.
+
+## v350 layout-aware sound pass
+
+The v350 pass promotes the five layout-change candidates described in the
+v349 section. It is still offline and uses the direct target evidence file
+`/tmp/graal-target-sounds-v348-long.json`.
+
+Generate the layout-aware anchor artifact. The generator checks the source
+category, target pseudocode terms, target names, and all changed metric fields:
+
+```bash
+python3 tools/generate_spectron_sounds_layout_anchors_v350.py \
+  --original-features /tmp/original_features_v3_current.json \
+  --spectron-features artifacts/spectron_features_v349_sounds_exact.json \
+  --semantic-parent artifacts/spectron_semantic_translation_v349.json \
+  --target-evidence /tmp/graal-target-sounds-v348-long.json \
+  --output artifacts/spectron_sounds_layout_manual_translation_anchors_20260829.json
+```
+
+The expected artifact has five high-confidence layout-change rows, zero
+exact-shape rows, and zero target-default rows. Its deltas are `+0xbb0`,
+`+0xbd8`, `+0xbe8`, and `+0xbf0`, with the last occurring twice.
+
+Carry the semantic map forward. The initializer is removed from the parent
+ambiguity list. The other four source rows are removed from its unmatched
+list:
+
+```bash
+python3 tools/carry_forward_spectron_semantic_translation_v350.py \
+  --parent-map artifacts/spectron_semantic_translation_v349.json \
+  --target-features artifacts/spectron_features_v349_sounds_exact.json \
+  --anchor-artifact artifacts/spectron_sounds_layout_manual_translation_anchors_20260829.json \
+  --output artifacts/spectron_semantic_translation_v350.json
+```
+
+The expected semantic totals are 3,737 mapped pairs, 3,677 high-confidence
+pairs, 1,003 ambiguities, and 604 unmatched source functions.
+
+Apply the five anchors to a fresh v349-derived IDA copy:
+
+```bash
+cp /home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v349_sounds_exact.i64 \
+  /tmp/spectron_v350_sounds_layout_apply_input.i64
+
+env IDADIR=/home/v/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_MANUAL_APPLY=1 \
+  SPECTRON_MANUAL_ANCHORS=/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_sounds_layout_manual_translation_anchors_20260829.json \
+  SPECTRON_MANUAL_EXPECTED_ARTIFACT=spectron_sounds_layout_manual_translation_anchors_20260829 \
+  SPECTRON_MANUAL_SAVE_PATH=/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v350_sounds_layout.i64 \
+  SPECTRON_MANUAL_REPORT=/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_sounds_layout_manual_translation_application_20260829.json \
+  /home/v/.codex/plugins/cache/mrexodia/ida-pro-mcp/0.1.0/.venv/bin/python \
+  /home/v/ida-pro-9.3/idalib/examples/idacli.py \
+  -f /tmp/spectron_v350_sounds_layout_apply_input.i64 \
+  -s /home/v/Desktop/graal-decomp/libqplay/tools/ida_apply_spectron_manual_anchors.py
+```
+
+All five target aliases and their comments already exist in the v349 copy. A
+successful application therefore reports five resolved starts, zero new
+renames, zero new comments, zero failures, and a saved database. Reopen it
+with the standard verifier:
+
+```bash
+env IDADIR=/home/v/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_MANUAL_ANCHORS=/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_sounds_layout_manual_translation_anchors_20260829.json \
+  SPECTRON_MANUAL_EXPECTED_ARTIFACT=spectron_sounds_layout_manual_translation_anchors_20260829 \
+  SPECTRON_MANUAL_VERIFY_REPORT=/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_sounds_layout_manual_translation_verification_20260829.json \
+  /home/v/.codex/plugins/cache/mrexodia/ida-pro-mcp/0.1.0/.venv/bin/python \
+  /home/v/ida-pro-9.3/idalib/examples/idacli.py \
+  -f /home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v350_sounds_layout.i64 \
+  -s /home/v/Desktop/graal-decomp/libqplay/tools/ida_verify_spectron_manual_anchors.py
+```
+
+The reopen report must show five verified names, zero failures, and 11,707
+functions. Refresh the feature export and three audits with the same IDALIB
+environment used by v349, changing only the output paths to:
+
+```text
+artifacts/spectron_features_v350_sounds_layout.json
+artifacts/spectron_name_coverage_audit_v350.json
+artifacts/spectron_dynamic_symbol_boundaries_v350.json
+artifacts/spectron_dynamic_symbol_coverage_audit_v350.json
+```
+
+The post-pass counts remain 11,707 functions, zero default names, 6,441
+translated aliases, 439 target-only descriptive labels, 5,782 exact dynamic
+function starts, and 4,796 source-backed dynamic rows. Build and validate the
+strict checkpoint:
+
+```bash
+python3 tools/generate_spectron_translation_checkpoint_v350.py \
+  --parent-checkpoint artifacts/spectron_translation_checkpoint_20260829_v349.json \
+  --database /home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v350_sounds_layout.i64 \
+  --label-artifact artifacts/spectron_sounds_layout_manual_translation_anchors_20260829.json \
+  --application-report artifacts/spectron_sounds_layout_manual_translation_application_20260829.json \
+  --verification-report artifacts/spectron_sounds_layout_manual_translation_verification_20260829.json \
+  --name-audit artifacts/spectron_name_coverage_audit_v350.json \
+  --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v350.json \
+  --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v350.json \
+  --semantic-map artifacts/spectron_semantic_translation_v350.json \
+  --feature-export artifacts/spectron_features_v350_sounds_layout.json \
+  --output artifacts/spectron_translation_checkpoint_20260829_v350.json
+
+python3 tools/validate_research_archive.py
+```
+
+The expected v350 database SHA-256 is
+`056db23f2015b33134e1fc2bcb99deb5821b96c9590646eb6100c0f7d3462870`.
+The v350 layout artifact intentionally reports zero exact-shape rows. If a
+future exporter makes any of these five pairs exact, preserve this checkpoint
+and create a new revision rather than rewriting its historical evidence.

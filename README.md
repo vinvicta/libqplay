@@ -8146,3 +8146,59 @@ The reusable scripts are
 
 This was static analysis only. It did not patch the APK, rerun the loopback
 client, contact a live endpoint, or change the TLS diagnosis.
+
+## v350 layout-aware sound routines
+
+The v350 pass follows the ten exact sound wrappers and handles the five larger
+audio routines whose target layout changed. These are still high-confidence
+source-backed correspondences, but none is labeled an exact-shape match.
+
+| Source | Target | Structural change |
+| --- | --- | --- |
+| `TSounds_initStaticVars_void` at `0xe2a88` | `0xe3678` | target list wrappers change type and layout |
+| `TSoundEffect_TSoundEffect_TString_const` at `0xe0dc0` | `0xe1970` | target adds `CanTfaz6bZ` encoded-string construction |
+| `TSounds_play_impl_TString_const_bool_bool_double_double` at `0xe135c` | `0xe1f34` | target adds two calls and four instructions |
+| `TSounds_script_setSoundPitchByNote` at `0xe2858` | `0xe3440` | target adds two wrapper instructions |
+| `TSoundEffectJava_play_void` at `0xe31d0` | `0xe3dc0` | target removes the source `steps` branch |
+
+The static initializer still creates the two global sound collections and
+returns the disabled-effects list address. The sound-effect constructor still
+lowercases the name, enters the base object, copies the original name, and
+initializes the playback fields. The large playback routine preserves its
+72-block extension classification, disabled-list check, cache lookup,
+download, player-capability checks, and playback state machine. The note
+parser preserves the twelve-note table, octave parsing, semitone calculation,
+and `powf(2.0, delta / 12.0)`. The Java play method preserves rate limiting,
+`startSound` lookup, path selection, byte-array creation, static invocation,
+local-reference release, and loaded/timestamp updates.
+
+The generator records the changed feature fields and requires role-specific
+terms from the direct target pseudocode evidence. One source row was promoted
+from the v349 ambiguity list and four from its unmatched list. The semantic
+map now contains 3,737 mapped pairs, 3,677 high-confidence pairs, 1,003
+remaining ambiguities, and 604 unmatched source functions.
+
+All five target aliases and review comments already existed in the v349 IDA
+copy. Applying the v350 artifact therefore performed zero new renames and
+zero new comments, with no failures. Reopening the saved copy verified all
+five names and boundaries. The v350 database is
+`analysis/spectron_libqplay_translated_v350_sounds_layout.i64` with SHA-256
+`056db23f2015b33134e1fc2bcb99deb5821b96c9590646eb6100c0f7d3462870`.
+
+The complete records are
+`artifacts/spectron_sounds_layout_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_sounds_layout_manual_translation_application_20260829.json`,
+`artifacts/spectron_sounds_layout_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v350_sounds_layout.json`,
+`artifacts/spectron_name_coverage_audit_v350.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v350.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v350.json`,
+`artifacts/spectron_semantic_translation_v350.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v350.json`.
+The reusable scripts are
+`tools/generate_spectron_sounds_layout_anchors_v350.py`,
+`tools/carry_forward_spectron_semantic_translation_v350.py`, and
+`tools/generate_spectron_translation_checkpoint_v350.py`.
+
+This was static analysis only. It did not patch the APK, rerun the loopback
+client, contact a live endpoint, or change the TLS or loading-state repairs.

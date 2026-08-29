@@ -12228,3 +12228,62 @@ The records are
 
 This comparison was offline. It did not patch the APK, contact the game
 server, or change the connector or loading-state experiments.
+
+## v350 layout-aware sound comparison
+
+The v350 pass records the five larger audio counterparts that cannot be
+validated as exact normalized-shape matches. The semantic evidence comes from
+direct source and target pseudocode, preserved literals, matching callers or
+class-local order, and explicit structural deltas.
+
+| Source role | Source EA | Spectron EA | Target alias | Source shape | Target shape |
+| --- | ---: | ---: | --- | --- | --- |
+| `TSounds_initStaticVars_void` | `0xe2a88` | `0xe3678` | `v18_TSounds_initStaticVars_void` | 76 / 19 / 1 / 5 / 4 | 76 / 19 / 1 / 5 / 4 |
+| `TSoundEffect_TSoundEffect_TString_const` | `0xe0dc0` | `0xe1970` | `v18_TSoundEffect_TSoundEffect_TString_const` | 136 / 34 / 1 / 5 / 4 | 172 / 43 / 1 / 7 / 6 |
+| `TSounds_play_impl_TString_const_bool_bool_double_double` | `0xe135c` | `0xe1f34` | `v18_TSounds_play_impl_TString_const_bool_bool_double_double` | 1312 / 328 / 72 / 96 / 42 | 1328 / 332 / 72 / 98 / 44 |
+| `TSounds_script_setSoundPitchByNote` | `0xe2858` | `0xe3440` | `v18_TSounds_script_setSoundPitchByNote` | 548 / 135 / 21 / 41 / 26 | 556 / 137 / 21 / 41 / 26 |
+| `TSoundEffectJava_play_void` | `0xe31d0` | `0xe3dc0` | `v18_TSoundEffectJava_play_void` | 720 / 178 / 20 / 26 / 12 | 676 / 168 / 19 / 22 / 9 |
+
+The five shape columns use size, instruction count, basic-block count, branch
+count, and call count in that order. The static initializer is the special
+case where those coarse counts are unchanged but the wrapper-specific hashes
+differ. It constructs `THashList` and `TStringList` in source, while target
+constructs `KKhLga4xoI` and `vuuHgangcF` and stores them in the target sound
+manager fields.
+
+The constructor row is identified by the same lowercasing, base construction,
+name copy, and field initialization. Target `0xe1970` adds the
+`CanTfaz6bZ` to `J7zOgaf09K` bridge. The playback row retains the source
+72-block flow and the `.mid` and `.mp2 .mp3 .ogg .wma .asf` literals while
+target wrappers account for the four-instruction and two-call increase. The
+note parser retains its twelve-note literal and `powf` calculation. The Java
+play row retains `startSound`, byte-array creation, static invocation, local
+reference release, loaded state, and timestamp state, but no longer checks the
+source `steps` prefix.
+
+The v350 artifact reports five high-confidence layout-change rows, zero exact
+shape rows, and zero target-default rows. One source was an ambiguity in the
+v349 map, while four were unmatched because their changed wrappers produced no
+useful automatic candidate. All five target aliases and comments were already
+present in the v349 IDA copy. The application report shows five resolved
+starts, zero new renames, zero new comments, and zero failures. Reopening the
+copy verified all five names and boundaries.
+
+The semantic map now has 3,737 mapped pairs, 3,677 high-confidence pairs,
+1,003 remaining ambiguities, and 604 unmatched source functions. The v350
+database is
+`analysis/spectron_libqplay_translated_v350_sounds_layout.i64` with SHA-256
+`056db23f2015b33134e1fc2bcb99deb5821b96c9590646eb6100c0f7d3462870`.
+The records are
+`artifacts/spectron_sounds_layout_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_sounds_layout_manual_translation_application_20260829.json`,
+`artifacts/spectron_sounds_layout_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v350_sounds_layout.json`,
+`artifacts/spectron_name_coverage_audit_v350.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v350.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v350.json`,
+`artifacts/spectron_semantic_translation_v350.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v350.json`.
+
+This comparison was offline. It did not patch the APK, contact the game
+server, or change the TLS or loading-state experiments.

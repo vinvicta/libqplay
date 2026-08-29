@@ -1556,6 +1556,33 @@ def main():
     spectron_checkpoint_v349 = load_json(
         "artifacts/spectron_translation_checkpoint_20260829_v349.json"
     )
+    spectron_sounds_layout_anchors_v350 = load_json(
+        "artifacts/spectron_sounds_layout_manual_translation_anchors_20260829.json"
+    )
+    spectron_sounds_layout_application_v350 = load_json(
+        "artifacts/spectron_sounds_layout_manual_translation_application_20260829.json"
+    )
+    spectron_sounds_layout_verification_v350 = load_json(
+        "artifacts/spectron_sounds_layout_manual_translation_verification_20260829.json"
+    )
+    spectron_name_coverage_v350 = load_json(
+        "artifacts/spectron_name_coverage_audit_v350.json"
+    )
+    spectron_dynamic_boundaries_v350 = load_json(
+        "artifacts/spectron_dynamic_symbol_boundaries_v350.json"
+    )
+    spectron_dynamic_symbol_coverage_v350 = load_json(
+        "artifacts/spectron_dynamic_symbol_coverage_audit_v350.json"
+    )
+    spectron_semantic_translation_v350 = load_json(
+        "artifacts/spectron_semantic_translation_v350.json"
+    )
+    spectron_features_v350 = load_json(
+        "artifacts/spectron_features_v350_sounds_layout.json"
+    )
+    spectron_checkpoint_v350 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260829_v350.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -26284,6 +26311,284 @@ def main():
         },
     )
     check(
+        "Spectron v350 layout-aware sound anchor artifact",
+        {
+            "artifact": spectron_sounds_layout_anchors_v350["artifact"],
+            "network_contacted": spectron_sounds_layout_anchors_v350["network_contacted"],
+            "summary": spectron_sounds_layout_anchors_v350["summary"],
+            "original_eas": [row["original_ea"] for row in spectron_sounds_layout_anchors_v350["anchors"]],
+            "target_eas": [row["spectron_ea"] for row in spectron_sounds_layout_anchors_v350["anchors"]],
+            "proposed_names": [row["proposed_name"] for row in spectron_sounds_layout_anchors_v350["anchors"]],
+        },
+        {
+            "artifact": "spectron_sounds_layout_manual_translation_anchors_20260829",
+            "network_contacted": False,
+            "summary": {
+                "address_delta_groups": {"+0xbb0": 1, "+0xbd8": 1, "+0xbe8": 1, "+0xbf0": 2},
+                "anchor_count": 5,
+                "exact_shape_anchor_count": 0,
+                "high_confidence_count": 5,
+                "layout_change_anchor_count": 5,
+                "new_context_anchor_count": 5,
+                "target_default_name_count": 0,
+            },
+            "original_eas": [
+                "0xe2a88",
+                "0xe0dc0",
+                "0xe135c",
+                "0xe2858",
+                "0xe31d0",
+            ],
+            "target_eas": [
+                "0xe3678",
+                "0xe1970",
+                "0xe1f34",
+                "0xe3440",
+                "0xe3dc0",
+            ],
+            "proposed_names": [
+                "v18_TSounds_initStaticVars_void",
+                "v18_TSoundEffect_TSoundEffect_TString_const",
+                "v18_TSounds_play_impl_TString_const_bool_bool_double_double",
+                "v18_TSounds_script_setSoundPitchByNote",
+                "v18_TSoundEffectJava_play_void",
+            ],
+        },
+    )
+    check(
+        "Spectron v350 layout-aware sound anchor application",
+        {
+            "artifact": spectron_sounds_layout_application_v350["artifact"],
+            "expected_artifact": spectron_sounds_layout_application_v350["expected_artifact"],
+            "apply": spectron_sounds_layout_application_v350["apply"],
+            "anchor_count": spectron_sounds_layout_application_v350["anchor_count"],
+            "resolved_count": spectron_sounds_layout_application_v350["resolved_count"],
+            "renamed_count": spectron_sounds_layout_application_v350["renamed_count"],
+            "comments_added": spectron_sounds_layout_application_v350["comments_added"],
+            "failure_count": spectron_sounds_layout_application_v350["failure_count"],
+            "saved": spectron_sounds_layout_application_v350["saved"],
+        },
+        {
+            "artifact": "spectron_manual_anchor_application",
+            "expected_artifact": "spectron_sounds_layout_manual_translation_anchors_20260829",
+            "apply": True,
+            "anchor_count": 5,
+            "resolved_count": 5,
+            "renamed_count": 0,
+            "comments_added": 0,
+            "failure_count": 0,
+            "saved": True,
+        },
+    )
+    check(
+        "Spectron v350 layout-aware sound reopen verification",
+        {
+            "artifact": spectron_sounds_layout_verification_v350["artifact"],
+            "expected_artifact": spectron_sounds_layout_verification_v350["expected_artifact"],
+            "anchor_count": spectron_sounds_layout_verification_v350["anchor_count"],
+            "verified_name_count": spectron_sounds_layout_verification_v350["verified_name_count"],
+            "failure_count": spectron_sounds_layout_verification_v350["failure_count"],
+            "function_count": spectron_sounds_layout_verification_v350["function_count"],
+            "verified": spectron_sounds_layout_verification_v350["verified"],
+        },
+        {
+            "artifact": "spectron_manual_anchor_reopen_verification",
+            "expected_artifact": "spectron_sounds_layout_manual_translation_anchors_20260829",
+            "anchor_count": 5,
+            "verified_name_count": 5,
+            "failure_count": 0,
+            "function_count": 11707,
+            "verified": True,
+        },
+    )
+    check(
+        "Spectron v350 name audit",
+        {
+            "artifact": spectron_name_coverage_v350["artifact"],
+            "network_contacted": spectron_name_coverage_v350["network_contacted"],
+            "input_sha256": spectron_name_coverage_v350["input_sha256"],
+            "function_count": spectron_name_coverage_v350["function_count"],
+            "default_name_count": spectron_name_coverage_v350["default_name_count"],
+            "name_origins": spectron_name_coverage_v350["name_origins"],
+        },
+        {
+            "artifact": "spectron_name_coverage_audit",
+            "network_contacted": False,
+            "input_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+            "function_count": 11707,
+            "default_name_count": 0,
+            "name_origins": {
+                "ida_named_or_other": 4052,
+                "target_jni_export": 7,
+                "target_named_export": 768,
+                "target_only_descriptive": 439,
+                "translated_v18_alias": 6441,
+            },
+        },
+    )
+    check(
+        "Spectron v350 dynamic boundary counts",
+        {
+            "artifact": spectron_dynamic_boundaries_v350["artifact"],
+            "network_contacted": spectron_dynamic_boundaries_v350["network_contacted"],
+            "input_sha256": spectron_dynamic_boundaries_v350["input_sha256"],
+            "defined_function_symbol_count": spectron_dynamic_boundaries_v350["defined_function_symbol_count"],
+            "ida_exact_start_count": spectron_dynamic_boundaries_v350["ida_exact_start_count"],
+            "ida_missing_exact_start_count": spectron_dynamic_boundaries_v350["ida_missing_exact_start_count"],
+            "row_count": len(spectron_dynamic_boundaries_v350["rows"]),
+        },
+        {
+            "artifact": "spectron_dynamic_symbol_boundary_audit",
+            "network_contacted": False,
+            "input_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+            "defined_function_symbol_count": 5782,
+            "ida_exact_start_count": 5782,
+            "ida_missing_exact_start_count": 0,
+            "row_count": 5782,
+        },
+    )
+    check(
+        "Spectron v350 dynamic symbol coverage",
+        {
+            "artifact": spectron_dynamic_symbol_coverage_v350["artifact"],
+            "network_contacted": spectron_dynamic_symbol_coverage_v350["network_contacted"],
+            "input_sha256": spectron_dynamic_symbol_coverage_v350["input_sha256"],
+            "summary": spectron_dynamic_symbol_coverage_v350["summary"],
+        },
+        {
+            "artifact": "spectron_dynamic_symbol_coverage_audit_20260828",
+            "network_contacted": False,
+            "input_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+            "summary": {
+                "defined_named_symbol_count": 6600,
+                "location_counts": {
+                    "ida_data_item": 482,
+                    "ida_function_exact": 5782,
+                    "ida_noncode_item": 336,
+                    "undefined_or_zero_value": 170,
+                },
+                "name_match_counts": {
+                    "item_name_match": 1656,
+                    "item_name_mismatch": 5114,
+                    "value_name_match": 1656,
+                    "value_name_mismatch": 5114,
+                },
+                "named_dynamic_symbol_count": 6770,
+                "status_counts": {
+                    "exact_retained_dynamic_name": 1656,
+                    "linker_boundary_alias_mismatch": 7,
+                    "other_retained_target_name": 119,
+                    "source_backed_v18_alias": 4796,
+                    "target_only_descriptive": 22,
+                    "undefined_import_with_plt_stub": 169,
+                    "undefined_no_target_address": 1,
+                },
+            },
+        },
+    )
+    check(
+        "Spectron v350 semantic translation carry-forward",
+        {
+            "artifact": spectron_semantic_translation_v350["artifact"],
+            "summary": spectron_semantic_translation_v350["summary"],
+            "carried_forward": spectron_semantic_translation_v350["carried_forward"]["target_feature_count"],
+            "manual_matches_added": spectron_semantic_translation_v350["carried_forward"]["manual_matches_added"],
+            "ambiguous_rows_resolved": spectron_semantic_translation_v350["carried_forward"]["ambiguous_rows_resolved"],
+            "unmatched_rows_promoted": spectron_semantic_translation_v350["carried_forward"]["unmatched_rows_promoted"],
+            "source_backed_translation_change": spectron_checkpoint_v350["semantic_function_translation_v350"]["source_backed_translation_change"],
+            "target_only_label_change": spectron_checkpoint_v350["semantic_function_translation_v350"]["target_only_label_change"],
+        },
+        {
+            "artifact": "spectron_semantic_function_translation",
+            "summary": {
+                "ambiguous_functions": 1003,
+                "mapped_functions": 3737,
+                "mapped_high_confidence": 3677,
+                "mapped_medium_confidence": 60,
+                "original_functions": 11308,
+                "spectron_functions": 11707,
+                "unique_spectron_targets": 3737,
+                "unmatched_functions": 604,
+            },
+            "carried_forward": 11707,
+            "manual_matches_added": 5,
+            "ambiguous_rows_resolved": 1,
+            "unmatched_rows_promoted": 4,
+            "source_backed_translation_change": True,
+            "target_only_label_change": False,
+        },
+    )
+    check(
+        "Spectron v350 feature export",
+        {
+            "artifact": spectron_features_v350["artifact"],
+            "network_contacted": spectron_features_v350["network_contacted"],
+            "function_count": spectron_features_v350["function_count"],
+        },
+        {
+            "artifact": "ida_function_features",
+            "network_contacted": False,
+            "function_count": 11707,
+        },
+    )
+    check(
+        "Spectron v350 checkpoint artifact",
+        {
+            "artifact": spectron_checkpoint_v350["artifact"],
+            "network_contacted": spectron_checkpoint_v350["network_contacted"],
+            "parent": spectron_checkpoint_v350["parent_checkpoint"]["artifact"],
+        },
+        {
+            "artifact": "spectron_translation_checkpoint_20260829_v350",
+            "network_contacted": False,
+            "parent": "spectron_translation_checkpoint_20260829_v349",
+        },
+    )
+    check(
+        "Spectron v350 checkpoint database",
+        {
+            "sha256": spectron_checkpoint_v350["database"]["sha256"],
+            "close_reopen_verified": spectron_checkpoint_v350["database"]["close_reopen_verified"],
+            "function_count": spectron_checkpoint_v350["database"]["function_count"],
+            "default_name_count": spectron_checkpoint_v350["database"]["default_name_count"],
+        },
+        {
+            "sha256": "056db23f2015b33134e1fc2bcb99deb5821b96c9590646eb6100c0f7d3462870",
+            "close_reopen_verified": True,
+            "function_count": 11707,
+            "default_name_count": 0,
+        },
+    )
+    check(
+        "Spectron v350 layout-aware sound checkpoint",
+        {
+            "anchor_count": spectron_checkpoint_v350["sounds_layout_translation_v350"]["anchor_count"],
+            "high_confidence_count": spectron_checkpoint_v350["sounds_layout_translation_v350"]["high_confidence_count"],
+            "exact_shape_anchor_count": spectron_checkpoint_v350["sounds_layout_translation_v350"]["exact_shape_anchor_count"],
+            "layout_change_anchor_count": spectron_checkpoint_v350["sounds_layout_translation_v350"]["layout_change_anchor_count"],
+            "new_context_anchor_count": spectron_checkpoint_v350["sounds_layout_translation_v350"]["new_context_anchor_count"],
+            "source_counterpart_count": spectron_checkpoint_v350["sounds_layout_translation_v350"]["source_counterpart_count"],
+            "resolved_ambiguous_count": spectron_checkpoint_v350["sounds_layout_translation_v350"]["resolved_ambiguous_count"],
+            "promoted_unmatched_count": spectron_checkpoint_v350["sounds_layout_translation_v350"]["promoted_unmatched_count"],
+            "target_default_name_count": spectron_checkpoint_v350["sounds_layout_translation_v350"]["target_default_name_count"],
+            "reopen_verified": spectron_checkpoint_v350["sounds_layout_translation_v350"]["reopen_verified"],
+            "existing_target_alias_count": spectron_checkpoint_v350["sounds_layout_translation_v350"]["existing_target_alias_count"],
+        },
+        {
+            "anchor_count": 5,
+            "high_confidence_count": 5,
+            "exact_shape_anchor_count": 0,
+            "layout_change_anchor_count": 5,
+            "new_context_anchor_count": 5,
+            "source_counterpart_count": 5,
+            "resolved_ambiguous_count": 1,
+            "promoted_unmatched_count": 4,
+            "target_default_name_count": 0,
+            "reopen_verified": True,
+            "existing_target_alias_count": 5,
+        },
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -26858,6 +27163,13 @@ def main():
         spectron_semantic_translation_v349,
         spectron_features_v349,
         spectron_checkpoint_v349,
+        spectron_sounds_layout_anchors_v350,
+        spectron_name_coverage_v350,
+        spectron_dynamic_boundaries_v350,
+        spectron_dynamic_symbol_coverage_v350,
+        spectron_semantic_translation_v350,
+        spectron_features_v350,
+        spectron_checkpoint_v350,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
