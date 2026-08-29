@@ -1117,6 +1117,13 @@ The complete metadata is in
 `artifacts/spectron_arm64_loopback_loading_replay_20260828.json`. The
 responder, certificate key, APK, captures, and game assets remain private.
 
+The package was also rerun after clearing the nine exact external cache files
+used by the private test. The builder produced the same APK hash, the client
+redownloaded the map and five level resources, and the target APK supplied its
+own `pics1.png` tile sheet from `assets/offline/levels/tiles`. The rendered
+screen kept the same hash as the earlier run. This clean-cache evidence is in
+`artifacts/spectron_arm64_clean_cache_replay_20260828.json`.
+
 The v235 entry below is a historical checkpoint in the IDA translation
 series. At that point, the current series reached
 `analysis/spectron_libqplay_translated_v268.i64`. The v235 pass adds 12

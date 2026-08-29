@@ -2888,6 +2888,37 @@ service compatibility or native rendering on a physical ARM64 device. The
 responder, certificate key, APK, captures, and game assets remain outside the
 repository, and both reverse mappings were removed after the run.
 
+## Spectron 2.2 clean-cache reproducibility pass
+
+The same package was rebuilt from the supplied APK with the current builder
+and produced the same APK hash. Before launching it, I removed only the nine
+external cache files used by the private replay and verified that the target
+cache directory was empty. This matters because clearing Android app data does
+not necessarily clear the external game cache.
+
+The clean pass again produced one native TLS request for `/con.png` with host
+`cong.quattroplay.com:18443` and user agent `Graal/6.171`. The certificate was
+accepted, and the game responder completed two encrypted connections. The
+second connection downloaded `basepackage.gupd`, the gray message image, the
+map, and five level resources. The target APK already contains
+`assets/offline/levels/tiles/pics1.png`, so it did not need a separate tile-sheet
+request. Packet-24 heartbeats continued after the resource sequence.
+
+The target loading control again changed the screen from the title or loading
+artwork to the green tiled world with the HUD and status indicators. The
+rebuilt APK hash is
+`6988410c57bcc4874b9e6932e82d1eeba3e9a39e684a26112b54586a76022b02`, the clean
+run screenshot hash is
+`08dc6793c3087caec00f1194e4966b1ab4753b53eacc0a1b2a86b92ad16c596e`, and the
+four private capture hashes are recorded in
+`artifacts/spectron_arm64_clean_cache_replay_20260828.json`.
+
+This is a stronger local reproduction of the resource path, not a new claim
+about the live service. It still runs translated ARM64 code on an x86_64
+emulator, uses synthetic game responses, and leaves the loading branch as a
+diagnostic control. The app was stopped and the reverse mappings were removed
+after capture.
+
 ## Not verified
 
 * A live game-server login.

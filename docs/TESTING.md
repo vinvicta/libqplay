@@ -171,6 +171,22 @@ both responders to loopback, and removed the mappings when it finished. The
 private certificate key, signed APK, captures, and fixture assets are not part
 of the repository.
 
+### Clean external-cache replay
+
+For a stronger resource-path check, the nine exact files created by the first
+private run were copied out and then removed from the emulator's external game
+cache. The directory was verified empty before launching the same rebuilt APK.
+The client downloaded the map, the five level resources, the gray message
+image, and the base package again, then continued sending heartbeat frames.
+The APK's own `assets/offline/levels/tiles/pics1.png` meant that no separate
+tile-sheet request was expected in this pass. The screen hash remained
+`08dc6793c3087caec00f1194e4966b1ab4753b53eacc0a1b2a86b92ad16c596e`.
+
+The clean replay used the same APK hash as the preceding run and is recorded
+in `artifacts/spectron_arm64_clean_cache_replay_20260828.json`. This remains
+a private translated-ARM64 loopback test. It does not validate a live service
+or a physical ARM64 device.
+
 The complete private chain can be rebuilt with the single offline helper:
 
 ```bash
