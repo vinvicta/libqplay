@@ -13,8 +13,9 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v318 Spectron database. It
-contains 11,695 functions and no remaining default `sub_` names. The v263
+The current documented translation frontier is the v319 Spectron database. It
+contains 11,695 functions and no remaining IDA default function names in the
+audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -298,6 +299,17 @@ destructor cleanup wrappers, and the AArch64 PLT resolver. These `spectron_`
 labels are target-only behavior names, not claims
 that stripped source symbols were recovered. The target now has no remaining
 default `sub_` names.
+The v319 revision audits the complete 11,695-function IDA name inventory and
+labels the nine remaining `nullsub_*` entries. Each is a four-byte AArch64
+function whose complete body is `RET`. The resulting `spectron_nullsub_stub_`
+labels describe the target behavior without inventing source names. The
+current name audit reports 6,217 `v18_` semantic aliases, 417 target-only
+descriptive labels, 1,001 retained target-style C++ names, seven JNI exports,
+4,053 other IDA names or PLT names, and zero audited default names. The
+separate ELF audit still reports 5,782 section-defined dynamic `FUNC` rows,
+but the target has no `.symtab` or DWARF metadata. This is naming coverage and
+cross-build translation evidence, not proof that every original source name
+was recoverable.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -404,6 +416,8 @@ The current v317 database is kept locally as
 `analysis/spectron_libqplay_translated_v317_jpeg_gpc.i64`.
 The current v318 database is kept locally as
 `analysis/spectron_libqplay_translated_v318_residual_labels.i64`.
+The current v319 database is kept locally as
+`analysis/spectron_libqplay_translated_v319_nullsub_labels.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -1129,6 +1143,23 @@ fixture reset, and resource sequence while leaving `0x15fad8` unchanged. It
 reached the same encrypted login, map, five-level, and heartbeat milestones,
 but kept the title/loading artwork. That comparison is recorded in
 `artifacts/spectron_arm64_stock_clean_cache_control_20260828.json`.
+
+The v319 static audit closes the last generic function-name gap in the current
+IDA copy. It found nine `nullsub_*` functions, each a four-byte AArch64
+`RET`, and renamed them to target-only `spectron_nullsub_stub_0x...` labels.
+The v319 database has 11,695 functions and zero default names in the audited
+`sub_`, `nullsub_`, `j_`, `loc_`, and `unk_` families. Its name-origin counts
+are 6,217 `v18_` aliases, 417 target-only descriptive labels, 1,001 retained
+target-style C++ names, seven JNI exports, and 4,053 other IDA or PLT names.
+The before and after inventories are in
+`artifacts/spectron_name_coverage_audit_v318_20260828.json` and
+`artifacts/spectron_name_coverage_audit_20260828.json`. The target-only label
+artifact, generator, and v319 checkpoint are
+`artifacts/spectron_nullsub_target_only_labels_20260828.json`,
+`tools/generate_spectron_nullsub_labels.py`, and
+`artifacts/spectron_translation_checkpoint_20260828_v319.json`.
+This is complete reviewed naming coverage for the IDA database, not a claim
+that stripped 2.2 debug symbols were restored.
 
 The v235 entry below is a historical checkpoint in the IDA translation
 series. At that point, the current series reached
@@ -6263,6 +6294,10 @@ proves the local native TLS path, not a current live certificate or service.
   `tools/generate_spectron_symbol_table_audit.py` preserves the complete
   `.dynsym` inventory from the stripped Spectron library and records which
   static and debug sections survived.
+  `tools/ida_audit_spectron_name_coverage.py` records the name origin and
+  leading bytes for every function in a translated Spectron IDA database.
+  `tools/generate_spectron_nullsub_labels.py` creates the reviewed target-only
+  labels for one-instruction null return stubs.
   `tools/ida_apply_spectron_translation.py` and
   `tools/ida_apply_spectron_manual_anchors.py` write separate disposable IDA
   copies, while the matching verification scripts reopen and check them. The

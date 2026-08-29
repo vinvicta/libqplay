@@ -1,0 +1,259 @@
+{
+  "artifact": "spectron_nullsub_target_only_labels_20260828",
+  "inputs": {
+    "name_coverage_audit": "artifacts/spectron_name_coverage_audit_v318_20260828.json",
+    "name_coverage_audit_sha256": "b1038fb110f9e05335ee6adc7de4c77853fafdac75016792bf20b5bf820bf481",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219"
+  },
+  "interpretation": [
+    "The spectron_ prefix marks a target-specific descriptive label rather than a restored source symbol.",
+    "Each row is a complete one-instruction AArch64 RET function. The label records that behavior and the exact target address.",
+    "The labels remove the last nine IDA nullsub defaults from this database revision, but they do not claim that an original source name was recovered."
+  ],
+  "labels": [
+    {
+      "confidence": "high",
+      "current_name": "nullsub_8",
+      "evidence": [
+        "The reopened translated IDA database contains a four-byte function at this address.",
+        "The complete body is the AArch64 RET instruction with bytes c0035fd6.",
+        "The function has no surviving source symbol and no demonstrated 1.8 counterpart."
+      ],
+      "function_end": "0x24a198",
+      "match_kind": "reviewed-target-only-nullsub",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "returns immediately without executing a body",
+      "proposed_name": "spectron_nullsub_stub_0x24a194",
+      "role": "nullsub_return_stub",
+      "script_name": "one-instruction null return stub",
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated",
+      "target_default_name": true,
+      "target_ea": "0x24a194",
+      "target_metrics": {
+        "bytes_hex": "c0035fd6",
+        "first_instruction": "RET",
+        "size": 4,
+        "xrefs_to": 1
+      }
+    },
+    {
+      "confidence": "high",
+      "current_name": "nullsub_9",
+      "evidence": [
+        "The reopened translated IDA database contains a four-byte function at this address.",
+        "The complete body is the AArch64 RET instruction with bytes c0035fd6.",
+        "The function has no surviving source symbol and no demonstrated 1.8 counterpart."
+      ],
+      "function_end": "0x24a19c",
+      "match_kind": "reviewed-target-only-nullsub",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "returns immediately without executing a body",
+      "proposed_name": "spectron_nullsub_stub_0x24a198",
+      "role": "nullsub_return_stub",
+      "script_name": "one-instruction null return stub",
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated",
+      "target_default_name": true,
+      "target_ea": "0x24a198",
+      "target_metrics": {
+        "bytes_hex": "c0035fd6",
+        "first_instruction": "RET",
+        "size": 4,
+        "xrefs_to": 1
+      }
+    },
+    {
+      "confidence": "high",
+      "current_name": "nullsub_10",
+      "evidence": [
+        "The reopened translated IDA database contains a four-byte function at this address.",
+        "The complete body is the AArch64 RET instruction with bytes c0035fd6.",
+        "The function has no surviving source symbol and no demonstrated 1.8 counterpart."
+      ],
+      "function_end": "0x24a1a0",
+      "match_kind": "reviewed-target-only-nullsub",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "returns immediately without executing a body",
+      "proposed_name": "spectron_nullsub_stub_0x24a19c",
+      "role": "nullsub_return_stub",
+      "script_name": "one-instruction null return stub",
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated",
+      "target_default_name": true,
+      "target_ea": "0x24a19c",
+      "target_metrics": {
+        "bytes_hex": "c0035fd6",
+        "first_instruction": "RET",
+        "size": 4,
+        "xrefs_to": 1
+      }
+    },
+    {
+      "confidence": "high",
+      "current_name": "nullsub_11",
+      "evidence": [
+        "The reopened translated IDA database contains a four-byte function at this address.",
+        "The complete body is the AArch64 RET instruction with bytes c0035fd6.",
+        "The function has no surviving source symbol and no demonstrated 1.8 counterpart."
+      ],
+      "function_end": "0x24a1a4",
+      "match_kind": "reviewed-target-only-nullsub",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "returns immediately without executing a body",
+      "proposed_name": "spectron_nullsub_stub_0x24a1a0",
+      "role": "nullsub_return_stub",
+      "script_name": "one-instruction null return stub",
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated",
+      "target_default_name": true,
+      "target_ea": "0x24a1a0",
+      "target_metrics": {
+        "bytes_hex": "c0035fd6",
+        "first_instruction": "RET",
+        "size": 4,
+        "xrefs_to": 1
+      }
+    },
+    {
+      "confidence": "high",
+      "current_name": "nullsub_12",
+      "evidence": [
+        "The reopened translated IDA database contains a four-byte function at this address.",
+        "The complete body is the AArch64 RET instruction with bytes c0035fd6.",
+        "The function has no surviving source symbol and no demonstrated 1.8 counterpart."
+      ],
+      "function_end": "0x24a1a8",
+      "match_kind": "reviewed-target-only-nullsub",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "returns immediately without executing a body",
+      "proposed_name": "spectron_nullsub_stub_0x24a1a4",
+      "role": "nullsub_return_stub",
+      "script_name": "one-instruction null return stub",
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated",
+      "target_default_name": true,
+      "target_ea": "0x24a1a4",
+      "target_metrics": {
+        "bytes_hex": "c0035fd6",
+        "first_instruction": "RET",
+        "size": 4,
+        "xrefs_to": 1
+      }
+    },
+    {
+      "confidence": "high",
+      "current_name": "nullsub_13",
+      "evidence": [
+        "The reopened translated IDA database contains a four-byte function at this address.",
+        "The complete body is the AArch64 RET instruction with bytes c0035fd6.",
+        "The function has no surviving source symbol and no demonstrated 1.8 counterpart."
+      ],
+      "function_end": "0x24a1ac",
+      "match_kind": "reviewed-target-only-nullsub",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "returns immediately without executing a body",
+      "proposed_name": "spectron_nullsub_stub_0x24a1a8",
+      "role": "nullsub_return_stub",
+      "script_name": "one-instruction null return stub",
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated",
+      "target_default_name": true,
+      "target_ea": "0x24a1a8",
+      "target_metrics": {
+        "bytes_hex": "c0035fd6",
+        "first_instruction": "RET",
+        "size": 4,
+        "xrefs_to": 1
+      }
+    },
+    {
+      "confidence": "high",
+      "current_name": "nullsub_3",
+      "evidence": [
+        "The reopened translated IDA database contains a four-byte function at this address.",
+        "The complete body is the AArch64 RET instruction with bytes c0035fd6.",
+        "The function has no surviving source symbol and no demonstrated 1.8 counterpart."
+      ],
+      "function_end": "0x2990f8",
+      "match_kind": "reviewed-target-only-nullsub",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "returns immediately without executing a body",
+      "proposed_name": "spectron_nullsub_stub_0x2990f4",
+      "role": "nullsub_return_stub",
+      "script_name": "one-instruction null return stub",
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated",
+      "target_default_name": true,
+      "target_ea": "0x2990f4",
+      "target_metrics": {
+        "bytes_hex": "c0035fd6",
+        "first_instruction": "RET",
+        "size": 4,
+        "xrefs_to": 2
+      }
+    },
+    {
+      "confidence": "high",
+      "current_name": "nullsub_7",
+      "evidence": [
+        "The reopened translated IDA database contains a four-byte function at this address.",
+        "The complete body is the AArch64 RET instruction with bytes c0035fd6.",
+        "The function has no surviving source symbol and no demonstrated 1.8 counterpart."
+      ],
+      "function_end": "0x2b0354",
+      "match_kind": "reviewed-target-only-nullsub",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "returns immediately without executing a body",
+      "proposed_name": "spectron_nullsub_stub_0x2b0350",
+      "role": "nullsub_return_stub",
+      "script_name": "one-instruction null return stub",
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated",
+      "target_default_name": true,
+      "target_ea": "0x2b0350",
+      "target_metrics": {
+        "bytes_hex": "c0035fd6",
+        "first_instruction": "RET",
+        "size": 4,
+        "xrefs_to": 2
+      }
+    },
+    {
+      "confidence": "high",
+      "current_name": "nullsub_1",
+      "evidence": [
+        "The reopened translated IDA database contains a four-byte function at this address.",
+        "The complete body is the AArch64 RET instruction with bytes c0035fd6.",
+        "The function has no surviving source symbol and no demonstrated 1.8 counterpart."
+      ],
+      "function_end": "0x2b82b0",
+      "match_kind": "reviewed-target-only-nullsub",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "returns immediately without executing a body",
+      "proposed_name": "spectron_nullsub_stub_0x2b82ac",
+      "role": "nullsub_return_stub",
+      "script_name": "one-instruction null return stub",
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated",
+      "target_default_name": true,
+      "target_ea": "0x2b82ac",
+      "target_metrics": {
+        "bytes_hex": "c0035fd6",
+        "first_instruction": "RET",
+        "size": 4,
+        "xrefs_to": 1
+      }
+    }
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed target-only labels for the nine remaining one-instruction null return stubs",
+  "summary": {
+    "high_confidence_count": 9,
+    "label_count": 9,
+    "nullsub_count": 9,
+    "target_default_name_count": 9,
+    "target_only_count": 9
+  }
+}

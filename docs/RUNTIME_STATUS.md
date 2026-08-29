@@ -2932,6 +2932,34 @@ only native difference is the conditional at `0x15fad8`, this is the strongest
 local causal comparison for the loading-state candidate, while still not being
 a production or physical-device validation.
 
+## Spectron 2.2 function-name coverage audit
+
+The v319 IDA checkpoint closes a small naming gap that was hidden by the
+earlier “zero `sub_` names” count. A complete audit of the 11,695-function
+translated database found nine remaining `nullsub_*` names. Each is a four-byte
+AArch64 function whose complete body is `RET`. They were renamed to stable
+target-only labels of the form `spectron_nullsub_stub_0x...` and verified after
+a close and reopen with zero failures.
+
+The v319 database is
+`analysis/spectron_libqplay_translated_v319_nullsub_labels.i64` with SHA-256
+`ca68997409b58ee6342a5288319c4d3b834fde1a7d526aa62db962c46164defd`. The name
+audit reports zero default function names in the checked `sub_`, `nullsub_`,
+`j_`, `loc_`, and `unk_` families. Its origin counts are 6,217 `v18_`
+translated aliases, 417 target-only descriptive labels, 1,001 retained
+target-style C++ names, seven JNI exports, and 4,053 other IDA or PLT names.
+
+This is a coverage result, not a claim that the stripped target's original
+source symbols were restored. The 1.8 semantic map contains 3,700 unique
+target matches, of which 3,641 high-confidence aliases were applied and 59
+medium-confidence rows remain review-only. The full before and after name
+inventories are in
+`artifacts/spectron_name_coverage_audit_v318_20260828.json` and
+`artifacts/spectron_name_coverage_audit_20260828.json`. The nine reviewed
+labels and the v319 checkpoint are in
+`artifacts/spectron_nullsub_target_only_labels_20260828.json` and
+`artifacts/spectron_translation_checkpoint_20260828_v319.json`.
+
 ## Not verified
 
 * A live game-server login.

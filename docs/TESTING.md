@@ -187,6 +187,45 @@ in `artifacts/spectron_arm64_clean_cache_replay_20260828.json`. This remains
 a private translated-ARM64 loopback test. It does not validate a live service
 or a physical ARM64 device.
 
+## Reproduce the IDA name-coverage audit
+
+The public archive keeps two complete name inventories for the translated
+Spectron database. The v318 inventory records the nine final `nullsub_*`
+defaults before the last naming pass. The v319 inventory records the same
+11,695 functions after those rows were renamed to target-only
+`spectron_nullsub_stub_0x...` labels.
+
+The audit helper runs inside IDA or IDALIB and writes one JSON row per
+function. It reports the function name, name origin, size, first instruction,
+leading bytes, and xref count:
+
+```bash
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_NAME_COVERAGE_OUTPUT=/tmp/spectron-name-audit.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/spectron_libqplay_translated_v318_residual_labels.i64 \
+  -s tools/ida_audit_spectron_name_coverage.py
+```
+
+The null-stub label artifact is generated from the v318 audit and can be
+applied to a fresh disposable IDA copy with
+`tools/ida_apply_spectron_target_only_labels.py`. Set
+`SPECTRON_TARGET_LABEL_APPLY=1` and provide a new
+`SPECTRON_TARGET_LABEL_SAVE_PATH`; the script refuses to overwrite an
+existing database. Reopen the saved copy with
+`tools/ida_verify_spectron_target_only_labels.py` and then rerun the audit.
+The expected result is nine verified labels, 11,695 functions, and zero
+default names in the checked `sub_`, `nullsub_`, `j_`, `loc_`, and `unk_`
+families.
+
+The checked-in inputs and results are
+`artifacts/spectron_name_coverage_audit_v318_20260828.json`,
+`artifacts/spectron_nullsub_target_only_labels_20260828.json`, and
+`artifacts/spectron_name_coverage_audit_20260828.json`. The result is naming
+coverage, not evidence that the stripped target retained every original C++
+source name.
+
 The complete private chain can be rebuilt with the single offline helper:
 
 ```bash

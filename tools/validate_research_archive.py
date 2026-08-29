@@ -779,6 +779,18 @@ def main():
     spectron_checkpoint_v318 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v318.json"
     )
+    spectron_name_coverage_v318 = load_json(
+        "artifacts/spectron_name_coverage_audit_v318_20260828.json"
+    )
+    spectron_name_coverage_v319 = load_json(
+        "artifacts/spectron_name_coverage_audit_20260828.json"
+    )
+    spectron_nullsub_labels = load_json(
+        "artifacts/spectron_nullsub_target_only_labels_20260828.json"
+    )
+    spectron_checkpoint_v319 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v319.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -17421,6 +17433,160 @@ def main():
         spectron_checkpoint_v318["residual_target_only_labels"]["reopen_failure_count"],
         0,
     )
+    coverage_v318_origins = spectron_name_coverage_v318["name_origins"]
+    coverage_v319_origins = spectron_name_coverage_v319["name_origins"]
+    check(
+        "Spectron v318 name audit artifact",
+        spectron_name_coverage_v318["artifact"],
+        "spectron_name_coverage_audit",
+    )
+    check(
+        "Spectron v318 name audit input hash",
+        spectron_name_coverage_v318["input_sha256"],
+        "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    )
+    check(
+        "Spectron v318 name audit function count",
+        spectron_name_coverage_v318["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v318 name audit default count",
+        spectron_name_coverage_v318["default_name_count"],
+        9,
+    )
+    check(
+        "Spectron v318 name audit origin counts",
+        coverage_v318_origins,
+        {
+            "ida_default": 9,
+            "ida_named_or_other": 4053,
+            "target_jni_export": 7,
+            "target_named_export": 1001,
+            "target_only_descriptive": 408,
+            "translated_v18_alias": 6217,
+        },
+    )
+    check(
+        "Spectron v319 name audit function count",
+        spectron_name_coverage_v319["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v319 name audit default count",
+        spectron_name_coverage_v319["default_name_count"],
+        0,
+    )
+    check(
+        "Spectron v319 name audit origin counts",
+        coverage_v319_origins,
+        {
+            "ida_named_or_other": 4053,
+            "target_jni_export": 7,
+            "target_named_export": 1001,
+            "target_only_descriptive": 417,
+            "translated_v18_alias": 6217,
+        },
+    )
+    check(
+        "Spectron nullsub label artifact",
+        spectron_nullsub_labels["artifact"],
+        "spectron_nullsub_target_only_labels_20260828",
+    )
+    check(
+        "Spectron nullsub label network marker",
+        spectron_nullsub_labels["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron nullsub label count",
+        spectron_nullsub_labels["summary"]["label_count"],
+        9,
+    )
+    check(
+        "Spectron nullsub label high-confidence count",
+        spectron_nullsub_labels["summary"]["high_confidence_count"],
+        9,
+    )
+    check(
+        "Spectron nullsub target-only count",
+        spectron_nullsub_labels["summary"]["target_only_count"],
+        9,
+    )
+    nullsub_labels_by_ea = {
+        label["target_ea"]: label for label in spectron_nullsub_labels["labels"]
+    }
+    check(
+        "Spectron nullsub label unique target count",
+        len(nullsub_labels_by_ea),
+        9,
+    )
+    for target_ea, label in nullsub_labels_by_ea.items():
+        check(
+            "Spectron nullsub label name " + target_ea,
+            label["proposed_name"],
+            "spectron_nullsub_stub_" + target_ea,
+        )
+        check(
+            "Spectron nullsub label body " + target_ea,
+            label["target_metrics"],
+            {
+                "bytes_hex": "c0035fd6",
+                "first_instruction": "RET",
+                "size": 4,
+                "xrefs_to": label["target_metrics"]["xrefs_to"],
+            },
+        )
+    check(
+        "Spectron v319 checkpoint artifact",
+        spectron_checkpoint_v319["artifact"],
+        "spectron_translation_checkpoint_20260828_v319",
+    )
+    check(
+        "Spectron v319 checkpoint parent",
+        spectron_checkpoint_v319["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v318",
+    )
+    check(
+        "Spectron v319 checkpoint parent path",
+        spectron_checkpoint_v319["parent_checkpoint"]["path"],
+        "artifacts/spectron_translation_checkpoint_20260828_v318.json",
+    )
+    check(
+        "Spectron v319 checkpoint database hash",
+        spectron_checkpoint_v319["database"]["sha256"],
+        "ca68997409b58ee6342a5288319c4d3b834fde1a7d526aa62db962c46164defd",
+    )
+    check(
+        "Spectron v319 checkpoint database close-reopen",
+        spectron_checkpoint_v319["database"]["close_reopen_verified"],
+        True,
+    )
+    check(
+        "Spectron v319 checkpoint function count",
+        spectron_checkpoint_v319["database"]["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v319 checkpoint default sub count",
+        spectron_checkpoint_v319["database"]["default_sub_function_count"],
+        0,
+    )
+    check(
+        "Spectron v319 nullsub label count",
+        spectron_checkpoint_v319["nullsub_target_only_labels"]["anchor_count"],
+        9,
+    )
+    check(
+        "Spectron v319 nullsub verified count",
+        spectron_checkpoint_v319["nullsub_target_only_labels"]["verified_name_count"],
+        9,
+    )
+    check(
+        "Spectron v319 nullsub reopen failures",
+        spectron_checkpoint_v319["nullsub_target_only_labels"]["reopen_failure_count"],
+        0,
+    )
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -17815,6 +17981,10 @@ def main():
         spectron_checkpoint_v317,
         spectron_residual_target_only_labels,
         spectron_checkpoint_v318,
+        spectron_name_coverage_v318,
+        spectron_name_coverage_v319,
+        spectron_nullsub_labels,
+        spectron_checkpoint_v319,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
