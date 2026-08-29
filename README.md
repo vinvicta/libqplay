@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v309 Spectron database. It
-contains 11,695 functions and 418 remaining default `sub_` names. The v263
+The current documented translation frontier is the v310 Spectron database. It
+contains 11,695 functions and 410 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -238,6 +238,11 @@ glyph-loader and interpreter helper block. They cover
 ARM64 shape, six match the complete recorded feature set, and one differs
 only in register allocation detail. The target now has 418 remaining default
 `sub_` names.
+The v310 revision adds eight high-confidence FreeType autofit labels. Seven
+are callbacks selected by the dummy, Latin, Latin2, and CJK script class
+records, and one is the Latin2 segment-analysis helper. All eight match the
+complete recorded ARM64 feature set. The target now has 410 remaining default
+`sub_` names.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -326,6 +331,8 @@ The current v308 database is kept locally as
 `analysis/spectron_libqplay_translated_v308.i64`.
 The current v309 database is kept locally as
 `analysis/spectron_libqplay_translated_v309.i64`.
+The current v310 database is kept locally as
+`analysis/spectron_libqplay_translated_v310_autofit.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
