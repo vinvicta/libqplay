@@ -731,6 +731,12 @@ def main():
     spectron_checkpoint_v310 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v310.json"
     )
+    spectron_freetype_autofit_followup_anchors = load_json(
+        "artifacts/spectron_freetype_autofit_followup_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v311 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v311.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -15857,6 +15863,212 @@ def main():
         410,
     )
     check(
+        "Spectron FreeType autofit follow-up artifact",
+        spectron_freetype_autofit_followup_anchors["artifact"],
+        "spectron_freetype_autofit_followup_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron FreeType autofit follow-up network",
+        spectron_freetype_autofit_followup_anchors["network_contacted"],
+        False,
+    )
+    followup_summary = spectron_freetype_autofit_followup_anchors["summary"]
+    check(
+        "Spectron FreeType autofit follow-up anchor count",
+        followup_summary["anchor_count"],
+        7,
+    )
+    check(
+        "Spectron FreeType autofit follow-up high-confidence count",
+        followup_summary["high_confidence_count"],
+        7,
+    )
+    check(
+        "Spectron FreeType autofit follow-up normalized count",
+        followup_summary["normalized_shape_exact_count"],
+        7,
+    )
+    check(
+        "Spectron FreeType autofit follow-up full metric count",
+        followup_summary["full_metric_exact_count"],
+        6,
+    )
+    check(
+        "Spectron FreeType autofit follow-up register-detail count",
+        followup_summary["register_detail_only_count"],
+        1,
+    )
+    check(
+        "Spectron FreeType autofit follow-up source default count",
+        followup_summary["source_default_name_count"],
+        7,
+    )
+    check(
+        "Spectron FreeType autofit follow-up target default count",
+        followup_summary["target_default_name_count"],
+        7,
+    )
+    followup_rows = {
+        row["spectron_ea"]: row
+        for row in spectron_freetype_autofit_followup_anchors["anchors"]
+    }
+    followup_expected = {
+        "0x275a78": (
+            "0x268608",
+            "v18_af_latin2_hints_link_segments",
+            "af_latin2_hints_link_segments",
+            "src/autofit/aflatin2.c",
+            [],
+            True,
+        ),
+        "0x275d6c": (
+            "0x2688fc",
+            "v18_af_latin2_hints_compute_edges",
+            "af_latin2_hints_compute_edges",
+            "src/autofit/aflatin2.c",
+            [],
+            True,
+        ),
+        "0x2762c8": (
+            "0x268e58",
+            "v18_af_glyph_hints_done",
+            "af_glyph_hints_done",
+            "src/autofit/afhints.c",
+            ["register_detail_hash"],
+            False,
+        ),
+        "0x2763b4": (
+            "0x268f44",
+            "v18_af_loader_load_g",
+            "af_loader_load_g",
+            "src/autofit/afloader.c",
+            [],
+            True,
+        ),
+        "0x276b44": (
+            "0x2696d4",
+            "v18_af_glyph_hints_reload",
+            "af_glyph_hints_reload",
+            "src/autofit/afhints.c",
+            [],
+            True,
+        ),
+        "0x277064": (
+            "0x269bf4",
+            "v18_af_latin2_metrics_scale",
+            "af_latin2_metrics_scale",
+            "src/autofit/aflatin2.c",
+            [],
+            True,
+        ),
+        "0x27738c": (
+            "0x269f1c",
+            "v18_af_latin_metrics_scale",
+            "af_latin_metrics_scale",
+            "src/autofit/aflatin.c",
+            [],
+            True,
+        ),
+    }
+    check(
+        "Spectron FreeType autofit follow-up target set",
+        set(followup_rows),
+        set(followup_expected),
+    )
+    for target_ea, (
+        source_ea,
+        expected_name,
+        expected_source_name,
+        expected_source_file,
+        expected_differences,
+        expected_full_match,
+    ) in followup_expected.items():
+        row = followup_rows[target_ea]
+        check(
+            "Spectron FreeType autofit follow-up source " + target_ea,
+            row["original_ea"],
+            source_ea,
+        )
+        check(
+            "Spectron FreeType autofit follow-up name " + target_ea,
+            row["proposed_name"],
+            expected_name,
+        )
+        check(
+            "Spectron FreeType autofit follow-up source name " + target_ea,
+            row["source_name"],
+            expected_source_name,
+        )
+        check(
+            "Spectron FreeType autofit follow-up source file " + target_ea,
+            row["source_file"],
+            expected_source_file,
+        )
+        check(
+            "Spectron FreeType autofit follow-up metrics " + target_ea,
+            row["metric_differences"],
+            expected_differences,
+        )
+        check(
+            "Spectron FreeType autofit follow-up normalized " + target_ea,
+            row["normalized_shape_equal"],
+            True,
+        )
+        check(
+            "Spectron FreeType autofit follow-up full metrics " + target_ea,
+            row["full_metric_equal"],
+            expected_full_match,
+        )
+    check(
+        "Spectron FreeType autofit follow-up verified name count",
+        spectron_checkpoint_v311["freetype_autofit_followup_anchors"][
+            "verified_name_count"
+        ],
+        7,
+    )
+    check(
+        "Spectron FreeType autofit follow-up reopen failures",
+        spectron_checkpoint_v311["freetype_autofit_followup_anchors"][
+            "reopen_failure_count"
+        ],
+        0,
+    )
+    check(
+        "Spectron v311 checkpoint artifact",
+        spectron_checkpoint_v311["artifact"],
+        "spectron_translation_checkpoint_20260828_v311",
+    )
+    check(
+        "Spectron v311 checkpoint parent",
+        spectron_checkpoint_v311["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v310",
+    )
+    check(
+        "Spectron v311 checkpoint parent path",
+        spectron_checkpoint_v311["parent_checkpoint"]["path"],
+        "artifacts/spectron_translation_checkpoint_20260828_v310.json",
+    )
+    check(
+        "Spectron v311 checkpoint database hash",
+        spectron_checkpoint_v311["database"]["sha256"],
+        "ce20ddf7e3d8835cb79f6889c9291445a0472480169f07cfadc6c6d6e1e6a6df",
+    )
+    check(
+        "Spectron v311 checkpoint database close-reopen",
+        spectron_checkpoint_v311["database"]["close_reopen_verified"],
+        True,
+    )
+    check(
+        "Spectron v311 checkpoint function count",
+        spectron_checkpoint_v311["database"]["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v311 checkpoint default sub count",
+        spectron_checkpoint_v311["database"]["default_sub_function_count"],
+        403,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -16234,6 +16446,8 @@ def main():
         spectron_checkpoint_v309,
         spectron_freetype_autofit_anchors,
         spectron_checkpoint_v310,
+        spectron_freetype_autofit_followup_anchors,
+        spectron_checkpoint_v311,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
