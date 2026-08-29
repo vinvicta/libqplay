@@ -1,0 +1,38 @@
+{
+  "anchor_count": 2,
+  "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_resource_stream_residual_manual_translation_anchors_20260829.json",
+  "apply": true,
+  "artifact": "spectron_manual_anchor_application",
+  "comments_added": 2,
+  "expected_artifact": "spectron_resource_stream_residual_manual_translation_anchors_20260829",
+  "failure_count": 0,
+  "failures": [],
+  "plan": [
+    {
+      "actual_name_after": "v18_TResourceFunctions_encryptTStream_TString_const_TStream",
+      "actual_name_before": "_ZN10f6WHgaQkAF10irmvgaEu_uERK10C8THgaTQxFP10nenvgaH9_u",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0xece78",
+      "original_name": "TResourceFunctions_encryptTStream_TString_const_TStream",
+      "proposed_name": "v18_TResourceFunctions_encryptTStream_TString_const_TStream",
+      "spectron_ea": "0xede48"
+    },
+    {
+      "actual_name_after": "v18_TResourceFunctions_decryptTStream_TString_const_TStream",
+      "actual_name_before": "_ZN10f6WHgaQkAF10sfhvgaC7VuERK10C8THgaTQxFP10nenvgaH9_u",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0xecfa0",
+      "original_name": "TResourceFunctions_decryptTStream_TString_const_TStream",
+      "proposed_name": "v18_TResourceFunctions_decryptTStream_TString_const_TStream",
+      "spectron_ea": "0xedf70"
+    }
+  ],
+  "renamed_count": 2,
+  "resolved_count": 2,
+  "save_path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v344_resource_stream.i64",
+  "saved": true,
+  "verified": true,
+  "verified_name_count": 2
+}

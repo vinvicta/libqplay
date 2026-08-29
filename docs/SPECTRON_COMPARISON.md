@@ -319,6 +319,45 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v344 resource-stream crypto comparison
+
+The v344 pass compares the adjacent resource-stream encryption and decryption
+methods. The target class is the obfuscated `f6WHgaQkAF` resource runtime.
+Both source and target bodies have direct compact Hex-Rays pseudocode.
+
+| Source role | Source address | Spectron address | Applied alias | Match class |
+| --- | ---: | ---: | --- | --- |
+| `TResourceFunctions_encryptTStream_TString_const_TStream` | `0xece78` | `0xede48` | `v18_TResourceFunctions_encryptTStream_TString_const_TStream` | normalized shape, encrypt call |
+| `TResourceFunctions_decryptTStream_TString_const_TStream` | `0xecfa0` | `0xedf70` | `v18_TResourceFunctions_decryptTStream_TString_const_TStream` | normalized shape, decrypt call |
+
+The two target bodies are both 296 bytes long with 74 instructions, nine
+basic blocks, ten branches, and four calls. Their normalized mnemonic,
+opcode, register-shape, and whole-body hashes match the source rows. The only
+metric difference is register-detail allocation. Since shape alone cannot
+separate the pair, the source encrypt-memory call maps to target
+`cHovga0n1u::thgvgajjVu`, while the source decrypt-memory call maps to target
+`cHovga0n1u::b2hvgavNWu`. The adjacent order is also preserved.
+
+The aliases were applied and verified after reopening the v344 database. It
+has 11,707 functions, zero audited default names, 6,437 translated aliases,
+4,791 source-backed dynamic rows, 1,680 exact retained dynamic names, and
+5,782 exact dynamic function starts. The semantic map now contains 3,718
+mapped source-target pairs, including these two manually resolved rows.
+
+The complete comparison records are
+`artifacts/spectron_resource_stream_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_resource_stream_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_resource_stream_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v344_resource_stream.json`,
+`artifacts/spectron_name_coverage_audit_v344.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v344.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v344.json`,
+`artifacts/spectron_semantic_translation_v344.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v344.json`.
+
+This comparison is static evidence. It does not change the runtime diagnosis,
+patch the APK, or contact a live endpoint.
+
 ## v343 TDrawingPanel residual comparison
 
 The v343 pass compares three raw target methods in the obfuscated `V8fxgahcBw`

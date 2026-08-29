@@ -425,6 +425,39 @@ records are
 `artifacts/spectron_semantic_translation_v326.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v326.json`.
 
+### v344 resource-stream crypto aliases
+
+The v344 pass adds two semantic aliases to the private Spectron IDA database.
+The raw target symbols remain recorded beside the analysis labels.
+
+| Spectron address | Raw target symbol | Applied alias | Recovered role |
+| ---: | --- | --- | --- |
+| `0xede48` | `_ZN10f6WHgaQkAF10irmvgaEu_uERK10C8THgaTQxFP10nenvgaH9_u` | `v18_TResourceFunctions_encryptTStream_TString_const_TStream` | resource stream encryption |
+| `0xedf70` | `_ZN10f6WHgaQkAF10sfhvgaC7VuERK10C8THgaTQxFP10nenvgaH9_u` | `v18_TResourceFunctions_decryptTStream_TString_const_TStream` | resource stream decryption |
+
+The source counterparts are `0xece78` and `0xecfa0`. Both pairs have direct
+source and target pseudocode, identical normalized ARM64 shape, and only a
+register-detail difference. The encrypt and decrypt helper calls distinguish
+the adjacent target methods after the automatic matcher reported both as
+candidates for both source rows.
+
+The v344 records are
+`artifacts/spectron_resource_stream_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_resource_stream_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_resource_stream_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v344_resource_stream.json`,
+`artifacts/spectron_name_coverage_audit_v344.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v344.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v344.json`,
+`artifacts/spectron_semantic_translation_v344.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v344.json`.
+
+The v344 database has 6,437 translated `v18_` aliases, 419 target-only
+descriptive labels, 792 retained target names, seven JNI exports, 4,052 other
+IDA or PLT names, 4,791 source-backed dynamic rows, 1,680 exact retained
+dynamic names, and 5,782 exact dynamic function starts. Its SHA-256 is
+`f8ce3bcf1d63ad596c64525e2621f1c3e9d2bbb544eccfedb36ade2b5d6baaf3`.
+
 ### v343 TDrawingPanel residual aliases
 
 The v343 pass adds three semantic aliases to the private Spectron IDA

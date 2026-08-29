@@ -3035,6 +3035,48 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v344 resource-stream crypto residuals
+
+The v344 revision is a static IDA checkpoint for the adjacent resource-stream
+encryption and decryption methods. Source `TResourceFunctions_encryptTStream`
+at `0xece78` maps to target `0xede48`, and source
+`TResourceFunctions_decryptTStream` at `0xecfa0` maps to target `0xedf70`.
+The raw target symbols are retained in the anchor artifact, while the IDA
+database now carries the `v18_` aliases.
+
+The automatic shape matcher had left both source rows ambiguous because each
+body is 296 bytes with 74 instructions, nine basic blocks, ten branches, and
+four calls. Direct source and target Hex-Rays pseudocode resolves the order:
+the first pair calls the encrypt-memory helper and the second calls the
+decrypt-memory helper. Both bodies lower-case the resource filename, derive
+the same eight-byte key schedule, read the `TString` payload, transform the
+bytes in memory, and clear the temporary string. All normalized feature hashes
+match; only the register-detail hash differs.
+
+The aliases were applied to a fresh v343-derived database and verified after
+reopening. The v344 database contains 11,707 functions, zero audited default
+names, 6,437 translated aliases, 4,791 source-backed dynamic rows, and 1,680
+exact retained dynamic names. All 5,782 defined dynamic function symbols
+still resolve to exact IDA function starts. The semantic map reports 3,718
+mapped source-target pairs and 1,018 remaining automatic ambiguities.
+
+Its SHA-256 is
+`f8ce3bcf1d63ad596c64525e2621f1c3e9d2bbb544eccfedb36ade2b5d6baaf3`.
+The records are
+`artifacts/spectron_resource_stream_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_resource_stream_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_resource_stream_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v344_resource_stream.json`,
+`artifacts/spectron_name_coverage_audit_v344.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v344.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v344.json`,
+`artifacts/spectron_semantic_translation_v344.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v344.json`.
+
+This checkpoint did not change the verified loopback package, connector TLS
+result, or local protocol responder. No live endpoint was contacted, and no
+new runtime replay was performed for v344.
+
 ## Spectron 2.2 v343 TDrawingPanel residuals
 
 The v343 revision is a static IDA checkpoint for three raw methods in the

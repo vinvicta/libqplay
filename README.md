@@ -13,7 +13,7 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v343 Spectron database. It
+The current documented translation frontier is the v344 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -244,6 +244,27 @@ normalized ARM64 feature matches. The v343 database contains 6,435 reviewed
 `v18_` aliases, 4,789 source-backed dynamic rows, and 1,682 exact retained
 dynamic names. It is a static IDA checkpoint and has not been used for a new
 runtime APK replay.
+
+The v344 revision resolves the adjacent `TResourceFunctions` stream crypto
+pair. Source `0xece78` encrypts a resource stream and source `0xecfa0`
+decrypts it. Their Spectron counterparts are `0xede48` and `0xedf70`, which
+were initially indistinguishable to the automatic matcher because both bodies
+are 296 bytes long with 74 instructions, nine basic blocks, ten branches, and
+four calls. Direct source and target Hex-Rays pseudocode separates them by the
+encrypt-memory and decrypt-memory helper calls. Both methods derive the same
+eight-byte key schedule from the lower-case resource name, read the `TString`
+payload, and transform the bytes in memory. Both rows have exact normalized
+ARM64 shape, with only register-detail allocation differing.
+
+The v344 database contains 6,437 reviewed `v18_` aliases, 4,791
+source-backed dynamic rows, and 1,680 exact retained dynamic names. The
+semantic map now contains 3,718 mapped source-target pairs, including these
+two manually resolved rows, and 1,018 remaining automatic ambiguities. It has
+11,707 functions, zero audited default names, and 5,782 exact dynamic
+function starts. The saved database hash is
+`f8ce3bcf1d63ad596c64525e2621f1c3e9d2bbb544eccfedb36ade2b5d6baaf3`.
+This is a static IDA checkpoint. It did not patch the APK, rerun the loopback
+client, contact a game server, or test a live endpoint.
 
 The v331 revision continues immediately into the static-variable runtime. It
 adds 22 high-confidence aliases for the universe initializer, the

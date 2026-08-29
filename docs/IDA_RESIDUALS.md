@@ -800,6 +800,62 @@ generators are
 `tools/generate_spectron_format_parameters_property_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v326.py`.
 
+### v344 TResourceFunctions stream crypto aliases
+
+The v344 pass starts from the verified v343 database and resolves the two
+adjacent stream transformation methods in the obfuscated `f6WHgaQkAF`
+resource runtime. The automatic matcher had left both source rows ambiguous
+because their normalized bodies are identical. Direct Hex-Rays pseudocode and
+the distinct memory crypto calls resolve the pair without relying on name
+similarity.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | --- | --- | --- |
+| `0xece78` `TResourceFunctions_encryptTStream_TString_const_TStream` | `0xede48` `_ZN10f6WHgaQkAF10irmvgaEu_uERK10C8THgaTQxFP10nenvgaH9_u` | `v18_TResourceFunctions_encryptTStream_TString_const_TStream` | lower-case resource key derivation and memory encryption |
+| `0xecfa0` `TResourceFunctions_decryptTStream_TString_const_TStream` | `0xedf70` `_ZN10f6WHgaQkAF10sfhvgaC7VuERK10C8THgaTQxFP10nenvgaH9_u` | `v18_TResourceFunctions_decryptTStream_TString_const_TStream` | lower-case resource key derivation and memory decryption |
+
+Both source and target bodies are 296 bytes long with 74 instructions, nine
+basic blocks, ten branches, and four calls. The normalized mnemonic, opcode,
+register-shape, and whole-body hashes all match. The only feature difference
+is the register-detail hash, which is consistent with the rebuilt target
+wrappers. The source calls
+`plt_TEncryption_des_encryptmemory_uchar_const_uchar_uint` and
+`plt_TEncryption_des_decryptmemory_uchar_const_uchar_uint`; the target calls
+`cHovga0n1u::thgvgajjVu` and `cHovga0n1u::b2hvgavNWu` respectively. Each body
+also lower-cases the filename, reads the `TString` bytes, and clears its
+temporary string.
+
+The two aliases were applied to a fresh v343-derived database and verified
+after reopening. This changes the semantic map from 3,716 to 3,718 mapped
+source-target pairs and removes the two resource rows from its automatic
+ambiguity set. The v344 database contains 11,707 functions, zero audited
+default names, 6,437 translated aliases, 419 target-only descriptive labels,
+792 retained target names, seven JNI exports, and 4,052 other IDA or PLT
+names. Dynamic coverage reports 4,791 source-backed aliases, 1,680 exact
+retained dynamic names, and 5,782 exact dynamic function starts.
+
+The saved database is
+`analysis/spectron_libqplay_translated_v344_resource_stream.i64` with SHA-256
+`f8ce3bcf1d63ad596c64525e2621f1c3e9d2bbb544eccfedb36ade2b5d6baaf3`. The
+machine-readable records are
+`artifacts/spectron_resource_stream_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_resource_stream_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_resource_stream_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v344_resource_stream.json`,
+`artifacts/spectron_name_coverage_audit_v344.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v344.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v344.json`,
+`artifacts/spectron_semantic_translation_v344.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v344.json`.
+The reusable scripts are
+`tools/generate_spectron_resource_stream_anchors.py`,
+`tools/carry_forward_spectron_semantic_translation_v344.py`, and
+`tools/generate_spectron_translation_checkpoint_v344.py`.
+
+This is a static IDA translation checkpoint. It did not patch the APK, rerun
+the loopback client, alter TLS behavior, contact a game server, or test a
+live endpoint.
+
 ### v343 TDrawingPanel residual aliases
 
 The v343 pass starts from the verified v342 database and translates three raw

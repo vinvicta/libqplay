@@ -261,6 +261,62 @@ This pass changed only the private IDA copy and archive. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
 
+## 2026-08-29: Resource stream crypto helpers, v344
+
+The v343 database left one especially instructive ambiguity in the resource
+runtime. The source has adjacent encrypt and decrypt methods, and the target
+also has an adjacent pair, but both versions produce the same normalized
+instruction shape. A shape-only matcher therefore returned both target
+addresses as candidates for both source functions.
+
+| 1.8 source | Spectron target | Applied alias | Distinguishing evidence |
+| --- | --- | --- | --- |
+| `0xece78` `TResourceFunctions_encryptTStream_TString_const_TStream` | `0xede48` `_ZN10f6WHgaQkAF10irmvgaEu_uERK10C8THgaTQxFP10nenvgaH9_u` | `v18_TResourceFunctions_encryptTStream_TString_const_TStream` | `des_encryptmemory` call |
+| `0xecfa0` `TResourceFunctions_decryptTStream_TString_const_TStream` | `0xedf70` `_ZN10f6WHgaQkAF10sfhvgaC7VuERK10C8THgaTQxFP10nenvgaH9_u` | `v18_TResourceFunctions_decryptTStream_TString_const_TStream` | `des_decryptmemory` call |
+
+I captured direct Hex-Rays pseudocode from the restarted IDA MCP for both
+source functions and from the target IDALIB copy. Each body derives the same
+eight-byte key schedule from a lower-case resource filename, checks the
+`TString` payload, passes its bytes and length to the matching memory crypto
+helper, and clears the temporary string. The target wrappers are obfuscated,
+but the operation is preserved. The target's encrypted helper is
+`cHovga0n1u::thgvgajjVu`; its decrypted helper is
+`cHovga0n1u::b2hvgavNWu`.
+
+The feature evidence is unusually strong. Both pairs are 296 bytes, 74
+instructions, nine basic blocks, ten branches, and four calls. The normalized
+mnemonic, opcode-shape, register-shape, and whole-body hashes are identical.
+Only the register-detail hash differs, reflecting the target's rebuilt wrapper
+allocation. The source and target pseudocode hashes are retained in the
+anchor artifact, and the target address order agrees with the source method
+order. That combination is enough to resolve the ambiguity without guessing
+from the obfuscated spellings.
+
+The application renamed both target functions and added two evidence comments;
+the reopen check found both names in the 11,707-function database. The v344
+database has zero audited default names, 6,437 translated aliases, 4,791
+source-backed dynamic rows, 1,680 exact retained dynamic names, and 5,782
+exact dynamic function boundaries. The semantic map now reports 3,718 mapped
+source-target pairs, 3,658 high-confidence pairs, 1,018 remaining ambiguous
+functions, and 608 unmatched functions.
+
+The saved v344 database is
+`analysis/spectron_libqplay_translated_v344_resource_stream.i64` with SHA-256
+`f8ce3bcf1d63ad596c64525e2621f1c3e9d2bbb544eccfedb36ade2b5d6baaf3`. The
+machine-readable evidence is
+`artifacts/spectron_resource_stream_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_resource_stream_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_resource_stream_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v344_resource_stream.json`,
+`artifacts/spectron_name_coverage_audit_v344.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v344.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v344.json`,
+`artifacts/spectron_semantic_translation_v344.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v344.json`.
+
+This pass was static analysis only. It did not patch the APK, rerun the local
+loopback client, contact a live service, or decrypt an external resource.
+
 ## 2026-08-29: TDrawingPanel residuals, v343
 
 The next clean raw-symbol group is the three-entry drawing-panel block.
