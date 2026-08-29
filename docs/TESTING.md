@@ -937,6 +937,101 @@ The expected v326 database hash is
 checkpoint is static evidence only. It does not change the loopback runtime
 result, TLS diagnosis, or live-service boundary.
 
+### v345 resource-object static translation
+
+The v345 pass is static IDA work only. It starts from the verified v344
+database and reviews source methods at `0xf0434`, `0xf0464`, and `0xf04a4`
+against target methods at `0xf1910`, `0xf1940`, and `0xf1980`. It does not
+require an APK, emulator, server, or live endpoint.
+
+Capture compact pseudocode with `tools/ida_dump_function_evidence.py` using
+the IDALIB environment described in the earlier sections. Keep the evidence
+files in `/tmp`:
+
+    /tmp/graal-source-resource-object-v345.json
+    /tmp/graal-target-resource-object-v345.json
+
+Generate the reviewed three-row artifact:
+
+    python3 tools/generate_spectron_resource_object_static_anchors.py \
+      --original-features /tmp/original_features_v3_current.json \
+      --spectron-features artifacts/spectron_features_v344_resource_stream.json \
+      --semantic-map artifacts/spectron_semantic_translation_v344.json \
+      --source-evidence /tmp/graal-source-resource-object-v345.json \
+      --target-evidence /tmp/graal-target-resource-object-v345.json \
+      --original-binary-sha256 9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8 \
+      --spectron-binary-sha256 f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219 \
+      --output artifacts/spectron_resource_object_static_residual_manual_translation_anchors_20260829.json
+
+Apply the artifact to a fresh v344-derived copy and save it as
+`analysis/spectron_libqplay_translated_v345_resource_object_static.i64`. Use
+`tools/ida_apply_spectron_manual_anchors.py` with the same IDALIB invocation
+shown earlier and these variables:
+
+    SPECTRON_MANUAL_APPLY=1
+    SPECTRON_MANUAL_ANCHORS=/path/to/artifacts/spectron_resource_object_static_residual_manual_translation_anchors_20260829.json
+    SPECTRON_MANUAL_EXPECTED_ARTIFACT=spectron_resource_object_static_residual_manual_translation_anchors_20260829
+    SPECTRON_MANUAL_SAVE_PATH=/path/to/spectron_libqplay_translated_v345_resource_object_static.i64
+    SPECTRON_MANUAL_REPORT=/tmp/spectron_resource_object_static_manual_translation_application_20260829.json
+
+Reopen the saved copy with `tools/ida_verify_spectron_manual_anchors.py` and
+set `SPECTRON_MANUAL_VERIFY_REPORT` to
+`/tmp/spectron_resource_object_static_manual_translation_verification_20260829.json`.
+The application report must contain three resolved functions, three renames,
+three evidence comments, zero failures, and a successful save. The reopen
+report must contain three verified names in an 11,707-function database.
+
+Refresh the feature export and audits with the IDALIB scripts from the v344
+section, using these output paths:
+
+    artifacts/spectron_features_v345_resource_object_static.json
+    artifacts/spectron_name_coverage_audit_v345.json
+    artifacts/spectron_dynamic_symbol_boundaries_v345.json
+    artifacts/spectron_dynamic_symbol_coverage_audit_v345.json
+
+Carry the semantic map forward and build the strict checkpoint:
+
+    python3 tools/carry_forward_spectron_semantic_translation_v345.py \
+      --parent-map artifacts/spectron_semantic_translation_v344.json \
+      --target-features artifacts/spectron_features_v345_resource_object_static.json \
+      --anchor-artifact artifacts/spectron_resource_object_static_residual_manual_translation_anchors_20260829.json \
+      --output artifacts/spectron_semantic_translation_v345.json
+
+    python3 tools/generate_spectron_translation_checkpoint_v345.py \
+      --parent-checkpoint artifacts/spectron_translation_checkpoint_20260829_v344.json \
+      --database /path/to/spectron_libqplay_translated_v345_resource_object_static.i64 \
+      --anchor-artifact artifacts/spectron_resource_object_static_residual_manual_translation_anchors_20260829.json \
+      --application-report artifacts/spectron_resource_object_static_residual_manual_translation_application_20260829.json \
+      --verification-report artifacts/spectron_resource_object_static_residual_manual_translation_verification_20260829.json \
+      --name-audit artifacts/spectron_name_coverage_audit_v345.json \
+      --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v345.json \
+      --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v345.json \
+      --semantic-map artifacts/spectron_semantic_translation_v345.json \
+      --feature-export artifacts/spectron_features_v345_resource_object_static.json \
+      --output artifacts/spectron_translation_checkpoint_20260829_v345.json
+
+    python3 tools/validate_research_archive.py
+
+The expected v345 database hash is
+`0b455dfb6777c8ca571f86e19612d30a7dca6c3d9b9e47590e31a6bfcea4442f`.
+Expected totals are 6,440 translated aliases, 419 target-only descriptive
+labels, 789 retained target names, seven JNI exports, 4,052 other IDA or PLT
+names, 4,795 source-backed dynamic symbols, 1,677 exact retained dynamic
+symbols, and 5,782 exact dynamic function starts. The semantic map has 3,721
+mapped pairs, 3,661 high-confidence pairs, 1,015 remaining automatic
+ambiguities, and 608 unmatched functions. The anchor summary is three
+high-confidence rows, three normalized-shape matches, three layout-change
+rows, three pseudocode-backed rows, and three resolved ambiguity rows.
+
+The target D2 function has a D1 alternate dynamic spelling. Rebuilding the
+dynamic audit therefore changes four names to source-backed aliases even
+though the pass adds three function aliases. This is expected. The checkpoint
+hash assumes the final IDB is not opened again after the last IDALIB audit,
+because opening an IDB can update IDA metadata.
+
+This checkpoint is static evidence only. It does not change the loopback
+runtime result, TLS diagnosis, or live-service boundary.
+
 ### v344 resource-stream crypto translation
 
 The v344 pass is static IDA work only. It starts from the verified v343

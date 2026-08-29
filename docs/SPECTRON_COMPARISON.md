@@ -319,6 +319,51 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v345 resource-object static comparison
+
+The v345 pass compares the three raw target helpers immediately before the
+resource-stream methods. The source cluster is the `TResourceObject` static
+initializer followed by the two `TEncodedFileKey` ABI forms.
+
+| Source role | Source address | Spectron address | Raw target symbol | Applied alias |
+| --- | ---: | ---: | --- | --- |
+| `TResourceObject_initStaticVars_void` | `0xf0434` | `0xf1910` | `_Z10dZEN2aa5nYv` | `v18_TResourceObject_initStaticVars_void` |
+| `TEncodedFileKey_TEncodedFileKey` | `0xf0464` | `0xf1940` | `_ZN10uVBvgaZvcvD2Ev` | `v18_TEncodedFileKey_TEncodedFileKey` |
+| `TEncodedFileKey_TEncodedFileKey__2` | `0xf04a4` | `0xf1980` | `_ZN10uVBvgaZvcvD0Ev` | `v18_TEncodedFileKey_TEncodedFileKey__2` |
+
+The initializer allocates a 0x28-byte hash-list wrapper, calls its
+constructor, and stores the result in the resource-object static slot. Both
+key forms reset their vtable and clear the strings at offsets `+16` and `+8`.
+The deleting form then releases the object. The target D2 function also has a
+D1 alternate dynamic spelling, which is preserved as an ABI detail rather
+than treated as a fourth source function.
+
+All three pairs have identical normalized feature shape: 296 bytes, 74
+instructions, nine basic blocks, ten branches, and four calls. Only the
+register-detail hash changes. Direct source and target pseudocode, direct
+allocation or clear calls, and the adjacent method order resolve the three
+rows that the automatic matcher left ambiguous.
+
+The aliases were applied and verified after reopening the v345 database. It
+has 11,707 functions, zero audited default names, 6,440 translated aliases,
+4,795 source-backed dynamic rows, 1,677 exact retained dynamic names, and
+5,782 exact dynamic function starts. The semantic map contains 3,721 mapped
+source-target pairs, including these three resolved ambiguity rows.
+
+The complete records are
+`artifacts/spectron_resource_object_static_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_resource_object_static_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_resource_object_static_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v345_resource_object_static.json`,
+`artifacts/spectron_name_coverage_audit_v345.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v345.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v345.json`,
+`artifacts/spectron_semantic_translation_v345.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v345.json`.
+
+This comparison is static evidence. It does not change the runtime diagnosis,
+patch the APK, or contact a live endpoint.
+
 ## v344 resource-stream crypto comparison
 
 The v344 pass compares the adjacent resource-stream encryption and decryption

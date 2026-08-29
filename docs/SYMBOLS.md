@@ -425,6 +425,43 @@ records are
 `artifacts/spectron_semantic_translation_v326.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v326.json`.
 
+### v345 resource-object static aliases
+
+The v345 pass adds three semantic aliases to the private Spectron IDA
+database. The raw target symbols remain visible so the names can be traced
+back to the stripped build.
+
+| Spectron address | Raw target symbol | Applied alias | Recovered role |
+| ---: | --- | --- | --- |
+| `0xf1910` | `_Z10dZEN2aa5nYv` | `v18_TResourceObject_initStaticVars_void` | resource-object hash-list initialization |
+| `0xf1940` | `_ZN10uVBvgaZvcvD2Ev` | `v18_TEncodedFileKey_TEncodedFileKey` | non-deleting key-object cleanup form |
+| `0xf1980` | `_ZN10uVBvgaZvcvD0Ev` | `v18_TEncodedFileKey_TEncodedFileKey__2` | deleting key-object cleanup form |
+
+The source counterparts are `0xf0434`, `0xf0464`, and `0xf04a4`. Every pair
+has the same normalized ARM64 shape: 296 bytes, 74 instructions, nine basic
+blocks, ten branches, and four calls. Only register-detail allocation differs.
+Direct pseudocode and the target's D2, D1, and D0 ABI order resolve the three
+rows after the automatic matcher left them ambiguous. The D2 entry's D1
+alternate dynamic spelling is retained as an ABI fact, not mapped to another
+source function.
+
+The v345 records are
+`artifacts/spectron_resource_object_static_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_resource_object_static_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_resource_object_static_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v345_resource_object_static.json`,
+`artifacts/spectron_name_coverage_audit_v345.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v345.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v345.json`,
+`artifacts/spectron_semantic_translation_v345.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v345.json`.
+
+The v345 database has 6,440 translated `v18_` aliases, 419 target-only
+descriptive labels, 789 retained target names, seven JNI exports, 4,052 other
+IDA or PLT names, 4,795 source-backed dynamic rows, 1,677 exact retained
+dynamic names, and 5,782 exact dynamic function starts. Its SHA-256 is
+`0b455dfb6777c8ca571f86e19612d30a7dca6c3d9b9e47590e31a6bfcea4442f`.
+
 ### v344 resource-stream crypto aliases
 
 The v344 pass adds two semantic aliases to the private Spectron IDA database.

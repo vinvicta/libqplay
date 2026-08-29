@@ -13,7 +13,7 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v344 Spectron database. It
+The current documented translation frontier is the v345 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -41,6 +41,15 @@ were recovered. The v272 revision adds one high-confidence zlib
 `inflate_fast` role label at target `0x297764`. Both source and target
 databases kept default names at that address, so the artifact records the
 inferred library role separately from the current IDA names.
+
+The v345 revision adds three high-confidence aliases in the resource-object
+static cluster: the resource-object static initializer and the two
+`TEncodedFileKey` ABI forms. The target keeps the same normalized ARM64 body
+shape while changing wrapper allocation and register detail. The v345 copy
+contains 6,440 reviewed `v18_` aliases, 4,795 source-backed dynamic rows, and
+1,677 exact retained dynamic names. Its semantic map contains 3,721 mapped
+pairs, 3,661 high-confidence pairs, 1,015 remaining automatic ambiguities,
+and 608 unmatched source functions.
 
 The v322 revision adds twelve high-confidence TGraalVar runtime aliases. The
 review joins source and target Hex-Rays pseudocode with the G0gxgajWBw
@@ -871,6 +880,60 @@ target-only functions, with zero failures. Reopening the fresh copy verified
 all four names. This was a static translation pass only. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
+
+### v345 TResourceObject and TEncodedFileKey static helpers
+
+The v345 pass resolves the three adjacent resource-object helpers that follow
+the earlier stream crypto pair. The source and target bodies have identical
+normalized ARM64 shape, but the automatic matcher left the rows ambiguous
+because the target rebuilt its string and hash-list wrappers. Direct Hex-Rays
+pseudocode, ABI role, allocation and clear calls, and local method order
+resolve the cluster.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | --- | --- | --- |
+| `0xf0434` `TResourceObject_initStaticVars_void` | `0xf1910` `_Z10dZEN2aa5nYv` | `v18_TResourceObject_initStaticVars_void` | allocate and install the resource-object hash list |
+| `0xf0464` `TEncodedFileKey_TEncodedFileKey` | `0xf1940` `_ZN10uVBvgaZvcvD2Ev` | `v18_TEncodedFileKey_TEncodedFileKey` | non-deleting ABI form that resets the vtable and clears both strings |
+| `0xf04a4` `TEncodedFileKey_TEncodedFileKey__2` | `0xf1980` `_ZN10uVBvgaZvcvD0Ev` | `v18_TEncodedFileKey_TEncodedFileKey__2` | deleting ABI form with the same clears followed by object release |
+
+Each source and target row is 296 bytes with 74 instructions, nine basic
+blocks, ten branches, and four calls. The normalized mnemonic, opcode,
+register-shape, and whole-body hashes match. Only register-detail allocation
+differs. The target D2 entry also retains a D1 alternate dynamic spelling,
+which is why this three-row pass changes the dynamic totals by four
+source-backed names, three fewer exact retained names, and one fewer other
+retained target name.
+
+All three aliases were applied to a fresh v344-derived database and verified
+after reopening. The v345 database contains 11,707 functions, zero audited
+default names, 6,440 translated aliases, 419 target-only descriptive labels,
+789 retained target names, seven JNI exports, and 4,052 other IDA or PLT
+names. Dynamic coverage reports 4,795 source-backed aliases, 1,677 exact
+retained dynamic names, and 5,782 exact dynamic function starts. The semantic
+map reports 3,721 mapped pairs and removes three rows from its ambiguity set.
+
+The saved database is
+`analysis/spectron_libqplay_translated_v345_resource_object_static.i64` with
+SHA-256
+`0b455dfb6777c8ca571f86e19612d30a7dca6c3d9b9e47590e31a6bfcea4442f`. The
+machine-readable records are
+`artifacts/spectron_resource_object_static_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_resource_object_static_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_resource_object_static_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v345_resource_object_static.json`,
+`artifacts/spectron_name_coverage_audit_v345.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v345.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v345.json`,
+`artifacts/spectron_semantic_translation_v345.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v345.json`.
+The reusable scripts are
+`tools/generate_spectron_resource_object_static_anchors.py`,
+`tools/carry_forward_spectron_semantic_translation_v345.py`, and
+`tools/generate_spectron_translation_checkpoint_v345.py`.
+
+This is a static IDA translation checkpoint. It did not patch the APK, rerun
+the loopback client, alter TLS behavior, contact a game server, or test a
+live endpoint.
 
 ### v343 TDrawingPanel residual aliases
 

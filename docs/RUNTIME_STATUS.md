@@ -3035,6 +3035,37 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v345 resource-object static residuals
+
+The v345 static checkpoint translates three adjacent resource-runtime helpers:
+the `TResourceObject` static initializer and the two `TEncodedFileKey` ABI
+forms. Source addresses `0xf0434`, `0xf0464`, and `0xf04a4` map to target
+addresses `0xf1910`, `0xf1940`, and `0xf1980`. The target raw symbols and the
+applied `v18_` aliases remain paired in the anchor artifact.
+
+All three source and target bodies are 296 bytes with 74 instructions, nine
+basic blocks, ten branches, and four calls. Their normalized mnemonic,
+opcode-shape, register-shape, and whole-body hashes match. Direct pseudocode
+resolves the roles across the rebuilt target wrappers: the initializer
+allocates and installs the resource-object hash list, while the key forms
+reset the vtable, clear both strings, and optionally release the object.
+
+The aliases were applied to a fresh v344-derived IDB and verified after
+reopening. The v345 database has 11,707 functions and zero audited default
+names. It contains 6,440 translated aliases, 419 target-only descriptive
+labels, 789 retained target names, seven JNI exports, and 4,052 other IDA or
+PLT names. Dynamic coverage reports 4,795 source-backed aliases, 1,677 exact
+retained names, and 5,782 exact dynamic function starts. The semantic map
+contains 3,721 mapped pairs, 3,661 high-confidence pairs, 1,015 remaining
+automatic ambiguities, and 608 unmatched source functions.
+
+The saved IDB is
+`analysis/spectron_libqplay_translated_v345_resource_object_static.i64` with
+SHA-256
+`0b455dfb6777c8ca571f86e19612d30a7dca6c3d9b9e47590e31a6bfcea4442f`.
+This was static IDA work only. It did not change the verified APK, loopback
+runtime, TLS diagnosis, or live-service boundary.
+
 ## Spectron 2.2 v344 resource-stream crypto residuals
 
 The v344 revision is a static IDA checkpoint for the adjacent resource-stream

@@ -261,6 +261,65 @@ This pass changed only the private IDA copy and archive. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
 
+## 2026-08-29: Resource-object static helpers, v345
+
+The v345 review moves one small cluster earlier in the resource-runtime
+block. The source functions at `0xf0434`, `0xf0464`, and `0xf04a4` are the
+resource-object static initializer and the two `TEncodedFileKey` ABI forms.
+Their target counterparts are raw symbols at `0xf1910`, `0xf1940`, and
+`0xf1980` in the obfuscated resource runtime.
+
+| 1.8 source | Spectron target | Applied alias | Direct behavior |
+| --- | --- | --- | --- |
+| `0xf0434` `TResourceObject_initStaticVars_void` | `0xf1910` `_Z10dZEN2aa5nYv` | `v18_TResourceObject_initStaticVars_void` | allocate a 0x28-byte hash-list wrapper, construct it, and store `resourceobjects` |
+| `0xf0464` `TEncodedFileKey_TEncodedFileKey` | `0xf1940` `_ZN10uVBvgaZvcvD2Ev` | `v18_TEncodedFileKey_TEncodedFileKey` | reset the vtable and clear the two embedded strings |
+| `0xf04a4` `TEncodedFileKey_TEncodedFileKey__2` | `0xf1980` `_ZN10uVBvgaZvcvD0Ev` | `v18_TEncodedFileKey_TEncodedFileKey__2` | perform the same clears and release the object |
+
+The source and target pseudocode agree on the operation. The initializer
+allocates the target hash-list wrapper and installs it in the same static
+slot. The two key forms reset the object vtable, clear the string at `this+16`,
+reset the vtable again, and clear the string at `this+8`. The deleting form
+then calls the target allocator's delete routine. The source evidence names
+the second form with the usual D0 role, while the target's D2 entry also
+retains a D1 alternate dynamic spelling.
+
+Every pair is 296 bytes with 74 instructions, nine basic blocks, ten branches,
+and four calls. Mnemonic, opcode-shape, register-shape, and whole-body hashes
+match. Only register-detail allocation differs. This is why the rows are
+high-confidence layout-change matches rather than exact binary matches.
+
+The automatic matcher had left all three source rows ambiguous. The direct
+body evidence and their position immediately before the target `TStream`
+helpers resolve the rows without treating the obfuscated spellings as source
+names. The application report renamed all three functions and added three
+evidence comments. Reopening the saved IDB verified all three names.
+
+The v345 database contains 11,707 functions, zero audited default names,
+6,440 translated aliases, 419 target-only descriptive labels, 789 retained
+target names, seven JNI exports, and 4,052 other IDA or PLT names. Dynamic
+coverage reports 4,795 source-backed aliases, 1,677 exact retained names, and
+5,782 exact dynamic function starts. The semantic map now contains 3,721
+mapped source-target pairs, 3,661 high-confidence pairs, 1,015 remaining
+automatic ambiguities, and 608 unmatched source functions.
+
+The saved database is
+`analysis/spectron_libqplay_translated_v345_resource_object_static.i64` with
+SHA-256
+`0b455dfb6777c8ca571f86e19612d30a7dca6c3d9b9e47590e31a6bfcea4442f`.
+The complete evidence is recorded in
+`artifacts/spectron_resource_object_static_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_resource_object_static_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_resource_object_static_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v345_resource_object_static.json`,
+`artifacts/spectron_name_coverage_audit_v345.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v345.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v345.json`,
+`artifacts/spectron_semantic_translation_v345.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v345.json`.
+
+This pass was static analysis only. It did not patch the APK, rerun the local
+loopback client, contact a live service, or decrypt an external resource.
+
 ## 2026-08-29: Resource stream crypto helpers, v344
 
 The v343 database left one especially instructive ambiguity in the resource
