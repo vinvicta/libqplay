@@ -42,11 +42,12 @@ REPORT_PATH = Path(
 
 
 def append_comment(ea: int, label: dict) -> bool:
+    role = label.get("script_name", label.get("role", "target-only residual role"))
     comment = (
         "Reviewed Spectron-only label: "
         + label["proposed_name"]
-        + "; property="
-        + label["script_name"]
+        + "; role="
+        + role
         + "; no demonstrated 1.8 source counterpart"
     )
     existing = ida_bytes.get_cmt(ea, False) or ""

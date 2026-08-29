@@ -773,6 +773,12 @@ def main():
     spectron_checkpoint_v317 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v317.json"
     )
+    spectron_residual_target_only_labels = load_json(
+        "artifacts/spectron_residual_target_only_labels_20260828.json"
+    )
+    spectron_checkpoint_v318 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v318.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -17277,6 +17283,145 @@ def main():
         0,
     )
     check(
+        "Spectron residual target-only artifact",
+        spectron_residual_target_only_labels["artifact"],
+        "spectron_residual_target_only_labels_20260828",
+    )
+    check(
+        "Spectron residual target-only network",
+        spectron_residual_target_only_labels["network_contacted"],
+        False,
+    )
+    residual_label_summary = spectron_residual_target_only_labels["summary"]
+    check("Spectron residual target-only label count", residual_label_summary["label_count"], 373)
+    check(
+        "Spectron residual target-only high-confidence count",
+        residual_label_summary["high_confidence_count"],
+        373,
+    )
+    check(
+        "Spectron residual target-only default count",
+        residual_label_summary["target_default_name_count"],
+        373,
+    )
+    check(
+        "Spectron residual target-only startup count",
+        residual_label_summary["startup_array_count"],
+        230,
+    )
+    check(
+        "Spectron residual target-only fini count",
+        residual_label_summary["fini_array_entry_count"],
+        117,
+    )
+    check(
+        "Spectron residual target-only init count",
+        residual_label_summary["init_array_entry_count"],
+        113,
+    )
+    check(
+        "Spectron residual target-only TString count",
+        residual_label_summary["tstring_clear_wrapper_count"],
+        99,
+    )
+    check(
+        "Spectron residual target-only CanTfaz6bZ count",
+        residual_label_summary["can_tfaz6bz_clear_wrapper_count"],
+        35,
+    )
+    check(
+        "Spectron residual target-only vuuHgangcF count",
+        residual_label_summary["vuu_hgangcf_destructor_thunk_count"],
+        6,
+    )
+    check(
+        "Spectron residual target-only G0gxgajWBw count",
+        residual_label_summary["g0gxgajwbw_destructor_thunk_count"],
+        2,
+    )
+    check(
+        "Spectron residual target-only resolver count",
+        residual_label_summary["aarch64_plt_resolver_count"],
+        1,
+    )
+    residual_labels = spectron_residual_target_only_labels["labels"]
+    check(
+        "Spectron residual target-only unique targets",
+        len({label["target_ea"] for label in residual_labels}),
+        373,
+    )
+    check(
+        "Spectron residual target-only all target-only",
+        residual_label_summary["target_only_count"],
+        373,
+    )
+    residual_label_samples = {
+        "0xd1500": "spectron_aarch64_plt_resolver",
+        "0xdfb64": "spectron_fini_array_entry_0xdfb64",
+        "0xe0480": "spectron_init_array_entry_0xe0480",
+        "0xe431c": "spectron_tstring_clear_wrapper_0xe431c",
+        "0x18f7d4": "spectron_can_tfaz6bz_clear_wrapper_0x18f7d4",
+        "0xe36fc": "spectron_vuu_hgangcf_destructor_thunk_0xe36fc",
+        "0x216058": "spectron_g0gxgajwbw_destructor_thunk_0x216058",
+    }
+    residual_labels_by_ea = {label["target_ea"]: label for label in residual_labels}
+    for target_ea, proposed_name in residual_label_samples.items():
+        check(
+            "Spectron residual target-only sample " + target_ea,
+            residual_labels_by_ea[target_ea]["proposed_name"],
+            proposed_name,
+        )
+    check(
+        "Spectron v318 checkpoint artifact",
+        spectron_checkpoint_v318["artifact"],
+        "spectron_translation_checkpoint_20260828_v318",
+    )
+    check(
+        "Spectron v318 checkpoint parent",
+        spectron_checkpoint_v318["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v317",
+    )
+    check(
+        "Spectron v318 checkpoint parent path",
+        spectron_checkpoint_v318["parent_checkpoint"]["path"],
+        "artifacts/spectron_translation_checkpoint_20260828_v317.json",
+    )
+    check(
+        "Spectron v318 checkpoint database hash",
+        spectron_checkpoint_v318["database"]["sha256"],
+        "006016f0d13a7a52e24fd18e3ec50443c69525cccfaad834b2b00d9b6d7fd58b",
+    )
+    check(
+        "Spectron v318 checkpoint database close-reopen",
+        spectron_checkpoint_v318["database"]["close_reopen_verified"],
+        True,
+    )
+    check(
+        "Spectron v318 checkpoint function count",
+        spectron_checkpoint_v318["database"]["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v318 checkpoint default sub count",
+        spectron_checkpoint_v318["database"]["default_sub_function_count"],
+        0,
+    )
+    check(
+        "Spectron v318 label count",
+        spectron_checkpoint_v318["residual_target_only_labels"]["anchor_count"],
+        373,
+    )
+    check(
+        "Spectron v318 verified label count",
+        spectron_checkpoint_v318["residual_target_only_labels"]["verified_name_count"],
+        373,
+    )
+    check(
+        "Spectron v318 reopen failures",
+        spectron_checkpoint_v318["residual_target_only_labels"]["reopen_failure_count"],
+        0,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -17668,6 +17813,8 @@ def main():
         spectron_checkpoint_v316,
         spectron_jpeg_gpc_residual_anchors,
         spectron_checkpoint_v317,
+        spectron_residual_target_only_labels,
+        spectron_checkpoint_v318,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
