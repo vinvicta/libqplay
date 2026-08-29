@@ -261,6 +261,68 @@ This pass changed only the private IDA copy and archive. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
 
+## 2026-08-29: TScriptMachine static tail, v328
+
+The v328 pass follows the property-runtime cleanup into the next two
+TScriptMachine lifecycle entries. The source and target evidence was exported
+from disposable IDA copies, then compared with the same normalized feature
+records used by the earlier passes.
+
+| 1.8 source | Spectron target | Applied alias | Review result |
+| --- | ---: | --- | --- |
+| `0x21f30c` | `0x227780` | `v18_TScriptMachine_initStaticScriptVars_void` | static property-object registration |
+| `0x21f394` | `0x227808` | `v18_TCallStackEntry_TCallStackEntry__2` | deleting destructor |
+
+The target `_Z10DgaM1aDf85v` helper allocates a `l8eTfaIl5YProperties` object,
+calls its default constructor, stores `l8eTfaIl5YOnln2aNBfC`, and returns the
+global address. This is the same operation as the source helper, which uses
+the `TCallStackEntryProperties` global. The only normalized metric difference
+is the target register-detail record. The pseudocode also makes the layout
+change concrete: target allocation is `0x68` bytes, while source allocation is
+`0x58` bytes.
+
+The target `_ZN10l8eTfaIl5YD0Ev` body is the deleting form of the
+`TCallStackEntry` destructor. It calls the D2 body and then
+`operator delete`, matching the source at both the pseudocode and normalized
+feature levels.
+
+The nearby target function at `0x221928` is a separate overload of the
+obfuscated `mTAogaaEip::xxpwPaW5SX` resolver. It takes `C8THgaTQxF`, assigns
+that value into a temporary `CanTfaz6bZ`, and forwards to the large resolver
+overload already translated in the earlier script-machine pass. The source
+database has no independent function boundary for this adapter, so it remains
+outside the v18 alias count.
+
+Both aliases were applied to a fresh v327-derived database and verified after
+reopening. The resulting v328 database has 11,707 functions and zero audited
+default names. Its name-origin counts are 6,332 translated aliases, 417
+target-only descriptive labels, 898 retained target names, seven JNI exports,
+and 4,053 other IDA or PLT names. Dynamic coverage reports 4,671
+source-backed aliases, 1,786 exact retained names, 136 other retained target
+names, seven linker-boundary aliases, 169 PLT veneers, and one undefined
+`__sF` import. Exact dynamic function-boundary coverage remains 5,782 starts.
+
+The v328 database is
+`analysis/spectron_libqplay_translated_v328_script_machine_static_tail.i64`
+with SHA-256
+`01e5dc66c7446c46101a09486f23c1a86822e9973b57b5897fa93a4d1f11526a`. The
+machine-readable records are
+`artifacts/spectron_script_machine_static_tail_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_script_machine_static_tail_manual_translation_application_20260829.json`,
+`artifacts/spectron_script_machine_static_tail_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v328.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v328.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v328.json`,
+`artifacts/spectron_semantic_translation_v328.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v328.json`.
+The reusable helpers are
+`tools/generate_spectron_script_machine_static_tail_anchors.py` and
+`tools/generate_spectron_translation_checkpoint_v328.py`.
+
+This pass changed only the private IDA copy and archive. It did not patch the
+APK, rerun the loopback client, alter TLS behavior, contact a game server, or
+test a live endpoint.
+
 ## 2026-08-29: Property construction and cleanup tail, v327
 
 The v326 pass made the remaining names around the property runtime easier to

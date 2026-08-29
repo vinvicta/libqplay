@@ -800,6 +800,42 @@ generators are
 `tools/generate_spectron_format_parameters_property_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v326.py`.
 
+### v328 TScriptMachine static-tail aliases
+
+The v328 pass closes two raw functions immediately after the v327 property
+runtime group:
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | ---: | --- | --- |
+| `0x21f30c` | `0x227780` | `v18_TScriptMachine_initStaticScriptVars_void` | static property-object registration |
+| `0x21f394` | `0x227808` | `v18_TCallStackEntry_TCallStackEntry__2` | deleting TCallStackEntry destructor |
+
+The first row is a layout-change anchor. Both helpers allocate and register a
+global `TCallStackEntryProperties` object, but the target allocates 0x68 bytes
+for its rebuilt `l8eTfaIl5YProperties` class instead of the source 0x58 bytes.
+The second row is an exact normalized feature match: the target D0 body calls
+the D2 destructor and then `operator delete`.
+
+Both aliases were applied to a fresh v327-derived copy and verified after
+reopening. The v328 database has 11,707 functions, zero audited default names,
+6,332 translated aliases, 4,671 source-backed dynamic rows, and 1,786 exact
+retained dynamic names. The target overload at `0x221928` remains outside the
+source-backed count because it is a `C8THgaTQxF` to `CanTfaz6bZ` string-wrapper
+adapter around the already translated resolver.
+
+The v328 records are
+`artifacts/spectron_script_machine_static_tail_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_script_machine_static_tail_manual_translation_application_20260829.json`,
+`artifacts/spectron_script_machine_static_tail_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v328.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v328.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v328.json`,
+`artifacts/spectron_semantic_translation_v328.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v328.json`. The reusable
+generators are
+`tools/generate_spectron_script_machine_static_tail_anchors.py` and
+`tools/generate_spectron_translation_checkpoint_v328.py`.
+
 ### v327 property construction and destructor-tail aliases
 
 The v327 pass continues through the property runtime after v326. It closes

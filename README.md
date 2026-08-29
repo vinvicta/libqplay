@@ -13,7 +13,7 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v327 Spectron database. It
+The current documented translation frontier is the v328 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -113,6 +113,16 @@ counterpart was established. The v327 database contains 6,330 reviewed
 `v18_` aliases, 4,669 source-backed dynamic rows, and 1,788 exact retained
 dynamic names. It is a static IDA checkpoint and has not been used for a new
 runtime APK replay.
+
+The v328 revision translates the next two TScriptMachine lifecycle functions.
+It names the static script-variable initializer and the deleting
+`TCallStackEntry` destructor. The initializer is a layout-change match because
+the target allocates the larger rebuilt property object; the deleting
+destructor is an exact normalized match. The v328 database contains 6,332
+reviewed `v18_` aliases, 4,671 source-backed dynamic rows, and 1,786 exact
+retained dynamic names. The nearby `C8THgaTQxF` resolver overload remains
+documented as a target string-wrapper adapter rather than an unsupported
+source alias.
 
 The v273 revision adds six high-confidence libjpeg source and destination
 callback labels. They are tied to the target `jpeg_stdio_dest` and
@@ -610,6 +620,45 @@ The v327 records are
 
 The v327 application renamed all 15 target functions and added 15 evidence
 comments with zero failures. Reopening the fresh copy verified all 15 names.
+This pass changed only the private IDA copy and archive. It did not patch the
+APK, rerun the loopback client, alter TLS behavior, contact a game server, or
+test a live endpoint.
+
+The v328 database is
+`analysis/spectron_libqplay_translated_v328_script_machine_static_tail.i64`
+with SHA-256
+`01e5dc66c7446c46101a09486f23c1a86822e9973b57b5897fa93a4d1f11526a`.
+It continues from the v327 database hash
+`cc731360c7c08f825a7905c760897d3a7aede1dccdb4322d56d72f5c2e0c2f13`.
+The fresh copy contains 11,707 functions and zero audited default names. Its
+name-origin counts are 6,332 translated `v18_` aliases, 417 target-only
+descriptive labels, 898 retained target names, seven JNI exports, and 4,053
+other IDA or PLT names. The dynamic-symbol audit reports 4,671 source-backed
+aliases, 1,786 exact retained names, 136 other retained target names, seven
+linker-boundary aliases, 169 PLT veneers, and one undefined `__sF` import
+without an in-library veneer.
+
+The v328 pass applies two aliases at `0x227780` and `0x227808`. The first is
+`TScriptMachine_initStaticScriptVars_void`, whose target `DgaM1aDf85` helper
+allocates a 0x68-byte rebuilt property object instead of the source 0x58-byte
+object. The second is `TCallStackEntry_TCallStackEntry__2`, whose target
+`l8eTfaIl5Y` D0 destructor has the same normalized feature record as 1.8. The
+target-only overload at `0x221928` converts `C8THgaTQxF` into `CanTfaz6bZ` and
+forwards to the already translated resolver; it remains outside the
+source-backed alias count.
+
+The v328 records are
+`artifacts/spectron_script_machine_static_tail_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_script_machine_static_tail_manual_translation_application_20260829.json`,
+`artifacts/spectron_script_machine_static_tail_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v328.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v328.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v328.json`,
+`artifacts/spectron_semantic_translation_v328.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v328.json`.
+
+The v328 application renamed both target functions and added two evidence
+comments with zero failures. Reopening the fresh copy verified both names.
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
@@ -6672,6 +6721,11 @@ proves the local native TLS path, not a current live certificate or service.
   construction and cleanup evidence. `tools/generate_spectron_translation_checkpoint_v327.py`
   records the v327 application, reopen verification, name audit,
   dynamic-symbol coverage, and refreshed semantic map.
+  `tools/generate_spectron_script_machine_static_tail_anchors.py` records the
+  v328 TScriptMachine static initializer and TCallStackEntry cleanup evidence.
+  `tools/generate_spectron_translation_checkpoint_v328.py` records the v328
+  application, reopen verification, name audit, dynamic-symbol coverage, and
+  refreshed semantic map.
   `tools/ida_apply_spectron_translation.py` and
   `tools/ida_apply_spectron_manual_anchors.py` write separate disposable IDA
   copies, while the matching verification scripts reopen and check them. The

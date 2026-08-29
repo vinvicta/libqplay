@@ -319,6 +319,49 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v328 TScriptMachine static-tail comparison
+
+The v328 pass follows the property block into the static script-machine
+initializer and `TCallStackEntry` cleanup tail. These two rows are supported
+by compact Hex-Rays pseudocode, target symbol signatures, and their exact
+class-local order.
+
+| Source role | Spectron address | Applied alias | Match class |
+| --- | ---: | --- | --- |
+| static script-variable initializer | `0x227780` | `v18_TScriptMachine_initStaticScriptVars_void` | layout change |
+| deleting TCallStackEntry destructor | `0x227808` | `v18_TCallStackEntry_TCallStackEntry__2` | exact metrics |
+
+The initializer has the same 12-instruction normalized shape in both builds.
+Its target pseudocode allocates `0x68` bytes for the rebuilt
+`l8eTfaIl5YProperties` object instead of the source `0x58`-byte
+`TCallStackEntryProperties` object, which explains the single register-detail
+change recorded in the anchor artifact. The deleting destructor is identical
+at the normalized feature level: it calls the D2 destructor and then
+`operator delete`.
+
+The nearby target overload at `0x221928` is deliberately not counted as a
+source alias. It converts the `C8THgaTQxF` string wrapper into the
+`CanTfaz6bZ` wrapper and forwards to the already translated main resolver.
+That is useful target behavior, but the 1.8 database has no distinct source
+function boundary for this adapter.
+
+Both aliases were applied to a fresh v327-derived database and verified after
+reopening. The result has 11,707 functions, zero audited default names, and
+6,332 translated `v18_` aliases. Dynamic coverage reports 4,671
+source-backed aliases, 1,786 exact retained names, and 136 other retained
+target names. The database hash is
+`01e5dc66c7446c46101a09486f23c1a86822e9973b57b5897fa93a4d1f11526a`.
+
+The v328 records are
+`artifacts/spectron_script_machine_static_tail_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_script_machine_static_tail_manual_translation_application_20260829.json`,
+`artifacts/spectron_script_machine_static_tail_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v328.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v328.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v328.json`,
+`artifacts/spectron_semantic_translation_v328.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v328.json`.
+
 ## v327 property construction and cleanup comparison
 
 The v327 pass follows the v326 format and property block into the adjacent

@@ -937,6 +937,107 @@ The expected v326 database hash is
 checkpoint is static evidence only. It does not change the loopback runtime
 result, TLS diagnosis, or live-service boundary.
 
+### v328 TScriptMachine static-tail translation
+
+The v328 pass continues from the verified v327 database and reviews two
+adjacent target functions. The source addresses are `0x21f30c` and `0x21f394`.
+The target addresses are `0x227780` and `0x227808`.
+
+Export compact pseudocode for the source pair and target pair with
+`tools/ida_dump_function_evidence.py`:
+
+```bash
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  LIBQPLAY_FUNCTION_EVIDENCE=0x21f30c,0x21f394 \
+  LIBQPLAY_EVIDENCE_COMPACT=1 \
+  LIBQPLAY_EVIDENCE_OUT=/tmp/graal-source-next-block.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/libqplay_translated_all_v4.i64 \
+  -s tools/ida_dump_function_evidence.py
+
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  LIBQPLAY_FUNCTION_EVIDENCE=0x227780,0x227808 \
+  LIBQPLAY_EVIDENCE_COMPACT=1 \
+  LIBQPLAY_EVIDENCE_OUT=/tmp/graal-target-next-block.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/spectron_libqplay_translated_v327_property_constructor_destructor.i64 \
+  -s tools/ida_dump_function_evidence.py
+```
+
+Export source features to `/tmp/original_features_v4_v3_materialized_v2.json`
+and target features to
+`/tmp/spectron_features_v327_property_constructor_destructor.json` with
+`tools/ida_export_function_features.py`. Generate the v328 anchors with:
+
+```bash
+python3 tools/generate_spectron_script_machine_static_tail_anchors.py \
+  --original-features /tmp/original_features_v4_v3_materialized_v2.json \
+  --spectron-features /tmp/spectron_features_v327_property_constructor_destructor.json \
+  --semantic-map /tmp/semantic_v327_current.json \
+  --source-evidence /tmp/graal-source-next-block.json \
+  --target-evidence /tmp/graal-target-next-block.json \
+  --original-binary-sha256 9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8 \
+  --spectron-binary-sha256 f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219 \
+  --output artifacts/spectron_script_machine_static_tail_manual_translation_anchors_20260829.json
+```
+
+The expected summary is two high-confidence anchors, one exact normalized
+metric row, one layout-change row, and pseudocode for both source and target
+functions. Apply them to a fresh v327 copy and reopen the result with the
+manual-anchor helpers. The expected application and reopen results are two
+renames, two evidence comments, 11,707 functions, and zero failures.
+
+The static initializer is recorded as a layout change because the target
+allocates a 0x68-byte rebuilt property object where 1.8 allocates 0x58 bytes.
+The deleting `TCallStackEntry` destructor is an exact normalized match. The
+nearby target overload at `0x221928` converts `C8THgaTQxF` into `CanTfaz6bZ`
+and forwards to the main resolver. It remains outside the source-backed alias
+set because the source database has no separate function boundary for that
+adapter.
+
+Run the name, boundary, dynamic-symbol, and semantic-map refreshes on the
+reopened copy. The expected v328 name origins are:
+
+```text
+ida_named_or_other       4053
+target_jni_export           7
+target_named_export       898
+target_only_descriptive   417
+translated_v18_alias     6332
+```
+
+The dynamic audit remains at 6,770 named rows, 6,600 defined rows, 5,782
+exact function starts, 482 data items, 336 other non-code items, and 170
+undefined imports. It reports 4,671 source-backed aliases, 1,786 exact
+retained names, 136 other retained target names, seven linker-boundary
+aliases, 169 PLT veneers, and one undefined `__sF` import.
+
+Rebuild and validate the v328 checkpoint with:
+
+```bash
+python3 tools/generate_spectron_translation_checkpoint_v328.py \
+  --parent-checkpoint artifacts/spectron_translation_checkpoint_20260829_v327.json \
+  --database /path/to/spectron_libqplay_translated_v328_script_machine_static_tail.i64 \
+  --anchor-artifact artifacts/spectron_script_machine_static_tail_manual_translation_anchors_20260829.json \
+  --application-report artifacts/spectron_script_machine_static_tail_manual_translation_application_20260829.json \
+  --verification-report artifacts/spectron_script_machine_static_tail_manual_translation_verification_20260829.json \
+  --name-audit artifacts/spectron_name_coverage_audit_v328.json \
+  --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v328.json \
+  --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v328.json \
+  --semantic-map artifacts/spectron_semantic_translation_v328.json \
+  --feature-export /tmp/spectron_features_v328_script_machine_static_tail.json \
+  --output artifacts/spectron_translation_checkpoint_20260829_v328.json
+
+python3 tools/validate_research_archive.py
+```
+
+The expected v328 database hash is
+`01e5dc66c7446c46101a09486f23c1a86822e9973b57b5897fa93a4d1f11526a`. This is
+a static translation checkpoint only. It does not change the loopback runtime
+result, the TLS diagnosis, or the live-service boundary.
+
 ### v327 property-construction and cleanup translation
 
 The v327 pass continues from the verified v326 database and reviews the next

@@ -3035,6 +3035,54 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v328 TScriptMachine static-tail translation
+
+The v328 pass closes the next two raw functions after the v327 property
+constructor and destructor work. It translates the static script-variable
+initializer and the deleting `TCallStackEntry` destructor.
+
+The target `DgaM1aDf85` helper is the source
+`TScriptMachine_initStaticScriptVars_void` role. Both helpers allocate the
+class-specific `TCallStackEntryProperties` object, call its default
+constructor, store the global pointer, and return the address of that global.
+The target allocates 0x68 bytes for the rebuilt `l8eTfaIl5YProperties` object,
+where 1.8 allocates 0x58 bytes, so this is recorded as a layout-change match.
+The target `l8eTfaIl5Y` D0 body is an exact normalized match for the source
+`TCallStackEntry_TCallStackEntry__2` deleting destructor: it calls the D2 body
+and then releases the receiver with `operator delete`.
+
+Both aliases were applied to a fresh v327-derived copy and verified after
+reopening. The v328 database contains 11,707 functions and zero audited
+default names. Its name origins are 6,332 translated `v18_` aliases, 417
+target-only descriptive labels, 898 retained target names, seven JNI exports,
+and 4,053 other IDA or PLT names. Dynamic-symbol coverage reports 4,671
+source-backed aliases, 1,786 exact retained names, and 136 other retained
+target names, with 5,782 exact dynamic function starts.
+
+The nearby `mTAogaaEip::xxpwPaW5SX` overload at `0x221928` remains outside the
+source-backed alias count. Its pseudocode converts a `C8THgaTQxF` string into
+the target `CanTfaz6bZ` wrapper and forwards to the already translated large
+resolver overload. No distinct 1.8 function boundary was established for
+that adapter.
+
+The final private database is
+`analysis/spectron_libqplay_translated_v328_script_machine_static_tail.i64`
+with SHA-256
+`01e5dc66c7446c46101a09486f23c1a86822e9973b57b5897fa93a4d1f11526a`. The
+machine-readable records are
+`artifacts/spectron_script_machine_static_tail_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_script_machine_static_tail_manual_translation_application_20260829.json`,
+`artifacts/spectron_script_machine_static_tail_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v328.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v328.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v328.json`,
+`artifacts/spectron_semantic_translation_v328.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v328.json`.
+
+This was a static translation pass only. It did not patch the APK, rerun the
+loopback client, alter TLS behavior, contact a game server, or test a live
+endpoint.
+
 ## Spectron 2.2 v327 property construction and cleanup translation
 
 The v327 pass closes the next raw target cluster after the v326 format and

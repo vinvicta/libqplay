@@ -425,6 +425,40 @@ records are
 `artifacts/spectron_semantic_translation_v326.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v326.json`.
 
+### v328 TScriptMachine static-tail aliases
+
+The v328 pass adds two reviewed cross-build aliases to the private Spectron
+IDA copy:
+
+| Spectron address | Applied alias | Evidence role |
+| ---: | --- | --- |
+| `0x227780` | `v18_TScriptMachine_initStaticScriptVars_void` | static TCallStackEntryProperties initializer |
+| `0x227808` | `v18_TCallStackEntry_TCallStackEntry__2` | deleting TCallStackEntry destructor |
+
+The initializer preserves the source allocation, constructor call, global
+store, and return sequence, with the target's 0x68-byte property object
+replacing the source's 0x58-byte object. The destructor is an exact normalized
+feature match. Both rows have source and target pseudocode records and were
+reopened successfully after application.
+
+The adjacent target symbol at `0x221928`,
+`_ZN10mTAogaaEip10xxpwPaW5SXEP10G0gxgajWBwRK10C8THgaTQxFPP10cWWYfaxbT2PS1_b`,
+is a string-wrapper adapter that converts `C8THgaTQxF` to `CanTfaz6bZ` before
+calling the main resolver. It remains a retained target symbol, not a v18
+alias, because no distinct 1.8 source boundary was found.
+
+The v328 database contains 11,707 functions, zero audited IDA default names,
+6,332 translated `v18_` aliases, and 5,782 exact dynamic function starts.
+The complete records are
+`artifacts/spectron_script_machine_static_tail_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_script_machine_static_tail_manual_translation_application_20260829.json`,
+`artifacts/spectron_script_machine_static_tail_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v328.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v328.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v328.json`,
+`artifacts/spectron_semantic_translation_v328.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v328.json`.
+
 ### v327 property-construction and cleanup aliases
 
 The v327 pass adds the next 15 reviewed cross-build aliases to the private
