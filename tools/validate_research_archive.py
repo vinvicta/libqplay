@@ -920,6 +920,30 @@ def main():
     spectron_checkpoint_v325 = load_json(
         "artifacts/spectron_translation_checkpoint_20260829_v325.json"
     )
+    spectron_format_parameters_property_anchors_v326 = load_json(
+        "artifacts/spectron_format_parameters_property_manual_translation_anchors_20260829.json"
+    )
+    spectron_format_parameters_property_application_v326 = load_json(
+        "artifacts/spectron_format_parameters_property_manual_translation_application_20260829.json"
+    )
+    spectron_format_parameters_property_verification_v326 = load_json(
+        "artifacts/spectron_format_parameters_property_manual_translation_verification_20260829.json"
+    )
+    spectron_name_coverage_v326 = load_json(
+        "artifacts/spectron_name_coverage_audit_v326.json"
+    )
+    spectron_dynamic_boundaries_v326 = load_json(
+        "artifacts/spectron_dynamic_symbol_boundaries_v326.json"
+    )
+    spectron_dynamic_symbol_coverage_v326 = load_json(
+        "artifacts/spectron_dynamic_symbol_coverage_audit_v326.json"
+    )
+    spectron_semantic_translation_v326 = load_json(
+        "artifacts/spectron_semantic_translation_v326.json"
+    )
+    spectron_checkpoint_v326 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260829_v326.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -19294,6 +19318,302 @@ def main():
             "anchor_count": 8,
             "high_confidence_count": 8,
             "layout_change_anchor_count": 5,
+            "reopen_verified": True,
+        },
+    )
+    check(
+        "Spectron v326 format/property anchor artifact",
+        spectron_format_parameters_property_anchors_v326["artifact"],
+        "spectron_format_parameters_property_manual_translation_anchors_20260829",
+    )
+    check(
+        "Spectron v326 format/property anchor network",
+        spectron_format_parameters_property_anchors_v326["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v326 format/property anchor summary",
+        spectron_format_parameters_property_anchors_v326["summary"],
+        {
+            "anchor_count": 20,
+            "exact_metric_anchor_count": 11,
+            "high_confidence_count": 20,
+            "layout_change_anchor_count": 9,
+            "new_context_anchor_count": 20,
+            "source_pseudocode_count": 20,
+            "target_pseudocode_count": 20,
+        },
+    )
+    check(
+        "Spectron v326 format/property source aliases",
+        [
+            row["proposed_name"]
+            for row in spectron_format_parameters_property_anchors_v326["anchors"]
+        ],
+        [
+            "v18_TScriptMachine_FormatParameters_TScriptMachine_FormatParameters",
+            "v18_TCallStackEntryProperties_TCallStackEntryProperties",
+            "v18_non_virtual_thunk_to_TCallStackEntryProperties_TCallStackEntryProperties",
+            "v18_TCallStackEntryProperties_TCallStackEntryProperties__2",
+            "v18_non_virtual_thunk_to_TCallStackEntryProperties_TCallStackEntryProperties__2",
+            "v18_TScriptMachine_FormatParameters_TScriptMachine_FormatParameters__2",
+            "v18_TScriptMachine_FormatParameters_getNextU32_void",
+            "v18_TScriptMachine_FormatParameters_getNextS32_void",
+            "v18_TScriptMachine_FormatParameters_getNextF64_void",
+            "v18_TScriptMachine_FormatParameters_getIndexedU32_int",
+            "v18_TScriptMachine_FormatParameters_getIndexedS32_int",
+            "v18_TScriptMachine_FormatParameters_getIndexedF64_int",
+            "v18_TScriptMachine_FormatParameters_getNextString_void",
+            "v18_TScriptMachine_FormatParameters_getIndexedString_int",
+            "v18_TProperties_TProperties",
+            "v18_non_virtual_thunk_to_TProperties_TProperties",
+            "v18_TProperties_TProperties__2",
+            "v18_non_virtual_thunk_to_TProperties_TProperties__2",
+            "v18_TJoinedClassesProperty_writeObject_TGraalVar_TGraalVar",
+            "v18_TAniProperty_writeObject_TGraalVar_TGraalVar",
+        ],
+    )
+    check(
+        "Spectron v326 format/property target addresses",
+        [
+            row["spectron_ea"]
+            for row in spectron_format_parameters_property_anchors_v326["anchors"]
+        ],
+        [
+            "0x22c810",
+            "0x22c858",
+            "0x22c874",
+            "0x22c87c",
+            "0x22c8b4",
+            "0x22c8bc",
+            "0x22ca58",
+            "0x22caa0",
+            "0x22cae8",
+            "0x22caf0",
+            "0x22cb38",
+            "0x22cb80",
+            "0x22cb88",
+            "0x22cb94",
+            "0x22cc48",
+            "0x22ccbc",
+            "0x22ccc4",
+            "0x22cce4",
+            "0x22ce20",
+            "0x22cea0",
+        ],
+    )
+    check(
+        "Spectron v326 format/property application artifact",
+        spectron_format_parameters_property_application_v326["artifact"],
+        "spectron_manual_anchor_application",
+    )
+    check(
+        "Spectron v326 format/property application counts",
+        {
+            "anchor_count": spectron_format_parameters_property_application_v326["anchor_count"],
+            "resolved_count": spectron_format_parameters_property_application_v326["resolved_count"],
+            "renamed_count": spectron_format_parameters_property_application_v326["renamed_count"],
+            "comments_added": spectron_format_parameters_property_application_v326["comments_added"],
+            "failure_count": spectron_format_parameters_property_application_v326["failure_count"],
+            "saved": spectron_format_parameters_property_application_v326["saved"],
+            "verified": spectron_format_parameters_property_application_v326["verified"],
+            "verified_name_count": spectron_format_parameters_property_application_v326["verified_name_count"],
+        },
+        {
+            "anchor_count": 20,
+            "resolved_count": 20,
+            "renamed_count": 20,
+            "comments_added": 20,
+            "failure_count": 0,
+            "saved": True,
+            "verified": True,
+            "verified_name_count": 20,
+        },
+    )
+    check(
+        "Spectron v326 format/property reopen verification",
+        {
+            "anchor_count": spectron_format_parameters_property_verification_v326["anchor_count"],
+            "failure_count": spectron_format_parameters_property_verification_v326["failure_count"],
+            "function_count": spectron_format_parameters_property_verification_v326["function_count"],
+            "verified": spectron_format_parameters_property_verification_v326["verified"],
+            "verified_name_count": spectron_format_parameters_property_verification_v326["verified_name_count"],
+        },
+        {
+            "anchor_count": 20,
+            "failure_count": 0,
+            "function_count": 11707,
+            "verified": True,
+            "verified_name_count": 20,
+        },
+    )
+    coverage_v326_origins = spectron_name_coverage_v326["name_origins"]
+    check(
+        "Spectron v326 name audit input hash",
+        spectron_name_coverage_v326["input_sha256"],
+        "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    )
+    check(
+        "Spectron v326 name audit function count",
+        spectron_name_coverage_v326["function_count"],
+        11707,
+    )
+    check(
+        "Spectron v326 name audit default count",
+        spectron_name_coverage_v326["default_name_count"],
+        0,
+    )
+    check(
+        "Spectron v326 name audit origin counts",
+        coverage_v326_origins,
+        {
+            "ida_named_or_other": 4053,
+            "target_jni_export": 7,
+            "target_named_export": 915,
+            "target_only_descriptive": 417,
+            "translated_v18_alias": 6315,
+        },
+    )
+    check(
+        "Spectron v326 dynamic boundary artifact",
+        spectron_dynamic_boundaries_v326["artifact"],
+        "spectron_dynamic_symbol_boundary_audit",
+    )
+    check(
+        "Spectron v326 dynamic boundary network",
+        spectron_dynamic_boundaries_v326["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v326 dynamic boundary input hash",
+        spectron_dynamic_boundaries_v326["input_sha256"],
+        "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    )
+    check(
+        "Spectron v326 dynamic boundary counts",
+        {
+            "defined_function_symbol_count": spectron_dynamic_boundaries_v326["defined_function_symbol_count"],
+            "ida_exact_start_count": spectron_dynamic_boundaries_v326["ida_exact_start_count"],
+            "ida_missing_exact_start_count": spectron_dynamic_boundaries_v326["ida_missing_exact_start_count"],
+            "row_count": len(spectron_dynamic_boundaries_v326["rows"]),
+        },
+        {
+            "defined_function_symbol_count": 5782,
+            "ida_exact_start_count": 5782,
+            "ida_missing_exact_start_count": 0,
+            "row_count": 5782,
+        },
+    )
+    dynamic_symbol_coverage_v326_summary = spectron_dynamic_symbol_coverage_v326["summary"]
+    check(
+        "Spectron v326 dynamic symbol coverage artifact",
+        spectron_dynamic_symbol_coverage_v326["artifact"],
+        "spectron_dynamic_symbol_coverage_audit_20260828",
+    )
+    check(
+        "Spectron v326 dynamic symbol coverage network",
+        spectron_dynamic_symbol_coverage_v326["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v326 dynamic symbol coverage input hash",
+        spectron_dynamic_symbol_coverage_v326["input_sha256"],
+        "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    )
+    check(
+        "Spectron v326 dynamic symbol coverage summary",
+        dynamic_symbol_coverage_v326_summary,
+        {
+            "defined_named_symbol_count": 6600,
+            "location_counts": {
+                "ida_data_item": 482,
+                "ida_function_exact": 5782,
+                "ida_noncode_item": 336,
+                "undefined_or_zero_value": 170,
+            },
+            "name_match_counts": {
+                "item_name_match": 1803,
+                "item_name_mismatch": 4967,
+                "value_name_match": 1803,
+                "value_name_mismatch": 4967,
+            },
+            "named_dynamic_symbol_count": 6770,
+            "status_counts": {
+                "exact_retained_dynamic_name": 1803,
+                "linker_boundary_alias_mismatch": 7,
+                "other_retained_target_name": 143,
+                "source_backed_v18_alias": 4647,
+                "undefined_import_with_plt_stub": 169,
+                "undefined_no_target_address": 1,
+            },
+        },
+    )
+    check(
+        "Spectron v326 semantic translation summary",
+        {
+            "artifact": spectron_semantic_translation_v326["artifact"],
+            "network_contacted": spectron_semantic_translation_v326["network_contacted"],
+            "summary": spectron_semantic_translation_v326["summary"],
+        },
+        {
+            "artifact": "spectron_semantic_function_translation",
+            "network_contacted": False,
+            "summary": {
+                "ambiguous_functions": 1020,
+                "mapped_functions": 3716,
+                "mapped_high_confidence": 3656,
+                "mapped_medium_confidence": 60,
+                "original_functions": 11308,
+                "spectron_functions": 11707,
+                "unique_spectron_targets": 3716,
+                "unmatched_functions": 608,
+            },
+        },
+    )
+    check(
+        "Spectron v326 checkpoint artifact",
+        spectron_checkpoint_v326["artifact"],
+        "spectron_translation_checkpoint_20260829_v326",
+    )
+    check(
+        "Spectron v326 checkpoint parent",
+        spectron_checkpoint_v326["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260829_v325",
+    )
+    check(
+        "Spectron v326 checkpoint database hash",
+        spectron_checkpoint_v326["database"]["sha256"],
+        "08ae63229dfbcabf94d314cda677a2c45b60e17b9c2fee8351a298b3cf6eb991",
+    )
+    check(
+        "Spectron v326 checkpoint database close-reopen",
+        spectron_checkpoint_v326["database"]["close_reopen_verified"],
+        True,
+    )
+    check(
+        "Spectron v326 checkpoint function count",
+        spectron_checkpoint_v326["database"]["function_count"],
+        11707,
+    )
+    check(
+        "Spectron v326 checkpoint default names",
+        spectron_checkpoint_v326["database"]["default_name_count"],
+        0,
+    )
+    check(
+        "Spectron v326 format/property translation",
+        {
+            "anchor_count": spectron_checkpoint_v326["format_parameters_property_translation_v326"]["anchor_count"],
+            "high_confidence_count": spectron_checkpoint_v326["format_parameters_property_translation_v326"]["high_confidence_count"],
+            "exact_metric_anchor_count": spectron_checkpoint_v326["format_parameters_property_translation_v326"]["exact_metric_anchor_count"],
+            "layout_change_anchor_count": spectron_checkpoint_v326["format_parameters_property_translation_v326"]["layout_change_anchor_count"],
+            "reopen_verified": spectron_checkpoint_v326["format_parameters_property_translation_v326"]["reopen_verified"],
+        },
+        {
+            "anchor_count": 20,
+            "high_confidence_count": 20,
+            "exact_metric_anchor_count": 11,
+            "layout_change_anchor_count": 9,
             "reopen_verified": True,
         },
     )

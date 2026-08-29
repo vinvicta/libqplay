@@ -173,6 +173,94 @@ The records are
 helpers are `tools/generate_spectron_tscript_destructor_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v325.py`.
 
+## 2026-08-29: Format parameters, properties, and v326
+
+The next raw target cluster was immediately adjacent to the v325 destructor
+work. It looked noisy at first because the 2.2 names are obfuscated, but the
+source class has a very distinctive accessor sequence. The source
+`TScriptMachine::FormatParameters` methods read the next or indexed float,
+convert it to an integer with a small `0.0001` bias when requested, and then
+expose direct string accessors. The target `OV5NOaoBLl` class repeats that
+sequence in exactly the same order and calls the corresponding obfuscated
+script-machine readers.
+
+The first six rows are the format-parameter and call-stack-property cleanup
+entries. The target D1, D2, and D0 names make the ABI relationship visible,
+even though the source IDA names use historical constructor-looking aliases.
+
+| 1.8 source | Spectron target | Applied alias | Review result |
+| --- | ---: | --- | --- |
+| `0x224248` | `0x22c810` | `v18_TScriptMachine_FormatParameters_TScriptMachine_FormatParameters` | D2 cleanup with target string-array extension |
+| `0x22424c` | `0x22c858` | `v18_TCallStackEntryProperties_TCallStackEntryProperties` | derived property cleanup |
+| `0x224268` | `0x22c874` | `v18_non_virtual_thunk_to_TCallStackEntryProperties_TCallStackEntryProperties` | receiver-adjustment thunk |
+| `0x224270` | `0x22c87c` | `v18_TCallStackEntryProperties_TCallStackEntryProperties__2` | deleting property cleanup |
+| `0x2242a8` | `0x22c8b4` | `v18_non_virtual_thunk_to_TCallStackEntryProperties_TCallStackEntryProperties__2` | deleting-destructor thunk |
+| `0x2242b0` | `0x22c8bc` | `v18_TScriptMachine_FormatParameters_TScriptMachine_FormatParameters__2` | D0 cleanup and delete |
+
+The eight accessors then follow as one class-local run:
+
+| 1.8 source | Spectron target | Applied alias | Behavior |
+| --- | ---: | --- | --- |
+| `0x224400` | `0x22ca58` | `v18_TScriptMachine_FormatParameters_getNextU32_void` | next float to unsigned integer |
+| `0x224448` | `0x22caa0` | `v18_TScriptMachine_FormatParameters_getNextS32_void` | next float to signed integer |
+| `0x224490` | `0x22cae8` | `v18_TScriptMachine_FormatParameters_getNextF64_void` | next float passthrough |
+| `0x224498` | `0x22caf0` | `v18_TScriptMachine_FormatParameters_getIndexedU32_int` | indexed float to unsigned integer |
+| `0x2244e0` | `0x22cb38` | `v18_TScriptMachine_FormatParameters_getIndexedS32_int` | indexed float to signed integer |
+| `0x224528` | `0x22cb80` | `v18_TScriptMachine_FormatParameters_getIndexedF64_int` | indexed float passthrough |
+| `0x224530` | `0x22cb88` | `v18_TScriptMachine_FormatParameters_getNextString_void` | next string passthrough |
+| `0x224538` | `0x22cb94` | `v18_TScriptMachine_FormatParameters_getIndexedString_int` | indexed string passthrough |
+
+The property base follows the same source and target grouping:
+
+| 1.8 source | Spectron target | Applied alias | Behavior |
+| --- | ---: | --- | --- |
+| `0x2245cc` | `0x22cc48` | `v18_TProperties_TProperties` | property-list and string ownership cleanup |
+| `0x224638` | `0x22ccbc` | `v18_non_virtual_thunk_to_TProperties_TProperties` | TProperties D1 thunk |
+| `0x224640` | `0x22ccc4` | `v18_TProperties_TProperties__2` | TProperties D0 cleanup |
+| `0x224660` | `0x22cce4` | `v18_non_virtual_thunk_to_TProperties_TProperties__2` | TProperties D0 thunk |
+| `0x224668` | `0x22ce20` | `v18_TJoinedClassesProperty_writeObject_TGraalVar_TGraalVar` | object-to-string property write |
+| `0x2246c8` | `0x22cea0` | `v18_TAniProperty_writeObject_TGraalVar_TGraalVar` | animation property write |
+
+Eleven rows retain all recorded normalized metrics. Nine rows change because
+2.2 stores additional format strings, uses rebuilt property-list and string
+classes, or emits explicit conversion and cleanup calls around temporary
+values. Those differences are useful evidence of a layout change, not a
+reason to discard the mapping. In particular, the two object writers preserve
+the source callback at vtable slot 64 and the TGraalVar conversion at slot
+184 before cleaning their temporaries.
+
+I exported compact Hex-Rays evidence from disposable copies of both IDA
+databases, generated the reviewed anchor artifact, applied all 20 aliases to a
+fresh v325-derived database, and reopened that database for verification. The
+application report contains 20 renames and 20 evidence comments with zero
+failures. The v326 database has 11,707 functions and zero audited default
+names. Its name-origin counts are 6,315 translated aliases, 417 target-only
+descriptive labels, 915 retained target names, seven JNI exports, and 4,053
+other IDA or PLT names. Dynamic coverage reports 4,647 source-backed aliases,
+1,803 exact retained names, 143 other retained target names, seven
+linker-boundary aliases, 169 PLT veneers, and one undefined `__sF` import.
+
+The v326 database is
+`analysis/spectron_libqplay_translated_v326_format_parameters_property.i64`
+with SHA-256
+`08ae63229dfbcabf94d314cda677a2c45b60e17b9c2fee8351a298b3cf6eb991`.
+The machine-readable records are
+`artifacts/spectron_format_parameters_property_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_format_parameters_property_manual_translation_application_20260829.json`,
+`artifacts/spectron_format_parameters_property_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v326.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v326.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v326.json`,
+`artifacts/spectron_semantic_translation_v326.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v326.json`.
+The reusable helpers are
+`tools/generate_spectron_format_parameters_property_anchors.py` and
+`tools/generate_spectron_translation_checkpoint_v326.py`.
+
+This pass changed only the private IDA copy and archive. It did not patch the
+APK, rerun the loopback client, alter TLS behavior, contact a game server, or
+test a live endpoint.
+
 ## 2026-08-29: Source-side GUI boundary recovery and v321
 
 The v320 pass completed the target's retained dynamic function boundaries, but

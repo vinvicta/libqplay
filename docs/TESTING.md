@@ -818,6 +818,125 @@ The expected v325 database hash is
 checkpoint is static evidence only and does not change the runtime or live
 service conclusions.
 
+### v326 format-parameter and property runtime translation
+
+The v326 pass reviews the format-parameter and property block immediately
+after the v325 destructor work. It covers 20 source and target functions:
+
+```text
+source: 0x224248,0x22424c,0x224268,0x224270,0x2242a8,0x2242b0,
+        0x224400,0x224448,0x224490,0x224498,0x2244e0,0x224528,
+        0x224530,0x224538,0x2245cc,0x224638,0x224640,0x224660,
+        0x224668,0x2246c8
+target: 0x22c810,0x22c858,0x22c874,0x22c87c,0x22c8b4,0x22c8bc,
+        0x22ca58,0x22caa0,0x22cae8,0x22caf0,0x22cb38,0x22cb80,
+        0x22cb88,0x22cb94,0x22cc48,0x22ccbc,0x22ccc4,0x22cce4,
+        0x22ce20,0x22cea0
+```
+
+The source evidence comes from the 1.8 translated IDA database. The target
+evidence comes from the v325-derived database before these names are applied.
+Run `tools/ida_dump_function_evidence.py` through IDALIB with
+`LIBQPLAY_EVIDENCE_COMPACT=1`. The anchor generator checks names, function
+ranges, pseudocode availability, and that the automatic semantic map has not
+already claimed either side.
+
+Generate the v326 anchor artifact with:
+
+```bash
+python3 tools/generate_spectron_format_parameters_property_anchors.py \
+  --original-features /tmp/original_features_v4_v3_materialized_v2.json \
+  --spectron-features /tmp/spectron_features_v325_tscript_destructors.json \
+  --semantic-map /tmp/semantic_v323_current.json \
+  --source-evidence /tmp/graal-source-format-parameters.json \
+  --source-evidence /tmp/graal-source-property-block.json \
+  --target-evidence /tmp/graal-target-property-block.json \
+  --original-binary-sha256 9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8 \
+  --spectron-binary-sha256 f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219 \
+  --output artifacts/spectron_format_parameters_property_manual_translation_anchors_20260829.json
+```
+
+The expected summary is 20 high-confidence anchors, 11 exact metric rows,
+nine layout-change rows, and pseudocode for all 20 source and target rows.
+The layout rows are intentional. The target format wrapper clears an added
+string array, and the property writers use rebuilt string and container
+classes.
+
+Apply the aliases to a new v325-derived copy:
+
+```bash
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_MANUAL_APPLY=1 \
+  SPECTRON_MANUAL_ANCHORS=/path/to/artifacts/spectron_format_parameters_property_manual_translation_anchors_20260829.json \
+  SPECTRON_MANUAL_EXPECTED_ARTIFACT=spectron_format_parameters_property_manual_translation_anchors_20260829 \
+  SPECTRON_MANUAL_SAVE_PATH=/path/to/spectron_libqplay_translated_v326_format_parameters_property.i64 \
+  SPECTRON_MANUAL_REPORT=/tmp/spectron_format_parameters_property_manual_translation_application_20260829.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/spectron_libqplay_translated_v325_tscript_destructor_final.i64 \
+  -s tools/ida_apply_spectron_manual_anchors.py
+```
+
+Reopen the saved v326 copy with the matching verification helper. Select the
+verification report with `SPECTRON_MANUAL_VERIFY_REPORT`:
+
+```bash
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_MANUAL_ANCHORS=/path/to/artifacts/spectron_format_parameters_property_manual_translation_anchors_20260829.json \
+  SPECTRON_MANUAL_EXPECTED_ARTIFACT=spectron_format_parameters_property_manual_translation_anchors_20260829 \
+  SPECTRON_MANUAL_VERIFY_REPORT=/tmp/spectron_format_parameters_property_manual_translation_verification_20260829.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/spectron_libqplay_translated_v326_format_parameters_property.i64 \
+  -s tools/ida_verify_spectron_manual_anchors.py
+```
+
+The expected application and reopen results are 20 rows, 20 resolved names,
+20 renames, 20 evidence comments, 11,707 functions, and zero failures. Run
+the name, dynamic-boundary, dynamic-symbol-coverage, and feature-export
+helpers on the reopened copy. The expected name origins are:
+
+```text
+ida_named_or_other       4053
+target_jni_export           7
+target_named_export       915
+target_only_descriptive   417
+translated_v18_alias     6315
+```
+
+The dynamic audit should report 6,770 named rows, 6,600 defined rows, 5,782
+exact function starts, 482 data items, 336 other non-code items, and 170
+undefined imports. The v326 status counts are 4,647 source-backed aliases,
+1,803 exact retained names, 143 other retained target names, seven
+linker-boundary aliases, 169 PLT veneers, and one undefined `__sF` import.
+The refreshed semantic feature map remains at 3,716 mapped functions, 3,656
+high-confidence matches, 60 medium-confidence matches, 1,020 ambiguous
+functions, and 608 unmatched functions.
+
+Rebuild the v326 checkpoint with:
+
+```bash
+python3 tools/generate_spectron_translation_checkpoint_v326.py \
+  --parent-checkpoint artifacts/spectron_translation_checkpoint_20260829_v325.json \
+  --database /path/to/spectron_libqplay_translated_v326_format_parameters_property.i64 \
+  --anchor-artifact artifacts/spectron_format_parameters_property_manual_translation_anchors_20260829.json \
+  --application-report artifacts/spectron_format_parameters_property_manual_translation_application_20260829.json \
+  --verification-report artifacts/spectron_format_parameters_property_manual_translation_verification_20260829.json \
+  --name-audit artifacts/spectron_name_coverage_audit_v326.json \
+  --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v326.json \
+  --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v326.json \
+  --semantic-map artifacts/spectron_semantic_translation_v326.json \
+  --feature-export /tmp/spectron_features_v326_format_parameters_property.json \
+  --output artifacts/spectron_translation_checkpoint_20260829_v326.json
+
+python3 tools/validate_research_archive.py
+```
+
+The expected v326 database hash is
+`08ae63229dfbcabf94d314cda677a2c45b60e17b9c2fee8351a298b3cf6eb991`. This
+checkpoint is static evidence only. It does not change the loopback runtime
+result, TLS diagnosis, or live-service boundary.
+
 The complete private chain can be rebuilt with the single offline helper:
 
 ```bash

@@ -319,6 +319,60 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v326 format-parameter and property comparison
+
+The v326 pass continues directly after the v325 script-runtime destructors.
+The target names are obfuscated, but the `OV5NOaoBLl` accessor sequence and
+the D1, D2, and D0 destructor forms make this one of the cleaner remaining
+class-local matches.
+
+| Source role | Spectron address | Applied alias | Match class |
+| --- | ---: | --- | --- |
+| format-parameter D2 cleanup | `0x22c810` | `v18_TScriptMachine_FormatParameters_TScriptMachine_FormatParameters` | layout change |
+| call-stack property D1/D2 cleanup | `0x22c858` | `v18_TCallStackEntryProperties_TCallStackEntryProperties` | register-detail change |
+| call-stack property D1 thunk | `0x22c874` | `v18_non_virtual_thunk_to_TCallStackEntryProperties_TCallStackEntryProperties` | exact metrics |
+| call-stack property D0 cleanup | `0x22c87c` | `v18_TCallStackEntryProperties_TCallStackEntryProperties__2` | register-detail change |
+| call-stack property D0 thunk | `0x22c8b4` | `v18_non_virtual_thunk_to_TCallStackEntryProperties_TCallStackEntryProperties__2` | exact metrics |
+| format-parameter D0 cleanup | `0x22c8bc` | `v18_TScriptMachine_FormatParameters_TScriptMachine_FormatParameters__2` | layout change |
+| next float to unsigned integer | `0x22ca58` | `v18_TScriptMachine_FormatParameters_getNextU32_void` | exact metrics |
+| next float to signed integer | `0x22caa0` | `v18_TScriptMachine_FormatParameters_getNextS32_void` | exact metrics |
+| next float passthrough | `0x22cae8` | `v18_TScriptMachine_FormatParameters_getNextF64_void` | exact metrics |
+| indexed float to unsigned integer | `0x22caf0` | `v18_TScriptMachine_FormatParameters_getIndexedU32_int` | exact metrics |
+| indexed float to signed integer | `0x22cb38` | `v18_TScriptMachine_FormatParameters_getIndexedS32_int` | exact metrics |
+| indexed float passthrough | `0x22cb80` | `v18_TScriptMachine_FormatParameters_getIndexedF64_int` | exact metrics |
+| next string passthrough | `0x22cb88` | `v18_TScriptMachine_FormatParameters_getNextString_void` | layout change |
+| indexed string passthrough | `0x22cb94` | `v18_TScriptMachine_FormatParameters_getIndexedString_int` | layout change |
+| TProperties D1/D2 cleanup | `0x22cc48` | `v18_TProperties_TProperties` | layout change |
+| TProperties D1 thunk | `0x22ccbc` | `v18_non_virtual_thunk_to_TProperties_TProperties` | exact metrics |
+| TProperties D0 cleanup | `0x22ccc4` | `v18_TProperties_TProperties__2` | exact metrics |
+| TProperties D0 thunk | `0x22cce4` | `v18_non_virtual_thunk_to_TProperties_TProperties__2` | exact metrics |
+| joined-class object writer | `0x22ce20` | `v18_TJoinedClassesProperty_writeObject_TGraalVar_TGraalVar` | layout change |
+| animation object writer | `0x22cea0` | `v18_TAniProperty_writeObject_TGraalVar_TGraalVar` | layout change |
+
+Eleven of the 20 rows have exact normalized metrics. The remaining nine are
+not weak matches: the target format wrapper owns a larger string array, the
+property classes use rebuilt containers, and the object writers explicitly
+convert and clear target string wrappers. The accessor calls and order remain
+the same, while the destructor thunks preserve the expected receiver
+adjustment.
+
+All 20 aliases were applied and verified after reopening the fresh v326
+database. It contains 11,707 functions, zero audited default names, and 6,315
+translated `v18_` aliases. Dynamic coverage reports 4,647 source-backed
+aliases, 1,803 exact retained names, and 143 other retained target names. The
+database hash is
+`08ae63229dfbcabf94d314cda677a2c45b60e17b9c2fee8351a298b3cf6eb991`.
+
+The v326 records are
+`artifacts/spectron_format_parameters_property_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_format_parameters_property_manual_translation_application_20260829.json`,
+`artifacts/spectron_format_parameters_property_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v326.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v326.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v326.json`,
+`artifacts/spectron_semantic_translation_v326.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v326.json`.
+
 ## v325 TScript destructor comparison
 
 The v325 pass closes eight raw symbols that sit around the v324 TScript

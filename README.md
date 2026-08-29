@@ -13,7 +13,7 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v325 Spectron database. It
+The current documented translation frontier is the v326 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -90,6 +90,17 @@ matches and five record the expected target string-wrapper or register-detail
 change. The v325 database contains 6,295 reviewed `v18_` aliases, 4,624
 source-backed dynamic rows, and 1,823 exact retained dynamic names. It is a
 static IDA checkpoint and has not been used for a new runtime APK replay.
+
+The v326 revision continues through the adjacent format-parameter and
+property-runtime block. It translates the `TScriptMachine::FormatParameters`
+destructor and eight numeric or string accessors, the complete
+`TCallStackEntryProperties` destructor family, the `TProperties` destructor
+family, and two derived-property object writers. All 20 rows are high
+confidence. Eleven retain exact normalized feature metrics and nine record
+the target's added fields or rebuilt string-wrapper behavior. The v326
+database contains 6,315 reviewed `v18_` aliases, 4,647 source-backed dynamic
+rows, and 1,803 exact retained dynamic names. It is a static IDA checkpoint
+and has not been used for a new runtime APK replay.
 The v273 revision adds six high-confidence libjpeg source and destination
 callback labels. They are tied to the target `jpeg_stdio_dest` and
 `jpeg_stdio_src` installation sites, with exact or normalized source-target
@@ -510,6 +521,45 @@ The v325 records are
 `artifacts/spectron_dynamic_symbol_boundaries_v325.json`,
 `artifacts/spectron_dynamic_symbol_coverage_audit_v325.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v325.json`.
+
+The v326 database is
+`analysis/spectron_libqplay_translated_v326_format_parameters_property.i64`
+with SHA-256
+`08ae63229dfbcabf94d314cda677a2c45b60e17b9c2fee8351a298b3cf6eb991`.
+It continues from the v325 database hash
+`229e4729eed1be2759935c1604ac6e3987ffe6fbe91c2b5a0dca16ae344c0757`.
+The fresh copy contains 11,707 functions and zero audited default names. Its
+name-origin counts are 6,315 translated `v18_` aliases, 417 target-only
+descriptive labels, 915 retained target names, seven JNI exports, and 4,053
+other IDA or PLT names. The dynamic-symbol audit reports 4,647 source-backed
+aliases, 1,803 exact retained names, 143 other retained target names, seven
+linker-boundary aliases, 169 PLT veneers, and one undefined `__sF` import
+without an in-library veneer.
+
+The v326 pass applies 20 aliases in the target range `0x22c810` through
+`0x22cea0`. The format-parameter accessors are especially strong matches:
+each target method calls the corresponding script-machine reader, performs
+the same biased integer conversion where appropriate, and appears in the
+same class-local order. The destructor rows are supported by the D1, D2, and
+D0 C++ ABI forms, receiver-adjustment thunks, and matching ownership cleanup.
+The two object writers preserve the source callback and temporary-string
+cleanup sequence while using the target's rebuilt string classes.
+
+The v326 records are
+`artifacts/spectron_format_parameters_property_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_format_parameters_property_manual_translation_application_20260829.json`,
+`artifacts/spectron_format_parameters_property_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v326.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v326.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v326.json`,
+`artifacts/spectron_semantic_translation_v326.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v326.json`.
+
+The v326 application renamed all 20 target functions and added 20 evidence
+comments with zero failures. Reopening the fresh copy verified all 20 names.
+This pass changed only the private IDA copy and archive. It did not patch the
+APK, rerun the loopback client, alter TLS behavior, contact a game server, or
+test a live endpoint.
 
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
@@ -6559,6 +6609,11 @@ proves the local native TLS path, not a current live certificate or service.
   TScript, TScriptFunctionProperties, and TFunctionProfile cleanup evidence.
   `tools/generate_spectron_translation_checkpoint_v325.py` records the v325
   application, reopen verification, name audit, and dynamic-symbol coverage.
+  `tools/generate_spectron_format_parameters_property_anchors.py` records the
+  v326 format-parameter, call-stack property, TProperties, and derived-property
+  pseudocode anchors. `tools/generate_spectron_translation_checkpoint_v326.py`
+  records the v326 application, reopen verification, name audit,
+  dynamic-symbol coverage, and semantic-map refresh.
   `tools/ida_apply_spectron_translation.py` and
   `tools/ida_apply_spectron_manual_anchors.py` write separate disposable IDA
   copies, while the matching verification scripts reopen and check them. The

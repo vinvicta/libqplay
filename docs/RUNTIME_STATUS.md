@@ -3035,6 +3035,51 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v326 format-parameter and property translation
+
+The v326 pass closes the next raw target cluster after the v325 script
+destructor work. It translates the `TScriptMachine::FormatParameters`
+destructor and eight accessors, the `TCallStackEntryProperties` destructor
+family, the `TProperties` destructor family, and two derived-property object
+writers.
+
+The eight accessors are a particularly strong match. The target's obfuscated
+`OV5NOaoBLl` methods call the next or indexed script-machine float readers in
+the same order as the source. The integer variants retain the `0.0001` bias
+and negative correction, while the floating-point and string variants remain
+direct forwarding wrappers. The destructor rows agree through D1, D2, and D0
+C++ ABI forms, vtable replacement, receiver adjustment, base cleanup, and
+`operator delete` placement. The object writers preserve the source callback
+and temporary-string cleanup sequence while using rebuilt target string
+classes.
+
+Eleven rows retain exact normalized feature metrics and nine are recorded as
+layout changes. All 20 aliases were applied to a fresh v325-derived copy and
+verified after reopening. The v326 database contains 11,707 functions and
+zero audited default names. Its name origins are 6,315 translated `v18_`
+aliases, 417 target-only descriptive labels, 915 retained target names, seven
+JNI exports, and 4,053 other IDA or PLT names. Dynamic-symbol coverage reports
+4,647 source-backed aliases, 1,803 exact retained names, and 143 other
+retained target names, with 5,782 exact dynamic function starts.
+
+The final private database is
+`analysis/spectron_libqplay_translated_v326_format_parameters_property.i64`
+with SHA-256
+`08ae63229dfbcabf94d314cda677a2c45b60e17b9c2fee8351a298b3cf6eb991`.
+The machine-readable records are
+`artifacts/spectron_format_parameters_property_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_format_parameters_property_manual_translation_application_20260829.json`,
+`artifacts/spectron_format_parameters_property_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v326.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v326.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v326.json`,
+`artifacts/spectron_semantic_translation_v326.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v326.json`.
+
+This was a static translation pass only. It did not patch the APK, rerun the
+loopback client, alter TLS behavior, contact a game server, or test a live
+endpoint.
+
 ## Spectron 2.2 v325 TScript destructor translation
 
 The v325 pass closes eight raw symbols left in the v324 script-runtime block.

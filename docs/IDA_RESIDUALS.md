@@ -737,6 +737,69 @@ v325 records are
 generators are `tools/generate_spectron_tscript_destructor_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v325.py`.
 
+### v326 format-parameter and property runtime aliases
+
+The v326 pass follows the destructor block into the next compact class-local
+sequence. It closes the raw target names for the format-parameter wrapper,
+`TCallStackEntryProperties`, `TProperties`, and two derived property writers.
+The method order is useful here because the target's obfuscated `OV5NOaoBLl`
+class contains the same next, indexed, numeric, and string accessors as the
+source `TScriptMachine::FormatParameters` class.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | ---: | --- | --- |
+| `0x224248` | `0x22c810` | `v18_TScriptMachine_FormatParameters_TScriptMachine_FormatParameters` | format-parameter D2 cleanup |
+| `0x22424c` | `0x22c858` | `v18_TCallStackEntryProperties_TCallStackEntryProperties` | property D1/D2 cleanup |
+| `0x224268` | `0x22c874` | `v18_non_virtual_thunk_to_TCallStackEntryProperties_TCallStackEntryProperties` | property D1 thunk |
+| `0x224270` | `0x22c87c` | `v18_TCallStackEntryProperties_TCallStackEntryProperties__2` | property D0 cleanup |
+| `0x2242a8` | `0x22c8b4` | `v18_non_virtual_thunk_to_TCallStackEntryProperties_TCallStackEntryProperties__2` | property D0 thunk |
+| `0x2242b0` | `0x22c8bc` | `v18_TScriptMachine_FormatParameters_TScriptMachine_FormatParameters__2` | format-parameter D0 cleanup |
+| `0x224400` | `0x22ca58` | `v18_TScriptMachine_FormatParameters_getNextU32_void` | next float to unsigned integer |
+| `0x224448` | `0x22caa0` | `v18_TScriptMachine_FormatParameters_getNextS32_void` | next float to signed integer |
+| `0x224490` | `0x22cae8` | `v18_TScriptMachine_FormatParameters_getNextF64_void` | next float passthrough |
+| `0x224498` | `0x22caf0` | `v18_TScriptMachine_FormatParameters_getIndexedU32_int` | indexed float to unsigned integer |
+| `0x2244e0` | `0x22cb38` | `v18_TScriptMachine_FormatParameters_getIndexedS32_int` | indexed float to signed integer |
+| `0x224528` | `0x22cb80` | `v18_TScriptMachine_FormatParameters_getIndexedF64_int` | indexed float passthrough |
+| `0x224530` | `0x22cb88` | `v18_TScriptMachine_FormatParameters_getNextString_void` | next string accessor |
+| `0x224538` | `0x22cb94` | `v18_TScriptMachine_FormatParameters_getIndexedString_int` | indexed string accessor |
+| `0x2245cc` | `0x22cc48` | `v18_TProperties_TProperties` | property-list and string cleanup |
+| `0x224638` | `0x22ccbc` | `v18_non_virtual_thunk_to_TProperties_TProperties` | TProperties D1 thunk |
+| `0x224640` | `0x22ccc4` | `v18_TProperties_TProperties__2` | TProperties D0 cleanup |
+| `0x224660` | `0x22cce4` | `v18_non_virtual_thunk_to_TProperties_TProperties__2` | TProperties D0 thunk |
+| `0x224668` | `0x22ce20` | `v18_TJoinedClassesProperty_writeObject_TGraalVar_TGraalVar` | object-to-string property write |
+| `0x2246c8` | `0x22cea0` | `v18_TAniProperty_writeObject_TGraalVar_TGraalVar` | animation property write |
+
+Eleven rows retain the complete normalized feature record. The nine layout
+rows are still high-confidence: the format destructor clears a target string
+array that is absent from the source body, the property destructors use the
+rebuilt target containers, the two string wrappers add a small ABI detail,
+and the object writers add explicit target string conversions and cleanup.
+The exact thunk and deleting-destructor rows are particularly useful anchors
+because receiver adjustment and `operator delete` placement are fixed by the
+C++ ABI.
+
+All 20 aliases were applied to a fresh v325-derived copy and all 20 were
+verified after reopening. The final database has 11,707 functions and zero
+audited default names. The v326 name-origin counts are 6,315 translated
+`v18_` aliases, 417 target-only descriptive labels, 915 retained target
+names, seven JNI exports, and 4,053 other IDA or PLT names. Dynamic coverage
+reports 4,647 source-backed aliases, 1,803 exact retained names, and 143
+other retained target names. The database hash is
+`08ae63229dfbcabf94d314cda677a2c45b60e17b9c2fee8351a298b3cf6eb991`.
+
+The v326 records are
+`artifacts/spectron_format_parameters_property_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_format_parameters_property_manual_translation_application_20260829.json`,
+`artifacts/spectron_format_parameters_property_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v326.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v326.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v326.json`,
+`artifacts/spectron_semantic_translation_v326.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v326.json`. The reusable
+generators are
+`tools/generate_spectron_format_parameters_property_anchors.py` and
+`tools/generate_spectron_translation_checkpoint_v326.py`.
+
 ## CyaSSL role pass
 
 The CyaSSL gap was worth a separate pass because these routines sit directly

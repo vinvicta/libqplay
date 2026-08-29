@@ -376,6 +376,55 @@ machine-readable records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v325.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v325.json`.
 
+### v326 format-parameter and property aliases
+
+The v326 pass names the adjacent format-parameter, property cleanup, and
+derived-property writer functions. These aliases are backed by compact
+Hex-Rays evidence and the source and target class-local order.
+
+| Source address | Spectron address | Applied alias |
+| ---: | ---: | --- |
+| `0x224248` | `0x22c810` | `v18_TScriptMachine_FormatParameters_TScriptMachine_FormatParameters` |
+| `0x22424c` | `0x22c858` | `v18_TCallStackEntryProperties_TCallStackEntryProperties` |
+| `0x224268` | `0x22c874` | `v18_non_virtual_thunk_to_TCallStackEntryProperties_TCallStackEntryProperties` |
+| `0x224270` | `0x22c87c` | `v18_TCallStackEntryProperties_TCallStackEntryProperties__2` |
+| `0x2242a8` | `0x22c8b4` | `v18_non_virtual_thunk_to_TCallStackEntryProperties_TCallStackEntryProperties__2` |
+| `0x2242b0` | `0x22c8bc` | `v18_TScriptMachine_FormatParameters_TScriptMachine_FormatParameters__2` |
+| `0x224400` | `0x22ca58` | `v18_TScriptMachine_FormatParameters_getNextU32_void` |
+| `0x224448` | `0x22caa0` | `v18_TScriptMachine_FormatParameters_getNextS32_void` |
+| `0x224490` | `0x22cae8` | `v18_TScriptMachine_FormatParameters_getNextF64_void` |
+| `0x224498` | `0x22caf0` | `v18_TScriptMachine_FormatParameters_getIndexedU32_int` |
+| `0x2244e0` | `0x22cb38` | `v18_TScriptMachine_FormatParameters_getIndexedS32_int` |
+| `0x224528` | `0x22cb80` | `v18_TScriptMachine_FormatParameters_getIndexedF64_int` |
+| `0x224530` | `0x22cb88` | `v18_TScriptMachine_FormatParameters_getNextString_void` |
+| `0x224538` | `0x22cb94` | `v18_TScriptMachine_FormatParameters_getIndexedString_int` |
+| `0x2245cc` | `0x22cc48` | `v18_TProperties_TProperties` |
+| `0x224638` | `0x22ccbc` | `v18_non_virtual_thunk_to_TProperties_TProperties` |
+| `0x224640` | `0x22ccc4` | `v18_TProperties_TProperties__2` |
+| `0x224660` | `0x22cce4` | `v18_non_virtual_thunk_to_TProperties_TProperties__2` |
+| `0x224668` | `0x22ce20` | `v18_TJoinedClassesProperty_writeObject_TGraalVar_TGraalVar` |
+| `0x2246c8` | `0x22cea0` | `v18_TAniProperty_writeObject_TGraalVar_TGraalVar` |
+
+Eleven rows have exact normalized feature records and nine are layout-change
+anchors. The target format-parameter methods retain the source's float
+conversion and accessor order. The destructor rows preserve the C++ ABI
+forms, and the object writers preserve the source virtual callback and
+temporary cleanup sequence. The application and reopen verification reports
+both contain 20 successful rows.
+
+The v326 database contains 6,315 translated `v18_` aliases and no audited IDA
+default names. Its hash is
+`08ae63229dfbcabf94d314cda677a2c45b60e17b9c2fee8351a298b3cf6eb991`. The
+records are
+`artifacts/spectron_format_parameters_property_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_format_parameters_property_manual_translation_application_20260829.json`,
+`artifacts/spectron_format_parameters_property_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v326.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v326.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v326.json`,
+`artifacts/spectron_semantic_translation_v326.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v326.json`.
+
 ## Current Spectron cross-build labels
 
 The latest disposable IDA copies extend the labels beyond the retained ELF
