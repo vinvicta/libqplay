@@ -937,6 +937,82 @@ The expected v326 database hash is
 checkpoint is static evidence only. It does not change the loopback runtime
 result, TLS diagnosis, or live-service boundary.
 
+### v342 TInput modifier-state residual translation
+
+The v342 pass is static IDA work only. It starts from the verified v341
+database and reviews source methods at 0x168ff0, 0x169024, and 0x169058
+against target methods at 0x16c9f0, 0x16ca24, and 0x16ca58. It does not
+require an APK, emulator, server, or live endpoint.
+
+Capture compact pseudocode with tools/ida_dump_function_evidence.py, using the
+same IDALIB environment shown in the v341 section. The source request is
+0x168ff0,0x169024,0x169058. The target request is 0x16c9f0,0x16ca24,0x16ca58.
+
+Generate the reviewed three-row artifact:
+
+    python3 tools/generate_spectron_input_modifiers_residual_anchors.py \
+      --original-features /tmp/original_features_v3_current.json \
+      --spectron-features artifacts/spectron_features_v341_colorset_residual.json \
+      --semantic-map artifacts/spectron_semantic_translation_v341.json \
+      --source-evidence /tmp/graal-source-input-mod-v342.json \
+      --target-evidence /tmp/graal-target-input-mod-v342.json \
+      --original-binary-sha256 9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8 \
+      --spectron-binary-sha256 f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219 \
+      --output artifacts/spectron_input_modifiers_residual_manual_translation_anchors_20260829.json
+
+Apply the artifact to a fresh copy of
+spectron_libqplay_translated_v341_colorset_residual.i64 and save
+spectron_libqplay_translated_v342_input_modifiers_residual.i64 with
+tools/ida_apply_spectron_manual_anchors.py. Use the same IDALIB environment
+shown in the v341 section, with these variables:
+
+    SPECTRON_MANUAL_APPLY=1
+    SPECTRON_MANUAL_ANCHORS=/path/to/artifacts/spectron_input_modifiers_residual_manual_translation_anchors_20260829.json
+    SPECTRON_MANUAL_EXPECTED_ARTIFACT=spectron_input_modifiers_residual_manual_translation_anchors_20260829
+    SPECTRON_MANUAL_SAVE_PATH=/path/to/spectron_libqplay_translated_v342_input_modifiers_residual.i64
+    SPECTRON_MANUAL_REPORT=/tmp/spectron_input_modifiers_residual_manual_translation_application_20260829.json
+
+Reopen the saved copy with tools/ida_verify_spectron_manual_anchors.py, using
+the same anchor and expected-artifact variables and
+SPECTRON_MANUAL_VERIFY_REPORT=/tmp/spectron_input_modifiers_residual_manual_translation_verification_20260829.json.
+The application report must contain three resolved functions, three renames,
+three evidence comments, zero failures, and a successful save. The reopen
+report must contain three verified names in an 11,707-function database.
+
+Refresh the feature export and the name and dynamic audits using the commands
+in the v341 section, changing the output suffix to v342. Carry the semantic
+map forward and build the strict checkpoint:
+
+    python3 tools/carry_forward_spectron_semantic_translation_v342.py \
+      --parent-map artifacts/spectron_semantic_translation_v341.json \
+      --target-features artifacts/spectron_features_v342_input_modifiers_residual.json \
+      --anchor-artifact artifacts/spectron_input_modifiers_residual_manual_translation_anchors_20260829.json \
+      --output artifacts/spectron_semantic_translation_v342.json
+
+    python3 tools/generate_spectron_translation_checkpoint_v342.py \
+      --parent-checkpoint artifacts/spectron_translation_checkpoint_20260829_v341.json \
+      --database /path/to/spectron_libqplay_translated_v342_input_modifiers_residual.i64 \
+      --anchor-artifact artifacts/spectron_input_modifiers_residual_manual_translation_anchors_20260829.json \
+      --application-report artifacts/spectron_input_modifiers_residual_manual_translation_application_20260829.json \
+      --verification-report artifacts/spectron_input_modifiers_residual_manual_translation_verification_20260829.json \
+      --name-audit artifacts/spectron_name_coverage_audit_v342.json \
+      --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v342.json \
+      --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v342.json \
+      --semantic-map artifacts/spectron_semantic_translation_v342.json \
+      --feature-export artifacts/spectron_features_v342_input_modifiers_residual.json \
+      --output artifacts/spectron_translation_checkpoint_20260829_v342.json
+
+    python3 tools/validate_research_archive.py
+
+The expected v342 database hash is
+`ec767e7a86e12b169f0053d4d1b783aa01fc8b7efa90863b69912553aa451ae7`.
+Expected totals are 6,432 translated aliases, 419 target-only descriptive
+labels, 797 retained target names, seven JNI exports, 4,052 other IDA or PLT
+names, 4,786 source-backed dynamic symbols, 1,685 exact retained dynamic
+symbols, and 5,782 exact dynamic function starts. The anchor summary is three
+high-confidence rows, three exact metric matches, three pseudocode-backed
+rows, and three new-context rows.
+
 ### v341 GuiControl color-setter residual translation
 
 The v341 pass is static IDA work only. It starts from the verified v340

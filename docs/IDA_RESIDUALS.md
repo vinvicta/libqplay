@@ -800,6 +800,60 @@ generators are
 `tools/generate_spectron_format_parameters_property_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v326.py`.
 
+### v342 TInput modifier-state residual aliases
+
+The v342 pass starts from the verified v341 database and translates three raw
+entries in the obfuscated `GaA2gaD2MX` input implementation. Direct compact
+Hex-Rays pseudocode was captured for every source and target row, and all
+three rows have exact normalized ARM64 feature matches.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | --- | --- | --- |
+| `0x168ff0` `TInput_getShiftKeyState_void` | `0x16c9f0` `_ZN10GaA2gaD2MX10_lcpfac0OzEv` | `v18_TInput_getShiftKeyState_void` | primary and fallback shift queries |
+| `0x169024` `TInput_getControlKeyState_void` | `0x16ca24` `_ZN10GaA2gaD2MX10wyepfaLRQzEv` | `v18_TInput_getControlKeyState_void` | primary and fallback control queries |
+| `0x169058` `TInput_getAltKeyState_void` | `0x16ca58` `_ZN10GaA2gaD2MX10Hf7ofaRIKzEv` | `v18_TInput_getAltKeyState_void` | primary and fallback alt queries |
+
+Each accessor calls the key-state helper with the incoming integer argument
+using one byte of the static `qword_A0` modifier table. If that result is
+false, it calls the same helper with zero using the adjacent table byte. The
+shift pair is at offsets 0 and 1, the control pair at 2 and 3, and the alt
+pair at 4 and 5. The source helper is `plt_TInput_getKeyState_int`; the
+target helper is the obfuscated `GaA2gaD2MX::xiDpfajGaA`.
+
+The three aliases were applied to a fresh v341-derived database and verified
+after reopening. Every row is new context in the automatic semantic map, so
+the archive keeps the direct evidence and does not inflate the source mapping
+count.
+
+The v342 database contains 11,707 functions, zero audited default names,
+6,432 translated aliases, 419 target-only descriptive labels, 797 retained
+target names, seven JNI exports, and 4,052 other IDA or PLT names. Dynamic
+coverage reports 4,786 source-backed aliases, 1,685 exact retained dynamic
+names, and 5,782 exact dynamic function starts.
+
+The saved database is
+`analysis/spectron_libqplay_translated_v342_input_modifiers_residual.i64` with
+SHA-256
+`ec767e7a86e12b169f0053d4d1b783aa01fc8b7efa90863b69912553aa451ae7`.
+The machine-readable records are
+`artifacts/spectron_input_modifiers_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_input_modifiers_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_input_modifiers_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v342_input_modifiers_residual.json`,
+`artifacts/spectron_name_coverage_audit_v342.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v342.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v342.json`,
+`artifacts/spectron_semantic_translation_v342.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v342.json`.
+The reusable scripts are
+`tools/generate_spectron_input_modifiers_residual_anchors.py`,
+`tools/carry_forward_spectron_semantic_translation_v342.py`, and
+`tools/generate_spectron_translation_checkpoint_v342.py`.
+
+This is a static IDA translation checkpoint. It did not patch the APK, rerun
+the loopback client, alter TLS behavior, contact a game server, or test a
+live endpoint.
+
 ### v341 GuiControl color-setter residual aliases
 
 The v341 pass starts from the verified v340 database and translates four raw

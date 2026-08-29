@@ -319,6 +319,43 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v342 TInput modifier-state residual comparison
+
+The v342 pass compares three raw target methods in the obfuscated `GaA2gaD2MX`
+input class. Every row has direct source and target compact Hex-Rays
+pseudocode and an exact normalized ARM64 feature match.
+
+| Source role | Spectron address | Applied alias | Match class |
+| --- | ---: | --- | --- |
+| `TInput_getShiftKeyState_void` | `0x16c9f0` | `v18_TInput_getShiftKeyState_void` | exact primary and fallback query |
+| `TInput_getControlKeyState_void` | `0x16ca24` | `v18_TInput_getControlKeyState_void` | exact primary and fallback query |
+| `TInput_getAltKeyState_void` | `0x16ca58` | `v18_TInput_getAltKeyState_void` | exact primary and fallback query |
+
+The source and target methods both call their build-specific key-state helper
+with the incoming integer argument. A false primary result triggers a second
+call with zero. The shift, control, and alt methods use adjacent byte pairs at
+qword_A0 offsets 0 and 1, 2 and 3, and 4 and 5. All three rows are new context
+in the automatic semantic map, and no alias relies on name similarity alone.
+
+The aliases were applied and verified after reopening the v342 database. It
+has 11,707 functions, zero audited default names, 6,432 translated aliases,
+4,786 source-backed dynamic rows, 1,685 exact retained dynamic names, and
+5,782 exact dynamic function starts. Its SHA-256 is
+`ec767e7a86e12b169f0053d4d1b783aa01fc8b7efa90863b69912553aa451ae7`.
+The complete comparison records are
+`artifacts/spectron_input_modifiers_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_input_modifiers_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_input_modifiers_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v342_input_modifiers_residual.json`,
+`artifacts/spectron_name_coverage_audit_v342.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v342.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v342.json`,
+`artifacts/spectron_semantic_translation_v342.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v342.json`.
+
+This comparison is static evidence. It does not change the runtime diagnosis,
+patch the APK, or contact a live endpoint.
+
 ## v341 GuiControl color-setter residual comparison
 
 The v341 pass compares four raw target methods in the obfuscated w9XxgaJdbx

@@ -425,6 +425,42 @@ records are
 `artifacts/spectron_semantic_translation_v326.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v326.json`.
 
+### v342 TInput modifier-state residual aliases
+
+The v342 pass adds three semantic aliases to the private Spectron IDA
+database. The raw target identifiers remain visible so each translated name
+can be traced back to the stripped build.
+
+| Spectron address | Raw target symbol | Applied alias | Recovered role |
+| ---: | --- | --- | --- |
+| `0x16c9f0` | `_ZN10GaA2gaD2MX10_lcpfac0OzEv` | `v18_TInput_getShiftKeyState_void` | shift primary and fallback query |
+| `0x16ca24` | `_ZN10GaA2gaD2MX10wyepfaLRQzEv` | `v18_TInput_getControlKeyState_void` | control primary and fallback query |
+| `0x16ca58` | `_ZN10GaA2gaD2MX10Hf7ofaRIKzEv` | `v18_TInput_getAltKeyState_void` | alt primary and fallback query |
+
+The source counterparts are `0x168ff0`, `0x169024`, and `0x169058`. Each
+method queries one modifier object with the incoming integer argument and
+checks the adjacent object with zero only when the first result is false. The
+source helper is `plt_TInput_getKeyState_int`; the target helper is
+`GaA2gaD2MX::xiDpfajGaA`. Direct pseudocode and exact normalized feature
+records support all three rows.
+
+The v342 records are
+`artifacts/spectron_input_modifiers_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_input_modifiers_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_input_modifiers_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v342_input_modifiers_residual.json`,
+`artifacts/spectron_name_coverage_audit_v342.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v342.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v342.json`,
+`artifacts/spectron_semantic_translation_v342.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v342.json`.
+
+The v342 database has 6,432 translated `v18_` aliases, 419 target-only
+descriptive labels, 797 retained target names, seven JNI exports, 4,052
+other IDA or PLT names, 4,786 source-backed dynamic rows, and 1,685 exact
+retained dynamic names. Its hash is
+`ec767e7a86e12b169f0053d4d1b783aa01fc8b7efa90863b69912553aa451ae7`.
+
 ### v341 GuiControl color-setter residual aliases
 
 The v341 pass adds four semantic aliases to the private Spectron IDA

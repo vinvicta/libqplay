@@ -3035,6 +3035,42 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v342 TInput modifier-state residuals
+
+The v342 revision is a static IDA checkpoint for three raw modifier accessors
+in the obfuscated `GaA2gaD2MX` input class. It covers shift, control, and alt
+state queries. Each source and target body has direct compact pseudocode and
+an exact normalized ARM64 feature match.
+
+The source methods use `plt_TInput_getKeyState_int`; the target methods use
+`GaA2gaD2MX::xiDpfajGaA`. Each method tests a primary modifier entry with the
+incoming key argument, then tests its adjacent fallback entry with zero when
+the primary result is false. The three byte pairs are qword_A0 offsets 0 and
+1, 2 and 3, and 4 and 5.
+
+The aliases were applied to a fresh v341-derived database and verified after
+reopening. The v342 database contains 11,707 functions, zero audited default
+names, 6,432 translated aliases, 4,786 source-backed dynamic rows, and 1,685
+exact retained dynamic names. All 5,782 defined dynamic function symbols still
+resolve to exact IDA function starts.
+
+Its SHA-256 is
+`ec767e7a86e12b169f0053d4d1b783aa01fc8b7efa90863b69912553aa451ae7`.
+The records are
+`artifacts/spectron_input_modifiers_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_input_modifiers_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_input_modifiers_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v342_input_modifiers_residual.json`,
+`artifacts/spectron_name_coverage_audit_v342.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v342.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v342.json`,
+`artifacts/spectron_semantic_translation_v342.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v342.json`.
+
+This checkpoint did not change the verified loopback package, connector TLS
+result, or local protocol responder. No live endpoint was contacted, and no
+new runtime replay was performed for v342.
+
 ## Spectron 2.2 v341 GuiControl color-setter residuals
 
 The v341 revision is a static IDA checkpoint for four raw GuiControl color

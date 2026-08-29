@@ -13,7 +13,7 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v341 Spectron database. It
+The current documented translation frontier is the v342 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -225,6 +225,15 @@ target Hex-Rays pseudocode and an exact normalized ARM64 feature match. The
 v341 database contains 6,429 reviewed `v18_` aliases, 4,783 source-backed
 dynamic rows, and 1,688 exact retained dynamic names. It is a static IDA
 checkpoint and has not been used for a new runtime APK replay.
+
+The v342 revision resolves three raw `TInput` modifier accessors for shift,
+control, and alt. Each source and target body makes the same primary key-state
+query, then checks a paired fallback key with argument zero when the primary
+query is false. All three rows have direct source and target Hex-Rays
+pseudocode and exact normalized ARM64 feature matches. The v342 database
+contains 6,432 reviewed `v18_` aliases, 4,786 source-backed dynamic rows, and
+1,685 exact retained dynamic names. It is a static IDA checkpoint and has not
+been used for a new runtime APK replay.
 
 The v331 revision continues immediately into the static-variable runtime. It
 adds 22 high-confidence aliases for the universe initializer, the
@@ -831,6 +840,62 @@ target-only functions, with zero failures. Reopening the fresh copy verified
 all four names. This was a static translation pass only. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
+
+### v342 TInput modifier-state residual aliases
+
+The v342 pass starts from the verified v341 database and resolves the three
+raw modifier accessors in the obfuscated `GaA2gaD2MX` input implementation.
+The target bodies were compared with their 1.8 counterparts using direct
+compact Hex-Rays pseudocode, exact normalized ARM64 feature metrics, and the
+local shift, control, alt order.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | --- | --- | --- |
+| `0x168ff0` `TInput_getShiftKeyState_void` | `0x16c9f0` `_ZN10GaA2gaD2MX10_lcpfac0OzEv` | `v18_TInput_getShiftKeyState_void` | qword_A0 offsets 0 and 1 |
+| `0x169024` `TInput_getControlKeyState_void` | `0x16ca24` `_ZN10GaA2gaD2MX10wyepfaLRQzEv` | `v18_TInput_getControlKeyState_void` | qword_A0 offsets 2 and 3 |
+| `0x169058` `TInput_getAltKeyState_void` | `0x16ca58` `_ZN10GaA2gaD2MX10Hf7ofaRIKzEv` | `v18_TInput_getAltKeyState_void` | qword_A0 offsets 4 and 5 |
+
+The direct behavior is intentionally simple. Shift calls the key-state helper
+with the first modifier object and the incoming integer argument. If that
+returns false, it calls the helper with the adjacent modifier object and zero.
+Control and alt use the same control flow with byte pairs at offsets 2 and 3,
+and 4 and 5, respectively. In the target, the obfuscated helper is
+`GaA2gaD2MX::xiDpfajGaA`; in the source, it is
+`plt_TInput_getKeyState_int`. This is a body-level match, not a name-only
+guess.
+
+All three aliases were applied to a fresh v341-derived database and verified
+after reopening. They are new context in the automatic semantic map, so they
+are recorded as reviewed anchors rather than promotions of earlier candidate
+rows.
+
+The v342 database has 11,707 functions and zero audited default names. Its
+name audit reports 6,432 translated aliases, 797 retained target names, 419
+target-only descriptive labels, seven JNI exports, and 4,052 other IDA or PLT
+names. Dynamic coverage reports 4,786 source-backed aliases, 1,685 exact
+retained dynamic names, and 5,782 exact dynamic function starts.
+
+The saved database is
+`analysis/spectron_libqplay_translated_v342_input_modifiers_residual.i64` with
+SHA-256
+`ec767e7a86e12b169f0053d4d1b783aa01fc8b7efa90863b69912553aa451ae7`.
+The machine-readable records are
+`artifacts/spectron_input_modifiers_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_input_modifiers_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_input_modifiers_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v342_input_modifiers_residual.json`,
+`artifacts/spectron_name_coverage_audit_v342.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v342.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v342.json`,
+`artifacts/spectron_semantic_translation_v342.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v342.json`.
+
+The reusable generators are
+`tools/generate_spectron_input_modifiers_residual_anchors.py`,
+`tools/carry_forward_spectron_semantic_translation_v342.py`, and
+`tools/generate_spectron_translation_checkpoint_v342.py`. This is a static
+IDA translation checkpoint. It did not patch the APK, rerun the loopback
+client, change TLS behavior, contact a game server, or test a live endpoint.
 
 ### v341 GuiControl color-setter residual aliases
 

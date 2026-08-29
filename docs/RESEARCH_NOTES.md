@@ -261,6 +261,62 @@ This pass changed only the private IDA copy and archive. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
 
+## 2026-08-29: TInput modifier-state residuals, v342
+
+The next clean raw-symbol group is the three-entry modifier accessor block.
+Source `TInput` methods at `0x168ff0`, `0x169024`, and `0x169058` line up with
+target methods at `0x16c9f0`, `0x16ca24`, and `0x16ca58` in the obfuscated
+`GaA2gaD2MX` class.
+
+| 1.8 source | Spectron target | Applied alias | Direct behavior |
+| --- | ---: | --- | --- |
+| `0x168ff0` `TInput_getShiftKeyState_void` | `0x16c9f0` `_ZN10GaA2gaD2MX10_lcpfac0OzEv` | `v18_TInput_getShiftKeyState_void` | query qword_A0 offsets 0 and 1 |
+| `0x169024` `TInput_getControlKeyState_void` | `0x16ca24` `_ZN10GaA2gaD2MX10wyepfaLRQzEv` | `v18_TInput_getControlKeyState_void` | query qword_A0 offsets 2 and 3 |
+| `0x169058` `TInput_getAltKeyState_void` | `0x16ca58` `_ZN10GaA2gaD2MX10Hf7ofaRIKzEv` | `v18_TInput_getAltKeyState_void` | query qword_A0 offsets 4 and 5 |
+
+The source and target pseudocode is the same small state machine. The primary
+query uses the incoming integer argument. When it returns false, the fallback
+query uses the adjacent modifier entry and integer zero. The source calls
+`plt_TInput_getKeyState_int`, while the target calls
+`GaA2gaD2MX::xiDpfajGaA`. The three bodies have identical instruction count,
+basic-block count, branch count, call count, return count, and all normalized
+instruction-shape digests.
+
+These are high-confidence new-context anchors. The automatic semantic map did
+not already contain the three source-target pairs, so the pass adds reviewed
+names without changing the mapped-function totals. The application renamed
+all three target functions and added three evidence comments. Reopening the
+saved database verified all three names in the 11,707-function IDA database.
+
+The v342 database has zero audited default names. Its name audit reports 6,432
+translated aliases, 419 target-only descriptive labels, 797 retained target
+names, seven JNI exports, and 4,052 other IDA or PLT names. Dynamic coverage
+reports 4,786 source-backed aliases, 1,685 exact retained dynamic names, and
+5,782 exact dynamic function starts.
+
+The v342 database is
+`analysis/spectron_libqplay_translated_v342_input_modifiers_residual.i64` with
+SHA-256
+`ec767e7a86e12b169f0053d4d1b783aa01fc8b7efa90863b69912553aa451ae7`.
+The records are
+`artifacts/spectron_input_modifiers_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_input_modifiers_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_input_modifiers_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v342_input_modifiers_residual.json`,
+`artifacts/spectron_name_coverage_audit_v342.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v342.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v342.json`,
+`artifacts/spectron_semantic_translation_v342.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v342.json`.
+The reusable helpers are
+`tools/generate_spectron_input_modifiers_residual_anchors.py`,
+`tools/carry_forward_spectron_semantic_translation_v342.py`, and
+`tools/generate_spectron_translation_checkpoint_v342.py`.
+
+This pass changed only the private IDA database and research archive. It did
+not patch the APK, rerun the loopback client, alter TLS behavior, contact a
+game server, or test a live endpoint.
+
 ## 2026-08-29: GuiControl color-setter residuals, v341
 
 The next clean raw-symbol group is a four-entry channel setter block. Source
