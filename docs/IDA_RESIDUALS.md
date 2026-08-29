@@ -800,6 +800,57 @@ generators are
 `tools/generate_spectron_format_parameters_property_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v326.py`.
 
+### v329 TScriptSpace residual aliases and target-only labels
+
+The v329 pass continues through the residual `N67CMatrxw` script-space block.
+It adds two reviewed source-backed aliases and two descriptive labels for
+target-only boundaries:
+
+| 1.8 source | Spectron target | Applied name | Evidence role |
+| ---: | ---: | --- | --- |
+| `0x227454` | `0x230198` | `v18_TScriptSpace_freeSuspendedStates_void` | exact saved-state cleanup |
+| `0x229f44` | `0x233114` | `v18_TScriptSpace_joinClass_TString_const_bool` | class join and permission path |
+| none claimed | `0x23332c` | `spectron_TScriptSpace_receiveEvent_TString_const_CanTfaz6bZ_const_TGraalVar` | target-only event overload |
+| none claimed | `0x2339b4` | `spectron_TScriptSpace_clearScheduledEventsAndCancelActions_void` | target-only queue cleanup |
+
+The `freeSuspendedStates` row is an exact normalized feature match. Both
+functions delete every saved machine state from field 16, clear the list, and
+write a null pointer. The `joinClass(..., bool)` row is a layout-change match:
+the source and target retain the same empty-script setup, class lookup,
+permission check, join, catcher installation, and class-update action, while
+the target's rebuilt wrappers add temporary construction and cleanup.
+
+The `0x23332c` target function has a separate ABI boundary with a
+`CanTfaz6bZ` event-name argument. Its pseudocode repeats the event limit,
+duplicate detection, priority insertion, and activation policy of the
+already translated `receiveEvent` method. The `0x2339b4` helper has no
+argument, deletes every scheduled event, and marks every pending action as
+canceled. Neither target-only boundary has a distinct 1.8 source function in
+the recovered method set, so neither is counted as a source correspondence.
+
+Both source aliases and both descriptive labels were applied to fresh
+v328-derived IDA copies and verified after reopening. The v329 database has
+11,707 functions, zero audited default names, 6,334 translated `v18_`
+aliases, 419 target-only descriptive labels, and 5,782 exact dynamic
+function starts. Dynamic coverage reports 4,673 source-backed aliases and
+1,782 exact retained names.
+
+The v329 records are
+`artifacts/spectron_tscript_space_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_space_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_space_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_tscript_space_residual_labels_20260829.json`,
+`artifacts/spectron_tscript_space_residual_label_application_20260829.json`,
+`artifacts/spectron_tscript_space_residual_label_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v329.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v329.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v329.json`,
+`artifacts/spectron_semantic_translation_v329.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v329.json`. The reusable
+helpers are `tools/generate_spectron_tscript_space_residual_anchors.py`,
+`tools/generate_spectron_tscript_space_residual_labels.py`, and
+`tools/generate_spectron_translation_checkpoint_v329.py`.
+
 ### v328 TScriptMachine static-tail aliases
 
 The v328 pass closes two raw functions immediately after the v327 property

@@ -261,6 +261,89 @@ This pass changed only the private IDA copy and archive. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
 
+## 2026-08-29: TScriptSpace residual block, v329
+
+The v329 pass reviews the next raw boundaries in the obfuscated `N67CMatrxw`
+TScriptSpace implementation. The source and target functions were opened in
+disposable IDA copies and compared through compact Hex-Rays pseudocode,
+class-local order, retained string literals, and the existing normalized
+feature export.
+
+| 1.8 source | Spectron target | Result | Confidence basis |
+| --- | ---: | --- | --- |
+| `TScriptSpace_freeSuspendedStates_void` at `0x227454` | `0x230198` | `v18_TScriptSpace_freeSuspendedStates_void` | exact normalized feature record and identical saved-state loop |
+| `TScriptSpace_joinClass_TString_const_bool` at `0x229f44` | `0x233114` | `v18_TScriptSpace_joinClass_TString_const_bool` | same class fields, decision tree, literals, and target wrapper cleanup |
+| no distinct source boundary | `0x23332c` | `spectron_TScriptSpace_receiveEvent_TString_const_CanTfaz6bZ_const_TGraalVar` | target-only overload with normalized event-name type |
+| no distinct source boundary | `0x2339b4` | `spectron_TScriptSpace_clearScheduledEventsAndCancelActions_void` | target-only no-argument queue cleanup |
+
+The first source-backed row is especially strong. Both builds use a 124-byte,
+31-instruction, eight-block body with seven branches, four calls, and matching
+normalized hashes. The method walks the saved-state list at receiver field 16,
+destroys each machine state, clears the list, and nulls the field. The broad
+semantic matcher had recorded this as a medium-confidence shape match because
+the target name remained obfuscated. Direct pseudocode review promoted it to a
+high-confidence alias.
+
+The `0x233114` target function demangles to
+`N67CMatrxw::NIyWfarPS0(C8THgaTQxF const&, bool)`. It follows the translated
+`setScript` method and precedes the already translated `joinClass(TScript)`
+method, exactly where the source `joinClass(TString const, bool)` overload
+appears. Its body creates the empty base script when needed, removes a stale
+class name in the non-preserving path, asks the universe for the class,
+checks its join permission, joins it to the active script, installs event
+catchers, and queues the class-update action. The extra target temporary
+construction explains the larger body without changing the role.
+
+The raw `0x23332c` function demangles to
+`N67CMatrxw::dOBHMaPpiA(C8THgaTQxF const&, CanTfaz6bZ const&, G0gxgajWBw*)`.
+It has the event queue limit, `onshow` and `onhide` policy, duplicate checks,
+priority insertion for `istimeout`, `created`, and `initialized`, and script
+activation found in the already translated `receiveEvent` method. The
+`CanTfaz6bZ` parameter is a separate target ABI boundary, so it is labeled as
+an overload rather than counted as a second source copy of `receiveEvent`.
+
+The raw `0x2339b4` function demangles to
+`N67CMatrxw::XzgcMa1yW9()`. It deletes every scheduled `yXeHMaPb_z` object
+from field 5, then sets the cancellation byte on every pending action in
+field 8. This is broader than the neighboring named `cancelEvents` method,
+which filters by event name. No distinct no-argument source method was found
+in the recovered 1.8 TScriptSpace set, so the target-only label keeps that
+boundary explicit.
+
+Both source aliases and both target-only labels were applied to a fresh
+v328-derived database and verified after reopening. The resulting v329
+database has 11,707 functions and zero audited default names. It contains
+6,334 translated `v18_` aliases and 419 target-only descriptive labels. The
+dynamic audit reports 4,673 source-backed aliases, 1,782 exact retained
+dynamic names, 136 other retained target names, two target-only descriptive
+rows, seven linker-boundary aliases, 169 PLT veneers, and one undefined
+`__sF` import. Exact dynamic function-boundary coverage remains 5,782 starts.
+
+The v329 database is
+`analysis/spectron_libqplay_translated_v329_tscript_space_residuals.i64`
+with SHA-256
+`c84c8bd4abe51302092c82db16003712e870b0ed8a541a9417f6c563f540b6ee`.
+The machine-readable records are
+`artifacts/spectron_tscript_space_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_space_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_space_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_tscript_space_residual_labels_20260829.json`,
+`artifacts/spectron_tscript_space_residual_label_application_20260829.json`,
+`artifacts/spectron_tscript_space_residual_label_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v329.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v329.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v329.json`,
+`artifacts/spectron_semantic_translation_v329.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v329.json`.
+The reusable helpers are
+`tools/generate_spectron_tscript_space_residual_anchors.py`,
+`tools/generate_spectron_tscript_space_residual_labels.py`, and
+`tools/generate_spectron_translation_checkpoint_v329.py`.
+
+This pass changed only the private IDA copy and archive. It did not patch the
+APK, rerun the loopback client, alter TLS behavior, contact a game server, or
+test a live endpoint.
+
 ## 2026-08-29: TScriptMachine static tail, v328
 
 The v328 pass follows the property-runtime cleanup into the next two

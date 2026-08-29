@@ -1,0 +1,228 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target both iterate field 16, delete each saved machine state, clear the list, and write a null list pointer.",
+        "All recorded ARM64 feature metrics are identical, including instruction shape, control-flow shape, calls, and register allocation."
+      ],
+      "exact_metric_match": true,
+      "match_kind": "manual-tscript-space-residual-exact-anchor",
+      "metric_differences": [],
+      "name_action": "rename-with-v18-prefix",
+      "operation": "releases every saved TScriptMachineState and clears the suspended-state list",
+      "original_direct_call_names": [
+        "plt_TList_operator_index_int",
+        "plt_TScriptMachineState_TScriptMachineState",
+        "plt_operator_delete_void__2"
+      ],
+      "original_ea": "0x227454",
+      "original_function_end": "0x2274d0",
+      "original_metrics": {
+        "basic_block_count": 8,
+        "branch_count": 7,
+        "call_count": 4,
+        "instruction_count": 31,
+        "mnemonic_hash": "a2d9abad3c5f313641a0c4aa325cb953209342ee82f9be0cf2dd7e6fc6cdd8c9",
+        "opcode_shape_hash": "81b73e015f72252cd976e4f0b7faf636c3695643e0226c3f2e7010c41df90022",
+        "register_detail_hash": "b974f68417f43f721c899025f7e79541e329b5dfebc77e8b1f9f7da5b08c6386",
+        "register_shape_hash": "8f2f67924509b1d4200e8f8cbfd977827f09d7f3cbc8d044e87836b2c77ebd02",
+        "return_count": 1,
+        "shape_hash": "6b1185af5b9f626de4f54fd06c6ec07ace134a979df0b77d222a795a379c4388",
+        "size": 124,
+        "string_refs_hash": null
+      },
+      "original_name": "TScriptSpace_freeSuspendedStates_void",
+      "original_string_refs": [],
+      "proposed_name": "v18_TScriptSpace_freeSuspendedStates_void",
+      "semantic_match_already_present": true,
+      "semantic_match_confidence": "medium",
+      "semantic_match_method": "shape_hash",
+      "source_basis": "Hex-Rays pseudocode, exact normalized feature metrics, and the matching TScriptSpace field sequence",
+      "source_component": "TScriptSpace residual lifecycle and class-management methods",
+      "source_evidence_name": "TScriptSpace_freeSuspendedStates_void",
+      "source_pseudocode_sha256": "42364dad88aba6986ff9d03a07dc58e23b6e7d9e3aefe7ee2e21cd83ed1c369c",
+      "spectron_direct_call_names": [
+        "._ZN10yVOJMa8r9BD2Ev",
+        "._ZNK10vy1JgaKVkHixEi",
+        "._ZdlPv"
+      ],
+      "spectron_ea": "0x230198",
+      "spectron_function_end": "0x230214",
+      "spectron_metrics": {
+        "basic_block_count": 8,
+        "branch_count": 7,
+        "call_count": 4,
+        "instruction_count": 31,
+        "mnemonic_hash": "a2d9abad3c5f313641a0c4aa325cb953209342ee82f9be0cf2dd7e6fc6cdd8c9",
+        "opcode_shape_hash": "81b73e015f72252cd976e4f0b7faf636c3695643e0226c3f2e7010c41df90022",
+        "register_detail_hash": "b974f68417f43f721c899025f7e79541e329b5dfebc77e8b1f9f7da5b08c6386",
+        "register_shape_hash": "8f2f67924509b1d4200e8f8cbfd977827f09d7f3cbc8d044e87836b2c77ebd02",
+        "return_count": 1,
+        "shape_hash": "6b1185af5b9f626de4f54fd06c6ec07ace134a979df0b77d222a795a379c4388",
+        "size": 124,
+        "string_refs_hash": null
+      },
+      "spectron_name": "_ZN10N67CMatrxw10ilmTfbBpbZEv",
+      "spectron_string_refs": [],
+      "target_component": "N67CMatrxw obfuscated script-space runtime",
+      "target_evidence_name": "_ZN10N67CMatrxw10ilmTfbBpbZEv",
+      "target_pseudocode_sha256": "69428823568da2dbe597adda63d09406a0c74525381659c48cb4f56997dcdbf5"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target preserve the same receiver fields, boolean branch, empty-script creation, class lookup, permission check, join call, catcher installation, and class-update action.",
+        "The target adds explicit temporary construction for its rebuilt string and list wrappers, which changes size and call counts without changing the surrounding role."
+      ],
+      "exact_metric_match": false,
+      "match_kind": "manual-tscript-space-residual-layout-anchor",
+      "metric_differences": [
+        "size",
+        "instruction_count",
+        "branch_count",
+        "call_count",
+        "mnemonic_hash",
+        "opcode_shape_hash",
+        "register_shape_hash",
+        "shape_hash",
+        "register_detail_hash"
+      ],
+      "name_action": "rename-with-v18-prefix",
+      "operation": "joins a named class, applies the permission check, installs catchers, and queues the class-update action",
+      "original_direct_call_names": [
+        "plt_TList_indexOf_void_const",
+        "plt_TScriptSpace_addScriptError_TString_const",
+        "plt_TScriptSpace_classUpdateAction_bool",
+        "plt_TScriptSpace_setScript_TString_const",
+        "plt_TScriptUniverse_getClassAndCreate_TString_const_bool",
+        "plt_TScript_installEventCatchers_TGraalVar",
+        "plt_TScript_isAllowedToJoin_TGraalVar",
+        "plt_TScript_joinClass_TScript",
+        "plt_TStringList_Remove_TString_const",
+        "plt_TString_clear_void",
+        "plt_TString_operator_assign_TString_const",
+        "plt_TString_operator_lshift_TString_const",
+        "plt_TString_operator_lshift_char_const"
+      ],
+      "original_ea": "0x229f44",
+      "original_function_end": "0x22a0b4",
+      "original_metrics": {
+        "basic_block_count": 16,
+        "branch_count": 30,
+        "call_count": 16,
+        "instruction_count": 91,
+        "mnemonic_hash": "c72e0c1c3cf78ecdfd65d628625ba704607a30aeaaea918163ca6c0e62b45e61",
+        "opcode_shape_hash": "80d10d2c30a32a29df98623f0fb5834fe1ff50453a9ccf7f55de5630b3074d0d",
+        "register_detail_hash": "23799893d4a5935f57e9ce1a694efac6aeb4902069f08f582af1fe2d45ce86e2",
+        "register_shape_hash": "9366cde4f4df5c146fcce1e7bd246ed0b5841815d43b2e870506fa371eadd240",
+        "return_count": 1,
+        "shape_hash": "e01b9e424424b397b99e03b9dfeb32d227870fbfd8d1f9887c04f627a8b651a3",
+        "size": 368,
+        "string_refs_hash": "c1968df19c0ffce904455d38a4efd1356e7328c8b4cd347d10fef9c620192f81"
+      },
+      "original_name": "TScriptSpace_joinClass_TString_const_bool",
+      "original_string_refs": [
+        "Object doesn't have rights to join class "
+      ],
+      "proposed_name": "v18_TScriptSpace_joinClass_TString_const_bool",
+      "semantic_match_already_present": false,
+      "semantic_match_confidence": null,
+      "semantic_match_method": null,
+      "source_basis": "Hex-Rays pseudocode, class-local order, matching string literals, and the preserved class-join decision tree",
+      "source_component": "TScriptSpace residual lifecycle and class-management methods",
+      "source_evidence_name": "TScriptSpace_joinClass_TString_const_bool",
+      "source_pseudocode_sha256": "8b631f44d95f9bf22adf58c0fce4824bc72d41f7d97237aa9de93352d49e4767",
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSERKS_",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10C8THgaTQxFlsERKS_",
+        "._ZN10CanTfaz6bZ5clearEv",
+        "._ZN10CanTfaz6bZaSERK10C8THgaTQxF",
+        "._ZN10N67CMatrxw10EKRSfbTPLYEb",
+        "._ZN10N67CMatrxw10lhv_fahWb4ERK10C8THgaTQxF",
+        "._ZN10N67CMatrxw10vZIuMassspERK10C8THgaTQxF",
+        "._ZN10e4ZYfa8PV210_d5_faz0G4ERK10C8THgaTQxFb",
+        "._ZN10vuuHgangcF6RemoveERK10CanTfaz6bZ",
+        "._ZN10zW2NgaU4IK10GBVWfal4a1EP10G0gxgajWBw",
+        "._ZN10zW2NgaU4IK10NIyWfarPS0EPS_",
+        "._ZN10zW2NgaU4IK10WKUVfagmk0EP10G0gxgajWBw",
+        "._ZNK10vy1JgaKVkH10JtTLgaLhUIEPKv"
+      ],
+      "spectron_ea": "0x233114",
+      "spectron_function_end": "0x2332ac",
+      "spectron_metrics": {
+        "basic_block_count": 16,
+        "branch_count": 32,
+        "call_count": 18,
+        "instruction_count": 101,
+        "mnemonic_hash": "c31e27922c82b7a23f6b34e59ecdbd4330fccec3f749270efb41a033f0071a22",
+        "opcode_shape_hash": "0b160523bed9a93ec03cb9aeb07b0373ef16853f65bd60da50edd1fb8a5ddf54",
+        "register_detail_hash": "bbd08f99a838f79da8f2456d7cb402303b4602c2ebf41e07f02b00ed668c4cc6",
+        "register_shape_hash": "568ea7bc4737c5c4528acc42bf5e9143e38bbe18360c547ea5ca795ec09b06e2",
+        "return_count": 1,
+        "shape_hash": "68d9c87aeb062bb357f6863e951ce2a94eb1e0caeae9ec2b9de2db67df212bf6",
+        "size": 408,
+        "string_refs_hash": "c1968df19c0ffce904455d38a4efd1356e7328c8b4cd347d10fef9c620192f81"
+      },
+      "spectron_name": "_ZN10N67CMatrxw10NIyWfarPS0ERK10C8THgaTQxFb",
+      "spectron_string_refs": [
+        "Object doesn't have rights to join class "
+      ],
+      "target_component": "N67CMatrxw obfuscated script-space runtime",
+      "target_evidence_name": "_ZN10N67CMatrxw10NIyWfarPS0ERK10C8THgaTQxFb",
+      "target_pseudocode_sha256": "063c53caae3a04c3be92745f53b75e88cf523a7c3adab515c68de12a7ab9291a"
+    }
+  ],
+  "artifact": "spectron_tscript_space_residual_manual_translation_anchors_20260829",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3_materialized_v2.json",
+    "original_features_sha256": "ec51e399a71083f6131398d87fd8b6cbfd48b255c92ade0156c2b29201b74c00",
+    "semantic_map": "/tmp/semantic_v328_current.json",
+    "semantic_map_sha256": "9a426db009f7d29e1fef0af1dccc89aa8255ad660a9c1eb6c02d834b08513de8",
+    "source_evidence": [
+      {
+        "path": "/tmp/graal-source-tspacescheduling.json",
+        "sha256": "7288a4cdbd641321969a8548c419dd6b7bb027df1a7a48cbbff8def3e6b799d5"
+      },
+      {
+        "path": "/tmp/graal-source-tspacescheduling-extra.json",
+        "sha256": "4c642a3fad7882537edc9ea5acfc13ead376efe5f9f91ad8ebb6a6aabc74fdb2"
+      }
+    ],
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v328_script_machine_static_tail.json",
+    "spectron_features_sha256": "f445b9dce7a43b02ae672739efe76df37dc2963ad581a0a7a0f4376823b387f3",
+    "target_evidence": [
+      {
+        "path": "/tmp/graal-target-tspacescheduling.json",
+        "sha256": "5e2db3aefd7b53d4d301dd4b6c2c0306531e0d77c26cd248d3bdbcf4e9f28287"
+      },
+      {
+        "path": "/tmp/graal-target-tspacescheduling-extra.json",
+        "sha256": "0d54a011efec2a966501a855653f0b2824e10dd2007b0b2f2093dd4f6fe35963"
+      }
+    ]
+  },
+  "interpretation": [
+    "The ilmTfbBpbZ method is an exact normalized match for TScriptSpace_freeSuspendedStates_void. The target's class and container names changed, but the ARM64 body is unchanged at the feature level.",
+    "The NIyWfarPS0 method is the target rebuild of TScriptSpace_joinClass_TString_const_bool. Its added temporary wrapper cleanup expands the body while preserving the source decision tree and class-local sequence.",
+    "The exact freeSuspendedStates match was present only as a medium-confidence automatic shape match, so this pass promotes it after direct Hex-Rays review.",
+    "The neighboring dOBHMaPpiA and XzgcMa1yW9 methods are target-only boundaries and are recorded in the companion descriptive-label artifact rather than being forced into a source correspondence."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for residual TScriptSpace lifecycle and class-management methods",
+  "summary": {
+    "anchor_count": 2,
+    "exact_metric_anchor_count": 1,
+    "high_confidence_count": 2,
+    "layout_change_anchor_count": 1,
+    "new_context_anchor_count": 1,
+    "semantic_promotion_count": 1,
+    "source_pseudocode_count": 2,
+    "target_pseudocode_count": 2
+  }
+}

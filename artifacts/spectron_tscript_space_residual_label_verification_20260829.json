@@ -1,0 +1,10 @@
+{
+  "artifact": "spectron_target_only_label_reopen_verification",
+  "expected_artifact": "spectron_tscript_space_residual_labels_20260829",
+  "failure_count": 0,
+  "failures": [],
+  "label_count": 2,
+  "label_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tscript_space_residual_labels_20260829.json",
+  "verified": true,
+  "verified_name_count": 2
+}

@@ -319,6 +319,57 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v329 TScriptSpace residual comparison
+
+The v329 pass follows the v328 static script-machine tail into the next raw
+`N67CMatrxw` methods. It combines direct Hex-Rays review with the address-
+independent feature records. Two functions receive source-backed aliases and
+two additional target boundaries receive descriptive labels.
+
+| Source role | Spectron address | Applied name | Match class |
+| --- | ---: | --- | --- |
+| `TScriptSpace_freeSuspendedStates_void` | `0x230198` | `v18_TScriptSpace_freeSuspendedStates_void` | exact metrics |
+| `TScriptSpace_joinClass_TString_const_bool` | `0x233114` | `v18_TScriptSpace_joinClass_TString_const_bool` | layout change |
+| target-only `receiveEvent` overload | `0x23332c` | `spectron_TScriptSpace_receiveEvent_TString_const_CanTfaz6bZ_const_TGraalVar` | descriptive label |
+| target-only queue cleanup helper | `0x2339b4` | `spectron_TScriptSpace_clearScheduledEventsAndCancelActions_void` | descriptive label |
+
+The `freeSuspendedStates` row is a 124-byte exact normalized match. Both
+functions walk the receiver's suspended-state list, destroy each machine
+state, clear the list, and null the field. The class-join row preserves the
+source decision tree and class-local placement. Its target body is larger
+because the 2.2 string and list wrappers require explicit temporary
+construction and cleanup.
+
+The raw `0x23332c` body is a distinct overload that takes a `CanTfaz6bZ`
+event-name wrapper. It retains the queue limit, duplicate-event logic,
+priority insertion, and activation behavior of the existing translated
+`receiveEvent` entry. The raw `0x2339b4` body has no arguments, deletes all
+scheduled events, and marks all pending actions canceled. The source database
+has no distinct 1.8 boundaries for either target-only method, so both labels
+stay outside the source mapping count.
+
+The v329 application renamed both source-backed functions and both target-only
+functions, and all four names were verified after reopening. The database has
+11,707 functions, zero audited default names, 6,334 translated `v18_` aliases,
+419 target-only descriptive labels, and 5,782 exact dynamic function starts.
+Dynamic coverage reports 4,673 source-backed aliases and 1,782 exact retained
+names.
+
+The v329 database hash is
+`c84c8bd4abe51302092c82db16003712e870b0ed8a541a9417f6c563f540b6ee`. Its
+records are
+`artifacts/spectron_tscript_space_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_space_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_space_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_tscript_space_residual_labels_20260829.json`,
+`artifacts/spectron_tscript_space_residual_label_application_20260829.json`,
+`artifacts/spectron_tscript_space_residual_label_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v329.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v329.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v329.json`,
+`artifacts/spectron_semantic_translation_v329.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v329.json`.
+
 ## v328 TScriptMachine static-tail comparison
 
 The v328 pass follows the property block into the static script-machine

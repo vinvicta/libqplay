@@ -1,0 +1,34 @@
+{
+  "apply": true,
+  "artifact": "spectron_target_only_label_application",
+  "comments_added": 2,
+  "expected_artifact": "spectron_tscript_space_residual_labels_20260829",
+  "failure_count": 0,
+  "failures": [],
+  "label_count": 2,
+  "label_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_tscript_space_residual_labels_20260829.json",
+  "plan": [
+    {
+      "actual_name_after": "spectron_TScriptSpace_receiveEvent_TString_const_CanTfaz6bZ_const_TGraalVar",
+      "actual_name_before": "_ZN10N67CMatrxw10dOBHMaPpiAERK10C8THgaTQxFRK10CanTfaz6bZP10G0gxgajWBw",
+      "current_name_expected": "_ZN10N67CMatrxw10dOBHMaPpiAERK10C8THgaTQxFRK10CanTfaz6bZP10G0gxgajWBw",
+      "function_end_expected": "0x2338e4",
+      "name_action": "rename-with-spectron-prefix",
+      "proposed_name": "spectron_TScriptSpace_receiveEvent_TString_const_CanTfaz6bZ_const_TGraalVar",
+      "target_ea": "0x23332c"
+    },
+    {
+      "actual_name_after": "spectron_TScriptSpace_clearScheduledEventsAndCancelActions_void",
+      "actual_name_before": "_ZN10N67CMatrxw10XzgcMa1yW9Ev",
+      "current_name_expected": "_ZN10N67CMatrxw10XzgcMa1yW9Ev",
+      "function_end_expected": "0x233a68",
+      "name_action": "rename-with-spectron-prefix",
+      "proposed_name": "spectron_TScriptSpace_clearScheduledEventsAndCancelActions_void",
+      "target_ea": "0x2339b4"
+    }
+  ],
+  "renamed_count": 2,
+  "resolved_count": 2,
+  "save_path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v329_tscript_space_residuals.i64",
+  "saved": true
+}

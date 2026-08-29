@@ -1,0 +1,145 @@
+{
+  "artifact": "spectron_tscript_space_residual_labels_20260829",
+  "context": {
+    "mapping_boundary": "These labels describe target behavior only. They are excluded from the 1.8-to-Spectron source mapping count.",
+    "resolution": "target signatures, class-local order, neighboring translated methods, target control flow, and Hex-Rays pseudocode",
+    "target_component": "N67CMatrxw TScriptSpace residual methods"
+  },
+  "inputs": {
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v328_script_machine_static_tail.json",
+    "spectron_features_sha256": "f445b9dce7a43b02ae672739efe76df37dc2963ad581a0a7a0f4376823b387f3",
+    "target_evidence": "/tmp/graal-target-tspacescheduling-extra.json",
+    "target_evidence_sha256": "0d54a011efec2a966501a855653f0b2824e10dd2007b0b2f2093dd4f6fe35963"
+  },
+  "interpretation": [
+    "The spectron_ prefix marks a target-specific descriptive label rather than a restored 1.8 symbol.",
+    "The receiveEvent overload is kept separate from the existing C8THgaTQxF-to-C8THgaTQxF source-backed alias because its CanTfaz6bZ parameter creates a distinct target ABI boundary.",
+    "The cleanup helper clears all scheduled events and marks pending actions canceled. Its no-argument boundary has no distinct 1.8 source counterpart in the recovered TScriptSpace method set."
+  ],
+  "labels": [
+    {
+      "confidence": "high",
+      "current_name": "_ZN10N67CMatrxw10dOBHMaPpiAERK10C8THgaTQxFRK10CanTfaz6bZP10G0gxgajWBw",
+      "evidence": [
+        "The target signature has a C8THgaTQxF event name, a CanTfaz6bZ event-name wrapper, and a G0gxgajWBw object receiver argument.",
+        "The body duplicates the already translated receiveEvent policy while avoiding the second wrapper conversion, and it is a separate target function boundary immediately before the scheduled-event helpers."
+      ],
+      "function_end": "0x2338e4",
+      "match_kind": "reviewed-tscript-space-target-only-label",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "applies the event queue limit, duplicate-event policy, priority insertion, and script activation to a CanTfaz6bZ event-name argument",
+      "proposed_name": "spectron_TScriptSpace_receiveEvent_TString_const_CanTfaz6bZ_const_TGraalVar",
+      "source_counterpart": null,
+      "source_counterpart_status": "target-only overload; the distinct 1.8 source boundary is not present",
+      "target_default_name": false,
+      "target_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSER10CanTfaz6bZ",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10C8THgaTQxFlsERKS_",
+        "._ZN10CanTfaz6bZ10gwFWfaPxY0Ev",
+        "._ZN10CanTfaz6bZ10lgBtMalYvoES_",
+        "._ZN10CanTfaz6bZ5clearEv",
+        "._ZN10CanTfaz6bZaSEPKc",
+        "._ZN10CanTfaz6bZaSERKS_",
+        "._ZN10FOb5fbmyZ8C1ERK10C8THgaTQxFRK10CanTfaz6bZP10G0gxgajWBw",
+        "._ZN10G0gxgajWBw10Qf4pga_byqEv",
+        "._ZN10N67CMatrxw10vZIuMassspERK10C8THgaTQxF",
+        "._ZN10vuuHgangcFC2ERK10C8THgaTQxFb",
+        "._ZN10vy1JgaKVkH3AddEPv",
+        "._ZN10vy1JgaKVkH6InsertEiPv",
+        "._ZNK10C8THgaTQxF10Ven3gakasYERKS_",
+        "._ZNK10CanTfaz6bZ10fEtHgarybFERKS_",
+        "._ZNK10CanTfaz6bZ6EqualsERKS_",
+        "._ZNK10vuuHgangcF10JtTLgaLhUIERK10CanTfaz6bZ",
+        "._ZNK10vy1JgaKVkHixEi",
+        "._ZeqRK10C8THgaTQxFS1_",
+        "._ZneRK10C8THgaTQxFS1_",
+        "._Znwm",
+        ".__cxa_guard_acquire",
+        ".__cxa_guard_release",
+        ".atexit"
+      ],
+      "target_ea": "0x23332c",
+      "target_evidence_name": "_ZN10N67CMatrxw10dOBHMaPpiAERK10C8THgaTQxFRK10CanTfaz6bZP10G0gxgajWBw",
+      "target_metrics": {
+        "basic_block_count": 58,
+        "branch_count": 120,
+        "call_count": 72,
+        "instruction_count": 359,
+        "mnemonic_hash": "b66c513b0cbc64ec8c3993c896ce0c737e36e42f1567aac0ddfbbb006f2a43b5",
+        "opcode_shape_hash": "b803a389c38696852d510b5cf5e125c01e2ac02d17bce015490937b9d875fe52",
+        "register_detail_hash": "f7d5e861c32d9f7ce50d9319539a4f31ffd0d61b6d2439f251bdc637fd800501",
+        "register_shape_hash": "d8538dfd07022c0c5b1e8fccaedf34ae7de1bd76daac8c119a5e7dd60c37abd5",
+        "return_count": 3,
+        "shape_hash": "5db64afe7f66bb90e63869713d1ec69984bfbd904da91fc246bbc9085d344d9b",
+        "size": 1464,
+        "string_refs_hash": "38c3219e0cc4a0ba087d1463ade6844f2e392fdfbc91fb3ab5c4601f93cd53c4"
+      },
+      "target_pseudocode_sha256": "25e19ed264d8df74068e213b34bfad4983e510305e7259d461dacf7bc4e01467",
+      "target_role": "TScriptSpace receiveEvent overload with a normalized event-name wrapper",
+      "target_string_refs": [
+        " (",
+        "Events number overrun for ",
+        "action",
+        "created",
+        "initialized",
+        "istimeout",
+        "onAllRCChat",
+        "onshow,onhide"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_name": "_ZN10N67CMatrxw10XzgcMa1yW9Ev",
+      "evidence": [
+        "The target body walks the scheduled-event list backwards, destroys each yXeHMaPb_z object, and removes every list entry.",
+        "It then walks the pending-action list and sets the action cancellation byte for every entry, which is broader than the named cancelEvents method beside it."
+      ],
+      "function_end": "0x233a68",
+      "match_kind": "reviewed-tscript-space-target-only-label",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "deletes every scheduled event and marks every pending action as canceled",
+      "proposed_name": "spectron_TScriptSpace_clearScheduledEventsAndCancelActions_void",
+      "source_counterpart": null,
+      "source_counterpart_status": "target-only helper; no distinct 1.8 source boundary was found",
+      "target_default_name": false,
+      "target_direct_call_names": [
+        "._ZN10vy1JgaKVkH6DeleteEi",
+        "._ZN10yXeHMaPb_zD2Ev",
+        "._ZNK10vy1JgaKVkHixEi",
+        "._ZdlPv"
+      ],
+      "target_ea": "0x2339b4",
+      "target_evidence_name": "_ZN10N67CMatrxw10XzgcMa1yW9Ev",
+      "target_metrics": {
+        "basic_block_count": 11,
+        "branch_count": 9,
+        "call_count": 5,
+        "instruction_count": 45,
+        "mnemonic_hash": "fdca55a86a6cfe34f5e2eec0e8e4237f27fbf1d6250412cb315868a1b1431b8d",
+        "opcode_shape_hash": "539b0ea90a82394435a4ceee3d2f56d9884672990e213a384e32177c2d80943b",
+        "register_detail_hash": "3fa4c9850d3d6c3fd537e20cf931e0bb720cfe9fbde8aa69ec4562610e3a4af0",
+        "register_shape_hash": "a65204ae1becedce754b502f63146e5f6abccb83e3ab83d0f8e4fe5d23bec60b",
+        "return_count": 1,
+        "shape_hash": "874eb3208542ee144666fc4dacb4b8e3e843cb13c117819668c056c764cdb170",
+        "size": 180,
+        "string_refs_hash": null
+      },
+      "target_pseudocode_sha256": "c1db4aef7ee8d7e44f8ddfcfa4d087a9674a69c89b72a7590146b22db8d7f1d1",
+      "target_role": "TScriptSpace scheduled-event and pending-action cleanup helper",
+      "target_string_refs": []
+    }
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed descriptive labels for two Spectron 2.2 TScriptSpace boundaries without a demonstrated 1.8 source counterpart",
+  "summary": {
+    "high_confidence_count": 2,
+    "label_count": 2,
+    "source_counterpart_count": 0,
+    "target_default_name_count": 0,
+    "target_only_count": 2
+  }
+}

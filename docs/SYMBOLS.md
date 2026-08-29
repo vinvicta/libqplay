@@ -425,6 +425,46 @@ records are
 `artifacts/spectron_semantic_translation_v326.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v326.json`.
 
+### v329 TScriptSpace residual aliases and labels
+
+The v329 pass adds two reviewed source aliases and two target-only descriptive
+names in the obfuscated `N67CMatrxw` TScriptSpace family:
+
+| Spectron address | Applied name | Evidence role |
+| ---: | --- | --- |
+| `0x230198` | `v18_TScriptSpace_freeSuspendedStates_void` | exact saved-state cleanup |
+| `0x233114` | `v18_TScriptSpace_joinClass_TString_const_bool` | class join and permission path |
+| `0x23332c` | `spectron_TScriptSpace_receiveEvent_TString_const_CanTfaz6bZ_const_TGraalVar` | target-only normalized-name overload |
+| `0x2339b4` | `spectron_TScriptSpace_clearScheduledEventsAndCancelActions_void` | target-only scheduled-action cleanup |
+
+The first row is an exact normalized feature match for source
+`0x227454`. The target method retains the source saved-state loop and field
+layout. The second row corresponds to source `0x229f44`; its target
+`NIyWfarPS0` body keeps the source class lookup, permission test, class join,
+catcher installation, and update action, with extra wrapper cleanup.
+
+The `dOBHMaPpiA` target boundary takes a `CanTfaz6bZ` event-name argument and
+duplicates the existing receive-event queue policy. The `XzgcMa1yW9` boundary
+has no arguments, deletes all scheduled events, and marks all pending actions
+canceled. These are useful target names, but neither claims a distinct 1.8
+symbol.
+
+The v329 database contains 11,707 functions, zero audited default names,
+6,334 translated aliases, 419 target-only descriptive labels, and 5,782 exact
+dynamic function starts. Dynamic coverage reports 4,673 source-backed aliases
+and 1,782 exact retained names. The records are
+`artifacts/spectron_tscript_space_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_space_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_space_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_tscript_space_residual_labels_20260829.json`,
+`artifacts/spectron_tscript_space_residual_label_application_20260829.json`,
+`artifacts/spectron_tscript_space_residual_label_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v329.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v329.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v329.json`,
+`artifacts/spectron_semantic_translation_v329.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v329.json`.
+
 ### v328 TScriptMachine static-tail aliases
 
 The v328 pass adds two reviewed cross-build aliases to the private Spectron

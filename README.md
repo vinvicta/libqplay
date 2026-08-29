@@ -13,7 +13,7 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v328 Spectron database. It
+The current documented translation frontier is the v329 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -647,6 +647,18 @@ target-only overload at `0x221928` converts `C8THgaTQxF` into `CanTfaz6bZ` and
 forwards to the already translated resolver; it remains outside the
 source-backed alias count.
 
+The v329 revision continues through the residual `N67CMatrxw` TScriptSpace
+block. It adds the exact `freeSuspendedStates` alias and the layout-aware
+`joinClass(..., bool)` alias. It also gives two target-only boundaries clear
+descriptive names: a `receiveEvent` overload that accepts the target's
+`CanTfaz6bZ` event-name wrapper, and a no-argument helper that clears scheduled
+events and marks pending actions canceled. The v329 database contains 6,334
+reviewed `v18_` aliases, 419 target-only descriptive labels, 894 retained
+target names, 4,673 source-backed dynamic rows, and 1,782 exact retained
+dynamic names. The source matcher totals are unchanged because the exact
+`freeSuspendedStates` row was promoted after direct review rather than added
+as a new semantic match.
+
 The v328 records are
 `artifacts/spectron_script_machine_static_tail_manual_translation_anchors_20260829.json`,
 `artifacts/spectron_script_machine_static_tail_manual_translation_application_20260829.json`,
@@ -660,6 +672,49 @@ The v328 records are
 The v328 application renamed both target functions and added two evidence
 comments with zero failures. Reopening the fresh copy verified both names.
 This pass changed only the private IDA copy and archive. It did not patch the
+APK, rerun the loopback client, alter TLS behavior, contact a game server, or
+test a live endpoint.
+
+The v329 database is
+`analysis/spectron_libqplay_translated_v329_tscript_space_residuals.i64`
+with SHA-256
+`c84c8bd4abe51302092c82db16003712e870b0ed8a541a9417f6c563f540b6ee`.
+It continues from the v328 database hash
+`01e5dc66c7446c46101a09486f23c1a86822e9973b57b5897fa93a4d1f11526a`.
+The fresh copy contains 11,707 functions and zero audited default names. Its
+name-origin counts are 6,334 translated `v18_` aliases, 419 target-only
+descriptive labels, 894 retained target names, seven JNI exports, and 4,053
+other IDA or PLT names. Dynamic-symbol coverage reports 4,673 source-backed
+aliases, 1,782 exact retained names, 136 other retained target names, seven
+linker-boundary aliases, two target-only descriptive rows, 169 PLT veneers,
+and one undefined `__sF` import without an in-library veneer.
+
+The v329 pass applies two source-backed aliases in the `N67CMatrxw`
+TScriptSpace family. `0x230198` is an exact normalized match for
+`TScriptSpace_freeSuspendedStates_void`. `0x233114` is the target rebuild of
+`TScriptSpace_joinClass_TString_const_bool`; its control flow and string
+literals line up while the target wrapper cleanup makes the body larger. Two
+neighboring target-only methods receive descriptive `spectron_` labels:
+`0x23332c` is a `receiveEvent` overload with a `CanTfaz6bZ` event-name
+argument, and `0x2339b4` clears scheduled events and marks pending actions
+canceled. They are deliberately excluded from the source mapping count.
+
+The v329 records are
+`artifacts/spectron_tscript_space_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_space_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_space_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_tscript_space_residual_labels_20260829.json`,
+`artifacts/spectron_tscript_space_residual_label_application_20260829.json`,
+`artifacts/spectron_tscript_space_residual_label_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v329.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v329.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v329.json`,
+`artifacts/spectron_semantic_translation_v329.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v329.json`.
+
+The v329 application renamed two source-backed target functions and two
+target-only functions, with zero failures. Reopening the fresh copy verified
+all four names. This was a static translation pass only. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
 
@@ -6726,6 +6781,12 @@ proves the local native TLS path, not a current live certificate or service.
   `tools/generate_spectron_translation_checkpoint_v328.py` records the v328
   application, reopen verification, name audit, dynamic-symbol coverage, and
   refreshed semantic map.
+  `tools/generate_spectron_tscript_space_residual_anchors.py` records the v329
+  exact and layout-aware TScriptSpace residual aliases, while
+  `tools/generate_spectron_tscript_space_residual_labels.py` records the two
+  target-only overload and cleanup labels. `tools/generate_spectron_translation_checkpoint_v329.py`
+  records their applications, reopen verification, name audit,
+  dynamic-symbol coverage, and refreshed semantic map.
   `tools/ida_apply_spectron_translation.py` and
   `tools/ida_apply_spectron_manual_anchors.py` write separate disposable IDA
   copies, while the matching verification scripts reopen and check them. The

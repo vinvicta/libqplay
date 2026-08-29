@@ -937,6 +937,119 @@ The expected v326 database hash is
 checkpoint is static evidence only. It does not change the loopback runtime
 result, TLS diagnosis, or live-service boundary.
 
+### v329 TScriptSpace residual translation
+
+The v329 pass continues from the verified v328 database and reviews the next
+raw `N67CMatrxw` TScriptSpace boundaries. The source-backed pairs are
+`0x227454 -> 0x230198` for `freeSuspendedStates` and
+`0x229f44 -> 0x233114` for `joinClass(..., bool)`. The target-only boundaries
+are `0x23332c`, a `receiveEvent` overload with a `CanTfaz6bZ` event-name
+argument, and `0x2339b4`, a no-argument helper that clears scheduled events
+and marks pending actions canceled.
+
+Capture compact pseudocode from disposable copies with:
+
+```bash
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  LIBQPLAY_FUNCTION_EVIDENCE=0x227454,0x229f44,0x229ea0,0x22a0b4,0x22a134,0x22a204 \
+  LIBQPLAY_EVIDENCE_COMPACT=1 \
+  LIBQPLAY_EVIDENCE_OUT=/tmp/graal-source-tspacescheduling.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/libqplay_translated_all_v4.i64 \
+  -s tools/ida_dump_function_evidence.py
+
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  LIBQPLAY_FUNCTION_EVIDENCE=0x230198,0x233070,0x233114,0x2332ac,0x23332c,0x2339b4,0x233a68 \
+  LIBQPLAY_EVIDENCE_COMPACT=1 \
+  LIBQPLAY_EVIDENCE_OUT=/tmp/graal-target-tspacescheduling.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/spectron_libqplay_translated_v328_script_machine_static_tail.i64 \
+  -s tools/ida_dump_function_evidence.py
+```
+
+The source evidence also needs the later source rows at `0x22981c` and
+`0x229898`, and the target evidence needs the later rows at `0x232944` and
+`0x2329c0`, so the companion evidence files used for this checkpoint contain
+those neighboring methods. Export target features from the v328 database to
+`/tmp/spectron_features_v328_script_machine_static_tail.json`, then generate
+the two v329 artifacts:
+
+```bash
+python3 tools/generate_spectron_tscript_space_residual_anchors.py \
+  --original-features /tmp/original_features_v4_v3_materialized_v2.json \
+  --spectron-features /tmp/spectron_features_v328_script_machine_static_tail.json \
+  --semantic-map /tmp/semantic_v328_current.json \
+  --source-evidence /tmp/graal-source-tspacescheduling.json \
+  --source-evidence /tmp/graal-source-tspacescheduling-extra.json \
+  --target-evidence /tmp/graal-target-tspacescheduling.json \
+  --target-evidence /tmp/graal-target-tspacescheduling-extra.json \
+  --original-binary-sha256 9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8 \
+  --spectron-binary-sha256 f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219 \
+  --output artifacts/spectron_tscript_space_residual_manual_translation_anchors_20260829.json
+
+python3 tools/generate_spectron_tscript_space_residual_labels.py \
+  --spectron-features /tmp/spectron_features_v328_script_machine_static_tail.json \
+  --target-evidence /tmp/graal-target-tspacescheduling-extra.json \
+  --spectron-binary-sha256 f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219 \
+  --output artifacts/spectron_tscript_space_residual_labels_20260829.json
+```
+
+Apply the source aliases to a fresh v328 copy with the manual-anchor helper,
+then apply the target-only labels to that result with the target-label helper.
+Reopen the final database with both verification helpers. The expected result
+is two source aliases, two target-only labels, four successful reopen checks,
+and 11,707 functions.
+
+After reopening, refresh the feature export and audits. The expected name
+origins are:
+
+```text
+ida_named_or_other       4053
+target_jni_export           7
+target_named_export       894
+target_only_descriptive   419
+translated_v18_alias     6334
+```
+
+Dynamic coverage remains at 6,770 named rows, 6,600 defined rows, 5,782
+exact function starts, 482 data items, 336 other non-code items, and 170
+undefined imports. It reports 4,673 source-backed aliases, 1,782 exact
+retained names, 136 other retained target names, two target-only descriptive
+rows, seven linker-boundary aliases, 169 PLT veneers, and one undefined
+`__sF` import. The semantic map remains at 3,716 mapped functions, 3,656
+high-confidence matches, 60 medium-confidence matches, 1,020 ambiguous
+functions, and 608 unmatched functions.
+
+Rebuild and validate the v329 checkpoint with:
+
+```bash
+python3 tools/generate_spectron_translation_checkpoint_v329.py \
+  --parent-checkpoint artifacts/spectron_translation_checkpoint_20260829_v328.json \
+  --database /path/to/spectron_libqplay_translated_v329_tscript_space_residuals.i64 \
+  --anchor-artifact artifacts/spectron_tscript_space_residual_manual_translation_anchors_20260829.json \
+  --application-report artifacts/spectron_tscript_space_residual_manual_translation_application_20260829.json \
+  --verification-report artifacts/spectron_tscript_space_residual_manual_translation_verification_20260829.json \
+  --label-artifact artifacts/spectron_tscript_space_residual_labels_20260829.json \
+  --label-application-report artifacts/spectron_tscript_space_residual_label_application_20260829.json \
+  --label-verification-report artifacts/spectron_tscript_space_residual_label_verification_20260829.json \
+  --name-audit artifacts/spectron_name_coverage_audit_v329.json \
+  --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v329.json \
+  --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v329.json \
+  --semantic-map artifacts/spectron_semantic_translation_v329.json \
+  --feature-export artifacts/spectron_features_v329_tscript_space_residuals.json \
+  --output artifacts/spectron_translation_checkpoint_20260829_v329.json
+
+python3 tools/validate_research_archive.py
+```
+
+The expected v329 database hash is
+`c84c8bd4abe51302092c82db16003712e870b0ed8a541a9417f6c563f540b6ee`. This
+is a static translation checkpoint only. It does not patch the APK, rerun the
+loopback client, alter TLS behavior, contact a game server, or test a live
+endpoint.
+
 ### v328 TScriptMachine static-tail translation
 
 The v328 pass continues from the verified v327 database and reviews two
