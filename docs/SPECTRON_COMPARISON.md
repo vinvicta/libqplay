@@ -319,6 +319,55 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v348 RSA public-encryption comparison
+
+The v348 pass resolves the source RSA public-encryption row that remained
+ambiguous after the v170 encryption review. The source function is
+`TEncryption_rsa_encrypt_TString_const_TString_const` at `0xf7218`. The
+target function at `0xf94ac` has raw symbol
+`_ZN10cHovga0n1u10D855FaUMK1ERK10C8THgaTQxFS2_` and now carries the alias
+`v18_TEncryption_rsa_encrypt_TString_const_TString_const`.
+
+| Source address | Target address | Target raw symbol | Applied alias | Evidence |
+| ---: | ---: | --- | --- | --- |
+| `0xf7218` | `0xf94ac` | `_ZN10cHovga0n1u10D855FaUMK1ERK10C8THgaTQxFS2_` | `v18_TEncryption_rsa_encrypt_TString_const_TString_const` | public-key decode, RNG setup, RSA size query, public encryption, append, cleanup |
+
+The source and target are identical across the complete normalized feature
+record: 296 bytes, 74 instructions, 12 basic blocks, 14 branches, seven
+calls, and matching mnemonic, opcode-shape, register-shape, and coarse shape
+hashes. Direct pseudocode resolves the class-local ambiguity. The source uses
+`RsaPublicKeyDecode`, `InitRng`, `RsaEncryptSize`, and `RsaPublicEncrypt`; the
+target calls the corresponding `CyaInt` methods and appends through
+`C8THgaTQxF::f7_SgaGITO`.
+
+The target sibling at `0xf96f8` remains the RSA signing translation from v170.
+It calls `RsaPrivateKeyDecode` and `RsaSSL_Sign`, so it is not a second
+candidate for the public-encryption row. The target xrefs for the new alias
+are `0x236d0` and `0x3895d0`. The source xrefs are `0x20aa0` and `0x3765d0`.
+
+The v348 alias was applied to a fresh v347-derived IDA database and verified
+after reopening. The database has 11,707 functions, 6,441 translated aliases,
+439 target-only descriptive labels, 768 retained target names, 4,796
+source-backed dynamic rows, 1,656 exact retained dynamic names, and 5,782
+exact dynamic function starts. The semantic map now contains 3,722 mapped
+pairs, 3,662 high-confidence pairs, 1,014 remaining automatic ambiguities,
+and 608 unmatched source functions. The database hash is
+`40ff536a25df6624d1ac25bc9052e85d107dddb996dc5e46b791d1df936a75c0`.
+
+The complete v348 records are
+`artifacts/spectron_rsa_encrypt_manual_translation_anchor_20260829.json`,
+`artifacts/spectron_rsa_encrypt_manual_translation_application_20260829.json`,
+`artifacts/spectron_rsa_encrypt_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v348_rsa_encrypt.json`,
+`artifacts/spectron_name_coverage_audit_v348.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v348.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v348.json`,
+`artifacts/spectron_semantic_translation_v348.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v348.json`.
+
+This is an offline comparison and IDA labeling result. It does not change the
+APK or make a live RSA, TLS, or game-server request.
+
 ## v347 encoded string buffer comparison
 
 The v347 pass reviews a target-only string subsystem rather than forcing a

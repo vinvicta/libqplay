@@ -13,7 +13,7 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v347 Spectron database. It
+The current documented translation frontier is the v348 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -78,6 +78,19 @@ dynamic function starts, and the unchanged semantic map of 3,721 mapped pairs.
 All 19 labels were applied and verified after reopening. This is static IDA
 evidence only, and the working loopback runtime and TLS diagnosis were not
 modified.
+
+The v348 revision resolves one remaining source ambiguity in the RSA wrapper
+family. Source `TEncryption_rsa_encrypt_TString_const_TString_const` at
+`0xf7218` is now paired with target `0xf94ac`, whose public-key decode and
+`RsaPublicEncrypt` calls distinguish it from the already translated private-key
+signing sibling at `0xf96f8`. The source and target have identical complete
+normalized ARM64 feature records. The v348 copy contains 6,441 translated
+aliases, 439 target-only descriptive labels, 768 retained target names, 4,796
+source-backed dynamic rows, and 1,656 exact retained dynamic names. Its
+semantic map contains 3,722 mapped pairs, 3,662 high-confidence pairs, 1,014
+remaining automatic ambiguities, and 608 unmatched source functions. The new
+alias was applied and verified after reopening. This is a source-backed IDA
+translation checkpoint only, and it does not alter the working loopback repair.
 
 The v322 revision adds twelve high-confidence TGraalVar runtime aliases. The
 review joins source and target Hex-Rays pseudocode with the G0gxgajWBw
@@ -908,6 +921,57 @@ target-only functions, with zero failures. Reopening the fresh copy verified
 all four names. This was a static translation pass only. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
+
+### v348 Spectron RSA public-encryption wrapper
+
+The v348 pass starts from the verified v347 database and resolves the one
+remaining RSA wrapper ambiguity that could be decided from direct algorithms.
+The source function is
+`TEncryption_rsa_encrypt_TString_const_TString_const` at `0xf7218`. The
+candidate target at `0xf94ac` has raw symbol
+`_ZN10cHovga0n1u10D855FaUMK1ERK10C8THgaTQxFS2_` and is labeled
+`v18_TEncryption_rsa_encrypt_TString_const_TString_const`.
+
+The decision is based on more than address proximity. Both complete feature
+records are 296 bytes, 74 instructions, 12 basic blocks, 14 branches, and
+seven calls, with matching mnemonic, opcode-shape, register-shape, and coarse
+shape hashes. The source pseudocode initializes an RSA key, decodes a public
+key, initializes the RNG, queries the RSA output size, calls
+`RsaPublicEncrypt`, appends a positive result, and frees the key. The target
+does the same work through `CyaInt` and `C8THgaTQxF` wrappers. Its xrefs are
+`0x236d0` and `0x3895d0`.
+
+The adjacent target `0xf96f8` remains the reviewed
+`v18_TEncryption_rsa_sign_TString_const_TString_const` function. It uses
+private-key decoding and `RsaSSL_Sign`, so it cannot be the public-encryption
+counterpart. The earlier semantic map listed the source `0xf7218` row as
+ambiguous between these two target bodies. The v348 anchor removes that one
+ambiguity and promotes only the public-encryption row.
+
+The alias was applied to a fresh v347-derived database and verified after
+reopening. The v348 IDB has 11,707 functions, zero audited default names,
+6,441 translated aliases, 439 target-only descriptive labels, 768 retained
+target names, 4,796 source-backed dynamic rows, 1,656 exact retained dynamic
+names, and 5,782 exact dynamic function starts. Its SHA-256 is
+`40ff536a25df6624d1ac25bc9052e85d107dddb996dc5e46b791d1df936a75c0`.
+
+The v348 records are
+`artifacts/spectron_rsa_encrypt_manual_translation_anchor_20260829.json`,
+`artifacts/spectron_rsa_encrypt_manual_translation_application_20260829.json`,
+`artifacts/spectron_rsa_encrypt_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v348_rsa_encrypt.json`,
+`artifacts/spectron_name_coverage_audit_v348.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v348.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v348.json`,
+`artifacts/spectron_semantic_translation_v348.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v348.json`. The reusable
+scripts are
+`tools/generate_spectron_rsa_encrypt_anchor.py`,
+`tools/carry_forward_spectron_semantic_translation_v348.py`, and
+`tools/generate_spectron_translation_checkpoint_v348.py`.
+
+This was static IDA work only. It did not patch the APK, rerun the loopback
+client, contact a live service, or decrypt an external resource.
 
 ### v347 Spectron encoded string buffer
 

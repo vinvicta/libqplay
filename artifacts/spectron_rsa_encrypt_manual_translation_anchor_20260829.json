@@ -1,0 +1,149 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source body decodes an RSA public key, initializes an RNG, calculates the RSA output size, encrypts the input with the public-key routine, appends a positive result, and frees the key state.",
+        "The target D855FaUMK1 body preserves the same hidden-string-return wrapper, guards, temporary buffers, call order, and cleanup, while using the target C8THgaTQxF and CyaInt wrapper names.",
+        "The adjacent target GjD5FacHl1 method is already the reviewed RSA private-key signing counterpart at 0xf96f8. Its private-key decode and RsaSSL_Sign calls distinguish it from this public-key method.",
+        "The source and target complete normalized ARM64 feature records match. Register-detail allocation differs only because the target rebuilt its string wrapper.",
+        "This row resolves the source 0xf7218 ambiguity between the public-encryption and private-signing target bodies by direct algorithm-specific pseudocode."
+      ],
+      "match_kind": "manual-encryption-rsa-public-exact-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_CyaInt_FreeRsaKey_CyaInt_RsaKey",
+        "plt_CyaInt_InitRsaKey_CyaInt_RsaKey_void",
+        "plt_CyaInt_RsaEncryptSize_CyaInt_RsaKey",
+        "plt_CyaInt_RsaPublicEncrypt_uchar_const_uint_uchar_uint_CyaInt_RsaKey_RNG",
+        "plt_CyaInt_RsaPublicKeyDecode_uchar_const_uint_CyaInt_RsaKey_uint",
+        "plt_InitRng_RNG",
+        "plt_TString_addbuffer_char_const_int"
+      ],
+      "original_ea": "0xf7218",
+      "original_function_end": "0xf7340",
+      "original_metrics": {
+        "basic_block_count": 12,
+        "branch_count": 14,
+        "call_count": 7,
+        "instruction_count": 74,
+        "mnemonic_hash": "e938d85b5f9aaa15363c23cad8116d1554baece87324787c1ddc06b3a5a5c687",
+        "opcode_shape_hash": "9878c8edd650c663edf23a5da1be40ef00a00ca979b9ee375835871fcb53e69e",
+        "register_shape_hash": "d2479e1429ddf4c3276fb550ab4c03827277e35b49efd41981b02c4bef0c914e",
+        "shape_hash": "dabe9927b95dcb728eb2a8ea5441f2c895903d1908097180eed3592c4fe022a6",
+        "size": 296,
+        "string_refs_hash": null
+      },
+      "original_name": "TEncryption_rsa_encrypt_TString_const_TString_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_TEncryption_rsa_encrypt_TString_const_TString_const",
+      "semantic_match_already_present": false,
+      "shape_equal": true,
+      "source_basis": "TEncryption RSA public-key encryption wrapper",
+      "source_pseudocode": "TString *__usercall TEncryption_rsa_encrypt_TString_const_TString_const@<X0>(\n        unsigned int **this@<X0>,\n        unsigned int **a2@<X1>,\n        const TString *a3@<X2>,\n        __int64 a4@<X3>,\n        TString *a5@<X8>)\n{\n  unsigned int *v8; // x2\n  __int64 v9; // x3\n  unsigned int *v10; // x0\n  unsigned int v12; // w0\n  __int64 v13; // x3\n  unsigned int *v14; // x1\n  unsigned int *v15; // x0\n  __int64 v16; // x1\n  int v17; // w2\n  char v18[16]; // [xsp+0h] [xbp+0h] BYREF\n  int v19; // [xsp+44h] [xbp+44h] BYREF\n  _BYTE v20[208]; // [xsp+48h] [xbp+48h] BYREF\n  _BYTE v21[264]; // [xsp+118h] [xbp+118h] BYREF\n\n  *(_QWORD *)a5 = 0;\n  plt_CyaInt_InitRsaKey_CyaInt_RsaKey_void(v20, 0, a3, a4);\n  v19 = 0;\n  v8 = *this;\n  if ( *this )\n  {\n    v9 = *v8;\n    v10 = v8 + 2;\n  }\n  else\n  {\n    v9 = 0;\n    v10 = (unsigned int *)TString_dummystr;\n  }\n  if ( !(unsigned int)plt_CyaInt_RsaPublicKeyDecode_uchar_const_uint_CyaInt_RsaKey_uint(v10, &v19, v20, v9) )\n  {\n    plt_InitRng_RNG(v21);\n    v12 = plt_CyaInt_RsaEncryptSize_CyaInt_RsaKey(v20);\n    v13 = v12;\n    if ( v12 - 1 <= 0x3FF )\n    {\n      v14 = *a2;\n      if ( *a2 )\n      {\n        v15 = v14 + 2;\n        v16 = *v14;\n      }\n      else\n      {\n        v16 = 0;\n        v15 = (unsigned int *)TString_dummystr;\n      }\n      v17 = plt_CyaInt_RsaPublicEncrypt_uchar_const_uint_uchar_uint_CyaInt_RsaKey_RNG(v15, v16, v18, v13, v20, v21);\n      if ( v17 > 0 )\n        plt_TString_addbuffer_char_const_int(a5, v18, v17);\n    }\n  }\n  plt_CyaInt_FreeRsaKey_CyaInt_RsaKey(v20);\n  return a5;\n}\n",
+      "source_xrefs": [
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x20aa0",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x3765d0",
+          "type": 1
+        }
+      ],
+      "spectron_current_name": "_ZN10cHovga0n1u10D855FaUMK1ERK10C8THgaTQxFS2_",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._Z7InitRngP3RNG",
+        "._ZN10C8THgaTQxF10f7_SgaGITOEPKci",
+        "._ZN6CyaInt10FreeRsaKeyEPNS_6RsaKeyE",
+        "._ZN6CyaInt10InitRsaKeyEPNS_6RsaKeyEPv",
+        "._ZN6CyaInt14RsaEncryptSizeEPNS_6RsaKeyE",
+        "._ZN6CyaInt16RsaPublicEncryptEPKhjPhjPNS_6RsaKeyEP3RNG",
+        "._ZN6CyaInt18RsaPublicKeyDecodeEPKhPjPNS_6RsaKeyEj"
+      ],
+      "spectron_ea": "0xf94ac",
+      "spectron_function_end": "0xf95d4",
+      "spectron_metrics": {
+        "basic_block_count": 12,
+        "branch_count": 14,
+        "call_count": 7,
+        "instruction_count": 74,
+        "mnemonic_hash": "e938d85b5f9aaa15363c23cad8116d1554baece87324787c1ddc06b3a5a5c687",
+        "opcode_shape_hash": "9878c8edd650c663edf23a5da1be40ef00a00ca979b9ee375835871fcb53e69e",
+        "register_shape_hash": "d2479e1429ddf4c3276fb550ab4c03827277e35b49efd41981b02c4bef0c914e",
+        "shape_hash": "dabe9927b95dcb728eb2a8ea5441f2c895903d1908097180eed3592c4fe022a6",
+        "size": 296,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x2294",
+      "target_pseudocode": "C8THgaTQxF *__usercall cHovga0n1u::D855FaUMK1@<X0>(\n        unsigned int **this@<X0>,\n        unsigned int **a2@<X1>,\n        C8THgaTQxF *a3@<X8>)\n{\n  unsigned int *v7; // x2\n  __int64 v8; // x3\n  unsigned int *v9; // x0\n  unsigned int v11; // w0\n  __int64 v12; // x3\n  unsigned int *v13; // x1\n  unsigned int *v14; // x0\n  __int64 v15; // x1\n  int v16; // w2\n  char v17[16]; // [xsp+0h] [xbp+0h] BYREF\n  int v18; // [xsp+44h] [xbp+44h] BYREF\n  _BYTE v19[208]; // [xsp+48h] [xbp+48h] BYREF\n  _BYTE v20[264]; // [xsp+118h] [xbp+118h] BYREF\n\n  *(_QWORD *)a3 = 0;\n  CyaInt::InitRsaKey(v19, 0);\n  v18 = 0;\n  v7 = *this;\n  if ( *this )\n  {\n    v8 = *v7;\n    v9 = v7 + 2;\n  }\n  else\n  {\n    v8 = 0;\n    v9 = (unsigned int *)O_mdJaBYRE;\n  }\n  if ( !(unsigned int)CyaInt::RsaPublicKeyDecode(v9, &v18, v19, v8) )\n  {\n    InitRng(v20);\n    v11 = CyaInt::RsaEncryptSize(v19);\n    v12 = v11;\n    if ( v11 - 1 <= 0x3FF )\n    {\n      v13 = *a2;\n      if ( *a2 )\n      {\n        v14 = v13 + 2;\n        v15 = *v13;\n      }\n      else\n      {\n        v15 = 0;\n        v14 = (unsigned int *)O_mdJaBYRE;\n      }\n      v16 = CyaInt::RsaPublicEncrypt(v14, v15, v17, v12, v19, v20);\n      if ( v16 > 0 )\n        C8THgaTQxF::f7_SgaGITO(a3, v17, v16);\n    }\n  }\n  CyaInt::FreeRsaKey(v19);\n  return a3;\n}\n",
+      "target_xrefs": [
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x236d0",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x3895d0",
+          "type": 1
+        }
+      ]
+    }
+  ],
+  "artifact": "spectron_rsa_encrypt_manual_translation_anchor_20260829",
+  "context": {
+    "resolution": "algorithm-specific RSA public-key pseudocode, the already reviewed private-signing sibling, class-local order, and exact normalized function features",
+    "source_classes": [
+      "TEncryption"
+    ],
+    "target_class_clusters": [
+      "cHovga0n1u"
+    ]
+  },
+  "inputs": {
+    "dynamic_symbol_coverage": "artifacts/spectron_dynamic_symbol_coverage_audit_v347.json",
+    "dynamic_symbol_coverage_sha256": "eebe9d04c15b281c2c922d4246af38f8b7c6f20e616e6fdc0df406a4cb65890e",
+    "original_binary": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so",
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_evidence": "/tmp/graal-source-rsa-v347.json",
+    "original_evidence_sha256": "dd66c4194195899797a29842561ed6f44f831b2644ba1f6b10d2246ca2074a26",
+    "original_features": "/tmp/original_features_v3_current.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_translation_v345.json",
+    "semantic_map_sha256": "d701a341cfbb98f93a28769977d02a79ab7892e2d0f480b91cab9cddcb544eda",
+    "spectron_binary": "/tmp/spectron-2.2-arm64/libqplay.so",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_evidence": "/tmp/graal-target-rsa-v347.json",
+    "spectron_evidence_sha256": "9a443bede84700a0d5cb041b632ff51acc8208ff4f65422dd07e29d8e0e2b7c5",
+    "spectron_features": "artifacts/spectron_features_v347_encoded_string.json",
+    "spectron_features_sha256": "f980d27bc2ca328188becf178d8575337e0300665f2eda6448ab2cb4ae16c174"
+  },
+  "interpretation": [
+    "This is a reviewed semantic correspondence, not a claim that stripped Spectron debug symbols were recovered.",
+    "The source and target rows match across the complete normalized feature set. Public-key decode and encryption calls resolve the ambiguity with the target private-signing sibling.",
+    "The v18_ alias is scoped to the exact hashed Spectron library in the inputs and is an IDA analysis overlay only."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchor for the TEncryption RSA public-encryption wrapper",
+  "summary": {
+    "address_delta_groups": {
+      "+0x2294": 1
+    },
+    "anchor_count": 1,
+    "exact_shape_anchor_count": 1,
+    "high_confidence_count": 1,
+    "layout_change_anchor_count": 0,
+    "new_context_anchor_count": 1,
+    "target_default_name_count": 0
+  }
+}

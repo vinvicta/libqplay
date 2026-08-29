@@ -3035,6 +3035,32 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v348 RSA public-encryption translation
+
+The v348 checkpoint is a static continuation from v347. It resolves the
+source `TEncryption_rsa_encrypt_TString_const_TString_const` row at
+`0xf7218` to target `0xf94ac`, raw symbol
+`_ZN10cHovga0n1u10D855FaUMK1ERK10C8THgaTQxFS2_`, and applies the alias
+`v18_TEncryption_rsa_encrypt_TString_const_TString_const`.
+
+The source and target bodies are both 296 bytes, 74 instructions, 12 basic
+blocks, 14 branches, and seven calls, with identical normalized feature hashes.
+The direct algorithm is decisive: both decode a public RSA key, initialize an
+RNG, query the RSA output size, call public-key encryption, append a positive
+result, and free the key. The nearby target `0xf96f8` is still the private-key
+signing row because it calls `RsaPrivateKeyDecode` and `RsaSSL_Sign`.
+
+The new alias was applied to a fresh v347-derived IDB and verified after
+reopening. The v348 database has 11,707 functions, zero audited default names,
+6,441 translated aliases, 439 target-only descriptive labels, 768 retained
+target names, 4,796 source-backed dynamic rows, 1,656 exact retained dynamic
+names, and 5,782 exact dynamic function starts. The semantic map now has 3,722
+mapped pairs. The database SHA-256 is
+`40ff536a25df6624d1ac25bc9052e85d107dddb996dc5e46b791d1df936a75c0`.
+
+The v348 pass has no runtime effect. It did not patch the APK, rerun the
+loopback client, contact a live service, or change the TLS diagnosis.
+
 ## Spectron 2.2 v347 encoded string residual
 
 The v347 checkpoint is a static continuation from v346. It labels 19 target

@@ -937,6 +937,143 @@ The expected v326 database hash is
 checkpoint is static evidence only. It does not change the loopback runtime
 result, TLS diagnosis, or live-service boundary.
 
+### v348 RSA public-encryption translation
+
+The v348 pass is a static IDA checkpoint. It starts from the verified v347
+database and resolves one source ambiguity using direct RSA algorithm calls.
+The source row is `TEncryption_rsa_encrypt_TString_const_TString_const` at
+`0xf7218`; the target row is `0xf94ac`, and the applied alias is
+`v18_TEncryption_rsa_encrypt_TString_const_TString_const`.
+
+The target function has raw symbol
+`_ZN10cHovga0n1u10D855FaUMK1ERK10C8THgaTQxFS2_`. The source and target feature
+records are identical after relocation normalization: 296 bytes, 74
+instructions, 12 basic blocks, 14 branches, seven calls, and matching
+mnemonic, opcode-shape, register-shape, and coarse shape hashes. The source
+and target pseudocode both use public-key decode, RNG setup, RSA output-size
+calculation, public encryption, output append, and key cleanup. The sibling at
+target `0xf96f8` remains the private-signing row because its body uses
+`RsaPrivateKeyDecode` and `RsaSSL_Sign`.
+
+The anchor generator validates the source and target feature rows, both
+pseudocode evidence records, the raw target symbol, the expected parent
+ambiguity, and the `+0x2294` address delta:
+
+```bash
+python3 tools/generate_spectron_rsa_encrypt_anchor.py \
+  --original-features /tmp/original_features_v3_current.json \
+  --spectron-features artifacts/spectron_features_v347_encoded_string.json \
+  --semantic-map artifacts/spectron_semantic_translation_v345.json \
+  --source-evidence /tmp/graal-source-rsa-v347.json \
+  --target-evidence /tmp/graal-target-rsa-v347.json \
+  --original-binary-sha256 9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8 \
+  --spectron-binary-sha256 f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219 \
+  --output artifacts/spectron_rsa_encrypt_manual_translation_anchor_20260829.json
+```
+
+Apply the one-row anchor to a fresh v347-derived IDA copy. The input and
+output paths must differ:
+
+```bash
+cp /path/to/analysis/spectron_libqplay_translated_v347_encoded_string.i64 \
+  /tmp/spectron_v348_anchor_apply_input.i64
+
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_MANUAL_ANCHORS=/path/to/libqplay/artifacts/spectron_rsa_encrypt_manual_translation_anchor_20260829.json \
+  SPECTRON_MANUAL_EXPECTED_ARTIFACT=spectron_rsa_encrypt_manual_translation_anchor_20260829 \
+  SPECTRON_MANUAL_APPLY=1 \
+  SPECTRON_MANUAL_SAVE_PATH=/path/to/analysis/spectron_libqplay_translated_v348_rsa_encrypt.i64 \
+  SPECTRON_MANUAL_REPORT=/path/to/libqplay/artifacts/spectron_rsa_encrypt_manual_translation_application_20260829.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /tmp/spectron_v348_anchor_apply_input.i64 \
+  -s tools/ida_apply_spectron_manual_anchors.py
+
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_MANUAL_ANCHORS=/path/to/libqplay/artifacts/spectron_rsa_encrypt_manual_translation_anchor_20260829.json \
+  SPECTRON_MANUAL_EXPECTED_ARTIFACT=spectron_rsa_encrypt_manual_translation_anchor_20260829 \
+  SPECTRON_MANUAL_VERIFY_REPORT=/path/to/libqplay/artifacts/spectron_rsa_encrypt_manual_translation_verification_20260829.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/analysis/spectron_libqplay_translated_v348_rsa_encrypt.i64 \
+  -s tools/ida_verify_spectron_manual_anchors.py
+```
+
+The application report must show one resolved function, one rename, one
+evidence comment, zero failures, and a successful save. The reopen report must
+show one verified name in an 11,707-function database.
+
+Refresh the feature and name-coverage audits against the saved v348 database:
+
+```bash
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  LIBQPLAY_FEATURES_OUT=/path/to/libqplay/artifacts/spectron_features_v348_rsa_encrypt.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/analysis/spectron_libqplay_translated_v348_rsa_encrypt.i64 \
+  -s tools/ida_export_function_features.py
+
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_NAME_COVERAGE_OUTPUT=/path/to/libqplay/artifacts/spectron_name_coverage_audit_v348.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/analysis/spectron_libqplay_translated_v348_rsa_encrypt.i64 \
+  -s tools/ida_audit_spectron_name_coverage.py
+
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_BOUNDARY_AUDIT_OUTPUT=/path/to/libqplay/artifacts/spectron_dynamic_symbol_boundaries_v348.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/analysis/spectron_libqplay_translated_v348_rsa_encrypt.i64 \
+  -s tools/ida_audit_dynamic_symbol_boundaries.py
+
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_DYNAMIC_SYMBOL_COVERAGE_OUTPUT=/path/to/libqplay/artifacts/spectron_dynamic_symbol_coverage_audit_v348.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/analysis/spectron_libqplay_translated_v348_rsa_encrypt.i64 \
+  -s tools/ida_audit_spectron_dynamic_symbol_coverage.py
+```
+
+Carry forward the semantic map from v345 while recording the one reviewed
+source-backed addition:
+
+```bash
+python3 tools/carry_forward_spectron_semantic_translation_v348.py \
+  --parent-map artifacts/spectron_semantic_translation_v345.json \
+  --target-features artifacts/spectron_features_v348_rsa_encrypt.json \
+  --anchor-artifact artifacts/spectron_rsa_encrypt_manual_translation_anchor_20260829.json \
+  --output artifacts/spectron_semantic_translation_v348.json
+```
+
+The expected v348 map contains 3,722 mapped pairs, 3,662 high-confidence
+pairs, 60 medium-confidence pairs, 1,014 remaining ambiguities, and 608
+unmatched source functions. Build the strict checkpoint and run the archive
+validator:
+
+```bash
+python3 tools/generate_spectron_translation_checkpoint_v348.py \
+  --parent-checkpoint artifacts/spectron_translation_checkpoint_20260829_v347.json \
+  --database /path/to/analysis/spectron_libqplay_translated_v348_rsa_encrypt.i64 \
+  --label-artifact artifacts/spectron_rsa_encrypt_manual_translation_anchor_20260829.json \
+  --application-report artifacts/spectron_rsa_encrypt_manual_translation_application_20260829.json \
+  --verification-report artifacts/spectron_rsa_encrypt_manual_translation_verification_20260829.json \
+  --name-audit artifacts/spectron_name_coverage_audit_v348.json \
+  --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v348.json \
+  --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v348.json \
+  --semantic-map artifacts/spectron_semantic_translation_v348.json \
+  --feature-export artifacts/spectron_features_v348_rsa_encrypt.json \
+  --output artifacts/spectron_translation_checkpoint_20260829_v348.json
+
+python3 tools/validate_research_archive.py
+```
+
+The expected v348 database hash is
+`40ff536a25df6624d1ac25bc9052e85d107dddb996dc5e46b791d1df936a75c0`. This
+checkpoint is static IDA evidence only. It does not patch the APK, rerun the
+loopback client, alter TLS behavior, contact a live endpoint, or request an
+external resource.
+
 ### v347 target-only encoded string buffer
 
 The v347 pass is static IDA work only. It starts from the verified v346 IDB

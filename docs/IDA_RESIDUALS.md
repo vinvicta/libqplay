@@ -800,6 +800,51 @@ generators are
 `tools/generate_spectron_format_parameters_property_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v326.py`.
 
+### v348 source-backed RSA public-encryption wrapper
+
+The v348 pass starts from the verified v347 database and resolves one source
+function that remained ambiguous after the broad translation pass. Source
+`TEncryption_rsa_encrypt_TString_const_TString_const` at `0xf7218` is paired
+with target `0xf94ac`, raw symbol
+`_ZN10cHovga0n1u10D855FaUMK1ERK10C8THgaTQxFS2_`, and renamed
+`v18_TEncryption_rsa_encrypt_TString_const_TString_const`.
+
+The match is an exact normalized feature match: both rows are 296 bytes, 74
+instructions, 12 basic blocks, 14 branches, and seven calls, with equal
+mnemonic, opcode-shape, register-shape, and coarse shape hashes. Direct
+pseudocode supplies the semantic discriminator. The source and target both
+initialize an RSA key, decode a public key, initialize the RNG, query the
+output size, call the public-key encryption routine, append positive output,
+and free the key. The wrappers differ only in their target-side names and
+`C8THgaTQxF` string-return representation.
+
+The neighboring target `0xf96f8` remains the private-key signing counterpart.
+Its `RsaPrivateKeyDecode` and `RsaSSL_Sign` calls rule it out as the source
+public-encryption row. The source `0xf7218` ambiguity is therefore resolved
+without using a positional guess. The anchor records target xrefs at
+`0x236d0` and `0x3895d0`, and the source xrefs at `0x20aa0` and `0x3765d0`.
+
+The alias was applied to a fresh v347-derived database and verified after
+reopening. The v348 copy has 11,707 functions and zero audited default names,
+with 6,441 translated aliases, 439 target-only descriptive labels, 768
+retained target names, 4,796 source-backed dynamic rows, 1,656 exact retained
+dynamic names, and 5,782 exact dynamic function starts. The database hash is
+`40ff536a25df6624d1ac25bc9052e85d107dddb996dc5e46b791d1df936a75c0`.
+
+The machine-readable records are
+`artifacts/spectron_rsa_encrypt_manual_translation_anchor_20260829.json`,
+`artifacts/spectron_rsa_encrypt_manual_translation_application_20260829.json`,
+`artifacts/spectron_rsa_encrypt_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v348_rsa_encrypt.json`,
+`artifacts/spectron_name_coverage_audit_v348.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v348.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v348.json`,
+`artifacts/spectron_semantic_translation_v348.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v348.json`.
+
+The v348 pass is static. It did not patch the APK, rerun the loopback client,
+contact a live endpoint, or change the TLS diagnosis.
+
 ### v347 target-only encoded string buffer
 
 The v347 pass starts from the verified v346 database and reviews 19 target

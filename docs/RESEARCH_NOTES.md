@@ -261,6 +261,53 @@ This pass changed only the private IDA copy and archive. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
 
+## 2026-08-29: RSA public-encryption wrapper, v348
+
+The v348 review starts from the verified v347 IDA database and resolves the
+remaining ambiguity in the TEncryption RSA pair. The original source row is
+`TEncryption_rsa_encrypt_TString_const_TString_const` at `0xf7218`. The
+target candidate is `0xf94ac`, raw symbol
+`_ZN10cHovga0n1u10D855FaUMK1ERK10C8THgaTQxFS2_`, and the applied alias is
+`v18_TEncryption_rsa_encrypt_TString_const_TString_const`.
+
+The source and target feature rows match completely after relocation
+normalization: 296 bytes, 74 instructions, 12 basic blocks, 14 branches,
+seven calls, and equal mnemonic, opcode-shape, register-shape, and coarse
+shape hashes. The source pseudocode uses `RsaPublicKeyDecode`, `InitRng`,
+`RsaEncryptSize`, and `RsaPublicEncrypt`, then appends a positive result and
+frees the RSA key. The target body preserves that call order through `CyaInt`
+and `C8THgaTQxF` wrappers.
+
+This algorithm check matters because the neighboring target `0xf96f8` has
+already been assigned to the source RSA signing row. It uses
+`RsaPrivateKeyDecode` and `RsaSSL_Sign`, so it is not the public-encryption
+counterpart. The source row had been listed as ambiguous between the two
+targets. The v348 anchor resolves only this one row, which raises the semantic
+map to 3,722 mapped pairs, 3,662 high-confidence pairs, and 1,014 remaining
+automatic ambiguities.
+
+The alias was applied to a fresh v347-derived copy and verified after
+reopening. The v348 database has 11,707 functions, zero audited default names,
+6,441 translated aliases, 439 target-only descriptive labels, 768 retained
+target names, 4,796 source-backed dynamic rows, 1,656 exact retained dynamic
+names, and 5,782 exact dynamic function starts. The saved IDB is
+`analysis/spectron_libqplay_translated_v348_rsa_encrypt.i64` with SHA-256
+`40ff536a25df6624d1ac25bc9052e85d107dddb996dc5e46b791d1df936a75c0`.
+
+The machine-readable records are
+`artifacts/spectron_rsa_encrypt_manual_translation_anchor_20260829.json`,
+`artifacts/spectron_rsa_encrypt_manual_translation_application_20260829.json`,
+`artifacts/spectron_rsa_encrypt_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v348_rsa_encrypt.json`,
+`artifacts/spectron_name_coverage_audit_v348.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v348.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v348.json`,
+`artifacts/spectron_semantic_translation_v348.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v348.json`.
+
+All v348 work was static. No APK patch, runtime replay, live endpoint, or
+external resource request was made.
+
 ## 2026-08-29: Encoded string buffer, v347
 
 The v347 review starts from the verified v346 database and moves to a

@@ -1801,6 +1801,28 @@ database with zero failures. The v283 checkpoint is
 `artifacts/spectron_translation_checkpoint_20260828_v283.json`; it records
 11,696 functions and 594 remaining default `sub_` names.
 
+## Current Spectron v348 RSA public-encryption alias
+
+The v348 source-backed alias closes one ambiguity in the retained RSA wrapper
+family. It is applied to the target address below after direct pseudocode and
+complete normalized feature comparison.
+
+| Source function | Source EA | Target EA | Target raw symbol | Applied target name | Role |
+| --- | ---: | ---: | --- | --- | --- |
+| `TEncryption_rsa_encrypt_TString_const_TString_const` | `0xf7218` | `0xf94ac` | `_ZN10cHovga0n1u10D855FaUMK1ERK10C8THgaTQxFS2_` | `v18_TEncryption_rsa_encrypt_TString_const_TString_const` | RSA public-key decode and encryption wrapper |
+
+The source and target bodies are each 296 bytes, 74 instructions, 12 basic
+blocks, 14 branches, and seven calls, with matching normalized hashes. The
+source calls `RsaPublicKeyDecode`, `InitRng`, `RsaEncryptSize`, and
+`RsaPublicEncrypt`; the target calls the corresponding `CyaInt` wrappers and
+appends through `C8THgaTQxF::f7_SgaGITO`. The target sibling at `0xf96f8`
+remains the RSA signing alias because it uses private-key decoding and
+`RsaSSL_Sign`.
+
+This row was promoted from the parent ambiguity list using algorithm-specific
+pseudocode, class-local context, xrefs, and feature equality. It is not a
+name recovered from the stripped target's original debug information.
+
 ## Current Spectron libjpeg coefficient-controller labels
 
 The v284 pass translated the seven retained function boundaries around the
