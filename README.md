@@ -262,7 +262,7 @@ semantic map now contains 3,718 mapped source-target pairs, including these
 two manually resolved rows, and 1,018 remaining automatic ambiguities. It has
 11,707 functions, zero audited default names, and 5,782 exact dynamic
 function starts. The saved database hash is
-`f8ce3bcf1d63ad596c64525e2621f1c3e9d2bbb544eccfedb36ade2b5d6baaf3`.
+`d7d4887e86d0570d7f2518bd545d3caa139aa0a1c5e0ca5c39d5c00b50b7669a`.
 This is a static IDA checkpoint. It did not patch the APK, rerun the loopback
 client, contact a game server, or test a live endpoint.
 

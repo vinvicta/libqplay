@@ -3061,7 +3061,7 @@ still resolve to exact IDA function starts. The semantic map reports 3,718
 mapped source-target pairs and 1,018 remaining automatic ambiguities.
 
 Its SHA-256 is
-`f8ce3bcf1d63ad596c64525e2621f1c3e9d2bbb544eccfedb36ade2b5d6baaf3`.
+`d7d4887e86d0570d7f2518bd545d3caa139aa0a1c5e0ca5c39d5c00b50b7669a`.
 The records are
 `artifacts/spectron_resource_stream_residual_manual_translation_anchors_20260829.json`,
 `artifacts/spectron_resource_stream_residual_manual_translation_application_20260829.json`,

@@ -836,7 +836,7 @@ retained dynamic names, and 5,782 exact dynamic function starts.
 
 The saved database is
 `analysis/spectron_libqplay_translated_v344_resource_stream.i64` with SHA-256
-`f8ce3bcf1d63ad596c64525e2621f1c3e9d2bbb544eccfedb36ade2b5d6baaf3`. The
+`d7d4887e86d0570d7f2518bd545d3caa139aa0a1c5e0ca5c39d5c00b50b7669a`. The
 machine-readable records are
 `artifacts/spectron_resource_stream_residual_manual_translation_anchors_20260829.json`,
 `artifacts/spectron_resource_stream_residual_manual_translation_application_20260829.json`,
