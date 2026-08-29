@@ -425,6 +425,44 @@ records are
 `artifacts/spectron_semantic_translation_v326.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v326.json`.
 
+### v346 target-only resource path helper
+
+The v346 pass adds one reviewed descriptive label to the private Spectron
+IDA database. The raw target symbol remains visible beside the applied name.
+
+| Spectron address | Raw target symbol | Applied label | Recovered role |
+| ---: | --- | --- | --- |
+| `0xefbcc` | `_ZN10f6WHgaQkAF10iaBygafTIxERK10C8THgaTQxFb` | `spectron_TResourceFunctions_resolveResourcePath_TString_const_bool` | absolute or level-relative resource path, optional update, and download fallback |
+
+The function is a defined global `FUNC` dynamic symbol with size `0x104`.
+Its only incoming reference is the dynamic-symbol record at `0x154b0`, and
+the review found no code caller. The target already has a separate
+source-backed `v18_TResourceFunctions_getGameFile_TString_const_bool` alias
+at `0xefe78`. Because the new helper has no exact or normalized feature match
+in the 1.8 inventory, it is recorded as target-only rather than as a second
+`getGameFile` mapping.
+
+The label was applied and verified after reopening the v346 database. The
+database has 11,707 functions, zero audited default names, 6,440 translated
+aliases, 420 target-only descriptive labels, 788 retained target names, seven
+JNI exports, and 4,052 other IDA or PLT names. Dynamic coverage reports 4,795
+source-backed rows, 1,676 exact retained dynamic names, three target-only
+descriptive rows, and 5,782 exact dynamic function starts.
+
+The v346 records are
+`artifacts/spectron_resource_path_helper_target_only_labels_20260829.json`,
+`artifacts/spectron_resource_path_helper_target_only_label_application_20260829.json`,
+`artifacts/spectron_resource_path_helper_target_only_label_verification_20260829.json`,
+`artifacts/spectron_features_v346_resource_path_helper.json`,
+`artifacts/spectron_name_coverage_audit_v346.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v346.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v346.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v346.json`. The saved
+database is
+`analysis/spectron_libqplay_translated_v346_resource_path_helper.i64` with
+SHA-256
+`bfb7f36be1a572c5428192c90ee3288035805a2e34b7ead439437c4b1ccf2392`.
+
 ### v345 resource-object static aliases
 
 The v345 pass adds three semantic aliases to the private Spectron IDA

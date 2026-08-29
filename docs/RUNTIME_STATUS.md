@@ -3035,6 +3035,32 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v346 resource path helper residual
+
+The v346 checkpoint adds one descriptive target-only label at `0xefbcc`, raw
+symbol `_ZN10f6WHgaQkAF10iaBygafTIxERK10C8THgaTQxFb`. Static pseudocode shows a
+resource path and update helper. It chooses an absolute or level-relative
+resource, checks loadability, optionally updates an existing object or starts
+a missing download, and returns the composed local path through a hidden
+`TString` output.
+
+This helper is distinct from the target's existing
+`v18_TResourceFunctions_getGameFile_TString_const_bool` alias at `0xefe78`.
+It has no exact or normalized feature match in the 1.8 inventory and no code
+caller beyond its dynamic-symbol data record, so the applied name is
+`spectron_TResourceFunctions_resolveResourcePath_TString_const_bool` rather
+than a second source-backed alias.
+
+The label was applied to the v345 IDB and verified after reopening. The v346
+database has 11,707 functions, zero audited default names, 6,440 translated
+aliases, 420 target-only descriptive labels, 4,795 source-backed dynamic
+rows, 1,676 exact retained dynamic names, and 5,782 exact dynamic function
+starts. The semantic map is unchanged. Its SHA-256 is
+`bfb7f36be1a572c5428192c90ee3288035805a2e34b7ead439437c4b1ccf2392`.
+
+This is static evidence only. It did not change the verified APK, the
+loopback runtime, the connector TLS diagnosis, or the live-service boundary.
+
 ## Spectron 2.2 v345 resource-object static residuals
 
 The v345 static checkpoint translates three adjacent resource-runtime helpers:

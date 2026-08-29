@@ -261,6 +261,40 @@ This pass changed only the private IDA copy and archive. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
 
+## 2026-08-29: Resource path helper, v346
+
+The v346 review adds one target-only label in the resource-runtime block.
+Target `0xefbcc` has raw symbol
+`_ZN10f6WHgaQkAF10iaBygafTIxERK10C8THgaTQxFb` and is now labeled
+`spectron_TResourceFunctions_resolveResourcePath_TString_const_bool`.
+
+The 260-byte body takes a resource-functions receiver, an update boolean, and
+a hidden `TString` return buffer. It chooses an absolute or level-relative
+resource, checks loadability, optionally refreshes an existing resource or
+requests a missing download, and appends the stored path and resource name to
+the output. The only incoming xref is the dynamic-symbol data record at
+`0x154b0`; no code caller was found.
+
+This is related to the source `getGameFile` and absolute-path lookup methods,
+but it is not a duplicate source mapping. The target's existing `0xefe78`
+body already carries the reviewed
+`v18_TResourceFunctions_getGameFile_TString_const_bool` alias. The new helper
+has no exact or normalized feature match in the 1.8 inventory, so the
+`spectron_` name records a target-specific description and leaves the
+semantic map unchanged.
+
+The label application and reopen verification both passed. The v346 database
+contains 11,707 functions, zero audited default names, 6,440 translated
+aliases, 420 target-only descriptive labels, 4,795 source-backed dynamic
+rows, 1,676 exact retained dynamic names, and 5,782 exact dynamic function
+starts. The saved IDB is
+`analysis/spectron_libqplay_translated_v346_resource_path_helper.i64` with
+SHA-256
+`bfb7f36be1a572c5428192c90ee3288035805a2e34b7ead439437c4b1ccf2392`.
+
+All v346 work was static. No APK patch, runtime replay, live endpoint, or
+external resource request was made.
+
 ## 2026-08-29: Resource-object static helpers, v345
 
 The v345 review moves one small cluster earlier in the resource-runtime

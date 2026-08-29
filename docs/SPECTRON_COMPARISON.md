@@ -319,6 +319,48 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v346 resource path helper comparison
+
+The v346 pass reviews a target resource-runtime function that has no safe
+source-backed counterpart. The target address is `0xefbcc`, raw symbol
+`_ZN10f6WHgaQkAF10iaBygafTIxERK10C8THgaTQxFb`, and the applied descriptive
+label is `spectron_TResourceFunctions_resolveResourcePath_TString_const_bool`.
+
+| Target address | Raw target symbol | Applied label | Comparison result |
+| ---: | --- | --- | --- |
+| `0xefbcc` | `_ZN10f6WHgaQkAF10iaBygafTIxERK10C8THgaTQxFb` | `spectron_TResourceFunctions_resolveResourcePath_TString_const_bool` | target-only resource path, update, and download helper |
+
+The body is 260 bytes with 65 instructions, 12 basic blocks, 22 branches,
+and 12 calls. It shares high-level path construction with source
+`TResourceFunctions_getGameFile_TString_const_bool` at `0xeec84`, and its
+absolute lookup is related to source
+`TResourceFunctions_getLevelFileResourceAbsPath_TString_const` at `0xedf40`.
+However, the target already has a separate `getGameFile` body at `0xefe78`
+with the reviewed source-backed alias. The new helper has no exact, 11-field
+normalized, or 10-field normalized feature match in the 1.8 inventory. Its
+only incoming reference is the dynamic-symbol record at `0x154b0`, so no code
+caller is inferred.
+
+The label was applied and verified after reopening the v346 IDA database. The
+semantic map is carried forward unchanged. The v346 database has 11,707
+functions, 6,440 translated aliases, 420 target-only descriptive labels,
+4,795 source-backed dynamic rows, 1,676 exact retained dynamic names, and
+5,782 exact dynamic function starts. Its SHA-256 is
+`bfb7f36be1a572c5428192c90ee3288035805a2e34b7ead439437c4b1ccf2392`.
+
+The complete v346 records are
+`artifacts/spectron_resource_path_helper_target_only_labels_20260829.json`,
+`artifacts/spectron_resource_path_helper_target_only_label_application_20260829.json`,
+`artifacts/spectron_resource_path_helper_target_only_label_verification_20260829.json`,
+`artifacts/spectron_features_v346_resource_path_helper.json`,
+`artifacts/spectron_name_coverage_audit_v346.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v346.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v346.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v346.json`.
+
+This comparison is static evidence. It does not change the runtime diagnosis,
+patch the APK, or contact a live endpoint.
+
 ## v345 resource-object static comparison
 
 The v345 pass compares the three raw target helpers immediately before the

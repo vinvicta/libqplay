@@ -13,7 +13,7 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v345 Spectron database. It
+The current documented translation frontier is the v346 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -50,6 +50,16 @@ contains 6,440 reviewed `v18_` aliases, 4,795 source-backed dynamic rows, and
 1,677 exact retained dynamic names. Its semantic map contains 3,721 mapped
 pairs, 3,661 high-confidence pairs, 1,015 remaining automatic ambiguities,
 and 608 unmatched source functions.
+
+The v346 revision adds one reviewed target-only label for the exported
+resource path, update, and download helper at target `0xefbcc`. It is kept
+separate from the existing source-backed `getGameFile` alias at `0xefe78`
+because the target helper has no 1.8 feature match and adds absolute-path,
+loadability, and update behavior. The v346 copy contains 6,440 translated
+aliases, 420 target-only descriptive labels, 788 retained target names, 4,795
+source-backed dynamic rows, and 1,676 exact retained dynamic names. Its
+semantic map is carried forward unchanged. This is static evidence only, and
+the verified loopback runtime and TLS diagnosis were not modified.
 
 The v322 revision adds twelve high-confidence TGraalVar runtime aliases. The
 review joins source and target Hex-Rays pseudocode with the G0gxgajWBw
@@ -880,6 +890,59 @@ target-only functions, with zero failures. Reopening the fresh copy verified
 all four names. This was a static translation pass only. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
+
+### v346 Spectron resource path helper
+
+The v346 pass reviews target function `0xefbcc`, raw symbol
+`_ZN10f6WHgaQkAF10iaBygafTIxERK10C8THgaTQxFb`. The applied name is
+`spectron_TResourceFunctions_resolveResourcePath_TString_const_bool`. The
+`spectron_` prefix is deliberate: this is a descriptive label for a target
+boundary, not a claim that a matching 1.8 symbol was recovered.
+
+The helper is 260 bytes with 65 instructions, 12 basic blocks, 22 branches,
+and 12 calls. It receives the resource-functions object, an update boolean,
+and a hidden `TString` return buffer. It selects an absolute or
+level-relative resource, checks whether the object is loadable, optionally
+updates an existing object or requests a missing download, and returns the
+composed local path. Its only incoming reference is the target dynamic-symbol
+record at `0x154b0`, so the label does not invent a code caller.
+
+The source has related path behavior in
+`TResourceFunctions_getGameFile_TString_const_bool` at `0xeec84` and
+`TResourceFunctions_getLevelFileResourceAbsPath_TString_const` at `0xedf40`.
+However, the target's existing `0xefe78` function already carries the reviewed
+`v18_TResourceFunctions_getGameFile_TString_const_bool` alias, and the new
+helper has no exact or normalized feature match in the 1.8 inventory. It is
+therefore excluded from the semantic source-to-target count.
+
+The label was applied to the v345 IDA copy and verified after reopening. The
+v346 database has 11,707 functions, zero audited default names, 6,440
+translated aliases, 420 target-only descriptive labels, 788 retained target
+names, seven JNI exports, and 4,052 other IDA or PLT names. Dynamic coverage
+reports 4,795 source-backed aliases, 1,676 exact retained dynamic names, three
+target-only descriptive dynamic rows, and 5,782 exact dynamic function starts.
+
+The saved database is
+`analysis/spectron_libqplay_translated_v346_resource_path_helper.i64` with
+SHA-256
+`bfb7f36be1a572c5428192c90ee3288035805a2e34b7ead439437c4b1ccf2392`. The
+machine-readable records are
+`artifacts/spectron_resource_path_helper_target_only_labels_20260829.json`,
+`artifacts/spectron_resource_path_helper_target_only_label_application_20260829.json`,
+`artifacts/spectron_resource_path_helper_target_only_label_verification_20260829.json`,
+`artifacts/spectron_features_v346_resource_path_helper.json`,
+`artifacts/spectron_name_coverage_audit_v346.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v346.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v346.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v346.json`.
+The reusable scripts are
+`tools/generate_spectron_resource_path_helper_target_only_labels.py`,
+`tools/ida_dump_data_window.py`, and
+`tools/generate_spectron_translation_checkpoint_v346.py`.
+
+This is a static IDA translation checkpoint. It did not patch the APK, rerun
+the loopback client, alter TLS behavior, contact a game server, or test a live
+endpoint.
 
 ### v345 TResourceObject and TEncodedFileKey static helpers
 

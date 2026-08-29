@@ -800,6 +800,52 @@ generators are
 `tools/generate_spectron_format_parameters_property_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v326.py`.
 
+### v346 target-only resource path helper
+
+The v346 pass starts from the verified v345 database and reviews target
+function `0xefbcc`, raw symbol
+`_ZN10f6WHgaQkAF10iaBygafTIxERK10C8THgaTQxFb`. The helper is 260 bytes with
+65 instructions, 12 basic blocks, 22 branches, and 12 calls. Its hidden-sret
+signature takes a resource-functions receiver, an update boolean, and a
+`TString` output buffer.
+
+Direct target pseudocode shows two resource lookup paths. Absolute paths use
+the target's `wiULgacZUI::WIOygaAhUx` helper and
+`f6WHgaQkAF::IQxvga548u`; level-relative paths use
+`f6WHgaQkAF::twbzgaWidy`. A loadability check then either copies the stored
+resource path into the output, optionally refreshes the object through
+`uq9xgaUxlx::mP6ygaUl9x`, or requests a missing download through
+`uq9xgaUxlx::zO9xgagSlx` before returning an empty string.
+
+The 1.8 library has related path logic in
+`TResourceFunctions_getGameFile_TString_const_bool` at `0xeec84` and
+`TResourceFunctions_getLevelFileResourceAbsPath_TString_const` at `0xedf40`.
+The target's existing `0xefe78` body is already the reviewed
+`v18_TResourceFunctions_getGameFile_TString_const_bool` correspondence, so
+the new helper is not treated as a duplicate source match. Its complete
+feature record has no exact, 11-field normalized, or 10-field normalized
+match in the 1.8 inventory. It also has no code caller, only a dynamic-symbol
+data record at `0x154b0` pointing to the function.
+
+The reviewed descriptive label is
+`spectron_TResourceFunctions_resolveResourcePath_TString_const_bool`. The
+`spectron_` prefix records that the name is target-specific. It was applied
+to a fresh v345-derived database and verified after reopening. The v346 copy
+has 11,707 functions, zero audited default names, 6,440 translated aliases,
+420 target-only descriptive labels, 4,795 source-backed dynamic rows, 1,676
+exact retained dynamic names, and 5,782 exact dynamic function starts. The
+semantic map is carried forward unchanged.
+
+The saved database is
+`analysis/spectron_libqplay_translated_v346_resource_path_helper.i64` with
+SHA-256
+`bfb7f36be1a572c5428192c90ee3288035805a2e34b7ead439437c4b1ccf2392`. The
+label, application, reopen-verification, feature, audit, and checkpoint
+records are listed in the README and in the corresponding v346 artifact
+files. This was static IDA work only. It did not patch the APK, rerun the
+loopback client, alter TLS behavior, contact a game server, or test a live
+endpoint.
+
 ### v345 TResourceObject and TEncodedFileKey static aliases
 
 The v345 pass starts from the verified v344 database and resolves the three
