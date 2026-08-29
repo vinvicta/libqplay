@@ -425,6 +425,36 @@ records are
 `artifacts/spectron_semantic_translation_v326.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v326.json`.
 
+### v335 GSFunctionsClient and TAdventure residual aliases
+
+The v335 pass adds four semantic aliases to the private Spectron IDA
+database. The raw target identifiers remain visible so the aliases can be
+traced back to the stripped build.
+
+| Spectron address | Raw target symbol | Applied alias | Recovered role |
+| ---: | --- | --- | --- |
+| `0x15de64` | `_Z10aitCvaXfZcv` | `v18_gsfunctions_client_initStaticVars_void` | static shootparams initializer |
+| `0x15e528` | `_ZN10oJlO1aTTY710wgSQgaCg5MEv` | `v18_TAdventure_freeResources_void` | Adventure graphics and sound cleanup |
+| `0x15ef90` | `_ZN10oJlO1aTTY710SenF1ahaq0Ev` | `v18_TAdventure_handleMouseMove_void` | empty mouse-move callback |
+| `0x15f27c` | `_Z10H0oQ2aeFH_v` | `v18_TAdventure_initStaticScriptVars_void` | empty static-script initializer |
+
+The source counterparts are at `0x15ae0c`, `0x15b4d0`, `0x15bf38`, and
+`0x15c224`. The static initializer differs only in register-detail
+allocation. The other three normalized feature records are exact. A raw
+empty target method at `0x15f724` remains intentionally unaliased because it
+has no established source counterpart.
+
+The v335 records are
+`artifacts/spectron_adventure_static_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_adventure_static_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_adventure_static_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v335_adventure_static_residual.json`,
+`artifacts/spectron_name_coverage_audit_v335.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v335.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v335.json`,
+`artifacts/spectron_semantic_translation_v335.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v335.json`.
+
 ### v334 bitmap JPEG static initializer
 
 The v334 pass adds one semantic alias to the private Spectron IDA database.

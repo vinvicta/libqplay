@@ -319,6 +319,45 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v335 GSFunctionsClient and TAdventure residual comparison
+
+The v335 pass compares four raw target entries in the GSFunctionsClient and
+TAdventure blocks. The target retains obfuscated names, while the source
+names, direct pseudocode, normalized features, and local method order provide
+the translation evidence.
+
+| Source role | Spectron address | Applied alias | Match class |
+| --- | ---: | --- | --- |
+| `gsfunctions_client_initStaticVars_void` | `0x15de64` | `v18_gsfunctions_client_initStaticVars_void` | static allocation; register-detail change |
+| `TAdventure_freeResources_void` | `0x15e528` | `v18_TAdventure_freeResources_void` | exact graphics and sound cleanup |
+| `TAdventure_handleMouseMove_void` | `0x15ef90` | `v18_TAdventure_handleMouseMove_void` | exact empty callback |
+| `TAdventure_initStaticScriptVars_void` | `0x15f27c` | `v18_TAdventure_initStaticScriptVars_void` | exact empty initializer |
+
+The source and target static-variable initializers allocate eight bytes,
+clear the qword, and publish the pointer in a build-specific global. The
+three remaining pairs preserve either the two-call Adventure cleanup or an
+empty callback body. The target's nearby empty entry at `0x15f724` is not
+translated because no source counterpart was established.
+
+All four aliases were applied and verified after reopening the v335 database.
+The database has 11,707 functions, zero audited default names, 6,389
+translated aliases, 4,740 source-backed dynamic rows, 1,728 exact retained
+dynamic names, and 5,782 exact dynamic function starts. Its SHA-256 is
+`dae970eb4edf7237544073da7badb3cfe0bd9d3ccb03e8ec9bde5b5c7de73a16`.
+The complete comparison records are
+`artifacts/spectron_adventure_static_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_adventure_static_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_adventure_static_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v335_adventure_static_residual.json`,
+`artifacts/spectron_name_coverage_audit_v335.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v335.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v335.json`,
+`artifacts/spectron_semantic_translation_v335.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v335.json`.
+
+This comparison is static evidence. It does not change the runtime diagnosis,
+patch the APK, or contact a live endpoint.
+
 ## v334 bitmap JPEG static initializer comparison
 
 The v334 pass compares the residual JPEG static initializer immediately

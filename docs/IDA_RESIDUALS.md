@@ -800,6 +800,50 @@ generators are
 `tools/generate_spectron_format_parameters_property_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v326.py`.
 
+### v335 GSFunctionsClient and TAdventure residual aliases
+
+The v335 pass starts from the verified v334 database and translates four raw
+entries in the GSFunctionsClient and TAdventure blocks. The source and target
+method order is preserved around each entry, and direct compact Hex-Rays
+pseudocode was captured for every row.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | --- | --- | --- |
+| `0x15ae0c` `gsfunctions_client_initStaticVars_void` | `0x15de64` `_Z10aitCvaXfZcv` | `v18_gsfunctions_client_initStaticVars_void` | static eight-byte shootparams storage |
+| `0x15b4d0` `TAdventure_freeResources_void` | `0x15e528` `_ZN10oJlO1aTTY710wgSQgaCg5MEv` | `v18_TAdventure_freeResources_void` | graphics then sound cleanup |
+| `0x15bf38` `TAdventure_handleMouseMove_void` | `0x15ef90` `_ZN10oJlO1aTTY710SenF1ahaq0Ev` | `v18_TAdventure_handleMouseMove_void` | empty mouse-move callback |
+| `0x15c224` `TAdventure_initStaticScriptVars_void` | `0x15f27c` `_Z10H0oQ2aeFH_v` | `v18_TAdventure_initStaticScriptVars_void` | empty static-script callback |
+
+Three rows match the complete normalized feature record. The static-variable
+initializer is the one layout-change row, with only register-detail
+allocation differing. The nearby empty target method at `0x15f724` is not
+assigned because it has no established source counterpart beyond a data
+reference.
+
+The v335 database contains 11,707 functions, zero audited default names,
+6,389 translated aliases, 419 target-only descriptive labels, 4,740
+source-backed dynamic rows, and 1,728 exact retained dynamic names. All 5,782
+defined dynamic symbols still resolve to exact IDA function starts. The saved
+database is
+`analysis/spectron_libqplay_translated_v335_adventure_static_residual.i64`
+with SHA-256
+`dae970eb4edf7237544073da7badb3cfe0bd9d3ccb03e8ec9bde5b5c7de73a16`.
+
+The machine-readable records are
+`artifacts/spectron_adventure_static_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_adventure_static_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_adventure_static_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v335_adventure_static_residual.json`,
+`artifacts/spectron_name_coverage_audit_v335.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v335.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v335.json`,
+`artifacts/spectron_semantic_translation_v335.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v335.json`.
+
+This is a static IDA translation checkpoint. It did not patch the APK, rerun
+the loopback client, change TLS behavior, contact a game server, or test a
+live endpoint.
+
 ### v334 bitmap JPEG static initializer
 
 The v334 pass starts from the verified v333 database and translates the

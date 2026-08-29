@@ -937,6 +937,78 @@ The expected v326 database hash is
 checkpoint is static evidence only. It does not change the loopback runtime
 result, TLS diagnosis, or live-service boundary.
 
+### v335 GSFunctionsClient and TAdventure residual translation
+
+The v335 pass is static IDA work only. It starts from the verified v334
+database and reviews source boundaries `0x15ae0c`, `0x15b4d0`, `0x15bf38`,
+and `0x15c224` against target boundaries `0x15de64`, `0x15e528`, `0x15ef90`,
+and `0x15f27c`. It does not require an APK, a running emulator, a server, or
+a live endpoint.
+
+Capture compact pseudocode with `tools/ida_dump_function_evidence.py`, using
+the same IDALIB environment shown in the v334 section. The source request is
+`0x15ae0c,0x15b4d0,0x15bf38,0x15c224`; the target request is
+`0x15de64,0x15e528,0x15ef90,0x15f27c`.
+
+Generate and apply the reviewed four-row artifact:
+
+```bash
+python3 tools/generate_spectron_adventure_static_residual_anchors.py \
+  --original-features /tmp/original_features_current.json \
+  --spectron-features artifacts/spectron_features_v334_bitmap_jpeg_static.json \
+  --semantic-map artifacts/spectron_semantic_translation_v334.json \
+  --source-evidence /tmp/graal-source-gsfunctions-static.json \
+  --source-evidence /tmp/graal-source-adventure-residual.json \
+  --target-evidence /tmp/graal-target-gsfunctions-static.json \
+  --target-evidence /tmp/graal-target-adventure-residual.json \
+  --original-binary-sha256 9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8 \
+  --spectron-binary-sha256 f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219 \
+  --output artifacts/spectron_adventure_static_residual_manual_translation_anchors_20260829.json
+```
+
+Apply the artifact to a fresh copy of
+`spectron_libqplay_translated_v334_bitmap_jpeg_static.i64` and reopen-verify
+the resulting
+`spectron_libqplay_translated_v335_adventure_static_residual.i64` with the
+manual-anchor scripts. The application report must contain four resolved
+functions, four renames, four evidence comments, zero failures, and a
+successful save. The reopen report must contain four verified names in an
+11,707-function database.
+
+Refresh the feature export and name and dynamic audits using the commands in
+the v334 section, changing the output suffix to `v335`. Carry the semantic map
+forward and build the strict checkpoint:
+
+```bash
+python3 tools/carry_forward_spectron_semantic_translation_v335.py \
+  --parent-map artifacts/spectron_semantic_translation_v334.json \
+  --target-features artifacts/spectron_features_v335_adventure_static_residual.json \
+  --anchor-artifact artifacts/spectron_adventure_static_residual_manual_translation_anchors_20260829.json \
+  --output artifacts/spectron_semantic_translation_v335.json
+
+python3 tools/generate_spectron_translation_checkpoint_v335.py \
+  --parent-checkpoint artifacts/spectron_translation_checkpoint_20260829_v334.json \
+  --database /path/to/spectron_libqplay_translated_v335_adventure_static_residual.i64 \
+  --anchor-artifact artifacts/spectron_adventure_static_residual_manual_translation_anchors_20260829.json \
+  --application-report artifacts/spectron_adventure_static_residual_manual_translation_application_20260829.json \
+  --verification-report artifacts/spectron_adventure_static_residual_manual_translation_verification_20260829.json \
+  --name-audit artifacts/spectron_name_coverage_audit_v335.json \
+  --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v335.json \
+  --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v335.json \
+  --semantic-map artifacts/spectron_semantic_translation_v335.json \
+  --feature-export artifacts/spectron_features_v335_adventure_static_residual.json \
+  --output artifacts/spectron_translation_checkpoint_20260829_v335.json
+
+python3 tools/validate_research_archive.py
+```
+
+The expected v335 database hash is
+`dae970eb4edf7237544073da7badb3cfe0bd9d3ccb03e8ec9bde5b5c7de73a16`.
+Expected audit totals are 6,389 translated aliases, 419 target-only
+descriptive labels, 840 retained target names, 7 JNI exports, 4,052 other
+IDA or PLT names, 4,740 source-backed dynamic symbols, 1,728 exact retained
+dynamic symbols, and 5,782 exact dynamic function starts.
+
 ### v334 bitmap JPEG static translation
 
 The v334 pass is static IDA work only. It starts from the verified v333

@@ -261,6 +261,93 @@ This pass changed only the private IDA copy and archive. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
 
+## 2026-08-29: GSFunctionsClient and TAdventure residuals, v335
+
+The v334 bitmap initializer pass left a compact raw-symbol sequence in the
+GSFunctionsClient and TAdventure blocks. Four entries can be joined safely
+to the 1.8 database using pseudocode, normalized ARM64 features, and the
+method order around the target's obfuscated class names.
+
+| Source boundary | Target boundary | Applied alias | Recovered role |
+| ---: | ---: | --- | --- |
+| `0x15ae0c` `gsfunctions_client_initStaticVars_void` | `0x15de64` `_Z10aitCvaXfZcv` | `v18_gsfunctions_client_initStaticVars_void` | static shootparams initializer |
+| `0x15b4d0` `TAdventure_freeResources_void` | `0x15e528` `_ZN10oJlO1aTTY710wgSQgaCg5MEv` | `v18_TAdventure_freeResources_void` | Adventure resource cleanup |
+| `0x15bf38` `TAdventure_handleMouseMove_void` | `0x15ef90` `_ZN10oJlO1aTTY710SenF1ahaq0Ev` | `v18_TAdventure_handleMouseMove_void` | empty mouse-move callback |
+| `0x15c224` `TAdventure_initStaticScriptVars_void` | `0x15f27c` `_Z10H0oQ2aeFH_v` | `v18_TAdventure_initStaticScriptVars_void` | empty static-script initializer |
+
+The first source body allocates an eight-byte object, stores zero in it, and
+publishes it as `shootparams`:
+
+```text
+_QWORD *__fastcall gsfunctions_client_initStaticVars_void()
+{
+  _QWORD *result;
+  result = (_QWORD *)plt_operator_new_ulong__2(8u);
+  *result = 0;
+  shootparams = (__int64)result;
+  return result;
+}
+```
+
+The target body has the same data flow, with the obfuscated static variable
+`LZ5iwaIEGN` and target `operator new` export:
+
+```text
+_QWORD *__fastcall aitCvaXfZc()
+{
+  _QWORD *result;
+  result = (_QWORD *)operator new(8u);
+  *result = 0;
+  LZ5iwaIEGN = (__int64)result;
+  return result;
+}
+```
+
+The source `TAdventure_freeResources_void` calls graphics cleanup and then
+sound cleanup. The target `oJlO1aTTY7::wgSQgaCg5M` retains that two-call
+sequence through the rebuilt `a7qxJaHqKV` and `IUKzgam4Gy` classes. The target
+entry lies between translated `initResources` and the translated Adventure
+constructor, just as the source entry does.
+
+Both mouse-move entries are empty one-instruction callbacks. They are still
+safe to translate because the target raw method sits between the translated
+Adventure mouse-event handler and `paintGraphics`, matching the source
+sequence. The static-script initializer is another empty entry, but its
+position between translated `initStaticVars` and `openSecureURL` makes the
+mapping specific. A separate empty target method at `0x15f724` has only a data
+reference and no source counterpart established, so it remains excluded.
+
+The anchor artifact classifies four high-confidence rows, three exact metric
+matches, one register-detail layout row, four pseudocode-backed rows, and no
+semantic-map promotions. The aliases were applied to a fresh v334-derived
+database. All four names and evidence comments were saved, and a close and
+reopen verified all four in an 11,707-function database.
+
+The v335 name audit reports 6,389 translated aliases, 419 target-only
+descriptive labels, 840 retained target names, seven JNI exports, 4,052 other
+IDA or PLT names, and zero default names. Dynamic coverage reports 4,740
+source-backed aliases and 1,728 exact retained dynamic names. The boundary
+audit reports 5,782 exact dynamic function starts.
+
+The v335 database hash is
+`dae970eb4edf7237544073da7badb3cfe0bd9d3ccb03e8ec9bde5b5c7de73a16`.
+The evidence is stored in
+`artifacts/spectron_adventure_static_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_adventure_static_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_adventure_static_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v335_adventure_static_residual.json`,
+`artifacts/spectron_name_coverage_audit_v335.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v335.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v335.json`,
+`artifacts/spectron_semantic_translation_v335.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v335.json`.
+
+The semantic map is carried forward from v334 because this pass changes IDA
+names and comments only. The new aliases are preserved in the anchor and
+checkpoint records without changing the established semantic-match counts.
+This was static analysis only. It did not patch the APK, rerun the loopback
+client, alter TLS behavior, contact a game server, or test a live endpoint.
+
 ## 2026-08-29: bitmap JPEG static initializer, v334
 
 The next raw target boundary after the translated JPEG helpers is

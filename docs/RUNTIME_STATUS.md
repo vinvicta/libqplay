@@ -3035,6 +3035,37 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v335 GSFunctionsClient and TAdventure residuals
+
+The v335 revision is a static IDA checkpoint for four raw target entries in
+the GSFunctionsClient and TAdventure blocks. It maps the static `shootparams`
+initializer, Adventure resource cleanup, the empty mouse-move callback, and
+the empty Adventure static-script initializer. Three rows are exact
+normalized matches and the static-variable row differs only in register-detail
+allocation.
+
+The aliases were applied to a fresh v334-derived database and verified after
+reopening. The v335 database has 11,707 functions, zero audited default names,
+6,389 translated aliases, 4,740 source-backed dynamic rows, and 1,728 exact
+retained dynamic names. All 5,782 defined dynamic symbols still resolve to
+exact IDA function starts. Its SHA-256 is
+`dae970eb4edf7237544073da7badb3cfe0bd9d3ccb03e8ec9bde5b5c7de73a16`.
+
+The records are
+`artifacts/spectron_adventure_static_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_adventure_static_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_adventure_static_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v335_adventure_static_residual.json`,
+`artifacts/spectron_name_coverage_audit_v335.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v335.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v335.json`,
+`artifacts/spectron_semantic_translation_v335.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v335.json`.
+
+This checkpoint did not change the verified loopback package, connector TLS
+result, or local protocol responder. No live endpoint was contacted, and no
+new runtime replay was performed for v335.
+
 ## Spectron 2.2 v334 bitmap JPEG static initializer
 
 The v334 revision is a static IDA checkpoint for the residual JPEG static

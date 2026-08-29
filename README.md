@@ -166,6 +166,15 @@ allocation differs. The v334 database contains 6,385 reviewed `v18_` aliases,
 4,736 source-backed dynamic rows, and 1,732 exact retained dynamic names. It
 is a static IDA checkpoint and has not been used for a new runtime APK replay.
 
+The v335 revision continues through the residual GSFunctionsClient and
+TAdventure block. It adds four high-confidence aliases: the static
+`shootparams` initializer, Adventure resource cleanup, the empty mouse-move
+callback, and the empty Adventure static-script initializer. Three rows are
+exact normalized matches and one differs only in register-detail allocation.
+The v335 database contains 6,389 reviewed `v18_` aliases, 4,740 source-backed
+dynamic rows, and 1,728 exact retained dynamic names. It is a static IDA
+checkpoint and has not been used for a new runtime APK replay.
+
 The v331 revision continues immediately into the static-variable runtime. It
 adds 22 high-confidence aliases for the universe initializer, the
 `TGraalPlayersArrayVar` destructor pair, the `TStaticVar` factory and
@@ -771,6 +780,56 @@ target-only functions, with zero failures. Reopening the fresh copy verified
 all four names. This was a static translation pass only. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
+
+### v335 GSFunctionsClient and TAdventure residual aliases
+
+The v335 pass starts from the verified v334 database and resolves four raw
+target entries in the GSFunctionsClient and TAdventure method blocks.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | --- | --- | --- |
+| `0x15ae0c` `gsfunctions_client_initStaticVars_void` | `0x15de64` `_Z10aitCvaXfZcv` | `v18_gsfunctions_client_initStaticVars_void` | allocates and clears static shootparams storage |
+| `0x15b4d0` `TAdventure_freeResources_void` | `0x15e528` `_ZN10oJlO1aTTY710wgSQgaCg5MEv` | `v18_TAdventure_freeResources_void` | graphics and sound cleanup |
+| `0x15bf38` `TAdventure_handleMouseMove_void` | `0x15ef90` `_ZN10oJlO1aTTY710SenF1ahaq0Ev` | `v18_TAdventure_handleMouseMove_void` | empty mouse-move callback |
+| `0x15c224` `TAdventure_initStaticScriptVars_void` | `0x15f27c` `_Z10H0oQ2aeFH_v` | `v18_TAdventure_initStaticScriptVars_void` | empty static-script initializer |
+
+The first row allocates eight bytes, clears the qword, and stores it in the
+class-specific static variable. Its normalized metrics match except for
+register-detail allocation. The free-resources row preserves the source
+graphics-then-sound cleanup sequence. The two four-byte rows are empty in
+both builds, but their class-local neighbors disambiguate them from the many
+other empty callbacks. A nearby empty target entry at `0x15f724` has only a
+data reference and no established 1.8 counterpart, so it remains a raw target
+symbol rather than receiving a guessed source alias.
+
+The v335 name audit reports 6,389 translated aliases, 419 target-only
+descriptive labels, 840 retained target names, seven JNI exports, 4,052 other
+IDA or PLT names, and zero default names. Dynamic coverage reports 4,740
+source-backed aliases and 1,728 exact retained dynamic names. The defined
+dynamic boundary audit still resolves all 5,782 function symbols to exact IDA
+starts.
+
+The v335 database is
+`analysis/spectron_libqplay_translated_v335_adventure_static_residual.i64`
+with SHA-256
+`dae970eb4edf7237544073da7badb3cfe0bd9d3ccb03e8ec9bde5b5c7de73a16`.
+The records are
+`artifacts/spectron_adventure_static_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_adventure_static_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_adventure_static_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v335_adventure_static_residual.json`,
+`artifacts/spectron_name_coverage_audit_v335.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v335.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v335.json`,
+`artifacts/spectron_semantic_translation_v335.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v335.json`.
+
+The reusable helpers are
+`tools/generate_spectron_adventure_static_residual_anchors.py`,
+`tools/carry_forward_spectron_semantic_translation_v335.py`, and
+`tools/generate_spectron_translation_checkpoint_v335.py`. This pass was
+static analysis only. It did not patch the APK, rerun the loopback client,
+alter TLS behavior, contact a game server, or test a live endpoint.
 
 ### v334 bitmap JPEG static initializer
 
