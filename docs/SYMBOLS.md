@@ -87,6 +87,37 @@ The full inventory is in
 `tools/generate_spectron_symbol_table_audit.py` and does not load either
 library or contact a service.
 
+### Completing retained `FUNC` boundaries
+
+The dynamic table also helps with IDA database hygiene. The v319 database had
+12 section-defined positive-size `FUNC` rows whose values were not IDA
+function starts. A read-only audit showed valid AArch64 prologues, no
+containing function, and no end overlap for all twelve. The v320 copy
+materializes the exact ELF intervals and preserves the retained target names.
+
+| Address | Size | Retained name |
+| ---: | ---: | --- |
+| `0x1b0140` | `0x4a0` | `_ZN10_YTgFa6HPk10bdqDgaFFMBERK10eY2wgaf6pw` |
+| `0x1b281c` | `0x314` | `_ZN10EqV_Ka3Vx910KHqDgay4MBERK10i7FHgaP2lF` |
+| `0x1b2b34` | `0x450` | `_ZN10EqV_Ka3Vx910ZCBDgaugWBERK10eY2wgaf6pw` |
+| `0x1c6c94` | `0x34c` | `_ZN10_k_Bgam3zA10sqrSLaYGpTERK10i7FHgaP2lF` |
+| `0x1c6fe4` | `0x900` | `_ZN10_k_Bgam3zA10KHqDgay4MBERK10i7FHgaP2lF` |
+| `0x1caeb4` | `0x190` | `_ZN10Q8n_Fa6V5W10ZCBDgaugWBERK10eY2wgaf6pw` |
+| `0x1cd73c` | `0x3c4` | `_ZN10_thLgaWjoI10KHqDgay4MBERK10i7FHgaP2lF` |
+| `0x1cdb04` | `0x59c` | `_ZN10_thLgaWjoI10ZCBDgaugWBERK10eY2wgaf6pw` |
+| `0x1dac5c` | `0x1b0` | `_ZN10s_YwgafWlw10PbVb4aCJD8ERK10eY2wgaf6pwS2_S2_` |
+| `0x1df0bc` | `0x34c` | `_ZN10awDo2aJRkD10KHqDgay4MBERK10i7FHgaP2lF` |
+| `0x1dfffc` | `0x41c` | `_ZN10EYKlVaL7UR10ZCBDgaugWBERK10eY2wgaf6pw` |
+| `0x2bcf44` | `0x48` | `_Z17yajl_buf_truncateP10yajl_buf_tm` |
+
+After reopening the v320 database, all 5,782 section-defined dynamic `FUNC`
+rows have exact IDA starts. The 988 named dynamic rows without a function at
+their value are left alone because the complete table includes objects,
+undefined imports, and other non-function entries. The machine-readable
+boundary and join records are
+`artifacts/spectron_dynamic_symbol_boundaries_20260828.json` and
+`artifacts/spectron_symbol_translation_inventory_20260828.json`.
+
 ## Current Spectron cross-build labels
 
 The latest disposable IDA copies extend the labels beyond the retained ELF

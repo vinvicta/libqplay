@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v319 Spectron database. It
-contains 11,695 functions and no remaining IDA default function names in the
+The current documented translation frontier is the v320 Spectron database. It
+contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
@@ -310,6 +310,19 @@ separate ELF audit still reports 5,782 section-defined dynamic `FUNC` rows,
 but the target has no `.symtab` or DWARF metadata. This is naming coverage and
 cross-build translation evidence, not proof that every original source name
 was recoverable.
+The v320 revision follows the retained dynamic symbols to the function
+boundary. It materializes twelve positive-size `FUNC` symbols that IDA had
+left outside its function index, using their exact ELF sizes and addresses.
+The reopened v320 copy has 11,707 functions, and all 5,782 section-defined
+dynamic `FUNC` rows now land on exact IDA function starts. The joined inventory
+contains 6,770 named dynamic rows, 5,782 matched function rows, and 988 rows
+that are data, undefined imports, or other non-function entries. The twelve
+new names are retained obfuscated target names, not invented 1.8 source names.
+The boundary, application, name-coverage, and joined-inventory records are
+`artifacts/spectron_dynamic_symbol_boundaries_20260828.json`,
+`artifacts/spectron_dynamic_function_application_20260828.json`,
+`artifacts/spectron_name_coverage_audit_v320_20260828.json`, and
+`artifacts/spectron_symbol_translation_inventory_20260828.json`.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -418,6 +431,8 @@ The current v318 database is kept locally as
 `analysis/spectron_libqplay_translated_v318_residual_labels.i64`.
 The current v319 database is kept locally as
 `analysis/spectron_libqplay_translated_v319_nullsub_labels.i64`.
+The current v320 database is kept locally as
+`analysis/spectron_libqplay_translated_v320_dynamic_functions.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -1160,6 +1175,18 @@ artifact, generator, and v319 checkpoint are
 `artifacts/spectron_translation_checkpoint_20260828_v319.json`.
 This is complete reviewed naming coverage for the IDA database, not a claim
 that stripped 2.2 debug symbols were restored.
+
+The v320 pass checks the retained dynamic table against the translated IDA
+function index. Twelve section-defined `FUNC` symbols had positive ELF sizes,
+valid AArch64 prologues, and no containing IDA function. They were materialized
+with exact `ea` to `ea + size` boundaries in a fresh copy and reopened
+successfully. The result is 11,707 functions and 0 missing starts among all
+5,782 section-defined dynamic `FUNC` rows. The dynamic join is recorded in
+`artifacts/spectron_symbol_translation_inventory_20260828.json`; the 988
+unmatched named rows are not silently treated as functions because they are
+data, undefined imports, or other non-function entries. The v320 database and
+checkpoint are `analysis/spectron_libqplay_translated_v320_dynamic_functions.i64`
+and `artifacts/spectron_translation_checkpoint_20260828_v320.json`.
 
 The v235 entry below is a historical checkpoint in the IDA translation
 series. At that point, the current series reached
@@ -6298,6 +6325,15 @@ proves the local native TLS path, not a current live certificate or service.
   leading bytes for every function in a translated Spectron IDA database.
   `tools/generate_spectron_nullsub_labels.py` creates the reviewed target-only
   labels for one-instruction null return stubs.
+  `tools/ida_audit_dynamic_symbol_boundaries.py` compares retained dynamic
+  function symbols with IDA's exact function starts.
+  `tools/ida_materialize_spectron_dynamic_functions.py` applies reviewed ELF
+  boundaries to a fresh database copy and preserves the exact target symbol
+  names.
+  `tools/generate_spectron_symbol_translation_inventory.py` joins all retained
+  named dynamic rows to the v320 IDA name audit.
+  `tools/generate_spectron_translation_checkpoint_v320.py` records the v320
+  database, boundary repair, and coverage evidence.
   `tools/ida_apply_spectron_translation.py` and
   `tools/ida_apply_spectron_manual_anchors.py` write separate disposable IDA
   copies, while the matching verification scripts reopen and check them. The

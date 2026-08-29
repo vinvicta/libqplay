@@ -791,6 +791,21 @@ def main():
     spectron_checkpoint_v319 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v319.json"
     )
+    spectron_name_coverage_v320 = load_json(
+        "artifacts/spectron_name_coverage_audit_v320_20260828.json"
+    )
+    spectron_dynamic_function_application = load_json(
+        "artifacts/spectron_dynamic_function_application_20260828.json"
+    )
+    spectron_dynamic_boundaries = load_json(
+        "artifacts/spectron_dynamic_symbol_boundaries_20260828.json"
+    )
+    spectron_symbol_inventory_v320 = load_json(
+        "artifacts/spectron_symbol_translation_inventory_20260828.json"
+    )
+    spectron_checkpoint_v320 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v320.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -17587,6 +17602,189 @@ def main():
         spectron_checkpoint_v319["nullsub_target_only_labels"]["reopen_failure_count"],
         0,
     )
+    coverage_v320_origins = spectron_name_coverage_v320["name_origins"]
+    check(
+        "Spectron v320 dynamic application artifact",
+        spectron_dynamic_function_application["artifact"],
+        "spectron_dynamic_function_application",
+    )
+    check(
+        "Spectron v320 dynamic application network",
+        spectron_dynamic_function_application["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v320 dynamic application mode",
+        spectron_dynamic_function_application["apply"],
+        True,
+    )
+    check(
+        "Spectron v320 dynamic application rows",
+        spectron_dynamic_function_application["row_count"],
+        12,
+    )
+    check(
+        "Spectron v320 dynamic application materialized",
+        spectron_dynamic_function_application["materialized_count"],
+        12,
+    )
+    check(
+        "Spectron v320 dynamic application failures",
+        spectron_dynamic_function_application["failure_count"],
+        0,
+    )
+    check(
+        "Spectron v320 dynamic application saved",
+        spectron_dynamic_function_application["saved"],
+        True,
+    )
+    check(
+        "Spectron v320 dynamic boundary artifact",
+        spectron_dynamic_boundaries["artifact"],
+        "spectron_dynamic_symbol_boundary_audit",
+    )
+    check(
+        "Spectron v320 dynamic boundary network",
+        spectron_dynamic_boundaries["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v320 dynamic boundary input hash",
+        spectron_dynamic_boundaries["input_sha256"],
+        "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    )
+    check(
+        "Spectron v320 dynamic boundary defined functions",
+        spectron_dynamic_boundaries["defined_function_symbol_count"],
+        5782,
+    )
+    check(
+        "Spectron v320 dynamic boundary exact starts",
+        spectron_dynamic_boundaries["ida_exact_start_count"],
+        5782,
+    )
+    check(
+        "Spectron v320 dynamic boundary missing starts",
+        spectron_dynamic_boundaries["ida_missing_exact_start_count"],
+        0,
+    )
+    check(
+        "Spectron v320 dynamic boundary row count",
+        len(spectron_dynamic_boundaries["rows"]),
+        5782,
+    )
+    check(
+        "Spectron v320 name audit input hash",
+        spectron_name_coverage_v320["input_sha256"],
+        "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    )
+    check(
+        "Spectron v320 name audit function count",
+        spectron_name_coverage_v320["function_count"],
+        11707,
+    )
+    check(
+        "Spectron v320 name audit default count",
+        spectron_name_coverage_v320["default_name_count"],
+        0,
+    )
+    check(
+        "Spectron v320 name audit origin counts",
+        coverage_v320_origins,
+        {
+            "ida_named_or_other": 4053,
+            "target_jni_export": 7,
+            "target_named_export": 1013,
+            "target_only_descriptive": 417,
+            "translated_v18_alias": 6217,
+        },
+    )
+    check(
+        "Spectron v320 symbol inventory artifact",
+        spectron_symbol_inventory_v320["artifact"],
+        "spectron_symbol_translation_inventory_20260828",
+    )
+    check(
+        "Spectron v320 symbol inventory network",
+        spectron_symbol_inventory_v320["network_contacted"],
+        False,
+    )
+    inventory_v320_summary = spectron_symbol_inventory_v320["summary"]
+    check(
+        "Spectron v320 symbol inventory named rows",
+        inventory_v320_summary["named_dynamic_symbol_count"],
+        6770,
+    )
+    check(
+        "Spectron v320 symbol inventory defined named rows",
+        inventory_v320_summary["defined_named_symbol_count"],
+        6600,
+    )
+    check(
+        "Spectron v320 symbol inventory defined functions",
+        inventory_v320_summary["section_defined_function_count"],
+        5782,
+    )
+    check(
+        "Spectron v320 symbol inventory matched rows",
+        inventory_v320_summary["ida_function_match_count"],
+        5782,
+    )
+    check(
+        "Spectron v320 symbol inventory status counts",
+        inventory_v320_summary["translation_status_counts"],
+        {
+            "ida_named_or_other": 74,
+            "no_ida_function_at_symbol_value": 988,
+            "retained_target_name": 1167,
+            "source_backed_v18_alias": 4541,
+        },
+    )
+    check(
+        "Spectron v320 checkpoint artifact",
+        spectron_checkpoint_v320["artifact"],
+        "spectron_translation_checkpoint_20260828_v320",
+    )
+    check(
+        "Spectron v320 checkpoint parent",
+        spectron_checkpoint_v320["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v319",
+    )
+    check(
+        "Spectron v320 checkpoint database hash",
+        spectron_checkpoint_v320["database"]["sha256"],
+        "17015ba3140200199269ca94675e043e1e87cbefcdfa473680062a55ac96a0d6",
+    )
+    check(
+        "Spectron v320 checkpoint database close-reopen",
+        spectron_checkpoint_v320["database"]["close_reopen_verified"],
+        True,
+    )
+    check(
+        "Spectron v320 checkpoint function count",
+        spectron_checkpoint_v320["database"]["function_count"],
+        11707,
+    )
+    check(
+        "Spectron v320 checkpoint default names",
+        spectron_checkpoint_v320["database"]["default_name_count"],
+        0,
+    )
+    check(
+        "Spectron v320 checkpoint materialized boundaries",
+        spectron_checkpoint_v320["dynamic_function_boundary_repair"]["materialized_count"],
+        12,
+    )
+    check(
+        "Spectron v320 checkpoint exact starts",
+        spectron_checkpoint_v320["dynamic_function_boundary_repair"]["ida_exact_start_count"],
+        5782,
+    )
+    check(
+        "Spectron v320 checkpoint missing starts",
+        spectron_checkpoint_v320["dynamic_function_boundary_repair"]["ida_missing_exact_start_count"],
+        0,
+    )
     check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
@@ -17985,6 +18183,11 @@ def main():
         spectron_name_coverage_v319,
         spectron_nullsub_labels,
         spectron_checkpoint_v319,
+        spectron_name_coverage_v320,
+        spectron_dynamic_function_application,
+        spectron_dynamic_boundaries,
+        spectron_symbol_inventory_v320,
+        spectron_checkpoint_v320,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

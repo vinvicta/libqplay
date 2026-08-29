@@ -1,0 +1,149 @@
+{
+  "apply": true,
+  "artifact": "spectron_dynamic_function_application",
+  "network_contacted": false,
+  "boundary_audit": "/tmp/spectron_dynamic_symbol_boundaries_v319_fresh.json",
+  "comments_added": 12,
+  "expected_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+  "failure_count": 0,
+  "failures": [],
+  "materialized_count": 12,
+  "plan": [
+    {
+      "actual_function_end": "0x1b05e0",
+      "actual_name": "_ZN10_YTgFa6HPk10bdqDgaFFMBERK10eY2wgaf6pw",
+      "current_name": "_ZN10_YTgFa6HPk10bdqDgaFFMBERK10eY2wgaf6pw",
+      "dynamic_name": "_ZN10_YTgFa6HPk10bdqDgaFFMBERK10eY2wgaf6pw",
+      "existing_name_ea": "0x1b0140",
+      "function_at_end": null,
+      "function_at_start": null,
+      "function_end_expected": "0x1b05e0",
+      "target_ea": "0x1b0140"
+    },
+    {
+      "actual_function_end": "0x1b2b30",
+      "actual_name": "_ZN10EqV_Ka3Vx910KHqDgay4MBERK10i7FHgaP2lF",
+      "current_name": "_ZN10EqV_Ka3Vx910KHqDgay4MBERK10i7FHgaP2lF",
+      "dynamic_name": "_ZN10EqV_Ka3Vx910KHqDgay4MBERK10i7FHgaP2lF",
+      "existing_name_ea": "0x1b281c",
+      "function_at_end": null,
+      "function_at_start": null,
+      "function_end_expected": "0x1b2b30",
+      "target_ea": "0x1b281c"
+    },
+    {
+      "actual_function_end": "0x1b2f84",
+      "actual_name": "_ZN10EqV_Ka3Vx910ZCBDgaugWBERK10eY2wgaf6pw",
+      "current_name": "_ZN10EqV_Ka3Vx910ZCBDgaugWBERK10eY2wgaf6pw",
+      "dynamic_name": "_ZN10EqV_Ka3Vx910ZCBDgaugWBERK10eY2wgaf6pw",
+      "existing_name_ea": "0x1b2b34",
+      "function_at_end": null,
+      "function_at_start": null,
+      "function_end_expected": "0x1b2f84",
+      "target_ea": "0x1b2b34"
+    },
+    {
+      "actual_function_end": "0x1c6fe0",
+      "actual_name": "_ZN10_k_Bgam3zA10sqrSLaYGpTERK10i7FHgaP2lF",
+      "current_name": "_ZN10_k_Bgam3zA10sqrSLaYGpTERK10i7FHgaP2lF",
+      "dynamic_name": "_ZN10_k_Bgam3zA10sqrSLaYGpTERK10i7FHgaP2lF",
+      "existing_name_ea": "0x1c6c94",
+      "function_at_end": null,
+      "function_at_start": null,
+      "function_end_expected": "0x1c6fe0",
+      "target_ea": "0x1c6c94"
+    },
+    {
+      "actual_function_end": "0x1c78e4",
+      "actual_name": "_ZN10_k_Bgam3zA10KHqDgay4MBERK10i7FHgaP2lF",
+      "current_name": "_ZN10_k_Bgam3zA10KHqDgay4MBERK10i7FHgaP2lF",
+      "dynamic_name": "_ZN10_k_Bgam3zA10KHqDgay4MBERK10i7FHgaP2lF",
+      "existing_name_ea": "0x1c6fe4",
+      "function_at_end": null,
+      "function_at_start": null,
+      "function_end_expected": "0x1c78e4",
+      "target_ea": "0x1c6fe4"
+    },
+    {
+      "actual_function_end": "0x1cb044",
+      "actual_name": "_ZN10Q8n_Fa6V5W10ZCBDgaugWBERK10eY2wgaf6pw",
+      "current_name": "_ZN10Q8n_Fa6V5W10ZCBDgaugWBERK10eY2wgaf6pw",
+      "dynamic_name": "_ZN10Q8n_Fa6V5W10ZCBDgaugWBERK10eY2wgaf6pw",
+      "existing_name_ea": "0x1caeb4",
+      "function_at_end": null,
+      "function_at_start": null,
+      "function_end_expected": "0x1cb044",
+      "target_ea": "0x1caeb4"
+    },
+    {
+      "actual_function_end": "0x1cdb00",
+      "actual_name": "_ZN10_thLgaWjoI10KHqDgay4MBERK10i7FHgaP2lF",
+      "current_name": "_ZN10_thLgaWjoI10KHqDgay4MBERK10i7FHgaP2lF",
+      "dynamic_name": "_ZN10_thLgaWjoI10KHqDgay4MBERK10i7FHgaP2lF",
+      "existing_name_ea": "0x1cd73c",
+      "function_at_end": null,
+      "function_at_start": null,
+      "function_end_expected": "0x1cdb00",
+      "target_ea": "0x1cd73c"
+    },
+    {
+      "actual_function_end": "0x1ce0a0",
+      "actual_name": "_ZN10_thLgaWjoI10ZCBDgaugWBERK10eY2wgaf6pw",
+      "current_name": "_ZN10_thLgaWjoI10ZCBDgaugWBERK10eY2wgaf6pw",
+      "dynamic_name": "_ZN10_thLgaWjoI10ZCBDgaugWBERK10eY2wgaf6pw",
+      "existing_name_ea": "0x1cdb04",
+      "function_at_end": null,
+      "function_at_start": null,
+      "function_end_expected": "0x1ce0a0",
+      "target_ea": "0x1cdb04"
+    },
+    {
+      "actual_function_end": "0x1dae0c",
+      "actual_name": "_ZN10s_YwgafWlw10PbVb4aCJD8ERK10eY2wgaf6pwS2_S2_",
+      "current_name": "_ZN10s_YwgafWlw10PbVb4aCJD8ERK10eY2wgaf6pwS2_S2_",
+      "dynamic_name": "_ZN10s_YwgafWlw10PbVb4aCJD8ERK10eY2wgaf6pwS2_S2_",
+      "existing_name_ea": "0x1dac5c",
+      "function_at_end": null,
+      "function_at_start": null,
+      "function_end_expected": "0x1dae0c",
+      "target_ea": "0x1dac5c"
+    },
+    {
+      "actual_function_end": "0x1df408",
+      "actual_name": "_ZN10awDo2aJRkD10KHqDgay4MBERK10i7FHgaP2lF",
+      "current_name": "_ZN10awDo2aJRkD10KHqDgay4MBERK10i7FHgaP2lF",
+      "dynamic_name": "_ZN10awDo2aJRkD10KHqDgay4MBERK10i7FHgaP2lF",
+      "existing_name_ea": "0x1df0bc",
+      "function_at_end": null,
+      "function_at_start": null,
+      "function_end_expected": "0x1df408",
+      "target_ea": "0x1df0bc"
+    },
+    {
+      "actual_function_end": "0x1e0418",
+      "actual_name": "_ZN10EYKlVaL7UR10ZCBDgaugWBERK10eY2wgaf6pw",
+      "current_name": "_ZN10EYKlVaL7UR10ZCBDgaugWBERK10eY2wgaf6pw",
+      "dynamic_name": "_ZN10EYKlVaL7UR10ZCBDgaugWBERK10eY2wgaf6pw",
+      "existing_name_ea": "0x1dfffc",
+      "function_at_end": null,
+      "function_at_start": null,
+      "function_end_expected": "0x1e0418",
+      "target_ea": "0x1dfffc"
+    },
+    {
+      "actual_function_end": "0x2bcf8c",
+      "actual_name": "_Z17yajl_buf_truncateP10yajl_buf_tm",
+      "current_name": "_Z17yajl_buf_truncateP10yajl_buf_tm",
+      "dynamic_name": "_Z17yajl_buf_truncateP10yajl_buf_tm",
+      "existing_name_ea": "0x2bcf44",
+      "function_at_end": null,
+      "function_at_start": null,
+      "function_end_expected": "0x2bcf8c",
+      "target_ea": "0x2bcf44"
+    }
+  ],
+  "renamed_count": 0,
+  "row_count": 12,
+  "save_path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v320_dynamic_functions.i64",
+  "saved": true
+}

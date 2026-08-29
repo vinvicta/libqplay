@@ -226,6 +226,69 @@ The checked-in inputs and results are
 coverage, not evidence that the stripped target retained every original C++
 source name.
 
+## Reproduce the Spectron dynamic-boundary pass
+
+The v320 pass uses the target's retained dynamic table as a boundary source.
+It only considers section-defined `FUNC` rows with a positive ELF size. The
+read-only helper compares those values with IDA's exact function starts:
+
+```bash
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_BOUNDARY_AUDIT_OUTPUT=/tmp/spectron-dynamic-boundaries.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/spectron_libqplay_translated_v319_nullsub_labels.i64 \
+  -s tools/ida_audit_dynamic_symbol_boundaries.py
+```
+
+The v319 result has 5,782 defined dynamic function rows, 5,770 exact IDA
+starts, and 12 missing starts. Review the twelve rows before applying them.
+The materializer validates the target library hash, every address, every ELF
+size, and the expected retained name. It is review-only unless the apply flag
+and a new output path are supplied:
+
+```bash
+cp /path/to/spectron_libqplay_translated_v319_nullsub_labels.i64 \
+  /tmp/spectron_dynamic_materialize_v319.i64
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_DYNAMIC_FUNCTION_APPLY=1 \
+  SPECTRON_DYNAMIC_FUNCTION_SAVE_PATH=/path/to/spectron_libqplay_translated_v320_dynamic_functions.i64 \
+  SPECTRON_DYNAMIC_FUNCTION_REPORT=/tmp/spectron_dynamic_function_application.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /tmp/spectron_dynamic_materialize_v319.i64 \
+  -s tools/ida_materialize_spectron_dynamic_functions.py
+```
+
+Open the new database again and rerun both audits. The expected v320 result is
+11,707 functions, 5,782 exact dynamic `FUNC` starts, zero missing starts, and
+zero audited default names. The joined inventory is rebuilt with:
+
+```bash
+python3 tools/generate_spectron_symbol_translation_inventory.py \
+  --symbols artifacts/spectron_symbol_table_audit_20260827.json \
+  --name-audit artifacts/spectron_name_coverage_audit_v320_20260828.json \
+  --output /tmp/spectron_symbol_translation_inventory.json
+```
+
+The dynamic table has 6,770 named rows, but only 5,782 section-defined
+function rows. The other named rows must remain classified as data, undefined
+imports, or other non-function entries. The final checkpoint generator and
+archive validator record this distinction:
+
+```bash
+python3 tools/generate_spectron_translation_checkpoint_v320.py \
+  --parent-checkpoint artifacts/spectron_translation_checkpoint_20260828_v319.json \
+  --database /path/to/spectron_libqplay_translated_v320_dynamic_functions.i64 \
+  --application-report artifacts/spectron_dynamic_function_application_20260828.json \
+  --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_20260828.json \
+  --name-audit artifacts/spectron_name_coverage_audit_v320_20260828.json \
+  --symbol-inventory artifacts/spectron_symbol_translation_inventory_20260828.json \
+  --output artifacts/spectron_translation_checkpoint_20260828_v320.json
+
+python3 tools/validate_research_archive.py
+```
+
 The complete private chain can be rebuilt with the single offline helper:
 
 ```bash

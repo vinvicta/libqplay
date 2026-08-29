@@ -31,6 +31,73 @@ The custom `con` tool produced the same ZIP payload as the independent
 decoder. That cross-check separated a package parsing mistake from a client
 compatibility problem.
 
+## 2026-08-28: Spectron dynamic function boundary completion and v320
+
+The retained dynamic table provided one more useful source of ground truth.
+The v319 database had 11,695 IDA functions and no audited default names, but
+the separate ELF audit still listed 5,782 section-defined dynamic `FUNC`
+symbols. I compared each of those symbol values with IDA's function index.
+Five thousand seven hundred seventy were already exact starts. Twelve rows
+were different: each had a positive ELF size, a valid-looking AArch64 stack
+prologue, no containing IDA function, and no overlap at its requested end.
+
+That combination is a boundary problem, not enough evidence to invent a
+semantic source label. I therefore used the exact retained dynamic name and
+the exact ELF interval `address` through `address + size`. The reviewed rows
+are:
+
+| Address | ELF size | Retained target name |
+| ---: | ---: | --- |
+| `0x1b0140` | `0x4a0` | `_ZN10_YTgFa6HPk10bdqDgaFFMBERK10eY2wgaf6pw` |
+| `0x1b281c` | `0x314` | `_ZN10EqV_Ka3Vx910KHqDgay4MBERK10i7FHgaP2lF` |
+| `0x1b2b34` | `0x450` | `_ZN10EqV_Ka3Vx910ZCBDgaugWBERK10eY2wgaf6pw` |
+| `0x1c6c94` | `0x34c` | `_ZN10_k_Bgam3zA10sqrSLaYGpTERK10i7FHgaP2lF` |
+| `0x1c6fe4` | `0x900` | `_ZN10_k_Bgam3zA10KHqDgay4MBERK10i7FHgaP2lF` |
+| `0x1caeb4` | `0x190` | `_ZN10Q8n_Fa6V5W10ZCBDgaugWBERK10eY2wgaf6pw` |
+| `0x1cd73c` | `0x3c4` | `_ZN10_thLgaWjoI10KHqDgay4MBERK10i7FHgaP2lF` |
+| `0x1cdb04` | `0x59c` | `_ZN10_thLgaWjoI10ZCBDgaugWBERK10eY2wgaf6pw` |
+| `0x1dac5c` | `0x1b0` | `_ZN10s_YwgafWlw10PbVb4aCJD8ERK10eY2wgaf6pwS2_S2_` |
+| `0x1df0bc` | `0x34c` | `_ZN10awDo2aJRkD10KHqDgay4MBERK10i7FHgaP2lF` |
+| `0x1dfffc` | `0x41c` | `_ZN10EYKlVaL7UR10ZCBDgaugWBERK10eY2wgaf6pw` |
+| `0x2bcf44` | `0x48` | `_Z17yajl_buf_truncateP10yajl_buf_tm` |
+
+The first eleven rows are obfuscated application C++ names. The final row is
+the retained YAJL helper name. IDA's analyzer picked up the retained names
+when the boundaries were created, so the application report shows twelve
+materialized functions and zero additional rename operations. Each new
+function also receives a repeat-safe comment that records the dynamic-symbol
+size and the offline boundary evidence.
+
+The v320 copy was created from v319, saved as a new packed IDA database, and
+opened again for two independent checks. The boundary audit now reports 5,782
+exact starts and zero missing starts. The name audit reports 11,707 functions
+and zero names in the checked `sub_`, `nullsub_`, `j_`, `loc_`, and `unk_`
+families. Its name-origin counts are 6,217 translated `v18_` aliases, 417
+target-only descriptive labels, 1,013 retained target-style names, seven JNI
+exports, and 4,053 other IDA or PLT names.
+
+The complete dynamic join contains 6,770 named dynamic rows. It matches all
+5,782 section-defined function rows to an IDA function. The remaining 988
+named rows are deliberately retained as non-function rows in the inventory;
+they include data symbols, undefined imports, and other entries that should
+not be promoted to code just because they have a name. The dynamic join now
+reports 4,541 source-backed `v18_` aliases, 1,167 retained target names, 74
+other IDA matches, and 988 rows with no function at the symbol value.
+
+This pass does not recover the stripped target's original source names. It
+only completes the function boundaries justified by the target's own dynamic
+metadata. The materializer is `tools/ida_materialize_spectron_dynamic_functions.py`;
+the read-only boundary audit is `tools/ida_audit_dynamic_symbol_boundaries.py`.
+The machine-readable records are
+`artifacts/spectron_dynamic_symbol_boundaries_20260828.json`,
+`artifacts/spectron_dynamic_function_application_20260828.json`,
+`artifacts/spectron_name_coverage_audit_v320_20260828.json`,
+`artifacts/spectron_symbol_translation_inventory_20260828.json`, and
+`artifacts/spectron_translation_checkpoint_20260828_v320.json`. The v320
+database hash is
+`17015ba3140200199269ca94675e043e1e87cbefcdfa473680062a55ac96a0d6`. All
+analysis was offline and every new artifact reports `network_contacted: false`.
+
 ## 2026-08-28: Spectron function-name coverage audit and v319 null stubs
 
 The v318 database had already exhausted the useful cross-build matches from

@@ -437,6 +437,31 @@ target-only labels are deliberately kept separate from the cross-build anchor
 artifacts so a descriptive cleanup name cannot be mistaken for a recovered
 1.8 source symbol.
 
+## Spectron v319 and v320 coverage
+
+The v319 name audit found nine remaining `nullsub_*` defaults in the 11,695
+function copy. Each was a four-byte `RET` stub, so the fresh v319 copy labels
+them as `spectron_nullsub_stub_0x...` and verifies the names after reopening.
+This removes the last generic names in the checked `sub_`, `nullsub_`, `j_`,
+`loc_`, and `unk_` families without pretending to know the original source
+roles.
+
+The v320 pass addresses a different residual: twelve positive-size,
+section-defined dynamic `FUNC` symbols had no IDA function boundary. Their
+valid AArch64 prologues and exact ELF sizes justify materializing the
+boundaries, but not assigning new semantic source names. The v320 database
+contains 11,707 functions, and all 5,782 section-defined dynamic `FUNC` rows
+now have exact IDA starts. The 988 named dynamic rows that are not function
+matches remain classified as non-function entries.
+
+The name audits, dynamic boundary records, and v320 checkpoint are
+`artifacts/spectron_name_coverage_audit_v318_20260828.json`,
+`artifacts/spectron_name_coverage_audit_20260828.json`,
+`artifacts/spectron_name_coverage_audit_v320_20260828.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_20260828.json`,
+`artifacts/spectron_symbol_translation_inventory_20260828.json`, and
+`artifacts/spectron_translation_checkpoint_20260828_v320.json`.
+
 ## CyaSSL role pass
 
 The CyaSSL gap was worth a separate pass because these routines sit directly

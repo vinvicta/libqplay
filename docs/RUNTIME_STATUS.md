@@ -2934,6 +2934,32 @@ a production or physical-device validation.
 
 ## Spectron 2.2 function-name coverage audit
 
+The v320 pass compares the retained Spectron dynamic table with the translated
+IDA function index. Twelve section-defined `FUNC` symbols had positive ELF
+sizes and valid AArch64 prologues but no IDA function boundary. A fresh copy
+of v319 now materializes those exact `address` through `address + size`
+intervals and keeps the target's retained mangled names.
+
+The reopened v320 database has 11,707 functions. All 5,782 section-defined
+dynamic `FUNC` rows now have exact IDA starts, with zero missing boundaries.
+The complete joined inventory covers 6,770 named dynamic rows. Its 988 rows
+without an IDA function at the symbol value remain unpromoted because they are
+data, undefined imports, or other non-function entries. This closes a real
+boundary gap without claiming that the stripped source-name table has been
+recovered.
+
+The v320 database is
+`analysis/spectron_libqplay_translated_v320_dynamic_functions.i64` with
+SHA-256
+`17015ba3140200199269ca94675e043e1e87cbefcdfa473680062a55ac96a0d6`.
+The boundary audit, application report, name audit, dynamic join, and
+checkpoint are
+`artifacts/spectron_dynamic_symbol_boundaries_20260828.json`,
+`artifacts/spectron_dynamic_function_application_20260828.json`,
+`artifacts/spectron_name_coverage_audit_v320_20260828.json`,
+`artifacts/spectron_symbol_translation_inventory_20260828.json`, and
+`artifacts/spectron_translation_checkpoint_20260828_v320.json`.
+
 The v319 IDA checkpoint closes a small naming gap that was hidden by the
 earlier “zero `sub_` names” count. A complete audit of the 11,695-function
 translated database found nine remaining `nullsub_*` names. Each is a four-byte
