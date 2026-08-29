@@ -761,6 +761,12 @@ def main():
     spectron_checkpoint_v315 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v315.json"
     )
+    spectron_freetype_tt_size_reset_anchor = load_json(
+        "artifacts/spectron_freetype_tt_size_reset_manual_translation_anchor_20260828.json"
+    )
+    spectron_checkpoint_v316 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v316.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -16962,6 +16968,146 @@ def main():
         378,
     )
     check(
+        "Spectron tt_size_reset artifact",
+        spectron_freetype_tt_size_reset_anchor["artifact"],
+        "spectron_freetype_tt_size_reset_manual_translation_anchor_20260828",
+    )
+    check(
+        "Spectron tt_size_reset network",
+        spectron_freetype_tt_size_reset_anchor["network_contacted"],
+        False,
+    )
+    tt_size_reset_summary = spectron_freetype_tt_size_reset_anchor["summary"]
+    check("Spectron tt_size_reset anchor count", tt_size_reset_summary["anchor_count"], 1)
+    check(
+        "Spectron tt_size_reset target set size",
+        tt_size_reset_summary["unique_target_count"],
+        1,
+    )
+    check(
+        "Spectron tt_size_reset high-confidence count",
+        tt_size_reset_summary["high_confidence_count"],
+        1,
+    )
+    check(
+        "Spectron tt_size_reset normalized count",
+        tt_size_reset_summary["normalized_shape_exact_count"],
+        1,
+    )
+    check(
+        "Spectron tt_size_reset full metric count",
+        tt_size_reset_summary["full_metric_exact_count"],
+        1,
+    )
+    check(
+        "Spectron tt_size_reset register-detail count",
+        tt_size_reset_summary["register_detail_only_count"],
+        0,
+    )
+    check(
+        "Spectron tt_size_reset source default count",
+        tt_size_reset_summary["source_default_name_count"],
+        1,
+    )
+    check(
+        "Spectron tt_size_reset target default count",
+        tt_size_reset_summary["target_default_name_count"],
+        1,
+    )
+    check(
+        "Spectron tt_size_reset role count",
+        tt_size_reset_summary["tt_size_reset_count"],
+        1,
+    )
+    tt_size_reset_row = spectron_freetype_tt_size_reset_anchor["anchors"][0]
+    check("Spectron tt_size_reset source", tt_size_reset_row["original_ea"], "0x25eaf8")
+    check("Spectron tt_size_reset target", tt_size_reset_row["spectron_ea"], "0x26bf68")
+    check(
+        "Spectron tt_size_reset name",
+        tt_size_reset_row["proposed_name"],
+        "v18_tt_size_reset",
+    )
+    check(
+        "Spectron tt_size_reset source role",
+        tt_size_reset_row["source_name"],
+        "tt_size_reset",
+    )
+    check(
+        "Spectron tt_size_reset source file",
+        tt_size_reset_row["source_file"],
+        "src/truetype/ttobjs.c",
+    )
+    check(
+        "Spectron tt_size_reset metrics",
+        tt_size_reset_row["metric_differences"],
+        [],
+    )
+    check(
+        "Spectron tt_size_reset normalized",
+        tt_size_reset_row["normalized_shape_equal"],
+        True,
+    )
+    check(
+        "Spectron tt_size_reset full match",
+        tt_size_reset_row["full_metric_equal"],
+        True,
+    )
+    check(
+        "Spectron tt_size_reset source slot",
+        spectron_freetype_tt_size_reset_anchor["context"]["source_size_reset_slot"],
+        "0x36d3e0",
+    )
+    check(
+        "Spectron tt_size_reset target slot",
+        spectron_freetype_tt_size_reset_anchor["context"]["target_size_reset_slot"],
+        "0x3801b0",
+    )
+    check(
+        "Spectron tt_size_reset verified name count",
+        spectron_checkpoint_v316["tt_size_reset_anchor"]["verified_name_count"],
+        1,
+    )
+    check(
+        "Spectron tt_size_reset reopen failures",
+        spectron_checkpoint_v316["tt_size_reset_anchor"]["reopen_failure_count"],
+        0,
+    )
+    check(
+        "Spectron v316 checkpoint artifact",
+        spectron_checkpoint_v316["artifact"],
+        "spectron_translation_checkpoint_20260828_v316",
+    )
+    check(
+        "Spectron v316 checkpoint parent",
+        spectron_checkpoint_v316["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v315",
+    )
+    check(
+        "Spectron v316 checkpoint parent path",
+        spectron_checkpoint_v316["parent_checkpoint"]["path"],
+        "artifacts/spectron_translation_checkpoint_20260828_v315.json",
+    )
+    check(
+        "Spectron v316 checkpoint database hash",
+        spectron_checkpoint_v316["database"]["sha256"],
+        "ba52348b6c87fc441fe94c3c70fc96efd4a5e6be4a1c72ee1f3efc5269b42b5b",
+    )
+    check(
+        "Spectron v316 checkpoint database close-reopen",
+        spectron_checkpoint_v316["database"]["close_reopen_verified"],
+        True,
+    )
+    check(
+        "Spectron v316 checkpoint function count",
+        spectron_checkpoint_v316["database"]["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v316 checkpoint default sub count",
+        spectron_checkpoint_v316["database"]["default_sub_function_count"],
+        377,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -17349,6 +17495,8 @@ def main():
         spectron_checkpoint_v314,
         spectron_jcmarker_anchors,
         spectron_checkpoint_v315,
+        spectron_freetype_tt_size_reset_anchor,
+        spectron_checkpoint_v316,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

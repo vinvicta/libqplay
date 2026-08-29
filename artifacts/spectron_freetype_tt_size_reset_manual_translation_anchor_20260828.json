@@ -1,0 +1,128 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target TrueType driver class records point to the matching body in their size_reset slot.",
+        "The target pointer table begins at 0x380170, and its size_reset pointer at 0x3801b0 is the source pointer at 0x36d3e0 plus the shared 0xd470 relocation.",
+        "The source and target pseudocode perform the same FT_Request_Metrics, FT_DivFix, FT_MulFix, and FT_MulDiv scaling sequence and set the same valid flag.",
+        "The official FreeType ttobjs.c source defines this body as tt_size_reset and gives the matching size-metrics reset contract.",
+        "All recorded ARM64 feature metrics are exact, including instruction shape, call topology, and register-detail allocation."
+      ],
+      "family": "FreeType TrueType size-management helpers",
+      "full_metric_equal": true,
+      "match_kind": "manual-freetype-tt-size-reset-anchor",
+      "metric_differences": [],
+      "name_action": "rename-with-v18-prefix",
+      "normalized_shape_equal": true,
+      "operation": "resets TrueType size metrics after a size or resolution change, scaling the horizontal and vertical metrics and selecting the active ppem dimension",
+      "original_current_name": "sub_25EAF8",
+      "original_default_name": true,
+      "original_direct_call_names": [
+        ".FT_DivFix",
+        ".FT_MulDiv",
+        ".FT_MulFix",
+        ".FT_Request_Metrics"
+      ],
+      "original_ea": "0x25eaf8",
+      "original_function_end": "0x25ec84",
+      "original_metrics": {
+        "basic_block_count": 10,
+        "branch_count": 17,
+        "call_count": 9,
+        "instruction_count": 99,
+        "mnemonic_hash": "7d79ffdc12265e2019c1e8df1f4f340017c7f9eca0dd31be960af9c2d0cb9fef",
+        "opcode_shape_hash": "fda0298faa5dbd474d67d54d77dce8b285a878a61b28dbc515c6ac08007a37d3",
+        "register_detail_hash": "4d47efd81fbc8847185aedc28093a0aa885f27060c4a48ede489b1b250d5545a",
+        "register_shape_hash": "2c46a7fdf87198f11a080aa84b8178ee591b6d5c7b3ff96cc755f3f101e97e8b",
+        "return_count": 1,
+        "shape_hash": "10257d9fbcdff29306d530648dc9ba9c1499fe51796d177258f9482061191fb9",
+        "size": 396,
+        "string_refs_hash": null
+      },
+      "original_name": "sub_25EAF8",
+      "original_string_refs": [],
+      "proposed_name": "v18_tt_size_reset",
+      "reference_sources": [
+        "https://android.googlesource.com/platform/external/freetype/%2B/6da2e02232e1bcf31cfb78894d46c7902b90ee9f/src/truetype/ttobjs.c"
+      ],
+      "semantic_match_already_present": false,
+      "source_basis": "matching pseudocode, corresponding TrueType driver class slot, official FreeType source role, and exact ARM64 feature metrics",
+      "source_component": "FreeType TrueType driver",
+      "source_data": "TrueType driver class size_reset slot at 0x36d3e0, the eighth qword in the class record beginning at 0x36d3a0",
+      "source_file": "src/truetype/ttobjs.c",
+      "source_name": "tt_size_reset",
+      "source_role": "TrueType size-metrics reset helper",
+      "spectron_current_name": "sub_26BF68",
+      "spectron_default_name": true,
+      "spectron_direct_call_names": [
+        ".FT_DivFix",
+        ".FT_MulDiv",
+        ".FT_MulFix",
+        ".FT_Request_Metrics"
+      ],
+      "spectron_ea": "0x26bf68",
+      "spectron_function_end": "0x26c0f4",
+      "spectron_metrics": {
+        "basic_block_count": 10,
+        "branch_count": 17,
+        "call_count": 9,
+        "instruction_count": 99,
+        "mnemonic_hash": "7d79ffdc12265e2019c1e8df1f4f340017c7f9eca0dd31be960af9c2d0cb9fef",
+        "opcode_shape_hash": "fda0298faa5dbd474d67d54d77dce8b285a878a61b28dbc515c6ac08007a37d3",
+        "register_detail_hash": "4d47efd81fbc8847185aedc28093a0aa885f27060c4a48ede489b1b250d5545a",
+        "register_shape_hash": "2c46a7fdf87198f11a080aa84b8178ee591b6d5c7b3ff96cc755f3f101e97e8b",
+        "return_count": 1,
+        "shape_hash": "10257d9fbcdff29306d530648dc9ba9c1499fe51796d177258f9482061191fb9",
+        "size": 396,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_component": "stripped Spectron FreeType TrueType driver",
+      "target_data": "TrueType driver class size_reset slot at 0x3801b0, the eighth qword in the class record beginning at 0x380170",
+      "topology": "the TrueType driver class stores this body in its size_reset slot; the helper requests current face metrics, copies the requested width and height, recomputes scaled ppem metrics, and marks the TrueType size metrics valid"
+    }
+  ],
+  "artifact": "spectron_freetype_tt_size_reset_manual_translation_anchor_20260828",
+  "context": {
+    "address_displacement": "0xd470",
+    "name_policy": "v18-prefixed semantic role because the target candidate retained only an IDA auto-generated name",
+    "reference_sources": [
+      "https://android.googlesource.com/platform/external/freetype/%2B/6da2e02232e1bcf31cfb78894d46c7902b90ee9f/src/truetype/ttobjs.c"
+    ],
+    "role_resolution": "matching TrueType driver class slot, matching pseudocode, official FreeType source role, and exact ARM64 feature metrics",
+    "source_driver_class": "TrueType driver class record beginning at 0x36d3a0",
+    "source_region": "0x25eaf8 through 0x25ec84",
+    "source_size_reset_slot": "0x36d3e0",
+    "target_driver_class": "TrueType driver class record beginning at 0x380170",
+    "target_region": "0x26bf68 through 0x26c0f4",
+    "target_size_reset_slot": "0x3801b0"
+  },
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_tt_v308.json",
+    "original_features_sha256": "243341ad40e912500365b6d7eb5b69f9f3b9d6200f5c825629cfc56d4343ac07",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b423221",
+    "spectron_features": "/tmp/spectron_features_v315_jcmarker.json",
+    "spectron_features_sha256": "c9ad2853ce5aa807f238479ce0aec2ec76b0f0f208bf847f24866522883302c4"
+  },
+  "interpretation": [
+    "This is a reviewed FreeType role label, not a claim that the stripped target retained its original debug symbol.",
+    "The driver-class pointer table is stronger than a displacement-only match because the source and target records select the same size_reset slot while the surrounding class fields relocate together.",
+    "The target body is a complete feature-for-feature match for the source body, so v18_tt_size_reset is a high-confidence semantic translation."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchor for the FreeType TrueType size reset helper",
+  "summary": {
+    "anchor_count": 1,
+    "full_metric_exact_count": 1,
+    "high_confidence_count": 1,
+    "normalized_shape_exact_count": 1,
+    "register_detail_only_count": 0,
+    "source_default_name_count": 1,
+    "target_default_name_count": 1,
+    "tt_size_reset_count": 1,
+    "unique_target_count": 1
+  }
+}

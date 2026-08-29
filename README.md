@@ -280,6 +280,11 @@ two internal DQT and DHT emitters are tied to their writer callers. All nine
 match normalized ARM64 shape, seven match every recorded metric, and two
 differ only in register-detail allocation. The target now has 378 remaining
 default `sub_` names.
+The v316 revision translates the TrueType size-metrics reset helper. The source
+and target TrueType driver class records select the same `size_reset` slot at
+`0x36d3e0` and `0x3801b0`, and the surrounding class records retain the shared
+`0xd470` displacement. The 99-instruction bodies match every recorded ARM64
+metric. The target now has 377 remaining default `sub_` names.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -380,6 +385,8 @@ The current v314 database is kept locally as
 `analysis/spectron_libqplay_translated_v314_freetype_apply.i64`.
 The current v315 database is kept locally as
 `analysis/spectron_libqplay_translated_v315_jcmarker.i64`.
+The current v316 database is kept locally as
+`analysis/spectron_libqplay_translated_v316_tt_size_reset.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
