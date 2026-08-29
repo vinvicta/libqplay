@@ -2092,3 +2092,95 @@ helpers, compiler-generated lifecycle code, cleanup thunks, or the PLT
 resolver. Assigning names such as `jpeg_internal_17` would make the IDA view
 look fuller but would not be a translation of a source symbol. They remain
 explicitly classified and addressable instead.
+
+## 2026-08-29: v349 exact sound-wrapper reconciliation
+
+The v349 pass closes ten semantic-map ambiguities in the `TSounds`,
+`TSoundPlayerJava`, and `TSoundEffectJava` families. These rows are slightly
+different from a normal rename pass. The target database already contained
+the matching `v18_` display names from earlier work, but the source-to-target
+relationships had not yet been promoted into the current semantic map. The
+pass therefore records the reasoning explicitly and adds review comments to a
+fresh database copy.
+
+| Source function | Source EA | Target EA | Target alias | Main discriminator |
+| --- | ---: | ---: | --- | --- |
+| `TSounds_isMusicPlaying` | `0xe0af8` | `0xe16a8` | `v18_TSounds_isMusicPlaying` | sound-player vtable slot `+56` |
+| `TSounds_getMusicPos_void` | `0xe0b3c` | `0xe16ec` | `v18_TSounds_getMusicPos_void` | position slot `+80` |
+| `TSounds_getMusicLen_void` | `0xe0b7c` | `0xe172c` | `v18_TSounds_getMusicLen_void` | length slot `+88` |
+| `TSounds_getDisabledSoundEffects` | `0xe0c84` | `0xe1834` | `v18_TSounds_getDisabledSoundEffects` | target `vuuHgangcF` list getter |
+| `TSounds_getSoundEffect_TString_const` | `0xe0e48` | `0xe1a1c` | `v18_TSounds_getSoundEffect_TString_const` | lowercase, hash, ignore-case lookup |
+| `TSounds_stopMidi_void` | `0xe1060` | `0xe1c34` | `v18_TSounds_stopMidi_void` | MIDI-stop slot `+72` |
+| `TSounds_updateMusic_void` | `0xe1888` | `0xe2470` | `v18_TSounds_updateMusic_void` | music-update slot `+48` |
+| `TSoundPlayerJava_stopMidi_void` | `0xe2b58` | `0xe3748` | `v18_TSoundPlayerJava_stopMidi_void` | Java player helper order |
+| `TSoundPlayerJava_setMusicVolumeAndPan_int_int` | `0xe2b78` | `0xe3768` | `v18_TSoundPlayerJava_setMusicVolumeAndPan_int_int` | adjacent Java player helper |
+| `TSoundEffectJava_TSoundEffectJava__2` | `0xe2c14` | `0xe3804` | `v18_TSoundEffectJava_TSoundEffectJava__2` | Java sound-effect constructor wrapper |
+
+All ten pairs match the complete normalized feature record. The records are
+68, 64, 64, 44, 92, 48, 48, 32, 32, and 32 bytes respectively, with the
+same instruction counts, basic-block counts, branch counts, call counts, and
+all ten feature hashes on each side. The target and source direct-call names
+change where the target uses `C8THgaTQxF`, `KKhLga4xoI`, `wiULgacZUI`, or
+`vuuHgangcF`, but those wrapper names are exactly the kind of cross-build
+change the normalized comparison is intended to tolerate.
+
+The first three rows are a three-way shape collision until their vtable slots
+are read. `isMusicPlaying` uses the sound-player slot at `+56`. The position
+and length getters both have the same 16-instruction body, but target slots
+`+80` and `+88` distinguish them. The disabled-effects getter is another
+shape collision with unrelated one-call wrappers, but its source global and
+target `vuuHgangcF` list call identify it. The sound-effect lookup is fixed by
+its four-call sequence: lowercase, hash, case-insensitive lookup, and
+temporary-string cleanup. The stop-MIDI and updateMusic rows share a compact
+shape, but their vtable slots and positions in the target cluster are
+different. The Java rows are fixed by their class-local order and their exact
+feature records.
+
+Five additional rows were deliberately not promoted by v349. They are strong
+layout-aware candidates, not exact-shape matches:
+
+* `TSounds_initStaticVars_void` at `0xe2a88` to `0xe3678`: both construct the
+  sound-effects hash list and disabled-effects list, but the target's
+  `KKhLga4xoI` and `vuuHgangcF` layouts differ from the source `THashList` and
+  `TStringList` sizes.
+* `TSoundEffect_TSoundEffect_TString_const` at `0xe0dc0` to `0xe1970`:
+  the target creates a `CanTfaz6bZ` bridge before entering the base object
+  constructor, making the target body 172 bytes instead of 136.
+* `TSounds_play_impl_TString_const_bool_bool_double_double` at `0xe135c` to
+  `0xe1f34`: the target preserves the 72-block selection, download, cache,
+  and play flow but adds wrapper calls, growing from 1,312 to 1,328 bytes.
+* `TSounds_script_setSoundPitchByNote` at `0xe2858` to `0xe3440`: the same
+  note table and `powf` pitch calculation survive, with a small two-instruction
+  wrapper difference.
+* `TSoundEffectJava_play_void` at `0xe31d0` to `0xe3dc0`: the Java byte-array,
+  static-method, local-reference, loaded-state, and timestamp flow survives,
+  but the target removes the source `steps` special case and is shorter.
+
+These five rows remain in the research notes as a separate layout-change
+queue. Keeping them out of the exact artifact prevents a readable alias from
+being mistaken for a proof that the target object layout is identical.
+
+The v349 copy has 11,707 functions, zero audited default names, 6,441
+translated aliases, and 439 target-only descriptive labels. The semantic map
+now contains 3,732 mapped pairs, 3,672 high-confidence pairs, 1,004 remaining
+ambiguities, and 608 unmatched source functions. The dynamic-symbol audits
+still report 5,782 exact function starts, 4,796 source-backed dynamic rows,
+and 1,656 exact retained dynamic names. Those unchanged totals are expected:
+the ten target aliases were already present in the IDA copy.
+
+The saved database is
+`analysis/spectron_libqplay_translated_v349_sounds_exact.i64` with SHA-256
+`ede4f9187e01c4a415181f423dd9c7b8467deb38595d399dcb19341fd9203faf`.
+The anchor, application, reopen, feature, name, boundary, dynamic-symbol,
+semantic-map, and checkpoint records are the files beginning with
+`spectron_sounds_exact_`, `spectron_features_v349_`,
+`spectron_name_coverage_audit_v349`, `spectron_dynamic_symbol_`,
+`spectron_semantic_translation_v349`, and
+`spectron_translation_checkpoint_20260829_v349` under `artifacts/`.
+The generators are `tools/generate_spectron_sounds_exact_anchors_v349.py`,
+`tools/carry_forward_spectron_semantic_translation_v349.py`, and
+`tools/generate_spectron_translation_checkpoint_v349.py`.
+
+This pass changed only a disposable IDA database copy and its offline
+metadata. It did not patch the APK or native library, alter TLS, contact a
+game service, or change the runtime loading repair.

@@ -1529,6 +1529,33 @@ def main():
     spectron_checkpoint_v348 = load_json(
         "artifacts/spectron_translation_checkpoint_20260829_v348.json"
     )
+    spectron_sounds_exact_anchors_v349 = load_json(
+        "artifacts/spectron_sounds_exact_manual_translation_anchors_20260829.json"
+    )
+    spectron_sounds_exact_application_v349 = load_json(
+        "artifacts/spectron_sounds_exact_manual_translation_application_20260829.json"
+    )
+    spectron_sounds_exact_verification_v349 = load_json(
+        "artifacts/spectron_sounds_exact_manual_translation_verification_20260829.json"
+    )
+    spectron_name_coverage_v349 = load_json(
+        "artifacts/spectron_name_coverage_audit_v349.json"
+    )
+    spectron_dynamic_boundaries_v349 = load_json(
+        "artifacts/spectron_dynamic_symbol_boundaries_v349.json"
+    )
+    spectron_dynamic_symbol_coverage_v349 = load_json(
+        "artifacts/spectron_dynamic_symbol_coverage_audit_v349.json"
+    )
+    spectron_semantic_translation_v349 = load_json(
+        "artifacts/spectron_semantic_translation_v349.json"
+    )
+    spectron_features_v349 = load_json(
+        "artifacts/spectron_features_v349_sounds_exact.json"
+    )
+    spectron_checkpoint_v349 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260829_v349.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -25968,6 +25995,295 @@ def main():
         },
     )
     check(
+        "Spectron v349 exact sound-wrapper anchor artifact",
+        {
+            "artifact": spectron_sounds_exact_anchors_v349["artifact"],
+            "network_contacted": spectron_sounds_exact_anchors_v349["network_contacted"],
+            "summary": spectron_sounds_exact_anchors_v349["summary"],
+            "original_eas": [row["original_ea"] for row in spectron_sounds_exact_anchors_v349["anchors"]],
+            "target_eas": [row["spectron_ea"] for row in spectron_sounds_exact_anchors_v349["anchors"]],
+            "proposed_names": [row["proposed_name"] for row in spectron_sounds_exact_anchors_v349["anchors"]],
+        },
+        {
+            "artifact": "spectron_sounds_exact_manual_translation_anchors_20260829",
+            "network_contacted": False,
+            "summary": {
+                "address_delta_groups": {"+0xbb0": 4, "+0xbd4": 2, "+0xbe8": 1, "+0xbf0": 3},
+                "anchor_count": 10,
+                "exact_shape_anchor_count": 10,
+                "high_confidence_count": 10,
+                "layout_change_anchor_count": 0,
+                "new_context_anchor_count": 10,
+                "target_default_name_count": 0,
+            },
+            "original_eas": [
+                "0xe0af8",
+                "0xe0b3c",
+                "0xe0b7c",
+                "0xe0c84",
+                "0xe0e48",
+                "0xe1060",
+                "0xe1888",
+                "0xe2b58",
+                "0xe2b78",
+                "0xe2c14",
+            ],
+            "target_eas": [
+                "0xe16a8",
+                "0xe16ec",
+                "0xe172c",
+                "0xe1834",
+                "0xe1a1c",
+                "0xe1c34",
+                "0xe2470",
+                "0xe3748",
+                "0xe3768",
+                "0xe3804",
+            ],
+            "proposed_names": [
+                "v18_TSounds_isMusicPlaying",
+                "v18_TSounds_getMusicPos_void",
+                "v18_TSounds_getMusicLen_void",
+                "v18_TSounds_getDisabledSoundEffects",
+                "v18_TSounds_getSoundEffect_TString_const",
+                "v18_TSounds_stopMidi_void",
+                "v18_TSounds_updateMusic_void",
+                "v18_TSoundPlayerJava_stopMidi_void",
+                "v18_TSoundPlayerJava_setMusicVolumeAndPan_int_int",
+                "v18_TSoundEffectJava_TSoundEffectJava__2",
+            ],
+        },
+    )
+    check(
+        "Spectron v349 exact sound-wrapper anchor application",
+        {
+            "artifact": spectron_sounds_exact_application_v349["artifact"],
+            "expected_artifact": spectron_sounds_exact_application_v349["expected_artifact"],
+            "apply": spectron_sounds_exact_application_v349["apply"],
+            "anchor_count": spectron_sounds_exact_application_v349["anchor_count"],
+            "resolved_count": spectron_sounds_exact_application_v349["resolved_count"],
+            "renamed_count": spectron_sounds_exact_application_v349["renamed_count"],
+            "comments_added": spectron_sounds_exact_application_v349["comments_added"],
+            "failure_count": spectron_sounds_exact_application_v349["failure_count"],
+            "saved": spectron_sounds_exact_application_v349["saved"],
+        },
+        {
+            "artifact": "spectron_manual_anchor_application",
+            "expected_artifact": "spectron_sounds_exact_manual_translation_anchors_20260829",
+            "apply": True,
+            "anchor_count": 10,
+            "resolved_count": 10,
+            "renamed_count": 0,
+            "comments_added": 9,
+            "failure_count": 0,
+            "saved": True,
+        },
+    )
+    check(
+        "Spectron v349 exact sound-wrapper reopen verification",
+        {
+            "artifact": spectron_sounds_exact_verification_v349["artifact"],
+            "expected_artifact": spectron_sounds_exact_verification_v349["expected_artifact"],
+            "anchor_count": spectron_sounds_exact_verification_v349["anchor_count"],
+            "verified_name_count": spectron_sounds_exact_verification_v349["verified_name_count"],
+            "failure_count": spectron_sounds_exact_verification_v349["failure_count"],
+            "function_count": spectron_sounds_exact_verification_v349["function_count"],
+            "verified": spectron_sounds_exact_verification_v349["verified"],
+        },
+        {
+            "artifact": "spectron_manual_anchor_reopen_verification",
+            "expected_artifact": "spectron_sounds_exact_manual_translation_anchors_20260829",
+            "anchor_count": 10,
+            "verified_name_count": 10,
+            "failure_count": 0,
+            "function_count": 11707,
+            "verified": True,
+        },
+    )
+    check(
+        "Spectron v349 name audit",
+        {
+            "artifact": spectron_name_coverage_v349["artifact"],
+            "network_contacted": spectron_name_coverage_v349["network_contacted"],
+            "input_sha256": spectron_name_coverage_v349["input_sha256"],
+            "function_count": spectron_name_coverage_v349["function_count"],
+            "default_name_count": spectron_name_coverage_v349["default_name_count"],
+            "name_origins": spectron_name_coverage_v349["name_origins"],
+        },
+        {
+            "artifact": "spectron_name_coverage_audit",
+            "network_contacted": False,
+            "input_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+            "function_count": 11707,
+            "default_name_count": 0,
+            "name_origins": {
+                "ida_named_or_other": 4052,
+                "target_jni_export": 7,
+                "target_named_export": 768,
+                "target_only_descriptive": 439,
+                "translated_v18_alias": 6441,
+            },
+        },
+    )
+    check(
+        "Spectron v349 dynamic boundary counts",
+        {
+            "artifact": spectron_dynamic_boundaries_v349["artifact"],
+            "network_contacted": spectron_dynamic_boundaries_v349["network_contacted"],
+            "input_sha256": spectron_dynamic_boundaries_v349["input_sha256"],
+            "defined_function_symbol_count": spectron_dynamic_boundaries_v349["defined_function_symbol_count"],
+            "ida_exact_start_count": spectron_dynamic_boundaries_v349["ida_exact_start_count"],
+            "ida_missing_exact_start_count": spectron_dynamic_boundaries_v349["ida_missing_exact_start_count"],
+            "row_count": len(spectron_dynamic_boundaries_v349["rows"]),
+        },
+        {
+            "artifact": "spectron_dynamic_symbol_boundary_audit",
+            "network_contacted": False,
+            "input_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+            "defined_function_symbol_count": 5782,
+            "ida_exact_start_count": 5782,
+            "ida_missing_exact_start_count": 0,
+            "row_count": 5782,
+        },
+    )
+    check(
+        "Spectron v349 dynamic symbol coverage",
+        {
+            "artifact": spectron_dynamic_symbol_coverage_v349["artifact"],
+            "network_contacted": spectron_dynamic_symbol_coverage_v349["network_contacted"],
+            "input_sha256": spectron_dynamic_symbol_coverage_v349["input_sha256"],
+            "summary": spectron_dynamic_symbol_coverage_v349["summary"],
+        },
+        {
+            "artifact": "spectron_dynamic_symbol_coverage_audit_20260828",
+            "network_contacted": False,
+            "input_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+            "summary": {
+                "defined_named_symbol_count": 6600,
+                "location_counts": {
+                    "ida_data_item": 482,
+                    "ida_function_exact": 5782,
+                    "ida_noncode_item": 336,
+                    "undefined_or_zero_value": 170,
+                },
+                "name_match_counts": {
+                    "item_name_match": 1656,
+                    "item_name_mismatch": 5114,
+                    "value_name_match": 1656,
+                    "value_name_mismatch": 5114,
+                },
+                "named_dynamic_symbol_count": 6770,
+                "status_counts": {
+                    "exact_retained_dynamic_name": 1656,
+                    "linker_boundary_alias_mismatch": 7,
+                    "other_retained_target_name": 119,
+                    "source_backed_v18_alias": 4796,
+                    "target_only_descriptive": 22,
+                    "undefined_import_with_plt_stub": 169,
+                    "undefined_no_target_address": 1,
+                },
+            },
+        },
+    )
+    check(
+        "Spectron v349 semantic translation carry-forward",
+        {
+            "artifact": spectron_semantic_translation_v349["artifact"],
+            "summary": spectron_semantic_translation_v349["summary"],
+            "carried_forward": spectron_semantic_translation_v349["carried_forward"]["target_feature_count"],
+            "manual_matches_added": spectron_semantic_translation_v349["carried_forward"]["manual_matches_added"],
+            "ambiguous_rows_resolved": spectron_semantic_translation_v349["carried_forward"]["ambiguous_rows_resolved"],
+            "source_backed_translation_change": spectron_checkpoint_v349["semantic_function_translation_v349"]["source_backed_translation_change"],
+            "target_only_label_change": spectron_checkpoint_v349["semantic_function_translation_v349"]["target_only_label_change"],
+        },
+        {
+            "artifact": "spectron_semantic_function_translation",
+            "summary": {
+                "ambiguous_functions": 1004,
+                "mapped_functions": 3732,
+                "mapped_high_confidence": 3672,
+                "mapped_medium_confidence": 60,
+                "original_functions": 11308,
+                "spectron_functions": 11707,
+                "unique_spectron_targets": 3732,
+                "unmatched_functions": 608,
+            },
+            "carried_forward": 11707,
+            "manual_matches_added": 10,
+            "ambiguous_rows_resolved": 10,
+            "source_backed_translation_change": True,
+            "target_only_label_change": False,
+        },
+    )
+    check(
+        "Spectron v349 feature export",
+        {
+            "artifact": spectron_features_v349["artifact"],
+            "network_contacted": spectron_features_v349["network_contacted"],
+            "function_count": spectron_features_v349["function_count"],
+        },
+        {
+            "artifact": "ida_function_features",
+            "network_contacted": False,
+            "function_count": 11707,
+        },
+    )
+    check(
+        "Spectron v349 checkpoint artifact",
+        {
+            "artifact": spectron_checkpoint_v349["artifact"],
+            "network_contacted": spectron_checkpoint_v349["network_contacted"],
+            "parent": spectron_checkpoint_v349["parent_checkpoint"]["artifact"],
+        },
+        {
+            "artifact": "spectron_translation_checkpoint_20260829_v349",
+            "network_contacted": False,
+            "parent": "spectron_translation_checkpoint_20260829_v348",
+        },
+    )
+    check(
+        "Spectron v349 checkpoint database",
+        {
+            "sha256": spectron_checkpoint_v349["database"]["sha256"],
+            "close_reopen_verified": spectron_checkpoint_v349["database"]["close_reopen_verified"],
+            "function_count": spectron_checkpoint_v349["database"]["function_count"],
+            "default_name_count": spectron_checkpoint_v349["database"]["default_name_count"],
+        },
+        {
+            "sha256": "ede4f9187e01c4a415181f423dd9c7b8467deb38595d399dcb19341fd9203faf",
+            "close_reopen_verified": True,
+            "function_count": 11707,
+            "default_name_count": 0,
+        },
+    )
+    check(
+        "Spectron v349 exact sound-wrapper checkpoint",
+        {
+            "anchor_count": spectron_checkpoint_v349["sounds_translation_v349"]["anchor_count"],
+            "high_confidence_count": spectron_checkpoint_v349["sounds_translation_v349"]["high_confidence_count"],
+            "exact_shape_anchor_count": spectron_checkpoint_v349["sounds_translation_v349"]["exact_shape_anchor_count"],
+            "layout_change_anchor_count": spectron_checkpoint_v349["sounds_translation_v349"]["layout_change_anchor_count"],
+            "new_context_anchor_count": spectron_checkpoint_v349["sounds_translation_v349"]["new_context_anchor_count"],
+            "source_counterpart_count": spectron_checkpoint_v349["sounds_translation_v349"]["source_counterpart_count"],
+            "resolved_ambiguous_count": spectron_checkpoint_v349["sounds_translation_v349"]["resolved_ambiguous_count"],
+            "target_default_name_count": spectron_checkpoint_v349["sounds_translation_v349"]["target_default_name_count"],
+            "reopen_verified": spectron_checkpoint_v349["sounds_translation_v349"]["reopen_verified"],
+            "existing_target_alias_count": spectron_checkpoint_v349["sounds_translation_v349"]["existing_target_alias_count"],
+        },
+        {
+            "anchor_count": 10,
+            "high_confidence_count": 10,
+            "exact_shape_anchor_count": 10,
+            "layout_change_anchor_count": 0,
+            "new_context_anchor_count": 10,
+            "source_counterpart_count": 10,
+            "resolved_ambiguous_count": 10,
+            "target_default_name_count": 0,
+            "reopen_verified": True,
+            "existing_target_alias_count": 10,
+        },
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -26535,6 +26851,13 @@ def main():
         spectron_semantic_translation_v348,
         spectron_features_v348,
         spectron_checkpoint_v348,
+        spectron_sounds_exact_anchors_v349,
+        spectron_name_coverage_v349,
+        spectron_dynamic_boundaries_v349,
+        spectron_dynamic_symbol_coverage_v349,
+        spectron_semantic_translation_v349,
+        spectron_features_v349,
+        spectron_checkpoint_v349,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

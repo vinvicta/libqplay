@@ -8076,3 +8076,73 @@ chain, repeat the same packet sequence on a real ARM64 device, and compare a
 live server's resource and login responses with the captured local trace.
 Those tests should only use an endpoint and account that the operator is
 authorized to test.
+
+## v349 exact TSounds and Java-audio wrappers
+
+The v349 pass reconciles ten source-backed sound rows that were still present
+in the semantic map's ambiguity set even though the target IDA database
+already displayed the corresponding `v18_` aliases. This is an important
+distinction: v349 adds explicit source-to-target evidence and review comments;
+it does not claim that a readable 1.8 symbol survived in the stripped target.
+
+| Source | Target | Target alias | Decision basis |
+| --- | --- | --- | --- |
+| `TSounds_isMusicPlaying` at `0xe0af8` | `0xe16a8` | `v18_TSounds_isMusicPlaying` | sound-player vtable slot `+56` |
+| `TSounds_getMusicPos_void` at `0xe0b3c` | `0xe16ec` | `v18_TSounds_getMusicPos_void` | position slot `+80` |
+| `TSounds_getMusicLen_void` at `0xe0b7c` | `0xe172c` | `v18_TSounds_getMusicLen_void` | length slot `+88` |
+| `TSounds_getDisabledSoundEffects` at `0xe0c84` | `0xe1834` | `v18_TSounds_getDisabledSoundEffects` | disabled-effects getter |
+| `TSounds_getSoundEffect_TString_const` at `0xe0e48` | `0xe1a1c` | `v18_TSounds_getSoundEffect_TString_const` | lowercase, hash, and ignore-case lookup |
+| `TSounds_stopMidi_void` at `0xe1060` | `0xe1c34` | `v18_TSounds_stopMidi_void` | MIDI-stop slot `+72` |
+| `TSounds_updateMusic_void` at `0xe1888` | `0xe2470` | `v18_TSounds_updateMusic_void` | music-update slot `+48` |
+| `TSoundPlayerJava_stopMidi_void` at `0xe2b58` | `0xe3748` | `v18_TSoundPlayerJava_stopMidi_void` | Java player helper order and exact shape |
+| `TSoundPlayerJava_setMusicVolumeAndPan_int_int` at `0xe2b78` | `0xe3768` | `v18_TSoundPlayerJava_setMusicVolumeAndPan_int_int` | adjacent Java player helper |
+| `TSoundEffectJava_TSoundEffectJava__2` at `0xe2c14` | `0xe3804` | `v18_TSoundEffectJava_TSoundEffectJava__2` | Java sound-effect constructor wrapper |
+
+Every row matches the complete normalized feature record: size, instruction
+count, basic-block count, branch count, call count, mnemonic hash,
+opcode-shape hash, register-shape hash, coarse shape hash, and string-reference
+hash. The address deltas form four compact groups: `+0xbb0` for four rows,
+`+0xbd4` for two, `+0xbe8` for one, and `+0xbf0` for three. The direct
+pseudocode review resolves the shape collisions. In particular, the two
+music getters use different vtable slots, the stop-MIDI and updateMusic rows
+use different slots and clusters, and the Java rows are fixed by their
+class-local order.
+
+Five larger sound routines remain deliberately separate layout-change
+candidates: `TSounds_initStaticVars_void`,
+`TSoundEffect_TSoundEffect_TString_const`,
+`TSounds_play_impl_TString_const_bool_bool_double_double`,
+`TSounds_script_setSoundPitchByNote`, and `TSoundEffectJava_play_void`.
+Their target pseudocode strongly follows the source, but the target's
+`C8THgaTQxF`, `CanTfaz6bZ`, and Java wrapper layouts add or remove instructions.
+They need a layout-aware pass rather than an exact-shape claim.
+
+The ten anchors were applied to a fresh v348-derived IDA copy. All ten
+function starts and names verified after reopening. The target already had all
+ten aliases, so IDA performed zero new renames and added nine new comments,
+with one identical comment already present. The v349 copy contains 11,707
+functions, 6,441 translated aliases, 439 target-only descriptive labels, and
+zero audited default names. The semantic map now has 3,732 mapped pairs,
+3,672 high-confidence pairs, 1,004 remaining ambiguities, and 608 unmatched
+functions.
+
+The v349 database is
+`analysis/spectron_libqplay_translated_v349_sounds_exact.i64` with SHA-256
+`ede4f9187e01c4a415181f423dd9c7b8467deb38595d399dcb19341fd9203faf`.
+The complete records are
+`artifacts/spectron_sounds_exact_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_sounds_exact_manual_translation_application_20260829.json`,
+`artifacts/spectron_sounds_exact_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v349_sounds_exact.json`,
+`artifacts/spectron_name_coverage_audit_v349.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v349.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v349.json`,
+`artifacts/spectron_semantic_translation_v349.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v349.json`.
+The reusable scripts are
+`tools/generate_spectron_sounds_exact_anchors_v349.py`,
+`tools/carry_forward_spectron_semantic_translation_v349.py`, and
+`tools/generate_spectron_translation_checkpoint_v349.py`.
+
+This was static analysis only. It did not patch the APK, rerun the loopback
+client, contact a live endpoint, or change the TLS diagnosis.

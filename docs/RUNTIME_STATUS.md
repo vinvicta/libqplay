@@ -4146,3 +4146,33 @@ The packet-59 shortcut remains rejected. The working file path is packet 102,
 with optional large-file framing 68, 84, 102, 69. The local responder also
 needs to send packet 49 again after the GMAP response because the tested client
 otherwise caches the map without completing the pending transition.
+
+## v349 static audio-family follow-up
+
+The v349 work is a static translation checkpoint and does not change the
+runtime result. It reconciles ten `TSounds`, `TSoundPlayerJava`, and
+`TSoundEffectJava` source rows with their target functions. The target IDA
+copy already contained the `v18_` aliases, so the pass added review comments
+and made the source-to-target relationships explicit in the semantic map.
+
+The runtime conclusions therefore remain unchanged:
+
+* the loopback connector replay still reaches the encrypted login path;
+* the client still requests the map, level files, and image resources;
+* the corrected loading-state diagnostic still reaches the green tiled world,
+  HUD, and status icons;
+* no live game server or production connector was contacted;
+* TLS peer and hostname verification remain preserved in the diagnostic path.
+
+The five larger sound routines reviewed during v349 are not runtime patches.
+They remain layout-change candidates because the target's obfuscated string and
+Java object wrappers add or remove instructions. Nothing from that group was
+inserted into the APK or used to alter the loading repair.
+
+The v349 static records are in
+`artifacts/spectron_sounds_exact_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_semantic_translation_v349.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v349.json`. The saved IDA
+copy is `analysis/spectron_libqplay_translated_v349_sounds_exact.i64` with
+SHA-256
+`ede4f9187e01c4a415181f423dd9c7b8467deb38595d399dcb19341fd9203faf`.

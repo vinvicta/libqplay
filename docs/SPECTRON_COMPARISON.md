@@ -12142,3 +12142,89 @@ The comparison therefore supports three practical conclusions:
 
 The live-service login remains unverified. No production endpoint or account
 was used for the local replay.
+
+## v349 TSounds and Java-audio comparison
+
+The v349 comparison resolves ten rows that the semantic matcher had left
+ambiguous. The target library is still the exact Spectron ARM64 build with
+SHA-256 `f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219`.
+The source rows come from the original 1.8 ARM64 feature export. The target
+names already had `v18_` aliases in IDA, so this is a semantic reconciliation
+pass rather than a first-time target rename.
+
+| Source role | Source EA | Spectron EA | Target alias | Target raw cluster | Evidence |
+| --- | ---: | ---: | --- | --- | --- |
+| `TSounds_isMusicPlaying` | `0xe0af8` | `0xe16a8` | `v18_TSounds_isMusicPlaying` | `IUKzgam4Gy` | vtable `+56` |
+| `TSounds_getMusicPos_void` | `0xe0b3c` | `0xe16ec` | `v18_TSounds_getMusicPos_void` | `IUKzgam4Gy` | vtable `+80` |
+| `TSounds_getMusicLen_void` | `0xe0b7c` | `0xe172c` | `v18_TSounds_getMusicLen_void` | `IUKzgam4Gy` | vtable `+88` |
+| `TSounds_getDisabledSoundEffects` | `0xe0c84` | `0xe1834` | `v18_TSounds_getDisabledSoundEffects` | `vuuHgangcF` | comma-text list getter |
+| `TSounds_getSoundEffect_TString_const` | `0xe0e48` | `0xe1a1c` | `v18_TSounds_getSoundEffect_TString_const` | `IUKzgam4Gy` | lowercase, hash, ignore-case lookup |
+| `TSounds_stopMidi_void` | `0xe1060` | `0xe1c34` | `v18_TSounds_stopMidi_void` | `IUKzgam4Gy` | vtable `+72` |
+| `TSounds_updateMusic_void` | `0xe1888` | `0xe2470` | `v18_TSounds_updateMusic_void` | `IUKzgam4Gy` | vtable `+48` |
+| `TSoundPlayerJava_stopMidi_void` | `0xe2b58` | `0xe3748` | `v18_TSoundPlayerJava_stopMidi_void` | Java player cluster | adjacent helper order |
+| `TSoundPlayerJava_setMusicVolumeAndPan_int_int` | `0xe2b78` | `0xe3768` | `v18_TSoundPlayerJava_setMusicVolumeAndPan_int_int` | Java player cluster | adjacent helper order |
+| `TSoundEffectJava_TSoundEffectJava__2` | `0xe2c14` | `0xe3804` | `v18_TSoundEffectJava_TSoundEffectJava__2` | `QPh5pbnC3y` | two-block constructor wrapper |
+
+### Exact feature comparison
+
+All ten rows match every field in the normalized feature schema. The main
+shape groups are:
+
+| Source to target | Size | Instructions | Blocks | Branches | Calls | Address delta |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| music state and disabled-effects getter | 68, 64, 64, 44 | 17, 16, 16, 11 | 3, 3, 3, 1 | 4, 4, 4, 2 | 1, 1, 1, 1 | `+0xbb0` |
+| sound lookup and stop MIDI | 92, 48 | 23, 12 | 1, 3 | 5, 3 | 4, 1 | `+0xbd4` |
+| music update | 48 | 12 | 3 | 3 | 1 | `+0xbe8` |
+| Java-player and Java-effect wrappers | 32, 32, 32 | 8, 8, 8 | 1, 1, 2 | 2, 2, 2 | 1, 1, 1 | `+0xbf0` |
+
+The normalized record includes size, instruction count, basic blocks, branch
+count, call count, mnemonic hash, opcode-shape hash, register-shape hash,
+coarse shape hash, and string-reference hash. The target's direct-call names
+change where the later build replaces `TString`, `THashList`, and
+`TStringList` with `C8THgaTQxF`, `KKhLga4xoI`, and `vuuHgangcF`. Those changes
+do not affect the exact normalized shape result.
+
+### Layout-change candidates kept separate
+
+The following pairs are behaviorally convincing but are not part of the exact
+v349 anchor artifact:
+
+| Source | Target | Structural difference |
+| --- | --- | --- |
+| `TSounds_initStaticVars_void` `0xe2a88` | `0xe3678` | target list wrapper layouts differ |
+| `TSoundEffect_TSoundEffect_TString_const` `0xe0dc0` | `0xe1970` | target adds the encoded-string bridge |
+| `TSounds_play_impl_TString_const_bool_bool_double_double` `0xe135c` | `0xe1f34` | target adds wrapper calls and four instructions |
+| `TSounds_script_setSoundPitchByNote` `0xe2858` | `0xe3440` | target adds two wrapper instructions |
+| `TSoundEffectJava_play_void` `0xe31d0` | `0xe3dc0` | target removes the `steps` branch and is shorter |
+
+The target playback implementation keeps the source's 72-block selection,
+download, cache, and play flow. The target note parser keeps the twelve-note
+literal and `powf` ratio calculation. The Java play method keeps byte-array
+creation, static method invocation, local-reference release, loaded-state
+assignment, and timestamp assignment. These are strong layout-aware findings,
+but mixing them with the exact rows would overstate the evidence.
+
+### v349 records
+
+The ten anchors were applied to a fresh v348-derived IDA copy. Reopening it
+verified all ten names and boundaries. Since the names already existed, the
+application report shows zero new renames, nine new comments, and zero
+failures. The new semantic map contains 3,732 mapped pairs, 3,672 of them
+high confidence, with 1,004 ambiguities and 608 unmatched source functions.
+
+The saved database is
+`analysis/spectron_libqplay_translated_v349_sounds_exact.i64` with SHA-256
+`ede4f9187e01c4a415181f423dd9c7b8467deb38595d399dcb19341fd9203faf`.
+The records are
+`artifacts/spectron_sounds_exact_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_sounds_exact_manual_translation_application_20260829.json`,
+`artifacts/spectron_sounds_exact_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v349_sounds_exact.json`,
+`artifacts/spectron_name_coverage_audit_v349.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v349.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v349.json`,
+`artifacts/spectron_semantic_translation_v349.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v349.json`.
+
+This comparison was offline. It did not patch the APK, contact the game
+server, or change the connector or loading-state experiments.

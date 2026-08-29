@@ -14606,6 +14606,137 @@ and the checkpoint is
 This pass changed only the disposable IDA database. It did not patch the APK
 or either native library, and it performed no DNS, HTTP, or TLS operation.
 
+## 2026-08-29: v349 TSounds and Java-audio exact anchors
+
+After the RSA wrapper pass, the next useful residual family was the sound
+subsystem. The source cluster spans `TSounds`, `TSoundPlayerJava`, and
+`TSoundEffectJava`. The target cluster is spread across the obfuscated
+`IUKzgam4Gy` sound manager and the Java sound-effect wrappers. The broad
+feature matcher had already found the right neighborhood, but ten source rows
+were still listed as ambiguous because several tiny wrappers share exactly the
+same normalized shape.
+
+I reviewed the source and target pseudocode directly in IDA before making the
+pass. The strongest rows are the first seven `TSounds` methods. The target
+music-state wrappers all read the same target sound-player pointer, but the
+virtual slots identify their roles:
+
+| Source | Target | Pseudocode discriminator |
+| --- | --- | --- |
+| `0xe0af8` `TSounds_isMusicPlaying` | `0xe16a8` | null check, then sound-player vtable `+56` |
+| `0xe0b3c` `TSounds_getMusicPos_void` | `0xe16ec` | null returns `-1.0`, then vtable `+80` |
+| `0xe0b7c` `TSounds_getMusicLen_void` | `0xe172c` | null returns `-1.0`, then vtable `+88` |
+| `0xe0c84` `TSounds_getDisabledSoundEffects` | `0xe1834` | target `vuuHgangcF::glvHgatZcF` comma-text getter |
+| `0xe0e48` `TSounds_getSoundEffect_TString_const` | `0xe1a1c` | lowercase, hash, ignore-case lookup, cleanup |
+| `0xe1060` `TSounds_stopMidi_void` | `0xe1c34` | sound-player vtable `+72` |
+| `0xe1888` `TSounds_updateMusic_void` | `0xe2470` | sound-player vtable `+48` |
+
+The source lookup at `0xe0e48` lowercases the incoming `TString` through
+`TFiles_lowerCaseFilename`, hashes it with `THashList_getHashcode`, searches
+`THashList_getObjectIgnoreCase`, and clears a temporary. The target at
+`0xe1a1c` has the same four-call order through `wiULgacZUI`, `KKhLga4xoI`,
+and `C8THgaTQxF`. This is much stronger evidence than its one-in-four feature
+candidate position.
+
+The two Java-player wrappers are similarly small and shape-colliding. Source
+`0xe2b58` and target `0xe3748` are the stop-MIDI helper. Source `0xe2b78` and
+target `0xe3768` are the volume-and-pan helper. Both pairs have identical
+complete feature records, and the target methods remain adjacent in the
+Java-player cluster. The source `0xe2c14` and target `0xe3804` are the
+two-block Java sound-effect constructor wrappers. The target's
+`QPh5pbnC3y` call is the obfuscated replacement for the source base
+constructor path.
+
+The exact normalized feature records are equal for all ten rows:
+
+| Source | Target | Size | Instructions | Blocks | Branches | Calls | Delta |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| `0xe0af8` | `0xe16a8` | 68 | 17 | 3 | 4 | 1 | `+0xbb0` |
+| `0xe0b3c` | `0xe16ec` | 64 | 16 | 3 | 4 | 1 | `+0xbb0` |
+| `0xe0b7c` | `0xe172c` | 64 | 16 | 3 | 4 | 1 | `+0xbb0` |
+| `0xe0c84` | `0xe1834` | 44 | 11 | 1 | 2 | 1 | `+0xbb0` |
+| `0xe0e48` | `0xe1a1c` | 92 | 23 | 1 | 5 | 4 | `+0xbd4` |
+| `0xe1060` | `0xe1c34` | 48 | 12 | 3 | 3 | 1 | `+0xbd4` |
+| `0xe1888` | `0xe2470` | 48 | 12 | 3 | 3 | 1 | `+0xbe8` |
+| `0xe2b58` | `0xe3748` | 32 | 8 | 1 | 2 | 1 | `+0xbf0` |
+| `0xe2b78` | `0xe3768` | 32 | 8 | 1 | 2 | 1 | `+0xbf0` |
+| `0xe2c14` | `0xe3804` | 32 | 8 | 2 | 2 | 1 | `+0xbf0` |
+
+The exact-shape generator checks every field in the feature schema, not only
+the size and instruction count. It also checks that each source row is still
+in the v348 parent ambiguity list and that the chosen target is one of the
+recorded candidates. This prevents a later run from silently converting a
+name that was already in the map or from accepting a target selected only by
+address proximity.
+
+Five larger sound routines were inspected but intentionally held out of the
+v349 exact artifact. The source and target pseudocode make them likely
+counterparts, but the target rebuild changed the wrapper layout:
+
+* `TSounds_initStaticVars_void` at `0xe2a88` and target `0xe3678` both create
+  the sound-effects collection and disabled-effects list. The source creates
+  `THashList` and `TStringList`, while the target creates `KKhLga4xoI` and
+  `vuuHgangcF` with a changed list layout.
+* `TSoundEffect_TSoundEffect_TString_const` at `0xe0dc0` and target `0xe1970`
+  both lowercase the name and initialize the sound-effect object, but target
+  construction adds the `CanTfaz6bZ` encoded-string bridge. The target is 172
+  bytes and 43 instructions versus 136 bytes and 34 instructions in source.
+* `TSounds_play_impl_TString_const_bool_bool_double_double` at `0xe135c` and
+  target `0xe1f34` preserve the 72-block, 42-call playback state machine. The
+  target adds two wrapper calls and four instructions, changing the body from
+  1,312 to 1,328 bytes.
+* `TSounds_script_setSoundPitchByNote` at `0xe2858` and target `0xe3440`
+  preserve the twelve-note string, octave parsing, and `powf` calculation. The
+  target wrapper adds two instructions while keeping 21 blocks and 26 calls.
+* `TSoundEffectJava_play_void` at `0xe31d0` and target `0xe3dc0` both build a
+  Java byte array, call the static player method, release the local reference,
+  and update loaded and timestamp fields. The target removes the source
+  `steps` special case and is 44 bytes shorter with three fewer calls.
+
+Those five are good candidates for a later layout-aware artifact. Assigning
+them in v349 would have mixed two different levels of evidence in one exact
+shape checkpoint, so they remain explicit research candidates.
+
+The v349 anchor artifact reports ten high-confidence exact-shape rows and zero
+target-default rows. Applying it to a fresh v348-derived copy resolved all ten
+function starts. The target names were already present, so the applier wrote
+zero new names and nine new comments. One identical comment was already on
+the database from an earlier sound pass. Reopening the saved copy verified all
+ten names and boundaries.
+
+The fresh feature export still contains 11,707 functions. The name audit is
+unchanged at 6,441 translated aliases, 439 target-only descriptive labels,
+768 retained target names, seven JNI exports, and 4,052 other IDA or PLT
+names. The dynamic audit remains 6,770 named rows, 6,600 defined rows, 5,782
+exact function starts, 482 data items, 336 other non-code items, and 170
+undefined imports. This unchanged audit is expected because the v349 target
+aliases already existed; the semantic map is what changed.
+
+The semantic map increased from 3,722 to 3,732 mapped pairs, from 3,662 to
+3,672 high-confidence pairs, and decreased the ambiguity count from 1,014 to
+1,004. The unmatched count remains 608. The saved v349 database is
+`analysis/spectron_libqplay_translated_v349_sounds_exact.i64` with SHA-256
+`ede4f9187e01c4a415181f423dd9c7b8467deb38595d399dcb19341fd9203faf`.
+
+The machine-readable records are
+`artifacts/spectron_sounds_exact_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_sounds_exact_manual_translation_application_20260829.json`,
+`artifacts/spectron_sounds_exact_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v349_sounds_exact.json`,
+`artifacts/spectron_name_coverage_audit_v349.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v349.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v349.json`,
+`artifacts/spectron_semantic_translation_v349.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v349.json`.
+The reusable generators are
+`tools/generate_spectron_sounds_exact_anchors_v349.py`,
+`tools/carry_forward_spectron_semantic_translation_v349.py`, and
+`tools/generate_spectron_translation_checkpoint_v349.py`.
+
+This was an offline IDA pass. It did not patch the APK, run an emulator,
+contact a game endpoint, or change the connector TLS or loading-state
+diagnosis.
+
 ## 2026-08-28: Spectron ARM64 loopback loading control
 
 The target-specific Spectron package check was followed by a real local

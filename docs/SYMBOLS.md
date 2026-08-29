@@ -3861,3 +3861,43 @@ The generated summary should have `rename_failures` equal to an empty list.
 If a future library revision produces a different count, keep its exports in
 a separate directory and record the build identity in the accompanying
 notes. Do not overwrite this table without preserving the old hash.
+
+## v349 sound-family aliases
+
+The v349 pass formalizes ten source-backed aliases in the target semantic map.
+The aliases were already visible in the target IDA database from earlier
+passes. Their addition here is a provenance improvement: each name now has a
+reviewed source row, target address, exact feature comparison, and direct
+pseudocode rationale.
+
+| Target address | Alias | Source counterpart | Target role |
+| ---: | --- | --- | --- |
+| `0xe16a8` | `v18_TSounds_isMusicPlaying` | `TSounds_isMusicPlaying` at `0xe0af8` | sound-player state getter |
+| `0xe16ec` | `v18_TSounds_getMusicPos_void` | `TSounds_getMusicPos_void` at `0xe0b3c` | music position getter |
+| `0xe172c` | `v18_TSounds_getMusicLen_void` | `TSounds_getMusicLen_void` at `0xe0b7c` | music length getter |
+| `0xe1834` | `v18_TSounds_getDisabledSoundEffects` | `TSounds_getDisabledSoundEffects` at `0xe0c84` | disabled-effects list getter |
+| `0xe1a1c` | `v18_TSounds_getSoundEffect_TString_const` | `TSounds_getSoundEffect_TString_const` at `0xe0e48` | case-insensitive effect lookup |
+| `0xe1c34` | `v18_TSounds_stopMidi_void` | `TSounds_stopMidi_void` at `0xe1060` | MIDI stop dispatch |
+| `0xe2470` | `v18_TSounds_updateMusic_void` | `TSounds_updateMusic_void` at `0xe1888` | music update dispatch |
+| `0xe3748` | `v18_TSoundPlayerJava_stopMidi_void` | `TSoundPlayerJava_stopMidi_void` at `0xe2b58` | Java player MIDI stop |
+| `0xe3768` | `v18_TSoundPlayerJava_setMusicVolumeAndPan_int_int` | `TSoundPlayerJava_setMusicVolumeAndPan_int_int` at `0xe2b78` | Java player volume and pan |
+| `0xe3804` | `v18_TSoundEffectJava_TSoundEffectJava__2` | `TSoundEffectJava_TSoundEffectJava__2` at `0xe2c14` | Java effect constructor wrapper |
+
+All ten aliases are high-confidence exact-shape anchors. The target library
+uses obfuscated names such as `IUKzgam4Gy`, `vuuHgangcF`, `C8THgaTQxF`, and
+`QPh5pbnC3y` in the corresponding bodies. Those names remain in the feature
+records and comments, while the `v18_` aliases provide the readable source
+role. The aliases are analysis names, not claims about surviving target debug
+information.
+
+The v349 name audit still reports 11,707 functions and zero default names. Its
+origin counts are 6,441 translated aliases, 439 target-only descriptive names,
+768 other target-retained names, seven JNI exports, and 4,052 other IDA or PLT
+names. The unchanged count is expected because the ten target aliases were
+already present before the semantic reconciliation.
+
+The anchor artifact is
+`artifacts/spectron_sounds_exact_manual_translation_anchors_20260829.json`.
+The semantic map is `artifacts/spectron_semantic_translation_v349.json`, and
+the strict database checkpoint is
+`artifacts/spectron_translation_checkpoint_20260829_v349.json`.

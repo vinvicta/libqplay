@@ -3665,3 +3665,146 @@ candidate rendered the same world through Android's x86_64 translation layer.
 The live-login part of milestone 4 remains open. A local responder can prove
 native control flow, but it cannot prove account authentication, server
 compatibility, or current service availability.
+
+## v349 exact sound-wrapper pass
+
+The v349 pass is offline. It does not need the APK, an emulator, a socket, or
+an authorized server endpoint. It uses the source feature export, the v348
+target feature export, the v348 semantic map, and the direct IDA pseudocode
+evidence captured during the review.
+
+Generate the ten-row artifact. The generator checks the complete feature
+record for every pair and rejects a row unless it is still an explicit v348
+ambiguity candidate:
+
+```bash
+python3 tools/generate_spectron_sounds_exact_anchors_v349.py \
+  --original-features /tmp/original_features_v3_current.json \
+  --spectron-features artifacts/spectron_features_v348_rsa_encrypt.json \
+  --semantic-parent artifacts/spectron_semantic_translation_v348.json \
+  --target-evidence /tmp/graal-target-sounds-v348.json \
+  --output artifacts/spectron_sounds_exact_manual_translation_anchors_20260829.json
+```
+
+The expected artifact summary is ten high-confidence exact-shape rows, zero
+layout-change rows, zero target-default rows, and these address deltas:
+`+0xbb0` four times, `+0xbd4` twice, `+0xbe8` once, and `+0xbf0` three
+times.
+
+Carry the semantic map forward:
+
+```bash
+python3 tools/carry_forward_spectron_semantic_translation_v349.py \
+  --parent-map artifacts/spectron_semantic_translation_v348.json \
+  --target-features artifacts/spectron_features_v348_rsa_encrypt.json \
+  --anchor-artifact artifacts/spectron_sounds_exact_manual_translation_anchors_20260829.json \
+  --output artifacts/spectron_semantic_translation_v349.json
+```
+
+The expected semantic totals are 3,732 mapped pairs, 3,672 high-confidence
+pairs, 1,004 remaining ambiguities, and 608 unmatched source functions. The
+target feature count remains 11,707.
+
+Apply the artifact to a fresh v348-derived IDA copy. Do not overwrite an
+existing checkpoint:
+
+```bash
+cp /home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v348_rsa_encrypt.i64 \
+  /tmp/spectron_v349_sounds_anchor_apply_input.i64
+
+env IDADIR=/home/v/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_MANUAL_APPLY=1 \
+  SPECTRON_MANUAL_ANCHORS=/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_sounds_exact_manual_translation_anchors_20260829.json \
+  SPECTRON_MANUAL_EXPECTED_ARTIFACT=spectron_sounds_exact_manual_translation_anchors_20260829 \
+  SPECTRON_MANUAL_SAVE_PATH=/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v349_sounds_exact.i64 \
+  SPECTRON_MANUAL_REPORT=/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_sounds_exact_manual_translation_application_20260829.json \
+  /home/v/.codex/plugins/cache/mrexodia/ida-pro-mcp/0.1.0/.venv/bin/python \
+  /home/v/ida-pro-9.3/idalib/examples/idacli.py \
+  -f /tmp/spectron_v349_sounds_anchor_apply_input.i64 \
+  -s /home/v/Desktop/graal-decomp/libqplay/tools/ida_apply_spectron_manual_anchors.py
+```
+
+All ten target names already exist in the v348-derived copy. Therefore the
+expected application report is ten resolved functions, zero new renames, nine
+new comments, zero failures, and a successful save. The nine-comment result
+means one identical review comment was already present; it is not a missing
+anchor.
+
+Reopen and verify the saved copy:
+
+```bash
+env IDADIR=/home/v/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_MANUAL_ANCHORS=/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_sounds_exact_manual_translation_anchors_20260829.json \
+  SPECTRON_MANUAL_EXPECTED_ARTIFACT=spectron_sounds_exact_manual_translation_anchors_20260829 \
+  SPECTRON_MANUAL_VERIFY_REPORT=/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_sounds_exact_manual_translation_verification_20260829.json \
+  /home/v/.codex/plugins/cache/mrexodia/ida-pro-mcp/0.1.0/.venv/bin/python \
+  /home/v/ida-pro-9.3/idalib/examples/idacli.py \
+  -f /home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v349_sounds_exact.i64 \
+  -s /home/v/Desktop/graal-decomp/libqplay/tools/ida_verify_spectron_manual_anchors.py
+```
+
+The reopen report must show ten verified names, zero failures, and 11,707
+functions.
+
+Refresh the post-pass inventories one at a time. Opening an IDA database can
+update IDA metadata, so calculate the final database hash only after the last
+audit:
+
+```bash
+env IDADIR=/home/v/ida-pro-9.3 IDAUSR=/tmp/graal-idalib-user \
+  LIBQPLAY_FEATURES_OUT=/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_features_v349_sounds_exact.json \
+  /home/v/.codex/plugins/cache/mrexodia/ida-pro-mcp/0.1.0/.venv/bin/python \
+  /home/v/ida-pro-9.3/idalib/examples/idacli.py \
+  -f /home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v349_sounds_exact.i64 \
+  -s /home/v/Desktop/graal-decomp/libqplay/tools/ida_export_function_features.py
+
+env IDADIR=/home/v/ida-pro-9.3 IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_NAME_COVERAGE_OUTPUT=/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_name_coverage_audit_v349.json \
+  /home/v/.codex/plugins/cache/mrexodia/ida-pro-mcp/0.1.0/.venv/bin/python \
+  /home/v/ida-pro-9.3/idalib/examples/idacli.py \
+  -f /home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v349_sounds_exact.i64 \
+  -s /home/v/Desktop/graal-decomp/libqplay/tools/ida_audit_spectron_name_coverage.py
+
+env IDADIR=/home/v/ida-pro-9.3 IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_BOUNDARY_AUDIT_OUTPUT=/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_dynamic_symbol_boundaries_v349.json \
+  /home/v/.codex/plugins/cache/mrexodia/ida-pro-mcp/0.1.0/.venv/bin/python \
+  /home/v/ida-pro-9.3/idalib/examples/idacli.py \
+  -f /home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v349_sounds_exact.i64 \
+  -s /home/v/Desktop/graal-decomp/libqplay/tools/ida_audit_dynamic_symbol_boundaries.py
+
+env IDADIR=/home/v/ida-pro-9.3 IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_DYNAMIC_SYMBOL_COVERAGE_OUTPUT=/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_dynamic_symbol_coverage_audit_v349.json \
+  /home/v/.codex/plugins/cache/mrexodia/ida-pro-mcp/0.1.0/.venv/bin/python \
+  /home/v/ida-pro-9.3/idalib/examples/idacli.py \
+  -f /home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v349_sounds_exact.i64 \
+  -s /home/v/Desktop/graal-decomp/libqplay/tools/ida_audit_spectron_dynamic_symbol_coverage.py
+```
+
+The v349 audits retain 11,707 functions, zero default names, 6,441 translated
+aliases, 439 target-only descriptive labels, 5,782 exact dynamic function
+starts, and 4,796 source-backed dynamic rows. Build the strict checkpoint:
+
+```bash
+python3 tools/generate_spectron_translation_checkpoint_v349.py \
+  --parent-checkpoint artifacts/spectron_translation_checkpoint_20260829_v348.json \
+  --database /home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v349_sounds_exact.i64 \
+  --label-artifact artifacts/spectron_sounds_exact_manual_translation_anchors_20260829.json \
+  --application-report artifacts/spectron_sounds_exact_manual_translation_application_20260829.json \
+  --verification-report artifacts/spectron_sounds_exact_manual_translation_verification_20260829.json \
+  --name-audit artifacts/spectron_name_coverage_audit_v349.json \
+  --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v349.json \
+  --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v349.json \
+  --semantic-map artifacts/spectron_semantic_translation_v349.json \
+  --feature-export artifacts/spectron_features_v349_sounds_exact.json \
+  --output artifacts/spectron_translation_checkpoint_20260829_v349.json
+
+python3 tools/validate_research_archive.py
+```
+
+The expected v349 database SHA-256 is
+`ede4f9187e01c4a415181f423dd9c7b8467deb38595d399dcb19341fd9203faf`.
+The archive validator must finish with `research archive validation: ok`.
+The five layout-change candidates above are not part of this checkpoint and
+must not be silently added to the exact-shape count.
