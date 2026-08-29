@@ -110,6 +110,11 @@ state they update.
 | `0x269bf4` | `0x277064` | `v18_af_latin2_metrics_scale` | Latin2 script class `metrics_scale` slot |
 | `0x269f1c` | `0x27738c` | `v18_af_latin_metrics_scale` | Latin script class `metrics_scale` slot |
 
+The first two historical labels in this table were later corrected to CJK
+roles. The source and target class records select the CJK hint-application
+callbacks, and the v312 checkpoint records the correction without rewriting
+this historical v311 artifact.
+
 The first two functions are the two halves of the Latin2 feature detector.
 `af_latin2_hints_link_segments` compares segments with compatible direction,
 length, and position, then writes reciprocal links or serif relationships.
@@ -155,6 +160,68 @@ source role references are Android FreeType's
 [`afloader.c`](https://android.googlesource.com/platform/external/freetype/+/f128616796ff176d99eb03c948fadf68161d5855/src/autofit/afloader.c),
 and
 [`aflatin.c`](https://android.googlesource.com/platform/external/freetype/+/2689da543c08133100124cab3ab19523b04f2f3d/src/autofit/aflatin.c).
+
+## 2026-08-28: Spectron FreeType autofit metrics and CJK correction
+
+The next contiguous source and target region remains separated by `0xd470`.
+This pass combines eleven new role labels with two corrections to the v311
+record. The corrections are not guesses based on similar function bodies. The
+source class records at `0x35e630` select the CJK hint callback at
+`0x26d1f8`, and the target records at `0x3713b0` select the corresponding
+callback at `0x27a668`. The two helpers called from that callback are therefore
+CJK helpers. The earlier v311 Latin2 labels remain in its historical artifact,
+but v312 supersedes them in the current IDA database.
+
+| 1.8 source | Spectron target | Applied label | Evidence | Match |
+| ---: | ---: | --- | --- | --- |
+| `0x268608` | `0x275a78` | `v18_af_cjk_hints_link_segments` | CJK hint-application call and class-table selection; correction of v311 | exact metrics |
+| `0x2688fc` | `0x275d6c` | `v18_af_cjk_hints_compute_edges` | CJK hint-application call and class-table selection; correction of v311 | exact metrics |
+| `0x26a3d0` | `0x277840` | `v18_af_latin_hints_compute_segments` | shared Latin segment builder and callers | exact metrics |
+| `0x26a904` | `0x277d74` | `v18_af_latin_metrics_init_widths` | shared representative-glyph width probe | exact metrics |
+| `0x26adcc` | `0x27823c` | `v18_af_cjk_metrics_init` | CJK script class `metrics_init` slot | exact metrics |
+| `0x26ae34` | `0x2782a4` | `v18_af_hint_normal_stem` | two calls from the CJK apply path and matching stem logic | exact metrics |
+| `0x26b198` | `0x278608` | `v18_af_latin2_metrics_init_widths` | Latin2 metrics initializer call and Latin2 segment builder | exact metrics |
+| `0x26b660` | `0x278ad0` | `v18_af_latin2_metrics_init` | Latin2 script class `metrics_init` slot | register-detail difference |
+| `0x26bb4c` | `0x278fbc` | `v18_af_latin_metrics_init` | Latin script class `metrics_init` slot | register-detail difference |
+| `0x26c040` | `0x2794b0` | `v18_af_latin2_hints_compute_edges` | Latin2 hint-application edge builder | exact metrics |
+| `0x26c61c` | `0x279a8c` | `v18_af_latin_hints_compute_edges` | Latin hint-application edge builder | exact metrics |
+| `0x26cb68` | `0x279fd8` | `v18_af_glyph_hints_align_edge_points` | shared post-edge alignment helper | exact metrics |
+| `0x26d1f8` | `0x27a668` | `v18_af_cjk_hints_apply` | CJK script class `hints_apply` slot | exact metrics |
+
+The corrected `af_cjk_hints_link_segments` helper compares compatible outline
+segments and records reciprocal links or serif relationships. The companion
+`af_cjk_hints_compute_edges` helper converts those linked segments into CJK
+edge records. The class-table evidence is important because the same source
+region also contains Latin2 routines with closely related bodies.
+
+The ten shared and script-specific helpers that follow cover the segment
+builder, representative-glyph width probes, three metrics initializers, the
+CJK normal-stem adjustment, two edge builders, and the shared edge-point
+alignment routine. The final row is the complete CJK hint callback, which
+ties the corrected helper roles together through one call chain. The source
+`af_latin_metrics_init_widths` routine is shared by Latin and CJK metrics setup
+in this older FreeType build, so it is deliberately named as the shared Latin
+helper rather than as a CJK-only function.
+
+All thirteen pairs match normalized ARM64 shape. Eleven match the complete
+recorded feature set, while the two metrics initializer rows differ only in
+register-detail allocation. The aliases were applied to a fresh v312 IDA
+copy, closed, reopened, and checked with zero failures. The broad translation
+reopen still verifies all 3,641 high-confidence map entries. The database has
+11,695 functions and 392 remaining default `sub_` names. Its SHA-256 is
+`a0ab5988b005eed29537dfb65f53e0b511fb6b7e6d9985bf5cb39e2414e06402`.
+
+The machine-readable anchor record is
+`artifacts/spectron_freetype_autofit_metrics_manual_translation_anchors_20260828.json`,
+generated by `tools/generate_spectron_freetype_autofit_metrics_anchors.py`.
+The v312 checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v312.json`. This pass is
+offline-only and the anchor record reports `network_contacted: false`. The
+role references are Android FreeType's
+[`afcjk.c`](https://android.googlesource.com/platform/external/freetype/+/a45c6a1cf3625709e149550b8fff1f09d01388d3/src/autofit/afcjk.c),
+[`aflatin.c`](https://android.googlesource.com/platform/external/freetype/+/2689da543c08133100124cab3ab19523b04f2f3d/src/autofit/aflatin.c),
+[`aflatin2.c`](https://android.googlesource.com/platform/external/freetype/+/6da2e02232e1bcf31cfb78894d46c7902b90ee9/src/autofit/aflatin2.c), and
+[`afhints.c`](https://android.googlesource.com/platform/external/freetype/+/8483e21a1fdc252bd234eb55c6b63c17551933ee/src/autofit/afhints.c).
 
 ## 2026-08-28: Spectron TrueType glyph-loader block
 

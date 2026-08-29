@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v310 Spectron database. It
-contains 11,695 functions and 410 remaining default `sub_` names. The v263
+The current documented translation frontier is the v312 Spectron database. It
+contains 11,695 functions and 392 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -249,7 +249,20 @@ construction, generic hint-buffer cleanup and reload, the recursive autofit
 glyph loader, and the Latin2 and Latin metrics scalers. All seven match
 normalized ARM64 shape, six match the complete recorded feature set, and one
 differs only in register-detail allocation. The target now has 403 remaining
-default `sub_` names.
+default `sub_` names. The first two historical role labels were superseded in
+v312 after both class tables showed that those helpers belong to the CJK path.
+The v312 revision translates eleven more functions from the same region and
+corrects the two v311 labels that were assigned to the wrong script family.
+The source and target class records select the corrected helpers from the CJK
+hint-application path, so the current labels are
+`v18_af_cjk_hints_link_segments` and `v18_af_cjk_hints_compute_edges`.
+The new rows also cover the shared Latin segment builder and metrics probe,
+the CJK metrics initializer, normal-stem adjustment, the Latin and Latin2
+metrics initializers and edge builders, shared edge-point alignment, and the
+CJK hint-application callback. All thirteen reviewed rows match normalized
+ARM64 shape. Eleven match the complete recorded feature set, while two differ
+only in register-detail allocation. The target now has 392 remaining default
+`sub_` names.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -342,6 +355,8 @@ The current v310 database is kept locally as
 `analysis/spectron_libqplay_translated_v310_autofit.i64`.
 The current v311 database is kept locally as
 `analysis/spectron_libqplay_translated_v311_autofit_followup.i64`.
+The current v312 database is kept locally as
+`analysis/spectron_libqplay_translated_v312_autofit_metrics.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
