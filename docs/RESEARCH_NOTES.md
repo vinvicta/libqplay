@@ -261,6 +261,54 @@ This pass changed only the private IDA copy and archive. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
 
+## 2026-08-29: Encoded string buffer, v347
+
+The v347 review starts from the verified v346 database and moves to a
+coherent target-only subsystem: the obfuscated `CanTfaz6bZ` copy-on-write
+buffer and its `C8THgaTQxF` conversion bridge. Direct target pseudocode was
+captured for all 19 defined global functions at `0xf37bc`, `0xf3888`, and
+`0xf8b90..0xf9374`.
+
+The class initializes a three-byte lower-case XOR key on demand. Its methods
+release shared storage, assign with reference counting, make a private copy,
+encode and decode the ordinary target `C8THgaTQxF` string wrapper, compare
+encoded bytes, compare decoded text case-insensitively, assign from a byte
+span or C string, index decoded bytes using one-based indexing, and append
+another encoded buffer while correcting the key offset. The two bridge
+methods expose decode-to-string and assignment from the ordinary target
+string. A null bridge input follows a target fallback static-string path.
+
+The source inventory has no one-to-one counterpart for this class. Three
+target functions happen to collide with ordinary source feature metrics:
+`0xf8c64` with `TString_clear_void`, `0xf8f54` with
+`TString_starts_TString_const`, and `0xf9178` with several small wrappers.
+Those are shape collisions, not semantic translations. The generated label
+artifact records three exact and normalized collisions, zero source
+counterparts, zero semantic claims, and 19 high-confidence target-only
+descriptions.
+
+All 19 `spectron_` labels were applied to a fresh v346-derived IDB and
+verified after reopening. The v347 database contains 11,707 functions, 6,440
+translated aliases, 439 target-only descriptive labels, 769 retained target
+names, 4,795 source-backed dynamic rows, 1,657 exact retained dynamic names,
+and 5,782 exact dynamic function starts. The source semantic map is carried
+forward unchanged at 3,721 mapped pairs. The saved IDB is
+`analysis/spectron_libqplay_translated_v347_encoded_string.i64` with SHA-256
+`fe1bbbdf27b25b2fe13d088fb01944a624e8fe8a11898a377ff66f49b892a59b`.
+
+The machine-readable records are
+`artifacts/spectron_encoded_string_target_only_labels_20260829.json`,
+`artifacts/spectron_encoded_string_target_only_label_application_20260829.json`,
+`artifacts/spectron_encoded_string_target_only_label_verification_20260829.json`,
+`artifacts/spectron_features_v347_encoded_string.json`,
+`artifacts/spectron_name_coverage_audit_v347.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v347.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v347.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v347.json`.
+
+All v347 work was static. No APK patch, runtime replay, live endpoint, or
+external resource request was made.
+
 ## 2026-08-29: Resource path helper, v346
 
 The v346 review adds one target-only label in the resource-runtime block.

@@ -937,6 +937,88 @@ The expected v326 database hash is
 checkpoint is static evidence only. It does not change the loopback runtime
 result, TLS diagnosis, or live-service boundary.
 
+### v347 target-only encoded string buffer
+
+The v347 pass is static IDA work only. It starts from the verified v346 IDB
+and reviews the 19-function `CanTfaz6bZ` copy-on-write XOR buffer cluster and
+the two `C8THgaTQxF` bridge methods. It does not require an APK, emulator,
+server, or live endpoint.
+
+Direct target evidence was captured from the restarted IDA MCP through
+disposable IDALIB copies. The evidence files were:
+
+    /tmp/graal-target-encoded-string-cluster-v347.json
+    /tmp/graal-source-encrypted-string-v347.json
+
+The target addresses reviewed were `0xf37bc`, `0xf3888`, and
+`0xf8b90..0xf9374`. The source evidence was used for context and metric
+collision reporting only. Generate the reviewed target-only label artifact
+with:
+
+    python3 tools/generate_spectron_encoded_string_target_only_labels.py \
+      --original-features /tmp/original_features_v3_current.json \
+      --spectron-features artifacts/spectron_features_v346_resource_path_helper.json \
+      --target-evidence /tmp/graal-target-encoded-string-cluster-v347.json \
+      --source-evidence /tmp/graal-source-encrypted-string-v347.json \
+      --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v346.json \
+      --symbol-table artifacts/spectron_symbol_table_audit_20260827.json \
+      --semantic-map artifacts/spectron_semantic_translation_v345.json \
+      --original-binary-sha256 9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8 \
+      --spectron-binary-sha256 f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219 \
+      --output artifacts/spectron_encoded_string_target_only_labels_20260829.json
+
+Apply the artifact to a fresh v346-derived copy and save it as
+`analysis/spectron_libqplay_translated_v347_encoded_string.i64`. Set
+`SPECTRON_TARGET_LABEL_APPLY=1`, point
+`SPECTRON_TARGET_LABEL_PATH` at the generated artifact, set
+`SPECTRON_TARGET_LABEL_EXPECTED_ARTIFACT` to
+`spectron_encoded_string_target_only_labels_20260829`, and set
+`SPECTRON_TARGET_LABEL_SAVE_PATH` and `SPECTRON_TARGET_LABEL_REPORT` to the
+v347 IDB and application report paths. The application report must contain 19
+resolved functions, 19 renames, 19 evidence comments, zero failures, and a
+successful save. Reopen the saved copy with
+`tools/ida_verify_spectron_target_only_labels.py`; the verification report
+must contain 19 verified names and zero failures.
+
+Refresh the feature export and audits with the existing IDALIB scripts, using
+these output paths:
+
+    artifacts/spectron_features_v347_encoded_string.json
+    artifacts/spectron_name_coverage_audit_v347.json
+    artifacts/spectron_dynamic_symbol_boundaries_v347.json
+    artifacts/spectron_dynamic_symbol_coverage_audit_v347.json
+
+The label artifact should report 19 high-confidence target-only labels, zero
+source counterparts, zero semantic claims, and three exact or normalized
+metric collisions. The v347 feature and audit outputs should retain 11,707
+functions, 6,440 translated aliases, 439 target-only descriptive labels, 769
+retained target names, 4,795 source-backed dynamic rows, 1,657 exact retained
+dynamic names, and 5,782 exact dynamic function starts.
+
+Build the checkpoint with:
+
+    python3 tools/generate_spectron_translation_checkpoint_v347.py \
+      --parent-checkpoint artifacts/spectron_translation_checkpoint_20260829_v346.json \
+      --database analysis/spectron_libqplay_translated_v347_encoded_string.i64 \
+      --label-artifact artifacts/spectron_encoded_string_target_only_labels_20260829.json \
+      --application-report artifacts/spectron_encoded_string_target_only_label_application_20260829.json \
+      --verification-report artifacts/spectron_encoded_string_target_only_label_verification_20260829.json \
+      --name-audit artifacts/spectron_name_coverage_audit_v347.json \
+      --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v347.json \
+      --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v347.json \
+      --semantic-map artifacts/spectron_semantic_translation_v345.json \
+      --feature-export artifacts/spectron_features_v347_encoded_string.json \
+      --output artifacts/spectron_translation_checkpoint_20260829_v347.json
+
+Run `python3 tools/validate_research_archive.py` after the checkpoint is
+written. The expected v347 database hash is
+`fe1bbbdf27b25b2fe13d088fb01944a624e8fe8a11898a377ff66f49b892a59b`. The
+semantic map is carried forward unchanged from v345 because the target-only
+buffer has no demonstrated 1.8 counterpart.
+
+This checkpoint is static evidence only. It does not change the verified
+loopback runtime, the connector TLS diagnosis, or the live-service boundary.
+
 ### v346 target-only resource path helper
 
 The v346 pass is static IDA work only. It starts from the verified v345

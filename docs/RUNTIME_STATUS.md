@@ -3035,6 +3035,36 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v347 encoded string residual
+
+The v347 checkpoint is a static continuation from v346. It labels 19 target
+functions in the obfuscated `CanTfaz6bZ` copy-on-write XOR-encoded string
+buffer and its `C8THgaTQxF` bridge. Direct target pseudocode shows lazy
+three-byte key initialization, shared-buffer release and assignment,
+make-unique copying, conversion to and from the ordinary target string,
+encoded comparison, decoded case-insensitive comparison, byte-buffer
+assignment, one-based decoded indexing, and XOR-aware append.
+
+The target-only policy is important here. The target buffer is not the same
+class as the target `vuuHgangcF` container that already has source-backed
+`v18_TStringList` aliases. Three rows happen to share ordinary source metrics,
+but their bodies implement encoded storage. The label artifact therefore
+records three exact and normalized metric collisions, zero source
+counterparts, and zero semantic promotions.
+
+All 19 labels were applied and verified after reopening the saved IDB. The
+v347 database has 11,707 functions, 6,440 translated aliases, 439 target-only
+descriptive labels, 769 retained target names, 4,795 source-backed dynamic
+rows, 1,657 exact retained dynamic names, and 5,782 exact dynamic function
+starts. The semantic map remains unchanged at 3,721 mapped pairs. The saved
+database is
+`analysis/spectron_libqplay_translated_v347_encoded_string.i64` with SHA-256
+`fe1bbbdf27b25b2fe13d088fb01944a624e8fe8a11898a377ff66f49b892a59b`.
+
+This checkpoint changes no APK and has no runtime effect. The verified
+loopback world-rendering result and the native TLS and hostname-verification
+diagnosis remain the same. No live service or external resource was contacted.
+
 ## Spectron 2.2 v346 resource path helper residual
 
 The v346 checkpoint adds one descriptive target-only label at `0xefbcc`, raw

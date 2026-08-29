@@ -319,6 +319,62 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v347 encoded string buffer comparison
+
+The v347 pass reviews a target-only string subsystem rather than forcing a
+source match. The target class is `CanTfaz6bZ`, a copy-on-write buffer with a
+lazy three-byte XOR key. Its adjacent bridge methods use the ordinary target
+`C8THgaTQxF` string wrapper.
+
+| Target address | Applied label | Recovered operation |
+| ---: | --- | --- |
+| `0xf37bc` | `spectron_C8THgaTQxF_decodeFromCanTfaz6bZ_const` | decode an encoded buffer into a string return value |
+| `0xf3888` | `spectron_C8THgaTQxF_assignCanTfaz6bZ` | clear the string wrapper and delegate to the decoder |
+| `0xf8b90` | `spectron_CanTfaz6bZ_initXorKey_void` | initialize the three-byte XOR key once |
+| `0xf8c64` | `spectron_CanTfaz6bZ_clear_void` | release or decrement shared encoded storage |
+| `0xf8ca8` | `spectron_CanTfaz6bZ_assign_CanTfaz6bZ_const` | copy-on-write reference-counted assignment |
+| `0xf8d00` | `spectron_CanTfaz6bZ_encodeFromC8THgaTQxF` | encode a target string into the buffer |
+| `0xf8de0` | `spectron_CanTfaz6bZ_decodeToC8THgaTQxF` | decode into a target string |
+| `0xf8e54` | `spectron_CanTfaz6bZ_decodeToC8THgaTQxF_variant` | alternate const decode form |
+| `0xf8ec8` | `spectron_CanTfaz6bZ_equals_CanTfaz6bZ_const` | compare encoded length and bytes |
+| `0xf8f54` | `spectron_CanTfaz6bZ_startsWithEncoded_CanTfaz6bZ_const` | compare an encoded prefix |
+| `0xf8fc8` | `spectron_CanTfaz6bZ_startsWithIgnoreCase_CanTfaz6bZ_const` | decoded case-insensitive prefix test |
+| `0xf9090` | `spectron_CanTfaz6bZ_equalsIgnoreCase_CanTfaz6bZ_const` | decoded case-insensitive equality |
+| `0xf9178` | `spectron_CanTfaz6bZ_decodeCopyToC8THgaTQxF` | wrapper around decode conversion |
+| `0xf9198` | `spectron_CanTfaz6bZ_assignFromC8THgaTQxF` | assign from an ordinary target string |
+| `0xf91b8` | `spectron_CanTfaz6bZ_setXorEncodedBuffer_char_const_int` | allocate and encode a byte span |
+| `0xf9264` | `spectron_CanTfaz6bZ_makeUnique_void` | detach shared storage before mutation |
+| `0xf92d8` | `spectron_CanTfaz6bZ_assignCStringXorEncoded_char_const` | encode and assign a C string |
+| `0xf9310` | `spectron_CanTfaz6bZ_indexDecoded_int` | one-based decoded byte access |
+| `0xf9374` | `spectron_CanTfaz6bZ_appendXorEncoded_CanTfaz6bZ_const` | append while correcting XOR offsets |
+
+The source 1.8 inventory has no safe one-to-one counterpart for this class.
+Three target rows, `0xf8c64`, `0xf8f54`, and `0xf9178`, collide with ordinary
+source feature metrics. Direct pseudocode separates them from
+`TString_clear_void`, `TString_starts_TString_const`, and small source
+wrappers, so the artifact records these as metric collisions only. It claims
+zero source counterparts and leaves the semantic map unchanged.
+
+The labels were applied to a fresh v346-derived IDA database and verified
+after reopening. The v347 database contains 6,440 translated aliases, 439
+target-only descriptive labels, 769 retained target names, 4,795
+source-backed dynamic rows, 1,657 exact retained dynamic names, and 5,782
+exact dynamic function starts. Its hash is
+`fe1bbbdf27b25b2fe13d088fb01944a624e8fe8a11898a377ff66f49b892a59b`.
+
+The complete records are
+`artifacts/spectron_encoded_string_target_only_labels_20260829.json`,
+`artifacts/spectron_encoded_string_target_only_label_application_20260829.json`,
+`artifacts/spectron_encoded_string_target_only_label_verification_20260829.json`,
+`artifacts/spectron_features_v347_encoded_string.json`,
+`artifacts/spectron_name_coverage_audit_v347.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v347.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v347.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v347.json`.
+
+This comparison is static evidence. It does not change the runtime diagnosis,
+patch the APK, or contact a live endpoint.
+
 ## v346 resource path helper comparison
 
 The v346 pass reviews a target resource-runtime function that has no safe

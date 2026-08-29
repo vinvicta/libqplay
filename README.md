@@ -13,7 +13,7 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v346 Spectron database. It
+The current documented translation frontier is the v347 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -60,6 +60,24 @@ aliases, 420 target-only descriptive labels, 788 retained target names, 4,795
 source-backed dynamic rows, and 1,676 exact retained dynamic names. Its
 semantic map is carried forward unchanged. This is static evidence only, and
 the verified loopback runtime and TLS diagnosis were not modified.
+
+The v347 revision adds 19 reviewed target-only labels for the Spectron
+encoded-string buffer and its `C8THgaTQxF` bridge. The target's
+`CanTfaz6bZ` class owns a copy-on-write buffer, a lazily initialized three-byte
+XOR key, encode and decode helpers, byte comparison, case-insensitive prefix
+and equality tests, and append or assignment methods. Direct target
+pseudocode shows that this is a private target subsystem, not a renamed 1.8
+`TString` implementation. Three ordinary source feature rows have the same
+compact metrics as target methods, but their bodies have different encoded
+buffer semantics, so the artifact records those as metric collisions only.
+
+The v347 copy contains 6,440 translated aliases, 439 target-only descriptive
+labels, 769 retained target names, 4,795 source-backed dynamic rows, and 1,657
+exact retained dynamic names. It still has 11,707 functions, 5,782 exact
+dynamic function starts, and the unchanged semantic map of 3,721 mapped pairs.
+All 19 labels were applied and verified after reopening. This is static IDA
+evidence only, and the working loopback runtime and TLS diagnosis were not
+modified.
 
 The v322 revision adds twelve high-confidence TGraalVar runtime aliases. The
 review joins source and target Hex-Rays pseudocode with the G0gxgajWBw
@@ -890,6 +908,85 @@ target-only functions, with zero failures. Reopening the fresh copy verified
 all four names. This was a static translation pass only. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
+
+### v347 Spectron encoded string buffer
+
+The v347 pass starts from the verified v346 database and reviews the
+obfuscated `CanTfaz6bZ` string-buffer cluster plus its two `C8THgaTQxF` bridge
+methods. The target functions are at `0xf37bc`, `0xf3888`, and
+`0xf8b90..0xf9374`. Their raw symbols remain in the label artifact and in the
+IDA comments.
+
+The direct target review identifies these operations:
+
+* lazy initialization of a three-byte lower-case XOR key;
+* reference-counted clear, assignment, and make-unique operations;
+* encoding from and decoding to the ordinary `C8THgaTQxF` string wrapper;
+* exact encoded comparison and encoded-prefix comparison;
+* decoded case-insensitive prefix and equality tests;
+* byte-buffer assignment, one-based decoded indexing, and XOR-aware append.
+
+The bridge at `0xf37bc` decodes the target buffer into a `C8THgaTQxF`
+return string, while `0xf3888` clears the wrapper and delegates to that
+decoder. A null input takes the target's fallback static string path. The
+target buffer class is distinct from the `vuuHgangcF` container that already
+has source-backed `v18_TStringList` aliases, so no source semantic alias is
+claimed here.
+
+All 19 target functions are defined global dynamic symbols. The reviewed
+labels are deliberately prefixed with `spectron_`:
+
+    spectron_C8THgaTQxF_decodeFromCanTfaz6bZ_const
+    spectron_C8THgaTQxF_assignCanTfaz6bZ
+    spectron_CanTfaz6bZ_initXorKey_void
+    spectron_CanTfaz6bZ_clear_void
+    spectron_CanTfaz6bZ_assign_CanTfaz6bZ_const
+    spectron_CanTfaz6bZ_encodeFromC8THgaTQxF
+    spectron_CanTfaz6bZ_decodeToC8THgaTQxF
+    spectron_CanTfaz6bZ_decodeToC8THgaTQxF_variant
+    spectron_CanTfaz6bZ_equals_CanTfaz6bZ_const
+    spectron_CanTfaz6bZ_startsWithEncoded_CanTfaz6bZ_const
+    spectron_CanTfaz6bZ_startsWithIgnoreCase_CanTfaz6bZ_const
+    spectron_CanTfaz6bZ_equalsIgnoreCase_CanTfaz6bZ_const
+    spectron_CanTfaz6bZ_decodeCopyToC8THgaTQxF
+    spectron_CanTfaz6bZ_assignFromC8THgaTQxF
+    spectron_CanTfaz6bZ_setXorEncodedBuffer_char_const_int
+    spectron_CanTfaz6bZ_makeUnique_void
+    spectron_CanTfaz6bZ_assignCStringXorEncoded_char_const
+    spectron_CanTfaz6bZ_indexDecoded_int
+    spectron_CanTfaz6bZ_appendXorEncoded_CanTfaz6bZ_const
+
+Three rows have exact and normalized metric collisions with ordinary source
+helpers, at target `0xf8c64`, `0xf8f54`, and `0xf9178`. These are shape
+collisions only. The artifact claims zero source counterparts and zero
+semantic promotions because the direct pseudocode identifies a different
+encoded-string subsystem.
+
+The v347 IDB has 11,707 functions and zero audited default names, with 6,440
+translated aliases, 439 target-only descriptive labels, 769 retained target
+names, 4,795 source-backed dynamic rows, 1,657 exact retained dynamic names,
+and 5,782 exact dynamic function starts. The source semantic map is carried
+forward unchanged at 3,721 mapped pairs. The saved database is
+`analysis/spectron_libqplay_translated_v347_encoded_string.i64` with SHA-256
+`fe1bbbdf27b25b2fe13d088fb01944a624e8fe8a11898a377ff66f49b892a59b`.
+
+The v347 records are
+`artifacts/spectron_encoded_string_target_only_labels_20260829.json`,
+`artifacts/spectron_encoded_string_target_only_label_application_20260829.json`,
+`artifacts/spectron_encoded_string_target_only_label_verification_20260829.json`,
+`artifacts/spectron_features_v347_encoded_string.json`,
+`artifacts/spectron_name_coverage_audit_v347.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v347.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v347.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v347.json`. The reusable
+scripts are
+`tools/generate_spectron_encoded_string_target_only_labels.py`,
+`tools/ida_apply_spectron_target_only_labels.py`,
+`tools/ida_verify_spectron_target_only_labels.py`, and
+`tools/generate_spectron_translation_checkpoint_v347.py`.
+
+This was static IDA work only. It did not patch the APK, rerun the loopback
+client, contact a live service, or decrypt an external resource.
 
 ### v346 Spectron resource path helper
 

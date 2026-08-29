@@ -1,0 +1,2050 @@
+{
+  "artifact": "spectron_encoded_string_target_only_labels_20260829",
+  "context": {
+    "key_behavior": "CanTfaz6bZ initializes a three-byte lower-case XOR key once, stores length and reference count beside encoded bytes, supports copy-on-write mutation, and decodes bytes for indexed access and comparisons.",
+    "mapping_boundary": "All rows are descriptive target-only labels. They are excluded from the 1.8-to-Spectron semantic mapping count.",
+    "source_comparison": "The 1.8 inventory contains ordinary TString and TStringList helpers but no one-to-one counterpart for this target-only XOR-encoded buffer class. Three target rows have ordinary metric collisions, which are retained as evidence and not promoted into the semantic map.",
+    "source_references": [
+      {
+        "ea": "0xf10b8",
+        "function_end": "0xf11bc",
+        "metrics": {
+          "basic_block_count": 14,
+          "branch_count": 10,
+          "call_count": 3,
+          "instruction_count": 65,
+          "mnemonic_hash": "7780532beb110a6f819c228928df5930db8564b3dbe9648908197bfc81944928",
+          "opcode_shape_hash": "77bb1e32a7e3def7d5bcfe9472d24dc42cd2af7e483679b608106036bbc7375b",
+          "register_detail_hash": "9c0202379497352cd08ea578d77b36ce147592f067898cb3f81a402fc590c2e0",
+          "register_shape_hash": "59caf43925c378fc9355139900ce97837a1185964ebcd92b3b78a044607617f8",
+          "return_count": 1,
+          "shape_hash": "999e892e965bc9f48fe884378107d22c3117b9d1a72e1a45d3e04cced5f222eb",
+          "size": 260,
+          "string_refs_hash": null
+        },
+        "name": "TString_setSize_int_bool",
+        "pseudocode": "int *__fastcall TString_setSize_int_bool(TString *this, int a2, unsigned __int8 a3)\n{\n  int v4; // w22\n  int v6; // w21\n  int *result; // x0\n  _DWORD *v8; // x1\n  __int64 v9; // x1\n\n  v4 = a3;\n  if ( a2 <= 0 )\n    return (int *)plt_TString_clear_void(this);\n  if ( !*(_QWORD *)this )\n  {\n    v6 = 0;\n    v8 = malloc(a2 + 9);\n    *(_QWORD *)this = v8;\nLABEL_5:\n    *v8 = a2;\n    result = &dword_0 + 1;\n    v8[1] = 1;\n    *((_BYTE *)v8 + a2 + 8) = 0;\n    if ( a2 > v6 )\n    {\n      if ( v4 )\n        return (int *)memset((void *)(*(_QWORD *)this + v6 + 8LL), 0, a2 - v6);\n    }\n    return result;\n  }\n  v6 = **(_DWORD **)this;\n  result = (int *)plt_TString_makeUnique_void(this);\n  if ( a2 != v6 )\n  {\n    v8 = realloc(*(void **)this, a2 + 9);\n    *(_QWORD *)this = v8;\n    goto LABEL_5;\n  }\n  if ( v4 )\n  {\n    result = *(int **)this;\n    v9 = *(_QWORD *)this + a2;\n    *result = a2;\n    result[1] = 1;\n    *(_BYTE *)(v9 + 8) = 0;\n  }\n  return result;\n}\n",
+        "pseudocode_sha256": "b65ffe15271d0a6c3294635e34b73fe68f140d31493e2df3f219de15cf527aae"
+      },
+      {
+        "ea": "0xf1288",
+        "function_end": "0xf12e0",
+        "metrics": {
+          "basic_block_count": 5,
+          "branch_count": 3,
+          "call_count": 1,
+          "instruction_count": 22,
+          "mnemonic_hash": "fe52ae0119200ebaa9f258d6fbba793134019120575b540dd7dafaa1161dab00",
+          "opcode_shape_hash": "df8849c7e2d1454624d40fd2e544c7a27e6fc087e33112b799b39f40c2ba9592",
+          "register_detail_hash": "b0729dcc1248f8913d9ac8211d850b0de47f712942965d5dfdb0d71768f003bd",
+          "register_shape_hash": "ae6c0cecef5b300a37de549cb7ae4d882d4c173a3d091e25eb9da1a217a5ff09",
+          "return_count": 1,
+          "shape_hash": "5b3e2d67e975b23f5a18420a03feaf623bd14cc3e1e9c32f14628a3f79b0d898",
+          "size": 88,
+          "string_refs_hash": null
+        },
+        "name": "TString_operator_assign_TString_const",
+        "pseudocode": "TString *__fastcall TString_operator_assign_TString_const(TString *a1, TString *a2)\n{\n  __int64 v3; // x0\n  int v4; // w1\n\n  if ( a2 != a1 && *(_QWORD *)a2 != *(_QWORD *)a1 )\n  {\n    plt_TString_clear_void(a1);\n    v3 = *(_QWORD *)a2;\n    if ( *(_QWORD *)a2 )\n    {\n      v4 = *(_DWORD *)(v3 + 4);\n      *(_QWORD *)a1 = v3;\n      *(_DWORD *)(v3 + 4) = v4 + 1;\n    }\n  }\n  return a1;\n}\n",
+        "pseudocode_sha256": "b20944b218513d02549a66bf20e3297189b240926c313984d3765fe850673d46"
+      },
+      {
+        "ea": "0xf2fa0",
+        "function_end": "0xf3014",
+        "metrics": {
+          "basic_block_count": 7,
+          "branch_count": 6,
+          "call_count": 1,
+          "instruction_count": 29,
+          "mnemonic_hash": "514a93f0f0b75167866152739da6782f02da978f4316f8b3e12c4240bc27e8a8",
+          "opcode_shape_hash": "465a25577ada579900d01a93f0621ef0297da34bce66f189b894be99e350ffff",
+          "register_detail_hash": "c6296e12300c47c4813a393697b7b52ca64d4f36dfb103e61522af43115aac33",
+          "register_shape_hash": "3a13db6005a86d3ff20422c3c377a7f439bf1e78015d08d9b2468ef033aa72af",
+          "return_count": 3,
+          "shape_hash": "31867afaea35cd1473aef7986c0f855693d3d5870739df7832bd7d463f1d8acf",
+          "size": 116,
+          "string_refs_hash": null
+        },
+        "name": "TString_starts_TString_const",
+        "pseudocode": "bool __fastcall TString_starts_TString_const(int **this, int **a2)\n{\n  int *v2; // x3\n  int v3; // w2\n  int *v4; // x1\n\n  v2 = *a2;\n  if ( !*a2 )\n    return 1;\n  v3 = *v2;\n  if ( *v2 <= 0 )\n    return 1;\n  v4 = *this;\n  return *this && v3 <= *v4 && memcmp(v2 + 2, v4 + 2, v3) == 0;\n}\n",
+        "pseudocode_sha256": "0d1bdeae9ae3f1a3cbe156e95bf48c211ab020ba7b5a5fc47dd71df332eb57d4"
+      },
+      {
+        "ea": "0xf5e50",
+        "function_end": "0xf5ef8",
+        "metrics": {
+          "basic_block_count": 8,
+          "branch_count": 8,
+          "call_count": 4,
+          "instruction_count": 42,
+          "mnemonic_hash": "37226809bb12fb0c57efadb332ec482df5cb3bc75b615e88364c9068e614d1c1",
+          "opcode_shape_hash": "a77395d6c378b2dedd7ec6c7cc3647bfce6db23f7f9299e59005403065770002",
+          "register_detail_hash": "8e0636a2c01bc95295aae6fb4608a59a648820a9702151fd3b16b1252712da98",
+          "register_shape_hash": "32bb0e9916fd07d0bcca5e4acc1b0bdfddcd8072c0f1948c886a0b99175e23fd",
+          "return_count": 1,
+          "shape_hash": "a0a1f102b1a30639636406b28fefe22501f9a6cfeb819bc79416ca9f6bc2023a",
+          "size": 168,
+          "string_refs_hash": null
+        },
+        "name": "TStringList_Assign_TStringList",
+        "pseudocode": "__int64 __fastcall TStringList_Assign_TStringList(TStringList *this, TStringList *a2)\n{\n  __int64 result; // x0\n  int v5; // w1\n  __int64 v6; // x20\n  int i; // w19\n  _QWORD *v8; // x22\n  __int64 v9; // x1\n\n  result = plt_TStringList_Clear_void(this);\n  if ( a2 )\n  {\n    v5 = *((_DWORD *)a2 + 4);\n    if ( v5 > 0 )\n    {\n      plt_TStringList_setCapacity_int(this, v5);\n      result = *((_QWORD *)this + 1);\n      if ( result )\n      {\n        result = *((unsigned int *)a2 + 4);\n        v6 = 0;\n        for ( i = 0; (int)result > i; v6 += 8 )\n        {\n          v8 = (_QWORD *)plt_operator_new_ulong__2(8u);\n          v9 = (unsigned int)i++;\n          plt_TStringList_operator_index_int(v8, a2, v9);\n          result = *((unsigned int *)a2 + 4);\n          *(_QWORD *)(*((_QWORD *)this + 1) + v6) = v8;\n        }\n        *((_DWORD *)this + 4) = result;\n      }\n      else\n      {\n        *((_DWORD *)this + 4) = 0;\n      }\n    }\n  }\n  return result;\n}\n",
+        "pseudocode_sha256": "a8d748869af4edb5283558c3c1b03f5deffb3b9a8c1b7e37969eaf47c0efcdbb"
+      }
+    ],
+    "target_component": "C8THgaTQxF and CanTfaz6bZ encoded-string runtime at 0xf37bc through 0xf94ac"
+  },
+  "inputs": {
+    "dynamic_symbol_coverage": "artifacts/spectron_dynamic_symbol_coverage_audit_v346.json",
+    "dynamic_symbol_coverage_sha256": "04b1067f2b5e16fd447eef92f6f208980ba4bab3e8b2e4f25a3306bd067dec67",
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v3_current.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_translation_v345.json",
+    "semantic_map_sha256": "d701a341cfbb98f93a28769977d02a79ab7892e2d0f480b91cab9cddcb544eda",
+    "source_evidence": "/tmp/graal-source-encrypted-string-v347.json",
+    "source_evidence_sha256": "5bdc5a1d50eb3ac00566a098bc79a1b18a905fd41a88ec42c571971b3dfdb187",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "artifacts/spectron_features_v346_resource_path_helper.json",
+    "spectron_features_sha256": "5469e99ccb07b08ba5924227ecac6f868ec84f5a144c10dd0b321582afab5d76",
+    "symbol_table": "artifacts/spectron_symbol_table_audit_20260827.json",
+    "symbol_table_sha256": "5d3acca25c56abbb71a6666092bf2fe3e674caade12dfe14b38e0e91838dc5a2",
+    "target_evidence": "/tmp/graal-target-encoded-string-cluster-v347.json",
+    "target_evidence_sha256": "639ea7ad2dbe267fcd47a202ad9799712a540fcf8b82f8f71b100b91b378f4aa"
+  },
+  "interpretation": [
+    "The spectron_ prefix marks target-specific descriptions rather than restored 1.8 symbols.",
+    "The CanTfaz6bZ class is an encoded string buffer with a random three-byte XOR key, copy-on-write storage, decoded indexing, case-insensitive comparisons, and concatenation.",
+    "C8THgaTQxF::QhxbJaMCjD and its assignment wrapper decode the encoded buffer into the ordinary target string wrapper.",
+    "Ordinary source metric collisions are explicitly retained as collisions and are not treated as source correspondences.",
+    "No live endpoint was contacted while producing this artifact."
+  ],
+  "labels": [
+    {
+      "confidence": "high",
+      "current_name": "_ZN10C8THgaTQxF10QhxbJaMCjDERK10CanTfaz6bZ",
+      "evidence": [
+        "The target dynamic symbol table defines this address as one global FUNC symbol with the recorded raw name and size.",
+        "Target pseudocode shows the copy-on-write encoded-buffer operation recorded in the operation field.",
+        "The CanTfaz6bZ cluster shares a process-generated three-byte XOR key and decoded access paths; the C8THgaTQxF bridge methods convert between the encoded and ordinary string representations.",
+        "The target function is outside the 1.8 semantic map. Any ordinary source feature collisions are recorded as metric collisions rather than source correspondences.",
+        "The spectron_ prefix marks a reviewed target-specific description and does not claim recovery of a 1.8 debug symbol."
+      ],
+      "function_end": "0xf3888",
+      "match_kind": "reviewed-target-only-encoded-string-helper",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "decodes the encoded CanTfaz6bZ buffer into the ordinary C8THgaTQxF string wrapper",
+      "proposed_name": "spectron_C8THgaTQxF_decodeFromCanTfaz6bZ_const",
+      "script_name": "C8THgaTQxF decode bridge",
+      "semantic_target_claimed_before_label": false,
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated; target encoded-string subsystem has no one-to-one 1.8 function",
+      "source_feature_collisions": {
+        "exact_metric_match_eas": [],
+        "normalized_10_match_eas": [],
+        "normalized_11_match_eas": []
+      },
+      "target_default_name": false,
+      "target_direct_call_names": [
+        "._ZN10C8THgaTQxF10PHFwgaxH5vEib",
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSERKS_",
+        "._ZN10C8THgaTQxFlsEPKc"
+      ],
+      "target_dynamic_symbol": {
+        "binding": "GLOBAL",
+        "dynamic_index": 6393,
+        "dynamic_name": "_ZN10C8THgaTQxF10QhxbJaMCjDERK10CanTfaz6bZ",
+        "prelabel_status": "exact_retained_dynamic_name",
+        "section_index": 9,
+        "size": 204,
+        "type": "FUNC",
+        "value": "0xf37bc"
+      },
+      "target_ea": "0xf37bc",
+      "target_metrics": {
+        "basic_block_count": 5,
+        "branch_count": 7,
+        "call_count": 4,
+        "instruction_count": 51,
+        "mnemonic_hash": "102ceb9d98bfe47cddf16115284c8966a6a64232e9919f5ec20527ab2cc5b674",
+        "opcode_shape_hash": "f0ea789db9fc666338d1d75930af78e70ed2379a39f73793a719f256cdf2ff9c",
+        "register_detail_hash": "0122621022811782a0f62c82cc91a3458c1d72d7b053b4f94da124a05af464f3",
+        "register_shape_hash": "4b2b0c9b5ddb0fea65cc50cbfe8ebf4b2d03040a7bc4bd1cd324d982e533ebb5",
+        "return_count": 1,
+        "shape_hash": "807465eedb9ce447eba3201ab73669ee123a02b358acf379d924ea9509e40791",
+        "size": 204,
+        "string_refs_hash": null
+      },
+      "target_pseudocode": "__int64 __fastcall C8THgaTQxF::QhxbJaMCjD(C8THgaTQxF *this, int **a2)\n{\n  int *v4; // x1\n  int v5; // w19\n  __int64 result; // x0\n  __int64 v7; // x7\n  int *v8; // x6\n  __int64 i; // x1\n  __int64 v10; // x3\n  unsigned int v11; // w2\n  int v12; // w0\n  __int64 v13; // [xsp+28h] [xbp-8h] BYREF\n\n  v4 = *a2;\n  if ( v4 )\n  {\n    v5 = *v4;\n    result = C8THgaTQxF::PHFwgaxH5v(this, *v4, 0);\n    v7 = *(_QWORD *)this;\n    v8 = *a2;\n    for ( i = 0; v5 > (int)i; *(_BYTE *)(v10 + 8) = result )\n    {\n      v10 = v7 + i;\n      v11 = *((unsigned __int8 *)v8 + i + 8);\n      v12 = (int)i++ % 3;\n      result = (unsigned __int8)CanTfaz6bZ::mO5aJaYuXC[v12] ^ v11;\n    }\n  }\n  else\n  {\n    v13 = 0;\n    C8THgaTQxF::operator<<((int)&v13, O_mdJaBYRE);\n    C8THgaTQxF::operator=(this, &v13);\n    return C8THgaTQxF::clear((C8THgaTQxF *)&v13);\n  }\n  return result;\n}\n",
+      "target_pseudocode_sha256": "dd85f5cb1fa7e1808b04dfd5f93bf7fefc90471db457257ea70332a0a2f42b75",
+      "target_role": "copy-on-write three-byte XOR encoded string buffer or bridge",
+      "target_string_refs": [],
+      "target_symbol_table_row": {
+        "binding": 1,
+        "binding_name": "GLOBAL",
+        "index": 6393,
+        "name": "_ZN10C8THgaTQxF10QhxbJaMCjDERK10CanTfaz6bZ",
+        "section_index": 9,
+        "size": 204,
+        "type": 2,
+        "type_name": "FUNC",
+        "value": 997308
+      },
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xdeb10",
+          "caller_name": "._ZN10C8THgaTQxF10QhxbJaMCjDERK10CanTfaz6bZ",
+          "from": "0xdeb1c",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x302d0",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xdeb10",
+          "caller_name": "._ZN10C8THgaTQxF10QhxbJaMCjDERK10CanTfaz6bZ",
+          "from": "0xdeb14",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x387008",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_name": "_ZN10C8THgaTQxFaSER10CanTfaz6bZ",
+      "evidence": [
+        "The target dynamic symbol table defines this address as one global FUNC symbol with the recorded raw name and size.",
+        "Target pseudocode shows the copy-on-write encoded-buffer operation recorded in the operation field.",
+        "The CanTfaz6bZ cluster shares a process-generated three-byte XOR key and decoded access paths; the C8THgaTQxF bridge methods convert between the encoded and ordinary string representations.",
+        "The target function is outside the 1.8 semantic map. Any ordinary source feature collisions are recorded as metric collisions rather than source correspondences.",
+        "The spectron_ prefix marks a reviewed target-specific description and does not claim recovery of a 1.8 debug symbol."
+      ],
+      "function_end": "0xf38b8",
+      "match_kind": "reviewed-target-only-encoded-string-helper",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "clears the destination and assigns it from the encoded CanTfaz6bZ buffer",
+      "proposed_name": "spectron_C8THgaTQxF_assignCanTfaz6bZ",
+      "script_name": "C8THgaTQxF encoded-buffer assignment",
+      "semantic_target_claimed_before_label": false,
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated; target encoded-string subsystem has no one-to-one 1.8 function",
+      "source_feature_collisions": {
+        "exact_metric_match_eas": [],
+        "normalized_10_match_eas": [],
+        "normalized_11_match_eas": []
+      },
+      "target_default_name": false,
+      "target_direct_call_names": [
+        "._ZN10C8THgaTQxF10QhxbJaMCjDERK10CanTfaz6bZ",
+        "._ZN10C8THgaTQxF5clearEv"
+      ],
+      "target_dynamic_symbol": {
+        "binding": "GLOBAL",
+        "dynamic_index": 471,
+        "dynamic_name": "_ZN10C8THgaTQxFaSER10CanTfaz6bZ",
+        "prelabel_status": "exact_retained_dynamic_name",
+        "section_index": 9,
+        "size": 48,
+        "type": "FUNC",
+        "value": "0xf3888"
+      },
+      "target_ea": "0xf3888",
+      "target_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 3,
+        "call_count": 2,
+        "instruction_count": 12,
+        "mnemonic_hash": "b59b562fd6727b5eacbc59c3c00ef03d682324ff3052ef7c7883056375c8a9d7",
+        "opcode_shape_hash": "333af682b20c6065bc03ca85c2281689f0f54b2a03eb1cdcf0a51bb40bffc3fb",
+        "register_detail_hash": "a1888a3fe65fd7db4f28ed15e3c4e5840cce6c5334777e3deb9ea70a69d5e762",
+        "register_shape_hash": "2782f2c5990c9473568cbcafa7af09937d4ff3f0bcba33e903eed931d29f1226",
+        "return_count": 1,
+        "shape_hash": "72c48cdf7cd1959f04ad0de69e9bb38f792ad1ac9701f1e9945d9bfe4e4e10a3",
+        "size": 48,
+        "string_refs_hash": null
+      },
+      "target_pseudocode": "C8THgaTQxF *__fastcall C8THgaTQxF::operator=(C8THgaTQxF *a1, const CanTfaz6bZ *a2)\n{\n  C8THgaTQxF::clear(a1);\n  C8THgaTQxF::QhxbJaMCjD(a1, a2);\n  return a1;\n}\n",
+      "target_pseudocode_sha256": "6d7f5120ae13a25f5c333fc9f3be4a888575c93e38de8ceb66d9c1673fc5347f",
+      "target_role": "copy-on-write three-byte XOR encoded string buffer or bridge",
+      "target_string_refs": [],
+      "target_symbol_table_row": {
+        "binding": 1,
+        "binding_name": "GLOBAL",
+        "index": 471,
+        "name": "_ZN10C8THgaTQxFaSER10CanTfaz6bZ",
+        "section_index": 9,
+        "size": 48,
+        "type": 2,
+        "type_name": "FUNC",
+        "value": 997512
+      },
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xd2420",
+          "caller_name": "._ZN10C8THgaTQxFaSER10CanTfaz6bZ",
+          "from": "0xd242c",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0xd7a0",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xd2420",
+          "caller_name": "._ZN10C8THgaTQxFaSER10CanTfaz6bZ",
+          "from": "0xd2424",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x380c90",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_name": "_ZN10CanTfaz6bZ10uTzSjboOwkEv",
+      "evidence": [
+        "The target dynamic symbol table defines this address as one global FUNC symbol with the recorded raw name and size.",
+        "Target pseudocode shows the copy-on-write encoded-buffer operation recorded in the operation field.",
+        "The CanTfaz6bZ cluster shares a process-generated three-byte XOR key and decoded access paths; the C8THgaTQxF bridge methods convert between the encoded and ordinary string representations.",
+        "The target function is outside the 1.8 semantic map. Any ordinary source feature collisions are recorded as metric collisions rather than source correspondences.",
+        "The spectron_ prefix marks a reviewed target-specific description and does not claim recovery of a 1.8 debug symbol."
+      ],
+      "function_end": "0xf8c60",
+      "match_kind": "reviewed-target-only-encoded-string-helper",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "initializes the three-byte lower-case XOR key once using the target random source",
+      "proposed_name": "spectron_CanTfaz6bZ_initXorKey_void",
+      "script_name": "encoded-buffer key initialization",
+      "semantic_target_claimed_before_label": false,
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated; target encoded-string subsystem has no one-to-one 1.8 function",
+      "source_feature_collisions": {
+        "exact_metric_match_eas": [],
+        "normalized_10_match_eas": [],
+        "normalized_11_match_eas": []
+      },
+      "target_default_name": false,
+      "target_direct_call_names": [
+        "._ZN10zYRMgaG0IJ10v7ptfa1AmDEv",
+        ".rand",
+        ".srand"
+      ],
+      "target_dynamic_symbol": {
+        "binding": "GLOBAL",
+        "dynamic_index": 5502,
+        "dynamic_name": "_ZN10CanTfaz6bZ10uTzSjboOwkEv",
+        "prelabel_status": "exact_retained_dynamic_name",
+        "section_index": 9,
+        "size": 208,
+        "type": "FUNC",
+        "value": "0xf8b90"
+      },
+      "target_ea": "0xf8b90",
+      "target_metrics": {
+        "basic_block_count": 3,
+        "branch_count": 7,
+        "call_count": 5,
+        "instruction_count": 51,
+        "mnemonic_hash": "6a07e2db06b95d952f0cb14ac36b7ba38840f734161301f5d41a6364c8e82cff",
+        "opcode_shape_hash": "b7c6c632aa7d2968d04212e8c1cf61e129ea14d3fa41f924a06c2f1ed6979be5",
+        "register_detail_hash": "d5228d13eb849547f184ff59e3e031472bc3323261a54d891aa76acc7692eac9",
+        "register_shape_hash": "1b62f07f5ae248449fc3aed1cd40db36950991effab9289ca6af141d53dc410e",
+        "return_count": 1,
+        "shape_hash": "140eeaa76334f3f88c1bc8ea7993cc93a2bade7e4a6e2f99fc16456066043cd2",
+        "size": 208,
+        "string_refs_hash": "d6ec6898de87ddac6e5b3611708a7aa1c2d298293349cc1a6c299a1db7149d38"
+      },
+      "target_pseudocode": "__int64 __fastcall CanTfaz6bZ::uTzSjboOwk(CanTfaz6bZ *this)\n{\n  __int64 result; // x0\n  unsigned int v2; // w0\n  int v3; // w0\n\n  result = (unsigned __int8)CanTfaz6bZ::HA7Sjbw_Zk;\n  if ( !CanTfaz6bZ::HA7Sjbw_Zk )\n  {\n    v2 = zYRMgaG0IJ::v7ptfa1AmD(nullptr);\n    srand(v2);\n    CanTfaz6bZ::mO5aJaYuXC[0] = aAbcdefghijklmn_1[rand() % 26];\n    byte_3A06F1 = aAbcdefghijklmn_1[rand() % 26];\n    v3 = rand();\n    CanTfaz6bZ::HA7Sjbw_Zk = 1;\n    result = (unsigned __int8)aAbcdefghijklmn_1[v3 % 26];\n    byte_3A06F2 = result;\n  }\n  return result;\n}\n",
+      "target_pseudocode_sha256": "d35dc66243a664b19eaba1cfb68e835eee122eb09de104ff24a63f1d6945f336",
+      "target_role": "copy-on-write three-byte XOR encoded string buffer or bridge",
+      "target_string_refs": [
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      ],
+      "target_symbol_table_row": {
+        "binding": 1,
+        "binding_name": "GLOBAL",
+        "index": 5502,
+        "name": "_ZN10CanTfaz6bZ10uTzSjboOwkEv",
+        "section_index": 9,
+        "size": 208,
+        "type": 2,
+        "type_name": "FUNC",
+        "value": 1018768
+      },
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xdcc10",
+          "caller_name": "._ZN10CanTfaz6bZ10uTzSjboOwkEv",
+          "from": "0xdcc1c",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x2af48",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xdcc10",
+          "caller_name": "._ZN10CanTfaz6bZ10uTzSjboOwkEv",
+          "from": "0xdcc14",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x386088",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_name": "_ZN10CanTfaz6bZ5clearEv",
+      "evidence": [
+        "The target dynamic symbol table defines this address as one global FUNC symbol with the recorded raw name and size.",
+        "Target pseudocode shows the copy-on-write encoded-buffer operation recorded in the operation field.",
+        "The CanTfaz6bZ cluster shares a process-generated three-byte XOR key and decoded access paths; the C8THgaTQxF bridge methods convert between the encoded and ordinary string representations.",
+        "The target function is outside the 1.8 semantic map. Any ordinary source feature collisions are recorded as metric collisions rather than source correspondences.",
+        "The spectron_ prefix marks a reviewed target-specific description and does not claim recovery of a 1.8 debug symbol."
+      ],
+      "function_end": "0xf8ca8",
+      "match_kind": "reviewed-target-only-encoded-string-helper",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "releases or decrements the shared encoded buffer and clears the object pointer",
+      "proposed_name": "spectron_CanTfaz6bZ_clear_void",
+      "script_name": "encoded-buffer cleanup",
+      "semantic_target_claimed_before_label": false,
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated; target encoded-string subsystem has no one-to-one 1.8 function",
+      "source_feature_collisions": {
+        "exact_metric_match_eas": [
+          "0xf0ef8"
+        ],
+        "normalized_10_match_eas": [
+          "0xf0ef8"
+        ],
+        "normalized_11_match_eas": [
+          "0xf0ef8"
+        ]
+      },
+      "target_default_name": false,
+      "target_direct_call_names": [
+        ".free"
+      ],
+      "target_dynamic_symbol": {
+        "binding": "GLOBAL",
+        "dynamic_index": 4824,
+        "dynamic_name": "_ZN10CanTfaz6bZ5clearEv",
+        "prelabel_status": "exact_retained_dynamic_name",
+        "section_index": 9,
+        "size": 68,
+        "type": "FUNC",
+        "value": "0xf8c64"
+      },
+      "target_ea": "0xf8c64",
+      "target_metrics": {
+        "basic_block_count": 6,
+        "branch_count": 4,
+        "call_count": 1,
+        "instruction_count": 17,
+        "mnemonic_hash": "6ba7625342ddf9a7e115fcc37c9f1b05cf919fc93895144098304fa583ab9349",
+        "opcode_shape_hash": "547e9611ec2110fed17c57f6e858d7e64eff030a5c5fa6d974db90f50180293b",
+        "register_detail_hash": "daf2e594de83c0733bfa6221d68f74d601287008ca08d4958f928285c89a4739",
+        "register_shape_hash": "f2d5d5b286760c7d708e0467307b6a0c58bd5db4ed53c19fdf6c60945ef5c955",
+        "return_count": 1,
+        "shape_hash": "65a35fb8b8dbf103a6ecf1943faebf2b6031f515e2b9095b991e76b566fd6433",
+        "size": 68,
+        "string_refs_hash": null
+      },
+      "target_pseudocode": "void __fastcall CanTfaz6bZ::clear(CanTfaz6bZ *this)\n{\n  _DWORD *v1; // x1\n  int v3; // w0\n\n  v1 = *(_DWORD **)this;\n  if ( *(_QWORD *)this )\n  {\n    v3 = v1[1];\n    if ( v3 <= 1 )\n      free(v1);\n    else\n      v1[1] = v3 - 1;\n    *(_QWORD *)this = 0;\n  }\n}\n",
+      "target_pseudocode_sha256": "a37365a86f551f5c699ef6e86ca71e09f9f41da67f663f15d52d9493d62c276b",
+      "target_role": "copy-on-write three-byte XOR encoded string buffer or bridge",
+      "target_string_refs": [],
+      "target_symbol_table_row": {
+        "binding": 1,
+        "binding_name": "GLOBAL",
+        "index": 4824,
+        "name": "_ZN10CanTfaz6bZ5clearEv",
+        "section_index": 9,
+        "size": 68,
+        "type": 2,
+        "type_name": "FUNC",
+        "value": 1018980
+      },
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xdb480",
+          "caller_name": "._ZN10CanTfaz6bZ5clearEv",
+          "from": "0xdb48c",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x26fb8",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xdb480",
+          "caller_name": "._ZN10CanTfaz6bZ5clearEv",
+          "from": "0xdb484",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x3854c0",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_name": "_ZN10CanTfaz6bZaSERKS_",
+      "evidence": [
+        "The target dynamic symbol table defines this address as one global FUNC symbol with the recorded raw name and size.",
+        "Target pseudocode shows the copy-on-write encoded-buffer operation recorded in the operation field.",
+        "The CanTfaz6bZ cluster shares a process-generated three-byte XOR key and decoded access paths; the C8THgaTQxF bridge methods convert between the encoded and ordinary string representations.",
+        "The target function is outside the 1.8 semantic map. Any ordinary source feature collisions are recorded as metric collisions rather than source correspondences.",
+        "The spectron_ prefix marks a reviewed target-specific description and does not claim recovery of a 1.8 debug symbol."
+      ],
+      "function_end": "0xf8d00",
+      "match_kind": "reviewed-target-only-encoded-string-helper",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "shares the encoded buffer with copy-on-write reference counting",
+      "proposed_name": "spectron_CanTfaz6bZ_assign_CanTfaz6bZ_const",
+      "script_name": "encoded-buffer copy assignment",
+      "semantic_target_claimed_before_label": false,
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated; target encoded-string subsystem has no one-to-one 1.8 function",
+      "source_feature_collisions": {
+        "exact_metric_match_eas": [],
+        "normalized_10_match_eas": [],
+        "normalized_11_match_eas": []
+      },
+      "target_default_name": false,
+      "target_direct_call_names": [
+        "._ZN10CanTfaz6bZ5clearEv"
+      ],
+      "target_dynamic_symbol": {
+        "binding": "GLOBAL",
+        "dynamic_index": 3635,
+        "dynamic_name": "_ZN10CanTfaz6bZaSERKS_",
+        "prelabel_status": "exact_retained_dynamic_name",
+        "section_index": 9,
+        "size": 88,
+        "type": "FUNC",
+        "value": "0xf8ca8"
+      },
+      "target_ea": "0xf8ca8",
+      "target_metrics": {
+        "basic_block_count": 5,
+        "branch_count": 4,
+        "call_count": 1,
+        "instruction_count": 22,
+        "mnemonic_hash": "2025cc11873def38aa5d2c157dce588401b89258e69d5e7865d1fb6912640b09",
+        "opcode_shape_hash": "2f00d35a166575638cca198a540f80eda5ab93ef1282e76fe026ba17f4b42e9f",
+        "register_detail_hash": "e0d58173a125567dc7acaa1d09620b34a7060c18707f0386975874470e7497a9",
+        "register_shape_hash": "e7b6ffb152580efdc18ec26fca28dba3ca4fea56312ddbd8ffe06e090e18376a",
+        "return_count": 1,
+        "shape_hash": "2b6b58dc0220839099334dcab5abbb6b79758ef25d7d051112fca5d050e49b05",
+        "size": 88,
+        "string_refs_hash": null
+      },
+      "target_pseudocode": "CanTfaz6bZ *__fastcall CanTfaz6bZ::operator=(CanTfaz6bZ *a1, __int64 *a2)\n{\n  __int64 v3; // x0\n  int v4; // w1\n\n  if ( *a2 != *(_QWORD *)a1 )\n  {\n    CanTfaz6bZ::clear(a1);\n    v3 = *a2;\n    if ( *a2 )\n    {\n      v4 = *(_DWORD *)(v3 + 4);\n      *(_QWORD *)a1 = v3;\n      *(_DWORD *)(v3 + 4) = v4 + 1;\n    }\n    else\n    {\n      *(_QWORD *)a1 = 0;\n    }\n  }\n  return a1;\n}\n",
+      "target_pseudocode_sha256": "c819289694ba6786024942cbce05cd28bf3f779e1ff660e17f43ed8c25ad1727",
+      "target_role": "copy-on-write three-byte XOR encoded string buffer or bridge",
+      "target_string_refs": [],
+      "target_symbol_table_row": {
+        "binding": 1,
+        "binding_name": "GLOBAL",
+        "index": 3635,
+        "name": "_ZN10CanTfaz6bZaSERKS_",
+        "section_index": 9,
+        "size": 88,
+        "type": 2,
+        "type_name": "FUNC",
+        "value": 1019048
+      },
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xd8c90",
+          "caller_name": "._ZN10CanTfaz6bZaSERKS_",
+          "from": "0xd8c9c",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x20040",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xd8c90",
+          "caller_name": "._ZN10CanTfaz6bZaSERKS_",
+          "from": "0xd8c94",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x3840c8",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_name": "_ZN10CanTfaz6bZ10OZpSjbLtokERK10C8THgaTQxF",
+      "evidence": [
+        "The target dynamic symbol table defines this address as one global FUNC symbol with the recorded raw name and size.",
+        "Target pseudocode shows the copy-on-write encoded-buffer operation recorded in the operation field.",
+        "The CanTfaz6bZ cluster shares a process-generated three-byte XOR key and decoded access paths; the C8THgaTQxF bridge methods convert between the encoded and ordinary string representations.",
+        "The target function is outside the 1.8 semantic map. Any ordinary source feature collisions are recorded as metric collisions rather than source correspondences.",
+        "The spectron_ prefix marks a reviewed target-specific description and does not claim recovery of a 1.8 debug symbol."
+      ],
+      "function_end": "0xf8de0",
+      "match_kind": "reviewed-target-only-encoded-string-helper",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "clears the destination and XOR-encodes a C8THgaTQxF string into a new buffer",
+      "proposed_name": "spectron_CanTfaz6bZ_encodeFromC8THgaTQxF",
+      "script_name": "encoded-buffer string conversion",
+      "semantic_target_claimed_before_label": false,
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated; target encoded-string subsystem has no one-to-one 1.8 function",
+      "source_feature_collisions": {
+        "exact_metric_match_eas": [],
+        "normalized_10_match_eas": [],
+        "normalized_11_match_eas": []
+      },
+      "target_default_name": false,
+      "target_direct_call_names": [
+        "._ZN10CanTfaz6bZ5clearEv",
+        ".malloc"
+      ],
+      "target_dynamic_symbol": {
+        "binding": "GLOBAL",
+        "dynamic_index": 5121,
+        "dynamic_name": "_ZN10CanTfaz6bZ10OZpSjbLtokERK10C8THgaTQxF",
+        "prelabel_status": "exact_retained_dynamic_name",
+        "section_index": 9,
+        "size": 224,
+        "type": "FUNC",
+        "value": "0xf8d00"
+      },
+      "target_ea": "0xf8d00",
+      "target_metrics": {
+        "basic_block_count": 11,
+        "branch_count": 9,
+        "call_count": 2,
+        "instruction_count": 56,
+        "mnemonic_hash": "ff8d768a1369de4c8af82218e6ed4f1683b67cb6ded80ba5e3021e09febe1004",
+        "opcode_shape_hash": "97aefeec75f09f00e96584cccb7b449c5076973a0f15de4535b342f718b9286a",
+        "register_detail_hash": "0726bb9912942a62c59bdf51c25e2d290f1d48b53f54e72bd090c334dcfc313b",
+        "register_shape_hash": "c4ab6296f993d3027437812ff7a290a75ca96cadc916a2b97b8931f46a89936c",
+        "return_count": 2,
+        "shape_hash": "e7a8c5aaad774fe7b6d09a683b7350c136a439e2ea878fb57aff2727e6fc140e",
+        "size": 224,
+        "string_refs_hash": null
+      },
+      "target_pseudocode": "_DWORD *__fastcall CanTfaz6bZ::OZpSjbLtok(CanTfaz6bZ *this, int **a2)\n{\n  int v2; // w19\n  _DWORD *result; // x0\n  int *v6; // x6\n  _DWORD *v7; // x6\n  __int64 i; // x2\n  char *v9; // x4\n  char v10; // w3\n  int v11; // w1\n\n  if ( !*a2 )\n    return (_DWORD *)CanTfaz6bZ::clear(this);\n  v2 = **a2;\n  result = (_DWORD *)CanTfaz6bZ::clear(this);\n  if ( v2 )\n  {\n    result = malloc(v2 + 8);\n    v6 = *a2;\n    *(_QWORD *)this = result;\n    if ( v6 )\n      v7 = v6 + 2;\n    else\n      v7 = (_DWORD *)O_mdJaBYRE;\n    for ( i = 0; v2 > (int)i; v9[8] = CanTfaz6bZ::mO5aJaYuXC[v11] ^ v10 )\n    {\n      v9 = (char *)result + i;\n      v10 = *((_BYTE *)v7 + i);\n      v11 = (int)i++ % 3;\n    }\n    *result = v2;\n    result[1] = 1;\n  }\n  return result;\n}\n",
+      "target_pseudocode_sha256": "65f23f55769c4a0afbf206bbda8fd77a551dae1b070e8813d33d0629b7061a68",
+      "target_role": "copy-on-write three-byte XOR encoded string buffer or bridge",
+      "target_string_refs": [],
+      "target_symbol_table_row": {
+        "binding": 1,
+        "binding_name": "GLOBAL",
+        "index": 5121,
+        "name": "_ZN10CanTfaz6bZ10OZpSjbLtokERK10C8THgaTQxF",
+        "section_index": 9,
+        "size": 224,
+        "type": 2,
+        "type_name": "FUNC",
+        "value": 1019136
+      },
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xdbf00",
+          "caller_name": "._ZN10CanTfaz6bZ10OZpSjbLtokERK10C8THgaTQxF",
+          "from": "0xdbf0c",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x28b90",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xdbf00",
+          "caller_name": "._ZN10CanTfaz6bZ10OZpSjbLtokERK10C8THgaTQxF",
+          "from": "0xdbf04",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x385a00",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_name": "_ZN10CanTfaz6bZ10wsWEEaIN2OERKS_",
+      "evidence": [
+        "The target dynamic symbol table defines this address as one global FUNC symbol with the recorded raw name and size.",
+        "Target pseudocode shows the copy-on-write encoded-buffer operation recorded in the operation field.",
+        "The CanTfaz6bZ cluster shares a process-generated three-byte XOR key and decoded access paths; the C8THgaTQxF bridge methods convert between the encoded and ordinary string representations.",
+        "The target function is outside the 1.8 semantic map. Any ordinary source feature collisions are recorded as metric collisions rather than source correspondences.",
+        "The spectron_ prefix marks a reviewed target-specific description and does not claim recovery of a 1.8 debug symbol."
+      ],
+      "function_end": "0xf8e54",
+      "match_kind": "reviewed-target-only-encoded-string-helper",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "decodes a non-empty encoded buffer into a hidden C8THgaTQxF return value",
+      "proposed_name": "spectron_CanTfaz6bZ_decodeToC8THgaTQxF",
+      "script_name": "encoded-buffer decode conversion",
+      "semantic_target_claimed_before_label": false,
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated; target encoded-string subsystem has no one-to-one 1.8 function",
+      "source_feature_collisions": {
+        "exact_metric_match_eas": [],
+        "normalized_10_match_eas": [],
+        "normalized_11_match_eas": []
+      },
+      "target_default_name": false,
+      "target_direct_call_names": [
+        "._ZN10C8THgaTQxF10QhxbJaMCjDERK10CanTfaz6bZ",
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSERKS_"
+      ],
+      "target_dynamic_symbol": {
+        "binding": "GLOBAL",
+        "dynamic_index": 149,
+        "dynamic_name": "_ZN10CanTfaz6bZ10wsWEEaIN2OERKS_",
+        "prelabel_status": "exact_retained_dynamic_name",
+        "section_index": 9,
+        "size": 116,
+        "type": "FUNC",
+        "value": "0xf8de0"
+      },
+      "target_ea": "0xf8de0",
+      "target_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 7,
+        "call_count": 3,
+        "instruction_count": 29,
+        "mnemonic_hash": "4d240a20c2384ff1bc24808f1f4159d3bfff28b324ca8b4d703274ecbeffa10d",
+        "opcode_shape_hash": "02750222395214b9b174ccc1eae1dd9aca981e842f044376c862a7ac219b8da9",
+        "register_detail_hash": "03ab14a0d5670170623993d944867a23aa79b984cce5ef276469f0bc345a4278",
+        "register_shape_hash": "5ea5d4cc3b0e93fd3ddface9a427d7efbcd1f51027becf27729fd77441cc9501",
+        "return_count": 2,
+        "shape_hash": "20a495b97c3ca718d2be07b18bf7245fce2f5b6487f9d701ccc757c30da881fe",
+        "size": 116,
+        "string_refs_hash": null
+      },
+      "target_pseudocode": "_QWORD *__usercall CanTfaz6bZ::wsWEEaIN2O@<X0>(CanTfaz6bZ *this@<X0>, _QWORD *a2@<X8>)\n{\n  __int64 v5; // [xsp+28h] [xbp-8h] BYREF\n\n  if ( *(_QWORD *)this && **(_DWORD **)this )\n  {\n    v5 = 0;\n    C8THgaTQxF::QhxbJaMCjD((C8THgaTQxF *)&v5, this);\n    *a2 = 0;\n    C8THgaTQxF::operator=(a2, &v5);\n    C8THgaTQxF::clear((C8THgaTQxF *)&v5);\n    return a2;\n  }\n  else\n  {\n    *a2 = 0;\n    return a2;\n  }\n}\n",
+      "target_pseudocode_sha256": "3b9355b09e03950ab4a2e29b410a59e2523a38b9587f5844cc2acf1003ce0610",
+      "target_role": "copy-on-write three-byte XOR encoded string buffer or bridge",
+      "target_string_refs": [],
+      "target_symbol_table_row": {
+        "binding": 1,
+        "binding_name": "GLOBAL",
+        "index": 149,
+        "name": "_ZN10CanTfaz6bZ10wsWEEaIN2OERKS_",
+        "section_index": 9,
+        "size": 116,
+        "type": 2,
+        "type_name": "FUNC",
+        "value": 1019360
+      },
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xd1970",
+          "caller_name": "._ZN10CanTfaz6bZ10wsWEEaIN2OERKS_",
+          "from": "0xd197c",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0xb970",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xd1970",
+          "caller_name": "._ZN10CanTfaz6bZ10wsWEEaIN2OERKS_",
+          "from": "0xd1974",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x380738",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_name": "_ZN10CanTfaz6bZ10lgBtMalYvoES_",
+      "evidence": [
+        "The target dynamic symbol table defines this address as one global FUNC symbol with the recorded raw name and size.",
+        "Target pseudocode shows the copy-on-write encoded-buffer operation recorded in the operation field.",
+        "The CanTfaz6bZ cluster shares a process-generated three-byte XOR key and decoded access paths; the C8THgaTQxF bridge methods convert between the encoded and ordinary string representations.",
+        "The target function is outside the 1.8 semantic map. Any ordinary source feature collisions are recorded as metric collisions rather than source correspondences.",
+        "The spectron_ prefix marks a reviewed target-specific description and does not claim recovery of a 1.8 debug symbol."
+      ],
+      "function_end": "0xf8ec8",
+      "match_kind": "reviewed-target-only-encoded-string-helper",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "performs the const decode-to-C8THgaTQxF path with the same hidden return layout",
+      "proposed_name": "spectron_CanTfaz6bZ_decodeToC8THgaTQxF_variant",
+      "script_name": "encoded-buffer decode conversion variant",
+      "semantic_target_claimed_before_label": false,
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated; target encoded-string subsystem has no one-to-one 1.8 function",
+      "source_feature_collisions": {
+        "exact_metric_match_eas": [],
+        "normalized_10_match_eas": [],
+        "normalized_11_match_eas": []
+      },
+      "target_default_name": false,
+      "target_direct_call_names": [
+        "._ZN10C8THgaTQxF10QhxbJaMCjDERK10CanTfaz6bZ",
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSERKS_"
+      ],
+      "target_dynamic_symbol": {
+        "binding": "GLOBAL",
+        "dynamic_index": 6309,
+        "dynamic_name": "_ZN10CanTfaz6bZ10lgBtMalYvoES_",
+        "prelabel_status": "exact_retained_dynamic_name",
+        "section_index": 9,
+        "size": 116,
+        "type": "FUNC",
+        "value": "0xf8e54"
+      },
+      "target_ea": "0xf8e54",
+      "target_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 7,
+        "call_count": 3,
+        "instruction_count": 29,
+        "mnemonic_hash": "4d240a20c2384ff1bc24808f1f4159d3bfff28b324ca8b4d703274ecbeffa10d",
+        "opcode_shape_hash": "02750222395214b9b174ccc1eae1dd9aca981e842f044376c862a7ac219b8da9",
+        "register_detail_hash": "03ab14a0d5670170623993d944867a23aa79b984cce5ef276469f0bc345a4278",
+        "register_shape_hash": "5ea5d4cc3b0e93fd3ddface9a427d7efbcd1f51027becf27729fd77441cc9501",
+        "return_count": 2,
+        "shape_hash": "20a495b97c3ca718d2be07b18bf7245fce2f5b6487f9d701ccc757c30da881fe",
+        "size": 116,
+        "string_refs_hash": null
+      },
+      "target_pseudocode": "_QWORD *__usercall CanTfaz6bZ::lgBtMalYvo@<X0>(const CanTfaz6bZ *a1@<X0>, _QWORD *a2@<X8>)\n{\n  __int64 v4; // [xsp+28h] [xbp-8h] BYREF\n\n  if ( *(_QWORD *)a1 && **(_DWORD **)a1 )\n  {\n    v4 = 0;\n    C8THgaTQxF::QhxbJaMCjD((C8THgaTQxF *)&v4, a1);\n    *a2 = 0;\n    C8THgaTQxF::operator=(a2, &v4);\n    C8THgaTQxF::clear((C8THgaTQxF *)&v4);\n    return a2;\n  }\n  else\n  {\n    *a2 = 0;\n    return a2;\n  }\n}\n",
+      "target_pseudocode_sha256": "c6fa682404a893bc866563472408ee8417d625aedb849302e500b137e491392e",
+      "target_role": "copy-on-write three-byte XOR encoded string buffer or bridge",
+      "target_string_refs": [],
+      "target_symbol_table_row": {
+        "binding": 1,
+        "binding_name": "GLOBAL",
+        "index": 6309,
+        "name": "_ZN10CanTfaz6bZ10lgBtMalYvoES_",
+        "section_index": 9,
+        "size": 116,
+        "type": 2,
+        "type_name": "FUNC",
+        "value": 1019476
+      },
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xde860",
+          "caller_name": "._ZN10CanTfaz6bZ10lgBtMalYvoES_",
+          "from": "0xde86c",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x2faf0",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xde860",
+          "caller_name": "._ZN10CanTfaz6bZ10lgBtMalYvoES_",
+          "from": "0xde864",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x386eb0",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_name": "_ZNK10CanTfaz6bZ6EqualsERKS_",
+      "evidence": [
+        "The target dynamic symbol table defines this address as one global FUNC symbol with the recorded raw name and size.",
+        "Target pseudocode shows the copy-on-write encoded-buffer operation recorded in the operation field.",
+        "The CanTfaz6bZ cluster shares a process-generated three-byte XOR key and decoded access paths; the C8THgaTQxF bridge methods convert between the encoded and ordinary string representations.",
+        "The target function is outside the 1.8 semantic map. Any ordinary source feature collisions are recorded as metric collisions rather than source correspondences.",
+        "The spectron_ prefix marks a reviewed target-specific description and does not claim recovery of a 1.8 debug symbol."
+      ],
+      "function_end": "0xf8f54",
+      "match_kind": "reviewed-target-only-encoded-string-helper",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "compares encoded lengths and bytes, using the shared buffer representation",
+      "proposed_name": "spectron_CanTfaz6bZ_equals_CanTfaz6bZ_const",
+      "script_name": "encoded-buffer equality",
+      "semantic_target_claimed_before_label": false,
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated; target encoded-string subsystem has no one-to-one 1.8 function",
+      "source_feature_collisions": {
+        "exact_metric_match_eas": [],
+        "normalized_10_match_eas": [],
+        "normalized_11_match_eas": []
+      },
+      "target_default_name": false,
+      "target_direct_call_names": [
+        ".memcmp"
+      ],
+      "target_dynamic_symbol": {
+        "binding": "GLOBAL",
+        "dynamic_index": 1193,
+        "dynamic_name": "_ZNK10CanTfaz6bZ6EqualsERKS_",
+        "prelabel_status": "exact_retained_dynamic_name",
+        "section_index": 9,
+        "size": 140,
+        "type": "FUNC",
+        "value": "0xf8ec8"
+      },
+      "target_ea": "0xf8ec8",
+      "target_metrics": {
+        "basic_block_count": 11,
+        "branch_count": 9,
+        "call_count": 1,
+        "instruction_count": 35,
+        "mnemonic_hash": "cd54002cba4b1fcb428bc6925eae9718e3d2c38b7786831ab7cb340ad3db9474",
+        "opcode_shape_hash": "b4096ac4bbf96094351cd4628b7beefd868a881e083fe1ed4e0d6ff5ff2d028a",
+        "register_detail_hash": "a06cb6f00ea80c61ae9a99155d5103bdf4a9754af5e6bcd61910b79465a81989",
+        "register_shape_hash": "e2c552e307000362b14d1f04fb6d5fe053df50d31ec693636e372933f52d5545",
+        "return_count": 3,
+        "shape_hash": "dd1d746584314fec4b62e2f880e6548594f7fb5db096b51f45316b4b834d1c45",
+        "size": 140,
+        "string_refs_hash": null
+      },
+      "target_pseudocode": "bool __fastcall CanTfaz6bZ::Equals(int **this, int **a2)\n{\n  int *v2; // x3\n  int *v3; // x1\n  int v4; // w2\n  int v5; // w0\n  bool v6; // zf\n  _BOOL8 result; // x0\n\n  v2 = *this;\n  v3 = *a2;\n  if ( *this == v3 )\n    return 1;\n  if ( !v3 )\n  {\n    v4 = 0;\n    if ( v2 )\n      goto LABEL_4;\n    return 1;\n  }\n  v4 = *v3;\n  if ( v2 )\n  {\nLABEL_4:\n    v5 = *v2;\n    goto LABEL_5;\n  }\n  v5 = 0;\nLABEL_5:\n  v6 = v4 == v5;\n  result = 0;\n  if ( v6 )\n  {\n    result = 1;\n    if ( v4 )\n      return memcmp(v2 + 2, v3 + 2, v4) == 0;\n  }\n  return result;\n}\n",
+      "target_pseudocode_sha256": "554a141a222beeb0880298dbd4be1373d2960b5f4fee32a15a9b85c512354d5d",
+      "target_role": "copy-on-write three-byte XOR encoded string buffer or bridge",
+      "target_string_refs": [],
+      "target_symbol_table_row": {
+        "binding": 1,
+        "binding_name": "GLOBAL",
+        "index": 1193,
+        "name": "_ZNK10CanTfaz6bZ6EqualsERKS_",
+        "section_index": 9,
+        "size": 140,
+        "type": 2,
+        "type_name": "FUNC",
+        "value": 1019592
+      },
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xd3af0",
+          "caller_name": "._ZNK10CanTfaz6bZ6EqualsERKS_",
+          "from": "0xd3afc",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x11b50",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xd3af0",
+          "caller_name": "._ZNK10CanTfaz6bZ6EqualsERKS_",
+          "from": "0xd3af4",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x3817f8",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_name": "_ZNK10CanTfaz6bZ10fEtHgarybFERKS_",
+      "evidence": [
+        "The target dynamic symbol table defines this address as one global FUNC symbol with the recorded raw name and size.",
+        "Target pseudocode shows the copy-on-write encoded-buffer operation recorded in the operation field.",
+        "The CanTfaz6bZ cluster shares a process-generated three-byte XOR key and decoded access paths; the C8THgaTQxF bridge methods convert between the encoded and ordinary string representations.",
+        "The target function is outside the 1.8 semantic map. Any ordinary source feature collisions are recorded as metric collisions rather than source correspondences.",
+        "The spectron_ prefix marks a reviewed target-specific description and does not claim recovery of a 1.8 debug symbol."
+      ],
+      "function_end": "0xf8fc8",
+      "match_kind": "reviewed-target-only-encoded-string-helper",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "tests whether the argument bytes form a prefix of the current encoded buffer",
+      "proposed_name": "spectron_CanTfaz6bZ_startsWithEncoded_CanTfaz6bZ_const",
+      "script_name": "encoded-buffer prefix comparison",
+      "semantic_target_claimed_before_label": false,
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated; target encoded-string subsystem has no one-to-one 1.8 function",
+      "source_feature_collisions": {
+        "exact_metric_match_eas": [
+          "0xf2fa0"
+        ],
+        "normalized_10_match_eas": [
+          "0xf2fa0"
+        ],
+        "normalized_11_match_eas": [
+          "0xf2fa0"
+        ]
+      },
+      "target_default_name": false,
+      "target_direct_call_names": [
+        ".memcmp"
+      ],
+      "target_dynamic_symbol": {
+        "binding": "GLOBAL",
+        "dynamic_index": 4237,
+        "dynamic_name": "_ZNK10CanTfaz6bZ10fEtHgarybFERKS_",
+        "prelabel_status": "exact_retained_dynamic_name",
+        "section_index": 9,
+        "size": 116,
+        "type": "FUNC",
+        "value": "0xf8f54"
+      },
+      "target_ea": "0xf8f54",
+      "target_metrics": {
+        "basic_block_count": 7,
+        "branch_count": 6,
+        "call_count": 1,
+        "instruction_count": 29,
+        "mnemonic_hash": "514a93f0f0b75167866152739da6782f02da978f4316f8b3e12c4240bc27e8a8",
+        "opcode_shape_hash": "465a25577ada579900d01a93f0621ef0297da34bce66f189b894be99e350ffff",
+        "register_detail_hash": "c6296e12300c47c4813a393697b7b52ca64d4f36dfb103e61522af43115aac33",
+        "register_shape_hash": "3a13db6005a86d3ff20422c3c377a7f439bf1e78015d08d9b2468ef033aa72af",
+        "return_count": 3,
+        "shape_hash": "31867afaea35cd1473aef7986c0f855693d3d5870739df7832bd7d463f1d8acf",
+        "size": 116,
+        "string_refs_hash": null
+      },
+      "target_pseudocode": "bool __fastcall CanTfaz6bZ::fEtHgarybF(int **this, int **a2)\n{\n  int *v2; // x3\n  int v3; // w2\n  int *v4; // x1\n\n  v2 = *a2;\n  if ( !*a2 )\n    return 1;\n  v3 = *v2;\n  if ( *v2 <= 0 )\n    return 1;\n  v4 = *this;\n  return *this && v3 <= *v4 && memcmp(v2 + 2, v4 + 2, v3) == 0;\n}\n",
+      "target_pseudocode_sha256": "d7f7f9fdbfc971a5cbca3b9f066fbd4c4ac61952487894a4d22c05d5db69bb64",
+      "target_role": "copy-on-write three-byte XOR encoded string buffer or bridge",
+      "target_string_refs": [],
+      "target_symbol_table_row": {
+        "binding": 1,
+        "binding_name": "GLOBAL",
+        "index": 4237,
+        "name": "_ZNK10CanTfaz6bZ10fEtHgarybFERKS_",
+        "section_index": 9,
+        "size": 116,
+        "type": 2,
+        "type_name": "FUNC",
+        "value": 1019732
+      },
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xda0c0",
+          "caller_name": "._ZNK10CanTfaz6bZ10fEtHgarybFERKS_",
+          "from": "0xda0cc",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x238b0",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xda0c0",
+          "caller_name": "._ZNK10CanTfaz6bZ10fEtHgarybFERKS_",
+          "from": "0xda0c4",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x384ae0",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_name": "_ZNK10CanTfaz6bZ10lHgfJa9EsGERKS_",
+      "evidence": [
+        "The target dynamic symbol table defines this address as one global FUNC symbol with the recorded raw name and size.",
+        "Target pseudocode shows the copy-on-write encoded-buffer operation recorded in the operation field.",
+        "The CanTfaz6bZ cluster shares a process-generated three-byte XOR key and decoded access paths; the C8THgaTQxF bridge methods convert between the encoded and ordinary string representations.",
+        "The target function is outside the 1.8 semantic map. Any ordinary source feature collisions are recorded as metric collisions rather than source correspondences.",
+        "The spectron_ prefix marks a reviewed target-specific description and does not claim recovery of a 1.8 debug symbol."
+      ],
+      "function_end": "0xf9090",
+      "match_kind": "reviewed-target-only-encoded-string-helper",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "XOR-decodes both buffers while comparing the argument as a case-insensitive prefix",
+      "proposed_name": "spectron_CanTfaz6bZ_startsWithIgnoreCase_CanTfaz6bZ_const",
+      "script_name": "decoded case-insensitive prefix comparison",
+      "semantic_target_claimed_before_label": false,
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated; target encoded-string subsystem has no one-to-one 1.8 function",
+      "source_feature_collisions": {
+        "exact_metric_match_eas": [],
+        "normalized_10_match_eas": [],
+        "normalized_11_match_eas": []
+      },
+      "target_default_name": false,
+      "target_direct_call_names": [],
+      "target_dynamic_symbol": {
+        "binding": "GLOBAL",
+        "dynamic_index": 5969,
+        "dynamic_name": "_ZNK10CanTfaz6bZ10lHgfJa9EsGERKS_",
+        "prelabel_status": "exact_retained_dynamic_name",
+        "section_index": 9,
+        "size": 200,
+        "type": "FUNC",
+        "value": "0xf8fc8"
+      },
+      "target_ea": "0xf8fc8",
+      "target_metrics": {
+        "basic_block_count": 13,
+        "branch_count": 4,
+        "call_count": 0,
+        "instruction_count": 50,
+        "mnemonic_hash": "a002837c4e42231d372f352482f314dd2695160267b3dd7f03144804f26494bd",
+        "opcode_shape_hash": "0f889a3efb9ac42d95961ef5c7256d409f397285800c6255e5710fa5a2f24f74",
+        "register_detail_hash": "494efad1716d35610912984d1ffb28aa9c2eef78e418e311c631aa854ebc4872",
+        "register_shape_hash": "2f566212ae08d29d894b354e7ca5754352b83ae1401658d1ba42cb7437b390dc",
+        "return_count": 2,
+        "shape_hash": "fa4056f37d84901d2fdbeaa086c2497cdb9dc4144f01490050c96a54a9bd0bb4",
+        "size": 200,
+        "string_refs_hash": null
+      },
+      "target_pseudocode": "__int64 __fastcall CanTfaz6bZ::lHgfJa9EsG(int **this, int **a2)\n{\n  int *v2; // x5\n  int v3; // w9\n  int *v4; // x8\n  __int64 v5; // x3\n  char v6; // w2\n  char v7; // w1\n  int v8; // w0\n  int v9; // w2\n  int v10; // w0\n\n  v2 = *a2;\n  if ( !*a2 )\n    return 1;\n  v3 = *v2;\n  if ( *v2 <= 0 )\n    return 1;\n  v4 = *this;\n  if ( *this && v3 <= *v4 )\n  {\n    v5 = 0;\n    while ( 1 )\n    {\n      v6 = *((_BYTE *)v4 + v5 + 8);\n      v7 = *((_BYTE *)v2 + v5 + 8);\n      v8 = (int)v5++ % 3;\n      LOBYTE(v8) = CanTfaz6bZ::mO5aJaYuXC[v8];\n      v9 = (unsigned __int8)(v8 ^ v6);\n      v10 = (unsigned __int8)(v8 ^ v7);\n      if ( (unsigned __int8)(v9 - 65) <= 0x19u )\n        v9 = (unsigned __int8)(v9 + 32);\n      if ( (unsigned __int8)(v10 - 65) <= 0x19u )\n        v10 = (unsigned __int8)(v10 + 32);\n      if ( v9 != v10 )\n        break;\n      if ( v3 <= (int)v5 )\n        return 1;\n    }\n  }\n  return 0;\n}\n",
+      "target_pseudocode_sha256": "407b1c19ce08a8fe5245cdb6ac9b08fdb57fdc20eb5a722ca50b491690ffdd8e",
+      "target_role": "copy-on-write three-byte XOR encoded string buffer or bridge",
+      "target_string_refs": [],
+      "target_symbol_table_row": {
+        "binding": 1,
+        "binding_name": "GLOBAL",
+        "index": 5969,
+        "name": "_ZNK10CanTfaz6bZ10lHgfJa9EsGERKS_",
+        "section_index": 9,
+        "size": 200,
+        "type": 2,
+        "type_name": "FUNC",
+        "value": 1019848
+      },
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xddbc0",
+          "caller_name": "._ZNK10CanTfaz6bZ10lHgfJa9EsGERKS_",
+          "from": "0xddbcc",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x2db10",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xddbc0",
+          "caller_name": "._ZNK10CanTfaz6bZ10lHgfJa9EsGERKS_",
+          "from": "0xddbc4",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x386860",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_name": "_ZNK10CanTfaz6bZ10Ven3gakasYERKS_",
+      "evidence": [
+        "The target dynamic symbol table defines this address as one global FUNC symbol with the recorded raw name and size.",
+        "Target pseudocode shows the copy-on-write encoded-buffer operation recorded in the operation field.",
+        "The CanTfaz6bZ cluster shares a process-generated three-byte XOR key and decoded access paths; the C8THgaTQxF bridge methods convert between the encoded and ordinary string representations.",
+        "The target function is outside the 1.8 semantic map. Any ordinary source feature collisions are recorded as metric collisions rather than source correspondences.",
+        "The spectron_ prefix marks a reviewed target-specific description and does not claim recovery of a 1.8 debug symbol."
+      ],
+      "function_end": "0xf9178",
+      "match_kind": "reviewed-target-only-encoded-string-helper",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "requires equal lengths and compares both decoded buffers without case sensitivity",
+      "proposed_name": "spectron_CanTfaz6bZ_equalsIgnoreCase_CanTfaz6bZ_const",
+      "script_name": "decoded case-insensitive equality",
+      "semantic_target_claimed_before_label": false,
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated; target encoded-string subsystem has no one-to-one 1.8 function",
+      "source_feature_collisions": {
+        "exact_metric_match_eas": [],
+        "normalized_10_match_eas": [],
+        "normalized_11_match_eas": []
+      },
+      "target_default_name": false,
+      "target_direct_call_names": [],
+      "target_dynamic_symbol": {
+        "binding": "GLOBAL",
+        "dynamic_index": 2962,
+        "dynamic_name": "_ZNK10CanTfaz6bZ10Ven3gakasYERKS_",
+        "prelabel_status": "exact_retained_dynamic_name",
+        "section_index": 9,
+        "size": 232,
+        "type": "FUNC",
+        "value": "0xf9090"
+      },
+      "target_ea": "0xf9090",
+      "target_metrics": {
+        "basic_block_count": 19,
+        "branch_count": 8,
+        "call_count": 0,
+        "instruction_count": 58,
+        "mnemonic_hash": "c5dc943d7b0c8003e4c189cd874ab116b9755a4c1c467d0624df765c69fb1298",
+        "opcode_shape_hash": "045fa86431cece34b05d5b89d99c247e4348cd84740b040bd4bac6ba38e60ab0",
+        "register_detail_hash": "39ddacc916f4cefd112b5f0c220c38e699b9e7d43a975c1a545eb47731777443",
+        "register_shape_hash": "535d2d858b74738a0fa7b5f63ef04e56e3c237d1740f2d5e8f8070ac97258df1",
+        "return_count": 3,
+        "shape_hash": "8f32fcd544392066eac3c59df47524afa399bbb12848a25a6b4833a6ebd35766",
+        "size": 232,
+        "string_refs_hash": null
+      },
+      "target_pseudocode": "__int64 __fastcall CanTfaz6bZ::Ven3gakasY(CanTfaz6bZ *this, int **a2)\n{\n  int *v2; // x6\n  _DWORD *v3; // x5\n  int v4; // w7\n  int v5; // w0\n  bool v6; // zf\n  __int64 result; // x0\n  __int64 v8; // x3\n  char v9; // w2\n  char v10; // w1\n  int v11; // w0\n  int v12; // w2\n  int v13; // w0\n\n  v2 = *a2;\n  v3 = *(_DWORD **)this;\n  if ( !*a2 )\n  {\n    v4 = 0;\n    if ( !v3 )\n      return 1;\n    goto LABEL_3;\n  }\n  v4 = *v2;\n  if ( v3 )\n  {\nLABEL_3:\n    v5 = *v3;\n    goto LABEL_4;\n  }\n  v5 = 0;\nLABEL_4:\n  v6 = v4 == v5;\n  result = 0;\n  if ( v6 )\n  {\n    if ( v4 <= 0 )\n    {\n      return 1;\n    }\n    else\n    {\n      v8 = 0;\n      while ( 1 )\n      {\n        v9 = *((_BYTE *)v3 + v8 + 8);\n        v10 = *((_BYTE *)v2 + v8 + 8);\n        v11 = (int)v8++ % 3;\n        LOBYTE(v11) = CanTfaz6bZ::mO5aJaYuXC[v11];\n        v12 = (unsigned __int8)(v11 ^ v9);\n        v13 = (unsigned __int8)(v11 ^ v10);\n        if ( (unsigned __int8)(v12 - 65) <= 0x19u )\n          v12 = (unsigned __int8)(v12 + 32);\n        if ( (unsigned __int8)(v13 - 65) <= 0x19u )\n          v13 = (unsigned __int8)(v13 + 32);\n        if ( v12 != v13 )\n          break;\n        if ( v4 <= (int)v8 )\n          return 1;\n      }\n      return 0;\n    }\n  }\n  return result;\n}\n",
+      "target_pseudocode_sha256": "a1bbf108592bed9f869746b5aa07e8fac5e51921c10606df800f962c3c2fee9a",
+      "target_role": "copy-on-write three-byte XOR encoded string buffer or bridge",
+      "target_string_refs": [],
+      "target_symbol_table_row": {
+        "binding": 1,
+        "binding_name": "GLOBAL",
+        "index": 2962,
+        "name": "_ZNK10CanTfaz6bZ10Ven3gakasYERKS_",
+        "section_index": 9,
+        "size": 232,
+        "type": 2,
+        "type_name": "FUNC",
+        "value": 1020048
+      },
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xd76d0",
+          "caller_name": "._ZNK10CanTfaz6bZ10Ven3gakasYERKS_",
+          "from": "0xd76dc",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x1c128",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xd76d0",
+          "caller_name": "._ZNK10CanTfaz6bZ10Ven3gakasYERKS_",
+          "from": "0xd76d4",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x3835e8",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_name": "_ZN10CanTfaz6bZ10gwFWfaPxY0Ev",
+      "evidence": [
+        "The target dynamic symbol table defines this address as one global FUNC symbol with the recorded raw name and size.",
+        "Target pseudocode shows the copy-on-write encoded-buffer operation recorded in the operation field.",
+        "The CanTfaz6bZ cluster shares a process-generated three-byte XOR key and decoded access paths; the C8THgaTQxF bridge methods convert between the encoded and ordinary string representations.",
+        "The target function is outside the 1.8 semantic map. Any ordinary source feature collisions are recorded as metric collisions rather than source correspondences.",
+        "The spectron_ prefix marks a reviewed target-specific description and does not claim recovery of a 1.8 debug symbol."
+      ],
+      "function_end": "0xf9198",
+      "match_kind": "reviewed-target-only-encoded-string-helper",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "wraps the encoded-buffer decode conversion and returns its hidden C8THgaTQxF result",
+      "proposed_name": "spectron_CanTfaz6bZ_decodeCopyToC8THgaTQxF",
+      "script_name": "encoded-buffer decode wrapper",
+      "semantic_target_claimed_before_label": false,
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated; target encoded-string subsystem has no one-to-one 1.8 function",
+      "source_feature_collisions": {
+        "exact_metric_match_eas": [
+          "0xe5d6c",
+          "0xec7ac",
+          "0xfbb24",
+          "0xfbb44",
+          "0xfbb64",
+          "0xfbb84",
+          "0xfbba4",
+          "0xfbc5c",
+          "0xfbeec",
+          "0xfc880",
+          "0x158e84",
+          "0x158ea4",
+          "0x1ad53c",
+          "0x1ba398",
+          "0x1bd6e8",
+          "0x1c6e50",
+          "0x1c9668",
+          "0x1c9b1c",
+          "0x1c9bc4",
+          "0x204e4c",
+          "0x204ea8",
+          "0x20add0",
+          "0x20adf0",
+          "0x20d4dc",
+          "0x20dd34",
+          "0x2379a8",
+          "0x237b14"
+        ],
+        "normalized_10_match_eas": [
+          "0xe5d6c",
+          "0xec7ac",
+          "0xfbb24",
+          "0xfbb44",
+          "0xfbb64",
+          "0xfbb84",
+          "0xfbba4",
+          "0xfbc5c",
+          "0xfbeec",
+          "0xfc880",
+          "0x158e84",
+          "0x158ea4",
+          "0x1ad53c",
+          "0x1ba398",
+          "0x1bd6e8",
+          "0x1c6e50",
+          "0x1c9668",
+          "0x1c9b1c",
+          "0x1c9bc4",
+          "0x204e4c",
+          "0x204ea8",
+          "0x20add0",
+          "0x20adf0",
+          "0x20d4dc",
+          "0x20dd34",
+          "0x2379a8",
+          "0x237b14"
+        ],
+        "normalized_11_match_eas": [
+          "0xe5d6c",
+          "0xec7ac",
+          "0xfbb24",
+          "0xfbb44",
+          "0xfbb64",
+          "0xfbb84",
+          "0xfbba4",
+          "0xfbc5c",
+          "0xfbeec",
+          "0xfc880",
+          "0x158e84",
+          "0x158ea4",
+          "0x1ad53c",
+          "0x1ba398",
+          "0x1bd6e8",
+          "0x1c6e50",
+          "0x1c9668",
+          "0x1c9b1c",
+          "0x1c9bc4",
+          "0x204e4c",
+          "0x204ea8",
+          "0x20add0",
+          "0x20adf0",
+          "0x20d4dc",
+          "0x20dd34",
+          "0x2379a8",
+          "0x237b14"
+        ]
+      },
+      "target_default_name": false,
+      "target_direct_call_names": [
+        "._ZN10CanTfaz6bZ10wsWEEaIN2OERKS_"
+      ],
+      "target_dynamic_symbol": {
+        "binding": "GLOBAL",
+        "dynamic_index": 4073,
+        "dynamic_name": "_ZN10CanTfaz6bZ10gwFWfaPxY0Ev",
+        "prelabel_status": "exact_retained_dynamic_name",
+        "section_index": 9,
+        "size": 32,
+        "type": "FUNC",
+        "value": "0xf9178"
+      },
+      "target_ea": "0xf9178",
+      "target_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "f8674fd115db69e342b0522c5ab191a85d3d5983728451a92136d84b2a6afbb6",
+        "opcode_shape_hash": "921a053341345bfba5092f6bf6b3ecb4d61601ce83af7dc0bae76e2d3de4bdf1",
+        "register_detail_hash": "7d0c6f8807cb3b19ceba9b281866bc27b88f85afaca96a95363343281586ae9b",
+        "register_shape_hash": "54ba2bd202a2a9458e96cf1e2ae73767aa882cc53f6250da2ca952b3ebe8b1ca",
+        "return_count": 1,
+        "shape_hash": "ca788e0a2eccdc06385b17ea365d3c6a5381b8680d389a5a99af7f4b0393cc8d",
+        "size": 32,
+        "string_refs_hash": null
+      },
+      "target_pseudocode": "__int64 __usercall CanTfaz6bZ::gwFWfaPxY0@<X0>(CanTfaz6bZ *this@<X0>, const CanTfaz6bZ *a2@<X1>, __int64 a3@<X8>)\n{\n  CanTfaz6bZ::wsWEEaIN2O(this, a2);\n  return a3;\n}\n",
+      "target_pseudocode_sha256": "d6b101e181883486144df8bf500f1e99a5636501e592fecdd98385d0c4bcbdf3",
+      "target_role": "copy-on-write three-byte XOR encoded string buffer or bridge",
+      "target_string_refs": [],
+      "target_symbol_table_row": {
+        "binding": 1,
+        "binding_name": "GLOBAL",
+        "index": 4073,
+        "name": "_ZN10CanTfaz6bZ10gwFWfaPxY0Ev",
+        "section_index": 9,
+        "size": 32,
+        "type": 2,
+        "type_name": "FUNC",
+        "value": 1020280
+      },
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xd9b40",
+          "caller_name": "._ZN10CanTfaz6bZ10gwFWfaPxY0Ev",
+          "from": "0xd9b4c",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x22950",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xd9b40",
+          "caller_name": "._ZN10CanTfaz6bZ10gwFWfaPxY0Ev",
+          "from": "0xd9b44",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x384820",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_name": "_ZN10CanTfaz6bZaSERK10C8THgaTQxF",
+      "evidence": [
+        "The target dynamic symbol table defines this address as one global FUNC symbol with the recorded raw name and size.",
+        "Target pseudocode shows the copy-on-write encoded-buffer operation recorded in the operation field.",
+        "The CanTfaz6bZ cluster shares a process-generated three-byte XOR key and decoded access paths; the C8THgaTQxF bridge methods convert between the encoded and ordinary string representations.",
+        "The target function is outside the 1.8 semantic map. Any ordinary source feature collisions are recorded as metric collisions rather than source correspondences.",
+        "The spectron_ prefix marks a reviewed target-specific description and does not claim recovery of a 1.8 debug symbol."
+      ],
+      "function_end": "0xf91b8",
+      "match_kind": "reviewed-target-only-encoded-string-helper",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "encodes a C8THgaTQxF source through the target encoded-buffer conversion helper",
+      "proposed_name": "spectron_CanTfaz6bZ_assignFromC8THgaTQxF",
+      "script_name": "encoded-buffer assignment from string",
+      "semantic_target_claimed_before_label": false,
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated; target encoded-string subsystem has no one-to-one 1.8 function",
+      "source_feature_collisions": {
+        "exact_metric_match_eas": [],
+        "normalized_10_match_eas": [],
+        "normalized_11_match_eas": []
+      },
+      "target_default_name": false,
+      "target_direct_call_names": [
+        "._ZN10CanTfaz6bZ10OZpSjbLtokERK10C8THgaTQxF"
+      ],
+      "target_dynamic_symbol": {
+        "binding": "GLOBAL",
+        "dynamic_index": 2534,
+        "dynamic_name": "_ZN10CanTfaz6bZaSERK10C8THgaTQxF",
+        "prelabel_status": "exact_retained_dynamic_name",
+        "section_index": 9,
+        "size": 32,
+        "type": "FUNC",
+        "value": "0xf9198"
+      },
+      "target_ea": "0xf9198",
+      "target_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 8,
+        "mnemonic_hash": "f8674fd115db69e342b0522c5ab191a85d3d5983728451a92136d84b2a6afbb6",
+        "opcode_shape_hash": "921a053341345bfba5092f6bf6b3ecb4d61601ce83af7dc0bae76e2d3de4bdf1",
+        "register_detail_hash": "cf1954a91b7fd57bc44cd677102fe199236231e1169e9ebd4da52267ab847702",
+        "register_shape_hash": "5f96d6ae70db67296c16563788c899b097eb8daf27f765f29c1bbc162a451d6c",
+        "return_count": 1,
+        "shape_hash": "ca788e0a2eccdc06385b17ea365d3c6a5381b8680d389a5a99af7f4b0393cc8d",
+        "size": 32,
+        "string_refs_hash": null
+      },
+      "target_pseudocode": "CanTfaz6bZ *__fastcall CanTfaz6bZ::operator=(CanTfaz6bZ *a1, const C8THgaTQxF *a2)\n{\n  CanTfaz6bZ::OZpSjbLtok(a1, a2);\n  return a1;\n}\n",
+      "target_pseudocode_sha256": "eb7dccc9e2b5b3f1a3801c210dc900f8e8d7a642c252e8232a304aa8fba4865e",
+      "target_role": "copy-on-write three-byte XOR encoded string buffer or bridge",
+      "target_string_refs": [],
+      "target_symbol_table_row": {
+        "binding": 1,
+        "binding_name": "GLOBAL",
+        "index": 2534,
+        "name": "_ZN10CanTfaz6bZaSERK10C8THgaTQxF",
+        "section_index": 9,
+        "size": 32,
+        "type": 2,
+        "type_name": "FUNC",
+        "value": 1020312
+      },
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xd67e0",
+          "caller_name": "._ZN10CanTfaz6bZaSERK10C8THgaTQxF",
+          "from": "0xd67ec",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x19908",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xd67e0",
+          "caller_name": "._ZN10CanTfaz6bZaSERK10C8THgaTQxF",
+          "from": "0xd67e4",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x382e70",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_name": "_ZN10CanTfaz6bZ9setbufferEPKci",
+      "evidence": [
+        "The target dynamic symbol table defines this address as one global FUNC symbol with the recorded raw name and size.",
+        "Target pseudocode shows the copy-on-write encoded-buffer operation recorded in the operation field.",
+        "The CanTfaz6bZ cluster shares a process-generated three-byte XOR key and decoded access paths; the C8THgaTQxF bridge methods convert between the encoded and ordinary string representations.",
+        "The target function is outside the 1.8 semantic map. Any ordinary source feature collisions are recorded as metric collisions rather than source correspondences.",
+        "The spectron_ prefix marks a reviewed target-specific description and does not claim recovery of a 1.8 debug symbol."
+      ],
+      "function_end": "0xf9264",
+      "match_kind": "reviewed-target-only-encoded-string-helper",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "allocates an encoded buffer and XOR-encodes the supplied byte span",
+      "proposed_name": "spectron_CanTfaz6bZ_setXorEncodedBuffer_char_const_int",
+      "script_name": "encoded-buffer byte setter",
+      "semantic_target_claimed_before_label": false,
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated; target encoded-string subsystem has no one-to-one 1.8 function",
+      "source_feature_collisions": {
+        "exact_metric_match_eas": [],
+        "normalized_10_match_eas": [],
+        "normalized_11_match_eas": []
+      },
+      "target_default_name": false,
+      "target_direct_call_names": [
+        "._ZN10CanTfaz6bZ5clearEv",
+        ".malloc"
+      ],
+      "target_dynamic_symbol": {
+        "binding": "GLOBAL",
+        "dynamic_index": 5275,
+        "dynamic_name": "_ZN10CanTfaz6bZ9setbufferEPKci",
+        "prelabel_status": "exact_retained_dynamic_name",
+        "section_index": 9,
+        "size": 172,
+        "type": "FUNC",
+        "value": "0xf91b8"
+      },
+      "target_ea": "0xf91b8",
+      "target_metrics": {
+        "basic_block_count": 5,
+        "branch_count": 5,
+        "call_count": 2,
+        "instruction_count": 43,
+        "mnemonic_hash": "9d8652c89eb105d08ffbd278f2cad07efde850fcd03f9ff1a02038287069539a",
+        "opcode_shape_hash": "8fd41e3d306dc66f1a2b6cc3c9aaef1b948bf8d6ddffe4ff4b16212960dc8f6b",
+        "register_detail_hash": "72c4991f44f72da7b92fe2bd749b9ce2984ef58cb4150469530846d391135b79",
+        "register_shape_hash": "18dd2fecb1c06c819f77dc3bb9c031f35a7f808feb5c2c960f25ab9f2cb79e5b",
+        "return_count": 2,
+        "shape_hash": "dbf0c79cfe56aabc2a2414b65f30d9e4aa3f7fef6a0a4b318eb889bd16605aa9",
+        "size": 172,
+        "string_refs_hash": null
+      },
+      "target_pseudocode": "_DWORD *__fastcall CanTfaz6bZ::setbuffer(CanTfaz6bZ *this, const char *a2, int a3)\n{\n  _DWORD *result; // x0\n  __int64 i; // x4\n  char *v8; // x6\n  char v9; // w5\n  int v10; // w3\n\n  result = (_DWORD *)CanTfaz6bZ::clear(this);\n  if ( a3 )\n  {\n    result = malloc(a3 + 8);\n    *(_QWORD *)this = result;\n    for ( i = 0; a3 > (int)i; v8[8] = CanTfaz6bZ::mO5aJaYuXC[v10] ^ v9 )\n    {\n      v8 = (char *)result + i;\n      v9 = a2[i];\n      v10 = (int)i++ % 3;\n    }\n    *result = a3;\n    result[1] = 1;\n  }\n  return result;\n}\n",
+      "target_pseudocode_sha256": "de0b8bc6c7e342f1c68f7feb9170bd069ff880c2191633dcfde2246b1ccf2995",
+      "target_role": "copy-on-write three-byte XOR encoded string buffer or bridge",
+      "target_string_refs": [],
+      "target_symbol_table_row": {
+        "binding": 1,
+        "binding_name": "GLOBAL",
+        "index": 5275,
+        "name": "_ZN10CanTfaz6bZ9setbufferEPKci",
+        "section_index": 9,
+        "size": 172,
+        "type": 2,
+        "type_name": "FUNC",
+        "value": 1020344
+      },
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xdc470",
+          "caller_name": "._ZN10CanTfaz6bZ9setbufferEPKci",
+          "from": "0xdc47c",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x29a00",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xdc470",
+          "caller_name": "._ZN10CanTfaz6bZ9setbufferEPKci",
+          "from": "0xdc474",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x385cb8",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_name": "_ZN10CanTfaz6bZ10y_WHgaffAFEv",
+      "evidence": [
+        "The target dynamic symbol table defines this address as one global FUNC symbol with the recorded raw name and size.",
+        "Target pseudocode shows the copy-on-write encoded-buffer operation recorded in the operation field.",
+        "The CanTfaz6bZ cluster shares a process-generated three-byte XOR key and decoded access paths; the C8THgaTQxF bridge methods convert between the encoded and ordinary string representations.",
+        "The target function is outside the 1.8 semantic map. Any ordinary source feature collisions are recorded as metric collisions rather than source correspondences.",
+        "The spectron_ prefix marks a reviewed target-specific description and does not claim recovery of a 1.8 debug symbol."
+      ],
+      "function_end": "0xf92d8",
+      "match_kind": "reviewed-target-only-encoded-string-helper",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "clones a shared encoded buffer before mutation and decrements the old reference",
+      "proposed_name": "spectron_CanTfaz6bZ_makeUnique_void",
+      "script_name": "encoded-buffer copy-on-write",
+      "semantic_target_claimed_before_label": false,
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated; target encoded-string subsystem has no one-to-one 1.8 function",
+      "source_feature_collisions": {
+        "exact_metric_match_eas": [],
+        "normalized_10_match_eas": [],
+        "normalized_11_match_eas": []
+      },
+      "target_default_name": false,
+      "target_direct_call_names": [
+        ".malloc",
+        ".memcpy"
+      ],
+      "target_dynamic_symbol": {
+        "binding": "GLOBAL",
+        "dynamic_index": 73,
+        "dynamic_name": "_ZN10CanTfaz6bZ10y_WHgaffAFEv",
+        "prelabel_status": "exact_retained_dynamic_name",
+        "section_index": 9,
+        "size": 116,
+        "type": "FUNC",
+        "value": "0xf9264"
+      },
+      "target_ea": "0xf9264",
+      "target_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 4,
+        "call_count": 2,
+        "instruction_count": 29,
+        "mnemonic_hash": "036ff9971e687f3edc60d619b08700ac1de0cdec7934ebdc314c29b0227f41ce",
+        "opcode_shape_hash": "4bd6ea0a0e5f63881eaf7cbceed54b039c23b88a2f9a5aad92766bee9c41f304",
+        "register_detail_hash": "c631cb676ebb03526686895ace148508a0662cd56f11c08b33bd894407ac1e98",
+        "register_shape_hash": "f4949e4763d532b366a9b3ec24a298b34b3e2bd5a88bf6109edf6a7091c2295e",
+        "return_count": 1,
+        "shape_hash": "21272b0b7df231141e063f3a9286852aa699cfee380859e8e3e61de9e6dc344e",
+        "size": 116,
+        "string_refs_hash": null
+      },
+      "target_pseudocode": "_DWORD **__fastcall CanTfaz6bZ::y_WHgaffAF(_DWORD **this)\n{\n  _DWORD *v1; // x19\n  _QWORD *v2; // x20\n  void *v3; // x0\n  _DWORD *v4; // x3\n  size_t n; // [xsp+28h] [xbp-8h]\n\n  v1 = *this;\n  if ( *this )\n  {\n    if ( (int)v1[1] > 1 )\n    {\n      v2 = this;\n      n = *v1 + 8;\n      v3 = malloc(n);\n      v4 = memcpy(v3, v1, n);\n      --v1[1];\n      *v2 = v4;\n      v4[1] = 1;\n      return (_DWORD **)(&dword_0 + 1);\n    }\n  }\n  return this;\n}\n",
+      "target_pseudocode_sha256": "5b778102089efeb4234015110bcecf56815664990fc3f6cf1691dc89d0a78b05",
+      "target_role": "copy-on-write three-byte XOR encoded string buffer or bridge",
+      "target_string_refs": [],
+      "target_symbol_table_row": {
+        "binding": 1,
+        "binding_name": "GLOBAL",
+        "index": 73,
+        "name": "_ZN10CanTfaz6bZ10y_WHgaffAFEv",
+        "section_index": 9,
+        "size": 116,
+        "type": 2,
+        "type_name": "FUNC",
+        "value": 1020516
+      },
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xd16f0",
+          "caller_name": "._ZN10CanTfaz6bZ10y_WHgaffAFEv",
+          "from": "0xd16fc",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0xb250",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xd16f0",
+          "caller_name": "._ZN10CanTfaz6bZ10y_WHgaffAFEv",
+          "from": "0xd16f4",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x3805f8",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_name": "_ZN10CanTfaz6bZaSEPKc",
+      "evidence": [
+        "The target dynamic symbol table defines this address as one global FUNC symbol with the recorded raw name and size.",
+        "Target pseudocode shows the copy-on-write encoded-buffer operation recorded in the operation field.",
+        "The CanTfaz6bZ cluster shares a process-generated three-byte XOR key and decoded access paths; the C8THgaTQxF bridge methods convert between the encoded and ordinary string representations.",
+        "The target function is outside the 1.8 semantic map. Any ordinary source feature collisions are recorded as metric collisions rather than source correspondences.",
+        "The spectron_ prefix marks a reviewed target-specific description and does not claim recovery of a 1.8 debug symbol."
+      ],
+      "function_end": "0xf9310",
+      "match_kind": "reviewed-target-only-encoded-string-helper",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "measures a C string and stores its XOR-encoded contents",
+      "proposed_name": "spectron_CanTfaz6bZ_assignCStringXorEncoded_char_const",
+      "script_name": "encoded-buffer C-string assignment",
+      "semantic_target_claimed_before_label": false,
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated; target encoded-string subsystem has no one-to-one 1.8 function",
+      "source_feature_collisions": {
+        "exact_metric_match_eas": [],
+        "normalized_10_match_eas": [],
+        "normalized_11_match_eas": []
+      },
+      "target_default_name": false,
+      "target_direct_call_names": [
+        "._ZN10CanTfaz6bZ9setbufferEPKci",
+        ".strlen"
+      ],
+      "target_dynamic_symbol": {
+        "binding": "GLOBAL",
+        "dynamic_index": 4604,
+        "dynamic_name": "_ZN10CanTfaz6bZaSEPKc",
+        "prelabel_status": "exact_retained_dynamic_name",
+        "section_index": 9,
+        "size": 56,
+        "type": "FUNC",
+        "value": "0xf92d8"
+      },
+      "target_ea": "0xf92d8",
+      "target_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 3,
+        "call_count": 2,
+        "instruction_count": 14,
+        "mnemonic_hash": "cba651e05d9d245cf722cc0a7969294a8c1d227c8ec0989927fe0d9f0cf5da85",
+        "opcode_shape_hash": "268290cf80e8e3c0d72466b5ca3f1fd08c1f3f6a33aed2744205f122e06e164c",
+        "register_detail_hash": "f30a8ad7d0829d29090f2e372b760ec3a62fdf2c86be632655ef77662e57da87",
+        "register_shape_hash": "919f83c809898f68f854181584df3b732e024b4e82abe95ed1543d1f1ca36a0d",
+        "return_count": 1,
+        "shape_hash": "3978f916aaef5f21b96e08303854ecc2928cb16c040a4159439cda476822a062",
+        "size": 56,
+        "string_refs_hash": null
+      },
+      "target_pseudocode": "CanTfaz6bZ *__fastcall CanTfaz6bZ::operator=(CanTfaz6bZ *a1, char *a2)\n{\n  int v3; // w0\n\n  v3 = strlen(a2);\n  CanTfaz6bZ::setbuffer(a1, a2, v3);\n  return a1;\n}\n",
+      "target_pseudocode_sha256": "2b6732b83174531f6b4769843a2d9db985caf295b781ee2dadb9de6b5694013d",
+      "target_role": "copy-on-write three-byte XOR encoded string buffer or bridge",
+      "target_string_refs": [],
+      "target_symbol_table_row": {
+        "binding": 1,
+        "binding_name": "GLOBAL",
+        "index": 4604,
+        "name": "_ZN10CanTfaz6bZaSEPKc",
+        "section_index": 9,
+        "size": 56,
+        "type": 2,
+        "type_name": "FUNC",
+        "value": 1020632
+      },
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xdad40",
+          "caller_name": "._ZN10CanTfaz6bZaSEPKc",
+          "from": "0xdad4c",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x25b18",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xdad40",
+          "caller_name": "._ZN10CanTfaz6bZaSEPKc",
+          "from": "0xdad44",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x385120",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_name": "_ZNK10CanTfaz6bZixEi",
+      "evidence": [
+        "The target dynamic symbol table defines this address as one global FUNC symbol with the recorded raw name and size.",
+        "Target pseudocode shows the copy-on-write encoded-buffer operation recorded in the operation field.",
+        "The CanTfaz6bZ cluster shares a process-generated three-byte XOR key and decoded access paths; the C8THgaTQxF bridge methods convert between the encoded and ordinary string representations.",
+        "The target function is outside the 1.8 semantic map. Any ordinary source feature collisions are recorded as metric collisions rather than source correspondences.",
+        "The spectron_ prefix marks a reviewed target-specific description and does not claim recovery of a 1.8 debug symbol."
+      ],
+      "function_end": "0xf9374",
+      "match_kind": "reviewed-target-only-encoded-string-helper",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "returns one decoded byte at a one-based index or zero for an invalid index",
+      "proposed_name": "spectron_CanTfaz6bZ_indexDecoded_int",
+      "script_name": "encoded-buffer indexed access",
+      "semantic_target_claimed_before_label": false,
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated; target encoded-string subsystem has no one-to-one 1.8 function",
+      "source_feature_collisions": {
+        "exact_metric_match_eas": [],
+        "normalized_10_match_eas": [],
+        "normalized_11_match_eas": []
+      },
+      "target_default_name": false,
+      "target_direct_call_names": [],
+      "target_dynamic_symbol": {
+        "binding": "GLOBAL",
+        "dynamic_index": 3166,
+        "dynamic_name": "_ZNK10CanTfaz6bZixEi",
+        "prelabel_status": "exact_retained_dynamic_name",
+        "section_index": 9,
+        "size": 100,
+        "type": "FUNC",
+        "value": "0xf9310"
+      },
+      "target_ea": "0xf9310",
+      "target_metrics": {
+        "basic_block_count": 5,
+        "branch_count": 3,
+        "call_count": 0,
+        "instruction_count": 25,
+        "mnemonic_hash": "15c6fafba9c9bec22d5547c5331e94808e450a80b87dc22217da867623a6d916",
+        "opcode_shape_hash": "4ec9015f8d2718e917ce01b33ea0386552e410d3d11a1d277e1bc9e1b0654eba",
+        "register_detail_hash": "554e85c49dc0de7626f3b513bcafa1ec3ba1a763d694573efef696f117d056e8",
+        "register_shape_hash": "02043e6739b236f22cda9410d1c269ee8bb9c110515d9a45fb069cf4e1a2642e",
+        "return_count": 2,
+        "shape_hash": "476090a2c46106d48b16104400c49284d86f73e2ffb0996156417416434c7622",
+        "size": 100,
+        "string_refs_hash": null
+      },
+      "target_pseudocode": "__int64 __fastcall CanTfaz6bZ::operator[](int **a1, int a2)\n{\n  int *v2; // x0\n\n  if ( a2 > 0 && (v2 = *a1) != nullptr && a2 <= *v2 )\n    return (unsigned __int8)(*((_BYTE *)v2 + a2 + 7) ^ CanTfaz6bZ::mO5aJaYuXC[(a2 - 1) % 3]);\n  else\n    return 0;\n}\n",
+      "target_pseudocode_sha256": "3f3fa737819e0d75dcbe7d9248d6fd7d8696fadea66b48755a1873e126f5469b",
+      "target_role": "copy-on-write three-byte XOR encoded string buffer or bridge",
+      "target_string_refs": [],
+      "target_symbol_table_row": {
+        "binding": 1,
+        "binding_name": "GLOBAL",
+        "index": 3166,
+        "name": "_ZNK10CanTfaz6bZixEi",
+        "section_index": 9,
+        "size": 100,
+        "type": 2,
+        "type_name": "FUNC",
+        "value": 1020688
+      },
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xd7da0",
+          "caller_name": "._ZNK10CanTfaz6bZixEi",
+          "from": "0xd7dac",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x1d448",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xd7da0",
+          "caller_name": "._ZNK10CanTfaz6bZixEi",
+          "from": "0xd7da4",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x383950",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_name": "_ZN10CanTfaz6bZ3AddERKS_",
+      "evidence": [
+        "The target dynamic symbol table defines this address as one global FUNC symbol with the recorded raw name and size.",
+        "Target pseudocode shows the copy-on-write encoded-buffer operation recorded in the operation field.",
+        "The CanTfaz6bZ cluster shares a process-generated three-byte XOR key and decoded access paths; the C8THgaTQxF bridge methods convert between the encoded and ordinary string representations.",
+        "The target function is outside the 1.8 semantic map. Any ordinary source feature collisions are recorded as metric collisions rather than source correspondences.",
+        "The spectron_ prefix marks a reviewed target-specific description and does not claim recovery of a 1.8 debug symbol."
+      ],
+      "function_end": "0xf94ac",
+      "match_kind": "reviewed-target-only-encoded-string-helper",
+      "name_action": "rename-with-spectron-prefix",
+      "operation": "appends an encoded buffer while correcting both source and destination XOR positions",
+      "proposed_name": "spectron_CanTfaz6bZ_appendXorEncoded_CanTfaz6bZ_const",
+      "script_name": "encoded-buffer concatenation",
+      "semantic_target_claimed_before_label": false,
+      "source_counterpart": null,
+      "source_counterpart_status": "not-demonstrated; target encoded-string subsystem has no one-to-one 1.8 function",
+      "source_feature_collisions": {
+        "exact_metric_match_eas": [],
+        "normalized_10_match_eas": [],
+        "normalized_11_match_eas": []
+      },
+      "target_default_name": false,
+      "target_direct_call_names": [
+        "._ZN10CanTfaz6bZ10y_WHgaffAFEv",
+        ".malloc",
+        ".realloc"
+      ],
+      "target_dynamic_symbol": {
+        "binding": "GLOBAL",
+        "dynamic_index": 657,
+        "dynamic_name": "_ZN10CanTfaz6bZ3AddERKS_",
+        "prelabel_status": "exact_retained_dynamic_name",
+        "section_index": 9,
+        "size": 312,
+        "type": "FUNC",
+        "value": "0xf9374"
+      },
+      "target_ea": "0xf9374",
+      "target_metrics": {
+        "basic_block_count": 13,
+        "branch_count": 10,
+        "call_count": 3,
+        "instruction_count": 78,
+        "mnemonic_hash": "2db7ce9bf261db437b5cb5c4576426532ffeea75c95a90dd36c2ef19f28aca34",
+        "opcode_shape_hash": "b9280e96d9024e595c104722c08cc76f10528848c6790184fda2a1b4d4d580da",
+        "register_detail_hash": "331386484eafdbc8332604817bdd2d9083535c78021ce6d64a62a59f1d21f2dd",
+        "register_shape_hash": "0f6f593396695ac1d8c08bedc5b357ff6e9aba114c6ff18ee55a90951f1d9e38",
+        "return_count": 2,
+        "shape_hash": "e206c6471c77069fa4cefbb9dc154a52c057e9574e7c8325b4dadaf298ffe30d",
+        "size": 312,
+        "string_refs_hash": null
+      },
+      "target_pseudocode": "__int64 __fastcall CanTfaz6bZ::Add(__int64 this, int **a2)\n{\n  int **v2; // x19\n  int *v3; // x6\n  int v4; // w20\n  int *v6; // x0\n  int v7; // w21\n  int v8; // w1\n  int *v9; // x1\n  __int64 v10; // x6\n  char *v11; // x6\n  int *v12; // x7\n  __int64 v13; // x2\n  int v14; // w4\n  unsigned int v15; // w1\n\n  v2 = (int **)this;\n  v3 = *a2;\n  if ( !*a2 )\n    return this;\n  v4 = *v3;\n  if ( !*v3 )\n    return this;\n  CanTfaz6bZ::y_WHgaffAF((CanTfaz6bZ *)this);\n  v6 = *v2;\n  if ( !*v2 )\n  {\n    v8 = v4 + 8;\n    goto LABEL_13;\n  }\n  v7 = *v6;\n  v8 = v4 + *v6 + 8;\n  if ( !*v6 )\n  {\nLABEL_13:\n    v7 = 0;\n    this = (__int64)malloc(v8);\n    *v2 = (int *)this;\n    v9 = (int *)this;\n    v10 = 8;\n    *(_DWORD *)(this + 4) = 1;\n    goto LABEL_7;\n  }\n  this = (__int64)realloc(v6, v8);\n  *v2 = (int *)this;\n  v9 = (int *)this;\n  v10 = v7 + 8LL;\nLABEL_7:\n  v11 = (char *)v9 + v10;\n  v12 = *a2;\n  if ( v4 > 0 )\n  {\n    v13 = 0;\n    do\n    {\n      v14 = *((unsigned __int8 *)v12 + v13 + 8);\n      v15 = (unsigned __int8)CanTfaz6bZ::mO5aJaYuXC[(v7 + (int)v13) % 3];\n      this = (unsigned __int8)CanTfaz6bZ::mO5aJaYuXC[(int)v13 % 3] ^ v14 ^ v15;\n      v11[v13] = CanTfaz6bZ::mO5aJaYuXC[(int)v13 % 3] ^ v14 ^ v15;\n      ++v13;\n    }\n    while ( v4 > (int)v13 );\n    v9 = *v2;\n  }\n  *v9 = v7 + v4;\n  return this;\n}\n",
+      "target_pseudocode_sha256": "49e035b8c719069b4be9e5fe1443430946c80964e655c25f23aef97378ac19ba",
+      "target_role": "copy-on-write three-byte XOR encoded string buffer or bridge",
+      "target_string_refs": [],
+      "target_symbol_table_row": {
+        "binding": 1,
+        "binding_name": "GLOBAL",
+        "index": 657,
+        "name": "_ZN10CanTfaz6bZ3AddERKS_",
+        "section_index": 9,
+        "size": 312,
+        "type": 2,
+        "type_name": "FUNC",
+        "value": 1020788
+      },
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xd2960",
+          "caller_name": "._ZN10CanTfaz6bZ3AddERKS_",
+          "from": "0xd296c",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0xe910",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xd2960",
+          "caller_name": "._ZN10CanTfaz6bZ3AddERKS_",
+          "from": "0xd2964",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x380f30",
+          "type": 1
+        }
+      ]
+    }
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed target-only labels for the Spectron C8THgaTQxF and CanTfaz6bZ XOR-encoded string helper cluster",
+  "summary": {
+    "defined_dynamic_symbol_count": 19,
+    "exact_metric_collision_target_count": 3,
+    "high_confidence_count": 19,
+    "label_count": 19,
+    "normalized_10_collision_target_count": 3,
+    "normalized_11_collision_target_count": 3,
+    "semantic_target_claimed_count": 0,
+    "source_counterpart_count": 0,
+    "target_default_name_count": 0,
+    "target_only_count": 19
+  }
+}

@@ -800,6 +800,52 @@ generators are
 `tools/generate_spectron_format_parameters_property_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v326.py`.
 
+### v347 target-only encoded string buffer
+
+The v347 pass starts from the verified v346 database and reviews 19 target
+functions in the obfuscated `CanTfaz6bZ` copy-on-write string-buffer class and
+the `C8THgaTQxF` bridge. The target addresses are `0xf37bc`, `0xf3888`, and
+`0xf8b90..0xf9374`.
+
+Direct target pseudocode identifies a lazy three-byte lower-case XOR key,
+reference-counted buffer ownership, make-unique behavior, encode and decode
+conversion to the ordinary `C8THgaTQxF` string wrapper, encoded comparison,
+decoded case-insensitive comparison, assignment, one-based byte access, and
+XOR-aware append. The bridge methods decode into or assign the regular target
+string wrapper. The class is separate from the target `vuuHgangcF` container
+that already carries source-backed `v18_TStringList` aliases.
+
+Every reviewed row is a defined global dynamic symbol and received a
+descriptive `spectron_` label. Three rows, at `0xf8c64`, `0xf8f54`, and
+`0xf9178`, collide with ordinary 1.8 feature metrics. Their direct bodies
+show encoded-buffer behavior, so the collisions are recorded as metrics only.
+The pass claims zero source counterparts, zero semantic promotions, and no
+new source-to-target mapping.
+
+The 19 labels were applied to a fresh v346-derived database and verified after
+reopening. The resulting v347 database has 11,707 functions, 6,440 translated
+aliases, 439 target-only descriptive labels, 769 retained target names, 4,795
+source-backed dynamic rows, 1,657 exact retained dynamic names, and 5,782
+exact dynamic function starts. Its SHA-256 is
+`fe1bbbdf27b25b2fe13d088fb01944a624e8fe8a11898a377ff66f49b892a59b`.
+
+The complete records are
+`artifacts/spectron_encoded_string_target_only_labels_20260829.json`,
+`artifacts/spectron_encoded_string_target_only_label_application_20260829.json`,
+`artifacts/spectron_encoded_string_target_only_label_verification_20260829.json`,
+`artifacts/spectron_features_v347_encoded_string.json`,
+`artifacts/spectron_name_coverage_audit_v347.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v347.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v347.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v347.json`.
+The reusable generators are
+`tools/generate_spectron_encoded_string_target_only_labels.py` and
+`tools/generate_spectron_translation_checkpoint_v347.py`.
+
+This is a static IDA translation checkpoint. It did not patch the APK, rerun
+the loopback client, alter TLS behavior, contact a live game service, or
+decrypt an external resource.
+
 ### v346 target-only resource path helper
 
 The v346 pass starts from the verified v345 database and reviews target

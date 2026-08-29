@@ -425,6 +425,54 @@ records are
 `artifacts/spectron_semantic_translation_v326.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v326.json`.
 
+### v347 encoded string target-only labels
+
+The v347 pass adds 19 descriptive labels for the target-only
+`CanTfaz6bZ` copy-on-write XOR buffer and its `C8THgaTQxF` bridge. The raw
+symbols remain in the artifact and in the IDA comments.
+
+| Spectron address | Applied label | Recovered role |
+| ---: | --- | --- |
+| `0xf37bc` | `spectron_C8THgaTQxF_decodeFromCanTfaz6bZ_const` | decode bridge |
+| `0xf3888` | `spectron_C8THgaTQxF_assignCanTfaz6bZ` | assignment bridge |
+| `0xf8b90` | `spectron_CanTfaz6bZ_initXorKey_void` | lazy XOR-key initialization |
+| `0xf8c64` | `spectron_CanTfaz6bZ_clear_void` | shared-buffer release |
+| `0xf8ca8` | `spectron_CanTfaz6bZ_assign_CanTfaz6bZ_const` | COW assignment |
+| `0xf8d00` | `spectron_CanTfaz6bZ_encodeFromC8THgaTQxF` | string encoding |
+| `0xf8de0` | `spectron_CanTfaz6bZ_decodeToC8THgaTQxF` | string decoding |
+| `0xf8e54` | `spectron_CanTfaz6bZ_decodeToC8THgaTQxF_variant` | alternate decoding |
+| `0xf8ec8` | `spectron_CanTfaz6bZ_equals_CanTfaz6bZ_const` | encoded equality |
+| `0xf8f54` | `spectron_CanTfaz6bZ_startsWithEncoded_CanTfaz6bZ_const` | encoded prefix |
+| `0xf8fc8` | `spectron_CanTfaz6bZ_startsWithIgnoreCase_CanTfaz6bZ_const` | decoded prefix, ignoring case |
+| `0xf9090` | `spectron_CanTfaz6bZ_equalsIgnoreCase_CanTfaz6bZ_const` | decoded equality, ignoring case |
+| `0xf9178` | `spectron_CanTfaz6bZ_decodeCopyToC8THgaTQxF` | decode-copy wrapper |
+| `0xf9198` | `spectron_CanTfaz6bZ_assignFromC8THgaTQxF` | string-to-buffer assignment |
+| `0xf91b8` | `spectron_CanTfaz6bZ_setXorEncodedBuffer_char_const_int` | encoded byte-span assignment |
+| `0xf9264` | `spectron_CanTfaz6bZ_makeUnique_void` | COW detachment |
+| `0xf92d8` | `spectron_CanTfaz6bZ_assignCStringXorEncoded_char_const` | encoded C-string assignment |
+| `0xf9310` | `spectron_CanTfaz6bZ_indexDecoded_int` | one-based decoded indexing |
+| `0xf9374` | `spectron_CanTfaz6bZ_appendXorEncoded_CanTfaz6bZ_const` | encoded append |
+
+The three rows at `0xf8c64`, `0xf8f54`, and `0xf9178` have ordinary source
+metric collisions, but direct pseudocode shows encoded-buffer behavior rather
+than the source `TString` or wrapper roles. They remain target-only labels and
+do not increase the source semantic map.
+
+The labels were applied and verified after reopening the v347 IDA database.
+The v347 records are
+`artifacts/spectron_encoded_string_target_only_labels_20260829.json`,
+`artifacts/spectron_encoded_string_target_only_label_application_20260829.json`,
+`artifacts/spectron_encoded_string_target_only_label_verification_20260829.json`,
+`artifacts/spectron_features_v347_encoded_string.json`,
+`artifacts/spectron_name_coverage_audit_v347.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v347.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v347.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v347.json`.
+
+The saved database is
+`analysis/spectron_libqplay_translated_v347_encoded_string.i64` with SHA-256
+`fe1bbbdf27b25b2fe13d088fb01944a624e8fe8a11898a377ff66f49b892a59b`.
+
 ### v346 target-only resource path helper
 
 The v346 pass adds one reviewed descriptive label to the private Spectron
