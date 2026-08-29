@@ -261,6 +261,71 @@ This pass changed only the private IDA copy and archive. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
 
+## 2026-08-29: TScriptUniverse residual lifecycle block, v330
+
+The next class-local target block after the v329 TScriptSpace methods is the
+obfuscated `e4ZYfa8PV2` TScriptUniverse implementation. I reviewed six
+boundaries here. The source and target pseudocode was available for every
+row, and the surrounding target methods had already established the universe
+class sequence.
+
+| Source boundary | Target boundary | Recovered source role | Confidence basis |
+| ---: | ---: | --- | --- |
+| `0x22b1f8` | `0x234bc0` | `TScriptExecutionStats_TScriptExecutionStats__2` | exact deleting-destructor form and metrics |
+| `0x22b3b4` | `0x234d98` | `TScriptUniverse_setExecutingNPC_TServerNPC` | same two state stores and `LBgVgaqANQ` parameter |
+| `0x22b3d0` | `0x234db4` | `TScriptUniverse_setExecutingPlayer_TServerPlayer` | same two state stores and `MpGzgariDy` parameter |
+| `0x22b614` | `0x235000` | `TScriptUniverse_removeStaticObject_TGraalVar` | same field-12 guard and hash-list removal |
+| `0x22c068` | `0x235a50` | `TScriptUniverse_addToFreeMachines_TScriptMachine` | same membership test and conditional append |
+| `0x22c210` | `0x235bf8` | `TScriptUniverse_TScriptUniverse__2` | exact deleting-destructor form and metrics |
+
+The first row is the deleting form of `TScriptExecutionStats`. Both builds
+call the complete destructor on the receiver and then release it with
+`operator delete`. The target boundary is the `R94BFa3XE` D0 method, which
+also confirms that this is the statistics class-local cleanup rather than a
+generic universe destructor.
+
+The next two rows are the execution-context setters. The source body writes
+the current and action NPC or player globals. The target bodies preserve that
+same pair of stores. The target parameter types identify `LBgVgaqANQ` as the
+rebuilt TServerNPC class and `MpGzgariDy` as the rebuilt TServerPlayer class.
+Their 28-byte one-block shape matches; only the normalized register-detail
+hash changes, so they are recorded as layout-change anchors rather than exact
+metric matches.
+
+The static-object remover reads universe field 12, returns when its hash list
+is absent, and otherwise removes the supplied `G0gxgajWBw` variable. It lies
+immediately before the already translated static-object adder. The
+free-machine helper accepts the target `mTAogaaEip` script-machine class,
+checks the list at the same universe field, and appends only when the machine
+is not already present. Its neighbors are the translated free-machine getter
+and list-clear helper. Both rows are exact normalized matches.
+
+The final row is the deleting `e4ZYfa8PV2` TScriptUniverse destructor. Its D0
+body follows the target D2 constructor/destructor body and has the exact
+source cleanup shape. The class-local sequence is useful here because the
+target has no readable C++ names, but the ABI form and feature record provide
+the primary evidence.
+
+The six aliases were applied to a fresh v329-derived IDA database. The
+application renamed all six functions and added six evidence comments with
+zero failures. A close and reopen verified all six names. The v330 database
+has 11,707 functions, zero audited default names, 6,340 translated aliases,
+and 419 target-only descriptive labels. Dynamic coverage reports 4,679
+source-backed aliases and 1,776 exact retained target names. The complete
+machine-readable records are listed in
+`artifacts/spectron_tscript_universe_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_universe_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_universe_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v330_tscript_universe_residual.json`,
+`artifacts/spectron_name_coverage_audit_v330.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v330.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v330.json`,
+`artifacts/spectron_semantic_translation_v330.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v330.json`.
+
+This was static analysis only. It did not patch the APK, rerun the loopback
+client, alter TLS behavior, contact a game server, or test a live endpoint.
+
 ## 2026-08-29: TScriptSpace residual block, v329
 
 The v329 pass reviews the next raw boundaries in the obfuscated `N67CMatrxw`

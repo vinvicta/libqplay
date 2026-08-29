@@ -800,6 +800,67 @@ generators are
 `tools/generate_spectron_format_parameters_property_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v326.py`.
 
+### v330 TScriptUniverse residual aliases
+
+The v330 pass follows the v329 TScriptSpace work into the next raw
+`e4ZYfa8PV2` TScriptUniverse block. Six source-backed aliases were reviewed
+against compact Hex-Rays pseudocode, target parameter classes, normalized
+feature records, and class-local order.
+
+| 1.8 source | Spectron target | Applied alias | Match class |
+| ---: | ---: | --- | --- |
+| `0x22b1f8` | `0x234bc0` | `v18_TScriptExecutionStats_TScriptExecutionStats__2` | exact D0 destructor |
+| `0x22b3b4` | `0x234d98` | `v18_TScriptUniverse_setExecutingNPC_TServerNPC` | register-detail change |
+| `0x22b3d0` | `0x234db4` | `v18_TScriptUniverse_setExecutingPlayer_TServerPlayer` | register-detail change |
+| `0x22b614` | `0x235000` | `v18_TScriptUniverse_removeStaticObject_TGraalVar` | exact normalized metrics |
+| `0x22c068` | `0x235a50` | `v18_TScriptUniverse_addToFreeMachines_TScriptMachine` | exact normalized metrics |
+| `0x22c210` | `0x235bf8` | `v18_TScriptUniverse_TScriptUniverse__2` | exact D0 destructor |
+
+The source `TScriptExecutionStats` deleting destructor maps to the target
+`R94BFa3XE` D0 boundary. The target calls the complete destructor and then
+`operator delete`, with the same normalized feature record. The two execution
+state setters preserve the source stores for the current and action NPC or
+player. Their target parameters are `LBgVgaqANQ` and `MpGzgariDy`, the
+translated TServerNPC and TServerPlayer classes, and their only recorded
+difference is register-detail allocation.
+
+The static-object remover reads the universe's hash-list field, returns when
+it is absent, and otherwise removes the supplied `G0gxgajWBw` variable. The
+free-machine helper checks the `mTAogaaEip` machine against the free-machine
+list before appending it. Both are exact normalized matches and sit beside
+the already translated `clearVars`, `addStaticObject`, `getFreeMachine`, and
+`clearGraalScriptMachines` methods. The final row is the target
+`e4ZYfa8PV2` deleting destructor and is an exact D0 match.
+
+The anchor generator records four exact metric rows, two register-detail
+layout rows, six pseudocode-backed high-confidence anchors, and no new
+automatic semantic-map matches. The application renamed all six functions
+and added six evidence comments with zero failures. Reopening the fresh copy
+verified all six names in the 11,707-function database.
+
+The v330 database contains 6,340 translated `v18_` aliases and no audited
+default names. Its dynamic audit reports 4,679 source-backed aliases, 1,776
+exact retained target names, 136 other retained target names, 419 target-only
+descriptive labels in the full name audit, and 5,782 exact dynamic function
+starts. The complete records are
+`artifacts/spectron_tscript_universe_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_universe_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_universe_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v330_tscript_universe_residual.json`,
+`artifacts/spectron_name_coverage_audit_v330.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v330.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v330.json`,
+`artifacts/spectron_semantic_translation_v330.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v330.json`.
+
+The private packed IDA database is
+`analysis/spectron_libqplay_translated_v330_tscript_universe_residual.i64`
+with SHA-256
+`be32d09e08a76b3641beff951644ec78167fcc2735d5fc5ea58f9ee12acf97a1`.
+This pass changed only the private IDA copy and the archive. It did not patch
+the APK, rerun the loopback client, alter TLS behavior, contact a game
+server, or test a live endpoint.
+
 ### v329 TScriptSpace residual aliases and target-only labels
 
 The v329 pass continues through the residual `N67CMatrxw` script-space block.

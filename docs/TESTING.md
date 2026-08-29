@@ -937,6 +937,113 @@ The expected v326 database hash is
 checkpoint is static evidence only. It does not change the loopback runtime
 result, TLS diagnosis, or live-service boundary.
 
+### v330 TScriptUniverse residual translation
+
+The v330 pass is static IDA work only. It starts from the verified v329
+database and reviews six source and target pseudocode pairs in the
+`TScriptUniverse` block. It does not require an APK, a running emulator, a
+TLS responder, or any network access.
+
+Capture compact pseudocode from disposable copies with:
+
+```bash
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  LIBQPLAY_FUNCTION_EVIDENCE=0x22b1f8,0x22b3b4,0x22b3d0,0x22b614,0x22c068,0x22c210 \
+  LIBQPLAY_EVIDENCE_COMPACT=1 \
+  LIBQPLAY_EVIDENCE_OUT=/tmp/graal-source-tscriptuniverse-residual.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/libqplay_translated_all_v4.i64 \
+  -s tools/ida_dump_function_evidence.py
+
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  LIBQPLAY_FUNCTION_EVIDENCE=0x234bc0,0x234d98,0x234db4,0x235000,0x235a50,0x235bf8 \
+  LIBQPLAY_EVIDENCE_COMPACT=1 \
+  LIBQPLAY_EVIDENCE_OUT=/tmp/graal-target-tscriptuniverse-residual.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/spectron_libqplay_translated_v329_tscript_space_residuals.i64 \
+  -s tools/ida_dump_function_evidence.py
+```
+
+Export the source feature file and target features from the v329 database.
+The reviewed anchor generator then records the source and target metrics,
+pseudocode fingerprints, direct-call context, and the reason for each alias:
+
+```bash
+python3 tools/generate_spectron_tscript_universe_residual_anchors.py \
+  --original-features /tmp/original_features_v4_v3_materialized_v2.json \
+  --spectron-features /tmp/spectron_features_v329_tscript_space_residuals.json \
+  --semantic-map /tmp/semantic_v329_current.json \
+  --source-evidence /tmp/graal-source-tscriptuniverse-residual.json \
+  --target-evidence /tmp/graal-target-tscriptuniverse-residual.json \
+  --original-binary-sha256 9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8 \
+  --spectron-binary-sha256 f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219 \
+  --output artifacts/spectron_tscript_universe_residual_manual_translation_anchors_20260829.json
+```
+
+Apply the six aliases to a fresh v329 copy, saving the result under a new
+name. Reopen that result with the verification helper before refreshing the
+feature and name audits:
+
+```bash
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_MANUAL_ANCHORS=/path/to/libqplay/artifacts/spectron_tscript_universe_residual_manual_translation_anchors_20260829.json \
+  SPECTRON_MANUAL_EXPECTED_ARTIFACT=spectron_tscript_universe_residual_manual_translation_anchors_20260829 \
+  SPECTRON_MANUAL_APPLY=1 \
+  SPECTRON_MANUAL_SAVE_PATH=/path/to/spectron_libqplay_translated_v330_tscript_universe_residual.i64 \
+  SPECTRON_MANUAL_REPORT=/tmp/spectron_tscript_universe_residual_application_20260829.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/spectron_libqplay_translated_v329_tscript_space_residuals.i64 \
+  -s tools/ida_apply_spectron_manual_anchors.py
+
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_MANUAL_ANCHORS=/path/to/libqplay/artifacts/spectron_tscript_universe_residual_manual_translation_anchors_20260829.json \
+  SPECTRON_MANUAL_EXPECTED_ARTIFACT=spectron_tscript_universe_residual_manual_translation_anchors_20260829 \
+  SPECTRON_MANUAL_VERIFY_REPORT=/tmp/spectron_tscript_universe_residual_verification_20260829.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/spectron_libqplay_translated_v330_tscript_universe_residual.i64 \
+  -s tools/ida_verify_spectron_manual_anchors.py
+```
+
+The expected application result is six resolved functions, six renames, six
+evidence comments, zero failures, and a successful save. The reopen result is
+six verified names in an 11,707-function database. Refresh the target feature
+export, name-origin audit, dynamic boundary audit, dynamic-symbol coverage,
+and semantic map, then rebuild the checkpoint:
+
+```bash
+python3 tools/generate_spectron_translation_checkpoint_v330.py \
+  --parent-checkpoint artifacts/spectron_translation_checkpoint_20260829_v329.json \
+  --database /path/to/spectron_libqplay_translated_v330_tscript_universe_residual.i64 \
+  --anchor-artifact artifacts/spectron_tscript_universe_residual_manual_translation_anchors_20260829.json \
+  --application-report artifacts/spectron_tscript_universe_residual_manual_translation_application_20260829.json \
+  --verification-report artifacts/spectron_tscript_universe_residual_manual_translation_verification_20260829.json \
+  --name-audit artifacts/spectron_name_coverage_audit_v330.json \
+  --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v330.json \
+  --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v330.json \
+  --semantic-map artifacts/spectron_semantic_translation_v330.json \
+  --feature-export artifacts/spectron_features_v330_tscript_universe_residual.json \
+  --output artifacts/spectron_translation_checkpoint_20260829_v330.json
+
+python3 tools/validate_research_archive.py
+```
+
+The v330 anchor summary is six high-confidence rows, four exact metric
+matches, two register-detail layout rows, and pseudocode for all twelve
+source and target functions. The name audit should report 6,340 translated
+aliases, 419 target-only descriptive labels, 888 retained target names, seven
+JNI exports, 4,053 other IDA or PLT names, and zero default names. Dynamic
+coverage should report 4,679 source-backed aliases, 1,776 exact retained
+names, and 5,782 exact function starts. The v330 database hash is
+`be32d09e08a76b3641beff951644ec78167fcc2735d5fc5ea58f9ee12acf97a1`.
+
+This checkpoint is static evidence only. It does not patch the APK, rerun the
+loopback client, alter TLS behavior, contact a game server, or test a live
+endpoint.
+
 ### v329 TScriptSpace residual translation
 
 The v329 pass continues from the verified v328 database and reviews the next

@@ -3035,6 +3035,53 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v330 TScriptUniverse residual translation
+
+The v330 revision is a static IDA checkpoint for the next target
+`e4ZYfa8PV2` TScriptUniverse block. It does not change the previously verified
+loopback package, connector TLS result, or local protocol responder.
+
+| 1.8 source | Spectron target | Applied alias | Review result |
+| ---: | ---: | --- | --- |
+| `0x22b1f8` | `0x234bc0` | `v18_TScriptExecutionStats_TScriptExecutionStats__2` | exact D0 destructor |
+| `0x22b3b4` | `0x234d98` | `v18_TScriptUniverse_setExecutingNPC_TServerNPC` | same execution-state stores; register-detail change |
+| `0x22b3d0` | `0x234db4` | `v18_TScriptUniverse_setExecutingPlayer_TServerPlayer` | same execution-state stores; register-detail change |
+| `0x22b614` | `0x235000` | `v18_TScriptUniverse_removeStaticObject_TGraalVar` | exact field-12 removal helper |
+| `0x22c068` | `0x235a50` | `v18_TScriptUniverse_addToFreeMachines_TScriptMachine` | exact membership and append helper |
+| `0x22c210` | `0x235bf8` | `v18_TScriptUniverse_TScriptUniverse__2` | exact D0 destructor |
+
+The target parameter classes provide useful confirmation. `LBgVgaqANQ` is the
+target TServerNPC class, `MpGzgariDy` is TServerPlayer, `G0gxgajWBw` is
+TGraalVar, and `mTAogaaEip` is TScriptMachine. The source and target bodies
+also line up with the neighboring translated `clearVars`, `addStaticObject`,
+`getFreeMachine`, and `clearGraalScriptMachines` methods.
+
+The application renamed all six functions and added six evidence comments
+with zero failures. Reopening the fresh copy verified all six names. The
+database contains 11,707 functions, zero audited default names, 6,340
+translated `v18_` aliases, and 419 target-only descriptive labels. Dynamic
+coverage reports 4,679 source-backed aliases and 1,776 exact retained names.
+All 5,782 defined dynamic function symbols still resolve to exact IDA
+function starts.
+
+The v330 database is
+`analysis/spectron_libqplay_translated_v330_tscript_universe_residual.i64`
+with SHA-256
+`be32d09e08a76b3641beff951644ec78167fcc2735d5fc5ea58f9ee12acf97a1`.
+The complete records are
+`artifacts/spectron_tscript_universe_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_universe_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_universe_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v330_tscript_universe_residual.json`,
+`artifacts/spectron_name_coverage_audit_v330.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v330.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v330.json`,
+`artifacts/spectron_semantic_translation_v330.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v330.json`.
+
+This is static evidence only. No APK was patched, no live endpoint was
+contacted, and no new runtime replay was performed for v330.
+
 ## Spectron 2.2 v329 TScriptSpace residual translation
 
 The v329 pass is a static IDA translation checkpoint. It follows the v328

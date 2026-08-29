@@ -319,6 +319,59 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v330 TScriptUniverse residual comparison
+
+The v330 pass compares the next six source and target boundaries in the
+script-universe runtime. The target class is the obfuscated `e4ZYfa8PV2`
+family, with readable parameter classes preserved for several methods.
+
+| Source role | Spectron address | Applied alias | Match class |
+| --- | ---: | --- | --- |
+| `TScriptExecutionStats_TScriptExecutionStats__2` | `0x234bc0` | `v18_TScriptExecutionStats_TScriptExecutionStats__2` | exact D0 destructor |
+| `TScriptUniverse_setExecutingNPC_TServerNPC` | `0x234d98` | `v18_TScriptUniverse_setExecutingNPC_TServerNPC` | register-detail change |
+| `TScriptUniverse_setExecutingPlayer_TServerPlayer` | `0x234db4` | `v18_TScriptUniverse_setExecutingPlayer_TServerPlayer` | register-detail change |
+| `TScriptUniverse_removeStaticObject_TGraalVar` | `0x235000` | `v18_TScriptUniverse_removeStaticObject_TGraalVar` | exact normalized metrics |
+| `TScriptUniverse_addToFreeMachines_TScriptMachine` | `0x235a50` | `v18_TScriptUniverse_addToFreeMachines_TScriptMachine` | exact normalized metrics |
+| `TScriptUniverse_TScriptUniverse__2` | `0x235bf8` | `v18_TScriptUniverse_TScriptUniverse__2` | exact D0 destructor |
+
+The source and target deleting destructors both call the complete destructor
+and then `operator delete`. The static-object remover performs the same
+field-12 null guard and hash-list removal, while the free-machine helper
+performs the same membership test and conditional append. The two execution
+setters preserve the current and action context stores. The target parameter
+classes are `LBgVgaqANQ` for TServerNPC, `MpGzgariDy` for TServerPlayer,
+`G0gxgajWBw` for TGraalVar, and `mTAogaaEip` for TScriptMachine.
+
+Four rows have identical normalized feature metrics. The setters retain the
+same 28-byte one-block shape but differ in register-detail allocation, which
+is recorded as a layout difference rather than hidden. Direct pseudocode was
+available for all six rows, and the methods occur in the expected sequence
+around the already translated universe constructors, clear helpers, and
+free-machine methods.
+
+The application renamed all six target functions and added six evidence
+comments with zero failures. Reopening the fresh IDA copy verified all six
+names. The v330 checkpoint contains 11,707 functions, zero audited default
+names, 6,340 translated aliases, 419 target-only descriptive labels, 4,679
+source-backed dynamic rows, 1,776 exact retained dynamic names, and 5,782
+exact dynamic function starts.
+
+The machine-readable records are
+`artifacts/spectron_tscript_universe_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_universe_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_universe_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v330_tscript_universe_residual.json`,
+`artifacts/spectron_name_coverage_audit_v330.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v330.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v330.json`,
+`artifacts/spectron_semantic_translation_v330.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v330.json`.
+
+The v330 private database hash is
+`be32d09e08a76b3641beff951644ec78167fcc2735d5fc5ea58f9ee12acf97a1`. This
+pass is static only. It does not change the loopback runtime result or the TLS
+diagnosis and does not contact a live endpoint.
+
 ## v329 TScriptSpace residual comparison
 
 The v329 pass follows the v328 static script-machine tail into the next raw

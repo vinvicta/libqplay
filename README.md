@@ -13,7 +13,7 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v329 Spectron database. It
+The current documented translation frontier is the v330 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -123,6 +123,18 @@ reviewed `v18_` aliases, 4,671 source-backed dynamic rows, and 1,786 exact
 retained dynamic names. The nearby `C8THgaTQxF` resolver overload remains
 documented as a target string-wrapper adapter rather than an unsupported
 source alias.
+
+The v330 revision reviews six more boundaries in the residual
+`TScriptUniverse` implementation. It translates the execution-state setters,
+static-object removal, free-machine insertion, and both destructor forms.
+Four rows are exact normalized feature matches. The two setter rows differ
+only in register-detail allocation, which is expected after the target's class
+and wrapper rebuild. The target parameter classes identify the NPC, player,
+script-machine, and variable roles directly: `LBgVgaqANQ`, `MpGzgariDy`,
+`mTAogaaEip`, and `G0gxgajWBw`. The v330 database contains 6,340 reviewed
+`v18_` aliases, 4,679 source-backed dynamic rows, and 1,776 exact retained
+dynamic names. It is a static IDA checkpoint and has not been used for a new
+runtime APK replay.
 
 The v273 revision adds six high-confidence libjpeg source and destination
 callback labels. They are tied to the target `jpeg_stdio_dest` and
@@ -717,6 +729,58 @@ target-only functions, with zero failures. Reopening the fresh copy verified
 all four names. This was a static translation pass only. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
+
+### v330 TScriptUniverse residual aliases
+
+The v330 pass continues from the verified v329 database into the next
+class-local `e4ZYfa8PV2` TScriptUniverse block. It adds six source-backed
+aliases. The target names are obfuscated, but their parameter classes and
+placement beside already translated universe methods make the roles clear.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | --- | --- | --- |
+| `0x22b1f8` | `0x234bc0` `_ZN10R94BFa3XECD0Ev` | `v18_TScriptExecutionStats_TScriptExecutionStats__2` | deleting TScriptExecutionStats destructor |
+| `0x22b3b4` | `0x234d98` `_ZN10e4ZYfa8PV210eh9ZuaaqUGEP10LBgVgaqANQ` | `v18_TScriptUniverse_setExecutingNPC_TServerNPC` | execution-NPC and action-NPC state |
+| `0x22b3d0` | `0x234db4` `_ZN10e4ZYfa8PV210hgXZuahtJGEP10MpGzgariDy` | `v18_TScriptUniverse_setExecutingPlayer_TServerPlayer` | execution-player and action-player state |
+| `0x22b614` | `0x235000` `_ZN10e4ZYfa8PV210ufZhMaE8JeEP10G0gxgajWBw` | `v18_TScriptUniverse_removeStaticObject_TGraalVar` | static-object hash-list removal |
+| `0x22c068` | `0x235a50` `_ZN10e4ZYfa8PV210WR0Lua3k0uEP10mTAogaaEip` | `v18_TScriptUniverse_addToFreeMachines_TScriptMachine` | unique free-machine insertion |
+| `0x22c210` | `0x235bf8` `_ZN10e4ZYfa8PV2D0Ev` | `v18_TScriptUniverse_TScriptUniverse__2` | deleting TScriptUniverse destructor |
+
+The first and last rows are exact normalized D0 destructor matches. The
+static-object remover and free-machine inserter are also exact normalized
+matches. The two setters preserve the same stores and one-block shape, with a
+register-detail hash difference caused by target register allocation. The
+`LBgVgaqANQ` and `MpGzgariDy` parameters identify the target TServerNPC and
+TServerPlayer classes. The `G0gxgajWBw` receiver is the target TGraalVar, and
+`mTAogaaEip` is the target TScriptMachine.
+
+All six aliases were applied to a fresh v329-derived IDA database and verified
+after reopening. The v330 database contains 11,707 functions, zero audited
+default names, 6,340 translated `v18_` aliases, and 419 target-only
+descriptive labels. Dynamic coverage reports 4,679 source-backed aliases and
+1,776 exact retained names. The 5,782 defined dynamic function symbols still
+have exact IDA function starts.
+
+The v330 database is
+`analysis/spectron_libqplay_translated_v330_tscript_universe_residual.i64`
+with SHA-256
+`be32d09e08a76b3641beff951644ec78167fcc2735d5fc5ea58f9ee12acf97a1`.
+The records are
+`artifacts/spectron_tscript_universe_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_universe_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_universe_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v330_tscript_universe_residual.json`,
+`artifacts/spectron_name_coverage_audit_v330.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v330.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v330.json`,
+`artifacts/spectron_semantic_translation_v330.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v330.json`.
+
+The reusable helpers are
+`tools/generate_spectron_tscript_universe_residual_anchors.py` and
+`tools/generate_spectron_translation_checkpoint_v330.py`. This was a static
+translation pass only. It did not patch the APK, rerun the loopback client,
+alter TLS behavior, contact a game server, or test a live endpoint.
 
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,

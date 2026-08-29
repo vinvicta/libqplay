@@ -425,6 +425,46 @@ records are
 `artifacts/spectron_semantic_translation_v326.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v326.json`.
 
+### v330 TScriptUniverse residual aliases
+
+The v330 pass adds six source-backed aliases to the private Spectron IDA
+database. The names retain the `v18_` prefix because they are semantic
+translations from the readable 1.8 database, not preserved 2.2 debug names.
+
+| Spectron address | Original source role | Applied alias | Target context |
+| ---: | --- | --- | --- |
+| `0x234bc0` | `TScriptExecutionStats_TScriptExecutionStats__2` | `v18_TScriptExecutionStats_TScriptExecutionStats__2` | `R94BFa3XE` deleting destructor |
+| `0x234d98` | `TScriptUniverse_setExecutingNPC_TServerNPC` | `v18_TScriptUniverse_setExecutingNPC_TServerNPC` | `LBgVgaqANQ` TServerNPC parameter |
+| `0x234db4` | `TScriptUniverse_setExecutingPlayer_TServerPlayer` | `v18_TScriptUniverse_setExecutingPlayer_TServerPlayer` | `MpGzgariDy` TServerPlayer parameter |
+| `0x235000` | `TScriptUniverse_removeStaticObject_TGraalVar` | `v18_TScriptUniverse_removeStaticObject_TGraalVar` | `G0gxgajWBw` static-object variable |
+| `0x235a50` | `TScriptUniverse_addToFreeMachines_TScriptMachine` | `v18_TScriptUniverse_addToFreeMachines_TScriptMachine` | `mTAogaaEip` script-machine parameter |
+| `0x235bf8` | `TScriptUniverse_TScriptUniverse__2` | `v18_TScriptUniverse_TScriptUniverse__2` | `e4ZYfa8PV2` deleting destructor |
+
+The two destructor rows and the static-object and free-machine helpers have
+exact normalized metrics. The setter bodies retain the same two global state
+stores and 28-byte one-block shape, with only register-detail allocation
+changing. The target parameter classes and the position beside the already
+translated universe methods make the class roles explicit enough for
+high-confidence labels.
+
+The six names were applied and verified after reopening. The v330 name audit
+contains zero default names, 6,340 translated aliases, 419 target-only
+descriptive labels, 888 retained target names, seven JNI exports, and 4,053
+other IDA or PLT names. The dynamic audit still resolves all 5,782 defined
+function symbols to exact IDA starts and classifies 4,679 rows as
+source-backed aliases.
+
+The complete v330 records are
+`artifacts/spectron_tscript_universe_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_universe_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_universe_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v330_tscript_universe_residual.json`,
+`artifacts/spectron_name_coverage_audit_v330.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v330.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v330.json`,
+`artifacts/spectron_semantic_translation_v330.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v330.json`.
+
 ### v329 TScriptSpace residual aliases and labels
 
 The v329 pass adds two reviewed source aliases and two target-only descriptive
