@@ -425,6 +425,41 @@ records are
 `artifacts/spectron_semantic_translation_v326.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v326.json`.
 
+### v336 GSFunctionsInitstaticscriptvars and TFormat2 residual aliases
+
+The v336 pass adds nine semantic aliases to the private Spectron IDA
+database. The raw target identifiers remain visible so the translated names
+can be traced back to the stripped build.
+
+| Spectron address | Raw target symbol | Applied alias | Recovered role |
+| ---: | --- | --- | --- |
+| `0x2130b0` | `_Z10HWyrga7_Nrv` | `v18_gsfunctions_initStaticScriptVars_void` | count-37 function-table registration |
+| `0x213218` | `_ZN10giqpgaXJ_p10mgCpgamO9pEv` | `v18_TFormat2_FormatParameters_getNextS32_void` | next signed number |
+| `0x2132a0` | `_ZN10giqpgaXJ_p10tfvpgaJU3pEv` | `v18_TFormat2_FormatParameters_getNextU32_void` | next unsigned number |
+| `0x213360` | `_ZN10giqpgaXJ_p10a67ogaLqLpEi` | `v18_TFormat2_FormatParameters_getIndexedS32_int` | indexed signed number |
+| `0x2133d0` | `_ZN10giqpgaXJ_p10nn9ogamvMpEi` | `v18_TFormat2_FormatParameters_getIndexedU32_int` | indexed unsigned number |
+| `0x213440` | `_ZN10giqpgaXJ_pD1Ev` | `v18_TFormat2_FormatParameters_TFormat2_FormatParameters` | complete D1/D2 destructor |
+| `0x213454` | `_ZN10giqpgaXJ_p10Ym2oga0BGpEi` | `v18_TFormat2_FormatParameters_getIndexedString_int` | indexed string conversion |
+| `0x2134f0` | `_ZN10giqpgaXJ_p10B8wpgaSu5pEv` | `v18_TFormat2_FormatParameters_getNextString_void` | next string conversion |
+| `0x213598` | `_ZN10giqpgaXJ_pD0Ev` | `v18_TFormat2_FormatParameters_TFormat2_FormatParameters__2` | deleting D0 destructor |
+
+The source counterparts are at `0x20cd20` through `0x20d1d4`. Four rows are
+exact normalized matches, the initializer and destructor rows differ in
+register detail, and the two string accessors record the rebuilt wrapper
+layout. The D0 row promotes a pre-existing automatic semantic candidate into
+the explicit manual alias record.
+
+The v336 records are
+`artifacts/spectron_format2_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_format2_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_format2_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v336_format2_residual.json`,
+`artifacts/spectron_name_coverage_audit_v336.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v336.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v336.json`,
+`artifacts/spectron_semantic_translation_v336.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v336.json`.
+
 ### v335 GSFunctionsClient and TAdventure residual aliases
 
 The v335 pass adds four semantic aliases to the private Spectron IDA

@@ -261,6 +261,78 @@ This pass changed only the private IDA copy and archive. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
 
+## 2026-08-29: GSFunctionsInitstaticscriptvars and TFormat2 residuals, v336
+
+The next untranslated sequence is a compact Format2 parameter block. The
+target class `giqpgaXJ_p` is obfuscated, but its method order, direct
+pseudocode, and numeric and string virtual slots line up with the source
+`TFormat2_FormatParameters` class.
+
+| Source boundary | Target boundary | Applied alias | Recovered role |
+| ---: | ---: | --- | --- |
+| `0x20cd20` `gsfunctions_initStaticScriptVars_void` | `0x2130b0` `_Z10HWyrga7_Nrv` | `v18_gsfunctions_initStaticScriptVars_void` | function-table registration |
+| `0x20ce88` `TFormat2_FormatParameters_getNextS32_void` | `0x213218` `_ZN10giqpgaXJ_p10mgCpgamO9pEv` | `v18_TFormat2_FormatParameters_getNextS32_void` | next signed number |
+| `0x20cf10` `TFormat2_FormatParameters_getNextU32_void` | `0x2132a0` `_ZN10giqpgaXJ_p10tfvpgaJU3pEv` | `v18_TFormat2_FormatParameters_getNextU32_void` | next unsigned number |
+| `0x20cfd0` `TFormat2_FormatParameters_getIndexedS32_int` | `0x213360` `_ZN10giqpgaXJ_p10a67ogaLqLpEi` | `v18_TFormat2_FormatParameters_getIndexedS32_int` | indexed signed number |
+| `0x20d040` `TFormat2_FormatParameters_getIndexedU32_int` | `0x2133d0` `_ZN10giqpgaXJ_p10nn9ogamvMpEi` | `v18_TFormat2_FormatParameters_getIndexedU32_int` | indexed unsigned number |
+| `0x20d0b0` `TFormat2_FormatParameters_TFormat2_FormatParameters` | `0x213440` `_ZN10giqpgaXJ_pD1Ev` | `v18_TFormat2_FormatParameters_TFormat2_FormatParameters` | complete D1/D2 destructor |
+| `0x20d0c4` `TFormat2_FormatParameters_getIndexedString_int` | `0x213454` `_ZN10giqpgaXJ_p10Ym2oga0BGpEi` | `v18_TFormat2_FormatParameters_getIndexedString_int` | indexed string |
+| `0x20d148` `TFormat2_FormatParameters_getNextString_void` | `0x2134f0` `_ZN10giqpgaXJ_p10B8wpgaSu5pEv` | `v18_TFormat2_FormatParameters_getNextString_void` | next string |
+| `0x20d1d4` `TFormat2_FormatParameters_TFormat2_FormatParameters__2` | `0x213598` `_ZN10giqpgaXJ_pD0Ev` | `v18_TFormat2_FormatParameters_TFormat2_FormatParameters__2` | deleting D0 destructor |
+
+The source initializer calls
+`TScriptProperty_addFuncs_TProperties_TPropertyFuncDef_int(0, &off_386C48, 37)`.
+The target calls `cWWYfaxbT2::DpbOGacdQC(0, &off_399D68, 37)`, preserving the
+null receiver, table pointer, and count. The four numeric accessors call the
+same virtual numeric getter at slot 224. The next-argument forms advance the
+stored index, and all four apply the source's `0.0001` correction before
+truncation.
+
+The D1 source entry carries the alternative `_ZN25TFormat2_FormatParametersD1Ev`
+name. It resets the vtable and clears the string member at offset 24. The
+target D1 entry does the same for `C8THgaTQxF`; the D0 entry adds
+`operator delete`. This is the same destructor ABI relationship used in the
+earlier residual passes.
+
+The source indexed-string and next-string methods call virtual slot 232,
+assign the converted result to the embedded string, clear temporaries, and
+return the stored string or dummy fallback. The target's extra conversion and
+cleanup calls account for the larger target bodies without changing their
+role. The D0 pair was already present as a medium-confidence automatic
+semantic candidate, so v336 promotes it into the manual alias record rather
+than creating a duplicate match.
+
+The anchor artifact classifies nine high-confidence rows, four exact metric
+matches, five layout-change rows, nine pseudocode-backed rows, eight new
+context rows, and one semantic promotion. The aliases were applied to a fresh
+v335-derived database. All nine names and evidence comments were saved, and
+a close and reopen verified all nine in an 11,707-function database.
+
+The v336 name audit reports 6,398 translated aliases, 419 target-only
+descriptive labels, 831 retained target names, seven JNI exports, 4,052 other
+IDA or PLT names, and zero default names. Dynamic coverage reports 4,750
+source-backed aliases and 1,719 exact retained dynamic names. The boundary
+audit reports 5,782 exact dynamic function starts.
+
+The v336 database hash is
+`55662a1b9e5989c1e14350ab585015ccb6af0af123f12fab0dcab414f54ca199`.
+The evidence is stored in
+`artifacts/spectron_format2_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_format2_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_format2_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v336_format2_residual.json`,
+`artifacts/spectron_name_coverage_audit_v336.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v336.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v336.json`,
+`artifacts/spectron_semantic_translation_v336.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v336.json`.
+
+The semantic map is carried forward from v335 with one existing D0 match's
+current target name refreshed to the new alias. The map's established
+3,716-function counts remain unchanged. This was static analysis only. It did
+not patch the APK, rerun the loopback client, alter TLS behavior, contact a
+game server, or test a live endpoint.
+
 ## 2026-08-29: GSFunctionsClient and TAdventure residuals, v335
 
 The v334 bitmap initializer pass left a compact raw-symbol sequence in the

@@ -13,7 +13,7 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v334 Spectron database. It
+The current documented translation frontier is the v336 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -173,6 +173,16 @@ callback, and the empty Adventure static-script initializer. Three rows are
 exact normalized matches and one differs only in register-detail allocation.
 The v335 database contains 6,389 reviewed `v18_` aliases, 4,740 source-backed
 dynamic rows, and 1,728 exact retained dynamic names. It is a static IDA
+checkpoint and has not been used for a new runtime APK replay.
+
+The v336 revision translates the next contiguous Format2 parameter block. It
+adds nine high-confidence aliases covering the GSFunctions script-function
+initializer, signed and unsigned numeric accessors, the D1 and D0 destructor
+boundaries, and indexed and next-string accessors. Four rows are exact
+normalized matches, four record the rebuilt string or destructor layout, and
+one is an explicit promotion of an existing automatic semantic candidate.
+The v336 database contains 6,398 reviewed `v18_` aliases, 4,750 source-backed
+dynamic rows, and 1,719 exact retained dynamic names. It is a static IDA
 checkpoint and has not been used for a new runtime APK replay.
 
 The v331 revision continues immediately into the static-variable runtime. It
@@ -780,6 +790,61 @@ target-only functions, with zero failures. Reopening the fresh copy verified
 all four names. This was a static translation pass only. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
+
+### v336 GSFunctionsInitstaticscriptvars and TFormat2 residual aliases
+
+The v336 pass starts from the verified v335 database and resolves the next
+contiguous raw-symbol block in the Format2 parameter runtime.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | --- | --- | --- |
+| `0x20cd20` `gsfunctions_initStaticScriptVars_void` | `0x2130b0` `_Z10HWyrga7_Nrv` | `v18_gsfunctions_initStaticScriptVars_void` | count-37 function-table registration |
+| `0x20ce88` `TFormat2_FormatParameters_getNextS32_void` | `0x213218` `_ZN10giqpgaXJ_p10mgCpgamO9pEv` | `v18_TFormat2_FormatParameters_getNextS32_void` | next signed numeric argument |
+| `0x20cf10` `TFormat2_FormatParameters_getNextU32_void` | `0x2132a0` `_ZN10giqpgaXJ_p10tfvpgaJU3pEv` | `v18_TFormat2_FormatParameters_getNextU32_void` | next unsigned numeric argument |
+| `0x20cfd0` `TFormat2_FormatParameters_getIndexedS32_int` | `0x213360` `_ZN10giqpgaXJ_p10a67ogaLqLpEi` | `v18_TFormat2_FormatParameters_getIndexedS32_int` | indexed signed numeric argument |
+| `0x20d040` `TFormat2_FormatParameters_getIndexedU32_int` | `0x2133d0` `_ZN10giqpgaXJ_p10nn9ogamvMpEi` | `v18_TFormat2_FormatParameters_getIndexedU32_int` | indexed unsigned numeric argument |
+| `0x20d0b0` `TFormat2_FormatParameters_TFormat2_FormatParameters` | `0x213440` `_ZN10giqpgaXJ_pD1Ev` | `v18_TFormat2_FormatParameters_TFormat2_FormatParameters` | complete D1/D2 destructor |
+| `0x20d0c4` `TFormat2_FormatParameters_getIndexedString_int` | `0x213454` `_ZN10giqpgaXJ_p10Ym2oga0BGpEi` | `v18_TFormat2_FormatParameters_getIndexedString_int` | indexed string conversion |
+| `0x20d148` `TFormat2_FormatParameters_getNextString_void` | `0x2134f0` `_ZN10giqpgaXJ_p10B8wpgaSu5pEv` | `v18_TFormat2_FormatParameters_getNextString_void` | next string conversion |
+| `0x20d1d4` `TFormat2_FormatParameters_TFormat2_FormatParameters__2` | `0x213598` `_ZN10giqpgaXJ_pD0Ev` | `v18_TFormat2_FormatParameters_TFormat2_FormatParameters__2` | deleting D0 destructor |
+
+The initializer registers 37 script functions through the target's rebuilt
+property helper. The four numeric accessors preserve the virtual numeric
+getter at slot 224, the `0.0001` adjustment, and the signed truncation logic.
+The D1 and D0 entries reset the vtable and clear the embedded string wrapper;
+the deleting form then calls `operator delete`. The two string accessors
+preserve virtual slot 232, temporary conversion, assignment, cleanup, and
+dummy-string fallback. Their larger target bodies reflect the rebuilt
+`CanTfaz6bZ` and `C8THgaTQxF` wrappers.
+
+The v336 name audit reports 6,398 translated aliases, 419 target-only
+descriptive labels, 831 retained target names, seven JNI exports, 4,052 other
+IDA or PLT names, and zero default names. Dynamic coverage reports 4,750
+source-backed aliases and 1,719 exact retained dynamic names. The defined
+dynamic boundary audit still resolves all 5,782 function symbols to exact IDA
+starts.
+
+The v336 database is
+`analysis/spectron_libqplay_translated_v336_format2_residual.i64` with
+SHA-256
+`55662a1b9e5989c1e14350ab585015ccb6af0af123f12fab0dcab414f54ca199`.
+The records are
+`artifacts/spectron_format2_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_format2_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_format2_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v336_format2_residual.json`,
+`artifacts/spectron_name_coverage_audit_v336.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v336.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v336.json`,
+`artifacts/spectron_semantic_translation_v336.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v336.json`.
+
+The reusable helpers are
+`tools/generate_spectron_format2_residual_anchors.py`,
+`tools/carry_forward_spectron_semantic_translation_v336.py`, and
+`tools/generate_spectron_translation_checkpoint_v336.py`. This pass was
+static analysis only. It did not patch the APK, rerun the loopback client,
+alter TLS behavior, contact a game server, or test a live endpoint.
 
 ### v335 GSFunctionsClient and TAdventure residual aliases
 

@@ -319,6 +319,51 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v336 GSFunctionsInitstaticscriptvars and TFormat2 residual comparison
+
+The v336 pass compares the next contiguous raw target block in the Format2
+parameter runtime. The target class is `giqpgaXJ_p`; source and target
+preserve the function-table registration, numeric conversion, string
+conversion, destructor ABI, and method order.
+
+| Source role | Spectron address | Applied alias | Match class |
+| --- | ---: | --- | --- |
+| `gsfunctions_initStaticScriptVars_void` | `0x2130b0` | `v18_gsfunctions_initStaticScriptVars_void` | count-37 registration; register-detail change |
+| `TFormat2_FormatParameters_getNextS32_void` | `0x213218` | `v18_TFormat2_FormatParameters_getNextS32_void` | exact numeric accessor |
+| `TFormat2_FormatParameters_getNextU32_void` | `0x2132a0` | `v18_TFormat2_FormatParameters_getNextU32_void` | exact numeric accessor |
+| `TFormat2_FormatParameters_getIndexedS32_int` | `0x213360` | `v18_TFormat2_FormatParameters_getIndexedS32_int` | exact indexed accessor |
+| `TFormat2_FormatParameters_getIndexedU32_int` | `0x2133d0` | `v18_TFormat2_FormatParameters_getIndexedU32_int` | exact indexed accessor |
+| `TFormat2_FormatParameters_TFormat2_FormatParameters` | `0x213440` | `v18_TFormat2_FormatParameters_TFormat2_FormatParameters` | D1/D2 cleanup; register-detail change |
+| `TFormat2_FormatParameters_getIndexedString_int` | `0x213454` | `v18_TFormat2_FormatParameters_getIndexedString_int` | rebuilt string-wrapper layout |
+| `TFormat2_FormatParameters_getNextString_void` | `0x2134f0` | `v18_TFormat2_FormatParameters_getNextString_void` | rebuilt string-wrapper layout |
+| `TFormat2_FormatParameters_TFormat2_FormatParameters__2` | `0x213598` | `v18_TFormat2_FormatParameters_TFormat2_FormatParameters__2` | deleting D0; register-detail change |
+
+The four numeric accessors preserve the same virtual getter at slot 224 and
+the same truncation logic. The string methods preserve virtual slot 232,
+temporary conversion, assignment, cleanup, and dummy fallback. The D1 and D0
+entries reset the vtable and clear the embedded member at offset 24, with D0
+then deleting the object. Direct pseudocode makes the target's expanded
+wrapper calls explainable rather than treating body size as a mismatch.
+
+All nine aliases were applied and verified after reopening the v336 database.
+The database has 11,707 functions, zero audited default names, 6,398
+translated aliases, 4,750 source-backed dynamic rows, 1,719 exact retained
+dynamic names, and 5,782 exact dynamic function starts. Its SHA-256 is
+`55662a1b9e5989c1e14350ab585015ccb6af0af123f12fab0dcab414f54ca199`.
+The complete comparison records are
+`artifacts/spectron_format2_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_format2_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_format2_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v336_format2_residual.json`,
+`artifacts/spectron_name_coverage_audit_v336.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v336.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v336.json`,
+`artifacts/spectron_semantic_translation_v336.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v336.json`.
+
+This comparison is static evidence. It does not change the runtime diagnosis,
+patch the APK, or contact a live endpoint.
+
 ## v335 GSFunctionsClient and TAdventure residual comparison
 
 The v335 pass compares four raw target entries in the GSFunctionsClient and

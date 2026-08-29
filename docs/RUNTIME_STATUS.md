@@ -3035,6 +3035,37 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v336 GSFunctionsInitstaticscriptvars and TFormat2 residuals
+
+The v336 revision is a static IDA checkpoint for the contiguous Format2
+parameter block at target `0x2130b0` through `0x213598`. It maps the count-37
+script-function initializer, four numeric accessors, the D1 and D0
+destructors, and two string accessors. Four rows are exact normalized matches,
+and the remaining five record the target's rebuilt wrapper layout or register
+detail.
+
+The aliases were applied to a fresh v335-derived database and verified after
+reopening. The v336 database has 11,707 functions, zero audited default names,
+6,398 translated aliases, 4,750 source-backed dynamic rows, and 1,719 exact
+retained dynamic names. All 5,782 defined dynamic symbols still resolve to
+exact IDA function starts. Its SHA-256 is
+`55662a1b9e5989c1e14350ab585015ccb6af0af123f12fab0dcab414f54ca199`.
+
+The records are
+`artifacts/spectron_format2_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_format2_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_format2_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v336_format2_residual.json`,
+`artifacts/spectron_name_coverage_audit_v336.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v336.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v336.json`,
+`artifacts/spectron_semantic_translation_v336.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v336.json`.
+
+This checkpoint did not change the verified loopback package, connector TLS
+result, or local protocol responder. No live endpoint was contacted, and no
+new runtime replay was performed for v336.
+
 ## Spectron 2.2 v335 GSFunctionsClient and TAdventure residuals
 
 The v335 revision is a static IDA checkpoint for four raw target entries in

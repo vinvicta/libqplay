@@ -800,6 +800,54 @@ generators are
 `tools/generate_spectron_format_parameters_property_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v326.py`.
 
+### v336 GSFunctionsInitstaticscriptvars and TFormat2 residual aliases
+
+The v336 pass starts from the verified v335 database and translates nine raw
+entries in the contiguous Format2 parameter block. Direct compact Hex-Rays
+pseudocode was captured for every source and target row.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | --- | --- | --- |
+| `0x20cd20` `gsfunctions_initStaticScriptVars_void` | `0x2130b0` `_Z10HWyrga7_Nrv` | `v18_gsfunctions_initStaticScriptVars_void` | count-37 function registration |
+| `0x20ce88` `TFormat2_FormatParameters_getNextS32_void` | `0x213218` `_ZN10giqpgaXJ_p10mgCpgamO9pEv` | `v18_TFormat2_FormatParameters_getNextS32_void` | next signed number |
+| `0x20cf10` `TFormat2_FormatParameters_getNextU32_void` | `0x2132a0` `_ZN10giqpgaXJ_p10tfvpgaJU3pEv` | `v18_TFormat2_FormatParameters_getNextU32_void` | next unsigned number |
+| `0x20cfd0` `TFormat2_FormatParameters_getIndexedS32_int` | `0x213360` `_ZN10giqpgaXJ_p10a67ogaLqLpEi` | `v18_TFormat2_FormatParameters_getIndexedS32_int` | indexed signed number |
+| `0x20d040` `TFormat2_FormatParameters_getIndexedU32_int` | `0x2133d0` `_ZN10giqpgaXJ_p10nn9ogamvMpEi` | `v18_TFormat2_FormatParameters_getIndexedU32_int` | indexed unsigned number |
+| `0x20d0b0` `TFormat2_FormatParameters_TFormat2_FormatParameters` | `0x213440` `_ZN10giqpgaXJ_pD1Ev` | `v18_TFormat2_FormatParameters_TFormat2_FormatParameters` | D1/D2 destructor |
+| `0x20d0c4` `TFormat2_FormatParameters_getIndexedString_int` | `0x213454` `_ZN10giqpgaXJ_p10Ym2oga0BGpEi` | `v18_TFormat2_FormatParameters_getIndexedString_int` | indexed string |
+| `0x20d148` `TFormat2_FormatParameters_getNextString_void` | `0x2134f0` `_ZN10giqpgaXJ_p10B8wpgaSu5pEv` | `v18_TFormat2_FormatParameters_getNextString_void` | next string |
+| `0x20d1d4` `TFormat2_FormatParameters_TFormat2_FormatParameters__2` | `0x213598` `_ZN10giqpgaXJ_pD0Ev` | `v18_TFormat2_FormatParameters_TFormat2_FormatParameters__2` | deleting D0 destructor |
+
+Four rows match the complete normalized feature record. The initializer and
+D1 rows differ only in register-detail allocation. The indexed and next
+string methods record the target's expanded wrapper conversion and cleanup
+layout. The D0 row was already an automatic semantic candidate and is
+recorded here as an explicit manual promotion.
+
+The v336 database contains 11,707 functions, zero audited default names,
+6,398 translated aliases, 419 target-only descriptive labels, 4,750
+source-backed dynamic rows, and 1,719 exact retained dynamic names. All 5,782
+defined dynamic symbols still resolve to exact IDA function starts. The saved
+database is
+`analysis/spectron_libqplay_translated_v336_format2_residual.i64` with
+SHA-256
+`55662a1b9e5989c1e14350ab585015ccb6af0af123f12fab0dcab414f54ca199`.
+
+The machine-readable records are
+`artifacts/spectron_format2_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_format2_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_format2_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v336_format2_residual.json`,
+`artifacts/spectron_name_coverage_audit_v336.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v336.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v336.json`,
+`artifacts/spectron_semantic_translation_v336.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v336.json`.
+
+This is a static IDA translation checkpoint. It did not patch the APK, rerun
+the loopback client, change TLS behavior, contact a game server, or test a
+live endpoint.
+
 ### v335 GSFunctionsClient and TAdventure residual aliases
 
 The v335 pass starts from the verified v334 database and translates four raw

@@ -1,0 +1,108 @@
+{
+  "anchor_count": 9,
+  "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_format2_residual_manual_translation_anchors_20260829.json",
+  "apply": true,
+  "artifact": "spectron_manual_anchor_application",
+  "comments_added": 9,
+  "expected_artifact": "spectron_format2_residual_manual_translation_anchors_20260829",
+  "failure_count": 0,
+  "failures": [],
+  "plan": [
+    {
+      "actual_name_after": "v18_gsfunctions_initStaticScriptVars_void",
+      "actual_name_before": "_Z10HWyrga7_Nrv",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x20cd20",
+      "original_name": "gsfunctions_initStaticScriptVars_void",
+      "proposed_name": "v18_gsfunctions_initStaticScriptVars_void",
+      "spectron_ea": "0x2130b0"
+    },
+    {
+      "actual_name_after": "v18_TFormat2_FormatParameters_getNextS32_void",
+      "actual_name_before": "_ZN10giqpgaXJ_p10mgCpgamO9pEv",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x20ce88",
+      "original_name": "TFormat2_FormatParameters_getNextS32_void",
+      "proposed_name": "v18_TFormat2_FormatParameters_getNextS32_void",
+      "spectron_ea": "0x213218"
+    },
+    {
+      "actual_name_after": "v18_TFormat2_FormatParameters_getNextU32_void",
+      "actual_name_before": "_ZN10giqpgaXJ_p10tfvpgaJU3pEv",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x20cf10",
+      "original_name": "TFormat2_FormatParameters_getNextU32_void",
+      "proposed_name": "v18_TFormat2_FormatParameters_getNextU32_void",
+      "spectron_ea": "0x2132a0"
+    },
+    {
+      "actual_name_after": "v18_TFormat2_FormatParameters_getIndexedS32_int",
+      "actual_name_before": "_ZN10giqpgaXJ_p10a67ogaLqLpEi",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x20cfd0",
+      "original_name": "TFormat2_FormatParameters_getIndexedS32_int",
+      "proposed_name": "v18_TFormat2_FormatParameters_getIndexedS32_int",
+      "spectron_ea": "0x213360"
+    },
+    {
+      "actual_name_after": "v18_TFormat2_FormatParameters_getIndexedU32_int",
+      "actual_name_before": "_ZN10giqpgaXJ_p10nn9ogamvMpEi",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x20d040",
+      "original_name": "TFormat2_FormatParameters_getIndexedU32_int",
+      "proposed_name": "v18_TFormat2_FormatParameters_getIndexedU32_int",
+      "spectron_ea": "0x2133d0"
+    },
+    {
+      "actual_name_after": "v18_TFormat2_FormatParameters_TFormat2_FormatParameters",
+      "actual_name_before": "_ZN10giqpgaXJ_pD1Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x20d0b0",
+      "original_name": "TFormat2_FormatParameters_TFormat2_FormatParameters",
+      "proposed_name": "v18_TFormat2_FormatParameters_TFormat2_FormatParameters",
+      "spectron_ea": "0x213440"
+    },
+    {
+      "actual_name_after": "v18_TFormat2_FormatParameters_getIndexedString_int",
+      "actual_name_before": "_ZN10giqpgaXJ_p10Ym2oga0BGpEi",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x20d0c4",
+      "original_name": "TFormat2_FormatParameters_getIndexedString_int",
+      "proposed_name": "v18_TFormat2_FormatParameters_getIndexedString_int",
+      "spectron_ea": "0x213454"
+    },
+    {
+      "actual_name_after": "v18_TFormat2_FormatParameters_getNextString_void",
+      "actual_name_before": "_ZN10giqpgaXJ_p10B8wpgaSu5pEv",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x20d148",
+      "original_name": "TFormat2_FormatParameters_getNextString_void",
+      "proposed_name": "v18_TFormat2_FormatParameters_getNextString_void",
+      "spectron_ea": "0x2134f0"
+    },
+    {
+      "actual_name_after": "v18_TFormat2_FormatParameters_TFormat2_FormatParameters__2",
+      "actual_name_before": "_ZN10giqpgaXJ_pD0Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x20d1d4",
+      "original_name": "TFormat2_FormatParameters_TFormat2_FormatParameters__2",
+      "proposed_name": "v18_TFormat2_FormatParameters_TFormat2_FormatParameters__2",
+      "spectron_ea": "0x213598"
+    }
+  ],
+  "renamed_count": 9,
+  "resolved_count": 9,
+  "save_path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v336_format2_residual.i64",
+  "saved": true,
+  "verified": true,
+  "verified_name_count": 9
+}
