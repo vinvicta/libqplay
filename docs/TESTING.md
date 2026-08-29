@@ -286,7 +286,8 @@ env IDADIR=/path/to/ida-pro-9.3 \
 The expected complete result has 6,770 named rows and 6,600 defined rows.
 Those defined rows resolve to 5,782 functions, 482 data items, and 336 other
 non-code items. The 170 undefined imports have no target address and are
-reported separately. The saved record is
+reported separately; 169 have exact IDA PLT veneer names and the `__sF` object
+has no in-library veneer. The saved record is
 `artifacts/spectron_dynamic_symbol_coverage_audit_20260828.json`.
 
 The dynamic table has 6,770 named rows, but only 5,782 section-defined

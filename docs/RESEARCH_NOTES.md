@@ -92,8 +92,10 @@ reviewed `v18_` source-backed alias is intentionally preferred, and 151 rows
 where another retained target alias occupies the same function address. The
 remaining seven rows are linker-boundary aliases such as `__bss_start__` and
 `_end`, which share two data boundaries, while 170 undefined imports have no
-address inside the library. This explains why the 988 non-function rows in
-the function join are not missing code labels.
+address inside the library. One of those imports is the `__sF` object, and the
+other 169 are represented by exact IDA PLT veneer names such as `.memcpy`.
+This explains why the 988 non-function rows in the function join are not
+missing code labels.
 
 The complete address-and-item record is
 `artifacts/spectron_dynamic_symbol_coverage_audit_20260828.json`, generated

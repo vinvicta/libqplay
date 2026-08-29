@@ -21,6 +21,7 @@ import ida_name
 import ida_nalt
 import ida_segment
 import idc
+import idautils
 
 
 REPO = Path("/home/v/Desktop/graal-decomp/libqplay")
@@ -91,6 +92,8 @@ def symbol_item(ea: int) -> dict:
 
 def dynamic_symbol_status(row: dict) -> str:
     if row["location_kind"] == "undefined_or_zero_value":
+        if row["ida_plt_stubs"]:
+            return "undefined_import_with_plt_stub"
         return "undefined_no_target_address"
     if row["ida_name_matches_dynamic_name"]:
         return "exact_retained_dynamic_name"
@@ -121,6 +124,11 @@ def main() -> None:
     location_counts = Counter()
     name_match_counts = Counter()
     status_counts = Counter()
+    function_name_eas = {}
+    for ea in idautils.Functions():
+        name = ida_name.get_name(ea)
+        if name:
+            function_name_eas.setdefault(name, []).append(ea)
     for symbol in target["named_symbols"]:
         row = {
             "dynamic_index": symbol["index"],
@@ -134,9 +142,23 @@ def main() -> None:
         }
         if row["is_defined"] and symbol["value"] != 0:
             row.update(symbol_item(symbol["value"]))
+            row["ida_plt_stubs"] = []
             exact_name = row["ida_name_at_value"] == symbol["name"]
             item_name_match = row["ida_item_name"] == symbol["name"]
         else:
+            plt_stubs = []
+            for stub_name, stub_kind in (
+                ("." + symbol["name"], "dot"),
+                ("j_." + symbol["name"], "jump"),
+            ):
+                for stub_ea in function_name_eas.get(stub_name, []):
+                    plt_stubs.append(
+                        {
+                            "name": stub_name,
+                            "kind": stub_kind,
+                            "ea": hex(stub_ea),
+                        }
+                    )
             row.update(
                 {
                     "ida_name_at_value": None,
@@ -146,6 +168,7 @@ def main() -> None:
                     "ida_function_end": None,
                     "segment_name": None,
                     "location_kind": "undefined_or_zero_value",
+                    "ida_plt_stubs": plt_stubs,
                 }
             )
             exact_name = False
@@ -182,6 +205,7 @@ def main() -> None:
             "A location without an exact name is a coverage candidate only after checking aliases and the symbol's type.",
             "A source-backed v18 alias is intentionally preferred over an obfuscated dynamic alias when the translated IDA database has reviewed cross-build evidence.",
             "A linker-boundary alias mismatch records multiple ELF boundary names at an IDA data item without replacing the useful existing item name.",
+            "An undefined import with a PLT stub is represented by the target dynamic name plus the exact IDA veneer name and address; the import itself still has no address in the library.",
             "This audit does not promote data, absolute symbols, or undefined imports to functions.",
         ],
         "rows": rows,

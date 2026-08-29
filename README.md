@@ -320,15 +320,17 @@ that are data, undefined imports, or other non-function entries. The twelve
 new names are retained obfuscated target names, not invented 1.8 source names.
 The complete address-and-item audit accounts for all 6,600 defined named rows:
 5,782 exact functions, 482 data items, and 336 other non-code items. It also
-identifies 170 undefined imports with no address in the library, 4,541
-addresses where a reviewed `v18_` alias is preferred, and seven linker
-boundary aliases that share two data locations.
+identifies 170 undefined imports with no address in the library. Exact PLT
+veneer names represent 169 of those imports, while the `__sF` object has no
+in-library veneer. The audit also records 4,541 addresses where a reviewed
+`v18_` alias is preferred and seven linker boundary aliases that share two
+data locations.
 The boundary, application, name-coverage, and joined-inventory records are
 `artifacts/spectron_dynamic_symbol_boundaries_20260828.json`,
 `artifacts/spectron_dynamic_function_application_20260828.json`,
 `artifacts/spectron_name_coverage_audit_v320_20260828.json`, and
 `artifacts/spectron_symbol_translation_inventory_20260828.json`. The complete
-address-and-item record is
+address-and-item record, including the import-to-PLT join, is
 `artifacts/spectron_dynamic_symbol_coverage_audit_20260828.json`.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,

@@ -17730,7 +17730,8 @@ def main():
             "linker_boundary_alias_mismatch": 7,
             "other_retained_target_name": 151,
             "source_backed_v18_alias": 4541,
-            "undefined_no_target_address": 170,
+            "undefined_import_with_plt_stub": 169,
+            "undefined_no_target_address": 1,
         },
     )
     check(
