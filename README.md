@@ -13,8 +13,8 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v312 Spectron database. It
-contains 11,695 functions and 392 remaining default `sub_` names. The v263
+The current documented translation frontier is the v317 Spectron database. It
+contains 11,695 functions and 373 remaining default `sub_` names. The v263
 revision added three reviewed cross-build aliases for the
 `GuiCanvas` dialog callback, `TGraalVar` trigger, and Facebook graph upload
 callbacks. The v264 revision added 22 target-only names for the Android and
@@ -285,6 +285,13 @@ and target TrueType driver class records select the same `size_reset` slot at
 `0x36d3e0` and `0x3801b0`, and the surrounding class records retain the shared
 `0xd470` displacement. The 99-instruction bodies match every recorded ARM64
 metric. The target now has 377 remaining default `sub_` names.
+The v317 revision translates four residual helpers: the libjpeg APP14 Adobe
+marker examiner, the GPC scanbeam-tree release and flatten routines, and the
+GPC tristrip-node allocation failure path. The two scanbeam routines share a
+`0x2e28` displacement between the source and target GPC regions. All four
+match normalized ARM64 shape, three match the complete recorded feature set,
+and the outlined failure path differs only in register-detail allocation. The
+target now has 373 remaining default `sub_` names.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -387,6 +394,8 @@ The current v315 database is kept locally as
 `analysis/spectron_libqplay_translated_v315_jcmarker.i64`.
 The current v316 database is kept locally as
 `analysis/spectron_libqplay_translated_v316_tt_size_reset.i64`.
+The current v317 database is kept locally as
+`analysis/spectron_libqplay_translated_v317_jpeg_gpc.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification

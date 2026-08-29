@@ -767,6 +767,12 @@ def main():
     spectron_checkpoint_v316 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v316.json"
     )
+    spectron_jpeg_gpc_residual_anchors = load_json(
+        "artifacts/spectron_jpeg_gpc_residual_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v317 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v317.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -17108,6 +17114,169 @@ def main():
         377,
     )
     check(
+        "Spectron JPEG/GPC residual artifact",
+        spectron_jpeg_gpc_residual_anchors["artifact"],
+        "spectron_jpeg_gpc_residual_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron JPEG/GPC residual network",
+        spectron_jpeg_gpc_residual_anchors["network_contacted"],
+        False,
+    )
+    jpeg_gpc_summary = spectron_jpeg_gpc_residual_anchors["summary"]
+    check("Spectron JPEG/GPC residual anchor count", jpeg_gpc_summary["anchor_count"], 4)
+    check(
+        "Spectron JPEG/GPC residual target set size",
+        jpeg_gpc_summary["unique_target_count"],
+        4,
+    )
+    check(
+        "Spectron JPEG/GPC residual high-confidence count",
+        jpeg_gpc_summary["high_confidence_count"],
+        4,
+    )
+    check(
+        "Spectron JPEG/GPC residual normalized count",
+        jpeg_gpc_summary["normalized_shape_exact_count"],
+        4,
+    )
+    check(
+        "Spectron JPEG/GPC residual full metric count",
+        jpeg_gpc_summary["full_metric_exact_count"],
+        3,
+    )
+    check(
+        "Spectron JPEG/GPC residual register-detail count",
+        jpeg_gpc_summary["register_detail_only_count"],
+        1,
+    )
+    check(
+        "Spectron JPEG/GPC residual source default count",
+        jpeg_gpc_summary["source_default_name_count"],
+        4,
+    )
+    check(
+        "Spectron JPEG/GPC residual target default count",
+        jpeg_gpc_summary["target_default_name_count"],
+        4,
+    )
+    check(
+        "Spectron JPEG/GPC residual JPEG count",
+        jpeg_gpc_summary["jpeg_marker_reader_count"],
+        1,
+    )
+    check(
+        "Spectron JPEG/GPC residual scanbeam count",
+        jpeg_gpc_summary["gpc_scanbeam_tree_count"],
+        2,
+    )
+    check(
+        "Spectron JPEG/GPC residual allocation diagnostic count",
+        jpeg_gpc_summary["gpc_allocation_diagnostic_count"],
+        1,
+    )
+    jpeg_gpc_expected = [
+        ("0xe0454", "0xdfae4", "v18_jpeg_examine_app14", []),
+        ("0x152200", "0x155028", "v18_gpc_free_sbtree", []),
+        ("0x152898", "0x1556c0", "v18_gpc_build_sbt", []),
+        (
+            "0xe01a0",
+            "0xdf830",
+            "v18_gpc_tristrip_node_malloc_failure",
+            ["register_detail_hash"],
+        ),
+    ]
+    jpeg_gpc_rows = spectron_jpeg_gpc_residual_anchors["anchors"]
+    check(
+        "Spectron JPEG/GPC residual row count",
+        len(jpeg_gpc_rows),
+        len(jpeg_gpc_expected),
+    )
+    for index, (source_ea, target_ea, proposed_name, differences) in enumerate(
+        jpeg_gpc_expected
+    ):
+        row = jpeg_gpc_rows[index]
+        check(
+            "Spectron JPEG/GPC residual source %d" % index,
+            row["original_ea"],
+            source_ea,
+        )
+        check(
+            "Spectron JPEG/GPC residual target %d" % index,
+            row["spectron_ea"],
+            target_ea,
+        )
+        check(
+            "Spectron JPEG/GPC residual name %d" % index,
+            row["proposed_name"],
+            proposed_name,
+        )
+        check(
+            "Spectron JPEG/GPC residual normalized %d" % index,
+            row["normalized_shape_equal"],
+            True,
+        )
+        check(
+            "Spectron JPEG/GPC residual metric differences %d" % index,
+            row["metric_differences"],
+            differences,
+        )
+    check(
+        "Spectron JPEG/GPC residual GPC displacement",
+        spectron_jpeg_gpc_residual_anchors["context"]["gpc_address_displacement"],
+        "0x2e28",
+    )
+    check(
+        "Spectron v317 checkpoint artifact",
+        spectron_checkpoint_v317["artifact"],
+        "spectron_translation_checkpoint_20260828_v317",
+    )
+    check(
+        "Spectron v317 checkpoint parent",
+        spectron_checkpoint_v317["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v316",
+    )
+    check(
+        "Spectron v317 checkpoint parent path",
+        spectron_checkpoint_v317["parent_checkpoint"]["path"],
+        "artifacts/spectron_translation_checkpoint_20260828_v316.json",
+    )
+    check(
+        "Spectron v317 checkpoint database hash",
+        spectron_checkpoint_v317["database"]["sha256"],
+        "0d39dce494c293094f370237decece95f27b176d3e7f477be8f50b7ed402575c",
+    )
+    check(
+        "Spectron v317 checkpoint database close-reopen",
+        spectron_checkpoint_v317["database"]["close_reopen_verified"],
+        True,
+    )
+    check(
+        "Spectron v317 checkpoint function count",
+        spectron_checkpoint_v317["database"]["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v317 checkpoint default sub count",
+        spectron_checkpoint_v317["database"]["default_sub_function_count"],
+        373,
+    )
+    check(
+        "Spectron v317 anchor count",
+        spectron_checkpoint_v317["jpeg_gpc_residual_anchors"]["anchor_count"],
+        4,
+    )
+    check(
+        "Spectron v317 verified name count",
+        spectron_checkpoint_v317["jpeg_gpc_residual_anchors"]["verified_name_count"],
+        4,
+    )
+    check(
+        "Spectron v317 reopen failures",
+        spectron_checkpoint_v317["jpeg_gpc_residual_anchors"]["reopen_failure_count"],
+        0,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -17497,6 +17666,8 @@ def main():
         spectron_checkpoint_v315,
         spectron_freetype_tt_size_reset_anchor,
         spectron_checkpoint_v316,
+        spectron_jpeg_gpc_residual_anchors,
+        spectron_checkpoint_v317,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
