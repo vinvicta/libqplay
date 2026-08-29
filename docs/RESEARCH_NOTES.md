@@ -261,6 +261,57 @@ This pass changed only the private IDA copy and archive. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
 
+## 2026-08-29: THashIntVar destructor pair, v333
+
+The next two raw target entries after the translated `THTMLColors` methods
+are `_ZN10SrwA5a7UkjD1Ev` at `0x11df60` and `_ZN10SrwA5a7UkjD0Ev` at
+`0x11df74`. The source block at `0x11b438` and `0x11b44c` is named
+`THashIntVar_THashIntVar` and `THashIntVar_THashIntVar__2`. This is a small
+but useful ABI pair because the source alternative name exposes D2 and the
+target names expose D1 and D0 directly.
+
+| Source boundary | Target boundary | Recovered source role | Evidence summary |
+| ---: | ---: | --- | --- |
+| `0x11b438` | `0x11df60` | `THashIntVar_THashIntVar` | vtable reset and member clear |
+| `0x11b44c` | `0x11df74` | `THashIntVar_THashIntVar__2` | member clear followed by delete |
+
+The complete destructor resets the class vtable and clears the string-like
+member at offset 8. The deleting form performs the same cleanup and then
+calls `operator delete`. On the source side the member is a `TString`; on the
+target side it is the rebuilt `CanTfaz6bZ` wrapper. The feature records match
+in size, instruction count, basic-block shape, normalized opcode sequence,
+register shape, and call structure. Only `register_detail_hash` differs.
+
+The local sequence provides a second check. The target pair follows the
+already translated `THTMLColors` methods and immediately precedes the
+translated `TImageAnimation_createFromStream_TStream` boundary. The source
+has the same `THashIntVar` pair between its color-table methods and image
+animation constructor. Direct compact Hex-Rays pseudocode confirms both
+cleanup bodies, so the aliases are high-confidence manual anchors rather than
+positional guesses.
+
+The aliases were applied to a fresh v332-derived database. Both renames and
+both evidence comments succeeded, and a close and reopen verified both names.
+The resulting database has 11,707 functions, zero audited default names,
+6,384 translated aliases, 4,735 source-backed dynamic rows, 1,733 exact
+retained dynamic names, and 5,782 exact dynamic function starts.
+
+The v333 database hash is
+`c6f31412206a9a893fedf594fac90dff2f13be69f2db28fcda80cc2c67ad7f4d`.
+The evidence is stored in
+`artifacts/spectron_hashintvar_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_hashintvar_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_hashintvar_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v333_hashintvar_residual.json`,
+`artifacts/spectron_name_coverage_audit_v333.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v333.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v333.json`,
+`artifacts/spectron_semantic_translation_v333.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v333.json`.
+
+This was static analysis only. It did not patch the APK, rerun the loopback
+client, alter TLS behavior, contact a game server, or test a live endpoint.
+
 ## 2026-08-29: TPanelOperation residual block, v332
 
 The v331 static-variable sequence led directly into a compact drawing-panel

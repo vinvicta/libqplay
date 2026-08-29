@@ -319,6 +319,45 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v333 THashIntVar residual comparison
+
+The v333 pass compares the two raw destructor boundaries immediately after
+the translated `THTMLColors` methods and before the translated
+`TImageAnimation` family.
+
+| Source role | Spectron address | Applied alias | Match class |
+| --- | ---: | --- | --- |
+| `THashIntVar_THashIntVar` | `0x11df60` | `v18_THashIntVar_THashIntVar` | complete D1/D2 cleanup; register-detail change |
+| `THashIntVar_THashIntVar__2` | `0x11df74` | `v18_THashIntVar_THashIntVar__2` | deleting D0 cleanup; register-detail change |
+
+Both bodies reset the vtable and clear their string-like member at offset 8.
+The deleting form then calls `operator delete`. The source and target have
+the same normalized instruction count, control-flow shape, opcode sequence,
+register shape, and cleanup order. The only metric difference is
+`register_detail_hash`, caused by the target's rebuilt `CanTfaz6bZ` wrapper.
+The source alternative C++ name and target D1 or D0 names establish the ABI
+relationship, while the surrounding `THTMLColors` and `TImageAnimation`
+methods confirm the class-local placement.
+
+Both aliases were applied and verified after reopening the v333 database. The
+v333 database has 11,707 functions, zero audited default names, 6,384
+translated aliases, 4,735 source-backed dynamic rows, 1,733 exact retained
+target names, and 5,782 exact dynamic function starts. Its SHA-256 is
+`c6f31412206a9a893fedf594fac90dff2f13be69f2db28fcda80cc2c67ad7f4d`.
+The complete comparison records are
+`artifacts/spectron_hashintvar_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_hashintvar_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_hashintvar_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v333_hashintvar_residual.json`,
+`artifacts/spectron_name_coverage_audit_v333.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v333.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v333.json`,
+`artifacts/spectron_semantic_translation_v333.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v333.json`.
+
+This comparison is static evidence. It does not change the runtime diagnosis,
+patch the APK, or contact a live endpoint.
+
 ## v332 TPanelOperation residual comparison
 
 The v332 pass compares the next complete drawing-panel sequence after the

@@ -3035,6 +3035,41 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v333 THashIntVar translation
+
+The v333 revision is a static IDA checkpoint for the two raw destructor
+entries between the translated `THTMLColors` and `TImageAnimation` methods.
+It translates the complete and deleting `THashIntVar` pair to the target
+`SrwA5a7Ukj` D1 and D0 boundaries. Both bodies reset the vtable, clear the
+member at offset 8, and the deleting form calls `operator delete`. It does
+not change the previously verified loopback package, connector TLS result,
+or local protocol responder.
+
+Both aliases were applied to a fresh v332-derived database and verified after
+reopening. The two rows are high-confidence layout matches because only the
+register-detail hash changes between source and target. The v333 database has
+11,707 functions, zero audited default names, 6,384 translated aliases, 4,735
+source-backed dynamic rows, and 1,733 exact retained target names. All 5,782
+defined dynamic function symbols still resolve to exact IDA function starts.
+
+The database is
+`analysis/spectron_libqplay_translated_v333_hashintvar_residual.i64` with
+SHA-256
+`c6f31412206a9a893fedf594fac90dff2f13be69f2db28fcda80cc2c67ad7f4d`.
+The records are
+`artifacts/spectron_hashintvar_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_hashintvar_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_hashintvar_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v333_hashintvar_residual.json`,
+`artifacts/spectron_name_coverage_audit_v333.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v333.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v333.json`,
+`artifacts/spectron_semantic_translation_v333.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v333.json`.
+
+This checkpoint is static evidence only. No APK was patched, no live endpoint
+was contacted, and no new runtime replay was performed for v333.
+
 ## Spectron 2.2 v332 TPanelOperation translation
 
 The v332 revision is a static IDA checkpoint for the next contiguous drawing

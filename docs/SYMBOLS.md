@@ -425,6 +425,33 @@ records are
 `artifacts/spectron_semantic_translation_v326.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v326.json`.
 
+### v333 THashIntVar residual aliases
+
+The v333 pass adds two semantic aliases to the private Spectron IDA database.
+The raw target identifiers are kept so the aliases remain traceable to the
+stripped build.
+
+| Spectron address | Raw target symbol | Applied alias | Recovered role |
+| ---: | --- | --- | --- |
+| `0x11df60` | `_ZN10SrwA5a7UkjD1Ev` | `v18_THashIntVar_THashIntVar` | complete THashIntVar D1/D2 destructor |
+| `0x11df74` | `_ZN10SrwA5a7UkjD0Ev` | `v18_THashIntVar_THashIntVar__2` | deleting THashIntVar D0 destructor |
+
+The source alternatives are `THashIntVar` D2 and D0 destructor names. Both
+source and target reset the vtable and clear the embedded member at offset 8;
+the D0 form then calls `operator delete`. Both rows are high-confidence
+pseudocode-backed layout aliases. Their normalized metrics match except for
+register-detail allocation caused by the target's rebuilt string wrapper.
+The v333 records are
+`artifacts/spectron_hashintvar_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_hashintvar_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_hashintvar_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v333_hashintvar_residual.json`,
+`artifacts/spectron_name_coverage_audit_v333.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v333.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v333.json`,
+`artifacts/spectron_semantic_translation_v333.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v333.json`.
+
 ### v332 TPanelOperation residual aliases
 
 The v332 pass adds 20 semantic aliases to the private Spectron IDA database.

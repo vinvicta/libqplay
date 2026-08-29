@@ -13,7 +13,7 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v332 Spectron database. It
+The current documented translation frontier is the v333 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -135,6 +135,16 @@ script-machine, and variable roles directly: `LBgVgaqANQ`, `MpGzgariDy`,
 `v18_` aliases, 4,679 source-backed dynamic rows, and 1,776 exact retained
 dynamic names. It is a static IDA checkpoint and has not been used for a new
 runtime APK replay.
+
+The v333 revision continues immediately into the residual `THashIntVar`
+destructor pair immediately before the translated `TImageAnimation` family.
+It adds two high-confidence aliases for the complete and deleting destructor
+boundaries. Both rows have direct source and target Hex-Rays pseudocode and
+preserve the same vtable reset, member-clear, and delete sequence. The target
+wrapper rebuild changes only the register-detail metric. The v333 database
+contains 6,384 reviewed `v18_` aliases, 4,735 source-backed dynamic rows, and
+1,733 exact retained dynamic names. It is a static IDA checkpoint and has not
+been used for a new runtime APK replay.
 
 The v332 revision continues immediately into the drawing-panel runtime. It
 adds 20 high-confidence aliases for the five `TPanelOperation::getBounds`
@@ -752,6 +762,57 @@ target-only functions, with zero failures. Reopening the fresh copy verified
 all four names. This was a static translation pass only. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
+
+### v333 THashIntVar residual aliases
+
+The v333 pass starts from the verified v332 database and translates the
+obfuscated `SrwA5a7Ukj` destructor pair immediately after the translated
+`THTMLColors` block and before `TImageAnimation`. The source database uses
+historical constructor-shaped names, but its alternative C++ names and the
+target's explicit `D1` and `D0` symbols identify the pair unambiguously.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | --- | --- | --- |
+| `0x11b438` `THashIntVar_THashIntVar` | `0x11df60` `_ZN10SrwA5a7UkjD1Ev` | `v18_THashIntVar_THashIntVar` | complete D1/D2 destructor |
+| `0x11b44c` `THashIntVar_THashIntVar__2` | `0x11df74` `_ZN10SrwA5a7UkjD0Ev` | `v18_THashIntVar_THashIntVar__2` | deleting D0 destructor |
+
+Both source and target reset the class vtable and clear the string-like member
+at offset 8. The deleting forms then call `operator delete`. The target member
+is the rebuilt `CanTfaz6bZ` wrapper rather than the source `TString`, which
+explains the register-detail difference while leaving the instruction shape,
+cleanup order, and class-local placement intact. The pair follows the
+translated `THTMLColors` methods and precedes the translated image-animation
+constructor, providing an additional boundary check.
+
+Both aliases were applied to a fresh v332-derived copy and verified after
+reopening. The v333 name audit reports 6,384 translated aliases, 419
+target-only descriptive labels, 845 retained target names, seven JNI exports,
+4,052 other IDA or PLT names, and zero default names. Dynamic coverage reports
+4,735 source-backed aliases and 1,733 exact retained dynamic names. The
+defined dynamic boundary audit still resolves all 5,782 function symbols to
+exact IDA starts.
+
+The v333 database is
+`analysis/spectron_libqplay_translated_v333_hashintvar_residual.i64` with
+SHA-256
+`c6f31412206a9a893fedf594fac90dff2f13be69f2db28fcda80cc2c67ad7f4d`.
+The records are
+`artifacts/spectron_hashintvar_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_hashintvar_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_hashintvar_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v333_hashintvar_residual.json`,
+`artifacts/spectron_name_coverage_audit_v333.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v333.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v333.json`,
+`artifacts/spectron_semantic_translation_v333.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v333.json`.
+
+The reusable helpers are
+`tools/generate_spectron_hashintvar_residual_anchors.py`,
+`tools/carry_forward_spectron_semantic_translation_v333.py`, and
+`tools/generate_spectron_translation_checkpoint_v333.py`. This pass was
+static analysis only. It did not patch the APK, rerun the loopback client,
+alter TLS behavior, contact a game server, or test a live endpoint.
 
 ### v332 TPanelOperation residual aliases
 

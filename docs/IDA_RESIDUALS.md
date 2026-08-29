@@ -800,6 +800,44 @@ generators are
 `tools/generate_spectron_format_parameters_property_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v326.py`.
 
+### v333 THashIntVar residual aliases
+
+The v333 pass starts from the verified v332 database and translates the
+obfuscated `SrwA5a7Ukj` destructor pair between the translated `THTMLColors`
+and `TImageAnimation` blocks. The source alternative C++ name and target D1
+or D0 symbols establish the destructor ABI relationship.
+
+| Source role | Spectron address | Applied alias | Review result |
+| --- | ---: | --- | --- |
+| `THashIntVar_THashIntVar` | `0x11df60` | `v18_THashIntVar_THashIntVar` | complete D1/D2 cleanup; register-detail change |
+| `THashIntVar_THashIntVar__2` | `0x11df74` | `v18_THashIntVar_THashIntVar__2` | deleting D0 cleanup; register-detail change |
+
+Both bodies reset the vtable and clear the embedded string-like member at
+offset 8. The deleting body then calls `operator delete`. The target uses its
+rebuilt `CanTfaz6bZ` wrapper, so both rows differ only in register-detail
+allocation while preserving normalized control-flow shape and cleanup order.
+Direct compact Hex-Rays pseudocode is recorded for both source and target
+rows. Both aliases were applied to a fresh v332-derived copy and verified
+after reopening.
+
+The v333 database contains 11,707 functions, zero audited default names,
+6,384 translated aliases, 4,735 source-backed dynamic rows, and 1,733 exact
+retained dynamic names. Its defined dynamic audit still resolves all 5,782
+function symbols to exact IDA starts. The database is
+`analysis/spectron_libqplay_translated_v333_hashintvar_residual.i64` with
+SHA-256
+`c6f31412206a9a893fedf594fac90dff2f13be69f2db28fcda80cc2c67ad7f4d`.
+The records are
+`artifacts/spectron_hashintvar_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_hashintvar_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_hashintvar_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v333_hashintvar_residual.json`,
+`artifacts/spectron_name_coverage_audit_v333.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v333.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v333.json`,
+`artifacts/spectron_semantic_translation_v333.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v333.json`.
+
 ### v332 TPanelOperation residual aliases
 
 The v332 pass starts from the verified v331 database and translates the next
