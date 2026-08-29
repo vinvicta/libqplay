@@ -13,7 +13,7 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v331 Spectron database. It
+The current documented translation frontier is the v332 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -135,6 +135,17 @@ script-machine, and variable roles directly: `LBgVgaqANQ`, `MpGzgariDy`,
 `v18_` aliases, 4,679 source-backed dynamic rows, and 1,776 exact retained
 dynamic names. It is a static IDA checkpoint and has not been used for a new
 runtime APK replay.
+
+The v332 revision continues immediately into the drawing-panel runtime. It
+adds 20 high-confidence aliases for the five `TPanelOperation::getBounds`
+methods, the empty D1 and deleting D0 boundaries for line, curve, and clear
+operations, the `TDrawingPanelProperties` destructor family, and the derived
+rectangle, stretched-image, and image operation cleanup families. All 20 rows
+have direct source and target Hex-Rays pseudocode. Thirteen are exact
+normalized feature matches and seven differ only in register-detail
+allocation. The v332 database contains 6,382 reviewed `v18_` aliases, 4,732
+source-backed dynamic rows, and 1,735 exact retained dynamic names. It is a
+static IDA checkpoint and has not been used for a new runtime APK replay.
 
 The v331 revision continues immediately into the static-variable runtime. It
 adds 22 high-confidence aliases for the universe initializer, the
@@ -741,6 +752,87 @@ target-only functions, with zero failures. Reopening the fresh copy verified
 all four names. This was a static translation pass only. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
+
+### v332 TPanelOperation residual aliases
+
+The v332 pass starts from the verified v331 database and translates the next
+contiguous drawing-panel sequence. The target class names are obfuscated, but
+the source and target retain the same operation fields, rectangle-return
+layout, C++ destructor ABI forms, base cleanup calls, and class-local order.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | --- | --- | --- |
+| `0x11a810` | `0x11d318` `_ZN10eHD62a2_be10rMBEgasoMCEv` | `v18_TPanelOperation_Clear_getBounds_void` | clear rectangle bounds |
+| `0x11a83c` | `0x11d344` `_ZN10xKbb3aMu1h10rMBEgasoMCEv` | `v18_TPanelOperation_DrawCurve_getBounds_void` | curve endpoint bounds |
+| `0x11a8cc` | `0x11d3d4` `_ZN10AK892aVY8g10rMBEgasoMCEv` | `v18_TPanelOperation_DrawStretched_getBounds_void` | stretched operation bounds |
+| `0x11a8f8` | `0x11d400` `_ZN10m0ka3aUhjh10rMBEgasoMCEv` | `v18_TPanelOperation_DrawLine_getBounds_void` | line endpoint bounds |
+| `0x11a95c` | `0x11d464` `_ZN10PO392awP4g10rMBEgasoMCEv` | `v18_TPanelOperation_DrawText_getBounds_void` | text bounds result |
+| `0x11a974` | `0x11d47c` `_ZN10m0ka3aUhjhD1Ev` | `v18_TPanelOperation_DrawLine_TPanelOperation_DrawLine` | line D1 boundary |
+| `0x11a978` | `0x11d480` `_ZN10xKbb3aMu1hD1Ev` | `v18_TPanelOperation_DrawCurve_TPanelOperation_DrawCurve` | curve D1 boundary |
+| `0x11a97c` | `0x11d484` `_ZN10eHD62a2_beD1Ev` | `v18_TPanelOperation_Clear_TPanelOperation_Clear` | clear D1 boundary |
+| `0x11aa28` | `0x11d530` `_ZN10m0ka3aUhjhD0Ev` | `v18_TPanelOperation_DrawLine_TPanelOperation_DrawLine__2` | line deleting D0 |
+| `0x11aa2c` | `0x11d534` `_ZN10xKbb3aMu1hD0Ev` | `v18_TPanelOperation_DrawCurve_TPanelOperation_DrawCurve__2` | curve deleting D0 |
+| `0x11aa30` | `0x11d538` `_ZN10eHD62a2_beD0Ev` | `v18_TPanelOperation_Clear_TPanelOperation_Clear__2` | clear deleting D0 |
+| `0x11a9c4` | `0x11d4cc` `_ZN20V8fxgahcBwPropertiesD2Ev` | `v18_TDrawingPanelProperties_TDrawingPanelProperties` | properties D2 cleanup |
+| `0x11a9e0` | `0x11d4e8` `_ZThn16_N20V8fxgahcBwPropertiesD1Ev` | `v18_non_virtual_thunk_to_TDrawingPanelProperties_TDrawingPanelProperties` | properties D1 thunk |
+| `0x11a9e8` | `0x11d4f0` `_ZN20V8fxgahcBwPropertiesD0Ev` | `v18_TDrawingPanelProperties_TDrawingPanelProperties__2` | properties deleting D0 |
+| `0x11aa20` | `0x11d528` `_ZThn16_N20V8fxgahcBwPropertiesD0Ev` | `v18_non_virtual_thunk_to_TDrawingPanelProperties_TDrawingPanelProperties__2` | properties D0 thunk |
+| `0x11ab28` | `0x11d5ec` `_ZN10AK892aVY8gD1Ev` | `v18_TPanelOperation_DrawRectangle_TPanelOperation_DrawRectangle` | rectangle resource cleanup |
+| `0x11ab3c` | `0x11d600` `_ZN10AK892aVY8gD0Ev` | `v18_TPanelOperation_DrawRectangle_TPanelOperation_DrawRectangle__2` | rectangle deleting D0 |
+| `0x11aae4` | `0x11d630` `_ZN10zfJa3aJGDhD2Ev` | `v18_TPanelOperation_DrawStretched_TPanelOperation_DrawStretched` | stretched resource cleanup |
+| `0x11aaf8` | `0x11d644` `_ZN10zfJa3aJGDhD0Ev` | `v18_TPanelOperation_DrawStretched_TPanelOperation_DrawStretched__2` | stretched deleting D0 |
+| `0x11ab80` | `0x11d688` `_ZN10EbOa3arQHhD0Ev` | `v18_TPanelOperation_DrawImage_TPanelOperation_DrawImage__2` | image deleting D0 |
+
+The five bounds methods preserve the operation-field offsets and the four
+integer result fields. `Clear` and `DrawStretched` copy the stored rectangle;
+`DrawCurve` and `DrawLine` select endpoint minima and absolute extents; and
+`DrawText` preserves the source's zeroed bounds result. These five rows are
+exact normalized ARM64 matches, including instruction count, control-flow
+shape, and register-aware details.
+
+The source database uses constructor-shaped IDA names for several four-byte
+destructor boundaries. The direct source alternative names and the target
+`D1` or `D0` symbols make the ABI form explicit. The three D1 rows are empty
+entry boundaries, while the three D0 rows call `operator delete`, matching the
+source sequence and the target's neighboring virtual destructor entries.
+
+The `V8fxgahcBwProperties` family resets the primary and secondary vtable
+pointers, calls the base `TProperties` destructor, and releases the receiver
+for D0. Its two thunks subtract 16 bytes from the secondary receiver. The
+rectangle, stretched-image, and image destructor rows preserve the embedded
+`TResourceFileUser` cleanup at the corresponding object offsets and the D0
+deletion step. The target's obfuscation changes only register-detail records
+for these seven layout rows.
+
+All 20 aliases were applied to a fresh v331-derived copy and verified after
+reopening. The v332 name audit reports 6,382 translated aliases, 419
+target-only descriptive labels, 847 retained target names, seven JNI exports,
+4,052 other IDA or PLT names, and zero default names. Dynamic coverage reports
+4,732 source-backed aliases and 1,735 exact retained dynamic names. The
+defined dynamic boundary audit still resolves all 5,782 function symbols to
+exact IDA starts.
+
+The v332 database is
+`analysis/spectron_libqplay_translated_v332_paneloperation_residual.i64` with
+SHA-256
+`f77edbe5076211bd3bd5a18c549f0c3cbaeeb88d2da7bc9c52a2733c1d87cdc2`.
+The records are
+`artifacts/spectron_paneloperation_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_paneloperation_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_paneloperation_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v332_paneloperation_residual.json`,
+`artifacts/spectron_name_coverage_audit_v332.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v332.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v332.json`,
+`artifacts/spectron_semantic_translation_v332.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v332.json`.
+
+The reusable helpers are
+`tools/generate_spectron_paneloperation_residual_anchors.py`,
+`tools/carry_forward_spectron_semantic_translation_v332.py`, and
+`tools/generate_spectron_translation_checkpoint_v332.py`. This pass was
+static analysis only. It did not patch the APK, rerun the loopback client,
+alter TLS behavior, contact a game server, or test a live endpoint.
 
 ### v331 static-variable runtime aliases
 

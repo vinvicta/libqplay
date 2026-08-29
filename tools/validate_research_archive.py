@@ -1076,6 +1076,33 @@ def main():
     spectron_checkpoint_v331 = load_json(
         "artifacts/spectron_translation_checkpoint_20260829_v331.json"
     )
+    spectron_paneloperation_residual_anchors_v332 = load_json(
+        "artifacts/spectron_paneloperation_residual_manual_translation_anchors_20260829.json"
+    )
+    spectron_paneloperation_residual_application_v332 = load_json(
+        "artifacts/spectron_paneloperation_residual_manual_translation_application_20260829.json"
+    )
+    spectron_paneloperation_residual_verification_v332 = load_json(
+        "artifacts/spectron_paneloperation_residual_manual_translation_verification_20260829.json"
+    )
+    spectron_name_coverage_v332 = load_json(
+        "artifacts/spectron_name_coverage_audit_v332.json"
+    )
+    spectron_dynamic_boundaries_v332 = load_json(
+        "artifacts/spectron_dynamic_symbol_boundaries_v332.json"
+    )
+    spectron_dynamic_symbol_coverage_v332 = load_json(
+        "artifacts/spectron_dynamic_symbol_coverage_audit_v332.json"
+    )
+    spectron_semantic_translation_v332 = load_json(
+        "artifacts/spectron_semantic_translation_v332.json"
+    )
+    spectron_features_v332 = load_json(
+        "artifacts/spectron_features_v332_paneloperation_residual.json"
+    )
+    spectron_checkpoint_v332 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260829_v332.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -21115,6 +21142,294 @@ def main():
         },
     )
     check(
+        "Spectron v332 TPanelOperation residual anchor artifact",
+        spectron_paneloperation_residual_anchors_v332["artifact"],
+        "spectron_paneloperation_residual_manual_translation_anchors_20260829",
+    )
+    check(
+        "Spectron v332 TPanelOperation residual anchor network",
+        spectron_paneloperation_residual_anchors_v332["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v332 TPanelOperation residual anchor summary",
+        spectron_paneloperation_residual_anchors_v332["summary"],
+        {
+            "anchor_count": 20,
+            "exact_metric_anchor_count": 13,
+            "high_confidence_count": 20,
+            "layout_change_anchor_count": 7,
+            "new_context_anchor_count": 17,
+            "semantic_promotion_count": 3,
+            "source_pseudocode_count": 20,
+            "target_pseudocode_count": 20,
+        },
+    )
+    check(
+        "Spectron v332 TPanelOperation residual source aliases",
+        [row["proposed_name"] for row in spectron_paneloperation_residual_anchors_v332["anchors"]],
+        [
+            "v18_TPanelOperation_Clear_getBounds_void",
+            "v18_TPanelOperation_DrawCurve_getBounds_void",
+            "v18_TPanelOperation_DrawStretched_getBounds_void",
+            "v18_TPanelOperation_DrawLine_getBounds_void",
+            "v18_TPanelOperation_DrawText_getBounds_void",
+            "v18_TPanelOperation_DrawLine_TPanelOperation_DrawLine",
+            "v18_TPanelOperation_DrawCurve_TPanelOperation_DrawCurve",
+            "v18_TPanelOperation_Clear_TPanelOperation_Clear",
+            "v18_TPanelOperation_DrawLine_TPanelOperation_DrawLine__2",
+            "v18_TPanelOperation_DrawCurve_TPanelOperation_DrawCurve__2",
+            "v18_TPanelOperation_Clear_TPanelOperation_Clear__2",
+            "v18_TDrawingPanelProperties_TDrawingPanelProperties",
+            "v18_non_virtual_thunk_to_TDrawingPanelProperties_TDrawingPanelProperties",
+            "v18_TDrawingPanelProperties_TDrawingPanelProperties__2",
+            "v18_non_virtual_thunk_to_TDrawingPanelProperties_TDrawingPanelProperties__2",
+            "v18_TPanelOperation_DrawRectangle_TPanelOperation_DrawRectangle",
+            "v18_TPanelOperation_DrawRectangle_TPanelOperation_DrawRectangle__2",
+            "v18_TPanelOperation_DrawStretched_TPanelOperation_DrawStretched",
+            "v18_TPanelOperation_DrawStretched_TPanelOperation_DrawStretched__2",
+            "v18_TPanelOperation_DrawImage_TPanelOperation_DrawImage__2",
+        ],
+    )
+    check(
+        "Spectron v332 TPanelOperation residual target addresses",
+        [row["spectron_ea"] for row in spectron_paneloperation_residual_anchors_v332["anchors"]],
+        [
+            "0x11d318",
+            "0x11d344",
+            "0x11d3d4",
+            "0x11d400",
+            "0x11d464",
+            "0x11d47c",
+            "0x11d480",
+            "0x11d484",
+            "0x11d530",
+            "0x11d534",
+            "0x11d538",
+            "0x11d4cc",
+            "0x11d4e8",
+            "0x11d4f0",
+            "0x11d528",
+            "0x11d5ec",
+            "0x11d600",
+            "0x11d630",
+            "0x11d644",
+            "0x11d688",
+        ],
+    )
+    check(
+        "Spectron v332 TPanelOperation residual application counts",
+        {
+            "artifact": spectron_paneloperation_residual_application_v332["artifact"],
+            "anchor_count": spectron_paneloperation_residual_application_v332["anchor_count"],
+            "resolved_count": spectron_paneloperation_residual_application_v332["resolved_count"],
+            "renamed_count": spectron_paneloperation_residual_application_v332["renamed_count"],
+            "comments_added": spectron_paneloperation_residual_application_v332["comments_added"],
+            "failure_count": spectron_paneloperation_residual_application_v332["failure_count"],
+            "saved": spectron_paneloperation_residual_application_v332["saved"],
+            "verified": spectron_paneloperation_residual_application_v332["verified"],
+            "verified_name_count": spectron_paneloperation_residual_application_v332["verified_name_count"],
+        },
+        {
+            "artifact": "spectron_manual_anchor_application",
+            "anchor_count": 20,
+            "resolved_count": 20,
+            "renamed_count": 20,
+            "comments_added": 20,
+            "failure_count": 0,
+            "saved": True,
+            "verified": True,
+            "verified_name_count": 20,
+        },
+    )
+    check(
+        "Spectron v332 TPanelOperation residual reopen verification",
+        {
+            "artifact": spectron_paneloperation_residual_verification_v332["artifact"],
+            "anchor_count": spectron_paneloperation_residual_verification_v332["anchor_count"],
+            "failure_count": spectron_paneloperation_residual_verification_v332["failure_count"],
+            "function_count": spectron_paneloperation_residual_verification_v332["function_count"],
+            "verified": spectron_paneloperation_residual_verification_v332["verified"],
+            "verified_name_count": spectron_paneloperation_residual_verification_v332["verified_name_count"],
+        },
+        {
+            "artifact": "spectron_manual_anchor_reopen_verification",
+            "anchor_count": 20,
+            "failure_count": 0,
+            "function_count": 11707,
+            "verified": True,
+            "verified_name_count": 20,
+        },
+    )
+    check(
+        "Spectron v332 name audit",
+        {
+            "artifact": spectron_name_coverage_v332["artifact"],
+            "network_contacted": spectron_name_coverage_v332["network_contacted"],
+            "input_sha256": spectron_name_coverage_v332["input_sha256"],
+            "function_count": spectron_name_coverage_v332["function_count"],
+            "default_name_count": spectron_name_coverage_v332["default_name_count"],
+            "name_origins": spectron_name_coverage_v332["name_origins"],
+        },
+        {
+            "artifact": "spectron_name_coverage_audit",
+            "network_contacted": False,
+            "input_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+            "function_count": 11707,
+            "default_name_count": 0,
+            "name_origins": {
+                "ida_named_or_other": 4052,
+                "target_jni_export": 7,
+                "target_named_export": 847,
+                "target_only_descriptive": 419,
+                "translated_v18_alias": 6382,
+            },
+        },
+    )
+    check(
+        "Spectron v332 dynamic boundary counts",
+        {
+            "artifact": spectron_dynamic_boundaries_v332["artifact"],
+            "network_contacted": spectron_dynamic_boundaries_v332["network_contacted"],
+            "input_sha256": spectron_dynamic_boundaries_v332["input_sha256"],
+            "defined_function_symbol_count": spectron_dynamic_boundaries_v332["defined_function_symbol_count"],
+            "ida_exact_start_count": spectron_dynamic_boundaries_v332["ida_exact_start_count"],
+            "ida_missing_exact_start_count": spectron_dynamic_boundaries_v332["ida_missing_exact_start_count"],
+            "row_count": len(spectron_dynamic_boundaries_v332["rows"]),
+        },
+        {
+            "artifact": "spectron_dynamic_symbol_boundary_audit",
+            "network_contacted": False,
+            "input_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+            "defined_function_symbol_count": 5782,
+            "ida_exact_start_count": 5782,
+            "ida_missing_exact_start_count": 0,
+            "row_count": 5782,
+        },
+    )
+    check(
+        "Spectron v332 dynamic symbol coverage",
+        {
+            "artifact": spectron_dynamic_symbol_coverage_v332["artifact"],
+            "network_contacted": spectron_dynamic_symbol_coverage_v332["network_contacted"],
+            "input_sha256": spectron_dynamic_symbol_coverage_v332["input_sha256"],
+            "summary": spectron_dynamic_symbol_coverage_v332["summary"],
+        },
+        {
+            "artifact": "spectron_dynamic_symbol_coverage_audit_20260828",
+            "network_contacted": False,
+            "input_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+            "summary": {
+                "defined_named_symbol_count": 6600,
+                "location_counts": {
+                    "ida_data_item": 482,
+                    "ida_function_exact": 5782,
+                    "ida_noncode_item": 336,
+                    "undefined_or_zero_value": 170,
+                },
+                "name_match_counts": {
+                    "item_name_match": 1735,
+                    "item_name_mismatch": 5035,
+                    "value_name_match": 1735,
+                    "value_name_mismatch": 5035,
+                },
+                "named_dynamic_symbol_count": 6770,
+                "status_counts": {
+                    "exact_retained_dynamic_name": 1735,
+                    "linker_boundary_alias_mismatch": 7,
+                    "other_retained_target_name": 124,
+                    "source_backed_v18_alias": 4732,
+                    "target_only_descriptive": 2,
+                    "undefined_import_with_plt_stub": 169,
+                    "undefined_no_target_address": 1,
+                },
+            },
+        },
+    )
+    check(
+        "Spectron v332 semantic translation",
+        {
+            "artifact": spectron_semantic_translation_v332["artifact"],
+            "network_contacted": spectron_semantic_translation_v332["network_contacted"],
+            "summary": spectron_semantic_translation_v332["summary"],
+            "carried_forward": spectron_semantic_translation_v332["carried_forward"]["target_feature_count"],
+        },
+        {
+            "artifact": "spectron_semantic_function_translation",
+            "network_contacted": False,
+            "summary": {
+                "ambiguous_functions": 1020,
+                "mapped_functions": 3716,
+                "mapped_high_confidence": 3656,
+                "mapped_medium_confidence": 60,
+                "original_functions": 11308,
+                "spectron_functions": 11707,
+                "unique_spectron_targets": 3716,
+                "unmatched_functions": 608,
+            },
+            "carried_forward": 11707,
+        },
+    )
+    check(
+        "Spectron v332 feature export",
+        {
+            "artifact": spectron_features_v332["artifact"],
+            "network_contacted": spectron_features_v332["network_contacted"],
+            "function_count": spectron_features_v332["function_count"],
+        },
+        {
+            "artifact": "ida_function_features",
+            "network_contacted": False,
+            "function_count": 11707,
+        },
+    )
+    check(
+        "Spectron v332 checkpoint artifact",
+        spectron_checkpoint_v332["artifact"],
+        "spectron_translation_checkpoint_20260829_v332",
+    )
+    check(
+        "Spectron v332 checkpoint parent",
+        spectron_checkpoint_v332["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260829_v331",
+    )
+    check(
+        "Spectron v332 checkpoint database",
+        {
+            "sha256": spectron_checkpoint_v332["database"]["sha256"],
+            "close_reopen_verified": spectron_checkpoint_v332["database"]["close_reopen_verified"],
+            "function_count": spectron_checkpoint_v332["database"]["function_count"],
+            "default_name_count": spectron_checkpoint_v332["database"]["default_name_count"],
+        },
+        {
+            "sha256": "f77edbe5076211bd3bd5a18c549f0c3cbaeeb88d2da7bc9c52a2733c1d87cdc2",
+            "close_reopen_verified": True,
+            "function_count": 11707,
+            "default_name_count": 0,
+        },
+    )
+    check(
+        "Spectron v332 TPanelOperation checkpoint",
+        {
+            "anchor_count": spectron_checkpoint_v332["paneloperation_residual_translation_v332"]["anchor_count"],
+            "high_confidence_count": spectron_checkpoint_v332["paneloperation_residual_translation_v332"]["high_confidence_count"],
+            "exact_metric_anchor_count": spectron_checkpoint_v332["paneloperation_residual_translation_v332"]["exact_metric_anchor_count"],
+            "layout_change_anchor_count": spectron_checkpoint_v332["paneloperation_residual_translation_v332"]["layout_change_anchor_count"],
+            "new_context_anchor_count": spectron_checkpoint_v332["paneloperation_residual_translation_v332"]["new_context_anchor_count"],
+            "semantic_promotion_count": spectron_checkpoint_v332["paneloperation_residual_translation_v332"]["semantic_promotion_count"],
+            "reopen_verified": spectron_checkpoint_v332["paneloperation_residual_translation_v332"]["reopen_verified"],
+        },
+        {
+            "anchor_count": 20,
+            "high_confidence_count": 20,
+            "exact_metric_anchor_count": 13,
+            "layout_change_anchor_count": 7,
+            "new_context_anchor_count": 17,
+            "semantic_promotion_count": 3,
+            "reopen_verified": True,
+        },
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -21565,6 +21880,13 @@ def main():
         spectron_semantic_translation_v331,
         spectron_features_v331,
         spectron_checkpoint_v331,
+        spectron_paneloperation_residual_anchors_v332,
+        spectron_name_coverage_v332,
+        spectron_dynamic_boundaries_v332,
+        spectron_dynamic_symbol_coverage_v332,
+        spectron_semantic_translation_v332,
+        spectron_features_v332,
+        spectron_checkpoint_v332,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

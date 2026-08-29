@@ -800,6 +800,69 @@ generators are
 `tools/generate_spectron_format_parameters_property_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v326.py`.
 
+### v332 TPanelOperation residual aliases
+
+The v332 pass starts from the verified v331 database and translates the next
+contiguous `TPanelOperation` and `TDrawingPanelProperties` sequence. The
+target symbols are obfuscated, but the source and target retain the same
+operation fields, bounds-result layout, C++ destructor forms, base cleanup,
+and local method order.
+
+| Source role | Spectron address | Applied alias | Review result |
+| --- | ---: | --- | --- |
+| `TPanelOperation_Clear_getBounds_void` | `0x11d318` | `v18_TPanelOperation_Clear_getBounds_void` | exact bounds copy |
+| `TPanelOperation_DrawCurve_getBounds_void` | `0x11d344` | `v18_TPanelOperation_DrawCurve_getBounds_void` | exact endpoint bounds |
+| `TPanelOperation_DrawStretched_getBounds_void` | `0x11d3d4` | `v18_TPanelOperation_DrawStretched_getBounds_void` | exact bounds copy |
+| `TPanelOperation_DrawLine_getBounds_void` | `0x11d400` | `v18_TPanelOperation_DrawLine_getBounds_void` | exact endpoint bounds |
+| `TPanelOperation_DrawText_getBounds_void` | `0x11d464` | `v18_TPanelOperation_DrawText_getBounds_void` | exact zeroed result |
+| line, curve, and clear D1 boundaries | `0x11d47c`, `0x11d480`, `0x11d484` | three `v18_TPanelOperation_*` aliases | empty ABI boundaries |
+| line, curve, and clear D0 boundaries | `0x11d530`, `0x11d534`, `0x11d538` | three `v18_TPanelOperation_*__2` aliases | `operator delete` forms |
+| `TDrawingPanelProperties` destructor family | `0x11d4cc` to `0x11d528` | four `v18_TDrawingPanelProperties` aliases | vtable, base cleanup, and thunks |
+| rectangle destructor family | `0x11d5ec`, `0x11d600` | two `v18_TPanelOperation_DrawRectangle` aliases | embedded resource cleanup |
+| stretched-image destructor family | `0x11d630`, `0x11d644` | two `v18_TPanelOperation_DrawStretched` aliases | embedded resource cleanup |
+| image deleting destructor | `0x11d688` | `v18_TPanelOperation_DrawImage_TPanelOperation_DrawImage__2` | embedded resource cleanup |
+
+The five bounds rows are exact normalized ARM64 matches. The clear and
+stretched methods copy the stored rectangle, the curve and line methods compute
+endpoint minima and absolute extents, and the text method preserves the
+zeroed four-field result. The target functions sit in the same order beside
+the already translated rectangle and image operations.
+
+The source IDA names for the six small operation entries look like
+constructors because the historical database keeps alternative C++ names on
+four-byte boundaries. Their source alternative names and the target `D1` and
+`D0` symbols identify the actual destructor ABI roles. The D1 entries are
+empty boundaries and the D0 entries release the object through
+`operator delete`.
+
+The `V8fxgahcBwProperties` target family resets both vtable pointers, calls
+the base `TProperties` destructor, and uses 16-byte secondary-base thunks.
+The `AK892aVY8g`, `zfJa3aJGDh`, and `EbOa3arQHh` destructor families clean up
+their embedded `TResourceFileUser` members at the same class-local offsets as
+the source operation objects. Seven rows differ only in register-detail
+allocation; the other 13 match all normalized feature metrics.
+
+All 20 aliases were applied to a fresh v331-derived copy and verified after
+reopening. The v332 database contains 11,707 functions, zero audited default
+names, 6,382 translated aliases, 4,732 source-backed dynamic rows, and 1,735
+exact retained dynamic names. The defined dynamic audit still resolves all
+5,782 function symbols to exact IDA starts.
+
+The v332 database is
+`analysis/spectron_libqplay_translated_v332_paneloperation_residual.i64` with
+SHA-256
+`f77edbe5076211bd3bd5a18c549f0c3cbaeeb88d2da7bc9c52a2733c1d87cdc2`.
+Its records are
+`artifacts/spectron_paneloperation_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_paneloperation_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_paneloperation_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v332_paneloperation_residual.json`,
+`artifacts/spectron_name_coverage_audit_v332.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v332.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v332.json`,
+`artifacts/spectron_semantic_translation_v332.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v332.json`.
+
 ### v331 static-variable runtime aliases
 
 The v331 pass continues from the verified v330 database through the next

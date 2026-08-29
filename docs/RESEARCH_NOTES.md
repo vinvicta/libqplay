@@ -261,6 +261,100 @@ This pass changed only the private IDA copy and archive. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
 
+## 2026-08-29: TPanelOperation residual block, v332
+
+The v331 static-variable sequence led directly into a compact drawing-panel
+cluster. This was a productive target because the source `TPanelOperation`
+class exposes a fixed operation layout, while the target's obfuscated methods
+still follow the same bounds and destructor order. I reviewed the complete
+cluster rather than assigning names from raw symbol order alone.
+
+| Source boundary | Target boundary | Recovered source role | Evidence summary |
+| ---: | ---: | --- | --- |
+| `0x11a810` | `0x11d318` | `TPanelOperation_Clear_getBounds_void` | exact four-field rectangle copy |
+| `0x11a83c` | `0x11d344` | `TPanelOperation_DrawCurve_getBounds_void` | exact endpoint minima and extents |
+| `0x11a8cc` | `0x11d3d4` | `TPanelOperation_DrawStretched_getBounds_void` | exact four-field rectangle copy |
+| `0x11a8f8` | `0x11d400` | `TPanelOperation_DrawLine_getBounds_void` | exact endpoint minima and extents |
+| `0x11a95c` | `0x11d464` | `TPanelOperation_DrawText_getBounds_void` | exact zeroed rectangle result |
+| `0x11a974` | `0x11d47c` | line D1 boundary | empty four-byte ABI entry |
+| `0x11a978` | `0x11d480` | curve D1 boundary | empty four-byte ABI entry |
+| `0x11a97c` | `0x11d484` | clear D1 boundary | empty four-byte ABI entry |
+| `0x11aa28` | `0x11d530` | line deleting D0 | exact `operator delete` boundary |
+| `0x11aa2c` | `0x11d534` | curve deleting D0 | exact `operator delete` boundary |
+| `0x11aa30` | `0x11d538` | clear deleting D0 | exact `operator delete` boundary |
+| `0x11a9c4` | `0x11d4cc` | `TDrawingPanelProperties` D2 | vtable and base cleanup |
+| `0x11a9e0` | `0x11d4e8` | properties D1 thunk | exact 16-byte receiver adjustment |
+| `0x11a9e8` | `0x11d4f0` | `TDrawingPanelProperties` D0 | vtable, base cleanup, and delete |
+| `0x11aa20` | `0x11d528` | properties D0 thunk | exact 16-byte receiver adjustment |
+| `0x11ab28` | `0x11d5ec` | `DrawRectangle` D1 | embedded resource cleanup |
+| `0x11ab3c` | `0x11d600` | `DrawRectangle` D0 | embedded resource cleanup and delete |
+| `0x11aae4` | `0x11d630` | `DrawStretched` D2 | embedded resource cleanup |
+| `0x11aaf8` | `0x11d644` | `DrawStretched` D0 | embedded resource cleanup and delete |
+| `0x11ab80` | `0x11d688` | `DrawImage` D0 | embedded resource cleanup and delete |
+
+The bounds methods were the cleanest part of the review. The clear and
+stretched methods copy x, y, width, and height to the result. The curve and
+line methods choose the smaller endpoint for x and y and compute absolute
+width and height values. The text method writes the same zeroed four-field
+result as the source. All five pairs have the same normalized instruction
+shape and register-aware metrics, despite different target symbol names.
+
+The small operation entries required more ABI care. The source IDA database
+keeps historical constructor-shaped names on several four-byte boundaries,
+but its alternative C++ names and the target's explicit `D1` and `D0` symbols
+identify destructor forms. The three D1 entries are empty entry boundaries;
+the three D0 entries call `operator delete`. This is why the applied aliases
+retain the source naming convention while the evidence records explain the
+actual ABI role.
+
+The target `V8fxgahcBwProperties` family mirrors `TDrawingPanelProperties`.
+Its destructor bodies reset primary and secondary vtable pointers, call the
+base `TProperties` destructor, and release the object for D0. The two thunks
+subtract 16 bytes from the secondary receiver. The `AK892aVY8g`, `zfJa3aJGDh`,
+and `EbOa3arQHh` entries are the corresponding rectangle, stretched-image,
+and image operation destructor families because they clean their embedded
+`TResourceFileUser` members at the expected object offsets.
+
+The anchor artifact contains 20 high-confidence rows. Thirteen are exact
+normalized metric matches and seven differ only in `register_detail_hash`.
+Every row has compact source and target Hex-Rays pseudocode. Three rows were
+already present as medium-confidence shape matches in the older semantic map;
+the remaining 17 add new reviewed context.
+
+All aliases were applied to a fresh v331-derived IDA database and verified
+after reopening. The resulting database has 11,707 functions and zero
+audited default names. Its name audit contains 6,382 translated aliases, 419
+target-only descriptive labels, 847 retained target names, seven JNI exports,
+and 4,052 other IDA or PLT names. Dynamic coverage reports 4,732
+source-backed aliases and 1,735 exact retained dynamic names. All 5,782
+defined dynamic function symbols still resolve to exact IDA starts.
+
+There is one provenance detail worth preserving. The current IDALIB export of
+the preserved source databases reports 11,297 functions, while the reviewed
+v331 source feature snapshot contains 11,308. Since this pass changes only
+target names and not function bodies, the v332 semantic map carries forward
+the v331 map and updates its target-feature hash. That keeps the 3,716 mapped
+functions and 608 unmatched functions stable instead of treating an exporter
+difference as a reverse-engineering regression. The carry-forward is explicit
+in `artifacts/spectron_semantic_translation_v332.json` and implemented by
+`tools/carry_forward_spectron_semantic_translation_v332.py`.
+
+The v332 database hash is
+`f77edbe5076211bd3bd5a18c549f0c3cbaeeb88d2da7bc9c52a2733c1d87cdc2`.
+The machine-readable evidence is
+`artifacts/spectron_paneloperation_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_paneloperation_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_paneloperation_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v332_paneloperation_residual.json`,
+`artifacts/spectron_name_coverage_audit_v332.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v332.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v332.json`,
+`artifacts/spectron_semantic_translation_v332.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v332.json`.
+
+This was static analysis only. It did not patch the APK, rerun the loopback
+client, alter TLS behavior, contact a game server, or test a live endpoint.
+
 ## 2026-08-29: static-variable destructor block, v331
 
 The next clean residual block begins at source `0x22d240` and target

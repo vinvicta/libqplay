@@ -425,6 +425,60 @@ records are
 `artifacts/spectron_semantic_translation_v326.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v326.json`.
 
+### v332 TPanelOperation residual aliases
+
+The v332 pass adds 20 semantic aliases to the private Spectron IDA database.
+The raw target identifiers are retained below so the applied `v18_` names can
+always be traced back to the stripped build.
+
+| Spectron address | Raw target symbol | Applied alias | Recovered role |
+| ---: | --- | --- | --- |
+| `0x11d318` | `_ZN10eHD62a2_be10rMBEgasoMCEv` | `v18_TPanelOperation_Clear_getBounds_void` | clear bounds |
+| `0x11d344` | `_ZN10xKbb3aMu1h10rMBEgasoMCEv` | `v18_TPanelOperation_DrawCurve_getBounds_void` | curve bounds |
+| `0x11d3d4` | `_ZN10AK892aVY8g10rMBEgasoMCEv` | `v18_TPanelOperation_DrawStretched_getBounds_void` | stretched bounds |
+| `0x11d400` | `_ZN10m0ka3aUhjh10rMBEgasoMCEv` | `v18_TPanelOperation_DrawLine_getBounds_void` | line bounds |
+| `0x11d464` | `_ZN10PO392awP4g10rMBEgasoMCEv` | `v18_TPanelOperation_DrawText_getBounds_void` | text bounds |
+| `0x11d47c` | `_ZN10m0ka3aUhjhD1Ev` | `v18_TPanelOperation_DrawLine_TPanelOperation_DrawLine` | line D1 boundary |
+| `0x11d480` | `_ZN10xKbb3aMu1hD1Ev` | `v18_TPanelOperation_DrawCurve_TPanelOperation_DrawCurve` | curve D1 boundary |
+| `0x11d484` | `_ZN10eHD62a2_beD1Ev` | `v18_TPanelOperation_Clear_TPanelOperation_Clear` | clear D1 boundary |
+| `0x11d530` | `_ZN10m0ka3aUhjhD0Ev` | `v18_TPanelOperation_DrawLine_TPanelOperation_DrawLine__2` | line D0 destructor |
+| `0x11d534` | `_ZN10xKbb3aMu1hD0Ev` | `v18_TPanelOperation_DrawCurve_TPanelOperation_DrawCurve__2` | curve D0 destructor |
+| `0x11d538` | `_ZN10eHD62a2_beD0Ev` | `v18_TPanelOperation_Clear_TPanelOperation_Clear__2` | clear D0 destructor |
+| `0x11d4cc` | `_ZN20V8fxgahcBwPropertiesD2Ev` | `v18_TDrawingPanelProperties_TDrawingPanelProperties` | properties D2 |
+| `0x11d4e8` | `_ZThn16_N20V8fxgahcBwPropertiesD1Ev` | `v18_non_virtual_thunk_to_TDrawingPanelProperties_TDrawingPanelProperties` | properties D1 thunk |
+| `0x11d4f0` | `_ZN20V8fxgahcBwPropertiesD0Ev` | `v18_TDrawingPanelProperties_TDrawingPanelProperties__2` | properties D0 |
+| `0x11d528` | `_ZThn16_N20V8fxgahcBwPropertiesD0Ev` | `v18_non_virtual_thunk_to_TDrawingPanelProperties_TDrawingPanelProperties__2` | properties D0 thunk |
+| `0x11d5ec` | `_ZN10AK892aVY8gD1Ev` | `v18_TPanelOperation_DrawRectangle_TPanelOperation_DrawRectangle` | rectangle D1 |
+| `0x11d600` | `_ZN10AK892aVY8gD0Ev` | `v18_TPanelOperation_DrawRectangle_TPanelOperation_DrawRectangle__2` | rectangle D0 |
+| `0x11d630` | `_ZN10zfJa3aJGDhD2Ev` | `v18_TPanelOperation_DrawStretched_TPanelOperation_DrawStretched` | stretched D2 |
+| `0x11d644` | `_ZN10zfJa3aJGDhD0Ev` | `v18_TPanelOperation_DrawStretched_TPanelOperation_DrawStretched__2` | stretched D0 |
+| `0x11d688` | `_ZN10EbOa3arQHhD0Ev` | `v18_TPanelOperation_DrawImage_TPanelOperation_DrawImage__2` | image D0 |
+
+The five `getBounds` rows are exact normalized matches, including their
+instruction counts, control-flow shape, and register-aware details. The
+source constructor-shaped names on the six operation destructor boundaries
+are historical IDA aliases; the source alternative names and the target D1
+or D0 symbols identify their ABI roles. The properties thunks subtract 16
+bytes from a secondary receiver. The derived operation destructors clean
+their embedded `TResourceFileUser` members before the D0 forms delete them.
+
+All 20 rows are high-confidence pseudocode-backed aliases. Thirteen have
+exact feature metrics and seven differ only in register-detail allocation.
+The v332 name audit reports 6,382 translated aliases, 419 target-only
+descriptive labels, 847 retained target names, seven JNI exports, 4,052 other
+IDA or PLT names, and zero default names. Dynamic coverage reports 4,732
+source-backed aliases and 1,735 exact retained dynamic names. The complete
+records are
+`artifacts/spectron_paneloperation_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_paneloperation_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_paneloperation_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v332_paneloperation_residual.json`,
+`artifacts/spectron_name_coverage_audit_v332.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v332.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v332.json`,
+`artifacts/spectron_semantic_translation_v332.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v332.json`.
+
 ### v331 static-variable residual aliases
 
 The v331 pass adds 22 semantic aliases to the private Spectron IDA database.

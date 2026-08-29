@@ -937,6 +937,155 @@ The expected v326 database hash is
 checkpoint is static evidence only. It does not change the loopback runtime
 result, TLS diagnosis, or live-service boundary.
 
+### v332 TPanelOperation residual translation
+
+The v332 pass is static IDA work only. It starts from the verified v331
+database and reviews the next contiguous `TPanelOperation` and
+`TDrawingPanelProperties` block. It does not require an APK, a running
+emulator, a server, or a live endpoint.
+
+The compact evidence was captured from the source block around
+`0x11a810` and the target block around `0x11d318`. The target evidence includes
+the raw obfuscated operation methods, explicit D1 and D0 destructor symbols,
+the properties thunks, and the derived resource-operation destructors. The
+anchor generator checks all 20 function boundaries, normalized metrics, raw
+names, and source and target pseudocode before writing the artifact.
+
+Generate the reviewed anchors with:
+
+```bash
+python3 tools/generate_spectron_paneloperation_residual_anchors.py \
+  --original-features /tmp/original_features_current.json \
+  --spectron-features artifacts/spectron_features_v331_tscript_var_residual.json \
+  --semantic-map artifacts/spectron_semantic_translation_v331.json \
+  --source-evidence /tmp/graal-source-paneloperation.json \
+  --target-evidence /tmp/graal-target-paneloperation.json \
+  --original-binary-sha256 9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8 \
+  --spectron-binary-sha256 f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219 \
+  --output artifacts/spectron_paneloperation_residual_manual_translation_anchors_20260829.json
+```
+
+The output has 20 high-confidence rows, 13 exact metric matches, seven
+register-detail layout rows, 17 new context anchors, three prior semantic-map
+corroborations, and pseudocode for all 20 source and target pairs.
+
+Apply the aliases to a separate input copy. The applier refuses to overwrite
+an existing IDA database:
+
+```bash
+cp /path/to/spectron_libqplay_translated_v331_tscript_var_residual.i64 \
+  /tmp/spectron_v332_anchor_apply_input.i64
+
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_MANUAL_ANCHORS=/path/to/libqplay/artifacts/spectron_paneloperation_residual_manual_translation_anchors_20260829.json \
+  SPECTRON_MANUAL_EXPECTED_ARTIFACT=spectron_paneloperation_residual_manual_translation_anchors_20260829 \
+  SPECTRON_MANUAL_APPLY=1 \
+  SPECTRON_MANUAL_SAVE_PATH=/path/to/spectron_libqplay_translated_v332_paneloperation_residual.i64 \
+  SPECTRON_MANUAL_REPORT=/tmp/spectron_paneloperation_residual_manual_translation_application_20260829.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /tmp/spectron_v332_anchor_apply_input.i64 \
+  -s tools/ida_apply_spectron_manual_anchors.py
+```
+
+Reopen the saved copy and verify names and function boundaries with the
+dedicated verifier:
+
+```bash
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_MANUAL_ANCHORS=/path/to/libqplay/artifacts/spectron_paneloperation_residual_manual_translation_anchors_20260829.json \
+  SPECTRON_MANUAL_EXPECTED_ARTIFACT=spectron_paneloperation_residual_manual_translation_anchors_20260829 \
+  SPECTRON_MANUAL_VERIFY_REPORT=/path/to/libqplay/artifacts/spectron_paneloperation_residual_manual_translation_verification_20260829.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/spectron_libqplay_translated_v332_paneloperation_residual.i64 \
+  -s tools/ida_verify_spectron_manual_anchors.py
+```
+
+The application report must contain 20 resolved functions, 20 renames, 20
+evidence comments, zero failures, and a successful save. The reopen report
+must contain 20 verified names in an 11,707-function database.
+
+Refresh the target feature export and audits with:
+
+```bash
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  LIBQPLAY_FEATURES_OUT=/path/to/libqplay/artifacts/spectron_features_v332_paneloperation_residual.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/spectron_libqplay_translated_v332_paneloperation_residual.i64 \
+  -s tools/ida_export_function_features.py
+
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_NAME_COVERAGE_OUTPUT=/path/to/libqplay/artifacts/spectron_name_coverage_audit_v332.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/spectron_libqplay_translated_v332_paneloperation_residual.i64 \
+  -s tools/ida_audit_spectron_name_coverage.py
+
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_BOUNDARY_AUDIT_OUTPUT=/path/to/libqplay/artifacts/spectron_dynamic_symbol_boundaries_v332.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/spectron_libqplay_translated_v332_paneloperation_residual.i64 \
+  -s tools/ida_audit_dynamic_symbol_boundaries.py
+
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_DYNAMIC_SYMBOL_COVERAGE_OUTPUT=/path/to/libqplay/artifacts/spectron_dynamic_symbol_coverage_audit_v332.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/spectron_libqplay_translated_v332_paneloperation_residual.i64 \
+  -s tools/ida_audit_spectron_dynamic_symbol_coverage.py
+```
+
+The source feature snapshot used by the earlier semantic map is not currently
+available in `/tmp`. A fresh IDALIB export reports 11,297 source functions,
+whereas the reviewed v331 snapshot records 11,308. Because v332 changes
+target names only, carry the reviewed semantic map forward and refresh its
+target-feature provenance instead of rerunning the matcher against the
+different source export:
+
+```bash
+python3 tools/carry_forward_spectron_semantic_translation_v332.py \
+  --parent-map artifacts/spectron_semantic_translation_v331.json \
+  --target-features artifacts/spectron_features_v332_paneloperation_residual.json \
+  --anchor-artifact artifacts/spectron_paneloperation_residual_manual_translation_anchors_20260829.json \
+  --output artifacts/spectron_semantic_translation_v332.json
+```
+
+The carry-forward is explicit in the artifact. It keeps 3,716 mapped
+functions, 3,656 high-confidence matches, 60 medium-confidence matches, 1,020
+ambiguous functions, and 608 unmatched functions. It refreshes the three
+target names that were already present in the old automatic map.
+
+Build the strict checkpoint and run the offline archive validator:
+
+```bash
+python3 tools/generate_spectron_translation_checkpoint_v332.py \
+  --parent-checkpoint artifacts/spectron_translation_checkpoint_20260829_v331.json \
+  --database /path/to/spectron_libqplay_translated_v332_paneloperation_residual.i64 \
+  --anchor-artifact artifacts/spectron_paneloperation_residual_manual_translation_anchors_20260829.json \
+  --application-report artifacts/spectron_paneloperation_residual_manual_translation_application_20260829.json \
+  --verification-report artifacts/spectron_paneloperation_residual_manual_translation_verification_20260829.json \
+  --name-audit artifacts/spectron_name_coverage_audit_v332.json \
+  --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v332.json \
+  --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v332.json \
+  --semantic-map artifacts/spectron_semantic_translation_v332.json \
+  --feature-export artifacts/spectron_features_v332_paneloperation_residual.json \
+  --output artifacts/spectron_translation_checkpoint_20260829_v332.json
+
+python3 tools/validate_research_archive.py
+```
+
+The expected v332 database hash is
+`f77edbe5076211bd3bd5a18c549f0c3cbaeeb88d2da7bc9c52a2733c1d87cdc2`.
+The audits should report 6,382 translated aliases, 419 target-only
+descriptive labels, 847 retained target names, 7 JNI exports, 4,052 other
+IDA or PLT names, 4,732 source-backed dynamic symbols, 1,735 exact retained
+dynamic symbols, and 5,782 exact dynamic function starts. This checkpoint is
+static evidence only. It does not patch the APK, rerun the loopback client,
+alter TLS behavior, contact a game server, or test a live endpoint.
+
 ### v331 static-variable residual translation
 
 The v331 pass is static IDA work only. It starts from the verified v330

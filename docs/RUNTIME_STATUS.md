@@ -3035,6 +3035,54 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v332 TPanelOperation translation
+
+The v332 revision is a static IDA checkpoint for the next contiguous drawing
+panel block. It translates five `TPanelOperation::getBounds` methods, the
+line, curve, and clear destructor boundaries, the
+`TDrawingPanelProperties` destructor family, and the derived rectangle,
+stretched-image, and image operation cleanup entries. It does not change the
+previously verified loopback package, connector TLS result, or local protocol
+responder.
+
+The five bounds methods are exact normalized ARM64 matches. The clear and
+stretched methods copy the operation rectangle, the curve and line methods
+compute endpoint minima and absolute extents, and the text method preserves a
+zeroed result rectangle. The source database's constructor-shaped names on
+the six four-byte operation entries are resolved as D1 and D0 destructor
+boundaries by the source alternative names and the target's explicit C++ ABI
+symbols. The `V8fxgahcBwProperties` family keeps the 16-byte secondary-base
+thunks, and the three derived operation families keep their embedded
+`TResourceFileUser` cleanup offsets.
+
+All 20 aliases were applied to a fresh v331-derived database and verified
+after reopening. Thirteen rows are exact feature matches and seven differ
+only in register-detail allocation. Every row has source and target compact
+Hex-Rays pseudocode and is marked high confidence.
+
+The v332 database contains 11,707 functions and zero audited default names,
+with 6,382 translated `v18_` aliases, 4,732 source-backed dynamic rows, and
+1,735 exact retained target names. All 5,782 defined dynamic function symbols
+still resolve to exact IDA function starts.
+
+The database is
+`analysis/spectron_libqplay_translated_v332_paneloperation_residual.i64` with
+SHA-256
+`f77edbe5076211bd3bd5a18c549f0c3cbaeeb88d2da7bc9c52a2733c1d87cdc2`.
+The records are
+`artifacts/spectron_paneloperation_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_paneloperation_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_paneloperation_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v332_paneloperation_residual.json`,
+`artifacts/spectron_name_coverage_audit_v332.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v332.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v332.json`,
+`artifacts/spectron_semantic_translation_v332.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v332.json`.
+
+This checkpoint is static evidence only. No APK was patched, no live endpoint
+was contacted, and no new runtime replay was performed for v332.
+
 ## Spectron 2.2 v331 static-variable runtime translation
 
 The v331 revision is a static IDA checkpoint for the class-local block that

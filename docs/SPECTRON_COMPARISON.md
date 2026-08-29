@@ -319,6 +319,69 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v332 TPanelOperation residual comparison
+
+The v332 pass compares the next complete drawing-panel sequence after the
+v331 static-variable methods. The target's raw symbols are obfuscated, but
+the source and target preserve operation field offsets, four-field bounds
+results, destructor ABI forms, resource-member cleanup, and local order.
+
+| Source role | Spectron address | Applied alias | Match class |
+| --- | ---: | --- | --- |
+| `TPanelOperation_Clear_getBounds_void` | `0x11d318` | `v18_TPanelOperation_Clear_getBounds_void` | exact normalized bounds copy |
+| `TPanelOperation_DrawCurve_getBounds_void` | `0x11d344` | `v18_TPanelOperation_DrawCurve_getBounds_void` | exact endpoint bounds |
+| `TPanelOperation_DrawStretched_getBounds_void` | `0x11d3d4` | `v18_TPanelOperation_DrawStretched_getBounds_void` | exact normalized bounds copy |
+| `TPanelOperation_DrawLine_getBounds_void` | `0x11d400` | `v18_TPanelOperation_DrawLine_getBounds_void` | exact endpoint bounds |
+| `TPanelOperation_DrawText_getBounds_void` | `0x11d464` | `v18_TPanelOperation_DrawText_getBounds_void` | exact zeroed result |
+| line D1 boundary | `0x11d47c` | `v18_TPanelOperation_DrawLine_TPanelOperation_DrawLine` | empty ABI boundary |
+| curve D1 boundary | `0x11d480` | `v18_TPanelOperation_DrawCurve_TPanelOperation_DrawCurve` | empty ABI boundary |
+| clear D1 boundary | `0x11d484` | `v18_TPanelOperation_Clear_TPanelOperation_Clear` | empty ABI boundary |
+| line D0 boundary | `0x11d530` | `v18_TPanelOperation_DrawLine_TPanelOperation_DrawLine__2` | exact delete form |
+| curve D0 boundary | `0x11d534` | `v18_TPanelOperation_DrawCurve_TPanelOperation_DrawCurve__2` | exact delete form |
+| clear D0 boundary | `0x11d538` | `v18_TPanelOperation_Clear_TPanelOperation_Clear__2` | exact delete form |
+| `TDrawingPanelProperties` D2 | `0x11d4cc` | `v18_TDrawingPanelProperties_TDrawingPanelProperties` | layout match; base cleanup |
+| properties D1 thunk | `0x11d4e8` | `v18_non_virtual_thunk_to_TDrawingPanelProperties_TDrawingPanelProperties` | exact receiver adjustment |
+| `TDrawingPanelProperties` D0 | `0x11d4f0` | `v18_TDrawingPanelProperties_TDrawingPanelProperties__2` | layout match; base cleanup |
+| properties D0 thunk | `0x11d528` | `v18_non_virtual_thunk_to_TDrawingPanelProperties_TDrawingPanelProperties__2` | exact receiver adjustment |
+| `DrawRectangle` D1 | `0x11d5ec` | `v18_TPanelOperation_DrawRectangle_TPanelOperation_DrawRectangle` | layout match; resource cleanup |
+| `DrawRectangle` D0 | `0x11d600` | `v18_TPanelOperation_DrawRectangle_TPanelOperation_DrawRectangle__2` | layout match; delete |
+| `DrawStretched` D2 | `0x11d630` | `v18_TPanelOperation_DrawStretched_TPanelOperation_DrawStretched` | layout match; resource cleanup |
+| `DrawStretched` D0 | `0x11d644` | `v18_TPanelOperation_DrawStretched_TPanelOperation_DrawStretched__2` | layout match; delete |
+| `DrawImage` D0 | `0x11d688` | `v18_TPanelOperation_DrawImage_TPanelOperation_DrawImage__2` | layout match; delete |
+
+The five bounds pairs are exact across the recorded normalized feature set.
+The source and target use the same rectangle fields and control-flow shape.
+The seven layout rows differ only in `register_detail_hash`, which records
+the target compiler's register allocation after its wrapper rebuild. The
+three D1 operation entries are empty boundaries, and the three D0 entries
+call `operator delete`. The two properties thunks subtract 16 bytes from a
+secondary receiver, while the derived operation destructors clean an embedded
+`TResourceFileUser` before their deleting forms release the object.
+
+The v332 anchor artifact has 20 high-confidence rows, 13 exact metric rows,
+seven layout rows, and compact pseudocode for every source and target row.
+Three rows corroborate target addresses already present in the v331 semantic
+map; 17 add new reviewed context. All names were applied and verified after
+reopening the v332 database.
+
+The v332 database has 11,707 functions, zero audited default names, 6,382
+translated aliases, 4,732 source-backed dynamic rows, 1,735 exact retained
+target names, and 5,782 exact dynamic function starts. Its SHA-256 is
+`f77edbe5076211bd3bd5a18c549f0c3cbaeeb88d2da7bc9c52a2733c1d87cdc2`.
+The complete comparison records are
+`artifacts/spectron_paneloperation_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_paneloperation_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_paneloperation_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v332_paneloperation_residual.json`,
+`artifacts/spectron_name_coverage_audit_v332.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v332.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v332.json`,
+`artifacts/spectron_semantic_translation_v332.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v332.json`.
+
+This comparison is static evidence. It does not change the runtime diagnosis,
+patch the APK, or contact a live endpoint.
+
 ## v331 static-variable residual comparison
 
 The v331 pass compares the next complete class-local sequence after the v330
