@@ -172,6 +172,59 @@ The v321 evidence is in
 `artifacts/spectron_dynamic_symbol_boundaries_v321_20260828.json`, and
 `artifacts/spectron_dynamic_symbol_coverage_audit_v321_20260828.json`.
 
+### v322 TGraalVar runtime aliases
+
+The v322 pass translates twelve methods in the obfuscated `G0gxgajWBw`
+implementation of `TGraalVar`. These were not accepted from name similarity
+alone. Each row was checked against source and target Hex-Rays pseudocode,
+the surrounding class-local method order, and the values passed through the
+key virtual slots.
+
+| 1.8 source | Spectron target | Applied alias | Confidence |
+| ---: | ---: | --- | --- |
+| `0x20d304` | `0x2136c4` | `v18_TGraalVar_receiveEvent_script_event` | high |
+| `0x20e070` | `0x214520` | `v18_TGraalVar_getVarNames_bool_bool_bool` | high |
+| `0x20e5c4` | `0x214a78` | `v18_parseDynamicFunctionParameters_char_const_std_va_list` | high |
+| `0x20ec60` | `0x215148` | `v18_TGraalVar_executeStringFunctionF_TString_const_char_const` | high |
+| `0x20f014` | `0x2154e0` | `v18_TGraalVar_saveString_TString_const_uint` | high |
+| `0x20f17c` | `0x215660` | `v18_TGraalVar_saveLines_TString_const_uint` | high |
+| `0x20f2ac` | `0x2157a8` | `v18_TGraalVar_loadString_TString_const` | high |
+| `0x20f3bc` | `0x2158e4` | `v18_TGraalVar_setVarValueAsFloat_TString_const_double` | high |
+| `0x20f474` | `0x2159f4` | `v18_TGraalVar_getVarValue_TString_const` | high |
+| `0x20fc18` | `0x216174` | `v18_TGraalVar_setArrayCellObject_int_TGraalVar` | high |
+| `0x20fe5c` | `0x216454` | `v18_TGraalVar_getVarValueAsFloat_TString_const` | high |
+| `0x20ff2c` | `0x216558` | `v18_TGraalVar_updateArrayString_void` | high |
+
+The event forwarder at `0x2136c4` keeps the source's one-block, 24-instruction
+body. The other methods are still semantic matches even when their complete
+feature records differ. The target uses `C8THgaTQxF` in place of the source
+`TString`, and similarly replaces the source list and hash wrappers. The
+dynamic-parameter parser retains all format cases, the save/load methods keep
+the same path and stream operations, and the variable accessors preserve the
+same primary lookup and persistent-hash fallback. The array setter at
+`0x216174` is an important disambiguation because automatic matching had
+assigned the nearby target string setter to the source string setter.
+
+The v322 name audit has zero default names in the checked families and reports
+6,240 translated `v18_` aliases. The complete dynamic-symbol audit reports
+4,564 source-backed aliases, 1,878 exact retained names, 151 other retained
+target names, seven linker-boundary aliases, and the same 169 PLT veneers and
+one `__sF` import exception as v321. The target still has 5,782 exact dynamic
+function starts, 482 data items, 336 other non-code items, and 170 undefined
+imports. The final v322 database hash is
+`af0f2361668f7cd375b33242a0b21591a53446c332c0e77c8a4e51e3c6bdf1ad`.
+
+The anchor record is
+`artifacts/spectron_tgraalvar_runtime_gap_manual_translation_anchors_20260829.json`.
+It stores the source and target feature metrics, direct-call names, and the
+SHA-256 fingerprint of each compact decompilation. The application and
+reopen reports are
+`artifacts/spectron_tgraalvar_runtime_gap_manual_translation_application_20260829.json`
+and
+`artifacts/spectron_tgraalvar_runtime_gap_manual_translation_verification_20260829.json`.
+The checkpoint is
+`artifacts/spectron_translation_checkpoint_20260829_v322.json`.
+
 ## Current Spectron cross-build labels
 
 The latest disposable IDA copies extend the labels beyond the retained ELF

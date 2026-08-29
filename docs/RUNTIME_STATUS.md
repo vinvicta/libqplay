@@ -2932,6 +2932,68 @@ only native difference is the conditional at `0x15fad8`, this is the strongest
 local causal comparison for the loading-state candidate, while still not being
 a production or physical-device validation.
 
+## Spectron 2.2 v322 TGraalVar runtime translation
+
+The v322 pass continues from the verified v321 database and recovers twelve
+source-backed names in the obfuscated `G0gxgajWBw` implementation of
+`TGraalVar`. This was an offline IDA review, not a client run. The automatic
+matcher had left the rows unresolved because the target rebuild changes the
+string, list, hash, and array wrapper classes. The source and target Hex-Rays
+pseudocode still agree on the operations and method-local order.
+
+The translated rows are:
+
+| Source method | Target | Applied alias | Behavior retained |
+| --- | ---: | --- | --- |
+| `TGraalVar_receiveEvent_script_event` | `0x2136c4` | `v18_TGraalVar_receiveEvent_script_event` | event name and virtual +128 forward |
+| `TGraalVar_getVarNames_bool_bool_bool` | `0x214520` | `v18_TGraalVar_getVarNames_bool_bool_bool` | filtered enumeration, deduplication, sort |
+| `parseDynamicFunctionParameters_char_const_std_va_list` | `0x214a78` | `v18_parseDynamicFunctionParameters_char_const_std_va_list` | all GS2 format cases |
+| `TGraalVar_executeStringFunctionF_TString_const_char_const` | `0x215148` | `v18_TGraalVar_executeStringFunctionF_TString_const_char_const` | parse, invoke, return-string extraction |
+| `TGraalVar_saveString_TString_const_uint` | `0x2154e0` | `v18_TGraalVar_saveString_TString_const_uint` | path, stream, file, resource update |
+| `TGraalVar_saveLines_TString_const_uint` | `0x215660` | `v18_TGraalVar_saveLines_TString_const_uint` | line-list serialization |
+| `TGraalVar_loadString_TString_const` | `0x2157a8` | `v18_TGraalVar_loadString_TString_const` | path, stream load, virtual setter |
+| `TGraalVar_setVarValueAsFloat_TString_const_double` | `0x2158e4` | `v18_TGraalVar_setVarValueAsFloat_TString_const_double` | lookup and numeric fallback |
+| `TGraalVar_getVarValue_TString_const` | `0x2159f4` | `v18_TGraalVar_getVarValue_TString_const` | copied value and persistent fallback |
+| `TGraalVar_setArrayCellObject_int_TGraalVar` | `0x216174` | `v18_TGraalVar_setArrayCellObject_int_TGraalVar` | bounds, cell assignment, update flag |
+| `TGraalVar_getVarValueAsFloat_TString_const` | `0x216454` | `v18_TGraalVar_getVarValueAsFloat_TString_const` | lookup and numeric projection |
+| `TGraalVar_updateArrayString_void` | `0x216558` | `v18_TGraalVar_updateArrayString_void` | comma-separated cache rebuild |
+
+The event forwarder is the cleanest row: its source and target bodies both
+have one block and 24 instructions, and both construct the event string before
+calling virtual slot `+128`. The remaining eleven are explicit layout-change
+matches. Their target bodies add conversions for `C8THgaTQxF` and related
+obfuscated containers, but retain the source decision trees. The dynamic
+parameter parser keeps the `b`, `c`, `s`, `d`, `f`, `i`, `o`, `p`, and `u` cases.
+The save/load pair preserves the script-access path and stream operations.
+The value accessors preserve their primary lookup and persistent-hash
+fallbacks. The object-array setter at `0x216174` is independently supported
+by its bounds check, virtual `+200` assignment, and array-updated call; it is
+not the nearby string-cell setter.
+
+The target alias application renamed twelve functions and added twelve
+evidence comments with zero failures. Reopening the saved copy verified all
+twelve names. The v322 database contains 11,707 functions and zero audited
+default names. Its name origins are 6,240 translated `v18_` aliases, 417
+target-only descriptive labels, 990 retained target names, seven JNI exports,
+and 4,053 other IDA or PLT names. The complete dynamic-symbol audit remains
+at 6,770 named rows and 6,600 defined rows, with 5,782 exact function starts,
+482 data items, 336 other non-code items, and 170 undefined imports. The
+source-backed alias count rises to 4,564.
+
+The database hash is
+`af0f2361668f7cd375b33242a0b21591a53446c332c0e77c8a4e51e3c6bdf1ad`. The
+anchor, application, reopen-verification, audit, and checkpoint records are
+`artifacts/spectron_tgraalvar_runtime_gap_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tgraalvar_runtime_gap_manual_translation_application_20260829.json`,
+`artifacts/spectron_tgraalvar_runtime_gap_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v322_20260829.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v322_20260829.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v322_20260829.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v322.json`.
+
+This pass changed only a private IDA copy and the research archive. It did not
+patch the APK, contact a game server, or test a live endpoint.
+
 ## Spectron 2.2 v321 GUI boundary translation
 
 The v321 pass closes the remaining comparison gap around eleven GUI methods.

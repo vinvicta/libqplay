@@ -383,6 +383,106 @@ python3 tools/generate_spectron_translation_checkpoint_v321.py \
 python3 tools/validate_research_archive.py
 ```
 
+### v322 TGraalVar runtime-gap translation
+
+The v322 pass is a semantic review over a fresh copy of the verified v321
+database. It does not change the APK or run the client. First export compact
+Hex-Rays evidence for the source and target method sets. The evidence helper
+accepts comma-separated addresses and writes a JSON snapshot when
+`LIBQPLAY_EVIDENCE_OUT` is set:
+
+```bash
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  LIBQPLAY_FUNCTION_EVIDENCE=0x20d304,0x20e070,0x20e5c4,0x20ec60,0x20f014,0x20f17c,0x20f2ac \
+  LIBQPLAY_EVIDENCE_COMPACT=1 \
+  LIBQPLAY_EVIDENCE_OUT=/tmp/graal-source-tgraalvar-evidence.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /tmp/source-evidence.i64 \
+  -s tools/ida_dump_function_evidence.py
+```
+
+Run the same helper against the target for `0x2136c4,0x214520,0x214a78,
+0x215148,0x2154e0,0x215660,0x2157a8,0x2158e4,0x2159f4,0x216174,0x216454,
+0x216558`. The v322 generator combines those snapshots with the source and
+target feature exports. It refuses a missing pseudocode row, a changed raw
+symbol name, a duplicate source or target, or a row already present in the
+automatic semantic match list:
+
+```bash
+python3 tools/generate_spectron_tgraalvar_runtime_gap_anchors.py \
+  --original-features /tmp/original_features_v4_v3_materialized_v2.json \
+  --spectron-features /tmp/spectron_features_v320_current.json \
+  --semantic-map artifacts/spectron_semantic_function_translation_v320_20260828.json \
+  --source-evidence /tmp/graal-source-tgraalvar-evidence.json \
+  --source-evidence /tmp/graal-source-tgraalvar-adjacent-evidence.json \
+  --source-evidence /tmp/graal-source-getvarvalueasfloat-evidence.json \
+  --target-evidence /tmp/graal-target-tgraalvar-evidence.json \
+  --target-evidence /tmp/graal-target-tgraalvar-adjacent-evidence.json \
+  --original-binary-sha256 9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8 \
+  --spectron-binary-sha256 f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219 \
+  --output artifacts/spectron_tgraalvar_runtime_gap_manual_translation_anchors_20260829.json
+```
+
+The generator should report twelve high-confidence anchors, twelve
+pseudocode fingerprints on each side, and twelve layout-change rows. Apply
+the reviewed names to a new database copy:
+
+```bash
+cp /path/to/spectron_libqplay_translated_v321_gui_missing_function_aliases_final.i64 \
+  /tmp/spectron_v322_tgraalvar.i64
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_MANUAL_APPLY=1 \
+  SPECTRON_MANUAL_ANCHORS=/path/to/artifacts/spectron_tgraalvar_runtime_gap_manual_translation_anchors_20260829.json \
+  SPECTRON_MANUAL_EXPECTED_ARTIFACT=spectron_tgraalvar_runtime_gap_manual_translation_anchors_20260829 \
+  SPECTRON_MANUAL_SAVE_PATH=/path/to/spectron_libqplay_translated_v322_tgraalvar_runtime_gap_final.i64 \
+  SPECTRON_MANUAL_REPORT=/tmp/spectron_tgraalvar_runtime_gap_application.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /tmp/spectron_v322_tgraalvar.i64 \
+  -s tools/ida_apply_spectron_manual_anchors.py
+```
+
+Reopen the saved copy with `tools/ida_verify_spectron_manual_anchors.py`. The
+expected result is twelve verified names, 11,707 functions, and zero
+failures. Then rerun the name, boundary, and complete dynamic-symbol audits.
+The expected v322 name origins are:
+
+```text
+ida_named_or_other       4053
+target_jni_export           7
+target_named_export       990
+target_only_descriptive   417
+translated_v18_alias     6240
+```
+
+The dynamic-symbol audit remains at 6,770 named rows and 6,600 defined rows,
+with 5,782 functions, 482 data items, 336 other non-code items, and 170
+undefined imports. The twelve new aliases change only the name classification:
+source-backed aliases rise to 4,564 and exact retained names fall to 1,878.
+The v322 checkpoint is rebuilt offline with:
+
+```bash
+python3 tools/generate_spectron_translation_checkpoint_v322.py \
+  --parent-checkpoint artifacts/spectron_translation_checkpoint_20260828_v321.json \
+  --database /path/to/spectron_libqplay_translated_v322_tgraalvar_runtime_gap_final.i64 \
+  --anchor-artifact artifacts/spectron_tgraalvar_runtime_gap_manual_translation_anchors_20260829.json \
+  --application-report artifacts/spectron_tgraalvar_runtime_gap_manual_translation_application_20260829.json \
+  --verification-report artifacts/spectron_tgraalvar_runtime_gap_manual_translation_verification_20260829.json \
+  --name-audit artifacts/spectron_name_coverage_audit_v322_20260829.json \
+  --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v322_20260829.json \
+  --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v322_20260829.json \
+  --semantic-map artifacts/spectron_semantic_function_translation_v320_20260828.json \
+  --output artifacts/spectron_translation_checkpoint_20260829_v322.json
+
+python3 tools/validate_research_archive.py
+```
+
+The final database hash for this checkpoint is
+`af0f2361668f7cd375b33242a0b21591a53446c332c0e77c8a4e51e3c6bdf1ad`. The
+anchor, application, verification, audit, and checkpoint records are all
+offline artifacts. They do not establish live game-server compatibility.
+
 The complete private chain can be rebuilt with the single offline helper:
 
 ```bash

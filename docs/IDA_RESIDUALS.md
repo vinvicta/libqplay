@@ -494,6 +494,75 @@ rows, including 5,782 exact functions, 482 data items, 336 other non-code
 items, and 170 undefined imports. This is a complete IDA boundary and item
 accounting result, not a claim that stripped 2.2 source names were restored.
 
+### v322 TGraalVar runtime-gap translation
+
+The v322 pass moves from boundary accounting to semantic recovery in the
+largest unresolved application block. The target class is the obfuscated
+`G0gxgajWBw` implementation of `TGraalVar`. Automatic feature matching was
+deliberately conservative here because the target rebuild replaces the source
+`TString`, `TStringList`, hash-list, and array wrappers. The source and target
+Hex-Rays decompilations still preserve enough data flow to review the method
+identities directly.
+
+| 1.8 source | Spectron target | Applied alias | Main evidence |
+| ---: | ---: | --- | --- |
+| `0x20d304` | `0x2136c4` | `v18_TGraalVar_receiveEvent_script_event` | event string and virtual +128 forward |
+| `0x20e070` | `0x214520` | `v18_TGraalVar_getVarNames_bool_bool_bool` | three visibility flags, deduplication, sort |
+| `0x20e5c4` | `0x214a78` | `v18_parseDynamicFunctionParameters_char_const_std_va_list` | all GS2 format cases and va_list walk |
+| `0x20ec60` | `0x215148` | `v18_TGraalVar_executeStringFunctionF_TString_const_char_const` | parser, function call, result string, cleanup |
+| `0x20f014` | `0x2154e0` | `v18_TGraalVar_saveString_TString_const_uint` | path, stream, file write, resource update |
+| `0x20f17c` | `0x215660` | `v18_TGraalVar_saveLines_TString_const_uint` | line-list iteration and save |
+| `0x20f2ac` | `0x2157a8` | `v18_TGraalVar_loadString_TString_const` | path, stream load, virtual +200 setter |
+| `0x20f3bc` | `0x2158e4` | `v18_TGraalVar_setVarValueAsFloat_TString_const_double` | lookup, persistent fallback, numeric +192 setter |
+| `0x20f474` | `0x2159f4` | `v18_TGraalVar_getVarValue_TString_const` | lookup, copied value, persistent fallback |
+| `0x20fc18` | `0x216174` | `v18_TGraalVar_setArrayCellObject_int_TGraalVar` | index check, virtual +200 assignment, update flag |
+| `0x20fe5c` | `0x216454` | `v18_TGraalVar_getVarValueAsFloat_TString_const` | lookup and numeric projection |
+| `0x20ff2c` | `0x216558` | `v18_TGraalVar_updateArrayString_void` | comma-separated array cache rebuild |
+
+All twelve rows are high-confidence layout-change anchors. The first row has
+the same size, instruction count, block count, branch count, and mnemonic
+shape in both builds. The other eleven retain the method-level control flow
+and data flow but have changed metric records because of wrapper conversion
+code. For example, the target dynamic-parameter parser keeps 48 basic blocks
+and the same format-string cases, while its string and array construction
+calls are renamed and expanded. The target object-array setter is especially
+useful: automatic matching had assigned the nearby target string setter to
+the source string setter, while the target `0x216174` body clearly performs
+the object-cell assignment and update operation.
+
+The review used compact IDA evidence exports with Hex-Rays pseudocode for all
+24 functions. The anchor artifact stores a SHA-256 fingerprint for each
+pseudocode result, the source and target feature records, direct-call names,
+and the reasoning for each alias. No live endpoint, APK, or server was used
+for this translation pass. The target aliases were applied to a fresh copy of
+the verified v321 database. The application report records twelve resolved
+rows, twelve renamed functions, twelve comments, and zero failures. Reopening
+the saved copy verified all twelve names.
+
+The v322 database contains 11,707 functions and zero audited default names in
+the checked IDA families. Its name-origin counts are 6,240 translated
+`v18_` aliases, 417 target-only descriptive labels, 990 retained target
+names, seven JNI exports, and 4,053 other IDA or PLT names. The dynamic
+boundary count remains 5,782 exact function starts. The full dynamic-symbol
+audit still accounts for 6,770 named rows: 5,782 functions, 482 data items,
+336 other non-code items, and 170 undefined imports. The twelve new aliases
+move twelve rows from retained target names to the source-backed alias class,
+so that class rises from 4,552 to 4,564.
+
+The v322 database hash is
+`af0f2361668f7cd375b33242a0b21591a53446c332c0e77c8a4e51e3c6bdf1ad`, recorded
+in `artifacts/spectron_translation_checkpoint_20260829_v322.json`. The
+machine-readable evidence is in
+`artifacts/spectron_tgraalvar_runtime_gap_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tgraalvar_runtime_gap_manual_translation_application_20260829.json`,
+`artifacts/spectron_tgraalvar_runtime_gap_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v322_20260829.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v322_20260829.json`, and
+`artifacts/spectron_dynamic_symbol_coverage_audit_v322_20260829.json`. The
+reusable generators are
+`tools/generate_spectron_tgraalvar_runtime_gap_anchors.py` and
+`tools/generate_spectron_translation_checkpoint_v322.py`.
+
 ## CyaSSL role pass
 
 The CyaSSL gap was worth a separate pass because these routines sit directly

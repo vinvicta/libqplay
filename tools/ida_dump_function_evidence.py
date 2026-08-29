@@ -200,13 +200,16 @@ def main() -> None:
         for ea in raw_addresses()
     ]
 
-    print(
-        json.dumps(
-            {"raw": raw_rows, "strings": string_rows, "targets": rows},
-            indent=2,
-            sort_keys=True,
-        )
-    )
+    document = {"raw": raw_rows, "strings": string_rows, "targets": rows}
+    rendered = json.dumps(document, indent=2, sort_keys=True)
+    output_path = os.environ.get("LIBQPLAY_EVIDENCE_OUT")
+    if output_path:
+        with open(output_path, "w", encoding="utf-8") as handle:
+            handle.write(rendered)
+            handle.write("\n")
+        print("evidence written to %s" % output_path)
+    else:
+        print(rendered)
 
 
 if __name__ == "__main__":

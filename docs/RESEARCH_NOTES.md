@@ -110,6 +110,100 @@ scripts are
 `tools/generate_spectron_gui_missing_function_anchors.py`, and
 `tools/generate_spectron_translation_checkpoint_v321.py`.
 
+## 2026-08-29: TGraalVar runtime-gap translation and v322
+
+The v321 pass proved that every retained Spectron `FUNC` symbol had an exact
+IDA function boundary. It did not prove that every target function had a
+source-backed name. I therefore returned to the semantic matcher and selected
+the unresolved `TGraalVar` block, where the source names are particularly
+useful for understanding the GS2 runtime and the connector's script path.
+
+The automatic matcher had left these rows unmatched or ambiguous. That was
+expected. Spectron rebuilds the source string and container classes under
+obfuscated names, so direct-call names and register-detail hashes diverge
+even when the method logic remains recognizable. I dumped compact IDA
+evidence from disposable copies of both databases and reviewed the Hex-Rays
+pseudocode side by side.
+
+| Source method | Target address | Alias applied | Review result |
+| --- | ---: | --- | --- |
+| `TGraalVar_receiveEvent_script_event` | `0x2136c4` | `v18_TGraalVar_receiveEvent_script_event` | same event string and virtual +128 forward |
+| `TGraalVar_getVarNames_bool_bool_bool` | `0x214520` | `v18_TGraalVar_getVarNames_bool_bool_bool` | same visibility filters, deduplication, and sort |
+| `parseDynamicFunctionParameters_char_const_std_va_list` | `0x214a78` | `v18_parseDynamicFunctionParameters_char_const_std_va_list` | same `b`, `c`, `s`, `d`, `f`, `i`, `o`, `p`, and `u` cases |
+| `TGraalVar_executeStringFunctionF_TString_const_char_const` | `0x215148` | `v18_TGraalVar_executeStringFunctionF_TString_const_char_const` | same parser, invocation, result extraction, and cleanup |
+| `TGraalVar_saveString_TString_const_uint` | `0x2154e0` | `v18_TGraalVar_saveString_TString_const_uint` | same path, stream, write, and resource update |
+| `TGraalVar_saveLines_TString_const_uint` | `0x215660` | `v18_TGraalVar_saveLines_TString_const_uint` | same line-list iteration and file write |
+| `TGraalVar_loadString_TString_const` | `0x2157a8` | `v18_TGraalVar_loadString_TString_const` | same path, load, virtual setter, and cleanup |
+| `TGraalVar_setVarValueAsFloat_TString_const_double` | `0x2158e4` | `v18_TGraalVar_setVarValueAsFloat_TString_const_double` | same lookup and numeric setter fallback |
+| `TGraalVar_getVarValue_TString_const` | `0x2159f4` | `v18_TGraalVar_getVarValue_TString_const` | same copied value and persistent fallback |
+| `TGraalVar_setArrayCellObject_int_TGraalVar` | `0x216174` | `v18_TGraalVar_setArrayCellObject_int_TGraalVar` | same bounds check, cell assignment, and update flag |
+| `TGraalVar_getVarValueAsFloat_TString_const` | `0x216454` | `v18_TGraalVar_getVarValueAsFloat_TString_const` | same lookup and numeric projection |
+| `TGraalVar_updateArrayString_void` | `0x216558` | `v18_TGraalVar_updateArrayString_void` | same comma-separated cache rebuild |
+
+The first row is unusually clean. Its source and target feature records both
+show a one-block, 24-instruction body. Both construct the same fixed event
+name, call the receiver virtual slot at `+128` with the script event, pass a
+zero fourth argument, and clear the temporary string. The target method's
+obfuscated export is therefore only a wrapper spelling difference.
+
+The other eleven are layout-change matches. The target dynamic-parameter
+parser is a good example: it keeps the source's format switch, AArch64
+`va_list` cursor rules, numeric conversions, string conversion, and coordinate
+triple construction. The target inserts explicit `C8THgaTQxF` and
+`CanTfaz6bZ` operations, so its size grows from 1,220 to 1,252 bytes and its
+call count grows from 32 to 34. Those changes are recorded in the artifact,
+not treated as a reason to discard the semantic match.
+
+The two variable accessors show the same pattern. The numeric setter at
+`0x2158e4` first uses the primary variable lookup, falls back to the persistent
+hash, creates a variable if necessary, and stores the supplied double through
+the value object's `+192` virtual slot. The getter at `0x2159f4` returns a
+copied value through `+40`, then checks the persistent hash and returns a copy
+or null. The target adds conversion around the lookup key, but does not alter
+the decision tree.
+
+The object-array setter at `0x216174` resolved an important collision. The
+automatic matcher had already associated target `0x216210` with the source
+string-cell setter. The body at `0x216174` instead validates an index, selects
+the cell, calls its virtual setter at `+200`, and marks the array updated. Its
+target parameter is rendered through the rebuilt string wrapper, which is why
+the target signature looks different from the source `TGraalVar` spelling.
+
+The anchor generator requires every source and target row to be present in
+the feature exports, absent from the existing semantic `matches` list, and
+present in the compact Hex-Rays evidence exports. It records source and target
+function ranges, all feature metrics, direct-call names, and a SHA-256
+fingerprint of each pseudocode string. The resulting artifact has twelve
+high-confidence anchors and twelve explicit layout-change rows. The target
+application added twelve names and twelve comments with zero failures. A
+close and reopen verification found all twelve names in the 11,707-function
+database.
+
+The v322 database is
+`analysis/spectron_libqplay_translated_v322_tgraalvar_runtime_gap_final.i64`
+with SHA-256
+`af0f2361668f7cd375b33242a0b21591a53446c332c0e77c8a4e51e3c6bdf1ad`.
+The name audit reports zero default names, 6,240 translated `v18_` aliases,
+417 target-only descriptive labels, 990 retained target names, seven JNI
+exports, and 4,053 other IDA or PLT names. The dynamic-symbol boundary count
+remains 5,782 exact function starts. Its complete named-row classification is
+4,564 source-backed aliases, 1,878 exact retained names, 151 other retained
+target names, seven linker-boundary aliases, 169 imports with exact PLT
+veneers, and one undefined `__sF` object without an in-library veneer.
+
+The records are
+`artifacts/spectron_tgraalvar_runtime_gap_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tgraalvar_runtime_gap_manual_translation_application_20260829.json`,
+`artifacts/spectron_tgraalvar_runtime_gap_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v322_20260829.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v322_20260829.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v322_20260829.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v322.json`. The reusable
+helpers are `tools/generate_spectron_tgraalvar_runtime_gap_anchors.py` and
+`tools/generate_spectron_translation_checkpoint_v322.py`. This pass changed
+only the private IDA copy and documentation. It did not patch the APK, run
+the client, contact a server, or perform a live TLS test.
+
 ## 2026-08-28: Spectron dynamic function boundary completion and v320
 
 The retained dynamic table provided one more useful source of ground truth.

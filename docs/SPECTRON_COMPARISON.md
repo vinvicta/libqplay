@@ -209,6 +209,49 @@ call context support it. The audit is offline and contacted no endpoint.
 
 The generator is `tools/generate_spectron_symbol_table_audit.py`.
 
+## v322 TGraalVar semantic comparison
+
+The v322 translation pass uses the Spectron library's obfuscated
+`G0gxgajWBw` class as a direct comparison point for the source `TGraalVar`
+runtime. The target's retained export names are not useful source names, but
+the decompiled bodies preserve the same method responsibilities. Twelve rows
+were reviewed from disposable source and target IDA copies:
+
+| Source role | Spectron address | Applied alias | Review basis |
+| --- | ---: | --- | --- |
+| event forwarding | `0x2136c4` | `v18_TGraalVar_receiveEvent_script_event` | fixed event string and virtual +128 call |
+| variable-name enumeration | `0x214520` | `v18_TGraalVar_getVarNames_bool_bool_bool` | visibility filters, deduplication, sort |
+| dynamic parameter parsing | `0x214a78` | `v18_parseDynamicFunctionParameters_char_const_std_va_list` | complete GS2 format switch |
+| formatted string execution | `0x215148` | `v18_TGraalVar_executeStringFunctionF_TString_const_char_const` | parse, invoke, return-string extraction |
+| string persistence | `0x2154e0` | `v18_TGraalVar_saveString_TString_const_uint` | path, stream, write, resource update |
+| line persistence | `0x215660` | `v18_TGraalVar_saveLines_TString_const_uint` | line-list iteration and write |
+| string loading | `0x2157a8` | `v18_TGraalVar_loadString_TString_const` | path, load, virtual setter |
+| numeric setter | `0x2158e4` | `v18_TGraalVar_setVarValueAsFloat_TString_const_double` | primary and persistent lookup paths |
+| value getter | `0x2159f4` | `v18_TGraalVar_getVarValue_TString_const` | copied value and persistent fallback |
+| object-array setter | `0x216174` | `v18_TGraalVar_setArrayCellObject_int_TGraalVar` | bounds, virtual +200 assignment, update flag |
+| floating-point getter | `0x216454` | `v18_TGraalVar_getVarValueAsFloat_TString_const` | lookup and numeric projection |
+| array-string updater | `0x216558` | `v18_TGraalVar_updateArrayString_void` | comma-separated cache rebuild |
+
+The target rebuild replaces the source string and container implementations,
+so eleven rows have explicit metric differences. The event forwarder retains
+the one-block, 24-instruction shape. The dynamic-parameter parser retains all
+of the source `va_list` cases, including coordinate triples. The object-array
+setter is separated from the nearby string-cell setter by its index check,
+virtual `+200` call, and array-updated operation. These are semantic aliases,
+not assertions that the stripped 2.2 ELF still contains the original source
+names.
+
+The anchor artifact stores every source and target feature record, direct-call
+set, function range, pseudocode fingerprint, and review note. All twelve names
+were applied to a fresh v321-derived database and verified after reopening.
+The final database hash is
+`af0f2361668f7cd375b33242a0b21591a53446c332c0e77c8a4e51e3c6bdf1ad`. The
+records are
+`artifacts/spectron_tgraalvar_runtime_gap_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tgraalvar_runtime_gap_manual_translation_application_20260829.json`,
+`artifacts/spectron_tgraalvar_runtime_gap_manual_translation_verification_20260829.json`,
+and `artifacts/spectron_translation_checkpoint_20260829_v322.json`.
+
 ## Spectron connector endpoint change
 
 The endpoint builder is one of the clearest differences between the two
