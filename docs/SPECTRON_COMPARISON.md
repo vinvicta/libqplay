@@ -319,6 +319,44 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v340 TTilesBlock and TTilesPanel residual comparison
+
+The v340 pass compares four raw target methods in the tile and panel block.
+Every row has direct source and target compact Hex-Rays pseudocode and an
+exact normalized ARM64 feature match.
+
+| Source role | Spectron address | Applied alias | Match class |
+| --- | ---: | --- | --- |
+| `TTilesBlock_destroyImage_void` | `0x23a9a4` | `v18_TTilesBlock_destroyImage_void` | exact virtual image cleanup |
+| `TTilesBlock_isTransparentWithout_int_int` | `0x23aad4` | `v18_TTilesBlock_isTransparentWithout_int_int` | exact transparency mask query |
+| `TTilesBlock_isBlackWithout_int_int` | `0x23ad2c` | `v18_TTilesBlock_isBlackWithout_int_int` | exact black mask query |
+| `TTilesPanel_TTilesPanel_bool` | `0x23ae18` | `v18_TTilesPanel_TTilesPanel_bool` | exact constructor initialization |
+
+The image method preserves the virtual destructor call and pointer reset. The
+two query methods preserve the four-column bit index and separate 16-bit
+masks. The panel constructor preserves its boolean mode and zeroed fields.
+Three rows reinforce existing medium-confidence semantic candidates; the
+constructor is new context.
+
+All four aliases were applied and verified after reopening the v340 database.
+It has 11,707 functions, zero audited default names, 6,425 translated aliases,
+4,779 source-backed dynamic rows, 1,692 exact retained dynamic names, and
+5,782 exact dynamic function starts. Its SHA-256 is
+`24a96367fa0730d1a125d146f4fd8e304ba96f6676c15deb2807d085671734d1`.
+The complete comparison records are
+`artifacts/spectron_tiles_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tiles_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tiles_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v340_tiles_residual.json`,
+`artifacts/spectron_name_coverage_audit_v340.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v340.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v340.json`,
+`artifacts/spectron_semantic_translation_v340.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v340.json`.
+
+This comparison is static evidence. It does not change the runtime diagnosis,
+patch the APK, or contact a live endpoint.
+
 ## v339 rectangle and region geometry residual comparison
 
 The v339 pass compares four raw target methods in the rectangle and region

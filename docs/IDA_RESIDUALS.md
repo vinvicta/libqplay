@@ -800,6 +800,55 @@ generators are
 `tools/generate_spectron_format_parameters_property_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v326.py`.
 
+### v340 tile and panel residual aliases
+
+The v340 pass starts from the verified v339 database and translates four raw
+entries in the TTilesBlock and TTilesPanel implementation. Direct compact
+Hex-Rays pseudocode was captured for every source and target row, and all four
+rows are exact normalized ARM64 matches.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | --- | --- | --- |
+| `0x230a2c` `TTilesBlock_destroyImage_void` | `0x23a9a4` `_ZN10w7keKa2nGv10khjdKaaQOuEv` | `v18_TTilesBlock_destroyImage_void` | image destruction and pointer reset |
+| `0x230b5c` `TTilesBlock_isTransparentWithout_int_int` | `0x23aad4` `_ZN10w7keKa2nGv10DnLcKawtluEii` | `v18_TTilesBlock_isTransparentWithout_int_int` | transparency bit-mask query |
+| `0x230db4` `TTilesBlock_isBlackWithout_int_int` | `0x23ad2c` `_ZN10w7keKa2nGv10N2HYJa6FGhEii` | `v18_TTilesBlock_isBlackWithout_int_int` | black bit-mask query |
+| `0x230ea0` `TTilesPanel_TTilesPanel_bool` | `0x23ae18` `_ZN10BEXWLaNNcXC1Eb` | `v18_TTilesPanel_TTilesPanel_bool` | constructor field initialization |
+
+The image method invokes the image object's virtual destructor and clears its
+pointer. The two tile queries preserve the x plus four-times-y bit index and
+their separate transparency and black masks. The panel constructor copies its
+boolean mode and clears the two integer fields and pointer. All four aliases
+were applied to a fresh v339-derived database and verified after reopening.
+
+The v340 database contains 11,707 functions, zero audited default names,
+6,425 translated aliases, 419 target-only descriptive labels, 804 retained
+target names, seven JNI exports, and 4,052 other IDA or PLT names. Dynamic
+coverage reports 4,779 source-backed aliases and 1,692 exact retained dynamic
+names. All 5,782 defined dynamic function symbols still resolve to exact IDA
+function starts.
+
+The saved database is
+`analysis/spectron_libqplay_translated_v340_tiles_residual.i64` with SHA-256
+`24a96367fa0730d1a125d146f4fd8e304ba96f6676c15deb2807d085671734d1`.
+The machine-readable records are
+`artifacts/spectron_tiles_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tiles_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tiles_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v340_tiles_residual.json`,
+`artifacts/spectron_name_coverage_audit_v340.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v340.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v340.json`,
+`artifacts/spectron_semantic_translation_v340.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v340.json`.
+The reusable scripts are
+`tools/generate_spectron_tiles_residual_anchors.py`,
+`tools/carry_forward_spectron_semantic_translation_v340.py`, and
+`tools/generate_spectron_translation_checkpoint_v340.py`.
+
+This is a static IDA translation checkpoint. It did not patch the APK, rerun
+the loopback client, alter TLS behavior, contact a game server, or test a
+live endpoint.
+
 ### v339 geometry residual aliases
 
 The v339 pass starts from the verified v338 database and translates four raw

@@ -13,7 +13,7 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v339 Spectron database. It
+The current documented translation frontier is the v340 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -209,6 +209,14 @@ direct source and target Hex-Rays pseudocode and an exact normalized ARM64
 feature match. The v339 database contains 6,421 reviewed `v18_` aliases,
 4,774 source-backed dynamic rows, and 1,696 exact retained dynamic names. It
 is a static IDA checkpoint and has not been used for a new runtime APK replay.
+
+The v340 revision resolves four raw tile and panel methods. It covers image
+destruction, transparency and black-mask queries, and the `TTilesPanel`
+constructor. Every row has direct source and target Hex-Rays pseudocode and an
+exact normalized ARM64 feature match. The v340 database contains 6,425
+reviewed `v18_` aliases, 4,779 source-backed dynamic rows, and 1,692 exact
+retained dynamic names. It is a static IDA checkpoint and has not been used
+for a new runtime APK replay.
 
 The v331 revision continues immediately into the static-variable runtime. It
 adds 22 high-confidence aliases for the universe initializer, the
@@ -815,6 +823,53 @@ target-only functions, with zero failures. Reopening the fresh copy verified
 all four names. This was a static translation pass only. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
+
+### v340 tile and panel residual aliases
+
+The v340 pass starts from the verified v339 database and resolves four raw
+entries in the `TTilesBlock` and `TTilesPanel` implementation. Direct compact
+Hex-Rays pseudocode was captured for every source and target row, and all four
+rows have exact normalized ARM64 feature matches.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | --- | --- | --- |
+| `0x230a2c` `TTilesBlock_destroyImage_void` | `0x23a9a4` `_ZN10w7keKa2nGv10khjdKaaQOuEv` | `v18_TTilesBlock_destroyImage_void` | image destruction and pointer reset |
+| `0x230b5c` `TTilesBlock_isTransparentWithout_int_int` | `0x23aad4` `_ZN10w7keKa2nGv10DnLcKawtluEii` | `v18_TTilesBlock_isTransparentWithout_int_int` | transparency bit-mask query |
+| `0x230db4` `TTilesBlock_isBlackWithout_int_int` | `0x23ad2c` `_ZN10w7keKa2nGv10N2HYJa6FGhEii` | `v18_TTilesBlock_isBlackWithout_int_int` | black bit-mask query |
+| `0x230ea0` `TTilesPanel_TTilesPanel_bool` | `0x23ae18` `_ZN10BEXWLaNNcXC1Eb` | `v18_TTilesPanel_TTilesPanel_bool` | constructor field initialization |
+
+The image method invokes the image object's virtual destructor and clears its
+pointer. The two query methods preserve the x plus four-times-y bit index and
+the separate transparency and black masks. The panel constructor copies its
+boolean mode and clears the two integer fields and pointer. The aliases were
+applied and verified after reopening the v340 database.
+
+The v340 database has 11,707 functions and zero audited default names. Its
+name audit reports 6,425 translated aliases, 804 retained target names, 419
+target-only descriptive labels, seven JNI exports, and 4,052 other IDA or PLT
+names. Dynamic coverage reports 4,779 source-backed aliases, 1,692 exact
+retained dynamic names, and 5,782 exact dynamic function starts.
+
+The saved database is
+`analysis/spectron_libqplay_translated_v340_tiles_residual.i64` with SHA-256
+`24a96367fa0730d1a125d146f4fd8e304ba96f6676c15deb2807d085671734d1`.
+The machine-readable records are
+`artifacts/spectron_tiles_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tiles_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tiles_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v340_tiles_residual.json`,
+`artifacts/spectron_name_coverage_audit_v340.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v340.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v340.json`,
+`artifacts/spectron_semantic_translation_v340.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v340.json`.
+
+The reusable generators are
+`tools/generate_spectron_tiles_residual_anchors.py`,
+`tools/carry_forward_spectron_semantic_translation_v340.py`, and
+`tools/generate_spectron_translation_checkpoint_v340.py`. This is a static
+IDA translation checkpoint. It did not patch the APK, rerun the loopback
+client, change TLS behavior, contact a game server, or test a live endpoint.
 
 ### v339 geometry residual aliases
 

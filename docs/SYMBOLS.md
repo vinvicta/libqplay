@@ -425,6 +425,43 @@ records are
 `artifacts/spectron_semantic_translation_v326.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v326.json`.
 
+### v340 TTilesBlock and TTilesPanel residual aliases
+
+The v340 pass adds four semantic aliases to the private Spectron IDA
+database. The raw target identifiers remain visible so each translated name
+can be traced back to the stripped build.
+
+| Spectron address | Raw target symbol | Applied alias | Recovered role |
+| ---: | --- | --- | --- |
+| `0x23a9a4` | `_ZN10w7keKa2nGv10khjdKaaQOuEv` | `v18_TTilesBlock_destroyImage_void` | image destruction and pointer reset |
+| `0x23aad4` | `_ZN10w7keKa2nGv10DnLcKawtluEii` | `v18_TTilesBlock_isTransparentWithout_int_int` | transparency bit-mask query |
+| `0x23ad2c` | `_ZN10w7keKa2nGv10N2HYJa6FGhEii` | `v18_TTilesBlock_isBlackWithout_int_int` | black bit-mask query |
+| `0x23ae18` | `_ZN10BEXWLaNNcXC1Eb` | `v18_TTilesPanel_TTilesPanel_bool` | constructor field initialization |
+
+The source counterparts are `0x230a2c`, `0x230b5c`, `0x230db4`, and
+`0x230ea0`. The image method invokes the virtual image destructor and clears
+its pointer. The two queries use the same `x + 4*y` bit index against separate
+transparency and black masks. The panel constructor stores its boolean mode
+and clears its integer fields and pointer. Direct pseudocode and exact
+normalized feature records support all four rows.
+
+The v340 records are
+`artifacts/spectron_tiles_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tiles_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tiles_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v340_tiles_residual.json`,
+`artifacts/spectron_name_coverage_audit_v340.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v340.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v340.json`,
+`artifacts/spectron_semantic_translation_v340.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v340.json`.
+
+The v340 database has 6,425 translated `v18_` aliases, 419 target-only
+descriptive labels, 804 retained target names, seven JNI exports, 4,052
+other IDA or PLT names, 4,779 source-backed dynamic rows, and 1,692 exact
+retained dynamic names. Its hash is
+`24a96367fa0730d1a125d146f4fd8e304ba96f6676c15deb2807d085671734d1`.
+
 ### v339 rectangle and region geometry residual aliases
 
 The v339 pass adds four semantic aliases to the private Spectron IDA

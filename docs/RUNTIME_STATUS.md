@@ -3035,6 +3035,38 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v340 TTilesBlock and TTilesPanel residuals
+
+The v340 revision is a static IDA checkpoint for four raw tile and panel
+methods. It covers image destruction, transparency and black-mask queries,
+and the boolean TTilesPanel constructor. Every source and target row has
+direct compact pseudocode and an exact normalized ARM64 feature match. Three
+rows reinforce existing semantic candidates; the panel constructor adds new
+context.
+
+The aliases were applied to a fresh v339-derived database and verified after
+reopening. The v340 database contains 11,707 functions, zero audited default
+names, 6,425 translated aliases, 4,779 source-backed dynamic rows, and 1,692
+exact retained dynamic names. All 5,782 defined dynamic function symbols still
+resolve to exact IDA function starts.
+
+Its SHA-256 is
+`24a96367fa0730d1a125d146f4fd8e304ba96f6676c15deb2807d085671734d1`.
+The records are
+`artifacts/spectron_tiles_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tiles_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tiles_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v340_tiles_residual.json`,
+`artifacts/spectron_name_coverage_audit_v340.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v340.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v340.json`,
+`artifacts/spectron_semantic_translation_v340.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v340.json`.
+
+This checkpoint did not change the verified loopback package, connector TLS
+result, or local protocol responder. No live endpoint was contacted, and no
+new runtime replay was performed for v340.
+
 ## Spectron 2.2 v339 rectangle and region geometry residuals
 
 The v339 revision is a static IDA checkpoint for four raw geometry methods:

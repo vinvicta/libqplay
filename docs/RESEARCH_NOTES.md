@@ -261,6 +261,62 @@ This pass changed only the private IDA copy and archive. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
 
+## 2026-08-29: TTilesBlock and TTilesPanel residuals, v340
+
+The next compact raw-symbol group is the tile and panel block at target
+`0x23a9a4` through `0x23ae18`. It contains the image destructor helper, two
+four-by-four tile mask queries, and the boolean `TTilesPanel` constructor.
+
+| 1.8 source | Spectron target | Applied alias | Direct behavior |
+| --- | ---: | --- | --- |
+| `0x230a2c` `TTilesBlock_destroyImage_void` | `0x23a9a4` `_ZN10w7keKa2nGv10khjdKaaQOuEv` | `v18_TTilesBlock_destroyImage_void` | virtual image destruction and pointer reset |
+| `0x230b5c` `TTilesBlock_isTransparentWithout_int_int` | `0x23aad4` `_ZN10w7keKa2nGv10DnLcKawtluEii` | `v18_TTilesBlock_isTransparentWithout_int_int` | transparency mask bit query |
+| `0x230db4` `TTilesBlock_isBlackWithout_int_int` | `0x23ad2c` `_ZN10w7keKa2nGv10N2HYJa6FGhEii` | `v18_TTilesBlock_isBlackWithout_int_int` | black mask bit query |
+| `0x230ea0` `TTilesPanel_TTilesPanel_bool` | `0x23ae18` `_ZN10BEXWLaNNcXC1Eb` | `v18_TTilesPanel_TTilesPanel_bool` | boolean mode and field initialization |
+
+The image method checks the image pointer, calls its virtual destructor at
+slot 1, and clears the member at offset 16. The transparency and black
+methods use the same bit index, `x + 4*y`, against separate 16-bit masks. The
+panel constructor stores its boolean argument at byte 0 and clears the two
+integer fields at offsets 4 and 8 and the pointer at offset 16. Direct
+compact Hex-Rays pseudocode and exact normalized ARM64 feature metrics agree
+for all four rows.
+
+Three rows reinforce medium-confidence automatic semantic candidates, while
+the panel constructor supplies new context. The aliases were applied to the
+v339-derived database and verified after reopening. The C1 and C2 constructor
+exports share one target address, so renaming the applied C1 anchor also makes
+the C2 dynamic row source-backed.
+
+The v340 database has 11,707 functions and zero audited default names. Its
+name audit reports 6,425 translated aliases, 804 retained target names, 419
+target-only descriptive labels, seven JNI exports, and 4,052 other IDA or PLT
+names. Dynamic coverage reports 4,779 source-backed aliases and 1,692 exact
+retained dynamic names. All 5,782 defined dynamic function symbols still
+resolve to exact IDA function starts.
+
+The v340 database is
+`analysis/spectron_libqplay_translated_v340_tiles_residual.i64` with SHA-256
+`24a96367fa0730d1a125d146f4fd8e304ba96f6676c15deb2807d085671734d1`.
+The machine-readable records are
+`artifacts/spectron_tiles_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tiles_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_tiles_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v340_tiles_residual.json`,
+`artifacts/spectron_name_coverage_audit_v340.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v340.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v340.json`,
+`artifacts/spectron_semantic_translation_v340.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v340.json`.
+The reusable scripts are
+`tools/generate_spectron_tiles_residual_anchors.py`,
+`tools/carry_forward_spectron_semantic_translation_v340.py`, and
+`tools/generate_spectron_translation_checkpoint_v340.py`.
+
+This pass changed only the private IDA database and research archive. It did
+not patch the APK, rerun the loopback client, alter TLS behavior, contact a
+game server, or test a live endpoint.
+
 ## 2026-08-29: rectangle and region geometry residuals, v339
 
 The next clean raw-symbol group after the THTMLPage lifecycle pass is a
