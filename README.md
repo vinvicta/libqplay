@@ -270,6 +270,10 @@ separated by `0xb470`. All three match normalized ARM64 shape. Two match the
 complete recorded feature set, while the state-machine helper differs only in
 register-detail allocation. The target now has 389 remaining default `sub_`
 names.
+The v314 revision translates the remaining large Latin2 and Latin
+`hints_apply` callbacks in that FreeType run. Both are selected directly by
+their script class records and both match the complete recorded ARM64 feature
+set. The target now has 387 remaining default `sub_` names.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -366,6 +370,8 @@ The current v312 database is kept locally as
 `analysis/spectron_libqplay_translated_v312_autofit_metrics.i64`.
 The current v313 database is kept locally as
 `analysis/spectron_libqplay_translated_v313_bzip2.i64`.
+The current v314 database is kept locally as
+`analysis/spectron_libqplay_translated_v314_freetype_apply.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification

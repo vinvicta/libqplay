@@ -749,6 +749,12 @@ def main():
     spectron_checkpoint_v313 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v313.json"
     )
+    spectron_freetype_apply_anchors = load_json(
+        "artifacts/spectron_freetype_apply_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v314 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v314.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -16555,6 +16561,177 @@ def main():
         389,
     )
     check(
+        "Spectron FreeType apply artifact",
+        spectron_freetype_apply_anchors["artifact"],
+        "spectron_freetype_apply_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron FreeType apply network",
+        spectron_freetype_apply_anchors["network_contacted"],
+        False,
+    )
+    freetype_apply_summary = spectron_freetype_apply_anchors["summary"]
+    check(
+        "Spectron FreeType apply anchor count",
+        freetype_apply_summary["anchor_count"],
+        2,
+    )
+    check(
+        "Spectron FreeType apply target set size",
+        freetype_apply_summary["unique_target_count"],
+        2,
+    )
+    check(
+        "Spectron FreeType apply high-confidence count",
+        freetype_apply_summary["high_confidence_count"],
+        2,
+    )
+    check(
+        "Spectron FreeType apply normalized count",
+        freetype_apply_summary["normalized_shape_exact_count"],
+        2,
+    )
+    check(
+        "Spectron FreeType apply full metric count",
+        freetype_apply_summary["full_metric_exact_count"],
+        2,
+    )
+    check(
+        "Spectron FreeType apply register-detail count",
+        freetype_apply_summary["register_detail_only_count"],
+        0,
+    )
+    check(
+        "Spectron FreeType apply source default count",
+        freetype_apply_summary["source_default_name_count"],
+        2,
+    )
+    check(
+        "Spectron FreeType apply target default count",
+        freetype_apply_summary["target_default_name_count"],
+        2,
+    )
+    freetype_apply_rows = {
+        row["spectron_ea"]: row
+        for row in spectron_freetype_apply_anchors["anchors"]
+    }
+    freetype_apply_expected = {
+        "0x27b3cc": (
+            "0x26df5c",
+            "v18_af_latin2_hints_apply",
+            "af_latin2_hints_apply",
+            "src/autofit/aflatin2.c",
+            [],
+            True,
+        ),
+        "0x27cc90": (
+            "0x26f820",
+            "v18_af_latin_hints_apply",
+            "af_latin_hints_apply",
+            "src/autofit/aflatin.c",
+            [],
+            True,
+        ),
+    }
+    check(
+        "Spectron FreeType apply target set",
+        set(freetype_apply_rows),
+        set(freetype_apply_expected),
+    )
+    for target_ea, (
+        source_ea,
+        expected_name,
+        expected_source_name,
+        expected_source_file,
+        expected_differences,
+        expected_full_match,
+    ) in freetype_apply_expected.items():
+        row = freetype_apply_rows[target_ea]
+        check(
+            "Spectron FreeType apply source " + target_ea,
+            row["original_ea"],
+            source_ea,
+        )
+        check(
+            "Spectron FreeType apply name " + target_ea,
+            row["proposed_name"],
+            expected_name,
+        )
+        check(
+            "Spectron FreeType apply source name " + target_ea,
+            row["source_name"],
+            expected_source_name,
+        )
+        check(
+            "Spectron FreeType apply source file " + target_ea,
+            row["source_file"],
+            expected_source_file,
+        )
+        check(
+            "Spectron FreeType apply metrics " + target_ea,
+            row["metric_differences"],
+            expected_differences,
+        )
+        check(
+            "Spectron FreeType apply normalized " + target_ea,
+            row["normalized_shape_equal"],
+            True,
+        )
+        check(
+            "Spectron FreeType apply full match " + target_ea,
+            row["full_metric_equal"],
+            expected_full_match,
+        )
+    check(
+        "Spectron FreeType apply verified name count",
+        spectron_checkpoint_v314["freetype_apply_anchors"][
+            "verified_name_count"
+        ],
+        2,
+    )
+    check(
+        "Spectron FreeType apply reopen failures",
+        spectron_checkpoint_v314["freetype_apply_anchors"][
+            "reopen_failure_count"
+        ],
+        0,
+    )
+    check(
+        "Spectron v314 checkpoint artifact",
+        spectron_checkpoint_v314["artifact"],
+        "spectron_translation_checkpoint_20260828_v314",
+    )
+    check(
+        "Spectron v314 checkpoint parent",
+        spectron_checkpoint_v314["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v313",
+    )
+    check(
+        "Spectron v314 checkpoint parent path",
+        spectron_checkpoint_v314["parent_checkpoint"]["path"],
+        "artifacts/spectron_translation_checkpoint_20260828_v313.json",
+    )
+    check(
+        "Spectron v314 checkpoint database hash",
+        spectron_checkpoint_v314["database"]["sha256"],
+        "338d9a62d76c6c2178acbd2a8ea50d811ff2959f25745e1aa5bdebea369bf279",
+    )
+    check(
+        "Spectron v314 checkpoint database close-reopen",
+        spectron_checkpoint_v314["database"]["close_reopen_verified"],
+        True,
+    )
+    check(
+        "Spectron v314 checkpoint function count",
+        spectron_checkpoint_v314["database"]["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v314 checkpoint default sub count",
+        spectron_checkpoint_v314["database"]["default_sub_function_count"],
+        387,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -16938,6 +17115,8 @@ def main():
         spectron_checkpoint_v312,
         spectron_bzip2_helpers_anchors,
         spectron_checkpoint_v313,
+        spectron_freetype_apply_anchors,
+        spectron_checkpoint_v314,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
