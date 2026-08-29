@@ -274,6 +274,12 @@ The v314 revision translates the remaining large Latin2 and Latin
 `hints_apply` callbacks in that FreeType run. Both are selected directly by
 their script class records and both match the complete recorded ARM64 feature
 set. The target now has 387 remaining default `sub_` names.
+The v315 revision translates nine libjpeg marker-writer routines. The source
+and target marker-writer tables select seven public writer methods, while the
+two internal DQT and DHT emitters are tied to their writer callers. All nine
+match normalized ARM64 shape, seven match every recorded metric, and two
+differ only in register-detail allocation. The target now has 378 remaining
+default `sub_` names.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -372,6 +378,8 @@ The current v313 database is kept locally as
 `analysis/spectron_libqplay_translated_v313_bzip2.i64`.
 The current v314 database is kept locally as
 `analysis/spectron_libqplay_translated_v314_freetype_apply.i64`.
+The current v315 database is kept locally as
+`analysis/spectron_libqplay_translated_v315_jcmarker.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification

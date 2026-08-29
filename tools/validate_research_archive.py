@@ -755,6 +755,12 @@ def main():
     spectron_checkpoint_v314 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v314.json"
     )
+    spectron_jcmarker_anchors = load_json(
+        "artifacts/spectron_jpeg_marker_writer_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v315 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v315.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -16732,6 +16738,230 @@ def main():
         387,
     )
     check(
+        "Spectron jcmarker artifact",
+        spectron_jcmarker_anchors["artifact"],
+        "spectron_jpeg_marker_writer_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron jcmarker network",
+        spectron_jcmarker_anchors["network_contacted"],
+        False,
+    )
+    jcmarker_summary = spectron_jcmarker_anchors["summary"]
+    check("Spectron jcmarker anchor count", jcmarker_summary["anchor_count"], 9)
+    check(
+        "Spectron jcmarker target set size",
+        jcmarker_summary["unique_target_count"],
+        9,
+    )
+    check(
+        "Spectron jcmarker high-confidence count",
+        jcmarker_summary["high_confidence_count"],
+        9,
+    )
+    check(
+        "Spectron jcmarker normalized count",
+        jcmarker_summary["normalized_shape_exact_count"],
+        9,
+    )
+    check(
+        "Spectron jcmarker full metric count",
+        jcmarker_summary["full_metric_exact_count"],
+        7,
+    )
+    check(
+        "Spectron jcmarker register-detail count",
+        jcmarker_summary["register_detail_only_count"],
+        2,
+    )
+    check(
+        "Spectron jcmarker source default count",
+        jcmarker_summary["source_default_name_count"],
+        9,
+    )
+    check(
+        "Spectron jcmarker target default count",
+        jcmarker_summary["target_default_name_count"],
+        9,
+    )
+    check(
+        "Spectron jcmarker method count",
+        jcmarker_summary["marker_method_count"],
+        7,
+    )
+    check(
+        "Spectron jcmarker internal emitter count",
+        jcmarker_summary["internal_emitter_count"],
+        2,
+    )
+    check(
+        "Spectron jcmarker writer body count",
+        jcmarker_summary["writer_body_count"],
+        5,
+    )
+    jcmarker_rows = {
+        row["spectron_ea"]: row
+        for row in spectron_jcmarker_anchors["anchors"]
+    }
+    jcmarker_expected = {
+        "0x2a5b30": (
+            "0x2986c0",
+            "v18_jpeg_write_marker_byte",
+            "write_marker_byte",
+            [],
+            True,
+        ),
+        "0x2a5b9c": (
+            "0x29872c",
+            "v18_jpeg_write_file_trailer",
+            "write_file_trailer",
+            [],
+            True,
+        ),
+        "0x2a5c60": (
+            "0x2987f0",
+            "v18_jpeg_write_marker_header",
+            "write_marker_header",
+            [],
+            True,
+        ),
+        "0x2a5e10": (
+            "0x2989a0",
+            "v18_jpeg_emit_dht",
+            "emit_dht",
+            [],
+            True,
+        ),
+        "0x2a6300": (
+            "0x298e90",
+            "v18_jpeg_write_file_header",
+            "write_file_header",
+            [],
+            True,
+        ),
+        "0x2a6f38": (
+            "0x299ac8",
+            "v18_jpeg_emit_dqt",
+            "emit_dqt",
+            [],
+            True,
+        ),
+        "0x2a72c4": (
+            "0x299e54",
+            "v18_jpeg_write_frame_header",
+            "write_frame_header",
+            ["register_detail_hash"],
+            False,
+        ),
+        "0x2a7748": (
+            "0x29a2d8",
+            "v18_jpeg_write_tables_only",
+            "write_tables_only",
+            ["register_detail_hash"],
+            False,
+        ),
+        "0x2a7eb8": (
+            "0x29aa48",
+            "v18_jpeg_write_scan_header",
+            "write_scan_header",
+            [],
+            True,
+        ),
+    }
+    check(
+        "Spectron jcmarker target set",
+        set(jcmarker_rows),
+        set(jcmarker_expected),
+    )
+    for target_ea, (
+        source_ea,
+        expected_name,
+        expected_source_name,
+        expected_differences,
+        expected_full_match,
+    ) in jcmarker_expected.items():
+        row = jcmarker_rows[target_ea]
+        check(
+            "Spectron jcmarker source " + target_ea,
+            row["original_ea"],
+            source_ea,
+        )
+        check(
+            "Spectron jcmarker name " + target_ea,
+            row["proposed_name"],
+            expected_name,
+        )
+        check(
+            "Spectron jcmarker source name " + target_ea,
+            row["source_name"],
+            expected_source_name,
+        )
+        check(
+            "Spectron jcmarker source file " + target_ea,
+            row["source_file"],
+            "jcmarker.c",
+        )
+        check(
+            "Spectron jcmarker metrics " + target_ea,
+            row["metric_differences"],
+            expected_differences,
+        )
+        check(
+            "Spectron jcmarker normalized " + target_ea,
+            row["normalized_shape_equal"],
+            True,
+        )
+        check(
+            "Spectron jcmarker full match " + target_ea,
+            row["full_metric_equal"],
+            expected_full_match,
+        )
+    check(
+        "Spectron jcmarker verified name count",
+        spectron_checkpoint_v315["jcmarker_anchors"]["verified_name_count"],
+        9,
+    )
+    check(
+        "Spectron jcmarker reopen failures",
+        spectron_checkpoint_v315["jcmarker_anchors"]["reopen_failure_count"],
+        0,
+    )
+    check(
+        "Spectron v315 checkpoint artifact",
+        spectron_checkpoint_v315["artifact"],
+        "spectron_translation_checkpoint_20260828_v315",
+    )
+    check(
+        "Spectron v315 checkpoint parent",
+        spectron_checkpoint_v315["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v314",
+    )
+    check(
+        "Spectron v315 checkpoint parent path",
+        spectron_checkpoint_v315["parent_checkpoint"]["path"],
+        "artifacts/spectron_translation_checkpoint_20260828_v314.json",
+    )
+    check(
+        "Spectron v315 checkpoint database hash",
+        spectron_checkpoint_v315["database"]["sha256"],
+        "c0c270a006c67f5f7ee2bb5f097c6fa2639ebaaba859cfa6070b2ebfcb1dabe6",
+    )
+    check(
+        "Spectron v315 checkpoint database close-reopen",
+        spectron_checkpoint_v315["database"]["close_reopen_verified"],
+        True,
+    )
+    check(
+        "Spectron v315 checkpoint function count",
+        spectron_checkpoint_v315["database"]["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v315 checkpoint default sub count",
+        spectron_checkpoint_v315["database"]["default_sub_function_count"],
+        378,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -17117,6 +17347,8 @@ def main():
         spectron_checkpoint_v313,
         spectron_freetype_apply_anchors,
         spectron_checkpoint_v314,
+        spectron_jcmarker_anchors,
+        spectron_checkpoint_v315,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
