@@ -563,6 +563,78 @@ reusable generators are
 `tools/generate_spectron_tgraalvar_runtime_gap_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v322.py`.
 
+### v323 TGraalVar runtime continuation
+
+The v323 pass reviews the next contiguous source and target method block. It
+uses the same evidence standard as v322, but the larger group makes the class
+relationships clearer. The source methods cover script lifecycle, function
+lookup, sorting, persistent-variable serialization, value access, recursive
+copying, array construction, static property registration, and string parsing.
+
+| 1.8 source | Spectron target | Applied alias | Main evidence |
+| ---: | ---: | --- | --- |
+| `0x20d7dc` | `0x213c84` | `v18_TGraalVar_runScript_void` | attached script-space forwarder |
+| `0x20e598` | `0x214a4c` | `v18_TGraalVar_leaveClass_TString_const` | lazy script-space creation and leave |
+| `0x20eaf0` | `0x214fc4` | `v18_TGraalVar_cancelEvents_TString_const` | attached script-space forwarder |
+| `0x20eb04` | `0x214fec` | `v18_TGraalVar_setScript_TString_const` | string script setter |
+| `0x20eb2c` | `0x215014` | `v18_TGraalVar_setScript_TScript` | script-object setter overload |
+| `0x20eb54` | `0x21503c` | `v18_TGraalVar_freeScript_void` | attached script-space release |
+| `0x210a8c` | `0x217198` | `v18_TGraalVar_hasFunction_TString_const` | primary, global, and table lookup |
+| `0x210b40` | `0x21727c` | `v18_TGraalVar_sortList_bool` | temporary records and value qsort |
+| `0x210ce8` | `0x217444` | `v18_TGraalVar_sortListByValue_TString_const_TString_const_bool` | numeric or string qsort |
+| `0x210f98` | `0x217754` | `v18_TGraalVar_listSubVars_TStringList_TString_const` | recursive persistent-variable listing |
+| `0x211178` | `0x21797c` | `v18_TGraalVar_saveVarsToArray_void` | property filtering and export |
+| `0x211850` | `0x21805c` | `v18_TGraalVar_writeFloatOrString_TString_const` | numeric test and setter choice |
+| `0x21190c` | `0x218134` | `v18_TGraalVar_setSubVar_TString_const` | dotted path parsing and recursion |
+| `0x211c00` | `0x218468` | `v18_TGraalVar_setVarValue_TString_const_TString_const` | direct lookup or equals fallback |
+| `0x2124c0` | `0x218d70` | `v18_TGraalVar_getArrayMember_TString_const` | case-insensitive member scan |
+| `0x21277c` | `0x219050` | `v18_TGraalVar_copyFrom_TGraalVar` | scalar, array, property, and child copy |
+| `0x2135b0` | `0x219ed0` | `v18_TGraalVar_getFunctions_void` | function metadata array |
+| `0x213b10` | `0x21a64c` | `v18_TGraalVar_writeStringList_TStringList` | array length synchronization |
+| `0x213e48` | `0x21a970` | `v18_TGraalVar_insertArrayCellFloat_int_double` | numeric cell construction |
+| `0x213f04` | `0x21aa0c` | `v18_TGraalVar_insertArrayCellString_int_TString_const` | string cell construction |
+| `0x213fc0` | `0x21aab0` | `v18_TGraalVar_insertArrayCellObject_int_TGraalVar` | object cell construction |
+| `0x21407c` | `0x21ab54` | `v18_TGraalVar_initStaticScriptVars_void` | static property registration |
+| `0x2140c0` | `0x21ab98` | `v18_TGraalVar_writeString_TString_const` | comma and quoted-text parsing |
+
+Six short wrappers have exact recorded metrics. The other seventeen are
+layout-change matches caused by the target's rebuilt string, list, hash, and
+iterator classes. The source and target pseudocode still agree on the key
+virtual slots and decisions. In particular, the two sort methods preserve
+their temporary records and qsort calls, `copyFrom` keeps its property-type
+switch and recursive child copy, and the three cell constructors use the
+float, string, and object setter slots in order.
+
+The nearby target method at `0x214fd8` is not included. It is a short
+target-only script-space helper with no independently established source
+counterpart. Keeping it as a retained target symbol avoids assigning the
+wrong adjacent source name. The continuation artifact records this exclusion
+along with the 23 positive aliases.
+
+The v323 application renamed all 23 target functions, added 23 evidence
+comments, and reported zero failures. A fresh reopen verified all 23 names.
+The final copy contains 11,707 functions and zero audited default names. Its
+name origins are 6,263 translated `v18_` aliases, 417 target-only descriptive
+labels, 967 retained target names, seven JNI exports, and 4,053 other IDA or
+PLT names. The dynamic-symbol audit reports 4,587 source-backed aliases,
+1,855 exact retained names, 151 other retained target names, seven
+linker-boundary aliases, 169 exact PLT veneers, and one undefined `__sF`
+import without an in-library veneer.
+
+The v323 database hash is
+`588e39f73c0946aea4ed45265820c9d95a73689339c365840b308170d36d0b4d`. The
+machine-readable records are
+`artifacts/spectron_tgraalvar_runtime_continuation_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tgraalvar_runtime_continuation_manual_translation_application_20260829.json`,
+`artifacts/spectron_tgraalvar_runtime_continuation_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v323_20260829.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v323_20260829.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v323.json`. The reusable
+generators are
+`tools/generate_spectron_tgraalvar_runtime_continuation_anchors.py` and
+`tools/generate_spectron_translation_checkpoint_v323.py`.
+
 ## CyaSSL role pass
 
 The CyaSSL gap was worth a separate pass because these routines sit directly

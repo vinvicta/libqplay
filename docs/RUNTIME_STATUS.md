@@ -2994,6 +2994,47 @@ anchor, application, reopen-verification, audit, and checkpoint records are
 This pass changed only a private IDA copy and the research archive. It did not
 patch the APK, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v323 TGraalVar continuation
+
+The v323 pass is a static translation checkpoint, not a new runtime attempt.
+It continues from the verified v322 IDA copy and reviews the next 23 methods
+in the obfuscated `G0gxgajWBw` implementation. The group covers script
+lifecycle wrappers, function checks, list sorting, persistent-variable
+serialization, value accessors, recursive copying, function enumeration,
+array construction, static property registration, and string parsing.
+
+Six short methods have exact recorded feature metrics. The other seventeen
+are high-confidence layout-change matches because Spectron rebuilt the source
+string, list, hash, and iterator classes. The source and target decompilations
+still agree on the key virtual slots and data flow. The target-only method at
+`0x214fd8` remains excluded because its source counterpart is not established.
+
+The application renamed all 23 target functions and added 23 evidence
+comments with zero failures. A fresh reopen verified all 23 names in an
+11,707-function database. The final name audit has zero default names and
+reports 6,263 translated `v18_` aliases, 417 target-only descriptive labels,
+967 retained target names, seven JNI exports, and 4,053 other IDA or PLT
+names. The dynamic-symbol audit reports 4,587 source-backed aliases and
+1,855 exact retained names, while preserving 5,782 exact dynamic function
+starts, 482 data items, 336 other non-code items, and 170 undefined imports.
+
+The v323 database is
+`analysis/spectron_libqplay_translated_v323_tgraalvar_runtime_continuation_final.i64`
+with SHA-256
+`588e39f73c0946aea4ed45265820c9d95a73689339c365840b308170d36d0b4d`.
+The anchor, application, reopen-verification, audit, and checkpoint records
+are listed in
+`artifacts/spectron_tgraalvar_runtime_continuation_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tgraalvar_runtime_continuation_manual_translation_application_20260829.json`,
+`artifacts/spectron_tgraalvar_runtime_continuation_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v323_20260829.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v323_20260829.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v323.json`.
+
+This pass changed only the private IDA copy and archive. It did not patch the
+APK, alter TLS behavior, contact a game server, or test a live endpoint.
+
 ## Spectron 2.2 v321 GUI boundary translation
 
 The v321 pass closes the remaining comparison gap around eleven GUI methods.

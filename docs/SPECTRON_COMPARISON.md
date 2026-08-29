@@ -252,6 +252,73 @@ records are
 `artifacts/spectron_tgraalvar_runtime_gap_manual_translation_verification_20260829.json`,
 and `artifacts/spectron_translation_checkpoint_20260829_v322.json`.
 
+## v323 TGraalVar continuation comparison
+
+The next class-local block gives another 23 source-to-target correspondences.
+The target export names remain obfuscated, but its Hex-Rays output preserves
+the source responsibilities and the important virtual slots. The six short
+wrappers are exact metric matches. The other seventeen are high-confidence
+layout-change matches caused by the target's rebuilt string and container
+types.
+
+| Source role | Spectron address | Applied alias | Review basis |
+| --- | ---: | --- | --- |
+| run script | `0x213c84` | `v18_TGraalVar_runScript_void` | script-space forwarder |
+| leave class | `0x214a4c` | `v18_TGraalVar_leaveClass_TString_const` | lazy creation and leave |
+| cancel events | `0x214fc4` | `v18_TGraalVar_cancelEvents_TString_const` | script-space forwarder |
+| set script from string | `0x214fec` | `v18_TGraalVar_setScript_TString_const` | script-space setter |
+| set script from object | `0x215014` | `v18_TGraalVar_setScript_TScript` | overload and object parameter |
+| free script | `0x21503c` | `v18_TGraalVar_freeScript_void` | script-space release |
+| function existence | `0x217198` | `v18_TGraalVar_hasFunction_TString_const` | primary, global, and table lookup |
+| list sort | `0x21727c` | `v18_TGraalVar_sortList_bool` | temporary records and qsort |
+| value sort | `0x217444` | `v18_TGraalVar_sortListByValue_TString_const_TString_const_bool` | numeric or string qsort |
+| subvariable listing | `0x217754` | `v18_TGraalVar_listSubVars_TStringList_TString_const` | recursive persistent hash walk |
+| save variables | `0x21797c` | `v18_TGraalVar_saveVarsToArray_void` | visible property export |
+| numeric or string write | `0x21805c` | `v18_TGraalVar_writeFloatOrString_TString_const` | numeric test and setter choice |
+| set subvariable | `0x218134` | `v18_TGraalVar_setSubVar_TString_const` | dotted path recursion |
+| set named value | `0x218468` | `v18_TGraalVar_setVarValue_TString_const_TString_const` | direct lookup or equals fallback |
+| array member lookup | `0x218d70` | `v18_TGraalVar_getArrayMember_TString_const` | case-insensitive scan |
+| recursive copy | `0x219050` | `v18_TGraalVar_copyFrom_TGraalVar` | properties, arrays, and child variables |
+| function enumeration | `0x219ed0` | `v18_TGraalVar_getFunctions_void` | function metadata objects |
+| write string list | `0x21a64c` | `v18_TGraalVar_writeStringList_TStringList` | array length synchronization |
+| insert float cell | `0x21a970` | `v18_TGraalVar_insertArrayCellFloat_int_double` | numeric cell construction |
+| insert string cell | `0x21aa0c` | `v18_TGraalVar_insertArrayCellString_int_TString_const` | string cell construction |
+| insert object cell | `0x21aab0` | `v18_TGraalVar_insertArrayCellObject_int_TGraalVar` | object cell construction |
+| static property initialization | `0x21ab54` | `v18_TGraalVar_initStaticScriptVars_void` | property table registration |
+| string write and parse | `0x21ab98` | `v18_TGraalVar_writeString_TString_const` | quoted and comma text parsing |
+
+The pair at `0x213c84` is a direct four-instruction wrapper around the
+attached script space. The methods at `0x21727c` and `0x217444` preserve the
+temporary record arrays and value comparators. `copyFrom` keeps the typed
+property switch, array cloning, and recursive child traversal. The three
+array constructors preserve the float, string, and object virtual setter
+slots at `+192`, `+200`, and `+208`. The static initializer at `0x21ab54`
+allocates the target property object and registers the same property-definition
+table as the source.
+
+The nearby target method at `0x214fd8` is intentionally excluded. It calls a
+target script-space helper but has no independently established source
+counterpart. The comparison record keeps the raw target symbol rather than
+turning a positional guess into a source alias.
+
+The v323 anchor artifact stores all 23 source and target feature records,
+function ranges, direct-call lists, and compact Hex-Rays fingerprints. The
+application renamed all 23 target functions and the reopen check verified all
+23. The resulting database has 11,707 functions, zero audited default names,
+6,263 translated `v18_` aliases, 4,587 source-backed dynamic rows, and 1,855
+exact retained dynamic names. Defined dynamic function coverage remains 5,782
+exact starts. The database hash is
+`588e39f73c0946aea4ed45265820c9d95a73689339c365840b308170d36d0b4d`.
+
+The v323 records are
+`artifacts/spectron_tgraalvar_runtime_continuation_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tgraalvar_runtime_continuation_manual_translation_application_20260829.json`,
+`artifacts/spectron_tgraalvar_runtime_continuation_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v323_20260829.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v323_20260829.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v323.json`.
+
 ## Spectron connector endpoint change
 
 The endpoint builder is one of the clearest differences between the two

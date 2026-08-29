@@ -13,7 +13,7 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v322 Spectron database. It
+The current documented translation frontier is the v323 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -55,6 +55,19 @@ database still has 11,707 functions and zero audited default names, with
 rows as source-backed aliases and 1,878 as exact retained dynamic names. This
 is a semantic translation checkpoint, not a claim that stripped 2.2 names
 were recovered verbatim.
+
+The v323 revision extends the same review across the next 23 methods in the
+obfuscated `G0gxgajWBw` implementation. It recovers script lifecycle wrappers,
+function checks, sorting, persistent-variable traversal, value accessors,
+array lookup and mutation, recursive copying, function enumeration, static
+property initialization, and string parsing. Six small wrappers retain exact
+recorded metrics, while seventeen methods show the expected rebuilt string or
+container layout changes. All 23 aliases are high-confidence because the
+source and target Hex-Rays bodies agree on data flow and class-local order.
+The v323 database contains 6,263 reviewed `v18_` aliases. Its complete
+dynamic-symbol audit reports 4,587 source-backed rows and 1,855 exact retained
+names, with the same 5,782 defined function boundaries and non-function item
+counts as v322.
 The v273 revision adds six high-confidence libjpeg source and destination
 callback labels. They are tied to the target `jpeg_stdio_dest` and
 `jpeg_stdio_src` installation sites, with exact or normalized source-target
@@ -396,6 +409,34 @@ imports. The v322 records are
 `artifacts/spectron_dynamic_symbol_boundaries_v322_20260829.json`,
 `artifacts/spectron_dynamic_symbol_coverage_audit_v322_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v322.json`.
+The v323 continuation is a separate fresh copy of that database. It applies
+23 additional high-confidence aliases from the next contiguous TGraalVar
+method family. The six short wrappers at `0x213c84`, `0x214a4c`, `0x214fc4`,
+`0x214fec`, `0x215014`, and `0x21503c` match their source metrics exactly.
+The remaining seventeen rows preserve behavior through rebuilt string, list,
+hash, and iterator wrappers. The reviewed target range continues through
+`0x21ab98`; the target-only helper at `0x214fd8` remains intentionally
+unlabeled because no source counterpart was established.
+
+The v323 database is
+`analysis/spectron_libqplay_translated_v323_tgraalvar_runtime_continuation_final.i64`
+with SHA-256
+`588e39f73c0946aea4ed45265820c9d95a73689339c365840b308170d36d0b4d`.
+It still contains 11,707 functions and zero audited default names. Its
+name-origin counts are 6,263 translated `v18_` aliases, 417 target-only
+descriptive labels, 967 retained target names, seven JNI exports, and 4,053
+other IDA or PLT names. The dynamic-symbol audit reports 4,587
+source-backed aliases, 1,855 exact retained names, 151 other retained target
+aliases, seven linker-boundary aliases, 169 PLT veneers, and one undefined
+`__sF` import without an in-library veneer. The v323 records are
+`artifacts/spectron_tgraalvar_runtime_continuation_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tgraalvar_runtime_continuation_manual_translation_application_20260829.json`,
+`artifacts/spectron_tgraalvar_runtime_continuation_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v323_20260829.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v323_20260829.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v323.json`.
+
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -510,6 +551,8 @@ The v321 database is kept locally as
 `analysis/spectron_libqplay_translated_v321_gui_missing_function_aliases_final.i64`.
 The current v322 database is kept locally as
 `analysis/spectron_libqplay_translated_v322_tgraalvar_runtime_gap_final.i64`.
+The current v323 database is kept locally as
+`analysis/spectron_libqplay_translated_v323_tgraalvar_runtime_continuation_final.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -6427,6 +6470,12 @@ proves the local native TLS path, not a current live certificate or service.
   records the v322 application, reopen verification, name audit, and dynamic
   symbol coverage. The same manual-anchor apply and verify helpers are used
   for this batch.
+  `tools/generate_spectron_tgraalvar_runtime_continuation_anchors.py` records
+  the next 23 TGraalVar source and target pseudocode fingerprints and reviewed
+  aliases. `tools/generate_spectron_translation_checkpoint_v323.py` records
+  the v323 application, reopen verification, name audit, and dynamic-symbol
+  coverage. The archive validator checks the alias order, target addresses,
+  counts, and no-network markers.
   `tools/ida_apply_spectron_translation.py` and
   `tools/ida_apply_spectron_manual_anchors.py` write separate disposable IDA
   copies, while the matching verification scripts reopen and check them. The

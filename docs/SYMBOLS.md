@@ -225,6 +225,69 @@ and
 The checkpoint is
 `artifacts/spectron_translation_checkpoint_20260829_v322.json`.
 
+### v323 TGraalVar runtime continuation aliases
+
+The v323 pass extends the TGraalVar translation through the next class-local
+method block. All 23 rows are high-confidence semantic aliases. Six small
+wrappers have exact recorded metrics, and seventeen larger methods retain the
+source behavior through the target's rebuilt string, list, hash, and iterator
+classes.
+
+| 1.8 source | Spectron target | Applied alias | Confidence |
+| ---: | ---: | --- | --- |
+| `0x20d7dc` | `0x213c84` | `v18_TGraalVar_runScript_void` | high |
+| `0x20e598` | `0x214a4c` | `v18_TGraalVar_leaveClass_TString_const` | high |
+| `0x20eaf0` | `0x214fc4` | `v18_TGraalVar_cancelEvents_TString_const` | high |
+| `0x20eb04` | `0x214fec` | `v18_TGraalVar_setScript_TString_const` | high |
+| `0x20eb2c` | `0x215014` | `v18_TGraalVar_setScript_TScript` | high |
+| `0x20eb54` | `0x21503c` | `v18_TGraalVar_freeScript_void` | high |
+| `0x210a8c` | `0x217198` | `v18_TGraalVar_hasFunction_TString_const` | high |
+| `0x210b40` | `0x21727c` | `v18_TGraalVar_sortList_bool` | high |
+| `0x210ce8` | `0x217444` | `v18_TGraalVar_sortListByValue_TString_const_TString_const_bool` | high |
+| `0x210f98` | `0x217754` | `v18_TGraalVar_listSubVars_TStringList_TString_const` | high |
+| `0x211178` | `0x21797c` | `v18_TGraalVar_saveVarsToArray_void` | high |
+| `0x211850` | `0x21805c` | `v18_TGraalVar_writeFloatOrString_TString_const` | high |
+| `0x21190c` | `0x218134` | `v18_TGraalVar_setSubVar_TString_const` | high |
+| `0x211c00` | `0x218468` | `v18_TGraalVar_setVarValue_TString_const_TString_const` | high |
+| `0x2124c0` | `0x218d70` | `v18_TGraalVar_getArrayMember_TString_const` | high |
+| `0x21277c` | `0x219050` | `v18_TGraalVar_copyFrom_TGraalVar` | high |
+| `0x2135b0` | `0x219ed0` | `v18_TGraalVar_getFunctions_void` | high |
+| `0x213b10` | `0x21a64c` | `v18_TGraalVar_writeStringList_TStringList` | high |
+| `0x213e48` | `0x21a970` | `v18_TGraalVar_insertArrayCellFloat_int_double` | high |
+| `0x213f04` | `0x21aa0c` | `v18_TGraalVar_insertArrayCellString_int_TString_const` | high |
+| `0x213fc0` | `0x21aab0` | `v18_TGraalVar_insertArrayCellObject_int_TGraalVar` | high |
+| `0x21407c` | `0x21ab54` | `v18_TGraalVar_initStaticScriptVars_void` | high |
+| `0x2140c0` | `0x21ab98` | `v18_TGraalVar_writeString_TString_const` | high |
+
+The short wrappers establish the target's script lifecycle calls. The
+sorting and persistent-variable methods preserve their record arrays, qsort
+comparators, hash walks, and recursion. `copyFrom` retains the typed property
+switch, array cloning, and recursive child copies. The array constructors map
+to the float, string, and object setter slots at `+192`, `+200`, and `+208`.
+The static initializer allocates the target property object and registers the
+same definition table as the source.
+
+The target method at `0x214fd8` remains deliberately unlabeled. It is a
+target-only helper with no independently established source counterpart. The
+machine-readable continuation anchor keeps the exclusion visible so a later
+review can revisit it without confusing it with a completed translation.
+
+The v323 name audit reports 11,707 functions and zero default names, with
+6,263 translated `v18_` aliases. The complete dynamic-symbol audit reports
+4,587 source-backed aliases, 1,855 exact retained names, 151 other retained
+target names, seven linker-boundary aliases, and the same 169 PLT veneers and
+one undefined `__sF` import exception. The final v323 database hash is
+`588e39f73c0946aea4ed45265820c9d95a73689339c365840b308170d36d0b4d`.
+
+The records are
+`artifacts/spectron_tgraalvar_runtime_continuation_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tgraalvar_runtime_continuation_manual_translation_application_20260829.json`,
+`artifacts/spectron_tgraalvar_runtime_continuation_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v323_20260829.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v323_20260829.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v323.json`.
+
 ## Current Spectron cross-build labels
 
 The latest disposable IDA copies extend the labels beyond the retained ELF

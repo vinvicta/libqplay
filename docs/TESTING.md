@@ -483,6 +483,112 @@ The final database hash for this checkpoint is
 anchor, application, verification, audit, and checkpoint records are all
 offline artifacts. They do not establish live game-server compatibility.
 
+### v323 TGraalVar runtime continuation
+
+The v323 pass reviews the next 23 source and target methods from disposable
+IDA copies of the v322 database. It does not modify the APK or contact a
+server. Export compact pseudocode evidence for the source addresses
+`0x20d7dc,0x20e598,0x20eaf0,0x20eb04,0x20eb2c,0x20eb54,0x210a8c,0x210b40,
+0x210ce8,0x210f98,0x211178,0x211850,0x21190c,0x211c00,0x2124c0,0x21277c,
+0x2135b0,0x213b10,0x213e48,0x213f04,0x213fc0,0x21407c,0x2140c0`:
+
+```bash
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  LIBQPLAY_FUNCTION_EVIDENCE=0x20d7dc,0x20e598,0x20eaf0,0x20eb04,0x20eb2c,0x20eb54,0x210a8c,0x210b40,0x210ce8,0x210f98,0x211178,0x211850,0x21190c,0x211c00,0x2124c0,0x21277c,0x2135b0,0x213b10,0x213e48,0x213f04,0x213fc0,0x21407c,0x2140c0 \
+  LIBQPLAY_EVIDENCE_COMPACT=1 \
+  LIBQPLAY_EVIDENCE_OUT=/tmp/graal-source-tgraalvar-next-evidence.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /tmp/source-evidence.i64 \
+  -s tools/ida_dump_function_evidence.py
+```
+
+Run the same helper against target addresses
+`0x213c84,0x214a4c,0x214fc4,0x214fec,0x215014,0x21503c,0x217198,
+0x21727c,0x217444,0x217754,0x21797c,0x21805c,0x218134,0x218468,
+0x218d70,0x219050,0x219ed0,0x21a64c,0x21a970,0x21aa0c,0x21aab0,
+0x21ab98`, then export `0x21ab54` separately if it was not included in
+that snapshot. The target-only helper at `0x214fd8` is intentionally not an
+anchor. Combine the evidence with the current source and target feature
+exports:
+
+```bash
+python3 tools/generate_spectron_tgraalvar_runtime_continuation_anchors.py \
+  --original-features /tmp/original_features_v4_v3_materialized_v2.json \
+  --spectron-features /tmp/spectron_features_v322_tgraalvar_runtime_gap.json \
+  --semantic-map artifacts/spectron_semantic_function_translation_v320_20260828.json \
+  --source-evidence /tmp/graal-source-tgraalvar-next-evidence.json \
+  --target-evidence /tmp/graal-target-tgraalvar-next-evidence.json \
+  --target-evidence /tmp/graal-target-static-init-evidence.json \
+  --original-binary-sha256 9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8 \
+  --spectron-binary-sha256 f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219 \
+  --output artifacts/spectron_tgraalvar_runtime_continuation_manual_translation_anchors_20260829.json
+```
+
+The generator should report 23 high-confidence anchors, six exact metric
+rows, seventeen layout-change rows, and pseudocode for all 46 source and
+target sides. It also refuses a changed raw name, a duplicate address, a
+missing pseudocode row, or a row already present in the v320 semantic match
+list.
+
+Apply the aliases to a new copy of the v322 database. Never apply this batch
+on top of the v322 file in place:
+
+```bash
+cp /path/to/spectron_libqplay_translated_v322_tgraalvar_runtime_gap_final.i64 \
+  /tmp/spectron_v323_tgraalvar.i64
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_MANUAL_APPLY=1 \
+  SPECTRON_MANUAL_ANCHORS=/path/to/artifacts/spectron_tgraalvar_runtime_continuation_manual_translation_anchors_20260829.json \
+  SPECTRON_MANUAL_EXPECTED_ARTIFACT=spectron_tgraalvar_runtime_continuation_manual_translation_anchors_20260829 \
+  SPECTRON_MANUAL_SAVE_PATH=/path/to/spectron_libqplay_translated_v323_tgraalvar_runtime_continuation_final.i64 \
+  SPECTRON_MANUAL_REPORT=/tmp/spectron_tgraalvar_runtime_continuation_manual_translation_application_20260829.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /tmp/spectron_v323_tgraalvar.i64 \
+  -s tools/ida_apply_spectron_manual_anchors.py
+```
+
+Reopen the saved copy with `tools/ida_verify_spectron_manual_anchors.py`. The
+expected result is 23 verified names, 11,707 functions, and zero failures.
+Rerun the name, dynamic-boundary, and complete dynamic-symbol audits. The
+expected v323 name origins are:
+
+```text
+ida_named_or_other       4053
+target_jni_export           7
+target_named_export       967
+target_only_descriptive   417
+translated_v18_alias     6263
+```
+
+The dynamic audit should still report 6,770 named rows, 6,600 defined rows,
+5,782 exact function starts, 482 data items, 336 other non-code items, and
+170 undefined imports. The continuation changes the classification to 4,587
+source-backed aliases and 1,855 exact retained names. Rebuild the checkpoint
+with:
+
+```bash
+python3 tools/generate_spectron_translation_checkpoint_v323.py \
+  --parent-checkpoint artifacts/spectron_translation_checkpoint_20260829_v322.json \
+  --database /path/to/spectron_libqplay_translated_v323_tgraalvar_runtime_continuation_final.i64 \
+  --anchor-artifact artifacts/spectron_tgraalvar_runtime_continuation_manual_translation_anchors_20260829.json \
+  --application-report artifacts/spectron_tgraalvar_runtime_continuation_manual_translation_application_20260829.json \
+  --verification-report artifacts/spectron_tgraalvar_runtime_continuation_manual_translation_verification_20260829.json \
+  --name-audit artifacts/spectron_name_coverage_audit_v323_20260829.json \
+  --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v323_20260829.json \
+  --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json \
+  --semantic-map artifacts/spectron_semantic_function_translation_v320_20260828.json \
+  --output artifacts/spectron_translation_checkpoint_20260829_v323.json
+
+python3 tools/validate_research_archive.py
+```
+
+The expected v323 database hash is
+`588e39f73c0946aea4ed45265820c9d95a73689339c365840b308170d36d0b4d`. The
+application and audit reports are offline records. This pass does not change
+the runtime conclusion or establish a live game-server login.
+
 The complete private chain can be rebuilt with the single offline helper:
 
 ```bash
