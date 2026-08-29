@@ -937,6 +937,81 @@ The expected v326 database hash is
 checkpoint is static evidence only. It does not change the loopback runtime
 result, TLS diagnosis, or live-service boundary.
 
+### v337 libjpeg helper residual translation
+
+The v337 pass is static IDA work only. It starts from the verified v336
+database and reviews source helpers at `0x294ee8`, `0x294ef0`, `0x294ef8`,
+`0x294f00`, `0x294f08`, `0x294f10`, `0x294f38`, `0x294f40`, `0x297e40`,
+`0x297e50`, `0x297ec8`, and `0x297edc` against target helpers at `0x2a2358`,
+`0x2a2360`, `0x2a2368`, `0x2a2370`, `0x2a2378`, `0x2a2380`, `0x2a23a8`,
+`0x2a23b0`, `0x2a52b0`, `0x2a52c0`, `0x2a5338`, and `0x2a534c`. It does not
+require an APK, emulator, server, or live endpoint.
+
+Capture compact pseudocode with `tools/ida_dump_function_evidence.py`, using
+the same IDALIB environment shown in the v336 section. The source request is
+`0x294ee8,0x294ef0,0x294ef8,0x294f00,0x294f08,0x294f10,0x294f38,0x294f40,0x297e40,0x297e50,0x297ec8,0x297edc`.
+The target request is
+`0x2a2358,0x2a2360,0x2a2368,0x2a2370,0x2a2378,0x2a2380,0x2a23a8,0x2a23b0,0x2a52b0,0x2a52c0,0x2a5338,0x2a534c`.
+
+Generate the reviewed twelve-row artifact:
+
+```bash
+python3 tools/generate_spectron_libjpeg_helper_residual_anchors.py \
+  --original-features /tmp/original_features_v3_current.json \
+  --spectron-features artifacts/spectron_features_v336_format2_residual.json \
+  --semantic-map artifacts/spectron_semantic_translation_v336.json \
+  --source-evidence /tmp/graal-source-libjpeg-helper.json \
+  --target-evidence /tmp/graal-target-libjpeg-helper.json \
+  --original-binary-sha256 9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8 \
+  --spectron-binary-sha256 f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219 \
+  --output artifacts/spectron_libjpeg_helper_residual_manual_translation_anchors_20260829.json
+```
+
+Apply the artifact to a fresh copy of
+`spectron_libqplay_translated_v336_format2_residual.i64` and reopen-verify
+the resulting
+`spectron_libqplay_translated_v337_libjpeg_helper_residual.i64` with the
+manual-anchor scripts. The application report must contain twelve resolved
+functions, twelve renames, twelve evidence comments, zero failures, and a
+successful save. The reopen report must contain twelve verified names in an
+11,707-function database.
+
+Refresh the feature export and name and dynamic audits using the commands in
+the v336 section, changing the output suffix to `v337`. Carry the semantic map
+forward and build the strict checkpoint:
+
+```bash
+python3 tools/carry_forward_spectron_semantic_translation_v337.py \
+  --parent-map artifacts/spectron_semantic_translation_v336.json \
+  --target-features artifacts/spectron_features_v337_libjpeg_helper_residual.json \
+  --anchor-artifact artifacts/spectron_libjpeg_helper_residual_manual_translation_anchors_20260829.json \
+  --output artifacts/spectron_semantic_translation_v337.json
+
+python3 tools/generate_spectron_translation_checkpoint_v337.py \
+  --parent-checkpoint artifacts/spectron_translation_checkpoint_20260829_v336.json \
+  --database /path/to/spectron_libqplay_translated_v337_libjpeg_helper_residual.i64 \
+  --anchor-artifact artifacts/spectron_libjpeg_helper_residual_manual_translation_anchors_20260829.json \
+  --application-report artifacts/spectron_libjpeg_helper_residual_manual_translation_application_20260829.json \
+  --verification-report artifacts/spectron_libjpeg_helper_residual_manual_translation_verification_20260829.json \
+  --name-audit artifacts/spectron_name_coverage_audit_v337.json \
+  --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v337.json \
+  --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v337.json \
+  --semantic-map artifacts/spectron_semantic_translation_v337.json \
+  --feature-export artifacts/spectron_features_v337_libjpeg_helper_residual.json \
+  --output artifacts/spectron_translation_checkpoint_20260829_v337.json
+
+python3 tools/validate_research_archive.py
+```
+
+The expected v337 database hash is
+`391d3bb01245f636760daeb8cef80012e602dfc04423d104a44ceb8e1e4d7113`.
+Expected audit totals are 6,410 translated aliases, 419 target-only
+descriptive labels, 819 retained target names, seven JNI exports, 4,052
+other IDA or PLT names, 4,762 source-backed dynamic symbols, 1,707 exact
+retained dynamic symbols, and 5,782 exact dynamic function starts. The anchor
+summary is twelve high-confidence rows, twelve exact metric matches, twelve
+pseudocode-backed rows, and no semantic-map promotions.
+
 ### v336 GSFunctionsInitstaticscriptvars and TFormat2 residual translation
 
 The v336 pass is static IDA work only. It starts from the verified v335

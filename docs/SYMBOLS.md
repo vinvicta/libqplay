@@ -425,6 +425,48 @@ records are
 `artifacts/spectron_semantic_translation_v326.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v326.json`.
 
+### v337 libjpeg helper residual aliases
+
+The v337 pass adds twelve semantic aliases to the private Spectron IDA
+database. The raw target identifiers remain visible so each translated name
+can be traced back to the stripped build.
+
+| Spectron address | Raw target symbol | Applied alias | Recovered role |
+| ---: | --- | --- | --- |
+| `0x2a2358` | `_Z14jpeg_get_smallP18jpeg_common_structm` | `v18_jpeg_get_small_jpeg_common_struct_ulong` | small allocation |
+| `0x2a2360` | `_Z15jpeg_free_smallP18jpeg_common_structPvm` | `v18_jpeg_free_small_jpeg_common_struct_void_ulong` | small release |
+| `0x2a2368` | `_Z14jpeg_get_largeP18jpeg_common_structm` | `v18_jpeg_get_large_jpeg_common_struct_ulong` | large allocation |
+| `0x2a2370` | `_Z15jpeg_free_largeP18jpeg_common_structPvm` | `v18_jpeg_free_large_jpeg_common_struct_void_ulong` | large release |
+| `0x2a2378` | `_Z18jpeg_mem_availableP18jpeg_common_structlll` | `v18_jpeg_mem_available_jpeg_common_struct_long_long_long` | memory amount return |
+| `0x2a2380` | `_Z23jpeg_open_backing_storeP18jpeg_common_structP20backing_store_structl` | `v18_jpeg_open_backing_store_jpeg_common_struct_backing_store_struct_long` | backing-store dispatch |
+| `0x2a23a8` | `_Z13jpeg_mem_initP18jpeg_common_struct` | `v18_jpeg_mem_init_jpeg_common_struct` | zero-return initializer |
+| `0x2a23b0` | `_Z13jpeg_mem_termP18jpeg_common_struct` | `v18_jpeg_mem_term_jpeg_common_struct` | empty terminator |
+| `0x2a52b0` | `_Z13jdiv_round_upll` | `v18_jdiv_round_up_long_long` | upward integer division |
+| `0x2a52c0` | `_Z9jround_upll` | `v18_jround_up_long_long` | round to a multiple |
+| `0x2a5338` | `_Z15jcopy_block_rowPA64_sS0_j` | `v18_jcopy_block_row_short_64_short_64_uint` | JPEG block-row copy |
+| `0x2a534c` | `_Z9jzero_farPvm` | `v18_jzero_far_void_ulong` | JPEG buffer clear |
+
+The source counterparts are `0x294ee8` through `0x294f40` for the memory
+manager and `0x297e40` through `0x297edc` for the utility helpers. The direct
+pseudocode and exact normalized feature records agree for all twelve rows.
+
+The v337 records are
+`artifacts/spectron_libjpeg_helper_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_libjpeg_helper_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_libjpeg_helper_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v337_libjpeg_helper_residual.json`,
+`artifacts/spectron_name_coverage_audit_v337.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v337.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v337.json`,
+`artifacts/spectron_semantic_translation_v337.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v337.json`.
+
+The v337 database has 6,410 translated `v18_` aliases, 419 target-only
+descriptive labels, 819 retained target names, seven JNI exports, 4,052
+other IDA or PLT names, 4,762 source-backed dynamic rows, and 1,707 exact
+retained dynamic names. Its hash is
+`391d3bb01245f636760daeb8cef80012e602dfc04423d104a44ceb8e1e4d7113`.
+
 ### v336 GSFunctionsInitstaticscriptvars and TFormat2 residual aliases
 
 The v336 pass adds nine semantic aliases to the private Spectron IDA

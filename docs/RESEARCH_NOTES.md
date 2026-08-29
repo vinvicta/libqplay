@@ -261,6 +261,66 @@ This pass changed only the private IDA copy and archive. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
 
+## 2026-08-29: libjpeg helper residuals, v337
+
+After the Format2 block, the next clean raw-symbol matches were two small
+libjpeg helper clusters. The first target sequence is at `0x2a2358` through
+`0x2a23b0`. The second is at `0x2a52b0` through `0x2a534c`, immediately around
+the translated JPEG compressor helpers.
+
+| 1.8 source | Spectron target | Applied alias | Direct behavior |
+| --- | ---: | --- | --- |
+| `0x294ee8` `jpeg_get_small_jpeg_common_struct_ulong` | `0x2a2358` `_Z14jpeg_get_smallP18jpeg_common_structm` | `v18_jpeg_get_small_jpeg_common_struct_ulong` | `malloc(byte_count)` |
+| `0x294ef0` `jpeg_free_small_jpeg_common_struct_void_ulong` | `0x2a2360` `_Z15jpeg_free_smallP18jpeg_common_structPvm` | `v18_jpeg_free_small_jpeg_common_struct_void_ulong` | `free(p)` |
+| `0x294ef8` `jpeg_get_large_jpeg_common_struct_ulong` | `0x2a2368` `_Z14jpeg_get_largeP18jpeg_common_structm` | `v18_jpeg_get_large_jpeg_common_struct_ulong` | `malloc(byte_count)` |
+| `0x294f00` `jpeg_free_large_jpeg_common_struct_void_ulong` | `0x2a2370` `_Z15jpeg_free_largeP18jpeg_common_structPvm` | `v18_jpeg_free_large_jpeg_common_struct_void_ulong` | `free(p)` |
+| `0x294f08` `jpeg_mem_available_jpeg_common_struct_long_long_long` | `0x2a2378` `_Z18jpeg_mem_availableP18jpeg_common_structlll` | `v18_jpeg_mem_available_jpeg_common_struct_long_long_long` | returns the third argument |
+| `0x294f10` `jpeg_open_backing_store_jpeg_common_struct_backing_store_struct_long` | `0x2a2380` `_Z23jpeg_open_backing_storeP18jpeg_common_structP20backing_store_structl` | `v18_jpeg_open_backing_store_jpeg_common_struct_backing_store_struct_long` | writes tag 49 and calls the first callback |
+| `0x294f38` `jpeg_mem_init_jpeg_common_struct` | `0x2a23a8` `_Z13jpeg_mem_initP18jpeg_common_struct` | `v18_jpeg_mem_init_jpeg_common_struct` | returns zero |
+| `0x294f40` `jpeg_mem_term_jpeg_common_struct` | `0x2a23b0` `_Z13jpeg_mem_termP18jpeg_common_struct` | `v18_jpeg_mem_term_jpeg_common_struct` | empty return |
+| `0x297e40` `jdiv_round_up_long_long` | `0x2a52b0` `_Z13jdiv_round_upll` | `v18_jdiv_round_up_long_long` | `(a1 + a2 - 1) / a2` |
+| `0x297e50` `jround_up_long_long` | `0x2a52c0` `_Z9jround_upll` | `v18_jround_up_long_long` | rounds up to an `a2` multiple |
+| `0x297ec8` `jcopy_block_row_short_64_short_64_uint` | `0x2a5338` `_Z15jcopy_block_rowPA64_sS0_j` | `v18_jcopy_block_row_short_64_short_64_uint` | `memcpy(dest, src, a3 << 7)` |
+| `0x297edc` `jzero_far_void_ulong` | `0x2a534c` `_Z9jzero_farPvm` | `v18_jzero_far_void_ulong` | `memset(a1, 0, a2)` |
+
+The raw target names are not merely positional guesses. The memory-manager
+rows have the same direct pseudocode and exact normalized feature records as
+the source rows, and they appear in the same helper order. The second group
+has the same arithmetic and memory-copy bodies, with exact normalized
+metrics, and sits in the expected JPEG utility sequence. All twelve rows are
+therefore high-confidence source-name translations.
+
+The aliases were applied to a fresh v336-derived database and verified after
+reopening. The v337 database has 11,707 functions and zero audited default
+names. Its name audit reports 6,410 translated aliases, 819 retained target
+names, 419 target-only descriptive labels, seven JNI exports, and 4,052 other
+IDA or PLT names. Dynamic coverage reports 4,762 source-backed aliases and
+1,707 exact retained dynamic names. All 5,782 defined dynamic function
+symbols still resolve to exact IDA function starts.
+
+The v337 database is
+`analysis/spectron_libqplay_translated_v337_libjpeg_helper_residual.i64` with
+SHA-256
+`391d3bb01245f636760daeb8cef80012e602dfc04423d104a44ceb8e1e4d7113`.
+The evidence is stored in
+`artifacts/spectron_libjpeg_helper_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_libjpeg_helper_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_libjpeg_helper_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v337_libjpeg_helper_residual.json`,
+`artifacts/spectron_name_coverage_audit_v337.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v337.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v337.json`,
+`artifacts/spectron_semantic_translation_v337.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v337.json`.
+
+The reusable scripts are
+`tools/generate_spectron_libjpeg_helper_residual_anchors.py`,
+`tools/carry_forward_spectron_semantic_translation_v337.py`, and
+`tools/generate_spectron_translation_checkpoint_v337.py`. This pass changed
+only the private IDA database and archive. It did not patch the APK, rerun the
+loopback client, alter TLS behavior, contact a game server, or test a live
+endpoint.
+
 ## 2026-08-29: GSFunctionsInitstaticscriptvars and TFormat2 residuals, v336
 
 The next untranslated sequence is a compact Format2 parameter block. The

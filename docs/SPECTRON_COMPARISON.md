@@ -319,6 +319,53 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v337 libjpeg helper residual comparison
+
+The v337 pass compares twelve raw target symbols in two libjpeg helper
+clusters. Every row has direct source and target Hex-Rays pseudocode and an
+exact normalized ARM64 feature match.
+
+| Source role | Spectron address | Applied alias | Match class |
+| --- | ---: | --- | --- |
+| `jpeg_get_small_jpeg_common_struct_ulong` | `0x2a2358` | `v18_jpeg_get_small_jpeg_common_struct_ulong` | exact malloc helper |
+| `jpeg_free_small_jpeg_common_struct_void_ulong` | `0x2a2360` | `v18_jpeg_free_small_jpeg_common_struct_void_ulong` | exact free helper |
+| `jpeg_get_large_jpeg_common_struct_ulong` | `0x2a2368` | `v18_jpeg_get_large_jpeg_common_struct_ulong` | exact malloc helper |
+| `jpeg_free_large_jpeg_common_struct_void_ulong` | `0x2a2370` | `v18_jpeg_free_large_jpeg_common_struct_void_ulong` | exact free helper |
+| `jpeg_mem_available_jpeg_common_struct_long_long_long` | `0x2a2378` | `v18_jpeg_mem_available_jpeg_common_struct_long_long_long` | exact third-argument return |
+| `jpeg_open_backing_store_jpeg_common_struct_backing_store_struct_long` | `0x2a2380` | `v18_jpeg_open_backing_store_jpeg_common_struct_backing_store_struct_long` | exact tag and callback dispatch |
+| `jpeg_mem_init_jpeg_common_struct` | `0x2a23a8` | `v18_jpeg_mem_init_jpeg_common_struct` | exact zero return |
+| `jpeg_mem_term_jpeg_common_struct` | `0x2a23b0` | `v18_jpeg_mem_term_jpeg_common_struct` | exact empty hook |
+| `jdiv_round_up_long_long` | `0x2a52b0` | `v18_jdiv_round_up_long_long` | exact upward division |
+| `jround_up_long_long` | `0x2a52c0` | `v18_jround_up_long_long` | exact multiple rounding |
+| `jcopy_block_row_short_64_short_64_uint` | `0x2a5338` | `v18_jcopy_block_row_short_64_short_64_uint` | exact 128-byte copy |
+| `jzero_far_void_ulong` | `0x2a534c` | `v18_jzero_far_void_ulong` | exact memset helper |
+
+The first eight methods preserve the source memory-manager order, including
+the backing-store method's write of tag 49 before its indirect callback. The
+second four methods preserve the source arithmetic and buffer-helper bodies
+around the translated JPEG compressor sequence. No row relies on a name-only
+or address-only guess.
+
+All twelve aliases were applied and verified after reopening the v337
+database. The database has 11,707 functions, zero audited default names,
+6,410 translated aliases, 4,762 source-backed dynamic rows, 1,707 exact
+retained dynamic names, and 5,782 exact dynamic function starts. Its SHA-256
+is
+`391d3bb01245f636760daeb8cef80012e602dfc04423d104a44ceb8e1e4d7113`.
+The complete comparison records are
+`artifacts/spectron_libjpeg_helper_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_libjpeg_helper_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_libjpeg_helper_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v337_libjpeg_helper_residual.json`,
+`artifacts/spectron_name_coverage_audit_v337.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v337.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v337.json`,
+`artifacts/spectron_semantic_translation_v337.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v337.json`.
+
+This comparison is static evidence. It does not change the runtime diagnosis,
+patch the APK, or contact a live endpoint.
+
 ## v336 GSFunctionsInitstaticscriptvars and TFormat2 residual comparison
 
 The v336 pass compares the next contiguous raw target block in the Format2

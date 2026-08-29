@@ -3035,6 +3035,37 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v337 libjpeg helper residuals
+
+The v337 revision is a static IDA checkpoint for twelve raw libjpeg helper
+symbols. Eight target entries at `0x2a2358` through `0x2a23b0` implement the
+memory-manager methods. Four more at `0x2a52b0` through `0x2a534c` implement
+rounding, block-row copying, and far-buffer clearing.
+
+All twelve source and target rows have direct pseudocode and exact normalized
+ARM64 feature matches. The aliases were applied to a fresh v336-derived
+database and verified after reopening. The v337 database contains 11,707
+functions, zero audited default names, 6,410 translated aliases, 4,762
+source-backed dynamic rows, and 1,707 exact retained dynamic names. All 5,782
+defined dynamic function symbols still resolve to exact IDA function starts.
+
+Its SHA-256 is
+`391d3bb01245f636760daeb8cef80012e602dfc04423d104a44ceb8e1e4d7113`.
+The records are
+`artifacts/spectron_libjpeg_helper_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_libjpeg_helper_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_libjpeg_helper_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v337_libjpeg_helper_residual.json`,
+`artifacts/spectron_name_coverage_audit_v337.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v337.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v337.json`,
+`artifacts/spectron_semantic_translation_v337.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v337.json`.
+
+This checkpoint did not change the verified loopback package, connector TLS
+result, or local protocol responder. No live endpoint was contacted, and no
+new runtime replay was performed for v337.
+
 ## Spectron 2.2 v336 GSFunctionsInitstaticscriptvars and TFormat2 residuals
 
 The v336 revision is a static IDA checkpoint for the contiguous Format2

@@ -800,6 +800,59 @@ generators are
 `tools/generate_spectron_format_parameters_property_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v326.py`.
 
+### v337 libjpeg helper residual aliases
+
+The v337 pass starts from the verified v336 database and translates twelve raw
+libjpeg entries in two helper clusters. Direct compact Hex-Rays pseudocode was
+captured for every source and target row, and all twelve rows are exact
+normalized ARM64 matches.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | --- | --- | --- |
+| `0x294ee8` `jpeg_get_small_jpeg_common_struct_ulong` | `0x2a2358` `_Z14jpeg_get_smallP18jpeg_common_structm` | `v18_jpeg_get_small_jpeg_common_struct_ulong` | small allocation |
+| `0x294ef0` `jpeg_free_small_jpeg_common_struct_void_ulong` | `0x2a2360` `_Z15jpeg_free_smallP18jpeg_common_structPvm` | `v18_jpeg_free_small_jpeg_common_struct_void_ulong` | small release |
+| `0x294ef8` `jpeg_get_large_jpeg_common_struct_ulong` | `0x2a2368` `_Z14jpeg_get_largeP18jpeg_common_structm` | `v18_jpeg_get_large_jpeg_common_struct_ulong` | large allocation |
+| `0x294f00` `jpeg_free_large_jpeg_common_struct_void_ulong` | `0x2a2370` `_Z15jpeg_free_largeP18jpeg_common_structPvm` | `v18_jpeg_free_large_jpeg_common_struct_void_ulong` | large release |
+| `0x294f08` `jpeg_mem_available_jpeg_common_struct_long_long_long` | `0x2a2378` `_Z18jpeg_mem_availableP18jpeg_common_structlll` | `v18_jpeg_mem_available_jpeg_common_struct_long_long_long` | memory amount passthrough |
+| `0x294f10` `jpeg_open_backing_store_jpeg_common_struct_backing_store_struct_long` | `0x2a2380` `_Z23jpeg_open_backing_storeP18jpeg_common_structP20backing_store_structl` | `v18_jpeg_open_backing_store_jpeg_common_struct_backing_store_struct_long` | backing-store dispatch |
+| `0x294f38` `jpeg_mem_init_jpeg_common_struct` | `0x2a23a8` `_Z13jpeg_mem_initP18jpeg_common_struct` | `v18_jpeg_mem_init_jpeg_common_struct` | initialization hook |
+| `0x294f40` `jpeg_mem_term_jpeg_common_struct` | `0x2a23b0` `_Z13jpeg_mem_termP18jpeg_common_struct` | `v18_jpeg_mem_term_jpeg_common_struct` | termination hook |
+| `0x297e40` `jdiv_round_up_long_long` | `0x2a52b0` `_Z13jdiv_round_upll` | `v18_jdiv_round_up_long_long` | upward integer division |
+| `0x297e50` `jround_up_long_long` | `0x2a52c0` `_Z9jround_upll` | `v18_jround_up_long_long` | round to a multiple |
+| `0x297ec8` `jcopy_block_row_short_64_short_64_uint` | `0x2a5338` `_Z15jcopy_block_rowPA64_sS0_j` | `v18_jcopy_block_row_short_64_short_64_uint` | 128-byte block copy |
+| `0x297edc` `jzero_far_void_ulong` | `0x2a534c` `_Z9jzero_farPvm` | `v18_jzero_far_void_ulong` | far-buffer clear |
+
+The first eight rows are the raw target memory-manager methods. The allocator
+methods call malloc or free, the accounting hook returns its third argument,
+and the backing-store method writes tag 49 before invoking the first callback.
+The second cluster contains the rounding, coefficient-row copy, and buffer
+clear helpers. Their pseudocode and normalized feature records agree exactly
+between the two builds.
+
+The v337 database contains 11,707 functions, zero audited default names,
+6,410 translated aliases, 419 target-only descriptive labels, 4,762
+source-backed dynamic rows, and 1,707 exact retained dynamic names. All 5,782
+defined dynamic symbols still resolve to exact IDA function starts. The saved
+database is
+`analysis/spectron_libqplay_translated_v337_libjpeg_helper_residual.i64` with
+SHA-256
+`391d3bb01245f636760daeb8cef80012e602dfc04423d104a44ceb8e1e4d7113`.
+
+The machine-readable records are
+`artifacts/spectron_libjpeg_helper_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_libjpeg_helper_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_libjpeg_helper_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v337_libjpeg_helper_residual.json`,
+`artifacts/spectron_name_coverage_audit_v337.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v337.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v337.json`,
+`artifacts/spectron_semantic_translation_v337.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v337.json`.
+
+This is a static IDA translation checkpoint. It did not patch the APK, rerun
+the loopback client, change TLS behavior, contact a game server, or test a
+live endpoint.
+
 ### v336 GSFunctionsInitstaticscriptvars and TFormat2 residual aliases
 
 The v336 pass starts from the verified v335 database and translates nine raw

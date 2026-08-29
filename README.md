@@ -13,7 +13,7 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v336 Spectron database. It
+The current documented translation frontier is the v337 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -184,6 +184,15 @@ one is an explicit promotion of an existing automatic semantic candidate.
 The v336 database contains 6,398 reviewed `v18_` aliases, 4,750 source-backed
 dynamic rows, and 1,719 exact retained dynamic names. It is a static IDA
 checkpoint and has not been used for a new runtime APK replay.
+
+The v337 revision resolves twelve more raw libjpeg helpers. It covers the
+small and large memory allocators, memory accounting hooks, backing-store
+setup, the rounding helpers, block-row copy, and far-buffer clearing. Every
+row has direct source and target Hex-Rays pseudocode and an exact normalized
+ARM64 feature match. The v337 database contains 6,410 reviewed `v18_`
+aliases, 4,762 source-backed dynamic rows, and 1,707 exact retained dynamic
+names. It is a static IDA checkpoint and has not been used for a new runtime
+APK replay.
 
 The v331 revision continues immediately into the static-variable runtime. It
 adds 22 high-confidence aliases for the universe initializer, the
@@ -790,6 +799,65 @@ target-only functions, with zero failures. Reopening the fresh copy verified
 all four names. This was a static translation pass only. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
+
+### v337 libjpeg helper residual aliases
+
+The v337 pass starts from the verified v336 database and resolves twelve raw
+target symbols in two small libjpeg helper clusters. Direct compact Hex-Rays
+pseudocode was captured for every source and target row, and every row has an
+exact normalized ARM64 feature match.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | --- | --- | --- |
+| `0x294ee8` `jpeg_get_small_jpeg_common_struct_ulong` | `0x2a2358` `_Z14jpeg_get_smallP18jpeg_common_structm` | `v18_jpeg_get_small_jpeg_common_struct_ulong` | small-block allocation |
+| `0x294ef0` `jpeg_free_small_jpeg_common_struct_void_ulong` | `0x2a2360` `_Z15jpeg_free_smallP18jpeg_common_structPvm` | `v18_jpeg_free_small_jpeg_common_struct_void_ulong` | small-block release |
+| `0x294ef8` `jpeg_get_large_jpeg_common_struct_ulong` | `0x2a2368` `_Z14jpeg_get_largeP18jpeg_common_structm` | `v18_jpeg_get_large_jpeg_common_struct_ulong` | large-block allocation |
+| `0x294f00` `jpeg_free_large_jpeg_common_struct_void_ulong` | `0x2a2370` `_Z15jpeg_free_largeP18jpeg_common_structPvm` | `v18_jpeg_free_large_jpeg_common_struct_void_ulong` | large-block release |
+| `0x294f08` `jpeg_mem_available_jpeg_common_struct_long_long_long` | `0x2a2378` `_Z18jpeg_mem_availableP18jpeg_common_structlll` | `v18_jpeg_mem_available_jpeg_common_struct_long_long_long` | memory amount passthrough |
+| `0x294f10` `jpeg_open_backing_store_jpeg_common_struct_backing_store_struct_long` | `0x2a2380` `_Z23jpeg_open_backing_storeP18jpeg_common_structP20backing_store_structl` | `v18_jpeg_open_backing_store_jpeg_common_struct_backing_store_struct_long` | backing-store dispatch |
+| `0x294f38` `jpeg_mem_init_jpeg_common_struct` | `0x2a23a8` `_Z13jpeg_mem_initP18jpeg_common_struct` | `v18_jpeg_mem_init_jpeg_common_struct` | zero-return initialization hook |
+| `0x294f40` `jpeg_mem_term_jpeg_common_struct` | `0x2a23b0` `_Z13jpeg_mem_termP18jpeg_common_struct` | `v18_jpeg_mem_term_jpeg_common_struct` | empty termination hook |
+| `0x297e40` `jdiv_round_up_long_long` | `0x2a52b0` `_Z13jdiv_round_upll` | `v18_jdiv_round_up_long_long` | upward integer division |
+| `0x297e50` `jround_up_long_long` | `0x2a52c0` `_Z9jround_upll` | `v18_jround_up_long_long` | round to a multiple |
+| `0x297ec8` `jcopy_block_row_short_64_short_64_uint` | `0x2a5338` `_Z15jcopy_block_rowPA64_sS0_j` | `v18_jcopy_block_row_short_64_short_64_uint` | 128-byte block-row copy |
+| `0x297edc` `jzero_far_void_ulong` | `0x2a534c` `_Z9jzero_farPvm` | `v18_jzero_far_void_ulong` | far-buffer clear |
+
+The first eight rows form the target's raw memory-manager sequence. The four
+allocation methods reduce to malloc and free, `jpeg_mem_available` returns
+its third argument, and `jpeg_open_backing_store` writes method tag 49 before
+calling the backing-store callback. The final four rows form a second utility
+sequence around the translated JPEG compressor methods. Their pseudocode is
+identical after demangling and relocation normalization.
+
+All twelve aliases were applied to a fresh v336-derived database and verified
+after reopening. The v337 database has 11,707 functions and zero audited
+default names. Its name audit reports 6,410 translated aliases, 819 retained
+target names, 419 target-only descriptive labels, seven JNI exports, and
+4,052 other IDA or PLT names. Dynamic coverage reports 4,762 source-backed
+aliases, 1,707 exact retained dynamic names, and 5,782 exact dynamic function
+starts.
+
+The saved database is
+`analysis/spectron_libqplay_translated_v337_libjpeg_helper_residual.i64` with
+SHA-256
+`391d3bb01245f636760daeb8cef80012e602dfc04423d104a44ceb8e1e4d7113`.
+The machine-readable records are
+`artifacts/spectron_libjpeg_helper_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_libjpeg_helper_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_libjpeg_helper_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v337_libjpeg_helper_residual.json`,
+`artifacts/spectron_name_coverage_audit_v337.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v337.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v337.json`,
+`artifacts/spectron_semantic_translation_v337.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v337.json`.
+
+The reusable generators are
+`tools/generate_spectron_libjpeg_helper_residual_anchors.py`,
+`tools/carry_forward_spectron_semantic_translation_v337.py`, and
+`tools/generate_spectron_translation_checkpoint_v337.py`. This is a static
+IDA translation checkpoint. It did not patch the APK, rerun the loopback
+client, change TLS behavior, contact a game server, or test a live endpoint.
 
 ### v336 GSFunctionsInitstaticscriptvars and TFormat2 residual aliases
 

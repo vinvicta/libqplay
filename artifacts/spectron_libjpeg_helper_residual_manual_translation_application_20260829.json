@@ -1,0 +1,138 @@
+{
+  "anchor_count": 12,
+  "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_libjpeg_helper_residual_manual_translation_anchors_20260829.json",
+  "apply": true,
+  "artifact": "spectron_manual_anchor_application",
+  "comments_added": 12,
+  "expected_artifact": "spectron_libjpeg_helper_residual_manual_translation_anchors_20260829",
+  "failure_count": 0,
+  "failures": [],
+  "plan": [
+    {
+      "actual_name_after": "v18_jpeg_get_small_jpeg_common_struct_ulong",
+      "actual_name_before": "_Z14jpeg_get_smallP18jpeg_common_structm",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x294ee8",
+      "original_name": "jpeg_get_small_jpeg_common_struct_ulong",
+      "proposed_name": "v18_jpeg_get_small_jpeg_common_struct_ulong",
+      "spectron_ea": "0x2a2358"
+    },
+    {
+      "actual_name_after": "v18_jpeg_free_small_jpeg_common_struct_void_ulong",
+      "actual_name_before": "_Z15jpeg_free_smallP18jpeg_common_structPvm",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x294ef0",
+      "original_name": "jpeg_free_small_jpeg_common_struct_void_ulong",
+      "proposed_name": "v18_jpeg_free_small_jpeg_common_struct_void_ulong",
+      "spectron_ea": "0x2a2360"
+    },
+    {
+      "actual_name_after": "v18_jpeg_get_large_jpeg_common_struct_ulong",
+      "actual_name_before": "_Z14jpeg_get_largeP18jpeg_common_structm",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x294ef8",
+      "original_name": "jpeg_get_large_jpeg_common_struct_ulong",
+      "proposed_name": "v18_jpeg_get_large_jpeg_common_struct_ulong",
+      "spectron_ea": "0x2a2368"
+    },
+    {
+      "actual_name_after": "v18_jpeg_free_large_jpeg_common_struct_void_ulong",
+      "actual_name_before": "_Z15jpeg_free_largeP18jpeg_common_structPvm",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x294f00",
+      "original_name": "jpeg_free_large_jpeg_common_struct_void_ulong",
+      "proposed_name": "v18_jpeg_free_large_jpeg_common_struct_void_ulong",
+      "spectron_ea": "0x2a2370"
+    },
+    {
+      "actual_name_after": "v18_jpeg_mem_available_jpeg_common_struct_long_long_long",
+      "actual_name_before": "_Z18jpeg_mem_availableP18jpeg_common_structlll",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x294f08",
+      "original_name": "jpeg_mem_available_jpeg_common_struct_long_long_long",
+      "proposed_name": "v18_jpeg_mem_available_jpeg_common_struct_long_long_long",
+      "spectron_ea": "0x2a2378"
+    },
+    {
+      "actual_name_after": "v18_jpeg_open_backing_store_jpeg_common_struct_backing_store_struct_long",
+      "actual_name_before": "_Z23jpeg_open_backing_storeP18jpeg_common_structP20backing_store_structl",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x294f10",
+      "original_name": "jpeg_open_backing_store_jpeg_common_struct_backing_store_struct_long",
+      "proposed_name": "v18_jpeg_open_backing_store_jpeg_common_struct_backing_store_struct_long",
+      "spectron_ea": "0x2a2380"
+    },
+    {
+      "actual_name_after": "v18_jpeg_mem_init_jpeg_common_struct",
+      "actual_name_before": "_Z13jpeg_mem_initP18jpeg_common_struct",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x294f38",
+      "original_name": "jpeg_mem_init_jpeg_common_struct",
+      "proposed_name": "v18_jpeg_mem_init_jpeg_common_struct",
+      "spectron_ea": "0x2a23a8"
+    },
+    {
+      "actual_name_after": "v18_jpeg_mem_term_jpeg_common_struct",
+      "actual_name_before": "_Z13jpeg_mem_termP18jpeg_common_struct",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x294f40",
+      "original_name": "jpeg_mem_term_jpeg_common_struct",
+      "proposed_name": "v18_jpeg_mem_term_jpeg_common_struct",
+      "spectron_ea": "0x2a23b0"
+    },
+    {
+      "actual_name_after": "v18_jdiv_round_up_long_long",
+      "actual_name_before": "_Z13jdiv_round_upll",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x297e40",
+      "original_name": "jdiv_round_up_long_long",
+      "proposed_name": "v18_jdiv_round_up_long_long",
+      "spectron_ea": "0x2a52b0"
+    },
+    {
+      "actual_name_after": "v18_jround_up_long_long",
+      "actual_name_before": "_Z9jround_upll",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x297e50",
+      "original_name": "jround_up_long_long",
+      "proposed_name": "v18_jround_up_long_long",
+      "spectron_ea": "0x2a52c0"
+    },
+    {
+      "actual_name_after": "v18_jcopy_block_row_short_64_short_64_uint",
+      "actual_name_before": "_Z15jcopy_block_rowPA64_sS0_j",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x297ec8",
+      "original_name": "jcopy_block_row_short_64_short_64_uint",
+      "proposed_name": "v18_jcopy_block_row_short_64_short_64_uint",
+      "spectron_ea": "0x2a5338"
+    },
+    {
+      "actual_name_after": "v18_jzero_far_void_ulong",
+      "actual_name_before": "_Z9jzero_farPvm",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x297edc",
+      "original_name": "jzero_far_void_ulong",
+      "proposed_name": "v18_jzero_far_void_ulong",
+      "spectron_ea": "0x2a534c"
+    }
+  ],
+  "renamed_count": 12,
+  "resolved_count": 12,
+  "save_path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v337_libjpeg_helper_residual.i64",
+  "saved": true,
+  "verified": true,
+  "verified_name_count": 12
+}
