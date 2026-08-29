@@ -3035,6 +3035,37 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v339 rectangle and region geometry residuals
+
+The v339 revision is a static IDA checkpoint for four raw geometry methods:
+float and double rectangle union, empty-region construction, and region-list
+cleanup. Every source and target row has direct compact pseudocode and an
+exact normalized ARM64 feature match. Three rows reinforce existing semantic
+candidates; the region constructor adds new context.
+
+The aliases were applied to a fresh v338-derived database and verified after
+reopening. The v339 database contains 11,707 functions, zero audited default
+names, 6,421 translated aliases, 4,774 source-backed dynamic rows, and 1,696
+exact retained dynamic names. All 5,782 defined dynamic function symbols still
+resolve to exact IDA function starts.
+
+Its SHA-256 is
+`d50a0755bb461dada6b011b4df4ca01f9a0cbaf0112805b0ff1e5ab48764bebe`.
+The records are
+`artifacts/spectron_geometry_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_geometry_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_geometry_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v339_geometry_residual.json`,
+`artifacts/spectron_name_coverage_audit_v339.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v339.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v339.json`,
+`artifacts/spectron_semantic_translation_v339.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v339.json`.
+
+This checkpoint did not change the verified loopback package, connector TLS
+result, or local protocol responder. No live endpoint was contacted, and no
+new runtime replay was performed for v339.
+
 ## Spectron 2.2 v338 THTMLPage lifecycle residuals
 
 The v338 revision is a static IDA checkpoint for seven raw lifecycle methods

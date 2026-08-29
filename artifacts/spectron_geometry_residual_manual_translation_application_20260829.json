@@ -1,0 +1,58 @@
+{
+  "anchor_count": 4,
+  "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_geometry_residual_manual_translation_anchors_20260829.json",
+  "apply": true,
+  "artifact": "spectron_manual_anchor_application",
+  "comments_added": 4,
+  "expected_artifact": "spectron_geometry_residual_manual_translation_anchors_20260829",
+  "failure_count": 0,
+  "failures": [],
+  "plan": [
+    {
+      "actual_name_after": "v18_TFloatRectangle_unionRects_TFloatRectangle_const",
+      "actual_name_before": "_ZN10vEhDgaHsFB10FwfGfa7F9NERKS_",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1e64f8",
+      "original_name": "TFloatRectangle_unionRects_TFloatRectangle_const",
+      "proposed_name": "v18_TFloatRectangle_unionRects_TFloatRectangle_const",
+      "spectron_ea": "0x1ea7e4"
+    },
+    {
+      "actual_name_after": "v18_TDoubleRectangle_unionRects_TDoubleRectangle_const",
+      "actual_name_before": "_ZN10tIiGfa7lcO10FwfGfa7F9NERKS_",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1e6574",
+      "original_name": "TDoubleRectangle_unionRects_TDoubleRectangle_const",
+      "proposed_name": "v18_TDoubleRectangle_unionRects_TDoubleRectangle_const",
+      "spectron_ea": "0x1ea860"
+    },
+    {
+      "actual_name_after": "v18_TRegion_TRegion_void",
+      "actual_name_before": "_ZN10e3mhxao0dCC1Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1e65f0",
+      "original_name": "TRegion_TRegion_void",
+      "proposed_name": "v18_TRegion_TRegion_void",
+      "spectron_ea": "0x1ea8dc"
+    },
+    {
+      "actual_name_after": "v18_TRegion_clear_void",
+      "actual_name_before": "_ZN10e3mhxao0dC5clearEv",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x1e65f8",
+      "original_name": "TRegion_clear_void",
+      "proposed_name": "v18_TRegion_clear_void",
+      "spectron_ea": "0x1ea8e4"
+    }
+  ],
+  "renamed_count": 4,
+  "resolved_count": 4,
+  "save_path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v339_geometry_residual.i64",
+  "saved": true,
+  "verified": true,
+  "verified_name_count": 4
+}

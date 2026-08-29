@@ -937,6 +937,87 @@ The expected v326 database hash is
 checkpoint is static evidence only. It does not change the loopback runtime
 result, TLS diagnosis, or live-service boundary.
 
+### v339 rectangle and region geometry residual translation
+
+The v339 pass is static IDA work only. It starts from the verified v338
+database and reviews source methods at 0x1e64f8, 0x1e6574, 0x1e65f0, and
+0x1e65f8 against target methods at 0x1ea7e4, 0x1ea860, 0x1ea8dc, and
+0x1ea8e4. It does not require an APK, emulator, server, or live endpoint.
+
+Capture compact pseudocode with tools/ida_dump_function_evidence.py, using the
+same IDALIB environment shown in the v338 section. The source request is
+0x1e64f8,0x1e6574,0x1e65f0,0x1e65f8. The target request is
+0x1ea7e4,0x1ea860,0x1ea8dc,0x1ea8e4.
+
+Generate the reviewed four-row artifact:
+
+    python3 tools/generate_spectron_geometry_residual_anchors.py \
+      --original-features /tmp/original_features_v3_current.json \
+      --spectron-features artifacts/spectron_features_v338_html_page_lifecycle.json \
+      --semantic-map artifacts/spectron_semantic_translation_v338.json \
+      --source-evidence /tmp/graal-source-geometry-v339.json \
+      --target-evidence /tmp/graal-target-geometry-v339.json \
+      --original-binary-sha256 9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8 \
+      --spectron-binary-sha256 f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219 \
+      --output artifacts/spectron_geometry_residual_manual_translation_anchors_20260829.json
+
+Apply the artifact to a fresh copy of
+spectron_libqplay_translated_v338_html_page_lifecycle.i64 and save
+spectron_libqplay_translated_v339_geometry_residual.i64 with
+tools/ida_apply_spectron_manual_anchors.py. The application environment is:
+
+    env IDADIR=/path/to/ida-pro-9.3 \
+      IDAUSR=/tmp/graal-idalib-user \
+      SPECTRON_MANUAL_APPLY=1 \
+      SPECTRON_MANUAL_ANCHORS=/path/to/artifacts/spectron_geometry_residual_manual_translation_anchors_20260829.json \
+      SPECTRON_MANUAL_EXPECTED_ARTIFACT=spectron_geometry_residual_manual_translation_anchors_20260829 \
+      SPECTRON_MANUAL_SAVE_PATH=/path/to/spectron_libqplay_translated_v339_geometry_residual.i64 \
+      SPECTRON_MANUAL_REPORT=/tmp/spectron_geometry_residual_manual_translation_application_20260829.json \
+      /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+      -f /path/to/spectron_libqplay_translated_v338_html_page_lifecycle.i64 \
+      -s tools/ida_apply_spectron_manual_anchors.py
+
+Reopen the saved copy with tools/ida_verify_spectron_manual_anchors.py, setting
+the same anchor and expected-artifact variables and
+SPECTRON_MANUAL_VERIFY_REPORT=/tmp/spectron_geometry_residual_manual_translation_verification_20260829.json.
+The application report must contain four resolved functions, four renames,
+four evidence comments, zero failures, and a successful save. The reopen
+report must contain four verified names in an 11,707-function database.
+
+Refresh the feature export and the name and dynamic audits using the commands
+in the v338 section, changing the output suffix to v339. Carry the semantic
+map forward and build the strict checkpoint:
+
+    python3 tools/carry_forward_spectron_semantic_translation_v339.py \
+      --parent-map artifacts/spectron_semantic_translation_v338.json \
+      --target-features artifacts/spectron_features_v339_geometry_residual.json \
+      --anchor-artifact artifacts/spectron_geometry_residual_manual_translation_anchors_20260829.json \
+      --output artifacts/spectron_semantic_translation_v339.json
+
+    python3 tools/generate_spectron_translation_checkpoint_v339.py \
+      --parent-checkpoint artifacts/spectron_translation_checkpoint_20260829_v338.json \
+      --database /path/to/spectron_libqplay_translated_v339_geometry_residual.i64 \
+      --anchor-artifact artifacts/spectron_geometry_residual_manual_translation_anchors_20260829.json \
+      --application-report artifacts/spectron_geometry_residual_manual_translation_application_20260829.json \
+      --verification-report artifacts/spectron_geometry_residual_manual_translation_verification_20260829.json \
+      --name-audit artifacts/spectron_name_coverage_audit_v339.json \
+      --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v339.json \
+      --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v339.json \
+      --semantic-map artifacts/spectron_semantic_translation_v339.json \
+      --feature-export artifacts/spectron_features_v339_geometry_residual.json \
+      --output artifacts/spectron_translation_checkpoint_20260829_v339.json
+
+    python3 tools/validate_research_archive.py
+
+The expected v339 database hash is
+d50a0755bb461dada6b011b4df4ca01f9a0cbaf0112805b0ff1e5ab48764bebe.
+Expected totals are 6,421 translated aliases, 419 target-only descriptive
+labels, 808 retained target names, seven JNI exports, 4,052 other IDA or PLT
+names, 4,774 source-backed dynamic symbols, 1,696 exact retained dynamic
+symbols, and 5,782 exact dynamic function starts. The anchor summary is four
+high-confidence rows, four exact metric matches, four pseudocode-backed rows,
+three semantic-map promotions, and one new-context row.
+
 ### v338 THTMLPage lifecycle residual translation
 
 The v338 pass is static IDA work only. It starts from the verified v337
@@ -954,14 +1035,14 @@ request is
 Generate the reviewed seven-row artifact:
 
 ```bash
-python3 tools/generate_spectron_html_page_lifecycle_anchors.py \\
-  --original-features /tmp/original_features_v3_current.json \\
-  --spectron-features artifacts/spectron_features_v337_libjpeg_helper_residual.json \\
-  --semantic-map artifacts/spectron_semantic_translation_v337.json \\
-  --source-evidence /tmp/graal-source-html-page-life.json \\
-  --target-evidence /tmp/graal-target-html-page-life.json \\
-  --original-binary-sha256 9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8 \\
-  --spectron-binary-sha256 f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219 \\
+python3 tools/generate_spectron_html_page_lifecycle_anchors.py \
+  --original-features /tmp/original_features_v3_current.json \
+  --spectron-features artifacts/spectron_features_v337_libjpeg_helper_residual.json \
+  --semantic-map artifacts/spectron_semantic_translation_v337.json \
+  --source-evidence /tmp/graal-source-html-page-life.json \
+  --target-evidence /tmp/graal-target-html-page-life.json \
+  --original-binary-sha256 9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8 \
+  --spectron-binary-sha256 f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219 \
   --output artifacts/spectron_html_page_lifecycle_manual_translation_anchors_20260829.json
 ```
 
@@ -977,23 +1058,23 @@ database.
 Carry the semantic map forward and build the strict checkpoint:
 
 ```bash
-python3 tools/carry_forward_spectron_semantic_translation_v338.py \\
-  --parent-map artifacts/spectron_semantic_translation_v337.json \\
-  --target-features artifacts/spectron_features_v338_html_page_lifecycle.json \\
-  --anchor-artifact artifacts/spectron_html_page_lifecycle_manual_translation_anchors_20260829.json \\
+python3 tools/carry_forward_spectron_semantic_translation_v338.py \
+  --parent-map artifacts/spectron_semantic_translation_v337.json \
+  --target-features artifacts/spectron_features_v338_html_page_lifecycle.json \
+  --anchor-artifact artifacts/spectron_html_page_lifecycle_manual_translation_anchors_20260829.json \
   --output artifacts/spectron_semantic_translation_v338.json
 
-python3 tools/generate_spectron_translation_checkpoint_v338.py \\
-  --parent-checkpoint artifacts/spectron_translation_checkpoint_20260829_v337.json \\
-  --database /path/to/spectron_libqplay_translated_v338_html_page_lifecycle.i64 \\
-  --anchor-artifact artifacts/spectron_html_page_lifecycle_manual_translation_anchors_20260829.json \\
-  --application-report artifacts/spectron_html_page_lifecycle_manual_translation_application_20260829.json \\
-  --verification-report artifacts/spectron_html_page_lifecycle_manual_translation_verification_20260829.json \\
-  --name-audit artifacts/spectron_name_coverage_audit_v338.json \\
-  --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v338.json \\
-  --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v338.json \\
-  --semantic-map artifacts/spectron_semantic_translation_v338.json \\
-  --feature-export artifacts/spectron_features_v338_html_page_lifecycle.json \\
+python3 tools/generate_spectron_translation_checkpoint_v338.py \
+  --parent-checkpoint artifacts/spectron_translation_checkpoint_20260829_v337.json \
+  --database /path/to/spectron_libqplay_translated_v338_html_page_lifecycle.i64 \
+  --anchor-artifact artifacts/spectron_html_page_lifecycle_manual_translation_anchors_20260829.json \
+  --application-report artifacts/spectron_html_page_lifecycle_manual_translation_application_20260829.json \
+  --verification-report artifacts/spectron_html_page_lifecycle_manual_translation_verification_20260829.json \
+  --name-audit artifacts/spectron_name_coverage_audit_v338.json \
+  --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v338.json \
+  --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v338.json \
+  --semantic-map artifacts/spectron_semantic_translation_v338.json \
+  --feature-export artifacts/spectron_features_v338_html_page_lifecycle.json \
   --output artifacts/spectron_translation_checkpoint_20260829_v338.json
 
 python3 tools/validate_research_archive.py

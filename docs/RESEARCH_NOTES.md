@@ -261,6 +261,65 @@ This pass changed only the private IDA copy and archive. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
 
+## 2026-08-29: rectangle and region geometry residuals, v339
+
+The next clean raw-symbol group after the THTMLPage lifecycle pass is a
+four-entry geometry block. The source rectangle helpers at `0x1e64f8` and
+`0x1e6574` line up with target helpers at `0x1ea7e4` and `0x1ea860`. The
+adjacent `TRegion` constructor and cleanup method line up at `0x1ea8dc` and
+`0x1ea8e4`.
+
+| 1.8 source | Spectron target | Applied alias | Direct behavior |
+| --- | ---: | --- | --- |
+| `0x1e64f8` `TFloatRectangle_unionRects_TFloatRectangle_const` | `0x1ea7e4` `_ZN10vEhDgaHsFB10FwfGfa7F9NERKS_` | `v18_TFloatRectangle_unionRects_TFloatRectangle_const` | float min and max edge union |
+| `0x1e6574` `TDoubleRectangle_unionRects_TDoubleRectangle_const` | `0x1ea860` `_ZN10tIiGfa7lcO10FwfGfa7F9NERKS_` | `v18_TDoubleRectangle_unionRects_TDoubleRectangle_const` | double min and max edge union |
+| `0x1e65f0` `TRegion_TRegion_void` | `0x1ea8dc` `_ZN10e3mhxao0dCC1Ev` | `v18_TRegion_TRegion_void` | clear the empty-region list head |
+| `0x1e65f8` `TRegion_clear_void` | `0x1ea8e4` `_ZN10e3mhxao0dC5clearEv` | `v18_TRegion_clear_void` | delete entries and destroy the region list |
+
+The two rectangle bodies are identical at the normalized-feature level and
+preserve the source arithmetic: choose the minimum left and top edges, choose
+the maximum right and bottom edges, write the resulting rectangle, and return
+the resulting height. The region constructor is the short C1 constructor
+that clears its list pointer. The cleanup pair walks the list, deletes every
+entry, invokes the list's virtual destruction hook, and resets the head. The
+target keeps the C1 and C2 constructor exports at one function address, so
+renaming the applied C1 anchor also makes the C2 dynamic row source-backed.
+
+All four rows have direct compact Hex-Rays pseudocode and exact normalized
+ARM64 feature records. Three rows reinforce medium-confidence automatic
+semantic candidates, while the constructor supplies new context. The aliases
+were applied to the v338-derived database and verified after reopening.
+
+The v339 database has 11,707 functions and zero audited default names. Its
+name audit reports 6,421 translated aliases, 808 retained target names, 419
+target-only descriptive labels, seven JNI exports, and 4,052 other IDA or PLT
+names. Dynamic coverage reports 4,774 source-backed aliases and 1,696 exact
+retained dynamic names. All 5,782 defined dynamic function symbols still
+resolve to exact IDA function starts.
+
+The v339 database is
+`analysis/spectron_libqplay_translated_v339_geometry_residual.i64` with
+SHA-256
+`d50a0755bb461dada6b011b4df4ca01f9a0cbaf0112805b0ff1e5ab48764bebe`.
+The machine-readable records are
+`artifacts/spectron_geometry_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_geometry_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_geometry_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v339_geometry_residual.json`,
+`artifacts/spectron_name_coverage_audit_v339.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v339.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v339.json`,
+`artifacts/spectron_semantic_translation_v339.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v339.json`.
+The reusable scripts are
+`tools/generate_spectron_geometry_residual_anchors.py`,
+`tools/carry_forward_spectron_semantic_translation_v339.py`, and
+`tools/generate_spectron_translation_checkpoint_v339.py`.
+
+This pass changed only the private IDA database and research archive. It did
+not patch the APK, rerun the loopback client, alter TLS behavior, contact a
+game server, or test a live endpoint.
+
 ## 2026-08-29: THTMLPage lifecycle residuals, v338
 
 After the libjpeg helper pass, the next clean raw-symbol group was the

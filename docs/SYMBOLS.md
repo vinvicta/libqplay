@@ -425,6 +425,42 @@ records are
 `artifacts/spectron_semantic_translation_v326.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v326.json`.
 
+### v339 rectangle and region geometry residual aliases
+
+The v339 pass adds four semantic aliases to the private Spectron IDA
+database. The raw target identifiers remain visible so each translated name
+can be traced back to the stripped build.
+
+| Spectron address | Raw target symbol | Applied alias | Recovered role |
+| ---: | --- | --- | --- |
+| `0x1ea7e4` | `_ZN10vEhDgaHsFB10FwfGfa7F9NERKS_` | `v18_TFloatRectangle_unionRects_TFloatRectangle_const` | float rectangle union |
+| `0x1ea860` | `_ZN10tIiGfa7lcO10FwfGfa7F9NERKS_` | `v18_TDoubleRectangle_unionRects_TDoubleRectangle_const` | double rectangle union |
+| `0x1ea8dc` | `_ZN10e3mhxao0dCC1Ev` | `v18_TRegion_TRegion_void` | empty-region construction |
+| `0x1ea8e4` | `_ZN10e3mhxao0dC5clearEv` | `v18_TRegion_clear_void` | region list cleanup |
+
+The source counterparts are `0x1e64f8`, `0x1e6574`, `0x1e65f0`, and
+`0x1e65f8`. The rectangle methods preserve the float and double edge-union
+arithmetic. The region constructor clears its list head, and the cleanup
+method deletes each entry, invokes list destruction, and resets the head.
+Direct pseudocode and exact normalized feature records support all four rows.
+
+The v339 records are
+`artifacts/spectron_geometry_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_geometry_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_geometry_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v339_geometry_residual.json`,
+`artifacts/spectron_name_coverage_audit_v339.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v339.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v339.json`,
+`artifacts/spectron_semantic_translation_v339.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v339.json`.
+
+The v339 database has 6,421 translated `v18_` aliases, 419 target-only
+descriptive labels, 808 retained target names, seven JNI exports, 4,052
+other IDA or PLT names, 4,774 source-backed dynamic rows, and 1,696 exact
+retained dynamic names. Its hash is
+`d50a0755bb461dada6b011b4df4ca01f9a0cbaf0112805b0ff1e5ab48764bebe`.
+
 ### v338 THTMLPage lifecycle residual aliases
 
 The v338 pass adds seven semantic aliases to the private Spectron IDA

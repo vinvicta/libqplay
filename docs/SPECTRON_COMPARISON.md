@@ -319,6 +319,43 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v339 rectangle and region geometry residual comparison
+
+The v339 pass compares four raw target methods in the rectangle and region
+geometry block. Every row has direct source and target compact Hex-Rays
+pseudocode and an exact normalized ARM64 feature match.
+
+| Source role | Spectron address | Applied alias | Match class |
+| --- | ---: | --- | --- |
+| `TFloatRectangle_unionRects_TFloatRectangle_const` | `0x1ea7e4` | `v18_TFloatRectangle_unionRects_TFloatRectangle_const` | exact float edge union |
+| `TDoubleRectangle_unionRects_TDoubleRectangle_const` | `0x1ea860` | `v18_TDoubleRectangle_unionRects_TDoubleRectangle_const` | exact double edge union |
+| `TRegion_TRegion_void` | `0x1ea8dc` | `v18_TRegion_TRegion_void` | exact empty constructor |
+| `TRegion_clear_void` | `0x1ea8e4` | `v18_TRegion_clear_void` | exact list cleanup |
+
+The rectangle rows preserve the minimum-origin and maximum-edge calculation.
+The region rows preserve empty construction and cleanup of every list entry,
+including virtual destruction and head reset. Three rows reinforce existing
+medium-confidence semantic candidates, while the constructor is new context.
+
+All four aliases were applied and verified after reopening the v339 database.
+It has 11,707 functions, zero audited default names, 6,421 translated aliases,
+4,774 source-backed dynamic rows, 1,696 exact retained dynamic names, and
+5,782 exact dynamic function starts. Its SHA-256 is
+`d50a0755bb461dada6b011b4df4ca01f9a0cbaf0112805b0ff1e5ab48764bebe`.
+The complete comparison records are
+`artifacts/spectron_geometry_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_geometry_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_geometry_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v339_geometry_residual.json`,
+`artifacts/spectron_name_coverage_audit_v339.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v339.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v339.json`,
+`artifacts/spectron_semantic_translation_v339.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v339.json`.
+
+This comparison is static evidence. It does not change the runtime diagnosis,
+patch the APK, or contact a live endpoint.
+
 ## v338 THTMLPage lifecycle residual comparison
 
 The v338 pass compares seven raw target methods in the obfuscated

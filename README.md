@@ -13,7 +13,7 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v337 Spectron database. It
+The current documented translation frontier is the v339 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -201,6 +201,14 @@ Hex-Rays pseudocode and an exact normalized ARM64 feature match. The v338
 database contains 6,417 reviewed `v18_` aliases, 4,769 source-backed dynamic
 rows, and 1,700 exact retained dynamic names. It is a static IDA checkpoint
 and has not been used for a new runtime APK replay.
+
+The v339 revision resolves four raw geometry methods immediately around the
+obfuscated rectangle and region classes. It covers float and double rectangle
+union, empty-region construction, and region list cleanup. Every row has
+direct source and target Hex-Rays pseudocode and an exact normalized ARM64
+feature match. The v339 database contains 6,421 reviewed `v18_` aliases,
+4,774 source-backed dynamic rows, and 1,696 exact retained dynamic names. It
+is a static IDA checkpoint and has not been used for a new runtime APK replay.
 
 The v331 revision continues immediately into the static-variable runtime. It
 adds 22 high-confidence aliases for the universe initializer, the
@@ -807,6 +815,55 @@ target-only functions, with zero failures. Reopening the fresh copy verified
 all four names. This was a static translation pass only. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
+
+### v339 geometry residual aliases
+
+The v339 pass starts from the verified v338 database and resolves four raw
+entries in the rectangle and region geometry block. Direct compact Hex-Rays
+pseudocode was captured for every source and target row, and all four rows
+have exact normalized ARM64 feature matches.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | --- | --- | --- |
+| `0x1e64f8` `TFloatRectangle_unionRects_TFloatRectangle_const` | `0x1ea7e4` `_ZN10vEhDgaHsFB10FwfGfa7F9NERKS_` | `v18_TFloatRectangle_unionRects_TFloatRectangle_const` | float rectangle union |
+| `0x1e6574` `TDoubleRectangle_unionRects_TDoubleRectangle_const` | `0x1ea860` `_ZN10tIiGfa7lcO10FwfGfa7F9NERKS_` | `v18_TDoubleRectangle_unionRects_TDoubleRectangle_const` | double rectangle union |
+| `0x1e65f0` `TRegion_TRegion_void` | `0x1ea8dc` `_ZN10e3mhxao0dCC1Ev` | `v18_TRegion_TRegion_void` | empty-region construction |
+| `0x1e65f8` `TRegion_clear_void` | `0x1ea8e4` `_ZN10e3mhxao0dC5clearEv` | `v18_TRegion_clear_void` | region list cleanup |
+
+The rectangle methods preserve the minimum-origin and maximum-edge union
+calculation for their respective float types. The region constructor clears
+the list head, while `clear` deletes every list entry, invokes list cleanup,
+and nulls the head. Three rows reinforce existing medium-confidence semantic
+map candidates; the region constructor is new context. The aliases were
+applied and verified after reopening the v339 database.
+
+The v339 database has 11,707 functions and zero audited default names. Its
+name audit reports 6,421 translated aliases, 808 retained target names, 419
+target-only descriptive labels, seven JNI exports, and 4,052 other IDA or PLT
+names. Dynamic coverage reports 4,774 source-backed aliases, 1,696 exact
+retained dynamic names, and 5,782 exact dynamic function starts.
+
+The saved database is
+`analysis/spectron_libqplay_translated_v339_geometry_residual.i64` with
+SHA-256
+`d50a0755bb461dada6b011b4df4ca01f9a0cbaf0112805b0ff1e5ab48764bebe`.
+The machine-readable records are
+`artifacts/spectron_geometry_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_geometry_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_geometry_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v339_geometry_residual.json`,
+`artifacts/spectron_name_coverage_audit_v339.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v339.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v339.json`,
+`artifacts/spectron_semantic_translation_v339.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v339.json`.
+
+The reusable generators are
+`tools/generate_spectron_geometry_residual_anchors.py`,
+`tools/carry_forward_spectron_semantic_translation_v339.py`, and
+`tools/generate_spectron_translation_checkpoint_v339.py`. This is a static
+IDA translation checkpoint. It did not patch the APK, rerun the loopback
+client, change TLS behavior, contact a game server, or test a live endpoint.
 
 ### v338 THTMLPage lifecycle residual aliases
 
