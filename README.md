@@ -13,7 +13,7 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v333 Spectron database. It
+The current documented translation frontier is the v334 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -156,6 +156,15 @@ normalized feature matches and seven differ only in register-detail
 allocation. The v332 database contains 6,382 reviewed `v18_` aliases, 4,732
 source-backed dynamic rows, and 1,735 exact retained dynamic names. It is a
 static IDA checkpoint and has not been used for a new runtime APK replay.
+
+The v334 revision continues into the bitmap codec runtime. It adds one
+high-confidence alias for the residual
+`TBitmap_jpeg_initStaticScriptVars_void` registration helper at target
+`0x1541bc`. The source and target each make a one-entry static property-table
+registration call with identical normalized body shape; only register-detail
+allocation differs. The v334 database contains 6,385 reviewed `v18_` aliases,
+4,736 source-backed dynamic rows, and 1,732 exact retained dynamic names. It
+is a static IDA checkpoint and has not been used for a new runtime APK replay.
 
 The v331 revision continues immediately into the static-variable runtime. It
 adds 22 high-confidence aliases for the universe initializer, the
@@ -762,6 +771,56 @@ target-only functions, with zero failures. Reopening the fresh copy verified
 all four names. This was a static translation pass only. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
+
+### v334 bitmap JPEG static initializer
+
+The v334 pass starts from the verified v333 database and translates the
+residual bitmap JPEG static initializer immediately before the target TGA
+helper family. The source and target bodies both register one static property
+definition through their respective rebuilt `TScriptProperty` helpers.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | --- | --- | --- |
+| `0x151394` `TBitmap_jpeg_initStaticScriptVars_void` | `0x1541bc` `_Z10eY1M1algS6v` | `v18_TBitmap_jpeg_initStaticScriptVars_void` | one-entry JPEG property table |
+
+The source body calls
+`TScriptProperty_addProps_TProperties_TPropertyPropDef_int(0, &off_378268, 1)`.
+The target uses the rebuilt `cWWYfaxbT2::hFWn2apYKC` helper with the same
+arguments and call shape, while its table lives at `off_38B278`. The target
+function is immediately followed by the translated `tga_error_string`,
+`tga_create`, and `tga_info` helpers, which provides a useful local boundary
+check. The single row is a high-confidence layout match with direct compact
+Hex-Rays pseudocode for both builds. It does not promote a new semantic-map
+match because the existing map is carried forward from v333.
+
+The v334 name audit reports 6,385 translated aliases, 419 target-only
+descriptive labels, 844 retained target names, seven JNI exports, 4,052 other
+IDA or PLT names, and zero default names. Dynamic coverage reports 4,736
+source-backed aliases and 1,732 exact retained dynamic names. The defined
+dynamic boundary audit still resolves all 5,782 function symbols to exact IDA
+starts.
+
+The v334 database is
+`analysis/spectron_libqplay_translated_v334_bitmap_jpeg_static.i64` with
+SHA-256
+`c2002066a0412b180afd6abb36fe08f0873403d3068a2a0bdd88deb997101398`.
+The records are
+`artifacts/spectron_bitmap_jpeg_static_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_bitmap_jpeg_static_manual_translation_application_20260829.json`,
+`artifacts/spectron_bitmap_jpeg_static_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v334_bitmap_jpeg_static.json`,
+`artifacts/spectron_name_coverage_audit_v334.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v334.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v334.json`,
+`artifacts/spectron_semantic_translation_v334.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v334.json`.
+
+The reusable helpers are
+`tools/generate_spectron_bitmap_jpeg_static_anchors.py`,
+`tools/carry_forward_spectron_semantic_translation_v334.py`, and
+`tools/generate_spectron_translation_checkpoint_v334.py`. This pass was
+static analysis only. It did not patch the APK, rerun the loopback client,
+alter TLS behavior, contact a game server, or test a live endpoint.
 
 ### v333 THashIntVar residual aliases
 

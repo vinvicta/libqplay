@@ -425,6 +425,33 @@ records are
 `artifacts/spectron_semantic_translation_v326.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v326.json`.
 
+### v334 bitmap JPEG static initializer
+
+The v334 pass adds one semantic alias to the private Spectron IDA database.
+The raw target identifier remains visible so the translated name can be
+traced back to the stripped build.
+
+| Spectron address | Raw target symbol | Applied alias | Recovered role |
+| ---: | --- | --- | --- |
+| `0x1541bc` | `_Z10eY1M1algS6v` | `v18_TBitmap_jpeg_initStaticScriptVars_void` | JPEG static property registration |
+
+The source counterpart is `TBitmap_jpeg_initStaticScriptVars_void` at
+`0x151394`. Both bodies call a property-registration helper with receiver
+zero, a table pointer, and count one. The target table and wrapper are
+relocated or rebuilt, so the row is a high-confidence layout alias rather
+than an exact byte-for-byte name recovery.
+
+The v334 records are
+`artifacts/spectron_bitmap_jpeg_static_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_bitmap_jpeg_static_manual_translation_application_20260829.json`,
+`artifacts/spectron_bitmap_jpeg_static_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v334_bitmap_jpeg_static.json`,
+`artifacts/spectron_name_coverage_audit_v334.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v334.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v334.json`,
+`artifacts/spectron_semantic_translation_v334.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v334.json`.
+
 ### v333 THashIntVar residual aliases
 
 The v333 pass adds two semantic aliases to the private Spectron IDA database.

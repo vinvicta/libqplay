@@ -319,6 +319,45 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v334 bitmap JPEG static initializer comparison
+
+The v334 pass compares the residual JPEG static initializer immediately
+before the target TGA helper block. The source and target use different
+property-registration symbols and table addresses, but both pass a null
+receiver, one table pointer, and a count of one.
+
+| Source role | Spectron address | Applied alias | Match class |
+| --- | ---: | --- | --- |
+| `TBitmap_jpeg_initStaticScriptVars_void` | `0x1541bc` | `v18_TBitmap_jpeg_initStaticScriptVars_void` | one-entry registration; register-detail change |
+
+The source boundary is `0x151394`, and the raw target symbol is
+`_Z10eY1M1algS6v`. Source pseudocode calls
+`TScriptProperty_addProps_TProperties_TPropertyPropDef_int`, while target
+pseudocode calls `cWWYfaxbT2::hFWn2apYKC`. The target's next boundaries are the
+already translated `tga_error_string`, `tga_create`, and `tga_info` helpers.
+Direct compact pseudocode and this local method order make the row
+high-confidence even though the target wrapper layout changes the register
+detail hash.
+
+The alias was applied and verified after reopening the v334 database. The
+database has 11,707 functions, zero audited default names, 6,385 translated
+aliases, 4,736 source-backed dynamic rows, 1,732 exact retained dynamic
+names, and 5,782 exact dynamic function starts. Its SHA-256 is
+`c2002066a0412b180afd6abb36fe08f0873403d3068a2a0bdd88deb997101398`.
+The complete comparison records are
+`artifacts/spectron_bitmap_jpeg_static_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_bitmap_jpeg_static_manual_translation_application_20260829.json`,
+`artifacts/spectron_bitmap_jpeg_static_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v334_bitmap_jpeg_static.json`,
+`artifacts/spectron_name_coverage_audit_v334.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v334.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v334.json`,
+`artifacts/spectron_semantic_translation_v334.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v334.json`.
+
+This comparison is static evidence. It does not change the runtime diagnosis,
+patch the APK, or contact a live endpoint.
+
 ## v333 THashIntVar residual comparison
 
 The v333 pass compares the two raw destructor boundaries immediately after

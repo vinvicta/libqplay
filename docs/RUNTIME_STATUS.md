@@ -3035,6 +3035,37 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v334 bitmap JPEG static initializer
+
+The v334 revision is a static IDA checkpoint for the residual JPEG static
+property initializer at target `0x1541bc`. It maps the source
+`TBitmap_jpeg_initStaticScriptVars_void` at `0x151394` to the stripped target
+`_Z10eY1M1algS6v`. Both functions make a one-entry property-table registration
+call. The target uses its rebuilt `cWWYfaxbT2` helper and a relocated table,
+so this is recorded as a high-confidence layout-change alias.
+
+The alias was applied to a fresh v333-derived copy and verified after
+reopening. The v334 database has 11,707 functions, zero audited default names,
+6,385 translated aliases, 4,736 source-backed dynamic rows, and 1,732 exact
+retained dynamic names. All 5,782 defined dynamic symbols still resolve to
+exact IDA function starts. Its SHA-256 is
+`c2002066a0412b180afd6abb36fe08f0873403d3068a2a0bdd88deb997101398`.
+
+The records are
+`artifacts/spectron_bitmap_jpeg_static_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_bitmap_jpeg_static_manual_translation_application_20260829.json`,
+`artifacts/spectron_bitmap_jpeg_static_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v334_bitmap_jpeg_static.json`,
+`artifacts/spectron_name_coverage_audit_v334.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v334.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v334.json`,
+`artifacts/spectron_semantic_translation_v334.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v334.json`.
+
+This checkpoint did not change the verified loopback package, connector TLS
+result, or local protocol responder. No live endpoint was contacted, and no
+new runtime replay was performed for v334.
+
 ## Spectron 2.2 v333 THashIntVar translation
 
 The v333 revision is a static IDA checkpoint for the two raw destructor

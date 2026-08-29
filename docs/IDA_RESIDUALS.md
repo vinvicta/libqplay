@@ -800,6 +800,45 @@ generators are
 `tools/generate_spectron_format_parameters_property_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v326.py`.
 
+### v334 bitmap JPEG static initializer
+
+The v334 pass starts from the verified v333 database and translates the
+residual `TBitmap_jpeg_initStaticScriptVars_void` registration helper at
+target `0x1541bc`. The source function at `0x151394` registers one JPEG
+property definition. The target's obfuscated body makes the same one-entry
+registration through its rebuilt `cWWYfaxbT2` property helper.
+
+The source call is
+`TScriptProperty_addProps_TProperties_TPropertyPropDef_int(0, &off_378268, 1)`.
+The target call is `cWWYfaxbT2::hFWn2apYKC(0, &off_38B278, 1)`. Direct compact
+Hex-Rays evidence and the adjacent translated TGA helper sequence make this
+a high-confidence layout-change alias. The only normalized feature
+difference is register-detail allocation.
+
+The v334 database contains 11,707 functions, zero audited default names,
+6,385 translated aliases, 419 target-only descriptive labels, 4,736
+source-backed dynamic rows, and 1,732 exact retained dynamic names. All 5,782
+defined dynamic symbols still resolve to exact IDA function starts. The saved
+database is
+`analysis/spectron_libqplay_translated_v334_bitmap_jpeg_static.i64` with
+SHA-256
+`c2002066a0412b180afd6abb36fe08f0873403d3068a2a0bdd88deb997101398`.
+
+The machine-readable records are
+`artifacts/spectron_bitmap_jpeg_static_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_bitmap_jpeg_static_manual_translation_application_20260829.json`,
+`artifacts/spectron_bitmap_jpeg_static_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v334_bitmap_jpeg_static.json`,
+`artifacts/spectron_name_coverage_audit_v334.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v334.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v334.json`,
+`artifacts/spectron_semantic_translation_v334.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v334.json`.
+
+This is a static IDA translation checkpoint. It did not patch the APK, rerun
+the loopback client, change TLS behavior, contact a game server, or test a
+live endpoint.
+
 ### v333 THashIntVar residual aliases
 
 The v333 pass starts from the verified v332 database and translates the

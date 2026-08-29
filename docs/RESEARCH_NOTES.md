@@ -261,6 +261,77 @@ This pass changed only the private IDA copy and archive. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
 
+## 2026-08-29: bitmap JPEG static initializer, v334
+
+The next raw target boundary after the translated JPEG helpers is
+`0x1541bc`, whose stripped name is `_Z10eY1M1algS6v`. The source counterpart
+is `TBitmap_jpeg_initStaticScriptVars_void` at `0x151394`. This is a small
+static registration helper, but it is a useful cross-build anchor because the
+source and target both perform exactly one property-table registration.
+
+| Source boundary | Target boundary | Applied alias | Recovered role |
+| ---: | ---: | --- | --- |
+| `0x151394` | `0x1541bc` `_Z10eY1M1algS6v` | `v18_TBitmap_jpeg_initStaticScriptVars_void` | one-entry JPEG property table |
+
+The source pseudocode is:
+
+```text
+__int64 __fastcall TBitmap_jpeg_initStaticScriptVars_void()
+{
+  return plt_TScriptProperty_addProps_TProperties_TPropertyPropDef_int(0, &off_378268, 1);
+}
+```
+
+The target pseudocode is:
+
+```text
+__int64 __fastcall eY1M1algS6()
+{
+  return cWWYfaxbT2::hFWn2apYKC(0, &off_38B278, 1);
+}
+```
+
+The table address changes with the target layout, and the property helper is
+obfuscated and rebuilt, but the call has the same null receiver, table
+pointer, and count of one. The target boundary is immediately before the
+translated `tga_error_string`, `tga_create`, and `tga_info` helpers, which
+gives a local order check independent of the raw name.
+
+The anchor generator classified this as one high-confidence layout-change
+row. It contains direct compact pseudocode for both builds, zero exact
+full-metric rows, zero prior semantic-map promotions, and one new local
+context row. The application report resolved and renamed one function, added
+one evidence comment, saved successfully, and reported zero failures. The
+dedicated reopen verifier found the alias in an 11,707-function database.
+
+The v334 name audit reports 6,385 translated aliases, 419 target-only
+descriptive labels, 844 retained target names, seven JNI exports, 4,052 other
+IDA or PLT names, and zero default names. Dynamic coverage reports 4,736
+source-backed aliases and 1,732 exact retained dynamic names. The dynamic
+boundary audit reports 5,782 exact IDA starts.
+
+The v334 database hash is
+`c2002066a0412b180afd6abb36fe08f0873403d3068a2a0bdd88deb997101398`.
+The evidence is stored in
+`artifacts/spectron_bitmap_jpeg_static_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_bitmap_jpeg_static_manual_translation_application_20260829.json`,
+`artifacts/spectron_bitmap_jpeg_static_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v334_bitmap_jpeg_static.json`,
+`artifacts/spectron_name_coverage_audit_v334.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v334.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v334.json`,
+`artifacts/spectron_semantic_translation_v334.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v334.json`.
+
+The semantic map is carried forward from v333. This preserves the reviewed
+source snapshot and avoids silently changing the established 3,716-function
+map merely because the current source IDALIB export has fewer function
+records. The new alias is tracked in the strict checkpoint and in the target
+feature export, while the existing semantic-map counts remain unchanged.
+
+This was static analysis only. It did not patch the APK, rerun the loopback
+client, alter TLS behavior, contact a game server, or test a live endpoint.
+
 ## 2026-08-29: THashIntVar destructor pair, v333
 
 The next two raw target entries after the translated `THTMLColors` methods

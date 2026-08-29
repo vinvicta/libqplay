@@ -1,0 +1,28 @@
+{
+  "anchor_count": 1,
+  "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_bitmap_jpeg_static_manual_translation_anchors_20260829.json",
+  "apply": true,
+  "artifact": "spectron_manual_anchor_application",
+  "comments_added": 1,
+  "expected_artifact": "spectron_bitmap_jpeg_static_manual_translation_anchors_20260829",
+  "failure_count": 0,
+  "failures": [],
+  "plan": [
+    {
+      "actual_name_after": "v18_TBitmap_jpeg_initStaticScriptVars_void",
+      "actual_name_before": "_Z10eY1M1algS6v",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x151394",
+      "original_name": "TBitmap_jpeg_initStaticScriptVars_void",
+      "proposed_name": "v18_TBitmap_jpeg_initStaticScriptVars_void",
+      "spectron_ea": "0x1541bc"
+    }
+  ],
+  "renamed_count": 1,
+  "resolved_count": 1,
+  "save_path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v334_bitmap_jpeg_static.i64",
+  "saved": true,
+  "verified": true,
+  "verified_name_count": 1
+}
