@@ -115,6 +115,64 @@ The v324 records are
 helpers are `tools/generate_spectron_tscript_runtime_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v324.py`.
 
+## 2026-08-29: TScript destructor block and v325
+
+The v324 pass left a small but important group of raw names in the same class
+neighborhood. I reviewed these separately because C++ destructor ABI forms are
+easy to confuse with constructors when the source database uses a historical
+alias. The source pseudocode comments expose the underlying D1, D2, and D0
+forms, and the target names expose the matching obfuscated destructor entry
+points.
+
+| 1.8 source | Spectron target | Applied alias | Review result |
+| --- | ---: | --- | --- |
+| `0x214794` | `0x21b324` | `v18_TScript_getLogName_void` | `Class ` plus script-name concatenation |
+| `0x2150ec` | `0x21bcfc` | `v18_TScript_TScript__2` | complete destructor plus delete |
+| `0x2175b8` | `0x21e4f8` | `v18_TScriptFunctionProperties_TScriptFunctionProperties` | property D1/D2 cleanup |
+| `0x2175d4` | `0x21e514` | `v18_non_virtual_thunk_to_TScriptFunctionProperties_TScriptFunctionProperties` | receiver adjustment thunk |
+| `0x2175dc` | `0x21e51c` | `v18_TScriptFunctionProperties_TScriptFunctionProperties__2` | property D0 cleanup |
+| `0x217614` | `0x21e554` | `v18_non_virtual_thunk_to_TScriptFunctionProperties_TScriptFunctionProperties__2` | deleting-destructor thunk |
+| `0x21761c` | `0x21e55c` | `v18_TFunctionProfile_TFunctionProfile` | profile-name cleanup |
+| `0x217630` | `0x21e570` | `v18_TFunctionProfile_TFunctionProfile__2` | profile D0 cleanup |
+
+The deleting TScript wrapper and the two property thunks have exact normalized
+metrics. The other five pairs differ only in the target's string wrapper or
+register-detail allocation. `getLogName` is especially clear: both bodies
+append the literal `Class `, copy the script name at offset 8, and clear their
+temporary string. The property methods reset vtable slots, call the base
+destructor, and either return or release the object. The profile methods reset
+their vtable, clear the name string, and optionally call `operator delete`.
+
+This pass also corrected the interpretation of the source names without
+renaming the source database. `TScriptFunctionProperties_TScriptFunctionProperties`
+at `0x2175b8` is an IDA alias for a destructor whose alternative symbol is D1,
+and `TFunctionProfile_TFunctionProfile` at `0x21761c` has the same D2-style
+alternative. Keeping that detail in the artifact avoids losing ABI meaning
+while preserving the existing source naming convention.
+
+All eight aliases were applied to a fresh v324-derived copy and verified after
+reopening. The final v325 database has 11,707 functions and zero audited
+default names. Its name audit counts 6,295 translated `v18_` aliases, 935
+retained target names, 417 target-only descriptive labels, seven JNI exports,
+and 4,053 other IDA or PLT names. The dynamic-symbol audit reports 4,624
+source-backed aliases, 1,823 exact retained names, and 146 other retained
+target names. Exact dynamic function boundaries remain at 5,782.
+
+The final database is
+`analysis/spectron_libqplay_translated_v325_tscript_destructor_final.i64` with
+SHA-256
+`229e4729eed1be2759935c1604ac6e3987ffe6fbe91c2b5a0dca16ae344c0757`.
+The records are
+`artifacts/spectron_tscript_destructor_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_destructor_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_destructor_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v325.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v325.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v325.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v325.json`. The reusable
+helpers are `tools/generate_spectron_tscript_destructor_anchors.py` and
+`tools/generate_spectron_translation_checkpoint_v325.py`.
+
 ## 2026-08-29: Source-side GUI boundary recovery and v321
 
 The v320 pass completed the target's retained dynamic function boundaries, but

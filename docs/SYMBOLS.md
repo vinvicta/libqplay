@@ -343,6 +343,39 @@ machine-readable records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v324.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v324.json`.
 
+### v325 TScript destructor aliases
+
+The v325 pass closes eight raw target names left beside the v324 script
+runtime block. The source property and profile aliases preserve the historical
+IDA naming convention, while the anchor pseudocode records the underlying C++
+D1, D2, and D0 destructor forms.
+
+| Source address | Spectron address | Applied alias |
+| ---: | ---: | --- |
+| `0x214794` | `0x21b324` | `v18_TScript_getLogName_void` |
+| `0x2150ec` | `0x21bcfc` | `v18_TScript_TScript__2` |
+| `0x2175b8` | `0x21e4f8` | `v18_TScriptFunctionProperties_TScriptFunctionProperties` |
+| `0x2175d4` | `0x21e514` | `v18_non_virtual_thunk_to_TScriptFunctionProperties_TScriptFunctionProperties` |
+| `0x2175dc` | `0x21e51c` | `v18_TScriptFunctionProperties_TScriptFunctionProperties__2` |
+| `0x217614` | `0x21e554` | `v18_non_virtual_thunk_to_TScriptFunctionProperties_TScriptFunctionProperties__2` |
+| `0x21761c` | `0x21e55c` | `v18_TFunctionProfile_TFunctionProfile` |
+| `0x217630` | `0x21e570` | `v18_TFunctionProfile_TFunctionProfile__2` |
+
+Three rows have exact normalized feature records. The other five differ only
+in rebuilt string-wrapper or register-detail behavior. The v325 application
+report records eight renames and eight evidence comments with no failures. A
+fresh reopen verified all eight names in the 11,707-function database. The
+final hash is
+`229e4729eed1be2759935c1604ac6e3987ffe6fbe91c2b5a0dca16ae344c0757`. The
+machine-readable records are
+`artifacts/spectron_tscript_destructor_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_destructor_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_destructor_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v325.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v325.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v325.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v325.json`.
+
 ## Current Spectron cross-build labels
 
 The latest disposable IDA copies extend the labels beyond the retained ELF

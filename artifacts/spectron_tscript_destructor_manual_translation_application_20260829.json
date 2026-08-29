@@ -1,0 +1,98 @@
+{
+  "anchor_count": 8,
+  "anchor_path": "/tmp/spectron_tscript_destructor_manual_translation_anchors_20260829.json",
+  "apply": true,
+  "artifact": "spectron_manual_anchor_application",
+  "comments_added": 8,
+  "expected_artifact": "spectron_tscript_destructor_manual_translation_anchors_20260829",
+  "failure_count": 0,
+  "failures": [],
+  "plan": [
+    {
+      "actual_name_after": "v18_TScript_getLogName_void",
+      "actual_name_before": "_ZN10zW2NgaU4IK10XmPXfa5PW1Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x214794",
+      "original_name": "TScript_getLogName_void",
+      "proposed_name": "v18_TScript_getLogName_void",
+      "spectron_ea": "0x21b324"
+    },
+    {
+      "actual_name_after": "v18_TScript_TScript__2",
+      "actual_name_before": "_ZN10zW2NgaU4IKD0Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x2150ec",
+      "original_name": "TScript_TScript__2",
+      "proposed_name": "v18_TScript_TScript__2",
+      "spectron_ea": "0x21bcfc"
+    },
+    {
+      "actual_name_after": "v18_TScriptFunctionProperties_TScriptFunctionProperties",
+      "actual_name_before": "_ZN20AICTfaebpZPropertiesD1Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x2175b8",
+      "original_name": "TScriptFunctionProperties_TScriptFunctionProperties",
+      "proposed_name": "v18_TScriptFunctionProperties_TScriptFunctionProperties",
+      "spectron_ea": "0x21e4f8"
+    },
+    {
+      "actual_name_after": "v18_non_virtual_thunk_to_TScriptFunctionProperties_TScriptFunctionProperties",
+      "actual_name_before": "_ZThn16_N20AICTfaebpZPropertiesD1Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x2175d4",
+      "original_name": "non_virtual_thunk_to_TScriptFunctionProperties_TScriptFunctionProperties",
+      "proposed_name": "v18_non_virtual_thunk_to_TScriptFunctionProperties_TScriptFunctionProperties",
+      "spectron_ea": "0x21e514"
+    },
+    {
+      "actual_name_after": "v18_TScriptFunctionProperties_TScriptFunctionProperties__2",
+      "actual_name_before": "_ZN20AICTfaebpZPropertiesD0Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x2175dc",
+      "original_name": "TScriptFunctionProperties_TScriptFunctionProperties__2",
+      "proposed_name": "v18_TScriptFunctionProperties_TScriptFunctionProperties__2",
+      "spectron_ea": "0x21e51c"
+    },
+    {
+      "actual_name_after": "v18_non_virtual_thunk_to_TScriptFunctionProperties_TScriptFunctionProperties__2",
+      "actual_name_before": "_ZThn16_N20AICTfaebpZPropertiesD0Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x217614",
+      "original_name": "non_virtual_thunk_to_TScriptFunctionProperties_TScriptFunctionProperties__2",
+      "proposed_name": "v18_non_virtual_thunk_to_TScriptFunctionProperties_TScriptFunctionProperties__2",
+      "spectron_ea": "0x21e554"
+    },
+    {
+      "actual_name_after": "v18_TFunctionProfile_TFunctionProfile",
+      "actual_name_before": "_ZN10hYSWfaoR80D2Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x21761c",
+      "original_name": "TFunctionProfile_TFunctionProfile",
+      "proposed_name": "v18_TFunctionProfile_TFunctionProfile",
+      "spectron_ea": "0x21e55c"
+    },
+    {
+      "actual_name_after": "v18_TFunctionProfile_TFunctionProfile__2",
+      "actual_name_before": "_ZN10hYSWfaoR80D0Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x217630",
+      "original_name": "TFunctionProfile_TFunctionProfile__2",
+      "proposed_name": "v18_TFunctionProfile_TFunctionProfile__2",
+      "spectron_ea": "0x21e570"
+    }
+  ],
+  "renamed_count": 8,
+  "resolved_count": 8,
+  "save_path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v325_tscript_destructor_final.i64",
+  "saved": true,
+  "verified": true,
+  "verified_name_count": 8
+}

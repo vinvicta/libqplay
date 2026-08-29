@@ -3035,6 +3035,46 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v325 TScript destructor translation
+
+The v325 pass closes eight raw symbols left in the v324 script-runtime block.
+It translates the TScript log-name helper, the deleting TScript destructor,
+the TScriptFunctionProperties destructor pair and non-virtual thunks, and the
+TFunctionProfile destructor pair.
+
+Three rows have exact normalized metrics. The five layout-change rows differ
+only in target string-wrapper or register-detail behavior. The source and
+target bodies agree on the C++ ABI sequence: vtable reset, base destruction,
+optional name-string cleanup, receiver adjustment for thunks, and
+`operator delete` for the D0 forms. The log-name helper still builds the
+`Class ` prefix followed by the script name.
+
+All eight aliases were applied to a fresh v324-derived copy and verified after
+reopening. The v325 database contains 11,707 functions and zero audited
+default names. Its name origins are 6,295 translated `v18_` aliases, 417
+target-only descriptive labels, 935 retained target names, seven JNI exports,
+and 4,053 other IDA or PLT names. The dynamic-symbol audit reports 4,624
+source-backed aliases, 1,823 exact retained names, 146 other retained target
+names, seven linker-boundary aliases, 169 PLT veneers, and one undefined
+`__sF` import without an in-library veneer.
+
+The final private database is
+`analysis/spectron_libqplay_translated_v325_tscript_destructor_final.i64` with
+SHA-256
+`229e4729eed1be2759935c1604ac6e3987ffe6fbe91c2b5a0dca16ae344c0757`.
+The machine-readable records are
+`artifacts/spectron_tscript_destructor_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_destructor_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_destructor_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v325.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v325.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v325.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v325.json`.
+
+This pass changed only the private IDA copy and archive. It did not patch the
+APK, rerun the client, alter TLS behavior, contact a game server, or test a
+live endpoint.
+
 ## Spectron 2.2 v324 TScript runtime translation
 
 The v324 pass is a static continuation from v323. It translates 24 methods in

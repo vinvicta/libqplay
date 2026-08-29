@@ -319,6 +319,47 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v325 TScript destructor comparison
+
+The v325 pass closes eight raw symbols that sit around the v324 TScript
+runtime block. Their target names are still obfuscated in the original ELF,
+but the C++ ABI forms and cleanup sequences line up with the source methods.
+
+| Source role | Spectron address | Applied alias | Match class |
+| --- | ---: | --- | --- |
+| script log name | `0x21b324` | `v18_TScript_getLogName_void` | layout change |
+| deleting TScript destructor | `0x21bcfc` | `v18_TScript_TScript__2` | exact metrics |
+| TScriptFunctionProperties destructor | `0x21e4f8` | `v18_TScriptFunctionProperties_TScriptFunctionProperties` | layout change |
+| property D1 thunk | `0x21e514` | `v18_non_virtual_thunk_to_TScriptFunctionProperties_TScriptFunctionProperties` | exact metrics |
+| deleting property destructor | `0x21e51c` | `v18_TScriptFunctionProperties_TScriptFunctionProperties__2` | layout change |
+| property D0 thunk | `0x21e554` | `v18_non_virtual_thunk_to_TScriptFunctionProperties_TScriptFunctionProperties__2` | exact metrics |
+| TFunctionProfile destructor | `0x21e55c` | `v18_TFunctionProfile_TFunctionProfile` | layout change |
+| deleting profile destructor | `0x21e570` | `v18_TFunctionProfile_TFunctionProfile__2` | layout change |
+
+The source database's historical aliases make the property and profile
+entries look like constructors, but their pseudocode comments expose the D1,
+D2, and D0 destructor symbols. Both builds reset the appropriate vtable slots,
+destroy the base or name string, adjust the receiver for non-virtual thunks,
+and call `operator delete` for the deleting forms. `getLogName` is also
+distinctive because both bodies assemble the literal `Class ` followed by the
+script name at object offset 8.
+
+Three rows have exact normalized metrics. The five layout-change rows differ
+only in the rebuilt target string wrapper or register-detail allocation. All
+eight aliases were applied and verified after reopening the fresh v325
+database. It contains 11,707 functions, zero audited default names, and 6,295
+translated `v18_` aliases. The final database hash is
+`229e4729eed1be2759935c1604ac6e3987ffe6fbe91c2b5a0dca16ae344c0757`.
+
+The v325 records are
+`artifacts/spectron_tscript_destructor_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_destructor_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_destructor_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v325.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v325.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v325.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v325.json`.
+
 ## v324 TScript runtime comparison
 
 The v324 pass follows the class-local method order into `TScriptFunction`,

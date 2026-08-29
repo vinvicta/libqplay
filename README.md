@@ -13,7 +13,7 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v324 Spectron database. It
+The current documented translation frontier is the v325 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -81,6 +81,15 @@ evidence recorded for both builds. The v324 database contains 6,287 reviewed
 `v18_` aliases. Its dynamic-symbol audit reports 4,614 source-backed rows and
 1,831 exact retained names. This is the latest static translation checkpoint;
 it has not been used for a new runtime APK replay.
+
+The v325 revision adds eight high-confidence destructor-family aliases around
+the same script runtime block. It translates the TScript log-name helper, the
+deleting TScript destructor, the TScriptFunctionProperties destructor pair and
+thunks, and the TFunctionProfile destructor pair. Three rows are exact metric
+matches and five record the expected target string-wrapper or register-detail
+change. The v325 database contains 6,295 reviewed `v18_` aliases, 4,624
+source-backed dynamic rows, and 1,823 exact retained dynamic names. It is a
+static IDA checkpoint and has not been used for a new runtime APK replay.
 The v273 revision adds six high-confidence libjpeg source and destination
 callback labels. They are tied to the target `jpeg_stdio_dest` and
 `jpeg_stdio_src` installation sites, with exact or normalized source-target
@@ -478,6 +487,29 @@ objects. The records are
 `artifacts/spectron_dynamic_symbol_boundaries_v324.json`,
 `artifacts/spectron_dynamic_symbol_coverage_audit_v324.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v324.json`.
+
+The v325 database is
+`analysis/spectron_libqplay_translated_v325_tscript_destructor_final.i64` with
+SHA-256
+`229e4729eed1be2759935c1604ac6e3987ffe6fbe91c2b5a0dca16ae344c0757`.
+It continues from the v324 database hash
+`975367646c22c2f21d1c7ffc8380e0b48a6c259864a1f8b192e043c3e0992e06`.
+The fresh copy still contains 11,707 functions and zero audited default names.
+Its name-origin counts are 6,295 translated `v18_` aliases, 417 target-only
+descriptive labels, 935 retained target names, seven JNI exports, and 4,053
+other IDA or PLT names. The dynamic-symbol audit reports 4,624 source-backed
+aliases, 1,823 exact retained names, 146 other retained target names, seven
+linker-boundary aliases, 169 PLT veneers, and one undefined `__sF` import
+without an in-library veneer.
+
+The v325 records are
+`artifacts/spectron_tscript_destructor_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_destructor_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_destructor_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v325.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v325.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v325.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v325.json`.
 
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
@@ -6523,6 +6555,10 @@ proves the local native TLS path, not a current live certificate or service.
   pseudocode fingerprints and reviewed aliases. `tools/generate_spectron_translation_checkpoint_v324.py`
   records the v324 application, reopen verification, name audit, and
   dynamic-symbol coverage.
+  `tools/generate_spectron_tscript_destructor_anchors.py` records the v325
+  TScript, TScriptFunctionProperties, and TFunctionProfile cleanup evidence.
+  `tools/generate_spectron_translation_checkpoint_v325.py` records the v325
+  application, reopen verification, name audit, and dynamic-symbol coverage.
   `tools/ida_apply_spectron_translation.py` and
   `tools/ida_apply_spectron_manual_anchors.py` write separate disposable IDA
   copies, while the matching verification scripts reopen and check them. The

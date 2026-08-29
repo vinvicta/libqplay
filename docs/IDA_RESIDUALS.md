@@ -695,6 +695,48 @@ default names. The v324 records are
 generators are `tools/generate_spectron_tscript_runtime_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v324.py`.
 
+### v325 TScript destructor and profile cleanup aliases
+
+The v325 pass closes eight raw target names in the same script-runtime
+neighborhood. The source feature names for the property and profile entries
+are historical IDA aliases, so the compact pseudocode comments are retained
+in the anchor artifact to show their underlying D1, D2, and D0 destructor
+forms.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | ---: | --- | --- |
+| `0x214794` | `0x21b324` | `v18_TScript_getLogName_void` | `Class ` prefix and script-name assembly |
+| `0x2150ec` | `0x21bcfc` | `v18_TScript_TScript__2` | deleting TScript destructor |
+| `0x2175b8` | `0x21e4f8` | `v18_TScriptFunctionProperties_TScriptFunctionProperties` | property destructor body |
+| `0x2175d4` | `0x21e514` | `v18_non_virtual_thunk_to_TScriptFunctionProperties_TScriptFunctionProperties` | property D1 thunk |
+| `0x2175dc` | `0x21e51c` | `v18_TScriptFunctionProperties_TScriptFunctionProperties__2` | deleting property destructor |
+| `0x217614` | `0x21e554` | `v18_non_virtual_thunk_to_TScriptFunctionProperties_TScriptFunctionProperties__2` | property D0 thunk |
+| `0x21761c` | `0x21e55c` | `v18_TFunctionProfile_TFunctionProfile` | profile-name cleanup |
+| `0x217630` | `0x21e570` | `v18_TFunctionProfile_TFunctionProfile__2` | deleting profile destructor |
+
+Three rows have exact normalized metrics: the deleting TScript wrapper and
+the two property destructor thunks. The other five differ only in the target
+string wrapper or register-detail record. `getLogName` still emits `Class `,
+copies the script name from object offset 8, and clears its temporary string.
+The property destructor bodies reset the two vtable slots, invoke the base
+destructor, and optionally call `operator delete`; their thunks subtract 16
+from the receiver. The profile destructors reset their vtable, clear the name
+at offset 8, and optionally release the object.
+
+The v325 application renamed all eight target functions, added eight evidence
+comments, and reported zero failures. A fresh reopen verified all eight names.
+The database still has 11,707 functions and zero audited default names. The
+v325 records are
+`artifacts/spectron_tscript_destructor_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_tscript_destructor_manual_translation_application_20260829.json`,
+`artifacts/spectron_tscript_destructor_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v325.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v325.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v325.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v325.json`. The reusable
+generators are `tools/generate_spectron_tscript_destructor_anchors.py` and
+`tools/generate_spectron_translation_checkpoint_v325.py`.
+
 ## CyaSSL role pass
 
 The CyaSSL gap was worth a separate pass because these routines sit directly
