@@ -319,6 +319,58 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v327 property construction and cleanup comparison
+
+The v327 pass follows the v326 format and property block into the adjacent
+constructors, registry helpers, and cleanup methods. The target C++ symbols
+remain obfuscated, but class-local order, constructor side effects, C++ ABI
+forms, and matching ownership operations make these high-confidence semantic
+translations.
+
+| Source role | Spectron address | Applied alias | Match class |
+| --- | ---: | --- | --- |
+| named property constructor | `0x22e49c` | `v18_TProperties_TProperties_TString_const_TString_const` | layout change |
+| compile inherited properties | `0x22e568` | `v18_TProperties_compileProperties_void` | layout change |
+| property-list lookup | `0x22e748` | `v18_getPropertyList_TString_const` | layout change |
+| object-creator constructor | `0x22e790` | `v18_TObjectCreator_TObjectCreator_TString_const_TGraalVar_TString_const` | layout change |
+| static script-property registration | `0x22f540` | `v18_TScriptProperty_initStaticScriptVars_void` | layout change |
+| object-creator D1 destructor | `0x22f554` | `v18_TObjectCreator_TObjectCreator` | layout change |
+| object-creator D0 destructor | `0x22f568` | `v18_TObjectCreator_TObjectCreator__2` | layout change |
+| script-property D2 destructor | `0x22f598` | `v18_TScriptProperty_TScriptProperty` | layout change |
+| script-property D0 destructor | `0x22f5d8` | `v18_TScriptProperty_TScriptProperty__2` | layout change |
+| animation-property D1 destructor | `0x22f620` | `v18_TAniProperty_TAniProperty` | layout change |
+| animation-property D0 destructor | `0x22f660` | `v18_TAniProperty_TAniProperty__2` | layout change |
+| joined-classes-property D1 destructor | `0x22f6a8` | `v18_TJoinedClassesProperty_TJoinedClassesProperty` | layout change |
+| joined-classes-property D0 destructor | `0x22f6e8` | `v18_TJoinedClassesProperty_TJoinedClassesProperty__2` | layout change |
+| accept-string-property D1 destructor | `0x22f730` | `v18_TAcceptStringProperty_TAcceptStringProperty` | layout change |
+| accept-string-property D0 destructor | `0x22f770` | `v18_TAcceptStringProperty_TAcceptStringProperty__2` | layout change |
+
+Every row is recorded as a layout-change anchor because the rebuilt target
+wrappers alter the normalized instruction and register metrics. The semantic
+evidence remains strong: the constructor and compiler perform the same list,
+registry, inheritance, replacement, and temporary-storage operations; the
+static helper builds the same global registration state; and the destructor
+families retain the expected vtable, base cleanup, receiver-adjustment, and
+deleting-form sequence. The nearby one-argument constructor at `0x22e838`
+remains raw because no independent 1.8 source counterpart was found.
+
+All 15 aliases were applied to a fresh v326-derived database and verified
+after reopening. The result has 11,707 functions, zero audited default names,
+and 6,330 translated `v18_` aliases. Dynamic coverage reports 4,669
+source-backed aliases, 1,788 exact retained names, and 136 other retained
+target names. The database hash is
+`cc731360c7c08f825a7905c760897d3a7aede1dccdb4322d56d72f5c2e0c2f13`.
+
+The v327 records are
+`artifacts/spectron_property_constructor_destructor_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_property_constructor_destructor_manual_translation_application_20260829.json`,
+`artifacts/spectron_property_constructor_destructor_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v327.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v327.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v327.json`,
+`artifacts/spectron_semantic_translation_v327.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v327.json`.
+
 ## v326 format-parameter and property comparison
 
 The v326 pass continues directly after the v325 script-runtime destructors.

@@ -3035,6 +3035,57 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v327 property construction and cleanup translation
+
+The v327 pass closes the next raw target cluster after the v326 format and
+property work. It translates the named `TProperties` constructor and
+compiler, the global property-list lookup, the `TObjectCreator` registration
+constructor, the static script-property registry helper, and the object
+creator plus derived-property destructor pairs.
+
+The source and target pseudocode agree on the important ownership behavior.
+The property constructor initializes the hash-list base, creates the property
+list, stores the display name, initializes the owner and flags, and registers
+the object globally. The compiler guards on the compiled state, rebuilds the
+list, recursively compiles inherited properties, removes replaced entries,
+and releases temporary storage. The object-creator constructor stores its
+string and callback and adds itself to the global registry. The destructor
+pairs preserve vtable replacement, derived and base string cleanup, receiver
+adjustment, and deleting-form `operator delete` placement.
+
+All 15 rows are high-confidence layout-change anchors. The target's rebuilt
+string and container wrappers alter the normalized metrics, so none are
+reported as exact metric matches even though the control-flow and cleanup
+roles line up. The nearby one-argument target constructor at `0x22e838`,
+`_ZN10cWWYfaxbT2C1ERK10CanTfaz6bZ`, remains a target-only overload because no
+independent 1.8 counterpart was established.
+
+All 15 aliases were applied to a fresh v326-derived copy and verified after
+reopening. The v327 database contains 11,707 functions and zero audited
+default names. Its name origins are 6,330 translated `v18_` aliases, 417
+target-only descriptive labels, 900 retained target names, seven JNI exports,
+and 4,053 other IDA or PLT names. Dynamic-symbol coverage reports 4,669
+source-backed aliases, 1,788 exact retained names, and 136 other retained
+target names, with 5,782 exact dynamic function starts.
+
+The final private database is
+`analysis/spectron_libqplay_translated_v327_property_constructor_destructor.i64`
+with SHA-256
+`cc731360c7c08f825a7905c760897d3a7aede1dccdb4322d56d72f5c2e0c2f13`. The
+machine-readable records are
+`artifacts/spectron_property_constructor_destructor_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_property_constructor_destructor_manual_translation_application_20260829.json`,
+`artifacts/spectron_property_constructor_destructor_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v327.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v327.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v327.json`,
+`artifacts/spectron_semantic_translation_v327.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v327.json`.
+
+This was a static translation pass only. It did not patch the APK, rerun the
+loopback client, alter TLS behavior, contact a game server, or test a live
+endpoint.
+
 ## Spectron 2.2 v326 format-parameter and property translation
 
 The v326 pass closes the next raw target cluster after the v325 script

@@ -425,6 +425,50 @@ records are
 `artifacts/spectron_semantic_translation_v326.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v326.json`.
 
+### v327 property-construction and cleanup aliases
+
+The v327 pass adds the next 15 reviewed cross-build aliases to the private
+Spectron IDA copy. They cover the property registry, property compilation,
+object-creator registration, static script-property setup, and the derived
+property destructor families.
+
+| Spectron address | Applied alias | Evidence role |
+| ---: | --- | --- |
+| `0x22e49c` | `v18_TProperties_TProperties_TString_const_TString_const` | named property constructor |
+| `0x22e568` | `v18_TProperties_compileProperties_void` | inherited property compilation |
+| `0x22e748` | `v18_getPropertyList_TString_const` | global property-list lookup |
+| `0x22e790` | `v18_TObjectCreator_TObjectCreator_TString_const_TGraalVar_TString_const` | object-creator registration constructor |
+| `0x22f540` | `v18_TScriptProperty_initStaticScriptVars_void` | static property registration |
+| `0x22f554` | `v18_TObjectCreator_TObjectCreator` | object-creator D1 cleanup |
+| `0x22f568` | `v18_TObjectCreator_TObjectCreator__2` | object-creator D0 cleanup |
+| `0x22f598` | `v18_TScriptProperty_TScriptProperty` | script-property D2 cleanup |
+| `0x22f5d8` | `v18_TScriptProperty_TScriptProperty__2` | script-property D0 cleanup |
+| `0x22f620` | `v18_TAniProperty_TAniProperty` | animation-property D1 cleanup |
+| `0x22f660` | `v18_TAniProperty_TAniProperty__2` | animation-property D0 cleanup |
+| `0x22f6a8` | `v18_TJoinedClassesProperty_TJoinedClassesProperty` | joined-property D1 cleanup |
+| `0x22f6e8` | `v18_TJoinedClassesProperty_TJoinedClassesProperty__2` | joined-property D0 cleanup |
+| `0x22f730` | `v18_TAcceptStringProperty_TAcceptStringProperty` | accept-string D1 cleanup |
+| `0x22f770` | `v18_TAcceptStringProperty_TAcceptStringProperty__2` | accept-string D0 cleanup |
+
+All 15 aliases are high-confidence layout-change translations. The evidence
+combines source and target Hex-Rays pseudocode, constructor side effects,
+class-local order, C++ ABI destructor forms, vtable replacement, receiver
+adjustment, and ownership cleanup. The target-only one-argument constructor
+`_ZN10cWWYfaxbT2C1ERK10CanTfaz6bZ` at `0x22e838` remains raw because a distinct
+1.8 counterpart was not established.
+
+The v327 database contains 11,707 functions, zero audited IDA default names,
+6,330 translated `v18_` aliases, and 5,782 exact dynamic function starts.
+The complete records are
+`artifacts/spectron_property_constructor_destructor_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_property_constructor_destructor_manual_translation_application_20260829.json`,
+`artifacts/spectron_property_constructor_destructor_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v327.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v327.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v327.json`,
+`artifacts/spectron_semantic_translation_v327.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v327.json`.
+
 ## Current Spectron cross-build labels
 
 The latest disposable IDA copies extend the labels beyond the retained ELF

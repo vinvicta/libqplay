@@ -261,6 +261,93 @@ This pass changed only the private IDA copy and archive. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
 
+## 2026-08-29: Property construction and cleanup tail, v327
+
+The v326 pass made the remaining names around the property runtime easier to
+read. The next target block contains the corresponding constructors,
+compiler, registry lookup, static property registration helper, and cleanup
+destructors. I reviewed it as a separate pass because one nearby target
+constructor is a real additional overload rather than a translated source
+function.
+
+The first group is the `TProperties` and `TObjectCreator` construction path:
+
+| 1.8 source | Spectron target | Applied alias | Review result |
+| --- | ---: | --- | --- |
+| `0x225c14` | `0x22e49c` | `v18_TProperties_TProperties_TString_const_TString_const` | named property construction and global registration |
+| `0x225cb8` | `0x22e568` | `v18_TProperties_compileProperties_void` | inherited and local property compilation |
+| `0x225ea0` | `0x22e748` | `v18_getPropertyList_TString_const` | global property-list lookup |
+| `0x225ee8` | `0x22e790` | `v18_TObjectCreator_TObjectCreator_TString_const_TGraalVar_TString_const` | object-creator callback registration |
+| `0x22693c` | `0x22f540` | `v18_TScriptProperty_initStaticScriptVars_void` | static property definition registration |
+
+The source and target constructor pseudocode agree on the global registry
+ownership. `compileProperties` also preserves the guard, inherited-property
+recursion, replacement handling, and temporary-list cleanup. The small
+static helper calls the same property-definition registration method in the
+same class-local position after `addFuncs`.
+
+The remaining ten rows are the object-creator and derived-property cleanup
+pairs:
+
+| 1.8 source | Spectron target | Applied alias | Review result |
+| --- | ---: | --- | --- |
+| `0x226950` | `0x22f554` | `v18_TObjectCreator_TObjectCreator` | D1/D2 name cleanup |
+| `0x226964` | `0x22f568` | `v18_TObjectCreator_TObjectCreator__2` | D0 cleanup and delete |
+| `0x226994` | `0x22f598` | `v18_TScriptProperty_TScriptProperty` | TScriptProperty D1/D2 cleanup |
+| `0x2269d4` | `0x22f5d8` | `v18_TScriptProperty_TScriptProperty__2` | TScriptProperty D0 cleanup |
+| `0x226a1c` | `0x22f620` | `v18_TAniProperty_TAniProperty` | animation-property D1/D2 cleanup |
+| `0x226a5c` | `0x22f660` | `v18_TAniProperty_TAniProperty__2` | animation-property D0 cleanup |
+| `0x226aa4` | `0x22f6a8` | `v18_TJoinedClassesProperty_TJoinedClassesProperty` | joined-property D1/D2 cleanup |
+| `0x226ae4` | `0x22f6e8` | `v18_TJoinedClassesProperty_TJoinedClassesProperty__2` | joined-property D0 cleanup |
+| `0x226b2c` | `0x22f730` | `v18_TAcceptStringProperty_TAcceptStringProperty` | accept-property D1/D2 cleanup |
+| `0x226b6c` | `0x22f770` | `v18_TAcceptStringProperty_TAcceptStringProperty__2` | accept-property D0 cleanup |
+
+The target symbols make the ABI forms explicit. Each D1 or D2 body resets
+the derived vtable, clears the derived string at offset 48, restores the
+base vtable, and clears the inherited name at offset 8. Each D0 body adds
+`operator delete`. The four derived classes share the same source field and
+cleanup pattern, and the target preserves their sibling order. The target's
+register-detail record changes because its string wrapper is different, so
+all 15 rows are recorded as layout-change anchors even where the instruction
+counts and field offsets agree.
+
+The target one-argument constructor at `0x22e838`,
+`_ZN10cWWYfaxbT2C1ERK10CanTfaz6bZ`, was not aliased. It is a target overload
+near the already translated three-argument TScriptProperty constructor, but
+there is no independent 1.8 source symbol with the same construction role.
+Keeping it raw is more honest than assigning a source name based only on
+proximity.
+
+All 15 reviewed aliases were applied to a fresh v326-derived IDA copy and
+verified after reopening. The resulting v327 database has 11,707 functions
+and zero audited default names. Its name-origin counts are 6,330 translated
+aliases, 417 target-only descriptive labels, 900 retained target names, seven
+JNI exports, and 4,053 other IDA or PLT names. Dynamic coverage reports 4,669
+source-backed aliases, 1,788 exact retained names, 136 other retained target
+names, seven linker-boundary aliases, 169 PLT veneers, and one undefined
+`__sF` import. The exact dynamic function-boundary count remains 5,782.
+
+The v327 database is
+`analysis/spectron_libqplay_translated_v327_property_constructor_destructor.i64`
+with SHA-256
+`cc731360c7c08f825a7905c760897d3a7aede1dccdb4322d56d72f5c2e0c2f13`.
+The machine-readable records are
+`artifacts/spectron_property_constructor_destructor_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_property_constructor_destructor_manual_translation_application_20260829.json`,
+`artifacts/spectron_property_constructor_destructor_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v327.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v327.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v327.json`,
+`artifacts/spectron_semantic_translation_v327.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v327.json`.
+The reusable helpers are
+`tools/generate_spectron_property_constructor_destructor_anchors.py` and
+`tools/generate_spectron_translation_checkpoint_v327.py`.
+
+This pass changed only the private IDA copy and archive. It did not patch the
+APK, rerun the loopback client, alter TLS behavior, contact a game server, or
+test a live endpoint.
+
 ## 2026-08-29: Source-side GUI boundary recovery and v321
 
 The v320 pass completed the target's retained dynamic function boundaries, but

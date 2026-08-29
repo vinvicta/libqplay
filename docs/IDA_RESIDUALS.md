@@ -800,6 +800,61 @@ generators are
 `tools/generate_spectron_format_parameters_property_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v326.py`.
 
+### v327 property construction and destructor-tail aliases
+
+The v327 pass continues through the property runtime after v326. It closes
+the target constructor, compiler, lookup, static-registration, and cleanup
+entries that were still carrying obfuscated names. The nearby one-argument
+`cWWYfaxbT2` constructor remains intentionally unaliased because it is an
+additional target overload without an independently established 1.8 source
+counterpart.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | ---: | --- | --- |
+| `0x225c14` | `0x22e49c` | `v18_TProperties_TProperties_TString_const_TString_const` | named property construction and global registration |
+| `0x225cb8` | `0x22e568` | `v18_TProperties_compileProperties_void` | inherited and local property compilation |
+| `0x225ea0` | `0x22e748` | `v18_getPropertyList_TString_const` | global property-list lookup |
+| `0x225ee8` | `0x22e790` | `v18_TObjectCreator_TObjectCreator_TString_const_TGraalVar_TString_const` | object-creator callback registration |
+| `0x22693c` | `0x22f540` | `v18_TScriptProperty_initStaticScriptVars_void` | static property definition registration |
+| `0x226950` | `0x22f554` | `v18_TObjectCreator_TObjectCreator` | object-creator D1/D2 cleanup |
+| `0x226964` | `0x22f568` | `v18_TObjectCreator_TObjectCreator__2` | object-creator D0 cleanup |
+| `0x226994` | `0x22f598` | `v18_TScriptProperty_TScriptProperty` | TScriptProperty D1/D2 cleanup |
+| `0x2269d4` | `0x22f5d8` | `v18_TScriptProperty_TScriptProperty__2` | TScriptProperty D0 cleanup |
+| `0x226a1c` | `0x22f620` | `v18_TAniProperty_TAniProperty` | animation-property cleanup |
+| `0x226a5c` | `0x22f660` | `v18_TAniProperty_TAniProperty__2` | animation-property D0 cleanup |
+| `0x226aa4` | `0x22f6a8` | `v18_TJoinedClassesProperty_TJoinedClassesProperty` | joined-property cleanup |
+| `0x226ae4` | `0x22f6e8` | `v18_TJoinedClassesProperty_TJoinedClassesProperty__2` | joined-property D0 cleanup |
+| `0x226b2c` | `0x22f730` | `v18_TAcceptStringProperty_TAcceptStringProperty` | accept-property D1/D2 cleanup |
+| `0x226b6c` | `0x22f770` | `v18_TAcceptStringProperty_TAcceptStringProperty__2` | accept-property D0 cleanup |
+
+All 15 rows are high-confidence layout-change anchors. The source and target
+constructors agree on global registry ownership and inherited compilation.
+The cleanup pairs agree on the D1, D2, and D0 C++ ABI forms, vtable reset,
+string cleanup, and object deletion. Register-detail differences remain in
+the normalized records because the target uses its rebuilt string wrapper.
+
+All 15 aliases were applied to a fresh v326-derived copy and all 15 were
+verified after reopening. The final database has 11,707 functions and zero
+audited default names. The v327 name-origin counts are 6,330 translated
+`v18_` aliases, 417 target-only descriptive labels, 900 retained target
+names, seven JNI exports, and 4,053 other IDA or PLT names. Dynamic coverage
+reports 4,669 source-backed aliases, 1,788 exact retained names, and 136
+other retained target names. The database hash is
+`cc731360c7c08f825a7905c760897d3a7aede1dccdb4322d56d72f5c2e0c2f13`.
+
+The v327 records are
+`artifacts/spectron_property_constructor_destructor_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_property_constructor_destructor_manual_translation_application_20260829.json`,
+`artifacts/spectron_property_constructor_destructor_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v327.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v327.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v327.json`,
+`artifacts/spectron_semantic_translation_v327.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v327.json`. The reusable
+generators are
+`tools/generate_spectron_property_constructor_destructor_anchors.py` and
+`tools/generate_spectron_translation_checkpoint_v327.py`.
+
 ## CyaSSL role pass
 
 The CyaSSL gap was worth a separate pass because these routines sit directly

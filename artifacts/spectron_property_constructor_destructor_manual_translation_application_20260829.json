@@ -1,0 +1,168 @@
+{
+  "anchor_count": 15,
+  "anchor_path": "/tmp/spectron_property_constructor_destructor_manual_translation_anchors_20260829.json",
+  "apply": true,
+  "artifact": "spectron_manual_anchor_application",
+  "comments_added": 15,
+  "expected_artifact": "spectron_property_constructor_destructor_manual_translation_anchors_20260829",
+  "failure_count": 0,
+  "failures": [],
+  "plan": [
+    {
+      "actual_name_after": "v18_TProperties_TProperties_TString_const_TString_const",
+      "actual_name_before": "_ZN10c76BgaJBGAC2ERK10C8THgaTQxFS2_",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x225c14",
+      "original_name": "TProperties_TProperties_TString_const_TString_const",
+      "proposed_name": "v18_TProperties_TProperties_TString_const_TString_const",
+      "spectron_ea": "0x22e49c"
+    },
+    {
+      "actual_name_after": "v18_TProperties_compileProperties_void",
+      "actual_name_before": "_ZN10c76BgaJBGA10_TCjIaUk7TEv",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x225cb8",
+      "original_name": "TProperties_compileProperties_void",
+      "proposed_name": "v18_TProperties_compileProperties_void",
+      "spectron_ea": "0x22e568"
+    },
+    {
+      "actual_name_after": "v18_getPropertyList_TString_const",
+      "actual_name_before": "_Z10nYwjIaul2TRK10C8THgaTQxF",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x225ea0",
+      "original_name": "getPropertyList_TString_const",
+      "proposed_name": "v18_getPropertyList_TString_const",
+      "spectron_ea": "0x22e748"
+    },
+    {
+      "actual_name_after": "v18_TObjectCreator_TObjectCreator_TString_const_TGraalVar_TString_const",
+      "actual_name_before": "_ZN10VxVm2aj1TBC2ERK10C8THgaTQxFPFP10G0gxgajWBwS2_E",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x225ee8",
+      "original_name": "TObjectCreator_TObjectCreator_TString_const_TGraalVar_TString_const",
+      "proposed_name": "v18_TObjectCreator_TObjectCreator_TString_const_TGraalVar_TString_const",
+      "spectron_ea": "0x22e790"
+    },
+    {
+      "actual_name_after": "v18_TScriptProperty_initStaticScriptVars_void",
+      "actual_name_before": "_Z10dNXM2a4UNXv",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x22693c",
+      "original_name": "TScriptProperty_initStaticScriptVars_void",
+      "proposed_name": "v18_TScriptProperty_initStaticScriptVars_void",
+      "spectron_ea": "0x22f540"
+    },
+    {
+      "actual_name_after": "v18_TObjectCreator_TObjectCreator",
+      "actual_name_before": "_ZN10VxVm2aj1TBD1Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x226950",
+      "original_name": "TObjectCreator_TObjectCreator",
+      "proposed_name": "v18_TObjectCreator_TObjectCreator",
+      "spectron_ea": "0x22f554"
+    },
+    {
+      "actual_name_after": "v18_TObjectCreator_TObjectCreator__2",
+      "actual_name_before": "_ZN10VxVm2aj1TBD0Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x226964",
+      "original_name": "TObjectCreator_TObjectCreator__2",
+      "proposed_name": "v18_TObjectCreator_TObjectCreator__2",
+      "spectron_ea": "0x22f568"
+    },
+    {
+      "actual_name_after": "v18_TScriptProperty_TScriptProperty",
+      "actual_name_before": "_ZN10cWWYfaxbT2D2Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x226994",
+      "original_name": "TScriptProperty_TScriptProperty",
+      "proposed_name": "v18_TScriptProperty_TScriptProperty",
+      "spectron_ea": "0x22f598"
+    },
+    {
+      "actual_name_after": "v18_TScriptProperty_TScriptProperty__2",
+      "actual_name_before": "_ZN10cWWYfaxbT2D0Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x2269d4",
+      "original_name": "TScriptProperty_TScriptProperty__2",
+      "proposed_name": "v18_TScriptProperty_TScriptProperty__2",
+      "spectron_ea": "0x22f5d8"
+    },
+    {
+      "actual_name_after": "v18_TAniProperty_TAniProperty",
+      "actual_name_before": "_ZN10ScpN2avPaYD1Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x226a1c",
+      "original_name": "TAniProperty_TAniProperty",
+      "proposed_name": "v18_TAniProperty_TAniProperty",
+      "spectron_ea": "0x22f620"
+    },
+    {
+      "actual_name_after": "v18_TAniProperty_TAniProperty__2",
+      "actual_name_before": "_ZN10ScpN2avPaYD0Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x226a5c",
+      "original_name": "TAniProperty_TAniProperty__2",
+      "proposed_name": "v18_TAniProperty_TAniProperty__2",
+      "spectron_ea": "0x22f660"
+    },
+    {
+      "actual_name_after": "v18_TJoinedClassesProperty_TJoinedClassesProperty",
+      "actual_name_before": "_ZN10KGeN2aIY1XD1Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x226aa4",
+      "original_name": "TJoinedClassesProperty_TJoinedClassesProperty",
+      "proposed_name": "v18_TJoinedClassesProperty_TJoinedClassesProperty",
+      "spectron_ea": "0x22f6a8"
+    },
+    {
+      "actual_name_after": "v18_TJoinedClassesProperty_TJoinedClassesProperty__2",
+      "actual_name_before": "_ZN10KGeN2aIY1XD0Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x226ae4",
+      "original_name": "TJoinedClassesProperty_TJoinedClassesProperty__2",
+      "proposed_name": "v18_TJoinedClassesProperty_TJoinedClassesProperty__2",
+      "spectron_ea": "0x22f6e8"
+    },
+    {
+      "actual_name_after": "v18_TAcceptStringProperty_TAcceptStringProperty",
+      "actual_name_before": "_ZN10q4yI2aq75TD2Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x226b2c",
+      "original_name": "TAcceptStringProperty_TAcceptStringProperty",
+      "proposed_name": "v18_TAcceptStringProperty_TAcceptStringProperty",
+      "spectron_ea": "0x22f730"
+    },
+    {
+      "actual_name_after": "v18_TAcceptStringProperty_TAcceptStringProperty__2",
+      "actual_name_before": "_ZN10q4yI2aq75TD0Ev",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x226b6c",
+      "original_name": "TAcceptStringProperty_TAcceptStringProperty__2",
+      "proposed_name": "v18_TAcceptStringProperty_TAcceptStringProperty__2",
+      "spectron_ea": "0x22f770"
+    }
+  ],
+  "renamed_count": 15,
+  "resolved_count": 15,
+  "save_path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v327_property_constructor_destructor.i64",
+  "saved": true,
+  "verified": true,
+  "verified_name_count": 15
+}
