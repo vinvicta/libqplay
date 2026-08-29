@@ -462,6 +462,38 @@ The name audits, dynamic boundary records, and v320 checkpoint are
 `artifacts/spectron_symbol_translation_inventory_20260828.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v320.json`.
 
+### v321 GUI boundary translation
+
+The v321 pass extends that boundary work to the original 1.8 database. Eleven
+positive-size GUI `FUNC` symbols were present in the source ELF table but had
+been classified as data by the source IDA analysis. The offline materializer
+restored their exact source intervals and readable names before comparing them
+to the eleven corresponding Spectron methods.
+
+Ten pairs have high-confidence normalized ARM64 matches. One pair,
+`GuiButtonCtrl::drawWithStyle`, is medium confidence because the target body is
+eight bytes and two instructions shorter. Its class-local method order,
+`Buttons` and `Taskbar.Button` strings, call and branch counts, and reviewed
+pseudocode all agree. The shorter body is recorded as a rebuild-layout
+difference rather than silently treated as an exact metric match.
+
+The eleven applied target aliases are stored in
+`artifacts/spectron_gui_missing_function_manual_translation_anchors_20260828.json`.
+The application report shows eleven resolved rows, eleven renamed functions,
+eleven comments, and zero failures. The close and reopen verification shows
+eleven verified names in the 11,707-function target database. The final target
+database hash is
+`b7d17b9a5dbc34922cc40fe030cb539d69dcf89fe8a5f64bae83e962309263ab`, recorded
+in `artifacts/spectron_translation_checkpoint_20260828_v321.json`.
+
+The final v321 name audit has zero default names in the checked families. It
+contains 6,228 translated `v18_` aliases, 417 target-only descriptive labels,
+1,002 retained target names, seven JNI exports, and 4,053 other IDA or PLT
+names. The separate dynamic-symbol audit still classifies all 6,770 named
+rows, including 5,782 exact functions, 482 data items, 336 other non-code
+items, and 170 undefined imports. This is a complete IDA boundary and item
+accounting result, not a claim that stripped 2.2 source names were restored.
+
 ## CyaSSL role pass
 
 The CyaSSL gap was worth a separate pass because these routines sit directly

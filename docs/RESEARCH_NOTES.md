@@ -31,6 +31,85 @@ The custom `con` tool produced the same ZIP payload as the independent
 decoder. That cross-check separated a package parsing mistake from a client
 compatibility problem.
 
+## 2026-08-29: Source-side GUI boundary recovery and v321
+
+The v320 pass completed the target's retained dynamic function boundaries, but
+the comparison was still asymmetric. The Spectron library had eleven GUI
+methods in its dynamic table that the target IDA database had not originally
+indexed as functions. The 1.8 library had the same issue for the corresponding
+GUI methods, so a direct source-to-target comparison would have been weaker
+than it needed to be.
+
+I repaired the source side first. Each source row had a positive ELF `FUNC`
+size, a valid ARM64 body, and an end address that did not overlap another
+known function. The disposable source database now contains all eleven exact
+ELF intervals and readable source names. The repair report records eleven
+materialized boundaries, eleven renamed functions, and zero failures. It is
+`artifacts/original_dynamic_function_application_20260828.json`.
+
+With both databases bounded, the offline feature matcher and a class-local
+review produced these aliases:
+
+| 1.8 source address | Spectron address | Applied alias | Confidence |
+| ---: | ---: | --- | --- |
+| `0x1abf80` | `0x1b0140` | `v18_GuiBitmapButtonCtrl_onRender_TPoint_const` | high |
+| `0x1ae65c` | `0x1b281c` | `v18_GuiButtonCtrl_drawWithStyle_TRectangle_const` | medium |
+| `0x1ae97c` | `0x1b2b34` | `v18_GuiButtonCtrl_drawWithProfile_TPoint_const` | high |
+| `0x1c21b8` | `0x1c6c94` | `v18_GuiScrollCtrl_drawBackground_TRectangle_const` | high |
+| `0x1c2508` | `0x1c6fe4` | `v18_GuiScrollCtrl_drawWithStyle_TRectangle_const` | high |
+| `0x1c63a8` | `0x1caeb4` | `v18_GuiTextCtrl_drawWithProfile_TPoint_const` | high |
+| `0x1c8bb8` | `0x1cd73c` | `v18_GuiTextEditCtrl_drawWithStyle_TRectangle_const` | high |
+| `0x1c8f80` | `0x1cdb04` | `v18_GuiTextEditCtrl_drawWithProfile_TPoint_const` | high |
+| `0x1d5fcc` | `0x1dac5c` | `v18_GuiArrayCtrl_onRenderColumnHeaders_TPoint_const_TPoint_const_TPoint_const` | high |
+| `0x1da320` | `0x1df0bc` | `v18_GuiPopUpMenuCtrl_drawWithStyle_TRectangle_const` | high |
+| `0x1dc260` | `0x1dfffc` | `v18_GuiProgressCtrl_drawWithProfile_TPoint_const` | high |
+
+Ten rows have the same normalized ARM64 function shape used by the existing
+matcher. The `GuiButtonCtrl::drawWithStyle` row is the one deliberate manual
+exception. Both classes have the same ordered method neighborhood, including
+the property accessors, constructor, icon-size helper, `drawIconAndText`,
+`drawWithProfile`, `onRender`, and destructor. Both bodies have 32 basic
+blocks, 39 branches, 16 calls, and two returns. Both reference the `Buttons`
+and `Taskbar.Button` style strings and decompile to the same style-button and
+icon-text rendering operation. The rebuilt Spectron wrapper is eight bytes and
+two instructions shorter, so the artifact records a medium-confidence class
+slot match rather than hiding the difference.
+
+The final target copy is
+`analysis/spectron_libqplay_translated_v321_gui_missing_function_aliases_final.i64`
+with SHA-256
+`b7d17b9a5dbc34922cc40fe030cb539d69dcf89fe8a5f64bae83e962309263ab`.
+The alias application reopened successfully and verified all eleven names with
+zero failures. The name audit still reports 11,707 functions and zero audited
+IDA defaults. Its origin counts are 6,228 translated `v18_` aliases, 417
+target-only descriptive labels, 1,002 retained target names, seven JNI
+exports, and 4,053 other IDA or PLT names.
+
+The dynamic-symbol audit remains deliberately broader than the function-name
+audit. It accounts for 6,770 named dynamic rows, of which 6,600 are defined
+inside the library. Those defined rows resolve to 5,782 exact functions, 482
+data items, and 336 other non-code items. There are 170 undefined imports. The
+PLT join identifies exact in-library veneers for 169 imports, while `__sF` has
+no in-library veneer. After the GUI aliases, 4,552 dynamic rows point to a
+reviewed `v18_` alias, 1,890 retain exact dynamic names, 151 use another
+retained target alias, and seven are linker-boundary aliases. This is complete
+boundary and item coverage, not proof that every stripped 2.2 source name was
+recoverable.
+
+The machine-readable records are
+`artifacts/spectron_gui_missing_function_manual_translation_anchors_20260828.json`,
+`artifacts/spectron_gui_missing_function_application_20260828.json`,
+`artifacts/spectron_gui_missing_function_verification_20260828.json`,
+`artifacts/spectron_semantic_function_translation_v320_20260828.json`,
+`artifacts/spectron_name_coverage_audit_v321_20260828.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v321_20260828.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v321_20260828.json`, and
+`artifacts/spectron_translation_checkpoint_20260828_v321.json`. The new helper
+scripts are
+`tools/ida_materialize_original_dynamic_functions.py`,
+`tools/generate_spectron_gui_missing_function_anchors.py`, and
+`tools/generate_spectron_translation_checkpoint_v321.py`.
+
 ## 2026-08-28: Spectron dynamic function boundary completion and v320
 
 The retained dynamic table provided one more useful source of ground truth.

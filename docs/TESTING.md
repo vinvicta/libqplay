@@ -308,6 +308,81 @@ python3 tools/generate_spectron_translation_checkpoint_v320.py \
 python3 tools/validate_research_archive.py
 ```
 
+### v321 source-side GUI boundary translation
+
+The v321 pass first restores the eleven original 1.8 GUI `FUNC` boundaries
+that IDA had classified as data. Use a fresh copy of the translated source
+database and keep the output separate from the source checkpoint:
+
+```bash
+cp /path/to/libqplay_translated_all_v4.i64 \
+  /tmp/original_dynamic_materialize.i64
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  ORIGINAL_DYNAMIC_FUNCTION_APPLY=1 \
+  ORIGINAL_DYNAMIC_FUNCTION_SAVE_PATH=/tmp/original_dynamic_materialized.i64 \
+  ORIGINAL_DYNAMIC_FUNCTION_REPORT=/tmp/original_dynamic_function_application.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /tmp/original_dynamic_materialize.i64 \
+  -s tools/ida_materialize_original_dynamic_functions.py
+```
+
+The source-side report must contain eleven rows, eleven materialized
+boundaries, eleven readable source aliases, and zero failures. The feature
+exports used for the review are disposable files, so their paths can be
+changed to match the local IDALIB export run:
+
+```bash
+python3 tools/generate_spectron_gui_missing_function_anchors.py \
+  --matcher artifacts/spectron_semantic_function_translation_v320_20260828.json \
+  --original-features /tmp/original_features_v4_v3_materialized_v2.json \
+  --spectron-features /tmp/spectron_features_v320_current.json \
+  --source-boundary-report artifacts/original_dynamic_function_application_20260828.json \
+  --target-boundary-report artifacts/spectron_dynamic_symbol_boundaries_20260828.json \
+  --original-binary-sha256 9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8 \
+  --spectron-binary-sha256 f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219 \
+  --output artifacts/spectron_gui_missing_function_manual_translation_anchors_20260828.json
+```
+
+The generator records ten high-confidence normalized-shape matches and one
+medium-confidence class-slot match. Apply those reviewed aliases to a fresh
+v320 copy with `tools/ida_apply_spectron_manual_anchors.py`, setting
+`SPECTRON_MANUAL_EXPECTED_ARTIFACT` to
+`spectron_gui_missing_function_manual_translation_anchors_20260828`, and then
+reopen the result with `tools/ida_verify_spectron_manual_anchors.py`. The
+expected verification is eleven names, 11,707 functions, and zero failures.
+The final audit should report these v321 name origins:
+
+```text
+ida_named_or_other       4053
+target_jni_export           7
+target_named_export      1002
+target_only_descriptive   417
+translated_v18_alias     6228
+```
+
+The target boundary audit remains at 5,782 exact starts. The complete dynamic
+symbol audit remains at 6,770 named rows and 6,600 defined rows, with 5,782
+functions, 482 data items, 336 other non-code items, and 170 undefined
+imports. The v321 checkpoint can then be rebuilt and checked offline:
+
+```bash
+python3 tools/generate_spectron_translation_checkpoint_v321.py \
+  --parent-checkpoint artifacts/spectron_translation_checkpoint_20260828_v320.json \
+  --database /path/to/spectron_libqplay_translated_v321_gui_missing_function_aliases_final.i64 \
+  --application-report artifacts/spectron_gui_missing_function_application_20260828.json \
+  --verification-report artifacts/spectron_gui_missing_function_verification_20260828.json \
+  --anchor-artifact artifacts/spectron_gui_missing_function_manual_translation_anchors_20260828.json \
+  --name-audit artifacts/spectron_name_coverage_audit_v321_20260828.json \
+  --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v321_20260828.json \
+  --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v321_20260828.json \
+  --semantic-map artifacts/spectron_semantic_function_translation_v320_20260828.json \
+  --source-boundary-report artifacts/original_dynamic_function_application_20260828.json \
+  --output artifacts/spectron_translation_checkpoint_20260828_v321.json
+
+python3 tools/validate_research_archive.py
+```
+
 The complete private chain can be rebuilt with the single offline helper:
 
 ```bash

@@ -2932,6 +2932,45 @@ only native difference is the conditional at `0x15fad8`, this is the strongest
 local causal comparison for the loading-state candidate, while still not being
 a production or physical-device validation.
 
+## Spectron 2.2 v321 GUI boundary translation
+
+The v321 pass closes the remaining comparison gap around eleven GUI methods.
+The original 1.8 ELF dynamic table exposed positive-size `FUNC` rows that the
+source IDA database had treated as data. A separate offline pass restored all
+eleven source boundaries before matching them to the corresponding Spectron
+methods.
+
+Ten pairs match the normalized ARM64 feature record at high confidence. The
+`GuiButtonCtrl::drawWithStyle` pair is medium confidence: class-local method
+order, shared `Buttons` and `Taskbar.Button` strings, identical call and
+branch counts, and reviewed pseudocode all agree, while the rebuilt Spectron
+body is eight bytes and two instructions shorter. The difference is preserved
+in the evidence rather than treated as an exact byte-level match.
+
+The alias application renamed and verified all eleven target functions with
+zero failures. The final v321 copy contains 11,707 functions and zero audited
+default names. Its name origins are 6,228 translated `v18_` aliases, 417
+target-only descriptive labels, 1,002 retained target names, seven JNI exports,
+and 4,053 other IDA or PLT names.
+
+The complete dynamic-symbol audit still accounts for data and imports instead
+of forcing every named row into the function list. It reports 6,770 named
+dynamic rows, 6,600 defined rows, 5,782 exact functions, 482 data items, 336
+other non-code items, and 170 undefined imports. Exact PLT veneers cover 169
+of the undefined imports. The remaining `__sF` object has no in-library
+veneer. The post-alias status counts are 4,552 source-backed `v18_` aliases,
+1,890 exact retained names, 151 other retained target aliases, and seven
+linker-boundary aliases.
+
+The current private database is
+`analysis/spectron_libqplay_translated_v321_gui_missing_function_aliases_final.i64`
+with SHA-256
+`b7d17b9a5dbc34922cc40fe030cb539d69dcf89fe8a5f64bae83e962309263ab`.
+The checkpoint is
+`artifacts/spectron_translation_checkpoint_20260828_v321.json`; the source
+boundary, GUI anchor, reopen-verification, name, and dynamic-symbol records
+are listed in that checkpoint and in the README.
+
 ## Spectron 2.2 function-name coverage audit
 
 The v320 pass compares the retained Spectron dynamic table with the translated

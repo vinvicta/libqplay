@@ -1,0 +1,925 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target ELF rows are positive-size dynamic FUNC symbols.",
+        "The restored source boundary and target boundary have the same normalized function metrics required by the matcher.",
+        "The readable source role is retained in a v18_ alias while the target's obfuscated name remains in the evidence row."
+      ],
+      "full_metric_equal": false,
+      "match_kind": "dynamic-boundary-exact-semantic-match",
+      "matcher_method": "mnemonic_hash",
+      "metric_differences": [
+        "opcode_shape_hash",
+        "shape_hash",
+        "register_detail_hash"
+      ],
+      "name_action": "rename-with-v18-prefix",
+      "normalized_shape_equal": false,
+      "original_direct_call_names": [
+        ".__cxa_guard_acquire",
+        ".__cxa_guard_release",
+        ".atexit",
+        "plt_GuiControl_renderJustifiedText_GuiControlProfile_TPoint_const_TPoint_const_TString_const_ColorI_const_bool",
+        "plt_ProfilerRootData_ProfilerRootData_TString_const",
+        "plt_TColorManager_pop_void",
+        "plt_TColorManager_push_ColorF_const_int",
+        "plt_TGraalVar_readObject_void",
+        "plt_TProfiler_hashPop_void",
+        "plt_TProfiler_hashPush_ProfilerRootData",
+        "plt_TString_clear_void",
+        "plt_TString_operator_assign_TString_const",
+        "plt_TString_operator_lshift_char_const",
+        "plt_TTexture_getTextureSize_TString_const",
+        "plt_dynamicCastVar_TProperties_TGraalVar"
+      ],
+      "original_ea": "0x1abf80",
+      "original_metrics": {
+        "basic_block_count": 45,
+        "branch_count": 62,
+        "call_count": 29,
+        "instruction_count": 295,
+        "mnemonic_hash": "a2b301d5d8b12357edb4c38be4e51b6302c6ca44ba4f7f528f19b787d113d7a6",
+        "opcode_shape_hash": "bf0e6505c88b89249012799d1509f65583b68f212b37dffa2bf08405100c05ec",
+        "register_detail_hash": "f22af164b58d06139d0fb0b26abb401953b4b82d24fc05f15dc9e09581b5739b",
+        "register_shape_hash": "0bcb3af453db7640c2044bb07b1570d0cb64240400cd231b81b13f9d44678747",
+        "return_count": 1,
+        "shape_hash": "e65461308bc9856707b9af240ef1a503874cf9f45c834383a93b2f4bb733b093",
+        "size": 1184,
+        "string_refs_hash": "3bfe024f0a927da0ed0c8c0b4daa45bc906048273416fbb29e80cde7ed823555"
+      },
+      "original_name": "GuiBitmapButtonCtrl_onRender_TPoint_const",
+      "original_string_refs": [
+        "Draw_BitmapButton"
+      ],
+      "proposed_name": "v18_GuiBitmapButtonCtrl_onRender_TPoint_const",
+      "source_basis": "the original positive-size ELF FUNC boundary was restored, then the normalized ARM64 feature matcher selected one unique target",
+      "spectron_current_name": "_ZN10_YTgFa6HPk10bdqDgaFFMBERK10eY2wgaf6pw",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._Z10n8NK2aKNZVP10c76BgaJBGAP10G0gxgajWBw",
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSERKS_",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10G0gxgajWBw10LfDmgaVDEnEv",
+        "._ZN10Uo5IvaD9xiC1ERK10C8THgaTQxF",
+        "._ZN10X7ZxganTcx3popEv",
+        "._ZN10X7ZxganTcx4pushERK10bagMga8cdJi",
+        "._ZN10_WevgakbUu10HP8Cga81xBERK10C8THgaTQxF",
+        "._ZN10esKIvakHfi10Qa_NvaTVFmEP10Uo5IvaD9xi",
+        "._ZN10esKIvakHfi10bCpNvaN9amEv",
+        "._ZN10w9XxgaJdbx10jMgDgakJEBEP10XoqxgaMPJwRK10eY2wgaf6pwS4_RK10C8THgaTQxFRK10dVIHgaIooFb",
+        ".__cxa_guard_acquire",
+        ".__cxa_guard_release",
+        ".atexit"
+      ],
+      "spectron_ea": "0x1b0140",
+      "spectron_metrics": {
+        "basic_block_count": 45,
+        "branch_count": 62,
+        "call_count": 29,
+        "instruction_count": 295,
+        "mnemonic_hash": "a2b301d5d8b12357edb4c38be4e51b6302c6ca44ba4f7f528f19b787d113d7a6",
+        "opcode_shape_hash": "0ebda5469cb0a7e1d7e7166f7c60935bba28f884efee79e6c7bec3075a9536f9",
+        "register_detail_hash": "092ecbac80346224e0a525c68741c597276b0d58cc71efa125d00a754e067534",
+        "register_shape_hash": "0bcb3af453db7640c2044bb07b1570d0cb64240400cd231b81b13f9d44678747",
+        "return_count": 1,
+        "shape_hash": "080414627d6b9e72b046a9f2cad6587656fc5c5a9f74eb629ea5fcfff7d248ee",
+        "size": 1184,
+        "string_refs_hash": "3bfe024f0a927da0ed0c8c0b4daa45bc906048273416fbb29e80cde7ed823555"
+      },
+      "spectron_string_refs": [
+        "Draw_BitmapButton"
+      ]
+    },
+    {
+      "confidence": "medium",
+      "evidence": [
+        "The source and target classes have the same property, constructor, icon-size, drawIconAndText, drawWithProfile, onRender, and destructor sequence.",
+        "The source and target bodies have 32 basic blocks, 39 branches, 16 calls, and two returns.",
+        "Both bodies reference the Buttons and Taskbar.Button style strings and decompile to the same style-button and icon-text rendering operation.",
+        "Spectron is eight bytes and two instructions shorter because rebuilt wrapper code changes the body layout; the size and hash differences are recorded rather than hidden."
+      ],
+      "full_metric_equal": false,
+      "match_kind": "dynamic-boundary-manual-class-slot-match",
+      "metric_differences": [
+        "size",
+        "instruction_count",
+        "mnemonic_hash",
+        "opcode_shape_hash",
+        "register_shape_hash",
+        "shape_hash",
+        "register_detail_hash"
+      ],
+      "name_action": "rename-with-v18-prefix",
+      "normalized_shape_equal": false,
+      "original_direct_call_names": [
+        "plt_GuiButtonCtrl_drawIconAndText_TString_const_TPoint_const_int_ColorI_const_GuiControlProfile",
+        "plt_TGUIRender_renderStyleButton_TRectangle_const_TGUIStyle_TString_const_int_int_bool",
+        "plt_TGUIStyle_getButton_TString_const",
+        "plt_TGraalVar_readObject_void",
+        "plt_TString_clear_void",
+        "plt_TString_operator_assign_TString_const",
+        "plt_TString_operator_lshift_char_const",
+        "plt_TString_starts_TString_const",
+        "plt_dynamicCastVar_TProperties_TGraalVar"
+      ],
+      "original_ea": "0x1ae65c",
+      "original_metrics": {
+        "basic_block_count": 32,
+        "branch_count": 39,
+        "call_count": 16,
+        "instruction_count": 198,
+        "mnemonic_hash": "0704cf709fe17cfbe06687346de856f6a51c35aa4f616cd71f3ba14d631c34e4",
+        "opcode_shape_hash": "df61a08954d74cf9e3138616bc903dc2edbb9ec5d951b2d7e89cbc55c3bb0eee",
+        "register_detail_hash": "958de5fbe138934aaa06f6f8ae40363fa5df638883f24aac3a9995d210122183",
+        "register_shape_hash": "a02c771addd4cc9860ea7fc3e8ed40f5ffa1683fd6f933d65d693bb001ab0128",
+        "return_count": 2,
+        "shape_hash": "244daffe25731af6ea8c3995a31fb9e8164d8a5d6590a01f787d4668991a6161",
+        "size": 796,
+        "string_refs_hash": "523d32bfe5f42e7a6d2b444e1cd31188379bddfb173c1d084bd568d1bd00c3c4"
+      },
+      "original_name": "GuiButtonCtrl_drawWithStyle_TRectangle_const",
+      "original_string_refs": [
+        "Buttons",
+        "Taskbar.Button"
+      ],
+      "proposed_name": "v18_GuiButtonCtrl_drawWithStyle_TRectangle_const",
+      "source_basis": "the target method occupies the GuiButtonCtrl-equivalent class slot between the exact drawIconAndText and drawWithProfile methods",
+      "source_component": "GuiButtonCtrl",
+      "spectron_current_name": "_ZN10EqV_Ka3Vx910KHqDgay4MBERK10i7FHgaP2lF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._Z10n8NK2aKNZVP10c76BgaJBGAP10G0gxgajWBw",
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSERKS_",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10EqV_Ka3Vx910SeNfIah2TQERK10C8THgaTQxFRK10eY2wgaf6pwiRK10dVIHgaIooFP10XoqxgaMPJw",
+        "._ZN10G0gxgajWBw10LfDmgaVDEnEv",
+        "._ZN10iHmzga6Hmy10T__fIaGC4QERK10C8THgaTQxF",
+        "._ZN10mytSgavtrO10JoAgIasezRERK10i7FHgaP2lFP10iHmzga6HmyRK10C8THgaTQxFiib",
+        "._ZNK10C8THgaTQxF10fEtHgarybFERKS_"
+      ],
+      "spectron_ea": "0x1b281c",
+      "spectron_metrics": {
+        "basic_block_count": 32,
+        "branch_count": 39,
+        "call_count": 16,
+        "instruction_count": 196,
+        "mnemonic_hash": "29da03b054ed50c79972cf0d2abe4415c57866aa663fb80e1a9b82cba9e5e9ca",
+        "opcode_shape_hash": "d3cf2916584143b810b81065e55247be9aff78b92e7398f43d559412fbb9ff1d",
+        "register_detail_hash": "1b5708293362d9b020dde0e6d06a23199cbc07cdfbbb7efb35d327ba1ceb4852",
+        "register_shape_hash": "cfa4b9f22b4dc9966dae07c42b056444b9db7a652bfa24793f27803ff661f76f",
+        "return_count": 2,
+        "shape_hash": "d9158a3b13efbba45be0430a552310e456161cad54b7fd90bae34d80ebe13842",
+        "size": 788,
+        "string_refs_hash": "523d32bfe5f42e7a6d2b444e1cd31188379bddfb173c1d084bd568d1bd00c3c4"
+      },
+      "spectron_string_refs": [
+        "Buttons",
+        "Taskbar.Button"
+      ],
+      "target_component": "EqV_Ka3Vx9"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target ELF rows are positive-size dynamic FUNC symbols.",
+        "The restored source boundary and target boundary have the same normalized function metrics required by the matcher.",
+        "The readable source role is retained in a v18_ alias while the target's obfuscated name remains in the evidence row."
+      ],
+      "full_metric_equal": false,
+      "match_kind": "dynamic-boundary-exact-semantic-match",
+      "matcher_method": "mnemonic_hash",
+      "metric_differences": [
+        "register_detail_hash"
+      ],
+      "name_action": "rename-with-v18-prefix",
+      "normalized_shape_equal": true,
+      "original_direct_call_names": [
+        "plt_GuiButtonCtrl_drawIconAndText_TString_const_TPoint_const_int_ColorI_const_GuiControlProfile",
+        "plt_GuiControlProfile_getBitmapArrayCount_void",
+        "plt_GuiControlProfile_getBitmapRect_int",
+        "plt_GuiControl_renderBitmapRectangle_TRectangle_const_int_bool_bool_bool",
+        "plt_TGraalVar_readObject_void",
+        "plt_TString_clear_void",
+        "plt_TString_indexOf_TString_const",
+        "plt_TString_lower_void",
+        "plt_TString_operator_assign_TString_const",
+        "plt_TString_operator_lshift_char_const",
+        "plt_dynamicCastVar_TProperties_TGraalVar"
+      ],
+      "original_ea": "0x1ae97c",
+      "original_metrics": {
+        "basic_block_count": 52,
+        "branch_count": 65,
+        "call_count": 27,
+        "instruction_count": 276,
+        "mnemonic_hash": "c0b0f7077b2a5d59182b4f571038d808d8797f6dffe02d1908cc791706bd84a1",
+        "opcode_shape_hash": "2773b733a22e250c2d2dfeab7c9399f6d595df3d749556c1365247dff9a96ade",
+        "register_detail_hash": "92cfd34a9430b9ac49730ccfc62213a1f806aeb5ca073cca927a95035475708c",
+        "register_shape_hash": "2b624b6fd62f9f530913bf1bb6a0113b315f237a23c47c93d71b85a0e9fd5ad3",
+        "return_count": 1,
+        "shape_hash": "039c8abdd470f5acfcb3aed66f154cc3b6002860f9d6fa4822231dacf237c56e",
+        "size": 1104,
+        "string_refs_hash": "62fa58094873ee72a35660fd7b29c3b2c20bec980c034914953b32d5e9b878a2"
+      },
+      "original_name": "GuiButtonCtrl_drawWithProfile_TPoint_const",
+      "original_string_refs": [
+        "Start",
+        "startbutton"
+      ],
+      "proposed_name": "v18_GuiButtonCtrl_drawWithProfile_TPoint_const",
+      "source_basis": "the original positive-size ELF FUNC boundary was restored, then the normalized ARM64 feature matcher selected one unique target",
+      "spectron_current_name": "_ZN10EqV_Ka3Vx910ZCBDgaugWBERK10eY2wgaf6pw",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._Z10n8NK2aKNZVP10c76BgaJBGAP10G0gxgajWBw",
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSERKS_",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10EqV_Ka3Vx910SeNfIah2TQERK10C8THgaTQxFRK10eY2wgaf6pwiRK10dVIHgaIooFP10XoqxgaMPJw",
+        "._ZN10G0gxgajWBw10LfDmgaVDEnEv",
+        "._ZN10w9XxgaJdbx10uBSqKa9xdGERK10i7FHgaP2lFibbb",
+        "._ZNK10C8THgaTQxF10JtTLgaLhUIERKS_",
+        "._ZNK10C8THgaTQxF5lowerEv",
+        "._ZNK10XoqxgaMPJw10F2PCgaTohBEv",
+        "._ZNK10XoqxgaMPJw10GCRCgabJiBEi"
+      ],
+      "spectron_ea": "0x1b2b34",
+      "spectron_metrics": {
+        "basic_block_count": 52,
+        "branch_count": 65,
+        "call_count": 27,
+        "instruction_count": 276,
+        "mnemonic_hash": "c0b0f7077b2a5d59182b4f571038d808d8797f6dffe02d1908cc791706bd84a1",
+        "opcode_shape_hash": "2773b733a22e250c2d2dfeab7c9399f6d595df3d749556c1365247dff9a96ade",
+        "register_detail_hash": "d966e76931bfee64881e8e92ee2ff1e5afb322d3d2e1d865eac52a4fe50e56b6",
+        "register_shape_hash": "2b624b6fd62f9f530913bf1bb6a0113b315f237a23c47c93d71b85a0e9fd5ad3",
+        "return_count": 1,
+        "shape_hash": "039c8abdd470f5acfcb3aed66f154cc3b6002860f9d6fa4822231dacf237c56e",
+        "size": 1104,
+        "string_refs_hash": "62fa58094873ee72a35660fd7b29c3b2c20bec980c034914953b32d5e9b878a2"
+      },
+      "spectron_string_refs": [
+        "Start",
+        "startbutton"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target ELF rows are positive-size dynamic FUNC symbols.",
+        "The restored source boundary and target boundary have the same normalized function metrics required by the matcher.",
+        "The readable source role is retained in a v18_ alias while the target's obfuscated name remains in the evidence row."
+      ],
+      "full_metric_equal": false,
+      "match_kind": "dynamic-boundary-exact-semantic-match",
+      "matcher_method": "mnemonic_hash",
+      "metric_differences": [
+        "opcode_shape_hash",
+        "shape_hash",
+        "register_detail_hash"
+      ],
+      "name_action": "rename-with-v18-prefix",
+      "normalized_shape_equal": false,
+      "original_direct_call_names": [
+        "plt_GuiControlProfile_getBitmapArrayCount_void",
+        "plt_GuiControlProfile_getBitmapName_void",
+        "plt_GuiControlProfile_getBitmapRect_int",
+        "plt_TColorManager_pop_void",
+        "plt_TColorManager_push_ColorF_const_int",
+        "plt_TGUIRender_renderBitmapPartToRectangle_TString_const_TRectangle_const_TFloatRectangle_const_bool_TPoint_const_float",
+        "plt_TGUIRender_renderBorder_TRectangle_const_GuiControlProfile",
+        "plt_TGraalVar_readObject_void",
+        "plt_TString_clear_void",
+        "plt_dynamicCastVar_TProperties_TGraalVar"
+      ],
+      "original_ea": "0x1c21b8",
+      "original_metrics": {
+        "basic_block_count": 39,
+        "branch_count": 58,
+        "call_count": 27,
+        "instruction_count": 211,
+        "mnemonic_hash": "df9a56613683e4541ead5193e4895705a92721ae9cef43da9eaec7b60d296670",
+        "opcode_shape_hash": "0f5fbfe5f3aabc60a2f1be5cdfd86ac5606d0daccd6293a4c4d87349d33a39d2",
+        "register_detail_hash": "06389522ece5ffc0029c9d5977a18734cedfbdaf301d8017aa45a01963a5de74",
+        "register_shape_hash": "1470d1ee76c08be0cf8c60f23c3b17611a6ffc23dbfc0d786dc2d02729031c1f",
+        "return_count": 1,
+        "shape_hash": "b3765328989a281f98f108be9e5e0ebd53d184c95b047a04e1afe43ac20e3b1c",
+        "size": 844,
+        "string_refs_hash": null
+      },
+      "original_name": "GuiScrollCtrl_drawBackground_TRectangle_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_GuiScrollCtrl_drawBackground_TRectangle_const",
+      "source_basis": "the original positive-size ELF FUNC boundary was restored, then the normalized ARM64 feature matcher selected one unique target",
+      "spectron_current_name": "_ZN10_k_Bgam3zA10sqrSLaYGpTERK10i7FHgaP2lF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._Z10n8NK2aKNZVP10c76BgaJBGAP10G0gxgajWBw",
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10G0gxgajWBw10LfDmgaVDEnEv",
+        "._ZN10X7ZxganTcx3popEv",
+        "._ZN10X7ZxganTcx4pushERK10bagMga8cdJi",
+        "._ZN10mytSgavtrO10NpgWTamqDFERK10C8THgaTQxFRK10i7FHgaP2lFRK10vEhDgaHsFBbRK10eY2wgaf6pwf",
+        "._ZN10mytSgavtrO10yEdX_aQ5qzERK10i7FHgaP2lFP10XoqxgaMPJw",
+        "._ZNK10XoqxgaMPJw10F2PCgaTohBEv",
+        "._ZNK10XoqxgaMPJw10GCRCgabJiBEi",
+        "._ZNK10XoqxgaMPJw10t8QCgaQjiBEv"
+      ],
+      "spectron_ea": "0x1c6c94",
+      "spectron_metrics": {
+        "basic_block_count": 39,
+        "branch_count": 58,
+        "call_count": 27,
+        "instruction_count": 211,
+        "mnemonic_hash": "df9a56613683e4541ead5193e4895705a92721ae9cef43da9eaec7b60d296670",
+        "opcode_shape_hash": "da87f33505d273208718d8ad75c5506abff9924a80cd991a76d0b32234ff12f9",
+        "register_detail_hash": "48ba705998554e68c101182dae366f431067be69bfe623fd6e11867b9cdea510",
+        "register_shape_hash": "1470d1ee76c08be0cf8c60f23c3b17611a6ffc23dbfc0d786dc2d02729031c1f",
+        "return_count": 1,
+        "shape_hash": "3c68f112c87f4b1654cc0a1ed0b12c24f653632f00ecb17bbd0c0e3e8934f626",
+        "size": 844,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target ELF rows are positive-size dynamic FUNC symbols.",
+        "The restored source boundary and target boundary have the same normalized function metrics required by the matcher.",
+        "The readable source role is retained in a v18_ alias while the target's obfuscated name remains in the evidence row."
+      ],
+      "full_metric_equal": false,
+      "match_kind": "dynamic-boundary-exact-semantic-match",
+      "matcher_method": "mnemonic_hash",
+      "metric_differences": [
+        "opcode_shape_hash",
+        "shape_hash",
+        "register_detail_hash"
+      ],
+      "name_action": "rename-with-v18-prefix",
+      "normalized_shape_equal": false,
+      "original_direct_call_names": [
+        "plt_GuiScrollCtrl_drawBackground_TRectangle_const",
+        "plt_TColorManager_pop_void",
+        "plt_TColorManager_push_ColorF_const_int",
+        "plt_TGUIRender_renderStyleButton_TRectangle_const_TGUIStyle_TString_const_int_int_bool",
+        "plt_TGraalVar_readObject_void",
+        "plt_TString_clear_void",
+        "plt_TString_operator_lshift_char_const",
+        "plt_TTexture_forceTextureTransparency_TString_const_uint",
+        "plt_TTexture_getTextureSize_TString_const",
+        "plt_dynamicCastVar_TProperties_TGraalVar"
+      ],
+      "original_ea": "0x1c2508",
+      "original_metrics": {
+        "basic_block_count": 72,
+        "branch_count": 92,
+        "call_count": 45,
+        "instruction_count": 575,
+        "mnemonic_hash": "ddedd11479d05b4d8f2776f6137684f5edf711a121af8ff404105b77391616fa",
+        "opcode_shape_hash": "3489cebf027aedc7cc14189159d4051a0fd07d6e177f4ea68fddf07761b98a90",
+        "register_detail_hash": "b4308d6412bbf9d632284298b48852ed352bfcdf94090170d976a4684219cfd8",
+        "register_shape_hash": "f397e64952c98c17a1026dd82f75c84233f42e8dbe92ef42e52005cbfed7fff9",
+        "return_count": 1,
+        "shape_hash": "399cac3be04a34c3d417687d7cdb216e51dbab51b6fc3942ef2ce55fc8cbc754",
+        "size": 2304,
+        "string_refs_hash": "ed6d6bde9bad8503108269c41383e82b5f171380fd94ee72f7c24e239a9234b9"
+      },
+      "original_name": "GuiScrollCtrl_drawWithStyle_TRectangle_const",
+      "original_string_refs": [
+        "HorzScroll",
+        "HorzScrollThumb",
+        "SunkEdge",
+        "VertScroll",
+        "VertScrollThumb"
+      ],
+      "proposed_name": "v18_GuiScrollCtrl_drawWithStyle_TRectangle_const",
+      "source_basis": "the original positive-size ELF FUNC boundary was restored, then the normalized ARM64 feature matcher selected one unique target",
+      "spectron_current_name": "_ZN10_k_Bgam3zA10KHqDgay4MBERK10i7FHgaP2lF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._Z10n8NK2aKNZVP10c76BgaJBGAP10G0gxgajWBw",
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10G0gxgajWBw10LfDmgaVDEnEv",
+        "._ZN10X7ZxganTcx3popEv",
+        "._ZN10X7ZxganTcx4pushERK10bagMga8cdJi",
+        "._ZN10_WevgakbUu10AGADgastVBERK10C8THgaTQxFj",
+        "._ZN10_WevgakbUu10HP8Cga81xBERK10C8THgaTQxF",
+        "._ZN10_k_Bgam3zA10sqrSLaYGpTERK10i7FHgaP2lF",
+        "._ZN10mytSgavtrO10JoAgIasezRERK10i7FHgaP2lFP10iHmzga6HmyRK10C8THgaTQxFiib"
+      ],
+      "spectron_ea": "0x1c6fe4",
+      "spectron_metrics": {
+        "basic_block_count": 72,
+        "branch_count": 92,
+        "call_count": 45,
+        "instruction_count": 575,
+        "mnemonic_hash": "ddedd11479d05b4d8f2776f6137684f5edf711a121af8ff404105b77391616fa",
+        "opcode_shape_hash": "56ee1d94b0c39bffea28eab7b51265db9c62a03ac2908eb916b167e1ba2c8dd6",
+        "register_detail_hash": "bc032f0b5a87e53242073f567577a61f5b44001ffd0e0c1d0c66569d56b72a49",
+        "register_shape_hash": "f397e64952c98c17a1026dd82f75c84233f42e8dbe92ef42e52005cbfed7fff9",
+        "return_count": 1,
+        "shape_hash": "39ab9f5548f6e39627c2e9f290332f854d702e28dd551c00c14b58b9f4400466",
+        "size": 2304,
+        "string_refs_hash": "ed6d6bde9bad8503108269c41383e82b5f171380fd94ee72f7c24e239a9234b9"
+      },
+      "spectron_string_refs": [
+        "HorzScroll",
+        "HorzScrollThumb",
+        "SunkEdge",
+        "VertScroll",
+        "VertScrollThumb"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target ELF rows are positive-size dynamic FUNC symbols.",
+        "The restored source boundary and target boundary have the same normalized function metrics required by the matcher.",
+        "The readable source role is retained in a v18_ alias while the target's obfuscated name remains in the evidence row."
+      ],
+      "full_metric_equal": false,
+      "match_kind": "dynamic-boundary-exact-semantic-match",
+      "matcher_method": "mnemonic_hash",
+      "metric_differences": [
+        "register_detail_hash"
+      ],
+      "name_action": "rename-with-v18-prefix",
+      "normalized_shape_equal": true,
+      "original_direct_call_names": [
+        "plt_GuiControl_renderJustifiedText_GuiControlProfile_TPoint_const_TPoint_const_TString_const_ColorI_const_bool",
+        "plt_TGraalVar_readObject_void",
+        "plt_TString_clear_void",
+        "plt_dynamicCastVar_TProperties_TGraalVar"
+      ],
+      "original_ea": "0x1c63a8",
+      "original_metrics": {
+        "basic_block_count": 13,
+        "branch_count": 19,
+        "call_count": 9,
+        "instruction_count": 100,
+        "mnemonic_hash": "58c29c67eff187418eacf4f0e7a3680375bf8e597cc56c819012962159b232f7",
+        "opcode_shape_hash": "2ae5cad80f0f6e838c0b13905be4b1beea5554baaf3807402a8d674b4170f6c0",
+        "register_detail_hash": "ed79e72a18f76473b34fa7fb3d965395cdfcbeceba5ac587536d44d3b632afc1",
+        "register_shape_hash": "555b99d01b32080157f0bada7e6ac3a0997c141fc7e195baa740a9649ca6f0bf",
+        "return_count": 1,
+        "shape_hash": "efbcbc79937658c6003e845de4d6bc83276f2248cc15201e6ce8f2a5f029e85d",
+        "size": 400,
+        "string_refs_hash": null
+      },
+      "original_name": "GuiTextCtrl_drawWithProfile_TPoint_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_GuiTextCtrl_drawWithProfile_TPoint_const",
+      "source_basis": "the original positive-size ELF FUNC boundary was restored, then the normalized ARM64 feature matcher selected one unique target",
+      "spectron_current_name": "_ZN10Q8n_Fa6V5W10ZCBDgaugWBERK10eY2wgaf6pw",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._Z10n8NK2aKNZVP10c76BgaJBGAP10G0gxgajWBw",
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10G0gxgajWBw10LfDmgaVDEnEv",
+        "._ZN10w9XxgaJdbx10jMgDgakJEBEP10XoqxgaMPJwRK10eY2wgaf6pwS4_RK10C8THgaTQxFRK10dVIHgaIooFb"
+      ],
+      "spectron_ea": "0x1caeb4",
+      "spectron_metrics": {
+        "basic_block_count": 13,
+        "branch_count": 19,
+        "call_count": 9,
+        "instruction_count": 100,
+        "mnemonic_hash": "58c29c67eff187418eacf4f0e7a3680375bf8e597cc56c819012962159b232f7",
+        "opcode_shape_hash": "2ae5cad80f0f6e838c0b13905be4b1beea5554baaf3807402a8d674b4170f6c0",
+        "register_detail_hash": "dc88482374b1f4e15761c569b3482e7d2db8b1dccb0d30bac9047fac14223773",
+        "register_shape_hash": "555b99d01b32080157f0bada7e6ac3a0997c141fc7e195baa740a9649ca6f0bf",
+        "return_count": 1,
+        "shape_hash": "efbcbc79937658c6003e845de4d6bc83276f2248cc15201e6ce8f2a5f029e85d",
+        "size": 400,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target ELF rows are positive-size dynamic FUNC symbols.",
+        "The restored source boundary and target boundary have the same normalized function metrics required by the matcher.",
+        "The readable source role is retained in a v18_ alias while the target's obfuscated name remains in the evidence row."
+      ],
+      "full_metric_equal": false,
+      "match_kind": "dynamic-boundary-exact-semantic-match",
+      "matcher_method": "mnemonic_hash",
+      "metric_differences": [
+        "opcode_shape_hash",
+        "shape_hash",
+        "register_detail_hash"
+      ],
+      "name_action": "rename-with-v18-prefix",
+      "normalized_shape_equal": false,
+      "original_direct_call_names": [
+        "plt_GuiControl_isFirstResponder_void",
+        "plt_GuiTextEditCtrl_drawText_TRectangle_const_bool_ColorI_const_ColorI_const_ColorI_const_ColorI_const",
+        "plt_TColorManager_pop_void",
+        "plt_TColorManager_push_ColorF_const_int",
+        "plt_TGUIRender_renderStyleButton_TRectangle_const_TGUIStyle_TString_const_int_int_bool",
+        "plt_TGraalVar_readObject_void",
+        "plt_TString_clear_void",
+        "plt_TString_operator_lshift_char_const",
+        "plt_dynamicCastVar_TProperties_TGraalVar"
+      ],
+      "original_ea": "0x1c8bb8",
+      "original_metrics": {
+        "basic_block_count": 34,
+        "branch_count": 43,
+        "call_count": 21,
+        "instruction_count": 240,
+        "mnemonic_hash": "9c29410b5b71adc056e50c0c623c5ea5d377f3dec68da34aea81a59df6990783",
+        "opcode_shape_hash": "41aa3e1c16d8a24ecd47b6c1585da6822d58e0a46b2589fe00a470cc620e9262",
+        "register_detail_hash": "face79608f1326364be6d6c4def4fba6ca35b8ce2a50008d34f2934effacb8d0",
+        "register_shape_hash": "b2a64743f8f09f77f1ca6337b2961235fd03b2e2ada800ffdbd708c3e61cfc0d",
+        "return_count": 1,
+        "shape_hash": "0244249e6508f7f3daa765a14776d3043b792b4dbb09e753c910ed3d67df6be4",
+        "size": 964,
+        "string_refs_hash": "d2f2310c9c52ceeefa776977bf3d2178a26872b6e46c0508b04832225d4a2b78"
+      },
+      "original_name": "GuiTextEditCtrl_drawWithStyle_TRectangle_const",
+      "original_string_refs": [
+        "SunkEdge"
+      ],
+      "proposed_name": "v18_GuiTextEditCtrl_drawWithStyle_TRectangle_const",
+      "source_basis": "the original positive-size ELF FUNC boundary was restored, then the normalized ARM64 feature matcher selected one unique target",
+      "spectron_current_name": "_ZN10_thLgaWjoI10KHqDgay4MBERK10i7FHgaP2lF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._Z10n8NK2aKNZVP10c76BgaJBGAP10G0gxgajWBw",
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10G0gxgajWBw10LfDmgaVDEnEv",
+        "._ZN10X7ZxganTcx3popEv",
+        "._ZN10X7ZxganTcx4pushERK10bagMga8cdJi",
+        "._ZN10_thLgaWjoI10u9WRgaBn_NERK10i7FHgaP2lFbRK10dVIHgaIooFS5_S5_S5_",
+        "._ZN10mytSgavtrO10JoAgIasezRERK10i7FHgaP2lFP10iHmzga6HmyRK10C8THgaTQxFiib",
+        "._ZN10w9XxgaJdbx10z1lDgaX8IBEv"
+      ],
+      "spectron_ea": "0x1cd73c",
+      "spectron_metrics": {
+        "basic_block_count": 34,
+        "branch_count": 43,
+        "call_count": 21,
+        "instruction_count": 240,
+        "mnemonic_hash": "9c29410b5b71adc056e50c0c623c5ea5d377f3dec68da34aea81a59df6990783",
+        "opcode_shape_hash": "fc1e4091ca00beb727ade1a7fc2fc866b64fbc5d061bd28c2df75725f91eca17",
+        "register_detail_hash": "3822e88cb3afb19952cad9c723e268bababc363dcb297261afa5e7319651cb57",
+        "register_shape_hash": "b2a64743f8f09f77f1ca6337b2961235fd03b2e2ada800ffdbd708c3e61cfc0d",
+        "return_count": 1,
+        "shape_hash": "4421c27a5b41c50e84e4595cfde1152a322aa897ca926965206f48108e99d160",
+        "size": 964,
+        "string_refs_hash": "d2f2310c9c52ceeefa776977bf3d2178a26872b6e46c0508b04832225d4a2b78"
+      },
+      "spectron_string_refs": [
+        "SunkEdge"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target ELF rows are positive-size dynamic FUNC symbols.",
+        "The restored source boundary and target boundary have the same normalized function metrics required by the matcher.",
+        "The readable source role is retained in a v18_ alias while the target's obfuscated name remains in the evidence row."
+      ],
+      "full_metric_equal": false,
+      "match_kind": "dynamic-boundary-exact-semantic-match",
+      "matcher_method": "mnemonic_hash",
+      "metric_differences": [
+        "opcode_shape_hash",
+        "shape_hash",
+        "register_detail_hash"
+      ],
+      "name_action": "rename-with-v18-prefix",
+      "normalized_shape_equal": false,
+      "original_direct_call_names": [
+        "plt_GuiControlProfile_getBitmapArrayCount_void",
+        "plt_GuiControlProfile_getBitmapRect_int",
+        "plt_GuiControl_isFirstResponder_void",
+        "plt_GuiControl_renderBitmapRectangle_TRectangle_const_int_bool_bool_bool",
+        "plt_GuiTextEditCtrl_drawText_TRectangle_const_bool_ColorI_const_ColorI_const_ColorI_const_ColorI_const",
+        "plt_TColorManager_pop_void",
+        "plt_TColorManager_push_ColorF_const_int",
+        "plt_TGraalVar_readObject_void",
+        "plt_dynamicCastVar_TProperties_TGraalVar"
+      ],
+      "original_ea": "0x1c8f80",
+      "original_metrics": {
+        "basic_block_count": 59,
+        "branch_count": 84,
+        "call_count": 36,
+        "instruction_count": 359,
+        "mnemonic_hash": "40a8c175d5177b12423256e5efcc228fd846c3c211f048f10afe6d21712f7fab",
+        "opcode_shape_hash": "3324e51d6fd6b71b6ec27aabe9d9c433bca79d1a4c4454f02bf25e00aeadcb32",
+        "register_detail_hash": "b734e34ff0c8e70d3a8b65b96874a8eb7c3766cd51bcbaca6fd991bb479bb4d8",
+        "register_shape_hash": "3fe9768a1258b864e2780ba98c14aefb6a8cf0840516aeb1a0367ae2f3e9bc61",
+        "return_count": 1,
+        "shape_hash": "ab37b1cd401091e6458625b8e9a684fef3b41ae87f115ff18c7427a4301e309d",
+        "size": 1436,
+        "string_refs_hash": null
+      },
+      "original_name": "GuiTextEditCtrl_drawWithProfile_TPoint_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_GuiTextEditCtrl_drawWithProfile_TPoint_const",
+      "source_basis": "the original positive-size ELF FUNC boundary was restored, then the normalized ARM64 feature matcher selected one unique target",
+      "spectron_current_name": "_ZN10_thLgaWjoI10ZCBDgaugWBERK10eY2wgaf6pw",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._Z10n8NK2aKNZVP10c76BgaJBGAP10G0gxgajWBw",
+        "._ZN10G0gxgajWBw10LfDmgaVDEnEv",
+        "._ZN10X7ZxganTcx3popEv",
+        "._ZN10X7ZxganTcx4pushERK10bagMga8cdJi",
+        "._ZN10_thLgaWjoI10u9WRgaBn_NERK10i7FHgaP2lFbRK10dVIHgaIooFS5_S5_S5_",
+        "._ZN10w9XxgaJdbx10uBSqKa9xdGERK10i7FHgaP2lFibbb",
+        "._ZN10w9XxgaJdbx10z1lDgaX8IBEv",
+        "._ZNK10XoqxgaMPJw10F2PCgaTohBEv",
+        "._ZNK10XoqxgaMPJw10GCRCgabJiBEi"
+      ],
+      "spectron_ea": "0x1cdb04",
+      "spectron_metrics": {
+        "basic_block_count": 59,
+        "branch_count": 84,
+        "call_count": 36,
+        "instruction_count": 359,
+        "mnemonic_hash": "40a8c175d5177b12423256e5efcc228fd846c3c211f048f10afe6d21712f7fab",
+        "opcode_shape_hash": "4ff0a413af2179ddd020dd2cba0170f3791bd8f773ffd99e084f8c5122694c46",
+        "register_detail_hash": "7472f3a83f82adb77444780a04d4e8458cc9293ef55c5cc694239f8297bd7cba",
+        "register_shape_hash": "3fe9768a1258b864e2780ba98c14aefb6a8cf0840516aeb1a0367ae2f3e9bc61",
+        "return_count": 1,
+        "shape_hash": "cd1a53991a038200473b5fb57d62a99807ee25dcec8d83c21aff1017f78f446a",
+        "size": 1436,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target ELF rows are positive-size dynamic FUNC symbols.",
+        "The restored source boundary and target boundary have the same normalized function metrics required by the matcher.",
+        "The readable source role is retained in a v18_ alias while the target's obfuscated name remains in the evidence row."
+      ],
+      "full_metric_equal": false,
+      "match_kind": "dynamic-boundary-exact-semantic-match",
+      "matcher_method": "mnemonic_hash",
+      "metric_differences": [
+        "opcode_shape_hash",
+        "shape_hash",
+        "register_detail_hash"
+      ],
+      "name_action": "rename-with-v18-prefix",
+      "normalized_shape_equal": false,
+      "original_direct_call_names": [
+        "plt_TColorManager_pop_void",
+        "plt_TColorManager_push_ColorF_const_int",
+        "plt_TGraalVar_readObject_void",
+        "plt_dynamicCastVar_TProperties_TGraalVar"
+      ],
+      "original_ea": "0x1d5fcc",
+      "original_metrics": {
+        "basic_block_count": 16,
+        "branch_count": 20,
+        "call_count": 9,
+        "instruction_count": 108,
+        "mnemonic_hash": "1459947da4d544980f89c7b662528d665133025f224ebc855d6a35fb20b9ec80",
+        "opcode_shape_hash": "91f28c8d7abc723d462692967898a445138bae23e0b7396d64220c99a09f8eba",
+        "register_detail_hash": "87af5260bef5404ef1fd1d62f19c7ddbe4216bae1dafa6226b61051ef2d4b971",
+        "register_shape_hash": "be6dbb7632e4f6489a3ca886e8a7b07521a8f80db784eb059545ac8d62bc7d1d",
+        "return_count": 1,
+        "shape_hash": "2657853df065608f06d36afad625c90d4afe3e37d74d6a159b09150bb0c3689a",
+        "size": 432,
+        "string_refs_hash": null
+      },
+      "original_name": "GuiArrayCtrl_onRenderColumnHeaders_TPoint_const_TPoint_const_TPoint_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_GuiArrayCtrl_onRenderColumnHeaders_TPoint_const_TPoint_const_TPoint_const",
+      "source_basis": "the original positive-size ELF FUNC boundary was restored, then the normalized ARM64 feature matcher selected one unique target",
+      "spectron_current_name": "_ZN10s_YwgafWlw10PbVb4aCJD8ERK10eY2wgaf6pwS2_S2_",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._Z10n8NK2aKNZVP10c76BgaJBGAP10G0gxgajWBw",
+        "._ZN10G0gxgajWBw10LfDmgaVDEnEv",
+        "._ZN10X7ZxganTcx3popEv",
+        "._ZN10X7ZxganTcx4pushERK10bagMga8cdJi"
+      ],
+      "spectron_ea": "0x1dac5c",
+      "spectron_metrics": {
+        "basic_block_count": 16,
+        "branch_count": 20,
+        "call_count": 9,
+        "instruction_count": 108,
+        "mnemonic_hash": "1459947da4d544980f89c7b662528d665133025f224ebc855d6a35fb20b9ec80",
+        "opcode_shape_hash": "239f42b5c0e77e7d6a7d4597c3a7889dfee75644aa4e3f6382d84928454e86d7",
+        "register_detail_hash": "307ab4ab7dd45ce54287b81b0227c76364a05f05aaa6d6b97ecc8d62e70b062d",
+        "register_shape_hash": "be6dbb7632e4f6489a3ca886e8a7b07521a8f80db784eb059545ac8d62bc7d1d",
+        "return_count": 1,
+        "shape_hash": "cc32b531068dc44f4c59e6965818a398fe59adde6d7949909156377f7b4f8f15",
+        "size": 432,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": []
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target ELF rows are positive-size dynamic FUNC symbols.",
+        "The restored source boundary and target boundary have the same normalized function metrics required by the matcher.",
+        "The readable source role is retained in a v18_ alias while the target's obfuscated name remains in the evidence row."
+      ],
+      "full_metric_equal": false,
+      "match_kind": "dynamic-boundary-exact-semantic-match",
+      "matcher_method": "mnemonic_hash",
+      "metric_differences": [
+        "opcode_shape_hash",
+        "shape_hash",
+        "register_detail_hash"
+      ],
+      "name_action": "rename-with-v18-prefix",
+      "normalized_shape_equal": false,
+      "original_direct_call_names": [
+        "plt_GuiPopUpMenuCtrl_drawIconAndText_TPoint_const_int_int_ColorI_const",
+        "plt_TColorManager_pop_void",
+        "plt_TColorManager_push_ColorF_const_int",
+        "plt_TGUIRender_renderStyleButton_TRectangle_const_TGUIStyle_TString_const_int_int_bool",
+        "plt_TGraalVar_readObject_void",
+        "plt_TString_clear_void",
+        "plt_TString_operator_lshift_char_const",
+        "plt_TTexture_forceTextureTransparency_TString_const_uint",
+        "plt_TTexture_getTextureSize_TString_const",
+        "plt_dynamicCastVar_TProperties_TGraalVar"
+      ],
+      "original_ea": "0x1da320",
+      "original_metrics": {
+        "basic_block_count": 22,
+        "branch_count": 35,
+        "call_count": 20,
+        "instruction_count": 210,
+        "mnemonic_hash": "a811df6b83af2d15f91de44071a3de0f5040363e836567b663e92bfc9e1595c8",
+        "opcode_shape_hash": "f5e578e9753888e381774ee74d911b6037e06979c3017834fdd65d91f270f110",
+        "register_detail_hash": "0e9efc24b09db6a0c863d2621c517f4b900bd6330d4bb052aa8eda4aba530318",
+        "register_shape_hash": "207af03762df6b4026732dc3263189039df00ae1b882d587075fe17b133aef46",
+        "return_count": 1,
+        "shape_hash": "9d973934719401707a2babbfd4705fa5059c9ea2ab4d937f477b5c14bc4e1028",
+        "size": 844,
+        "string_refs_hash": "8802dfdded8817a5ea73cf3bbb5c585eba0853157b5ba573567c1935b18eafb0"
+      },
+      "original_name": "GuiPopUpMenuCtrl_drawWithStyle_TRectangle_const",
+      "original_string_refs": [
+        "ComboButton",
+        "SunkEdge"
+      ],
+      "proposed_name": "v18_GuiPopUpMenuCtrl_drawWithStyle_TRectangle_const",
+      "source_basis": "the original positive-size ELF FUNC boundary was restored, then the normalized ARM64 feature matcher selected one unique target",
+      "spectron_current_name": "_ZN10awDo2aJRkD10KHqDgay4MBERK10i7FHgaP2lF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._Z10n8NK2aKNZVP10c76BgaJBGAP10G0gxgajWBw",
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10G0gxgajWBw10LfDmgaVDEnEv",
+        "._ZN10X7ZxganTcx3popEv",
+        "._ZN10X7ZxganTcx4pushERK10bagMga8cdJi",
+        "._ZN10_WevgakbUu10AGADgastVBERK10C8THgaTQxFj",
+        "._ZN10_WevgakbUu10HP8Cga81xBERK10C8THgaTQxF",
+        "._ZN10awDo2aJRkD10SeNfIah2TQERK10eY2wgaf6pwiiRK10dVIHgaIooF",
+        "._ZN10mytSgavtrO10JoAgIasezRERK10i7FHgaP2lFP10iHmzga6HmyRK10C8THgaTQxFiib"
+      ],
+      "spectron_ea": "0x1df0bc",
+      "spectron_metrics": {
+        "basic_block_count": 22,
+        "branch_count": 35,
+        "call_count": 20,
+        "instruction_count": 210,
+        "mnemonic_hash": "a811df6b83af2d15f91de44071a3de0f5040363e836567b663e92bfc9e1595c8",
+        "opcode_shape_hash": "a7b2c677a322456fa30b8934c918c288b6faebeb04124bf6adaf88e261de1f2a",
+        "register_detail_hash": "307f9e57c88b3c875d5c94d864dd4220677fecb370a5fba62e3e1d948f4abc3c",
+        "register_shape_hash": "207af03762df6b4026732dc3263189039df00ae1b882d587075fe17b133aef46",
+        "return_count": 1,
+        "shape_hash": "1bfdbe79986aeb9d3077edda5c6532f200551945546b2049b2fa986c9d45e423",
+        "size": 844,
+        "string_refs_hash": "8802dfdded8817a5ea73cf3bbb5c585eba0853157b5ba573567c1935b18eafb0"
+      },
+      "spectron_string_refs": [
+        "ComboButton",
+        "SunkEdge"
+      ]
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "The source and target ELF rows are positive-size dynamic FUNC symbols.",
+        "The restored source boundary and target boundary have the same normalized function metrics required by the matcher.",
+        "The readable source role is retained in a v18_ alias while the target's obfuscated name remains in the evidence row."
+      ],
+      "full_metric_equal": false,
+      "match_kind": "dynamic-boundary-exact-semantic-match",
+      "matcher_method": "mnemonic_hash",
+      "metric_differences": [
+        "opcode_shape_hash",
+        "shape_hash",
+        "register_detail_hash"
+      ],
+      "name_action": "rename-with-v18-prefix",
+      "normalized_shape_equal": false,
+      "original_direct_call_names": [
+        "plt_TColorManager_pop_void",
+        "plt_TColorManager_push_ColorF_const_int",
+        "plt_TGraalVar_readObject_void",
+        "plt_dynamicCastVar_TProperties_TGraalVar"
+      ],
+      "original_ea": "0x1dc260",
+      "original_metrics": {
+        "basic_block_count": 23,
+        "branch_count": 37,
+        "call_count": 23,
+        "instruction_count": 263,
+        "mnemonic_hash": "a0ef006c4609e2c01cfccb2fa5745fee97e4559ba34feeba6b702a7ae5d2a945",
+        "opcode_shape_hash": "6469dc80d4aea774928ede478c8fbd705fb3ff71bf7b7f52f17a5d03a72f9db0",
+        "register_detail_hash": "9b1beb5af538c634f9f0693acf44dea84dea5fd64c16fa9b42fc5cd7c7990d87",
+        "register_shape_hash": "be18a6dc8670582149bb23ce587803352e3ad61de0cd76d1e02206cd2304fad7",
+        "return_count": 1,
+        "shape_hash": "ba308310064289b5f857a0f414a79f60419537296fdb067e9b9d872848a98e6a",
+        "size": 1052,
+        "string_refs_hash": null
+      },
+      "original_name": "GuiProgressCtrl_drawWithProfile_TPoint_const",
+      "original_string_refs": [],
+      "proposed_name": "v18_GuiProgressCtrl_drawWithProfile_TPoint_const",
+      "source_basis": "the original positive-size ELF FUNC boundary was restored, then the normalized ARM64 feature matcher selected one unique target",
+      "spectron_current_name": "_ZN10EYKlVaL7UR10ZCBDgaugWBERK10eY2wgaf6pw",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._Z10n8NK2aKNZVP10c76BgaJBGAP10G0gxgajWBw",
+        "._ZN10G0gxgajWBw10LfDmgaVDEnEv",
+        "._ZN10X7ZxganTcx3popEv",
+        "._ZN10X7ZxganTcx4pushERK10bagMga8cdJi"
+      ],
+      "spectron_ea": "0x1dfffc",
+      "spectron_metrics": {
+        "basic_block_count": 23,
+        "branch_count": 37,
+        "call_count": 23,
+        "instruction_count": 263,
+        "mnemonic_hash": "a0ef006c4609e2c01cfccb2fa5745fee97e4559ba34feeba6b702a7ae5d2a945",
+        "opcode_shape_hash": "ed5de2de98b4d6c80383aa5d308b2759e45c99599800aeab85dae92340712520",
+        "register_detail_hash": "84564ebe8c150e1f7d3dbd4ca573e40e0ec7537c9f41c5f39b2769dd1aa38189",
+        "register_shape_hash": "be18a6dc8670582149bb23ce587803352e3ad61de0cd76d1e02206cd2304fad7",
+        "return_count": 1,
+        "shape_hash": "342feacaa12e1f1bf692a1934c4fc8aacac13dd63eb2002d4d3b10006c17313d",
+        "size": 1052,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": []
+    }
+  ],
+  "artifact": "spectron_gui_missing_function_manual_translation_anchors_20260828",
+  "context": {
+    "exact_pair_count": 10,
+    "manual_pair_count": 1,
+    "resolution": "ELF dynamic FUNC sizes and names, restored source boundaries, normalized ARM64 features, class-local method order, shared strings, and reviewed pseudocode",
+    "source_dynamic_function_count": 11,
+    "source_materialized_count": 11,
+    "target_dynamic_function_count": 5782,
+    "target_exact_start_count": 5782,
+    "target_missing_exact_start_count": 0
+  },
+  "inputs": {
+    "matcher": "artifacts/spectron_semantic_function_translation_v320_20260828.json",
+    "matcher_sha256": "513b71102aa829f2e7a09f7b20932ed30d8db1735582b3bcd76585b558fb3aa2",
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v4_v3_materialized_v2.json",
+    "original_features_sha256": "ec51e399a71083f6131398d87fd8b6cbfd48b255c92ade0156c2b29201b74c00",
+    "source_boundary_report": "artifacts/original_dynamic_function_application_20260828.json",
+    "source_boundary_report_sha256": "c230ea37e55f7bdb4f2c3ce34f14c737d85368c3fadce5f375e3744f60ea860f",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "/tmp/spectron_features_v320_current.json",
+    "spectron_features_sha256": "c6edb143e73102b2e92105432805838299783d7ac6f6850b79932fdb8054cc43",
+    "target_boundary_report": "artifacts/spectron_dynamic_symbol_boundaries_20260828.json",
+    "target_boundary_report_sha256": "bd9a15ecc0df6f246b93d741b4778c9cfa810cee4e3a5e691b565ca1dceba6e4"
+  },
+  "interpretation": [
+    "These are reviewed semantic correspondences, not claims that Spectron retained readable 1.8 debug symbols.",
+    "The v18_ labels preserve the readable source role while each target obfuscated name, address, and metric record remains available for audit.",
+    "Ten pairs are exact normalized feature matches after restoring the source-side ELF boundaries.",
+    "The GuiButtonCtrl drawWithStyle pair is a documented medium-confidence class-slot match because the rebuilt Spectron wrappers shorten the body by eight bytes and two instructions."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 aliases for eleven GUI functions whose ELF symbols survived but old IDA missed their boundaries",
+  "summary": {
+    "anchor_count": 11,
+    "full_metric_exact_count": 0,
+    "high_confidence_count": 10,
+    "medium_confidence_count": 1,
+    "metric_difference_count": 11,
+    "normalized_shape_exact_count": 2
+  }
+}

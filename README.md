@@ -13,7 +13,7 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The current documented translation frontier is the v320 Spectron database. It
+The current documented translation frontier is the v321 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -332,6 +332,33 @@ The boundary, application, name-coverage, and joined-inventory records are
 `artifacts/spectron_symbol_translation_inventory_20260828.json`. The complete
 address-and-item record, including the import-to-PLT join, is
 `artifacts/spectron_dynamic_symbol_coverage_audit_20260828.json`.
+The v321 revision then repairs the source-side GUI boundary gap. The original
+1.8 dynamic table exposed eleven positive-size GUI `FUNC` symbols that the
+source IDA database had treated as data. Their exact ELF intervals were
+materialized in a disposable source database, matched against the target's
+same-class methods, and applied as `v18_` aliases to the final Spectron copy.
+Ten matches are high-confidence normalized-shape matches. The remaining
+`GuiButtonCtrl::drawWithStyle` pair is a documented class-slot match with the
+same call and branch structure, but the rebuilt target is eight bytes shorter.
+The v321 name audit still has zero audited default names, with 6,228 reviewed
+`v18_` aliases and 417 target-only descriptive labels. Its full dynamic-symbol
+coverage keeps 6,770 named rows classified as 5,782 exact functions, 482 data
+items, 336 other non-code items, and 170 undefined imports. The import join
+identifies 169 exact PLT veneers and one undefined `__sF` object without an
+in-library veneer. This is complete boundary and item coverage, not a claim
+that every stripped 2.2 source name was recovered.
+The v321 records are
+`artifacts/spectron_gui_missing_function_manual_translation_anchors_20260828.json`,
+`artifacts/spectron_gui_missing_function_application_20260828.json`,
+`artifacts/spectron_gui_missing_function_verification_20260828.json`,
+`artifacts/spectron_name_coverage_audit_v321_20260828.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v321_20260828.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v321_20260828.json`, and
+`artifacts/spectron_translation_checkpoint_20260828_v321.json`. The current
+private IDA database is
+`analysis/spectron_libqplay_translated_v321_gui_missing_function_aliases_final.i64`
+with SHA-256
+`b7d17b9a5dbc34922cc40fe030cb539d69dcf89fe8a5f64bae83e962309263ab`.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -442,6 +469,8 @@ The current v319 database is kept locally as
 `analysis/spectron_libqplay_translated_v319_nullsub_labels.i64`.
 The current v320 database is kept locally as
 `analysis/spectron_libqplay_translated_v320_dynamic_functions.i64`.
+The current v321 database is kept locally as
+`analysis/spectron_libqplay_translated_v321_gui_missing_function_aliases_final.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification
@@ -6345,6 +6374,14 @@ proves the local native TLS path, not a current live certificate or service.
   named dynamic rows to the v320 IDA name audit.
   `tools/generate_spectron_translation_checkpoint_v320.py` records the v320
   database, boundary repair, and coverage evidence.
+  `tools/ida_materialize_original_dynamic_functions.py` restores the eleven
+  source-side GUI boundaries whose positive-size ELF symbols were previously
+  treated as data by IDA.
+  `tools/generate_spectron_gui_missing_function_anchors.py` records the
+  reviewed 1.8-to-Spectron GUI matches, including the one explicit metric
+  difference.
+  `tools/generate_spectron_translation_checkpoint_v321.py` records the v321
+  source-boundary, GUI alias, name-coverage, and dynamic-symbol evidence.
   `tools/ida_apply_spectron_translation.py` and
   `tools/ida_apply_spectron_manual_anchors.py` write separate disposable IDA
   copies, while the matching verification scripts reopen and check them. The
