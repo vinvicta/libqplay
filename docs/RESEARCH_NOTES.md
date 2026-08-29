@@ -261,6 +261,59 @@ This pass changed only the private IDA copy and archive. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
 
+## 2026-08-29: GuiControl color-setter residuals, v341
+
+The next clean raw-symbol group is a four-entry channel setter block. Source
+GuiControl methods at `0x1ba168`, `0x1ba1ac`, `0x1ba1f0`, and `0x1ba234` line
+up with target methods at `0x1bea8c`, `0x1bead0`, `0x1beb14`, and `0x1beb58`.
+
+| 1.8 source | Spectron target | Applied alias | Direct behavior |
+| --- | ---: | --- | --- |
+| `0x1ba168` `GuiControl_setRed_float` | `0x1bea8c` `_ZN10w9XxgaJdbx10pONIFa0viIEf` | `v18_GuiControl_setRed_float` | update red slot 60, refresh colors, invalidate |
+| `0x1ba1ac` `GuiControl_setGreen_float` | `0x1bead0` `_ZN10w9XxgaJdbx10oDVIFaK5oIEf` | `v18_GuiControl_setGreen_float` | update green slot 61, refresh colors, invalidate |
+| `0x1ba1f0` `GuiControl_setBlue_float` | `0x1beb14` `_ZN10w9XxgaJdbx10EFcJFaGgEIEf` | `v18_GuiControl_setBlue_float` | update blue slot 62, refresh colors, invalidate |
+| `0x1ba234` `GuiControl_setAlpha_float` | `0x1beb58` `_ZN10w9XxgaJdbx10S0OSgapxJOEf` | `v18_GuiControl_setAlpha_float` | update alpha slot 63, refresh colors, invalidate |
+
+Each target body has the same compare, conditional channel update, shared
+color-state refresh, and rectangle-invalidation calls as its source
+counterpart. The four channels use consecutive fields 60 through 63, which
+also preserves the class-local method order. Direct compact Hex-Rays
+pseudocode and exact normalized ARM64 feature metrics agree for all four rows.
+
+The aliases were applied to the v340-derived database and verified after
+reopening. All four rows are new context in the automatic semantic map, so
+this pass records direct evidence rather than promoting an existing candidate.
+
+The v341 database has 11,707 functions and zero audited default names. Its
+name audit reports 6,429 translated aliases, 800 retained target names, 419
+target-only descriptive labels, seven JNI exports, and 4,052 other IDA or PLT
+names. Dynamic coverage reports 4,783 source-backed aliases and 1,688 exact
+retained dynamic names. All 5,782 defined dynamic function symbols still
+resolve to exact IDA function starts.
+
+The v341 database is
+`analysis/spectron_libqplay_translated_v341_colorset_residual.i64` with
+SHA-256
+`f892d0eb81a79a242c41aeb19742dc33693863fd0373217727d2bba154d33d73`.
+The machine-readable records are
+`artifacts/spectron_colorset_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_colorset_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_colorset_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v341_colorset_residual.json`,
+`artifacts/spectron_name_coverage_audit_v341.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v341.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v341.json`,
+`artifacts/spectron_semantic_translation_v341.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v341.json`.
+The reusable scripts are
+`tools/generate_spectron_colorset_residual_anchors.py`,
+`tools/carry_forward_spectron_semantic_translation_v341.py`, and
+`tools/generate_spectron_translation_checkpoint_v341.py`.
+
+This pass changed only the private IDA database and research archive. It did
+not patch the APK, rerun the loopback client, alter TLS behavior, contact a
+game server, or test a live endpoint.
+
 ## 2026-08-29: TTilesBlock and TTilesPanel residuals, v340
 
 The next compact raw-symbol group is the tile and panel block at target

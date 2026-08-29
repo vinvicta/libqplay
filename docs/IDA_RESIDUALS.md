@@ -800,6 +800,56 @@ generators are
 `tools/generate_spectron_format_parameters_property_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v326.py`.
 
+### v341 GuiControl color-setter residual aliases
+
+The v341 pass starts from the verified v340 database and translates four raw
+entries in the obfuscated w9XxgaJdbx control implementation. Direct compact
+Hex-Rays pseudocode was captured for every source and target row, and all four
+rows are exact normalized ARM64 matches.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | --- | --- | --- |
+| `0x1ba168` `GuiControl_setRed_float` | `0x1bea8c` `_ZN10w9XxgaJdbx10pONIFa0viIEf` | `v18_GuiControl_setRed_float` | red channel update |
+| `0x1ba1ac` `GuiControl_setGreen_float` | `0x1bead0` `_ZN10w9XxgaJdbx10oDVIFaK5oIEf` | `v18_GuiControl_setGreen_float` | green channel update |
+| `0x1ba1f0` `GuiControl_setBlue_float` | `0x1beb14` `_ZN10w9XxgaJdbx10EFcJFaGgEIEf` | `v18_GuiControl_setBlue_float` | blue channel update |
+| `0x1ba234` `GuiControl_setAlpha_float` | `0x1beb58` `_ZN10w9XxgaJdbx10S0OSgapxJOEf` | `v18_GuiControl_setAlpha_float` | alpha channel update |
+
+Every setter compares its consecutive channel field, updates only when the
+value changes, invokes the shared color-state refresh helper, and invalidates
+the control rectangle. The source and target preserve the same four-channel
+method order and body shape. All four aliases were applied to a fresh
+v340-derived database and verified after reopening.
+
+The v341 database contains 11,707 functions, zero audited default names,
+6,429 translated aliases, 419 target-only descriptive labels, 800 retained
+target names, seven JNI exports, and 4,052 other IDA or PLT names. Dynamic
+coverage reports 4,783 source-backed aliases and 1,688 exact retained dynamic
+names. All 5,782 defined dynamic function symbols still resolve to exact IDA
+function starts.
+
+The saved database is
+`analysis/spectron_libqplay_translated_v341_colorset_residual.i64` with
+SHA-256
+`f892d0eb81a79a242c41aeb19742dc33693863fd0373217727d2bba154d33d73`.
+The machine-readable records are
+`artifacts/spectron_colorset_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_colorset_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_colorset_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v341_colorset_residual.json`,
+`artifacts/spectron_name_coverage_audit_v341.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v341.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v341.json`,
+`artifacts/spectron_semantic_translation_v341.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v341.json`.
+The reusable scripts are
+`tools/generate_spectron_colorset_residual_anchors.py`,
+`tools/carry_forward_spectron_semantic_translation_v341.py`, and
+`tools/generate_spectron_translation_checkpoint_v341.py`.
+
+This is a static IDA translation checkpoint. It did not patch the APK, rerun
+the loopback client, alter TLS behavior, contact a game server, or test a
+live endpoint.
+
 ### v340 tile and panel residual aliases
 
 The v340 pass starts from the verified v339 database and translates four raw

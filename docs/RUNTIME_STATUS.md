@@ -3035,6 +3035,37 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v341 GuiControl color-setter residuals
+
+The v341 revision is a static IDA checkpoint for four raw GuiControl color
+setters in the obfuscated w9XxgaJdbx class. It covers red, green, blue, and
+alpha updates, including the shared color refresh and rectangle invalidation.
+Every source and target row has direct compact pseudocode and an exact
+normalized ARM64 feature match.
+
+The aliases were applied to a fresh v340-derived database and verified after
+reopening. The v341 database contains 11,707 functions, zero audited default
+names, 6,429 translated aliases, 4,783 source-backed dynamic rows, and 1,688
+exact retained dynamic names. All 5,782 defined dynamic function symbols still
+resolve to exact IDA function starts.
+
+Its SHA-256 is
+`f892d0eb81a79a242c41aeb19742dc33693863fd0373217727d2bba154d33d73`.
+The records are
+`artifacts/spectron_colorset_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_colorset_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_colorset_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v341_colorset_residual.json`,
+`artifacts/spectron_name_coverage_audit_v341.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v341.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v341.json`,
+`artifacts/spectron_semantic_translation_v341.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v341.json`.
+
+This checkpoint did not change the verified loopback package, connector TLS
+result, or local protocol responder. No live endpoint was contacted, and no
+new runtime replay was performed for v341.
+
 ## Spectron 2.2 v340 TTilesBlock and TTilesPanel residuals
 
 The v340 revision is a static IDA checkpoint for four raw tile and panel

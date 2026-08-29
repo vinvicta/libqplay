@@ -1,0 +1,309 @@
+{
+  "anchors": [
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies compare the value at channel slot 60, update it when changed, refresh color usage, and invalidate the control rectangle.",
+        "The normalized ARM64 records are exact, including the conditional branch and two direct helper calls.",
+        "The target method is the first raw entry in the consecutive four-channel setter block."
+      ],
+      "exact_metric_match": true,
+      "match_kind": "manual-colorset-exact-anchor",
+      "metric_differences": [],
+      "name_action": "rename-with-v18-prefix",
+      "operation": "sets the red color component and invalidates the control",
+      "original_direct_call_names": [
+        "plt_GuiControl_updateUseColors_void"
+      ],
+      "original_ea": "0x1ba168",
+      "original_function_end": "0x1ba1a8",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 3,
+        "call_count": 1,
+        "instruction_count": 16,
+        "mnemonic_hash": "52eb32bd5e299f0043571a0f2deda5ad5ef2283b8ca48798b4ba88c312d11dbd",
+        "opcode_shape_hash": "ed186cb3fbb724e0c0bb543a966ea81019894c31a0472b0deac712048830a21a",
+        "register_detail_hash": "d932111195b2e6c72036be629cbecc64e2002ef844954c5f11f0c6d647a3e39a",
+        "register_shape_hash": "b2e526d0cd8d59d236070ac80d40f57d40375662ce3ed9b24cdb547fd5d5d99b",
+        "return_count": 1,
+        "shape_hash": "edb7d24a081220ab9dba8f5f01a27a69f13c2b1ce21343de418b21bb0436b995",
+        "size": 64,
+        "string_refs_hash": null
+      },
+      "original_name": "GuiControl_setRed_float",
+      "original_string_refs": [],
+      "proposed_name": "v18_GuiControl_setRed_float",
+      "semantic_match_already_present": false,
+      "semantic_match_confidence": null,
+      "semantic_match_method": null,
+      "source_basis": "Hex-Rays pseudocode, exact normalized ARM64 feature metrics, and local four-channel setter order",
+      "source_component": "bundled GuiControl runtime",
+      "source_evidence_name": "GuiControl_setRed_float",
+      "source_pseudocode_sha256": "6f219a5891f4298279f634c58e4b877266f0f89eb709bd0dc1781f1306845d81",
+      "spectron_direct_call_names": [
+        "._ZN10w9XxgaJdbx10kAX50afKCxEv"
+      ],
+      "spectron_ea": "0x1bea8c",
+      "spectron_function_end": "0x1beacc",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 3,
+        "call_count": 1,
+        "instruction_count": 16,
+        "mnemonic_hash": "52eb32bd5e299f0043571a0f2deda5ad5ef2283b8ca48798b4ba88c312d11dbd",
+        "opcode_shape_hash": "ed186cb3fbb724e0c0bb543a966ea81019894c31a0472b0deac712048830a21a",
+        "register_detail_hash": "d932111195b2e6c72036be629cbecc64e2002ef844954c5f11f0c6d647a3e39a",
+        "register_shape_hash": "b2e526d0cd8d59d236070ac80d40f57d40375662ce3ed9b24cdb547fd5d5d99b",
+        "return_count": 1,
+        "shape_hash": "edb7d24a081220ab9dba8f5f01a27a69f13c2b1ce21343de418b21bb0436b995",
+        "size": 64,
+        "string_refs_hash": null
+      },
+      "spectron_name": "_ZN10w9XxgaJdbx10pONIFa0viIEf",
+      "spectron_string_refs": [],
+      "target_component": "obfuscated w9XxgaJdbx control runtime",
+      "target_evidence_name": "_ZN10w9XxgaJdbx10pONIFa0viIEf",
+      "target_pseudocode_sha256": "56fa081a93d8086675d8f304d1195766cd02a287b45ddfd7029c7e016220cc74"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies preserve the setter pattern while using channel slot 61 for green.",
+        "The normalized ARM64 records are exact, including the conditional branch and helper-call sequence.",
+        "The target method immediately follows the red setter in the same w9XxgaJdbx class block."
+      ],
+      "exact_metric_match": true,
+      "match_kind": "manual-colorset-exact-anchor",
+      "metric_differences": [],
+      "name_action": "rename-with-v18-prefix",
+      "operation": "sets the green color component and invalidates the control",
+      "original_direct_call_names": [
+        "plt_GuiControl_updateUseColors_void"
+      ],
+      "original_ea": "0x1ba1ac",
+      "original_function_end": "0x1ba1ec",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 3,
+        "call_count": 1,
+        "instruction_count": 16,
+        "mnemonic_hash": "52eb32bd5e299f0043571a0f2deda5ad5ef2283b8ca48798b4ba88c312d11dbd",
+        "opcode_shape_hash": "ed186cb3fbb724e0c0bb543a966ea81019894c31a0472b0deac712048830a21a",
+        "register_detail_hash": "c137d379f88ce84e8ce900ca3e2287be97acf1704db302083e9600eee1b960a3",
+        "register_shape_hash": "b2e526d0cd8d59d236070ac80d40f57d40375662ce3ed9b24cdb547fd5d5d99b",
+        "return_count": 1,
+        "shape_hash": "edb7d24a081220ab9dba8f5f01a27a69f13c2b1ce21343de418b21bb0436b995",
+        "size": 64,
+        "string_refs_hash": null
+      },
+      "original_name": "GuiControl_setGreen_float",
+      "original_string_refs": [],
+      "proposed_name": "v18_GuiControl_setGreen_float",
+      "semantic_match_already_present": false,
+      "semantic_match_confidence": null,
+      "semantic_match_method": null,
+      "source_basis": "Hex-Rays pseudocode, exact normalized ARM64 feature metrics, and local four-channel setter order",
+      "source_component": "bundled GuiControl runtime",
+      "source_evidence_name": "GuiControl_setGreen_float",
+      "source_pseudocode_sha256": "f56d396a4645a407a647f4a49ab2a4f565f38c2cd041d412a61e828f8a4b9bb1",
+      "spectron_direct_call_names": [
+        "._ZN10w9XxgaJdbx10kAX50afKCxEv"
+      ],
+      "spectron_ea": "0x1bead0",
+      "spectron_function_end": "0x1beb10",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 3,
+        "call_count": 1,
+        "instruction_count": 16,
+        "mnemonic_hash": "52eb32bd5e299f0043571a0f2deda5ad5ef2283b8ca48798b4ba88c312d11dbd",
+        "opcode_shape_hash": "ed186cb3fbb724e0c0bb543a966ea81019894c31a0472b0deac712048830a21a",
+        "register_detail_hash": "c137d379f88ce84e8ce900ca3e2287be97acf1704db302083e9600eee1b960a3",
+        "register_shape_hash": "b2e526d0cd8d59d236070ac80d40f57d40375662ce3ed9b24cdb547fd5d5d99b",
+        "return_count": 1,
+        "shape_hash": "edb7d24a081220ab9dba8f5f01a27a69f13c2b1ce21343de418b21bb0436b995",
+        "size": 64,
+        "string_refs_hash": null
+      },
+      "spectron_name": "_ZN10w9XxgaJdbx10oDVIFaK5oIEf",
+      "spectron_string_refs": [],
+      "target_component": "obfuscated w9XxgaJdbx control runtime",
+      "target_evidence_name": "_ZN10w9XxgaJdbx10oDVIFaK5oIEf",
+      "target_pseudocode_sha256": "7791651c42c7a4301413bdfec500fd7d9736c3c3500fc6aff0e63eedba52de3a"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies preserve the setter pattern while using channel slot 62 for blue.",
+        "The normalized ARM64 records are exact, including the conditional branch and helper-call sequence.",
+        "The target method is the third raw entry in the consecutive four-channel setter block."
+      ],
+      "exact_metric_match": true,
+      "match_kind": "manual-colorset-exact-anchor",
+      "metric_differences": [],
+      "name_action": "rename-with-v18-prefix",
+      "operation": "sets the blue color component and invalidates the control",
+      "original_direct_call_names": [
+        "plt_GuiControl_updateUseColors_void"
+      ],
+      "original_ea": "0x1ba1f0",
+      "original_function_end": "0x1ba230",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 3,
+        "call_count": 1,
+        "instruction_count": 16,
+        "mnemonic_hash": "52eb32bd5e299f0043571a0f2deda5ad5ef2283b8ca48798b4ba88c312d11dbd",
+        "opcode_shape_hash": "ed186cb3fbb724e0c0bb543a966ea81019894c31a0472b0deac712048830a21a",
+        "register_detail_hash": "c23800c153efc3480024f9604f97e7e9a79889d3090359cbd4dc61f4cbb59407",
+        "register_shape_hash": "b2e526d0cd8d59d236070ac80d40f57d40375662ce3ed9b24cdb547fd5d5d99b",
+        "return_count": 1,
+        "shape_hash": "edb7d24a081220ab9dba8f5f01a27a69f13c2b1ce21343de418b21bb0436b995",
+        "size": 64,
+        "string_refs_hash": null
+      },
+      "original_name": "GuiControl_setBlue_float",
+      "original_string_refs": [],
+      "proposed_name": "v18_GuiControl_setBlue_float",
+      "semantic_match_already_present": false,
+      "semantic_match_confidence": null,
+      "semantic_match_method": null,
+      "source_basis": "Hex-Rays pseudocode, exact normalized ARM64 feature metrics, and local four-channel setter order",
+      "source_component": "bundled GuiControl runtime",
+      "source_evidence_name": "GuiControl_setBlue_float",
+      "source_pseudocode_sha256": "490d077811c38a21c9ee1fb07842e3ad7aa7ef3ab0475771cd42e1738c8f9a4d",
+      "spectron_direct_call_names": [
+        "._ZN10w9XxgaJdbx10kAX50afKCxEv"
+      ],
+      "spectron_ea": "0x1beb14",
+      "spectron_function_end": "0x1beb54",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 3,
+        "call_count": 1,
+        "instruction_count": 16,
+        "mnemonic_hash": "52eb32bd5e299f0043571a0f2deda5ad5ef2283b8ca48798b4ba88c312d11dbd",
+        "opcode_shape_hash": "ed186cb3fbb724e0c0bb543a966ea81019894c31a0472b0deac712048830a21a",
+        "register_detail_hash": "c23800c153efc3480024f9604f97e7e9a79889d3090359cbd4dc61f4cbb59407",
+        "register_shape_hash": "b2e526d0cd8d59d236070ac80d40f57d40375662ce3ed9b24cdb547fd5d5d99b",
+        "return_count": 1,
+        "shape_hash": "edb7d24a081220ab9dba8f5f01a27a69f13c2b1ce21343de418b21bb0436b995",
+        "size": 64,
+        "string_refs_hash": null
+      },
+      "spectron_name": "_ZN10w9XxgaJdbx10EFcJFaGgEIEf",
+      "spectron_string_refs": [],
+      "target_component": "obfuscated w9XxgaJdbx control runtime",
+      "target_evidence_name": "_ZN10w9XxgaJdbx10EFcJFaGgEIEf",
+      "target_pseudocode_sha256": "532c32a13c3d0e20a723c7e953a404cfe8e8462276f9677f83f10421197049ce"
+    },
+    {
+      "confidence": "high",
+      "evidence": [
+        "Both bodies preserve the setter pattern while using channel slot 63 for alpha.",
+        "The normalized ARM64 records are exact, including the conditional branch and helper-call sequence.",
+        "The target method closes the raw four-channel setter block in the w9XxgaJdbx class."
+      ],
+      "exact_metric_match": true,
+      "match_kind": "manual-colorset-exact-anchor",
+      "metric_differences": [],
+      "name_action": "rename-with-v18-prefix",
+      "operation": "sets the alpha color component and invalidates the control",
+      "original_direct_call_names": [
+        "plt_GuiControl_updateUseColors_void"
+      ],
+      "original_ea": "0x1ba234",
+      "original_function_end": "0x1ba274",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 3,
+        "call_count": 1,
+        "instruction_count": 16,
+        "mnemonic_hash": "52eb32bd5e299f0043571a0f2deda5ad5ef2283b8ca48798b4ba88c312d11dbd",
+        "opcode_shape_hash": "ed186cb3fbb724e0c0bb543a966ea81019894c31a0472b0deac712048830a21a",
+        "register_detail_hash": "0b3055b654ab4b6a37352be49fe577eba6127954baed99d56b0efbd7a3f1853b",
+        "register_shape_hash": "b2e526d0cd8d59d236070ac80d40f57d40375662ce3ed9b24cdb547fd5d5d99b",
+        "return_count": 1,
+        "shape_hash": "edb7d24a081220ab9dba8f5f01a27a69f13c2b1ce21343de418b21bb0436b995",
+        "size": 64,
+        "string_refs_hash": null
+      },
+      "original_name": "GuiControl_setAlpha_float",
+      "original_string_refs": [],
+      "proposed_name": "v18_GuiControl_setAlpha_float",
+      "semantic_match_already_present": false,
+      "semantic_match_confidence": null,
+      "semantic_match_method": null,
+      "source_basis": "Hex-Rays pseudocode, exact normalized ARM64 feature metrics, and local four-channel setter order",
+      "source_component": "bundled GuiControl runtime",
+      "source_evidence_name": "GuiControl_setAlpha_float",
+      "source_pseudocode_sha256": "814db29f7169cfa456c71281de62fdd29d562a3786764009e743cd463394ef38",
+      "spectron_direct_call_names": [
+        "._ZN10w9XxgaJdbx10kAX50afKCxEv"
+      ],
+      "spectron_ea": "0x1beb58",
+      "spectron_function_end": "0x1beb98",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 3,
+        "call_count": 1,
+        "instruction_count": 16,
+        "mnemonic_hash": "52eb32bd5e299f0043571a0f2deda5ad5ef2283b8ca48798b4ba88c312d11dbd",
+        "opcode_shape_hash": "ed186cb3fbb724e0c0bb543a966ea81019894c31a0472b0deac712048830a21a",
+        "register_detail_hash": "0b3055b654ab4b6a37352be49fe577eba6127954baed99d56b0efbd7a3f1853b",
+        "register_shape_hash": "b2e526d0cd8d59d236070ac80d40f57d40375662ce3ed9b24cdb547fd5d5d99b",
+        "return_count": 1,
+        "shape_hash": "edb7d24a081220ab9dba8f5f01a27a69f13c2b1ce21343de418b21bb0436b995",
+        "size": 64,
+        "string_refs_hash": null
+      },
+      "spectron_name": "_ZN10w9XxgaJdbx10S0OSgapxJOEf",
+      "spectron_string_refs": [],
+      "target_component": "obfuscated w9XxgaJdbx control runtime",
+      "target_evidence_name": "_ZN10w9XxgaJdbx10S0OSgapxJOEf",
+      "target_pseudocode_sha256": "da74bed03895aac3d70947c4ea12d250689dc0aa4731a36881de93315ac10ef6"
+    }
+  ],
+  "artifact": "spectron_colorset_residual_manual_translation_anchors_20260829",
+  "inputs": {
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_v3_current.json",
+    "original_features_sha256": "96b1f729602c2041bd3a233ffc99400d3b30375839e33417895d2efd7ae233b8",
+    "semantic_map": "artifacts/spectron_semantic_translation_v340.json",
+    "semantic_map_sha256": "a29be69acab139efc719c486eeccbd8a5384b041b359b543dd5be5ee5d5e21d6",
+    "source_evidence": [
+      {
+        "path": "/tmp/graal-source-colorset-v341.json",
+        "sha256": "867ad6ef4baf331bf6ee491cfad5c4ef20dd63708dd2871dbaa7888b487878d0"
+      }
+    ],
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "artifacts/spectron_features_v340_tiles_residual.json",
+    "spectron_features_sha256": "6f315de99590dc4a69fea16e3b4bda7ef88a446014b879763251704431f9122c",
+    "target_evidence": [
+      {
+        "path": "/tmp/graal-target-colorset-v341.json",
+        "sha256": "dad19c710c8dfca9a6db57be4341b0a88d7a104a1cf445307e9270089ca4aba1"
+      }
+    ]
+  },
+  "interpretation": [
+    "The four anchors resolve the raw GuiControl color setters by direct pseudocode, exact normalized features, and their consecutive channel-slot order.",
+    "All four setters preserve the source compare, channel update, color-state refresh, and rectangle invalidation behavior.",
+    "The v18_ prefix remains an analysis label and does not claim that Spectron retained the original source symbol."
+  ],
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for residual GuiControl color setters",
+  "summary": {
+    "anchor_count": 4,
+    "exact_metric_anchor_count": 4,
+    "high_confidence_count": 4,
+    "layout_change_anchor_count": 0,
+    "new_context_anchor_count": 4,
+    "semantic_promotion_count": 0,
+    "source_pseudocode_count": 4,
+    "target_pseudocode_count": 4
+  }
+}

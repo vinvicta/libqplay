@@ -319,6 +319,42 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v341 GuiControl color-setter residual comparison
+
+The v341 pass compares four raw target methods in the obfuscated w9XxgaJdbx
+control class. Every row has direct source and target compact Hex-Rays
+pseudocode and an exact normalized ARM64 feature match.
+
+| Source role | Spectron address | Applied alias | Match class |
+| --- | ---: | --- | --- |
+| `GuiControl_setRed_float` | `0x1bea8c` | `v18_GuiControl_setRed_float` | exact channel 60 setter |
+| `GuiControl_setGreen_float` | `0x1bead0` | `v18_GuiControl_setGreen_float` | exact channel 61 setter |
+| `GuiControl_setBlue_float` | `0x1beb14` | `v18_GuiControl_setBlue_float` | exact channel 62 setter |
+| `GuiControl_setAlpha_float` | `0x1beb58` | `v18_GuiControl_setAlpha_float` | exact channel 63 setter |
+
+Every setter preserves the compare, conditional write, shared color-state
+refresh, and rectangle-invalidation sequence. All four rows are new context
+in the automatic semantic map, and no alias relies on name similarity alone.
+
+All four aliases were applied and verified after reopening the v341 database.
+It has 11,707 functions, zero audited default names, 6,429 translated aliases,
+4,783 source-backed dynamic rows, 1,688 exact retained dynamic names, and
+5,782 exact dynamic function starts. Its SHA-256 is
+`f892d0eb81a79a242c41aeb19742dc33693863fd0373217727d2bba154d33d73`.
+The complete comparison records are
+`artifacts/spectron_colorset_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_colorset_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_colorset_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v341_colorset_residual.json`,
+`artifacts/spectron_name_coverage_audit_v341.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v341.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v341.json`,
+`artifacts/spectron_semantic_translation_v341.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v341.json`.
+
+This comparison is static evidence. It does not change the runtime diagnosis,
+patch the APK, or contact a live endpoint.
+
 ## v340 TTilesBlock and TTilesPanel residual comparison
 
 The v340 pass compares four raw target methods in the tile and panel block.

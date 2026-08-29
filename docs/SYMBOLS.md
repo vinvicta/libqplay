@@ -425,6 +425,42 @@ records are
 `artifacts/spectron_semantic_translation_v326.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v326.json`.
 
+### v341 GuiControl color-setter residual aliases
+
+The v341 pass adds four semantic aliases to the private Spectron IDA
+database. The raw target identifiers remain visible so each translated name
+can be traced back to the stripped build.
+
+| Spectron address | Raw target symbol | Applied alias | Recovered role |
+| ---: | --- | --- | --- |
+| `0x1bea8c` | `_ZN10w9XxgaJdbx10pONIFa0viIEf` | `v18_GuiControl_setRed_float` | red channel update |
+| `0x1bead0` | `_ZN10w9XxgaJdbx10oDVIFaK5oIEf` | `v18_GuiControl_setGreen_float` | green channel update |
+| `0x1beb14` | `_ZN10w9XxgaJdbx10EFcJFaGgEIEf` | `v18_GuiControl_setBlue_float` | blue channel update |
+| `0x1beb58` | `_ZN10w9XxgaJdbx10S0OSgapxJOEf` | `v18_GuiControl_setAlpha_float` | alpha channel update |
+
+The source counterparts are `0x1ba168`, `0x1ba1ac`, `0x1ba1f0`, and
+`0x1ba234`. Each method updates one consecutive channel field, calls the
+shared color-state refresh helper, and invalidates the control rectangle when
+the value changes. Direct pseudocode and exact normalized feature records
+support all four rows.
+
+The v341 records are
+`artifacts/spectron_colorset_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_colorset_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_colorset_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v341_colorset_residual.json`,
+`artifacts/spectron_name_coverage_audit_v341.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v341.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v341.json`,
+`artifacts/spectron_semantic_translation_v341.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v341.json`.
+
+The v341 database has 6,429 translated `v18_` aliases, 419 target-only
+descriptive labels, 800 retained target names, seven JNI exports, 4,052
+other IDA or PLT names, 4,783 source-backed dynamic rows, and 1,688 exact
+retained dynamic names. Its hash is
+`f892d0eb81a79a242c41aeb19742dc33693863fd0373217727d2bba154d33d73`.
+
 ### v340 TTilesBlock and TTilesPanel residual aliases
 
 The v340 pass adds four semantic aliases to the private Spectron IDA
