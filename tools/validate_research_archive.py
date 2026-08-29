@@ -719,6 +719,12 @@ def main():
     spectron_checkpoint_v308 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v308.json"
     )
+    spectron_freetype_tt_glyph_loader_anchors = load_json(
+        "artifacts/spectron_freetype_tt_glyph_loader_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v309 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v309.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -15519,6 +15525,139 @@ def main():
         1,
     )
     check(
+        "Spectron FreeType TrueType glyph-loader artifact",
+        spectron_freetype_tt_glyph_loader_anchors["artifact"],
+        "spectron_freetype_tt_glyph_loader_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron FreeType TrueType glyph-loader network",
+        spectron_freetype_tt_glyph_loader_anchors["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron FreeType TrueType glyph-loader count",
+        spectron_freetype_tt_glyph_loader_anchors["summary"]["anchor_count"],
+        7,
+    )
+    check(
+        "Spectron FreeType TrueType glyph-loader high confidence",
+        spectron_freetype_tt_glyph_loader_anchors["summary"][
+            "high_confidence_count"
+        ],
+        7,
+    )
+    check(
+        "Spectron FreeType TrueType glyph-loader normalized count",
+        spectron_freetype_tt_glyph_loader_anchors["summary"][
+            "normalized_shape_exact_count"
+        ],
+        7,
+    )
+    check(
+        "Spectron FreeType TrueType glyph-loader full metric count",
+        spectron_freetype_tt_glyph_loader_anchors["summary"][
+            "full_metric_exact_count"
+        ],
+        6,
+    )
+    glyph_loader_rows = {
+        row["spectron_ea"]: row
+        for row in spectron_freetype_tt_glyph_loader_anchors["anchors"]
+    }
+    glyph_loader_expected = {
+        "0x270224": ("0x262db4", "v18_load_truetype_glyph", [], True),
+        "0x27118c": (
+            "0x263d1c",
+            "v18_TT_Load_Glyph",
+            ["register_detail_hash"],
+            False,
+        ),
+        "0x2723e8": ("0x264f78", "v18_tt_glyph_load", [], True),
+        "0x27243c": ("0x264fcc", "v18_Ins_SxVTL", [], True),
+        "0x27268c": ("0x26521c", "v18_Ins_CALL", [], True),
+        "0x2727e0": ("0x265370", "v18_Ins_LOOPCALL", [], True),
+        "0x272944": ("0x2654d4", "v18_Ins_UNKNOWN", [], True),
+    }
+    check(
+        "Spectron FreeType TrueType glyph-loader target set",
+        set(glyph_loader_rows),
+        set(glyph_loader_expected),
+    )
+    for target_ea, (
+        source_ea,
+        expected_name,
+        expected_differences,
+        expected_full_match,
+    ) in glyph_loader_expected.items():
+        row = glyph_loader_rows[target_ea]
+        check(
+            "Spectron FreeType TrueType glyph-loader source " + target_ea,
+            row["original_ea"],
+            source_ea,
+        )
+        check(
+            "Spectron FreeType TrueType glyph-loader name " + target_ea,
+            row["proposed_name"],
+            expected_name,
+        )
+        check(
+            "Spectron FreeType TrueType glyph-loader metrics " + target_ea,
+            row["metric_differences"],
+            expected_differences,
+        )
+        check(
+            "Spectron FreeType TrueType glyph-loader normalized " + target_ea,
+            row["normalized_shape_equal"],
+            True,
+        )
+        check(
+            "Spectron FreeType TrueType glyph-loader full metrics " + target_ea,
+            row["full_metric_equal"],
+            expected_full_match,
+        )
+    check(
+        "Spectron v309 checkpoint artifact",
+        spectron_checkpoint_v309["artifact"],
+        "spectron_translation_checkpoint_20260828_v309",
+    )
+    check(
+        "Spectron v309 checkpoint parent",
+        spectron_checkpoint_v309["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v308",
+    )
+    check(
+        "Spectron v309 checkpoint parent path",
+        spectron_checkpoint_v309["parent_checkpoint"]["path"],
+        "artifacts/spectron_translation_checkpoint_20260828_v308.json",
+    )
+    check(
+        "Spectron v309 checkpoint database hash",
+        spectron_checkpoint_v309["database"]["sha256"],
+        "73e94e4ea548857972a5a0222c24860c4ed6123e0fda9cba61bd3e090c4bd824",
+    )
+    check(
+        "Spectron v309 checkpoint database close-reopen",
+        spectron_checkpoint_v309["database"]["close_reopen_verified"],
+        True,
+    )
+    check(
+        "Spectron v309 checkpoint function count",
+        spectron_checkpoint_v309["database"]["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v309 checkpoint default sub count",
+        spectron_checkpoint_v309["database"]["default_sub_function_count"],
+        418,
+    )
+    check(
+        "Spectron v309 checkpoint glyph-loader count",
+        spectron_checkpoint_v309["freetype_tt_glyph_loader_anchors"][
+            "verified_name_count"
+        ],
+        7,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -15892,6 +16031,8 @@ def main():
         spectron_freetype_tt_runtime_tail_anchors,
         spectron_freetype_tt_projection_correction,
         spectron_checkpoint_v308,
+        spectron_freetype_tt_glyph_loader_anchors,
+        spectron_checkpoint_v309,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
