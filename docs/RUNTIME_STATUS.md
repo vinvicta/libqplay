@@ -2919,6 +2919,19 @@ emulator, uses synthetic game responses, and leaves the loading branch as a
 diagnostic control. The app was stopped and the reverse mappings were removed
 after capture.
 
+The matched stock-branch control was run with the same clean-cache procedure,
+same local TLS certificate, same encrypted responder, and same fixture hashes.
+It completed the network and resource milestones but remained on the original
+title/loading artwork. Its APK hash is
+`45f469692cb6ee2e8d0f1529d8b0871dafdf718e2c8b6e345cb5082e40257751`, and its
+screen hash is
+`bcf5f1c8423d1cecce5b6debb8f8126828bffb824cb299518c55771eeb65e788`. The
+four capture hashes and the build report are in
+`artifacts/spectron_arm64_stock_clean_cache_control_20260828.json`. Since the
+only native difference is the conditional at `0x15fad8`, this is the strongest
+local causal comparison for the loading-state candidate, while still not being
+a production or physical-device validation.
+
 ## Not verified
 
 * A live game-server login.

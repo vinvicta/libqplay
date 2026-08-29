@@ -1124,6 +1124,12 @@ own `pics1.png` tile sheet from `assets/offline/levels/tiles`. The rendered
 screen kept the same hash as the earlier run. This clean-cache evidence is in
 `artifacts/spectron_arm64_clean_cache_replay_20260828.json`.
 
+A matched stock-branch control used the same source APK, private responders,
+fixture reset, and resource sequence while leaving `0x15fad8` unchanged. It
+reached the same encrypted login, map, five-level, and heartbeat milestones,
+but kept the title/loading artwork. That comparison is recorded in
+`artifacts/spectron_arm64_stock_clean_cache_control_20260828.json`.
+
 The v235 entry below is a historical checkpoint in the IDA translation
 series. At that point, the current series reached
 `analysis/spectron_libqplay_translated_v268.i64`. The v235 pass adds 12
