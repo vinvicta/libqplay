@@ -84,6 +84,25 @@ not be promoted to code just because they have a name. The dynamic join now
 reports 4,541 source-backed `v18_` aliases, 1,167 retained target names, 74
 other IDA matches, and 988 rows with no function at the symbol value.
 
+I also ran a complete address-and-item audit over all 6,770 named dynamic
+rows. Every one of the 6,600 defined named rows resolves to an IDA item: 5,782
+exact functions, 482 data items, and 336 other non-code items. The name
+coverage split is 1,901 exact retained dynamic names, 4,541 addresses where a
+reviewed `v18_` source-backed alias is intentionally preferred, and 151 rows
+where another retained target alias occupies the same function address. The
+remaining seven rows are linker-boundary aliases such as `__bss_start__` and
+`_end`, which share two data boundaries, while 170 undefined imports have no
+address inside the library. This explains why the 988 non-function rows in
+the function join are not missing code labels.
+
+The complete address-and-item record is
+`artifacts/spectron_dynamic_symbol_coverage_audit_20260828.json`, generated
+by `tools/ida_audit_spectron_dynamic_symbol_coverage.py`. It keeps the raw
+dynamic name, type, binding, section, value, size, IDA location, current IDA
+name, and coverage status for every named row. That makes the “every symbol”
+claim auditable without forcing data symbols or undefined imports into the
+function namespace.
+
 This pass does not recover the stripped target's original source names. It
 only completes the function boundaries justified by the target's own dynamic
 metadata. The materializer is `tools/ida_materialize_spectron_dynamic_functions.py`;
@@ -93,6 +112,7 @@ The machine-readable records are
 `artifacts/spectron_dynamic_function_application_20260828.json`,
 `artifacts/spectron_name_coverage_audit_v320_20260828.json`,
 `artifacts/spectron_symbol_translation_inventory_20260828.json`, and
+`artifacts/spectron_dynamic_symbol_coverage_audit_20260828.json`, and
 `artifacts/spectron_translation_checkpoint_20260828_v320.json`. The v320
 database hash is
 `17015ba3140200199269ca94675e043e1e87cbefcdfa473680062a55ac96a0d6`. All

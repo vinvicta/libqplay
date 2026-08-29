@@ -318,11 +318,18 @@ dynamic `FUNC` rows now land on exact IDA function starts. The joined inventory
 contains 6,770 named dynamic rows, 5,782 matched function rows, and 988 rows
 that are data, undefined imports, or other non-function entries. The twelve
 new names are retained obfuscated target names, not invented 1.8 source names.
+The complete address-and-item audit accounts for all 6,600 defined named rows:
+5,782 exact functions, 482 data items, and 336 other non-code items. It also
+identifies 170 undefined imports with no address in the library, 4,541
+addresses where a reviewed `v18_` alias is preferred, and seven linker
+boundary aliases that share two data locations.
 The boundary, application, name-coverage, and joined-inventory records are
 `artifacts/spectron_dynamic_symbol_boundaries_20260828.json`,
 `artifacts/spectron_dynamic_function_application_20260828.json`,
 `artifacts/spectron_name_coverage_audit_v320_20260828.json`, and
-`artifacts/spectron_symbol_translation_inventory_20260828.json`.
+`artifacts/spectron_symbol_translation_inventory_20260828.json`. The complete
+address-and-item record is
+`artifacts/spectron_dynamic_symbol_coverage_audit_20260828.json`.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -6327,6 +6334,8 @@ proves the local native TLS path, not a current live certificate or service.
   labels for one-instruction null return stubs.
   `tools/ida_audit_dynamic_symbol_boundaries.py` compares retained dynamic
   function symbols with IDA's exact function starts.
+  `tools/ida_audit_spectron_dynamic_symbol_coverage.py` accounts for every
+  named dynamic function, object, linker boundary, and undefined import.
   `tools/ida_materialize_spectron_dynamic_functions.py` applies reviewed ELF
   boundaries to a fresh database copy and preserves the exact target symbol
   names.

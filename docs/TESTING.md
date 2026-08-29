@@ -271,6 +271,24 @@ python3 tools/generate_spectron_symbol_translation_inventory.py \
   --output /tmp/spectron_symbol_translation_inventory.json
 ```
 
+To account for every named dynamic row, including data and imports, reopen a
+v320 copy and run:
+
+```bash
+env IDADIR=/path/to/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_DYNAMIC_SYMBOL_COVERAGE_OUTPUT=/tmp/spectron-dynamic-symbol-coverage.json \
+  /path/to/idalib-python /path/to/idalib/examples/idacli.py \
+  -f /path/to/spectron_libqplay_translated_v320_dynamic_functions.i64 \
+  -s tools/ida_audit_spectron_dynamic_symbol_coverage.py
+```
+
+The expected complete result has 6,770 named rows and 6,600 defined rows.
+Those defined rows resolve to 5,782 functions, 482 data items, and 336 other
+non-code items. The 170 undefined imports have no target address and are
+reported separately. The saved record is
+`artifacts/spectron_dynamic_symbol_coverage_audit_20260828.json`.
+
 The dynamic table has 6,770 named rows, but only 5,782 section-defined
 function rows. The other named rows must remain classified as data, undefined
 imports, or other non-function entries. The final checkpoint generator and

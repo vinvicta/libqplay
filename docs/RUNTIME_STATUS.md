@@ -2948,6 +2948,13 @@ data, undefined imports, or other non-function entries. This closes a real
 boundary gap without claiming that the stripped source-name table has been
 recovered.
 
+The complete address-and-item audit accounts for all 6,600 defined named
+symbols: 5,782 exact functions, 482 data items, and 336 other non-code items.
+It records 1,901 exact retained names, 4,541 reviewed `v18_` aliases, 151
+other retained target aliases, seven linker-boundary aliases, and 170
+undefined imports with no library address. The full record is
+`artifacts/spectron_dynamic_symbol_coverage_audit_20260828.json`.
+
 The v320 database is
 `analysis/spectron_libqplay_translated_v320_dynamic_functions.i64` with
 SHA-256

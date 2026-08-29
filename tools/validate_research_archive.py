@@ -800,6 +800,9 @@ def main():
     spectron_dynamic_boundaries = load_json(
         "artifacts/spectron_dynamic_symbol_boundaries_20260828.json"
     )
+    spectron_dynamic_symbol_coverage = load_json(
+        "artifacts/spectron_dynamic_symbol_coverage_audit_20260828.json"
+    )
     spectron_symbol_inventory_v320 = load_json(
         "artifacts/spectron_symbol_translation_inventory_20260828.json"
     )
@@ -17674,6 +17677,63 @@ def main():
         5782,
     )
     check(
+        "Spectron v320 dynamic symbol coverage artifact",
+        spectron_dynamic_symbol_coverage["artifact"],
+        "spectron_dynamic_symbol_coverage_audit_20260828",
+    )
+    check(
+        "Spectron v320 dynamic symbol coverage network",
+        spectron_dynamic_symbol_coverage["network_contacted"],
+        False,
+    )
+    check(
+        "Spectron v320 dynamic symbol coverage input hash",
+        spectron_dynamic_symbol_coverage["input_sha256"],
+        "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    )
+    dynamic_symbol_coverage_summary = spectron_dynamic_symbol_coverage["summary"]
+    check(
+        "Spectron v320 dynamic symbol coverage named rows",
+        dynamic_symbol_coverage_summary["named_dynamic_symbol_count"],
+        6770,
+    )
+    check(
+        "Spectron v320 dynamic symbol coverage defined rows",
+        dynamic_symbol_coverage_summary["defined_named_symbol_count"],
+        6600,
+    )
+    check(
+        "Spectron v320 dynamic symbol coverage locations",
+        dynamic_symbol_coverage_summary["location_counts"],
+        {
+            "ida_data_item": 482,
+            "ida_function_exact": 5782,
+            "ida_noncode_item": 336,
+            "undefined_or_zero_value": 170,
+        },
+    )
+    check(
+        "Spectron v320 dynamic symbol coverage name matches",
+        dynamic_symbol_coverage_summary["name_match_counts"],
+        {
+            "item_name_match": 1901,
+            "item_name_mismatch": 4869,
+            "value_name_match": 1901,
+            "value_name_mismatch": 4869,
+        },
+    )
+    check(
+        "Spectron v320 dynamic symbol coverage statuses",
+        dynamic_symbol_coverage_summary["status_counts"],
+        {
+            "exact_retained_dynamic_name": 1901,
+            "linker_boundary_alias_mismatch": 7,
+            "other_retained_target_name": 151,
+            "source_backed_v18_alias": 4541,
+            "undefined_no_target_address": 170,
+        },
+    )
+    check(
         "Spectron v320 name audit input hash",
         spectron_name_coverage_v320["input_sha256"],
         "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
@@ -18186,6 +18246,7 @@ def main():
         spectron_name_coverage_v320,
         spectron_dynamic_function_application,
         spectron_dynamic_boundaries,
+        spectron_dynamic_symbol_coverage,
         spectron_symbol_inventory_v320,
         spectron_checkpoint_v320,
     ):
