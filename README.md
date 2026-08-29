@@ -263,6 +263,13 @@ CJK hint-application callback. All thirteen reviewed rows match normalized
 ARM64 shape. Eleven match the complete recorded feature set, while two differ
 only in register-detail allocation. The target now has 392 remaining default
 `sub_` names.
+The v313 revision translates three residual helpers from the bundled bzip2
+implementation. They cover the default allocation and cleanup callbacks and
+the streaming compression state machine, with the source and target addresses
+separated by `0xb470`. All three match normalized ARM64 shape. Two match the
+complete recorded feature set, while the state-machine helper differs only in
+register-detail allocation. The target now has 389 remaining default `sub_`
+names.
 The saved databases are
 `analysis/spectron_libqplay_translated_v263_corrected.i64`,
 `analysis/spectron_libqplay_translated_v264_corrected.i64`,
@@ -357,6 +364,8 @@ The current v311 database is kept locally as
 `analysis/spectron_libqplay_translated_v311_autofit_followup.i64`.
 The current v312 database is kept locally as
 `analysis/spectron_libqplay_translated_v312_autofit_metrics.i64`.
+The current v313 database is kept locally as
+`analysis/spectron_libqplay_translated_v313_bzip2.i64`.
 
 The 22 bridge labels include deep-link and push-notification accessors,
 Android version helpers, Google Play and Firebase calls, notification

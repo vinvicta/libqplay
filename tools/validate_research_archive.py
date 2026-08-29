@@ -743,6 +743,12 @@ def main():
     spectron_checkpoint_v312 = load_json(
         "artifacts/spectron_translation_checkpoint_20260828_v312.json"
     )
+    spectron_bzip2_helpers_anchors = load_json(
+        "artifacts/spectron_bzip2_helpers_manual_translation_anchors_20260828.json"
+    )
+    spectron_checkpoint_v313 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260828_v313.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -16383,6 +16389,172 @@ def main():
         392,
     )
     check(
+        "Spectron bzip2 helpers artifact",
+        spectron_bzip2_helpers_anchors["artifact"],
+        "spectron_bzip2_helpers_manual_translation_anchors_20260828",
+    )
+    check(
+        "Spectron bzip2 helpers network",
+        spectron_bzip2_helpers_anchors["network_contacted"],
+        False,
+    )
+    bzip2_summary = spectron_bzip2_helpers_anchors["summary"]
+    check("Spectron bzip2 helpers anchor count", bzip2_summary["anchor_count"], 3)
+    check(
+        "Spectron bzip2 helpers target set size",
+        bzip2_summary["unique_target_count"],
+        3,
+    )
+    check(
+        "Spectron bzip2 helpers high-confidence count",
+        bzip2_summary["high_confidence_count"],
+        3,
+    )
+    check(
+        "Spectron bzip2 helpers normalized count",
+        bzip2_summary["normalized_shape_exact_count"],
+        3,
+    )
+    check(
+        "Spectron bzip2 helpers full metric count",
+        bzip2_summary["full_metric_exact_count"],
+        2,
+    )
+    check(
+        "Spectron bzip2 helpers register-detail count",
+        bzip2_summary["register_detail_only_count"],
+        1,
+    )
+    check(
+        "Spectron bzip2 helpers source default count",
+        bzip2_summary["source_default_name_count"],
+        3,
+    )
+    check(
+        "Spectron bzip2 helpers target default count",
+        bzip2_summary["target_default_name_count"],
+        3,
+    )
+    bzip2_rows = {
+        row["spectron_ea"]: row
+        for row in spectron_bzip2_helpers_anchors["anchors"]
+    }
+    bzip2_expected = {
+        "0x2807c0": (
+            "0x273350",
+            "v18_bzip2_default_bzfree",
+            "default_bzfree",
+            [],
+            True,
+        ),
+        "0x2807d0": (
+            "0x273360",
+            "v18_bzip2_default_bzalloc",
+            "default_bzalloc",
+            [],
+            True,
+        ),
+        "0x2807dc": (
+            "0x27336c",
+            "v18_bzip2_handle_compress",
+            "handle_compress",
+            ["register_detail_hash"],
+            False,
+        ),
+    }
+    check(
+        "Spectron bzip2 helpers target set",
+        set(bzip2_rows),
+        set(bzip2_expected),
+    )
+    for target_ea, (
+        source_ea,
+        expected_name,
+        expected_source_name,
+        expected_differences,
+        expected_full_match,
+    ) in bzip2_expected.items():
+        row = bzip2_rows[target_ea]
+        check(
+            "Spectron bzip2 helpers source " + target_ea,
+            row["original_ea"],
+            source_ea,
+        )
+        check(
+            "Spectron bzip2 helpers name " + target_ea,
+            row["proposed_name"],
+            expected_name,
+        )
+        check(
+            "Spectron bzip2 helpers source name " + target_ea,
+            row["source_name"],
+            expected_source_name,
+        )
+        check(
+            "Spectron bzip2 helpers metrics " + target_ea,
+            row["metric_differences"],
+            expected_differences,
+        )
+        check(
+            "Spectron bzip2 helpers normalized " + target_ea,
+            row["normalized_shape_equal"],
+            True,
+        )
+        check(
+            "Spectron bzip2 helpers full match " + target_ea,
+            row["full_metric_equal"],
+            expected_full_match,
+        )
+    check(
+        "Spectron bzip2 helpers verified name count",
+        spectron_checkpoint_v313["bzip2_helpers_anchors"][
+            "verified_name_count"
+        ],
+        3,
+    )
+    check(
+        "Spectron bzip2 helpers reopen failures",
+        spectron_checkpoint_v313["bzip2_helpers_anchors"][
+            "reopen_failure_count"
+        ],
+        0,
+    )
+    check(
+        "Spectron v313 checkpoint artifact",
+        spectron_checkpoint_v313["artifact"],
+        "spectron_translation_checkpoint_20260828_v313",
+    )
+    check(
+        "Spectron v313 checkpoint parent",
+        spectron_checkpoint_v313["parent_checkpoint"]["artifact"],
+        "spectron_translation_checkpoint_20260828_v312",
+    )
+    check(
+        "Spectron v313 checkpoint parent path",
+        spectron_checkpoint_v313["parent_checkpoint"]["path"],
+        "artifacts/spectron_translation_checkpoint_20260828_v312.json",
+    )
+    check(
+        "Spectron v313 checkpoint database hash",
+        spectron_checkpoint_v313["database"]["sha256"],
+        "45f965884bffdc73e981d88d2965fac94f453640a29aa4d44acc7aca6b9e46e5",
+    )
+    check(
+        "Spectron v313 checkpoint database close-reopen",
+        spectron_checkpoint_v313["database"]["close_reopen_verified"],
+        True,
+    )
+    check(
+        "Spectron v313 checkpoint function count",
+        spectron_checkpoint_v313["database"]["function_count"],
+        11695,
+    )
+    check(
+        "Spectron v313 checkpoint default sub count",
+        spectron_checkpoint_v313["database"]["default_sub_function_count"],
+        389,
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -16764,6 +16936,8 @@ def main():
         spectron_checkpoint_v311,
         spectron_freetype_autofit_metrics_anchors,
         spectron_checkpoint_v312,
+        spectron_bzip2_helpers_anchors,
+        spectron_checkpoint_v313,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 
