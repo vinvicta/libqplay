@@ -425,6 +425,45 @@ records are
 `artifacts/spectron_semantic_translation_v326.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v326.json`.
 
+### v338 THTMLPage lifecycle residual aliases
+
+The v338 pass adds seven semantic aliases to the private Spectron IDA
+database. The raw target identifiers remain visible so each translated name
+can be traced back to the stripped build.
+
+| Spectron address | Raw target symbol | Applied alias | Recovered role |
+| ---: | --- | --- | --- |
+| `0x1d5f6c` | `_ZN10AS80gaE4zW10g3mRgak0vNEv` | `v18_THTMLPage_initTabStops_void` | tab-stop storage initialization |
+| `0x1d606c` | `_ZN10AS80gaE4zW10EGlRgaCRuNEv` | `v18_THTMLPage_initLineTags_void` | line-tag storage initialization |
+| `0x1d6104` | `_ZN10AS80gaE4zW10OZOQgaFv2MEv` | `v18_THTMLPage_freeLineTags_void` | linked line-tag cleanup |
+| `0x1d614c` | `_ZN10AS80gaE4zW10XBgRgaCAqNEv` | `v18_THTMLPage_initStyles_void` | style storage initialization |
+| `0x1d62f0` | `_ZN10AS80gaE4zW10uWkRgaPduNEv` | `v18_THTMLPage_initSubPages_void` | sub-page storage initialization |
+| `0x1d73c0` | `_ZN10AS80gaE4zW10EmhRgaNdrNEv` | `v18_THTMLPage_initLists_void` | list-stack initialization |
+| `0x1d7724` | `_ZN10AS80gaE4zW10meOQgaMS1MEv` | `v18_THTMLPage_freeSubPages_void` | linked sub-page cleanup |
+
+The source counterparts are `0x1d1318`, `0x1d1418`, `0x1d14b0`, `0x1d14f8`,
+`0x1d169c`, `0x1d276c`, and `0x1d2ad0`. The initializer methods clear the
+same page fields in both builds. The cleanup methods walk member indices 43
+and 44, respectively, then reset their list heads. Direct pseudocode and
+exact normalized feature records support all seven rows.
+
+The v338 records are
+`artifacts/spectron_html_page_lifecycle_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_html_page_lifecycle_manual_translation_application_20260829.json`,
+`artifacts/spectron_html_page_lifecycle_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v338_html_page_lifecycle.json`,
+`artifacts/spectron_name_coverage_audit_v338.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v338.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v338.json`,
+`artifacts/spectron_semantic_translation_v338.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v338.json`.
+
+The v338 database has 6,417 translated `v18_` aliases, 419 target-only
+descriptive labels, 812 retained target names, seven JNI exports, 4,052
+other IDA or PLT names, 4,769 source-backed dynamic rows, and 1,700 exact
+retained dynamic names. Its hash is
+`26584982aa976361088e7978b162d12e1be4bf2bf9991bf9484c56e92bba8c2d`.
+
 ### v337 libjpeg helper residual aliases
 
 The v337 pass adds twelve semantic aliases to the private Spectron IDA

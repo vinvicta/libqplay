@@ -261,6 +261,62 @@ This pass changed only the private IDA copy and archive. It did not patch the
 APK, rerun the loopback client, alter TLS behavior, contact a game server, or
 test a live endpoint.
 
+## 2026-08-29: THTMLPage lifecycle residuals, v338
+
+After the libjpeg helper pass, the next clean raw-symbol group was the
+seven-entry `AS80gaE4zW` lifecycle sequence. The source `THTMLPage` and target
+class preserve the same member offsets, cleanup loops, exact normalized
+metrics, and local method order.
+
+| 1.8 source | Spectron target | Applied alias | Direct behavior |
+| --- | ---: | --- | --- |
+| `0x1d1318` `THTMLPage_initTabStops_void` | `0x1d5f6c` `_ZN10AS80gaE4zW10g3mRgak0vNEv` | `v18_THTMLPage_initTabStops_void` | clear members `+152` and `+160` |
+| `0x1d1418` `THTMLPage_initLineTags_void` | `0x1d606c` `_ZN10AS80gaE4zW10EGlRgaCRuNEv` | `v18_THTMLPage_initLineTags_void` | clear member `+344` |
+| `0x1d14b0` `THTMLPage_freeLineTags_void` | `0x1d6104` `_ZN10AS80gaE4zW10OZOQgaFv2MEv` | `v18_THTMLPage_freeLineTags_void` | walk index 43, clear and delete nodes |
+| `0x1d14f8` `THTMLPage_initStyles_void` | `0x1d614c` `_ZN10AS80gaE4zW10XBgRgaCAqNEv` | `v18_THTMLPage_initStyles_void` | clear members `+200` and `+208` |
+| `0x1d169c` `THTMLPage_initSubPages_void` | `0x1d62f0` `_ZN10AS80gaE4zW10uWkRgaPduNEv` | `v18_THTMLPage_initSubPages_void` | clear member `+352` |
+| `0x1d276c` `THTMLPage_initLists_void` | `0x1d73c0` `_ZN10AS80gaE4zW10EmhRgaNdrNEv` | `v18_THTMLPage_initLists_void` | clear members `+224` and `+232` |
+| `0x1d2ad0` `THTMLPage_freeSubPages_void` | `0x1d7724` `_ZN10AS80gaE4zW10meOQgaMS1MEv` | `v18_THTMLPage_freeSubPages_void` | walk index 44, destroy and delete nodes |
+
+The five initializer bodies clear the same page fields and return the
+receiver. `freeLineTags` clears and deletes each linked line-tag node before
+resetting the head. `freeSubPages` performs the corresponding destroy and
+delete sequence for linked sub-pages. Direct compact Hex-Rays pseudocode was
+captured for every row, and all seven pairs have exact normalized ARM64
+feature records. The target methods are interleaved with already translated
+entries in the same class-local order as the source.
+
+The aliases were applied to a fresh v337-derived database and verified after
+reopening. The v338 database has 11,707 functions and zero audited default
+names. Its name audit reports 6,417 translated aliases, 812 retained target
+names, 419 target-only descriptive labels, seven JNI exports, and 4,052 other
+IDA or PLT names. Dynamic coverage reports 4,769 source-backed aliases and
+1,700 exact retained dynamic names. All 5,782 defined dynamic function
+symbols still resolve to exact IDA function starts.
+
+The v338 database is
+`analysis/spectron_libqplay_translated_v338_html_page_lifecycle.i64` with
+SHA-256
+`26584982aa976361088e7978b162d12e1be4bf2bf9991bf9484c56e92bba8c2d`.
+The machine-readable records are
+`artifacts/spectron_html_page_lifecycle_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_html_page_lifecycle_manual_translation_application_20260829.json`,
+`artifacts/spectron_html_page_lifecycle_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v338_html_page_lifecycle.json`,
+`artifacts/spectron_name_coverage_audit_v338.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v338.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v338.json`,
+`artifacts/spectron_semantic_translation_v338.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v338.json`.
+The reusable scripts are
+`tools/generate_spectron_html_page_lifecycle_anchors.py`,
+`tools/carry_forward_spectron_semantic_translation_v338.py`, and
+`tools/generate_spectron_translation_checkpoint_v338.py`.
+
+This pass changed only the private IDA database and research archive. It did
+not patch the APK, rerun the loopback client, alter TLS behavior, contact a
+game server, or test a live endpoint.
+
 ## 2026-08-29: libjpeg helper residuals, v337
 
 After the Format2 block, the next clean raw-symbol matches were two small

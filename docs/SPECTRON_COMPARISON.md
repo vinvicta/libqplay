@@ -319,6 +319,47 @@ The v323 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v323_20260829.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v323.json`.
 
+## v338 THTMLPage lifecycle residual comparison
+
+The v338 pass compares seven raw target methods in the obfuscated
+`AS80gaE4zW` HTML-page class. Every row has direct source and target compact
+Hex-Rays pseudocode and an exact normalized ARM64 feature match.
+
+| Source role | Spectron address | Applied alias | Match class |
+| --- | ---: | --- | --- |
+| `THTMLPage_initTabStops_void` | `0x1d5f6c` | `v18_THTMLPage_initTabStops_void` | exact member reset |
+| `THTMLPage_initLineTags_void` | `0x1d606c` | `v18_THTMLPage_initLineTags_void` | exact member reset |
+| `THTMLPage_freeLineTags_void` | `0x1d6104` | `v18_THTMLPage_freeLineTags_void` | exact linked-node cleanup |
+| `THTMLPage_initStyles_void` | `0x1d614c` | `v18_THTMLPage_initStyles_void` | exact member reset |
+| `THTMLPage_initSubPages_void` | `0x1d62f0` | `v18_THTMLPage_initSubPages_void` | exact member reset |
+| `THTMLPage_initLists_void` | `0x1d73c0` | `v18_THTMLPage_initLists_void` | exact member reset |
+| `THTMLPage_freeSubPages_void` | `0x1d7724` | `v18_THTMLPage_freeSubPages_void` | exact linked-node cleanup |
+
+The initializer rows preserve the source field offsets. The two cleanup rows
+preserve the linked-list traversal, node destruction, deletion, and head
+reset. The target method order matches the source class sequence, so these are
+not name-only or address-only assignments.
+
+All seven aliases were applied and verified after reopening the v338
+database. The database has 11,707 functions, zero audited default names,
+6,417 translated aliases, 4,769 source-backed dynamic rows, 1,700 exact
+retained dynamic names, and 5,782 exact dynamic function starts. Its SHA-256
+is
+`26584982aa976361088e7978b162d12e1be4bf2bf9991bf9484c56e92bba8c2d`.
+The complete comparison records are
+`artifacts/spectron_html_page_lifecycle_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_html_page_lifecycle_manual_translation_application_20260829.json`,
+`artifacts/spectron_html_page_lifecycle_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v338_html_page_lifecycle.json`,
+`artifacts/spectron_name_coverage_audit_v338.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v338.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v338.json`,
+`artifacts/spectron_semantic_translation_v338.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v338.json`.
+
+This comparison is static evidence. It does not change the runtime diagnosis,
+patch the APK, or contact a live endpoint.
+
 ## v337 libjpeg helper residual comparison
 
 The v337 pass compares twelve raw target symbols in two libjpeg helper

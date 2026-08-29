@@ -800,6 +800,53 @@ generators are
 `tools/generate_spectron_format_parameters_property_anchors.py` and
 `tools/generate_spectron_translation_checkpoint_v326.py`.
 
+### v338 THTMLPage lifecycle residual aliases
+
+The v338 pass starts from the verified v337 database and translates seven raw
+entries in the obfuscated `AS80gaE4zW` HTML-page class. Direct compact
+Hex-Rays pseudocode was captured for every source and target row, and all
+seven rows are exact normalized ARM64 matches.
+
+| 1.8 source | Spectron target | Applied alias | Evidence role |
+| ---: | --- | --- | --- |
+| `0x1d1318` `THTMLPage_initTabStops_void` | `0x1d5f6c` `_ZN10AS80gaE4zW10g3mRgak0vNEv` | `v18_THTMLPage_initTabStops_void` | tab-stop storage initialization |
+| `0x1d1418` `THTMLPage_initLineTags_void` | `0x1d606c` `_ZN10AS80gaE4zW10EGlRgaCRuNEv` | `v18_THTMLPage_initLineTags_void` | line-tag storage initialization |
+| `0x1d14b0` `THTMLPage_freeLineTags_void` | `0x1d6104` `_ZN10AS80gaE4zW10OZOQgaFv2MEv` | `v18_THTMLPage_freeLineTags_void` | linked line-tag cleanup |
+| `0x1d14f8` `THTMLPage_initStyles_void` | `0x1d614c` `_ZN10AS80gaE4zW10XBgRgaCAqNEv` | `v18_THTMLPage_initStyles_void` | style storage initialization |
+| `0x1d169c` `THTMLPage_initSubPages_void` | `0x1d62f0` `_ZN10AS80gaE4zW10uWkRgaPduNEv` | `v18_THTMLPage_initSubPages_void` | sub-page storage initialization |
+| `0x1d276c` `THTMLPage_initLists_void` | `0x1d73c0` `_ZN10AS80gaE4zW10EmhRgaNdrNEv` | `v18_THTMLPage_initLists_void` | list-stack initialization |
+| `0x1d2ad0` `THTMLPage_freeSubPages_void` | `0x1d7724` `_ZN10AS80gaE4zW10meOQgaMS1MEv` | `v18_THTMLPage_freeSubPages_void` | linked sub-page cleanup |
+
+The five initializer rows clear the same `THTMLPage` member offsets and return
+the receiver. The line-tag cleanup walks member index 43, clears and deletes
+each node, and resets the head. The sub-page cleanup walks member index 44,
+destroys and deletes each node, and resets that head. The target entries are
+interleaved with already translated methods in exactly the source class order.
+
+The v338 database contains 11,707 functions, zero audited default names,
+6,417 translated aliases, 419 target-only descriptive labels, 4,769
+source-backed dynamic rows, and 1,700 exact retained dynamic names. All 5,782
+defined dynamic symbols still resolve to exact IDA function starts. The saved
+database is
+`analysis/spectron_libqplay_translated_v338_html_page_lifecycle.i64` with
+SHA-256
+`26584982aa976361088e7978b162d12e1be4bf2bf9991bf9484c56e92bba8c2d`.
+
+The machine-readable records are
+`artifacts/spectron_html_page_lifecycle_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_html_page_lifecycle_manual_translation_application_20260829.json`,
+`artifacts/spectron_html_page_lifecycle_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v338_html_page_lifecycle.json`,
+`artifacts/spectron_name_coverage_audit_v338.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v338.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v338.json`,
+`artifacts/spectron_semantic_translation_v338.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v338.json`.
+
+This is a static IDA translation checkpoint. It did not patch the APK, rerun
+the loopback client, change TLS behavior, contact a game server, or test a
+live endpoint.
+
 ### v337 libjpeg helper residual aliases
 
 The v337 pass starts from the verified v336 database and translates twelve raw

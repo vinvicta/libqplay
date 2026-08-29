@@ -3035,6 +3035,37 @@ are listed in
 This pass changed only the private IDA copy and archive. It did not patch the
 APK, alter TLS behavior, contact a game server, or test a live endpoint.
 
+## Spectron 2.2 v338 THTMLPage lifecycle residuals
+
+The v338 revision is a static IDA checkpoint for seven raw lifecycle methods
+in the obfuscated `AS80gaE4zW` class. The source and target entries have direct
+compact pseudocode, exact normalized ARM64 metrics, and matching class-local
+order. The aliases cover tab stops, line tags, styles, sub-pages, lists, and
+the two linked-list cleanup routines.
+
+The aliases were applied to a fresh v337-derived database and verified after
+reopening. The v338 database contains 11,707 functions, zero audited default
+names, 6,417 translated aliases, 4,769 source-backed dynamic rows, and 1,700
+exact retained dynamic names. All 5,782 defined dynamic function symbols still
+resolve to exact IDA function starts.
+
+Its SHA-256 is
+`26584982aa976361088e7978b162d12e1be4bf2bf9991bf9484c56e92bba8c2d`.
+The records are
+`artifacts/spectron_html_page_lifecycle_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_html_page_lifecycle_manual_translation_application_20260829.json`,
+`artifacts/spectron_html_page_lifecycle_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v338_html_page_lifecycle.json`,
+`artifacts/spectron_name_coverage_audit_v338.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v338.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v338.json`,
+`artifacts/spectron_semantic_translation_v338.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v338.json`.
+
+This checkpoint did not change the verified loopback package, connector TLS
+result, or local protocol responder. No live endpoint was contacted, and no
+new runtime replay was performed for v338.
+
 ## Spectron 2.2 v337 libjpeg helper residuals
 
 The v337 revision is a static IDA checkpoint for twelve raw libjpeg helper

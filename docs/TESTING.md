@@ -937,6 +937,77 @@ The expected v326 database hash is
 checkpoint is static evidence only. It does not change the loopback runtime
 result, TLS diagnosis, or live-service boundary.
 
+### v338 THTMLPage lifecycle residual translation
+
+The v338 pass is static IDA work only. It starts from the verified v337
+database and reviews source methods at `0x1d1318`, `0x1d1418`, `0x1d14b0`,
+`0x1d14f8`, `0x1d169c`, `0x1d276c`, and `0x1d2ad0` against target methods at
+`0x1d5f6c`, `0x1d606c`, `0x1d6104`, `0x1d614c`, `0x1d62f0`, `0x1d73c0`, and
+`0x1d7724`. It does not require an APK, emulator, server, or live endpoint.
+
+Capture compact pseudocode with `tools/ida_dump_function_evidence.py`, using
+the same IDALIB environment shown in the v337 section. The source request is
+`0x1d1318,0x1d1418,0x1d14b0,0x1d14f8,0x1d169c,0x1d276c,0x1d2ad0`. The target
+request is
+`0x1d5f6c,0x1d606c,0x1d6104,0x1d614c,0x1d62f0,0x1d73c0,0x1d7724`.
+
+Generate the reviewed seven-row artifact:
+
+```bash
+python3 tools/generate_spectron_html_page_lifecycle_anchors.py \\
+  --original-features /tmp/original_features_v3_current.json \\
+  --spectron-features artifacts/spectron_features_v337_libjpeg_helper_residual.json \\
+  --semantic-map artifacts/spectron_semantic_translation_v337.json \\
+  --source-evidence /tmp/graal-source-html-page-life.json \\
+  --target-evidence /tmp/graal-target-html-page-life.json \\
+  --original-binary-sha256 9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8 \\
+  --spectron-binary-sha256 f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219 \\
+  --output artifacts/spectron_html_page_lifecycle_manual_translation_anchors_20260829.json
+```
+
+Apply the artifact to a fresh copy of
+`spectron_libqplay_translated_v337_libjpeg_helper_residual.i64` and reopen
+verify the resulting
+`spectron_libqplay_translated_v338_html_page_lifecycle.i64` with the manual
+anchor scripts. The application report must contain seven resolved functions,
+seven renames, seven evidence comments, zero failures, and a successful save.
+The reopen report must contain seven verified names in an 11,707-function
+database.
+
+Carry the semantic map forward and build the strict checkpoint:
+
+```bash
+python3 tools/carry_forward_spectron_semantic_translation_v338.py \\
+  --parent-map artifacts/spectron_semantic_translation_v337.json \\
+  --target-features artifacts/spectron_features_v338_html_page_lifecycle.json \\
+  --anchor-artifact artifacts/spectron_html_page_lifecycle_manual_translation_anchors_20260829.json \\
+  --output artifacts/spectron_semantic_translation_v338.json
+
+python3 tools/generate_spectron_translation_checkpoint_v338.py \\
+  --parent-checkpoint artifacts/spectron_translation_checkpoint_20260829_v337.json \\
+  --database /path/to/spectron_libqplay_translated_v338_html_page_lifecycle.i64 \\
+  --anchor-artifact artifacts/spectron_html_page_lifecycle_manual_translation_anchors_20260829.json \\
+  --application-report artifacts/spectron_html_page_lifecycle_manual_translation_application_20260829.json \\
+  --verification-report artifacts/spectron_html_page_lifecycle_manual_translation_verification_20260829.json \\
+  --name-audit artifacts/spectron_name_coverage_audit_v338.json \\
+  --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v338.json \\
+  --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v338.json \\
+  --semantic-map artifacts/spectron_semantic_translation_v338.json \\
+  --feature-export artifacts/spectron_features_v338_html_page_lifecycle.json \\
+  --output artifacts/spectron_translation_checkpoint_20260829_v338.json
+
+python3 tools/validate_research_archive.py
+```
+
+The expected v338 database hash is
+`26584982aa976361088e7978b162d12e1be4bf2bf9991bf9484c56e92bba8c2d`.
+Expected totals are 6,417 translated aliases, 419 target-only descriptive
+labels, 812 retained target names, seven JNI exports, 4,052 other IDA or PLT
+names, 4,769 source-backed dynamic symbols, 1,700 exact retained dynamic
+symbols, and 5,782 exact dynamic function starts. The anchor summary is seven
+high-confidence rows, seven exact metric matches, seven pseudocode-backed
+rows, and no semantic-map promotions.
+
 ### v337 libjpeg helper residual translation
 
 The v337 pass is static IDA work only. It starts from the verified v336
