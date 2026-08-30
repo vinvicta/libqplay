@@ -3920,3 +3920,103 @@ The expected v350 database SHA-256 is
 The v350 layout artifact intentionally reports zero exact-shape rows. If a
 future exporter makes any of these five pairs exact, preserve this checkpoint
 and create a new revision rather than rewriting its historical evidence.
+
+## v351 hash-family residual pass
+
+The v351 pass is an offline source-to-target labeling pass. It does not alter
+the runtime APK, the local loopback responder, the TLS trust behavior, or the
+loading-branch repair. It adds eight reviewed links for hash-list and
+hash-string functions to the target IDA copy.
+
+Generate the anchor artifact from the v350 feature export and the direct
+target evidence captured during review:
+
+```bash
+python3 tools/generate_spectron_hash_residual_anchors_v351.py \
+  --original-features /tmp/original_features_v3_current.json \
+  --spectron-features artifacts/spectron_features_v350_sounds_layout.json \
+  --semantic-parent artifacts/spectron_semantic_translation_v350.json \
+  --target-evidence /tmp/graal_hash_target_v351_all.json \
+  --output artifacts/spectron_hash_residual_manual_translation_anchors_20260829.json
+```
+
+The expected artifact contains eight high-confidence rows, two exact-shape
+rows, six layout-aware rows, six promoted unmatched source rows, and two
+resolved ambiguous rows. Its address deltas are `+0xc4c`, `+0xc60`, `+0xc74`,
+`+0xca0`, `+0xce0`, `+0xd2c`, `+0xdb8`, and `+0xdf8`.
+
+Carry the semantic map forward with the reviewed anchors:
+
+```bash
+python3 tools/carry_forward_spectron_semantic_translation_v351.py \
+  --parent-map artifacts/spectron_semantic_translation_v350.json \
+  --target-features artifacts/spectron_features_v350_sounds_layout.json \
+  --anchor-artifact artifacts/spectron_hash_residual_manual_translation_anchors_20260829.json \
+  --output artifacts/spectron_semantic_translation_v351.json
+```
+
+The expected semantic totals are 3,745 mapped pairs, 3,685 high-confidence
+pairs, 1,001 remaining ambiguities, and 598 unmatched source functions.
+
+Apply the anchors to a fresh v350-derived copy. The command below preserves
+the input checkpoint and writes a separate v351 database and report:
+
+```bash
+cp /home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v350_sounds_layout.i64 \
+  /tmp/spectron_v351_hash_residual_apply_input.i64
+
+env IDADIR=/home/v/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_MANUAL_APPLY=1 \
+  SPECTRON_MANUAL_ANCHORS=/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_hash_residual_manual_translation_anchors_20260829.json \
+  SPECTRON_MANUAL_EXPECTED_ARTIFACT=spectron_hash_residual_manual_translation_anchors_20260829 \
+  SPECTRON_MANUAL_SAVE_PATH=/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v351_hash_residual.i64 \
+  SPECTRON_MANUAL_REPORT=/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_hash_residual_manual_translation_application_20260829.json \
+  /home/v/.codex/plugins/cache/mrexodia/ida-pro-mcp/0.1.0/.venv/bin/python \
+  /home/v/ida-pro-9.3/idalib/examples/idacli.py \
+  -f /tmp/spectron_v351_hash_residual_apply_input.i64 \
+  -s /home/v/Desktop/graal-decomp/libqplay/tools/ida_apply_spectron_manual_anchors.py
+```
+
+Reopen the saved IDB with the verifier before exporting post-apply audits:
+
+```bash
+env IDADIR=/home/v/ida-pro-9.3 \
+  IDAUSR=/tmp/graal-idalib-user \
+  SPECTRON_MANUAL_ANCHORS=/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_hash_residual_manual_translation_anchors_20260829.json \
+  SPECTRON_MANUAL_EXPECTED_ARTIFACT=spectron_hash_residual_manual_translation_anchors_20260829 \
+  SPECTRON_MANUAL_VERIFY_REPORT=/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_hash_residual_manual_translation_verification_20260829.json \
+  /home/v/.codex/plugins/cache/mrexodia/ida-pro-mcp/0.1.0/.venv/bin/python \
+  /home/v/ida-pro-9.3/idalib/examples/idacli.py \
+  -f /home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v351_hash_residual.i64 \
+  -s /home/v/Desktop/graal-decomp/libqplay/tools/ida_verify_spectron_manual_anchors.py
+```
+
+The application report must show eight resolved anchors, four renamed
+functions, eight comments, zero failures, and a saved database. The reopen
+report must show eight verified names, zero failures, and 11,707 functions.
+The v351 feature and audit exports must be generated from the reopened IDB,
+not from the pre-apply copy.
+
+Build the strict checkpoint and run the archive validator:
+
+```bash
+python3 tools/generate_spectron_translation_checkpoint_v351.py \
+  --parent-checkpoint artifacts/spectron_translation_checkpoint_20260829_v350.json \
+  --database /home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v351_hash_residual.i64 \
+  --label-artifact artifacts/spectron_hash_residual_manual_translation_anchors_20260829.json \
+  --application-report artifacts/spectron_hash_residual_manual_translation_application_20260829.json \
+  --verification-report artifacts/spectron_hash_residual_manual_translation_verification_20260829.json \
+  --name-audit artifacts/spectron_name_coverage_audit_v351.json \
+  --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v351.json \
+  --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v351.json \
+  --semantic-map artifacts/spectron_semantic_translation_v351.json \
+  --feature-export artifacts/spectron_features_v351_hash_residual.json \
+  --output artifacts/spectron_translation_checkpoint_20260829_v351.json
+
+python3 tools/validate_research_archive.py
+```
+
+The expected v351 database SHA-256 is
+`0fb0662dffea1f1f6223e0e52745a19505687a79cf47f207280ce098f61b87f0`.
+The validator must finish with `research archive validation: ok`.

@@ -18883,3 +18883,56 @@ The reusable generators are
 
 This was an offline IDA pass. It did not patch the APK, run an emulator,
 contact a game endpoint, or change the TLS or loading-state diagnosis.
+
+## 2026-08-29: v351 hash-family residuals
+
+The v351 pass brings the remaining reviewed hash-list helpers into the
+source-backed semantic map. This is useful because these methods sit below
+resource lookup, sound caching, script tables, and several GUI collections.
+Their target names are otherwise easy to confuse when the target has several
+short wrappers with the same size.
+
+The source methods at `0xeac64` and `0xeb844` are small string-key wrappers.
+Each calls the string hash helper and then the integer add or remove method.
+Target `0xeb904` and `0xec570` have the same complete normalized feature
+records, and their pseudocode makes the same two calls through
+`KKhLga4xoI::g4ouMaaIbp`. These are the two exact-shape rows in this pass.
+
+The source encoded add and remove methods at `0xeacd4` and `0xeb8c0` inline a
+three-byte XOR transform, ASCII lowercasing, and the DJB-style accumulation
+that starts at 5381. Target `0xeb934` and `0xec5a0` centralize this work in
+the exported `KKhLga4xoI::g4ouMaaIbp` helper and then call the integer
+overload. That explains the target's compact 48-byte bodies and is why the
+rows are semantic rather than exact-shape matches.
+
+The target lookup at `0xeba30` preserves the source key lookup despite the
+target's extra temporary C8TH assignment and cleanup. It hashes the key,
+selects a bucket, walks the collision chain, compares the stored key, and
+returns the matching object. The target value setter at `0xebfcc` has the
+same source behavior: it inserts a nonempty missing value if capacity allows,
+updates a changed value, and removes the object when the new value is empty.
+
+The list serializer at `0xecc58` keeps the source distinction between
+`name=value` for nonempty values and `name` for empty values. The comma
+serializer at `0xecde8` retains comma separators, the same two value branches,
+and a final target escape helper before appending each element. The target
+uses `Zb7cUaSFEU` for iteration and C8TH temporaries, which accounts for the
+larger bodies without changing the visible behavior.
+
+The v351 artifact promotes two ambiguous and six unmatched rows. It contains
+two exact-shape anchors and six layout-aware anchors. The semantic map now
+reports 3,745 mapped pairs, 3,685 high-confidence pairs, 1,001 remaining
+ambiguities, and 598 unmatched source functions. The target IDA copy contains
+11,707 functions and zero audited default names. Four target functions were
+renamed in this pass and all eight names survived the reopen verification.
+
+The v351 database is
+`analysis/spectron_libqplay_translated_v351_hash_residual.i64` with SHA-256
+`0fb0662dffea1f1f6223e0e52745a19505687a79cf47f207280ce098f61b87f0`.
+The machine-readable records are
+`artifacts/spectron_hash_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_semantic_translation_v351.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v351.json`.
+
+This was an offline IDA pass. It did not patch the APK, run an emulator,
+contact a game endpoint, or change the TLS or loading-state diagnosis.

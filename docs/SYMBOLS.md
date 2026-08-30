@@ -3930,3 +3930,63 @@ exact function starts. The full layout anchor record is
 with semantic carry-forward in
 `artifacts/spectron_semantic_translation_v350.json` and the strict checkpoint
 in `artifacts/spectron_translation_checkpoint_20260829_v350.json`.
+
+## v351 hash-family residual aliases
+
+The v351 pass records eight more source-backed aliases in the target semantic
+map. This is a small hash-container family rather than a claim that every
+remaining ambiguous row has been solved. The source side hashes ordinary and
+encoded `TString` values before delegating to integer hash-list operations.
+The target keeps that behavior behind `CanTfaz6bZ` and `C8THgaTQxF` wrappers,
+so six rows are explicitly marked layout-aware.
+
+| Target address | Alias | Source counterpart | Review status |
+| ---: | --- | --- | --- |
+| `0xeb904` | `v18_THashList_addObject_THashListObject_TString_const` | `THashList_addObject_THashListObject_TString_const` at `0xeac64` | exact wrapper match |
+| `0xeb934` | `v18_THashList_addObjectEncoded_THashListObject` | `THashList_addObjectEncoded_THashListObject` at `0xeacd4` | layout-aware encoded hash wrapper |
+| `0xec570` | `v18_THashList_removeObject_THashListObject_TString_const` | `THashList_removeObject_THashListObject_TString_const` at `0xeb844` | exact wrapper match |
+| `0xec5a0` | `v18_THashList_removeObjectEncoded_THashListObject` | `THashList_removeObjectEncoded_THashListObject` at `0xeb8c0` | layout-aware encoded hash wrapper |
+| `0xeba30` | `v18_THashStrings_getObject_TString_const` | `THashStrings_getObject_TString_const` at `0xeade4` | layout-aware lookup and comparison |
+| `0xebfcc` | `v18_THashStrings_setValue_TString_const_TString_const` | `THashStrings_setValue_TString_const_TString_const` at `0xeb358` | layout-aware insert, update, and remove |
+| `0xecc58` | `v18_THashStrings_listStrings_void` | `THashStrings_listStrings_void` at `0xebea0` | layout-aware iterator and serialization |
+| `0xecde8` | `v18_THashStrings_GetCommaText2_void` | `THashStrings_GetCommaText2_void` at `0xebff0` | layout-aware iterator and comma serialization |
+
+The two ordinary add/remove wrappers retain the source call shape. The two
+encoded variants add the target's obfuscated hash bridge. The lookup and
+mutation functions still perform bucket lookup, value comparison, insertion,
+update, and deletion in the same order as the source, but use the target
+string and iterator representations. The two serializers still emit either
+`name` or `name=value`, with the comma form escaping names before joining them.
+
+The v351 application resolved all eight anchors, added four new aliases, and
+added review comments to four aliases that were already present in the IDA
+copy. The reopened database verified all eight names and all 11,707 function
+boundaries. The name audit reports 6,445 translated aliases, 439 target-only
+descriptive labels, seven JNI exports, 4,052 other IDA or PLT names, and zero
+default names. Dynamic symbol coverage reports 1,652 exact retained dynamic
+names, 4,800 source-backed `v18_` aliases, 119 other retained target names,
+22 target-only descriptive labels, 169 undefined import PLT rows, seven
+linker-boundary rows, and one undefined dynamic row without a target.
+
+The anchor artifact is
+`artifacts/spectron_hash_residual_manual_translation_anchors_20260829.json`.
+The semantic map, feature export, audits, application report, verification
+report, and strict checkpoint are respectively:
+
+```text
+artifacts/spectron_semantic_translation_v351.json
+artifacts/spectron_features_v351_hash_residual.json
+artifacts/spectron_name_coverage_audit_v351.json
+artifacts/spectron_dynamic_symbol_boundaries_v351.json
+artifacts/spectron_dynamic_symbol_coverage_audit_v351.json
+artifacts/spectron_hash_residual_manual_translation_application_20260829.json
+artifacts/spectron_hash_residual_manual_translation_verification_20260829.json
+artifacts/spectron_translation_checkpoint_20260829_v351.json
+```
+
+The persisted target IDA database is
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v351_hash_residual.i64`.
+Its SHA-256 is
+`0fb0662dffea1f1f6223e0e52745a19505687a79cf47f207280ce098f61b87f0`.
+The checkpoint is tied to that exact file hash and should be treated as an
+immutable historical revision.

@@ -12229,6 +12229,62 @@ The records are
 This comparison was offline. It did not patch the APK, contact the game
 server, or change the connector or loading-state experiments.
 
+## v351 hash-family residual comparison
+
+The v351 pass resolves eight rows that automatic normalized matching left
+unresolved. The evidence combines direct source and target pseudocode with
+overload signatures and class-local order.
+
+| Source role | Source EA | Spectron EA | Target alias | Source shape | Target shape |
+| --- | ---: | ---: | --- | --- | --- |
+| string-key add wrapper | `0xeac64` | `0xeb904` | `v18_THashList_addObject_THashListObject_TString_const` | 48 / 12 / 2 / 2 / 1 | 48 / 12 / 2 / 2 / 1 |
+| encoded-key add wrapper | `0xeacd4` | `0xeb934` | `v18_THashList_addObjectEncoded_THashListObject` | 132 / 33 / 9 / 5 / 0 | 48 / 12 / 2 / 2 / 1 |
+| string-key remove wrapper | `0xeb844` | `0xec570` | `v18_THashList_removeObject_THashListObject_TString_const` | 48 / 12 / 2 / 2 / 1 | 48 / 12 / 2 / 2 / 1 |
+| encoded-key remove wrapper | `0xeb8c0` | `0xec5a0` | `v18_THashList_removeObjectEncoded_THashListObject` | 144 / 36 / 10 / 5 / 0 | 48 / 12 / 2 / 2 / 1 |
+| hash-string key lookup | `0xeade4` | `0xeba30` | `v18_THashStrings_getObject_TString_const` | 136 / 34 / 7 / 8 / 2 | 176 / 44 / 7 / 10 / 4 |
+| hash-string value update | `0xeb358` | `0xebfcc` | `v18_THashStrings_setValue_TString_const_TString_const` | 280 / 70 / 11 / 15 / 7 | 308 / 77 / 11 / 17 / 9 |
+| name/value list serialization | `0xebea0` | `0xecc58` | `v18_THashStrings_listStrings_void` | 272 / 68 / 7 / 19 / 14 | 336 / 84 / 7 / 23 / 18 |
+| comma-text serialization | `0xebff0` | `0xecde8` | `v18_THashStrings_GetCommaText2_void` | 360 / 90 / 9 / 23 / 17 | 440 / 110 / 9 / 29 / 23 |
+
+The five shape values in each row are size, instruction count, basic-block
+count, branch count, and call count. The normal add and remove wrappers are
+exact across the complete normalized feature record, so the target alias is
+strongly grounded even though its mangled method name differs. The encoded
+wrappers are shorter because target `g4ouMaaIbp` centralizes the encoded hash
+calculation.
+
+The four THashStrings rows keep the source behavior in direct pseudocode.
+Target `0xeba30` still performs bucket selection, collision-chain traversal,
+key comparison, and object return. Target `0xebfcc` keeps missing-value
+insertion, changed-value replacement, and empty-value removal. Targets
+`0xecc58` and `0xecde8` preserve name=value assembly, empty-value handling,
+comma joining, and escaping. The changed metrics come from explicit C8TH and
+iterator temporaries, not from a different role.
+
+The v351 artifact contains two exact-shape rows and six layout-aware rows. It
+promotes two parent ambiguities and six unmatched source functions. The
+semantic map now has 3,745 mapped pairs, 3,685 high-confidence pairs, 1,001
+remaining ambiguities, and 598 unmatched source functions. The v351 database
+has 11,707 functions, zero audited default names, and 5,782 exact dynamic
+function starts.
+
+The v351 database is
+`analysis/spectron_libqplay_translated_v351_hash_residual.i64` with SHA-256
+`0fb0662dffea1f1f6223e0e52745a19505687a79cf47f207280ce098f61b87f0`.
+The records are
+`artifacts/spectron_hash_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_hash_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_hash_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v351_hash_residual.json`,
+`artifacts/spectron_name_coverage_audit_v351.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v351.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v351.json`,
+`artifacts/spectron_semantic_translation_v351.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v351.json`.
+
+This comparison was offline. It did not patch the APK, contact the game
+server, or change the connector or loading-state experiments.
+
 ## v350 layout-aware sound comparison
 
 The v350 pass records the five larger audio counterparts that cannot be

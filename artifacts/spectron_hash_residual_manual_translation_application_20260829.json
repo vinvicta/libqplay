@@ -1,0 +1,98 @@
+{
+  "anchor_count": 8,
+  "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_hash_residual_manual_translation_anchors_20260829.json",
+  "apply": true,
+  "artifact": "spectron_manual_anchor_application",
+  "comments_added": 8,
+  "expected_artifact": "spectron_hash_residual_manual_translation_anchors_20260829",
+  "failure_count": 0,
+  "failures": [],
+  "plan": [
+    {
+      "actual_name_after": "v18_THashList_addObject_THashListObject_TString_const",
+      "actual_name_before": "_ZN10KKhLga4xoI9addObjectEP10J7zOgaf09KRK10C8THgaTQxF",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0xeac64",
+      "original_name": "THashList_addObject_THashListObject_TString_const",
+      "proposed_name": "v18_THashList_addObject_THashListObject_TString_const",
+      "spectron_ea": "0xeb904"
+    },
+    {
+      "actual_name_after": "v18_THashList_addObjectEncoded_THashListObject",
+      "actual_name_before": "_ZN10KKhLga4xoI9addObjectEP10J7zOgaf09KRK10CanTfaz6bZ",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0xeacd4",
+      "original_name": "THashList_addObjectEncoded_THashListObject",
+      "proposed_name": "v18_THashList_addObjectEncoded_THashListObject",
+      "spectron_ea": "0xeb934"
+    },
+    {
+      "actual_name_after": "v18_THashList_removeObject_THashListObject_TString_const",
+      "actual_name_before": "_ZN10KKhLga4xoI10g6yvgaX89uEP10J7zOgaf09KRK10C8THgaTQxF",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0xeb844",
+      "original_name": "THashList_removeObject_THashListObject_TString_const",
+      "proposed_name": "v18_THashList_removeObject_THashListObject_TString_const",
+      "spectron_ea": "0xec570"
+    },
+    {
+      "actual_name_after": "v18_THashList_removeObjectEncoded_THashListObject",
+      "actual_name_before": "_ZN10KKhLga4xoI10g6yvgaX89uEP10J7zOgaf09KRK10CanTfaz6bZ",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0xeb8c0",
+      "original_name": "THashList_removeObjectEncoded_THashListObject",
+      "proposed_name": "v18_THashList_removeObjectEncoded_THashListObject",
+      "spectron_ea": "0xec5a0"
+    },
+    {
+      "actual_name_after": "v18_THashStrings_getObject_TString_const",
+      "actual_name_before": "v18_THashStrings_getObject_TString_const",
+      "confidence": "high",
+      "name_action": "retain-existing-v18-alias-and-add-reviewed-comment",
+      "original_ea": "0xeade4",
+      "original_name": "THashStrings_getObject_TString_const",
+      "proposed_name": "v18_THashStrings_getObject_TString_const",
+      "spectron_ea": "0xeba30"
+    },
+    {
+      "actual_name_after": "v18_THashStrings_setValue_TString_const_TString_const",
+      "actual_name_before": "v18_THashStrings_setValue_TString_const_TString_const",
+      "confidence": "high",
+      "name_action": "retain-existing-v18-alias-and-add-reviewed-comment",
+      "original_ea": "0xeb358",
+      "original_name": "THashStrings_setValue_TString_const_TString_const",
+      "proposed_name": "v18_THashStrings_setValue_TString_const_TString_const",
+      "spectron_ea": "0xebfcc"
+    },
+    {
+      "actual_name_after": "v18_THashStrings_listStrings_void",
+      "actual_name_before": "v18_THashStrings_listStrings_void",
+      "confidence": "high",
+      "name_action": "retain-existing-v18-alias-and-add-reviewed-comment",
+      "original_ea": "0xebea0",
+      "original_name": "THashStrings_listStrings_void",
+      "proposed_name": "v18_THashStrings_listStrings_void",
+      "spectron_ea": "0xecc58"
+    },
+    {
+      "actual_name_after": "v18_THashStrings_GetCommaText2_void",
+      "actual_name_before": "v18_THashStrings_GetCommaText2_void",
+      "confidence": "high",
+      "name_action": "retain-existing-v18-alias-and-add-reviewed-comment",
+      "original_ea": "0xebff0",
+      "original_name": "THashStrings_GetCommaText2_void",
+      "proposed_name": "v18_THashStrings_GetCommaText2_void",
+      "spectron_ea": "0xecde8"
+    }
+  ],
+  "renamed_count": 4,
+  "resolved_count": 8,
+  "save_path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v351_hash_residual.i64",
+  "saved": true,
+  "verified": true,
+  "verified_name_count": 8
+}

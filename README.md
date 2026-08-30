@@ -8202,3 +8202,56 @@ The reusable scripts are
 
 This was static analysis only. It did not patch the APK, rerun the loopback
 client, contact a live endpoint, or change the TLS or loading-state repairs.
+
+## v351 hash-family residuals
+
+The v351 pass closes the next gap in the source-backed map. It records eight
+THashList and THashStrings relationships that were visible as target aliases
+or nearby obfuscated methods but were not yet represented in the semantic
+translation artifact.
+
+| Source | Target | Result |
+| --- | --- | --- |
+| `THashList_addObject_THashListObject_TString_const` at `0xeac64` | `0xeb904` | exact wrapper match |
+| `THashList_addObjectEncoded_THashListObject` at `0xeacd4` | `0xeb934` | encoded wrapper, target hash helper |
+| `THashList_removeObject_THashListObject_TString_const` at `0xeb844` | `0xec570` | exact wrapper match |
+| `THashList_removeObjectEncoded_THashListObject` at `0xeb8c0` | `0xec5a0` | encoded wrapper, target hash helper |
+| `THashStrings_getObject_TString_const` at `0xeade4` | `0xeba30` | target C8TH wrapper layout |
+| `THashStrings_setValue_TString_const_TString_const` at `0xeb358` | `0xebfcc` | target C8TH wrapper layout |
+| `THashStrings_listStrings_void` at `0xebea0` | `0xecc58` | target string-list wrapper layout |
+| `THashStrings_GetCommaText2_void` at `0xebff0` | `0xecde8` | target string-list wrapper layout |
+
+The two normal add and remove overloads match every exported normalized
+feature field. The encoded add and remove routines are shorter in the target
+because the source computes the three-byte XOR hash inline while target
+`KKhLga4xoI::g4ouMaaIbp` owns that calculation. The remaining four rows keep
+the same lookup, value-update, iterator, empty-value, comma, and escaping
+behavior while the target uses `C8THgaTQxF`, `CanTfaz6bZ`, `vuuHgangcF`, and
+`Zb7cUaSFEU` wrappers.
+
+The v351 semantic map contains 3,745 mapped pairs, 3,685 high-confidence
+pairs, 1,001 remaining ambiguities, and 598 unmatched source functions. The
+application resolved all eight rows, renamed four target functions, and added
+eight review comments. Reopening the database verified all eight names and
+all 11,707 function boundaries.
+
+The v351 database is
+`analysis/spectron_libqplay_translated_v351_hash_residual.i64` with SHA-256
+`0fb0662dffea1f1f6223e0e52745a19505687a79cf47f207280ce098f61b87f0`.
+The complete records are
+`artifacts/spectron_hash_residual_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_hash_residual_manual_translation_application_20260829.json`,
+`artifacts/spectron_hash_residual_manual_translation_verification_20260829.json`,
+`artifacts/spectron_features_v351_hash_residual.json`,
+`artifacts/spectron_name_coverage_audit_v351.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v351.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v351.json`,
+`artifacts/spectron_semantic_translation_v351.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v351.json`.
+The reusable scripts are
+`tools/generate_spectron_hash_residual_anchors_v351.py`,
+`tools/carry_forward_spectron_semantic_translation_v351.py`, and
+`tools/generate_spectron_translation_checkpoint_v351.py`.
+
+This was static analysis only. It did not patch the APK, rerun the loopback
+client, contact a live endpoint, or change the TLS or loading-state repairs.

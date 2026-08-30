@@ -4204,3 +4204,22 @@ The layout-aware checkpoint is
 copy is `analysis/spectron_libqplay_translated_v350_sounds_layout.i64` with
 SHA-256
 `056db23f2015b33134e1fc2bcb99deb5821b96c9590646eb6100c0f7d3462870`.
+
+## v351 static hash-family follow-up
+
+The v351 pass is also static. It adds eight source-backed hash-container
+relationships to the semantic map and does not change the working runtime
+repair. The exact rows are the normal THashList string add and remove
+wrappers. The encoded add and remove overloads and the four THashStrings
+lookup or serialization methods use changed target string and iterator
+wrappers, so they are documented as layout-aware.
+
+The loopback connector result, encrypted login trace, resource requests,
+green-world diagnostic, TLS verification behavior, and live-service boundary
+are unchanged. No emulator or live endpoint was used for v351.
+
+The v351 checkpoint is
+`artifacts/spectron_translation_checkpoint_20260829_v351.json`. Its saved IDA
+copy is `analysis/spectron_libqplay_translated_v351_hash_residual.i64` with
+SHA-256
+`0fb0662dffea1f1f6223e0e52745a19505687a79cf47f207280ce098f61b87f0`.

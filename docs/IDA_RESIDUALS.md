@@ -2265,3 +2265,60 @@ The generators are `tools/generate_spectron_sounds_layout_anchors_v350.py`,
 This pass changed only a disposable IDA database copy and offline metadata.
 It did not patch the APK, alter TLS, contact a game service, or change the
 loading-state repair.
+
+## 2026-08-29: v351 hash-family residuals
+
+The v351 pass resolves eight rows in the THashList and THashStrings clusters.
+The parent map still listed two overloads as ambiguous because several target
+wrappers shared the same short shape. Six more rows were unmatched because
+the target moved hashing and string work into C8THgaTQxF or CanTfaz6bZ
+helpers. Direct pseudocode and the class-local overload order resolve them.
+
+| Source | Target | Source shape | Target shape | Evidence |
+| --- | --- | --- | --- | --- |
+| `THashList_addObject_THashListObject_TString_const` `0xeac64` | `0xeb904` | 48 bytes, 12 instructions, 2 blocks, 2 branches, 1 call | identical | both hash a string key and forward to the integer add overload |
+| `THashList_addObjectEncoded_THashListObject` `0xeacd4` | `0xeb934` | 132 bytes, 33 instructions, 9 blocks, 5 branches, 0 calls | 48 bytes, 12 instructions, 2 blocks, 2 branches, 1 call | target delegates encoded hashing to `g4ouMaaIbp` |
+| `THashList_removeObject_THashListObject_TString_const` `0xeb844` | `0xec570` | 48 bytes, 12 instructions, 2 blocks, 2 branches, 1 call | identical | both hash a string key and forward to the integer remove overload |
+| `THashList_removeObjectEncoded_THashListObject` `0xeb8c0` | `0xec5a0` | 144 bytes, 36 instructions, 10 blocks, 5 branches, 0 calls | 48 bytes, 12 instructions, 2 blocks, 2 branches, 1 call | target delegates encoded hashing to `g4ouMaaIbp` |
+| `THashStrings_getObject_TString_const` `0xeade4` | `0xeba30` | 136 bytes, 34 instructions, 7 blocks, 8 branches, 2 calls | 176 bytes, 44 instructions, 7 blocks, 10 branches, 4 calls | target preserves bucket lookup, chain walk, and equality |
+| `THashStrings_setValue_TString_const_TString_const` `0xeb358` | `0xebfcc` | 280 bytes, 70 instructions, 11 blocks, 15 branches, 7 calls | 308 bytes, 77 instructions, 11 blocks, 17 branches, 9 calls | target preserves insert, replace, and empty-value removal |
+| `THashStrings_listStrings_void` `0xebea0` | `0xecc58` | 272 bytes, 68 instructions, 7 blocks, 19 branches, 14 calls | 336 bytes, 84 instructions, 7 blocks, 23 branches, 18 calls | target preserves name=value and name-only list entries |
+| `THashStrings_GetCommaText2_void` `0xebff0` | `0xecde8` | 360 bytes, 90 instructions, 9 blocks, 23 branches, 17 calls | 440 bytes, 110 instructions, 9 blocks, 29 branches, 23 calls | target preserves comma joining and escaped entries |
+
+The first and third rows are exact across the complete normalized feature
+record, not just the coarse shape. Their target pseudocode calls
+`KKhLga4xoI::g4ouMaaIbp` and the corresponding add or remove overload. The
+encoded rows use the same helper with `CanTfaz6bZ`, so the shorter target
+body is an intentional representation change rather than missing analysis.
+
+The target key lookup allocates a temporary C8TH wrapper, hashes the key,
+walks the same bucket chain, compares the key, and clears the temporary. Its
+value setter retains the source three-way behavior: add a nonempty missing
+value, update a changed value, or remove the object for an empty value. The
+two serializers retain iterator traversal and their distinct empty-value
+rules. The comma serializer additionally calls the target escape helper
+`Z1ceJasAzF` before appending each item.
+
+The v351 artifact records two exact-shape anchors and six layout-aware
+anchors. It promotes two parent ambiguities and six unmatched source rows.
+All eight target names were verified after reopening. Four names were new in
+the v351 IDA copy, while the four THashStrings aliases were already present.
+The semantic map now reports 3,745 mapped pairs, 3,685 high-confidence pairs,
+1,001 ambiguities, and 598 unmatched source functions.
+
+The saved database is
+`analysis/spectron_libqplay_translated_v351_hash_residual.i64` with SHA-256
+`0fb0662dffea1f1f6223e0e52745a19505687a79cf47f207280ce098f61b87f0`.
+The machine-readable records are the files beginning with
+`spectron_hash_residual_`, `spectron_features_v351_`,
+`spectron_name_coverage_audit_v351`, `spectron_dynamic_symbol_`,
+`spectron_semantic_translation_v351`, and
+`spectron_translation_checkpoint_20260829_v351` under `artifacts/`.
+The generators are
+`tools/generate_spectron_hash_residual_anchors_v351.py`,
+`tools/carry_forward_spectron_semantic_translation_v351.py`, and
+`tools/generate_spectron_translation_checkpoint_v351.py`.
+
+This pass changed only a disposable IDA database copy and offline metadata.
+It did not patch the APK, alter TLS, contact a game service, or change the
+loading-state repair.
