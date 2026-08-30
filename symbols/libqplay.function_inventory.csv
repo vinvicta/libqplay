@@ -3583,7 +3583,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 917840,plt_TPlayer_paintOffscreen_int_int_int_int_int,elf_symbol,plt_thunk,._ZN7TPlayer14paintOffscreenEiiiii,"TPlayer::paintOffscreen(int,int,int,int,int)",plt_TPlayer_paintOffscreen_int_int_int_int_int,.plt,16,6,5312,True,False,False
 917856,plt_TPlayer_setHP_double,elf_symbol,plt_thunk,._ZN7TPlayer5setHPEd,TPlayer::setHP(double),plt_TPlayer_setHP_double,.plt,16,1,5312,True,False,False
 917872,start,ida_named_non_elf,,,,,.text,48,3,5121,False,False,False
-917920,sub_E01A0,ida_default_sub,,,,,.text,48,1,5121,False,False,True
+917920,gpc_abort_malloc_failure_tristrip_node,ida_named_non_elf,,,,,.text,48,1,5121,False,False,False
 917968,ani_lexer_getPreviousState,ida_named_non_elf,,,,,.text,220,3,5120,False,False,False
 918188,bzip2_mainGtU,ida_named_non_elf,,,,,.text,424,3,5120,False,False,False
 918612,sub_E0454,ida_default_sub,,,,,.text,128,2,5120,False,False,True
@@ -5048,8 +5048,8 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1381560,tga_info,ida_named_non_elf,,,,,.text,276,1,5120,False,False,False
 1381836,tga_load,ida_named_non_elf,,,,,.text,2876,4,5120,False,False,False
 1384720,TBitmap_readTGA_TStream,elf_symbol,function,_ZN7TBitmap7readTGAEP7TStream,TBitmap::readTGA(TStream *),TBitmap_readTGA_TStream,.text,240,4,5120,False,False,False
-1384960,sub_152200,ida_default_sub,,,,,.text,1688,45,5120,False,False,True
-1386648,sub_152898,ida_default_sub,,,,,.text,628,2,5120,False,False,True
+1384960,gpc_free_sbtree,ida_named_non_elf,,,,,.text,1688,45,5120,False,False,False
+1386648,gpc_build_sbt,ida_named_non_elf,,,,,.text,628,2,5120,False,False,False
 1387276,gpc_build_lmt,ida_named_non_elf,,,,,.text,2404,2,5120,False,False,False
 1389680,gpc_free_polygon_gpc_polygon,elf_symbol,function,_Z16gpc_free_polygonP11gpc_polygon,gpc_free_polygon(gpc_polygon *),gpc_free_polygon_gpc_polygon,.text,144,4,5120,False,False,False
 1389824,gpc_add_contour_gpc_polygon_gpc_vertex_list_int,elf_symbol,function,_Z15gpc_add_contourP11gpc_polygonP15gpc_vertex_listi,"gpc_add_contour(gpc_polygon *,gpc_vertex_list *,int)",gpc_add_contour_gpc_polygon_gpc_vertex_list_int,.text,412,4,5120,False,False,False

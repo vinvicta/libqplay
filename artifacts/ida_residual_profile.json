@@ -1402,34 +1402,6 @@
       "total_bytes": 90960
     },
     {
-      "category": "gpc_static_internal",
-      "count": 3,
-      "entries": [
-        {
-          "category": "gpc_static_internal",
-          "current_ida_name": "sub_E01A0",
-          "ea": "0xe01a0",
-          "segment": ".text",
-          "size": 48
-        },
-        {
-          "category": "gpc_static_internal",
-          "current_ida_name": "sub_152200",
-          "ea": "0x152200",
-          "segment": ".text",
-          "size": 1688
-        },
-        {
-          "category": "gpc_static_internal",
-          "current_ida_name": "sub_152898",
-          "ea": "0x152898",
-          "segment": ".text",
-          "size": 628
-        }
-      ],
-      "total_bytes": 2364
-    },
-    {
       "category": "init_or_fini_array_entry",
       "count": 19,
       "entries": [
@@ -3400,14 +3372,6 @@
       "total_bytes": 90960
     },
     {
-      "category": "gpc_static_internal",
-      "count": 3,
-      "evidence": "The main gap ends at gpc_free_polygon and follows TBitmap::readTGA; 0xe01a0 is called by gpc_tristrip_clip at 0x15504c and formats the gpc malloc failure diagnostic for tristrip node creation.",
-      "first_ea": "0xe01a0",
-      "last_ea": "0x152898",
-      "total_bytes": 2364
-    },
-    {
       "category": "init_or_fini_array_entry",
       "count": 19,
       "evidence": "The address is referenced by the ELF .init_array or .fini_array.",
@@ -3457,18 +3421,34 @@
     }
   ],
   "database": {
-    "close_reopen_verified": true,
-    "default_sub_function_count": 421,
+    "bytes": 61286570,
+    "close_reopen_verified": false,
+    "default_sub_function_count": 418,
     "format": "packed IDA 9.3 database",
     "function_count": 11297,
-    "path": "analysis/libqplay_translated_all_v4.i64",
-    "sha256": "089e588389206929cbcbd7d1d65dd477e0c69eed0841b430636bb7c947594ac3"
+    "path": "analysis/libqplay_translated_from_active_v8.i64",
+    "sha256": "6f489cc9ab1b922e3c2e77747a1295b1ee49020fb38c1bebb84bc2a7271bd397"
   },
   "ida_reclassified_functions": [
     {
       "ea": "0x1f94fc",
       "new_name": "j_TCachedStream_get_minfilecachesize",
       "reason": "IDA reclassified the four-byte unconditional branch veneer as a named thunk to TCachedStream_get_minfilecachesize when the persisted translation copy was rebuilt."
+    },
+    {
+      "ea": "0xe01a0",
+      "new_name": "gpc_abort_malloc_failure_tristrip_node",
+      "reason": "IDA function at 0xe01a0 was identified as the GPC tristrip allocation-failure abort from its fixed diagnostic and exit path."
+    },
+    {
+      "ea": "0x152200",
+      "new_name": "gpc_free_sbtree",
+      "reason": "The helper recursively frees the scanbeam tree passed through gpc_build_lmt and matches the upstream GPC free_sbtree role."
+    },
+    {
+      "ea": "0x152898",
+      "new_name": "gpc_build_sbt",
+      "reason": "The helper flattens the scanbeam tree into the sorted scanbeam array and matches the upstream GPC build_sbt role."
     }
   ],
   "network_contacted": false,
@@ -3478,7 +3458,7 @@
     "unresolved_default_sub_function_count": 488
   },
   "purpose": "Account for every default sub_ function left in the persisted IDA translation copy without inventing source names.",
-  "remaining_default_sub_function_count": 421,
+  "remaining_default_sub_function_count": 418,
   "residual_default_sub_functions": [
     {
       "category": "plt0_resolver",
@@ -3486,13 +3466,6 @@
       "ea": "0xd2170",
       "segment": ".plt",
       "size": 20
-    },
-    {
-      "category": "gpc_static_internal",
-      "current_ida_name": "sub_E01A0",
-      "ea": "0xe01a0",
-      "segment": ".text",
-      "size": 48
     },
     {
       "category": "jpeg_static_internal",
@@ -3871,20 +3844,6 @@
       "ea": "0x114f70",
       "segment": ".text",
       "size": 16
-    },
-    {
-      "category": "gpc_static_internal",
-      "current_ida_name": "sub_152200",
-      "ea": "0x152200",
-      "segment": ".text",
-      "size": 1688
-    },
-    {
-      "category": "gpc_static_internal",
-      "current_ida_name": "sub_152898",
-      "ea": "0x152898",
-      "segment": ".text",
-      "size": 628
     },
     {
       "category": "tstring_static_cleanup_wrapper",

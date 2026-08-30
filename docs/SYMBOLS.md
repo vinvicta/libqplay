@@ -30,16 +30,18 @@ The active ARM64 database was then processed by the reviewed callback,
 script-table, application-role, CyaSSL, and bundled-library passes. The final
 packed copy was saved as
 `/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v8.i64`.
-An IDALIB reopen verified 11,297 functions, 11,297 named function heads, 421
-remaining default `sub_` entries, and 1,249 reviewed names at their expected
-addresses. The verification had zero failures.
+The active IDA verifier reports 11,297 functions, 11,297 named function heads,
+418 remaining default `sub_` entries, and zero failures after the final GPC
+helper pass. The post-GPC packed copy is saved, but a separate close and
+reopen of that exact copy is still pending.
 
-The 1,249 reviewed names are made up of 277 native callback candidates, 906
+The 1,252 reviewed names are made up of 277 native callback candidates, 906
 exact script-table callbacks, 28 application or engine role aliases, 11
-CyaSSL aliases, and 27 bundled-library aliases. The machine-readable record is
+CyaSSL aliases, 27 bundled-library aliases, and 3 GPC helper aliases. The
+machine-readable record is
 `artifacts/ida_translation_verification_20260830.json`.
 
-The remaining 421 default names are not an unfinished application boundary.
+The remaining 418 default names are not an unfinished application boundary.
 The active-IDB scope check found no default name in the Android bridge range,
 no default name among the 1,779 unique script callback addresses, and no
 direct call from a remaining default function to the selected socket, file,

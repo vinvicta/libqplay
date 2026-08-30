@@ -26,7 +26,37 @@ DEFAULT_STATIC_ROLES = [
 ]
 DEFAULT_OUTPUT = "artifacts/ida_residual_profile.json"
 
+CURRENT_DATABASE = {
+    "path": "analysis/libqplay_translated_from_active_v8.i64",
+    "sha256": "6f489cc9ab1b922e3c2e77747a1295b1ee49020fb38c1bebb84bc2a7271bd397",
+    "bytes": 61286570,
+    "format": "packed IDA 9.3 database",
+    "close_reopen_verified": False,
+    "function_count": 11297,
+}
+
 REANALYZED_FUNCTIONS = {
+    0x0E01A0: {
+        "new_name": "gpc_abort_malloc_failure_tristrip_node",
+        "reason": (
+            "IDA function at 0xe01a0 was identified as the GPC tristrip "
+            "allocation-failure abort from its fixed diagnostic and exit path."
+        ),
+    },
+    0x152200: {
+        "new_name": "gpc_free_sbtree",
+        "reason": (
+            "The helper recursively frees the scanbeam tree passed through "
+            "gpc_build_lmt and matches the upstream GPC free_sbtree role."
+        ),
+    },
+    0x152898: {
+        "new_name": "gpc_build_sbt",
+        "reason": (
+            "The helper flattens the scanbeam tree into the sorted scanbeam "
+            "array and matches the upstream GPC build_sbt role."
+        ),
+    },
     0x1F94FC: {
         "new_name": "j_TCachedStream_get_minfilecachesize",
         "reason": (
@@ -181,25 +211,10 @@ def generate(
             }
         )
 
-    if static_documents:
-        latest_static = static_documents[-1]
-        database = {
-            "path": latest_static["database"]["path"],
-            "sha256": latest_static["database"]["sha256"],
-            "format": latest_static["database"]["format"],
-            "close_reopen_verified": latest_static["database"]["close_reopen_verified"],
-            "function_count": latest_static["database"]["function_count"],
-            "default_sub_function_count": len(residual),
-        }
-    else:
-        database = {
-            "path": "analysis/libqplay_translated_all_v2.i64",
-            "sha256": "0306a53f164fc9f860f24eb248039a94172959053daa6464d4a1effe35026a89",
-            "format": "packed IDA 9.3 database",
-            "close_reopen_verified": True,
-            "function_count": 11297,
-            "default_sub_function_count": len(residual),
-        }
+    database = {
+        **CURRENT_DATABASE,
+        "default_sub_function_count": len(residual),
+    }
 
     result = {
         "schema_version": 1,

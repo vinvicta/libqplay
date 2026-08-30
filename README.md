@@ -20,12 +20,12 @@ static-library aliases. The counts are:
 | Kind | Count |
 | --- | ---: |
 | Retained ELF symbols translated | 8,601 |
-| Additional reviewed function aliases | 1,249 |
+| Additional reviewed function aliases | 1,252 |
 | IDA functions in the saved copy | 11,297 |
-| Remaining default `sub_` functions | 421 |
+| Remaining default `sub_` functions | 418 |
 
 The retained ELF count includes 4,714 implementation functions, 3,183 PLT
-thunks, 199 jump thunks, and 505 data symbols. The 421 remaining `sub_`
+thunks, 199 jump thunks, and 505 data symbols. The 418 remaining `sub_`
 entries are code that IDA discovered without a preserved source symbol. They
 are kept address-based rather than being assigned guesses. The compact
 verification record is `artifacts/ida_translation_verification_20260830.json`.

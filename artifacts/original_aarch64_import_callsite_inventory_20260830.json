@@ -11466,7 +11466,7 @@
         },
         {
           "caller": "0xe01a0",
-          "caller_name": "sub_E01A0",
+          "caller_name": "gpc_abort_malloc_failure_tristrip_node",
           "callsite": "0xe01cc",
           "target": "0xdc590",
           "transfer": "bl"
@@ -11883,7 +11883,7 @@
         },
         {
           "caller": "0xe01a0",
-          "caller_name": "sub_E01A0",
+          "caller_name": "gpc_abort_malloc_failure_tristrip_node",
           "callsite": "0xe01c4",
           "target": "0xd7850",
           "transfer": "bl"
@@ -12519,301 +12519,301 @@
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x15225c",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x15228c",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x1522a0",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x1522e0",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x152310",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x152324",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x152354",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x152368",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x15237c",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x1523bc",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x1523ec",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x152400",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x152440",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x152470",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x152484",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x1524b4",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x1524c8",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x1524dc",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x1524f0",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x152538",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x152568",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x15257c",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x1525bc",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x1525ec",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x152600",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x152638",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x152668",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x15267c",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x152690",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x1526a4",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x1526ec",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x15271c",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x152730",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x152760",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x152774",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x1527ac",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x1527e4",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x152814",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x152828",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x15283c",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x152850",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x152864",
           "target": "0xd4e20",
           "transfer": "bl"
         },
         {
           "caller": "0x152200",
-          "caller_name": "sub_152200",
+          "caller_name": "gpc_free_sbtree",
           "callsite": "0x152878",
           "target": "0xd4e20",
           "transfer": "bl"
@@ -23938,7 +23938,7 @@
   "inventory": {
     "function_count": 7548,
     "path": "symbols/libqplay.function_inventory.json",
-    "sha256": "5d25001293e816e7a2d91261ba9140b9f891df952b3427fd67343c643ed87496"
+    "sha256": "eef76c2c499bdac534620f2eb686177db7103c67e574381b5d96c2b869ba2919"
   },
   "limitations": [
     "The scan covers direct BL calls and unconditional B tail-call transfers to PLT stubs only.",

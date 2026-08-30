@@ -125,8 +125,8 @@ to bypass a signature on a live service.
 ## Translation scope and residual names
 
 The final ARM64 IDA copy contains 11,297 function heads. All 8,601 retained
-ELF symbols and 1,249 reviewed callback or role aliases were checked at their
-expected addresses. The 421 remaining default `sub_` names are IDA-created
+ELF symbols and 1,252 reviewed callback or role aliases were checked at their
+expected addresses. The 418 remaining default `sub_` names are IDA-created
 functions without a surviving source symbol. A read-only active-IDB check
 found none in the Android bridge range, none among the 1,779 unique script
 callback addresses, and no direct call from them into the selected socket,

@@ -11,7 +11,7 @@
     "address_bucket_counts": {
       "0x100000-0x10ffff": 4,
       "0x110000-0x11ffff": 5,
-      "0x150000-0x15ffff": 6,
+      "0x150000-0x15ffff": 4,
       "0x160000-0x16ffff": 4,
       "0x170000-0x17ffff": 3,
       "0x180000-0x18ffff": 10,
@@ -32,27 +32,21 @@
       "0x290000-0x29ffff": 77,
       "0x2a0000-0x2affff": 47,
       "0xd0000-0xdffff": 1,
-      "0xe0000-0xeffff": 33,
+      "0xe0000-0xeffff": 32,
       "0xf0000-0xfffff": 13
     },
-    "default_sub_functions": 421,
+    "default_sub_functions": 418,
     "elf_symbol_backed_functions": 8096,
-    "named_non_elf_functions": 2780,
-    "path": "/tmp/ida-v4-inventory/libqplay.function_inventory.json",
+    "named_non_elf_functions": 2783,
+    "path": "/home/v/Desktop/graal-decomp/analysis/libqplay.function_inventory.json",
     "row_count": 11297,
     "segment_counts": {
       ".plt": 1,
-      ".text": 420
+      ".text": 417
     },
-    "sha256": "5d25001293e816e7a2d91261ba9140b9f891df952b3427fd67343c643ed87496"
+    "sha256": "eef76c2c499bdac534620f2eb686177db7103c67e574381b5d96c2b869ba2919"
   },
   "most_referenced_residuals": [
-    {
-      "ea": "0x152200",
-      "name": "sub_152200",
-      "size": 1688,
-      "xrefs_to": 45
-    },
     {
       "ea": "0x25e6d4",
       "name": "sub_25E6D4",
@@ -286,6 +280,12 @@
       "name": "sub_2A1B50",
       "size": 100,
       "xrefs_to": 3
+    },
+    {
+      "ea": "0x2a2b0c",
+      "name": "sub_2A2B0C",
+      "size": 196,
+      "xrefs_to": 3
     }
   ],
   "network_contacted": false,
@@ -298,14 +298,6 @@
         "first_ea": "0x250e94",
         "last_ea": "0x27336c",
         "total_bytes": 90960
-      },
-      {
-        "category": "gpc_static_internal",
-        "count": 3,
-        "evidence": "The main gap ends at gpc_free_polygon and follows TBitmap::readTGA; 0xe01a0 is called by gpc_tristrip_clip at 0x15504c and formats the gpc malloc failure diagnostic for tristrip node creation.",
-        "first_ea": "0xe01a0",
-        "last_ea": "0x152898",
-        "total_bytes": 2364
       },
       {
         "category": "init_or_fini_array_entry",
@@ -357,7 +349,7 @@
       }
     ],
     "profile_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/ida_residual_profile.json",
-    "profile_sha256": "f746137e00d48dd7a5ddb963659d2efb79808cf54f79cec791f770c613ca7892"
+    "profile_sha256": "722a9c1d2e5a1f39e06ef6b97440dc2d47e8ab536b46e799c919ecadb0a3d1fd"
   },
   "residual_functions": [
     {
@@ -366,13 +358,6 @@
       "segment": ".plt",
       "size": 20,
       "xrefs_to": 0
-    },
-    {
-      "ea": "0xe01a0",
-      "end_ea": "0xe01d0",
-      "segment": ".text",
-      "size": 48,
-      "xrefs_to": 1
     },
     {
       "ea": "0xe0454",
@@ -751,20 +736,6 @@
       "segment": ".text",
       "size": 16,
       "xrefs_to": 1
-    },
-    {
-      "ea": "0x152200",
-      "end_ea": "0x152898",
-      "segment": ".text",
-      "size": 1688,
-      "xrefs_to": 45
-    },
-    {
-      "ea": "0x152898",
-      "end_ea": "0x152b0c",
-      "segment": ".text",
-      "size": 628,
-      "xrefs_to": 2
     },
     {
       "ea": "0x15ae70",

@@ -29,7 +29,7 @@ import idautils
 SYMBOL_JSON = "/home/v/Desktop/graal-decomp/libqplay/symbols/libqplay.symbols.json"
 OUTPUT_DIR = os.environ.get(
     "LIBQPLAY_INVENTORY_OUTPUT_DIR",
-    "/home/v/Desktop/graal-decomp/libqplay/analysis",
+    "/home/v/Desktop/graal-decomp/analysis",
 )
 DEFAULT_SUB_RE = re.compile(r"^sub_[0-9A-Fa-f]+$")
 

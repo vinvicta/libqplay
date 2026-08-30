@@ -4,8 +4,9 @@
 This is a read-only check for IDALIB or the IDA Python console. It verifies
 the 277 native role candidates, every exact script-table callback label that
 has a proposed name, 28 application or engine role aliases, 11 CyaSSL role
-aliases, and 27 bundled library role aliases at their expected addresses. The
-expected database totals are also checked after the boundary pass.
+aliases, 27 bundled library role aliases, and four persisted function
+reclassifications at their expected addresses. The expected database totals
+are also checked after the boundary pass.
 """
 
 from __future__ import annotations
@@ -43,6 +44,13 @@ NATIVE_GROUPS = (
     "server_level_link_properties",
     "tiles_layer_properties",
     "tiles_layer_functions",
+)
+
+RECLASSIFIED_NAMES = (
+    (0x1F94FC, "j_TCachedStream_get_minfilecachesize"),
+    (0x0E01A0, "gpc_abort_malloc_failure_tristrip_node"),
+    (0x152200, "gpc_free_sbtree"),
+    (0x152898, "gpc_build_sbt"),
 )
 
 
@@ -100,6 +108,14 @@ def expected_names() -> list[dict]:
                 "expected_name": item["proposed_name"],
             }
         )
+    for va, name in RECLASSIFIED_NAMES:
+        rows.append(
+            {
+                "source": "ida_residual_profile",
+                "va": va,
+                "expected_name": name,
+            }
+        )
     return rows
 
 
@@ -136,10 +152,10 @@ def main() -> None:
         "function_count": function_count,
         "default_sub_count": default_sub_count,
         "expected_function_count": 11297,
-        "expected_default_sub_count": 421,
+        "expected_default_sub_count": 418,
         "failures": failures,
         "status": "ok"
-        if not failures and function_count == 11297 and default_sub_count == 421
+        if not failures and function_count == 11297 and default_sub_count == 418
         else "failed",
     }
     print(json.dumps(result, sort_keys=True))
