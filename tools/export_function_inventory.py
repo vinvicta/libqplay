@@ -155,7 +155,7 @@ def write_outputs(inventory, symbol_rows):
         "is_default_sub",
     ]
     with open(csv_path, "w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
         writer.writeheader()
         writer.writerows(inventory)
 

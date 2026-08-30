@@ -34,6 +34,14 @@ The supporting records are
 `artifacts/cyassl_static_role_audit_20260826.json` and
 `artifacts/static_library_role_audit_20260826.json`.
 
+The checked-in function inventory and script-table inventory were regenerated
+from the final saved IDA state. They now report 11,297 functions and 1,779
+unique script callback addresses, with no default `sub_` name in the callback
+set. The overlay and unresolved-function profile retain the earlier
+pre-persistence snapshot because the residual calculation uses that snapshot
+as its input. Their 11,272-function and 1,645-default-name counts are
+historical inputs, not a description of the final database.
+
 The APK has no full `.symtab` or DWARF record set. The 8,601 translated
 aliases include dynamic names, PLT entries, jump thunks, and data aliases.
 They are an analysis inventory rather than a claim that all original

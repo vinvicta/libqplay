@@ -2,10 +2,10 @@
 """Verify the complete prepared translation set in the current IDA database.
 
 This is a read-only check for IDALIB or the IDA Python console. It verifies
-the 277 native role candidates, 906 exact script-table callbacks, 28
-application or engine role aliases, 11 CyaSSL role aliases, and 27 bundled
-library role aliases at their expected addresses. The expected database
-totals are also checked after the boundary pass.
+the 277 native role candidates, every exact script-table callback label that
+has a proposed name, 28 application or engine role aliases, 11 CyaSSL role
+aliases, and 27 bundled library role aliases at their expected addresses. The
+expected database totals are also checked after the boundary pass.
 """
 
 from __future__ import annotations

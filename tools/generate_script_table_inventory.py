@@ -389,7 +389,9 @@ def coverage_for_target(
         return {
             "status": "native_callback_candidate",
             "name": item.get("proposed_name"),
-            "current_ida_name": item.get("current_ida_name"),
+            "current_ida_name": functions_by_ea.get(target, {}).get(
+                "name", item.get("current_ida_name")
+            ),
             "has_function_boundary": target in functions_by_ea,
         }
     function = functions_by_ea.get(target)

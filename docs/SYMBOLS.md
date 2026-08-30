@@ -49,6 +49,12 @@ addresses remain available in
 `artifacts/ida_active_translation_scope_check_20260830.json` without guessed
 source names.
 
+The public `symbols/libqplay.function_inventory.json` and
+`artifacts/script_table_inventory.json` are synchronized with this final
+state. The function inventory has 11,297 rows, and the script-table inventory
+has 1,779 unique callback targets. The older overlay and unresolved profile
+remain as the pre-persistence inputs used by the residual calculation.
+
 ## Naming policy
 
 The native names are kept close to their demangled ELF form. Characters that
