@@ -17,7 +17,9 @@ The machine-readable evidence is in
 `artifacts/original_security_callsite_review_20260830.json`. The first report
 is produced by `tools/audit_original_apk.py`. The second is exported directly
 from the original ARM64 IDA database by
-`tools/ida_export_original_security_callsite_review.py`.
+`tools/ida_export_original_security_callsite_review.py`. The Java WebView
+boundary review is summarized in
+`artifacts/original_dex_webview_review_20260830.json`.
 
 ## Executive assessment
 
@@ -37,10 +39,10 @@ There are also several meaningful security boundaries:
    `android:exported` value, but its intent filters make the activity effectively
    exported under the old Android component rules. Other applications can
    therefore request that activity.
-3. The Java DEX contains a WebView path with JavaScript enabled and a native
-   JavaScript bridge. The audit establishes the capability and its input
-   boundary. It does not establish that an attacker-controlled page can reach
-   every bridge method.
+3. The Java DEX contains separate JavaScript-enabled WebView surfaces. The game
+   activity loads native-supplied URLs, while a bundled Bolts app-link resolver
+   owns the `addJavascriptInterface` bridge. The audit establishes these
+   capabilities and their boundaries, but not attacker reachability.
 4. Update code can remove package files and can start a replacement executable.
    The generic deletion helper calls `unlink`, while the reviewed script and
    update callers provide the path policy around it. The executable handoff is
@@ -51,9 +53,10 @@ There are also several meaningful security boundaries:
    This is a privacy concern and an account-correlation surface, not evidence of
    code execution.
 6. The DEX contains `onReceivedSslError`, `DISABLE_SSL_CHECK_FOR_TESTING`, and
-   `fz_server_domain_ssl` indicators. They justify a Java call-graph review, but
-   static strings do not show that a certificate error is ignored or that test
-   mode is active. The native connector is a separate CyaSSL implementation.
+   `fz_server_domain_ssl` indicators. Local smali review resolves the first two
+   to Facebook WebDialog code where the test flag is false and SSL errors are
+   cancelled. This is not a Java SSL-bypass finding. The native connector is a
+   separate CyaSSL implementation.
 
 The native libraries do have useful baseline mitigations. All four packaged
 libraries report a non-executable `GNU_STACK`, GNU RELRO, and `BIND_NOW` in the
@@ -110,23 +113,35 @@ alone cannot explain its network behavior.
 
 The DEX string inventory finds `WebView`, `setJavaScriptEnabled`,
 `addJavascriptInterface`, `JavascriptInterface`, `getSharedPreferences`, and
-`android_id`. This is enough to identify a native WebView bridge boundary in
-the Java layer. It is not enough to say that a remote attacker owns the bridge.
+`android_id`. A local baksmali review separates these strings into two paths.
+The compact evidence is in `artifacts/original_dex_webview_review_20260830.json`.
 
-The risks to resolve in a follow-up review are straightforward:
+`com.quattroplay.GraalClassic.QPlayActivity$27` creates the game WebView with
+the application context, enables JavaScript, turns on the legacy WebView plugin
+state, installs `InsideWebViewClient` and `WebChromeClient`, and stores the view
+in the activity's map. `QPlayActivity.setWebViewURL` later calls `loadUrl` with
+a native-supplied URL on the UI thread. In
+`InsideWebViewClient.shouldOverrideUrlLoading`, the reviewed code calls
+`WebView.loadUrl` for the supplied URL and returns true. No visible URL
+allowlist check appears in that method. This is a real navigation surface, but
+the report does not claim that an untrusted caller can choose the URL.
 
-* What exact URL or local content is loaded into the WebView?
-* Is navigation restricted to an allowlist, or can arbitrary redirects reach the
-  page with the bridge attached?
-* Which bridge methods are annotated and what data do they return or write?
-* Can message data be inserted into JavaScript without quoting or escaping?
-* Can a URI or native server message trigger the WebView path before the user
-  has authenticated?
+The `addJavascriptInterface` call belongs to the bundled
+`bolts.WebViewAppLinkResolver`, not to the game activity's WebView setup. That
+resolver disables network access, installs a bridge named
+`boltsWebViewAppLinkResolverResult`, and injects JavaScript that reads `al:`
+metadata. Its annotated `setValue` method parses a JSON array and reports a
+result or error. This is narrower than a general game message bridge, although
+it still deserves review when the resolver is reachable.
 
-The same DEX string table contains `onReceivedSslError` and
-`DISABLE_SSL_CHECK_FOR_TESTING`, along with `fz_server_domain_ssl`. The offline
-audit records these as APK-011. They are useful search anchors for a future
-Java call-graph review, not proof that WebView certificate errors are ignored.
+The DEX also contains `onReceivedSslError`,
+`DISABLE_SSL_CHECK_FOR_TESTING`, and `fz_server_domain_ssl`. Local smali review
+resolves these anchors to `com.facebook.widget.WebDialog`: the test flag is
+explicitly false, and `DialogWebViewClient.onReceivedSslError` calls
+`SslErrorHandler.cancel()` and dismisses the dialog. No Java SSL bypass was
+established. The native connector's CyaSSL path is separate and is documented
+below.
+
 No `DexClassLoader`, `load_dex`, or repository-specific `java_reflection`
 indicator was found in the original DEX, so dynamic code loading was not
 established by this static pass.

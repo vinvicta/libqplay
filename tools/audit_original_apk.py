@@ -591,11 +591,11 @@ def build_findings(manifest: dict, dex_reports: list[dict], native_reports: list
 
     if {"webview_class", "webview_javascript_enabled", "webview_javascript_bridge"} <= indicators:
         findings.append({
-            "id": "APK-004", "severity": "high-interest", "confidence": "confirmed capability, reachability depends on page source",
-            "title": "The WebTop path enables JavaScript and a native bridge",
-            "evidence": ["DEX strings include WebView, setJavaScriptEnabled, and addJavascriptInterface."],
-            "impact": "A page that can reach the bridge may read device state, persist data, and send messages into native dispatch.",
-            "limit": "String evidence does not prove that a remote page can reach every bridge method in a production run.",
+            "id": "APK-004", "severity": "high-interest", "confidence": "confirmed capability, path boundaries reviewed locally",
+            "title": "The Java layer contains separate JavaScript-enabled WebView surfaces",
+            "evidence": ["DEX strings include WebView, setJavaScriptEnabled, and addJavascriptInterface. Local smali review places the game WebView in QPlayActivity and the bridge call in the bundled Bolts app-link resolver."],
+            "impact": "QPlayActivity can load native-supplied URLs with JavaScript enabled. The separate Bolts resolver exposes a narrow JSON metadata bridge, so both paths deserve input and navigation review.",
+            "limit": "Static review does not prove that a remote page can reach the game WebView, the Bolts resolver, or every bridge method in a production run.",
         })
     if {"dynamic_dex_loader", "dynamic_dex_command", "reflection_command"} <= indicators:
         findings.append({
@@ -607,11 +607,11 @@ def build_findings(manifest: dict, dex_reports: list[dict], native_reports: list
         })
     if {"webview_ssl_error_handler", "ssl_test_bypass_indicator"} <= indicators:
         findings.append({
-            "id": "APK-011", "severity": "high-interest", "confidence": "confirmed string indicators, behavior untested",
-            "title": "The Java layer contains WebView SSL-error and test-mode indicators",
-            "evidence": ["The DEX string table contains onReceivedSslError and DISABLE_SSL_CHECK_FOR_TESTING."],
-            "impact": "If the corresponding code path is active, it may alter how WebView certificate errors are handled in a test or legacy configuration.",
-            "limit": "Static strings do not prove that SSL errors are ignored, that test mode is enabled, or that a remote page can reach this code. The native connector uses a separate CyaSSL path.",
+            "id": "APK-011", "severity": "informational", "confidence": "confirmed legacy string anchor, safe branch verified by local smali",
+            "title": "Facebook WebDialog carries a disabled SSL-test flag",
+            "evidence": ["The DEX string table contains onReceivedSslError and DISABLE_SSL_CHECK_FOR_TESTING. Local smali review resolves them to Facebook WebDialog, where the flag is false and the SSL-error handler calls SslErrorHandler.cancel() before dismissing the dialog."],
+            "impact": "This is a useful maintenance and call-graph anchor, but the reviewed Java path rejects WebView certificate errors rather than accepting them.",
+            "limit": "This finding does not describe the native CyaSSL connector and does not prove how unrelated WebViews handle errors. The fz_server_domain_ssl string is also only a configuration anchor here.",
         })
 
     if qplay and qplay["native_strings"].get("legacy_or_weak_cipher_names"):

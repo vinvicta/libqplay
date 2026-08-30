@@ -62,6 +62,9 @@ account authentication remain open.
   live game service.
 * `docs/SECURITY.md` records the original APK and ARM64 native trust-boundary
   review.
+* `artifacts/original_dex_webview_review_20260830.json` records the local smali
+  review that separates the game WebView, Bolts bridge, and Facebook SSL-error
+  path.
 * `artifacts/connector_http_flow_review_20260830.json` preserves the compact
   IDA export for the original connector request lifecycle.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.

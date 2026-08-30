@@ -1,0 +1,96 @@
+{
+  "schema": "libqplay.original-dex-webview-review.v1",
+  "analysis_date": "2026-08-30",
+  "scope": "Offline smali review of the original Graal Online Classic 1.8 DEX",
+  "input": {
+    "name": "classes.dex",
+    "sha256": "58cf65ea6f1c473887164630e2091a7fcbe78f3f72720a6b076cfa6750ae4ffc"
+  },
+  "network_contacted": false,
+  "method": "The private classes.dex was disassembled with baksmali 2.5.2 and inspected by class and method. Raw smali is not redistributed.",
+  "findings": [
+    {
+      "class": "com.quattroplay.GraalClassic.QPlayActivity$27",
+      "method": "run",
+      "location": "QPlayActivity$27.smali:1908-1924",
+      "confidence": "confirmed local smali",
+      "behavior": [
+        "Creates a WebView with the application context",
+        "Enables JavaScript",
+        "Sets the legacy WebView PluginState to ON",
+        "Installs InsideWebViewClient and WebChromeClient",
+        "Adds the view to its parent and stores it in webviewmap"
+      ]
+    },
+    {
+      "class": "com.quattroplay.GraalClassic.QPlayActivity$InsideWebViewClient",
+      "method": "shouldOverrideUrlLoading",
+      "confidence": "confirmed local smali",
+      "behavior": [
+        "Calls WebView.loadUrl with the supplied URL",
+        "Returns true",
+        "No visible URL allowlist check appears in the reviewed method"
+      ]
+    },
+    {
+      "class": "com.quattroplay.GraalClassic.QPlayActivity",
+      "method": "setWebViewURL",
+      "confidence": "confirmed local smali",
+      "behavior": [
+        "Schedules a UI-thread operation",
+        "Calls WebView.loadUrl with the supplied URL when the mapped view exists"
+      ]
+    },
+    {
+      "class": "bolts.WebViewAppLinkResolver$2",
+      "method": "then",
+      "confidence": "confirmed local smali",
+      "behavior": [
+        "Creates a separate WebView",
+        "Enables JavaScript",
+        "Disables network access with setNetworkAvailable(false)",
+        "Installs the bridge named boltsWebViewAppLinkResolverResult"
+      ]
+    },
+    {
+      "class": "bolts.WebViewAppLinkResolver$2$2",
+      "method": "setValue",
+      "confidence": "confirmed local smali",
+      "behavior": [
+        "Is annotated with android.webkit.JavascriptInterface",
+        "Parses the supplied value with org.json.JSONArray",
+        "Reports a parsed result or an error to the resolver task"
+      ]
+    },
+    {
+      "class": "com.facebook.widget.WebDialog",
+      "member": "DISABLE_SSL_CHECK_FOR_TESTING",
+      "confidence": "confirmed local smali",
+      "behavior": [
+        "The static boolean field is explicitly false"
+      ]
+    },
+    {
+      "class": "com.facebook.widget.WebDialog$DialogWebViewClient",
+      "method": "onReceivedSslError",
+      "confidence": "confirmed local smali",
+      "behavior": [
+        "Calls the superclass handler",
+        "Reports a FacebookDialogException to the listener",
+        "Calls SslErrorHandler.cancel()",
+        "Dismisses the WebDialog"
+      ]
+    }
+  ],
+  "negative_indicators": [
+    "DexClassLoader",
+    "load_dex",
+    "java_reflection"
+  ],
+  "interpretation": [
+    "The game activity has a JavaScript-enabled navigation surface with a native-supplied URL input.",
+    "The addJavascriptInterface bridge belongs to a separate Bolts app-link resolver and is limited to JSON metadata resolution in the reviewed code.",
+    "The reviewed Facebook WebDialog path rejects WebView certificate errors. It does not establish a Java SSL bypass.",
+    "The native connector uses an independent CyaSSL implementation and is not covered by the WebDialog result."
+  ]
+}
