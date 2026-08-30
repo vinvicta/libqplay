@@ -62,6 +62,8 @@ account authentication remain open.
   live game service.
 * `docs/SECURITY.md` records the original APK and ARM64 native trust-boundary
   review.
+* `artifacts/connector_http_flow_review_20260830.json` preserves the compact
+  IDA export for the original connector request lifecycle.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.
 * `symbols/libqplay.symbols.json` is the machine-readable equivalent.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.

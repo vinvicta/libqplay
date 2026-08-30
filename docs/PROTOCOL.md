@@ -47,6 +47,28 @@ TServerList_login
 call `TSocketConnection_setVerifyGraalWebCert` at `0x20ab20` before the TLS
 handshake.
 
+The complete request lifecycle is captured in
+`artifacts/connector_http_flow_review_20260830.json`. The read-only IDA
+export covers the connection-limit check, keep-alive reuse, outgoing write,
+request construction, incremental read, header pre-parser, body parser,
+download completion, and request state machine. The important order is:
+
+```text
+THTTPRequest_runScript
+  -> THTTPRequest_sendOutgoing
+  -> THTTPRequest_read
+  -> THTTPRequest_preParseData
+  -> THTTPRequest_parseData or THTTPRequest_saveDownloadedData
+```
+
+When a response carries a redirect or selected retry status, the state
+machine can extract a new host, port, file, and TLS flag from the location
+field, reopen the request, and send it again. It limits that retry counter to
+ten attempts. A connector response is dispatched to the script path, while a
+game-file response is written through the cache and file-download paths. A
+declared body larger than the native web-download limit is discarded and
+reported instead of being saved.
+
 The response parser is `THTTPRequest_preParseData_void` at ARM64 `0x201d68`.
 It lowercases each complete header line before checking the header name, so
 `content-length:` and `Content-Length:` are equivalent to this client. It
