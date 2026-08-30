@@ -67,6 +67,8 @@ account authentication remain open.
   path.
 * `artifacts/connector_http_flow_review_20260830.json` preserves the compact
   IDA export for the original connector request lifecycle.
+* `artifacts/game_connection_flow_review_20260830.json` preserves the compact
+  IDA export for the connector-to-game socket lifecycle.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.
 * `symbols/libqplay.symbols.json` is the machine-readable equivalent.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.

@@ -1,0 +1,349 @@
+{
+  "artifact": "game_connection_flow_review_20260830",
+  "database": {
+    "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "imagebase": "0x0",
+    "path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
+  },
+  "functions": [
+    {
+      "address": "0x204420",
+      "call_tokens": [],
+      "caller_count": 1,
+      "callers": [
+        {
+          "caller": "0x15cba0",
+          "caller_name": "TClientEnvironment_loadGui_bool",
+          "callsite": "0x15cc4c"
+        }
+      ],
+      "code": "__int64 __fastcall TServerList_login_void(TServerList *this, bool a2)\n{\n  __int64 v2; // x20\n  TServerList *v3; // x0\n  int v4; // w1\n  __int64 v6; // [xsp+28h] [xbp-8h] BYREF\n\n  plt_TServerList_deleteTClient_bool(nullptr, a2);\n  v6 = 0;\n  v2 = data_TServerList_servername;\n  plt_TString_operator_lshift_char_const((int)&v6, \"Login\");\n  plt_TString_operator_assign_TString_const(v2, &v6);\n  v3 = (TServerList *)plt_TString_clear_void((TString *)&v6);\n  plt_TServerList_showConnectingWindow_void(v3);\n  return plt_TServerList_enterNextConnectorMode_int((TServerList *)((char *)&dword_0 + 1), v4);\n}\n",
+      "code_bytes": 598,
+      "code_sha256": "305e589ff0b1ec16ffa7f39fb0d11c71eb158c0aeca68a6ca0564195c76efe4c",
+      "function_end": "0x204488",
+      "function_start": "0x204420",
+      "name": "TServerList_login_void",
+      "role": "connector login selection",
+      "string_literals": [
+        "\"Login\""
+      ]
+    },
+    {
+      "address": "0x204488",
+      "call_tokens": [],
+      "caller_count": 1,
+      "callers": [
+        {
+          "caller": "0x15b0b4",
+          "caller_name": "TAdventure_timer_void",
+          "callsite": "0x15b154"
+        }
+      ],
+      "code": "void __fastcall TServerList_handleServerWarp_void(TServerList *this)\n{\n  __int64 v1; // x20\n  const TString *v2; // x1\n  THashList *v3; // x20\n  unsigned int Hashcode_TString_const; // w0\n  TGraalVar *Object_uint_TString_const; // x23\n  __int64 v6; // x22\n  __int64 v7; // x4\n  unsigned int v8; // w0\n  __int64 v9; // [xsp+48h] [xbp-48h]\n  __int64 v10; // [xsp+58h] [xbp-38h] BYREF\n  __int64 v11; // [xsp+60h] [xbp-30h] BYREF\n  __int64 v12; // [xsp+68h] [xbp-28h] BYREF\n  __int64 v13; // [xsp+70h] [xbp-20h] BYREF\n  _BYTE v14[16]; // [xsp+78h] [xbp-18h] BYREF\n  int v15; // [xsp+88h] [xbp-8h]\n\n  plt_TStringList_TStringList_TString_const((TStringList *)v14, (const TString *)&data_TClient_serverwarpdestination);\n  v13 = 0;\n  plt_TString_operator_lshift_char_const((int)&v13, &byte_2DCE08);\n  plt_TString_operator_assign_TString_const(&data_TClient_serverwarpdestination, &v13);\n  plt_TString_clear_void((TString *)&v13);\n  if ( v15 > 3 )\n  {\n    v13 = 0;\n    v1 = data_TGameEnvironment_universe;\n    plt_TString_operator_lshift_char_const((int)&v13, \"StartScript_Connector\");\n    v3 = *(THashList **)(v1 + 96);\n    if ( !v3 )\n    {\nLABEL_9:\n      plt_TString_clear_void((TString *)&v13);\n      goto LABEL_10;\n    }\n    Hashcode_TString_const = plt_THashList_getHashcode_TString_const((THashList *)&v13, v2);\n    Object_uint_TString_const = (TGraalVar *)plt_THashList_getObject_uint_TString_const(\n                                               v3,\n                                               Hashcode_TString_const,\n                                               (const TString *)&v13);\n    plt_TString_clear_void((TString *)&v13);\n    if ( Object_uint_TString_const )\n    {\n      v13 = 0;\n      plt_TString_operator_lshift_char_const((int)&v13, \"onServerWarp\");\n      plt_TStringList_operator_index_int(&v10, v14, 1);\n      if ( v10 )\n        v6 = v10 + 8;\n      else\n        v6 = TString_dummystr;\n      plt_TStringList_operator_index_int(&v11, v14, 2);\n      if ( v11 )\n        v7 = v11 + 8;\n      else\n        v7 = TString_dummystr;\n      v9 = v7;\n      plt_TStringList_operator_index_int(&v12, v14, 3);\n      v8 = plt_strtoint_TString_const((const TString *)&v12);\n      plt_TGraalVar_invokeEvent_TString_const_char_const(\n        Object_uint_TString_const,\n        (const TString *)&v13,\n        \"ssi\",\n        v6,\n        v9,\n        v8);\n      plt_TString_clear_void((TString *)&v12);\n      plt_TString_clear_void((TString *)&v11);\n      plt_TString_clear_void((TString *)&v10);\n      goto LABEL_9;\n    }\n  }\nLABEL_10:\n  plt_TStringList_TStringList((TStringList *)v14);\n}\n",
+      "code_bytes": 2584,
+      "code_sha256": "fb2ee7d706f7dccc223796b799aec7ba04ef37ba43b10492b3341b51b1bc22ac",
+      "function_end": "0x204630",
+      "function_start": "0x204488",
+      "name": "TServerList_handleServerWarp_void",
+      "role": "server-warp handoff",
+      "string_literals": [
+        "\"StartScript_Connector\"",
+        "\"onServerWarp\"",
+        "\"ssi\""
+      ]
+    },
+    {
+      "address": "0x1e7058",
+      "call_tokens": [
+        "connect"
+      ],
+      "caller_count": 1,
+      "callers": [
+        {
+          "caller": "0x1eba0c",
+          "caller_name": "jump_TClient_connectToGameServer_void",
+          "callsite": "0x1eba0c"
+        }
+      ],
+      "code": "// Game-server startup calls TGraalConnection::connectToServer, then accepts non-error status 4 (EINPROGRESS) before starting the client thread. The game-server trust path is separate from the connector's TSocketConnection_setVerifyGraalWebCert path.\n__int64 __fastcall TClient_connectToGameServer_void(TClient *this)\n{\n  const TString *v2; // x23\n  TSocketConnection *v3; // x0\n  __int64 v4; // x3\n  __int64 v6; // x21\n  const TString *v7; // x1\n  char *v8; // [xsp+38h] [xbp-18h]\n  __int64 v9; // [xsp+40h] [xbp-10h] BYREF\n  __int64 v10; // [xsp+48h] [xbp-8h] BYREF\n\n  v2 = (const TString *)data_TServerList_serveraddr;\n  if ( *(_QWORD *)data_TServerList_serveraddr\n    && **(int **)data_TServerList_serveraddr > 0\n    && data_TServerList_serverport > 0\n    && (v10 = 0,\n        plt_TString_operator_lshift_int(&v10),\n        plt_TGraalConnection_connectToServer_TString_const_TString_const(this, v2, (const TString *)&v10),\n        plt_TString_clear_void((TString *)&v10),\n        (v3 = *((TSocketConnection **)this + 32)) != nullptr)\n    && !(unsigned __int8)plt_TSocketConnection_hasError_void(v3) )\n  {\n    v9 = 0;\n    v6 = data_TClient_serveripstr;\n    plt_TString_operator_assign_TString_const(&v9, data_TServerList_serveraddr);\n    plt_TString_operator_lshift_int(&v9);\n    plt_TEncryption_getMD5Digest_TString_const(&v10, (TEncryption *)&v9, v7);\n    plt_TString_operator_assign_TString_const(v6, &v10);\n    plt_TString_clear_void((TString *)&v10);\n    plt_TString_clear_void((TString *)&v9);\n    plt_createClientThread_void();\n    return 1;\n  }\n  else\n  {\n    *((_BYTE *)this + 272) = 1;\n    v8 = (char *)plt_gettextpo_get_char_const(\"Couldn't connect to the game server. Please make sure that the internet connection is working.\");\n    plt_TGameEnvironment_getApplicationIdentifier_void(&v10, (TGameEnvironment *)v8);\n    v4 = v10 + 8;\n    if ( !v10 )\n      v4 = TString_dummystr;\n    plt_TString_format_bool_char_const((TString *)&data_TClient_disconnectreason, 0, v8, v4);\n    plt_TString_clear_void((TString *)&v10);\n    return 0;\n  }\n}\n",
+      "code_bytes": 2052,
+      "code_sha256": "8100e3fce7a46df8fadce340780487025b3e99940ac530dadb6abf1975c008a3",
+      "function_end": "0x1e71cc",
+      "function_start": "0x1e7058",
+      "name": "TClient_connectToGameServer_void",
+      "role": "game-server connect setup",
+      "string_literals": [
+        "\"Couldn't connect to the game server. Please make sure that the internet connection is working.\""
+      ]
+    },
+    {
+      "address": "0x206bd8",
+      "call_tokens": [
+        "connect",
+        "gethostbyname",
+        "socket"
+      ],
+      "caller_count": 3,
+      "callers": [
+        {
+          "caller": "0x1feb98",
+          "caller_name": "TGraalConnection_connectToServer_TString_const_TString_const",
+          "callsite": "0x1fec40"
+        },
+        {
+          "caller": "0x1ffde8",
+          "caller_name": "THTTPRequest_sendRequest_void",
+          "callsite": "0x1fffdc"
+        },
+        {
+          "caller": "0x204ec8",
+          "caller_name": "TSocket_connect_TString_const_int",
+          "callsite": "0x204ffc"
+        }
+      ],
+      "code": "// Creates a nonblocking TCP socket. Status 4 represents EINPROGRESS and status 5 represents a completed TCP connection. The status transition, rather than a blocking connect, drives delayed TLS setup.\n__int64 __fastcall TSocketConnection_connectSocket_TString_const_int(\n        TSocketConnection *this,\n        int **a2,\n        unsigned int a3)\n{\n  char *v6; // x22\n  int *v7; // x0\n  int v8; // w0\n  const char *v9; // x0\n  in_addr_t v10; // w2\n  __int64 v11; // x0\n  _DWORD *v12; // x20\n  int v13; // w1\n  __int64 result; // x0\n  TString *v15; // x20\n  struct sockaddr *v16; // x0\n  char *v17; // x1\n  __int64 v18; // [xsp+38h] [xbp-18h] BYREF\n  struct sockaddr v19; // [xsp+40h] [xbp-10h] BYREF\n\n  v6 = (char *)this + 0x2000;\n  plt_TSocketConnection_closeSocket_void(this);\n  plt_TSocketConnection_setStatus_int(this, 0);\n  plt_TString_operator_assign_TString_const(v6 + 176, a2);\n  v7 = *a2;\n  *((_DWORD *)this + 2094) = a3;\n  if ( !v7 || *v7 <= 0 || (v8 = socket(2, 1, 6), *(_DWORD *)this = v8, v8 == -1) )\n  {\n    *(_DWORD *)this = 0;\n    plt_TSocketConnection_setStatus_int(this, 1);\n    *(_QWORD *)&v19.sa_family = 0;\n    plt_TString_operator_lshift_char_const((int)&v19, \"socket call failed\");\n    plt_TString_operator_assign_TString_const(v6 + 128, &v19);\n    return plt_TString_clear_void((TString *)&v19);\n  }\n  else\n  {\n    plt_TSocketConnection_setNonBlocking_void(this);\n    if ( *a2 )\n      v9 = (const char *)(*a2 + 2);\n    else\n      v9 = (const char *)TString_dummystr;\n    v10 = inet_addr(v9);\n    if ( v10 == -1 && (v10 = plt_resolveHost_TString_const((const TString *)a2), v10 == -1) )\n    {\n      v15 = (TString *)&v19;\n      plt_TSocketConnection_closeSocket_void(this);\n      plt_TSocketConnection_setStatus_int(this, 1);\n      *(_QWORD *)&v19.sa_family = 0;\n      v16 = &v19;\n      v17 = \"gethostbyname call failed\";\nLABEL_20:\n      plt_TString_operator_lshift_char_const((int)v16, v17);\n      plt_TString_operator_assign_TString_const(v6 + 128, v15);\n      return plt_TString_clear_void(v15);\n    }\n    else\n    {\n      *((_DWORD *)this + 2) = v10;\n      v19.sa_family = 2;\n      *(_WORD *)v19.sa_data = __rev16(a3);\n      *(_DWORD *)&v19.sa_data[2] = v10;\n      v11 = plt_TSocketConnection_setStatus_int(this, 4);\n      v12 = (_DWORD *)__errno(v11);\n      do\n      {\n        if ( (connect(*(_DWORD *)this, &v19, 0x10u) & 0x80000000) == 0 )\n        {\n          if ( *v12 == 115 )\n            v13 = 4;\n          else\n            v13 = 5;\n          goto LABEL_13;\n        }\n      }\n      while ( *v12 == 4 );\n      v13 = 4;\n      if ( *v12 != 115 )\n      {\n        v15 = (TString *)&v18;\n        plt_TSocketConnection_closeSocket_void(this);\n        plt_TSocketConnection_setStatus_int(this, 2);\n        v18 = 0;\n        v16 = (struct sockaddr *)&v18;\n        v17 = \"connect call failed\";\n        goto LABEL_20;\n      }\nLABEL_13:\n      plt_TSocketConnection_setStatus_int(this, v13);\n      plt_TSocketConnection_closeForSubProcesses_void(this);\n      plt_TSocketConnection_turnOffNagleDelay_void(this);\n      result = (unsigned __int8)v6[36];\n      if ( v6[36] )\n      {\n        result = *((unsigned int *)this + 1);\n        if ( (_DWORD)result == 5 )\n          return plt_TSocketConnection_enableSSLOnSocket_void(this);\n      }\n    }\n  }\n  return result;\n}\n",
+      "code_bytes": 3286,
+      "code_sha256": "3054eb82cc6ffcde1f47d296af31b493edb03a0ecd01bc0a6702134ced63dc15",
+      "function_end": "0x206e0c",
+      "function_start": "0x206bd8",
+      "name": "TSocketConnection_connectSocket_TString_const_int",
+      "role": "nonblocking socket connect",
+      "string_literals": [
+        "\"connect call failed\"",
+        "\"gethostbyname call failed\"",
+        "\"socket call failed\""
+      ]
+    },
+    {
+      "address": "0x206a48",
+      "call_tokens": [
+        "connect",
+        "getsockopt",
+        "select"
+      ],
+      "caller_count": 2,
+      "callers": [
+        {
+          "caller": "0x207118",
+          "caller_name": "TSocketConnection_sendData_void_const_int",
+          "callsite": "0x207154"
+        },
+        {
+          "caller": "0x2074d4",
+          "caller_name": "TSocketConnection_read_void",
+          "callsite": "0x2074f0"
+        }
+      ],
+      "code": "// Checks a status-4 nonblocking connect with zero-timeout select and SO_ERROR. On success it calls setStatus(5); setStatus_int starts the CyaSSL handshake when SSL is enabled.\n__int64 __fastcall TSocketConnection_checkConnecting_void(__int64 this)\n{\n  int v1; // w1\n  TSocketConnection *v2; // x19\n  unsigned __int64 v3; // x7\n  __fd_mask v4; // x8\n  int v5; // w0\n  char *v6; // x1\n  int optval; // [xsp+20h] [xbp-A0h] BYREF\n  socklen_t optlen; // [xsp+24h] [xbp-9Ch] BYREF\n  __int64 v9; // [xsp+28h] [xbp-98h] BYREF\n  struct timeval timeout; // [xsp+30h] [xbp-90h] BYREF\n  fd_set writefds; // [xsp+40h] [xbp-80h] BYREF\n\n  v1 = *(_DWORD *)this;\n  if ( *(_DWORD *)this && *(_DWORD *)(this + 4) == 4 )\n  {\n    v2 = (TSocketConnection *)this;\n    memset(&writefds, 0, sizeof(writefds));\n    v3 = (unsigned __int64)v1 >> 6;\n    timeout.tv_sec = 0;\n    v4 = writefds.fds_bits[v3];\n    timeout.tv_usec = 0;\n    writefds.fds_bits[v3] = v4 | (1LL << (v1 & 0x3F));\n    this = select(v1 + 1, nullptr, &writefds, nullptr, &timeout);\n    if ( (int)this < 0 )\n    {\n      this = *(unsigned int *)__errno(this);\n      if ( (_DWORD)this == 4 )\n        return this;\n      plt_TSocketConnection_closeSocket_void(v2);\n      plt_TSocketConnection_setStatus_int(v2, 2);\n      v6 = \"connect call failed (2)\";\n    }\n    else\n    {\n      if ( !(_DWORD)this )\n        return this;\n      v5 = *(_DWORD *)v2;\n      optlen = 4;\n      if ( (getsockopt(v5, 1, 4, &optval, &optlen) & 0x80000000) == 0 && !optval )\n        return plt_TSocketConnection_setStatus_int(v2, 5);\n      plt_TSocketConnection_closeSocket_void(v2);\n      plt_TSocketConnection_setStatus_int(v2, 2);\n      v6 = \"connect call failed (3)\";\n    }\n    v9 = 0;\n    plt_TString_operator_lshift_char_const((int)&v9, v6);\n    plt_TString_operator_assign_TString_const((char *)v2 + 8320, &v9);\n    return plt_TString_clear_void((TString *)&v9);\n  }\n  return this;\n}\n",
+      "code_bytes": 1902,
+      "code_sha256": "2fafdfefd98a0b189394ad63f48a84cd6863ceb1db4ab2fa338c9882757d7f9c",
+      "function_end": "0x206bd8",
+      "function_start": "0x206a48",
+      "name": "TSocketConnection_checkConnecting_void",
+      "role": "delayed connect completion",
+      "string_literals": [
+        "\"connect call failed (2)\"",
+        "\"connect call failed (3)\""
+      ]
+    },
+    {
+      "address": "0x2067b4",
+      "call_tokens": [
+        "connect"
+      ],
+      "caller_count": 15,
+      "callers": [
+        {
+          "caller": "0x203360",
+          "caller_name": "TServerList_handleClient_void",
+          "callsite": "0x203674"
+        },
+        {
+          "caller": "0x2067e0",
+          "caller_name": "TSocketConnection_closeSocket_void",
+          "callsite": "0x206824"
+        },
+        {
+          "caller": "0x2068b4",
+          "caller_name": "TSocketConnection_bindSocket_int_bool",
+          "callsite": "0x206968"
+        },
+        {
+          "caller": "0x2068b4",
+          "caller_name": "TSocketConnection_bindSocket_int_bool",
+          "callsite": "0x2069a8"
+        },
+        {
+          "caller": "0x2068b4",
+          "caller_name": "TSocketConnection_bindSocket_int_bool",
+          "callsite": "0x206a18"
+        },
+        {
+          "caller": "0x206a48",
+          "caller_name": "TSocketConnection_checkConnecting_void",
+          "callsite": "0x206b3c"
+        },
+        {
+          "caller": "0x206a48",
+          "caller_name": "TSocketConnection_checkConnecting_void",
+          "callsite": "0x206b74"
+        },
+        {
+          "caller": "0x206a48",
+          "caller_name": "TSocketConnection_checkConnecting_void",
+          "callsite": "0x206bc8"
+        },
+        {
+          "caller": "0x206bd8",
+          "caller_name": "TSocketConnection_connectSocket_TString_const_int",
+          "callsite": "0x206c04"
+        },
+        {
+          "caller": "0x206bd8",
+          "caller_name": "TSocketConnection_connectSocket_TString_const_int",
+          "callsite": "0x206c90"
+        },
+        {
+          "caller": "0x206bd8",
+          "caller_name": "TSocketConnection_connectSocket_TString_const_int",
+          "callsite": "0x206cd8"
+        },
+        {
+          "caller": "0x206bd8",
+          "caller_name": "TSocketConnection_connectSocket_TString_const_int",
+          "callsite": "0x206d2c"
+        },
+        {
+          "caller": "0x206bd8",
+          "caller_name": "TSocketConnection_connectSocket_TString_const_int",
+          "callsite": "0x206d8c"
+        },
+        {
+          "caller": "0x206bd8",
+          "caller_name": "TSocketConnection_connectSocket_TString_const_int",
+          "callsite": "0x206df4"
+        },
+        {
+          "caller": "0x206e30",
+          "caller_name": "TSocketConnection_acceptSocket_void",
+          "callsite": "0x206f00"
+        }
+      ],
+      "code": "// Status 5 is the connected TCP state. When the SSL flag at this+0x2024 is enabled, this transition invokes enableSSLOnSocket. This is also the delayed nonblocking-connect completion path.\n__int64 __fastcall TSocketConnection_setStatus_int(__int64 this, int a2)\n{\n  if ( *(_DWORD *)(this + 4) != a2 )\n  {\n    *(_DWORD *)(this + 4) = a2;\n    if ( a2 == 5 )\n    {\n      if ( *(_BYTE *)(this + 8228) )\n        return plt_TSocketConnection_enableSSLOnSocket_void((TSocketConnection *)this);\n    }\n  }\n  return this;\n}\n",
+      "code_bytes": 515,
+      "code_sha256": "21cb5f3fbe389541a7efc8747f0eac081092e620b8f8bc464b6a463d0eecb221",
+      "function_end": "0x2067e0",
+      "function_start": "0x2067b4",
+      "name": "TSocketConnection_setStatus_int",
+      "role": "socket status transition",
+      "string_literals": []
+    },
+    {
+      "address": "0x206450",
+      "call_tokens": [
+        "CyaSSL_connect",
+        "socket"
+      ],
+      "caller_count": 3,
+      "callers": [
+        {
+          "caller": "0x2067b4",
+          "caller_name": "TSocketConnection_setStatus_int",
+          "callsite": "0x2067dc"
+        },
+        {
+          "caller": "0x206bd8",
+          "caller_name": "TSocketConnection_connectSocket_TString_const_int",
+          "callsite": "0x206d04"
+        },
+        {
+          "caller": "0x206e0c",
+          "caller_name": "TSocketConnection_setEnableSSL_bool",
+          "callsite": "0x206e2c"
+        }
+      ],
+      "code": "// Creates the CyaSSL client, loads the per-socket verify buffer, enables peer verification when the buffer is present, checks the hostname when configured, and starts CyaSSL_connect in nonblocking mode.\n__int64 __fastcall TSocketConnection_enableSSLOnSocket_void(__int64 this)\n{\n  _BYTE *v1; // x21\n  __int64 v2; // x22\n  TSocketConnection *v3; // x19\n  int *v4; // x3\n  int *v5; // x20\n  __int64 v6; // x3\n  int verify_buffer; // w20\n  const char *v8; // x2\n  __int64 v9; // x0\n  int *v10; // x1\n  int *v11; // x0\n  __int64 v12; // x1\n  __int64 v13; // x1\n  char *v14; // x1\n  const char *v15; // x2\n  CyaInt *v16; // x0\n  CyaInt *v17; // x0\n  CyaInt *v18; // x0\n  __int64 v19; // x0\n  __int64 v20; // x0\n  unsigned __int64 v21; // x0\n  CyaInt *v22; // x0\n  CyaInt *v23; // x0\n  __int64 v24; // [xsp+48h] [xbp-18h]\n  __int64 v25; // [xsp+58h] [xbp-8h] BYREF\n\n  if ( !*(_DWORD *)this || *(_DWORD *)(this + 4) != 5 )\n    return this;\n  v1 = (_BYTE *)(this + 0x2000);\n  if ( *(_BYTE *)(this + 8328) )\n    v2 = qword_390B20;\n  else\n    v2 = qword_390B28;\n  v3 = (TSocketConnection *)this;\n  if ( v2 )\n    goto LABEL_7;\n  v16 = (CyaInt *)plt_CyaSSL_SetLoggingCb_void_int_char_const((void (*)(int, const char *))TSocket_logSocketMessage);\n  v17 = (CyaInt *)plt_CyaInt_CyaSSL_library_init_void(v16);\n  plt_CyaInt_CyaSSL_load_error_strings_void(v17);\n  v18 = (CyaInt *)(unsigned __int8)plt_operator_assign_TString_const_char_const((int)v1 + 64, \"SSLv3\");\n  if ( !(_BYTE)v18 )\n  {\n    v21 = (unsigned __int8)plt_operator_assign_TString_const_char_const((int)v1 + 64, \"SSLv23\");\n    if ( !(_BYTE)v21 )\n    {\n      v22 = (CyaInt *)(unsigned __int8)plt_operator_assign_TString_const_char_const((int)v1 + 64, \"TLSv1\");\n      if ( (_BYTE)v22 )\n      {\n        v19 = plt_CyaInt_CyaTLSv1_client_method_void(v22);\n        goto LABEL_34;\n      }\n      v23 = (CyaInt *)(unsigned __int8)plt_operator_assign_TString_const_char_const((int)v1 + 64, \"TLSv1_1\");\n      if ( (_BYTE)v23 )\n      {\n        v19 = plt_CyaInt_CyaTLSv1_1_client_method_void(v23);\n        goto LABEL_34;\n      }\n      v21 = (unsigned __int8)plt_operator_assign_TString_const_char_const((int)v1 + 64, \"TLSv1_2\");\n      if ( (_BYTE)v21 )\n      {\n        v19 = plt_CyaInt_CyaTLSv1_2_client_method_void((CyaInt *)v21);\n        goto LABEL_34;\n      }\n    }\n    v19 = plt_CyaInt_CyaSSLv23_client_method_void((CyaInt *)v21);\n    goto LABEL_34;\n  }\n  v19 = plt_CyaInt_CyaSSLv3_client_method_void(v18);\nLABEL_34:\n  v20 = plt_CyaInt_CyaSSL_CTX_new_CyaInt_CYASSL_METHOD(v19);\n  v2 = v20;\n  if ( !v20 )\n  {\n    v14 = \"Error when creating SSL context\";\n    goto LABEL_31;\n  }\n  plt_CyaInt_CyaSSL_SetIORecv_CyaInt_CYASSL_CTX_int_CyaInt_CYASSL_char_int_void(v20, TSocket_recvPlain);\n  plt_CyaInt_CyaSSL_SetIOSend_CyaInt_CYASSL_CTX_int_CyaInt_CYASSL_char_int_void(v2, TSocket_sendPlain);\n  if ( v1[136] )\n    qword_390B20 = v2;\n  else\n    qword_390B28 = v2;\nLABEL_7:\n  v4 = *((int **)v3 + 1034);\n  if ( v4 && *v4 > 0 )\n  {\n    v5 = v4 + 2;\n    v24 = *v4;\n    v25 = 0;\n    plt_TString_operator_lshift_char_const((int)&v25, \"---\");\n    v6 = (unsigned __int8)plt_TString_starts_TString_const((TString *)(v1 + 80), (const TString *)&v25) ? 1LL : 2LL;\n    verify_buffer = plt_CyaInt_CyaSSL_CTX_load_verify_buffer_CyaInt_CYASSL_CTX_uchar_const_long_int(v2, v5, v24, v6);\n    plt_TString_clear_void((TString *)&v25);\n    if ( !verify_buffer )\n    {\n      v25 = 0;\n      plt_TString_operator_lshift_char_const((int)&v25, \"Error initializing SSL (1)\");\n      plt_TLog_echo_TString_const_double_double_double_char_const((TLog *)&v25, nullptr, 1.0, 0.0, 0.0, v8);\n      plt_TString_clear_void((TString *)&v25);\n    }\n  }\n  v9 = plt_CyaInt_CyaSSL_new_CyaInt_CYASSL_CTX(v2);\n  *((_QWORD *)v3 + 1029) = v9;\n  if ( !v9 )\n  {\n    v14 = \"Error initializing SSL (2)\";\nLABEL_31:\n    v25 = 0;\n    plt_TString_operator_lshift_char_const((int)&v25, v14);\n    plt_TLog_echo_TString_const_double_double_double_char_const((TLog *)&v25, nullptr, 1.0, 0.0, 0.0, v15);\n    plt_TString_clear_void((TString *)&v25);\n    return plt_TSocketConnection_closeSocket_void(v3);\n  }\n  plt_CyaInt_CyaSSL_SetIOReadCtx_CyaInt_CYASSL_void(v9, v3);\n  plt_CyaInt_CyaSSL_SetIOWriteCtx_CyaInt_CYASSL_void(*((_QWORD *)v3 + 1029), v3);\n  v10 = *((int **)v3 + 1031);\n  if ( v10\n    && *v10 > 0\n    && (int)plt_CyaInt_CyaSSL_set_cipher_list_CyaInt_CYASSL_char_const(*((_QWORD *)v3 + 1029), v10 + 2) <= 0 )\n  {\n    v13 = *((_QWORD *)v3 + 1031);\n    if ( v13 )\n      plt_TLog_printf_char_const((TLog *)\"Error setting SSL cipher '%s'\", (const char *)(v13 + 8));\n    else\n      plt_TLog_printf_char_const((TLog *)\"Error setting SSL cipher '%s'\", TString_dummystr);\n  }\n  if ( v1[48] )\n  {\n    plt_CyaInt_CyaSSL_set_verify_CyaInt_CYASSL_int_int_int_CyaInt_CYASSL_X509_STORE_CTX(*((_QWORD *)v3 + 1029), 0, 0);\n  }\n  else\n  {\n    v11 = *((int **)v3 + 1034);\n    if ( v11 && *v11 > 0 )\n      plt_CyaInt_CyaSSL_set_verify_CyaInt_CYASSL_int_int_int_CyaInt_CYASSL_X509_STORE_CTX(*((_QWORD *)v3 + 1029), 3, 0);\n  }\n  v12 = *((_QWORD *)v3 + 1033);\n  if ( v12 )\n  {\n    if ( *(int *)v12 > 0 )\n      plt_CyaInt_CyaSSL_check_domain_name_CyaInt_CYASSL_char_const(*((_QWORD *)v3 + 1029), (char *)(v12 + 8));\n  }\n  plt_CyaInt_CyaSSL_set_using_nonblock_CyaInt_CYASSL_int(*((_QWORD *)v3 + 1029), 1);\n  return plt_CyaInt_CyaSSL_connect_CyaInt_CYASSL(*((_QWORD *)v3 + 1029));\n}\n",
+      "code_bytes": 5341,
+      "code_sha256": "713284457a3b917cb4b62361beb662c995c2f545e0ea096f3f41a980d4ab2b65",
+      "function_end": "0x2067b4",
+      "function_start": "0x206450",
+      "name": "TSocketConnection_enableSSLOnSocket_void",
+      "role": "delayed TLS setup",
+      "string_literals": [
+        "\"---\"",
+        "\"Error initializing SSL (1)\"",
+        "\"Error initializing SSL (2)\"",
+        "\"Error setting SSL cipher '%s'\"",
+        "\"Error when creating SSL context\"",
+        "\"SSLv23\"",
+        "\"SSLv3\"",
+        "\"TLSv1\"",
+        "\"TLSv1_1\"",
+        "\"TLSv1_2\""
+      ]
+    },
+    {
+      "address": "0x208920",
+      "call_tokens": [
+        "nanosleep"
+      ],
+      "caller_count": 2,
+      "callers": [
+        {
+          "caller": "0x20861c",
+          "caller_name": "createClientThread_void",
+          "callsite": "0x208670"
+        },
+        {
+          "caller": "0x20861c",
+          "caller_name": "createClientThread_void",
+          "callsite": "0x20867c"
+        }
+      ],
+      "code": "// Sets the client network-thread running flag, drains incoming packages while the queue stays below its limit, processes and sends outgoing packages, sleeps briefly, and clears the running flag on shutdown.\n__int64 sub_208920()\n{\n  __int64 v1; // [xsp+30h] [xbp-10h] BYREF\n  __int64 v2; // [xsp+38h] [xbp-8h]\n\n  byte_390B59 = 1;\n  while ( !byte_390B58 )\n  {\n    while ( *(int *)(client_thread_incoming + 12) <= 999 )\n    {\n      if ( data_TClient_client )\n      {\n        plt_readIncomingData_void();\n        plt_processOutgoingPackages_void();\n        plt_sendOutgoingPackages_void();\n      }\n      v1 = 0;\n      v2 = 1000000;\n      nanosleep((const struct timespec *)&v1, nullptr);\n      if ( byte_390B58 )\n        goto LABEL_7;\n    }\n    v1 = 1;\n    v2 = 0;\n    nanosleep((const struct timespec *)&v1, nullptr);\n  }\nLABEL_7:\n  client_thread_running = 0;\n  return 0;\n}\n",
+      "code_bytes": 872,
+      "code_sha256": "e5aad58adddccd3eded8edab71f915869e57f4d932402a1832b612973270e444",
+      "function_end": "0x2089e4",
+      "function_start": "0x208920",
+      "name": "TClient_networkThreadMain",
+      "role": "game network thread",
+      "string_literals": []
+    },
+    {
+      "address": "0x203360",
+      "call_tokens": [],
+      "caller_count": 1,
+      "callers": [
+        {
+          "caller": "0x15b0b4",
+          "caller_name": "TAdventure_timer_void",
+          "callsite": "0x15b124"
+        }
+      ],
+      "code": "__int64 __fastcall TServerList_handleClient_void(TServerList *this)\n{\n  __int64 result; // x0\n  __int64 v2; // x19\n  __int64 v3; // x0\n  unsigned int v4; // w19\n  __int64 i; // x0\n  __int64 v6; // x1\n  __int64 v7; // x0\n  unsigned int v8; // w19\n  __int64 j; // x0\n  __int64 v10; // x1\n  TServerPlayer **v11; // x0\n  int v12; // w19\n  __int64 v13; // x0\n  _DWORD *v14; // x20\n  int v15; // w1\n  __int64 v16; // x1\n  int v17; // w1\n  const TString *v18; // x1\n  THashList *v19; // x19\n  unsigned int Hashcode; // w0\n  TGraalVar *Object; // x19\n  TGraalVar *v22; // x26\n  double v23; // d0\n  __int64 v24; // [xsp+58h] [xbp-8h] BYREF\n\n  result = data_TClient_client;\n  if ( !data_TClient_client )\n    return result;\n  v2 = data_TGameEnvironment_universe;\n  if ( !data_TGameEnvironment_universe )\n    return result;\n  if ( data_TClient_reconnect )\n  {\n    data_TClient_reconnect = 0;\n    v24 = 0;\n    plt_TString_operator_lshift_char_const((int)&v24, \"StartScript_Connector\");\n    v19 = *(THashList **)(v2 + 96);\n    if ( v19 )\n    {\n      Hashcode = plt_THashList_getHashcode_TString_const((THashList *)&v24, v18);\n      Object = (TGraalVar *)plt_THashList_getObject_uint_TString_const(v19, Hashcode, (const TString *)&v24);\n      plt_TString_clear_void((TString *)&v24);\n      if ( !Object )\n        goto LABEL_32;\n      v24 = 0;\n      plt_TString_operator_lshift_char_const((int)&v24, \"onReconnect\");\n      plt_TGraalVar_invokeEvent_TString_const(Object, (const TString *)&v24);\n    }\n    plt_TString_clear_void((TString *)&v24);\nLABEL_32:\n    result = data_TClient_client;\n    if ( !data_TClient_client )\n      return result;\n  }\n  v3 = *(_QWORD *)(result + 256);\n  if ( v3 && *(_DWORD *)(v3 + 4) == 5 && data_TClientEnvironment_loadingstate <= 0 )\n    data_TClientEnvironment_loadingstate = 1;\n  v4 = 0;\n  for ( i = data_TGameEnvironment_allplayers;\n        *(_DWORD *)(data_TGameEnvironment_allplayers + 12) > (signed int)v4;\n        i = data_TGameEnvironment_allplayers )\n  {\n    v6 = v4++;\n    *(_BYTE *)(*(_QWORD *)plt_TList_operator_index_int(i, v6) + 848LL) = 0;\n  }\n  plt_TClient_processIncomingPackages_void((TClient *)data_TClient_client);\n  v7 = *(unsigned __int8 *)(data_TClient_client + 272);\n  if ( *(_BYTE *)(data_TClient_client + 272) )\n    goto LABEL_9;\n  plt_TClient_checkDownloadStalled_void((TClient *)v7);\n  v7 = data_TClient_client;\n  if ( *(_BYTE *)(data_TClient_client + 272) )\n    goto LABEL_9;\n  v16 = *(_QWORD *)(data_TClient_client + 256);\n  if ( v16 )\n  {\n    v17 = *(_DWORD *)(v16 + 4);\n    if ( v17 == 4 )\n    {\n      plt_TTime_getTime_void((TTime *)data_TClient_client);\n      if ( v23 >= *(double *)&data_TClient_starttime + 5.0 )\n        plt_TSocketConnection_setStatus_int(*(TSocketConnection **)(data_TClient_client + 256), 2);\n      v7 = data_TClient_client;\n      if ( *(_DWORD *)(*(_QWORD *)(data_TClient_client + 256) + 4LL) == 2 )\n        goto LABEL_27;\n      v7 = *(unsigned __int8 *)(data_TClient_client + 272);\n      if ( *(_BYTE *)(data_TClient_client + 272) )\n        goto LABEL_9;\n    }\n    else if ( v17 == 2 )\n    {\nLABEL_27:\n      *(_BYTE *)(v7 + 272) = 1;\nLABEL_9:\n      plt_TServerList_onClientDisconnected_void((TServerList *)v7);\n    }\n  }\n  v8 = 0;\n  for ( j = data_TGameEnvironment_allplayers;\n        *(_DWORD *)(data_TGameEnvironment_allplayers + 12) > (signed int)v8;\n        j = data_TGameEnvironment_allplayers )\n  {\n    v10 = v8++;\n    v11 = (TServerPlayer **)plt_TList_operator_index_int(j, v10);\n    plt_TServerPlayer_testStopWalking_void(*v11);\n  }\n  result = data_TClient_deletedplayers;\n  v12 = *(_DWORD *)(data_TClient_deletedplayers + 12) - 1;\n  if ( v12 >= 0 )\n  {\n    while ( 1 )\n    {\n      v13 = plt_TList_operator_index_int(result, (unsigned int)v12);\n      v14 = *(_DWORD **)v13;\n      result = *(_QWORD *)(*(_QWORD *)v13 + 960LL);\n      if ( result && (result = *(unsigned int *)result, (int)result > 0)\n        || (result = plt_TTime_getUTCTime_void((TTime *)result), (unsigned int)result <= v14[186] + 5) )\n      {\n        if ( --v12 == -1 )\n          return result;\n      }\n      else\n      {\n        if ( (int)v14[187] > 99999 )\n        {\n          v24 = 0;\n          v22 = (TGraalVar *)data_TGameEnvironment_universe;\n          plt_TString_operator_lshift_char_const((int)&v24, \"onPlayerLogout\");\n          plt_TGraalVar_invokeEvent_TString_const_char_const(\n            v22,\n            (const TString *)&v24,\n            \"oi\",\n            v14,\n            (unsigned int)v14[187]);\n          plt_TString_clear_void((TString *)&v24);\n        }\n        v15 = v12--;\n        plt_TList_Delete_int((TList *)data_TClient_deletedplayers, v15);\n        result = (*(__int64 (__fastcall **)(_DWORD *))(*(_QWORD *)v14 + 8LL))(v14);\n        if ( v12 == -1 )\n          return result;\n      }\n      result = data_TClient_deletedplayers;\n    }\n  }\n  return result;\n}\n",
+      "code_bytes": 4834,
+      "code_sha256": "ee518c206aebe2c5037c591528cc88579155c2e8689e8ec3a4fb8d40f6ce9151",
+      "function_end": "0x20369c",
+      "function_start": "0x203360",
+      "name": "TServerList_handleClient_void",
+      "role": "game client event loop",
+      "string_literals": [
+        "\"StartScript_Connector\"",
+        "\"oi\"",
+        "\"onPlayerLogout\"",
+        "\"onReconnect\""
+      ]
+    }
+  ],
+  "interpretation": [
+    "TServerList_login selects connector mode and prepares the login request. A later server-warp event supplies the host, server name, and port for the game connection.",
+    "TClient_connectToGameServer validates the supplied address and port, records an address-and-port digest, creates the client thread, and reports a generic failure when the inputs are empty or the socket is already in error.",
+    "The socket path is nonblocking. Status 4 represents an in-progress connect, checkConnecting uses select and SO_ERROR, and status 5 represents a completed TCP connection.",
+    "setStatus starts TLS when status 5 is reached and the SSL flag is set. The TLS setup selects a CyaSSL method, loads the configured verification buffer, applies optional hostname verification, and calls CyaSSL_connect.",
+    "The network thread drains incoming data, processes outgoing packages, sends queued bytes, and sleeps briefly between iterations. The server-list handler drives reconnect, timeout, package, player, and server-warp events.",
+    "The export records native behavior in this APK revision. It does not contact a live service or prove that a current host, certificate, or server response is still compatible."
+  ],
+  "network_contacted": false,
+  "schema": "libqplay.original-game-connection-flow.v1",
+  "scope": "read-only Hex-Rays export of original 1.8 game connection lifecycle functions"
+}

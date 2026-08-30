@@ -135,7 +135,93 @@ connector trust buffer. A production repair should replace or update the
 trust chain through a verified endpoint. The local diagnostic builds merely
 skip or redirect the check so that later protocol behavior can be observed.
 
-## 4. NewGraal framing
+## 4. Native game-server connection lifecycle
+
+The connector and the game socket meet at a server-warp event. The focused
+IDA export is in `artifacts/game_connection_flow_review_20260830.json`, with
+the export source in `tools/ida_export_game_connection_flow.py`. Its native
+handoff is:
+
+```text
+TServerList_login
+  -> connector request and script
+  -> packet 178 server-warp destination
+  -> TServerList_handleServerWarp
+  -> connector script onServerWarp(host, servername, port)
+  -> TClient_connectToGameServer
+  -> TSocketConnection_connectSocket
+  -> status 4 or status 5
+  -> checkConnecting and SO_ERROR when delayed
+  -> status 5 and optional CyaSSL setup
+  -> TClient_networkThreadMain
+```
+
+`TServerList_login` deletes the prior client, labels the active server as
+`Login`, shows the connecting window, and enters connector mode. The server-warp
+handler tokenizes `data_TClient_serverwarpdestination`, clears the global, and
+passes fields 1, 2, and 3 to `StartScript_Connector.onServerWarp` as host,
+server name, and integer port. The script-side event is the handoff point that
+eventually supplies the game connection fields.
+
+`TClient_connectToGameServer` requires a nonempty address and a positive port.
+It calls `TGraalConnection_connectToServer`, checks that the socket exists and
+has no recorded error, computes the client address digest from address plus
+port, starts the client thread, and returns success. Empty inputs or an error
+socket set the disconnect reason to the localized game-server connection
+failure message. This function does not call the connector-specific
+`setVerifyGraalWebCert` helper, so the connector trust problem and the game
+socket trust path must be investigated separately.
+
+The socket uses an asynchronous IPv4 TCP path:
+
+| Status | Meaning in the reviewed path |
+| ---: | --- |
+| 0 | Existing socket is closed before a new attempt |
+| 1 | Socket creation or host resolution failed |
+| 2 | Connection failed or the socket was closed |
+| 4 | `connect` is in progress, normally `EINPROGRESS` |
+| 5 | TCP connection completed |
+
+`TSocketConnection_connectSocket` closes any previous descriptor, creates an
+`AF_INET` stream socket, enables nonblocking mode, accepts a numeric address or
+resolves the host with `gethostbyname`, and calls `connect`. `EINTR` retries the
+call, `EINPROGRESS` leaves status 4, immediate success reaches status 5, and
+other errors close the descriptor and record `connect call failed`.
+
+`TSocketConnection_checkConnecting` is called from the read path. For status 4
+it performs a zero-timeout `select` on the write set and then reads
+`SO_ERROR`. A zero error changes the socket to status 5. A nonzero error closes
+the socket, changes it to status 2, and records `connect call failed (3)`. A
+select failure other than `EINTR` uses the corresponding `(2)` message. The
+server-list loop also treats a connection that remains in status 4 for five
+seconds as failed and moves it to status 2.
+
+`TSocketConnection_setStatus_int` starts TLS when status 5 is reached and the
+per-socket SSL flag is enabled. `TSocketConnection_enableSSLOnSocket` selects
+the configured CyaSSL method, loads an optional verification buffer as PEM or
+DER, applies the configured verification mode and hostname check, installs the
+plain socket I/O callbacks, and calls `CyaSSL_connect` in nonblocking mode. The
+reviewed game connection therefore has a delayed TLS boundary, but its exact
+certificate source still needs to be traced from the game-server setup rather
+than inferred from the connector's embedded GraalWeb certificate.
+
+`TClient_networkThreadMain` marks the thread running, drains incoming work
+while the queue is at or below 999 entries, reads incoming bytes, processes
+outgoing packages, sends queued bytes, and sleeps for one millisecond between
+iterations. When the queue exceeds the limit it sleeps for one second. The
+server-list handler drives that thread from the main loop, resets player walk
+flags, processes incoming packages, checks stalled downloads, starts loading
+when the socket reaches status 5, and disconnects after the timeout or a status
+2 failure.
+
+This state machine gives a useful diagnostic split. A failure before status 4
+points to empty fields, socket creation, or name resolution. A failure stuck at
+status 4 points to routing, firewall, or the five-second timeout. A failure at
+status 5 with an SSL error points to the game-server TLS configuration. A
+successful handshake with no packets moves the investigation into NewGraal
+framing and the inbound handler table.
+
+## 5. NewGraal framing
 
 After connector script execution, the game socket uses framed data. The
 client identifies the protocol with `GNP1905C`. The first key exchange is an
@@ -171,7 +257,7 @@ TClient_manageDataByScript         0x1e7bf0
 `tools/decode_game_handshake_capture.py` keeps one RC4 state per direction
 and decodes captured frames without printing login fields by default.
 
-## 5. Inbound handler table
+## 6. Inbound handler table
 
 The first interpretation of `setInDataHandlers` was wrong. The connector
 bytecode was read as if the VM had reversed each pair, which led to an
@@ -193,7 +279,7 @@ as a negative control, not as a repair. `tools/patch_compatibility_repairs.py`
 now contains only the independent connector RSA and expired-certificate
 diagnostics.
 
-## 6. Useful inbound packet pairs
+## 7. Useful inbound packet pairs
 
 The following mappings come from the decoded connector script and the native
 table at `data_TClient_indatahandlers`. They are packet type to handler index,
@@ -262,7 +348,7 @@ control. It changed the first connection to ordinary packet-23 requests and
 prevented the normal second-connection map sequence. Packet 59 is therefore
 not part of the working file path for this client revision.
 
-## 7. Local trace
+## 8. Local trace
 
 The final bounded replay used the original no-swap handler table and two game
 connections:

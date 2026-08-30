@@ -83,6 +83,49 @@ build that forced the parser through plain HTTP still did not advance until
 the response format was made compatible. Certificate repair is necessary for
 the old HTTPS path, but it is not sufficient evidence of a working client.
 
+## Native connection lifecycle
+
+The native connector does not directly become the game socket. Packet 178
+delivers a comma-separated server-warp destination. `TServerList_handleServerWarp`
+at `0x204488` clears the global destination and invokes
+`StartScript_Connector.onServerWarp` with the host, server name, and port. The
+script-side handoff eventually reaches `TClient_connectToGameServer` at
+`0x1e7058`.
+
+The game connect function calls `TGraalConnection_connectToServer` only when
+the address is nonempty and the port is positive. It accepts a socket that has
+not recorded an error, hashes address plus port into `serveripstr`, starts the
+client thread, and returns success. Its failure message is generic, so the
+socket state is more useful than the message when diagnosing a real device.
+
+The focused native export is
+`artifacts/game_connection_flow_review_20260830.json`. It covers
+`TServerList_login`, `TServerList_handleServerWarp`,
+`TClient_connectToGameServer`, the three socket state helpers,
+`TSocketConnection_enableSSLOnSocket`, `TClient_networkThreadMain`, and
+`TServerList_handleClient`.
+
+The socket is IPv4 TCP and nonblocking. `connectSocket` uses status 4 for
+`EINPROGRESS` and status 5 for a completed connection. The status-4 path uses
+a zero-timeout write `select` followed by `getsockopt(SO_ERROR)`. Status 5
+triggers the CyaSSL setup when the per-socket SSL flag is set. The server-list
+loop treats a connection still in status 4 after five seconds as failed. This
+gives three independent checkpoints for a future device trace: socket and
+resolver setup, delayed connect completion, and TLS handshake.
+
+The game TLS path is not automatically the connector certificate path. The
+connector explicitly calls `setVerifyGraalWebCert`; the reviewed game connect
+function does not. The source of the game-server verification buffer and the
+configured hostname still need a separate setup trace before any certificate
+change is considered.
+
+The client network thread reads incoming data, processes and sends outgoing
+packages, and sleeps for one millisecond while the incoming queue stays below
+1,000 entries. The server-list loop handles reconnect callbacks, starts the
+loading state after socket status 5, checks stalled downloads, and disconnects
+after a status-4 timeout or status-2 failure. A device log that records these
+states will distinguish transport failure from a later NewGraal parser issue.
+
 ## Connector package
 
 The response named `con.png` is a binary package. Its first four bytes are a
