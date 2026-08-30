@@ -94,6 +94,15 @@ and the parser does not decode `Transfer-Encoding: chunked`. Legacy
 replay, but a current server's framing still needs to be verified. The
 evidence is in `artifacts/original_http_framing_review_20260830.json`.
 
+The Facebook bridge pass found that the Android script table exposes more than
+login status. An activated script can read the current Facebook access token,
+request additional read or publish permissions, issue authenticated Graph GET,
+POST, or DELETE requests, and use the `graph2` path to upload eligible game
+resources. The SDK builds HTTPS Graph URLs by default, but transport security
+does not remove the risk of handing a bearer token to script code. The focused
+IDA and DEX review is in
+`artifacts/original_facebook_bridge_review_20260830.json`.
+
 ## Repository layout
 
 * `docs/RESEARCH_NOTES.md` is the chronological investigation record.
@@ -149,6 +158,9 @@ evidence is in `artifacts/original_http_framing_review_20260830.json`.
   callbacks, Android intent construction, and installed-handler probing.
 * `artifacts/original_http_framing_review_20260830.json` records response
   accumulation, header limits, transfer coding, and body completion behavior.
+* `artifacts/original_facebook_bridge_review_20260830.json` records the
+  Facebook session, permission, Graph request, and game-resource upload
+  callbacks. It contains no real token or login result.
 * `artifacts/ida_translation_verification_20260830.json` records the final
   packed IDA copy, pass counts, hashes, and zero-failure verification result.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.

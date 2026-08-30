@@ -1,0 +1,445 @@
+{
+  "artifact": "original_facebook_bridge_review_20260830",
+  "database": {
+    "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "imagebase": "0x0",
+    "path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
+  },
+  "facebook_login_performed": false,
+  "findings": [
+    {
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "getnewfacebooktoken is registered in the main_android script table and points to JNI_getNewFacebookToken.",
+        "The JNI wrapper copies QPlayActivity.getNewFacebookToken() into a native script value.",
+        "The Java method returns Session.getAccessToken() for an open active session."
+      ],
+      "id": "ANDROID-FB-001",
+      "impact": "Any script that reaches this capability can copy the current Facebook bearer token and use it outside the intended game feature boundary. A bearer token can authorize actions covered by the granted session permissions until it expires or is revoked.",
+      "limits": "The review did not execute a script, perform a Facebook login, capture a token, or send the token to an endpoint. Reachability depends on the script package and the native script runtime trust model. No real token is included in this artifact.",
+      "severity": "high",
+      "title": "An activated script can read the active Facebook bearer token"
+    },
+    {
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "requestnewfacebookgraph and requestnewfacebookgraph2 are script-table entries.",
+        "The activity accepts exact POST and DELETE method strings and treats all other values as GET.",
+        "The bundled Facebook SDK targets the HTTPS Graph host and automatically inserts the active session access_token when the caller has not supplied one."
+      ],
+      "id": "ANDROID-FB-002",
+      "impact": "A compromised or untrusted script package can use the user's granted Facebook permissions for reads and state-changing Graph operations, including deletion requests accepted by Facebook.",
+      "limits": "The request still requires an open session and is subject to the permission set and Facebook server authorization. The review did not contact Facebook or prove that any particular Graph path is accepted by the historical API version.",
+      "severity": "medium",
+      "title": "The script API can issue authenticated Graph GET, POST, and DELETE requests"
+    },
+    {
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "The native callback resolves image: and file: values through TResourceFunctions_getGameFile and TStream_LoadFromFile.",
+        "It Base64-encodes the loaded bytes and forwards them to Java.",
+        "Java turns image: values into Bitmaps and file: values into byte-array Bundle entries for the Facebook Request."
+      ],
+      "id": "ANDROID-FB-003",
+      "impact": "A script with access to this callback can upload eligible game resources through the user's active Facebook session. This extends the impact of a script compromise beyond token exposure alone.",
+      "limits": "The path is based on game-file resource resolution, not a demonstrated unrestricted filesystem read. No file was uploaded and no external network request was made during this review.",
+      "severity": "medium",
+      "title": "The graph2 bridge joins game-resource reads to authenticated uploads"
+    },
+    {
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "requestnewfacebookrights is a registered script callback.",
+        "The Java method accepts caller-supplied comma-separated permission names and selects requestNewReadPermissions or requestNewPublishPermissions from the Boolean flag.",
+        "The status result is returned to native script code after the session permission list is checked."
+      ],
+      "id": "ANDROID-FB-004",
+      "impact": "A malicious script can trigger permission prompts for capabilities outside the original feature's narrow purpose and can attempt to obtain publish permissions from the user.",
+      "limits": "The user-facing Facebook flow and Facebook's server-side policy still mediate the request. The review did not display a prompt or obtain new permissions.",
+      "severity": "medium",
+      "title": "Scripts can request additional Facebook read or publish permissions"
+    }
+  ],
+  "functions": [
+    {
+      "address": "0x245f40",
+      "callers": [
+        {
+          "caller": "0xddf70",
+          "caller_name": "plt_main_android_initStaticScriptVars_void",
+          "callsite": "0xddf74"
+        },
+        {
+          "caller": "0xddf70",
+          "caller_name": "plt_main_android_initStaticScriptVars_void",
+          "callsite": "0xddf7c"
+        }
+      ],
+      "code": "__int64 __fastcall main_android_initStaticScriptVars_void()\n{\n  return plt_TScriptProperty_addFuncs_TProperties_TPropertyFuncDef_int(0, &off_38B2D0, 44);\n}\n",
+      "code_bytes": 156,
+      "code_sha256": "ad787d04458833982fa77040114bd10396d04df8d2b54855a58f5879941d18d2",
+      "function_end": "0x245f54",
+      "function_start": "0x245f40",
+      "name": "main_android_initStaticScriptVars_void",
+      "role": "Android script table owner"
+    },
+    {
+      "address": "0x24025c",
+      "callers": [],
+      "code": "// Calls Java static getNewFacebookPermissions()[B. Copies the returned byte array into a TString.\nTString *__usercall JNI_getNewFacebookPermissions@<X0>(TString *a1@<X8>)\n{\n  __int64 v2; // x2\n  __int64 v3; // x0\n  __int64 v4; // x19\n  int v5; // w23\n  const char *v6; // x20\n\n  v2 = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n         javaenvironment,\n         javaenvironmentclass,\n         \"getNewFacebookPermissions\",\n         \"()[B\");\n  if ( v2 )\n  {\n    v3 = plt_JNIEnv_CallStaticObjectMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v2);\n    *(_QWORD *)a1 = 0;\n    v4 = v3;\n    if ( v3 )\n    {\n      v5 = (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 1368LL))(javaenvironment, v3);\n      v6 = (const char *)(*(__int64 (__fastcall **)(__int64, __int64, _QWORD))(*(_QWORD *)javaenvironment + 1472LL))(\n                           javaenvironment,\n                           v4,\n                           0);\n      if ( (unsigned int)(v5 - 1) <= 0x3FF )\n      {\n        if ( v6 )\n          plt_TString_addbuffer_char_const_int(a1, v6, v5);\n      }\n      (*(void (__fastcall **)(__int64, __int64, const char *, _QWORD))(*(_QWORD *)javaenvironment + 1536LL))(\n        javaenvironment,\n        v4,\n        v6,\n        0);\n    }\n    return a1;\n  }\n  else\n  {\n    *(_QWORD *)a1 = 0;\n    return a1;\n  }\n}\n",
+      "code_bytes": 1417,
+      "code_sha256": "e92704cef8484e359d8b9473b15be61cae92e543aeaf03390d41df005719949f",
+      "function_end": "0x240380",
+      "function_start": "0x24025c",
+      "name": "JNI_getNewFacebookPermissions",
+      "role": "Facebook permission getter bridge"
+    },
+    {
+      "address": "0x240380",
+      "callers": [],
+      "code": "// Calls Java static getNewFacebookToken()[B. Copies the returned byte array into a TString.\nTString *__usercall JNI_getNewFacebookToken@<X0>(TString *a1@<X8>)\n{\n  __int64 v2; // x2\n  __int64 v3; // x0\n  __int64 v4; // x19\n  int v5; // w23\n  const char *v6; // x20\n\n  v2 = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n         javaenvironment,\n         javaenvironmentclass,\n         \"getNewFacebookToken\",\n         \"()[B\");\n  if ( v2 )\n  {\n    v3 = plt_JNIEnv_CallStaticObjectMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v2);\n    *(_QWORD *)a1 = 0;\n    v4 = v3;\n    if ( v3 )\n    {\n      v5 = (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 1368LL))(javaenvironment, v3);\n      v6 = (const char *)(*(__int64 (__fastcall **)(__int64, __int64, _QWORD))(*(_QWORD *)javaenvironment + 1472LL))(\n                           javaenvironment,\n                           v4,\n                           0);\n      if ( (unsigned int)(v5 - 1) <= 0x3FF )\n      {\n        if ( v6 )\n          plt_TString_addbuffer_char_const_int(a1, v6, v5);\n      }\n      (*(void (__fastcall **)(__int64, __int64, const char *, _QWORD))(*(_QWORD *)javaenvironment + 1536LL))(\n        javaenvironment,\n        v4,\n        v6,\n        0);\n    }\n    return a1;\n  }\n  else\n  {\n    *(_QWORD *)a1 = 0;\n    return a1;\n  }\n}\n",
+      "code_bytes": 1399,
+      "code_sha256": "abb0f92190b8dadfae9e2dfb68f7d6e08cef381a3013c33173c818c9ee7a85cb",
+      "function_end": "0x2404a4",
+      "function_start": "0x240380",
+      "name": "JNI_getNewFacebookToken",
+      "role": "Facebook access-token getter bridge"
+    },
+    {
+      "address": "0x240884",
+      "callers": [],
+      "code": "// Calls Java static isNewFacebookAvailable()Z. Returns the Java boolean result.\nbool JNI_isNewFacebookAvailable()\n{\n  __int64 v0; // x2\n\n  v0 = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n         javaenvironment,\n         javaenvironmentclass,\n         \"isNewFacebookAvailable\",\n         \"()Z\");\n  return v0\n      && (unsigned __int8)plt_JNIEnv_CallStaticBooleanMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v0) != 0;\n}\n",
+      "code_bytes": 507,
+      "code_sha256": "fdd4c66c9927a3b5c5ffc8b43ee9985445fb6b98070ff428e021201870af5e91",
+      "function_end": "0x24090c",
+      "function_start": "0x240884",
+      "name": "JNI_isNewFacebookAvailable",
+      "role": "Facebook availability bridge"
+    },
+    {
+      "address": "0x2413cc",
+      "callers": [],
+      "code": "// Calls Java static getNewFacebookSessionState()I. Calls the Java static session-state method and returns its integer result.\n__int64 JNI_getNewFacebookSessionState()\n{\n  __int64 v0; // x2\n\n  v0 = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n         javaenvironment,\n         javaenvironmentclass,\n         \"getNewFacebookSessionState\",\n         \"()I\");\n  if ( v0 )\n    return plt_JNIEnv_CallStaticIntMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v0);\n  else\n    return 0xFFFFFFFFLL;\n}\n",
+      "code_bytes": 572,
+      "code_sha256": "fcfb4a3135bb5b028a6c0a6abdedba8ba3182db2bc8934533c090ed4ffec6754",
+      "function_end": "0x241444",
+      "function_start": "0x2413cc",
+      "name": "JNI_getNewFacebookSessionState",
+      "role": "Facebook session-state getter bridge"
+    },
+    {
+      "address": "0x2415b4",
+      "callers": [],
+      "code": "// Calls Java static logoutFromNewFacebook()V. Calls the Java static Facebook logout method.\n__int64 JNI_logoutFromNewFacebook()\n{\n  __int64 result; // x0\n  __int64 v1; // x3\n  __int64 v2; // x4\n\n  result = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n             javaenvironment,\n             javaenvironmentclass,\n             \"logoutFromNewFacebook\",\n             \"()V\");\n  if ( result )\n    return plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, result, v1, v2);\n  return result;\n}\n",
+      "code_bytes": 594,
+      "code_sha256": "e04393d0dc13d37fc39a3ce28a91eaa24c269b0ed823a185cb578921ef07e258",
+      "function_end": "0x241628",
+      "function_start": "0x2415b4",
+      "name": "JNI_logoutFromNewFacebook",
+      "role": "Facebook logout bridge"
+    },
+    {
+      "address": "0x24296c",
+      "callers": [],
+      "code": "// Calls Java static requestNewFacebookGraph([B)V. Converts the supplied TString and calls the Facebook graph-request method.\n__int64 __fastcall JNI_requestNewFacebookGraph(unsigned int **a1)\n{\n  __int64 result; // x0\n  __int64 v3; // x22\n  __int64 v4; // x21\n  unsigned int *v5; // x4\n  __int64 v6; // x0\n  __int64 v7; // x3\n  _DWORD *v8; // x4\n  unsigned int v9; // t1\n  __int64 v10; // x4\n\n  result = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n             javaenvironment,\n             javaenvironmentclass,\n             \"requestNewFacebookGraph\",\n             \"([B)V\");\n  v3 = result;\n  if ( result )\n  {\n    if ( *a1 )\n    {\n      v4 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, **a1);\n      v5 = *a1;\n      v6 = javaenvironment;\n      if ( *a1 )\n      {\nLABEL_4:\n        v9 = *v5;\n        v8 = v5 + 2;\n        v7 = v9;\nLABEL_5:\n        (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, _DWORD *))(*(_QWORD *)v6 + 1664LL))(\n          v6,\n          v4,\n          0,\n          v7,\n          v8);\n        plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v3, v4, v10);\n        return (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v4);\n      }\n    }\n    else\n    {\n      v4 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, 0);\n      v5 = *a1;\n      v6 = javaenvironment;\n      if ( *a1 )\n        goto LABEL_4;\n    }\n    v7 = 0;\n    v8 = (_DWORD *)TString_dummystr;\n    goto LABEL_5;\n  }\n  return result;\n}\n",
+      "code_bytes": 1688,
+      "code_sha256": "6cc372a8e567aa972d9d5e9f503560742b3948ff33c4964559c0b481923656f1",
+      "function_end": "0x242a88",
+      "function_start": "0x24296c",
+      "name": "JNI_requestNewFacebookGraph",
+      "role": "Facebook Graph request bridge"
+    },
+    {
+      "address": "0x242a88",
+      "callers": [],
+      "code": "// Calls Java static requestNewFacebookRights(I[B)V. Converts the supplied TString and calls the Facebook rights-request method.\n__int64 __fastcall JNI_requestNewFacebookRights(unsigned __int8 a1, unsigned int **a2)\n{\n  unsigned int v2; // w24\n  __int64 result; // x0\n  __int64 v5; // x22\n  __int64 v6; // x21\n  unsigned int *v7; // x4\n  __int64 v8; // x0\n  __int64 v9; // x3\n  _DWORD *v10; // x4\n  unsigned int v11; // t1\n\n  v2 = a1;\n  result = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n             javaenvironment,\n             javaenvironmentclass,\n             \"requestNewFacebookRights\",\n             \"(I[B)V\");\n  v5 = result;\n  if ( result )\n  {\n    if ( *a2 )\n    {\n      v6 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, **a2);\n      v7 = *a2;\n      v8 = javaenvironment;\n      if ( *a2 )\n      {\nLABEL_4:\n        v11 = *v7;\n        v10 = v7 + 2;\n        v9 = v11;\nLABEL_5:\n        (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, _DWORD *))(*(_QWORD *)v8 + 1664LL))(\n          v8,\n          v6,\n          0,\n          v9,\n          v10);\n        plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v5, v2, v6);\n        return (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v6);\n      }\n    }\n    else\n    {\n      v6 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, 0);\n      v7 = *a2;\n      v8 = javaenvironment;\n      if ( *a2 )\n        goto LABEL_4;\n    }\n    v9 = 0;\n    v10 = (_DWORD *)TString_dummystr;\n    goto LABEL_5;\n  }\n  return result;\n}\n",
+      "code_bytes": 1736,
+      "code_sha256": "27fbbd897eea526fc25c4b21178609421d006cacb0a1fb345b329e57a9efac25",
+      "function_end": "0x242bb4",
+      "function_start": "0x242a88",
+      "name": "JNI_requestNewFacebookRights",
+      "role": "Facebook permission-request bridge"
+    },
+    {
+      "address": "0x242bb4",
+      "callers": [],
+      "code": "// Calls Java static loginToNewFacebook(I[B)V. Converts the supplied TString and calls the Facebook login method.\n__int64 __fastcall JNI_loginToNewFacebook(unsigned __int8 a1, unsigned int **a2)\n{\n  unsigned int v2; // w24\n  __int64 result; // x0\n  __int64 v5; // x22\n  __int64 v6; // x21\n  unsigned int *v7; // x4\n  __int64 v8; // x0\n  __int64 v9; // x3\n  _DWORD *v10; // x4\n  unsigned int v11; // t1\n\n  v2 = a1;\n  result = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n             javaenvironment,\n             javaenvironmentclass,\n             \"loginToNewFacebook\",\n             \"(I[B)V\");\n  v5 = result;\n  if ( result )\n  {\n    if ( *a2 )\n    {\n      v6 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, **a2);\n      v7 = *a2;\n      v8 = javaenvironment;\n      if ( *a2 )\n      {\nLABEL_4:\n        v11 = *v7;\n        v10 = v7 + 2;\n        v9 = v11;\nLABEL_5:\n        (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, _DWORD *))(*(_QWORD *)v8 + 1664LL))(\n          v8,\n          v6,\n          0,\n          v9,\n          v10);\n        plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v5, v2, v6);\n        return (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v6);\n      }\n    }\n    else\n    {\n      v6 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, 0);\n      v7 = *a2;\n      v8 = javaenvironment;\n      if ( *a2 )\n        goto LABEL_4;\n    }\n    v9 = 0;\n    v10 = (_DWORD *)TString_dummystr;\n    goto LABEL_5;\n  }\n  return result;\n}\n",
+      "code_bytes": 1709,
+      "code_sha256": "5c387f4799cc33bed76b14a9acde9df24fe3ce704124117e572fe7d13e8282db",
+      "function_end": "0x242ce0",
+      "function_start": "0x242bb4",
+      "name": "JNI_loginToNewFacebook",
+      "role": "Facebook login bridge"
+    },
+    {
+      "address": "0x246104",
+      "callers": [],
+      "code": "void __fastcall MainAndroid_script_requestnewfacebookgraph2(__int64 a1, __int64 a2, const TString *a3)\n{\n  int v4; // w22\n  int v5; // w1\n  bool v6; // w2\n  const TString *v7; // x1\n  int v8; // w25\n  int v9; // w28\n  int v10; // w28\n  __int64 v11; // x20\n  __int64 v12; // x21\n  __int64 v13; // x23\n  __int64 v14; // [xsp+88h] [xbp-58h]\n  __int64 v15; // [xsp+98h] [xbp-48h] BYREF\n  __int64 v16; // [xsp+A0h] [xbp-40h] BYREF\n  __int64 v17; // [xsp+A8h] [xbp-38h] BYREF\n  __int64 v18; // [xsp+B0h] [xbp-30h] BYREF\n  __int64 v19; // [xsp+B8h] [xbp-28h] BYREF\n  __int64 v20; // [xsp+C0h] [xbp-20h] BYREF\n  _BYTE v21[16]; // [xsp+C8h] [xbp-18h] BYREF\n  int v22; // [xsp+D8h] [xbp-8h]\n\n  v14 = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n          javaenvironment,\n          javaenvironmentclass,\n          \"requestNewFacebookGraph2\",\n          \"([B[B[B)V\");\n  if ( !v14 )\n    return;\n  plt_TStringList_TStringList_TString_const((TStringList *)v21, a3);\n  if ( v22 <= 1 )\n  {\nLABEL_12:\n    plt_TStringList_GetCommaText2_void(&v19, (TStringList *)v21);\n    v11 = (*(__int64 (**)(void))(*(_QWORD *)javaenvironment + 1408LL))();\n    (*(void (**)(void))(*(_QWORD *)javaenvironment + 1664LL))();\n    v12 = (*(__int64 (**)(void))(*(_QWORD *)javaenvironment + 1408LL))();\n    (*(void (**)(void))(*(_QWORD *)javaenvironment + 1664LL))();\n    v13 = (*(__int64 (**)(void))(*(_QWORD *)javaenvironment + 1408LL))();\n    (*(void (**)(void))(*(_QWORD *)javaenvironment + 1664LL))();\n    plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v14, v11, v12);\n    (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v11);\n    (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v12);\n    (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v13);\n    plt_TString_clear_void((TString *)&v19);\n    plt_TStringList_TStringList((TStringList *)v21);\n    return;\n  }\n  v4 = 0;\n  while ( 1 )\n  {\n    while ( 1 )\n    {\n      v8 = v4 + 1;\n      plt_TStringList_operator_index_int(&v15, v21, (unsigned int)(v4 + 1));\n      v16 = 0;\n      v19 = 0;\n      plt_TString_operator_lshift_char_const((int)&v19, \"image:\");\n      v9 = (unsigned __int8)plt_TString_starts_TString_const((TString *)&v15, (const TString *)&v19);\n      plt_TString_clear_void((TString *)&v19);\n      if ( v9 )\n      {\n        v19 = 0;\n        plt_TString_operator_lshift_char_const((int)&v19, \"image:\");\n        plt_TString_operator_assign_TString_const(&v16, &v19);\n        plt_TString_clear_void((TString *)&v19);\n        v5 = 6;\n        goto LABEL_5;\n      }\n      v19 = 0;\n      plt_TString_operator_lshift_char_const((int)&v19, \"file:\");\n      v10 = (unsigned __int8)plt_TString_starts_TString_const((TString *)&v15, (const TString *)&v19);\n      plt_TString_clear_void((TString *)&v19);\n      if ( v10 )\n        break;\n      v4 += 2;\n      plt_TString_clear_void((TString *)&v16);\n      plt_TString_clear_void((TString *)&v15);\n      if ( v22 - 1 <= v4 )\n        goto LABEL_12;\n    }\n    v19 = 0;\n    plt_TString_operator_lshift_char_const((int)&v19, \"file:\");\n    plt_TString_operator_assign_TString_const(&v16, &v19);\n    plt_TString_clear_void((TString *)&v19);\n    v5 = 5;\nLABEL_5:\n    plt_TString_subString_int(&v19, (TString *)&v15, v5);\n    plt_TString_operator_assign_TString_const(&v15, &v19);\n    plt_TString_clear_void((TString *)&v19);\n    plt_TResourceFunctions_getGameFile_TString_const_bool(\n      &v17,\n      (TResourceFunctions *)&v15,\n      (const TString *)((char *)&dword_0 + 1),\n      v6);\n    if ( !v17 )\n    {\n      plt_TLog_printf_char_const(\n        (TLog *)\"Failed to upload facebook picture, file could not be loaded: %s\\n\",\n        TString_dummystr);\n      goto LABEL_15;\n    }\n    if ( *(int *)v17 <= 0 )\n      break;\n    v19 = 0;\n    v4 += 2;\n    v20 = 0;\n    ++cstream;\n    plt_TStream_LoadFromFile_TString_const((TStream *)&v19, (const TString *)&v17);\n    plt_TEncryption_base64encode_TString_const(&v18, (TEncryption *)&v20, v7);\n    plt_TString_operator_assign_TString_const(&v15, &v18);\n    plt_TString_clear_void((TString *)&v18);\n    v18 = 0;\n    plt_TString_operator_assign_TString_const(&v18, &v16);\n    plt_TString_operator_lshift_TString_const(&v18, &v15);\n    plt_TStringList_Replace_int_TString_const((TStringList *)v21, v8, (const TString *)&v18);\n    plt_TString_clear_void((TString *)&v18);\n    --cstream;\n    plt_TString_clear_void((TString *)&v20);\n    plt_TString_clear_void((TString *)&v17);\n    plt_TString_clear_void((TString *)&v16);\n    plt_TString_clear_void((TString *)&v15);\n    if ( v22 - 1 <= v4 )\n      goto LABEL_12;\n  }\n  plt_TLog_printf_char_const(\n    (TLog *)\"Failed to upload facebook picture, file could not be loaded: %s\\n\",\n    (const char *)(v17 + 8));\nLABEL_15:\n  plt_TString_clear_void((TString *)&v17);\n  plt_TString_clear_void((TString *)&v16);\n  plt_TString_clear_void((TString *)&v15);\n  plt_TStringList_TStringList((TStringList *)v21);\n}\n",
+      "code_bytes": 5096,
+      "code_sha256": "14d379996a28aa8311013b8915dc2e472306390457cf961fa9abe72ac967b737",
+      "function_end": "0x246628",
+      "function_start": "0x246104",
+      "name": "MainAndroid_script_requestnewfacebookgraph2",
+      "role": "Facebook Graph upload bridge"
+    }
+  ],
+  "interpretation": [
+    "The Facebook path is separate from the native Graal connector and its CyaSSL trust bundle.",
+    "The script bridge is intentionally powerful enough to log in, ask for permissions, read the token, issue Graph requests, and report results back to native script code.",
+    "The bundled SDK uses HTTPS Graph endpoints by default, but HTTPS transport does not prevent a trusted or compromised script from misusing the active session token exposed by the API.",
+    "A repair should remove direct token getters from script scope, restrict Graph operations to named game features, keep upload sources allowlisted, and require explicit user intent for permission changes."
+  ],
+  "java_observations": [
+    {
+      "behavior": [
+        "Reads Session.getActiveSession().",
+        "Returns Session.getAccessToken() only when the session exists and is opened.",
+        "Returns an empty string when no open session exists."
+      ],
+      "class": "com.quattroplay.GraalClassic.QPlayActivity",
+      "method": "getNewFacebookToken()",
+      "source": "original DEX smali"
+    },
+    {
+      "behavior": [
+        "Reads the open session permission list.",
+        "Joins permission names with commas and applies the activity's quote escaping before returning them.",
+        "Returns an empty string when no open session exists."
+      ],
+      "class": "com.quattroplay.GraalClassic.QPlayActivity",
+      "method": "getNewFacebookPermissions()",
+      "source": "original DEX smali"
+    },
+    {
+      "behavior": [
+        "Creates and registers a Session when no active session exists.",
+        "Maps CREATED to 0, CREATED_TOKEN_LOADED to 1, OPENING to 2, OPENED to 0x201, OPENED_TOKEN_UPDATED to 0x202, CLOSED_LOGIN_FAILED to 0x101, and CLOSED to 0x102.",
+        "Returns -1 for an unrecognized state."
+      ],
+      "class": "com.quattroplay.GraalClassic.QPlayActivity",
+      "method": "getNewFacebookSessionState()",
+      "source": "original DEX smali"
+    },
+    {
+      "behavior": [
+        "Returns immediately when the active session is already open.",
+        "Parses comma-separated requested permissions and removes trailing empty entries.",
+        "Builds an OpenRequest with those permissions and a status callback, then calls Session.openForRead().",
+        "The Boolean controls whether a newly built session may proceed when it is not in CREATED_TOKEN_LOADED state."
+      ],
+      "class": "com.quattroplay.GraalClassic.QPlayActivity",
+      "method": "loginToNewFacebook(boolean, java.lang.String)",
+      "source": "original DEX smali"
+    },
+    {
+      "behavior": [
+        "Requires an existing open active session.",
+        "Stores and parses the caller's comma-separated permission text, removing trailing empty entries.",
+        "Uses requestNewPublishPermissions when the Boolean is true and requestNewReadPermissions otherwise.",
+        "The status callback reports the requested text plus a Boolean indicating whether every requested permission is now present."
+      ],
+      "class": "com.quattroplay.GraalClassic.QPlayActivity",
+      "method": "requestNewFacebookRights(boolean, java.lang.String)",
+      "source": "original DEX smali"
+    },
+    {
+      "behavior": [
+        "Requires an open active session and otherwise returns without an event.",
+        "Maps the exact strings POST and DELETE to those HttpMethod values and maps every other method string to GET.",
+        "Constructs com.facebook.Request with the caller's Graph path, Bundle, and callback, then calls executeAsync()."
+      ],
+      "class": "com.quattroplay.GraalClassic.QPlayActivity",
+      "method": "requestNewFacebookGraphWithParams(java.lang.String, java.lang.String, android.os.Bundle)",
+      "source": "original DEX smali"
+    },
+    {
+      "behavior": [
+        "Uses the default Graph API version v2.1 unless the path already matches the version pattern ^/?v\\d+\\.\\d+/(.*).",
+        "Builds the normal endpoint as https://graph.facebook.com/<version>/<path>; POST paths ending in /videos use the graph-video host.",
+        "Adds the active session access_token to the request Bundle when the caller did not provide one, plus sdk=android and format=json.",
+        "Uses HttpURLConnection, sets the Facebook SDK headers, and enables chunked streaming for POST bodies."
+      ],
+      "class": "com.facebook.Request",
+      "method": "getUrlForSingleRequest and addCommonParameters",
+      "source": "original DEX smali"
+    },
+    {
+      "behavior": [
+        "Parses alternating comma-text keys and values into a Bundle.",
+        "Values prefixed image: are Base64-decoded and passed through BitmapFactory.decodeByteArray before being stored as a Bitmap.",
+        "Values prefixed file: are Base64-decoded and stored as byte arrays; other values remain strings.",
+        "The native wrapper handles image: and file: values before this method by resolving a game file, reading it, Base64-encoding it, and replacing the value."
+      ],
+      "class": "com.quattroplay.GraalClassic.QPlayActivity",
+      "method": "requestNewFacebookGraph2(java.lang.String, java.lang.String, java.lang.String)",
+      "source": "original DEX smali"
+    },
+    {
+      "behavior": [
+        "Schedules onNewFaceBookState with the mapped state integer on the GL thread.",
+        "When a permission request is pending, checks every requested permission against Session.getPermissions().",
+        "Schedules onNewFaceBookRights with the escaped original permission text and 1 only when all requested entries are present, otherwise 0.",
+        "Clears the pending permission fields after scheduling the result."
+      ],
+      "class": "com.quattroplay.GraalClassic.QPlayActivity$24",
+      "method": "call(Session, SessionState, Exception)",
+      "source": "original DEX smali"
+    },
+    {
+      "behavior": [
+        "Starts a comma-text result with the escaped requested Graph path.",
+        "Appends the GraphObject inner JSONObject text when one exists.",
+        "Schedules onNewFaceBookGraph on the GL thread; the reviewed callback does not append a FacebookException string when the response has no GraphObject."
+      ],
+      "class": "com.quattroplay.GraalClassic.QPlayActivity$25$1",
+      "method": "onCompleted(Response)",
+      "source": "original DEX smali"
+    }
+  ],
+  "network_contacted": false,
+  "observations": [
+    {
+      "address": "0x240380",
+      "classification": "credential-like token exposure",
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "The main_android script table maps getnewfacebooktoken to JNI_getNewFacebookToken.",
+        "The JNI wrapper calls the Java getNewFacebookToken()[B method and copies the result into a native TString.",
+        "QPlayActivity returns the active Session access token when the session is open."
+      ],
+      "interpretation": "An activated script can receive the bearer token for the current Facebook session through a normal script callback."
+    },
+    {
+      "address": "0x24296c",
+      "classification": "privileged Graph request surface",
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "The script table maps requestnewfacebookgraph to JNI_requestNewFacebookGraph.",
+        "The Java activity requires an open active session, accepts a caller-supplied Graph path, and starts an asynchronous Facebook Request.",
+        "The SDK builds requests for the HTTPS Graph host and adds the active access token when absent from the Bundle."
+      ],
+      "interpretation": "The script API can perform authenticated Facebook Graph reads and writes subject to the session's granted permissions and Facebook's server policy."
+    },
+    {
+      "address": "0x246104",
+      "classification": "local-resource to Facebook upload path",
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "The native graph2 callback recognizes image: and file: parameter values.",
+        "It resolves the suffix as a game file, loads the resource, Base64-encodes its bytes, and replaces the parameter before calling Java.",
+        "Java converts image: data into a Bitmap and file: data into a byte array in the request Bundle."
+      ],
+      "interpretation": "A script can combine access to a game-readable resource with an authenticated Facebook upload request, although this path is not an arbitrary raw filesystem reader by itself."
+    },
+    {
+      "address": "0x242a88",
+      "classification": "script-controlled permission request",
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "The script table maps requestnewfacebookrights to JNI_requestNewFacebookRights.",
+        "The Java method accepts arbitrary comma-separated permission text and selects read or publish permission requests from a Boolean flag.",
+        "No local permission-name allowlist appears in the reviewed method; Facebook still mediates the resulting user prompt and server decision."
+      ],
+      "interpretation": "A script can ask the user for additional Facebook capabilities through the client UI, which increases the impact of a compromised or untrusted script package."
+    },
+    {
+      "address": "0x245f40",
+      "classification": "script capability registration",
+      "confidence": "confirmed-static-plus-inventory",
+      "evidence": [
+        "main_android_initStaticScriptVars_void registers 44 Android functions through the table at 0x38b2d0.",
+        "The relevant Facebook entries and callback addresses match the repository script_table_inventory.json records."
+      ],
+      "interpretation": "These are intended script-visible capabilities, not merely dead JNI helpers."
+    }
+  ],
+  "schema": "libqplay.original-facebook-bridge-review.v1",
+  "scope": "read-only review of the original 1.8 Facebook script, JNI, and bundled SDK bridge",
+  "script_surface": {
+    "owner": "main_android_initStaticScriptVars_void",
+    "registered_function_count": 44,
+    "relevant_entries": [
+      {
+        "behavior": "The bundled Natives implementation returns true.",
+        "callback_va": "0x240884",
+        "native_signature": "isNewFacebookAvailable()Z",
+        "script_name": "isnewfacebookavailable"
+      },
+      {
+        "behavior": "Passes the force-style integer and comma permission text to the activity.",
+        "callback_va": "0x242bb4",
+        "native_signature": "loginToNewFacebook(I[B)V",
+        "script_name": "logintonewfacebook"
+      },
+      {
+        "behavior": "Closes the active session and clears its token information when open.",
+        "callback_va": "0x2415b4",
+        "native_signature": "logoutFromNewFacebook()V",
+        "script_name": "logoutfromnewfacebook"
+      },
+      {
+        "behavior": "Returns the activity's mapped session state integer.",
+        "callback_va": "0x2413cc",
+        "native_signature": "getNewFacebookSessionState()I",
+        "script_name": "getnewfacebooksessionstate"
+      },
+      {
+        "behavior": "Returns the active Facebook access token when the session is open.",
+        "callback_va": "0x240380",
+        "native_signature": "getNewFacebookToken()[B",
+        "script_name": "getnewfacebooktoken"
+      },
+      {
+        "behavior": "Returns the active session permissions as escaped comma text.",
+        "callback_va": "0x24025c",
+        "native_signature": "getNewFacebookPermissions()[B",
+        "script_name": "getnewfacebookpermissions"
+      },
+      {
+        "behavior": "Requests script-supplied read or publish permissions on an open session.",
+        "callback_va": "0x242a88",
+        "native_signature": "requestNewFacebookRights(I[B)V",
+        "script_name": "requestnewfacebookrights"
+      },
+      {
+        "behavior": "Starts a default GET request for a script-supplied Graph path.",
+        "callback_va": "0x24296c",
+        "native_signature": "requestNewFacebookGraph([B)V",
+        "script_name": "requestnewfacebookgraph"
+      },
+      {
+        "behavior": "Starts a Graph request and can convert native game files into image or file attachments.",
+        "callback_va": "0x246104",
+        "native_signature": "requestNewFacebookGraph2([B[B[B)V",
+        "script_name": "requestnewfacebookgraph2"
+      },
+      {
+        "behavior": "Reports whether the activity has an open Facebook session through the WebDialog check.",
+        "callback_va": "0x240a1c",
+        "native_signature": "canShowFacebookShareDialog([B[B[B[B[B[B)Z",
+        "script_name": "canshowfacebooksharedialog"
+      },
+      {
+        "behavior": "Builds a feed dialog request from link, name, caption, description, and picture text.",
+        "callback_va": "0x242504",
+        "native_signature": "showFacebookShareDialog([B[B[B[B[B[B)V",
+        "script_name": "showfacebooksharedialog"
+      },
+      {
+        "behavior": "Returns true only when the active Facebook session is open.",
+        "callback_va": "0x2407fc",
+        "native_signature": "canShowFacebookWebDialog()Z",
+        "script_name": "canshowfacebookwebdialog"
+      },
+      {
+        "behavior": "Passes an action and comma-encoded parameters to the Facebook WebDialog.",
+        "callback_va": "0x24233c",
+        "native_signature": "showFacebookWebDialog([B[B)V",
+        "script_name": "showfacebookwebdialog"
+      }
+    ],
+    "source": "IDA script_table_inventory.json plus active IDA database",
+    "table_va": "0x38b2d0"
+  },
+  "scripts_executed": false
+}
