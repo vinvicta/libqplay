@@ -1,0 +1,71 @@
+{
+  "artifact": "ida_translation_verification_20260830",
+  "binary": {
+    "architecture": "aarch64",
+    "path": "GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so",
+    "sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8"
+  },
+  "coverage": {
+    "bundled_library_role_aliases": 27,
+    "cyassl_role_aliases": 11,
+    "native_callback_candidates": 277,
+    "retained_elf_symbols": 8601,
+    "script_table_callbacks": 906,
+    "application_and_engine_role_aliases": 28,
+    "reviewed_function_names": 1249
+  },
+  "database": {
+    "source_idb": "GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so.i64",
+    "saved_copy": "analysis/libqplay_translated_from_active_v8.i64",
+    "saved_copy_bytes": 60106701,
+    "saved_copy_sha256": "32cb6dc0e30bd1c6a62baab45dd45a940d76e7d8951b927a3d1dfcc79355fbe7"
+  },
+  "passes": [
+    {
+      "name": "retained ELF symbol translation",
+      "renamed": 8601,
+      "rename_failures": 0
+    },
+    {
+      "name": "native callback and static-state candidates",
+      "renamed": 277,
+      "boundary_additions": 5,
+      "failures": 0
+    },
+    {
+      "name": "exact script-table callbacks",
+      "renamed": 906,
+      "boundary_additions": 20,
+      "function_splits": 2,
+      "failures": 0
+    },
+    {
+      "name": "application and engine role candidates",
+      "renamed": 28,
+      "failures": 0
+    },
+    {
+      "name": "CyaSSL static role aliases",
+      "renamed": 11,
+      "failures": 0
+    },
+    {
+      "name": "bundled-library role aliases",
+      "renamed": 27,
+      "failures": 0
+    }
+  ],
+  "verification": {
+    "default_sub_count": 421,
+    "failure_count": 0,
+    "function_count": 11297,
+    "function_heads_with_names": 11297,
+    "status": "ok",
+    "verified_reviewed_name_count": 1249
+  },
+  "notes": [
+    "The saved copy was produced from the active ARM64 IDA database after the complete reviewed pass.",
+    "The remaining 421 entries are IDA-created functions without preserved source names. They remain addressable and were not given speculative source names.",
+    "The verification and local replay steps contacted no live service."
+  ]
+}

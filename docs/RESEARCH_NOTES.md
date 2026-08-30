@@ -64,6 +64,15 @@ followed by name. Important ARM64 addresses include:
 * `TClient_parse` at `0x1e7cd0`;
 * `TServerLevel_LoadEncrypted_void` at `0x1aa198`.
 
+The saved IDA database was later brought to the same state as the public
+translation plan. The active base database was copied, the callback and
+script-table boundaries were applied, and the reviewed application, CyaSSL,
+and bundled-library aliases were added. The final copy has 11,297 functions,
+11,297 named function heads, and 421 remaining default `sub_` entries. The
+read-only verifier checked 1,249 reviewed names at their expected addresses
+with zero failures. The copy hash and pass breakdown are in
+`artifacts/ida_translation_verification_20260830.json`.
+
 ## Connector and TLS
 
 The startup path creates an HTTP request for one of three connector modes.

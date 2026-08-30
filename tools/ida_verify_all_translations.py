@@ -2,9 +2,10 @@
 """Verify the complete prepared translation set in the current IDA database.
 
 This is a read-only check for IDALIB or the IDA Python console. It verifies
-the 277 native role candidates, 906 exact script-table callbacks, and 28
-unresolved application or engine role aliases at their expected addresses.
-The expected database totals are also checked after the boundary pass.
+the 277 native role candidates, 906 exact script-table callbacks, 28
+application or engine role aliases, 11 CyaSSL role aliases, and 27 bundled
+library role aliases at their expected addresses. The expected database
+totals are also checked after the boundary pass.
 """
 
 from __future__ import annotations
@@ -53,6 +54,8 @@ def expected_names() -> list[dict]:
     native = load("artifacts/native_callback_candidates.json")
     script = load("artifacts/script_table_inventory.json")
     roles = load("artifacts/unresolved_function_candidates.json")
+    cyassl = load("artifacts/cyassl_static_role_audit_20260826.json")
+    static_libraries = load("artifacts/static_library_role_audit_20260826.json")
     rows = []
     for group in NATIVE_GROUPS:
         for item in native.get(group, []):
@@ -77,6 +80,22 @@ def expected_names() -> list[dict]:
         rows.append(
             {
                 "source": "unresolved_function_candidates",
+                "va": int(item["va"], 16),
+                "expected_name": item["proposed_name"],
+            }
+        )
+    for item in cyassl["aliases"]:
+        rows.append(
+            {
+                "source": "cyassl_static_role_audit",
+                "va": int(item["va"], 16),
+                "expected_name": item["proposed_name"],
+            }
+        )
+    for item in static_libraries["aliases"]:
+        rows.append(
+            {
+                "source": "static_library_role_audit",
                 "va": int(item["va"], 16),
                 "expected_name": item["proposed_name"],
             }
@@ -117,10 +136,10 @@ def main() -> None:
         "function_count": function_count,
         "default_sub_count": default_sub_count,
         "expected_function_count": 11297,
-        "expected_default_sub_count": 459,
+        "expected_default_sub_count": 421,
         "failures": failures,
         "status": "ok"
-        if not failures and function_count == 11297 and default_sub_count == 459
+        if not failures and function_count == 11297 and default_sub_count == 421
         else "failed",
     }
     print(json.dumps(result, sort_keys=True))

@@ -13,16 +13,22 @@ handshake is not the same thing as a successful game login.
 
 ## Current status
 
-The symbol pass is complete. The ARM64 IDA database contains 8,601 translated
-and applied names with zero rename failures:
+The symbol pass is complete for every name retained in the ELF export. The
+final ARM64 IDA copy also contains the reviewed callback, script-table, and
+static-library aliases. The counts are:
 
 | Kind | Count |
 | --- | ---: |
-| Functions | 4,714 |
-| PLT thunks | 3,183 |
-| Jump thunks | 199 |
-| Data symbols | 505 |
-| Total translated symbols | 8,601 |
+| Retained ELF symbols translated | 8,601 |
+| Additional reviewed function aliases | 1,249 |
+| IDA functions in the saved copy | 11,297 |
+| Remaining default `sub_` functions | 421 |
+
+The retained ELF count includes 4,714 implementation functions, 3,183 PLT
+thunks, 199 jump thunks, and 505 data symbols. The 421 remaining `sub_`
+entries are code that IDA discovered without a preserved source symbol. They
+are kept address-based rather than being assigned guesses. The compact
+verification record is `artifacts/ida_translation_verification_20260830.json`.
 
 The old connector has a concrete compatibility problem. Its embedded
 GraalWeb certificate expired on 2023-07-29, so the original HTTPS path cannot
@@ -84,6 +90,8 @@ account authentication remain open.
 * `artifacts/original_script_package_review_20260830.json` records the signed
   connector script package parser and activation path. Embedded crypto
   literals are redacted from this public report.
+* `artifacts/ida_translation_verification_20260830.json` records the final
+  packed IDA copy, pass counts, hashes, and zero-failure verification result.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.
 * `symbols/libqplay.symbols.json` is the machine-readable equivalent.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.

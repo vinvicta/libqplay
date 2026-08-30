@@ -24,6 +24,21 @@ The full exports are in `symbols/`. The CSV is convenient for grep, a
 spreadsheet, or a quick address lookup. The JSON preserves the same records
 with explicit fields.
 
+## Persisted IDA result
+
+The active ARM64 database was then processed by the reviewed callback,
+script-table, application-role, CyaSSL, and bundled-library passes. The final
+packed copy was saved as
+`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v8.i64`.
+An IDALIB reopen verified 11,297 functions, 11,297 named function heads, 421
+remaining default `sub_` entries, and 1,249 reviewed names at their expected
+addresses. The verification had zero failures.
+
+The 1,249 reviewed names are made up of 277 native callback candidates, 906
+exact script-table callbacks, 28 application or engine role aliases, 11
+CyaSSL aliases, and 27 bundled-library aliases. The machine-readable record is
+`artifacts/ida_translation_verification_20260830.json`.
+
 ## Naming policy
 
 The native names are kept close to their demangled ELF form. Characters that
@@ -52,8 +67,8 @@ cross-references and emulator traces.
 
 Run the IDAPython script from IDA's Python console or with the IDA batch
 runner. The input must be the same library revision used to build the IDB.
-The script deliberately reports a byte or address mismatch instead of
-silently applying names to a different build.
+The scripts deliberately report an address or boundary mismatch instead of
+silently applying a reviewed alias to a different function.
 
 The generated summary should have `rename_failures` equal to an empty list.
 If a future library revision produces a different count, keep its exports in

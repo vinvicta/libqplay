@@ -7,16 +7,12 @@ their original source names.
 
 ## Final count
 
-The public inventory is an earlier snapshot taken before the disposable IDA
-copy was persisted. It contains 11,272 functions and 1,645 default `sub_`
-names. After the callback, script-table, and role passes, the saved copy at
-`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_all_v2.i64`
-contained 11,297 functions and 459 default names. A follow-up CyaSSL alias
-pass was saved as
-`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_all_v3.i64`
-with 448 default names. The static-library pass was saved as
-`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_all_v4.i64`
-and contains 11,297 functions and 421 default names.
+The original active database started with 11,272 functions and 1,645 default
+`sub_` names. The complete reviewed pass added 25 function boundaries and
+1,249 names or aliases. The final packed copy at
+`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v8.i64`
+contains 11,297 functions and 421 default names. An IDALIB reopen and the
+read-only translation verifier both returned zero failures.
 
 The count is accounted for exactly:
 
@@ -55,7 +51,7 @@ does not publish another full inventory. When the checked-in residual profile
 matches the input addresses, the report also embeds its category counts and
 profile hash.
 
-The report was generated from the private v4 IDA export with:
+The report was generated from the private translated IDA export with:
 
 ```text
 python3 tools/generate_final_residual_audit.py \
@@ -65,6 +61,11 @@ python3 tools/generate_final_residual_audit.py \
 The input path is local to the analysis workstation. The report's SHA-256
 fields make it possible to verify that a future export describes the same
 library and inventory.
+
+The final packed-database verification is recorded separately in
+`artifacts/ida_translation_verification_20260830.json`. It includes the
+source library hash, the saved IDA copy hash, all pass counts, and the exact
+function and residual totals.
 
 The 421 residual entries have also been classified by the persisted IDA
 profile:

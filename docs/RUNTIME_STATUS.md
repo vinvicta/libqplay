@@ -32,8 +32,9 @@ This is the short handoff view. The full reasoning and command history are in
 10. The original no-swap handler table routes packet 190 to the native
     connecting-window completion wrapper. The rendered world remains visible
     without the centered connecting control.
-11. The symbol translation pass applied 8,601 names to the ARM64 IDA database
-    with zero rename failures.
+11. The symbol translation pass applied all 8,601 retained ELF names, then
+    1,249 reviewed function aliases. The final packed copy has 11,297
+    functions, 421 address-only `sub_` entries, and zero verification failures.
 
 ## Not verified
 
