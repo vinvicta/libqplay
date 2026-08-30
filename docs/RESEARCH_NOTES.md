@@ -364,6 +364,20 @@ non-executable stacks, GNU RELRO, and `BIND_NOW`. These facts are documented in
 `docs/SECURITY.md` with confidence limits so compatibility failures are not
 presented as confirmed vulnerabilities.
 
+The parser-hardening pass adds
+`artifacts/original_level_parser_review_20260830.json`. It confirms that the
+outer `.code` length uses a signed 32-bit check before allocation, that
+allocation failures are not handled, and that fixed field reads do not always
+check their short-read count. The normal board path is bounded to 4096 cells
+with a fixed 13-bit callsite and 8192-byte tile buffers. The line-oriented
+readers are less defensive: signs and links have no total record budget, the
+shared line reader has no per-line limit, and key-code replacement repeatedly
+rebuilds sign text. NPC and chest object creation is disabled in the stock
+encrypted-level loader, so those branches remain context-dependent rather than
+normal-path findings. The report records these as availability or parser
+robustness risks and leaves remote reachability for a disposable local harness
+and a complete cache/download trace.
+
 ## Corrected two-connection runtime trace
 
 The first useful local run sent the map and player properties on the same

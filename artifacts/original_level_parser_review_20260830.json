@@ -1,0 +1,4258 @@
+{
+  "artifact": "original_level_parser_review_20260830",
+  "database": {
+    "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "imagebase": "0x0",
+    "path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
+  },
+  "functions": [
+    {
+      "address": "0x1aa198",
+      "callers": [
+        {
+          "caller": "0x16e634",
+          "caller_name": "TPlayer_loadSideLevels_void",
+          "callsite": "0x16e904"
+        },
+        {
+          "caller": "0x16e634",
+          "caller_name": "TPlayer_loadSideLevels_void",
+          "callsite": "0x16e96c"
+        },
+        {
+          "caller": "0x16e634",
+          "caller_name": "TPlayer_loadSideLevels_void",
+          "callsite": "0x16e9d4"
+        },
+        {
+          "caller": "0x178a18",
+          "caller_name": "TPlayer_enterServerLevel_TString_const_bool",
+          "callsite": "0x178d80"
+        },
+        {
+          "caller": "0x1f4238",
+          "caller_name": "TClient_sendLevelLinking_TString_const_double_double",
+          "callsite": "0x1f462c"
+        }
+      ],
+      "code": "__int64 __fastcall TServerLevel_LoadEncrypted_void(TServerLevel *this, __int64 a2, bool a3)\n{\n  _DWORD **v3; // x20\n  int v5; // w21\n  int v6; // w19\n  __int64 v7; // x1\n  _DWORD **v8; // x0\n  bool v9; // cc\n  TStream *CodedFile_TString_const; // x0\n  const TString *v11; // x1\n  TStream *v12; // x19\n  int v14; // w0\n  int v15; // w0\n  unsigned __int8 v16; // w0\n  int v17; // w27\n  unsigned __int8 v18; // w0\n  int v19; // w27\n  unsigned __int8 v20; // w0\n  int v21; // w27\n  unsigned __int8 v22; // w0\n  int v23; // w27\n  unsigned __int8 v24; // w0\n  signed int v25; // w20\n  __int64 v26; // x0\n  __int64 v27; // x1\n  _BOOL4 v28; // w3\n  bool v29; // w4\n  __int64 v30; // x0\n  bool v31; // w4\n  unsigned __int8 v32; // [xsp+57h] [xbp-119h] BYREF\n  int *v33; // [xsp+58h] [xbp-118h] BYREF\n  __int64 v34; // [xsp+60h] [xbp-110h] BYREF\n  char dest[8]; // [xsp+68h] [xbp-108h] BYREF\n  char v36[256]; // [xsp+70h] [xbp-100h] BYREF\n\n  v3 = (_DWORD **)((char *)this + 128);\n  v33 = nullptr;\n  v5 = 78121784;\n  plt_TServerLevel_getEncryptedFilename_TString_const_bool(&v34, (TServerLevel *)((char *)this + 128), nullptr, a3);\n  v6 = 1;\n  while ( *v3 )\n  {\n    v7 = (unsigned int)v6;\n    v8 = v3;\n    v9 = v6++ <= **v3;\n    if ( !v9 )\n      goto LABEL_7;\nLABEL_4:\n    v5 *= *(unsigned __int8 *)plt_TString_operator_index_int__2(v8, v7);\n  }\n  v7 = (unsigned int)v6;\n  v9 = v6 <= 0;\n  v8 = v3;\n  ++v6;\n  if ( v9 )\n    goto LABEL_4;\nLABEL_7:\n  drandseed = v5;\n  CodedFile_TString_const = (TStream *)plt_TEncryption_loadCodedFile_TString_const(\n                                         (TEncryption *)&v34,\n                                         (const TString *)&drandseed);\n  v12 = CodedFile_TString_const;\n  if ( !CodedFile_TString_const )\n  {\nLABEL_10:\n    plt_TFiles_deleteFile_TString_const((TFiles *)&v34, v11);\n    *((_DWORD *)this + 35) = 0;\n    plt_TString_clear_void((TString *)&v34);\n    return plt_TString_clear_void((TString *)&v33);\n  }\n  plt_TStream_read_void_int(CodedFile_TString_const, dest, 8);\n  plt_TString_addbuffer_char_const_int((TString *)&v33, dest, 8);\n  if ( (unsigned __int8)plt_operator_ne_TString_const_char_const((int)&v33, \"GWEBL001\") )\n    goto LABEL_9;\n  plt_TStream_read_void_int(v12, &v32, 1);\n  plt_TStream_read_void_int(v12, v36, v32 - 32);\n  plt_TString_clear_void((TString *)&v33);\n  plt_TString_addbuffer_char_const_int((TString *)&v33, v36, v32 - 32);\n  if ( (unsigned __int8)plt_operator_ne_TString_const_TString_const(&v33, data_TClient_serveripstr) )\n    goto LABEL_9;\n  plt_TStream_read_void_int(v12, dest, 2);\n  v14 = dest[1] - 32 + ((dest[0] - 32) << 7);\n  if ( v14 != data_TClient_serversignature && (v14 != 1 || data_TClient_serversignature != 73) )\n    goto LABEL_9;\n  plt_TStream_read_void_int(v12, dest, 5);\n  plt_TString_clear_void((TString *)&v33);\n  plt_TString_addbuffer_char_const_int((TString *)&v33, dest, 5);\n  if ( v33 )\n  {\n    v15 = 0;\n    if ( *v33 > 4 )\n    {\n      plt_TString_operator_index_int(&v33, 1);\n      v17 = v16;\n      plt_TString_operator_index_int(&v33, 2);\n      v19 = ((v18 - 32) << 21) + (v17 << 28);\n      plt_TString_operator_index_int(&v33, 3);\n      v21 = v19 + ((v20 - 32) << 14);\n      plt_TString_operator_index_int(&v33, 4);\n      v23 = v21 + ((v22 - 32) << 7);\n      plt_TString_operator_index_int(&v33, 5);\n      v15 = v23 + v24 - 32;\n    }\n  }\n  else\n  {\n    v15 = 0;\n  }\n  *((_DWORD *)this + 35) = v15;\n  plt_TStream_read_void_int(v12, &v32, 1);\n  plt_TStream_read_void_int(v12, v36, v32 - 32);\n  plt_TString_clear_void((TString *)&v33);\n  plt_TString_addbuffer_char_const_int((TString *)&v33, v36, v32 - 32);\n  if ( (unsigned __int8)plt_operator_ne_TString_const_TString_const(&v33, v3)\n    || (plt_TStream_read_void_int(v12, dest, 8),\n        plt_TString_clear_void((TString *)&v33),\n        plt_TString_addbuffer_char_const_int((TString *)&v33, dest, 8),\n        (unsigned __int8)plt_operator_ne_TString_const_char_const((int)&v33, \"GR-V1.03\"))\n    && (unsigned __int8)plt_operator_ne_TString_const_char_const((int)&v33, \"GR-V1.04\")\n    && (unsigned __int8)plt_operator_ne_TString_const_char_const((int)&v33, \"GR-V1.05\") )\n  {\nLABEL_9:\n    --cstream;\n    plt_TString_clear_void((TStream *)((char *)v12 + 8));\n    plt_operator_delete_void__2(v12);\n    goto LABEL_10;\n  }\n  if ( !(unsigned __int8)plt_operator_assign_TString_const_char_const((int)&v33, \"GR-V1.05\") )\n  {\n    v30 = plt_TList_operator_index_int(*((_QWORD *)this + 14), 0);\n    if ( (unsigned __int8)plt_TLevelLoader_loadBoard_TStream_short_int_bool(\n                            v12,\n                            *(TStream **)(*(_QWORD *)v30 + 128LL),\n                            (__int16 *)&byte_9[4],\n                            0,\n                            v31) )\n      goto LABEL_28;\n    goto LABEL_9;\n  }\n  v25 = 0;\n  plt_TStream_read_void_int(v12, dest, 1);\n  plt_TServerLevel_setTileLayerCount_int(this, dest[0] - 32);\n  v26 = *((_QWORD *)this + 14);\n  if ( *(int *)(v26 + 12) > 0 )\n  {\n    do\n    {\n      v27 = *(_QWORD *)plt_TList_operator_index_int(v26, (unsigned int)v25);\n      v28 = v25++ > 0;\n      if ( !(unsigned __int8)plt_TLevelLoader_loadBoard_TStream_short_int_bool(\n                               v12,\n                               *(TStream **)(v27 + 128),\n                               (__int16 *)&byte_9[4],\n                               v28,\n                               v29) )\n        goto LABEL_9;\n      v26 = *((_QWORD *)this + 14);\n    }\n    while ( v25 < *(_DWORD *)(v26 + 12) );\n  }\nLABEL_28:\n  plt_TServerLevel_readLinks_TStream(this, v12);\n  plt_TServerLevel_readBaddies_TStream_bool(this, v12, 0);\n  plt_TServerLevel_readNPCs_TStream_bool(this, v12, 0);\n  plt_TServerLevel_readChests_TStream_bool(this, v12, 0);\n  plt_TServerLevel_readSigns_TStream(this, v12);\n  --cstream;\n  plt_TString_clear_void((TStream *)((char *)v12 + 8));\n  plt_operator_delete_void__2(v12);\n  plt_TString_clear_void((TString *)&v34);\n  return plt_TString_clear_void((TString *)&v33);\n}\n",
+      "code_bytes": 5955,
+      "code_sha256": "038360e08402baff8650d4dbd117daac1a8f3b273c971a916bf62a704a5d046f",
+      "function_end": "0x1aa648",
+      "function_start": "0x1aa198",
+      "name": "TServerLevel_LoadEncrypted_void",
+      "role": "encrypted level loader",
+      "string_literals": [
+        "\"GR-V1.03\"",
+        "\"GR-V1.04\"",
+        "\"GR-V1.05\"",
+        "\"GWEBL001\""
+      ]
+    },
+    {
+      "address": "0xe62ec",
+      "callers": [
+        {
+          "caller": "0x1661b0",
+          "caller_name": "TGraalAni_loadScriptEncrypted_void",
+          "callsite": "0x166274"
+        },
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa238"
+        }
+      ],
+      "code": "_DWORD *__fastcall TEncryption_loadCodedFile_TString_const(TEncryption *this, const TString *a2)\n{\n  int *v2; // x0\n  int *v3; // x19\n  TString *v4; // x26\n  _DWORD *result; // x0\n  int v6; // w24\n  int v7; // w3\n  __int64 v8; // x23\n  char *v9; // x23\n  int v10; // w21\n  __int64 v11; // x24\n  int v12; // w28\n  void *v13; // x0\n  int v14; // w0\n  signed int v16; // [xsp+68h] [xbp-38h]\n  _DWORD *v17; // [xsp+70h] [xbp-30h]\n  int dest; // [xsp+84h] [xbp-1Ch] BYREF\n  int8x8_t v19; // [xsp+88h] [xbp-18h]\n  int8x8_t v20; // [xsp+90h] [xbp-10h] BYREF\n  _BYTE v21[8]; // [xsp+98h] [xbp-8h] BYREF\n\n  v2 = (int *)plt_operator_new_ulong__2(0x10u);\n  *v2 = 0;\n  v2[1] = 0;\n  v3 = v2;\n  *((_QWORD *)v2 + 1) = 0;\n  v4 = (TString *)(v2 + 2);\n  ++cstream;\n  plt_TStream_LoadFromFile_TString_const((TStream *)v2, this);\n  if ( v3[1] <= 3 || (plt_TStream_read_void_int((TStream *)v3, &dest, 4), v6 = dest, dest + 3 >= v3[1]) )\n  {\n    --cstream;\n    plt_TString_clear_void(v4);\n    plt_operator_delete_void__2(v3);\n    return nullptr;\n  }\n  else\n  {\n    v16 = dest - 8;\n    v19.n64_u64[0] = 0;\n    v17 = (_DWORD *)plt_operator_new_ulong__2(0x10u);\n    v7 = cstream + 1;\n    *v17 = 0;\n    v17[1] = 0;\n    *((_QWORD *)v17 + 1) = 0;\n    cstream = v7;\n    plt_TString_setSize_int_bool((TString *)(v17 + 2), v6 - 8, 0);\n    v8 = *((_QWORD *)v17 + 1);\n    if ( v8 )\n      v9 = (char *)(v8 + 8);\n    else\n      v9 = (char *)TString_dummystr;\n    v10 = 0;\n    while ( v16 > v10 )\n    {\n      v11 = 0;\n      plt_TStream_read_void_int((TStream *)v3, &v20, 8);\n      do\n        v21[v11++] = plt_drandi_void();\n      while ( v11 != 8 );\n      v12 = v16 - v10;\n      plt_TEncryption_des_decryptmemory_uchar_const_uchar_uint(\n        (TEncryption *)v21,\n        (const unsigned __int8 *)&v20,\n        (unsigned __int8 *)&byte_8,\n        v16);\n      if ( v16 - v10 > 8 )\n        v12 = 8;\n      v13 = v9;\n      v10 += v12;\n      v9 += v12;\n      v19.n64_u64[0] = vadd_s8(v20, v19).n64_u64[0];\n      memcpy(v13, &v20, v12);\n    }\n    plt_TStream_read_void_int((TStream *)v3, &v20, 8);\n    --cstream;\n    plt_TString_clear_void(v4);\n    plt_operator_delete_void__2(v3);\n    v14 = v19.n64_u8[0];\n    v17[1] = v10;\n    if ( v20.n64_u8[0] != v14\n      || v20.n64_u8[1] != v19.n64_u8[1]\n      || v20.n64_u8[2] != v19.n64_u8[2]\n      || v20.n64_u8[3] != v19.n64_u8[3]\n      || v20.n64_u8[4] != v19.n64_u8[4]\n      || v20.n64_u8[5] != v19.n64_u8[5]\n      || v20.n64_u8[6] != v19.n64_u8[6]\n      || (result = v17, v20.n64_u8[7] != v19.n64_u8[7]) )\n    {\n      --cstream;\n      plt_TString_clear_void((TString *)(v17 + 2));\n      plt_operator_delete_void__2(v17);\n      return nullptr;\n    }\n  }\n  return result;\n}\n",
+      "code_bytes": 2678,
+      "code_sha256": "70e406c7fff3ea2ed487e0f7554a279fc32c78f0afc92e7be93d2fdab003eb3c",
+      "function_end": "0xe659c",
+      "function_start": "0xe62ec",
+      "name": "TEncryption_loadCodedFile_TString_const",
+      "role": "coded file reader",
+      "string_literals": []
+    },
+    {
+      "address": "0xf0790",
+      "callers": [
+        {
+          "caller": "0xe62ec",
+          "caller_name": "TEncryption_loadCodedFile_TString_const",
+          "callsite": "0xe6340"
+        },
+        {
+          "caller": "0xe659c",
+          "caller_name": "TEncryption_getCodedScriptChecksum_TString_const",
+          "callsite": "0xe6674"
+        },
+        {
+          "caller": "0xe6740",
+          "caller_name": "TEncryption_loadCodedScript_TString_const_int_TString_const_uint_bool",
+          "callsite": "0xe685c"
+        },
+        {
+          "caller": "0xe9230",
+          "caller_name": "TFileNameScan_loadCacheFile_TString_const_TString_const_bool",
+          "callsite": "0xe928c"
+        },
+        {
+          "caller": "0xec3e8",
+          "caller_name": "TIdentification_getCookie_void",
+          "callsite": "0xec43c"
+        },
+        {
+          "caller": "0xefe7c",
+          "caller_name": "TResourceObject_getStream_void",
+          "callsite": "0xf00ec"
+        },
+        {
+          "caller": "0xefe7c",
+          "caller_name": "TResourceObject_getStream_void",
+          "callsite": "0xf0254"
+        },
+        {
+          "caller": "0xf6380",
+          "caller_name": "TStringList_LoadFromFile_TString_const",
+          "callsite": "0xf63c4"
+        },
+        {
+          "caller": "0xfbda4",
+          "caller_name": "TFileScripting_script_getFileContent",
+          "callsite": "0xfbde0"
+        },
+        {
+          "caller": "0x197204",
+          "caller_name": "TSetup_copyExtraFilesToPath_TString_const",
+          "callsite": "0x19727c"
+        },
+        {
+          "caller": "0x1f4cf8",
+          "caller_name": "TClient_sendWantImageUpdateCRC_TString_const",
+          "callsite": "0x1f4e94"
+        },
+        {
+          "caller": "0x20f2ac",
+          "caller_name": "TGraalVar_loadString_TString_const",
+          "callsite": "0x20f328"
+        },
+        {
+          "caller": "0x2116bc",
+          "caller_name": "TGraalVar_readFromFile_TString_const_TString_const_bool",
+          "callsite": "0x211728"
+        },
+        {
+          "caller": "0x211db0",
+          "caller_name": "TGraalVar_loadVars_TString_const",
+          "callsite": "0x211e40"
+        },
+        {
+          "caller": "0x213d08",
+          "caller_name": "TGraalVar_loadLines_TString_const",
+          "callsite": "0x213d88"
+        },
+        {
+          "caller": "0x246104",
+          "caller_name": "sub_246104",
+          "callsite": "0x246254"
+        }
+      ],
+      "code": "__int64 __fastcall TStream_LoadFromFile_TString_const(TStream *this, const TString *a2)\n{\n  TString *v2; // x23\n  const TString *v5; // x1\n  __int64 result; // x0\n  int v7; // w20\n  FILE *v8; // x21\n  __int64 v9; // x0\n  void *v10; // x0\n  const char *v11; // x2\n  __int64 v12; // [xsp+38h] [xbp-18h] BYREF\n  __int64 v13; // [xsp+40h] [xbp-10h] BYREF\n  __int64 v14; // [xsp+48h] [xbp-8h] BYREF\n\n  v2 = (TStream *)((char *)this + 8);\n  plt_TString_clear_void((TStream *)((char *)this + 8));\n  *((_DWORD *)this + 1) = 0;\n  *(_DWORD *)this = 0;\n  result = plt_TFiles_fileSize_TString_const(a2, v5);\n  v7 = result;\n  if ( (int)result <= 0 )\n    return result;\n  if ( !*(_QWORD *)a2 )\n  {\n    v8 = fopen(TString_dummystr, \"rb\");\n    if ( v8 )\n      goto LABEL_4;\nLABEL_9:\n    v12 = 0;\n    plt_TString_operator_lshift_char_const((int)&v12, \"Couldn't open \");\n    v13 = 0;\n    plt_TString_operator_assign_TString_const(&v13, &v12);\n    plt_TString_operator_lshift_TString_const(&v13, a2);\n    v14 = 0;\n    plt_TString_operator_assign_TString_const(&v14, &v13);\n    plt_TString_operator_lshift_char_const((int)&v14, \" for reading!\");\n    plt_TLog_echo_TString_const_double_double_double_char_const(\n      (TLog *)&v14,\n      (const TString *)\"files\",\n      0.5,\n      0.0,\n      0.0,\n      v11);\n    plt_TString_clear_void((TString *)&v14);\n    plt_TString_clear_void((TString *)&v13);\n    return plt_TString_clear_void((TString *)&v12);\n  }\n  v8 = fopen((const char *)(*(_QWORD *)a2 + 8LL), \"rb\");\n  if ( !v8 )\n    goto LABEL_9;\nLABEL_4:\n  plt_TString_setSize_int_bool(v2, v7, 0);\n  v9 = *((_QWORD *)this + 1);\n  if ( v9 )\n    v10 = (void *)(v9 + 8);\n  else\n    v10 = (void *)TString_dummystr;\n  fread(v10, 1u, v7, v8);\n  *((_DWORD *)this + 1) = v7;\n  return fclose(v8);\n}\n",
+      "code_bytes": 1766,
+      "code_sha256": "408833cce6c5ae9264dd59818b95ca44ce9002dadefb0af9249ac98b567932a6",
+      "function_end": "0xf0910",
+      "function_start": "0xf0790",
+      "name": "TStream_LoadFromFile_TString_const",
+      "role": "file to stream loader",
+      "string_literals": [
+        "\" for reading!\"",
+        "\"Couldn't open \"",
+        "\"files\"",
+        "\"rb\""
+      ]
+    },
+    {
+      "address": "0xf0684",
+      "callers": [
+        {
+          "caller": "0xe6100",
+          "caller_name": "TEncryption_saveCodedFile_TStream_TString_const",
+          "callsite": "0xe6204"
+        },
+        {
+          "caller": "0xe62ec",
+          "caller_name": "TEncryption_loadCodedFile_TString_const",
+          "callsite": "0xe639c"
+        },
+        {
+          "caller": "0xe62ec",
+          "caller_name": "TEncryption_loadCodedFile_TString_const",
+          "callsite": "0xe643c"
+        },
+        {
+          "caller": "0xe62ec",
+          "caller_name": "TEncryption_loadCodedFile_TString_const",
+          "callsite": "0xe64b4"
+        },
+        {
+          "caller": "0xf075c",
+          "caller_name": "sub_F075C",
+          "callsite": "0xf0774"
+        },
+        {
+          "caller": "0x115128",
+          "caller_name": "TBitmapLoader_guessFileType_TStream",
+          "callsite": "0x115180"
+        },
+        {
+          "caller": "0x115e28",
+          "caller_name": "TBitmap_readMSBmp_TStream",
+          "callsite": "0x115e60"
+        },
+        {
+          "caller": "0x115e28",
+          "caller_name": "TBitmap_readMSBmp_TStream",
+          "callsite": "0x115e74"
+        },
+        {
+          "caller": "0x115e28",
+          "caller_name": "TBitmap_readMSBmp_TStream",
+          "callsite": "0x115e84"
+        },
+        {
+          "caller": "0x115e28",
+          "caller_name": "TBitmap_readMSBmp_TStream",
+          "callsite": "0x115e94"
+        },
+        {
+          "caller": "0x115e28",
+          "caller_name": "TBitmap_readMSBmp_TStream",
+          "callsite": "0x115ea4"
+        },
+        {
+          "caller": "0x115e28",
+          "caller_name": "TBitmap_readMSBmp_TStream",
+          "callsite": "0x115eb4"
+        },
+        {
+          "caller": "0x115e28",
+          "caller_name": "TBitmap_readMSBmp_TStream",
+          "callsite": "0x115ec4"
+        },
+        {
+          "caller": "0x115e28",
+          "caller_name": "TBitmap_readMSBmp_TStream",
+          "callsite": "0x115ed4"
+        },
+        {
+          "caller": "0x115e28",
+          "caller_name": "TBitmap_readMSBmp_TStream",
+          "callsite": "0x115ee4"
+        },
+        {
+          "caller": "0x115e28",
+          "caller_name": "TBitmap_readMSBmp_TStream",
+          "callsite": "0x115ef4"
+        },
+        {
+          "caller": "0x115e28",
+          "caller_name": "TBitmap_readMSBmp_TStream",
+          "callsite": "0x115f04"
+        },
+        {
+          "caller": "0x115e28",
+          "caller_name": "TBitmap_readMSBmp_TStream",
+          "callsite": "0x115f14"
+        },
+        {
+          "caller": "0x115e28",
+          "caller_name": "TBitmap_readMSBmp_TStream",
+          "callsite": "0x115f24"
+        },
+        {
+          "caller": "0x115e28",
+          "caller_name": "TBitmap_readMSBmp_TStream",
+          "callsite": "0x115f34"
+        },
+        {
+          "caller": "0x115e28",
+          "caller_name": "TBitmap_readMSBmp_TStream",
+          "callsite": "0x115f44"
+        },
+        {
+          "caller": "0x115e28",
+          "caller_name": "TBitmap_readMSBmp_TStream",
+          "callsite": "0x115f54"
+        },
+        {
+          "caller": "0x115e28",
+          "caller_name": "TBitmap_readMSBmp_TStream",
+          "callsite": "0x116070"
+        },
+        {
+          "caller": "0x115e28",
+          "caller_name": "TBitmap_readMSBmp_TStream",
+          "callsite": "0x11612c"
+        },
+        {
+          "caller": "0x115e28",
+          "caller_name": "TBitmap_readMSBmp_TStream",
+          "callsite": "0x116248"
+        },
+        {
+          "caller": "0x11f9d8",
+          "caller_name": "TMNGAnimation_parsePicture_void",
+          "callsite": "0x11fa14"
+        },
+        {
+          "caller": "0x11f9d8",
+          "caller_name": "TMNGAnimation_parsePicture_void",
+          "callsite": "0x11fb00"
+        },
+        {
+          "caller": "0x11f9d8",
+          "caller_name": "TMNGAnimation_parsePicture_void",
+          "callsite": "0x11fb54"
+        },
+        {
+          "caller": "0x11f9d8",
+          "caller_name": "TMNGAnimation_parsePicture_void",
+          "callsite": "0x11fcd4"
+        },
+        {
+          "caller": "0x11f9d8",
+          "caller_name": "TMNGAnimation_parsePicture_void",
+          "callsite": "0x11fd9c"
+        },
+        {
+          "caller": "0x11f9d8",
+          "caller_name": "TMNGAnimation_parsePicture_void",
+          "callsite": "0x11feb4"
+        },
+        {
+          "caller": "0x11f9d8",
+          "caller_name": "TMNGAnimation_parsePicture_void",
+          "callsite": "0x11fed4"
+        },
+        {
+          "caller": "0x11f9d8",
+          "caller_name": "TMNGAnimation_parsePicture_void",
+          "callsite": "0x11ff50"
+        },
+        {
+          "caller": "0x11f9d8",
+          "caller_name": "TMNGAnimation_parsePicture_void",
+          "callsite": "0x120054"
+        },
+        {
+          "caller": "0x11f9d8",
+          "caller_name": "TMNGAnimation_parsePicture_void",
+          "callsite": "0x120274"
+        },
+        {
+          "caller": "0x11f9d8",
+          "caller_name": "TMNGAnimation_parsePicture_void",
+          "callsite": "0x120334"
+        },
+        {
+          "caller": "0x150a30",
+          "caller_name": "sub_150A30",
+          "callsite": "0x150a34"
+        },
+        {
+          "caller": "0x150f40",
+          "caller_name": "jump_TStream_read_void_int",
+          "callsite": "0x150f40"
+        },
+        {
+          "caller": "0x1514b8",
+          "caller_name": "tga_info",
+          "callsite": "0x1514f0"
+        },
+        {
+          "caller": "0x1515cc",
+          "caller_name": "tga_load",
+          "callsite": "0x151614"
+        },
+        {
+          "caller": "0x1515cc",
+          "caller_name": "tga_load",
+          "callsite": "0x1518cc"
+        },
+        {
+          "caller": "0x1515cc",
+          "caller_name": "tga_load",
+          "callsite": "0x151934"
+        },
+        {
+          "caller": "0x1515cc",
+          "caller_name": "tga_load",
+          "callsite": "0x151a24"
+        },
+        {
+          "caller": "0x1515cc",
+          "caller_name": "tga_load",
+          "callsite": "0x151de0"
+        },
+        {
+          "caller": "0x1515cc",
+          "caller_name": "tga_load",
+          "callsite": "0x152084"
+        },
+        {
+          "caller": "0x1a29d0",
+          "caller_name": "TServerLevel_readBaddies_TStream_bool",
+          "callsite": "0x1a29f8"
+        },
+        {
+          "caller": "0x1a29d0",
+          "caller_name": "TServerLevel_readBaddies_TStream_bool",
+          "callsite": "0x1a2a24"
+        },
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa250"
+        },
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa2ec"
+        },
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa300"
+        },
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa348"
+        },
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa390"
+        },
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa448"
+        },
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa45c"
+        },
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa4a0"
+        },
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa4f8"
+        },
+        {
+          "caller": "0x22ed90",
+          "caller_name": "TLevelLoader_loadBoard_TStream_short_int_bool",
+          "callsite": "0x22ee2c"
+        }
+      ],
+      "code": "__int64 __fastcall TStream_read_void_int(TStream *this, void *dest, int a3)\n{\n  int *v3; // x4\n  int v4; // w3\n  int v5; // w19\n  int v6; // w19\n\n  if ( a3 < 0 )\n    return 0;\n  v3 = *((int **)this + 1);\n  if ( !v3 || *v3 <= 0 )\n    return 0;\n  v4 = *(_DWORD *)this;\n  if ( (*(_DWORD *)this & 0x80000000) != 0 )\n  {\n    v5 = *((_DWORD *)this + 1);\n    v4 = 0;\n    *(_DWORD *)this = 0;\n    if ( v5 >= 0 )\n      goto LABEL_6;\nLABEL_10:\n    *(_DWORD *)this = v5;\n    if ( a3 > 0 )\n      return 0;\n    else\n      return (unsigned int)a3;\n  }\n  v5 = *((_DWORD *)this + 1);\n  if ( v5 < v4 )\n    goto LABEL_10;\nLABEL_6:\n  v6 = v5 - v4;\n  if ( a3 <= v6 )\n    v6 = a3;\n  if ( v6 <= 0 )\n    return (unsigned int)v6;\n  memcpy(dest, (char *)v3 + v4 + 8, v6);\n  *(_DWORD *)this += v6;\n  return (unsigned int)v6;\n}\n",
+      "code_bytes": 801,
+      "code_sha256": "19d430f58376222899d0dc95731919b12ebfa9b7152a34260417a337351544a6",
+      "function_end": "0xf075c",
+      "function_start": "0xf0684",
+      "name": "TStream_read_void_int",
+      "role": "bounded stream read",
+      "string_literals": []
+    },
+    {
+      "address": "0xf11bc",
+      "callers": [
+        {
+          "caller": "0xe4f68",
+          "caller_name": "TCompression_CompressBuf_void_const_int_uchar_uint",
+          "callsite": "0xe4f9c"
+        },
+        {
+          "caller": "0xe4fc8",
+          "caller_name": "TCompression_DecompressBuf_void_const_int_uchar_uint",
+          "callsite": "0xe50d0"
+        },
+        {
+          "caller": "0xe5210",
+          "caller_name": "TCompression_CompressBuf2_void_const_int_uchar_uint",
+          "callsite": "0xe5244"
+        },
+        {
+          "caller": "0xe5270",
+          "caller_name": "TCompression_DecompressBuf2_void_const_int_uchar_uint",
+          "callsite": "0xe5368"
+        },
+        {
+          "caller": "0xe5f94",
+          "caller_name": "TEncryption_getdecode_TString_const_TString_const",
+          "callsite": "0xe60d0"
+        },
+        {
+          "caller": "0xe6100",
+          "caller_name": "TEncryption_saveCodedFile_TStream_TString_const",
+          "callsite": "0xe616c"
+        },
+        {
+          "caller": "0xe6100",
+          "caller_name": "TEncryption_saveCodedFile_TStream_TString_const",
+          "callsite": "0xe61bc"
+        },
+        {
+          "caller": "0xe6100",
+          "caller_name": "TEncryption_saveCodedFile_TStream_TString_const",
+          "callsite": "0xe6248"
+        },
+        {
+          "caller": "0xe6100",
+          "caller_name": "TEncryption_saveCodedFile_TStream_TString_const",
+          "callsite": "0xe627c"
+        },
+        {
+          "caller": "0xe9230",
+          "caller_name": "TFileNameScan_loadCacheFile_TString_const_TString_const_bool",
+          "callsite": "0xe9418"
+        },
+        {
+          "caller": "0xe9230",
+          "caller_name": "TFileNameScan_loadCacheFile_TString_const_TString_const_bool",
+          "callsite": "0xe943c"
+        },
+        {
+          "caller": "0xe9230",
+          "caller_name": "TFileNameScan_loadCacheFile_TString_const_TString_const_bool",
+          "callsite": "0xe9598"
+        },
+        {
+          "caller": "0xe9230",
+          "caller_name": "TFileNameScan_loadCacheFile_TString_const_TString_const_bool",
+          "callsite": "0xe95d4"
+        },
+        {
+          "caller": "0xe9688",
+          "caller_name": "TFileNameScan_loadCacheFile2_TStream_TString_const_bool",
+          "callsite": "0xe97d8"
+        },
+        {
+          "caller": "0xe9688",
+          "caller_name": "TFileNameScan_loadCacheFile2_TStream_TString_const_bool",
+          "callsite": "0xe97fc"
+        },
+        {
+          "caller": "0xe9688",
+          "caller_name": "TFileNameScan_loadCacheFile2_TStream_TString_const_bool",
+          "callsite": "0xe9998"
+        },
+        {
+          "caller": "0xe9688",
+          "caller_name": "TFileNameScan_loadCacheFile2_TStream_TString_const_bool",
+          "callsite": "0xe99d0"
+        },
+        {
+          "caller": "0xf0564",
+          "caller_name": "sub_F0564",
+          "callsite": "0xf05e4"
+        },
+        {
+          "caller": "0xf0ce0",
+          "caller_name": "TStream_readLine_void",
+          "callsite": "0xf0d6c"
+        },
+        {
+          "caller": "0xf0e38",
+          "caller_name": "TStream_write_char_const",
+          "callsite": "0xf0e5c"
+        },
+        {
+          "caller": "0xf12e0",
+          "caller_name": "TString_operator_lshift_TString_const",
+          "callsite": "0xf130c"
+        },
+        {
+          "caller": "0xf1334",
+          "caller_name": "TString_operator_lshift_char_const",
+          "callsite": "0xf135c"
+        },
+        {
+          "caller": "0xf1370",
+          "caller_name": "TString_addint_int_int_int_bool_bool",
+          "callsite": "0xf1450"
+        },
+        {
+          "caller": "0xf14f8",
+          "caller_name": "TString_addunsignedint_uint_int_int_bool_bool",
+          "callsite": "0xf159c"
+        },
+        {
+          "caller": "0xf14f8",
+          "caller_name": "TString_addunsignedint_uint_int_int_bool_bool",
+          "callsite": "0xf1610"
+        },
+        {
+          "caller": "0xf1644",
+          "caller_name": "TString_addunsignedlongint_ulong_long_int_int_bool_bool",
+          "callsite": "0xf16e8"
+        },
+        {
+          "caller": "0xf1644",
+          "caller_name": "TString_addunsignedlongint_ulong_long_int_int_bool_bool",
+          "callsite": "0xf1748"
+        },
+        {
+          "caller": "0xf177c",
+          "caller_name": "TString_addhex_uint_int_int_bool_bool_bool",
+          "callsite": "0xf182c"
+        },
+        {
+          "caller": "0xf177c",
+          "caller_name": "TString_addhex_uint_int_int_bool_bool_bool",
+          "callsite": "0xf1890"
+        },
+        {
+          "caller": "0xf1894",
+          "caller_name": "TString_adddouble_double_int_int_bool_bool",
+          "callsite": "0xf196c"
+        },
+        {
+          "caller": "0xf1894",
+          "caller_name": "TString_adddouble_double_int_int_bool_bool",
+          "callsite": "0xf1b50"
+        },
+        {
+          "caller": "0xf1894",
+          "caller_name": "TString_adddouble_double_int_int_bool_bool",
+          "callsite": "0xf1bb8"
+        },
+        {
+          "caller": "0xf1894",
+          "caller_name": "TString_adddouble_double_int_int_bool_bool",
+          "callsite": "0xf1c44"
+        },
+        {
+          "caller": "0xf1894",
+          "caller_name": "TString_adddouble_double_int_int_bool_bool",
+          "callsite": "0xf1c68"
+        },
+        {
+          "caller": "0xf1d08",
+          "caller_name": "TString_operator_lshift_char",
+          "callsite": "0xf1d24"
+        },
+        {
+          "caller": "0xf22e4",
+          "caller_name": "TString_formatf_bool_char_const_TStringFormatParameters",
+          "callsite": "0xf244c"
+        },
+        {
+          "caller": "0xf22e4",
+          "caller_name": "TString_formatf_bool_char_const_TStringFormatParameters",
+          "callsite": "0xf248c"
+        },
+        {
+          "caller": "0xf22e4",
+          "caller_name": "TString_formatf_bool_char_const_TStringFormatParameters",
+          "callsite": "0xf2528"
+        },
+        {
+          "caller": "0xf22e4",
+          "caller_name": "TString_formatf_bool_char_const_TStringFormatParameters",
+          "callsite": "0xf2564"
+        },
+        {
+          "caller": "0xf22e4",
+          "caller_name": "TString_formatf_bool_char_const_TStringFormatParameters",
+          "callsite": "0xf266c"
+        },
+        {
+          "caller": "0xf22e4",
+          "caller_name": "TString_formatf_bool_char_const_TStringFormatParameters",
+          "callsite": "0xf2690"
+        },
+        {
+          "caller": "0xf22e4",
+          "caller_name": "TString_formatf_bool_char_const_TStringFormatParameters",
+          "callsite": "0xf2734"
+        },
+        {
+          "caller": "0xf2da4",
+          "caller_name": "TString_subString_int_int",
+          "callsite": "0xf2e2c"
+        },
+        {
+          "caller": "0xf5938",
+          "caller_name": "TStringList_SetCommaText2_TString_const",
+          "callsite": "0xf5aac"
+        },
+        {
+          "caller": "0xf5938",
+          "caller_name": "TStringList_SetCommaText2_TString_const",
+          "callsite": "0xf5ad8"
+        },
+        {
+          "caller": "0xf5938",
+          "caller_name": "TStringList_SetCommaText2_TString_const",
+          "callsite": "0xf5b14"
+        },
+        {
+          "caller": "0xf5938",
+          "caller_name": "TStringList_SetCommaText2_TString_const",
+          "callsite": "0xf5b24"
+        },
+        {
+          "caller": "0xf6950",
+          "caller_name": "TStringList_Tokenize_TString_const_TString_const",
+          "callsite": "0xf6b5c"
+        },
+        {
+          "caller": "0xf6950",
+          "caller_name": "TStringList_Tokenize_TString_const_TString_const",
+          "callsite": "0xf6b8c"
+        },
+        {
+          "caller": "0xf6950",
+          "caller_name": "TStringList_Tokenize_TString_const_TString_const",
+          "callsite": "0xf6bdc"
+        },
+        {
+          "caller": "0xf6950",
+          "caller_name": "TStringList_Tokenize_TString_const_TString_const",
+          "callsite": "0xf6bec"
+        },
+        {
+          "caller": "0xf7218",
+          "caller_name": "TEncryption_rsa_encrypt_TString_const_TString_const",
+          "callsite": "0xf730c"
+        },
+        {
+          "caller": "0xf7340",
+          "caller_name": "TEncryption_rsa_decrypt_TString_const_TString_const",
+          "callsite": "0xf7414"
+        },
+        {
+          "caller": "0xf7464",
+          "caller_name": "TEncryption_rsa_sign_TString_const_TString_const",
+          "callsite": "0xf7558"
+        },
+        {
+          "caller": "0xf758c",
+          "caller_name": "TEncryption_rsa_verify_TString_const_TString_const_TString_const",
+          "callsite": "0xf7688"
+        },
+        {
+          "caller": "0xf76bc",
+          "caller_name": "TEncryption_rsa_encodesignature_TString_const",
+          "callsite": "0xf770c"
+        },
+        {
+          "caller": "0x10fc50",
+          "caller_name": "TUnicode_convertLatinToUTF8_TString_const",
+          "callsite": "0x10fce4"
+        },
+        {
+          "caller": "0x10fc50",
+          "caller_name": "TUnicode_convertLatinToUTF8_TString_const",
+          "callsite": "0x10fd40"
+        },
+        {
+          "caller": "0x10fdb8",
+          "caller_name": "TUnicode_convertUTF8ToLatin_char_const",
+          "callsite": "0x10fe3c"
+        },
+        {
+          "caller": "0x10fdb8",
+          "caller_name": "TUnicode_convertUTF8ToLatin_char_const",
+          "callsite": "0x10fe94"
+        },
+        {
+          "caller": "0x10fdb8",
+          "caller_name": "TUnicode_convertUTF8ToLatin_char_const",
+          "callsite": "0x10feac"
+        },
+        {
+          "caller": "0x1166f8",
+          "caller_name": "TBitmap_writeMSBmp_TStream",
+          "callsite": "0x11678c"
+        },
+        {
+          "caller": "0x1166f8",
+          "caller_name": "TBitmap_writeMSBmp_TStream",
+          "callsite": "0x1167bc"
+        },
+        {
+          "caller": "0x1166f8",
+          "caller_name": "TBitmap_writeMSBmp_TStream",
+          "callsite": "0x1167ec"
+        },
+        {
+          "caller": "0x1166f8",
+          "caller_name": "TBitmap_writeMSBmp_TStream",
+          "callsite": "0x11681c"
+        },
+        {
+          "caller": "0x1166f8",
+          "caller_name": "TBitmap_writeMSBmp_TStream",
+          "callsite": "0x11684c"
+        },
+        {
+          "caller": "0x1166f8",
+          "caller_name": "TBitmap_writeMSBmp_TStream",
+          "callsite": "0x11687c"
+        },
+        {
+          "caller": "0x1166f8",
+          "caller_name": "TBitmap_writeMSBmp_TStream",
+          "callsite": "0x1168ac"
+        },
+        {
+          "caller": "0x1166f8",
+          "caller_name": "TBitmap_writeMSBmp_TStream",
+          "callsite": "0x1168dc"
+        },
+        {
+          "caller": "0x1166f8",
+          "caller_name": "TBitmap_writeMSBmp_TStream",
+          "callsite": "0x11690c"
+        },
+        {
+          "caller": "0x1166f8",
+          "caller_name": "TBitmap_writeMSBmp_TStream",
+          "callsite": "0x11693c"
+        },
+        {
+          "caller": "0x1166f8",
+          "caller_name": "TBitmap_writeMSBmp_TStream",
+          "callsite": "0x11696c"
+        },
+        {
+          "caller": "0x1166f8",
+          "caller_name": "TBitmap_writeMSBmp_TStream",
+          "callsite": "0x11699c"
+        },
+        {
+          "caller": "0x1166f8",
+          "caller_name": "TBitmap_writeMSBmp_TStream",
+          "callsite": "0x1169cc"
+        },
+        {
+          "caller": "0x1166f8",
+          "caller_name": "TBitmap_writeMSBmp_TStream",
+          "callsite": "0x1169fc"
+        },
+        {
+          "caller": "0x1166f8",
+          "caller_name": "TBitmap_writeMSBmp_TStream",
+          "callsite": "0x116a2c"
+        },
+        {
+          "caller": "0x1166f8",
+          "caller_name": "TBitmap_writeMSBmp_TStream",
+          "callsite": "0x116a5c"
+        },
+        {
+          "caller": "0x1166f8",
+          "caller_name": "TBitmap_writeMSBmp_TStream",
+          "callsite": "0x116e68"
+        },
+        {
+          "caller": "0x1166f8",
+          "caller_name": "TBitmap_writeMSBmp_TStream",
+          "callsite": "0x116efc"
+        },
+        {
+          "caller": "0x11720c",
+          "caller_name": "TBitmap_writePNG_TStream_int",
+          "callsite": "0x11729c"
+        },
+        {
+          "caller": "0x11720c",
+          "caller_name": "TBitmap_writePNG_TStream_int",
+          "callsite": "0x117350"
+        },
+        {
+          "caller": "0x11720c",
+          "caller_name": "TBitmap_writePNG_TStream_int",
+          "callsite": "0x1174b0"
+        },
+        {
+          "caller": "0x11720c",
+          "caller_name": "TBitmap_writePNG_TStream_int",
+          "callsite": "0x117514"
+        },
+        {
+          "caller": "0x11720c",
+          "caller_name": "TBitmap_writePNG_TStream_int",
+          "callsite": "0x117588"
+        },
+        {
+          "caller": "0x11720c",
+          "caller_name": "TBitmap_writePNG_TStream_int",
+          "callsite": "0x117658"
+        },
+        {
+          "caller": "0x11720c",
+          "caller_name": "TBitmap_writePNG_TStream_int",
+          "callsite": "0x117718"
+        },
+        {
+          "caller": "0x11720c",
+          "caller_name": "TBitmap_writePNG_TStream_int",
+          "callsite": "0x11774c"
+        },
+        {
+          "caller": "0x11a6a8",
+          "caller_name": "TDrawingPanel_setDrawPaletteNamed_TString_const_int",
+          "callsite": "0x11a724"
+        },
+        {
+          "caller": "0x150f44",
+          "caller_name": "sub_150F44",
+          "callsite": "0x150f5c"
+        },
+        {
+          "caller": "0x1712b8",
+          "caller_name": "TPlayer_getNetProperty_int",
+          "callsite": "0x171390"
+        },
+        {
+          "caller": "0x1712b8",
+          "caller_name": "TPlayer_getNetProperty_int",
+          "callsite": "0x1714b0"
+        },
+        {
+          "caller": "0x1712b8",
+          "caller_name": "TPlayer_getNetProperty_int",
+          "callsite": "0x171598"
+        },
+        {
+          "caller": "0x1712b8",
+          "caller_name": "TPlayer_getNetProperty_int",
+          "callsite": "0x1716c0"
+        },
+        {
+          "caller": "0x1712b8",
+          "caller_name": "TPlayer_getNetProperty_int",
+          "callsite": "0x17184c"
+        },
+        {
+          "caller": "0x183628",
+          "caller_name": "parseMessageCodes_TString_const_bool_TPlayer",
+          "callsite": "0x183760"
+        },
+        {
+          "caller": "0x183628",
+          "caller_name": "parseMessageCodes_TString_const_bool_TPlayer",
+          "callsite": "0x1837c0"
+        },
+        {
+          "caller": "0x1a1f50",
+          "caller_name": "TServerLevel_SaveEncrypted_uint",
+          "callsite": "0x1a1fdc"
+        },
+        {
+          "caller": "0x1a1f50",
+          "caller_name": "TServerLevel_SaveEncrypted_uint",
+          "callsite": "0x1a2170"
+        },
+        {
+          "caller": "0x1a1f50",
+          "caller_name": "TServerLevel_SaveEncrypted_uint",
+          "callsite": "0x1a23d0"
+        },
+        {
+          "caller": "0x1a1f50",
+          "caller_name": "TServerLevel_SaveEncrypted_uint",
+          "callsite": "0x1a24d8"
+        },
+        {
+          "caller": "0x1a1f50",
+          "caller_name": "TServerLevel_SaveEncrypted_uint",
+          "callsite": "0x1a2838"
+        },
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa260"
+        },
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa31c"
+        },
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa3a8"
+        },
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa478"
+        },
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa4b8"
+        },
+        {
+          "caller": "0x1bc84c",
+          "caller_name": "sub_1BC84C",
+          "callsite": "0x1bc86c"
+        },
+        {
+          "caller": "0x1bc884",
+          "caller_name": "sub_1BC884",
+          "callsite": "0x1bc8ac"
+        },
+        {
+          "caller": "0x1bd64c",
+          "caller_name": "GuiMLTextCtrl_getLine_int",
+          "callsite": "0x1bd6b4"
+        },
+        {
+          "caller": "0x1bd72c",
+          "caller_name": "GuiMLTextCtrl_getLines_void",
+          "callsite": "0x1bd77c"
+        },
+        {
+          "caller": "0x1bd810",
+          "caller_name": "GuiMLTextCtrl_copyToClipboard_uint_uint",
+          "callsite": "0x1bd8c4"
+        },
+        {
+          "caller": "0x1bf6f4",
+          "caller_name": "GuiMLTextCtrl_onMouseUp_GuiEvent_const",
+          "callsite": "0x1bf84c"
+        },
+        {
+          "caller": "0x1c7e00",
+          "caller_name": "GuiTextEditCtrl_copySelectedText_bool",
+          "callsite": "0x1c7e94"
+        },
+        {
+          "caller": "0x1ced84",
+          "caller_name": "THTMLDefinitions_getHTMLAmpersand_char_const_int_int",
+          "callsite": "0x1cee30"
+        },
+        {
+          "caller": "0x1cfe8c",
+          "caller_name": "THTMLPage_parseTag_char",
+          "callsite": "0x1cffc0"
+        },
+        {
+          "caller": "0x1d015c",
+          "caller_name": "THTMLPage_stripControlChars_char_const_int_bool_bool",
+          "callsite": "0x1d027c"
+        },
+        {
+          "caller": "0x1f494c",
+          "caller_name": "TClient_sendSaveFile_TString_const_int_TString_const",
+          "callsite": "0x1f49c8"
+        },
+        {
+          "caller": "0x1f5bf8",
+          "caller_name": "TClient_sendBoardModify2_TString_const_int_int_int_int_int_int",
+          "callsite": "0x1f5d28"
+        },
+        {
+          "caller": "0x1f5ec8",
+          "caller_name": "TClient_sendBomb_double_double_int_int_bool_TString_const",
+          "callsite": "0x1f5fcc"
+        },
+        {
+          "caller": "0x1f6b10",
+          "caller_name": "TClient_sendProjectile_double_double_double_double_double_double_double_TString_const_TString_const_TString_const",
+          "callsite": "0x1f6e7c"
+        },
+        {
+          "caller": "0x1f6b10",
+          "caller_name": "TClient_sendProjectile_double_double_double_double_double_double_double_TString_const_TString_const_TString_const",
+          "callsite": "0x1f6ed4"
+        },
+        {
+          "caller": "0x1f8a88",
+          "caller_name": "TClient_sendRequestFileRename_TString_const_TString_const",
+          "callsite": "0x1f8b18"
+        },
+        {
+          "caller": "0x1f8a88",
+          "caller_name": "TClient_sendRequestFileRename_TString_const_TString_const",
+          "callsite": "0x1f8b68"
+        },
+        {
+          "caller": "0x1f8cd0",
+          "caller_name": "TClient_sendRequestFilesMove_TString_const_TString_const",
+          "callsite": "0x1f8d4c"
+        },
+        {
+          "caller": "0x1f8e60",
+          "caller_name": "TClient_sendRequestUpdatePackage_TUpdatePackage_bool",
+          "callsite": "0x1f8ef8"
+        },
+        {
+          "caller": "0x1fc598",
+          "caller_name": "TGraalConnection_parseProtocol_OldGraal_void",
+          "callsite": "0x1fc8bc"
+        },
+        {
+          "caller": "0x1fce58",
+          "caller_name": "TGraalConnection_addDataBlocks_TString_const_uchar_int",
+          "callsite": "0x1fceec"
+        },
+        {
+          "caller": "0x1fd780",
+          "caller_name": "TGraalConnection_sendData_int_TString_const",
+          "callsite": "0x1fdb20"
+        },
+        {
+          "caller": "0x1fd780",
+          "caller_name": "TGraalConnection_sendData_int_TString_const",
+          "callsite": "0x1fdb38"
+        },
+        {
+          "caller": "0x1fd780",
+          "caller_name": "TGraalConnection_sendData_int_TString_const",
+          "callsite": "0x1fdca0"
+        },
+        {
+          "caller": "0x2074d4",
+          "caller_name": "TSocketConnection_read_void",
+          "callsite": "0x207554"
+        },
+        {
+          "caller": "0x2074d4",
+          "caller_name": "TSocketConnection_read_void",
+          "callsite": "0x2075c0"
+        },
+        {
+          "caller": "0x2074d4",
+          "caller_name": "TSocketConnection_read_void",
+          "callsite": "0x207750"
+        },
+        {
+          "caller": "0x21624c",
+          "caller_name": "TScript_setStream_TString_const",
+          "callsite": "0x2164d0"
+        },
+        {
+          "caller": "0x21624c",
+          "caller_name": "TScript_setStream_TString_const",
+          "callsite": "0x2165e0"
+        },
+        {
+          "caller": "0x21624c",
+          "caller_name": "TScript_setStream_TString_const",
+          "callsite": "0x216a78"
+        },
+        {
+          "caller": "0x22d9fc",
+          "caller_name": "sub_22D9FC",
+          "callsite": "0x22da18"
+        },
+        {
+          "caller": "0x22dab4",
+          "caller_name": "sub_22DAB4",
+          "callsite": "0x22dad0"
+        },
+        {
+          "caller": "0x22dbbc",
+          "caller_name": "sub_22DBBC",
+          "callsite": "0x22dbdc"
+        },
+        {
+          "caller": "0x22ea14",
+          "caller_name": "TGraalVar_writeJSON_int",
+          "callsite": "0x22ec10"
+        },
+        {
+          "caller": "0x22efec",
+          "caller_name": "TLevelLoader_saveBoard_TStream_short",
+          "callsite": "0x22f0c4"
+        },
+        {
+          "caller": "0x22efec",
+          "caller_name": "TLevelLoader_saveBoard_TStream_short",
+          "callsite": "0x22f118"
+        },
+        {
+          "caller": "0x2372d8",
+          "caller_name": "TShowImg_getNetProperty_TServerPlayer_int",
+          "callsite": "0x237658"
+        },
+        {
+          "caller": "0x24025c",
+          "caller_name": "JNI_getNewFacebookPermissions",
+          "callsite": "0x240378"
+        },
+        {
+          "caller": "0x240380",
+          "caller_name": "JNI_getNewFacebookToken",
+          "callsite": "0x24049c"
+        },
+        {
+          "caller": "0x2404a4",
+          "caller_name": "JNI_getAndroidDeviceModel",
+          "callsite": "0x2405c0"
+        },
+        {
+          "caller": "0x2405c8",
+          "caller_name": "JNI_getAndroidOSVersion",
+          "callsite": "0x2406e4"
+        },
+        {
+          "caller": "0x2434c4",
+          "caller_name": "androidGetRandomUUID_void",
+          "callsite": "0x2435e0"
+        }
+      ],
+      "code": "TString *__fastcall TString_addbuffer_char_const_int(TString *this, const char *a2, int a3)\n{\n  TString *v3; // x19\n  TString *v6; // x0\n  int v7; // w21\n  __int64 v8; // x24\n  _DWORD *v9; // x0\n  __int64 v10; // x1\n\n  v3 = this;\n  if ( a2 && a3 > 0 )\n  {\n    plt_TString_makeUnique_void(this);\n    v6 = *(TString **)v3;\n    if ( *(_QWORD *)v3 )\n    {\n      v7 = *(_DWORD *)v6;\n      v8 = *(int *)v6;\n      v9 = realloc(v6, *(_DWORD *)v6 + a3 + 9);\n      *(_QWORD *)v3 = v9;\n      v10 = v7 + 8LL;\n    }\n    else\n    {\n      v8 = 0;\n      v7 = 0;\n      v9 = malloc(a3 + 9);\n      *(_QWORD *)v3 = v9;\n      v10 = 8;\n      v9[1] = 1;\n    }\n    memcpy((char *)v9 + v10, a2, a3);\n    *(_BYTE *)(*(_QWORD *)v3 + v8 + a3 + 8) = 0;\n    this = *(TString **)v3;\n    **(_DWORD **)v3 = a3 + v7;\n  }\n  return this;\n}\n",
+      "code_bytes": 804,
+      "code_sha256": "31873d51665d8a88ce7498725a2238958aea44fe378cf44a4d4e3db913bb74c1",
+      "function_end": "0xf1288",
+      "function_start": "0xf11bc",
+      "name": "TString_addbuffer_char_const_int",
+      "role": "dynamic string append",
+      "string_literals": []
+    },
+    {
+      "address": "0xf0ce0",
+      "callers": [
+        {
+          "caller": "0xf0db0",
+          "caller_name": "TStream_readLines_void",
+          "callsite": "0xf0df8"
+        },
+        {
+          "caller": "0xf6250",
+          "caller_name": "TStringList_LoadFromStream_TStream",
+          "callsite": "0xf6294"
+        },
+        {
+          "caller": "0x1a2924",
+          "caller_name": "TServerLevel_readLinks_TStream",
+          "callsite": "0x1a2954"
+        },
+        {
+          "caller": "0x1a2a9c",
+          "caller_name": "TServerLevel_readNPCs_TStream_bool",
+          "callsite": "0x1a2af0"
+        },
+        {
+          "caller": "0x1a2cbc",
+          "caller_name": "TServerLevel_readChests_TStream_bool",
+          "callsite": "0x1a2d04"
+        },
+        {
+          "caller": "0x1a2f08",
+          "caller_name": "TServerLevel_readSigns_TStream",
+          "callsite": "0x1a2fac"
+        },
+        {
+          "caller": "0x201d68",
+          "caller_name": "THTTPRequest_preParseData_void",
+          "callsite": "0x201e08"
+        }
+      ],
+      "code": "TString *__usercall TStream_readLine_void@<X0>(TStream *this@<X0>, TString *a2@<X8>)\n{\n  int v3; // w19\n  unsigned int v4; // w4\n  int *v5; // x5\n  int v6; // w0\n  unsigned __int8 *v7; // x2\n  int v8; // w3\n  int v9; // w19\n  int v10; // w0\n  TString *v12; // [xsp+28h] [xbp-8h]\n\n  v3 = *((_DWORD *)this + 1);\n  *(_QWORD *)a2 = 0;\n  if ( v3 > 0 )\n  {\n    v4 = *(_DWORD *)this;\n    if ( v3 > *(_DWORD *)this )\n    {\n      v5 = *((int **)this + 1);\n      if ( v5 )\n      {\n        if ( *v5 > 0 )\n        {\n          v6 = *(_DWORD *)this;\n          v7 = (unsigned __int8 *)v5 + v4 + 8;\n          while ( 1 )\n          {\n            v8 = *v7;\n            if ( v8 == 10 )\n              break;\n            ++v6;\n            ++v7;\n            if ( v6 == v3 )\n              goto LABEL_8;\n          }\n          v3 = v6;\n          if ( v6 > (int)v4 )\n          {\n            v8 = *(v7 - 1);\nLABEL_8:\n            LODWORD(v7) = (_DWORD)v7 - (v8 == 13);\n          }\n          v12 = a2;\n          v9 = v3 + 1;\n          plt_TString_addbuffer_char_const_int(a2, (const char *)v5 + v4 + 8, (_DWORD)v7 - ((_DWORD)v5 + v4 + 8));\n          *(_DWORD *)this = v9;\n          v10 = *((_DWORD *)this + 1);\n          a2 = v12;\n          if ( v9 > v10 )\n            *(_DWORD *)this = v10;\n        }\n      }\n    }\n  }\n  return a2;\n}\n",
+      "code_bytes": 1306,
+      "code_sha256": "ce7e31faa5fd78d4cf61275bc08586cd614abbd40084e0412b2657351df6669e",
+      "function_end": "0xf0db0",
+      "function_start": "0xf0ce0",
+      "name": "TStream_readLine_void",
+      "role": "line reader",
+      "string_literals": []
+    },
+    {
+      "address": "0xf1d74",
+      "callers": [
+        {
+          "caller": "0xe3c30",
+          "caller_name": "TTranslationFile_addTranslation_TString_const_TString_const_TString_const",
+          "callsite": "0xe3ca8"
+        },
+        {
+          "caller": "0xe3c30",
+          "caller_name": "TTranslationFile_addTranslation_TString_const_TString_const_TString_const",
+          "callsite": "0xe3cfc"
+        },
+        {
+          "caller": "0xe3c30",
+          "caller_name": "TTranslationFile_addTranslation_TString_const_TString_const_TString_const",
+          "callsite": "0xe3d8c"
+        },
+        {
+          "caller": "0xe3f88",
+          "caller_name": "TTranslationFile_read_void",
+          "callsite": "0xe407c"
+        },
+        {
+          "caller": "0xe3f88",
+          "caller_name": "TTranslationFile_read_void",
+          "callsite": "0xe4278"
+        },
+        {
+          "caller": "0xe3f88",
+          "caller_name": "TTranslationFile_read_void",
+          "callsite": "0xe442c"
+        },
+        {
+          "caller": "0xe3f88",
+          "caller_name": "TTranslationFile_read_void",
+          "callsite": "0xe464c"
+        },
+        {
+          "caller": "0xe3f88",
+          "caller_name": "TTranslationFile_read_void",
+          "callsite": "0xe46c4"
+        },
+        {
+          "caller": "0xe3f88",
+          "caller_name": "TTranslationFile_read_void",
+          "callsite": "0xe47a8"
+        },
+        {
+          "caller": "0xe3f88",
+          "caller_name": "TTranslationFile_read_void",
+          "callsite": "0xe485c"
+        },
+        {
+          "caller": "0xe3f88",
+          "caller_name": "TTranslationFile_read_void",
+          "callsite": "0xe49cc"
+        },
+        {
+          "caller": "0xe5f94",
+          "caller_name": "TEncryption_getdecode_TString_const_TString_const",
+          "callsite": "0xe5fec"
+        },
+        {
+          "caller": "0xe5f94",
+          "caller_name": "TEncryption_getdecode_TString_const_TString_const",
+          "callsite": "0xe6000"
+        },
+        {
+          "caller": "0xe7a50",
+          "caller_name": "TFiles_escapedFilename_TString_const",
+          "callsite": "0xe7ac8"
+        },
+        {
+          "caller": "0xe7ba8",
+          "caller_name": "TFiles_removeEscapesOfFilename_TString_const",
+          "callsite": "0xe7c08"
+        },
+        {
+          "caller": "0xf2ba0",
+          "caller_name": "TString_indexOf_TString_const",
+          "callsite": "0xf2bec"
+        },
+        {
+          "caller": "0xf2ba0",
+          "caller_name": "TString_indexOf_TString_const",
+          "callsite": "0xf2c44"
+        },
+        {
+          "caller": "0xf2c98",
+          "caller_name": "TString_indexOf_TString_const_int",
+          "callsite": "0xf2cf8"
+        },
+        {
+          "caller": "0xf2c98",
+          "caller_name": "TString_indexOf_TString_const_int",
+          "callsite": "0xf2d50"
+        },
+        {
+          "caller": "0xf36dc",
+          "caller_name": "LastDelimiter_TString_const_TString_const",
+          "callsite": "0xf3728"
+        },
+        {
+          "caller": "0xf36dc",
+          "caller_name": "LastDelimiter_TString_const_TString_const",
+          "callsite": "0xf373c"
+        },
+        {
+          "caller": "0xf3fd8",
+          "caller_name": "iscorrect_TString_const",
+          "callsite": "0xf4008"
+        },
+        {
+          "caller": "0xf4060",
+          "caller_name": "escaped39_TString_const",
+          "callsite": "0xf40c8"
+        },
+        {
+          "caller": "0xf4154",
+          "caller_name": "escaped34_TString_const",
+          "callsite": "0xf41c8"
+        },
+        {
+          "caller": "0xf446c",
+          "caller_name": "removeEmptyLinesAtEnd_TString_const",
+          "callsite": "0xf44c8"
+        },
+        {
+          "caller": "0xfbf0c",
+          "caller_name": "TFileScripting_AllowedFoldername_TString_const_bool",
+          "callsite": "0xfbf68"
+        },
+        {
+          "caller": "0xfbf0c",
+          "caller_name": "TFileScripting_AllowedFoldername_TString_const_bool",
+          "callsite": "0xfbf98"
+        },
+        {
+          "caller": "0x15b6a8",
+          "caller_name": "TAdventure_invokeKeyPressed_int_int_TString_const_int",
+          "callsite": "0x15b6fc"
+        },
+        {
+          "caller": "0x15b6a8",
+          "caller_name": "TAdventure_invokeKeyPressed_int_int_TString_const_int",
+          "callsite": "0x15b794"
+        },
+        {
+          "caller": "0x167858",
+          "caller_name": "TGraphics_WrapText_TStringList_TString_const_TString_const_TString_const_TString_const_int_bool_int",
+          "callsite": "0x167958"
+        },
+        {
+          "caller": "0x1734b8",
+          "caller_name": "TPlayer_setProperties_TString_const",
+          "callsite": "0x1737b4"
+        },
+        {
+          "caller": "0x1734b8",
+          "caller_name": "TPlayer_setProperties_TString_const",
+          "callsite": "0x1737c8"
+        },
+        {
+          "caller": "0x1734b8",
+          "caller_name": "TPlayer_setProperties_TString_const",
+          "callsite": "0x173a80"
+        },
+        {
+          "caller": "0x1734b8",
+          "caller_name": "TPlayer_setProperties_TString_const",
+          "callsite": "0x173a94"
+        },
+        {
+          "caller": "0x1734b8",
+          "caller_name": "TPlayer_setProperties_TString_const",
+          "callsite": "0x174024"
+        },
+        {
+          "caller": "0x1734b8",
+          "caller_name": "TPlayer_setProperties_TString_const",
+          "callsite": "0x174034"
+        },
+        {
+          "caller": "0x1734b8",
+          "caller_name": "TPlayer_setProperties_TString_const",
+          "callsite": "0x174050"
+        },
+        {
+          "caller": "0x1734b8",
+          "caller_name": "TPlayer_setProperties_TString_const",
+          "callsite": "0x174068"
+        },
+        {
+          "caller": "0x1734b8",
+          "caller_name": "TPlayer_setProperties_TString_const",
+          "callsite": "0x174080"
+        },
+        {
+          "caller": "0x1734b8",
+          "caller_name": "TPlayer_setProperties_TString_const",
+          "callsite": "0x1740b8"
+        },
+        {
+          "caller": "0x1734b8",
+          "caller_name": "TPlayer_setProperties_TString_const",
+          "callsite": "0x1740cc"
+        },
+        {
+          "caller": "0x1734b8",
+          "caller_name": "TPlayer_setProperties_TString_const",
+          "callsite": "0x1740e8"
+        },
+        {
+          "caller": "0x1772c0",
+          "caller_name": "TPlayer_doServerModifies3_TServerLevel_TString_const_bool",
+          "callsite": "0x17732c"
+        },
+        {
+          "caller": "0x1772c0",
+          "caller_name": "TPlayer_doServerModifies3_TServerLevel_TString_const_bool",
+          "callsite": "0x17733c"
+        },
+        {
+          "caller": "0x1772c0",
+          "caller_name": "TPlayer_doServerModifies3_TServerLevel_TString_const_bool",
+          "callsite": "0x177354"
+        },
+        {
+          "caller": "0x1772c0",
+          "caller_name": "TPlayer_doServerModifies3_TServerLevel_TString_const_bool",
+          "callsite": "0x17736c"
+        },
+        {
+          "caller": "0x1772c0",
+          "caller_name": "TPlayer_doServerModifies3_TServerLevel_TString_const_bool",
+          "callsite": "0x17737c"
+        },
+        {
+          "caller": "0x17f210",
+          "caller_name": "TPlayer_drawStringLine_TString_const_int_int",
+          "callsite": "0x17f28c"
+        },
+        {
+          "caller": "0x17f210",
+          "caller_name": "TPlayer_drawStringLine_TString_const_int_int",
+          "callsite": "0x17f2f8"
+        },
+        {
+          "caller": "0x17f210",
+          "caller_name": "TPlayer_drawStringLine_TString_const_int_int",
+          "callsite": "0x17f650"
+        },
+        {
+          "caller": "0x183298",
+          "caller_name": "indexOf_int_signed_char_TString_const",
+          "callsite": "0x1832d0"
+        },
+        {
+          "caller": "0x183320",
+          "caller_name": "findBracketsEnd_TString_const",
+          "callsite": "0x183350"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x187b0c"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x187b20"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x187ca4"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x187cb8"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x187d4c"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x187d60"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18e414"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18e428"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18e4e0"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18e4f4"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18ef40"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18ef54"
+        },
+        {
+          "caller": "0x1a1d00",
+          "caller_name": "getSignText_TString_const",
+          "callsite": "0x1a1d58"
+        },
+        {
+          "caller": "0x1a1f50",
+          "caller_name": "TServerLevel_SaveEncrypted_uint",
+          "callsite": "0x1a2520"
+        },
+        {
+          "caller": "0x1a1f50",
+          "caller_name": "TServerLevel_SaveEncrypted_uint",
+          "callsite": "0x1a26fc"
+        },
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa3cc"
+        },
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa3dc"
+        },
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa3f8"
+        },
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa410"
+        },
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa428"
+        },
+        {
+          "caller": "0x1b9c50",
+          "caller_name": "GuiControl_renderJustifiedText_GuiControlProfile_TPoint_const_TPoint_const_TString_const_ColorI_const_bool",
+          "callsite": "0x1b9f04"
+        },
+        {
+          "caller": "0x1bdcdc",
+          "caller_name": "GuiMLTextCtrl_findTextAt_TString_const_int_int",
+          "callsite": "0x1bdd5c"
+        },
+        {
+          "caller": "0x1bdcdc",
+          "caller_name": "GuiMLTextCtrl_findTextAt_TString_const_int_int",
+          "callsite": "0x1bde40"
+        },
+        {
+          "caller": "0x1bdcdc",
+          "caller_name": "GuiMLTextCtrl_findTextAt_TString_const_int_int",
+          "callsite": "0x1bde80"
+        },
+        {
+          "caller": "0x1bdcdc",
+          "caller_name": "GuiMLTextCtrl_findTextAt_TString_const_int_int",
+          "callsite": "0x1bdec4"
+        },
+        {
+          "caller": "0x1ce610",
+          "caller_name": "html_tag_parse_TString_const",
+          "callsite": "0x1ce660"
+        },
+        {
+          "caller": "0x1ce610",
+          "caller_name": "html_tag_parse_TString_const",
+          "callsite": "0x1ce764"
+        },
+        {
+          "caller": "0x1ce610",
+          "caller_name": "html_tag_parse_TString_const",
+          "callsite": "0x1ce888"
+        },
+        {
+          "caller": "0x1ce610",
+          "caller_name": "html_tag_parse_TString_const",
+          "callsite": "0x1cea30"
+        },
+        {
+          "caller": "0x1ce610",
+          "caller_name": "html_tag_parse_TString_const",
+          "callsite": "0x1cea7c"
+        },
+        {
+          "caller": "0x1ce610",
+          "caller_name": "html_tag_parse_TString_const",
+          "callsite": "0x1ceb08"
+        },
+        {
+          "caller": "0x1ce610",
+          "caller_name": "html_tag_parse_TString_const",
+          "callsite": "0x1ceb48"
+        },
+        {
+          "caller": "0x1ec3e4",
+          "caller_name": "TClient_setPlayerPosition",
+          "callsite": "0x1ec40c"
+        },
+        {
+          "caller": "0x1ec3e4",
+          "caller_name": "TClient_setPlayerPosition",
+          "callsite": "0x1ec420"
+        },
+        {
+          "caller": "0x1ec664",
+          "caller_name": "TClient_addWeapon",
+          "callsite": "0x1ec690"
+        },
+        {
+          "caller": "0x1eccf8",
+          "caller_name": "TClient_handleMapWarpPacket",
+          "callsite": "0x1ecd3c"
+        },
+        {
+          "caller": "0x1eccf8",
+          "caller_name": "TClient_handleMapWarpPacket",
+          "callsite": "0x1ecd5c"
+        },
+        {
+          "caller": "0x1eccf8",
+          "caller_name": "TClient_handleMapWarpPacket",
+          "callsite": "0x1ecd7c"
+        },
+        {
+          "caller": "0x1eccf8",
+          "caller_name": "TClient_handleMapWarpPacket",
+          "callsite": "0x1ecd98"
+        },
+        {
+          "caller": "0x1eccf8",
+          "caller_name": "TClient_handleMapWarpPacket",
+          "callsite": "0x1ecdac"
+        },
+        {
+          "caller": "0x1ed934",
+          "caller_name": "TClient_setTimeVar",
+          "callsite": "0x1ed95c"
+        },
+        {
+          "caller": "0x1ed934",
+          "caller_name": "TClient_setTimeVar",
+          "callsite": "0x1ed970"
+        },
+        {
+          "caller": "0x1ed934",
+          "caller_name": "TClient_setTimeVar",
+          "callsite": "0x1ed98c"
+        },
+        {
+          "caller": "0x1ed934",
+          "caller_name": "TClient_setTimeVar",
+          "callsite": "0x1ed9a4"
+        },
+        {
+          "caller": "0x1ed9d0",
+          "caller_name": "TClient_setNpcScript",
+          "callsite": "0x1eda0c"
+        },
+        {
+          "caller": "0x1ed9d0",
+          "caller_name": "TClient_setNpcScript",
+          "callsite": "0x1eda20"
+        },
+        {
+          "caller": "0x1ed9d0",
+          "caller_name": "TClient_setNpcScript",
+          "callsite": "0x1eda3c"
+        },
+        {
+          "caller": "0x1edae8",
+          "caller_name": "TClient_setGhostMode",
+          "callsite": "0x1edb08"
+        },
+        {
+          "caller": "0x1edb2c",
+          "caller_name": "TClient_setPlayerStateFlagFromChar",
+          "callsite": "0x1edb4c"
+        },
+        {
+          "caller": "0x1edcd4",
+          "caller_name": "TClient_parseSetRawLen_TString_const",
+          "callsite": "0x1edd2c"
+        },
+        {
+          "caller": "0x1edcd4",
+          "caller_name": "TClient_parseSetRawLen_TString_const",
+          "callsite": "0x1edd40"
+        },
+        {
+          "caller": "0x1edcd4",
+          "caller_name": "TClient_parseSetRawLen_TString_const",
+          "callsite": "0x1edd5c"
+        },
+        {
+          "caller": "0x1edd78",
+          "caller_name": "TClient_addNpcWeapon",
+          "callsite": "0x1edd98"
+        },
+        {
+          "caller": "0x1ede48",
+          "caller_name": "TClient_setPlayerWeaponImages",
+          "callsite": "0x1ede78"
+        },
+        {
+          "caller": "0x1ede48",
+          "caller_name": "TClient_setPlayerWeaponImages",
+          "callsite": "0x1ede88"
+        },
+        {
+          "caller": "0x1edf04",
+          "caller_name": "TClient_handleServerLoginPacket",
+          "callsite": "0x1edf28"
+        },
+        {
+          "caller": "0x1edf8c",
+          "caller_name": "TClient_modifyBoard",
+          "callsite": "0x1edfe4"
+        },
+        {
+          "caller": "0x1edf8c",
+          "caller_name": "TClient_modifyBoard",
+          "callsite": "0x1ee044"
+        },
+        {
+          "caller": "0x1edf8c",
+          "caller_name": "TClient_modifyBoard",
+          "callsite": "0x1ee060"
+        },
+        {
+          "caller": "0x1edf8c",
+          "caller_name": "TClient_modifyBoard",
+          "callsite": "0x1ee074"
+        },
+        {
+          "caller": "0x1edf8c",
+          "caller_name": "TClient_modifyBoard",
+          "callsite": "0x1ee104"
+        },
+        {
+          "caller": "0x1edf8c",
+          "caller_name": "TClient_modifyBoard",
+          "callsite": "0x1ee114"
+        },
+        {
+          "caller": "0x1edf8c",
+          "caller_name": "TClient_modifyBoard",
+          "callsite": "0x1ee21c"
+        },
+        {
+          "caller": "0x1ee234",
+          "caller_name": "TClient_modifyBoardLevel",
+          "callsite": "0x1ee284"
+        },
+        {
+          "caller": "0x1ee234",
+          "caller_name": "TClient_modifyBoardLevel",
+          "callsite": "0x1ee298"
+        },
+        {
+          "caller": "0x1ee234",
+          "caller_name": "TClient_modifyBoardLevel",
+          "callsite": "0x1ee34c"
+        },
+        {
+          "caller": "0x1ee234",
+          "caller_name": "TClient_modifyBoardLevel",
+          "callsite": "0x1ee390"
+        },
+        {
+          "caller": "0x1ee234",
+          "caller_name": "TClient_modifyBoardLevel",
+          "callsite": "0x1ee3ac"
+        },
+        {
+          "caller": "0x1ee234",
+          "caller_name": "TClient_modifyBoardLevel",
+          "callsite": "0x1ee3c8"
+        },
+        {
+          "caller": "0x1ee234",
+          "caller_name": "TClient_modifyBoardLevel",
+          "callsite": "0x1ee3d8"
+        },
+        {
+          "caller": "0x1ee234",
+          "caller_name": "TClient_modifyBoardLevel",
+          "callsite": "0x1ee46c"
+        },
+        {
+          "caller": "0x1ee234",
+          "caller_name": "TClient_modifyBoardLevel",
+          "callsite": "0x1ee47c"
+        },
+        {
+          "caller": "0x1ee560",
+          "caller_name": "TClient_setNpcWeaponImages",
+          "callsite": "0x1ee590"
+        },
+        {
+          "caller": "0x1ee560",
+          "caller_name": "TClient_setNpcWeaponImages",
+          "callsite": "0x1ee5a4"
+        },
+        {
+          "caller": "0x1ee560",
+          "caller_name": "TClient_setNpcWeaponImages",
+          "callsite": "0x1ee5c0"
+        },
+        {
+          "caller": "0x1ee620",
+          "caller_name": "TClient_parseSetPing_TString_const",
+          "callsite": "0x1ee64c"
+        },
+        {
+          "caller": "0x1ee620",
+          "caller_name": "TClient_parseSetPing_TString_const",
+          "callsite": "0x1ee68c"
+        },
+        {
+          "caller": "0x1ee620",
+          "caller_name": "TClient_parseSetPing_TString_const",
+          "callsite": "0x1ee6a0"
+        },
+        {
+          "caller": "0x1ee708",
+          "caller_name": "TClient_removeNpcById",
+          "callsite": "0x1ee740"
+        },
+        {
+          "caller": "0x1ee708",
+          "caller_name": "TClient_removeNpcById",
+          "callsite": "0x1ee754"
+        },
+        {
+          "caller": "0x1ee708",
+          "caller_name": "TClient_removeNpcById",
+          "callsite": "0x1ee770"
+        },
+        {
+          "caller": "0x1ee7b0",
+          "caller_name": "TClient_handleThrowObject",
+          "callsite": "0x1ee7d8"
+        },
+        {
+          "caller": "0x1ee7b0",
+          "caller_name": "TClient_handleThrowObject",
+          "callsite": "0x1ee7ec"
+        },
+        {
+          "caller": "0x1ee860",
+          "caller_name": "TClient_addChest",
+          "callsite": "0x1ee8a8"
+        },
+        {
+          "caller": "0x1ee860",
+          "caller_name": "TClient_addChest",
+          "callsite": "0x1ee8b8"
+        },
+        {
+          "caller": "0x1ee860",
+          "caller_name": "TClient_addChest",
+          "callsite": "0x1ee8c8"
+        },
+        {
+          "caller": "0x1ee860",
+          "caller_name": "TClient_addChest",
+          "callsite": "0x1ee9b4"
+        },
+        {
+          "caller": "0x1ee860",
+          "caller_name": "TClient_addChest",
+          "callsite": "0x1ee9c8"
+        },
+        {
+          "caller": "0x1ee9ec",
+          "caller_name": "TClient_handleClientsideTriggerPacket",
+          "callsite": "0x1eea28"
+        },
+        {
+          "caller": "0x1ee9ec",
+          "caller_name": "TClient_handleClientsideTriggerPacket",
+          "callsite": "0x1eea3c"
+        },
+        {
+          "caller": "0x1eebcc",
+          "caller_name": "TClient_handlePlayerHurt",
+          "callsite": "0x1eebfc"
+        },
+        {
+          "caller": "0x1eebcc",
+          "caller_name": "TClient_handlePlayerHurt",
+          "callsite": "0x1eec0c"
+        },
+        {
+          "caller": "0x1eebcc",
+          "caller_name": "TClient_handlePlayerHurt",
+          "callsite": "0x1eec1c"
+        },
+        {
+          "caller": "0x1eebcc",
+          "caller_name": "TClient_handlePlayerHurt",
+          "callsite": "0x1eec40"
+        },
+        {
+          "caller": "0x1eebcc",
+          "caller_name": "TClient_handlePlayerHurt",
+          "callsite": "0x1eec60"
+        },
+        {
+          "caller": "0x1eebcc",
+          "caller_name": "TClient_handlePlayerHurt",
+          "callsite": "0x1eec9c"
+        },
+        {
+          "caller": "0x1eebcc",
+          "caller_name": "TClient_handlePlayerHurt",
+          "callsite": "0x1eecb0"
+        },
+        {
+          "caller": "0x1eebcc",
+          "caller_name": "TClient_handlePlayerHurt",
+          "callsite": "0x1eeccc"
+        },
+        {
+          "caller": "0x1eed50",
+          "caller_name": "TClient_handleExplosion",
+          "callsite": "0x1eed8c"
+        },
+        {
+          "caller": "0x1eed50",
+          "caller_name": "TClient_handleExplosion",
+          "callsite": "0x1eed9c"
+        },
+        {
+          "caller": "0x1eed50",
+          "caller_name": "TClient_handleExplosion",
+          "callsite": "0x1eedac"
+        },
+        {
+          "caller": "0x1eed50",
+          "caller_name": "TClient_handleExplosion",
+          "callsite": "0x1eedbc"
+        },
+        {
+          "caller": "0x1eed50",
+          "caller_name": "TClient_handleExplosion",
+          "callsite": "0x1eedcc"
+        },
+        {
+          "caller": "0x1eed50",
+          "caller_name": "TClient_handleExplosion",
+          "callsite": "0x1eeddc"
+        },
+        {
+          "caller": "0x1eef34",
+          "caller_name": "TClient_handleNpcMovement",
+          "callsite": "0x1eef78"
+        },
+        {
+          "caller": "0x1eef34",
+          "caller_name": "TClient_handleNpcMovement",
+          "callsite": "0x1eef8c"
+        },
+        {
+          "caller": "0x1eef34",
+          "caller_name": "TClient_handleNpcMovement",
+          "callsite": "0x1eefa8"
+        },
+        {
+          "caller": "0x1eef34",
+          "caller_name": "TClient_handleNpcMovement",
+          "callsite": "0x1ef030"
+        },
+        {
+          "caller": "0x1eef34",
+          "caller_name": "TClient_handleNpcMovement",
+          "callsite": "0x1ef044"
+        },
+        {
+          "caller": "0x1eef34",
+          "caller_name": "TClient_handleNpcMovement",
+          "callsite": "0x1ef0a8"
+        },
+        {
+          "caller": "0x1eef34",
+          "caller_name": "TClient_handleNpcMovement",
+          "callsite": "0x1ef0bc"
+        },
+        {
+          "caller": "0x1eef34",
+          "caller_name": "TClient_handleNpcMovement",
+          "callsite": "0x1ef120"
+        },
+        {
+          "caller": "0x1eef34",
+          "caller_name": "TClient_handleNpcMovement",
+          "callsite": "0x1ef134"
+        },
+        {
+          "caller": "0x1eef34",
+          "caller_name": "TClient_handleNpcMovement",
+          "callsite": "0x1ef194"
+        },
+        {
+          "caller": "0x1eef34",
+          "caller_name": "TClient_handleNpcMovement",
+          "callsite": "0x1ef1a8"
+        },
+        {
+          "caller": "0x1eef34",
+          "caller_name": "TClient_handleNpcMovement",
+          "callsite": "0x1ef1e4"
+        },
+        {
+          "caller": "0x1eef34",
+          "caller_name": "TClient_handleNpcMovement",
+          "callsite": "0x1ef1fc"
+        },
+        {
+          "caller": "0x1eef34",
+          "caller_name": "TClient_handleNpcMovement",
+          "callsite": "0x1ef214"
+        },
+        {
+          "caller": "0x1ef2d0",
+          "caller_name": "TClient_handleGaniScript",
+          "callsite": "0x1ef2fc"
+        },
+        {
+          "caller": "0x1ef48c",
+          "caller_name": "TClient_setBigFileSize",
+          "callsite": "0x1ef4b8"
+        },
+        {
+          "caller": "0x1ef48c",
+          "caller_name": "TClient_setBigFileSize",
+          "callsite": "0x1ef4c8"
+        },
+        {
+          "caller": "0x1ef48c",
+          "caller_name": "TClient_setBigFileSize",
+          "callsite": "0x1ef4e4"
+        },
+        {
+          "caller": "0x1ef48c",
+          "caller_name": "TClient_setBigFileSize",
+          "callsite": "0x1ef4fc"
+        },
+        {
+          "caller": "0x1ef48c",
+          "caller_name": "TClient_setBigFileSize",
+          "callsite": "0x1ef514"
+        },
+        {
+          "caller": "0x1ef560",
+          "caller_name": "TClient_removeBomb",
+          "callsite": "0x1ef5b0"
+        },
+        {
+          "caller": "0x1ef560",
+          "caller_name": "TClient_removeBomb",
+          "callsite": "0x1ef5cc"
+        },
+        {
+          "caller": "0x1ef770",
+          "caller_name": "TClient_saveLevelEncrypted",
+          "callsite": "0x1ef7bc"
+        },
+        {
+          "caller": "0x1ef770",
+          "caller_name": "TClient_saveLevelEncrypted",
+          "callsite": "0x1ef7cc"
+        },
+        {
+          "caller": "0x1ef770",
+          "caller_name": "TClient_saveLevelEncrypted",
+          "callsite": "0x1ef7e8"
+        },
+        {
+          "caller": "0x1ef770",
+          "caller_name": "TClient_saveLevelEncrypted",
+          "callsite": "0x1ef800"
+        },
+        {
+          "caller": "0x1ef770",
+          "caller_name": "TClient_saveLevelEncrypted",
+          "callsite": "0x1ef818"
+        },
+        {
+          "caller": "0x1ef850",
+          "caller_name": "TClient_setServerOptions",
+          "callsite": "0x1ef878"
+        },
+        {
+          "caller": "0x1ef850",
+          "caller_name": "TClient_setServerOptions",
+          "callsite": "0x1ef888"
+        },
+        {
+          "caller": "0x1ef850",
+          "caller_name": "TClient_setServerOptions",
+          "callsite": "0x1ef8a4"
+        },
+        {
+          "caller": "0x1ef850",
+          "caller_name": "TClient_setServerOptions",
+          "callsite": "0x1ef8bc"
+        },
+        {
+          "caller": "0x1ef850",
+          "caller_name": "TClient_setServerOptions",
+          "callsite": "0x1ef8d4"
+        },
+        {
+          "caller": "0x1ef900",
+          "caller_name": "TClient_handlePlayerHurtAtPosition",
+          "callsite": "0x1ef944"
+        },
+        {
+          "caller": "0x1ef900",
+          "caller_name": "TClient_handlePlayerHurtAtPosition",
+          "callsite": "0x1ef954"
+        },
+        {
+          "caller": "0x1ef900",
+          "caller_name": "TClient_handlePlayerHurtAtPosition",
+          "callsite": "0x1ef964"
+        },
+        {
+          "caller": "0x1ef900",
+          "caller_name": "TClient_handlePlayerHurtAtPosition",
+          "callsite": "0x1ef99c"
+        },
+        {
+          "caller": "0x1ef900",
+          "caller_name": "TClient_handlePlayerHurtAtPosition",
+          "callsite": "0x1ef9e0"
+        },
+        {
+          "caller": "0x1ef900",
+          "caller_name": "TClient_handlePlayerHurtAtPosition",
+          "callsite": "0x1efa5c"
+        },
+        {
+          "caller": "0x1ef900",
+          "caller_name": "TClient_handlePlayerHurtAtPosition",
+          "callsite": "0x1efa70"
+        },
+        {
+          "caller": "0x1ef900",
+          "caller_name": "TClient_handlePlayerHurtAtPosition",
+          "callsite": "0x1efa8c"
+        },
+        {
+          "caller": "0x1efb0c",
+          "caller_name": "TClient_handleExtra",
+          "callsite": "0x1efb5c"
+        },
+        {
+          "caller": "0x1efb0c",
+          "caller_name": "TClient_handleExtra",
+          "callsite": "0x1efb6c"
+        },
+        {
+          "caller": "0x1efb0c",
+          "caller_name": "TClient_handleExtra",
+          "callsite": "0x1efb7c"
+        },
+        {
+          "caller": "0x1efb0c",
+          "caller_name": "TClient_handleExtra",
+          "callsite": "0x1efd7c"
+        },
+        {
+          "caller": "0x1efb0c",
+          "caller_name": "TClient_handleExtra",
+          "callsite": "0x1efd90"
+        },
+        {
+          "caller": "0x1efe14",
+          "caller_name": "TClient_handleProjectile",
+          "callsite": "0x1efebc"
+        },
+        {
+          "caller": "0x1efe14",
+          "caller_name": "TClient_handleProjectile",
+          "callsite": "0x1efecc"
+        },
+        {
+          "caller": "0x1efe14",
+          "caller_name": "TClient_handleProjectile",
+          "callsite": "0x1eff04"
+        },
+        {
+          "caller": "0x1efe14",
+          "caller_name": "TClient_handleProjectile",
+          "callsite": "0x1eff18"
+        },
+        {
+          "caller": "0x1efe14",
+          "caller_name": "TClient_handleProjectile",
+          "callsite": "0x1eff68"
+        },
+        {
+          "caller": "0x1efe14",
+          "caller_name": "TClient_handleProjectile",
+          "callsite": "0x1eff7c"
+        },
+        {
+          "caller": "0x1efe14",
+          "caller_name": "TClient_handleProjectile",
+          "callsite": "0x1effcc"
+        },
+        {
+          "caller": "0x1efe14",
+          "caller_name": "TClient_handleProjectile",
+          "callsite": "0x1effe0"
+        },
+        {
+          "caller": "0x1efe14",
+          "caller_name": "TClient_handleProjectile",
+          "callsite": "0x1f0030"
+        },
+        {
+          "caller": "0x1efe14",
+          "caller_name": "TClient_handleProjectile",
+          "callsite": "0x1f0070"
+        },
+        {
+          "caller": "0x1efe14",
+          "caller_name": "TClient_handleProjectile",
+          "callsite": "0x1f00b0"
+        },
+        {
+          "caller": "0x1efe14",
+          "caller_name": "TClient_handleProjectile",
+          "callsite": "0x1f00f8"
+        },
+        {
+          "caller": "0x1efe14",
+          "caller_name": "TClient_handleProjectile",
+          "callsite": "0x1f0150"
+        },
+        {
+          "caller": "0x1efe14",
+          "caller_name": "TClient_handleProjectile",
+          "callsite": "0x1f019c"
+        },
+        {
+          "caller": "0x1efe14",
+          "caller_name": "TClient_handleProjectile",
+          "callsite": "0x1f01b0"
+        },
+        {
+          "caller": "0x1efe14",
+          "caller_name": "TClient_handleProjectile",
+          "callsite": "0x1f0204"
+        },
+        {
+          "caller": "0x1efe14",
+          "caller_name": "TClient_handleProjectile",
+          "callsite": "0x1f02d4"
+        },
+        {
+          "caller": "0x1f0470",
+          "caller_name": "TClient_requestGameFile",
+          "callsite": "0x1f04a8"
+        },
+        {
+          "caller": "0x1f0470",
+          "caller_name": "TClient_requestGameFile",
+          "callsite": "0x1f04b8"
+        },
+        {
+          "caller": "0x1f0470",
+          "caller_name": "TClient_requestGameFile",
+          "callsite": "0x1f04c8"
+        },
+        {
+          "caller": "0x1f0470",
+          "caller_name": "TClient_requestGameFile",
+          "callsite": "0x1f04d8"
+        },
+        {
+          "caller": "0x1f0470",
+          "caller_name": "TClient_requestGameFile",
+          "callsite": "0x1f04e8"
+        },
+        {
+          "caller": "0x1f0470",
+          "caller_name": "TClient_requestGameFile",
+          "callsite": "0x1f04f8"
+        },
+        {
+          "caller": "0x1f0470",
+          "caller_name": "TClient_requestGameFile",
+          "callsite": "0x1f0540"
+        },
+        {
+          "caller": "0x1f05fc",
+          "caller_name": "TClient_addSign",
+          "callsite": "0x1f0628"
+        },
+        {
+          "caller": "0x1f05fc",
+          "caller_name": "TClient_addSign",
+          "callsite": "0x1f063c"
+        },
+        {
+          "caller": "0x1f0728",
+          "caller_name": "TClient_addNpcToLevel",
+          "callsite": "0x1f0778"
+        },
+        {
+          "caller": "0x1f0728",
+          "caller_name": "TClient_addNpcToLevel",
+          "callsite": "0x1f078c"
+        },
+        {
+          "caller": "0x1f0728",
+          "caller_name": "TClient_addNpcToLevel",
+          "callsite": "0x1f07a8"
+        },
+        {
+          "caller": "0x1f0728",
+          "caller_name": "TClient_addNpcToLevel",
+          "callsite": "0x1f0884"
+        },
+        {
+          "caller": "0x1f0728",
+          "caller_name": "TClient_addNpcToLevel",
+          "callsite": "0x1f08a0"
+        },
+        {
+          "caller": "0x1f0920",
+          "caller_name": "TClient_handleBomb",
+          "callsite": "0x1f0958"
+        },
+        {
+          "caller": "0x1f0920",
+          "caller_name": "TClient_handleBomb",
+          "callsite": "0x1f096c"
+        },
+        {
+          "caller": "0x1f0920",
+          "caller_name": "TClient_handleBomb",
+          "callsite": "0x1f0984"
+        },
+        {
+          "caller": "0x1f0920",
+          "caller_name": "TClient_handleBomb",
+          "callsite": "0x1f0994"
+        },
+        {
+          "caller": "0x1f0920",
+          "caller_name": "TClient_handleBomb",
+          "callsite": "0x1f09a4"
+        },
+        {
+          "caller": "0x1f0920",
+          "caller_name": "TClient_handleBomb",
+          "callsite": "0x1f09b8"
+        },
+        {
+          "caller": "0x1f0920",
+          "caller_name": "TClient_handleBomb",
+          "callsite": "0x1f0a98"
+        },
+        {
+          "caller": "0x1f0ae4",
+          "caller_name": "TClient_removeExtra",
+          "callsite": "0x1f0b28"
+        },
+        {
+          "caller": "0x1f0ae4",
+          "caller_name": "TClient_removeExtra",
+          "callsite": "0x1f0b38"
+        },
+        {
+          "caller": "0x1f0c44",
+          "caller_name": "TClient_handleUpdatePackage",
+          "callsite": "0x1f0c70"
+        },
+        {
+          "caller": "0x1f0c44",
+          "caller_name": "TClient_handleUpdatePackage",
+          "callsite": "0x1f0d5c"
+        },
+        {
+          "caller": "0x1f0c44",
+          "caller_name": "TClient_handleUpdatePackage",
+          "callsite": "0x1f0d6c"
+        },
+        {
+          "caller": "0x1f0c44",
+          "caller_name": "TClient_handleUpdatePackage",
+          "callsite": "0x1f0d88"
+        },
+        {
+          "caller": "0x1f0c44",
+          "caller_name": "TClient_handleUpdatePackage",
+          "callsite": "0x1f0da0"
+        },
+        {
+          "caller": "0x1f0c44",
+          "caller_name": "TClient_handleUpdatePackage",
+          "callsite": "0x1f0db8"
+        },
+        {
+          "caller": "0x1f0de4",
+          "caller_name": "TClient_parseEncodedFileChunk",
+          "callsite": "0x1f0e20"
+        },
+        {
+          "caller": "0x1f0de4",
+          "caller_name": "TClient_parseEncodedFileChunk",
+          "callsite": "0x1f0e30"
+        },
+        {
+          "caller": "0x1f0de4",
+          "caller_name": "TClient_parseEncodedFileChunk",
+          "callsite": "0x1f0e40"
+        }
+      ],
+      "code": "__int64 __fastcall TString_operator_index_int__2(int **a1, int a2)\n{\n  int *v2; // x0\n\n  if ( a2 > 0 && (v2 = *a1) != nullptr && a2 <= *v2 )\n    return *((unsigned __int8 *)v2 + a2 + 7);\n  else\n    return (unsigned __int8)byte_38CEAA;\n}\n",
+      "code_bytes": 237,
+      "code_sha256": "8d97cef961d3becded0a1009b1996e2336595271d903117a92b97fff1e13e131",
+      "function_end": "0xf1da8",
+      "function_start": "0xf1d74",
+      "name": "TString_operator_index_int__2",
+      "role": "bounded string index",
+      "string_literals": []
+    },
+    {
+      "address": "0xf2da4",
+      "callers": [
+        {
+          "caller": "0xe2858",
+          "caller_name": "TSounds_script_setSoundPitchByNote",
+          "callsite": "0xe28b0"
+        },
+        {
+          "caller": "0xe2858",
+          "caller_name": "TSounds_script_setSoundPitchByNote",
+          "callsite": "0xe2940"
+        },
+        {
+          "caller": "0xe3f88",
+          "caller_name": "TTranslationFile_read_void",
+          "callsite": "0xe404c"
+        },
+        {
+          "caller": "0xe3f88",
+          "caller_name": "TTranslationFile_read_void",
+          "callsite": "0xe4248"
+        },
+        {
+          "caller": "0xe3f88",
+          "caller_name": "TTranslationFile_read_void",
+          "callsite": "0xe43fc"
+        },
+        {
+          "caller": "0xe3f88",
+          "caller_name": "TTranslationFile_read_void",
+          "callsite": "0xe44e8"
+        },
+        {
+          "caller": "0xe3f88",
+          "caller_name": "TTranslationFile_read_void",
+          "callsite": "0xe456c"
+        },
+        {
+          "caller": "0xe3f88",
+          "caller_name": "TTranslationFile_read_void",
+          "callsite": "0xe45f0"
+        },
+        {
+          "caller": "0xe3f88",
+          "caller_name": "TTranslationFile_read_void",
+          "callsite": "0xe467c"
+        },
+        {
+          "caller": "0xe3f88",
+          "caller_name": "TTranslationFile_read_void",
+          "callsite": "0xe46f4"
+        },
+        {
+          "caller": "0xe3f88",
+          "caller_name": "TTranslationFile_read_void",
+          "callsite": "0xe4778"
+        },
+        {
+          "caller": "0xe3f88",
+          "caller_name": "TTranslationFile_read_void",
+          "callsite": "0xe488c"
+        },
+        {
+          "caller": "0xe3f88",
+          "caller_name": "TTranslationFile_read_void",
+          "callsite": "0xe4958"
+        },
+        {
+          "caller": "0xe3f88",
+          "caller_name": "TTranslationFile_read_void",
+          "callsite": "0xe49fc"
+        },
+        {
+          "caller": "0xe5d8c",
+          "caller_name": "TEncryption_getencode_TString_const_TString_const",
+          "callsite": "0xe5f48"
+        },
+        {
+          "caller": "0xe6ce0",
+          "caller_name": "TFiles_fileIsFolder_TString_const",
+          "callsite": "0xe6d68"
+        },
+        {
+          "caller": "0xe7304",
+          "caller_name": "TFiles_extractFilename_TString_const",
+          "callsite": "0xe7360"
+        },
+        {
+          "caller": "0xe73b4",
+          "caller_name": "TFiles_lowerCaseFilename_TString_const",
+          "callsite": "0xe7410"
+        },
+        {
+          "caller": "0xe7464",
+          "caller_name": "TFiles_extractFilepath_TString_const",
+          "callsite": "0xe74bc"
+        },
+        {
+          "caller": "0xe74d4",
+          "caller_name": "TFiles_forceDirectories_TString_const",
+          "callsite": "0xe75a8"
+        },
+        {
+          "caller": "0xe79c8",
+          "caller_name": "TFiles_extractFileBase_TString_const",
+          "callsite": "0xe7a24"
+        },
+        {
+          "caller": "0xe7ba8",
+          "caller_name": "TFiles_removeEscapesOfFilename_TString_const",
+          "callsite": "0xe7c30"
+        },
+        {
+          "caller": "0xe7ba8",
+          "caller_name": "TFiles_removeEscapesOfFilename_TString_const",
+          "callsite": "0xe7cd0"
+        },
+        {
+          "caller": "0xe7d08",
+          "caller_name": "TFiles_removeExtension_TString_const",
+          "callsite": "0xe7d40"
+        },
+        {
+          "caller": "0xe7d6c",
+          "caller_name": "TFiles_removeGifExtension_TString_const",
+          "callsite": "0xe7dc4"
+        },
+        {
+          "caller": "0xe9230",
+          "caller_name": "TFileNameScan_loadCacheFile_TString_const_TString_const_bool",
+          "callsite": "0xe94ec"
+        },
+        {
+          "caller": "0xe9688",
+          "caller_name": "TFileNameScan_loadCacheFile2_TStream_TString_const_bool",
+          "callsite": "0xe98e8"
+        },
+        {
+          "caller": "0xeb470",
+          "caller_name": "THashStrings_AddSimple_TString_const",
+          "callsite": "0xeb4e0"
+        },
+        {
+          "caller": "0xeb470",
+          "caller_name": "THashStrings_AddSimple_TString_const",
+          "callsite": "0xeb508"
+        },
+        {
+          "caller": "0xed578",
+          "caller_name": "TResourceFunctions_updateGameObjectsForFile_TString_const",
+          "callsite": "0xed5ec"
+        },
+        {
+          "caller": "0xed578",
+          "caller_name": "TResourceFunctions_updateGameObjectsForFile_TString_const",
+          "callsite": "0xed6d8"
+        },
+        {
+          "caller": "0xedbcc",
+          "caller_name": "TResourceFunctions_getLevelFileResource_TString_const",
+          "callsite": "0xedce0"
+        },
+        {
+          "caller": "0xf2eac",
+          "caller_name": "TString_subString_int",
+          "callsite": "0xf2ec8"
+        },
+        {
+          "caller": "0xf2eac",
+          "caller_name": "TString_subString_int",
+          "callsite": "0xf2ee4"
+        },
+        {
+          "caller": "0xf32b4",
+          "caller_name": "TString_trim_void",
+          "callsite": "0xf3388"
+        },
+        {
+          "caller": "0xf33e8",
+          "caller_name": "TString_trimLeft_void",
+          "callsite": "0xf3450"
+        },
+        {
+          "caller": "0xf3488",
+          "caller_name": "TString_trimRight_void",
+          "callsite": "0xf3500"
+        },
+        {
+          "caller": "0xf446c",
+          "caller_name": "removeEmptyLinesAtEnd_TString_const",
+          "callsite": "0xf44f4"
+        },
+        {
+          "caller": "0xf45ac",
+          "caller_name": "addLineEnds_TString_const",
+          "callsite": "0xf4668"
+        },
+        {
+          "caller": "0xf45ac",
+          "caller_name": "addLineEnds_TString_const",
+          "callsite": "0xf46a0"
+        },
+        {
+          "caller": "0xf46f4",
+          "caller_name": "addLineEndsForHashB_TString_const",
+          "callsite": "0xf4754"
+        },
+        {
+          "caller": "0xf46f4",
+          "caller_name": "addLineEndsForHashB_TString_const",
+          "callsite": "0xf47e0"
+        },
+        {
+          "caller": "0xf4c74",
+          "caller_name": "patternMatches_TString_const_TString_const",
+          "callsite": "0xf4dd8"
+        },
+        {
+          "caller": "0xf57dc",
+          "caller_name": "TStringList_SetCommaText_TString_const",
+          "callsite": "0xf585c"
+        },
+        {
+          "caller": "0xf5938",
+          "caller_name": "TStringList_SetCommaText2_TString_const",
+          "callsite": "0xf59e4"
+        },
+        {
+          "caller": "0xf6950",
+          "caller_name": "TStringList_Tokenize_TString_const_TString_const",
+          "callsite": "0xf6a40"
+        },
+        {
+          "caller": "0xf6d4c",
+          "caller_name": "TStringList_getStringTokens_TString_const",
+          "callsite": "0xf6ddc"
+        },
+        {
+          "caller": "0xfbf0c",
+          "caller_name": "TFileScripting_AllowedFoldername_TString_const_bool",
+          "callsite": "0xfbff8"
+        },
+        {
+          "caller": "0xfc110",
+          "caller_name": "TFileScripting_getScriptAccessFilename_TString_const_bool",
+          "callsite": "0xfc29c"
+        },
+        {
+          "caller": "0xfc110",
+          "caller_name": "TFileScripting_getScriptAccessFilename_TString_const_bool",
+          "callsite": "0xfc474"
+        },
+        {
+          "caller": "0xfc8a0",
+          "caller_name": "TFileScripting_getScriptWriteAccessFolder_TString_const",
+          "callsite": "0xfc95c"
+        },
+        {
+          "caller": "0x11061c",
+          "caller_name": "TUnicode_swapTextDirection_TString_const",
+          "callsite": "0x11068c"
+        },
+        {
+          "caller": "0x115128",
+          "caller_name": "TBitmapLoader_guessFileType_TStream",
+          "callsite": "0x11542c"
+        },
+        {
+          "caller": "0x157794",
+          "caller_name": "sub_157794",
+          "callsite": "0x157860"
+        },
+        {
+          "caller": "0x157794",
+          "caller_name": "sub_157794",
+          "callsite": "0x1578c0"
+        },
+        {
+          "caller": "0x1579c0",
+          "caller_name": "sub_1579C0",
+          "callsite": "0x157a90"
+        },
+        {
+          "caller": "0x1579c0",
+          "caller_name": "sub_1579C0",
+          "callsite": "0x157af0"
+        },
+        {
+          "caller": "0x15c3d8",
+          "caller_name": "TAdventure_setChat_TString_const",
+          "callsite": "0x15c454"
+        },
+        {
+          "caller": "0x15e220",
+          "caller_name": "TGaniObject_setBody_TString_const",
+          "callsite": "0x15e2d0"
+        },
+        {
+          "caller": "0x160534",
+          "caller_name": "TGaniObject_startAnimation_TString_const_TString_const_bool",
+          "callsite": "0x160654"
+        },
+        {
+          "caller": "0x160534",
+          "caller_name": "TGaniObject_startAnimation_TString_const_TString_const_bool",
+          "callsite": "0x160668"
+        },
+        {
+          "caller": "0x160534",
+          "caller_name": "TGaniObject_startAnimation_TString_const_TString_const_bool",
+          "callsite": "0x1606a8"
+        },
+        {
+          "caller": "0x160534",
+          "caller_name": "TGaniObject_startAnimation_TString_const_TString_const_bool",
+          "callsite": "0x1607dc"
+        },
+        {
+          "caller": "0x161120",
+          "caller_name": "TGaniParam_writeString_TString_const",
+          "callsite": "0x161320"
+        },
+        {
+          "caller": "0x161120",
+          "caller_name": "TGaniParam_writeString_TString_const",
+          "callsite": "0x161398"
+        },
+        {
+          "caller": "0x161120",
+          "caller_name": "TGaniParam_writeString_TString_const",
+          "callsite": "0x1613dc"
+        },
+        {
+          "caller": "0x1617b4",
+          "caller_name": "TGaniObject_getSpriteForString_TString_const",
+          "callsite": "0x161834"
+        },
+        {
+          "caller": "0x1617b4",
+          "caller_name": "TGaniObject_getSpriteForString_TString_const",
+          "callsite": "0x1618e8"
+        },
+        {
+          "caller": "0x163354",
+          "caller_name": "TGaniObject_setFrame_int",
+          "callsite": "0x163ab0"
+        },
+        {
+          "caller": "0x163354",
+          "caller_name": "TGaniObject_setFrame_int",
+          "callsite": "0x164c8c"
+        },
+        {
+          "caller": "0x164cf8",
+          "caller_name": "TGaniObject_playAnimation_void",
+          "callsite": "0x164ee8"
+        },
+        {
+          "caller": "0x164cf8",
+          "caller_name": "TGaniObject_playAnimation_void",
+          "callsite": "0x1651bc"
+        },
+        {
+          "caller": "0x167688",
+          "caller_name": "TGraphics_getTextFormat_TString_TString_TString_int",
+          "callsite": "0x16772c"
+        },
+        {
+          "caller": "0x167688",
+          "caller_name": "TGraphics_getTextFormat_TString_TString_TString_int",
+          "callsite": "0x16778c"
+        },
+        {
+          "caller": "0x167858",
+          "caller_name": "TGraphics_WrapText_TStringList_TString_const_TString_const_TString_const_TString_const_int_bool_int",
+          "callsite": "0x1679bc"
+        },
+        {
+          "caller": "0x167858",
+          "caller_name": "TGraphics_WrapText_TStringList_TString_const_TString_const_TString_const_TString_const_int_bool_int",
+          "callsite": "0x167bd4"
+        },
+        {
+          "caller": "0x16dc38",
+          "caller_name": "TClientSideTrigger_TClientSideTrigger_TString_const",
+          "callsite": "0x16dcb4"
+        },
+        {
+          "caller": "0x1703a4",
+          "caller_name": "TPlayer_parseSignImages_TString_const_bool_bool",
+          "callsite": "0x170504"
+        },
+        {
+          "caller": "0x1703a4",
+          "caller_name": "TPlayer_parseSignImages_TString_const_bool_bool",
+          "callsite": "0x17058c"
+        },
+        {
+          "caller": "0x1712b8",
+          "caller_name": "TPlayer_getNetProperty_int",
+          "callsite": "0x171d88"
+        },
+        {
+          "caller": "0x1712b8",
+          "caller_name": "TPlayer_getNetProperty_int",
+          "callsite": "0x171f58"
+        },
+        {
+          "caller": "0x1734b8",
+          "caller_name": "TPlayer_setProperties_TString_const",
+          "callsite": "0x173668"
+        },
+        {
+          "caller": "0x1734b8",
+          "caller_name": "TPlayer_setProperties_TString_const",
+          "callsite": "0x1736fc"
+        },
+        {
+          "caller": "0x1734b8",
+          "caller_name": "TPlayer_setProperties_TString_const",
+          "callsite": "0x173790"
+        },
+        {
+          "caller": "0x1734b8",
+          "caller_name": "TPlayer_setProperties_TString_const",
+          "callsite": "0x173920"
+        },
+        {
+          "caller": "0x1734b8",
+          "caller_name": "TPlayer_setProperties_TString_const",
+          "callsite": "0x173964"
+        },
+        {
+          "caller": "0x1734b8",
+          "caller_name": "TPlayer_setProperties_TString_const",
+          "callsite": "0x173a5c"
+        },
+        {
+          "caller": "0x1734b8",
+          "caller_name": "TPlayer_setProperties_TString_const",
+          "callsite": "0x173b38"
+        },
+        {
+          "caller": "0x1734b8",
+          "caller_name": "TPlayer_setProperties_TString_const",
+          "callsite": "0x173c38"
+        },
+        {
+          "caller": "0x1734b8",
+          "caller_name": "TPlayer_setProperties_TString_const",
+          "callsite": "0x173d34"
+        },
+        {
+          "caller": "0x1734b8",
+          "caller_name": "TPlayer_setProperties_TString_const",
+          "callsite": "0x173ea8"
+        },
+        {
+          "caller": "0x1758e8",
+          "caller_name": "TPlayer_addNPCWeapon_int",
+          "callsite": "0x1759c8"
+        },
+        {
+          "caller": "0x17f754",
+          "caller_name": "TPlayer_drawSign_void",
+          "callsite": "0x17f7f8"
+        },
+        {
+          "caller": "0x181458",
+          "caller_name": "TServerNPC_getLogName_void",
+          "callsite": "0x181724"
+        },
+        {
+          "caller": "0x183414",
+          "caller_name": "replaceKeyCodes_TString_const",
+          "callsite": "0x183480"
+        },
+        {
+          "caller": "0x183414",
+          "caller_name": "replaceKeyCodes_TString_const",
+          "callsite": "0x1834c4"
+        },
+        {
+          "caller": "0x183414",
+          "caller_name": "replaceKeyCodes_TString_const",
+          "callsite": "0x18350c"
+        },
+        {
+          "caller": "0x183414",
+          "caller_name": "replaceKeyCodes_TString_const",
+          "callsite": "0x18355c"
+        },
+        {
+          "caller": "0x183628",
+          "caller_name": "parseMessageCodes_TString_const_bool_TPlayer",
+          "callsite": "0x1838b0"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x186eb4"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x186f38"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x187368"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x1873d0"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x1873f8"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x187550"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x1876d8"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x18777c"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x187860"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x1878b8"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x187aec"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x187b94"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x187c24"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x187c80"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x187d28"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x187e68"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x187fa8"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x18806c"
+        },
+        {
+          "caller": "0x186d48",
+          "caller_name": "TServerNPC_setProperties_TString_const",
+          "callsite": "0x188148"
+        },
+        {
+          "caller": "0x18cf08",
+          "caller_name": "TServerPlayer_getNickWrapped_TPlayer",
+          "callsite": "0x18d0e0"
+        },
+        {
+          "caller": "0x18dea0",
+          "caller_name": "TServerPlayer_setNick_TString_const",
+          "callsite": "0x18e154"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18e3f0"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18e4bc"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18e5a8"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18e5f4"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18e74c"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18e780"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18e7ac"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18e894"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18ea40"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18edcc"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18eef0"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18ef20"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18eff8"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18f154"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18f1d4"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18f290"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18f62c"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18f788"
+        },
+        {
+          "caller": "0x18e168",
+          "caller_name": "TServerPlayer_setProperties_TString_const",
+          "callsite": "0x18f828"
+        },
+        {
+          "caller": "0x19004c",
+          "caller_name": "TServerPlayer_setWeaponImgs_TString_const",
+          "callsite": "0x19043c"
+        },
+        {
+          "caller": "0x1911b8",
+          "caller_name": "TTranslations_getLanguageDomain_TString_const",
+          "callsite": "0x191454"
+        },
+        {
+          "caller": "0x191d98",
+          "caller_name": "TTranslations_checkInstalledLanguages_void",
+          "callsite": "0x191ee0"
+        },
+        {
+          "caller": "0x191d98",
+          "caller_name": "TTranslations_checkInstalledLanguages_void",
+          "callsite": "0x1920a8"
+        },
+        {
+          "caller": "0x191d98",
+          "caller_name": "TTranslations_checkInstalledLanguages_void",
+          "callsite": "0x1922a8"
+        },
+        {
+          "caller": "0x1923f4",
+          "caller_name": "TTranslations_checkUpdateTranslationFile_TString_const",
+          "callsite": "0x1924e0"
+        },
+        {
+          "caller": "0x192ec8",
+          "caller_name": "lex_load_TGraalAni",
+          "callsite": "0x193294"
+        },
+        {
+          "caller": "0x196914",
+          "caller_name": "TGraalActorMod_getMod_TString_const_TString",
+          "callsite": "0x196a00"
+        },
+        {
+          "caller": "0x1a08e8",
+          "caller_name": "TServerLevelLink_getTStringRepresentation_void",
+          "callsite": "0x1a0b98"
+        },
+        {
+          "caller": "0x1a08e8",
+          "caller_name": "TServerLevelLink_getTStringRepresentation_void",
+          "callsite": "0x1a0c04"
+        },
+        {
+          "caller": "0x1a08e8",
+          "caller_name": "TServerLevelLink_getTStringRepresentation_void",
+          "callsite": "0x1a0c58"
+        },
+        {
+          "caller": "0x1a08e8",
+          "caller_name": "TServerLevelLink_getTStringRepresentation_void",
+          "callsite": "0x1a0cc4"
+        },
+        {
+          "caller": "0x1a2a9c",
+          "caller_name": "TServerLevel_readNPCs_TStream_bool",
+          "callsite": "0x1a2b7c"
+        },
+        {
+          "caller": "0x1a2a9c",
+          "caller_name": "TServerLevel_readNPCs_TStream_bool",
+          "callsite": "0x1a2bb8"
+        },
+        {
+          "caller": "0x1a2a9c",
+          "caller_name": "TServerLevel_readNPCs_TStream_bool",
+          "callsite": "0x1a2bcc"
+        },
+        {
+          "caller": "0x1a2f08",
+          "caller_name": "TServerLevel_readSigns_TStream",
+          "callsite": "0x1a2f50"
+        },
+        {
+          "caller": "0x1a349c",
+          "caller_name": "TServerLevel_LoadGMap_TString_const",
+          "callsite": "0x1a37b4"
+        },
+        {
+          "caller": "0x1a349c",
+          "caller_name": "TServerLevel_LoadGMap_TString_const",
+          "callsite": "0x1a37f8"
+        },
+        {
+          "caller": "0x1a349c",
+          "caller_name": "TServerLevel_LoadGMap_TString_const",
+          "callsite": "0x1a3850"
+        },
+        {
+          "caller": "0x1b9570",
+          "caller_name": "GuiControl_onWake_void",
+          "callsite": "0x1b9868"
+        },
+        {
+          "caller": "0x1b9c50",
+          "caller_name": "GuiControl_renderJustifiedText_GuiControlProfile_TPoint_const_TPoint_const_TString_const_ColorI_const_bool",
+          "callsite": "0x1b9f28"
+        },
+        {
+          "caller": "0x1c6108",
+          "caller_name": "GuiTextCtrl_setText_TString_const",
+          "callsite": "0x1c617c"
+        },
+        {
+          "caller": "0x1c77a8",
+          "caller_name": "GuiTextEditCtrl_insertClipboardText_void",
+          "callsite": "0x1c7878"
+        },
+        {
+          "caller": "0x1c77a8",
+          "caller_name": "GuiTextEditCtrl_insertClipboardText_void",
+          "callsite": "0x1c7954"
+        },
+        {
+          "caller": "0x1c77a8",
+          "caller_name": "GuiTextEditCtrl_insertClipboardText_void",
+          "callsite": "0x1c79cc"
+        },
+        {
+          "caller": "0x1c7e00",
+          "caller_name": "GuiTextEditCtrl_copySelectedText_bool",
+          "callsite": "0x1c7f3c"
+        },
+        {
+          "caller": "0x1ce610",
+          "caller_name": "html_tag_parse_TString_const",
+          "callsite": "0x1ce6b8"
+        },
+        {
+          "caller": "0x1ce610",
+          "caller_name": "html_tag_parse_TString_const",
+          "callsite": "0x1ce7f8"
+        },
+        {
+          "caller": "0x1ce610",
+          "caller_name": "html_tag_parse_TString_const",
+          "callsite": "0x1ce900"
+        },
+        {
+          "caller": "0x1ce610",
+          "caller_name": "html_tag_parse_TString_const",
+          "callsite": "0x1ce978"
+        },
+        {
+          "caller": "0x1ce610",
+          "caller_name": "html_tag_parse_TString_const",
+          "callsite": "0x1ce9e8"
+        },
+        {
+          "caller": "0x1ce610",
+          "caller_name": "html_tag_parse_TString_const",
+          "callsite": "0x1ceabc"
+        },
+        {
+          "caller": "0x1ce610",
+          "caller_name": "html_tag_parse_TString_const",
+          "callsite": "0x1cebb0"
+        },
+        {
+          "caller": "0x1ce610",
+          "caller_name": "html_tag_parse_TString_const",
+          "callsite": "0x1cec28"
+        },
+        {
+          "caller": "0x1d3414",
+          "caller_name": "THTMLPage_emitSubPageToken_char_const_uint_uint_TString_const_TString_const",
+          "callsite": "0x1d3524"
+        },
+        {
+          "caller": "0x1d3414",
+          "caller_name": "THTMLPage_emitSubPageToken_char_const_uint_uint_TString_const_TString_const",
+          "callsite": "0x1d35a8"
+        },
+        {
+          "caller": "0x1d3414",
+          "caller_name": "THTMLPage_emitSubPageToken_char_const_uint_uint_TString_const_TString_const",
+          "callsite": "0x1d35fc"
+        },
+        {
+          "caller": "0x1d3414",
+          "caller_name": "THTMLPage_emitSubPageToken_char_const_uint_uint_TString_const_TString_const",
+          "callsite": "0x1d3684"
+        },
+        {
+          "caller": "0x1ec664",
+          "caller_name": "TClient_addWeapon",
+          "callsite": "0x1ec6e0"
+        },
+        {
+          "caller": "0x1ec664",
+          "caller_name": "TClient_addWeapon",
+          "callsite": "0x1ec710"
+        },
+        {
+          "caller": "0x1eccf8",
+          "caller_name": "TClient_handleMapWarpPacket",
+          "callsite": "0x1ecdd8"
+        },
+        {
+          "caller": "0x1edf8c",
+          "caller_name": "TClient_modifyBoard",
+          "callsite": "0x1ee154"
+        },
+        {
+          "caller": "0x1ee234",
+          "caller_name": "TClient_modifyBoardLevel",
+          "callsite": "0x1ee4bc"
+        },
+        {
+          "caller": "0x1ee620",
+          "caller_name": "TClient_parseSetPing_TString_const",
+          "callsite": "0x1ee668"
+        },
+        {
+          "caller": "0x1ee9ec",
+          "caller_name": "TClient_handleClientsideTriggerPacket",
+          "callsite": "0x1eeb04"
+        },
+        {
+          "caller": "0x1ee9ec",
+          "caller_name": "TClient_handleClientsideTriggerPacket",
+          "callsite": "0x1eeb5c"
+        },
+        {
+          "caller": "0x1eef34",
+          "caller_name": "TClient_handleNpcMovement",
+          "callsite": "0x1ef084"
+        },
+        {
+          "caller": "0x1eef34",
+          "caller_name": "TClient_handleNpcMovement",
+          "callsite": "0x1ef0fc"
+        },
+        {
+          "caller": "0x1eef34",
+          "caller_name": "TClient_handleNpcMovement",
+          "callsite": "0x1ef170"
+        },
+        {
+          "caller": "0x1eef34",
+          "caller_name": "TClient_handleNpcMovement",
+          "callsite": "0x1ef26c"
+        },
+        {
+          "caller": "0x1ef2d0",
+          "caller_name": "TClient_handleGaniScript",
+          "callsite": "0x1ef34c"
+        },
+        {
+          "caller": "0x1ef2d0",
+          "caller_name": "TClient_handleGaniScript",
+          "callsite": "0x1ef37c"
+        },
+        {
+          "caller": "0x1ef654",
+          "caller_name": "TClient_removeLevelObject",
+          "callsite": "0x1ef6b8"
+        },
+        {
+          "caller": "0x1efe14",
+          "caller_name": "TClient_handleProjectile",
+          "callsite": "0x1f0230"
+        },
+        {
+          "caller": "0x1efe14",
+          "caller_name": "TClient_handleProjectile",
+          "callsite": "0x1f0288"
+        },
+        {
+          "caller": "0x1efe14",
+          "caller_name": "TClient_handleProjectile",
+          "callsite": "0x1f02f8"
+        },
+        {
+          "caller": "0x1f0470",
+          "caller_name": "TClient_requestGameFile",
+          "callsite": "0x1f0534"
+        },
+        {
+          "caller": "0x1f0470",
+          "caller_name": "TClient_requestGameFile",
+          "callsite": "0x1f0584"
+        },
+        {
+          "caller": "0x1f05fc",
+          "caller_name": "TClient_addSign",
+          "callsite": "0x1f0668"
+        },
+        {
+          "caller": "0x1f0728",
+          "caller_name": "TClient_addNpcToLevel",
+          "callsite": "0x1f08d8"
+        },
+        {
+          "caller": "0x1f0920",
+          "caller_name": "TClient_handleBomb",
+          "callsite": "0x1f0ab4"
+        },
+        {
+          "caller": "0x1f0c44",
+          "caller_name": "TClient_handleUpdatePackage",
+          "callsite": "0x1f0c9c"
+        },
+        {
+          "caller": "0x1f0c44",
+          "caller_name": "TClient_handleUpdatePackage",
+          "callsite": "0x1f0cb0"
+        },
+        {
+          "caller": "0x1f0de4",
+          "caller_name": "TClient_parseEncodedFileChunk",
+          "callsite": "0x1f0e94"
+        },
+        {
+          "caller": "0x1f0de4",
+          "caller_name": "TClient_parseEncodedFileChunk",
+          "callsite": "0x1f0ec0"
+        },
+        {
+          "caller": "0x1f12b8",
+          "caller_name": "TClient_setEncodedFileKey",
+          "callsite": "0x1f135c"
+        },
+        {
+          "caller": "0x1f15b8",
+          "caller_name": "TClient_handleMapLevelPacket",
+          "callsite": "0x1f1620"
+        },
+        {
+          "caller": "0x1f212c",
+          "caller_name": "TClient_setEncryptedScript",
+          "callsite": "0x1f21b0"
+        },
+        {
+          "caller": "0x1f212c",
+          "caller_name": "TClient_setEncryptedScript",
+          "callsite": "0x1f21f4"
+        },
+        {
+          "caller": "0x1f212c",
+          "caller_name": "TClient_setEncryptedScript",
+          "callsite": "0x1f22ac"
+        },
+        {
+          "caller": "0x1f25a8",
+          "caller_name": "TClient_loadEncryptedScript",
+          "callsite": "0x1f26a0"
+        },
+        {
+          "caller": "0x1f2a20",
+          "caller_name": "TClient_handleGaniUpdate",
+          "callsite": "0x1f2aa4"
+        },
+        {
+          "caller": "0x1f2a20",
+          "caller_name": "TClient_handleGaniUpdate",
+          "callsite": "0x1f2ad4"
+        },
+        {
+          "caller": "0x1f56c0",
+          "caller_name": "TClient_sendToAllChat_TString_const",
+          "callsite": "0x1f5818"
+        },
+        {
+          "caller": "0x1fa920",
+          "caller_name": "TCachedStream_getDownloadFilename_TString_const",
+          "callsite": "0x1fab20"
+        },
+        {
+          "caller": "0x1fa920",
+          "caller_name": "TCachedStream_getDownloadFilename_TString_const",
+          "callsite": "0x1fb4e0"
+        },
+        {
+          "caller": "0x1fc598",
+          "caller_name": "TGraalConnection_parseProtocol_OldGraal_void",
+          "callsite": "0x1fc724"
+        },
+        {
+          "caller": "0x1fc598",
+          "caller_name": "TGraalConnection_parseProtocol_OldGraal_void",
+          "callsite": "0x1fc97c"
+        },
+        {
+          "caller": "0x1fd2f0",
+          "caller_name": "TGraalConnection_addDataBlocksRaw_void",
+          "callsite": "0x1fd364"
+        },
+        {
+          "caller": "0x1fe0b4",
+          "caller_name": "TGraalConnection_parseSetEncryptionIn_TString_const",
+          "callsite": "0x1fe1f8"
+        },
+        {
+          "caller": "0x1fe0b4",
+          "caller_name": "TGraalConnection_parseSetEncryptionIn_TString_const",
+          "callsite": "0x1fe244"
+        },
+        {
+          "caller": "0x1fe31c",
+          "caller_name": "TGraalConnection_parseProtocol_NewGraal_void",
+          "callsite": "0x1fe6ac"
+        },
+        {
+          "caller": "0x200010",
+          "caller_name": "THTTPRequest_saveDownloadedData_void",
+          "callsite": "0x200988"
+        },
+        {
+          "caller": "0x200d44",
+          "caller_name": "THTTPRequest_extractHTTPHostPortFile_TString_const_TString_int_TString_bool",
+          "callsite": "0x200e6c"
+        },
+        {
+          "caller": "0x200d44",
+          "caller_name": "THTTPRequest_extractHTTPHostPortFile_TString_const_TString_int_TString_bool",
+          "callsite": "0x200f10"
+        },
+        {
+          "caller": "0x200d44",
+          "caller_name": "THTTPRequest_extractHTTPHostPortFile_TString_const_TString_int_TString_bool",
+          "callsite": "0x200f44"
+        },
+        {
+          "caller": "0x2016e4",
+          "caller_name": "THTTPRequest_getAbsoluteLinkURL_TString_const_TString_const_bool",
+          "callsite": "0x201890"
+        },
+        {
+          "caller": "0x2016e4",
+          "caller_name": "THTTPRequest_getAbsoluteLinkURL_TString_const_TString_const_bool",
+          "callsite": "0x20197c"
+        },
+        {
+          "caller": "0x2016e4",
+          "caller_name": "THTTPRequest_getAbsoluteLinkURL_TString_const_TString_const_bool",
+          "callsite": "0x201a10"
+        },
+        {
+          "caller": "0x201d68",
+          "caller_name": "THTTPRequest_preParseData_void",
+          "callsite": "0x202144"
+        },
+        {
+          "caller": "0x202c64",
+          "caller_name": "TServerList_setProtocolString_TString_const",
+          "callsite": "0x202e10"
+        },
+        {
+          "caller": "0x202c64",
+          "caller_name": "TServerList_setProtocolString_TString_const",
+          "callsite": "0x202e4c"
+        },
+        {
+          "caller": "0x205328",
+          "caller_name": "TSocket_checkDataPackages_void",
+          "callsite": "0x20537c"
+        },
+        {
+          "caller": "0x205328",
+          "caller_name": "TSocket_checkDataPackages_void",
+          "callsite": "0x205474"
+        },
+        {
+          "caller": "0x2057a0",
+          "caller_name": "TSocket_checkAllowBind_int",
+          "callsite": "0x2058e0"
+        },
+        {
+          "caller": "0x2079ac",
+          "caller_name": "IsHostAndPortInList_TString_const_TString_const_int",
+          "callsite": "0x207a98"
+        },
+        {
+          "caller": "0x2079ac",
+          "caller_name": "IsHostAndPortInList_TString_const_TString_const_int",
+          "callsite": "0x207b60"
+        },
+        {
+          "caller": "0x20c8a0",
+          "caller_name": "sub_20C8A0",
+          "callsite": "0x20c944"
+        },
+        {
+          "caller": "0x20cd34",
+          "caller_name": "sub_20CD34",
+          "callsite": "0x20cd98"
+        },
+        {
+          "caller": "0x21190c",
+          "caller_name": "TGraalVar_setSubVar_TString_const",
+          "callsite": "0x211a10"
+        },
+        {
+          "caller": "0x21190c",
+          "caller_name": "TGraalVar_setSubVar_TString_const",
+          "callsite": "0x211a68"
+        },
+        {
+          "caller": "0x21190c",
+          "caller_name": "TGraalVar_setSubVar_TString_const",
+          "callsite": "0x211ac8"
+        },
+        {
+          "caller": "0x211ccc",
+          "caller_name": "TGraalVar_setVarValue_TString_const",
+          "callsite": "0x211d1c"
+        },
+        {
+          "caller": "0x211ccc",
+          "caller_name": "TGraalVar_setVarValue_TString_const",
+          "callsite": "0x211d48"
+        },
+        {
+          "caller": "0x2140c0",
+          "caller_name": "TGraalVar_writeString_TString_const",
+          "callsite": "0x214248"
+        },
+        {
+          "caller": "0x214354",
+          "caller_name": "TGraalVar_readIniFromFile_TString_const_bool",
+          "callsite": "0x214528"
+        },
+        {
+          "caller": "0x214354",
+          "caller_name": "TGraalVar_readIniFromFile_TString_const_bool",
+          "callsite": "0x214624"
+        },
+        {
+          "caller": "0x214354",
+          "caller_name": "TGraalVar_readIniFromFile_TString_const_bool",
+          "callsite": "0x214694"
+        },
+        {
+          "caller": "0x215294",
+          "caller_name": "TScript_addFunction_TString_const_int_int",
+          "callsite": "0x2152ec"
+        },
+        {
+          "caller": "0x215294",
+          "caller_name": "TScript_addFunction_TString_const_int_int",
+          "callsite": "0x215318"
+        },
+        {
+          "caller": "0x215488",
+          "caller_name": "TScript_getFunction_TString_const",
+          "callsite": "0x2154ec"
+        }
+      ],
+      "code": "_QWORD *__usercall TString_subString_int_int@<X0>(int **this@<X0>, int a2@<W1>, int a3@<W2>, _QWORD *a4@<X8>)\n{\n  int *v6; // x0\n  int v8; // w4\n  int v9; // w2\n  const char *v10; // x3\n  __int64 v11; // [xsp+28h] [xbp-8h] BYREF\n\n  v6 = *this;\n  if ( a2 )\n  {\n    if ( a2 < 0 )\n      a2 = 0;\n    if ( v6 )\n    {\nLABEL_8:\n      v8 = *v6;\n      if ( a3 <= *v6 )\n      {\n        v9 = a3 - a2;\n        v11 = 0;\n        if ( v9 <= 0 )\n          goto LABEL_12;\n      }\n      else\n      {\n        v9 = v8 - a2;\n        v11 = 0;\n        if ( v8 - a2 <= 0 )\n          goto LABEL_12;\n      }\n      v10 = (const char *)(v6 + 2);\n      goto LABEL_11;\n    }\n  }\n  else\n  {\n    if ( v6 )\n    {\n      if ( a3 == *v6 )\n      {\nLABEL_4:\n        *a4 = 0;\n        plt_TString_operator_assign_TString_const(a4, this);\n        return a4;\n      }\n      goto LABEL_8;\n    }\n    if ( !a3 )\n      goto LABEL_4;\n  }\n  if ( a3 > 0 )\n  {\n    v11 = 0;\n    goto LABEL_12;\n  }\n  v9 = a3 - a2;\n  v11 = 0;\n  if ( v9 <= 0 )\n    goto LABEL_12;\n  v10 = (const char *)TString_dummystr;\nLABEL_11:\n  plt_TString_addbuffer_char_const_int((TString *)&v11, &v10[a2], v9);\nLABEL_12:\n  *a4 = 0;\n  plt_TString_operator_assign_TString_const(a4, &v11);\n  plt_TString_clear_void((TString *)&v11);\n  return a4;\n}\n",
+      "code_bytes": 1264,
+      "code_sha256": "862cd879fe55f84d1c80e30f6daaea83063261d0a7c1df491ec170350d4e46c1",
+      "function_end": "0xf2eac",
+      "function_start": "0xf2da4",
+      "name": "TString_subString_int_int",
+      "role": "substring helper",
+      "string_literals": []
+    },
+    {
+      "address": "0x1aa0a0",
+      "callers": [
+        {
+          "caller": "0x176f28",
+          "caller_name": "TPlayer_doServerModifies_TServerLevel_TString_const",
+          "callsite": "0x1771a0"
+        },
+        {
+          "caller": "0x1772c0",
+          "caller_name": "TPlayer_doServerModifies3_TServerLevel_TString_const_bool",
+          "callsite": "0x1774c8"
+        },
+        {
+          "caller": "0x177564",
+          "caller_name": "TPlayer_modifyBoard_TServerLevel_int_int_int_int_int_int_bool",
+          "callsite": "0x177718"
+        },
+        {
+          "caller": "0x177798",
+          "caller_name": "TPlayer_updateBoard_int_int_int_int_int",
+          "callsite": "0x177ad8"
+        },
+        {
+          "caller": "0x1aa194",
+          "caller_name": "jump_TServerLevel_setTileLayerCount_int",
+          "callsite": "0x1aa194"
+        },
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa508"
+        },
+        {
+          "caller": "0x1aa648",
+          "caller_name": "TServerLevel_settilebylayer_int_double_double_int_bool",
+          "callsite": "0x1aa6d4"
+        },
+        {
+          "caller": "0x1aa648",
+          "caller_name": "TServerLevel_settilebylayer_int_double_double_int_bool",
+          "callsite": "0x1aa78c"
+        }
+      ],
+      "code": "TList *__fastcall TServerLevel_setTileLayerCount_int(TList **this, int a2)\n{\n  TServerLevel *v2; // x20\n  TList *v4; // x19\n  int v5; // w2\n  __int64 v6; // x19\n  TList *result; // x0\n  TTilesLayer *v8; // x22\n  int v9; // [xsp+38h] [xbp-8h]\n\n  v2 = (TServerLevel *)this;\n  v4 = *(this + 14);\n  v5 = *((_DWORD *)v4 + 3);\n  do\n  {\n    if ( a2 <= 0 )\n    {\n      a2 = 1;\n    }\n    else if ( a2 > 100 )\n    {\n      a2 = 100;\n    }\n    while ( 1 )\n    {\n      result = v4;\n      if ( a2 >= v5 )\n        break;\n      v6 = *(_QWORD *)plt_TList_operator_index_int(v4, (unsigned int)(v5 - 1));\n      plt_TList_Delete_int(*((TList **)v2 + 14), *(_DWORD *)(*((_QWORD *)v2 + 14) + 12LL) - 1);\n      if ( v6 )\n        (*(void (__fastcall **)(__int64))(*(_QWORD *)v6 + 8LL))(v6);\n      v4 = *((TList **)v2 + 14);\n      v5 = *((_DWORD *)v4 + 3);\n    }\n    while ( v5 < a2 )\n    {\n      v9 = v5;\n      v8 = (TTilesLayer *)plt_operator_new_ulong__2(0xA8u);\n      plt_TTilesLayer_TTilesLayer_TServerLevel_int(v8, v2, v9);\n      result = (TList *)plt_TList_Add_void(v4, v8);\n      v4 = *((TList **)v2 + 14);\n      v5 = *((_DWORD *)v4 + 3);\n    }\n    v2 = *((TServerLevel **)v2 + 45);\n    if ( !v2 )\n      break;\n    v4 = *((TList **)v2 + 14);\n    v5 = *((_DWORD *)v4 + 3);\n  }\n  while ( a2 > v5 );\n  return result;\n}\n",
+      "code_bytes": 1299,
+      "code_sha256": "7c781d9dda05691b44746db5324d799a9ec3e4d439ad960244e3be79b335eb22",
+      "function_end": "0x1aa194",
+      "function_start": "0x1aa0a0",
+      "name": "TServerLevel_setTileLayerCount_int",
+      "role": "tile-layer count",
+      "string_literals": []
+    },
+    {
+      "address": "0x1a0ea4",
+      "callers": [
+        {
+          "caller": "0x1a854c",
+          "caller_name": "TServerLevel_TServerLevel_TString_const",
+          "callsite": "0x1a8658"
+        },
+        {
+          "caller": "0x1aa0a0",
+          "caller_name": "TServerLevel_setTileLayerCount_int",
+          "callsite": "0x1aa12c"
+        }
+      ],
+      "code": "// Alternative name is '_ZN11TTilesLayerC1EP12TServerLeveli'\nTTilesLayer *__fastcall TTilesLayer_TTilesLayer_TServerLevel_int(THashList **this, TServerLevel *a2, int a3)\n{\n  int16x8_t *v6; // x0\n  unsigned int v7; // w2\n  unsigned __int8 v8; // w0\n  TLayerTilesVar *v9; // x21\n  THashList *v10; // x0\n  int16x8_t v12; // q0\n  int16x8_t *v13; // x1\n  THashList *v14; // x20\n  __int64 v15; // [xsp+38h] [xbp-8h] BYREF\n\n  v15 = 0;\n  plt_TString_operator_lshift_char_const((int)&v15, &byte_2DCE08);\n  plt_TGraalVar_TGraalVar_TString_const((TGraalVar *)this, (const TString *)&v15);\n  plt_TString_clear_void((TString *)&v15);\n  *this = (THashList *)&off_362D80;\n  *((_DWORD *)this + 34) = 0;\n  *((_DWORD *)this + 35) = 0;\n  *((_DWORD *)this + 36) = 0;\n  *((_BYTE *)this + 19) = 1;\n  *((_BYTE *)this + 22) = 3;\n  *(this + 14) = a2;\n  *((_DWORD *)this + 30) = a3;\n  *((float *)this + 37) = 1.0;\n  *((float *)this + 38) = 1.0;\n  *(this + 13) = (THashList *)TTilesLayer_properties;\n  *((_DWORD *)this + 41) = 1;\n  *((float *)this + 39) = 1.0;\n  *((float *)this + 40) = 1.0;\n  v6 = (int16x8_t *)malloc(0x2000u);\n  *(this + 16) = (THashList *)v6;\n  if ( a3 )\n  {\n    v7 = -1;\n  }\n  else\n  {\n    v7 = (__int16)data_TTilesLayer_preloadleveldefaulttile;\n    if ( !(_WORD)data_TTilesLayer_preloadleveldefaulttile )\n    {\n      memset(v6, 0, 0x2000u);\n      goto LABEL_4;\n    }\n  }\n  v12 = vdupq_n_s16(v7);\n  v13 = v6 + 512;\n  do\n    *v6++ = v12;\n  while ( v6 != v13 );\nLABEL_4:\n  v8 = atomic_load((unsigned __int8 *)&byte_38F658);\n  if ( (v8 & 1) == 0 && __cxa_guard_acquire((__guard *)&byte_38F658) )\n  {\n    qword_38F550 = 0;\n    plt_TString_operator_lshift_char_const((int)&qword_38F550, \"tiles\");\n    __cxa_guard_release((__guard *)&byte_38F658);\n    atexit((void (*)(void))sub_19F9CC);\n    v9 = (TLayerTilesVar *)plt_operator_new_ulong__2(0x78u);\n    plt_TLayerTilesVar_TLayerTilesVar_TTilesLayer_TString_const(v9, (TTilesLayer *)this, (const TString *)&qword_38F550);\n    v10 = *(this + 12);\n    if ( !v10 )\n      goto LABEL_13;\n    return (TTilesLayer *)plt_THashList_addObject_THashListObject(v10, v9);\n  }\n  v9 = (TLayerTilesVar *)plt_operator_new_ulong__2(0x78u);\n  plt_TLayerTilesVar_TLayerTilesVar_TTilesLayer_TString_const(v9, (TTilesLayer *)this, (const TString *)&qword_38F550);\n  v10 = *(this + 12);\n  if ( v10 )\n    return (TTilesLayer *)plt_THashList_addObject_THashListObject(v10, v9);\nLABEL_13:\n  v14 = (THashList *)plt_operator_new_ulong__2(0x28u);\n  plt_THashList_THashList_void__2(v14);\n  *(this + 12) = v14;\n  return (TTilesLayer *)plt_THashList_addObject_THashListObject(v14, v9);\n}\n",
+      "code_bytes": 2593,
+      "code_sha256": "6eb5b214b7350ae6452ae25a656696bf240eae9f95166fc37e65ad2f0d00c0d2",
+      "function_end": "0x1a107c",
+      "function_start": "0x1a0ea4",
+      "name": "TTilesLayer_TTilesLayer_TServerLevel_int",
+      "role": "tile-layer allocation",
+      "string_literals": [
+        "\"tiles\""
+      ]
+    },
+    {
+      "address": "0x22ed90",
+      "callers": [
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa554"
+        },
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa58c"
+        }
+      ],
+      "code": "bool __fastcall TLevelLoader_loadBoard_TStream_short_int_bool(\n        TLevelLoader *this,\n        TStream *a2,\n        __int16 *a3,\n        unsigned __int8 a4)\n{\n  TStream *v5; // x24\n  int v6; // w19\n  int v7; // w25\n  int v8; // w26\n  int v9; // w27\n  int v10; // w22\n  int v11; // w23\n  int v12; // w28\n  int v13; // w0\n  int v14; // w0\n  int v16; // w1\n  __int16 v17; // w1\n  int v18; // w26\n  int v19; // [xsp+6Ch] [xbp-24h]\n  int v20; // [xsp+70h] [xbp-20h]\n  int v21; // [xsp+74h] [xbp-1Ch]\n  unsigned int v22; // [xsp+78h] [xbp-18h]\n  int v23; // [xsp+7Ch] [xbp-14h]\n  unsigned __int8 dest; // [xsp+8Fh] [xbp-1h] BYREF\n\n  v22 = a4;\n  v5 = a2;\n  v6 = (int)a3;\n  if ( !this || !a2 )\n    return 0;\n  v7 = 1;\n  v21 = (_DWORD)a3 - 1;\n  v20 = 1 << ((_BYTE)a3 - 1);\n  v8 = 0;\n  v19 = (1 << (char)a3) - 1;\n  v9 = 0;\n  v10 = 0;\n  v23 = -1;\n  v11 = 0;\n  do\n  {\n    if ( *(_DWORD *)this >= *((_DWORD *)this + 1) )\n      break;\n    v12 = v10;\n    if ( v6 > v10 )\n    {\n      do\n      {\n        plt_TStream_read_void_int(this, &dest, 1);\n        v13 = dest << v12;\n        v12 += 8;\n        v9 += v13;\n      }\n      while ( v6 > v12 );\n      v10 += 8 + ((v21 - v10) & 0xFFFFFFF8);\n    }\n    v10 -= v6;\n    v14 = v9 & v19;\n    v9 >>= v6;\n    if ( (v14 & v20) <= 0 )\n    {\n      if ( v7 == 1 )\n      {\n        v5 = (TStream *)((char *)v5 + 2);\n        if ( (v14 != 4095) < v22 )\n          LOWORD(v14) = -1;\n        ++v11;\n        *((_WORD *)v5 - 1) = v14;\n      }\n      else if ( v8 )\n      {\n        v17 = v23;\n        if ( v23 < 0 )\n        {\n          v23 = v14;\n        }\n        else\n        {\n          if ( v11 <= 4094 && v7 )\n          {\n            v18 = 1;\n            if ( (v23 != 4095) < v22 )\n              v17 = -1;\n            if ( (v14 != 4095) < v22 )\n              LOWORD(v14) = -1;\n            do\n            {\n              *(_WORD *)v5 = v17;\n              v5 = (TStream *)((char *)v5 + 4);\n              ++v18;\n              v11 += 2;\n              *((_WORD *)v5 - 1) = v14;\n            }\n            while ( v18 <= v7 && v11 <= 4094 );\n          }\n          v8 = 0;\n          v23 = -1;\n          v7 = 1;\n        }\n      }\n      else\n      {\n        if ( v7 )\n        {\n          v16 = 1;\n          if ( (v14 != 4095) < v22 )\n            LOWORD(v14) = -1;\n          do\n          {\n            ++v16;\n            *(_WORD *)v5 = v14;\n            v5 = (TStream *)((char *)v5 + 2);\n            ++v11;\n          }\n          while ( v16 <= v7 && v11 <= 4095 );\n        }\n        v7 = 1;\n      }\n    }\n    else\n    {\n      v7 = (unsigned __int8)v14;\n      if ( (v14 & 0x100) != 0 )\n        v8 = 1;\n    }\n  }\n  while ( v11 <= 4095 );\n  return v11 > 4095;\n}\n",
+      "code_bytes": 2665,
+      "code_sha256": "af889b1340a2648789d836e16eb0d964b4f6c6c02ea1bff9956d2d8b234a487c",
+      "function_end": "0x22efec",
+      "function_start": "0x22ed90",
+      "name": "TLevelLoader_loadBoard_TStream_short_int_bool",
+      "role": "board decoder",
+      "string_literals": []
+    },
+    {
+      "address": "0x1a2924",
+      "callers": [
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa5a0"
+        }
+      ],
+      "code": "__int64 __fastcall TServerLevel_readLinks_TStream(__int64 this, TStream *a2)\n{\n  __int64 v2; // x22\n  TServerLevelLink *v4; // x23\n  int *v5; // [xsp+38h] [xbp-8h] BYREF\n\n  if ( a2 )\n  {\n    v2 = this;\n    while ( 1 )\n    {\n      plt_TStream_readLine_void(&v5, a2);\n      if ( !v5 || *v5 <= 0 || (unsigned __int8)plt_operator_assign_TString_const_char_const((int)&v5, \"#\") )\n        break;\n      v4 = (TServerLevelLink *)plt_operator_new_ulong__2(0xA8u);\n      plt_TServerLevelLink_TServerLevelLink_void(v4);\n      plt_TServerLevelLink_Assign_TString_const(v4, (const TString *)&v5);\n      plt_TList_Add_void(*(TList **)(v2 + 160), v4);\n      plt_TString_clear_void((TString *)&v5);\n    }\n    return plt_TString_clear_void((TString *)&v5);\n  }\n  return this;\n}\n",
+      "code_bytes": 761,
+      "code_sha256": "e0593c58370399bd0413998b48948a85db18b9ac7180a61f4353eed297786af9",
+      "function_end": "0x1a29d0",
+      "function_start": "0x1a2924",
+      "name": "TServerLevel_readLinks_TStream",
+      "role": "link reader",
+      "string_literals": [
+        "\"#\""
+      ]
+    },
+    {
+      "address": "0x1a29d0",
+      "callers": [
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa5b0"
+        }
+      ],
+      "code": "__int64 __fastcall TServerLevel_readBaddies_TStream_bool(TServerLevel *this, TStream *a2)\n{\n  int *v3; // x2\n  unsigned __int8 dest; // [xsp+27h] [xbp-9h] BYREF\n  int *v6; // [xsp+28h] [xbp-8h] BYREF\n\n  while ( 1 )\n  {\n    v6 = nullptr;\n    if ( (int)plt_TStream_read_void_int(a2, &dest, 1) <= 0 )\n    {\nLABEL_4:\n      v3 = v6;\n      if ( !v6 )\n        return plt_TString_clear_void((TString *)&v6);\n    }\n    else\n    {\n      while ( 1 )\n      {\n        if ( dest == 10 )\n        {\n          v3 = v6;\n          if ( v6 )\n          {\n            if ( *v6 > 2 )\n              break;\n          }\n        }\n        plt_TString_operator_lshift_char(&v6, dest);\n        if ( (int)plt_TStream_read_void_int(a2, &dest, 1) <= 0 )\n          goto LABEL_4;\n      }\n    }\n    if ( *v3 <= 2 || *(char *)plt_TString_operator_index_int__2(&v6, 1) < 0 )\n      return plt_TString_clear_void((TString *)&v6);\n    plt_TString_clear_void((TString *)&v6);\n  }\n}\n",
+      "code_bytes": 941,
+      "code_sha256": "dc19af741ba04d9f4e8409d5b258fd9b08278dcb32d034dce0e9c894a8b3c870",
+      "function_end": "0x1a2a9c",
+      "function_start": "0x1a29d0",
+      "name": "TServerLevel_readBaddies_TStream_bool",
+      "role": "baddie reader",
+      "string_literals": []
+    },
+    {
+      "address": "0x1a2a9c",
+      "callers": [
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa5c0"
+        }
+      ],
+      "code": "__int64 __fastcall TServerLevel_readNPCs_TStream_bool(__int64 this, TStream *a2, unsigned __int8 a3)\n{\n  int v3; // w23\n  __int64 v4; // x22\n  int v6; // w2\n  int v7; // w28\n  int v8; // w0\n  long double v9; // q0\n  double v10; // d8\n  TServerNPC *v11; // x28\n  TServerLevel *v12; // x1\n  int v13; // w3\n  long double v14; // [xsp+60h] [xbp-30h]\n  int *v15; // [xsp+70h] [xbp-20h] BYREF\n  int *v16; // [xsp+78h] [xbp-18h] BYREF\n  __int64 v17; // [xsp+80h] [xbp-10h] BYREF\n  __int64 v18; // [xsp+88h] [xbp-8h] BYREF\n\n  v3 = a3;\n  if ( a2 )\n  {\n    v4 = this;\n    while ( 1 )\n    {\n      plt_TStream_readLine_void(&v15, a2);\n      if ( !v15 || *v15 <= 0 || (unsigned __int8)plt_operator_assign_TString_const_char_const((int)&v15, \"#\") )\n        break;\n      if ( v3 && !data_TClient_client )\n      {\n        if ( v15 )\n          v6 = *v15;\n        else\n          v6 = 0;\n        plt_TString_subString_int_int((__int64 *)&v16, (TString *)&v15, 2, v6);\n        v7 = plt_TString_indexOf_char((TString *)&v16, 35);\n        if ( v16 )\n          v8 = *v16;\n        else\n          v8 = 0;\n        plt_TString_subString_int_int(&v17, (TString *)&v16, v7 + 1, v8);\n        plt_TString_subString_int_int(&v18, (TString *)&v16, 0, v7);\n        *(double *)&v9 = (double)(*(unsigned __int8 *)plt_TString_operator_index_int__2(&v15, 1) - 32);\n        v14 = v9;\n        v10 = (double)(*(unsigned __int8 *)plt_TString_operator_index_int__2(&v15, 2) - 32);\n        v11 = (TServerNPC *)plt_operator_new_ulong__2(0x4D0u);\n        plt_TServerNPC_TServerNPC_int(v11, -1);\n        (*(void (__fastcall **)(TServerNPC *, _QWORD, long double))(*(_QWORD *)v11 + 336LL))(v11, 0, v14);\n        (*(void (__fastcall **)(TServerNPC *, _QWORD, double))(*(_QWORD *)v11 + 352LL))(v11, 0, v10);\n        plt_TServerNPC_setvisible_bool(v11, 1);\n        plt_TServerNPC_loadImage_TString_const(v11, (const TString *)&v18);\n        v12 = *(TServerLevel **)(v4 + 360);\n        if ( v12 )\n        {\n          v13 = *(_DWORD *)(v4 + 368);\n          *((_DWORD *)v11 + 39) = *(_DWORD *)(v4 + 372);\n          *((_DWORD *)v11 + 38) = v13;\n          plt_TServerNPC_addToLevel_TServerLevel(v11, v12);\n        }\n        else\n        {\n          plt_TServerNPC_addToLevel_TServerLevel(v11, (TServerLevel *)v4);\n        }\n        plt_TString_clear_void((TString *)&v18);\n        plt_TString_clear_void((TString *)&v17);\n        plt_TString_clear_void((TString *)&v16);\n      }\n      plt_TString_clear_void((TString *)&v15);\n    }\n    return plt_TString_clear_void((TString *)&v15);\n  }\n  return this;\n}\n",
+      "code_bytes": 2549,
+      "code_sha256": "4f1fe4b826a0a0f7fbe144f56e44f0a40e00040be76a633c85b0afb24129a0ef",
+      "function_end": "0x1a2cbc",
+      "function_start": "0x1a2a9c",
+      "name": "TServerLevel_readNPCs_TStream_bool",
+      "role": "NPC reader",
+      "string_literals": [
+        "\"#\""
+      ]
+    },
+    {
+      "address": "0x1a2cbc",
+      "callers": [
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa5d0"
+        }
+      ],
+      "code": "TList **__fastcall TServerLevel_readChests_TStream_bool(TList **this, TStream *a2, unsigned __int8 a3)\n{\n  int v3; // w23\n  TList **v4; // x22\n  TServerChest *v6; // x25\n  void (__fastcall *v7)(TServerChest *, _QWORD, double); // x26\n  unsigned __int8 *v8; // x0\n  void (__fastcall *v9)(TServerChest *, _QWORD, double); // x26\n  unsigned __int8 *v10; // x0\n  int *v11; // [xsp+58h] [xbp-8h] BYREF\n\n  v3 = a3;\n  if ( a2 )\n  {\n    v4 = this;\n    while ( 1 )\n    {\n      plt_TStream_readLine_void(&v11, a2);\n      if ( !v11 || *v11 <= 0 || (unsigned __int8)plt_operator_assign_TString_const_char_const((int)&v11, \"#\") )\n        break;\n      if ( v3 && !data_TClient_client )\n      {\n        v6 = (TServerChest *)plt_operator_new_ulong__2(0x108u);\n        plt_TServerChest_TServerChest_TServerLevel(v6, (TServerLevel *)v4);\n        v7 = *(void (__fastcall **)(TServerChest *, _QWORD, double))(*(_QWORD *)v6 + 336LL);\n        v8 = (unsigned __int8 *)plt_TString_operator_index_int__2(&v11, 1);\n        v7(v6, 0, (double)(*v8 - 32));\n        if ( (*(double (__fastcall **)(TServerChest *))(*(_QWORD *)v6 + 328LL))(v6) < 0.0 )\n          (*(void (__fastcall **)(TServerChest *, _QWORD, double))(*(_QWORD *)v6 + 336LL))(v6, 0, 0.0);\n        if ( (*(double (__fastcall **)(TServerChest *))(*(_QWORD *)v6 + 328LL))(v6) > 62.0 )\n          (*(void (__fastcall **)(TServerChest *, _QWORD, double))(*(_QWORD *)v6 + 336LL))(v6, 0, 62.0);\n        v9 = *(void (__fastcall **)(TServerChest *, _QWORD, double))(*(_QWORD *)v6 + 352LL);\n        v10 = (unsigned __int8 *)plt_TString_operator_index_int__2(&v11, 2);\n        v9(v6, 0, (double)(*v10 - 32));\n        if ( (*(double (__fastcall **)(TServerChest *))(*(_QWORD *)v6 + 344LL))(v6) < 0.0 )\n          (*(void (__fastcall **)(TServerChest *, _QWORD, double))(*(_QWORD *)v6 + 352LL))(v6, 0, 0.0);\n        if ( (*(double (__fastcall **)(TServerChest *))(*(_QWORD *)v6 + 344LL))(v6) > 62.0 )\n          (*(void (__fastcall **)(TServerChest *, _QWORD, double))(*(_QWORD *)v6 + 352LL))(v6, 0, 62.0);\n        *((_DWORD *)v6 + 60) = *(unsigned __int8 *)plt_TString_operator_index_int__2(&v11, 3) - 32;\n        *((_DWORD *)v6 + 61) = *(unsigned __int8 *)plt_TString_operator_index_int__2(&v11, 4) - 32;\n        plt_TServerChest_setOpen_bool(v6, 0);\n        plt_TList_Add_void(v4[27], v6);\n      }\n      plt_TString_clear_void((TString *)&v11);\n    }\n    return (TList **)plt_TString_clear_void((TString *)&v11);\n  }\n  return this;\n}\n",
+      "code_bytes": 2456,
+      "code_sha256": "98fab8d79a31d733d9f958011d84ca8b36d2eafbd8eab3821ece89b94f598dce",
+      "function_end": "0x1a2efc",
+      "function_start": "0x1a2cbc",
+      "name": "TServerLevel_readChests_TStream_bool",
+      "role": "chest reader",
+      "string_literals": [
+        "\"#\""
+      ]
+    },
+    {
+      "address": "0x1a2f08",
+      "callers": [
+        {
+          "caller": "0x1aa198",
+          "caller_name": "TServerLevel_LoadEncrypted_void",
+          "callsite": "0x1aa5dc"
+        }
+      ],
+      "code": "TList **__fastcall TServerLevel_readSigns_TStream(TList **this, TStream *a2)\n{\n  TList **v2; // x24\n  int v4; // w2\n  TServerSign *v5; // x20\n  void (__fastcall *v6)(TServerSign *, _QWORD, double); // x27\n  unsigned __int8 *v7; // x0\n  void (__fastcall *v8)(TServerSign *, _QWORD, double); // x27\n  unsigned __int8 *v9; // x0\n  int *v10; // [xsp+50h] [xbp-20h] BYREF\n  __int64 v11; // [xsp+58h] [xbp-18h] BYREF\n  __int64 v12; // [xsp+60h] [xbp-10h] BYREF\n  __int64 v13; // [xsp+68h] [xbp-8h] BYREF\n\n  if ( a2 )\n  {\n    v2 = this;\n    while ( 1 )\n    {\n      plt_TStream_readLine_void(&v10, a2);\n      if ( !v10 || *v10 <= 1 )\n        break;\n      v5 = (TServerSign *)plt_operator_new_ulong__2(0xF8u);\n      plt_TServerSign_TServerSign_TServerLevel(v5, (TServerLevel *)v2);\n      v6 = *(void (__fastcall **)(TServerSign *, _QWORD, double))(*(_QWORD *)v5 + 336LL);\n      v7 = (unsigned __int8 *)plt_TString_operator_index_int__2(&v10, 1);\n      v6(v5, 0, (double)(*v7 - 32));\n      v8 = *(void (__fastcall **)(TServerSign *, _QWORD, double))(*(_QWORD *)v5 + 352LL);\n      v9 = (unsigned __int8 *)plt_TString_operator_index_int__2(&v10, 2);\n      v8(v5, 0, (double)(*v9 - 32));\n      if ( v10 )\n        v4 = *v10;\n      else\n        v4 = 0;\n      plt_TString_subString_int_int(&v13, (TString *)&v10, 2, v4);\n      plt_getSignText_TString_const(&v12, (const TString *)&v13);\n      plt_replaceKeyCodes_TString_const(&v11, (const TString *)&v12);\n      plt_TString_operator_assign_TString_const((char *)v5 + 240, &v11);\n      plt_TString_clear_void((TString *)&v11);\n      plt_TString_clear_void((TString *)&v12);\n      plt_TString_clear_void((TString *)&v13);\n      plt_TList_Add_void(v2[26], v5);\n      plt_TString_clear_void((TString *)&v10);\n    }\n    return (TList **)plt_TString_clear_void((TString *)&v10);\n  }\n  return this;\n}\n",
+      "code_bytes": 1829,
+      "code_sha256": "7dc09e064eeaa5d43be6599fa19b848e96d4e50060a65329893f99be8c0a06c1",
+      "function_end": "0x1a3068",
+      "function_start": "0x1a2f08",
+      "name": "TServerLevel_readSigns_TStream",
+      "role": "sign reader",
+      "string_literals": []
+    },
+    {
+      "address": "0x1a1d00",
+      "callers": [
+        {
+          "caller": "0x1a2f08",
+          "caller_name": "TServerLevel_readSigns_TStream",
+          "callsite": "0x1a2f5c"
+        },
+        {
+          "caller": "0x1f05fc",
+          "caller_name": "TClient_addSign",
+          "callsite": "0x1f0674"
+        }
+      ],
+      "code": "_QWORD *__usercall getSignText_TString_const@<X0>(int **a1@<X0>, _QWORD *a2@<X8>)\n{\n  int v4; // w27\n  int *v5; // x0\n  unsigned __int8 v6; // w0\n  int v7; // w0\n  int *v8; // x1\n  __int64 v9; // x1\n  int v10; // w2\n  bool v11; // zf\n  _QWORD *v12; // x0\n  __int64 v13; // x19\n  __int64 v14; // x0\n  _DWORD *v15; // x1\n  __int64 v16; // x1\n\n  *a2 = 0;\n  v4 = 1;\n  v5 = *a1;\n  if ( !v5 )\n    goto LABEL_43;\nLABEL_2:\n  if ( v4 <= *v5 )\n  {\n    while ( 1 )\n    {\n      plt_TString_operator_index_int(a1, (unsigned int)v4);\n      v7 = v6 - 32;\n      if ( v7 < 0 )\n        break;\n      v8 = *(int **)pcode;\n      if ( !*(_QWORD *)pcode || v7 >= *v8 )\n        break;\n      v9 = *((unsigned __int8 *)v8 + v7 + 8);\n      if ( (_DWORD)v9 != 35 )\n        goto LABEL_46;\n      if ( v7 == ctab[ctabindex[0]] )\n        v10 = 0;\n      else\n        v10 = -1;\n      if ( v7 == ctab[dword_37E914] )\n        v10 = 1;\n      if ( v7 == ctab[dword_37E918] )\n        v10 = 2;\n      if ( v7 == ctab[dword_37E91C] )\n        v10 = 3;\n      if ( v7 == ctab[dword_37E920] )\n        v10 = 4;\n      if ( v7 == ctab[dword_37E924] )\n        v10 = 5;\n      if ( v7 == ctab[dword_37E928] )\n        v10 = 6;\n      if ( v7 == ctab[dword_37E92C] )\n        v10 = 7;\n      if ( v7 == ctab[dword_37E930] )\n        v10 = 8;\n      if ( v7 == ctab[dword_37E934] )\n        v10 = 9;\n      if ( v7 == ctab[dword_37E938] )\n        v10 = 10;\n      if ( v7 == ctab[dword_37E93C] )\n        v10 = 11;\n      if ( v7 == ctab[dword_37E940] )\n        v10 = 12;\n      v11 = v7 == ctab[dword_37E944];\n      v12 = a2;\n      if ( v11 )\n        LODWORD(v13) = 13;\n      else\n        LODWORD(v13) = v10;\n      if ( (_DWORD)v13 != -1 )\n      {\n        v14 = plt_TString_operator_lshift_char(a2, v9);\n        v15 = *(_DWORD **)ccode;\n        if ( *(_QWORD *)ccode && (int)v13 < *v15 )\n        {\n          v13 = (int)v13;\n          v16 = *((unsigned __int8 *)v15 + (int)v13 + 8);\n        }\n        else\n        {\n          v16 = 0;\n          v13 = (int)v13;\n        }\n        plt_TString_operator_lshift_char(v14, v16);\n        v4 += ctablen[v13];\n        goto LABEL_42;\n      }\nLABEL_47:\n      plt_TString_operator_lshift_char(v12, v9);\n      ++v4;\nLABEL_42:\n      v5 = *a1;\n      if ( *a1 )\n        goto LABEL_2;\nLABEL_43:\n      if ( v4 > 0 )\n        return a2;\n    }\n    v9 = 0;\nLABEL_46:\n    v12 = a2;\n    goto LABEL_47;\n  }\n  return a2;\n}\n",
+      "code_bytes": 2381,
+      "code_sha256": "2befb6f898c730f446005ad938ffc40bc3b3ccab4ee1166c488e5d608142cddb",
+      "function_end": "0x1a1f50",
+      "function_start": "0x1a1d00",
+      "name": "getSignText_TString_const",
+      "role": "keyboard-code expansion",
+      "string_literals": []
+    },
+    {
+      "address": "0x183414",
+      "callers": [
+        {
+          "caller": "0x1a2f08",
+          "caller_name": "TServerLevel_readSigns_TStream",
+          "callsite": "0x1a2f68"
+        }
+      ],
+      "code": "TString *__usercall replaceKeyCodes_TString_const@<X0>(const TString *a1@<X0>, TString *a2@<X8>)\n{\n  int v3; // w2\n  int BracketsEnd_TString_const; // w0\n  int v5; // w26\n  unsigned int v6; // w0\n  int v7; // w2\n  int v8; // w25\n  int v10; // [xsp+60h] [xbp-40h]\n  __int64 v11; // [xsp+78h] [xbp-28h] BYREF\n  __int64 v12; // [xsp+80h] [xbp-20h] BYREF\n  __int64 v13; // [xsp+88h] [xbp-18h] BYREF\n  __int64 v14; // [xsp+90h] [xbp-10h] BYREF\n  __int64 v15; // [xsp+98h] [xbp-8h] BYREF\n\n  *(_QWORD *)a2 = 0;\n  plt_TString_operator_assign_TString_const(a2, a1);\n  while ( 1 )\n  {\n    v15 = 0;\n    plt_TString_operator_lshift_char_const((int)&v15, \"#K(\");\n    v8 = plt_TString_indexOf_TString_const(a2, (const TString *)&v15);\n    plt_TString_clear_void((TString *)&v15);\n    if ( v8 + 1 <= 0 )\n      break;\n    v3 = *(_QWORD *)a2 ? **(_DWORD **)a2 : 0;\n    plt_TString_subString_int_int(&v15, a2, v8 + 2, v3);\n    BracketsEnd_TString_const = plt_findBracketsEnd_TString_const((const TString *)&v15);\n    v5 = BracketsEnd_TString_const + 2;\n    v10 = BracketsEnd_TString_const;\n    plt_TString_clear_void((TString *)&v15);\n    if ( v10 <= 0 )\n      break;\n    v11 = 0;\n    plt_TString_subString_int_int(&v14, a2, v8 + 3, v8 + v10 + 1);\n    v6 = plt_strtoint_TString_const((const TString *)&v14);\n    v15 = 0;\n    plt_TString_operator_lshift_char(&v15, v6);\n    plt_TString_operator_assign_TString_const(&v11, &v15);\n    plt_TString_clear_void((TString *)&v15);\n    plt_TString_clear_void((TString *)&v14);\n    plt_TString_subString_int_int(&v12, a2, 0, v8);\n    v13 = 0;\n    plt_TString_operator_assign_TString_const(&v13, &v12);\n    plt_TString_operator_lshift_TString_const(&v13, &v11);\n    if ( *(_QWORD *)a2 )\n      v7 = **(_DWORD **)a2 + 1;\n    else\n      v7 = 1;\n    plt_TString_subString_int_int(&v14, a2, v8 + v5, v7 - 1);\n    v15 = 0;\n    plt_TString_operator_assign_TString_const(&v15, &v13);\n    plt_TString_operator_lshift_TString_const(&v15, &v14);\n    plt_TString_operator_assign_TString_const(a2, &v15);\n    plt_TString_clear_void((TString *)&v15);\n    plt_TString_clear_void((TString *)&v14);\n    plt_TString_clear_void((TString *)&v13);\n    plt_TString_clear_void((TString *)&v12);\n    plt_TString_clear_void((TString *)&v11);\n  }\n  return a2;\n}\n",
+      "code_bytes": 2257,
+      "code_sha256": "61e0978600de140d673bcf858fbcd181024c5168ae6fcf3a594a901541b390d2",
+      "function_end": "0x183628",
+      "function_start": "0x183414",
+      "name": "replaceKeyCodes_TString_const",
+      "role": "key-code replacement",
+      "string_literals": [
+        "\"#K(\""
+      ]
+    },
+    {
+      "address": "0x183320",
+      "callers": [
+        {
+          "caller": "0x1703a4",
+          "caller_name": "TPlayer_parseSignImages_TString_const_bool_bool",
+          "callsite": "0x17056c"
+        },
+        {
+          "caller": "0x183414",
+          "caller_name": "replaceKeyCodes_TString_const",
+          "callsite": "0x183488"
+        }
+      ],
+      "code": "__int64 __fastcall findBracketsEnd_TString_const(const TString *a1)\n{\n  signed __int8 v2; // w0\n  signed __int8 v3; // w23\n  signed __int8 v4; // w24\n  __int64 result; // x0\n  int v6; // w21\n  int v7; // w19\n  int v8; // w20\n\n  if ( *(_QWORD *)a1 && **(int **)a1 > 0 )\n  {\n    plt_TString_operator_index_int(a1, 1);\n    v3 = v2;\n    if ( v2 == 40 )\n    {\n      v4 = 41;\n    }\n    else if ( v2 == 91 )\n    {\n      v4 = 93;\n    }\n    else\n    {\n      v4 = 125;\n    }\n    LODWORD(result) = 1;\n    v6 = 1;\n    while ( 1 )\n    {\n      while ( 1 )\n      {\n        v7 = result + 1;\n        v8 = plt_indexOf_int_signed_char_TString_const((int)result + 1, v3, a1);\n        result = plt_indexOf_int_signed_char_TString_const(v7, v4, a1);\n        if ( v8 <= 0 || v8 >= (int)result && (_DWORD)result )\n          break;\n        ++v6;\n        LODWORD(result) = v8;\n      }\n      if ( (int)result <= 0 )\n        break;\n      if ( !--v6 )\n        return result;\n    }\n  }\n  return 0;\n}\n",
+      "code_bytes": 970,
+      "code_sha256": "6a3eb62fa8d25179c1f5b6f681dff57d7ba34ee6af2bc5318c709225311531d4",
+      "function_end": "0x183414",
+      "function_start": "0x183320",
+      "name": "findBracketsEnd_TString_const",
+      "role": "replacement bracket scan",
+      "string_literals": []
+    }
+  ],
+  "interpretation": [
+    "The outer coded-file reader bounds ordinary copies to the in-memory stream, but trusts a signed 32-bit interpretation of the stored length and does not check allocation failure.",
+    "The encrypted level loader checks the server identity, signature, and accepted version before decoding the board, but fixed-field read counts are ignored and the additive checksum is not an authenticity mechanism.",
+    "The normal board caller uses a fixed 13-bit decoder with a 4096-cell destination allocated as 8192 bytes. Its run-length branches stop at the destination capacity.",
+    "The layer count is clamped to 1 through 100. The link and sign readers have no comparable total record budget, and signs are processed through expansion helpers until end of stream.",
+    "NPC and chest object creation is gated off by the boolean used in the normal encrypted-level loader. Their alternative branches still need budgets if other callers enable them.",
+    "The report identifies denial-of-service and parser-robustness risks from static evidence. It does not claim remote exploitability without tracing the complete file-download path or running a disposable fuzz harness."
+  ],
+  "manual_reviews": [
+    {
+      "address": "0xe62ec",
+      "classification": "declared-length-availability-risk",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The four-byte outer length is loaded into a 32-bit W register and the check at 0xe63a8 uses signed B.GE after adding three; there is no explicit lower bound for the stored value.",
+        "The code subtracts eight in 32-bit arithmetic and passes the result to TString_setSize_int_bool without checking the allocator result.",
+        "For a stored value of 0x80000000, the W-register subtraction produces 0x7ffffff8. TString_setSize then adds nine in W arithmetic, sign-extends the wrapped value for malloc, and immediately dereferences the returned pointer without an allocation-failure check.",
+        "Ciphertext and checksum reads use TStream_read_void_int, which clamps to the available bytes, but their return values are ignored. The decoded output is accepted only after an eight-byte additive column checksum, not a cryptographic authenticity check."
+      ],
+      "function": "TEncryption_loadCodedFile_TString_const",
+      "interpretation": "A small malformed cached file can therefore drive a very large allocation request or a null dereference before the level header is checked. This is a confirmed static denial-of-service path for a locally writable cache. Reaching it through a game-server response depends on the file-download and cache path, but the normal level flow does load server-supplied .code data.",
+      "severity": "availability-risk"
+    },
+    {
+      "address": "0x1aa198",
+      "classification": "unchecked-short-header-reads",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The loader ignores the return value of fixed reads for the GWEBL001 marker, one-byte lengths, the two-byte signature, five-byte modification time, and eight-byte version.",
+        "TStream_read_void_int returns a short count at end of stream, while the loader immediately compares or appends the requested byte count. The destination arrays are fixed at eight and 256 bytes, so the visible issue is stale or uninitialized stack data and parser-state confusion rather than a direct copy past those arrays.",
+        "Length bytes are interpreted as byte minus 32. A negative result is ignored by the stream and string helpers, while positive values are bounded by the 256-byte temporary buffer.",
+        "The server identity and signature checks happen before board decoding, but the outer coded-file checksum is additive and does not authenticate the level contents."
+      ],
+      "function": "TServerLevel_LoadEncrypted_void",
+      "interpretation": "Truncated containers should be rejected on each field read. The current code often reaches a later comparison with stale stack bytes, which can cause inconsistent rejection or accidental continuation. A reproducer should vary truncation points and stack history before assigning a code-execution severity.",
+      "severity": "parser-robustness-risk"
+    },
+    {
+      "address": "0xf0684",
+      "classification": "bounded-short-read-helper",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "Negative requested lengths return zero.",
+        "Positive reads are capped to the available stream length and return the actual count copied.",
+        "The helper does not report an error separately, so callers must compare the return count before consuming a fixed-size field."
+      ],
+      "function": "TStream_read_void_int",
+      "interpretation": "The helper itself prevents a requested read from overrunning the in-memory stream. Its callers can still mishandle truncated input when they ignore the returned count.",
+      "severity": "context-dependent"
+    },
+    {
+      "address": "0xf11bc",
+      "classification": "allocation-failure-and-size-overflow-risk",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The append length is an int and the new allocation size is formed with 32-bit ADD instructions before sign extension to malloc.",
+        "The realloc and malloc results are stored and then dereferenced without null checks.",
+        "Normal one-byte header fields and the fixed formatter wrappers stay far below this boundary, while line readers can grow a string in proportion to an entire input line."
+      ],
+      "function": "TString_addbuffer_char_const_int",
+      "interpretation": "This is primarily an out-of-memory and integer-wrap concern for oversized level data. It is not evidence that ordinary short level records overflow the string object.",
+      "severity": "availability-risk"
+    },
+    {
+      "address": "0xf0ce0",
+      "classification": "unbounded-line-allocation",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The reader scans until LF or the end of the in-memory stream and appends the entire line to a dynamic TString.",
+        "It removes a preceding CR when a line terminator is found, but has no maximum line length and no explicit malformed-line error.",
+        "An unterminated final line is returned as a valid nonempty string when the stream ends."
+      ],
+      "function": "TStream_readLine_void",
+      "interpretation": "The outer coded-file length still limits the total input, but a large line can consume a large allocation and make every entity reader process attacker-sized text. A modern parser should set both per-line and total-object budgets.",
+      "severity": "availability-risk"
+    },
+    {
+      "address": "0x22ed90",
+      "classification": "bounded-board-decoder",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The normal caller passes a fixed 13-bit value. The call-site immediate is byte_9 + 4, and IDA defines byte_9 as the constant address value 9, giving 13.",
+        "The decoder writes at most 4096 cells. Literal and run-length branches stop when the cell counter reaches 4096.",
+        "TTilesLayer allocates exactly 0x2000 bytes, or 4096 16-bit cells, for each board.",
+        "The decoder returns false when the stream is exhausted before the cell counter reaches 4096."
+      ],
+      "function": "TLevelLoader_loadBoard_TStream_short_int_bool",
+      "interpretation": "No board-buffer overrun is visible for the normal fixed caller. The function would need a separate audit if another caller supplied an unchecked bit depth, but the current IDA xrefs do not show one.",
+      "severity": "reviewed-safe-bound"
+    },
+    {
+      "address": "0x1aa0a0",
+      "classification": "clamped-layer-count",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "Layer counts at or below zero are changed to one and counts above 100 are changed to 100.",
+        "Each new TTilesLayer allocates a 0x2000-byte board plus its object and list state.",
+        "The function also applies the count across the linked-level chain when one is present."
+      ],
+      "function": "TServerLevel_setTileLayerCount_int",
+      "interpretation": "The one-byte network field cannot directly request an unbounded layer count, but the maximum still represents roughly 800 KiB of board storage per level before object and list overhead. The linked-level chain deserves a separate total-budget check.",
+      "severity": "resource-amplification"
+    },
+    {
+      "address": "0x1a2924",
+      "classification": "unbounded-link-list",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The reader accepts records until a line exactly equal to #, allocates 0xA8 bytes for every accepted line, tokenizes it, and appends the object to the level list.",
+        "There is no record count, line-length limit, or total link budget in this function.",
+        "The link tokenizer requires more than four fields before assigning the object, but malformed short lines still pass through dynamic string and token-list work."
+      ],
+      "function": "TServerLevel_readLinks_TStream",
+      "interpretation": "A syntactically valid but very large link section can consume memory and CPU. The impact is a denial of service unless another caller gives the records a more privileged effect.",
+      "severity": "availability-risk"
+    },
+    {
+      "address": "0x1a2f08",
+      "classification": "unbounded-sign-list-and-expansion",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The normal loader calls this reader without a boolean gate. It allocates a 0xF8-byte sign for each line longer than one byte and continues until the stream ends or readLine returns empty.",
+        "Unlike the link reader, it does not stop on a # sentinel.",
+        "Each sign passes through getSignText and replaceKeyCodes, which can expand text and repeatedly rebuild the string when several #K(...) sequences are present.",
+        "The coordinate accessor returns a safe fallback byte for short records, but there is no count or text-length budget."
+      ],
+      "function": "TServerLevel_readSigns_TStream",
+      "interpretation": "Signs are the clearest normal-path resource-exhaustion surface in the level parser. A hostile level can supply many records or expensive key-code text without reaching an obvious fixed-buffer overwrite.",
+      "severity": "availability-risk"
+    },
+    {
+      "address": "0x1a2a9c",
+      "classification": "normal-path-discard-with-gated-allocation",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The normal encrypted-level loader passes boolean zero, so this reader consumes and clears lines without allocating NPC objects.",
+        "When its boolean is true and the global client pointer is null, it allocates 0x4D0 bytes per record, reads short fields through the bounded string accessor, and calls loadImage with the parsed image name.",
+        "No record count or line-length limit is visible."
+      ],
+      "function": "TServerLevel_readNPCs_TStream_bool",
+      "interpretation": "The object-building branch is not active in the stock LoadEncrypted callsite reviewed here. It remains a gated resource and image-loading risk for other callers or modified modes.",
+      "severity": "context-dependent"
+    },
+    {
+      "address": "0x1a2cbc",
+      "classification": "normal-path-discard-with-gated-allocation",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The normal encrypted-level loader passes boolean zero, so this reader consumes and clears lines without allocating chest objects.",
+        "When enabled, it allocates 0x108 bytes per record, clamps the first two coordinates to 0 through 62, and reads additional byte fields without a count or record budget.",
+        "Short coordinate fields use the bounded string accessor and therefore receive its fallback byte rather than an obvious out-of-bounds read."
+      ],
+      "function": "TServerLevel_readChests_TStream_bool",
+      "interpretation": "The stock level-load path does not build these objects. Other callers should still impose record and line budgets before enabling the branch.",
+      "severity": "context-dependent"
+    },
+    {
+      "address": "0x1a29d0",
+      "classification": "unbounded-line-consumer",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The reader consumes one byte at a time into a dynamic TString until LF or end of stream.",
+        "It stops or returns on short records based on the line length and second byte, but it does not impose a line-length limit.",
+        "This function does not allocate a baddie object in the reviewed body, so its direct impact is dynamic-string work rather than per-record object growth."
+      ],
+      "function": "TServerLevel_readBaddies_TStream_bool",
+      "interpretation": "The missing line budget is still a denial-of-service concern for oversized input, but the reviewed function has less object amplification than the link and sign readers.",
+      "severity": "parser-robustness-risk"
+    },
+    {
+      "address": "0x183414",
+      "classification": "repeated-rebuild-complexity",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The function searches for #K(, finds a matching bracket, parses the number, constructs prefix and suffix strings, and assigns a rebuilt result in a loop.",
+        "Each replacement can copy most of the current string, so a long sign containing many replacement sequences can cause repeated whole-string allocation and copying.",
+        "Unmatched brackets stop the loop, and the numeric conversion returns a fallback value when parsing fails."
+      ],
+      "function": "replaceKeyCodes_TString_const",
+      "interpretation": "This is an algorithmic complexity concern layered on top of the sign reader. It is not a direct fixed-buffer overwrite in the reviewed code.",
+      "severity": "availability-risk"
+    }
+  ],
+  "network_contacted": false,
+  "schema": "libqplay.original-level-parser-review.v1",
+  "scope": "read-only Hex-Rays export of original 1.8 ARM64 encrypted level and line-oriented entity parsing",
+  "validated_constants": {
+    "board_bit_depth_at_normal_callsite": 13,
+    "board_bytes": 8192,
+    "board_cells": 4096,
+    "encoded_string_max_bytes": 223,
+    "gwebl_header_bytes": 8,
+    "maximum_tile_layers": 100,
+    "minimum_tile_layers": 1,
+    "tile_layer_allocation_bytes": 8192
+  }
+}

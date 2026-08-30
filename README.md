@@ -71,6 +71,8 @@ account authentication remain open.
   IDA export for the connector-to-game socket lifecycle.
 * `artifacts/original_libc_callsite_review_20260830.json` records the direct
   libc call sites and focused buffer review for the original ARM64 library.
+* `artifacts/original_level_parser_review_20260830.json` records the encrypted
+  level, board, and line-oriented entity parser review.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.
 * `symbols/libqplay.symbols.json` is the machine-readable equivalent.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.
