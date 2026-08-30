@@ -1,0 +1,2665 @@
+{
+  "artifact": "original_libc_callsite_review_20260830",
+  "database": {
+    "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "imagebase": "0x0",
+    "path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
+  },
+  "import_targets": [
+    {
+      "address": "0xd5cb0",
+      "callers": [
+        {
+          "caller": "0x196fe0",
+          "caller_name": "TSetup_startExeReplacer_TString_const",
+          "callsite": "0x197014",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x196fe0",
+          "caller_name": "TSetup_startExeReplacer_TString_const",
+          "callsite": "0x197064",
+          "xref_type": 17
+        }
+      ],
+      "ida_name": ".chmod",
+      "name": "chmod"
+    },
+    {
+      "address": "0xd8da0",
+      "callers": [
+        {
+          "caller": "0x206bd8",
+          "caller_name": "TSocketConnection_connectSocket_TString_const_int",
+          "callsite": "0x206cb8",
+          "xref_type": 17
+        }
+      ],
+      "ida_name": ".connect",
+      "name": "connect"
+    },
+    {
+      "address": "0xd2940",
+      "callers": [
+        {
+          "caller": "0x196fe0",
+          "caller_name": "TSetup_startExeReplacer_TString_const",
+          "callsite": "0x197130",
+          "xref_type": 17
+        }
+      ],
+      "ida_name": ".execvp",
+      "name": "execvp"
+    },
+    {
+      "address": "0xdafc0",
+      "callers": [
+        {
+          "caller": "0x196fe0",
+          "caller_name": "TSetup_startExeReplacer_TString_const",
+          "callsite": "0x19701c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x196fe0",
+          "caller_name": "TSetup_startExeReplacer_TString_const",
+          "callsite": "0x19706c",
+          "xref_type": 17
+        }
+      ],
+      "ida_name": ".fork",
+      "name": "fork"
+    },
+    {
+      "address": "0xd2340",
+      "callers": [
+        {
+          "caller": "0xe62ec",
+          "caller_name": "TEncryption_loadCodedFile_TString_const",
+          "callsite": "0xe6498",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xecc4c",
+          "caller_name": "TList_Assign_TList",
+          "callsite": "0xecc90",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xeccc0",
+          "caller_name": "TList_AddList_TList_int_int",
+          "callsite": "0xecd3c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xf0564",
+          "caller_name": "sub_F0564",
+          "callsite": "0xf05c4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xf0684",
+          "caller_name": "TStream_read_void_int",
+          "callsite": "0xf06e8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xf0fd8",
+          "caller_name": "TString_makeUnique_void",
+          "callsite": "0xf101c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xf11bc",
+          "caller_name": "TString_addbuffer_char_const_int",
+          "callsite": "0xf1228",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xf6408",
+          "caller_name": "TStringList_toString_void",
+          "callsite": "0xf64c0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xf6408",
+          "caller_name": "TStringList_toString_void",
+          "callsite": "0xf6518",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x109758",
+          "caller_name": "TPixelBufferOpenGL_updateTexture_int_int_int_int",
+          "callsite": "0x1098c4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x10d038",
+          "caller_name": "TFontCharInfo_setData_TFont_uchar_const_int_int_int_int_int_int",
+          "callsite": "0x10d130",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x10d038",
+          "caller_name": "TFontCharInfo_setData_TFont_uchar_const_int_int_int_int_int_int",
+          "callsite": "0x10d1c0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x10d4cc",
+          "caller_name": "TFont_generateFontBitmap_void",
+          "callsite": "0x10d7f4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x112bf8",
+          "caller_name": "TBitmap_TBitmap_TBitmap_const",
+          "callsite": "0x112c50",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x1140b0",
+          "caller_name": "TBitmap_allocateBitmap_uint_uint_bool_TBitmap_BitmapFormat",
+          "callsite": "0x114218",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x1143f8",
+          "caller_name": "TBitmap_copyAnimationStep_TBitmap_AnimationStep_bool",
+          "callsite": "0x114628",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x11583c",
+          "caller_name": "TBitmapLoader_createPaddedBitmap_TBitmap_bool_int_bool_bool",
+          "callsite": "0x115a9c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x11583c",
+          "caller_name": "TBitmapLoader_createPaddedBitmap_TBitmap_bool_int_bool_bool",
+          "callsite": "0x115d80",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x1166f8",
+          "caller_name": "TBitmap_writeMSBmp_TStream",
+          "callsite": "0x116eac",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x116fa0",
+          "caller_name": "TBitmap_readPNG_TStream",
+          "callsite": "0x1170f0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x11720c",
+          "caller_name": "TBitmap_writePNG_TStream_int",
+          "callsite": "0x117414",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x11b7a0",
+          "caller_name": "TMNGAnimation_decode_TMNGAnimationStep",
+          "callsite": "0x11d410",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x1206e0",
+          "caller_name": "TPalette_setPalette_TPalette_const",
+          "callsite": "0x120708",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x120774",
+          "caller_name": "TPalette_setPaletteType_TPalette_PaletteType",
+          "callsite": "0x1207e0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x1209d8",
+          "caller_name": "TPixelOperation_drawImage_uchar_int_int_int_int_int_int_uchar_const_int_int_float_float_float_float_TPalette_const_bool_bool_int_ColorF_const",
+          "callsite": "0x12d510",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x150a38",
+          "caller_name": "TBitmap_readGIF_TStream",
+          "callsite": "0x150d50",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x152110",
+          "caller_name": "TBitmap_readTGA_TStream",
+          "callsite": "0x1521bc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x1771d8",
+          "caller_name": "TPlayer_doServerModifies2_TServerLevel_TString_const_bool",
+          "callsite": "0x177238",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x1772c0",
+          "caller_name": "TPlayer_doServerModifies3_TServerLevel_TString_const_bool",
+          "callsite": "0x177460",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x1772c0",
+          "caller_name": "TPlayer_doServerModifies3_TServerLevel_TString_const_bool",
+          "callsite": "0x17755c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x1bcf68",
+          "caller_name": "GuiMLTextCtrl_getText_char_uint",
+          "callsite": "0x1bcf8c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x1bd8d4",
+          "caller_name": "GuiMLTextCtrl_insertText_char_const_uint_uint_bool_bool_bool",
+          "callsite": "0x1bda0c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x1be354",
+          "caller_name": "GuiMLTextCtrl_setText_char_const_uint",
+          "callsite": "0x1be444",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x1f1b34",
+          "caller_name": "TClient_setOutDataHandlers_TClient_int_int",
+          "callsite": "0x1f1b80",
+          "xref_type": 19
+        },
+        {
+          "caller": "0x24733c",
+          "caller_name": "deskey_uchar_const_short_ulong",
+          "callsite": "0x247590",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x24a624",
+          "caller_name": "unzOpen2",
+          "callsite": "0x24ac98",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x24afa8",
+          "caller_name": "unzLocateFile",
+          "callsite": "0x24b008",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x24afa8",
+          "caller_name": "unzLocateFile",
+          "callsite": "0x24b064",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x24e470",
+          "caller_name": "FT_Outline_Copy",
+          "callsite": "0x24e4d0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x24e470",
+          "caller_name": "FT_Outline_Copy",
+          "callsite": "0x24e4e0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x24e470",
+          "caller_name": "FT_Outline_Copy",
+          "callsite": "0x24e4f4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x24f0dc",
+          "caller_name": "FT_Stream_ReadAt",
+          "callsite": "0x24f17c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x24f198",
+          "caller_name": "FT_Stream_TryRead",
+          "callsite": "0x24f214",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x251200",
+          "caller_name": "FT_Stream_ReadFields",
+          "callsite": "0x251428",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x251860",
+          "caller_name": "FT_GlyphLoader_CopyPoints",
+          "callsite": "0x2518d4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x251860",
+          "caller_name": "FT_GlyphLoader_CopyPoints",
+          "callsite": "0x2518e4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x251860",
+          "caller_name": "FT_GlyphLoader_CopyPoints",
+          "callsite": "0x2518f4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x251860",
+          "caller_name": "FT_GlyphLoader_CopyPoints",
+          "callsite": "0x251914",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x251860",
+          "caller_name": "FT_GlyphLoader_CopyPoints",
+          "callsite": "0x251924",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x25216c",
+          "caller_name": "ft_mem_dup",
+          "callsite": "0x2521ac",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x256b7c",
+          "caller_name": "sub_256B7C",
+          "callsite": "0x256ba8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x25b7dc",
+          "caller_name": "sub_25B7DC",
+          "callsite": "0x25b9e0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x25b7dc",
+          "caller_name": "sub_25B7DC",
+          "callsite": "0x25b9f0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x25b7dc",
+          "caller_name": "sub_25B7DC",
+          "callsite": "0x25ba0c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x25f044",
+          "caller_name": "TT_Load_Simple_Glyph",
+          "callsite": "0x25f234",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x262db4",
+          "caller_name": "sub_262DB4",
+          "callsite": "0x263378",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x262db4",
+          "caller_name": "sub_262DB4",
+          "callsite": "0x263484",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x262db4",
+          "caller_name": "sub_262DB4",
+          "callsite": "0x2634b0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x262db4",
+          "caller_name": "sub_262DB4",
+          "callsite": "0x2634c0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x262db4",
+          "caller_name": "sub_262DB4",
+          "callsite": "0x2634d0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x262db4",
+          "caller_name": "sub_262DB4",
+          "callsite": "0x2635b4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x262db4",
+          "caller_name": "sub_262DB4",
+          "callsite": "0x263a9c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x262db4",
+          "caller_name": "sub_262DB4",
+          "callsite": "0x263ab4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x262db4",
+          "caller_name": "sub_262DB4",
+          "callsite": "0x263ad8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x262db4",
+          "caller_name": "sub_262DB4",
+          "callsite": "0x263ba0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x262db4",
+          "caller_name": "sub_262DB4",
+          "callsite": "0x263bcc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x262db4",
+          "caller_name": "sub_262DB4",
+          "callsite": "0x263bdc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x262db4",
+          "caller_name": "sub_262DB4",
+          "callsite": "0x263bec",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x263d1c",
+          "caller_name": "sub_263D1C",
+          "callsite": "0x264bc0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x263d1c",
+          "caller_name": "sub_263D1C",
+          "callsite": "0x264bd0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x263d1c",
+          "caller_name": "sub_263D1C",
+          "callsite": "0x264c20",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x263d1c",
+          "caller_name": "sub_263D1C",
+          "callsite": "0x264c50",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x263d1c",
+          "caller_name": "sub_263D1C",
+          "callsite": "0x264cc0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x263d1c",
+          "caller_name": "sub_263D1C",
+          "callsite": "0x264cd0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x263d1c",
+          "caller_name": "sub_263D1C",
+          "callsite": "0x264ce0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x268f44",
+          "caller_name": "sub_268F44",
+          "callsite": "0x269084",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x268f44",
+          "caller_name": "sub_268F44",
+          "callsite": "0x269468",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x268f44",
+          "caller_name": "sub_268F44",
+          "callsite": "0x26947c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x268f44",
+          "caller_name": "sub_268F44",
+          "callsite": "0x26948c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2715bc",
+          "caller_name": "FT_Bitmap_Copy",
+          "callsite": "0x271684",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2716e4",
+          "caller_name": "FT_Bitmap_Convert",
+          "callsite": "0x271a1c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x271fb0",
+          "caller_name": "FT_Bitmap_Embolden",
+          "callsite": "0x272894",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x271fb0",
+          "caller_name": "FT_Bitmap_Embolden",
+          "callsite": "0x272948",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x27fd34",
+          "caller_name": "sub_27FD34",
+          "callsite": "0x2800a0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x27fd34",
+          "caller_name": "sub_27FD34",
+          "callsite": "0x280244",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x27fd34",
+          "caller_name": "sub_27FD34",
+          "callsite": "0x280278",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x27fd34",
+          "caller_name": "sub_27FD34",
+          "callsite": "0x2805fc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2806e8",
+          "caller_name": "sub_2806E8",
+          "callsite": "0x280848",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2806e8",
+          "caller_name": "sub_2806E8",
+          "callsite": "0x2809a8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2806e8",
+          "caller_name": "sub_2806E8",
+          "callsite": "0x2809dc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2806e8",
+          "caller_name": "sub_2806E8",
+          "callsite": "0x280c70",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2806e8",
+          "caller_name": "sub_2806E8",
+          "callsite": "0x280cf8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x280d70",
+          "caller_name": "sub_280D70",
+          "callsite": "0x2810e4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x280d70",
+          "caller_name": "sub_280D70",
+          "callsite": "0x28111c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x280d70",
+          "caller_name": "sub_280D70",
+          "callsite": "0x281244",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x280d70",
+          "caller_name": "sub_280D70",
+          "callsite": "0x281460",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x280d70",
+          "caller_name": "sub_280D70",
+          "callsite": "0x2817dc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x281898",
+          "caller_name": "deflateSetDictionary",
+          "callsite": "0x281900",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x281cb4",
+          "caller_name": "deflate",
+          "callsite": "0x281edc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x281cb4",
+          "caller_name": "deflate",
+          "callsite": "0x282044",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x281cb4",
+          "caller_name": "deflate",
+          "callsite": "0x2820fc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x281cb4",
+          "caller_name": "deflate",
+          "callsite": "0x282184",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x281cb4",
+          "caller_name": "deflate",
+          "callsite": "0x282664",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x281cb4",
+          "caller_name": "deflate",
+          "callsite": "0x282748",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x281cb4",
+          "caller_name": "deflate",
+          "callsite": "0x282908",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x281cb4",
+          "caller_name": "deflate",
+          "callsite": "0x2829e8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x281cb4",
+          "caller_name": "deflate",
+          "callsite": "0x282b60",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x281cb4",
+          "caller_name": "deflate",
+          "callsite": "0x282e34",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x281cb4",
+          "caller_name": "deflate",
+          "callsite": "0x282e6c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x281cb4",
+          "caller_name": "deflate",
+          "callsite": "0x282ed8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x281cb4",
+          "caller_name": "deflate",
+          "callsite": "0x2832c0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x281cb4",
+          "caller_name": "deflate",
+          "callsite": "0x283710",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x283d30",
+          "caller_name": "deflateCopy",
+          "callsite": "0x283d58",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x283d30",
+          "caller_name": "deflateCopy",
+          "callsite": "0x283d84",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x283d30",
+          "caller_name": "deflateCopy",
+          "callsite": "0x283e28",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x283d30",
+          "caller_name": "deflateCopy",
+          "callsite": "0x283e3c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x283d30",
+          "caller_name": "deflateCopy",
+          "callsite": "0x283e50",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x283d30",
+          "caller_name": "deflateCopy",
+          "callsite": "0x283e60",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x284198",
+          "caller_name": "inflate",
+          "callsite": "0x284930",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x284198",
+          "caller_name": "inflate",
+          "callsite": "0x284b84",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x284198",
+          "caller_name": "inflate",
+          "callsite": "0x2850ac",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x284198",
+          "caller_name": "inflate",
+          "callsite": "0x28540c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x284198",
+          "caller_name": "inflate",
+          "callsite": "0x285448",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x286328",
+          "caller_name": "inflateSetDictionary",
+          "callsite": "0x2863c8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x286328",
+          "caller_name": "inflateSetDictionary",
+          "callsite": "0x286420",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x286328",
+          "caller_name": "inflateSetDictionary",
+          "callsite": "0x2864a8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x286328",
+          "caller_name": "inflateSetDictionary",
+          "callsite": "0x2864c4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x286328",
+          "caller_name": "inflateSetDictionary",
+          "callsite": "0x2864f4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x286850",
+          "caller_name": "inflateCopy",
+          "callsite": "0x2868d8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x286850",
+          "caller_name": "inflateCopy",
+          "callsite": "0x2868e8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x286850",
+          "caller_name": "inflateCopy",
+          "callsite": "0x286928",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x28beb0",
+          "caller_name": "sub_28BEB0",
+          "callsite": "0x28c10c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x28beb0",
+          "caller_name": "sub_28BEB0",
+          "callsite": "0x28c20c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x28beb0",
+          "caller_name": "sub_28BEB0",
+          "callsite": "0x28c288",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x28beb0",
+          "caller_name": "sub_28BEB0",
+          "callsite": "0x28c2d8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x28c378",
+          "caller_name": "sub_28C378",
+          "callsite": "0x28c880",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x28c378",
+          "caller_name": "sub_28C378",
+          "callsite": "0x28c9c8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x28c378",
+          "caller_name": "sub_28C378",
+          "callsite": "0x28ca18",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x28c378",
+          "caller_name": "sub_28C378",
+          "callsite": "0x28ca68",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x28d424",
+          "caller_name": "sub_28D424",
+          "callsite": "0x28d6f8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x28f8c0",
+          "caller_name": "jinit_master_decompress_jpeg_decompress_struct",
+          "callsite": "0x28fa70",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x297e68",
+          "caller_name": "jcopy_sample_rows_uchar_int_uchar_int_int_uint",
+          "callsite": "0x297ea8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x297ec8",
+          "caller_name": "jcopy_block_row_short_64_short_64_uint",
+          "callsite": "0x297ed8",
+          "xref_type": 19
+        },
+        {
+          "caller": "0x29bdd8",
+          "caller_name": "jpeg_set_defaults",
+          "callsite": "0x29bebc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x29bdd8",
+          "caller_name": "jpeg_set_defaults",
+          "callsite": "0x29bf50",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x29bdd8",
+          "caller_name": "jpeg_set_defaults",
+          "callsite": "0x29bfe8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x29bdd8",
+          "caller_name": "jpeg_set_defaults",
+          "callsite": "0x29c080",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2aaa44",
+          "caller_name": "jinit_c_prep_controller_jpeg_compress_struct_int",
+          "callsite": "0x2aacc0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2ae9f4",
+          "caller_name": "GifMakeMapObject",
+          "callsite": "0x2aea6c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2af000",
+          "caller_name": "GifAddExtensionBlock",
+          "callsite": "0x2af08c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2af1dc",
+          "caller_name": "GifMakeSavedImage",
+          "callsite": "0x2af2bc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2af1dc",
+          "caller_name": "GifMakeSavedImage",
+          "callsite": "0x2af2f0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2af86c",
+          "caller_name": "yajl_buf_append_yajl_buf_t_void_const_ulong",
+          "callsite": "0x2af900",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2b3c64",
+          "caller_name": "sub_2B3C64",
+          "callsite": "0x2b3eec",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2b3c64",
+          "caller_name": "sub_2B3C64",
+          "callsite": "0x2b3f44",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2b3c64",
+          "caller_name": "sub_2B3C64",
+          "callsite": "0x2b4204",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2b56cc",
+          "caller_name": "CyaInt_DecodeToKey_CyaInt_DecodedCert_int",
+          "callsite": "0x2b5b34",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2b56cc",
+          "caller_name": "CyaInt_DecodeToKey_CyaInt_DecodedCert_int",
+          "callsite": "0x2b5cdc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2b56cc",
+          "caller_name": "CyaInt_DecodeToKey_CyaInt_DecodedCert_int",
+          "callsite": "0x2b5d74",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2b60dc",
+          "caller_name": "CyaInt_EncodeSignature_uchar_uchar_const_uint_int",
+          "callsite": "0x2b611c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2b60dc",
+          "caller_name": "CyaInt_EncodeSignature_uchar_uchar_const_uint_int",
+          "callsite": "0x2b6264",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2b60dc",
+          "caller_name": "CyaInt_EncodeSignature_uchar_uchar_const_uint_int",
+          "callsite": "0x2b6290",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2b60dc",
+          "caller_name": "CyaInt_EncodeSignature_uchar_uchar_const_uint_int",
+          "callsite": "0x2b62a0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2b60dc",
+          "caller_name": "CyaInt_EncodeSignature_uchar_uchar_const_uint_int",
+          "callsite": "0x2b62b4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2b6384",
+          "caller_name": "sub_2B6384",
+          "callsite": "0x2b648c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2b65f8",
+          "caller_name": "CyaInt_ParseCertRelative_CyaInt_DecodedCert_int_int_void",
+          "callsite": "0x2b6df4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2b74ac",
+          "caller_name": "CyaInt_ParseCert_CyaInt_DecodedCert_int_int_void",
+          "callsite": "0x2b74f8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2b74ac",
+          "caller_name": "CyaInt_ParseCert_CyaInt_DecodedCert_int_int_void",
+          "callsite": "0x2b7558",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2b824c",
+          "caller_name": "AesSetKey_Aes_uchar_const_uint_uchar_const_int",
+          "callsite": "0x2b8298",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2be70c",
+          "caller_name": "Md5Update_Md5_uchar_const_uint",
+          "callsite": "0x2be768",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2bf528",
+          "caller_name": "CyaInt_RsaPublicEncrypt_uchar_const_uint_uchar_uint_CyaInt_RsaKey_RNG",
+          "callsite": "0x2bf7ec",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2bfbf0",
+          "caller_name": "CyaInt_RsaPrivateDecrypt_uchar_const_uint_uchar_uint_CyaInt_RsaKey",
+          "callsite": "0x2bfc34",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2bfbf0",
+          "caller_name": "CyaInt_RsaPrivateDecrypt_uchar_const_uint_uchar_uint_CyaInt_RsaKey",
+          "callsite": "0x2bfca0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2bffa4",
+          "caller_name": "CyaInt_RsaSSL_Verify_uchar_const_uint_uchar_uint_CyaInt_RsaKey",
+          "callsite": "0x2bffe8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2bffa4",
+          "caller_name": "CyaInt_RsaSSL_Verify_uchar_const_uint_uchar_uint_CyaInt_RsaKey",
+          "callsite": "0x2c0054",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c0064",
+          "caller_name": "CyaInt_RsaSSL_Sign_uchar_const_uint_uchar_uint_CyaInt_RsaKey_RNG",
+          "callsite": "0x2c0138",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c1684",
+          "caller_name": "ShaUpdate_Sha_uchar_const_uint",
+          "callsite": "0x2c16e4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c3414",
+          "caller_name": "Sha256Update_Sha256_uchar_const_uint",
+          "callsite": "0x2c3464",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c3a3c",
+          "caller_name": "CyaInt_CyaSSL_SetTmpDH_CyaInt_CYASSL_uchar_const_int_uchar_const_int",
+          "callsite": "0x2c3aec",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c3a3c",
+          "caller_name": "CyaInt_CyaSSL_SetTmpDH_CyaInt_CYASSL_uchar_const_int_uchar_const_int",
+          "callsite": "0x2c3afc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c47e0",
+          "caller_name": "sub_2C47E0",
+          "callsite": "0x2c487c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c47e0",
+          "caller_name": "sub_2C47E0",
+          "callsite": "0x2c48d4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c47e0",
+          "caller_name": "sub_2C47E0",
+          "callsite": "0x2c4c10",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c5e54",
+          "caller_name": "CyaInt_CyaSSL_writev_CyaInt_CYASSL_iovec_const_int",
+          "callsite": "0x2c5fb0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c61e0",
+          "caller_name": "CyaInt_CyaSSL_X509_NAME_oneline_CyaInt_CYASSL_X509_NAME_char_int",
+          "callsite": "0x2c6234",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c6514",
+          "caller_name": "sub_2C6514",
+          "callsite": "0x2c6598",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c6514",
+          "caller_name": "sub_2C6514",
+          "callsite": "0x2c65b0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c6514",
+          "caller_name": "sub_2C6514",
+          "callsite": "0x2c6658",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c6514",
+          "caller_name": "sub_2C6514",
+          "callsite": "0x2c66bc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c6514",
+          "caller_name": "sub_2C6514",
+          "callsite": "0x2c67a4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c6514",
+          "caller_name": "sub_2C6514",
+          "callsite": "0x2c67c0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c6514",
+          "caller_name": "sub_2C6514",
+          "callsite": "0x2c67d4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c6514",
+          "caller_name": "sub_2C6514",
+          "callsite": "0x2c67f0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c6514",
+          "caller_name": "sub_2C6514",
+          "callsite": "0x2c6880",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c6514",
+          "caller_name": "sub_2C6514",
+          "callsite": "0x2c6a7c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c7074",
+          "caller_name": "CyaInt_DeriveTlsKeys_CyaInt_CYASSL",
+          "callsite": "0x2c71d8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c7074",
+          "caller_name": "CyaInt_DeriveTlsKeys_CyaInt_CYASSL",
+          "callsite": "0x2c723c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c7074",
+          "caller_name": "CyaInt_DeriveTlsKeys_CyaInt_CYASSL",
+          "callsite": "0x2c7478",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c7074",
+          "caller_name": "CyaInt_DeriveTlsKeys_CyaInt_CYASSL",
+          "callsite": "0x2c75f4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c8024",
+          "caller_name": "HmacSetKey_Hmac_int_uchar_const_uint",
+          "callsite": "0x2c80a4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c8a20",
+          "caller_name": "sub_2C8A20",
+          "callsite": "0x2c8a60",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c8a20",
+          "caller_name": "sub_2C8A20",
+          "callsite": "0x2c8abc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c8a20",
+          "caller_name": "sub_2C8A20",
+          "callsite": "0x2c8ae4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c8a20",
+          "caller_name": "sub_2C8A20",
+          "callsite": "0x2c8b44",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c90cc",
+          "caller_name": "CyaInt_ShrinkInputBuffer_CyaInt_CYASSL_int",
+          "callsite": "0x2c9174",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c9434",
+          "caller_name": "CyaInt_GrowInputBuffer_CyaInt_CYASSL_int_int",
+          "callsite": "0x2c9500",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c9510",
+          "caller_name": "CyaInt_CheckAvalaibleSize_CyaInt_CYASSL_int",
+          "callsite": "0x2c9604",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c980c",
+          "caller_name": "CyaInt_SendFinished_CyaInt_CYASSL",
+          "callsite": "0x2c98e8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c980c",
+          "caller_name": "CyaInt_SendFinished_CyaInt_CYASSL",
+          "callsite": "0x2c9944",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c980c",
+          "caller_name": "CyaInt_SendFinished_CyaInt_CYASSL",
+          "callsite": "0x2c9a78",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c980c",
+          "caller_name": "CyaInt_SendFinished_CyaInt_CYASSL",
+          "callsite": "0x2c9adc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c980c",
+          "caller_name": "CyaInt_SendFinished_CyaInt_CYASSL",
+          "callsite": "0x2c9b64",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c980c",
+          "caller_name": "CyaInt_SendFinished_CyaInt_CYASSL",
+          "callsite": "0x2c9ce4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c9d90",
+          "caller_name": "CyaInt_SendCertificate_CyaInt_CYASSL",
+          "callsite": "0x2c9ee0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c9d90",
+          "caller_name": "CyaInt_SendCertificate_CyaInt_CYASSL",
+          "callsite": "0x2c9ef8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c9f44",
+          "caller_name": "CyaInt_SendCertificateRequest_CyaInt_CYASSL",
+          "callsite": "0x2ca078",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2ca0d0",
+          "caller_name": "CyaInt_SendData_CyaInt_CYASSL_void_const_int",
+          "callsite": "0x2ca1e4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2ca0d0",
+          "caller_name": "CyaInt_SendData_CyaInt_CYASSL_void_const_int",
+          "callsite": "0x2ca2f8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2ca408",
+          "caller_name": "CyaInt_SendAlert_CyaInt_CYASSL_int_int",
+          "callsite": "0x2ca668",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2ca940",
+          "caller_name": "sub_2CA940",
+          "callsite": "0x2cab5c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2ca940",
+          "caller_name": "sub_2CA940",
+          "callsite": "0x2cacd8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2ca940",
+          "caller_name": "sub_2CA940",
+          "callsite": "0x2cae4c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2ca940",
+          "caller_name": "sub_2CA940",
+          "callsite": "0x2caed0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2cb030",
+          "caller_name": "CyaInt_ProcessReply_CyaInt_CYASSL",
+          "callsite": "0x2cb124",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2cbd04",
+          "caller_name": "CyaInt_ReceiveData_CyaInt_CYASSL_uchar_int_int",
+          "callsite": "0x2cbd98",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2cc1b8",
+          "caller_name": "CyaInt_SendClientHello_CyaInt_CYASSL",
+          "callsite": "0x2cc290",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2cc4d8",
+          "caller_name": "CyaInt_SendClientKeyExchange_CyaInt_CYASSL",
+          "callsite": "0x2cc5d4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2cc72c",
+          "caller_name": "CyaInt_SendCertificateVerify_CyaInt_CYASSL",
+          "callsite": "0x2cc7c4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2cc72c",
+          "caller_name": "CyaInt_SendCertificateVerify_CyaInt_CYASSL",
+          "callsite": "0x2cc808",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2cc72c",
+          "caller_name": "CyaInt_SendCertificateVerify_CyaInt_CYASSL",
+          "callsite": "0x2cc928",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2cc72c",
+          "caller_name": "CyaInt_SendCertificateVerify_CyaInt_CYASSL",
+          "callsite": "0x2cc974",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2ccd78",
+          "caller_name": "CyaInt_InitSSL_CyaInt_CYASSL_CyaInt_CYASSL_CTX",
+          "callsite": "0x2cd094",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2cd398",
+          "caller_name": "CyaInt_StoreKeys_CyaInt_CYASSL_uchar_const",
+          "callsite": "0x2cd3dc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2cd398",
+          "caller_name": "CyaInt_StoreKeys_CyaInt_CYASSL_uchar_const",
+          "callsite": "0x2cd3ec",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2cd398",
+          "caller_name": "CyaInt_StoreKeys_CyaInt_CYASSL_uchar_const",
+          "callsite": "0x2cd420",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2cd398",
+          "caller_name": "CyaInt_StoreKeys_CyaInt_CYASSL_uchar_const",
+          "callsite": "0x2cd430",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2cd398",
+          "caller_name": "CyaInt_StoreKeys_CyaInt_CYASSL_uchar_const",
+          "callsite": "0x2cd448",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2cd398",
+          "caller_name": "CyaInt_StoreKeys_CyaInt_CYASSL_uchar_const",
+          "callsite": "0x2cd45c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2cdad0",
+          "caller_name": "CyaInt_MakeMasterSecret_CyaInt_CYASSL",
+          "callsite": "0x2cd8f8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2cdad0",
+          "caller_name": "CyaInt_MakeMasterSecret_CyaInt_CYASSL",
+          "callsite": "0x2cd94c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2cdad0",
+          "caller_name": "CyaInt_MakeMasterSecret_CyaInt_CYASSL",
+          "callsite": "0x2cd95c",
+          "xref_type": 17
+        }
+      ],
+      "ida_name": ".memcpy",
+      "name": "memcpy"
+    },
+    {
+      "address": "0xd62a0",
+      "callers": [
+        {
+          "caller": "0xec8b8",
+          "caller_name": "TList_Insert_int_void",
+          "callsite": "0xec9e8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xeca94",
+          "caller_name": "TList_Delete_int",
+          "callsite": "0xecb78",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xf104c",
+          "caller_name": "TString_getPointerAndClear_void",
+          "callsite": "0xf108c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xf2ef8",
+          "caller_name": "TString_removeStart_int",
+          "callsite": "0xf2f54",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xf53b4",
+          "caller_name": "TStringList_Insert_int_TString_const",
+          "callsite": "0xf54ec",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xf552c",
+          "caller_name": "TStringList_Delete_int",
+          "callsite": "0xf5654",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x1bd8d4",
+          "caller_name": "GuiMLTextCtrl_insertText_char_const_uint_uint_bool_bool_bool",
+          "callsite": "0x1bda98",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x1bdb60",
+          "caller_name": "GuiMLTextCtrl_deleteText_uint_uint_bool_bool",
+          "callsite": "0x1bdbbc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x251658",
+          "caller_name": "FT_GlyphLoader_CheckPoints",
+          "callsite": "0x25184c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x260d7c",
+          "caller_name": "sub_260D7C",
+          "callsite": "0x260ddc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2b4a80",
+          "caller_name": "CyaInt_ToTraditional_uchar_uint",
+          "callsite": "0x2b4bb4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2cb030",
+          "caller_name": "CyaInt_ProcessReply_CyaInt_CYASSL",
+          "callsite": "0x2cb89c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2cb030",
+          "caller_name": "CyaInt_ProcessReply_CyaInt_CYASSL",
+          "callsite": "0x2cbbb0",
+          "xref_type": 17
+        }
+      ],
+      "ida_name": ".memmove",
+      "name": "memmove"
+    },
+    {
+      "address": "0xdae40",
+      "callers": [
+        {
+          "caller": "0xeaab4",
+          "caller_name": "THashList_expand_void",
+          "callsite": "0xeab2c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xeaab4",
+          "caller_name": "THashList_expand_void",
+          "callsite": "0xeabd8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xeaee8",
+          "caller_name": "THashStrings_expand_void",
+          "callsite": "0xeafc4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xf10b8",
+          "caller_name": "TString_setSize_int_bool",
+          "callsite": "0xf1158",
+          "xref_type": 19
+        },
+        {
+          "caller": "0xf773c",
+          "caller_name": "TEncryption_rc4_createwithkey_TString_const",
+          "callsite": "0xf777c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xf78f8",
+          "caller_name": "TEncryption_aes_createwithkey_TString_const_TString_const_bool",
+          "callsite": "0xf796c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xfe068",
+          "caller_name": "TDrawingPanelPixelBuffer_getPixels_void",
+          "callsite": "0xfe0f0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xfe260",
+          "caller_name": "TDrawingPanelPixelBuffer_setSize_int_int",
+          "callsite": "0xfe2e0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x104fb0",
+          "caller_name": "TPixelBuffer_createPixels_void",
+          "callsite": "0x105080",
+          "xref_type": 19
+        },
+        {
+          "caller": "0x10873c",
+          "caller_name": "generateOpenGLMipmaps_uchar_const_int_int_bool",
+          "callsite": "0x10883c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x10d4cc",
+          "caller_name": "TFont_generateFontBitmap_void",
+          "callsite": "0x10d730",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x1140b0",
+          "caller_name": "TBitmap_allocateBitmap_uint_uint_bool_TBitmap_BitmapFormat",
+          "callsite": "0x114200",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x11473c",
+          "caller_name": "TBitmap_copyFirstAnimationStep_void",
+          "callsite": "0x11478c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x114a50",
+          "caller_name": "TBitmap_advanceTime_uint",
+          "callsite": "0x114b84",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x11b7a0",
+          "caller_name": "TMNGAnimation_decode_TMNGAnimationStep",
+          "callsite": "0x11bf14",
+          "xref_type": 19
+        },
+        {
+          "caller": "0x12068c",
+          "caller_name": "TPalette_TPalette_void",
+          "callsite": "0x1206c8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x172338",
+          "caller_name": "TPlayer_checkWeaponImgs_void",
+          "callsite": "0x1723a8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x172338",
+          "caller_name": "TPlayer_checkWeaponImgs_void",
+          "callsite": "0x1723b8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x1a0ea4",
+          "caller_name": "TTilesLayer_TTilesLayer_TServerLevel_int",
+          "callsite": "0x1a0f80",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x1e7eb0",
+          "caller_name": "TClient_initStaticVars_void",
+          "callsite": "0x1e805c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x1eb91c",
+          "caller_name": "TClient_clearInDataHandlers",
+          "callsite": "0x1eb930",
+          "xref_type": 19
+        },
+        {
+          "caller": "0x1fd780",
+          "caller_name": "TGraalConnection_sendData_int_TString_const",
+          "callsite": "0x1fd834",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x20bf6c",
+          "caller_name": "sub_20BF6C",
+          "callsite": "0x20c158",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x230c1c",
+          "caller_name": "TTilesBlock_getPixels_void",
+          "callsite": "0x230da8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2312c8",
+          "caller_name": "TTilesPanel_clearTile_int_int",
+          "callsite": "0x2313d0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2313f0",
+          "caller_name": "TTilesPanel_drawBlackTile_int_int",
+          "callsite": "0x2314f8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x250858",
+          "caller_name": "ft_mem_alloc",
+          "callsite": "0x25088c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x251544",
+          "caller_name": "ft_mem_realloc",
+          "callsite": "0x251598",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x25b660",
+          "caller_name": "sub_25B660",
+          "callsite": "0x25b764",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x263d1c",
+          "caller_name": "sub_263D1C",
+          "callsite": "0x263da8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x268f00",
+          "caller_name": "af_autofitter_init",
+          "callsite": "0x268f24",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x26a904",
+          "caller_name": "sub_26A904",
+          "callsite": "0x26aacc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x26b198",
+          "caller_name": "sub_26B198",
+          "callsite": "0x26b360",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2711d4",
+          "caller_name": "af_autofitter_load_glyph",
+          "callsite": "0x271374",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x271fb0",
+          "caller_name": "FT_Bitmap_Embolden",
+          "callsite": "0x27217c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x273148",
+          "caller_name": "FT_Glyph_To_Bitmap",
+          "callsite": "0x2731bc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x27fd34",
+          "caller_name": "sub_27FD34",
+          "callsite": "0x2803ec",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x27fd34",
+          "caller_name": "sub_27FD34",
+          "callsite": "0x280454",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2806e8",
+          "caller_name": "sub_2806E8",
+          "callsite": "0x280b58",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2806e8",
+          "caller_name": "sub_2806E8",
+          "callsite": "0x280c50",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x280d70",
+          "caller_name": "sub_280D70",
+          "callsite": "0x2813a4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x280d70",
+          "caller_name": "sub_280D70",
+          "callsite": "0x2815cc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2819d0",
+          "caller_name": "deflateReset",
+          "callsite": "0x281a7c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x281cb4",
+          "caller_name": "deflate",
+          "callsite": "0x2820bc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x281cb4",
+          "caller_name": "deflate",
+          "callsite": "0x2822e0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x281cb4",
+          "caller_name": "deflate",
+          "callsite": "0x282330",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x281cb4",
+          "caller_name": "deflate",
+          "callsite": "0x28303c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x281cb4",
+          "caller_name": "deflate",
+          "callsite": "0x2831f4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x283a6c",
+          "caller_name": "deflateInit2_",
+          "callsite": "0x283bdc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x283d30",
+          "caller_name": "deflateCopy",
+          "callsite": "0x283dc8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x28ad98",
+          "caller_name": "jpeg_CreateDecompress",
+          "callsite": "0x28ae2c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x28f8c0",
+          "caller_name": "jinit_master_decompress_jpeg_decompress_struct",
+          "callsite": "0x28f940",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x28f8c0",
+          "caller_name": "jinit_master_decompress_jpeg_decompress_struct",
+          "callsite": "0x28fa60",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x297edc",
+          "caller_name": "jzero_far_void_ulong",
+          "callsite": "0x297ee4",
+          "xref_type": 19
+        },
+        {
+          "caller": "0x297ee8",
+          "caller_name": "jpeg_CreateCompress",
+          "callsite": "0x297f7c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x29e7b0",
+          "caller_name": "jinit_inverse_dct_jpeg_decompress_struct",
+          "callsite": "0x29e830",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x29e858",
+          "caller_name": "jpeg_make_d_derived_tbl_jpeg_decompress_struct_int_int_d_derived_tbl",
+          "callsite": "0x29ed00",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2a4a08",
+          "caller_name": "jpeg_make_c_derived_tbl_jpeg_compress_struct_int_int_c_derived_tbl",
+          "callsite": "0x2a4da8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2a4ec8",
+          "caller_name": "sub_2A4EC8",
+          "callsite": "0x2a4f5c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2a4ec8",
+          "caller_name": "sub_2A4EC8",
+          "callsite": "0x2a4f70",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2a4ec8",
+          "caller_name": "sub_2A4EC8",
+          "callsite": "0x2a5070",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2a50b4",
+          "caller_name": "jpeg_gen_optimal_table_jpeg_compress_struct_JHUFF_TBL_long",
+          "callsite": "0x2a50fc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2a73fc",
+          "caller_name": "sub_2A73FC",
+          "callsite": "0x2a74b0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2ad420",
+          "caller_name": "DGifOpenFileHandle",
+          "callsite": "0x2ad48c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2ad62c",
+          "caller_name": "DGifOpen",
+          "callsite": "0x2ad694",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2afbd4",
+          "caller_name": "yajl_gen_alloc",
+          "callsite": "0x2afc20",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2bf218",
+          "caller_name": "Md5Final_Md5_uchar",
+          "callsite": "0x2bf288",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2bf218",
+          "caller_name": "Md5Final_Md5_uchar",
+          "callsite": "0x2bf2ec",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2bf30c",
+          "caller_name": "RNG_GenerateBlock_RNG_uchar_uint",
+          "callsite": "0x2bf330",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2bfbf0",
+          "caller_name": "CyaInt_RsaPrivateDecrypt_uchar_const_uint_uchar_uint_CyaInt_RsaKey",
+          "callsite": "0x2bfc6c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2bffa4",
+          "caller_name": "CyaInt_RsaSSL_Verify_uchar_const_uint_uchar_uint_CyaInt_RsaKey",
+          "callsite": "0x2c0020",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c0064",
+          "caller_name": "CyaInt_RsaSSL_Sign_uchar_const_uint_uchar_uint_CyaInt_RsaKey_RNG",
+          "callsite": "0x2c011c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c2c4c",
+          "caller_name": "ShaFinal_Sha_uchar",
+          "callsite": "0x2c2cdc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c2c4c",
+          "caller_name": "ShaFinal_Sha_uchar",
+          "callsite": "0x2c2e50",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c358c",
+          "caller_name": "Sha256Final_Sha256_uchar",
+          "callsite": "0x2c361c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c358c",
+          "caller_name": "Sha256Final_Sha256_uchar",
+          "callsite": "0x2c37a0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c50ac",
+          "caller_name": "sub_2C50AC",
+          "callsite": "0x2c5144",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c6514",
+          "caller_name": "sub_2C6514",
+          "callsite": "0x2c6704",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c6514",
+          "caller_name": "sub_2C6514",
+          "callsite": "0x2c676c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c6514",
+          "caller_name": "sub_2C6514",
+          "callsite": "0x2c6794",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c6514",
+          "caller_name": "sub_2C6514",
+          "callsite": "0x2c69d8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c6514",
+          "caller_name": "sub_2C6514",
+          "callsite": "0x2c6b70",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c7074",
+          "caller_name": "CyaInt_DeriveTlsKeys_CyaInt_CYASSL",
+          "callsite": "0x2c7284",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c7074",
+          "caller_name": "CyaInt_DeriveTlsKeys_CyaInt_CYASSL",
+          "callsite": "0x2c7358",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c7074",
+          "caller_name": "CyaInt_DeriveTlsKeys_CyaInt_CYASSL",
+          "callsite": "0x2c7380",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c7074",
+          "caller_name": "CyaInt_DeriveTlsKeys_CyaInt_CYASSL",
+          "callsite": "0x2c754c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c7074",
+          "caller_name": "CyaInt_DeriveTlsKeys_CyaInt_CYASSL",
+          "callsite": "0x2c76dc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c8024",
+          "caller_name": "HmacSetKey_Hmac_int_uchar_const_uint",
+          "callsite": "0x2c819c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c8710",
+          "caller_name": "sub_2C8710",
+          "callsite": "0x2c874c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2cc4d8",
+          "caller_name": "CyaInt_SendClientKeyExchange_CyaInt_CYASSL",
+          "callsite": "0x2cc650",
+          "xref_type": 17
+        }
+      ],
+      "ida_name": ".memset",
+      "name": "memset"
+    },
+    {
+      "address": "0xdfb50",
+      "callers": [
+        {
+          "caller": "0x2ad5e4",
+          "caller_name": "DGifOpenFileName",
+          "callsite": "0x2ad5f4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2bf378",
+          "caller_name": "GenerateSeed_OS_Seed_uchar_uint",
+          "callsite": "0x2bf39c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2bf378",
+          "caller_name": "GenerateSeed_OS_Seed_uchar_uint",
+          "callsite": "0x2bf40c",
+          "xref_type": 17
+        }
+      ],
+      "ida_name": ".open",
+      "name": "open"
+    },
+    {
+      "address": "0xd6290",
+      "callers": [
+        {
+          "caller": "0x2bf378",
+          "caller_name": "GenerateSeed_OS_Seed_uchar_uint",
+          "callsite": "0x2bf3b8",
+          "xref_type": 17
+        }
+      ],
+      "ida_name": ".read",
+      "name": "read"
+    },
+    {
+      "address": "0xdde50",
+      "callers": [
+        {
+          "caller": "0x206080",
+          "caller_name": "TSocket_recvPlain",
+          "callsite": "0x2060b4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2074d4",
+          "caller_name": "TSocketConnection_read_void",
+          "callsite": "0x2075a4",
+          "xref_type": 17
+        }
+      ],
+      "ida_name": ".recv",
+      "name": "recv"
+    },
+    {
+      "address": "0xd6170",
+      "callers": [
+        {
+          "caller": "0x206010",
+          "caller_name": "TSocket_sendPlain",
+          "callsite": "0x206044",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x207118",
+          "caller_name": "TSocketConnection_sendData_void_const_int",
+          "callsite": "0x207288",
+          "xref_type": 17
+        }
+      ],
+      "ida_name": ".send",
+      "name": "send"
+    },
+    {
+      "address": "0xde9a0",
+      "callers": [
+        {
+          "caller": "0xec158",
+          "caller_name": "TIdentification_getMacAddressBuffer_void",
+          "callsite": "0xec19c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2068b4",
+          "caller_name": "TSocketConnection_bindSocket_int_bool",
+          "callsite": "0x2068ec",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2068b4",
+          "caller_name": "TSocketConnection_bindSocket_int_bool",
+          "callsite": "0x206988",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x206bd8",
+          "caller_name": "TSocketConnection_connectSocket_TString_const_int",
+          "callsite": "0x206c38",
+          "xref_type": 17
+        }
+      ],
+      "ida_name": ".socket",
+      "name": "socket"
+    },
+    {
+      "address": "0xd5880",
+      "callers": [
+        {
+          "caller": "0x292b34",
+          "caller_name": "sub_292B34",
+          "callsite": "0x292bd0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x292b34",
+          "caller_name": "sub_292B34",
+          "callsite": "0x292c08",
+          "xref_type": 19
+        },
+        {
+          "caller": "0x2afcec",
+          "caller_name": "yajl_gen_integer",
+          "callsite": "0x2afd98",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2aff04",
+          "caller_name": "yajl_gen_double",
+          "callsite": "0x2affe8",
+          "xref_type": 17
+        }
+      ],
+      "ida_name": ".sprintf",
+      "name": "sprintf"
+    },
+    {
+      "address": "0xdb3f0",
+      "callers": [
+        {
+          "caller": "0xe6c1c",
+          "caller_name": "TFiles_fileExists_TString_const",
+          "callsite": "0xe6c40",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xe6c80",
+          "caller_name": "TFiles_fileSize_TString_const",
+          "callsite": "0xe6ca8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xe6ce0",
+          "caller_name": "TFiles_fileIsFolder_TString_const",
+          "callsite": "0xe6d94",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xe7068",
+          "caller_name": "TFiles_getUTCFileModTime_TString_const",
+          "callsite": "0xe7090",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xe7138",
+          "caller_name": "TFiles_getFileSizeAndTime_TString_const_int_uint",
+          "callsite": "0xe716c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xe7774",
+          "caller_name": "TFiles_getFolder_TString_const_TString_const_bool_bool",
+          "callsite": "0xe78b0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xe85a8",
+          "caller_name": "TFileNameScan_readLevelPaths_TString_const",
+          "callsite": "0xe86e8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c50ac",
+          "caller_name": "sub_2C50AC",
+          "callsite": "0x2c5180",
+          "xref_type": 17
+        }
+      ],
+      "ida_name": ".stat",
+      "name": "stat"
+    },
+    {
+      "address": "0xda310",
+      "callers": [
+        {
+          "caller": "0x2b2724",
+          "caller_name": "yajl_render_error_string_yajl_handle_t_uchar_const_ulong_int",
+          "callsite": "0x2b27ec",
+          "xref_type": 17
+        }
+      ],
+      "ida_name": ".strcpy",
+      "name": "strcpy"
+    },
+    {
+      "address": "0xda8d0",
+      "callers": [
+        {
+          "caller": "0x2c50ac",
+          "caller_name": "sub_2C50AC",
+          "callsite": "0x2c5174",
+          "xref_type": 17
+        }
+      ],
+      "ida_name": ".strncat",
+      "name": "strncat"
+    },
+    {
+      "address": "0xd2e00",
+      "callers": [
+        {
+          "caller": "0xf2870",
+          "caller_name": "TString_snprintf_char_int_char_const",
+          "callsite": "0xf2934",
+          "xref_type": 17
+        },
+        {
+          "caller": "0xf2990",
+          "caller_name": "TString_vsnprintf_char_int_char_const_std_va_list",
+          "callsite": "0xf29fc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c440c",
+          "caller_name": "CyaInt_PemToDer_uchar_const_long_int_CyaInt_buffert_void_CyaInt_EncryptedInfo_int",
+          "callsite": "0x2c4478",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c440c",
+          "caller_name": "CyaInt_PemToDer_uchar_const_long_int_CyaInt_buffert_void_CyaInt_EncryptedInfo_int",
+          "callsite": "0x2c448c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c440c",
+          "caller_name": "CyaInt_PemToDer_uchar_const_long_int_CyaInt_buffert_void_CyaInt_EncryptedInfo_int",
+          "callsite": "0x2c45d0",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c440c",
+          "caller_name": "CyaInt_PemToDer_uchar_const_long_int_CyaInt_buffert_void_CyaInt_EncryptedInfo_int",
+          "callsite": "0x2c45e4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c440c",
+          "caller_name": "CyaInt_PemToDer_uchar_const_long_int_CyaInt_buffert_void_CyaInt_EncryptedInfo_int",
+          "callsite": "0x2c4610",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c440c",
+          "caller_name": "CyaInt_PemToDer_uchar_const_long_int_CyaInt_buffert_void_CyaInt_EncryptedInfo_int",
+          "callsite": "0x2c4624",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c440c",
+          "caller_name": "CyaInt_PemToDer_uchar_const_long_int_CyaInt_buffert_void_CyaInt_EncryptedInfo_int",
+          "callsite": "0x2c4658",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c440c",
+          "caller_name": "CyaInt_PemToDer_uchar_const_long_int_CyaInt_buffert_void_CyaInt_EncryptedInfo_int",
+          "callsite": "0x2c466c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c440c",
+          "caller_name": "CyaInt_PemToDer_uchar_const_long_int_CyaInt_buffert_void_CyaInt_EncryptedInfo_int",
+          "callsite": "0x2c46c8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c440c",
+          "caller_name": "CyaInt_PemToDer_uchar_const_long_int_CyaInt_buffert_void_CyaInt_EncryptedInfo_int",
+          "callsite": "0x2c46dc",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c440c",
+          "caller_name": "CyaInt_PemToDer_uchar_const_long_int_CyaInt_buffert_void_CyaInt_EncryptedInfo_int",
+          "callsite": "0x2c46f8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c440c",
+          "caller_name": "CyaInt_PemToDer_uchar_const_long_int_CyaInt_buffert_void_CyaInt_EncryptedInfo_int",
+          "callsite": "0x2c470c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c440c",
+          "caller_name": "CyaInt_PemToDer_uchar_const_long_int_CyaInt_buffert_void_CyaInt_EncryptedInfo_int",
+          "callsite": "0x2c4744",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c440c",
+          "caller_name": "CyaInt_PemToDer_uchar_const_long_int_CyaInt_buffert_void_CyaInt_EncryptedInfo_int",
+          "callsite": "0x2c4758",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c440c",
+          "caller_name": "CyaInt_PemToDer_uchar_const_long_int_CyaInt_buffert_void_CyaInt_EncryptedInfo_int",
+          "callsite": "0x2c47b4",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c440c",
+          "caller_name": "CyaInt_PemToDer_uchar_const_long_int_CyaInt_buffert_void_CyaInt_EncryptedInfo_int",
+          "callsite": "0x2c47c8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c50ac",
+          "caller_name": "sub_2C50AC",
+          "callsite": "0x2c5154",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2c5dc8",
+          "caller_name": "CyaInt_CyaSSL_check_domain_name_CyaInt_CYASSL_char_const",
+          "callsite": "0x2c5e18",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2ca940",
+          "caller_name": "sub_2CA940",
+          "callsite": "0x2cac44",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2ca940",
+          "caller_name": "sub_2CA940",
+          "callsite": "0x2cac6c",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2cbe18",
+          "caller_name": "CyaInt_SetErrorString_int_char",
+          "callsite": "0x2cbe28",
+          "xref_type": 19
+        },
+        {
+          "caller": "0x2cbe2c",
+          "caller_name": "CyaInt_SetCipherList_CyaInt_Suites_char_const",
+          "callsite": "0x2cbef8",
+          "xref_type": 17
+        },
+        {
+          "caller": "0x2cbe2c",
+          "caller_name": "CyaInt_SetCipherList_CyaInt_Suites_char_const",
+          "callsite": "0x2cc000",
+          "xref_type": 17
+        }
+      ],
+      "ida_name": ".strncpy",
+      "name": "strncpy"
+    },
+    {
+      "address": "0xdeb90",
+      "callers": [
+        {
+          "caller": "0xe6dfc",
+          "caller_name": "TFiles_deleteFile_TString_const",
+          "callsite": "0xe6e08",
+          "xref_type": 19
+        },
+        {
+          "caller": "0xe6dfc",
+          "caller_name": "TFiles_deleteFile_TString_const",
+          "callsite": "0xe6e18",
+          "xref_type": 19
+        }
+      ],
+      "ida_name": ".unlink",
+      "name": "unlink"
+    }
+  ],
+  "interpretation": [
+    "Imported libc functions show capability, not exploitability.",
+    "The selected direct call sites contain one unbounded sprintf destination requiring deeper provenance analysis.",
+    "The reviewed fixed-size formatter, YAJL integer formatter, certificate-directory path builder, cipher parser, and MAC-interface setup have visible local bounds or fixed inputs.",
+    "The report does not prove that a network peer can reach any manual-review site or control its destination buffer.",
+    "The report does not replace parser fuzzing in a disposable process."
+  ],
+  "manual_reviews": [
+    {
+      "address": "0x292b34",
+      "api": "sprintf",
+      "behavior": "The function selects a format string from internal formatter state and writes into its caller-provided char buffer with sprintf at 0x292bd0 and 0x292c08. No destination length is passed by this function.",
+      "classification": "manual-review",
+      "confidence": "confirmed-static",
+      "function": "sub_292B34",
+      "security_note": "This is the only reviewed legacy sprintf site without a visible local bound. The format table and the destination provenance need a separate data-flow trace before calling it exploitable. No direct remote reachability was established."
+    },
+    {
+      "address": "0x2afcec",
+      "api": "sprintf",
+      "behavior": "Formats a signed 64-bit integer with the literal %lld into a 32-byte local buffer before appending it to the YAJL output.",
+      "classification": "bounded",
+      "confidence": "confirmed-static",
+      "function": "yajl_gen_integer",
+      "security_note": "A signed 64-bit decimal value needs at most 20 digits plus a sign and terminator, so the local buffer is sufficient for this format."
+    },
+    {
+      "address": "0x2aff04",
+      "api": "sprintf",
+      "behavior": "Formats a double with the literal %.20g into a 32-byte local buffer before appending it to the YAJL output.",
+      "classification": "bounded",
+      "confidence": "confirmed-static",
+      "function": "yajl_gen_double",
+      "security_note": "The fixed format bounds the rendered value well below the local buffer size, including the exponent and terminator."
+    },
+    {
+      "address": "0x2b2724",
+      "api": "strcpy/stpcpy",
+      "behavior": "Builds a YAJL parser error string. It computes the variable error length, asks the parser allocator for the complete result, then copies fixed labels and the bounded parser error text.",
+      "classification": "length-precomputed",
+      "confidence": "confirmed-static",
+      "function": "yajl_render_error_string_yajl_handle_t_uchar_const_ulong_int",
+      "security_note": "The copies are not individually length-limited, but the output allocation is sized from the same strings before the copies. This review does not establish an allocation overflow in the surrounding parser allocator."
+    },
+    {
+      "address": "0x2c50ac",
+      "api": "strncpy/strncat/stat",
+      "behavior": "Enumerates a certificate directory, clears a 256-byte local path buffer, copies at most 126 bytes of the directory name, adds a slash, and appends at most 128 bytes of each dirent name before stat and certificate processing.",
+      "classification": "bounded-path-construction",
+      "confidence": "confirmed-static",
+      "function": "sub_2C50AC",
+      "security_note": "The visible arithmetic keeps the constructed path within the 256-byte local buffer, including its terminator. stat follows links and no canonicalization or no-follow operation is visible, so symlink semantics remain an open trust-boundary question."
+    },
+    {
+      "address": "0x2cbe2c",
+      "api": "strncpy",
+      "behavior": "Splits the colon-separated cipher list into a 48-byte local buffer, always terminates it, and maps recognized legacy suite names to internal cipher identifiers.",
+      "classification": "bounded-parser",
+      "confidence": "confirmed-static",
+      "function": "CyaInt_SetCipherList_CyaInt_Suites_char_const",
+      "security_note": "The short and long input paths both write a terminator within the local buffer. The supported NULL and RC4 names are a legacy cryptographic policy concern, not a string overflow finding."
+    },
+    {
+      "address": "0xec158",
+      "api": "socket/ioctl/close",
+      "behavior": "Writes the fixed interface name eth0 with ordinary ARM64 stores, then calls socket and SIOCGIFHWADDR to obtain the hardware address. The apparent strcpy in the decompiler is compiler inlining, not an imported strcpy call.",
+      "classification": "fixed-input",
+      "confidence": "confirmed-static",
+      "function": "TIdentification_getMacAddressBuffer_void",
+      "security_note": "There is no attacker-sized string copy at this site. The privacy impact of collecting and hashing the MAC address is documented in SECURITY.md."
+    },
+    {
+      "address": "0xf2870",
+      "api": "strncpy",
+      "behavior": "Renders through the internal formatter, caps the copy to the caller-supplied size minus one, and writes a terminating byte.",
+      "classification": "bounded-wrapper",
+      "confidence": "confirmed-static",
+      "function": "TString_snprintf_char_int_char_const",
+      "security_note": "The wrapper preserves the visible size boundary."
+    },
+    {
+      "address": "0xf2990",
+      "api": "strncpy",
+      "behavior": "The va_list variant follows the same size-minus-one copy and terminator pattern as TString_snprintf.",
+      "classification": "bounded-wrapper",
+      "confidence": "confirmed-static",
+      "function": "TString_vsnprintf_char_int_char_const_std_va_list",
+      "security_note": "The wrapper preserves the visible size boundary."
+    },
+    {
+      "address": "0x2bf378",
+      "api": "open/read",
+      "behavior": "Opens /dev/urandom, falls back to /dev/random, reads the exact requested byte count, closes the descriptor, and returns an error code for an incomplete read.",
+      "classification": "system-randomness",
+      "confidence": "confirmed-static",
+      "function": "GenerateSeed_OS_Seed_uchar_uint",
+      "security_note": "The path is a fixed device name, not caller-controlled."
+    },
+    {
+      "address": "0x2ad5e4",
+      "api": "open",
+      "behavior": "Opens a caller-supplied GIF filename read-only and passes the descriptor to the bundled GIF decoder.",
+      "classification": "path-input",
+      "confidence": "confirmed-static",
+      "function": "DGifOpenFileName",
+      "security_note": "The path provenance is supplied by the resource and image loaders. This site alone does not prove arbitrary file access."
+    }
+  ],
+  "network_contacted": false,
+  "schema": "libqplay.original-libc-callsite-review.v1",
+  "scope": "read-only direct PLT call-site inventory and manual buffer review for the original 1.8 ARM64 library"
+}
