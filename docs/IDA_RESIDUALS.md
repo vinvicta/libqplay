@@ -43,6 +43,27 @@ aliases include dynamic names, PLT entries, jump thunks, and data aliases.
 They are an analysis inventory rather than a claim that all original
 debug symbols survived.
 
+## Compact residual audit
+
+The final residual set is recorded in
+`artifacts/ida_final_residual_audit_20260830.json`. It contains one compact
+record per remaining default `sub_` function, including its address, size,
+segment, and incoming xref count. It also records the 11,297-row inventory
+hash, the original ARM64 library hash, address buckets, and the most
+referenced residual entries. The report contains 421 residual functions and
+does not publish another full inventory.
+
+The report was generated from the private v4 IDA export with:
+
+```text
+python3 tools/generate_final_residual_audit.py \
+  /tmp/ida-v4-inventory/libqplay.function_inventory.json
+```
+
+The input path is local to the analysis workstation. The report's SHA-256
+fields make it possible to verify that a future export describes the same
+library and inventory.
+
 ## How to work the remaining queue
 
 Keep unresolved functions tied to their address and record the evidence used
