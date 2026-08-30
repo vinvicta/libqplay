@@ -113,11 +113,17 @@ loop treats a connection still in status 4 after five seconds as failed. This
 gives three independent checkpoints for a future device trace: socket and
 resolver setup, delayed connect completion, and TLS handshake.
 
-The game TLS path is not automatically the connector certificate path. The
-connector explicitly calls `setVerifyGraalWebCert`; the reviewed game connect
-function does not. The source of the game-server verification buffer and the
-configured hostname still need a separate setup trace before any certificate
-change is considered.
+The game TLS fields are configured through the script callback at `0x1eb964`.
+The callback decrypts its certificate argument with the DES key `NakFpz15`,
+stores the protocol, cipher list, and verify buffer, and applies the SSL enable
+flag. `TGraalConnection_connectToServer` then copies those fields to the new
+socket before connecting. The recovered source was checked with
+`tools/audit_classic_ssl_mode.py`: the Classic branch sets `usessl=false`, the
+NewGraal `setSSLParameters` call is guarded by that flag, and the final value
+remains false. The same expired Eurocenter Games certificate is therefore
+real but dormant in stock Classic. It remains relevant to legacy branches or
+modified scripts. The active connector HTTPS request is the path that directly
+consumes the expired GraalWeb bundle.
 
 The client network thread reads incoming data, processes and sends outgoing
 packages, and sleeps for one millisecond while the incoming queue stays below

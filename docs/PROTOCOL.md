@@ -201,9 +201,19 @@ per-socket SSL flag is enabled. `TSocketConnection_enableSSLOnSocket` selects
 the configured CyaSSL method, loads an optional verification buffer as PEM or
 DER, applies the configured verification mode and hostname check, installs the
 plain socket I/O callbacks, and calls `CyaSSL_connect` in nonblocking mode. The
-reviewed game connection therefore has a delayed TLS boundary, but its exact
-certificate source still needs to be traced from the game-server setup rather
-than inferred from the connector's embedded GraalWeb certificate.
+`TClient_setSSLParameters_scriptCallback` at `0x1eb964` is the script-facing
+configuration boundary. It receives the enable flag, protocol, cipher list, and
+encrypted certificate, decrypts the certificate with the recovered `NakFpz15`
+DES key, and stores the values in `TGraalConnection`. The connection function
+then copies those fields into the new socket before calling `connect`.
+
+The recovered `StartScript_Connector` source was audited separately in
+`artifacts/game_server_tls.json`. It passes `RC4-SHA`, `SSLv23`, and a
+certificate that matches the first connector trust-bundle entry, but the
+Classic branch sets `usessl=false`, guards the `setSSLParameters` call, and
+leaves the final value false. The certificate is therefore dormant for the
+stock Classic branch and relevant to legacy modes or modified scripts. The
+active connector HTTPS request still uses the expired GraalWeb trust bundle.
 
 `TClient_networkThreadMain` marks the thread running, drains incoming work
 while the queue is at or below 999 entries, reads incoming bytes, processes
@@ -217,9 +227,11 @@ when the socket reaches status 5, and disconnects after the timeout or a status
 This state machine gives a useful diagnostic split. A failure before status 4
 points to empty fields, socket creation, or name resolution. A failure stuck at
 status 4 points to routing, firewall, or the five-second timeout. A failure at
-status 5 with an SSL error points to the game-server TLS configuration. A
-successful handshake with no packets moves the investigation into NewGraal
-framing and the inbound handler table.
+status 5 with an SSL error points to a non-Classic branch or a modified script
+that enabled game-server TLS. In the recovered Classic branch, status 5 should
+move directly into ordinary NewGraal traffic. A successful handshake with no
+packets moves the investigation into NewGraal framing and the inbound handler
+table.
 
 ## 5. NewGraal framing
 

@@ -29,7 +29,13 @@ import idc
 TARGETS = [
     ("0x204420", "TServerList_login_void", "connector login selection"),
     ("0x204488", "TServerList_handleServerWarp_void", "server-warp handoff"),
+    ("0x1eb964", "TClient_setSSLParameters_scriptCallback", "script TLS parameter callback"),
     ("0x1e7058", "TClient_connectToGameServer_void", "game-server connect setup"),
+    ("0x1feb98", "TGraalConnection_connectToServer_TString_const_TString_const", "game connection field transfer"),
+    ("0x1feb38", "TGraalConnection_setSSLVerifyCert_TString_const", "game-server verify-buffer setter"),
+    ("0x1feae8", "TGraalConnection_setSSLProtocol_TString_const", "game-server TLS protocol setter"),
+    ("0x1fea98", "TGraalConnection_setSSLCipherList_TString_const", "game-server TLS cipher setter"),
+    ("0x1fea70", "TGraalConnection_setEnableSSL_bool", "game-server SSL enable setter"),
     ("0x206bd8", "TSocketConnection_connectSocket_TString_const_int", "nonblocking socket connect"),
     ("0x206a48", "TSocketConnection_checkConnecting_void", "delayed connect completion"),
     ("0x2067b4", "TSocketConnection_setStatus_int", "socket status transition"),
@@ -67,6 +73,10 @@ CALL_WORDS = {
     "TClient_readIncomingData",
     "TClient_sendOutgoingPackages",
     "TServerList_handleServerWarp",
+    "TGraalConnection_setEnableSSL",
+    "TGraalConnection_setSSLVerifyCert",
+    "TGraalConnection_setSSLProtocol",
+    "TGraalConnection_setSSLCipherList",
 }
 
 
@@ -171,6 +181,8 @@ def main() -> None:
         "interpretation": [
             "TServerList_login selects connector mode and prepares the login request. A later server-warp event supplies the host, server name, and port for the game connection.",
             "TClient_connectToGameServer validates the supplied address and port, records an address-and-port digest, creates the client thread, and reports a generic failure when the inputs are empty or the socket is already in error.",
+            "The script callback at 0x1eb964 accepts an SSL enable flag, protocol, cipher list, and encrypted certificate. It decrypts the certificate with the recovered NakFpz15 key and copies all four values into TGraalConnection fields.",
+            "TGraalConnection_connectToServer transfers the stored SSL fields to the new socket before connecting. The companion game_server_tls artifact records that the recovered Classic source sets usessl false and guards setSSLParameters, so this stale game TLS material is dormant in the stock Classic branch.",
             "The socket path is nonblocking. Status 4 represents an in-progress connect, checkConnecting uses select and SO_ERROR, and status 5 represents a completed TCP connection.",
             "setStatus starts TLS when status 5 is reached and the SSL flag is set. The TLS setup selects a CyaSSL method, loads the configured verification buffer, applies optional hostname verification, and calls CyaSSL_connect.",
             "The network thread drains incoming data, processes outgoing packages, sends queued bytes, and sleeps briefly between iterations. The server-list handler drives reconnect, timeout, package, player, and server-warp events.",

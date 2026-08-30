@@ -53,6 +53,22 @@
       ]
     },
     {
+      "address": "0x1eb964",
+      "call_tokens": [],
+      "caller_count": 0,
+      "callers": [],
+      "code": "// Game-server TLS callback recovered from the decoded StartScript_Connector bytecode. The script calls client.setSSLParameters with base64decode(string 143), RC4-SHA, SSLv23, and enabled=1. This callback decrypts the certificate argument with DES key NakFpz15, stores the cipher/protocol/trust fields, and enables SSL. Offline DER SHA-256 is 2e6425395e91baab7be95d9918de198684bcb718800bff07113e7f336d06ce56; it expires 2023-07-29. No network used.\n__int64 __fastcall sub_1EB964(TGraalConnection *a1, bool a2, TString *a3, const TString *a4, const TString *a5)\n{\n  const TString *v7; // x2\n  __int64 v11; // [xsp+40h] [xbp-10h] BYREF\n  __int64 v12; // [xsp+48h] [xbp-8h] BYREF\n\n  plt_TGraalConnection_setSSLProtocol_TString_const(a1, a3);\n  plt_TGraalConnection_setSSLCipherList_TString_const(a1, a4);\n  v11 = 0;\n  plt_TString_operator_lshift_char_const((int)&v11, \"NakFpz15\");\n  plt_TEncryption_des_decrypt_TString_const_TString_const(&v12, (TEncryption *)&v11, a5, v7);\n  plt_TGraalConnection_setSSLVerifyCert_TString_const(a1, (const TString *)&v12);\n  plt_TString_clear_void((TString *)&v12);\n  plt_TString_clear_void((TString *)&v11);\n  return plt_TGraalConnection_setEnableSSL_bool(a1, a2);\n}\n",
+      "code_bytes": 1199,
+      "code_sha256": "96ccda2766d5a10d31c6e7963ae9081a0adf8b23a10a16c4285516457b128d5e",
+      "function_end": "0x1eba08",
+      "function_start": "0x1eb964",
+      "name": "TClient_setSSLParameters_scriptCallback",
+      "role": "script TLS parameter callback",
+      "string_literals": [
+        "\"NakFpz15\""
+      ]
+    },
+    {
       "address": "0x1e7058",
       "call_tokens": [
         "connect"
@@ -75,6 +91,110 @@
       "string_literals": [
         "\"Couldn't connect to the game server. Please make sure that the internet connection is working.\""
       ]
+    },
+    {
+      "address": "0x1feb98",
+      "call_tokens": [
+        "socket"
+      ],
+      "caller_count": 1,
+      "callers": [
+        {
+          "caller": "0x1e7058",
+          "caller_name": "TClient_connectToGameServer_void",
+          "callsite": "0x1e70bc"
+        }
+      ],
+      "code": "// Copies TGraalConnection SSL cipher at +128 to socket +8248, protocol at +136 to socket +8256, and trust material at +144 through setSSLVerifyCert to socket +8272. It disables the socket's verify-disabled flag and then applies the SSL enable flag before connecting.\n__int64 __fastcall TGraalConnection_connectToServer_TString_const_TString_const(\n        TGraalConnection *this,\n        const TString *a2,\n        const TString *a3)\n{\n  int v5; // w1\n  TSocketConnection *v6; // x20\n  TSocketConnection *v7; // x0\n  TSocketConnection *v8; // x19\n  int v9; // w2\n\n  v5 = *((_DWORD *)this + 72);\n  *((_BYTE *)this + 296) = 1;\n  *((_DWORD *)this + 71) = v5;\n  v6 = (TSocketConnection *)plt_operator_new_ulong__2(0x20C8u);\n  plt_TSocketConnection_TSocketConnection_void(v6);\n  *((_QWORD *)this + 32) = v6;\n  plt_TString_operator_assign_TString_const((char *)v6 + 8248, (char *)this + 128);\n  plt_TString_operator_assign_TString_const(*((_QWORD *)this + 32) + 8256LL, (char *)this + 136);\n  plt_TSocketConnection_setSSLVerifyCert_TString_const(\n    *((TSocketConnection **)this + 32),\n    (TGraalConnection *)((char *)this + 144));\n  v7 = *((TSocketConnection **)this + 32);\n  *((_BYTE *)v7 + 8240) = 0;\n  plt_TSocketConnection_setEnableSSL_bool(v7, *((_BYTE *)this + 120));\n  v8 = *((TSocketConnection **)this + 32);\n  v9 = plt_strtoint_TString_const(a3);\n  return plt_TSocketConnection_connectSocket_TString_const_int(v8, a2, v9);\n}\n",
+      "code_bytes": 1432,
+      "code_sha256": "ec976d82342fb57b6dfddb031b7d9e38ca34b85ad23d3e4edc6d0b14d676c898",
+      "function_end": "0x1fec44",
+      "function_start": "0x1feb98",
+      "name": "TGraalConnection_connectToServer_TString_const_TString_const",
+      "role": "game connection field transfer",
+      "string_literals": []
+    },
+    {
+      "address": "0x1feb38",
+      "call_tokens": [
+        "socket"
+      ],
+      "caller_count": 1,
+      "callers": [
+        {
+          "caller": "0x1eb964",
+          "caller_name": "TClient_setSSLParameters_scriptCallback",
+          "callsite": "0x1eb9d4"
+        }
+      ],
+      "code": "// TGraalConnection SSL field map: +144 is the game-server trust buffer and is copied to the socket through TSocketConnection::setSSLVerifyCert.\nTSocketConnection *__fastcall TGraalConnection_setSSLVerifyCert_TString_const(\n        TGraalConnection *this,\n        const TString *a2)\n{\n  const TString *v2; // x20\n  TSocketConnection *result; // x0\n\n  v2 = (TGraalConnection *)((char *)this + 144);\n  plt_TString_operator_assign_TString_const((char *)this + 144, a2);\n  result = *((TSocketConnection **)this + 32);\n  if ( result )\n    return (TSocketConnection *)plt_TSocketConnection_setSSLVerifyCert_TString_const(result, v2);\n  return result;\n}\n",
+      "code_bytes": 647,
+      "code_sha256": "be3c3ef34b2484e169a201754459ee252277df9e85715fc02ff39b0bd210f7e7",
+      "function_end": "0x1feb80",
+      "function_start": "0x1feb38",
+      "name": "TGraalConnection_setSSLVerifyCert_TString_const",
+      "role": "game-server verify-buffer setter",
+      "string_literals": []
+    },
+    {
+      "address": "0x1feae8",
+      "call_tokens": [],
+      "caller_count": 1,
+      "callers": [
+        {
+          "caller": "0x1eb964",
+          "caller_name": "TClient_setSSLParameters_scriptCallback",
+          "callsite": "0x1eb98c"
+        }
+      ],
+      "code": "// TGraalConnection SSL field map: +136 is the protocol string and is copied to TSocketConnection +8256.\n__int64 __fastcall TGraalConnection_setSSLProtocol_TString_const(TGraalConnection *this, const TString *a2)\n{\n  char *v2; // x20\n  __int64 result; // x0\n\n  v2 = (char *)this + 136;\n  plt_TString_operator_assign_TString_const((char *)this + 136, a2);\n  result = *((_QWORD *)this + 32);\n  if ( result )\n    return plt_TString_operator_assign_TString_const(result + 8256, v2);\n  return result;\n}\n",
+      "code_bytes": 498,
+      "code_sha256": "fc4849e61850740a3fa22d9b5c361768f3e235c38b5789437596a039c2d9a588",
+      "function_end": "0x1feb38",
+      "function_start": "0x1feae8",
+      "name": "TGraalConnection_setSSLProtocol_TString_const",
+      "role": "game-server TLS protocol setter",
+      "string_literals": []
+    },
+    {
+      "address": "0x1fea98",
+      "call_tokens": [],
+      "caller_count": 1,
+      "callers": [
+        {
+          "caller": "0x1eb964",
+          "caller_name": "TClient_setSSLParameters_scriptCallback",
+          "callsite": "0x1eb9a0"
+        }
+      ],
+      "code": "// TGraalConnection SSL field map: +128 is the cipher list and is copied to TSocketConnection +8248.\n__int64 __fastcall TGraalConnection_setSSLCipherList_TString_const(TGraalConnection *this, const TString *a2)\n{\n  char *v2; // x20\n  __int64 result; // x0\n\n  v2 = (char *)this + 128;\n  plt_TString_operator_assign_TString_const((char *)this + 128, a2);\n  result = *((_QWORD *)this + 32);\n  if ( result )\n    return plt_TString_operator_assign_TString_const(result + 8248, v2);\n  return result;\n}\n",
+      "code_bytes": 496,
+      "code_sha256": "371f77f1723a16f0fde29a480d156201000b78393a5e1494141323788cf2c89d",
+      "function_end": "0x1feae8",
+      "function_start": "0x1fea98",
+      "name": "TGraalConnection_setSSLCipherList_TString_const",
+      "role": "game-server TLS cipher setter",
+      "string_literals": []
+    },
+    {
+      "address": "0x1fea70",
+      "call_tokens": [],
+      "caller_count": 1,
+      "callers": [
+        {
+          "caller": "0x1eb964",
+          "caller_name": "TClient_setSSLParameters_scriptCallback",
+          "callsite": "0x1eb9f0"
+        }
+      ],
+      "code": "__int64 __fastcall TGraalConnection_setEnableSSL_bool(__int64 this, bool a2)\n{\n  TSocketConnection *v2; // x2\n\n  if ( *(_BYTE *)(this + 120) != a2 )\n  {\n    v2 = *(TSocketConnection **)(this + 256);\n    *(_BYTE *)(this + 120) = a2;\n    if ( v2 )\n      return plt_TSocketConnection_setEnableSSL_bool(v2, a2);\n  }\n  return this;\n}\n",
+      "code_bytes": 329,
+      "code_sha256": "59883b533875526e52224a5d83b043dac7f31f0113ce8822e8a8f5d5f7d42ffe",
+      "function_end": "0x1fea98",
+      "function_start": "0x1fea70",
+      "name": "TGraalConnection_setEnableSSL_bool",
+      "role": "game-server SSL enable setter",
+      "string_literals": []
     },
     {
       "address": "0x206bd8",
@@ -338,6 +458,8 @@
   "interpretation": [
     "TServerList_login selects connector mode and prepares the login request. A later server-warp event supplies the host, server name, and port for the game connection.",
     "TClient_connectToGameServer validates the supplied address and port, records an address-and-port digest, creates the client thread, and reports a generic failure when the inputs are empty or the socket is already in error.",
+    "The script callback at 0x1eb964 accepts an SSL enable flag, protocol, cipher list, and encrypted certificate. It decrypts the certificate with the recovered NakFpz15 key and copies all four values into TGraalConnection fields.",
+    "TGraalConnection_connectToServer transfers the stored SSL fields to the new socket before connecting. The companion game_server_tls artifact records that the recovered Classic source sets usessl false and guards setSSLParameters, so this stale game TLS material is dormant in the stock Classic branch.",
     "The socket path is nonblocking. Status 4 represents an in-progress connect, checkConnecting uses select and SO_ERROR, and status 5 represents a completed TCP connection.",
     "setStatus starts TLS when status 5 is reached and the SSL flag is set. The TLS setup selects a CyaSSL method, loads the configured verification buffer, applies optional hostname verification, and calls CyaSSL_connect.",
     "The network thread drains incoming data, processes outgoing packages, sends queued bytes, and sleeps briefly between iterations. The server-list handler drives reconnect, timeout, package, player, and server-warp events.",
