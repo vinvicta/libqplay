@@ -17,8 +17,8 @@
   "database": {
     "source_idb": "GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so.i64",
     "saved_copy": "analysis/libqplay_translated_from_active_v8.i64",
-    "saved_copy_bytes": 60106701,
-    "saved_copy_sha256": "32cb6dc0e30bd1c6a62baab45dd45a940d76e7d8951b927a3d1dfcc79355fbe7"
+    "saved_copy_bytes": 61286566,
+    "saved_copy_sha256": "3116c65db9da002b698c54f2aafca5c2497e65ba2549f06a853a28aca3389536"
   },
   "passes": [
     {
@@ -65,6 +65,7 @@
   },
   "notes": [
     "The saved copy was produced from the active ARM64 IDA database after the complete reviewed pass.",
+    "The saved copy was refreshed during the Android device and media pass after naming the display metrics, video rectangle state, and virtual-keyboard control.",
     "The remaining 421 entries are IDA-created functions without preserved source names. They remain addressable and were not given speculative source names.",
     "The verification and local replay steps contacted no live service."
   ]

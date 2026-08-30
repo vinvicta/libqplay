@@ -120,6 +120,14 @@ memory, but the stock Java bridge never sends them to a working SDK. The
 focused evidence is in
 `artifacts/original_partner_bridge_review_20260830.json`.
 
+The Android device and media pass found two useful compatibility details. The
+script table can read the Android release, manufacturer, model, and display
+metrics, while the native video path is only partly wired: the activity's
+video open and stop methods are no-ops and the rectangle setter has no matching
+static method in the reviewed `Natives` class. Keyboard closure is still a
+real asynchronous input path. The focused evidence is in
+`artifacts/original_android_device_media_review_20260830.json`.
+
 ## Repository layout
 
 * `docs/RESEARCH_NOTES.md` is the chronological investigation record.
@@ -184,6 +192,9 @@ focused evidence is in
 * `artifacts/original_partner_bridge_review_20260830.json` records the
   TapJoy, Distimo, Fabzat, TrialPay, Amazon, and Mobiroo compatibility paths,
   including their Java no-op behavior.
+* `artifacts/original_android_device_media_review_20260830.json` records the
+  Android build-info, display-metric, virtual-keyboard, and legacy video
+  bridges. It contains no device-collected values or media data.
 * `artifacts/ida_translation_verification_20260830.json` records the final
   packed IDA copy, pass counts, hashes, and zero-failure verification result.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.

@@ -1,0 +1,378 @@
+{
+  "artifact": "original_android_device_media_review_20260830",
+  "database": {
+    "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "imagebase": "0x0",
+    "path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
+  },
+  "findings": [
+    {
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "The Android script table exposes getandroiddevicemodel and getandroidosversion.",
+        "The Java implementations read Build.MANUFACTURER, Build.MODEL, and Build.VERSION.RELEASE.",
+        "The existing script HTTP and Facebook bridges can provide separate egress or authenticated data paths, although this review did not join them at runtime."
+      ],
+      "id": "ANDROID-DEVICE-001",
+      "impact": "A trusted or compromised script can fingerprint the broad device environment. The individual values are not unique identifiers and the callbacks do not themselves contact a server.",
+      "limits": "No script was executed and no device model or release was sent to a live service during this pass.",
+      "severity": "low",
+      "title": "Scripts can read Android build identity and release information"
+    },
+    {
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "The native path caches rectangle state and conditionally draws it in QPlayLoop.",
+        "QPlayActivity.openVideoPlayer and stopVideoPlayer return immediately.",
+        "Natives.smali has no static setVideoPlayerRectangle declaration, and the exported native update callback is not declared in the reviewed Natives class."
+      ],
+      "id": "ANDROID-MEDIA-001",
+      "impact": "Video features that depend on this bridge can silently do nothing or retain stale rectangle state. This is a compatibility defect, not evidence of a connector or TLS problem.",
+      "limits": "The review did not load a media file or exercise a third-party video backend.",
+      "severity": "informational",
+      "title": "The native video path is not backed by a working stock Java implementation"
+    },
+    {
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "The Java closeVirtualKeyboard method returns when the EditText is hidden.",
+        "The final text callback requires both the native boolean argument and Natives.loaded to be true.",
+        "Text delivery is posted to the GL thread while keyboard hiding is posted to the UI thread."
+      ],
+      "id": "ANDROID-INPUT-001",
+      "impact": "A script or login flow can observe missing final text if the renderer is not loaded or the widget is already hidden. This can look like an input or startup failure rather than a transport failure.",
+      "limits": "No live UI interaction was performed during this static pass.",
+      "severity": "low",
+      "title": "Final virtual-keyboard text delivery depends on asynchronous lifecycle gates"
+    }
+  ],
+  "functions": [
+    {
+      "address": "0x2404a4",
+      "callers": [],
+      "code": "// Calls Java static getAndroidDeviceModel()[B. Copies the returned byte array into a TString.\nTString *__usercall JNI_getAndroidDeviceModel@<X0>(TString *a1@<X8>)\n{\n  __int64 v2; // x2\n  __int64 v3; // x0\n  __int64 v4; // x19\n  int v5; // w23\n  const char *v6; // x20\n\n  v2 = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n         javaenvironment,\n         javaenvironmentclass,\n         \"getAndroidDeviceModel\",\n         \"()[B\");\n  if ( v2 )\n  {\n    v3 = plt_JNIEnv_CallStaticObjectMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v2);\n    *(_QWORD *)a1 = 0;\n    v4 = v3;\n    if ( v3 )\n    {\n      v5 = (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 1368LL))(javaenvironment, v3);\n      v6 = (const char *)(*(__int64 (__fastcall **)(__int64, __int64, _QWORD))(*(_QWORD *)javaenvironment + 1472LL))(\n                           javaenvironment,\n                           v4,\n                           0);\n      if ( (unsigned int)(v5 - 1) <= 0x3FF )\n      {\n        if ( v6 )\n          plt_TString_addbuffer_char_const_int(a1, v6, v5);\n      }\n      (*(void (__fastcall **)(__int64, __int64, const char *, _QWORD))(*(_QWORD *)javaenvironment + 1536LL))(\n        javaenvironment,\n        v4,\n        v6,\n        0);\n    }\n    return a1;\n  }\n  else\n  {\n    *(_QWORD *)a1 = 0;\n    return a1;\n  }\n}\n",
+      "code_bytes": 1405,
+      "code_sha256": "d1f3778eb2003bcdb2ef991f1ba74000e1297625f8b611febb5b4e3ac8215510",
+      "function_end": "0x2405c8",
+      "function_start": "0x2404a4",
+      "name": "JNI_getAndroidDeviceModel",
+      "role": "Android manufacturer and model bridge"
+    },
+    {
+      "address": "0x2405c8",
+      "callers": [],
+      "code": "// Calls Java static getAndroidOSVersion()[B. Copies the returned byte array into a TString.\nTString *__usercall JNI_getAndroidOSVersion@<X0>(TString *a1@<X8>)\n{\n  __int64 v2; // x2\n  __int64 v3; // x0\n  __int64 v4; // x19\n  int v5; // w23\n  const char *v6; // x20\n\n  v2 = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n         javaenvironment,\n         javaenvironmentclass,\n         \"getAndroidOSVersion\",\n         \"()[B\");\n  if ( v2 )\n  {\n    v3 = plt_JNIEnv_CallStaticObjectMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v2);\n    *(_QWORD *)a1 = 0;\n    v4 = v3;\n    if ( v3 )\n    {\n      v5 = (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 1368LL))(javaenvironment, v3);\n      v6 = (const char *)(*(__int64 (__fastcall **)(__int64, __int64, _QWORD))(*(_QWORD *)javaenvironment + 1472LL))(\n                           javaenvironment,\n                           v4,\n                           0);\n      if ( (unsigned int)(v5 - 1) <= 0x3FF )\n      {\n        if ( v6 )\n          plt_TString_addbuffer_char_const_int(a1, v6, v5);\n      }\n      (*(void (__fastcall **)(__int64, __int64, const char *, _QWORD))(*(_QWORD *)javaenvironment + 1536LL))(\n        javaenvironment,\n        v4,\n        v6,\n        0);\n    }\n    return a1;\n  }\n  else\n  {\n    *(_QWORD *)a1 = 0;\n    return a1;\n  }\n}\n",
+      "code_bytes": 1399,
+      "code_sha256": "4c6ae4766306fcef686b22436c6f7b64452da28bc786d008343d019dcf9f1b1b",
+      "function_end": "0x2406ec",
+      "function_start": "0x2405c8",
+      "name": "JNI_getAndroidOSVersion",
+      "role": "Android release-version bridge"
+    },
+    {
+      "address": "0x241444",
+      "callers": [],
+      "code": "// Calls Java static closeVirtualKeyboard(I)V. Calls the Java static keyboard-close method with the integer argument.\n__int64 __fastcall JNI_closeVirtualKeyboard(unsigned __int8 a1)\n{\n  unsigned int v1; // w21\n  __int64 result; // x0\n  __int64 v3; // x4\n\n  v1 = a1;\n  result = virtual_keyboard_control;\n  if ( virtual_keyboard_control )\n  {\n    result = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n               javaenvironment,\n               javaenvironmentclass,\n               \"closeVirtualKeyboard\",\n               \"(I)V\");\n    if ( result )\n      return plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, result, v1, v3);\n  }\n  return result;\n}\n",
+      "code_bytes": 757,
+      "code_sha256": "12f3eee267f3a9b53cbb727be938ee74e9316898b7a2686fc081886f8370758b",
+      "function_end": "0x2414cc",
+      "function_start": "0x241444",
+      "name": "JNI_closeVirtualKeyboard",
+      "role": "virtual-keyboard close bridge"
+    },
+    {
+      "address": "0x242df0",
+      "callers": [],
+      "code": "// Calls Java static setVideoPlayerRectangle(IIII)V. Caches the four rectangle values in dword_391228 through dword_391234 and resolves the Java video-rectangle method.\nvoid __fastcall JNI_setVideoPlayerRectangle(unsigned int a1, unsigned int a2, unsigned int a3, unsigned int a4)\n{\n  __int64 v8; // x4\n  __int64 (__fastcall *v9)(__int64, __int64, const char *, const char *); // x4\n  __int64 v10; // x2\n\n  v8 = *(_QWORD *)javaenvironment;\n  video_rectangle_x = a1;\n  v9 = *(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(v8 + 904);\n  video_rectangle_y = a2;\n  video_rectangle_width = a3;\n  video_rectangle_height = a4;\n  v10 = v9(javaenvironment, javaenvironmentclass, \"setVideoPlayerRectangle\", \"(IIII)V\");\n  if ( v10 )\n    plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v10, a1, a2, a3, a4);\n}\n",
+      "code_bytes": 862,
+      "code_sha256": "4688041a3d3bbc3902af633d8da6d8720bbf2e84c38e6029d4268c9593ba7057",
+      "function_end": "0x242eb4",
+      "function_start": "0x242df0",
+      "name": "JNI_setVideoPlayerRectangle",
+      "role": "video rectangle bridge"
+    },
+    {
+      "address": "0x242f0c",
+      "callers": [
+        {
+          "caller": "0xdef50",
+          "caller_name": "plt_openVirtualKeyboard_TString_const_TString_const",
+          "callsite": "0xdef54"
+        },
+        {
+          "caller": "0xdef50",
+          "caller_name": "plt_openVirtualKeyboard_TString_const_TString_const",
+          "callsite": "0xdef5c"
+        }
+      ],
+      "code": "__int64 __fastcall openVirtualKeyboard_TString_const_TString_const(unsigned int **a1, unsigned int **a2)\n{\n  __int64 result; // x0\n  __int64 v5; // x23\n  __int64 v6; // x20\n  unsigned int *v7; // x4\n  __int64 v8; // x0\n  __int64 v9; // x3\n  _DWORD *v10; // x4\n  unsigned int v11; // t1\n  __int64 v12; // x21\n  unsigned int *v13; // x4\n  __int64 v14; // x0\n  __int64 v15; // x3\n  _DWORD *v16; // x4\n  unsigned int v17; // t1\n\n  result = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n             javaenvironment,\n             javaenvironmentclass,\n             \"openVirtualKeyboard\",\n             \"([B[B)V\");\n  v5 = result;\n  if ( result )\n  {\n    if ( *a1 )\n    {\n      v6 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, **a1);\n      v7 = *a1;\n      v8 = javaenvironment;\n      if ( *a1 )\n      {\nLABEL_4:\n        v11 = *v7;\n        v10 = v7 + 2;\n        v9 = v11;\n        goto LABEL_5;\n      }\n    }\n    else\n    {\n      v6 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, 0);\n      v7 = *a1;\n      v8 = javaenvironment;\n      if ( *a1 )\n        goto LABEL_4;\n    }\n    v9 = 0;\n    v10 = (_DWORD *)TString_dummystr;\nLABEL_5:\n    (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, _DWORD *))(*(_QWORD *)v8 + 1664LL))(v8, v6, 0, v9, v10);\n    if ( *a2 )\n    {\n      v12 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, **a2);\n      v13 = *a2;\n      v14 = javaenvironment;\n      if ( *a2 )\n      {\nLABEL_7:\n        v17 = *v13;\n        v16 = v13 + 2;\n        v15 = v17;\nLABEL_8:\n        (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, _DWORD *))(*(_QWORD *)v14 + 1664LL))(\n          v14,\n          v12,\n          0,\n          v15,\n          v16);\n        plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v5, v6, v12);\n        (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v6);\n        return (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v12);\n      }\n    }\n    else\n    {\n      v12 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, 0);\n      v13 = *a2;\n      v14 = javaenvironment;\n      if ( *a2 )\n        goto LABEL_7;\n    }\n    v15 = 0;\n    v16 = (_DWORD *)TString_dummystr;\n    goto LABEL_8;\n  }\n  return result;\n}\n",
+      "code_bytes": 2558,
+      "code_sha256": "ab86d99a8c2f7ee9a1a22ec93a030534cfea139f18151879084dc6500ab8a3cc",
+      "function_end": "0x2430d4",
+      "function_start": "0x242f0c",
+      "name": "openVirtualKeyboard_TString_const_TString_const",
+      "role": "virtual-keyboard open bridge"
+    },
+    {
+      "address": "0x2430d4",
+      "callers": [
+        {
+          "caller": "0xdd7f0",
+          "caller_name": "plt_closeVirtualKeyboard_void",
+          "callsite": "0xdd7f4"
+        },
+        {
+          "caller": "0xdd7f0",
+          "caller_name": "plt_closeVirtualKeyboard_void",
+          "callsite": "0xdd7fc"
+        }
+      ],
+      "code": "void __fastcall closeVirtualKeyboard_void()\n{\n  __int64 v0; // x2\n\n  if ( virtual_keyboard_control )\n  {\n    v0 = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n           javaenvironment,\n           javaenvironmentclass,\n           \"closeVirtualKeyboard\",\n           \"(I)V\");\n    if ( v0 )\n      plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v0, 0);\n  }\n}\n",
+      "code_bytes": 464,
+      "code_sha256": "a25c2c5785c54800d3676608ea9b79cd9b0c1a096f5ccd2e8c3082532f20a3ce",
+      "function_end": "0x243158",
+      "function_start": "0x2430d4",
+      "name": "closeVirtualKeyboard_void",
+      "role": "native virtual-keyboard close helper"
+    },
+    {
+      "address": "0x243274",
+      "callers": [
+        {
+          "caller": "0xdfa60",
+          "caller_name": "plt_openVideoPlayer_TString_const_TString_const",
+          "callsite": "0xdfa64"
+        },
+        {
+          "caller": "0xdfa60",
+          "caller_name": "plt_openVideoPlayer_TString_const_TString_const",
+          "callsite": "0xdfa6c"
+        }
+      ],
+      "code": "__int64 __fastcall openVideoPlayer_TString_const_TString_const(const TString *a1, const TString *a2)\n{\n  __int64 result; // x0\n  const TString *v4; // x1\n  __int64 v5; // x24\n  int v6; // w1\n  unsigned int *v7; // x1\n  __int64 v8; // x0\n  __int64 v9; // x22\n  unsigned int *v10; // x4\n  __int64 v11; // x0\n  __int64 v12; // x3\n  _DWORD *v13; // x4\n  unsigned int v14; // t1\n  unsigned int *v15; // [xsp+48h] [xbp-8h] BYREF\n\n  result = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n             javaenvironment,\n             javaenvironmentclass,\n             \"openVideoPlayer\",\n             \"([B)V\");\n  v5 = result;\n  if ( result )\n  {\n    plt_TFiles_lowerCaseFilename_TString_const((__int64 *)&v15, a1, v4);\n    plt_TString_operator_assign_TString_const(&video_player_filename, &v15);\n    plt_TString_clear_void((TString *)&v15);\n    if ( (unsigned __int8)plt_TString_starts_TString_const(a1, (const TString *)&data_TFiles_basedatafolder2) )\n    {\n      if ( data_TFiles_basedatafolder2 )\n        v6 = *(_DWORD *)data_TFiles_basedatafolder2;\n      else\n        v6 = 0;\n      plt_TString_subString_int((__int64 *)&v15, a1, v6);\n      v7 = v15;\n      v8 = javaenvironment;\n      if ( v15 )\n      {\nLABEL_6:\n        v9 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)v8 + 1408LL))(v8, *v7);\n        v10 = v15;\n        v11 = javaenvironment;\n        if ( v15 )\n        {\nLABEL_7:\n          v14 = *v10;\n          v13 = v10 + 2;\n          v12 = v14;\nLABEL_8:\n          (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, _DWORD *))(*(_QWORD *)v11 + 1664LL))(\n            v11,\n            v9,\n            0,\n            v12,\n            v13);\n          plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v5, v9);\n          (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v9);\n          return plt_TString_clear_void((TString *)&v15);\n        }\nLABEL_12:\n        v12 = 0;\n        v13 = (_DWORD *)TString_dummystr;\n        goto LABEL_8;\n      }\n    }\n    else\n    {\n      v15 = nullptr;\n      plt_TString_operator_assign_TString_const(&v15, a1);\n      v7 = v15;\n      v8 = javaenvironment;\n      if ( v15 )\n        goto LABEL_6;\n    }\n    v9 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)v8 + 1408LL))(v8, 0);\n    v10 = v15;\n    v11 = javaenvironment;\n    if ( v15 )\n      goto LABEL_7;\n    goto LABEL_12;\n  }\n  return result;\n}\n",
+      "code_bytes": 2502,
+      "code_sha256": "5951286ce637fb642aacd5fe03552e7c84a1ac05491afa6b21bdfdbff28ca2dd",
+      "function_end": "0x24342c",
+      "function_start": "0x243274",
+      "name": "openVideoPlayer_TString_const_TString_const",
+      "role": "video open bridge"
+    },
+    {
+      "address": "0x24342c",
+      "callers": [
+        {
+          "caller": "0xdbd70",
+          "caller_name": "plt_stopVideoPlayer_void",
+          "callsite": "0xdbd74"
+        },
+        {
+          "caller": "0xdbd70",
+          "caller_name": "plt_stopVideoPlayer_void",
+          "callsite": "0xdbd7c"
+        }
+      ],
+      "code": "void __fastcall stopVideoPlayer_void()\n{\n  __int64 v0; // x2\n\n  v0 = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n         javaenvironment,\n         javaenvironmentclass,\n         \"stopVideoPlayer\",\n         \"()V\");\n  if ( v0 )\n    plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v0);\n}\n",
+      "code_bytes": 394,
+      "code_sha256": "ffbde7beced53cc269b98537bed569a78f584453f5fe348f14f2ef2039bdd7de",
+      "function_end": "0x2434a0",
+      "function_start": "0x24342c",
+      "name": "stopVideoPlayer_void",
+      "role": "video stop bridge"
+    },
+    {
+      "address": "0x2440f4",
+      "callers": [],
+      "code": "char *__fastcall Java_com_quattroplay_GraalClassic_Natives_QPlayLoop(TTime *a1, __int64 a2)\n{\n  double v2; // d8\n  double v3; // d0\n  char *result; // x0\n  double v5; // d1\n  __int64 v6; // x2\n  void (__fastcall *v7)(__int64, float *); // x2\n  unsigned __int64 inited; // x0\n  TClientEnvironment *v9; // x0\n  bool v10; // w1\n  TScreenPanelOpenGL *v11; // x20\n  void (__fastcall *v12)(__int64, float *); // x2\n  TWindow *v13; // x0\n  TClientEnvironment *v14; // x0\n  TClientEnvironment *v15; // x0\n  float v16; // [xsp+40h] [xbp-10h] BYREF\n  float v17; // [xsp+44h] [xbp-Ch]\n  float v18; // [xsp+48h] [xbp-8h]\n  float v19; // [xsp+4Ch] [xbp-4h]\n\n  javaenvironment = (__int64)a1;\n  javaenvironmentclass = a2;\n  v2 = (double)(unsigned int)data_TTime_frametick / 1000.0;\n  plt_TTime_getTime_void(a1);\n  result = (char *)&dword_0 + 2;\n  v5 = *(double *)&qword_3912B8 + v2;\n  if ( v3 >= *(double *)&qword_3912B8 + v2 )\n  {\n    if ( v3 > *(double *)&qword_3912B8 + v2 * 2.0 )\n      v5 = v3;\n    qword_3912B8 = *(_QWORD *)&v5;\n    if ( (unsigned __int8)plt_TClientEnvironment_TimeExpired_void((TClientEnvironment *)((char *)&dword_0 + 2)) )\n      goto LABEL_21;\n    plt_invokeAndroidMouseEvents_void();\n    (*(void (__fastcall **)(__int64))(*(_QWORD *)data_TGraphicOperation_target + 200LL))(data_TGraphicOperation_target);\n    v6 = *(_QWORD *)data_TGraphicOperation_target;\n    v16 = 1.0;\n    v17 = 1.0;\n    v7 = *(void (__fastcall **)(__int64, float *))(v6 + 216);\n    v18 = 1.0;\n    v19 = 1.0;\n    v7(data_TGraphicOperation_target, &v16);\n    glDisableClientState(32884);\n    glDisableClientState(32886);\n    glDisableClientState(32885);\n    glDisableClientState(32888);\n    glDisable(3008);\n    glDisable(2929);\n    glDisable(3553);\n    inited = (unsigned __int8)byte_3912C0;\n    if ( byte_3912C0 )\n    {\n      byte_3912C0 = 0;\n      v14 = (TClientEnvironment *)plt_TClientEnvironment_freeGraphics_void((TClientEnvironment *)inited);\n      v15 = (TClientEnvironment *)plt_TClientEnvironment_reloadTextures_void(v14);\n      inited = plt_TClientEnvironment_initGraphics_void(v15);\n    }\n    v9 = (TClientEnvironment *)plt_TClientEnvironment_runTimers_void((TClientEnvironment *)inited);\n    if ( (unsigned __int8)plt_TClientEnvironment_getLoadingScreenEnabled_void(v9) )\n    {\n      plt_drawDefaultScreen_void();\n    }\n    else\n    {\n      if ( !data_TClient_client )\n        plt_drawDefaultScreen_void();\n      plt_TPanelInterface_setClippingRectangle_float_float_float_float(\n        (TPanelInterface *)data_TGraphicOperation_target,\n        0.0,\n        0.0,\n        (float)SCR_WIDTH,\n        (float)SCR_HEIGHT);\n      if ( !(unsigned __int8)plt_TClientEnvironment_drawGame_bool(nullptr, v10) )\n      {\n        glClearColor(0.0, 0.0, 0.0, 1.0);\n        glClear(0x4000);\n      }\n      if ( (unsigned __int8)plt_isVideoPlayerOpen_void() && video_rectangle_width > 0 && video_rectangle_height > 0 )\n      {\n        v11 = (TScreenPanelOpenGL *)data_TGraphicOperation_target;\n        v12 = *(void (__fastcall **)(__int64, float *))(*(_QWORD *)data_TGraphicOperation_target + 216LL);\n        v16 = 0.0;\n        v17 = 0.0;\n        v18 = 0.0;\n        v19 = 0.0;\n        v12(data_TGraphicOperation_target, &v16);\n        plt_TScreenPanelOpenGL_drawQuad_float_float_float_float(\n          v11,\n          (float)video_rectangle_x,\n          (float)video_rectangle_y,\n          (float)video_rectangle_width,\n          (float)video_rectangle_height);\n      }\n      if ( data_TWindow_mainwindow )\n      {\n        v13 = (TWindow *)(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)data_TWindow_mainwindow + 528LL))(data_TWindow_mainwindow);\n        plt_TWindow_onFrameDrawn_void(v13);\n      }\n    }\n    if ( data_TGameEnvironment_closeapplication )\nLABEL_21:\n      exit(0);\n    return (_BYTE *)(&dword_0 + 1);\n  }\n  return result;\n}\n",
+      "code_bytes": 3813,
+      "code_sha256": "bb4bbf5f343cddb9d2b539bf698c0ea8cfc0c75f92684cc3bb3a7e1ceb0d030c",
+      "function_end": "0x2443ac",
+      "function_start": "0x2440f4",
+      "name": "Java_com_quattroplay_GraalClassic_Natives_QPlayLoop",
+      "role": "Android render loop"
+    },
+    {
+      "address": "0x245a18",
+      "callers": [],
+      "code": "__int64 *__fastcall Java_com_quattroplay_GraalClassic_Natives_onUpdateVideoPlayerRectangle(\n        __int64 a1,\n        __int64 a2,\n        int a3,\n        int a4,\n        int a5,\n        int a6)\n{\n  video_rectangle_x = a3;\n  video_rectangle_y = a4;\n  video_rectangle_width = a5;\n  video_rectangle_height = a6;\n  return &qword_391210;\n}\n",
+      "code_bytes": 337,
+      "code_sha256": "2613aeae5f25a5d404995269004d0e88a7fb250588920cd9ef8e969511dd3041",
+      "function_end": "0x245a34",
+      "function_start": "0x245a18",
+      "name": "Java_com_quattroplay_GraalClassic_Natives_onUpdateVideoPlayerRectangle",
+      "role": "video rectangle native callback"
+    },
+    {
+      "address": "0x246628",
+      "callers": [],
+      "code": "__int64 *__usercall MainAndroid_script_androidgetdisplayattributes@<X0>(__int64 *a1@<X8>)\n{\n  __int64 v3; // [xsp+30h] [xbp-20h] BYREF\n  _BYTE v4[24]; // [xsp+38h] [xbp-18h] BYREF\n\n  plt_TStringList_TStringList_void((TStringList *)v4);\n  v3 = 0;\n  plt_TString_operator_lshift_int((TString *)&v3, android_density_dpi);\n  plt_TStringList_Add_TString_const((TStringList *)v4, (const TString *)&v3);\n  plt_TString_clear_void((TString *)&v3);\n  v3 = 0;\n  plt_TString_operator_lshift_double(&v3, android_xdpi);\n  plt_TStringList_Add_TString_const((TStringList *)v4, (const TString *)&v3);\n  plt_TString_clear_void((TString *)&v3);\n  v3 = 0;\n  plt_TString_operator_lshift_double(&v3, android_ydpi);\n  plt_TStringList_Add_TString_const((TStringList *)v4, (const TString *)&v3);\n  plt_TString_clear_void((TString *)&v3);\n  v3 = 0;\n  plt_TString_operator_lshift_double(&v3, android_scaled_density);\n  plt_TStringList_Add_TString_const((TStringList *)v4, (const TString *)&v3);\n  plt_TString_clear_void((TString *)&v3);\n  plt_TStringList_GetCommaText2_void(a1, (TStringList *)v4);\n  plt_TStringList_TStringList((TStringList *)v4);\n  return a1;\n}\n",
+      "code_bytes": 1135,
+      "code_sha256": "998571fb19e63d736adf5b1e13ea31183d68d8e6379978c5d3c1476ea104d01d",
+      "function_end": "0x246720",
+      "function_start": "0x246628",
+      "name": "MainAndroid_script_androidgetdisplayattributes",
+      "role": "display attributes script callback"
+    }
+  ],
+  "interpretation": [
+    "The device and display callbacks explain environment data supplied to scripts, not the connector transport failure.",
+    "The native video state machine survives in the library, but the reviewed Android activity leaves its open and stop methods empty and does not declare the rectangle setter.",
+    "A repair should disclose only the environment fields required by the protocol, keep final text delivery lifecycle-safe, and either remove the dead video bridge or implement it as an explicit feature."
+  ],
+  "java_observations": [
+    {
+      "behavior": [
+        "Reads android.os.Build.VERSION.RELEASE.",
+        "Returns String.getBytes() using the platform default charset."
+      ],
+      "class": "com.quattroplay.GraalClassic.Natives",
+      "method": "getAndroidOSVersion()",
+      "source": "original DEX smali"
+    },
+    {
+      "behavior": [
+        "Concatenates android.os.Build.MANUFACTURER, one space, and android.os.Build.MODEL.",
+        "Returns String.getBytes() using the platform default charset."
+      ],
+      "class": "com.quattroplay.GraalClassic.Natives",
+      "method": "getAndroidDeviceModel()",
+      "source": "original DEX smali"
+    },
+    {
+      "behavior": [
+        "Returns immediately without creating or starting a player."
+      ],
+      "class": "com.quattroplay.GraalClassic.QPlayActivity",
+      "method": "openVideoPlayer(String)",
+      "source": "original DEX smali"
+    },
+    {
+      "behavior": [
+        "Returns immediately without changing Java-side media state."
+      ],
+      "class": "com.quattroplay.GraalClassic.QPlayActivity",
+      "method": "stopVideoPlayer()",
+      "source": "original DEX smali"
+    },
+    {
+      "behavior": [
+        "No matching static method declaration was found in Natives.smali.",
+        "The native lookup can therefore return no method ID in the reviewed APK."
+      ],
+      "class": "com.quattroplay.GraalClassic.Natives",
+      "method": "setVideoPlayerRectangle(IIII)",
+      "source": "original DEX class method inventory"
+    },
+    {
+      "behavior": [
+        "Returns if the EditText is not visible.",
+        "When visible, snapshots the text, schedules a GL-thread onTextEntered(true, text) callback only when the argument is true and Natives.loaded is true, then posts an UI-thread task that hides the input method and makes the EditText gone."
+      ],
+      "class": "com.quattroplay.GraalClassic.QPlayActivity",
+      "method": "closeVirtualKeyboard(boolean)",
+      "source": "original DEX smali"
+    }
+  ],
+  "media_opened": false,
+  "network_contacted": false,
+  "observations": [
+    {
+      "address": "0x2404a4",
+      "classification": "device-model-disclosure",
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "JNI_getAndroidDeviceModel resolves getAndroidDeviceModel()[B and copies a returned byte array into a native TString.",
+        "The Java method joins Build.MANUFACTURER and Build.MODEL.",
+        "The native copy accepts lengths from 1 through 1024 bytes and releases the Java array afterward."
+      ],
+      "interpretation": "An activated script can learn the device manufacturer and model without a special permission in this path. The callback itself does not transmit the value."
+    },
+    {
+      "address": "0x2405c8",
+      "classification": "os-version-disclosure",
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "JNI_getAndroidOSVersion resolves getAndroidOSVersion()[B and uses the same bounded byte-array copy.",
+        "The Java method returns Build.VERSION.RELEASE."
+      ],
+      "interpretation": "An activated script can learn the user-visible Android release string. This is ordinary environment information, but it can contribute to device fingerprinting when combined with other callbacks."
+    },
+    {
+      "address": "0x246628",
+      "classification": "display-metric serialization",
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "QPlayMain stores densityDpi, xdpi, ydpi, and scaledDensity in native globals.",
+        "MainAndroid_script_androidgetdisplayattributes formats those four values as a comma-separated TStringList result.",
+        "The native names android_density_dpi, android_xdpi, android_ydpi, and android_scaled_density now describe the active IDA data items."
+      ],
+      "interpretation": "The callback supplies rendering and layout metrics to scripts. It is a compatibility surface rather than a network or credential path."
+    },
+    {
+      "address": "0x242df0",
+      "classification": "video-rectangle-state",
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "JNI_setVideoPlayerRectangle stores four caller-supplied integers in video_rectangle_x, video_rectangle_y, video_rectangle_width, and video_rectangle_height.",
+        "It attempts to resolve setVideoPlayerRectangle(IIII)V on the Java class saved by QPlayMain.",
+        "The reviewed Natives class has no matching static declaration, so the lookup has no visible Java implementation to reach."
+      ],
+      "interpretation": "The native library retains video placement state, but the stock Java bridge does not provide the corresponding setter."
+    },
+    {
+      "address": "0x2440f4",
+      "classification": "video-render-gate",
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "QPlayLoop draws a quad only when isVideoPlayerOpen() is true and the cached width and height are positive.",
+        "The quad uses the four cached rectangle values after normal game drawing and graphics-state setup.",
+        "QPlayActivity.openVideoPlayer and stopVideoPlayer are Java no-ops in the reviewed DEX, so the normal Android listener path does not establish a player."
+      ],
+      "interpretation": "The old video path is present in native code but is disabled or incomplete at the Android boundary in this APK. It is not a plausible explanation for connector failure."
+    },
+    {
+      "address": "0x241444",
+      "classification": "keyboard-close-dispatch",
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "JNI_closeVirtualKeyboard calls the Java closeVirtualKeyboard(I)V method only when a native virtual keyboard control has been registered.",
+        "Natives.closeVirtualKeyboard forwards the integer as a boolean to the EventListener.",
+        "QPlayActivity.closeVirtualKeyboard snapshots visible text, conditionally sends onTextEntered, then hides the IME and the EditText on the UI thread."
+      ],
+      "interpretation": "Keyboard closure is an asynchronous UI and input callback. A startup test that interrupts this sequence can miss text delivery without indicating a network failure."
+    }
+  ],
+  "schema": "libqplay.original-android-device-media-review.v1",
+  "scope": "read-only review of original 1.8 Android build-info, display, input, and legacy video callbacks",
+  "script_surface": {
+    "entries": [
+      {
+        "callback_va": "0x2405c8",
+        "index": 1,
+        "native_signature": "getAndroidOSVersion()[B",
+        "script_name": "getandroidosversion"
+      },
+      {
+        "callback_va": "0x2404a4",
+        "index": 2,
+        "native_signature": "getAndroidDeviceModel()[B",
+        "script_name": "getandroiddevicemodel"
+      },
+      {
+        "callback_va": "0x242df0",
+        "index": 4,
+        "native_signature": "setVideoPlayerRectangle(IIII)V",
+        "script_name": "setvideoplayerrectangle"
+      },
+      {
+        "callback_va": "0x241444",
+        "index": 43,
+        "native_signature": "closeVirtualKeyboard(I)V",
+        "script_name": "forceclosevirtualkeyboard"
+      }
+    ],
+    "owner": "main_android_initStaticScriptVars_void",
+    "registered_function_count": 44,
+    "table_va": "0x38b2d0"
+  },
+  "scripts_executed": false
+}
