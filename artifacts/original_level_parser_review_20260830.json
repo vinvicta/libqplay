@@ -63,9 +63,9 @@
           "callsite": "0x1aa238"
         }
       ],
-      "code": "_DWORD *__fastcall TEncryption_loadCodedFile_TString_const(TEncryption *this, const TString *a2)\n{\n  int *v2; // x0\n  int *v3; // x19\n  TString *v4; // x26\n  _DWORD *result; // x0\n  int v6; // w24\n  int v7; // w3\n  __int64 v8; // x23\n  char *v9; // x23\n  int v10; // w21\n  __int64 v11; // x24\n  int v12; // w28\n  void *v13; // x0\n  int v14; // w0\n  signed int v16; // [xsp+68h] [xbp-38h]\n  _DWORD *v17; // [xsp+70h] [xbp-30h]\n  int dest; // [xsp+84h] [xbp-1Ch] BYREF\n  int8x8_t v19; // [xsp+88h] [xbp-18h]\n  int8x8_t v20; // [xsp+90h] [xbp-10h] BYREF\n  _BYTE v21[8]; // [xsp+98h] [xbp-8h] BYREF\n\n  v2 = (int *)plt_operator_new_ulong__2(0x10u);\n  *v2 = 0;\n  v2[1] = 0;\n  v3 = v2;\n  *((_QWORD *)v2 + 1) = 0;\n  v4 = (TString *)(v2 + 2);\n  ++cstream;\n  plt_TStream_LoadFromFile_TString_const((TStream *)v2, this);\n  if ( v3[1] <= 3 || (plt_TStream_read_void_int((TStream *)v3, &dest, 4), v6 = dest, dest + 3 >= v3[1]) )\n  {\n    --cstream;\n    plt_TString_clear_void(v4);\n    plt_operator_delete_void__2(v3);\n    return nullptr;\n  }\n  else\n  {\n    v16 = dest - 8;\n    v19.n64_u64[0] = 0;\n    v17 = (_DWORD *)plt_operator_new_ulong__2(0x10u);\n    v7 = cstream + 1;\n    *v17 = 0;\n    v17[1] = 0;\n    *((_QWORD *)v17 + 1) = 0;\n    cstream = v7;\n    plt_TString_setSize_int_bool((TString *)(v17 + 2), v6 - 8, 0);\n    v8 = *((_QWORD *)v17 + 1);\n    if ( v8 )\n      v9 = (char *)(v8 + 8);\n    else\n      v9 = (char *)TString_dummystr;\n    v10 = 0;\n    while ( v16 > v10 )\n    {\n      v11 = 0;\n      plt_TStream_read_void_int((TStream *)v3, &v20, 8);\n      do\n        v21[v11++] = plt_drandi_void();\n      while ( v11 != 8 );\n      v12 = v16 - v10;\n      plt_TEncryption_des_decryptmemory_uchar_const_uchar_uint(\n        (TEncryption *)v21,\n        (const unsigned __int8 *)&v20,\n        (unsigned __int8 *)&byte_8,\n        v16);\n      if ( v16 - v10 > 8 )\n        v12 = 8;\n      v13 = v9;\n      v10 += v12;\n      v9 += v12;\n      v19.n64_u64[0] = vadd_s8(v20, v19).n64_u64[0];\n      memcpy(v13, &v20, v12);\n    }\n    plt_TStream_read_void_int((TStream *)v3, &v20, 8);\n    --cstream;\n    plt_TString_clear_void(v4);\n    plt_operator_delete_void__2(v3);\n    v14 = v19.n64_u8[0];\n    v17[1] = v10;\n    if ( v20.n64_u8[0] != v14\n      || v20.n64_u8[1] != v19.n64_u8[1]\n      || v20.n64_u8[2] != v19.n64_u8[2]\n      || v20.n64_u8[3] != v19.n64_u8[3]\n      || v20.n64_u8[4] != v19.n64_u8[4]\n      || v20.n64_u8[5] != v19.n64_u8[5]\n      || v20.n64_u8[6] != v19.n64_u8[6]\n      || (result = v17, v20.n64_u8[7] != v19.n64_u8[7]) )\n    {\n      --cstream;\n      plt_TString_clear_void((TString *)(v17 + 2));\n      plt_operator_delete_void__2(v17);\n      return nullptr;\n    }\n  }\n  return result;\n}\n",
-      "code_bytes": 2678,
-      "code_sha256": "70e406c7fff3ea2ed487e0f7554a279fc32c78f0afc92e7be93d2fdab003eb3c",
+      "code": "_DWORD *__fastcall TEncryption_loadCodedFile_TString_const(TEncryption *this, const TString *a2)\n{\n  int *v2; // x0\n  int *v3; // x19\n  TString *v4; // x26\n  _DWORD *result; // x0\n  int v6; // w24\n  int v7; // w3\n  __int64 v8; // x23\n  char *v9; // x23\n  int v10; // w21\n  __int64 v11; // x24\n  int v12; // w28\n  void *v13; // x0\n  int v14; // w0\n  signed int v16; // [xsp+68h] [xbp-38h]\n  _DWORD *v17; // [xsp+70h] [xbp-30h]\n  int dest; // [xsp+84h] [xbp-1Ch] BYREF\n  int8x8_t v19; // [xsp+88h] [xbp-18h]\n  int8x8_t v20; // [xsp+90h] [xbp-10h] BYREF\n  _BYTE v21[8]; // [xsp+98h] [xbp-8h] BYREF\n\n  v2 = (int *)plt_operator_new_ulong__2(0x10u);\n  *v2 = 0;\n  v2[1] = 0;\n  v3 = v2;\n  *((_QWORD *)v2 + 1) = 0;\n  v4 = (TString *)(v2 + 2);\n  ++cstream;\n  plt_TStream_LoadFromFile_TString_const((TStream *)v2, this);\n  if ( v3[1] <= 3 || (plt_TStream_read_void_int((TStream *)v3, &dest, 4), v6 = dest, dest + 3 >= v3[1]) )\n  {\n    --cstream;\n    plt_TString_clear_void(v4);\n    plt_operator_delete_void__2(v3);\n    return nullptr;\n  }\n  else\n  {\n    v16 = dest - 8;\n    v19.n64_u64[0] = 0;\n    v17 = (_DWORD *)plt_operator_new_ulong__2(0x10u);\n    v7 = cstream + 1;\n    *v17 = 0;\n    v17[1] = 0;\n    *((_QWORD *)v17 + 1) = 0;\n    cstream = v7;\n    plt_TString_setSize_int_bool((TString *)(v17 + 2), v6 - 8, 0);\n    v8 = *((_QWORD *)v17 + 1);\n    if ( v8 )\n      v9 = (char *)(v8 + 8);\n    else\n      v9 = (char *)TString_dummystr;\n    v10 = 0;\n    while ( v16 > v10 )\n    {\n      v11 = 0;\n      plt_TStream_read_void_int((TStream *)v3, &v20, 8);\n      do\n        v21[v11++] = plt_drandi_void();\n      while ( v11 != 8 );\n      v12 = v16 - v10;\n      plt_TEncryption_des_decryptmemory_uchar_const_uchar_uint(\n        (TEncryption *)v21,\n        (const unsigned __int8 *)&v20,\n        (unsigned __int8 *)byte_8,\n        v16);\n      if ( v16 - v10 > 8 )\n        v12 = 8;\n      v13 = v9;\n      v10 += v12;\n      v9 += v12;\n      v19.n64_u64[0] = vadd_s8(v20, v19).n64_u64[0];\n      memcpy(v13, &v20, v12);\n    }\n    plt_TStream_read_void_int((TStream *)v3, &v20, 8);\n    --cstream;\n    plt_TString_clear_void(v4);\n    plt_operator_delete_void__2(v3);\n    v14 = v19.n64_u8[0];\n    v17[1] = v10;\n    if ( v20.n64_u8[0] != v14\n      || v20.n64_u8[1] != v19.n64_u8[1]\n      || v20.n64_u8[2] != v19.n64_u8[2]\n      || v20.n64_u8[3] != v19.n64_u8[3]\n      || v20.n64_u8[4] != v19.n64_u8[4]\n      || v20.n64_u8[5] != v19.n64_u8[5]\n      || v20.n64_u8[6] != v19.n64_u8[6]\n      || (result = v17, v20.n64_u8[7] != v19.n64_u8[7]) )\n    {\n      --cstream;\n      plt_TString_clear_void((TString *)(v17 + 2));\n      plt_operator_delete_void__2(v17);\n      return nullptr;\n    }\n  }\n  return result;\n}\n",
+      "code_bytes": 2677,
+      "code_sha256": "1f515793c38345fa64413be97e147aac6c0dcd5bc3f15d41a9b98407300f80a3",
       "function_end": "0xe659c",
       "function_start": "0xe62ec",
       "name": "TEncryption_loadCodedFile_TString_const",
@@ -152,7 +152,7 @@
         },
         {
           "caller": "0x246104",
-          "caller_name": "sub_246104",
+          "caller_name": "MainAndroid_script_requestnewfacebookgraph2",
           "callsite": "0x246254"
         }
       ],
@@ -195,7 +195,7 @@
         },
         {
           "caller": "0xf075c",
-          "caller_name": "sub_F075C",
+          "caller_name": "TStream_zipReadFile",
           "callsite": "0xf0774"
         },
         {
@@ -355,7 +355,7 @@
         },
         {
           "caller": "0x150a30",
-          "caller_name": "sub_150A30",
+          "caller_name": "TBitmap_GIF_streamRead",
           "callsite": "0x150a34"
         },
         {
@@ -558,7 +558,7 @@
         },
         {
           "caller": "0xf0564",
-          "caller_name": "sub_F0564",
+          "caller_name": "TStream_zipWriteFile",
           "callsite": "0xf05e4"
         },
         {
@@ -913,7 +913,7 @@
         },
         {
           "caller": "0x150f44",
-          "caller_name": "sub_150F44",
+          "caller_name": "TBitmap_JPEG_streamWrite",
           "callsite": "0x150f5c"
         },
         {
@@ -1003,12 +1003,12 @@
         },
         {
           "caller": "0x1bc84c",
-          "caller_name": "sub_1BC84C",
+          "caller_name": "GuiMLTextCtrl_get_plaintext",
           "callsite": "0x1bc86c"
         },
         {
           "caller": "0x1bc884",
-          "caller_name": "sub_1BC884",
+          "caller_name": "GuiMLTextCtrl_get_text",
           "callsite": "0x1bc8ac"
         },
         {
@@ -1153,17 +1153,17 @@
         },
         {
           "caller": "0x22d9fc",
-          "caller_name": "sub_22D9FC",
+          "caller_name": "TGraalVar_jsonMapKeyCallback",
           "callsite": "0x22da18"
         },
         {
           "caller": "0x22dab4",
-          "caller_name": "sub_22DAB4",
+          "caller_name": "TGraalVar_jsonStringCallback",
           "callsite": "0x22dad0"
         },
         {
           "caller": "0x22dbbc",
-          "caller_name": "sub_22DBBC",
+          "caller_name": "TGraalVar_jsonNumberCallback",
           "callsite": "0x22dbdc"
         },
         {
@@ -1212,9 +1212,9 @@
           "callsite": "0x2435e0"
         }
       ],
-      "code": "TString *__fastcall TString_addbuffer_char_const_int(TString *this, const char *a2, int a3)\n{\n  TString *v3; // x19\n  TString *v6; // x0\n  int v7; // w21\n  __int64 v8; // x24\n  _DWORD *v9; // x0\n  __int64 v10; // x1\n\n  v3 = this;\n  if ( a2 && a3 > 0 )\n  {\n    plt_TString_makeUnique_void(this);\n    v6 = *(TString **)v3;\n    if ( *(_QWORD *)v3 )\n    {\n      v7 = *(_DWORD *)v6;\n      v8 = *(int *)v6;\n      v9 = realloc(v6, *(_DWORD *)v6 + a3 + 9);\n      *(_QWORD *)v3 = v9;\n      v10 = v7 + 8LL;\n    }\n    else\n    {\n      v8 = 0;\n      v7 = 0;\n      v9 = malloc(a3 + 9);\n      *(_QWORD *)v3 = v9;\n      v10 = 8;\n      v9[1] = 1;\n    }\n    memcpy((char *)v9 + v10, a2, a3);\n    *(_BYTE *)(*(_QWORD *)v3 + v8 + a3 + 8) = 0;\n    this = *(TString **)v3;\n    **(_DWORD **)v3 = a3 + v7;\n  }\n  return this;\n}\n",
-      "code_bytes": 804,
-      "code_sha256": "31873d51665d8a88ce7498725a2238958aea44fe378cf44a4d4e3db913bb74c1",
+      "code": "TString *__fastcall TString_addbuffer_char_const_int(TString *this, const char *a2, int a3)\n{\n  TString **v3; // x19\n  TString *v6; // x0\n  int v7; // w21\n  __int64 v8; // x24\n  TString *v9; // x0\n  __int64 v10; // x1\n\n  v3 = (TString **)this;\n  if ( a2 && a3 > 0 )\n  {\n    plt_TString_makeUnique_void(this);\n    v6 = *v3;\n    if ( *v3 )\n    {\n      v7 = *(_DWORD *)v6;\n      v8 = *(int *)v6;\n      v9 = (TString *)realloc(v6, *(_DWORD *)v6 + a3 + 9);\n      *v3 = v9;\n      v10 = v7 + 8LL;\n    }\n    else\n    {\n      v8 = 0;\n      v7 = 0;\n      v9 = (TString *)malloc(a3 + 9);\n      *v3 = v9;\n      v10 = 8;\n      *((_DWORD *)v9 + 1) = 1;\n    }\n    memcpy((char *)v9 + v10, a2, a3);\n    *((_BYTE *)*v3 + v8 + a3 + 8) = 0;\n    this = *v3;\n    *(_DWORD *)*v3 = a3 + v7;\n  }\n  return this;\n}\n",
+      "code_bytes": 789,
+      "code_sha256": "e5a011232143570b37c2c2321bba125c811e6c2ac2f87c2df8be51ff15a66934",
       "function_end": "0xf1288",
       "function_start": "0xf11bc",
       "name": "TString_addbuffer_char_const_int",
@@ -2802,22 +2802,22 @@
         },
         {
           "caller": "0x157794",
-          "caller_name": "sub_157794",
+          "caller_name": "GSFunctionsClient_script_wraptext",
           "callsite": "0x157860"
         },
         {
           "caller": "0x157794",
-          "caller_name": "sub_157794",
+          "caller_name": "GSFunctionsClient_script_wraptext",
           "callsite": "0x1578c0"
         },
         {
           "caller": "0x1579c0",
-          "caller_name": "sub_1579C0",
+          "caller_name": "GSFunctionsClient_script_wraptext2",
           "callsite": "0x157a90"
         },
         {
           "caller": "0x1579c0",
-          "caller_name": "sub_1579C0",
+          "caller_name": "GSFunctionsClient_script_wraptext2",
           "callsite": "0x157af0"
         },
         {
@@ -3716,13 +3716,18 @@
           "callsite": "0x207b60"
         },
         {
+          "caller": "0x20afd8",
+          "caller_name": "GSFunctionsInitstaticscriptvars_script_getstringkeys",
+          "callsite": "0x20b044"
+        },
+        {
           "caller": "0x20c8a0",
-          "caller_name": "sub_20C8A0",
+          "caller_name": "GSFunctionsInitstaticscriptvars_script_copystrings",
           "callsite": "0x20c944"
         },
         {
           "caller": "0x20cd34",
-          "caller_name": "sub_20CD34",
+          "caller_name": "GSFunctionsInitstaticscriptvars_script_randomstring",
           "callsite": "0x20cd98"
         },
         {
@@ -3779,16 +3784,11 @@
           "caller": "0x215294",
           "caller_name": "TScript_addFunction_TString_const_int_int",
           "callsite": "0x215318"
-        },
-        {
-          "caller": "0x215488",
-          "caller_name": "TScript_getFunction_TString_const",
-          "callsite": "0x2154ec"
         }
       ],
-      "code": "_QWORD *__usercall TString_subString_int_int@<X0>(int **this@<X0>, int a2@<W1>, int a3@<W2>, _QWORD *a4@<X8>)\n{\n  int *v6; // x0\n  int v8; // w4\n  int v9; // w2\n  const char *v10; // x3\n  __int64 v11; // [xsp+28h] [xbp-8h] BYREF\n\n  v6 = *this;\n  if ( a2 )\n  {\n    if ( a2 < 0 )\n      a2 = 0;\n    if ( v6 )\n    {\nLABEL_8:\n      v8 = *v6;\n      if ( a3 <= *v6 )\n      {\n        v9 = a3 - a2;\n        v11 = 0;\n        if ( v9 <= 0 )\n          goto LABEL_12;\n      }\n      else\n      {\n        v9 = v8 - a2;\n        v11 = 0;\n        if ( v8 - a2 <= 0 )\n          goto LABEL_12;\n      }\n      v10 = (const char *)(v6 + 2);\n      goto LABEL_11;\n    }\n  }\n  else\n  {\n    if ( v6 )\n    {\n      if ( a3 == *v6 )\n      {\nLABEL_4:\n        *a4 = 0;\n        plt_TString_operator_assign_TString_const(a4, this);\n        return a4;\n      }\n      goto LABEL_8;\n    }\n    if ( !a3 )\n      goto LABEL_4;\n  }\n  if ( a3 > 0 )\n  {\n    v11 = 0;\n    goto LABEL_12;\n  }\n  v9 = a3 - a2;\n  v11 = 0;\n  if ( v9 <= 0 )\n    goto LABEL_12;\n  v10 = (const char *)TString_dummystr;\nLABEL_11:\n  plt_TString_addbuffer_char_const_int((TString *)&v11, &v10[a2], v9);\nLABEL_12:\n  *a4 = 0;\n  plt_TString_operator_assign_TString_const(a4, &v11);\n  plt_TString_clear_void((TString *)&v11);\n  return a4;\n}\n",
+      "code": "_QWORD *__usercall TString_subString_int_int@<X0>(int **this@<X0>, _QWORD *a2@<X8>, int a3@<W1>, int a4@<W2>)\n{\n  int *v6; // x0\n  int v8; // w4\n  int v9; // w2\n  const char *v10; // x3\n  __int64 v11; // [xsp+28h] [xbp-8h] BYREF\n\n  v6 = *this;\n  if ( a3 )\n  {\n    if ( a3 < 0 )\n      a3 = 0;\n    if ( v6 )\n    {\nLABEL_8:\n      v8 = *v6;\n      if ( a4 <= *v6 )\n      {\n        v9 = a4 - a3;\n        v11 = 0;\n        if ( v9 <= 0 )\n          goto LABEL_12;\n      }\n      else\n      {\n        v9 = v8 - a3;\n        v11 = 0;\n        if ( v8 - a3 <= 0 )\n          goto LABEL_12;\n      }\n      v10 = (const char *)(v6 + 2);\n      goto LABEL_11;\n    }\n  }\n  else\n  {\n    if ( v6 )\n    {\n      if ( a4 == *v6 )\n      {\nLABEL_4:\n        *a2 = 0;\n        plt_TString_operator_assign_TString_const(a2, this);\n        return a2;\n      }\n      goto LABEL_8;\n    }\n    if ( !a4 )\n      goto LABEL_4;\n  }\n  if ( a4 > 0 )\n  {\n    v11 = 0;\n    goto LABEL_12;\n  }\n  v9 = a4 - a3;\n  v11 = 0;\n  if ( v9 <= 0 )\n    goto LABEL_12;\n  v10 = (const char *)TString_dummystr;\nLABEL_11:\n  plt_TString_addbuffer_char_const_int((TString *)&v11, &v10[a3], v9);\nLABEL_12:\n  *a2 = 0;\n  plt_TString_operator_assign_TString_const(a2, &v11);\n  plt_TString_clear_void((TString *)&v11);\n  return a2;\n}\n",
       "code_bytes": 1264,
-      "code_sha256": "862cd879fe55f84d1c80e30f6daaea83063261d0a7c1df491ec170350d4e46c1",
+      "code_sha256": "a5ac853b6beb3567e29597e2d81ba8d9b3b52ce29483526a675a9847342efbdc",
       "function_end": "0xf2eac",
       "function_start": "0xf2da4",
       "name": "TString_subString_int_int",
@@ -3839,9 +3839,9 @@
           "callsite": "0x1aa78c"
         }
       ],
-      "code": "TList *__fastcall TServerLevel_setTileLayerCount_int(TList **this, int a2)\n{\n  TServerLevel *v2; // x20\n  TList *v4; // x19\n  int v5; // w2\n  __int64 v6; // x19\n  TList *result; // x0\n  TTilesLayer *v8; // x22\n  int v9; // [xsp+38h] [xbp-8h]\n\n  v2 = (TServerLevel *)this;\n  v4 = *(this + 14);\n  v5 = *((_DWORD *)v4 + 3);\n  do\n  {\n    if ( a2 <= 0 )\n    {\n      a2 = 1;\n    }\n    else if ( a2 > 100 )\n    {\n      a2 = 100;\n    }\n    while ( 1 )\n    {\n      result = v4;\n      if ( a2 >= v5 )\n        break;\n      v6 = *(_QWORD *)plt_TList_operator_index_int(v4, (unsigned int)(v5 - 1));\n      plt_TList_Delete_int(*((TList **)v2 + 14), *(_DWORD *)(*((_QWORD *)v2 + 14) + 12LL) - 1);\n      if ( v6 )\n        (*(void (__fastcall **)(__int64))(*(_QWORD *)v6 + 8LL))(v6);\n      v4 = *((TList **)v2 + 14);\n      v5 = *((_DWORD *)v4 + 3);\n    }\n    while ( v5 < a2 )\n    {\n      v9 = v5;\n      v8 = (TTilesLayer *)plt_operator_new_ulong__2(0xA8u);\n      plt_TTilesLayer_TTilesLayer_TServerLevel_int(v8, v2, v9);\n      result = (TList *)plt_TList_Add_void(v4, v8);\n      v4 = *((TList **)v2 + 14);\n      v5 = *((_DWORD *)v4 + 3);\n    }\n    v2 = *((TServerLevel **)v2 + 45);\n    if ( !v2 )\n      break;\n    v4 = *((TList **)v2 + 14);\n    v5 = *((_DWORD *)v4 + 3);\n  }\n  while ( a2 > v5 );\n  return result;\n}\n",
-      "code_bytes": 1299,
-      "code_sha256": "7c781d9dda05691b44746db5324d799a9ec3e4d439ad960244e3be79b335eb22",
+      "code": "TList *__fastcall TServerLevel_setTileLayerCount_int(TList **this, int a2)\n{\n  TList **v2; // x20\n  TList *v4; // x19\n  int v5; // w2\n  __int64 v6; // x19\n  TList *result; // x0\n  TTilesLayer *v8; // x22\n  int v9; // [xsp+38h] [xbp-8h]\n\n  v2 = this;\n  v4 = *(this + 14);\n  v5 = *((_DWORD *)v4 + 3);\n  do\n  {\n    if ( a2 <= 0 )\n    {\n      a2 = 1;\n    }\n    else if ( a2 > 100 )\n    {\n      a2 = 100;\n    }\n    while ( 1 )\n    {\n      result = v4;\n      if ( a2 >= v5 )\n        break;\n      v6 = *(_QWORD *)plt_TList_operator_index_int(v4, (unsigned int)(v5 - 1));\n      plt_TList_Delete_int(v2[14], *((_DWORD *)v2[14] + 3) - 1);\n      if ( v6 )\n        (*(void (__fastcall **)(__int64))(*(_QWORD *)v6 + 8LL))(v6);\n      v4 = v2[14];\n      v5 = *((_DWORD *)v4 + 3);\n    }\n    while ( v5 < a2 )\n    {\n      v9 = v5;\n      v8 = (TTilesLayer *)plt_operator_new_ulong__2(0xA8u);\n      plt_TTilesLayer_TTilesLayer_TServerLevel_int(v8, (TServerLevel *)v2, v9);\n      result = (TList *)plt_TList_Add_void(v4, v8);\n      v4 = v2[14];\n      v5 = *((_DWORD *)v4 + 3);\n    }\n    v2 = (TList **)v2[45];\n    if ( !v2 )\n      break;\n    v4 = v2[14];\n    v5 = *((_DWORD *)v4 + 3);\n  }\n  while ( a2 > v5 );\n  return result;\n}\n",
+      "code_bytes": 1209,
+      "code_sha256": "ff35a3f9c301cf7c0937887d2081d5968ab1e91ab462322b33ac97d41019570a",
       "function_end": "0x1aa194",
       "function_start": "0x1aa0a0",
       "name": "TServerLevel_setTileLayerCount_int",
@@ -3862,9 +3862,9 @@
           "callsite": "0x1aa12c"
         }
       ],
-      "code": "// Alternative name is '_ZN11TTilesLayerC1EP12TServerLeveli'\nTTilesLayer *__fastcall TTilesLayer_TTilesLayer_TServerLevel_int(THashList **this, TServerLevel *a2, int a3)\n{\n  int16x8_t *v6; // x0\n  unsigned int v7; // w2\n  unsigned __int8 v8; // w0\n  TLayerTilesVar *v9; // x21\n  THashList *v10; // x0\n  int16x8_t v12; // q0\n  int16x8_t *v13; // x1\n  THashList *v14; // x20\n  __int64 v15; // [xsp+38h] [xbp-8h] BYREF\n\n  v15 = 0;\n  plt_TString_operator_lshift_char_const((int)&v15, &byte_2DCE08);\n  plt_TGraalVar_TGraalVar_TString_const((TGraalVar *)this, (const TString *)&v15);\n  plt_TString_clear_void((TString *)&v15);\n  *this = (THashList *)&off_362D80;\n  *((_DWORD *)this + 34) = 0;\n  *((_DWORD *)this + 35) = 0;\n  *((_DWORD *)this + 36) = 0;\n  *((_BYTE *)this + 19) = 1;\n  *((_BYTE *)this + 22) = 3;\n  *(this + 14) = a2;\n  *((_DWORD *)this + 30) = a3;\n  *((float *)this + 37) = 1.0;\n  *((float *)this + 38) = 1.0;\n  *(this + 13) = (THashList *)TTilesLayer_properties;\n  *((_DWORD *)this + 41) = 1;\n  *((float *)this + 39) = 1.0;\n  *((float *)this + 40) = 1.0;\n  v6 = (int16x8_t *)malloc(0x2000u);\n  *(this + 16) = (THashList *)v6;\n  if ( a3 )\n  {\n    v7 = -1;\n  }\n  else\n  {\n    v7 = (__int16)data_TTilesLayer_preloadleveldefaulttile;\n    if ( !(_WORD)data_TTilesLayer_preloadleveldefaulttile )\n    {\n      memset(v6, 0, 0x2000u);\n      goto LABEL_4;\n    }\n  }\n  v12 = vdupq_n_s16(v7);\n  v13 = v6 + 512;\n  do\n    *v6++ = v12;\n  while ( v6 != v13 );\nLABEL_4:\n  v8 = atomic_load((unsigned __int8 *)&byte_38F658);\n  if ( (v8 & 1) == 0 && __cxa_guard_acquire((__guard *)&byte_38F658) )\n  {\n    qword_38F550 = 0;\n    plt_TString_operator_lshift_char_const((int)&qword_38F550, \"tiles\");\n    __cxa_guard_release((__guard *)&byte_38F658);\n    atexit((void (*)(void))sub_19F9CC);\n    v9 = (TLayerTilesVar *)plt_operator_new_ulong__2(0x78u);\n    plt_TLayerTilesVar_TLayerTilesVar_TTilesLayer_TString_const(v9, (TTilesLayer *)this, (const TString *)&qword_38F550);\n    v10 = *(this + 12);\n    if ( !v10 )\n      goto LABEL_13;\n    return (TTilesLayer *)plt_THashList_addObject_THashListObject(v10, v9);\n  }\n  v9 = (TLayerTilesVar *)plt_operator_new_ulong__2(0x78u);\n  plt_TLayerTilesVar_TLayerTilesVar_TTilesLayer_TString_const(v9, (TTilesLayer *)this, (const TString *)&qword_38F550);\n  v10 = *(this + 12);\n  if ( v10 )\n    return (TTilesLayer *)plt_THashList_addObject_THashListObject(v10, v9);\nLABEL_13:\n  v14 = (THashList *)plt_operator_new_ulong__2(0x28u);\n  plt_THashList_THashList_void__2(v14);\n  *(this + 12) = v14;\n  return (TTilesLayer *)plt_THashList_addObject_THashListObject(v14, v9);\n}\n",
-      "code_bytes": 2593,
-      "code_sha256": "6eb5b214b7350ae6452ae25a656696bf240eae9f95166fc37e65ad2f0d00c0d2",
+      "code": "// Alternative name is '_ZN11TTilesLayerC1EP12TServerLeveli'\nTTilesLayer *__fastcall TTilesLayer_TTilesLayer_TServerLevel_int(THashList **this, TServerLevel *a2, int a3)\n{\n  THashList *v6; // x0\n  unsigned int v7; // w2\n  unsigned __int8 v8; // w0\n  TLayerTilesVar *v9; // x21\n  THashList *v10; // x0\n  int16x8_t v12; // q0\n  THashList *v13; // x1\n  THashList *v14; // x20\n  __int64 v15; // [xsp+38h] [xbp-8h] BYREF\n\n  v15 = 0;\n  plt_TString_operator_lshift_char_const((int)&v15, &byte_2DCE08);\n  plt_TGraalVar_TGraalVar_TString_const((TGraalVar *)this, (const TString *)&v15);\n  plt_TString_clear_void((TString *)&v15);\n  *this = (THashList *)&off_362D80;\n  *((_DWORD *)this + 34) = 0;\n  *((_DWORD *)this + 35) = 0;\n  *((_DWORD *)this + 36) = 0;\n  *((_BYTE *)this + 19) = 1;\n  *((_BYTE *)this + 22) = 3;\n  *(this + 14) = a2;\n  *((_DWORD *)this + 30) = a3;\n  *((float *)this + 37) = 1.0;\n  *((float *)this + 38) = 1.0;\n  *(this + 13) = (THashList *)TTilesLayer_properties;\n  *((_DWORD *)this + 41) = 1;\n  *((float *)this + 39) = 1.0;\n  *((float *)this + 40) = 1.0;\n  v6 = (THashList *)malloc(0x2000u);\n  *(this + 16) = v6;\n  if ( a3 )\n  {\n    v7 = -1;\n  }\n  else\n  {\n    v7 = (__int16)data_TTilesLayer_preloadleveldefaulttile;\n    if ( !(_WORD)data_TTilesLayer_preloadleveldefaulttile )\n    {\n      memset(v6, 0, 0x2000u);\n      goto LABEL_4;\n    }\n  }\n  v12 = vdupq_n_s16(v7);\n  v13 = (THashList *)((char *)v6 + 0x2000);\n  do\n  {\n    *(int16x8_t *)v6 = v12;\n    v6 = (THashList *)((char *)v6 + 16);\n  }\n  while ( v6 != v13 );\nLABEL_4:\n  v8 = atomic_load((unsigned __int8 *)&byte_38F658);\n  if ( (v8 & 1) == 0 && __cxa_guard_acquire((__guard *)&byte_38F658) )\n  {\n    qword_38F550 = 0;\n    plt_TString_operator_lshift_char_const((int)&qword_38F550, \"tiles\");\n    __cxa_guard_release((__guard *)&byte_38F658);\n    atexit((void (*)(void))sub_19F9CC);\n    v9 = (TLayerTilesVar *)plt_operator_new_ulong__2(0x78u);\n    plt_TLayerTilesVar_TLayerTilesVar_TTilesLayer_TString_const(v9, (TTilesLayer *)this, (const TString *)&qword_38F550);\n    v10 = *(this + 12);\n    if ( !v10 )\n      goto LABEL_13;\n    return (TTilesLayer *)plt_THashList_addObject_THashListObject(v10, v9);\n  }\n  v9 = (TLayerTilesVar *)plt_operator_new_ulong__2(0x78u);\n  plt_TLayerTilesVar_TLayerTilesVar_TTilesLayer_TString_const(v9, (TTilesLayer *)this, (const TString *)&qword_38F550);\n  v10 = *(this + 12);\n  if ( v10 )\n    return (TTilesLayer *)plt_THashList_addObject_THashListObject(v10, v9);\nLABEL_13:\n  v14 = (THashList *)plt_operator_new_ulong__2(0x28u);\n  plt_THashList_THashList_void__2(v14);\n  *(this + 12) = v14;\n  return (TTilesLayer *)plt_THashList_addObject_THashListObject(v14, v9);\n}\n",
+      "code_bytes": 2666,
+      "code_sha256": "4a6901baaf1ccc86356f74b0db5c21f5ad2d0e1cc8c50354cb2eda10967776c4",
       "function_end": "0x1a107c",
       "function_start": "0x1a0ea4",
       "name": "TTilesLayer_TTilesLayer_TServerLevel_int",

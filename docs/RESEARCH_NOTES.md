@@ -783,7 +783,7 @@ action in this client table, not the server-warp instruction.
 The final second connection sends packet 9 with a minimal own-player property,
 packet 190 with an empty body, and packet 49 with the GMAP transition. The
 packet 9 body for the test name `test` is `20 24 74 65 73 74`. Packet 190
-reaches `sub_1EB4C0`, which hides the connecting window and invokes the
+reaches `TGUIScriptLoader_finishServerListConnect`, which hides the connecting window and invokes the
 server-list connection callback. This corrected the earlier assumption that
 packet 182 was the completion event. Static analysis maps packet 182 to the
 process or window-list path at handler index 15.

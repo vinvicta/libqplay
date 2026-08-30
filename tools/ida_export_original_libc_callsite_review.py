@@ -131,7 +131,7 @@ MANUAL_REVIEWS = [
     },
     {
         "address": "0x2c50ac",
-        "function": "sub_2C50AC",
+        "function": "CyaInt_ProcessVerifyPath",
         "identified_role": "CyaSSL certificate-directory loader",
         "api": "strncpy/strncat/stat",
         "classification": "bounded-dormant-path-api",

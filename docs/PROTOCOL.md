@@ -479,17 +479,17 @@ protocol revisions reused numeric ranges differently.
 | Packet | Handler index | Observed role |
 | ---: | ---: | --- |
 | 7 | 31 | client-specific level-selection path, seen in an earlier test |
-| 9 | 1 | own-player property update, `sub_1EB8E0` |
-| 48 | 8 | trigger-action path, `sub_1EE9EC` |
-| 49 | 32 | player warp and GMAP transition, `sub_1ECCF8` |
+| 9 | 1 | own-player property update, `TClient_applyPlayerProperties` |
+| 48 | 8 | trigger-action path, `TClient_handleClientsideTriggerPacket` |
+| 49 | 32 | player warp and GMAP transition, `TClient_handleMapWarpPacket` |
 | 54 | 10 | encrypted login result |
 | 68 | 21 | large-file start |
 | 69 | 23 | large-file end |
 | 84 | 22 | large-file size |
-| 102 | 24 | file data parser, `sub_1F0DE4` |
-| 178 | 0 | server-warp destination, `sub_1E9860` |
-| 182 | 15 | process or window-list path, `sub_1EB450` |
-| 190 | 14 | hide connecting window and `onServerListerConnect`, `sub_1EB4C0` |
+| 102 | 24 | file data parser, `TClient_parseEncodedFileChunk` |
+| 178 | 0 | server-warp destination, `TClient_setServerWarpDestination` |
+| 182 | 15 | process or window-list path, `TClient_sendWindowList` |
+| 190 | 14 | hide connecting window and `onServerListerConnect`, `TGUIScriptLoader_finishServerListConnect` |
 
 Packet 178 carries a comma-separated destination. The local test body was:
 

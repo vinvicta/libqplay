@@ -14,9 +14,9 @@
   "callbacks": [
     {
       "address": "0xe06d8",
-      "code": "__int64 *sub_E06D8()\n{\n  data_TFiles_basedatafolder = 0;\n  data_TFiles_basedatafolder2 = 0;\n  data_TFiles_baseuserfolder = 0;\n  data_TFiles_sdcardpath = 0;\n  return &data_TFiles_sdcardpath;\n}\n",
-      "code_bytes": 192,
-      "code_sha256": "02bde4ca9317910ea5b0c6d911028f301f14c843ef5de368f6971ebc98d0374d",
+      "code": "__int64 *TFiles_resetStaticPathPointers()\n{\n  data_TFiles_basedatafolder = 0;\n  data_TFiles_basedatafolder2 = 0;\n  data_TFiles_baseuserfolder = 0;\n  data_TFiles_sdcardpath = 0;\n  return &data_TFiles_sdcardpath;\n}\n",
+      "code_bytes": 213,
+      "code_sha256": "594691938f70758990814da4c58d5b5e28c4cae751b512781fa7cd474fd292ac",
       "direct_callees": [],
       "function_end": "0xe070c",
       "function_start": "0xe06d8",
@@ -27,9 +27,9 @@
     },
     {
       "address": "0xe070c",
-      "code": "__int64 *sub_E070C()\n{\n  THashList *v0; // x19\n  THashList *v1; // x19\n\n  v0 = (THashList *)plt_operator_new_ulong__2(0x28u);\n  plt_THashList_THashList_void__2(v0);\n  data_TResourceFileLink_links = (__int64)v0;\n  v1 = (THashList *)plt_operator_new_ulong__2(0x28u);\n  plt_THashList_THashList_void__2(v1);\n  data_TResourceObjectLink_links = (__int64)v1;\n  return &data_TResourceObjectLink_links;\n}\n",
-      "code_bytes": 396,
-      "code_sha256": "fed41ec7855145ed22f3f95529b534073c526a51d0cad32f7c5c9c359de27dc0",
+      "code": "__int64 *TResource_initializeLinkLists()\n{\n  THashList *v0; // x19\n  THashList *v1; // x19\n\n  v0 = (THashList *)plt_operator_new_ulong__2(0x28u);\n  plt_THashList_THashList_void__2(v0);\n  data_TResourceFileLink_links = (__int64)v0;\n  v1 = (THashList *)plt_operator_new_ulong__2(0x28u);\n  plt_THashList_THashList_void__2(v1);\n  data_TResourceObjectLink_links = (__int64)v1;\n  return &data_TResourceObjectLink_links;\n}\n",
+      "code_bytes": 416,
+      "code_sha256": "b2968e47335e9c347ceac73e781e4ddeec891b34e66820ed9052420bf0f611ca",
       "direct_callees": [
         {
           "address": "0xd68d0",
@@ -62,9 +62,9 @@
     },
     {
       "address": "0xe0770",
-      "code": "__int64 sub_E0770()\n{\n  __int64 result; // x0\n\n  result = plt_operator_new_ulong__2(0x18u);\n  *(_DWORD *)(result + 8) = 0;\n  *(_QWORD *)result = off_35EEB0;\n  *(_DWORD *)(result + 12) = 0;\n  *(_QWORD *)(result + 16) = 0;\n  data_TDrawTexture_textures = result;\n  return result;\n}\n",
-      "code_bytes": 279,
-      "code_sha256": "a6e6e196c0505ddc560e0a611d35e6b5739209474586308d706dfd9946cff71f",
+      "code": "__int64 TDrawTexture_initializeTexturesList()\n{\n  __int64 result; // x0\n\n  result = plt_operator_new_ulong__2(0x18u);\n  *(_DWORD *)(result + 8) = 0;\n  *(_QWORD *)result = off_35EEB0;\n  *(_DWORD *)(result + 12) = 0;\n  *(_QWORD *)(result + 16) = 0;\n  data_TDrawTexture_textures = result;\n  return result;\n}\n",
+      "code_bytes": 305,
+      "code_sha256": "c8f2a3f928d5910b86d2db57dbbce7f142ce44c45826e153a59ce122d3410474",
       "direct_callees": [
         {
           "address": "0xdfb30",
@@ -119,9 +119,9 @@
     },
     {
       "address": "0xe0814",
-      "code": "__int64 *sub_E0814()\n{\n  data_TClientEnvironment_fullexepath = 0;\n  data_TClientEnvironment_servername_saveforrestart = 0;\n  data_TClientEnvironment_serveraddr_saveforrestart = 0;\n  return &data_TClientEnvironment_serveraddr_saveforrestart;\n}\n",
-      "code_bytes": 243,
-      "code_sha256": "ff2acc88c9270afa795ec3f7dff8b9c1f83502734ec0ca3fdf9e6f372186e8ea",
+      "code": "__int64 *TClientEnvironment_clearRestartState()\n{\n  data_TClientEnvironment_fullexepath = 0;\n  data_TClientEnvironment_servername_saveforrestart = 0;\n  data_TClientEnvironment_serveraddr_saveforrestart = 0;\n  return &data_TClientEnvironment_serveraddr_saveforrestart;\n}\n",
+      "code_bytes": 270,
+      "code_sha256": "1dfffa53aeed41f21b636c100d255dcd3769d80a33e9e09a8eefca6dcba6430e",
       "direct_callees": [],
       "function_end": "0xe083c",
       "function_start": "0xe0814",
@@ -132,9 +132,9 @@
     },
     {
       "address": "0xe083c",
-      "code": "__int128 *sub_E083C()\n{\n  curanis = 0u;\n  xmmword_38D5F8 = 0u;\n  xmmword_38D608 = 0u;\n  qword_38D6D8 = 0;\n  xmmword_38D618 = 0u;\n  xmmword_38D628 = 0u;\n  xmmword_38D638 = 0u;\n  xmmword_38D648 = 0u;\n  xmmword_38D658 = 0u;\n  xmmword_38D668 = 0u;\n  xmmword_38D678 = 0u;\n  xmmword_38D688 = 0u;\n  xmmword_38D698 = 0u;\n  xmmword_38D6A8 = 0u;\n  xmmword_38D6B8 = 0u;\n  xmmword_38D6C8 = 0u;\n  return &curanis;\n}\n",
-      "code_bytes": 403,
-      "code_sha256": "65b9026b1073b782378465aa5620a01c771b5d19ac44ee512973d2f2178d9eb7",
+      "code": "__int128 *clearCurAnis()\n{\n  curanis = 0u;\n  xmmword_38D5F8 = 0u;\n  xmmword_38D608 = 0u;\n  qword_38D6D8 = 0;\n  xmmword_38D618 = 0u;\n  xmmword_38D628 = 0u;\n  xmmword_38D638 = 0u;\n  xmmword_38D648 = 0u;\n  xmmword_38D658 = 0u;\n  xmmword_38D668 = 0u;\n  xmmword_38D678 = 0u;\n  xmmword_38D688 = 0u;\n  xmmword_38D698 = 0u;\n  xmmword_38D6A8 = 0u;\n  xmmword_38D6B8 = 0u;\n  xmmword_38D6C8 = 0u;\n  return &curanis;\n}\n",
+      "code_bytes": 406,
+      "code_sha256": "905480396fb2e40bd335ea93e0415a0106cc87841a74bdc81bec61cfec25b1c0",
       "direct_callees": [],
       "function_end": "0xe08c4",
       "function_start": "0xe083c",
@@ -288,9 +288,9 @@
     },
     {
       "address": "0xe04d4",
-      "code": "__int64 sub_E04D4()\n{\n  plt_TString_clear_void((TString *)&data_TFiles_sdcardpath);\n  plt_TString_clear_void((TString *)&data_TFiles_baseuserfolder);\n  plt_TString_clear_void((TString *)&data_TFiles_basedatafolder2);\n  return plt_TString_clear_void((TString *)&data_TFiles_basedatafolder);\n}\n",
-      "code_bytes": 292,
-      "code_sha256": "de6de05ec016a7a57d3359ef07ca2ae292eba3669ae604d00645d8f9719354b1",
+      "code": "__int64 TFiles_clearStaticPaths()\n{\n  plt_TString_clear_void((TString *)&data_TFiles_sdcardpath);\n  plt_TString_clear_void((TString *)&data_TFiles_baseuserfolder);\n  plt_TString_clear_void((TString *)&data_TFiles_basedatafolder2);\n  return plt_TString_clear_void((TString *)&data_TFiles_basedatafolder);\n}\n",
+      "code_bytes": 306,
+      "code_sha256": "2e1051548cf047398e1f7df375925073aa4402deeb060d1841050fb6ed98bbe8",
       "direct_callees": [
         {
           "address": "0xd9020",
@@ -414,9 +414,9 @@
     },
     {
       "address": "0xe05ec",
-      "code": "__int64 sub_E05EC()\n{\n  plt_TString_clear_void((TString *)&data_TClient_loginaccountname);\n  plt_TString_clear_void((TString *)&data_TClient_currentdownloadpackage);\n  plt_TString_clear_void((TString *)&data_TClient_currentdownloadfile);\n  plt_TString_clear_void((TString *)&data_TClient_disconnectreason);\n  plt_TString_clear_void((TString *)&data_TClient_ghostmessage);\n  plt_TString_clear_void((TString *)&data_TClient_requestedmapwarp);\n  plt_TString_clear_void((TString *)&data_TClient_lastserverwarp);\n  plt_TString_clear_void((TString *)&data_TClient_serverwarpdestination);\n  plt_TString_clear_void((TString *)&data_TClient_lastdownloadfile);\n  plt_TString_clear_void((TString *)&data_TClient_bigfilename);\n  return plt_TString_clear_void((TString *)&data_TClient_serverlevelname);\n}\n",
-      "code_bytes": 792,
-      "code_sha256": "c08b858680a4fcfd80635356d6f10b4d1b7b49e0e30188fa359c2bf0a9b5d93f",
+      "code": "__int64 TClient_clearStaticStrings()\n{\n  plt_TString_clear_void((TString *)&data_TClient_loginaccountname);\n  plt_TString_clear_void((TString *)&data_TClient_currentdownloadpackage);\n  plt_TString_clear_void((TString *)&data_TClient_currentdownloadfile);\n  plt_TString_clear_void((TString *)&data_TClient_disconnectreason);\n  plt_TString_clear_void((TString *)&data_TClient_ghostmessage);\n  plt_TString_clear_void((TString *)&data_TClient_requestedmapwarp);\n  plt_TString_clear_void((TString *)&data_TClient_lastserverwarp);\n  plt_TString_clear_void((TString *)&data_TClient_serverwarpdestination);\n  plt_TString_clear_void((TString *)&data_TClient_lastdownloadfile);\n  plt_TString_clear_void((TString *)&data_TClient_bigfilename);\n  return plt_TString_clear_void((TString *)&data_TClient_serverlevelname);\n}\n",
+      "code_bytes": 809,
+      "code_sha256": "d56ac62c6c8f4045942a3dcbd96c8231a61f0c5239f449c2ae30ba9de2a54463",
       "direct_callees": [
         {
           "address": "0xd9020",
@@ -432,9 +432,9 @@
     },
     {
       "address": "0xe0680",
-      "code": "__int64 sub_E0680()\n{\n  plt_TString_clear_void((TString *)&data_TSocket_allowedportsbind);\n  return plt_TString_clear_void((TString *)&data_TSocket_allowedsocketsconnect);\n}\n",
-      "code_bytes": 174,
-      "code_sha256": "e99847ca97d57966d6e09690812a817413c3a0514162203d5f851279a81e8444",
+      "code": "__int64 TSocket_clearStaticStrings()\n{\n  plt_TString_clear_void((TString *)&data_TSocket_allowedportsbind);\n  return plt_TString_clear_void((TString *)&data_TSocket_allowedsocketsconnect);\n}\n",
+      "code_bytes": 191,
+      "code_sha256": "3a6272496d9c7fe705b44589666eb39c1f725c891ba5b0ff666d162c47c7df80",
       "direct_callees": [
         {
           "address": "0xd9020",
