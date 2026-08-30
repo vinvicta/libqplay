@@ -892,6 +892,14 @@ does not install the package or contact a host. It records the manifest, DEX
 string indicators, packaged ELF metadata, signing metadata, and hashes of the
 private input files.
 
+The certificate-directory helper was traced as a separate CyaSSL API. Its
+bounded 256-byte path construction still uses `stat`, which follows symbolic
+links, but IDA shows only the CyaSSL certificate-directory wrapper reaching it.
+The stock connector uses the embedded trust buffer through
+`CyaInt_CyaSSL_CTX_load_verify_buffer` instead. The symlink concern therefore
+remains relevant to an external caller of the dormant API, not to the active
+connector path established in this client.
+
 The most important native result is an update boundary. The download-complete
 handler at `0x1ec044` can call the executable replacer at `0x196fe0` after all
 package downloads complete and a replacement flag is set. The replacer changes

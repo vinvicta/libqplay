@@ -940,8 +940,10 @@ would reopen the hazard.
 The other reviewed sites have clearer boundaries. YAJL integer and double
 formatters render into 32-byte locals with fixed numeric formats. The
 certificate-directory enumerator keeps its constructed path within a 256-byte
-local buffer, although it uses `stat`, so symlink behavior remains an open
-trust-boundary question. The `TString_snprintf` wrappers copy at most size
+local buffer, but its `stat` calls follow links. That helper is only reached
+through the exported CyaSSL certificate-directory API, not the stock connector
+path, so symlink behavior is a dormant-API concern rather than a demonstrated
+startup or connector issue. The `TString_snprintf` wrappers copy at most size
 minus one and terminate the result. The apparent `strcpy` around the fixed
 `eth0` interface name is compiler-inlined storage, not an imported call. The
 random-seed routine uses fixed `/dev/urandom` or `/dev/random` paths, while the

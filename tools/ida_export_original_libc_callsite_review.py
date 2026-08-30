@@ -132,8 +132,9 @@ MANUAL_REVIEWS = [
     {
         "address": "0x2c50ac",
         "function": "sub_2C50AC",
+        "identified_role": "CyaSSL certificate-directory loader",
         "api": "strncpy/strncat/stat",
-        "classification": "bounded-path-construction",
+        "classification": "bounded-dormant-path-api",
         "confidence": "confirmed-static",
         "behavior": (
             "Enumerates a certificate directory, clears a 256-byte local "
@@ -145,7 +146,14 @@ MANUAL_REVIEWS = [
             "The visible arithmetic keeps the constructed path within the "
             "256-byte local buffer, including its terminator. stat follows "
             "links and no canonicalization or no-follow operation is visible, "
-            "so symlink semantics remain an open trust-boundary question."
+            "so a caller that invokes this dormant API with an untrusted "
+            "directory still has symlink risk. This helper is only called by "
+            "CyaInt_CyaSSL_CTX_load_verify_locations, which is only reached "
+            "by the exported CyaInt_CyaSSL_CertManagerLoadCA wrapper. The "
+            "application connector instead calls "
+            "CyaInt_CyaSSL_CTX_load_verify_buffer with its embedded trust "
+            "bundle, and no internal application caller of the directory path "
+            "API was found."
         ),
     },
     {
