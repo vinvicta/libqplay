@@ -195,6 +195,8 @@ The compact record is
   live game service.
 * `docs/SECURITY.md` records the original APK and ARM64 native trust-boundary
   review.
+* `docs/DEPENDENCY_PROVENANCE.md` records the bundled compression, font, and
+  image-library versions and their input paths.
 * `artifacts/original_dex_webview_review_20260830.json` records the local smali
   review that separates the game WebView, Bolts bridge, and Facebook SSL-error
   path.
@@ -229,6 +231,9 @@ The compact record is
 * `artifacts/original_image_parser_review_20260830.json` records the downloaded
   image-resource path and the native PNG, GIF, JPEG, BMP, and TGA decoder
   boundaries. It is a static review and contains no fuzzing results.
+* `artifacts/original_dependency_provenance_20260830.json` records the exact
+  bundled zlib, bzip2, and FreeType version evidence, compression callsites,
+  font paths, and conservative dependency findings.
 * `artifacts/original_android_lifecycle_review_20260830.json` records the
   Activity, GLThread, renderer, and ARM64 JNI startup and pause boundaries.
 * `artifacts/original_intent_launch_review_20260830.json` records the Android

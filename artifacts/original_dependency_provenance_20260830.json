@@ -1,0 +1,462 @@
+{
+  "artifact": "original_dependency_provenance_20260830",
+  "callsite_evidence": [
+    {
+      "callee": "TCompression_DecompressBuf_void_const_int_uchar_uint",
+      "caller": "0x1fc598",
+      "caller_name": "TGraalConnection_parseProtocol_OldGraal_void",
+      "callsite": "0x1fc680",
+      "selector": "legacy compression modes 3 and 4"
+    },
+    {
+      "callee": "TCompression_DecompressBuf2_void_const_int_uchar_uint",
+      "caller": "0x1fc598",
+      "caller_name": "TGraalConnection_parseProtocol_OldGraal_void",
+      "callsite": "0x1fc8a4",
+      "selector": "legacy compression modes 5 and 6"
+    },
+    {
+      "callee": "TCompression_DecompressBuf_void_const_int_uchar_uint",
+      "caller": "0x1fe31c",
+      "caller_name": "TGraalConnection_parseProtocol_NewGraal_void",
+      "callsite": "0x1fe880",
+      "selector": "NewGraal compression selector 1"
+    },
+    {
+      "callee": "TCompression_DecompressBuf2_void_const_int_uchar_uint",
+      "caller": "0x1fe31c",
+      "caller_name": "TGraalConnection_parseProtocol_NewGraal_void",
+      "callsite": "0x1fe868",
+      "selector": "NewGraal compression selector 2"
+    },
+    {
+      "callee": "inflate",
+      "caller": "0x11f9d8",
+      "caller_name": "TMNGAnimation_parsePicture_void",
+      "callsite": "0x1204a8",
+      "selector": "PNG or MNG IDAT output"
+    },
+    {
+      "callee": "uncompress",
+      "caller": "0x11f9d8",
+      "caller_name": "TMNGAnimation_parsePicture_void",
+      "callsite": "0x1204f4",
+      "selector": "PNG or MNG compressed block path"
+    },
+    {
+      "callee": "inflate",
+      "caller": "0x24b174",
+      "caller_name": "unzReadCurrentFile",
+      "callsite": "0x24b458",
+      "selector": "ZIP entry decompression"
+    },
+    {
+      "callee": "FT_New_Memory_Face",
+      "caller": "0x110ca0",
+      "caller_name": "TFontData_load_void",
+      "callsite": "0x110d6c",
+      "selector": "resource-backed font stream"
+    },
+    {
+      "callee": "FT_New_Face",
+      "caller": "0x110ca0",
+      "caller_name": "TFontData_load_void",
+      "callsite": "0x110f14",
+      "selector": "filesystem font path"
+    }
+  ],
+  "database": {
+    "binary_bytes": 3657208,
+    "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "imagebase": "0x0",
+    "path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
+  },
+  "dependencies": [
+    {
+      "inbound_paths": [
+        "TMNGAnimation_parsePicture_void at 0x11f9d8 inflates PNG or MNG data.",
+        "unzReadCurrentFile at 0x24b174 uses inflate for ZIP entries.",
+        "TCompression_DecompressBuf at 0xe4fc8 is selected by protocol compression mode 1, and by legacy modes 3 and 4."
+      ],
+      "linkage": "static code embedded in libqplay.so",
+      "name": "zlib",
+      "version": "1.2.5",
+      "version_evidence": {
+        "address": "0x289b50",
+        "also_passed_to": [
+          "inflateInit_ at 0x289ac0",
+          "inflateInit2_ at 0x120428"
+        ],
+        "function": "zlibVersion",
+        "return_literal": "1.2.5"
+      }
+    },
+    {
+      "inbound_paths": [
+        "TCompression_DecompressBuf2 at 0xe5270 calls BZ2_bzBuffToBuffDecompress.",
+        "The NewGraal protocol selects this wrapper for compression selector 2.",
+        "The legacy protocol selects this wrapper for modes 5 and 6."
+      ],
+      "linkage": "static code embedded in libqplay.so",
+      "name": "bzip2",
+      "version": "1.0.4, 20-Dec-2006",
+      "version_evidence": {
+        "address": "0x2751ac",
+        "function": "BZ2_bzlibVersion",
+        "return_literal": "1.0.4, 20-Dec-2006"
+      }
+    },
+    {
+      "inbound_paths": [
+        "TFontData_load_void at 0x110ca0 loads system fonts through FT_New_Face.",
+        "The same loader uses FT_New_Memory_Face for resource-backed font streams.",
+        "A missing relative font resource reaches TFileDownload_download, so the resource-backed path is a conditional downloaded-input boundary."
+      ],
+      "linkage": "static code embedded in libqplay.so",
+      "name": "FreeType",
+      "version": "2.3.6",
+      "version_evidence": {
+        "address": "0x253f1c",
+        "function": "FT_Init_FreeType",
+        "library_version_fields": [
+          2,
+          3,
+          6
+        ]
+      }
+    },
+    {
+      "inbound_paths": [
+        "TBitmap_readJPEG_TStream at 0x150fa8 receives extension-selected image resources."
+      ],
+      "linkage": "static code embedded in libqplay.so",
+      "name": "libjpeg",
+      "version": null,
+      "version_evidence": {
+        "known_symbols": [
+          "jpeg_std_error at 0x292c8c",
+          "jpeg_CreateDecompress at 0x28ad98"
+        ],
+        "note": "The exact libjpeg release was not recovered in this pass. ABI constants in jpeg_CreateCompress are not treated as a release identifier."
+      }
+    }
+  ],
+  "dynamic_needed_libraries": [
+    "libGLESv1_CM.so",
+    "libc.so",
+    "libstdc++.so",
+    "libm.so",
+    "liblog.so"
+  ],
+  "functions": [
+    {
+      "address": "0xe4dd4",
+      "callers": [
+        {
+          "caller": "0xd7f70",
+          "caller_name": "plt_TCompression_getCompressionBuffer_int",
+          "callsite": "0xd7f74",
+          "xref_type": 1
+        },
+        {
+          "caller": "0xd7f70",
+          "caller_name": "plt_TCompression_getCompressionBuffer_int",
+          "callsite": "0xd7f7c",
+          "xref_type": 19
+        }
+      ],
+      "code": "void *__fastcall TCompression_getCompressionBuffer_int(TCompression *this)\n{\n  int v1; // w2\n  size_t v2; // x1\n  void *result; // x0\n\n  if ( data_TCompression_compressionbuffersize >= (int)this )\n    return (void *)data_TCompression_compressionbuffer;\n  if ( (int)this <= 2 )\n  {\n    v2 = 2;\n    v1 = 2;\n  }\n  else\n  {\n    v1 = 2;\n    do\n      v1 *= 2;\n    while ( (int)this > v1 );\n    v2 = v1;\n  }\n  data_TCompression_compressionbuffersize = v1;\n  result = realloc((void *)data_TCompression_compressionbuffer, v2);\n  data_TCompression_compressionbuffer = (__int64)result;\n  return result;\n}\n",
+      "code_bytes": 594,
+      "code_sha256": "771e09cf83f21f1d0e116001149ddf740e1731c1e2b6a4d6bed5d51777513e68",
+      "function_end": "0xe4e5c",
+      "function_start": "0xe4dd4",
+      "name": "TCompression_getCompressionBuffer_int",
+      "role": "shared decompression buffer growth"
+    },
+    {
+      "address": "0xe4fc8",
+      "callers": [
+        {
+          "caller": "0xdd510",
+          "caller_name": "plt_TCompression_DecompressBuf_void_const_int_uchar_uint",
+          "callsite": "0xdd514",
+          "xref_type": 1
+        },
+        {
+          "caller": "0xdd510",
+          "caller_name": "plt_TCompression_DecompressBuf_void_const_int_uchar_uint",
+          "callsite": "0xdd51c",
+          "xref_type": 19
+        }
+      ],
+      "code": "TString *__usercall TCompression_DecompressBuf_void_const_int_uchar_uint@<X0>(\n        TCompression *this@<X0>,\n        const void *a2@<X1>,\n        unsigned __int8 *a3@<X3>,\n        const char *a4@<X2>,\n        TString *a5@<X8>)\n{\n  const char *CompressionBuffer_int; // x20\n  unsigned int v8; // w19\n  _BOOL4 v9; // w24\n  __int64 v10; // x22\n  unsigned __int64 v11; // x21\n  int v12; // w1\n  int v13; // w2\n  int v15; // [xsp+58h] [xbp-18h]\n  int v16[2]; // [xsp+68h] [xbp-8h] BYREF\n\n  *(_QWORD *)a5 = 0;\n  CompressionBuffer_int = a4;\n  v8 = (unsigned int)a3;\n  if ( this && (int)a2 > 0 )\n  {\n    v9 = a4 == nullptr;\n    if ( a4\n      || ((v15 = (int)a2, data_TCompression_compressionbuffersize < 0x10000)\n        ? (v8 = 0x10000)\n        : (v8 = data_TCompression_compressionbuffersize),\n          CompressionBuffer_int = (const char *)plt_TCompression_getCompressionBuffer_int((TCompression *)v8, (int)a2),\n          LODWORD(a2) = v15,\n          CompressionBuffer_int) )\n    {\n      v10 = (int)a2;\n      while ( 1 )\n      {\n        v11 = v8;\n        *(_QWORD *)v16 = v8;\n        v8 *= 2;\n        v13 = uncompress(CompressionBuffer_int, v16, this, v10);\n        if ( v13 != -5 || !v9 )\n          break;\n        if ( v8 <= 0x400000 )\n        {\n          CompressionBuffer_int = (const char *)plt_TCompression_getCompressionBuffer_int((TCompression *)v8, v12);\n          if ( CompressionBuffer_int )\n            continue;\n        }\n        return a5;\n      }\n      if ( !v13 && *(_QWORD *)v16 && *(_QWORD *)v16 <= v11 )\n        plt_TString_addbuffer_char_const_int(a5, CompressionBuffer_int, v16[0]);\n    }\n  }\n  return a5;\n}\n",
+      "code_bytes": 1627,
+      "code_sha256": "818f30bfc116a4b479beb5819fadbee40cbf597f2c2a85132bffc9165c438b22",
+      "function_end": "0xe50d8",
+      "function_start": "0xe4fc8",
+      "name": "TCompression_DecompressBuf_void_const_int_uchar_uint",
+      "role": "zlib decompression wrapper"
+    },
+    {
+      "address": "0xe5270",
+      "callers": [
+        {
+          "caller": "0xd95a0",
+          "caller_name": "plt_TCompression_DecompressBuf2_void_const_int_uchar_uint",
+          "callsite": "0xd95a4",
+          "xref_type": 1
+        },
+        {
+          "caller": "0xd95a0",
+          "caller_name": "plt_TCompression_DecompressBuf2_void_const_int_uchar_uint",
+          "callsite": "0xd95ac",
+          "xref_type": 19
+        }
+      ],
+      "code": "TString *__usercall TCompression_DecompressBuf2_void_const_int_uchar_uint@<X0>(\n        TCompression *this@<X0>,\n        const void *a2@<X1>,\n        unsigned __int8 *a3@<X3>,\n        const char *a4@<X2>,\n        TString *a5@<X8>)\n{\n  unsigned int v7; // w22\n  const char *CompressionBuffer_int; // x20\n  unsigned int v9; // w19\n  _BOOL4 v10; // w23\n  int v11; // w0\n  int v12; // w1\n  int v14; // [xsp+4Ch] [xbp-4h] BYREF\n\n  *(_QWORD *)a5 = 0;\n  v7 = (unsigned int)a2;\n  CompressionBuffer_int = a4;\n  v9 = (unsigned int)a3;\n  if ( !this || (int)a2 <= 0 )\n    return a5;\n  v10 = a4 == nullptr;\n  if ( !a4 )\n  {\n    v9 = data_TCompression_compressionbuffersize < 0x10000 ? 0x10000 : data_TCompression_compressionbuffersize;\n    CompressionBuffer_int = (const char *)plt_TCompression_getCompressionBuffer_int((TCompression *)v9, (int)a2);\n    if ( !CompressionBuffer_int )\n      return a5;\n  }\n  while ( 1 )\n  {\n    v14 = v9;\n    v11 = BZ2_bzBuffToBuffDecompress(CompressionBuffer_int, &v14, this, v7, 0, 0);\n    if ( v11 != -8 || !v10 )\n      break;\n    v9 *= 2;\n    if ( v9 <= 0x400000 )\n    {\n      CompressionBuffer_int = (const char *)plt_TCompression_getCompressionBuffer_int((TCompression *)v9, v12);\n      if ( CompressionBuffer_int )\n        continue;\n    }\n    return a5;\n  }\n  if ( v11 < 0 || v14 > v9 || !v14 )\n    return a5;\n  plt_TString_addbuffer_char_const_int(a5, CompressionBuffer_int, v14);\n  return a5;\n}\n",
+      "code_bytes": 1423,
+      "code_sha256": "e65add78685fda8db2048c25f1b2f9f9043fd7e78db44d2d118965b4a6bb0db1",
+      "function_end": "0xe5388",
+      "function_start": "0xe5270",
+      "name": "TCompression_DecompressBuf2_void_const_int_uchar_uint",
+      "role": "bzip2 decompression wrapper"
+    },
+    {
+      "address": "0xe50d8",
+      "callers": [],
+      "code": "__int64 *__usercall TCompression_DecompressBuf_TString_const_uchar_uint@<X0>(\n        TCompression *this@<X0>,\n        const TString *a2@<X1>,\n        unsigned __int8 *a3@<X2>,\n        __int64 *a4@<X8>)\n{\n  if ( *(_QWORD *)this )\n    plt_TCompression_DecompressBuf_void_const_int_uchar_uint(\n      a4,\n      (TCompression *)(*(_QWORD *)this + 8LL),\n      (const void *)**(unsigned int **)this,\n      (int)a2,\n      (unsigned __int8 *)(unsigned int)a3,\n      *(_QWORD *)this);\n  else\n    plt_TCompression_DecompressBuf_void_const_int_uchar_uint(\n      a4,\n      TString_dummystr,\n      nullptr,\n      (int)a2,\n      (unsigned __int8 *)(unsigned int)a3,\n      0);\n  return a4;\n}\n",
+      "code_bytes": 677,
+      "code_sha256": "07fc3d7d608a12dbd309736369f7981b6b2890657d95392e2b20ee6d07f5ea6c",
+      "function_end": "0xe5144",
+      "function_start": "0xe50d8",
+      "name": "TCompression_DecompressBuf_TString_const_uchar_uint",
+      "role": "zlib string wrapper"
+    },
+    {
+      "address": "0xe5388",
+      "callers": [],
+      "code": "__int64 *__usercall TCompression_DecompressBuf2_TString_const_uchar_uint@<X0>(\n        TCompression *this@<X0>,\n        const TString *a2@<X1>,\n        unsigned __int8 *a3@<X2>,\n        __int64 *a4@<X8>)\n{\n  if ( *(_QWORD *)this )\n    plt_TCompression_DecompressBuf2_void_const_int_uchar_uint(\n      a4,\n      (TCompression *)(*(_QWORD *)this + 8LL),\n      (const void *)**(unsigned int **)this,\n      (int)a2,\n      (unsigned __int8 *)(unsigned int)a3,\n      *(_QWORD *)this);\n  else\n    plt_TCompression_DecompressBuf2_void_const_int_uchar_uint(\n      a4,\n      TString_dummystr,\n      nullptr,\n      (int)a2,\n      (unsigned __int8 *)(unsigned int)a3,\n      0);\n  return a4;\n}\n",
+      "code_bytes": 680,
+      "code_sha256": "15e04af6fdfb73f4a3305c5743769a83852ddce7acb9143da582f7e08fbec61b",
+      "function_end": "0xe53f4",
+      "function_start": "0xe5388",
+      "name": "TCompression_DecompressBuf2_TString_const_uchar_uint",
+      "role": "bzip2 string wrapper"
+    },
+    {
+      "address": "0x275070",
+      "callers": [
+        {
+          "caller": "0xd37f0",
+          "caller_name": ".BZ2_bzBuffToBuffDecompress",
+          "callsite": "0xd37f4",
+          "xref_type": 1
+        },
+        {
+          "caller": "0xd37f0",
+          "caller_name": ".BZ2_bzBuffToBuffDecompress",
+          "callsite": "0xd37fc",
+          "xref_type": 19
+        }
+      ],
+      "code": "__int64 __fastcall BZ2_bzBuffToBuffDecompress(\n        __int64 a1,\n        int *a2,\n        __int64 a3,\n        int a4,\n        unsigned int a5,\n        unsigned int a6)\n{\n  unsigned int v10; // w20\n  unsigned int v12; // w0\n  unsigned int v13; // w20\n  __int64 v14; // [xsp+40h] [xbp-50h] BYREF\n  int v15; // [xsp+48h] [xbp-48h]\n  __int64 v16; // [xsp+58h] [xbp-38h]\n  int v17; // [xsp+60h] [xbp-30h]\n  __int64 v18; // [xsp+78h] [xbp-18h]\n  __int64 v19; // [xsp+80h] [xbp-10h]\n  __int64 v20; // [xsp+88h] [xbp-8h]\n\n  if ( !a1 || !a2 || !a3 || a5 > 1 || a6 > 4 )\n    return 4294967294LL;\n  v18 = 0;\n  v19 = 0;\n  v20 = 0;\n  v10 = BZ2_bzDecompressInit(&v14, a6, a5);\n  if ( v10 )\n    return v10;\n  v17 = *a2;\n  v14 = a3;\n  v16 = a1;\n  v15 = a4;\n  v12 = BZ2_bzDecompress(&v14);\n  if ( !v12 )\n  {\n    if ( v17 )\n      v10 = -7;\n    else\n      v10 = -8;\n    BZ2_bzDecompressEnd(&v14);\n    return v10;\n  }\n  if ( v12 == 4 )\n  {\n    *a2 -= v17;\n    BZ2_bzDecompressEnd(&v14);\n    return v10;\n  }\n  v13 = v12;\n  BZ2_bzDecompressEnd(&v14);\n  return v13;\n}\n",
+      "code_bytes": 1047,
+      "code_sha256": "5bbceadad96c76ca16a08fc381b5e2704af210cef9a98686884b9a2551ab615d",
+      "function_end": "0x2751ac",
+      "function_start": "0x275070",
+      "name": "BZ2_bzBuffToBuffDecompress",
+      "role": "bundled bzip2 buffer API"
+    },
+    {
+      "address": "0x2751ac",
+      "callers": [],
+      "code": "const char *BZ2_bzlibVersion()\n{\n  return \"1.0.4, 20-Dec-2006\";\n}\n",
+      "code_bytes": 66,
+      "code_sha256": "86fd9cf657b5e022b5ff26a5d8b30299475f1b6e1a6a85c6acaa13c1f5e6a977",
+      "function_end": "0x2751b8",
+      "function_start": "0x2751ac",
+      "name": "BZ2_bzlibVersion",
+      "role": "bundled bzip2 version API"
+    },
+    {
+      "address": "0x289a70",
+      "callers": [
+        {
+          "caller": "0xd50c0",
+          "caller_name": ".uncompress",
+          "callsite": "0xd50c4",
+          "xref_type": 1
+        },
+        {
+          "caller": "0xd50c0",
+          "caller_name": ".uncompress",
+          "callsite": "0xd50cc",
+          "xref_type": 19
+        }
+      ],
+      "code": "__int64 __fastcall uncompress(__int64 a1, __int64 *a2, __int64 a3, __int64 a4)\n{\n  __int64 v5; // x1\n  __int64 result; // x0\n  unsigned int v7; // w19\n  __int64 v8; // [xsp+20h] [xbp-70h] BYREF\n  int v9; // [xsp+28h] [xbp-68h]\n  __int64 v10; // [xsp+38h] [xbp-58h]\n  int v11; // [xsp+40h] [xbp-50h]\n  __int64 v12; // [xsp+48h] [xbp-48h]\n  __int64 v13; // [xsp+60h] [xbp-30h]\n  __int64 v14; // [xsp+68h] [xbp-28h]\n\n  v8 = a3;\n  v9 = a4;\n  if ( a4 != (unsigned int)a4 )\n    return 4294967291LL;\n  v5 = *a2;\n  v10 = a1;\n  v11 = v5;\n  if ( v5 != (unsigned int)v5 )\n    return 4294967291LL;\n  v13 = 0;\n  v14 = 0;\n  result = inflateInit_(&v8, \"1.2.5\", 112);\n  if ( !(_DWORD)result )\n  {\n    v7 = inflate(&v8, 4);\n    if ( v7 == 1 )\n    {\n      *a2 = v12;\n      return inflateEnd(&v8);\n    }\n    else\n    {\n      inflateEnd(&v8);\n      if ( v7 == 2 )\n      {\n        return 4294967293LL;\n      }\n      else\n      {\n        result = v7;\n        if ( v7 == -5 )\n        {\n          if ( v9 )\n            return 4294967291LL;\n          else\n            return 4294967293LL;\n        }\n      }\n    }\n  }\n  return result;\n}\n",
+      "code_bytes": 1111,
+      "code_sha256": "87569c072f64f13e6d17249c95af582ab900763c665911c0453491924ca8d5b0",
+      "function_end": "0x289b50",
+      "function_start": "0x289a70",
+      "name": "uncompress",
+      "role": "bundled zlib buffer API"
+    },
+    {
+      "address": "0x289b50",
+      "callers": [],
+      "code": "const char *zlibVersion()\n{\n  return \"1.2.5\";\n}\n",
+      "code_bytes": 48,
+      "code_sha256": "98d165ca74b2bd13d8df912339da8de86c86307f4154f76b7bd355676301fe54",
+      "function_end": "0x289b5c",
+      "function_start": "0x289b50",
+      "name": "zlibVersion",
+      "role": "bundled zlib version API"
+    },
+    {
+      "address": "0x110ca0",
+      "callers": [
+        {
+          "caller": "0xda150",
+          "caller_name": "plt_TFontData_load_void",
+          "callsite": "0xda154",
+          "xref_type": 1
+        },
+        {
+          "caller": "0xda150",
+          "caller_name": "plt_TFontData_load_void",
+          "callsite": "0xda15c",
+          "xref_type": 19
+        }
+      ],
+      "code": "__int64 __fastcall TFontData_load_void(TFontData *this)\n{\n  TResourceFunctions *v2; // x20\n  const TString *v3; // x1\n  const TString *v4; // x1\n  const TString *v5; // x1\n  TResourceObject *LevelFileResource_TString_const; // x21\n  __int64 v7; // x0\n  __int64 Stream_void; // x20\n  int *v9; // x1\n  int v10; // w25\n  const char *v11; // x2\n  __int64 v12; // x20\n  const TString *v13; // x1\n  int exists; // w24\n  const TString *v16; // x1\n  int v17; // w26\n  int *v18; // [xsp+58h] [xbp-28h] BYREF\n  __int64 v19; // [xsp+60h] [xbp-20h] BYREF\n  __int64 v20; // [xsp+68h] [xbp-18h] BYREF\n  __int64 v21; // [xsp+70h] [xbp-10h] BYREF\n  __int64 v22; // [xsp+78h] [xbp-8h] BYREF\n\n  v2 = (TFontData *)((char *)this + 16);\n  v18 = nullptr;\n  *((_QWORD *)this + 3) = data_TTime_curhighprecisiontime;\n  if ( (unsigned __int8)plt_operator_assign_TString_const_TString_const(\n                          (char *)this + 16,\n                          data_TFontOptions_unicodefont) )\n  {\n    v22 = 0;\n    plt_TString_operator_assign_TString_const(&v22, data_TFontManager_systemfontsfolder);\n    plt_TString_operator_lshift_TString_const(&v22, v2);\n    exists = (unsigned __int8)plt_TFiles_fileExists_TString_const((TFiles *)&v22, v13);\n    plt_TString_clear_void((TString *)&v22);\n    if ( exists )\n    {\n      v22 = 0;\n      plt_TString_operator_assign_TString_const(&v22, data_TFontManager_systemfontsfolder);\n      plt_TString_operator_lshift_TString_const(&v22, v2);\n      plt_TString_operator_assign_TString_const(&v18, &v22);\n      plt_TString_clear_void((TString *)&v22);\n      Stream_void = *((_QWORD *)this + 5);\n      if ( !Stream_void )\n        goto LABEL_18;\nLABEL_8:\n      v9 = *(int **)(Stream_void + 8);\n      if ( !v9 || *v9 <= 0 )\n      {\n        --cstream;\n        plt_TString_clear_void((TString *)(Stream_void + 8));\n        plt_operator_delete_void__2((void *)Stream_void);\n        *((_QWORD *)this + 5) = 0;\n        return plt_TString_clear_void((TString *)&v18);\n      }\n      if ( qword_38D1E0 )\n        goto LABEL_11;\n      goto LABEL_23;\n    }\n  }\n  if ( !(unsigned __int8)plt_TFiles_hasPath_TString_const(v2, v3)\n    || (unsigned __int8)plt_TString_starts_TString_const(v2, (const TString *)&data_TFiles_basedatafolder2) )\n  {\n    LevelFileResource_TString_const = (TResourceObject *)plt_TResourceFunctions_getLevelFileResource_TString_const(\n                                                           v2,\n                                                           v4);\n    if ( !LevelFileResource_TString_const )\n    {\n      plt_TFileDownload_download_TString_const(v2, v5);\n      return plt_TString_clear_void((TString *)&v18);\n    }\n    plt_TFileDownload_update_TString_const(v2, v5);\n    v7 = *((_QWORD *)LevelFileResource_TString_const + 4);\n    if ( v7 && *(_QWORD *)(v7 + 16) )\n      goto LABEL_6;\n    v21 = 0;\n    plt_TString_operator_assign_TString_const(&v21, (char *)LevelFileResource_TString_const + 16);\n    v22 = 0;\n    plt_TString_operator_assign_TString_const(&v22, &v21);\n    plt_TString_operator_lshift_TString_const(&v22, (char *)LevelFileResource_TString_const + 8);\n    v17 = (unsigned __int8)plt_TFiles_fileExists_TString_const((TFiles *)&v22, v16);\n    plt_TString_clear_void((TString *)&v22);\n    plt_TString_clear_void((TString *)&v21);\n    if ( !v17 )\n    {\nLABEL_6:\n      Stream_void = plt_TResourceObject_getStream_void(LevelFileResource_TString_const);\n      *((_QWORD *)this + 5) = Stream_void;\n    }\n    else\n    {\n      v21 = 0;\n      plt_TString_operator_assign_TString_const(&v21, (char *)LevelFileResource_TString_const + 16);\n      v22 = 0;\n      plt_TString_operator_assign_TString_const(&v22, &v21);\n      plt_TString_operator_lshift_TString_const(&v22, (char *)LevelFileResource_TString_const + 8);\n      plt_TString_operator_assign_TString_const(&v18, &v22);\n      plt_TString_clear_void((TString *)&v22);\n      plt_TString_clear_void((TString *)&v21);\n      Stream_void = *((_QWORD *)this + 5);\n    }\n  }\n  else\n  {\n    plt_TString_operator_assign_TString_const(&v18, v2);\n    Stream_void = *((_QWORD *)this + 5);\n  }\n  if ( Stream_void )\n    goto LABEL_8;\nLABEL_18:\n  if ( !v18 || *v18 <= 0 )\n    return plt_TString_clear_void((TString *)&v18);\n  if ( qword_38D1E0 )\n  {\nLABEL_21:\n    v10 = FT_New_Face();\n    if ( v10 )\n      goto LABEL_13;\nLABEL_12:\n    if ( *((_QWORD *)this + 4) )\n      return plt_TString_clear_void((TString *)&v18);\n    goto LABEL_13;\n  }\nLABEL_23:\n  FT_Init_FreeType(&qword_38D1E0);\n  if ( !*((_QWORD *)this + 5) )\n    goto LABEL_21;\nLABEL_11:\n  v10 = FT_New_Memory_Face();\n  if ( !v10 )\n    goto LABEL_12;\nLABEL_13:\n  v19 = 0;\n  plt_TString_operator_lshift_char_const((int)&v19, \"Failed to load font \");\n  v20 = 0;\n  plt_TString_operator_assign_TString_const(&v20, &v19);\n  plt_TString_operator_lshift_TString_const(&v20, &v18);\n  v21 = 0;\n  plt_TString_operator_assign_TString_const(&v21, &v20);\n  plt_TString_operator_lshift_char_const((int)&v21, \": \");\n  v22 = 0;\n  plt_TString_operator_assign_TString_const(&v22, &v21);\n  plt_TString_operator_lshift_int((TString *)&v22, v10);\n  plt_TLog_echo_TString_const_double_double_double_char_const(\n    (TLog *)&v22,\n    (const TString *)\"graphics\",\n    1.0,\n    0.0,\n    0.0,\n    v11);\n  plt_TString_clear_void((TString *)&v22);\n  plt_TString_clear_void((TString *)&v21);\n  plt_TString_clear_void((TString *)&v20);\n  plt_TString_clear_void((TString *)&v19);\n  v12 = *((_QWORD *)this + 5);\n  if ( v12 )\n  {\n    --cstream;\n    plt_TString_clear_void((TString *)(v12 + 8));\n    plt_operator_delete_void__2((void *)v12);\n    *((_QWORD *)this + 5) = 0;\n  }\n  *((_QWORD *)this + 4) = 0;\n  return plt_TString_clear_void((TString *)&v18);\n}\n",
+      "code_bytes": 5658,
+      "code_sha256": "61ed9c85bb57d77faf1b9c22ec798a800cae56e70cccda2f9579badd2215de5b",
+      "function_end": "0x1110a8",
+      "function_start": "0x110ca0",
+      "name": "TFontData_load_void",
+      "role": "font resource and file loader"
+    },
+    {
+      "address": "0x1110a8",
+      "callers": [
+        {
+          "caller": "0xd8f90",
+          "caller_name": "plt_TFontData_getFontData_TString_const",
+          "callsite": "0xd8f94",
+          "xref_type": 1
+        },
+        {
+          "caller": "0xd8f90",
+          "caller_name": "plt_TFontData_getFontData_TString_const",
+          "callsite": "0xd8f9c",
+          "xref_type": 19
+        }
+      ],
+      "code": "TFontData *__fastcall TFontData_getFontData_TString_const(TFontData *this, const TString *a2)\n{\n  TFontData *result; // x0\n  TFontData *v4; // x19\n\n  result = (TFontData *)plt_TFontData_findFontData_TString_const(this, a2);\n  if ( result )\n  {\n    *((_QWORD *)result + 3) = data_TTime_curhighprecisiontime;\n  }\n  else\n  {\n    v4 = (TFontData *)plt_operator_new_ulong__2(0x38u);\n    plt_TFontData_TFontData_TString_const(v4, this);\n    plt_THashList_addObject_THashListObject((THashList *)data_TFontData_fontdatas, v4);\n    plt_TFontData_load_void(v4);\n    return v4;\n  }\n  return result;\n}\n",
+      "code_bytes": 590,
+      "code_sha256": "64fb8144a1fc64c867ba5b9d1914a9cd6516b054fe08d2e498792e8c1f5b6b7b",
+      "function_end": "0x111130",
+      "function_start": "0x1110a8",
+      "name": "TFontData_getFontData_TString_const",
+      "role": "font cache entrypoint"
+    },
+    {
+      "address": "0x253f1c",
+      "callers": [
+        {
+          "caller": "0xd65c0",
+          "caller_name": ".FT_Init_FreeType",
+          "callsite": "0xd65c4",
+          "xref_type": 1
+        },
+        {
+          "caller": "0xd65c0",
+          "caller_name": ".FT_Init_FreeType",
+          "callsite": "0xd65cc",
+          "xref_type": 19
+        }
+      ],
+      "code": "__int64 __fastcall FT_Init_FreeType(_QWORD *a1)\n{\n  __int64 v2; // x0\n  unsigned int v3; // w1\n  __int64 v4; // x20\n  unsigned int v5; // w19\n  _DWORD *v7; // x0\n\n  v2 = FT_New_Memory();\n  v3 = 7;\n  v4 = v2;\n  if ( !v2 )\n    return v3;\n  v5 = FT_New_Library(v2, a1);\n  if ( v5 )\n  {\n    FT_Done_Memory(v4);\n    return v5;\n  }\n  v7 = (_DWORD *)*a1;\n  v7[6] = 2;\n  v7[7] = 3;\n  v7[8] = 6;\n  FT_Add_Default_Modules(v7);\n  return 0;\n}\n",
+      "code_bytes": 431,
+      "code_sha256": "ad1640722adab14e3684b6c058e6ba4fa91947ba2a2c4ac94c4dc95424672a47",
+      "function_end": "0x253fa8",
+      "function_start": "0x253f1c",
+      "name": "FT_Init_FreeType",
+      "role": "bundled FreeType initialization"
+    }
+  ],
+  "fuzzing_performed": false,
+  "interpretation": [
+    "The native library statically embeds the decompression and font implementations, so Android system updates cannot independently patch these code paths.",
+    "The highest-value follow-up is a disposable local harness for protocol compression, PNG or ZIP input, and font parsing with explicit byte and allocation budgets."
+  ],
+  "missing_dynamic_replacements": [
+    "libz.so",
+    "libbz2.so",
+    "libfreetype.so"
+  ],
+  "network_contacted": false,
+  "references": [
+    {
+      "title": "zlib 1.2.x ChangeLog",
+      "url": "https://raw.githubusercontent.com/madler/zlib/v1.2.12/ChangeLog",
+      "use": "upstream release-history comparison; not a binary provenance claim"
+    },
+    {
+      "title": "zlib development ChangeLog",
+      "url": "https://github.com/madler/zlib/blob/develop/ChangeLog",
+      "use": "upstream parser-fix history; exact vendor backports remain unknown"
+    },
+    {
+      "title": "bzip2 historical source archive",
+      "url": "https://www.sourceware.org/pub/bzip2/",
+      "use": "historical source comparison for the exact 1.0.4 release"
+    }
+  ],
+  "schema": "libqplay.original-dependency-provenance.v1",
+  "scope": "read-only Hex-Rays export of original 1.8 bundled compression and font-library boundaries",
+  "security_findings": [
+    {
+      "confidence": "confirmed-static",
+      "evidence": [
+        "zlibVersion returns 1.2.5 and BZ2_bzlibVersion returns 1.0.4, 20-Dec-2006.",
+        "The protocol parsers select the zlib and bzip2 wrappers from fields in incoming frames.",
+        "PNG, MNG, and ZIP resource paths also reach bundled zlib code.",
+        "DT_NEEDED contains no libz or libbz2 entry, so a host-library update cannot replace these implementations without rebuilding or repackaging the native library."
+      ],
+      "id": "DEP-001",
+      "impact": "These versions predate many later parser and resource-handling fixes. An attacker who can supply accepted protocol or resource bytes may have more malformed-input exposure than a current library would. Updating the dependency or proving vendor backports is appropriate before relying on the old client for hostile inputs.",
+      "limits": "The exact bundled source revisions and vendor backports were not reconstructed here. This is dependency exposure, not a claim that a particular CVE is exploitable in this binary. No decoder fuzzing or live-server test was performed.",
+      "severity": "medium",
+      "title": "Inbound decompression uses old statically bundled zlib and bzip2 releases"
+    },
+    {
+      "confidence": "confirmed-static",
+      "evidence": [
+        "FT_Init_FreeType writes version fields 2, 3, and 6 into the library object.",
+        "TFontData_load uses FT_New_Memory_Face for resource streams and FT_New_Face for filesystem paths.",
+        "A relative font that is absent locally is handed to the file-download/resource lookup path before the font face is created."
+      ],
+      "id": "DEP-002",
+      "impact": "Font parsing is native code with a large historical input surface. A malformed accepted font can create parser, memory, or availability test cases, especially because no application-level font byte or glyph budget was established in this pass.",
+      "limits": "The review did not prove that an untrusted server can choose the font option or supply arbitrary font bytes in the stock game flow. No font fuzzing was performed.",
+      "severity": "medium",
+      "title": "Resource-backed font data reaches bundled FreeType 2.3.6"
+    },
+    {
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The automatic TCompression wrappers start at least 64 KiB and retry after output-buffer-full results.",
+        "The retry loop accepts capacities through 4 MiB, then returns an empty result when another growth would exceed that threshold.",
+        "TCompression_getCompressionBuffer_int itself rounds requests to powers of two and has no independent upper bound.",
+        "The input stream and packet accumulator have separate limits and are not covered by this output-buffer ceiling."
+      ],
+      "id": "DEP-003",
+      "impact": "A compressed frame can force repeated global reallocations and consume memory before the wrapper rejects it. The cap limits one automatic output path but is not a complete compressed-input or total-resource budget.",
+      "limits": "The exact behavior for every explicit-output-buffer caller was not exhaustively traced. This finding is a static resource-policy observation, not a demonstrated memory corruption.",
+      "severity": "medium",
+      "title": "Automatic decompression buffer growth is shared and only partially bounded"
+    }
+  ]
+}
