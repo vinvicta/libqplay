@@ -73,6 +73,68 @@ read-only verifier checked 1,249 reviewed names at their expected addresses
 with zero failures. The copy hash and pass breakdown are in
 `artifacts/ida_translation_verification_20260830.json`.
 
+## Android lifecycle and the first network checkpoint
+
+The original Java activity does not call the native engine from
+`onCreate`. It stores `ApplicationInfo.sourceDir` and `dataDir`, registers the
+activity as the native event listener, sets the GL thread activity pointer,
+and requests the permissions declared by the package. `onStart` creates the
+`GLView`, constructs `QPlayRenderer`, starts `GLThread`, and queues the first
+foreground event.
+
+The important detail is inside `GLThread.needToWait`. Its render loop does not
+call `Renderer.drawFrame` until the activity is resumed, the window has focus,
+the surface exists, the EGL context is not marked lost, and the thread is not
+done. While waiting it sleeps for 100 milliseconds. The first call to
+`QPlayRenderer.loadLibrary`, and therefore the first call to
+`Natives.QPlayMain`, happens only after that gate opens.
+
+There is also a Java-side permission gate. `PermissionsAllGranted` sets the
+field `Natives.downloaded` to true. `QPlayRenderer.loadLibrary` returns
+without loading `qplay` while that field is false. On API 23 and later,
+`AskPermissions` filters the package's declared Android dangerous permissions,
+checks them, and requests missing entries. The field name is misleading: in
+this path it is the switch that permits native startup, not a proof that a
+native download just completed.
+
+The renderer passes the locale language, APK source directory, application
+data directory, first external-files directory, display values, and the full
+launch URI to the ARM64 JNI wrapper. `QPlayMain` stores the external path as
+`sdcardpath`, uses the application data directory as the native base data
+folder after adding a separator, and falls back to the historical package
+directory pattern when the value is empty. It then loads the engine, selects
+the translation language, loads the GUI unless offline, and forwards a
+nonempty launch URI to `TServerList` through `onStartedWithURL`.
+
+The Java bridge ignores the integer returned by `QPlayMain` and sets
+`Natives.loaded` true immediately afterward. Every later frame calls
+`Natives.QPlayLoop`, which advances timers and the network scheduler before
+choosing the loading or game draw path. This gives a useful troubleshooting
+split:
+
+* no native library load means the focus, surface, permission, or GL-thread
+  gate has not opened;
+* a loaded library with no connector request points to engine initialization,
+  launch-URI handling, or the native server-list state machine;
+* a connector request that fails before a response reaches CyaSSL or the HTTP
+  parser belongs to the independent connector trust and transport review.
+
+The smali also exposes two old lifecycle quirks. One local string in
+`QPlayRenderer.loadLibrary` is initialized to an empty value and checked with
+the message `internalstorage string is empty`, while a separate local holds
+the external-files directory passed to native code. This is a stale diagnostic
+and path-marshalling defect, but the local replay still supplied an external
+cache directory and reached the resource path. More seriously,
+`Natives.onAppPause` sets the native close flag when there is no client or the
+loading state is at most 2, and `QPlayLoop` exits when that flag is observed.
+An interruption during early startup can therefore look like a failed login.
+
+The focused evidence is in
+`artifacts/original_android_lifecycle_review_20260830.json`. The native
+functions are exported directly from the active ARM64 IDA database by
+`tools/ida_export_original_android_lifecycle_review.py`; the Java observations
+were checked against the original DEX smali kept outside the public repository.
+
 ## Credential and local-option storage
 
 The credential pass follows the native option object rather than assuming

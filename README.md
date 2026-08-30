@@ -57,6 +57,13 @@ proves that the native client can reach a rendered world through a bounded
 loopback responder. Live endpoint availability, current package signing, and
 account authentication remain open.
 
+The Android lifecycle review adds an important first diagnostic checkpoint.
+The connector is downstream of the GL surface, window focus, runtime
+permission completion, and the first render frame. A compatibility dialog or
+permission state can therefore make the app look offline before any TLS code
+has run. The native Java bridge and ARM64 JNI evidence are in
+`artifacts/original_android_lifecycle_review_20260830.json`.
+
 ## Repository layout
 
 * `docs/RESEARCH_NOTES.md` is the chronological investigation record.
@@ -102,6 +109,8 @@ account authentication remain open.
 * `artifacts/original_image_parser_review_20260830.json` records the downloaded
   image-resource path and the native PNG, GIF, JPEG, BMP, and TGA decoder
   boundaries. It is a static review and contains no fuzzing results.
+* `artifacts/original_android_lifecycle_review_20260830.json` records the
+  Activity, GLThread, renderer, and ARM64 JNI startup and pause boundaries.
 * `artifacts/ida_translation_verification_20260830.json` records the final
   packed IDA copy, pass counts, hashes, and zero-failure verification result.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.

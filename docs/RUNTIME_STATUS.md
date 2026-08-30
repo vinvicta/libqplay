@@ -36,6 +36,13 @@ This is the short handoff view. The full reasoning and command history are in
     1,249 reviewed function aliases. The final packed copy has 11,297
     functions, 421 address-only `sub_` entries, and zero verification failures.
 
+The Android lifecycle review now gives a pre-network checkpoint. The GL thread
+must have a surface and window focus, and the permission callback must set
+`Natives.downloaded`, before the first `QPlayMain` call can occur. The Android
+compatibility warning was dismissed in the successful local replay. The full
+startup and pause evidence is in
+`artifacts/original_android_lifecycle_review_20260830.json`.
+
 ## Not verified
 
 * A live game-server login.

@@ -1,0 +1,231 @@
+{
+  "apk_executed_by_exporter": false,
+  "artifact": "original_android_lifecycle_review_20260830",
+  "database": {
+    "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "imagebase": "0x0",
+    "path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
+  },
+  "findings": [
+    {
+      "confidence": "confirmed-static",
+      "evidence": [
+        "GLThread requires an active surface, window focus, and a non-paused Activity before it calls QPlayRenderer.drawFrame.",
+        "QPlayRenderer does not call System.loadLibrary or QPlayMain until Natives.downloaded is true.",
+        "Natives.downloaded is set only by PermissionsAllGranted in the reviewed Java code."
+      ],
+      "id": "ANDROID-001",
+      "impact": "A client that displays a title or static layout while a compatibility or permission dialog is present may not have executed any connector code. The first diagnostic should verify focus, surface creation, permission completion, and Natives.loaded before changing certificate or HTTP code.",
+      "limits": "The exact grant behavior of WRITE_EXTERNAL_STORAGE with its old max SDK declaration varies by Android release and was not asserted from this static pass. The local replay did load the native library after the compatibility dialog was dismissed.",
+      "severity": "medium",
+      "title": "Focus and permission gates can suppress native startup before TLS is attempted"
+    },
+    {
+      "confidence": "confirmed-static",
+      "evidence": [
+        "Java queues onAppPause on the GL thread during Activity.onPause.",
+        "The native bridge sets closeapplication when the client is absent or loadingstate is at most 2.",
+        "QPlayLoop calls exit(0) when closeapplication is set."
+      ],
+      "id": "ANDROID-002",
+      "impact": "A startup interruption can terminate the client rather than preserving a resumable loading state. This complicates testing with system dialogs and can be mistaken for a failed network connection.",
+      "limits": "The static path does not show which Android dialogs generate onPause on every supported release. No production device behavior was changed.",
+      "severity": "medium",
+      "title": "Early Activity pause can schedule process exit"
+    },
+    {
+      "confidence": "confirmed-static",
+      "evidence": [
+        "QPlayRenderer ignores the integer returned by QPlayMain.",
+        "It sets Natives.loaded to true immediately after the call.",
+        "QPlayMain calls the engine loader without using its return value in the reviewed wrapper and then returns 1 on its normal path."
+      ],
+      "id": "ANDROID-003",
+      "impact": "A partial engine initialization can be reported to Java as loaded, leaving QPlayLoop and later callbacks to operate on incomplete state. A repair build should propagate an initialization result and log the failed stage.",
+      "limits": "The normal QPlayMain path returns 1 in the reviewed native function. This is a robustness and observability issue, not proof of a stock initialization failure.",
+      "severity": "low",
+      "title": "The Java bridge marks native initialization successful without checking its return code"
+    }
+  ],
+  "functions": [
+    {
+      "address": "0x243858",
+      "callers": [],
+      "code": "__int64 __fastcall Java_com_quattroplay_GraalClassic_Natives_QPlayMain(\n        __int64 a1,\n        __int64 a2,\n        __int64 a3,\n        __int64 a4,\n        __int64 a5,\n        __int64 a6,\n        int a7,\n        int a8,\n        float a9,\n        float a10,\n        float a11,\n        int a12,\n        __int64 a13)\n{\n  unsigned int v18; // w22\n  int v19; // w26\n  int v20; // w24\n  const TString *v21; // x1\n  int *v22; // x0\n  bool v23; // w2\n  const TString *v24; // x1\n  bool v25; // w1\n  const TString *v26; // x1\n  TGraalVar *v27; // x19\n  int *v28; // x3\n  TGameEnvironment *v30; // x0\n  char *v31; // [xsp+58h] [xbp-38h]\n  char *v32; // [xsp+58h] [xbp-38h]\n  char *v33; // [xsp+58h] [xbp-38h]\n  char *v34; // [xsp+58h] [xbp-38h]\n  char *v35; // [xsp+58h] [xbp-38h]\n  int *v36; // [xsp+68h] [xbp-28h] BYREF\n  __int64 v37; // [xsp+70h] [xbp-20h] BYREF\n  __int64 v38; // [xsp+78h] [xbp-18h] BYREF\n  int *v39; // [xsp+80h] [xbp-10h] BYREF\n  __int64 v40; // [xsp+88h] [xbp-8h] BYREF\n\n  javaenvironmentclass = a2;\n  dword_38B2C8 = LODWORD(a11);\n  dword_391244 = LODWORD(a9);\n  SCR_WIDTH = a7;\n  dword_391248 = LODWORD(a10);\n  SCR_HEIGHT = a8;\n  javaenvironment = a1;\n  dword_391240 = a12;\n  plt_TInitStatics_init_void((TInitStatics *)&qword_391210);\n  v31 = (char *)(*(__int64 (__fastcall **)(__int64, __int64, _QWORD))(*(_QWORD *)a1 + 1352LL))(a1, a6, 0);\n  v40 = 0;\n  plt_TString_operator_lshift_char_const((int)&v40, v31);\n  (*(void (__fastcall **)(__int64, __int64, char *))(*(_QWORD *)a1 + 1360LL))(a1, a6, v31);\n  plt_TString_operator_assign_TString_const(&data_TFiles_sdcardpath, &v40);\n  plt_TString_clear_void((TString *)&v40);\n  if ( data_TFiles_sdcardpath && *(int *)data_TFiles_sdcardpath > 0 )\n  {\n    v40 = 0;\n    v18 = (unsigned __int8)data_TFiles_fileseparator;\n    plt_TString_operator_lshift_char(&v40, (unsigned __int8)data_TFiles_fileseparator);\n    v19 = (unsigned __int8)plt_TString_ends_TString_const((TString *)&data_TFiles_sdcardpath, (const TString *)&v40);\n    plt_TString_clear_void((TString *)&v40);\n    if ( !v19 )\n      plt_TString_operator_lshift_char(&data_TFiles_sdcardpath, (unsigned __int8)data_TFiles_fileseparator);\n  }\n  else\n  {\n    v18 = (unsigned __int8)data_TFiles_fileseparator;\n  }\n  v32 = (char *)(*(__int64 (__fastcall **)(__int64, __int64, _QWORD))(*(_QWORD *)a1 + 1352LL))(a1, a4, 0);\n  v40 = 0;\n  plt_TString_operator_lshift_char_const((int)&v40, v32);\n  (*(void (__fastcall **)(__int64, __int64, char *))(*(_QWORD *)a1 + 1360LL))(a1, a4, v32);\n  plt_TString_operator_assign_TString_const(&data_TFiles_basedatafolder2, &v40);\n  plt_TString_clear_void((TString *)&v40);\n  v33 = (char *)(*(__int64 (__fastcall **)(__int64, __int64, _QWORD))(*(_QWORD *)a1 + 1352LL))(a1, a5, 0);\n  v36 = nullptr;\n  plt_TString_operator_lshift_char_const((int)&v36, v33);\n  (*(void (__fastcall **)(__int64, __int64, char *))(*(_QWORD *)a1 + 1360LL))(a1, a5, v33);\n  v40 = 0;\n  plt_TString_operator_lshift_char(&v40, v18);\n  v20 = (unsigned __int8)plt_TString_ends_TString_const((TString *)&v36, (const TString *)&v40);\n  plt_TString_clear_void((TString *)&v40);\n  if ( v20 )\n  {\n    v22 = v36;\n    if ( !v36 )\n    {\nLABEL_17:\n      v37 = 0;\n      v30 = (TGameEnvironment *)plt_TString_operator_lshift_char_const((int)&v37, \"/data/data/com.quattroplay.\");\n      plt_TGameEnvironment_getApplicationIdentifier_void(&v38, v30);\n      v39 = nullptr;\n      plt_TString_operator_assign_TString_const(&v39, &v37);\n      plt_TString_operator_lshift_TString_const(&v39, &v38);\n      v40 = 0;\n      plt_TString_operator_assign_TString_const(&v40, &v39);\n      plt_TString_operator_lshift_char_const((int)&v40, (char *)&word_2D8820);\n      plt_TString_operator_assign_TString_const(&v36, &v40);\n      plt_TString_clear_void((TString *)&v40);\n      plt_TString_clear_void((TString *)&v39);\n      plt_TString_clear_void((TString *)&v38);\n      plt_TString_clear_void((TString *)&v37);\n      goto LABEL_8;\n    }\n  }\n  else\n  {\n    plt_TString_operator_lshift_char(&v36, v18);\n    v22 = v36;\n    if ( !v36 )\n      goto LABEL_17;\n  }\n  if ( *v22 <= 0 )\n    goto LABEL_17;\nLABEL_8:\n  plt_TFiles_forceDirectories_TString_const((TFiles *)&v36, v21);\n  plt_TClientEnvironment_loadEngine_TString_const_bool(\n    (TClientEnvironment *)&v36,\n    (const TString *)((char *)&dword_0 + 1),\n    v23);\n  v34 = (char *)(*(__int64 (__fastcall **)(__int64, __int64, _QWORD))(*(_QWORD *)a1 + 1352LL))(a1, a3, 0);\n  v40 = 0;\n  plt_TString_operator_lshift_char_const((int)&v40, v34);\n  (*(void (__fastcall **)(__int64, __int64, char *))(*(_QWORD *)a1 + 1360LL))(a1, a3, v34);\n  plt_TTranslations_setLanguage_TString_const((TTranslations *)&v40, v24);\n  plt_TString_clear_void((TString *)&v40);\n  plt_TClientEnvironment_loadGui_bool((TClientEnvironment *)((unsigned __int8)chosenofflinemode ^ 1u), v25);\n  v35 = (char *)(*(__int64 (__fastcall **)(__int64, __int64, _QWORD))(*(_QWORD *)a1 + 1352LL))(a1, a13, 0);\n  v39 = nullptr;\n  plt_TString_operator_lshift_char_const((int)&v39, v35);\n  (*(void (__fastcall **)(__int64, __int64, char *))(*(_QWORD *)a1 + 1360LL))(a1, a13, v35);\n  if ( v39 )\n  {\n    if ( *v39 > 0 )\n    {\n      plt_TServerList_setProtocolString_TString_const((TServerList *)&v39, v26);\n      v27 = (TGraalVar *)data_TGameEnvironment_universe;\n      if ( data_TGameEnvironment_universe )\n      {\n        v40 = 0;\n        plt_TString_operator_lshift_char_const((int)&v40, \"onStartedWithURL\");\n        if ( v39 )\n          v28 = v39 + 2;\n        else\n          v28 = (int *)TString_dummystr;\n        plt_TGraalVar_invokeEvent_TString_const_char_const(v27, (const TString *)&v40, \"s\", v28);\n        plt_TString_clear_void((TString *)&v40);\n      }\n    }\n  }\n  plt_TString_clear_void((TString *)&v39);\n  plt_TString_clear_void((TString *)&v36);\n  return 1;\n}\n",
+      "code_bytes": 5769,
+      "code_sha256": "71918dd14ee1d97761edab750282dd3b5ec7d6bb5954b81a5296fc7fa7bef221",
+      "function_end": "0x243c9c",
+      "function_start": "0x243858",
+      "name": "Java_com_quattroplay_GraalClassic_Natives_QPlayMain",
+      "role": "native initialization"
+    },
+    {
+      "address": "0x2440f4",
+      "callers": [],
+      "code": "char *__fastcall Java_com_quattroplay_GraalClassic_Natives_QPlayLoop(TTime *a1, __int64 a2)\n{\n  double v2; // d8\n  double v3; // d0\n  char *result; // x0\n  double v5; // d1\n  __int64 v6; // x2\n  void (__fastcall *v7)(__int64, float *); // x2\n  unsigned __int64 inited; // x0\n  TClientEnvironment *v9; // x0\n  bool v10; // w1\n  TScreenPanelOpenGL *v11; // x20\n  void (__fastcall *v12)(__int64, float *); // x2\n  TWindow *v13; // x0\n  TClientEnvironment *v14; // x0\n  TClientEnvironment *v15; // x0\n  float v16; // [xsp+40h] [xbp-10h] BYREF\n  float v17; // [xsp+44h] [xbp-Ch]\n  float v18; // [xsp+48h] [xbp-8h]\n  float v19; // [xsp+4Ch] [xbp-4h]\n\n  javaenvironment = (__int64)a1;\n  javaenvironmentclass = a2;\n  v2 = (double)(unsigned int)data_TTime_frametick / 1000.0;\n  plt_TTime_getTime_void(a1);\n  result = (char *)&dword_0 + 2;\n  v5 = *(double *)&qword_3912B8 + v2;\n  if ( v3 >= *(double *)&qword_3912B8 + v2 )\n  {\n    if ( v3 > *(double *)&qword_3912B8 + v2 * 2.0 )\n      v5 = v3;\n    qword_3912B8 = *(_QWORD *)&v5;\n    if ( (unsigned __int8)plt_TClientEnvironment_TimeExpired_void((TClientEnvironment *)((char *)&dword_0 + 2)) )\n      goto LABEL_21;\n    plt_invokeAndroidMouseEvents_void();\n    (*(void (__fastcall **)(__int64))(*(_QWORD *)data_TGraphicOperation_target + 200LL))(data_TGraphicOperation_target);\n    v6 = *(_QWORD *)data_TGraphicOperation_target;\n    v16 = 1.0;\n    v17 = 1.0;\n    v7 = *(void (__fastcall **)(__int64, float *))(v6 + 216);\n    v18 = 1.0;\n    v19 = 1.0;\n    v7(data_TGraphicOperation_target, &v16);\n    glDisableClientState(32884);\n    glDisableClientState(32886);\n    glDisableClientState(32885);\n    glDisableClientState(32888);\n    glDisable(3008);\n    glDisable(2929);\n    glDisable(3553);\n    inited = (unsigned __int8)byte_3912C0;\n    if ( byte_3912C0 )\n    {\n      byte_3912C0 = 0;\n      v14 = (TClientEnvironment *)plt_TClientEnvironment_freeGraphics_void((TClientEnvironment *)inited);\n      v15 = (TClientEnvironment *)plt_TClientEnvironment_reloadTextures_void(v14);\n      inited = plt_TClientEnvironment_initGraphics_void(v15);\n    }\n    v9 = (TClientEnvironment *)plt_TClientEnvironment_runTimers_void((TClientEnvironment *)inited);\n    if ( (unsigned __int8)plt_TClientEnvironment_getLoadingScreenEnabled_void(v9) )\n    {\n      plt_drawDefaultScreen_void();\n    }\n    else\n    {\n      if ( !data_TClient_client )\n        plt_drawDefaultScreen_void();\n      plt_TPanelInterface_setClippingRectangle_float_float_float_float(\n        (TPanelInterface *)data_TGraphicOperation_target,\n        0.0,\n        0.0,\n        (float)SCR_WIDTH,\n        (float)SCR_HEIGHT);\n      if ( !(unsigned __int8)plt_TClientEnvironment_drawGame_bool(nullptr, v10) )\n      {\n        glClearColor(0.0, 0.0, 0.0, 1.0);\n        glClear(0x4000);\n      }\n      if ( (unsigned __int8)plt_isVideoPlayerOpen_void() && dword_391230 > 0 && dword_391234 > 0 )\n      {\n        v11 = (TScreenPanelOpenGL *)data_TGraphicOperation_target;\n        v12 = *(void (__fastcall **)(__int64, float *))(*(_QWORD *)data_TGraphicOperation_target + 216LL);\n        v16 = 0.0;\n        v17 = 0.0;\n        v18 = 0.0;\n        v19 = 0.0;\n        v12(data_TGraphicOperation_target, &v16);\n        plt_TScreenPanelOpenGL_drawQuad_float_float_float_float(\n          v11,\n          (float)dword_391228,\n          (float)dword_39122C,\n          (float)dword_391230,\n          (float)dword_391234);\n      }\n      if ( data_TWindow_mainwindow )\n      {\n        v13 = (TWindow *)(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)data_TWindow_mainwindow + 528LL))(data_TWindow_mainwindow);\n        plt_TWindow_onFrameDrawn_void(v13);\n      }\n    }\n    if ( data_TGameEnvironment_closeapplication )\nLABEL_21:\n      exit(0);\n    return (_BYTE *)(&dword_0 + 1);\n  }\n  return result;\n}\n",
+      "code_bytes": 3765,
+      "code_sha256": "67683fee7caf86c0e19db7540ffbb3ebb616f7cd24059f9690922f6db36b6017",
+      "function_end": "0x2443ac",
+      "function_start": "0x2440f4",
+      "name": "Java_com_quattroplay_GraalClassic_Natives_QPlayLoop",
+      "role": "per-frame native loop"
+    },
+    {
+      "address": "0x243c9c",
+      "callers": [],
+      "code": "__int64 __fastcall Java_com_quattroplay_GraalClassic_Natives_onSizeChanged(__int64 a1, __int64 a2, int a3, int a4)\n{\n  __int64 result; // x0\n\n  result = data_TWindow_mainwindow;\n  if ( data_TWindow_mainwindow )\n  {\n    javaenvironment = a1;\n    javaenvironmentclass = a2;\n    SCR_WIDTH = a3;\n    SCR_HEIGHT = a4;\n    return plt_TWindow_setSize_int_int_bool((TWindow *)data_TWindow_mainwindow, a3, a4, 0);\n  }\n  return result;\n}\n",
+      "code_bytes": 428,
+      "code_sha256": "9215993d1fd27f6356c30d90335e63028330a1d6da626ee8ba3217e26e6ef15d",
+      "function_end": "0x243d00",
+      "function_start": "0x243c9c",
+      "name": "Java_com_quattroplay_GraalClassic_Natives_onSizeChanged",
+      "role": "surface size bridge"
+    },
+    {
+      "address": "0x244990",
+      "callers": [],
+      "code": "void Java_com_quattroplay_GraalClassic_Natives_onAppEnterBackground()\n{\n  TGraalVar *v0; // x21\n  __int64 v1; // x20\n  const TString *v2; // x1\n  THashList *v3; // x20\n  unsigned int Hashcode_TString_const; // w0\n  TGraalVar *Object_uint_TString_const; // x20\n  __int64 v6; // [xsp+28h] [xbp-8h] BYREF\n\n  v0 = (TGraalVar *)data_TGameEnvironment_universe;\n  if ( data_TGameEnvironment_universe )\n  {\n    v6 = 0;\n    plt_TString_operator_lshift_char_const((int)&v6, \"onAppEnterBackground\");\n    plt_TGraalVar_invokeEvent_TString_const(v0, (const TString *)&v6);\n    plt_TString_clear_void((TString *)&v6);\n    v1 = data_TGameEnvironment_universe;\n    v6 = 0;\n    plt_TString_operator_lshift_char_const((int)&v6, \"-Games\");\n    v3 = *(THashList **)(v1 + 96);\n    if ( v3 )\n    {\n      Hashcode_TString_const = plt_THashList_getHashcode_TString_const((THashList *)&v6, v2);\n      Object_uint_TString_const = (TGraalVar *)plt_THashList_getObject_uint_TString_const(\n                                                 v3,\n                                                 Hashcode_TString_const,\n                                                 (const TString *)&v6);\n      plt_TString_clear_void((TString *)&v6);\n      if ( Object_uint_TString_const )\n      {\n        v6 = 0;\n        plt_TString_operator_lshift_char_const((int)&v6, \"prepareEnterBackground\");\n        plt_TGraalVar_executeFloatFunctionF_TString_const_char_const(\n          Object_uint_TString_const,\n          (const TString *)&v6,\n          &byte_2DCE08);\n        plt_TString_clear_void((TString *)&v6);\n      }\n    }\n    else\n    {\n      plt_TString_clear_void((TString *)&v6);\n    }\n  }\n}\n",
+      "code_bytes": 1651,
+      "code_sha256": "d4be80017bcd815b57ac6a3d545aea9262c179eae65b04d798073efffd9f06ba",
+      "function_end": "0x244a68",
+      "function_start": "0x244990",
+      "name": "Java_com_quattroplay_GraalClassic_Natives_onAppEnterBackground",
+      "role": "background transition"
+    },
+    {
+      "address": "0x244a68",
+      "callers": [],
+      "code": "__int64 *Java_com_quattroplay_GraalClassic_Natives_onAppLeaveBackground()\n{\n  __int64 *result; // x0\n  TGraalVar *v1; // x20\n  __int64 v2; // [xsp+28h] [xbp-8h] BYREF\n\n  result = &data_TGameEnvironment_universe;\n  v1 = (TGraalVar *)data_TGameEnvironment_universe;\n  if ( data_TGameEnvironment_universe )\n  {\n    v2 = 0;\n    plt_TString_operator_lshift_char_const((int)&v2, \"onAppLeaveBackground\");\n    plt_TGraalVar_invokeEvent_TString_const(v1, (const TString *)&v2);\n    return (__int64 *)plt_TString_clear_void((TString *)&v2);\n  }\n  return result;\n}\n",
+      "code_bytes": 554,
+      "code_sha256": "ee54ca31ef653f788299fce0cc5162a82bd6334af4ced5d506c3a0d6cf432e76",
+      "function_end": "0x244ac0",
+      "function_start": "0x244a68",
+      "name": "Java_com_quattroplay_GraalClassic_Natives_onAppLeaveBackground",
+      "role": "foreground transition"
+    },
+    {
+      "address": "0x244ac0",
+      "callers": [],
+      "code": "char *Java_com_quattroplay_GraalClassic_Natives_onAppPause()\n{\n  char *result; // x0\n\n  if ( !data_TClient_client\n    || (result = (char *)(unsigned int)data_TClientEnvironment_loadingstate, data_TClientEnvironment_loadingstate <= 2) )\n  {\n    data_TGameEnvironment_closeapplication = 1;\n    return &data_TGameEnvironment_closeapplication;\n  }\n  return result;\n}\n",
+      "code_bytes": 363,
+      "code_sha256": "20df41d8645cd4bf36be0495d92f6b6360d34e0cf77c8298360966b534b9719a",
+      "function_end": "0x244af8",
+      "function_start": "0x244ac0",
+      "name": "Java_com_quattroplay_GraalClassic_Natives_onAppPause",
+      "role": "pause bridge"
+    }
+  ],
+  "interpretation": [
+    "The native connector is downstream of Android permission completion, surface creation, window focus, and the GL render loop.",
+    "A useful device trace should log those gates and Natives.loaded before diagnosing the native TLS trust bundle.",
+    "The local replay showed that the native path becomes active after the compatibility warning is dismissed, so this report narrows the startup diagnosis without replacing the independent stale-certificate finding."
+  ],
+  "java_bridge": {
+    "entrypoint_order": [
+      "Activity.onCreate",
+      "Activity.onStart",
+      "GLView.setRenderer",
+      "GLThread.needToWait gate",
+      "QPlayRenderer.loadLibrary",
+      "Natives.QPlayMain",
+      "Natives.QPlayLoop on later frames"
+    ],
+    "native_class": "com.quattroplay.GraalClassic.Natives",
+    "renderer": "com.quattroplay.GraalClassic.QPlayRenderer",
+    "thread": "com.quattroplay.GraalClassic.GLThread"
+  },
+  "java_observations": [
+    {
+      "class": "com.quattroplay.GraalClassic.QPlayActivity",
+      "classification": "native-listener-registration",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The activity stores its ApplicationInfo sourceDir and dataDir, registers itself as the native event listener, and stores itself through SetGLThreadActivity.",
+        "The activity sets the content view and requests runtime permissions before the renderer is created by onStart."
+      ],
+      "interpretation": "The activity is only the listener and lifecycle owner at creation time. Native initialization is deferred to the GL renderer thread.",
+      "method": "onCreate(Bundle)",
+      "source_line": 222
+    },
+    {
+      "class": "com.quattroplay.GraalClassic.QPlayActivity",
+      "classification": "renderer-thread-start",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "onStart calls createGLView, which constructs QPlayRenderer and starts GLThread.",
+        "The same method queues the initial onAppLeaveBackground callback, but the callback waits behind the GLThread state gate."
+      ],
+      "interpretation": "A successful Activity onCreate is not proof that libqplay has loaded. The first native call occurs only after the GL surface and focus are usable.",
+      "method": "onStart()",
+      "source_line": 428
+    },
+    {
+      "class": "com.quattroplay.GraalClassic.GLThread",
+      "classification": "renderer-startup-gate",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The render loop waits while paused, unfocused, without a surface, after context loss, or after the thread is marked done.",
+        "While waiting, guardedRun sleeps for 100 milliseconds and does not call Renderer.drawFrame.",
+        "onWindowFocusChanged(true) and surfaceCreated clear the relevant blockers, while onResume clears the pause flag."
+      ],
+      "interpretation": "A system compatibility dialog, permission dialog, or another focus holder can make the visible symptom look like a network failure because QPlayRenderer has not reached QPlayMain yet.",
+      "method": "needToWait()",
+      "source_line": 211
+    },
+    {
+      "class": "com.quattroplay.GraalClassic.QPlayActivity",
+      "classification": "native-load-permission-gate",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "PermissionsAllGranted sets Natives.downloaded to true.",
+        "QPlayRenderer.loadLibrary returns immediately while Natives.downloaded is false.",
+        "On Android API 23 and later, AskPermissions examines the permissions declared by the installed package and calls PermissionsAllGranted only when its checks pass."
+      ],
+      "interpretation": "The field named downloaded is also the Java-side gate for loading the native library. A permission state that never reaches PermissionsAllGranted suppresses all connector traffic.",
+      "method": "PermissionsAllGranted()",
+      "source_line": 268
+    },
+    {
+      "class": "com.quattroplay.GraalClassic.QPlayRenderer",
+      "classification": "native-load-and-argument-marshalling",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The renderer calls System.loadLibrary(\"qplay\") only after the downloaded gate passes and only when Natives.loaded is false.",
+        "It obtains the first external-files directory when available and passes it as the fourth string argument to QPlayMain.",
+        "It passes the application sourceDir, application dataDir, display dimensions, display metrics, locale language, and the complete intent URI to QPlayMain.",
+        "The Java method sets Natives.loaded to true after QPlayMain returns and does not inspect the native return value."
+      ],
+      "interpretation": "Native initialization runs on the GL thread with an Android GL context. The native loaded flag is a Java bookkeeping value, not a checked QPlayMain result.",
+      "method": "loadLibrary()",
+      "source_line": 121
+    },
+    {
+      "class": "com.quattroplay.GraalClassic.QPlayRenderer",
+      "classification": "per-frame-bridge",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "Each renderer frame calls loadLibrary first, then QPlayLoop when Natives.loaded is true.",
+        "The boolean returned by QPlayLoop controls whether GLThread swaps the EGL surface for that frame."
+      ],
+      "interpretation": "The connector is driven by the render loop. If QPlayLoop is not reached, no native timers or network scheduler work can advance.",
+      "method": "runLibrary(GL10)",
+      "source_line": 114
+    },
+    {
+      "class": "com.quattroplay.GraalClassic.QPlayActivity",
+      "classification": "early-pause-shutdown",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "onPause queues Natives.onAppPause on the GL thread after setting mPaused.",
+        "onStop queues Natives.onAppEnterBackground and then marks the GL thread for exit through requestExitAndWait.",
+        "The native onAppPause bridge sets closeapplication when no client exists or loadingstate is at most 2."
+      ],
+      "interpretation": "A pause during early startup is not treated as a harmless suspend. The next native frame can call exit(0), which can make a dialog or background transition appear to close the client.",
+      "method": "onPause() and onStop()",
+      "source_line": 368
+    }
+  ],
+  "network_contacted": false,
+  "schema": "libqplay.original-android-lifecycle-review.v1",
+  "scope": "read-only review of the original 1.8 Android Java renderer bridge and ARM64 JNI lifecycle functions"
+}
