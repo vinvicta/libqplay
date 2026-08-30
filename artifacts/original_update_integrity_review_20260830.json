@@ -1,0 +1,820 @@
+{
+  "artifact": "original_update_integrity_review_20260830",
+  "database": {
+    "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "imagebase": "0x0",
+    "path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
+  },
+  "functions": [
+    {
+      "address": "0x1fbe78",
+      "callers": [
+        {
+          "caller": "0xe135c",
+          "caller_name": "TSounds_play_impl_TString_const_bool_bool_double_double",
+          "callsite": "0xe1704"
+        },
+        {
+          "caller": "0xeeae8",
+          "caller_name": "TResourceFunctions_getResourceStream_TString_const_bool_bool",
+          "callsite": "0xeeb5c"
+        },
+        {
+          "caller": "0xeec84",
+          "caller_name": "TResourceFunctions_getGameFile_TString_const_bool",
+          "callsite": "0xeed20"
+        },
+        {
+          "caller": "0xfbe74",
+          "caller_name": "TFileScripting_script_fileUpdate",
+          "callsite": "0xfbed4"
+        },
+        {
+          "caller": "0x110ca0",
+          "caller_name": "TFontData_load_void",
+          "callsite": "0x111084"
+        },
+        {
+          "caller": "0x114f80",
+          "caller_name": "TBitmapLoader_forceRedownload_TResourceObject",
+          "callsite": "0x114fb8"
+        },
+        {
+          "caller": "0x114fbc",
+          "caller_name": "TBitmapLoader_findImageFile_TString_const",
+          "callsite": "0x115044"
+        },
+        {
+          "caller": "0x1668a8",
+          "caller_name": "TGraalAni_loadAni_TString_const_bool",
+          "callsite": "0x166aa8"
+        },
+        {
+          "caller": "0x191864",
+          "caller_name": "TTranslations_requestTranslation_TString_const",
+          "callsite": "0x1919a0"
+        },
+        {
+          "caller": "0x1a8e88",
+          "caller_name": "LoadGraalMap_TPlayer_TString_const_bool",
+          "callsite": "0x1a90b4"
+        },
+        {
+          "caller": "0x209020",
+          "caller_name": "requestUpdatePackage_void",
+          "callsite": "0x209218"
+        },
+        {
+          "caller": "0x209fa4",
+          "caller_name": "TUpdatePackage_load_void",
+          "callsite": "0x20a66c"
+        }
+      ],
+      "code": "__int64 __fastcall TFileDownload_download_TString_const(__int64 this, const TString *a2)\n{\n  const TString *v2; // x19\n  int v3; // w21\n  const TString *v4; // x1\n  const TString *v5; // x1\n  __int64 v6; // [xsp+20h] [xbp-10h] BYREF\n  __int64 v7; // [xsp+28h] [xbp-8h] BYREF\n\n  if ( !data_TClient_downloadsblocked )\n  {\n    if ( *(_QWORD *)this )\n    {\n      if ( **(int **)this > 0 )\n      {\n        v2 = (const TString *)this;\n        this = (unsigned __int8)plt_operator_assign_TString_const_char_const(this, \"-\");\n        if ( !(_BYTE)this )\n        {\n          this = (unsigned __int8)plt_isnumber2_TString_const(v2);\n          if ( !(_BYTE)this )\n          {\n            v7 = 0;\n            plt_TString_operator_lshift_char_const((int)&v7, data_TFiles_encodedurlidentifier);\n            v3 = plt_TString_indexOf_TString_const(v2, (const TString *)&v7);\n            this = plt_TString_clear_void((TString *)&v7);\n            if ( v3 < 0 )\n            {\n              plt_TFiles_stripFileName_TString_const(&v6, v2, v4);\n              if ( data_TFileDownload_scripteddownloadsystem )\n              {\n                plt_TFileDownload_onFileEvent_TString_const_TFileDownload_fileeventtype((TString *)&v6);\n              }\n              else\n              {\n                plt_TFiles_extractFileExt_TString_const(&v7, (TFiles *)&v6, v5);\n                if ( !(unsigned __int8)plt_operator_assign_TString_const_char_const((int)&v7, \".gft\") )\n                {\n                  if ( data_TClient_client )\n                    plt_TClient_requestDownload_TString_const((TClient *)data_TClient_client, (const TString *)&v6);\n                }\n                plt_TString_clear_void((TString *)&v7);\n              }\n              return plt_TString_clear_void((TString *)&v6);\n            }\n          }\n        }\n      }\n    }\n  }\n  return this;\n}\n",
+      "code_bytes": 1847,
+      "code_sha256": "4d6f71b92db8c80ce5ecbd3b330060d3f4abe74cf351285a45464e646e59976a",
+      "function_end": "0x1fbf98",
+      "function_start": "0x1fbe78",
+      "name": "TFileDownload_download_TString_const",
+      "role": "ordinary download request gate",
+      "string_literals": [
+        "\"-\"",
+        "\".gft\""
+      ]
+    },
+    {
+      "address": "0x1fbf98",
+      "callers": [
+        {
+          "caller": "0xe135c",
+          "caller_name": "TSounds_play_impl_TString_const_bool_bool_double_double",
+          "callsite": "0xe16a0"
+        },
+        {
+          "caller": "0xeeae8",
+          "caller_name": "TResourceFunctions_getResourceStream_TString_const_bool_bool",
+          "callsite": "0xeeb38"
+        },
+        {
+          "caller": "0xefe7c",
+          "caller_name": "TResourceObject_getStream_void",
+          "callsite": "0xf0030"
+        },
+        {
+          "caller": "0xefe7c",
+          "caller_name": "TResourceObject_getStream_void",
+          "callsite": "0xf0060"
+        },
+        {
+          "caller": "0xf03a0",
+          "caller_name": "TResourceObject_canBeLoaded_void",
+          "callsite": "0xf03e4"
+        },
+        {
+          "caller": "0xf03a0",
+          "caller_name": "TResourceObject_canBeLoaded_void",
+          "callsite": "0xf0428"
+        },
+        {
+          "caller": "0xfbe74",
+          "caller_name": "TFileScripting_script_fileUpdate",
+          "callsite": "0xfbeb4"
+        },
+        {
+          "caller": "0x10ecd4",
+          "caller_name": "TFontManager_tryCreateFont_TString_const_int_TString_const_bool",
+          "callsite": "0x10ee50"
+        },
+        {
+          "caller": "0x110ca0",
+          "caller_name": "TFontData_load_void",
+          "callsite": "0x110d18"
+        },
+        {
+          "caller": "0x114fbc",
+          "caller_name": "TBitmapLoader_findImageFile_TString_const",
+          "callsite": "0x115034"
+        },
+        {
+          "caller": "0x1668a8",
+          "caller_name": "TGraalAni_loadAni_TString_const_bool",
+          "callsite": "0x166a78"
+        },
+        {
+          "caller": "0x191864",
+          "caller_name": "TTranslations_requestTranslation_TString_const",
+          "callsite": "0x19194c"
+        },
+        {
+          "caller": "0x1a8e88",
+          "caller_name": "LoadGraalMap_TPlayer_TString_const_bool",
+          "callsite": "0x1a8fa4"
+        },
+        {
+          "caller": "0x1b6618",
+          "caller_name": "GuiControl_setStyleName_TString_const_bool",
+          "callsite": "0x1b6768"
+        },
+        {
+          "caller": "0x209020",
+          "caller_name": "requestUpdatePackage_void",
+          "callsite": "0x209240"
+        },
+        {
+          "caller": "0x209fa4",
+          "caller_name": "TUpdatePackage_load_void",
+          "callsite": "0x20a404"
+        }
+      ],
+      "code": "__int64 __fastcall TFileDownload_update_TString_const(__int64 this, const TString *a2)\n{\n  TString *v2; // x19\n  const TString *v3; // x1\n  int v4; // w21\n  const TString *v5; // x1\n  __int64 v6; // [xsp+30h] [xbp-10h] BYREF\n  __int64 v7; // [xsp+38h] [xbp-8h] BYREF\n\n  if ( !data_TClient_downloadsblocked )\n  {\n    if ( *(_QWORD *)this )\n    {\n      if ( **(int **)this > 0 )\n      {\n        v2 = (TString *)this;\n        this = (unsigned __int8)plt_isnumber2_TString_const((const TString *)this);\n        if ( !(_BYTE)this )\n        {\n          if ( !(unsigned __int8)plt_TFiles_hasPath_TString_const(v2, v3)\n            || (this = (unsigned __int8)plt_TString_starts_TString_const(\n                                          v2,\n                                          (const TString *)&data_TFiles_baseuserfolder),\n                (_BYTE)this) )\n          {\n            v6 = 0;\n            v7 = 0;\n            plt_TString_operator_lshift_char_const((int)&v7, data_TFiles_encodedurlidentifier);\n            v4 = plt_TString_indexOf_TString_const(v2, (const TString *)&v7);\n            plt_TString_clear_void((TString *)&v7);\n            if ( v4 < 0 )\n              plt_TFiles_stripFileName_TString_const(&v7, v2, v5);\n            else\n              plt_TFiles_removeEscapesOfFilename_TString_const(&v7, v2, v5);\n            plt_TString_operator_assign_TString_const(&v6, &v7);\n            plt_TString_clear_void((TString *)&v7);\n            if ( data_TFileDownload_scripteddownloadsystem )\n            {\n              plt_TFileDownload_onFileEvent_TString_const_TFileDownload_fileeventtype((TString *)&v6);\n            }\n            else if ( data_TClient_client )\n            {\n              plt_TClient_requestUpdate_TString_const((TClient *)data_TClient_client, (const TString *)&v6);\n            }\n            return plt_TString_clear_void((TString *)&v6);\n          }\n        }\n      }\n    }\n  }\n  return this;\n}\n",
+      "code_bytes": 1922,
+      "code_sha256": "95aa8751d438269d4b75de0a3e82de096116521d7b3426374d3127f7cc1868ad",
+      "function_end": "0x1fc0cc",
+      "function_start": "0x1fbf98",
+      "name": "TFileDownload_update_TString_const",
+      "role": "update request gate",
+      "string_literals": []
+    },
+    {
+      "address": "0x1fbcc0",
+      "callers": [
+        {
+          "caller": "0xe18f0",
+          "caller_name": "TSounds_getsoundfile_TString_const",
+          "callsite": "0xe1a44"
+        },
+        {
+          "caller": "0x1668a8",
+          "caller_name": "TGraalAni_loadAni_TString_const_bool",
+          "callsite": "0x1669ac"
+        },
+        {
+          "caller": "0x1668a8",
+          "caller_name": "TGraalAni_loadAni_TString_const_bool",
+          "callsite": "0x166ae0"
+        }
+      ],
+      "code": "bool __fastcall TFileDownload_canDownload_void(TFileDownload *this)\n{\n  return data_TClient_client != 0;\n}\n",
+      "code_bytes": 107,
+      "code_sha256": "c51747ffa714edc12f2d3b09301fac9596f3bcf49e4475a2ccbaf107eaff00d4",
+      "function_end": "0x1fbcd8",
+      "function_start": "0x1fbcc0",
+      "name": "TFileDownload_canDownload_void",
+      "role": "download availability",
+      "string_literals": []
+    },
+    {
+      "address": "0x1fbcd8",
+      "callers": [
+        {
+          "caller": "0x1fbd14",
+          "caller_name": "jump_TFileDownload_isDownloadingFiles_void",
+          "callsite": "0x1fbd14"
+        }
+      ],
+      "code": "THTTPRequest *__fastcall TFileDownload_isDownloadingFiles_void(TFileDownload *this)\n{\n  THTTPRequest *result; // x0\n\n  result = (THTTPRequest *)data_TClient_client;\n  if ( !data_TClient_client )\n    return (THTTPRequest *)plt_THTTPRequest_isDownloadingFiles_void(result);\n  result = (THTTPRequest *)plt_TClient_isDownloadingFiles_void((TClient *)data_TClient_client);\n  if ( !(_BYTE)result )\n    return (THTTPRequest *)plt_THTTPRequest_isDownloadingFiles_void(result);\n  return result;\n}\n",
+      "code_bytes": 488,
+      "code_sha256": "6eb108ab6b0619c48fc20433ec2fff161fda0fe0074b2083c90318af9b43a73e",
+      "function_end": "0x1fbd14",
+      "function_start": "0x1fbcd8",
+      "name": "TFileDownload_isDownloadingFiles_void",
+      "role": "download status",
+      "string_literals": []
+    },
+    {
+      "address": "0x1fbd98",
+      "callers": [
+        {
+          "caller": "0x1e8890",
+          "caller_name": "TClient_passDownloadQueueToScript_void",
+          "callsite": "0x1e88d4"
+        },
+        {
+          "caller": "0x1e8890",
+          "caller_name": "TClient_passDownloadQueueToScript_void",
+          "callsite": "0x1e8930"
+        },
+        {
+          "caller": "0x1eb008",
+          "caller_name": "TClient_continueDownloadQueue",
+          "callsite": "0x1eb090"
+        },
+        {
+          "caller": "0x1eb208",
+          "caller_name": "TClient_finishDownloadFile",
+          "callsite": "0x1eb234"
+        },
+        {
+          "caller": "0x1eb294",
+          "caller_name": "TClient_finishFileDownload",
+          "callsite": "0x1eb33c"
+        },
+        {
+          "caller": "0x1ec4a0",
+          "caller_name": "TClient_finishCachedFile",
+          "callsite": "0x1ec630"
+        },
+        {
+          "caller": "0x1ec764",
+          "caller_name": "TClient_processFileChunk",
+          "callsite": "0x1eca70"
+        },
+        {
+          "caller": "0x1fbe78",
+          "caller_name": "TFileDownload_download_TString_const",
+          "callsite": "0x1fbf40"
+        },
+        {
+          "caller": "0x1fbf98",
+          "caller_name": "TFileDownload_update_TString_const",
+          "callsite": "0x1fc098"
+        },
+        {
+          "caller": "0x1fc0cc",
+          "caller_name": "TFileDownload_ignore_TString_const",
+          "callsite": "0x1fc0f8"
+        },
+        {
+          "caller": "0x200010",
+          "caller_name": "THTTPRequest_saveDownloadedData_void",
+          "callsite": "0x200130"
+        },
+        {
+          "caller": "0x200010",
+          "caller_name": "THTTPRequest_saveDownloadedData_void",
+          "callsite": "0x2002d4"
+        },
+        {
+          "caller": "0x200010",
+          "caller_name": "THTTPRequest_saveDownloadedData_void",
+          "callsite": "0x2003d4"
+        },
+        {
+          "caller": "0x200010",
+          "caller_name": "THTTPRequest_saveDownloadedData_void",
+          "callsite": "0x200608"
+        }
+      ],
+      "code": "__int64 __fastcall TFileDownload_onFileEvent_TString_const_TFileDownload_fileeventtype(__int64 result, int a2)\n{\n  const TString *v2; // x20\n  TStringList *v3; // x0\n  TStringList *v4; // x19\n  TStringList *v5; // x22\n  __int64 v6; // [xsp+38h] [xbp-8h] BYREF\n\n  if ( data_TFileDownload_scripteddownloadsystem )\n  {\n    if ( data_TGameEnvironment_universe )\n    {\n      v2 = (const TString *)result;\n      if ( (unsigned int)(a2 - 1) > 1\n        || !data_TFileDownload_scripteddownloadignore\n        || (result = (unsigned __int8)plt_THashStrings_contains_TString_const(\n                                        (THashStrings *)data_TFileDownload_scripteddownloadignore,\n                                        (const TString *)result),\n            !(_BYTE)result) )\n      {\n        v3 = (TStringList *)data_TFileDownload_scriptedfileevents;\n        if ( !data_TFileDownload_scriptedfileevents )\n        {\n          v5 = (TStringList *)plt_operator_new_ulong__2(0x18u);\n          plt_TStringList_TStringList_void(v5);\n          data_TFileDownload_scriptedfileevents = (__int64)v5;\n          v3 = v5;\n        }\n        plt_TStringList_Add_TString_const(v3, v2);\n        v6 = 0;\n        v4 = (TStringList *)data_TFileDownload_scriptedfileevents;\n        plt_TString_operator_lshift_int(&v6);\n        plt_TStringList_Add_TString_const(v4, (const TString *)&v6);\n        return plt_TString_clear_void((TString *)&v6);\n      }\n    }\n  }\n  return result;\n}\n",
+      "code_bytes": 1450,
+      "code_sha256": "a8fbe753c29fc763c32f360a6c17614c9b74bdc67ae1ce15b06111b1b0443910",
+      "function_end": "0x1fbe78",
+      "function_start": "0x1fbd98",
+      "name": "TFileDownload_onFileEvent_TString_const_TFileDownload_fileeventtype",
+      "role": "scripted download events",
+      "string_literals": []
+    },
+    {
+      "address": "0x1fc0cc",
+      "callers": [
+        {
+          "caller": "0x114f80",
+          "caller_name": "TBitmapLoader_forceRedownload_TResourceObject",
+          "callsite": "0x114fa8"
+        },
+        {
+          "caller": "0x1fc100",
+          "caller_name": "jump_TFileDownload_ignore_TString_const",
+          "callsite": "0x1fc100"
+        }
+      ],
+      "code": "__int64 __fastcall TFileDownload_ignore_TString_const(TFileDownload *this, const TString *a2)\n{\n  __int64 result; // x0\n\n  if ( data_TFileDownload_scripteddownloadsystem )\n    return plt_TFileDownload_onFileEvent_TString_const_TFileDownload_fileeventtype(this);\n  result = data_TClient_client;\n  if ( data_TClient_client )\n    return plt_TClient_ignoreFileRequests_TString_const((TClient *)data_TClient_client, this);\n  return result;\n}\n",
+      "code_bytes": 437,
+      "code_sha256": "4b6fb3d8ef649b356f0c38a0c03c81f989467bb1ce028d8846f2aa65f863e350",
+      "function_end": "0x1fc100",
+      "function_start": "0x1fc0cc",
+      "name": "TFileDownload_ignore_TString_const",
+      "role": "ignored download request",
+      "string_literals": []
+    },
+    {
+      "address": "0x1e8780",
+      "callers": [
+        {
+          "caller": "0x1eb938",
+          "caller_name": "jump_TClient_startFileDownloading_void",
+          "callsite": "0x1eb938"
+        }
+      ],
+      "code": "__int64 __fastcall TClient_startFileDownloading_void(TClient *this)\n{\n  __int64 result; // x0\n  __int64 v3; // x0\n  int v4; // w20\n  __int64 v5; // x1\n  int v6; // w20\n  __int64 v7; // x1\n  __int64 v8; // [xsp+38h] [xbp-8h] BYREF\n\n  plt_requestUpdatePackage_void();\n  result = (unsigned __int8)data_TFileDownload_scripteddownloadsystem;\n  if ( !data_TFileDownload_scripteddownloadsystem )\n  {\n    v3 = data_TClient_requestedfiles;\n    if ( *(int *)(data_TClient_requestedfiles + 16) > 0 )\n    {\n      v4 = 0;\n      do\n      {\n        v5 = (unsigned int)v4++;\n        plt_TStringList_operator_index_int(&v8, v3, v5);\n        plt_TClient_sendWantImage_TString_const(this, (const TString *)&v8);\n        plt_TString_clear_void((TString *)&v8);\n        v3 = data_TClient_requestedfiles;\n      }\n      while ( *(_DWORD *)(data_TClient_requestedfiles + 16) > v4 && v4 <= 9 );\n    }\n    result = data_TClient_modrequestedfiles;\n    if ( *(int *)(data_TClient_modrequestedfiles + 16) > 0 )\n    {\n      v6 = 0;\n      do\n      {\n        v7 = (unsigned int)v6++;\n        plt_TStringList_operator_index_int(&v8, result, v7);\n        plt_TClient_sendWantImageUpdate_TString_const(this, (const TString *)&v8);\n        plt_TString_clear_void((TString *)&v8);\n        result = data_TClient_modrequestedfiles;\n      }\n      while ( *(_DWORD *)(data_TClient_modrequestedfiles + 16) > v6 && v6 <= 9 );\n    }\n  }\n  return result;\n}\n",
+      "code_bytes": 1412,
+      "code_sha256": "7ecd14051877fcba26a93ce6f1839c69048bec387b6c982cfba5995aabbadbe5",
+      "function_end": "0x1e8890",
+      "function_start": "0x1e8780",
+      "name": "TClient_startFileDownloading_void",
+      "role": "download scheduler",
+      "string_literals": []
+    },
+    {
+      "address": "0x1e987c",
+      "callers": [],
+      "code": "_DWORD *__fastcall TClient_beginUpdatePackageDownload(TString *a1, int a2)\n{\n  _DWORD *result; // x0\n  _DWORD *v4; // x19\n  __int64 v5; // [xsp+28h] [xbp-8h] BYREF\n\n  result = (_DWORD *)plt_getUpdatePackage_TUpdatePackage_TString_const_bool(nullptr, a1, 0);\n  v4 = result;\n  if ( result )\n  {\n    if ( (plt_TList_indexOf_void_const((TList *)downloadingpackages, result) & 0x80000000) != 0 )\n      plt_TList_Add_void((TList *)downloadingpackages, v4);\n    v4[56] = a2;\n    v5 = 0;\n    plt_TString_operator_lshift_char_const((int)&v5, &byte_2DCE08);\n    plt_TString_operator_assign_TString_const(v4 + 60, &v5);\n    result = (_DWORD *)plt_TString_clear_void((TString *)&v5);\n    v4[59] = 0;\n    v4[58] = 0;\n  }\n  return result;\n}\n",
+      "code_bytes": 727,
+      "code_sha256": "1e7d43961b3acd3ae0265bde310b196f9e0ee6821440534c4fa4b6210de2beee",
+      "function_end": "0x1e9918",
+      "function_start": "0x1e987c",
+      "name": "TClient_beginUpdatePackageDownload",
+      "role": "package download state",
+      "string_literals": []
+    },
+    {
+      "address": "0x1f8e60",
+      "callers": [
+        {
+          "caller": "0x2097c8",
+          "caller_name": "TUpdatePackage_update_bool",
+          "callsite": "0x209868"
+        }
+      ],
+      "code": "TGraalVar *__fastcall TClient_sendRequestUpdatePackage_TUpdatePackage_bool(\n        TGraalVar *this,\n        TUpdatePackage *a2,\n        unsigned __int8 a3)\n{\n  unsigned int v3; // w26\n  int *v5; // x0\n  int v6; // w0\n  __int64 v7; // x1\n  const char *v8; // x1\n  __int64 v9; // x1\n  unsigned int v10; // w20\n  __int64 v11; // x0\n  const TString *v12; // x1\n  unsigned int *LevelFileResource_TString_const; // x21\n  unsigned __int64 v14; // x1\n  int v15; // w2\n  unsigned __int8 v16; // w3\n  unsigned int v17; // w22\n  __int64 v18; // x1\n  unsigned int v19; // w21\n  unsigned int v20; // w28\n  unsigned int v21; // w27\n  const TString *v22; // x1\n  unsigned __int64 Checksum_void; // x0\n  void (__fastcall *v24)(TGraalVar *, _QWORD, __int64 *); // x19\n  __int64 v25; // x1\n  __int64 v26; // x0\n  unsigned int v27; // [xsp+64h] [xbp-2Ch]\n  TGraalVar *v28; // [xsp+68h] [xbp-28h]\n  __int64 v29; // [xsp+78h] [xbp-18h] BYREF\n  int *v30; // [xsp+80h] [xbp-10h] BYREF\n  __int64 v31; // [xsp+88h] [xbp-8h] BYREF\n\n  v3 = a3;\n  if ( !a2 )\n    return this;\n  v27 = dword_38FE04;\n  if ( dword_38FE04 < 0 )\n    return this;\n  v28 = this;\n  if ( dword_38FE04 == 254 )\n  {\n    v31 = 0;\n    plt_TString_operator_lshift_char_const((int)&v31, \"onSendUpdatePackage\");\n    plt_TGraalVar_invokeEvent_TString_const_char_const(v28, (const TString *)&v31, \"ob\", a2, v3);\n    return (TGraalVar *)plt_TString_clear_void((TString *)&v31);\n  }\n  v5 = *((int **)a2 + 17);\n  v29 = 0;\n  v31 = 0;\n  data_TClient_downloadsblocked = 1;\n  if ( v5 )\n  {\n    v6 = *v5;\n    if ( v6 > 223 )\n    {\n      plt_TString_operator_lshift_char(&v31, 0xFFFFFFFFLL);\n      v7 = *((_QWORD *)a2 + 17);\n      if ( v7 )\n        v8 = (const char *)(v7 + 8);\n      else\n        v8 = (const char *)TString_dummystr;\n      plt_TString_addbuffer_char_const_int((TString *)&v31, v8, 223);\n      goto LABEL_9;\n    }\n    v25 = (unsigned __int8)(v6 + 32);\n  }\n  else\n  {\n    v25 = 32;\n  }\n  v26 = plt_TString_operator_lshift_char(&v31, v25);\n  plt_TString_operator_lshift_TString_const(v26, (char *)a2 + 136);\nLABEL_9:\n  plt_TString_operator_lshift_TString_const(&v29, &v31);\n  plt_TString_clear_void((TString *)&v31);\n  if ( v3 || (v9 = 33, *((_BYTE *)a2 + 208)) )\n    v9 = 34;\n  v10 = 0;\n  plt_TString_operator_lshift_char(&v29, v9);\n  v11 = *((_QWORD *)a2 + 25);\n  if ( *(int *)(v11 + 16) > 0 )\n  {\n    do\n    {\n      plt_TStringList_operator_index_int(&v30, v11, v10);\n      if ( v30 && *v30 > 0 )\n      {\n        plt_TFiles_lowerCaseFilename_TString_const(&v31, (TFiles *)&v30, v22);\n        LevelFileResource_TString_const = (unsigned int *)plt_TResourceFunctions_getLevelFileResource_TString_const(\n                                                            (TResourceFunctions *)&v31,\n                                                            v12);\n        plt_TString_clear_void((TString *)&v31);\n        if ( LevelFileResource_TString_const )\n        {\n          if ( v3 || *((_BYTE *)a2 + 208) )\n          {\n            Checksum_void = plt_TResourceObject_getChecksum_void((TResourceObject *)LevelFileResource_TString_const);\n            v17 = (unsigned __int8)(((Checksum_void >> 21) & 0x7F) + 32);\n            v18 = ((unsigned int)Checksum_void >> 28) + 32;\n            v19 = (unsigned __int8)(((Checksum_void >> 14) & 0x7F) + 32);\n            v20 = (unsigned __int8)(((Checksum_void >> 7) & 0x7F) + 32);\n            v21 = (unsigned __int8)((Checksum_void & 0x7F) + 32);\n          }\n          else\n          {\n            v14 = LevelFileResource_TString_const[6];\n            LOBYTE(v19) = ((v14 >> 14) & 0x7F) + 32;\n            v15 = ((v14 >> 7) & 0x7F) + 32;\n            v16 = (v14 & 0x7F) + 32;\n            v17 = (unsigned __int8)(((v14 >> 21) & 0x7F) + 32);\n            v18 = ((unsigned int)v14 >> 28) + 32;\n            v19 = (unsigned __int8)v19;\n            v20 = (unsigned __int8)v15;\n            v21 = v16;\n          }\n        }\n        else\n        {\n          v21 = 32;\n          v20 = 32;\n          v19 = 32;\n          v17 = 32;\n          v18 = 32;\n        }\n      }\n      else\n      {\n        v20 = 32;\n        v21 = 33;\n        v19 = 32;\n        v17 = 32;\n        v18 = 32;\n      }\n      v31 = 0;\n      ++v10;\n      plt_TString_operator_lshift_char(&v31, v18);\n      plt_TString_operator_lshift_char(&v31, v17);\n      plt_TString_operator_lshift_char(&v31, v19);\n      plt_TString_operator_lshift_char(&v31, v20);\n      plt_TString_operator_lshift_char(&v31, v21);\n      plt_TString_operator_lshift_TString_const(&v29, &v31);\n      plt_TString_clear_void((TString *)&v31);\n      plt_TString_clear_void((TString *)&v30);\n      v11 = *((_QWORD *)a2 + 25);\n    }\n    while ( *(_DWORD *)(v11 + 16) > (signed int)v10 );\n  }\n  v24 = *(void (__fastcall **)(TGraalVar *, _QWORD, __int64 *))(*(_QWORD *)v28 + 312LL);\n  data_TClient_downloadsblocked = 0;\n  v24(v28, v27, &v29);\n  return (TGraalVar *)plt_TString_clear_void((TString *)&v29);\n}\n",
+      "code_bytes": 4902,
+      "code_sha256": "e84fd4d46c80228b181de511fe70e1aff162f8bed188453a193a671559508f52",
+      "function_end": "0x1f9198",
+      "function_start": "0x1f8e60",
+      "name": "TClient_sendRequestUpdatePackage_TUpdatePackage_bool",
+      "role": "package request encoding",
+      "string_literals": [
+        "\"ob\"",
+        "\"onSendUpdatePackage\""
+      ]
+    },
+    {
+      "address": "0x1f4cf8",
+      "callers": [
+        {
+          "caller": "0x1f52b8",
+          "caller_name": "TClient_sendWantImageUpdate_TString_const",
+          "callsite": "0x1f52fc"
+        },
+        {
+          "caller": "0x1fbc04",
+          "caller_name": "sub_1FBC04",
+          "callsite": "0x1fbc18"
+        }
+      ],
+      "code": "TResourceObject *__fastcall TClient_sendWantImageUpdateCRC_TString_const(TClient *this, const TString *a2)\n{\n  TResourceObject *result; // x0\n  TResourceObject *v5; // x21\n  int v6; // w22\n  bool v7; // w2\n  int v8; // w22\n  const TString *v9; // x1\n  bool v10; // w2\n  const TString *v11; // x1\n  unsigned __int64 Checksum_void; // x21\n  __int64 v13; // x0\n  int *v14; // x1\n  __int64 v15; // x2\n  unsigned int v16; // w26\n  __int64 v17; // x2\n  void (__fastcall *v18)(TClient *, _QWORD, __int64 *, long double); // x28\n  const TString *v19; // x1\n  long double v20; // q0\n  __int64 v21; // x3\n  __int64 v22; // [xsp+60h] [xbp-30h] BYREF\n  __int64 v23; // [xsp+68h] [xbp-28h] BYREF\n  __int64 v24; // [xsp+70h] [xbp-20h] BYREF\n  __int64 v25; // [xsp+78h] [xbp-18h] BYREF\n  __int64 v26; // [xsp+80h] [xbp-10h] BYREF\n  int *v27; // [xsp+88h] [xbp-8h] BYREF\n\n  result = (TResourceObject *)plt_TResourceFunctions_getLevelFileResource_TString_const(a2, a2);\n  v5 = result;\n  if ( result )\n  {\n    v26 = 0;\n    plt_TString_operator_lshift_char_const((int)&v26, (char *)data_TFiles_urlidentifier);\n    v6 = plt_TString_indexOf_TString_const(a2, (const TString *)&v26);\n    plt_TString_clear_void((TString *)&v26);\n    if ( v6 < 0 )\n    {\n      v26 = 0;\n      plt_TString_operator_lshift_char_const((int)&v26, data_TFiles_encodedurlidentifier);\n      v8 = plt_TString_indexOf_TString_const(a2, (const TString *)&v26);\n      plt_TString_clear_void((TString *)&v26);\n      if ( (v8 & 0x80000000) == 0 )\n      {\n        plt_TFiles_removeEscapesOfFilename_TString_const(&v26, a2, v9);\n        plt_THTTPRequest_requestURLFile_TString_const_bool((THTTPRequest *)&v26, nullptr, v10);\n        return (TResourceObject *)plt_TString_clear_void((TString *)&v26);\n      }\n      plt_TFiles_extractFileExt_TString_const(&v22, a2, v9);\n      v23 = 0;\n      if ( (unsigned __int8)plt_operator_assign_TString_const_char_const((int)&v22, \".gupd\") )\n      {\n        plt_TFiles_lowerCaseFilename_TString_const(&v25, a2, v11);\n        plt_getPackageFullFilename_TString_const(&v26, (const TString *)&v25);\n        plt_TString_operator_assign_TString_const(&v23, &v26);\n        plt_TString_clear_void((TString *)&v26);\n        plt_TString_clear_void((TString *)&v25);\n        v26 = 0;\n        v27 = nullptr;\n        ++cstream;\n        plt_TStream_LoadFromFile_TString_const((TStream *)&v26, (const TString *)&v23);\n        if ( v27 )\n        {\n          Checksum_void = 0;\n          if ( *v27 > 0 )\n          {\n            v13 = crc32(0, 0, 0);\n            if ( v27 )\n            {\n              v14 = v27 + 2;\n              v15 = (unsigned int)*v27;\n            }\n            else\n            {\n              v15 = 0;\n              v14 = (int *)TString_dummystr;\n            }\n            Checksum_void = (unsigned int)crc32(v13, v14, v15);\n          }\n        }\n        else\n        {\n          Checksum_void = 0;\n        }\n        --cstream;\n        plt_TString_clear_void((TString *)&v27);\n      }\n      else\n      {\n        Checksum_void = (unsigned int)plt_TResourceObject_getChecksum_void(v5);\n      }\n      v16 = dword_38FDD4;\n      if ( (dword_38FDD4 & 0x80000000) == 0 )\n      {\n        if ( dword_38FDD4 != 254 )\n        {\n          v17 = *(_QWORD *)this;\n          v24 = 0;\n          v18 = *(void (__fastcall **)(TClient *, _QWORD, __int64 *, long double))(v17 + 312);\n          plt_TString_operator_lshift_char(&v24, ((unsigned int)Checksum_void >> 28) + 32);\n          plt_TString_operator_lshift_char(&v24, ((Checksum_void >> 21) & 0x7F) + 32);\n          plt_TString_operator_lshift_char(&v24, ((Checksum_void >> 14) & 0x7F) + 32);\n          plt_TString_operator_lshift_char(&v24, ((Checksum_void >> 7) & 0x7F) + 32);\n          plt_TString_operator_lshift_char(&v24, (unsigned int)(Checksum_void & 0x7F) + 32);\n          plt_TFiles_lowerCaseFilename_TString_const(&v25, a2, v19);\n          v26 = 0;\n          plt_TString_operator_assign_TString_const(&v26, &v24);\n          *(__n128 *)&v20 = plt_TString_operator_lshift_TString_const(&v26, &v25);\n          v18(this, v16, &v26, v20);\n          plt_TString_clear_void((TString *)&v26);\n          plt_TString_clear_void((TString *)&v25);\n          plt_TString_clear_void((TString *)&v24);\n          data_TClient_lastfilerequesttime = data_TTime_curhighprecisiontime;\n          plt_TString_clear_void((TString *)&v23);\n          return (TResourceObject *)plt_TString_clear_void((TString *)&v22);\n        }\n        v26 = 0;\n        plt_TString_operator_lshift_char_const((int)&v26, \"onSendImageUpdateCRC\");\n        if ( *(_QWORD *)a2 )\n          v21 = *(_QWORD *)a2 + 8LL;\n        else\n          v21 = TString_dummystr;\n        plt_TGraalVar_invokeEvent_TString_const_char_const(\n          this,\n          (const TString *)&v26,\n          \"su\",\n          v21,\n          (unsigned int)Checksum_void);\n        plt_TString_clear_void((TString *)&v26);\n      }\n      plt_TString_clear_void((TString *)&v23);\n      return (TResourceObject *)plt_TString_clear_void((TString *)&v22);\n    }\n    else\n    {\n      return (TResourceObject *)plt_THTTPRequest_requestURLFile_TString_const_bool(a2, nullptr, v7);\n    }\n  }\n  return result;\n}\n",
+      "code_bytes": 5159,
+      "code_sha256": "a2aa1ae9ffa9e4acc28336bcef33b2d2da9659dbd3b9d8e7fd9d06eb0731ea00",
+      "function_end": "0x1f5078",
+      "function_start": "0x1f4cf8",
+      "name": "TClient_sendWantImageUpdateCRC_TString_const",
+      "role": "conditional file request checksum",
+      "string_literals": [
+        "\".gupd\"",
+        "\"onSendImageUpdateCRC\"",
+        "\"su\""
+      ]
+    },
+    {
+      "address": "0xf02f8",
+      "callers": [
+        {
+          "caller": "0x1f4cf8",
+          "caller_name": "TClient_sendWantImageUpdateCRC_TString_const",
+          "callsite": "0x1f4ef8"
+        },
+        {
+          "caller": "0x1f8e60",
+          "caller_name": "TClient_sendRequestUpdatePackage_TUpdatePackage_bool",
+          "callsite": "0x1f90b8"
+        }
+      ],
+      "code": "__int64 __fastcall TResourceObject_getChecksum_void(TResourceObject *this)\n{\n  __int64 Stream_void; // x19\n  int *v2; // x0\n  unsigned int v3; // w20\n  __int64 v4; // x0\n  unsigned int *v5; // x2\n  unsigned int *v6; // x1\n  __int64 v7; // x2\n\n  Stream_void = plt_TResourceObject_getStream_void(this);\n  v2 = *(int **)(Stream_void + 8);\n  if ( v2 )\n  {\n    v3 = 0;\n    if ( *v2 > 0 )\n    {\n      v4 = crc32(0, 0, 0);\n      v5 = *(unsigned int **)(Stream_void + 8);\n      if ( v5 )\n      {\n        v6 = v5 + 2;\n        v7 = *v5;\n      }\n      else\n      {\n        v7 = 0;\n        v6 = (unsigned int *)TString_dummystr;\n      }\n      v3 = crc32(v4, v6, v7);\n    }\n  }\n  else\n  {\n    v3 = 0;\n  }\n  --cstream;\n  plt_TString_clear_void((TString *)(Stream_void + 8));\n  plt_operator_delete_void__2((void *)Stream_void);\n  return v3;\n}\n",
+      "code_bytes": 828,
+      "code_sha256": "f3f1a0a231415c003acaf2ac9a3bc154e1932e5cbc46110a323ab9e313e30cca",
+      "function_end": "0xf03a0",
+      "function_start": "0xf02f8",
+      "name": "TResourceObject_getChecksum_void",
+      "role": "resource CRC32",
+      "string_literals": []
+    },
+    {
+      "address": "0xe59c8",
+      "callers": [],
+      "code": "double __fastcall gs_checksum_TString_const(const TString *a1)\n{\n  __int64 v2; // x0\n  unsigned int *v3; // x2\n  unsigned int *v4; // x1\n  __int64 v5; // x2\n\n  if ( !*(_QWORD *)a1 || **(int **)a1 <= 0 )\n    return 0.0;\n  v2 = crc32(0, 0, 0);\n  v3 = *(unsigned int **)a1;\n  if ( *(_QWORD *)a1 )\n  {\n    v4 = v3 + 2;\n    v5 = *v3;\n  }\n  else\n  {\n    v5 = 0;\n    v4 = (unsigned int *)TString_dummystr;\n  }\n  return (double)(unsigned __int64)crc32(v2, v4, v5);\n}\n",
+      "code_bytes": 459,
+      "code_sha256": "1c466e2a1984aa4c94ee7262836c07a0fbe91ebd2f4e3278c98be433c2e40fcf",
+      "function_end": "0xe5a40",
+      "function_start": "0xe59c8",
+      "name": "gs_checksum_TString_const",
+      "role": "script CRC32",
+      "string_literals": []
+    },
+    {
+      "address": "0x1ec764",
+      "callers": [
+        {
+          "caller": "0x1eccc8",
+          "caller_name": "TClient_dispatchEncodedFileChunk",
+          "callsite": "0x1eccf0"
+        },
+        {
+          "caller": "0x1f0de4",
+          "caller_name": "TClient_parseEncodedFileChunk",
+          "callsite": "0x1f0f18"
+        }
+      ],
+      "code": "__int64 __fastcall sub_1EC764(int a1, TCachedStream *this, int **a3)\n{\n  THashListObject *CachedFile_TString_const; // x0\n  THashListObject *v7; // x20\n  const TString *v8; // x1\n  __int64 DownloadFile_TString_const; // x0\n  const TString *v10; // x1\n  __int64 v11; // x24\n  __int64 v12; // x19\n  __int64 v13; // x0\n  int *v14; // x1\n  int *v15; // x0\n  int v16; // w1\n  __int64 v17; // x2\n  unsigned int v18; // w24\n  _DWORD *ContainingUpdatePackage_TString_const; // x22\n  int v20; // w0\n  TClient *v21; // x0\n  unsigned int v22; // w20\n  TGraalVar *v23; // x25\n  __int64 v24; // x3\n  TGraalVar *v26; // x28\n  __int64 v27; // x3\n  TGraalVar *v28; // x25\n  __int64 v29; // x3\n  const TString *v30; // x1\n  const TString *v31; // x2\n  const TString *v32; // x1\n  int v33; // w20\n  const TString *v34; // x1\n  int v35; // w24\n  bool v36; // w2\n  int *v37; // [xsp+60h] [xbp-10h] BYREF\n  __int64 v38; // [xsp+68h] [xbp-8h] BYREF\n\n  CachedFile_TString_const = (THashListObject *)plt_TCachedStream_getCachedFile_TString_const(this, this);\n  v7 = CachedFile_TString_const;\n  if ( CachedFile_TString_const )\n  {\n    plt_THashList_removeObject_THashListObject((THashList *)data_TCachedStream_cachedfiles, CachedFile_TString_const);\n    if ( (unsigned __int8)plt_operator_ne_TString_const_TString_const(this, &data_TClient_bigfilename) )\n      plt_TCachedStream_clear_void(v7);\n  }\n  else\n  {\n    v38 = 0;\n    plt_TString_operator_lshift_char_const((int)&v38, &byte_2DCE08);\n    v7 = (THashListObject *)plt_operator_new_ulong__2(0x28u);\n    plt_TCachedStream_TCachedStream_TString_const(v7, (const TString *)&v38);\n    plt_TString_clear_void((TString *)&v38);\n  }\n  *((_DWORD *)v7 + 8) = a1;\n  v37 = nullptr;\n  plt_TString_operator_assign_TString_const(&v37, (char *)v7 + 24);\n  DownloadFile_TString_const = plt_TClient_findDownloadFile_TString_const(this, v8);\n  v11 = DownloadFile_TString_const;\n  if ( DownloadFile_TString_const )\n  {\n    v38 = 0;\n    plt_TString_operator_assign_TString_const(&v38, DownloadFile_TString_const + 8);\n    plt_TString_operator_lshift_TString_const(&v38, v11 + 16);\n    plt_TString_operator_assign_TString_const(&v37, &v38);\n    plt_TString_clear_void((TString *)&v38);\n    *((_BYTE *)v7 + 37) = 1;\n  }\n  if ( !v37 || *v37 <= 0 )\n  {\n    plt_TFiles_extractFileExt_TString_const(&v38, this, v10);\n    v35 = (unsigned __int8)plt_operator_ne_TString_const_char_const((int)&v38, \".gupd\");\n    plt_TString_clear_void((TString *)&v38);\n    if ( v35 )\n    {\n      if ( (plt_TResourceFunctions_getGameFile_TString_const_bool(&v38, this, nullptr, v36),\n            plt_TString_operator_assign_TString_const(&v37, &v38),\n            plt_TString_clear_void((TString *)&v38),\n            (unsigned __int8)plt_operator_ne_TString_const_TString_const(\n                               &data_TFiles_baseuserfolder,\n                               &data_TFiles_basedatafolder))\n        && (unsigned __int8)plt_TString_starts_TString_const(\n                              (TString *)&v37,\n                              (const TString *)&data_TFiles_basedatafolder)\n        || data_TFiles_basedatafolder2\n        && *(int *)data_TFiles_basedatafolder2 > 0\n        && (unsigned __int8)plt_TString_starts_TString_const(\n                              (TString *)&v37,\n                              (const TString *)&data_TFiles_basedatafolder2) )\n      {\n        plt_TString_operator_assign_TString_const(&v37, this);\n      }\n    }\n    if ( !v37 || *v37 <= 0 )\n      plt_TString_operator_assign_TString_const(&v37, this);\n  }\n  plt_TCachedStream_setFileName_TString_const(v7, (const TString *)&v37);\n  plt_THashList_addObject_THashListObject((THashList *)data_TCachedStream_cachedfiles, v7);\n  v12 = *((_QWORD *)v7 + 2);\n  v13 = v12 + 8;\n  v14 = *(int **)(v12 + 8);\n  if ( v14 && *v14 > 0 )\n  {\n    plt_TString_operator_lshift_TString_const(v13, a3);\n    v15 = *(int **)(v12 + 8);\n    if ( v15 )\n    {\nLABEL_11:\n      v16 = *v15;\n      goto LABEL_12;\n    }\n  }\n  else\n  {\n    plt_TString_operator_assign_TString_const(v13, a3);\n    v15 = *(int **)(v12 + 8);\n    if ( v15 )\n      goto LABEL_11;\n  }\n  v16 = 0;\nLABEL_12:\n  v17 = *((_QWORD *)v7 + 2);\n  *(_DWORD *)(v12 + 4) = v16;\n  *(_DWORD *)v12 = v16;\n  v18 = *(_DWORD *)(v17 + 4);\n  ContainingUpdatePackage_TString_const = (_DWORD *)plt_getContainingUpdatePackage_TString_const(this);\n  if ( ContainingUpdatePackage_TString_const )\n  {\n    if ( *a3 )\n      v20 = **a3;\n    else\n      v20 = 0;\n    ContainingUpdatePackage_TString_const[57] += v20;\n    plt_TString_operator_assign_TString_const(\n      &data_TClient_currentdownloadpackage,\n      ContainingUpdatePackage_TString_const + 34);\n  }\n  else\n  {\n    v38 = 0;\n    plt_TString_operator_lshift_char_const((int)&v38, &byte_2DCE08);\n    plt_TString_operator_assign_TString_const(&data_TClient_currentdownloadpackage, &v38);\n    plt_TString_clear_void((TString *)&v38);\n  }\n  plt_TString_operator_assign_TString_const(&data_TClient_currentdownloadfile, this);\n  plt_TString_operator_assign_TString_const(&data_TClient_lastdownloadfile, &data_TClient_currentdownloadfile);\n  if ( (unsigned __int8)plt_operator_assign_TString_const_TString_const(this, &data_TClient_bigfilename) )\n  {\n    v21 = (TClient *)&data_TGameEnvironment_universe;\n    v22 = data_TClient_bigfilesize;\n    v23 = (TGraalVar *)data_TGameEnvironment_universe;\n    if ( !data_TClient_bigfilesize )\n      v22 = v18;\n    if ( data_TGameEnvironment_universe )\n    {\n      v38 = 0;\n      plt_TString_operator_lshift_char_const((int)&v38, \"onFileChunkReceived\");\n      if ( *(_QWORD *)this )\n        v24 = *(_QWORD *)this + 8LL;\n      else\n        v24 = TString_dummystr;\n      plt_TGraalVar_invokeEvent_TString_const_char_const(v23, (const TString *)&v38, \"sii\", v24, v18, v22);\n      v21 = (TClient *)plt_TString_clear_void((TString *)&v38);\n    }\n  }\n  else\n  {\n    **((_DWORD **)v7 + 2) = 0;\n    v26 = (TGraalVar *)data_TGameEnvironment_universe;\n    if ( data_TGameEnvironment_universe )\n    {\n      v38 = 0;\n      plt_TString_operator_lshift_char_const((int)&v38, \"onFileChunkReceived\");\n      if ( *(_QWORD *)this )\n        v27 = *(_QWORD *)this + 8LL;\n      else\n        v27 = TString_dummystr;\n      plt_TGraalVar_invokeEvent_TString_const_char_const(v26, (const TString *)&v38, \"sii\", v27, v18, v18);\n      plt_TString_clear_void((TString *)&v38);\n      v38 = 0;\n      v28 = (TGraalVar *)data_TGameEnvironment_universe;\n      plt_TString_operator_lshift_char_const((int)&v38, \"onFileDownloaded\");\n      if ( *(_QWORD *)this )\n        v29 = *(_QWORD *)this + 8LL;\n      else\n        v29 = TString_dummystr;\n      plt_TGraalVar_invokeEvent_TString_const_char_const(v28, (const TString *)&v38, \"si\", v29, v18);\n      plt_TString_clear_void((TString *)&v38);\n    }\n    plt_TFileDownload_onFileEvent_TString_const_TFileDownload_fileeventtype(this);\n    plt_TClient_removeRequestedFile_TString_const(this, v30);\n    v38 = 0;\n    plt_TString_operator_lshift_char_const((int)&v38, &byte_2DCE08);\n    plt_TCachedStream_saveAndUpdate_TCachedStream_TString_const(v7, (TCachedStream *)&v38, v31);\n    plt_TString_clear_void((TString *)&v38);\n    plt_TFiles_extractFileExt_TString_const(&v38, this, v32);\n    v33 = (unsigned __int8)plt_operator_assign_TString_const_char_const((int)&v38, \".gupd\");\n    plt_TString_clear_void((TString *)&v38);\n    if ( v33 )\n      plt_updatePackageDownloaded_TString_const(this);\n    v22 = v18;\n    plt_TResourceFunctions_validateFileKey_TString_const(this, v34);\n    v38 = 0;\n    plt_TString_operator_lshift_char_const((int)&v38, &byte_2DCE08);\n    plt_TString_operator_assign_TString_const(&data_TClient_currentdownloadfile, &v38);\n    v21 = (TClient *)plt_TString_clear_void((TString *)&v38);\n  }\n  if ( ContainingUpdatePackage_TString_const )\n  {\n    v21 = (TClient *)plt_TString_operator_assign_TString_const(\n                       ContainingUpdatePackage_TString_const + 60,\n                       &data_TClient_lastdownloadfile);\n    ContainingUpdatePackage_TString_const[59] = v18;\n    ContainingUpdatePackage_TString_const[58] = v22;\n  }\n  plt_TClient_onDownloadAction_void(v21);\n  return plt_TString_clear_void((TString *)&v37);\n}\n",
+      "code_bytes": 8137,
+      "code_sha256": "da98c3d3b0e4498ea9052611a6f151e7ecfd06b8d72b31c689ba3bfda71fd4bb",
+      "function_end": "0x1eccc8",
+      "function_start": "0x1ec764",
+      "name": "TClient_processFileChunk",
+      "role": "file response accumulation",
+      "string_literals": [
+        "\".gupd\"",
+        "\"onFileChunkReceived\"",
+        "\"onFileDownloaded\"",
+        "\"si\"",
+        "\"sii\""
+      ]
+    },
+    {
+      "address": "0x1eb208",
+      "callers": [],
+      "code": "__int64 __fastcall sub_1EB208(TString *a1)\n{\n  TClient *v1; // x19\n  const TString *v2; // x1\n  const TString *v3; // x1\n  int v4; // w21\n  const TString *v5; // x1\n  __int64 v7; // [xsp+28h] [xbp-8h] BYREF\n\n  v1 = a1;\n  if ( *(_QWORD *)a1 && **(int **)a1 > 0 )\n  {\n    plt_TFileDownload_onFileEvent_TString_const_TFileDownload_fileeventtype(a1);\n    plt_TClient_removeRequestedFile_TString_const(v1, v2);\n    plt_TFiles_extractFileExt_TString_const(&v7, v1, v3);\n    v4 = (unsigned __int8)plt_operator_assign_TString_const_char_const((int)&v7, \".gupd\");\n    plt_TString_clear_void((TString *)&v7);\n    if ( v4 )\n      plt_updatePackageDownloaded_TString_const(v1);\n    a1 = (TString *)plt_TResourceFunctions_validateFileKey_TString_const(v1, v5);\n  }\n  return plt_TClient_onDownloadAction_void(a1);\n}\n",
+      "code_bytes": 802,
+      "code_sha256": "2296349faee23cc071df582095f77d2c66a2a14ff9582f6d8f742b9606428f33",
+      "function_end": "0x1eb294",
+      "function_start": "0x1eb208",
+      "name": "TClient_finishDownloadFile",
+      "role": "ordinary response completion",
+      "string_literals": [
+        "\".gupd\""
+      ]
+    },
+    {
+      "address": "0x1eb294",
+      "callers": [],
+      "code": "__int64 __fastcall sub_1EB294(TCachedStream *a1)\n{\n  const TString *v2; // x1\n  TCachedStream *CachedFile_TString_const; // x0\n  TCachedStream *v4; // x21\n  TGraalVar *v5; // x22\n  __int64 v6; // x3\n  const TString *v7; // x1\n  const TString *v8; // x2\n  const TString *v9; // x1\n  int v10; // w21\n  const TString *v11; // x1\n  __int64 v13; // [xsp+38h] [xbp-8h] BYREF\n\n  if ( (unsigned __int8)plt_operator_assign_TString_const_TString_const(a1, &data_TClient_bigfilename) )\n  {\n    v13 = 0;\n    plt_TString_operator_lshift_char_const((int)&v13, &byte_2DCE08);\n    plt_TString_operator_assign_TString_const(&data_TClient_bigfilename, &v13);\n    plt_TString_clear_void((TString *)&v13);\n  }\n  CachedFile_TString_const = (TCachedStream *)plt_TCachedStream_getCachedFile_TString_const(a1, v2);\n  v4 = CachedFile_TString_const;\n  if ( CachedFile_TString_const )\n  {\n    **((_DWORD **)CachedFile_TString_const + 2) = 0;\n    v5 = (TGraalVar *)data_TGameEnvironment_universe;\n    if ( data_TGameEnvironment_universe )\n    {\n      v13 = 0;\n      plt_TString_operator_lshift_char_const((int)&v13, \"onFileDownloaded\");\n      if ( *(_QWORD *)a1 )\n        v6 = *(_QWORD *)a1 + 8LL;\n      else\n        v6 = TString_dummystr;\n      plt_TGraalVar_invokeEvent_TString_const_char_const(\n        v5,\n        (const TString *)&v13,\n        \"si\",\n        v6,\n        *(unsigned int *)(*((_QWORD *)v4 + 2) + 4LL));\n      plt_TString_clear_void((TString *)&v13);\n    }\n    plt_TFileDownload_onFileEvent_TString_const_TFileDownload_fileeventtype(a1);\n    plt_TClient_removeRequestedFile_TString_const(a1, v7);\n    v13 = 0;\n    plt_TString_operator_lshift_char_const((int)&v13, &byte_2DCE08);\n    plt_TCachedStream_saveAndUpdate_TCachedStream_TString_const(v4, (TCachedStream *)&v13, v8);\n    plt_TString_clear_void((TString *)&v13);\n    plt_TFiles_extractFileExt_TString_const(&v13, a1, v9);\n    v10 = (unsigned __int8)plt_operator_assign_TString_const_char_const((int)&v13, \".gupd\");\n    plt_TString_clear_void((TString *)&v13);\n    if ( v10 )\n      plt_updatePackageDownloaded_TString_const(a1);\n    plt_TResourceFunctions_validateFileKey_TString_const(a1, v11);\n    v13 = 0;\n    plt_TString_operator_lshift_char_const((int)&v13, &byte_2DCE08);\n    plt_TString_operator_assign_TString_const(&data_TClient_currentdownloadfile, &v13);\n    CachedFile_TString_const = (TCachedStream *)plt_TString_clear_void((TString *)&v13);\n  }\n  return plt_TClient_onDownloadAction_void(CachedFile_TString_const);\n}\n",
+      "code_bytes": 2477,
+      "code_sha256": "2d9aec0579f74197c5edf4ef65006572e65ebb215741dd397f93cb3adef0fc0d",
+      "function_end": "0x1eb42c",
+      "function_start": "0x1eb294",
+      "name": "TClient_finishFileDownload",
+      "role": "large response completion",
+      "string_literals": [
+        "\".gupd\"",
+        "\"onFileDownloaded\"",
+        "\"si\""
+      ]
+    },
+    {
+      "address": "0x2097c8",
+      "callers": [
+        {
+          "caller": "0x20993c",
+          "caller_name": "TUpdatePackage_updateNoForce",
+          "callsite": "0x209940"
+        },
+        {
+          "caller": "0x209944",
+          "caller_name": "TUpdatePackage_updateForce",
+          "callsite": "0x209948"
+        }
+      ],
+      "code": "__int64 __fastcall TUpdatePackage_update_bool(TUpdatePackage *this, unsigned __int8 a2)\n{\n  int v3; // w22\n  __int64 result; // x0\n  TList *v5; // x0\n  unsigned int v6; // w19\n  __int64 v7; // x1\n  char *v8; // x23\n  const TString *v9; // x1\n  const TString *v10; // x1\n  __int64 v11; // [xsp+38h] [xbp-8h] BYREF\n\n  v3 = a2;\n  result = 0;\n  if ( !*((_BYTE *)this + 249) )\n  {\n    v5 = (TList *)downloadingpackages;\n    if ( *(int *)(downloadingpackages + 12) <= 0 )\n    {\nLABEL_11:\n      plt_TList_Clear_void(v5);\n      if ( data_TClient_client )\n      {\n        v11 = 0;\n        plt_TString_operator_lshift_char_const((int)&v11, &byte_2DCE08);\n        plt_TString_operator_assign_TString_const(&data_TClient_currentdownloadpackage, &v11);\n        plt_TString_clear_void((TString *)&v11);\n      }\n    }\n    else\n    {\n      v6 = 0;\n      while ( 1 )\n      {\n        v7 = v6++;\n        if ( !*(_BYTE *)(*(_QWORD *)plt_TList_operator_index_int(v5, v7) + 248LL) )\n          break;\n        v5 = (TList *)downloadingpackages;\n        if ( *(_DWORD *)(downloadingpackages + 12) <= (signed int)v6 )\n          goto LABEL_11;\n      }\n    }\n    if ( v3 && *((_BYTE *)this + 210) )\n    {\n      v11 = 0;\n      v8 = data_TSetup_baseexe;\n      plt_TString_operator_assign_TString_const(&v11, &data_TFiles_baseuserfolder);\n      plt_TString_operator_lshift_char_const((int)&v11, v8);\n      if ( (unsigned __int8)plt_TFiles_fileExists_TString_const((TFiles *)&v11, v9) )\n        plt_TFiles_deleteFile_TString_const((TFiles *)&v11, v10);\n      plt_TString_clear_void((TString *)&v11);\n    }\n    *((_DWORD *)this + 56) = 0;\n    *((_DWORD *)this + 57) = 0;\n    *((_BYTE *)this + 248) = 0;\n    if ( data_TClient_client )\n    {\n      plt_TClient_sendRequestUpdatePackage_TUpdatePackage_bool((TClient *)data_TClient_client, this, v3);\n      return 1;\n    }\n    else\n    {\n      return 1;\n    }\n  }\n  return result;\n}\n",
+      "code_bytes": 1895,
+      "code_sha256": "65d7be15ba2081ad36bec3621e0b704c8c589cc7eeb79853f21d559b7095c8d4",
+      "function_end": "0x20993c",
+      "function_start": "0x2097c8",
+      "name": "TUpdatePackage_update_bool",
+      "role": "update request scheduling",
+      "string_literals": []
+    },
+    {
+      "address": "0x1ec044",
+      "callers": [],
+      "code": "__int64 __fastcall sub_1EC044(TString *a1)\n{\n  __int64 result; // x0\n  __int64 v2; // x19\n  int v3; // w0\n  TGraalVar *v4; // x22\n  TGraalVar *v5; // x20\n  const TString *v6; // x1\n  __int64 v7; // [xsp+38h] [xbp-8h] BYREF\n\n  result = plt_getUpdatePackage_TUpdatePackage_TString_const_bool(nullptr, a1, 0);\n  v2 = result;\n  if ( result )\n  {\n    v3 = *(unsigned __int8 *)(result + 210);\n    *(_BYTE *)(v2 + 248) = 1;\n    if ( !v3 )\n      *(_QWORD *)(v2 + 216) = *(_QWORD *)(v2 + 152);\n    plt_TUpdatePackage_saveLocalVersion_void((TUpdatePackage *)v2);\n    v4 = (TGraalVar *)data_TGameEnvironment_universe;\n    if ( data_TGameEnvironment_universe )\n    {\n      v7 = 0;\n      plt_TString_operator_lshift_char_const((int)&v7, \"onUpdatePackageDownloaded\");\n      plt_TGraalVar_invokeEvent_TString_const_char_const(v4, (const TString *)&v7, \"o\", v2);\n      plt_TString_clear_void((TString *)&v7);\n    }\n    result = (unsigned __int8)plt_getPackagesDownloadComplete_void();\n    if ( (_BYTE)result )\n    {\n      v5 = (TGraalVar *)data_TGameEnvironment_universe;\n      if ( data_TGameEnvironment_universe )\n      {\n        v7 = 0;\n        plt_TString_operator_lshift_char_const((int)&v7, \"onPackagesDownloadComplete\");\n        plt_TGraalVar_invokeEvent_TString_const(v5, (const TString *)&v7);\n        plt_TString_clear_void((TString *)&v7);\n      }\n      result = (__int64)&data_TClient_replacedgraalexe;\n      v6 = (const TString *)(unsigned __int8)data_TClient_replacedgraalexe;\n      if ( data_TClient_replacedgraalexe )\n      {\n        data_TClient_replacedgraalexe = 0;\n        return plt_TSetup_startExeReplacer_TString_const((TSetup *)&data_TClientEnvironment_fullexepath, v6);\n      }\n    }\n  }\n  return result;\n}\n",
+      "code_bytes": 1716,
+      "code_sha256": "57b5013e963b0a1c3a99f8258c6782cbe4d21de25cc9753ef1d4a4c92b784efc",
+      "function_end": "0x1ec164",
+      "function_start": "0x1ec044",
+      "name": "TClient_handleUpdatePackageDownloaded",
+      "role": "package completion",
+      "string_literals": [
+        "\"o\"",
+        "\"onPackagesDownloadComplete\"",
+        "\"onUpdatePackageDownloaded\""
+      ]
+    },
+    {
+      "address": "0x1fa6e8",
+      "callers": [
+        {
+          "caller": "0x1fb744",
+          "caller_name": "TCachedStream_saveAndUpdate_TCachedStream_TString_const",
+          "callsite": "0x1fb7f8"
+        },
+        {
+          "caller": "0x1fb744",
+          "caller_name": "TCachedStream_saveAndUpdate_TCachedStream_TString_const",
+          "callsite": "0x1fb99c"
+        }
+      ],
+      "code": "char *__fastcall TCachedStream_save_bool(char *this, unsigned __int8 a2)\n{\n  int v2; // w21\n  __int64 v3; // x1\n  const TString *v4; // x1\n  TFiles *v5; // x20\n  char *v6; // x19\n  const TString *v7; // x1\n  const TString *v8; // x1\n  const TString *v9; // x1\n  int v10; // w23\n  int v11; // w25\n  TStream *v12; // x0\n  _DWORD *v13; // x21\n  __int64 v14; // x1\n  TString *v15; // x24\n  int *v16; // x0\n  int v17; // w1\n  TStream *v18; // x2\n  const TString *v19; // x1\n  unsigned int v20; // w2\n  __int64 v21; // [xsp+40h] [xbp-10h] BYREF\n  __int64 v22; // [xsp+48h] [xbp-8h] BYREF\n\n  v2 = a2;\n  v3 = *((_QWORD *)this + 2);\n  if ( !v3 )\n    return this;\n  v4 = (const TString *)*(unsigned int *)(v3 + 4);\n  if ( (int)v4 <= 0 )\n    return this;\n  v5 = (TFiles *)(this + 24);\n  v6 = this;\n  plt_TFiles_forceDirectories_TString_const((TFiles *)(this + 24), v4);\n  if ( !(unsigned __int8)plt_TString_starts_TString_const(v5, (const TString *)&data_TFiles_baseuserfolder) )\n  {\n    if ( !(unsigned __int8)plt_operator_assign_TString_const_TString_const(v5, &data_TClientEnvironment_fullexepath) )\n      goto LABEL_9;\nLABEL_6:\n    plt_TString_operator_assign_TString_const(v5, &data_TClientEnvironment_fullexepath);\n    v10 = 1;\n    if ( (unsigned __int8)plt_TFiles_fileExists_TString_const(v5, v8) )\n      plt_TFiles_deleteFile_TString_const(v5, v9);\n    goto LABEL_10;\n  }\n  plt_TFiles_lowerCaseFilename_TString_const(&v21, v5, v7);\n  v22 = 0;\n  plt_TString_operator_lshift_char_const((int)&v22, data_TSetup_baseexe);\n  if ( (unsigned __int8)plt_TString_equalsIgnoreCase_TString_const((TString *)&v21, (const TString *)&v22) )\n  {\n    plt_TString_clear_void((TString *)&v22);\n    plt_TString_clear_void((TString *)&v21);\n    goto LABEL_6;\n  }\n  v11 = (unsigned __int8)plt_operator_assign_TString_const_TString_const(v5, &data_TClientEnvironment_fullexepath);\n  plt_TString_clear_void((TString *)&v22);\n  plt_TString_clear_void((TString *)&v21);\n  if ( v11 )\n    goto LABEL_6;\nLABEL_9:\n  v10 = 0;\nLABEL_10:\n  v12 = *((TStream **)v6 + 2);\n  *(_DWORD *)v12 = 0;\n  if ( v2 )\n  {\n    v13 = (_DWORD *)plt_operator_new_ulong__2(0x10u);\n    v14 = *((_QWORD *)v6 + 2);\n    v15 = (TString *)(v13 + 2);\n    *v13 = 0;\n    v13[1] = 0;\n    *((_QWORD *)v13 + 1) = 0;\n    ++cstream;\n    plt_TString_operator_assign_TString_const(v13 + 2, v14 + 8);\n    v16 = *((int **)v13 + 1);\n    if ( v16 )\n      v17 = *v16;\n    else\n      v17 = 0;\n    v13[1] = v17;\n    *v13 = v17;\n    plt_TString_makeUnique_void(v15);\n    *v13 = 0;\n    plt_TResourceFunctions_encryptTStream_TString_const_TStream(v5, (const TString *)v13, v18);\n    plt_TStream_SaveToFile_TString_const_uint((TStream *)v13, v5, 0);\n    --cstream;\n    plt_TString_clear_void(v15);\n    plt_operator_delete_void__2(v13);\n  }\n  else\n  {\n    plt_TStream_SaveToFile_TString_const_uint(v12, v5, 0);\n  }\n  if ( v6[36] && (v19 = (const TString *)*((unsigned int *)v6 + 8), (_DWORD)v19) )\n  {\n    this = (char *)plt_TFiles_setUTCFileModTime_TString_const_uint(v5, v19, v20);\n  }\n  else\n  {\n    this = (char *)plt_TFiles_getUTCFileModTime_TString_const(v5, v19);\n    *((_DWORD *)v6 + 8) = (_DWORD)this;\n  }\n  if ( v10 )\n  {\n    this = &data_TClient_replacedgraalexe;\n    data_TClient_replacedgraalexe = 1;\n  }\n  return this;\n}\n",
+      "code_bytes": 3251,
+      "code_sha256": "b68d88791ac34919d97c666d271403faf5c967a61eda330451b1db0bd399d8c7",
+      "function_end": "0x1fa920",
+      "function_start": "0x1fa6e8",
+      "name": "TCachedStream_save_bool",
+      "role": "cache persistence",
+      "string_literals": []
+    },
+    {
+      "address": "0xf0aa8",
+      "callers": [
+        {
+          "caller": "0xe6100",
+          "caller_name": "TEncryption_saveCodedFile_TStream_TString_const",
+          "callsite": "0xe62a4"
+        },
+        {
+          "caller": "0xe6a0c",
+          "caller_name": "TEncryption_saveCodedScript_TString_const_TString_const_int_TString_const",
+          "callsite": "0xe6af4"
+        },
+        {
+          "caller": "0xec4ec",
+          "caller_name": "TIdentification_setCookie_TString_const",
+          "callsite": "0xec55c"
+        },
+        {
+          "caller": "0xfbbc8",
+          "caller_name": "TFileScripting_script_setFileContent",
+          "callsite": "0xfbc24"
+        },
+        {
+          "caller": "0xfca80",
+          "caller_name": "TFileScripting_script_decompressFile",
+          "callsite": "0xfcc64"
+        },
+        {
+          "caller": "0x114e00",
+          "caller_name": "TBitmap_saveBitmap_TString_const",
+          "callsite": "0x114e88"
+        },
+        {
+          "caller": "0x197204",
+          "caller_name": "TSetup_copyExtraFilesToPath_TString_const",
+          "callsite": "0x1972b4"
+        },
+        {
+          "caller": "0x1fa6e8",
+          "caller_name": "TCachedStream_save_bool",
+          "callsite": "0x1fa864"
+        },
+        {
+          "caller": "0x1fa6e8",
+          "caller_name": "TCachedStream_save_bool",
+          "callsite": "0x1fa8f4"
+        },
+        {
+          "caller": "0x20f014",
+          "caller_name": "TGraalVar_saveString_TString_const_uint",
+          "callsite": "0x20f0f0"
+        },
+        {
+          "caller": "0x2120a8",
+          "caller_name": "TGraalVar_writeToFile_TString_const_TString_const_uint_bool_bool_int",
+          "callsite": "0x2121f0"
+        }
+      ],
+      "code": "__int64 __fastcall TStream_SaveToFile_TString_const_uint(__int64 this, const TString *a2, int a3)\n{\n  __int64 v4; // x22\n  unsigned __int8 v6; // w0\n  int *v7; // x0\n  const char *v8; // x0\n  const char *v9; // x1\n  const TString *v10; // x1\n  FILE *v11; // x20\n  int *v12; // x1\n  size_t v13; // x2\n  const void *v14; // x0\n  int v15; // w22\n  const char *v16; // x2\n  __int64 v17; // [xsp+48h] [xbp-18h] BYREF\n  __int64 v18; // [xsp+50h] [xbp-10h] BYREF\n  __int64 v19; // [xsp+58h] [xbp-8h] BYREF\n\n  if ( *(_QWORD *)a2 && **(int **)a2 > 0 )\n  {\n    v4 = this;\n    v6 = atomic_load((unsigned __int8 *)&byte_38CA48);\n    if ( (v6 & 1) == 0 && __cxa_guard_acquire((__guard *)&byte_38CA48) )\n    {\n      v19 = 0;\n      plt_TString_operator_lshift_char_const((int)&v19, \"StreamSave\");\n      plt_ProfilerRootData_ProfilerRootData_TString_const((ProfilerRootData *)&unk_38CA10, (const TString *)&v19);\n      __cxa_guard_release((__guard *)&byte_38CA48);\n      atexit((void (*)(void))sub_F0558);\n      plt_TString_clear_void((TString *)&v19);\n    }\n    if ( gProfiler )\n      plt_TProfiler_hashPush_ProfilerRootData((TProfiler *)gProfiler, (ProfilerRootData *)&unk_38CA10);\n    v7 = *(int **)(v4 + 8);\n    if ( v7 && *v7 > 0 )\n    {\n      if ( *(_QWORD *)a2 )\n        v8 = (const char *)(*(_QWORD *)a2 + 8LL);\n      else\n        v8 = (const char *)TString_dummystr;\n      if ( a3 == 1 )\n        v9 = \"ab\";\n      else\n        v9 = (const char *)&unk_2CDF78;\n      v11 = fopen(v8, v9);\n      if ( v11 )\n      {\n        v12 = *(int **)(v4 + 8);\n        if ( v12 )\n        {\n          v13 = *v12;\n          v14 = v12 + 2;\n        }\n        else\n        {\n          v13 = 0;\n          v14 = (const void *)TString_dummystr;\n        }\n        fwrite(v14, 1u, v13, v11);\n        fclose(v11);\n      }\n      else\n      {\n        plt_TFiles_extractFileExt_TString_const(&v19, a2, v10);\n        v15 = (unsigned __int8)plt_operator_ne_TString_const_char_const((int)&v19, \".log\");\n        plt_TString_clear_void((TString *)&v19);\n        if ( v15 )\n        {\n          v17 = 0;\n          plt_TString_operator_lshift_char_const((int)&v17, \"Couldn't open \");\n          v18 = 0;\n          plt_TString_operator_assign_TString_const(&v18, &v17);\n          plt_TString_operator_lshift_TString_const(&v18, a2);\n          v19 = 0;\n          plt_TString_operator_assign_TString_const(&v19, &v18);\n          plt_TString_operator_lshift_char_const((int)&v19, \" for writing!\");\n          plt_TLog_echo_TString_const_double_double_double_char_const(\n            (TLog *)&v19,\n            (const TString *)\"files\",\n            0.5,\n            0.0,\n            0.0,\n            v16);\n          plt_TString_clear_void((TString *)&v19);\n          plt_TString_clear_void((TString *)&v18);\n          plt_TString_clear_void((TString *)&v17);\n        }\n      }\n    }\n    else if ( !a3 )\n    {\n      plt_TFiles_deleteFile_TString_const(a2, a2);\n    }\n    this = gProfiler;\n    if ( gProfiler )\n      return plt_TProfiler_hashPop_void((TProfiler *)gProfiler);\n  }\n  return this;\n}\n",
+      "code_bytes": 3039,
+      "code_sha256": "2e14f1f7ace0bfdd393eeeb88ca2dd896534d05e8c598d4acb07f59104fc8b8c",
+      "function_end": "0xf0ce0",
+      "function_start": "0xf0aa8",
+      "name": "TStream_SaveToFile_TString_const_uint",
+      "role": "stream write",
+      "string_literals": [
+        "\" for writing!\"",
+        "\".log\"",
+        "\"Couldn't open \"",
+        "\"StreamSave\"",
+        "\"ab\"",
+        "\"files\""
+      ]
+    }
+  ],
+  "interpretation": [
+    "The original client uses CRC32 values in conditional file and update-package requests.",
+    "The reviewed packet-102 accumulation and completion bodies do not show a matching CRC, RSA signature, or keyed MAC verification before ordinary cache persistence.",
+    "The update scheduler limits queue dispatch but does not impose a general response-size or total-cache budget.",
+    "The executable replacement path remains a high-impact state transition, but this export does not establish that a remote peer can set the required flags in stock operation.",
+    "This artifact records static behavior and does not claim an unauthenticated remote exploit. Reachability still requires a controlled local protocol and filesystem test."
+  ],
+  "manual_reviews": [
+    {
+      "address": "0x1f4cf8",
+      "classification": "request-side-conditional-crc",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "Existing resources are resolved before a five-character checksum is constructed for the request.",
+        "A local .gupd package is loaded and CRC32 is calculated over the package bytes; other resources use TResourceObject_getChecksum.",
+        "The computed value is encoded with five 7-bit characters and sent with the lowercased basename, or is delivered to the scripted onSendImageUpdateCRC event in scripted mode."
+      ],
+      "function": "TClient_sendWantImageUpdateCRC_TString_const",
+      "interpretation": "This is a conditional request mechanism. The function does not verify the bytes of the later packet-102 response, and a CRC32 request value is not an authenticity check.",
+      "severity": "integrity-boundary"
+    },
+    {
+      "address": "0xf02f8",
+      "classification": "resource-crc32",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The function obtains the resource stream and feeds its entire TString buffer to crc32.",
+        "The result is consumed by TClient_sendRequestUpdatePackage_TUpdatePackage_bool and TClient_sendWantImageUpdateCRC_TString_const.",
+        "No signature or keyed MAC is calculated in this helper."
+      ],
+      "function": "TResourceObject_getChecksum_void",
+      "interpretation": "CRC32 detects accidental changes for cache negotiation, but it does not authenticate server-supplied content against an attacker.",
+      "severity": "integrity-boundary"
+    },
+    {
+      "address": "0x1f8e60",
+      "classification": "package-request-encoding",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The function sets downloadsblocked while it constructs the request and clears the flag before invoking the script or network callback.",
+        "Each nonempty package FILE entry is reduced to a basename for resource lookup, and a five-character CRC field is appended when the package state requests checksum use.",
+        "When no local resource is available, the checksum field is five spaces. The function sends the package metadata through the client's callback slot; it does not verify a response here."
+      ],
+      "function": "TClient_sendRequestUpdatePackage_TUpdatePackage_bool",
+      "interpretation": "The update request tells the peer what the client already has. The reviewed code does not turn that request checksum into a signed package-manifest or response-authentication step.",
+      "severity": "integrity-boundary"
+    },
+    {
+      "address": "0x1e8780",
+      "classification": "download-scheduler-order",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The function calls requestUpdatePackage_void before ordinary file queues are sent.",
+        "It sends at most the first ten entries of the ordinary and modification queues in this pass, while later entries remain queued.",
+        "The scripted download mode skips the native queue dispatch."
+      ],
+      "function": "TClient_startFileDownloading_void",
+      "interpretation": "The ten-entry behavior is a concurrency or scheduling limit, not a byte-size limit. It does not bound the size of an individual response or the total cached data.",
+      "severity": "availability-and-state"
+    },
+    {
+      "address": "0x1fbe78",
+      "classification": "ordinary-download-input-filter",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The function refuses downloads while downloadsblocked is set.",
+        "It ignores empty values, a literal hyphen, numeric-only values, and values containing the encoded URL marker.",
+        "It strips the input to a filename before native requests and suppresses .gft requests. Scripted mode records an event instead of making the native request."
+      ],
+      "function": "TFileDownload_download_TString_const",
+      "interpretation": "The helper applies a narrow request policy, but it is not a trust or authenticity check for content returned after a valid request.",
+      "severity": "input-policy"
+    },
+    {
+      "address": "0x1fbf98",
+      "classification": "update-download-input-filter",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The helper rejects numeric-only values and accepts a path only when it has no path or begins with the native base user folder.",
+        "It removes filename escapes or strips the filename before calling TClient_requestUpdate.",
+        "The helper has no signature verification and does not perform canonical path resolution."
+      ],
+      "function": "TFileDownload_update_TString_const",
+      "interpretation": "The base-user prefix check is a string check. It reduces the direct update-request surface but does not replace final canonical containment or response validation.",
+      "severity": "path-trust-boundary"
+    },
+    {
+      "address": "0x1ec764",
+      "classification": "response-accumulation-without-integrity-check",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The decoded packet offset is stored on the cached stream, then the response data is appended to the current stream buffer.",
+        "The body updates progress counters and routes ordinary files to cache save and resource validation.",
+        "The reviewed body contains no CRC32, RSA verification, signature comparison, offset-order check, or declared-total-size check before the ordinary save path."
+      ],
+      "function": "TClient_processFileChunk",
+      "interpretation": "A peer that has already passed the connection and protocol boundary can influence cached bytes and resource state. The strongest static result is missing response-integrity and size enforcement, not a claim that an unauthenticated remote peer can reach it in stock operation.",
+      "severity": "integrity-and-availability"
+    },
+    {
+      "address": "0x1eb294",
+      "classification": "large-response-finalization",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The function obtains the cached stream for the big filename, emits the download event, removes the request, and calls TCachedStream_saveAndUpdate.",
+        "It validates the resource key after saving and invokes the package completion hook for .gupd files.",
+        "No response CRC, signature, or accumulated-size comparison is visible in this finalizer."
+      ],
+      "function": "TClient_finishFileDownload",
+      "interpretation": "The large-file path shares the cache writer without a visible final content-authentication check. Declared size and packet ordering should be enforced before a modern implementation makes the file persistent.",
+      "severity": "integrity-and-availability"
+    },
+    {
+      "address": "0x2097c8",
+      "classification": "forced-update-preparation",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "When the package is marked as the main executable and the boolean argument is true, the function deletes the base executable below the base user folder before sending the package request.",
+        "It clears package progress state and calls TClient_sendRequestUpdatePackage_TUpdatePackage_bool.",
+        "No package signature verification is performed in this function."
+      ],
+      "function": "TUpdatePackage_update_bool",
+      "interpretation": "Forced replacement has a destructive precondition. Whether an untrusted package can set the main-executable state remains a caller and trust-chain question, but the operation deserves a hard stop in any repair build.",
+      "severity": "high-impact-capability"
+    },
+    {
+      "address": "0x1ec044",
+      "classification": "package-completion-and-exec-handoff",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The handler marks the package downloaded, sets its local version, and invokes onUpdatePackageDownloaded.",
+        "After all package downloads complete, it invokes onPackagesDownloadComplete and checks the replacement flag.",
+        "If the flag is set, it calls TSetup_startExeReplacer with the configured full executable path."
+      ],
+      "function": "TClient_handleUpdatePackageDownloaded",
+      "interpretation": "A successful package response reaches a high-impact executable handoff through state flags and script events. This code does not establish remote reachability or package authenticity by itself.",
+      "severity": "high-impact-capability"
+    },
+    {
+      "address": "0x1fa6e8",
+      "classification": "persistent-cache-write",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The function creates parent directories, redirects a path outside the base user prefix or matching the base executable to the full executable path, and calls TStream_SaveToFile.",
+        "The write path has no package signature check, atomic rename, or no-follow open operation.",
+        "The executable redirect deletes an existing target and sets the replacement flag."
+      ],
+      "function": "TCachedStream_save_bool",
+      "interpretation": "The cache writer is the point where previously accepted bytes become persistent state. It should be treated as a trust boundary even though this function alone does not prove an attacker-controlled input path.",
+      "severity": "integrity-and-availability"
+    },
+    {
+      "address": "0xf0aa8",
+      "classification": "unchecked-file-write",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The writer uses wb or ab, writes the stream in one fwrite call, and does not compare the return value with the requested length.",
+        "An open failure is logged, but no structured write failure is returned to the cache state machine."
+      ],
+      "function": "TStream_SaveToFile_TString_const_uint",
+      "interpretation": "Interrupted or partial writes can leave a truncated cached package or resource while surrounding code continues. A repaired writer should use checked temporary writes and an atomic replacement policy.",
+      "severity": "integrity-and-availability"
+    },
+    {
+      "address": "0x1fbd98",
+      "classification": "scripted-event-queue",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "In scripted mode the function appends a filename and an integer event code to a global TStringList.",
+        "The list is lazily allocated and the reviewed function has no visible total event-count or string-length cap.",
+        "A small ignore hash can suppress selected event types, but it does not cap the queue."
+      ],
+      "function": "TFileDownload_onFileEvent_TString_const_TFileDownload_fileeventtype",
+      "interpretation": "A script-facing caller can accumulate unbounded event state if it remains in scripted mode. This is a local availability concern until the caller and lifecycle are shown to be remotely controlled.",
+      "severity": "availability-and-state"
+    }
+  ],
+  "network_contacted": false,
+  "schema": "libqplay.original-update-integrity-review.v1",
+  "scope": "read-only Hex-Rays export of original 1.8 update requests, checksum construction, response accumulation, and cache writes"
+}

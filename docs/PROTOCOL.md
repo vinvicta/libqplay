@@ -375,6 +375,12 @@ the local writers that persist package state. Those findings are intentionally
 kept separate from the packet framing below because they describe filesystem
 trust boundaries after a file response has already been accepted.
 
+The request-side CRC and response-integrity review is in
+`artifacts/original_update_integrity_review_20260830.json`. The five-character
+CRC fields describe local cache state to the peer. They are not a response
+signature, and the reviewed packet-102 completion path does not visibly compare
+received data against them before saving.
+
 ```text
 packet 102
   -> handler index 24: TClient_parseEncodedFileChunk

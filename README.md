@@ -78,6 +78,9 @@ account authentication remain open.
 * `artifacts/original_update_package_path_review_20260830.json` records the
   update-package manifest parser, package path policy, cache path mapping, and
   local file writers.
+* `artifacts/original_update_integrity_review_20260830.json` records the
+  request-side CRC fields, download scheduler, response accumulation, and
+  package completion boundary.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.
 * `symbols/libqplay.symbols.json` is the machine-readable equivalent.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.

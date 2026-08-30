@@ -405,6 +405,19 @@ important local checks. The package parser also has no visible total budget for
 records, descriptions, or nested packages, so the strongest current finding is
 context-dependent availability risk rather than confirmed arbitrary file write.
 
+The companion integrity export is
+`artifacts/original_update_integrity_review_20260830.json`. It resolves an
+important distinction in the update protocol. `TResourceObject_getChecksum`
+and the package request builder calculate CRC32 values for conditional requests
+and encode them into five-character fields. The response path does not visibly
+compare received bytes against those values. Packet 102 appends data to a
+cached stream, and both ordinary and large-file completion call the cache save
+path without a visible CRC, RSA signature, keyed MAC, offset-order, or declared
+size check. The scheduler's ten-entry queue limit is not a byte-size limit.
+This is a static response-integrity and availability concern after a trusted
+connection is established, not proof that an unauthenticated server can reach
+the write in stock operation.
+
 ## Corrected two-connection runtime trace
 
 The first useful local run sent the map and player properties on the same
