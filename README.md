@@ -71,6 +71,14 @@ script event `onStartedWithURL`. This is now documented as a compatibility lead
 and a conditional destination-control concern in
 `artifacts/original_intent_launch_review_20260830.json`.
 
+The native HTTP redirect pass found another destination-control boundary.
+Responses with status 300 through 303, 305, or 307 can replace the request's
+host, port, path, and scheme from a `Location` value. The retry limit is ten,
+but the old code does not compare the new destination with the original one
+or prevent an HTTPS-to-HTTP downgrade. This is a confirmed static finding,
+not a live-service result. The evidence is in
+`artifacts/original_http_redirect_review_20260830.json`.
+
 ## Repository layout
 
 * `docs/RESEARCH_NOTES.md` is the chronological investigation record.
@@ -120,6 +128,8 @@ and a conditional destination-control concern in
   Activity, GLThread, renderer, and ARM64 JNI startup and pause boundaries.
 * `artifacts/original_intent_launch_review_20260830.json` records the Android
   custom-scheme entrypoint, native URI parser, and script-visible start fields.
+* `artifacts/original_http_redirect_review_20260830.json` records native HTTP
+  redirect handling, destination replacement, and transport downgrade behavior.
 * `artifacts/ida_translation_verification_20260830.json` records the final
   packed IDA copy, pass counts, hashes, and zero-failure verification result.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.
