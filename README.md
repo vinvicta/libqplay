@@ -73,6 +73,8 @@ account authentication remain open.
   libc call sites and focused buffer review for the original ARM64 library.
 * `artifacts/original_level_parser_review_20260830.json` records the encrypted
   level, board, and line-oriented entity parser review.
+* `artifacts/original_download_cache_flow_review_20260830.json` records the
+  server-file response, resource resolution, and cache save flow.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.
 * `symbols/libqplay.symbols.json` is the machine-readable equivalent.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.

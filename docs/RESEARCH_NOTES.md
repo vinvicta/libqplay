@@ -378,6 +378,19 @@ normal-path findings. The report records these as availability or parser
 robustness risks and leaves remote reachability for a disposable local harness
 and a complete cache/download trace.
 
+The follow-up cache-flow export is
+`artifacts/original_download_cache_flow_review_20260830.json`. It connects
+wire packet 102 and the large-file 68, 84, 102, 69 sequence to
+`TClient_processFileChunk`, `TCachedStream_saveAndUpdate`, and the resource
+resolver. The client appends received data to a dynamic cached stream while
+recording, but not visibly enforcing, the declared offset and big-file size.
+Recognized extensions are mapped into application-owned directories and final
+components are escaped, yet the reviewed save path still uses string prefixes
+and `stat` without visible canonical-root or no-follow creation. This makes
+server-supplied resource exhaustion a real trust-boundary concern after a
+connection is accepted, while symlink traversal remains an untested local
+question rather than a confirmed vulnerability.
+
 ## Corrected two-connection runtime trace
 
 The first useful local run sent the map and player properties on the same

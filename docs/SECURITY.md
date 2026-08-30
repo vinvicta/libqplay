@@ -406,6 +406,25 @@ and parser-robustness findings, not proof of code execution. A disposable
 malformed-container harness is still needed to establish crash behavior and
 to trace whether an attacker-controlled server can supply each section.
 
+The cache-flow review now closes much of that reachability gap. Wire packet 102
+maps to handler index 24, which splits the response into a filename and data
+and calls `TClient_processFileChunk`. That function appends data to a dynamic
+cached stream and later calls `TCachedStream_saveAndUpdate`; a `.code` response
+can therefore become the input consumed by `TServerLevel_LoadEncrypted`. The
+large-file 68, 84, 102, 69 sequence reaches the same save path. The reviewed
+code records the declared offset and size but does not visibly enforce offset
+ordering, total accumulated length, or a general file-size maximum. This makes
+resource exhaustion and cache-state confusion plausible for a peer that has
+already crossed the socket trust boundary. It still does not prove a production
+remote exploit while the original trust and authentication checks remain
+intact.
+
+The mapper sends recognized files to application directories and escapes final
+components, but save and existing-file checks use string prefixes and `stat`.
+No canonical-root or no-follow creation step is visible. Symlink replacement,
+case-folding, and path-separator behavior should be tested only in a
+disposable private directory before assigning a traversal severity.
+
 ## Priorities for a safe repair
 
 The practical order is:
