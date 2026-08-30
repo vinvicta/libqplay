@@ -51,7 +51,9 @@ record per remaining default `sub_` function, including its address, size,
 segment, and incoming xref count. It also records the 11,297-row inventory
 hash, the original ARM64 library hash, address buckets, and the most
 referenced residual entries. The report contains 421 residual functions and
-does not publish another full inventory.
+does not publish another full inventory. When the checked-in residual profile
+matches the input addresses, the report also embeds its category counts and
+profile hash.
 
 The report was generated from the private v4 IDA export with:
 
@@ -63,6 +65,25 @@ python3 tools/generate_final_residual_audit.py \
 The input path is local to the analysis workstation. The report's SHA-256
 fields make it possible to verify that a future export describes the same
 library and inventory.
+
+The 421 residual entries have also been classified by the persisted IDA
+profile:
+
+| Class | Count | Interpretation |
+| --- | ---: | --- |
+| JPEG static internals | 150 | Unnamed routines inside the bundled JPEG implementation |
+| FreeType static internals | 144 | Unnamed routines inside the bundled FreeType implementation |
+| TString cleanup wrappers | 97 | Compiler-generated destructors for fixed global strings |
+| Init or fini array entries | 19 | Runtime registration or cleanup entry points referenced by ELF arrays |
+| TStringList cleanup wrappers | 5 | Compiler-generated destructors for fixed global string lists |
+| GPC static internals | 3 | Unnamed routines inside the bundled polygon clipper |
+| TGraalVar cleanup wrappers | 2 | Compiler-generated destructors for fixed global script values |
+| AArch64 PLT resolver | 1 | The resolver slot at `0xd2170`, not an imported function |
+
+This breakdown accounts for every residual entry. The large JPEG and FreeType
+groups are not omitted from the analysis; they are left with address-based
+names because their local source names were not retained and a family label
+alone is not enough to prove an exact function match.
 
 ## How to work the remaining queue
 

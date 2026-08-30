@@ -19,6 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_INVENTORY = ROOT.parent / "analysis" / "libqplay.function_inventory.json"
 DEFAULT_OUTPUT = ROOT / "artifacts" / "ida_final_residual_audit_20260830.json"
+DEFAULT_PROFILE = ROOT / "artifacts" / "ida_residual_profile.json"
 EXPECTED_BINARY_SHA256 = "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8"
 
 
@@ -34,7 +35,25 @@ def address_bucket(ea: int) -> str:
     return f"0x{ea & ~0xFFFF:05x}-0x{(ea & ~0xFFFF) + 0xFFFF:05x}"
 
 
-def build_report(inventory_path: Path) -> dict:
+def load_residual_classification(profile_path: Path, default_rows: list[dict]) -> dict | None:
+    if not profile_path.is_file():
+        return None
+    profile = json.loads(profile_path.read_text(encoding="utf-8"))
+    profile_rows = profile.get("residual_default_sub_functions")
+    if not isinstance(profile_rows, list):
+        return None
+    inventory_eas = {int(row["ea"]) for row in default_rows}
+    profile_eas = {int(row["ea"], 16) for row in profile_rows}
+    if inventory_eas != profile_eas:
+        return None
+    return {
+        "profile_path": profile_path.as_posix(),
+        "profile_sha256": sha256_file(profile_path),
+        "categories": profile.get("category_summary", []),
+    }
+
+
+def build_report(inventory_path: Path, profile_path: Path | None = None) -> dict:
     document = json.loads(inventory_path.read_text(encoding="utf-8"))
     if not isinstance(document, list):
         raise ValueError("IDA inventory must be a JSON list")
@@ -60,6 +79,11 @@ def build_report(inventory_path: Path) -> dict:
         ),
         key=lambda row: (-row["xrefs_to"], int(row["ea"])),
     )[:40]
+    classification = (
+        load_residual_classification(profile_path, default_rows)
+        if profile_path is not None
+        else None
+    )
 
     return {
         "schema": "libqplay.ida-final-residual-audit.v1",
@@ -79,6 +103,7 @@ def build_report(inventory_path: Path) -> dict:
             "address_bucket_counts": dict(sorted(buckets.items())),
         },
         "binary_sha256": EXPECTED_BINARY_SHA256,
+        "residual_classification": classification,
         "residual_functions": residuals,
         "most_referenced_residuals": [
             {
@@ -100,13 +125,15 @@ def build_report(inventory_path: Path) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("inventory", nargs="?", type=Path, default=DEFAULT_INVENTORY)
+    parser.add_argument("--profile", type=Path, default=DEFAULT_PROFILE)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     args = parser.parse_args()
     inventory = args.inventory if args.inventory.is_absolute() else Path.cwd() / args.inventory
+    profile = args.profile if args.profile.is_absolute() else Path.cwd() / args.profile
     output = args.output if args.output.is_absolute() else ROOT / args.output
     if not inventory.is_file():
         parser.error(f"IDA inventory does not exist: {inventory}")
-    report = build_report(inventory)
+    report = build_report(inventory, profile)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps({
