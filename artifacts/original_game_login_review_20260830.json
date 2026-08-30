@@ -1,0 +1,542 @@
+{
+  "artifact": "original_game_login_review_20260830",
+  "database": {
+    "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "imagebase": "0x0",
+    "path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
+  },
+  "functions": [
+    {
+      "address": "0x1fca6c",
+      "callers": [
+        {
+          "caller": "0xd89f0",
+          "caller_name": "plt_TGraalConnection_setProtocol_NewGraal_TString_const",
+          "callsite": "0xd89f4"
+        },
+        {
+          "caller": "0xd89f0",
+          "caller_name": "plt_TGraalConnection_setProtocol_NewGraal_TString_const",
+          "callsite": "0xd89fc"
+        }
+      ],
+      "code": "__int64 __fastcall TGraalConnection_setProtocol_NewGraal_TString_const(TGraalConnection *this, char **a2)\n{\n  char *v4; // x0\n  char v5; // w0\n  int *v6; // x3\n  int v7; // w1\n  _DWORD *v8; // x2\n  int v9; // w0\n  int v10; // w5\n  unsigned __int8 *v11; // x2\n  int i; // w4\n  int v13; // t1\n  int v14; // w1\n  int *v15; // x3\n  int v16; // w1\n  __int64 v17; // x2\n  int v18; // w0\n  int v19; // w5\n  unsigned __int8 *v20; // x2\n  int j; // w4\n  int v22; // t1\n  int v23; // w1\n  int *v24; // x3\n  int v25; // w1\n  __int64 v26; // x2\n  int v27; // w0\n  int v28; // w5\n  unsigned __int8 *v29; // x2\n  int k; // w4\n  int v31; // t1\n  int v32; // w1\n  int *v33; // x2\n  int v34; // w3\n  __int64 v35; // x1\n  int v36; // w0\n  int v37; // w5\n  unsigned __int8 *v38; // x1\n  int m; // w4\n  int v40; // t1\n  int v41; // w0\n  int v42; // w1\n  bool v43; // w0\n  __int64 v45; // [xsp+38h] [xbp-8h] BYREF\n\n  v4 = *a2;\n  *((_DWORD *)this + 69) = 1;\n  if ( v4 )\n    v5 = *v4;\n  else\n    v5 = 0;\n  *((_BYTE *)this + 176) = v5;\n  v45 = 0;\n  plt_TString_operator_lshift_char_const((int)&v45, \"I\");\n  *((_DWORD *)this + 45) = plt_TString_indexOf_TString_const((TString *)a2, (const TString *)&v45);\n  plt_TString_clear_void((TString *)&v45);\n  v6 = (int *)*a2;\n  v7 = *((_DWORD *)this + 45);\n  if ( *a2 )\n    v8 = v6 + 2;\n  else\n    v8 = (_DWORD *)TString_dummystr;\n  v9 = v7 + 1;\n  v10 = *((unsigned __int8 *)v8 + v7);\n  v11 = (unsigned __int8 *)v8 + v7 + 1;\n  if ( !v6 )\n    goto LABEL_42;\nLABEL_6:\n  for ( i = *v6; v9 < i; i = 0 )\n  {\n    v13 = *v11++;\n    if ( v13 != v10 )\n      break;\n    ++v9;\n    if ( v6 )\n      goto LABEL_6;\nLABEL_42:\n    ;\n  }\n  v14 = v9 - v7;\n  v45 = 0;\n  if ( v14 > 4 )\n    LOBYTE(v14) = 4;\n  *((_BYTE *)this + 184) = v14;\n  plt_TString_operator_lshift_char_const((int)&v45, \"L\");\n  *((_DWORD *)this + 47) = plt_TString_indexOf_TString_const((TString *)a2, (const TString *)&v45);\n  plt_TString_clear_void((TString *)&v45);\n  v15 = (int *)*a2;\n  v16 = *((_DWORD *)this + 47);\n  v17 = (__int64)(*a2 + 8);\n  if ( !*a2 )\n    v17 = TString_dummystr;\n  v18 = v16 + 1;\n  v19 = *(unsigned __int8 *)(v17 + v16);\n  v20 = (unsigned __int8 *)(v17 + v16 + 1);\n  if ( !v15 )\n    goto LABEL_44;\nLABEL_14:\n  for ( j = *v15; v18 < j; j = 0 )\n  {\n    v22 = *v20++;\n    if ( v22 != v19 )\n      break;\n    ++v18;\n    if ( v15 )\n      goto LABEL_14;\nLABEL_44:\n    ;\n  }\n  v23 = v18 - v16;\n  v45 = 0;\n  if ( v23 > 4 )\n    LOBYTE(v23) = 4;\n  *((_BYTE *)this + 192) = v23;\n  plt_TString_operator_lshift_char_const((int)&v45, \"T\");\n  *((_DWORD *)this + 49) = plt_TString_indexOf_TString_const((TString *)a2, (const TString *)&v45);\n  plt_TString_clear_void((TString *)&v45);\n  v24 = (int *)*a2;\n  v25 = *((_DWORD *)this + 49);\n  v26 = (__int64)(*a2 + 8);\n  if ( !*a2 )\n    v26 = TString_dummystr;\n  v27 = v25 + 1;\n  v28 = *(unsigned __int8 *)(v26 + v25);\n  v29 = (unsigned __int8 *)(v26 + v25 + 1);\n  if ( !v24 )\n    goto LABEL_46;\nLABEL_22:\n  for ( k = *v24; v27 < k; k = 0 )\n  {\n    v31 = *v29++;\n    if ( v31 != v28 )\n      break;\n    ++v27;\n    if ( v24 )\n      goto LABEL_22;\nLABEL_46:\n    ;\n  }\n  v32 = v27 - v25;\n  v45 = 0;\n  if ( v32 > 4 )\n    LOBYTE(v32) = 4;\n  *((_BYTE *)this + 200) = v32;\n  plt_TString_operator_lshift_char_const((int)&v45, \"E\");\n  *((_DWORD *)this + 51) = plt_TString_indexOf_TString_const((TString *)a2, (const TString *)&v45);\n  plt_TString_clear_void((TString *)&v45);\n  v33 = (int *)*a2;\n  v34 = *((_DWORD *)this + 51);\n  v35 = (__int64)(*a2 + 8);\n  if ( !*a2 )\n    v35 = TString_dummystr;\n  v36 = v34 + 1;\n  v37 = *(unsigned __int8 *)(v35 + v34);\n  v38 = (unsigned __int8 *)(v35 + v34 + 1);\n  if ( !v33 )\n    goto LABEL_40;\nLABEL_30:\n  for ( m = *v33; v36 < m; m = 0 )\n  {\n    v40 = *v38++;\n    if ( v40 != v37 )\n      break;\n    ++v36;\n    if ( v33 )\n      goto LABEL_30;\nLABEL_40:\n    ;\n  }\n  v41 = v36 - v34;\n  v42 = *((_DWORD *)this + 47);\n  if ( v41 > 4 )\n    LOBYTE(v41) = 4;\n  *((_BYTE *)this + 208) = v41;\n  v43 = (v42 & 0x80000000) == 0 && *((_DWORD *)this + 49) >= 0;\n  *((_BYTE *)this + 152) = v43;\n  *((_DWORD *)this + 59) = 1;\n  *((_DWORD *)this + 53) = -1;\n  return 0xFFFFFFFFLL;\n}\n",
+      "code_bytes": 4119,
+      "code_sha256": "a70834b0cd07ce3e0dccba06586fda47d96072360ba3c0afdab09793c05e1aff",
+      "function_end": "0x1fcd50",
+      "function_start": "0x1fca6c",
+      "name": "TGraalConnection_setProtocol_NewGraal_TString_const",
+      "role": "NewGraal header setup",
+      "string_literals": [
+        "\"E\"",
+        "\"I\"",
+        "\"L\"",
+        "\"T\""
+      ]
+    },
+    {
+      "address": "0x1fe0b4",
+      "callers": [
+        {
+          "caller": "0xdeec0",
+          "caller_name": "plt_TGraalConnection_parseSetEncryptionIn_TString_const",
+          "callsite": "0xdeec4"
+        },
+        {
+          "caller": "0xdeec0",
+          "caller_name": "plt_TGraalConnection_parseSetEncryptionIn_TString_const",
+          "callsite": "0xdeecc"
+        }
+      ],
+      "code": "TGraalConnection *__fastcall TGraalConnection_parseSetEncryptionIn_TString_const(\n        TGraalConnection *this,\n        const TString *a2)\n{\n  TGraalConnection *v2; // x20\n  const TString *v3; // x2\n  const TString *v4; // x2\n  int v5; // w24\n  int v6; // w25\n  int v7; // w25\n  char *v8; // x1\n  int *v9; // [xsp+58h] [xbp-28h] BYREF\n  int *v10; // [xsp+60h] [xbp-20h] BYREF\n  __int64 v11; // [xsp+68h] [xbp-18h] BYREF\n  __int64 v12; // [xsp+70h] [xbp-10h] BYREF\n  __int64 v13; // [xsp+78h] [xbp-8h] BYREF\n\n  if ( *(_QWORD *)a2 && **(int **)a2 > 0 )\n  {\n    v2 = this;\n    v9 = nullptr;\n    plt_TString_operator_assign_TString_const(&v9, a2);\n    v10 = nullptr;\n    plt_TString_operator_assign_TString_const(&v10, (char *)v2 + 168);\n    if ( v10 && *v10 > 0 )\n    {\n      v11 = 0;\n      plt_TString_operator_lshift_char_const((int)&v11, \"<redacted fixed key literal>\");\n      plt_TEncryption_des_decrypt_TString_const_TString_const(&v12, (TEncryption *)&v11, (const TString *)&v10, v3);\n      plt_TEncryption_rsa_decrypt_TString_const_TString_const(&v13, (TEncryption *)&v12, (const TString *)&v9, v4);\n      plt_TString_operator_assign_TString_const(&v9, &v13);\n      plt_TString_clear_void((TString *)&v13);\n      plt_TString_clear_void((TString *)&v12);\n      plt_TString_clear_void((TString *)&v11);\n    }\n    if ( v9 )\n    {\n      v5 = 0;\n      if ( *v9 > 0 )\n        v5 = (unsigned __int8)(plt_TString_operator_index_int(&v9, 1) - 32);\n    }\n    else\n    {\n      v5 = 0;\n    }\n    plt_TString_removeStart_int((TString *)&v9, 1);\n    if ( v9 )\n    {\n      v6 = 1;\n      if ( *v9 > 0 )\n        v6 = (unsigned __int8)plt_TString_operator_index_int(&v9, 1) - 31;\n    }\n    else\n    {\n      v6 = 1;\n    }\n    plt_TString_subString_int_int(&v11, (TString *)&v9, 1, v6);\n    plt_TString_removeStart_int((TString *)&v9, v6);\n    if ( v9 )\n    {\n      v7 = 1;\n      if ( *v9 > 0 )\n        v7 = (unsigned __int8)plt_TString_operator_index_int(&v9, 1) - 31;\n    }\n    else\n    {\n      v7 = 1;\n    }\n    plt_TString_subString_int_int(&v12, (TString *)&v9, 1, v7);\n    plt_TString_removeStart_int((TString *)&v9, v7);\n    if ( v5 == 1 )\n    {\n      v8 = \"RC4\";\n    }\n    else if ( v5 == 2 )\n    {\n      v8 = \"AES\";\n    }\n    else\n    {\n      v8 = &byte_2DCE08;\n    }\n    v13 = 0;\n    plt_TString_operator_lshift_char_const((int)&v13, v8);\n    plt_TGraalConnection_setEncryptionIn_TString_const_TString_const_TString_const(\n      v2,\n      (const TString *)&v13,\n      (const TString *)&v11,\n      (const TString *)&v12);\n    plt_TString_clear_void((TString *)&v13);\n    plt_TString_clear_void((TString *)&v12);\n    plt_TString_clear_void((TString *)&v11);\n    plt_TString_clear_void((TString *)&v10);\n    return (TGraalConnection *)plt_TString_clear_void((TString *)&v9);\n  }\n  return this;\n}\n",
+      "code_bytes": 2789,
+      "code_sha256": "dc750386d16df3fb15cadbc1d3d2c36e6630c0ed83da384af9c2e6b8ec1bbb68",
+      "function_end": "0x1fe31c",
+      "function_start": "0x1fe0b4",
+      "name": "TGraalConnection_parseSetEncryptionIn_TString_const",
+      "role": "server cipher setup parser",
+      "string_literals": [
+        "\"<redacted fixed key literal>\"",
+        "\"AES\"",
+        "\"RC4\""
+      ]
+    },
+    {
+      "address": "0xf7340",
+      "callers": [
+        {
+          "caller": "0xdff10",
+          "caller_name": "plt_TEncryption_rsa_decrypt_TString_const_TString_const",
+          "callsite": "0xdff14"
+        },
+        {
+          "caller": "0xdff10",
+          "caller_name": "plt_TEncryption_rsa_decrypt_TString_const_TString_const",
+          "callsite": "0xdff1c"
+        }
+      ],
+      "code": "TString *__usercall TEncryption_rsa_decrypt_TString_const_TString_const@<X0>(\n        unsigned int **this@<X0>,\n        unsigned int **a2@<X1>,\n        const TString *a3@<X2>,\n        __int64 a4@<X3>,\n        TString *a5@<X8>)\n{\n  unsigned int *v8; // x1\n  __int64 v9; // x3\n  unsigned int *v10; // x0\n  unsigned int *v12; // x1\n  int v13; // w0\n  size_t v14; // x1\n  int v15; // w2\n  char v16[16]; // [xsp+0h] [xbp+0h] BYREF\n  int v17; // [xsp+3Ch] [xbp+3Ch] BYREF\n  _BYTE v18[208]; // [xsp+40h] [xbp+40h] BYREF\n\n  *(_QWORD *)a5 = 0;\n  plt_CyaInt_InitRsaKey_CyaInt_RsaKey_void(v18, 0, a3, a4);\n  v17 = 0;\n  v8 = *this;\n  if ( *this )\n  {\n    v9 = *v8;\n    v10 = v8 + 2;\n  }\n  else\n  {\n    v9 = 0;\n    v10 = (unsigned int *)TString_dummystr;\n  }\n  if ( (unsigned int)plt_CyaInt_RsaPrivateKeyDecode_uchar_const_uint_CyaInt_RsaKey_uint(v10, &v17, v18, v9)\n    || (unsigned int)plt_CyaInt_RsaEncryptSize_CyaInt_RsaKey(v18) - 1 > 0x3FF )\n  {\n    plt_CyaInt_FreeRsaKey_CyaInt_RsaKey(v18);\n    return a5;\n  }\n  else\n  {\n    v12 = *a2;\n    if ( *a2 )\n    {\n      v13 = (_DWORD)v12 + 8;\n      v14 = *v12;\n    }\n    else\n    {\n      v14 = 0;\n      v13 = TString_dummystr;\n    }\n    v15 = plt_CyaInt_RsaPrivateDecrypt_uchar_const_uint_uchar_uint_CyaInt_RsaKey(v13, v14);\n    if ( v15 > 0 )\n      plt_TString_addbuffer_char_const_int(a5, v16, v15);\n    plt_CyaInt_FreeRsaKey_CyaInt_RsaKey(v18);\n    return a5;\n  }\n}\n",
+      "code_bytes": 1405,
+      "code_sha256": "5b0b17854677d2a68e10a0326c1caee1e9bc41e05c8975a5eee7ebd8e68e7307",
+      "function_end": "0xf7464",
+      "function_start": "0xf7340",
+      "name": "TEncryption_rsa_decrypt_TString_const_TString_const",
+      "role": "RSA private-key unwrap helper",
+      "string_literals": []
+    },
+    {
+      "address": "0x1fdfd0",
+      "callers": [
+        {
+          "caller": "0xdd2d0",
+          "caller_name": "plt_TGraalConnection_setEncryptionIn_TString_const_TString_const_TString_const",
+          "callsite": "0xdd2d4"
+        },
+        {
+          "caller": "0xdd2d0",
+          "caller_name": "plt_TGraalConnection_setEncryptionIn_TString_const_TString_const_TString_const",
+          "callsite": "0xdd2dc"
+        }
+      ],
+      "code": "__int64 __fastcall TGraalConnection_setEncryptionIn_TString_const_TString_const_TString_const(\n        TGraalConnection *this,\n        const TString *a2,\n        const TString *a3,\n        const TString *a4)\n{\n  int v4; // w19\n  TGraalConnection *v8; // x0\n  __int64 v9; // x0\n  __int64 v11; // x0\n\n  v4 = (int)a2;\n  plt_TGraalConnection_clearEncryptionKeyIn_void(this);\n  if ( (unsigned __int8)plt_operator_assign_TString_const_char_const(v4, \"RC4\") )\n  {\n    *((_BYTE *)this + 216) = (unsigned __int8)&dword_0 + 1;\n    v9 = plt_TEncryption_rc4_createwithkey_TString_const(a3, (const TString *)((char *)&dword_0 + 1));\n    *((_DWORD *)this + 58) = 0;\n    *((_QWORD *)this + 28) = v9;\n    return plt_TGraalConnection_decryptIncoming_void(this);\n  }\n  else\n  {\n    if ( (unsigned __int8)plt_operator_assign_TString_const_char_const(v4, \"AES\") )\n    {\n      *((_BYTE *)this + 216) = 2;\n      v11 = plt_TEncryption_aes_createwithkey_TString_const_TString_const_bool(a3, a4, nullptr, 2);\n      *((_DWORD *)this + 58) = 0;\n      *((_QWORD *)this + 28) = v11;\n      v8 = this;\n    }\n    else\n    {\n      *((_BYTE *)this + 216) = 0;\n      v8 = this;\n      *((_DWORD *)this + 58) = 0;\n    }\n    return plt_TGraalConnection_decryptIncoming_void(v8);\n  }\n}\n",
+      "code_bytes": 1247,
+      "code_sha256": "53febc36d9cbd24435b92042f3cbbcdd20cb28b2598f47e9a489664a4e421a9e",
+      "function_end": "0x1fe0b4",
+      "function_start": "0x1fdfd0",
+      "name": "TGraalConnection_setEncryptionIn_TString_const_TString_const_TString_const",
+      "role": "incoming cipher selection",
+      "string_literals": [
+        "\"AES\"",
+        "\"RC4\""
+      ]
+    },
+    {
+      "address": "0x1fd6b4",
+      "callers": [
+        {
+          "caller": "0xde110",
+          "caller_name": "plt_TGraalConnection_setEncryptionOut_TString_const_TString_const_TString_const",
+          "callsite": "0xde114"
+        },
+        {
+          "caller": "0xde110",
+          "caller_name": "plt_TGraalConnection_setEncryptionOut_TString_const_TString_const_TString_const",
+          "callsite": "0xde11c"
+        }
+      ],
+      "code": "__int64 __fastcall TGraalConnection_setEncryptionOut_TString_const_TString_const_TString_const(\n        TGraalConnection *this,\n        const TString *a2,\n        const TString *a3,\n        const TString *a4)\n{\n  int v4; // w20\n  __int64 result; // x0\n\n  v4 = (int)a2;\n  plt_TGraalConnection_sendOutgoing_void(this);\n  plt_TGraalConnection_clearEncryptionKeyOut_void(this);\n  if ( (unsigned __int8)plt_operator_assign_TString_const_char_const(v4, \"RC4\") )\n  {\n    *((_BYTE *)this + 240) = (unsigned __int8)&dword_0 + 1;\n    result = plt_TEncryption_rc4_createwithkey_TString_const(a3, (const TString *)((char *)&dword_0 + 1));\n    *((_QWORD *)this + 31) = result;\n  }\n  else\n  {\n    result = (unsigned __int8)plt_operator_assign_TString_const_char_const(v4, \"AES\");\n    if ( (_BYTE)result )\n    {\n      *((_BYTE *)this + 240) = 2;\n      result = plt_TEncryption_aes_createwithkey_TString_const_TString_const_bool(\n                 a3,\n                 a4,\n                 (const TString *)((char *)&dword_0 + 1),\n                 2);\n      *((_QWORD *)this + 31) = result;\n    }\n    else\n    {\n      *((_BYTE *)this + 240) = 0;\n    }\n  }\n  return result;\n}\n",
+      "code_bytes": 1158,
+      "code_sha256": "a6272100f0ce0b72e8e8b33aa5675b4cf337e9f84e17847c0a86cb85eb5de125",
+      "function_end": "0x1fd780",
+      "function_start": "0x1fd6b4",
+      "name": "TGraalConnection_setEncryptionOut_TString_const_TString_const_TString_const",
+      "role": "outgoing cipher selection",
+      "string_literals": [
+        "\"AES\"",
+        "\"RC4\""
+      ]
+    },
+    {
+      "address": "0x1fdeec",
+      "callers": [
+        {
+          "caller": "0xdb700",
+          "caller_name": "plt_TGraalConnection_decryptIncoming_void",
+          "callsite": "0xdb704"
+        },
+        {
+          "caller": "0xdb700",
+          "caller_name": "plt_TGraalConnection_decryptIncoming_void",
+          "callsite": "0xdb70c"
+        }
+      ],
+      "code": "__int64 __fastcall TGraalConnection_decryptIncoming_void(TGraalConnection *this)\n{\n  char *v1; // x19\n  int v2; // w2\n  __int64 v3; // x4\n  int *v4; // x20\n  int v5; // w3\n  __int64 result; // x0\n  char *v7; // x1\n  int v8; // w20\n  unsigned int *v9; // x0\n\n  v1 = (char *)this + 152;\n  v2 = *((unsigned __int8 *)this + 216);\n  if ( !*((_BYTE *)this + 216) || (v3 = *((_QWORD *)this + 28)) == 0 )\n  {\n    v9 = *((unsigned int **)this + 38);\n    if ( v9 )\n      result = *v9;\n    else\n      result = 0;\nLABEL_11:\n    *((_DWORD *)v1 + 20) = result;\n    return result;\n  }\n  v4 = *((int **)this + 38);\n  if ( v4 )\n  {\n    v5 = *v4;\n    result = *((unsigned int *)this + 58);\n    if ( *v4 <= (int)result )\n      return result;\n    v7 = (char *)v4 + (int)result + 8;\nLABEL_6:\n    v8 = v5 - result;\n    if ( v2 == 1 )\n    {\n      plt_TEncryption_rc4_process_void_uchar_uchar_int(\n        *((TEncryption **)v1 + 9),\n        v7,\n        (unsigned __int8 *)v7,\n        (unsigned __int8 *)(unsigned int)v8,\n        v3);\n      result = (unsigned int)(v8 + *((_DWORD *)v1 + 20));\n    }\n    else\n    {\n      if ( v2 == 2 )\n      {\n        v8 &= 0xFFFFFFF0;\n        if ( v8 <= 0 )\n          return result;\n        plt_TEncryption_aes_decrypt_void_uchar_uchar_int(\n          *((TEncryption **)v1 + 9),\n          v7,\n          (unsigned __int8 *)v7,\n          (unsigned __int8 *)(unsigned int)v8,\n          v3);\n        LODWORD(result) = *((_DWORD *)v1 + 20);\n      }\n      result = (unsigned int)(v8 + result);\n    }\n    goto LABEL_11;\n  }\n  result = *((unsigned int *)this + 58);\n  if ( (result & 0x80000000) != 0 )\n  {\n    v5 = 0;\n    v7 = (char *)(TString_dummystr + (int)result);\n    goto LABEL_6;\n  }\n  return result;\n}\n",
+      "code_bytes": 1710,
+      "code_sha256": "66073b70153d94351e6136e027d9fd3d03827a8c0e06dab362067e70ab910f2f",
+      "function_end": "0x1fdfd0",
+      "function_start": "0x1fdeec",
+      "name": "TGraalConnection_decryptIncoming_void",
+      "role": "incoming stream decryption",
+      "string_literals": []
+    },
+    {
+      "address": "0x1fcd58",
+      "callers": [
+        {
+          "caller": "0xd7ea0",
+          "caller_name": "plt_TGraalConnection_checkPacketID_uint",
+          "callsite": "0xd7ea4"
+        },
+        {
+          "caller": "0xd7ea0",
+          "caller_name": "plt_TGraalConnection_checkPacketID_uint",
+          "callsite": "0xd7eac"
+        }
+      ],
+      "code": "__int64 __fastcall TGraalConnection_checkPacketID_uint(TGraalConnection *this, int a2)\n{\n  int v2; // w2\n  int v3; // w4\n  int v4; // w2\n  int v5; // w4\n  const char *v7; // x2\n  __int64 v9; // [xsp+20h] [xbp-10h] BYREF\n  __int64 v10; // [xsp+28h] [xbp-8h] BYREF\n\n  v2 = *((_DWORD *)this + 53);\n  if ( v2 < 0\n    || ((v3 = *((unsigned __int8 *)this + 184), v4 = v2 + 1, v3 == 1)\n      ? (v5 = 255)\n      : v3 == 2\n      ? (v5 = 0xFFFF)\n      : v3 != 3\n      ? (v5 = -1)\n      : (v5 = 0xFFFFFF),\n        a2 == (v5 & v4)) )\n  {\n    *((_DWORD *)this + 53) = a2;\n    return 1;\n  }\n  else\n  {\n    v10 = 0;\n    plt_TString_operator_lshift_char_const((int)&v10, \"Received invalid data (3) from \");\n    v9 = 0;\n    plt_TString_operator_assign_TString_const(&v9, &v10);\n    plt_TString_operator_lshift_TString_const(&v9, (char *)this + 264);\n    plt_TLog_echo_TString_const_double_double_double_char_const((TLog *)&v9, (const TString *)\"net\", 1.0, 0.0, 0.0, v7);\n    plt_TString_clear_void((TString *)&v9);\n    plt_TString_clear_void((TString *)&v10);\n    *((_BYTE *)this + 272) = 1;\n    return 0;\n  }\n}\n",
+      "code_bytes": 1095,
+      "code_sha256": "e294014ffce1cd14d4a6116ffafa0ea4a7d8eaa1e99189c4288b8f2be6116e7b",
+      "function_end": "0x1fce4c",
+      "function_start": "0x1fcd58",
+      "name": "TGraalConnection_checkPacketID_uint",
+      "role": "incoming sequence check",
+      "string_literals": [
+        "\"Received invalid data (3) from \"",
+        "\"net\""
+      ]
+    },
+    {
+      "address": "0x1fe31c",
+      "callers": [
+        {
+          "caller": "0xdd830",
+          "caller_name": "plt_TGraalConnection_parseProtocol_NewGraal_void",
+          "callsite": "0xdd834"
+        },
+        {
+          "caller": "0xdd830",
+          "caller_name": "plt_TGraalConnection_parseProtocol_NewGraal_void",
+          "callsite": "0xdd83c"
+        }
+      ],
+      "code": "__int64 __fastcall TGraalConnection_parseProtocol_NewGraal_void(__int64 this)\n{\n  __int64 v1; // x19\n  TString *v2; // x22\n  __int64 v3; // x20\n  int v4; // w21\n  int v5; // w5\n  unsigned __int8 *v6; // x4\n  __int64 v7; // x1\n  unsigned __int8 *v8; // x23\n  int v9; // w27\n  int v10; // w23\n  __int64 v11; // x0\n  unsigned __int8 *v12; // x21\n  unsigned int v13; // w26\n  int v14; // w23\n  int v15; // w0\n  unsigned __int8 *v16; // x21\n  unsigned int v17; // w23\n  int v18; // w21\n  int v19; // w0\n  unsigned __int8 *v20; // x1\n  unsigned __int8 v21; // w0\n  unsigned __int64 v22; // x1\n  int v23; // w0\n  int *v24; // x1\n  int v25; // w0\n  int v26; // w26\n  int v27; // w27\n  int v28; // w0\n  unsigned __int8 *v29; // x4\n  int v30; // w1\n  int v31; // t1\n  const char *v32; // x2\n  int v33; // w20\n  int v34; // w4\n  int v35; // t1\n  int *v36; // [xsp+58h] [xbp-18h] BYREF\n  __int64 v37; // [xsp+60h] [xbp-10h] BYREF\n  __int64 v38; // [xsp+68h] [xbp-8h] BYREF\n\n  v1 = this + 152;\n  if ( !*(_BYTE *)(this + 152) || !*(_BYTE *)(this + 176) )\n    return this;\n  v2 = (TString *)(this + 304);\n  v3 = this;\n  plt_TString_makeUnique_void((TString *)(this + 304));\n  v4 = *(_DWORD *)(v1 + 80);\n  while ( 1 )\n  {\n    v5 = *(unsigned __int8 *)(v1 + 24);\n    if ( v4 < v5 )\n      break;\n    if ( *(_QWORD *)v2 )\n      v6 = (unsigned __int8 *)(*(_QWORD *)v2 + 8LL);\n    else\n      v6 = (unsigned __int8 *)TString_dummystr;\n    if ( *(_BYTE *)(v1 + 64) == 2 && *v6 == 255 )\n    {\n      if ( v4 > 1 && v6[1] == 255 )\n      {\n        v29 = v6 + 2;\n        v30 = 1;\n        while ( ++v30 != v4 )\n        {\n          v31 = *v29++;\n          if ( v31 != 255 )\n          {\n            v4 = v30;\n            break;\n          }\n        }\n      }\n      else\n      {\n        v4 = 1;\n      }\n      plt_TString_removeStart_int(v2, v4);\n      v4 = *(_DWORD *)(v1 + 80) - v4;\n      *(_DWORD *)(v1 + 80) = v4;\n    }\n    else\n    {\n      this = *(unsigned __int8 *)(v1 + 40);\n      v7 = *(int *)(v1 + 36);\n      v8 = &v6[v7];\n      switch ( (_DWORD)this )\n      {\n        case 2:\n          this = v8[1];\n          v9 = this + (v6[v7] << 8);\n          break;\n        case 3:\n          this = (v8[1] << 8) + (*v8 << 16);\n          v9 = this + v8[2];\n          break;\n        case 1:\n          v9 = *v8;\n          break;\n        default:\n          this = (v8[1] << 16) + (*v8 << 24) + (v8[2] << 8);\n          v9 = this + v8[3];\n          break;\n      }\n      if ( v9 > v4 )\n        return this;\n      v10 = *(unsigned __int8 *)(v1 + 48);\n      v11 = *(int *)(v1 + 44);\n      v12 = &v6[v11];\n      switch ( v10 )\n      {\n        case 2:\n          v13 = v12[1] + (v6[v11] << 8);\n          break;\n        case 3:\n          v13 = (v12[1] << 8) + (*v12 << 16) + v12[2];\n          break;\n        case 1:\n          v13 = *v12;\n          break;\n        default:\n          v13 = (v12[1] << 16) + (*v12 << 24) + (v12[2] << 8) + v12[3];\n          break;\n      }\n      v14 = *(_DWORD *)(v1 + 28);\n      if ( v14 < 0 )\n      {\n        v17 = 0;\n      }\n      else\n      {\n        v15 = *(unsigned __int8 *)(v1 + 32);\n        v16 = &v6[v14];\n        switch ( v15 )\n        {\n          case 2:\n            v17 = v16[1] + (v6[v14] << 8);\n            break;\n          case 3:\n            v17 = (v16[1] << 8) + (*v16 << 16) + v16[2];\n            break;\n          case 1:\n            v17 = *v16;\n            break;\n          default:\n            v17 = (v16[1] << 16) + (*v16 << 24) + (v16[2] << 8) + v16[3];\n            break;\n        }\n      }\n      v18 = *(_DWORD *)(v1 + 52);\n      if ( v18 < 0 )\n      {\n        v36 = nullptr;\n        if ( v9 - v5 <= 0 )\n          goto LABEL_55;\nLABEL_57:\n        plt_TString_subString_int_int(&v38, v2, v5, v9);\nLABEL_58:\n        plt_TString_operator_assign_TString_const(&v36, &v38);\n        plt_TString_clear_void((TString *)&v38);\n        plt_TString_removeStart_int(v2, v9);\n        v24 = v36;\n        *(_DWORD *)(v1 + 80) -= v9;\n        if ( !v24 )\n        {\nLABEL_59:\n          v38 = 0;\n          plt_TString_operator_lshift_char_const((int)&v38, \"Received invalid data (2) from \");\n          v37 = 0;\n          plt_TString_operator_assign_TString_const(&v37, &v38);\n          plt_TString_operator_lshift_TString_const(&v37, v3 + 264);\n          plt_TLog_echo_TString_const_double_double_double_char_const(\n            (TLog *)&v37,\n            (const TString *)\"net\",\n            1.0,\n            0.0,\n            0.0,\n            v32);\n          plt_TString_clear_void((TString *)&v37);\n          plt_TString_clear_void((TString *)&v38);\n          *(_BYTE *)(v3 + 272) = 1;\n          return plt_TString_clear_void((TString *)&v36);\n        }\n        goto LABEL_33;\n      }\n      v19 = *(unsigned __int8 *)(v1 + 56);\n      v20 = &v6[v18];\n      switch ( v19 )\n      {\n        case 2:\n          v21 = v20[1];\n          break;\n        case 3:\n          v21 = v20[2];\n          break;\n        case 1:\n          v21 = *v20;\n          break;\n        default:\n          v21 = v20[3];\n          break;\n      }\n      v22 = (unsigned int)(v9 - v5);\n      v36 = nullptr;\n      if ( v9 - v5 <= 0 )\n      {\nLABEL_55:\n        plt_TString_removeStart_int(v2, v9);\n        *(_DWORD *)(v1 + 80) -= v9;\n        goto LABEL_34;\n      }\n      v23 = v21 & 0xF;\n      switch ( v23 )\n      {\n        case 1:\n          plt_TCompression_DecompressBuf_void_const_int_uchar_uint(\n            &v38,\n            (TCompression *)&v6[(unsigned __int8)v5],\n            (const void *)v22,\n            0,\n            nullptr,\n            (unsigned int)v6);\n          goto LABEL_58;\n        case 2:\n          plt_TCompression_DecompressBuf2_void_const_int_uchar_uint(\n            &v38,\n            (TCompression *)&v6[(unsigned __int8)v5],\n            (const void *)v22,\n            0,\n            nullptr,\n            (unsigned int)v6);\n          goto LABEL_58;\n        case 0:\n          goto LABEL_57;\n      }\n      plt_TString_removeStart_int(v2, v9);\n      v24 = v36;\n      *(_DWORD *)(v1 + 80) -= v9;\n      if ( !v24 )\n        goto LABEL_59;\nLABEL_33:\n      if ( *v24 <= 0 )\n        goto LABEL_59;\nLABEL_34:\n      v25 = *(_DWORD *)(v1 + 4);\n      if ( (v25 & 0x80000000) == 0 && v25 == v13 )\n      {\n        v38 = 0;\n        plt_TString_operator_assign_TString_const(&v38, v2);\n        v26 = *(_DWORD *)(v1 + 80);\n        v27 = *(unsigned __int8 *)(v1 + 64);\n        plt_TString_operator_assign_TString_const(v2, &v36);\n        v28 = (int)v36;\n        if ( v36 )\n          v28 = *v36;\n        *(_DWORD *)(v1 + 80) = v28;\n        plt_TGraalConnection_parseProtocol_NewGraal_void((TGraalConnection *)v3);\n        plt_TString_operator_assign_TString_const(v2, &v38);\n        *(_DWORD *)(v1 + 80) = v26;\n        if ( (*(_DWORD *)(v1 + 28) & 0x80000000) == 0\n          && !(unsigned __int8)plt_TGraalConnection_checkPacketID_uint((TGraalConnection *)v3, v17) )\n        {\n          plt_TString_clear_void((TString *)&v38);\n          return plt_TString_clear_void((TString *)&v36);\n        }\n        if ( *(unsigned __int8 *)(v1 + 64) != v27 )\n        {\n          *(_DWORD *)(v1 + 80) = 0;\n          plt_TGraalConnection_decryptIncoming_void((TGraalConnection *)v3);\n        }\n        plt_TString_clear_void((TString *)&v38);\n      }\n      else\n      {\n        if ( (*(_DWORD *)(v1 + 28) & 0x80000000) == 0\n          && !(unsigned __int8)plt_TGraalConnection_checkPacketID_uint((TGraalConnection *)v3, v17) )\n        {\n          return plt_TString_clear_void((TString *)&v36);\n        }\n        (*(void (__fastcall **)(__int64, _QWORD, int **))(*(_QWORD *)v3 + 304LL))(v3, v13, &v36);\n      }\n      if ( *(_BYTE *)(v3 + 272) )\n        return plt_TString_clear_void((TString *)&v36);\n      plt_TString_clear_void((TString *)&v36);\n      v4 = *(_DWORD *)(v1 + 80);\n    }\n  }\n  this = *(_QWORD *)(v3 + 304);\n  v33 = v4;\n  if ( this && *(int *)this > 0 && *(_BYTE *)(v1 + 64) == 2 && v4 > 0 && *(unsigned __int8 *)(this + 8) == 255 )\n  {\n    this += 9;\n    v34 = 0;\n    while ( ++v34 != v4 )\n    {\n      v35 = *(unsigned __int8 *)this++;\n      if ( v35 != 255 )\n      {\n        v33 = v34;\n        break;\n      }\n    }\n    if ( v33 )\n    {\n      plt_TString_removeStart_int(v2, v33);\n      this = *(unsigned int *)(v1 + 80);\n      *(_DWORD *)(v1 + 80) = this - v33;\n    }\n  }\n  return this;\n}\n",
+      "code_bytes": 8247,
+      "code_sha256": "4e715e6a2b8c89959a624910adedb8030a88d5e963f115b6f23a8d965e045291",
+      "function_end": "0x1fe940",
+      "function_start": "0x1fe31c",
+      "name": "TGraalConnection_parseProtocol_NewGraal_void",
+      "role": "NewGraal frame parser",
+      "string_literals": [
+        "\"Received invalid data (2) from \"",
+        "\"net\""
+      ]
+    },
+    {
+      "address": "0x1fe940",
+      "callers": [
+        {
+          "caller": "0xdb920",
+          "caller_name": "plt_TGraalConnection_read_void",
+          "callsite": "0xdb924"
+        },
+        {
+          "caller": "0xdb920",
+          "caller_name": "plt_TGraalConnection_read_void",
+          "callsite": "0xdb92c"
+        }
+      ],
+      "code": "__int64 __fastcall TGraalConnection_read_void(TGraalConnection *this)\n{\n  __int64 result; // x0\n  int *v3; // x0\n  int v4; // w21\n  int *v5; // x1\n  int v6; // w0\n  __int64 v7; // [xsp+28h] [xbp-8h] BYREF\n\n  result = *((_QWORD *)this + 32);\n  if ( result )\n  {\n    result = (unsigned __int8)plt_TSocketConnection_hasError_void((TSocketConnection *)result);\n    if ( !(_BYTE)result )\n    {\n      v3 = *((int **)this + 38);\n      v4 = 0;\n      if ( v3 )\n        v4 = *v3;\n      plt_TSocketConnection_read_void(&v7, *((TSocketConnection **)this + 32));\n      plt_TString_operator_lshift_TString_const((char *)this + 304, &v7);\n      plt_TString_clear_void((TString *)&v7);\n      v5 = *((int **)this + 38);\n      if ( !v5 )\n      {\n        *((_DWORD *)this + 84) -= v4;\n        goto LABEL_11;\n      }\n      *((_DWORD *)this + 84) += *v5 - v4;\n      if ( *v5 <= 0 )\n        goto LABEL_11;\n      v6 = *((_DWORD *)this + 69);\n      if ( v6 == 1 )\n      {\n        plt_TGraalConnection_decryptIncoming_void(this);\n        v6 = *((_DWORD *)this + 69);\n        if ( v6 )\n        {\nLABEL_9:\n          if ( v6 == 1 )\n            plt_TGraalConnection_parseProtocol_NewGraal_void(this);\nLABEL_11:\n          result = (unsigned __int8)plt_TSocketConnection_hasError_void(*((TSocketConnection **)this + 32));\n          if ( !(_BYTE)result )\n            return result;\n          return plt_TGraalConnection_printSocketError_void(this);\n        }\n      }\n      else if ( v6 )\n      {\n        goto LABEL_9;\n      }\n      plt_TGraalConnection_parseProtocol_OldGraal_void(this);\n      result = (unsigned __int8)plt_TSocketConnection_hasError_void(*((TSocketConnection **)this + 32));\n      if ( (_BYTE)result )\n        return plt_TGraalConnection_printSocketError_void(this);\n    }\n  }\n  return result;\n}\n",
+      "code_bytes": 1782,
+      "code_sha256": "4582abb157ecb783f4470bf66e80f1613618c87cdaa2e1ec2e6d920f2a6db39f",
+      "function_end": "0x1fea58",
+      "function_start": "0x1fe940",
+      "name": "TGraalConnection_read_void",
+      "role": "connection read and parse dispatch",
+      "string_literals": []
+    },
+    {
+      "address": "0x2074d4",
+      "callers": [
+        {
+          "caller": "0xd8330",
+          "caller_name": "plt_TSocketConnection_read_void",
+          "callsite": "0xd8334"
+        },
+        {
+          "caller": "0xd8330",
+          "caller_name": "plt_TSocketConnection_read_void",
+          "callsite": "0xd833c"
+        }
+      ],
+      "code": "_QWORD *__usercall TSocketConnection_read_void@<X0>(TSocketConnection *this@<X0>, _QWORD *a2@<X8>)\n{\n  int v4; // w0\n  char *v5; // x1\n  __int64 v6; // x0\n  int v7; // w19\n  int v8; // w1\n  char *v9; // x1\n  int v10; // w19\n  char *v12; // x0\n  unsigned int error; // w0\n  unsigned int v14; // w19\n  int v15; // w0\n  int v16; // w0\n  int v17; // w19\n  int v18; // w19\n  socklen_t v19; // [xsp+4Ch] [xbp-24h] BYREF\n  __int64 v20; // [xsp+50h] [xbp-20h] BYREF\n  __int64 v21; // [xsp+58h] [xbp-18h] BYREF\n  struct sockaddr v22; // [xsp+60h] [xbp-10h] BYREF\n\n  plt_TSocketConnection_checkConnecting_void(this);\n  if ( *(_DWORD *)this && (v4 = *((_DWORD *)this + 1), v4 != 4) && (v4 != 6 || *((_BYTE *)this + 8344)) )\n  {\n    v20 = 0;\nLABEL_5:\n    while ( 1 )\n    {\n      v5 = (char *)this + 36;\n      v6 = *((_QWORD *)this + 1029);\n      if ( v6 )\n        break;\nLABEL_9:\n      v9 = (char *)this + 36;\n      if ( *((_BYTE *)this + 8344) )\n      {\n        v15 = *(_DWORD *)this;\n        v19 = 16;\n        v16 = recvfrom(v15, v9, 0x2000u, 0, &v22, &v19);\n        v17 = v16;\n        if ( v16 > 0 )\n        {\n          plt_TString_addbuffer_char_const_int((TString *)&v20, (const char *)this + 36, v16);\n          data_TSocketConnection_gotbytes += v17;\n          plt_getIPString_uint(&v21, *(unsigned int *)&v22.sa_data[2]);\n          plt_TString_operator_assign_TString_const((char *)this + 24, &v21);\n          plt_TString_clear_void((TString *)&v21);\n          *((_DWORD *)this + 8) = (unsigned __int16)__rev16(*(unsigned __int16 *)v22.sa_data);\n        }\n        goto LABEL_18;\n      }\n      v10 = recv(*(_DWORD *)this, v9, 0x2000u, 0);\n      if ( v10 <= 0 )\n      {\n        if ( v10 == -1 )\n        {\n          v18 = *(_DWORD *)__errno(&v20);\n          if ( v18 != 90 && v18 != 11 && v18 != 4 )\n          {\n            v21 = 0;\n            plt_TString_operator_lshift_char_const((int)&v21, \"recv failed (returned -1): \");\n            *(_QWORD *)&v22.sa_family = 0;\n            plt_TString_operator_assign_TString_const(&v22, &v21);\n            plt_TString_operator_lshift_int(&v22);\n            plt_TString_operator_assign_TString_const((char *)this + 8320, &v22);\n            plt_TString_clear_void((TString *)&v22);\n            plt_TString_clear_void((TString *)&v21);\n            plt_TSocketConnection_closeSocket_void(this);\n          }\n          goto LABEL_18;\n        }\n        if ( !v10 )\n        {\n          plt_TSocketConnection_closeSocket_void(this);\n          *(_QWORD *)&v22.sa_family = 0;\n          plt_TString_operator_lshift_char_const((int)&v22, \"recv failed (returned 0)\");\n          v12 = (char *)this + 8320;\n          goto LABEL_17;\n        }\n      }\n      else\n      {\n        plt_TString_addbuffer_char_const_int((TString *)&v20, (const char *)this + 36, v10);\n        data_TSocketConnection_gotbytes += v10;\n      }\n    }\n    while ( 1 )\n    {\n      v7 = plt_CyaInt_CyaSSL_read_CyaInt_CYASSL_void_int(v6, v5, 0x2000);\n      if ( v7 <= 0 )\n        break;\n      plt_TString_addbuffer_char_const_int((TString *)&v20, (const char *)this + 36, v7);\n      v8 = *((unsigned __int8 *)this + 8280);\n      data_TSocketConnection_gotbytes += v7;\n      if ( v8 )\n        goto LABEL_5;\n      plt_TSocketConnection_printSSLCertificates_void(this);\n      v5 = (char *)this + 36;\n      v6 = *((_QWORD *)this + 1029);\n      if ( !v6 )\n        goto LABEL_9;\n    }\n    if ( !v7 )\n    {\n      plt_TSocketConnection_closeSocket_void(this);\n      *(_QWORD *)&v22.sa_family = 0;\n      plt_TString_operator_lshift_char_const((int)&v22, \"SSL read failed (returned 0)\");\n      v12 = (char *)this + 8320;\nLABEL_17:\n      plt_TString_operator_assign_TString_const(v12, &v22);\n      plt_TString_clear_void((TString *)&v22);\n      goto LABEL_18;\n    }\n    error = plt_CyaInt_CyaSSL_get_error_CyaInt_CYASSL_int(*((_QWORD *)this + 1029), (unsigned int)v7, (unsigned int)v7);\n    v14 = error;\n    if ( error && error != 6 && error - 2 > 1 )\n    {\n      if ( *((_BYTE *)this + 8328) )\n      {\n        plt_TSocketConnection_getIP_void((__int64 *)&v22, this);\n        if ( *(_QWORD *)&v22.sa_family )\n          plt_TLog_printf_char_const(\n            (TLog *)\"SSL read error from %s: %d\",\n            (const char *)(*(_QWORD *)&v22.sa_family + 8LL),\n            v14);\n        else\n          plt_TLog_printf_char_const((TLog *)\"SSL read error from %s: %d\", TString_dummystr, v14);\n        plt_TString_clear_void((TString *)&v22);\n      }\n      *((_DWORD *)this + 2078) = v14;\n      *(_QWORD *)&v22.sa_family = 0;\n      plt_TString_operator_lshift_char_const((int)&v22, \"SSL socket closed\");\n      plt_TString_operator_assign_TString_const((char *)this + 8320, &v22);\n      plt_TString_clear_void((TString *)&v22);\n      plt_TSocketConnection_closeSocket_void(this);\n    }\nLABEL_18:\n    *a2 = 0;\n    plt_TString_operator_assign_TString_const(a2, &v20);\n    plt_TString_clear_void((TString *)&v20);\n    return a2;\n  }\n  else\n  {\n    *a2 = 0;\n    return a2;\n  }\n}\n",
+      "code_bytes": 4946,
+      "code_sha256": "a4a95c0ece0fcee6c76419f4ae89829bbc01d8db5c3c23132dbd9a9993cfee47",
+      "function_end": "0x207868",
+      "function_start": "0x2074d4",
+      "name": "TSocketConnection_read_void",
+      "role": "plain or TLS socket read",
+      "string_literals": [
+        "\"SSL read error from %s: %d\"",
+        "\"SSL read failed (returned 0)\"",
+        "\"SSL socket closed\"",
+        "\"recv failed (returned -1): \"",
+        "\"recv failed (returned 0)\""
+      ]
+    },
+    {
+      "address": "0x1e7cd0",
+      "callers": [],
+      "code": "__int64 __fastcall TClient_parse_uchar_TString_const(TClient *this, unsigned __int8 a2, const TString *a3)\n{\n  __int64 (__fastcall *v3)(const TString *); // x3\n\n  v3 = (__int64 (__fastcall *)(const TString *))data_TClient_indatahandlers[a2];\n  if ( v3 == TClient_parseSetEncryptionIn_TString_const\n    || v3 == TClient_parseSetRawLen_TString_const\n    || v3 == TClient_parseSetPing_TString_const )\n  {\n    return v3(a3);\n  }\n  if ( client_thread_running )\n    return plt_addIncomingClientPackage_uchar_TString_const(a2, a3);\n  return plt_TClient_processIncomingPackage_int_TString_const(this, a2, a3);\n}\n",
+      "code_bytes": 604,
+      "code_sha256": "dec1dc96fd5d226ada2df38369246f5db224b9cbb74c5cee0b3546afd1fb9c47",
+      "function_end": "0x1e7d68",
+      "function_start": "0x1e7cd0",
+      "name": "TClient_parse_uchar_TString_const",
+      "role": "packet handler dispatch",
+      "string_literals": []
+    },
+    {
+      "address": "0x1e7c90",
+      "callers": [
+        {
+          "caller": "0xdc0c0",
+          "caller_name": "plt_TClient_processIncomingPackage_int_TString_const",
+          "callsite": "0xdc0c4"
+        },
+        {
+          "caller": "0xdc0c0",
+          "caller_name": "plt_TClient_processIncomingPackage_int_TString_const",
+          "callsite": "0xdc0cc"
+        }
+      ],
+      "code": "TClient *__fastcall TClient_processIncomingPackage_int_TString_const(TClient *this, int a2, const TString *a3)\n{\n  __int64 (__fastcall *v3)(const TString *); // x3\n\n  v3 = (__int64 (__fastcall *)(const TString *))data_TClient_indatahandlers[a2];\n  if ( v3 == (__int64 (__fastcall *)(const TString *))((char *)&dword_0 + 1) )\n    return (TClient *)plt_TClient_manageDataByScript_uchar_TString_const(this, a2, a3);\n  if ( v3 )\n    return (TClient *)v3(a3);\n  return this;\n}\n",
+      "code_bytes": 472,
+      "code_sha256": "b4f299d97d28f5711dad770b7621919f929c1045237b3cd4211f3037075c45a1",
+      "function_end": "0x1e7cd0",
+      "function_start": "0x1e7c90",
+      "name": "TClient_processIncomingPackage_int_TString_const",
+      "role": "queued packet dispatch",
+      "string_literals": []
+    },
+    {
+      "address": "0x1edf04",
+      "callers": [],
+      "code": "__int64 __fastcall sub_1EDF04(__int64 result)\n{\n  TGraalVar *v1; // x20\n  __int64 v2; // [xsp+28h] [xbp-8h] BYREF\n\n  if ( *(_QWORD *)result && **(int **)result > 0 )\n  {\n    result = (unsigned int)(unsigned __int8)plt_TString_operator_index_int(result, 1) - 32;\n    v1 = (TGraalVar *)data_TGameEnvironment_universe;\n    data_TClient_serversignature = result;\n    if ( data_TGameEnvironment_universe )\n    {\n      v2 = 0;\n      plt_TString_operator_lshift_char_const((int)&v2, \"onServerLogin\");\n      plt_TGraalVar_invokeEvent_TString_const(v1, (const TString *)&v2);\n      return plt_TString_clear_void((TString *)&v2);\n    }\n  }\n  return result;\n}\n",
+      "code_bytes": 649,
+      "code_sha256": "c4180e3522547cfad44513c859eda5e4085976240c2bfc4e4d64254d4dd8a7e9",
+      "function_end": "0x1edf8c",
+      "function_start": "0x1edf04",
+      "name": "TClient_handleServerLoginPacket",
+      "role": "packet-54 server login event",
+      "string_literals": [
+        "\"onServerLogin\""
+      ]
+    },
+    {
+      "address": "0x1e97dc",
+      "callers": [],
+      "code": "__int64 __fastcall sub_1E97DC(__int64 result)\n{\n  TGraalVar *v1; // x20\n  __int64 v2; // [xsp+28h] [xbp-8h] BYREF\n\n  v1 = (TGraalVar *)data_TGameEnvironment_universe;\n  data_TClient_serversignature = result;\n  if ( data_TGameEnvironment_universe )\n  {\n    v2 = 0;\n    plt_TString_operator_lshift_char_const((int)&v2, \"onServerLogin\");\n    plt_TGraalVar_invokeEvent_TString_const(v1, (const TString *)&v2);\n    return plt_TString_clear_void((TString *)&v2);\n  }\n  return result;\n}\n",
+      "code_bytes": 480,
+      "code_sha256": "70a380a9340d567d7c902bf4cfaf59cf31cbf905c2f1c588f520b46deb86ee0b",
+      "function_end": "0x1e9840",
+      "function_start": "0x1e97dc",
+      "name": "TClient_handleServerLoginSignature",
+      "role": "script server-login event setter",
+      "string_literals": [
+        "\"onServerLogin\""
+      ]
+    },
+    {
+      "address": "0x1eba28",
+      "callers": [],
+      "code": "__int64 __fastcall sub_1EBA28(TString *a1, TString *a2, TString *a3)\n{\n  __int64 result; // x0\n\n  result = data_TClient_client;\n  if ( data_TClient_client )\n    return plt_TGraalConnection_setEncryptionIn_TString_const_TString_const_TString_const(\n             (TGraalConnection *)data_TClient_client,\n             a1,\n             a2,\n             a3);\n  return result;\n}\n",
+      "code_bytes": 373,
+      "code_sha256": "8dbd3ca62004475b2fb06e99361958e26bd23d6af8e6ea1ea4961dddd8556ea1",
+      "function_end": "0x1eba54",
+      "function_start": "0x1eba28",
+      "name": "TClient_setEncryptionIn",
+      "role": "script-facing incoming cipher bridge",
+      "string_literals": []
+    }
+  ],
+  "interpretation": [
+    "Connector HTTPS trust and game-socket trust are separate boundaries in this APK.",
+    "The local handshake responder is useful for protocol study, but it does not prove live account authentication or current server compatibility."
+  ],
+  "manual_reviews": [
+    {
+      "address": "0x1fca6c",
+      "classification": "framed-protocol-header",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The setup function identifies the six-character EILLLT header layout.",
+        "It records the positions and widths of I, L, and T, caps each discovered width at four bytes, and initializes the packet sequence state.",
+        "The L field is a three-byte length in the stock NewGraal string, while T is the packet type at the end of the six-byte header."
+      ],
+      "interpretation": "The parser is length-framed and its header metadata is selected from the protocol string rather than hard-coded in the read loop."
+    },
+    {
+      "address": "0x1fe0b4",
+      "classification": "server-cipher-setup",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The function copies the setup payload, optionally DES-decrypts it with the configured parse key, and passes the result to the RSA decrypt helper.",
+        "It removes the leading mode byte and parses two length-prefixed text fields before selecting RC4 for mode one, AES for mode two, or no cipher for other values.",
+        "The path calls setEncryptionIn and does not call the package RSA signature verifier."
+      ],
+      "interpretation": "The packet-252 or 0xfc setup is a key-unwrapping and cipher-selection path. Its RSA operation is distinct from signed connector-package verification."
+    },
+    {
+      "address": "0xf7340",
+      "classification": "client-held-rsa-private-material",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The helper decodes a supplied RSA private key and calls CyaInt_RsaPrivateDecrypt on the incoming ciphertext.",
+        "It allocates a temporary input copy, bounds the decoded result against a local output buffer, clears the temporary input, and frees it.",
+        "The parse-key input is supplied by the preceding game cipher setup path, which is fed from connector script material."
+      ],
+      "interpretation": "The RSA unwrap is not a public-key trust anchor. A private key used by the client is recoverable from the client-side trust material, so the design should not be treated as peer authentication without an independent authenticated transport or signature check."
+    },
+    {
+      "address": "0x1fdfd0",
+      "classification": "incoming-cipher-state",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The function clears the previous incoming key, creates an RC4 or AES context, resets the processed-byte counter, and immediately decrypts buffered input.",
+        "RC4 uses the first key string. AES uses the key and IV strings and retains the cipher type in the connection object."
+      ],
+      "interpretation": "Cipher state is directional and persistent across the receive buffer. Reinitializing RC4 for each frame will not reproduce the client."
+    },
+    {
+      "address": "0x1fd6b4",
+      "classification": "outgoing-cipher-state",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "Pending outgoing data is sent before the old key is cleared.",
+        "The function then selects RC4 or AES and creates a new outgoing context."
+      ],
+      "interpretation": "Changing the outgoing key is a state transition with a flush boundary, not a per-packet option."
+    },
+    {
+      "address": "0x1fdeec",
+      "classification": "stream-decryption",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "RC4 decrypts every currently buffered byte and advances the processed-byte count.",
+        "AES truncates the available input to complete 16-byte blocks before decrypting.",
+        "When no cipher is active, the connection still updates its processed-byte position from the buffer state."
+      ],
+      "interpretation": "The receive parser can retain a partial AES block until more bytes arrive. A malformed peer can therefore hold parser state without producing a complete frame."
+    },
+    {
+      "address": "0x1fcd58",
+      "classification": "sequence-order-check",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The check accepts the first packet without a prior sequence value.",
+        "Later values must equal the previous value plus one masked to the configured sequence width.",
+        "A mismatch logs invalid data, sets the connection error flag, and rejects the packet."
+      ],
+      "interpretation": "Sequence checking provides ordering and replay resistance within the connection state, but it is not a cryptographic authenticity check."
+    },
+    {
+      "address": "0x1fe31c",
+      "classification": "framed-input-parser",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The parser waits until the declared frame length is present before consuming a frame.",
+        "It handles uncompressed input, two decompression modes, packet sequence validation, and a special 0xff prefix used by the compressed stream path.",
+        "Invalid extraction or sequence state sets the connection error flag and logs an invalid-data message.",
+        "The reviewed code has no explicit application cap below the three-byte protocol length field."
+      ],
+      "interpretation": "A peer can advertise a frame up to the protocol's 24-bit length range and make the client retain input while it waits for the remaining bytes. This is a plausible availability risk that still needs a bounded local fuzz test."
+    },
+    {
+      "address": "0x1fe940",
+      "classification": "read-to-parser-bridge",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The function reads from TSocketConnection, appends the returned bytes to the connection buffer, and enters decryption and protocol parsing when data is available.",
+        "The byte counter is adjusted against the previous buffer length, and both NewGraal and the older protocol parser are selected from the connection state."
+      ],
+      "interpretation": "The stream buffer is fed directly into the framing parser. There is no visible independent byte-budget check at this bridge."
+    },
+    {
+      "address": "0x2074d4",
+      "classification": "socket-read-boundary",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "Plain sockets use recv with an 8192-byte temporary buffer; TLS sockets use repeated CyaSSL_read calls with the same limit.",
+        "EAGAIN, EINTR, and the platform-specific nonblocking error are treated as no new data, while other failures close the socket.",
+        "The bytes are appended to a TString returned to the caller, with no visible total receive-buffer cap here."
+      ],
+      "interpretation": "The transport read size is bounded per call, but the accumulated protocol buffer is governed by higher-level framing and can grow until a frame completes or the socket fails."
+    },
+    {
+      "address": "0x1e7cd0",
+      "classification": "packet-dispatch-boundary",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The handler table is indexed by the wire packet type.",
+        "The encryption-setup, raw-length, and ping handlers execute immediately, while ordinary packets enter the client queue when the network thread is running."
+      ],
+      "interpretation": "The key-setup packet is deliberately outside the ordinary queued path, which explains why a correct 0xfc response must arrive before normal encrypted packets."
+    },
+    {
+      "address": "0x1edf04",
+      "classification": "server-login-event",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The handler for packet type 54 decodes the first body byte by subtracting the text offset and stores it in TClient::serversignature.",
+        "It invokes the onServerLogin event after storing the value.",
+        "The ARM64 handler table maps packet type 54 to handler index 10 and this function."
+      ],
+      "interpretation": "Packet 54 is a state transition into script-side login completion. It is not itself a TLS certificate or RSA signature verification step."
+    },
+    {
+      "address": "0x1e97dc",
+      "classification": "script-login-signature-setter",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The function stores its incoming value in TClient::serversignature and invokes onServerLogin.",
+        "The script-table inventory identifies the function as the tclient_setserversignature callback."
+      ],
+      "interpretation": "The script-facing setter and the packet-54 handler converge on the same event, but the integer server signature is a protocol identity value rather than proof of peer authenticity."
+    }
+  ],
+  "network_contacted": false,
+  "packet_mapping": {
+    "encryption_setup_type": "0xfc",
+    "header_layout": "EILLLT",
+    "sequence_first_server_value": 0,
+    "server_login_handler": "0x1edf04",
+    "server_login_handler_index": 10,
+    "server_login_type": 54
+  },
+  "redactions": {
+    "count": 2,
+    "policy": "Fixed key-like literals are replaced before public export. No raw private key or credential is included."
+  },
+  "schema": "libqplay.original-game-login-review.v1",
+  "scope": "read-only Hex-Rays export of original 1.8 NewGraal login and framing functions",
+  "security_findings": [
+    {
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The recovered Classic connector script sets usessl=false and guards the setSSLParameters call.",
+        "The native connection path can configure CyaSSL, but it only starts that path when the per-socket SSL flag is enabled.",
+        "The normal game sequence therefore proceeds over the NewGraal socket without the connector's HTTPS trust buffer."
+      ],
+      "id": "GAME-LOGIN-001",
+      "impact": "A repair should not assume that fixing the expired connector certificate also authenticates the game socket. A hostile network could observe or alter the legacy game transport unless an independently verified current server path provides authentication.",
+      "limits": "This is a static result for the recovered Classic branch. It does not claim that every modified script or later client revision has the same setting, and no live endpoint was contacted.",
+      "severity": "high",
+      "title": "Stock Classic leaves the game socket outside TLS"
+    },
+    {
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The game setup parser optionally DES-decrypts its input with a fixed parse key and calls TEncryption_rsa_decrypt.",
+        "TEncryption_rsa_decrypt decodes a supplied RSA private key and calls CyaInt_RsaPrivateDecrypt.",
+        "The reviewed setup path does not call TEncryption_rsa_verify, and sequence numbers only enforce order after setup."
+      ],
+      "id": "GAME-LOGIN-002",
+      "impact": "The embedded private-key material is not a server identity anchor. If the legacy transport is intercepted, an attacker who can reproduce the client-side key material may be able to substitute session setup values. A modern repair should use authenticated server key exchange or TLS with current trust material.",
+      "limits": "The full server-side protocol and any checks in code outside this path were not exercised. This finding is a design weakness and a review target, not a claim of a demonstrated remote exploit.",
+      "severity": "high",
+      "title": "The client performs RSA private-key unwrap with client-held material"
+    },
+    {
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The NewGraal length field is three bytes and the parser waits for the declared length.",
+        "Socket reads append into the connection TString, and the selected bridge has no independent total-buffer limit."
+      ],
+      "id": "GAME-LOGIN-003",
+      "impact": "A peer can consume memory or stall the protocol parser by declaring a large incomplete frame. The reachable impact depends on whether an untrusted peer can reach the game socket and should be tested only with a local bounded harness.",
+      "limits": "The static pass did not execute a malformed-frame probe and does not establish a practical network reachability path in stock operation.",
+      "severity": "medium",
+      "title": "Framed input has no visible sub-24-bit receive cap"
+    }
+  ]
+}

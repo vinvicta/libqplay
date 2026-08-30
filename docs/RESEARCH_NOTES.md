@@ -231,6 +231,39 @@ APK. That lets the local server decode the client's login envelope without
 implementing the server's private RSA path. The key is not a real account
 credential and is not included in this repository.
 
+## Game login and framing review
+
+The next pass followed the bytes between the first game connection and the
+`onServerLogin` event. The compact export is
+`artifacts/original_game_login_review_20260830.json`. It covers the NewGraal
+header setup, the type-252 encryption setup path, RSA unwrap, both directional
+cipher states, sequence checks, socket reads, dispatch, and the type-54 login
+handler.
+
+The native code configures the framing string as `EILLLT`. The parser waits for
+the three-byte length field to be present, optionally removes the two legacy
+compression forms, verifies the sequence value, and then dispatches the
+packet. The special encryption-setup handler runs immediately instead of
+entering the network-thread queue. Packet 54 is mapped to handler index 10.
+Its handler subtracts the text offset from the first body byte, stores the
+result as `serversignature`, and invokes `onServerLogin`.
+
+The setup path is important for the original connection failure question. It
+optionally DES-decrypts the input, then uses a helper that decodes a private
+RSA key supplied by the client-side trust material and calls private-key
+decrypt. The resulting mode selects RC4 or AES. RC4 state is continuous
+across frames; AES holds back incomplete 16-byte blocks. This is a
+cryptographic envelope, not proof of server identity. The recovered Classic
+branch leaves game-socket TLS disabled, and the setup path does not call the
+separate package RSA signature verifier.
+
+The same review found an availability boundary. Reads use an 8192-byte
+temporary buffer, but the accumulated protocol string has no visible smaller
+limit than the 24-bit frame-length field. A peer can therefore advertise a
+large incomplete frame and keep the parser waiting. This remains a static,
+local-harness test target, not a live-service result. Fixed key-like literals
+were redacted from the public export.
+
 ## Server warp and packet mapping
 
 The connector script selected a login host and port. To keep the test local,
