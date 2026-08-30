@@ -135,6 +135,37 @@ functions are exported directly from the active ARM64 IDA database by
 `tools/ida_export_original_android_lifecycle_review.py`; the Java observations
 were checked against the original DEX smali kept outside the public repository.
 
+## Android custom-scheme launch path
+
+The Android manifest registers `graalclassic` and `graalclassicplus` as
+browsable schemes for `QPlayActivity`. This is a real external entrypoint
+because the activity has intent filters and no explicit `exported` attribute.
+The Java renderer does not parse the incoming URI. It checks that the current
+intent has a scheme and data, converts the data URI to a string, and passes the
+full value to `QPlayMain`.
+
+The native wrapper calls `TServerList_setProtocolString` for a nonempty URI and
+then invokes the script event `onStartedWithURL` with the original string. The
+parser strips only `graal://` and `graal3://`. For those forms it splits a
+slash-delimited connection and parameter value. For an accepted Android URI
+such as `graalclassic://host/path`, the parser sees the internal `://` marker
+before it has removed anything. It stores the full value in
+`serverstartparams` and leaves `serverstartconnect` empty. Those two globals
+are exposed through script getters and setters.
+
+This gives two useful conclusions. First, a deep link can open the app without
+starting the intended server because the Java and native scheme grammars do
+not agree. Second, the exported activity forwards unvalidated launch data into
+script code. If the core startup scripts use that data to make a connection,
+an external caller could influence the destination. The core consumer was not
+fully recovered and no external intent was sent, so the latter remains a
+conditional capability rather than a proven SSRF or code-execution issue.
+
+The focused IDA export is in
+`artifacts/original_intent_launch_review_20260830.json`. It includes the URI
+parser and the script-field accessors without publishing the missing core
+script or any live destination.
+
 ## Credential and local-option storage
 
 The credential pass follows the native option object rather than assuming

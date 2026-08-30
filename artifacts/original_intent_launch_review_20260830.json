@@ -1,0 +1,191 @@
+{
+  "android_entrypoint": {
+    "accepted_schemes": [
+      "graalclassic",
+      "graalclassicplus"
+    ],
+    "activity": "com.quattroplay.GraalClassic.QPlayActivity",
+    "native_event": "onStartedWithURL",
+    "native_parser_prefixes": [
+      "graal://",
+      "graal3://"
+    ],
+    "script_fields": [
+      "serverstartconnect",
+      "serverstartparams"
+    ]
+  },
+  "artifact": "original_intent_launch_review_20260830",
+  "database": {
+    "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "imagebase": "0x0",
+    "path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
+  },
+  "external_intent_sent": false,
+  "findings": [
+    {
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The Android manifest accepts graalclassic:// and graalclassicplus://.",
+        "The renderer passes the complete incoming URI to QPlayMain.",
+        "TServerList_setProtocolString strips only graal:// and graal3:// before splitting the value."
+      ],
+      "id": "URI-001",
+      "impact": "A launch URI that Android accepts may not populate serverstartconnect and serverstartparams in the form expected by the native graal:// path. This can prevent a deep-link start or make it appear to be a connector failure even though the normal launcher path is unrelated.",
+      "limits": "The core startup script that consumes onStartedWithURL was not fully recovered in this pass. The mismatch is confirmed, but the exact user-visible behavior for every URI shape remains a script and runtime question.",
+      "severity": "medium",
+      "title": "Android deep-link schemes do not match the native prefix normalizer"
+    },
+    {
+      "confidence": "conditional-capability",
+      "evidence": [
+        "The activity is externally launchable through browsable custom schemes and does not constrain a host or path.",
+        "QPlayMain forwards the URI to onStartedWithURL and the native parser writes script-visible start fields.",
+        "The reviewed native path shows no destination allowlist or canonical host validation at this boundary."
+      ],
+      "id": "URI-002",
+      "impact": "If the installed startup scripts use the event or start fields to open a server connection or HTTP request, another application may be able to make this client contact an attacker-selected destination. A modern repair should validate the scheme, host, port, and parameter grammar before any network action.",
+      "limits": "The core script consumer and a real external-app launch were not tested. This is not a proven SSRF, credential leak, or remote code execution path.",
+      "severity": "medium",
+      "title": "An exported activity forwards unvalidated deep-link data into script-visible start state"
+    }
+  ],
+  "functions": [
+    {
+      "address": "0x202c64",
+      "callers": [
+        {
+          "caller": "0xdb220",
+          "caller_name": "plt_TServerList_setProtocolString_TString_const",
+          "callsite": "0xdb224"
+        },
+        {
+          "caller": "0xdb220",
+          "caller_name": "plt_TServerList_setProtocolString_TString_const",
+          "callsite": "0xdb22c"
+        }
+      ],
+      "code": "__int64 __fastcall TServerList_setProtocolString_TString_const(TServerList *this, const TString *a2)\n{\n  int v2; // w21\n  int v3; // w21\n  __int64 v4; // x21\n  int v6; // w21\n  int v7; // w22\n  __int64 v8; // x23\n  int v9; // w0\n  __int64 v10; // x21\n  int *v11; // [xsp+48h] [xbp-18h] BYREF\n  __int64 v12; // [xsp+50h] [xbp-10h] BYREF\n  __int64 v13; // [xsp+58h] [xbp-8h] BYREF\n\n  v11 = nullptr;\n  plt_TString_operator_assign_TString_const(&v11, this);\n  v13 = 0;\n  plt_TString_operator_lshift_char_const((int)&v13, \"graal://\");\n  v2 = (unsigned __int8)plt_TString_starts_TString_const((TString *)&v11, (const TString *)&v13);\n  plt_TString_clear_void((TString *)&v13);\n  if ( v2 )\n  {\n    plt_TString_removeStart_int((TString *)&v11, 8);\n  }\n  else\n  {\n    v13 = 0;\n    plt_TString_operator_lshift_char_const((int)&v13, \"graal3://\");\n    v6 = (unsigned __int8)plt_TString_starts_TString_const((TString *)&v11, (const TString *)&v13);\n    plt_TString_clear_void((TString *)&v13);\n    if ( v6 )\n      plt_TString_removeStart_int((TString *)&v11, 9);\n  }\n  v13 = 0;\n  plt_TString_operator_lshift_char_const((int)&v13, (char *)&off_2CDAE0);\n  v3 = plt_TString_indexOf_TString_const((TString *)&v11, (const TString *)&v13);\n  plt_TString_clear_void((TString *)&v13);\n  if ( v3 < 0 )\n  {\n    v13 = 0;\n    plt_TString_operator_lshift_char_const((int)&v13, (char *)&word_2D8820);\n    v7 = plt_TString_indexOf_TString_const((TString *)&v11, (const TString *)&v13);\n    plt_TString_clear_void((TString *)&v13);\n    if ( v7 + 1 <= 0 )\n    {\n      v13 = 0;\n      v10 = data_TServerList_serverstartparams;\n      plt_TString_operator_lshift_char_const((int)&v13, &byte_2DCE08);\n      plt_TString_operator_assign_TString_const(v10, &v13);\n      plt_TString_clear_void((TString *)&v13);\n    }\n    else\n    {\n      v8 = data_TServerList_serverstartparams;\n      if ( v11 )\n        v9 = *v11;\n      else\n        v9 = 0;\n      plt_TString_subString_int_int(&v12, (TString *)&v11, v7 + 1, v9);\n      plt_TString_trim_void(&v13, (TString *)&v12);\n      plt_TString_operator_assign_TString_const(v8, &v13);\n      plt_TString_clear_void((TString *)&v13);\n      plt_TString_clear_void((TString *)&v12);\n      plt_TString_subString_int_int(&v13, (TString *)&v11, 0, v7);\n      plt_TString_operator_assign_TString_const(&v11, &v13);\n      plt_TString_clear_void((TString *)&v13);\n    }\n    v4 = data_TServerList_serverstartconnect;\n    plt_TString_trim_void(&v13, (TString *)&v11);\n  }\n  else\n  {\n    plt_TString_operator_assign_TString_const(data_TServerList_serverstartparams, &v11);\n    v13 = 0;\n    v4 = data_TServerList_serverstartconnect;\n    plt_TString_operator_lshift_char_const((int)&v13, &byte_2DCE08);\n  }\n  plt_TString_operator_assign_TString_const(v4, &v13);\n  plt_TString_clear_void((TString *)&v13);\n  return plt_TString_clear_void((TString *)&v11);\n}\n",
+      "code_bytes": 2844,
+      "code_sha256": "6105e2abfe6564fc18a926d86c49dcbd0cd321c4c38dab18fa6defa40e29d773",
+      "function_end": "0x202ec0",
+      "function_start": "0x202c64",
+      "name": "TServerList_setProtocolString_TString_const",
+      "role": "incoming URI parser"
+    },
+    {
+      "address": "0x202a78",
+      "callers": [],
+      "code": "// Inferred semantic label: assigns the supplied string to data_TServerList_serverstartparams.\n__int64 __fastcall sub_202A78(__int64 a1)\n{\n  return plt_TString_operator_assign_TString_const(data_TServerList_serverstartparams, a1);\n}\n",
+      "code_bytes": 233,
+      "code_sha256": "0150eac2e8ed7b8e17fe79995b1e4533dee84e6e2aae1e0a675043f87865e3c8",
+      "function_end": "0x202a8c",
+      "function_start": "0x202a78",
+      "name": "TServerList_setServerStartParams",
+      "role": "script-visible start parameters setter"
+    },
+    {
+      "address": "0x202a8c",
+      "callers": [],
+      "code": "// Inferred semantic label: assigns the supplied string to data_TServerList_serverstartconnect.\n__int64 __fastcall sub_202A8C(__int64 a1)\n{\n  return plt_TString_operator_assign_TString_const(data_TServerList_serverstartconnect, a1);\n}\n",
+      "code_bytes": 235,
+      "code_sha256": "53a7a552605805833151bfe1873c3bcd87ab48e42226c12c47d0de995e0c3d7c",
+      "function_end": "0x202aa0",
+      "function_start": "0x202a8c",
+      "name": "TServerList_setServerStartConnect",
+      "role": "script-visible start destination setter"
+    },
+    {
+      "address": "0x202aa0",
+      "callers": [],
+      "code": "// Inferred semantic label: returns a copy of data_TServerList_serverstartparams.\n_QWORD *__usercall sub_202AA0@<X0>(_QWORD *a1@<X8>)\n{\n  __int64 v1; // x1\n\n  v1 = data_TServerList_serverstartparams;\n  *a1 = 0;\n  plt_TString_operator_assign_TString_const(a1, v1);\n  return a1;\n}\n",
+      "code_bytes": 279,
+      "code_sha256": "6f357dbaeca0434e3588f4ac2093a51748543309d48263a7f68c6d8f9527ca24",
+      "function_end": "0x202ad8",
+      "function_start": "0x202aa0",
+      "name": "TServerList_getServerStartParams",
+      "role": "script-visible start parameters getter"
+    },
+    {
+      "address": "0x202ad8",
+      "callers": [],
+      "code": "// Inferred semantic label: returns a copy of data_TServerList_serverstartconnect.\n_QWORD *__usercall sub_202AD8@<X0>(_QWORD *a1@<X8>)\n{\n  __int64 v1; // x1\n\n  v1 = data_TServerList_serverstartconnect;\n  *a1 = 0;\n  plt_TString_operator_assign_TString_const(a1, v1);\n  return a1;\n}\n",
+      "code_bytes": 281,
+      "code_sha256": "e4584dfa7936bfd7ebf7b9739460a1bc4ef70ad32dcb9791c89dd95ddd84e56d",
+      "function_end": "0x202b10",
+      "function_start": "0x202ad8",
+      "name": "TServerList_getServerStartConnect",
+      "role": "script-visible start destination getter"
+    }
+  ],
+  "interpretation": [
+    "The ordinary launcher has no data URI and follows TServerList_login; the custom-scheme path is a separate input path.",
+    "The confirmed scheme mismatch is a compatibility lead. The destination-control concern remains conditional until the core startup script is recovered or a bounded external-intent test is authorized."
+  ],
+  "network_contacted": false,
+  "observations": [
+    {
+      "classification": "exported-custom-scheme-entrypoint",
+      "component": "AndroidManifest.xml",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The launcher activity has VIEW and BROWSABLE filters for the graalclassic and graalclassicplus schemes.",
+        "The activity omits an explicit exported attribute, so the old component rules infer it as externally launchable because it has intent filters."
+      ],
+      "interpretation": "Another application can supply a custom-scheme launch URI to the old activity. The manifest does not constrain the host or path because neither filter declares one.",
+      "method": "QPlayActivity intent filters",
+      "source_line": null
+    },
+    {
+      "classification": "intent-forwarding",
+      "component": "com.quattroplay.GraalClassic.QPlayRenderer",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The renderer reads the current Activity intent, checks for a scheme and data URI, converts the data to a string, and passes it as the final QPlayMain argument.",
+        "The renderer does not normalize the Android graalclassic or graalclassicplus scheme before passing the string to native code."
+      ],
+      "interpretation": "The native startup wrapper receives the complete incoming URI rather than a validated host, path, or parameter structure.",
+      "method": "loadLibrary()",
+      "source_line": 173
+    },
+    {
+      "classification": "native-start-event",
+      "component": "Java_com_quattroplay_GraalClassic_Natives_QPlayMain",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The JNI wrapper converts the final Java string to a native TString.",
+        "For a nonempty value it calls TServerList_setProtocolString and then invokes the universe event onStartedWithURL with the original string payload."
+      ],
+      "interpretation": "A deep link reaches both native start-state fields and a script event before ordinary connector login is selected.",
+      "method": "QPlayMain",
+      "source_line": null
+    },
+    {
+      "classification": "scheme-and-path-parser",
+      "component": "TServerList_setProtocolString_TString_const",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The parser strips graal:// or graal3:// when those prefixes are present.",
+        "It searches for :// and otherwise uses / to split a start connection value from start parameters.",
+        "It writes the resulting values to the script-visible serverstartconnect and serverstartparams globals."
+      ],
+      "interpretation": "The Android-registered graalclassic:// prefix is not one of the prefixes removed by this native parser. It reaches the parser and the event, but does not follow the same split as the native graal:// form.",
+      "method": "setProtocolString",
+      "source_line": null
+    },
+    {
+      "classification": "script-visible-start-state",
+      "component": "TServerList script table",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The script inventory maps getters and setters for both serverstartconnect and serverstartparams.",
+        "The native URI parser writes those same globals before the onStartedWithURL event is invoked."
+      ],
+      "interpretation": "Any activated script that reads these properties can observe the incoming launch data, and a script with the setters can change the values later.",
+      "method": "serverstartconnect and serverstartparams",
+      "source_line": null
+    }
+  ],
+  "schema": "libqplay.original-intent-launch-review.v1",
+  "scope": "read-only review of original 1.8 Android custom-scheme launch handling and ARM64 server-start URI parsing"
+}

@@ -64,6 +64,13 @@ permission state can therefore make the app look offline before any TLS code
 has run. The native Java bridge and ARM64 JNI evidence are in
 `artifacts/original_android_lifecycle_review_20260830.json`.
 
+The incoming deep-link path has a separate mismatch. Android accepts
+`graalclassic://` and `graalclassicplus://`, while the native start parser only
+normalizes `graal://` and `graal3://`. The full URI is also delivered to the
+script event `onStartedWithURL`. This is now documented as a compatibility lead
+and a conditional destination-control concern in
+`artifacts/original_intent_launch_review_20260830.json`.
+
 ## Repository layout
 
 * `docs/RESEARCH_NOTES.md` is the chronological investigation record.
@@ -111,6 +118,8 @@ has run. The native Java bridge and ARM64 JNI evidence are in
   boundaries. It is a static review and contains no fuzzing results.
 * `artifacts/original_android_lifecycle_review_20260830.json` records the
   Activity, GLThread, renderer, and ARM64 JNI startup and pause boundaries.
+* `artifacts/original_intent_launch_review_20260830.json` records the Android
+  custom-scheme entrypoint, native URI parser, and script-visible start fields.
 * `artifacts/ida_translation_verification_20260830.json` records the final
   packed IDA copy, pass counts, hashes, and zero-failure verification result.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.

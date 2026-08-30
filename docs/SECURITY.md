@@ -142,6 +142,30 @@ causes process exit. The native initialization result is also ignored by the
 Java renderer, which can mark the library loaded after a partial initialization
 and make later failures harder to classify.
 
+### Custom-scheme launch input
+
+The launcher activity is effectively exported under the old Android rules and
+accepts browsable `graalclassic://` and `graalclassicplus://` intents. The
+renderer forwards the full incoming data URI to native code, where it reaches
+`onStartedWithURL` and the script-visible `serverstartconnect` and
+`serverstartparams` fields. The native boundary shows no destination allowlist
+or canonical host validation.
+
+There is a confirmed compatibility defect here: the Android schemes are not
+the same prefixes that `TServerList_setProtocolString` removes. A
+`graalclassic://host/path` URI therefore does not follow the same split as a
+`graal://host/path` URI. The result can be a deep-link startup failure, not a
+TLS failure.
+
+The destination-control risk is conditional rather than proven. If the
+activated startup scripts use the event or fields to initiate an HTTP request
+or game connection, another application could supply an attacker-selected
+destination. The core script consumer and an external-app launch were not
+tested, so this is not claimed as a demonstrated SSRF, credential leak, or
+remote code execution path. A repair should use a strict allowlist or a
+validated server descriptor before any network action. The machine-readable
+review is `artifacts/original_intent_launch_review_20260830.json`.
+
 ## WebView and Java bridge
 
 The DEX string inventory finds `WebView`, `setJavaScriptEnabled`,
