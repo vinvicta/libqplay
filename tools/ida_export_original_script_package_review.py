@@ -163,9 +163,14 @@ def redact_literal(match: re.Match[str], redactions: list[dict]) -> str:
     quoted = match.group(0)
     content = quoted[1:-1]
     decoded = content.replace(r'\\', "\\").replace(r'\"', '"')
+    looks_like_base64 = re.fullmatch(r"[A-Za-z0-9+/=_-]+", decoded) is not None
     should_redact = decoded in SENSITIVE_SHORT_LITERALS or (
-        len(decoded) >= 80
-        and re.fullmatch(r"[A-Za-z0-9+/=_-]+", decoded) is not None
+        looks_like_base64
+        and len(decoded) >= 80
+    ) or (
+        looks_like_base64
+        and len(decoded) >= 16
+        and any(character in decoded for character in "+/=")
     )
     if not should_redact:
         return quoted
