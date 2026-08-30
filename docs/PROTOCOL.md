@@ -454,6 +454,12 @@ production peer untrusted. The connector and game sockets must first pass the
 client's trust and protocol checks, and this repository's runtime proof uses a
 loopback responder only.
 
+Image resources use the same packet-102 cache path. After a resource is saved,
+the extension selects the native PNG, GIF, JPEG, BMP, or TGA reader. The image
+parser review records the dimensions and accumulated-data boundaries at
+`artifacts/original_image_parser_review_20260830.json`; it is static and was
+not fuzzed.
+
 ## 10. Local trace
 
 The final bounded replay used the original no-swap handler table and two game
