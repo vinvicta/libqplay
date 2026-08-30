@@ -1,0 +1,14 @@
+{
+  "anchor_count": 509,
+  "artifact": "spectron_existing_v18_alias_reconciliation_verification",
+  "database_changed": false,
+  "expected_artifact": "spectron_existing_v18_alias_reconciliation_20260829",
+  "failure_count": 0,
+  "failures": [],
+  "function_count": 11707,
+  "input_feature_sha256": "46ec138a8ab7ad1d21a6a92d1d033e1173006be779c6b515c07f87173838366c",
+  "network_contacted": false,
+  "schema_version": 1,
+  "verified": true,
+  "verified_name_count": 509
+}

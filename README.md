@@ -8203,6 +8203,42 @@ The reusable scripts are
 This was static analysis only. It did not patch the APK, rerun the loopback
 client, contact a live endpoint, or change the TLS or loading-state repairs.
 
+## v352 existing alias reconciliation
+
+The v352 pass fixes a bookkeeping gap between the IDA database and the
+semantic map. Earlier passes had already placed readable `v18_` aliases on
+509 target functions and recorded their evidence in prior anchor artifacts.
+The later semantic carry-forward did not include all of those source rows,
+so it incorrectly left them in the unmatched list.
+
+The reconciliation matched each source row to the unique target function
+whose existing name was exactly `v18_` plus the source name. It also required
+one prior reviewed anchor artifact for the same source and target addresses.
+This recovered 509 mappings, including 508 high-confidence rows and one
+medium-confidence row. No target name, comment, function boundary, or code
+changed in this pass. The target IDB was verified through its existing feature
+export and retained its v351 SHA-256:
+`0fb0662dffea1f1f6223e0e52745a19505687a79cf47f207280ce098f61b87f0`.
+
+The semantic map now reports 4,254 mapped pairs, 4,193 high-confidence pairs,
+61 medium-confidence pairs, 1,001 remaining ambiguities, and 89 unmatched
+source functions. The 89 rows have no unique existing `v18_` alias and remain
+the next direct-analysis target.
+
+The reconciliation record is
+`artifacts/spectron_existing_v18_alias_reconciliation_20260829.json`, with
+the semantic map in `artifacts/spectron_semantic_translation_v352.json` and
+the strict checkpoint in
+`artifacts/spectron_translation_checkpoint_20260829_v352.json`. The two
+companion reports record the map-only operation and verify all 509 existing
+target names. The reusable scripts are
+`tools/generate_spectron_existing_alias_reconciliation_v352.py`,
+`tools/carry_forward_spectron_semantic_translation_v352.py`, and
+`tools/generate_spectron_translation_checkpoint_v352.py`.
+
+This was an offline metadata correction. It did not patch the APK, contact a
+live endpoint, or change the TLS and loading-state findings.
+
 ## v351 hash-family residuals
 
 The v351 pass closes the next gap in the source-backed map. It records eight

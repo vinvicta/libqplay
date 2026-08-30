@@ -1610,6 +1610,36 @@ def main():
     spectron_checkpoint_v351 = load_json(
         "artifacts/spectron_translation_checkpoint_20260829_v351.json"
     )
+    spectron_existing_alias_reconciliation_v352 = load_json(
+        "artifacts/spectron_existing_v18_alias_reconciliation_20260829.json"
+    )
+    spectron_existing_alias_application_v352 = load_json(
+        "artifacts/spectron_existing_v18_alias_reconciliation_application_20260829.json"
+    )
+    spectron_existing_alias_verification_v352 = load_json(
+        "artifacts/spectron_existing_v18_alias_reconciliation_verification_20260829.json"
+    )
+    spectron_semantic_translation_v352 = load_json(
+        "artifacts/spectron_semantic_translation_v352.json"
+    )
+    spectron_checkpoint_v352 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260829_v352.json"
+    )
+    spectron_existing_alias_reconciliation_v352 = load_json(
+        "artifacts/spectron_existing_v18_alias_reconciliation_20260829.json"
+    )
+    spectron_existing_alias_application_v352 = load_json(
+        "artifacts/spectron_existing_v18_alias_reconciliation_application_20260829.json"
+    )
+    spectron_existing_alias_verification_v352 = load_json(
+        "artifacts/spectron_existing_v18_alias_reconciliation_verification_20260829.json"
+    )
+    spectron_semantic_translation_v352 = load_json(
+        "artifacts/spectron_semantic_translation_v352.json"
+    )
+    spectron_checkpoint_v352 = load_json(
+        "artifacts/spectron_translation_checkpoint_20260829_v352.json"
+    )
     spectron_player_helper_anchors = load_json(
         "artifacts/spectron_player_helper_manual_translation_anchors_20260826.json"
     )
@@ -26887,6 +26917,142 @@ def main():
         },
     )
     check(
+        "Spectron v352 existing alias reconciliation",
+        {
+            "artifact": spectron_existing_alias_reconciliation_v352["artifact"],
+            "network_contacted": spectron_existing_alias_reconciliation_v352["network_contacted"],
+            "summary": spectron_existing_alias_reconciliation_v352["summary"],
+            "anchor_count": len(spectron_existing_alias_reconciliation_v352["anchors"]),
+            "provenance_count": len(spectron_existing_alias_reconciliation_v352["provenance_manifest"]),
+            "all_existing_aliases": all(
+                row["target_name_before_reconciliation"] == row["proposed_name"]
+                for row in spectron_existing_alias_reconciliation_v352["anchors"]
+            ),
+        },
+        {
+            "artifact": "spectron_existing_v18_alias_reconciliation_20260829",
+            "network_contacted": False,
+            "summary": {
+                "anchor_count": 509,
+                "exact_shape_prior_count": 0,
+                "high_confidence_count": 508,
+                "layout_change_prior_count": 509,
+                "medium_confidence_count": 1,
+                "new_target_name_count": 0,
+                "provenance_artifact_count": 336,
+                "reconciled_unmatched_count": 509,
+                "remaining_unmatched_without_existing_alias": 89,
+                "target_default_name_count": 0,
+            },
+            "anchor_count": 509,
+            "provenance_count": 336,
+            "all_existing_aliases": True,
+        },
+    )
+    check(
+        "Spectron v352 existing alias reconciliation application",
+        {
+            "artifact": spectron_existing_alias_application_v352["artifact"],
+            "expected_artifact": spectron_existing_alias_application_v352["expected_artifact"],
+            "apply": spectron_existing_alias_application_v352["apply"],
+            "anchor_count": spectron_existing_alias_application_v352["anchor_count"],
+            "resolved_count": spectron_existing_alias_application_v352["resolved_count"],
+            "renamed_count": spectron_existing_alias_application_v352["renamed_count"],
+            "comments_added": spectron_existing_alias_application_v352["comments_added"],
+            "failure_count": spectron_existing_alias_application_v352["failure_count"],
+            "saved": spectron_existing_alias_application_v352["saved"],
+            "database_changed": spectron_existing_alias_application_v352["database_changed"],
+        },
+        {
+            "artifact": "spectron_existing_v18_alias_reconciliation_application",
+            "expected_artifact": "spectron_existing_v18_alias_reconciliation_20260829",
+            "apply": False,
+            "anchor_count": 509,
+            "resolved_count": 509,
+            "renamed_count": 0,
+            "comments_added": 0,
+            "failure_count": 0,
+            "saved": False,
+            "database_changed": False,
+        },
+    )
+    check(
+        "Spectron v352 existing alias reconciliation verification",
+        {
+            "artifact": spectron_existing_alias_verification_v352["artifact"],
+            "expected_artifact": spectron_existing_alias_verification_v352["expected_artifact"],
+            "anchor_count": spectron_existing_alias_verification_v352["anchor_count"],
+            "verified_name_count": spectron_existing_alias_verification_v352["verified_name_count"],
+            "failure_count": spectron_existing_alias_verification_v352["failure_count"],
+            "function_count": spectron_existing_alias_verification_v352["function_count"],
+            "verified": spectron_existing_alias_verification_v352["verified"],
+            "database_changed": spectron_existing_alias_verification_v352["database_changed"],
+        },
+        {
+            "artifact": "spectron_existing_v18_alias_reconciliation_verification",
+            "expected_artifact": "spectron_existing_v18_alias_reconciliation_20260829",
+            "anchor_count": 509,
+            "verified_name_count": 509,
+            "failure_count": 0,
+            "function_count": 11707,
+            "verified": True,
+            "database_changed": False,
+        },
+    )
+    check(
+        "Spectron v352 semantic translation carry-forward",
+        {
+            "artifact": spectron_semantic_translation_v352["artifact"],
+            "summary": spectron_semantic_translation_v352["summary"],
+            "target_feature_count": spectron_semantic_translation_v352["carried_forward"]["target_feature_count"],
+            "manual_matches_added": spectron_semantic_translation_v352["carried_forward"]["manual_matches_added"],
+            "existing_alias_rows_reconciled": spectron_semantic_translation_v352["carried_forward"]["existing_alias_rows_reconciled"],
+            "unmatched_rows_promoted": spectron_semantic_translation_v352["carried_forward"]["unmatched_rows_promoted"],
+        },
+        {
+            "artifact": "spectron_semantic_function_translation",
+            "summary": {
+                "ambiguous_functions": 1001,
+                "mapped_functions": 4254,
+                "mapped_high_confidence": 4193,
+                "mapped_medium_confidence": 61,
+                "original_functions": 11308,
+                "spectron_functions": 11707,
+                "unique_spectron_targets": 4254,
+                "unmatched_functions": 89,
+            },
+            "target_feature_count": 11707,
+            "manual_matches_added": 509,
+            "existing_alias_rows_reconciled": 509,
+            "unmatched_rows_promoted": 509,
+        },
+    )
+    check(
+        "Spectron v352 checkpoint",
+        {
+            "artifact": spectron_checkpoint_v352["artifact"],
+            "network_contacted": spectron_checkpoint_v352["network_contacted"],
+            "parent": spectron_checkpoint_v352["parent_checkpoint"]["artifact"],
+            "sha256": spectron_checkpoint_v352["database"]["sha256"],
+            "close_reopen_verified": spectron_checkpoint_v352["database"]["close_reopen_verified"],
+            "function_count": spectron_checkpoint_v352["database"]["function_count"],
+            "default_name_count": spectron_checkpoint_v352["database"]["default_name_count"],
+            "reconciled_alias_count": spectron_checkpoint_v352["existing_v18_alias_reconciliation_v352"]["reconciled_alias_count"],
+            "target_database_changed": spectron_checkpoint_v352["existing_v18_alias_reconciliation_v352"]["target_database_changed"],
+        },
+        {
+            "artifact": "spectron_translation_checkpoint_20260829_v352",
+            "network_contacted": False,
+            "parent": "spectron_translation_checkpoint_20260829_v351",
+            "sha256": "0fb0662dffea1f1f6223e0e52745a19505687a79cf47f207280ce098f61b87f0",
+            "close_reopen_verified": True,
+            "function_count": 11707,
+            "default_name_count": 0,
+            "reconciled_alias_count": 509,
+            "target_database_changed": False,
+        },
+    )
+    check(
         "Spectron manual artifact",
         spectron_manual["artifact"],
         "spectron_manual_translation_anchors_20260826",
@@ -27475,6 +27641,11 @@ def main():
         spectron_semantic_translation_v351,
         spectron_features_v351,
         spectron_checkpoint_v351,
+        spectron_existing_alias_reconciliation_v352,
+        spectron_existing_alias_application_v352,
+        spectron_existing_alias_verification_v352,
+        spectron_semantic_translation_v352,
+        spectron_checkpoint_v352,
     ):
         check("offline artifact marker", document.get("network_contacted"), False)
 

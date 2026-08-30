@@ -4223,3 +4223,20 @@ The v351 checkpoint is
 copy is `analysis/spectron_libqplay_translated_v351_hash_residual.i64` with
 SHA-256
 `0fb0662dffea1f1f6223e0e52745a19505687a79cf47f207280ce098f61b87f0`.
+
+## v352 semantic-map reconciliation
+
+The v352 work is static metadata only. It reconciles 509 aliases that were
+already present in the target IDB and backed by earlier reviewed anchor
+artifacts. It does not change the runtime APK, the loopback responder, the
+TLS trust path, the loading-state repair, or any production endpoint.
+
+The target database is unchanged from v351 and retains SHA-256
+`0fb0662dffea1f1f6223e0e52745a19505687a79cf47f207280ce098f61b87f0`. The
+runtime conclusion remains the same: the corrected local replay reaches the
+encrypted login flow, receives the requested resource set, and renders the
+green tiled world with HUD and status icons. No live service was contacted.
+
+The semantic map now has 4,254 mapped pairs and 89 unmatched source rows. The
+new checkpoint is
+`artifacts/spectron_translation_checkpoint_20260829_v352.json`.

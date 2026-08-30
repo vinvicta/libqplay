@@ -2266,6 +2266,50 @@ This pass changed only a disposable IDA database copy and offline metadata.
 It did not patch the APK, alter TLS, contact a game service, or change the
 loading-state repair.
 
+## 2026-08-29: v352 existing alias reconciliation
+
+The target database contained more reviewed readable names than the current
+source-to-target semantic map acknowledged. I audited every v351 unmatched
+source row against the target feature export and selected a row only when the
+target already had the unique name `v18_<source name>`. Each selected pair was
+then matched to a prior anchor artifact in the public archive. This makes the
+pass a provenance reconciliation, not a new inference based on naming alone.
+
+The result is 509 recovered mappings. The inherited evidence classifies 508
+as high confidence and one as medium confidence. The target feature export
+shows zero default names for the selected rows. There were no target renames
+or comments to apply, and the saved target IDB remains byte-identical to the
+v351 database.
+
+The reconciliation is useful for interpreting the remaining residual list.
+It removes already-reviewed methods from that list without hiding unresolved
+work. The semantic totals are now:
+
+| Quantity | v352 value |
+| --- | ---: |
+| source functions | 11,308 |
+| target functions | 11,707 |
+| mapped pairs | 4,254 |
+| high-confidence mappings | 4,193 |
+| medium-confidence mappings | 61 |
+| ambiguous source rows | 1,001 |
+| unmatched source rows | 89 |
+
+The 89 remaining unmatched rows do not have a unique existing `v18_` target
+alias. They need fresh class-local, caller, string, and decompiled-behavior
+review. The reconciliation artifact records every selected pair, its prior
+anchor path and hash, the target name observed in the current feature export,
+and the prior evidence text. Its summary reports 336 anchor-bearing JSON files
+scanned and 509 selected rows.
+
+The strict checkpoint is
+`artifacts/spectron_translation_checkpoint_20260829_v352.json`. It points to
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v351_hash_residual.i64`,
+whose SHA-256 is
+`0fb0662dffea1f1f6223e0e52745a19505687a79cf47f207280ce098f61b87f0`.
+Because v352 changes only the semantic map, this repeated database hash is
+intentional and recorded explicitly.
+
 ## 2026-08-29: v351 hash-family residuals
 
 The v351 pass resolves eight rows in the THashList and THashStrings clusters.

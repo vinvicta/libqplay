@@ -3990,3 +3990,33 @@ Its SHA-256 is
 `0fb0662dffea1f1f6223e0e52745a19505687a79cf47f207280ce098f61b87f0`.
 The checkpoint is tied to that exact file hash and should be treated as an
 immutable historical revision.
+
+## v352 existing v18 alias reconciliation
+
+The target IDA database already contained 509 readable `v18_` aliases whose
+source counterparts were still classified as unmatched by the v351 semantic
+map. The reconciliation pass makes those existing labels explicit in the
+source-backed map. It does not claim that the stripped target retained 1.8
+debug symbols, and it does not rename the target database.
+
+Each selected row satisfies three checks: the source row was in the v351
+unmatched list, the target feature export contained one unique function named
+`v18_<source name>`, and a prior reviewed anchor artifact contained the same
+source and target pair. The result is 508 inherited high-confidence rows and
+one inherited medium-confidence row. All 509 target names are non-default and
+were verified in the 11,707-function target feature export.
+
+The target name audit remains at 6,445 translated aliases and zero default
+names. The dynamic boundary audit remains at 5,782 exact starts. The target
+IDB is unchanged from v351:
+`/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v351_hash_residual.i64`
+with SHA-256
+`0fb0662dffea1f1f6223e0e52745a19505687a79cf47f207280ce098f61b87f0`.
+
+The full selected-row record is
+`artifacts/spectron_existing_v18_alias_reconciliation_20260829.json`; the
+semantic map and strict checkpoint are
+`artifacts/spectron_semantic_translation_v352.json` and
+`artifacts/spectron_translation_checkpoint_20260829_v352.json`. The 89
+source rows without a unique existing alias remain unresolved and are not
+silently counted as translated.

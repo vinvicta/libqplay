@@ -18884,6 +18884,39 @@ The reusable generators are
 This was an offline IDA pass. It did not patch the APK, run an emulator,
 contact a game endpoint, or change the TLS or loading-state diagnosis.
 
+## v352: reconcile the IDB name surface with the semantic map
+
+The v351 residual counts needed one consistency audit before selecting more
+functions for direct analysis. The target IDB already contained 6,445
+translated aliases, while the semantic map contained only 3,745 source-backed
+pairs. I compared the 598 v351 unmatched rows with the current target feature
+export and found 509 unique exact-name relationships of the form
+`v18_<source name>`.
+
+An exact name by itself is not sufficient evidence for a new translation, so
+the reconciliation also searched the earlier anchor artifacts. Every selected
+pair had one prior reviewed anchor row with matching source and target
+addresses and the same proposed alias. The archive scan considered 336 JSON
+files containing anchor arrays. Duplicate historical rows were resolved by
+preferring the row with an explicit reviewed alias, confidence, and evidence;
+conflicting unrelated aliases for the same target were not treated as new
+semantic claims.
+
+The selected rows inherit 508 high-confidence and one medium-confidence
+classification. The current target feature export verifies all 509 names,
+and the companion reports verify 11,707 target functions. The semantic map
+therefore moves to 4,254 mapped pairs and 89 unmatched source rows. The
+target database hash remains
+`0fb0662dffea1f1f6223e0e52745a19505687a79cf47f207280ce098f61b87f0` because
+this pass makes no IDA database changes.
+
+This correction matters for future prioritization. The remaining 89 rows are
+not simply rows whose aliases were forgotten by the map. They lack a unique
+existing target alias and should be handled with new evidence, starting with
+the top class clusters and the direct target pseudocode route. The full
+provenance list and selected rows are in
+`artifacts/spectron_existing_v18_alias_reconciliation_20260829.json`.
+
 ## 2026-08-29: v351 hash-family residuals
 
 The v351 pass brings the remaining reviewed hash-list helpers into the

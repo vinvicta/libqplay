@@ -4020,3 +4020,60 @@ python3 tools/validate_research_archive.py
 The expected v351 database SHA-256 is
 `0fb0662dffea1f1f6223e0e52745a19505687a79cf47f207280ce098f61b87f0`.
 The validator must finish with `research archive validation: ok`.
+
+## v352 existing alias reconciliation
+
+This pass is reproducible without IDA because it checks names and provenance
+against artifacts already exported from the persisted target IDB. Generate
+the reconciliation and its two reports with:
+
+```bash
+python3 tools/generate_spectron_existing_alias_reconciliation_v352.py \
+  --semantic-parent artifacts/spectron_semantic_translation_v351.json \
+  --target-features artifacts/spectron_features_v351_hash_residual.json \
+  --artifact-dir artifacts \
+  --output artifacts/spectron_existing_v18_alias_reconciliation_20260829.json \
+  --application-report artifacts/spectron_existing_v18_alias_reconciliation_application_20260829.json \
+  --verification-report artifacts/spectron_existing_v18_alias_reconciliation_verification_20260829.json
+```
+
+The generator must report 509 selected aliases, 508 high-confidence rows,
+one medium-confidence row, 89 unmatched rows without an existing alias, and
+336 anchor-bearing provenance files. Carry the semantic map forward:
+
+```bash
+python3 tools/carry_forward_spectron_semantic_translation_v352.py \
+  --parent-map artifacts/spectron_semantic_translation_v351.json \
+  --target-features artifacts/spectron_features_v351_hash_residual.json \
+  --reconciliation-artifact artifacts/spectron_existing_v18_alias_reconciliation_20260829.json \
+  --output artifacts/spectron_semantic_translation_v352.json
+```
+
+The expected map totals are 4,254 mapped pairs, 4,193 high-confidence pairs,
+61 medium-confidence pairs, 1,001 ambiguities, and 89 unmatched source
+functions. The operation report must show 509 resolved rows, zero renames,
+zero comments, zero failures, and `database_changed: false`. The verification
+report must show 509 verified names and 11,707 target functions.
+
+Build the strict checkpoint and run the archive validator:
+
+```bash
+python3 tools/generate_spectron_translation_checkpoint_v352.py \
+  --parent-checkpoint artifacts/spectron_translation_checkpoint_20260829_v351.json \
+  --database /home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v351_hash_residual.i64 \
+  --reconciliation-artifact artifacts/spectron_existing_v18_alias_reconciliation_20260829.json \
+  --application-report artifacts/spectron_existing_v18_alias_reconciliation_application_20260829.json \
+  --verification-report artifacts/spectron_existing_v18_alias_reconciliation_verification_20260829.json \
+  --name-audit artifacts/spectron_name_coverage_audit_v351.json \
+  --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v351.json \
+  --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v351.json \
+  --semantic-map artifacts/spectron_semantic_translation_v352.json \
+  --target-features artifacts/spectron_features_v351_hash_residual.json \
+  --output artifacts/spectron_translation_checkpoint_20260829_v352.json
+
+python3 tools/validate_research_archive.py
+```
+
+The expected v352 database SHA-256 is
+`0fb0662dffea1f1f6223e0e52745a19505687a79cf47f207280ce098f61b87f0`.
+The validator must finish with `research archive validation: ok`.

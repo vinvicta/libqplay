@@ -12343,3 +12343,35 @@ The records are
 
 This comparison was offline. It did not patch the APK, contact the game
 server, or change the TLS or loading-state experiments.
+
+## v352 existing alias reconciliation
+
+The v352 comparison is about provenance rather than new target code. The
+target feature export already showed 509 functions named exactly
+`v18_<source name>` for source rows still listed as unmatched in v351. Each
+pair was accepted only after locating one earlier reviewed anchor artifact
+with the same source and target addresses. This recovered 509 semantic rows,
+with 508 inherited high-confidence classifications and one inherited
+medium-confidence classification.
+
+No new target aliases were created. The map-only application report records
+509 resolved rows, zero renames, zero comments, zero failures, and no database
+write. The verification report checks all 509 target names against the current
+11,707-function feature export. The target database hash remains
+`0fb0662dffea1f1f6223e0e52745a19505687a79cf47f207280ce098f61b87f0`.
+
+| Semantic quantity | v351 | v352 |
+| --- | ---: | ---: |
+| mapped pairs | 3,745 | 4,254 |
+| high-confidence pairs | 3,685 | 4,193 |
+| medium-confidence pairs | 60 | 61 |
+| ambiguous rows | 1,001 | 1,001 |
+| unmatched rows | 598 | 89 |
+
+The 89 remaining unmatched rows have no unique existing `v18_` target alias.
+They are still open for direct source and target analysis. The complete
+reconciliation rows and the 336-file provenance manifest are in
+`artifacts/spectron_existing_v18_alias_reconciliation_20260829.json`. The
+semantic map and strict checkpoint are
+`artifacts/spectron_semantic_translation_v352.json` and
+`artifacts/spectron_translation_checkpoint_20260829_v352.json`.
