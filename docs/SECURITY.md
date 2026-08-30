@@ -135,6 +135,15 @@ short static-state wrappers, which remain address-based because assigning
 source names would be speculation. See
 `artifacts/ida_active_translation_scope_check_20260830.json`.
 
+The selected residual review inspected eleven of the most referenced unnamed
+functions in the embedded FreeType and TrueType regions. They are arithmetic,
+stream, cleanup, and diagnostic-string helpers reached through FreeType or
+TrueType tables. The review did not find a new Android, socket, file, process,
+or update boundary in that sample. It is a semantic narrowing pass, not proof
+that every static-library routine is safe. See
+`docs/RESIDUAL_ANALYSIS.md` and
+`artifacts/original_residual_semantic_review_20260830.json`.
+
 ## Android package surface
 
 The binary manifest reports:

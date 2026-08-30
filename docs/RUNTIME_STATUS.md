@@ -63,6 +63,8 @@ startup and pause evidence is in
   covered.
 * The early-pause callback behavior has not been rerun on a current ARM64
   device with activity, permission, and surface timestamps captured.
+* A 2.2 `libqplay` binary is not present in the current workspace. No
+  cross-version symbol, protocol, or behavior mapping has been applied.
 
 ## Current blocker
 

@@ -234,6 +234,10 @@ The compact record is
 * `artifacts/original_dependency_provenance_20260830.json` records the exact
   bundled zlib, bzip2, and FreeType version evidence, compression callsites,
   font paths, and conservative dependency findings.
+* `artifacts/original_residual_semantic_review_20260830.json` records the
+  address-level behavior of selected unnamed FreeType and TrueType helpers.
+  It complements the complete residual address audit without assigning
+  speculative source names.
 * `artifacts/original_android_lifecycle_review_20260830.json` records the
   Activity, GLThread, renderer, and ARM64 JNI startup and pause boundaries.
 * `artifacts/original_intent_launch_review_20260830.json` records the Android
