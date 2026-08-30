@@ -112,6 +112,14 @@ purchase JSON, and signature back into native script events even when the
 purchase signature was rejected. The focused review is in
 `artifacts/original_billing_bridge_review_20260830.json`.
 
+The legacy partner pass found that the remaining TapJoy, Distimo, Fabzat, and
+TrialPay entries are compatibility remnants in this APK. Their Java methods
+are no-ops or return false, while five Fabzat callbacks are native nullsubs.
+The native TapJoy setters still retain script-provided strings in process
+memory, but the stock Java bridge never sends them to a working SDK. The
+focused evidence is in
+`artifacts/original_partner_bridge_review_20260830.json`.
+
 ## Repository layout
 
 * `docs/RESEARCH_NOTES.md` is the chronological investigation record.
@@ -173,6 +181,9 @@ purchase signature was rejected. The focused review is in
 * `artifacts/original_billing_bridge_review_20260830.json` records the legacy
   Google Play billing script, JNI, purchase verification, and callback path.
   It contains no purchase data, signature, or embedded key material.
+* `artifacts/original_partner_bridge_review_20260830.json` records the
+  TapJoy, Distimo, Fabzat, TrialPay, Amazon, and Mobiroo compatibility paths,
+  including their Java no-op behavior.
 * `artifacts/ida_translation_verification_20260830.json` records the final
   packed IDA copy, pass counts, hashes, and zero-failure verification result.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.

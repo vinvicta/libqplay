@@ -1,0 +1,603 @@
+{
+  "artifact": "original_partner_bridge_review_20260830",
+  "database": {
+    "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "imagebase": "0x0",
+    "path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
+  },
+  "findings": [
+    {
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "TapJoy, TrialPay, and Fabzat support probes return false.",
+        "Distimo, Fabzat, TrialPay, and TapJoy operation methods in Natives return without performing work, except the TapJoy connection method which returns false.",
+        "The native wrappers call those exact Natives methods rather than an independent partner SDK entrypoint."
+      ],
+      "id": "ANDROID-PARTNER-001",
+      "impact": "Scripts or game code that expect these providers can silently do nothing. This is a compatibility and feature-availability finding, not an evidence of a remote vulnerability.",
+      "limits": "Other code or an external repackaging could add a provider implementation. The review is limited to this APK's original DEX and ARM64 library.",
+      "severity": "low",
+      "title": "The partner feature table is present but disabled by Java no-op stubs"
+    },
+    {
+      "confidence": "confirmed-static-plus-ida",
+      "evidence": [
+        "The script callbacks at 0x2401f4 and 0x240204 assign incoming TStrings to native globals.",
+        "The setter functions do not validate or cap the input in their visible bodies.",
+        "The only reviewed consumer is a TapJoy bridge that eventually calls a Java method returning false in this APK."
+      ],
+      "id": "ANDROID-PARTNER-002",
+      "impact": "An activated script can cause native allocation and retention of arbitrary configuration text, creating a small process-memory and availability surface. The stored values are not shown leaving the process in the stock package.",
+      "limits": "The allocator behavior and remote reachability were not fuzzed. This is not a confirmed overflow or credential exfiltration path.",
+      "severity": "low",
+      "title": "TapJoy configuration text is stored without a visible bound"
+    },
+    {
+      "confidence": "confirmed-static-plus-inventory",
+      "evidence": [
+        "Amazon and Mobiroo helper methods in Natives return immediately.",
+        "The active 44-entry Android script table contains no Amazon or Mobiroo entries.",
+        "The native Amazon and Mobiroo callback symbols are not referenced by the script callback inventory."
+      ],
+      "id": "ANDROID-PARTNER-003",
+      "impact": "This prevents a false lead during compatibility work. Re-enabling those old libraries would require a separate, explicit integration review.",
+      "limits": "A Java caller outside the reviewed class could theoretically use a bundled helper directly. No such caller was found in the scoped package review.",
+      "severity": "informational",
+      "title": "Bundled vendor billing classes are not proof of an active Amazon or Mobiroo path"
+    }
+  ],
+  "functions": [
+    {
+      "address": "0x245f40",
+      "callers": [
+        {
+          "caller": "0xddf70",
+          "caller_name": "plt_main_android_initStaticScriptVars_void",
+          "callsite": "0xddf74"
+        },
+        {
+          "caller": "0xddf70",
+          "caller_name": "plt_main_android_initStaticScriptVars_void",
+          "callsite": "0xddf7c"
+        }
+      ],
+      "code": "__int64 __fastcall main_android_initStaticScriptVars_void()\n{\n  return plt_TScriptProperty_addFuncs_TProperties_TPropertyFuncDef_int(0, &off_38B2D0, 44);\n}\n",
+      "code_bytes": 156,
+      "code_redacted_literals": false,
+      "code_sha256": "ad787d04458833982fa77040114bd10396d04df8d2b54855a58f5879941d18d2",
+      "function_end": "0x245f54",
+      "function_start": "0x245f40",
+      "name": "main_android_initStaticScriptVars_void",
+      "role": "Android script table owner"
+    },
+    {
+      "address": "0x2401e0",
+      "callers": [],
+      "code": "void nullsub_8()\n{\n  ;\n}\n",
+      "code_bytes": 25,
+      "code_redacted_literals": false,
+      "code_sha256": "bddf6a349ac85c4db985655e19efc0864fbb54d7a222ff227eb951c7c0bd4fc7",
+      "function_end": "0x2401e4",
+      "function_start": "0x2401e0",
+      "name": "nullsub_8",
+      "role": "Fabzat logo callback stub"
+    },
+    {
+      "address": "0x2401e4",
+      "callers": [],
+      "code": "void nullsub_9()\n{\n  ;\n}\n",
+      "code_bytes": 25,
+      "code_redacted_literals": false,
+      "code_sha256": "c74fe1bc98c7f04a9b7b63311658492e19b49dc12085ace6839eda5c02b7d9e1",
+      "function_end": "0x2401e8",
+      "function_start": "0x2401e4",
+      "name": "nullsub_9",
+      "role": "Fabzat share URL callback stub"
+    },
+    {
+      "address": "0x2401e8",
+      "callers": [],
+      "code": "void nullsub_10()\n{\n  ;\n}\n",
+      "code_bytes": 26,
+      "code_redacted_literals": false,
+      "code_sha256": "469458d4981ef1982dac57260d740ac027d8050d0a65205c253a9749749dd0ea",
+      "function_end": "0x2401ec",
+      "function_start": "0x2401e8",
+      "name": "nullsub_10",
+      "role": "Fabzat title-font callback stub"
+    },
+    {
+      "address": "0x2401ec",
+      "callers": [],
+      "code": "void nullsub_11()\n{\n  ;\n}\n",
+      "code_bytes": 26,
+      "code_redacted_literals": false,
+      "code_sha256": "164d8caba320af50799d0e725b9a4384b2522c9429c94459ed1159734951f315",
+      "function_end": "0x2401f0",
+      "function_start": "0x2401ec",
+      "name": "nullsub_11",
+      "role": "Fabzat button-font callback stub"
+    },
+    {
+      "address": "0x2401f0",
+      "callers": [],
+      "code": "void nullsub_12()\n{\n  ;\n}\n",
+      "code_bytes": 26,
+      "code_redacted_literals": false,
+      "code_sha256": "8fd33536019666773e6bd5c8ed4f800bfdb871d178bdcd9b65786e10d5f9fdd1",
+      "function_end": "0x2401f4",
+      "function_start": "0x2401f0",
+      "name": "nullsub_12",
+      "role": "Fabzat texture callback stub"
+    },
+    {
+      "address": "0x2401f4",
+      "callers": [],
+      "code": "__int64 __fastcall sub_2401F4(__int64 a1)\n{\n  return plt_TString_operator_assign_TString_const(&qword_391210, a1);\n}\n",
+      "code_bytes": 117,
+      "code_redacted_literals": false,
+      "code_sha256": "d99731f21cc8b12160bd4b34ac8f9fccdf9a42738f258955e778e612ee04fffe",
+      "function_end": "0x240204",
+      "function_start": "0x2401f4",
+      "name": "MainAndroid_script_settapjoysecret",
+      "role": "TapJoy secret setter"
+    },
+    {
+      "address": "0x240204",
+      "callers": [],
+      "code": "__int64 __fastcall sub_240204(__int64 a1)\n{\n  return plt_TString_operator_assign_TString_const(&qword_391218, a1);\n}\n",
+      "code_bytes": 117,
+      "code_redacted_literals": false,
+      "code_sha256": "9920f0a41a75f99cb3c28c6d867decb434b1f2c97745a5c8906f0be0aadd004d",
+      "function_end": "0x240218",
+      "function_start": "0x240204",
+      "name": "MainAndroid_script_settapjoyapplicationid",
+      "role": "TapJoy application-ID setter"
+    },
+    {
+      "address": "0x2406ec",
+      "callers": [],
+      "code": "// Calls Java static isTrialpaySupported()Z. Returns the Java boolean result.\nbool JNI_isTrialpaySupported()\n{\n  __int64 v0; // x2\n\n  v0 = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n         javaenvironment,\n         javaenvironmentclass,\n         \"isTrialpaySupported\",\n         \"()Z\");\n  return v0\n      && (unsigned __int8)plt_JNIEnv_CallStaticBooleanMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v0) != 0;\n}\n",
+      "code_bytes": 498,
+      "code_redacted_literals": false,
+      "code_sha256": "c07ac9222164d1587c56301f14885db7b22bd0f69a2337b1c69e29a7113992a2",
+      "function_end": "0x240774",
+      "function_start": "0x2406ec",
+      "name": "JNI_isTrialpaySupported",
+      "role": "TrialPay support probe"
+    },
+    {
+      "address": "0x240774",
+      "callers": [],
+      "code": "// Calls Java static isFabzatSupported()Z. Returns the Java boolean result.\nbool JNI_isFabzatSupported()\n{\n  __int64 v0; // x2\n\n  v0 = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n         javaenvironment,\n         javaenvironmentclass,\n         \"isFabzatSupported\",\n         \"()Z\");\n  return v0\n      && (unsigned __int8)plt_JNIEnv_CallStaticBooleanMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v0) != 0;\n}\n",
+      "code_bytes": 492,
+      "code_redacted_literals": false,
+      "code_sha256": "0275f8db5ebfaa6c3a2358f1df580779473e3248f086fb798f42eebaf89bd5f2",
+      "function_end": "0x2407fc",
+      "function_start": "0x240774",
+      "name": "JNI_isFabzatSupported",
+      "role": "Fabzat support probe"
+    },
+    {
+      "address": "0x240994",
+      "callers": [],
+      "code": "// Calls Java static isTapJoyEnabled()Z. Returns the Java boolean result.\nbool JNI_isTapJoyEnabled()\n{\n  __int64 v0; // x2\n\n  v0 = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n         javaenvironment,\n         javaenvironmentclass,\n         \"isTapJoyEnabled\",\n         \"()Z\");\n  return v0\n      && (unsigned __int8)plt_JNIEnv_CallStaticBooleanMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v0) != 0;\n}\n",
+      "code_bytes": 486,
+      "code_redacted_literals": false,
+      "code_sha256": "53cf6898c6ad4ecc5aba25d5449abd42861fc03c4904c5c941ef561b9cca7553",
+      "function_end": "0x240a1c",
+      "function_start": "0x240994",
+      "name": "JNI_isTapJoyEnabled",
+      "role": "TapJoy support probe"
+    },
+    {
+      "address": "0x2410ac",
+      "callers": [],
+      "code": "// Calls Java static connectToTapJoyService([B[B)Z. Converts the cached TapJoy and user strings to Java byte arrays and returns the Java boolean result.\nbool JNI_connectToTapJoyService()\n{\n  __int64 v0; // x24\n  __int64 v1; // x1\n  __int64 v2; // x22\n  __int64 v3; // x3\n  __int64 v4; // x4\n  __int64 v5; // x23\n  unsigned int *v6; // x4\n  __int64 v7; // x0\n  __int64 v8; // x3\n  _DWORD *v9; // x4\n  unsigned int v10; // t1\n  _BOOL4 v11; // w20\n\n  v0 = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n         javaenvironment,\n         javaenvironmentclass,\n         \"connectToTapJoyService\",\n         \"([B[B)Z\");\n  if ( v0 )\n  {\n    if ( qword_391218 )\n      v1 = *(unsigned int *)qword_391218;\n    else\n      v1 = 0;\n    v2 = (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, v1);\n    if ( qword_391218 )\n    {\n      v4 = qword_391218 + 8;\n      v3 = *(unsigned int *)qword_391218;\n    }\n    else\n    {\n      v3 = 0;\n      v4 = TString_dummystr;\n    }\n    (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, __int64))(*(_QWORD *)javaenvironment + 1664LL))(\n      javaenvironment,\n      v2,\n      0,\n      v3,\n      v4);\n    if ( qword_391210 )\n    {\n      v5 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(\n             javaenvironment,\n             *(unsigned int *)qword_391210);\n      v6 = (unsigned int *)qword_391210;\n      v7 = javaenvironment;\n      if ( qword_391210 )\n      {\nLABEL_8:\n        v10 = *v6;\n        v9 = v6 + 2;\n        v8 = v10;\nLABEL_9:\n        (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, _DWORD *))(*(_QWORD *)v7 + 1664LL))(\n          v7,\n          v5,\n          0,\n          v8,\n          v9);\n        v11 = (unsigned __int8)plt_JNIEnv_CallStaticBooleanMethod_jclass_jmethodID(\n                                 javaenvironment,\n                                 javaenvironmentclass,\n                                 v0) != 0;\n        (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v2);\n        (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v5);\n        return v11;\n      }\n    }\n    else\n    {\n      v5 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, 0);\n      v6 = (unsigned int *)qword_391210;\n      v7 = javaenvironment;\n      if ( qword_391210 )\n        goto LABEL_8;\n    }\n    v8 = 0;\n    v9 = (_DWORD *)TString_dummystr;\n    goto LABEL_9;\n  }\n  return 0;\n}\n",
+      "code_bytes": 2621,
+      "code_redacted_literals": false,
+      "code_sha256": "a7ca251dfa5e6f9850a61c26c29ced48005feb3552e5988cac6034fce46ce9ba",
+      "function_end": "0x241288",
+      "function_start": "0x2410ac",
+      "name": "JNI_connectToTapJoyService",
+      "role": "TapJoy connection bridge"
+    },
+    {
+      "address": "0x2414cc",
+      "callers": [],
+      "code": "// Calls Java static showFabzatStore()V. Calls the Java static Fabzat store display method.\n__int64 JNI_showFabzatStore()\n{\n  __int64 result; // x0\n  __int64 v1; // x3\n  __int64 v2; // x4\n\n  result = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n             javaenvironment,\n             javaenvironmentclass,\n             \"showFabzatStore\",\n             \"()V\");\n  if ( result )\n    return plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, result, v1, v2);\n  return result;\n}\n",
+      "code_bytes": 581,
+      "code_redacted_literals": false,
+      "code_sha256": "b91beb46d774a1927b13ecde74b868ee9050b84318f6101eaf3a037b477d28e5",
+      "function_end": "0x241540",
+      "function_start": "0x2414cc",
+      "name": "JNI_showFabzatStore",
+      "role": "Fabzat store bridge"
+    },
+    {
+      "address": "0x241540",
+      "callers": [],
+      "code": "// Calls Java static setDistimoRegisteredUser()V. Calls the Java static Distimo registration method.\n__int64 JNI_setDistimoRegisteredUser()\n{\n  __int64 result; // x0\n  __int64 v1; // x3\n  __int64 v2; // x4\n\n  result = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n             javaenvironment,\n             javaenvironmentclass,\n             \"setDistimoRegisteredUser\",\n             \"()V\");\n  if ( result )\n    return plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, result, v1, v2);\n  return result;\n}\n",
+      "code_bytes": 608,
+      "code_redacted_literals": false,
+      "code_sha256": "210e407d4992570307e703d5ded25e56a24215cd009aeed20849e338c78d8073",
+      "function_end": "0x2415b4",
+      "function_start": "0x241540",
+      "name": "JNI_setDistimoRegisteredUser",
+      "role": "Distimo registration bridge"
+    },
+    {
+      "address": "0x2417f0",
+      "callers": [],
+      "code": "// Calls Java static showTrialpayOfferwall([B)V. Converts the supplied TString to a Java byte array and calls the TrialPay offerwall method.\n__int64 __fastcall JNI_showTrialpayOfferwall(unsigned int **a1)\n{\n  __int64 result; // x0\n  __int64 v3; // x22\n  __int64 v4; // x21\n  unsigned int *v5; // x4\n  __int64 v6; // x0\n  __int64 v7; // x3\n  _DWORD *v8; // x4\n  unsigned int v9; // t1\n  __int64 v10; // x4\n\n  result = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n             javaenvironment,\n             javaenvironmentclass,\n             \"showTrialpayOfferwall\",\n             \"([B)V\");\n  v3 = result;\n  if ( result )\n  {\n    if ( *a1 )\n    {\n      v4 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, **a1);\n      v5 = *a1;\n      v6 = javaenvironment;\n      if ( *a1 )\n      {\nLABEL_4:\n        v9 = *v5;\n        v8 = v5 + 2;\n        v7 = v9;\nLABEL_5:\n        (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, _DWORD *))(*(_QWORD *)v6 + 1664LL))(\n          v6,\n          v4,\n          0,\n          v7,\n          v8);\n        plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v3, v4, v10);\n        return (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v4);\n      }\n    }\n    else\n    {\n      v4 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, 0);\n      v5 = *a1;\n      v6 = javaenvironment;\n      if ( *a1 )\n        goto LABEL_4;\n    }\n    v7 = 0;\n    v8 = (_DWORD *)TString_dummystr;\n    goto LABEL_5;\n  }\n  return result;\n}\n",
+      "code_bytes": 1699,
+      "code_redacted_literals": false,
+      "code_sha256": "affeaf3ca02d6bbdec31503e9f7ae280b9fe927e8726ce5432c8523b04c0fc88",
+      "function_end": "0x24190c",
+      "function_start": "0x2417f0",
+      "name": "JNI_showTrialpayOfferwall",
+      "role": "TrialPay offerwall bridge"
+    },
+    {
+      "address": "0x24190c",
+      "callers": [],
+      "code": "// Calls Java static setTrialpayAgeAndGender(I[B)V. Converts the supplied TString and calls the TrialPay age and gender method.\n__int64 __fastcall JNI_setTrialpayAgeAndGender(unsigned int a1, unsigned int **a2)\n{\n  __int64 result; // x0\n  __int64 v5; // x22\n  __int64 v6; // x21\n  unsigned int *v7; // x4\n  __int64 v8; // x0\n  __int64 v9; // x3\n  _DWORD *v10; // x4\n  unsigned int v11; // t1\n\n  result = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n             javaenvironment,\n             javaenvironmentclass,\n             \"setTrialpayAgeAndGender\",\n             \"(I[B)V\");\n  v5 = result;\n  if ( result )\n  {\n    if ( *a2 )\n    {\n      v6 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, **a2);\n      v7 = *a2;\n      v8 = javaenvironment;\n      if ( *a2 )\n      {\nLABEL_4:\n        v11 = *v7;\n        v10 = v7 + 2;\n        v9 = v11;\nLABEL_5:\n        (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, _DWORD *))(*(_QWORD *)v8 + 1664LL))(\n          v8,\n          v6,\n          0,\n          v9,\n          v10);\n        plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v5, a1, v6);\n        return (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v6);\n      }\n    }\n    else\n    {\n      v6 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, 0);\n      v7 = *a2;\n      v8 = javaenvironment;\n      if ( *a2 )\n        goto LABEL_4;\n    }\n    v9 = 0;\n    v10 = (_DWORD *)TString_dummystr;\n    goto LABEL_5;\n  }\n  return result;\n}\n",
+      "code_bytes": 1693,
+      "code_redacted_literals": false,
+      "code_sha256": "c4a89b04f9cd389fa25a9a13cb3c74d37ff8122f040e5d14adf9570be5bbf736",
+      "function_end": "0x241a38",
+      "function_start": "0x24190c",
+      "name": "JNI_setTrialpayAgeAndGender",
+      "role": "TrialPay demographic bridge"
+    },
+    {
+      "address": "0x241a38",
+      "callers": [],
+      "code": "// Calls Java static setTrialpayCampaign([B[B)V. Converts two TString byte buffers and calls the TrialPay campaign method.\n__int64 __fastcall JNI_setTrialpayCampaign(unsigned int **a1, unsigned int **a2)\n{\n  __int64 result; // x0\n  __int64 v5; // x23\n  __int64 v6; // x20\n  unsigned int *v7; // x4\n  __int64 v8; // x0\n  __int64 v9; // x3\n  _DWORD *v10; // x4\n  unsigned int v11; // t1\n  __int64 v12; // x21\n  unsigned int *v13; // x4\n  __int64 v14; // x0\n  __int64 v15; // x3\n  _DWORD *v16; // x4\n  unsigned int v17; // t1\n\n  result = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n             javaenvironment,\n             javaenvironmentclass,\n             \"setTrialpayCampaign\",\n             \"([B[B)V\");\n  v5 = result;\n  if ( result )\n  {\n    if ( *a1 )\n    {\n      v6 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, **a1);\n      v7 = *a1;\n      v8 = javaenvironment;\n      if ( *a1 )\n      {\nLABEL_4:\n        v11 = *v7;\n        v10 = v7 + 2;\n        v9 = v11;\n        goto LABEL_5;\n      }\n    }\n    else\n    {\n      v6 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, 0);\n      v7 = *a1;\n      v8 = javaenvironment;\n      if ( *a1 )\n        goto LABEL_4;\n    }\n    v9 = 0;\n    v10 = (_DWORD *)TString_dummystr;\nLABEL_5:\n    (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, _DWORD *))(*(_QWORD *)v8 + 1664LL))(v8, v6, 0, v9, v10);\n    if ( *a2 )\n    {\n      v12 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, **a2);\n      v13 = *a2;\n      v14 = javaenvironment;\n      if ( *a2 )\n      {\nLABEL_7:\n        v17 = *v13;\n        v16 = v13 + 2;\n        v15 = v17;\nLABEL_8:\n        (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, _DWORD *))(*(_QWORD *)v14 + 1664LL))(\n          v14,\n          v12,\n          0,\n          v15,\n          v16);\n        plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v5, v6, v12);\n        (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v6);\n        return (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v12);\n      }\n    }\n    else\n    {\n      v12 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, 0);\n      v13 = *a2;\n      v14 = javaenvironment;\n      if ( *a2 )\n        goto LABEL_7;\n    }\n    v15 = 0;\n    v16 = (_DWORD *)TString_dummystr;\n    goto LABEL_8;\n  }\n  return result;\n}\n",
+      "code_bytes": 2657,
+      "code_redacted_literals": false,
+      "code_sha256": "4c9c2561a1a1879fd87d5871681c452ade92b2d466d3ad836d20a67370877911",
+      "function_end": "0x241c00",
+      "function_start": "0x241a38",
+      "name": "JNI_setTrialpayCampaign",
+      "role": "TrialPay campaign bridge"
+    },
+    {
+      "address": "0x241c00",
+      "callers": [],
+      "code": "// Calls Java static initTrialpay([B)V. Converts the supplied TString and calls the TrialPay initialization method.\n__int64 __fastcall JNI_initTrialpay(unsigned int **a1)\n{\n  __int64 result; // x0\n  __int64 v3; // x22\n  __int64 v4; // x21\n  unsigned int *v5; // x4\n  __int64 v6; // x0\n  __int64 v7; // x3\n  _DWORD *v8; // x4\n  unsigned int v9; // t1\n  __int64 v10; // x4\n\n  result = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n             javaenvironment,\n             javaenvironmentclass,\n             \"initTrialpay\",\n             \"([B)V\");\n  v3 = result;\n  if ( result )\n  {\n    if ( *a1 )\n    {\n      v4 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, **a1);\n      v5 = *a1;\n      v6 = javaenvironment;\n      if ( *a1 )\n      {\nLABEL_4:\n        v9 = *v5;\n        v8 = v5 + 2;\n        v7 = v9;\nLABEL_5:\n        (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, _DWORD *))(*(_QWORD *)v6 + 1664LL))(\n          v6,\n          v4,\n          0,\n          v7,\n          v8);\n        plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v3, v4, v10);\n        return (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v4);\n      }\n    }\n    else\n    {\n      v4 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, 0);\n      v5 = *a1;\n      v6 = javaenvironment;\n      if ( *a1 )\n        goto LABEL_4;\n    }\n    v7 = 0;\n    v8 = (_DWORD *)TString_dummystr;\n    goto LABEL_5;\n  }\n  return result;\n}\n",
+      "code_bytes": 1656,
+      "code_redacted_literals": false,
+      "code_sha256": "ebf8e5e1b31a0114cf64fb8993ba744eaf6910dfc7127022e4b890cd911280c5",
+      "function_end": "0x241d1c",
+      "function_start": "0x241c00",
+      "name": "JNI_initTrialpay",
+      "role": "TrialPay initialization bridge"
+    },
+    {
+      "address": "0x241d1c",
+      "callers": [],
+      "code": "// Calls Java static fabzatSetResourcePath([B)V. Converts the supplied TString and calls the Fabzat resource-path method.\n__int64 __fastcall JNI_fabzatSetResourcePath(unsigned int **a1)\n{\n  __int64 result; // x0\n  __int64 v3; // x22\n  __int64 v4; // x21\n  unsigned int *v5; // x4\n  __int64 v6; // x0\n  __int64 v7; // x3\n  _DWORD *v8; // x4\n  unsigned int v9; // t1\n  __int64 v10; // x4\n\n  result = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n             javaenvironment,\n             javaenvironmentclass,\n             \"fabzatSetResourcePath\",\n             \"([B)V\");\n  v3 = result;\n  if ( result )\n  {\n    if ( *a1 )\n    {\n      v4 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, **a1);\n      v5 = *a1;\n      v6 = javaenvironment;\n      if ( *a1 )\n      {\nLABEL_4:\n        v9 = *v5;\n        v8 = v5 + 2;\n        v7 = v9;\nLABEL_5:\n        (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, _DWORD *))(*(_QWORD *)v6 + 1664LL))(\n          v6,\n          v4,\n          0,\n          v7,\n          v8);\n        plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v3, v4, v10);\n        return (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v4);\n      }\n    }\n    else\n    {\n      v4 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, 0);\n      v5 = *a1;\n      v6 = javaenvironment;\n      if ( *a1 )\n        goto LABEL_4;\n    }\n    v7 = 0;\n    v8 = (_DWORD *)TString_dummystr;\n    goto LABEL_5;\n  }\n  return result;\n}\n",
+      "code_bytes": 1680,
+      "code_redacted_literals": false,
+      "code_sha256": "72bb13a7293396e6f401a44a6b00879159a6792c7c5d68c4c1ea148868eecce8",
+      "function_end": "0x241e38",
+      "function_start": "0x241d1c",
+      "name": "JNI_fabzatSetResourcePath",
+      "role": "Fabzat resource-path bridge"
+    },
+    {
+      "address": "0x241e38",
+      "callers": [],
+      "code": "// Calls Java static initFabzatStore([B[B)V. Converts two TString byte buffers and calls the Fabzat store initialization method.\n__int64 __fastcall JNI_initFabzatStore(unsigned int **a1, unsigned int **a2)\n{\n  __int64 result; // x0\n  __int64 v5; // x23\n  __int64 v6; // x20\n  unsigned int *v7; // x4\n  __int64 v8; // x0\n  __int64 v9; // x3\n  _DWORD *v10; // x4\n  unsigned int v11; // t1\n  __int64 v12; // x21\n  unsigned int *v13; // x4\n  __int64 v14; // x0\n  __int64 v15; // x3\n  _DWORD *v16; // x4\n  unsigned int v17; // t1\n\n  result = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n             javaenvironment,\n             javaenvironmentclass,\n             \"initFabzatStore\",\n             \"([B[B)V\");\n  v5 = result;\n  if ( result )\n  {\n    if ( *a1 )\n    {\n      v6 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, **a1);\n      v7 = *a1;\n      v8 = javaenvironment;\n      if ( *a1 )\n      {\nLABEL_4:\n        v11 = *v7;\n        v10 = v7 + 2;\n        v9 = v11;\n        goto LABEL_5;\n      }\n    }\n    else\n    {\n      v6 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, 0);\n      v7 = *a1;\n      v8 = javaenvironment;\n      if ( *a1 )\n        goto LABEL_4;\n    }\n    v9 = 0;\n    v10 = (_DWORD *)TString_dummystr;\nLABEL_5:\n    (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, _DWORD *))(*(_QWORD *)v8 + 1664LL))(v8, v6, 0, v9, v10);\n    if ( *a2 )\n    {\n      v12 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, **a2);\n      v13 = *a2;\n      v14 = javaenvironment;\n      if ( *a2 )\n      {\nLABEL_7:\n        v17 = *v13;\n        v16 = v13 + 2;\n        v15 = v17;\nLABEL_8:\n        (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, _DWORD *))(*(_QWORD *)v14 + 1664LL))(\n          v14,\n          v12,\n          0,\n          v15,\n          v16);\n        plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v5, v6, v12);\n        (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v6);\n        return (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v12);\n      }\n    }\n    else\n    {\n      v12 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, 0);\n      v13 = *a2;\n      v14 = javaenvironment;\n      if ( *a2 )\n        goto LABEL_7;\n    }\n    v15 = 0;\n    v16 = (_DWORD *)TString_dummystr;\n    goto LABEL_8;\n  }\n  return result;\n}\n",
+      "code_bytes": 2655,
+      "code_redacted_literals": false,
+      "code_sha256": "78f1d37c494d9a2cb76943ac1cb8911f7c9530db1aba14879761b695dbc8855f",
+      "function_end": "0x242000",
+      "function_start": "0x241e38",
+      "name": "JNI_initFabzatStore",
+      "role": "Fabzat initialization bridge"
+    },
+    {
+      "address": "0x242000",
+      "callers": [],
+      "code": "// Calls Java static registerPurchaseToDistimo([B[B)V. Converts two TString byte buffers and calls the Distimo purchase-registration method.\n__int64 __fastcall JNI_registerPurchaseToDistimo(unsigned int **a1, unsigned int **a2)\n{\n  __int64 result; // x0\n  __int64 v5; // x23\n  __int64 v6; // x20\n  unsigned int *v7; // x4\n  __int64 v8; // x0\n  __int64 v9; // x3\n  _DWORD *v10; // x4\n  unsigned int v11; // t1\n  __int64 v12; // x21\n  unsigned int *v13; // x4\n  __int64 v14; // x0\n  __int64 v15; // x3\n  _DWORD *v16; // x4\n  unsigned int v17; // t1\n\n  result = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n             javaenvironment,\n             javaenvironmentclass,\n             \"registerPurchaseToDistimo\",\n             \"([B[B)V\");\n  v5 = result;\n  if ( result )\n  {\n    if ( *a1 )\n    {\n      v6 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, **a1);\n      v7 = *a1;\n      v8 = javaenvironment;\n      if ( *a1 )\n      {\nLABEL_4:\n        v11 = *v7;\n        v10 = v7 + 2;\n        v9 = v11;\n        goto LABEL_5;\n      }\n    }\n    else\n    {\n      v6 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, 0);\n      v7 = *a1;\n      v8 = javaenvironment;\n      if ( *a1 )\n        goto LABEL_4;\n    }\n    v9 = 0;\n    v10 = (_DWORD *)TString_dummystr;\nLABEL_5:\n    (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, _DWORD *))(*(_QWORD *)v8 + 1664LL))(v8, v6, 0, v9, v10);\n    if ( *a2 )\n    {\n      v12 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, **a2);\n      v13 = *a2;\n      v14 = javaenvironment;\n      if ( *a2 )\n      {\nLABEL_7:\n        v17 = *v13;\n        v16 = v13 + 2;\n        v15 = v17;\nLABEL_8:\n        (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, _DWORD *))(*(_QWORD *)v14 + 1664LL))(\n          v14,\n          v12,\n          0,\n          v15,\n          v16);\n        plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v5, v6, v12);\n        (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v6);\n        return (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v12);\n      }\n    }\n    else\n    {\n      v12 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, 0);\n      v13 = *a2;\n      v14 = javaenvironment;\n      if ( *a2 )\n        goto LABEL_7;\n    }\n    v15 = 0;\n    v16 = (_DWORD *)TString_dummystr;\n    goto LABEL_8;\n  }\n  return result;\n}\n",
+      "code_bytes": 2687,
+      "code_redacted_literals": false,
+      "code_sha256": "e5f197b0a43f79cec0037afad3ea362601bfb4e2c45bb2018730a1f622ee1002",
+      "function_end": "0x2421c8",
+      "function_start": "0x242000",
+      "name": "JNI_registerPurchaseToDistimo",
+      "role": "Distimo purchase bridge"
+    },
+    {
+      "address": "0x2421c8",
+      "callers": [],
+      "code": "// Calls Java static connectToDistimoService([B)V. Converts the supplied TString and calls the Distimo connection method.\n__int64 __fastcall JNI_connectToDistimoService(int **a1)\n{\n  __int64 result; // x0\n  __int64 v3; // x21\n  unsigned int *v4; // x1\n  __int64 v5; // x0\n  __int64 v6; // x20\n  unsigned int *v7; // x4\n  __int64 v8; // x0\n  __int64 v9; // x3\n  char *v10; // x4\n  unsigned int v11; // t1\n  __int64 v12; // x4\n  unsigned int *v13; // [xsp+38h] [xbp-8h] BYREF\n\n  result = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n             javaenvironment,\n             javaenvironmentclass,\n             \"connectToDistimoService\",\n             \"([B)V\");\n  v3 = result;\n  if ( result )\n  {\n    if ( *a1 && **a1 > 0 )\n    {\n      v13 = nullptr;\n      plt_TString_operator_assign_TString_const(&v13, a1);\n      v4 = v13;\n      v5 = javaenvironment;\n      if ( v13 )\n        goto LABEL_5;\n    }\n    else\n    {\n      v13 = nullptr;\n      plt_TString_operator_lshift_char_const((int)&v13, \"<redacted fixed literal>\");\n      v4 = v13;\n      v5 = javaenvironment;\n      if ( v13 )\n      {\nLABEL_5:\n        v6 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)v5 + 1408LL))(v5, *v4);\n        v7 = v13;\n        v8 = javaenvironment;\n        if ( v13 )\n        {\nLABEL_6:\n          v11 = *v7;\n          v10 = &byte_8[(_QWORD)v7];\n          v9 = v11;\nLABEL_7:\n          (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, char *))(*(_QWORD *)v8 + 1664LL))(\n            v8,\n            v6,\n            0,\n            v9,\n            v10);\n          plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v3, v6, v12);\n          (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v6);\n          return plt_TString_clear_void((TString *)&v13);\n        }\nLABEL_11:\n        v9 = 0;\n        v10 = (char *)TString_dummystr;\n        goto LABEL_7;\n      }\n    }\n    v6 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)v5 + 1408LL))(v5, 0);\n    v7 = v13;\n    v8 = javaenvironment;\n    if ( v13 )\n      goto LABEL_6;\n    goto LABEL_11;\n  }\n  return result;\n}\n",
+      "code_bytes": 2211,
+      "code_redacted_literals": true,
+      "code_sha256": "421ab93f89e6e9c872f82a3da2000f73b444764a0bdce3c9ce9e47086b4fb775",
+      "function_end": "0x24233c",
+      "function_start": "0x2421c8",
+      "name": "JNI_connectToDistimoService",
+      "role": "Distimo connection bridge"
+    },
+    {
+      "address": "0x242ce0",
+      "callers": [],
+      "code": "// Calls Java static showTapJoyOffers([B)V. Converts the supplied TString and calls the TapJoy offers method.\n__int64 JNI_showTapJoyOffers()\n{\n  __int64 result; // x0\n  __int64 v1; // x23\n  unsigned int *v2; // x1\n  __int64 v3; // x1\n  __int64 v4; // x22\n  unsigned int *v5; // x4\n  __int64 v6; // x3\n  _DWORD *v7; // x4\n  unsigned int v8; // t1\n  __int64 v9; // x4\n\n  result = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n             javaenvironment,\n             javaenvironmentclass,\n             \"showTapJoyOffers\",\n             \"([B)V\");\n  v1 = result;\n  if ( result )\n  {\n    v2 = *(unsigned int **)(activeplayer + 912);\n    if ( v2 )\n      v3 = *v2;\n    else\n      v3 = 0;\n    v4 = (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, v3);\n    v5 = *(unsigned int **)(activeplayer + 912);\n    if ( v5 )\n    {\n      v8 = *v5;\n      v7 = v5 + 2;\n      v6 = v8;\n    }\n    else\n    {\n      v6 = 0;\n      v7 = (_DWORD *)TString_dummystr;\n    }\n    (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, _DWORD *))(*(_QWORD *)javaenvironment + 1664LL))(\n      javaenvironment,\n      v4,\n      0,\n      v6,\n      v7);\n    plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v1, v4, v9);\n    return (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v4);\n  }\n  return result;\n}\n",
+      "code_bytes": 1482,
+      "code_redacted_literals": false,
+      "code_sha256": "082ce63bf6233cba2f44cfe5901c2019fd9e718a5834d203ae041eb2d9fd641f",
+      "function_end": "0x242df0",
+      "function_start": "0x242ce0",
+      "name": "JNI_showTapJoyOffers",
+      "role": "TapJoy offers bridge"
+    }
+  ],
+  "interpretation": [
+    "The partner callbacks are compatibility remnants in the reviewed package, not an explanation for the native connector failing to reach its server.",
+    "Fabzat's expired certificate resource should not be treated as an active trust anchor based on this pass, because the matching script and Java paths are stubs here.",
+    "A repair should remove or clearly gate dead provider entries, bound configuration strings, and avoid reactivating vendor SDKs without an explicit privacy and trust review."
+  ],
+  "java_noop_methods": [
+    {
+      "behavior": "returns immediately",
+      "class": "com.quattroplay.GraalClassic.Natives",
+      "method": "connectToDistimoService([B)V"
+    },
+    {
+      "behavior": "returns false",
+      "class": "com.quattroplay.GraalClassic.Natives",
+      "method": "connectToTapJoyService([B[B)Z"
+    },
+    {
+      "behavior": "returns immediately",
+      "class": "com.quattroplay.GraalClassic.Natives",
+      "method": "fabzatSetResourcePath([B)V"
+    },
+    {
+      "behavior": "returns immediately",
+      "class": "com.quattroplay.GraalClassic.Natives",
+      "method": "initFabzatStore([B[B)V"
+    },
+    {
+      "behavior": "returns immediately",
+      "class": "com.quattroplay.GraalClassic.Natives",
+      "method": "initTrialpay([B)V"
+    },
+    {
+      "behavior": "returns false",
+      "class": "com.quattroplay.GraalClassic.Natives",
+      "method": "isFabzatSupported()Z"
+    },
+    {
+      "behavior": "returns false",
+      "class": "com.quattroplay.GraalClassic.Natives",
+      "method": "isTapJoyEnabled()Z"
+    },
+    {
+      "behavior": "returns false",
+      "class": "com.quattroplay.GraalClassic.Natives",
+      "method": "isTrialpaySupported()Z"
+    },
+    {
+      "behavior": "returns immediately",
+      "class": "com.quattroplay.GraalClassic.Natives",
+      "method": "registerPurchaseToDistimo([B[B)V"
+    },
+    {
+      "behavior": "returns immediately",
+      "class": "com.quattroplay.GraalClassic.Natives",
+      "method": "setDistimoRegisteredUser()V"
+    },
+    {
+      "behavior": "returns immediately",
+      "class": "com.quattroplay.GraalClassic.Natives",
+      "method": "setTrialpayAgeAndGender(I[B)V"
+    },
+    {
+      "behavior": "returns immediately",
+      "class": "com.quattroplay.GraalClassic.Natives",
+      "method": "setTrialpayCampaign([B[B)V"
+    },
+    {
+      "behavior": "returns immediately",
+      "class": "com.quattroplay.GraalClassic.Natives",
+      "method": "showFabzatStore()V"
+    },
+    {
+      "behavior": "returns immediately",
+      "class": "com.quattroplay.GraalClassic.Natives",
+      "method": "showTapJoyOffers([B)V"
+    },
+    {
+      "behavior": "returns immediately",
+      "class": "com.quattroplay.GraalClassic.Natives",
+      "method": "showTrialpayOfferwall([B)V"
+    },
+    {
+      "behavior": "returns immediately",
+      "class": "com.quattroplay.GraalClassic.Natives",
+      "method": "buyAmazonInAppPurchase([B)V"
+    },
+    {
+      "behavior": "returns immediately",
+      "class": "com.quattroplay.GraalClassic.Natives",
+      "method": "buyMobirooInAppPurchase([B)V"
+    },
+    {
+      "behavior": "returns immediately",
+      "class": "com.quattroplay.GraalClassic.Natives",
+      "method": "requestAmazonPurchaseHistory([B)V"
+    },
+    {
+      "behavior": "returns immediately",
+      "class": "com.quattroplay.GraalClassic.Natives",
+      "method": "requestMobirooInAppData([B)V"
+    }
+  ],
+  "network_contacted": false,
+  "observations": [
+    {
+      "classification": "partner integration disabled at Java boundary",
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "Natives.isTapJoyEnabled(), isTrialpaySupported(), and isFabzatSupported() return false without consulting an SDK.",
+        "Natives.connectToTapJoyService() returns false, while the corresponding Distimo, Fabzat, and TrialPay operations return immediately.",
+        "The native JNI wrappers call these Natives methods by their exact names and signatures."
+      ],
+      "interpretation": "The partner callback table is present for compatibility, but the stock APK does not implement an active TapJoy, TrialPay, Fabzat, or Distimo flow through these entries."
+    },
+    {
+      "classification": "TapJoy configuration retained in native memory",
+      "confidence": "confirmed-static-plus-ida",
+      "evidence": [
+        "settapjoysecret at 0x2401f4 assigns its TString argument to qword_391210.",
+        "settapjoyapplicationid at 0x240204 assigns its TString argument to qword_391218.",
+        "connectToTapJoyService reads both globals before calling the Java method that returns false."
+      ],
+      "interpretation": "A script can place arbitrary TapJoy configuration text in process memory, but this APK does not pass it to a functioning Java TapJoy service. The values are still sensitive if a future patch activates the bridge."
+    },
+    {
+      "classification": "Fabzat callback stubs",
+      "confidence": "confirmed-static-plus-inventory",
+      "evidence": [
+        "Five script-table entries at 0x2401e0 through 0x2401f0 point to four-byte native nullsubs.",
+        "The table inventory identifies these callbacks as the Fabzat logo, share URL, font, and texture setters."
+      ],
+      "interpretation": "Those callbacks have no side effects in this library and cannot configure a live Fabzat UI."
+    },
+    {
+      "classification": "unused legacy Java classes",
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "The DEX contains OnePF/OpenIAB and several vendor billing classes.",
+        "The active com.quattroplay.GraalClassic.Natives partner methods are no-ops and no Java native declarations for the Amazon or Mobiroo reverse callbacks were found in that class."
+      ],
+      "interpretation": "Bundled legacy classes should not be treated as proof that their stores are active in the reviewed APK. Their presence increases maintenance and attack-surface complexity but does not establish a reachable service flow."
+    }
+  ],
+  "partner_service_bound": false,
+  "partner_ui_opened": false,
+  "schema": "libqplay.original-partner-bridge-review.v1",
+  "scope": "read-only review of the original 1.8 TapJoy, Distimo, Fabzat, TrialPay, Amazon, and Mobiroo compatibility bridges",
+  "script_surface": {
+    "entries": [
+      {
+        "callback_va": "0x240994",
+        "native_signature": "isTapJoyEnabled()Z",
+        "script_name": "istapjoyenabled"
+      },
+      {
+        "callback_va": "0x240204",
+        "native_signature": "TString -> native global",
+        "script_name": "settapjoyapplicationid"
+      },
+      {
+        "callback_va": "0x2401f4",
+        "native_signature": "TString -> native global",
+        "script_name": "settapjoysecret"
+      },
+      {
+        "callback_va": "0x2410ac",
+        "native_signature": "connectToTapJoyService([B[B)Z",
+        "script_name": "connecttotapjoyservice"
+      },
+      {
+        "callback_va": "0x242ce0",
+        "native_signature": "showTapJoyOffers([B)V",
+        "script_name": "showtapjoyoffers"
+      },
+      {
+        "callback_va": "0x2421c8",
+        "native_signature": "connectToDistimoService([B)V",
+        "script_name": "connecttodistimoservice"
+      },
+      {
+        "callback_va": "0x241540",
+        "native_signature": "setDistimoRegisteredUser()V",
+        "script_name": "setdistimoregistereduser"
+      },
+      {
+        "callback_va": "0x242000",
+        "native_signature": "registerPurchaseToDistimo([B[B)V",
+        "script_name": "registerpurchasetodistimo"
+      },
+      {
+        "callback_va": "0x240774",
+        "native_signature": "isFabzatSupported()Z",
+        "script_name": "isfabzatsupported"
+      },
+      {
+        "callback_va": "0x241e38",
+        "native_signature": "initFabzatStore([B[B)V",
+        "script_name": "initfabzatstore"
+      },
+      {
+        "callback_va": "0x241d1c",
+        "native_signature": "fabzatSetResourcePath([B)V",
+        "script_name": "fabzatsetresourcepath"
+      },
+      {
+        "callback_va": "0x2414cc",
+        "native_signature": "showFabzatStore()V",
+        "script_name": "showfabzatstore"
+      },
+      {
+        "callback_va": "0x2401e0",
+        "native_signature": "native nullsub",
+        "script_name": "fabzatsetlogo"
+      },
+      {
+        "callback_va": "0x2401e4",
+        "native_signature": "native nullsub",
+        "script_name": "fabzatsetshareurl"
+      },
+      {
+        "callback_va": "0x2401e8",
+        "native_signature": "native nullsub",
+        "script_name": "fabzatsettitlefont"
+      },
+      {
+        "callback_va": "0x2401ec",
+        "native_signature": "native nullsub",
+        "script_name": "fabzatsetbuttonsfont"
+      },
+      {
+        "callback_va": "0x2401f0",
+        "native_signature": "native nullsub",
+        "script_name": "fabzatreplacetexture"
+      },
+      {
+        "callback_va": "0x2406ec",
+        "native_signature": "isTrialpaySupported()Z",
+        "script_name": "istrialpaysupported"
+      },
+      {
+        "callback_va": "0x241c00",
+        "native_signature": "initTrialpay([B)V",
+        "script_name": "inittrialpay"
+      },
+      {
+        "callback_va": "0x241a38",
+        "native_signature": "setTrialpayCampaign([B[B)V",
+        "script_name": "settrialpaycampaign"
+      },
+      {
+        "callback_va": "0x24190c",
+        "native_signature": "setTrialpayAgeAndGender(I[B)V",
+        "script_name": "settrialpayageandgender"
+      },
+      {
+        "callback_va": "0x2417f0",
+        "native_signature": "showTrialpayOfferwall([B)V",
+        "script_name": "showtrialpayofferwall"
+      }
+    ],
+    "owner": "main_android_initStaticScriptVars_void",
+    "registered_function_count": 44,
+    "source": "IDA script_table_inventory.json plus active IDA database",
+    "table_va": "0x38b2d0"
+  }
+}
