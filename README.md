@@ -79,6 +79,14 @@ or prevent an HTTPS-to-HTTP downgrade. This is a confirmed static finding,
 not a live-service result. The evidence is in
 `artifacts/original_http_redirect_review_20260830.json`.
 
+The script-to-Android URL pass found a separate outbound capability. The
+`openurl` and `openurl2` callbacks reach `QPlayActivity.openURL`; non-legacy
+inputs become `ACTION_VIEW` intents without a visible scheme or host
+allowlist, while `canopenurl` reports whether Android has a matching handler.
+The server-mediated `opengraalurl` path normally sends a game message, but it
+falls back to the same bridge when no active client exists. The static evidence
+is in `artifacts/original_external_url_review_20260830.json`.
+
 ## Repository layout
 
 * `docs/RESEARCH_NOTES.md` is the chronological investigation record.
@@ -130,6 +138,8 @@ not a live-service result. The evidence is in
   custom-scheme entrypoint, native URI parser, and script-visible start fields.
 * `artifacts/original_http_redirect_review_20260830.json` records native HTTP
   redirect handling, destination replacement, and transport downgrade behavior.
+* `artifacts/original_external_url_review_20260830.json` records script URL
+  callbacks, Android intent construction, and installed-handler probing.
 * `artifacts/ida_translation_verification_20260830.json` records the final
   packed IDA copy, pass counts, hashes, and zero-failure verification result.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.

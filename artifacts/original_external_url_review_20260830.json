@@ -1,0 +1,244 @@
+{
+  "artifact": "original_external_url_review_20260830",
+  "database": {
+    "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "imagebase": "0x0",
+    "path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
+  },
+  "findings": [
+    {
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "The openurl and openurl2 script callbacks reach TWindow_openURL and openAndroidURL_TString_const.",
+        "QPlayActivity.getIntentForURL uses ACTION_VIEW with Uri.parse for every input that is not one of the exact legacy game strings.",
+        "QPlayActivity.openURL starts the resolved activity without a visible scheme or host allowlist and without user confirmation."
+      ],
+      "id": "ANDROID-URL-001",
+      "impact": "A script that reaches this callback can cause the device to resolve and launch handlers for web, custom, or other supported URI schemes. This can open attacker-controlled content or cross-application flows and may expose the user to phishing or handler-specific side effects.",
+      "limits": "The callback still depends on script activation, an installed handler, and Android intent behavior. No script was executed and no intent was launched during this review. This is not evidence of arbitrary native code execution.",
+      "severity": "medium",
+      "title": "The script external URL bridge launches arbitrary ACTION_VIEW URIs"
+    },
+    {
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "JNI_canOpenURL forwards arbitrary input to QPlayActivity.canOpenURL.",
+        "The Java method queries PackageManager.queryIntentActivities and returns only whether the result is nonempty."
+      ],
+      "id": "ANDROID-URL-002",
+      "impact": "An activated script can use URI-handler queries as a coarse installed-application or capability probe. The result is a privacy signal rather than a direct file or credential read.",
+      "limits": "The result is Boolean and depends on Android package visibility and installed applications. No probing was performed against a device during this pass.",
+      "severity": "low",
+      "title": "canopenurl exposes installed-handler presence to scripts"
+    }
+  ],
+  "functions": [
+    {
+      "address": "0x106904",
+      "callers": [],
+      "code": "__int64 __fastcall TWindow_openURL_TString_const_bool(TWindow *this, const TString *a2)\n{\n  return plt_openAndroidURL_TString_const(a2);\n}\n",
+      "code_bytes": 139,
+      "code_sha256": "fbe1686752720e29a1f3c150610f8c081a80edcd557c70f3929176467166abad",
+      "function_end": "0x10690c",
+      "function_start": "0x106904",
+      "name": "TWindow_openURL_TString_const_bool",
+      "role": "window external URL bridge"
+    },
+    {
+      "address": "0x156cb4",
+      "callers": [],
+      "code": "__int64 __fastcall GSFunctionsClient_script_openurl(__int64 result)\n{\n  if ( data_TWindow_mainwindow )\n    return (*(__int64 (__fastcall **)(__int64, __int64, _QWORD))(*(_QWORD *)data_TWindow_mainwindow + 472LL))(\n             data_TWindow_mainwindow,\n             result,\n             0);\n  return result;\n}\n",
+      "code_bytes": 309,
+      "code_sha256": "7627c09977fa5e0768936720922fda249bffe399699974b2003039bb7aba3079",
+      "function_end": "0x156cf0",
+      "function_start": "0x156cb4",
+      "name": "GSFunctionsClient_script_openurl",
+      "role": "script external URL callback"
+    },
+    {
+      "address": "0x156cf0",
+      "callers": [],
+      "code": "__int64 __fastcall GSFunctionsClient_script_openurl2(__int64 result)\n{\n  if ( data_TWindow_mainwindow )\n    return (*(__int64 (__fastcall **)(__int64, __int64, _QWORD))(*(_QWORD *)data_TWindow_mainwindow + 472LL))(\n             data_TWindow_mainwindow,\n             result,\n             0);\n  return result;\n}\n",
+      "code_bytes": 310,
+      "code_sha256": "a9c82b8c50bd5dcf9bf671b9635b8f7a65c21821498493ba1b1131e497d5ecff",
+      "function_end": "0x156d2c",
+      "function_start": "0x156cf0",
+      "name": "GSFunctionsClient_script_openurl2",
+      "role": "second script external URL callback"
+    },
+    {
+      "address": "0x158b80",
+      "callers": [],
+      "code": "__int64 __fastcall GSFunctionsClient_script_opengraalurl(TString *a1)\n{\n  __int64 result; // x0\n\n  result = Adventure;\n  if ( Adventure )\n    return plt_TAdventure_openSecureURL_TString_const((TAdventure *)Adventure, a1);\n  return result;\n}\n",
+      "code_bytes": 241,
+      "code_sha256": "054a3e699623a7a7d3cc4c144a366136d912b35061b48d6ad5a94288bc5f792b",
+      "function_end": "0x158b9c",
+      "function_start": "0x158b80",
+      "name": "GSFunctionsClient_script_opengraalurl",
+      "role": "server-mediated URL callback"
+    },
+    {
+      "address": "0x15aeac",
+      "callers": [
+        {
+          "caller": "0xddff0",
+          "caller_name": "plt_TAdventure_checkOpenSecureURL_void",
+          "callsite": "0xddff4"
+        },
+        {
+          "caller": "0xddff0",
+          "caller_name": "plt_TAdventure_checkOpenSecureURL_void",
+          "callsite": "0xddffc"
+        }
+      ],
+      "code": "double *__fastcall TAdventure_checkOpenSecureURL_void(double *this)\n{\n  THTTPRequest *v1; // x22\n  int *v2; // x1\n  double *v3; // x20\n  bool *v4; // x5\n  double v5; // d0\n  const TString *v6; // x1\n  int v7; // w0\n  int v8; // w0\n  __int64 v9; // x23\n  const TString *v10; // x1\n  __int64 v11; // x0\n  char v12; // [xsp+5Bh] [xbp-25h] BYREF\n  char v13[4]; // [xsp+5Ch] [xbp-24h] BYREF\n  __int64 v14; // [xsp+60h] [xbp-20h] BYREF\n  __int64 v15; // [xsp+68h] [xbp-18h] BYREF\n  int v16[2]; // [xsp+70h] [xbp-10h] BYREF\n  __int64 v17; // [xsp+78h] [xbp-8h] BYREF\n\n  v1 = (THTTPRequest *)(this + 3);\n  v2 = *((int **)this + 3);\n  if ( v2 )\n  {\n    if ( *v2 > 0 )\n    {\n      v3 = this;\n      this = (double *)plt_TTime_getTime_void((TTime *)this);\n      if ( v5 >= v3[2] + 0.5 )\n      {\n        v14 = 0;\n        v15 = 0;\n        *(_QWORD *)v16 = 0;\n        if ( (unsigned __int8)plt_THTTPRequest_extractHTTPHostPortFile_TString_const_TString_int_TString_bool(\n                                v1,\n                                (const TString *)&v15,\n                                (TString *)v13,\n                                v16,\n                                (TString *)&v12,\n                                v4) )\n        {\n          v11 = plt_TString_operator_lshift_char_const((int)&v14, \"http://\");\n          plt_TString_operator_lshift_TString_const(v11, &v15);\n        }\n        else\n        {\n          plt_TString_operator_lshift_char_const((int)&v14, \"http://www.graalonline.com\");\n        }\n        plt_TString_operator_lshift_char_const((int)&v14, \"/accounts/login.php?uname=\");\n        plt_TEncryption_base64encode_TString_const(&v17, (TEncryption *)(activeplayer + 912), v6);\n        plt_TString_operator_lshift_TString_const(&v14, &v17);\n        plt_TString_operator_lshift_char_const(v7, \"&cookie=\");\n        plt_TString_clear_void((TString *)&v17);\n        plt_TString_operator_lshift_TString_const(&v14, v3 + 4);\n        v9 = plt_TString_operator_lshift_char_const(v8, \"&page=\");\n        plt_TEncryption_base64encode_TString_const(&v17, v1, v10);\n        plt_TString_operator_lshift_TString_const(v9, &v17);\n        plt_TString_clear_void((TString *)&v17);\n        if ( data_TWindow_mainwindow )\n          (*(void (__fastcall **)(__int64, __int64 *, _QWORD))(*(_QWORD *)data_TWindow_mainwindow + 472LL))(\n            data_TWindow_mainwindow,\n            &v14,\n            0);\n        v17 = 0;\n        plt_TString_operator_lshift_char_const((int)&v17, &byte_2DCE08);\n        plt_TString_operator_assign_TString_const(v1, &v17);\n        plt_TString_clear_void((TString *)&v17);\n        v17 = 0;\n        v3[2] = 0.0;\n        plt_TString_operator_lshift_char_const((int)&v17, &byte_2DCE08);\n        plt_TString_operator_assign_TString_const(v3 + 4, &v17);\n        plt_TString_clear_void((TString *)&v17);\n        plt_TString_clear_void((TString *)v16);\n        plt_TString_clear_void((TString *)&v15);\n        return (double *)plt_TString_clear_void((TString *)&v14);\n      }\n    }\n  }\n  return this;\n}\n",
+      "code_bytes": 3020,
+      "code_sha256": "8f5886bdf05e1a7737dd82330285e28a1384d7f8eb135a25953614ce2d2fc106",
+      "function_end": "0x15b0b4",
+      "function_start": "0x15aeac",
+      "name": "TAdventure_checkOpenSecureURL_void",
+      "role": "server-mediated URL checker"
+    },
+    {
+      "address": "0x15c228",
+      "callers": [
+        {
+          "caller": "0xd99d0",
+          "caller_name": "plt_TAdventure_openSecureURL_TString_const",
+          "callsite": "0xd99d4"
+        },
+        {
+          "caller": "0xd99d0",
+          "caller_name": "plt_TAdventure_openSecureURL_TString_const",
+          "callsite": "0xd99dc"
+        }
+      ],
+      "code": "void __fastcall TAdventure_openSecureURL_TString_const(TAdventure *this, const TString *a2)\n{\n  char *v3; // x0\n  __int64 v4; // d0\n  const TString *v5; // x26\n  const TString *v6; // x1\n  TClient *v7; // x23\n  __int64 v9; // [xsp+68h] [xbp-38h] BYREF\n  __int64 v10; // [xsp+70h] [xbp-30h] BYREF\n  __int64 v11; // [xsp+78h] [xbp-28h] BYREF\n  __int64 v12; // [xsp+80h] [xbp-20h] BYREF\n  __int64 v13[3]; // [xsp+88h] [xbp-18h] BYREF\n\n  if ( activeplayer && data_TClient_client )\n  {\n    plt_TTime_getTime_void((TTime *)data_TClient_client);\n    v3 = (char *)this + 24;\n    *((_QWORD *)this + 2) = v4;\n    v5 = (TAdventure *)((char *)this + 32);\n    plt_TString_operator_assign_TString_const(v3, a2);\n    v12 = 0;\n    plt_TString_operator_lshift_double(&v12, *((double *)v5 - 2));\n    plt_TEncryption_getMD5Digest_TString_const(v13, (TEncryption *)&v12, v6);\n    plt_TString_operator_assign_TString_const(v5, v13);\n    plt_TString_clear_void((TString *)v13);\n    plt_TString_clear_void((TString *)&v12);\n    plt_TStringList_TStringList_void((TStringList *)v13);\n    plt_TStringList_Add_TString_const((TStringList *)v13, (const TString *)(activeplayer + 912));\n    plt_TStringList_Add_TString_const((TStringList *)v13, v5);\n    v10 = 0;\n    v7 = (TClient *)data_TClient_client;\n    plt_TString_operator_lshift_char_const((int)&v10, \"GraalEngine\");\n    v11 = 0;\n    plt_TString_operator_lshift_char_const((int)&v11, \"lister\");\n    v12 = 0;\n    plt_TString_operator_lshift_char_const((int)&v12, \"setcookie\");\n    plt_TStringList_GetCommaText2_void(&v9, (TStringList *)v13);\n    plt_TClient_sendSetText_TString_const_TString_const_TString_const_TString_const(\n      v7,\n      (const TString *)&v10,\n      (const TString *)&v11,\n      (const TString *)&v12,\n      (const TString *)&v9);\n    plt_TString_clear_void((TString *)&v9);\n    plt_TString_clear_void((TString *)&v12);\n    plt_TString_clear_void((TString *)&v11);\n    plt_TString_clear_void((TString *)&v10);\n    plt_TStringList_TStringList((TStringList *)v13);\n  }\n  else if ( data_TWindow_mainwindow )\n  {\n    (*(void (__fastcall **)(__int64, const TString *, _QWORD))(*(_QWORD *)data_TWindow_mainwindow + 472LL))(\n      data_TWindow_mainwindow,\n      a2,\n      0);\n  }\n}\n",
+      "code_bytes": 2223,
+      "code_sha256": "93c8553c74f2ecbfc94068840dd5239444d7a37b77b583bd9a0351453a1235a8",
+      "function_end": "0x15c3d8",
+      "function_start": "0x15c228",
+      "name": "TAdventure_openSecureURL_TString_const",
+      "role": "server-mediated URL sender"
+    },
+    {
+      "address": "0x241288",
+      "callers": [],
+      "code": "// Calls Java static canOpenURL([B)Z. Converts a URL TString to a Java byte array and returns the Java boolean result.\nbool __fastcall JNI_canOpenURL(unsigned int **a1)\n{\n  __int64 v2; // x22\n  __int64 v3; // x21\n  unsigned int *v4; // x4\n  __int64 v5; // x0\n  __int64 v6; // x3\n  _DWORD *v7; // x4\n  unsigned int v8; // t1\n  _BOOL4 v9; // w19\n\n  v2 = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n         javaenvironment,\n         javaenvironmentclass,\n         \"canOpenURL\",\n         \"([B)Z\");\n  if ( v2 )\n  {\n    if ( *a1 )\n    {\n      v3 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, **a1);\n      v4 = *a1;\n      v5 = javaenvironment;\n      if ( *a1 )\n      {\nLABEL_4:\n        v8 = *v4;\n        v7 = v4 + 2;\n        v6 = v8;\nLABEL_5:\n        (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, _DWORD *))(*(_QWORD *)v5 + 1664LL))(\n          v5,\n          v3,\n          0,\n          v6,\n          v7);\n        v9 = (unsigned __int8)plt_JNIEnv_CallStaticBooleanMethod_jclass_jmethodID(\n                                javaenvironment,\n                                javaenvironmentclass,\n                                v2) != 0;\n        (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v3);\n        return v9;\n      }\n    }\n    else\n    {\n      v3 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, 0);\n      v4 = *a1;\n      v5 = javaenvironment;\n      if ( *a1 )\n        goto LABEL_4;\n    }\n    v6 = 0;\n    v7 = (_DWORD *)TString_dummystr;\n    goto LABEL_5;\n  }\n  return 0;\n}\n",
+      "code_bytes": 1710,
+      "code_sha256": "84546714e1715c1c3a258208636cb5c7b68585f67b9256cb1ee5e1a17a5a9924",
+      "function_end": "0x2413cc",
+      "function_start": "0x241288",
+      "name": "JNI_canOpenURL",
+      "role": "Android handler query bridge"
+    },
+    {
+      "address": "0x243158",
+      "callers": [
+        {
+          "caller": "0xd2900",
+          "caller_name": "plt_openAndroidURL_TString_const",
+          "callsite": "0xd2904"
+        },
+        {
+          "caller": "0xd2900",
+          "caller_name": "plt_openAndroidURL_TString_const",
+          "callsite": "0xd290c"
+        }
+      ],
+      "code": "__int64 __fastcall openAndroidURL_TString_const(unsigned int **a1)\n{\n  __int64 result; // x0\n  __int64 v3; // x22\n  __int64 v4; // x21\n  unsigned int *v5; // x4\n  __int64 v6; // x0\n  __int64 v7; // x3\n  _DWORD *v8; // x4\n  unsigned int v9; // t1\n  __int64 v10; // x4\n\n  result = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n             javaenvironment,\n             javaenvironmentclass,\n             \"openURL\",\n             \"([B)V\");\n  v3 = result;\n  if ( result )\n  {\n    if ( *a1 )\n    {\n      v4 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, **a1);\n      v5 = *a1;\n      v6 = javaenvironment;\n      if ( *a1 )\n      {\nLABEL_4:\n        v9 = *v5;\n        v8 = v5 + 2;\n        v7 = v9;\nLABEL_5:\n        (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, _DWORD *))(*(_QWORD *)v6 + 1664LL))(\n          v6,\n          v4,\n          0,\n          v7,\n          v8);\n        plt_JNIEnv_CallStaticVoidMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v3, v4, v10);\n        return (*(__int64 (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v4);\n      }\n    }\n    else\n    {\n      v4 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, 0);\n      v5 = *a1;\n      v6 = javaenvironment;\n      if ( *a1 )\n        goto LABEL_4;\n    }\n    v7 = 0;\n    v8 = (_DWORD *)TString_dummystr;\n    goto LABEL_5;\n  }\n  return result;\n}\n",
+      "code_bytes": 1547,
+      "code_sha256": "011ddea7f0739b60bee2e52255ad458f908ed299cbd19a526a1368ab4a6cfc6f",
+      "function_end": "0x243274",
+      "function_start": "0x243158",
+      "name": "openAndroidURL_TString_const",
+      "role": "Android external intent bridge"
+    }
+  ],
+  "intents_launched": false,
+  "interpretation": [
+    "openurl and openurl2 are external Android intent capabilities, not the native HTTP request API.",
+    "opengraalurl normally sends a server-mediated setcookie message when an active player and client exist, but its disconnected fallback calls the general external URL bridge.",
+    "A repair should allow only approved schemes and hosts, keep legacy game routing explicit, and avoid exposing package-handler queries to untrusted scripts."
+  ],
+  "java_observations": [
+    {
+      "behavior": [
+        "The exact strings graalclassic:// and graalclassicplus:// create ACTION_RUN intents targeting com.quattroplay.GraalClassic.QPlayActivity.",
+        "The exact graalera, graaleraplus, graalzone, graalzoneplus, graalworld, graalworldplus, graalolwest, and graalolwestplus strings target their corresponding legacy package and activity with ACTION_RUN.",
+        "Every other string is passed to Uri.parse and placed in an ACTION_VIEW intent without a scheme or host allowlist."
+      ],
+      "class": "com.quattroplay.GraalClassic.QPlayActivity",
+      "method": "getIntentForURL(java.lang.String)",
+      "source": "original DEX smali"
+    },
+    {
+      "behavior": [
+        "The method queries PackageManager.queryIntentActivities for the constructed intent.",
+        "When at least one handler exists it calls startActivity; otherwise it prints Can't open URL and returns.",
+        "The reviewed method has no user confirmation, scheme allowlist, or host allowlist before startActivity."
+      ],
+      "class": "com.quattroplay.GraalClassic.QPlayActivity",
+      "method": "openURL(java.lang.String)",
+      "source": "original DEX smali"
+    },
+    {
+      "behavior": [
+        "The method uses the same getIntentForURL mapping and returns whether queryIntentActivities finds at least one handler.",
+        "This exposes installed-handler presence to the caller of the native script bridge."
+      ],
+      "class": "com.quattroplay.GraalClassic.QPlayActivity",
+      "method": "canOpenURL(java.lang.String)",
+      "source": "original DEX smali"
+    }
+  ],
+  "network_contacted": false,
+  "observations": [
+    {
+      "address": "0x156cb4",
+      "classification": "script-to-window-dispatch",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "GSFunctionsClient_script_openurl forwards its argument through the main window virtual method at slot 472.",
+        "GSFunctionsClient_script_openurl2 uses the same main-window virtual method.",
+        "TWindow_openURL delegates to openAndroidURL_TString_const."
+      ],
+      "interpretation": "The openurl and openurl2 script callbacks reach the Android URL bridge rather than a native HTTP request object."
+    },
+    {
+      "address": "0x243158",
+      "classification": "Android-intent-construction",
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "openAndroidURL_TString_const calls the Java static openURL([B)V method after copying the native TString into a byte array.",
+        "The original QPlayActivity openURL method constructs the intent from the supplied string and starts it when an activity handler exists.",
+        "The Java helper maps only exact legacy game strings specially; all other values use ACTION_VIEW and Uri.parse."
+      ],
+      "interpretation": "An activated script can request external Android URI handling, subject to installed handlers and the Android sandbox."
+    },
+    {
+      "address": "0x241288",
+      "classification": "Android-handler-query",
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "JNI_canOpenURL calls the Java static canOpenURL([B)Z method.",
+        "The Java method returns whether PackageManager.queryIntentActivities finds a handler for the constructed intent."
+      ],
+      "interpretation": "The script-visible canopenurl callback can probe whether an installed application handles a URI, but it does not launch the handler itself."
+    },
+    {
+      "address": "0x158b80",
+      "classification": "server-mediated-URL-path",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "GSFunctionsClient_script_opengraalurl calls TAdventure_openSecureURL when the Adventure object exists.",
+        "With an active player and client, TAdventure_openSecureURL sends a setcookie message to the game server instead of immediately opening the argument.",
+        "Without that state, the native function falls back to the main window external URL bridge."
+      ],
+      "interpretation": "opengraalurl is a distinct server-mediated path, but its disconnected fallback still reaches the general Android URL bridge."
+    }
+  ],
+  "schema": "libqplay.original-external-url-review.v1",
+  "scope": "read-only review of original 1.8 script callbacks that reach Android URL intents",
+  "scripts_executed": false
+}
