@@ -66,6 +66,12 @@ There are also several meaningful security boundaries:
    to Facebook WebDialog code where the test flag is false and SSL errors are
    cancelled. This is not a Java SSL-bypass finding. The native connector is a
    separate CyaSSL implementation.
+7. The native `TSocket` property table exposes `bind`, `connect`, `send`, and
+   `sendudp`. Its connection helper contains local `bind`, `listen`, and
+   `accept` operations as well as TCP and UDP data paths. This is a conditional
+   local-listener capability for activated script code. The stock connector is
+   not shown to start a listener, and no runtime bind or external exposure was
+   tested.
 
 The native libraries do have useful baseline mitigations. All four packaged
 libraries report a non-executable `GNU_STACK`, GNU RELRO, and `BIND_NOW` in the
@@ -537,6 +543,59 @@ useful controls, but the signed script-package verifier remains the main trust
 boundary. A repair should remove direct file callbacks, require canonical
 application-root paths, use an explicit HTTP destination policy, and keep
 credentials and protocol keys outside general script reach.
+
+## Native socket capability boundary
+
+The complete direct-import inventory is in
+`artifacts/original_aarch64_import_callsite_inventory_20260830.json`, generated
+by `tools/audit_aarch64_import_calls.py`. It scans the original ARM64 ELF's
+`.text` section for direct `BL` calls and unconditional `B` tail transfers to
+PLT stubs, then names the containing functions from the checked-in inventory.
+It found 167 undefined symbols, 165 with direct transfers, 3,186 transfer
+sites, and 301 tail calls. The two imports without a direct transfer are the
+stdio global `__sF` and the C++ `__cxa_pure_virtual` fallback; the latter is
+referenced through virtual-table data rather than a normal callsite.
+
+The import scan confirms the following native boundary:
+
+* `TSocketProperties` registers the script functions `bind`, `connect`,
+  `send`, and `sendudp`. The bind callback is
+  `jump_TSocket_bind_int_bool` at `0x205b94`, and the UDP callback is
+  `jump_TSocket_sendUDP_TString_const_TString_const_int` at `0x2052e4`.
+* `TSocketConnection_bindSocket_int_bool` at `0x2068b4` creates and configures
+  a socket, then calls `bind` at `0x206940` and `listen` at `0x2069f0`.
+  `TSocketConnection_acceptSocket_void` calls `accept` at `0x206e60`.
+* The native constructor at `0xe0ab4` clears the allowed-port and
+  allowed-outbound-socket string state. The script callbacks at `0x204678`
+  and `0x204688` replace those values. The exact matching rules and whether a
+  stock activated script invokes them still need a controlled loopback test.
+* The ordinary connector uses the separate nonblocking TCP path. The UDP
+  branch reaches `sendto` at `0x2071f0` and `recvfrom` at `0x207730`, with the
+  receive path recording sender metadata. No live destination was identified
+  or contacted.
+
+This makes `SOCKET-001` a medium-severity conditional capability finding. An
+activated script that can set permissive values and invoke the bind operation
+may be able to create a local listener, but the static review does not show
+that the stock connector starts one, does not establish whether the listener
+is loopback-only, and did not observe an external connection. `SOCKET-002` is a
+lower-severity conditional UDP capability finding for the matching datagram
+send and receive path. The signed script package remains a key reachability
+gate for both.
+
+The scanner also corrected a completeness issue in the older libc review:
+`TFiles_deleteFile_TString_const` reaches `unlink` through two unconditional
+tail branches. A BL-only search would have reported that imported deletion
+function as unused. This does not change the existing conclusion that caller
+path policy, resource resolution, and symlink behavior determine the file
+deletion risk.
+
+The scan is intentionally not a full call graph. It does not include
+conditional branches, `BLR`, function pointers, vtables, or data-table
+dispatch. It proves imported native capability and code ownership, not stock
+runtime reachability. A safe repair should keep listener binding disabled for
+untrusted scripts, require an explicit loopback or approved-address policy,
+bound ports, and a separate outbound destination policy.
 
 ## Native HTTP redirects and destination changes
 

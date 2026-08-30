@@ -56,6 +56,8 @@ startup and pause evidence is in
   current device image.
 * Whether the live server sends the same completion sequence as the local
   responder.
+* Whether an activated script can pass the native socket allowlist checks and
+  create a listener or use the UDP branch.
 
 ## Current blocker
 

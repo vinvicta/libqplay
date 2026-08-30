@@ -1018,6 +1018,51 @@ This is a static response-integrity and availability concern after a trusted
 connection is established, not proof that an unauthenticated server can reach
 the write in stock operation.
 
+## Native import and socket capability inventory
+
+The next pass widened the native boundary check from the selected libc calls to
+every undefined symbol in the original ARM64 ELF. The compact report is
+`artifacts/original_aarch64_import_callsite_inventory_20260830.json`, generated
+by `tools/audit_aarch64_import_calls.py`. It maps `.rela.plt` entries to their
+AArch64 PLT stubs, scans `.text` for direct `BL` calls and unconditional `B`
+tail transfers, and uses the checked-in function inventory to label each
+containing function. It found 167 undefined symbols, 165 imports with direct
+transfers, 3,186 transfer sites, and 301 tail calls. No network service was
+contacted.
+
+The wider scan clarified the native socket surface. The `TSocketProperties`
+table registers `bind`, `connect`, `send`, and `sendudp`. The bind entry at
+`0x3864f0` points through `jump_TSocket_bind_int_bool` at `0x205b94`; the UDP
+entry points through `jump_TSocket_sendUDP_TString_const_TString_const_int` at
+`0x2052e4`. The underlying `TSocketConnection_bindSocket_int_bool` at
+`0x2068b4` creates and configures a socket, then reaches libc `bind` at
+`0x206940` and `listen` at `0x2069f0`. The separate
+`TSocketConnection_acceptSocket_void` function calls `accept` at `0x206e60`.
+
+The constructor at `0xe0ab4` starts with null values for the allowed outbound
+socket and allowed bind-port strings. Script callbacks at `0x204688` and
+`0x204678` replace those values. The exact matching rules are still a runtime
+question, but the static relationship is enough to classify the capability as
+conditional: an activated script may be able to create a local listener if it
+can supply permissive policy values and reach the bind operation. The stock
+connector path uses the separate nonblocking TCP connect flow and is not shown
+to start a listener.
+
+The same class has a UDP data branch. `sendto` is called at `0x2071f0` and
+`recvfrom` at `0x207730`; the receive path records the sender address and port
+before appending the bytes. This establishes a native datagram capability, not
+a live destination or proof that the stock script invokes it. The signed
+connector script package remains a significant reachability gate for these
+script-facing entries.
+
+The scan also corrected a completeness assumption in the earlier libc report.
+`TFiles_deleteFile_TString_const` reaches `unlink` through two unconditional
+tail branches at `0xe6e08` and `0xe6e18`. A search limited to `BL` would have
+reported that import as unused. The report now records the transfer kind for
+each site and explicitly excludes conditional branches, `BLR`, function
+pointers, vtables, and data-table dispatch. Those omissions mean the result is
+an import boundary inventory, not a complete call graph.
+
 ## Image resource and decoder review
 
 The next pass followed the same packet-102 resource path into the image loader.
