@@ -121,6 +121,14 @@ was captured for another client revision. It does not prove that the current
 service would reject the real request. The local test bypasses this branch
 only to study the native code after the package boundary.
 
+The native package boundary is recorded in
+`artifacts/original_script_package_review_20260830.json`. The outer RSA check
+precedes encrypted ZIP parsing, and only after it succeeds does the client look
+for `StartScript_Connector` and run its script object. The ZIP parser limits
+entry count and individual reported size but has no visible aggregate
+decompressed-size budget. Long embedded crypto literals are redacted from the
+public artifact.
+
 ## 3. Certificate finding
 
 The embedded GraalWeb certificate was recovered from the ARM64 library and

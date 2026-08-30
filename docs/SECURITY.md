@@ -192,6 +192,31 @@ The APK contains `res/raw/fabzat_com.crt`, whose subject is
 legacy material, not proof that the startup connector consumes it. It should
 not be treated as a current trust anchor.
 
+### Signed connector script package
+
+The connector package has a second trust boundary after HTTPS. The compact
+review is in `artifacts/original_script_package_review_20260830.json`, generated
+by `tools/ida_export_original_script_package_review.py`. The native
+`TScriptUniverse_compileZippedScripts` path verifies the outer package with an
+embedded RSA public key before RC4 decryption and ZIP dispatch. The public
+artifact redacts long crypto literals and records only their lengths and
+hashes.
+
+The parser caps the ZIP global entry count at 10,000 and skips entries whose
+reported uncompressed size exceeds 1 GiB. It has no visible aggregate
+decompressed-size budget, and one `unzReadCurrentFile` result is not compared
+with the requested entry size. Recognized entries become connector, NPC, or
+class script objects. The reviewed dispatch does not directly write arbitrary
+ZIP entry names to disk, so ZIP path traversal is not established here. Large
+or numerous signed entries remain an availability concern.
+
+After a successful compile, `TScriptUniverse_addZippedScripts` finds
+`StartScript_Connector`, exposes selected socket and TLS metadata as script
+variables, and starts the script runtime. A mismatched or stale `con.png` can
+therefore fail at package verification even when the HTTPS transport is
+otherwise repaired. This package-signing check is separate from the expired
+connector certificate and should remain enabled in any compatibility build.
+
 ### Game-server TLS configuration
 
 The game connection has its own `TGraalConnection` SSL fields. The script

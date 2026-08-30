@@ -145,6 +145,16 @@ The package is therefore a stale or mismatched artifact for a strict client.
 The local test has a narrowly scoped RSA branch bypass so the script compiler
 can be studied. That bypass is not a safe release repair.
 
+The follow-up IDA export is
+`artifacts/original_script_package_review_20260830.json`. It confirms that the
+RSA check happens before the encrypted ZIP is opened and before
+`StartScript_Connector` can be activated. The ZIP parser caps the number of
+entries at 10,000 and rejects an individual reported size above 1 GiB, but it
+does not show an aggregate decompressed-size budget. It also dispatches
+recognized ZIP names to script objects rather than directly writing arbitrary
+entry paths. The report redacts embedded crypto literals while retaining the
+structural decompilation and hashes of the redacted values.
+
 The response-header finding needed a correction after a second IDA pass. The
 function `THTTPRequest_preParseData_void` at `0x201d68` lowercases each header
 line with `TString::lower` before matching `server:`, `content-length:`,

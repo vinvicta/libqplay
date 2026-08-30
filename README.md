@@ -81,6 +81,9 @@ account authentication remain open.
 * `artifacts/original_update_integrity_review_20260830.json` records the
   request-side CRC fields, download scheduler, response accumulation, and
   package completion boundary.
+* `artifacts/original_script_package_review_20260830.json` records the signed
+  connector script package parser and activation path. Embedded crypto
+  literals are redacted from this public report.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.
 * `symbols/libqplay.symbols.json` is the machine-readable equivalent.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.

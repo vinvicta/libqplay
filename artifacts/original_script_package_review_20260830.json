@@ -1,0 +1,418 @@
+{
+  "artifact": "original_script_package_review_20260830",
+  "database": {
+    "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "imagebase": "0x0",
+    "path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
+  },
+  "functions": [
+    {
+      "address": "0x22cf78",
+      "callers": [
+        {
+          "caller": "0x22cf98",
+          "caller_name": "TScriptUniverse_addZippedScripts_TString_const_TSocketConnection",
+          "callsite": "0x22cfb4"
+        }
+      ],
+      "code": "__int64 __fastcall TScriptUniverse_compileZippedScripts_TString_const(TScriptUniverse *this, int **a2)\n{\n  int v4; // w19\n  int v5; // w25\n  int v6; // w25\n  int v7; // w25\n  int v8; // w26\n  int v9; // w0\n  unsigned int v10; // w27\n  int v11; // w28\n  int v12; // w20\n  int v13; // w20\n  int v14; // w20\n  int v15; // w2\n  int v16; // w0\n  int v17; // w2\n  const TString *v18; // x1\n  const TString *v19; // x2\n  const TString *v20; // x1\n  const TString *v21; // x3\n  int v22; // w28\n  const TString *v23; // x2\n  int v24; // w1\n  __int64 v25; // x0\n  __int64 v26; // x24\n  int v27; // w0\n  int v28; // w25\n  __int64 v29; // x1\n  const TString *v30; // x1\n  const TString *v31; // x1\n  const TString *v32; // x1\n  unsigned int Hashcode_TString_const; // w0\n  TGraalVar *Object_uint_TString_const; // x2\n  TGraalVar *v35; // x2\n  const TString *v36; // x1\n  const TString *v37; // x1\n  unsigned int v38; // w3\n  TEncryption *v39; // x0\n  const unsigned __int8 *v40; // x1\n  const TString *v41; // x2\n  __int64 v42; // x3\n  double v43; // d0\n  unsigned int v45; // [xsp+78h] [xbp-278h]\n  THashList *v46; // [xsp+78h] [xbp-278h]\n  TGraalVar *v47; // [xsp+78h] [xbp-278h]\n  THashList *TString_const_bool; // [xsp+78h] [xbp-278h]\n  THashList *v49; // [xsp+78h] [xbp-278h]\n  int v50; // [xsp+88h] [xbp-268h]\n  int v51; // [xsp+8Ch] [xbp-264h]\n  double v52; // [xsp+98h] [xbp-258h]\n  __int64 v53; // [xsp+B8h] [xbp-238h] BYREF\n  __int64 v54; // [xsp+C0h] [xbp-230h] BYREF\n  int *v55; // [xsp+C8h] [xbp-228h] BYREF\n  char v56[8]; // [xsp+D0h] [xbp-220h] BYREF\n  __int64 v57; // [xsp+D8h] [xbp-218h] BYREF\n  __int64 v58; // [xsp+E0h] [xbp-210h] BYREF\n  _DWORD *v59; // [xsp+E8h] [xbp-208h] BYREF\n  __int64 v60; // [xsp+F0h] [xbp-200h] BYREF\n  int v61; // [xsp+F8h] [xbp-1F8h] BYREF\n  int v62; // [xsp+FCh] [xbp-1F4h]\n  int *v63; // [xsp+100h] [xbp-1F0h] BYREF\n  __int64 v64[2]; // [xsp+108h] [xbp-1E8h] BYREF\n  __int64 v65; // [xsp+118h] [xbp-1D8h] BYREF\n  __int64 v66; // [xsp+120h] [xbp-1D0h] BYREF\n  __int64 v67[8]; // [xsp+128h] [xbp-1C8h] BYREF\n  _QWORD v68[7]; // [xsp+168h] [xbp-188h] BYREF\n  unsigned __int64 v69; // [xsp+1A0h] [xbp-150h]\n  __int64 v70[32]; // [xsp+1F0h] [xbp-100h] BYREF\n\n  if ( !*a2 || **a2 <= 3 )\n    return 0;\n  v4 = (unsigned __int8)plt_TString_operator_index_int(a2, 1);\n  v5 = ((unsigned __int8)plt_TString_operator_index_int(a2, 2) << 16) + (v4 << 24);\n  v6 = v5 + ((unsigned __int8)plt_TString_operator_index_int(a2, 3) << 8);\n  v7 = v6 + (unsigned __int8)plt_TString_operator_index_int(a2, 4);\n  v8 = v7 + 7;\n  if ( *a2 )\n    v9 = **a2;\n  else\n    v9 = 0;\n  v10 = 0;\n  if ( v8 < v9 )\n  {\n    v11 = v7 + 8;\n    plt_TString_subString_int_int(&v53, (TString *)a2, 4, v7 + 4);\n    v12 = (unsigned __int8)plt_TString_operator_index_int(a2, (unsigned int)(v7 + 5));\n    v13 = ((unsigned __int8)plt_TString_operator_index_int(a2, (unsigned int)(v7 + 6)) << 16) + (v12 << 24);\n    v14 = v13 + ((unsigned __int8)plt_TString_operator_index_int(a2, (unsigned int)v8) << 8);\n    v15 = v14 + (unsigned __int8)plt_TString_operator_index_int(a2, (unsigned int)(v7 + 8));\n    if ( *a2 )\n      v16 = **a2;\n    else\n      v16 = 0;\n    v17 = v11 + v15;\n    v10 = 0;\n    if ( v17 <= v16 )\n    {\n      plt_TString_subString_int_int(&v54, (TString *)a2, v11, v17);\n      v68[0] = 0;\n      plt_TString_operator_lshift_char_const((int)v68, \"<redacted-static-literal length=8 sha256=30c72a9ec76686c938d19697d5a15fd24ba65a548c5f622ea7b8678c32be60af>\");\n      v65 = 0;\n      plt_TString_operator_lshift_char_const(\n        (int)&v65,\n        \"<redacted-static-literal length=112 sha256=413ccbd95953cf2517f486de5f385d18a8f83e4ca81721d4df45266d1c3046ef>\"\n        \"<redacted-static-literal length=112 sha256=e56c2d147699c39b51d5f5446ebf9b807715cb8fed451095bf0da4235813bc91>\"\n        \"<redacted-static-literal length=112 sha256=62b83e18e59f6d0beecf8e60cbae3ec73e79f4f97e8e9ff6ce364604199a8de9>\"\n        \"MtZGCbjTgf9LBBGtAgMBAAE=\");\n      plt_TEncryption_base64decode_TString_const(v67, (TEncryption *)&v65, v18);\n      plt_TEncryption_des_decrypt_TString_const_TString_const(v70, (TEncryption *)v68, (const TString *)v67, v19);\n      plt_TEncryption_sha256_TString_const(v64, (TEncryption *)&v54, v20);\n      v22 = (unsigned __int8)plt_TEncryption_rsa_verify_TString_const_TString_const_TString_const(\n                               (TEncryption *)v70,\n                               (const TString *)v64,\n                               (const TString *)&v53,\n                               v21);\n      plt_TString_clear_void((TString *)v64);\n      plt_TString_clear_void((TString *)v70);\n      plt_TString_clear_void((TString *)v67);\n      plt_TString_clear_void((TString *)&v65);\n      plt_TString_clear_void((TString *)v68);\n      if ( v22 )\n      {\n        v68[0] = 0;\n        v63 = nullptr;\n        v61 = 0;\n        v62 = 0;\n        ++cstream;\n        plt_TString_operator_lshift_char_const((int)v68, \"<redacted-static-literal length=16 sha256=30691eeed035b01fa2f44267620b1079eeea87c71e2e91f6d108d642fcef120e>\");\n        plt_TEncryption_rc4_cipher_simple_TString_const_TString_const(\n          v70,\n          (TEncryption *)v68,\n          (const TString *)&v54,\n          v23);\n        if ( v63 && *v63 > 0 )\n          plt_TString_operator_lshift_TString_const(&v63, v70);\n        else\n          plt_TString_operator_assign_TString_const(&v63, v70);\n        if ( v63 )\n          v24 = *v63;\n        else\n          v24 = 0;\n        v62 = v24;\n        v61 = v24;\n        plt_TString_clear_void((TString *)v70);\n        plt_TString_clear_void((TString *)v68);\n        plt_TStream_fillZipFunctions_zlib_filefunc_def_s(&v61, v67);\n        v25 = unzOpen2(0, v67);\n        v26 = v25;\n        if ( v25 )\n        {\n          if ( (unsigned int)unzGetGlobalInfo(v25, v64) )\n          {\n            v10 = 0;\n            unzClose(v26);\n          }\n          else\n          {\n            v55 = nullptr;\n            if ( SLODWORD(v64[0]) > 10000 )\n              v27 = 10000;\n            else\n              v27 = v64[0];\n            v50 = v27;\n            if ( v27 <= 0 )\n            {\n              v51 = 0;\n            }\n            else\n            {\n              v51 = 0;\n              v28 = 0;\n              v52 = 0.0;\n              do\n              {\n                if ( (unsigned int)unzGetCurrentFileInfo(v26, v68, v70, 256, 0, 0, 0, 0) )\n                  break;\n                if ( v69 <= 0x40000000 )\n                {\n                  v45 = unzOpenCurrentFile(v26);\n                  if ( !v45 )\n                  {\n                    v65 = 0;\n                    v66 = 0;\n                    ++cstream;\n                    plt_TStream_setSize_int((TStream *)&v65, v69);\n                    v29 = v66 + 8;\n                    if ( !v66 )\n                      v29 = TString_dummystr;\n                    if ( (unzReadCurrentFile(v26, v29, HIDWORD(v65)) & 0x80000000) == 0 )\n                    {\n                      if ( v55 && *v55 > 7 )\n                      {\n                        plt_TString_makeUnique_void((TString *)&v66);\n                        plt_TEncryption_rc4_cipher_simple_TString_const_TString_const(\n                          &v60,\n                          (TEncryption *)&v55,\n                          (const TString *)&v66,\n                          (const TString *)&v66);\n                        plt_TString_operator_assign_TString_const(&v66, &v60);\n                        plt_TString_clear_void((TString *)&v60);\n                      }\n                      v60 = 0;\n                      plt_TString_operator_lshift_char_const((int)&v60, (char *)v70);\n                      plt_TFiles_extractFilepath_TString_const((TFiles *)&v60, v30);\n                      plt_TString_clear_void((TString *)&v60);\n                      v60 = 0;\n                      plt_TString_operator_lshift_char_const((int)&v60, (char *)v70);\n                      plt_TFiles_extractFilename_TString_const((TFiles *)&v60, v31);\n                      plt_TString_clear_void((TString *)&v60);\n                      if ( (unsigned __int8)plt_operator_assign_TString_const_char_const((int)v56, &byte_2DCE08)\n                        && (unsigned __int8)plt_operator_assign_TString_const_char_const((int)&v57, \".rk\") )\n                      {\n                        v60 = 0;\n                        plt_TString_operator_lshift_char_const((int)&v60, \"<redacted-static-literal length=12 sha256=9b0bc7e17841f17590efda3bc1960e5a6198e783f9a81e0f7c15afb706274e22>\");\n                        plt_TEncryption_base64decode_TString_const(&v58, (TEncryption *)&v60, v36);\n                        plt_TString_clear_void((TString *)&v60);\n                        v60 = 0;\n                        plt_TString_operator_lshift_char_const(\n                          (int)&v60,\n                          \"<redacted-static-literal length=94 sha256=12e83f5e4d9091459017aaf1a35009a71e0b89a9390a69ea528017c9fdd51981>\"\n                          \"<redacted-static-literal length=94 sha256=3ea7e1a50df2c0de2590b3fd21a4123480776ceb0376206bb9a766b2f0c2e110>\"\n                          \"<redacted-static-literal length=94 sha256=672788b66c078136f6a5c9a0d4ab4f53bcb29e6a8f7616ee0b7b0eb7a14fb99a>\"\n                          \"<redacted-static-literal length=94 sha256=82e969965cef475a5d8fd3a1a22108ff66d3446d042f4808476d38584a9bbfc1>\"\n                          \"<redacted-static-literal length=94 sha256=6bf47a856df6f300248b09788f667ac42a12c89c67a5048e0cd928d135284dcf>\"\n                          \"<redacted-static-literal length=94 sha256=bc340e5de4888c94cb19563dbd43068cf79ba1758e3b925fbd7ccf23ee3f6860>\"\n                          \"<redacted-static-literal length=94 sha256=c47ab076a0b64e1dc826d65c31a091b079815b555a11cfc9d027a7c2c8d52750>\"\n                          \"<redacted-static-literal length=94 sha256=67e7d245380db3137b71da1be5c5fe9f2f08e8635f9024d8facbca6369a730bb>\"\n                          \"<redacted-static-literal length=94 sha256=8b0d5efdde01925f55faf937c827081aa6c96a27fac431801ae64d260384a284>\"\n                          \"<redacted-static-literal length=94 sha256=079a7158dd16a16e9d7098e18342d511e7838e55776db952ac516f895122d965>\"\n                          \"<redacted-static-literal length=94 sha256=a29f367b4c1e3ef47ba70691535aa583214ec811fda820f5b31a4cd30db3534c>\"\n                          \"<redacted-static-literal length=94 sha256=4e7649576a09ac7bc01c22f1f9d085ffeb18472de2e2f9cc17e29270173fcd12>\"\n                          \"<redacted-static-literal length=94 sha256=3918a8b9412d32aaec24f0c328fa599c2bd9c6f03f2124b4839b2e6bb7a044b6>\"\n                          \"<redacted-static-literal length=94 sha256=3c08ab5a516a62b084800c546099bc648ef91e0d520a7a30fa6ad30b9eb89077>\"\n                          \"<redacted-static-literal length=94 sha256=b73cae85c6656286a6fa7be2253a3ef3ed0adb309e8a0384fb8d4c40fe43546c>\"\n                          \"<redacted-static-literal length=94 sha256=01781bd6d7423d164ac2933abe16eea7c281e6191fe908f0afa2af642b8a7e8f>\"\n                          \"<redacted-static-literal length=80 sha256=7e4739eb0875259c936f4a091795c7be46879f7758c0549945df6858c6843ff1>\");\n                        plt_TEncryption_base64decode_TString_const((__int64 *)&v59, (TEncryption *)&v60, v37);\n                        plt_TString_clear_void((TString *)&v60);\n                        v39 = (TEncryption *)(v58 + 8);\n                        if ( !v58 )\n                          v39 = (TEncryption *)TString_dummystr;\n                        if ( v59 )\n                        {\n                          v40 = (const unsigned __int8 *)(v59 + 2);\n                          v45 = *v59;\n                        }\n                        else\n                        {\n                          v40 = (const unsigned __int8 *)TString_dummystr;\n                        }\n                        plt_TEncryption_des_decryptmemory_uchar_const_uchar_uint(v39, v40, (unsigned __int8 *)v45, v38);\n                        plt_TEncryption_rsa_decrypt_TString_const_TString_const(\n                          &v60,\n                          (TEncryption *)&v59,\n                          (const TString *)&v66,\n                          v41);\n                        plt_TString_operator_assign_TString_const(&v55, &v60);\n                        plt_TString_clear_void((TString *)&v60);\n                        plt_TString_clear_void((TString *)&v59);\n                        plt_TString_clear_void((TString *)&v58);\n                      }\n                      else if ( v55 && *v55 > 0 )\n                      {\n                        if ( (unsigned __int8)plt_operator_assign_TString_const_char_const((int)v56, &byte_2DCE08)\n                          && (unsigned __int8)plt_operator_assign_TString_const_char_const((int)&v57, \".t\") )\n                        {\n                          plt_strtofloat_TString_const((const TString *)&v66);\n                          v52 = v43;\n                        }\n                        else if ( (unsigned __int8)plt_operator_assign_TString_const_char_const((int)v56, \"NPCS/\") )\n                        {\n                          if ( !*(_QWORD *)(data_TGameEnvironment_universe + 96)\n                            || (v46 = *(THashList **)(data_TGameEnvironment_universe + 96),\n                                Hashcode_TString_const = plt_THashList_getHashcode_TString_const((THashList *)&v57, v32),\n                                (Object_uint_TString_const = (TGraalVar *)plt_THashList_getObject_uint_TString_const(\n                                                                            v46,\n                                                                            Hashcode_TString_const,\n                                                                            (const TString *)&v57)) == nullptr) )\n                          {\n                            v49 = (THashList *)plt_operator_new_ulong__2(0x70u);\n                            plt_TGraalVar_TGraalVar_TString_const__2(v49, (const TString *)&v57);\n                            *((_BYTE *)v49 + 19) = 1;\n                            if ( data_TServerList_connectormode <= 2 )\n                              (*(void (__fastcall **)(THashList *, __int64))(*(_QWORD *)v49 + 168LL))(v49, 2);\n                            else\n                              (*(void (__fastcall **)(THashList *, __int64))(*(_QWORD *)v49 + 168LL))(v49, 1);\n                            plt_TScriptUniverse_addStaticObject_TGraalVar(\n                              (TScriptUniverse *)data_TGameEnvironment_universe,\n                              v49);\n                            Object_uint_TString_const = v49;\n                          }\n                          v47 = Object_uint_TString_const;\n                          plt_TGraalVar_setScript_TString_const(Object_uint_TString_const, (const TString *)&v66);\n                          v35 = v47;\n                          if ( v52 != 0.0 )\n                          {\n                            v60 = 0;\n                            plt_TString_operator_lshift_char_const((int)&v60, \"scripttimestamp\");\n                            plt_TGraalVar_setVarValueAsFloat_TString_const_double(v47, (const TString *)&v60, v52);\n                            plt_TString_clear_void((TString *)&v60);\n                            v35 = v47;\n                          }\n                          v51 = 1;\n                          (*(void (__fastcall **)(TGraalVar *, _QWORD))(*(_QWORD *)v35 + 144LL))(v35, 0);\n                        }\n                        else if ( (unsigned __int8)plt_operator_assign_TString_const_char_const((int)v56, \"CLASSES/\") )\n                        {\n                          TString_const_bool = (THashList *)plt_TScriptUniverse_getClassAndCreate_TString_const_bool(\n                                                              (TScriptUniverse *)data_TGameEnvironment_universe,\n                                                              (const TString *)&v57,\n                                                              0);\n                          plt_TScript_setStream_TString_const(TString_const_bool, (const TString *)&v66);\n                          *((_DWORD *)TString_const_bool + 46) = 2;\n                          *((_BYTE *)TString_const_bool + 224) = 0;\n                          v60 = 0;\n                          plt_TString_operator_lshift_char_const((int)&v60, \"onClassLoaded\");\n                          if ( v57 )\n                            v42 = v57 + 8;\n                          else\n                            v42 = TString_dummystr;\n                          v51 = 1;\n                          plt_TGraalVar_invokeEvent_TString_const_char_const(this, (const TString *)&v60, \"s\", v42);\n                          plt_TString_clear_void((TString *)&v60);\n                          v60 = 0;\n                          plt_TString_operator_lshift_char_const((int)&v60, \"onClassLoaded\");\n                          plt_TGraalVar_invokeEvent_TString_const(TString_const_bool, (const TString *)&v60);\n                          plt_TString_clear_void((TString *)&v60);\n                        }\n                      }\n                      plt_TString_clear_void((TString *)&v57);\n                      plt_TString_clear_void((TString *)v56);\n                    }\n                    unzCloseCurrentFile(v26);\n                    --cstream;\n                    plt_TString_clear_void((TString *)&v66);\n                  }\n                }\n                if ( ++v28 == v50 )\n                  break;\n              }\n              while ( !(unsigned int)unzGoToNextFile(v26) );\n            }\n            v10 = v51;\n            unzClose(v26);\n            plt_TString_clear_void((TString *)&v55);\n          }\n        }\n        else\n        {\n          v10 = 0;\n        }\n        --cstream;\n        plt_TString_clear_void((TString *)&v63);\n      }\n      plt_TString_clear_void((TString *)&v54);\n    }\n    plt_TString_clear_void((TString *)&v53);\n  }\n  return v10;\n}\n",
+      "code_bytes": 17928,
+      "code_literals_redacted": true,
+      "code_sha256": "22a0a7354d0e26e4e095c750c6588d4709d4539585e5a1f603c3fb8bda1f7284",
+      "function_end": "0x22cf98",
+      "function_start": "0x22cf78",
+      "name": "TScriptUniverse_compileZippedScripts_TString_const",
+      "role": "signed encrypted ZIP parser",
+      "string_literals": [
+        "\".rk\"",
+        "\".t\"",
+        "\"<redacted-static-literal length=112 sha256=413ccbd95953cf2517f486de5f385d18a8f83e4ca81721d4df45266d1c3046ef>\"",
+        "\"<redacted-static-literal length=112 sha256=62b83e18e59f6d0beecf8e60cbae3ec73e79f4f97e8e9ff6ce364604199a8de9>\"",
+        "\"<redacted-static-literal length=112 sha256=e56c2d147699c39b51d5f5446ebf9b807715cb8fed451095bf0da4235813bc91>\"",
+        "\"<redacted-static-literal length=12 sha256=9b0bc7e17841f17590efda3bc1960e5a6198e783f9a81e0f7c15afb706274e22>\"",
+        "\"<redacted-static-literal length=16 sha256=30691eeed035b01fa2f44267620b1079eeea87c71e2e91f6d108d642fcef120e>\"",
+        "\"<redacted-static-literal length=8 sha256=30c72a9ec76686c938d19697d5a15fd24ba65a548c5f622ea7b8678c32be60af>\"",
+        "\"<redacted-static-literal length=80 sha256=7e4739eb0875259c936f4a091795c7be46879f7758c0549945df6858c6843ff1>\"",
+        "\"<redacted-static-literal length=94 sha256=01781bd6d7423d164ac2933abe16eea7c281e6191fe908f0afa2af642b8a7e8f>\"",
+        "\"<redacted-static-literal length=94 sha256=079a7158dd16a16e9d7098e18342d511e7838e55776db952ac516f895122d965>\"",
+        "\"<redacted-static-literal length=94 sha256=12e83f5e4d9091459017aaf1a35009a71e0b89a9390a69ea528017c9fdd51981>\"",
+        "\"<redacted-static-literal length=94 sha256=3918a8b9412d32aaec24f0c328fa599c2bd9c6f03f2124b4839b2e6bb7a044b6>\"",
+        "\"<redacted-static-literal length=94 sha256=3c08ab5a516a62b084800c546099bc648ef91e0d520a7a30fa6ad30b9eb89077>\"",
+        "\"<redacted-static-literal length=94 sha256=3ea7e1a50df2c0de2590b3fd21a4123480776ceb0376206bb9a766b2f0c2e110>\"",
+        "\"<redacted-static-literal length=94 sha256=4e7649576a09ac7bc01c22f1f9d085ffeb18472de2e2f9cc17e29270173fcd12>\"",
+        "\"<redacted-static-literal length=94 sha256=672788b66c078136f6a5c9a0d4ab4f53bcb29e6a8f7616ee0b7b0eb7a14fb99a>\"",
+        "\"<redacted-static-literal length=94 sha256=67e7d245380db3137b71da1be5c5fe9f2f08e8635f9024d8facbca6369a730bb>\"",
+        "\"<redacted-static-literal length=94 sha256=6bf47a856df6f300248b09788f667ac42a12c89c67a5048e0cd928d135284dcf>\"",
+        "\"<redacted-static-literal length=94 sha256=82e969965cef475a5d8fd3a1a22108ff66d3446d042f4808476d38584a9bbfc1>\"",
+        "\"<redacted-static-literal length=94 sha256=8b0d5efdde01925f55faf937c827081aa6c96a27fac431801ae64d260384a284>\"",
+        "\"<redacted-static-literal length=94 sha256=a29f367b4c1e3ef47ba70691535aa583214ec811fda820f5b31a4cd30db3534c>\"",
+        "\"<redacted-static-literal length=94 sha256=b73cae85c6656286a6fa7be2253a3ef3ed0adb309e8a0384fb8d4c40fe43546c>\"",
+        "\"<redacted-static-literal length=94 sha256=bc340e5de4888c94cb19563dbd43068cf79ba1758e3b925fbd7ccf23ee3f6860>\"",
+        "\"<redacted-static-literal length=94 sha256=c47ab076a0b64e1dc826d65c31a091b079815b555a11cfc9d027a7c2c8d52750>\"",
+        "\"CLASSES/\"",
+        "\"MtZGCbjTgf9LBBGtAgMBAAE=\"",
+        "\"NPCS/\"",
+        "\"onClassLoaded\"",
+        "\"s\"",
+        "\"scripttimestamp\""
+      ]
+    },
+    {
+      "address": "0x22cf98",
+      "callers": [
+        {
+          "caller": "0x200010",
+          "caller_name": "THTTPRequest_saveDownloadedData_void",
+          "callsite": "0x2001b0"
+        }
+      ],
+      "code": "__int64 __fastcall TScriptUniverse_addZippedScripts_TString_const_TSocketConnection(\n        THashList **this,\n        const TString *a2,\n        TSocketConnection *a3)\n{\n  int v5; // w24\n  const TString *v6; // x1\n  THashList *v7; // x20\n  unsigned int Hashcode_TString_const; // w0\n  TGraalVar *Object_uint_TString_const; // x21\n  _BOOL4 v10; // w20\n  const char *v11; // x2\n  unsigned int hasEventCatcher_TString_const; // w24\n  const TString *v14; // x1\n  THashList *v15; // x20\n  unsigned int v16; // w0\n  __int64 v17; // [xsp+40h] [xbp-10h] BYREF\n  __int64 v18; // [xsp+48h] [xbp-8h] BYREF\n\n  v5 = plt_TScriptUniverse_compileZippedScripts_TString_const((TScriptUniverse *)this, a2);\n  v18 = 0;\n  plt_TString_operator_lshift_char_const((int)&v18, \"StartScript_Connector\");\n  v7 = *(this + 12);\n  if ( !v7 )\n  {\n    plt_TString_clear_void((TString *)&v18);\n    goto LABEL_11;\n  }\n  Hashcode_TString_const = plt_THashList_getHashcode_TString_const((THashList *)&v18, v6);\n  Object_uint_TString_const = (TGraalVar *)plt_THashList_getObject_uint_TString_const(\n                                             v7,\n                                             Hashcode_TString_const,\n                                             (const TString *)&v18);\n  plt_TString_clear_void((TString *)&v18);\n  if ( !Object_uint_TString_const )\n  {\nLABEL_11:\n    v18 = 0;\n    plt_TString_operator_lshift_char_const((int)&v18, \"StartScript_Fail\");\n    v15 = *(this + 12);\n    if ( v15 )\n    {\n      v16 = plt_THashList_getHashcode_TString_const((THashList *)&v18, v14);\n      Object_uint_TString_const = (TGraalVar *)plt_THashList_getObject_uint_TString_const(\n                                                 v15,\n                                                 v16,\n                                                 (const TString *)&v18);\n      v10 = Object_uint_TString_const != nullptr && v5 > 0;\n    }\n    else\n    {\n      v10 = 0;\n      Object_uint_TString_const = nullptr;\n    }\n    plt_TString_clear_void((TString *)&v18);\n    goto LABEL_4;\n  }\n  v10 = v5 > 0;\nLABEL_4:\n  if ( v10\n    && (v18 = 0,\n        plt_TString_operator_lshift_char_const((int)&v18, \"onCreated\"),\n        hasEventCatcher_TString_const = (unsigned __int8)plt_TGraalVar_hasEventCatcher_TString_const(\n                                                           Object_uint_TString_const,\n                                                           (const TString *)&v18),\n        plt_TString_clear_void((TString *)&v18),\n        hasEventCatcher_TString_const) )\n  {\n    if ( a3 )\n    {\n      v18 = 0;\n      plt_TString_operator_lshift_char_const((int)&v18, \"scriptip\");\n      plt_TSocketConnection_getIP_void(&v17, a3);\n      plt_TGraalVar_setVarValue_TString_const_TString_const(\n        Object_uint_TString_const,\n        (const TString *)&v18,\n        (const TString *)&v17);\n      plt_TString_clear_void((TString *)&v17);\n      plt_TString_clear_void((TString *)&v18);\n      v18 = 0;\n      plt_TString_operator_lshift_char_const((int)&v18, \"scriptsslcipher\");\n      v17 = 0;\n      plt_TString_operator_assign_TString_const(&v17, (char *)a3 + 8288);\n      plt_TGraalVar_setVarValue_TString_const_TString_const(\n        Object_uint_TString_const,\n        (const TString *)&v18,\n        (const TString *)&v17);\n      plt_TString_clear_void((TString *)&v17);\n      plt_TString_clear_void((TString *)&v18);\n      v18 = 0;\n      plt_TString_operator_lshift_char_const((int)&v18, \"scriptsslsubject\");\n      v17 = 0;\n      plt_TString_operator_assign_TString_const(&v17, (char *)a3 + 8296);\n      plt_TGraalVar_setVarValue_TString_const_TString_const(\n        Object_uint_TString_const,\n        (const TString *)&v18,\n        (const TString *)&v17);\n      plt_TString_clear_void((TString *)&v17);\n      plt_TString_clear_void((TString *)&v18);\n      v18 = 0;\n      plt_TString_operator_lshift_char_const((int)&v18, \"scriptsslissuer\");\n      v17 = 0;\n      plt_TString_operator_assign_TString_const(&v17, (char *)a3 + 8304);\n      plt_TGraalVar_setVarValue_TString_const_TString_const(\n        Object_uint_TString_const,\n        (const TString *)&v18,\n        (const TString *)&v17);\n      plt_TString_clear_void((TString *)&v17);\n      plt_TString_clear_void((TString *)&v18);\n    }\n    plt_TScriptUniverse_runScripts_bool((TScriptUniverse *)this, 0);\n    return hasEventCatcher_TString_const;\n  }\n  else\n  {\n    v18 = 0;\n    plt_TString_operator_lshift_char_const((int)&v18, \"Problem setting up the networking\");\n    plt_TLog_echo_TString_const_double_double_double_char_const(\n      (TLog *)&v18,\n      (const TString *)\"net\",\n      1.0,\n      0.0,\n      0.0,\n      v11);\n    plt_TString_clear_void((TString *)&v18);\n    return 0;\n  }\n}\n",
+      "code_bytes": 4695,
+      "code_literals_redacted": true,
+      "code_sha256": "4b4ad88343a28404f9f7367baa641321834c0eebf3b194c760cf7439f6c42b22",
+      "function_end": "0x22d240",
+      "function_start": "0x22cf98",
+      "name": "TScriptUniverse_addZippedScripts_TString_const_TSocketConnection",
+      "role": "connector script activation",
+      "string_literals": [
+        "\"Problem setting up the networking\"",
+        "\"StartScript_Connector\"",
+        "\"StartScript_Fail\"",
+        "\"net\"",
+        "\"onCreated\"",
+        "\"scriptip\"",
+        "\"scriptsslcipher\"",
+        "\"scriptsslissuer\"",
+        "\"scriptsslsubject\""
+      ]
+    },
+    {
+      "address": "0x200010",
+      "callers": [
+        {
+          "caller": "0x2025a0",
+          "caller_name": "THTTPRequest_runScript_void",
+          "callsite": "0x2027e0"
+        }
+      ],
+      "code": "__int64 __fastcall THTTPRequest_saveDownloadedData_void(__int64 this)\n{\n  const TString *v1; // x1\n  __int64 v2; // x19\n  int v3; // w0\n  int *v4; // x2\n  TClient *v5; // x20\n  unsigned __int64 v6; // x2\n  _BOOL4 v7; // w21\n  unsigned int v8; // w22\n  unsigned int v9; // w21\n  int v10; // w1\n  __int64 v11; // x0\n  __int64 v12; // x0\n  int v13; // w2\n  TString *v14; // x0\n  TString *v15; // x19\n  int v16; // w2\n  TClient *v17; // x0\n  int *v18; // x0\n  int v19; // w0\n  int v20; // w0\n  TString *v21; // x0\n  const TString *v22; // x1\n  const TString *v23; // x1\n  int v24; // w0\n  __int64 v25; // x23\n  int v26; // w25\n  bool v27; // w26\n  __int64 CachedFile_TString_const; // x21\n  __int64 v29; // x22\n  __int64 v30; // x1\n  __int64 v31; // x0\n  int *v32; // x2\n  int *v33; // x0\n  int v34; // w2\n  _DWORD *v35; // x3\n  const TString *v36; // x2\n  const TString *v37; // x1\n  TGraalVar *v38; // x22\n  __int64 v39; // x3\n  __int64 v40; // x3\n  const char *v41; // x2\n  const TString *v42; // x1\n  TTime *v43; // x0\n  __int64 v44; // x25\n  const TString *v45; // x1\n  int UTCTime_void; // w26\n  __int64 v47; // x22\n  __int64 v48; // x24\n  __int64 v49; // x1\n  __int64 v50; // x0\n  int *v51; // x2\n  int *v52; // x0\n  int v53; // w2\n  _DWORD *v54; // x3\n  const TString *v55; // x2\n  TGraalVar *v56; // x20\n  __int64 v57; // x3\n  __int64 v58; // x3\n  const char *v59; // x2\n  const char *v60; // x2\n  const TString *v61; // x1\n  int v62; // w2\n  int v63; // w0\n  __int64 v64; // [xsp+70h] [xbp-40h] BYREF\n  __int64 v65; // [xsp+78h] [xbp-38h] BYREF\n  __int64 v66; // [xsp+80h] [xbp-30h] BYREF\n  int *v67; // [xsp+88h] [xbp-28h] BYREF\n  int *v68; // [xsp+90h] [xbp-20h] BYREF\n  int *v69; // [xsp+98h] [xbp-18h] BYREF\n  __int64 v70; // [xsp+A0h] [xbp-10h] BYREF\n  __int64 v71; // [xsp+A8h] [xbp-8h] BYREF\n\n  v1 = (const TString *)*(unsigned __int8 *)(this + 208);\n  if ( !*(_BYTE *)(this + 208) && !*(_BYTE *)(this + 194) )\n    return this;\n  v2 = this;\n  v3 = *(_DWORD *)(*(_QWORD *)(this + 232) + 4LL);\n  if ( v3 <= 0 && *(_DWORD *)(v2 + 244) == -1 )\n    goto LABEL_36;\n  v4 = *(int **)(v2 + 200);\n  v5 = (TClient *)(v2 + 200);\n  if ( !v4 || *v4 <= 0 )\n    goto LABEL_36;\n  v6 = *(unsigned int *)(v2 + 304);\n  v7 = (int)v6 > 0 && v3 < (int)v6;\n  if ( *(_BYTE *)(v2 + 229) )\n  {\n    v8 = 1;\nLABEL_8:\n    if ( v3 <= 0 )\n      goto LABEL_53;\n    if ( v7 )\n    {\nLABEL_10:\n      if ( *(_BYTE *)(v2 + 208) )\n      {\n        v9 = 0;\n        v17 = (TClient *)(v2 + 216);\nLABEL_39:\n        plt_TClient_removeRequestedFile_TString_const(v17, v1);\n        if ( *(_DWORD *)(v2 + 244) != -1 )\n          goto LABEL_13;\n        goto LABEL_40;\n      }\n      v9 = 0;\n      if ( (unsigned int)(*(_DWORD *)(v2 + 244) - 400) <= 0xC7 )\n        goto LABEL_12;\n      goto LABEL_30;\n    }\n    if ( (unsigned int)(*(_DWORD *)(v2 + 244) - 400) <= 0xC7 )\n    {\nLABEL_53:\n      v1 = (const TString *)*(unsigned __int8 *)(v2 + 208);\n      v9 = 0;\n      goto LABEL_37;\n    }\n    goto LABEL_30;\n  }\n  v16 = *(_DWORD *)(v2 + 244);\n  if ( v16 == 404 )\n  {\n    v68 = nullptr;\n    plt_TString_operator_lshift_char_const((int)&v68, \"File download: \");\n    v8 = 1;\n    plt_THTTPRequest_getPrintName_void((__int64 *)&v69, (THTTPRequest *)v2);\n    v70 = 0;\n    plt_TString_operator_assign_TString_const(&v70, &v68);\n    plt_TString_operator_lshift_TString_const(&v70, &v69);\n    v71 = 0;\n    plt_TString_operator_assign_TString_const(&v71, &v70);\n    plt_TString_operator_lshift_char_const((int)&v71, \" not found\");\n    plt_TLog_echo_TString_const_double_double_double_char_const(\n      (TLog *)&v71,\n      (const TString *)\"files\",\n      0.5,\n      0.0,\n      0.0,\n      v59);\n    plt_TString_clear_void((TString *)&v71);\n    plt_TString_clear_void((TString *)&v70);\n    plt_TString_clear_void((TString *)&v69);\n    plt_TString_clear_void((TString *)&v68);\n    v3 = *(_DWORD *)(*(_QWORD *)(v2 + 232) + 4LL);\n    goto LABEL_8;\n  }\n  if ( v16 == 304 )\n  {\n    v21 = (TString *)(v2 + 216);\n    if ( !(_DWORD)v1 )\n      v21 = (TString *)(v2 + 200);\n    v8 = 0;\n    plt_TFileDownload_onFileEvent_TString_const_TFileDownload_fileeventtype(v21);\n    v3 = *(_DWORD *)(*(_QWORD *)(v2 + 232) + 4LL);\n    goto LABEL_8;\n  }\n  v6 = (unsigned int)(v16 - 400);\n  if ( (unsigned int)v6 <= 0xC7 )\n  {\n    v69 = nullptr;\n    plt_TString_operator_lshift_char_const((int)&v69, \"File download: error when downloading \");\n    v8 = 1;\n    plt_THTTPRequest_getPrintName_void(&v70, (THTTPRequest *)v2);\n    v71 = 0;\n    plt_TString_operator_assign_TString_const(&v71, &v69);\n    plt_TString_operator_lshift_TString_const(&v71, &v70);\n    plt_TLog_echo_TString_const_double_double_double_char_const(\n      (TLog *)&v71,\n      (const TString *)\"files\",\n      0.5,\n      0.0,\n      0.0,\n      v41);\n    plt_TString_clear_void((TString *)&v71);\n    plt_TString_clear_void((TString *)&v70);\n    plt_TString_clear_void((TString *)&v69);\n    v3 = *(_DWORD *)(*(_QWORD *)(v2 + 232) + 4LL);\n    goto LABEL_8;\n  }\n  if ( v7 )\n  {\n    v64 = 0;\n    plt_TString_operator_lshift_char_const((int)&v64, \"File download: error when downloading \");\n    plt_THTTPRequest_getPrintName_void(&v65, (THTTPRequest *)v2);\n    v66 = 0;\n    plt_TString_operator_assign_TString_const(&v66, &v64);\n    v8 = 1;\n    plt_TString_operator_lshift_TString_const(&v66, &v65);\n    v67 = nullptr;\n    plt_TString_operator_assign_TString_const(&v67, &v66);\n    plt_TString_operator_lshift_char_const((int)&v67, \", only partially retrieved (\");\n    v68 = nullptr;\n    plt_TString_operator_assign_TString_const(&v68, &v67);\n    plt_TString_operator_lshift_int(&v68);\n    v69 = nullptr;\n    plt_TString_operator_assign_TString_const(&v69, &v68);\n    plt_TString_operator_lshift_char_const((int)&v69, (char *)&word_2D8820);\n    v70 = 0;\n    plt_TString_operator_assign_TString_const(&v70, &v69);\n    plt_TString_operator_lshift_int(&v70);\n    v71 = 0;\n    plt_TString_operator_assign_TString_const(&v71, &v70);\n    plt_TString_operator_lshift_char_const((int)&v71, \")\");\n    plt_TLog_echo_TString_const_double_double_double_char_const(\n      (TLog *)&v71,\n      (const TString *)\"files\",\n      0.5,\n      0.0,\n      0.0,\n      v60);\n    plt_TString_clear_void((TString *)&v71);\n    plt_TString_clear_void((TString *)&v70);\n    plt_TString_clear_void((TString *)&v69);\n    plt_TString_clear_void((TString *)&v68);\n    plt_TString_clear_void((TString *)&v67);\n    plt_TString_clear_void((TString *)&v66);\n    plt_TString_clear_void((TString *)&v65);\n    plt_TString_clear_void((TString *)&v64);\n    if ( *(int *)(*(_QWORD *)(v2 + 232) + 4LL) > 0 )\n      goto LABEL_10;\n    goto LABEL_53;\n  }\n  if ( v3 <= 0 )\n  {\nLABEL_36:\n    v8 = 1;\n    v9 = 0;\n    goto LABEL_37;\n  }\nLABEL_30:\n  if ( *(_BYTE *)(v2 + 272) )\n    plt_TURLCache_addURL_TString_const_TString_const(\n      (TURLCache *)(v2 + 200),\n      (const TString *)(v2 + 264),\n      (const TString *)v6);\n  if ( *(_BYTE *)(v2 + 229) )\n  {\n    if ( data_TGameEnvironment_universe )\n    {\n      v8 = 0;\n      v9 = (unsigned __int8)plt_TScriptUniverse_addZippedScripts_TString_const_TSocketConnection(\n                              (TScriptUniverse *)data_TGameEnvironment_universe,\n                              (const TString *)(*(_QWORD *)(v2 + 232) + 8LL),\n                              *(TSocketConnection **)(v2 + 136));\n      v1 = (const TString *)*(unsigned __int8 *)(v2 + 208);\n    }\n    else\n    {\n      v1 = (const TString *)*(unsigned __int8 *)(v2 + 208);\n      v8 = 0;\n      v9 = 0;\n    }\n  }\n  else if ( *(_BYTE *)(v2 + 208) )\n  {\n    v67 = nullptr;\n    plt_TString_operator_assign_TString_const(&v67, v2 + 216);\n    if ( !(unsigned __int8)plt_TFiles_hasAbsolutePath_TString_const((TFiles *)&v67, v22) )\n    {\n      plt_TCachedStream_getDownloadFilename_TString_const(&v71, (TCachedStream *)&v67, v23);\n      plt_TString_operator_assign_TString_const(&v67, &v71);\n      plt_TString_clear_void((TString *)&v71);\n    }\n    if ( *(_BYTE *)(v2 + 208) && *(int *)(v2 + 156) > 0 && *(_BYTE *)(v2 + 228) )\n    {\n      plt_TFiles_extractFileExt_TString_const((__int64 *)&v68, (TFiles *)&v67, v23);\n      plt_TFiles_extractFileExt_TString_const((__int64 *)&v69, (TFiles *)(v2 + 184), v61);\n      if ( v69 && *v69 > 0 && (unsigned __int8)plt_operator_ne_TString_const_TString_const(&v69, &v68) )\n      {\n        if ( v67 )\n          v62 = *v67;\n        else\n          v62 = 0;\n        if ( v68 )\n          v63 = *v68;\n        else\n          v63 = 0;\n        plt_TString_subString_int_int(&v70, (TString *)&v67, 0, v62 - v63);\n        v71 = 0;\n        plt_TString_operator_assign_TString_const(&v71, &v70);\n        plt_TString_operator_lshift_TString_const(&v71, &v69);\n        plt_TString_operator_assign_TString_const(&v67, &v71);\n        plt_TString_clear_void((TString *)&v71);\n        plt_TString_clear_void((TString *)&v70);\n      }\n      plt_TString_clear_void((TString *)&v69);\n      plt_TString_clear_void((TString *)&v68);\n    }\n    v24 = *(_DWORD *)(v2 + 224);\n    v25 = *(_QWORD *)(v2 + 232);\n    if ( v24 )\n      v26 = *(_DWORD *)(v2 + 224);\n    else\n      v26 = 1;\n    v27 = v24 != 0;\n    if ( v25 )\n    {\n      CachedFile_TString_const = plt_TCachedStream_getCachedFile_TString_const((TCachedStream *)&v67, v23);\n      if ( !CachedFile_TString_const )\n      {\n        CachedFile_TString_const = plt_operator_new_ulong__2(0x28u);\n        plt_TCachedStream_TCachedStream_TString_const((TCachedStream *)CachedFile_TString_const, (const TString *)&v67);\n        plt_THashList_addObject_THashListObject(\n          (THashList *)data_TCachedStream_cachedfiles,\n          (THashListObject *)CachedFile_TString_const);\n      }\n      v29 = *(_QWORD *)(CachedFile_TString_const + 16);\n      v30 = v25 + 8;\n      v31 = v29 + 8;\n      v32 = *(int **)(v29 + 8);\n      if ( v32 && *v32 > 0 )\n        plt_TString_operator_lshift_TString_const(v31, v30);\n      else\n        plt_TString_operator_assign_TString_const(v31, v30);\n      v33 = *(int **)(v29 + 8);\n      if ( v33 )\n        v34 = *v33;\n      else\n        v34 = 0;\n      v35 = *(_DWORD **)(CachedFile_TString_const + 16);\n      *(_DWORD *)(v29 + 4) = v34;\n      *(_DWORD *)v29 = v34;\n      *v35 = 0;\n      plt_TString_operator_assign_TString_const(CachedFile_TString_const + 24, &v67);\n      *(_DWORD *)(CachedFile_TString_const + 32) = v26;\n      *(_BYTE *)(CachedFile_TString_const + 38) = 1;\n      *(_BYTE *)(CachedFile_TString_const + 36) = v27;\n      plt_TCachedStream_saveAndUpdate_TCachedStream_TString_const(\n        (TCachedStream *)CachedFile_TString_const,\n        (TCachedStream *)&v67,\n        v36);\n      plt_TResourceFunctions_validateFileKey_TString_const((TResourceFunctions *)(v2 + 216), v37);\n      plt_TFileDownload_onFileEvent_TString_const_TFileDownload_fileeventtype((TString *)(v2 + 216));\n      v38 = (TGraalVar *)data_TGameEnvironment_universe;\n      if ( data_TGameEnvironment_universe )\n      {\n        v71 = 0;\n        plt_TString_operator_lshift_char_const((int)&v71, \"onFileDownloaded\");\n        v39 = *(_QWORD *)(v2 + 216);\n        if ( v39 )\n          v40 = v39 + 8;\n        else\n          v40 = TString_dummystr;\n        plt_TGraalVar_invokeEvent_TString_const_char_const(\n          v38,\n          (const TString *)&v71,\n          \"si\",\n          v40,\n          *(unsigned int *)(v25 + 4));\n        plt_TString_clear_void((TString *)&v71);\n      }\n    }\n    v8 = 0;\n    v9 = 0;\n    plt_TString_clear_void((TString *)&v67);\n    v1 = (const TString *)*(unsigned __int8 *)(v2 + 208);\n  }\n  else\n  {\n    v71 = 0;\n    plt_TString_operator_assign_TString_const(&v71, &data_TFiles_baseuserfolder);\n    plt_TString_operator_lshift_char_const((int)&v71, \"webfiles\");\n    v70 = 0;\n    plt_TString_operator_assign_TString_const(&v70, &v71);\n    plt_TString_operator_lshift_char(&v70, (unsigned __int8)data_TFiles_fileseparator);\n    plt_TString_clear_void((TString *)&v71);\n    plt_TFiles_escapedFilename_TString_const(&v71, (TFiles *)(v2 + 200), v42);\n    v69 = nullptr;\n    plt_TString_operator_assign_TString_const(&v69, &v70);\n    plt_TString_operator_lshift_TString_const(&v69, &v71);\n    plt_TString_clear_void((TString *)&v71);\n    v43 = (TTime *)plt_TString_clear_void((TString *)&v70);\n    v44 = *(_QWORD *)(v2 + 232);\n    UTCTime_void = plt_TTime_getUTCTime_void(v43);\n    if ( v44 )\n    {\n      v47 = plt_TCachedStream_getCachedFile_TString_const((TCachedStream *)&v69, v45);\n      if ( !v47 )\n      {\n        v47 = plt_operator_new_ulong__2(0x28u);\n        plt_TCachedStream_TCachedStream_TString_const((TCachedStream *)v47, (const TString *)&v69);\n        plt_THashList_addObject_THashListObject((THashList *)data_TCachedStream_cachedfiles, (THashListObject *)v47);\n      }\n      v48 = *(_QWORD *)(v47 + 16);\n      v49 = v44 + 8;\n      v50 = v48 + 8;\n      v51 = *(int **)(v48 + 8);\n      if ( v51 && *v51 > 0 )\n        plt_TString_operator_lshift_TString_const(v50, v49);\n      else\n        plt_TString_operator_assign_TString_const(v50, v49);\n      v52 = *(int **)(v48 + 8);\n      if ( v52 )\n        v53 = *v52;\n      else\n        v53 = 0;\n      v54 = *(_DWORD **)(v47 + 16);\n      *(_DWORD *)(v48 + 4) = v53;\n      *(_DWORD *)v48 = v53;\n      *v54 = 0;\n      plt_TString_operator_assign_TString_const(v47 + 24, &v69);\n      *(_DWORD *)(v47 + 32) = UTCTime_void;\n      *(_BYTE *)(v47 + 38) = 1;\n      *(_BYTE *)(v47 + 36) = 0;\n      plt_TCachedStream_saveAndUpdate_TCachedStream_TString_const(\n        (TCachedStream *)v47,\n        (TCachedStream *)(v2 + 200),\n        v55);\n      plt_TFileDownload_onFileEvent_TString_const_TFileDownload_fileeventtype((TString *)(v2 + 200));\n      v56 = (TGraalVar *)data_TGameEnvironment_universe;\n      if ( data_TGameEnvironment_universe )\n      {\n        v71 = 0;\n        plt_TString_operator_lshift_char_const((int)&v71, \"onFileDownloaded\");\n        v57 = *(_QWORD *)(v2 + 200);\n        if ( v57 )\n          v58 = v57 + 8;\n        else\n          v58 = TString_dummystr;\n        plt_TGraalVar_invokeEvent_TString_const_char_const(\n          v56,\n          (const TString *)&v71,\n          \"si\",\n          v58,\n          *(unsigned int *)(v44 + 4));\n        plt_TString_clear_void((TString *)&v71);\n      }\n    }\n    v8 = 0;\n    v9 = 0;\n    plt_TString_clear_void((TString *)&v69);\n    v1 = (const TString *)*(unsigned __int8 *)(v2 + 208);\n  }\nLABEL_37:\n  v5 = (TClient *)(v2 + 200);\n  if ( (_DWORD)v1 )\n  {\n    v17 = (TClient *)(v2 + 216);\n    goto LABEL_39;\n  }\nLABEL_12:\n  plt_TClient_removeRequestedFile_TString_const(v5, v1);\n  if ( *(_DWORD *)(v2 + 244) != -1 )\n  {\nLABEL_13:\n    plt_THTTPRequest_removeFromRequests_void((THTTPRequest *)v2);\n    this = *(unsigned __int8 *)(v2 + 229);\n    if ( (unsigned int)this > v9 )\n    {\n      v11 = *(_QWORD *)(v2 + 136);\n      if ( v11 )\n      {\n        v10 = *(_DWORD *)(v11 + 8312);\n        v12 = 0xFFFFFFFFLL;\n        if ( v10 )\n        {\n          if ( data_TServerList_connectormode > 2 )\n            v12 = 0xFFFFFFFFLL;\n          else\n            v12 = 3;\n        }\n      }\n      else\n      {\n        v12 = 0xFFFFFFFFLL;\n      }\n      plt_TServerList_enterNextConnectorMode_int((TServerList *)v12, v10);\n      this = *(unsigned __int8 *)(v2 + 229);\n    }\n    if ( v8 > (unsigned int)this )\n    {\n      v13 = *(unsigned __int8 *)(v2 + 208);\n      v14 = (TString *)(v2 + 216);\n      v15 = (TString *)(v2 + 200);\n      if ( !v13 )\n        v14 = v15;\n      return plt_TFileDownload_onFileEvent_TString_const_TFileDownload_fileeventtype(v14);\n    }\n    return this;\n  }\nLABEL_40:\n  if ( *(int *)(*(_QWORD *)(v2 + 232) + 4LL) > 0 )\n    goto LABEL_13;\n  if ( *(int *)(v2 + 304) > 0 )\n    goto LABEL_13;\n  v18 = *(int **)(v2 + 200);\n  if ( !v18 )\n    goto LABEL_13;\n  if ( *v18 <= 0 )\n    goto LABEL_13;\n  v19 = *(_DWORD *)(v2 + 160);\n  if ( v19 > 2 || *(_BYTE *)(v2 + 229) )\n    goto LABEL_13;\n  *(_DWORD *)(v2 + 160) = v19 + 1;\n  if ( *(_DWORD *)(data_THTTPRequest_keepaliveconnections + 12) + data_THTTPRequest_openconnections > 2\n    && data_THTTPRequest_maxconnections > 2 )\n  {\n    v20 = data_THTTPRequest_maxconnections - 2;\n    if ( data_THTTPRequest_maxconnections - 2 < 2 )\n      v20 = 2;\n    data_THTTPRequest_maxconnections = v20;\n  }\n  return plt_THTTPRequest_sendRequest_void((THTTPRequest *)v2);\n}\n",
+      "code_bytes": 16137,
+      "code_literals_redacted": true,
+      "code_sha256": "9cab45a492a0aeb05b642ac541c40bf95692f780df59ae9be2307694053b2f75",
+      "function_end": "0x200a70",
+      "function_start": "0x200010",
+      "name": "THTTPRequest_saveDownloadedData_void",
+      "role": "download completion dispatcher",
+      "string_literals": [
+        "\" not found\"",
+        "\")\"",
+        "\", only partially retrieved (\"",
+        "\"File download: \"",
+        "\"File download: error when downloading \"",
+        "\"files\"",
+        "\"onFileDownloaded\"",
+        "\"si\"",
+        "\"webfiles\""
+      ]
+    },
+    {
+      "address": "0xf758c",
+      "callers": [
+        {
+          "caller": "0x22cf78",
+          "caller_name": "TScriptUniverse_compileZippedScripts_TString_const",
+          "callsite": "0x22c598"
+        }
+      ],
+      "code": "__int64 __fastcall TEncryption_rsa_verify_TString_const_TString_const_TString_const(\n        unsigned int **this,\n        const TString *a2,\n        unsigned int **a3,\n        const TString *a4)\n{\n  unsigned int *v7; // x1\n  __int64 v8; // x3\n  unsigned int *v9; // x0\n  unsigned int v10; // w19\n  unsigned int *v12; // x1\n  int v13; // w0\n  size_t v14; // x1\n  int v15; // w2\n  char v16[16]; // [xsp+0h] [xbp+0h] BYREF\n  int v17; // [xsp+44h] [xbp+44h] BYREF\n  __int64 v18; // [xsp+48h] [xbp+48h] BYREF\n  _BYTE v19[208]; // [xsp+50h] [xbp+50h] BYREF\n\n  v18 = 0;\n  plt_CyaInt_InitRsaKey_CyaInt_RsaKey_void(v19, 0, a3, a4);\n  v17 = 0;\n  v7 = *this;\n  if ( *this )\n  {\n    v8 = *v7;\n    v9 = v7 + 2;\n  }\n  else\n  {\n    v8 = 0;\n    v9 = (unsigned int *)TString_dummystr;\n  }\n  if ( !(unsigned int)plt_CyaInt_RsaPublicKeyDecode_uchar_const_uint_CyaInt_RsaKey_uint(v9, &v17, v19, v8)\n    && (unsigned int)plt_CyaInt_RsaEncryptSize_CyaInt_RsaKey(v19) - 1 <= 0x3FF )\n  {\n    v12 = *a3;\n    if ( *a3 )\n    {\n      v13 = (_DWORD)v12 + 8;\n      v14 = *v12;\n    }\n    else\n    {\n      v14 = 0;\n      v13 = TString_dummystr;\n    }\n    v15 = plt_CyaInt_RsaSSL_Verify_uchar_const_uint_uchar_uint_CyaInt_RsaKey(v13, v14);\n    if ( v15 > 0 )\n      plt_TString_addbuffer_char_const_int((TString *)&v18, v16, v15);\n  }\n  plt_CyaInt_FreeRsaKey_CyaInt_RsaKey(v19);\n  v10 = plt_operator_assign_TString_const_TString_const(&v18, a2);\n  plt_TString_clear_void((TString *)&v18);\n  return v10;\n}\n",
+      "code_bytes": 1471,
+      "code_literals_redacted": true,
+      "code_sha256": "327dfe34c3caea40ded42f9a1545f63fd0698e8e029c0f62084b6208721d4938",
+      "function_end": "0xf76bc",
+      "function_start": "0xf758c",
+      "name": "TEncryption_rsa_verify_TString_const_TString_const_TString_const",
+      "role": "RSA signature verification",
+      "string_literals": []
+    },
+    {
+      "address": "0xf7d94",
+      "callers": [
+        {
+          "caller": "0x22cf78",
+          "caller_name": "TScriptUniverse_compileZippedScripts_TString_const",
+          "callsite": "0x22c588"
+        }
+      ],
+      "code": "TString *__usercall TEncryption_sha256_TString_const@<X0>(\n        TEncryption *this@<X0>,\n        const TString *a2@<X1>,\n        TString *a3@<X8>)\n{\n  void *v5; // x1\n  _BYTE v7[112]; // [xsp+20h] [xbp-70h] BYREF\n\n  plt_InitSha256_Sha256(v7, a2);\n  if ( *(_QWORD *)this )\n    v5 = (void *)(*(_QWORD *)this + 8LL);\n  else\n    v5 = (void *)TString_dummystr;\n  plt_Sha256Update_Sha256_uchar_const_uint((int)v7, v5);\n  *(_QWORD *)a3 = 0;\n  plt_TString_setSize_int_bool(a3, 32, 0);\n  if ( *(_QWORD *)a3 )\n    plt_Sha256Final_Sha256_uchar(v7, *(_QWORD *)a3 + 8LL);\n  else\n    plt_Sha256Final_Sha256_uchar(v7, TString_dummystr);\n  return a3;\n}\n",
+      "code_bytes": 639,
+      "code_literals_redacted": true,
+      "code_sha256": "d24e8189e19e31312784d21f5bb271da8c7ddc7b798fbe03b74a098bdecba3d4",
+      "function_end": "0xf7e44",
+      "function_start": "0xf7d94",
+      "name": "TEncryption_sha256_TString_const",
+      "role": "SHA-256 digest helper",
+      "string_literals": []
+    },
+    {
+      "address": "0x22bcf8",
+      "callers": [
+        {
+          "caller": "0x22bee8",
+          "caller_name": "TScriptUniverse_runAllGraalScripts_bool",
+          "callsite": "0x22bf58"
+        },
+        {
+          "caller": "0x22cf98",
+          "caller_name": "TScriptUniverse_addZippedScripts_TString_const_TSocketConnection",
+          "callsite": "0x22d1b8"
+        }
+      ],
+      "code": "__int64 __fastcall TScriptUniverse_runScripts_bool(TScriptUniverse *this, char a2)\n{\n  __int64 v3; // x25\n  double v4; // d1\n  __int64 v5; // x0\n  int v6; // w1\n  int v7; // w21\n  unsigned int v8; // w20\n  int v9; // w23\n  _QWORD *v10; // x0\n  _BYTE *v11; // x19\n  int v12; // w0\n  int v13; // w1\n  int v14; // w1\n  int v15; // w0\n  __int64 result; // x0\n  __int64 v17; // d0\n\n  v3 = data_TGameEnvironment_universe;\n  data_TGameEnvironment_universe = (__int64)this;\n  if ( (unsigned int)data_TTime_frametick <= 0x31 )\n  {\n    plt_TTime_getTime_void((TTime *)(unsigned int)data_TTime_frametick);\n    *((_QWORD *)this + 21) = v17;\n  }\n  else\n  {\n    v4 = *((double *)this + 21);\n    if ( v4 == 0.0 )\n    {\n      *((double *)this + 21) = 1.0;\n    }\n    else if ( a2 )\n    {\n      *((double *)this + 21) = v4 + (double)(unsigned int)data_TTime_frametick / 1000.0;\n    }\n  }\n  v5 = *((_QWORD *)this + 19);\n  v6 = *((_DWORD *)this + 41);\n  *((_BYTE *)this + 160) = 1;\n  v7 = *(_DWORD *)(v5 + 12);\n  *((_DWORD *)this + 41) = v6 + 1;\n  if ( v7 > 0 )\n  {\n    v8 = 0;\n    v9 = 0;\n    while ( 1 )\n    {\n      v10 = (_QWORD *)plt_TList_operator_index_int(v5, v8);\n      v11 = (_BYTE *)*v10;\n      if ( !*v10 )\n        goto LABEL_9;\n      if ( (*(unsigned __int8 (__fastcall **)(_QWORD))(*(_QWORD *)v11 + 152LL))(*v10) )\n        goto LABEL_9;\n      v12 = *((_DWORD *)this + 41);\n      if ( *((_DWORD *)v11 + 11) == v12 )\n        goto LABEL_9;\n      v13 = (unsigned __int8)v11[20];\n      *((_DWORD *)v11 + 11) = v12;\n      if ( v13 )\n        break;\n      (*(void (__fastcall **)(_BYTE *))(*(_QWORD *)v11 + 104LL))(v11);\n      if ( v11[42] )\n      {\n        if ( v11[20] || !(*(unsigned __int8 (__fastcall **)(_BYTE *))(*(_QWORD *)v11 + 112LL))(v11) )\n          break;\n        if ( v11[20] )\n          goto LABEL_16;\n      }\n      else if ( v11[20] )\n      {\n        break;\n      }\nLABEL_17:\n      v15 = *(_DWORD *)(*((_QWORD *)this + 19) + 12LL);\n      if ( v7 <= v15 )\n      {\n        if ( v7 < v15 && ++v9 <= 31 )\n          v7 = *(_DWORD *)(*((_QWORD *)this + 19) + 12LL);\nLABEL_9:\n        if ( v7 <= (int)++v8 )\n          goto LABEL_19;\n        goto LABEL_10;\n      }\n      v7 = *(_DWORD *)(*((_QWORD *)this + 19) + 12LL);\n      if ( v15 <= (int)++v8 )\n        goto LABEL_19;\nLABEL_10:\n      v5 = *((_QWORD *)this + 19);\n    }\n    v14 = v8;\n    --v7;\n    --v8;\n    plt_TList_Delete_int(*((TList **)this + 19), v14);\n    v11[42] = 0;\n    if ( !v11[20] )\n      goto LABEL_17;\nLABEL_16:\n    (*(void (__fastcall **)(_BYTE *))(*(_QWORD *)v11 + 8LL))(v11);\n    goto LABEL_17;\n  }\nLABEL_19:\n  *((_BYTE *)this + 160) = 0;\n  data_TInput_mousewheeldelta = 0;\n  result = plt_TScriptUniverse_checkRunGarbageCollector_void(this);\n  data_TGameEnvironment_universe = v3;\n  return result;\n}\n",
+      "code_bytes": 2764,
+      "code_literals_redacted": true,
+      "code_sha256": "1344fc53713eb88b76094011c875e937547b7e99c7c4f65b42e17a95a9577042",
+      "function_end": "0x22bee0",
+      "function_start": "0x22bcf8",
+      "name": "TScriptUniverse_runScripts_bool",
+      "role": "script runtime start",
+      "string_literals": []
+    },
+    {
+      "address": "0x22cc88",
+      "callers": [
+        {
+          "caller": "0x1661b0",
+          "caller_name": "TGraalAni_loadScriptEncrypted_void",
+          "callsite": "0x1662e8"
+        },
+        {
+          "caller": "0x1ed2e4",
+          "caller_name": "TClient_setGaniScript",
+          "callsite": "0x1ed368"
+        },
+        {
+          "caller": "0x1ef2d0",
+          "caller_name": "TClient_handleGaniScript",
+          "callsite": "0x1ef3ec"
+        },
+        {
+          "caller": "0x22cd98",
+          "caller_name": "TScriptUniverse_addEncryptedClassScript_TString_const_TString_const_int_TString_const",
+          "callsite": "0x22ce08"
+        }
+      ],
+      "code": "__int64 __fastcall TScriptUniverse_addClassScript_TString_const_TString_const(\n        TScriptUniverse *this,\n        const TString *a2,\n        const TString *a3)\n{\n  TScript *TString_const_bool; // x0\n  int v7; // w19\n  TScript *v8; // x20\n  TGraalVar *v9; // x22\n  __int64 v10; // x3\n  __int64 v12; // [xsp+38h] [xbp-8h] BYREF\n\n  if ( (plt_TStringList_indexOf_TString_const((TStringList *)requestedclassscripts, a2) & 0x80000000) != 0 )\n    plt_TStringList_Add_TString_const((TStringList *)requestedclassscripts, a2);\n  TString_const_bool = (TScript *)plt_TScriptUniverse_getClassAndCreate_TString_const_bool(this, a2, 1);\n  v7 = *((_DWORD *)TString_const_bool + 46);\n  v8 = TString_const_bool;\n  if ( v7 <= (int)plt_TServerList_getServerPrivileges_void(TString_const_bool) )\n    plt_TScript_setStream_TString_const(v8, a3);\n  *((_BYTE *)v8 + 224) = 0;\n  v9 = (TGraalVar *)data_TGameEnvironment_universe;\n  if ( data_TGameEnvironment_universe )\n  {\n    v12 = 0;\n    plt_TString_operator_lshift_char_const((int)&v12, \"onClassLoaded\");\n    if ( *(_QWORD *)a2 )\n      v10 = *(_QWORD *)a2 + 8LL;\n    else\n      v10 = TString_dummystr;\n    plt_TGraalVar_invokeEvent_TString_const_char_const(v9, (const TString *)&v12, \"s\", v10);\n    plt_TString_clear_void((TString *)&v12);\n  }\n  v12 = 0;\n  plt_TString_operator_lshift_char_const((int)&v12, \"onClassLoaded\");\n  plt_TGraalVar_invokeEvent_TString_const(v8, (const TString *)&v12);\n  return plt_TString_clear_void((TString *)&v12);\n}\n",
+      "code_bytes": 1479,
+      "code_literals_redacted": true,
+      "code_sha256": "465716249e3b76a8b6b32879f6cadac4b28533f118bfcfdc0d7867895dc3d5c6",
+      "function_end": "0x22cd98",
+      "function_start": "0x22cc88",
+      "name": "TScriptUniverse_addClassScript_TString_const_TString_const",
+      "role": "class script registration",
+      "string_literals": [
+        "\"onClassLoaded\"",
+        "\"s\""
+      ]
+    }
+  ],
+  "interpretation": [
+    "The connector script package is protected by an embedded RSA verification step before encrypted ZIP entries are dispatched.",
+    "TLS trust and package signing are separate gates. A valid certificate does not make a mismatched package valid, and a diagnostic package-signature bypass must remain private.",
+    "The archive parser limits entry count and individual reported size but has no visible aggregate decompressed-size budget.",
+    "The reviewed ZIP dispatch uses recognized entry names as script-object identifiers and does not directly write arbitrary ZIP paths to disk.",
+    "This artifact does not claim a remote exploit. It records static trust and resource boundaries without contacting a service or publishing embedded key material."
+  ],
+  "manual_reviews": [
+    {
+      "address": "0x22cf78",
+      "classification": "signed-encrypted-script-package",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The parser requires more than three input bytes, decodes a signed outer length and payload length, and rejects the payload when the calculated end exceeds the input string.",
+        "It computes SHA-256 over the recovered package material and calls TEncryption_rsa_verify before RC4 decryption and ZIP parsing.",
+        "ZIP global entry count is capped at 10000 and an individual uncompressed entry is processed only when its reported size is at most 0x40000000 bytes.",
+        "Each accepted entry is read into a dynamically sized stream, but there is no visible aggregate decompressed-size budget and the return value is not compared with the requested entry size."
+      ],
+      "function": "TScriptUniverse_compileZippedScripts_TString_const",
+      "interpretation": "The connector script package has a real embedded RSA verification gate, which is separate from the TLS certificate check. The archive limits reduce but do not eliminate resource-exhaustion risk. The public artifact redacts the embedded crypto literals.",
+      "severity": "trust-boundary-and-availability"
+    },
+    {
+      "address": "0x22cf98",
+      "classification": "verified-script-activation",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The function calls compileZippedScripts and looks up StartScript_Connector in the resulting script universe.",
+        "If the connector script exists and has an onCreated catcher, the socket IP, SSL cipher, SSL subject, and SSL issuer are exposed as script variables.",
+        "It then calls TScriptUniverse_runScripts_bool. When setup fails it looks for StartScript_Fail and logs a networking error."
+      ],
+      "function": "TScriptUniverse_addZippedScripts_TString_const_TSocketConnection",
+      "interpretation": "A package that passes the RSA gate can install and run connector script logic. This explains why stale or mismatched con.png material fails before normal login handoff and why connector package verification must remain enabled in a repair build.",
+      "severity": "high-impact-trust-boundary"
+    },
+    {
+      "address": "0x200010",
+      "classification": "download-to-script-or-cache-dispatch",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The function handles HTTP completion and error states, then routes script-marked responses to TScriptUniverse_addZippedScripts_TString_const_TSocketConnection.",
+        "Ordinary responses are routed through TCachedStream_saveAndUpdate and TResourceFunctions_validateFileKey before download events are emitted.",
+        "The function retries or continues queued requests for selected failures and records partial retrieval states, but the cache save path does not perform the script package RSA check."
+      ],
+      "function": "THTTPRequest_saveDownloadedData_void",
+      "interpretation": "The response type determines whether bytes become executable script state or ordinary cached data. The script branch relies on the package verifier, while ordinary resources rely on the separate cache and resource policy.",
+      "severity": "trust-boundary-and-availability"
+    },
+    {
+      "address": "0xf758c",
+      "classification": "RSA-public-key-verifier",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The helper decodes an RSA public key, verifies a supplied signature over the provided digest, and returns the recovered verification result through a TString assignment.",
+        "The connector ZIP parser is the reviewed caller in this ARM64 database.",
+        "The key material is embedded in the native library rather than obtained from the Java trust store."
+      ],
+      "function": "TEncryption_rsa_verify_TString_const_TString_const_TString_const",
+      "interpretation": "This is a package-signing trust anchor, not a TLS certificate check. Replacing it or bypassing its result would make the connector script boundary accept unauthenticated code.",
+      "severity": "trust-boundary"
+    },
+    {
+      "address": "0x22cf78",
+      "classification": "archive-entry-dispatch",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The parser reads ZIP entry names into a fixed 256-byte name buffer and separates the entry path from its final component.",
+        "The reviewed dispatch recognizes .rk, .t, NPCS/ entries, and CLASSES/ entries. It creates script objects or assigns class streams rather than directly writing the ZIP name to disk in this function.",
+        "The archive entry count is bounded, but there is no visible name-count, total decompressed-size, or per-entry script execution budget beyond the reported 1 GiB entry check."
+      ],
+      "function": "TScriptUniverse_compileZippedScripts_TString_const",
+      "interpretation": "ZIP path traversal is not established from this dispatch because entry names are used as script-object identifiers in the reviewed path. Large or numerous accepted entries remain a context-dependent availability risk.",
+      "severity": "path-and-resource-policy"
+    },
+    {
+      "address": "0x22cc88",
+      "classification": "class-script-installation",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The function creates or obtains a class object, checks its privilege level against the server privilege value, and installs the supplied script stream when allowed.",
+        "It marks the class loaded and invokes onClassLoaded on the universe and class object.",
+        "The caller in the ZIP parser supplies the archive entry stream after the outer RSA check."
+      ],
+      "function": "TScriptUniverse_addClassScript_TString_const_TString_const",
+      "interpretation": "Class code is an executable content boundary. The privilege check is a semantic script policy, not a substitute for authenticating the package that supplied the stream.",
+      "severity": "script-trust-boundary"
+    },
+    {
+      "address": "0x22bcf8",
+      "classification": "script-runtime-start",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The connector package activation path calls this function after locating a verified StartScript_Connector object and its onCreated catcher.",
+        "The function is the transition from script registration to script-machine execution in the reviewed call chain."
+      ],
+      "function": "TScriptUniverse_runScripts_bool",
+      "interpretation": "This is the final high-impact edge in the connector package path. A diagnostic RSA bypass is appropriate only for a private, bounded fixture, never as a general compatibility repair.",
+      "severity": "high-impact-capability"
+    }
+  ],
+  "network_contacted": false,
+  "public_artifact_redactions": {
+    "embedded_crypto_literals": [
+      {
+        "length": 8,
+        "sha256": "30c72a9ec76686c938d19697d5a15fd24ba65a548c5f622ea7b8678c32be60af"
+      },
+      {
+        "length": 12,
+        "sha256": "9b0bc7e17841f17590efda3bc1960e5a6198e783f9a81e0f7c15afb706274e22"
+      },
+      {
+        "length": 16,
+        "sha256": "30691eeed035b01fa2f44267620b1079eeea87c71e2e91f6d108d642fcef120e"
+      },
+      {
+        "length": 80,
+        "sha256": "7e4739eb0875259c936f4a091795c7be46879f7758c0549945df6858c6843ff1"
+      },
+      {
+        "length": 94,
+        "sha256": "01781bd6d7423d164ac2933abe16eea7c281e6191fe908f0afa2af642b8a7e8f"
+      },
+      {
+        "length": 94,
+        "sha256": "079a7158dd16a16e9d7098e18342d511e7838e55776db952ac516f895122d965"
+      },
+      {
+        "length": 94,
+        "sha256": "12e83f5e4d9091459017aaf1a35009a71e0b89a9390a69ea528017c9fdd51981"
+      },
+      {
+        "length": 94,
+        "sha256": "3918a8b9412d32aaec24f0c328fa599c2bd9c6f03f2124b4839b2e6bb7a044b6"
+      },
+      {
+        "length": 94,
+        "sha256": "3c08ab5a516a62b084800c546099bc648ef91e0d520a7a30fa6ad30b9eb89077"
+      },
+      {
+        "length": 94,
+        "sha256": "3ea7e1a50df2c0de2590b3fd21a4123480776ceb0376206bb9a766b2f0c2e110"
+      },
+      {
+        "length": 94,
+        "sha256": "4e7649576a09ac7bc01c22f1f9d085ffeb18472de2e2f9cc17e29270173fcd12"
+      },
+      {
+        "length": 94,
+        "sha256": "672788b66c078136f6a5c9a0d4ab4f53bcb29e6a8f7616ee0b7b0eb7a14fb99a"
+      },
+      {
+        "length": 94,
+        "sha256": "67e7d245380db3137b71da1be5c5fe9f2f08e8635f9024d8facbca6369a730bb"
+      },
+      {
+        "length": 94,
+        "sha256": "6bf47a856df6f300248b09788f667ac42a12c89c67a5048e0cd928d135284dcf"
+      },
+      {
+        "length": 94,
+        "sha256": "82e969965cef475a5d8fd3a1a22108ff66d3446d042f4808476d38584a9bbfc1"
+      },
+      {
+        "length": 94,
+        "sha256": "8b0d5efdde01925f55faf937c827081aa6c96a27fac431801ae64d260384a284"
+      },
+      {
+        "length": 94,
+        "sha256": "a29f367b4c1e3ef47ba70691535aa583214ec811fda820f5b31a4cd30db3534c"
+      },
+      {
+        "length": 94,
+        "sha256": "b73cae85c6656286a6fa7be2253a3ef3ed0adb309e8a0384fb8d4c40fe43546c"
+      },
+      {
+        "length": 94,
+        "sha256": "bc340e5de4888c94cb19563dbd43068cf79ba1758e3b925fbd7ccf23ee3f6860"
+      },
+      {
+        "length": 94,
+        "sha256": "c47ab076a0b64e1dc826d65c31a091b079815b555a11cfc9d027a7c2c8d52750"
+      },
+      {
+        "length": 112,
+        "sha256": "413ccbd95953cf2517f486de5f385d18a8f83e4ca81721d4df45266d1c3046ef"
+      },
+      {
+        "length": 112,
+        "sha256": "62b83e18e59f6d0beecf8e60cbae3ec73e79f4f97e8e9ff6ce364604199a8de9"
+      },
+      {
+        "length": 112,
+        "sha256": "e56c2d147699c39b51d5f5446ebf9b807715cb8fed451095bf0da4235813bc91"
+      }
+    ],
+    "reason": "Avoid publishing embedded private or key-like literals while retaining structural evidence."
+  },
+  "schema": "libqplay.original-script-package-review.v1",
+  "scope": "read-only Hex-Rays export of original 1.8 signed connector script package parsing and download activation"
+}
