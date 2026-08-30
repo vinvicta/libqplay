@@ -919,12 +919,23 @@ than a raw import dump. The exporter records every direct caller of selected
 ARM64 PLT entries, then adds manual notes where a buffer or path boundary is
 visible in the decompiler.
 
-The main open item is `sub_292B34` at `0x292b34`. It selects a format string
-from internal formatter state and calls `sprintf` into a caller-provided
-buffer without receiving a destination length. The format table, destination
-allocation, and all callers need a data-flow trace before this can be called a
-memory-corruption vulnerability. This review found no direct proof that a
-network peer controls the format or reaches the destination.
+The former open item at `sub_292B34` (`0x292b34`) is the bundled libjpeg
+`format_message` callback installed by `jpeg_std_error`. It selects one of 124
+fixed message strings and calls `sprintf` into the 200-byte local buffer used
+by `TBitmap_JPEG_outputMessage`. The call has no destination-length argument,
+so it remains an unsafe source-level pattern.
+
+The reachability trace narrows the APK-specific risk. The only three `%s`
+messages in the table describe temporary-file operations, but this build's
+`jpeg_open_backing_store` implementation raises the fixed no-backing-store
+error instead of creating a temporary file. The bitmap reader supplies a
+stream source, and the JPEG code writes numeric diagnostics to the error
+parameter union. No write of a caller-controlled string into `msg_parm.s` was
+found in the bundled JPEG path. Numeric formats in the fixed table remain
+within the 200-byte diagnostic buffer for their 32-bit arguments. This is
+therefore not classified as a reachable string-format overflow in this APK,
+although reusing the formatter with another backing-store implementation
+would reopen the hazard.
 
 The other reviewed sites have clearer boundaries. YAJL integer and double
 formatters render into 32-byte locals with fixed numeric formats. The

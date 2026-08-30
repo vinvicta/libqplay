@@ -93,7 +93,7 @@
         },
         {
           "caller": "0xf0564",
-          "caller_name": "sub_F0564",
+          "caller_name": "TStream_zipWriteFile",
           "callsite": "0xf05c4",
           "xref_type": 17
         },
@@ -573,85 +573,85 @@
         },
         {
           "caller": "0x27fd34",
-          "caller_name": "sub_27FD34",
+          "caller_name": "zlib_deflate_fast",
           "callsite": "0x2800a0",
           "xref_type": 17
         },
         {
           "caller": "0x27fd34",
-          "caller_name": "sub_27FD34",
+          "caller_name": "zlib_deflate_fast",
           "callsite": "0x280244",
           "xref_type": 17
         },
         {
           "caller": "0x27fd34",
-          "caller_name": "sub_27FD34",
+          "caller_name": "zlib_deflate_fast",
           "callsite": "0x280278",
           "xref_type": 17
         },
         {
           "caller": "0x27fd34",
-          "caller_name": "sub_27FD34",
+          "caller_name": "zlib_deflate_fast",
           "callsite": "0x2805fc",
           "xref_type": 17
         },
         {
           "caller": "0x2806e8",
-          "caller_name": "sub_2806E8",
+          "caller_name": "zlib_deflate_stored",
           "callsite": "0x280848",
           "xref_type": 17
         },
         {
           "caller": "0x2806e8",
-          "caller_name": "sub_2806E8",
+          "caller_name": "zlib_deflate_stored",
           "callsite": "0x2809a8",
           "xref_type": 17
         },
         {
           "caller": "0x2806e8",
-          "caller_name": "sub_2806E8",
+          "caller_name": "zlib_deflate_stored",
           "callsite": "0x2809dc",
           "xref_type": 17
         },
         {
           "caller": "0x2806e8",
-          "caller_name": "sub_2806E8",
+          "caller_name": "zlib_deflate_stored",
           "callsite": "0x280c70",
           "xref_type": 17
         },
         {
           "caller": "0x2806e8",
-          "caller_name": "sub_2806E8",
+          "caller_name": "zlib_deflate_stored",
           "callsite": "0x280cf8",
           "xref_type": 17
         },
         {
           "caller": "0x280d70",
-          "caller_name": "sub_280D70",
+          "caller_name": "zlib_deflate_slow",
           "callsite": "0x2810e4",
           "xref_type": 17
         },
         {
           "caller": "0x280d70",
-          "caller_name": "sub_280D70",
+          "caller_name": "zlib_deflate_slow",
           "callsite": "0x28111c",
           "xref_type": 17
         },
         {
           "caller": "0x280d70",
-          "caller_name": "sub_280D70",
+          "caller_name": "zlib_deflate_slow",
           "callsite": "0x281244",
           "xref_type": 17
         },
         {
           "caller": "0x280d70",
-          "caller_name": "sub_280D70",
+          "caller_name": "zlib_deflate_slow",
           "callsite": "0x281460",
           "xref_type": 17
         },
         {
           "caller": "0x280d70",
-          "caller_name": "sub_280D70",
+          "caller_name": "zlib_deflate_slow",
           "callsite": "0x2817dc",
           "xref_type": 17
         },
@@ -993,19 +993,19 @@
         },
         {
           "caller": "0x2b3c64",
-          "caller_name": "sub_2B3C64",
+          "caller_name": "CyaInt_GetName",
           "callsite": "0x2b3eec",
           "xref_type": 17
         },
         {
           "caller": "0x2b3c64",
-          "caller_name": "sub_2B3C64",
+          "caller_name": "CyaInt_GetName",
           "callsite": "0x2b3f44",
           "xref_type": 17
         },
         {
           "caller": "0x2b3c64",
-          "caller_name": "sub_2B3C64",
+          "caller_name": "CyaInt_GetName",
           "callsite": "0x2b4204",
           "xref_type": 17
         },
@@ -1059,7 +1059,7 @@
         },
         {
           "caller": "0x2b6384",
-          "caller_name": "sub_2B6384",
+          "caller_name": "CyaInt_ConfirmSignature",
           "callsite": "0x2b648c",
           "xref_type": 17
         },
@@ -1155,19 +1155,19 @@
         },
         {
           "caller": "0x2c47e0",
-          "caller_name": "sub_2C47E0",
+          "caller_name": "CyaInt_ProcessBuffer",
           "callsite": "0x2c487c",
           "xref_type": 17
         },
         {
           "caller": "0x2c47e0",
-          "caller_name": "sub_2C47E0",
+          "caller_name": "CyaInt_ProcessBuffer",
           "callsite": "0x2c48d4",
           "xref_type": 17
         },
         {
           "caller": "0x2c47e0",
-          "caller_name": "sub_2C47E0",
+          "caller_name": "CyaInt_ProcessBuffer",
           "callsite": "0x2c4c10",
           "xref_type": 17
         },
@@ -1185,61 +1185,61 @@
         },
         {
           "caller": "0x2c6514",
-          "caller_name": "sub_2C6514",
+          "caller_name": "CyaInt_PRF",
           "callsite": "0x2c6598",
           "xref_type": 17
         },
         {
           "caller": "0x2c6514",
-          "caller_name": "sub_2C6514",
+          "caller_name": "CyaInt_PRF",
           "callsite": "0x2c65b0",
           "xref_type": 17
         },
         {
           "caller": "0x2c6514",
-          "caller_name": "sub_2C6514",
+          "caller_name": "CyaInt_PRF",
           "callsite": "0x2c6658",
           "xref_type": 17
         },
         {
           "caller": "0x2c6514",
-          "caller_name": "sub_2C6514",
+          "caller_name": "CyaInt_PRF",
           "callsite": "0x2c66bc",
           "xref_type": 17
         },
         {
           "caller": "0x2c6514",
-          "caller_name": "sub_2C6514",
+          "caller_name": "CyaInt_PRF",
           "callsite": "0x2c67a4",
           "xref_type": 17
         },
         {
           "caller": "0x2c6514",
-          "caller_name": "sub_2C6514",
+          "caller_name": "CyaInt_PRF",
           "callsite": "0x2c67c0",
           "xref_type": 17
         },
         {
           "caller": "0x2c6514",
-          "caller_name": "sub_2C6514",
+          "caller_name": "CyaInt_PRF",
           "callsite": "0x2c67d4",
           "xref_type": 17
         },
         {
           "caller": "0x2c6514",
-          "caller_name": "sub_2C6514",
+          "caller_name": "CyaInt_PRF",
           "callsite": "0x2c67f0",
           "xref_type": 17
         },
         {
           "caller": "0x2c6514",
-          "caller_name": "sub_2C6514",
+          "caller_name": "CyaInt_PRF",
           "callsite": "0x2c6880",
           "xref_type": 17
         },
         {
           "caller": "0x2c6514",
-          "caller_name": "sub_2C6514",
+          "caller_name": "CyaInt_PRF",
           "callsite": "0x2c6a7c",
           "xref_type": 17
         },
@@ -1275,25 +1275,25 @@
         },
         {
           "caller": "0x2c8a20",
-          "caller_name": "sub_2C8A20",
+          "caller_name": "CyaInt_ComputeFinishedVerifyData",
           "callsite": "0x2c8a60",
           "xref_type": 17
         },
         {
           "caller": "0x2c8a20",
-          "caller_name": "sub_2C8A20",
+          "caller_name": "CyaInt_ComputeFinishedVerifyData",
           "callsite": "0x2c8abc",
           "xref_type": 17
         },
         {
           "caller": "0x2c8a20",
-          "caller_name": "sub_2C8A20",
+          "caller_name": "CyaInt_ComputeFinishedVerifyData",
           "callsite": "0x2c8ae4",
           "xref_type": 17
         },
         {
           "caller": "0x2c8a20",
-          "caller_name": "sub_2C8A20",
+          "caller_name": "CyaInt_ComputeFinishedVerifyData",
           "callsite": "0x2c8b44",
           "xref_type": 17
         },
@@ -1389,25 +1389,25 @@
         },
         {
           "caller": "0x2ca940",
-          "caller_name": "sub_2CA940",
+          "caller_name": "CyaInt_ProcessPeerCerts",
           "callsite": "0x2cab5c",
           "xref_type": 17
         },
         {
           "caller": "0x2ca940",
-          "caller_name": "sub_2CA940",
+          "caller_name": "CyaInt_ProcessPeerCerts",
           "callsite": "0x2cacd8",
           "xref_type": 17
         },
         {
           "caller": "0x2ca940",
-          "caller_name": "sub_2CA940",
+          "caller_name": "CyaInt_ProcessPeerCerts",
           "callsite": "0x2cae4c",
           "xref_type": 17
         },
         {
           "caller": "0x2ca940",
-          "caller_name": "sub_2CA940",
+          "caller_name": "CyaInt_ProcessPeerCerts",
           "callsite": "0x2caed0",
           "xref_type": 17
         },
@@ -1745,7 +1745,7 @@
         },
         {
           "caller": "0x20bf6c",
-          "caller_name": "sub_20BF6C",
+          "caller_name": "GSFunctionsInitstaticscriptvars_script_findpathinarray",
           "callsite": "0x20c158",
           "xref_type": 17
         },
@@ -1829,37 +1829,37 @@
         },
         {
           "caller": "0x27fd34",
-          "caller_name": "sub_27FD34",
+          "caller_name": "zlib_deflate_fast",
           "callsite": "0x2803ec",
           "xref_type": 17
         },
         {
           "caller": "0x27fd34",
-          "caller_name": "sub_27FD34",
+          "caller_name": "zlib_deflate_fast",
           "callsite": "0x280454",
           "xref_type": 17
         },
         {
           "caller": "0x2806e8",
-          "caller_name": "sub_2806E8",
+          "caller_name": "zlib_deflate_stored",
           "callsite": "0x280b58",
           "xref_type": 17
         },
         {
           "caller": "0x2806e8",
-          "caller_name": "sub_2806E8",
+          "caller_name": "zlib_deflate_stored",
           "callsite": "0x280c50",
           "xref_type": 17
         },
         {
           "caller": "0x280d70",
-          "caller_name": "sub_280D70",
+          "caller_name": "zlib_deflate_slow",
           "callsite": "0x2813a4",
           "xref_type": 17
         },
         {
           "caller": "0x280d70",
-          "caller_name": "sub_280D70",
+          "caller_name": "zlib_deflate_slow",
           "callsite": "0x2815cc",
           "xref_type": 17
         },
@@ -2069,37 +2069,37 @@
         },
         {
           "caller": "0x2c50ac",
-          "caller_name": "sub_2C50AC",
+          "caller_name": "CyaInt_ProcessVerifyPath",
           "callsite": "0x2c5144",
           "xref_type": 17
         },
         {
           "caller": "0x2c6514",
-          "caller_name": "sub_2C6514",
+          "caller_name": "CyaInt_PRF",
           "callsite": "0x2c6704",
           "xref_type": 17
         },
         {
           "caller": "0x2c6514",
-          "caller_name": "sub_2C6514",
+          "caller_name": "CyaInt_PRF",
           "callsite": "0x2c676c",
           "xref_type": 17
         },
         {
           "caller": "0x2c6514",
-          "caller_name": "sub_2C6514",
+          "caller_name": "CyaInt_PRF",
           "callsite": "0x2c6794",
           "xref_type": 17
         },
         {
           "caller": "0x2c6514",
-          "caller_name": "sub_2C6514",
+          "caller_name": "CyaInt_PRF",
           "callsite": "0x2c69d8",
           "xref_type": 17
         },
         {
           "caller": "0x2c6514",
-          "caller_name": "sub_2C6514",
+          "caller_name": "CyaInt_PRF",
           "callsite": "0x2c6b70",
           "xref_type": 17
         },
@@ -2141,7 +2141,7 @@
         },
         {
           "caller": "0x2c8710",
-          "caller_name": "sub_2C8710",
+          "caller_name": "CyaInt_VerifyRecordMac",
           "callsite": "0x2c874c",
           "xref_type": 17
         },
@@ -2340,7 +2340,7 @@
         },
         {
           "caller": "0x2c50ac",
-          "caller_name": "sub_2C50AC",
+          "caller_name": "CyaInt_ProcessVerifyPath",
           "callsite": "0x2c5180",
           "xref_type": 17
         }
@@ -2366,7 +2366,7 @@
       "callers": [
         {
           "caller": "0x2c50ac",
-          "caller_name": "sub_2C50AC",
+          "caller_name": "CyaInt_ProcessVerifyPath",
           "callsite": "0x2c5174",
           "xref_type": 17
         }
@@ -2487,7 +2487,7 @@
         },
         {
           "caller": "0x2c50ac",
-          "caller_name": "sub_2C50AC",
+          "caller_name": "CyaInt_ProcessVerifyPath",
           "callsite": "0x2c5154",
           "xref_type": 17
         },
@@ -2499,13 +2499,13 @@
         },
         {
           "caller": "0x2ca940",
-          "caller_name": "sub_2CA940",
+          "caller_name": "CyaInt_ProcessPeerCerts",
           "callsite": "0x2cac44",
           "xref_type": 17
         },
         {
           "caller": "0x2ca940",
-          "caller_name": "sub_2CA940",
+          "caller_name": "CyaInt_ProcessPeerCerts",
           "callsite": "0x2cac6c",
           "xref_type": 17
         },
@@ -2553,7 +2553,7 @@
   ],
   "interpretation": [
     "Imported libc functions show capability, not exploitability.",
-    "The selected direct call sites contain one unbounded sprintf destination requiring deeper provenance analysis.",
+    "The selected direct call sites contain one unbounded sprintf call in the bundled JPEG formatter; its fixed-table string path and backing-store reachability were reviewed separately.",
     "The reviewed fixed-size formatter, YAJL integer formatter, certificate-directory path builder, cipher parser, and MAC-interface setup have visible local bounds or fixed inputs.",
     "The report does not prove that a network peer can reach any manual-review site or control its destination buffer.",
     "The report does not replace parser fuzzing in a disposable process."
@@ -2562,11 +2562,12 @@
     {
       "address": "0x292b34",
       "api": "sprintf",
-      "behavior": "The function selects a format string from internal formatter state and writes into its caller-provided char buffer with sprintf at 0x292bd0 and 0x292c08. No destination length is passed by this function.",
-      "classification": "manual-review",
+      "behavior": "jpeg_std_error installs this function as the bundled libjpeg format_message callback. It selects one of 124 fixed message strings and writes into the caller-provided char buffer with sprintf at 0x292bd0 and 0x292c08. No destination length is passed by this function.",
+      "classification": "unbounded-callsite-unreachable-string-format",
       "confidence": "confirmed-static",
       "function": "sub_292B34",
-      "security_note": "This is the only reviewed legacy sprintf site without a visible local bound. The format table and the destination provenance need a separate data-flow trace before calling it exploitable. No direct remote reachability was established."
+      "identified_role": "bundled libjpeg format_message callback",
+      "security_note": "The 200-byte destination is TBitmap_JPEG_outputMessage's local JMSG_LENGTH_MAX buffer. The only three %s entries in the table describe temporary-file messages, but this build's jpeg_open_backing_store implementation reports the fixed JERR_NO_BACKING_STORE error instead of creating a temporary file. The TBitmap JPEG path supplies a stream source and reaches this formatter through numeric JPEG diagnostics. No write of a caller-controlled string into msg_parm.s was found in the bundled JPEG call path. The unbounded call remains a source-level hazard if the library is reused with a different backing-store or error path, but this APK does not establish a reachable string-format overflow."
     },
     {
       "address": "0x2afcec",

@@ -933,6 +933,18 @@ device logcat should be used to check the dynamic-linker result before
 changing the connector. The finding is `APK-012` in
 `artifacts/original_apk_security_audit_20260830.json`.
 
+The focused libc call-site pass also closed the last explicitly open formatter
+question. Residual function `0x292b34` is the bundled libjpeg
+`format_message` callback, not an application formatter. Its `sprintf` call
+does omit a destination length, but the 124-entry table has only three `%s`
+messages and all three refer to temporary files. The build's backing-store
+helper reports `JERR_NO_BACKING_STORE` instead of creating one, while the
+bitmap reader reaches the callback with numeric JPEG diagnostics. No
+`msg_parm.s` write was found in the bundled JPEG path. The report now records
+this as an unsafe source pattern with no demonstrated reachable string-format
+overflow for this APK, while noting that a different backing-store
+implementation would change the conclusion.
+
 The native init/fini pass then followed the dynamic-section arrays through
 IDA. There are 20 fixed init callbacks and 10 fini callbacks. Most are small
 static-state routines: they initialize resource link lists, the texture list,

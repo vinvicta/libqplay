@@ -54,20 +54,30 @@ MANUAL_REVIEWS = [
     {
         "address": "0x292b34",
         "function": "sub_292B34",
+        "identified_role": "bundled libjpeg format_message callback",
         "api": "sprintf",
-        "classification": "manual-review",
+        "classification": "unbounded-callsite-unreachable-string-format",
         "confidence": "confirmed-static",
         "behavior": (
-            "The function selects a format string from internal formatter "
-            "state and writes into its caller-provided char buffer with "
+            "jpeg_std_error installs this function as the bundled libjpeg "
+            "format_message callback. It selects one of 124 fixed message "
+            "strings and writes into the caller-provided char buffer with "
             "sprintf at 0x292bd0 and 0x292c08. No destination length is "
             "passed by this function."
         ),
         "security_note": (
-            "This is the only reviewed legacy sprintf site without a visible "
-            "local bound. The format table and the destination provenance "
-            "need a separate data-flow trace before calling it exploitable. "
-            "No direct remote reachability was established."
+            "The 200-byte destination is TBitmap_JPEG_outputMessage's local "
+            "JMSG_LENGTH_MAX buffer. The only three %s entries in the table "
+            "describe temporary-file messages, but this build's "
+            "jpeg_open_backing_store implementation reports the fixed "
+            "JERR_NO_BACKING_STORE error instead of creating a temporary file. "
+            "The TBitmap JPEG path supplies a stream source and reaches this "
+            "formatter through numeric JPEG diagnostics. No write of a "
+            "caller-controlled string into msg_parm.s was found in the bundled "
+            "JPEG call path. The unbounded call remains a source-level hazard "
+            "if the library is reused with a different backing-store or error "
+            "path, but this APK does not establish a reachable string-format "
+            "overflow."
         ),
     },
     {
@@ -306,7 +316,7 @@ def main() -> None:
         "manual_reviews": MANUAL_REVIEWS,
         "interpretation": [
             "Imported libc functions show capability, not exploitability.",
-            "The selected direct call sites contain one unbounded sprintf destination requiring deeper provenance analysis.",
+            "The selected direct call sites contain one unbounded sprintf call in the bundled JPEG formatter; its fixed-table string path and backing-store reachability were reviewed separately.",
             "The reviewed fixed-size formatter, YAJL integer formatter, certificate-directory path builder, cipher parser, and MAC-interface setup have visible local bounds or fixed inputs.",
             "The report does not prove that a network peer can reach any manual-review site or control its destination buffer.",
             "The report does not replace parser fuzzing in a disposable process.",
