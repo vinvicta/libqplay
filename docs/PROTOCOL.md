@@ -368,6 +368,13 @@ The server-file path is recorded in
 handler to the cache rather than treating the level loader as an isolated file
 parser:
 
+The related update-package path review is recorded in
+`artifacts/original_update_package_path_review_20260830.json`. It covers the
+manifest `SUBPACKAGE` and `FILE` records, the package-aware cache mapper, and
+the local writers that persist package state. Those findings are intentionally
+kept separate from the packet framing below because they describe filesystem
+trust boundaries after a file response has already been accepted.
+
 ```text
 packet 102
   -> handler index 24: TClient_parseEncodedFileChunk

@@ -391,6 +391,20 @@ server-supplied resource exhaustion a real trust-boundary concern after a
 connection is accepted, while symlink traversal remains an untested local
 question rather than a confirmed vulnerability.
 
+The focused update-package path export is
+`artifacts/original_update_package_path_review_20260830.json`. It separates the
+two manifest cases that had previously been easy to conflate. `SUBPACKAGE`
+names are reduced to a basename before package lookup, so a literal traversal
+string does not reach the package filename builder. `FILE` directories are
+retained after the `AllowedFoldername` check, which rejects ordinary dot-dot
+components but does not provide canonical containment. The package-aware cache
+mapper adds the native base user folder to the stored path, so the static pass
+does not prove a root escape from an absolute-looking directory. Symlink
+following, uncrossed canonical roots, and non-atomic file writes remain the
+important local checks. The package parser also has no visible total budget for
+records, descriptions, or nested packages, so the strongest current finding is
+context-dependent availability risk rather than confirmed arbitrary file write.
+
 ## Corrected two-connection runtime trace
 
 The first useful local run sent the map and player properties on the same
