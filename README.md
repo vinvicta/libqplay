@@ -40,10 +40,12 @@ names. The check is preserved in
 
 The old connector has a concrete compatibility problem. Its embedded
 GraalWeb certificate expired on 2023-07-29, so the original HTTPS path cannot
-be trusted by a current clock. The archived connector package also fails the
-RSA check against this APK's embedded public key. Both findings are separate
-from the game-server protocol and are handled only by private diagnostic
-patches in the local test build.
+be trusted by a current clock. The archived connector fixture is structurally
+valid and passes the native RSA check when verified with the recovered wolfSSL
+raw-digest format. An earlier generic ASN.1 `DigestInfo` check reported a
+mismatch because it used the wrong signature format. Certificate freshness
+and package verification are separate from the game-server protocol, and any
+diagnostic changes remain private to the local test build.
 
 The symbolized handler-table investigation also produced an important
 correction. The original `setInDataHandlers` instructions are correct for this

@@ -11,8 +11,10 @@ This is the short handoff view. The full reasoning and command history are in
 3. The connector request shape is known, including the `p=` query, the
    legacy HTTP/1.0 headers, and the three fallback modes.
 4. The archived connector body has valid framing and decrypts to a valid
-   three-entry ZIP. Its RSA signature does not match the embedded public key,
-   which is why the diagnostic replay uses an explicit test-only bypass.
+   three-entry ZIP. Its RSA signature passes the embedded public-key check
+   when the native wolfSSL raw-digest format is reproduced. An earlier generic
+   ASN.1 verifier used the wrong format, so the first diagnostic replay used a
+   bypass that the saved fixture does not need.
 5. The response parser lowercases header lines before matching them. Local
    replay variants with lowercase or title-case names, and with either
    `Connection: keep-alive` or `Connection: close`, all reached the game

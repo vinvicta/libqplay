@@ -576,10 +576,12 @@ big-endian payload length, and the encrypted ZIP. The archived body is 16,446
 bytes and decrypts to a valid ZIP containing `.rk`, `.t`, and
 `NPCS/StartScript_Connector`.
 
-The body does not validate against the public key recovered from this APK.
-The package is therefore a stale or mismatched artifact for a strict client.
-The local test has a narrowly scoped RSA branch bypass so the script compiler
-can be studied. That bypass is not a safe release repair.
+The body passes the public-key check recovered from this APK when the native
+wolfSSL raw-digest signature format is reproduced. An earlier generic ASN.1
+`DigestInfo` verifier reported a mismatch because it used the wrong format.
+The first local test therefore used a narrowly scoped RSA branch bypass before
+the native format was identified. The saved fixture does not need that bypass,
+and the bypass is not a safe release repair.
 
 The follow-up IDA export is
 `artifacts/original_script_package_review_20260830.json`. It confirms that the
@@ -715,9 +717,9 @@ was a negative control. It changed the table enough to break the normal
 protocol sequence, so it is no longer included in the compatibility patcher.
 
 This conclusion is independent of the expired connector certificate and the
-stale package signature. Keeping those diagnostics separate makes it clear
-which changes are needed to study the client and which bytes are already
-correct.
+package-verification diagnostic. Keeping those diagnostics separate makes it
+clear which changes are needed to study the client and which bytes are
+already correct.
 
 ## NewGraal key exchange
 

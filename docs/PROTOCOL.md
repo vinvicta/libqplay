@@ -260,12 +260,12 @@ per-package RC4 key from `.rk`, and uses that key for the remaining entries.
 `tools/parse_connector_response.py` checks the framing and outer ZIP. The
 decoder in `tools/decode_connector_scripts.py` checks the inner package.
 
-The archived body has a valid ZIP but its RSA signature does not verify
-against the public key recovered from this APK. That is a useful diagnostic
-result. It means that package is stale, belongs to another connector key, or
-was captured for another client revision. It does not prove that the current
-service would reject the real request. The local test bypasses this branch
-only to study the native code after the package boundary.
+The archived body has a valid ZIP and its RSA signature passes the public-key
+check recovered from this APK when the native wolfSSL raw-digest format is
+reproduced. An earlier generic ASN.1 `DigestInfo` check reported a mismatch
+because it used the wrong signature format. The local test originally bypassed
+this branch before that native format was identified; the saved fixture does
+not need the bypass.
 
 The native package boundary is recorded in
 `artifacts/original_script_package_review_20260830.json`. The outer RSA check
