@@ -1,5 +1,12 @@
 # Residual IDA functions
 
+The repository keeps compact residual evidence and moves repeated full-target
+JSON exports into the local ignored archive. Historical path names in this
+document remain useful identifiers, but the corresponding large files may now
+be present only under `research-data/generated/`. Their hashes, sizes, and
+line counts are recorded in `artifacts/research_archive_manifest.json`.
+The policy and regeneration instructions are in `docs/ARTIFACT_POLICY.md`.
+
 The exported-name translation is complete for the original ARM64
 `libqplay.so`: all 8,601 rows in the applied alias inventory were renamed with
 no failures. This is not an unstripped debug-symbol count. The APK is reported
@@ -2265,6 +2272,29 @@ The generators are `tools/generate_spectron_sounds_layout_anchors_v350.py`,
 This pass changed only a disposable IDA database copy and offline metadata.
 It did not patch the APK, alter TLS, contact a game service, or change the
 loading-state repair.
+
+## 2026-08-30: v354 compact-core translations
+
+The v354 pass removes nine compact source rows from the unmatched queue. It
+covers static file variables, recursive level-path scanning, cookie filename
+selection, system-ID selection, top-script reporting, profiler stack timing,
+control-binding construction, input key descriptions, and the reviewed
+Android, TapJoy, and video cleanup role correction. Each row was reviewed with
+source and target pseudocode and class-local context. The target wrappers use
+rebuilt string and collection types, so all nine are layout-change matches.
+
+The target database is
+`analysis/spectron_libqplay_translated_v354_compact_core_final.i64` with
+SHA-256
+`27eccea1a8ac243724b3df040055332cd486ca6171a7aa57d66123d4e115bef0`.
+The map now reports 4,268 mapped pairs, 4,207 high-confidence pairs, 61
+medium-confidence pairs, 1,001 ambiguous rows, and 75 unmatched rows. Four
+nearby source rows remain explicitly unpromoted: encoded hash-list
+containment, `THashStrings_listNames`, `TLog_echo`, and the central
+`TInitStatics_initVars` helper. The compact anchor, application, verification,
+and checkpoint records are public. Repeated full-population exports are
+indexed by the research archive manifest and are not required to review this
+pass.
 
 ## 2026-08-29: v353 retained JNI callback translations
 

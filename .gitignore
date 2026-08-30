@@ -11,6 +11,12 @@ captures/
 private/
 tmp/
 
+# Large reproducible analysis output is retained locally and indexed by the
+# checked-in artifact manifest instead of being copied into Git history.
+research-data/
+artifacts/raw/
+artifacts/generated-large/
+
 # Python and editor output
 __pycache__/
 *.pyc

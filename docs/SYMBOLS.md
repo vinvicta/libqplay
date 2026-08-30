@@ -1,5 +1,12 @@
 # Symbol translation
 
+Large per-checkpoint feature exports and repeated dynamic-symbol audits are
+kept in the local ignored archive rather than duplicated in the public tree.
+The compact evidence remains public, and the original paths, hashes, sizes,
+and line counts are listed in
+`artifacts/research_archive_manifest.json`. See
+`docs/ARTIFACT_POLICY.md` before regenerating one of the full exports.
+
 ## Result
 
 The original ARM64 database was processed with `tools/ida_translate_symbols.py`.
@@ -4058,3 +4065,25 @@ The v353 records are
 `artifacts/spectron_dynamic_symbol_coverage_audit_v353.json`,
 `artifacts/spectron_semantic_translation_v353.json`, and
 `artifacts/spectron_translation_checkpoint_20260829_v353.json`.
+
+## v354 compact filesystem and runtime helpers
+
+The v354 pass adds nine high-confidence layout-aware aliases to the compact
+filesystem, identity, logging, profiling, input, and Android cleanup groups.
+The target functions are `0xe8f20`, `0xe9194`, `0xed0d8`, `0xed6b4`,
+`0xfa5f8`, `0xfc7ac`, `0x16c59c`, `0x16d174`, and the corrected cleanup role at
+`0xe0438`. All nine were applied and verified after reopening the target IDA
+copy. The target remains at 11,707 functions with zero audited default names.
+
+The v354 semantic totals are 4,268 mapped pairs, 4,207 high-confidence
+pairs, 61 medium-confidence pairs, 1,001 ambiguous rows, and 75 unmatched
+rows. Four nearby source rows were left unpromoted because they folded into an
+existing target body or lacked a one-to-one counterpart. The compact records
+are `spectron_compact_core_manual_translation_anchors_20260830.json`, its
+application and verification companions, and
+`spectron_translation_checkpoint_20260830_v354.json`.
+
+The complete feature and audit exports for v354 are local-only generated
+inputs. Their manifest entries preserve the exact hashes and let a reviewer
+recover them on the analysis workstation without inflating the public Git
+tree.

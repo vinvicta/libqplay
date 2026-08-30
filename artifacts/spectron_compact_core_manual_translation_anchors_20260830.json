@@ -1,0 +1,1452 @@
+{
+  "anchors": [
+    {
+      "changed_metric_fields": [
+        "size",
+        "instruction_count",
+        "branch_count",
+        "call_count",
+        "mnemonic_hash",
+        "opcode_shape_hash",
+        "register_shape_hash",
+        "shape_hash"
+      ],
+      "confidence": "high",
+      "evidence": [
+        "The source and target rows were selected from the corresponding class-local regions of the exact hashed ARM64 builds.",
+        "The target addresses and v18_ names are analysis aliases. They are not claims that the stripped 2.2 library retained the readable 1.8 debug symbols.",
+        "The target wrappers use rebuilt C8THgaTQxF, CanTfaz6bZ, vuuHgangcF, and obfuscated class names. Changed metrics are therefore recorded as layout changes rather than exact binary matches.",
+        "Each selected target body was reviewed through fresh offline Hex-Rays pseudocode evidence and checked against the current target feature export.",
+        "The earlier Android and video state audit ties the source cleanup callback to the source static cleanup table and to the translated JNI and video state fields.",
+        "The target cleanup callback is registered in the corresponding target cleanup table and clears the three matching target string fields plus one target-only string lifetime.",
+        "The target already carries the reviewed v18_Android_TapJoy_video_clearStaticStrings alias, so this pass adds explicit source-backed provenance without renaming it again."
+      ],
+      "layout_change": true,
+      "layout_metric_delta": {
+        "branch_count": {
+          "original": 3,
+          "spectron": 4
+        },
+        "call_count": {
+          "original": 2,
+          "spectron": 3
+        },
+        "instruction_count": {
+          "original": 11,
+          "spectron": 13
+        },
+        "mnemonic_hash": {
+          "original": "d3f694c8771c2a7b2ee1ccf748b372ac1cf8e2276158a27706345abfd75eec02",
+          "spectron": "085e7797c0dd22757b8b154e55db7a21a9b22de60813a1f3ec2c580d1ada600c"
+        },
+        "opcode_shape_hash": {
+          "original": "d70fae4190fd8af3952860635d9cb950a003c374ba19422a2b9bfebccabf31c3",
+          "spectron": "0afd2608e877ecd76b79d9e6c997bc9d7bdce1dc1585f7311b4779941629134a"
+        },
+        "register_shape_hash": {
+          "original": "9e2473400339d23bab8b8602851b3c39978eb005822ed45e7b44efe7b53e4a91",
+          "spectron": "f169ec4bf5d445ab1ed070e0247ae29fb3dcca1d27d12ea883fb6e2aec9a08ed"
+        },
+        "shape_hash": {
+          "original": "3f10124a84f0909320a71adedb0289969cb0a7e79731d563665575d0be21b025",
+          "spectron": "f4020899961cbcda6947b104acf2851c8aed9c9bb86c539a2006cf4005007c82"
+        },
+        "size": {
+          "original": 48,
+          "spectron": 56
+        }
+      },
+      "match_kind": "manual-compact-core-role-correction",
+      "name_action": "retain-existing-v18-alias-and-add-reviewed-comment",
+      "original_direct_call_names": [
+        "plt_TString_clear_void"
+      ],
+      "original_ea": "0xe06a8",
+      "original_function_end": "0xe06d8",
+      "original_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 3,
+        "call_count": 2,
+        "instruction_count": 11,
+        "mnemonic_hash": "d3f694c8771c2a7b2ee1ccf748b372ac1cf8e2276158a27706345abfd75eec02",
+        "opcode_shape_hash": "d70fae4190fd8af3952860635d9cb950a003c374ba19422a2b9bfebccabf31c3",
+        "register_shape_hash": "9e2473400339d23bab8b8602851b3c39978eb005822ed45e7b44efe7b53e4a91",
+        "shape_hash": "3f10124a84f0909320a71adedb0289969cb0a7e79731d563665575d0be21b025",
+        "size": 48,
+        "string_refs_hash": null
+      },
+      "original_name": "TServerFlying_clearStaticStrings",
+      "original_string_refs": [],
+      "prior_provenance": [
+        {
+          "artifact": "artifacts/spectron_android_tapjoy_video_state_manual_translation_anchors_20260827.json",
+          "artifact_sha256": "8541126ca3159a4850ad9337cd26dc807ae07d9759f6726ba41a84332317be19",
+          "proposed_name": "v18_Android_TapJoy_video_clearStaticStrings",
+          "target_ea": "0xe0438"
+        }
+      ],
+      "proposed_name": "v18_Android_TapJoy_video_clearStaticStrings",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "Android TapJoy and video static-string cleanup callback",
+      "source_category": "unmatched",
+      "source_pseudocode_basis": "Fresh direct source Hex-Rays review was summarized in source_semantics; source metrics come from the offline source feature export.",
+      "source_semantics": "Clears the three source Android or video TString globals registered in the cleanup table. The old TServerFlying label was corrected by the earlier TapJoy and video state audit.",
+      "spectron_current_name": "v18_Android_TapJoy_video_clearStaticStrings",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv"
+      ],
+      "spectron_ea": "0xe0438",
+      "spectron_function_end": "0xe0470",
+      "spectron_metrics": {
+        "basic_block_count": 2,
+        "branch_count": 4,
+        "call_count": 3,
+        "instruction_count": 13,
+        "mnemonic_hash": "085e7797c0dd22757b8b154e55db7a21a9b22de60813a1f3ec2c580d1ada600c",
+        "opcode_shape_hash": "0afd2608e877ecd76b79d9e6c997bc9d7bdce1dc1585f7311b4779941629134a",
+        "register_shape_hash": "f169ec4bf5d445ab1ed070e0247ae29fb3dcca1d27d12ea883fb6e2aec9a08ed",
+        "shape_hash": "f4020899961cbcda6947b104acf2851c8aed9c9bb86c539a2006cf4005007c82",
+        "size": 56,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "-0x270",
+      "target_evidence_terms": [
+        "C8THgaTQxF::clear",
+        "CanTfaz6bZ::clear",
+        "qword_3A58D8",
+        "qword_3A5920"
+      ],
+      "target_pseudocode": "__int64 v18_Android_TapJoy_video_clearStaticStrings()\n{\n  C8THgaTQxF::clear((C8THgaTQxF *)&qword_3A58D8);\n  C8THgaTQxF::clear((C8THgaTQxF *)&qword_3A58E0);\n  C8THgaTQxF::clear((C8THgaTQxF *)&qword_3A5920);\n  return CanTfaz6bZ::clear((CanTfaz6bZ *)&qword_3A59C8);\n}\n",
+      "target_xrefs_to": [
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x370060",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "changed_metric_fields": [
+        "size",
+        "instruction_count",
+        "mnemonic_hash",
+        "opcode_shape_hash",
+        "register_shape_hash",
+        "shape_hash"
+      ],
+      "confidence": "high",
+      "evidence": [
+        "The source and target rows were selected from the corresponding class-local regions of the exact hashed ARM64 builds.",
+        "The target addresses and v18_ names are analysis aliases. They are not claims that the stripped 2.2 library retained the readable 1.8 debug symbols.",
+        "The target wrappers use rebuilt C8THgaTQxF, CanTfaz6bZ, vuuHgangcF, and obfuscated class names. Changed metrics are therefore recorded as layout changes rather than exact binary matches.",
+        "Each selected target body was reviewed through fresh offline Hex-Rays pseudocode evidence and checked against the current target feature export.",
+        "Both bodies lazily allocate the separator and allowed-character strings, then construct the archive extension list from the same six extensions.",
+        "The target uses C8THgaTQxF and vuuHgangcF in place of the source TString and TStringList wrappers, accounting for the small layout change."
+      ],
+      "layout_change": true,
+      "layout_metric_delta": {
+        "instruction_count": {
+          "original": 54,
+          "spectron": 55
+        },
+        "mnemonic_hash": {
+          "original": "d7dbe922125a45fa50ecc797342f85306beb8f35deb95391c6f8a27b3ab128ee",
+          "spectron": "5f08426f20e4a4c09ddfd99235c78d4a2243152c98dae76dc5ee4a5833673400"
+        },
+        "opcode_shape_hash": {
+          "original": "81a4ce257659183d33a8dd45ae0db45fd470bb2a2b769f978a4862e9179a6aa2",
+          "spectron": "a404f4d0dbdcb1f955a7e4accb16def10c008a442f7b38ac422a6fb939f857db"
+        },
+        "register_shape_hash": {
+          "original": "225c5aeb339ab7bd548b140eb6794015a666b85d63dd9ea88aceef75e1236a6f",
+          "spectron": "26df51d1e7c359dd506c0e694bfc5ec83976dc40b37f864e1f152fea513135ab"
+        },
+        "shape_hash": {
+          "original": "c0965f101c84e9f394829015dec64c2ae90c2f0cc7d92c58241ba8ddad13a39d",
+          "spectron": "59cc24a77b4752c53a8bc3565c03794dab3946c002f785c468fe85ac2eee4950"
+        },
+        "size": {
+          "original": 220,
+          "spectron": 224
+        }
+      },
+      "match_kind": "manual-compact-core-layout-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TStringList_TStringList_TString_const",
+        "plt_TString_clear_void",
+        "plt_TString_operator_lshift_char_const",
+        "plt_operator_new_ulong__2"
+      ],
+      "original_ea": "0xe8338",
+      "original_function_end": "0xe8414",
+      "original_metrics": {
+        "basic_block_count": 7,
+        "branch_count": 15,
+        "call_count": 8,
+        "instruction_count": 54,
+        "mnemonic_hash": "d7dbe922125a45fa50ecc797342f85306beb8f35deb95391c6f8a27b3ab128ee",
+        "opcode_shape_hash": "81a4ce257659183d33a8dd45ae0db45fd470bb2a2b769f978a4862e9179a6aa2",
+        "register_shape_hash": "225c5aeb339ab7bd548b140eb6794015a666b85d63dd9ea88aceef75e1236a6f",
+        "shape_hash": "c0965f101c84e9f394829015dec64c2ae90c2f0cc7d92c58241ba8ddad13a39d",
+        "size": 220,
+        "string_refs_hash": "2cb4ea676b0018dec7aa92730981426575fcd0b115383718a800fea416491584"
+      },
+      "original_name": "TFiles_initStaticVars_void",
+      "original_string_refs": [
+        ".gpake,.gpak,.zip,.wba,.mdt,.apk",
+        "/\\",
+        "_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+      ],
+      "prior_provenance": [],
+      "proposed_name": "v18_TFiles_initStaticVars_void",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "TFiles static path, filename-character, and archive-extension initializer",
+      "source_category": "unmatched",
+      "source_pseudocode_basis": "Fresh direct source Hex-Rays review was summarized in source_semantics; source metrics come from the offline source feature export.",
+      "source_semantics": "Lazily creates the slash separator string, allowed filename character string, and archive extension list used by TFiles.",
+      "spectron_current_name": "_Z10mw80JaPMzkv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10vuuHgangcFC2ERK10C8THgaTQxFb",
+        "._Znwm"
+      ],
+      "spectron_ea": "0xe8f20",
+      "spectron_function_end": "0xe9000",
+      "spectron_metrics": {
+        "basic_block_count": 7,
+        "branch_count": 15,
+        "call_count": 8,
+        "instruction_count": 55,
+        "mnemonic_hash": "5f08426f20e4a4c09ddfd99235c78d4a2243152c98dae76dc5ee4a5833673400",
+        "opcode_shape_hash": "a404f4d0dbdcb1f955a7e4accb16def10c008a442f7b38ac422a6fb939f857db",
+        "register_shape_hash": "26df51d1e7c359dd506c0e694bfc5ec83976dc40b37f864e1f152fea513135ab",
+        "shape_hash": "59cc24a77b4752c53a8bc3565c03794dab3946c002f785c468fe85ac2eee4950",
+        "size": 224,
+        "string_refs_hash": "2cb4ea676b0018dec7aa92730981426575fcd0b115383718a800fea416491584"
+      },
+      "spectron_string_refs": [
+        ".gpake,.gpak,.zip,.wba,.mdt,.apk",
+        "/\\",
+        "_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+      ],
+      "target_delta": "+0xbe8",
+      "target_evidence_terms": [
+        "/\\\\",
+        "_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+        ".gpake,.gpak,.zip,.wba,.mdt,.apk",
+        "vuuHgangcF"
+      ],
+      "target_pseudocode": "__int64 __fastcall mw80JaPMzk()\n{\n  __int64 result; // x0\n  vuuHgangcF *v1; // x21\n  _QWORD *v2; // x0\n  __int64 v3; // x20\n  _QWORD *v4; // x0\n  __int64 v5; // x20\n  __int64 v6; // [xsp+28h] [xbp-8h] BYREF\n\n  if ( !wiULgacZUI::yPJyga59Px )\n  {\n    v2 = (_QWORD *)operator new(8u);\n    *v2 = 0;\n    v3 = (__int64)v2;\n    C8THgaTQxF::operator<<((int)v2, \"/\\\\\");\n    wiULgacZUI::yPJyga59Px = v3;\n  }\n  if ( !wiULgacZUI::D5v_JanCcj )\n  {\n    v4 = (_QWORD *)operator new(8u);\n    *v4 = 0;\n    v5 = (__int64)v4;\n    C8THgaTQxF::operator<<((int)v4, \"_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\");\n    wiULgacZUI::D5v_JanCcj = v5;\n  }\n  result = wiULgacZUI::bn5vga47Bv;\n  if ( !wiULgacZUI::bn5vga47Bv )\n  {\n    v6 = 0;\n    C8THgaTQxF::operator<<((int)&v6, \".gpake,.gpak,.zip,.wba,.mdt,.apk\");\n    v1 = (vuuHgangcF *)operator new(0x20u);\n    vuuHgangcF::vuuHgangcF(v1, (const C8THgaTQxF *)&v6, 0);\n    wiULgacZUI::bn5vga47Bv = (__int64)v1;\n    return C8THgaTQxF::clear((C8THgaTQxF *)&v6);\n  }\n  return result;\n}\n",
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xdcd60",
+          "caller_name": "._Z10mw80JaPMzkv",
+          "from": "0xdcd6c",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x2b398",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xdcd60",
+          "caller_name": "._Z10mw80JaPMzkv",
+          "from": "0xdcd64",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x386130",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "changed_metric_fields": [
+        "size",
+        "instruction_count",
+        "branch_count",
+        "call_count",
+        "mnemonic_hash",
+        "opcode_shape_hash",
+        "register_shape_hash",
+        "shape_hash",
+        "string_refs_hash"
+      ],
+      "confidence": "high",
+      "evidence": [
+        "The source and target rows were selected from the corresponding class-local regions of the exact hashed ARM64 builds.",
+        "The target addresses and v18_ names are analysis aliases. They are not claims that the stripped 2.2 library retained the readable 1.8 debug symbols.",
+        "The target wrappers use rebuilt C8THgaTQxF, CanTfaz6bZ, vuuHgangcF, and obfuscated class names. Changed metrics are therefore recorded as layout changes rather than exact binary matches.",
+        "Each selected target body was reviewed through fresh offline Hex-Rays pseudocode evidence and checked against the current target feature export.",
+        "Both bodies initialize the same ignored directory list and .code suffix, normalize the directory separator, enumerate with opendir and readdir, stat each entry, recurse into permitted directories, and forward regular files to the resource registration helper.",
+        "The target's resource and string wrapper names changed, and the rebuilt helper takes a different register-level signature, but the directory traversal and filtering role is preserved."
+      ],
+      "layout_change": true,
+      "layout_metric_delta": {
+        "branch_count": {
+          "original": 71,
+          "spectron": 59
+        },
+        "call_count": {
+          "original": 44,
+          "spectron": 32
+        },
+        "instruction_count": {
+          "original": 215,
+          "spectron": 166
+        },
+        "mnemonic_hash": {
+          "original": "b07d18d6e284eea72101066c21ac646a244cb8c8274d7809455a2276d6a65c60",
+          "spectron": "81cdcb7d4ae0137aa5079bca31d9ea6e6c809c5523a454ae532c6325229fa2e7"
+        },
+        "opcode_shape_hash": {
+          "original": "4247994463f12874f8c050dd5259090c2c61779d3b94bb00da5923a4da148241",
+          "spectron": "29a914c2bb07260befc7b9f36793445cb342987282256a28279e3b49a04cae08"
+        },
+        "register_shape_hash": {
+          "original": "49c5b924eebb1a69a6f313d888cb638601895b96049760f3926706dfb1bd5673",
+          "spectron": "9f7e763487556c08b34cddafd17f690ae3a039b4071ddd8cd5324f85b965a83f"
+        },
+        "shape_hash": {
+          "original": "6367b13ade57e87587d745da773a8bf2d878ee65e4836446b1b5991e01f281d3",
+          "spectron": "a6584338fe0ec38d93fb98da6036c21b5f1ebe8699e4358b2f6b653fb4d991c0"
+        },
+        "size": {
+          "original": 876,
+          "spectron": 676
+        },
+        "string_refs_hash": {
+          "original": "af5827c3980abc49d772edce785b44456853d4b90fba928c84cb9b148862e5c9",
+          "spectron": "962166794dd8c0634908116d27db292f6d0522acf11adc680c56df04d560531a"
+        }
+      },
+      "match_kind": "manual-compact-core-layout-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        ".__cxa_guard_acquire",
+        ".__cxa_guard_release",
+        ".atexit",
+        ".closedir",
+        ".opendir",
+        ".readdir",
+        ".stat",
+        "plt_TFileNameScan_readLevelPaths_TString_const",
+        "plt_TLog_echo_TString_const_double_double_double_char_const",
+        "plt_TResourceFunctions_createFileResource_TResourceObject_TString_const_TString_const_uint",
+        "plt_TStringList_TStringList_TString_const",
+        "plt_TStringList_indexOf_TString_const",
+        "plt_TString_clear_void",
+        "plt_TString_endsIgnoreCase_TString_const",
+        "plt_TString_ends_TString_const",
+        "plt_TString_operator_assign_TString_const",
+        "plt_TString_operator_lshift_TString_const",
+        "plt_TString_operator_lshift_char",
+        "plt_TString_operator_lshift_char_const",
+        "plt_operator_assign_TString_const_char_const"
+      ],
+      "original_ea": "0xe85a8",
+      "original_function_end": "0xe8914",
+      "original_metrics": {
+        "basic_block_count": 31,
+        "branch_count": 71,
+        "call_count": 44,
+        "instruction_count": 215,
+        "mnemonic_hash": "b07d18d6e284eea72101066c21ac646a244cb8c8274d7809455a2276d6a65c60",
+        "opcode_shape_hash": "4247994463f12874f8c050dd5259090c2c61779d3b94bb00da5923a4da148241",
+        "register_shape_hash": "49c5b924eebb1a69a6f313d888cb638601895b96049760f3926706dfb1bd5673",
+        "shape_hash": "6367b13ade57e87587d745da773a8bf2d878ee65e4836446b1b5991e01f281d3",
+        "size": 876,
+        "string_refs_hash": "af5827c3980abc49d772edce785b44456853d4b90fba928c84cb9b148862e5c9"
+      },
+      "original_name": "TFileNameScan_readLevelPaths_TString_const",
+      "original_string_refs": [
+        " filename=",
+        ".code",
+        "found file folder : ",
+        "ignore,cache,offline,_CodeSignature"
+      ],
+      "prior_provenance": [],
+      "proposed_name": "v18_TFileNameScan_readLevelPaths_TString_const",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "recursive resource-directory scanner",
+      "source_category": "unmatched",
+      "source_pseudocode_basis": "Fresh direct source Hex-Rays review was summarized in source_semantics; source metrics come from the offline source feature export.",
+      "source_semantics": "Initializes the ignored directory and extension lists, normalizes a directory path, recurses through non-ignored directories, and registers eligible regular files as resource objects.",
+      "spectron_current_name": "_ZN10CDPvgaY2nv10Ael5MaUt6UERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSERKS_",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10C8THgaTQxFlsERKS_",
+        "._ZN10C8THgaTQxFlsEc",
+        "._ZN10CDPvgaY2nv10Ael5MaUt6UERK10C8THgaTQxF",
+        "._ZN10f6WHgaQkAF10iwUvgaL9rvEP10bNZvga2AwvRK10C8THgaTQxFS4_j",
+        "._ZN10vuuHgangcFC2ERK10C8THgaTQxFb",
+        "._ZNK10C8THgaTQxF10LYKeJaS70FERKS_",
+        "._ZNK10C8THgaTQxF4endsERKS_",
+        "._ZNK10vuuHgangcF10JtTLgaLhUIERK10C8THgaTQxF",
+        "._ZeqRK10C8THgaTQxFPKc",
+        ".__cxa_guard_acquire",
+        ".__cxa_guard_release",
+        ".atexit",
+        ".closedir",
+        ".opendir",
+        ".readdir",
+        ".stat"
+      ],
+      "spectron_ea": "0xe9194",
+      "spectron_function_end": "0xe9438",
+      "spectron_metrics": {
+        "basic_block_count": 31,
+        "branch_count": 59,
+        "call_count": 32,
+        "instruction_count": 166,
+        "mnemonic_hash": "81cdcb7d4ae0137aa5079bca31d9ea6e6c809c5523a454ae532c6325229fa2e7",
+        "opcode_shape_hash": "29a914c2bb07260befc7b9f36793445cb342987282256a28279e3b49a04cae08",
+        "register_shape_hash": "9f7e763487556c08b34cddafd17f690ae3a039b4071ddd8cd5324f85b965a83f",
+        "shape_hash": "a6584338fe0ec38d93fb98da6036c21b5f1ebe8699e4358b2f6b653fb4d991c0",
+        "size": 676,
+        "string_refs_hash": "962166794dd8c0634908116d27db292f6d0522acf11adc680c56df04d560531a"
+      },
+      "spectron_string_refs": [
+        ".code",
+        "ignore,cache,offline,_CodeSignature"
+      ],
+      "target_delta": "+0xbec",
+      "target_evidence_terms": [
+        "opendir",
+        "readdir",
+        "stat",
+        "ignore,cache,offline,_CodeSignature",
+        ".code",
+        "iwUvgaL9rv"
+      ],
+      "target_pseudocode": "__int64 __fastcall CDPvgaY2nv::Ael5MaUt6U(CDPvgaY2nv *this, const C8THgaTQxF *a2)\n{\n  unsigned __int8 v3; // w0\n  unsigned __int8 v4; // w0\n  int v5; // w20\n  __int64 v6; // x0\n  const char *v7; // x0\n  DIR *v8; // x21\n  struct dirent *v9; // x0\n  __int64 v10; // x0\n  const char *v11; // x0\n  const C8THgaTQxF *v13; // x1\n  unsigned int v14; // w4\n  __int64 v15; // [xsp+58h] [xbp-98h] BYREF\n  __int64 v16; // [xsp+60h] [xbp-90h] BYREF\n  __int64 v17; // [xsp+68h] [xbp-88h] BYREF\n  _QWORD v18[2]; // [xsp+70h] [xbp-80h] BYREF\n  __int16 v19; // [xsp+80h] [xbp-70h]\n  unsigned int v20; // [xsp+C8h] [xbp-28h]\n\n  v3 = atomic_load((unsigned __int8 *)&byte_39FFD8);\n  if ( (v3 & 1) == 0 && __cxa_guard_acquire((__guard *)&byte_39FFD8) )\n  {\n    v18[0] = 0;\n    C8THgaTQxF::operator<<((int)v18, \"ignore,cache,offline,_CodeSignature\");\n    vuuHgangcF::vuuHgangcF((vuuHgangcF *)&unk_39FFE0, (const C8THgaTQxF *)v18, 0);\n    __cxa_guard_release((__guard *)&byte_39FFD8);\n    atexit((void (*)(void))spectron_vuu_hgangcf_destructor_thunk_0xe9d74);\n    C8THgaTQxF::clear((C8THgaTQxF *)v18);\n  }\n  v4 = atomic_load((unsigned __int8 *)&byte_3A0000);\n  if ( (v4 & 1) == 0 && __cxa_guard_acquire((__guard *)&byte_3A0000) )\n  {\n    qword_39FFC0 = 0;\n    C8THgaTQxF::operator<<((int)&qword_39FFC0, \".code\");\n    __cxa_guard_release((__guard *)&byte_3A0000);\n    atexit((void (*)(void))spectron_tstring_clear_wrapper_0xe9168);\n  }\n  v15 = 0;\n  C8THgaTQxF::operator=(&v15, this);\n  v18[0] = 0;\n  C8THgaTQxF::operator<<(v18, (unsigned __int8)wiULgacZUI::YTwvgaSh8u);\n  v5 = (unsigned __int8)C8THgaTQxF::ends((C8THgaTQxF *)&v15, (const C8THgaTQxF *)v18);\n  C8THgaTQxF::clear((C8THgaTQxF *)v18);\n  if ( v5 )\n  {\n    v6 = v15;\n    if ( v15 )\n    {\nLABEL_5:\n      v7 = (const char *)(v6 + 8);\n      goto LABEL_6;\n    }\n  }\n  else\n  {\n    C8THgaTQxF::operator<<(&v15, (unsigned __int8)wiULgacZUI::YTwvgaSh8u);\n    v6 = v15;\n    if ( v15 )\n      goto LABEL_5;\n  }\n  v7 = (const char *)O_mdJaBYRE;\nLABEL_6:\n  v8 = opendir(v7);\n  if ( !v8 )\n    return C8THgaTQxF::clear((C8THgaTQxF *)&v15);\n  while ( 1 )\n  {\n    v9 = readdir(v8);\n    if ( !v9 )\n      break;\n    v16 = 0;\n    C8THgaTQxF::operator<<((int)&v16, v9->d_name);\n    if ( !(unsigned __int8)operator==((int)&v16, \".\") && !(unsigned __int8)operator==((int)&v16, \"..\") )\n    {\n      v17 = 0;\n      C8THgaTQxF::operator<<(&v17, &v15);\n      C8THgaTQxF::operator<<(v10, &v16);\n      v11 = (const char *)(v17 + 8);\n      if ( !v17 )\n        v11 = (const char *)O_mdJaBYRE;\n      if ( !stat(v11, (struct stat *)v18) )\n      {\n        if ( (v19 & 0x4000) != 0 )\n        {\n          if ( (vuuHgangcF::JtTLgaLhUI((vuuHgangcF *)&unk_39FFE0, (const C8THgaTQxF *)&v16) & 0x80000000) != 0 )\n            CDPvgaY2nv::Ael5MaUt6U((CDPvgaY2nv *)&v17, v13);\n        }\n        else if ( v19 < 0\n               && !(unsigned __int8)C8THgaTQxF::LYKeJaS70F((C8THgaTQxF *)&v16, (const C8THgaTQxF *)&qword_39FFC0) )\n        {\n          f6WHgaQkAF::iwUvgaL9rv(nullptr, (bNZvga2Awv *)&v15, (const C8THgaTQxF *)&v16, (const C8THgaTQxF *)v20, v14);\n        }\n      }\n      C8THgaTQxF::clear((C8THgaTQxF *)&v17);\n    }\n    C8THgaTQxF::clear((C8THgaTQxF *)&v16);\n  }\n  closedir(v8);\n  return C8THgaTQxF::clear((C8THgaTQxF *)&v15);\n}\n",
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xdc010",
+          "caller_name": "._ZN10CDPvgaY2nv10Ael5MaUt6UERK10C8THgaTQxF",
+          "from": "0xdc01c",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x28e60",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xdc010",
+          "caller_name": "._ZN10CDPvgaY2nv10Ael5MaUt6UERK10C8THgaTQxF",
+          "from": "0xdc014",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x385a88",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "changed_metric_fields": [
+        "size",
+        "instruction_count",
+        "basic_block_count",
+        "branch_count",
+        "call_count",
+        "mnemonic_hash",
+        "opcode_shape_hash",
+        "register_shape_hash",
+        "shape_hash"
+      ],
+      "confidence": "high",
+      "evidence": [
+        "The source and target rows were selected from the corresponding class-local regions of the exact hashed ARM64 builds.",
+        "The target addresses and v18_ names are analysis aliases. They are not claims that the stripped 2.2 library retained the readable 1.8 debug symbols.",
+        "The target wrappers use rebuilt C8THgaTQxF, CanTfaz6bZ, vuuHgangcF, and obfuscated class names. Changed metrics are therefore recorded as layout changes rather than exact binary matches.",
+        "Each selected target body was reviewed through fresh offline Hex-Rays pseudocode evidence and checked against the current target feature export.",
+        "The target begins with the same cache/creationtime.dat path and checks it through the target file-existence helper.",
+        "When the cache path is absent, the target preserves the files/creationtime.dat fallback and adds two older fallback variants visible in the target pseudocode."
+      ],
+      "layout_change": true,
+      "layout_metric_delta": {
+        "basic_block_count": {
+          "original": 4,
+          "spectron": 5
+        },
+        "branch_count": {
+          "original": 22,
+          "spectron": 52
+        },
+        "call_count": {
+          "original": 19,
+          "spectron": 47
+        },
+        "instruction_count": {
+          "original": 86,
+          "spectron": 179
+        },
+        "mnemonic_hash": {
+          "original": "edf5b5137e6878e5bbf5d05e5d3424e5e1b9cfe85b692458a3d27580143458d2",
+          "spectron": "7a648d23b9e2d9ca1583436fd67dfa998bd12e99ba40097a6d5683a914af2810"
+        },
+        "opcode_shape_hash": {
+          "original": "39ffd96aaae89433807e04c150918c35984633315c52ade5e42768398ca9199f",
+          "spectron": "c72d3afaa7299277915fbcafea50b5c54e1fb969e9b6b4afed9a4933cdf11769"
+        },
+        "register_shape_hash": {
+          "original": "b8860429b3af94fb66c81e37ff1caca9f7789cc5c8277b493b19142be0e9290a",
+          "spectron": "e6c24854f1877e9070e1491804defef8ec9d976a5608df72b8e37722779eb4d6"
+        },
+        "shape_hash": {
+          "original": "22bb968799d1219d16f11ef5969519b9a7c950dbb90ee57ca0798f796ca58590",
+          "spectron": "c1f119048a4a40a7d72b1c3e9e0793ca726a4208945e1dfc2585c379800c7c4d"
+        },
+        "size": {
+          "original": 344,
+          "spectron": 716
+        }
+      },
+      "match_kind": "manual-compact-core-layout-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TFiles_fileExists_TString_const",
+        "plt_TString_clear_void",
+        "plt_TString_operator_assign_TString_const",
+        "plt_TString_operator_lshift_char",
+        "plt_TString_operator_lshift_char_const"
+      ],
+      "original_ea": "0xec290",
+      "original_function_end": "0xec3e8",
+      "original_metrics": {
+        "basic_block_count": 4,
+        "branch_count": 22,
+        "call_count": 19,
+        "instruction_count": 86,
+        "mnemonic_hash": "edf5b5137e6878e5bbf5d05e5d3424e5e1b9cfe85b692458a3d27580143458d2",
+        "opcode_shape_hash": "39ffd96aaae89433807e04c150918c35984633315c52ade5e42768398ca9199f",
+        "register_shape_hash": "b8860429b3af94fb66c81e37ff1caca9f7789cc5c8277b493b19142be0e9290a",
+        "shape_hash": "22bb968799d1219d16f11ef5969519b9a7c950dbb90ee57ca0798f796ca58590",
+        "size": 344,
+        "string_refs_hash": "58f2d421694dfa00257dc82a8f020635a89567f645e618eae0bad63680f54afd"
+      },
+      "original_name": "TIdentification_getCookieFilename_void",
+      "original_string_refs": [
+        "cache",
+        "creationtime.dat",
+        "files"
+      ],
+      "prior_provenance": [],
+      "proposed_name": "v18_TIdentification_getCookieFilename_void",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "cookie creation-time filename selection",
+      "source_category": "unmatched",
+      "source_pseudocode_basis": "Fresh direct source Hex-Rays review was summarized in source_semantics; source metrics come from the offline source feature export.",
+      "source_semantics": "Builds basedatafolder/cache/creationtime.dat, returns it when present, and otherwise falls back to basedatafolder/files/creationtime.dat.",
+      "spectron_current_name": "_ZN10NiVAFatPFB10NcxWQawyR8Ev",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSERKS_",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10C8THgaTQxFlsEc",
+        "._ZN10wiULgacZUI10PhVLgaLOVIERK10C8THgaTQxF"
+      ],
+      "spectron_ea": "0xed0d8",
+      "spectron_function_end": "0xed3a4",
+      "spectron_metrics": {
+        "basic_block_count": 5,
+        "branch_count": 52,
+        "call_count": 47,
+        "instruction_count": 179,
+        "mnemonic_hash": "7a648d23b9e2d9ca1583436fd67dfa998bd12e99ba40097a6d5683a914af2810",
+        "opcode_shape_hash": "c72d3afaa7299277915fbcafea50b5c54e1fb969e9b6b4afed9a4933cdf11769",
+        "register_shape_hash": "e6c24854f1877e9070e1491804defef8ec9d976a5608df72b8e37722779eb4d6",
+        "shape_hash": "c1f119048a4a40a7d72b1c3e9e0793ca726a4208945e1dfc2585c379800c7c4d",
+        "size": 716,
+        "string_refs_hash": "58f2d421694dfa00257dc82a8f020635a89567f645e618eae0bad63680f54afd"
+      },
+      "spectron_string_refs": [
+        "cache",
+        "creationtime.dat",
+        "files"
+      ],
+      "target_delta": "+0xe48",
+      "target_evidence_terms": [
+        "cache",
+        "files",
+        "creationtime.dat",
+        "PhVLgaLOVI"
+      ],
+      "target_pseudocode": "wiULgacZUI *__usercall NiVAFatPFB::NcxWQawyR8@<X0>(wiULgacZUI *a1@<X8>)\n{\n  const C8THgaTQxF *v3; // x1\n  const C8THgaTQxF *v5; // x1\n  const C8THgaTQxF *v6; // x1\n  __int64 v7; // [xsp+68h] [xbp-28h] BYREF\n  __int64 v8; // [xsp+70h] [xbp-20h] BYREF\n  __int64 v9; // [xsp+78h] [xbp-18h] BYREF\n  __int64 v10; // [xsp+80h] [xbp-10h] BYREF\n  __int64 v11; // [xsp+88h] [xbp-8h] BYREF\n\n  v10 = 0;\n  C8THgaTQxF::operator=(&v10, &wiULgacZUI::Ql0vga2Uxv);\n  C8THgaTQxF::operator<<((int)&v10, \"cache\");\n  v11 = 0;\n  C8THgaTQxF::operator=(&v11, &v10);\n  C8THgaTQxF::operator<<(&v11, (unsigned __int8)wiULgacZUI::YTwvgaSh8u);\n  *(_QWORD *)a1 = 0;\n  C8THgaTQxF::operator=(a1, &v11);\n  C8THgaTQxF::operator<<((int)a1, \"creationtime.dat\");\n  C8THgaTQxF::clear((C8THgaTQxF *)&v11);\n  C8THgaTQxF::clear((C8THgaTQxF *)&v10);\n  if ( !(unsigned __int8)wiULgacZUI::PhVLgaLOVI(a1, v3) )\n  {\n    v9 = 0;\n    C8THgaTQxF::operator=(&v9, &wiULgacZUI::Y_J0GaLjeO);\n    C8THgaTQxF::operator<<((int)&v9, \"files\");\n    v10 = 0;\n    C8THgaTQxF::operator=(&v10, &v9);\n    C8THgaTQxF::operator<<(&v10, (unsigned __int8)wiULgacZUI::YTwvgaSh8u);\n    v11 = 0;\n    C8THgaTQxF::operator=(&v11, &v10);\n    C8THgaTQxF::operator<<((int)&v11, \"creationtime.dat\");\n    C8THgaTQxF::operator=(a1, &v11);\n    C8THgaTQxF::clear((C8THgaTQxF *)&v11);\n    C8THgaTQxF::clear((C8THgaTQxF *)&v10);\n    C8THgaTQxF::clear((C8THgaTQxF *)&v9);\n    if ( !(unsigned __int8)wiULgacZUI::PhVLgaLOVI(a1, v5) )\n    {\n      v7 = 0;\n      C8THgaTQxF::operator=(&v7, &wiULgacZUI::Ql0vga2Uxv);\n      C8THgaTQxF::operator<<((int)&v7, \"files\");\n      v8 = 0;\n      C8THgaTQxF::operator=(&v8, &v7);\n      C8THgaTQxF::operator<<(&v8, (unsigned __int8)wiULgacZUI::YTwvgaSh8u);\n      v9 = 0;\n      C8THgaTQxF::operator=(&v9, &v8);\n      C8THgaTQxF::operator<<((int)&v9, \"files\");\n      v10 = 0;\n      C8THgaTQxF::operator=(&v10, &v9);\n      C8THgaTQxF::operator<<(&v10, (unsigned __int8)wiULgacZUI::YTwvgaSh8u);\n      v11 = 0;\n      C8THgaTQxF::operator=(&v11, &v10);\n      C8THgaTQxF::operator<<((int)&v11, \"creationtime.dat\");\n      C8THgaTQxF::operator=(a1, &v11);\n      C8THgaTQxF::clear((C8THgaTQxF *)&v11);\n      C8THgaTQxF::clear((C8THgaTQxF *)&v10);\n      C8THgaTQxF::clear((C8THgaTQxF *)&v9);\n      C8THgaTQxF::clear((C8THgaTQxF *)&v8);\n      C8THgaTQxF::clear((C8THgaTQxF *)&v7);\n      if ( !(unsigned __int8)wiULgacZUI::PhVLgaLOVI(a1, v6) )\n      {\n        v9 = 0;\n        C8THgaTQxF::operator=(&v9, &wiULgacZUI::Ql0vga2Uxv);\n        C8THgaTQxF::operator<<((int)&v9, \"files\");\n        v10 = 0;\n        C8THgaTQxF::operator=(&v10, &v9);\n        C8THgaTQxF::operator<<(&v10, (unsigned __int8)wiULgacZUI::YTwvgaSh8u);\n        v11 = 0;\n        C8THgaTQxF::operator=(&v11, &v10);\n        C8THgaTQxF::operator<<((int)&v11, \"creationtime.dat\");\n        C8THgaTQxF::operator=(a1, &v11);\n        C8THgaTQxF::clear((C8THgaTQxF *)&v11);\n        C8THgaTQxF::clear((C8THgaTQxF *)&v10);\n        C8THgaTQxF::clear((C8THgaTQxF *)&v9);\n      }\n    }\n  }\n  return a1;\n}\n",
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xd5e60",
+          "caller_name": "._ZN10NiVAFatPFB10NcxWQawyR8Ev",
+          "from": "0xd5e6c",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x17e38",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xd5e60",
+          "caller_name": "._ZN10NiVAFatPFB10NcxWQawyR8Ev",
+          "from": "0xd5e64",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x3829b0",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "changed_metric_fields": [
+        "size",
+        "instruction_count",
+        "basic_block_count",
+        "branch_count",
+        "call_count",
+        "mnemonic_hash",
+        "opcode_shape_hash",
+        "register_shape_hash",
+        "shape_hash"
+      ],
+      "confidence": "high",
+      "evidence": [
+        "The source and target rows were selected from the corresponding class-local regions of the exact hashed ARM64 builds.",
+        "The target addresses and v18_ names are analysis aliases. They are not claims that the stripped 2.2 library retained the readable 1.8 debug symbols.",
+        "The target wrappers use rebuilt C8THgaTQxF, CanTfaz6bZ, vuuHgangcF, and obfuscated class names. Changed metrics are therefore recorded as layout changes rather than exact binary matches.",
+        "Each selected target body was reviewed through fresh offline Hex-Rays pseudocode evidence and checked against the current target feature export.",
+        "The target keeps the selector cases for dc:id2, hard-disk, network, operating-system, and Android identifiers, with the same empty default output.",
+        "The target adds one selector case for a newer identifier source, which explains the extra block and return shape without changing the original cases."
+      ],
+      "layout_change": true,
+      "layout_metric_delta": {
+        "basic_block_count": {
+          "original": 8,
+          "spectron": 9
+        },
+        "branch_count": {
+          "original": 12,
+          "spectron": 14
+        },
+        "call_count": {
+          "original": 5,
+          "spectron": 6
+        },
+        "instruction_count": {
+          "original": 44,
+          "spectron": 49
+        },
+        "mnemonic_hash": {
+          "original": "1d004b541ffc1b3387d924667c681b78089efa2a96b3579dc9b1debe394041e5",
+          "spectron": "d52a97e7845fcd6eb13485fe515b1035a1a1177018f0f30b181261c52d42ac7e"
+        },
+        "opcode_shape_hash": {
+          "original": "da96dbc91b73973c687540855be01a3170f8015afd86434768dcce7875733497",
+          "spectron": "0aa2a0eac0b749e845d37c575e741998988fa635f7e6fabe0cb27bff1dc6292e"
+        },
+        "register_shape_hash": {
+          "original": "13113c1949fc8d189b18df86ce521ab15c03667dc8a2eee6517f8d300f252f80",
+          "spectron": "b7145d0b39fbfb3152fd15048d3eb6cb67e56ced2061ca07d52467b2cc12c9dd"
+        },
+        "shape_hash": {
+          "original": "94511e666c8c6735eed23ca76dcb4414fedb221dae63f91f5dc2a41a9d7fa46e",
+          "spectron": "b15327f73c75e11adb36891ccd5412e88bbbc28d24e40a2368b3583e4fe49c9c"
+        },
+        "size": {
+          "original": 180,
+          "spectron": 200
+        }
+      },
+      "match_kind": "manual-compact-core-layout-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TIdentification_getHarddiskID_void",
+        "plt_TIdentification_getNetworkID_void",
+        "plt_TIdentification_getOSID_void",
+        "plt_TString_operator_lshift_char_const",
+        "plt_androidGetID_void"
+      ],
+      "original_ea": "0xec6f8",
+      "original_function_end": "0xec7ac",
+      "original_metrics": {
+        "basic_block_count": 8,
+        "branch_count": 12,
+        "call_count": 5,
+        "instruction_count": 44,
+        "mnemonic_hash": "1d004b541ffc1b3387d924667c681b78089efa2a96b3579dc9b1debe394041e5",
+        "opcode_shape_hash": "da96dbc91b73973c687540855be01a3170f8015afd86434768dcce7875733497",
+        "register_shape_hash": "13113c1949fc8d189b18df86ce521ab15c03667dc8a2eee6517f8d300f252f80",
+        "shape_hash": "94511e666c8c6735eed23ca76dcb4414fedb221dae63f91f5dc2a41a9d7fa46e",
+        "size": 180,
+        "string_refs_hash": "b28aa5b40a782d5837a190516a2d0f49fe52b27647c5146f9786c251a64d4679"
+      },
+      "original_name": "TIdentification_getSystemID_int",
+      "original_string_refs": [
+        "dc:id2"
+      ],
+      "prior_provenance": [],
+      "proposed_name": "v18_TIdentification_getSystemID_int",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "system-identifier selector",
+      "source_category": "unmatched",
+      "source_pseudocode_basis": "Fresh direct source Hex-Rays review was summarized in source_semantics; source metrics come from the offline source feature export.",
+      "source_semantics": "Selects dc:id2, hard-disk, network, operating-system, or Android identifiers by selector and returns an empty string for unsupported values.",
+      "spectron_current_name": "_ZN10NiVAFatPFB10qstsLaCozxEi",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._Z10_Sn_GaYH5Mv",
+        "._Z10gla0FatjLXv",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10NiVAFatPFB10FWw_Qa_jdcEv",
+        "._ZN10NiVAFatPFB10VlsAFa7shBEv",
+        "._ZN10NiVAFatPFB10d_f_Qa03ZbEv"
+      ],
+      "spectron_ea": "0xed6b4",
+      "spectron_function_end": "0xed77c",
+      "spectron_metrics": {
+        "basic_block_count": 9,
+        "branch_count": 14,
+        "call_count": 6,
+        "instruction_count": 49,
+        "mnemonic_hash": "d52a97e7845fcd6eb13485fe515b1035a1a1177018f0f30b181261c52d42ac7e",
+        "opcode_shape_hash": "0aa2a0eac0b749e845d37c575e741998988fa635f7e6fabe0cb27bff1dc6292e",
+        "register_shape_hash": "b7145d0b39fbfb3152fd15048d3eb6cb67e56ced2061ca07d52467b2cc12c9dd",
+        "shape_hash": "b15327f73c75e11adb36891ccd5412e88bbbc28d24e40a2368b3583e4fe49c9c",
+        "size": 200,
+        "string_refs_hash": "b28aa5b40a782d5837a190516a2d0f49fe52b27647c5146f9786c251a64d4679"
+      },
+      "spectron_string_refs": [
+        "dc:id2"
+      ],
+      "target_delta": "+0xfbc",
+      "target_evidence_terms": [
+        "dc:id2",
+        "d_f_Qa03Zb",
+        "FWw_Qa_jdc",
+        "VlsAFa7shB",
+        "_Sn_GaYH5M"
+      ],
+      "target_pseudocode": "_QWORD *__usercall NiVAFatPFB::qstsLaCozx@<X0>(NiVAFatPFB *this@<X0>, _QWORD *a2@<X8>)\n{\n  _QWORD *result; // x0\n\n  switch ( (int)this )\n  {\n    case 0:\n      *a2 = 0;\n      C8THgaTQxF::operator<<((int)a2, \"dc:id2\");\n      result = a2;\n      break;\n    case 1:\n      NiVAFatPFB::d_f_Qa03Zb(this);\n      result = a2;\n      break;\n    case 2:\n      NiVAFatPFB::FWw_Qa_jdc(this);\n      result = a2;\n      break;\n    case 3:\n      NiVAFatPFB::VlsAFa7shB(this);\n      result = a2;\n      break;\n    case 4:\n      _Sn_GaYH5M();\n      result = a2;\n      break;\n    case 5:\n      gla0FatjLX();\n      result = a2;\n      break;\n    default:\n      *a2 = 0;\n      result = a2;\n      break;\n  }\n  return result;\n}\n",
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xdbf40",
+          "caller_name": "._ZN10NiVAFatPFB10qstsLaCozxEi",
+          "from": "0xdbf4c",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x28c80",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xdbf40",
+          "caller_name": "._ZN10NiVAFatPFB10qstsLaCozxEi",
+          "from": "0xdbf44",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x385a20",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "changed_metric_fields": [
+        "size",
+        "instruction_count",
+        "basic_block_count",
+        "branch_count",
+        "call_count",
+        "mnemonic_hash",
+        "opcode_shape_hash",
+        "register_shape_hash",
+        "shape_hash",
+        "string_refs_hash"
+      ],
+      "confidence": "high",
+      "evidence": [
+        "The source and target rows were selected from the corresponding class-local regions of the exact hashed ARM64 builds.",
+        "The target addresses and v18_ names are analysis aliases. They are not claims that the stripped 2.2 library retained the readable 1.8 debug symbols.",
+        "The target wrappers use rebuilt C8THgaTQxF, CanTfaz6bZ, vuuHgangcF, and obfuscated class names. Changed metrics are therefore recorded as layout changes rather than exact binary matches.",
+        "Each selected target body was reviewed through fresh offline Hex-Rays pseudocode evidence and checked against the current target feature export.",
+        "The target builds the same top-script report, iterates the profiler list, formats percentage and script name fields, optionally resolves the script and emits function profiles, and handles the empty-list case.",
+        "The target stores profile entries in the rebuilt list and script classes, so the body is shorter and its normalized metrics differ even though the report role remains clear."
+      ],
+      "layout_change": true,
+      "layout_metric_delta": {
+        "basic_block_count": {
+          "original": 18,
+          "spectron": 12
+        },
+        "branch_count": {
+          "original": 41,
+          "spectron": 28
+        },
+        "call_count": {
+          "original": 29,
+          "spectron": 19
+        },
+        "instruction_count": {
+          "original": 162,
+          "spectron": 124
+        },
+        "mnemonic_hash": {
+          "original": "de0ff3683ecec39772a2a5de6c508ac0826cfd7ffa04becaab804611cd7e18b7",
+          "spectron": "8395f96c1a40cdf15231d7e3f9f0e4c0dc9d648d4bb6736f580aa66881948399"
+        },
+        "opcode_shape_hash": {
+          "original": "ca968d0b5bdc2d39e5979d7965b6e97da3de7f6c1f6ce5b0032969b9097b8571",
+          "spectron": "45d8e8abfc6e808e6e80124641e8cb2d13c49928437b2358801af9f18c0a916c"
+        },
+        "register_shape_hash": {
+          "original": "ce72b84bd95e4a382b554c4dddbf3816f53513c22adb3894a8d993f7c99dfd5c",
+          "spectron": "91ee653f0e2b9e4439d2d0da02eca9ddf68dc97c419e5fd2c9c6c54482cdc709"
+        },
+        "shape_hash": {
+          "original": "df77c70ec9ebb899f1ec2eb63fe875ee775ec31cec5a3fb7cd82e44f7d726cfd",
+          "spectron": "1783681c5b572f8812d60bfc3d3b5032ece07db845022e7ff8f8b660ae53cd93"
+        },
+        "size": {
+          "original": 648,
+          "spectron": 496
+        },
+        "string_refs_hash": {
+          "original": "ce133d3fe05a87f8f69bbf81aeed8d696216c40f66040b0c385b38f24a006348",
+          "spectron": "8a5af61caf70f75b7b69a07980173df334f324ba7496c14103a5fece2db6af38"
+        }
+      },
+      "match_kind": "manual-compact-core-layout-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TGraalVar_readObject_void",
+        "plt_TList_operator_index_int",
+        "plt_TScript_printFunctionProfiles_TStringList_TString_const",
+        "plt_TStringList_Add_TString_const",
+        "plt_TString_clear_void",
+        "plt_TString_operator_assign_TString_const",
+        "plt_TString_operator_lshift_TString_const",
+        "plt_TString_operator_lshift_char_const",
+        "plt_TString_operator_lshift_double",
+        "plt_TString_operator_lshift_int",
+        "plt_TTime_getTime_void"
+      ],
+      "original_ea": "0xf85fc",
+      "original_function_end": "0xf8884",
+      "original_metrics": {
+        "basic_block_count": 18,
+        "branch_count": 41,
+        "call_count": 29,
+        "instruction_count": 162,
+        "mnemonic_hash": "de0ff3683ecec39772a2a5de6c508ac0826cfd7ffa04becaab804611cd7e18b7",
+        "opcode_shape_hash": "ca968d0b5bdc2d39e5979d7965b6e97da3de7f6c1f6ce5b0032969b9097b8571",
+        "register_shape_hash": "ce72b84bd95e4a382b554c4dddbf3816f53513c22adb3894a8d993f7c99dfd5c",
+        "shape_hash": "df77c70ec9ebb899f1ec2eb63fe875ee775ec31cec5a3fb7cd82e44f7d726cfd",
+        "size": 648,
+        "string_refs_hash": "ce133d3fe05a87f8f69bbf81aeed8d696216c40f66040b0c385b38f24a006348"
+      },
+      "original_name": "TLogActions_getTopScripts_TStringList_bool",
+      "original_string_refs": [
+        "  ",
+        " % ",
+        " of npcs taken most CPU time:",
+        "(none)",
+        ". ",
+        "Started the script function profiling, it will be displayed on next call.",
+        "Top "
+      ],
+      "prior_provenance": [],
+      "proposed_name": "v18_TLogActions_getTopScripts_TStringList_bool",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "top script CPU profile report",
+      "source_category": "unmatched",
+      "source_pseudocode_basis": "Fresh direct source Hex-Rays review was summarized in source_semantics; source metrics come from the offline source feature export.",
+      "source_semantics": "Appends a top-N CPU report, formats each profiled NPC script with its percentage, optionally dumps function profiles, and emits (none) when the list is empty.",
+      "spectron_current_name": "_ZN10qjQMgaXCHJ10c4RmLa65QsEv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10G0gxgajWBw10BRcLgaJqkIERK10C8THgaTQxFPKcz",
+        "._ZN10G0gxgajWBw10c_H_fa_Cm4ERK10C8THgaTQxF",
+        "._ZN10KKhLga4xoI10kEiLgawipIERK10C8THgaTQxF",
+        "._ZN10KKhLga4xoI10tJOiUaYhrZERK10C8THgaTQxF",
+        "._ZN10vy1JgaKVkH5ClearEv",
+        "._ZNK10vy1JgaKVkHixEi",
+        "._ZdlPv"
+      ],
+      "spectron_ea": "0xfa5f8",
+      "spectron_function_end": "0xfa7e8",
+      "spectron_metrics": {
+        "basic_block_count": 12,
+        "branch_count": 28,
+        "call_count": 19,
+        "instruction_count": 124,
+        "mnemonic_hash": "8395f96c1a40cdf15231d7e3f9f0e4c0dc9d648d4bb6736f580aa66881948399",
+        "opcode_shape_hash": "45d8e8abfc6e808e6e80124641e8cb2d13c49928437b2358801af9f18c0a916c",
+        "register_shape_hash": "91ee653f0e2b9e4439d2d0da02eca9ddf68dc97c419e5fd2c9c6c54482cdc709",
+        "shape_hash": "1783681c5b572f8812d60bfc3d3b5032ece07db845022e7ff8f8b660ae53cd93",
+        "size": 496,
+        "string_refs_hash": "8a5af61caf70f75b7b69a07980173df334f324ba7496c14103a5fece2db6af38"
+      },
+      "spectron_string_refs": [
+        "sfffs"
+      ],
+      "target_delta": "+0x1ffc",
+      "target_evidence_terms": [
+        "BRcLgaJqkI",
+        "c_H_fa_Cm4",
+        "sfffs",
+        "vy1JgaKVkH",
+        "fpnoLaVi7t"
+      ],
+      "target_pseudocode": "__int64 __fastcall qjQMgaXCHJ::c4RmLa65Qs(qjQMgaXCHJ *this)\n{\n  __int64 result; // x0\n  G0gxgajWBw *v2; // x21\n  const C8THgaTQxF *v3; // x1\n  const C8THgaTQxF *v4; // x1\n  int v5; // w21\n  vy1JgaKVkH *v6; // x0\n  unsigned int v7; // w21\n  double *v8; // x19\n  G0gxgajWBw *v9; // x24\n  const C8THgaTQxF *v10; // x1\n  const C8THgaTQxF *v11; // x1\n  __int64 v12; // [xsp+78h] [xbp-18h] BYREF\n  __int64 v13; // [xsp+80h] [xbp-10h] BYREF\n  __int64 v14; // [xsp+88h] [xbp-8h] BYREF\n\n  result = (unsigned __int8)qjQMgaXCHJ::fpnoLaVi7t;\n  if ( !qjQMgaXCHJ::fpnoLaVi7t )\n  {\n    result = (__int64)&QYZugaRKGu::yl0ugaRUHu;\n    v2 = (G0gxgajWBw *)QYZugaRKGu::yl0ugaRUHu;\n    if ( QYZugaRKGu::yl0ugaRUHu )\n    {\n      v12 = 0;\n      C8THgaTQxF::operator<<((int)&v12, a0_1);\n      KKhLga4xoI::tJOiUaYhrZ(&v13, (KKhLga4xoI *)&v12, v3);\n      KKhLga4xoI::kEiLgawipI(&v14, (KKhLga4xoI *)&v13, v4);\n      v5 = (unsigned __int8)G0gxgajWBw::c_H_fa_Cm4(v2, (const C8THgaTQxF *)&v14);\n      C8THgaTQxF::clear((C8THgaTQxF *)&v14);\n      C8THgaTQxF::clear((C8THgaTQxF *)&v13);\n      result = C8THgaTQxF::clear((C8THgaTQxF *)&v12);\n      if ( v5 )\n      {\n        qjQMgaXCHJ::fpnoLaVi7t = 1;\n        v6 = (vy1JgaKVkH *)qjQMgaXCHJ::QKqoLa469t;\n        if ( *(int *)(qjQMgaXCHJ::QKqoLa469t + 12) > 0 )\n        {\n          v7 = 0;\n          do\n          {\n            v8 = *(double **)vy1JgaKVkH::operator[](v6, v7);\n            v12 = 0;\n            v9 = (G0gxgajWBw *)QYZugaRKGu::yl0ugaRUHu;\n            C8THgaTQxF::operator<<((int)&v12, a0_1);\n            KKhLga4xoI::tJOiUaYhrZ(&v13, (KKhLga4xoI *)&v12, v10);\n            KKhLga4xoI::kEiLgawipI(&v14, (KKhLga4xoI *)&v13, v11);\n            ++v7;\n            G0gxgajWBw::BRcLgaJqkI(v9, (const C8THgaTQxF *)&v14, \"sfffs\", v8[1], v8[2], v8[3]);\n            C8THgaTQxF::clear((C8THgaTQxF *)&v14);\n            C8THgaTQxF::clear((C8THgaTQxF *)&v13);\n            C8THgaTQxF::clear((C8THgaTQxF *)&v12);\n            C8THgaTQxF::clear((C8THgaTQxF *)(v8 + 4));\n            C8THgaTQxF::clear((C8THgaTQxF *)v8);\n            operator delete(v8);\n            v6 = (vy1JgaKVkH *)qjQMgaXCHJ::QKqoLa469t;\n          }\n          while ( *(_DWORD *)(qjQMgaXCHJ::QKqoLa469t + 12) > (signed int)v7 );\n        }\n        return vy1JgaKVkH::Clear(v6);\n      }\n    }\n  }\n  return result;\n}\n",
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xd47e0",
+          "caller_name": "._ZN10qjQMgaXCHJ10c4RmLa65QsEv",
+          "from": "0xd47ec",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x13dd0",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xd47e0",
+          "caller_name": "._ZN10qjQMgaXCHJ10c4RmLa65QsEv",
+          "from": "0xd47e4",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x381e70",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "changed_metric_fields": [
+        "size",
+        "instruction_count",
+        "branch_count",
+        "call_count",
+        "mnemonic_hash",
+        "opcode_shape_hash",
+        "register_shape_hash",
+        "shape_hash"
+      ],
+      "confidence": "high",
+      "evidence": [
+        "The source and target rows were selected from the corresponding class-local regions of the exact hashed ARM64 builds.",
+        "The target addresses and v18_ names are analysis aliases. They are not claims that the stripped 2.2 library retained the readable 1.8 debug symbols.",
+        "The target wrappers use rebuilt C8THgaTQxF, CanTfaz6bZ, vuuHgangcF, and obfuscated class names. Changed metrics are therefore recorded as layout changes rather than exact binary matches.",
+        "Each selected target body was reviewed through fresh offline Hex-Rays pseudocode evidence and checked against the current target feature export.",
+        "The target decrements the same profiler depth field, preserves the underflow diagnostic, and updates nested counts and timing fields through the rebuilt profiler tree.",
+        "The target retains the source branch topology around disabled markers, parent propagation, root cleanup, and timer restart, with only wrapper and helper identities changed."
+      ],
+      "layout_change": true,
+      "layout_metric_delta": {
+        "branch_count": {
+          "original": 25,
+          "spectron": 23
+        },
+        "call_count": {
+          "original": 8,
+          "spectron": 6
+        },
+        "instruction_count": {
+          "original": 88,
+          "spectron": 74
+        },
+        "mnemonic_hash": {
+          "original": "d617220f481205a2c72e8c14810fe0f7372ea76bb6bd3a7bf77962db799f60c4",
+          "spectron": "fb7ea45400db540059fec69fceaf93ce8b1b5fd501a5278abfd08c836b7ce417"
+        },
+        "opcode_shape_hash": {
+          "original": "bf5e5894776f6bef97549f423fd3e1fe59a54bf33e12697dca094cb9b1890f23",
+          "spectron": "d1e61cc939d383754d88e4539497d4a8165ea38f7ccf756fec22217158d16f72"
+        },
+        "register_shape_hash": {
+          "original": "7bb1aa90f09da9712d25fabe10950989b8b0c6012c8c38bb685a80f3ab42c034",
+          "spectron": "c5fc7fb925c97388a133e8daebb9536118439391f72690e4b04f5fd04c19dedc"
+        },
+        "shape_hash": {
+          "original": "072a3d0598ef51f7da3998634de89ddace842fe73d13cf79a37ec448419ccfbe",
+          "spectron": "4a5e54a8f47a36bae0d4869b17360fe98e57e7e6e41c973e1691346c8166a583"
+        },
+        "size": {
+          "original": 356,
+          "spectron": 300
+        }
+      },
+      "match_kind": "manual-compact-core-layout-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TLog_echo_TString_const_double_double_double_char_const",
+        "plt_TString_clear_void",
+        "plt_TString_operator_lshift_char_const",
+        "plt_TTime_getTime_void",
+        "plt_debugBreak_void",
+        "plt_endHighResolutionTimer_uint",
+        "plt_startHighResolutionTimer_uint"
+      ],
+      "original_ea": "0xfa17c",
+      "original_function_end": "0xfa2e0",
+      "original_metrics": {
+        "basic_block_count": 23,
+        "branch_count": 25,
+        "call_count": 8,
+        "instruction_count": 88,
+        "mnemonic_hash": "d617220f481205a2c72e8c14810fe0f7372ea76bb6bd3a7bf77962db799f60c4",
+        "opcode_shape_hash": "bf5e5894776f6bef97549f423fd3e1fe59a54bf33e12697dca094cb9b1890f23",
+        "register_shape_hash": "7bb1aa90f09da9712d25fabe10950989b8b0c6012c8c38bb685a80f3ab42c034",
+        "shape_hash": "072a3d0598ef51f7da3998634de89ddace842fe73d13cf79a37ec448419ccfbe",
+        "size": 356,
+        "string_refs_hash": "3f8a3647a2b2e2d44a172b849897e85db91dfd6bf8444afe17eb082b5173c0ee"
+      },
+      "original_name": "TProfiler_hashPop_void",
+      "original_string_refs": [
+        "Echo: stack underflow in profiler"
+      ],
+      "prior_provenance": [],
+      "proposed_name": "v18_TProfiler_hashPop_void",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "profiler stack-pop and timing accumulation",
+      "source_category": "unmatched",
+      "source_pseudocode_basis": "Fresh direct source Hex-Rays review was summarized in source_semantics; source metrics come from the offline source feature export.",
+      "source_semantics": "Pops a profiler frame, reports underflow, handles disabled markers and nested counts, stops the timer, accumulates inclusive and exclusive timing, and restarts the root timer when needed.",
+      "spectron_current_name": "_ZN10esKIvakHfi10bCpNvaN9amEv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._Z10BByIvagJ5hv",
+        "._Z10c_1EFaUh8EPj",
+        "._Z10gfBEFaqXLEPj",
+        "._ZN10qjQMgaXCHJ10cWQMgaD8HJEPKc",
+        "._ZN10zYRMgaG0IJ10FYcZgaMw6TEv"
+      ],
+      "spectron_ea": "0xfc7ac",
+      "spectron_function_end": "0xfc8d8",
+      "spectron_metrics": {
+        "basic_block_count": 23,
+        "branch_count": 23,
+        "call_count": 6,
+        "instruction_count": 74,
+        "mnemonic_hash": "fb7ea45400db540059fec69fceaf93ce8b1b5fd501a5278abfd08c836b7ce417",
+        "opcode_shape_hash": "d1e61cc939d383754d88e4539497d4a8165ea38f7ccf756fec22217158d16f72",
+        "register_shape_hash": "c5fc7fb925c97388a133e8daebb9536118439391f72690e4b04f5fd04c19dedc",
+        "shape_hash": "4a5e54a8f47a36bae0d4869b17360fe98e57e7e6e41c973e1691346c8166a583",
+        "size": 300,
+        "string_refs_hash": "3f8a3647a2b2e2d44a172b849897e85db91dfd6bf8444afe17eb082b5173c0ee"
+      },
+      "spectron_string_refs": [
+        "Echo: stack underflow in profiler"
+      ],
+      "target_delta": "+0x2630",
+      "target_evidence_terms": [
+        "Echo: stack underflow in profiler",
+        "cWQMgaD8HJ",
+        "gfBEFaqXLE",
+        "FYcZgaMw6T"
+      ],
+      "target_pseudocode": "__int64 __fastcall esKIvakHfi::bCpNvaN9am(esKIvakHfi *this, const char *a2)\n{\n  int v3; // w0\n  __int64 result; // x0\n  int v5; // w1\n  double v6; // d0\n  double *v7; // x1\n  double *v8; // x0\n  double v9; // x2\n  double v10; // x1\n  zYRMgaG0IJ *v11; // x0\n  __int64 v12; // d0\n\n  v3 = *((_DWORD *)this + 9) - 1;\n  *((_DWORD *)this + 9) = v3;\n  if ( v3 < 0 )\n  {\n    qjQMgaXCHJ::cWQMgaD8HJ((qjQMgaXCHJ *)\"Echo: stack underflow in profiler\", a2);\n    BByIvagJ5h();\n  }\n  if ( !*((_BYTE *)this + 32) )\n  {\n    result = *((unsigned int *)this + 9);\n    if ( (_DWORD)result )\n      return result;\n    goto LABEL_8;\n  }\n  result = *((_QWORD *)this + 1);\n  v5 = *(_DWORD *)(result + 324);\n  if ( v5 )\n  {\n    *(_DWORD *)(result + 324) = v5 - 1;\n    return result;\n  }\n  gfBEFaqXLE((unsigned int *)(result + 332));\n  v7 = *((double **)this + 1);\n  v8 = *((double **)v7 + 4);\n  v7[43] = v7[43] + v6;\n  if ( v8 )\n  {\n    v9 = *v8;\n    v8[44] = v8[44] + v6;\n    if ( v9 != 0.0 )\n      *(double *)(*(_QWORD *)&v9 + 40LL) = *(double *)(*(_QWORD *)&v9 + 40LL) + v6;\n    v10 = *v7;\n    if ( v10 != 0.0 )\n      *(double *)(*(_QWORD *)&v10 + 32LL) = *(double *)(*(_QWORD *)&v10 + 32LL) + v6;\n    *((_QWORD *)this + 1) = v8;\n  }\n  else\n  {\n    if ( *(_QWORD *)v7 )\n      *(double *)(*(_QWORD *)v7 + 32LL) = *(double *)(*(_QWORD *)v7 + 32LL) + v6;\n    *((_QWORD *)this + 1) = 0;\n    BByIvagJ5h();\n  }\n  result = *((unsigned int *)this + 9);\n  if ( !(_DWORD)result )\n  {\n    if ( *((_BYTE *)this + 32) )\n    {\n      result = *((unsigned __int8 *)this + 40);\n      *((_BYTE *)this + 32) = result;\n      return result;\n    }\nLABEL_8:\n    result = *((unsigned __int8 *)this + 40);\n    if ( *((_BYTE *)this + 40) )\n    {\n      v11 = (zYRMgaG0IJ *)c_1EFaUh8E((unsigned int *)(*((_QWORD *)this + 1) + 332LL));\n      zYRMgaG0IJ::FYcZgaMw6T(v11);\n      result = *((unsigned __int8 *)this + 40);\n      *((_QWORD *)this + 6) = v12;\n    }\n    *((_BYTE *)this + 32) = result;\n  }\n  return result;\n}\n",
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xd9550",
+          "caller_name": "._ZN10esKIvakHfi10bCpNvaN9amEv",
+          "from": "0xd955c",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x21810",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xd9550",
+          "caller_name": "._ZN10esKIvakHfi10bCpNvaN9amEv",
+          "from": "0xd9554",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x384528",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "changed_metric_fields": [
+        "size",
+        "instruction_count",
+        "branch_count",
+        "call_count",
+        "mnemonic_hash",
+        "opcode_shape_hash",
+        "register_shape_hash",
+        "shape_hash"
+      ],
+      "confidence": "high",
+      "evidence": [
+        "The source and target rows were selected from the corresponding class-local regions of the exact hashed ARM64 builds.",
+        "The target addresses and v18_ names are analysis aliases. They are not claims that the stripped 2.2 library retained the readable 1.8 debug symbols.",
+        "The target wrappers use rebuilt C8THgaTQxF, CanTfaz6bZ, vuuHgangcF, and obfuscated class names. Changed metrics are therefore recorded as layout changes rather than exact binary matches.",
+        "Each selected target body was reviewed through fresh offline Hex-Rays pseudocode evidence and checked against the current target feature export.",
+        "The target copies the string through CanTfaz6bZ, constructs the rebuilt TGraalVar base, initializes the same sentinel binding fields, and installs the target control-binding vtable and callback.",
+        "The target constructor is larger because the encoded string wrapper and rebuilt base class require explicit lifetime operations."
+      ],
+      "layout_change": true,
+      "layout_metric_delta": {
+        "branch_count": {
+          "original": 2,
+          "spectron": 4
+        },
+        "call_count": {
+          "original": 1,
+          "spectron": 3
+        },
+        "instruction_count": {
+          "original": 23,
+          "spectron": 33
+        },
+        "mnemonic_hash": {
+          "original": "651bbd960249098f1852c0295cab7c307be859107f79d28fe49f1ad1e562bd23",
+          "spectron": "a2467a530f18e5ce16792baf95576252343e7fcc95490c5b1232ebfa763a7c90"
+        },
+        "opcode_shape_hash": {
+          "original": "e6eb46e41c2b83e0c2673e542f8aa677491998d705f48b86d44bfca56ddbea49",
+          "spectron": "3fc3c82694af493089945b7d8aaa6b04e71d694fb109240d7fd5dd7cd3b2951e"
+        },
+        "register_shape_hash": {
+          "original": "2b4681a5bc666cdb4e3b248effd8324edc31645ef7f48f1637b11e49b81b8a0f",
+          "spectron": "4765c45032039df0bf46033671624348dd1c85ac5f3fc9c779c58bfca5a2710b"
+        },
+        "shape_hash": {
+          "original": "f308110fc71aeb08d88f82c4f90c2bac335f017cfb426338c16d01786b3cb2fd",
+          "spectron": "985952f31f64057ee80363d68fd418d8fe334254a49fb3e2f6d64c1f81df3ed1"
+        },
+        "size": {
+          "original": 92,
+          "spectron": 132
+        }
+      },
+      "match_kind": "manual-compact-core-layout-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TGraalVar_TGraalVar_TString_const"
+      ],
+      "original_ea": "0x168bc4",
+      "original_function_end": "0x168c20",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 2,
+        "call_count": 1,
+        "instruction_count": 23,
+        "mnemonic_hash": "651bbd960249098f1852c0295cab7c307be859107f79d28fe49f1ad1e562bd23",
+        "opcode_shape_hash": "e6eb46e41c2b83e0c2673e542f8aa677491998d705f48b86d44bfca56ddbea49",
+        "register_shape_hash": "2b4681a5bc666cdb4e3b248effd8324edc31645ef7f48f1637b11e49b81b8a0f",
+        "shape_hash": "f308110fc71aeb08d88f82c4f90c2bac335f017cfb426338c16d01786b3cb2fd",
+        "size": 92,
+        "string_refs_hash": null
+      },
+      "original_name": "TControlBinding_TControlBinding_TString_const",
+      "original_string_refs": [],
+      "prior_provenance": [],
+      "proposed_name": "v18_TControlBinding_TControlBinding_TString_const",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "control binding string constructor",
+      "source_category": "unmatched",
+      "source_pseudocode_basis": "Fresh direct source Hex-Rays review was summarized in source_semantics; source metrics come from the offline source feature export.",
+      "source_semantics": "Constructs the TGraalVar-backed binding from a string, initializes the keycode and slot fields to -1, sets default flags, and installs the control-binding vtable and property pointer.",
+      "spectron_current_name": "_ZN10IoTkgardbmC1ERK10C8THgaTQxF",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10CanTfaz6bZ5clearEv",
+        "._ZN10CanTfaz6bZaSERK10C8THgaTQxF",
+        "._ZN10G0gxgajWBwC1ERK10CanTfaz6bZ_0"
+      ],
+      "spectron_ea": "0x16c59c",
+      "spectron_function_end": "0x16c620",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 4,
+        "call_count": 3,
+        "instruction_count": 33,
+        "mnemonic_hash": "a2467a530f18e5ce16792baf95576252343e7fcc95490c5b1232ebfa763a7c90",
+        "opcode_shape_hash": "3fc3c82694af493089945b7d8aaa6b04e71d694fb109240d7fd5dd7cd3b2951e",
+        "register_shape_hash": "4765c45032039df0bf46033671624348dd1c85ac5f3fc9c779c58bfca5a2710b",
+        "shape_hash": "985952f31f64057ee80363d68fd418d8fe334254a49fb3e2f6d64c1f81df3ed1",
+        "size": 132,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x39d8",
+      "target_evidence_terms": [
+        "CanTfaz6bZ::operator=",
+        "G0gxgajWBw::G0gxgajWBw",
+        "IoTkgardbmOnln2aNBfC"
+      ],
+      "target_pseudocode": "// Alternative name is '_ZN10IoTkgardbmC2ERK10C8THgaTQxF'\nvoid __fastcall IoTkgardbm::IoTkgardbm(IoTkgardbm *this, const C8THgaTQxF *a2)\n{\n  __int64 v3; // [xsp+28h] [xbp-8h] BYREF\n\n  v3 = 0;\n  CanTfaz6bZ::operator=(&v3, a2);\n  G0gxgajWBw::G0gxgajWBw(this, (const CanTfaz6bZ *)&v3);\n  CanTfaz6bZ::clear((CanTfaz6bZ *)&v3);\n  *((_DWORD *)this + 28) = -1;\n  *(_QWORD *)this = off_373E40;\n  *((_BYTE *)this + 19) = 1;\n  *((_BYTE *)this + 22) = 3;\n  *((_DWORD *)this + 29) = -1;\n  *((_DWORD *)this + 30) = -1;\n  *((_QWORD *)this + 13) = IoTkgardbmOnln2aNBfC;\n}\n",
+      "target_xrefs_to": [
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x13998",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x32040",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "changed_metric_fields": [
+        "size",
+        "instruction_count",
+        "mnemonic_hash",
+        "opcode_shape_hash",
+        "register_shape_hash",
+        "shape_hash"
+      ],
+      "confidence": "high",
+      "evidence": [
+        "The source and target rows were selected from the corresponding class-local regions of the exact hashed ARM64 builds.",
+        "The target addresses and v18_ names are analysis aliases. They are not claims that the stripped 2.2 library retained the readable 1.8 debug symbols.",
+        "The target wrappers use rebuilt C8THgaTQxF, CanTfaz6bZ, vuuHgangcF, and obfuscated class names. Changed metrics are therefore recorded as layout changes rather than exact binary matches.",
+        "Each selected target body was reviewed through fresh offline Hex-Rays pseudocode evidence and checked against the current target feature export.",
+        "The target allocates the same two list objects, assigns the first to the control-binding static, builds the long key description table, and constructs the second list from it.",
+        "The target keeps recognizable entries including Backspace, Left Windows, and Numpad0; its four-byte size difference is wrapper overhead only."
+      ],
+      "layout_change": true,
+      "layout_metric_delta": {
+        "instruction_count": {
+          "original": 35,
+          "spectron": 36
+        },
+        "mnemonic_hash": {
+          "original": "056af7a7583103e645b9a49d4c120afbb918e8e0d6ff1066e23c05da506f5f32",
+          "spectron": "a72427de5365bcfff3227f0c03e6dccf9e63fd3adb40733f9509e0bd4fadac5e"
+        },
+        "opcode_shape_hash": {
+          "original": "67c0b26ed957687c65f0544cde2816465ad53684f576ef8a3cd220484b3ed38a",
+          "spectron": "b505aa9a29c751c5d97caeb87e11e2053987a0317bc4f83700f04a81766ebaec"
+        },
+        "register_shape_hash": {
+          "original": "1565c9b884e0a52da113f8b946a883b916556b11607de0dc9abed5e6c7a718fa",
+          "spectron": "7944d8daccfd30a3abb37cc3a8013353ec108a43da4ad62f4653f2710ff63e86"
+        },
+        "shape_hash": {
+          "original": "549319af042e093164be032ca1acf939e26289afa9666648c08e0b70da3ea767",
+          "spectron": "527e2bbbcac352db03a06241814e94fd3e2d23b1c484055893a3af40b8b8e801"
+        },
+        "size": {
+          "original": 140,
+          "spectron": 144
+        }
+      },
+      "match_kind": "manual-compact-core-layout-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [
+        "plt_TStringList_TStringList_TString_const",
+        "plt_TString_clear_void",
+        "plt_TString_operator_lshift_char_const",
+        "plt_operator_new_ulong__2"
+      ],
+      "original_ea": "0x169720",
+      "original_function_end": "0x1697ac",
+      "original_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 6,
+        "call_count": 5,
+        "instruction_count": 35,
+        "mnemonic_hash": "056af7a7583103e645b9a49d4c120afbb918e8e0d6ff1066e23c05da506f5f32",
+        "opcode_shape_hash": "67c0b26ed957687c65f0544cde2816465ad53684f576ef8a3cd220484b3ed38a",
+        "register_shape_hash": "1565c9b884e0a52da113f8b946a883b916556b11607de0dc9abed5e6c7a718fa",
+        "shape_hash": "549319af042e093164be032ca1acf939e26289afa9666648c08e0b70da3ea767",
+        "size": 140,
+        "string_refs_hash": null
+      },
+      "original_name": "TInput_initStaticVars_void",
+      "original_string_refs": [],
+      "prior_provenance": [],
+      "proposed_name": "v18_TInput_initStaticVars_void",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "input control-binding and key-description static initializer",
+      "source_category": "unmatched",
+      "source_pseudocode_basis": "Fresh direct source Hex-Rays review was summarized in source_semantics; source metrics come from the offline source feature export.",
+      "source_semantics": "Allocates the control-binding list, builds the complete comma-separated key description table, and creates the second list used for key text lookup.",
+      "spectron_current_name": "_Z10x3PsfaBpSCv",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10vuuHgangcFC2ERK10C8THgaTQxFb",
+        "._Znwm"
+      ],
+      "spectron_ea": "0x16d174",
+      "spectron_function_end": "0x16d204",
+      "spectron_metrics": {
+        "basic_block_count": 1,
+        "branch_count": 6,
+        "call_count": 5,
+        "instruction_count": 36,
+        "mnemonic_hash": "a72427de5365bcfff3227f0c03e6dccf9e63fd3adb40733f9509e0bd4fadac5e",
+        "opcode_shape_hash": "b505aa9a29c751c5d97caeb87e11e2053987a0317bc4f83700f04a81766ebaec",
+        "register_shape_hash": "7944d8daccfd30a3abb37cc3a8013353ec108a43da4ad62f4653f2710ff63e86",
+        "shape_hash": "527e2bbbcac352db03a06241814e94fd3e2d23b1c484055893a3af40b8b8e801",
+        "size": 144,
+        "string_refs_hash": null
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0x3a54",
+      "target_evidence_terms": [
+        "Backspace",
+        "Left Windows",
+        "Numpad0",
+        "vuuHgangcF"
+      ],
+      "target_pseudocode": "__int64 __fastcall x3PsfaBpSC()\n{\n  __int64 v0; // x0\n  vuuHgangcF *v1; // x20\n  __int64 v3; // [xsp+28h] [xbp-8h] BYREF\n\n  v0 = operator new(0x18u);\n  *(_DWORD *)(v0 + 8) = 0;\n  *(_QWORD *)v0 = off_371C30;\n  *(_DWORD *)(v0 + 12) = 0;\n  *(_QWORD *)(v0 + 16) = 0;\n  v3 = 0;\n  GaA2gaD2MX::t4aggatWdi = v0;\n  C8THgaTQxF::operator<<(\n    (int)&v3,\n    \",,,,,,,,Backspace,Tab,,,,Enter,,,Shift,Ctrl,Menu,Pause,Capslock,,,,,,,Escape,,,,,Space,PageUp,PageDown,End,Home,Left\"\n    \",Up,Right,Down,,Print,,,Insert,Delete,Help,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\\\"Left Windows\\\",\\\"Right Windo\"\n    \"ws\\\",Apps,,,Numpad0,Numpad1,Numpad2,Numpad3,Numpad4,Numpad5,Numpad6,Numpad7,Numpad8,Numpad9,Numpadmult,Numpadadd,Num\"\n    \"padsep,Numpadminus,Numpadddecimal,\\\"Num Divide\\\",F1,F2,F3,F4,F5,F6,F7,F8,F9,F10,F11,F12,F13,F14,F15,F16,F17,F18,F19,\"\n    \"F20,F21,F22,F23,F24,,,,,,,,,Numlock,Scrolllock,,,,,,,,,,,,,,,\\\"Left Shift\\\",\\\"Right Shift\\\",\\\"Left Ctrl\\\",\\\"Right Ct\"\n    \"rl\\\",Lalt,Ralt,,,,,,,,,,,,,,,,,,,,,Semicolon,Equals,Comma,Minus,Period,Slash,Tilde,,,,,,,,,,,,,,,,,,,,,,,,,,,Lbracke\"\n    \"t,Backslash,Rbracket,Apostrophe,,,,Lessthan,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\");\n  v1 = (vuuHgangcF *)operator new(0x20u);\n  vuuHgangcF::vuuHgangcF(v1, (const C8THgaTQxF *)&v3, 0);\n  qword_3A17C0 = (__int64)v1;\n  return C8THgaTQxF::clear((C8THgaTQxF *)&v3);\n}\n",
+      "target_xrefs_to": [
+        {
+          "caller_ea": "0xda580",
+          "caller_name": "._Z10x3PsfaBpSCv",
+          "from": "0xda58c",
+          "type": 19
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x24618",
+          "type": 1
+        },
+        {
+          "caller_ea": "0xda580",
+          "caller_name": "._Z10x3PsfaBpSCv",
+          "from": "0xda584",
+          "type": 1
+        },
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x384d40",
+          "type": 1
+        }
+      ]
+    }
+  ],
+  "artifact": "spectron_compact_core_manual_translation_anchors_20260830",
+  "context": {
+    "resolution": "compact source and target roles are preserved even when the target adds fallback cases, changes wrapper classes, or stores profiler and input state in rebuilt layouts",
+    "source_classes": [
+      "TFiles",
+      "TFileNameScan",
+      "TIdentification",
+      "TLogActions",
+      "TProfiler",
+      "TControlBinding",
+      "TInput"
+    ],
+    "target_class_clusters": [
+      "wiULgacZUI",
+      "CDPvgaY2nv",
+      "NiVAFatPFB",
+      "qjQMgaXCHJ",
+      "esKIvakHfi",
+      "IoTkgardbm",
+      "GaA2gaD2MX"
+    ]
+  },
+  "inputs": {
+    "database_before_application": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v353_jni_callbacks.i64",
+    "database_before_application_sha256": "e4caba5dba37c84c90ab26d0d358de5a2484058a4a1c186e12af19c01f4da62d",
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "original_features": "/tmp/original_features_current.json",
+    "original_features_sha256": "243341ad40e912500365b6d7eb5b69f9f3b9d6200f5c825629cfc56d4343ac07",
+    "prior_role_artifact": "artifacts/spectron_android_tapjoy_video_state_manual_translation_anchors_20260827.json",
+    "prior_role_artifact_sha256": "8541126ca3159a4850ad9337cd26dc807ae07d9759f6726ba41a84332317be19",
+    "semantic_map_parent": "artifacts/spectron_semantic_translation_v353.json",
+    "semantic_map_parent_sha256": "531122e5a63d89dcd291947f5895e22d06eb2f314ee361ccb67080baf08009b8",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "spectron_features": "artifacts/spectron_features_v353_jni_callbacks.json",
+    "spectron_features_sha256": "aaa124dcedbb2025e583c2aae9eac20b620e9297a35a6a1d2ea6d11b72ffbe01",
+    "target_pseudocode_evidence": "/tmp/spectron_residual_core_target_v354.json",
+    "target_pseudocode_evidence_sha256": "e29b632dc58270cd9f41b74c8b129f421d6a66cbcafe62f14190b0079eb9afe3"
+  },
+  "interpretation": [
+    "These rows are reviewed semantic correspondences, not restored original debug symbols.",
+    "The Android cleanup row is a source-backed promotion of a prior role correction. Its existing target alias is retained and provenance is made explicit.",
+    "The remaining eight rows are high-confidence layout-aware translations. Their target code is unchanged by the artifact; only the later IDA application adds readable aliases and comments."
+  ],
+  "method": {
+    "address_policy": "source and target addresses remain separate fields; no address is copied between builds",
+    "confidence_policy": "high confidence requires direct role continuity; changed sizes and wrapper identities are recorded rather than hidden",
+    "name_policy": "the target receives a v18_ analysis prefix, except for the existing reviewed Android cleanup alias",
+    "selection": "fresh source role review, target role pseudocode review, class-local order, target feature verification, and explicit wrapper-layout deltas"
+  },
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for compact filesystem, identity, logging, profiling, and input residuals",
+  "summary": {
+    "address_delta_groups": {
+      "+0x1ffc": 1,
+      "+0x2630": 1,
+      "+0x39d8": 1,
+      "+0x3a54": 1,
+      "+0xbe8": 1,
+      "+0xbec": 1,
+      "+0xe48": 1,
+      "+0xfbc": 1,
+      "-0x270": 1
+    },
+    "anchor_count": 9,
+    "exact_shape_anchor_count": 0,
+    "existing_alias_role_correction_count": 1,
+    "high_confidence_count": 9,
+    "layout_change_anchor_count": 9,
+    "new_context_anchor_count": 9,
+    "promoted_unmatched_count": 9,
+    "target_default_name_count": 0
+  }
+}

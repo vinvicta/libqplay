@@ -4,7 +4,9 @@ This is an offline integrity check. It reads only JSON files already present in
 the repository and does not open a network connection or require IDA.
 """
 
+import hashlib
 import json
+import subprocess
 from pathlib import Path
 
 
@@ -16,7 +18,143 @@ def load_json(relative_path):
         return json.load(handle)
 
 
+def sha256_path(path):
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def validate_compact_public_archive():
+    """Validate the public tree without requiring the local large exports."""
+
+    checks = 0
+
+    def check(label, condition):
+        nonlocal checks
+        if not condition:
+            raise AssertionError(label)
+        checks += 1
+
+    required = [
+        "symbols/libqplay.symbols.summary.json",
+        "symbols/libqplay.function_inventory.summary.json",
+        "artifacts/ida_translation_validation.json",
+        "artifacts/ida_residual_profile.json",
+        "artifacts/spectron_arm64_loopback_loading_replay_20260828.json",
+        "artifacts/spectron_compact_core_manual_translation_anchors_20260830.json",
+        "artifacts/spectron_compact_core_manual_translation_application_20260830.json",
+        "artifacts/spectron_compact_core_manual_translation_verification_20260830.json",
+        "artifacts/spectron_translation_checkpoint_20260830_v354.json",
+        "artifacts/research_archive_manifest.json",
+    ]
+    documents = {}
+    for relative_path in required:
+        path = ROOT / relative_path
+        check("required artifact exists: " + relative_path, path.is_file())
+        documents[relative_path] = load_json(relative_path)
+
+    manifest = documents["artifacts/research_archive_manifest.json"]
+    check(
+        "archive manifest schema",
+        manifest.get("schema") == "libqplay.research-archive-manifest.v1",
+    )
+    records = manifest.get("files", [])
+    check("archive manifest has records", len(records) > 0)
+    check(
+        "archive manifest source paths",
+        manifest.get("tracked_source_paths")
+        == [record.get("source_path") for record in records],
+    )
+    check(
+        "archive manifest totals",
+        manifest.get("totals", {}).get("file_count") == len(records)
+        and manifest["totals"]["bytes"] == sum(record["bytes"] for record in records)
+        and manifest["totals"]["lines"] == sum(record["lines"] for record in records),
+    )
+    local_records_checked = 0
+    for record in records:
+        source_path = record.get("source_path", "")
+        archive_path = record.get("archive_path", "")
+        check("manifest source path is under artifacts", source_path.startswith("artifacts/"))
+        check(
+            "manifest archive path is under research-data",
+            archive_path.startswith("research-data/generated/"),
+        )
+        archived = ROOT / archive_path
+        if archived.is_file():
+            check("archived byte count: " + source_path, archived.stat().st_size == record["bytes"])
+            check("archived hash: " + source_path, sha256_path(archived) == record["sha256"])
+            local_records_checked += 1
+
+    banned_patterns = (
+        "spectron_features_v*.json",
+        "spectron_name_coverage_audit*.json",
+        "spectron_dynamic_symbol_coverage_audit*.json",
+        "spectron_dynamic_symbol_boundaries*.json",
+        "spectron_semantic_translation_v*.json",
+        "spectron_semantic_function_translation*.json",
+    )
+    for pattern in banned_patterns:
+        check("no tracked large export remains: " + pattern, not list((ROOT / "artifacts").glob(pattern)))
+
+    tracked_json = subprocess.check_output(
+        ["git", "ls-files", "-z", "--", "*.json"], cwd=ROOT
+    ).split(b"\0")
+    for raw_path in tracked_json:
+        if not raw_path:
+            continue
+        path = ROOT / raw_path.decode("utf-8")
+        if path.is_file():
+            load_json(path.relative_to(ROOT).as_posix())
+            checks += 1
+
+    symbols = documents["symbols/libqplay.symbols.summary.json"]
+    inventory = documents["symbols/libqplay.function_inventory.summary.json"]
+    ida_validation = documents["artifacts/ida_translation_validation.json"]
+    loopback = documents["artifacts/spectron_arm64_loopback_loading_replay_20260828.json"]
+    anchors = documents["artifacts/spectron_compact_core_manual_translation_anchors_20260830.json"]
+    application = documents[
+        "artifacts/spectron_compact_core_manual_translation_application_20260830.json"
+    ]
+    verification = documents[
+        "artifacts/spectron_compact_core_manual_translation_verification_20260830.json"
+    ]
+    checkpoint = documents["artifacts/spectron_translation_checkpoint_20260830_v354.json"]
+
+    check("symbol summary is offline", symbols.get("rename_failures") == [])
+    check("symbol summary has translated rows", symbols.get("translated_symbols", 0) > 0)
+    check("function inventory has functions", inventory.get("total_functions", 0) > 0)
+    check("IDA validation is offline", ida_validation.get("network_contacted") is False)
+    check("loopback replay is offline", loopback.get("network_contacted") is False)
+    check("compact-core anchors are offline", anchors.get("network_contacted") is False)
+    check("compact-core anchor count", len(anchors.get("anchors", [])) == 9)
+    check(
+        "compact-core application succeeded",
+        application.get("failure_count") == 0 and application.get("verified") is True,
+    )
+    check(
+        "compact-core reopen succeeded",
+        verification.get("failure_count") == 0 and verification.get("verified") is True,
+    )
+    check("v354 checkpoint is offline", checkpoint.get("network_contacted") is False)
+    check(
+        "v354 checkpoint references compact core",
+        checkpoint.get("compact_core_translation_v354", {}).get("anchor_count") == 9,
+    )
+
+    print(
+        "research archive validation: ok (%d checks, %d local large exports checked)"
+        % (checks, local_records_checked)
+    )
+    return 0
+
+
 def main():
+    if not (ROOT / "artifacts/spectron_features_v353_jni_callbacks.json").is_file():
+        return validate_compact_public_archive()
+
     symbols = load_json("symbols/libqplay.symbols.summary.json")
     inventory = load_json("symbols/libqplay.function_inventory.summary.json")
     labels = load_json("artifacts/ida_semantic_labels.json")

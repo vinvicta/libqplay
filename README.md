@@ -11,9 +11,19 @@ binary, facts reproduced in an emulator, and hypotheses that still need a
 server-side test. That distinction matters here because a successful TCP
 handshake is not the same thing as a successful game login.
 
+## Artifact policy
+
+The repository keeps compact evidence, symbol inventories, scripts, and human
+readable findings. Repeated full-function JSON exports stay in the local
+ignored `research-data/generated/` archive so the public history does not grow
+by hundreds of megabytes at every translation checkpoint. The archive is
+indexed by [`artifacts/research_archive_manifest.json`](artifacts/research_archive_manifest.json),
+and the policy is described in
+[`docs/ARTIFACT_POLICY.md`](docs/ARTIFACT_POLICY.md).
+
 ## Current status
 
-The current documented translation frontier is the v348 Spectron database. It
+The current documented translation frontier is the v354 Spectron database. It
 contains 11,707 functions and no remaining IDA default function names in the
 audited `sub_`, `nullsub_`, `j_`, `loc_`, or `unk_` families. The v263
 revision added three reviewed cross-build aliases for the
@@ -8202,6 +8212,49 @@ The reusable scripts are
 
 This was static analysis only. It did not patch the APK, rerun the loopback
 client, contact a live endpoint, or change the TLS or loading-state repairs.
+
+## v354 compact filesystem and runtime helpers
+
+The v354 pass adds nine source-backed aliases in the compact filesystem,
+identity, logging, profiling, control-binding, input, and Android cleanup
+clusters. The target wrappers use rebuilt string and container types, so these
+are recorded as high-confidence layout-change translations rather than exact
+byte-shape matches.
+
+| Source role | Target address | Target alias |
+| --- | ---: | --- |
+| `TFiles_initStaticVars_void` | `0xe8f20` | `v18_TFiles_initStaticVars_void` |
+| `TFileNameScan_readLevelPaths_TString_const` | `0xe9194` | `v18_TFileNameScan_readLevelPaths_TString_const` |
+| `TIdentification_getCookieFilename_void` | `0xed0d8` | `v18_TIdentification_getCookieFilename_void` |
+| `TIdentification_getSystemID_int` | `0xed6b4` | `v18_TIdentification_getSystemID_int` |
+| `TLogActions_getTopScripts_TStringList_bool` | `0xfa5f8` | `v18_TLogActions_getTopScripts_TStringList_bool` |
+| `TProfiler_hashPop_void` | `0xfc7ac` | `v18_TProfiler_hashPop_void` |
+| `TControlBinding_TControlBinding_TString_const` | `0x16c59c` | `v18_TControlBinding_TControlBinding_TString_const` |
+| `TInput_initStaticVars_void` | `0x16d174` | `v18_TInput_initStaticVars_void` |
+| prior TapJoy/video cleanup role correction | `0xe0438` | `v18_Android_TapJoy_video_clearStaticStrings` |
+
+The source scanner walks directories recursively while skipping `ignore`,
+`cache`, `offline`, `_CodeSignature`, and `.code`. The identity helpers select
+the cache cookie filename and system identifier variants. The logging and
+profiling rows preserve their report-building and timing-stack roles. Four
+nearby source rows were deliberately not forced into aliases because the
+target folded them into existing bodies or did not retain a one-to-one
+counterpart: encoded hash-list containment, the `THashStrings` name-list
+helper, `TLog_echo`, and the central `TInitStatics_initVars` routine.
+
+The v354 semantic map contains 4,268 mapped pairs, including 4,207 high
+confidence and 61 medium confidence mappings. It leaves 1,001 ambiguous and
+75 unmatched source rows. The target still has 11,707 functions and zero
+audited default names. The target IDA copy is
+`analysis/spectron_libqplay_translated_v354_compact_core_final.i64` with
+SHA-256
+`27eccea1a8ac243724b3df040055332cd486ca6171a7aa57d66123d4e115bef0`.
+
+The compact anchor, application, verification, and checkpoint records remain
+public. The full v354 feature export, name audit, dynamic-symbol audits, and
+semantic map are indexed in
+`artifacts/research_archive_manifest.json` and retained locally under the
+ignored archive described in `docs/ARTIFACT_POLICY.md`.
 
 ## v353 retained JNI callback translations
 
