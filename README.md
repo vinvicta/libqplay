@@ -96,6 +96,9 @@ account authentication remain open.
 * `artifacts/original_credential_storage_review_20260830.json` records the
   native option store, reversible value transform, and script-facing account,
   password, and cookie boundaries.
+* `artifacts/original_script_capability_review_20260830.json` records the
+  embedded script callbacks that reach local files, uploads, HTTP requests,
+  protocol controls, and dynamic class loading.
 * `artifacts/original_image_parser_review_20260830.json` records the downloaded
   image-resource path and the native PNG, GIF, JPEG, BMP, and TGA decoder
   boundaries. It is a static review and contains no fuzzing results.

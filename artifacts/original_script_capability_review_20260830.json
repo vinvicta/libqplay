@@ -1,0 +1,559 @@
+{
+  "artifact": "original_script_capability_review_20260830",
+  "database": {
+    "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "imagebase": "0x0",
+    "path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
+  },
+  "functions": [
+    {
+      "address": "0xf0790",
+      "callers": [
+        {
+          "caller": "0xd9e00",
+          "caller_name": "plt_TStream_LoadFromFile_TString_const",
+          "callsite": "0xd9e04"
+        },
+        {
+          "caller": "0xd9e00",
+          "caller_name": "plt_TStream_LoadFromFile_TString_const",
+          "callsite": "0xd9e0c"
+        }
+      ],
+      "code": "__int64 __fastcall TStream_LoadFromFile_TString_const(TStream *this, const TString *a2)\n{\n  TString *v2; // x23\n  const TString *v5; // x1\n  __int64 result; // x0\n  int v7; // w20\n  FILE *v8; // x21\n  __int64 v9; // x0\n  void *v10; // x0\n  const char *v11; // x2\n  __int64 v12; // [xsp+38h] [xbp-18h] BYREF\n  __int64 v13; // [xsp+40h] [xbp-10h] BYREF\n  __int64 v14; // [xsp+48h] [xbp-8h] BYREF\n\n  v2 = (TStream *)((char *)this + 8);\n  plt_TString_clear_void((TStream *)((char *)this + 8));\n  *((_DWORD *)this + 1) = 0;\n  *(_DWORD *)this = 0;\n  result = plt_TFiles_fileSize_TString_const(a2, v5);\n  v7 = result;\n  if ( (int)result <= 0 )\n    return result;\n  if ( !*(_QWORD *)a2 )\n  {\n    v8 = fopen(TString_dummystr, \"rb\");\n    if ( v8 )\n      goto LABEL_4;\nLABEL_9:\n    v12 = 0;\n    plt_TString_operator_lshift_char_const((int)&v12, \"Couldn't open \");\n    v13 = 0;\n    plt_TString_operator_assign_TString_const(&v13, &v12);\n    plt_TString_operator_lshift_TString_const(&v13, a2);\n    v14 = 0;\n    plt_TString_operator_assign_TString_const(&v14, &v13);\n    plt_TString_operator_lshift_char_const((int)&v14, \" for reading!\");\n    plt_TLog_echo_TString_const_double_double_double_char_const(\n      (TLog *)&v14,\n      (const TString *)\"files\",\n      0.5,\n      0.0,\n      0.0,\n      v11);\n    plt_TString_clear_void((TString *)&v14);\n    plt_TString_clear_void((TString *)&v13);\n    return plt_TString_clear_void((TString *)&v12);\n  }\n  v8 = fopen((const char *)(*(_QWORD *)a2 + 8LL), \"rb\");\n  if ( !v8 )\n    goto LABEL_9;\nLABEL_4:\n  plt_TString_setSize_int_bool(v2, v7, 0);\n  v9 = *((_QWORD *)this + 1);\n  if ( v9 )\n    v10 = (void *)(v9 + 8);\n  else\n    v10 = (void *)TString_dummystr;\n  fread(v10, 1u, v7, v8);\n  *((_DWORD *)this + 1) = v7;\n  return fclose(v8);\n}\n",
+      "code_bytes": 1766,
+      "code_sha256": "408833cce6c5ae9264dd59818b95ca44ce9002dadefb0af9249ac98b567932a6",
+      "function_end": "0xf0910",
+      "function_start": "0xf0790",
+      "name": "TStream_LoadFromFile_TString_const",
+      "role": "generic file reader"
+    },
+    {
+      "address": "0xf0aa8",
+      "callers": [
+        {
+          "caller": "0xd6a30",
+          "caller_name": "plt_TStream_SaveToFile_TString_const_uint",
+          "callsite": "0xd6a34"
+        },
+        {
+          "caller": "0xd6a30",
+          "caller_name": "plt_TStream_SaveToFile_TString_const_uint",
+          "callsite": "0xd6a3c"
+        }
+      ],
+      "code": "__int64 __fastcall TStream_SaveToFile_TString_const_uint(__int64 this, const TString *a2, int a3)\n{\n  __int64 v4; // x22\n  unsigned __int8 v6; // w0\n  int *v7; // x0\n  const char *v8; // x0\n  const char *v9; // x1\n  const TString *v10; // x1\n  FILE *v11; // x20\n  int *v12; // x1\n  size_t v13; // x2\n  const void *v14; // x0\n  int v15; // w22\n  const char *v16; // x2\n  __int64 v17; // [xsp+48h] [xbp-18h] BYREF\n  __int64 v18; // [xsp+50h] [xbp-10h] BYREF\n  __int64 v19; // [xsp+58h] [xbp-8h] BYREF\n\n  if ( *(_QWORD *)a2 && **(int **)a2 > 0 )\n  {\n    v4 = this;\n    v6 = atomic_load((unsigned __int8 *)&byte_38CA48);\n    if ( (v6 & 1) == 0 && __cxa_guard_acquire((__guard *)&byte_38CA48) )\n    {\n      v19 = 0;\n      plt_TString_operator_lshift_char_const((int)&v19, \"StreamSave\");\n      plt_ProfilerRootData_ProfilerRootData_TString_const((ProfilerRootData *)&unk_38CA10, (const TString *)&v19);\n      __cxa_guard_release((__guard *)&byte_38CA48);\n      atexit((void (*)(void))TStream_clearStaticString38CA10);\n      plt_TString_clear_void((TString *)&v19);\n    }\n    if ( gProfiler )\n      plt_TProfiler_hashPush_ProfilerRootData((TProfiler *)gProfiler, (ProfilerRootData *)&unk_38CA10);\n    v7 = *(int **)(v4 + 8);\n    if ( v7 && *v7 > 0 )\n    {\n      if ( *(_QWORD *)a2 )\n        v8 = (const char *)(*(_QWORD *)a2 + 8LL);\n      else\n        v8 = (const char *)TString_dummystr;\n      if ( a3 == 1 )\n        v9 = \"ab\";\n      else\n        v9 = (const char *)&unk_2CDF78;\n      v11 = fopen(v8, v9);\n      if ( v11 )\n      {\n        v12 = *(int **)(v4 + 8);\n        if ( v12 )\n        {\n          v13 = *v12;\n          v14 = v12 + 2;\n        }\n        else\n        {\n          v13 = 0;\n          v14 = (const void *)TString_dummystr;\n        }\n        fwrite(v14, 1u, v13, v11);\n        fclose(v11);\n      }\n      else\n      {\n        plt_TFiles_extractFileExt_TString_const(&v19, a2, v10);\n        v15 = (unsigned __int8)plt_operator_ne_TString_const_char_const((int)&v19, \".log\");\n        plt_TString_clear_void((TString *)&v19);\n        if ( v15 )\n        {\n          v17 = 0;\n          plt_TString_operator_lshift_char_const((int)&v17, \"Couldn't open \");\n          v18 = 0;\n          plt_TString_operator_assign_TString_const(&v18, &v17);\n          plt_TString_operator_lshift_TString_const(&v18, a2);\n          v19 = 0;\n          plt_TString_operator_assign_TString_const(&v19, &v18);\n          plt_TString_operator_lshift_char_const((int)&v19, \" for writing!\");\n          plt_TLog_echo_TString_const_double_double_double_char_const(\n            (TLog *)&v19,\n            (const TString *)\"files\",\n            0.5,\n            0.0,\n            0.0,\n            v16);\n          plt_TString_clear_void((TString *)&v19);\n          plt_TString_clear_void((TString *)&v18);\n          plt_TString_clear_void((TString *)&v17);\n        }\n      }\n    }\n    else if ( !a3 )\n    {\n      plt_TFiles_deleteFile_TString_const(a2, a2);\n    }\n    this = gProfiler;\n    if ( gProfiler )\n      return plt_TProfiler_hashPop_void((TProfiler *)gProfiler);\n  }\n  return this;\n}\n",
+      "code_bytes": 3061,
+      "code_sha256": "0c34f2d3c309211691c61af7286cbe593bf3e2f0aa5641b324a48ecc474c8274",
+      "function_end": "0xf0ce0",
+      "function_start": "0xf0aa8",
+      "name": "TStream_SaveToFile_TString_const_uint",
+      "role": "generic file writer"
+    },
+    {
+      "address": "0xfc110",
+      "callers": [
+        {
+          "caller": "0xdae20",
+          "caller_name": "plt_TFileScripting_getScriptAccessFilename_TString_const_bool",
+          "callsite": "0xdae24"
+        },
+        {
+          "caller": "0xdae20",
+          "caller_name": "plt_TFileScripting_getScriptAccessFilename_TString_const_bool",
+          "callsite": "0xdae2c"
+        }
+      ],
+      "code": "_QWORD *__usercall TFileScripting_getScriptAccessFilename_TString_const_bool@<X0>(\n        TFileScripting *this@<X0>,\n        const TString *a2@<X1>,\n        _QWORD *a3@<X8>)\n{\n  int v3; // w24\n  const TString *v6; // x1\n  const TString *v7; // x1\n  const TString *v8; // x1\n  __int64 v10; // x0\n  __int64 v11; // x0\n  int v12; // w2\n  TStringList *v13; // x24\n  char *v14; // x25\n  const TString *v15; // x1\n  __int64 v16; // x0\n  bool v17; // w2\n  int v18; // w20\n  const TString *v19; // x1\n  TStringList *v20; // x24\n  int *v21; // [xsp+48h] [xbp-28h] BYREF\n  __int64 v22; // [xsp+50h] [xbp-20h] BYREF\n  int *v23; // [xsp+58h] [xbp-18h] BYREF\n  __int64 v24; // [xsp+60h] [xbp-10h] BYREF\n  __int64 v25; // [xsp+68h] [xbp-8h] BYREF\n\n  v3 = (unsigned __int8)a2;\n  if ( *(_QWORD *)this )\n  {\n    v6 = (const TString *)**(unsigned int **)this;\n    if ( (int)v6 > 0 )\n    {\n      plt_TFiles_extractFilepath_TString_const((__int64 *)&v21, this, v6);\n      plt_TFiles_extractFilename_TString_const(&v22, this, v7);\n      plt_TFiles_extractFileExt_TString_const((__int64 *)&v23, (TFiles *)&v22, v8);\n      if ( !v23\n        || *v23 <= 0\n        || (plt_TStringList_indexOf_TString_const(\n              (TStringList *)data_TFileScripting_disallowedfileextensions,\n              (const TString *)&v23)\n          & 0x80000000) == 0 )\n      {\n        *a3 = 0;\nLABEL_7:\n        plt_TString_clear_void((TString *)&v23);\n        plt_TString_clear_void((TString *)&v22);\n        plt_TString_clear_void((TString *)&v21);\n        return a3;\n      }\n      if ( v3 )\n      {\n        if ( !data_TGameEnvironment_universe\n          || (v10 = *(_QWORD *)(data_TGameEnvironment_universe + 176)) == 0\n          || (v11 = *(_QWORD *)(v10 + 112)) == 0\n          || !*(_BYTE *)(v11 + 18) )\n        {\n          v12 = plt_TString_indexOf_char((TString *)&v21, 47) + 1;\n          if ( v12 <= 0\n            || (v13 = (TStringList *)qword_38CFD8,\n                plt_TString_subString_int_int(&v25, (TString *)&v21, 0, v12),\n                LODWORD(v13) = plt_TStringList_indexOf_TString_const(v13, (const TString *)&v25),\n                plt_TString_clear_void((TString *)&v25),\n                ((unsigned int)v13 & 0x80000000) != 0) )\n          {\nLABEL_18:\n            v24 = 0;\n            v14 = data_TFileScripting_scriptwritefolder;\n            plt_TString_operator_assign_TString_const(&v24, &data_TFiles_baseuserfolder);\n            plt_TString_operator_lshift_char_const((int)&v24, v14);\n            if ( !(unsigned __int8)plt_operator_assign_TString_const_char_const(\n                                     (int)&v21,\n                                     data_TFileScripting_scriptwritefolder) )\n            {\n              plt_TFiles_escapedFilename_TString_const(&v25, (TFiles *)data_TServerList_servername, v15);\n              plt_TString_operator_lshift_TString_const(&v24, &v25);\n              plt_TString_operator_lshift_char(v16, (unsigned __int8)data_TFiles_fileseparator);\n              plt_TString_clear_void((TString *)&v25);\n              if ( v21 )\n              {\n                if ( *v21 > 0 )\n                {\n                  if ( (unsigned __int8)plt_TFileScripting_AllowedFoldername_TString_const_bool(\n                                          (TFileScripting *)&v21,\n                                          nullptr,\n                                          v17) )\n                    plt_TString_operator_lshift_TString_const(&v24, &v21);\n                }\n              }\n            }\n            plt_TString_operator_lshift_TString_const(&v24, &v22);\n            *a3 = 0;\n            plt_TString_operator_assign_TString_const(a3, &v24);\n            plt_TString_clear_void((TString *)&v24);\n            goto LABEL_7;\n          }\n        }\n        v25 = 0;\n      }\n      else\n      {\n        v18 = plt_TString_indexOf_char((TString *)&v21, 47);\n        if ( !(unsigned __int8)plt_operator_assign_TString_const_char_const((int)&v23, \".plist\") )\n        {\n          if ( v18 + 1 <= 0 )\n            goto LABEL_18;\n          v20 = (TStringList *)qword_38CFE0;\n          plt_TString_subString_int_int(&v25, (TString *)&v21, 0, v18 + 1);\n          LODWORD(v20) = plt_TStringList_indexOf_TString_const(v20, (const TString *)&v25);\n          plt_TString_clear_void((TString *)&v25);\n          if ( ((unsigned int)v20 & 0x80000000) != 0 )\n            goto LABEL_18;\n        }\n        if ( (unsigned __int8)plt_operator_ne_TString_const_TString_const(\n                                &data_TFiles_baseuserfolder,\n                                &data_TFiles_basedatafolder) )\n        {\n          v25 = 0;\n          plt_TString_operator_assign_TString_const(&v25, &data_TFiles_basedatafolder);\n          plt_TString_operator_lshift_TString_const(&v25, &v21);\n          v24 = 0;\n          plt_TString_operator_assign_TString_const(&v24, &v25);\n          plt_TString_operator_lshift_TString_const(&v24, &v22);\n          plt_TString_clear_void((TString *)&v25);\n          if ( plt_TResourceFunctions_getLevelFileResourceAbsPath_TString_const((TResourceFunctions *)&v24, v19) )\n          {\n            *a3 = 0;\n            plt_TString_operator_assign_TString_const(a3, &v24);\n            plt_TString_clear_void((TString *)&v24);\n            goto LABEL_7;\n          }\n          plt_TString_clear_void((TString *)&v24);\n        }\n        v25 = 0;\n      }\n      plt_TString_operator_assign_TString_const(&v25, &data_TFiles_baseuserfolder);\n      plt_TString_operator_lshift_TString_const(&v25, &v21);\n      *a3 = 0;\n      plt_TString_operator_assign_TString_const(a3, &v25);\n      plt_TString_operator_lshift_TString_const(a3, &v22);\n      plt_TString_clear_void((TString *)&v25);\n      goto LABEL_7;\n    }\n  }\n  *a3 = 0;\n  return a3;\n}\n",
+      "code_bytes": 5723,
+      "code_sha256": "415945fac4ddb8fa977d082566f4622feb9d75abbeb5d88b3cfb7529010195ee",
+      "function_end": "0xfc4b0",
+      "function_start": "0xfc110",
+      "name": "TFileScripting_getScriptAccessFilename_TString_const_bool",
+      "role": "script path policy"
+    },
+    {
+      "address": "0xfc880",
+      "callers": [],
+      "code": "// TFileScripting_initStaticScriptVars table at 0x376bd0 registers getscriptaccessfile with this wrapper.\n__int64 *__usercall TFileScripting_script_getScriptAccessFile@<X0>(\n        TFileScripting *a1@<X0>,\n        const TString *a2@<X1>,\n        bool a3@<W2>,\n        __int64 *a4@<X8>)\n{\n  plt_TFileScripting_getScriptAccessFilename_TString_const_bool(a4, a1, a2, a3);\n  return a4;\n}\n",
+      "code_bytes": 385,
+      "code_sha256": "39365e2c33087f9b9ee3040f5aa4e78570165174c5f4c23bdcfb9ffa0a5daa6d",
+      "function_end": "0xfc8a0",
+      "function_start": "0xfc880",
+      "name": "TFileScripting_script_getScriptAccessFile",
+      "role": "script path policy callback"
+    },
+    {
+      "address": "0xfc7ec",
+      "callers": [],
+      "code": "// TFileScripting_initStaticScriptVars table at 0x376bd0 registers fileexists with this wrapper.\n__int64 __fastcall TFileScripting_script_fileExists(TResourceFunctions *a1, const TString *a2)\n{\n  const TString *v3; // x1\n  bool v4; // w2\n  const TString *v5; // x1\n  unsigned int exists; // w19\n  int *v8; // [xsp+28h] [xbp-8h] BYREF\n\n  if ( !(unsigned __int8)plt_TFiles_hasPath_TString_const(a1, a2) )\n    return (unsigned __int8)plt_TResourceFunctions_gamefileexists_TString_const(a1, v3);\n  plt_TFileScripting_getScriptAccessFilename_TString_const_bool((__int64 *)&v8, a1, nullptr, v4);\n  if ( v8 && *v8 > 0 )\n    exists = (unsigned __int8)plt_TFiles_fileExists_TString_const((TFiles *)&v8, v5);\n  else\n    exists = 0;\n  plt_TString_clear_void((TString *)&v8);\n  return exists;\n}\n",
+      "code_bytes": 783,
+      "code_sha256": "d6d17eca4b5a311424f998030abc7583681ed0d2733cade9b3b051c7462dabbe",
+      "function_end": "0xfc880",
+      "function_start": "0xfc7ec",
+      "name": "TFileScripting_script_fileExists",
+      "role": "policy-aware file existence callback"
+    },
+    {
+      "address": "0xfc740",
+      "callers": [],
+      "code": "// TFileScripting_initStaticScriptVars table at 0x376bd0 registers filesize with this wrapper.\n__int64 __fastcall TFileScripting_script_fileSize(TFileScripting *a1, const TString *a2)\n{\n  const TString *v3; // x1\n  bool v4; // w2\n  const TString *v5; // x1\n  unsigned int v6; // w19\n  TResourceObject *LevelFileResource_TString_const; // x0\n  unsigned int v9; // w19\n  int *v10; // [xsp+28h] [xbp-8h] BYREF\n\n  if ( (unsigned __int8)plt_TFiles_hasPath_TString_const(a1, a2) )\n  {\n    plt_TFileScripting_getScriptAccessFilename_TString_const_bool((__int64 *)&v10, a1, nullptr, v4);\n    if ( v10 && *v10 > 0 )\n    {\n      v6 = plt_TFiles_fileSize_TString_const((TFiles *)&v10, v5);\n      plt_TString_clear_void((TString *)&v10);\n      return v6;\n    }\n    v9 = -1;\n    plt_TString_clear_void((TString *)&v10);\n  }\n  else\n  {\n    LevelFileResource_TString_const = (TResourceObject *)plt_TResourceFunctions_getLevelFileResource_TString_const(\n                                                           a1,\n                                                           v3);\n    if ( LevelFileResource_TString_const )\n      return (unsigned int)plt_TResourceObject_getSize_void(LevelFileResource_TString_const);\n    else\n      return (unsigned int)-1;\n  }\n  return v9;\n}\n",
+      "code_bytes": 1261,
+      "code_sha256": "b9f352fd2a57ed284a703f58c0580e33f1022f9b3342b43ddf2b38c05f18a391",
+      "function_end": "0xfc7ec",
+      "function_start": "0xfc740",
+      "name": "TFileScripting_script_fileSize",
+      "role": "policy-aware file-size callback"
+    },
+    {
+      "address": "0xfbda4",
+      "callers": [],
+      "code": "// TFileScripting_initStaticScriptVars table at 0x376bd0 registers adventure_getfilecontent with this wrapper.\n_QWORD *__usercall TFileScripting_script_getFileContent@<X0>(TString *a1@<X0>, _QWORD *a2@<X8>)\n{\n  _DWORD v4[2]; // [xsp+20h] [xbp-10h] BYREF\n  __int64 v5; // [xsp+28h] [xbp-8h] BYREF\n\n  v4[0] = 0;\n  v4[1] = 0;\n  v5 = 0;\n  ++cstream;\n  plt_TStream_LoadFromFile_TString_const((TStream *)v4, a1);\n  *a2 = 0;\n  plt_TString_operator_assign_TString_const(a2, &v5);\n  --cstream;\n  plt_TString_clear_void((TString *)&v5);\n  return a2;\n}\n",
+      "code_bytes": 542,
+      "code_sha256": "23329df8f4b5aa0c788a09f46afa14959df379bc55c93922dbc1b1007239fcda",
+      "function_end": "0xfbe1c",
+      "function_start": "0xfbda4",
+      "name": "TFileScripting_script_getFileContent",
+      "role": "script file-content reader"
+    },
+    {
+      "address": "0xfbbc8",
+      "callers": [],
+      "code": "// TFileScripting_initStaticScriptVars table at 0x376bd0 registers adventure_setfilecontent with this wrapper.\n__int64 __fastcall TFileScripting_script_setFileContent(const TString *a1, __int64 a2)\n{\n  int v3; // w3\n  int v5; // [xsp+20h] [xbp-10h] BYREF\n  int v6; // [xsp+24h] [xbp-Ch]\n  int *v7; // [xsp+28h] [xbp-8h] BYREF\n\n  v5 = 0;\n  v6 = 0;\n  v7 = nullptr;\n  ++cstream;\n  plt_TString_operator_assign_TString_const(&v7, a2);\n  if ( v7 )\n    v3 = *v7;\n  else\n    v3 = 0;\n  v6 = v3;\n  v5 = v3;\n  plt_TStream_SaveToFile_TString_const_uint((TStream *)&v5, a1, 0);\n  --cstream;\n  return plt_TString_clear_void((TString *)&v7);\n}\n",
+      "code_bytes": 629,
+      "code_sha256": "0498ec0c77857ac94cca3e0090288b83da2754523c84512faf5b644937f13ac7",
+      "function_end": "0xfbc58",
+      "function_start": "0xfbbc8",
+      "name": "TFileScripting_script_setFileContent",
+      "role": "script file-content writer"
+    },
+    {
+      "address": "0xfc4b0",
+      "callers": [],
+      "code": "// TFileScripting_initStaticScriptVars table at 0x376bd0 registers deletefile with this wrapper.\n__int64 __fastcall TFileScripting_script_deleteFile(TFileScripting *a1, __int64 a2, bool a3)\n{\n  const TString *v3; // x1\n  unsigned __int8 exists; // w0\n  const TString *v5; // x1\n  unsigned int v6; // w20\n  bool v8; // w2\n  int *v9; // [xsp+28h] [xbp-8h] BYREF\n\n  plt_TFileScripting_getScriptAccessFilename_TString_const_bool(\n    (__int64 *)&v9,\n    a1,\n    (const TString *)((char *)&dword_0 + 1),\n    a3);\n  if ( v9 && *v9 > 0 && (exists = plt_TFiles_fileExists_TString_const((TFiles *)&v9, v3), (v6 = exists) != 0) )\n  {\n    plt_TFiles_deleteFile_TString_const((TFiles *)&v9, v5);\n    plt_TResourceFunctions_updateResourceObject_TString_const_bool((TResourceFunctions *)&v9, nullptr, v8);\n    plt_TString_clear_void((TString *)&v9);\n    return v6;\n  }\n  else\n  {\n    plt_TString_clear_void((TString *)&v9);\n    return 0;\n  }\n}\n",
+      "code_bytes": 930,
+      "code_sha256": "98f6e45262844ce113830d04876d49bf4c1d95c45c2b30599e2a21b42d34670c",
+      "function_end": "0xfc540",
+      "function_start": "0xfc4b0",
+      "name": "TFileScripting_script_deleteFile",
+      "role": "policy-aware script deletion callback"
+    },
+    {
+      "address": "0xfca80",
+      "callers": [],
+      "code": "// TFileScripting_initStaticScriptVars table at 0x376bd0 registers decompressfile with this wrapper.\n__int64 __fastcall TFileScripting_script_decompressFile(\n        TFileScripting *a1,\n        const TString *a2,\n        TFileScripting *a3,\n        char a4)\n{\n  unsigned int *v4; // x28\n  TStringList *v9; // x21\n  const TString *v10; // x1\n  unsigned __int8 exists; // w0\n  const TString *v12; // x1\n  unsigned int v13; // w21\n  const TString *v15; // x1\n  TResourceObject *LevelFileResourceAbsPath_TString_const; // x0\n  TResourceObject *v17; // x26\n  __int64 v18; // x0\n  unsigned int v19; // w24\n  __int64 v20; // x0\n  __int64 v21; // x0\n  TResourceObject **v22; // x0\n  unsigned int v23; // w2\n  const char *v24; // x2\n  int v25; // w1\n  int *v26; // x0\n  int v27; // w0\n  bool v28; // w2\n  const TString *v29; // x1\n  void *v30; // [xsp+60h] [xbp-80h]\n  char *Stream_void; // [xsp+60h] [xbp-80h]\n  int v32; // [xsp+68h] [xbp-78h]\n  int *v33; // [xsp+98h] [xbp-48h] BYREF\n  int *v34; // [xsp+A0h] [xbp-40h] BYREF\n  __int64 v35; // [xsp+A8h] [xbp-38h] BYREF\n  __int64 v36; // [xsp+B0h] [xbp-30h] BYREF\n  __int64 v37; // [xsp+B8h] [xbp-28h] BYREF\n  __int64 v38; // [xsp+C0h] [xbp-20h] BYREF\n  int *v39; // [xsp+C8h] [xbp-18h] BYREF\n  __int64 v40; // [xsp+D0h] [xbp-10h] BYREF\n  int *v41; // [xsp+D8h] [xbp-8h] BYREF\n\n  plt_TFileScripting_getScriptAccessFilename_TString_const_bool((__int64 *)&v33, a1, nullptr, (bool)a3);\n  if ( v33 )\n  {\n    if ( *v33 > 0 )\n    {\n      v9 = (TStringList *)qword_38CFE8;\n      plt_TFiles_extractFileExt_TString_const((__int64 *)&v41, (TFiles *)&v33, (const TString *)&unk_38C000);\n      LODWORD(v9) = plt_TStringList_indexOf_TString_const(v9, (const TString *)&v41);\n      plt_TString_clear_void((TString *)&v41);\n      if ( ((unsigned int)v9 & 0x80000000) == 0 )\n      {\n        exists = plt_TFiles_fileExists_TString_const((TFiles *)&v33, v10);\n        v13 = exists;\n        if ( exists )\n        {\n          plt_TFileScripting_getScriptWriteAccessFolder_TString_const((__int64 *)&v34, a3, v12);\n          if ( v34 && *v34 > 0 )\n          {\n            LevelFileResourceAbsPath_TString_const = (TResourceObject *)plt_TResourceFunctions_getLevelFileResourceAbsPath_TString_const(\n                                                                          (TResourceFunctions *)&v33,\n                                                                          v15);\n            v17 = LevelFileResourceAbsPath_TString_const;\n            if ( LevelFileResourceAbsPath_TString_const )\n            {\n              if ( (unsigned __int8)plt_TResourceObject_canBeLoaded_void(LevelFileResourceAbsPath_TString_const) )\n              {\n                v18 = *((_QWORD *)v17 + 4);\n                if ( v18 )\n                {\n                  if ( *(_QWORD *)(v18 + 48) )\n                  {\n                    v19 = 0;\n                    plt_TFiles_forceDirectories_TString_const((TFiles *)&v34, (const TString *)(a4 & 2));\n                    v32 = (unsigned __int8)plt_operator_ne_TString_const_char_const((int)a2, \"*\");\n                    while ( 1 )\n                    {\n                      v20 = *((_QWORD *)v17 + 4);\n                      if ( !v20 )\n                        break;\n                      v21 = *(_QWORD *)(v20 + 48);\n                      if ( (signed int)v19 >= *(_DWORD *)(v21 + 12) )\n                        goto LABEL_27;\n                      v22 = (TResourceObject **)plt_TList_operator_index_int(v21, v19);\n                      v4 = (unsigned int *)*v22;\n                      if ( *v22 && (unsigned __int8)plt_TResourceObject_canBeLoaded_void(*v22) )\n                      {\n                        if ( !v32 )\n                        {\n                          v30 = v4 + 2;\nLABEL_20:\n                          v38 = 0;\n                          plt_TString_operator_assign_TString_const(&v38, &v34);\n                          plt_TString_operator_lshift_TString_const(&v38, v30);\n                          if ( (a4 & 1) != 0 )\n                          {\n                            v40 = 0;\n                            plt_TString_operator_assign_TString_const(&v40, v4 + 4);\n                            v41 = nullptr;\n                            plt_TString_operator_assign_TString_const(&v41, (char *)v17 + 16);\n                            if ( v41 )\n                              v25 = *v41;\n                            else\n                              v25 = 0;\n                            v26 = *((int **)v17 + 1);\n                            if ( v26 )\n                              v27 = *v26;\n                            else\n                              v27 = 0;\n                            plt_TString_subString_int((__int64 *)&v39, (TString *)&v40, v25 + v27 + 1);\n                            plt_TString_clear_void((TString *)&v41);\n                            plt_TString_clear_void((TString *)&v40);\n                            if ( v39\n                              && *v39 > 0\n                              && (unsigned __int8)plt_TFileScripting_AllowedFoldername_TString_const_bool(\n                                                    (TFileScripting *)&v39,\n                                                    nullptr,\n                                                    v28) )\n                            {\n                              v41 = nullptr;\n                              plt_TString_operator_assign_TString_const(&v41, &v34);\n                              plt_TString_operator_lshift_TString_const(&v41, &v39);\n                              plt_TFiles_forceDirectories_TString_const((TFiles *)&v41, v29);\n                              plt_TString_clear_void((TString *)&v41);\n                              v40 = 0;\n                              plt_TString_operator_assign_TString_const(&v40, &v34);\n                              plt_TString_operator_lshift_TString_const(&v40, &v39);\n                              v41 = nullptr;\n                              plt_TString_operator_assign_TString_const(&v41, &v40);\n                              plt_TString_operator_lshift_TString_const(&v41, v30);\n                              plt_TString_operator_assign_TString_const(&v38, &v41);\n                              plt_TString_clear_void((TString *)&v41);\n                              plt_TString_clear_void((TString *)&v40);\n                            }\n                            plt_TString_clear_void((TString *)&v39);\n                          }\n                          Stream_void = (char *)plt_TResourceObject_getStream_void((TResourceObject *)v4);\n                          plt_TStream_SaveToFile_TString_const_uint((TStream *)Stream_void, (const TString *)&v38, 0);\n                          if ( Stream_void )\n                          {\n                            --cstream;\n                            plt_TString_clear_void((TString *)(Stream_void + 8));\n                            plt_operator_delete_void__2(Stream_void);\n                          }\n                          if ( (a4 & 2) != 0 )\n                            plt_TFiles_setUTCFileModTime_TString_const_uint((TFiles *)&v38, (const TString *)v4[6], v23);\n                          plt_TResourceFunctions_updateResourceObject_TString_const_bool(\n                            (TResourceFunctions *)&v38,\n                            nullptr,\n                            v23);\n                          plt_TString_clear_void((TString *)&v38);\n                          goto LABEL_26;\n                        }\nLABEL_31:\n                        v30 = v4 + 2;\n                        if ( (unsigned __int8)plt_patternMatches_TString_const_TString_const(\n                                                (const TString *)(v4 + 2),\n                                                a2) )\n                          goto LABEL_20;\n                        ++v19;\n                      }\n                      else\n                      {\nLABEL_26:\n                        ++v19;\n                      }\n                    }\n                    __break(0x3E8u);\n                    goto LABEL_31;\n                  }\n                }\n              }\n            }\nLABEL_27:\n            v35 = 0;\n            plt_TString_operator_lshift_char_const((int)&v35, \"Unzipped \");\n            v36 = 0;\n            plt_TString_operator_assign_TString_const(&v36, &v35);\n            plt_TString_operator_lshift_TString_const(&v36, a1);\n            v37 = 0;\n            plt_TString_operator_assign_TString_const(&v37, &v36);\n            plt_TString_operator_lshift_char(&v37, (unsigned __int8)data_TFiles_fileseparator);\n            v38 = 0;\n            plt_TString_operator_assign_TString_const(&v38, &v37);\n            plt_TString_operator_lshift_TString_const(&v38, a2);\n            v39 = nullptr;\n            plt_TString_operator_assign_TString_const(&v39, &v38);\n            plt_TString_operator_lshift_char_const((int)&v39, \" into \");\n            v40 = 0;\n            plt_TString_operator_assign_TString_const(&v40, &v39);\n            plt_TString_operator_lshift_TString_const(&v40, &v34);\n            v41 = nullptr;\n            plt_TString_operator_assign_TString_const(&v41, &v40);\n            plt_TString_operator_lshift_char_const((int)&v41, \".\");\n            plt_TLog_echo_TString_const_double_double_double_char_const(\n              (TLog *)&v41,\n              (const TString *)\"files\",\n              0.0,\n              0.5,\n              0.0,\n              v24);\n            plt_TString_clear_void((TString *)&v41);\n            plt_TString_clear_void((TString *)&v40);\n            plt_TString_clear_void((TString *)&v39);\n            plt_TString_clear_void((TString *)&v38);\n            plt_TString_clear_void((TString *)&v37);\n            plt_TString_clear_void((TString *)&v36);\n            plt_TString_clear_void((TString *)&v35);\n          }\n          else\n          {\n            v13 = 0;\n          }\n          plt_TString_clear_void((TString *)&v34);\n          goto LABEL_6;\n        }\n      }\n    }\n  }\n  v13 = 0;\nLABEL_6:\n  plt_TString_clear_void((TString *)&v33);\n  return v13;\n}\n",
+      "code_bytes": 10059,
+      "code_sha256": "b37c73d536cff387eb2acbf113a8b07b8410e94ed3350fbe4f3fd9ed2fbf6be4",
+      "function_end": "0xfcf8c",
+      "function_start": "0xfca80",
+      "name": "TFileScripting_script_decompressFile",
+      "role": "script archive extraction callback"
+    },
+    {
+      "address": "0x157d20",
+      "callers": [],
+      "code": "__int64 __fastcall GSFunctionsClient_script_adventure_uploadfile(const TString *a1)\n{\n  __int64 result; // x0\n\n  result = data_TClient_client;\n  if ( data_TClient_client )\n    return plt_TClient_uploadFile_TString_const((TClient *)data_TClient_client, a1);\n  return result;\n}\n",
+      "code_bytes": 276,
+      "code_sha256": "e58a171c4184c47f6c735ae649100a225a4cedd70ad217d15f90dfed8ccfdf58",
+      "function_end": "0x157d3c",
+      "function_start": "0x157d20",
+      "name": "GSFunctionsClient_script_adventure_uploadfile",
+      "role": "unfiltered upload callback"
+    },
+    {
+      "address": "0x157d3c",
+      "callers": [],
+      "code": "const TString *__fastcall GSFunctionsClient_script_uploadfile(const TString *result)\n{\n  TFileScripting *v1; // x19\n  bool v2; // w2\n  int *v3; // [xsp+30h] [xbp-10h] BYREF\n  __int64 v4; // [xsp+38h] [xbp-8h] BYREF\n\n  if ( data_TClient_client )\n  {\n    v1 = result;\n    v3 = nullptr;\n    if ( (plt_TStringList_indexOf_TString_const((TStringList *)data_TClient_alloweduploadfiles, result) & 0x80000000) != 0 )\n    {\n      plt_TFileScripting_getScriptAccessFilename_TString_const_bool(&v4, v1, nullptr, v2);\n      plt_TString_operator_assign_TString_const(&v3, &v4);\n      plt_TString_clear_void((TString *)&v4);\n      if ( !v3 || *v3 <= 0 )\n        return (const TString *)plt_TString_clear_void((TString *)&v3);\n    }\n    else\n    {\n      plt_TStringList_Remove_TString_const((TStringList *)data_TClient_alloweduploadfiles, v1);\n      plt_TString_operator_assign_TString_const(&v3, v1);\n    }\n    plt_TClient_uploadFile_TString_const((TClient *)data_TClient_client, (const TString *)&v3);\n    return (const TString *)plt_TString_clear_void((TString *)&v3);\n  }\n  return result;\n}\n",
+      "code_bytes": 1080,
+      "code_sha256": "15b578d959905b7c98e1118761ddc4ea85afcd8fd573e1b81acd88af090e64e8",
+      "function_end": "0x157e0c",
+      "function_start": "0x157d3c",
+      "name": "GSFunctionsClient_script_uploadfile",
+      "role": "policy-aware upload callback"
+    },
+    {
+      "address": "0x1e9068",
+      "callers": [
+        {
+          "caller": "0xd51a0",
+          "caller_name": "plt_TClient_uploadFile_TString_const",
+          "callsite": "0xd51a4"
+        },
+        {
+          "caller": "0xd51a0",
+          "caller_name": "plt_TClient_uploadFile_TString_const",
+          "callsite": "0xd51ac"
+        }
+      ],
+      "code": "__int64 __fastcall TClient_uploadFile_TString_const(TClient *this, const TString *a2)\n{\n  __int64 result; // x0\n  __int64 v4; // x0\n  int v5; // w0\n  __int64 v6; // x0\n  int v7; // w0\n  TGraalVar *v8; // x19\n  __int64 v9; // x3\n  TList *v10; // x21\n  TUploadFile *v11; // x19\n  __int64 v12; // [xsp+30h] [xbp-10h] BYREF\n  __int64 v13; // [xsp+38h] [xbp-8h] BYREF\n\n  if ( (int)plt_TFiles_fileSize_TString_const(a2, a2) <= 20000000 )\n  {\n    v10 = (TList *)data_TClient_uploadfiles;\n    v11 = (TUploadFile *)plt_operator_new_ulong__2(0x18u);\n    plt_TUploadFile_TUploadFile_TString_const(v11, a2);\n    return plt_TList_Add_void(v10, v11);\n  }\n  else\n  {\n    result = data_TGameEnvironment_universe;\n    if ( data_TGameEnvironment_universe )\n    {\n      v12 = 0;\n      v4 = plt_TString_operator_lshift_char_const((int)&v12, \"File \");\n      plt_TString_operator_lshift_TString_const(v4, a2);\n      v6 = plt_TString_operator_lshift_char_const(v5, \" is too big to upload (max \");\n      v7 = plt_TString_operator_lshift_int(v6);\n      plt_TString_operator_lshift_char_const(v7, \" bytes)\");\n      v8 = (TGraalVar *)data_TGameEnvironment_universe;\n      v13 = 0;\n      plt_TString_operator_lshift_char_const((int)&v13, \"onFolderLog\");\n      if ( v12 )\n        v9 = v12 + 8;\n      else\n        v9 = TString_dummystr;\n      plt_TGraalVar_invokeEvent_TString_const_char_const(v8, (const TString *)&v13, \"s\", v9);\n      plt_TString_clear_void((TString *)&v13);\n      return plt_TString_clear_void((TString *)&v12);\n    }\n  }\n  return result;\n}\n",
+      "code_bytes": 1531,
+      "code_sha256": "b66c351eec4b327cb46242b5b274202e64fc94e538869cc1968b66895e96ca16",
+      "function_end": "0x1e9198",
+      "function_start": "0x1e9068",
+      "name": "TClient_uploadFile_TString_const",
+      "role": "upload queue admission"
+    },
+    {
+      "address": "0x1e9198",
+      "callers": [
+        {
+          "caller": "0xd2640",
+          "caller_name": "plt_TClient_uploadFilesToServer_void",
+          "callsite": "0xd2644"
+        },
+        {
+          "caller": "0xd2640",
+          "caller_name": "plt_TClient_uploadFilesToServer_void",
+          "callsite": "0xd264c"
+        }
+      ],
+      "code": "__int64 *__fastcall TClient_uploadFilesToServer_void(TClient *this)\n{\n  __int64 *result; // x0\n  int *v3; // x2\n  int v4; // w3\n  TClient *v5; // x24\n  __int64 v6; // x19\n  const TString *v7; // x1\n  int v8; // w28\n  int v9; // w0\n  int v10; // w22\n  _DWORD *v11; // x0\n  const TString *v12; // x27\n  int v13; // w2\n  void *v14; // x23\n  int v15; // w22\n  TGraalVar *v16; // x19\n  __int64 v17; // [xsp+68h] [xbp-8h] BYREF\n\n  result = (__int64 *)data_TClient_uploadfiles;\n  if ( *(int *)(data_TClient_uploadfiles + 12) > 0 )\n  {\n    v3 = *((int **)this + 39);\n    v4 = 0;\n    if ( v3 )\n      v4 = *v3;\n    if ( v4 + (*(_DWORD *)(*((_QWORD *)this + 40) + 12LL) << 10) <= 0xFFFF )\n    {\n      v5 = this;\n      v6 = *(_QWORD *)plt_TList_operator_index_int(data_TClient_uploadfiles, 0);\n      v17 = 0;\n      plt_TString_operator_assign_TString_const(&v17, v6 + 8);\n      plt_TString_operator_lshift_TString_const(&v17, v6);\n      v8 = plt_TFiles_fileSize_TString_const((TFiles *)&v17, v7);\n      v9 = *(_DWORD *)(v6 + 16);\n      v10 = v8 - v9;\n      if ( v8 >= v9 + 32000 )\n        v10 = 32000;\n      if ( v10 < v8 && !v9 )\n      {\n        *(_BYTE *)(v6 + 20) = 1;\n        plt_TClient_sendUploadStart_TString_const(v5, (const TString *)v6);\n      }\n      v11 = (_DWORD *)plt_operator_new_ulong__2(0x10u);\n      v12 = (const TString *)(v11 + 2);\n      v13 = *(_DWORD *)(v6 + 16);\n      *v11 = 0;\n      v11[1] = 0;\n      v14 = v11;\n      *((_QWORD *)v11 + 1) = 0;\n      ++cstream;\n      plt_TStream_LoadFromFile_TString_const_int_int((TStream *)v11, (const TString *)&v17, v13, v10);\n      plt_TClient_sendSaveFile_TString_const_int_TString_const(v5, (const TString *)v6, *(_DWORD *)(v6 + 16), v12);\n      --cstream;\n      plt_TString_clear_void(v12);\n      plt_operator_delete_void__2(v14);\n      v15 = v10 + *(_DWORD *)(v6 + 16);\n      *(_DWORD *)(v6 + 16) = v15;\n      if ( v8 <= v15 )\n      {\n        plt_TList_Remove_void((TList *)data_TClient_uploadfiles, (void *)v6);\n        if ( *(_BYTE *)(v6 + 20) )\n          plt_TClient_sendUploadEnd_TString_const(v5, (const TString *)v6);\n        plt_TString_clear_void((TString *)(v6 + 8));\n        plt_TString_clear_void((TString *)v6);\n        plt_operator_delete_void__2((void *)v6);\n      }\n      plt_TString_clear_void((TString *)&v17);\n      result = &data_TGameEnvironment_universe;\n      v16 = (TGraalVar *)data_TGameEnvironment_universe;\n      if ( data_TGameEnvironment_universe )\n      {\n        v17 = 0;\n        plt_TString_operator_lshift_char_const((int)&v17, \"onFilesUploaded\");\n        plt_TGraalVar_invokeEvent_TString_const(v16, (const TString *)&v17);\n        return (__int64 *)plt_TString_clear_void((TString *)&v17);\n      }\n    }\n  }\n  return result;\n}\n",
+      "code_bytes": 2716,
+      "code_sha256": "3995c777cc76cdc9d42d307a3ca6babde526d92b6024ea1971044edb44bef272",
+      "function_end": "0x1e93a0",
+      "function_start": "0x1e9198",
+      "name": "TClient_uploadFilesToServer_void",
+      "role": "upload queue sender"
+    },
+    {
+      "address": "0x200d44",
+      "callers": [
+        {
+          "caller": "0xdea10",
+          "caller_name": "plt_THTTPRequest_extractHTTPHostPortFile_TString_const_TString_int_TString_bool",
+          "callsite": "0xdea1c"
+        }
+      ],
+      "code": "__int64 __fastcall THTTPRequest_extractHTTPHostPortFile_TString_const_TString_int_TString_bool(\n        THTTPRequest *this,\n        const TString *a2,\n        TString *a3,\n        TString *a4,\n        TString *a5,\n        bool *a6)\n{\n  int v11; // w20\n  unsigned __int8 v12; // w0\n  int v13; // w23\n  unsigned int v14; // w20\n  unsigned __int8 v15; // w24\n  int v16; // w0\n  int v17; // w1\n  int v18; // w21\n  int v20; // w1\n  int v21; // w0\n  int v22; // [xsp+60h] [xbp-20h]\n  __int64 v23; // [xsp+70h] [xbp-10h] BYREF\n  __int64 v24; // [xsp+78h] [xbp-8h] BYREF\n\n  plt_TString_clear_void(a2);\n  plt_TString_clear_void(a4);\n  v24 = 0;\n  plt_TString_operator_lshift_char_const((int)&v24, \"http://\");\n  v11 = (unsigned __int8)plt_TString_starts_TString_const(this, (const TString *)&v24);\n  plt_TString_clear_void((TString *)&v24);\n  v24 = 0;\n  plt_TString_operator_lshift_char_const((int)&v24, \"https://\");\n  v12 = plt_TString_starts_TString_const(this, (const TString *)&v24);\n  v13 = v12;\n  v14 = v12 | v11;\n  v15 = v12;\n  plt_TString_clear_void((TString *)&v24);\n  if ( !v14 )\n  {\n    *(_DWORD *)a3 = -1;\n    return v14;\n  }\n  if ( v13 )\n    v16 = 443;\n  else\n    v16 = 80;\n  if ( v13 )\n    v17 = 8;\n  else\n    v17 = 7;\n  *(_DWORD *)a3 = v16;\n  plt_TString_subString_int(&v23, this, v17);\n  v22 = plt_TString_indexOf_char((TString *)&v23, 58);\n  v18 = plt_TString_indexOf_char((TString *)&v23, 47);\n  if ( v22 < 0 )\n  {\n    if ( v18 < 0 )\n    {\n      plt_TString_operator_assign_TString_const(a2, &v23);\n      goto LABEL_13;\n    }\n  }\n  else if ( v22 < v18 || v18 < 0 )\n  {\n    plt_TString_subString_int_int(&v24, (TString *)&v23, 0, v22);\n    plt_TString_operator_assign_TString_const(a2, &v24);\n    plt_TString_clear_void((TString *)&v24);\n    v20 = v22 + 1;\n    if ( v18 < 0 )\n      plt_TString_subString_int(&v24, (TString *)&v23, v20);\n    else\n      plt_TString_subString_int_int(&v24, (TString *)&v23, v20, v18);\n    *(_DWORD *)a3 = plt_strtoint_TString_const((const TString *)&v24);\n    plt_TString_clear_void((TString *)&v24);\n    if ( *(int *)a3 <= 0 )\n    {\n      if ( v13 )\n        v21 = 443;\n      else\n        v21 = 80;\n      *(_DWORD *)a3 = v21;\n      if ( v18 < 0 )\n        goto LABEL_13;\n    }\n    else if ( v18 < 0 )\n    {\n      goto LABEL_13;\n    }\n    goto LABEL_12;\n  }\n  plt_TString_subString_int_int(&v24, (TString *)&v23, 0, v18);\n  plt_TString_operator_assign_TString_const(a2, &v24);\n  plt_TString_clear_void((TString *)&v24);\nLABEL_12:\n  plt_TString_subString_int(&v24, (TString *)&v23, v18);\n  plt_TString_operator_assign_TString_const(a4, &v24);\n  plt_TString_clear_void((TString *)&v24);\nLABEL_13:\n  *(_BYTE *)a5 = v15;\n  plt_TString_clear_void((TString *)&v23);\n  return v14;\n}\n",
+      "code_bytes": 2711,
+      "code_sha256": "9300262b9eba63af0464d50d05ac98bcdb2b7462e1a18153fc06f555e0ccbc95",
+      "function_end": "0x200f98",
+      "function_start": "0x200d44",
+      "name": "THTTPRequest_extractHTTPHostPortFile_TString_const_TString_int_TString_bool",
+      "role": "HTTP URL parser"
+    },
+    {
+      "address": "0x1ffa90",
+      "callers": [],
+      "code": "// Inferred semantic label: builds a static HTTP_<host>_<port>_<suffix> key, reuses an existing THTTPRequest or creates one, and starts a pending request when needed.\nTHTTPRequest *__fastcall THTTPRequest_findOrCreateStatic(const TString *a1, int a2, const TString *a3)\n{\n  __int64 v6; // x0\n  int v7; // w0\n  __int64 v8; // x0\n  int v9; // w0\n  __int64 v10; // x0\n  TProperties *v11; // x19\n  TGraalVar *GlobalVar_TString_const; // x0\n  THTTPRequest *v13; // x0\n  THTTPRequest *v14; // x19\n  __int64 v16; // [xsp+40h] [xbp-10h] BYREF\n  __int64 v17; // [xsp+48h] [xbp-8h] BYREF\n\n  v16 = 0;\n  plt_TString_operator_lshift_char_const((int)&v16, &byte_2DCE08);\n  v17 = 0;\n  v6 = plt_TString_operator_lshift_char_const((int)&v17, \"HTTP_\");\n  plt_TString_operator_lshift_TString_const(v6, a1);\n  v8 = plt_TString_operator_lshift_char_const(v7, \"_\");\n  v9 = plt_TString_operator_lshift_int(v8);\n  v10 = plt_TString_operator_lshift_char_const(v9, \"_\");\n  plt_TString_operator_lshift_TString_const(v10, a3);\n  v11 = (TProperties *)THTTPRequest_properties;\n  GlobalVar_TString_const = (TGraalVar *)plt_TScriptUniverse_getGlobalVar_TString_const(\n                                           (TScriptUniverse *)&v17,\n                                           (const TString *)&THTTPRequest_properties);\n  v13 = (THTTPRequest *)plt_dynamicCastVar_TProperties_TGraalVar(v11, GlobalVar_TString_const);\n  if ( v13 )\n  {\n    v14 = v13;\n    if ( *((_BYTE *)v13 + 240) )\n      plt_THTTPRequest_setSendRequest_void(v13);\n  }\n  else if ( data_THTTPRequest_chttprequests > 9999 )\n  {\n    v14 = nullptr;\n  }\n  else\n  {\n    v14 = (THTTPRequest *)plt_operator_new_ulong__2(0x148u);\n    plt_THTTPRequest_THTTPRequest_TString_const_TString_const_int_TString_const_TString_const_bool(\n      v14,\n      (const TString *)&v17,\n      a1,\n      a2,\n      a3,\n      (const TString *)&v16,\n      a2 == 443);\n    plt_TScriptUniverse_addStaticObject_TGraalVar((TScriptUniverse *)data_TGameEnvironment_universe, v14);\n  }\n  plt_TString_clear_void((TString *)&v17);\n  plt_TString_clear_void((TString *)&v16);\n  return v14;\n}\n",
+      "code_bytes": 2087,
+      "code_sha256": "688c0d0929b8cd2ac2c6d7b04cfa1d188f62de85e231d4d8ea754ca2503d561b",
+      "function_end": "0x1ffbd8",
+      "function_start": "0x1ffa90",
+      "name": "THTTPRequest_findOrCreateStatic",
+      "role": "host-port HTTP request factory"
+    },
+    {
+      "address": "0x200f98",
+      "callers": [],
+      "code": "// Inferred semantic label: parses an HTTP URL, builds its static request key, reuses or creates a THTTPRequest, and stores it in the script universe.\nTHTTPRequest *__fastcall THTTPRequest_findOrCreateFromUrl(\n        const TString *a1,\n        __int64 a2,\n        __int64 a3,\n        __int64 a4,\n        __int64 a5,\n        bool *a6)\n{\n  int v7; // w23\n  bool v8; // w25\n  __int64 v9; // x0\n  int v10; // w0\n  __int64 v11; // x0\n  int v12; // w0\n  __int64 v13; // x0\n  TProperties *v14; // x19\n  TGraalVar *GlobalVar_TString_const; // x0\n  THTTPRequest *v16; // x0\n  THTTPRequest *v17; // x19\n  bool v19; // [xsp+53h] [xbp-1Dh] BYREF\n  int v20; // [xsp+54h] [xbp-1Ch] BYREF\n  __int64 v21; // [xsp+58h] [xbp-18h] BYREF\n  int v22[2]; // [xsp+60h] [xbp-10h] BYREF\n  __int64 v23; // [xsp+68h] [xbp-8h] BYREF\n\n  v21 = 0;\n  *(_QWORD *)v22 = 0;\n  if ( (unsigned __int8)plt_THTTPRequest_extractHTTPHostPortFile_TString_const_TString_int_TString_bool(\n                          a1,\n                          (const TString *)&v21,\n                          (TString *)&v20,\n                          v22,\n                          (TString *)&v19,\n                          a6) )\n  {\n    v7 = v20;\n    v8 = v19;\n    v23 = 0;\n    v9 = plt_TString_operator_lshift_char_const((int)&v23, \"HTTP_\");\n    plt_TString_operator_lshift_TString_const(v9, &v21);\n    v11 = plt_TString_operator_lshift_char_const(v10, \"_\");\n    v12 = plt_TString_operator_lshift_int(v11);\n    v13 = plt_TString_operator_lshift_char_const(v12, \"_\");\n    plt_TString_operator_lshift_TString_const(v13, v22);\n    v14 = (TProperties *)THTTPRequest_properties;\n    GlobalVar_TString_const = (TGraalVar *)plt_TScriptUniverse_getGlobalVar_TString_const(\n                                             (TScriptUniverse *)&v23,\n                                             (const TString *)&THTTPRequest_properties);\n    v16 = (THTTPRequest *)plt_dynamicCastVar_TProperties_TGraalVar(v14, GlobalVar_TString_const);\n    if ( v16 )\n    {\n      v17 = v16;\n      if ( *((_BYTE *)v16 + 240) )\n        plt_THTTPRequest_setSendRequest_void(v16);\n    }\n    else if ( data_THTTPRequest_chttprequests > 9999 )\n    {\n      v17 = nullptr;\n    }\n    else\n    {\n      v17 = (THTTPRequest *)plt_operator_new_ulong__2(0x148u);\n      plt_THTTPRequest_THTTPRequest_TString_const_TString_const_int_TString_const_TString_const_bool(\n        v17,\n        (const TString *)&v23,\n        (const TString *)&v21,\n        v7,\n        (const TString *)v22,\n        a1,\n        v8);\n      plt_TScriptUniverse_addStaticObject_TGraalVar((TScriptUniverse *)data_TGameEnvironment_universe, v17);\n    }\n    plt_TString_clear_void((TString *)&v23);\n  }\n  else\n  {\n    v17 = nullptr;\n  }\n  plt_TString_clear_void((TString *)v22);\n  plt_TString_clear_void((TString *)&v21);\n  return v17;\n}\n",
+      "code_bytes": 2805,
+      "code_sha256": "48b3eb59f9f9b06464b3d747cd6f4acd650ff8e71dc27fd6481a3bf5dfa26663",
+      "function_end": "0x20110c",
+      "function_start": "0x200f98",
+      "name": "THTTPRequest_findOrCreateFromUrl",
+      "role": "URL HTTP request factory"
+    },
+    {
+      "address": "0x2015e8",
+      "callers": [],
+      "code": "// Inferred semantic label: rejects the connector pseudo-file and disallowed extensions, then requests the stripped filename as a game file.\n__int64 __fastcall THTTPRequest_requestGameFileIfAllowed(\n        THTTPRequest *a1,\n        TFiles *a2,\n        unsigned int a3,\n        unsigned __int8 a4)\n{\n  unsigned int v7; // w23\n  const TString *v8; // x1\n  __int64 v9; // x21\n  TStringList *v10; // x25\n  bool v11; // w4\n  int *v13; // [xsp+40h] [xbp-10h] BYREF\n  __int64 v14; // [xsp+48h] [xbp-8h] BYREF\n\n  v7 = a4;\n  if ( (unsigned __int8)plt_operator_assign_TString_const_char_const((int)a2, \"connector\") )\n    return 0;\n  v9 = 0;\n  plt_TFiles_extractFilename_TString_const((__int64 *)&v13, a2, v8);\n  v10 = (TStringList *)data_TFileScripting_disallowedfileextensions;\n  plt_TFiles_extractFileExt_TString_const(\n    &v14,\n    (TFiles *)&v13,\n    (const TString *)&data_TFileScripting_disallowedfileextensions);\n  LODWORD(v10) = plt_TStringList_indexOf_TString_const(v10, (const TString *)&v14);\n  plt_TString_clear_void((TString *)&v14);\n  if ( ((unsigned int)v10 & 0x80000000) != 0 && v13 && *v13 > 0 )\n    v9 = plt_THTTPRequest_requestURLAsGameFile_TString_const_TString_const_uint_bool(\n           a1,\n           (const TString *)&v13,\n           (const TString *)a3,\n           v7,\n           v11);\n  plt_TString_clear_void((TString *)&v13);\n  return v9;\n}\n",
+      "code_bytes": 1362,
+      "code_sha256": "bc9763d240649c600f6a6a6ae1d5b5116f4a238dc82529a46845a6e97bad920b",
+      "function_end": "0x2016e4",
+      "function_start": "0x2015e8",
+      "name": "THTTPRequest_requestGameFileIfAllowed",
+      "role": "game-file URL policy callback"
+    },
+    {
+      "address": "0x156cb4",
+      "callers": [],
+      "code": "__int64 __fastcall GSFunctionsClient_script_openurl(__int64 result)\n{\n  if ( data_TWindow_mainwindow )\n    return (*(__int64 (__fastcall **)(__int64, __int64, _QWORD))(*(_QWORD *)data_TWindow_mainwindow + 472LL))(\n             data_TWindow_mainwindow,\n             result,\n             0);\n  return result;\n}\n",
+      "code_bytes": 309,
+      "code_sha256": "7627c09977fa5e0768936720922fda249bffe399699974b2003039bb7aba3079",
+      "function_end": "0x156cf0",
+      "function_start": "0x156cb4",
+      "name": "GSFunctionsClient_script_openurl",
+      "role": "external URL callback"
+    },
+    {
+      "address": "0x158b80",
+      "callers": [],
+      "code": "__int64 __fastcall GSFunctionsClient_script_opengraalurl(TString *a1)\n{\n  __int64 result; // x0\n\n  result = Adventure;\n  if ( Adventure )\n    return plt_TAdventure_openSecureURL_TString_const((TAdventure *)Adventure, a1);\n  return result;\n}\n",
+      "code_bytes": 241,
+      "code_sha256": "054a3e699623a7a7d3cc4c144a366136d912b35061b48d6ad5a94288bc5f792b",
+      "function_end": "0x158b9c",
+      "function_start": "0x158b80",
+      "name": "GSFunctionsClient_script_opengraalurl",
+      "role": "server-mediated URL callback"
+    },
+    {
+      "address": "0x158e50",
+      "callers": [],
+      "code": "__int64 __fastcall GSFunctionsClient_script_loadclass(TString *a1)\n{\n  __int64 result; // x0\n\n  result = data_TGameEnvironment_universe;\n  if ( data_TGameEnvironment_universe )\n  {\n    if ( *(int *)(*(_QWORD *)(data_TGameEnvironment_universe + 144) + 32LL) <= 9999 )\n      return plt_TScriptUniverse_getClassAndCreate_TString_const_bool(\n               (TScriptUniverse *)data_TGameEnvironment_universe,\n               a1,\n               1);\n  }\n  return result;\n}\n",
+      "code_bytes": 465,
+      "code_sha256": "2c5f84aceca0bd1d29e17c3ad4d325564bebc4c28e95b9e7fa6ebd2b9a6877a3",
+      "function_end": "0x158e84",
+      "function_start": "0x158e50",
+      "name": "GSFunctionsClient_script_loadclass",
+      "role": "dynamic class request callback"
+    },
+    {
+      "address": "0x22c260",
+      "callers": [
+        {
+          "caller": "0xdcb70",
+          "caller_name": "plt_TScriptUniverse_getClassAndCreate_TString_const_bool",
+          "callsite": "0xdcb74"
+        },
+        {
+          "caller": "0xdcb70",
+          "caller_name": "plt_TScriptUniverse_getClassAndCreate_TString_const_bool",
+          "callsite": "0xdcb7c"
+        }
+      ],
+      "code": "_DWORD *__fastcall TScriptUniverse_getClassAndCreate_TString_const_bool(\n        TScriptUniverse *this,\n        const TString *a2,\n        unsigned __int8 a3)\n{\n  THashList *v5; // x19\n  int v6; // w22\n  unsigned int Hashcode_TString_const; // w0\n  __int64 Object_uint_TString_const; // x0\n  _DWORD *v9; // x19\n  TServerList *v11; // x0\n  int v12; // w24\n  __int64 v13; // [xsp+48h] [xbp-8h] BYREF\n\n  v5 = *((THashList **)this + 18);\n  v6 = a3;\n  Hashcode_TString_const = plt_THashList_getHashcode_TString_const(a2, a2);\n  Object_uint_TString_const = plt_THashList_getObject_uint_TString_const(v5, Hashcode_TString_const, a2);\n  v9 = (_DWORD *)Object_uint_TString_const;\n  if ( Object_uint_TString_const )\n  {\n    if ( v6\n      && *(_BYTE *)(Object_uint_TString_const + 225)\n      && (plt_TStringList_indexOf_TString_const((TStringList *)requestedclassscripts, a2) & 0x80000000) != 0 )\n    {\nLABEL_6:\n      v13 = 0;\n      plt_TString_operator_lshift_char_const((int)&v13, &byte_2DCE08);\n      plt_TScript_loadScriptEncrypted_int_TString_const_uint((TScript *)v9, -1, (const TString *)&v13, 0);\n      plt_TString_clear_void((TString *)&v13);\n    }\n  }\n  else\n  {\n    v9 = (_DWORD *)plt_operator_new_ulong__2(0xE8u);\n    v11 = plt_TScript_TScript_TString_const((TScript *)v9, a2);\n    v9[46] = plt_TServerList_getServerPrivileges_void(v11);\n    v13 = 0;\n    plt_TString_operator_lshift_char_const((int)&v13, \"gani::\");\n    v12 = (unsigned __int8)plt_TString_starts_TString_const((TString *)(v9 + 2), (const TString *)&v13);\n    plt_TString_clear_void((TString *)&v13);\n    if ( v12 )\n      v9[46] = 0;\n    plt_THashList_addObject_THashListObject(*((THashList **)this + 18), (THashListObject *)v9);\n    if ( v6 && (plt_TStringList_indexOf_TString_const((TStringList *)requestedclassscripts, a2) & 0x80000000) != 0 )\n      goto LABEL_6;\n  }\n  return v9;\n}\n",
+      "code_bytes": 1852,
+      "code_sha256": "9cb1d3d8dc2245fbc0da1f5e077a51ccac4c2145aa95fbb98b781333f4fdd5fe",
+      "function_end": "0x22c3cc",
+      "function_start": "0x22c260",
+      "name": "TScriptUniverse_getClassAndCreate_TString_const_bool",
+      "role": "class lookup and request"
+    },
+    {
+      "address": "0x22cc88",
+      "callers": [
+        {
+          "caller": "0xd4c10",
+          "caller_name": "plt_TScriptUniverse_addClassScript_TString_const_TString_const",
+          "callsite": "0xd4c14"
+        },
+        {
+          "caller": "0xd4c10",
+          "caller_name": "plt_TScriptUniverse_addClassScript_TString_const_TString_const",
+          "callsite": "0xd4c1c"
+        }
+      ],
+      "code": "__int64 __fastcall TScriptUniverse_addClassScript_TString_const_TString_const(\n        TScriptUniverse *this,\n        const TString *a2,\n        const TString *a3)\n{\n  TScript *TString_const_bool; // x0\n  int v7; // w19\n  TScript *v8; // x20\n  TGraalVar *v9; // x22\n  __int64 v10; // x3\n  __int64 v12; // [xsp+38h] [xbp-8h] BYREF\n\n  if ( (plt_TStringList_indexOf_TString_const((TStringList *)requestedclassscripts, a2) & 0x80000000) != 0 )\n    plt_TStringList_Add_TString_const((TStringList *)requestedclassscripts, a2);\n  TString_const_bool = (TScript *)plt_TScriptUniverse_getClassAndCreate_TString_const_bool(this, a2, 1);\n  v7 = *((_DWORD *)TString_const_bool + 46);\n  v8 = TString_const_bool;\n  if ( v7 <= (int)plt_TServerList_getServerPrivileges_void(TString_const_bool) )\n    plt_TScript_setStream_TString_const(v8, a3);\n  *((_BYTE *)v8 + 224) = 0;\n  v9 = (TGraalVar *)data_TGameEnvironment_universe;\n  if ( data_TGameEnvironment_universe )\n  {\n    v12 = 0;\n    plt_TString_operator_lshift_char_const((int)&v12, \"onClassLoaded\");\n    if ( *(_QWORD *)a2 )\n      v10 = *(_QWORD *)a2 + 8LL;\n    else\n      v10 = TString_dummystr;\n    plt_TGraalVar_invokeEvent_TString_const_char_const(v9, (const TString *)&v12, \"s\", v10);\n    plt_TString_clear_void((TString *)&v12);\n  }\n  v12 = 0;\n  plt_TString_operator_lshift_char_const((int)&v12, \"onClassLoaded\");\n  plt_TGraalVar_invokeEvent_TString_const(v8, (const TString *)&v12);\n  return plt_TString_clear_void((TString *)&v12);\n}\n",
+      "code_bytes": 1479,
+      "code_sha256": "465716249e3b76a8b6b32879f6cadac4b28533f118bfcfdc0d7867895dc3d5c6",
+      "function_end": "0x22cd98",
+      "function_start": "0x22cc88",
+      "name": "TScriptUniverse_addClassScript_TString_const_TString_const",
+      "role": "class script installation"
+    },
+    {
+      "address": "0x216de8",
+      "callers": [
+        {
+          "caller": "0xda5e0",
+          "caller_name": "plt_TScript_loadScriptEncrypted_int_TString_const_uint",
+          "callsite": "0xda5e4"
+        },
+        {
+          "caller": "0xda5e0",
+          "caller_name": "plt_TScript_loadScriptEncrypted_int_TString_const_uint",
+          "callsite": "0xda5ec"
+        }
+      ],
+      "code": "__int64 __fastcall TScript_loadScriptEncrypted_int_TString_const_uint(\n        __int64 this,\n        const TString *a2,\n        const TString *a3,\n        const TString *a4)\n{\n  const TString *v4; // x23\n  __int64 v5; // x19\n  bool *v6; // x5\n  int v7; // w20\n  TGraalVar *v8; // x23\n  __int64 v9; // x3\n  __int64 v10; // x3\n  TClient *v11; // x20\n  unsigned int CodedScriptChecksum_TString_const; // w0\n  int v14; // [xsp+50h] [xbp-30h]\n  _BYTE v16[9]; // [xsp+67h] [xbp-19h] BYREF\n  __int64 v17; // [xsp+70h] [xbp-10h] BYREF\n  __int64 v18; // [xsp+78h] [xbp-8h] BYREF\n\n  if ( data_TClient_client )\n  {\n    v4 = (const TString *)(this + 8);\n    v5 = this;\n    v14 = (int)a3;\n    plt_TScript_getClassCodeFilename_TString_const((__int64 *)&v16[1], (TScript *)(this + 8), a2);\n    plt_TEncryption_loadCodedScript_TString_const_int_TString_const_uint_bool(\n      &v17,\n      (TEncryption *)&v16[1],\n      a2,\n      v14,\n      a4,\n      (unsigned int)v16,\n      v6);\n    if ( v16[0] )\n    {\n      v7 = *(_DWORD *)(v5 + 184);\n      if ( v7 <= (int)plt_TServerList_getServerPrivileges_void((TServerList *)v16[0]) )\n        plt_TScript_setStream_TString_const((TScript *)v5, (const TString *)&v17);\n      *(_BYTE *)(v5 + 224) = 0;\n      v8 = (TGraalVar *)data_TGameEnvironment_universe;\n      if ( data_TGameEnvironment_universe )\n      {\n        v18 = 0;\n        plt_TString_operator_lshift_char_const((int)&v18, \"onClassLoaded\");\n        v9 = *(_QWORD *)(v5 + 8);\n        if ( v9 )\n          v10 = v9 + 8;\n        else\n          v10 = TString_dummystr;\n        plt_TGraalVar_invokeEvent_TString_const_char_const(v8, (const TString *)&v18, \"s\", v10);\n        plt_TString_clear_void((TString *)&v18);\n      }\n      v18 = 0;\n      plt_TString_operator_lshift_char_const((int)&v18, \"onClassLoaded\");\n      plt_TGraalVar_invokeEvent_TString_const((TGraalVar *)v5, (const TString *)&v18);\n      plt_TString_clear_void((TString *)&v18);\n    }\n    else\n    {\n      if ( (plt_TStringList_indexOf_TString_const((TStringList *)requestedclassscripts, v4) & 0x80000000) == 0 )\n      {\n        plt_TString_clear_void((TString *)&v17);\n        return plt_TString_clear_void((TString *)&v16[1]);\n      }\n      plt_TStringList_Add_TString_const((TStringList *)requestedclassscripts, v4);\n      v11 = (TClient *)data_TClient_client;\n      *(_BYTE *)(v5 + 224) = (unsigned __int8)&dword_0 + 1;\n      CodedScriptChecksum_TString_const = plt_TEncryption_getCodedScriptChecksum_TString_const(\n                                            (TEncryption *)&v16[1],\n                                            (const TString *)((char *)&dword_0 + 1));\n      plt_TClient_sendWantClassScript_TString_const_uint(v11, v4, CodedScriptChecksum_TString_const);\n    }\n    *(_BYTE *)(v5 + 225) = 0;\n    plt_TString_clear_void((TString *)&v17);\n    return plt_TString_clear_void((TString *)&v16[1]);\n  }\n  return this;\n}\n",
+      "code_bytes": 2879,
+      "code_sha256": "1f333c47685cf87fe4c7a6c15263aaf923e4592fb46cf777a29cdb0a5dafc21c",
+      "function_end": "0x216fa0",
+      "function_start": "0x216de8",
+      "name": "TScript_loadScriptEncrypted_int_TString_const_uint",
+      "role": "encrypted class script loader"
+    }
+  ],
+  "interpretation": [
+    "The embedded script runtime is a privileged native bridge. Its security depends on package signing and script provenance as well as on individual callback policies.",
+    "The strongest new issue is an inconsistent local-file policy: several ordinary callbacks sanitize names, while adventure file-content and upload callbacks do not show the same gate.",
+    "The report records capability reachability and static limits. It does not claim that a production server can deliver an untrusted script or that any external endpoint was contacted."
+  ],
+  "network_contacted": false,
+  "schema": "libqplay.original-script-capability-review.v1",
+  "scope": "read-only Hex-Rays export of original 1.8 script-to-native file, upload, HTTP, protocol, and class-loading boundaries",
+  "script_capability_groups": [
+    {
+      "entries": [
+        {
+          "callback": "0xfbda4",
+          "policy_observation": "The callback loads the supplied filename directly through TStream_LoadFromFile.",
+          "script_name": "adventure_getfilecontent"
+        },
+        {
+          "callback": "0xfbbc8",
+          "policy_observation": "The callback writes the supplied filename directly through TStream_SaveToFile.",
+          "script_name": "adventure_setfilecontent"
+        },
+        {
+          "callback": "0xfc7ec",
+          "policy_observation": "The callback first resolves the name through TFileScripting_getScriptAccessFilename.",
+          "script_name": "fileexists"
+        },
+        {
+          "callback": "0xfc740",
+          "policy_observation": "Path-like names are resolved through TFileScripting_getScriptAccessFilename; resource names use the game-resource resolver.",
+          "script_name": "filesize"
+        },
+        {
+          "callback": "0xfc4b0",
+          "policy_observation": "The callback resolves a policy-controlled path, checks existence, then calls the generic delete helper.",
+          "script_name": "deletefile"
+        },
+        {
+          "callback": "0xfca80",
+          "policy_observation": "The callback uses the script access and write-folder helpers before extracting recognized archive resources.",
+          "script_name": "decompressfile"
+        }
+      ],
+      "name": "file-content-access",
+      "table_owner": "TFileScripting_initStaticScriptVars_void",
+      "table_va": "0x376bd0"
+    },
+    {
+      "entries": [
+        {
+          "callback": "0x157d20",
+          "policy_observation": "The wrapper calls TClient_uploadFile directly without the normal access-filename helper.",
+          "script_name": "adventure_uploadfile"
+        },
+        {
+          "callback": "0x157d3c",
+          "policy_observation": "The normal wrapper checks the one-shot allowed-upload list or resolves the name through the script access helper.",
+          "script_name": "uploadfile"
+        }
+      ],
+      "limits": [
+        "TClient_uploadFile rejects a reported file size above 20,000,000 bytes before queueing.",
+        "TClient_uploadFilesToServer reads queued files in chunks of at most 32,000 bytes and sends them to the current game connection.",
+        "The size limit is not a path allowlist and the direct adventure wrapper does not establish a local filename root."
+      ],
+      "name": "file-upload",
+      "table_owner": "gsfunctions_client_initStaticScriptVars_void",
+      "table_va": "0x378c28"
+    },
+    {
+      "entries": [
+        {
+          "callback": "0x1ffa90",
+          "policy_observation": "The factory accepts a supplied host, port, and path and creates or reuses a request object.",
+          "script_name": "requesthttp"
+        },
+        {
+          "callback": "0x200f98",
+          "policy_observation": "The URL parser accepts http:// and https:// forms and the factory has no visible host allowlist.",
+          "script_name": "requesturl"
+        },
+        {
+          "callback": "0x2015e8",
+          "policy_observation": "This narrower path rejects the connector pseudo-file and blocked extensions before requesting the stripped filename as a game file.",
+          "script_name": "requesturlasgamefile"
+        }
+      ],
+      "limits": [
+        "The reviewed URL parser defaults ports to 80 or 443 and accepts a positive parsed port.",
+        "The request object count is capped at 10,000, but no destination allowlist is visible in these wrappers."
+      ],
+      "name": "HTTP-request-access",
+      "table_owner": "THTTPRequest_initStaticScriptVars_void",
+      "table_va": "0x385e10"
+    },
+    {
+      "entries": [
+        {
+          "callback": "0x1e9518",
+          "script_name": "sendraw"
+        },
+        {
+          "callback": "0x1e9540",
+          "script_name": "senddata"
+        },
+        {
+          "callback": "0x1eb964",
+          "script_name": "setsslparameters"
+        },
+        {
+          "callback": "0x1eb960",
+          "script_name": "setencryptionparsekey"
+        },
+        {
+          "callback": "0x1eb95c",
+          "script_name": "setencryptionout"
+        },
+        {
+          "callback": "0x1eb93c",
+          "script_name": "getpassword"
+        },
+        {
+          "callback": "0x1eba0c",
+          "script_name": "connecttogameserver"
+        }
+      ],
+      "name": "protocol-and-class-bridge",
+      "observation": "The connector script object has a native protocol bridge with raw-send, encryption, TLS-parameter, connection, and password callbacks. Its trust boundary is the signed script-package verifier, not a small capability sandbox.",
+      "table_owner": "TClientProperties_TClientProperties_void",
+      "table_va": "0x3842c0"
+    },
+    {
+      "entries": [
+        {
+          "callback": "0x158e50",
+          "policy_observation": "The callback permits class creation while the universe class count is at most 9,999.",
+          "script_name": "loadclass"
+        }
+      ],
+      "name": "dynamic-class-loading",
+      "positive_controls": [
+        "TScriptUniverse_getClassAndCreate uses requestedclassscripts to avoid duplicate requests.",
+        "TScriptUniverse_addClassScript compares a class privilege value against the current server privilege before installing its stream.",
+        "TScript_loadScriptEncrypted requests a coded class script and uses the encrypted-script checksum path when the local class is absent."
+      ],
+      "table_owner": "gsfunctions_client_initStaticScriptVars_void",
+      "table_va": "0x378c28"
+    }
+  ],
+  "scripts_executed": false,
+  "security_findings": [
+    {
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The adventure_getfilecontent callback passes its filename directly to TStream_LoadFromFile.",
+        "The adventure_setfilecontent callback passes its filename directly to TStream_SaveToFile.",
+        "Neither wrapper calls TFileScripting_getScriptAccessFilename or TFileScripting_AllowedFoldername, unlike the reviewed fileexists, filesize, deletefile, and decompressfile paths.",
+        "TStream_SaveToFile uses a normal writable fopen mode and treats an empty stream as a delete request when overwrite mode is selected."
+      ],
+      "id": "SCRIPT-001",
+      "impact": "An activated script can request reads or writes for paths accessible to the native process, subject to the Android application sandbox and filesystem permissions. This can expose local application data or alter existing files without the narrower path policy used by neighboring callbacks.",
+      "limits": "The finding is about a native capability boundary. The static pass did not prove that an attacker can supply an accepted script package, did not test path variants, and did not contact a server.",
+      "severity": "high",
+      "title": "Adventure file-content callbacks bypass the visible script path policy"
+    },
+    {
+      "confidence": "confirmed-static",
+      "evidence": [
+        "GSFunctionsClient_script_adventure_uploadfile calls TClient_uploadFile directly.",
+        "The separate uploadfile callback checks the allowed-upload list or resolves the filename through TFileScripting_getScriptAccessFilename before queueing.",
+        "TClient_uploadFile applies only a reported 20,000,000-byte size check, and TClient_uploadFilesToServer later opens the queued path and sends its contents in chunks."
+      ],
+      "id": "SCRIPT-002",
+      "impact": "A script with access to the direct callback can queue an accessible local file for upload to the current game server. The size ceiling limits one queued file but does not substitute for a local path policy.",
+      "limits": "The server-side acceptance and destination were not tested. The Android sandbox still constrains which files are readable, and no live endpoint was contacted.",
+      "severity": "high",
+      "title": "The adventure upload callback bypasses the normal filename gate"
+    },
+    {
+      "confidence": "confirmed-static",
+      "evidence": [
+        "THTTPRequest_extractHTTPHostPortFile accepts both http:// and https:// URLs and parses a supplied host, path, and positive port.",
+        "The requesthttp and requesturl factories create or reuse requests from those values without a visible host or private-network filter.",
+        "The requesturlasgamefile callback adds filename and extension checks, but the general HTTP callbacks are separate."
+      ],
+      "id": "SCRIPT-003",
+      "impact": "An activated script may be able to make the client contact arbitrary HTTP(S) destinations and expose request or response data through the script object. This is a device-side egress and data-access capability, not proof of a server-side request forgery.",
+      "limits": "The static pass did not execute a script or inspect every later request policy branch. Android network permission and the device network still govern reachability, and no external destination was contacted.",
+      "severity": "medium",
+      "title": "Script HTTP request factories have no visible destination allowlist"
+    }
+  ]
+}
