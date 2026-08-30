@@ -13,8 +13,11 @@ This is the short handoff view. The full reasoning and command history are in
 4. The archived connector body has valid framing and decrypts to a valid
    three-entry ZIP. Its RSA signature does not match the embedded public key,
    which is why the diagnostic replay uses an explicit test-only bypass.
-5. Lowercase legacy HTTP response headers are required by the old parser. A
-   corrected local replay reaches `Connected.`.
+5. The response parser lowercases header lines before matching them. Local
+   replay variants with lowercase or title-case names, and with either
+   `Connection: keep-alive` or `Connection: close`, all reached the game
+   responder. A no-`Content-Length` variant also worked when the local
+   responder half-closed the response after the body.
 6. The repaired x86_64 client completes the NewGraal `fd` and `fc` exchange,
    receives an encrypted login-success packet, and logs `Connected.`.
 7. Packet 178 causes the expected server-warp transition and a second game

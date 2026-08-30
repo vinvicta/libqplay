@@ -262,9 +262,11 @@ The practical order is:
 2. Replace the stale connector trust material only with a certificate chain
    obtained from an endpoint and service owner that the operator is authorized
    to test. Keep peer and hostname verification enabled.
-3. Reproduce the connector response with exact legacy headers and body framing
-   on loopback before attributing a failure to TLS. The old parser is strict
-   about some lowercase header spellings.
+3. Reproduce the connector response with exact body framing on loopback before
+   attributing a failure to TLS. IDA shows that the old parser lowercases
+   header lines before matching them, and local tests accepted title-case names
+   as well as lowercase names. Keep `Content-Length` or an intentional EOF
+   boundary so the body cannot be mistaken for a transport failure.
 4. Trace package signature verification from package input to
    `TClient_handleUpdatePackageDownloaded` before testing executable replacement.
 5. Exercise deep links, WebView messages, script paths, archive names, and

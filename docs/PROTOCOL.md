@@ -47,6 +47,18 @@ TServerList_login
 call `TSocketConnection_setVerifyGraalWebCert` at `0x20ab20` before the TLS
 handshake.
 
+The response parser is `THTTPRequest_preParseData_void` at ARM64 `0x201d68`.
+It lowercases each complete header line before checking the header name, so
+`content-length:` and `Content-Length:` are equivalent to this client. It
+records the body size from `Content-Length` when present and can also finish
+on EOF when the peer half-closes the response. It recognizes
+`connection: keep-alive` as a connection-reuse hint. In bounded local replays,
+ordinary title-case headers, `Connection: close`, and an omitted
+`Content-Length` all completed successfully. The replay tool still defaults
+to the original-looking lowercase names and keep-alive value, while its
+`--header-case`, `--connection-value`, and `--omit-content-length` options
+make these distinctions reproducible.
+
 ## 2. Connector response envelope
 
 The body is not a PNG despite the filename. It is a big-endian length wrapper:
