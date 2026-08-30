@@ -17,8 +17,9 @@ The machine-readable evidence is in
 `artifacts/original_security_callsite_review_20260830.json`. The first report
 is produced by `tools/audit_original_apk.py`. The second is exported directly
 from the original ARM64 IDA database by
-`tools/ida_export_original_security_callsite_review.py`. The Java WebView
-boundary review is summarized in
+`tools/ida_export_original_security_callsite_review.py`; it now also includes
+the update-package parser and resource path helpers. The Java WebView boundary
+review is summarized in
 `artifacts/original_dex_webview_review_20260830.json`.
 
 ## Executive assessment
@@ -186,7 +187,54 @@ The APK contains `res/raw/fabzat_com.crt`, whose subject is
 legacy material, not proof that the startup connector consumes it. It should
 not be treated as a current trust anchor.
 
+### Game-server TLS configuration
+
+The game connection has its own `TGraalConnection` SSL fields. The script
+callback `TClient_setSSLParameters_scriptCallback` at `0x1eb964` accepts an
+enable flag, protocol, cipher list, and encrypted certificate. It decrypts the
+certificate with the recovered `NakFpz15` DES key and stores the values. The
+later `TGraalConnection_connectToServer` call copies those fields into the new
+socket before it connects.
+
+The recovered source-level audit in `artifacts/game_server_tls.json` resolves
+the apparent contradiction in this code. The Classic branch sets `usessl=false`,
+the NewGraal `setSSLParameters` call is guarded by that flag, and the final
+value remains false. The certificate passed by the dormant path matches the
+first connector trust-bundle entry and expired on 2023-07-29, but this stale
+game-server material is not an active TLS blocker for the stock Classic branch.
+It remains relevant to other legacy modes or a modified script. The active
+connector HTTPS request still consumes the expired GraalWeb trust bundle.
+
 ## Update and file operations
+
+### Package manifest and path policy
+
+`TUpdatePackage_load_void` at `0x209fa4` loads a cached stream or a local
+package file as a line list, accepts the `GRPKG001` header, clears the previous
+package lists, and parses records including `NAME`, `FLAG`, `VERSION`,
+`PLATFORM`, `ACCOUNTS`, `MODE`, `SUBPACKAGE`, `FILE`, `DESCRIPTION`,
+`ISMAINEXECUTABLE`, `USECHECKSUM`, and `PROTECTOVERWRITE`. `SUBPACKAGE` records
+are restricted to `.gupd` entries and can start another download during the
+load. `FILE` records are filtered by platform, folder policy, and filename
+policy before the resulting path is stored.
+
+Package filenames are rooted below the user `updatepackages` directory. For a
+nonprivileged server, `getPackageFullFilename_TString_const` adds an escaped
+server-name component. The escape helper preserves a narrow filename alphabet
+and percent-encodes other bytes. The parser's protected-extension checks
+reject `.exe`, `.lexe`, `.bat`, and `.com` unless the package is privileged and
+also rejects a file identified as the configured base executable. The separate
+script policy has a broader blocked-extension table.
+
+Resource lookup is not a raw string concatenation in the reviewed path.
+`TResourceFunctions_getGameFile_TString_const_bool` resolves a registered
+resource and can request a download when its boolean argument allows it.
+`TResourceFunctions_getLevelFileResource_TString_const` checks path form and
+registered alternatives before returning a resource. `TFiles_fileExists` uses
+`stat` and returns true only for regular files. The reviewed subset contains no
+`realpath` or no-follow open operation, so symlink and canonicalization
+semantics still need a disposable-directory test. This is a review boundary,
+not a claim that arbitrary file access was proven.
 
 ### Executable replacement
 

@@ -300,7 +300,10 @@ request. `requestUpdatePackage_void` at ARM64 `0x209020` creates or loads
 `updatepackages/basepackage.gupd`. `TUpdatePackage_load` at `0x209fa4` parses
 the `GRPKG001` header and fields such as `NAME`, `VERSION`, `PLATFORM`,
 `SUBPACKAGE`, and `FILE`. A `SUBPACKAGE` entry starts another download during
-the load, while a `FILE` entry adds a file to the package's file list.
+the load, while a `FILE` entry adds a file to the package's file list after
+platform and path-policy checks. The focused security export now includes the
+parser, package path builder, resource lookup, and file-download gate alongside
+the update completion and uninstall callers.
 
 `TClient_sendRequestUpdatePackage` at `0x1f8e78` sends the package name,
 install separator, and one five-byte checksum per listed file. The normal file
@@ -351,13 +354,15 @@ hard-disk, OS, and Android ID values. The cookie loader reads
 folder. These are privacy and account-correlation surfaces rather than proof of
 code execution.
 
-The APK also has an effectively exported custom-scheme activity, a DEX-visible
-WebView JavaScript bridge, an expired `admin.fabzat.com` certificate resource,
-legacy CyaSSL cipher identifiers, and an embedded connector trust bundle whose
-earliest recovered certificate expired on 2023-07-29. All four packaged native
-libraries report non-executable stacks, GNU RELRO, and `BIND_NOW`. These facts
-are documented in `docs/SECURITY.md` with confidence limits so compatibility
-failures are not presented as confirmed vulnerabilities.
+The APK also has an effectively exported custom-scheme activity, separate
+JavaScript-enabled WebView surfaces, an expired `admin.fabzat.com` certificate
+resource, legacy CyaSSL cipher identifiers, and an embedded connector trust
+bundle whose earliest recovered certificate expired on 2023-07-29. The Java
+smali review shows that the game WebView and the bundled Bolts JSON metadata
+bridge are different paths. All four packaged native libraries report
+non-executable stacks, GNU RELRO, and `BIND_NOW`. These facts are documented in
+`docs/SECURITY.md` with confidence limits so compatibility failures are not
+presented as confirmed vulnerabilities.
 
 ## Corrected two-connection runtime trace
 
