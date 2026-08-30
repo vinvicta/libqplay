@@ -24,8 +24,6 @@ the title or loading image after network and resource work has completed.
 | Delayed TLS path audit | Recheck `O_NONBLOCK`, status 4 to 5 completion, `SO_ERROR`, and the status setter's SSL call in IDA | The delayed path does start CyaSSL through `TSocketConnection_setStatus_int`; no blocking-I/O repair is justified | False lead closed |
 | Longer connect poll | Change the x86_64 zero-second poll timeout to five seconds | The client still stayed on the splash screen | Not the complete cause |
 | HTTP transport redirect | Force the recognized HTTPS parser result to port 80 with SSL disabled | The local HTTP request was received, but transport alone did not advance the client | Not a repair |
-| Spectron endpoint audit | Compare the native connector fragments instead of reusing 1.8 host assumptions | Spectron selects `cong.quattroplay.com` and `cong2.quattroplay.com`, while paths and transport modes remain the same | Static finding, live status unknown |
-| Spectron local loopback package | Use target-specific trust, resolver, HTTPS-port, and fixed-key patches with `tools/build_spectron_loopback_apk.py` | The exact supplied APK built, aligned, and passed APK signature verification; no runtime claim was made because no emulator was connected for this build check | Private offline diagnostic only |
 | Native RSA path retained | Leave the RSA branch at its original bytes and use the saved response, which passes the native raw-digest check | The package-preserving ARM64 candidate retained original bytes `dc 00 00 35` and completed a fresh translated-ARM64 loopback replay without the RSA bypass | Verified local package test, live service still open |
 | RSA result bypass | Accept a response that fails the native package-signature check at ARM64 `0x22c5c8` or x86_64 `0x245009` | Used by the early replay before the raw wolfSSL format was identified. The saved archived fixture passes without it | Unnecessary for the saved fixture, diagnostic only for mismatched packages |
 | Controlled connector key | Replace the encrypted embedded key at ARM64 `0x2e1798` or x86_64 `0x3003d8` in a private library copy, then sign a local package with the matching test key | The generated 16,446-byte package passed the native wolfSSL raw-digest RSA check without bypassing the result branch | Diagnostic only |
@@ -73,15 +71,6 @@ The matching package has SHA-256
 The private test key is not committed, and no runtime APK using this key was
 treated as a production build.
 
-The Spectron package has its own checked offset map. The target trust bundle is
-at `0x2ea9e0`, the resolver entry is at `0x20c20c`, and the two HTTPS port
-instructions are at `0x2065e0` and `0x206764`. Its outgoing-key diagnostic
-uses the 128-byte zero-filled cave at `0x1c4000` and the target
-`setEncryptionOut` entry at `0x202fe8`. These offsets are guarded against the
-exact target library hash and are not interchangeable with the 1.8 values.
-The target-specific plan and byte guards are recorded in
-`artifacts/spectron_loopback_patch_audit_20260828.json`.
-
 ## Loading-state diagnostics
 
 | Test | Change | Result | Status |
@@ -91,8 +80,6 @@ The target-specific plan and byte guards are recorded in
 | Original-stream script clear plus native startup clear | Combine the direct script patch with the existing branch edit at ARM64 `0x15ca7c` | The same script and native chain reached the map, level files, image path, heartbeats, and a translated-ARM64 world/HUD screenshot | Historical combined diagnostic |
 | Non-premium branch with original script | Change the conditional at ARM64 `0x15ca7c` so the existing clear at `0x15cac8` runs, while serving the original connector stream unchanged | The translated ARM64 client rendered the tiled world, HUD, and status icons with the exact `.gmap` fixture. No script-level loading clear was present | Leading isolated local candidate |
 | Stock premium branch with original script | Restore the original `B.LE` bytes at ARM64 `0x15ca7c` with `tools/patch_restore_premium_loading_test.py` | The same translated client completed the map, three level files, image request, and heartbeat path, but retained the title/loading artwork | Matched negative control |
-| Spectron 2.2 non-premium branch with original script | Change the target conditional at `0x15fad8` from `B.LE 0x15fb1c` to an unconditional branch to the existing clear block | The target-specific ARM64 package completed the same local connector and game replay, then rendered the green tiled world with the HUD and status indicators | Verified translated-ARM64 loopback control |
-| Spectron 2.2 stock branch, clean external cache | Leave `B.LE 0x15fb1c` unchanged and rerun the same target package chain after clearing the nine exact cache files | The stock package completed the same TLS, encrypted login, map, five-level, and heartbeat path, but retained the title/loading artwork. The target APK supplied its bundled `pics1.png` tile sheet | Matched target negative control; see `artifacts/spectron_arm64_stock_clean_cache_control_20260828.json` |
 | Render-boundary clear | Hook the getter call at `0x244228`, clear the flag through GOT slot `0x375e30`, then return to `0x24422c` | The translated ARM64 client rendered the same world and HUD | Control only |
 
 The native flag starts enabled at `0x37a549`. The marker decodes to
@@ -104,14 +91,6 @@ download, as the local cause of the remaining visual split.
 
 The non-premium branch is the smallest state-oriented experiment because it
 reuses the client's own initialization and leaves the render loop unchanged.
-The Spectron equivalent is at `0x15fad8`, not the earlier target path at
-`0x15faac`. The latter selects an executable-path fallback and was rejected
-after the full target pseudocode was reviewed. The target control was run
-through Android's x86_64 ARM64 translation layer. It is still not called a
-production fix, and the meaning of the premium branch needs to be confirmed on
-a physical ARM64 device and an authorized current service. The exact target
-replay is recorded in
-`artifacts/spectron_arm64_loopback_loading_replay_20260828.json`.
 
 ## Rejected handler-table repair
 

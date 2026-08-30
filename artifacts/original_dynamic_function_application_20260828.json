@@ -147,8 +147,8 @@
   "row_count": 11,
   "save_path": "/tmp/original-dynamic-feature-export-materialized-v2.i64",
   "saved": true,
-  "symbol_audit": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_symbol_table_audit_20260827.json",
-  "symbol_audit_sha256": "5d3acca25c56abbb71a6666092bf2fe3e674caade12dfe14b38e0e91838dc5a2",
+  "symbol_audit": "artifacts/elf_symbol_table_audit_20260826.json",
+  "symbol_audit_sha256": "ebc6c8bbaa5d5bbc516ff7ec49ca8ba1b5d9920c99b8cf3817e94097b1ad31af",
   "symbol_list": "/home/v/Desktop/graal-decomp/libqplay/symbols/libqplay.symbols.json",
   "symbol_list_sha256": "b9e5d272b8ea589ef689e8fd98658b645b01842b725bb9826e929dee585ad441"
 }

@@ -39,9 +39,6 @@ CERT_OFFSETS_BY_VARIANT = {
     "x86": 0x2ECB08,
     "armeabi": 0x21A438,
     },
-    "spectron": {
-        "arm64-v8a": 0x2EA9E0,
-    },
 }
 # Kept as a compatibility alias for code that used the original offsets.
 CERT_OFFSETS = CERT_OFFSETS_BY_VARIANT["original"]
@@ -112,7 +109,6 @@ def encode_native_bundle(bundle: bytes) -> bytes:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--variant", choices=sorted(CERT_OFFSETS_BY_VARIANT), default="original")
     parser.add_argument("--arch", choices=("arm64-v8a", "armeabi", "x86", "x86_64"), required=True)
     parser.add_argument("--bundle", type=Path, required=True)
     parser.add_argument("input", type=Path)
@@ -120,10 +116,10 @@ def main() -> None:
     args = parser.parse_args()
 
     blob = bytearray(args.input.read_bytes())
-    offsets = CERT_OFFSETS_BY_VARIANT[args.variant]
+    offsets = CERT_OFFSETS_BY_VARIANT["original"]
     if args.arch not in offsets:
         raise SystemExit(
-            f"{args.variant} has no trust-bundle slot for architecture {args.arch}"
+            f"no trust-bundle slot for architecture {args.arch}"
         )
     offset = offsets[args.arch]
     expected = bytes(blob[offset : offset + CERT_TEXT_LENGTH])

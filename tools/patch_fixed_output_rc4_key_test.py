@@ -42,20 +42,12 @@ ARM64_ORIGINAL_PREFIX = bytes.fromhex(
 ORIGINAL_ARM64_CAVE_VA = 0x1F2DCC
 ARM64_CAVE_CAPACITY = 128
 ARM64_EXPECTED_CAVE = bytes(ARM64_CAVE_CAPACITY)
-SPECTRON_ARM64_PATCH_SITE = 0x202FE8
-SPECTRON_ARM64_CAVE_VA = 0x1C4000
 
 
 ARM64_VARIANTS = {
     "original": {
         "patch_site": ORIGINAL_ARM64_PATCH_SITE,
         "cave_va": ORIGINAL_ARM64_CAVE_VA,
-        "expected_prefix": ARM64_ORIGINAL_PREFIX,
-        "expected_cave": ARM64_EXPECTED_CAVE,
-    },
-    "spectron": {
-        "patch_site": SPECTRON_ARM64_PATCH_SITE,
-        "cave_va": SPECTRON_ARM64_CAVE_VA,
         "expected_prefix": ARM64_ORIGINAL_PREFIX,
         "expected_cave": ARM64_EXPECTED_CAVE,
     },
@@ -185,8 +177,8 @@ def patch_x86(blob: bytearray) -> None:
     )
 
 
-def patch_arm64(blob: bytearray, variant: str) -> tuple[int, int]:
-    config = ARM64_VARIANTS[variant]
+def patch_arm64(blob: bytearray) -> tuple[int, int]:
+    config = ARM64_VARIANTS["original"]
     patch_site = config["patch_site"]
     cave_va = config["cave_va"]
     expected_prefix = config["expected_prefix"]
@@ -212,7 +204,6 @@ def patch_arm64(blob: bytearray, variant: str) -> tuple[int, int]:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--variant", choices=sorted(ARM64_VARIANTS), default="original")
     parser.add_argument("--arch", choices=("x86_64", "arm64-v8a"), default="x86_64")
     parser.add_argument("input", type=Path)
     parser.add_argument("output", type=Path)
@@ -224,7 +215,7 @@ def main() -> None:
         patch_site = CALL_SITE
         cave_va = CAVE_VA
     else:
-        patch_site, cave_va = patch_arm64(blob, args.variant)
+        patch_site, cave_va = patch_arm64(blob)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_bytes(blob)
     print(

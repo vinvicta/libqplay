@@ -20,22 +20,6 @@ dates. Replacing the buffer with an authorized current certificate chain is
 the production-compatible repair direction. The certificate-skip branch is
 useful only as a private diagnostic control.
 
-For the supplied Spectron 2.2 build, the same native TLS design is present at
-different addresses. The target trust text is at `0x2ea9e0`, the application
-connection helper is at `0x20ad98`, and the low-level SSL setup is at
-`0x20c59c`. The target connector host is `cong.quattroplay.com`, so a local
-certificate control must use that hostname in both its subject alternative
-name and the responder's TLS configuration. The target-specific patch and
-build records are in
-`artifacts/spectron_loopback_patch_audit_20260828.json` and
-`tools/build_spectron_loopback_apk.py`.
-
-That package also has a completed loopback replay record. The loading-state
-control is kept separate from the connector edits: it changes only target
-`0x15fad8` and branches to the existing clear block at `0x15fb1c`. The private
-translated-ARM64 run accepted the connector response and reached the rendered
-world. Details and hashes are in
-`artifacts/spectron_arm64_loopback_loading_replay_20260828.json`.
 
 ## Date checks recovered in CyaSSL
 

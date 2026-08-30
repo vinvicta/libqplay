@@ -29,7 +29,7 @@ REPO = Path("/home/v/Desktop/graal-decomp/libqplay")
 SYMBOL_AUDIT = Path(
     os.environ.get(
         "ORIGINAL_DYNAMIC_SYMBOL_AUDIT",
-        str(REPO / "artifacts/spectron_symbol_table_audit_20260827.json"),
+        str(REPO / "artifacts/elf_symbol_table_audit_20260826.json"),
     )
 )
 SYMBOL_LIST = Path(
