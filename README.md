@@ -87,6 +87,13 @@ The server-mediated `opengraalurl` path normally sends a game message, but it
 falls back to the same bridge when no active client exists. The static evidence
 is in `artifacts/original_external_url_review_20260830.json`.
 
+The HTTP framing pass confirms that the 8,192-byte native read size is only a
+chunk size. Header lines and accumulated response data have no general cap,
+and the parser does not decode `Transfer-Encoding: chunked`. Legacy
+`Content-Length` and close-delimited responses work in the bounded local
+replay, but a current server's framing still needs to be verified. The
+evidence is in `artifacts/original_http_framing_review_20260830.json`.
+
 ## Repository layout
 
 * `docs/RESEARCH_NOTES.md` is the chronological investigation record.
@@ -140,6 +147,8 @@ is in `artifacts/original_external_url_review_20260830.json`.
   redirect handling, destination replacement, and transport downgrade behavior.
 * `artifacts/original_external_url_review_20260830.json` records script URL
   callbacks, Android intent construction, and installed-handler probing.
+* `artifacts/original_http_framing_review_20260830.json` records response
+  accumulation, header limits, transfer coding, and body completion behavior.
 * `artifacts/ida_translation_verification_20260830.json` records the final
   packed IDA copy, pass counts, hashes, and zero-failure verification result.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.

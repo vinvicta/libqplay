@@ -1,0 +1,240 @@
+{
+  "artifact": "original_http_framing_review_20260830",
+  "database": {
+    "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "imagebase": "0x0",
+    "path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
+  },
+  "findings": [
+    {
+      "confidence": "confirmed-static",
+      "evidence": [
+        "TSocketConnection_read uses repeated 8192-byte reads, and THTTPRequest_read appends each result to the response stream.",
+        "TStream_readLine has no per-line limit, and the header parser has no header-count or aggregate-header budget.",
+        "The web-download size check is applied after header parsing and does not cover every unknown-length or ordinary response path."
+      ],
+      "id": "HTTP-FRAME-001",
+      "impact": "A peer that reaches the HTTP parser may consume client memory with a long header, many headers, or a response whose framing does not reach a bounded completion path. A modern client should cap header bytes, line length, body bytes, and aggregate decompressed data before appending.",
+      "limits": "The stock connector and game paths still have separate package, protocol, and declared-download gates. No malformed response was fuzzed and no live endpoint was contacted, so this is an availability finding rather than a demonstrated crash.",
+      "severity": "medium",
+      "title": "HTTP response accumulation has no general header or total-buffer cap"
+    },
+    {
+      "confidence": "confirmed-static",
+      "evidence": [
+        "THTTPRequest_preParseData recognizes Content-Length and a keep-alive hint but has no Transfer-Encoding branch.",
+        "THTTPRequest_parseData consumes the remaining stream directly instead of decoding HTTP chunks."
+      ],
+      "id": "HTTP-FRAME-002",
+      "impact": "A current endpoint that sends a chunked response can fail compatibility or deliver chunk-size markers to the connector, script, or file consumer. Framing assumptions can also become ambiguous if a proxy or server mixes chunked and length-based behavior.",
+      "limits": "The original client deliberately sends HTTP/1.0, and the local compatibility responder used Content-Length or EOF. No current service response was observed.",
+      "severity": "medium",
+      "title": "The legacy parser does not implement chunked transfer coding"
+    },
+    {
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The status parser checks only that the first token starts with HTTP and accepts the integer conversion of the next token.",
+        "Repeated Content-Length headers overwrite the stored value instead of being rejected or compared.",
+        "The parser does not visibly validate the HTTP version, duplicate header policy, or a bounded numeric range before using the parsed length."
+      ],
+      "id": "HTTP-FRAME-003",
+      "impact": "Malformed or conflicting responses can be interpreted differently by the client and an intermediary, creating compatibility and framing ambiguity. A strict parser should reject invalid status lines, conflicting lengths, unsupported transfer codings, and overflow.",
+      "limits": "No request-smuggling or cross-component exploit was demonstrated. The client uses a simple HTTP/1.0 request path, and no live proxy chain was tested.",
+      "severity": "low",
+      "title": "Response framing metadata is accepted without strict consistency checks"
+    }
+  ],
+  "functions": [
+    {
+      "address": "0x2077a0",
+      "callers": [
+        {
+          "caller": "0x2074d4",
+          "caller_name": "TSocketConnection_read_void",
+          "callsite": "0x20779c"
+        }
+      ],
+      "code": "_QWORD *__usercall TSocketConnection_read_void@<X0>(TSocketConnection *this@<X0>, _QWORD *a2@<X8>)\n{\n  int v4; // w0\n  char *v5; // x1\n  __int64 v6; // x0\n  int v7; // w19\n  int v8; // w1\n  char *v9; // x1\n  int v10; // w19\n  char *v12; // x0\n  unsigned int error; // w0\n  unsigned int v14; // w19\n  int v15; // w0\n  int v16; // w0\n  int v17; // w19\n  int v18; // w19\n  socklen_t v19; // [xsp+4Ch] [xbp-24h] BYREF\n  __int64 v20; // [xsp+50h] [xbp-20h] BYREF\n  __int64 v21; // [xsp+58h] [xbp-18h] BYREF\n  struct sockaddr v22; // [xsp+60h] [xbp-10h] BYREF\n\n  plt_TSocketConnection_checkConnecting_void(this);\n  if ( *(_DWORD *)this && (v4 = *((_DWORD *)this + 1), v4 != 4) && (v4 != 6 || *((_BYTE *)this + 8344)) )\n  {\n    v20 = 0;\nLABEL_5:\n    while ( 1 )\n    {\n      v5 = (char *)this + 36;\n      v6 = *((_QWORD *)this + 1029);\n      if ( v6 )\n        break;\nLABEL_9:\n      v9 = (char *)this + 36;\n      if ( *((_BYTE *)this + 8344) )\n      {\n        v15 = *(_DWORD *)this;\n        v19 = 16;\n        v16 = recvfrom(v15, v9, 0x2000u, 0, &v22, &v19);\n        v17 = v16;\n        if ( v16 > 0 )\n        {\n          plt_TString_addbuffer_char_const_int((TString *)&v20, (const char *)this + 36, v16);\n          data_TSocketConnection_gotbytes += v17;\n          plt_getIPString_uint(&v21, *(unsigned int *)&v22.sa_data[2]);\n          plt_TString_operator_assign_TString_const((char *)this + 24, &v21);\n          plt_TString_clear_void((TString *)&v21);\n          *((_DWORD *)this + 8) = (unsigned __int16)__rev16(*(unsigned __int16 *)v22.sa_data);\n        }\n        goto LABEL_18;\n      }\n      v10 = recv(*(_DWORD *)this, v9, 0x2000u, 0);\n      if ( v10 <= 0 )\n      {\n        if ( v10 == -1 )\n        {\n          v18 = *(_DWORD *)__errno(&v20);\n          if ( v18 != 90 && v18 != 11 && v18 != 4 )\n          {\n            v21 = 0;\n            plt_TString_operator_lshift_char_const((int)&v21, \"recv failed (returned -1): \");\n            *(_QWORD *)&v22.sa_family = 0;\n            plt_TString_operator_assign_TString_const(&v22, &v21);\n            plt_TString_operator_lshift_int(&v22);\n            plt_TString_operator_assign_TString_const((char *)this + 8320, &v22);\n            plt_TString_clear_void((TString *)&v22);\n            plt_TString_clear_void((TString *)&v21);\n            plt_TSocketConnection_closeSocket_void(this);\n          }\n          goto LABEL_18;\n        }\n        if ( !v10 )\n        {\n          plt_TSocketConnection_closeSocket_void(this);\n          *(_QWORD *)&v22.sa_family = 0;\n          plt_TString_operator_lshift_char_const((int)&v22, \"recv failed (returned 0)\");\n          v12 = (char *)this + 8320;\n          goto LABEL_17;\n        }\n      }\n      else\n      {\n        plt_TString_addbuffer_char_const_int((TString *)&v20, (const char *)this + 36, v10);\n        data_TSocketConnection_gotbytes += v10;\n      }\n    }\n    while ( 1 )\n    {\n      v7 = plt_CyaInt_CyaSSL_read_CyaInt_CYASSL_void_int(v6, v5, 0x2000);\n      if ( v7 <= 0 )\n        break;\n      plt_TString_addbuffer_char_const_int((TString *)&v20, (const char *)this + 36, v7);\n      v8 = *((unsigned __int8 *)this + 8280);\n      data_TSocketConnection_gotbytes += v7;\n      if ( v8 )\n        goto LABEL_5;\n      plt_TSocketConnection_printSSLCertificates_void(this);\n      v5 = (char *)this + 36;\n      v6 = *((_QWORD *)this + 1029);\n      if ( !v6 )\n        goto LABEL_9;\n    }\n    if ( !v7 )\n    {\n      plt_TSocketConnection_closeSocket_void(this);\n      *(_QWORD *)&v22.sa_family = 0;\n      plt_TString_operator_lshift_char_const((int)&v22, \"SSL read failed (returned 0)\");\n      v12 = (char *)this + 8320;\nLABEL_17:\n      plt_TString_operator_assign_TString_const(v12, &v22);\n      plt_TString_clear_void((TString *)&v22);\n      goto LABEL_18;\n    }\n    error = plt_CyaInt_CyaSSL_get_error_CyaInt_CYASSL_int(*((_QWORD *)this + 1029), (unsigned int)v7, (unsigned int)v7);\n    v14 = error;\n    if ( error && error != 6 && error - 2 > 1 )\n    {\n      if ( *((_BYTE *)this + 8328) )\n      {\n        plt_TSocketConnection_getIP_void((__int64 *)&v22, this);\n        if ( *(_QWORD *)&v22.sa_family )\n          plt_TLog_printf_char_const(\n            (TLog *)\"SSL read error from %s: %d\",\n            (const char *)(*(_QWORD *)&v22.sa_family + 8LL),\n            v14);\n        else\n          plt_TLog_printf_char_const((TLog *)\"SSL read error from %s: %d\", TString_dummystr, v14);\n        plt_TString_clear_void((TString *)&v22);\n      }\n      *((_DWORD *)this + 2078) = v14;\n      *(_QWORD *)&v22.sa_family = 0;\n      plt_TString_operator_lshift_char_const((int)&v22, \"SSL socket closed\");\n      plt_TString_operator_assign_TString_const((char *)this + 8320, &v22);\n      plt_TString_clear_void((TString *)&v22);\n      plt_TSocketConnection_closeSocket_void(this);\n    }\nLABEL_18:\n    *a2 = 0;\n    plt_TString_operator_assign_TString_const(a2, &v20);\n    plt_TString_clear_void((TString *)&v20);\n    return a2;\n  }\n  else\n  {\n    *a2 = 0;\n    return a2;\n  }\n}\n",
+      "code_bytes": 4946,
+      "code_sha256": "a4a95c0ece0fcee6c76419f4ae89829bbc01d8db5c3c23132dbd9a9993cfee47",
+      "function_end": "0x207868",
+      "function_start": "0x2074d4",
+      "name": "TSocketConnection_read_void",
+      "role": "socket and TLS read accumulation"
+    },
+    {
+      "address": "0x200a70",
+      "callers": [
+        {
+          "caller": "0xdc060",
+          "caller_name": "plt_THTTPRequest_read_void",
+          "callsite": "0xdc06c"
+        }
+      ],
+      "code": "__int64 __fastcall THTTPRequest_read_void(THTTPRequest *this)\n{\n  __int64 v2; // x20\n  int v3; // w22\n  int *v4; // x1\n  __int64 v5; // x0\n  int *v6; // x0\n  int v7; // w1\n  int v8; // w0\n  unsigned int v9; // w20\n  __int64 v10; // x2\n  const TString *v11; // x1\n  const char *v12; // x2\n  __int64 v14; // [xsp+70h] [xbp-40h] BYREF\n  __int64 v15; // [xsp+78h] [xbp-38h] BYREF\n  __int64 v16; // [xsp+80h] [xbp-30h] BYREF\n  __int64 v17; // [xsp+88h] [xbp-28h] BYREF\n  __int64 v18; // [xsp+90h] [xbp-20h] BYREF\n  __int64 v19; // [xsp+98h] [xbp-18h] BYREF\n  __int64 v20; // [xsp+A0h] [xbp-10h] BYREF\n  __int64 v21; // [xsp+A8h] [xbp-8h] BYREF\n\n  if ( !*((_QWORD *)this + 17)\n    || (unsigned __int8)plt_TSocketConnection_hasError_void(*((TSocketConnection **)this + 17)) )\n  {\n    return 0;\n  }\n  else\n  {\n    v2 = *((_QWORD *)this + 29);\n    v3 = *(_DWORD *)(v2 + 4);\n    plt_TSocketConnection_read_void(&v21, *((TSocketConnection **)this + 17));\n    v4 = *(int **)(v2 + 8);\n    v5 = v2 + 8;\n    if ( v4 && *v4 > 0 )\n      plt_TString_operator_lshift_TString_const(v5, &v21);\n    else\n      plt_TString_operator_assign_TString_const(v5, &v21);\n    v6 = *(int **)(v2 + 8);\n    if ( v6 )\n      v7 = *v6;\n    else\n      v7 = 0;\n    *(_DWORD *)(v2 + 4) = v7;\n    *(_DWORD *)v2 = v7;\n    plt_TString_clear_void((TString *)&v21);\n    v8 = *(_DWORD *)(*((_QWORD *)this + 29) + 4LL);\n    if ( v3 >= v8 )\n      return 1;\n    v9 = *((unsigned __int8 *)this + 208);\n    v10 = data_TTime_curhighprecisiontime;\n    *((_QWORD *)this + 39) = data_TTime_curhighprecisiontime;\n    data_THTTPRequest_lastwebdownloadtime = v10;\n    if ( !v9 || *((int *)this + 76) <= 0 || v8 / 0x8000 == v3 / 0x8000 )\n    {\n      return 1;\n    }\n    else\n    {\n      v20 = 0;\n      plt_TString_operator_lshift_char_const((int)&v20, \"File download: (2) \");\n      plt_TFiles_lowerCaseFilename_TString_const(&v21, (THTTPRequest *)((char *)this + 216), v11);\n      v19 = 0;\n      plt_TString_operator_assign_TString_const(&v19, &v20);\n      plt_TString_operator_lshift_TString_const(&v19, &v21);\n      v18 = 0;\n      plt_TString_operator_assign_TString_const(&v18, &v19);\n      plt_TString_operator_lshift_char_const((int)&v18, \" (\");\n      v17 = 0;\n      plt_TString_operator_assign_TString_const(&v17, &v18);\n      plt_TString_operator_lshift_int(&v17);\n      v16 = 0;\n      plt_TString_operator_assign_TString_const(&v16, &v17);\n      plt_TString_operator_lshift_char_const((int)&v16, (char *)&word_2D8820);\n      v15 = 0;\n      plt_TString_operator_assign_TString_const(&v15, &v16);\n      plt_TString_operator_lshift_int(&v15);\n      v14 = 0;\n      plt_TString_operator_assign_TString_const(&v14, &v15);\n      plt_TString_operator_lshift_char_const((int)&v14, \")...\");\n      plt_TLog_echo_TString_const_double_double_double_char_const(\n        (TLog *)&v14,\n        (const TString *)\"files\",\n        0.0,\n        0.5,\n        0.0,\n        v12);\n      plt_TString_clear_void((TString *)&v14);\n      plt_TString_clear_void((TString *)&v15);\n      plt_TString_clear_void((TString *)&v16);\n      plt_TString_clear_void((TString *)&v17);\n      plt_TString_clear_void((TString *)&v18);\n      plt_TString_clear_void((TString *)&v19);\n      plt_TString_clear_void((TString *)&v21);\n      plt_TString_clear_void((TString *)&v20);\n    }\n  }\n  return v9;\n}\n",
+      "code_bytes": 3307,
+      "code_sha256": "9bc95d45b405741506950c5b7bb50326c85b27010cc5f1f49fa4de015fcb8680",
+      "function_end": "0x200d14",
+      "function_start": "0x200a70",
+      "name": "THTTPRequest_read_void",
+      "role": "HTTP stream accumulation"
+    },
+    {
+      "address": "0xf0ce0",
+      "callers": [
+        {
+          "caller": "0xd4820",
+          "caller_name": "plt_TStream_readLine_void",
+          "callsite": "0xd4824"
+        },
+        {
+          "caller": "0xd4820",
+          "caller_name": "plt_TStream_readLine_void",
+          "callsite": "0xd482c"
+        }
+      ],
+      "code": "TString *__usercall TStream_readLine_void@<X0>(TStream *this@<X0>, TString *a2@<X8>)\n{\n  int v3; // w19\n  unsigned int v4; // w4\n  int *v5; // x5\n  int v6; // w0\n  unsigned __int8 *v7; // x2\n  int v8; // w3\n  int v9; // w19\n  int v10; // w0\n  TString *v12; // [xsp+28h] [xbp-8h]\n\n  v3 = *((_DWORD *)this + 1);\n  *(_QWORD *)a2 = 0;\n  if ( v3 > 0 )\n  {\n    v4 = *(_DWORD *)this;\n    if ( v3 > *(_DWORD *)this )\n    {\n      v5 = *((int **)this + 1);\n      if ( v5 )\n      {\n        if ( *v5 > 0 )\n        {\n          v6 = *(_DWORD *)this;\n          v7 = (unsigned __int8 *)v5 + v4 + 8;\n          while ( 1 )\n          {\n            v8 = *v7;\n            if ( v8 == 10 )\n              break;\n            ++v6;\n            ++v7;\n            if ( v6 == v3 )\n              goto LABEL_8;\n          }\n          v3 = v6;\n          if ( v6 > (int)v4 )\n          {\n            v8 = *(v7 - 1);\nLABEL_8:\n            LODWORD(v7) = (_DWORD)v7 - (v8 == 13);\n          }\n          v12 = a2;\n          v9 = v3 + 1;\n          plt_TString_addbuffer_char_const_int(a2, (const char *)v5 + v4 + 8, (_DWORD)v7 - ((_DWORD)v5 + v4 + 8));\n          *(_DWORD *)this = v9;\n          v10 = *((_DWORD *)this + 1);\n          a2 = v12;\n          if ( v9 > v10 )\n            *(_DWORD *)this = v10;\n        }\n      }\n    }\n  }\n  return a2;\n}\n",
+      "code_bytes": 1306,
+      "code_sha256": "ce7e31faa5fd78d4cf61275bc08586cd614abbd40084e0412b2657351df6669e",
+      "function_end": "0xf0db0",
+      "function_start": "0xf0ce0",
+      "name": "TStream_readLine_void",
+      "role": "line extraction"
+    },
+    {
+      "address": "0x201d68",
+      "callers": [
+        {
+          "caller": "0xdd890",
+          "caller_name": "plt_THTTPRequest_preParseData_void",
+          "callsite": "0xdd894"
+        },
+        {
+          "caller": "0xdd890",
+          "caller_name": "plt_THTTPRequest_preParseData_void",
+          "callsite": "0xdd89c"
+        }
+      ],
+      "code": "void __fastcall THTTPRequest_preParseData_void(THTTPRequest *this)\n{\n  TStream *v2; // x0\n  int v3; // w1\n  int v4; // w23\n  char *v5; // x0\n  int v6; // w28\n  int v7; // w28\n  int v8; // w28\n  int v9; // w0\n  int *v10; // x1\n  __int64 v11; // x0\n  _DWORD *v12; // x1\n  int v13; // w24\n  int v14; // w23\n  __int64 v15; // x24\n  __int64 v16; // x1\n  int v17; // [xsp+68h] [xbp-78h]\n  int v18; // [xsp+68h] [xbp-78h]\n  int v19; // [xsp+68h] [xbp-78h]\n  int v20; // [xsp+68h] [xbp-78h]\n  __int64 v21; // [xsp+88h] [xbp-58h] BYREF\n  __int64 v22; // [xsp+90h] [xbp-50h] BYREF\n  __int64 v23; // [xsp+98h] [xbp-48h] BYREF\n  __int64 v24; // [xsp+A0h] [xbp-40h] BYREF\n  __int64 v25; // [xsp+A8h] [xbp-38h] BYREF\n  _BYTE v26[16]; // [xsp+B0h] [xbp-30h] BYREF\n  int v27; // [xsp+C0h] [xbp-20h]\n  _QWORD v28[2]; // [xsp+C8h] [xbp-18h] BYREF\n  int v29; // [xsp+D8h] [xbp-8h]\n\n  if ( *((_BYTE *)this + 241) )\n    return;\n  plt_TStringList_TStringList_void((TStringList *)v26);\n  v2 = *((TStream **)this + 29);\n  v3 = *((_DWORD *)v2 + 1);\n  *(_DWORD *)v2 = 0;\n  if ( v3 <= 0 )\n  {\nLABEL_18:\n    plt_TStringList_TStringList((TStringList *)v26);\n    return;\n  }\n  while ( 1 )\n  {\n    plt_TStream_readLine_void(v28, v2);\n    if ( !v28[0] || *(int *)v28[0] <= 0 )\n      break;\n    plt_TStringList_Add_TString_const((TStringList *)v26, (const TString *)v28);\n    plt_TString_clear_void((TString *)v28);\n    v2 = *((TStream **)this + 29);\n    if ( *(_DWORD *)v2 >= *((_DWORD *)v2 + 1) )\n      goto LABEL_18;\n  }\n  plt_TString_clear_void((TString *)v28);\n  if ( v27 <= 0 )\n  {\n    **((_DWORD **)this + 29) = *(_DWORD *)(*((_QWORD *)this + 29) + 4LL);\n    goto LABEL_18;\n  }\n  plt_TStringList_operator_index_int(&v21, v26, 0);\n  plt_TStringList_TStringList_void((TStringList *)v28);\n  v25 = 0;\n  plt_TString_operator_lshift_char_const((int)&v25, \" \");\n  plt_TStringList_Tokenize_TString_const_TString_const((TStringList *)v28, (const TString *)&v21, (const TString *)&v25);\n  plt_TString_clear_void((TString *)&v25);\n  if ( v29 > 2 )\n  {\n    plt_TStringList_operator_index_int(&v24, v28, 0);\n    v25 = 0;\n    plt_TString_operator_lshift_char_const((int)&v25, \"HTTP\");\n    v13 = (unsigned __int8)plt_TString_starts_TString_const((TString *)&v24, (const TString *)&v25);\n    plt_TString_clear_void((TString *)&v25);\n    plt_TString_clear_void((TString *)&v24);\n    if ( v13 )\n    {\n      plt_TStringList_operator_index_int(&v25, v28, 1);\n      *((_DWORD *)this + 61) = plt_strtoint_TString_const((const TString *)&v25);\n      plt_TString_clear_void((TString *)&v25);\n      plt_TStringList_operator_index_int(&v25, v28, 2);\n      plt_TString_operator_assign_TString_const((char *)this + 248, &v25);\n      plt_TString_clear_void((TString *)&v25);\n      if ( v29 > 3 )\n      {\n        v14 = 3;\n        do\n        {\n          v15 = plt_TString_operator_lshift_char_const((int)this + 248, \" \");\n          v16 = (unsigned int)v14++;\n          plt_TStringList_operator_index_int(&v25, v28, v16);\n          plt_TString_operator_lshift_TString_const(v15, &v25);\n          plt_TString_clear_void((TString *)&v25);\n        }\n        while ( v29 > v14 );\n      }\n    }\n  }\n  if ( v27 > 1 )\n  {\n    v4 = 1;\n    while ( 1 )\n    {\n      plt_TStringList_operator_index_int(&v22, v26, (unsigned int)v4);\n      plt_TString_lower_void(&v23, (TString *)&v22);\n      v25 = 0;\n      plt_TString_operator_lshift_char_const((int)&v25, \"server:\");\n      v6 = (unsigned __int8)plt_TString_starts_TString_const((TString *)&v23, (const TString *)&v25);\n      plt_TString_clear_void((TString *)&v25);\n      if ( v6 )\n        break;\n      v25 = 0;\n      plt_TString_operator_lshift_char_const((int)&v25, \"last-modified:\");\n      v7 = (unsigned __int8)plt_TString_starts_TString_const((TString *)&v23, (const TString *)&v25);\n      plt_TString_clear_void((TString *)&v25);\n      if ( v7 )\n      {\n        plt_TString_subString_int(&v24, (TString *)&v22, 14);\n        plt_TString_trim_void(&v25, (TString *)&v24);\n        v5 = (char *)this + 264;\n        goto LABEL_12;\n      }\n      v25 = 0;\n      plt_TString_operator_lshift_char_const((int)&v25, \"location:\");\n      v8 = (unsigned __int8)plt_TString_starts_TString_const((TString *)&v23, (const TString *)&v25);\n      plt_TString_clear_void((TString *)&v25);\n      if ( v8 )\n      {\n        plt_TString_subString_int(&v24, (TString *)&v22, 9);\n        plt_TString_trim_void(&v25, (TString *)&v24);\n        v5 = (char *)this + 280;\n        goto LABEL_12;\n      }\n      v25 = 0;\n      plt_TString_operator_lshift_char_const((int)&v25, \"content-language:\");\n      v17 = (unsigned __int8)plt_TString_starts_TString_const((TString *)&v23, (const TString *)&v25);\n      plt_TString_clear_void((TString *)&v25);\n      if ( v17 )\n      {\n        plt_TString_subString_int(&v24, (TString *)&v22, 17);\n        plt_TString_trim_void(&v25, (TString *)&v24);\n        plt_TString_operator_assign_TString_const((char *)this + 288, &v25);\nLABEL_29:\n        plt_TString_clear_void((TString *)&v25);\n        plt_TString_clear_void((TString *)&v24);\n        goto LABEL_13;\n      }\n      v25 = 0;\n      plt_TString_operator_lshift_char_const((int)&v25, \"content-type:\");\n      v18 = (unsigned __int8)plt_TString_starts_TString_const((TString *)&v23, (const TString *)&v25);\n      plt_TString_clear_void((TString *)&v25);\n      if ( v18 )\n      {\n        plt_TString_subString_int(&v24, (TString *)&v22, 13);\n        plt_TString_trim_void(&v25, (TString *)&v24);\n        plt_TString_operator_assign_TString_const((char *)this + 296, &v25);\n        plt_TString_clear_void((TString *)&v25);\n        plt_TString_clear_void((TString *)&v24);\n        v9 = plt_TString_indexOf_char((THTTPRequest *)((char *)this + 296), 59);\n        if ( (v9 & 0x80000000) == 0 )\n        {\n          plt_TString_subString_int_int(&v25, (THTTPRequest *)((char *)this + 296), 0, v9);\n          plt_TString_operator_assign_TString_const((char *)this + 296, &v25);\n          plt_TString_clear_void((TString *)&v25);\n        }\n        goto LABEL_13;\n      }\n      v25 = 0;\n      plt_TString_operator_lshift_char_const((int)&v25, \"content-length:\");\n      v19 = (unsigned __int8)plt_TString_starts_TString_const((TString *)&v23, (const TString *)&v25);\n      plt_TString_clear_void((TString *)&v25);\n      if ( v19 )\n      {\n        plt_TString_subString_int(&v24, (TString *)&v22, 15);\n        plt_TString_trim_void(&v25, (TString *)&v24);\n        *((_DWORD *)this + 76) = plt_strtoint_TString_const((const TString *)&v25);\n        goto LABEL_29;\n      }\n      if ( (unsigned __int8)plt_operator_assign_TString_const_char_const((int)&v23, \"connection: keep-alive\") )\n      {\n        if ( !*((_BYTE *)this + 229) )\n          *((_BYTE *)this + 320) = 1;\n        goto LABEL_13;\n      }\n      v25 = 0;\n      plt_TString_operator_lshift_char_const((int)&v25, \"modtime:\");\n      v20 = (unsigned __int8)plt_TString_starts_TString_const((TString *)&v23, (const TString *)&v25);\n      plt_TString_clear_void((TString *)&v25);\n      if ( v20 && !*((_DWORD *)this + 56) )\n      {\n        plt_TString_subString_int(&v24, (TString *)&v22, 8);\n        plt_TString_trim_void(&v25, (TString *)&v24);\n        *((_DWORD *)this + 56) = plt_strtouint_TString_const((const TString *)&v25);\n        goto LABEL_29;\n      }\nLABEL_13:\n      ++v4;\n      plt_TString_clear_void((TString *)&v23);\n      plt_TString_clear_void((TString *)&v22);\n      if ( v27 <= v4 )\n        goto LABEL_25;\n    }\n    plt_TString_subString_int(&v24, (TString *)&v22, 7);\n    plt_TString_trim_void(&v25, (TString *)&v24);\n    v5 = (char *)this + 256;\nLABEL_12:\n    plt_TString_operator_assign_TString_const(v5, &v25);\n    plt_TString_clear_void((TString *)&v25);\n    plt_TString_clear_void((TString *)&v24);\n    goto LABEL_13;\n  }\nLABEL_25:\n  v10 = *((int **)this + 29);\n  *((_BYTE *)this + 241) = 1;\n  plt_TString_removeStart_int((TString *)(v10 + 2), *v10);\n  v11 = *((_QWORD *)this + 29);\n  v12 = *(_DWORD **)(v11 + 8);\n  *(_DWORD *)v11 = 0;\n  if ( v12 )\n    LODWORD(v12) = *v12;\n  *(_DWORD *)(v11 + 4) = (_DWORD)v12;\n  plt_TStringList_TStringList((TStringList *)v28);\n  plt_TString_clear_void((TString *)&v21);\n  plt_TStringList_TStringList((TStringList *)v26);\n}\n",
+      "code_bytes": 8168,
+      "code_sha256": "ce59a2bfc7bc42db2bd949d70a6ddee57d7c19ee2d7834537573694dfb75df38",
+      "function_end": "0x2023fc",
+      "function_start": "0x201d68",
+      "name": "THTTPRequest_preParseData_void",
+      "role": "HTTP status and header parser"
+    },
+    {
+      "address": "0x2023fc",
+      "callers": [
+        {
+          "caller": "0xde300",
+          "caller_name": "plt_THTTPRequest_parseData_void",
+          "callsite": "0xde304"
+        },
+        {
+          "caller": "0xde300",
+          "caller_name": "plt_THTTPRequest_parseData_void",
+          "callsite": "0xde30c"
+        }
+      ],
+      "code": "void __fastcall THTTPRequest_parseData_void(TStream **this)\n{\n  TStream *v2; // x1\n  const TString *v3; // x1\n  THashList *v4; // x21\n  unsigned int Hashcode_TString_const; // w0\n  __int64 Object_uint_TString_const; // x21\n  int v7; // w19\n  __int64 v8; // x0\n  int v9; // w2\n  __int64 v10; // x1\n  void (__fastcall *v11)(__int64, __int64, __int64 *); // x22\n  __int64 (__fastcall *v12)(TStream **, __int64 *); // x21\n  __int64 v13; // [xsp+30h] [xbp-20h] BYREF\n  _BYTE v14[16]; // [xsp+38h] [xbp-18h] BYREF\n  int v15; // [xsp+48h] [xbp-8h]\n\n  if ( !*((_BYTE *)this + 241) )\n  {\n    plt_TStream_Clear_void(*(this + 29));\n    return;\n  }\n  if ( !*((_BYTE *)this + 208) && !*((_BYTE *)this + 194) )\n  {\n    plt_TStringList_TStringList_void((TStringList *)v14);\n    v2 = *(this + 29);\n    *(_DWORD *)v2 = 0;\n    plt_TStringList_LoadFromStream_TStream((TStringList *)v14, v2);\n    v13 = 0;\n    plt_TString_operator_lshift_char_const((int)&v13, \"data\");\n    v4 = *(this + 12);\n    if ( v4 )\n    {\n      Hashcode_TString_const = plt_THashList_getHashcode_TString_const((THashList *)&v13, v3);\n      Object_uint_TString_const = plt_THashList_getObject_uint_TString_const(\n                                    v4,\n                                    Hashcode_TString_const,\n                                    (const TString *)&v13);\n      plt_TString_clear_void((TString *)&v13);\n      if ( Object_uint_TString_const )\n      {\n        plt_TGraalVar_clearValues_void((TGraalVar *)Object_uint_TString_const);\nLABEL_8:\n        *(_BYTE *)(Object_uint_TString_const + 22) = 3;\n        v7 = 0;\n        *(_BYTE *)(Object_uint_TString_const + 40) = 3;\n        v8 = plt_operator_new_ulong__2(0x18u);\n        *(_DWORD *)(v8 + 8) = 0;\n        *(_DWORD *)(v8 + 12) = 0;\n        *(_QWORD *)(v8 + 16) = 0;\n        v9 = v15;\n        *(_QWORD *)v8 = off_35EEB0;\n        *(_QWORD *)(Object_uint_TString_const + 56) = v8;\n        if ( v9 > 0 )\n        {\n          do\n          {\n            v10 = (unsigned int)v7++;\n            v11 = *(void (__fastcall **)(__int64, __int64, __int64 *))(*(_QWORD *)Object_uint_TString_const + 288LL);\n            plt_TStringList_operator_index_int(&v13, v14, v10);\n            v11(Object_uint_TString_const, 0xFFFFFFFFLL, &v13);\n            plt_TString_clear_void((TString *)&v13);\n          }\n          while ( v7 < v15 );\n        }\n        plt_TStringList_TStringList((TStringList *)v14);\n        return;\n      }\n    }\n    else\n    {\n      plt_TString_clear_void((TString *)&v13);\n    }\n    v12 = *((__int64 (__fastcall **)(TStream **, __int64 *))*this + 9);\n    v13 = 0;\n    plt_TString_operator_lshift_char_const((int)&v13, \"data\");\n    Object_uint_TString_const = v12(this, &v13);\n    plt_TString_clear_void((TString *)&v13);\n    goto LABEL_8;\n  }\n}\n",
+      "code_bytes": 2763,
+      "code_sha256": "5ae10282a56c1e914426f8b431546e83bd4ad5ec0e72def83958134cffeb63f9",
+      "function_end": "0x2025a0",
+      "function_start": "0x2023fc",
+      "name": "THTTPRequest_parseData_void",
+      "role": "HTTP body dispatch"
+    },
+    {
+      "address": "0x2025a0",
+      "callers": [],
+      "code": "_BYTE *__fastcall THTTPRequest_runScript_void(_BYTE *this)\n{\n  _BYTE *v1; // x19\n  int v2; // w0\n  int v3; // w2\n  const char *v4; // x2\n  int v5; // w1\n  int *v6; // x2\n  bool *v7; // x5\n  int HTTPHostPortFile_TString_const_TString_int_TString_bool; // w24\n  int *v9; // x0\n  TSocketConnection *v10; // x0\n  __int64 v11; // [xsp+50h] [xbp-40h] BYREF\n  __int64 v12; // [xsp+58h] [xbp-38h] BYREF\n  __int64 v13; // [xsp+60h] [xbp-30h] BYREF\n  int *v14; // [xsp+68h] [xbp-28h] BYREF\n  __int64 v15; // [xsp+70h] [xbp-20h] BYREF\n  __int64 v16[3]; // [xsp+78h] [xbp-18h] BYREF\n\n  v1 = this;\n  if ( !*(this + 20) )\n  {\n    if ( *(this + 193) )\n    {\n      if ( (unsigned __int8)plt_THTTPRequest_canOpenConnection_void((THTTPRequest *)this) )\n      {\n        plt_THTTPRequest_setIsOpen_bool((THTTPRequest *)v1, 1);\n        v1[193] = 0;\n        plt_THTTPRequest_sendRequest_void((THTTPRequest *)v1);\n      }\n      if ( v1[193] )\n        return (_BYTE *)plt_TGraalVar_runScript_void((TGraalVar *)v1);\n    }\n    if ( v1[240] )\n      return (_BYTE *)plt_TGraalVar_runScript_void((TGraalVar *)v1);\n    plt_THTTPRequest_sendOutgoing_void((THTTPRequest *)v1);\n    plt_THTTPRequest_read_void((THTTPRequest *)v1);\n    if ( v1[241] || (plt_THTTPRequest_preParseData_void((THTTPRequest *)v1), v1[241]) )\n    {\n      v2 = *((_DWORD *)v1 + 61);\n      if ( (unsigned int)(v2 - 300) <= 3 || (v2 & 0xFFFFFFFD) == 0x131 )\n      {\n        v5 = *((_DWORD *)v1 + 39);\n        if ( v5 <= 9 )\n        {\n          v6 = *((int **)v1 + 35);\n          if ( v6 )\n          {\n            if ( *v6 > 0 )\n            {\n              *((_DWORD *)v1 + 39) = v5 + 1;\n              plt_TStringList_TStringList_void((TStringList *)v16);\n              v15 = 0;\n              plt_TString_operator_lshift_char_const((int)&v15, \" \");\n              plt_TStringList_Tokenize_TString_const_TString_const(\n                (TStringList *)v16,\n                (const TString *)(v1 + 280),\n                (const TString *)&v15);\n              plt_TString_clear_void((TString *)&v15);\n              v13 = 0;\n              v14 = nullptr;\n              plt_TStringList_operator_index_int(&v15, v16, 0);\n              HTTPHostPortFile_TString_const_TString_int_TString_bool = (unsigned __int8)plt_THTTPRequest_extractHTTPHostPortFile_TString_const_TString_int_TString_bool(\n                                                                                           (THTTPRequest *)&v15,\n                                                                                           (const TString *)&v13,\n                                                                                           (TString *)&v12,\n                                                                                           (int *)&v14,\n                                                                                           (TString *)&v11,\n                                                                                           v7);\n              plt_TString_clear_void((TString *)&v15);\n              if ( HTTPHostPortFile_TString_const_TString_int_TString_bool )\n              {\n                plt_TString_operator_assign_TString_const(v1 + 168, &v13);\n                v9 = v14;\n                *((_DWORD *)v1 + 44) = v12;\n                if ( v9 && *v9 > 0 )\n                {\n                  v15 = 0;\n                  plt_TString_operator_assign_TString_const(&v15, &v14);\n                }\n                else\n                {\n                  v15 = 0;\n                  plt_TString_operator_lshift_char_const((int)&v15, (char *)&word_2D8820);\n                }\n                plt_TString_operator_assign_TString_const(v1 + 184, &v15);\n                plt_TString_clear_void((TString *)&v15);\n                v1[192] = v11;\n                plt_THTTPRequest_setIsOpen_bool((THTTPRequest *)v1, 1);\n                v1[193] = 0;\n                plt_THTTPRequest_sendRequest_void((THTTPRequest *)v1);\n              }\n              else\n              {\n                plt_THTTPRequest_parseData_void((THTTPRequest *)v1);\n                v15 = 0;\n                v1[240] = 1;\n                plt_TString_operator_lshift_char_const((int)&v15, \"onReceiveData\");\n                plt_TGraalVar_invokeEvent_TString_const((TGraalVar *)v1, (const TString *)&v15);\n                plt_TString_clear_void((TString *)&v15);\n                plt_THTTPRequest_setIsOpen_bool((THTTPRequest *)v1, 0);\n                plt_THTTPRequest_removeFromRequests_void((THTTPRequest *)v1);\n              }\n              plt_TString_clear_void((TString *)&v14);\n              plt_TString_clear_void((TString *)&v13);\n              plt_TStringList_TStringList((TStringList *)v16);\n              return (_BYTE *)plt_TGraalVar_runScript_void((TGraalVar *)v1);\n            }\n          }\n        }\n      }\n      v3 = *((_DWORD *)v1 + 76);\n      if ( v3 > 0 && v3 <= *(_DWORD *)(*((_QWORD *)v1 + 29) + 4LL) || v2 == 304 )\n      {\n        if ( v3 <= data_THTTPRequest_webdownloadsizelimit )\n        {\nLABEL_31:\n          plt_THTTPRequest_parseData_void((THTTPRequest *)v1);\n          goto LABEL_17;\n        }\n      }\n      else if ( v3 <= data_THTTPRequest_webdownloadsizelimit )\n      {\n        goto LABEL_29;\n      }\n      v15 = 0;\n      plt_TString_operator_lshift_char_const((int)&v15, \"Web file is too huge, download skipped: \");\n      plt_THTTPRequest_getPrintName_void(v16, (THTTPRequest *)v1);\n      v14 = nullptr;\n      plt_TString_operator_assign_TString_const(&v14, &v15);\n      plt_TString_operator_lshift_TString_const(&v14, v16);\n      v13 = 0;\n      plt_TString_operator_assign_TString_const(&v13, &v14);\n      plt_TString_operator_lshift_char_const((int)&v13, \" (size of \");\n      v12 = 0;\n      plt_TString_operator_assign_TString_const(&v12, &v13);\n      plt_TString_operator_lshift_int(&v12);\n      v11 = 0;\n      plt_TString_operator_assign_TString_const(&v11, &v12);\n      plt_TString_operator_lshift_char_const((int)&v11, \" bytes)\");\n      plt_TLog_echo_TString_const_double_double_double_char_const(\n        (TLog *)&v11,\n        (const TString *)\"files\",\n        0.5,\n        0.0,\n        0.0,\n        v4);\n      plt_TString_clear_void((TString *)&v11);\n      plt_TString_clear_void((TString *)&v12);\n      plt_TString_clear_void((TString *)&v13);\n      plt_TString_clear_void((TString *)&v14);\n      plt_TString_clear_void((TString *)v16);\n      plt_TString_clear_void((TString *)&v15);\n      plt_TStream_Clear_void(*((TStream **)v1 + 29));\n      *((_DWORD *)v1 + 61) = -1;\nLABEL_17:\n      v1[240] = 1;\n      v16[0] = 0;\n      plt_TString_operator_lshift_char_const((int)v16, \"onReceiveData\");\n      plt_TGraalVar_invokeEvent_TString_const((TGraalVar *)v1, (const TString *)v16);\n      plt_TString_clear_void((TString *)v16);\n      plt_THTTPRequest_setIsOpen_bool((THTTPRequest *)v1, 0);\n      plt_THTTPRequest_saveDownloadedData_void((THTTPRequest *)v1);\n      return (_BYTE *)plt_TGraalVar_runScript_void((TGraalVar *)v1);\n    }\nLABEL_29:\n    v10 = *((TSocketConnection **)v1 + 17);\n    if ( v10 && !(unsigned __int8)plt_TSocketConnection_hasError_void(v10) )\n      return (_BYTE *)plt_TGraalVar_runScript_void((TGraalVar *)v1);\n    goto LABEL_31;\n  }\n  return this;\n}\n",
+      "code_bytes": 7196,
+      "code_sha256": "927b8d5e3f0adb9afe1091405d8312185a212c1962b36915802c06d724fb15f8",
+      "function_end": "0x2029d0",
+      "function_start": "0x2025a0",
+      "name": "THTTPRequest_runScript_void",
+      "role": "response completion state machine"
+    }
+  ],
+  "fuzzing_performed": false,
+  "interpretation": [
+    "The native 8192-byte read size should not be mistaken for a total response limit.",
+    "The connector's legacy Content-Length and EOF behavior is compatible with the local replay, but chunked responses and malformed framing remain unverified.",
+    "A repair should enforce bounded response framing before parsing or saving data and should reject unsupported transfer codings rather than passing them to consumers."
+  ],
+  "network_contacted": false,
+  "observations": [
+    {
+      "address": "0x2077a0",
+      "classification": "bounded-read-unbounded-accumulation",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "TSocketConnection_read reads at most 8192 bytes per native recv, recvfrom, or CyaSSL_read call.",
+        "It repeats while the TLS read continues to return data, and THTTPRequest_read appends each returned string to its response stream.",
+        "The reviewed read and append path has no general total response-buffer cap."
+      ],
+      "interpretation": "The 8192-byte socket chunk is an I/O buffer size, not a maximum response size."
+    },
+    {
+      "address": "0xf0ce0",
+      "classification": "line-parser-boundary",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "TStream_readLine scans from the current offset until LF or the current stream end.",
+        "It removes a preceding CR from the copied line but does not impose a per-line length limit.",
+        "TStringList_LoadFromStream repeatedly calls the same helper without a line-count or aggregate-size budget."
+      ],
+      "interpretation": "A large or unterminated header line can consume the accumulated response buffer before normal header processing finishes."
+    },
+    {
+      "address": "0x201d68",
+      "classification": "HTTP-header-interpretation",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The pre-parser accepts a status line when its first token starts with HTTP and converts the second token with strtoint.",
+        "It recognizes server, last-modified, location, content-language, content-type, content-length, connection: keep-alive, and modtime.",
+        "It lowercases each complete header line before matching names, but it does not inspect Transfer-Encoding or reject duplicate framing headers.",
+        "Each recognized content-length line overwrites the stored integer, so a later value wins without a duplicate consistency check."
+      ],
+      "interpretation": "The parser follows a narrow legacy HTTP subset and is lenient about status and framing metadata."
+    },
+    {
+      "address": "0x2023fc",
+      "classification": "body-dispatch",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "For ordinary non-download responses, parseData loads the remaining stream into a TStringList and exposes each line through the data variable.",
+        "The body path does not contain a Transfer-Encoding chunk decoder.",
+        "The request state machine applies a declared web-download size check, but that check does not provide a general header or unknown-length response cap."
+      ],
+      "interpretation": "A chunked response would be treated as ordinary bytes and can reach the consumer with its chunk framing still present."
+    },
+    {
+      "address": "0x2025a0",
+      "classification": "completion-and-size-state",
+      "confidence": "confirmed-static",
+      "evidence": [
+        "For a positive Content-Length, the response state machine uses the declared boundary once the accumulated stream reaches that length; when the length is absent or nonpositive, it waits for the socket error or close path before completing.",
+        "A declared body above the native web-download limit is cleared and reported as too huge rather than saved.",
+        "Redirect-like statuses are handled before the normal body path and have a separate ten-attempt loop bound."
+      ],
+      "interpretation": "The declared-size guard is useful for selected downloads, but it is not a complete framing or memory-safety policy."
+    }
+  ],
+  "read_chunk_size": 8192,
+  "recognized_headers": [
+    "server",
+    "last-modified",
+    "location",
+    "content-language",
+    "content-type",
+    "content-length",
+    "connection: keep-alive",
+    "modtime"
+  ],
+  "schema": "libqplay.original-http-framing-review.v1",
+  "scope": "read-only review of original 1.8 HTTP response accumulation and framing",
+  "transfer_encoding_supported": false
+}
