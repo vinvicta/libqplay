@@ -47,6 +47,7 @@ def validate_compact_public_archive():
         "artifacts/spectron_compact_core_manual_translation_application_20260830.json",
         "artifacts/spectron_compact_core_manual_translation_verification_20260830.json",
         "artifacts/spectron_translation_checkpoint_20260830_v354.json",
+        "artifacts/spectron_apk_security_audit_20260830.json",
         "artifacts/research_archive_manifest.json",
     ]
     documents = {}
@@ -122,6 +123,7 @@ def validate_compact_public_archive():
         "artifacts/spectron_compact_core_manual_translation_verification_20260830.json"
     ]
     checkpoint = documents["artifacts/spectron_translation_checkpoint_20260830_v354.json"]
+    security = documents["artifacts/spectron_apk_security_audit_20260830.json"]
 
     check("symbol summary is offline", symbols.get("rename_failures") == [])
     check("symbol summary has translated rows", symbols.get("translated_symbols", 0) > 0)
@@ -142,6 +144,54 @@ def validate_compact_public_archive():
     check(
         "v354 checkpoint references compact core",
         checkpoint.get("compact_core_translation_v354", {}).get("anchor_count") == 9,
+    )
+    check(
+        "security audit schema",
+        security.get("schema") == "libqplay.spectron-apk-security-audit.v1",
+    )
+    check(
+        "security audit is offline",
+        security.get("network_contacted") is False
+        and security.get("live_endpoint_tested") is False,
+    )
+    check(
+        "security audit input identity",
+        security.get("input", {}).get("sha256")
+        == "5b10289ad2b67fba77f5f4159d51cdbeaf4ca2710fb1459da69c8d4b1af5149c",
+    )
+    check(
+        "security audit manifest policy",
+        security.get("manifest", {})
+        .get("application", {})
+        .get("uses_cleartext_traffic")
+        is True,
+    )
+    check(
+        "security audit records deep link",
+        any(
+            component.get("name") == "com.quattroplay.GraalClassic.QPlayActivity"
+            for component in security.get("component_security_selection", {})
+            .get("exported_deep_link_components", [])
+        ),
+    )
+    check(
+        "security audit records dynamic DEX capability",
+        any(
+            "dynamic_dex_loader" in report.get("indicators", {})
+            and "reflection_command" in report.get("indicators", {})
+            for report in security.get("dex", [])
+        ),
+    )
+    check(
+        "security audit records v2 signing block",
+        "0x7109871a"
+        in security.get("signing", {})
+        .get("apk_signing_block", {})
+        .get("ids", []),
+    )
+    check(
+        "security audit has findings",
+        len(security.get("findings", [])) >= 8,
     )
 
     print(

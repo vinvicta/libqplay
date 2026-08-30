@@ -21,6 +21,16 @@ indexed by [`artifacts/research_archive_manifest.json`](artifacts/research_archi
 and the policy is described in
 [`docs/ARTIFACT_POLICY.md`](docs/ARTIFACT_POLICY.md).
 
+## Security review
+
+The supplied Spectron APK has a separate offline security and attack-surface
+review in [`docs/SECURITY.md`](docs/SECURITY.md). Its compact evidence record
+is [`artifacts/spectron_apk_security_audit_20260830.json`](artifacts/spectron_apk_security_audit_20260830.json),
+and [`tools/audit_spectron_apk.py`](tools/audit_spectron_apk.py) regenerates it
+without installing the APK or contacting a server. The review covers the
+manifest, exported components, WebTop JavaScript bridge, dynamic DEX loading,
+native TLS material, hook layer, signing metadata, and native hardening.
+
 ## Current status
 
 The current documented translation frontier is the v354 Spectron database. It
