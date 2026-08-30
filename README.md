@@ -93,6 +93,9 @@ account authentication remain open.
 * `artifacts/original_game_login_review_20260830.json` records the NewGraal
   key setup, framing, sequence, and packet-54 login transition. Fixed key-like
   literals are redacted from this public report.
+* `artifacts/original_credential_storage_review_20260830.json` records the
+  native option store, reversible value transform, and script-facing account,
+  password, and cookie boundaries.
 * `artifacts/ida_translation_verification_20260830.json` records the final
   packed IDA copy, pass counts, hashes, and zero-failure verification result.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.
