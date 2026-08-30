@@ -52,6 +52,8 @@ startup and pause evidence is in
 * That the current server's certificate and package-signing chain can be
   replaced safely without changing protocol behavior.
 * ARM64 runtime behavior on a real ARM64 device.
+* Whether the ARM64 loader and its fixed init-array callbacks complete on a
+  current device image.
 * Whether the live server sends the same completion sequence as the local
   responder.
 

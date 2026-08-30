@@ -1,0 +1,509 @@
+{
+  "apk_executed_by_exporter": false,
+  "arrays": {
+    "fini_array": {
+      "address": "0x35d2b0",
+      "entries": 10
+    },
+    "init_array": {
+      "address": "0x35d210",
+      "entries": 20
+    }
+  },
+  "artifact": "original_native_init_review_20260830",
+  "callbacks": [
+    {
+      "address": "0xe06d8",
+      "code": "__int64 *sub_E06D8()\n{\n  data_TFiles_basedatafolder = 0;\n  data_TFiles_basedatafolder2 = 0;\n  data_TFiles_baseuserfolder = 0;\n  data_TFiles_sdcardpath = 0;\n  return &data_TFiles_sdcardpath;\n}\n",
+      "code_bytes": 192,
+      "code_sha256": "02bde4ca9317910ea5b0c6d911028f301f14c843ef5de368f6971ebc98d0374d",
+      "direct_callees": [],
+      "function_end": "0xe070c",
+      "function_start": "0xe06d8",
+      "kind": "init",
+      "name": "TFiles_resetStaticPathPointers",
+      "selected_boundary_callees": [],
+      "slot": "0x35d210"
+    },
+    {
+      "address": "0xe070c",
+      "code": "__int64 *sub_E070C()\n{\n  THashList *v0; // x19\n  THashList *v1; // x19\n\n  v0 = (THashList *)plt_operator_new_ulong__2(0x28u);\n  plt_THashList_THashList_void__2(v0);\n  data_TResourceFileLink_links = (__int64)v0;\n  v1 = (THashList *)plt_operator_new_ulong__2(0x28u);\n  plt_THashList_THashList_void__2(v1);\n  data_TResourceObjectLink_links = (__int64)v1;\n  return &data_TResourceObjectLink_links;\n}\n",
+      "code_bytes": 396,
+      "code_sha256": "fed41ec7855145ed22f3f95529b534073c526a51d0cad32f7c5c9c359de27dc0",
+      "direct_callees": [
+        {
+          "address": "0xd68d0",
+          "name": "plt_THashList_THashList_void__2"
+        },
+        {
+          "address": "0xdfb30",
+          "name": "plt_operator_new_ulong__2"
+        }
+      ],
+      "function_end": "0xe0758",
+      "function_start": "0xe070c",
+      "kind": "init",
+      "name": "TResource_initializeLinkLists",
+      "selected_boundary_callees": [],
+      "slot": "0x35d218"
+    },
+    {
+      "address": "0xe0758",
+      "code": "__int64 *sub_E0758()\n{\n  qword_38D0F0 = 0;\n  dword_38D0F8 = 0;\n  dword_38D0FC = 0;\n  return &qword_38D0E0;\n}\n",
+      "code_bytes": 109,
+      "code_sha256": "bef18facc19a0c186939831149f6aee98e6804ca46b239d2be2d65ab7d784707",
+      "direct_callees": [],
+      "function_end": "0xe0770",
+      "function_start": "0xe0758",
+      "kind": "init",
+      "name": "sub_E0758",
+      "selected_boundary_callees": [],
+      "slot": "0x35d220"
+    },
+    {
+      "address": "0xe0770",
+      "code": "__int64 sub_E0770()\n{\n  __int64 result; // x0\n\n  result = plt_operator_new_ulong__2(0x18u);\n  *(_DWORD *)(result + 8) = 0;\n  *(_QWORD *)result = off_35EEB0;\n  *(_DWORD *)(result + 12) = 0;\n  *(_QWORD *)(result + 16) = 0;\n  data_TDrawTexture_textures = result;\n  return result;\n}\n",
+      "code_bytes": 279,
+      "code_sha256": "a6e6e196c0505ddc560e0a611d35e6b5739209474586308d706dfd9946cff71f",
+      "direct_callees": [
+        {
+          "address": "0xdfb30",
+          "name": "plt_operator_new_ulong__2"
+        }
+      ],
+      "function_end": "0xe07b4",
+      "function_start": "0xe0770",
+      "kind": "init",
+      "name": "TDrawTexture_initializeTexturesList",
+      "selected_boundary_callees": [],
+      "slot": "0x35d228"
+    },
+    {
+      "address": "0xe07b4",
+      "code": "int *sub_E07B4()\n{\n  dword_38D138 = 0;\n  dword_38D13C = 0;\n  dword_38D140 = 1142947840;\n  dword_38D144 = 1139802112;\n  return &dword_38D138;\n}\n",
+      "code_bytes": 143,
+      "code_sha256": "dfc6c8e72876c367cee796cf54217b9a4b5a9b6f7f0010519ba79b97692cab9e",
+      "direct_callees": [],
+      "function_end": "0xe07dc",
+      "function_start": "0xe07b4",
+      "kind": "init",
+      "name": "sub_E07B4",
+      "selected_boundary_callees": [],
+      "slot": "0x35d230"
+    },
+    {
+      "address": "0xe07e4",
+      "code": "void *sub_E07E4()\n{\n  dword_38D1F0 = 3;\n  qword_38D1F8 = (__int64)&unk_377D00;\n  return &unk_377D00;\n}\n",
+      "code_bytes": 103,
+      "code_sha256": "373f2df975f1e811c8bb39e7be66b83f86c3478968b46a60feb980e0d56ed6a5",
+      "direct_callees": [],
+      "function_end": "0xe0808",
+      "function_start": "0xe07e4",
+      "kind": "init",
+      "name": "sub_E07E4",
+      "selected_boundary_callees": [],
+      "slot": "0x35d238"
+    },
+    {
+      "address": "0xe0808",
+      "code": "__int64 *sub_E0808()\n{\n  qword_38D2B8 = 0;\n  return &data_TBitmapArrayHolder_bitmaparrays;\n}\n",
+      "code_bytes": 93,
+      "code_sha256": "dab54d6c44b6b969f5379853de4da18b6a2236ae8b0b9078007766272dcfbc79",
+      "direct_callees": [],
+      "function_end": "0xe0814",
+      "function_start": "0xe0808",
+      "kind": "init",
+      "name": "sub_E0808",
+      "selected_boundary_callees": [],
+      "slot": "0x35d240"
+    },
+    {
+      "address": "0xe0814",
+      "code": "__int64 *sub_E0814()\n{\n  data_TClientEnvironment_fullexepath = 0;\n  data_TClientEnvironment_servername_saveforrestart = 0;\n  data_TClientEnvironment_serveraddr_saveforrestart = 0;\n  return &data_TClientEnvironment_serveraddr_saveforrestart;\n}\n",
+      "code_bytes": 243,
+      "code_sha256": "ff2acc88c9270afa795ec3f7dff8b9c1f83502734ec0ca3fdf9e6f372186e8ea",
+      "direct_callees": [],
+      "function_end": "0xe083c",
+      "function_start": "0xe0814",
+      "kind": "init",
+      "name": "TClientEnvironment_clearRestartState",
+      "selected_boundary_callees": [],
+      "slot": "0x35d248"
+    },
+    {
+      "address": "0xe083c",
+      "code": "__int128 *sub_E083C()\n{\n  curanis = 0u;\n  xmmword_38D5F8 = 0u;\n  xmmword_38D608 = 0u;\n  qword_38D6D8 = 0;\n  xmmword_38D618 = 0u;\n  xmmword_38D628 = 0u;\n  xmmword_38D638 = 0u;\n  xmmword_38D648 = 0u;\n  xmmword_38D658 = 0u;\n  xmmword_38D668 = 0u;\n  xmmword_38D678 = 0u;\n  xmmword_38D688 = 0u;\n  xmmword_38D698 = 0u;\n  xmmword_38D6A8 = 0u;\n  xmmword_38D6B8 = 0u;\n  xmmword_38D6C8 = 0u;\n  return &curanis;\n}\n",
+      "code_bytes": 403,
+      "code_sha256": "65b9026b1073b782378465aa5620a01c771b5d19ac44ee512973d2f2178d9eb7",
+      "direct_callees": [],
+      "function_end": "0xe08c4",
+      "function_start": "0xe083c",
+      "kind": "init",
+      "name": "clearCurAnis",
+      "selected_boundary_callees": [],
+      "slot": "0x35d250"
+    },
+    {
+      "address": "0xe08c4",
+      "code": "__int64 *sub_E08C4()\n{\n  __int64 *result; // x0\n\n  result = (__int64 *)&unk_38D710;\n  do\n  {\n    *(_OWORD *)result = 0u;\n    result += 2;\n  }\n  while ( result != &qword_38DF10 );\n  return result;\n}\n",
+      "code_bytes": 198,
+      "code_sha256": "0045bfc4e38c416118073d53f077bd7167d6f4666b8cb3812203a4525ee01ee4",
+      "direct_callees": [],
+      "function_end": "0xe08e4",
+      "function_start": "0xe08c4",
+      "kind": "init",
+      "name": "sub_E08C4",
+      "selected_boundary_callees": [],
+      "slot": "0x35d258"
+    },
+    {
+      "address": "0xe08e4",
+      "code": "int *TOptions_initializeWindowPosition()\n{\n  data_TOptions_windowpos = -1;\n  dword_38E0C4 = -1;\n  return &data_TOptions_windowpos;\n}\n",
+      "code_bytes": 133,
+      "code_sha256": "dba7e3a10bde15b8e43bf3cb40bba9198cfe7aada0af959103d542d053551c47",
+      "direct_callees": [],
+      "function_end": "0xe08fc",
+      "function_start": "0xe08e4",
+      "kind": "init",
+      "name": "TOptions_initializeWindowPosition",
+      "selected_boundary_callees": [],
+      "slot": "0x35d260"
+    },
+    {
+      "address": "0xe08fc",
+      "code": "__int64 *initializeDisplayedGif()\n{\n  displayedgif = 0;\n  return &displayedgif;\n}\n",
+      "code_bytes": 82,
+      "code_sha256": "2b8b5e7186e698caa0e9273d260f7149f1bec7bddd6a5e9aca3bda53120c6888",
+      "direct_callees": [],
+      "function_end": "0xe090c",
+      "function_start": "0xe08fc",
+      "kind": "init",
+      "name": "initializeDisplayedGif",
+      "selected_boundary_callees": [],
+      "slot": "0x35d268"
+    },
+    {
+      "address": "0xe090c",
+      "code": "void *sub_E090C()\n{\n  dword_38F788 = 3;\n  qword_38F790 = (__int64)&unk_3804C0;\n  return &unk_3804C0;\n}\n",
+      "code_bytes": 103,
+      "code_sha256": "f8d61b9495e5c38d0f6619bf7ded78497562262f5873362d0a89dbc9607bb077",
+      "direct_callees": [],
+      "function_end": "0xe0930",
+      "function_start": "0xe090c",
+      "kind": "init",
+      "name": "sub_E090C",
+      "selected_boundary_callees": [],
+      "slot": "0x35d270"
+    },
+    {
+      "address": "0xe0930",
+      "code": "void *sub_E0930()\n{\n  dword_38F830 = 5;\n  dword_38F840 = 5;\n  qword_38F848 = (__int64)&unk_381630;\n  qword_38F838 = (__int64)&unk_381680;\n  return &unk_381680;\n}\n",
+      "code_bytes": 162,
+      "code_sha256": "f5ea95997a1e904bebdc90a689a5d8594731383b9bc35cf0081897c14891ff67",
+      "direct_callees": [],
+      "function_end": "0xe0960",
+      "function_start": "0xe0930",
+      "kind": "init",
+      "name": "sub_E0930",
+      "selected_boundary_callees": [],
+      "slot": "0x35d278"
+    },
+    {
+      "address": "0xe0960",
+      "code": "void *sub_E0960()\n{\n  dword_38F8F8 = 3;\n  qword_38F900 = (__int64)&unk_382060;\n  return &unk_382060;\n}\n",
+      "code_bytes": 103,
+      "code_sha256": "05e310e4d0a368f70dc5576d2b191c4b17e0a4054fd2f9915e2910f38db2fef2",
+      "direct_callees": [],
+      "function_end": "0xe0984",
+      "function_start": "0xe0960",
+      "kind": "init",
+      "name": "sub_E0960",
+      "selected_boundary_callees": [],
+      "slot": "0x35d280"
+    },
+    {
+      "address": "0xe0984",
+      "code": "float sub_E0984()\n{\n  dword_38FA08 = 0.75;\n  dword_38FA0C = 0.75;\n  dword_38FA10 = 0.75;\n  dword_38FA14 = 1.0;\n  dword_38FA18 = 0.5;\n  dword_38FA1C = 0.5;\n  dword_38FA20 = 0.5;\n  dword_38FA24 = 1.0;\n  dword_38FA28 = 0.25;\n  dword_38FA2C = 0.25;\n  dword_38FA30 = 0.25;\n  dword_38FA34 = 1.0;\n  dword_38F9E8 = 1.0;\n  dword_38F9EC = 1.0;\n  dword_38F9F0 = 1.0;\n  dword_38F9F4 = 1.0;\n  dword_38F9F8 = 0;\n  dword_38F9FC = 0;\n  dword_38FA00 = 0;\n  dword_38FA04 = 1.0;\n  return 1.0;\n}\n",
+      "code_bytes": 476,
+      "code_sha256": "8400f0325e3e1a159bfc9fb75a317fedd368e390789f8321debab1fd45ee79df",
+      "direct_callees": [],
+      "function_end": "0xe09f4",
+      "function_start": "0xe0984",
+      "kind": "init",
+      "name": "sub_E0984",
+      "selected_boundary_callees": [],
+      "slot": "0x35d288"
+    },
+    {
+      "address": "0xe09f4",
+      "code": "char *sub_E09F4()\n{\n  data_THTMLDefinitions_defaultbitmapindent = 5;\n  dword_38FA94 = 0;\n  data_THTMLDefinitions_horizontallinecolor = 64;\n  byte_38FA89 = 64;\n  byte_38FA8A = 64;\n  byte_38FA8B = -1;\n  return &data_THTMLDefinitions_horizontallinecolor;\n}\n",
+      "code_bytes": 254,
+      "code_sha256": "2e2b56a6fa8b440a3b7caeffa2116add9804acca2266cd2433fe17838485a7ab",
+      "direct_callees": [],
+      "function_end": "0xe0a2c",
+      "function_start": "0xe09f4",
+      "kind": "init",
+      "name": "sub_E09F4",
+      "selected_boundary_callees": [],
+      "slot": "0x35d290"
+    },
+    {
+      "address": "0xe0a2c",
+      "code": "__int64 *sub_E0A2C()\n{\n  data_TClient_serverlevelname = 0;\n  data_TClient_bigfilename = 0;\n  data_TClient_lastdownloadfile = 0;\n  data_TClient_serverwarpdestination = 0;\n  data_TClient_lastserverwarp = 0;\n  data_TClient_requestedmapwarp = 0;\n  data_TClient_ghostmessage = 0;\n  data_TClient_disconnectreason = 0;\n  data_TClient_currentdownloadfile = 0;\n  data_TClient_currentdownloadpackage = 0;\n  data_TClient_loginaccountname = 0;\n  return &data_TClient_loginaccountname;\n}\n",
+      "code_bytes": 475,
+      "code_sha256": "124e10be3d59fccc4ebfcb9f52ea8294d80c6e9fa212b654ed916ce4e6494eb5",
+      "direct_callees": [],
+      "function_end": "0xe0ab4",
+      "function_start": "0xe0a2c",
+      "kind": "init",
+      "name": "sub_E0A2C",
+      "selected_boundary_callees": [],
+      "slot": "0x35d298"
+    },
+    {
+      "address": "0xe0ab4",
+      "code": "__int64 *sub_E0AB4()\n{\n  data_TSocket_allowedsocketsconnect = 0;\n  data_TSocket_allowedportsbind = 0;\n  return &data_TSocket_allowedportsbind;\n}\n",
+      "code_bytes": 145,
+      "code_sha256": "4f2bf572389649e37b30a4aaebc39919ed8fc40a0887ee81b27fa6113e67a682",
+      "direct_callees": [],
+      "function_end": "0xe0ad0",
+      "function_start": "0xe0ab4",
+      "kind": "init",
+      "name": "sub_E0AB4",
+      "selected_boundary_callees": [],
+      "slot": "0x35d2a0"
+    },
+    {
+      "address": "0xe0ad0",
+      "code": "__int64 *sub_E0AD0()\n{\n  qword_391210 = 0;\n  video_player_filename = 0;\n  video_rectangle_x = 0;\n  video_rectangle_y = 0;\n  video_rectangle_width = 0;\n  video_rectangle_height = 0;\n  qword_391218 = 0;\n  return &qword_391210;\n}\n",
+      "code_bytes": 227,
+      "code_sha256": "effc62e7ef82c115ac53eaa20fab33f96e080fbbc442d2e6961783555999e818",
+      "direct_callees": [],
+      "function_end": "0xe0af8",
+      "function_start": "0xe0ad0",
+      "kind": "init",
+      "name": "sub_E0AD0",
+      "selected_boundary_callees": [],
+      "slot": "0x35d2a8"
+    },
+    {
+      "address": "0xe04d4",
+      "code": "__int64 sub_E04D4()\n{\n  plt_TString_clear_void((TString *)&data_TFiles_sdcardpath);\n  plt_TString_clear_void((TString *)&data_TFiles_baseuserfolder);\n  plt_TString_clear_void((TString *)&data_TFiles_basedatafolder2);\n  return plt_TString_clear_void((TString *)&data_TFiles_basedatafolder);\n}\n",
+      "code_bytes": 292,
+      "code_sha256": "de6de05ec016a7a57d3359ef07ca2ae292eba3669ae604d00645d8f9719354b1",
+      "direct_callees": [
+        {
+          "address": "0xd9020",
+          "name": "plt_TString_clear_void"
+        }
+      ],
+      "function_end": "0xe0514",
+      "function_start": "0xe04d4",
+      "kind": "fini",
+      "name": "TFiles_clearStaticPaths",
+      "selected_boundary_callees": [],
+      "slot": "0x35d2b0"
+    },
+    {
+      "address": "0xe0514",
+      "code": "__int64 sub_E0514()\n{\n  return plt_TString_clear_void((TString *)&qword_38D0F0);\n}\n",
+      "code_bytes": 83,
+      "code_sha256": "fe53e92e4459576002c7b515ed79eabe4524ccf2af48f81f555959ec70202502",
+      "direct_callees": [
+        {
+          "address": "0xd9020",
+          "name": "plt_TString_clear_void"
+        }
+      ],
+      "function_end": "0xe0524",
+      "function_start": "0xe0514",
+      "kind": "fini",
+      "name": "sub_E0514",
+      "selected_boundary_callees": [],
+      "slot": "0x35d2b8"
+    },
+    {
+      "address": "0xe0524",
+      "code": "__int64 sub_E0524()\n{\n  return plt_TString_clear_void((TString *)&qword_38D2B8);\n}\n",
+      "code_bytes": 83,
+      "code_sha256": "c25beac1e44ec896b4eb5a00a514d6f8fd479b299ce2fff244b6e2173a9cd125",
+      "direct_callees": [
+        {
+          "address": "0xd9020",
+          "name": "plt_TString_clear_void"
+        }
+      ],
+      "function_end": "0xe0530",
+      "function_start": "0xe0524",
+      "kind": "fini",
+      "name": "sub_E0524",
+      "selected_boundary_callees": [],
+      "slot": "0x35d2c0"
+    },
+    {
+      "address": "0xe0530",
+      "code": "__int64 sub_E0530()\n{\n  plt_TString_clear_void((TString *)&data_TClientEnvironment_serveraddr_saveforrestart);\n  plt_TString_clear_void((TString *)&data_TClientEnvironment_servername_saveforrestart);\n  return plt_TString_clear_void((TString *)&data_TClientEnvironment_fullexepath);\n}\n",
+      "code_bytes": 284,
+      "code_sha256": "76a5a6f9a74005c3ce5b1c211decba4112db062577e9916767df8f367c70b798",
+      "direct_callees": [
+        {
+          "address": "0xd9020",
+          "name": "plt_TString_clear_void"
+        }
+      ],
+      "function_end": "0xe0564",
+      "function_start": "0xe0530",
+      "kind": "fini",
+      "name": "sub_E0530",
+      "selected_boundary_callees": [],
+      "slot": "0x35d2c8"
+    },
+    {
+      "address": "0xe0564",
+      "code": "__int128 *sub_E0564()\n{\n  TString *v0; // x19\n  __int128 *result; // x0\n\n  v0 = (TString *)&graalanis;\n  do\n  {\n    v0 = (TString *)((char *)v0 - 8);\n    plt_TString_clear_void(v0);\n    result = &curanis;\n  }\n  while ( v0 != (TString *)&curanis );\n  return result;\n}\n",
+      "code_bytes": 267,
+      "code_sha256": "38343dc77403f9c893e3f365b43edc5569e4b8b1a5c88bcba37ff5a0a6b4643b",
+      "direct_callees": [
+        {
+          "address": "0xd9020",
+          "name": "plt_TString_clear_void"
+        }
+      ],
+      "function_end": "0xe05a4",
+      "function_start": "0xe0564",
+      "kind": "fini",
+      "name": "sub_E0564",
+      "selected_boundary_callees": [],
+      "slot": "0x35d2d0"
+    },
+    {
+      "address": "0xe05a4",
+      "code": "__int64 sub_E05A4()\n{\n  TString *v0; // x19\n  __int64 result; // x0\n\n  v0 = (TString *)&qword_38DF10;\n  do\n  {\n    v0 = (TString *)((char *)v0 - 8);\n    result = plt_TString_clear_void(v0);\n  }\n  while ( v0 != (TString *)&unk_38D710 );\n  return result;\n}\n",
+      "code_bytes": 255,
+      "code_sha256": "afcd2c54ed850a86f16d6b583f9db3b85b7557b0e3939ffa8a20b7e53b6fc78c",
+      "direct_callees": [
+        {
+          "address": "0xd9020",
+          "name": "plt_TString_clear_void"
+        }
+      ],
+      "function_end": "0xe05e0",
+      "function_start": "0xe05a4",
+      "kind": "fini",
+      "name": "sub_E05A4",
+      "selected_boundary_callees": [],
+      "slot": "0x35d2d8"
+    },
+    {
+      "address": "0xe05e0",
+      "code": "__int64 sub_E05E0()\n{\n  return plt_TString_clear_void((TString *)&displayedgif);\n}\n",
+      "code_bytes": 83,
+      "code_sha256": "9b0c88e9b0f18b886114d9e680a96c837f6f0bdc419104c666d06c079c183fe6",
+      "direct_callees": [
+        {
+          "address": "0xd9020",
+          "name": "plt_TString_clear_void"
+        }
+      ],
+      "function_end": "0xe05ec",
+      "function_start": "0xe05e0",
+      "kind": "fini",
+      "name": "sub_E05E0",
+      "selected_boundary_callees": [],
+      "slot": "0x35d2e0"
+    },
+    {
+      "address": "0xe05ec",
+      "code": "__int64 sub_E05EC()\n{\n  plt_TString_clear_void((TString *)&data_TClient_loginaccountname);\n  plt_TString_clear_void((TString *)&data_TClient_currentdownloadpackage);\n  plt_TString_clear_void((TString *)&data_TClient_currentdownloadfile);\n  plt_TString_clear_void((TString *)&data_TClient_disconnectreason);\n  plt_TString_clear_void((TString *)&data_TClient_ghostmessage);\n  plt_TString_clear_void((TString *)&data_TClient_requestedmapwarp);\n  plt_TString_clear_void((TString *)&data_TClient_lastserverwarp);\n  plt_TString_clear_void((TString *)&data_TClient_serverwarpdestination);\n  plt_TString_clear_void((TString *)&data_TClient_lastdownloadfile);\n  plt_TString_clear_void((TString *)&data_TClient_bigfilename);\n  return plt_TString_clear_void((TString *)&data_TClient_serverlevelname);\n}\n",
+      "code_bytes": 792,
+      "code_sha256": "c08b858680a4fcfd80635356d6f10b4d1b7b49e0e30188fa359c2bf0a9b5d93f",
+      "direct_callees": [
+        {
+          "address": "0xd9020",
+          "name": "plt_TString_clear_void"
+        }
+      ],
+      "function_end": "0xe0680",
+      "function_start": "0xe05ec",
+      "kind": "fini",
+      "name": "TClient_clearStaticStrings",
+      "selected_boundary_callees": [],
+      "slot": "0x35d2e8"
+    },
+    {
+      "address": "0xe0680",
+      "code": "__int64 sub_E0680()\n{\n  plt_TString_clear_void((TString *)&data_TSocket_allowedportsbind);\n  return plt_TString_clear_void((TString *)&data_TSocket_allowedsocketsconnect);\n}\n",
+      "code_bytes": 174,
+      "code_sha256": "e99847ca97d57966d6e09690812a817413c3a0514162203d5f851279a81e8444",
+      "direct_callees": [
+        {
+          "address": "0xd9020",
+          "name": "plt_TString_clear_void"
+        }
+      ],
+      "function_end": "0xe06a8",
+      "function_start": "0xe0680",
+      "kind": "fini",
+      "name": "TSocket_clearStaticStrings",
+      "selected_boundary_callees": [],
+      "slot": "0x35d2f0"
+    },
+    {
+      "address": "0xe06a8",
+      "code": "__int64 TServerFlying_clearStaticStrings()\n{\n  plt_TString_clear_void((TString *)&qword_391210);\n  plt_TString_clear_void((TString *)&qword_391218);\n  return plt_TString_clear_void((TString *)&video_player_filename);\n}\n",
+      "code_bytes": 219,
+      "code_sha256": "93990085b2ccecbaa4dc950c5ef2df9d5cb73899e32632b75c994e2eaa230437",
+      "direct_callees": [
+        {
+          "address": "0xd9020",
+          "name": "plt_TString_clear_void"
+        }
+      ],
+      "function_end": "0xe06d8",
+      "function_start": "0xe06a8",
+      "kind": "fini",
+      "name": "TServerFlying_clearStaticStrings",
+      "selected_boundary_callees": [],
+      "slot": "0x35d2f8"
+    }
+  ],
+  "database": {
+    "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "imagebase": "0x0",
+    "path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
+  },
+  "findings": [
+    {
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The ARM64 dynamic section defines a 20-entry init array at 0x35d210 and a 10-entry fini array at 0x35d2b0.",
+        "The entries resolve to fixed code addresses inside libqplay.so and do not depend on an incoming URI or server response."
+      ],
+      "id": "INIT-001",
+      "impact": "A loader failure or constructor crash can occur before the Java bridge reaches QPlayMain. This is a startup boundary that should be separated from connector and TLS diagnosis.",
+      "limits": "Static decompilation does not prove that every constructor runs successfully on a particular Android image. No ARM64 device logcat was available.",
+      "severity": "informational",
+      "title": "Native load executes a fixed constructor array before QPlayMain"
+    },
+    {
+      "confidence": "confirmed-static",
+      "evidence": [
+        "The callbacks initialize or clear file paths, resource link lists, texture state, cached image dimensions, GUI defaults, client restart strings, input animation state, and Android video globals.",
+        "The exporter found 0 direct calls from the callback set into the selected socket, resolver, file, or process boundary names."
+      ],
+      "id": "INIT-002",
+      "impact": "The constructor set is not a hidden connector request path in the reviewed database. The only nontrivial load-time work is allocation of small native lists and initialization of fixed global values.",
+      "limits": "The direct-call check is name-based and does not replace a full audit of every helper called by a constructor. It does not establish memory-safety of the allocation or teardown code.",
+      "severity": "informational",
+      "title": "Reviewed init and fini callbacks perform static state setup and teardown"
+    }
+  ],
+  "interpretation": [
+    "The JNI load path has a fixed native initialization phase before Java calls QPlayMain.",
+    "The residual sub_E* callbacks in this array are retained address-based names in IDA because several only write anonymous static storage; their decompiled code is included for reproducibility.",
+    "The selected boundary check found no direct constructor edge into connect, resolver, socket, file, or process imports."
+  ],
+  "network_contacted": false,
+  "schema": "libqplay.original-native-init-review.v1",
+  "scope": "read-only review of the original ARM64 ELF init and fini callback arrays"
+}

@@ -933,6 +933,17 @@ device logcat should be used to check the dynamic-linker result before
 changing the connector. The finding is `APK-012` in
 `artifacts/original_apk_security_audit_20260830.json`.
 
+The native init/fini pass then followed the dynamic-section arrays through
+IDA. There are 20 fixed init callbacks and 10 fini callbacks. Most are small
+static-state routines: they initialize resource link lists, the texture list,
+cached image dimensions, GUI defaults, client restart strings, input state,
+and Android video globals. Two init callbacks allocate small hash or texture
+objects. The exporter found no direct edge from the callback set into the
+selected socket, resolver, file, or process boundary names. This makes the
+constructor phase a useful loader checkpoint without treating it as a hidden
+network path. The full output is in
+`artifacts/original_native_init_review_20260830.json`.
+
 The parser-hardening pass adds
 `artifacts/original_level_parser_review_20260830.json`. It confirms that the
 outer `.code` length uses a signed 32-bit check before allocation, that

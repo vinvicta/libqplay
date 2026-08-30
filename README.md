@@ -147,6 +147,13 @@ still needed to distinguish a missing or incompatible runtime dependency from
 the separate stale-certificate problem. The expanded records are in
 `artifacts/original_apk_security_audit_20260830.json`.
 
+The native init/fini review confirms that `libqplay.so` runs a fixed 20-entry
+constructor array before `QPlayMain` and a 10-entry teardown array on unload.
+The callbacks initialize resource lists, texture state, GUI defaults, client
+state, and video globals. None of the callbacks directly reaches the selected
+socket, resolver, file, or process boundaries. Their decompiler output is
+preserved in `artifacts/original_native_init_review_20260830.json`.
+
 ## Repository layout
 
 * `docs/RESEARCH_NOTES.md` is the chronological investigation record.
@@ -214,6 +221,8 @@ the separate stale-certificate problem. The expanded records are in
 * `artifacts/original_android_device_media_review_20260830.json` records the
   Android build-info, display-metric, virtual-keyboard, and legacy video
   bridges. It contains no device-collected values or media data.
+* `artifacts/original_native_init_review_20260830.json` records the fixed ELF
+  init/fini callback arrays and their static-state behavior.
 * `artifacts/ida_translation_verification_20260830.json` records the final
   packed IDA copy, pass counts, hashes, and zero-failure verification result.
 * `artifacts/ida_active_translation_scope_check_20260830.json` records the

@@ -83,6 +83,15 @@ the native load result, before changing connector or TLS code. The machine
 readable record is `APK-012` in
 `artifacts/original_apk_security_audit_20260830.json`.
 
+The separate init/fini export records the load-time constructor boundary. The
+ARM64 library has 20 fixed init callbacks and 10 fini callbacks. They set up or
+clear resource lists, cached texture dimensions, GUI defaults, client strings,
+and video state. The callbacks do not directly call the selected socket,
+resolver, file, or process boundary names. This narrows, but does not
+eliminate, the possibility of a constructor or allocation failure before
+`QPlayMain`. The detailed record is
+`artifacts/original_native_init_review_20260830.json`.
+
 ## Evidence boundaries
 
 The findings use these terms:
