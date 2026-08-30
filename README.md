@@ -103,6 +103,15 @@ does not remove the risk of handing a bearer token to script code. The focused
 IDA and DEX review is in
 `artifacts/original_facebook_bridge_review_20260830.json`.
 
+The Google Play pass found a separate legacy billing bridge. The Android
+script table can start an in-app purchase with caller-supplied SKU and
+developer-payload text. The store still controls availability and signs the
+result, but the activity reports the immediate launch Boolean before the
+asynchronous result is known. The later callback sends status, SKU, original
+purchase JSON, and signature back into native script events even when the
+purchase signature was rejected. The focused review is in
+`artifacts/original_billing_bridge_review_20260830.json`.
+
 ## Repository layout
 
 * `docs/RESEARCH_NOTES.md` is the chronological investigation record.
@@ -161,6 +170,9 @@ IDA and DEX review is in
 * `artifacts/original_facebook_bridge_review_20260830.json` records the
   Facebook session, permission, Graph request, and game-resource upload
   callbacks. It contains no real token or login result.
+* `artifacts/original_billing_bridge_review_20260830.json` records the legacy
+  Google Play billing script, JNI, purchase verification, and callback path.
+  It contains no purchase data, signature, or embedded key material.
 * `artifacts/ida_translation_verification_20260830.json` records the final
   packed IDA copy, pass counts, hashes, and zero-failure verification result.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.

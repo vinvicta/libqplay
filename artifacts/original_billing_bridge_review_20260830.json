@@ -1,0 +1,297 @@
+{
+  "artifact": "original_billing_bridge_review_20260830",
+  "billing_service_bound": false,
+  "database": {
+    "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "imagebase": "0x0",
+    "path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
+  },
+  "findings": [
+    {
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "buygoogleplayitem is registered in the Android script table.",
+        "The activity passes the script-supplied SKU and developer payload directly to the legacy billing helper.",
+        "No local product-ID allowlist appears in the reviewed activity method."
+      ],
+      "id": "ANDROID-IAB-001",
+      "impact": "A compromised or untrusted script can trigger arbitrary store purchase prompts and choose the developer-payload text sent with the request. This is a purchase-initiation capability, not a demonstrated way to obtain free goods: Google Play still decides whether the SKU exists and whether the account may buy it.",
+      "limits": "The review did not launch a purchase, contact Google Play, or inspect server-side entitlement handling. The public artifact contains no developer payload, purchase JSON, order identifier, or signature.",
+      "severity": "medium",
+      "title": "Activated scripts can launch purchases for caller-supplied SKUs"
+    },
+    {
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "IabHelper verifies signed purchase data with the embedded RSA public key.",
+        "The verification-failure branch still passes its parsed Purchase object to the purchase listener with a failure result.",
+        "QPlayActivity forwards status, SKU, original JSON, and signature to native code, and the native JNI callback emits them as onGooglePlayPurchase string arguments."
+      ],
+      "id": "ANDROID-IAB-002",
+      "impact": "Scripts can observe transaction metadata and signature material for failed as well as successful attempts. If a script checks only SKU or JSON and ignores the status argument, this boundary creates room for a client-side entitlement mistake. It also exposes more purchase data to script code than is needed to report a simple result.",
+      "limits": "The static path does not show that the stock scripts grant an item on a failed status. Google Play signature verification remains in place for the success path, and no live purchase data was collected.",
+      "severity": "medium",
+      "title": "Purchase fields cross into script events even when verification fails"
+    },
+    {
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "initGooglePlay returns true after creating the helper and invoking startSetup(), even though setup is asynchronous.",
+        "The outer method catches Exception and still returns true.",
+        "The binding helper ignores the Boolean result from bindService(), while the later callback reports service availability or failure."
+      ],
+      "id": "ANDROID-IAB-003",
+      "impact": "A script can treat billing as ready when the device lacks the legacy Play service or when setup failed. This can produce missed purchase attempts, stale helper state, and misleading diagnostics on current Android builds.",
+      "limits": "The later onGooglePlayInitialized event carries the actual setup result. This is a compatibility and state-reporting issue, not proof that the store service can be bypassed.",
+      "severity": "low",
+      "title": "Billing initialization reports success before asynchronous setup completes"
+    },
+    {
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "Security.verify uses SHA1withRSA and the platform default charset for signed purchase text.",
+        "The helper uses the legacy in-app billing v3 AIDL service.",
+        "Automatic consumption is selected by substring checks for gralatspack, coinspack, and vippack, plus an android.test prefix, rather than a fixed catalog."
+      ],
+      "id": "ANDROID-IAB-004",
+      "impact": "The cryptographic and API choices create maintenance debt on newer platforms. The broad SKU substring rules can also consume a product whose identifier happens to contain one of those tokens, which could discard an entitlement before a game-specific handler uses it.",
+      "limits": "The review did not demonstrate a forged signature, a charset mismatch in a real purchase, or an actual SKU collision. These are hardening and compatibility concerns, not a confirmed forgery path.",
+      "severity": "low",
+      "title": "The client uses legacy SHA-1 purchase verification and name-based consumption"
+    }
+  ],
+  "functions": [
+    {
+      "address": "0x245f40",
+      "callers": [
+        {
+          "caller": "0xddf70",
+          "caller_name": "plt_main_android_initStaticScriptVars_void",
+          "callsite": "0xddf74"
+        },
+        {
+          "caller": "0xddf70",
+          "caller_name": "plt_main_android_initStaticScriptVars_void",
+          "callsite": "0xddf7c"
+        }
+      ],
+      "code": "__int64 __fastcall main_android_initStaticScriptVars_void()\n{\n  return plt_TScriptProperty_addFuncs_TProperties_TPropertyFuncDef_int(0, &off_38B2D0, 44);\n}\n",
+      "code_bytes": 156,
+      "code_sha256": "ad787d04458833982fa77040114bd10396d04df8d2b54855a58f5879941d18d2",
+      "function_end": "0x245f54",
+      "function_start": "0x245f40",
+      "name": "main_android_initStaticScriptVars_void",
+      "role": "Android script table owner"
+    },
+    {
+      "address": "0xe9d30",
+      "callers": [],
+      "code": "// Shared script wrapper used by getclassicversion and getgamesubversion. Returns the literal googleplay.\n_QWORD *__usercall TGameEnvironment_script_getGooglePlay@<X0>(_QWORD *a1@<X8>)\n{\n  *a1 = 0;\n  plt_TString_operator_lshift_char_const((int)a1, \"googleplay\");\n  return a1;\n}\n",
+      "code_bytes": 278,
+      "code_sha256": "46a0f3973245e79c2010421a02988db1a10956ba8e5fde31c2bdab78166eea90",
+      "function_end": "0xe9d64",
+      "function_start": "0xe9d30",
+      "name": "TGameEnvironment_script_getGooglePlay",
+      "role": "Google Play feature marker"
+    },
+    {
+      "address": "0x24090c",
+      "callers": [],
+      "code": "// Calls Java static initGooglePlay()Z. Returns the Java boolean result.\nbool JNI_initGooglePlay()\n{\n  __int64 v0; // x2\n\n  v0 = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n         javaenvironment,\n         javaenvironmentclass,\n         \"initGooglePlay\",\n         \"()Z\");\n  return v0\n      && (unsigned __int8)plt_JNIEnv_CallStaticBooleanMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v0) != 0;\n}\n",
+      "code_bytes": 483,
+      "code_sha256": "62192385780c3196bb852fdf37516e470392917b75520c2ccfd96672981ca586",
+      "function_end": "0x240994",
+      "function_start": "0x24090c",
+      "name": "JNI_initGooglePlay",
+      "role": "Google Play initialization bridge"
+    },
+    {
+      "address": "0x240eb8",
+      "callers": [],
+      "code": "// Calls Java static buyGooglePlayItem([B[B)Z. Converts two TString byte buffers to Java byte arrays and returns the Java boolean result.\nbool __fastcall JNI_buyGooglePlayItem(unsigned int **a1, unsigned int **a2)\n{\n  __int64 v4; // x23\n  __int64 v5; // x20\n  unsigned int *v6; // x4\n  __int64 v7; // x0\n  __int64 v8; // x3\n  _DWORD *v9; // x4\n  unsigned int v10; // t1\n  __int64 v11; // x21\n  unsigned int *v12; // x4\n  __int64 v13; // x0\n  __int64 v14; // x3\n  _DWORD *v15; // x4\n  unsigned int v16; // t1\n  char v17; // w0\n  __int64 v18; // x1\n  _BOOL4 v19; // w20\n\n  v4 = (*(__int64 (__fastcall **)(__int64, __int64, const char *, const char *))(*(_QWORD *)javaenvironment + 904LL))(\n         javaenvironment,\n         javaenvironmentclass,\n         \"buyGooglePlayItem\",\n         \"([B[B)Z\");\n  if ( v4 )\n  {\n    if ( *a1 )\n    {\n      v5 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, **a1);\n      v6 = *a1;\n      v7 = javaenvironment;\n      if ( *a1 )\n      {\nLABEL_4:\n        v10 = *v6;\n        v9 = v6 + 2;\n        v8 = v10;\n        goto LABEL_5;\n      }\n    }\n    else\n    {\n      v5 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, 0);\n      v6 = *a1;\n      v7 = javaenvironment;\n      if ( *a1 )\n        goto LABEL_4;\n    }\n    v8 = 0;\n    v9 = (_DWORD *)TString_dummystr;\nLABEL_5:\n    (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, _DWORD *))(*(_QWORD *)v7 + 1664LL))(v7, v5, 0, v8, v9);\n    if ( *a2 )\n    {\n      v11 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, **a2);\n      v12 = *a2;\n      v13 = javaenvironment;\n      if ( *a2 )\n      {\nLABEL_7:\n        v16 = *v12;\n        v15 = v12 + 2;\n        v14 = v16;\nLABEL_8:\n        (*(void (__fastcall **)(__int64, __int64, _QWORD, __int64, _DWORD *))(*(_QWORD *)v13 + 1664LL))(\n          v13,\n          v11,\n          0,\n          v14,\n          v15);\n        v17 = plt_JNIEnv_CallStaticBooleanMethod_jclass_jmethodID(javaenvironment, javaenvironmentclass, v4);\n        v18 = v5;\n        v19 = v17 != 0;\n        (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v18);\n        (*(void (__fastcall **)(__int64, __int64))(*(_QWORD *)javaenvironment + 184LL))(javaenvironment, v11);\n        return v19;\n      }\n    }\n    else\n    {\n      v11 = (*(__int64 (__fastcall **)(__int64, _QWORD))(*(_QWORD *)javaenvironment + 1408LL))(javaenvironment, 0);\n      v12 = *a2;\n      v13 = javaenvironment;\n      if ( *a2 )\n        goto LABEL_7;\n    }\n    v14 = 0;\n    v15 = (_DWORD *)TString_dummystr;\n    goto LABEL_8;\n  }\n  return 0;\n}\n",
+      "code_bytes": 2706,
+      "code_sha256": "7ad3fc95b19148b61b55dd651d3224f5399d402824f8941f286a20fc88f9ca9e",
+      "function_end": "0x2410ac",
+      "function_start": "0x240eb8",
+      "name": "JNI_buyGooglePlayItem",
+      "role": "Google Play purchase bridge"
+    },
+    {
+      "address": "0x245768",
+      "callers": [],
+      "code": "__int64 *__fastcall Java_com_quattroplay_GraalClassic_Natives_onGooglePlayInitialized(\n        __int64 a1,\n        __int64 a2,\n        unsigned __int8 a3)\n{\n  __int64 *result; // x0\n  TGraalVar *v4; // x20\n  __int64 v5; // [xsp+28h] [xbp-18h]\n  __int64 v6; // [xsp+38h] [xbp-8h] BYREF\n\n  result = &data_TGameEnvironment_universe;\n  v5 = a3;\n  v4 = (TGraalVar *)data_TGameEnvironment_universe;\n  if ( data_TGameEnvironment_universe )\n  {\n    v6 = 0;\n    plt_TString_operator_lshift_char_const((int)&v6, \"onGooglePlayInitialized\");\n    plt_TGraalVar_invokeEvent_TString_const_char_const(v4, (const TString *)&v6, \"b\", v5);\n    return (__int64 *)plt_TString_clear_void((TString *)&v6);\n  }\n  return result;\n}\n",
+      "code_bytes": 706,
+      "code_sha256": "1caa1290205fa6bb0d32a6746f37d5eb7433691251685accc2fd599367a85279",
+      "function_end": "0x2457d4",
+      "function_start": "0x245768",
+      "name": "Java_com_quattroplay_GraalClassic_Natives_onGooglePlayInitialized",
+      "role": "Google Play setup callback"
+    },
+    {
+      "address": "0x2457d4",
+      "callers": [],
+      "code": "__int64 __fastcall Java_com_quattroplay_GraalClassic_Natives_onGooglePlayPurchase(\n        __int64 a1,\n        __int64 a2,\n        __int64 a3,\n        __int64 a4,\n        __int64 a5,\n        __int64 a6)\n{\n  TGraalVar *v11; // x24\n  __int64 v12; // x4\n  __int64 v13; // x3\n  __int64 v14; // x5\n  __int64 v15; // x4\n  __int64 v16; // x6\n  __int64 v17; // x5\n  __int64 v18; // x6\n  char *v20; // [xsp+58h] [xbp-38h]\n  char *v21; // [xsp+58h] [xbp-38h]\n  char *v22; // [xsp+58h] [xbp-38h]\n  char *v23; // [xsp+58h] [xbp-38h]\n  __int64 v24; // [xsp+68h] [xbp-28h] BYREF\n  __int64 v25; // [xsp+70h] [xbp-20h] BYREF\n  __int64 v26; // [xsp+78h] [xbp-18h] BYREF\n  __int64 v27; // [xsp+80h] [xbp-10h] BYREF\n  __int64 v28; // [xsp+88h] [xbp-8h] BYREF\n\n  v20 = (char *)(*(__int64 (__fastcall **)(__int64, __int64, _QWORD))(*(_QWORD *)a1 + 1352LL))(a1, a3, 0);\n  v24 = 0;\n  plt_TString_operator_lshift_char_const((int)&v24, v20);\n  (*(void (__fastcall **)(__int64, __int64, char *))(*(_QWORD *)a1 + 1360LL))(a1, a3, v20);\n  v21 = (char *)(*(__int64 (__fastcall **)(__int64, __int64, _QWORD))(*(_QWORD *)a1 + 1352LL))(a1, a4, 0);\n  v25 = 0;\n  plt_TString_operator_lshift_char_const((int)&v25, v21);\n  (*(void (__fastcall **)(__int64, __int64, char *))(*(_QWORD *)a1 + 1360LL))(a1, a4, v21);\n  v22 = (char *)(*(__int64 (__fastcall **)(__int64, __int64, _QWORD))(*(_QWORD *)a1 + 1352LL))(a1, a5, 0);\n  v26 = 0;\n  plt_TString_operator_lshift_char_const((int)&v26, v22);\n  (*(void (__fastcall **)(__int64, __int64, char *))(*(_QWORD *)a1 + 1360LL))(a1, a5, v22);\n  v23 = (char *)(*(__int64 (__fastcall **)(__int64, __int64, _QWORD))(*(_QWORD *)a1 + 1352LL))(a1, a6, 0);\n  v27 = 0;\n  plt_TString_operator_lshift_char_const((int)&v27, v23);\n  (*(void (__fastcall **)(__int64, __int64, char *))(*(_QWORD *)a1 + 1360LL))(a1, a6, v23);\n  v11 = (TGraalVar *)data_TGameEnvironment_universe;\n  if ( data_TGameEnvironment_universe )\n  {\n    v28 = 0;\n    plt_TString_operator_lshift_char_const((int)&v28, \"onGooglePlayPurchase\");\n    if ( v24 )\n    {\n      v12 = v25;\n      v13 = v24 + 8;\n      if ( v25 )\n        goto LABEL_4;\n    }\n    else\n    {\n      v12 = v25;\n      v13 = TString_dummystr;\n      if ( v25 )\n      {\nLABEL_4:\n        v14 = v26;\n        v15 = v12 + 8;\n        if ( v26 )\n          goto LABEL_5;\n        goto LABEL_11;\n      }\n    }\n    v14 = v26;\n    v15 = TString_dummystr;\n    if ( v26 )\n    {\nLABEL_5:\n      v16 = v27;\n      v17 = v14 + 8;\n      if ( v27 )\n      {\nLABEL_6:\n        v18 = v16 + 8;\nLABEL_7:\n        plt_TGraalVar_invokeEvent_TString_const_char_const(v11, (const TString *)&v28, \"ssss\", v13, v15, v17, v18);\n        plt_TString_clear_void((TString *)&v28);\n        goto LABEL_8;\n      }\nLABEL_12:\n      v18 = TString_dummystr;\n      goto LABEL_7;\n    }\nLABEL_11:\n    v16 = v27;\n    v17 = TString_dummystr;\n    if ( v27 )\n      goto LABEL_6;\n    goto LABEL_12;\n  }\nLABEL_8:\n  plt_TString_clear_void((TString *)&v27);\n  plt_TString_clear_void((TString *)&v26);\n  plt_TString_clear_void((TString *)&v25);\n  return plt_TString_clear_void((TString *)&v24);\n}\n",
+      "code_bytes": 3063,
+      "code_sha256": "80de62f6ad75578ab42815fb0353c344d00311c6aa79490866eea60184bb969e",
+      "function_end": "0x245a18",
+      "function_start": "0x2457d4",
+      "name": "Java_com_quattroplay_GraalClassic_Natives_onGooglePlayPurchase",
+      "role": "Google Play purchase callback"
+    }
+  ],
+  "interpretation": [
+    "The billing bridge is separate from the native Graal connector and its CyaSSL trust bundle.",
+    "The store's signature verification gates the successful IAB result, but the surrounding callback still forwards purchase fields to native script code on failure.",
+    "The immediate init and buy Booleans are operation-start indicators. The asynchronous callbacks carry the meaningful billing result.",
+    "A repair should allowlist product IDs, treat the asynchronous setup and purchase result as authoritative, pass only the minimum result data to scripts, and replace the legacy billing API when the service contract permits."
+  ],
+  "java_observations": [
+    {
+      "behavior": [
+        "Returns true immediately when a billing helper already exists.",
+        "Constructs IabHelper with the embedded RSA public key, enables debug logging with the tag unixmad, and calls startSetup().",
+        "Catches Exception around construction, logging, and setup invocation but still returns true.",
+        "The setup callback later reports success or failure to native code and queries inventory after successful setup."
+      ],
+      "class": "com.quattroplay.GraalClassic.QPlayActivity",
+      "method": "initGooglePlay()",
+      "source": "original DEX smali"
+    },
+    {
+      "behavior": [
+        "Returns false when mBillingHelper is null.",
+        "Passes the caller's SKU and developer payload to IabHelper.launchPurchaseFlow() as an inapp item with a fixed request code.",
+        "Returns true after the asynchronous flow is launched, before the purchase result is known.",
+        "Catches synchronous exceptions and returns false, while asynchronous failures arrive through the purchase callback.",
+        "The reviewed activity method contains no product-ID allowlist."
+      ],
+      "class": "com.quattroplay.GraalClassic.QPlayActivity",
+      "method": "buyGooglePlayItem(java.lang.String, java.lang.String)",
+      "source": "original DEX smali"
+    },
+    {
+      "behavior": [
+        "Binds the explicit com.android.vending billing service action and checks in-app billing version 3 support.",
+        "Passes caller-supplied SKU and developer payload to the billing service getBuyIntent() call.",
+        "The bindService Boolean result is not used to report an immediate failure.",
+        "The purchase activity result is checked against the fixed request code before purchase data is parsed."
+      ],
+      "class": "com.quattroplay.GraalClassic.util.IabHelper",
+      "method": "startSetup() and launchPurchaseFlow()",
+      "source": "original DEX smali"
+    },
+    {
+      "behavior": [
+        "Rejects empty key, signed-data, or signature text.",
+        "Decodes the embedded Base64 X.509 RSA public key and verifies the signed data with SHA1withRSA.",
+        "Uses String.getBytes() without an explicit charset for the signed purchase JSON.",
+        "IabHelper calls this verifier for both the immediate purchase result and inventory entries."
+      ],
+      "class": "com.quattroplay.GraalClassic.util.Security",
+      "method": "verifyPurchase(java.lang.String, java.lang.String, java.lang.String)",
+      "source": "original DEX smali"
+    },
+    {
+      "behavior": [
+        "Maps response code 7 to alreadyowned, any failure to failed, and a non-null successful purchase to success.",
+        "Forwards the Purchase object to onGooglePlayPurchase() on all three paths when the listener provides one.",
+        "Automatically consumes successful purchases whose SKU contains gralatspack, coinspack, or vippack, or starts with android.test."
+      ],
+      "class": "com.quattroplay.GraalClassic.QPlayActivity$21",
+      "method": "onIabPurchaseFinished(IabResult, Purchase)",
+      "source": "original DEX smali"
+    },
+    {
+      "behavior": [
+        "Logs the result status and Purchase.toString() through stdout.",
+        "Schedules a GL-thread callback carrying status, SKU, original purchase JSON, and signature.",
+        "The native callback receives empty strings when the Purchase object is null."
+      ],
+      "class": "com.quattroplay.GraalClassic.QPlayActivity",
+      "method": "onGooglePlayPurchase(java.lang.String, Purchase)",
+      "source": "original DEX smali"
+    },
+    {
+      "behavior": [
+        "After successful setup, inventory entries are verified by IabHelper and then automatically consumed only for the same name-based SKU classes.",
+        "Consumption reports consumesuccess or consumefailed through the same purchase event path.",
+        "The inventory listener does not expose a separate native inventory event."
+      ],
+      "class": "com.quattroplay.GraalClassic.QPlayActivity$20 and $22",
+      "method": "inventory and consume callbacks",
+      "source": "original DEX smali"
+    }
+  ],
+  "network_contacted": false,
+  "observations": [
+    {
+      "address": "0x38b4e0",
+      "classification": "script-visible billing setup",
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "The main_android script table maps initgoogleplay to JNI_initGooglePlay.",
+        "The native wrapper calls QPlayActivity.initGooglePlay() and returns its immediate Java Boolean.",
+        "The Java method starts legacy billing setup asynchronously and reports the eventual result through onGooglePlayInitialized."
+      ],
+      "interpretation": "A true script return value means only that the helper setup call was accepted synchronously, not that a usable Play billing service is ready."
+    },
+    {
+      "address": "0x38b510",
+      "classification": "script-controlled purchase launch",
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "The main_android script table maps buygoogleplayitem to JNI_buyGooglePlayItem.",
+        "The JNI wrapper converts two native strings to Java byte arrays and calls buyGooglePlayItem([B[B)Z.",
+        "The activity passes both values directly to IabHelper.launchPurchaseFlow(), which calls the billing service getBuyIntent() method."
+      ],
+      "interpretation": "An activated script can request a store purchase for any SKU text it supplies. The store still controls product availability, account authorization, and the signed result."
+    },
+    {
+      "address": "0x2457d4",
+      "classification": "purchase-data trust boundary",
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "IabHelper verifies the purchase signature before reporting a successful result.",
+        "When verification fails, IabHelper still calls the purchase listener with a constructed Purchase object and a failure result.",
+        "QPlayActivity forwards the status, SKU, original JSON, and signature to the native onGooglePlayPurchase callback.",
+        "The native callback invokes the script event onGooglePlayPurchase with four string arguments."
+      ],
+      "interpretation": "Signature verification gates the success status, but it does not gate exposure of the purchase fields to native script code."
+    },
+    {
+      "address": "0x245768",
+      "classification": "asynchronous setup result",
+      "confidence": "confirmed-static-plus-dex",
+      "evidence": [
+        "The Java setup listener schedules onGooglePlayInitialized on the GL thread.",
+        "The native callback invokes the script event with the Boolean setup result.",
+        "The result callback is the only reviewed path that distinguishes an available billing service from the optimistic initGooglePlay return value."
+      ],
+      "interpretation": "Scripts need the later initialization event to know whether billing v3 was actually available on the device."
+    }
+  ],
+  "purchase_data_collected": false,
+  "purchase_flow_launched": false,
+  "schema": "libqplay.original-billing-bridge-review.v1",
+  "scope": "read-only review of the original 1.8 Google Play billing script, JNI, and legacy helper bridge",
+  "script_surface": {
+    "owner": "main_android_initStaticScriptVars_void",
+    "registered_function_count": 44,
+    "relevant_entries": [
+      {
+        "behavior": "Calls the activity's asynchronous legacy billing setup and returns its immediate Java Boolean.",
+        "callback_va": "0x24090c",
+        "native_signature": "initGooglePlay()Z",
+        "script_name": "initgoogleplay"
+      },
+      {
+        "behavior": "Passes script-supplied SKU and developer-payload text to the activity's in-app purchase flow.",
+        "callback_va": "0x240eb8",
+        "native_signature": "buyGooglePlayItem([B[B)Z",
+        "script_name": "buygoogleplayitem"
+      }
+    ],
+    "source": "IDA script_table_inventory.json plus active IDA database",
+    "table_va": "0x38b2d0"
+  }
+}
