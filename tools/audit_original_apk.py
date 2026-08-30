@@ -290,6 +290,9 @@ DEX_INDICATORS = {
     "webview_javascript_bridge": "addJavascriptInterface",
     "webview_script_evaluation": "evaluateJavascript",
     "javascript_interface_annotation": "JavascriptInterface",
+    "webview_ssl_error_handler": "onReceivedSslError",
+    "ssl_test_bypass_indicator": "DISABLE_SSL_CHECK_FOR_TESTING",
+    "ssl_server_domain_indicator": "fz_server_domain_ssl",
     "dynamic_dex_loader": "DexClassLoader",
     "dynamic_dex_command": "load_dex",
     "reflection_command": "java_reflection",
@@ -601,6 +604,14 @@ def build_findings(manifest: dict, dex_reports: list[dict], native_reports: list
             "evidence": ["DEX strings include DexClassLoader, load_dex, and java_reflection."],
             "impact": "If untrusted content can supply those commands, code can be loaded inside the application process with its permissions.",
             "limit": "The audit did not inject DEX, invoke reflection, or contact the recovered WebTop URL.",
+        })
+    if {"webview_ssl_error_handler", "ssl_test_bypass_indicator"} <= indicators:
+        findings.append({
+            "id": "APK-011", "severity": "high-interest", "confidence": "confirmed string indicators, behavior untested",
+            "title": "The Java layer contains WebView SSL-error and test-mode indicators",
+            "evidence": ["The DEX string table contains onReceivedSslError and DISABLE_SSL_CHECK_FOR_TESTING."],
+            "impact": "If the corresponding code path is active, it may alter how WebView certificate errors are handled in a test or legacy configuration.",
+            "limit": "Static strings do not prove that SSL errors are ignored, that test mode is enabled, or that a remote page can reach this code. The native connector uses a separate CyaSSL path.",
         })
 
     if qplay and qplay["native_strings"].get("legacy_or_weak_cipher_names"):

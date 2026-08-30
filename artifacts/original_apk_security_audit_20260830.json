@@ -118,6 +118,20 @@
           ],
           "needle": "getSharedPreferences"
         },
+        "ssl_server_domain_indicator": {
+          "count": 1,
+          "examples": [
+            "fz_server_domain_ssl"
+          ],
+          "needle": "fz_server_domain_ssl"
+        },
+        "ssl_test_bypass_indicator": {
+          "count": 1,
+          "examples": [
+            "DISABLE_SSL_CHECK_FOR_TESTING"
+          ],
+          "needle": "DISABLE_SSL_CHECK_FOR_TESTING"
+        },
         "webview_class": {
           "count": 30,
           "examples": [
@@ -145,6 +159,13 @@
             "setJavaScriptEnabled"
           ],
           "needle": "setJavaScriptEnabled"
+        },
+        "webview_ssl_error_handler": {
+          "count": 1,
+          "examples": [
+            "onReceivedSslError"
+          ],
+          "needle": "onReceivedSslError"
         }
       },
       "magic": "dex\n035\u0000",
@@ -187,6 +208,17 @@
       "limit": "String evidence does not prove that a remote page can reach every bridge method in a production run.",
       "severity": "high-interest",
       "title": "The WebTop path enables JavaScript and a native bridge"
+    },
+    {
+      "confidence": "confirmed string indicators, behavior untested",
+      "evidence": [
+        "The DEX string table contains onReceivedSslError and DISABLE_SSL_CHECK_FOR_TESTING."
+      ],
+      "id": "APK-011",
+      "impact": "If the corresponding code path is active, it may alter how WebView certificate errors are handled in a test or legacy configuration.",
+      "limit": "Static strings do not prove that SSL errors are ignored, that test mode is enabled, or that a remote page can reach this code. The native connector uses a separate CyaSSL path.",
+      "severity": "high-interest",
+      "title": "The Java layer contains WebView SSL-error and test-mode indicators"
     },
     {
       "confidence": "confirmed legacy vocabulary, active suite selection unproven",

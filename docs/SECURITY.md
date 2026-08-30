@@ -50,6 +50,10 @@ There are also several meaningful security boundaries:
    a network identifier, and exposes other system-ID modes including Android ID.
    This is a privacy concern and an account-correlation surface, not evidence of
    code execution.
+6. The DEX contains `onReceivedSslError`, `DISABLE_SSL_CHECK_FOR_TESTING`, and
+   `fz_server_domain_ssl` indicators. They justify a Java call-graph review, but
+   static strings do not show that a certificate error is ignored or that test
+   mode is active. The native connector is a separate CyaSSL implementation.
 
 The native libraries do have useful baseline mitigations. All four packaged
 libraries report a non-executable `GNU_STACK`, GNU RELRO, and `BIND_NOW` in the
@@ -118,6 +122,14 @@ The risks to resolve in a follow-up review are straightforward:
 * Can message data be inserted into JavaScript without quoting or escaping?
 * Can a URI or native server message trigger the WebView path before the user
   has authenticated?
+
+The same DEX string table contains `onReceivedSslError` and
+`DISABLE_SSL_CHECK_FOR_TESTING`, along with `fz_server_domain_ssl`. The offline
+audit records these as APK-011. They are useful search anchors for a future
+Java call-graph review, not proof that WebView certificate errors are ignored.
+No `DexClassLoader`, `load_dex`, or repository-specific `java_reflection`
+indicator was found in the original DEX, so dynamic code loading was not
+established by this static pass.
 
 The safe maintenance direction is to remove the bridge from untrusted pages,
 use an explicit URL allowlist, validate every message as structured data, and
