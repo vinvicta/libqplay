@@ -1,0 +1,3321 @@
+{
+  "raw": [],
+  "strings": [],
+  "targets": [
+    {
+      "comment": "Reviewed 1.8-to-Spectron anchor: Java_com_quattroplay_GraalClassic_Natives_QPlayLoop at 0x2440f4; basis=exact JNI export name and loading/world render control flow; confidence=high",
+      "disassembly": [
+        {
+          "ea": "0x250ee0",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X2, #_ZN10zYRMgaG0IJ10flT3GasaTQE_ptr@PAGE; Reviewed 1.8-to-Spectron anchor: Java_com_quattroplay_GraalClassic_Natives_QPlayLoop at 0x2440f4; basis=exact JNI export name and loading/world render control flow; confidence=high"
+        },
+        {
+          "ea": "0x250ee4",
+          "mnemonic": "SUB",
+          "text": "SUB             SP, SP, #0x80"
+        },
+        {
+          "ea": "0x250ee8",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X4, #javaenvironment_ptr@PAGE"
+        },
+        {
+          "ea": "0x250eec",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X3, #javaenvironmentclass_ptr@PAGE"
+        },
+        {
+          "ea": "0x250ef0",
+          "mnemonic": "STR",
+          "text": "STR             D8, [SP,#0x80+var_40]"
+        },
+        {
+          "ea": "0x250ef4",
+          "mnemonic": "LDR",
+          "text": "LDR             X2, [X2,#_ZN10zYRMgaG0IJ10flT3GasaTQE_ptr@PAGEOFF]; zYRMgaG0IJ::flT3GasaTQ ..."
+        },
+        {
+          "ea": "0x250ef8",
+          "mnemonic": "STP",
+          "text": "STP             X19, X20, [SP,#0x80+var_80]"
+        },
+        {
+          "ea": "0x250efc",
+          "mnemonic": "STP",
+          "text": "STP             X21, X22, [SP,#0x80+var_70]"
+        },
+        {
+          "ea": "0x250f00",
+          "mnemonic": "STP",
+          "text": "STP             X23, X24, [SP,#0x80+var_60]"
+        },
+        {
+          "ea": "0x250f04",
+          "mnemonic": "STP",
+          "text": "STP             X25, X30, [SP,#0x80+var_50]"
+        },
+        {
+          "ea": "0x250f08",
+          "mnemonic": "LDR",
+          "text": "LDR             D8, =0x408F400000000000"
+        },
+        {
+          "ea": "0x250f0c",
+          "mnemonic": "LDR",
+          "text": "LDR             X4, [X4,#javaenvironment_ptr@PAGEOFF]; javaenvironment"
+        },
+        {
+          "ea": "0x250f10",
+          "mnemonic": "LDR",
+          "text": "LDR             W2, [X2]; zYRMgaG0IJ::flT3GasaTQ"
+        },
+        {
+          "ea": "0x250f14",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X19, #dword_3A58D0@PAGE"
+        },
+        {
+          "ea": "0x250f18",
+          "mnemonic": "LDR",
+          "text": "LDR             X3, [X3,#javaenvironmentclass_ptr@PAGEOFF]; javaenvironmentclass"
+        },
+        {
+          "ea": "0x250f1c",
+          "mnemonic": "STR",
+          "text": "STR             X0, [X4]"
+        },
+        {
+          "ea": "0x250f20",
+          "mnemonic": "UCVTF",
+          "text": "UCVTF           D0, W2"
+        },
+        {
+          "ea": "0x250f24",
+          "mnemonic": "STR",
+          "text": "STR             X1, [X3]"
+        },
+        {
+          "ea": "0x250f28",
+          "mnemonic": "FDIV",
+          "text": "FDIV            D8, D0, D8"
+        },
+        {
+          "ea": "0x250f2c",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10zYRMgaG0IJ10FYcZgaMw6TEv; zYRMgaG0IJ::FYcZgaMw6T(void)"
+        },
+        {
+          "ea": "0x250f30",
+          "mnemonic": "ADD",
+          "text": "ADD             X1, X19, #dword_3A58D0@PAGEOFF"
+        },
+        {
+          "ea": "0x250f34",
+          "mnemonic": "MOV",
+          "text": "MOV             W0, #2"
+        },
+        {
+          "ea": "0x250f38",
+          "mnemonic": "LDR",
+          "text": "LDR             D2, [X1,#(qword_3A59A8 - 0x3A58D0)]"
+        },
+        {
+          "ea": "0x250f3c",
+          "mnemonic": "FADD",
+          "text": "FADD            D1, D2, D8"
+        },
+        {
+          "ea": "0x250f40",
+          "mnemonic": "FCMPE",
+          "text": "FCMPE           D0, D1"
+        },
+        {
+          "ea": "0x250f44",
+          "mnemonic": "B.PL",
+          "text": "B.PL            loc_250F64"
+        },
+        {
+          "ea": "0x250f48",
+          "mnemonic": "LDP",
+          "text": "LDP             X19, X20, [SP,#0x80+var_80]"
+        },
+        {
+          "ea": "0x250f4c",
+          "mnemonic": "LDP",
+          "text": "LDP             X21, X22, [SP,#0x80+var_70]"
+        },
+        {
+          "ea": "0x250f50",
+          "mnemonic": "LDP",
+          "text": "LDP             X23, X24, [SP,#0x80+var_60]"
+        },
+        {
+          "ea": "0x250f54",
+          "mnemonic": "LDP",
+          "text": "LDP             X25, X30, [SP,#0x80+var_50]"
+        },
+        {
+          "ea": "0x250f58",
+          "mnemonic": "LDR",
+          "text": "LDR             D8, [SP,#0x80+var_40]"
+        },
+        {
+          "ea": "0x250f5c",
+          "mnemonic": "ADD",
+          "text": "ADD             SP, SP, #0x80"
+        },
+        {
+          "ea": "0x250f60",
+          "mnemonic": "RET",
+          "text": "RET"
+        },
+        {
+          "ea": "0x250f64",
+          "mnemonic": "FMOV",
+          "text": "FMOV            D3, #2.0"
+        },
+        {
+          "ea": "0x250f68",
+          "mnemonic": "FMADD",
+          "text": "FMADD           D8, D8, D3, D2"
+        },
+        {
+          "ea": "0x250f6c",
+          "mnemonic": "FCMPE",
+          "text": "FCMPE           D0, D8"
+        },
+        {
+          "ea": "0x250f70",
+          "mnemonic": "B.GT",
+          "text": "B.GT            loc_2511C0"
+        },
+        {
+          "ea": "0x250f74",
+          "mnemonic": "ADD",
+          "text": "ADD             X0, X19, #dword_3A58D0@PAGEOFF; this"
+        },
+        {
+          "ea": "0x250f78",
+          "mnemonic": "STR",
+          "text": "STR             Q0, [SP,#0x80+var_30]"
+        },
+        {
+          "ea": "0x250f7c",
+          "mnemonic": "STR",
+          "text": "STR             D1, [X0,#(qword_3A59A8 - 0x3A58D0)]"
+        },
+        {
+          "ea": "0x250f80",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10a7qxJaHqKV10XPp3GaoluQEv; a7qxJaHqKV::XPp3GaoluQ(void)"
+        },
+        {
+          "ea": "0x250f84",
+          "mnemonic": "UXTB",
+          "text": "UXTB            W0, W0"
+        },
+        {
+          "ea": "0x250f88",
+          "mnemonic": "LDR",
+          "text": "LDR             Q0, [SP,#0x80+var_30]"
+        },
+        {
+          "ea": "0x250f8c",
+          "mnemonic": "CBNZ",
+          "text": "CBNZ            W0, loc_2512EC"
+        },
+        {
+          "ea": "0x250f90",
+          "mnemonic": "ADD",
+          "text": "ADD             X0, X19, #dword_3A58D0@PAGEOFF"
+        },
+        {
+          "ea": "0x250f94",
+          "mnemonic": "FMOV",
+          "text": "FMOV            D2, #5.0"
+        },
+        {
+          "ea": "0x250f98",
+          "mnemonic": "LDR",
+          "text": "LDR             D1, [X0,#(qword_3A59B0 - 0x3A58D0)]"
+        },
+        {
+          "ea": "0x250f9c",
+          "mnemonic": "FSUB",
+          "text": "FSUB            D1, D0, D1"
+        },
+        {
+          "ea": "0x250fa0",
+          "mnemonic": "FCMPE",
+          "text": "FCMPE           D1, D2"
+        },
+        {
+          "ea": "0x250fa4",
+          "mnemonic": "B.GT",
+          "text": "B.GT            loc_251204"
+        },
+        {
+          "ea": "0x250fa8",
+          "mnemonic": "ADD",
+          "text": "ADD             X23, SP, #0x80+var_10"
+        },
+        {
+          "ea": "0x250fac",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X20, #_ZN10QYZugaRKGu10TI0CgaxdrBE_ptr@PAGE"
+        },
+        {
+          "ea": "0x250fb0",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X21, #_ZN10s40xgamwex6targetE_ptr@PAGE"
+        },
+        {
+          "ea": "0x250fb4",
+          "mnemonic": "BL",
+          "text": "BL              ._Z10J0L4Gam0CRv; J0L4Gam0CR(void)"
+        },
+        {
+          "ea": "0x250fb8",
+          "mnemonic": "LDR",
+          "text": "LDR             X22, [X21,#_ZN10s40xgamwex6targetE_ptr@PAGEOFF]; s40xgamwex::target ..."
+        },
+        {
+          "ea": "0x250fbc",
+          "mnemonic": "LDR",
+          "text": "LDR             X1, [X22]; s40xgamwex::target"
+        },
+        {
+          "ea": "0x250fc0",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X1"
+        },
+        {
+          "ea": "0x250fc4",
+          "mnemonic": "LDR",
+          "text": "LDR             X1, [X1]"
+        },
+        {
+          "ea": "0x250fc8",
+          "mnemonic": "LDR",
+          "text": "LDR             X1, [X1,#0xD0]"
+        },
+        {
+          "ea": "0x250fcc",
+          "mnemonic": "BLR",
+          "text": "BLR             X1"
+        },
+        {
+          "ea": "0x250fd0",
+          "mnemonic": "LDR",
+          "text": "LDR             X2, [X22]; s40xgamwex::target"
+        },
+        {
+          "ea": "0x250fd4",
+          "mnemonic": "MOV",
+          "text": "MOV             X1, X23"
+        },
+        {
+          "ea": "0x250fd8",
+          "mnemonic": "FMOV",
+          "text": "FMOV            S0, #1.0"
+        },
+        {
+          "ea": "0x250fdc",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X2"
+        },
+        {
+          "ea": "0x250fe0",
+          "mnemonic": "LDR",
+          "text": "LDR             X2, [X2]"
+        },
+        {
+          "ea": "0x250fe4",
+          "mnemonic": "STR",
+          "text": "STR             S0, [SP,#0x80+var_10]"
+        },
+        {
+          "ea": "0x250fe8",
+          "mnemonic": "STR",
+          "text": "STR             S0, [SP,#0x80+var_C]"
+        },
+        {
+          "ea": "0x250fec",
+          "mnemonic": "LDR",
+          "text": "LDR             X2, [X2,#0xE0]"
+        },
+        {
+          "ea": "0x250ff0",
+          "mnemonic": "STR",
+          "text": "STR             S0, [SP,#0x80+var_8]"
+        },
+        {
+          "ea": "0x250ff4",
+          "mnemonic": "STR",
+          "text": "STR             S0, [SP,#0x80+var_4]"
+        },
+        {
+          "ea": "0x250ff8",
+          "mnemonic": "BLR",
+          "text": "BLR             X2"
+        },
+        {
+          "ea": "0x250ffc",
+          "mnemonic": "MOV",
+          "text": "MOV             W0, #0x8074"
+        },
+        {
+          "ea": "0x251000",
+          "mnemonic": "BL",
+          "text": "BL              .glDisableClientState"
+        },
+        {
+          "ea": "0x251004",
+          "mnemonic": "MOV",
+          "text": "MOV             W0, #0x8076"
+        },
+        {
+          "ea": "0x251008",
+          "mnemonic": "BL",
+          "text": "BL              .glDisableClientState"
+        },
+        {
+          "ea": "0x25100c",
+          "mnemonic": "MOV",
+          "text": "MOV             W0, #0x8075"
+        },
+        {
+          "ea": "0x251010",
+          "mnemonic": "BL",
+          "text": "BL              .glDisableClientState"
+        },
+        {
+          "ea": "0x251014",
+          "mnemonic": "MOV",
+          "text": "MOV             W0, #0x8078"
+        },
+        {
+          "ea": "0x251018",
+          "mnemonic": "BL",
+          "text": "BL              .glDisableClientState"
+        },
+        {
+          "ea": "0x25101c",
+          "mnemonic": "MOV",
+          "text": "MOV             W0, #0xBC0"
+        },
+        {
+          "ea": "0x251020",
+          "mnemonic": "BL",
+          "text": "BL              .glDisable"
+        },
+        {
+          "ea": "0x251024",
+          "mnemonic": "MOV",
+          "text": "MOV             W0, #0xB71"
+        },
+        {
+          "ea": "0x251028",
+          "mnemonic": "BL",
+          "text": "BL              .glDisable"
+        },
+        {
+          "ea": "0x25102c",
+          "mnemonic": "MOV",
+          "text": "MOV             W0, #0xDE1"
+        },
+        {
+          "ea": "0x251030",
+          "mnemonic": "BL",
+          "text": "BL              .glDisable"
+        },
+        {
+          "ea": "0x251034",
+          "mnemonic": "ADD",
+          "text": "ADD             X0, X19, #dword_3A58D0@PAGEOFF; this"
+        },
+        {
+          "ea": "0x251038",
+          "mnemonic": "LDRB",
+          "text": "LDRB            W1, [X0,#(byte_3A59B8 - 0x3A58D0)]"
+        },
+        {
+          "ea": "0x25103c",
+          "mnemonic": "CBNZ",
+          "text": "CBNZ            W1, loc_2511F0"
+        },
+        {
+          "ea": "0x251040",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10a7qxJaHqKV10XzaCJaWvJZEv; a7qxJaHqKV::XzaCJaWvJZ(void)"
+        },
+        {
+          "ea": "0x251044",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10a7qxJaHqKV10rm2hIauBNSEv; a7qxJaHqKV::rm2hIauBNS(void)"
+        },
+        {
+          "ea": "0x251048",
+          "mnemonic": "UXTB",
+          "text": "UXTB            W0, W0"
+        },
+        {
+          "ea": "0x25104c",
+          "mnemonic": "CBNZ",
+          "text": "CBNZ            W0, loc_2511E8"
+        },
+        {
+          "ea": "0x251050",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X0, #_ZN10w6qzgacqqy10r05Uga4FEQE_ptr@PAGE"
+        },
+        {
+          "ea": "0x251054",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X0,#_ZN10w6qzgacqqy10r05Uga4FEQE_ptr@PAGEOFF]; w6qzgacqqy::r05Uga4FEQ ..."
+        },
+        {
+          "ea": "0x251058",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X0]; w6qzgacqqy::r05Uga4FEQ"
+        },
+        {
+          "ea": "0x25105c",
+          "mnemonic": "CBZ",
+          "text": "CBZ             X0, loc_2514C8"
+        },
+        {
+          "ea": "0x251060",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X2, #hEDwJatY3U_ptr@PAGE"
+        },
+        {
+          "ea": "0x251064",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X1, #e6cwJaVDIU_ptr@PAGE"
+        },
+        {
+          "ea": "0x251068",
+          "mnemonic": "FMOV",
+          "text": "FMOV            S0, WZR; float"
+        },
+        {
+          "ea": "0x25106c",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X21,#_ZN10s40xgamwex6targetE_ptr@PAGEOFF]; s40xgamwex::target ..."
+        },
+        {
+          "ea": "0x251070",
+          "mnemonic": "LDR",
+          "text": "LDR             X2, [X2,#hEDwJatY3U_ptr@PAGEOFF]; hEDwJatY3U"
+        },
+        {
+          "ea": "0x251074",
+          "mnemonic": "LDR",
+          "text": "LDR             X1, [X1,#e6cwJaVDIU_ptr@PAGEOFF]; e6cwJaVDIU"
+        },
+        {
+          "ea": "0x251078",
+          "mnemonic": "FMOV",
+          "text": "FMOV            S1, S0; float"
+        },
+        {
+          "ea": "0x25107c",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X0]; this"
+        },
+        {
+          "ea": "0x251080",
+          "mnemonic": "LDR",
+          "text": "LDR             W2, [X2]"
+        },
+        {
+          "ea": "0x251084",
+          "mnemonic": "LDR",
+          "text": "LDR             W1, [X1]"
+        },
+        {
+          "ea": "0x251088",
+          "mnemonic": "SCVTF",
+          "text": "SCVTF           S2, W2; float"
+        },
+        {
+          "ea": "0x25108c",
+          "mnemonic": "SCVTF",
+          "text": "SCVTF           S3, W1; float"
+        },
+        {
+          "ea": "0x251090",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10oMhmIajzmW10QB9uJaBHPTEffff; oMhmIajzmW::QB9uJaBHPT(float,float,float,float)"
+        },
+        {
+          "ea": "0x251094",
+          "mnemonic": "MOV",
+          "text": "MOV             W0, #0; this"
+        },
+        {
+          "ea": "0x251098",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10a7qxJaHqKV10LV3BJalVDZEb; a7qxJaHqKV::LV3BJalVDZ(bool)"
+        },
+        {
+          "ea": "0x25109c",
+          "mnemonic": "UXTB",
+          "text": "UXTB            W0, W0"
+        },
+        {
+          "ea": "0x2510a0",
+          "mnemonic": "CBZ",
+          "text": "CBZ             W0, loc_2511C8"
+        },
+        {
+          "ea": "0x2510a4",
+          "mnemonic": "BL",
+          "text": "BL              ._Z10By2MgaQLSJv; By2MgaQLSJ(void)"
+        },
+        {
+          "ea": "0x2510a8",
+          "mnemonic": "UXTB",
+          "text": "UXTB            W0, W0"
+        },
+        {
+          "ea": "0x2510ac",
+          "mnemonic": "CBZ",
+          "text": "CBZ             W0, loc_251128"
+        },
+        {
+          "ea": "0x2510b0",
+          "mnemonic": "ADD",
+          "text": "ADD             X19, X19, #dword_3A58D0@PAGEOFF"
+        },
+        {
+          "ea": "0x2510b4",
+          "mnemonic": "ADD",
+          "text": "ADD             X22, X19, #0x38 ; '8'"
+        },
+        {
+          "ea": "0x2510b8",
+          "mnemonic": "LDR",
+          "text": "LDR             W0, [X22,#(dword_3A5910 - 0x3A5908)]"
+        },
+        {
+          "ea": "0x2510bc",
+          "mnemonic": "CMP",
+          "text": "CMP             W0, WZR"
+        },
+        {
+          "ea": "0x2510c0",
+          "mnemonic": "B.LE",
+          "text": "B.LE            loc_251128"
+        },
+        {
+          "ea": "0x2510c4",
+          "mnemonic": "LDR",
+          "text": "LDR             W0, [X22,#(dword_3A5914 - 0x3A5908)]"
+        },
+        {
+          "ea": "0x2510c8",
+          "mnemonic": "CMP",
+          "text": "CMP             W0, WZR"
+        },
+        {
+          "ea": "0x2510cc",
+          "mnemonic": "B.LE",
+          "text": "B.LE            loc_251128"
+        },
+        {
+          "ea": "0x2510d0",
+          "mnemonic": "LDR",
+          "text": "LDR             X2, [X21,#_ZN10s40xgamwex6targetE_ptr@PAGEOFF]; s40xgamwex::target ..."
+        },
+        {
+          "ea": "0x2510d4",
+          "mnemonic": "MOV",
+          "text": "MOV             X1, X23"
+        },
+        {
+          "ea": "0x2510d8",
+          "mnemonic": "FMOV",
+          "text": "FMOV            S0, WZR"
+        },
+        {
+          "ea": "0x2510dc",
+          "mnemonic": "LDR",
+          "text": "LDR             X21, [X2]; s40xgamwex::target"
+        },
+        {
+          "ea": "0x2510e0",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X21"
+        },
+        {
+          "ea": "0x2510e4",
+          "mnemonic": "LDR",
+          "text": "LDR             X2, [X21]"
+        },
+        {
+          "ea": "0x2510e8",
+          "mnemonic": "LDR",
+          "text": "LDR             X2, [X2,#0xE0]"
+        },
+        {
+          "ea": "0x2510ec",
+          "mnemonic": "STR",
+          "text": "STR             S0, [SP,#0x80+var_10]"
+        },
+        {
+          "ea": "0x2510f0",
+          "mnemonic": "STR",
+          "text": "STR             S0, [SP,#0x80+var_C]"
+        },
+        {
+          "ea": "0x2510f4",
+          "mnemonic": "STR",
+          "text": "STR             S0, [SP,#0x80+var_8]"
+        },
+        {
+          "ea": "0x2510f8",
+          "mnemonic": "STR",
+          "text": "STR             S0, [SP,#0x80+var_4]"
+        },
+        {
+          "ea": "0x2510fc",
+          "mnemonic": "BLR",
+          "text": "BLR             X2"
+        },
+        {
+          "ea": "0x251100",
+          "mnemonic": "LDR",
+          "text": "LDR             W4, [X19,#(dword_3A5908 - 0x3A58D0)]"
+        },
+        {
+          "ea": "0x251104",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X21; this"
+        },
+        {
+          "ea": "0x251108",
+          "mnemonic": "LDR",
+          "text": "LDR             W3, [X22,#(dword_3A590C - 0x3A5908)]"
+        },
+        {
+          "ea": "0x25110c",
+          "mnemonic": "LDR",
+          "text": "LDR             W2, [X22,#(dword_3A5910 - 0x3A5908)]"
+        },
+        {
+          "ea": "0x251110",
+          "mnemonic": "LDR",
+          "text": "LDR             W1, [X22,#(dword_3A5914 - 0x3A5908)]"
+        },
+        {
+          "ea": "0x251114",
+          "mnemonic": "SCVTF",
+          "text": "SCVTF           S0, W4; float"
+        },
+        {
+          "ea": "0x251118",
+          "mnemonic": "SCVTF",
+          "text": "SCVTF           S1, W3; float"
+        },
+        {
+          "ea": "0x25111c",
+          "mnemonic": "SCVTF",
+          "text": "SCVTF           S2, W2; float"
+        },
+        {
+          "ea": "0x251120",
+          "mnemonic": "SCVTF",
+          "text": "SCVTF           S3, W1; float"
+        },
+        {
+          "ea": "0x251124",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10SU3JfaCUmR10brKIfarGfQEffff; SU3JfaCUmR::brKIfarGfQ(float,float,float,float)"
+        },
+        {
+          "ea": "0x251128",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X0, #_ZN10LJyzga9Pwy10mainwindowE_ptr@PAGE"
+        },
+        {
+          "ea": "0x25112c",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X0,#_ZN10LJyzga9Pwy10mainwindowE_ptr@PAGEOFF]; LJyzga9Pwy::mainwindow ..."
+        },
+        {
+          "ea": "0x251130",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X0]; LJyzga9Pwy::mainwindow"
+        },
+        {
+          "ea": "0x251134",
+          "mnemonic": "CBZ",
+          "text": "CBZ             X0, loc_251148"
+        },
+        {
+          "ea": "0x251138",
+          "mnemonic": "LDR",
+          "text": "LDR             X1, [X0]"
+        },
+        {
+          "ea": "0x25113c",
+          "mnemonic": "LDR",
+          "text": "LDR             X1, [X1,#0x218]"
+        },
+        {
+          "ea": "0x251140",
+          "mnemonic": "BLR",
+          "text": "BLR             X1"
+        },
+        {
+          "ea": "0x251144",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10LJyzga9Pwy10vBgCJaaAOZEv; LJyzga9Pwy::vBgCJaaAOZ(void)"
+        },
+        {
+          "ea": "0x251148",
+          "mnemonic": "LDR",
+          "text": "LDR             X20, [X20,#_ZN10QYZugaRKGu10TI0CgaxdrBE_ptr@PAGEOFF]; QYZugaRKGu::TI0CgaxdrB ..."
+        },
+        {
+          "ea": "0x25114c",
+          "mnemonic": "LDRB",
+          "text": "LDRB            W0, [X20]; QYZugaRKGu::TI0CgaxdrB"
+        },
+        {
+          "ea": "0x251150",
+          "mnemonic": "CBZ",
+          "text": "CBZ             W0, loc_2511A0"
+        },
+        {
+          "ea": "0x251154",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X19, #_ZN10QYZugaRKGu10rxN_IaKhrtE_ptr@PAGE"
+        },
+        {
+          "ea": "0x251158",
+          "mnemonic": "LDR",
+          "text": "LDR             X20, [X19,#_ZN10QYZugaRKGu10rxN_IaKhrtE_ptr@PAGEOFF]; QYZugaRKGu::rxN_IaKhrt ..."
+        },
+        {
+          "ea": "0x25115c",
+          "mnemonic": "LDR",
+          "text": "LDR             W0, [X20]; QYZugaRKGu::rxN_IaKhrt"
+        },
+        {
+          "ea": "0x251160",
+          "mnemonic": "CMP",
+          "text": "CMP             W0, #1"
+        },
+        {
+          "ea": "0x251164",
+          "mnemonic": "B.EQ",
+          "text": "B.EQ            loc_251304"
+        },
+        {
+          "ea": "0x251168",
+          "mnemonic": "CMP",
+          "text": "CMP             W0, #2"
+        },
+        {
+          "ea": "0x25116c",
+          "mnemonic": "B.EQ",
+          "text": "B.EQ            loc_251310"
+        },
+        {
+          "ea": "0x251170",
+          "mnemonic": "CMP",
+          "text": "CMP             W0, #3"
+        },
+        {
+          "ea": "0x251174",
+          "mnemonic": "B.EQ",
+          "text": "B.EQ            loc_251320"
+        },
+        {
+          "ea": "0x251178",
+          "mnemonic": "CMP",
+          "text": "CMP             W0, #4"
+        },
+        {
+          "ea": "0x25117c",
+          "mnemonic": "B.EQ",
+          "text": "B.EQ            loc_251330"
+        },
+        {
+          "ea": "0x251180",
+          "mnemonic": "CMP",
+          "text": "CMP             W0, #5"
+        },
+        {
+          "ea": "0x251184",
+          "mnemonic": "B.EQ",
+          "text": "B.EQ            loc_251340"
+        },
+        {
+          "ea": "0x251188",
+          "mnemonic": "CMP",
+          "text": "CMP             W0, #6"
+        },
+        {
+          "ea": "0x25118c",
+          "mnemonic": "B.EQ",
+          "text": "B.EQ            loc_251350"
+        },
+        {
+          "ea": "0x251190",
+          "mnemonic": "CMP",
+          "text": "CMP             W0, #7"
+        },
+        {
+          "ea": "0x251194",
+          "mnemonic": "B.EQ",
+          "text": "B.EQ            loc_251360"
+        },
+        {
+          "ea": "0x251198",
+          "mnemonic": "CMP",
+          "text": "CMP             W0, #8"
+        },
+        {
+          "ea": "0x25119c",
+          "mnemonic": "B.EQ",
+          "text": "B.EQ            loc_2512F8"
+        },
+        {
+          "ea": "0x2511a0",
+          "mnemonic": "MOV",
+          "text": "MOV             W0, #1"
+        },
+        {
+          "ea": "0x2511a4",
+          "mnemonic": "LDP",
+          "text": "LDP             X19, X20, [SP,#0x80+var_80]"
+        },
+        {
+          "ea": "0x2511a8",
+          "mnemonic": "LDP",
+          "text": "LDP             X21, X22, [SP,#0x80+var_70]"
+        },
+        {
+          "ea": "0x2511ac",
+          "mnemonic": "LDP",
+          "text": "LDP             X23, X24, [SP,#0x80+var_60]"
+        },
+        {
+          "ea": "0x2511b0",
+          "mnemonic": "LDP",
+          "text": "LDP             X25, X30, [SP,#0x80+var_50]"
+        },
+        {
+          "ea": "0x2511b4",
+          "mnemonic": "LDR",
+          "text": "LDR             D8, [SP,#0x80+var_40]"
+        },
+        {
+          "ea": "0x2511b8",
+          "mnemonic": "ADD",
+          "text": "ADD             SP, SP, #0x80"
+        },
+        {
+          "ea": "0x2511bc",
+          "mnemonic": "RET",
+          "text": "RET"
+        },
+        {
+          "ea": "0x2511c0",
+          "mnemonic": "FMOV",
+          "text": "FMOV            D1, D0"
+        },
+        {
+          "ea": "0x2511c4",
+          "mnemonic": "B",
+          "text": "B               loc_250F74"
+        },
+        {
+          "ea": "0x2511c8",
+          "mnemonic": "FMOV",
+          "text": "FMOV            S0, WZR"
+        },
+        {
+          "ea": "0x2511cc",
+          "mnemonic": "FMOV",
+          "text": "FMOV            S3, #1.0"
+        },
+        {
+          "ea": "0x2511d0",
+          "mnemonic": "FMOV",
+          "text": "FMOV            S1, S0"
+        },
+        {
+          "ea": "0x2511d4",
+          "mnemonic": "FMOV",
+          "text": "FMOV            S2, S0"
+        },
+        {
+          "ea": "0x2511d8",
+          "mnemonic": "BL",
+          "text": "BL              .glClearColor"
+        },
+        {
+          "ea": "0x2511dc",
+          "mnemonic": "MOV",
+          "text": "MOV             W0, #0x4000"
+        },
+        {
+          "ea": "0x2511e0",
+          "mnemonic": "BL",
+          "text": "BL              .glClear"
+        },
+        {
+          "ea": "0x2511e4",
+          "mnemonic": "B",
+          "text": "B               loc_2510A4"
+        },
+        {
+          "ea": "0x2511e8",
+          "mnemonic": "BL",
+          "text": "BL              ._Z10L_1XHasi7Av; L_1XHasi7A(void)"
+        },
+        {
+          "ea": "0x2511ec",
+          "mnemonic": "B",
+          "text": "B               loc_251148"
+        },
+        {
+          "ea": "0x2511f0",
+          "mnemonic": "STRB",
+          "text": "STRB            WZR, [X0,#(byte_3A59B8 - 0x3A58D0)]"
+        },
+        {
+          "ea": "0x2511f4",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10a7qxJaHqKV10ejCrIaRQQ_Ev; a7qxJaHqKV::ejCrIaRQQ_(void)"
+        },
+        {
+          "ea": "0x2511f8",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10a7qxJaHqKV10WDrhJanShIEv; a7qxJaHqKV::WDrhJanShI(void)"
+        },
+        {
+          "ea": "0x2511fc",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10a7qxJaHqKV10bA4tIa0sV1Ev; a7qxJaHqKV::bA4tIa0sV1(void)"
+        },
+        {
+          "ea": "0x251200",
+          "mnemonic": "B",
+          "text": "B               loc_251040"
+        },
+        {
+          "ea": "0x251204",
+          "mnemonic": "LDR",
+          "text": "LDR             W1, [X0,#(dword_3A58E8 - 0x3A58D0)]"
+        },
+        {
+          "ea": "0x251208",
+          "mnemonic": "CMP",
+          "text": "CMP             W1, WZR"
+        },
+        {
+          "ea": "0x25120c",
+          "mnemonic": "B.LE",
+          "text": "B.LE            loc_251370"
+        },
+        {
+          "ea": "0x251210",
+          "mnemonic": "ADD",
+          "text": "ADD             X23, SP, #0x80+var_10"
+        },
+        {
+          "ea": "0x251214",
+          "mnemonic": "ADD",
+          "text": "ADD             X20, X19, #dword_3A58D0@PAGEOFF"
+        },
+        {
+          "ea": "0x251218",
+          "mnemonic": "LDR",
+          "text": "LDR             W0, [X20,#(dword_3A5918 - 0x3A58D0)]"
+        },
+        {
+          "ea": "0x25121c",
+          "mnemonic": "CMP",
+          "text": "CMP             W0, WZR"
+        },
+        {
+          "ea": "0x251220",
+          "mnemonic": "B.LE",
+          "text": "B.LE            loc_25142C"
+        },
+        {
+          "ea": "0x251224",
+          "mnemonic": "LDR",
+          "text": "LDR             W0, [X20,#(dword_3A58EC - 0x3A58D0)]"
+        },
+        {
+          "ea": "0x251228",
+          "mnemonic": "ADD",
+          "text": "ADD             X21, X19, #dword_3A58D0@PAGEOFF"
+        },
+        {
+          "ea": "0x25122c",
+          "mnemonic": "CMP",
+          "text": "CMP             W0, WZR"
+        },
+        {
+          "ea": "0x251230",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X20, #_ZN10QYZugaRKGu10TI0CgaxdrBE_ptr@PAGE"
+        },
+        {
+          "ea": "0x251234",
+          "mnemonic": "STR",
+          "text": "STR             WZR, [X21,#(dword_3A58E8 - 0x3A58D0)]"
+        },
+        {
+          "ea": "0x251238",
+          "mnemonic": "STR",
+          "text": "STR             WZR, [X21,#(dword_3A5918 - 0x3A58D0)]"
+        },
+        {
+          "ea": "0x25123c",
+          "mnemonic": "B.LE",
+          "text": "B.LE            loc_2512E0"
+        },
+        {
+          "ea": "0x251240",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X0, #dword_3A58D0@PAGE"
+        },
+        {
+          "ea": "0x251244",
+          "mnemonic": "LDR",
+          "text": "LDR             W0, [X0,#dword_3A58D0@PAGEOFF]"
+        },
+        {
+          "ea": "0x251248",
+          "mnemonic": "CMP",
+          "text": "CMP             W0, #1"
+        },
+        {
+          "ea": "0x25124c",
+          "mnemonic": "B.EQ",
+          "text": "B.EQ            loc_25140C"
+        },
+        {
+          "ea": "0x251250",
+          "mnemonic": "CMP",
+          "text": "CMP             W0, #2"
+        },
+        {
+          "ea": "0x251254",
+          "mnemonic": "B.EQ",
+          "text": "B.EQ            loc_2514E4"
+        },
+        {
+          "ea": "0x251258",
+          "mnemonic": "CMP",
+          "text": "CMP             W0, #3"
+        },
+        {
+          "ea": "0x25125c",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X20, #_ZN10QYZugaRKGu10TI0CgaxdrBE_ptr@PAGE"
+        },
+        {
+          "ea": "0x251260",
+          "mnemonic": "B.NE",
+          "text": "B.NE            loc_2512E0"
+        },
+        {
+          "ea": "0x251264",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X0, #_ZN10QYZugaRKGu10yl0ugaRUHuE_ptr@PAGE"
+        },
+        {
+          "ea": "0x251268",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X0,#_ZN10QYZugaRKGu10yl0ugaRUHuE_ptr@PAGEOFF]; QYZugaRKGu::yl0ugaRUHu ..."
+        },
+        {
+          "ea": "0x25126c",
+          "mnemonic": "LDR",
+          "text": "LDR             X25, [X0]; QYZugaRKGu::yl0ugaRUHu"
+        },
+        {
+          "ea": "0x251270",
+          "mnemonic": "CBZ",
+          "text": "CBZ             X25, loc_2512E0"
+        },
+        {
+          "ea": "0x251274",
+          "mnemonic": "ADD",
+          "text": "ADD             X22, SP, #0x80+var_20"
+        },
+        {
+          "ea": "0x251278",
+          "mnemonic": "ADRL",
+          "text": "ADRL            X1, unk_2F12F8; char *"
+        },
+        {
+          "ea": "0x251280",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X22; int"
+        },
+        {
+          "ea": "0x251284",
+          "mnemonic": "STR",
+          "text": "STR             Q0, [SP,#0x80+var_30]"
+        },
+        {
+          "ea": "0x251288",
+          "mnemonic": "ADD",
+          "text": "ADD             X24, SP, #0x80+var_18"
+        },
+        {
+          "ea": "0x25128c",
+          "mnemonic": "STR",
+          "text": "STR             XZR, [SP,#0x80+var_20]"
+        },
+        {
+          "ea": "0x251290",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxFlsEPKc; C8THgaTQxF::operator<<(char const*)"
+        },
+        {
+          "ea": "0x251294",
+          "mnemonic": "MOV",
+          "text": "MOV             X8, X24"
+        },
+        {
+          "ea": "0x251298",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X22; this"
+        },
+        {
+          "ea": "0x25129c",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10KKhLga4xoI10tJOiUaYhrZERK10C8THgaTQxF; KKhLga4xoI::tJOiUaYhrZ(C8THgaTQxF const&)"
+        },
+        {
+          "ea": "0x2512a0",
+          "mnemonic": "MOV",
+          "text": "MOV             X8, X23"
+        },
+        {
+          "ea": "0x2512a4",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X24; this"
+        },
+        {
+          "ea": "0x2512a8",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10KKhLga4xoI10kEiLgawipIERK10C8THgaTQxF; KKhLga4xoI::kEiLgawipI(C8THgaTQxF const&)"
+        },
+        {
+          "ea": "0x2512ac",
+          "mnemonic": "LDR",
+          "text": "LDR             W3, [X21,#(dword_3A58EC - 0x3A58D0)]"
+        },
+        {
+          "ea": "0x2512b0",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X2, #(aIiiisiiii+8)@PAGE; \"i\""
+        },
+        {
+          "ea": "0x2512b4",
+          "mnemonic": "MOV",
+          "text": "MOV             X1, X23; C8THgaTQxF *"
+        },
+        {
+          "ea": "0x2512b8",
+          "mnemonic": "ADD",
+          "text": "ADD             X2, X2, #(aIiiisiiii+8)@PAGEOFF; char *"
+        },
+        {
+          "ea": "0x2512bc",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X25; this"
+        },
+        {
+          "ea": "0x2512c0",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10G0gxgajWBw10BRcLgaJqkIERK10C8THgaTQxFPKcz; G0gxgajWBw::BRcLgaJqkI(C8THgaTQxF const&,char const*,...)"
+        },
+        {
+          "ea": "0x2512c4",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X23; this"
+        },
+        {
+          "ea": "0x2512c8",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxF5clearEv; C8THgaTQxF::clear(void)"
+        },
+        {
+          "ea": "0x2512cc",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X24; this"
+        },
+        {
+          "ea": "0x2512d0",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxF5clearEv; C8THgaTQxF::clear(void)"
+        },
+        {
+          "ea": "0x2512d4",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X22; this"
+        },
+        {
+          "ea": "0x2512d8",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxF5clearEv; C8THgaTQxF::clear(void)"
+        },
+        {
+          "ea": "0x2512dc",
+          "mnemonic": "LDR",
+          "text": "LDR             Q0, [SP,#0x80+var_30]"
+        },
+        {
+          "ea": "0x2512e0",
+          "mnemonic": "ADD",
+          "text": "ADD             X0, X19, #dword_3A58D0@PAGEOFF"
+        },
+        {
+          "ea": "0x2512e4",
+          "mnemonic": "STR",
+          "text": "STR             D0, [X0,#(qword_3A59B0 - 0x3A58D0)]"
+        },
+        {
+          "ea": "0x2512e8",
+          "mnemonic": "B",
+          "text": "B               loc_250FB0"
+        },
+        {
+          "ea": "0x2512ec",
+          "mnemonic": "BL",
+          "text": "BL              ._Z10npMAGa2kyrv; npMAGa2kyr(void)"
+        },
+        {
+          "ea": "0x2512f0",
+          "mnemonic": "LDR",
+          "text": "LDR             Q0, [SP,#0x80+var_30]"
+        },
+        {
+          "ea": "0x2512f4",
+          "mnemonic": "B",
+          "text": "B               loc_250F90"
+        },
+        {
+          "ea": "0x2512f8",
+          "mnemonic": "BL",
+          "text": "BL              ._Z10npMAGa2kyrv; npMAGa2kyr(void)"
+        },
+        {
+          "ea": "0x2512fc",
+          "mnemonic": "MOV",
+          "text": "MOV             W0, #1"
+        },
+        {
+          "ea": "0x251300",
+          "mnemonic": "B",
+          "text": "B               loc_2511A4"
+        },
+        {
+          "ea": "0x251304",
+          "mnemonic": "BL",
+          "text": "BL              ._Z10npMAGa2kyrv; npMAGa2kyr(void)"
+        },
+        {
+          "ea": "0x251308",
+          "mnemonic": "LDR",
+          "text": "LDR             W0, [X20]; QYZugaRKGu::rxN_IaKhrt"
+        },
+        {
+          "ea": "0x25130c",
+          "mnemonic": "B",
+          "text": "B               loc_251168"
+        },
+        {
+          "ea": "0x251310",
+          "mnemonic": "BL",
+          "text": "BL              ._Z10npMAGa2kyrv; npMAGa2kyr(void)"
+        },
+        {
+          "ea": "0x251314",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X19,#_ZN10QYZugaRKGu10rxN_IaKhrtE_ptr@PAGEOFF]; QYZugaRKGu::rxN_IaKhrt ..."
+        },
+        {
+          "ea": "0x251318",
+          "mnemonic": "LDR",
+          "text": "LDR             W0, [X0]; QYZugaRKGu::rxN_IaKhrt"
+        },
+        {
+          "ea": "0x25131c",
+          "mnemonic": "B",
+          "text": "B               loc_251170"
+        },
+        {
+          "ea": "0x251320",
+          "mnemonic": "BL",
+          "text": "BL              ._Z10npMAGa2kyrv; npMAGa2kyr(void)"
+        },
+        {
+          "ea": "0x251324",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X19,#_ZN10QYZugaRKGu10rxN_IaKhrtE_ptr@PAGEOFF]; QYZugaRKGu::rxN_IaKhrt ..."
+        },
+        {
+          "ea": "0x251328",
+          "mnemonic": "LDR",
+          "text": "LDR             W0, [X0]; QYZugaRKGu::rxN_IaKhrt"
+        },
+        {
+          "ea": "0x25132c",
+          "mnemonic": "B",
+          "text": "B               loc_251178"
+        },
+        {
+          "ea": "0x251330",
+          "mnemonic": "BL",
+          "text": "BL              ._Z10npMAGa2kyrv; npMAGa2kyr(void)"
+        },
+        {
+          "ea": "0x251334",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X19,#_ZN10QYZugaRKGu10rxN_IaKhrtE_ptr@PAGEOFF]; QYZugaRKGu::rxN_IaKhrt ..."
+        },
+        {
+          "ea": "0x251338",
+          "mnemonic": "LDR",
+          "text": "LDR             W0, [X0]; QYZugaRKGu::rxN_IaKhrt"
+        },
+        {
+          "ea": "0x25133c",
+          "mnemonic": "B",
+          "text": "B               loc_251180"
+        },
+        {
+          "ea": "0x251340",
+          "mnemonic": "BL",
+          "text": "BL              ._Z10npMAGa2kyrv; npMAGa2kyr(void)"
+        },
+        {
+          "ea": "0x251344",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X19,#_ZN10QYZugaRKGu10rxN_IaKhrtE_ptr@PAGEOFF]; QYZugaRKGu::rxN_IaKhrt ..."
+        },
+        {
+          "ea": "0x251348",
+          "mnemonic": "LDR",
+          "text": "LDR             W0, [X0]; QYZugaRKGu::rxN_IaKhrt"
+        },
+        {
+          "ea": "0x25134c",
+          "mnemonic": "B",
+          "text": "B               loc_251188"
+        },
+        {
+          "ea": "0x251350",
+          "mnemonic": "BL",
+          "text": "BL              ._Z10npMAGa2kyrv; npMAGa2kyr(void)"
+        },
+        {
+          "ea": "0x251354",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X19,#_ZN10QYZugaRKGu10rxN_IaKhrtE_ptr@PAGEOFF]; QYZugaRKGu::rxN_IaKhrt ..."
+        },
+        {
+          "ea": "0x251358",
+          "mnemonic": "LDR",
+          "text": "LDR             W0, [X0]; QYZugaRKGu::rxN_IaKhrt"
+        },
+        {
+          "ea": "0x25135c",
+          "mnemonic": "B",
+          "text": "B               loc_251190"
+        },
+        {
+          "ea": "0x251360",
+          "mnemonic": "BL",
+          "text": "BL              ._Z10npMAGa2kyrv; npMAGa2kyr(void)"
+        },
+        {
+          "ea": "0x251364",
+          "mnemonic": "LDR",
+          "text": "LDR             X19, [X19,#_ZN10QYZugaRKGu10rxN_IaKhrtE_ptr@PAGEOFF]; QYZugaRKGu::rxN_IaKhrt ..."
+        },
+        {
+          "ea": "0x251368",
+          "mnemonic": "LDR",
+          "text": "LDR             W0, [X19]; QYZugaRKGu::rxN_IaKhrt"
+        },
+        {
+          "ea": "0x25136c",
+          "mnemonic": "B",
+          "text": "B               loc_251198"
+        },
+        {
+          "ea": "0x251370",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X1, #dword_3A58D0@PAGE"
+        },
+        {
+          "ea": "0x251374",
+          "mnemonic": "MOV",
+          "text": "MOV             W2, #0xFFFFFFFF"
+        },
+        {
+          "ea": "0x251378",
+          "mnemonic": "STR",
+          "text": "STR             W2, [X0,#(dword_3A58EC - 0x3A58D0)]"
+        },
+        {
+          "ea": "0x25137c",
+          "mnemonic": "LDR",
+          "text": "LDR             W1, [X1,#dword_3A58D0@PAGEOFF]"
+        },
+        {
+          "ea": "0x251380",
+          "mnemonic": "CMP",
+          "text": "CMP             W1, WZR"
+        },
+        {
+          "ea": "0x251384",
+          "mnemonic": "B.LE",
+          "text": "B.LE            loc_251210"
+        },
+        {
+          "ea": "0x251388",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X0, #_ZN10QYZugaRKGu10yl0ugaRUHuE_ptr@PAGE"
+        },
+        {
+          "ea": "0x25138c",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X0,#_ZN10QYZugaRKGu10yl0ugaRUHuE_ptr@PAGEOFF]; QYZugaRKGu::yl0ugaRUHu ..."
+        },
+        {
+          "ea": "0x251390",
+          "mnemonic": "LDR",
+          "text": "LDR             X22, [X0]; QYZugaRKGu::yl0ugaRUHu"
+        },
+        {
+          "ea": "0x251394",
+          "mnemonic": "CBZ",
+          "text": "CBZ             X22, loc_251210"
+        },
+        {
+          "ea": "0x251398",
+          "mnemonic": "ADD",
+          "text": "ADD             X20, SP, #0x80+var_20"
+        },
+        {
+          "ea": "0x25139c",
+          "mnemonic": "ADRL",
+          "text": "ADRL            X1, unk_2F12F8; char *"
+        },
+        {
+          "ea": "0x2513a4",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X20; int"
+        },
+        {
+          "ea": "0x2513a8",
+          "mnemonic": "STR",
+          "text": "STR             Q0, [SP,#0x80+var_30]"
+        },
+        {
+          "ea": "0x2513ac",
+          "mnemonic": "ADD",
+          "text": "ADD             X21, SP, #0x80+var_18"
+        },
+        {
+          "ea": "0x2513b0",
+          "mnemonic": "STR",
+          "text": "STR             XZR, [SP,#0x80+var_20]"
+        },
+        {
+          "ea": "0x2513b4",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxFlsEPKc; C8THgaTQxF::operator<<(char const*)"
+        },
+        {
+          "ea": "0x2513b8",
+          "mnemonic": "MOV",
+          "text": "MOV             X8, X21"
+        },
+        {
+          "ea": "0x2513bc",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X20; this"
+        },
+        {
+          "ea": "0x2513c0",
+          "mnemonic": "ADD",
+          "text": "ADD             X23, SP, #0x80+var_10"
+        },
+        {
+          "ea": "0x2513c4",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10KKhLga4xoI10tJOiUaYhrZERK10C8THgaTQxF; KKhLga4xoI::tJOiUaYhrZ(C8THgaTQxF const&)"
+        },
+        {
+          "ea": "0x2513c8",
+          "mnemonic": "MOV",
+          "text": "MOV             X8, X23"
+        },
+        {
+          "ea": "0x2513cc",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X21; this"
+        },
+        {
+          "ea": "0x2513d0",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10KKhLga4xoI10kEiLgawipIERK10C8THgaTQxF; KKhLga4xoI::kEiLgawipI(C8THgaTQxF const&)"
+        },
+        {
+          "ea": "0x2513d4",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X2, #(a127001+8)@PAGE; \"1\""
+        },
+        {
+          "ea": "0x2513d8",
+          "mnemonic": "MOV",
+          "text": "MOV             X1, X23; C8THgaTQxF *"
+        },
+        {
+          "ea": "0x2513dc",
+          "mnemonic": "ADD",
+          "text": "ADD             X2, X2, #(a127001+8)@PAGEOFF; char *"
+        },
+        {
+          "ea": "0x2513e0",
+          "mnemonic": "MOV",
+          "text": "MOV             W3, #0xA"
+        },
+        {
+          "ea": "0x2513e4",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X22; this"
+        },
+        {
+          "ea": "0x2513e8",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10G0gxgajWBw10BRcLgaJqkIERK10C8THgaTQxFPKcz; G0gxgajWBw::BRcLgaJqkI(C8THgaTQxF const&,char const*,...)"
+        },
+        {
+          "ea": "0x2513ec",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X23; this"
+        },
+        {
+          "ea": "0x2513f0",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxF5clearEv; C8THgaTQxF::clear(void)"
+        },
+        {
+          "ea": "0x2513f4",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X21; this"
+        },
+        {
+          "ea": "0x2513f8",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxF5clearEv; C8THgaTQxF::clear(void)"
+        },
+        {
+          "ea": "0x2513fc",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X20; this"
+        },
+        {
+          "ea": "0x251400",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxF5clearEv; C8THgaTQxF::clear(void)"
+        },
+        {
+          "ea": "0x251404",
+          "mnemonic": "LDR",
+          "text": "LDR             Q0, [SP,#0x80+var_30]"
+        },
+        {
+          "ea": "0x251408",
+          "mnemonic": "B",
+          "text": "B               loc_251214"
+        },
+        {
+          "ea": "0x25140c",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X20, #_ZN10QYZugaRKGu10TI0CgaxdrBE_ptr@PAGE"
+        },
+        {
+          "ea": "0x251410",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X1, #_ZN10QYZugaRKGu10rxN_IaKhrtE_ptr@PAGE"
+        },
+        {
+          "ea": "0x251414",
+          "mnemonic": "LDR",
+          "text": "LDR             X2, [X20,#_ZN10QYZugaRKGu10TI0CgaxdrBE_ptr@PAGEOFF]; QYZugaRKGu::TI0CgaxdrB ..."
+        },
+        {
+          "ea": "0x251418",
+          "mnemonic": "LDR",
+          "text": "LDR             X1, [X1,#_ZN10QYZugaRKGu10rxN_IaKhrtE_ptr@PAGEOFF]; QYZugaRKGu::rxN_IaKhrt ..."
+        },
+        {
+          "ea": "0x25141c",
+          "mnemonic": "STRB",
+          "text": "STRB            W0, [X2]; QYZugaRKGu::TI0CgaxdrB"
+        },
+        {
+          "ea": "0x251420",
+          "mnemonic": "MOV",
+          "text": "MOV             W0, #6"
+        },
+        {
+          "ea": "0x251424",
+          "mnemonic": "STR",
+          "text": "STR             W0, [X1]; QYZugaRKGu::rxN_IaKhrt"
+        },
+        {
+          "ea": "0x251428",
+          "mnemonic": "B",
+          "text": "B               loc_2512E0"
+        },
+        {
+          "ea": "0x25142c",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X0, #dword_3A58D0@PAGE"
+        },
+        {
+          "ea": "0x251430",
+          "mnemonic": "MOV",
+          "text": "MOV             W1, #0xFFFFFFFF"
+        },
+        {
+          "ea": "0x251434",
+          "mnemonic": "STR",
+          "text": "STR             W1, [X20,#(dword_3A58EC - 0x3A58D0)]"
+        },
+        {
+          "ea": "0x251438",
+          "mnemonic": "LDR",
+          "text": "LDR             W0, [X0,#dword_3A58D0@PAGEOFF]"
+        },
+        {
+          "ea": "0x25143c",
+          "mnemonic": "CMP",
+          "text": "CMP             W0, WZR"
+        },
+        {
+          "ea": "0x251440",
+          "mnemonic": "B.LE",
+          "text": "B.LE            loc_2514D0"
+        },
+        {
+          "ea": "0x251444",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X0, #_ZN10QYZugaRKGu10yl0ugaRUHuE_ptr@PAGE"
+        },
+        {
+          "ea": "0x251448",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X0,#_ZN10QYZugaRKGu10yl0ugaRUHuE_ptr@PAGEOFF]; QYZugaRKGu::yl0ugaRUHu ..."
+        },
+        {
+          "ea": "0x25144c",
+          "mnemonic": "LDR",
+          "text": "LDR             X24, [X0]; QYZugaRKGu::yl0ugaRUHu"
+        },
+        {
+          "ea": "0x251450",
+          "mnemonic": "CBZ",
+          "text": "CBZ             X24, loc_2514D0"
+        },
+        {
+          "ea": "0x251454",
+          "mnemonic": "ADD",
+          "text": "ADD             X21, SP, #0x80+var_20"
+        },
+        {
+          "ea": "0x251458",
+          "mnemonic": "ADRL",
+          "text": "ADRL            X1, unk_2F12F8; char *"
+        },
+        {
+          "ea": "0x251460",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X21; int"
+        },
+        {
+          "ea": "0x251464",
+          "mnemonic": "STR",
+          "text": "STR             Q0, [SP,#0x80+var_30]"
+        },
+        {
+          "ea": "0x251468",
+          "mnemonic": "ADD",
+          "text": "ADD             X22, SP, #0x80+var_18"
+        },
+        {
+          "ea": "0x25146c",
+          "mnemonic": "STR",
+          "text": "STR             XZR, [SP,#0x80+var_20]"
+        },
+        {
+          "ea": "0x251470",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxFlsEPKc; C8THgaTQxF::operator<<(char const*)"
+        },
+        {
+          "ea": "0x251474",
+          "mnemonic": "MOV",
+          "text": "MOV             X8, X22"
+        },
+        {
+          "ea": "0x251478",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X21; this"
+        },
+        {
+          "ea": "0x25147c",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10KKhLga4xoI10tJOiUaYhrZERK10C8THgaTQxF; KKhLga4xoI::tJOiUaYhrZ(C8THgaTQxF const&)"
+        },
+        {
+          "ea": "0x251480",
+          "mnemonic": "MOV",
+          "text": "MOV             X8, X23"
+        },
+        {
+          "ea": "0x251484",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X22; this"
+        },
+        {
+          "ea": "0x251488",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10KKhLga4xoI10kEiLgawipIERK10C8THgaTQxF; KKhLga4xoI::kEiLgawipI(C8THgaTQxF const&)"
+        },
+        {
+          "ea": "0x25148c",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X2, #(aIiiisiiii+8)@PAGE; \"i\""
+        },
+        {
+          "ea": "0x251490",
+          "mnemonic": "MOV",
+          "text": "MOV             X1, X23; C8THgaTQxF *"
+        },
+        {
+          "ea": "0x251494",
+          "mnemonic": "ADD",
+          "text": "ADD             X2, X2, #(aIiiisiiii+8)@PAGEOFF; char *"
+        },
+        {
+          "ea": "0x251498",
+          "mnemonic": "MOV",
+          "text": "MOV             W3, #0xB"
+        },
+        {
+          "ea": "0x25149c",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X24; this"
+        },
+        {
+          "ea": "0x2514a0",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10G0gxgajWBw10BRcLgaJqkIERK10C8THgaTQxFPKcz; G0gxgajWBw::BRcLgaJqkI(C8THgaTQxF const&,char const*,...)"
+        },
+        {
+          "ea": "0x2514a4",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X23; this"
+        },
+        {
+          "ea": "0x2514a8",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxF5clearEv; C8THgaTQxF::clear(void)"
+        },
+        {
+          "ea": "0x2514ac",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X22; this"
+        },
+        {
+          "ea": "0x2514b0",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxF5clearEv; C8THgaTQxF::clear(void)"
+        },
+        {
+          "ea": "0x2514b4",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X21; this"
+        },
+        {
+          "ea": "0x2514b8",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxF5clearEv; C8THgaTQxF::clear(void)"
+        },
+        {
+          "ea": "0x2514bc",
+          "mnemonic": "LDR",
+          "text": "LDR             W0, [X20,#(dword_3A58EC - 0x3A58D0)]"
+        },
+        {
+          "ea": "0x2514c0",
+          "mnemonic": "LDR",
+          "text": "LDR             Q0, [SP,#0x80+var_30]"
+        },
+        {
+          "ea": "0x2514c4",
+          "mnemonic": "B",
+          "text": "B               loc_251228"
+        },
+        {
+          "ea": "0x2514c8",
+          "mnemonic": "BL",
+          "text": "BL              ._Z10L_1XHasi7Av; L_1XHasi7A(void)"
+        },
+        {
+          "ea": "0x2514cc",
+          "mnemonic": "B",
+          "text": "B               loc_251060"
+        },
+        {
+          "ea": "0x2514d0",
+          "mnemonic": "ADD",
+          "text": "ADD             X0, X19, #dword_3A58D0@PAGEOFF"
+        },
+        {
+          "ea": "0x2514d4",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X20, #_ZN10QYZugaRKGu10TI0CgaxdrBE_ptr@PAGE"
+        },
+        {
+          "ea": "0x2514d8",
+          "mnemonic": "STR",
+          "text": "STR             WZR, [X0,#(dword_3A58E8 - 0x3A58D0)]"
+        },
+        {
+          "ea": "0x2514dc",
+          "mnemonic": "STR",
+          "text": "STR             WZR, [X0,#(dword_3A5918 - 0x3A58D0)]"
+        },
+        {
+          "ea": "0x2514e0",
+          "mnemonic": "B",
+          "text": "B               loc_2512E0"
+        },
+        {
+          "ea": "0x2514e4",
+          "mnemonic": "STR",
+          "text": "STR             Q0, [SP,#0x80+var_30]"
+        },
+        {
+          "ea": "0x2514e8",
+          "mnemonic": "BL",
+          "text": "BL              ._Z10npMAGa2kyrv; npMAGa2kyr(void)"
+        },
+        {
+          "ea": "0x2514ec",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X20, #_ZN10QYZugaRKGu10TI0CgaxdrBE_ptr@PAGE"
+        },
+        {
+          "ea": "0x2514f0",
+          "mnemonic": "LDR",
+          "text": "LDR             Q0, [SP,#0x80+var_30]"
+        },
+        {
+          "ea": "0x2514f4",
+          "mnemonic": "B",
+          "text": "B               loc_2512E0"
+        }
+      ],
+      "ea": "0x250ee0",
+      "function_end": "0x2514f8",
+      "function_start": "0x250ee0",
+      "name": "Java_com_quattroplay_GraalClassic_Natives_QPlayLoop",
+      "pseudocode": "__int64 __fastcall Java_com_quattroplay_GraalClassic_Natives_QPlayLoop(zYRMgaG0IJ *a1, __int64 a2)\n{\n  double v2; // d8\n  double v3; // d0\n  __int64 result; // x0\n  double v5; // d1\n  char v6; // w0\n  double v7; // d0\n  __int64 v8; // x2\n  void (__fastcall *v9)(__int64, __int64 *); // x2\n  a7qxJaHqKV *v10; // x0\n  a7qxJaHqKV *v11; // x0\n  bool v12; // w1\n  SU3JfaCUmR *v13; // x21\n  void (__fastcall *v14)(__int64, __int64 *); // x2\n  LJyzga9Pwy *v15; // x0\n  int v16; // w0\n  a7qxJaHqKV *v17; // x0\n  a7qxJaHqKV *v18; // x0\n  int v19; // w0\n  G0gxgajWBw *v20; // x25\n  const C8THgaTQxF *v21; // x1\n  const C8THgaTQxF *v22; // x1\n  G0gxgajWBw *v23; // x22\n  const C8THgaTQxF *v24; // x1\n  const C8THgaTQxF *v25; // x1\n  G0gxgajWBw *v26; // x24\n  const C8THgaTQxF *v27; // x1\n  const C8THgaTQxF *v28; // x1\n  double v29; // [xsp+50h] [xbp-30h]\n  double v30; // [xsp+50h] [xbp-30h]\n  double v31; // [xsp+50h] [xbp-30h]\n  double v32; // [xsp+50h] [xbp-30h]\n  double v33; // [xsp+50h] [xbp-30h]\n  __int64 v34; // [xsp+60h] [xbp-20h] BYREF\n  __int64 v35; // [xsp+68h] [xbp-18h] BYREF\n  __int64 v36; // [xsp+70h] [xbp-10h] BYREF\n  float v37; // [xsp+78h] [xbp-8h]\n  float v38; // [xsp+7Ch] [xbp-4h]\n\n  javaenvironment = (__int64)a1;\n  javaenvironmentclass = a2;\n  v2 = (double)(unsigned int)zYRMgaG0IJ::flT3GasaTQ / 1000.0;\n  zYRMgaG0IJ::FYcZgaMw6T(a1);\n  result = 2;\n  v5 = *(double *)&qword_3A59A8 + v2;\n  if ( v3 < *(double *)&qword_3A59A8 + v2 )\n    return result;\n  if ( v3 > *(double *)&qword_3A59A8 + v2 * 2.0 )\n    v5 = v3;\n  v29 = v3;\n  qword_3A59A8 = *(_QWORD *)&v5;\n  v6 = a7qxJaHqKV::XPp3GaoluQ((a7qxJaHqKV *)dword_3A58D0);\n  v7 = v29;\n  if ( v6 )\n  {\n    npMAGa2kyr();\n    v7 = v29;\n  }\n  if ( v7 - *(double *)&qword_3A59B0 > 5.0 )\n  {\n    if ( dword_3A58E8 <= 0 )\n    {\n      dword_3A58EC = -1;\n      if ( dword_3A58D0[0] > 0 )\n      {\n        v23 = (G0gxgajWBw *)QYZugaRKGu::yl0ugaRUHu;\n        if ( QYZugaRKGu::yl0ugaRUHu )\n        {\n          v31 = v7;\n          v34 = 0;\n          C8THgaTQxF::operator<<((int)&v34, aE_0);\n          KKhLga4xoI::tJOiUaYhrZ(&v35, (KKhLga4xoI *)&v34, v24);\n          KKhLga4xoI::kEiLgawipI(&v36, (KKhLga4xoI *)&v35, v25);\n          G0gxgajWBw::BRcLgaJqkI(v23, (const C8THgaTQxF *)&v36, \"1\", 10);\n          C8THgaTQxF::clear((C8THgaTQxF *)&v36);\n          C8THgaTQxF::clear((C8THgaTQxF *)&v35);\n          C8THgaTQxF::clear((C8THgaTQxF *)&v34);\n          v7 = v31;\n        }\n      }\n    }\n    if ( dword_3A5918 <= 0 )\n    {\n      dword_3A58EC = -1;\n      if ( dword_3A58D0[0] <= 0 || (v26 = (G0gxgajWBw *)QYZugaRKGu::yl0ugaRUHu) == nullptr )\n      {\n        dword_3A58E8 = 0;\n        dword_3A5918 = 0;\nLABEL_47:\n        qword_3A59B0 = *(_QWORD *)&v7;\n        goto LABEL_7;\n      }\n      v32 = v7;\n      v34 = 0;\n      C8THgaTQxF::operator<<((int)&v34, aE_0);\n      KKhLga4xoI::tJOiUaYhrZ(&v35, (KKhLga4xoI *)&v34, v27);\n      KKhLga4xoI::kEiLgawipI(&v36, (KKhLga4xoI *)&v35, v28);\n      G0gxgajWBw::BRcLgaJqkI(v26, (const C8THgaTQxF *)&v36, \"i\", 11);\n      C8THgaTQxF::clear((C8THgaTQxF *)&v36);\n      C8THgaTQxF::clear((C8THgaTQxF *)&v35);\n      C8THgaTQxF::clear((C8THgaTQxF *)&v34);\n      v19 = dword_3A58EC;\n      v7 = v32;\n    }\n    else\n    {\n      v19 = dword_3A58EC;\n    }\n    dword_3A58E8 = 0;\n    dword_3A5918 = 0;\n    if ( v19 > 0 )\n    {\n      switch ( dword_3A58D0[0] )\n      {\n        case 1:\n          QYZugaRKGu::TI0CgaxdrB = 1;\n          QYZugaRKGu::rxN_IaKhrt = 6;\n          break;\n        case 2:\n          v33 = v7;\n          npMAGa2kyr();\n          v7 = v33;\n          break;\n        case 3:\n          v20 = (G0gxgajWBw *)QYZugaRKGu::yl0ugaRUHu;\n          if ( QYZugaRKGu::yl0ugaRUHu )\n          {\n            v30 = v7;\n            v34 = 0;\n            C8THgaTQxF::operator<<((int)&v34, aE_0);\n            KKhLga4xoI::tJOiUaYhrZ(&v35, (KKhLga4xoI *)&v34, v21);\n            KKhLga4xoI::kEiLgawipI(&v36, (KKhLga4xoI *)&v35, v22);\n            G0gxgajWBw::BRcLgaJqkI(v20, (const C8THgaTQxF *)&v36, \"i\", (unsigned int)dword_3A58EC);\n            C8THgaTQxF::clear((C8THgaTQxF *)&v36);\n            C8THgaTQxF::clear((C8THgaTQxF *)&v35);\n            C8THgaTQxF::clear((C8THgaTQxF *)&v34);\n            v7 = v30;\n          }\n          break;\n      }\n    }\n    goto LABEL_47;\n  }\nLABEL_7:\n  J0L4Gam0CR();\n  (*(void (__fastcall **)(__int64))(*(_QWORD *)s40xgamwex::target + 208LL))(s40xgamwex::target);\n  v8 = *(_QWORD *)s40xgamwex::target;\n  LODWORD(v36) = 1.0;\n  HIDWORD(v36) = 1.0;\n  v9 = *(void (__fastcall **)(__int64, __int64 *))(v8 + 224);\n  v37 = 1.0;\n  v38 = 1.0;\n  v9(s40xgamwex::target, &v36);\n  glDisableClientState(32884);\n  glDisableClientState(32886);\n  glDisableClientState(32885);\n  glDisableClientState(32888);\n  glDisable(3008);\n  glDisable(2929);\n  glDisable(3553);\n  v10 = (a7qxJaHqKV *)dword_3A58D0;\n  if ( byte_3A59B8 )\n  {\n    byte_3A59B8 = 0;\n    v17 = (a7qxJaHqKV *)a7qxJaHqKV::ejCrIaRQQ_((a7qxJaHqKV *)dword_3A58D0);\n    v18 = (a7qxJaHqKV *)a7qxJaHqKV::WDrhJanShI(v17);\n    v10 = (a7qxJaHqKV *)a7qxJaHqKV::bA4tIa0sV1(v18);\n  }\n  v11 = (a7qxJaHqKV *)a7qxJaHqKV::XzaCJaWvJZ(v10);\n  if ( (unsigned __int8)a7qxJaHqKV::rm2hIauBNS(v11) )\n  {\n    L_1XHasi7A();\n  }\n  else\n  {\n    if ( !w6qzgacqqy::r05Uga4FEQ )\n      L_1XHasi7A();\n    oMhmIajzmW::QB9uJaBHPT((oMhmIajzmW *)s40xgamwex::target, 0.0, 0.0, (float)hEDwJatY3U, (float)e6cwJaVDIU);\n    if ( !(unsigned __int8)a7qxJaHqKV::LV3BJalVDZ(nullptr, v12) )\n    {\n      glClearColor(0.0, 0.0, 0.0, 1.0);\n      glClear(0x4000);\n    }\n    if ( (unsigned __int8)By2MgaQLSJ() && dword_3A5910 > 0 && dword_3A5914 > 0 )\n    {\n      v13 = (SU3JfaCUmR *)s40xgamwex::target;\n      v14 = *(void (__fastcall **)(__int64, __int64 *))(*(_QWORD *)s40xgamwex::target + 224LL);\n      v36 = 0;\n      v37 = 0.0;\n      v38 = 0.0;\n      v14(s40xgamwex::target, &v36);\n      SU3JfaCUmR::brKIfarGfQ(v13, (float)dword_3A5908, (float)dword_3A590C, (float)dword_3A5910, (float)dword_3A5914);\n    }\n    if ( LJyzga9Pwy::mainwindow )\n    {\n      v15 = (LJyzga9Pwy *)(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)LJyzga9Pwy::mainwindow + 536LL))(LJyzga9Pwy::mainwindow);\n      LJyzga9Pwy::vBgCJaaAOZ(v15);\n    }\n  }\n  if ( !QYZugaRKGu::TI0CgaxdrB )\n    return 1;\n  v16 = QYZugaRKGu::rxN_IaKhrt;\n  if ( QYZugaRKGu::rxN_IaKhrt == 1 )\n  {\n    npMAGa2kyr();\n    v16 = QYZugaRKGu::rxN_IaKhrt;\n  }\n  if ( v16 == 2 )\n  {\n    npMAGa2kyr();\n    v16 = QYZugaRKGu::rxN_IaKhrt;\n  }\n  if ( v16 == 3 )\n  {\n    npMAGa2kyr();\n    v16 = QYZugaRKGu::rxN_IaKhrt;\n  }\n  if ( v16 == 4 )\n  {\n    npMAGa2kyr();\n    v16 = QYZugaRKGu::rxN_IaKhrt;\n  }\n  if ( v16 == 5 )\n  {\n    npMAGa2kyr();\n    v16 = QYZugaRKGu::rxN_IaKhrt;\n  }\n  if ( v16 == 6 )\n  {\n    npMAGa2kyr();\n    v16 = QYZugaRKGu::rxN_IaKhrt;\n  }\n  if ( v16 == 7 )\n  {\n    npMAGa2kyr();\n    v16 = QYZugaRKGu::rxN_IaKhrt;\n  }\n  if ( v16 != 8 )\n    return 1;\n  npMAGa2kyr();\n  return 1;\n}\n",
+      "xrefs_to": [
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x18708",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "comment": null,
+      "disassembly": [
+        {
+          "ea": "0x251500",
+          "mnemonic": "SUB",
+          "text": "SUB             SP, SP, #0x50"
+        },
+        {
+          "ea": "0x251504",
+          "mnemonic": "STP",
+          "text": "STP             X19, X20, [SP,#0x50+var_50]"
+        },
+        {
+          "ea": "0x251508",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X19, #_ZN10LJyzga9Pwy10mainwindowE_ptr@PAGE"
+        },
+        {
+          "ea": "0x25150c",
+          "mnemonic": "MOV",
+          "text": "MOV             W20, W3"
+        },
+        {
+          "ea": "0x251510",
+          "mnemonic": "STP",
+          "text": "STP             X21, X22, [SP,#0x50+var_40]"
+        },
+        {
+          "ea": "0x251514",
+          "mnemonic": "STR",
+          "text": "STR             X30, [SP,#0x50+var_30]"
+        },
+        {
+          "ea": "0x251518",
+          "mnemonic": "LDR",
+          "text": "LDR             X3, [X19,#_ZN10LJyzga9Pwy10mainwindowE_ptr@PAGEOFF]; LJyzga9Pwy::mainwindow ..."
+        },
+        {
+          "ea": "0x25151c",
+          "mnemonic": "LDR",
+          "text": "LDR             X3, [X3]; LJyzga9Pwy::mainwindow"
+        },
+        {
+          "ea": "0x251520",
+          "mnemonic": "CBZ",
+          "text": "CBZ             X3, loc_2515F0"
+        },
+        {
+          "ea": "0x251524",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X3, #_ZN10GaA2gaD2MX10kGgggaiEiiE_ptr@PAGE"
+        },
+        {
+          "ea": "0x251528",
+          "mnemonic": "LDR",
+          "text": "LDR             X3, [X3,#_ZN10GaA2gaD2MX10kGgggaiEiiE_ptr@PAGEOFF]; GaA2gaD2MX::kGgggaiEii ..."
+        },
+        {
+          "ea": "0x25152c",
+          "mnemonic": "LDRB",
+          "text": "LDRB            W3, [X3]; GaA2gaD2MX::kGgggaiEii"
+        },
+        {
+          "ea": "0x251530",
+          "mnemonic": "CBZ",
+          "text": "CBZ             W3, loc_2515F0"
+        },
+        {
+          "ea": "0x251534",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X3, #_ZN10KcKRganuPN10AYiOfaBzWUE_ptr@PAGE"
+        },
+        {
+          "ea": "0x251538",
+          "mnemonic": "STR",
+          "text": "STR             XZR, [SP,#0x50+var_10]"
+        },
+        {
+          "ea": "0x25153c",
+          "mnemonic": "STR",
+          "text": "STR             X6, [SP,#0x50+var_18]"
+        },
+        {
+          "ea": "0x251540",
+          "mnemonic": "ADD",
+          "text": "ADD             X21, SP, #0x50+var_10"
+        },
+        {
+          "ea": "0x251544",
+          "mnemonic": "STR",
+          "text": "STR             X2, [SP,#0x50+var_20]"
+        },
+        {
+          "ea": "0x251548",
+          "mnemonic": "ADD",
+          "text": "ADD             X22, SP, #0x50+var_8"
+        },
+        {
+          "ea": "0x25154c",
+          "mnemonic": "LDR",
+          "text": "LDR             X3, [X3,#_ZN10KcKRganuPN10AYiOfaBzWUE_ptr@PAGEOFF]; KcKRganuPN::AYiOfaBzWU ..."
+        },
+        {
+          "ea": "0x251550",
+          "mnemonic": "LDRB",
+          "text": "LDRB            W0, [X3]; KcKRganuPN::AYiOfaBzWU"
+        },
+        {
+          "ea": "0x251554",
+          "mnemonic": "CBZ",
+          "text": "CBZ             W0, loc_251604"
+        },
+        {
+          "ea": "0x251558",
+          "mnemonic": "MOV",
+          "text": "MOV             W0, W4; this"
+        },
+        {
+          "ea": "0x25155c",
+          "mnemonic": "MOV",
+          "text": "MOV             X8, X22"
+        },
+        {
+          "ea": "0x251560",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN8TUnicode10dbu3Ga6_xQEj; TUnicode::dbu3Ga6_xQ(uint)"
+        },
+        {
+          "ea": "0x251564",
+          "mnemonic": "MOV",
+          "text": "MOV             X1, X22"
+        },
+        {
+          "ea": "0x251568",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X21"
+        },
+        {
+          "ea": "0x25156c",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxFaSERKS_; C8THgaTQxF::operator=(C8THgaTQxF const&)"
+        },
+        {
+          "ea": "0x251570",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X22; this"
+        },
+        {
+          "ea": "0x251574",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxF5clearEv; C8THgaTQxF::clear(void)"
+        },
+        {
+          "ea": "0x251578",
+          "mnemonic": "LDR",
+          "text": "LDR             X2, [SP,#0x50+var_20]"
+        },
+        {
+          "ea": "0x25157c",
+          "mnemonic": "LDR",
+          "text": "LDR             X6, [SP,#0x50+var_18]"
+        },
+        {
+          "ea": "0x251580",
+          "mnemonic": "CMP",
+          "text": "CMP             W20, #0x5B ; '['"
+        },
+        {
+          "ea": "0x251584",
+          "mnemonic": "MOV",
+          "text": "MOV             W1, #0"
+        },
+        {
+          "ea": "0x251588",
+          "mnemonic": "B.HI",
+          "text": "B.HI            loc_25159C"
+        },
+        {
+          "ea": "0x25158c",
+          "mnemonic": "ADRL",
+          "text": "ADRL            X0, byte_2F0810"
+        },
+        {
+          "ea": "0x251594",
+          "mnemonic": "ADD",
+          "text": "ADD             X0, X0, #(unk_2F0910 - 0x2F0810)"
+        },
+        {
+          "ea": "0x251598",
+          "mnemonic": "LDRB",
+          "text": "LDRB            W1, [X0,W20,SXTW]; int"
+        },
+        {
+          "ea": "0x25159c",
+          "mnemonic": "AND",
+          "text": "AND             W3, W6, #0x30 ; '0'"
+        },
+        {
+          "ea": "0x2515a0",
+          "mnemonic": "AND",
+          "text": "AND             W0, W6, #0x40 ; '@'"
+        },
+        {
+          "ea": "0x2515a4",
+          "mnemonic": "CMP",
+          "text": "CMP             W0, WZR"
+        },
+        {
+          "ea": "0x2515a8",
+          "mnemonic": "ORR",
+          "text": "ORR             W0, W3, #1"
+        },
+        {
+          "ea": "0x2515ac",
+          "mnemonic": "CSEL",
+          "text": "CSEL            W3, W0, W3, NE"
+        },
+        {
+          "ea": "0x2515b0",
+          "mnemonic": "LDR",
+          "text": "LDR             X19, [X19,#_ZN10LJyzga9Pwy10mainwindowE_ptr@PAGEOFF]; LJyzga9Pwy::mainwindow ..."
+        },
+        {
+          "ea": "0x2515b4",
+          "mnemonic": "AND",
+          "text": "AND             W6, W6, #0x80"
+        },
+        {
+          "ea": "0x2515b8",
+          "mnemonic": "ORR",
+          "text": "ORR             W0, W3, #2"
+        },
+        {
+          "ea": "0x2515bc",
+          "mnemonic": "CMP",
+          "text": "CMP             W6, WZR"
+        },
+        {
+          "ea": "0x2515c0",
+          "mnemonic": "MOV",
+          "text": "MOV             W4, W20; int"
+        },
+        {
+          "ea": "0x2515c4",
+          "mnemonic": "CSEL",
+          "text": "CSEL            W3, W0, W3, NE"
+        },
+        {
+          "ea": "0x2515c8",
+          "mnemonic": "CMP",
+          "text": "CMP             W2, #1"
+        },
+        {
+          "ea": "0x2515cc",
+          "mnemonic": "CSET",
+          "text": "CSET            W5, EQ; bool"
+        },
+        {
+          "ea": "0x2515d0",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X19]; this"
+        },
+        {
+          "ea": "0x2515d4",
+          "mnemonic": "CMP",
+          "text": "CMP             W2, #4"
+        },
+        {
+          "ea": "0x2515d8",
+          "mnemonic": "MOV",
+          "text": "MOV             W2, W3; int"
+        },
+        {
+          "ea": "0x2515dc",
+          "mnemonic": "CSET",
+          "text": "CSET            W6, EQ; bool"
+        },
+        {
+          "ea": "0x2515e0",
+          "mnemonic": "MOV",
+          "text": "MOV             X3, X21; C8THgaTQxF *"
+        },
+        {
+          "ea": "0x2515e4",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10LJyzga9Pwy10onKeyEventEiiRK10C8THgaTQxFibb; LJyzga9Pwy::onKeyEvent(int,int,C8THgaTQxF const&,int,bool,bool)"
+        },
+        {
+          "ea": "0x2515e8",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X21; this"
+        },
+        {
+          "ea": "0x2515ec",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxF5clearEv; C8THgaTQxF::clear(void)"
+        },
+        {
+          "ea": "0x2515f0",
+          "mnemonic": "LDP",
+          "text": "LDP             X19, X20, [SP,#0x50+var_50]"
+        },
+        {
+          "ea": "0x2515f4",
+          "mnemonic": "LDP",
+          "text": "LDP             X21, X22, [SP,#0x50+var_40]"
+        },
+        {
+          "ea": "0x2515f8",
+          "mnemonic": "LDR",
+          "text": "LDR             X30, [SP,#0x50+var_30]"
+        },
+        {
+          "ea": "0x2515fc",
+          "mnemonic": "ADD",
+          "text": "ADD             SP, SP, #0x50 ; 'P'"
+        },
+        {
+          "ea": "0x251600",
+          "mnemonic": "RET",
+          "text": "RET"
+        },
+        {
+          "ea": "0x251604",
+          "mnemonic": "MOV",
+          "text": "MOV             W1, W4"
+        },
+        {
+          "ea": "0x251608",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X22"
+        },
+        {
+          "ea": "0x25160c",
+          "mnemonic": "STR",
+          "text": "STR             XZR, [SP,#0x50+var_8]"
+        },
+        {
+          "ea": "0x251610",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxFlsEc; C8THgaTQxF::operator<<(char)"
+        },
+        {
+          "ea": "0x251614",
+          "mnemonic": "MOV",
+          "text": "MOV             X1, X22"
+        },
+        {
+          "ea": "0x251618",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X21"
+        },
+        {
+          "ea": "0x25161c",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxFaSERKS_; C8THgaTQxF::operator=(C8THgaTQxF const&)"
+        },
+        {
+          "ea": "0x251620",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X22; this"
+        },
+        {
+          "ea": "0x251624",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxF5clearEv; C8THgaTQxF::clear(void)"
+        },
+        {
+          "ea": "0x251628",
+          "mnemonic": "LDR",
+          "text": "LDR             X6, [SP,#0x50+var_18]"
+        },
+        {
+          "ea": "0x25162c",
+          "mnemonic": "LDR",
+          "text": "LDR             X2, [SP,#0x50+var_20]"
+        },
+        {
+          "ea": "0x251630",
+          "mnemonic": "B",
+          "text": "B               loc_251580"
+        }
+      ],
+      "ea": "0x251500",
+      "function_end": "0x251634",
+      "function_start": "0x251500",
+      "name": "Java_com_quattroplay_GraalClassic_Natives_onKeyEvent",
+      "pseudocode": "void __fastcall Java_com_quattroplay_GraalClassic_Natives_onKeyEvent(\n        int a1,\n        unsigned int a2,\n        int a3,\n        int a4,\n        TUnicode *this,\n        __int64 a6,\n        char a7)\n{\n  int v8; // w2\n  char v9; // w6\n  int v10; // w1\n  int v11; // w3\n  __int64 v14; // [xsp+40h] [xbp-10h] BYREF\n  __int64 v15; // [xsp+48h] [xbp-8h] BYREF\n\n  if ( LJyzga9Pwy::mainwindow && GaA2gaD2MX::kGgggaiEii )\n  {\n    v14 = 0;\n    if ( KcKRganuPN::AYiOfaBzWU )\n    {\n      TUnicode::dbu3Ga6_xQ(&v15, (TUnicode *)(unsigned int)this, a2);\n      C8THgaTQxF::operator=(&v14, &v15);\n      C8THgaTQxF::clear((C8THgaTQxF *)&v15);\n      v8 = a3;\n      v9 = a7;\n    }\n    else\n    {\n      v15 = 0;\n      C8THgaTQxF::operator<<(&v15, (unsigned int)this);\n      C8THgaTQxF::operator=(&v14, &v15);\n      C8THgaTQxF::clear((C8THgaTQxF *)&v15);\n      v9 = a7;\n      v8 = a3;\n    }\n    v10 = 0;\n    if ( (unsigned int)a4 <= 0x5B )\n      v10 = byte_2F0910[a4];\n    v11 = v9 & 0x30;\n    if ( (v9 & 0x40) != 0 )\n      v11 = v9 & 0x30 | 1;\n    if ( v9 < 0 )\n      v11 |= 2u;\n    LJyzga9Pwy::onKeyEvent(\n      (LJyzga9Pwy *)LJyzga9Pwy::mainwindow,\n      v10,\n      v11,\n      (const C8THgaTQxF *)&v14,\n      a4,\n      v8 == 1,\n      v8 == 4);\n    C8THgaTQxF::clear((C8THgaTQxF *)&v14);\n  }\n}\n",
+      "xrefs_to": [
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x1fbd8",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "comment": null,
+      "disassembly": [
+        {
+          "ea": "0x251adc",
+          "mnemonic": "SUB",
+          "text": "SUB             SP, SP, #0x30"
+        },
+        {
+          "ea": "0x251ae0",
+          "mnemonic": "STP",
+          "text": "STP             X19, X20, [SP,#0x30+var_30]"
+        },
+        {
+          "ea": "0x251ae4",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X20, #_ZN10QYZugaRKGu10yl0ugaRUHuE_ptr@PAGE"
+        },
+        {
+          "ea": "0x251ae8",
+          "mnemonic": "STP",
+          "text": "STP             X21, X30, [SP,#0x30+var_20]"
+        },
+        {
+          "ea": "0x251aec",
+          "mnemonic": "LDR",
+          "text": "LDR             X20, [X20,#_ZN10QYZugaRKGu10yl0ugaRUHuE_ptr@PAGEOFF]; QYZugaRKGu::yl0ugaRUHu ..."
+        },
+        {
+          "ea": "0x251af0",
+          "mnemonic": "LDR",
+          "text": "LDR             X21, [X20]; QYZugaRKGu::yl0ugaRUHu"
+        },
+        {
+          "ea": "0x251af4",
+          "mnemonic": "CBZ",
+          "text": "CBZ             X21, loc_251B9C"
+        },
+        {
+          "ea": "0x251af8",
+          "mnemonic": "ADD",
+          "text": "ADD             X19, SP, #0x30+var_8"
+        },
+        {
+          "ea": "0x251afc",
+          "mnemonic": "ADRL",
+          "text": "ADRL            X1, aOnappenterback; \"onAppEnterBackground\""
+        },
+        {
+          "ea": "0x251b04",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X19; int"
+        },
+        {
+          "ea": "0x251b08",
+          "mnemonic": "STR",
+          "text": "STR             XZR, [SP,#0x30+var_8]"
+        },
+        {
+          "ea": "0x251b0c",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxFlsEPKc; C8THgaTQxF::operator<<(char const*)"
+        },
+        {
+          "ea": "0x251b10",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X21; this"
+        },
+        {
+          "ea": "0x251b14",
+          "mnemonic": "MOV",
+          "text": "MOV             X1, X19; C8THgaTQxF *"
+        },
+        {
+          "ea": "0x251b18",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10G0gxgajWBw10BRcLgaJqkIERK10C8THgaTQxF; G0gxgajWBw::BRcLgaJqkI(C8THgaTQxF const&)"
+        },
+        {
+          "ea": "0x251b1c",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X19; this"
+        },
+        {
+          "ea": "0x251b20",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxF5clearEv; C8THgaTQxF::clear(void)"
+        },
+        {
+          "ea": "0x251b24",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X20]; QYZugaRKGu::yl0ugaRUHu"
+        },
+        {
+          "ea": "0x251b28",
+          "mnemonic": "LDR",
+          "text": "LDR             X20, [X0,#0x60]"
+        },
+        {
+          "ea": "0x251b2c",
+          "mnemonic": "CBZ",
+          "text": "CBZ             X20, loc_251B9C"
+        },
+        {
+          "ea": "0x251b30",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X1, #aGames_0@PAGE; \"-Games\""
+        },
+        {
+          "ea": "0x251b34",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X19; int"
+        },
+        {
+          "ea": "0x251b38",
+          "mnemonic": "ADD",
+          "text": "ADD             X1, X1, #aGames_0@PAGEOFF; \"-Games\""
+        },
+        {
+          "ea": "0x251b3c",
+          "mnemonic": "STR",
+          "text": "STR             XZR, [SP,#0x30+var_8]"
+        },
+        {
+          "ea": "0x251b40",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxFlsEPKc; C8THgaTQxF::operator<<(char const*)"
+        },
+        {
+          "ea": "0x251b44",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X19; this"
+        },
+        {
+          "ea": "0x251b48",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10KKhLga4xoI10g4ouMaaIbpERK10C8THgaTQxF; KKhLga4xoI::g4ouMaaIbp(C8THgaTQxF const&)"
+        },
+        {
+          "ea": "0x251b4c",
+          "mnemonic": "MOV",
+          "text": "MOV             W1, W0; unsigned int"
+        },
+        {
+          "ea": "0x251b50",
+          "mnemonic": "MOV",
+          "text": "MOV             X2, X19; C8THgaTQxF *"
+        },
+        {
+          "ea": "0x251b54",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X20; this"
+        },
+        {
+          "ea": "0x251b58",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10KKhLga4xoI10TBCvgay5cvEjRK10C8THgaTQxF; KKhLga4xoI::TBCvgay5cv(uint,C8THgaTQxF const&)"
+        },
+        {
+          "ea": "0x251b5c",
+          "mnemonic": "MOV",
+          "text": "MOV             X20, X0"
+        },
+        {
+          "ea": "0x251b60",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X19; this"
+        },
+        {
+          "ea": "0x251b64",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxF5clearEv; C8THgaTQxF::clear(void)"
+        },
+        {
+          "ea": "0x251b68",
+          "mnemonic": "CBZ",
+          "text": "CBZ             X20, loc_251B9C"
+        },
+        {
+          "ea": "0x251b6c",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X1, #aPrepareenterba@PAGE; \"prepareEnterBackground\""
+        },
+        {
+          "ea": "0x251b70",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X19; int"
+        },
+        {
+          "ea": "0x251b74",
+          "mnemonic": "ADD",
+          "text": "ADD             X1, X1, #aPrepareenterba@PAGEOFF; \"prepareEnterBackground\""
+        },
+        {
+          "ea": "0x251b78",
+          "mnemonic": "STR",
+          "text": "STR             XZR, [X19]"
+        },
+        {
+          "ea": "0x251b7c",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxFlsEPKc; C8THgaTQxF::operator<<(char const*)"
+        },
+        {
+          "ea": "0x251b80",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X2, #byte_2EA8F0@PAGE"
+        },
+        {
+          "ea": "0x251b84",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X20; this"
+        },
+        {
+          "ea": "0x251b88",
+          "mnemonic": "MOV",
+          "text": "MOV             X1, X19; C8THgaTQxF *"
+        },
+        {
+          "ea": "0x251b8c",
+          "mnemonic": "ADD",
+          "text": "ADD             X2, X2, #byte_2EA8F0@PAGEOFF; char *"
+        },
+        {
+          "ea": "0x251b90",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10G0gxgajWBw10pjSNGaWizCERK10C8THgaTQxFPKcz; G0gxgajWBw::pjSNGaWizC(C8THgaTQxF const&,char const*,...)"
+        },
+        {
+          "ea": "0x251b94",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X19; this"
+        },
+        {
+          "ea": "0x251b98",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxF5clearEv; C8THgaTQxF::clear(void)"
+        },
+        {
+          "ea": "0x251b9c",
+          "mnemonic": "LDP",
+          "text": "LDP             X19, X20, [SP,#0x30+var_30]"
+        },
+        {
+          "ea": "0x251ba0",
+          "mnemonic": "LDP",
+          "text": "LDP             X21, X30, [SP,#0x30+var_20]"
+        },
+        {
+          "ea": "0x251ba4",
+          "mnemonic": "ADD",
+          "text": "ADD             SP, SP, #0x30 ; '0'"
+        },
+        {
+          "ea": "0x251ba8",
+          "mnemonic": "RET",
+          "text": "RET"
+        }
+      ],
+      "ea": "0x251adc",
+      "function_end": "0x251bac",
+      "function_start": "0x251adc",
+      "name": "Java_com_quattroplay_GraalClassic_Natives_onAppEnterBackground",
+      "pseudocode": "void Java_com_quattroplay_GraalClassic_Natives_onAppEnterBackground()\n{\n  G0gxgajWBw *v0; // x21\n  KKhLga4xoI *v1; // x20\n  const C8THgaTQxF *v2; // x1\n  unsigned int v3; // w0\n  G0gxgajWBw *v4; // x20\n  __int64 v5; // [xsp+28h] [xbp-8h] BYREF\n\n  v0 = (G0gxgajWBw *)QYZugaRKGu::yl0ugaRUHu;\n  if ( QYZugaRKGu::yl0ugaRUHu )\n  {\n    v5 = 0;\n    C8THgaTQxF::operator<<((int)&v5, \"onAppEnterBackground\");\n    G0gxgajWBw::BRcLgaJqkI(v0, (const C8THgaTQxF *)&v5);\n    C8THgaTQxF::clear((C8THgaTQxF *)&v5);\n    v1 = *(KKhLga4xoI **)(QYZugaRKGu::yl0ugaRUHu + 96);\n    if ( v1 )\n    {\n      v5 = 0;\n      C8THgaTQxF::operator<<((int)&v5, \"-Games\");\n      v3 = KKhLga4xoI::g4ouMaaIbp((KKhLga4xoI *)&v5, v2);\n      v4 = (G0gxgajWBw *)KKhLga4xoI::TBCvgay5cv(v1, v3, (const C8THgaTQxF *)&v5);\n      C8THgaTQxF::clear((C8THgaTQxF *)&v5);\n      if ( v4 )\n      {\n        v5 = 0;\n        C8THgaTQxF::operator<<((int)&v5, \"prepareEnterBackground\");\n        G0gxgajWBw::pjSNGaWizC(v4, (const C8THgaTQxF *)&v5, &byte_2EA8F0);\n        C8THgaTQxF::clear((C8THgaTQxF *)&v5);\n      }\n    }\n  }\n}\n",
+      "xrefs_to": [
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x19140",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "comment": null,
+      "disassembly": [
+        {
+          "ea": "0x251c04",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X0, #_ZN10w6qzgacqqy10r05Uga4FEQE_ptr@PAGE"
+        },
+        {
+          "ea": "0x251c08",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X0,#_ZN10w6qzgacqqy10r05Uga4FEQE_ptr@PAGEOFF]; w6qzgacqqy::r05Uga4FEQ ..."
+        },
+        {
+          "ea": "0x251c0c",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X0]; w6qzgacqqy::r05Uga4FEQ"
+        },
+        {
+          "ea": "0x251c10",
+          "mnemonic": "CBZ",
+          "text": "CBZ             X0, loc_251C28"
+        },
+        {
+          "ea": "0x251c14",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X0, #_ZN10a7qxJaHqKV10rdNNGa00uCE_ptr@PAGE"
+        },
+        {
+          "ea": "0x251c18",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X0,#_ZN10a7qxJaHqKV10rdNNGa00uCE_ptr@PAGEOFF]; a7qxJaHqKV::rdNNGa00uC ..."
+        },
+        {
+          "ea": "0x251c1c",
+          "mnemonic": "LDR",
+          "text": "LDR             W0, [X0]; a7qxJaHqKV::rdNNGa00uC"
+        },
+        {
+          "ea": "0x251c20",
+          "mnemonic": "CMP",
+          "text": "CMP             W0, #2"
+        },
+        {
+          "ea": "0x251c24",
+          "mnemonic": "B.GT",
+          "text": "B.GT            loc_251C38"
+        },
+        {
+          "ea": "0x251c28",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X0, #_ZN10QYZugaRKGu10TI0CgaxdrBE_ptr@PAGE"
+        },
+        {
+          "ea": "0x251c2c",
+          "mnemonic": "MOV",
+          "text": "MOV             W1, #1"
+        },
+        {
+          "ea": "0x251c30",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X0,#_ZN10QYZugaRKGu10TI0CgaxdrBE_ptr@PAGEOFF]; QYZugaRKGu::TI0CgaxdrB ..."
+        },
+        {
+          "ea": "0x251c34",
+          "mnemonic": "STRB",
+          "text": "STRB            W1, [X0]; QYZugaRKGu::TI0CgaxdrB"
+        },
+        {
+          "ea": "0x251c38",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X0, #_ZN10QYZugaRKGu10rxN_IaKhrtE_ptr@PAGE"
+        },
+        {
+          "ea": "0x251c3c",
+          "mnemonic": "MOV",
+          "text": "MOV             W1, #8"
+        },
+        {
+          "ea": "0x251c40",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X0,#_ZN10QYZugaRKGu10rxN_IaKhrtE_ptr@PAGEOFF]; QYZugaRKGu::rxN_IaKhrt ..."
+        },
+        {
+          "ea": "0x251c44",
+          "mnemonic": "STR",
+          "text": "STR             W1, [X0]; QYZugaRKGu::rxN_IaKhrt"
+        },
+        {
+          "ea": "0x251c48",
+          "mnemonic": "RET",
+          "text": "RET"
+        }
+      ],
+      "ea": "0x251c04",
+      "function_end": "0x251c4c",
+      "function_start": "0x251c04",
+      "name": "Java_com_quattroplay_GraalClassic_Natives_onAppPause",
+      "pseudocode": "int *Java_com_quattroplay_GraalClassic_Natives_onAppPause()\n{\n  if ( !w6qzgacqqy::r05Uga4FEQ || a7qxJaHqKV::rdNNGa00uC <= 2 )\n    QYZugaRKGu::TI0CgaxdrB = 1;\n  QYZugaRKGu::rxN_IaKhrt = 8;\n  return &QYZugaRKGu::rxN_IaKhrt;\n}\n",
+      "xrefs_to": [
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x28d28",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "comment": null,
+      "disassembly": [
+        {
+          "ea": "0x253380",
+          "mnemonic": "SUB",
+          "text": "SUB             SP, SP, #0x70"
+        },
+        {
+          "ea": "0x253384",
+          "mnemonic": "MOV",
+          "text": "MOV             X1, X2"
+        },
+        {
+          "ea": "0x253388",
+          "mnemonic": "STP",
+          "text": "STP             X23, X30, [SP,#0x70+var_50]"
+        },
+        {
+          "ea": "0x25338c",
+          "mnemonic": "STP",
+          "text": "STP             X19, X20, [SP,#0x70+var_70]"
+        },
+        {
+          "ea": "0x253390",
+          "mnemonic": "STP",
+          "text": "STP             X21, X22, [SP,#0x70+var_60]"
+        },
+        {
+          "ea": "0x253394",
+          "mnemonic": "MOV",
+          "text": "MOV             X22, X3"
+        },
+        {
+          "ea": "0x253398",
+          "mnemonic": "MOV",
+          "text": "MOV             X23, X2"
+        },
+        {
+          "ea": "0x25339c",
+          "mnemonic": "LDR",
+          "text": "LDR             X3, [X0]"
+        },
+        {
+          "ea": "0x2533a0",
+          "mnemonic": "MOV",
+          "text": "MOV             X2, #0"
+        },
+        {
+          "ea": "0x2533a4",
+          "mnemonic": "MOV",
+          "text": "MOV             X19, X0"
+        },
+        {
+          "ea": "0x2533a8",
+          "mnemonic": "ADD",
+          "text": "ADD             X20, SP, #0x70+var_30"
+        },
+        {
+          "ea": "0x2533ac",
+          "mnemonic": "ADD",
+          "text": "ADD             X21, SP, #0x70+var_28"
+        },
+        {
+          "ea": "0x2533b0",
+          "mnemonic": "LDR",
+          "text": "LDR             X3, [X3,#0x548]"
+        },
+        {
+          "ea": "0x2533b4",
+          "mnemonic": "BLR",
+          "text": "BLR             X3"
+        },
+        {
+          "ea": "0x2533b8",
+          "mnemonic": "MOV",
+          "text": "MOV             X1, X0; char *"
+        },
+        {
+          "ea": "0x2533bc",
+          "mnemonic": "STR",
+          "text": "STR             X0, [SP,#0x70+var_38]"
+        },
+        {
+          "ea": "0x2533c0",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X20; int"
+        },
+        {
+          "ea": "0x2533c4",
+          "mnemonic": "STR",
+          "text": "STR             XZR, [SP,#0x70+var_30]"
+        },
+        {
+          "ea": "0x2533c8",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxFlsEPKc; C8THgaTQxF::operator<<(char const*)"
+        },
+        {
+          "ea": "0x2533cc",
+          "mnemonic": "LDR",
+          "text": "LDR             X3, [X19]"
+        },
+        {
+          "ea": "0x2533d0",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X19"
+        },
+        {
+          "ea": "0x2533d4",
+          "mnemonic": "LDR",
+          "text": "LDR             X2, [SP,#0x70+var_38]"
+        },
+        {
+          "ea": "0x2533d8",
+          "mnemonic": "MOV",
+          "text": "MOV             X1, X23"
+        },
+        {
+          "ea": "0x2533dc",
+          "mnemonic": "LDR",
+          "text": "LDR             X3, [X3,#0x550]"
+        },
+        {
+          "ea": "0x2533e0",
+          "mnemonic": "BLR",
+          "text": "BLR             X3"
+        },
+        {
+          "ea": "0x2533e4",
+          "mnemonic": "LDR",
+          "text": "LDR             X3, [X19]"
+        },
+        {
+          "ea": "0x2533e8",
+          "mnemonic": "MOV",
+          "text": "MOV             X2, #0"
+        },
+        {
+          "ea": "0x2533ec",
+          "mnemonic": "MOV",
+          "text": "MOV             X1, X22"
+        },
+        {
+          "ea": "0x2533f0",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X19"
+        },
+        {
+          "ea": "0x2533f4",
+          "mnemonic": "LDR",
+          "text": "LDR             X3, [X3,#0x548]"
+        },
+        {
+          "ea": "0x2533f8",
+          "mnemonic": "BLR",
+          "text": "BLR             X3"
+        },
+        {
+          "ea": "0x2533fc",
+          "mnemonic": "MOV",
+          "text": "MOV             X1, X0; char *"
+        },
+        {
+          "ea": "0x253400",
+          "mnemonic": "STR",
+          "text": "STR             X0, [SP,#0x70+var_38]"
+        },
+        {
+          "ea": "0x253404",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X21; int"
+        },
+        {
+          "ea": "0x253408",
+          "mnemonic": "STR",
+          "text": "STR             XZR, [SP,#0x70+var_28]"
+        },
+        {
+          "ea": "0x25340c",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxFlsEPKc; C8THgaTQxF::operator<<(char const*)"
+        },
+        {
+          "ea": "0x253410",
+          "mnemonic": "LDR",
+          "text": "LDR             X3, [X19]"
+        },
+        {
+          "ea": "0x253414",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X19"
+        },
+        {
+          "ea": "0x253418",
+          "mnemonic": "LDR",
+          "text": "LDR             X2, [SP,#0x70+var_38]"
+        },
+        {
+          "ea": "0x25341c",
+          "mnemonic": "MOV",
+          "text": "MOV             X1, X22"
+        },
+        {
+          "ea": "0x253420",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X19, #_ZN10QYZugaRKGu10yl0ugaRUHuE_ptr@PAGE"
+        },
+        {
+          "ea": "0x253424",
+          "mnemonic": "LDR",
+          "text": "LDR             X3, [X3,#0x550]"
+        },
+        {
+          "ea": "0x253428",
+          "mnemonic": "BLR",
+          "text": "BLR             X3"
+        },
+        {
+          "ea": "0x25342c",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X1, #aOndevicebackbu@PAGE; \"onDeviceBackButton\""
+        },
+        {
+          "ea": "0x253430",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X20; int"
+        },
+        {
+          "ea": "0x253434",
+          "mnemonic": "ADD",
+          "text": "ADD             X1, X1, #aOndevicebackbu@PAGEOFF; \"onDeviceBackButton\""
+        },
+        {
+          "ea": "0x253438",
+          "mnemonic": "BL",
+          "text": "BL              ._ZeqRK10C8THgaTQxFPKc; operator==(C8THgaTQxF const&,char const*)"
+        },
+        {
+          "ea": "0x25343c",
+          "mnemonic": "UXTB",
+          "text": "UXTB            W0, W0"
+        },
+        {
+          "ea": "0x253440",
+          "mnemonic": "CBZ",
+          "text": "CBZ             W0, loc_253460"
+        },
+        {
+          "ea": "0x253444",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X19,#_ZN10QYZugaRKGu10yl0ugaRUHuE_ptr@PAGEOFF]; QYZugaRKGu::yl0ugaRUHu ..."
+        },
+        {
+          "ea": "0x253448",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X0]; this"
+        },
+        {
+          "ea": "0x25344c",
+          "mnemonic": "CBZ",
+          "text": "CBZ             X0, loc_2534F4"
+        },
+        {
+          "ea": "0x253450",
+          "mnemonic": "MOV",
+          "text": "MOV             X1, X20; C8THgaTQxF *"
+        },
+        {
+          "ea": "0x253454",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10G0gxgajWBw10c_H_fa_Cm4ERK10C8THgaTQxF; G0gxgajWBw::c_H_fa_Cm4(C8THgaTQxF const&)"
+        },
+        {
+          "ea": "0x253458",
+          "mnemonic": "UXTB",
+          "text": "UXTB            W0, W0"
+        },
+        {
+          "ea": "0x25345c",
+          "mnemonic": "CBZ",
+          "text": "CBZ             W0, loc_2534F4"
+        },
+        {
+          "ea": "0x253460",
+          "mnemonic": "LDR",
+          "text": "LDR             X19, [X19,#_ZN10QYZugaRKGu10yl0ugaRUHuE_ptr@PAGEOFF]; QYZugaRKGu::yl0ugaRUHu ..."
+        },
+        {
+          "ea": "0x253464",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X19]; this"
+        },
+        {
+          "ea": "0x253468",
+          "mnemonic": "CBZ",
+          "text": "CBZ             X0, loc_2534D0"
+        },
+        {
+          "ea": "0x25346c",
+          "mnemonic": "LDR",
+          "text": "LDR             X1, [SP,#0x70+var_28]"
+        },
+        {
+          "ea": "0x253470",
+          "mnemonic": "CBZ",
+          "text": "CBZ             X1, loc_253538"
+        },
+        {
+          "ea": "0x253474",
+          "mnemonic": "LDR",
+          "text": "LDR             W1, [X1]"
+        },
+        {
+          "ea": "0x253478",
+          "mnemonic": "CMP",
+          "text": "CMP             W1, WZR"
+        },
+        {
+          "ea": "0x25347c",
+          "mnemonic": "B.LE",
+          "text": "B.LE            loc_253538"
+        },
+        {
+          "ea": "0x253480",
+          "mnemonic": "ADD",
+          "text": "ADD             X23, SP, #0x70+var_20"
+        },
+        {
+          "ea": "0x253484",
+          "mnemonic": "MOV",
+          "text": "MOV             W2, #0; bool"
+        },
+        {
+          "ea": "0x253488",
+          "mnemonic": "MOV",
+          "text": "MOV             X1, X21; C8THgaTQxF *"
+        },
+        {
+          "ea": "0x25348c",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X23; this"
+        },
+        {
+          "ea": "0x253490",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10vuuHgangcFC2ERK10C8THgaTQxFb; vuuHgangcF::vuuHgangcF(C8THgaTQxF const&,bool)"
+        },
+        {
+          "ea": "0x253494",
+          "mnemonic": "MOV",
+          "text": "MOV             W1, #0; vuuHgangcF *"
+        },
+        {
+          "ea": "0x253498",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X23; this"
+        },
+        {
+          "ea": "0x25349c",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10D6TlgajP1m10I4logaIb6oEPK10vuuHgangcFb; D6TlgajP1m::I4logaIb6o(vuuHgangcF const*,bool)"
+        },
+        {
+          "ea": "0x2534a0",
+          "mnemonic": "MOV",
+          "text": "MOV             X22, X0"
+        },
+        {
+          "ea": "0x2534a4",
+          "mnemonic": "LDR",
+          "text": "LDR             X0, [X19]; this"
+        },
+        {
+          "ea": "0x2534a8",
+          "mnemonic": "MOV",
+          "text": "MOV             X1, X20; C8THgaTQxF *"
+        },
+        {
+          "ea": "0x2534ac",
+          "mnemonic": "MOV",
+          "text": "MOV             X2, X22; G0gxgajWBw *"
+        },
+        {
+          "ea": "0x2534b0",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10G0gxgajWBw10BRcLgaJqkIERK10C8THgaTQxFPS_; G0gxgajWBw::BRcLgaJqkI(C8THgaTQxF const&,G0gxgajWBw*)"
+        },
+        {
+          "ea": "0x2534b4",
+          "mnemonic": "CBZ",
+          "text": "CBZ             X22, loc_2534C8"
+        },
+        {
+          "ea": "0x2534b8",
+          "mnemonic": "LDR",
+          "text": "LDR             X1, [X22]"
+        },
+        {
+          "ea": "0x2534bc",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X22"
+        },
+        {
+          "ea": "0x2534c0",
+          "mnemonic": "LDR",
+          "text": "LDR             X1, [X1,#8]"
+        },
+        {
+          "ea": "0x2534c4",
+          "mnemonic": "BLR",
+          "text": "BLR             X1"
+        },
+        {
+          "ea": "0x2534c8",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X23; this"
+        },
+        {
+          "ea": "0x2534cc",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10vuuHgangcFD2Ev; vuuHgangcF::~vuuHgangcF()"
+        },
+        {
+          "ea": "0x2534d0",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X21; this"
+        },
+        {
+          "ea": "0x2534d4",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxF5clearEv; C8THgaTQxF::clear(void)"
+        },
+        {
+          "ea": "0x2534d8",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X20; this"
+        },
+        {
+          "ea": "0x2534dc",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxF5clearEv; C8THgaTQxF::clear(void)"
+        },
+        {
+          "ea": "0x2534e0",
+          "mnemonic": "LDP",
+          "text": "LDP             X23, X30, [SP,#0x70+var_50]"
+        },
+        {
+          "ea": "0x2534e4",
+          "mnemonic": "LDP",
+          "text": "LDP             X19, X20, [SP,#0x70+var_70]"
+        },
+        {
+          "ea": "0x2534e8",
+          "mnemonic": "LDP",
+          "text": "LDP             X21, X22, [SP,#0x70+var_60]"
+        },
+        {
+          "ea": "0x2534ec",
+          "mnemonic": "ADD",
+          "text": "ADD             SP, SP, #0x70 ; 'p'"
+        },
+        {
+          "ea": "0x2534f0",
+          "mnemonic": "RET",
+          "text": "RET"
+        },
+        {
+          "ea": "0x2534f4",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X2, #_ZN10QYZugaRKGu10TI0CgaxdrBE_ptr@PAGE"
+        },
+        {
+          "ea": "0x2534f8",
+          "mnemonic": "ADRP",
+          "text": "ADRP            X1, #_ZN10QYZugaRKGu10rxN_IaKhrtE_ptr@PAGE"
+        },
+        {
+          "ea": "0x2534fc",
+          "mnemonic": "MOV",
+          "text": "MOV             W3, #1"
+        },
+        {
+          "ea": "0x253500",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X21; this"
+        },
+        {
+          "ea": "0x253504",
+          "mnemonic": "LDR",
+          "text": "LDR             X2, [X2,#_ZN10QYZugaRKGu10TI0CgaxdrBE_ptr@PAGEOFF]; QYZugaRKGu::TI0CgaxdrB ..."
+        },
+        {
+          "ea": "0x253508",
+          "mnemonic": "LDR",
+          "text": "LDR             X1, [X1,#_ZN10QYZugaRKGu10rxN_IaKhrtE_ptr@PAGEOFF]; QYZugaRKGu::rxN_IaKhrt ..."
+        },
+        {
+          "ea": "0x25350c",
+          "mnemonic": "STRB",
+          "text": "STRB            W3, [X2]; QYZugaRKGu::TI0CgaxdrB"
+        },
+        {
+          "ea": "0x253510",
+          "mnemonic": "MOV",
+          "text": "MOV             W2, #7"
+        },
+        {
+          "ea": "0x253514",
+          "mnemonic": "STR",
+          "text": "STR             W2, [X1]; QYZugaRKGu::rxN_IaKhrt"
+        },
+        {
+          "ea": "0x253518",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxF5clearEv; C8THgaTQxF::clear(void)"
+        },
+        {
+          "ea": "0x25351c",
+          "mnemonic": "MOV",
+          "text": "MOV             X0, X20; this"
+        },
+        {
+          "ea": "0x253520",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10C8THgaTQxF5clearEv; C8THgaTQxF::clear(void)"
+        },
+        {
+          "ea": "0x253524",
+          "mnemonic": "LDP",
+          "text": "LDP             X23, X30, [SP,#0x70+var_50]"
+        },
+        {
+          "ea": "0x253528",
+          "mnemonic": "LDP",
+          "text": "LDP             X19, X20, [SP,#0x70+var_70]"
+        },
+        {
+          "ea": "0x25352c",
+          "mnemonic": "LDP",
+          "text": "LDP             X21, X22, [SP,#0x70+var_60]"
+        },
+        {
+          "ea": "0x253530",
+          "mnemonic": "ADD",
+          "text": "ADD             SP, SP, #0x70 ; 'p'"
+        },
+        {
+          "ea": "0x253534",
+          "mnemonic": "RET",
+          "text": "RET"
+        },
+        {
+          "ea": "0x253538",
+          "mnemonic": "MOV",
+          "text": "MOV             X1, X20; C8THgaTQxF *"
+        },
+        {
+          "ea": "0x25353c",
+          "mnemonic": "BL",
+          "text": "BL              ._ZN10G0gxgajWBw10BRcLgaJqkIERK10C8THgaTQxF; G0gxgajWBw::BRcLgaJqkI(C8THgaTQxF const&)"
+        },
+        {
+          "ea": "0x253540",
+          "mnemonic": "B",
+          "text": "B               loc_2534D0"
+        }
+      ],
+      "ea": "0x253380",
+      "function_end": "0x253544",
+      "function_start": "0x253380",
+      "name": "Java_com_quattroplay_GraalClassic_Natives_onInvokeEvent",
+      "pseudocode": "__int64 __fastcall Java_com_quattroplay_GraalClassic_Natives_onInvokeEvent(\n        __int64 a1,\n        __int64 a2,\n        __int64 a3,\n        __int64 a4)\n{\n  bool v7; // w2\n  G0gxgajWBw *v8; // x22\n  char *v10; // [xsp+38h] [xbp-38h]\n  char *v11; // [xsp+38h] [xbp-38h]\n  __int64 v12; // [xsp+40h] [xbp-30h] BYREF\n  int *v13; // [xsp+48h] [xbp-28h] BYREF\n  _BYTE v14[32]; // [xsp+50h] [xbp-20h] BYREF\n\n  v10 = (char *)(*(__int64 (__fastcall **)(__int64, __int64, _QWORD))(*(_QWORD *)a1 + 1352LL))(a1, a3, 0);\n  v12 = 0;\n  C8THgaTQxF::operator<<((int)&v12, v10);\n  (*(void (__fastcall **)(__int64, __int64, char *))(*(_QWORD *)a1 + 1360LL))(a1, a3, v10);\n  v11 = (char *)(*(__int64 (__fastcall **)(__int64, __int64, _QWORD))(*(_QWORD *)a1 + 1352LL))(a1, a4, 0);\n  v13 = nullptr;\n  C8THgaTQxF::operator<<((int)&v13, v11);\n  (*(void (__fastcall **)(__int64, __int64, char *))(*(_QWORD *)a1 + 1360LL))(a1, a4, v11);\n  if ( !(unsigned __int8)operator==((int)&v12, \"onDeviceBackButton\")\n    || QYZugaRKGu::yl0ugaRUHu\n    && (unsigned __int8)G0gxgajWBw::c_H_fa_Cm4((G0gxgajWBw *)QYZugaRKGu::yl0ugaRUHu, (const C8THgaTQxF *)&v12) )\n  {\n    if ( QYZugaRKGu::yl0ugaRUHu )\n    {\n      if ( v13 && *v13 > 0 )\n      {\n        vuuHgangcF::vuuHgangcF((vuuHgangcF *)v14, (const C8THgaTQxF *)&v13, 0);\n        v8 = (G0gxgajWBw *)D6TlgajP1m::I4logaIb6o((D6TlgajP1m *)v14, nullptr, v7);\n        G0gxgajWBw::BRcLgaJqkI((G0gxgajWBw *)QYZugaRKGu::yl0ugaRUHu, (const C8THgaTQxF *)&v12, v8);\n        if ( v8 )\n          (*(void (__fastcall **)(G0gxgajWBw *))(*(_QWORD *)v8 + 8LL))(v8);\n        vuuHgangcF::~vuuHgangcF((vuuHgangcF *)v14);\n      }\n      else\n      {\n        G0gxgajWBw::BRcLgaJqkI((G0gxgajWBw *)QYZugaRKGu::yl0ugaRUHu, (const C8THgaTQxF *)&v12);\n      }\n    }\n    C8THgaTQxF::clear((C8THgaTQxF *)&v13);\n    return C8THgaTQxF::clear((C8THgaTQxF *)&v12);\n  }\n  else\n  {\n    QYZugaRKGu::TI0CgaxdrB = 1;\n    QYZugaRKGu::rxN_IaKhrt = 7;\n    C8THgaTQxF::clear((C8THgaTQxF *)&v13);\n    return C8THgaTQxF::clear((C8THgaTQxF *)&v12);\n  }\n}\n",
+      "xrefs_to": [
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x28b18",
+          "type": 1
+        }
+      ]
+    }
+  ]
+}

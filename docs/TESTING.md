@@ -4077,3 +4077,71 @@ python3 tools/validate_research_archive.py
 The expected v352 database SHA-256 is
 `0fb0662dffea1f1f6223e0e52745a19505687a79cf47f207280ce098f61b87f0`.
 The validator must finish with `research archive validation: ok`.
+
+## v353 retained JNI callback translation
+
+The v353 source and target pseudocode captures were collected offline from the
+corresponding IDA databases with `tools/ida_dump_function_evidence.py`. The
+five address pairs are:
+
+```text
+0x2440f4 -> 0x250ee0  QPlayLoop
+0x2443b8 -> 0x251500  onKeyEvent
+0x244990 -> 0x251adc  onAppEnterBackground
+0x244ac0 -> 0x251c04  onAppPause
+0x245f54 -> 0x253380  onInvokeEvent
+```
+
+Generate the reviewed anchor artifact and carry the semantic map forward with:
+
+```bash
+python3 tools/generate_spectron_jni_callbacks_anchors_v353.py \
+  --parent-map artifacts/spectron_semantic_translation_v352.json \
+  --exact-name-artifact artifacts/spectron_exact_shared_name_anchors_20260826.json \
+  --target-features artifacts/spectron_features_v351_hash_residual.json \
+  --source-evidence artifacts/spectron_jni_callbacks_source_evidence_20260829.json \
+  --target-evidence artifacts/spectron_jni_callbacks_target_evidence_20260829.json \
+  --database /home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v351_hash_residual.i64 \
+  --output artifacts/spectron_jni_callbacks_manual_translation_anchors_20260829.json
+
+python3 tools/carry_forward_spectron_semantic_translation_v353.py \
+  --parent-map artifacts/spectron_semantic_translation_v352.json \
+  --anchor-artifact artifacts/spectron_jni_callbacks_manual_translation_anchors_20260829.json \
+  --target-features artifacts/spectron_features_v351_hash_residual.json \
+  --output artifacts/spectron_semantic_translation_v353.json
+```
+
+Apply the five aliases to a new IDA copy with the existing manual-anchor
+script. The application report must show five resolved rows, five renames,
+zero failures, and a saved database. Reopen the copy with
+`tools/ida_verify_spectron_manual_anchors.py`; it must verify five names and
+11,707 functions.
+
+The final v353 feature and checkpoint commands are:
+
+```bash
+env LIBQPLAY_FEATURES_OUT=artifacts/spectron_features_v353_jni_callbacks.json \
+  /home/v/.codex/plugins/cache/mrexodia/ida-pro-mcp/0.1.0/.venv/bin/python \
+  /home/v/ida-pro-9.3/idalib/examples/idacli.py \
+  -f /home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v353_jni_callbacks.i64 \
+  -s tools/ida_export_function_features.py
+
+python3 tools/generate_spectron_translation_checkpoint_v353.py \
+  --parent-checkpoint artifacts/spectron_translation_checkpoint_20260829_v352.json \
+  --database /home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v353_jni_callbacks.i64 \
+  --anchor-artifact artifacts/spectron_jni_callbacks_manual_translation_anchors_20260829.json \
+  --application-report artifacts/spectron_jni_callbacks_manual_translation_application_20260829.json \
+  --verification-report artifacts/spectron_jni_callbacks_manual_translation_verification_20260829.json \
+  --name-audit artifacts/spectron_name_coverage_audit_v353.json \
+  --boundary-audit artifacts/spectron_dynamic_symbol_boundaries_v353.json \
+  --dynamic-symbol-coverage artifacts/spectron_dynamic_symbol_coverage_audit_v353.json \
+  --semantic-map artifacts/spectron_semantic_translation_v353.json \
+  --target-features artifacts/spectron_features_v353_jni_callbacks.json \
+  --output artifacts/spectron_translation_checkpoint_20260829_v353.json
+
+python3 tools/validate_research_archive.py
+```
+
+The strict v353 database SHA-256 is
+`03959f04419cb3900cf68b41283138c458c46e6dbede9c1ba9d1acbf15c6b63a`. The
+archive validator must finish with `research archive validation: ok`.

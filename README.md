@@ -8203,6 +8203,44 @@ The reusable scripts are
 This was static analysis only. It did not patch the APK, rerun the loopback
 client, contact a live endpoint, or change the TLS or loading-state repairs.
 
+## v353 retained JNI callback translations
+
+The v353 pass resolves five source rows whose JNI export names survived
+unchanged in the supplied Spectron build. The semantic matcher had left these
+rows unmatched because the target frame loop and lifecycle callbacks gained
+target-specific work. Fresh source and target pseudocode review confirms the
+roles, so the target functions now carry consistent `v18_` analysis aliases.
+
+| Source | Target | Role | Review result |
+| --- | --- | --- | --- |
+| `Java_com_quattroplay_GraalClassic_Natives_QPlayLoop` at `0x2440f4` | `0x250ee0` | frame loop and renderer dispatch | high confidence, target adds periodic status and lifecycle handling |
+| `Java_com_quattroplay_GraalClassic_Natives_onKeyEvent` at `0x2443b8` | `0x251500` | keyboard event adapter | high confidence, same input conversion and window dispatch |
+| `Java_com_quattroplay_GraalClassic_Natives_onAppEnterBackground` at `0x244990` | `0x251adc` | background lifecycle event | high confidence, same event and `-Games` preparation path |
+| `Java_com_quattroplay_GraalClassic_Natives_onAppPause` at `0x244ac0` | `0x251c04` | pause state transition | high confidence, target expresses the lifecycle state through rebuilt globals |
+| `Java_com_quattroplay_GraalClassic_Natives_onInvokeEvent` at `0x245f54` | `0x253380` | Java event bridge | high confidence, same back-button and universe-event dispatch logic |
+
+The source and target exact-name records are in
+`artifacts/spectron_exact_shared_name_anchors_20260826.json`. Fresh Hex-Rays
+captures are preserved in
+`artifacts/spectron_jni_callbacks_source_evidence_20260829.json` and
+`artifacts/spectron_jni_callbacks_target_evidence_20260829.json`. The reviewed
+anchor artifact is
+`artifacts/spectron_jni_callbacks_manual_translation_anchors_20260829.json`.
+
+The v353 semantic map contains 4,259 mapped pairs, 4,198 high-confidence
+pairs, 61 medium-confidence pairs, 1,001 ambiguities, and 84 unmatched source
+rows. The target IDA copy is
+`analysis/spectron_libqplay_translated_v353_jni_callbacks.i64` with SHA-256
+`03959f04419cb3900cf68b41283138c458c46e6dbede9c1ba9d1acbf15c6b63a`.
+All five aliases survived close and reopen verification. The function count
+remains 11,707, the default function count remains zero, and the dynamic
+boundary audit still finds 5,782 exact starts.
+
+This pass changes IDA analysis metadata only. It does not change native code,
+the APK, the loopback repair, TLS behavior, or the live-service boundary.
+The strict record is
+`artifacts/spectron_translation_checkpoint_20260829_v353.json`.
+
 ## v352 existing alias reconciliation
 
 The v352 pass fixes a bookkeeping gap between the IDA database and the

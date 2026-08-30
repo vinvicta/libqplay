@@ -4240,3 +4240,29 @@ green tiled world with HUD and status icons. No live service was contacted.
 The semantic map now has 4,254 mapped pairs and 89 unmatched source rows. The
 new checkpoint is
 `artifacts/spectron_translation_checkpoint_20260829_v352.json`.
+
+## v353 retained JNI callback translation
+
+The v353 work is static IDA metadata and does not change the runtime repair.
+It translates the five JNI callbacks that remained unmatched after the v352
+provenance reconciliation. The target functions already retained their exact
+JNI export names, and fresh pseudocode review confirms the callback roles.
+The new aliases are present in
+`analysis/spectron_libqplay_translated_v353_jni_callbacks.i64`, whose recorded
+SHA-256 is
+`03959f04419cb3900cf68b41283138c458c46e6dbede9c1ba9d1acbf15c6b63a`.
+
+The working runtime conclusion remains unchanged:
+
+* the corrected local replay reaches encrypted login;
+* the second connection requests the base package, image, map, and level resources;
+* packet-24 heartbeats continue after the local responses;
+* the client renders the green tiled world with HUD and status icons;
+* native RSA encryption, TLS peer verification, and hostname verification remain present;
+* no production endpoint was contacted.
+
+The v353 reports are the JNI anchor artifact, application report, reopen
+verification, v353 feature export, name audit, dynamic boundary audit, dynamic
+symbol coverage, semantic map, and strict checkpoint under `artifacts/`.
+The archive validator still passes all 6,025 checks. This pass did not patch
+the APK or modify the loopback responder.

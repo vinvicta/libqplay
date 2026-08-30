@@ -2266,6 +2266,43 @@ This pass changed only a disposable IDA database copy and offline metadata.
 It did not patch the APK, alter TLS, contact a game service, or change the
 loading-state repair.
 
+## 2026-08-29: v353 retained JNI callback translations
+
+The v353 residual review covers the five JNI callbacks that remained in the
+v352 unmatched list even though the target retained each exact export name.
+The target name was not treated as enough evidence by itself. Each row was
+checked against the source and target Hex-Rays pseudocode, the current target
+feature export, the one-to-one exact-name inventory, and the target's retained
+dynamic symbol table.
+
+| Source | Target | Source shape | Target shape | Role evidence |
+| --- | --- | --- | --- | --- |
+| `QPlayLoop` `0x2440f4` | `0x250ee0` | 696 bytes, 174 instructions, 22 blocks | 1,560 bytes, 387 instructions, 61 blocks | target preserves frame timing, graphics reset, timers, loading/game draw split, video overlay, and frame callback; it also adds periodic status work and a lifecycle state machine |
+| `onKeyEvent` `0x2443b8` | `0x251500` | 304 bytes, 75 instructions, 9 blocks | 308 bytes, 76 instructions, 9 blocks | both gate on the main window and keyboard setting, convert Unicode or append a byte, normalize the scan code and modifiers, call the window handler, and clear temporaries |
+| `onAppEnterBackground` `0x244990` | `0x251adc` | 216 bytes, 53 instructions, 6 blocks | 208 bytes, 51 instructions, 5 blocks | both invoke the background event, hash and find `-Games`, and call `prepareEnterBackground` |
+| `onAppPause` `0x244ac0` | `0x251c04` | 56 bytes, 14 instructions, 4 blocks | 72 bytes, 18 instructions, 4 blocks | both inspect client and loading state before requesting the pause or close result |
+| `onInvokeEvent` `0x245f54` | `0x253380` | 432 bytes, 108 instructions, 12 blocks | 452 bytes, 113 instructions, 12 blocks | both read two Java strings, handle `onDeviceBackButton`, create an optional string-list variable, invoke the universe event, and request closure without a catcher |
+
+The target functions were renamed from their retained JNI export names to
+`v18_` aliases and received review comments. No function boundary or code
+byte changed. The application report records five resolved rows, five
+renames, and zero failures. Reopening the saved database verified all five
+names and all 11,707 function starts.
+
+The v353 map totals are 4,259 mapped pairs, 4,198 high-confidence pairs, 61
+medium-confidence pairs, 1,001 ambiguous rows, and 84 unmatched rows. The
+remaining rows still need direct review. The saved database and strict
+checkpoint are:
+
+```text
+/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v353_jni_callbacks.i64
+SHA-256 03959f04419cb3900cf68b41283138c458c46e6dbede9c1ba9d1acbf15c6b63a
+artifacts/spectron_translation_checkpoint_20260829_v353.json
+```
+
+This pass was offline static analysis. It did not patch the APK, contact a
+live endpoint, or alter the TLS and loading-state repairs.
+
 ## 2026-08-29: v352 existing alias reconciliation
 
 The target database contained more reviewed readable names than the current

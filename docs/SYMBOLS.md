@@ -4020,3 +4020,41 @@ semantic map and strict checkpoint are
 `artifacts/spectron_translation_checkpoint_20260829_v352.json`. The 89
 source rows without a unique existing alias remain unresolved and are not
 silently counted as translated.
+
+## v353 retained JNI callback aliases
+
+The v353 pass adds five source-backed aliases to the target IDA database. Each
+source and target function has the same exact JNI export name in the offline
+feature inventories, and each pair was checked with fresh pseudocode.
+
+| Target address | Alias | Source counterpart | Review status |
+| ---: | --- | --- | --- |
+| `0x250ee0` | `v18_Java_com_quattroplay_GraalClassic_Natives_QPlayLoop` | source `0x2440f4` | high confidence, frame loop with target additions |
+| `0x251500` | `v18_Java_com_quattroplay_GraalClassic_Natives_onKeyEvent` | source `0x2443b8` | high confidence, input adapter |
+| `0x251adc` | `v18_Java_com_quattroplay_GraalClassic_Natives_onAppEnterBackground` | source `0x244990` | high confidence, background event bridge |
+| `0x251c04` | `v18_Java_com_quattroplay_GraalClassic_Natives_onAppPause` | source `0x244ac0` | high confidence, pause state adapter |
+| `0x253380` | `v18_Java_com_quattroplay_GraalClassic_Natives_onInvokeEvent` | source `0x245f54` | high confidence, Java event bridge |
+
+Before application, the target carried the exact retained JNI names. The
+application report records five renames and five review comments. The reopen
+verification confirms every alias at its expected function start. The name
+audit reports 6,450 translated aliases, two remaining target JNI export names,
+764 other target named exports, 439 target-only descriptive labels, 4,052
+other IDA names, and zero default names.
+
+Dynamic-symbol coverage reports 1,647 exact retained dynamic names and 4,805
+source-backed `v18_` aliases. The other categories are unchanged: 119 other
+retained target names, 22 target-only descriptive labels, 169 undefined
+imports with PLT stubs, seven linker-boundary rows, and one undefined dynamic
+row without a target address. The dynamic boundary audit still reports 5,782
+defined function symbols with exact starts.
+
+The v353 records are
+`artifacts/spectron_jni_callbacks_manual_translation_anchors_20260829.json`,
+`artifacts/spectron_jni_callbacks_manual_translation_application_20260829.json`,
+`artifacts/spectron_jni_callbacks_manual_translation_verification_20260829.json`,
+`artifacts/spectron_name_coverage_audit_v353.json`,
+`artifacts/spectron_dynamic_symbol_boundaries_v353.json`,
+`artifacts/spectron_dynamic_symbol_coverage_audit_v353.json`,
+`artifacts/spectron_semantic_translation_v353.json`, and
+`artifacts/spectron_translation_checkpoint_20260829_v353.json`.

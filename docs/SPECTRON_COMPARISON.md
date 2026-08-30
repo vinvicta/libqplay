@@ -12375,3 +12375,32 @@ reconciliation rows and the 336-file provenance manifest are in
 semantic map and strict checkpoint are
 `artifacts/spectron_semantic_translation_v352.json` and
 `artifacts/spectron_translation_checkpoint_20260829_v352.json`.
+
+## v353 retained JNI callback comparison
+
+The following rows are exact shared JNI names, not guesses derived from a
+nearby obfuscated C++ method. The target name was prefixed with `v18_` in the
+translated IDA copy after direct pseudocode review.
+
+| Source 1.8 | Spectron 2.2 | Source size | Target size | Interpretation |
+| --- | --- | ---: | ---: | --- |
+| `Java_com_quattroplay_GraalClassic_Natives_QPlayLoop` `0x2440f4` | `0x250ee0` | 696 | 1,560 | same frame and draw callback, with target-side status and lifecycle work |
+| `Java_com_quattroplay_GraalClassic_Natives_onKeyEvent` `0x2443b8` | `0x251500` | 304 | 308 | same Unicode conversion, modifier normalization, and window dispatch |
+| `Java_com_quattroplay_GraalClassic_Natives_onAppEnterBackground` `0x244990` | `0x251adc` | 216 | 208 | same universe event and `-Games` preparation sequence |
+| `Java_com_quattroplay_GraalClassic_Natives_onAppPause` `0x244ac0` | `0x251c04` | 56 | 72 | same pause guard expressed through target lifecycle globals |
+| `Java_com_quattroplay_GraalClassic_Natives_onInvokeEvent` `0x245f54` | `0x253380` | 432 | 452 | same Java string bridge, back-button branch, and universe invocation |
+
+The QPlayLoop size difference is not evidence of a false match. The target
+pseudocode still contains the source's render preparation, graphics reset,
+timer run, loading/game branch, video overlay, and frame-drawn callback. Its
+additional periodic status code and lifecycle switch appear before and after
+that shared path. The other four rows retain the source control-flow roles
+with only small target wrapper and state-layout changes.
+
+The complete direct captures are
+`artifacts/spectron_jni_callbacks_source_evidence_20260829.json` and
+`artifacts/spectron_jni_callbacks_target_evidence_20260829.json`. The applied
+alias record is
+`artifacts/spectron_jni_callbacks_manual_translation_anchors_20260829.json`.
+The semantic map now reports 4,259 mapped functions and 84 unmatched source
+functions.

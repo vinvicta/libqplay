@@ -1,0 +1,68 @@
+{
+  "anchor_count": 5,
+  "anchor_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/spectron_jni_callbacks_manual_translation_anchors_20260829.json",
+  "apply": true,
+  "artifact": "spectron_manual_anchor_application",
+  "comments_added": 5,
+  "expected_artifact": "spectron_jni_callbacks_manual_translation_anchors_20260829",
+  "failure_count": 0,
+  "failures": [],
+  "plan": [
+    {
+      "actual_name_after": "v18_Java_com_quattroplay_GraalClassic_Natives_QPlayLoop",
+      "actual_name_before": "Java_com_quattroplay_GraalClassic_Natives_QPlayLoop",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x2440f4",
+      "original_name": "Java_com_quattroplay_GraalClassic_Natives_QPlayLoop",
+      "proposed_name": "v18_Java_com_quattroplay_GraalClassic_Natives_QPlayLoop",
+      "spectron_ea": "0x250ee0"
+    },
+    {
+      "actual_name_after": "v18_Java_com_quattroplay_GraalClassic_Natives_onKeyEvent",
+      "actual_name_before": "Java_com_quattroplay_GraalClassic_Natives_onKeyEvent",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x2443b8",
+      "original_name": "Java_com_quattroplay_GraalClassic_Natives_onKeyEvent",
+      "proposed_name": "v18_Java_com_quattroplay_GraalClassic_Natives_onKeyEvent",
+      "spectron_ea": "0x251500"
+    },
+    {
+      "actual_name_after": "v18_Java_com_quattroplay_GraalClassic_Natives_onAppEnterBackground",
+      "actual_name_before": "Java_com_quattroplay_GraalClassic_Natives_onAppEnterBackground",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x244990",
+      "original_name": "Java_com_quattroplay_GraalClassic_Natives_onAppEnterBackground",
+      "proposed_name": "v18_Java_com_quattroplay_GraalClassic_Natives_onAppEnterBackground",
+      "spectron_ea": "0x251adc"
+    },
+    {
+      "actual_name_after": "v18_Java_com_quattroplay_GraalClassic_Natives_onAppPause",
+      "actual_name_before": "Java_com_quattroplay_GraalClassic_Natives_onAppPause",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x244ac0",
+      "original_name": "Java_com_quattroplay_GraalClassic_Natives_onAppPause",
+      "proposed_name": "v18_Java_com_quattroplay_GraalClassic_Natives_onAppPause",
+      "spectron_ea": "0x251c04"
+    },
+    {
+      "actual_name_after": "v18_Java_com_quattroplay_GraalClassic_Natives_onInvokeEvent",
+      "actual_name_before": "Java_com_quattroplay_GraalClassic_Natives_onInvokeEvent",
+      "confidence": "high",
+      "name_action": "rename-with-v18-prefix",
+      "original_ea": "0x245f54",
+      "original_name": "Java_com_quattroplay_GraalClassic_Natives_onInvokeEvent",
+      "proposed_name": "v18_Java_com_quattroplay_GraalClassic_Natives_onInvokeEvent",
+      "spectron_ea": "0x253380"
+    }
+  ],
+  "renamed_count": 5,
+  "resolved_count": 5,
+  "save_path": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v353_jni_callbacks.i64",
+  "saved": true,
+  "verified": true,
+  "verified_name_count": 5
+}

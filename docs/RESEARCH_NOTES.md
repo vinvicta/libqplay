@@ -18884,6 +18884,67 @@ The reusable generators are
 This was an offline IDA pass. It did not patch the APK, run an emulator,
 contact a game endpoint, or change the TLS or loading-state diagnosis.
 
+## v353: retained JNI callbacks close the native bridge residual
+
+The five remaining JNI rows are a useful boundary between source-backed
+translation and target-only reverse engineering. Their names are present once
+in both feature exports, but the original semantic matcher rejected them
+because the target reorganized lifecycle and frame-loop work. The new pass
+keeps that distinction explicit: the names are retained export anchors, and
+the behavior review confirms the native role, but no stripped C++ name is
+being claimed.
+
+`QPlayLoop` is the largest change. The source callback updates the frame clock,
+services timers, resets graphics when requested, selects the loading or game
+draw path, draws an optional video quad, and notifies the main window. The
+target does all of that through `zYRMgaG0IJ`, `a7qxJaHqKV`, `LJyzga9Pwy`, and
+the rebuilt rendering wrappers. Before entering the shared draw path, the
+target also performs periodic status work and later steps through explicit
+lifecycle states. The larger body is therefore a target feature addition, not
+a mismatch in callback identity.
+
+`onKeyEvent` is nearly shape-preserving. The target changes only the class
+names and the backing address of the scan-code table. Its pseudocode still
+has the same two Unicode conversion branches, the same modifier mask rules,
+the same `a4` scan-code normalization, the same call to the window key event,
+and the same temporary-string cleanup.
+
+`onAppEnterBackground` provides a stronger semantic check than its size. Both
+versions construct `onAppEnterBackground`, invoke it on the universe, construct
+`-Games`, hash and search the universe collection, then call
+`prepareEnterBackground` on the result. The target helpers are
+`KKhLga4xoI::g4ouMaaIbp`, `KKhLga4xoI::TBCvgay5cv`, and
+`G0gxgajWBw::pjSNGaWizC`.
+
+`onAppPause` is intentionally documented as a lifecycle translation rather
+than an exact wrapper. The source sets `closeapplication` when no client is
+active or when loading is early. The target sets its explicit close-request
+state and pause state, with the same client and loading-state guard. This is a
+small method where the class-local state names make the target behavior clear.
+
+`onInvokeEvent` preserves the Java string bridge and the special
+`onDeviceBackButton` path. Both versions read the event name and parameter
+strings through the Java environment, test whether the universe catches the
+event, optionally make a variable from a string list, invoke the event, and
+release the temporary value. The target uses `vuuHgangcF` and
+`D6TlgajP1m` for the rebuilt variable representation.
+
+The five rows are stored in
+`artifacts/spectron_jni_callbacks_manual_translation_anchors_20260829.json`.
+The source and target captures are kept separately so a later reviewer can
+inspect the complete disassembly and pseudocode without relying on a summary.
+The semantic carry-forward script is
+`tools/carry_forward_spectron_semantic_translation_v353.py`, and the strict
+checkpoint generator is
+`tools/generate_spectron_translation_checkpoint_v353.py`.
+
+The target IDA name audit changes in the expected way. Translated aliases rise
+from 6,445 to 6,450, retained JNI export names fall from seven to two, and
+the default-name count stays at zero. Dynamic symbol coverage changes only in
+the corresponding name classification: exact retained names fall from 1,652
+to 1,647 and source-backed aliases rise from 4,800 to 4,805. All 5,782
+defined function symbols still have exact IDA function starts.
+
 ## v352: reconcile the IDB name surface with the semantic map
 
 The v351 residual counts needed one consistency audit before selecting more

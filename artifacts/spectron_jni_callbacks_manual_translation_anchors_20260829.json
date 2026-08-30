@@ -1,0 +1,443 @@
+{
+  "anchors": [
+    {
+      "changed_metric_fields": [
+        "size",
+        "instruction_count",
+        "basic_block_count"
+      ],
+      "confidence": "high",
+      "evidence": [
+        "The exact non-default JNI export name appears once in each build's feature export.",
+        "The target keeps the frame clock, input pump, graphics reset, timer execution, loading/game draw split, video overlay, frame callback, and lifecycle state machine, while adding target-side periodic status handling.",
+        "The source and target rows were reviewed through fresh Hex-Rays pseudocode evidence from the corresponding IDA databases.",
+        "The target name is renamed only by adding the v18_ analysis prefix; its original export name remains in the artifact and dynamic-symbol evidence."
+      ],
+      "layout_change": true,
+      "layout_metric_delta": {
+        "basic_block_count": {
+          "original": 22,
+          "spectron": 61
+        },
+        "instruction_count": {
+          "original": 174,
+          "spectron": 387
+        },
+        "size": {
+          "original": 696,
+          "spectron": 1560
+        }
+      },
+      "match_kind": "manual-jni-exact-name-pseudocode-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x2440f4",
+      "original_function_end": null,
+      "original_metrics": {
+        "basic_block_count": 22,
+        "instruction_count": 174,
+        "size": 696
+      },
+      "original_name": "Java_com_quattroplay_GraalClassic_Natives_QPlayLoop",
+      "original_string_refs": [],
+      "proposed_name": "v18_Java_com_quattroplay_GraalClassic_Natives_QPlayLoop",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "native frame loop and render dispatch",
+      "source_pseudocode": null,
+      "source_xrefs": [],
+      "spectron_current_name": "Java_com_quattroplay_GraalClassic_Natives_QPlayLoop",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._Z10By2MgaQLSJv",
+        "._Z10J0L4Gam0CRv",
+        "._Z10L_1XHasi7Av",
+        "._Z10npMAGa2kyrv",
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10G0gxgajWBw10BRcLgaJqkIERK10C8THgaTQxFPKcz",
+        "._ZN10KKhLga4xoI10kEiLgawipIERK10C8THgaTQxF",
+        "._ZN10KKhLga4xoI10tJOiUaYhrZERK10C8THgaTQxF",
+        "._ZN10LJyzga9Pwy10vBgCJaaAOZEv",
+        "._ZN10SU3JfaCUmR10brKIfarGfQEffff",
+        "._ZN10a7qxJaHqKV10LV3BJalVDZEb",
+        "._ZN10a7qxJaHqKV10WDrhJanShIEv",
+        "._ZN10a7qxJaHqKV10XPp3GaoluQEv",
+        "._ZN10a7qxJaHqKV10XzaCJaWvJZEv",
+        "._ZN10a7qxJaHqKV10bA4tIa0sV1Ev",
+        "._ZN10a7qxJaHqKV10ejCrIaRQQ_Ev",
+        "._ZN10a7qxJaHqKV10rm2hIauBNSEv",
+        "._ZN10oMhmIajzmW10QB9uJaBHPTEffff",
+        "._ZN10zYRMgaG0IJ10FYcZgaMw6TEv",
+        ".glClear",
+        ".glClearColor",
+        ".glDisable",
+        ".glDisableClientState"
+      ],
+      "spectron_ea": "0x250ee0",
+      "spectron_function_end": "0x2514f8",
+      "spectron_metrics": {
+        "basic_block_count": 61,
+        "instruction_count": 387,
+        "size": 1560
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0xcdec",
+      "target_pseudocode": "__int64 __fastcall Java_com_quattroplay_GraalClassic_Natives_QPlayLoop(zYRMgaG0IJ *a1, __int64 a2)\n{\n  double v2; // d8\n  double v3; // d0\n  __int64 result; // x0\n  double v5; // d1\n  char v6; // w0\n  double v7; // d0\n  __int64 v8; // x2\n  void (__fastcall *v9)(__int64, __int64 *); // x2\n  a7qxJaHqKV *v10; // x0\n  a7qxJaHqKV *v11; // x0\n  bool v12; // w1\n  SU3JfaCUmR *v13; // x21\n  void (__fastcall *v14)(__int64, __int64 *); // x2\n  LJyzga9Pwy *v15; // x0\n  int v16; // w0\n  a7qxJaHqKV *v17; // x0\n  a7qxJaHqKV *v18; // x0\n  int v19; // w0\n  G0gxgajWBw *v20; // x25\n  const C8THgaTQxF *v21; // x1\n  const C8THgaTQxF *v22; // x1\n  G0gxgajWBw *v23; // x22\n  const C8THgaTQxF *v24; // x1\n  const C8THgaTQxF *v25; // x1\n  G0gxgajWBw *v26; // x24\n  const C8THgaTQxF *v27; // x1\n  const C8THgaTQxF *v28; // x1\n  double v29; // [xsp+50h] [xbp-30h]\n  double v30; // [xsp+50h] [xbp-30h]\n  double v31; // [xsp+50h] [xbp-30h]\n  double v32; // [xsp+50h] [xbp-30h]\n  double v33; // [xsp+50h] [xbp-30h]\n  __int64 v34; // [xsp+60h] [xbp-20h] BYREF\n  __int64 v35; // [xsp+68h] [xbp-18h] BYREF\n  __int64 v36; // [xsp+70h] [xbp-10h] BYREF\n  float v37; // [xsp+78h] [xbp-8h]\n  float v38; // [xsp+7Ch] [xbp-4h]\n\n  javaenvironment = (__int64)a1;\n  javaenvironmentclass = a2;\n  v2 = (double)(unsigned int)zYRMgaG0IJ::flT3GasaTQ / 1000.0;\n  zYRMgaG0IJ::FYcZgaMw6T(a1);\n  result = 2;\n  v5 = *(double *)&qword_3A59A8 + v2;\n  if ( v3 < *(double *)&qword_3A59A8 + v2 )\n    return result;\n  if ( v3 > *(double *)&qword_3A59A8 + v2 * 2.0 )\n    v5 = v3;\n  v29 = v3;\n  qword_3A59A8 = *(_QWORD *)&v5;\n  v6 = a7qxJaHqKV::XPp3GaoluQ((a7qxJaHqKV *)dword_3A58D0);\n  v7 = v29;\n  if ( v6 )\n  {\n    npMAGa2kyr();\n    v7 = v29;\n  }\n  if ( v7 - *(double *)&qword_3A59B0 > 5.0 )\n  {\n    if ( dword_3A58E8 <= 0 )\n    {\n      dword_3A58EC = -1;\n      if ( dword_3A58D0[0] > 0 )\n      {\n        v23 = (G0gxgajWBw *)QYZugaRKGu::yl0ugaRUHu;\n        if ( QYZugaRKGu::yl0ugaRUHu )\n        {\n          v31 = v7;\n          v34 = 0;\n          C8THgaTQxF::operator<<((int)&v34, aE_0);\n          KKhLga4xoI::tJOiUaYhrZ(&v35, (KKhLga4xoI *)&v34, v24);\n          KKhLga4xoI::kEiLgawipI(&v36, (KKhLga4xoI *)&v35, v25);\n          G0gxgajWBw::BRcLgaJqkI(v23, (const C8THgaTQxF *)&v36, \"1\", 10);\n          C8THgaTQxF::clear((C8THgaTQxF *)&v36);\n          C8THgaTQxF::clear((C8THgaTQxF *)&v35);\n          C8THgaTQxF::clear((C8THgaTQxF *)&v34);\n          v7 = v31;\n        }\n      }\n    }\n    if ( dword_3A5918 <= 0 )\n    {\n      dword_3A58EC = -1;\n      if ( dword_3A58D0[0] <= 0 || (v26 = (G0gxgajWBw *)QYZugaRKGu::yl0ugaRUHu) == nullptr )\n      {\n        dword_3A58E8 = 0;\n        dword_3A5918 = 0;\nLABEL_47:\n        qword_3A59B0 = *(_QWORD *)&v7;\n        goto LABEL_7;\n      }\n      v32 = v7;\n      v34 = 0;\n      C8THgaTQxF::operator<<((int)&v34, aE_0);\n      KKhLga4xoI::tJOiUaYhrZ(&v35, (KKhLga4xoI *)&v34, v27);\n      KKhLga4xoI::kEiLgawipI(&v36, (KKhLga4xoI *)&v35, v28);\n      G0gxgajWBw::BRcLgaJqkI(v26, (const C8THgaTQxF *)&v36, \"i\", 11);\n      C8THgaTQxF::clear((C8THgaTQxF *)&v36);\n      C8THgaTQxF::clear((C8THgaTQxF *)&v35);\n      C8THgaTQxF::clear((C8THgaTQxF *)&v34);\n      v19 = dword_3A58EC;\n      v7 = v32;\n    }\n    else\n    {\n      v19 = dword_3A58EC;\n    }\n    dword_3A58E8 = 0;\n    dword_3A5918 = 0;\n    if ( v19 > 0 )\n    {\n      switch ( dword_3A58D0[0] )\n      {\n        case 1:\n          QYZugaRKGu::TI0CgaxdrB = 1;\n          QYZugaRKGu::rxN_IaKhrt = 6;\n          break;\n        case 2:\n          v33 = v7;\n          npMAGa2kyr();\n          v7 = v33;\n          break;\n        case 3:\n          v20 = (G0gxgajWBw *)QYZugaRKGu::yl0ugaRUHu;\n          if ( QYZugaRKGu::yl0ugaRUHu )\n          {\n            v30 = v7;\n            v34 = 0;\n            C8THgaTQxF::operator<<((int)&v34, aE_0);\n            KKhLga4xoI::tJOiUaYhrZ(&v35, (KKhLga4xoI *)&v34, v21);\n            KKhLga4xoI::kEiLgawipI(&v36, (KKhLga4xoI *)&v35, v22);\n            G0gxgajWBw::BRcLgaJqkI(v20, (const C8THgaTQxF *)&v36, \"i\", (unsigned int)dword_3A58EC);\n            C8THgaTQxF::clear((C8THgaTQxF *)&v36);\n            C8THgaTQxF::clear((C8THgaTQxF *)&v35);\n            C8THgaTQxF::clear((C8THgaTQxF *)&v34);\n            v7 = v30;\n          }\n          break;\n      }\n    }\n    goto LABEL_47;\n  }\nLABEL_7:\n  J0L4Gam0CR();\n  (*(void (__fastcall **)(__int64))(*(_QWORD *)s40xgamwex::target + 208LL))(s40xgamwex::target);\n  v8 = *(_QWORD *)s40xgamwex::target;\n  LODWORD(v36) = 1.0;\n  HIDWORD(v36) = 1.0;\n  v9 = *(void (__fastcall **)(__int64, __int64 *))(v8 + 224);\n  v37 = 1.0;\n  v38 = 1.0;\n  v9(s40xgamwex::target, &v36);\n  glDisableClientState(32884);\n  glDisableClientState(32886);\n  glDisableClientState(32885);\n  glDisableClientState(32888);\n  glDisable(3008);\n  glDisable(2929);\n  glDisable(3553);\n  v10 = (a7qxJaHqKV *)dword_3A58D0;\n  if ( byte_3A59B8 )\n  {\n    byte_3A59B8 = 0;\n    v17 = (a7qxJaHqKV *)a7qxJaHqKV::ejCrIaRQQ_((a7qxJaHqKV *)dword_3A58D0);\n    v18 = (a7qxJaHqKV *)a7qxJaHqKV::WDrhJanShI(v17);\n    v10 = (a7qxJaHqKV *)a7qxJaHqKV::bA4tIa0sV1(v18);\n  }\n  v11 = (a7qxJaHqKV *)a7qxJaHqKV::XzaCJaWvJZ(v10);\n  if ( (unsigned __int8)a7qxJaHqKV::rm2hIauBNS(v11) )\n  {\n    L_1XHasi7A();\n  }\n  else\n  {\n    if ( !w6qzgacqqy::r05Uga4FEQ )\n      L_1XHasi7A();\n    oMhmIajzmW::QB9uJaBHPT((oMhmIajzmW *)s40xgamwex::target, 0.0, 0.0, (float)hEDwJatY3U, (float)e6cwJaVDIU);\n    if ( !(unsigned __int8)a7qxJaHqKV::LV3BJalVDZ(nullptr, v12) )\n    {\n      glClearColor(0.0, 0.0, 0.0, 1.0);\n      glClear(0x4000);\n    }\n    if ( (unsigned __int8)By2MgaQLSJ() && dword_3A5910 > 0 && dword_3A5914 > 0 )\n    {\n      v13 = (SU3JfaCUmR *)s40xgamwex::target;\n      v14 = *(void (__fastcall **)(__int64, __int64 *))(*(_QWORD *)s40xgamwex::target + 224LL);\n      v36 = 0;\n      v37 = 0.0;\n      v38 = 0.0;\n      v14(s40xgamwex::target, &v36);\n      SU3JfaCUmR::brKIfarGfQ(v13, (float)dword_3A5908, (float)dword_3A590C, (float)dword_3A5910, (float)dword_3A5914);\n    }\n    if ( LJyzga9Pwy::mainwindow )\n    {\n      v15 = (LJyzga9Pwy *)(*(__int64 (__fastcall **)(__int64))(*(_QWORD *)LJyzga9Pwy::mainwindow + 536LL))(LJyzga9Pwy::mainwindow);\n      LJyzga9Pwy::vBgCJaaAOZ(v15);\n    }\n  }\n  if ( !QYZugaRKGu::TI0CgaxdrB )\n    return 1;\n  v16 = QYZugaRKGu::rxN_IaKhrt;\n  if ( QYZugaRKGu::rxN_IaKhrt == 1 )\n  {\n    npMAGa2kyr();\n    v16 = QYZugaRKGu::rxN_IaKhrt;\n  }\n  if ( v16 == 2 )\n  {\n    npMAGa2kyr();\n    v16 = QYZugaRKGu::rxN_IaKhrt;\n  }\n  if ( v16 == 3 )\n  {\n    npMAGa2kyr();\n    v16 = QYZugaRKGu::rxN_IaKhrt;\n  }\n  if ( v16 == 4 )\n  {\n    npMAGa2kyr();\n    v16 = QYZugaRKGu::rxN_IaKhrt;\n  }\n  if ( v16 == 5 )\n  {\n    npMAGa2kyr();\n    v16 = QYZugaRKGu::rxN_IaKhrt;\n  }\n  if ( v16 == 6 )\n  {\n    npMAGa2kyr();\n    v16 = QYZugaRKGu::rxN_IaKhrt;\n  }\n  if ( v16 == 7 )\n  {\n    npMAGa2kyr();\n    v16 = QYZugaRKGu::rxN_IaKhrt;\n  }\n  if ( v16 != 8 )\n    return 1;\n  npMAGa2kyr();\n  return 1;\n}\n",
+      "target_xrefs": [
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x18708",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "changed_metric_fields": [
+        "size",
+        "instruction_count"
+      ],
+      "confidence": "high",
+      "evidence": [
+        "The exact non-default JNI export name appears once in each build's feature export.",
+        "Both bodies gate on the main window and hardware keyboard setting, convert Unicode input, normalize the scan-code table and modifier flags, dispatch TWindow::onKeyEvent, and clear temporary strings.",
+        "The source and target rows were reviewed through fresh Hex-Rays pseudocode evidence from the corresponding IDA databases.",
+        "The target name is renamed only by adding the v18_ analysis prefix; its original export name remains in the artifact and dynamic-symbol evidence."
+      ],
+      "layout_change": true,
+      "layout_metric_delta": {
+        "instruction_count": {
+          "original": 75,
+          "spectron": 76
+        },
+        "size": {
+          "original": 304,
+          "spectron": 308
+        }
+      },
+      "match_kind": "manual-jni-exact-name-pseudocode-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x2443b8",
+      "original_function_end": null,
+      "original_metrics": {
+        "basic_block_count": 9,
+        "instruction_count": 75,
+        "size": 304
+      },
+      "original_name": "Java_com_quattroplay_GraalClassic_Natives_onKeyEvent",
+      "original_string_refs": [],
+      "proposed_name": "v18_Java_com_quattroplay_GraalClassic_Natives_onKeyEvent",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "native keyboard event adapter",
+      "source_pseudocode": null,
+      "source_xrefs": [],
+      "spectron_current_name": "Java_com_quattroplay_GraalClassic_Natives_onKeyEvent",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFaSERKS_",
+        "._ZN10C8THgaTQxFlsEc",
+        "._ZN10LJyzga9Pwy10onKeyEventEiiRK10C8THgaTQxFibb",
+        "._ZN8TUnicode10dbu3Ga6_xQEj"
+      ],
+      "spectron_ea": "0x251500",
+      "spectron_function_end": "0x251634",
+      "spectron_metrics": {
+        "basic_block_count": 9,
+        "instruction_count": 76,
+        "size": 308
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0xd148",
+      "target_pseudocode": "void __fastcall Java_com_quattroplay_GraalClassic_Natives_onKeyEvent(\n        int a1,\n        unsigned int a2,\n        int a3,\n        int a4,\n        TUnicode *this,\n        __int64 a6,\n        char a7)\n{\n  int v8; // w2\n  char v9; // w6\n  int v10; // w1\n  int v11; // w3\n  __int64 v14; // [xsp+40h] [xbp-10h] BYREF\n  __int64 v15; // [xsp+48h] [xbp-8h] BYREF\n\n  if ( LJyzga9Pwy::mainwindow && GaA2gaD2MX::kGgggaiEii )\n  {\n    v14 = 0;\n    if ( KcKRganuPN::AYiOfaBzWU )\n    {\n      TUnicode::dbu3Ga6_xQ(&v15, (TUnicode *)(unsigned int)this, a2);\n      C8THgaTQxF::operator=(&v14, &v15);\n      C8THgaTQxF::clear((C8THgaTQxF *)&v15);\n      v8 = a3;\n      v9 = a7;\n    }\n    else\n    {\n      v15 = 0;\n      C8THgaTQxF::operator<<(&v15, (unsigned int)this);\n      C8THgaTQxF::operator=(&v14, &v15);\n      C8THgaTQxF::clear((C8THgaTQxF *)&v15);\n      v9 = a7;\n      v8 = a3;\n    }\n    v10 = 0;\n    if ( (unsigned int)a4 <= 0x5B )\n      v10 = byte_2F0910[a4];\n    v11 = v9 & 0x30;\n    if ( (v9 & 0x40) != 0 )\n      v11 = v9 & 0x30 | 1;\n    if ( v9 < 0 )\n      v11 |= 2u;\n    LJyzga9Pwy::onKeyEvent(\n      (LJyzga9Pwy *)LJyzga9Pwy::mainwindow,\n      v10,\n      v11,\n      (const C8THgaTQxF *)&v14,\n      a4,\n      v8 == 1,\n      v8 == 4);\n    C8THgaTQxF::clear((C8THgaTQxF *)&v14);\n  }\n}\n",
+      "target_xrefs": [
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x1fbd8",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "changed_metric_fields": [
+        "size",
+        "instruction_count",
+        "basic_block_count"
+      ],
+      "confidence": "high",
+      "evidence": [
+        "The exact non-default JNI export name appears once in each build's feature export.",
+        "Both bodies invoke onAppEnterBackground on the universe, locate the -Games object, and call prepareEnterBackground when it exists. The target uses the rebuilt hash and script object classes.",
+        "The source and target rows were reviewed through fresh Hex-Rays pseudocode evidence from the corresponding IDA databases.",
+        "The target name is renamed only by adding the v18_ analysis prefix; its original export name remains in the artifact and dynamic-symbol evidence."
+      ],
+      "layout_change": true,
+      "layout_metric_delta": {
+        "basic_block_count": {
+          "original": 6,
+          "spectron": 5
+        },
+        "instruction_count": {
+          "original": 53,
+          "spectron": 51
+        },
+        "size": {
+          "original": 216,
+          "spectron": 208
+        }
+      },
+      "match_kind": "manual-jni-exact-name-pseudocode-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x244990",
+      "original_function_end": null,
+      "original_metrics": {
+        "basic_block_count": 6,
+        "instruction_count": 53,
+        "size": 216
+      },
+      "original_name": "Java_com_quattroplay_GraalClassic_Natives_onAppEnterBackground",
+      "original_string_refs": [],
+      "proposed_name": "v18_Java_com_quattroplay_GraalClassic_Natives_onAppEnterBackground",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "background lifecycle event adapter",
+      "source_pseudocode": null,
+      "source_xrefs": [],
+      "spectron_current_name": "Java_com_quattroplay_GraalClassic_Natives_onAppEnterBackground",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10G0gxgajWBw10BRcLgaJqkIERK10C8THgaTQxF",
+        "._ZN10G0gxgajWBw10pjSNGaWizCERK10C8THgaTQxFPKcz",
+        "._ZN10KKhLga4xoI10TBCvgay5cvEjRK10C8THgaTQxF",
+        "._ZN10KKhLga4xoI10g4ouMaaIbpERK10C8THgaTQxF"
+      ],
+      "spectron_ea": "0x251adc",
+      "spectron_function_end": "0x251bac",
+      "spectron_metrics": {
+        "basic_block_count": 5,
+        "instruction_count": 51,
+        "size": 208
+      },
+      "spectron_string_refs": [
+        "-Games",
+        "onAppEnterBackground",
+        "prepareEnterBackground"
+      ],
+      "target_delta": "+0xd14c",
+      "target_pseudocode": "void Java_com_quattroplay_GraalClassic_Natives_onAppEnterBackground()\n{\n  G0gxgajWBw *v0; // x21\n  KKhLga4xoI *v1; // x20\n  const C8THgaTQxF *v2; // x1\n  unsigned int v3; // w0\n  G0gxgajWBw *v4; // x20\n  __int64 v5; // [xsp+28h] [xbp-8h] BYREF\n\n  v0 = (G0gxgajWBw *)QYZugaRKGu::yl0ugaRUHu;\n  if ( QYZugaRKGu::yl0ugaRUHu )\n  {\n    v5 = 0;\n    C8THgaTQxF::operator<<((int)&v5, \"onAppEnterBackground\");\n    G0gxgajWBw::BRcLgaJqkI(v0, (const C8THgaTQxF *)&v5);\n    C8THgaTQxF::clear((C8THgaTQxF *)&v5);\n    v1 = *(KKhLga4xoI **)(QYZugaRKGu::yl0ugaRUHu + 96);\n    if ( v1 )\n    {\n      v5 = 0;\n      C8THgaTQxF::operator<<((int)&v5, \"-Games\");\n      v3 = KKhLga4xoI::g4ouMaaIbp((KKhLga4xoI *)&v5, v2);\n      v4 = (G0gxgajWBw *)KKhLga4xoI::TBCvgay5cv(v1, v3, (const C8THgaTQxF *)&v5);\n      C8THgaTQxF::clear((C8THgaTQxF *)&v5);\n      if ( v4 )\n      {\n        v5 = 0;\n        C8THgaTQxF::operator<<((int)&v5, \"prepareEnterBackground\");\n        G0gxgajWBw::pjSNGaWizC(v4, (const C8THgaTQxF *)&v5, &byte_2EA8F0);\n        C8THgaTQxF::clear((C8THgaTQxF *)&v5);\n      }\n    }\n  }\n}\n",
+      "target_xrefs": [
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x19140",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "changed_metric_fields": [
+        "size",
+        "instruction_count"
+      ],
+      "confidence": "high",
+      "evidence": [
+        "The exact non-default JNI export name appears once in each build's feature export.",
+        "Both callbacks examine client and loading state before requesting application closure. The target expresses the same lifecycle result through its explicit close-state and pause-state globals.",
+        "The source and target rows were reviewed through fresh Hex-Rays pseudocode evidence from the corresponding IDA databases.",
+        "The target name is renamed only by adding the v18_ analysis prefix; its original export name remains in the artifact and dynamic-symbol evidence."
+      ],
+      "layout_change": true,
+      "layout_metric_delta": {
+        "instruction_count": {
+          "original": 14,
+          "spectron": 18
+        },
+        "size": {
+          "original": 56,
+          "spectron": 72
+        }
+      },
+      "match_kind": "manual-jni-exact-name-pseudocode-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x244ac0",
+      "original_function_end": null,
+      "original_metrics": {
+        "basic_block_count": 4,
+        "instruction_count": 14,
+        "size": 56
+      },
+      "original_name": "Java_com_quattroplay_GraalClassic_Natives_onAppPause",
+      "original_string_refs": [],
+      "proposed_name": "v18_Java_com_quattroplay_GraalClassic_Natives_onAppPause",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "pause state transition adapter",
+      "source_pseudocode": null,
+      "source_xrefs": [],
+      "spectron_current_name": "Java_com_quattroplay_GraalClassic_Natives_onAppPause",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [],
+      "spectron_ea": "0x251c04",
+      "spectron_function_end": "0x251c4c",
+      "spectron_metrics": {
+        "basic_block_count": 4,
+        "instruction_count": 18,
+        "size": 72
+      },
+      "spectron_string_refs": [],
+      "target_delta": "+0xd144",
+      "target_pseudocode": "int *Java_com_quattroplay_GraalClassic_Natives_onAppPause()\n{\n  if ( !w6qzgacqqy::r05Uga4FEQ || a7qxJaHqKV::rdNNGa00uC <= 2 )\n    QYZugaRKGu::TI0CgaxdrB = 1;\n  QYZugaRKGu::rxN_IaKhrt = 8;\n  return &QYZugaRKGu::rxN_IaKhrt;\n}\n",
+      "target_xrefs": [
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x28d28",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "changed_metric_fields": [
+        "size",
+        "instruction_count"
+      ],
+      "confidence": "high",
+      "evidence": [
+        "The exact non-default JNI export name appears once in each build's feature export.",
+        "Both bodies read two Java strings, recognize onDeviceBackButton, test the universe event catcher, optionally construct a string-list variable, invoke the universe event, and request the matching close state when no catcher exists.",
+        "The source and target rows were reviewed through fresh Hex-Rays pseudocode evidence from the corresponding IDA databases.",
+        "The target name is renamed only by adding the v18_ analysis prefix; its original export name remains in the artifact and dynamic-symbol evidence."
+      ],
+      "layout_change": true,
+      "layout_metric_delta": {
+        "instruction_count": {
+          "original": 108,
+          "spectron": 113
+        },
+        "size": {
+          "original": 432,
+          "spectron": 452
+        }
+      },
+      "match_kind": "manual-jni-exact-name-pseudocode-anchor",
+      "name_action": "rename-with-v18-prefix",
+      "original_direct_call_names": [],
+      "original_ea": "0x245f54",
+      "original_function_end": null,
+      "original_metrics": {
+        "basic_block_count": 12,
+        "instruction_count": 108,
+        "size": 432
+      },
+      "original_name": "Java_com_quattroplay_GraalClassic_Natives_onInvokeEvent",
+      "original_string_refs": [],
+      "proposed_name": "v18_Java_com_quattroplay_GraalClassic_Natives_onInvokeEvent",
+      "semantic_match_already_present": false,
+      "shape_equal": false,
+      "source_basis": "Java event bridge",
+      "source_pseudocode": null,
+      "source_xrefs": [],
+      "spectron_current_name": "Java_com_quattroplay_GraalClassic_Natives_onInvokeEvent",
+      "spectron_default_name": false,
+      "spectron_direct_call_names": [
+        "._ZN10C8THgaTQxF5clearEv",
+        "._ZN10C8THgaTQxFlsEPKc",
+        "._ZN10D6TlgajP1m10I4logaIb6oEPK10vuuHgangcFb",
+        "._ZN10G0gxgajWBw10BRcLgaJqkIERK10C8THgaTQxF",
+        "._ZN10G0gxgajWBw10BRcLgaJqkIERK10C8THgaTQxFPS_",
+        "._ZN10G0gxgajWBw10c_H_fa_Cm4ERK10C8THgaTQxF",
+        "._ZN10vuuHgangcFC2ERK10C8THgaTQxFb",
+        "._ZN10vuuHgangcFD2Ev",
+        "._ZeqRK10C8THgaTQxFPKc"
+      ],
+      "spectron_ea": "0x253380",
+      "spectron_function_end": "0x253544",
+      "spectron_metrics": {
+        "basic_block_count": 12,
+        "instruction_count": 113,
+        "size": 452
+      },
+      "spectron_string_refs": [
+        "onDeviceBackButton"
+      ],
+      "target_delta": "+0xd42c",
+      "target_pseudocode": "__int64 __fastcall Java_com_quattroplay_GraalClassic_Natives_onInvokeEvent(\n        __int64 a1,\n        __int64 a2,\n        __int64 a3,\n        __int64 a4)\n{\n  bool v7; // w2\n  G0gxgajWBw *v8; // x22\n  char *v10; // [xsp+38h] [xbp-38h]\n  char *v11; // [xsp+38h] [xbp-38h]\n  __int64 v12; // [xsp+40h] [xbp-30h] BYREF\n  int *v13; // [xsp+48h] [xbp-28h] BYREF\n  _BYTE v14[32]; // [xsp+50h] [xbp-20h] BYREF\n\n  v10 = (char *)(*(__int64 (__fastcall **)(__int64, __int64, _QWORD))(*(_QWORD *)a1 + 1352LL))(a1, a3, 0);\n  v12 = 0;\n  C8THgaTQxF::operator<<((int)&v12, v10);\n  (*(void (__fastcall **)(__int64, __int64, char *))(*(_QWORD *)a1 + 1360LL))(a1, a3, v10);\n  v11 = (char *)(*(__int64 (__fastcall **)(__int64, __int64, _QWORD))(*(_QWORD *)a1 + 1352LL))(a1, a4, 0);\n  v13 = nullptr;\n  C8THgaTQxF::operator<<((int)&v13, v11);\n  (*(void (__fastcall **)(__int64, __int64, char *))(*(_QWORD *)a1 + 1360LL))(a1, a4, v11);\n  if ( !(unsigned __int8)operator==((int)&v12, \"onDeviceBackButton\")\n    || QYZugaRKGu::yl0ugaRUHu\n    && (unsigned __int8)G0gxgajWBw::c_H_fa_Cm4((G0gxgajWBw *)QYZugaRKGu::yl0ugaRUHu, (const C8THgaTQxF *)&v12) )\n  {\n    if ( QYZugaRKGu::yl0ugaRUHu )\n    {\n      if ( v13 && *v13 > 0 )\n      {\n        vuuHgangcF::vuuHgangcF((vuuHgangcF *)v14, (const C8THgaTQxF *)&v13, 0);\n        v8 = (G0gxgajWBw *)D6TlgajP1m::I4logaIb6o((D6TlgajP1m *)v14, nullptr, v7);\n        G0gxgajWBw::BRcLgaJqkI((G0gxgajWBw *)QYZugaRKGu::yl0ugaRUHu, (const C8THgaTQxF *)&v12, v8);\n        if ( v8 )\n          (*(void (__fastcall **)(G0gxgajWBw *))(*(_QWORD *)v8 + 8LL))(v8);\n        vuuHgangcF::~vuuHgangcF((vuuHgangcF *)v14);\n      }\n      else\n      {\n        G0gxgajWBw::BRcLgaJqkI((G0gxgajWBw *)QYZugaRKGu::yl0ugaRUHu, (const C8THgaTQxF *)&v12);\n      }\n    }\n    C8THgaTQxF::clear((C8THgaTQxF *)&v13);\n    return C8THgaTQxF::clear((C8THgaTQxF *)&v12);\n  }\n  else\n  {\n    QYZugaRKGu::TI0CgaxdrB = 1;\n    QYZugaRKGu::rxN_IaKhrt = 7;\n    C8THgaTQxF::clear((C8THgaTQxF *)&v13);\n    return C8THgaTQxF::clear((C8THgaTQxF *)&v12);\n  }\n}\n",
+      "target_xrefs": [
+        {
+          "caller_ea": null,
+          "caller_name": null,
+          "from": "0x28b18",
+          "type": 1
+        }
+      ]
+    }
+  ],
+  "artifact": "spectron_jni_callbacks_manual_translation_anchors_20260829",
+  "context": {
+    "resolution": "preserved JNI export names plus direct pseudocode role correspondence; target-specific lifecycle and frame-loop additions are recorded as layout changes",
+    "source_classes": [
+      "JNI native bridge",
+      "TTime",
+      "TWindow",
+      "TGameEnvironment"
+    ],
+    "target_class_clusters": [
+      "zYRMgaG0IJ",
+      "LJyzga9Pwy",
+      "QYZugaRKGu",
+      "a7qxJaHqKV"
+    ]
+  },
+  "inputs": {
+    "database": "/home/v/Desktop/graal-decomp/analysis/spectron_libqplay_translated_v351_hash_residual.i64",
+    "database_sha256": "8174668ac90de7816b9ea99f342234436220c6b6f8d57b301c868df97222311a",
+    "exact_name_artifact": "artifacts/spectron_exact_shared_name_anchors_20260826.json",
+    "exact_name_artifact_sha256": "d463a44c8535b886faeebba9fb57e9cacde5b3daf2db13ccf78cd95d4b22d174",
+    "original_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+    "parent_map": "artifacts/spectron_semantic_translation_v352.json",
+    "parent_map_sha256": "79a269e7e88cafe9bf93d2233702bcb78081311bfa9a95163f07c7b76306eba9",
+    "source_evidence": "artifacts/spectron_jni_callbacks_source_evidence_20260829.json",
+    "source_evidence_sha256": "9077149702ba525b1924219fbe5680c30d13036478cfaf901e02a79b65ab0077",
+    "spectron_binary_sha256": "f57f7da48bcddf3738f15502328b36032313ad760eea04c5cc19ef82b4232219",
+    "target_evidence": "artifacts/spectron_jni_callbacks_target_evidence_20260829.json",
+    "target_evidence_sha256": "16c85e4cd97d04e3dec14684ac60935dc45f4443874ae66ba92573d9f03ef403",
+    "target_features": "artifacts/spectron_features_v351_hash_residual.json",
+    "target_features_sha256": "46ec138a8ab7ad1d21a6a92d1d033e1173006be779c6b515c07f87173838366c"
+  },
+  "interpretation": [
+    "The source and target export names are exact shared JNI names, so the translation does not infer a stripped C++ symbol.",
+    "The target QPlayLoop is larger because the 2.2 build adds periodic status work and an explicit lifecycle state machine. The callback role remains unambiguous.",
+    "The target database change is an analysis overlay only: five retained JNI names are prefixed v18_ and receive review comments; native code is unchanged."
+  ],
+  "method": {
+    "address_policy": "source and target addresses remain separate fields; no address is copied between builds",
+    "interpretation": "these are retained native export names with direct role confirmation, not guesses about unrelated obfuscated C++ methods",
+    "name_policy": "the target's retained JNI name receives a v18_ IDA analysis prefix",
+    "selection": "exact one-to-one JNI name, fresh source and target pseudocode role review, and current target feature verification"
+  },
+  "network_contacted": false,
+  "schema_version": 1,
+  "scope": "reviewed 1.8-to-Spectron ARM64 anchors for the five retained JNI native callbacks",
+  "summary": {
+    "address_delta_groups": {
+      "+0xcdec": 1,
+      "+0xd144": 1,
+      "+0xd148": 1,
+      "+0xd14c": 1,
+      "+0xd42c": 1
+    },
+    "anchor_count": 5,
+    "exact_name_anchor_count": 5,
+    "high_confidence_count": 5,
+    "layout_change_anchor_count": 5,
+    "target_default_name_count": 0
+  }
+}
