@@ -72,6 +72,17 @@ libraries report a non-executable `GNU_STACK`, GNU RELRO, and `BIND_NOW` in the
 ELF metadata. Those properties do not compensate for unsafe input, stale trust
 material, or an overly broad update path.
 
+The same offline ELF inventory found a loader compatibility lead. Every native
+ABI declares `libstdc++.so` in `DT_NEEDED`, but no `libstdc++.so` file is
+packaged in the APK. The ARM64 `LOAD` segments use `0x10000` alignment and the
+armeabi, x86, and x86_64 variants use `0x1000`. If a device image does not
+provide a compatible legacy C++ runtime SONAME, the dynamic linker can reject
+the library before JNI startup. The successful x86_64 replay means this is not
+an established root cause. It should be checked with ARM64 `logcat`, alongside
+the native load result, before changing connector or TLS code. The machine
+readable record is `APK-012` in
+`artifacts/original_apk_security_audit_20260830.json`.
+
 ## Evidence boundaries
 
 The findings use these terms:

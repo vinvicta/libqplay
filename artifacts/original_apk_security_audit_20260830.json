@@ -275,6 +275,18 @@
       "limit": "It does not establish full RELRO, complete control-flow integrity, or safe input handling.",
       "severity": "informational",
       "title": "Packaged native libraries do not request an executable stack"
+    },
+    {
+      "confidence": "confirmed static compatibility lead",
+      "evidence": [
+        "Every packaged libqplay.so declares NEEDED libstdc++.so, while the APK contains no libstdc++.so file.",
+        "ELF LOAD alignment is 0x10000 for ARM64 and 0x1000 for the other packaged ABIs."
+      ],
+      "id": "APK-012",
+      "impact": "On an Android image that does not provide a compatible libstdc++.so, the dynamic linker can reject libqplay.so before JNI startup. That can look like an offline or non-connecting application.",
+      "limit": "This is a loader-compatibility hypothesis, not a confirmed failure. The local replay loaded the x86_64 variant, and no ARM64 device logcat was available. The alignment values do not by themselves identify a fault.",
+      "severity": "low",
+      "title": "Native libraries depend on an unbundled legacy C++ runtime SONAME"
     }
   ],
   "input": {
@@ -541,6 +553,27 @@
           "_ZNK17TSocketConnection8getIPNumEv",
           "_ZNK17TSocketConnection8hasErrorEv"
         ],
+        "load_alignments": [
+          "0x10000"
+        ],
+        "load_segments": [
+          {
+            "align": "0x10000",
+            "file_size": "0x34c610",
+            "flags": "RE",
+            "memory_size": "0x34c610",
+            "offset": "0x000000",
+            "virtual_address": "0x0000000000000000"
+          },
+          {
+            "align": "0x10000",
+            "file_size": "0x02f580",
+            "flags": "RW",
+            "memory_size": "0x036368",
+            "offset": "0x34d210",
+            "virtual_address": "0x000000000035d210"
+          }
+        ],
         "machine": "AArch64",
         "named_dynamic_symbol_count": 6673,
         "needed": [
@@ -749,6 +782,27 @@
           "_ZNK17TSocketConnection5getIPEv",
           "_ZNK17TSocketConnection8getIPNumEv",
           "_ZNK17TSocketConnection8hasErrorEv"
+        ],
+        "load_alignments": [
+          "0x1000"
+        ],
+        "load_segments": [
+          {
+            "align": "0x1000",
+            "file_size": "0x22e0e4",
+            "flags": "RE",
+            "memory_size": "0x22e0e4",
+            "offset": "0x000000",
+            "virtual_address": "0x00000000"
+          },
+          {
+            "align": "0x1000",
+            "file_size": "0x1b628",
+            "flags": "RW",
+            "memory_size": "0x1fca8",
+            "offset": "0x22e1d8",
+            "virtual_address": "0x0022f1d8"
+          }
         ],
         "machine": "ARM",
         "named_dynamic_symbol_count": 6817,
@@ -959,6 +1013,27 @@
           "_ZNK17TSocketConnection8getIPNumEv",
           "_ZNK17TSocketConnection8hasErrorEv"
         ],
+        "load_alignments": [
+          "0x1000"
+        ],
+        "load_segments": [
+          {
+            "align": "0x1000",
+            "file_size": "0x36e8d8",
+            "flags": "RE",
+            "memory_size": "0x36e8d8",
+            "offset": "0x000000",
+            "virtual_address": "0x00000000"
+          },
+          {
+            "align": "0x1000",
+            "file_size": "0x1d3a0",
+            "flags": "RW",
+            "memory_size": "0x22378",
+            "offset": "0x36f380",
+            "virtual_address": "0x00370380"
+          }
+        ],
         "machine": "Intel 80386",
         "named_dynamic_symbol_count": 6670,
         "needed": [
@@ -1167,6 +1242,27 @@
           "_ZNK17TSocketConnection5getIPEv",
           "_ZNK17TSocketConnection8getIPNumEv",
           "_ZNK17TSocketConnection8hasErrorEv"
+        ],
+        "load_alignments": [
+          "0x1000"
+        ],
+        "load_segments": [
+          {
+            "align": "0x1000",
+            "file_size": "0x3775ec",
+            "flags": "RE",
+            "memory_size": "0x3775ec",
+            "offset": "0x000000",
+            "virtual_address": "0x0000000000000000"
+          },
+          {
+            "align": "0x1000",
+            "file_size": "0x034000",
+            "flags": "RW",
+            "memory_size": "0x03b3b8",
+            "offset": "0x377700",
+            "virtual_address": "0x0000000000378700"
+          }
         ],
         "machine": "Advanced Micro Devices X86-64",
         "named_dynamic_symbol_count": 6669,

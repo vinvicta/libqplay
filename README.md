@@ -138,6 +138,15 @@ static method in the reviewed `Natives` class. Keyboard closure is still a
 real asynchronous input path. The focused evidence is in
 `artifacts/original_android_device_media_review_20260830.json`.
 
+The offline ELF loader inventory adds one more compatibility lead. All four
+packaged native variants declare `libstdc++.so`, but the APK does not package a
+library with that name. The ARM64 library uses `0x10000` ELF `LOAD` alignment;
+the other three use `0x1000`. The earlier x86_64 replay loaded successfully, so
+this does not identify the current failure by itself. An ARM64 device logcat is
+still needed to distinguish a missing or incompatible runtime dependency from
+the separate stale-certificate problem. The expanded records are in
+`artifacts/original_apk_security_audit_20260830.json`.
+
 ## Repository layout
 
 * `docs/RESEARCH_NOTES.md` is the chronological investigation record.

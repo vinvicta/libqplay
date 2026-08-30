@@ -374,6 +374,20 @@ def parse_readelf(path: Path) -> dict:
         if any(token in base_name for token in INTERESTING_SYMBOLS):
             symbol_hits.append(base_name)
 
+    load_segments = []
+    for line in program.splitlines():
+        fields = line.split()
+        if not fields or fields[0] != "LOAD" or len(fields) < 8:
+            continue
+        load_segments.append({
+            "offset": fields[1],
+            "virtual_address": fields[2],
+            "file_size": fields[4],
+            "memory_size": fields[5],
+            "flags": "".join(fields[6:-1]),
+            "align": fields[-1],
+        })
+
     stack_flags = None
     for line in program.splitlines():
         fields = line.split()
@@ -393,6 +407,8 @@ def parse_readelf(path: Path) -> dict:
         "defined_function_count": defined_functions,
         "interesting_imports": sorted(import_set & INTERESTING_IMPORTS),
         "interesting_symbols": sorted(set(symbol_hits))[:300],
+        "load_segments": load_segments,
+        "load_alignments": sorted({segment["align"] for segment in load_segments}),
         "has_gnu_relro": "GNU_RELRO" in program,
         "gnu_stack_flags": stack_flags,
         "executable_stack": bool(stack_flags and "E" in stack_flags),
@@ -662,6 +678,36 @@ def build_findings(manifest: dict, dex_reports: list[dict], native_reports: list
             "evidence": ["readelf reports non-executable GNU_STACK program headers for the packaged shared libraries."],
             "impact": "This is a useful mitigation against one class of memory corruption exploit.",
             "limit": "It does not establish full RELRO, complete control-flow integrity, or safe input handling.",
+        })
+
+    legacy_cpp = sorted(
+        report["name"]
+        for report in native_reports
+        if "libstdc++.so" in report["elf"].get("needed", [])
+    )
+    packaged_native_names = {report["name"].rsplit("/", 1)[-1] for report in native_reports}
+    if legacy_cpp and "libstdc++.so" not in packaged_native_names:
+        alignments = {
+            report["name"]: ", ".join(report["elf"].get("load_alignments", [])) or "none"
+            for report in native_reports
+        }
+        arm64_alignment = alignments.get("lib/arm64-v8a/libqplay.so", "unknown")
+        other_alignments = sorted(
+            {
+                value
+                for name, value in alignments.items()
+                if name != "lib/arm64-v8a/libqplay.so"
+            }
+        )
+        findings.append({
+            "id": "APK-012", "severity": "low", "confidence": "confirmed static compatibility lead",
+            "title": "Native libraries depend on an unbundled legacy C++ runtime SONAME",
+            "evidence": [
+                "Every packaged libqplay.so declares NEEDED libstdc++.so, while the APK contains no libstdc++.so file.",
+                f"ELF LOAD alignment is {arm64_alignment} for ARM64 and {', '.join(other_alignments) or 'unknown'} for the other packaged ABIs.",
+            ],
+            "impact": "On an Android image that does not provide a compatible libstdc++.so, the dynamic linker can reject libqplay.so before JNI startup. That can look like an offline or non-connecting application.",
+            "limit": "This is a loader-compatibility hypothesis, not a confirmed failure. The local replay loaded the x86_64 variant, and no ARM64 device logcat was available. The alignment values do not by themselves identify a fault.",
         })
     return findings
 

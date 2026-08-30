@@ -924,6 +924,15 @@ non-executable stacks, GNU RELRO, and `BIND_NOW`. These facts are documented in
 `docs/SECURITY.md` with confidence limits so compatibility failures are not
 presented as confirmed vulnerabilities.
 
+The same audit records a loader-level compatibility lead. Each packaged ABI
+declares `libstdc++.so` as a needed library, but no copy is present in the APK.
+The ARM64 `LOAD` alignment is `0x10000`; the armeabi, x86, and x86_64 files use
+`0x1000`. The x86_64 diagnostic replay loaded its variant, so the missing
+runtime dependency is not proven to be the startup failure. A real ARM64
+device logcat should be used to check the dynamic-linker result before
+changing the connector. The finding is `APK-012` in
+`artifacts/original_apk_security_audit_20260830.json`.
+
 The parser-hardening pass adds
 `artifacts/original_level_parser_review_20260830.json`. It confirms that the
 outer `.code` length uses a signed 32-bit check before allocation, that
