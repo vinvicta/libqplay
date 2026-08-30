@@ -91,6 +91,19 @@ The report does not install the APK, send an intent to another application,
 inject DEX, fuzz the native parser, contact a production endpoint, or attempt
 to bypass a signature on a live service.
 
+## Translation scope and residual names
+
+The final ARM64 IDA copy contains 11,297 function heads. All 8,601 retained
+ELF symbols and 1,249 reviewed callback or role aliases were checked at their
+expected addresses. The 421 remaining default `sub_` names are IDA-created
+functions without a surviving source symbol. A read-only active-IDB check
+found none in the Android bridge range, none among the 1,779 unique script
+callback addresses, and no direct call from them into the selected socket,
+file, process, or update imports. The broader application-core range has 23
+short static-state wrappers, which remain address-based because assigning
+source names would be speculation. See
+`artifacts/ida_active_translation_scope_check_20260830.json`.
+
 ## Android package surface
 
 The binary manifest reports:

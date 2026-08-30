@@ -30,6 +30,14 @@ entries are code that IDA discovered without a preserved source symbol. They
 are kept address-based rather than being assigned guesses. The compact
 verification record is `artifacts/ida_translation_verification_20260830.json`.
 
+The active-IDB scope check found zero default names in the Android bridge
+range, zero among the 1,779 unique script callback addresses, and zero direct
+calls from a remaining default function into the selected socket, file,
+process, or update imports. The broader application-core range contains 23
+short static-state wrappers, which are documented without invented source
+names. The check is preserved in
+`artifacts/ida_active_translation_scope_check_20260830.json`.
+
 The old connector has a concrete compatibility problem. Its embedded
 GraalWeb certificate expired on 2023-07-29, so the original HTTPS path cannot
 be trusted by a current clock. The archived connector package also fails the
@@ -197,6 +205,9 @@ real asynchronous input path. The focused evidence is in
   bridges. It contains no device-collected values or media data.
 * `artifacts/ida_translation_verification_20260830.json` records the final
   packed IDA copy, pass counts, hashes, and zero-failure verification result.
+* `artifacts/ida_active_translation_scope_check_20260830.json` records the
+  active-IDB check that separates remaining static wrappers from app-boundary
+  functions.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.
 * `symbols/libqplay.symbols.json` is the machine-readable equivalent.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.

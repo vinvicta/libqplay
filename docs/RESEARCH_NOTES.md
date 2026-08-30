@@ -73,6 +73,18 @@ read-only verifier checked 1,249 reviewed names at their expected addresses
 with zero failures. The copy hash and pass breakdown are in
 `artifacts/ida_translation_verification_20260830.json`.
 
+The final scope check keeps that count honest. None of the 421 default names
+is in the `0x240000` through `0x246fff` Android bridge range. None of the
+1,779 unique callback addresses in the script-table inventory currently has a
+default name, including the callbacks added during the Facebook, billing,
+partner, and device/media reviews. The remaining 23 default entries in the
+broader `0x1e0000` through `0x246fff` application-core range are short static
+wrappers that clear or initialize global `TString`, `TStringList`, or
+`TGraalVar` objects. No remaining default function has a direct call edge to
+the selected socket, file, process, or update imports. The IDA-generated
+check is preserved in
+`artifacts/ida_active_translation_scope_check_20260830.json`.
+
 ## Android lifecycle and the first network checkpoint
 
 The original Java activity does not call the native engine from
