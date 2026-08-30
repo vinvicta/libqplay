@@ -1,0 +1,452 @@
+{
+  "artifact": "original_dex_native_surface_review_20260830",
+  "class": {
+    "access": [
+      "public"
+    ],
+    "access_flags": "0x1",
+    "descriptor": "Lcom/quattroplay/GraalClassic/Natives;",
+    "method_count": 79,
+    "native_method_count": 18
+  },
+  "input": {
+    "bytes": 1847252,
+    "magic": "dex\n035\u0000",
+    "path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/classes.dex",
+    "sha256": "58cf65ea6f1c473887164630e2091a7fcbe78f3f72720a6b076cfa6750ae4ffc"
+  },
+  "interpretation": [
+    "This inventory follows direct invoke-* method references in DEX code items. Reflection, JNI function pointers, and calls from native code into Java are outside the scan.",
+    "The Natives methods marked 0x109 are public static native methods in the original class. Their Java caller list is therefore an in-process callsite inventory, not an exported Android component list.",
+    "A native method with no direct DEX caller may still be reachable through reflection or a callback path that is not represented by a direct invoke instruction."
+  ],
+  "native_methods": [
+    {
+      "access": [
+        "public",
+        "static",
+        "native"
+      ],
+      "access_flags": "0x109",
+      "code_off": "0x0",
+      "direct_calls": [
+        {
+          "caller_class": "Lcom/quattroplay/GraalClassic/QPlayRenderer;",
+          "caller_method": "runLibrary",
+          "caller_method_index": 15430,
+          "code_offset": "0xf8ece",
+          "opcode": "0x71"
+        }
+      ],
+      "index": 15148,
+      "kind": "direct",
+      "name": "QPlayLoop",
+      "proto_index": 40
+    },
+    {
+      "access": [
+        "public",
+        "static",
+        "native"
+      ],
+      "access_flags": "0x109",
+      "code_off": "0x0",
+      "direct_calls": [
+        {
+          "caller_class": "Lcom/quattroplay/GraalClassic/QPlayRenderer;",
+          "caller_method": "loadLibrary",
+          "caller_method_index": 15429,
+          "code_offset": "0xf90d6",
+          "opcode": "0x77"
+        }
+      ],
+      "index": 15149,
+      "kind": "direct",
+      "name": "QPlayMain",
+      "proto_index": 153
+    },
+    {
+      "access": [
+        "public",
+        "static",
+        "native"
+      ],
+      "access_flags": "0x109",
+      "code_off": "0x0",
+      "direct_calls": [
+        {
+          "caller_class": "Lcom/quattroplay/GraalClassic/GLView$1;",
+          "caller_method": "run",
+          "caller_method_index": 15089,
+          "code_offset": "0xf44bc",
+          "opcode": "0x71"
+        },
+        {
+          "caller_class": "Lcom/quattroplay/GraalClassic/QPlayActivity$9;",
+          "caller_method": "run",
+          "caller_method_index": 15309,
+          "code_offset": "0xf6c8e",
+          "opcode": "0x71"
+        }
+      ],
+      "index": 15180,
+      "kind": "direct",
+      "name": "onAccelerator",
+      "proto_index": 1921
+    },
+    {
+      "access": [
+        "public",
+        "static",
+        "native"
+      ],
+      "access_flags": "0x109",
+      "code_off": "0x0",
+      "direct_calls": [],
+      "index": 15181,
+      "kind": "direct",
+      "name": "onAddScriptFunction",
+      "proto_index": 3209
+    },
+    {
+      "access": [
+        "public",
+        "static",
+        "native"
+      ],
+      "access_flags": "0x109",
+      "code_off": "0x0",
+      "direct_calls": [
+        {
+          "caller_class": "Lcom/quattroplay/GraalClassic/QPlayActivity$8;",
+          "caller_method": "run",
+          "caller_method_index": 15307,
+          "code_offset": "0xf6c08",
+          "opcode": "0x71"
+        }
+      ],
+      "index": 15182,
+      "kind": "direct",
+      "name": "onAppEnterBackground",
+      "proto_index": 1897
+    },
+    {
+      "access": [
+        "public",
+        "static",
+        "native"
+      ],
+      "access_flags": "0x109",
+      "code_off": "0x0",
+      "direct_calls": [
+        {
+          "caller_class": "Lcom/quattroplay/GraalClassic/QPlayActivity$7;",
+          "caller_method": "run",
+          "caller_method_index": 15305,
+          "code_offset": "0xf6bcc",
+          "opcode": "0x71"
+        }
+      ],
+      "index": 15183,
+      "kind": "direct",
+      "name": "onAppLeaveBackground",
+      "proto_index": 1897
+    },
+    {
+      "access": [
+        "public",
+        "static",
+        "native"
+      ],
+      "access_flags": "0x109",
+      "code_off": "0x0",
+      "direct_calls": [
+        {
+          "caller_class": "Lcom/quattroplay/GraalClassic/QPlayActivity$6;",
+          "caller_method": "run",
+          "caller_method_index": 15303,
+          "code_offset": "0xf6b90",
+          "opcode": "0x71"
+        }
+      ],
+      "index": 15184,
+      "kind": "direct",
+      "name": "onAppPause",
+      "proto_index": 1897
+    },
+    {
+      "access": [
+        "public",
+        "static",
+        "native"
+      ],
+      "access_flags": "0x109",
+      "code_off": "0x0",
+      "direct_calls": [
+        {
+          "caller_class": "Lcom/quattroplay/GraalClassic/QPlayActivity$19$1;",
+          "caller_method": "run",
+          "caller_method_index": 15250,
+          "code_offset": "0xf5ac4",
+          "opcode": "0x71"
+        }
+      ],
+      "index": 15185,
+      "kind": "direct",
+      "name": "onGooglePlayInitialized",
+      "proto_index": 3485
+    },
+    {
+      "access": [
+        "public",
+        "static",
+        "native"
+      ],
+      "access_flags": "0x109",
+      "code_off": "0x0",
+      "direct_calls": [
+        {
+          "caller_class": "Lcom/quattroplay/GraalClassic/QPlayActivity$23;",
+          "caller_method": "run",
+          "caller_method_index": 15262,
+          "code_offset": "0xf5f28",
+          "opcode": "0x71"
+        }
+      ],
+      "index": 15186,
+      "kind": "direct",
+      "name": "onGooglePlayPurchase",
+      "proto_index": 3313
+    },
+    {
+      "access": [
+        "public",
+        "static",
+        "native"
+      ],
+      "access_flags": "0x109",
+      "code_off": "0x0",
+      "direct_calls": [
+        {
+          "caller_class": "Lcom/quattroplay/GraalClassic/QPlayActivity$13;",
+          "caller_method": "run",
+          "caller_method_index": 15236,
+          "code_offset": "0xf56e4",
+          "opcode": "0x71"
+        },
+        {
+          "caller_class": "Lcom/quattroplay/GraalClassic/QPlayActivity$24$1;",
+          "caller_method": "run",
+          "caller_method_index": 15264,
+          "code_offset": "0xf5f92",
+          "opcode": "0x71"
+        },
+        {
+          "caller_class": "Lcom/quattroplay/GraalClassic/QPlayActivity$24$2;",
+          "caller_method": "run",
+          "caller_method_index": 15266,
+          "code_offset": "0xf5fdc",
+          "opcode": "0x71"
+        },
+        {
+          "caller_class": "Lcom/quattroplay/GraalClassic/QPlayActivity$25$1$1;",
+          "caller_method": "run",
+          "caller_method_index": 15270,
+          "code_offset": "0xf6148",
+          "opcode": "0x71"
+        },
+        {
+          "caller_class": "Lcom/quattroplay/GraalClassic/QPlayActivity$26$1$1;",
+          "caller_method": "run",
+          "caller_method_index": 15276,
+          "code_offset": "0xf62cc",
+          "opcode": "0x71"
+        }
+      ],
+      "index": 15187,
+      "kind": "direct",
+      "name": "onInvokeEvent",
+      "proto_index": 3306
+    },
+    {
+      "access": [
+        "public",
+        "static",
+        "native"
+      ],
+      "access_flags": "0x109",
+      "code_off": "0x0",
+      "direct_calls": [
+        {
+          "caller_class": "Lcom/quattroplay/GraalClassic/QPlayActivity$12;",
+          "caller_method": "run",
+          "caller_method_index": 15234,
+          "code_offset": "0xf56a6",
+          "opcode": "0x71"
+        },
+        {
+          "caller_class": "Lcom/quattroplay/GraalClassic/QPlayActivity$14;",
+          "caller_method": "run",
+          "caller_method_index": 15238,
+          "code_offset": "0xf573a",
+          "opcode": "0x71"
+        }
+      ],
+      "index": 15188,
+      "kind": "direct",
+      "name": "onKeyEvent",
+      "proto_index": 1923
+    },
+    {
+      "access": [
+        "public",
+        "static",
+        "native"
+      ],
+      "access_flags": "0x109",
+      "code_off": "0x0",
+      "direct_calls": [
+        {
+          "caller_class": "Lcom/quattroplay/GraalClassic/QPlayActivity$11;",
+          "caller_method": "run",
+          "caller_method_index": 15232,
+          "code_offset": "0xf5648",
+          "opcode": "0x71"
+        }
+      ],
+      "index": 15189,
+      "kind": "direct",
+      "name": "onMouseEvent",
+      "proto_index": 1922
+    },
+    {
+      "access": [
+        "public",
+        "static",
+        "native"
+      ],
+      "access_flags": "0x109",
+      "code_off": "0x0",
+      "direct_calls": [],
+      "index": 15190,
+      "kind": "direct",
+      "name": "onRegisterEvent",
+      "proto_index": 3209
+    },
+    {
+      "access": [
+        "public",
+        "static",
+        "native"
+      ],
+      "access_flags": "0x109",
+      "code_off": "0x0",
+      "direct_calls": [
+        {
+          "caller_class": "Lcom/quattroplay/GraalClassic/QPlayRenderer;",
+          "caller_method": "surfaceCreated",
+          "caller_method_index": 15432,
+          "code_offset": "0xf9166",
+          "opcode": "0x71"
+        }
+      ],
+      "index": 15191,
+      "kind": "direct",
+      "name": "onReloadTextures",
+      "proto_index": 1897
+    },
+    {
+      "access": [
+        "public",
+        "static",
+        "native"
+      ],
+      "access_flags": "0x109",
+      "code_off": "0x0",
+      "direct_calls": [
+        {
+          "caller_class": "Lcom/quattroplay/GraalClassic/GLThread;",
+          "caller_method": "guardedRun",
+          "caller_method_index": 15073,
+          "code_offset": "0xf41dc",
+          "opcode": "0x71"
+        }
+      ],
+      "index": 15193,
+      "kind": "direct",
+      "name": "onSizeChanged",
+      "proto_index": 1919
+    },
+    {
+      "access": [
+        "public",
+        "static",
+        "native"
+      ],
+      "access_flags": "0x109",
+      "code_off": "0x0",
+      "direct_calls": [
+        {
+          "caller_class": "Lcom/quattroplay/GraalClassic/QPlayActivity$15$1;",
+          "caller_method": "run",
+          "caller_method_index": 15240,
+          "code_offset": "0xf5782",
+          "opcode": "0x71"
+        },
+        {
+          "caller_class": "Lcom/quattroplay/GraalClassic/QPlayActivity$17;",
+          "caller_method": "run",
+          "caller_method_index": 15246,
+          "code_offset": "0xf5a0a",
+          "opcode": "0x71"
+        }
+      ],
+      "index": 15194,
+      "kind": "direct",
+      "name": "onTextEntered",
+      "proto_index": 3496
+    },
+    {
+      "access": [
+        "public",
+        "static",
+        "native"
+      ],
+      "access_flags": "0x109",
+      "code_off": "0x0",
+      "direct_calls": [],
+      "index": 15195,
+      "kind": "direct",
+      "name": "onVideoFinished",
+      "proto_index": 1897
+    },
+    {
+      "access": [
+        "public",
+        "static",
+        "native"
+      ],
+      "access_flags": "0x109",
+      "code_off": "0x0",
+      "direct_calls": [],
+      "index": 15196,
+      "kind": "direct",
+      "name": "onVideoLoaded",
+      "proto_index": 1897
+    }
+  ],
+  "network_contacted": false,
+  "schema": "libqplay.original-dex-native-surface-review.v1",
+  "scope": "offline DEX method and direct-call inventory for the original 1.8 APK",
+  "summary": {
+    "direct_dex_call_count": 21,
+    "native_method_count": 18,
+    "native_methods_with_direct_dex_callers": 14,
+    "native_methods_without_direct_dex_callers": [
+      "onAddScriptFunction",
+      "onRegisterEvent",
+      "onVideoFinished",
+      "onVideoLoaded"
+    ]
+  }
+}

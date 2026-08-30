@@ -58,6 +58,11 @@ startup and pause evidence is in
   responder.
 * Whether an activated script can pass the native socket allowlist checks and
   create a listener or use the UDP branch.
+* Four exported Android callbacks have no direct DEX `invoke-*` caller in the
+  static scan. Reflection and native-to-Java callback reachability were not
+  covered.
+* The early-pause callback behavior has not been rerun on a current ARM64
+  device with activity, permission, and surface timestamps captured.
 
 ## Current blocker
 
