@@ -259,6 +259,45 @@ tests, but it is no longer the leading explanation for the rendered-world
 result. The final local run hides the connecting control through packet 190 in
 the normal no-swap table.
 
+## Original APK security pass
+
+The first offline security pass is now limited to the original 1.8 APK. The
+machine-readable reports are `artifacts/original_apk_security_audit_20260830.json`
+and `artifacts/original_security_callsite_review_20260830.json`. The APK audit
+does not install the package or contact a host. It records the manifest, DEX
+string indicators, packaged ELF metadata, signing metadata, and hashes of the
+private input files.
+
+The most important native result is an update boundary. The download-complete
+handler at `0x1ec044` can call the executable replacer at `0x196fe0` after all
+package downloads complete and a replacement flag is set. The replacer changes
+the configured executable mode to `0775`, forks, and calls `execvp` on the
+configured path. The reviewed function does not perform a package signature
+check itself, so the next step is to trace the package verification and path
+provenance before making any repair that enables this branch.
+
+The generic file helper at `0xe6dfc` calls `unlink`. Package uninstall routes
+file names through a resource resolver before reaching it. The script-facing
+delete path also resolves a policy-controlled filename, checks existence, and
+updates the resource object. The policy tables block executable and other
+high-risk extensions and restrict folder prefixes, but a complete traversal
+review still needs separator, escape, symlink, and archive-entry tests.
+
+The identification path reads `eth0`, stores the six-byte MAC address, and
+computes a network ID from an MD5 digest. Other system-ID modes include
+hard-disk, OS, and Android ID values. The cookie loader reads
+`cache/creationtime.dat` or `files/creationtime.dat` below the native data
+folder. These are privacy and account-correlation surfaces rather than proof of
+code execution.
+
+The APK also has an effectively exported custom-scheme activity, a DEX-visible
+WebView JavaScript bridge, an expired `admin.fabzat.com` certificate resource,
+legacy CyaSSL cipher identifiers, and an embedded connector trust bundle whose
+earliest recovered certificate expired on 2023-07-29. All four packaged native
+libraries report non-executable stacks, GNU RELRO, and `BIND_NOW`. These facts
+are documented in `docs/SECURITY.md` with confidence limits so compatibility
+failures are not presented as confirmed vulnerabilities.
+
 ## Corrected two-connection runtime trace
 
 The first useful local run sent the map and player properties on the same

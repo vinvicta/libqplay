@@ -60,6 +60,8 @@ account authentication remain open.
 * `docs/RUNTIME_STATUS.md` lists verified milestones and open blockers.
 * `docs/TESTING.md` describes local-only reproduction without contacting a
   live game service.
+* `docs/SECURITY.md` records the original APK and ARM64 native trust-boundary
+  review.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.
 * `symbols/libqplay.symbols.json` is the machine-readable equivalent.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.
@@ -81,8 +83,8 @@ Two helper repositories were also checked out locally during the work:
 * `MorenoLand/Moreno.kahn`, used to validate the archived connector package
   and its `con.png` container.
 
-Their source is not vendored here. The exact commits and the comparison
-results are recorded in the research notes.
+Their source is not vendored here. The exact commits and their role in the
+local validation are recorded in the research notes.
 
 ## Safety and scope
 

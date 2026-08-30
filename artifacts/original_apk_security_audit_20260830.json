@@ -1,0 +1,1454 @@
+{
+  "analysis_date": "2026-08-30",
+  "analysis_scope": "offline static inventory of the original Graal Online Classic 1.8 APK",
+  "component_security_selection": {
+    "exported_deep_link_components": [
+      {
+        "authorities": null,
+        "exported": null,
+        "exported_effective": true,
+        "intent_filters": [
+          {
+            "actions": [
+              "android.intent.action.MAIN"
+            ],
+            "categories": [
+              "android.intent.category.LAUNCHER"
+            ],
+            "data": []
+          },
+          {
+            "actions": [
+              "android.intent.action.VIEW"
+            ],
+            "categories": [
+              "android.intent.category.BROWSABLE",
+              "android.intent.category.DEFAULT"
+            ],
+            "data": [
+              {
+                "android:scheme": "graalclassic"
+              },
+              {
+                "android:scheme": "graalclassicplus"
+              }
+            ]
+          }
+        ],
+        "name": "com.quattroplay.GraalClassic.QPlayActivity",
+        "permission": null,
+        "type": "activity"
+      }
+    ],
+    "exported_effective": [
+      {
+        "authorities": null,
+        "exported": null,
+        "exported_effective": true,
+        "intent_filters": [
+          {
+            "actions": [
+              "android.intent.action.MAIN"
+            ],
+            "categories": [
+              "android.intent.category.LAUNCHER"
+            ],
+            "data": []
+          },
+          {
+            "actions": [
+              "android.intent.action.VIEW"
+            ],
+            "categories": [
+              "android.intent.category.BROWSABLE",
+              "android.intent.category.DEFAULT"
+            ],
+            "data": [
+              {
+                "android:scheme": "graalclassic"
+              },
+              {
+                "android:scheme": "graalclassicplus"
+              }
+            ]
+          }
+        ],
+        "name": "com.quattroplay.GraalClassic.QPlayActivity",
+        "permission": null,
+        "type": "activity"
+      }
+    ]
+  },
+  "dex": [
+    {
+      "indicators": {
+        "deep_link_classic": {
+          "count": 1,
+          "examples": [
+            "graalclassic://"
+          ],
+          "needle": "graalclassic://"
+        },
+        "deep_link_classic_plus": {
+          "count": 1,
+          "examples": [
+            "graalclassicplus://"
+          ],
+          "needle": "graalclassicplus://"
+        },
+        "device_identifier": {
+          "count": 1,
+          "examples": [
+            "android_id"
+          ],
+          "needle": "android_id"
+        },
+        "javascript_interface_annotation": {
+          "count": 2,
+          "examples": [
+            "Landroid/webkit/JavascriptInterface;",
+            "addJavascriptInterface"
+          ],
+          "needle": "JavascriptInterface"
+        },
+        "persistent_preferences": {
+          "count": 1,
+          "examples": [
+            "getSharedPreferences"
+          ],
+          "needle": "getSharedPreferences"
+        },
+        "webview_class": {
+          "count": 30,
+          "examples": [
+            "DialogWebViewClient",
+            "InsideWebViewClient",
+            "Landroid/webkit/WebView;",
+            "Landroid/webkit/WebViewClient;",
+            "Lbolts/WebViewAppLinkResolver$1;",
+            "Lbolts/WebViewAppLinkResolver$2$1;",
+            "Lbolts/WebViewAppLinkResolver$2$2;",
+            "Lbolts/WebViewAppLinkResolver$2;"
+          ],
+          "needle": "WebView"
+        },
+        "webview_javascript_bridge": {
+          "count": 1,
+          "examples": [
+            "addJavascriptInterface"
+          ],
+          "needle": "addJavascriptInterface"
+        },
+        "webview_javascript_enabled": {
+          "count": 1,
+          "examples": [
+            "setJavaScriptEnabled"
+          ],
+          "needle": "setJavaScriptEnabled"
+        }
+      },
+      "magic": "dex\n035\u0000",
+      "name": "classes.dex",
+      "sha256": "58cf65ea6f1c473887164630e2091a7fcbe78f3f72720a6b076cfa6750ae4ffc",
+      "size": 1847252,
+      "string_count": 16825
+    }
+  ],
+  "findings": [
+    {
+      "confidence": "confirmed",
+      "evidence": [
+        "AndroidManifest.xml declares android.permission.INTERNET."
+      ],
+      "id": "APK-001",
+      "impact": "The native connector and game socket can communicate with remote endpoints.",
+      "limit": "This is expected for an online game and does not identify a vulnerable endpoint by itself.",
+      "severity": "context",
+      "title": "The application has network access"
+    },
+    {
+      "confidence": "confirmed capability, exploitability untested",
+      "evidence": [
+        "An exported component accepts graalclassic:// or graalclassicplus:// intent data."
+      ],
+      "id": "APK-003",
+      "impact": "Any installed application can request the activity, so URI action, data, and extras are an input boundary.",
+      "limit": "This audit did not send a malicious intent or claim code execution from the URI alone.",
+      "severity": "medium",
+      "title": "An exported activity accepts custom Graal URI schemes"
+    },
+    {
+      "confidence": "confirmed capability, reachability depends on page source",
+      "evidence": [
+        "DEX strings include WebView, setJavaScriptEnabled, and addJavascriptInterface."
+      ],
+      "id": "APK-004",
+      "impact": "A page that can reach the bridge may read device state, persist data, and send messages into native dispatch.",
+      "limit": "String evidence does not prove that a remote page can reach every bridge method in a production run.",
+      "severity": "high-interest",
+      "title": "The WebTop path enables JavaScript and a native bridge"
+    },
+    {
+      "confidence": "confirmed legacy vocabulary, active suite selection unproven",
+      "evidence": [
+        "libqplay.so contains RC4 and NULL cipher identifiers and TLS version strings."
+      ],
+      "id": "APK-006",
+      "impact": "If enabled by negotiation or configuration, legacy suites increase downgrade and confidentiality risk.",
+      "limit": "String presence does not show that a weak suite was negotiated. Separate IDA review found peer and hostname verification in the connector path.",
+      "severity": "medium",
+      "title": "The bundled native TLS implementation contains legacy cipher names"
+    },
+    {
+      "confidence": "confirmed embedded legacy material, active trust use unproven",
+      "evidence": [
+        "res/raw/fabzat_com.crt is a PEM certificate for admin.fabzat.com.",
+        "Its recorded validity ends at 2014-08-23T05:22:41 and its signature hash is sha1."
+      ],
+      "id": "APK-007",
+      "impact": "Any code that treats this file as a trust anchor or pinned service certificate cannot validate a current service chain after expiry.",
+      "limit": "The file's presence does not prove that startup or login consumes it. No live request was made.",
+      "severity": "medium",
+      "title": "The APK carries an expired Fabzat certificate"
+    },
+    {
+      "confidence": "confirmed embedded bundle, active validation path separately reviewed",
+      "evidence": [
+        "The ARM64 library contains 12820 bytes of trust text at file offset 3002104 with SHA-256 c87ea7bc32005cca699fb724ab455926fd852a1bd40ce0985aadf31a994878a0."
+      ],
+      "id": "APK-008",
+      "impact": "A connector that still validates only against this bundle can fail after a service certificate renewal.",
+      "limit": "The report does not claim that every native connection uses the bundle or that replacing it is safe without an authorized current chain.",
+      "severity": "medium",
+      "title": "The native library embeds a fixed connector trust bundle"
+    },
+    {
+      "confidence": "confirmed signing metadata",
+      "evidence": [
+        "The extracted v1 certificate reports signature hash sha1 and fingerprint c63130fa95a05ec36c4f1dca30cf148a0b2fb3818c794899cd426206f5067c02."
+      ],
+      "id": "APK-009",
+      "impact": "SHA-1 is legacy signing metadata and can complicate installation or trust decisions on modern tooling.",
+      "limit": "This does not mean the APK was forged. The report does not independently verify every APK signature scheme.",
+      "severity": "medium",
+      "title": "The APK v1 signing certificate uses SHA-1"
+    },
+    {
+      "confidence": "confirmed",
+      "evidence": [
+        "readelf reports non-executable GNU_STACK program headers for the packaged shared libraries."
+      ],
+      "id": "APK-010",
+      "impact": "This is a useful mitigation against one class of memory corruption exploit.",
+      "limit": "It does not establish full RELRO, complete control-flow integrity, or safe input handling.",
+      "severity": "informational",
+      "title": "Packaged native libraries do not request an executable stack"
+    }
+  ],
+  "input": {
+    "bytes": 25104728,
+    "name": "GraalOnline+Classic_1.8_APKPure.apk",
+    "sha256": "6d6c0428fe890d0f18fb1ce572798d7a8a95853b10078f693026164d6a5f56d7"
+  },
+  "live_endpoint_tested": false,
+  "manifest": {
+    "application": {
+      "allow_backup": null,
+      "debuggable": null,
+      "label": "@0x7f080001",
+      "name": null,
+      "network_security_config": null,
+      "uses_cleartext_traffic": null
+    },
+    "compile_sdk_version": null,
+    "components": [
+      {
+        "authorities": null,
+        "exported": null,
+        "exported_effective": true,
+        "intent_filters": [
+          {
+            "actions": [
+              "android.intent.action.MAIN"
+            ],
+            "categories": [
+              "android.intent.category.LAUNCHER"
+            ],
+            "data": []
+          },
+          {
+            "actions": [
+              "android.intent.action.VIEW"
+            ],
+            "categories": [
+              "android.intent.category.BROWSABLE",
+              "android.intent.category.DEFAULT"
+            ],
+            "data": [
+              {
+                "android:scheme": "graalclassic"
+              },
+              {
+                "android:scheme": "graalclassicplus"
+              }
+            ]
+          }
+        ],
+        "name": "com.quattroplay.GraalClassic.QPlayActivity",
+        "permission": null,
+        "type": "activity"
+      },
+      {
+        "authorities": null,
+        "exported": null,
+        "exported_effective": false,
+        "intent_filters": [],
+        "name": "com.facebook.LoginActivity",
+        "permission": null,
+        "type": "activity"
+      }
+    ],
+    "package": "com.quattroplay.GraalClassic",
+    "permissions": [
+      {
+        "max_sdk_version": null,
+        "name": "android.permission.INTERNET",
+        "node": "uses-permission"
+      },
+      {
+        "max_sdk_version": 18,
+        "name": "android.permission.WRITE_EXTERNAL_STORAGE",
+        "node": "uses-permission"
+      },
+      {
+        "max_sdk_version": null,
+        "name": "com.android.vending.BILLING",
+        "node": "uses-permission"
+      },
+      {
+        "max_sdk_version": null,
+        "name": "org.onepf.openiab.permission.BILLING",
+        "node": "uses-permission"
+      }
+    ],
+    "sdk": {
+      "minSdkVersion": 9,
+      "targetSdkVersion": 26
+    },
+    "version_code": 6158,
+    "version_name": "1.8"
+  },
+  "native": [
+    {
+      "elf": {
+        "bind_now": true,
+        "class": "ELF64",
+        "defined_function_count": 5709,
+        "dynamic_symbol_count": 6674,
+        "entry_point": "0xe0170",
+        "executable_stack": false,
+        "gnu_stack_flags": "RW",
+        "has_gnu_relro": true,
+        "interesting_imports": [
+          "chmod",
+          "connect",
+          "execvp",
+          "fork",
+          "gethostbyname",
+          "ioctl",
+          "open",
+          "recv",
+          "recvfrom",
+          "send",
+          "sendto",
+          "socket",
+          "unlink"
+        ],
+        "interesting_symbols": [
+          "TUpdatePackage_properties",
+          "_Z19CyaSSL_Debugging_ONv",
+          "_Z19CyaSSL_SetLoggingCbPFviPKcE",
+          "_Z20CyaSSL_Debugging_OFFv",
+          "_Z29TFileScripting_initStaticVarsv",
+          "_Z29TUpdatePackage_initStaticVarsv",
+          "_Z32TSocketConnection_initStaticVarsv",
+          "_Z35TFileScripting_initStaticScriptVarsv",
+          "_Z35TUpdatePackage_initStaticScriptVarsv",
+          "_Z36TIdentification_initStaticScriptVarsv",
+          "_Z38TSocketConnection_initStaticScriptVarsv",
+          "_ZN15TScriptUniverse16addZippedScriptsERK7TStringP17TSocketConnection",
+          "_ZN16TGraalConnectionC1EP17TSocketConnection",
+          "_ZN16TGraalConnectionC2EP17TSocketConnection",
+          "_ZN17TSocketConnection10bindSocketEib",
+          "_ZN17TSocketConnection11closeSocketEv",
+          "_ZN17TSocketConnection11sendDataUDPEPKviRK7TStringi",
+          "_ZN17TSocketConnection12acceptSocketEv",
+          "_ZN17TSocketConnection12setEnableSSLEb",
+          "_ZN17TSocketConnection13connectSocketERK7TStringi",
+          "_ZN17TSocketConnection14setNonBlockingEv",
+          "_ZN17TSocketConnection15checkConnectingEv",
+          "_ZN17TSocketConnection16setSSLVerifyCertERK7TString",
+          "_ZN17TSocketConnection17enableSSLOnSocketEv",
+          "_ZN17TSocketConnection17turnOffNagleDelayEv",
+          "_ZN17TSocketConnection20closeForSubProcessesEv",
+          "_ZN17TSocketConnection20printSSLCertificatesEv",
+          "_ZN17TSocketConnection21setVerifyGraalWebCertEv",
+          "_ZN17TSocketConnection4readEv",
+          "_ZN17TSocketConnection8gotbytesE",
+          "_ZN17TSocketConnection8sendDataEPKvi",
+          "_ZN17TSocketConnection9sentbytesE",
+          "_ZN17TSocketConnection9setStatusEi",
+          "_ZN17TSocketConnectionC1Ev",
+          "_ZN17TSocketConnectionC2Ev",
+          "_ZN17TSocketConnectionD1Ev",
+          "_ZN17TSocketConnectionD2Ev",
+          "_ZN6CyaInt10CyaSSL_newEPNS_10CYASSL_CTXE",
+          "_ZN6CyaInt11CyaSSL_InitEv",
+          "_ZN6CyaInt11CyaSSL_dtlsEPNS_6CYASSLE",
+          "_ZN6CyaInt11CyaSSL_freeEPNS_6CYASSLE",
+          "_ZN6CyaInt11CyaSSL_peekEPNS_6CYASSLEPvi",
+          "_ZN6CyaInt11CyaSSL_readEPNS_6CYASSLEPvi",
+          "_ZN6CyaInt11CyaSSL_recvEPNS_6CYASSLEPvii",
+          "_ZN6CyaInt11CyaSSL_sendEPNS_6CYASSLEPKvii",
+          "_ZN6CyaInt12CyaSSL_writeEPNS_6CYASSLEPKvi",
+          "_ZN6CyaInt13CyaSSL_get_fdEPKNS_6CYASSLE",
+          "_ZN6CyaInt13CyaSSL_set_fdEPNS_6CYASSLEi",
+          "_ZN6CyaInt13CyaSSL_writevEPNS_6CYASSLEPK5ioveci",
+          "_ZN6CyaInt14CyaSSL_CTX_newEPNS_13CYASSL_METHODE",
+          "_ZN6CyaInt14CyaSSL_CleanupEv",
+          "_ZN6CyaInt14CyaSSL_connectEPNS_6CYASSLE",
+          "_ZN6CyaInt14CyaSSL_pendingEPNS_6CYASSLE",
+          "_ZN6CyaInt15CyaSSL_CTX_freeEPNS_10CYASSL_CTXE",
+          "_ZN6CyaInt15CyaSSL_SetTmpDHEPNS_6CYASSLEPKhiS3_i",
+          "_ZN6CyaInt15CyaSSL_shutdownEPNS_6CYASSLE",
+          "_ZN6CyaInt16CyaSSL_SetIORecvEPNS_10CYASSL_CTXEPFiPNS_6CYASSLEPciPvE",
+          "_ZN6CyaInt16CyaSSL_SetIOSendEPNS_10CYASSL_CTXEPFiPNS_6CYASSLEPciPvE",
+          "_ZN6CyaInt16CyaSSL_X509_freeEPNS_11CYASSL_X509E",
+          "_ZN6CyaInt16CyaSSL_get_errorEPNS_6CYASSLEi",
+          "_ZN6CyaInt16CyaSSL_negotiateEPNS_6CYASSLE",
+          "_ZN6CyaInt16CyaSSL_want_readEPNS_6CYASSLE",
+          "_ZN6CyaInt17CyaSSL_FreeArraysEPNS_6CYASSLE",
+          "_ZN6CyaInt17CyaSSL_KeepArraysEPNS_6CYASSLE",
+          "_ZN6CyaInt17CyaSSL_SetVersionEPNS_6CYASSLEi",
+          "_ZN6CyaInt17CyaSSL_get_cipherEPNS_6CYASSLE",
+          "_ZN6CyaInt17CyaSSL_set_verifyEPNS_6CYASSLEiPFiiPNS_21CYASSL_X509_STORE_CTXEE",
+          "_ZN6CyaInt17CyaSSL_want_writeEPNS_6CYASSLE",
+          "_ZN6CyaInt18CyaSSL_CTX_SetCACbEPNS_10CYASSL_CTXEPFvPhiiE",
+          "_ZN6CyaInt18CyaSSL_get_sessionEPNS_6CYASSLE",
+          "_ZN6CyaInt18CyaSSL_get_versionEPNS_6CYASSLE",
+          "_ZN6CyaInt18CyaSSL_set_sessionEPNS_6CYASSLEPNS_14CYASSL_SESSIONE",
+          "_ZN6CyaInt18CyaSSL_set_timeoutEPNS_6CYASSLEj",
+          "_ZN6CyaInt19CyaSSL_SetIOReadCtxEPNS_6CYASSLEPv",
+          "_ZN6CyaInt19CyaSSL_connect_certEPNS_6CYASSLE",
+          "_ZN6CyaInt19CyaSSL_get_shutdownEPKNS_6CYASSLE",
+          "_ZN6CyaInt19CyaSSL_library_initEv",
+          "_ZN6CyaInt20CyaSSL_GetObjectSizeEv",
+          "_ZN6CyaInt20CyaSSL_SetIOWriteCtxEPNS_6CYASSLEPv",
+          "_ZN6CyaInt20CyaSSL_dtls_get_peerEPNS_6CYASSLEPvPj",
+          "_ZN6CyaInt20CyaSSL_dtls_set_peerEPNS_6CYASSLEPvj",
+          "_ZN6CyaInt20CyaSSL_make_eap_keysEPNS_6CYASSLEPvjPKc",
+          "_ZN6CyaInt21CyaSSL_CTX_set_verifyEPNS_10CYASSL_CTXEiPFiiPNS_21CYASSL_X509_STORE_CTXEE",
+          "_ZN6CyaInt21CyaSSL_CertManagerNewEv",
+          "_ZN6CyaInt21CyaSSL_SetIOReadFlagsEPNS_6CYASSLEi",
+          "_ZN6CyaInt21CyaSSL_flush_sessionsEPNS_10CYASSL_CTXEl",
+          "_ZN6CyaInt21CyaSSL_session_reusedEPNS_6CYASSLE",
+          "_ZN6CyaInt22CyaSSL_CIPHER_get_nameEPKNS_13CYASSL_CIPHERE",
+          "_ZN6CyaInt22CyaSSL_CTX_set_timeoutEPNS_10CYASSL_CTXEj",
+          "_ZN6CyaInt22CyaSSL_CertManagerFreeEPNS_19CYASSL_CERT_MANAGERE",
+          "_ZN6CyaInt22CyaSSL_SetIOWriteFlagsEPNS_6CYASSLEi",
+          "_ZN6CyaInt22CyaSSL_set_cipher_listEPNS_6CYASSLEPKc",
+          "_ZN6CyaInt22CyaSSL_set_compressionEPNS_6CYASSLE",
+          "_ZN6CyaInt22CyaSSLv3_client_methodEv",
+          "_ZN6CyaInt23CyaSSL_ERR_error_stringEmPc",
+          "_ZN6CyaInt23CyaSSL_dtls_got_timeoutEPNS_6CYASSLE",
+          "_ZN6CyaInt23CyaSSL_is_init_finishedEPNS_6CYASSLE",
+          "_ZN6CyaInt23CyaSSLv23_client_methodEv",
+          "_ZN6CyaInt24CyaSSL_CertManagerLoadCAEPNS_19CYASSL_CERT_MANAGEREPKcS3_",
+          "_ZN6CyaInt24CyaSSL_CertManagerVerifyEPNS_19CYASSL_CERT_MANAGEREPKci",
+          "_ZN6CyaInt24CyaSSL_X509_NAME_onelineEPNS_16CYASSL_X509_NAMEEPci",
+          "_ZN6CyaInt24CyaSSL_check_domain_nameEPNS_6CYASSLEPKc",
+          "_ZN6CyaInt24CyaSSL_get_alert_historyEPNS_6CYASSLEPNS_20CYASSL_ALERT_HISTORYE",
+          "_ZN6CyaInt25CyaSSL_ERR_error_string_nEmPcm",
+          "_ZN6CyaInt25CyaSSL_X509_get_subjectCNEPNS_11CYASSL_X509E",
+          "_ZN6CyaInt25CyaSSL_get_current_cipherEPNS_6CYASSLE",
+          "_ZN6CyaInt25CyaSSL_get_using_nonblockEPNS_6CYASSLE",
+          "_ZN6CyaInt25CyaSSL_load_error_stringsEv",
+          "_ZN6CyaInt25CyaSSL_set_group_messagesEPNS_6CYASSLE",
+          "_ZN6CyaInt25CyaSSL_set_using_nonblockEPNS_6CYASSLEi",
+          "_ZN6CyaInt26CyaSSL_CTX_set_cipher_listEPNS_10CYASSL_CTXEPKc",
+          "_ZN6CyaInt26CyaSSL_ERR_print_errors_fpEP7__sFILEi",
+          "_ZN6CyaInt27CyaSSL_CTX_OCSP_set_optionsEPNS_10CYASSL_CTXEl",
+          "_ZN6CyaInt27CyaSSL_CertManagerEnableCRLEPNS_19CYASSL_CERT_MANAGEREi",
+          "_ZN6CyaInt27CyaSSL_X509_get_issuer_nameEPNS_11CYASSL_X509E",
+          "_ZN6CyaInt27CyaSSL_get_peer_certificateEPNS_6CYASSLE",
+          "_ZN6CyaInt28CyaSSL_CTX_check_private_keyEPNS_10CYASSL_CTXE",
+          "_ZN6CyaInt28CyaSSL_CertManagerDisableCRLEPNS_19CYASSL_CERT_MANAGERE",
+          "_ZN6CyaInt28CyaSSL_X509_get_subject_nameEPNS_11CYASSL_X509E",
+          "_ZN6CyaInt28CyaSSL_use_PrivateKey_bufferEPNS_6CYASSLEPKhli",
+          "_ZN6CyaInt29CyaSSL_CTX_load_verify_bufferEPNS_10CYASSL_CTXEPKhli",
+          "_ZN6CyaInt29CyaSSL_CTX_set_group_messagesEPNS_10CYASSL_CTXE",
+          "_ZN6CyaInt29CyaSSL_use_certificate_bufferEPNS_6CYASSLEPKhli",
+          "_ZN6CyaInt30CyaSSL_CTX_use_PrivateKey_fileEPNS_10CYASSL_CTXEPKci",
+          "_ZN6CyaInt30CyaSSL_CertManagerVerifyBufferEPNS_19CYASSL_CERT_MANAGEREPKhli",
+          "_ZN6CyaInt31CyaSSL_CTX_use_certificate_fileEPNS_10CYASSL_CTXEPKci",
+          "_ZN6CyaInt31CyaSSL_dtls_get_current_timeoutEPNS_6CYASSLE",
+          "_ZN6CyaInt31CyaSSL_get_current_cipher_suiteEPNS_6CYASSLE",
+          "_ZN6CyaInt32CyaSSL_CTX_OCSP_set_override_urlEPNS_10CYASSL_CTXEPKc",
+          "_ZN6CyaInt32CyaSSL_CTX_load_verify_locationsEPNS_10CYASSL_CTXEPKcS3_",
+          "_ZN6CyaInt32CyaSSL_CTX_use_PrivateKey_bufferEPNS_10CYASSL_CTXEPKhli",
+          "_ZN6CyaInt33CyaSSL_CTX_set_session_cache_modeEPNS_10CYASSL_CTXEl",
+          "_ZN6CyaInt33CyaSSL_CTX_use_certificate_bufferEPNS_10CYASSL_CTXEPKhli",
+          "_ZN6CyaInt35CyaSSL_use_certificate_chain_bufferEPNS_6CYASSLEPKhl",
+          "_ZN6CyaInt37CyaSSL_CTX_use_certificate_chain_fileEPNS_10CYASSL_CTXEPKc",
+          "_ZN6CyaInt39CyaSSL_CTX_use_certificate_chain_bufferEPNS_10CYASSL_CTXEPKhl",
+          "_ZN7TSocket9setSocketEP17TSocketConnection",
+          "_ZNK17TSocketConnection14getSocketOwnIPEv",
+          "_ZNK17TSocketConnection16getSocketOwnPortEv",
+          "_ZNK17TSocketConnection17getSocketOwnIPNumEv",
+          "_ZNK17TSocketConnection5getIPEv",
+          "_ZNK17TSocketConnection8getIPNumEv",
+          "_ZNK17TSocketConnection8hasErrorEv"
+        ],
+        "machine": "AArch64",
+        "named_dynamic_symbol_count": 6673,
+        "needed": [
+          "libGLESv1_CM.so",
+          "libc.so",
+          "libstdc++.so",
+          "libm.so",
+          "liblog.so"
+        ]
+      },
+      "name": "lib/arm64-v8a/libqplay.so",
+      "native_strings": {
+        "certificate_markers": {
+          "-----BEGIN CERTIFICATE-----": 1,
+          "-----BEGIN RSA PRIVATE KEY-----": 1
+        },
+        "embedded_trust_text": {
+          "bytes": 12820,
+          "file_offset": 3002104,
+          "sha256": "c87ea7bc32005cca699fb724ab455926fd852a1bd40ce0985aadf31a994878a0"
+        },
+        "legacy_or_weak_cipher_names": {
+          "SSL_RSA_WITH_RC4_128_MD5": 1,
+          "SSL_RSA_WITH_RC4_128_SHA": 1,
+          "TLS_RSA_WITH_NULL_SHA": 2,
+          "TLS_RSA_WITH_NULL_SHA256": 1
+        },
+        "legacy_tls_versions": {
+          "TLSv1.1": 1,
+          "TLSv1.2": 2
+        },
+        "native_tls_names": {
+          "CyaSSL": 102,
+          "CyaSSL_CTX_load_verify_buffer": 1
+        }
+      },
+      "sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+      "size": 3657208
+    },
+    {
+      "elf": {
+        "bind_now": true,
+        "class": "ELF32",
+        "defined_function_count": 5853,
+        "dynamic_symbol_count": 6818,
+        "entry_point": "0x0",
+        "executable_stack": false,
+        "gnu_stack_flags": "RW",
+        "has_gnu_relro": true,
+        "interesting_imports": [
+          "chmod",
+          "connect",
+          "execvp",
+          "fork",
+          "gethostbyname",
+          "ioctl",
+          "open",
+          "recv",
+          "recvfrom",
+          "send",
+          "sendto",
+          "socket",
+          "unlink"
+        ],
+        "interesting_symbols": [
+          "TUpdatePackage_properties",
+          "_Z19CyaSSL_Debugging_ONv",
+          "_Z19CyaSSL_SetLoggingCbPFviPKcE",
+          "_Z20CyaSSL_Debugging_OFFv",
+          "_Z29TFileScripting_initStaticVarsv",
+          "_Z29TUpdatePackage_initStaticVarsv",
+          "_Z32TSocketConnection_initStaticVarsv",
+          "_Z35TFileScripting_initStaticScriptVarsv",
+          "_Z35TUpdatePackage_initStaticScriptVarsv",
+          "_Z36TIdentification_initStaticScriptVarsv",
+          "_Z38TSocketConnection_initStaticScriptVarsv",
+          "_ZN15TScriptUniverse16addZippedScriptsERK7TStringP17TSocketConnection",
+          "_ZN16TGraalConnectionC1EP17TSocketConnection",
+          "_ZN16TGraalConnectionC2EP17TSocketConnection",
+          "_ZN17TSocketConnection10bindSocketEib",
+          "_ZN17TSocketConnection11closeSocketEv",
+          "_ZN17TSocketConnection11sendDataUDPEPKviRK7TStringi",
+          "_ZN17TSocketConnection12acceptSocketEv",
+          "_ZN17TSocketConnection12setEnableSSLEb",
+          "_ZN17TSocketConnection13connectSocketERK7TStringi",
+          "_ZN17TSocketConnection14setNonBlockingEv",
+          "_ZN17TSocketConnection15checkConnectingEv",
+          "_ZN17TSocketConnection16setSSLVerifyCertERK7TString",
+          "_ZN17TSocketConnection17enableSSLOnSocketEv",
+          "_ZN17TSocketConnection17turnOffNagleDelayEv",
+          "_ZN17TSocketConnection20closeForSubProcessesEv",
+          "_ZN17TSocketConnection20printSSLCertificatesEv",
+          "_ZN17TSocketConnection21setVerifyGraalWebCertEv",
+          "_ZN17TSocketConnection4readEv",
+          "_ZN17TSocketConnection8gotbytesE",
+          "_ZN17TSocketConnection8sendDataEPKvi",
+          "_ZN17TSocketConnection9sentbytesE",
+          "_ZN17TSocketConnection9setStatusEi",
+          "_ZN17TSocketConnectionC1Ev",
+          "_ZN17TSocketConnectionC2Ev",
+          "_ZN17TSocketConnectionD1Ev",
+          "_ZN17TSocketConnectionD2Ev",
+          "_ZN6CyaInt10CyaSSL_newEPNS_10CYASSL_CTXE",
+          "_ZN6CyaInt11CyaSSL_InitEv",
+          "_ZN6CyaInt11CyaSSL_dtlsEPNS_6CYASSLE",
+          "_ZN6CyaInt11CyaSSL_freeEPNS_6CYASSLE",
+          "_ZN6CyaInt11CyaSSL_peekEPNS_6CYASSLEPvi",
+          "_ZN6CyaInt11CyaSSL_readEPNS_6CYASSLEPvi",
+          "_ZN6CyaInt11CyaSSL_recvEPNS_6CYASSLEPvii",
+          "_ZN6CyaInt11CyaSSL_sendEPNS_6CYASSLEPKvii",
+          "_ZN6CyaInt12CyaSSL_writeEPNS_6CYASSLEPKvi",
+          "_ZN6CyaInt13CyaSSL_get_fdEPKNS_6CYASSLE",
+          "_ZN6CyaInt13CyaSSL_set_fdEPNS_6CYASSLEi",
+          "_ZN6CyaInt13CyaSSL_writevEPNS_6CYASSLEPK5ioveci",
+          "_ZN6CyaInt14CyaSSL_CTX_newEPNS_13CYASSL_METHODE",
+          "_ZN6CyaInt14CyaSSL_CleanupEv",
+          "_ZN6CyaInt14CyaSSL_connectEPNS_6CYASSLE",
+          "_ZN6CyaInt14CyaSSL_pendingEPNS_6CYASSLE",
+          "_ZN6CyaInt15CyaSSL_CTX_freeEPNS_10CYASSL_CTXE",
+          "_ZN6CyaInt15CyaSSL_SetTmpDHEPNS_6CYASSLEPKhiS3_i",
+          "_ZN6CyaInt15CyaSSL_shutdownEPNS_6CYASSLE",
+          "_ZN6CyaInt16CyaSSL_SetIORecvEPNS_10CYASSL_CTXEPFiPNS_6CYASSLEPciPvE",
+          "_ZN6CyaInt16CyaSSL_SetIOSendEPNS_10CYASSL_CTXEPFiPNS_6CYASSLEPciPvE",
+          "_ZN6CyaInt16CyaSSL_X509_freeEPNS_11CYASSL_X509E",
+          "_ZN6CyaInt16CyaSSL_get_errorEPNS_6CYASSLEi",
+          "_ZN6CyaInt16CyaSSL_negotiateEPNS_6CYASSLE",
+          "_ZN6CyaInt16CyaSSL_want_readEPNS_6CYASSLE",
+          "_ZN6CyaInt17CyaSSL_FreeArraysEPNS_6CYASSLE",
+          "_ZN6CyaInt17CyaSSL_KeepArraysEPNS_6CYASSLE",
+          "_ZN6CyaInt17CyaSSL_SetVersionEPNS_6CYASSLEi",
+          "_ZN6CyaInt17CyaSSL_get_cipherEPNS_6CYASSLE",
+          "_ZN6CyaInt17CyaSSL_set_verifyEPNS_6CYASSLEiPFiiPNS_21CYASSL_X509_STORE_CTXEE",
+          "_ZN6CyaInt17CyaSSL_want_writeEPNS_6CYASSLE",
+          "_ZN6CyaInt18CyaSSL_CTX_SetCACbEPNS_10CYASSL_CTXEPFvPhiiE",
+          "_ZN6CyaInt18CyaSSL_get_sessionEPNS_6CYASSLE",
+          "_ZN6CyaInt18CyaSSL_get_versionEPNS_6CYASSLE",
+          "_ZN6CyaInt18CyaSSL_set_sessionEPNS_6CYASSLEPNS_14CYASSL_SESSIONE",
+          "_ZN6CyaInt18CyaSSL_set_timeoutEPNS_6CYASSLEj",
+          "_ZN6CyaInt19CyaSSL_SetIOReadCtxEPNS_6CYASSLEPv",
+          "_ZN6CyaInt19CyaSSL_connect_certEPNS_6CYASSLE",
+          "_ZN6CyaInt19CyaSSL_get_shutdownEPKNS_6CYASSLE",
+          "_ZN6CyaInt19CyaSSL_library_initEv",
+          "_ZN6CyaInt20CyaSSL_GetObjectSizeEv",
+          "_ZN6CyaInt20CyaSSL_SetIOWriteCtxEPNS_6CYASSLEPv",
+          "_ZN6CyaInt20CyaSSL_dtls_get_peerEPNS_6CYASSLEPvPj",
+          "_ZN6CyaInt20CyaSSL_dtls_set_peerEPNS_6CYASSLEPvj",
+          "_ZN6CyaInt20CyaSSL_make_eap_keysEPNS_6CYASSLEPvjPKc",
+          "_ZN6CyaInt21CyaSSL_CTX_set_verifyEPNS_10CYASSL_CTXEiPFiiPNS_21CYASSL_X509_STORE_CTXEE",
+          "_ZN6CyaInt21CyaSSL_CertManagerNewEv",
+          "_ZN6CyaInt21CyaSSL_SetIOReadFlagsEPNS_6CYASSLEi",
+          "_ZN6CyaInt21CyaSSL_flush_sessionsEPNS_10CYASSL_CTXEl",
+          "_ZN6CyaInt21CyaSSL_session_reusedEPNS_6CYASSLE",
+          "_ZN6CyaInt22CyaSSL_CIPHER_get_nameEPKNS_13CYASSL_CIPHERE",
+          "_ZN6CyaInt22CyaSSL_CTX_set_timeoutEPNS_10CYASSL_CTXEj",
+          "_ZN6CyaInt22CyaSSL_CertManagerFreeEPNS_19CYASSL_CERT_MANAGERE",
+          "_ZN6CyaInt22CyaSSL_SetIOWriteFlagsEPNS_6CYASSLEi",
+          "_ZN6CyaInt22CyaSSL_set_cipher_listEPNS_6CYASSLEPKc",
+          "_ZN6CyaInt22CyaSSL_set_compressionEPNS_6CYASSLE",
+          "_ZN6CyaInt22CyaSSLv3_client_methodEv",
+          "_ZN6CyaInt23CyaSSL_ERR_error_stringEmPc",
+          "_ZN6CyaInt23CyaSSL_dtls_got_timeoutEPNS_6CYASSLE",
+          "_ZN6CyaInt23CyaSSL_is_init_finishedEPNS_6CYASSLE",
+          "_ZN6CyaInt23CyaSSLv23_client_methodEv",
+          "_ZN6CyaInt24CyaSSL_CertManagerLoadCAEPNS_19CYASSL_CERT_MANAGEREPKcS3_",
+          "_ZN6CyaInt24CyaSSL_CertManagerVerifyEPNS_19CYASSL_CERT_MANAGEREPKci",
+          "_ZN6CyaInt24CyaSSL_X509_NAME_onelineEPNS_16CYASSL_X509_NAMEEPci",
+          "_ZN6CyaInt24CyaSSL_check_domain_nameEPNS_6CYASSLEPKc",
+          "_ZN6CyaInt24CyaSSL_get_alert_historyEPNS_6CYASSLEPNS_20CYASSL_ALERT_HISTORYE",
+          "_ZN6CyaInt25CyaSSL_ERR_error_string_nEmPcm",
+          "_ZN6CyaInt25CyaSSL_X509_get_subjectCNEPNS_11CYASSL_X509E",
+          "_ZN6CyaInt25CyaSSL_get_current_cipherEPNS_6CYASSLE",
+          "_ZN6CyaInt25CyaSSL_get_using_nonblockEPNS_6CYASSLE",
+          "_ZN6CyaInt25CyaSSL_load_error_stringsEv",
+          "_ZN6CyaInt25CyaSSL_set_group_messagesEPNS_6CYASSLE",
+          "_ZN6CyaInt25CyaSSL_set_using_nonblockEPNS_6CYASSLEi",
+          "_ZN6CyaInt26CyaSSL_CTX_set_cipher_listEPNS_10CYASSL_CTXEPKc",
+          "_ZN6CyaInt26CyaSSL_ERR_print_errors_fpEP7__sFILEi",
+          "_ZN6CyaInt27CyaSSL_CTX_OCSP_set_optionsEPNS_10CYASSL_CTXEl",
+          "_ZN6CyaInt27CyaSSL_CertManagerEnableCRLEPNS_19CYASSL_CERT_MANAGEREi",
+          "_ZN6CyaInt27CyaSSL_X509_get_issuer_nameEPNS_11CYASSL_X509E",
+          "_ZN6CyaInt27CyaSSL_get_peer_certificateEPNS_6CYASSLE",
+          "_ZN6CyaInt28CyaSSL_CTX_check_private_keyEPNS_10CYASSL_CTXE",
+          "_ZN6CyaInt28CyaSSL_CertManagerDisableCRLEPNS_19CYASSL_CERT_MANAGERE",
+          "_ZN6CyaInt28CyaSSL_X509_get_subject_nameEPNS_11CYASSL_X509E",
+          "_ZN6CyaInt28CyaSSL_use_PrivateKey_bufferEPNS_6CYASSLEPKhli",
+          "_ZN6CyaInt29CyaSSL_CTX_load_verify_bufferEPNS_10CYASSL_CTXEPKhli",
+          "_ZN6CyaInt29CyaSSL_CTX_set_group_messagesEPNS_10CYASSL_CTXE",
+          "_ZN6CyaInt29CyaSSL_use_certificate_bufferEPNS_6CYASSLEPKhli",
+          "_ZN6CyaInt30CyaSSL_CTX_use_PrivateKey_fileEPNS_10CYASSL_CTXEPKci",
+          "_ZN6CyaInt30CyaSSL_CertManagerVerifyBufferEPNS_19CYASSL_CERT_MANAGEREPKhli",
+          "_ZN6CyaInt31CyaSSL_CTX_use_certificate_fileEPNS_10CYASSL_CTXEPKci",
+          "_ZN6CyaInt31CyaSSL_dtls_get_current_timeoutEPNS_6CYASSLE",
+          "_ZN6CyaInt31CyaSSL_get_current_cipher_suiteEPNS_6CYASSLE",
+          "_ZN6CyaInt32CyaSSL_CTX_OCSP_set_override_urlEPNS_10CYASSL_CTXEPKc",
+          "_ZN6CyaInt32CyaSSL_CTX_load_verify_locationsEPNS_10CYASSL_CTXEPKcS3_",
+          "_ZN6CyaInt32CyaSSL_CTX_use_PrivateKey_bufferEPNS_10CYASSL_CTXEPKhli",
+          "_ZN6CyaInt33CyaSSL_CTX_set_session_cache_modeEPNS_10CYASSL_CTXEl",
+          "_ZN6CyaInt33CyaSSL_CTX_use_certificate_bufferEPNS_10CYASSL_CTXEPKhli",
+          "_ZN6CyaInt35CyaSSL_use_certificate_chain_bufferEPNS_6CYASSLEPKhl",
+          "_ZN6CyaInt37CyaSSL_CTX_use_certificate_chain_fileEPNS_10CYASSL_CTXEPKc",
+          "_ZN6CyaInt39CyaSSL_CTX_use_certificate_chain_bufferEPNS_10CYASSL_CTXEPKhl",
+          "_ZN7TSocket9setSocketEP17TSocketConnection",
+          "_ZNK17TSocketConnection14getSocketOwnIPEv",
+          "_ZNK17TSocketConnection16getSocketOwnPortEv",
+          "_ZNK17TSocketConnection17getSocketOwnIPNumEv",
+          "_ZNK17TSocketConnection5getIPEv",
+          "_ZNK17TSocketConnection8getIPNumEv",
+          "_ZNK17TSocketConnection8hasErrorEv"
+        ],
+        "machine": "ARM",
+        "named_dynamic_symbol_count": 6817,
+        "needed": [
+          "libGLESv1_CM.so",
+          "libc.so",
+          "libstdc++.so",
+          "libm.so",
+          "liblog.so"
+        ]
+      },
+      "name": "lib/armeabi/libqplay.so",
+      "native_strings": {
+        "certificate_markers": {
+          "-----BEGIN CERTIFICATE-----": 1,
+          "-----BEGIN RSA PRIVATE KEY-----": 1
+        },
+        "embedded_trust_text": {
+          "bytes": 12820,
+          "file_offset": 2204728,
+          "sha256": "c87ea7bc32005cca699fb724ab455926fd852a1bd40ce0985aadf31a994878a0"
+        },
+        "legacy_or_weak_cipher_names": {
+          "SSL_RSA_WITH_RC4_128_MD5": 1,
+          "SSL_RSA_WITH_RC4_128_SHA": 1,
+          "TLS_RSA_WITH_NULL_SHA": 2,
+          "TLS_RSA_WITH_NULL_SHA256": 1
+        },
+        "legacy_tls_versions": {
+          "TLSv1.1": 1,
+          "TLSv1.2": 2
+        },
+        "native_tls_names": {
+          "CyaSSL": 102,
+          "CyaSSL_CTX_load_verify_buffer": 1
+        }
+      },
+      "sha256": "a0e89f2d76685f93256ce82185cc032dec8f2a5a7fd6842714c8f22da9439860",
+      "size": 2399684
+    },
+    {
+      "elf": {
+        "bind_now": true,
+        "class": "ELF32",
+        "defined_function_count": 5711,
+        "dynamic_symbol_count": 6671,
+        "entry_point": "0x0",
+        "executable_stack": false,
+        "gnu_stack_flags": "RW",
+        "has_gnu_relro": true,
+        "interesting_imports": [
+          "chmod",
+          "connect",
+          "execvp",
+          "fork",
+          "gethostbyname",
+          "ioctl",
+          "open",
+          "recv",
+          "recvfrom",
+          "send",
+          "sendto",
+          "socket",
+          "unlink"
+        ],
+        "interesting_symbols": [
+          "TUpdatePackage_properties",
+          "_Z19CyaSSL_Debugging_ONv",
+          "_Z19CyaSSL_SetLoggingCbPFviPKcE",
+          "_Z20CyaSSL_Debugging_OFFv",
+          "_Z29TFileScripting_initStaticVarsv",
+          "_Z29TUpdatePackage_initStaticVarsv",
+          "_Z32TSocketConnection_initStaticVarsv",
+          "_Z35TFileScripting_initStaticScriptVarsv",
+          "_Z35TUpdatePackage_initStaticScriptVarsv",
+          "_Z36TIdentification_initStaticScriptVarsv",
+          "_Z38TSocketConnection_initStaticScriptVarsv",
+          "_ZN15TScriptUniverse16addZippedScriptsERK7TStringP17TSocketConnection",
+          "_ZN16TGraalConnectionC1EP17TSocketConnection",
+          "_ZN16TGraalConnectionC2EP17TSocketConnection",
+          "_ZN17TSocketConnection10bindSocketEib",
+          "_ZN17TSocketConnection11closeSocketEv",
+          "_ZN17TSocketConnection11sendDataUDPEPKviRK7TStringi",
+          "_ZN17TSocketConnection12acceptSocketEv",
+          "_ZN17TSocketConnection12setEnableSSLEb",
+          "_ZN17TSocketConnection13connectSocketERK7TStringi",
+          "_ZN17TSocketConnection14setNonBlockingEv",
+          "_ZN17TSocketConnection15checkConnectingEv",
+          "_ZN17TSocketConnection16setSSLVerifyCertERK7TString",
+          "_ZN17TSocketConnection17enableSSLOnSocketEv",
+          "_ZN17TSocketConnection17turnOffNagleDelayEv",
+          "_ZN17TSocketConnection20closeForSubProcessesEv",
+          "_ZN17TSocketConnection20printSSLCertificatesEv",
+          "_ZN17TSocketConnection21setVerifyGraalWebCertEv",
+          "_ZN17TSocketConnection4readEv",
+          "_ZN17TSocketConnection8gotbytesE",
+          "_ZN17TSocketConnection8sendDataEPKvi",
+          "_ZN17TSocketConnection9sentbytesE",
+          "_ZN17TSocketConnection9setStatusEi",
+          "_ZN17TSocketConnectionC1Ev",
+          "_ZN17TSocketConnectionC2Ev",
+          "_ZN17TSocketConnectionD1Ev",
+          "_ZN17TSocketConnectionD2Ev",
+          "_ZN6CyaInt10CyaSSL_newEPNS_10CYASSL_CTXE",
+          "_ZN6CyaInt11CyaSSL_InitEv",
+          "_ZN6CyaInt11CyaSSL_dtlsEPNS_6CYASSLE",
+          "_ZN6CyaInt11CyaSSL_freeEPNS_6CYASSLE",
+          "_ZN6CyaInt11CyaSSL_peekEPNS_6CYASSLEPvi",
+          "_ZN6CyaInt11CyaSSL_readEPNS_6CYASSLEPvi",
+          "_ZN6CyaInt11CyaSSL_recvEPNS_6CYASSLEPvii",
+          "_ZN6CyaInt11CyaSSL_sendEPNS_6CYASSLEPKvii",
+          "_ZN6CyaInt12CyaSSL_writeEPNS_6CYASSLEPKvi",
+          "_ZN6CyaInt13CyaSSL_get_fdEPKNS_6CYASSLE",
+          "_ZN6CyaInt13CyaSSL_set_fdEPNS_6CYASSLEi",
+          "_ZN6CyaInt13CyaSSL_writevEPNS_6CYASSLEPK5ioveci",
+          "_ZN6CyaInt14CyaSSL_CTX_newEPNS_13CYASSL_METHODE",
+          "_ZN6CyaInt14CyaSSL_CleanupEv",
+          "_ZN6CyaInt14CyaSSL_connectEPNS_6CYASSLE",
+          "_ZN6CyaInt14CyaSSL_pendingEPNS_6CYASSLE",
+          "_ZN6CyaInt15CyaSSL_CTX_freeEPNS_10CYASSL_CTXE",
+          "_ZN6CyaInt15CyaSSL_SetTmpDHEPNS_6CYASSLEPKhiS3_i",
+          "_ZN6CyaInt15CyaSSL_shutdownEPNS_6CYASSLE",
+          "_ZN6CyaInt16CyaSSL_SetIORecvEPNS_10CYASSL_CTXEPFiPNS_6CYASSLEPciPvE",
+          "_ZN6CyaInt16CyaSSL_SetIOSendEPNS_10CYASSL_CTXEPFiPNS_6CYASSLEPciPvE",
+          "_ZN6CyaInt16CyaSSL_X509_freeEPNS_11CYASSL_X509E",
+          "_ZN6CyaInt16CyaSSL_get_errorEPNS_6CYASSLEi",
+          "_ZN6CyaInt16CyaSSL_negotiateEPNS_6CYASSLE",
+          "_ZN6CyaInt16CyaSSL_want_readEPNS_6CYASSLE",
+          "_ZN6CyaInt17CyaSSL_FreeArraysEPNS_6CYASSLE",
+          "_ZN6CyaInt17CyaSSL_KeepArraysEPNS_6CYASSLE",
+          "_ZN6CyaInt17CyaSSL_SetVersionEPNS_6CYASSLEi",
+          "_ZN6CyaInt17CyaSSL_get_cipherEPNS_6CYASSLE",
+          "_ZN6CyaInt17CyaSSL_set_verifyEPNS_6CYASSLEiPFiiPNS_21CYASSL_X509_STORE_CTXEE",
+          "_ZN6CyaInt17CyaSSL_want_writeEPNS_6CYASSLE",
+          "_ZN6CyaInt18CyaSSL_CTX_SetCACbEPNS_10CYASSL_CTXEPFvPhiiE",
+          "_ZN6CyaInt18CyaSSL_get_sessionEPNS_6CYASSLE",
+          "_ZN6CyaInt18CyaSSL_get_versionEPNS_6CYASSLE",
+          "_ZN6CyaInt18CyaSSL_set_sessionEPNS_6CYASSLEPNS_14CYASSL_SESSIONE",
+          "_ZN6CyaInt18CyaSSL_set_timeoutEPNS_6CYASSLEj",
+          "_ZN6CyaInt19CyaSSL_SetIOReadCtxEPNS_6CYASSLEPv",
+          "_ZN6CyaInt19CyaSSL_connect_certEPNS_6CYASSLE",
+          "_ZN6CyaInt19CyaSSL_get_shutdownEPKNS_6CYASSLE",
+          "_ZN6CyaInt19CyaSSL_library_initEv",
+          "_ZN6CyaInt20CyaSSL_GetObjectSizeEv",
+          "_ZN6CyaInt20CyaSSL_SetIOWriteCtxEPNS_6CYASSLEPv",
+          "_ZN6CyaInt20CyaSSL_dtls_get_peerEPNS_6CYASSLEPvPj",
+          "_ZN6CyaInt20CyaSSL_dtls_set_peerEPNS_6CYASSLEPvj",
+          "_ZN6CyaInt20CyaSSL_make_eap_keysEPNS_6CYASSLEPvjPKc",
+          "_ZN6CyaInt21CyaSSL_CTX_set_verifyEPNS_10CYASSL_CTXEiPFiiPNS_21CYASSL_X509_STORE_CTXEE",
+          "_ZN6CyaInt21CyaSSL_CertManagerNewEv",
+          "_ZN6CyaInt21CyaSSL_SetIOReadFlagsEPNS_6CYASSLEi",
+          "_ZN6CyaInt21CyaSSL_flush_sessionsEPNS_10CYASSL_CTXEl",
+          "_ZN6CyaInt21CyaSSL_session_reusedEPNS_6CYASSLE",
+          "_ZN6CyaInt22CyaSSL_CIPHER_get_nameEPKNS_13CYASSL_CIPHERE",
+          "_ZN6CyaInt22CyaSSL_CTX_set_timeoutEPNS_10CYASSL_CTXEj",
+          "_ZN6CyaInt22CyaSSL_CertManagerFreeEPNS_19CYASSL_CERT_MANAGERE",
+          "_ZN6CyaInt22CyaSSL_SetIOWriteFlagsEPNS_6CYASSLEi",
+          "_ZN6CyaInt22CyaSSL_set_cipher_listEPNS_6CYASSLEPKc",
+          "_ZN6CyaInt22CyaSSL_set_compressionEPNS_6CYASSLE",
+          "_ZN6CyaInt22CyaSSLv3_client_methodEv",
+          "_ZN6CyaInt23CyaSSL_ERR_error_stringEmPc",
+          "_ZN6CyaInt23CyaSSL_dtls_got_timeoutEPNS_6CYASSLE",
+          "_ZN6CyaInt23CyaSSL_is_init_finishedEPNS_6CYASSLE",
+          "_ZN6CyaInt23CyaSSLv23_client_methodEv",
+          "_ZN6CyaInt24CyaSSL_CertManagerLoadCAEPNS_19CYASSL_CERT_MANAGEREPKcS3_",
+          "_ZN6CyaInt24CyaSSL_CertManagerVerifyEPNS_19CYASSL_CERT_MANAGEREPKci",
+          "_ZN6CyaInt24CyaSSL_X509_NAME_onelineEPNS_16CYASSL_X509_NAMEEPci",
+          "_ZN6CyaInt24CyaSSL_check_domain_nameEPNS_6CYASSLEPKc",
+          "_ZN6CyaInt24CyaSSL_get_alert_historyEPNS_6CYASSLEPNS_20CYASSL_ALERT_HISTORYE",
+          "_ZN6CyaInt25CyaSSL_ERR_error_string_nEmPcm",
+          "_ZN6CyaInt25CyaSSL_X509_get_subjectCNEPNS_11CYASSL_X509E",
+          "_ZN6CyaInt25CyaSSL_get_current_cipherEPNS_6CYASSLE",
+          "_ZN6CyaInt25CyaSSL_get_using_nonblockEPNS_6CYASSLE",
+          "_ZN6CyaInt25CyaSSL_load_error_stringsEv",
+          "_ZN6CyaInt25CyaSSL_set_group_messagesEPNS_6CYASSLE",
+          "_ZN6CyaInt25CyaSSL_set_using_nonblockEPNS_6CYASSLEi",
+          "_ZN6CyaInt26CyaSSL_CTX_set_cipher_listEPNS_10CYASSL_CTXEPKc",
+          "_ZN6CyaInt26CyaSSL_ERR_print_errors_fpEP7__sFILEi",
+          "_ZN6CyaInt27CyaSSL_CTX_OCSP_set_optionsEPNS_10CYASSL_CTXEl",
+          "_ZN6CyaInt27CyaSSL_CertManagerEnableCRLEPNS_19CYASSL_CERT_MANAGEREi",
+          "_ZN6CyaInt27CyaSSL_X509_get_issuer_nameEPNS_11CYASSL_X509E",
+          "_ZN6CyaInt27CyaSSL_get_peer_certificateEPNS_6CYASSLE",
+          "_ZN6CyaInt28CyaSSL_CTX_check_private_keyEPNS_10CYASSL_CTXE",
+          "_ZN6CyaInt28CyaSSL_CertManagerDisableCRLEPNS_19CYASSL_CERT_MANAGERE",
+          "_ZN6CyaInt28CyaSSL_X509_get_subject_nameEPNS_11CYASSL_X509E",
+          "_ZN6CyaInt28CyaSSL_use_PrivateKey_bufferEPNS_6CYASSLEPKhli",
+          "_ZN6CyaInt29CyaSSL_CTX_load_verify_bufferEPNS_10CYASSL_CTXEPKhli",
+          "_ZN6CyaInt29CyaSSL_CTX_set_group_messagesEPNS_10CYASSL_CTXE",
+          "_ZN6CyaInt29CyaSSL_use_certificate_bufferEPNS_6CYASSLEPKhli",
+          "_ZN6CyaInt30CyaSSL_CTX_use_PrivateKey_fileEPNS_10CYASSL_CTXEPKci",
+          "_ZN6CyaInt30CyaSSL_CertManagerVerifyBufferEPNS_19CYASSL_CERT_MANAGEREPKhli",
+          "_ZN6CyaInt31CyaSSL_CTX_use_certificate_fileEPNS_10CYASSL_CTXEPKci",
+          "_ZN6CyaInt31CyaSSL_dtls_get_current_timeoutEPNS_6CYASSLE",
+          "_ZN6CyaInt31CyaSSL_get_current_cipher_suiteEPNS_6CYASSLE",
+          "_ZN6CyaInt32CyaSSL_CTX_OCSP_set_override_urlEPNS_10CYASSL_CTXEPKc",
+          "_ZN6CyaInt32CyaSSL_CTX_load_verify_locationsEPNS_10CYASSL_CTXEPKcS3_",
+          "_ZN6CyaInt32CyaSSL_CTX_use_PrivateKey_bufferEPNS_10CYASSL_CTXEPKhli",
+          "_ZN6CyaInt33CyaSSL_CTX_set_session_cache_modeEPNS_10CYASSL_CTXEl",
+          "_ZN6CyaInt33CyaSSL_CTX_use_certificate_bufferEPNS_10CYASSL_CTXEPKhli",
+          "_ZN6CyaInt35CyaSSL_use_certificate_chain_bufferEPNS_6CYASSLEPKhl",
+          "_ZN6CyaInt37CyaSSL_CTX_use_certificate_chain_fileEPNS_10CYASSL_CTXEPKc",
+          "_ZN6CyaInt39CyaSSL_CTX_use_certificate_chain_bufferEPNS_10CYASSL_CTXEPKhl",
+          "_ZN7TSocket9setSocketEP17TSocketConnection",
+          "_ZNK17TSocketConnection14getSocketOwnIPEv",
+          "_ZNK17TSocketConnection16getSocketOwnPortEv",
+          "_ZNK17TSocketConnection17getSocketOwnIPNumEv",
+          "_ZNK17TSocketConnection5getIPEv",
+          "_ZNK17TSocketConnection8getIPNumEv",
+          "_ZNK17TSocketConnection8hasErrorEv"
+        ],
+        "machine": "Intel 80386",
+        "named_dynamic_symbol_count": 6670,
+        "needed": [
+          "libGLESv1_CM.so",
+          "libc.so",
+          "libstdc++.so",
+          "libm.so",
+          "liblog.so"
+        ]
+      },
+      "name": "lib/x86/libqplay.so",
+      "native_strings": {
+        "certificate_markers": {
+          "-----BEGIN CERTIFICATE-----": 1,
+          "-----BEGIN RSA PRIVATE KEY-----": 1
+        },
+        "embedded_trust_text": {
+          "bytes": 12820,
+          "file_offset": 3066632,
+          "sha256": "c87ea7bc32005cca699fb724ab455926fd852a1bd40ce0985aadf31a994878a0"
+        },
+        "legacy_or_weak_cipher_names": {
+          "SSL_RSA_WITH_RC4_128_MD5": 1,
+          "SSL_RSA_WITH_RC4_128_SHA": 1,
+          "TLS_RSA_WITH_NULL_SHA": 2,
+          "TLS_RSA_WITH_NULL_SHA256": 1
+        },
+        "legacy_tls_versions": {
+          "TLSv1.1": 1,
+          "TLSv1.2": 2
+        },
+        "native_tls_names": {
+          "CyaSSL": 102,
+          "CyaSSL_CTX_load_verify_buffer": 1
+        }
+      },
+      "sha256": "93e322c8b6fdc5666fde67ef02badc71a55b002c3936451c93f02860d843b333",
+      "size": 3722404
+    },
+    {
+      "elf": {
+        "bind_now": true,
+        "class": "ELF64",
+        "defined_function_count": 5709,
+        "dynamic_symbol_count": 6670,
+        "entry_point": "0x0",
+        "executable_stack": false,
+        "gnu_stack_flags": "RW",
+        "has_gnu_relro": true,
+        "interesting_imports": [
+          "chmod",
+          "connect",
+          "execvp",
+          "fork",
+          "gethostbyname",
+          "ioctl",
+          "open",
+          "recv",
+          "recvfrom",
+          "send",
+          "sendto",
+          "socket",
+          "unlink"
+        ],
+        "interesting_symbols": [
+          "TUpdatePackage_properties",
+          "_Z19CyaSSL_Debugging_ONv",
+          "_Z19CyaSSL_SetLoggingCbPFviPKcE",
+          "_Z20CyaSSL_Debugging_OFFv",
+          "_Z29TFileScripting_initStaticVarsv",
+          "_Z29TUpdatePackage_initStaticVarsv",
+          "_Z32TSocketConnection_initStaticVarsv",
+          "_Z35TFileScripting_initStaticScriptVarsv",
+          "_Z35TUpdatePackage_initStaticScriptVarsv",
+          "_Z36TIdentification_initStaticScriptVarsv",
+          "_Z38TSocketConnection_initStaticScriptVarsv",
+          "_ZN15TScriptUniverse16addZippedScriptsERK7TStringP17TSocketConnection",
+          "_ZN16TGraalConnectionC1EP17TSocketConnection",
+          "_ZN16TGraalConnectionC2EP17TSocketConnection",
+          "_ZN17TSocketConnection10bindSocketEib",
+          "_ZN17TSocketConnection11closeSocketEv",
+          "_ZN17TSocketConnection11sendDataUDPEPKviRK7TStringi",
+          "_ZN17TSocketConnection12acceptSocketEv",
+          "_ZN17TSocketConnection12setEnableSSLEb",
+          "_ZN17TSocketConnection13connectSocketERK7TStringi",
+          "_ZN17TSocketConnection14setNonBlockingEv",
+          "_ZN17TSocketConnection15checkConnectingEv",
+          "_ZN17TSocketConnection16setSSLVerifyCertERK7TString",
+          "_ZN17TSocketConnection17enableSSLOnSocketEv",
+          "_ZN17TSocketConnection17turnOffNagleDelayEv",
+          "_ZN17TSocketConnection20closeForSubProcessesEv",
+          "_ZN17TSocketConnection20printSSLCertificatesEv",
+          "_ZN17TSocketConnection21setVerifyGraalWebCertEv",
+          "_ZN17TSocketConnection4readEv",
+          "_ZN17TSocketConnection8gotbytesE",
+          "_ZN17TSocketConnection8sendDataEPKvi",
+          "_ZN17TSocketConnection9sentbytesE",
+          "_ZN17TSocketConnection9setStatusEi",
+          "_ZN17TSocketConnectionC1Ev",
+          "_ZN17TSocketConnectionC2Ev",
+          "_ZN17TSocketConnectionD1Ev",
+          "_ZN17TSocketConnectionD2Ev",
+          "_ZN6CyaInt10CyaSSL_newEPNS_10CYASSL_CTXE",
+          "_ZN6CyaInt11CyaSSL_InitEv",
+          "_ZN6CyaInt11CyaSSL_dtlsEPNS_6CYASSLE",
+          "_ZN6CyaInt11CyaSSL_freeEPNS_6CYASSLE",
+          "_ZN6CyaInt11CyaSSL_peekEPNS_6CYASSLEPvi",
+          "_ZN6CyaInt11CyaSSL_readEPNS_6CYASSLEPvi",
+          "_ZN6CyaInt11CyaSSL_recvEPNS_6CYASSLEPvii",
+          "_ZN6CyaInt11CyaSSL_sendEPNS_6CYASSLEPKvii",
+          "_ZN6CyaInt12CyaSSL_writeEPNS_6CYASSLEPKvi",
+          "_ZN6CyaInt13CyaSSL_get_fdEPKNS_6CYASSLE",
+          "_ZN6CyaInt13CyaSSL_set_fdEPNS_6CYASSLEi",
+          "_ZN6CyaInt13CyaSSL_writevEPNS_6CYASSLEPK5ioveci",
+          "_ZN6CyaInt14CyaSSL_CTX_newEPNS_13CYASSL_METHODE",
+          "_ZN6CyaInt14CyaSSL_CleanupEv",
+          "_ZN6CyaInt14CyaSSL_connectEPNS_6CYASSLE",
+          "_ZN6CyaInt14CyaSSL_pendingEPNS_6CYASSLE",
+          "_ZN6CyaInt15CyaSSL_CTX_freeEPNS_10CYASSL_CTXE",
+          "_ZN6CyaInt15CyaSSL_SetTmpDHEPNS_6CYASSLEPKhiS3_i",
+          "_ZN6CyaInt15CyaSSL_shutdownEPNS_6CYASSLE",
+          "_ZN6CyaInt16CyaSSL_SetIORecvEPNS_10CYASSL_CTXEPFiPNS_6CYASSLEPciPvE",
+          "_ZN6CyaInt16CyaSSL_SetIOSendEPNS_10CYASSL_CTXEPFiPNS_6CYASSLEPciPvE",
+          "_ZN6CyaInt16CyaSSL_X509_freeEPNS_11CYASSL_X509E",
+          "_ZN6CyaInt16CyaSSL_get_errorEPNS_6CYASSLEi",
+          "_ZN6CyaInt16CyaSSL_negotiateEPNS_6CYASSLE",
+          "_ZN6CyaInt16CyaSSL_want_readEPNS_6CYASSLE",
+          "_ZN6CyaInt17CyaSSL_FreeArraysEPNS_6CYASSLE",
+          "_ZN6CyaInt17CyaSSL_KeepArraysEPNS_6CYASSLE",
+          "_ZN6CyaInt17CyaSSL_SetVersionEPNS_6CYASSLEi",
+          "_ZN6CyaInt17CyaSSL_get_cipherEPNS_6CYASSLE",
+          "_ZN6CyaInt17CyaSSL_set_verifyEPNS_6CYASSLEiPFiiPNS_21CYASSL_X509_STORE_CTXEE",
+          "_ZN6CyaInt17CyaSSL_want_writeEPNS_6CYASSLE",
+          "_ZN6CyaInt18CyaSSL_CTX_SetCACbEPNS_10CYASSL_CTXEPFvPhiiE",
+          "_ZN6CyaInt18CyaSSL_get_sessionEPNS_6CYASSLE",
+          "_ZN6CyaInt18CyaSSL_get_versionEPNS_6CYASSLE",
+          "_ZN6CyaInt18CyaSSL_set_sessionEPNS_6CYASSLEPNS_14CYASSL_SESSIONE",
+          "_ZN6CyaInt18CyaSSL_set_timeoutEPNS_6CYASSLEj",
+          "_ZN6CyaInt19CyaSSL_SetIOReadCtxEPNS_6CYASSLEPv",
+          "_ZN6CyaInt19CyaSSL_connect_certEPNS_6CYASSLE",
+          "_ZN6CyaInt19CyaSSL_get_shutdownEPKNS_6CYASSLE",
+          "_ZN6CyaInt19CyaSSL_library_initEv",
+          "_ZN6CyaInt20CyaSSL_GetObjectSizeEv",
+          "_ZN6CyaInt20CyaSSL_SetIOWriteCtxEPNS_6CYASSLEPv",
+          "_ZN6CyaInt20CyaSSL_dtls_get_peerEPNS_6CYASSLEPvPj",
+          "_ZN6CyaInt20CyaSSL_dtls_set_peerEPNS_6CYASSLEPvj",
+          "_ZN6CyaInt20CyaSSL_make_eap_keysEPNS_6CYASSLEPvjPKc",
+          "_ZN6CyaInt21CyaSSL_CTX_set_verifyEPNS_10CYASSL_CTXEiPFiiPNS_21CYASSL_X509_STORE_CTXEE",
+          "_ZN6CyaInt21CyaSSL_CertManagerNewEv",
+          "_ZN6CyaInt21CyaSSL_SetIOReadFlagsEPNS_6CYASSLEi",
+          "_ZN6CyaInt21CyaSSL_flush_sessionsEPNS_10CYASSL_CTXEl",
+          "_ZN6CyaInt21CyaSSL_session_reusedEPNS_6CYASSLE",
+          "_ZN6CyaInt22CyaSSL_CIPHER_get_nameEPKNS_13CYASSL_CIPHERE",
+          "_ZN6CyaInt22CyaSSL_CTX_set_timeoutEPNS_10CYASSL_CTXEj",
+          "_ZN6CyaInt22CyaSSL_CertManagerFreeEPNS_19CYASSL_CERT_MANAGERE",
+          "_ZN6CyaInt22CyaSSL_SetIOWriteFlagsEPNS_6CYASSLEi",
+          "_ZN6CyaInt22CyaSSL_set_cipher_listEPNS_6CYASSLEPKc",
+          "_ZN6CyaInt22CyaSSL_set_compressionEPNS_6CYASSLE",
+          "_ZN6CyaInt22CyaSSLv3_client_methodEv",
+          "_ZN6CyaInt23CyaSSL_ERR_error_stringEmPc",
+          "_ZN6CyaInt23CyaSSL_dtls_got_timeoutEPNS_6CYASSLE",
+          "_ZN6CyaInt23CyaSSL_is_init_finishedEPNS_6CYASSLE",
+          "_ZN6CyaInt23CyaSSLv23_client_methodEv",
+          "_ZN6CyaInt24CyaSSL_CertManagerLoadCAEPNS_19CYASSL_CERT_MANAGEREPKcS3_",
+          "_ZN6CyaInt24CyaSSL_CertManagerVerifyEPNS_19CYASSL_CERT_MANAGEREPKci",
+          "_ZN6CyaInt24CyaSSL_X509_NAME_onelineEPNS_16CYASSL_X509_NAMEEPci",
+          "_ZN6CyaInt24CyaSSL_check_domain_nameEPNS_6CYASSLEPKc",
+          "_ZN6CyaInt24CyaSSL_get_alert_historyEPNS_6CYASSLEPNS_20CYASSL_ALERT_HISTORYE",
+          "_ZN6CyaInt25CyaSSL_ERR_error_string_nEmPcm",
+          "_ZN6CyaInt25CyaSSL_X509_get_subjectCNEPNS_11CYASSL_X509E",
+          "_ZN6CyaInt25CyaSSL_get_current_cipherEPNS_6CYASSLE",
+          "_ZN6CyaInt25CyaSSL_get_using_nonblockEPNS_6CYASSLE",
+          "_ZN6CyaInt25CyaSSL_load_error_stringsEv",
+          "_ZN6CyaInt25CyaSSL_set_group_messagesEPNS_6CYASSLE",
+          "_ZN6CyaInt25CyaSSL_set_using_nonblockEPNS_6CYASSLEi",
+          "_ZN6CyaInt26CyaSSL_CTX_set_cipher_listEPNS_10CYASSL_CTXEPKc",
+          "_ZN6CyaInt26CyaSSL_ERR_print_errors_fpEP7__sFILEi",
+          "_ZN6CyaInt27CyaSSL_CTX_OCSP_set_optionsEPNS_10CYASSL_CTXEl",
+          "_ZN6CyaInt27CyaSSL_CertManagerEnableCRLEPNS_19CYASSL_CERT_MANAGEREi",
+          "_ZN6CyaInt27CyaSSL_X509_get_issuer_nameEPNS_11CYASSL_X509E",
+          "_ZN6CyaInt27CyaSSL_get_peer_certificateEPNS_6CYASSLE",
+          "_ZN6CyaInt28CyaSSL_CTX_check_private_keyEPNS_10CYASSL_CTXE",
+          "_ZN6CyaInt28CyaSSL_CertManagerDisableCRLEPNS_19CYASSL_CERT_MANAGERE",
+          "_ZN6CyaInt28CyaSSL_X509_get_subject_nameEPNS_11CYASSL_X509E",
+          "_ZN6CyaInt28CyaSSL_use_PrivateKey_bufferEPNS_6CYASSLEPKhli",
+          "_ZN6CyaInt29CyaSSL_CTX_load_verify_bufferEPNS_10CYASSL_CTXEPKhli",
+          "_ZN6CyaInt29CyaSSL_CTX_set_group_messagesEPNS_10CYASSL_CTXE",
+          "_ZN6CyaInt29CyaSSL_use_certificate_bufferEPNS_6CYASSLEPKhli",
+          "_ZN6CyaInt30CyaSSL_CTX_use_PrivateKey_fileEPNS_10CYASSL_CTXEPKci",
+          "_ZN6CyaInt30CyaSSL_CertManagerVerifyBufferEPNS_19CYASSL_CERT_MANAGEREPKhli",
+          "_ZN6CyaInt31CyaSSL_CTX_use_certificate_fileEPNS_10CYASSL_CTXEPKci",
+          "_ZN6CyaInt31CyaSSL_dtls_get_current_timeoutEPNS_6CYASSLE",
+          "_ZN6CyaInt31CyaSSL_get_current_cipher_suiteEPNS_6CYASSLE",
+          "_ZN6CyaInt32CyaSSL_CTX_OCSP_set_override_urlEPNS_10CYASSL_CTXEPKc",
+          "_ZN6CyaInt32CyaSSL_CTX_load_verify_locationsEPNS_10CYASSL_CTXEPKcS3_",
+          "_ZN6CyaInt32CyaSSL_CTX_use_PrivateKey_bufferEPNS_10CYASSL_CTXEPKhli",
+          "_ZN6CyaInt33CyaSSL_CTX_set_session_cache_modeEPNS_10CYASSL_CTXEl",
+          "_ZN6CyaInt33CyaSSL_CTX_use_certificate_bufferEPNS_10CYASSL_CTXEPKhli",
+          "_ZN6CyaInt35CyaSSL_use_certificate_chain_bufferEPNS_6CYASSLEPKhl",
+          "_ZN6CyaInt37CyaSSL_CTX_use_certificate_chain_fileEPNS_10CYASSL_CTXEPKc",
+          "_ZN6CyaInt39CyaSSL_CTX_use_certificate_chain_bufferEPNS_10CYASSL_CTXEPKhl",
+          "_ZN7TSocket9setSocketEP17TSocketConnection",
+          "_ZNK17TSocketConnection14getSocketOwnIPEv",
+          "_ZNK17TSocketConnection16getSocketOwnPortEv",
+          "_ZNK17TSocketConnection17getSocketOwnIPNumEv",
+          "_ZNK17TSocketConnection5getIPEv",
+          "_ZNK17TSocketConnection8getIPNumEv",
+          "_ZNK17TSocketConnection8hasErrorEv"
+        ],
+        "machine": "Advanced Micro Devices X86-64",
+        "named_dynamic_symbol_count": 6669,
+        "needed": [
+          "libGLESv1_CM.so",
+          "libc.so",
+          "libstdc++.so",
+          "libm.so",
+          "liblog.so"
+        ]
+      },
+      "name": "lib/x86_64/libqplay.so",
+      "native_strings": {
+        "embedded_trust_text": {
+          "bytes": 12820,
+          "file_offset": 3132032,
+          "sha256": "c87ea7bc32005cca699fb724ab455926fd852a1bd40ce0985aadf31a994878a0"
+        },
+        "legacy_or_weak_cipher_names": {
+          "SSL_RSA_WITH_RC4_128_MD5": 1,
+          "SSL_RSA_WITH_RC4_128_SHA": 1,
+          "TLS_RSA_WITH_NULL_SHA": 2,
+          "TLS_RSA_WITH_NULL_SHA256": 1
+        },
+        "legacy_tls_versions": {
+          "TLSv1.1": 1,
+          "TLSv1.2": 2
+        },
+        "native_tls_names": {
+          "CyaSSL": 102,
+          "CyaSSL_CTX_load_verify_buffer": 1
+        }
+      },
+      "sha256": "b529184d981ec2a08e6a623e1d0634bb6a36d0e71856c544608190ed5b35a8d7",
+      "size": 3850000
+    }
+  ],
+  "network_contacted": false,
+  "reproduction": {
+    "command": "python3 tools/audit_original_apk.py /path/to/GraalOnline+Classic_1.8_APKPure.apk --output artifacts/original_apk_security_audit_20260830.json",
+    "side_effects": "Reads the APK and writes only the requested JSON report. Temporary ELF and certificate files are removed on exit."
+  },
+  "schema": "libqplay.original-apk-security-audit.v1",
+  "signing": {
+    "apk_signing_block": {
+      "ids": [
+        "0x7109871a",
+        "0x42726577"
+      ],
+      "malformed": false,
+      "present": true
+    },
+    "certificates": {
+      "apk_v1": {
+        "container": "PKCS#7 SignedData",
+        "encoding": "PEM",
+        "issuer": [
+          {
+            "name": "countryName",
+            "oid": "2.5.4.6",
+            "value": "fr"
+          },
+          {
+            "name": "stateOrProvinceName",
+            "oid": "2.5.4.8",
+            "value": "France"
+          },
+          {
+            "name": "localityName",
+            "oid": "2.5.4.7",
+            "value": "Paris"
+          },
+          {
+            "name": "organizationName",
+            "oid": "2.5.4.10",
+            "value": "Eurocenter"
+          },
+          {
+            "name": "organizationalUnitName",
+            "oid": "2.5.4.11",
+            "value": "Eurocenter"
+          },
+          {
+            "name": "commonName",
+            "oid": "2.5.4.3",
+            "value": "Eurocenter"
+          }
+        ],
+        "name": "META-INF/CERT.RSA",
+        "not_after": "2038-01-30T11:26:28",
+        "not_before": "2010-09-14T11:26:28",
+        "public_key": {
+          "size": 1024,
+          "type": "_RSAPublicKey"
+        },
+        "serial_number": "0x4c8f5be4",
+        "sha256_fingerprint": "c63130fa95a05ec36c4f1dca30cf148a0b2fb3818c794899cd426206f5067c02",
+        "signature_hash": "sha1",
+        "subject": [
+          {
+            "name": "countryName",
+            "oid": "2.5.4.6",
+            "value": "fr"
+          },
+          {
+            "name": "stateOrProvinceName",
+            "oid": "2.5.4.8",
+            "value": "France"
+          },
+          {
+            "name": "localityName",
+            "oid": "2.5.4.7",
+            "value": "Paris"
+          },
+          {
+            "name": "organizationName",
+            "oid": "2.5.4.10",
+            "value": "Eurocenter"
+          },
+          {
+            "name": "organizationalUnitName",
+            "oid": "2.5.4.11",
+            "value": "Eurocenter"
+          },
+          {
+            "name": "commonName",
+            "oid": "2.5.4.3",
+            "value": "Eurocenter"
+          }
+        ]
+      },
+      "fabzat": {
+        "encoding": "PEM",
+        "issuer": [
+          {
+            "name": "countryName",
+            "oid": "2.5.4.6",
+            "value": "IL"
+          },
+          {
+            "name": "organizationName",
+            "oid": "2.5.4.10",
+            "value": "StartCom Ltd."
+          },
+          {
+            "name": "organizationalUnitName",
+            "oid": "2.5.4.11",
+            "value": "Secure Digital Certificate Signing"
+          },
+          {
+            "name": "commonName",
+            "oid": "2.5.4.3",
+            "value": "StartCom Class 1 Primary Intermediate Server CA"
+          }
+        ],
+        "name": "res/raw/fabzat_com.crt",
+        "not_after": "2014-08-23T05:22:41",
+        "not_before": "2013-08-22T05:59:47",
+        "public_key": {
+          "size": 2048,
+          "type": "_RSAPublicKey"
+        },
+        "serial_number": "0xba11c",
+        "sha256_fingerprint": "7ef70360e4c1228706d96ecf0d5b8e6b391b15c36151e0a5c976a37637d8cdfa",
+        "signature_hash": "sha1",
+        "subject": [
+          {
+            "name": "Unknown OID",
+            "oid": "2.5.4.13",
+            "value": "evmNvVGZms1NfR00"
+          },
+          {
+            "name": "countryName",
+            "oid": "2.5.4.6",
+            "value": "FR"
+          },
+          {
+            "name": "commonName",
+            "oid": "2.5.4.3",
+            "value": "admin.fabzat.com"
+          },
+          {
+            "name": "emailAddress",
+            "oid": "1.2.840.113549.1.9.1",
+            "value": "webmaster@fabzat.com"
+          }
+        ]
+      }
+    },
+    "v1_signature_entries": [
+      "META-INF/CERT.RSA",
+      "META-INF/CERT.SF"
+    ],
+    "v1_signature_present": true
+  },
+  "tool": "tools/audit_original_apk.py",
+  "tool_version": 1,
+  "zip": {
+    "apk_signing_block": {
+      "ids": [
+        "0x7109871a",
+        "0x42726577"
+      ],
+      "malformed": false,
+      "present": true
+    },
+    "archive_bytes": 25104728,
+    "duplicate_entry_names": [],
+    "encrypted_entries": [],
+    "entry_count": 702,
+    "file_count": 702,
+    "path_anomalies": [],
+    "top_entries_by_uncompressed_size": [
+      {
+        "bytes": 3850000,
+        "compressed_bytes": 1467586,
+        "name": "lib/x86_64/libqplay.so"
+      },
+      {
+        "bytes": 3722404,
+        "compressed_bytes": 1490557,
+        "name": "lib/x86/libqplay.so"
+      },
+      {
+        "bytes": 3657208,
+        "compressed_bytes": 1433598,
+        "name": "lib/arm64-v8a/libqplay.so"
+      },
+      {
+        "bytes": 2399684,
+        "compressed_bytes": 1232685,
+        "name": "lib/armeabi/libqplay.so"
+      },
+      {
+        "bytes": 1847252,
+        "compressed_bytes": 755072,
+        "name": "classes.dex"
+      },
+      {
+        "bytes": 1372176,
+        "compressed_bytes": 1372176,
+        "name": "assets/offline/levels/music/classiciphone_story.mp3"
+      },
+      {
+        "bytes": 962559,
+        "compressed_bytes": 962559,
+        "name": "assets/offline/levels/music/classiciphone_main_castle.mp3"
+      },
+      {
+        "bytes": 961305,
+        "compressed_bytes": 961305,
+        "name": "assets/offline/levels/music/classiciphone_main_intro.mp3"
+      },
+      {
+        "bytes": 958379,
+        "compressed_bytes": 958379,
+        "name": "assets/offline/levels/music/classiciphone_pub.mp3"
+      },
+      {
+        "bytes": 956707,
+        "compressed_bytes": 956707,
+        "name": "assets/offline/levels/music/classiciphone_event.mp3"
+      },
+      {
+        "bytes": 956707,
+        "compressed_bytes": 956707,
+        "name": "assets/offline/levels/music/classiciphone_race.mp3"
+      },
+      {
+        "bytes": 949602,
+        "compressed_bytes": 949602,
+        "name": "assets/offline/levels/music/classiciphone_main_start.mp3"
+      },
+      {
+        "bytes": 931125,
+        "compressed_bytes": 931125,
+        "name": "assets/offline/levels/music/classiciphone_shop.mp3"
+      },
+      {
+        "bytes": 916665,
+        "compressed_bytes": 916665,
+        "name": "assets/offline/levels/music/classiciphone_background1.mp3"
+      },
+      {
+        "bytes": 907277,
+        "compressed_bytes": 907277,
+        "name": "res/drawable-hdpi-v4/fz_background.png"
+      },
+      {
+        "bytes": 889617,
+        "compressed_bytes": 889617,
+        "name": "assets/offline/levels/music/classiciphone_background2.mp3"
+      },
+      {
+        "bytes": 788636,
+        "compressed_bytes": 788636,
+        "name": "assets/offline/levels/music/classiciphone_rain.mp3"
+      },
+      {
+        "bytes": 739728,
+        "compressed_bytes": 739728,
+        "name": "assets/offline/levels/music/classiciphone_dance.mp3"
+      },
+      {
+        "bytes": 714564,
+        "compressed_bytes": 714564,
+        "name": "assets/offline/levels/music/classiciphone_story_secret.mp3"
+      },
+      {
+        "bytes": 694908,
+        "compressed_bytes": 694908,
+        "name": "assets/offline/levels/music/classiciphone_cave.mp3"
+      }
+    ],
+    "uncompressed_bytes": 35895879
+  }
+}
