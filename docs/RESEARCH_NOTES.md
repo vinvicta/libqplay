@@ -1679,6 +1679,32 @@ resource code. The six-case record is
 bounded x86_64 control, not exhaustive fuzzing, and no live endpoint was
 contacted.
 
+## Delayed socket-to-TLS gate
+
+The next static pass checked the state transition that precedes certificate
+verification. `TSocketConnection_connectSocket` at `0x206bd8` creates an IPv4
+TCP socket, makes it nonblocking, and begins `connect`. A pending connection
+is status 4. `TSocketConnection_checkConnecting` at `0x206a48` polls the write
+set with a zero-timeout `select`, then calls `getsockopt(SOL_SOCKET, SO_ERROR)`.
+A zero error changes the state to 5. A nonzero error closes the socket and
+enters the failure state.
+
+`TSocketConnection_setStatus` at `0x2067b4` starts
+`TSocketConnection_enableSSLOnSocket` only when the state reaches 5 and SSL is
+enabled. The TLS function at `0x206450` returns early unless the descriptor
+exists and the TCP state is 5. It then loads the trust buffer, selects a
+legacy CyaSSL method, configures I/O and verification, checks the hostname,
+and calls `CyaSSL_connect`. The request builder at `0x1ffde8` can set the SSL
+flag before the TCP socket is ready, so that early call is expected to be a
+no-op and the later status transition is significant.
+
+This adds an ordering constraint to runtime diagnosis. Seeing a TCP attempt
+without a TLS ClientHello does not by itself prove certificate rejection. The
+render and timer loop may not have completed the status-4 poll, or the poll
+may have reported a socket error first. The static map is preserved in
+`artifacts/connector_socket_state_review_20260902.json`. No network endpoint or
+native library was executed for this pass.
+
 ## Cross-ABI parity pass
 
 Because a physical ARM64 run is not currently available, the four native

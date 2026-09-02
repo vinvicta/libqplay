@@ -61,6 +61,13 @@ transition, including the failed TLS leg and the subsequent plain
 `artifacts/connector_fallback_review_20260902.json` and
 `artifacts/connector_fallback_runtime_control_20260902.json`.
 
+The connector also has a delayed TLS gate. It opens a nonblocking TCP socket,
+polls status 4 with zero-timeout `select`, and starts CyaSSL only after
+`SO_ERROR` moves the socket to status 5. A device trace with TCP but no TLS
+ClientHello therefore needs the render and timer loop checked before it is
+classified as a certificate failure. The static state record is
+`artifacts/connector_socket_state_review_20260902.json`.
+
 That control reused the archived `/con.png` package as the `/conf.gs` body and
 did not reach the synthetic game listener. The current mode-3 response is
 still unverified. A follow-up local control used the mode-specific

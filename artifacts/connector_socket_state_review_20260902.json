@@ -1,0 +1,70 @@
+{
+  "artifact": "connector_socket_state_review",
+  "generated": "2026-09-02",
+  "scope": "Original Graal Online Classic 1.8 ARM64 libqplay.so",
+  "functions": [
+    {
+      "address": "0x1ffde8",
+      "name": "THTTPRequest_sendRequest_void",
+      "role": "Builds a connector request, configures the native socket, and starts the connection."
+    },
+    {
+      "address": "0x206450",
+      "name": "TSocketConnection_enableSSLOnSocket_void",
+      "role": "Creates or reuses the CyaSSL context, loads trust data, configures verification, and starts the nonblocking TLS handshake."
+    },
+    {
+      "address": "0x2067b4",
+      "name": "TSocketConnection_setStatus_int",
+      "role": "Transitions the socket state and starts TLS when a connected socket reaches status 5."
+    },
+    {
+      "address": "0x206a48",
+      "name": "TSocketConnection_checkConnecting_void",
+      "role": "Polls a pending nonblocking connect and checks SO_ERROR."
+    },
+    {
+      "address": "0x206bd8",
+      "name": "TSocketConnection_connectSocket_TString_const_int",
+      "role": "Creates an IPv4 TCP socket, makes it nonblocking, and begins connect."
+    },
+    {
+      "address": "0x206e0c",
+      "name": "TSocketConnection_setEnableSSL_bool",
+      "role": "Changes the SSL request flag and attempts the SSL transition."
+    },
+    {
+      "address": "0x207058",
+      "name": "TSocketConnection_setSSLVerifyCert_TString_const",
+      "role": "Stores the native trust string and enables certificate verification when it is nonempty."
+    },
+    {
+      "address": "0x207118",
+      "name": "TSocketConnection_sendData_void_const_int",
+      "role": "Writes through CyaSSL when TLS is active and records TLS errors."
+    },
+    {
+      "address": "0x2074d4",
+      "name": "TSocketConnection_read_void",
+      "role": "Reads through CyaSSL when TLS is active and closes on terminal errors."
+    }
+  ],
+  "state_summary": {
+    "status_4": "TCP connect pending. checkConnecting uses a zero-timeout select on the write set and can leave the socket pending when it is not ready.",
+    "status_5": "TCP connect completed. setStatus calls enableSSLOnSocket when the SSL flag is enabled.",
+    "tls_gate": "enableSSLOnSocket returns unless the descriptor exists and the state is status 5. It then loads the trust buffer, configures verification and hostname checking, enables nonblocking CyaSSL I/O, and calls CyaSSL_connect.",
+    "status_2": "A nonzero SO_ERROR from the pending-connect check closes the socket and enters the failure state.",
+    "status_7": "closeSocket frees the CyaSSL object, closes the descriptor, and records the closed state."
+  },
+  "diagnostic_order": [
+    "Confirm the app reaches its loading and timer loop.",
+    "Confirm that a TCP connection is attempted.",
+    "For a status-4 socket, observe the zero-timeout select and SO_ERROR result.",
+    "Only after status 5, inspect the TLS ClientHello, trust-buffer load, hostname check, and certificate result.",
+    "If TLS fails, inspect the documented mode-3 cleartext fallback separately."
+  ],
+  "runtime_relation": "The earlier local ARM64 emulator control reached a TLS listener, sent no HTTP request for an expired trust input, and then exercised the mode-3 fallback. That proves the TLS-stage failure control but does not exclude a separate status-4 stall caused by a render or timer loop that never performs the pending-connect poll.",
+  "network_contacted": false,
+  "native_executed": false,
+  "source": "IDA Pro decompilation and cross-references from the active 1.8 ARM64 database."
+}

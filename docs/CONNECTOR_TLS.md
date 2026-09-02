@@ -29,6 +29,20 @@ of a package-specific trust choice, not evidence of an authorized current
 service chain. The full metadata-only comparison is in
 `artifacts/cross_version_trust_bundle_review_20260902.json`.
 
+There is a separate socket-state gate before the certificate check. The
+connector creates a nonblocking TCP socket and uses status 4 for a pending
+connect. `TSocketConnection_checkConnecting` at `0x206a48` polls the write set
+with a zero timeout and checks `SO_ERROR`. Only a zero result changes the
+socket to status 5, and `TSocketConnection_setStatus` then calls
+`enableSSLOnSocket`. That function returns immediately unless the descriptor
+exists and the status is 5.
+
+This changes the order of device diagnosis. A trace that shows a TCP attempt
+but no TLS ClientHello may reflect a stalled render or timer loop that has not
+completed the status-4 poll. It is not, by itself, proof of certificate
+rejection. The complete static state record is in
+`artifacts/connector_socket_state_review_20260902.json`.
+
 
 ## Date checks recovered in CyaSSL
 
