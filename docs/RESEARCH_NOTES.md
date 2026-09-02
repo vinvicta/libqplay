@@ -1427,6 +1427,16 @@ capture hashes, and static addresses are in
 `artifacts/update_package_transfer_review_20260902.json`; the narrative is in
 `docs/UPDATE_PACKAGES.md`.
 
+The same static pass tightened the security interpretation. Packet 84 at
+`0x1ef48c` accepts any five available bytes and combines them with 32-bit
+shifts into `bigfilesize`; no visible range or overflow check precedes the
+store. Packet 69 at `0x1eb294` clears `bigfilename` only when the equality test
+matches, but its equal and unequal paths both continue into cached-file lookup.
+That is a state-confusion and arithmetic-validation lead, not a proven memory
+corruption or arbitrary file write. The declared-size field's direct impact
+was not established, and the filename-mismatch case still needs an isolated
+replay.
+
 The public game responder accepts `--frame-after-client` and
 `--frame-after-map`. The first is useful for event-driven packet experiments.
 The second was used here to send packet 49 only after the GMAP response, which

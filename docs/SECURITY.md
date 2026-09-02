@@ -1241,6 +1241,15 @@ address. A `probe.bin` filename produced the same trace, so this local result
 does not require a `.gupd` parser branch. It is not evidence that a production
 server can crash an unmodified client, and it has not been reproduced on ARM64.
 
+The same handler review found two input-validation gaps that are independent
+of the reproduced null dereference. Packet 84 combines five input bytes into a
+32-bit `bigfilesize` value without a visible character-range or overflow
+check. Packet 69 uses its filename equality test to clear the active large-file
+marker, but both match and mismatch paths converge on cached-file lookup before
+completion callbacks. These are static state and arithmetic leads. The review
+does not show a direct allocation overflow, arbitrary file path, or production
+reachability.
+
 ### Executable replacement
 
 `TClient_handleUpdatePackageDownloaded` at `0x1ec044` calls the package lookup,

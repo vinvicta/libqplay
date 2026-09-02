@@ -118,7 +118,7 @@
       "wire_type": 84,
       "handler_index": 22,
       "handler": "TClient_setBigFileSize",
-      "effect": "Decodes and stores the declared large-file size."
+      "effect": "Decodes and stores the declared large-file size in a 32-bit field. The visible check is only that five characters are available; no character-range or upper-bound check is visible."
     },
     {
       "wire_type": 102,
@@ -130,9 +130,22 @@
       "wire_type": 69,
       "handler_index": 23,
       "handler": "TClient_finishFileDownload",
-      "effect": "Matches the completion filename against the large-file state, clears that state, emits onFileDownloaded, saves the cache, and updates a .gupd package when applicable."
+      "effect": "Tests the completion filename against the large-file state and clears that state on equality, but both match and mismatch paths converge on cached-file lookup. A found cached file can then emit onFileDownloaded, save the cache, and update a .gupd package."
     }
   ],
+  "declared_size_parser": {
+    "handler": "TClient_setBigFileSize",
+    "va": "0x1ef48c",
+    "minimum_input_length": 5,
+    "encoding": "(b1 << 28) + ((b2 - 0x20) << 21) + ((b3 - 0x20) << 14) + ((b4 - 0x20) << 7) + (b5 - 0x20)",
+    "arithmetic": "32-bit ARM W-register arithmetic",
+    "checks_observed": [
+      "Input string pointer is non-null.",
+      "The first five indexed characters are read only when the length is greater than four.",
+      "No visible character-range, signedness, upper-bound, or overflow check occurs before storing the result."
+    ],
+    "impact_boundary": "The field is passed into progress and onFileChunkReceived values in the reviewed path. A direct allocation or memory-corruption consequence was not established."
+  },
   "completion_behavior": {
     "ordinary_packet_102": [
       "When no large-file filename is active, processFileChunk emits onFileChunkReceived and onFileDownloaded.",
@@ -141,7 +154,7 @@
     ],
     "large_file": [
       "When a large-file filename is active, packet 102 emits onFileChunkReceived and retains the stream for later completion.",
-      "Packet 69 is the transition into the cached-file completion callback.",
+      "Packet 69 tests the active filename, but the handler does not visibly return early on a mismatch before cached-file lookup.",
       "The completion callback can invoke a universe script event before the package update callback."
     ],
     "script_setup": "The first created event for a lazily created script space calls TScriptSpace_receiveEvent. Its ARM64 prologue dereferences the owner TGraalVar and calls the virtual slot at owner vtable offset 0x98 before queue processing."
@@ -219,14 +232,17 @@
     "confirmed": [
       "The original ARM64 code separates ordinary packet-102 completion from the 68, 84, 102, 69 large-file sequence.",
       "In the local x86_64 diagnostic replay, packet-69 completion is the smallest changed condition associated with the reproduced crash.",
-      "A non-package filename still reaches the same failure, so package metadata parsing is not required for this local result."
+      "A non-package filename still reaches the same failure, so package metadata parsing is not required for this local result.",
+      "The packet-84 parser has no visible range or overflow validation for its 32-bit declared-size field.",
+      "The packet-69 handler does not visibly reject a filename mismatch before attempting cached-file lookup."
     ],
     "not_proven": [
       "The same failure occurs in the original ARM64 library.",
       "An unmodified production client accepts the same server sequence.",
       "A live server can deliver the sequence to an unmodified client.",
       "The null dereference is exploitable beyond denial of service.",
-      "The local diagnostic build has exactly the same object initialization state as the stock x86_64 APK."
+      "The local diagnostic build has exactly the same object initialization state as the stock x86_64 APK.",
+      "The unchecked declared-size field directly causes an allocation overflow or memory corruption."
     ],
     "severity_language": "Treat this as a local availability lead and an input-validation target, not as a confirmed remote vulnerability."
   },

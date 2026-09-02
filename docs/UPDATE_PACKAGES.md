@@ -84,9 +84,9 @@ The inbound table maps the large-file sequence as follows:
 | Wire type | Internal handler index | ARM64 handler | State change |
 | ---: | ---: | --- | --- |
 | 68 | 21 | `TClient_beginBigFileDownload` at `0x1eb12c` | Selects the large-file filename and starts transfer state. |
-| 84 | 22 | `TClient_setBigFileSize` at `0x1ef48c` | Stores the declared size. |
+| 84 | 22 | `TClient_setBigFileSize` at `0x1ef48c` | Decodes five characters into a 32-bit declared-size field. |
 | 102 | 24 | `TClient_parseEncodedFileChunk` at `0x1f0de4` | Parses a chunk and forwards it to `TClient_processFileChunk` at `0x1ec764`. |
-| 69 | 23 | `TClient_finishFileDownload` at `0x1eb294` | Matches the completion filename and finalizes the cached stream. |
+| 69 | 23 | `TClient_finishFileDownload` at `0x1eb294` | Tests the completion filename, then looks up a cached stream and can finalize it. |
 
 The internal handler index is not the wire packet number. The full table and
 the packet-to-index mapping are in `artifacts/inbound_handler_table.json`.
@@ -101,6 +101,23 @@ the first field as an offset or size value in this protocol family. The
 reviewed chunk path appends data to the active dynamic stream; it does not show
 a strict seek-to-offset operation or a comparison of accumulated bytes with
 the type-84 declaration before saving.
+
+### Declared-size decoding
+
+`TClient_setBigFileSize` at `0x1ef48c` checks that its input exists and has
+length greater than four. It then reads five bytes and combines them with
+32-bit ARM arithmetic:
+
+```text
+(b1 << 28) + ((b2 - 0x20) << 21) + ((b3 - 0x20) << 14)
+            + ((b4 - 0x20) << 7) + (b5 - 0x20)
+```
+
+There is no visible character-range, signedness, upper-bound, or overflow
+check before the result is stored in `bigfilesize`. The reviewed code passes
+the field into progress and `onFileChunkReceived` values. This is a clear
+input-validation gap, but this pass did not establish that the field directly
+controls an allocation or causes memory corruption.
 
 The state machine is easiest to read as two paths:
 
@@ -155,6 +172,16 @@ the ordinary event queue work. The local x86_64 instruction offset was
 with a null or invalid owner callback, although it does not by itself prove
 which object field was wrong in the diagnostic build.
 
+The filename check in `TClient_finishFileDownload` is also less restrictive
+than its name suggests. The handler tests whether the supplied filename equals
+the active `bigfilename` and clears that global on equality. The equal and
+unequal branches then converge on `TCachedStream_getCachedFile` with the
+supplied name. If a cached stream is found, the handler can emit
+`onFileDownloaded`, save it, and take the `.gupd` callback path. No early
+reject for a mismatch is visible in the ARM64 decompilation. This is a
+state-confusion lead that needs an isolated filename-mismatch replay; it is
+not evidence that an arbitrary filesystem path is accepted.
+
 The important follow-up was to vary only the transfer state:
 
 | Control | Result | What it tells us |
@@ -192,6 +219,9 @@ Other update-path concerns remain independent of this crash:
 
 * received data is appended before a visible declared-size, offset-order, or
   response-signature check;
+* the packet-84 declared-size decoder has no visible range or overflow check;
+* packet-69 does not visibly reject a completion filename mismatch before
+  cached-file lookup;
 * manifest and nested-package expansion lack a single visible aggregate
   budget;
 * cache writes are non-atomic and the reviewed `fwrite` result is not checked;
