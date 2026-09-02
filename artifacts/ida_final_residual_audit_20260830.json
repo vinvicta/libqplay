@@ -1,5 +1,5 @@
 {
-  "analysis_date": "2026-08-30",
+  "analysis_date": "2026-09-01",
   "analysis_scope": "original ARM64 libqplay.so translated IDA inventory",
   "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
   "interpretation": [
@@ -25,8 +25,8 @@
       "0x210000-0x21ffff": 4,
       "0x220000-0x22ffff": 10,
       "0x230000-0x23ffff": 5,
-      "0x250000-0x25ffff": 82,
-      "0x260000-0x26ffff": 59,
+      "0x250000-0x25ffff": 59,
+      "0x260000-0x26ffff": 58,
       "0x270000-0x27ffff": 3,
       "0x280000-0x28ffff": 25,
       "0x290000-0x29ffff": 77,
@@ -35,34 +35,22 @@
       "0xe0000-0xeffff": 32,
       "0xf0000-0xfffff": 13
     },
-    "default_sub_functions": 418,
+    "default_sub_functions": 394,
     "elf_symbol_backed_functions": 8096,
-    "named_non_elf_functions": 2783,
+    "named_non_elf_functions": 2807,
     "path": "/home/v/Desktop/graal-decomp/analysis/libqplay.function_inventory.json",
     "row_count": 11297,
     "segment_counts": {
       ".plt": 1,
-      ".text": 417
+      ".text": 393
     },
-    "sha256": "eef76c2c499bdac534620f2eb686177db7103c67e574381b5d96c2b869ba2919"
+    "sha256": "38790bf4489930335b1960d23830c01d10300b0af6bb157c32854ea2f19ae504"
   },
   "most_referenced_residuals": [
-    {
-      "ea": "0x25e6d4",
-      "name": "sub_25E6D4",
-      "size": 8,
-      "xrefs_to": 17
-    },
     {
       "ea": "0x2563d0",
       "name": "sub_2563D0",
       "size": 524,
-      "xrefs_to": 16
-    },
-    {
-      "ea": "0x25e6cc",
-      "name": "sub_25E6CC",
-      "size": 8,
       "xrefs_to": 16
     },
     {
@@ -78,12 +66,6 @@
       "xrefs_to": 11
     },
     {
-      "ea": "0x25ed14",
-      "name": "sub_25ED14",
-      "size": 188,
-      "xrefs_to": 10
-    },
-    {
       "ea": "0x261818",
       "name": "sub_261818",
       "size": 140,
@@ -94,42 +76,6 @@
       "name": "sub_25D4BC",
       "size": 2048,
       "xrefs_to": 9
-    },
-    {
-      "ea": "0x25ec84",
-      "name": "sub_25EC84",
-      "size": 144,
-      "xrefs_to": 9
-    },
-    {
-      "ea": "0x25e580",
-      "name": "sub_25E580",
-      "size": 48,
-      "xrefs_to": 8
-    },
-    {
-      "ea": "0x25e5b0",
-      "name": "sub_25E5B0",
-      "size": 52,
-      "xrefs_to": 8
-    },
-    {
-      "ea": "0x25e5e4",
-      "name": "sub_25E5E4",
-      "size": 24,
-      "xrefs_to": 7
-    },
-    {
-      "ea": "0x25e5fc",
-      "name": "sub_25E5FC",
-      "size": 28,
-      "xrefs_to": 7
-    },
-    {
-      "ea": "0x25e640",
-      "name": "sub_25E640",
-      "size": 140,
-      "xrefs_to": 5
     },
     {
       "ea": "0x2696d4",
@@ -150,21 +96,9 @@
       "xrefs_to": 5
     },
     {
-      "ea": "0x250e94",
-      "name": "sub_250E94",
-      "size": 104,
-      "xrefs_to": 4
-    },
-    {
       "ea": "0x25cf78",
       "name": "sub_25CF78",
       "size": 1348,
-      "xrefs_to": 4
-    },
-    {
-      "ea": "0x25e504",
-      "name": "sub_25E504",
-      "size": 80,
       "xrefs_to": 4
     },
     {
@@ -286,6 +220,72 @@
       "name": "sub_2A2B0C",
       "size": 196,
       "xrefs_to": 3
+    },
+    {
+      "ea": "0xe0454",
+      "name": "sub_E0454",
+      "size": 128,
+      "xrefs_to": 2
+    },
+    {
+      "ea": "0xe2b0c",
+      "name": "sub_E2B0C",
+      "size": 16,
+      "xrefs_to": 2
+    },
+    {
+      "ea": "0x252e90",
+      "name": "sub_252E90",
+      "size": 320,
+      "xrefs_to": 2
+    },
+    {
+      "ea": "0x25663c",
+      "name": "sub_25663C",
+      "size": 156,
+      "xrefs_to": 2
+    },
+    {
+      "ea": "0x2573b8",
+      "name": "sub_2573B8",
+      "size": 844,
+      "xrefs_to": 2
+    },
+    {
+      "ea": "0x25b660",
+      "name": "sub_25B660",
+      "size": 268,
+      "xrefs_to": 2
+    },
+    {
+      "ea": "0x25fe38",
+      "name": "sub_25FE38",
+      "size": 68,
+      "xrefs_to": 2
+    },
+    {
+      "ea": "0x25fef4",
+      "name": "sub_25FEF4",
+      "size": 68,
+      "xrefs_to": 2
+    },
+    {
+      "ea": "0x2621f4",
+      "name": "sub_2621F4",
+      "size": 1012,
+      "xrefs_to": 2
+    },
+    {
+      "ea": "0x262db4",
+      "name": "sub_262DB4",
+      "size": 3944,
+      "xrefs_to": 2
+    },
+    {
+      "ea": "0x264fcc",
+      "name": "sub_264FCC",
+      "size": 592,
+      "xrefs_to": 2
     }
   ],
   "network_contacted": false,
@@ -293,11 +293,11 @@
     "categories": [
       {
         "category": "freetype_static_internal",
-        "count": 144,
+        "count": 120,
         "evidence": "The region is bracketed by the archive I/O helpers and the FreeType to bzip2 transition.",
-        "first_ea": "0x250e94",
+        "first_ea": "0x252e90",
         "last_ea": "0x27336c",
-        "total_bytes": 90960
+        "total_bytes": 87084
       },
       {
         "category": "init_or_fini_array_entry",
@@ -349,7 +349,7 @@
       }
     ],
     "profile_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/ida_residual_profile.json",
-    "profile_sha256": "722a9c1d2e5a1f39e06ef6b97440dc2d47e8ab536b46e799c919ecadb0a3d1fd"
+    "profile_sha256": "8190b8556a4edabc5235aff81919fb69cb2cf979e56107b1dcf7014374316558"
   },
   "residual_functions": [
     {
@@ -1228,13 +1228,6 @@
       "xrefs_to": 1
     },
     {
-      "ea": "0x250e94",
-      "end_ea": "0x250efc",
-      "segment": ".text",
-      "size": 104,
-      "xrefs_to": 4
-    },
-    {
       "ea": "0x252e90",
       "end_ea": "0x252fd0",
       "segment": ".text",
@@ -1571,160 +1564,6 @@
       "xrefs_to": 1
     },
     {
-      "ea": "0x25e320",
-      "end_ea": "0x25e35c",
-      "segment": ".text",
-      "size": 60,
-      "xrefs_to": 1
-    },
-    {
-      "ea": "0x25e35c",
-      "end_ea": "0x25e454",
-      "segment": ".text",
-      "size": 248,
-      "xrefs_to": 1
-    },
-    {
-      "ea": "0x25e4e4",
-      "end_ea": "0x25e504",
-      "segment": ".text",
-      "size": 32,
-      "xrefs_to": 1
-    },
-    {
-      "ea": "0x25e504",
-      "end_ea": "0x25e554",
-      "segment": ".text",
-      "size": 80,
-      "xrefs_to": 4
-    },
-    {
-      "ea": "0x25e580",
-      "end_ea": "0x25e5b0",
-      "segment": ".text",
-      "size": 48,
-      "xrefs_to": 8
-    },
-    {
-      "ea": "0x25e5b0",
-      "end_ea": "0x25e5e4",
-      "segment": ".text",
-      "size": 52,
-      "xrefs_to": 8
-    },
-    {
-      "ea": "0x25e5e4",
-      "end_ea": "0x25e5fc",
-      "segment": ".text",
-      "size": 24,
-      "xrefs_to": 7
-    },
-    {
-      "ea": "0x25e5fc",
-      "end_ea": "0x25e618",
-      "segment": ".text",
-      "size": 28,
-      "xrefs_to": 7
-    },
-    {
-      "ea": "0x25e618",
-      "end_ea": "0x25e640",
-      "segment": ".text",
-      "size": 40,
-      "xrefs_to": 2
-    },
-    {
-      "ea": "0x25e640",
-      "end_ea": "0x25e6cc",
-      "segment": ".text",
-      "size": 140,
-      "xrefs_to": 5
-    },
-    {
-      "ea": "0x25e6cc",
-      "end_ea": "0x25e6d4",
-      "segment": ".text",
-      "size": 8,
-      "xrefs_to": 16
-    },
-    {
-      "ea": "0x25e6d4",
-      "end_ea": "0x25e6dc",
-      "segment": ".text",
-      "size": 8,
-      "xrefs_to": 17
-    },
-    {
-      "ea": "0x25e6dc",
-      "end_ea": "0x25e770",
-      "segment": ".text",
-      "size": 148,
-      "xrefs_to": 1
-    },
-    {
-      "ea": "0x25e770",
-      "end_ea": "0x25e7f8",
-      "segment": ".text",
-      "size": 136,
-      "xrefs_to": 1
-    },
-    {
-      "ea": "0x25e7f8",
-      "end_ea": "0x25e890",
-      "segment": ".text",
-      "size": 152,
-      "xrefs_to": 1
-    },
-    {
-      "ea": "0x25e890",
-      "end_ea": "0x25e950",
-      "segment": ".text",
-      "size": 192,
-      "xrefs_to": 1
-    },
-    {
-      "ea": "0x25e950",
-      "end_ea": "0x25e9a8",
-      "segment": ".text",
-      "size": 88,
-      "xrefs_to": 1
-    },
-    {
-      "ea": "0x25e9a8",
-      "end_ea": "0x25eaf8",
-      "segment": ".text",
-      "size": 336,
-      "xrefs_to": 1
-    },
-    {
-      "ea": "0x25eaf8",
-      "end_ea": "0x25ec84",
-      "segment": ".text",
-      "size": 396,
-      "xrefs_to": 1
-    },
-    {
-      "ea": "0x25ec84",
-      "end_ea": "0x25ed14",
-      "segment": ".text",
-      "size": 144,
-      "xrefs_to": 9
-    },
-    {
-      "ea": "0x25ed14",
-      "end_ea": "0x25edd0",
-      "segment": ".text",
-      "size": 188,
-      "xrefs_to": 10
-    },
-    {
-      "ea": "0x25edd0",
-      "end_ea": "0x25f044",
-      "segment": ".text",
-      "size": 628,
-      "xrefs_to": 1
-    },
-    {
       "ea": "0x25f4f4",
       "end_ea": "0x25f500",
       "segment": ".text",
@@ -1800,13 +1639,6 @@
       "segment": ".text",
       "size": 104,
       "xrefs_to": 3
-    },
-    {
-      "ea": "0x260050",
-      "end_ea": "0x2602a4",
-      "segment": ".text",
-      "size": 596,
-      "xrefs_to": 1
     },
     {
       "ea": "0x2602a4",

@@ -1,51 +1,31 @@
 {
-  "analysis_date": "2026-08-30",
-  "analysis_scope": "selected unnamed functions in the original ARM64 libqplay.so IDA database",
+  "analysis_date": "2026-09-01",
+  "analysis_scope": "selected unnamed functions remaining in the original ARM64 libqplay.so IDA database",
   "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
   "conclusions": [
-    "The selected high-reference routines are embedded FreeType or TrueType support code, not new Android bridge functions.",
-    "The xref context places the arithmetic and stream helpers under the TrueType interpreter tables and execution path.",
-    "The cleanup helper is reached from FT_Done_Face, while the string helpers are reached from a FreeType internal object routine.",
-    "These observations narrow the remaining symbol queue without changing the 418-function residual count or inventing names."
+    "The selected remaining routines are FreeType diagnostic helpers, not new Android bridge functions.",
+    "The xref context places both helpers under a FreeType internal object routine that sanitizes diagnostic strings.",
+    "Twenty-four neighboring FreeType and TrueType routines were removed from this residual review after exact source matching and are listed in the source-match artifact."
   ],
   "coverage": {
-    "reviewed_functions": 11,
+    "reviewed_functions": 2,
     "reviewed_regions": {
-      "freetype_diagnostic_helpers": 2,
-      "freetype_static_internal": 9
+      "freetype_diagnostic_helpers": 2
     },
-    "total_default_sub_functions": 418
+    "total_default_sub_functions": 394
   },
   "method": [
-    "Function sizes and xref counts are checked against the final residual audit.",
+    "Function sizes and xref counts are checked against the current final residual audit.",
     "Semantic observations come from active-IDB pseudocode and xref review.",
-    "No exact source name is added unless the binary provides enough evidence."
+    "Functions with exact pinned FreeType source matches are excluded and documented in the source-match artifact."
   ],
   "network_contacted": false,
   "not_claimed": [
-    "An exact upstream FreeType 2.3.6 source identifier for each residual function.",
+    "An exact upstream FreeType source identifier for the two diagnostic helpers.",
     "A security finding from these internal routines alone.",
     "Coverage of every residual JPEG or FreeType function."
   ],
   "observations": [
-    {
-      "address": "0x250e94",
-      "confidence": "high",
-      "ida_name": "sub_250E94",
-      "observed_behavior": [
-        "Invokes an object-local callback when the callback slot at object offset 16 is set.",
-        "Invokes a driver callback reached through the object at offset 40 and vtable offset 120 when present.",
-        "Frees the allocation at object offset 80, clears that field, and frees the object itself."
-      ],
-      "reference_context": [
-        "FT_Done_Face",
-        "sub_252E90"
-      ],
-      "role": "FreeType face or driver cleanup helper",
-      "size": 104,
-      "source_name_status": "exact FreeType source name not established",
-      "xrefs_to": 4
-    },
     {
       "address": "0x256060",
       "confidence": "high",
@@ -81,149 +61,13 @@
       "size": 524,
       "source_name_status": "exact FreeType trace helper name not established",
       "xrefs_to": 16
-    },
-    {
-      "address": "0x25e504",
-      "confidence": "medium",
-      "ida_name": "sub_25E504",
-      "observed_behavior": [
-        "Takes the absolute values of both signed inputs and multiplies their high and low halves.",
-        "Adds a 0x2000 rounding term and shifts the combined result by 14 bits.",
-        "Restores the sign from the XOR of the original inputs."
-      ],
-      "reference_context": [
-        "TT_RunIns"
-      ],
-      "role": "signed fixed-point multiplication helper",
-      "size": 80,
-      "source_name_status": "FT_MulFix-like behavior, exact source name not established",
-      "xrefs_to": 4
-    },
-    {
-      "address": "0x25e618",
-      "confidence": "medium",
-      "ida_name": "sub_25E618",
-      "observed_behavior": [
-        "Uses subtraction when the first arithmetic input is negative and addition otherwise.",
-        "Returns zero for the observed positive-result overflow cases and otherwise returns the computed value."
-      ],
-      "reference_context": [
-        "TT_RunIns"
-      ],
-      "role": "signed overflow-aware arithmetic helper",
-      "size": 40,
-      "source_name_status": "exact FreeType source name not established",
-      "xrefs_to": 2
-    },
-    {
-      "address": "0x25e640",
-      "confidence": "medium",
-      "ida_name": "sub_25E640",
-      "observed_behavior": [
-        "Reads two signed 16-bit coefficients from object offsets 538 and 540.",
-        "Combines those coefficients with two 32-bit fixed-point inputs, including their high and low halves.",
-        "Performs carry-aware addition, adds 0x2000 for rounding, and returns a value shifted by 14 bits."
-      ],
-      "reference_context": [
-        "TT_RunIns",
-        "sub_260050"
-      ],
-      "role": "TrueType fixed-point projection or transform helper",
-      "size": 140,
-      "source_name_status": "exact TrueType source name not established",
-      "xrefs_to": 5
-    },
-    {
-      "address": "0x25e6cc",
-      "confidence": "high",
-      "ida_name": "sub_25E6CC",
-      "observed_behavior": [
-        "Returns its second argument unchanged."
-      ],
-      "reference_context": [
-        "TT_RunIns",
-        "sub_260050"
-      ],
-      "role": "TrueType interpreter identity callback",
-      "size": 8,
-      "source_name_status": "compiler or library callback name unresolved",
-      "xrefs_to": 16
-    },
-    {
-      "address": "0x25e6d4",
-      "confidence": "high",
-      "ida_name": "sub_25E6D4",
-      "observed_behavior": [
-        "Returns its third argument unchanged."
-      ],
-      "reference_context": [
-        "TT_RunIns",
-        "sub_260050"
-      ],
-      "role": "TrueType interpreter identity callback",
-      "size": 8,
-      "source_name_status": "compiler or library callback name unresolved",
-      "xrefs_to": 17
-    },
-    {
-      "address": "0x25e6dc",
-      "confidence": "high",
-      "ida_name": "sub_25E6DC",
-      "observed_behavior": [
-        "Reads a count from the stream state and checks it against the remaining byte range.",
-        "On success, consumes count big-endian 16-bit values and writes them as signed values to the caller buffer.",
-        "Advances the stream position and updates the consumed-byte count; an invalid count stores error 130."
-      ],
-      "reference_context": [
-        "TT_RunIns"
-      ],
-      "role": "TrueType stream vector reader",
-      "size": 148,
-      "source_name_status": "exact TrueType source name not established",
-      "xrefs_to": 1
-    },
-    {
-      "address": "0x25ec84",
-      "confidence": "medium",
-      "ida_name": "sub_25EC84",
-      "observed_behavior": [
-        "Scales the input with FT_MulDiv using the signed coefficients at object offsets 542 and 544.",
-        "Adds the scaled value to the x and y slots selected by the point index.",
-        "Updates the interpreter point arrays without setting the per-point projection flags used by the paired helper."
-      ],
-      "reference_context": [
-        "TT_RunIns",
-        "sub_260050"
-      ],
-      "role": "TrueType projection delta accumulator",
-      "size": 144,
-      "source_name_status": "exact TrueType source name not established",
-      "xrefs_to": 9
-    },
-    {
-      "address": "0x25ed14",
-      "confidence": "medium",
-      "ida_name": "sub_25ED14",
-      "observed_behavior": [
-        "Uses the same two signed projection coefficients and FT_MulDiv scaling as the paired helper at 0x25ec84.",
-        "Adds the results to the selected x and y point slots.",
-        "Sets flag bits 8 and 16 in the point state when the corresponding projection coefficient is active."
-      ],
-      "reference_context": [
-        "TT_RunIns",
-        "sub_260050"
-      ],
-      "role": "TrueType projection delta accumulator with flags",
-      "size": 188,
-      "source_name_status": "exact TrueType source name not established",
-      "xrefs_to": 10
     }
   ],
   "schema": "libqplay.ida-residual-semantic-review.v1",
   "source_audit": {
     "path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/ida_final_residual_audit_20260830.json",
-    "sha256": "399c1b8581b5773aacea38c7d824892d224ba6165dc9c747e971423311156028"
+    "sha256": "2ad6709e97bf5d89b595456b312e892404a64dcf84fc0997f6582bb137633f9b"
   },
   "tool": "tools/generate_original_residual_semantic_review.py",
-  "tool_version": 1
+  "tool_version": 2
 }

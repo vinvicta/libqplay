@@ -27,6 +27,18 @@ release text. FreeType initialization writes the three version fields into the
 new library object. The libjpeg ABI constants are deliberately not treated as
 a release identifier.
 
+### FreeType source anchor
+
+The current IDA pass compared the embedded TrueType and FreeType routines with
+the official FreeType 2.3.6 tree at tag `VER-2-3-6`, commit
+`6174e17cf7cb3eef826d95c96757dbb0feea7bdb`. Twenty-four function bodies now
+have exact source-backed names, including `Compute_Funcs`, the projection and
+movement callbacks, the main TrueType instruction handlers, and the size,
+kerning, loca-table, and cleanup helpers. The address-level evidence is kept
+in `artifacts/ida_freetype_source_matches_20260901.json`, with direct links to
+the tagged source lines. This is a provenance anchor, not a claim that every
+local build option or vendor change is identical to the public tree.
+
 `readelf -d` lists only `libGLESv1_CM.so`, `libc.so`, `libstdc++.so`, `libm.so`,
 and `liblog.so` as needed libraries. There is no `libz.so`, `libbz2.so`, or
 `libfreetype.so` dependency. The versions above are therefore properties of

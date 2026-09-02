@@ -27,21 +27,22 @@ with explicit fields.
 ## Persisted IDA result
 
 The active ARM64 database was then processed by the reviewed callback,
-script-table, application-role, CyaSSL, and bundled-library passes. The final
-packed copy was saved as
-`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v8.i64`.
+script-table, application-role, CyaSSL, bundled-library, and exact FreeType
+source-match passes. The final packed copy was saved as
+`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v9.i64`.
 The active IDA verifier reports 11,297 functions, 11,297 named function heads,
-418 remaining default `sub_` entries, and zero failures after the final GPC
-helper pass. The post-GPC packed copy is saved, but a separate close and
-reopen of that exact copy is still pending.
+394 remaining default `sub_` entries, and zero failures after the exact
+FreeType source-match pass. The post-source-match packed copy is saved, but a
+separate close and reopen of that exact copy is still pending.
 
-The 1,252 reviewed names are made up of 277 native callback candidates, 906
+The 1,276 reviewed names are made up of 277 native callback candidates, 906
 exact script-table callbacks, 28 application or engine role aliases, 11
-CyaSSL aliases, 27 bundled-library aliases, and 3 GPC helper aliases. The
+CyaSSL aliases, 27 bundled-library aliases, 3 GPC helper aliases, and 24
+exact FreeType 2.3.6 source matches. The
 machine-readable record is
 `artifacts/ida_translation_verification_20260830.json`.
 
-The remaining 418 default names are not an unfinished application boundary.
+The remaining 394 default names are not an unfinished application boundary.
 The active-IDB scope check found no default name in the Android bridge range,
 no default name among the 1,779 unique script callback addresses, and no
 direct call from a remaining default function to the selected socket, file,
@@ -49,7 +50,9 @@ process, or update imports. The 23 entries in the broader application-core
 range are short static-state wrappers around existing library objects. Their
 addresses remain available in
 `artifacts/ida_active_translation_scope_check_20260830.json` without guessed
-source names.
+source names. The 24 exact FreeType and TrueType matches are listed in
+`artifacts/ida_freetype_source_matches_20260901.json`, with the pinned source
+tag, commit, source file, and line anchor for each routine.
 
 The public `symbols/libqplay.function_inventory.json` and
 `artifacts/script_table_inventory.json` are synchronized with this final

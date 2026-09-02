@@ -6,9 +6,11 @@ the pre-persistence inventory. The role-candidate pass names 28 application or
 engine entries, the first CyaSSL pass names 11 static TLS and crypto roles, and
 the next static-library pass names 27 zlib, bzip2, minizip, GPC, CyaSSL,
 LibTomCrypt, and YAJL roles. IDA reclassifies one compiler branch veneer as a
-thunk when the saved copy is reopened. This helper subtracts those known
-changes and emits the exact residual count in the latest persisted database.
-It only reads JSON files and performs no network operation.
+thunk when the saved copy is reopened. A later source comparison also names
+24 embedded FreeType and TrueType routines from the pinned FreeType 2.3.6
+source. This helper subtracts those known changes and emits the exact residual
+count in the latest persisted database. It only reads JSON files and performs
+no network operation.
 """
 
 from __future__ import annotations
@@ -27,8 +29,8 @@ DEFAULT_STATIC_ROLES = [
 DEFAULT_OUTPUT = "artifacts/ida_residual_profile.json"
 
 CURRENT_DATABASE = {
-    "path": "analysis/libqplay_translated_from_active_v8.i64",
-    "sha256": "6f489cc9ab1b922e3c2e77747a1295b1ee49020fb38c1bebb84bc2a7271bd397",
+    "path": "analysis/libqplay_translated_from_active_v9.i64",
+    "sha256": "860cd26c43c0c4a98e7939c5bbe7c02fa92c35662d11e86eb8e7a84bc64b116f",
     "bytes": 61286570,
     "format": "packed IDA 9.3 database",
     "close_reopen_verified": False,
@@ -64,7 +66,178 @@ REANALYZED_FUNCTIONS = {
             "named thunk to TCachedStream_get_minfilecachesize when the "
             "persisted translation copy was rebuilt."
         ),
-    }
+    },
+    0x250E94: {
+        "new_name": "destroy_size",
+        "reason": (
+            "The cleanup body matches FreeType 2.3.6 destroy_size: it runs "
+            "the generic and driver finalizers, frees size->internal, and "
+            "then frees the size object."
+        ),
+    },
+    0x25E320: {
+        "new_name": "tt_get_kerning",
+        "reason": (
+            "The helper initializes the kerning vector and delegates the x "
+            "coordinate to the TrueType SFNT service, matching the pinned "
+            "FreeType 2.3.6 tt_get_kerning implementation."
+        ),
+    },
+    0x25E35C: {
+        "new_name": "tt_face_get_location",
+        "reason": (
+            "The loca-table offset and short/long format handling match the "
+            "pinned FreeType 2.3.6 tt_face_get_location implementation."
+        ),
+    },
+    0x25E4E4: {
+        "new_name": "tt_size_init",
+        "reason": (
+            "The size initialization fields and reset values match the "
+            "pinned FreeType 2.3.6 tt_size_init implementation."
+        ),
+    },
+    0x25E504: {
+        "new_name": "TT_MulFix14",
+        "reason": (
+            "The split multiply, 0x2000 rounding, 14-bit shift, and sign "
+            "restore match the pinned FreeType 2.3.6 TT_MulFix14 helper."
+        ),
+    },
+    0x25E580: {
+        "new_name": "Direct_Move_X",
+        "reason": (
+            "The x-axis point movement and touch flag behavior match the "
+            "pinned FreeType 2.3.6 Direct_Move_X interpreter callback."
+        ),
+    },
+    0x25E5B0: {
+        "new_name": "Direct_Move_Y",
+        "reason": (
+            "The y-axis point movement and touch flag behavior match the "
+            "pinned FreeType 2.3.6 Direct_Move_Y interpreter callback."
+        ),
+    },
+    0x25E5E4: {
+        "new_name": "Direct_Move_Orig_X",
+        "reason": (
+            "The original-coordinate x movement behavior matches the pinned "
+            "FreeType 2.3.6 Direct_Move_Orig_X callback."
+        ),
+    },
+    0x25E5FC: {
+        "new_name": "Direct_Move_Orig_Y",
+        "reason": (
+            "The original-coordinate y movement behavior matches the pinned "
+            "FreeType 2.3.6 Direct_Move_Orig_Y callback."
+        ),
+    },
+    0x25E618: {
+        "new_name": "Round_None",
+        "reason": (
+            "The signed compensation and overflow clamps match the pinned "
+            "FreeType 2.3.6 Round_None implementation."
+        ),
+    },
+    0x25E640: {
+        "new_name": "Project",
+        "reason": (
+            "The projection-vector fixed-point dot product matches the pinned "
+            "FreeType 2.3.6 Project interpreter callback."
+        ),
+    },
+    0x25E6CC: {
+        "new_name": "Project_x",
+        "reason": (
+            "The callback returns its x input and occupies the projection "
+            "slot selected by Compute_Funcs, matching FreeType 2.3.6."
+        ),
+    },
+    0x25E6D4: {
+        "new_name": "Project_y",
+        "reason": (
+            "The callback returns its y input and occupies the projection "
+            "slot selected by Compute_Funcs, matching FreeType 2.3.6."
+        ),
+    },
+    0x25E6DC: {
+        "new_name": "Ins_NPUSHW",
+        "reason": (
+            "The count check, signed big-endian word reads, and instruction "
+            "state updates match the pinned FreeType 2.3.6 Ins_NPUSHW."
+        ),
+    },
+    0x25E770: {
+        "new_name": "Ins_PUSHW",
+        "reason": (
+            "The opcode-derived word count and signed stream reads match the "
+            "pinned FreeType 2.3.6 Ins_PUSHW implementation."
+        ),
+    },
+    0x25E7F8: {
+        "new_name": "Ins_GC",
+        "reason": (
+            "The point validation, projection choice, and current-coordinate "
+            "write match the pinned FreeType 2.3.6 Ins_GC handler."
+        ),
+    },
+    0x25E890: {
+        "new_name": "Ins_SCFS",
+        "reason": (
+            "The projection, freedom-vector move, and twilight copy behavior "
+            "match the pinned FreeType 2.3.6 Ins_SCFS handler."
+        ),
+    },
+    0x25E950: {
+        "new_name": "Ins_GETINFO",
+        "reason": (
+            "The version and graphics-state feature bits match the pinned "
+            "FreeType 2.3.6 Ins_GETINFO handler."
+        ),
+    },
+    0x25E9A8: {
+        "new_name": "Ins_MD",
+        "reason": (
+            "The two-point validation, dual projection, scaling, and stack "
+            "result match the pinned FreeType 2.3.6 Ins_MD handler."
+        ),
+    },
+    0x25EAF8: {
+        "new_name": "tt_size_request",
+        "reason": (
+            "The metrics request and scaling path match the pinned FreeType "
+            "2.3.6 tt_size_request driver callback and its class-table slot."
+        ),
+    },
+    0x25EC84: {
+        "new_name": "Direct_Move_Orig",
+        "reason": (
+            "The freedom-vector movement of original coordinates without touch "
+            "flags matches the pinned FreeType 2.3.6 Direct_Move_Orig."
+        ),
+    },
+    0x25ED14: {
+        "new_name": "Direct_Move",
+        "reason": (
+            "The freedom-vector movement of current coordinates with touch flags "
+            "matches the pinned FreeType 2.3.6 Direct_Move."
+        ),
+    },
+    0x25EDD0: {
+        "new_name": "Ins_ISECT",
+        "reason": (
+            "The five-point intersection math, discriminant fallback, and touch "
+            "flags match the pinned FreeType 2.3.6 Ins_ISECT handler."
+        ),
+    },
+    0x260050: {
+        "new_name": "Compute_Funcs",
+        "reason": (
+            "The projection and movement callback selection, including the "
+            "unpatented-hinting branch, matches the pinned FreeType 2.3.6 "
+            "Compute_Funcs implementation."
+        ),
+    },
 }
 
 

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Build a compact semantic review for selected unnamed IDA functions.
 
-The structural fields come from the final residual audit. The observations
+The structural fields come from the current residual audit. The observations
 were written after reviewing pseudocode and cross-references in the active
-ARM64 IDA database. This report deliberately keeps source names unresolved
-when the binary does not prove them, and it never contacts a network.
+ARM64 IDA database. Exact FreeType source matches are recorded separately by
+the source-match artifact, and this report never contacts a network.
 """
 
 from __future__ import annotations
@@ -21,7 +21,9 @@ DEFAULT_OUTPUT = ROOT / "artifacts" / "original_residual_semantic_review_2026083
 EXPECTED_BINARY_SHA256 = "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8"
 
 
-OBSERVATIONS = {
+# These entries preserve the notes from the pre-source-match review. Only the
+# two helpers below are emitted for the current residual set.
+LEGACY_OBSERVATIONS = {
     "0x250e94": {
         "role": "FreeType face or driver cleanup helper",
         "confidence": "high",
@@ -139,6 +141,12 @@ OBSERVATIONS = {
 }
 
 
+OBSERVATIONS = {
+    "0x256060": LEGACY_OBSERVATIONS["0x256060"],
+    "0x2563d0": LEGACY_OBSERVATIONS["0x2563d0"],
+}
+
+
 def sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:
@@ -168,33 +176,31 @@ def build_report(audit_path: Path) -> dict:
     return {
         "schema": "libqplay.ida-residual-semantic-review.v1",
         "tool": "tools/generate_original_residual_semantic_review.py",
-        "tool_version": 1,
-        "analysis_date": "2026-08-30",
-        "analysis_scope": "selected unnamed functions in the original ARM64 libqplay.so IDA database",
+        "tool_version": 2,
+        "analysis_date": "2026-09-01",
+        "analysis_scope": "selected unnamed functions remaining in the original ARM64 libqplay.so IDA database",
         "binary_sha256": EXPECTED_BINARY_SHA256,
         "network_contacted": False,
         "method": [
-            "Function sizes and xref counts are checked against the final residual audit.",
+            "Function sizes and xref counts are checked against the current final residual audit.",
             "Semantic observations come from active-IDB pseudocode and xref review.",
-            "No exact source name is added unless the binary provides enough evidence.",
+            "Functions with exact pinned FreeType source matches are excluded and documented in the source-match artifact.",
         ],
         "coverage": {
             "total_default_sub_functions": len(audit.get("residual_functions", [])),
             "reviewed_functions": len(selected),
             "reviewed_regions": {
-                "freetype_static_internal": 9,
                 "freetype_diagnostic_helpers": 2,
             },
         },
         "observations": selected,
         "conclusions": [
-            "The selected high-reference routines are embedded FreeType or TrueType support code, not new Android bridge functions.",
-            "The xref context places the arithmetic and stream helpers under the TrueType interpreter tables and execution path.",
-            "The cleanup helper is reached from FT_Done_Face, while the string helpers are reached from a FreeType internal object routine.",
-            "These observations narrow the remaining symbol queue without changing the 418-function residual count or inventing names.",
+            "The selected remaining routines are FreeType diagnostic helpers, not new Android bridge functions.",
+            "The xref context places both helpers under a FreeType internal object routine that sanitizes diagnostic strings.",
+            "Twenty-four neighboring FreeType and TrueType routines were removed from this residual review after exact source matching and are listed in the source-match artifact.",
         ],
         "not_claimed": [
-            "An exact upstream FreeType 2.3.6 source identifier for each residual function.",
+            "An exact upstream FreeType source identifier for the two diagnostic helpers.",
             "A security finding from these internal routines alone.",
             "Coverage of every residual JPEG or FreeType function.",
         ],

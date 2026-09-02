@@ -4,9 +4,10 @@
 This is a read-only check for IDALIB or the IDA Python console. It verifies
 the 277 native role candidates, every exact script-table callback label that
 has a proposed name, 28 application or engine role aliases, 11 CyaSSL role
-aliases, 27 bundled library role aliases, and four persisted function
-reclassifications at their expected addresses. The expected database totals
-are also checked after the boundary pass.
+aliases, 27 bundled library role aliases, four older persisted function
+reclassifications, and 24 exact FreeType source matches at their expected
+addresses. The expected database totals are also checked after the boundary
+pass.
 """
 
 from __future__ import annotations
@@ -51,6 +52,33 @@ RECLASSIFIED_NAMES = (
     (0x0E01A0, "gpc_abort_malloc_failure_tristrip_node"),
     (0x152200, "gpc_free_sbtree"),
     (0x152898, "gpc_build_sbt"),
+)
+
+FREETYPE_SOURCE_MATCH_NAMES = (
+    (0x250E94, "destroy_size"),
+    (0x25E320, "tt_get_kerning"),
+    (0x25E35C, "tt_face_get_location"),
+    (0x25E4E4, "tt_size_init"),
+    (0x25E504, "TT_MulFix14"),
+    (0x25E580, "Direct_Move_X"),
+    (0x25E5B0, "Direct_Move_Y"),
+    (0x25E5E4, "Direct_Move_Orig_X"),
+    (0x25E5FC, "Direct_Move_Orig_Y"),
+    (0x25E618, "Round_None"),
+    (0x25E640, "Project"),
+    (0x25E6CC, "Project_x"),
+    (0x25E6D4, "Project_y"),
+    (0x25E6DC, "Ins_NPUSHW"),
+    (0x25E770, "Ins_PUSHW"),
+    (0x25E7F8, "Ins_GC"),
+    (0x25E890, "Ins_SCFS"),
+    (0x25E950, "Ins_GETINFO"),
+    (0x25E9A8, "Ins_MD"),
+    (0x25EAF8, "tt_size_request"),
+    (0x25EC84, "Direct_Move_Orig"),
+    (0x25ED14, "Direct_Move"),
+    (0x25EDD0, "Ins_ISECT"),
+    (0x260050, "Compute_Funcs"),
 )
 
 
@@ -116,6 +144,14 @@ def expected_names() -> list[dict]:
                 "expected_name": name,
             }
         )
+    for va, name in FREETYPE_SOURCE_MATCH_NAMES:
+        rows.append(
+            {
+                "source": "ida_freetype_source_matches",
+                "va": va,
+                "expected_name": name,
+            }
+        )
     return rows
 
 
@@ -152,10 +188,10 @@ def main() -> None:
         "function_count": function_count,
         "default_sub_count": default_sub_count,
         "expected_function_count": 11297,
-        "expected_default_sub_count": 418,
+        "expected_default_sub_count": 394,
         "failures": failures,
         "status": "ok"
-        if not failures and function_count == 11297 and default_sub_count == 418
+        if not failures and function_count == 11297 and default_sub_count == 394
         else "failed",
     }
     print(json.dumps(result, sort_keys=True))

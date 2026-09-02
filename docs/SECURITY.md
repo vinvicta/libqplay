@@ -125,9 +125,10 @@ to bypass a signature on a live service.
 ## Translation scope and residual names
 
 The final ARM64 IDA copy contains 11,297 function heads. All 8,601 retained
-ELF symbols and 1,252 reviewed callback or role aliases were checked at their
-expected addresses. The 418 remaining default `sub_` names are IDA-created
-functions without a surviving source symbol. A read-only active-IDB check
+ELF symbols and 1,276 reviewed callback, role, and exact FreeType aliases were
+checked at their expected addresses. The 394 remaining default `sub_` names
+are IDA-created functions without a surviving source symbol. A read-only
+active-IDB check
 found none in the Android bridge range, none among the 1,779 unique script
 callback addresses, and no direct call from them into the selected socket,
 file, process, or update imports. The broader application-core range has 23
@@ -135,14 +136,17 @@ short static-state wrappers, which remain address-based because assigning
 source names would be speculation. See
 `artifacts/ida_active_translation_scope_check_20260830.json`.
 
-The selected residual review inspected eleven of the most referenced unnamed
-functions in the embedded FreeType and TrueType regions. They are arithmetic,
-stream, cleanup, and diagnostic-string helpers reached through FreeType or
-TrueType tables. The review did not find a new Android, socket, file, process,
-or update boundary in that sample. It is a semantic narrowing pass, not proof
-that every static-library routine is safe. See
+The selected residual review inspected two of the remaining most referenced
+unnamed functions in the embedded FreeType region. They are diagnostic-string
+helpers reached through a FreeType internal object routine. A separate source
+comparison matched 24 neighboring FreeType and TrueType routines to the
+tagged 2.3.6 implementation. Neither pass found a new Android, socket, file,
+process, or update boundary in the reviewed functions. These are semantic and
+source-matching passes, not proof that every static-library routine is safe.
+See
 `docs/RESIDUAL_ANALYSIS.md` and
-`artifacts/original_residual_semantic_review_20260830.json`.
+`artifacts/original_residual_semantic_review_20260830.json` plus
+`artifacts/ida_freetype_source_matches_20260901.json`.
 
 ## Android package surface
 

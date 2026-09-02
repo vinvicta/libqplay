@@ -9,11 +9,11 @@ their original source names.
 
 The original active database started with 11,272 functions and 1,645 default
 `sub_` names. The complete reviewed pass added 25 function boundaries and
-1,252 names or aliases. The final packed copy at
-`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v8.i64`
-contains 11,297 functions and 418 default names. The active IDA verifier
-returned zero failures after the final GPC helper pass. A separate reopen of
-this post-GPC copy is still pending.
+1,276 names or aliases. The final packed copy at
+`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v9.i64`
+contains 11,297 functions and 394 default names. The active IDA verifier
+returned zero failures after the exact FreeType source-match pass. A separate
+reopen of this post-source-match copy is still pending.
 
 The count is accounted for exactly:
 
@@ -24,7 +24,8 @@ The count is accounted for exactly:
 - 27 applied static-library role aliases
 -  3 reviewed GPC helper aliases
 -  1 compiler branch veneer reclassified as a named thunk
-=418 residual default entries
+- 24 exact FreeType 2.3.6 source matches
+=394 residual default entries
 ```
 
 The 28 application and engine role aliases are behavior-based names, not
@@ -42,6 +43,17 @@ allocation-failure abort, `0x152200` is the scanbeam-tree cleanup helper, and
 `0x152898` flattens the scanbeam tree into the sorted scanbeam array. Their
 roles match the corresponding private helpers in the
 [upstream GPC source](https://raw.githubusercontent.com/rickbrew/GeneralPolygonClipper/main/gpc.c).
+
+The source comparison then matched 24 functions to the tagged FreeType 2.3.6
+tree. The set includes the TrueType interpreter callbacks `Compute_Funcs`,
+`Project`, `Project_x`, `Project_y`, `Direct_Move`, and `Direct_Move_Orig`,
+the instruction handlers `Ins_NPUSHW`, `Ins_PUSHW`, `Ins_GC`, `Ins_SCFS`,
+`Ins_GETINFO`, `Ins_MD`, and `Ins_ISECT`, and the TrueType and face helpers
+`TT_MulFix14`, `Round_None`, `tt_size_init`, `tt_size_request`,
+`tt_get_kerning`, `tt_face_get_location`, `destroy_size`, and the four
+axis-specific movement callbacks. The exact address, size, xref count, source
+file, line anchor, and evidence are in
+`artifacts/ida_freetype_source_matches_20260901.json`.
 
 The checked-in function inventory and script-table inventory were regenerated
 from the final saved IDA state. They now report 11,297 functions and 1,779
@@ -63,7 +75,7 @@ The final residual set is recorded in
 record per remaining default `sub_` function, including its address, size,
 segment, and incoming xref count. It also records the 11,297-row inventory
 hash, the original ARM64 library hash, address buckets, and the most
-referenced residual entries. The report contains 418 residual functions and
+referenced residual entries. The report contains 394 residual functions and
 does not publish another full inventory. When the checked-in residual profile
 matches the input addresses, the report also embeds its category counts and
 profile hash.
@@ -72,7 +84,7 @@ The report was generated from the private translated IDA export with:
 
 ```text
 python3 tools/generate_final_residual_audit.py \
-  /tmp/ida-v4-inventory/libqplay.function_inventory.json
+  /home/v/Desktop/graal-decomp/analysis/libqplay.function_inventory.json
 ```
 
 The input path is local to the analysis workstation. The report's SHA-256
@@ -84,23 +96,24 @@ The final packed-database verification is recorded separately in
 source library hash, the saved IDA copy hash, all pass counts, and the exact
 function and residual totals.
 
-The 418 residual entries have also been classified by the persisted IDA
+The 394 residual entries have also been classified by the persisted IDA
 profile:
 
 | Class | Count | Interpretation |
 | --- | ---: | --- |
 | JPEG static internals | 150 | Unnamed routines inside the bundled JPEG implementation |
-| FreeType static internals | 144 | Unnamed routines inside the bundled FreeType implementation |
+| FreeType static internals | 120 | Unnamed routines inside the bundled FreeType implementation after exact source matches |
 | TString cleanup wrappers | 97 | Compiler-generated destructors for fixed global strings |
 | Init or fini array entries | 19 | Runtime registration or cleanup entry points referenced by ELF arrays |
 | TStringList cleanup wrappers | 5 | Compiler-generated destructors for fixed global string lists |
 | TGraalVar cleanup wrappers | 2 | Compiler-generated destructors for fixed global script values |
 | AArch64 PLT resolver | 1 | The resolver slot at `0xd2170`, not an imported function |
 
-This breakdown accounts for every residual entry. The large JPEG and FreeType
-groups are not omitted from the analysis; they are left with address-based
-names because their local source names were not retained and a family label
-alone is not enough to prove an exact function match.
+This breakdown accounts for every residual entry. The large JPEG and remaining
+FreeType groups are not omitted from the analysis. They are left with
+address-based names because their local source names were not retained and a
+family label alone is not enough to prove an exact function match. The 24
+matched FreeType routines are no longer part of this residual table.
 
 ## How to work the remaining queue
 

@@ -388,15 +388,8 @@
   "categories": [
     {
       "category": "freetype_static_internal",
-      "count": 144,
+      "count": 120,
       "entries": [
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_250E94",
-          "ea": "0x250e94",
-          "segment": ".text",
-          "size": 104
-        },
         {
           "category": "freetype_static_internal",
           "current_ida_name": "sub_252E90",
@@ -735,160 +728,6 @@
         },
         {
           "category": "freetype_static_internal",
-          "current_ida_name": "sub_25E320",
-          "ea": "0x25e320",
-          "segment": ".text",
-          "size": 60
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25E35C",
-          "ea": "0x25e35c",
-          "segment": ".text",
-          "size": 248
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25E4E4",
-          "ea": "0x25e4e4",
-          "segment": ".text",
-          "size": 32
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25E504",
-          "ea": "0x25e504",
-          "segment": ".text",
-          "size": 80
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25E580",
-          "ea": "0x25e580",
-          "segment": ".text",
-          "size": 48
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25E5B0",
-          "ea": "0x25e5b0",
-          "segment": ".text",
-          "size": 52
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25E5E4",
-          "ea": "0x25e5e4",
-          "segment": ".text",
-          "size": 24
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25E5FC",
-          "ea": "0x25e5fc",
-          "segment": ".text",
-          "size": 28
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25E618",
-          "ea": "0x25e618",
-          "segment": ".text",
-          "size": 40
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25E640",
-          "ea": "0x25e640",
-          "segment": ".text",
-          "size": 140
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25E6CC",
-          "ea": "0x25e6cc",
-          "segment": ".text",
-          "size": 8
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25E6D4",
-          "ea": "0x25e6d4",
-          "segment": ".text",
-          "size": 8
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25E6DC",
-          "ea": "0x25e6dc",
-          "segment": ".text",
-          "size": 148
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25E770",
-          "ea": "0x25e770",
-          "segment": ".text",
-          "size": 136
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25E7F8",
-          "ea": "0x25e7f8",
-          "segment": ".text",
-          "size": 152
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25E890",
-          "ea": "0x25e890",
-          "segment": ".text",
-          "size": 192
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25E950",
-          "ea": "0x25e950",
-          "segment": ".text",
-          "size": 88
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25E9A8",
-          "ea": "0x25e9a8",
-          "segment": ".text",
-          "size": 336
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25EAF8",
-          "ea": "0x25eaf8",
-          "segment": ".text",
-          "size": 396
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25EC84",
-          "ea": "0x25ec84",
-          "segment": ".text",
-          "size": 144
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25ED14",
-          "ea": "0x25ed14",
-          "segment": ".text",
-          "size": 188
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25EDD0",
-          "ea": "0x25edd0",
-          "segment": ".text",
-          "size": 628
-        },
-        {
-          "category": "freetype_static_internal",
           "current_ida_name": "sub_25F4F4",
           "ea": "0x25f4f4",
           "segment": ".text",
@@ -963,13 +802,6 @@
           "ea": "0x25ffe8",
           "segment": ".text",
           "size": 104
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_260050",
-          "ea": "0x260050",
-          "segment": ".text",
-          "size": 596
         },
         {
           "category": "freetype_static_internal",
@@ -1399,7 +1231,7 @@
           "size": 2220
         }
       ],
-      "total_bytes": 90960
+      "total_bytes": 87084
     },
     {
       "category": "init_or_fini_array_entry",
@@ -3365,11 +3197,11 @@
   "category_summary": [
     {
       "category": "freetype_static_internal",
-      "count": 144,
+      "count": 120,
       "evidence": "The region is bracketed by the archive I/O helpers and the FreeType to bzip2 transition.",
-      "first_ea": "0x250e94",
+      "first_ea": "0x252e90",
       "last_ea": "0x27336c",
-      "total_bytes": 90960
+      "total_bytes": 87084
     },
     {
       "category": "init_or_fini_array_entry",
@@ -3423,17 +3255,137 @@
   "database": {
     "bytes": 61286570,
     "close_reopen_verified": false,
-    "default_sub_function_count": 418,
+    "default_sub_function_count": 394,
     "format": "packed IDA 9.3 database",
     "function_count": 11297,
-    "path": "analysis/libqplay_translated_from_active_v8.i64",
-    "sha256": "6f489cc9ab1b922e3c2e77747a1295b1ee49020fb38c1bebb84bc2a7271bd397"
+    "path": "analysis/libqplay_translated_from_active_v9.i64",
+    "sha256": "860cd26c43c0c4a98e7939c5bbe7c02fa92c35662d11e86eb8e7a84bc64b116f"
   },
   "ida_reclassified_functions": [
     {
       "ea": "0x1f94fc",
       "new_name": "j_TCachedStream_get_minfilecachesize",
       "reason": "IDA reclassified the four-byte unconditional branch veneer as a named thunk to TCachedStream_get_minfilecachesize when the persisted translation copy was rebuilt."
+    },
+    {
+      "ea": "0x250e94",
+      "new_name": "destroy_size",
+      "reason": "The cleanup body matches FreeType 2.3.6 destroy_size: it runs the generic and driver finalizers, frees size->internal, and then frees the size object."
+    },
+    {
+      "ea": "0x25e320",
+      "new_name": "tt_get_kerning",
+      "reason": "The helper initializes the kerning vector and delegates the x coordinate to the TrueType SFNT service, matching the pinned FreeType 2.3.6 tt_get_kerning implementation."
+    },
+    {
+      "ea": "0x25e35c",
+      "new_name": "tt_face_get_location",
+      "reason": "The loca-table offset and short/long format handling match the pinned FreeType 2.3.6 tt_face_get_location implementation."
+    },
+    {
+      "ea": "0x25e4e4",
+      "new_name": "tt_size_init",
+      "reason": "The size initialization fields and reset values match the pinned FreeType 2.3.6 tt_size_init implementation."
+    },
+    {
+      "ea": "0x25e504",
+      "new_name": "TT_MulFix14",
+      "reason": "The split multiply, 0x2000 rounding, 14-bit shift, and sign restore match the pinned FreeType 2.3.6 TT_MulFix14 helper."
+    },
+    {
+      "ea": "0x25e580",
+      "new_name": "Direct_Move_X",
+      "reason": "The x-axis point movement and touch flag behavior match the pinned FreeType 2.3.6 Direct_Move_X interpreter callback."
+    },
+    {
+      "ea": "0x25e5b0",
+      "new_name": "Direct_Move_Y",
+      "reason": "The y-axis point movement and touch flag behavior match the pinned FreeType 2.3.6 Direct_Move_Y interpreter callback."
+    },
+    {
+      "ea": "0x25e5e4",
+      "new_name": "Direct_Move_Orig_X",
+      "reason": "The original-coordinate x movement behavior matches the pinned FreeType 2.3.6 Direct_Move_Orig_X callback."
+    },
+    {
+      "ea": "0x25e5fc",
+      "new_name": "Direct_Move_Orig_Y",
+      "reason": "The original-coordinate y movement behavior matches the pinned FreeType 2.3.6 Direct_Move_Orig_Y callback."
+    },
+    {
+      "ea": "0x25e618",
+      "new_name": "Round_None",
+      "reason": "The signed compensation and overflow clamps match the pinned FreeType 2.3.6 Round_None implementation."
+    },
+    {
+      "ea": "0x25e640",
+      "new_name": "Project",
+      "reason": "The projection-vector fixed-point dot product matches the pinned FreeType 2.3.6 Project interpreter callback."
+    },
+    {
+      "ea": "0x25e6cc",
+      "new_name": "Project_x",
+      "reason": "The callback returns its x input and occupies the projection slot selected by Compute_Funcs, matching FreeType 2.3.6."
+    },
+    {
+      "ea": "0x25e6d4",
+      "new_name": "Project_y",
+      "reason": "The callback returns its y input and occupies the projection slot selected by Compute_Funcs, matching FreeType 2.3.6."
+    },
+    {
+      "ea": "0x25e6dc",
+      "new_name": "Ins_NPUSHW",
+      "reason": "The count check, signed big-endian word reads, and instruction state updates match the pinned FreeType 2.3.6 Ins_NPUSHW."
+    },
+    {
+      "ea": "0x25e770",
+      "new_name": "Ins_PUSHW",
+      "reason": "The opcode-derived word count and signed stream reads match the pinned FreeType 2.3.6 Ins_PUSHW implementation."
+    },
+    {
+      "ea": "0x25e7f8",
+      "new_name": "Ins_GC",
+      "reason": "The point validation, projection choice, and current-coordinate write match the pinned FreeType 2.3.6 Ins_GC handler."
+    },
+    {
+      "ea": "0x25e890",
+      "new_name": "Ins_SCFS",
+      "reason": "The projection, freedom-vector move, and twilight copy behavior match the pinned FreeType 2.3.6 Ins_SCFS handler."
+    },
+    {
+      "ea": "0x25e950",
+      "new_name": "Ins_GETINFO",
+      "reason": "The version and graphics-state feature bits match the pinned FreeType 2.3.6 Ins_GETINFO handler."
+    },
+    {
+      "ea": "0x25e9a8",
+      "new_name": "Ins_MD",
+      "reason": "The two-point validation, dual projection, scaling, and stack result match the pinned FreeType 2.3.6 Ins_MD handler."
+    },
+    {
+      "ea": "0x25eaf8",
+      "new_name": "tt_size_request",
+      "reason": "The metrics request and scaling path match the pinned FreeType 2.3.6 tt_size_request driver callback and its class-table slot."
+    },
+    {
+      "ea": "0x25ec84",
+      "new_name": "Direct_Move_Orig",
+      "reason": "The freedom-vector movement of original coordinates without touch flags matches the pinned FreeType 2.3.6 Direct_Move_Orig."
+    },
+    {
+      "ea": "0x25ed14",
+      "new_name": "Direct_Move",
+      "reason": "The freedom-vector movement of current coordinates with touch flags matches the pinned FreeType 2.3.6 Direct_Move."
+    },
+    {
+      "ea": "0x25edd0",
+      "new_name": "Ins_ISECT",
+      "reason": "The five-point intersection math, discriminant fallback, and touch flags match the pinned FreeType 2.3.6 Ins_ISECT handler."
+    },
+    {
+      "ea": "0x260050",
+      "new_name": "Compute_Funcs",
+      "reason": "The projection and movement callback selection, including the unpatented-hinting branch, matches the pinned FreeType 2.3.6 Compute_Funcs implementation."
     },
     {
       "ea": "0xe01a0",
@@ -3458,7 +3410,7 @@
     "unresolved_default_sub_function_count": 488
   },
   "purpose": "Account for every default sub_ function left in the persisted IDA translation copy without inventing source names.",
-  "remaining_default_sub_function_count": 418,
+  "remaining_default_sub_function_count": 394,
   "residual_default_sub_functions": [
     {
       "category": "plt0_resolver",
@@ -4337,13 +4289,6 @@
     },
     {
       "category": "freetype_static_internal",
-      "current_ida_name": "sub_250E94",
-      "ea": "0x250e94",
-      "segment": ".text",
-      "size": 104
-    },
-    {
-      "category": "freetype_static_internal",
       "current_ida_name": "sub_252E90",
       "ea": "0x252e90",
       "segment": ".text",
@@ -4680,160 +4625,6 @@
     },
     {
       "category": "freetype_static_internal",
-      "current_ida_name": "sub_25E320",
-      "ea": "0x25e320",
-      "segment": ".text",
-      "size": 60
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25E35C",
-      "ea": "0x25e35c",
-      "segment": ".text",
-      "size": 248
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25E4E4",
-      "ea": "0x25e4e4",
-      "segment": ".text",
-      "size": 32
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25E504",
-      "ea": "0x25e504",
-      "segment": ".text",
-      "size": 80
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25E580",
-      "ea": "0x25e580",
-      "segment": ".text",
-      "size": 48
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25E5B0",
-      "ea": "0x25e5b0",
-      "segment": ".text",
-      "size": 52
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25E5E4",
-      "ea": "0x25e5e4",
-      "segment": ".text",
-      "size": 24
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25E5FC",
-      "ea": "0x25e5fc",
-      "segment": ".text",
-      "size": 28
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25E618",
-      "ea": "0x25e618",
-      "segment": ".text",
-      "size": 40
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25E640",
-      "ea": "0x25e640",
-      "segment": ".text",
-      "size": 140
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25E6CC",
-      "ea": "0x25e6cc",
-      "segment": ".text",
-      "size": 8
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25E6D4",
-      "ea": "0x25e6d4",
-      "segment": ".text",
-      "size": 8
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25E6DC",
-      "ea": "0x25e6dc",
-      "segment": ".text",
-      "size": 148
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25E770",
-      "ea": "0x25e770",
-      "segment": ".text",
-      "size": 136
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25E7F8",
-      "ea": "0x25e7f8",
-      "segment": ".text",
-      "size": 152
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25E890",
-      "ea": "0x25e890",
-      "segment": ".text",
-      "size": 192
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25E950",
-      "ea": "0x25e950",
-      "segment": ".text",
-      "size": 88
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25E9A8",
-      "ea": "0x25e9a8",
-      "segment": ".text",
-      "size": 336
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25EAF8",
-      "ea": "0x25eaf8",
-      "segment": ".text",
-      "size": 396
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25EC84",
-      "ea": "0x25ec84",
-      "segment": ".text",
-      "size": 144
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25ED14",
-      "ea": "0x25ed14",
-      "segment": ".text",
-      "size": 188
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25EDD0",
-      "ea": "0x25edd0",
-      "segment": ".text",
-      "size": 628
-    },
-    {
-      "category": "freetype_static_internal",
       "current_ida_name": "sub_25F4F4",
       "ea": "0x25f4f4",
       "segment": ".text",
@@ -4908,13 +4699,6 @@
       "ea": "0x25ffe8",
       "segment": ".text",
       "size": 104
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_260050",
-      "ea": "0x260050",
-      "segment": ".text",
-      "size": 596
     },
     {
       "category": "freetype_static_internal",

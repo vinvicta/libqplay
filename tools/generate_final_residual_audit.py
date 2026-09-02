@@ -89,7 +89,7 @@ def build_report(inventory_path: Path, profile_path: Path | None = None) -> dict
         "schema": "libqplay.ida-final-residual-audit.v1",
         "tool": "tools/generate_final_residual_audit.py",
         "tool_version": 1,
-        "analysis_date": "2026-08-30",
+        "analysis_date": "2026-09-01",
         "analysis_scope": "original ARM64 libqplay.so translated IDA inventory",
         "network_contacted": False,
         "inventory": {

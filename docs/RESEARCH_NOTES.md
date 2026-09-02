@@ -67,13 +67,15 @@ followed by name. Important ARM64 addresses include:
 The saved IDA database was later brought to the same state as the public
 translation plan. The active base database was copied, the callback and
 script-table boundaries were applied, and the reviewed application, CyaSSL,
-and bundled-library aliases were added. The final copy has 11,297 functions,
-11,297 named function heads, and 418 remaining default `sub_` entries. The
-read-only verifier returned zero failures after the final GPC helper pass. The
-copy hash and pass breakdown are in
+and bundled-library aliases were added. A pinned FreeType 2.3.6 source pass
+then matched 24 more functions, including the TrueType interpreter callbacks
+and instruction handlers. The final copy has 11,297 functions, 11,297 named
+function heads, and 394 remaining default `sub_` entries. The read-only
+verifier returned zero failures after the source-match pass. The copy hash and
+pass breakdown are in
 `artifacts/ida_translation_verification_20260830.json`.
 
-The final scope check keeps that count honest. None of the 418 default names
+The final scope check keeps that count honest. None of the 394 default names
 is in the `0x240000` through `0x246fff` Android bridge range. None of the
 1,779 unique callback addresses in the script-table inventory currently has a
 default name, including the callbacks added during the Facebook, billing,
@@ -84,6 +86,39 @@ wrappers that clear or initialize global `TString`, `TStringList`, or
 the selected socket, file, process, or update imports. The IDA-generated
 check is preserved in
 `artifacts/ida_active_translation_scope_check_20260830.json`.
+
+## FreeType source matching
+
+The remaining default-name queue was not treated as an invitation to label
+every routine by proximity. A local shallow checkout of the official
+FreeType 2.3.6 tree was compared with the active ARM64 pseudocode. The
+checkout is pinned to commit
+`6174e17cf7cb3eef826d95c96757dbb0feea7bdb` and the source files and line
+anchors are listed in
+`artifacts/ida_freetype_source_matches_20260901.json`.
+
+The comparison matched 24 functions exactly enough to apply the upstream
+names. The strongest cluster is the TrueType interpreter: `Compute_Funcs`
+selects projection and movement callbacks, `Project`, `Project_x`, and
+`Project_y` implement the projection choices, and `Direct_Move`,
+`Direct_Move_Orig`, and their axis-specific variants update glyph coordinates.
+The instruction handlers `Ins_NPUSHW`, `Ins_PUSHW`, `Ins_GC`, `Ins_SCFS`,
+`Ins_GETINFO`, `Ins_MD`, and `Ins_ISECT` then line up with the surrounding
+interpreter dispatch table and error paths.
+
+The other matches cover fixed-point math (`TT_MulFix14` and `Round_None`),
+TrueType size and font-table operations (`tt_size_init`, `tt_size_request`,
+`tt_get_kerning`, and `tt_face_get_location`), and the generic `destroy_size`
+cleanup routine. The callback assignments in `Compute_Funcs`, the driver class
+slot for `tt_size_request`, and the object field offsets in `destroy_size`
+provided useful checks beyond a superficial instruction comparison.
+
+This pass reduced the default-name count from 418 to 394 and the FreeType
+bucket from 144 to 120. Two diagnostic string sanitizers remain deliberately
+address-based because their exact upstream helper names are not established.
+They are covered by the current residual semantic review. The result is a
+smaller, more honest queue: source-backed names are visible in IDA, while
+unmatched code remains easy to revisit.
 
 ## Android lifecycle and the first network checkpoint
 

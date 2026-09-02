@@ -14,18 +14,18 @@ handshake is not the same thing as a successful game login.
 ## Current status
 
 The symbol pass is complete for every name retained in the ELF export. The
-final ARM64 IDA copy also contains the reviewed callback, script-table, and
-static-library aliases. The counts are:
+final ARM64 IDA copy also contains the reviewed callback, script-table,
+static-library, and exact FreeType source aliases. The counts are:
 
 | Kind | Count |
 | --- | ---: |
 | Retained ELF symbols translated | 8,601 |
-| Additional reviewed function aliases | 1,252 |
+| Additional reviewed function aliases | 1,276 |
 | IDA functions in the saved copy | 11,297 |
-| Remaining default `sub_` functions | 418 |
+| Remaining default `sub_` functions | 394 |
 
 The retained ELF count includes 4,714 implementation functions, 3,183 PLT
-thunks, 199 jump thunks, and 505 data symbols. The 418 remaining `sub_`
+thunks, 199 jump thunks, and 505 data symbols. The 394 remaining `sub_`
 entries are code that IDA discovered without a preserved source symbol. They
 are kept address-based rather than being assigned guesses. The compact
 verification record is `artifacts/ida_translation_verification_20260830.json`.
@@ -234,10 +234,13 @@ The compact record is
 * `artifacts/original_dependency_provenance_20260830.json` records the exact
   bundled zlib, bzip2, and FreeType version evidence, compression callsites,
   font paths, and conservative dependency findings.
+* `artifacts/ida_freetype_source_matches_20260901.json` records 24 exact
+  FreeType 2.3.6 source matches with address, size, xref, and source-line
+  evidence.
 * `artifacts/original_residual_semantic_review_20260830.json` records the
-  address-level behavior of selected unnamed FreeType and TrueType helpers.
-  It complements the complete residual address audit without assigning
-  speculative source names.
+  address-level behavior of the two remaining selected unnamed FreeType
+  diagnostic helpers. It complements the complete residual address audit
+  without assigning speculative source names.
 * `artifacts/original_android_lifecycle_review_20260830.json` records the
   Activity, GLThread, renderer, and ARM64 JNI startup and pause boundaries.
 * `artifacts/original_intent_launch_review_20260830.json` records the Android

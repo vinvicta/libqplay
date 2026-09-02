@@ -129,7 +129,7 @@ def main() -> None:
     result = {
         "schema": "libqplay.ida-active-translation-scope-check.v1",
         "tool": "tools/ida_export_active_translation_scope_check.py",
-        "analysis_date": "2026-08-30",
+        "analysis_date": "2026-09-01",
         "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
         "database": {
             "input_path": idaapi.get_input_file_path(),
@@ -161,12 +161,12 @@ def main() -> None:
             },
         },
         "interpretation": [
-            "The 418 remaining default sub_ functions are outside the Android bridge callback region.",
+            "The 394 remaining default sub_ functions are outside the Android bridge callback region.",
             "The 23 default functions in the broader application-core range are short static-state wrappers around TString, TStringList, or TGraalVar objects; their decompiled bodies do not contain the selected socket, file, process, or update boundary calls.",
             "Every address in the 1779-entry script callback inventory has a non-default active IDA name, including the callbacks reviewed in the focused Android passes.",
         ],
         "status": "ok"
-        if len(default_rows) == 418
+        if len(default_rows) == 394
         and not android_defaults
         and not callback_defaults
         and not boundary_edges

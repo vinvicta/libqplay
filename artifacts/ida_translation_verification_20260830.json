@@ -13,13 +13,13 @@
     "retained_elf_symbols": 8601,
     "script_table_callbacks": 906,
     "application_and_engine_role_aliases": 28,
-    "reviewed_function_names": 1252
+    "reviewed_function_names": 1276
   },
   "database": {
     "source_idb": "GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so.i64",
-    "saved_copy": "analysis/libqplay_translated_from_active_v8.i64",
+    "saved_copy": "analysis/libqplay_translated_from_active_v9.i64",
     "saved_copy_bytes": 61286570,
-    "saved_copy_sha256": "6f489cc9ab1b922e3c2e77747a1295b1ee49020fb38c1bebb84bc2a7271bd397",
+    "saved_copy_sha256": "860cd26c43c0c4a98e7939c5bbe7c02fa92c35662d11e86eb8e7a84bc64b116f",
     "saved_copy_reopen_verified": false
   },
   "passes": [
@@ -60,21 +60,26 @@
       "name": "GPC residual helper review",
       "renamed": 3,
       "failures": 0
+    },
+    {
+      "name": "exact FreeType 2.3.6 source matches",
+      "renamed": 24,
+      "failures": 0
     }
   ],
   "verification": {
-    "default_sub_count": 418,
+    "default_sub_count": 394,
     "failure_count": 0,
     "function_count": 11297,
     "function_heads_with_names": 11297,
     "status": "ok",
-    "verified_reviewed_name_count": 1252
+    "verified_reviewed_name_count": 1276
   },
   "notes": [
-    "The saved copy was produced from the active ARM64 IDA database after the complete reviewed pass.",
+    "The saved copy was produced from the active ARM64 IDA database after the complete reviewed pass and the exact FreeType 2.3.6 source-match pass.",
     "The saved copy was refreshed during the Android device and media pass after naming the display metrics, video rectangle state, and virtual-keyboard control.",
-    "The post-GPC saved copy has not yet been independently reopened; its active database names passed the read-only verifier.",
-    "The remaining 418 entries are IDA-created functions without preserved source names. They remain addressable and were not given speculative source names.",
+    "The post-source-match saved copy has not yet been independently reopened; its active database names passed the read-only verifier.",
+    "The remaining 394 entries are IDA-created functions without preserved source names. They remain addressable and were not given speculative source names.",
     "The verification and local replay steps contacted no live service."
   ]
 }
