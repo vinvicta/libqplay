@@ -263,6 +263,10 @@ The compact record is
 * `artifacts/jpeg_decoder_security_review_20260902.json` records the JPEG
   decoder-dimension path into the shared bitmap allocator and scanline copy,
   including a conditional 32-bit RGB size-wrap candidate.
+* `artifacts/compression_buffer_security_review_20260902.json` records the
+  shared zlib and bzip2 buffer growth loop, the signed-size stall witness, and
+  the process-wide high-water behavior outside the nominal 4 MiB
+  decompression retry policy.
 * `artifacts/static_library_role_audit_20260901.json` records 30 high-
   confidence bundled-library role aliases, including the final bzip2 stream
   callbacks.

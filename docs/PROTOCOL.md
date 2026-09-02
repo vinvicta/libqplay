@@ -447,6 +447,34 @@ TClient_manageDataByScript         0x1e7bf0
 `tools/decode_game_handshake_capture.py` keeps one RC4 state per direction
 and decodes captured frames without printing login fields by default.
 
+### Compression and receive-buffer limits
+
+The NewGraal parser at `0x1fe31c` sends selector 1 payloads through the zlib
+wrapper at `0xe4fc8` and selector 2 payloads through the bzip2 wrapper at
+`0xe5270`. The legacy parser at `0x1fc598` uses the same wrappers for modes 3
+and 4, and modes 5 and 6 respectively. Both automatic wrappers use the
+process-wide buffer owned by `TCompression_getCompressionBuffer_int` at
+`0xe4dd4`. They start at 64 KiB or the existing high-water capacity and retry
+only while the next capacity is at most 4 MiB.
+
+That 4 MiB check is not a complete process-wide limit. Compression first asks
+for `input_length + 1024`, and the shared helper rounds that request to a power
+of two without an upper bound. An input length of `4194305` therefore requests
+`4195329` bytes and can raise the shared capacity to 8 MiB. The next automatic
+decompression begins from that 8 MiB value. A separate signed W32 witness at
+`0x40000001` reaches zero and stalls in the helper's doubling loop. These
+static findings are recorded as `COMP-001` and `COMP-002` in
+`artifacts/compression_buffer_security_review_20260902.json`.
+
+The socket read size is only a chunk size. `TSocketConnection_read_void` reads
+at most 8192 bytes per call, while `TGraalConnection_read_void` appends those
+bytes to the protocol string until the six-byte header and its declared frame
+are present. The reviewed parser has no smaller aggregate receive or declared
+decompressed-size budget. The compression findings and the framing finding
+therefore describe related but separate limits: compressed bytes can
+accumulate in the protocol string, while decoded output uses the shared
+compression buffer and is then appended to another string.
+
 ## 7. Inbound handler table
 
 The first interpretation of `setInDataHandlers` was wrong. The connector
