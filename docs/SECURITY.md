@@ -756,6 +756,27 @@ pool between the preserved `jpeg_fdct_float` and `jpeg_fdct_ifast` symbols.
 These corrections improve attribution but do not remove the missing image
 resource budgets described above.
 
+The GIF-specific comparison is recorded in
+`artifacts/gif_decoder_security_review_20260902.json`. The LZW helper has
+visible checks for a full pixel stack, 12-bit dictionary indices, bounded
+prefix walks, and dictionary growth beyond the `RunningCode - 2` table limit.
+That makes the two 2018 giflib dictionary-index CVEs useful comparison points,
+not confirmed APK assignments. [CVE-2018-11489](https://nvd.nist.gov/vuln/detail/CVE-2018-11489)
+describes an unchecked `CrntCode` index, while
+[CVE-2018-11490](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-11490)
+describes an unchecked `Private->RunningCode - 2` index. The exact giflib
+release in this APK remains unknown and no malformed-image fuzzing was done.
+
+The high-level `DGifSlurp` function at `0x2ae6ec` is a separate finding. At
+`0x2ae814` it multiplies width and height in 32-bit arithmetic, sign-extends
+that result for `reallocarray` at `0x2ae824`, and uses another 32-bit
+width-times-row product at `0x2ae8b4`. The path has no application pixel or
+cumulative decoded-byte budget. This is tracked as `GIF-003`, an availability
+and memory-pressure hardening item, rather than a demonstrated out-of-bounds
+write. The zero-height divide-by-zero described by
+[CVE-2019-15133](https://nvd.nist.gov/vuln/detail/CVE-2019-15133) was not
+assigned to this binary because that exact divider state was not observed.
+
 The strongest finding is a static memory-pressure and integer-wrap boundary,
 not a demonstrated remote crash. A peer would first need to cross the
 connector, game protocol, cache, and resource gates. A safe repair should use
@@ -790,11 +811,13 @@ conditional file-download path when a relative font is missing locally.
 
 This creates three conservative review items. The old zlib, bzip2, IJG, and
 giflib code is dependency exposure, not proof of a particular exploitable CVE
-because vendor backports and exact source revisions were not diffed. Resource-backed
-font parsing reaches FreeType 2.3.6 without a separately established font-byte
-budget. The automatic decompression output buffer starts at 64 KiB and grows
-through 4 MiB, but that per-call behavior does not cap compressed input,
-shared stream accumulation, or total native resource memory.
+because vendor backports and exact source revisions were not diffed. The GIF
+comparison narrows two historical dictionary-index concerns but does not
+replace fuzzing, and `GIF-003` remains an independent dimension-budget gap.
+Resource-backed font parsing reaches FreeType 2.3.6 without a separately
+established font-byte budget. The automatic decompression output buffer starts
+at 64 KiB and grows through 4 MiB, but that per-call behavior does not cap
+compressed input, shared stream accumulation, or total native resource memory.
 
 The upstream [zlib 1.2.x ChangeLog](https://raw.githubusercontent.com/madler/zlib/v1.2.12/ChangeLog)
 records later inflate validation fixes, which gives the source-diff pass a

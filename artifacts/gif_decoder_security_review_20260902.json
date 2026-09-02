@@ -1,0 +1,153 @@
+{
+  "analysis_date": "2026-09-02",
+  "analysis_scope": "static comparison of the embedded giflib-style GIF decoder and its DGifSlurp allocation path",
+  "artifact": "gif_decoder_security_review_20260902",
+  "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+  "functions": {
+    "high_level_decoder": {
+      "address": "0x2ae6ec",
+      "ida_name": "DGifSlurp",
+      "size": 644,
+      "source_role": "DGifSlurp"
+    },
+    "lzw_line_decoder": {
+      "address": "0x2acb20",
+      "callers": [
+        "DGifGetLine",
+        "DGifGetPixel"
+      ],
+      "ida_name": "giflib_DGifDecompressLine",
+      "size": 1508,
+      "source_role": "DGifDecompressLine"
+    }
+  },
+  "fuzzing_performed": false,
+  "inventory": {
+    "path": "/home/v/Desktop/graal-decomp/analysis/libqplay.function_inventory.json",
+    "row_count": 11296,
+    "sha256": "c5e9c2e0b1c3e6cffa061ad7b2212815d54cc62e49ab0a3c6ba1cc9ea54b1844"
+  },
+  "network_contacted": false,
+  "not_claimed": [
+    "That the APK contains a uniquely identified giflib release.",
+    "That the reviewed CVEs are exploitable or absent under every malformed GIF input.",
+    "That GIF-003 is a demonstrated out-of-bounds write."
+  ],
+  "observed_lzw_checks": [
+    {
+      "addresses": [
+        "0x2acb64"
+      ],
+      "id": "LZW-STACKPTR-BOUND",
+      "instruction": "B.GT loc_2ACC3C after comparing StackPtr with 0xFFF",
+      "interpretation": "The saved pixel stack is rejected before it is drained when its index is above the 4095-entry table."
+    },
+    {
+      "addresses": [
+        "0x2acd08",
+        "0x2acd10",
+        "0x2acd14"
+      ],
+      "id": "LZW-RUNNING-CODE-CAP",
+      "instruction": "CMP W3, #0x1000; B.GT loc_2ACD40; ADD W3, W3, #1",
+      "interpretation": "The input loop stops increasing RunningCode once it is above 4096. In the observed control flow this keeps the later RunningCode - 2 table index at or below 4095."
+    },
+    {
+      "addresses": [
+        "0x2ace98",
+        "0x2aceb4",
+        "0x2aceb8",
+        "0x2aced8",
+        "0x2acedc"
+      ],
+      "id": "LZW-CODE-INDEX-BOUNDS",
+      "instruction": "CMP index, #0xFFF followed by B.GT before table loads",
+      "interpretation": "The dictionary and suffix accesses in the main trace loop have explicit upper-bound branches before dependent loads."
+    },
+    {
+      "addresses": [
+        "0x2ad008",
+        "0x2ad00c",
+        "0x2ad024",
+        "0x2ad028",
+        "0x2ad02c",
+        "0x2ad070",
+        "0x2ad074",
+        "0x2ad08c",
+        "0x2ad090",
+        "0x2ad098"
+      ],
+      "id": "LZW-CHAIN-BOUNDS",
+      "instruction": "0xFFF checks and a 0x1000 iteration counter surround Prefix walks",
+      "interpretation": "Malformed dictionary chains are bounded by both an index check and a finite walk count before Prefix is read again."
+    },
+    {
+      "addresses": [
+        "0x2aceac",
+        "0x2aceb0",
+        "0x2acee0",
+        "0x2acee4"
+      ],
+      "id": "LZW-STACK-WRITE-BOUNDS",
+      "instruction": "CMP StackPtr, #0xFFE followed by B.GT before stack writes",
+      "interpretation": "The decoder rejects a full pixel stack before adding more decoded suffix bytes."
+    }
+  ],
+  "observed_slurp_hardening_gap": {
+    "addresses": [
+      "0x2ae808",
+      "0x2ae80c",
+      "0x2ae814",
+      "0x2ae824",
+      "0x2ae8b4",
+      "0x2ae8b8"
+    ],
+    "assessment": "The path has no application pixel or cumulative decoded-byte budget. Its 32-bit arithmetic should be treated as a hardening gap even though this static pass does not demonstrate a memory corruption primitive.",
+    "id": "GIF-003",
+    "instruction": "DGifSlurp multiplies width and height in W20, sign-extends the 32-bit result for reallocarray, and separately multiplies width by a row index in W3 before sign-extending the offset.",
+    "severity": "availability and memory-pressure risk"
+  },
+  "overall_assessment": "The current ARM64 GIF LZW helper is not statically assigned any of the three reviewed upstream CVEs. Its visible bounds checks make the two 2018 dictionary-index patterns less likely to be present, but the exact giflib release is unknown and no malformed-image fuzzing was performed. GIF-003 remains an independent resource and integer-arithmetic hardening item.",
+  "schema": "libqplay.gif-decoder-security-review.v1",
+  "source_comparison_references": [
+    {
+      "description": "Pinned giflib-style DGifDecompressLine role reference",
+      "url": "https://android.googlesource.com/platform/external/giflib/+/9aef3ea079a57c98a9207f8c3b95a5dc08ee74b5/dgif_lib.c#669"
+    },
+    {
+      "description": "Older public decoder source showing the historical unchecked RunningCode - 2 writes",
+      "url": "https://android.googlesource.com/platform/external/giflib/+/froyo/dgif_lib.c#838"
+    },
+    {
+      "description": "giflib NEWS entry recording the CVE-2018-11490 fix in 5.1.5",
+      "url": "https://github.com/aseprite/giflib/blob/master/NEWS#L2464"
+    }
+  ],
+  "tool": "tools/generate_gif_decoder_security_review.py",
+  "tool_version": 1,
+  "upstream_context": [
+    {
+      "affected_versions": "giflib 3.0 through 3.1.1 are listed by NVD",
+      "comparison": "The current body has explicit 0xFFF checks around the observed dependent dictionary loads. The exact giflib release and malformed-input behavior remain unproven.",
+      "description": "NVD describes a heap buffer overflow in DGifDecompressLine caused by an unchecked CrntCode array index.",
+      "id": "CVE-2018-11489",
+      "reference": "https://nvd.nist.gov/vuln/detail/CVE-2018-11489",
+      "status": "conditional_not_mapped"
+    },
+    {
+      "affected_versions": "giflib 3.0 through 3.1.1 are associated with the record",
+      "comparison": "The current body caps RunningCode growth at the 0x1000 boundary and caps the pixel stack before writes. This is evidence against a direct copy of the vulnerable pattern, not proof that all decoder states are safe.",
+      "description": "MITRE describes a heap buffer overflow in DGifDecompressLine caused by an unchecked Private->RunningCode - 2 index.",
+      "id": "CVE-2018-11490",
+      "reference": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-11490",
+      "status": "conditional_not_mapped"
+    },
+    {
+      "comparison": "No direct zero-height divider was identified in the current DGifSlurp body. The body does contain the separate unchecked 32-bit dimension multiplication recorded as GIF-003.",
+      "description": "NVD describes a divide-by-zero in DGifSlurp for a malformed GIF with an ImageSize height of zero in GIFLIB before 2019-02-16.",
+      "id": "CVE-2019-15133",
+      "reference": "https://nvd.nist.gov/vuln/detail/CVE-2019-15133",
+      "status": "conditional_not_mapped"
+    }
+  ]
+}

@@ -108,6 +108,9 @@ Three conservative findings are recorded in the machine-readable export:
   accepted protocol and resource paths. Vendor backports have not been
   reconstructed, so this is not a claim that a specific CVE is exploitable in
   this APK.
+  The focused GIF comparison records visible LZW bounds checks and leaves
+  CVE-2018-11489, CVE-2018-11490, and CVE-2019-15133 as conditional rather
+  than assigning them to the binary.
 * `DEP-002` covers resource-backed font data reaching FreeType 2.3.6. Native
   font parsing deserves its own input and allocation budget, but arbitrary
   server control over the font option has not been established.

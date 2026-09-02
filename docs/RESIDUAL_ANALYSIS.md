@@ -66,6 +66,28 @@ links, and emits a line of decoded pixels. It is named
 is intentionally left open because the available evidence establishes the
 role, not a unique release number.
 
+The focused security comparison is in
+`artifacts/gif_decoder_security_review_20260902.json`. The LZW helper visibly
+rejects an overfull pixel stack, stops growing the dictionary at the 12-bit
+boundary, checks dictionary indices before the dependent loads, and limits
+prefix-chain walks. Those checks are evidence against a direct copy of the
+unchecked `CrntCode` and `RunningCode - 2` patterns described by
+[CVE-2018-11489](https://nvd.nist.gov/vuln/detail/CVE-2018-11489) and
+[CVE-2018-11490](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-11490),
+but they do not identify the exact giflib release or replace malformed-input
+testing.
+
+The high-level `DGifSlurp` body at `0x2ae6ec` remains a separate hardening
+concern. It multiplies image width and height in 32-bit registers before
+calling `reallocarray`, and it multiplies width by a row index again when
+forming decoded-frame offsets. There is no application pixel or cumulative
+decoded-byte budget in this path. This is recorded as `GIF-003`, an
+availability and memory-pressure risk, not as a demonstrated memory
+corruption. The zero-height divide-by-zero described by
+[CVE-2019-15133](https://nvd.nist.gov/vuln/detail/CVE-2019-15133) was not
+assigned to this APK because the current `DGifSlurp` body does not show that
+direct divider state and the embedded giflib release is unknown.
+
 One apparent function at `0x2ac400` was not code. The preserved ELF symbol
 `jpeg_fdct_float` ends at `0x2ac3fc`, and the preserved
 `jpeg_fdct_ifast` function begins at `0x2ac440`. The bytes from `0x2ac3fc`
