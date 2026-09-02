@@ -1396,12 +1396,22 @@ and connecting-window transition all run in the bounded local test.
 
 One negative control is worth preserving. A test build routed packet 59
 directly to the apparent x86_64 parser block at `0x2096f0`, bypassing the
-directly to the apparent x86_64 parser block. That build did not reproduce the
-working exchange. It changed the first connection to ordinary packet 23
-requests and stopped before the normal second-connection sequence. The direct
-jump is therefore rejected as a repair. The working responder uses packet 102
-for a complete file response and can also emit the native 68, 84, 102, 69
+normal packet-102 file path. That build did not reproduce the working
+exchange. It changed the first connection to ordinary packet 23 requests and
+stopped before the normal second-connection sequence. The direct jump is
+therefore rejected as a repair. The working responder uses packet 102 for a
+complete file response and can also emit the native 68, 84, 102, 69
 large-file sequence.
+
+A second negative control returned a 49-byte package containing only the
+`GRPKG001` header and three metadata fields. The client accepted the packet
+sequence, then crashed in the x86_64 diagnostic build at
+`TScriptSpace::receiveEvent` while creating the script space. The stack passed
+through `invokeCreatedEvent`, `TScriptSpace`, `TGraalVar::createScriptSpace`,
+and `TClient::processIncomingPackages`. This establishes that the native
+script setup path assumes required package records are present. It is a local
+synthetic-fixture result, not a live-server exploit claim. The compact private
+hash record is `artifacts/synthetic_basepackage_crash_20260902.json`.
 
 The public game responder accepts `--frame-after-client` and
 `--frame-after-map`. The first is useful for event-driven packet experiments.

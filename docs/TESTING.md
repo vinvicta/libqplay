@@ -236,11 +236,28 @@ outgoing key:
 ```bash
 python3 tools/decode_game_handshake_capture.py \
   /tmp/graal-handshake-2.in.bin \
-  --key-hex 0123456789abcdef
+  --key-hex 30313233343536373839616263646566
 ```
 
 The decoder prints frame metadata and hashes by default. Use the option that
 explicitly permits login-field output only on private captures.
+
+## Malformed base-package negative control
+
+The base package is not just a header. A local test that returned only
+`GRPKG001`, `NAME`, `VERSION`, and `PLATFORM` reached the script-space setup
+path and then crashed the x86_64 diagnostic build in
+`TScriptSpace::receiveEvent`. The native stack was
+`TScriptSpace::receiveEvent` -> `invokeCreatedEvent` -> `TScriptSpace` ->
+`TGraalVar::createScriptSpace` -> `TClient::processIncomingPackages`.
+
+This is a useful fixture warning and a conditional robustness finding. It
+does not prove that the production service can deliver the same bytes, that a
+live client has the same build, or that the crash is remotely reachable. Use
+a package containing the required file and script records for render tests.
+The private hashes and exact response sequence are in
+`artifacts/synthetic_basepackage_crash_20260902.json`; raw APKs, captures, and
+package bodies remain outside the repository.
 
 ## What counts as a successful test
 

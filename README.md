@@ -80,6 +80,12 @@ proves that the native client can reach a rendered world through a bounded
 loopback responder. Live endpoint availability, current package signing, and
 account authentication remain open.
 
+The unverified installed 2.2 comparison is recorded separately in
+`docs/ABI_2_2_COMPARISON.md`. It retains enough dynamic symbols for useful
+cross-version anchors, but its companion `libxposed.so` installs inline hooks
+and disables a Frida-detection path. It must not be treated as a stock 2.2
+reference.
+
 The Android lifecycle review adds an important first diagnostic checkpoint.
 The connector is downstream of the GL surface, window focus, runtime
 permission completion, and the first render frame. A compatibility dialog or
@@ -228,6 +234,8 @@ The compact record is
   live game service.
 * `docs/SECURITY.md` records the original APK and ARM64 native trust-boundary
   review.
+* `docs/ABI_2_2_COMPARISON.md` records the bounded, offline comparison with
+  the unverified installed 2.2 package.
 * `docs/DEPENDENCY_PROVENANCE.md` records the bundled compression, font, and
   image-library versions and their input paths.
 * `artifacts/original_dex_webview_review_20260830.json` records the local smali
@@ -305,6 +313,9 @@ The compact record is
 * `artifacts/cache_filename_policy_review_20260902.json` records URL-derived
   filename escaping, ordinary cache path classification, unchecked file-write
   results, URLCACHE persistence, and the resulting startup-integrity lead.
+* `artifacts/synthetic_basepackage_crash_20260902.json` records a local
+  negative control in which a metadata-only base package reached a native null
+  dereference. It contains hashes and stack metadata, not raw package data.
 * `artifacts/static_library_role_audit_20260901.json` records 30 high-
   confidence bundled-library role aliases, including the final bzip2 stream
   callbacks.

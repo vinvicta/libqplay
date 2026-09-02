@@ -1,0 +1,79 @@
+{
+  "artifact": "synthetic_basepackage_crash",
+  "date": "2026-09-02",
+  "scope": "loopback-only diagnostic replay",
+  "purpose": "Record the native failure caused by returning a metadata-only base package during a bounded local game handshake.",
+  "client": {
+    "package": "com.quattroplay.GraalClassic",
+    "version_name": "1.8",
+    "version_code": 6158,
+    "apk_sha256": "80ca2ea4da22040fb62d615d430358da1419d5578f6afb07182f0bed8b2d93e1",
+    "native_abi": "x86_64",
+    "native_library_sha256": "431715f2811da85fdfc259d27c7dec06ab56e1c2f6992243ff0f79d93989c5a0",
+    "build_notes": [
+      "private debug-signed diagnostic APK",
+      "connector and game traffic routed to loopback through ADB reverse",
+      "production endpoints and certificate policy were not contacted"
+    ]
+  },
+  "emulator": {
+    "android_api": 36,
+    "host_abi": "x86_64",
+    "execution": "native x86_64 library",
+    "game_port": 14900
+  },
+  "synthetic_package": {
+    "filename": "basepackage.gupd",
+    "size": 49,
+    "sha256": "d4b367d9f483ab15924819f4b4535725d3e5f5883e4ba0693c70955583219e9b",
+    "records": [
+      "GRPKG001",
+      "NAME basepackage",
+      "VERSION 1",
+      "PLATFORM any"
+    ],
+    "file_transfer": [68, 84, 102, 69],
+    "returned_for_repeated_request": true
+  },
+  "protocol": {
+    "initial_server_control": [178],
+    "client_stage_before_package": [253, 37, 23],
+    "outgoing_capture_size": 563,
+    "outgoing_capture_sha256": "761303a33f6bc6c490c3b419e7a1ac5fdba1f04c3ad2cc783f7d49ec3b7e339a",
+    "incoming_capture_size": 524,
+    "incoming_capture_sha256": "c3abbc895b9dbea064784f2912e99efceff018ced6ce125b1410ec1860a42551"
+  },
+  "failure": {
+    "signal": "SIGSEGV",
+    "fault_address": "0x0",
+    "thread": "GLThread",
+    "instruction_offset": "0x242246",
+    "function": "TScriptSpace::receiveEvent(TString const&, TString const&, TGraalVar*)+38",
+    "stack": [
+      "TScriptSpace::receiveEvent",
+      "TScriptSpace::invokeCreatedEvent",
+      "TScriptSpace::TScriptSpace",
+      "TGraalVar::createScriptSpace",
+      "TGraalVar::receiveEvent",
+      "TClient::processIncomingPackages",
+      "TServerList::handleClient",
+      "TAdventure::timer",
+      "GuiCanvas::prerenderFrame",
+      "TClientEnvironment::runTimers",
+      "Java_com_quattroplay_GraalClassic_Natives_QPlayLoop"
+    ]
+  },
+  "assessment": {
+    "finding": "A metadata-only package can drive the native script-space setup into a null dereference in this diagnostic build.",
+    "confidence": "local runtime",
+    "likely_cause": "The synthetic package contains no FILE or script definitions required by the normal startup graph.",
+    "not_proven": [
+      "A live server can deliver this exact package to an unmodified client.",
+      "The same crash occurs in the ARM64 build or on physical hardware.",
+      "The crash is exploitable beyond denial of service.",
+      "The package verifier accepts arbitrary metadata-only packages in production."
+    ],
+    "next_test": "Build a minimal valid package with the required script and resource records, then repeat the render replay under a debugger or tombstone capture."
+  },
+  "raw_data_policy": "Raw APKs, native files, packet captures, login fields, and package bodies remain outside the repository."
+}

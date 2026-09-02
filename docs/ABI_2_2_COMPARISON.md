@@ -1,0 +1,129 @@
+# 2.2 ABI comparison
+
+This page records a bounded, offline comparison of an installed 2.2 package
+against the 1.8 native research target. The package was pulled from a local
+Android emulator after installation. It has not been provenance-checked
+against an official release, so it must not be treated as a stock 2.2 build.
+No live endpoint was contacted.
+
+## Inputs and provenance
+
+The following hashes identify the private files used for this pass:
+
+| File | SHA-256 |
+| --- | --- |
+| Installed 2.2 APK | `45f469692cb6ee2e8d0f1529d8b0871dafdf718e2c8b6e345cb5082e40257751` |
+| 2.2 ARM64 `libqplay.so` | `45a7f97df9b40cdac6fbd42dc715bbabf3bbdb9b33876990e232133a8818941e` |
+| 2.2 ARM64 `libxposed.so` | `ba6023c42e501c9f1dae17f7d65973d09b399f4f8c1acf1e43487b1b01a50c` |
+
+The installed package record reported package ID
+`com.quattroplay.GraalClassiC`, version code `6612`, and version name `2.2`.
+The native files were extracted from that package's `arm64-v8a` directory.
+The package includes a separate `libxposed.so`, which is why this comparison
+is treated as an untrusted modified-package analysis rather than evidence
+about an official 2.2 distribution.
+
+## Manifest surface
+
+Offline manifest inspection found the following high-level surface:
+
+| Property | Observed value |
+| --- | --- |
+| Minimum SDK | 19 |
+| Target SDK | 33 |
+| Compile SDK | 33 |
+| Application class | `androidx.multidex.MultiDexApplication` |
+| Cleartext traffic | Explicitly enabled |
+| Main activity | `com.quattroplay.GraalClassic.QPlayActivity` |
+
+`QPlayActivity` is exported and has launcher and browsable VIEW filters. The
+declared custom schemes are `graalclassic://` and `graalclassicplus://`, with
+no activity permission recorded. The manifest also contains framework and
+service components with narrower Google or Android permissions, including the
+Firebase receiver, WorkManager service, and diagnostics receiver. Component
+reachability and the behavior behind these entry points were not exercised.
+
+The APK contains two DEX files. Their hashes are included here to make the
+comparison reproducible without publishing their contents:
+
+| File | Size | SHA-256 |
+| --- | ---: | --- |
+| `classes.dex` | 9,519,720 bytes | `3c01753f23c18a1d115c12267f01d75118e62d4cc83de1150d66f159f9a4772b` |
+| `classes2.dex` | 244,120 bytes | `cc38472d80baaca5cbd8861d687080d5109078e397e9cfb2c95678406aa6a596` |
+
+## 2.2 `libqplay.so`
+
+The 2.2 ARM64 `libqplay.so` is reported as stripped by the ELF file tools.
+That description is incomplete for reverse engineering purposes. Its dynamic
+symbol table retains 6,773 entries, including 5,782 defined functions and
+6,772 named dynamic entries. The retained names include JNI exports, CyaSSL
+entry points, and application symbols. Many application names are obfuscated
+or randomly shaped, but they still provide useful anchors for matching code
+and cross-referencing callers.
+
+The library also retains the expected native TLS surface, including the CyaSSL
+client methods, certificate-buffer loading, hostname checking, verification
+configuration, and `CyaSSL_connect`. These exports establish available code,
+not a successful connection or a currently valid trust configuration.
+
+The ELF metadata reports full RELRO, `BIND_NOW`, and a non-executable stack.
+Those baseline properties do not remove the risks of legacy transport policy
+or code that changes executable memory at runtime.
+
+## Separate `libxposed.so` behavior
+
+The companion library is a distinct ARM64 ELF object with 2,159 dynamic
+symbols and 1,323 defined functions. Static inspection found imports and
+strings for `dlopen`, `dlsym`, `mprotect`, `libqplay.so`, and an AArch64 inline
+hook implementation. The relevant setup is asynchronous:
+
+1. Exported `init` at `0x864b0` calls `pthread_create` with a thread entry at
+   `0x862d4`.
+2. That thread repeatedly calls `dlopen("libqplay.so", 5)`, sleeping between
+   attempts until the library becomes available.
+3. It then resolves selected qplay targets with `dlsym` and enters the hook
+   setup at `0x80fe4`.
+4. The hook installer page-aligns targets and calls `mprotect` with
+   `prot=7`, making one or two pages readable, writable, and executable while
+   it writes an inline-hook trampoline. The instruction budget observed by
+   the installer is `0x32`.
+
+The following target names were decoded from the library's existing encrypted
+name builders. They are included because each was statically established,
+not inferred from a source guess:
+
+```text
+_ZN10G0gxgajWBw10PADGMaKVtzERK10C8THgaTQxFS2_
+_ZN10G0gxgajWBw10lhv_fahWb4ERK10C8THgaTQxF
+_ZN10G0gxgajWBwC2ERK10CanTfaz6bZ
+_ZN10cWWYfaxbT210DpbOGacdQCEP10c76BgaJBGAP10sXw2GaJkKPi
+_ZN10mTAogaaEip10_hwWPaWMQiEP10G0gxgajWBwP10AICTfaebpZi
+_ZN10zW2NgaU4IK10EpeWfajKB0ERK10C8THgaTQxF
+_ZN10W6NzgawMJy10tIIEga1dSCEPS_
+_ZN10W6NzgawMJy10CrD_faSNi4ERK10C8THgaTQxFS2_
+_Z16DetectFridaLoop1bbb
+```
+
+The replacement for `_Z16DetectFridaLoop1bbb` is at `0x80fbc`. The original
+qplay function at `0x24a2e8` performs extensive process-map and ELF-oriented
+scanning consistent with anti-instrumentation checks. The replacement only
+normalizes its three boolean-looking arguments and returns without calling
+the original trampoline. This is strong static evidence that the companion
+library disables that detection path in the analyzed package.
+
+The other observed hooks call through saved original trampolines after doing
+additional object and string processing. Their complete application semantics
+remain unresolved, so this page does not assign them behavioral names.
+
+## Limits and open questions
+
+This comparison is static except for pulling the already installed package
+from a local emulator. It does not establish who produced the package, when
+it was built, whether its Java code loads `libxposed.so` on every device, or
+which hooked paths are reached during startup. It also does not establish a
+current server response, account behavior, or an end-to-end TLS result.
+
+The most useful next comparison is a verified stock 2.2 package, followed by
+function matching between its stripped qplay build and the retained 1.8
+anchors. Until that is available, conclusions about 2.2 should be labeled as
+observations of this unverified installed package.
