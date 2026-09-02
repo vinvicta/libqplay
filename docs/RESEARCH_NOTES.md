@@ -1786,3 +1786,11 @@ anchors, and byte-equality results. It does not copy either native file into
 the repository or contact a network service. The safe translation workflow is
 to find the exact 2.2 name first, verify its size and bytes, then check its
 callers and data references before applying an IDA name or patch.
+
+The next step made that workflow searchable rather than implicit. The
+metadata-only `artifacts/cross_version_translation_candidates_20260902.json`
+contains all 835 exact-name rows, including both symbol values, per-function
+size equality, the measured address delta, and raw-byte equality. Its generator
+can read `lib/arm64-v8a/libqplay.so` directly from the private 2.2 APK. This
+does not make a global delta safe and does not claim that the unverified
+package represents stock 2.2 behavior.

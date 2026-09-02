@@ -137,6 +137,12 @@ JNI, and a small residual bucket. The measured address clusters are
 family-specific, so exact names and per-function validation remain the
 translation rule.
 
+The complete 835-row name and address lookup is in
+`artifacts/cross_version_translation_candidates_20260902.json`. It records
+per-function sizes, address deltas, and byte equality while keeping the APK
+and native files outside Git. It is a review map for a future 2.2 IDA database,
+not a bulk patch list.
+
 The Android lifecycle review adds an important first diagnostic checkpoint.
 The connector is downstream of the GL surface, window focus, runtime
 permission completion, and the first render frame. A compatibility dialog or
