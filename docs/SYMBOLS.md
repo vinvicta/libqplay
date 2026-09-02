@@ -125,3 +125,20 @@ The generated summary should have `rename_failures` equal to an empty list.
 If a future library revision produces a different count, keep its exports in
 a separate directory and record the build identity in the accompanying
 notes. Do not overwrite this table without preserving the old hash.
+
+## ABI parity check
+
+The four native variants in the original APK were compared by
+`tools/generate_cross_abi_compatibility_review.py`. The report is
+`artifacts/cross_abi_compatibility_review_20260902.json`. All four contain the
+same connector and CyaSSL marker counts, the same 12,820-byte embedded trust
+text hash, and the same five `DT_NEEDED` libraries, including
+`libstdc++.so`. The ARM64 build has `0x10000` `LOAD` alignment; the armeabi,
+x86, and x86_64 builds use `0x1000`.
+
+The defined dynamic symbol sets are similar but not identical. The x86_64
+variant shares 6,486 defined names with ARM64, while armeabi shares 6,349 and
+x86 shares 6,346. ABI-specific mangling, compiler output, and data layout make
+address transfer unsafe. The shared trust hash and marker set do, however,
+make the stale connector chain a cross-build compatibility lead rather than an
+ARM64-only hypothesis. No ABI was executed by this comparison.

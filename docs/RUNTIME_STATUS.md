@@ -68,6 +68,9 @@ startup and pause evidence is in
   device with activity, permission, and surface timestamps captured.
 * A 2.2 `libqplay` binary is not present in the current workspace. No
   cross-version symbol, protocol, or behavior mapping has been applied.
+* The four 1.8 native ABI variants were compared statically. They share the
+  connector trust text and marker set, but no non-ARM64 or physical ARM64
+  runtime was executed in this pass.
 
 ## Current blocker
 

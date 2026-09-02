@@ -112,6 +112,14 @@ the native load result, before changing connector or TLS code. The machine
 readable record is `APK-012` in
 `artifacts/original_apk_security_audit_20260830.json`.
 
+The focused cross-ABI report at
+`artifacts/cross_abi_compatibility_review_20260902.json` confirms that all
+four variants share the same five native dependencies, baseline ELF hardening,
+connector and CyaSSL markers, and embedded connector trust text hash. This
+supports treating the expired trust material as a build-wide compatibility
+lead. It does not prove identical control flow, and the different segment
+alignment and code layouts still require an ARM64 loader test.
+
 The separate init/fini export records the load-time constructor boundary. The
 ARM64 library has 20 fixed init callbacks and 10 fini callbacks. They set up or
 clear resource lists, cached texture dimensions, GUI defaults, client strings,

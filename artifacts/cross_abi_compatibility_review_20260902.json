@@ -1,0 +1,443 @@
+{
+  "analysis_date": "2026-09-02",
+  "artifact": "cross_abi_compatibility_review_20260902",
+  "comparisons_to_arm64": [
+    {
+      "abi": "armeabi",
+      "connector_tls_markers_equal": true,
+      "defined_dynamic_symbol_intersection": 6349,
+      "reference_abi": "arm64-v8a",
+      "reference_only_defined_dynamic_symbols": 157,
+      "reference_only_sample": [
+        ".data.rel.ro",
+        ".text",
+        "_Z10anireallocPvm",
+        "_Z12yajl_lex_lexP12yajl_lexer_tPKhmPmPS2_S3_",
+        "_Z13yajl_do_parseP13yajl_handle_tPKhm",
+        "_Z13yajl_lex_peekP12yajl_lexer_tPKhmm",
+        "_Z14ani_scan_bytesPKcm",
+        "_Z14jpeg_get_largeP18jpeg_common_structm",
+        "_Z14jpeg_get_smallP18jpeg_common_structm",
+        "_Z15ani_scan_bufferPcm",
+        "_Z15jpeg_free_largeP18jpeg_common_structPvm",
+        "_Z15jpeg_free_smallP18jpeg_common_structPvm"
+      ],
+      "trust_text_equal": true,
+      "variant_only_defined_dynamic_symbols": 295,
+      "variant_only_sample": [
+        "_Unwind_Backtrace",
+        "_Unwind_Complete",
+        "_Unwind_DeleteException",
+        "_Unwind_ForcedUnwind",
+        "_Unwind_GetCFA",
+        "_Unwind_GetDataRelBase",
+        "_Unwind_GetLanguageSpecificData",
+        "_Unwind_GetRegionStart",
+        "_Unwind_GetTextRelBase",
+        "_Unwind_RaiseException",
+        "_Unwind_Resume",
+        "_Unwind_Resume_or_Rethrow"
+      ]
+    },
+    {
+      "abi": "x86",
+      "connector_tls_markers_equal": true,
+      "defined_dynamic_symbol_intersection": 6346,
+      "reference_abi": "arm64-v8a",
+      "reference_only_defined_dynamic_symbols": 160,
+      "reference_only_sample": [
+        ".data.rel.ro",
+        ".text",
+        "_Z10anireallocPvm",
+        "_Z12yajl_lex_lexP12yajl_lexer_tPKhmPmPS2_S3_",
+        "_Z13yajl_do_parseP13yajl_handle_tPKhm",
+        "_Z13yajl_lex_peekP12yajl_lexer_tPKhmm",
+        "_Z14ani_scan_bytesPKcm",
+        "_Z14jpeg_get_largeP18jpeg_common_structm",
+        "_Z14jpeg_get_smallP18jpeg_common_structm",
+        "_Z15ani_scan_bufferPcm",
+        "_Z15jpeg_free_largeP18jpeg_common_structPvm",
+        "_Z15jpeg_free_smallP18jpeg_common_structPvm"
+      ],
+      "trust_text_equal": true,
+      "variant_only_defined_dynamic_symbols": 156,
+      "variant_only_sample": [
+        "_Z10anireallocPvj",
+        "_Z12yajl_lex_lexP12yajl_lexer_tPKhjPjPS2_S3_",
+        "_Z13yajl_do_parseP13yajl_handle_tPKhj",
+        "_Z13yajl_lex_peekP12yajl_lexer_tPKhjj",
+        "_Z14ani_scan_bytesPKcj",
+        "_Z14jpeg_get_largeP18jpeg_common_structj",
+        "_Z14jpeg_get_smallP18jpeg_common_structj",
+        "_Z15ani_scan_bufferPcj",
+        "_Z15jpeg_free_largeP18jpeg_common_structPvj",
+        "_Z15jpeg_free_smallP18jpeg_common_structPvj",
+        "_Z15yajl_buf_appendP10yajl_buf_tPKvj",
+        "_Z17yajl_buf_truncateP10yajl_buf_tj"
+      ]
+    },
+    {
+      "abi": "x86_64",
+      "connector_tls_markers_equal": true,
+      "defined_dynamic_symbol_intersection": 6486,
+      "reference_abi": "arm64-v8a",
+      "reference_only_defined_dynamic_symbols": 20,
+      "reference_only_sample": [
+        ".data.rel.ro",
+        ".text",
+        "_Z30parseDynamicFunctionParametersPKcSt9__va_list",
+        "_ZN6CyaInt11mp_dr_setupEPNS_6mp_intEPj",
+        "_ZN6CyaInt12mp_dr_reduceEPNS_6mp_intES1_j",
+        "_ZN6CyaInt12mp_reduce_2kEPNS_6mp_intES1_j",
+        "_ZN6CyaInt18mp_reduce_2k_setupEPNS_6mp_intEPj",
+        "_ZN6CyaInt19mp_montgomery_setupEPNS_6mp_intEPj",
+        "_ZN6CyaInt20mp_montgomery_reduceEPNS_6mp_intES1_j",
+        "_ZN6CyaInt25fast_mp_montgomery_reduceEPNS_6mp_intES1_j",
+        "_ZN6CyaInt6mp_setEPNS_6mp_intEj",
+        "_ZN6CyaInt8mp_cmp_dEPNS_6mp_intEj"
+      ],
+      "trust_text_equal": true,
+      "variant_only_defined_dynamic_symbols": 14,
+      "variant_only_sample": [
+        "_Z30parseDynamicFunctionParametersPKcP13__va_list_tag",
+        "_ZN6CyaInt11mp_dr_setupEPNS_6mp_intEPm",
+        "_ZN6CyaInt12mp_dr_reduceEPNS_6mp_intES1_m",
+        "_ZN6CyaInt12mp_reduce_2kEPNS_6mp_intES1_m",
+        "_ZN6CyaInt18mp_reduce_2k_setupEPNS_6mp_intEPm",
+        "_ZN6CyaInt19mp_montgomery_setupEPNS_6mp_intEPm",
+        "_ZN6CyaInt20mp_montgomery_reduceEPNS_6mp_intES1_m",
+        "_ZN6CyaInt25fast_mp_montgomery_reduceEPNS_6mp_intES1_m",
+        "_ZN6CyaInt6mp_setEPNS_6mp_intEm",
+        "_ZN6CyaInt8mp_cmp_dEPNS_6mp_intEm",
+        "_ZN6CyaInt8mp_div_3EPNS_6mp_intES1_Pm",
+        "_ZN6CyaInt8mp_mul_dEPNS_6mp_intEmS1_"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "assessment": "All four packaged libraries contain the same connector and CyaSSL marker set, and the embedded connector trust text has the same SHA-256 value recorded for the ARM64 build. The stale trust material and the connector fallback logic are therefore not likely to be an ARM64-only defect.",
+      "confidence": "confirmed-static",
+      "id": "ABI-COMPAT-001",
+      "limits": [
+        "The report compares embedded bytes and symbols, not live execution on each ABI.",
+        "Identical markers do not prove that every ABI reaches the same branch for every runtime error.",
+        "No current service or physical device was contacted."
+      ],
+      "title": "Connector trust material is shared across all four ABIs"
+    },
+    {
+      "assessment": "Every ABI declares the same five native dependencies, including libstdc++.so, and enables BIND_NOW, GNU RELRO, and a non-executable stack. The ARM64 library uses 0x10000 LOAD alignment while the other variants use 0x1000, so loader behavior still needs an ARM64 device check.",
+      "confidence": "confirmed-static",
+      "id": "ABI-COMPAT-002",
+      "limits": [
+        "A declared SONAME does not prove that the target Android image supplies a compatible library.",
+        "Segment alignment alone does not identify a loader failure."
+      ],
+      "title": "Loader layout differs even though dependencies are shared"
+    }
+  ],
+  "network_contacted": false,
+  "schema": "libqplay.cross-abi-compatibility-review.v1",
+  "scope": "metadata-only comparison of the four native ABI variants in the original 1.8 APK",
+  "shared_properties": {
+    "all_variants_have_gnu_relro": true,
+    "all_variants_have_non_executable_stack": true,
+    "all_variants_have_same_connector_tls_marker_counts": true,
+    "all_variants_have_same_embedded_trust_text_hash": true,
+    "all_variants_have_same_needed_libraries": true,
+    "all_variants_use_bind_now": true
+  },
+  "tool": "tools/generate_cross_abi_compatibility_review.py",
+  "tool_version": 1,
+  "variants": [
+    {
+      "abi": "arm64-v8a",
+      "bytes": 3657208,
+      "connector_tls_marker_counts": {
+        "CyaSSL": 102,
+        "SSL_RSA_WITH_RC4_128_MD5": 1,
+        "SSL_RSA_WITH_RC4_128_SHA": 1,
+        "TLS_RSA_WITH_NULL_SHA": 2,
+        "TLS_RSA_WITH_NULL_SHA256": 1,
+        "TLSv1_2": 4,
+        "con.gs": 0,
+        "con.png": 0,
+        "con.quattroplay.com": 0,
+        "con2.quattroplay.com": 0,
+        "conf.gs": 0,
+        "libstdc++.so": 1
+      },
+      "elf": {
+        "bind_now": true,
+        "class": "ELF64",
+        "defined_function_count": 5709,
+        "defined_object_count": 788,
+        "defined_symbol_count": 6506,
+        "defined_symbol_name_sha256": "77d78d8833ae414c3921da167f088b2ac0618b62a732441369e5ce906d347d5d",
+        "dynamic_symbol_count": 6674,
+        "entry_point": "0xe0170",
+        "executable_stack": false,
+        "gnu_stack_flags": "RW",
+        "has_gnu_relro": true,
+        "load_alignments": [
+          "0x10000"
+        ],
+        "load_segments": [
+          {
+            "align": "0x10000",
+            "file_size": "0x34c610",
+            "flags": "R E",
+            "memory_size": "0x34c610",
+            "offset": "0x000000",
+            "virtual_address": "0x0000000000000000"
+          },
+          {
+            "align": "0x10000",
+            "file_size": "0x02f580",
+            "flags": "RW",
+            "memory_size": "0x036368",
+            "offset": "0x34d210",
+            "virtual_address": "0x000000000035d210"
+          }
+        ],
+        "machine": "AArch64",
+        "machine_id": 183,
+        "needed": [
+          "libGLESv1_CM.so",
+          "libc.so",
+          "liblog.so",
+          "libm.so",
+          "libstdc++.so"
+        ],
+        "soname": "GraalonlineClassic.android.arm64",
+        "undefined_symbol_count": 168
+      },
+      "embedded_trust_text": {
+        "bytes": 12820,
+        "file_offset": 3002104,
+        "matches_arm64_record": true,
+        "present": true,
+        "sha256": "c87ea7bc32005cca699fb724ab455926fd852a1bd40ce0985aadf31a994878a0"
+      },
+      "path": "GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so",
+      "sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8"
+    },
+    {
+      "abi": "armeabi",
+      "bytes": 2399684,
+      "connector_tls_marker_counts": {
+        "CyaSSL": 102,
+        "SSL_RSA_WITH_RC4_128_MD5": 1,
+        "SSL_RSA_WITH_RC4_128_SHA": 1,
+        "TLS_RSA_WITH_NULL_SHA": 2,
+        "TLS_RSA_WITH_NULL_SHA256": 1,
+        "TLSv1_2": 4,
+        "con.gs": 0,
+        "con.png": 0,
+        "con.quattroplay.com": 0,
+        "con2.quattroplay.com": 0,
+        "conf.gs": 0,
+        "libstdc++.so": 1
+      },
+      "elf": {
+        "bind_now": true,
+        "class": "ELF32",
+        "defined_function_count": 5853,
+        "defined_object_count": 788,
+        "defined_symbol_count": 6644,
+        "defined_symbol_name_sha256": "b3a495e12f468abcccc17998be6ce5a1a589c5a35af615e69a6abac76c7957ac",
+        "dynamic_symbol_count": 6818,
+        "entry_point": "0x0",
+        "executable_stack": false,
+        "gnu_stack_flags": "RW",
+        "has_gnu_relro": true,
+        "load_alignments": [
+          "0x1000"
+        ],
+        "load_segments": [
+          {
+            "align": "0x1000",
+            "file_size": "0x22e0e4",
+            "flags": "R E",
+            "memory_size": "0x22e0e4",
+            "offset": "0x000000",
+            "virtual_address": "0x00000000"
+          },
+          {
+            "align": "0x1000",
+            "file_size": "0x1b628",
+            "flags": "RW",
+            "memory_size": "0x1fca8",
+            "offset": "0x22e1d8",
+            "virtual_address": "0x0022f1d8"
+          }
+        ],
+        "machine": "ARM",
+        "machine_id": 40,
+        "needed": [
+          "libGLESv1_CM.so",
+          "libc.so",
+          "liblog.so",
+          "libm.so",
+          "libstdc++.so"
+        ],
+        "soname": "GraalonlineClassic.android.arm",
+        "undefined_symbol_count": 174
+      },
+      "embedded_trust_text": {
+        "bytes": 12820,
+        "file_offset": 2204728,
+        "matches_arm64_record": true,
+        "present": true,
+        "sha256": "c87ea7bc32005cca699fb724ab455926fd852a1bd40ce0985aadf31a994878a0"
+      },
+      "path": "GraalOnline+Classic_1.8_APKPure/lib/armeabi/libqplay.so",
+      "sha256": "a0e89f2d76685f93256ce82185cc032dec8f2a5a7fd6842714c8f22da9439860"
+    },
+    {
+      "abi": "x86",
+      "bytes": 3722404,
+      "connector_tls_marker_counts": {
+        "CyaSSL": 102,
+        "SSL_RSA_WITH_RC4_128_MD5": 1,
+        "SSL_RSA_WITH_RC4_128_SHA": 1,
+        "TLS_RSA_WITH_NULL_SHA": 2,
+        "TLS_RSA_WITH_NULL_SHA256": 1,
+        "TLSv1_2": 4,
+        "con.gs": 0,
+        "con.png": 0,
+        "con.quattroplay.com": 0,
+        "con2.quattroplay.com": 0,
+        "conf.gs": 0,
+        "libstdc++.so": 1
+      },
+      "elf": {
+        "bind_now": true,
+        "class": "ELF32",
+        "defined_function_count": 5711,
+        "defined_object_count": 788,
+        "defined_symbol_count": 6502,
+        "defined_symbol_name_sha256": "7fb149ddab85c336407d8d124926700df8c3965a700148378615494592bbf141",
+        "dynamic_symbol_count": 6671,
+        "entry_point": "0x0",
+        "executable_stack": false,
+        "gnu_stack_flags": "RW",
+        "has_gnu_relro": true,
+        "load_alignments": [
+          "0x1000"
+        ],
+        "load_segments": [
+          {
+            "align": "0x1000",
+            "file_size": "0x36e8d8",
+            "flags": "R E",
+            "memory_size": "0x36e8d8",
+            "offset": "0x000000",
+            "virtual_address": "0x00000000"
+          },
+          {
+            "align": "0x1000",
+            "file_size": "0x1d3a0",
+            "flags": "RW",
+            "memory_size": "0x22378",
+            "offset": "0x36f380",
+            "virtual_address": "0x00370380"
+          }
+        ],
+        "machine": "Intel 80386",
+        "machine_id": 3,
+        "needed": [
+          "libGLESv1_CM.so",
+          "libc.so",
+          "liblog.so",
+          "libm.so",
+          "libstdc++.so"
+        ],
+        "soname": "GraalonlineClassic.android.x86",
+        "undefined_symbol_count": 169
+      },
+      "embedded_trust_text": {
+        "bytes": 12820,
+        "file_offset": 3066632,
+        "matches_arm64_record": true,
+        "present": true,
+        "sha256": "c87ea7bc32005cca699fb724ab455926fd852a1bd40ce0985aadf31a994878a0"
+      },
+      "path": "GraalOnline+Classic_1.8_APKPure/lib/x86/libqplay.so",
+      "sha256": "93e322c8b6fdc5666fde67ef02badc71a55b002c3936451c93f02860d843b333"
+    },
+    {
+      "abi": "x86_64",
+      "bytes": 3850000,
+      "connector_tls_marker_counts": {
+        "CyaSSL": 102,
+        "SSL_RSA_WITH_RC4_128_MD5": 1,
+        "SSL_RSA_WITH_RC4_128_SHA": 1,
+        "TLS_RSA_WITH_NULL_SHA": 2,
+        "TLS_RSA_WITH_NULL_SHA256": 1,
+        "TLSv1_2": 4,
+        "con.gs": 0,
+        "con.png": 0,
+        "con.quattroplay.com": 0,
+        "con2.quattroplay.com": 0,
+        "conf.gs": 0,
+        "libstdc++.so": 1
+      },
+      "elf": {
+        "bind_now": true,
+        "class": "ELF64",
+        "defined_function_count": 5709,
+        "defined_object_count": 788,
+        "defined_symbol_count": 6500,
+        "defined_symbol_name_sha256": "d11ff15dfffda2eb20e8d5c856e25b4d94b998e2fdb803f17d5b7ebfa29e21ae",
+        "dynamic_symbol_count": 6670,
+        "entry_point": "0x0",
+        "executable_stack": false,
+        "gnu_stack_flags": "RW",
+        "has_gnu_relro": true,
+        "load_alignments": [
+          "0x1000"
+        ],
+        "load_segments": [
+          {
+            "align": "0x1000",
+            "file_size": "0x3775ec",
+            "flags": "R E",
+            "memory_size": "0x3775ec",
+            "offset": "0x000000",
+            "virtual_address": "0x0000000000000000"
+          },
+          {
+            "align": "0x1000",
+            "file_size": "0x034000",
+            "flags": "RW",
+            "memory_size": "0x03b3b8",
+            "offset": "0x377700",
+            "virtual_address": "0x0000000000378700"
+          }
+        ],
+        "machine": "Advanced Micro Devices X86-64",
+        "machine_id": 62,
+        "needed": [
+          "libGLESv1_CM.so",
+          "libc.so",
+          "liblog.so",
+          "libm.so",
+          "libstdc++.so"
+        ],
+        "soname": "GraalonlineClassic.android.x86_64",
+        "undefined_symbol_count": 170
+      },
+      "embedded_trust_text": {
+        "bytes": 12820,
+        "file_offset": 3132032,
+        "matches_arm64_record": true,
+        "present": true,
+        "sha256": "c87ea7bc32005cca699fb724ab455926fd852a1bd40ce0985aadf31a994878a0"
+      },
+      "path": "GraalOnline+Classic_1.8_APKPure/lib/x86_64/libqplay.so",
+      "sha256": "b529184d981ec2a08e6a623e1d0634bb6a36d0e71856c544608190ed5b35a8d7"
+    }
+  ]
+}
