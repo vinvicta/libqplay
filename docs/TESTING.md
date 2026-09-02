@@ -74,6 +74,51 @@ The local test matrix completed the connector and game replay with lowercase
 or title-case names, with either connection value, and without
 `Content-Length` when the responder supplied an EOF boundary.
 
+## TLS error and mode-3 fallback control
+
+The static retry review shows that a CyaSSL error in connector mode 1 or 2 can
+skip the remaining HTTPS attempt and enter mode 3, which uses plain HTTP on
+port 80. The existing expiry control used only the TLS listener, so it did not
+capture this second leg. A bounded follow-up needs two local responders and
+two reverse mappings:
+
+```bash
+python3 tools/tls_capture_server.py \
+  --certificate /tmp/expired.crt \
+  --private-key /tmp/expired.key \
+  --response /tmp/con.png \
+  --port 18443 \
+  --count 1
+```
+
+In a second terminal, start the existing HTTP capture on an unprivileged host
+port. If the test should continue beyond the request observation, place the
+same archived package at `/tmp/conf.gs` as well:
+
+```bash
+cp /tmp/con.png /tmp/conf.gs
+python3 tools/connector_capture_server.py \
+  --port 18080 \
+  --count 2 \
+  --accept-timeout 180
+```
+
+On the private emulator, map the connector's HTTPS port and the device's
+plain HTTP port separately:
+
+```bash
+adb reverse tcp:18443 tcp:18443
+adb reverse tcp:80 tcp:18080
+```
+
+Use the expired-trust diagnostic package, with the local resolver patch and
+the connector HTTPS port set to 18443. The expected observation is a TCP and
+TLS arrival on the first listener, no HTTP request on that TLS connection, and
+then a plain `GET /conf.gs` on the second listener. If the second listener is
+silent, record the native connector mode and socket error before concluding
+that the fallback branch is absent. This is a local control only. It does not
+validate the current service or justify disabling certificate verification.
+
 When `--output-dir` points to a new directory, the responder creates it before
 accepting requests. This keeps capture setup separate from the protocol test.
 
