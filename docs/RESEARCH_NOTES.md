@@ -1627,6 +1627,33 @@ may not be the response format expected from `conf.gs`, and the local trace
 does not distinguish that case from a later script activation problem. No live
 host was contacted.
 
+## Runtime mode-3 role control
+
+The next local control used a role-correct package rather than reusing the
+archived `con.png` body. The supplied Moreno.kahn workbench, pinned at commit
+`e1f49b5ce6fa46b41354d9a81f75994f91d3ff16`, defines separate output slots in
+`src/contool.cpp`: `StartScript_Fail` for the `conf.gs` role and
+`StartScript_Connector` for the `con.png` role. Its packing code also matches
+the native envelope observed in the APK: a big-endian length-prefixed raw
+RSA-SSL signature, an outer RC4-encrypted ZIP, a wrapped 16-byte script key in
+`.rk`, a 20-byte `.t` entry, and RC4-encrypted compiled script entries.
+
+A private 959-byte package containing only `.rk`, `.t`, and
+`NPCS/StartScript_Fail` was generated from that format. The x86_64 diagnostic
+library was paired with the matching public test key. No RSA-result bypass and
+no certificate-verification skip was used. The expired TLS responder then
+forced the same plain `/conf.gs` transition as the earlier two-port control.
+
+This time the native log emitted `MODE3_FAIL_SCRIPT_REACHED` from the test
+script's `onCreated` event. That is a complete local proof of HTTP body
+acceptance, native signature verification, ZIP unpacking, script installation,
+and failure-script execution. It also explains the earlier stalled replay:
+the archived `con.png` package contained the connector role, so it was the
+wrong semantic fixture for `conf.gs`. The failure role is not expected to open
+a game socket. The current service's package, key, and connector script remain
+unverified. The compact record is
+`artifacts/connector_mode3_fail_script_runtime_control_20260902.json`.
+
 ## Cross-ABI parity pass
 
 Because a physical ARM64 run is not currently available, the four native

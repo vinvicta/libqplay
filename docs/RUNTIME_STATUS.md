@@ -44,6 +44,12 @@ This is the short handoff view. The full reasoning and command history are in
     emitted no HTTPS GET, and then issued plain `GET /conf.gs`. The same
     result held with `Connection: close`. The fallback metadata is in
     `artifacts/connector_fallback_runtime_control_20260902.json`.
+13. A follow-up two-port control served a semantically correct mode-3 package
+    containing `NPCS/StartScript_Fail`. With native RSA verification still
+    enabled, the emulator unpacked the package and logged
+    `MODE3_FAIL_SCRIPT_REACHED` from its `onCreated` event. This closes the
+    local package-handoff ambiguity. The record is in
+    `artifacts/connector_mode3_fail_script_runtime_control_20260902.json`.
 
 The Android lifecycle review now gives a pre-network checkpoint. The GL thread
 must have a surface and window focus, and the permission callback must set
@@ -93,8 +99,9 @@ identified failure in the native TLS fallback transition:
 
 * the current connector certificate and package-signing chain have not been
   tested against a live service;
-* the response format served by the current mode-3 `conf.gs` endpoint is not
-  known, so the fallback package-to-game handoff remains open;
+* the package format and `StartScript_Fail` mode-3 handoff are validated
+  locally, but the current service's `conf.gs` body, signing key, and game
+  connector script are not known;
 * no live game-server login has been attempted or verified;
 * the working replay uses an x86_64 diagnostic APK, so ARM64 device behavior
   still needs a controlled run.
@@ -128,8 +135,12 @@ message. A private ARM64 run should record these checkpoints in order:
    and the runtime record is
    `artifacts/connector_fallback_runtime_control_20260902.json`.
 5. If HTTP completes, check the binary envelope, RSA result, ZIP dispatch, and
-   `StartScript_Connector`. A valid HTTP response that never emits
-   `onServerWarp` is a connector package or script activation problem.
+   the role-specific script. `StartScript_Connector` is the game-start path;
+   the mode-3 fallback may intentionally contain `StartScript_Fail`. The
+   local role control is in
+   `artifacts/connector_mode3_fail_script_runtime_control_20260902.json`.
+   A valid connector response that never emits `onServerWarp` is then a
+   connector package or script activation problem.
 6. If `onServerWarp` fires, record the game address, port, socket status 4 to 5
    transition, and the first `fd` and `fc` frames. No second socket attempt
    points to the connector script handoff or address fields; a socket that

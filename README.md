@@ -63,8 +63,14 @@ transition, including the failed TLS leg and the subsequent plain
 
 That control reused the archived `/con.png` package as the `/conf.gs` body and
 did not reach the synthetic game listener. The current mode-3 response is
-still unverified, so this is a transport finding and a compatibility lead, not
-a release repair.
+still unverified. A follow-up local control used the mode-specific
+`StartScript_Fail` package role described by the supplied Moreno.kahn workbench.
+With a matching test public key and native RSA verification left enabled, the
+emulator accepted the 959-byte package and logged
+`MODE3_FAIL_SCRIPT_REACHED`. This proves that the mode-3 package can be
+unpacked and activated. It does not prove that the current service publishes
+that package or that the failure script should start a game. The runtime record
+is `artifacts/connector_mode3_fail_script_runtime_control_20260902.json`.
 
 The symbolized handler-table investigation also produced an important
 correction. The original `setInDataHandlers` instructions are correct for this
@@ -274,6 +280,8 @@ The compact record is
   retry state machine and the TLS-error jump to its cleartext fallback.
 * `artifacts/connector_fallback_runtime_control_20260902.json` records the
   private two-port runtime observation and its response-format limitation.
+* `artifacts/connector_mode3_fail_script_runtime_control_20260902.json` records
+  the matching mode-3 package and `StartScript_Fail` execution control.
 * `artifacts/cross_abi_compatibility_review_20260902.json` compares the four
   native ABI variants without copying binaries into the repository.
 * `artifacts/game_connection_flow_review_20260830.json` preserves the compact

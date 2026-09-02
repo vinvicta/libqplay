@@ -1079,6 +1079,16 @@ therefore fail at package verification even when the HTTPS transport is
 otherwise repaired. This package-signing check is separate from the expired
 connector certificate and should remain enabled in any compatibility build.
 
+The mode-3 role has now been tested separately. The supplied Moreno.kahn
+workbench assigns `StartScript_Fail` to the `conf.gs` role and
+`StartScript_Connector` to the `con.png` role. A private package containing
+only `NPCS/StartScript_Fail` passed the native signature check, unpacked, and
+ran its `onCreated` event in the emulator. This means the earlier absence of a
+game connection after serving a `con.png` body at `/conf.gs` was not enough to
+identify a parser or VM failure. The current service's role-specific package
+and signing key remain unverified. See
+`artifacts/connector_mode3_fail_script_runtime_control_20260902.json`.
+
 ### Game-server TLS configuration
 
 The game connection has its own `TGraalConnection` SSL fields. The script

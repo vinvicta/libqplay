@@ -201,6 +201,25 @@ runtime result confirms the native TLS-to-HTTP transition, but does not yet
 prove that the saved package is the correct response for the mode-3 endpoint
 or that the current service still publishes that response.
 
+The next control separated the endpoint role from the transport test. The
+supplied Moreno.kahn workbench, at commit
+`e1f49b5ce6fa46b41354d9a81f75994f91d3ff16`, defines `StartScript_Fail` as the
+script slot for `conf.gs` and `StartScript_Connector` as the slot for
+`con.png`. A private 959-byte package containing `.rk`, `.t`, and
+`NPCS/StartScript_Fail` was generated from that format. The x86_64 diagnostic
+copy was paired with the matching test public key, but its native RSA result
+branch and certificate verification were left enabled.
+
+The emulator then followed the expired TLS leg into plain `/conf.gs` and
+logged `MODE3_FAIL_SCRIPT_REACHED` from the package's `onCreated` event. This
+proves the mode-3 response framing, native RSA check, ZIP unpack, script
+installation, and failure-script execution as a local chain. It also explains
+the earlier stalled result: returning a `StartScript_Connector` package at
+the `conf.gs` path was not a valid semantic fixture. The control does not
+prove that a live service still uses these slots or that `StartScript_Fail`
+should start a game connection. Its compact record is
+`artifacts/connector_mode3_fail_script_runtime_control_20260902.json`.
+
 The response parser is `THTTPRequest_preParseData_void` at ARM64 `0x201d68`.
 It lowercases each complete header line before checking the header name, so
 `content-length:` and `Content-Length:` are equivalent to this client. It
@@ -302,6 +321,14 @@ The native code then uses an embedded RSA private-key path to recover the
 per-package RC4 key from `.rk`, and uses that key for the remaining entries.
 `tools/parse_connector_response.py` checks the framing and outer ZIP. The
 decoder in `tools/decode_connector_scripts.py` checks the inner package.
+
+The script name is role-sensitive. The normal connector package exposes
+`NPCS/StartScript_Connector`; the mode-3 failure role is
+`NPCS/StartScript_Fail`. The supplied Moreno.kahn workbench source explicitly
+maps the latter to `conf.gs` and the former to `con.png`. A private runtime
+control with the failure role reached its `onCreated` event after native
+signature verification and ZIP unpacking. The role-specific evidence is in
+`artifacts/connector_mode3_fail_script_runtime_control_20260902.json`.
 
 The archived body has a valid ZIP and its RSA signature passes the public-key
 check recovered from this APK when the native wolfSSL raw-digest format is

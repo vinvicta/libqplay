@@ -120,6 +120,23 @@ transport fallback, but not that the archived `/con.png` body is a valid
 path-specific `conf.gs` response or that the script handoff is broken. The
 current service's mode-3 response remains unverified.
 
+The semantic fixture was then corrected using the supplied Moreno.kahn
+workbench at commit `e1f49b5ce6fa46b41354d9a81f75994f91d3ff16`. Its source
+defines `StartScript_Fail` for the `conf.gs` role and `StartScript_Connector`
+for the `con.png` role. A private package containing only the failure-script
+role was signed with the matching test key, and the diagnostic library was
+patched to that public key while keeping native RSA verification enabled.
+The expired TLS control followed the same mode-3 transition, and the native
+log emitted `MODE3_FAIL_SCRIPT_REACHED` from `onCreated`.
+
+This closes the local package-handoff ambiguity. The mode-3 response framing,
+signature check, ZIP unpack, script installation, and failure-script
+execution all work together. The failure script is intentionally not a game
+connector, so zero game connections is expected in this control. The current
+service's package, signing key, and game-start script remain unverified. The
+compact record is
+`artifacts/connector_mode3_fail_script_runtime_control_20260902.json`.
+
 The diagnostic port patcher supports this split explicitly. On ARM64,
 `--port 18443 --fallback-port 18080` changes the two HTTPS defaults and the
 two plain-HTTP defaults at the parser's separate instruction sites. On

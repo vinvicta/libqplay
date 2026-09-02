@@ -164,6 +164,24 @@ The current endpoint response must be obtained from an authorized source
 before making a release repair. This is a local control only. It does not
 validate the current service or justify disabling certificate verification.
 
+For the package boundary, use a role-correct private fixture. The supplied
+Moreno.kahn workbench at commit
+`e1f49b5ce6fa46b41354d9a81f75994f91d3ff16` pairs the `conf.gs` role with
+`StartScript_Fail` and the `con.png` role with `StartScript_Connector`. The
+successful control generated a 959-byte signed package containing `.rk`, `.t`,
+and `NPCS/StartScript_Fail`, then paired the diagnostic library with the
+matching public test key. Native RSA verification and certificate checks were
+left enabled. After the expired TLS leg, the emulator requested plain
+`/conf.gs` and logged `MODE3_FAIL_SCRIPT_REACHED` from the failure script's
+`onCreated` event. The compact record is
+`artifacts/connector_mode3_fail_script_runtime_control_20260902.json`.
+
+This fixture is deliberately a failure-script control, so it should not open
+a game connection. It proves the local mode-3 framing, signature check, ZIP
+unpack, script installation, and script execution. It does not establish what
+the current service returns or provide a production signing key. Keep the
+private keys and generated package outside this repository.
+
 When `--output-dir` points to a new directory, the responder creates it before
 accepting requests. This keeps capture setup separate from the protocol test.
 

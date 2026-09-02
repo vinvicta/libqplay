@@ -1,0 +1,110 @@
+{
+  "schema": "libqplay.connector-mode3-fail-script-runtime-control.v1",
+  "artifact": "connector_mode3_fail_script_runtime_control_20260902",
+  "analysis_date": "2026-09-02",
+  "scope": "private loopback-only x86_64 emulator control",
+  "network_contacted": false,
+  "purpose": "Distinguish a semantically incorrect /conf.gs fixture from a failure in native package verification or script activation.",
+  "static_source": {
+    "repository": "https://github.com/MorenoLand/Moreno.kahn",
+    "commit": "e1f49b5ce6fa46b41354d9a81f75994f91d3ff16",
+    "source_file": "src/contool.cpp",
+    "format_observation": "The workbench defines separate script slots: StartScript_Fail is stored as the conf.gs role and StartScript_Connector is stored as the con.png role.",
+    "format_details": [
+      "The container starts with a big-endian signature length and raw RSA-SSL signature.",
+      "The signed stream is an outer-RC4-encrypted ZIP using the historical key already recovered from the client.",
+      "The ZIP contains .rk, .t, and compiled script entries.",
+      "The .rk value wraps a random 16-byte script key with the archive RSA key.",
+      "Compiled script entries are RC4-encrypted with that per-archive script key."
+    ],
+    "production_status": "The helper source is a format lead and a local test fixture source. It does not prove that a current production endpoint still emits the same files or keys."
+  },
+  "diagnostic_inputs": {
+    "base_native_sha256": "c2145a5bdd3611f548271000f630301c8d00b74ba538289cc7de9a157973cf32",
+    "test_key_native_sha256": "a5f6872cdd4b0d91e58651be44194eae3f94fb6fe2ce6370ab3f35e063ce99b6",
+    "test_apk_sha256": "8e0e4067094e2bfab037c108817a3295c9898466ddb5059485b2ce08d7f5efce",
+    "test_apk_bytes": 24703004,
+    "native_member": "lib/x86_64/libqplay.so",
+    "embedded_test_public_key_der_sha256": "5dff27a209730bdc52b4c182e85411dcdf584659d94dddca25062cfdae149cd9",
+    "rsa_bypass_applied": false,
+    "certificate_verification_disabled": false,
+    "mode3_script_bytecode_sha256": "9b9a7de6100e101a1ae70b3ad118184f78640bdeb9988d3abb6d70579e925b57",
+    "mode3_package_sha256": "eb444c1382c211e0a0c94576c82eee6f5a2db5853e5c673b6bf9cf823b48794f",
+    "mode3_package_bytes": 959,
+    "mode3_package_entries": [
+      ".rk",
+      ".t",
+      "NPCS/StartScript_Fail"
+    ],
+    "mode3_script_behavior": "onCreated calls echo with the marker MODE3_FAIL_SCRIPT_REACHED"
+  },
+  "emulator": {
+    "device": "emulator-5554",
+    "android_api": 36,
+    "selected_abi": "x86_64",
+    "adb_reverse": {
+      "18443": "127.0.0.1 expired-certificate TLS responder",
+      "18080": "127.0.0.1 mode-3 HTTP responder",
+      "14900": "127.0.0.1 synthetic game responder"
+    }
+  },
+  "tls_leg": {
+    "port": 18443,
+    "certificate": "private expired test certificate",
+    "tcp_arrival": true,
+    "http_request_seen": false,
+    "responder_observation": "SSLZeroReturnError: TLS/SSL connection has been closed (EOF)",
+    "interpretation": "Native certificate verification rejected the expired test chain before an HTTPS GET was sent."
+  },
+  "http_fallback_leg": {
+    "port": 18080,
+    "request_count": 1,
+    "request_path": "/conf.gs",
+    "request_sha256": "9e18c6d14a508488cb64d72f15af347d209b73ab072f6ad409676eb2c9261068",
+    "request_first_line": "GET /conf.gs?p=<redacted encoded query> HTTP/1.0",
+    "host_header": "con.quattroplay.com:18080",
+    "user_agent": "Graal/6.15401",
+    "response_status": "HTTP/1.0 200 OK",
+    "response_header_case": "title",
+    "response_connection": "close",
+    "response_body_bytes": 959,
+    "response_body_sha256": "eb444c1382c211e0a0c94576c82eee6f5a2db5853e5c673b6bf9cf823b48794f",
+    "response_body_role": "mode-3 failure-script package"
+  },
+  "native_checkpoint": {
+    "log_timestamp": "2026-09-02T09:32:02.729-04:00",
+    "tag": "qplay",
+    "level": "INFO",
+    "marker": "MODE3_FAIL_SCRIPT_REACHED",
+    "preceding_checkpoints": [
+      "basedatafolder to: /data/user/0/com.quattroplay.GraalClassic/",
+      "Scanning files ...",
+      "Scanning done.",
+      "GraalClassic has been activated!",
+      "Initialized OpenGL.",
+      "Maximum texture size: 8192"
+    ]
+  },
+  "game_leg": {
+    "port": 14900,
+    "connections": 0,
+    "interpretation": "The failure script is not expected to start a game connection. Its marker proves script activation instead of game-server handoff."
+  },
+  "conclusion": {
+    "tls_error_to_http_fallback_runtime_proven": true,
+    "mode3_http_response_runtime_proven": true,
+    "native_rsa_verification_runtime_proven": true,
+    "mode3_zip_unpack_runtime_proven": true,
+    "start_script_fail_execution_runtime_proven": true,
+    "connector_script_to_game_handoff_runtime_proven": false,
+    "current_live_conf_gs_verified": false,
+    "safe_repair_conclusion": "The old mode-3 package handoff is functional with the matching test key and a StartScript_Fail archive. Obtain an authorized current response before repairing the production client, and preserve certificate and package verification."
+  },
+  "limitations": [
+    "The diagnostic library trusts a private helper test public key so the local package can be checked without bypassing native RSA verification.",
+    "The local package used the failure-script role by design and therefore does not prove a game login.",
+    "The x86_64 emulator did not execute the ARM64 native member.",
+    "No remote host or production endpoint was contacted.",
+    "The local TLS responder does not expose the native numeric CyaSSL error value."
+  ]
+}
