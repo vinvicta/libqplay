@@ -47,7 +47,7 @@ The remaining 124 default names are not an unfinished application boundary.
 The active-IDB scope check found no default name in the Android bridge range,
 no default name among the 1,779 unique script callback addresses, and no
 direct call from a remaining default function to the selected socket, file,
-process, or update imports. The 4 entries in the broader application-core
+process, or update imports. The 23 entries in the broader application-core
 range are short static-state or cleanup wrappers around existing library objects. Their
 addresses remain available in
 `artifacts/ida_active_translation_scope_check_20260902.json` without guessed
