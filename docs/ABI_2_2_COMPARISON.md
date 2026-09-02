@@ -66,6 +66,23 @@ client methods, certificate-buffer loading, hostname checking, verification
 configuration, and `CyaSSL_connect`. These exports establish available code,
 not a successful connection or a currently valid trust configuration.
 
+### Embedded trust input
+
+The native trust input is not carried over unchanged. The 1.8 string decodes
+to six PEM certificates, while the installed 2.2 package's string decodes to
+one self-signed certificate whose subject and DNS name are
+`cong.quattroplay.com`. That certificate is dated from 2025-01-01 through
+2035-01-01. The two decoded sets share no certificate DER hash.
+
+This is a package-specific anchor, not evidence that the 2.2 package has a
+current authorized Graal service chain. The package is already marked as an
+unverified modified build because it carries `libxposed.so`. The trust
+comparison is therefore useful for explaining why a 2.2 local setup may have
+different TLS behavior, but it is not a drop-in 1.8 repair. The metadata-only
+record and generator are
+`artifacts/cross_version_trust_bundle_review_20260902.json` and
+`tools/generate_cross_version_trust_review.py`.
+
 ### Exact CyaSSL anchors
 
 The 2.2 dynamic table preserves all 253 exact `CyaInt` function names found in

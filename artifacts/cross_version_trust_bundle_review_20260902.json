@@ -1,0 +1,215 @@
+{
+  "artifact": "cross_version_trust_bundle_review",
+  "assessment": {
+    "confirmed": [
+      "The 1.8 embedded trust input decodes to six PEM certificates.",
+      "The unverified 2.2 package decodes to one PEM certificate with subject and SAN cong.quattroplay.com.",
+      "The 1.8 and 2.2 decoded trust inputs share no certificate DER hash.",
+      "The 2.2 certificate is self-signed and has a 2025-01-01 through 2035-01-01 validity interval."
+    ],
+    "not_proven": [
+      "That the installed 2.2 package is an official release.",
+      "That cong.quattroplay.com is a live or authorized service endpoint.",
+      "That the 2.2 certificate is accepted by the current game service.",
+      "That the package's Java code loads the companion hook library on every device."
+    ],
+    "repair_implication": "The 2.2 trust material is not a drop-in repair for 1.8. It is a different, package-specific self-signed anchor and must be treated as untrusted comparison data until its provenance and service ownership are established."
+  },
+  "comparison": {
+    "1.8_certificate_count": 6,
+    "1.8_only_der_sha256": [
+      "2e6425395e91baab7be95d9918de198684bcb718800bff07113e7f336d06ce56",
+      "687fa451382278fff0c8b11f8d43d576671c6eb2bceab413fb83d965d06d2ff2",
+      "8d722f81a9c113c0791df136a2966db26c950a971db46b4199f4ea54b78bfb9f",
+      "c766a9bef2d4071c863a31aa4920e813b2d198608cb7b7cfe21143b836df09ea",
+      "ebd41040e4bb3ec742c9e381d31ef2a41a48b6685c96e7cef3c1df6cd4331c99",
+      "ee793643199474ed60efdc8ccde4d37445921683593aa751bbf8ee491a391e97"
+    ],
+    "2.2_certificate_count": 1,
+    "2.2_only_der_sha256": [
+      "4114af4386965f0e224240b5e6681c9ca6f426f4b144cb899abd48e6d9716fda"
+    ],
+    "encoded_length_changed": true,
+    "shared_der_sha256": []
+  },
+  "date": "2026-09-02",
+  "inputs": {
+    "1.8": {
+      "certificates": [
+        {
+          "der_sha256": "2e6425395e91baab7be95d9918de198684bcb718800bff07113e7f336d06ce56",
+          "index": 0,
+          "issuer": "CN=Stefan Knorr,OU=Technical Department,O=Eurocenter Games,L=Paris,ST=Paris,C=FR",
+          "marker_style": "standard",
+          "normalized_pem_sha256": "ba5a89a80b630aef47d59aeef36837a5c3433801b17614c2f9cf9ea545be6ae4",
+          "not_after": "2023-07-29T07:37:32Z",
+          "not_before": "2013-07-31T07:37:32Z",
+          "pem_bytes": 1029,
+          "pem_sha256": "ba5a89a80b630aef47d59aeef36837a5c3433801b17614c2f9cf9ea545be6ae4",
+          "public_key_bits": 1024,
+          "public_key_type": "_RSAPublicKey",
+          "serial": "B087AC89F25B5C53",
+          "sha256_fingerprint": "2e6425395e91baab7be95d9918de198684bcb718800bff07113e7f336d06ce56",
+          "signature_hash": "sha1",
+          "subject": "CN=Stefan Knorr,OU=Technical Department,O=Eurocenter Games,L=Paris,ST=Paris,C=FR",
+          "subject_alt_names": []
+        },
+        {
+          "der_sha256": "687fa451382278fff0c8b11f8d43d576671c6eb2bceab413fb83d965d06d2ff2",
+          "index": 1,
+          "issuer": "CN=AddTrust External CA Root,OU=AddTrust External TTP Network,O=AddTrust AB,C=SE",
+          "marker_style": "standard",
+          "normalized_pem_sha256": "4a4928ce5db4c7347a6d0b7b10677c6308390b624d82eeb0fe3f68d125121a4e",
+          "not_after": "2020-05-30T10:48:38Z",
+          "not_before": "2000-05-30T10:48:38Z",
+          "pem_bytes": 1521,
+          "pem_sha256": "4a4928ce5db4c7347a6d0b7b10677c6308390b624d82eeb0fe3f68d125121a4e",
+          "public_key_bits": 2048,
+          "public_key_type": "_RSAPublicKey",
+          "serial": "1",
+          "sha256_fingerprint": "687fa451382278fff0c8b11f8d43d576671c6eb2bceab413fb83d965d06d2ff2",
+          "signature_hash": "sha1",
+          "subject": "CN=AddTrust External CA Root,OU=AddTrust External TTP Network,O=AddTrust AB,C=SE",
+          "subject_alt_names": []
+        },
+        {
+          "der_sha256": "c766a9bef2d4071c863a31aa4920e813b2d198608cb7b7cfe21143b836df09ea",
+          "index": 2,
+          "issuer": "CN=StartCom Certification Authority,OU=Secure Digital Certificate Signing,O=StartCom Ltd.,C=IL",
+          "marker_style": "standard",
+          "normalized_pem_sha256": "916a8f9232328192968c81c8edb672fa539f726861dfe379ca722050e19962cd",
+          "not_after": "2036-09-17T19:46:36Z",
+          "not_before": "2006-09-17T19:46:36Z",
+          "pem_bytes": 2760,
+          "pem_sha256": "916a8f9232328192968c81c8edb672fa539f726861dfe379ca722050e19962cd",
+          "public_key_bits": 4096,
+          "public_key_type": "_RSAPublicKey",
+          "serial": "1",
+          "sha256_fingerprint": "c766a9bef2d4071c863a31aa4920e813b2d198608cb7b7cfe21143b836df09ea",
+          "signature_hash": "sha1",
+          "subject": "CN=StartCom Certification Authority,OU=Secure Digital Certificate Signing,O=StartCom Ltd.,C=IL",
+          "subject_alt_names": []
+        },
+        {
+          "der_sha256": "ee793643199474ed60efdc8ccde4d37445921683593aa751bbf8ee491a391e97",
+          "index": 3,
+          "issuer": "CN=GlobalSign Root CA,OU=Root CA,O=GlobalSign nv-sa,C=BE",
+          "marker_style": "missing-space",
+          "normalized_pem_sha256": "8f18023f2570728a82fff7ae2acc6cea2c986048f9de0fb47179d1ac87170bdf",
+          "not_after": "2024-02-20T10:00:00Z",
+          "not_before": "2014-02-20T10:00:00Z",
+          "pem_bytes": 1551,
+          "pem_sha256": "c95a52bb5127970298477d10ddc88663a75fee2110bf448b14422b0ae336a4bf",
+          "public_key_bits": 2048,
+          "public_key_type": "_RSAPublicKey",
+          "serial": "40000000001444EF03631",
+          "sha256_fingerprint": "ee793643199474ed60efdc8ccde4d37445921683593aa751bbf8ee491a391e97",
+          "signature_hash": "sha256",
+          "subject": "CN=AlphaSSL CA - SHA256 - G2,O=GlobalSign nv-sa,C=BE",
+          "subject_alt_names": []
+        },
+        {
+          "der_sha256": "ebd41040e4bb3ec742c9e381d31ef2a41a48b6685c96e7cef3c1df6cd4331c99",
+          "index": 4,
+          "issuer": "CN=GlobalSign Root CA,OU=Root CA,O=GlobalSign nv-sa,C=BE",
+          "marker_style": "standard",
+          "normalized_pem_sha256": "df68841998b7fd098a9517fe971e97890be0fc93bbe1b2a1ef63ebdea3111c80",
+          "not_after": "2028-01-28T12:00:00Z",
+          "not_before": "1998-09-01T12:00:00Z",
+          "pem_bytes": 1261,
+          "pem_sha256": "df68841998b7fd098a9517fe971e97890be0fc93bbe1b2a1ef63ebdea3111c80",
+          "public_key_bits": 2048,
+          "public_key_type": "_RSAPublicKey",
+          "serial": "40000000001154B5AC394",
+          "sha256_fingerprint": "ebd41040e4bb3ec742c9e381d31ef2a41a48b6685c96e7cef3c1df6cd4331c99",
+          "signature_hash": "sha1",
+          "subject": "CN=GlobalSign Root CA,OU=Root CA,O=GlobalSign nv-sa,C=BE",
+          "subject_alt_names": []
+        },
+        {
+          "der_sha256": "8d722f81a9c113c0791df136a2966db26c950a971db46b4199f4ea54b78bfb9f",
+          "index": 5,
+          "issuer": "CN=thawte Primary Root CA,OU=(c) 2006 thawte\\, Inc. - For authorized use only,OU=Certification Services Division,O=thawte\\, Inc.,C=US",
+          "marker_style": "standard",
+          "normalized_pem_sha256": "fdd466b6d0e7013a55bc8d83009137bc32be09099235aa6d6747cc7be4f6b031",
+          "not_after": "2036-07-16T23:59:59Z",
+          "not_before": "2006-11-17T00:00:00Z",
+          "pem_bytes": 1493,
+          "pem_sha256": "fdd466b6d0e7013a55bc8d83009137bc32be09099235aa6d6747cc7be4f6b031",
+          "public_key_bits": 2048,
+          "public_key_type": "_RSAPublicKey",
+          "serial": "344ED55720D5EDEC49F42FCE37DB2B6D",
+          "sha256_fingerprint": "8d722f81a9c113c0791df136a2966db26c950a971db46b4199f4ea54b78bfb9f",
+          "signature_hash": "sha1",
+          "subject": "CN=thawte Primary Root CA,OU=(c) 2006 thawte\\, Inc. - For authorized use only,OU=Certification Services Division,O=thawte\\, Inc.,C=US",
+          "subject_alt_names": []
+        }
+      ],
+      "embedded_trust": {
+        "ciphertext_bytes": 9615,
+        "ciphertext_sha256": "9b54788838df0accd1e59b8c73d8aa0feff10037a98d0e561ed4201c432cc161",
+        "des_full_block_bytes": 9608,
+        "des_unprocessed_tail_bytes": 7,
+        "encoded_bytes": 12820,
+        "encoded_file_offset": "0x2dcef8",
+        "encoded_sha256": "c87ea7bc32005cca699fb724ab455926fd852a1bd40ce0985aadf31a994878a0",
+        "plaintext_bytes": 9615,
+        "plaintext_sha256": "b5a9320a2f302c84a3b4c24364c062c33333591d96c780b07a9deb170903a224"
+      },
+      "library_bytes": 3657208,
+      "library_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+      "source": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
+    },
+    "2.2": {
+      "certificates": [
+        {
+          "der_sha256": "4114af4386965f0e224240b5e6681c9ca6f426f4b144cb899abd48e6d9716fda",
+          "index": 0,
+          "issuer": "CN=cong.quattroplay.com",
+          "marker_style": "standard",
+          "normalized_pem_sha256": "3ddd9cc4a6b3f657704a8731e66af2266055d2e391d6a957ee5f0c17e65646eb",
+          "not_after": "2035-01-01T00:00:00Z",
+          "not_before": "2025-01-01T00:00:00Z",
+          "pem_bytes": 1103,
+          "pem_sha256": "3ddd9cc4a6b3f657704a8731e66af2266055d2e391d6a957ee5f0c17e65646eb",
+          "public_key_bits": 2048,
+          "public_key_type": "_RSAPublicKey",
+          "serial": "1192442346ACCE6AE0882EB0949A248064B6802E",
+          "sha256_fingerprint": "4114af4386965f0e224240b5e6681c9ca6f426f4b144cb899abd48e6d9716fda",
+          "signature_hash": "sha256",
+          "subject": "CN=cong.quattroplay.com",
+          "subject_alt_names": [
+            {
+              "type": "DNSName",
+              "value": "cong.quattroplay.com"
+            }
+          ]
+        }
+      ],
+      "embedded_trust": {
+        "ciphertext_bytes": 1103,
+        "ciphertext_sha256": "da2f877191389dbaa2cecdac8d44c5003e1ebb9fe78c65b9e8f2e3ccaeade281",
+        "des_full_block_bytes": 1096,
+        "des_unprocessed_tail_bytes": 7,
+        "encoded_bytes": 1472,
+        "encoded_file_offset": "0x2ea9e0",
+        "encoded_sha256": "eab759c34c8bc2f323eff8e152b1cc5cbcf6031ace48ca519a528ff0e327f142",
+        "plaintext_bytes": 1103,
+        "plaintext_sha256": "3ddd9cc4a6b3f657704a8731e66af2266055d2e391d6a957ee5f0c17e65646eb"
+      },
+      "library_bytes": 3736872,
+      "library_sha256": "45a7f97df9b40cdac6fbd42dc715bbabf3bbdb9b33876990e232133a8818941e",
+      "source": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_2.2_installed.apk"
+    }
+  },
+  "method": {
+    "certificate_parser": "cryptography.x509 metadata extraction; certificate bodies are not emitted.",
+    "hook_library_executed": false,
+    "native_decoder": "Base64 decode, reverse each DES key byte, DES-ECB decrypt complete blocks, preserve any short tail.",
+    "native_executed": false,
+    "network_contacted": false
+  },
+  "scope": "Offline comparison of the embedded native TLS trust inputs in the original 1.8 ARM64 library and an unverified installed 2.2 package",
+  "tool": "tools/generate_cross_version_trust_review.py",
+  "tool_version": 1
+}

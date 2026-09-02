@@ -113,6 +113,15 @@ deltas and 84 byte-identical function bodies. The application entrypoints do
 not share that guarantee, so the result is useful for TLS analysis rather than
 blind address translation.
 
+The same comparison found that the embedded TLS trust input changed entirely.
+The original 1.8 library decodes to six historical certificates, while the
+unverified installed 2.2 package decodes to one self-signed
+`cong.quattroplay.com` certificate dated 2025-01-01 through 2035-01-01. No
+decoded certificate is shared between the two versions. That package-specific
+anchor is not a safe repair source. The metadata and decoder are recorded in
+`artifacts/cross_version_trust_bundle_review_20260902.json` and
+`tools/generate_cross_version_trust_review.py`.
+
 The full retained-function overlap is recorded in
 `artifacts/cross_version_symbol_overlap_20260902.json`. It finds 835 exact
 shared defined-function names, 830 matching sizes, and 279 byte-identical
