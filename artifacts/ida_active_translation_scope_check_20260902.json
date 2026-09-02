@@ -1,0 +1,197 @@
+{
+  "analysis_date": "2026-09-02",
+  "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+  "checks": {
+    "android_bridge_range": {
+      "default_sub_count": 0,
+      "default_sub_functions": [],
+      "end_exclusive": "0x247000",
+      "start": "0x240000"
+    },
+    "application_core_range": {
+      "default_sub_count": 23,
+      "default_sub_functions": [
+        {
+          "address": "0x1e006c",
+          "name": "sub_1E006C",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "address": "0x1e0e58",
+          "name": "sub_1E0E58",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "address": "0x20adbc",
+          "name": "sub_20ADBC",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "address": "0x20fa90",
+          "name": "sub_20FA90",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "address": "0x214758",
+          "name": "sub_214758",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "address": "0x214764",
+          "name": "sub_214764",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "address": "0x214774",
+          "name": "sub_214774",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "address": "0x214784",
+          "name": "sub_214784",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "address": "0x224728",
+          "name": "sub_224728",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "address": "0x224734",
+          "name": "sub_224734",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "address": "0x226ccc",
+          "name": "sub_226CCC",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "address": "0x226cd8",
+          "name": "sub_226CD8",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "address": "0x22b15c",
+          "name": "sub_22B15C",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "address": "0x22b16c",
+          "name": "sub_22B16C",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "address": "0x22b1dc",
+          "name": "sub_22B1DC",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "address": "0x22b1e8",
+          "name": "sub_22B1E8",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "address": "0x22d9f0",
+          "name": "sub_22D9F0",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "address": "0x22ec18",
+          "name": "sub_22EC18",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "address": "0x2309d0",
+          "name": "sub_2309D0",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "address": "0x2343d4",
+          "name": "sub_2343D4",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "address": "0x2383f0",
+          "name": "sub_2383F0",
+          "segment": ".text",
+          "size": 12
+        },
+        {
+          "address": "0x2383fc",
+          "name": "sub_2383FC",
+          "segment": ".text",
+          "size": 16
+        },
+        {
+          "address": "0x23840c",
+          "name": "sub_23840C",
+          "segment": ".text",
+          "size": 16
+        }
+      ],
+      "end_exclusive": "0x247000",
+      "start": "0x1e0000"
+    },
+    "direct_boundary_calls": {
+      "default_sub_edge_count": 0,
+      "edges": [],
+      "targets": [
+        ".chmod",
+        ".connect",
+        ".execvp",
+        ".fopen",
+        ".fork",
+        ".gethostbyname",
+        ".mkdir",
+        ".open",
+        ".read",
+        ".recv",
+        ".select",
+        ".send",
+        ".sendto",
+        ".socket",
+        ".unlink"
+      ]
+    },
+    "script_table_callbacks": {
+      "default_sub_count": 0,
+      "default_sub_functions": [],
+      "unique_callback_count": 1779
+    }
+  },
+  "database": {
+    "default_sub_count": 124,
+    "function_count": 11296,
+    "input_path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
+  },
+  "interpretation": [
+    "The 124 remaining default sub_ functions are outside the Android bridge callback region.",
+    "The 23 default functions in the broader application-core range are short static-state or cleanup wrappers; their decompiled bodies do not contain the selected socket, file, process, or update boundary calls.",
+    "Every address in the 1779-entry script callback inventory has a non-default active IDA name, including the callbacks reviewed in the focused Android passes."
+  ],
+  "network_contacted": false,
+  "schema": "libqplay.ida-active-translation-scope-check.v1",
+  "status": "ok",
+  "tool": "tools/ida_export_active_translation_scope_check.py"
+}

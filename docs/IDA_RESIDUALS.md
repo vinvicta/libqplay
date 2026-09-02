@@ -9,23 +9,24 @@ their original source names.
 
 The original active database started with 11,272 functions and 1,645 default
 `sub_` names. The complete reviewed pass added 25 function boundaries and
-1,396 names or aliases. The current packed copy at
-`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v11.i64`
-contains 11,297 functions and 274 default names. The active IDA verifier
-returned zero failures after the expanded FreeType source-match pass. A
-separate reopen of this current copy is still pending.
+1,551 names or aliases. One false boundary was then removed from a literal
+pool between two JPEG DCT routines. The current packed copy at
+`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v12.i64`
+contains 11,296 functions and 124 default names. The active IDA verifier
+returned zero failures after the expanded embedded-library source-role pass.
+A separate reopen of this current copy is still pending.
 
 The count is accounted for exactly:
 
 ```text
 488 pre-persistence unresolved entries
 - 28 applied application or engine role aliases
-- 11 applied CyaSSL static role aliases
-- 30 applied static-library role aliases
--  3 reviewed GPC helper aliases
--  1 compiler branch veneer reclassified as a named thunk
-- 141 exact FreeType 2.3.6 source matches
-=274 residual default entries
+- 41 applied CyaSSL and bundled-library role aliases
+-145 reclassified entries, including 141 FreeType matches, three GPC helpers,
+   and one compiler branch veneer
+-149 source matches intersecting the old residual profile
+-  1 false function boundary removed from a literal pool
+=124 residual default entries
 ```
 
 The 28 application and engine role aliases are behavior-based names, not
@@ -52,8 +53,20 @@ dummy autofit classes. The exact address, size, xref count, source file, line
 anchor, and evidence are in
 `artifacts/ida_freetype_source_matches_20260901.json`.
 
+The former coarse JPEG bucket is now resolved. One hundred fifty-three IJG
+libjpeg 6b source matches were checked, with 147 intersecting the old
+residual profile and six no-op callbacks already outside it. The corrected
+marker-reader mappings include `examine_app14` at `0xe0454`,
+`skip_variable` at `0x28d2ec`, and `next_marker` at `0x28db3c`. The zlib
+`inflate_fast` role at `0x28a2f4` and the static giflib
+`DGifDecompressLine` role at `0x2acb20` were separated from the old JPEG
+address bucket. Their evidence is recorded in
+`artifacts/ida_libjpeg_source_matches_20260902.json`,
+`artifacts/ida_zlib_source_matches_20260902.json`, and
+`artifacts/ida_giflib_source_matches_20260902.json`.
+
 The checked-in function inventory and script-table inventory were regenerated
-from the current saved IDA state. They now report 11,297 functions and 1,779
+from the current saved IDA state. They now report 11,296 functions and 1,779
 unique script callback addresses, with no default `sub_` name in the callback
 set. The overlay and unresolved-function profile retain the earlier
 pre-persistence snapshot because the residual calculation uses that snapshot
@@ -68,11 +81,11 @@ debug symbols survived.
 ## Compact residual audit
 
 The current residual set is recorded in
-`artifacts/ida_final_residual_audit_20260901.json`. It contains one compact
+`artifacts/ida_final_residual_audit_20260902.json`. It contains one compact
 record per remaining default `sub_` function, including its address, size,
-segment, and incoming xref count. It also records the 11,297-row inventory
+segment, and incoming xref count. It also records the 11,296-row inventory
 hash, the original ARM64 library hash, address buckets, and the most
-referenced residual entries. The report contains 274 residual functions and
+referenced residual entries. The report contains 124 residual functions and
 does not publish another full inventory. When the checked-in residual profile
 matches the input addresses, the report also embeds its category counts and
 profile hash.
@@ -89,27 +102,27 @@ fields make it possible to verify that a future export describes the same
 library and inventory.
 
 The final packed-database verification is recorded separately in
-`artifacts/ida_translation_verification_20260901.json`. It includes the
+`artifacts/ida_translation_verification_20260902.json`. It includes the
 source library hash, the saved IDA copy hash, all pass counts, and the exact
 function and residual totals.
 
-The 274 residual entries have also been classified by the persisted IDA
+The 124 residual entries have also been classified by the persisted IDA
 profile:
 
 | Class | Count | Interpretation |
 | --- | ---: | --- |
-| JPEG static internals | 150 | Unnamed routines inside the bundled JPEG implementation |
 | TString cleanup wrappers | 97 | Compiler-generated destructors for fixed global strings |
 | Init or fini array entries | 19 | Runtime registration or cleanup entry points referenced by ELF arrays |
 | TStringList cleanup wrappers | 5 | Compiler-generated destructors for fixed global string lists |
 | TGraalVar cleanup wrappers | 2 | Compiler-generated destructors for fixed global script values |
 | AArch64 PLT resolver | 1 | The resolver slot at `0xd2170`, not an imported function |
 
-This breakdown accounts for every residual entry. The large JPEG group and
-cleanup wrappers are not omitted from the analysis. They are left with
-address-based names because their local source names were not retained and a
-family label alone is not enough to prove an exact function match. The 141
-matched FreeType routines are no longer part of this residual table.
+This breakdown accounts for every residual entry. The former 150-entry JPEG
+address bucket no longer appears because its 147 real residual functions have
+source-role matches, two other entries were the zlib and GIF helpers, and one
+entry was a false function boundary over literal data. The remaining queue is
+therefore dominated by cleanup and runtime registration wrappers, where a
+family label alone is not enough to prove an exact source function.
 
 ## How to work the remaining queue
 

@@ -3586,7 +3586,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 917920,gpc_abort_malloc_failure_tristrip_node,ida_named_non_elf,,,,,.text,48,1,5121,False,False,False
 917968,ani_lexer_getPreviousState,ida_named_non_elf,,,,,.text,220,3,5120,False,False,False
 918188,bzip2_mainGtU,ida_named_non_elf,,,,,.text,424,3,5120,False,False,False
-918612,sub_E0454,ida_default_sub,,,,,.text,128,2,5120,False,False,True
+918612,libjpeg_jdmarker_examine_app14,ida_named_non_elf,,,,,.text,128,2,5120,False,False,False
 918740,TFiles_clearStaticPaths,ida_named_non_elf,,,,,.text,64,1,5120,False,False,False
 918804,sub_E0514,ida_default_sub,,,,,.text,16,1,5120,False,False,True
 918820,sub_E0524,ida_default_sub,,,,,.text,12,1,5120,False,False,True
@@ -10507,7 +10507,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2661264,adler32,ida_named_non_elf,,,,,.text,1452,4,5120,False,False,False
 2662716,adler32_combine,ida_named_non_elf,,,,,.text,220,1,5120,False,False,False
 2662936,adler32_combine64_ulong_ulong_long,elf_symbol,function,_Z17adler32_combine64mml,"adler32_combine64(ulong,ulong,long)",adler32_combine64_ulong_ulong_long,.text,220,1,5120,False,False,False
-2663156,sub_28A2F4,ida_default_sub,,,,,.text,2724,1,5120,False,False,True
+2663156,zlib_inflate_fast,ida_named_non_elf,,,,,.text,2724,1,5120,False,False,False
 2665880,jpeg_CreateDecompress,ida_named_non_elf,,,,,.text,280,4,5120,False,False,False
 2666160,jpeg_destroy_decompress,ida_named_non_elf,,,,,.text,4,4,5120,False,False,False
 2666164,jpeg_abort_decompress,ida_named_non_elf,,,,,.text,4,1,5120,False,False,False
@@ -10521,82 +10521,82 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2668172,jpeg_read_raw_data,ida_named_non_elf,,,,,.text,308,1,5120,False,False,False
 2668480,jpeg_start_output,ida_named_non_elf,,,,,.text,376,1,5120,False,False,False
 2668856,jpeg_finish_output,ida_named_non_elf,,,,,.text,188,1,5120,False,False,False
-2669044,sub_28B9F4,ida_default_sub,,,,,.text,60,1,5120,False,False,True
-2669104,sub_28BA30,ida_default_sub,,,,,.text,116,1,5120,False,False,True
-2669220,sub_28BAA4,ida_default_sub,,,,,.text,184,1,5120,False,False,True
+2669044,libjpeg_jdatadst_init_destination,ida_named_non_elf,,,,,.text,60,1,5120,False,False,False
+2669104,libjpeg_jdatadst_empty_output_buffer,ida_named_non_elf,,,,,.text,116,1,5120,False,False,False
+2669220,libjpeg_jdatadst_term_destination,ida_named_non_elf,,,,,.text,184,1,5120,False,False,False
 2669404,jpeg_stdio_dest,ida_named_non_elf,,,,,.text,96,4,5120,False,False,False
-2669500,sub_28BBBC,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-2669516,sub_28BBCC,ida_default_sub,,,,,.text,184,1,5120,False,False,True
-2669700,nullsub_3,ida_named_non_elf,,,,,.text,4,2,5184,False,False,False
-2669704,sub_28BC88,ida_default_sub,,,,,.text,276,1,5120,False,False,True
+2669500,libjpeg_jdatasrc_init_source,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+2669516,libjpeg_jdatasrc_fill_input_buffer,ida_named_non_elf,,,,,.text,184,1,5120,False,False,False
+2669700,libjpeg_jdatasrc_term_source,ida_named_non_elf,,,,,.text,4,2,5184,False,False,False
+2669704,libjpeg_jdatasrc_skip_input_data,ida_named_non_elf,,,,,.text,276,1,5120,False,False,False
 2669980,jpeg_stdio_src,ida_named_non_elf,,,,,.text,168,4,5120,False,False,False
-2670148,sub_28BE44,ida_default_sub,,,,,.text,20,1,5120,False,False,True
-2670168,sub_28BE58,ida_default_sub,,,,,.text,88,2,5120,False,False,True
-2670256,sub_28BEB0,ida_default_sub,,,,,.text,1224,1,5120,False,False,True
-2671480,sub_28C378,ida_default_sub,,,,,.text,2000,4,5120,False,False,True
+2670148,libjpeg_jdinput_finish_input_pass,ida_named_non_elf,,,,,.text,20,1,5120,False,False,False
+2670168,libjpeg_jdinput_reset_input_controller,ida_named_non_elf,,,,,.text,88,2,5120,False,False,False
+2670256,libjpeg_jdinput_start_input_pass,ida_named_non_elf,,,,,.text,1224,1,5120,False,False,False
+2671480,libjpeg_jdinput_consume_markers,ida_named_non_elf,,,,,.text,2000,4,5120,False,False,False
 2673480,jinit_input_controller_jpeg_decompress_struct,elf_symbol,function,_Z22jinit_input_controllerP22jpeg_decompress_struct,jinit_input_controller(jpeg_decompress_struct *),jinit_input_controller_jpeg_decompress_struct,.text,112,4,5120,False,False,False
-2673592,sub_28CBB8,ida_default_sub,,,,,.text,1092,4,5120,False,False,True
-2674684,sub_28CFFC,ida_default_sub,,,,,.text,752,2,5120,False,False,True
-2675436,sub_28D2EC,ida_default_sub,,,,,.text,276,3,5120,False,False,True
-2675712,sub_28D400,ida_default_sub,,,,,.text,36,1,5120,False,False,True
-2675748,sub_28D424,ida_default_sub,,,,,.text,992,1,5120,False,False,True
-2676740,sub_28D804,ida_default_sub,,,,,.text,824,5,5120,False,False,True
-2677564,sub_28DB3C,ida_default_sub,,,,,.text,608,2,5120,False,False,True
-2678172,sub_28DD9C,ida_default_sub,,,,,.text,3460,2,5120,False,False,True
-2681632,sub_28EB20,ida_default_sub,,,,,.text,520,1,5120,False,False,True
+2673592,libjpeg_jdmarker_get_sof,ida_named_non_elf,,,,,.text,1092,4,5120,False,False,False
+2674684,libjpeg_jdmarker_examine_app0,ida_named_non_elf,,,,,.text,752,2,5120,False,False,False
+2675436,libjpeg_jdmarker_skip_variable,ida_named_non_elf,,,,,.text,276,3,5120,False,False,False
+2675712,libjpeg_jdmarker_reset_marker_reader,ida_named_non_elf,,,,,.text,36,1,5120,False,False,False
+2675748,libjpeg_jdmarker_get_interesting_appn,ida_named_non_elf,,,,,.text,992,1,5120,False,False,False
+2676740,libjpeg_jdmarker_save_marker,ida_named_non_elf,,,,,.text,824,5,5120,False,False,False
+2677564,libjpeg_jdmarker_next_marker,ida_named_non_elf,,,,,.text,608,2,5120,False,False,False
+2678172,libjpeg_jdmarker_read_markers,ida_named_non_elf,,,,,.text,3460,2,5120,False,False,False
+2681632,libjpeg_jdmarker_read_restart_marker,ida_named_non_elf,,,,,.text,520,1,5120,False,False,False
 2682152,jpeg_resync_to_restart,ida_named_non_elf,,,,,.text,768,3,5120,False,False,False
 2682920,jinit_marker_reader_jpeg_decompress_struct,elf_symbol,function,_Z19jinit_marker_readerP22jpeg_decompress_struct,jinit_marker_reader(jpeg_decompress_struct *),jinit_marker_reader_jpeg_decompress_struct,.text,248,4,5120,False,False,False
 2683168,jpeg_save_markers,ida_named_non_elf,,,,,.text,280,1,5120,False,False,False
 2683448,jpeg_set_marker_processor,ida_named_non_elf,,,,,.text,108,1,5120,False,False,False
-2683568,sub_28F2B0,ida_default_sub,,,,,.text,456,2,5120,False,False,True
-2684024,sub_28F478,ida_default_sub,,,,,.text,56,1,5120,False,False,True
+2683568,libjpeg_jdmaster_prepare_for_output_pass,ida_named_non_elf,,,,,.text,456,2,5120,False,False,False
+2684024,libjpeg_jdmaster_finish_output_pass,ida_named_non_elf,,,,,.text,56,1,5120,False,False,False
 2684080,jpeg_calc_output_dimensions,ida_named_non_elf,,,,,.text,876,4,5120,False,False,False
 2684956,jpeg_new_colormap,ida_named_non_elf,,,,,.text,164,1,5120,False,False,False
 2685120,jinit_master_decompress_jpeg_decompress_struct,elf_symbol,function,_Z23jinit_master_decompressP22jpeg_decompress_struct,jinit_master_decompress(jpeg_decompress_struct *),jinit_master_decompress_jpeg_decompress_struct,.text,1308,4,5120,False,False,False
-2686688,sub_28FEE0,ida_default_sub,,,,,.text,20,2,5120,False,False,True
-2686708,sub_28FEF4,ida_default_sub,,,,,.text,80,2,5120,False,False,True
-2686788,sub_28FF44,ida_default_sub,,,,,.text,336,1,5120,False,False,True
-2687124,sub_290094,ida_default_sub,,,,,.text,512,1,5120,False,False,True
-2687636,sub_290294,ida_default_sub,,,,,.text,260,1,5120,False,False,True
+2686688,libjpeg_jdmerge_start_pass_merged_upsample,ida_named_non_elf,,,,,.text,20,2,5120,False,False,False
+2686708,libjpeg_jdmerge_merged_1v_upsample,ida_named_non_elf,,,,,.text,80,2,5120,False,False,False
+2686788,libjpeg_jdmerge_h2v1_merged_upsample,ida_named_non_elf,,,,,.text,336,1,5120,False,False,False
+2687124,libjpeg_jdmerge_h2v2_merged_upsample,ida_named_non_elf,,,,,.text,512,1,5120,False,False,False
+2687636,libjpeg_jdmerge_merged_2v_upsample,ida_named_non_elf,,,,,.text,260,1,5120,False,False,False
 2687896,jinit_merged_upsampler_jpeg_decompress_struct,elf_symbol,function,_Z22jinit_merged_upsamplerP22jpeg_decompress_struct,jinit_merged_upsampler(jpeg_decompress_struct *),jinit_merged_upsampler_jpeg_decompress_struct,.text,416,4,5120,False,False,False
-2688312,sub_290538,ida_default_sub,,,,,.text,1060,1,5120,False,False,True
-2689372,sub_29095C,ida_default_sub,,,,,.text,1248,1,5120,False,False,True
-2690620,sub_290E3C,ida_default_sub,,,,,.text,792,1,5120,False,False,True
-2691412,sub_291154,ida_default_sub,,,,,.text,420,1,5120,False,False,True
-2691832,sub_2912F8,ida_default_sub,,,,,.text,740,1,5120,False,False,True
+2688312,libjpeg_jdphuff_start_pass_phuff_decoder,ida_named_non_elf,,,,,.text,1060,1,5120,False,False,False
+2689372,libjpeg_jdphuff_decode_mcu_DC_first,ida_named_non_elf,,,,,.text,1248,1,5120,False,False,False
+2690620,libjpeg_jdphuff_decode_mcu_AC_first,ida_named_non_elf,,,,,.text,792,1,5120,False,False,False
+2691412,libjpeg_jdphuff_decode_mcu_DC_refine,ida_named_non_elf,,,,,.text,420,1,5120,False,False,False
+2691832,libjpeg_jdphuff_decode_mcu_AC_refine,ida_named_non_elf,,,,,.text,740,1,5120,False,False,False
 2692572,jinit_phuff_decoder_jpeg_decompress_struct,elf_symbol,function,_Z19jinit_phuff_decoderP22jpeg_decompress_struct,jinit_phuff_decoder(jpeg_decompress_struct *),jinit_phuff_decoder_jpeg_decompress_struct,.text,284,4,5120,False,False,False
-2692856,sub_2916F8,ida_default_sub,,,,,.text,280,1,5120,False,False,True
-2693136,sub_291810,ida_default_sub,,,,,.text,144,2,5120,False,False,True
-2693280,sub_2918A0,ida_default_sub,,,,,.text,256,2,5120,False,False,True
-2693536,sub_2919A0,ida_default_sub,,,,,.text,240,2,5120,False,False,True
+2692856,libjpeg_jdpostct_start_pass_dpost,ida_named_non_elf,,,,,.text,280,1,5120,False,False,False
+2693136,libjpeg_jdpostct_post_process_1pass,ida_named_non_elf,,,,,.text,144,2,5120,False,False,False
+2693280,libjpeg_jdpostct_post_process_prepass,ida_named_non_elf,,,,,.text,256,2,5120,False,False,False
+2693536,libjpeg_jdpostct_post_process_2pass,ida_named_non_elf,,,,,.text,240,2,5120,False,False,False
 2693776,jinit_d_post_controller_jpeg_decompress_struct_int,elf_symbol,function,_Z23jinit_d_post_controllerP22jpeg_decompress_structi,"jinit_d_post_controller(jpeg_decompress_struct *,int)",jinit_d_post_controller_jpeg_decompress_struct_int,.text,220,4,5120,False,False,False
-2693996,sub_291B6C,ida_default_sub,,,,,.text,24,1,5120,False,False,True
-2694020,sub_291B84,ida_default_sub,,,,,.text,356,1,5120,False,False,True
-2694376,sub_291CE8,ida_default_sub,,,,,.text,8,2,5120,False,False,True
-2694384,sub_291CF0,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-2694392,sub_291CF8,ida_default_sub,,,,,.text,628,1,5120,False,False,True
-2695020,sub_291F6C,ida_default_sub,,,,,.text,692,1,5120,False,False,True
-2695712,sub_292220,ida_default_sub,,,,,.text,320,2,5120,False,False,True
-2696032,sub_292360,ida_default_sub,,,,,.text,520,2,5120,False,False,True
-2696552,sub_292568,ida_default_sub,,,,,.text,708,2,5120,False,False,True
+2693996,libjpeg_jdsample_start_pass_upsample,ida_named_non_elf,,,,,.text,24,1,5120,False,False,False
+2694020,libjpeg_jdsample_sep_upsample,ida_named_non_elf,,,,,.text,356,1,5120,False,False,False
+2694376,libjpeg_jdsample_fullsize_upsample,ida_named_non_elf,,,,,.text,8,2,5120,False,False,False
+2694384,libjpeg_jdsample_noop_upsample,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+2694392,libjpeg_jdsample_int_upsample,ida_named_non_elf,,,,,.text,628,1,5120,False,False,False
+2695020,libjpeg_jdsample_h2v1_upsample,ida_named_non_elf,,,,,.text,692,1,5120,False,False,False
+2695712,libjpeg_jdsample_h2v2_upsample,ida_named_non_elf,,,,,.text,320,2,5120,False,False,False
+2696032,libjpeg_jdsample_h2v1_fancy_upsample,ida_named_non_elf,,,,,.text,520,2,5120,False,False,False
+2696552,libjpeg_jdsample_h2v2_fancy_upsample,ida_named_non_elf,,,,,.text,708,2,5120,False,False,False
 2697260,jinit_upsampler_jpeg_decompress_struct,elf_symbol,function,_Z15jinit_upsamplerP22jpeg_decompress_struct,jinit_upsampler(jpeg_decompress_struct *),jinit_upsampler_jpeg_decompress_struct,.text,640,4,5120,False,False,False
-2697900,sub_292AAC,ida_default_sub,,,,,.text,120,2,5120,False,False,True
-2698020,sub_292B24,ida_default_sub,,,,,.text,16,2,5120,False,False,True
-2698036,sub_292B34,ida_default_sub,,,,,.text,232,2,5120,False,False,True
-2698268,sub_292C1C,ida_default_sub,,,,,.text,72,2,5120,False,False,True
-2698340,sub_292C64,ida_default_sub,,,,,.text,40,2,5121,False,False,True
+2697900,libjpeg_jerror_emit_message,ida_named_non_elf,,,,,.text,120,2,5120,False,False,False
+2698020,libjpeg_jerror_reset_error_mgr,ida_named_non_elf,,,,,.text,16,2,5120,False,False,False
+2698036,libjpeg_jerror_format_message,ida_named_non_elf,,,,,.text,232,2,5120,False,False,False
+2698268,libjpeg_jerror_output_message,ida_named_non_elf,,,,,.text,72,2,5120,False,False,False
+2698340,libjpeg_jerror_error_exit,ida_named_non_elf,,,,,.text,40,2,5121,False,False,False
 2698380,jpeg_std_error,ida_named_non_elf,,,,,.text,108,4,5120,False,False,False
-2698488,sub_292CF8,ida_default_sub,,,,,.text,512,2,5120,False,False,True
-2699000,sub_292EF8,ida_default_sub,,,,,.text,352,2,5120,False,False,True
-2699352,sub_293058,ida_default_sub,,,,,.text,272,2,5120,False,False,True
-2699624,sub_293168,ida_default_sub,,,,,.text,920,2,5120,False,False,True
-2700544,sub_293500,ida_default_sub,,,,,.text,944,2,5120,False,False,True
-2701488,sub_2938B0,ida_default_sub,,,,,.text,540,2,5120,False,False,True
-2702028,sub_293ACC,ida_default_sub,,,,,.text,540,2,5120,False,False,True
-2702568,sub_293CE8,ida_default_sub,,,,,.text,360,2,5120,False,False,True
-2702928,sub_293E50,ida_default_sub,,,,,.text,896,2,5120,False,False,True
-2703824,sub_2941D0,ida_default_sub,,,,,.text,868,2,5120,False,False,True
-2704692,sub_294534,ida_default_sub,,,,,.text,2068,2,5120,False,False,True
+2698488,libjpeg_jmemmgr_alloc_small,ida_named_non_elf,,,,,.text,512,2,5120,False,False,False
+2699000,libjpeg_jmemmgr_alloc_large,ida_named_non_elf,,,,,.text,352,2,5120,False,False,False
+2699352,libjpeg_jmemmgr_alloc_sarray,ida_named_non_elf,,,,,.text,272,2,5120,False,False,False
+2699624,libjpeg_jmemmgr_alloc_barray,ida_named_non_elf,,,,,.text,920,2,5120,False,False,False
+2700544,libjpeg_jmemmgr_request_virt_sarray,ida_named_non_elf,,,,,.text,944,2,5120,False,False,False
+2701488,libjpeg_jmemmgr_request_virt_barray,ida_named_non_elf,,,,,.text,540,2,5120,False,False,False
+2702028,libjpeg_jmemmgr_realize_virt_arrays,ida_named_non_elf,,,,,.text,540,2,5120,False,False,False
+2702568,libjpeg_jmemmgr_access_virt_sarray,ida_named_non_elf,,,,,.text,360,2,5120,False,False,False
+2702928,libjpeg_jmemmgr_access_virt_barray,ida_named_non_elf,,,,,.text,896,2,5120,False,False,False
+2703824,libjpeg_jmemmgr_free_pool,ida_named_non_elf,,,,,.text,868,2,5120,False,False,False
+2704692,libjpeg_jmemmgr_self_destruct,ida_named_non_elf,,,,,.text,2068,2,5120,False,False,False
 2706760,jinit_memory_mgr_jpeg_common_struct,elf_symbol,function,_Z16jinit_memory_mgrP18jpeg_common_struct,jinit_memory_mgr(jpeg_common_struct *),jinit_memory_mgr_jpeg_common_struct,.text,416,4,5120,False,False,False
 2707176,jpeg_get_small_jpeg_common_struct_ulong,elf_symbol,function,_Z14jpeg_get_smallP18jpeg_common_structm,"jpeg_get_small(jpeg_common_struct *,ulong)",jpeg_get_small_jpeg_common_struct_ulong,.text,8,4,5120,False,False,False
 2707184,jpeg_free_small_jpeg_common_struct_void_ulong,elf_symbol,function,_Z15jpeg_free_smallP18jpeg_common_structPvm,"jpeg_free_small(jpeg_common_struct *,void *,ulong)",jpeg_free_small_jpeg_common_struct_void_ulong,.text,8,4,5120,False,False,False
@@ -10606,24 +10606,24 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2707216,jpeg_open_backing_store_jpeg_common_struct_backing_store_struct_long,elf_symbol,function,_Z23jpeg_open_backing_storeP18jpeg_common_structP20backing_store_structl,"jpeg_open_backing_store(jpeg_common_struct *,backing_store_struct *,long)",jpeg_open_backing_store_jpeg_common_struct_backing_store_struct_long,.text,40,4,5120,False,False,False
 2707256,jpeg_mem_init_jpeg_common_struct,elf_symbol,function,_Z13jpeg_mem_initP18jpeg_common_struct,jpeg_mem_init(jpeg_common_struct *),jpeg_mem_init_jpeg_common_struct,.text,8,4,5120,False,False,False
 2707264,jpeg_mem_term_jpeg_common_struct,elf_symbol,function,_Z13jpeg_mem_termP18jpeg_common_struct,jpeg_mem_term(jpeg_common_struct *),jpeg_mem_term_jpeg_common_struct,.text,4,4,5120,False,False,False
-2707268,sub_294F44,ida_default_sub,,,,,.text,140,1,5120,False,False,True
-2707408,sub_294FD0,ida_default_sub,,,,,.text,128,1,5120,False,False,True
-2707536,sub_295050,ida_default_sub,,,,,.text,232,1,5120,False,False,True
-2707768,nullsub_4,ida_named_non_elf,,,,,.text,4,2,5184,False,False,False
-2707772,sub_29513C,ida_default_sub,,,,,.text,40,2,5120,False,False,True
-2707812,sub_295164,ida_default_sub,,,,,.text,480,2,5120,False,False,True
-2708292,sub_295344,ida_default_sub,,,,,.text,280,1,5120,False,False,True
-2708572,sub_29545C,ida_default_sub,,,,,.text,1724,2,5120,False,False,True
+2707268,libjpeg_jquant1_color_quantize,ida_named_non_elf,,,,,.text,140,1,5120,False,False,False
+2707408,libjpeg_jquant1_color_quantize3,ida_named_non_elf,,,,,.text,128,1,5120,False,False,False
+2707536,libjpeg_jquant1_quantize3_ord_dither,ida_named_non_elf,,,,,.text,232,1,5120,False,False,False
+2707768,libjpeg_jquant1_finish_pass_1_quant,ida_named_non_elf,,,,,.text,4,2,5184,False,False,False
+2707772,libjpeg_jquant1_new_color_map_1_quant,ida_named_non_elf,,,,,.text,40,2,5120,False,False,False
+2707812,libjpeg_jquant1_quantize_fs_dither,ida_named_non_elf,,,,,.text,480,2,5120,False,False,False
+2708292,libjpeg_jquant1_quantize_ord_dither,ida_named_non_elf,,,,,.text,280,1,5120,False,False,False
+2708572,libjpeg_jquant1_start_pass_1_quant,ida_named_non_elf,,,,,.text,1724,2,5120,False,False,False
 2710296,jinit_1pass_quantizer_jpeg_decompress_struct,elf_symbol,function,_Z21jinit_1pass_quantizerP22jpeg_decompress_struct,jinit_1pass_quantizer(jpeg_decompress_struct *),jinit_1pass_quantizer_jpeg_decompress_struct,.text,1880,4,5120,False,False,False
-2712176,sub_296270,ida_default_sub,,,,,.text,132,1,5120,False,False,True
-2712308,nullsub_5,ida_named_non_elf,,,,,.text,4,1,5184,False,False,False
-2712312,sub_2962F8,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-2712328,sub_296308,ida_default_sub,,,,,.text,652,2,5120,False,False,True
-2713120,sub_296620,ida_default_sub,,,,,.text,1092,2,5120,False,False,True
-2714212,sub_296A64,ida_default_sub,,,,,.text,1128,2,5120,False,False,True
-2715360,sub_296EE0,ida_default_sub,,,,,.text,260,1,5120,False,False,True
-2715620,sub_296FE4,ida_default_sub,,,,,.text,932,1,5120,False,False,True
-2716552,sub_297388,ida_default_sub,,,,,.text,1912,1,5120,False,False,True
+2712176,libjpeg_jquant2_prescan_quantize,ida_named_non_elf,,,,,.text,132,1,5120,False,False,False
+2712308,libjpeg_jquant2_finish_pass2,ida_named_non_elf,,,,,.text,4,1,5184,False,False,False
+2712312,libjpeg_jquant2_new_color_map_2_quant,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+2712328,libjpeg_jquant2_start_pass_2_quant,ida_named_non_elf,,,,,.text,652,2,5120,False,False,False
+2713120,libjpeg_jquant2_find_nearby_colors,ida_named_non_elf,,,,,.text,1092,2,5120,False,False,False
+2714212,libjpeg_jquant2_fill_inverse_cmap,ida_named_non_elf,,,,,.text,1128,2,5120,False,False,False
+2715360,libjpeg_jquant2_pass2_no_dither,ida_named_non_elf,,,,,.text,260,1,5120,False,False,False
+2715620,libjpeg_jquant2_pass2_fs_dither,ida_named_non_elf,,,,,.text,932,1,5120,False,False,False
+2716552,libjpeg_jquant2_finish_pass1,ida_named_non_elf,,,,,.text,1912,1,5120,False,False,False
 2718464,jinit_2pass_quantizer_jpeg_decompress_struct,elf_symbol,function,_Z21jinit_2pass_quantizerP22jpeg_decompress_struct,jinit_2pass_quantizer(jpeg_decompress_struct *),jinit_2pass_quantizer_jpeg_decompress_struct,.text,692,4,5120,False,False,False
 2719296,jdiv_round_up_long_long,elf_symbol,function,_Z13jdiv_round_upll,"jdiv_round_up(long,long)",jdiv_round_up_long_long,.text,16,4,5120,False,False,False
 2719312,jround_up_long_long,elf_symbol,function,_Z9jround_upll,"jround_up(long,long)",jround_up_long_long,.text,24,4,5120,False,False,False
@@ -10642,15 +10642,15 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2720708,jpeg_start_compress,ida_named_non_elf,,,,,.text,176,4,5120,False,False,False
 2720884,jpeg_write_scanlines,ida_named_non_elf,,,,,.text,260,4,5120,False,False,False
 2721144,jpeg_write_raw_data,ida_named_non_elf,,,,,.text,328,1,5120,False,False,False
-2721472,sub_2986C0,ida_default_sub,,,,,.text,108,1,5120,False,False,True
-2721580,sub_29872C,ida_default_sub,,,,,.text,196,1,5120,False,False,True
-2721776,sub_2987F0,ida_default_sub,,,,,.text,432,1,5120,False,False,True
-2722208,sub_2989A0,ida_default_sub,,,,,.text,1264,4,5120,False,False,True
-2723472,sub_298E90,ida_default_sub,,,,,.text,3128,2,5120,False,False,True
-2726600,sub_299AC8,ida_default_sub,,,,,.text,908,3,5120,False,False,True
-2727508,sub_299E54,ida_default_sub,,,,,.text,1156,1,5120,False,False,True
-2728664,sub_29A2D8,ida_default_sub,,,,,.text,1904,1,5120,False,False,True
-2730568,sub_29AA48,ida_default_sub,,,,,.text,3264,1,5120,False,False,True
+2721472,libjpeg_jcmarker_write_marker_byte,ida_named_non_elf,,,,,.text,108,1,5120,False,False,False
+2721580,libjpeg_jcmarker_write_file_trailer,ida_named_non_elf,,,,,.text,196,1,5120,False,False,False
+2721776,libjpeg_jcmarker_write_marker_header,ida_named_non_elf,,,,,.text,432,1,5120,False,False,False
+2722208,libjpeg_jcmarker_emit_dqt,ida_named_non_elf,,,,,.text,1264,4,5120,False,False,False
+2723472,libjpeg_jcmarker_write_file_header,ida_named_non_elf,,,,,.text,3128,2,5120,False,False,False
+2726600,libjpeg_jcmarker_emit_dht,ida_named_non_elf,,,,,.text,908,3,5120,False,False,False
+2727508,libjpeg_jcmarker_write_frame_header,ida_named_non_elf,,,,,.text,1156,1,5120,False,False,False
+2728664,libjpeg_jcmarker_write_scan_header,ida_named_non_elf,,,,,.text,1904,1,5120,False,False,False
+2730568,libjpeg_jcmarker_write_tables_only,ida_named_non_elf,,,,,.text,3264,1,5120,False,False,False
 2733832,jinit_marker_writer_jpeg_compress_struct,elf_symbol,function,_Z19jinit_marker_writerP20jpeg_compress_struct,jinit_marker_writer(jpeg_compress_struct *),jinit_marker_writer_jpeg_compress_struct,.text,136,4,5120,False,False,False
 2733968,jpeg_add_quant_table,ida_named_non_elf,,,,,.text,372,4,5120,False,False,False
 2734340,jpeg_set_linear_quality,ida_named_non_elf,,,,,.text,96,4,5120,False,False,False
@@ -10664,33 +10664,33 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2737716,jpeg_destroy,ida_named_non_elf,,,,,.text,48,4,5120,False,False,False
 2737764,jpeg_alloc_quant_table,ida_named_non_elf,,,,,.text,44,4,5120,False,False,False
 2737808,jpeg_alloc_huff_table,ida_named_non_elf,,,,,.text,44,4,5120,False,False,False
-2737852,sub_29C6BC,ida_default_sub,,,,,.text,8,1,5120,False,False,True
-2737860,sub_29C6C4,ida_default_sub,,,,,.text,772,2,5120,False,False,True
-2738632,sub_29C9C8,ida_default_sub,,,,,.text,440,1,5120,False,False,True
-2739072,sub_29CB80,ida_default_sub,,,,,.text,1912,1,5120,False,False,True
-2740984,sub_29D2F8,ida_default_sub,,,,,.text,536,2,5120,False,False,True
-2741520,sub_29D510,ida_default_sub,,,,,.text,96,1,5120,False,False,True
-2741616,sub_29D570,ida_default_sub,,,,,.text,824,2,5120,False,False,True
+2737852,libjpeg_jdcoefct_dummy_consume_data,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
+2737860,libjpeg_jdcoefct_consume_data,ida_named_non_elf,,,,,.text,772,2,5120,False,False,False
+2738632,libjpeg_jdcoefct_start_output_pass,ida_named_non_elf,,,,,.text,440,1,5120,False,False,False
+2739072,libjpeg_jdcoefct_decompress_smooth_data,ida_named_non_elf,,,,,.text,1912,1,5120,False,False,False
+2740984,libjpeg_jdcoefct_decompress_data,ida_named_non_elf,,,,,.text,536,2,5120,False,False,False
+2741520,libjpeg_jdcoefct_start_input_pass,ida_named_non_elf,,,,,.text,96,1,5120,False,False,False
+2741616,libjpeg_jdcoefct_decompress_onepass,ida_named_non_elf,,,,,.text,824,2,5120,False,False,False
 2742440,jinit_d_coef_controller_jpeg_decompress_struct_int,elf_symbol,function,_Z23jinit_d_coef_controllerP22jpeg_decompress_structi,"jinit_d_coef_controller(jpeg_decompress_struct *,int)",jinit_d_coef_controller_jpeg_decompress_struct_int,.text,448,4,5120,False,False,False
-2742888,sub_29DA68,ida_default_sub,,,,,.text,192,1,5120,False,False,True
-2743080,sub_29DB28,ida_default_sub,,,,,.text,124,3,5120,False,False,True
-2743204,sub_29DBA4,ida_default_sub,,,,,.text,836,1,5120,False,False,True
-2744040,sub_29DEE8,ida_default_sub,,,,,.text,224,1,5120,False,False,True
-2744264,nullsub_6,ida_named_non_elf,,,,,.text,4,2,5184,False,False,False
-2744268,sub_29DFCC,ida_default_sub,,,,,.text,24,2,5120,False,False,True
+2742888,libjpeg_jdcolor_ycc_rgb_convert,ida_named_non_elf,,,,,.text,192,1,5120,False,False,False
+2743080,libjpeg_jdcolor_null_convert,ida_named_non_elf,,,,,.text,124,3,5120,False,False,False
+2743204,libjpeg_jdcolor_gray_rgb_convert,ida_named_non_elf,,,,,.text,836,1,5120,False,False,False
+2744040,libjpeg_jdcolor_ycck_cmyk_convert,ida_named_non_elf,,,,,.text,224,1,5120,False,False,False
+2744264,libjpeg_jdcolor_start_pass_dcolor,ida_named_non_elf,,,,,.text,4,2,5184,False,False,False
+2744268,libjpeg_jdcolor_grayscale_convert,ida_named_non_elf,,,,,.text,24,2,5120,False,False,False
 2744292,jinit_color_deconverter_jpeg_decompress_struct,elf_symbol,function,_Z23jinit_color_deconverterP22jpeg_decompress_struct,jinit_color_deconverter(jpeg_decompress_struct *),jinit_color_deconverter_jpeg_decompress_struct,.text,1064,4,5120,False,False,False
-2745356,sub_29E40C,ida_default_sub,,,,,.text,932,1,5120,False,False,True
+2745356,libjpeg_jddctmgr_start_pass,ida_named_non_elf,,,,,.text,932,1,5120,False,False,False
 2746288,jinit_inverse_dct_jpeg_decompress_struct,elf_symbol,function,_Z17jinit_inverse_dctP22jpeg_decompress_struct,jinit_inverse_dct(jpeg_decompress_struct *),jinit_inverse_dct_jpeg_decompress_struct,.text,168,4,5120,False,False,False
 2746456,jpeg_make_d_derived_tbl_jpeg_decompress_struct_int_int_d_derived_tbl,elf_symbol,function,_Z23jpeg_make_d_derived_tblP22jpeg_decompress_structiiPP13d_derived_tbl,"jpeg_make_d_derived_tbl(jpeg_decompress_struct *,int,int,d_derived_tbl **)",jpeg_make_d_derived_tbl_jpeg_decompress_struct_int_int_d_derived_tbl,.text,2680,4,5120,False,False,False
-2749136,sub_29F2D0,ida_default_sub,,,,,.text,376,1,5120,False,False,True
+2749136,libjpeg_jdhuff_start_pass_huff_decoder,ida_named_non_elf,,,,,.text,376,1,5120,False,False,False
 2749512,jpeg_fill_bit_buffer_bitread_working_state_long_int_int,elf_symbol,function,_Z20jpeg_fill_bit_bufferP21bitread_working_statelii,"jpeg_fill_bit_buffer(bitread_working_state *,long,int,int)",jpeg_fill_bit_buffer_bitread_working_state_long_int_int,.text,388,4,5120,False,False,False
 2749900,jpeg_huff_decode_bitread_working_state_long_int_d_derived_tbl_int,elf_symbol,function,_Z16jpeg_huff_decodeP21bitread_working_stateliP13d_derived_tbli,"jpeg_huff_decode(bitread_working_state *,long,int,d_derived_tbl *,int)",jpeg_huff_decode_bitread_working_state_long_int_d_derived_tbl_int,.text,360,4,5120,False,False,False
-2750260,sub_29F734,ida_default_sub,,,,,.text,1272,2,5120,False,False,True
+2750260,libjpeg_jdhuff_decode_mcu,ida_named_non_elf,,,,,.text,1272,2,5120,False,False,False
 2751532,jinit_huff_decoder_jpeg_decompress_struct,elf_symbol,function,_Z18jinit_huff_decoderP22jpeg_decompress_struct,jinit_huff_decoder(jpeg_decompress_struct *),jinit_huff_decoder_jpeg_decompress_struct,.text,108,4,5120,False,False,False
-2751640,sub_29FC98,ida_default_sub,,,,,.text,168,1,5120,False,False,True
-2751808,sub_29FD40,ida_default_sub,,,,,.text,896,1,5120,False,False,True
-2752704,sub_2A00C0,ida_default_sub,,,,,.text,56,1,5120,False,False,True
-2752760,sub_2A00F8,ida_default_sub,,,,,.text,1020,1,5120,False,False,True
+2751640,libjpeg_jdmainct_process_data_simple_main,ida_named_non_elf,,,,,.text,168,1,5120,False,False,False
+2751808,libjpeg_jdmainct_process_data_context_main,ida_named_non_elf,,,,,.text,896,1,5120,False,False,False
+2752704,libjpeg_jdmainct_process_data_crank_post,ida_named_non_elf,,,,,.text,56,1,5120,False,False,False
+2752760,libjpeg_jdmainct_start_pass_main,ida_named_non_elf,,,,,.text,1020,1,5120,False,False,False
 2753780,jinit_d_main_controller_jpeg_decompress_struct_int,elf_symbol,function,_Z23jinit_d_main_controllerP22jpeg_decompress_structi,"jinit_d_main_controller(jpeg_decompress_struct *,int)",jinit_d_main_controller_jpeg_decompress_struct_int,.text,496,4,5120,False,False,False
 2754276,jpeg_idct_float_jpeg_decompress_struct_jpeg_component_info_short_uchar_uint,elf_symbol,function,_Z15jpeg_idct_floatP22jpeg_decompress_structP19jpeg_component_infoPsPPhj,"jpeg_idct_float(jpeg_decompress_struct *,jpeg_component_info *,short *,uchar **,uint)",jpeg_idct_float_jpeg_decompress_struct_jpeg_component_info_short_uchar_uint,.text,892,3,5120,False,False,False
 2755184,jpeg_idct_ifast_jpeg_decompress_struct_jpeg_component_info_short_uchar_uint,elf_symbol,function,_Z15jpeg_idct_ifastP22jpeg_decompress_structP19jpeg_component_infoPsPPhj,"jpeg_idct_ifast(jpeg_decompress_struct *,jpeg_component_info *,short *,uchar **,uint)",jpeg_idct_ifast_jpeg_decompress_struct_jpeg_component_info_short_uchar_uint,.text,1136,3,5120,False,False,False
@@ -10699,67 +10699,66 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2758556,jpeg_idct_2x2_jpeg_decompress_struct_jpeg_component_info_short_uchar_uint,elf_symbol,function,_Z13jpeg_idct_2x2P22jpeg_decompress_structP19jpeg_component_infoPsPPhj,"jpeg_idct_2x2(jpeg_decompress_struct *,jpeg_component_info *,short *,uchar **,uint)",jpeg_idct_2x2_jpeg_decompress_struct_jpeg_component_info_short_uchar_uint,.text,664,3,5120,False,False,False
 2759220,jpeg_idct_1x1_jpeg_decompress_struct_jpeg_component_info_short_uchar_uint,elf_symbol,function,_Z13jpeg_idct_1x1P22jpeg_decompress_structP19jpeg_component_infoPsPPhj,"jpeg_idct_1x1(jpeg_decompress_struct *,jpeg_component_info *,short *,uchar **,uint)",jpeg_idct_1x1_jpeg_decompress_struct_jpeg_component_info_short_uchar_uint,.text,52,3,5120,False,False,False
 2759272,jinit_compress_master_jpeg_compress_struct,elf_symbol,function,_Z21jinit_compress_masterP20jpeg_compress_struct,jinit_compress_master(jpeg_compress_struct *),jinit_compress_master_jpeg_compress_struct,.text,232,4,5120,False,False,False
-2759504,sub_2A1B50,ida_default_sub,,,,,.text,100,3,5120,False,False,True
-2759604,sub_2A1BB4,ida_default_sub,,,,,.text,652,1,5120,False,False,True
-2760256,sub_2A1E40,ida_default_sub,,,,,.text,1364,1,5120,False,False,True
-2761620,sub_2A2394,ida_default_sub,,,,,.text,312,1,5120,False,False,True
-2761932,sub_2A24CC,ida_default_sub,,,,,.text,1264,1,5120,False,False,True
+2759504,libjpeg_jccoefct_start_iMCU_row,ida_named_non_elf,,,,,.text,100,3,5120,False,False,False
+2759604,libjpeg_jccoefct_compress_data,ida_named_non_elf,,,,,.text,652,1,5120,False,False,False
+2760256,libjpeg_jccoefct_compress_first_pass,ida_named_non_elf,,,,,.text,1364,1,5120,False,False,False
+2761620,libjpeg_jccoefct_start_pass_coef,ida_named_non_elf,,,,,.text,312,1,5120,False,False,False
+2761932,libjpeg_jccoefct_compress_output,ida_named_non_elf,,,,,.text,1264,1,5120,False,False,False
 2763196,jinit_c_coef_controller_jpeg_compress_struct_int,elf_symbol,function,_Z23jinit_c_coef_controllerP20jpeg_compress_structi,"jinit_c_coef_controller(jpeg_compress_struct *,int)",jinit_c_coef_controller_jpeg_compress_struct_int,.text,336,4,5120,False,False,False
-2763532,sub_2A2B0C,ida_default_sub,,,,,.text,196,3,5120,False,False,True
-2763728,sub_2A2BD0,ida_default_sub,,,,,.text,212,1,5120,False,False,True
-2763940,sub_2A2CA4,ida_default_sub,,,,,.text,120,1,5120,False,False,True
-2764060,sub_2A2D1C,ida_default_sub,,,,,.text,260,1,5120,False,False,True
-2764320,sub_2A2E20,ida_default_sub,,,,,.text,76,1,5120,False,False,True
-2764396,sub_2A2E6C,ida_default_sub,,,,,.text,116,1,5120,False,False,True
-2764512,nullsub_7,ida_named_non_elf,,,,,.text,4,2,5184,False,False,False
+2763532,libjpeg_jccolor_rgb_ycc_start,ida_named_non_elf,,,,,.text,196,3,5120,False,False,False
+2763728,libjpeg_jccolor_rgb_ycc_convert,ida_named_non_elf,,,,,.text,212,1,5120,False,False,False
+2763940,libjpeg_jccolor_rgb_gray_convert,ida_named_non_elf,,,,,.text,120,1,5120,False,False,False
+2764060,libjpeg_jccolor_cmyk_ycck_convert,ida_named_non_elf,,,,,.text,260,1,5120,False,False,False
+2764320,libjpeg_jccolor_grayscale_convert,ida_named_non_elf,,,,,.text,76,1,5120,False,False,False
+2764396,libjpeg_jccolor_null_convert,ida_named_non_elf,,,,,.text,116,1,5120,False,False,False
+2764512,libjpeg_jccolor_null_method,ida_named_non_elf,,,,,.text,4,2,5184,False,False,False
 2764516,jinit_color_converter_jpeg_compress_struct,elf_symbol,function,_Z21jinit_color_converterP20jpeg_compress_struct,jinit_color_converter(jpeg_compress_struct *),jinit_color_converter_jpeg_compress_struct,.text,776,4,5120,False,False,False
-2765296,sub_2A31F0,ida_default_sub,,,,,.text,1096,1,5120,False,False,True
-2766392,sub_2A3638,ida_default_sub,,,,,.text,360,2,5120,False,False,True
-2766752,sub_2A37A0,ida_default_sub,,,,,.text,1092,1,5120,False,False,True
+2765296,libjpeg_jcdctmgr_start_pass_fdctmgr,ida_named_non_elf,,,,,.text,1096,1,5120,False,False,False
+2766392,libjpeg_jcdctmgr_forward_DCT,ida_named_non_elf,,,,,.text,360,2,5120,False,False,False
+2766752,libjpeg_jcdctmgr_forward_DCT_float,ida_named_non_elf,,,,,.text,1092,1,5120,False,False,False
 2767872,jinit_forward_dct_jpeg_compress_struct,elf_symbol,function,_Z17jinit_forward_dctP20jpeg_compress_struct,jinit_forward_dct(jpeg_compress_struct *),jinit_forward_dct_jpeg_compress_struct,.text,240,4,5120,False,False,False
-2768112,sub_2A3CF0,ida_default_sub,,,,,.text,576,2,5120,False,False,True
-2768688,sub_2A3F30,ida_default_sub,,,,,.text,384,2,5120,False,False,True
-2769072,sub_2A40B0,ida_default_sub,,,,,.text,2392,2,5120,False,False,True
+2768112,libjpeg_jchuff_encode_mcu_gather,ida_named_non_elf,,,,,.text,576,2,5120,False,False,False
+2768688,libjpeg_jchuff_finish_pass_huff,ida_named_non_elf,,,,,.text,384,2,5120,False,False,False
+2769072,libjpeg_jchuff_encode_mcu_huff,ida_named_non_elf,,,,,.text,2392,2,5120,False,False,False
 2771464,jpeg_make_c_derived_tbl_jpeg_compress_struct_int_int_c_derived_tbl,elf_symbol,function,_Z23jpeg_make_c_derived_tblP20jpeg_compress_structiiPP13c_derived_tbl,"jpeg_make_c_derived_tbl(jpeg_compress_struct *,int,int,c_derived_tbl **)",jpeg_make_c_derived_tbl_jpeg_compress_struct_int_int_c_derived_tbl,.text,1216,4,5120,False,False,False
-2772680,sub_2A4EC8,ida_default_sub,,,,,.text,492,2,5120,False,False,True
+2772680,libjpeg_jchuff_start_pass_huff,ida_named_non_elf,,,,,.text,492,2,5120,False,False,False
 2773172,jpeg_gen_optimal_table_jpeg_compress_struct_JHUFF_TBL_long,elf_symbol,function,_Z22jpeg_gen_optimal_tableP20jpeg_compress_structP9JHUFF_TBLPl,"jpeg_gen_optimal_table(jpeg_compress_struct *,JHUFF_TBL *,long *)",jpeg_gen_optimal_table_jpeg_compress_struct_JHUFF_TBL_long,.text,1008,4,5120,False,False,False
-2774180,sub_2A54A4,ida_default_sub,,,,,.text,280,2,5120,False,False,True
+2774180,libjpeg_jchuff_finish_pass_gather,ida_named_non_elf,,,,,.text,280,2,5120,False,False,False
 2774460,jinit_huff_encoder_jpeg_compress_struct,elf_symbol,function,_Z18jinit_huff_encoderP20jpeg_compress_struct,jinit_huff_encoder(jpeg_compress_struct *),jinit_huff_encoder_jpeg_compress_struct,.text,128,4,5120,False,False,False
-2774588,sub_2A563C,ida_default_sub,,,,,.text,288,1,5120,False,False,True
-2774876,sub_2A575C,ida_default_sub,,,,,.text,96,1,5120,False,False,True
+2774588,libjpeg_jcmainct_process_data_simple_main,ida_named_non_elf,,,,,.text,288,1,5120,False,False,False
+2774876,libjpeg_jcmainct_start_pass_main,ida_named_non_elf,,,,,.text,96,1,5120,False,False,False
 2774972,jinit_c_main_controller_jpeg_compress_struct_int,elf_symbol,function,_Z23jinit_c_main_controllerP20jpeg_compress_structi,"jinit_c_main_controller(jpeg_compress_struct *,int)",jinit_c_main_controller_jpeg_compress_struct_int,.text,220,4,5120,False,False,False
-2775192,sub_2A5898,ida_default_sub,,,,,.text,2460,1,5120,False,False,True
-2777652,sub_2A6234,ida_default_sub,,,,,.text,60,1,5120,False,False,True
-2777712,sub_2A6270,ida_default_sub,,,,,.text,180,2,5120,False,False,True
-2777892,sub_2A6324,ida_default_sub,,,,,.text,3380,1,5120,False,False,True
+2775192,libjpeg_jcmaster_validate_script,ida_named_non_elf,,,,,.text,2460,1,5120,False,False,False
+2777652,libjpeg_jcmaster_pass_startup,ida_named_non_elf,,,,,.text,60,1,5120,False,False,False
+2777712,libjpeg_jcmaster_finish_pass_master,ida_named_non_elf,,,,,.text,180,2,5120,False,False,False
+2777892,libjpeg_jcmaster_prepare_for_pass,ida_named_non_elf,,,,,.text,3380,1,5120,False,False,False
 2781272,jinit_c_master_control_jpeg_compress_struct_int,elf_symbol,function,_Z22jinit_c_master_controlP20jpeg_compress_structi,"jinit_c_master_control(jpeg_compress_struct *,int)",jinit_c_master_control_jpeg_compress_struct_int,.text,932,4,5120,False,False,False
-2782204,sub_2A73FC,ida_default_sub,,,,,.text,480,2,5120,False,False,True
-2782684,sub_2A75DC,ida_default_sub,,,,,.text,1700,11,5120,False,False,True
-2784384,sub_2A7C80,ida_default_sub,,,,,.text,3180,2,5120,False,False,True
-2787564,sub_2A88EC,ida_default_sub,,,,,.text,440,1,5120,False,False,True
-2788004,sub_2A8AA4,ida_default_sub,,,,,.text,768,1,5120,False,False,True
-2788772,sub_2A8DA4,ida_default_sub,,,,,.text,1160,1,5120,False,False,True
-2789932,sub_2A922C,ida_default_sub,,,,,.text,2228,1,5120,False,False,True
-2792160,sub_2A9AE0,ida_default_sub,,,,,.text,2420,1,5120,False,False,True
+2782204,libjpeg_jcphuff_start_pass_phuff,ida_named_non_elf,,,,,.text,480,2,5120,False,False,False
+2782684,libjpeg_jcphuff_emit_eobrun,ida_named_non_elf,,,,,.text,1700,11,5120,False,False,False
+2784384,libjpeg_jcphuff_encode_mcu_AC_refine,ida_named_non_elf,,,,,.text,3180,2,5120,False,False,False
+2787564,libjpeg_jcphuff_finish_pass_phuff,ida_named_non_elf,,,,,.text,440,1,5120,False,False,False
+2788004,libjpeg_jcphuff_finish_pass_gather_phuff,ida_named_non_elf,,,,,.text,768,1,5120,False,False,False
+2788772,libjpeg_jcphuff_encode_mcu_DC_refine,ida_named_non_elf,,,,,.text,1160,1,5120,False,False,False
+2789932,libjpeg_jcphuff_encode_mcu_DC_first,ida_named_non_elf,,,,,.text,2228,1,5120,False,False,False
+2792160,libjpeg_jcphuff_encode_mcu_AC_first,ida_named_non_elf,,,,,.text,2420,1,5120,False,False,False
 2794580,jinit_phuff_encoder_jpeg_compress_struct,elf_symbol,function,_Z19jinit_phuff_encoderP20jpeg_compress_struct,jinit_phuff_encoder(jpeg_compress_struct *),jinit_phuff_encoder_jpeg_compress_struct,.text,100,4,5120,False,False,False
-2794680,sub_2AA4B8,ida_default_sub,,,,,.text,88,1,5120,False,False,True
-2794768,sub_2AA510,ida_default_sub,,,,,.text,660,1,5120,False,False,True
-2795428,sub_2AA7A4,ida_default_sub,,,,,.text,672,2,5120,False,False,True
+2794680,libjpeg_jcprepct_start_pass_prep,ida_named_non_elf,,,,,.text,88,1,5120,False,False,False
+2794768,libjpeg_jcprepct_pre_process_context,ida_named_non_elf,,,,,.text,660,1,5120,False,False,False
+2795428,libjpeg_jcprepct_pre_process_data,ida_named_non_elf,,,,,.text,672,2,5120,False,False,False
 2796100,jinit_c_prep_controller_jpeg_compress_struct_int,elf_symbol,function,_Z23jinit_c_prep_controllerP20jpeg_compress_structi,"jinit_c_prep_controller(jpeg_compress_struct *,int)",jinit_c_prep_controller_jpeg_compress_struct_int,.text,1016,4,5120,False,False,False
-2797116,nullsub_1,ida_named_non_elf,,,,,.text,4,1,5184,False,False,False
-2797120,sub_2AAE40,ida_default_sub,,,,,.text,164,1,5120,False,False,True
-2797284,sub_2AAEE4,ida_default_sub,,,,,.text,1040,2,5120,False,False,True
-2798324,sub_2AB2F4,ida_default_sub,,,,,.text,432,2,5120,False,False,True
-2798756,sub_2AB4A4,ida_default_sub,,,,,.text,460,2,5120,False,False,True
-2799216,sub_2AB670,ida_default_sub,,,,,.text,952,2,5120,False,False,True
-2800168,sub_2ABA28,ida_default_sub,,,,,.text,680,2,5120,False,False,True
-2800848,sub_2ABCD0,ida_default_sub,,,,,.text,392,1,5120,False,False,True
+2797116,libjpeg_jcsample_start_pass_downsample,ida_named_non_elf,,,,,.text,4,1,5184,False,False,False
+2797120,libjpeg_jcsample_sep_downsample,ida_named_non_elf,,,,,.text,164,1,5120,False,False,False
+2797284,libjpeg_jcsample_int_downsample,ida_named_non_elf,,,,,.text,1040,2,5120,False,False,False
+2798324,libjpeg_jcsample_h2v1_downsample,ida_named_non_elf,,,,,.text,432,2,5120,False,False,False
+2798756,libjpeg_jcsample_h2v2_downsample,ida_named_non_elf,,,,,.text,460,2,5120,False,False,False
+2799216,libjpeg_jcsample_h2v2_smooth_downsample,ida_named_non_elf,,,,,.text,952,2,5120,False,False,False
+2800168,libjpeg_jcsample_fullsize_smooth_downsample,ida_named_non_elf,,,,,.text,680,2,5120,False,False,False
+2800848,libjpeg_jcsample_fullsize_downsample,ida_named_non_elf,,,,,.text,392,1,5120,False,False,False
 2801240,jinit_downsampler_jpeg_compress_struct,elf_symbol,function,_Z17jinit_downsamplerP20jpeg_compress_struct,jinit_downsampler(jpeg_compress_struct *),jinit_downsampler_jpeg_compress_struct,.text,508,4,5120,False,False,False
 2801760,jpeg_fdct_float_float,elf_symbol,function,_Z15jpeg_fdct_floatPf,jpeg_fdct_float(float *),jpeg_fdct_float_float,.text,924,3,5120,False,False,False
-2802688,sub_2AC400,ida_default_sub,,,,,.text,64,1,5120,False,False,True
-2802752,jpeg_fdct_ifast_int,elf_symbol,function,_Z15jpeg_fdct_ifastPi,jpeg_fdct_ifast(int *),jpeg_fdct_ifast_int,.text,924,4,5120,False,False,False
+2802752,jpeg_fdct_ifast_int,elf_symbol,function,_Z15jpeg_fdct_ifastPi,jpeg_fdct_ifast(int *),jpeg_fdct_ifast_int,.text,924,3,5120,False,False,False
 2803696,jpeg_fdct_islow_int,elf_symbol,function,_Z15jpeg_fdct_islowPi,jpeg_fdct_islow(int *),jpeg_fdct_islow_int,.text,808,3,5120,False,False,False
-2804512,sub_2ACB20,ida_default_sub,,,,,.text,1508,2,5120,False,False,True
+2804512,giflib_DGifDecompressLine,ida_named_non_elf,,,,,.text,1508,2,5120,False,False,False
 2806048,reallocarray,ida_named_non_elf,,,,,.text,92,4,5120,False,False,False
 2806140,DGifGetScreenDesc,ida_named_non_elf,,,,,.text,676,4,5120,False,False,False
 2806816,DGifOpenFileHandle,ida_named_non_elf,,,,,.text,452,4,5120,False,False,False

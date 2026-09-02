@@ -5,9 +5,9 @@ This is a read-only check for IDALIB or the IDA Python console. It verifies
 the 277 native role candidates, every exact script-table callback label that
 has a proposed name, 28 application or engine role aliases, 11 CyaSSL role
 aliases, 30 bundled library role aliases, four older persisted function
-reclassifications, and every exact FreeType source match at its expected
-address. The expected database totals are also checked after the boundary
-pass.
+reclassifications, and every exact FreeType, IJG libjpeg, and zlib source
+match at its expected address. The expected database totals are also checked
+after the boundary pass.
 """
 
 from __future__ import annotations
@@ -23,7 +23,7 @@ import idautils
 
 
 REPO = Path("/home/v/Desktop/graal-decomp/libqplay")
-REPORT_PATH = REPO / "artifacts/ida_translation_verification_20260901.json"
+REPORT_PATH = REPO / "artifacts/ida_translation_verification_20260902.json"
 NATIVE_GROUPS = (
     "callbacks",
     "static_initializers",
@@ -66,6 +66,9 @@ def expected_names() -> list[dict]:
     cyassl = load("artifacts/cyassl_static_role_audit_20260826.json")
     static_libraries = load("artifacts/static_library_role_audit_20260901.json")
     freetype = load("artifacts/ida_freetype_source_matches_20260901.json")
+    libjpeg = load("artifacts/ida_libjpeg_source_matches_20260902.json")
+    zlib = load("artifacts/ida_zlib_source_matches_20260902.json")
+    giflib = load("artifacts/ida_giflib_source_matches_20260902.json")
     rows = []
     for group in NATIVE_GROUPS:
         for item in native.get(group, []):
@@ -126,6 +129,30 @@ def expected_names() -> list[dict]:
                 "expected_name": item["upstream_name"],
             }
         )
+    for item in libjpeg["matches"]:
+        rows.append(
+            {
+                "source": "ida_libjpeg_source_matches",
+                "va": int(item["address"], 0),
+                "expected_name": item["ida_name"],
+            }
+        )
+    for item in zlib["matches"]:
+        rows.append(
+            {
+                "source": "ida_zlib_source_matches",
+                "va": int(item["address"], 0),
+                "expected_name": item["ida_name"],
+            }
+        )
+    for item in giflib["matches"]:
+        rows.append(
+            {
+                "source": "ida_giflib_source_matches",
+                "va": int(item["address"], 0),
+                "expected_name": item["ida_name"],
+            }
+        )
     return rows
 
 
@@ -161,18 +188,18 @@ def main() -> None:
         "failure_count": len(failures),
         "function_count": function_count,
         "default_sub_count": default_sub_count,
-        "expected_function_count": 11297,
-        "expected_default_sub_count": 274,
+        "expected_function_count": 11296,
+        "expected_default_sub_count": 124,
         "failures": failures,
         "status": "ok"
-        if not failures and function_count == 11297 and default_sub_count == 274
+        if not failures and function_count == 11296 and default_sub_count == 124
         else "failed",
     }
     function_heads_with_names = sum(
         1 for ea in idautils.Functions() if ida_name.get_name(ea)
     )
     report = {
-        "artifact": "ida_translation_verification_20260901",
+        "artifact": "ida_translation_verification_20260902",
         "binary": {
             "architecture": "aarch64",
             "path": "GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so",
@@ -187,13 +214,16 @@ def main() -> None:
             "script_table_callbacks": 906,
             "application_and_engine_role_aliases": 28,
             "exact_freetype_source_matches": 141,
-            "reviewed_function_names": 1396,
+            "exact_libjpeg_source_matches": 153,
+            "exact_zlib_source_matches": 1,
+            "exact_giflib_source_matches": 1,
+            "reviewed_function_names": 1551,
         },
         "database": {
             "source_idb": "GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so.i64",
-            "saved_copy": "analysis/libqplay_translated_from_active_v11.i64",
-            "saved_copy_bytes": 61286570,
-            "saved_copy_sha256": "26471ffbe194a721e4fde7e894a451c7c8dccbe61c32eafc8305190b37ee6917",
+            "saved_copy": "analysis/libqplay_translated_from_active_v12.i64",
+            "saved_copy_bytes": 61991120,
+            "saved_copy_sha256": "77ecf848c9ed49b25896fef5b97b090234d380ff79d4591ee4113e00b8416625",
             "saved_copy_reopen_verified": False,
         },
         "passes": [
@@ -205,6 +235,9 @@ def main() -> None:
             {"name": "bundled-library role aliases", "renamed": 30, "failures": 0},
             {"name": "GPC residual helper review", "renamed": 3, "failures": 0},
             {"name": "exact FreeType 2.3.6 source matches", "renamed": 141, "failures": 0},
+            {"name": "exact IJG libjpeg 6b source matches", "renamed": 153, "failures": 0},
+            {"name": "exact zlib 1.2.5 source matches", "renamed": 1, "failures": 0},
+            {"name": "exact giflib static role matches", "renamed": 1, "failures": 0},
         ],
         "verification": {
             **result,
@@ -212,9 +245,9 @@ def main() -> None:
             "verified_reviewed_name_count": len(rows),
         },
         "notes": [
-            "The active ARM64 database was saved as the v11 packed copy after the final FreeType and bzip2 source-role pass.",
-            "The v11 copy has not yet been independently closed and reopened; its active database names passed the read-only verifier.",
-            "The 274 remaining entries are IDA-created functions without preserved source names. They remain addressable and were not given speculative source names.",
+            "The active ARM64 database was saved as the v12 packed copy after the exact FreeType, IJG libjpeg, zlib, and giflib role pass.",
+            "The v12 copy has not yet been independently closed and reopened; its active database names passed the read-only verifier.",
+            "The 124 remaining entries are IDA-created functions without preserved source names. They remain addressable and were not given speculative source names.",
             "The verification and local replay steps contacted no live service.",
         ],
     }

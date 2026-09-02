@@ -1,0 +1,108 @@
+{
+  "artifact": "ida_translation_verification_20260902",
+  "binary": {
+    "architecture": "aarch64",
+    "path": "GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so",
+    "sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8"
+  },
+  "coverage": {
+    "application_and_engine_role_aliases": 28,
+    "bundled_library_role_aliases": 30,
+    "cyassl_role_aliases": 11,
+    "exact_freetype_source_matches": 141,
+    "exact_giflib_source_matches": 1,
+    "exact_libjpeg_source_matches": 153,
+    "exact_zlib_source_matches": 1,
+    "gpc_helper_aliases": 3,
+    "native_callback_candidates": 277,
+    "retained_elf_symbols": 8601,
+    "reviewed_function_names": 1551,
+    "script_table_callbacks": 906
+  },
+  "database": {
+    "saved_copy": "analysis/libqplay_translated_from_active_v12.i64",
+    "saved_copy_bytes": 61991120,
+    "saved_copy_reopen_verified": false,
+    "saved_copy_sha256": "77ecf848c9ed49b25896fef5b97b090234d380ff79d4591ee4113e00b8416625",
+    "source_idb": "GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so.i64"
+  },
+  "notes": [
+    "The active ARM64 database was saved as the v12 packed copy after the exact FreeType, IJG libjpeg, zlib, and giflib role pass.",
+    "The v12 copy has not yet been independently closed and reopened; its active database names passed the read-only verifier.",
+    "The 124 remaining entries are IDA-created functions without preserved source names. They remain addressable and were not given speculative source names.",
+    "The verification and local replay steps contacted no live service."
+  ],
+  "passes": [
+    {
+      "name": "retained ELF symbol translation",
+      "rename_failures": 0,
+      "renamed": 8601
+    },
+    {
+      "boundary_additions": 5,
+      "failures": 0,
+      "name": "native callback and static-state candidates",
+      "renamed": 277
+    },
+    {
+      "boundary_additions": 20,
+      "failures": 0,
+      "function_splits": 2,
+      "name": "exact script-table callbacks",
+      "renamed": 906
+    },
+    {
+      "failures": 0,
+      "name": "application and engine role candidates",
+      "renamed": 28
+    },
+    {
+      "failures": 0,
+      "name": "CyaSSL static role aliases",
+      "renamed": 11
+    },
+    {
+      "failures": 0,
+      "name": "bundled-library role aliases",
+      "renamed": 30
+    },
+    {
+      "failures": 0,
+      "name": "GPC residual helper review",
+      "renamed": 3
+    },
+    {
+      "failures": 0,
+      "name": "exact FreeType 2.3.6 source matches",
+      "renamed": 141
+    },
+    {
+      "failures": 0,
+      "name": "exact IJG libjpeg 6b source matches",
+      "renamed": 153
+    },
+    {
+      "failures": 0,
+      "name": "exact zlib 1.2.5 source matches",
+      "renamed": 1
+    },
+    {
+      "failures": 0,
+      "name": "exact giflib static role matches",
+      "renamed": 1
+    }
+  ],
+  "verification": {
+    "default_sub_count": 124,
+    "expected_default_sub_count": 124,
+    "expected_function_count": 11296,
+    "expected_name_count": 646,
+    "failure_count": 0,
+    "failures": [],
+    "function_count": 11296,
+    "function_heads_with_names": 11296,
+    "status": "ok",
+    "verified_name_count": 646,
+    "verified_reviewed_name_count": 646
+  }
+}

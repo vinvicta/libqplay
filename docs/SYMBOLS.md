@@ -27,32 +27,37 @@ with explicit fields.
 ## Persisted IDA result
 
 The active ARM64 database was then processed by the reviewed callback,
-script-table, application-role, CyaSSL, bundled-library, and exact FreeType
-source-match passes. The current packed copy was saved as
-`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v11.i64`.
-The active IDA verifier reports 11,297 functions, 11,297 named function heads,
-274 remaining default `sub_` entries, and zero failures after the expanded
-FreeType source-match pass. A separate close and reopen of that exact copy is
-still pending.
+script-table, application-role, CyaSSL, bundled-library, and exact embedded
+source-role passes. The current packed copy was saved as
+`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v12.i64`.
+The active IDA verifier reports 11,296 functions, 11,296 named function heads,
+124 remaining default `sub_` entries, and zero failures after the expanded
+source-role pass. A separate close and reopen of that exact copy is still
+pending.
 
-The 1,396 reviewed names are made up of 277 native callback candidates, 906
+The 1,551 reviewed aliases are made up of 277 native callback candidates, 906
 exact script-table callbacks, 28 application or engine role aliases, 11
-CyaSSL aliases, 30 bundled-library aliases, 3 GPC helper aliases, and 141
-exact FreeType 2.3.6 source matches. The
+CyaSSL aliases, 30 bundled-library aliases, 3 GPC helper aliases, 141 exact
+FreeType 2.3.6 source matches, 153 exact IJG libjpeg 6b matches, one exact
+zlib 1.2.5 match, and one exact giflib role match. The
 machine-readable record is
-`artifacts/ida_translation_verification_20260901.json`.
+`artifacts/ida_translation_verification_20260902.json`.
 
-The remaining 274 default names are not an unfinished application boundary.
+The remaining 124 default names are not an unfinished application boundary.
 The active-IDB scope check found no default name in the Android bridge range,
 no default name among the 1,779 unique script callback addresses, and no
 direct call from a remaining default function to the selected socket, file,
 process, or update imports. The 4 entries in the broader application-core
-range are short static-state wrappers around existing library objects. Their
+range are short static-state or cleanup wrappers around existing library objects. Their
 addresses remain available in
-`artifacts/ida_active_translation_scope_check_20260901.json` without guessed
+`artifacts/ida_active_translation_scope_check_20260902.json` without guessed
 source names. The 141 exact FreeType and TrueType matches are listed in
 `artifacts/ida_freetype_source_matches_20260901.json`, with the pinned source
-tag, commit, source file, and line anchor for each routine.
+tag, commit, source file, and line anchor for each routine. The current IJG,
+zlib, and giflib role records are in
+`artifacts/ida_libjpeg_source_matches_20260902.json`,
+`artifacts/ida_zlib_source_matches_20260902.json`, and
+`artifacts/ida_giflib_source_matches_20260902.json`.
 
 The last four entries removed from the older residual queue are
 `tt_get_cmap_info` at `0x254b98`, `default_bzfree` at `0x273350`,
@@ -63,7 +68,7 @@ aliases rather than address-only guesses.
 
 The public `symbols/libqplay.function_inventory.json` and
 `artifacts/script_table_inventory.json` are synchronized with this final
-state. The function inventory has 11,297 rows, and the script-table inventory
+state. The function inventory has 11,296 rows, and the script-table inventory
 has 1,779 unique callback targets. The older overlay and unresolved profile
 remain as the pre-persistence inputs used by the residual calculation.
 

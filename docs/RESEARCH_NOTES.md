@@ -67,25 +67,24 @@ followed by name. Important ARM64 addresses include:
 The saved IDA database was later brought to the same state as the public
 translation plan. The active base database was copied, the callback and
 script-table boundaries were applied, and the reviewed application, CyaSSL,
-and bundled-library aliases were added. A pinned FreeType 2.3.6 source pass
-then matched 141 functions in total, including the SFNT loaders, smooth rasterizer,
-TrueType interpreter, glyph loader, and autofit classes. The current copy has
-11,297 functions, 11,297 named function heads, and 274 remaining default
-`sub_` entries. The read-only verifier returned zero failures after the
-source-match pass. The copy hash and pass breakdown are in
-`artifacts/ida_translation_verification_20260901.json`.
+and bundled-library aliases were added. The exact source-role pass then
+matched 141 FreeType functions, 153 IJG libjpeg 6b functions, one zlib
+function, and one static giflib role. The current copy has 11,296 functions,
+11,296 named function heads, and 124 remaining default `sub_` entries. The
+read-only verifier returned zero failures after the source-role pass. The copy
+hash and pass breakdown are in
+`artifacts/ida_translation_verification_20260902.json`.
 
-The final scope check keeps that count honest. None of the 274 default names
+The final scope check keeps that count honest. None of the 124 default names
 is in the `0x240000` through `0x246fff` Android bridge range. None of the
 1,779 unique callback addresses in the script-table inventory currently has a
 default name, including the callbacks added during the Facebook, billing,
-partner, and device/media reviews. The remaining 4 default entries in the
-broader `0x1e0000` through `0x246fff` application-core range are short static
-wrappers that clear or initialize global `TString`, `TStringList`, or
-`TGraalVar` objects. No remaining default function has a direct call edge to
+partner, and device/media reviews. The remaining 23 default entries in the
+broader `0x1e0000` through `0x246fff` application-core range are short
+static-state or cleanup wrappers. No remaining default function has a direct call edge to
 the selected socket, file, process, or update imports. The IDA-generated
 check is preserved in
-`artifacts/ida_active_translation_scope_check_20260901.json`.
+`artifacts/ida_active_translation_scope_check_20260902.json`.
 
 ## FreeType source matching
 
@@ -111,13 +110,45 @@ left address-based in the earlier residual review. `0x256060` is now
 slots, source declarations, and matching decompiler bodies supplied checks
 beyond a superficial name similarity.
 
-This follow-up reduced the default-name count from 394 to 274 and removed the
-FreeType residual bucket entirely. The final source-role pass identified
+This FreeType follow-up reduced the default-name count from 394 to 274 and
+removed the FreeType residual bucket entirely. The same review identified
 `tt_get_cmap_info` at `0x254b98` from the FreeType cmap service dispatch, and
 `default_bzfree`, `default_bzalloc`, and `handle_compress` at `0x273350`,
 `0x273360`, and `0x27336c` from the bzip2 stream initialization and compression
-state machine. The remaining queue is now limited to JPEG internals, cleanup
-wrappers, init or fini support, and the AArch64 resolver slot.
+state machine. Those counts are historical checkpoints. The current residual
+queue is documented below.
+
+## IJG, zlib, and GIF source-role pass
+
+The old profile grouped a large address interval as JPEG because the bundled
+IJG routines occupy that part of the text segment. A source-body comparison
+resolved 153 functions to IJG libjpeg 6b. The local archive is
+`jpegsrc.v6b.tar.gz`, released 27-Mar-1998, with SHA-256
+`75c3ec241e9996504fe02a9ed4d12f16b74ade713972f3db9e65ce95cd27e35d`.
+The marker-reader corrections were important: `0xe0454` parses Adobe APP14,
+`0x28d2ec` is `skip_variable`, and `0x28db3c` is `next_marker`.
+
+The function at `0x28a2f4` was initially placed in that same address bucket.
+Its literal, length, and distance Huffman decode loop and its zlib diagnostic
+strings match `inflate_fast` from zlib 1.2.5. It is now named
+`zlib_inflate_fast`.
+
+The function at `0x2acb20` is the static GIF LZW line decompressor. The
+preserved `DGifGetLine` and `DGifGetPixel` symbols both reference it. Its
+prefix table, suffix table, stack, clear code, EOF code, variable-width code
+reader, dictionary links, and output loop agree with the giflib
+`DGifDecompressLine` role. It is now named
+`giflib_DGifDecompressLine`; the exact giflib release remains unestablished.
+
+One more correction was at `0x2ac400`. The preserved `jpeg_fdct_float` symbol
+ends at `0x2ac3fc` and `jpeg_fdct_ifast` starts at `0x2ac440`. The bytes in
+between are alignment and floating-point constants referenced by the DCT code,
+not a separate function. Removing that false IDA boundary reduced the final
+function inventory by one and left 124 genuine default `sub_` functions.
+The current source-role artifacts are
+`artifacts/ida_libjpeg_source_matches_20260902.json`,
+`artifacts/ida_zlib_source_matches_20260902.json`, and
+`artifacts/ida_giflib_source_matches_20260902.json`.
 
 ## Android lifecycle and the first network checkpoint
 
@@ -1242,9 +1273,10 @@ fuzz a decoder.
 The binary gives exact version evidence for three components. `zlibVersion` at
 `0x289b50` returns `1.2.5`; `BZ2_bzlibVersion` at `0x2751ac` returns
 `1.0.4, 20-Dec-2006`; and `FT_Init_FreeType` at `0x253f1c` writes the library
-version fields `2`, `3`, and `6`. The exact libjpeg release remains unknown.
-Its `jpeg_CreateCompress` ABI constants are not being used as a release
-identifier.
+version fields `2`, `3`, and `6`. The embedded JPEG body matches IJG libjpeg
+6b, released 27-Mar-1998, across 153 source-role entries. The GIF analysis
+establishes the giflib API and static decompressor role, but not a unique
+giflib release.
 
 `readelf -d` shows no `libz.so`, `libbz2.so`, or `libfreetype.so` dependency.
 Those implementations are statically embedded in `libqplay.so`. That means a

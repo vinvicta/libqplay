@@ -18,7 +18,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_INVENTORY = ROOT.parent / "analysis" / "libqplay.function_inventory.json"
-DEFAULT_OUTPUT = ROOT / "artifacts" / "ida_final_residual_audit_20260901.json"
+DEFAULT_OUTPUT = ROOT / "artifacts" / "ida_final_residual_audit_20260902.json"
 DEFAULT_PROFILE = ROOT / "artifacts" / "ida_residual_profile.json"
 EXPECTED_BINARY_SHA256 = "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8"
 
@@ -89,7 +89,7 @@ def build_report(inventory_path: Path, profile_path: Path | None = None) -> dict
         "schema": "libqplay.ida-final-residual-audit.v1",
         "tool": "tools/generate_final_residual_audit.py",
         "tool_version": 1,
-        "analysis_date": "2026-09-01",
+        "analysis_date": "2026-09-02",
         "analysis_scope": "original ARM64 libqplay.so translated IDA inventory",
         "network_contacted": False,
         "inventory": {
@@ -116,6 +116,8 @@ def build_report(inventory_path: Path, profile_path: Path | None = None) -> dict
         ],
         "interpretation": [
             "The 8601 translated aliases cover the names present in the retained ELF symbol export, including functions, thunks, and data.",
+            "The exact source pass now accounts for 141 FreeType 2.3.6 functions, 153 IJG libjpeg 6b functions, one zlib 1.2.5 function, and one static giflib role.",
+            "A false IDA function boundary inside the JPEG DCT literal pool was removed before this inventory was generated.",
             "The residual list contains IDA-created code functions with no preserved source symbol in this APK.",
             "Addresses and behavior can be documented without inventing source names; a new alias should be added only when its role has evidence.",
         ],

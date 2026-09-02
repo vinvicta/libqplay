@@ -6,11 +6,12 @@ the pre-persistence inventory. The role-candidate pass names 28 application or
 engine entries, the first CyaSSL pass names 11 static TLS and crypto roles, and
 the next static-library pass names 30 zlib, bzip2, minizip, GPC, CyaSSL,
 LibTomCrypt, and YAJL roles. IDA reclassifies one compiler branch veneer as a
-thunk when the saved copy is reopened. A later source comparison also names
-141 embedded FreeType and TrueType routines from the pinned FreeType 2.3.6
-source. This helper subtracts those known changes and emits the exact residual
-count in the latest persisted database. It only reads JSON files and performs
-no network operation.
+thunk when the saved copy is reopened. Source comparisons also name 141
+embedded FreeType and TrueType routines, 153 IJG libjpeg 6b routines, one
+zlib 1.2.5 routine, and one static giflib role. This helper subtracts those
+known changes and emits the
+exact residual count in the latest persisted database. It only reads JSON
+files and performs no network operation.
 """
 
 from __future__ import annotations
@@ -26,15 +27,30 @@ DEFAULT_STATIC_ROLES = [
     "artifacts/cyassl_static_role_audit_20260826.json",
     "artifacts/static_library_role_audit_20260901.json",
 ]
+DEFAULT_SOURCE_MATCHES = [
+    "artifacts/ida_libjpeg_source_matches_20260902.json",
+    "artifacts/ida_zlib_source_matches_20260902.json",
+    "artifacts/ida_giflib_source_matches_20260902.json",
+]
 DEFAULT_OUTPUT = "artifacts/ida_residual_profile.json"
 
 CURRENT_DATABASE = {
-    "path": "analysis/libqplay_translated_from_active_v11.i64",
-    "sha256": "26471ffbe194a721e4fde7e894a451c7c8dccbe61c32eafc8305190b37ee6917",
-    "bytes": 61286570,
+    "path": "analysis/libqplay_translated_from_active_v12.i64",
+    "sha256": "77ecf848c9ed49b25896fef5b97b090234d380ff79d4591ee4113e00b8416625",
+    "bytes": 61991120,
     "format": "packed IDA 9.3 database",
     "close_reopen_verified": False,
-    "function_count": 11297,
+    "function_count": 11296,
+}
+
+REMOVED_FALSE_FUNCTIONS = {
+    0x2AC400: {
+        "reason": (
+            "IDA had created a false function inside the literal pool between "
+            "jpeg_fdct_float and jpeg_fdct_ifast. The ELF symbol boundaries and "
+            "the ARM64 bytes identify this range as constants, not executable code."
+        ),
+    },
 }
 
 REANALYZED_FUNCTIONS = {
@@ -389,6 +405,7 @@ def generate(
     profile: dict,
     roles: dict,
     static_roles: list[dict] | dict | None = None,
+    source_matches: list[dict] | None = None,
 ) -> dict:
     role_by_ea = {address(item["va"]): item for item in roles["candidates"]}
     if static_roles is None:
@@ -412,6 +429,21 @@ def generate(
         for entry in group["entries"]
     ]
     profile_by_ea = {address(item["ea"]): item for item in profile_entries}
+    source_documents = list(source_matches or [])
+    source_by_ea = {}
+    source_artifact_by_ea = {}
+    source_sources = []
+    for document in source_documents:
+        artifact = document.get("artifact", document.get("tool", "unknown"))
+        source_sources.append(artifact)
+        for item in document.get("matches", []):
+            ea = address(item["address"])
+            if ea in source_by_ea:
+                raise ValueError(f"duplicate source-match address: 0x{ea:x}")
+            source_by_ea[ea] = item
+            source_artifact_by_ea[ea] = artifact
+    source_profile_eas = set(source_by_ea) & set(profile_by_ea)
+    removed_source_matches = []
 
     missing_roles = sorted(set(role_by_ea) - set(profile_by_ea))
     if missing_roles:
@@ -430,6 +462,7 @@ def generate(
     removed_roles = []
     removed_static_roles = []
     removed_reanalyzed = []
+    removed_false_functions = []
     for group in profile["categories"]:
         category = group["category"]
         for original in group["entries"]:
@@ -465,6 +498,27 @@ def generate(
                     }
                 )
                 continue
+            if ea in REMOVED_FALSE_FUNCTIONS:
+                removed_false_functions.append(
+                    {
+                        "ea": f"0x{ea:x}",
+                        "reason": REMOVED_FALSE_FUNCTIONS[ea]["reason"],
+                    }
+                )
+                continue
+            if ea in source_by_ea:
+                item = source_by_ea[ea]
+                removed_source_matches.append(
+                    {
+                        "ea": f"0x{ea:x}",
+                        "confidence": item.get("confidence"),
+                        "ida_name": item.get("ida_name"),
+                        "source_file": item.get("source_file"),
+                        "source_artifact": source_artifact_by_ea[ea],
+                        "upstream_name": item.get("upstream_name"),
+                    }
+                )
+                continue
             residual.append(
                 {
                     "ea": f"0x{ea:x}",
@@ -483,9 +537,14 @@ def generate(
     )
     if len(removed_static_roles) != expected_static_count:
         raise ValueError("static role removal count does not match audit artifacts")
+    expected_source_profile_count = len(source_profile_eas)
+    if len(removed_source_matches) != expected_source_profile_count:
+        raise ValueError("source-match removal count does not match profile intersection")
     expected = profile["unresolved_default_sub_function_count"] - len(
         removed_roles
-    ) - len(removed_static_roles) - len(removed_reanalyzed)
+    ) - len(removed_static_roles) - len(removed_reanalyzed) - len(
+        removed_source_matches
+    ) - len(removed_false_functions)
     if len(residual) != expected:
         raise ValueError(
             f"residual count mismatch: expected {expected}, got {len(residual)}"
@@ -556,7 +615,19 @@ def generate(
                 removed_static_roles, key=lambda item: address(item["ea"])
             ),
         },
+        "applied_source_matches": {
+            "sources": [f"artifacts/{artifact}.json" for artifact in source_sources],
+            "count": sum(document.get("match_count", 0) for document in source_documents),
+            "profile_residual_count": len(removed_source_matches),
+            "out_of_profile_count": sum(
+                document.get("match_count", 0) for document in source_documents
+            ) - len(removed_source_matches),
+            "entries": sorted(
+                removed_source_matches, key=lambda item: address(item["ea"])
+            ),
+        },
         "ida_reclassified_functions": removed_reanalyzed,
+        "ida_removed_false_functions": removed_false_functions,
         "remaining_default_sub_function_count": len(residual),
         "category_summary": category_summary,
         "categories": [groups[key] for key in sorted(groups)],
@@ -574,6 +645,9 @@ def generate(
                 f"artifacts/{artifact}.json" for artifact in static_sources
             ],
             "freetype_source_matches": "artifacts/ida_freetype_source_matches_20260901.json",
+            "embedded_source_matches": [
+                f"artifacts/{artifact}.json" for artifact in source_sources
+            ],
             "validation": "artifacts/ida_translation_validation.json",
         },
         "network_contacted": False,
@@ -591,6 +665,12 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help="static role audit JSON; may be supplied more than once",
     )
+    parser.add_argument(
+        "--source-matches",
+        action="append",
+        default=None,
+        help="source-match JSON; may be supplied more than once",
+    )
     parser.add_argument("--output", default=DEFAULT_OUTPUT)
     return parser.parse_args()
 
@@ -598,10 +678,12 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
     static_paths = args.static_roles or DEFAULT_STATIC_ROLES
+    source_paths = args.source_matches or DEFAULT_SOURCE_MATCHES
     result = generate(
         load(args.profile),
         load(args.roles),
         [load(path) for path in static_paths],
+        [load(path) for path in source_paths],
     )
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)

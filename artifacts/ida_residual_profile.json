@@ -145,6 +145,1210 @@
     ],
     "source": "artifacts/unresolved_function_candidates.json"
   },
+  "applied_source_matches": {
+    "count": 155,
+    "entries": [
+      {
+        "confidence": "exact",
+        "ea": "0xe0454",
+        "ida_name": "libjpeg_jdmarker_examine_app14",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdmarker.c",
+        "upstream_name": "examine_app14"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28a2f4",
+        "ida_name": "zlib_inflate_fast",
+        "source_artifact": "ida_zlib_source_matches_20260902",
+        "source_file": "inffast.c",
+        "upstream_name": "inflate_fast"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28b9f4",
+        "ida_name": "libjpeg_jdatadst_init_destination",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdatadst.c",
+        "upstream_name": "init_destination"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28ba30",
+        "ida_name": "libjpeg_jdatadst_empty_output_buffer",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdatadst.c",
+        "upstream_name": "empty_output_buffer"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28baa4",
+        "ida_name": "libjpeg_jdatadst_term_destination",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdatadst.c",
+        "upstream_name": "term_destination"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28bbbc",
+        "ida_name": "libjpeg_jdatasrc_init_source",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdatasrc.c",
+        "upstream_name": "init_source"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28bbcc",
+        "ida_name": "libjpeg_jdatasrc_fill_input_buffer",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdatasrc.c",
+        "upstream_name": "fill_input_buffer"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28bc88",
+        "ida_name": "libjpeg_jdatasrc_skip_input_data",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdatasrc.c",
+        "upstream_name": "skip_input_data"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28be44",
+        "ida_name": "libjpeg_jdinput_finish_input_pass",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdinput.c",
+        "upstream_name": "finish_input_pass"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28be58",
+        "ida_name": "libjpeg_jdinput_reset_input_controller",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdinput.c",
+        "upstream_name": "reset_input_controller"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28beb0",
+        "ida_name": "libjpeg_jdinput_start_input_pass",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdinput.c",
+        "upstream_name": "start_input_pass"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28c378",
+        "ida_name": "libjpeg_jdinput_consume_markers",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdinput.c",
+        "upstream_name": "consume_markers"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28cbb8",
+        "ida_name": "libjpeg_jdmarker_get_sof",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdmarker.c",
+        "upstream_name": "get_sof"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28cffc",
+        "ida_name": "libjpeg_jdmarker_examine_app0",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdmarker.c",
+        "upstream_name": "examine_app0"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28d2ec",
+        "ida_name": "libjpeg_jdmarker_skip_variable",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdmarker.c",
+        "upstream_name": "skip_variable"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28d400",
+        "ida_name": "libjpeg_jdmarker_reset_marker_reader",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdmarker.c",
+        "upstream_name": "reset_marker_reader"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28d424",
+        "ida_name": "libjpeg_jdmarker_get_interesting_appn",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdmarker.c",
+        "upstream_name": "get_interesting_appn"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28d804",
+        "ida_name": "libjpeg_jdmarker_save_marker",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdmarker.c",
+        "upstream_name": "save_marker"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28db3c",
+        "ida_name": "libjpeg_jdmarker_next_marker",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdmarker.c",
+        "upstream_name": "next_marker"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28dd9c",
+        "ida_name": "libjpeg_jdmarker_read_markers",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdmarker.c",
+        "upstream_name": "read_markers"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28eb20",
+        "ida_name": "libjpeg_jdmarker_read_restart_marker",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdmarker.c",
+        "upstream_name": "read_restart_marker"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28f2b0",
+        "ida_name": "libjpeg_jdmaster_prepare_for_output_pass",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdmaster.c",
+        "upstream_name": "prepare_for_output_pass"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28f478",
+        "ida_name": "libjpeg_jdmaster_finish_output_pass",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdmaster.c",
+        "upstream_name": "finish_output_pass"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28fee0",
+        "ida_name": "libjpeg_jdmerge_start_pass_merged_upsample",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdmerge.c",
+        "upstream_name": "start_pass_merged_upsample"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28fef4",
+        "ida_name": "libjpeg_jdmerge_merged_1v_upsample",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdmerge.c",
+        "upstream_name": "merged_1v_upsample"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x28ff44",
+        "ida_name": "libjpeg_jdmerge_h2v1_merged_upsample",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdmerge.c",
+        "upstream_name": "h2v1_merged_upsample"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x290094",
+        "ida_name": "libjpeg_jdmerge_h2v2_merged_upsample",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdmerge.c",
+        "upstream_name": "h2v2_merged_upsample"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x290294",
+        "ida_name": "libjpeg_jdmerge_merged_2v_upsample",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdmerge.c",
+        "upstream_name": "merged_2v_upsample"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x290538",
+        "ida_name": "libjpeg_jdphuff_start_pass_phuff_decoder",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdphuff.c",
+        "upstream_name": "start_pass_phuff_decoder"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x29095c",
+        "ida_name": "libjpeg_jdphuff_decode_mcu_DC_first",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdphuff.c",
+        "upstream_name": "decode_mcu_DC_first"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x290e3c",
+        "ida_name": "libjpeg_jdphuff_decode_mcu_AC_first",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdphuff.c",
+        "upstream_name": "decode_mcu_AC_first"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x291154",
+        "ida_name": "libjpeg_jdphuff_decode_mcu_DC_refine",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdphuff.c",
+        "upstream_name": "decode_mcu_DC_refine"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2912f8",
+        "ida_name": "libjpeg_jdphuff_decode_mcu_AC_refine",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdphuff.c",
+        "upstream_name": "decode_mcu_AC_refine"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2916f8",
+        "ida_name": "libjpeg_jdpostct_start_pass_dpost",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdpostct.c",
+        "upstream_name": "start_pass_dpost"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x291810",
+        "ida_name": "libjpeg_jdpostct_post_process_1pass",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdpostct.c",
+        "upstream_name": "post_process_1pass"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2918a0",
+        "ida_name": "libjpeg_jdpostct_post_process_prepass",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdpostct.c",
+        "upstream_name": "post_process_prepass"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2919a0",
+        "ida_name": "libjpeg_jdpostct_post_process_2pass",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdpostct.c",
+        "upstream_name": "post_process_2pass"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x291b6c",
+        "ida_name": "libjpeg_jdsample_start_pass_upsample",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdsample.c",
+        "upstream_name": "start_pass_upsample"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x291b84",
+        "ida_name": "libjpeg_jdsample_sep_upsample",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdsample.c",
+        "upstream_name": "sep_upsample"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x291ce8",
+        "ida_name": "libjpeg_jdsample_fullsize_upsample",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdsample.c",
+        "upstream_name": "fullsize_upsample"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x291cf0",
+        "ida_name": "libjpeg_jdsample_noop_upsample",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdsample.c",
+        "upstream_name": "noop_upsample"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x291cf8",
+        "ida_name": "libjpeg_jdsample_int_upsample",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdsample.c",
+        "upstream_name": "int_upsample"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x291f6c",
+        "ida_name": "libjpeg_jdsample_h2v1_upsample",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdsample.c",
+        "upstream_name": "h2v1_upsample"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x292220",
+        "ida_name": "libjpeg_jdsample_h2v2_upsample",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdsample.c",
+        "upstream_name": "h2v2_upsample"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x292360",
+        "ida_name": "libjpeg_jdsample_h2v1_fancy_upsample",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdsample.c",
+        "upstream_name": "h2v1_fancy_upsample"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x292568",
+        "ida_name": "libjpeg_jdsample_h2v2_fancy_upsample",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdsample.c",
+        "upstream_name": "h2v2_fancy_upsample"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x292aac",
+        "ida_name": "libjpeg_jerror_emit_message",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jerror.c",
+        "upstream_name": "emit_message"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x292b24",
+        "ida_name": "libjpeg_jerror_reset_error_mgr",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jerror.c",
+        "upstream_name": "reset_error_mgr"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x292b34",
+        "ida_name": "libjpeg_jerror_format_message",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jerror.c",
+        "upstream_name": "format_message"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x292c1c",
+        "ida_name": "libjpeg_jerror_output_message",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jerror.c",
+        "upstream_name": "output_message"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x292c64",
+        "ida_name": "libjpeg_jerror_error_exit",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jerror.c",
+        "upstream_name": "error_exit"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x292cf8",
+        "ida_name": "libjpeg_jmemmgr_alloc_small",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jmemmgr.c",
+        "upstream_name": "alloc_small"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x292ef8",
+        "ida_name": "libjpeg_jmemmgr_alloc_large",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jmemmgr.c",
+        "upstream_name": "alloc_large"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x293058",
+        "ida_name": "libjpeg_jmemmgr_alloc_sarray",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jmemmgr.c",
+        "upstream_name": "alloc_sarray"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x293168",
+        "ida_name": "libjpeg_jmemmgr_alloc_barray",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jmemmgr.c",
+        "upstream_name": "alloc_barray"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x293500",
+        "ida_name": "libjpeg_jmemmgr_request_virt_sarray",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jmemmgr.c",
+        "upstream_name": "request_virt_sarray"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2938b0",
+        "ida_name": "libjpeg_jmemmgr_request_virt_barray",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jmemmgr.c",
+        "upstream_name": "request_virt_barray"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x293acc",
+        "ida_name": "libjpeg_jmemmgr_realize_virt_arrays",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jmemmgr.c",
+        "upstream_name": "realize_virt_arrays"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x293ce8",
+        "ida_name": "libjpeg_jmemmgr_access_virt_sarray",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jmemmgr.c",
+        "upstream_name": "access_virt_sarray"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x293e50",
+        "ida_name": "libjpeg_jmemmgr_access_virt_barray",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jmemmgr.c",
+        "upstream_name": "access_virt_barray"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2941d0",
+        "ida_name": "libjpeg_jmemmgr_free_pool",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jmemmgr.c",
+        "upstream_name": "free_pool"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x294534",
+        "ida_name": "libjpeg_jmemmgr_self_destruct",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jmemmgr.c",
+        "upstream_name": "self_destruct"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x294f44",
+        "ida_name": "libjpeg_jquant1_color_quantize",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jquant1.c",
+        "upstream_name": "color_quantize"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x294fd0",
+        "ida_name": "libjpeg_jquant1_color_quantize3",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jquant1.c",
+        "upstream_name": "color_quantize3"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x295050",
+        "ida_name": "libjpeg_jquant1_quantize3_ord_dither",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jquant1.c",
+        "upstream_name": "quantize3_ord_dither"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x29513c",
+        "ida_name": "libjpeg_jquant1_new_color_map_1_quant",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jquant1.c",
+        "upstream_name": "new_color_map_1_quant"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x295164",
+        "ida_name": "libjpeg_jquant1_quantize_fs_dither",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jquant1.c",
+        "upstream_name": "quantize_fs_dither"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x295344",
+        "ida_name": "libjpeg_jquant1_quantize_ord_dither",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jquant1.c",
+        "upstream_name": "quantize_ord_dither"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x29545c",
+        "ida_name": "libjpeg_jquant1_start_pass_1_quant",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jquant1.c",
+        "upstream_name": "start_pass_1_quant"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x296270",
+        "ida_name": "libjpeg_jquant2_prescan_quantize",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jquant2.c",
+        "upstream_name": "prescan_quantize"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2962f8",
+        "ida_name": "libjpeg_jquant2_new_color_map_2_quant",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jquant2.c",
+        "upstream_name": "new_color_map_2_quant"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x296308",
+        "ida_name": "libjpeg_jquant2_start_pass_2_quant",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jquant2.c",
+        "upstream_name": "start_pass_2_quant"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x296620",
+        "ida_name": "libjpeg_jquant2_find_nearby_colors",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jquant2.c",
+        "upstream_name": "find_nearby_colors"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x296a64",
+        "ida_name": "libjpeg_jquant2_fill_inverse_cmap",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jquant2.c",
+        "upstream_name": "fill_inverse_cmap"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x296ee0",
+        "ida_name": "libjpeg_jquant2_pass2_no_dither",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jquant2.c",
+        "upstream_name": "pass2_no_dither"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x296fe4",
+        "ida_name": "libjpeg_jquant2_pass2_fs_dither",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jquant2.c",
+        "upstream_name": "pass2_fs_dither"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x297388",
+        "ida_name": "libjpeg_jquant2_finish_pass1",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jquant2.c",
+        "upstream_name": "finish_pass1"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2986c0",
+        "ida_name": "libjpeg_jcmarker_write_marker_byte",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcmarker.c",
+        "upstream_name": "write_marker_byte"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x29872c",
+        "ida_name": "libjpeg_jcmarker_write_file_trailer",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcmarker.c",
+        "upstream_name": "write_file_trailer"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2987f0",
+        "ida_name": "libjpeg_jcmarker_write_marker_header",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcmarker.c",
+        "upstream_name": "write_marker_header"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2989a0",
+        "ida_name": "libjpeg_jcmarker_emit_dqt",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcmarker.c",
+        "upstream_name": "emit_dqt"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x298e90",
+        "ida_name": "libjpeg_jcmarker_write_file_header",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcmarker.c",
+        "upstream_name": "write_file_header"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x299ac8",
+        "ida_name": "libjpeg_jcmarker_emit_dht",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcmarker.c",
+        "upstream_name": "emit_dht"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x299e54",
+        "ida_name": "libjpeg_jcmarker_write_frame_header",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcmarker.c",
+        "upstream_name": "write_frame_header"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x29a2d8",
+        "ida_name": "libjpeg_jcmarker_write_scan_header",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcmarker.c",
+        "upstream_name": "write_scan_header"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x29aa48",
+        "ida_name": "libjpeg_jcmarker_write_tables_only",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcmarker.c",
+        "upstream_name": "write_tables_only"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x29c6bc",
+        "ida_name": "libjpeg_jdcoefct_dummy_consume_data",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdcoefct.c",
+        "upstream_name": "dummy_consume_data"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x29c6c4",
+        "ida_name": "libjpeg_jdcoefct_consume_data",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdcoefct.c",
+        "upstream_name": "consume_data"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x29c9c8",
+        "ida_name": "libjpeg_jdcoefct_start_output_pass",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdcoefct.c",
+        "upstream_name": "start_output_pass"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x29cb80",
+        "ida_name": "libjpeg_jdcoefct_decompress_smooth_data",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdcoefct.c",
+        "upstream_name": "decompress_smooth_data"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x29d2f8",
+        "ida_name": "libjpeg_jdcoefct_decompress_data",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdcoefct.c",
+        "upstream_name": "decompress_data"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x29d510",
+        "ida_name": "libjpeg_jdcoefct_start_input_pass",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdcoefct.c",
+        "upstream_name": "start_input_pass"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x29d570",
+        "ida_name": "libjpeg_jdcoefct_decompress_onepass",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdcoefct.c",
+        "upstream_name": "decompress_onepass"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x29da68",
+        "ida_name": "libjpeg_jdcolor_ycc_rgb_convert",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdcolor.c",
+        "upstream_name": "ycc_rgb_convert"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x29db28",
+        "ida_name": "libjpeg_jdcolor_null_convert",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdcolor.c",
+        "upstream_name": "null_convert"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x29dba4",
+        "ida_name": "libjpeg_jdcolor_gray_rgb_convert",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdcolor.c",
+        "upstream_name": "gray_rgb_convert"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x29dee8",
+        "ida_name": "libjpeg_jdcolor_ycck_cmyk_convert",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdcolor.c",
+        "upstream_name": "ycck_cmyk_convert"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x29dfcc",
+        "ida_name": "libjpeg_jdcolor_grayscale_convert",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdcolor.c",
+        "upstream_name": "grayscale_convert"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x29e40c",
+        "ida_name": "libjpeg_jddctmgr_start_pass",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jddctmgr.c",
+        "upstream_name": "start_pass"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x29f2d0",
+        "ida_name": "libjpeg_jdhuff_start_pass_huff_decoder",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdhuff.c",
+        "upstream_name": "start_pass_huff_decoder"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x29f734",
+        "ida_name": "libjpeg_jdhuff_decode_mcu",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdhuff.c",
+        "upstream_name": "decode_mcu"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x29fc98",
+        "ida_name": "libjpeg_jdmainct_process_data_simple_main",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdmainct.c",
+        "upstream_name": "process_data_simple_main"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x29fd40",
+        "ida_name": "libjpeg_jdmainct_process_data_context_main",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdmainct.c",
+        "upstream_name": "process_data_context_main"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a00c0",
+        "ida_name": "libjpeg_jdmainct_process_data_crank_post",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdmainct.c",
+        "upstream_name": "process_data_crank_post"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a00f8",
+        "ida_name": "libjpeg_jdmainct_start_pass_main",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jdmainct.c",
+        "upstream_name": "start_pass_main"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a1b50",
+        "ida_name": "libjpeg_jccoefct_start_iMCU_row",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jccoefct.c",
+        "upstream_name": "start_iMCU_row"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a1bb4",
+        "ida_name": "libjpeg_jccoefct_compress_data",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jccoefct.c",
+        "upstream_name": "compress_data"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a1e40",
+        "ida_name": "libjpeg_jccoefct_compress_first_pass",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jccoefct.c",
+        "upstream_name": "compress_first_pass"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a2394",
+        "ida_name": "libjpeg_jccoefct_start_pass_coef",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jccoefct.c",
+        "upstream_name": "start_pass_coef"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a24cc",
+        "ida_name": "libjpeg_jccoefct_compress_output",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jccoefct.c",
+        "upstream_name": "compress_output"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a2b0c",
+        "ida_name": "libjpeg_jccolor_rgb_ycc_start",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jccolor.c",
+        "upstream_name": "rgb_ycc_start"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a2bd0",
+        "ida_name": "libjpeg_jccolor_rgb_ycc_convert",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jccolor.c",
+        "upstream_name": "rgb_ycc_convert"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a2ca4",
+        "ida_name": "libjpeg_jccolor_rgb_gray_convert",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jccolor.c",
+        "upstream_name": "rgb_gray_convert"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a2d1c",
+        "ida_name": "libjpeg_jccolor_cmyk_ycck_convert",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jccolor.c",
+        "upstream_name": "cmyk_ycck_convert"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a2e20",
+        "ida_name": "libjpeg_jccolor_grayscale_convert",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jccolor.c",
+        "upstream_name": "grayscale_convert"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a2e6c",
+        "ida_name": "libjpeg_jccolor_null_convert",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jccolor.c",
+        "upstream_name": "null_convert"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a31f0",
+        "ida_name": "libjpeg_jcdctmgr_start_pass_fdctmgr",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcdctmgr.c",
+        "upstream_name": "start_pass_fdctmgr"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a3638",
+        "ida_name": "libjpeg_jcdctmgr_forward_DCT",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcdctmgr.c",
+        "upstream_name": "forward_DCT"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a37a0",
+        "ida_name": "libjpeg_jcdctmgr_forward_DCT_float",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcdctmgr.c",
+        "upstream_name": "forward_DCT_float"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a3cf0",
+        "ida_name": "libjpeg_jchuff_encode_mcu_gather",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jchuff.c",
+        "upstream_name": "encode_mcu_gather"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a3f30",
+        "ida_name": "libjpeg_jchuff_finish_pass_huff",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jchuff.c",
+        "upstream_name": "finish_pass_huff"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a40b0",
+        "ida_name": "libjpeg_jchuff_encode_mcu_huff",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jchuff.c",
+        "upstream_name": "encode_mcu_huff"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a4ec8",
+        "ida_name": "libjpeg_jchuff_start_pass_huff",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jchuff.c",
+        "upstream_name": "start_pass_huff"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a54a4",
+        "ida_name": "libjpeg_jchuff_finish_pass_gather",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jchuff.c",
+        "upstream_name": "finish_pass_gather"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a563c",
+        "ida_name": "libjpeg_jcmainct_process_data_simple_main",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcmainct.c",
+        "upstream_name": "process_data_simple_main"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a575c",
+        "ida_name": "libjpeg_jcmainct_start_pass_main",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcmainct.c",
+        "upstream_name": "start_pass_main"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a5898",
+        "ida_name": "libjpeg_jcmaster_validate_script",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcmaster.c",
+        "upstream_name": "validate_script"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a6234",
+        "ida_name": "libjpeg_jcmaster_pass_startup",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcmaster.c",
+        "upstream_name": "pass_startup"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a6270",
+        "ida_name": "libjpeg_jcmaster_finish_pass_master",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcmaster.c",
+        "upstream_name": "finish_pass_master"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a6324",
+        "ida_name": "libjpeg_jcmaster_prepare_for_pass",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcmaster.c",
+        "upstream_name": "prepare_for_pass"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a73fc",
+        "ida_name": "libjpeg_jcphuff_start_pass_phuff",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcphuff.c",
+        "upstream_name": "start_pass_phuff"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a75dc",
+        "ida_name": "libjpeg_jcphuff_emit_eobrun",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcphuff.c",
+        "upstream_name": "emit_eobrun"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a7c80",
+        "ida_name": "libjpeg_jcphuff_encode_mcu_AC_refine",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcphuff.c",
+        "upstream_name": "encode_mcu_AC_refine"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a88ec",
+        "ida_name": "libjpeg_jcphuff_finish_pass_phuff",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcphuff.c",
+        "upstream_name": "finish_pass_phuff"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a8aa4",
+        "ida_name": "libjpeg_jcphuff_finish_pass_gather_phuff",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcphuff.c",
+        "upstream_name": "finish_pass_gather_phuff"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a8da4",
+        "ida_name": "libjpeg_jcphuff_encode_mcu_DC_refine",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcphuff.c",
+        "upstream_name": "encode_mcu_DC_refine"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a922c",
+        "ida_name": "libjpeg_jcphuff_encode_mcu_DC_first",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcphuff.c",
+        "upstream_name": "encode_mcu_DC_first"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2a9ae0",
+        "ida_name": "libjpeg_jcphuff_encode_mcu_AC_first",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcphuff.c",
+        "upstream_name": "encode_mcu_AC_first"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2aa4b8",
+        "ida_name": "libjpeg_jcprepct_start_pass_prep",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcprepct.c",
+        "upstream_name": "start_pass_prep"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2aa510",
+        "ida_name": "libjpeg_jcprepct_pre_process_context",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcprepct.c",
+        "upstream_name": "pre_process_context"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2aa7a4",
+        "ida_name": "libjpeg_jcprepct_pre_process_data",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcprepct.c",
+        "upstream_name": "pre_process_data"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2aae40",
+        "ida_name": "libjpeg_jcsample_sep_downsample",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcsample.c",
+        "upstream_name": "sep_downsample"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2aaee4",
+        "ida_name": "libjpeg_jcsample_int_downsample",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcsample.c",
+        "upstream_name": "int_downsample"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2ab2f4",
+        "ida_name": "libjpeg_jcsample_h2v1_downsample",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcsample.c",
+        "upstream_name": "h2v1_downsample"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2ab4a4",
+        "ida_name": "libjpeg_jcsample_h2v2_downsample",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcsample.c",
+        "upstream_name": "h2v2_downsample"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2ab670",
+        "ida_name": "libjpeg_jcsample_h2v2_smooth_downsample",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcsample.c",
+        "upstream_name": "h2v2_smooth_downsample"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2aba28",
+        "ida_name": "libjpeg_jcsample_fullsize_smooth_downsample",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcsample.c",
+        "upstream_name": "fullsize_smooth_downsample"
+      },
+      {
+        "confidence": "exact",
+        "ea": "0x2abcd0",
+        "ida_name": "libjpeg_jcsample_fullsize_downsample",
+        "source_artifact": "ida_libjpeg_source_matches_20260902",
+        "source_file": "jcsample.c",
+        "upstream_name": "fullsize_downsample"
+      },
+      {
+        "confidence": "exact_role",
+        "ea": "0x2acb20",
+        "ida_name": "giflib_DGifDecompressLine",
+        "source_artifact": "ida_giflib_source_matches_20260902",
+        "source_file": "dgif_lib.c",
+        "upstream_name": "DGifDecompressLine"
+      }
+    ],
+    "out_of_profile_count": 6,
+    "profile_residual_count": 149,
+    "sources": [
+      "artifacts/ida_libjpeg_source_matches_20260902.json",
+      "artifacts/ida_zlib_source_matches_20260902.json",
+      "artifacts/ida_giflib_source_matches_20260902.json"
+    ]
+  },
   "applied_static_role_aliases": {
     "count": 41,
     "entries": [
@@ -543,1063 +1747,6 @@
         }
       ],
       "total_bytes": 852
-    },
-    {
-      "category": "jpeg_static_internal",
-      "count": 150,
-      "entries": [
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_E0454",
-          "ea": "0xe0454",
-          "segment": ".text",
-          "size": 128
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28A2F4",
-          "ea": "0x28a2f4",
-          "segment": ".text",
-          "size": 2724
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28B9F4",
-          "ea": "0x28b9f4",
-          "segment": ".text",
-          "size": 60
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28BA30",
-          "ea": "0x28ba30",
-          "segment": ".text",
-          "size": 116
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28BAA4",
-          "ea": "0x28baa4",
-          "segment": ".text",
-          "size": 184
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28BBBC",
-          "ea": "0x28bbbc",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28BBCC",
-          "ea": "0x28bbcc",
-          "segment": ".text",
-          "size": 184
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28BC88",
-          "ea": "0x28bc88",
-          "segment": ".text",
-          "size": 276
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28BE44",
-          "ea": "0x28be44",
-          "segment": ".text",
-          "size": 20
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28BE58",
-          "ea": "0x28be58",
-          "segment": ".text",
-          "size": 88
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28BEB0",
-          "ea": "0x28beb0",
-          "segment": ".text",
-          "size": 1224
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28C378",
-          "ea": "0x28c378",
-          "segment": ".text",
-          "size": 2000
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28CBB8",
-          "ea": "0x28cbb8",
-          "segment": ".text",
-          "size": 1092
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28CFFC",
-          "ea": "0x28cffc",
-          "segment": ".text",
-          "size": 752
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28D2EC",
-          "ea": "0x28d2ec",
-          "segment": ".text",
-          "size": 276
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28D400",
-          "ea": "0x28d400",
-          "segment": ".text",
-          "size": 36
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28D424",
-          "ea": "0x28d424",
-          "segment": ".text",
-          "size": 992
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28D804",
-          "ea": "0x28d804",
-          "segment": ".text",
-          "size": 824
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28DB3C",
-          "ea": "0x28db3c",
-          "segment": ".text",
-          "size": 608
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28DD9C",
-          "ea": "0x28dd9c",
-          "segment": ".text",
-          "size": 3460
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28EB20",
-          "ea": "0x28eb20",
-          "segment": ".text",
-          "size": 520
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28F2B0",
-          "ea": "0x28f2b0",
-          "segment": ".text",
-          "size": 456
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28F478",
-          "ea": "0x28f478",
-          "segment": ".text",
-          "size": 56
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28FEE0",
-          "ea": "0x28fee0",
-          "segment": ".text",
-          "size": 20
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28FEF4",
-          "ea": "0x28fef4",
-          "segment": ".text",
-          "size": 80
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_28FF44",
-          "ea": "0x28ff44",
-          "segment": ".text",
-          "size": 336
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_290094",
-          "ea": "0x290094",
-          "segment": ".text",
-          "size": 512
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_290294",
-          "ea": "0x290294",
-          "segment": ".text",
-          "size": 260
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_290538",
-          "ea": "0x290538",
-          "segment": ".text",
-          "size": 1060
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_29095C",
-          "ea": "0x29095c",
-          "segment": ".text",
-          "size": 1248
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_290E3C",
-          "ea": "0x290e3c",
-          "segment": ".text",
-          "size": 792
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_291154",
-          "ea": "0x291154",
-          "segment": ".text",
-          "size": 420
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2912F8",
-          "ea": "0x2912f8",
-          "segment": ".text",
-          "size": 740
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2916F8",
-          "ea": "0x2916f8",
-          "segment": ".text",
-          "size": 280
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_291810",
-          "ea": "0x291810",
-          "segment": ".text",
-          "size": 144
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2918A0",
-          "ea": "0x2918a0",
-          "segment": ".text",
-          "size": 256
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2919A0",
-          "ea": "0x2919a0",
-          "segment": ".text",
-          "size": 240
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_291B6C",
-          "ea": "0x291b6c",
-          "segment": ".text",
-          "size": 24
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_291B84",
-          "ea": "0x291b84",
-          "segment": ".text",
-          "size": 356
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_291CE8",
-          "ea": "0x291ce8",
-          "segment": ".text",
-          "size": 8
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_291CF0",
-          "ea": "0x291cf0",
-          "segment": ".text",
-          "size": 8
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_291CF8",
-          "ea": "0x291cf8",
-          "segment": ".text",
-          "size": 628
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_291F6C",
-          "ea": "0x291f6c",
-          "segment": ".text",
-          "size": 692
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_292220",
-          "ea": "0x292220",
-          "segment": ".text",
-          "size": 320
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_292360",
-          "ea": "0x292360",
-          "segment": ".text",
-          "size": 520
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_292568",
-          "ea": "0x292568",
-          "segment": ".text",
-          "size": 708
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_292AAC",
-          "ea": "0x292aac",
-          "segment": ".text",
-          "size": 120
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_292B24",
-          "ea": "0x292b24",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_292B34",
-          "ea": "0x292b34",
-          "segment": ".text",
-          "size": 232
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_292C1C",
-          "ea": "0x292c1c",
-          "segment": ".text",
-          "size": 72
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_292C64",
-          "ea": "0x292c64",
-          "segment": ".text",
-          "size": 40
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_292CF8",
-          "ea": "0x292cf8",
-          "segment": ".text",
-          "size": 512
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_292EF8",
-          "ea": "0x292ef8",
-          "segment": ".text",
-          "size": 352
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_293058",
-          "ea": "0x293058",
-          "segment": ".text",
-          "size": 272
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_293168",
-          "ea": "0x293168",
-          "segment": ".text",
-          "size": 920
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_293500",
-          "ea": "0x293500",
-          "segment": ".text",
-          "size": 944
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2938B0",
-          "ea": "0x2938b0",
-          "segment": ".text",
-          "size": 540
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_293ACC",
-          "ea": "0x293acc",
-          "segment": ".text",
-          "size": 540
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_293CE8",
-          "ea": "0x293ce8",
-          "segment": ".text",
-          "size": 360
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_293E50",
-          "ea": "0x293e50",
-          "segment": ".text",
-          "size": 896
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2941D0",
-          "ea": "0x2941d0",
-          "segment": ".text",
-          "size": 868
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_294534",
-          "ea": "0x294534",
-          "segment": ".text",
-          "size": 2068
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_294F44",
-          "ea": "0x294f44",
-          "segment": ".text",
-          "size": 140
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_294FD0",
-          "ea": "0x294fd0",
-          "segment": ".text",
-          "size": 128
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_295050",
-          "ea": "0x295050",
-          "segment": ".text",
-          "size": 232
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_29513C",
-          "ea": "0x29513c",
-          "segment": ".text",
-          "size": 40
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_295164",
-          "ea": "0x295164",
-          "segment": ".text",
-          "size": 480
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_295344",
-          "ea": "0x295344",
-          "segment": ".text",
-          "size": 280
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_29545C",
-          "ea": "0x29545c",
-          "segment": ".text",
-          "size": 1724
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_296270",
-          "ea": "0x296270",
-          "segment": ".text",
-          "size": 132
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2962F8",
-          "ea": "0x2962f8",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_296308",
-          "ea": "0x296308",
-          "segment": ".text",
-          "size": 652
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_296620",
-          "ea": "0x296620",
-          "segment": ".text",
-          "size": 1092
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_296A64",
-          "ea": "0x296a64",
-          "segment": ".text",
-          "size": 1128
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_296EE0",
-          "ea": "0x296ee0",
-          "segment": ".text",
-          "size": 260
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_296FE4",
-          "ea": "0x296fe4",
-          "segment": ".text",
-          "size": 932
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_297388",
-          "ea": "0x297388",
-          "segment": ".text",
-          "size": 1912
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2986C0",
-          "ea": "0x2986c0",
-          "segment": ".text",
-          "size": 108
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_29872C",
-          "ea": "0x29872c",
-          "segment": ".text",
-          "size": 196
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2987F0",
-          "ea": "0x2987f0",
-          "segment": ".text",
-          "size": 432
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2989A0",
-          "ea": "0x2989a0",
-          "segment": ".text",
-          "size": 1264
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_298E90",
-          "ea": "0x298e90",
-          "segment": ".text",
-          "size": 3128
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_299AC8",
-          "ea": "0x299ac8",
-          "segment": ".text",
-          "size": 908
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_299E54",
-          "ea": "0x299e54",
-          "segment": ".text",
-          "size": 1156
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_29A2D8",
-          "ea": "0x29a2d8",
-          "segment": ".text",
-          "size": 1904
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_29AA48",
-          "ea": "0x29aa48",
-          "segment": ".text",
-          "size": 3264
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_29C6BC",
-          "ea": "0x29c6bc",
-          "segment": ".text",
-          "size": 8
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_29C6C4",
-          "ea": "0x29c6c4",
-          "segment": ".text",
-          "size": 772
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_29C9C8",
-          "ea": "0x29c9c8",
-          "segment": ".text",
-          "size": 440
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_29CB80",
-          "ea": "0x29cb80",
-          "segment": ".text",
-          "size": 1912
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_29D2F8",
-          "ea": "0x29d2f8",
-          "segment": ".text",
-          "size": 536
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_29D510",
-          "ea": "0x29d510",
-          "segment": ".text",
-          "size": 96
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_29D570",
-          "ea": "0x29d570",
-          "segment": ".text",
-          "size": 824
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_29DA68",
-          "ea": "0x29da68",
-          "segment": ".text",
-          "size": 192
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_29DB28",
-          "ea": "0x29db28",
-          "segment": ".text",
-          "size": 124
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_29DBA4",
-          "ea": "0x29dba4",
-          "segment": ".text",
-          "size": 836
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_29DEE8",
-          "ea": "0x29dee8",
-          "segment": ".text",
-          "size": 224
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_29DFCC",
-          "ea": "0x29dfcc",
-          "segment": ".text",
-          "size": 24
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_29E40C",
-          "ea": "0x29e40c",
-          "segment": ".text",
-          "size": 932
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_29F2D0",
-          "ea": "0x29f2d0",
-          "segment": ".text",
-          "size": 376
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_29F734",
-          "ea": "0x29f734",
-          "segment": ".text",
-          "size": 1272
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_29FC98",
-          "ea": "0x29fc98",
-          "segment": ".text",
-          "size": 168
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_29FD40",
-          "ea": "0x29fd40",
-          "segment": ".text",
-          "size": 896
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A00C0",
-          "ea": "0x2a00c0",
-          "segment": ".text",
-          "size": 56
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A00F8",
-          "ea": "0x2a00f8",
-          "segment": ".text",
-          "size": 1020
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A1B50",
-          "ea": "0x2a1b50",
-          "segment": ".text",
-          "size": 100
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A1BB4",
-          "ea": "0x2a1bb4",
-          "segment": ".text",
-          "size": 652
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A1E40",
-          "ea": "0x2a1e40",
-          "segment": ".text",
-          "size": 1364
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A2394",
-          "ea": "0x2a2394",
-          "segment": ".text",
-          "size": 312
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A24CC",
-          "ea": "0x2a24cc",
-          "segment": ".text",
-          "size": 1264
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A2B0C",
-          "ea": "0x2a2b0c",
-          "segment": ".text",
-          "size": 196
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A2BD0",
-          "ea": "0x2a2bd0",
-          "segment": ".text",
-          "size": 212
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A2CA4",
-          "ea": "0x2a2ca4",
-          "segment": ".text",
-          "size": 120
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A2D1C",
-          "ea": "0x2a2d1c",
-          "segment": ".text",
-          "size": 260
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A2E20",
-          "ea": "0x2a2e20",
-          "segment": ".text",
-          "size": 76
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A2E6C",
-          "ea": "0x2a2e6c",
-          "segment": ".text",
-          "size": 116
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A31F0",
-          "ea": "0x2a31f0",
-          "segment": ".text",
-          "size": 1096
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A3638",
-          "ea": "0x2a3638",
-          "segment": ".text",
-          "size": 360
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A37A0",
-          "ea": "0x2a37a0",
-          "segment": ".text",
-          "size": 1092
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A3CF0",
-          "ea": "0x2a3cf0",
-          "segment": ".text",
-          "size": 576
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A3F30",
-          "ea": "0x2a3f30",
-          "segment": ".text",
-          "size": 384
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A40B0",
-          "ea": "0x2a40b0",
-          "segment": ".text",
-          "size": 2392
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A4EC8",
-          "ea": "0x2a4ec8",
-          "segment": ".text",
-          "size": 492
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A54A4",
-          "ea": "0x2a54a4",
-          "segment": ".text",
-          "size": 280
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A563C",
-          "ea": "0x2a563c",
-          "segment": ".text",
-          "size": 288
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A575C",
-          "ea": "0x2a575c",
-          "segment": ".text",
-          "size": 96
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A5898",
-          "ea": "0x2a5898",
-          "segment": ".text",
-          "size": 2460
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A6234",
-          "ea": "0x2a6234",
-          "segment": ".text",
-          "size": 60
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A6270",
-          "ea": "0x2a6270",
-          "segment": ".text",
-          "size": 180
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A6324",
-          "ea": "0x2a6324",
-          "segment": ".text",
-          "size": 3380
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A73FC",
-          "ea": "0x2a73fc",
-          "segment": ".text",
-          "size": 480
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A75DC",
-          "ea": "0x2a75dc",
-          "segment": ".text",
-          "size": 1700
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A7C80",
-          "ea": "0x2a7c80",
-          "segment": ".text",
-          "size": 3180
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A88EC",
-          "ea": "0x2a88ec",
-          "segment": ".text",
-          "size": 440
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A8AA4",
-          "ea": "0x2a8aa4",
-          "segment": ".text",
-          "size": 768
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A8DA4",
-          "ea": "0x2a8da4",
-          "segment": ".text",
-          "size": 1160
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A922C",
-          "ea": "0x2a922c",
-          "segment": ".text",
-          "size": 2228
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2A9AE0",
-          "ea": "0x2a9ae0",
-          "segment": ".text",
-          "size": 2420
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2AA4B8",
-          "ea": "0x2aa4b8",
-          "segment": ".text",
-          "size": 88
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2AA510",
-          "ea": "0x2aa510",
-          "segment": ".text",
-          "size": 660
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2AA7A4",
-          "ea": "0x2aa7a4",
-          "segment": ".text",
-          "size": 672
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2AAE40",
-          "ea": "0x2aae40",
-          "segment": ".text",
-          "size": 164
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2AAEE4",
-          "ea": "0x2aaee4",
-          "segment": ".text",
-          "size": 1040
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2AB2F4",
-          "ea": "0x2ab2f4",
-          "segment": ".text",
-          "size": 432
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2AB4A4",
-          "ea": "0x2ab4a4",
-          "segment": ".text",
-          "size": 460
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2AB670",
-          "ea": "0x2ab670",
-          "segment": ".text",
-          "size": 952
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2ABA28",
-          "ea": "0x2aba28",
-          "segment": ".text",
-          "size": 680
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2ABCD0",
-          "ea": "0x2abcd0",
-          "segment": ".text",
-          "size": 392
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2AC400",
-          "ea": "0x2ac400",
-          "segment": ".text",
-          "size": 64
-        },
-        {
-          "category": "jpeg_static_internal",
-          "current_ida_name": "sub_2ACB20",
-          "ea": "0x2acb20",
-          "segment": ".text",
-          "size": 1508
-        }
-      ],
-      "total_bytes": 104008
     },
     {
       "category": "plt0_resolver",
@@ -2375,14 +2522,6 @@
       "total_bytes": 852
     },
     {
-      "category": "jpeg_static_internal",
-      "count": 150,
-      "evidence": "The entries occupy the static gaps in the contiguous JPEG implementation region; 0xe0454 is called by the marker parser at 0x28db2c and 0x28dd94 and decodes a JPEG marker into the library's image state.",
-      "first_ea": "0xe0454",
-      "last_ea": "0x2acb20",
-      "total_bytes": 104008
-    },
-    {
       "category": "plt0_resolver",
       "count": 1,
       "evidence": "The first 20-byte .plt entry is the AArch64 resolver slot, not an imported function.",
@@ -2416,13 +2555,13 @@
     }
   ],
   "database": {
-    "bytes": 61286570,
+    "bytes": 61991120,
     "close_reopen_verified": false,
-    "default_sub_function_count": 274,
+    "default_sub_function_count": 124,
     "format": "packed IDA 9.3 database",
-    "function_count": 11297,
-    "path": "analysis/libqplay_translated_from_active_v11.i64",
-    "sha256": "26471ffbe194a721e4fde7e894a451c7c8dccbe61c32eafc8305190b37ee6917"
+    "function_count": 11296,
+    "path": "analysis/libqplay_translated_from_active_v12.i64",
+    "sha256": "77ecf848c9ed49b25896fef5b97b090234d380ff79d4591ee4113e00b8416625"
   },
   "ida_reclassified_functions": [
     {
@@ -3151,6 +3290,12 @@
       "reason": "The helper flattens the scanbeam tree into the sorted scanbeam array and matches the upstream GPC build_sbt role."
     }
   ],
+  "ida_removed_false_functions": [
+    {
+      "ea": "0x2ac400",
+      "reason": "IDA had created a false function inside the literal pool between jpeg_fdct_float and jpeg_fdct_ifast. The ELF symbol boundaries and the ARM64 bytes identify this range as constants, not executable code."
+    }
+  ],
   "network_contacted": false,
   "pre_persistence_snapshot": {
     "default_sub_function_count": 1645,
@@ -3158,7 +3303,7 @@
     "unresolved_default_sub_function_count": 488
   },
   "purpose": "Account for every default sub_ function left in the persisted IDA translation copy without inventing source names.",
-  "remaining_default_sub_function_count": 274,
+  "remaining_default_sub_function_count": 124,
   "residual_default_sub_functions": [
     {
       "category": "plt0_resolver",
@@ -3166,13 +3311,6 @@
       "ea": "0xd2170",
       "segment": ".plt",
       "size": 20
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_E0454",
-      "ea": "0xe0454",
-      "segment": ".text",
-      "size": 128
     },
     {
       "category": "init_or_fini_array_entry",
@@ -4034,1053 +4172,15 @@
       "ea": "0x23840c",
       "segment": ".text",
       "size": 16
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28A2F4",
-      "ea": "0x28a2f4",
-      "segment": ".text",
-      "size": 2724
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28B9F4",
-      "ea": "0x28b9f4",
-      "segment": ".text",
-      "size": 60
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28BA30",
-      "ea": "0x28ba30",
-      "segment": ".text",
-      "size": 116
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28BAA4",
-      "ea": "0x28baa4",
-      "segment": ".text",
-      "size": 184
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28BBBC",
-      "ea": "0x28bbbc",
-      "segment": ".text",
-      "size": 16
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28BBCC",
-      "ea": "0x28bbcc",
-      "segment": ".text",
-      "size": 184
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28BC88",
-      "ea": "0x28bc88",
-      "segment": ".text",
-      "size": 276
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28BE44",
-      "ea": "0x28be44",
-      "segment": ".text",
-      "size": 20
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28BE58",
-      "ea": "0x28be58",
-      "segment": ".text",
-      "size": 88
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28BEB0",
-      "ea": "0x28beb0",
-      "segment": ".text",
-      "size": 1224
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28C378",
-      "ea": "0x28c378",
-      "segment": ".text",
-      "size": 2000
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28CBB8",
-      "ea": "0x28cbb8",
-      "segment": ".text",
-      "size": 1092
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28CFFC",
-      "ea": "0x28cffc",
-      "segment": ".text",
-      "size": 752
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28D2EC",
-      "ea": "0x28d2ec",
-      "segment": ".text",
-      "size": 276
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28D400",
-      "ea": "0x28d400",
-      "segment": ".text",
-      "size": 36
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28D424",
-      "ea": "0x28d424",
-      "segment": ".text",
-      "size": 992
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28D804",
-      "ea": "0x28d804",
-      "segment": ".text",
-      "size": 824
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28DB3C",
-      "ea": "0x28db3c",
-      "segment": ".text",
-      "size": 608
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28DD9C",
-      "ea": "0x28dd9c",
-      "segment": ".text",
-      "size": 3460
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28EB20",
-      "ea": "0x28eb20",
-      "segment": ".text",
-      "size": 520
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28F2B0",
-      "ea": "0x28f2b0",
-      "segment": ".text",
-      "size": 456
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28F478",
-      "ea": "0x28f478",
-      "segment": ".text",
-      "size": 56
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28FEE0",
-      "ea": "0x28fee0",
-      "segment": ".text",
-      "size": 20
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28FEF4",
-      "ea": "0x28fef4",
-      "segment": ".text",
-      "size": 80
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_28FF44",
-      "ea": "0x28ff44",
-      "segment": ".text",
-      "size": 336
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_290094",
-      "ea": "0x290094",
-      "segment": ".text",
-      "size": 512
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_290294",
-      "ea": "0x290294",
-      "segment": ".text",
-      "size": 260
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_290538",
-      "ea": "0x290538",
-      "segment": ".text",
-      "size": 1060
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_29095C",
-      "ea": "0x29095c",
-      "segment": ".text",
-      "size": 1248
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_290E3C",
-      "ea": "0x290e3c",
-      "segment": ".text",
-      "size": 792
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_291154",
-      "ea": "0x291154",
-      "segment": ".text",
-      "size": 420
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2912F8",
-      "ea": "0x2912f8",
-      "segment": ".text",
-      "size": 740
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2916F8",
-      "ea": "0x2916f8",
-      "segment": ".text",
-      "size": 280
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_291810",
-      "ea": "0x291810",
-      "segment": ".text",
-      "size": 144
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2918A0",
-      "ea": "0x2918a0",
-      "segment": ".text",
-      "size": 256
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2919A0",
-      "ea": "0x2919a0",
-      "segment": ".text",
-      "size": 240
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_291B6C",
-      "ea": "0x291b6c",
-      "segment": ".text",
-      "size": 24
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_291B84",
-      "ea": "0x291b84",
-      "segment": ".text",
-      "size": 356
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_291CE8",
-      "ea": "0x291ce8",
-      "segment": ".text",
-      "size": 8
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_291CF0",
-      "ea": "0x291cf0",
-      "segment": ".text",
-      "size": 8
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_291CF8",
-      "ea": "0x291cf8",
-      "segment": ".text",
-      "size": 628
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_291F6C",
-      "ea": "0x291f6c",
-      "segment": ".text",
-      "size": 692
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_292220",
-      "ea": "0x292220",
-      "segment": ".text",
-      "size": 320
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_292360",
-      "ea": "0x292360",
-      "segment": ".text",
-      "size": 520
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_292568",
-      "ea": "0x292568",
-      "segment": ".text",
-      "size": 708
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_292AAC",
-      "ea": "0x292aac",
-      "segment": ".text",
-      "size": 120
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_292B24",
-      "ea": "0x292b24",
-      "segment": ".text",
-      "size": 16
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_292B34",
-      "ea": "0x292b34",
-      "segment": ".text",
-      "size": 232
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_292C1C",
-      "ea": "0x292c1c",
-      "segment": ".text",
-      "size": 72
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_292C64",
-      "ea": "0x292c64",
-      "segment": ".text",
-      "size": 40
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_292CF8",
-      "ea": "0x292cf8",
-      "segment": ".text",
-      "size": 512
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_292EF8",
-      "ea": "0x292ef8",
-      "segment": ".text",
-      "size": 352
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_293058",
-      "ea": "0x293058",
-      "segment": ".text",
-      "size": 272
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_293168",
-      "ea": "0x293168",
-      "segment": ".text",
-      "size": 920
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_293500",
-      "ea": "0x293500",
-      "segment": ".text",
-      "size": 944
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2938B0",
-      "ea": "0x2938b0",
-      "segment": ".text",
-      "size": 540
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_293ACC",
-      "ea": "0x293acc",
-      "segment": ".text",
-      "size": 540
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_293CE8",
-      "ea": "0x293ce8",
-      "segment": ".text",
-      "size": 360
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_293E50",
-      "ea": "0x293e50",
-      "segment": ".text",
-      "size": 896
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2941D0",
-      "ea": "0x2941d0",
-      "segment": ".text",
-      "size": 868
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_294534",
-      "ea": "0x294534",
-      "segment": ".text",
-      "size": 2068
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_294F44",
-      "ea": "0x294f44",
-      "segment": ".text",
-      "size": 140
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_294FD0",
-      "ea": "0x294fd0",
-      "segment": ".text",
-      "size": 128
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_295050",
-      "ea": "0x295050",
-      "segment": ".text",
-      "size": 232
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_29513C",
-      "ea": "0x29513c",
-      "segment": ".text",
-      "size": 40
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_295164",
-      "ea": "0x295164",
-      "segment": ".text",
-      "size": 480
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_295344",
-      "ea": "0x295344",
-      "segment": ".text",
-      "size": 280
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_29545C",
-      "ea": "0x29545c",
-      "segment": ".text",
-      "size": 1724
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_296270",
-      "ea": "0x296270",
-      "segment": ".text",
-      "size": 132
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2962F8",
-      "ea": "0x2962f8",
-      "segment": ".text",
-      "size": 16
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_296308",
-      "ea": "0x296308",
-      "segment": ".text",
-      "size": 652
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_296620",
-      "ea": "0x296620",
-      "segment": ".text",
-      "size": 1092
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_296A64",
-      "ea": "0x296a64",
-      "segment": ".text",
-      "size": 1128
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_296EE0",
-      "ea": "0x296ee0",
-      "segment": ".text",
-      "size": 260
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_296FE4",
-      "ea": "0x296fe4",
-      "segment": ".text",
-      "size": 932
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_297388",
-      "ea": "0x297388",
-      "segment": ".text",
-      "size": 1912
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2986C0",
-      "ea": "0x2986c0",
-      "segment": ".text",
-      "size": 108
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_29872C",
-      "ea": "0x29872c",
-      "segment": ".text",
-      "size": 196
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2987F0",
-      "ea": "0x2987f0",
-      "segment": ".text",
-      "size": 432
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2989A0",
-      "ea": "0x2989a0",
-      "segment": ".text",
-      "size": 1264
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_298E90",
-      "ea": "0x298e90",
-      "segment": ".text",
-      "size": 3128
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_299AC8",
-      "ea": "0x299ac8",
-      "segment": ".text",
-      "size": 908
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_299E54",
-      "ea": "0x299e54",
-      "segment": ".text",
-      "size": 1156
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_29A2D8",
-      "ea": "0x29a2d8",
-      "segment": ".text",
-      "size": 1904
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_29AA48",
-      "ea": "0x29aa48",
-      "segment": ".text",
-      "size": 3264
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_29C6BC",
-      "ea": "0x29c6bc",
-      "segment": ".text",
-      "size": 8
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_29C6C4",
-      "ea": "0x29c6c4",
-      "segment": ".text",
-      "size": 772
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_29C9C8",
-      "ea": "0x29c9c8",
-      "segment": ".text",
-      "size": 440
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_29CB80",
-      "ea": "0x29cb80",
-      "segment": ".text",
-      "size": 1912
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_29D2F8",
-      "ea": "0x29d2f8",
-      "segment": ".text",
-      "size": 536
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_29D510",
-      "ea": "0x29d510",
-      "segment": ".text",
-      "size": 96
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_29D570",
-      "ea": "0x29d570",
-      "segment": ".text",
-      "size": 824
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_29DA68",
-      "ea": "0x29da68",
-      "segment": ".text",
-      "size": 192
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_29DB28",
-      "ea": "0x29db28",
-      "segment": ".text",
-      "size": 124
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_29DBA4",
-      "ea": "0x29dba4",
-      "segment": ".text",
-      "size": 836
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_29DEE8",
-      "ea": "0x29dee8",
-      "segment": ".text",
-      "size": 224
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_29DFCC",
-      "ea": "0x29dfcc",
-      "segment": ".text",
-      "size": 24
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_29E40C",
-      "ea": "0x29e40c",
-      "segment": ".text",
-      "size": 932
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_29F2D0",
-      "ea": "0x29f2d0",
-      "segment": ".text",
-      "size": 376
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_29F734",
-      "ea": "0x29f734",
-      "segment": ".text",
-      "size": 1272
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_29FC98",
-      "ea": "0x29fc98",
-      "segment": ".text",
-      "size": 168
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_29FD40",
-      "ea": "0x29fd40",
-      "segment": ".text",
-      "size": 896
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A00C0",
-      "ea": "0x2a00c0",
-      "segment": ".text",
-      "size": 56
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A00F8",
-      "ea": "0x2a00f8",
-      "segment": ".text",
-      "size": 1020
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A1B50",
-      "ea": "0x2a1b50",
-      "segment": ".text",
-      "size": 100
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A1BB4",
-      "ea": "0x2a1bb4",
-      "segment": ".text",
-      "size": 652
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A1E40",
-      "ea": "0x2a1e40",
-      "segment": ".text",
-      "size": 1364
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A2394",
-      "ea": "0x2a2394",
-      "segment": ".text",
-      "size": 312
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A24CC",
-      "ea": "0x2a24cc",
-      "segment": ".text",
-      "size": 1264
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A2B0C",
-      "ea": "0x2a2b0c",
-      "segment": ".text",
-      "size": 196
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A2BD0",
-      "ea": "0x2a2bd0",
-      "segment": ".text",
-      "size": 212
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A2CA4",
-      "ea": "0x2a2ca4",
-      "segment": ".text",
-      "size": 120
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A2D1C",
-      "ea": "0x2a2d1c",
-      "segment": ".text",
-      "size": 260
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A2E20",
-      "ea": "0x2a2e20",
-      "segment": ".text",
-      "size": 76
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A2E6C",
-      "ea": "0x2a2e6c",
-      "segment": ".text",
-      "size": 116
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A31F0",
-      "ea": "0x2a31f0",
-      "segment": ".text",
-      "size": 1096
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A3638",
-      "ea": "0x2a3638",
-      "segment": ".text",
-      "size": 360
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A37A0",
-      "ea": "0x2a37a0",
-      "segment": ".text",
-      "size": 1092
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A3CF0",
-      "ea": "0x2a3cf0",
-      "segment": ".text",
-      "size": 576
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A3F30",
-      "ea": "0x2a3f30",
-      "segment": ".text",
-      "size": 384
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A40B0",
-      "ea": "0x2a40b0",
-      "segment": ".text",
-      "size": 2392
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A4EC8",
-      "ea": "0x2a4ec8",
-      "segment": ".text",
-      "size": 492
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A54A4",
-      "ea": "0x2a54a4",
-      "segment": ".text",
-      "size": 280
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A563C",
-      "ea": "0x2a563c",
-      "segment": ".text",
-      "size": 288
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A575C",
-      "ea": "0x2a575c",
-      "segment": ".text",
-      "size": 96
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A5898",
-      "ea": "0x2a5898",
-      "segment": ".text",
-      "size": 2460
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A6234",
-      "ea": "0x2a6234",
-      "segment": ".text",
-      "size": 60
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A6270",
-      "ea": "0x2a6270",
-      "segment": ".text",
-      "size": 180
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A6324",
-      "ea": "0x2a6324",
-      "segment": ".text",
-      "size": 3380
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A73FC",
-      "ea": "0x2a73fc",
-      "segment": ".text",
-      "size": 480
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A75DC",
-      "ea": "0x2a75dc",
-      "segment": ".text",
-      "size": 1700
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A7C80",
-      "ea": "0x2a7c80",
-      "segment": ".text",
-      "size": 3180
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A88EC",
-      "ea": "0x2a88ec",
-      "segment": ".text",
-      "size": 440
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A8AA4",
-      "ea": "0x2a8aa4",
-      "segment": ".text",
-      "size": 768
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A8DA4",
-      "ea": "0x2a8da4",
-      "segment": ".text",
-      "size": 1160
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A922C",
-      "ea": "0x2a922c",
-      "segment": ".text",
-      "size": 2228
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2A9AE0",
-      "ea": "0x2a9ae0",
-      "segment": ".text",
-      "size": 2420
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2AA4B8",
-      "ea": "0x2aa4b8",
-      "segment": ".text",
-      "size": 88
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2AA510",
-      "ea": "0x2aa510",
-      "segment": ".text",
-      "size": 660
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2AA7A4",
-      "ea": "0x2aa7a4",
-      "segment": ".text",
-      "size": 672
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2AAE40",
-      "ea": "0x2aae40",
-      "segment": ".text",
-      "size": 164
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2AAEE4",
-      "ea": "0x2aaee4",
-      "segment": ".text",
-      "size": 1040
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2AB2F4",
-      "ea": "0x2ab2f4",
-      "segment": ".text",
-      "size": 432
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2AB4A4",
-      "ea": "0x2ab4a4",
-      "segment": ".text",
-      "size": 460
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2AB670",
-      "ea": "0x2ab670",
-      "segment": ".text",
-      "size": 952
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2ABA28",
-      "ea": "0x2aba28",
-      "segment": ".text",
-      "size": 680
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2ABCD0",
-      "ea": "0x2abcd0",
-      "segment": ".text",
-      "size": 392
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2AC400",
-      "ea": "0x2ac400",
-      "segment": ".text",
-      "size": 64
-    },
-    {
-      "category": "jpeg_static_internal",
-      "current_ida_name": "sub_2ACB20",
-      "ea": "0x2acb20",
-      "segment": ".text",
-      "size": 1508
     }
   ],
   "schema_version": 1,
   "source_artifacts": {
+    "embedded_source_matches": [
+      "artifacts/ida_libjpeg_source_matches_20260902.json",
+      "artifacts/ida_zlib_source_matches_20260902.json",
+      "artifacts/ida_giflib_source_matches_20260902.json"
+    ],
     "freetype_source_matches": "artifacts/ida_freetype_source_matches_20260901.json",
     "profile": "artifacts/unresolved_function_profile.json",
     "role_candidates": "artifacts/unresolved_function_candidates.json",

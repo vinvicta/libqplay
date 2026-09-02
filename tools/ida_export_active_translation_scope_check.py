@@ -21,7 +21,7 @@ import idc
 
 REPO = Path("/home/v/Desktop/graal-decomp/libqplay")
 SCRIPT_TABLE = REPO / "artifacts" / "script_table_inventory.json"
-OUTPUT = REPO / "artifacts" / "ida_active_translation_scope_check_20260901.json"
+OUTPUT = REPO / "artifacts" / "ida_active_translation_scope_check_20260902.json"
 ANDROID_START = 0x240000
 ANDROID_END = 0x247000
 APP_CORE_START = 0x1E0000
@@ -129,7 +129,7 @@ def main() -> None:
     result = {
         "schema": "libqplay.ida-active-translation-scope-check.v1",
         "tool": "tools/ida_export_active_translation_scope_check.py",
-        "analysis_date": "2026-09-01",
+        "analysis_date": "2026-09-02",
         "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
         "database": {
             "input_path": idaapi.get_input_file_path(),
@@ -161,12 +161,12 @@ def main() -> None:
             },
         },
         "interpretation": [
-            "The 274 remaining default sub_ functions are outside the Android bridge callback region.",
-            "The four default functions in the broader application-core range are short static-state wrappers around TString, TStringList, or TGraalVar objects; their decompiled bodies do not contain the selected socket, file, process, or update boundary calls.",
+            "The 124 remaining default sub_ functions are outside the Android bridge callback region.",
+            "The 23 default functions in the broader application-core range are short static-state or cleanup wrappers; their decompiled bodies do not contain the selected socket, file, process, or update boundary calls.",
             "Every address in the 1779-entry script callback inventory has a non-default active IDA name, including the callbacks reviewed in the focused Android passes.",
         ],
         "status": "ok"
-        if len(default_rows) == 274
+        if len(default_rows) == 124
         and not android_defaults
         and not callback_defaults
         and not boundary_edges

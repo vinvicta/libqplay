@@ -19,13 +19,16 @@ results.
 | zlib | `zlibVersion` at `0x289b50` returns `1.2.5` | `uncompress`, `inflate`, `inflateInit_`, `inflateInit2_` | NewGraal and legacy protocol compression, PNG/MNG, and ZIP entries |
 | bzip2 | `BZ2_bzlibVersion` at `0x2751ac` returns `1.0.4, 20-Dec-2006` | `BZ2_bzBuffToBuffDecompress` | NewGraal selector 2 and legacy modes 5 and 6 |
 | FreeType | `FT_Init_FreeType` at `0x253f1c` writes library fields `2`, `3`, and `6` | `FT_New_Face`, `FT_New_Memory_Face` | System font paths and resource-backed font streams |
-| libjpeg | Exact release not recovered | `jpeg_std_error`, `jpeg_CreateDecompress` | Extension-selected downloaded image resources |
+| IJG libjpeg | 6b, released 27-Mar-1998 by source-body match | `jpeg_std_error`, `jpeg_CreateDecompress` | Extension-selected downloaded image resources |
+| giflib | Exact release not recovered; API and static decoder role identified | `DGifOpen`, `DGifGetLine`, `DGifGetPixel` | Extension-selected downloaded GIF resources |
 
 The version conclusions are based on code behavior, not only on nearby
 strings. zlib and bzip2 expose version functions that return the recovered
 release text. FreeType initialization writes the three version fields into the
-new library object. The libjpeg ABI constants are deliberately not treated as
-a release identifier.
+new library object. The IJG libjpeg conclusion comes from 153 address and body
+matches against the 6b source archive, not from ABI constants. The GIF
+analysis establishes the giflib API and static decompressor role but does not
+claim a unique giflib release.
 
 ### FreeType source anchor
 
@@ -38,6 +41,22 @@ Latin, Latin2, CJK, and dummy autofit classes. The address-level evidence is kep
 in `artifacts/ida_freetype_source_matches_20260901.json`, with direct links to
 the tagged source lines. This is a provenance anchor, not a claim that every
 local build option or vendor change is identical to the public tree.
+
+### IJG libjpeg and giflib source anchors
+
+The current source-role pass matches 153 embedded IJG routines to libjpeg 6b,
+whose local archive SHA-256 is
+`75c3ec241e9996504fe02a9ed4d12f16b74ade713972f3db9e65ce95cd27e35d`. The
+public archive is [jpegsrc.v6b.tar.gz](https://www.ijg.org/files/jpegsrc.v6b.tar.gz).
+address-level evidence is in
+`artifacts/ida_libjpeg_source_matches_20260902.json`. The corrected marker
+reader names include `examine_app14`, `skip_variable`, and `next_marker`.
+
+The static GIF helper at `0x2acb20` is named
+`giflib_DGifDecompressLine`. Its callers are the preserved
+`DGifGetLine` and `DGifGetPixel` functions, and its LZW state machine matches
+the pinned `dgif_lib.c` role reference. The exact giflib release is still open;
+the evidence is in `artifacts/ida_giflib_source_matches_20260902.json`.
 
 `readelf -d` lists only `libGLESv1_CM.so`, `libc.so`, `libstdc++.so`, `libm.so`,
 and `liblog.so` as needed libraries. There is no `libz.so`, `libbz2.so`, or
@@ -74,18 +93,21 @@ asks the file-download and resource layer for it. This makes the memory-face
 path a conditional downloaded-input boundary, although the stock flow has not
 been shown to let an untrusted caller choose arbitrary font data.
 
-JPEG is included to keep the inventory honest. `TBitmap_readJPEG_TStream` at
-`0x150fa8` reaches the bundled decoder, but the exact libjpeg release was not
-identified and no new JPEG vulnerability claim is made here.
+JPEG and GIF are included to keep the inventory honest.
+`TBitmap_readJPEG_TStream` at `0x150fa8` reaches the embedded IJG decoder,
+and `TBitmap_readGIF_TStream` at `0x150a38` reaches the embedded giflib path.
+The image parser review documents their allocation and downloaded-resource
+boundaries.
 
 ## Security interpretation
 
 Three conservative findings are recorded in the machine-readable export:
 
-* `DEP-001` is an old-dependency exposure. zlib 1.2.5 and bzip2 1.0.4 are
-  statically present on accepted protocol and resource paths. The exact
-  source revisions and vendor backports have not been reconstructed, so this
-  is not a claim that a specific CVE is exploitable in this APK.
+* `DEP-001` is an old-dependency exposure. zlib 1.2.5, bzip2 1.0.4, IJG
+  libjpeg 6b, and an older giflib implementation are statically present on
+  accepted protocol and resource paths. Vendor backports have not been
+  reconstructed, so this is not a claim that a specific CVE is exploitable in
+  this APK.
 * `DEP-002` covers resource-backed font data reaching FreeType 2.3.6. Native
   font parsing deserves its own input and allocation budget, but arbitrary
   server control over the font option has not been established.

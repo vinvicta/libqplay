@@ -15,28 +15,30 @@ handshake is not the same thing as a successful game login.
 
 The symbol pass is complete for every name retained in the ELF export. The
 final ARM64 IDA copy also contains the reviewed callback, script-table,
-static-library, and exact FreeType source aliases. The counts are:
+static-library, and exact embedded-library source aliases. The counts are:
 
 | Kind | Count |
 | --- | ---: |
 | Retained ELF symbols translated | 8,601 |
-| Additional reviewed function aliases | 1,396 |
-| IDA functions in the saved copy | 11,297 |
-| Remaining default `sub_` functions | 274 |
+| Additional reviewed function aliases | 1,551 |
+| IDA functions in the saved copy | 11,296 |
+| Remaining default `sub_` functions | 124 |
 
 The retained ELF count includes 4,714 implementation functions, 3,183 PLT
-thunks, 199 jump thunks, and 505 data symbols. The 274 remaining `sub_`
+thunks, 199 jump thunks, and 505 data symbols. The 124 remaining `sub_`
 entries are code that IDA discovered without a preserved source symbol. They
-are kept address-based rather than being assigned guesses. The compact
-verification record is `artifacts/ida_translation_verification_20260901.json`.
+are kept address-based rather than being assigned guesses. The exact source
+role pass covers 141 FreeType 2.3.6 functions, 153 IJG libjpeg 6b functions,
+one zlib 1.2.5 function, and one static giflib GIF decoder helper. The compact
+verification record is `artifacts/ida_translation_verification_20260902.json`.
 
 The active-IDB scope check found zero default names in the Android bridge
 range, zero among the 1,779 unique script callback addresses, and zero direct
 calls from a remaining default function into the selected socket, file,
-process, or update imports. The broader application-core range contains 4
-short static-state wrappers, which are documented without invented source
-names. The check is preserved in
-`artifacts/ida_active_translation_scope_check_20260901.json`.
+process, or update imports. The broader application-core range contains 23
+short static-state or cleanup wrappers, which are documented without invented
+source names. The check is preserved in
+`artifacts/ida_active_translation_scope_check_20260902.json`.
 
 The old connector has a concrete compatibility problem. Its embedded
 GraalWeb certificate expired on 2023-07-29, so the original HTTPS path cannot
@@ -237,6 +239,13 @@ The compact record is
 * `artifacts/ida_freetype_source_matches_20260901.json` records 141 exact
   FreeType 2.3.6 source matches with address, size, xref, and source-line
   evidence.
+* `artifacts/ida_libjpeg_source_matches_20260902.json` records 153 exact IJG
+  libjpeg 6b source matches, including the corrected marker-reader roles.
+* `artifacts/ida_zlib_source_matches_20260902.json` records the exact
+  `inflate_fast` match at `0x28a2f4`.
+* `artifacts/ida_giflib_source_matches_20260902.json` records the static
+  `DGifDecompressLine` role at `0x2acb20` while leaving the exact giflib
+  release open.
 * `artifacts/static_library_role_audit_20260901.json` records 30 high-
   confidence bundled-library role aliases, including the final bzip2 stream
   callbacks.
@@ -274,11 +283,11 @@ The compact record is
   remaining native Android JNI callback bodies and their behavior summaries.
 * `artifacts/original_dex_native_surface_review_20260830.json` records the
   Natives class access flags and direct Java bytecode callsites.
-* `artifacts/ida_translation_verification_20260901.json` records the final
+* `artifacts/ida_translation_verification_20260902.json` records the final
   packed IDA copy, pass counts, hashes, and zero-failure verification result.
-* `artifacts/ida_final_residual_audit_20260901.json` records the current
+* `artifacts/ida_final_residual_audit_20260902.json` records the current
   compact address-level residual audit.
-* `artifacts/ida_active_translation_scope_check_20260901.json` records the
+* `artifacts/ida_active_translation_scope_check_20260902.json` records the
   active-IDB check that separates remaining static wrappers from app-boundary
   functions.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.

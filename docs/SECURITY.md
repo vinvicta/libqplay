@@ -124,29 +124,33 @@ to bypass a signature on a live service.
 
 ## Translation scope and residual names
 
-The current ARM64 IDA copy contains 11,297 function heads. All 8,601 retained
-ELF symbols and 1,396 reviewed callback, role, and exact FreeType aliases were
-checked at their expected addresses. The 274 remaining default `sub_` names
+The current ARM64 IDA copy contains 11,296 function heads. All 8,601 retained
+ELF symbols and 1,551 reviewed callback, role, and exact embedded-library
+aliases were checked at their expected addresses. The 124 remaining default `sub_` names
 are IDA-created functions without a surviving source symbol. A read-only
 active-IDB check
 found none in the Android bridge range, none among the 1,779 unique script
 callback addresses, and no direct call from them into the selected socket,
-file, process, or update imports. The broader application-core range has 4
-short static-state wrappers, which remain address-based because assigning
+file, process, or update imports. The broader application-core range has 23
+short static-state or cleanup wrappers, which remain address-based because assigning
 source names would be speculation. See
-`artifacts/ida_active_translation_scope_check_20260901.json`.
+`artifacts/ida_active_translation_scope_check_20260902.json`.
 
 The selected residual review inspected two of the remaining most referenced
 unnamed functions in the embedded FreeType region. They are diagnostic-string
 helpers reached through a FreeType internal object routine. A separate source
 comparison matched 141 FreeType and TrueType routines to the tagged 2.3.6
-implementation. Neither pass found a new Android, socket, file,
+implementation, 153 routines to IJG libjpeg 6b, one to zlib 1.2.5, and one
+static GIF decoder role to giflib. Neither pass found a new Android, socket, file,
 process, or update boundary in the reviewed functions. These are semantic and
 source-matching passes, not proof that every static-library routine is safe.
 See
 `docs/RESIDUAL_ANALYSIS.md` and
 `artifacts/original_residual_semantic_review_20260830.json` plus
-`artifacts/ida_freetype_source_matches_20260901.json`.
+`artifacts/ida_freetype_source_matches_20260901.json`,
+`artifacts/ida_libjpeg_source_matches_20260902.json`,
+`artifacts/ida_zlib_source_matches_20260902.json`, and
+`artifacts/ida_giflib_source_matches_20260902.json`.
 
 ## Android package surface
 
@@ -742,6 +746,16 @@ byte budget before those allocations. JPEG delegates malformed syntax to the
 bundled decoder, but its wrapper still reaches the same allocator without a
 separate application pixel cap.
 
+The embedded decoder inventory is now more precise. The JPEG body matches IJG
+libjpeg 6b across 153 functions, including the marker readers and the
+`jerror` formatter. The GIF API symbols are retained in the ELF export, and
+the shared static LZW line decompressor at `0x2acb20` is now named
+`giflib_DGifDecompressLine`. One apparent function at `0x2ac400` was removed
+from the IDA function inventory because it occupied the floating-point literal
+pool between the preserved `jpeg_fdct_float` and `jpeg_fdct_ifast` symbols.
+These corrections improve attribution but do not remove the missing image
+resource budgets described above.
+
 The strongest finding is a static memory-pressure and integer-wrap boundary,
 not a demonstrated remote crash. A peer would first need to cross the
 connector, game protocol, cache, and resource gates. A safe repair should use
@@ -761,8 +775,10 @@ and version table are in `docs/DEPENDENCY_PROVENANCE.md`.
 `zlibVersion` at `0x289b50` returns `1.2.5`, and
 `BZ2_bzlibVersion` at `0x2751ac` returns `1.0.4, 20-Dec-2006`. The FreeType
 initializer at `0x253f1c` writes version fields `2`, `3`, and `6`. These are
-code-level version observations. The exact libjpeg release was not recovered;
-its ABI constants are not used as a release guess.
+code-level version observations. The embedded JPEG body matches IJG libjpeg
+6b, released 27-Mar-1998, across 153 source-role entries. The GIF analysis
+establishes the giflib API and static decompressor role, but not a unique
+giflib release.
 
 The code is statically embedded. The ARM64 `DT_NEEDED` list contains no
 `libz.so`, `libbz2.so`, or `libfreetype.so`, so updating the Android host
@@ -772,9 +788,9 @@ PNG, MNG, and ZIP resource paths also reach bundled zlib. The font loader uses
 FreeType for system paths and for resource-backed memory streams, with a
 conditional file-download path when a relative font is missing locally.
 
-This creates three conservative review items. The old zlib and bzip2 releases
-are dependency exposure, not proof of a particular exploitable CVE because
-vendor backports and exact source revisions were not diffed. Resource-backed
+This creates three conservative review items. The old zlib, bzip2, IJG, and
+giflib code is dependency exposure, not proof of a particular exploitable CVE
+because vendor backports and exact source revisions were not diffed. Resource-backed
 font parsing reaches FreeType 2.3.6 without a separately established font-byte
 budget. The automatic decompression output buffer starts at 64 KiB and grows
 through 4 MiB, but that per-call behavior does not cap compressed input,
@@ -1083,8 +1099,8 @@ than a raw import dump. The exporter records every direct caller of selected
 ARM64 PLT entries, then adds manual notes where a buffer or path boundary is
 visible in the decompiler.
 
-The former open item at `sub_292B34` (`0x292b34`) is the bundled libjpeg
-`format_message` callback installed by `jpeg_std_error`. It selects one of 124
+The former open item at `libjpeg_jerror_format_message` (`0x292b34`) is the
+bundled libjpeg `format_message` callback installed by `jpeg_std_error`. It selects one of 124
 fixed message strings and calls `sprintf` into the 200-byte local buffer used
 by `TBitmap_JPEG_outputMessage`. The call has no destination-length argument,
 so it remains an unsafe source-level pattern.
