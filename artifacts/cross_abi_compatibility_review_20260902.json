@@ -149,7 +149,7 @@
     "all_variants_use_bind_now": true
   },
   "symbol_anchors": {
-    "count": 40,
+    "count": 34,
     "rows": [
       {
         "symbol": "Java_com_quattroplay_GraalClassic_Natives_QPlayLoop",
@@ -190,27 +190,6 @@
           "x86_64": {
             "size": "1103",
             "value": "000000000025ce10"
-          }
-        }
-      },
-      {
-        "symbol": "_ZN10TServerNPC9runScriptEv",
-        "variants": {
-          "arm64-v8a": {
-            "size": "608",
-            "value": "0000000000184aa0"
-          },
-          "armeabi": {
-            "size": "496",
-            "value": "00105d55"
-          },
-          "x86": {
-            "size": "623",
-            "value": "0015c630"
-          },
-          "x86_64": {
-            "size": "567",
-            "value": "0000000000198bd0"
           }
         }
       },
@@ -316,69 +295,6 @@
           "x86_64": {
             "size": "598",
             "value": "0000000000218ab0"
-          }
-        }
-      },
-      {
-        "symbol": "_ZN12THTTPRequest9runScriptEv",
-        "variants": {
-          "arm64-v8a": {
-            "size": "1072",
-            "value": "00000000002025a0"
-          },
-          "armeabi": {
-            "size": "868",
-            "value": "00167111"
-          },
-          "x86": {
-            "size": "1321",
-            "value": "001f24e0"
-          },
-          "x86_64": {
-            "size": "1239",
-            "value": "0000000000219cd0"
-          }
-        }
-      },
-      {
-        "symbol": "_ZN12TScriptSpace9runScriptEv",
-        "variants": {
-          "arm64-v8a": {
-            "size": "844",
-            "value": "000000000022a5e0"
-          },
-          "armeabi": {
-            "size": "636",
-            "value": "001844e1"
-          },
-          "x86": {
-            "size": "826",
-            "value": "00221160"
-          },
-          "x86_64": {
-            "size": "795",
-            "value": "0000000000242fa0"
-          }
-        }
-      },
-      {
-        "symbol": "_ZN15TScriptUniverse10runScriptsEb",
-        "variants": {
-          "arm64-v8a": {
-            "size": "488",
-            "value": "000000000022bcf8"
-          },
-          "armeabi": {
-            "size": "388",
-            "value": "00185461"
-          },
-          "x86": {
-            "size": "509",
-            "value": "00222ac0"
-          },
-          "x86_64": {
-            "size": "524",
-            "value": "00000000002446c0"
           }
         }
       },
@@ -946,48 +862,6 @@
           "x86_64": {
             "size": "148",
             "value": "00000000002108b0"
-          }
-        }
-      },
-      {
-        "symbol": "_ZN7TSocket9runScriptEv",
-        "variants": {
-          "arm64-v8a": {
-            "size": "696",
-            "value": "0000000000205bdc"
-          },
-          "armeabi": {
-            "size": "460",
-            "value": "001697b9"
-          },
-          "x86": {
-            "size": "729",
-            "value": "001f66c0"
-          },
-          "x86_64": {
-            "size": "676",
-            "value": "000000000021d390"
-          }
-        }
-      },
-      {
-        "symbol": "_ZN9TGraalVar9runScriptEv",
-        "variants": {
-          "arm64-v8a": {
-            "size": "16",
-            "value": "000000000020d7dc"
-          },
-          "armeabi": {
-            "size": "14",
-            "value": "0016f1f9"
-          },
-          "x86": {
-            "size": "41",
-            "value": "001ff9d0"
-          },
-          "x86_64": {
-            "size": "17",
-            "value": "0000000000224f70"
           }
         }
       }

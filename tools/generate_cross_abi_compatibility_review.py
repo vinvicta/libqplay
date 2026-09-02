@@ -55,7 +55,6 @@ ANCHOR_TOKENS = (
     "handleServerWarp",
     "sendRequest",
     "saveDownloadedData",
-    "runScript",
     "requestURLAsGameFile",
     "connectSocket",
     "enableSSLOnSocket",

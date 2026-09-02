@@ -143,7 +143,7 @@ address transfer unsafe. The shared trust hash and marker set do, however,
 make the stale connector chain a cross-build compatibility lead rather than an
 ARM64-only hypothesis. No ABI was executed by this comparison.
 
-The same report includes 40 exact shared address anchors for `QPlayMain`,
+The same report includes 34 exact shared address anchors for `QPlayMain`,
 `QPlayLoop`, connector selection, HTTP completion, socket setup, NewGraal
 framing, game connection, and selected CyaSSL calls. These addresses are
 useful when comparing the four 1.8 builds, but they must not be copied into a
