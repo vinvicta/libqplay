@@ -90,3 +90,41 @@ The packet-59 shortcut remains rejected. The working file path is packet 102,
 with optional large-file framing 68, 84, 102, 69. The local responder also
 needs to send packet 49 again after the GMAP response because the tested client
 otherwise caches the map without completing the pending transition.
+
+## Device diagnostic order
+
+The native error string collapses several independent failures into the same
+message. A private ARM64 run should record these checkpoints in order:
+
+1. Confirm that the permission callback sets `Natives.downloaded`, the GL
+   thread has a surface and focus, and `QPlayRenderer.loadLibrary` reaches
+   `Natives.QPlayMain`. If this stage is absent, the connector has not run.
+2. Confirm that `QPlayMain` returns and that the Java side records
+   `Natives.loaded`. A dynamic-linker error, missing legacy C++ runtime, or an
+   early native initialization failure belongs here, before TLS.
+3. Record the first connector destination and whether the native socket reaches
+   TCP connect completion. A DNS or socket error is distinct from a TLS error.
+4. For HTTPS, check whether the responder sees a ClientHello and whether the
+   client sends `GET /con.png` afterward. The paired local validity control
+   reached TCP but sent no HTTP request with the expired trust material, while
+   a matching valid bundle sent the GET. A live device that stops at this
+   boundary should not be debugged by disabling certificate checks.
+5. If HTTP completes, check the binary envelope, RSA result, ZIP dispatch, and
+   `StartScript_Connector`. A valid HTTP response that never emits
+   `onServerWarp` is a connector package or script activation problem.
+6. If `onServerWarp` fires, record the game address, port, socket status 4 to 5
+   transition, and the first `fd` and `fc` frames. No second socket attempt
+   points to the connector script handoff or address fields; a socket that
+   remains at status 4 points to transport or firewall behavior; a completed
+   socket with no protocol frames points to the game-server handshake.
+7. After packet 178, check the second connection and the packet-9, packet-190,
+   packet-49, and file-request sequence. If the map or level request is made
+   but loading fails, inspect the external cache under the native reported
+   application-files directory. The cache writer does not check `fwrite`, so a
+   partial file can survive as an apparently completed resource. The focused
+   review is `artifacts/cache_filename_policy_review_20260902.json`.
+
+This order keeps the strongest current hypotheses separate: Android startup
+gates, legacy loader compatibility, expired connector trust, package parsing,
+game protocol state, and corrupted downloaded resources. It is a diagnostic
+checklist, not a claim that the live service accepts the 2019 client.
