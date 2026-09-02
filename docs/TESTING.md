@@ -116,6 +116,30 @@ python3 tools/patch_connector_tls_port_test.py \
   /tmp/libqplay.two-port.so
 ```
 
+To package the same control with the original APK, use the private builder.
+The bundle may be a deliberately expired test certificate when the goal is to
+observe fallback, or an authorized current chain when the goal is to test a
+real service. The builder preserves native certificate and RSA verification;
+`--force-nonpremium-loading` adds the separate loading-state diagnostic.
+
+```bash
+python3 tools/build_arm64_trust_control.py \
+  /path/to/GraalOnline+Classic_1.8_APKPure.apk \
+  /tmp/GraalClassic_arm64_two_port_debug_signed.apk \
+  --bundle /path/to/test-chain.pem \
+  --port 18443 \
+  --fallback-port 18080 \
+  --zipalign /path/to/android-sdk/build-tools/35.0.1/zipalign \
+  --apksigner /path/to/android-sdk/build-tools/35.0.1/apksigner \
+  --keystore /path/to/debug.keystore \
+  --force-nonpremium-loading
+```
+
+The output is a debug-signed, ARM64-only diagnostic package. Keep it outside
+the repository and uninstall the stock package before installing it if the
+signing key differs. Do not use a diagnostic trust bundle or the forced
+loading branch in a release client.
+
 On the private emulator, map the connector's HTTPS port and the device's
 plain HTTP fallback port separately:
 
