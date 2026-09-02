@@ -7,7 +7,7 @@ engine entries, the first CyaSSL pass names 11 static TLS and crypto roles, and
 the next static-library pass names 27 zlib, bzip2, minizip, GPC, CyaSSL,
 LibTomCrypt, and YAJL roles. IDA reclassifies one compiler branch veneer as a
 thunk when the saved copy is reopened. A later source comparison also names
-24 embedded FreeType and TrueType routines from the pinned FreeType 2.3.6
+140 embedded FreeType and TrueType routines from the pinned FreeType 2.3.6
 source. This helper subtracts those known changes and emits the exact residual
 count in the latest persisted database. It only reads JSON files and performs
 no network operation.
@@ -29,8 +29,8 @@ DEFAULT_STATIC_ROLES = [
 DEFAULT_OUTPUT = "artifacts/ida_residual_profile.json"
 
 CURRENT_DATABASE = {
-    "path": "analysis/libqplay_translated_from_active_v9.i64",
-    "sha256": "860cd26c43c0c4a98e7939c5bbe7c02fa92c35662d11e86eb8e7a84bc64b116f",
+    "path": "analysis/libqplay_translated_from_active_v10.i64",
+    "sha256": "5894e93f41d83d7978e38305b1a86dd06217a3efb8fd48e4ae2f743438c8e063",
     "bytes": 61286570,
     "format": "packed IDA 9.3 database",
     "close_reopen_verified": False,
@@ -241,6 +241,141 @@ REANALYZED_FUNCTIONS = {
 }
 
 
+# The current IDA copy carries exact names for these additional FreeType
+# routines. The source-line and body evidence lives in the dedicated
+# source-match artifact; this table supplies the residual arithmetic.
+ADDITIONAL_FREETYPE_REANALYZED = {
+    0x252E90: "destroy_face",
+    0x254BB8: "tt_face_get_kerning",
+    0x254D80: "get_sfnt_table",
+    0x255FC0: "tt_face_free_name",
+    0x256060: "tt_name_entry_ascii_from_utf16",
+    0x2563D0: "tt_name_entry_ascii_from_other",
+    0x2565E8: "tt_face_goto_table",
+    0x25663C: "tt_face_load_any",
+    0x2566D8: "tt_face_get_metrics",
+    0x25687C: "tt_face_load_hmtx",
+    0x2568FC: "tt_face_load_pclt",
+    0x256960: "tt_face_load_name",
+    0x256B14: "tt_face_load_post",
+    0x256B7C: "tt_face_load_os2",
+    0x256D24: "tt_face_load_hhea",
+    0x256EF4: "tt_face_load_gasp",
+    0x257030: "tt_face_load_kern",
+    0x257254: "sfnt_done_face",
+    0x2573B8: "tt_face_build_cmaps",
+    0x257704: "sfnt_init_face",
+    0x25796C: "sfnt_table_info",
+    0x2579B4: "sfnt_get_ps_name",
+    0x257C28: "tt_face_load_font_dir",
+    0x257F64: "tt_face_load_maxp",
+    0x258198: "tt_face_load_cmap",
+    0x258204: "tt_face_load_head",
+    0x25A8E0: "sfnt_load_face",
+    0x25B5F4: "ft_smooth_init",
+    0x25B62C: "ft_smooth_set_mode",
+    0x25B654: "gray_raster_done",
+    0x25B660: "gray_render_span",
+    0x25B76C: "gray_raster_new",
+    0x25B7B4: "ft_smooth_get_cbox",
+    0x25B7DC: "ft_smooth_render_lcd_v",
+    0x25BA90: "gray_raster_reset",
+    0x25BAEC: "ft_smooth_transform",
+    0x25BB64: "gray_convert_glyph_inner",
+    0x25BCA8: "gray_move_to",
+    0x25BE44: "gray_convert_glyph",
+    0x25C878: "gray_raster_render",
+    0x25CA78: "ft_smooth_render",
+    0x25CCB8: "ft_smooth_render_lcd",
+    0x25CF78: "gray_render_scanline",
+    0x25D4BC: "gray_render_line",
+    0x25DCBC: "gray_cubic_to",
+    0x25E04C: "gray_conic_to",
+    0x25E2EC: "gray_line_to",
+    0x25F4F4: "tt_slot_init",
+    0x25F500: "tt_face_done",
+    0x25F648: "tt_face_init",
+    0x25FD8C: "Current_Ratio",
+    0x25FE38: "Round_To_Grid",
+    0x25FE7C: "Round_To_Half_Grid",
+    0x25FEB8: "Round_Down_To_Grid",
+    0x25FEF4: "Round_Up_To_Grid",
+    0x25FF38: "Round_To_Double_Grid",
+    0x25FF7C: "Round_Super",
+    0x25FFE8: "Round_Super_45",
+    0x2602A4: "Ins_SZP0",
+    0x2602FC: "Ins_SZP1",
+    0x260354: "Ins_SZP2",
+    0x2603AC: "Ins_SZPS",
+    0x260468: "Ins_ALIGNRP",
+    0x260590: "Ins_UTP",
+    0x260660: "Ins_MDRP",
+    0x2608E0: "Ins_IP",
+    0x260BC4: "TT_DotFix14",
+    0x260D7C: "Ins_MINDEX",
+    0x260E00: "tt_driver_done",
+    0x260E8C: "Ins_IUP",
+    0x261624: "Ins_ENDF",
+    0x2616E0: "tt_size_done_bytecode",
+    0x261818: "Dual_Project",
+    0x2618A4: "Ins_FDEF",
+    0x2619D4: "Ins_IDEF",
+    0x261D8C: "Ins_DELTAP",
+    0x261FC4: "Ins_DELTAC",
+    0x2621F4: "TT_Load_Context",
+    0x2625E8: "Ins_SHC",
+    0x262864: "Ins_SHP",
+    0x262A74: "Ins_MIRP",
+    0x262DB4: "load_truetype_glyph",
+    0x263D1C: "TT_Load_Glyph",
+    0x264F78: "Load_Glyph",
+    0x264FCC: "Ins_SxVTL",
+    0x26521C: "Ins_CALL",
+    0x265370: "Ins_LOOPCALL",
+    0x2654D4: "Ins_UNKNOWN",
+    0x267ECC: "tt_driver_init",
+    0x267EF0: "af_dummy_hints_init",
+    0x267F08: "af_dummy_hints_apply",
+    0x267F10: "af_latin_hints_init",
+    0x267F90: "af_latin2_hints_init",
+    0x268010: "af_cjk_metrics_scale",
+    0x268050: "af_cjk_hints_init",
+    0x2680C0: "af_latin2_hints_compute_segments",
+    0x268608: "af_cjk_hints_link_segments",
+    0x2688FC: "af_cjk_hints_compute_edges",
+    0x268E58: "af_face_globals_free",
+    0x268F44: "af_loader_load_g",
+    0x2696D4: "af_glyph_hints_reload",
+    0x269BF4: "af_latin2_metrics_scale",
+    0x269F1C: "af_latin_metrics_scale",
+    0x26A3D0: "af_latin_hints_compute_segments",
+    0x26A904: "af_latin_metrics_init_widths",
+    0x26ADCC: "af_cjk_metrics_init",
+    0x26AE34: "af_hint_normal_stem",
+    0x26B198: "af_latin2_metrics_init_widths",
+    0x26B660: "af_latin2_metrics_init",
+    0x26BB4C: "af_latin_metrics_init",
+    0x26C040: "af_latin2_hints_compute_edges",
+    0x26C61C: "af_latin_hints_compute_edges",
+    0x26CB68: "af_glyph_hints_align_weak_points",
+    0x26D1F8: "af_cjk_hints_apply",
+    0x26DF5C: "af_latin2_hints_apply",
+    0x26F820: "af_latin_hints_apply",
+}
+
+for _ea, _name in ADDITIONAL_FREETYPE_REANALYZED.items():
+    REANALYZED_FUNCTIONS.setdefault(
+        _ea,
+        {
+            "new_name": _name,
+            "reason": (
+                "The current IDA name is backed by an exact comparison with "
+                "the pinned FreeType 2.3.6 implementation."
+            ),
+        },
+    )
+
+
 def address(value: int | str) -> int:
     return int(value, 0) if isinstance(value, str) else int(value)
 
@@ -437,6 +572,7 @@ def generate(
             "static_role_aliases": [
                 f"artifacts/{artifact}.json" for artifact in static_sources
             ],
+            "freetype_source_matches": "artifacts/ida_freetype_source_matches_20260901.json",
             "validation": "artifacts/ida_translation_validation.json",
         },
         "network_contacted": False,

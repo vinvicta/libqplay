@@ -181,13 +181,13 @@
     }
   },
   "database": {
-    "default_sub_count": 394,
+    "default_sub_count": 278,
     "function_count": 11297,
     "input_path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
   },
   "interpretation": [
-    "The 394 remaining default sub_ functions are outside the Android bridge callback region.",
-    "The 23 default functions in the broader application-core range are short static-state wrappers around TString, TStringList, or TGraalVar objects; their decompiled bodies do not contain the selected socket, file, process, or update boundary calls.",
+    "The 278 remaining default sub_ functions are outside the Android bridge callback region.",
+    "The four default functions in the broader application-core range are short static-state wrappers around TString, TStringList, or TGraalVar objects; their decompiled bodies do not contain the selected socket, file, process, or update boundary calls.",
     "Every address in the 1779-entry script callback inventory has a non-default active IDA name, including the callbacks reviewed in the focused Android passes."
   ],
   "network_contacted": false,

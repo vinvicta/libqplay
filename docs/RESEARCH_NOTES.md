@@ -68,24 +68,24 @@ The saved IDA database was later brought to the same state as the public
 translation plan. The active base database was copied, the callback and
 script-table boundaries were applied, and the reviewed application, CyaSSL,
 and bundled-library aliases were added. A pinned FreeType 2.3.6 source pass
-then matched 24 more functions, including the TrueType interpreter callbacks
-and instruction handlers. The final copy has 11,297 functions, 11,297 named
-function heads, and 394 remaining default `sub_` entries. The read-only
-verifier returned zero failures after the source-match pass. The copy hash and
-pass breakdown are in
-`artifacts/ida_translation_verification_20260830.json`.
+then matched 140 functions in total, including the SFNT loaders, smooth rasterizer,
+TrueType interpreter, glyph loader, and autofit classes. The current copy has
+11,297 functions, 11,297 named function heads, and 278 remaining default
+`sub_` entries. The read-only verifier returned zero failures after the
+source-match pass. The copy hash and pass breakdown are in
+`artifacts/ida_translation_verification_20260901.json`.
 
-The final scope check keeps that count honest. None of the 394 default names
+The final scope check keeps that count honest. None of the 278 default names
 is in the `0x240000` through `0x246fff` Android bridge range. None of the
 1,779 unique callback addresses in the script-table inventory currently has a
 default name, including the callbacks added during the Facebook, billing,
-partner, and device/media reviews. The remaining 23 default entries in the
+partner, and device/media reviews. The remaining 4 default entries in the
 broader `0x1e0000` through `0x246fff` application-core range are short static
 wrappers that clear or initialize global `TString`, `TStringList`, or
 `TGraalVar` objects. No remaining default function has a direct call edge to
 the selected socket, file, process, or update imports. The IDA-generated
 check is preserved in
-`artifacts/ida_active_translation_scope_check_20260830.json`.
+`artifacts/ida_active_translation_scope_check_20260901.json`.
 
 ## FreeType source matching
 
@@ -97,28 +97,25 @@ checkout is pinned to commit
 anchors are listed in
 `artifacts/ida_freetype_source_matches_20260901.json`.
 
-The comparison matched 24 functions exactly enough to apply the upstream
-names. The strongest cluster is the TrueType interpreter: `Compute_Funcs`
-selects projection and movement callbacks, `Project`, `Project_x`, and
-`Project_y` implement the projection choices, and `Direct_Move`,
-`Direct_Move_Orig`, and their axis-specific variants update glyph coordinates.
-The instruction handlers `Ins_NPUSHW`, `Ins_PUSHW`, `Ins_GC`, `Ins_SCFS`,
-`Ins_GETINFO`, `Ins_MD`, and `Ins_ISECT` then line up with the surrounding
-interpreter dispatch table and error paths.
+The comparison matched 140 functions exactly enough to apply the upstream
+names. The set spans the SFNT face and table loaders, the smooth rasterizer,
+the TrueType interpreter and glyph loader, and the Latin, Latin2, CJK, and
+dummy autofit classes. The strongest interpreter cluster includes
+`Compute_Funcs`, the projection and movement callbacks, the instruction
+handlers, fixed-point rounding helpers, and the glyph-loading callbacks.
 
-The other matches cover fixed-point math (`TT_MulFix14` and `Round_None`),
-TrueType size and font-table operations (`tt_size_init`, `tt_size_request`,
-`tt_get_kerning`, and `tt_face_get_location`), and the generic `destroy_size`
-cleanup routine. The callback assignments in `Compute_Funcs`, the driver class
-slot for `tt_size_request`, and the object field offsets in `destroy_size`
-provided useful checks beyond a superficial instruction comparison.
+The source comparison also resolved the two diagnostic helpers that had been
+left address-based in the earlier residual review. `0x256060` is now
+`tt_name_entry_ascii_from_utf16`, and `0x2563d0` is now
+`tt_name_entry_ascii_from_other`. The callback assignments, driver class
+slots, source declarations, and matching decompiler bodies supplied checks
+beyond a superficial name similarity.
 
-This pass reduced the default-name count from 418 to 394 and the FreeType
-bucket from 144 to 120. Two diagnostic string sanitizers remain deliberately
-address-based because their exact upstream helper names are not established.
-They are covered by the current residual semantic review. The result is a
-smaller, more honest queue: source-backed names are visible in IDA, while
-unmatched code remains easy to revisit.
+This follow-up reduced the default-name count from 394 to 278 and the
+FreeType residual bucket from 120 to 4. The four remaining FreeType entries
+are still address-based because their exact source names have not been
+established. The result is a smaller, more honest queue: source-backed names
+are visible in IDA, while unmatched code remains easy to revisit.
 
 ## Android lifecycle and the first network checkpoint
 

@@ -35,8 +35,8 @@ This is the short handoff view. The full reasoning and command history are in
     connecting-window completion wrapper. The rendered world remains visible
     without the centered connecting control.
 11. The symbol translation pass applied all 8,601 retained ELF names, then
-    1,276 reviewed function aliases, including 24 exact FreeType 2.3.6 source
-    matches. The final packed copy has 11,297 functions, 394 address-only
+    1,392 reviewed function aliases, including 140 exact FreeType 2.3.6 source
+    matches. The current packed copy has 11,297 functions, 278 address-only
     `sub_` entries, and zero verification failures.
 
 The Android lifecycle review now gives a pre-network checkpoint. The GL thread

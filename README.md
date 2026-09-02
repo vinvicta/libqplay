@@ -20,23 +20,23 @@ static-library, and exact FreeType source aliases. The counts are:
 | Kind | Count |
 | --- | ---: |
 | Retained ELF symbols translated | 8,601 |
-| Additional reviewed function aliases | 1,276 |
+| Additional reviewed function aliases | 1,392 |
 | IDA functions in the saved copy | 11,297 |
-| Remaining default `sub_` functions | 394 |
+| Remaining default `sub_` functions | 278 |
 
 The retained ELF count includes 4,714 implementation functions, 3,183 PLT
-thunks, 199 jump thunks, and 505 data symbols. The 394 remaining `sub_`
+thunks, 199 jump thunks, and 505 data symbols. The 278 remaining `sub_`
 entries are code that IDA discovered without a preserved source symbol. They
 are kept address-based rather than being assigned guesses. The compact
-verification record is `artifacts/ida_translation_verification_20260830.json`.
+verification record is `artifacts/ida_translation_verification_20260901.json`.
 
 The active-IDB scope check found zero default names in the Android bridge
 range, zero among the 1,779 unique script callback addresses, and zero direct
 calls from a remaining default function into the selected socket, file,
-process, or update imports. The broader application-core range contains 23
+process, or update imports. The broader application-core range contains 4
 short static-state wrappers, which are documented without invented source
 names. The check is preserved in
-`artifacts/ida_active_translation_scope_check_20260830.json`.
+`artifacts/ida_active_translation_scope_check_20260901.json`.
 
 The old connector has a concrete compatibility problem. Its embedded
 GraalWeb certificate expired on 2023-07-29, so the original HTTPS path cannot
@@ -234,13 +234,12 @@ The compact record is
 * `artifacts/original_dependency_provenance_20260830.json` records the exact
   bundled zlib, bzip2, and FreeType version evidence, compression callsites,
   font paths, and conservative dependency findings.
-* `artifacts/ida_freetype_source_matches_20260901.json` records 24 exact
+* `artifacts/ida_freetype_source_matches_20260901.json` records 140 exact
   FreeType 2.3.6 source matches with address, size, xref, and source-line
   evidence.
 * `artifacts/original_residual_semantic_review_20260830.json` records the
-  address-level behavior of the two remaining selected unnamed FreeType
-  diagnostic helpers. It complements the complete residual address audit
-  without assigning speculative source names.
+  historical address-level behavior of the two selected FreeType diagnostic
+  helpers. Both helpers are now source-labeled in the current IDA copy.
 * `artifacts/original_android_lifecycle_review_20260830.json` records the
   Activity, GLThread, renderer, and ARM64 JNI startup and pause boundaries.
 * `artifacts/original_intent_launch_review_20260830.json` records the Android
@@ -272,9 +271,11 @@ The compact record is
   remaining native Android JNI callback bodies and their behavior summaries.
 * `artifacts/original_dex_native_surface_review_20260830.json` records the
   Natives class access flags and direct Java bytecode callsites.
-* `artifacts/ida_translation_verification_20260830.json` records the final
+* `artifacts/ida_translation_verification_20260901.json` records the final
   packed IDA copy, pass counts, hashes, and zero-failure verification result.
-* `artifacts/ida_active_translation_scope_check_20260830.json` records the
+* `artifacts/ida_final_residual_audit_20260901.json` records the current
+  compact address-level residual audit.
+* `artifacts/ida_active_translation_scope_check_20260901.json` records the
   active-IDB check that separates remaining static wrappers from app-boundary
   functions.
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.

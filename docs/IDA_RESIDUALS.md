@@ -9,11 +9,11 @@ their original source names.
 
 The original active database started with 11,272 functions and 1,645 default
 `sub_` names. The complete reviewed pass added 25 function boundaries and
-1,276 names or aliases. The final packed copy at
-`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v9.i64`
-contains 11,297 functions and 394 default names. The active IDA verifier
-returned zero failures after the exact FreeType source-match pass. A separate
-reopen of this post-source-match copy is still pending.
+1,392 names or aliases. The current packed copy at
+`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v10.i64`
+contains 11,297 functions and 278 default names. The active IDA verifier
+returned zero failures after the expanded FreeType source-match pass. A
+separate reopen of this current copy is still pending.
 
 The count is accounted for exactly:
 
@@ -24,8 +24,8 @@ The count is accounted for exactly:
 - 27 applied static-library role aliases
 -  3 reviewed GPC helper aliases
 -  1 compiler branch veneer reclassified as a named thunk
-- 24 exact FreeType 2.3.6 source matches
-=394 residual default entries
+- 140 exact FreeType 2.3.6 source matches
+=278 residual default entries
 ```
 
 The 28 application and engine role aliases are behavior-based names, not
@@ -44,19 +44,15 @@ allocation-failure abort, `0x152200` is the scanbeam-tree cleanup helper, and
 roles match the corresponding private helpers in the
 [upstream GPC source](https://raw.githubusercontent.com/rickbrew/GeneralPolygonClipper/main/gpc.c).
 
-The source comparison then matched 24 functions to the tagged FreeType 2.3.6
-tree. The set includes the TrueType interpreter callbacks `Compute_Funcs`,
-`Project`, `Project_x`, `Project_y`, `Direct_Move`, and `Direct_Move_Orig`,
-the instruction handlers `Ins_NPUSHW`, `Ins_PUSHW`, `Ins_GC`, `Ins_SCFS`,
-`Ins_GETINFO`, `Ins_MD`, and `Ins_ISECT`, and the TrueType and face helpers
-`TT_MulFix14`, `Round_None`, `tt_size_init`, `tt_size_request`,
-`tt_get_kerning`, `tt_face_get_location`, `destroy_size`, and the four
-axis-specific movement callbacks. The exact address, size, xref count, source
-file, line anchor, and evidence are in
+The source comparison now matches 140 functions to the tagged FreeType 2.3.6
+tree. The set covers the SFNT face and table loaders, the smooth rasterizer,
+the TrueType interpreter and glyph loader, and the Latin, Latin2, CJK, and
+dummy autofit classes. The exact address, size, xref count, source file, line
+anchor, and evidence are in
 `artifacts/ida_freetype_source_matches_20260901.json`.
 
 The checked-in function inventory and script-table inventory were regenerated
-from the final saved IDA state. They now report 11,297 functions and 1,779
+from the current saved IDA state. They now report 11,297 functions and 1,779
 unique script callback addresses, with no default `sub_` name in the callback
 set. The overlay and unresolved-function profile retain the earlier
 pre-persistence snapshot because the residual calculation uses that snapshot
@@ -70,12 +66,12 @@ debug symbols survived.
 
 ## Compact residual audit
 
-The final residual set is recorded in
-`artifacts/ida_final_residual_audit_20260830.json`. It contains one compact
+The current residual set is recorded in
+`artifacts/ida_final_residual_audit_20260901.json`. It contains one compact
 record per remaining default `sub_` function, including its address, size,
 segment, and incoming xref count. It also records the 11,297-row inventory
 hash, the original ARM64 library hash, address buckets, and the most
-referenced residual entries. The report contains 394 residual functions and
+referenced residual entries. The report contains 278 residual functions and
 does not publish another full inventory. When the checked-in residual profile
 matches the input addresses, the report also embeds its category counts and
 profile hash.
@@ -92,17 +88,17 @@ fields make it possible to verify that a future export describes the same
 library and inventory.
 
 The final packed-database verification is recorded separately in
-`artifacts/ida_translation_verification_20260830.json`. It includes the
+`artifacts/ida_translation_verification_20260901.json`. It includes the
 source library hash, the saved IDA copy hash, all pass counts, and the exact
 function and residual totals.
 
-The 394 residual entries have also been classified by the persisted IDA
+The 278 residual entries have also been classified by the persisted IDA
 profile:
 
 | Class | Count | Interpretation |
 | --- | ---: | --- |
 | JPEG static internals | 150 | Unnamed routines inside the bundled JPEG implementation |
-| FreeType static internals | 120 | Unnamed routines inside the bundled FreeType implementation after exact source matches |
+| FreeType static internals | 4 | Unnamed routines inside the bundled FreeType implementation after exact source matches |
 | TString cleanup wrappers | 97 | Compiler-generated destructors for fixed global strings |
 | Init or fini array entries | 19 | Runtime registration or cleanup entry points referenced by ELF arrays |
 | TStringList cleanup wrappers | 5 | Compiler-generated destructors for fixed global string lists |
@@ -112,7 +108,7 @@ profile:
 This breakdown accounts for every residual entry. The large JPEG and remaining
 FreeType groups are not omitted from the analysis. They are left with
 address-based names because their local source names were not retained and a
-family label alone is not enough to prove an exact function match. The 24
+family label alone is not enough to prove an exact function match. The 140
 matched FreeType routines are no longer part of this residual table.
 
 ## How to work the remaining queue

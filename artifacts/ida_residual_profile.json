@@ -388,826 +388,14 @@
   "categories": [
     {
       "category": "freetype_static_internal",
-      "count": 120,
+      "count": 4,
       "entries": [
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_252E90",
-          "ea": "0x252e90",
-          "segment": ".text",
-          "size": 320
-        },
         {
           "category": "freetype_static_internal",
           "current_ida_name": "sub_254B98",
           "ea": "0x254b98",
           "segment": ".text",
           "size": 32
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_254BB8",
-          "ea": "0x254bb8",
-          "segment": ".text",
-          "size": 456
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_254D80",
-          "ea": "0x254d80",
-          "segment": ".text",
-          "size": 160
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_255FC0",
-          "ea": "0x255fc0",
-          "segment": ".text",
-          "size": 160
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_256060",
-          "ea": "0x256060",
-          "segment": ".text",
-          "size": 880
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_2563D0",
-          "ea": "0x2563d0",
-          "segment": ".text",
-          "size": 524
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_2565E8",
-          "ea": "0x2565e8",
-          "segment": ".text",
-          "size": 84
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25663C",
-          "ea": "0x25663c",
-          "segment": ".text",
-          "size": 156
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_2566D8",
-          "ea": "0x2566d8",
-          "segment": ".text",
-          "size": 420
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25687C",
-          "ea": "0x25687c",
-          "segment": ".text",
-          "size": 128
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_2568FC",
-          "ea": "0x2568fc",
-          "segment": ".text",
-          "size": 100
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_256960",
-          "ea": "0x256960",
-          "segment": ".text",
-          "size": 436
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_256B14",
-          "ea": "0x256b14",
-          "segment": ".text",
-          "size": 104
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_256B7C",
-          "ea": "0x256b7c",
-          "segment": ".text",
-          "size": 424
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_256D24",
-          "ea": "0x256d24",
-          "segment": ".text",
-          "size": 464
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_256EF4",
-          "ea": "0x256ef4",
-          "segment": ".text",
-          "size": 316
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_257030",
-          "ea": "0x257030",
-          "segment": ".text",
-          "size": 548
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_257254",
-          "ea": "0x257254",
-          "segment": ".text",
-          "size": 356
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_2573B8",
-          "ea": "0x2573b8",
-          "segment": ".text",
-          "size": 844
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_257704",
-          "ea": "0x257704",
-          "segment": ".text",
-          "size": 616
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25796C",
-          "ea": "0x25796c",
-          "segment": ".text",
-          "size": 72
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_2579B4",
-          "ea": "0x2579b4",
-          "segment": ".text",
-          "size": 628
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_257C28",
-          "ea": "0x257c28",
-          "segment": ".text",
-          "size": 828
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_257F64",
-          "ea": "0x257f64",
-          "segment": ".text",
-          "size": 564
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_258198",
-          "ea": "0x258198",
-          "segment": ".text",
-          "size": 108
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_258204",
-          "ea": "0x258204",
-          "segment": ".text",
-          "size": 104
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25A8E0",
-          "ea": "0x25a8e0",
-          "segment": ".text",
-          "size": 3348
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25B5F4",
-          "ea": "0x25b5f4",
-          "segment": ".text",
-          "size": 56
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25B62C",
-          "ea": "0x25b62c",
-          "segment": ".text",
-          "size": 40
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25B654",
-          "ea": "0x25b654",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25B660",
-          "ea": "0x25b660",
-          "segment": ".text",
-          "size": 268
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25B76C",
-          "ea": "0x25b76c",
-          "segment": ".text",
-          "size": 72
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25B7B4",
-          "ea": "0x25b7b4",
-          "segment": ".text",
-          "size": 40
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25B7DC",
-          "ea": "0x25b7dc",
-          "segment": ".text",
-          "size": 692
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25BA90",
-          "ea": "0x25ba90",
-          "segment": ".text",
-          "size": 92
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25BAEC",
-          "ea": "0x25baec",
-          "segment": ".text",
-          "size": 120
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25BB64",
-          "ea": "0x25bb64",
-          "segment": ".text",
-          "size": 324
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25BCA8",
-          "ea": "0x25bca8",
-          "segment": ".text",
-          "size": 412
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25BE44",
-          "ea": "0x25be44",
-          "segment": ".text",
-          "size": 2612
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25C878",
-          "ea": "0x25c878",
-          "segment": ".text",
-          "size": 512
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25CA78",
-          "ea": "0x25ca78",
-          "segment": ".text",
-          "size": 576
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25CCB8",
-          "ea": "0x25ccb8",
-          "segment": ".text",
-          "size": 704
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25CF78",
-          "ea": "0x25cf78",
-          "segment": ".text",
-          "size": 1348
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25D4BC",
-          "ea": "0x25d4bc",
-          "segment": ".text",
-          "size": 2048
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25DCBC",
-          "ea": "0x25dcbc",
-          "segment": ".text",
-          "size": 912
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25E04C",
-          "ea": "0x25e04c",
-          "segment": ".text",
-          "size": 672
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25E2EC",
-          "ea": "0x25e2ec",
-          "segment": ".text",
-          "size": 52
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25F4F4",
-          "ea": "0x25f4f4",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25F500",
-          "ea": "0x25f500",
-          "segment": ".text",
-          "size": 184
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25F648",
-          "ea": "0x25f648",
-          "segment": ".text",
-          "size": 1256
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25FD8C",
-          "ea": "0x25fd8c",
-          "segment": ".text",
-          "size": 172
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25FE38",
-          "ea": "0x25fe38",
-          "segment": ".text",
-          "size": 68
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25FE7C",
-          "ea": "0x25fe7c",
-          "segment": ".text",
-          "size": 60
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25FEB8",
-          "ea": "0x25feb8",
-          "segment": ".text",
-          "size": 60
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25FEF4",
-          "ea": "0x25fef4",
-          "segment": ".text",
-          "size": 68
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25FF38",
-          "ea": "0x25ff38",
-          "segment": ".text",
-          "size": 68
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25FF7C",
-          "ea": "0x25ff7c",
-          "segment": ".text",
-          "size": 108
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_25FFE8",
-          "ea": "0x25ffe8",
-          "segment": ".text",
-          "size": 104
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_2602A4",
-          "ea": "0x2602a4",
-          "segment": ".text",
-          "size": 88
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_2602FC",
-          "ea": "0x2602fc",
-          "segment": ".text",
-          "size": 88
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_260354",
-          "ea": "0x260354",
-          "segment": ".text",
-          "size": 88
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_2603AC",
-          "ea": "0x2603ac",
-          "segment": ".text",
-          "size": 188
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_260468",
-          "ea": "0x260468",
-          "segment": ".text",
-          "size": 296
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_260590",
-          "ea": "0x260590",
-          "segment": ".text",
-          "size": 92
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_260660",
-          "ea": "0x260660",
-          "segment": ".text",
-          "size": 640
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_2608E0",
-          "ea": "0x2608e0",
-          "segment": ".text",
-          "size": 740
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_260BC4",
-          "ea": "0x260bc4",
-          "segment": ".text",
-          "size": 440
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_260D7C",
-          "ea": "0x260d7c",
-          "segment": ".text",
-          "size": 132
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_260E00",
-          "ea": "0x260e00",
-          "segment": ".text",
-          "size": 140
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_260E8C",
-          "ea": "0x260e8c",
-          "segment": ".text",
-          "size": 1944
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_261624",
-          "ea": "0x261624",
-          "segment": ".text",
-          "size": 188
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_2616E0",
-          "ea": "0x2616e0",
-          "segment": ".text",
-          "size": 312
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_261818",
-          "ea": "0x261818",
-          "segment": ".text",
-          "size": 140
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_2618A4",
-          "ea": "0x2618a4",
-          "segment": ".text",
-          "size": 304
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_2619D4",
-          "ea": "0x2619d4",
-          "segment": ".text",
-          "size": 328
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_261D8C",
-          "ea": "0x261d8c",
-          "segment": ".text",
-          "size": 568
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_261FC4",
-          "ea": "0x261fc4",
-          "segment": ".text",
-          "size": 560
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_2621F4",
-          "ea": "0x2621f4",
-          "segment": ".text",
-          "size": 1012
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_2625E8",
-          "ea": "0x2625e8",
-          "segment": ".text",
-          "size": 636
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_262864",
-          "ea": "0x262864",
-          "segment": ".text",
-          "size": 528
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_262A74",
-          "ea": "0x262a74",
-          "segment": ".text",
-          "size": 832
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_262DB4",
-          "ea": "0x262db4",
-          "segment": ".text",
-          "size": 3944
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_263D1C",
-          "ea": "0x263d1c",
-          "segment": ".text",
-          "size": 4700
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_264F78",
-          "ea": "0x264f78",
-          "segment": ".text",
-          "size": 84
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_264FCC",
-          "ea": "0x264fcc",
-          "segment": ".text",
-          "size": 592
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_26521C",
-          "ea": "0x26521c",
-          "segment": ".text",
-          "size": 340
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_265370",
-          "ea": "0x265370",
-          "segment": ".text",
-          "size": 356
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_2654D4",
-          "ea": "0x2654d4",
-          "segment": ".text",
-          "size": 276
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_267ECC",
-          "ea": "0x267ecc",
-          "segment": ".text",
-          "size": 36
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_267EF0",
-          "ea": "0x267ef0",
-          "segment": ".text",
-          "size": 24
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_267F08",
-          "ea": "0x267f08",
-          "segment": ".text",
-          "size": 8
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_267F10",
-          "ea": "0x267f10",
-          "segment": ".text",
-          "size": 128
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_267F90",
-          "ea": "0x267f90",
-          "segment": ".text",
-          "size": 128
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_268010",
-          "ea": "0x268010",
-          "segment": ".text",
-          "size": 64
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_268050",
-          "ea": "0x268050",
-          "segment": ".text",
-          "size": 112
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_2680C0",
-          "ea": "0x2680c0",
-          "segment": ".text",
-          "size": 1352
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_268608",
-          "ea": "0x268608",
-          "segment": ".text",
-          "size": 756
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_2688FC",
-          "ea": "0x2688fc",
-          "segment": ".text",
-          "size": 1372
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_268E58",
-          "ea": "0x268e58",
-          "segment": ".text",
-          "size": 168
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_268F44",
-          "ea": "0x268f44",
-          "segment": ".text",
-          "size": 1936
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_2696D4",
-          "ea": "0x2696d4",
-          "segment": ".text",
-          "size": 1312
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_269BF4",
-          "ea": "0x269bf4",
-          "segment": ".text",
-          "size": 808
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_269F1C",
-          "ea": "0x269f1c",
-          "segment": ".text",
-          "size": 988
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_26A3D0",
-          "ea": "0x26a3d0",
-          "segment": ".text",
-          "size": 1332
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_26A904",
-          "ea": "0x26a904",
-          "segment": ".text",
-          "size": 1224
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_26ADCC",
-          "ea": "0x26adcc",
-          "segment": ".text",
-          "size": 104
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_26AE34",
-          "ea": "0x26ae34",
-          "segment": ".text",
-          "size": 868
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_26B198",
-          "ea": "0x26b198",
-          "segment": ".text",
-          "size": 1224
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_26B660",
-          "ea": "0x26b660",
-          "segment": ".text",
-          "size": 1260
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_26BB4C",
-          "ea": "0x26bb4c",
-          "segment": ".text",
-          "size": 1268
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_26C040",
-          "ea": "0x26c040",
-          "segment": ".text",
-          "size": 1500
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_26C61C",
-          "ea": "0x26c61c",
-          "segment": ".text",
-          "size": 1356
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_26CB68",
-          "ea": "0x26cb68",
-          "segment": ".text",
-          "size": 1680
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_26D1F8",
-          "ea": "0x26d1f8",
-          "segment": ".text",
-          "size": 3428
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_26DF5C",
-          "ea": "0x26df5c",
-          "segment": ".text",
-          "size": 6340
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_26F820",
-          "ea": "0x26f820",
-          "segment": ".text",
-          "size": 6580
         },
         {
           "category": "freetype_static_internal",
@@ -1231,7 +419,7 @@
           "size": 2220
         }
       ],
-      "total_bytes": 87084
+      "total_bytes": 2280
     },
     {
       "category": "init_or_fini_array_entry",
@@ -3197,11 +2385,11 @@
   "category_summary": [
     {
       "category": "freetype_static_internal",
-      "count": 120,
+      "count": 4,
       "evidence": "The region is bracketed by the archive I/O helpers and the FreeType to bzip2 transition.",
-      "first_ea": "0x252e90",
+      "first_ea": "0x254b98",
       "last_ea": "0x27336c",
-      "total_bytes": 87084
+      "total_bytes": 2280
     },
     {
       "category": "init_or_fini_array_entry",
@@ -3255,11 +2443,11 @@
   "database": {
     "bytes": 61286570,
     "close_reopen_verified": false,
-    "default_sub_function_count": 394,
+    "default_sub_function_count": 278,
     "format": "packed IDA 9.3 database",
     "function_count": 11297,
-    "path": "analysis/libqplay_translated_from_active_v9.i64",
-    "sha256": "860cd26c43c0c4a98e7939c5bbe7c02fa92c35662d11e86eb8e7a84bc64b116f"
+    "path": "analysis/libqplay_translated_from_active_v10.i64",
+    "sha256": "5894e93f41d83d7978e38305b1a86dd06217a3efb8fd48e4ae2f743438c8e063"
   },
   "ida_reclassified_functions": [
     {
@@ -3271,6 +2459,241 @@
       "ea": "0x250e94",
       "new_name": "destroy_size",
       "reason": "The cleanup body matches FreeType 2.3.6 destroy_size: it runs the generic and driver finalizers, frees size->internal, and then frees the size object."
+    },
+    {
+      "ea": "0x252e90",
+      "new_name": "destroy_face",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x254bb8",
+      "new_name": "tt_face_get_kerning",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x254d80",
+      "new_name": "get_sfnt_table",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x255fc0",
+      "new_name": "tt_face_free_name",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x256060",
+      "new_name": "tt_name_entry_ascii_from_utf16",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x2563d0",
+      "new_name": "tt_name_entry_ascii_from_other",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x2565e8",
+      "new_name": "tt_face_goto_table",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25663c",
+      "new_name": "tt_face_load_any",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x2566d8",
+      "new_name": "tt_face_get_metrics",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25687c",
+      "new_name": "tt_face_load_hmtx",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x2568fc",
+      "new_name": "tt_face_load_pclt",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x256960",
+      "new_name": "tt_face_load_name",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x256b14",
+      "new_name": "tt_face_load_post",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x256b7c",
+      "new_name": "tt_face_load_os2",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x256d24",
+      "new_name": "tt_face_load_hhea",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x256ef4",
+      "new_name": "tt_face_load_gasp",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x257030",
+      "new_name": "tt_face_load_kern",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x257254",
+      "new_name": "sfnt_done_face",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x2573b8",
+      "new_name": "tt_face_build_cmaps",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x257704",
+      "new_name": "sfnt_init_face",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25796c",
+      "new_name": "sfnt_table_info",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x2579b4",
+      "new_name": "sfnt_get_ps_name",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x257c28",
+      "new_name": "tt_face_load_font_dir",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x257f64",
+      "new_name": "tt_face_load_maxp",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x258198",
+      "new_name": "tt_face_load_cmap",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x258204",
+      "new_name": "tt_face_load_head",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25a8e0",
+      "new_name": "sfnt_load_face",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25b5f4",
+      "new_name": "ft_smooth_init",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25b62c",
+      "new_name": "ft_smooth_set_mode",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25b654",
+      "new_name": "gray_raster_done",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25b660",
+      "new_name": "gray_render_span",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25b76c",
+      "new_name": "gray_raster_new",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25b7b4",
+      "new_name": "ft_smooth_get_cbox",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25b7dc",
+      "new_name": "ft_smooth_render_lcd_v",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25ba90",
+      "new_name": "gray_raster_reset",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25baec",
+      "new_name": "ft_smooth_transform",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25bb64",
+      "new_name": "gray_convert_glyph_inner",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25bca8",
+      "new_name": "gray_move_to",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25be44",
+      "new_name": "gray_convert_glyph",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25c878",
+      "new_name": "gray_raster_render",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25ca78",
+      "new_name": "ft_smooth_render",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25ccb8",
+      "new_name": "ft_smooth_render_lcd",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25cf78",
+      "new_name": "gray_render_scanline",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25d4bc",
+      "new_name": "gray_render_line",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25dcbc",
+      "new_name": "gray_cubic_to",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25e04c",
+      "new_name": "gray_conic_to",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25e2ec",
+      "new_name": "gray_line_to",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
     },
     {
       "ea": "0x25e320",
@@ -3383,9 +2806,354 @@
       "reason": "The five-point intersection math, discriminant fallback, and touch flags match the pinned FreeType 2.3.6 Ins_ISECT handler."
     },
     {
+      "ea": "0x25f4f4",
+      "new_name": "tt_slot_init",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25f500",
+      "new_name": "tt_face_done",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25f648",
+      "new_name": "tt_face_init",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25fd8c",
+      "new_name": "Current_Ratio",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25fe38",
+      "new_name": "Round_To_Grid",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25fe7c",
+      "new_name": "Round_To_Half_Grid",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25feb8",
+      "new_name": "Round_Down_To_Grid",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25fef4",
+      "new_name": "Round_Up_To_Grid",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25ff38",
+      "new_name": "Round_To_Double_Grid",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25ff7c",
+      "new_name": "Round_Super",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x25ffe8",
+      "new_name": "Round_Super_45",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
       "ea": "0x260050",
       "new_name": "Compute_Funcs",
       "reason": "The projection and movement callback selection, including the unpatented-hinting branch, matches the pinned FreeType 2.3.6 Compute_Funcs implementation."
+    },
+    {
+      "ea": "0x2602a4",
+      "new_name": "Ins_SZP0",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x2602fc",
+      "new_name": "Ins_SZP1",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x260354",
+      "new_name": "Ins_SZP2",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x2603ac",
+      "new_name": "Ins_SZPS",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x260468",
+      "new_name": "Ins_ALIGNRP",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x260590",
+      "new_name": "Ins_UTP",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x260660",
+      "new_name": "Ins_MDRP",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x2608e0",
+      "new_name": "Ins_IP",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x260bc4",
+      "new_name": "TT_DotFix14",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x260d7c",
+      "new_name": "Ins_MINDEX",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x260e00",
+      "new_name": "tt_driver_done",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x260e8c",
+      "new_name": "Ins_IUP",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x261624",
+      "new_name": "Ins_ENDF",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x2616e0",
+      "new_name": "tt_size_done_bytecode",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x261818",
+      "new_name": "Dual_Project",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x2618a4",
+      "new_name": "Ins_FDEF",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x2619d4",
+      "new_name": "Ins_IDEF",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x261d8c",
+      "new_name": "Ins_DELTAP",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x261fc4",
+      "new_name": "Ins_DELTAC",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x2621f4",
+      "new_name": "TT_Load_Context",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x2625e8",
+      "new_name": "Ins_SHC",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x262864",
+      "new_name": "Ins_SHP",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x262a74",
+      "new_name": "Ins_MIRP",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x262db4",
+      "new_name": "load_truetype_glyph",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x263d1c",
+      "new_name": "TT_Load_Glyph",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x264f78",
+      "new_name": "Load_Glyph",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x264fcc",
+      "new_name": "Ins_SxVTL",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x26521c",
+      "new_name": "Ins_CALL",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x265370",
+      "new_name": "Ins_LOOPCALL",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x2654d4",
+      "new_name": "Ins_UNKNOWN",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x267ecc",
+      "new_name": "tt_driver_init",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x267ef0",
+      "new_name": "af_dummy_hints_init",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x267f08",
+      "new_name": "af_dummy_hints_apply",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x267f10",
+      "new_name": "af_latin_hints_init",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x267f90",
+      "new_name": "af_latin2_hints_init",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x268010",
+      "new_name": "af_cjk_metrics_scale",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x268050",
+      "new_name": "af_cjk_hints_init",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x2680c0",
+      "new_name": "af_latin2_hints_compute_segments",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x268608",
+      "new_name": "af_cjk_hints_link_segments",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x2688fc",
+      "new_name": "af_cjk_hints_compute_edges",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x268e58",
+      "new_name": "af_face_globals_free",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x268f44",
+      "new_name": "af_loader_load_g",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x2696d4",
+      "new_name": "af_glyph_hints_reload",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x269bf4",
+      "new_name": "af_latin2_metrics_scale",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x269f1c",
+      "new_name": "af_latin_metrics_scale",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x26a3d0",
+      "new_name": "af_latin_hints_compute_segments",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x26a904",
+      "new_name": "af_latin_metrics_init_widths",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x26adcc",
+      "new_name": "af_cjk_metrics_init",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x26ae34",
+      "new_name": "af_hint_normal_stem",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x26b198",
+      "new_name": "af_latin2_metrics_init_widths",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x26b660",
+      "new_name": "af_latin2_metrics_init",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x26bb4c",
+      "new_name": "af_latin_metrics_init",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x26c040",
+      "new_name": "af_latin2_hints_compute_edges",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x26c61c",
+      "new_name": "af_latin_hints_compute_edges",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x26cb68",
+      "new_name": "af_glyph_hints_align_weak_points",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x26d1f8",
+      "new_name": "af_cjk_hints_apply",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x26df5c",
+      "new_name": "af_latin2_hints_apply",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x26f820",
+      "new_name": "af_latin_hints_apply",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
     },
     {
       "ea": "0xe01a0",
@@ -3410,7 +3178,7 @@
     "unresolved_default_sub_function_count": 488
   },
   "purpose": "Account for every default sub_ function left in the persisted IDA translation copy without inventing source names.",
-  "remaining_default_sub_function_count": 394,
+  "remaining_default_sub_function_count": 278,
   "residual_default_sub_functions": [
     {
       "category": "plt0_resolver",
@@ -4289,822 +4057,10 @@
     },
     {
       "category": "freetype_static_internal",
-      "current_ida_name": "sub_252E90",
-      "ea": "0x252e90",
-      "segment": ".text",
-      "size": 320
-    },
-    {
-      "category": "freetype_static_internal",
       "current_ida_name": "sub_254B98",
       "ea": "0x254b98",
       "segment": ".text",
       "size": 32
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_254BB8",
-      "ea": "0x254bb8",
-      "segment": ".text",
-      "size": 456
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_254D80",
-      "ea": "0x254d80",
-      "segment": ".text",
-      "size": 160
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_255FC0",
-      "ea": "0x255fc0",
-      "segment": ".text",
-      "size": 160
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_256060",
-      "ea": "0x256060",
-      "segment": ".text",
-      "size": 880
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_2563D0",
-      "ea": "0x2563d0",
-      "segment": ".text",
-      "size": 524
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_2565E8",
-      "ea": "0x2565e8",
-      "segment": ".text",
-      "size": 84
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25663C",
-      "ea": "0x25663c",
-      "segment": ".text",
-      "size": 156
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_2566D8",
-      "ea": "0x2566d8",
-      "segment": ".text",
-      "size": 420
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25687C",
-      "ea": "0x25687c",
-      "segment": ".text",
-      "size": 128
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_2568FC",
-      "ea": "0x2568fc",
-      "segment": ".text",
-      "size": 100
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_256960",
-      "ea": "0x256960",
-      "segment": ".text",
-      "size": 436
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_256B14",
-      "ea": "0x256b14",
-      "segment": ".text",
-      "size": 104
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_256B7C",
-      "ea": "0x256b7c",
-      "segment": ".text",
-      "size": 424
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_256D24",
-      "ea": "0x256d24",
-      "segment": ".text",
-      "size": 464
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_256EF4",
-      "ea": "0x256ef4",
-      "segment": ".text",
-      "size": 316
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_257030",
-      "ea": "0x257030",
-      "segment": ".text",
-      "size": 548
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_257254",
-      "ea": "0x257254",
-      "segment": ".text",
-      "size": 356
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_2573B8",
-      "ea": "0x2573b8",
-      "segment": ".text",
-      "size": 844
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_257704",
-      "ea": "0x257704",
-      "segment": ".text",
-      "size": 616
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25796C",
-      "ea": "0x25796c",
-      "segment": ".text",
-      "size": 72
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_2579B4",
-      "ea": "0x2579b4",
-      "segment": ".text",
-      "size": 628
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_257C28",
-      "ea": "0x257c28",
-      "segment": ".text",
-      "size": 828
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_257F64",
-      "ea": "0x257f64",
-      "segment": ".text",
-      "size": 564
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_258198",
-      "ea": "0x258198",
-      "segment": ".text",
-      "size": 108
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_258204",
-      "ea": "0x258204",
-      "segment": ".text",
-      "size": 104
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25A8E0",
-      "ea": "0x25a8e0",
-      "segment": ".text",
-      "size": 3348
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25B5F4",
-      "ea": "0x25b5f4",
-      "segment": ".text",
-      "size": 56
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25B62C",
-      "ea": "0x25b62c",
-      "segment": ".text",
-      "size": 40
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25B654",
-      "ea": "0x25b654",
-      "segment": ".text",
-      "size": 12
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25B660",
-      "ea": "0x25b660",
-      "segment": ".text",
-      "size": 268
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25B76C",
-      "ea": "0x25b76c",
-      "segment": ".text",
-      "size": 72
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25B7B4",
-      "ea": "0x25b7b4",
-      "segment": ".text",
-      "size": 40
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25B7DC",
-      "ea": "0x25b7dc",
-      "segment": ".text",
-      "size": 692
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25BA90",
-      "ea": "0x25ba90",
-      "segment": ".text",
-      "size": 92
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25BAEC",
-      "ea": "0x25baec",
-      "segment": ".text",
-      "size": 120
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25BB64",
-      "ea": "0x25bb64",
-      "segment": ".text",
-      "size": 324
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25BCA8",
-      "ea": "0x25bca8",
-      "segment": ".text",
-      "size": 412
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25BE44",
-      "ea": "0x25be44",
-      "segment": ".text",
-      "size": 2612
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25C878",
-      "ea": "0x25c878",
-      "segment": ".text",
-      "size": 512
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25CA78",
-      "ea": "0x25ca78",
-      "segment": ".text",
-      "size": 576
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25CCB8",
-      "ea": "0x25ccb8",
-      "segment": ".text",
-      "size": 704
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25CF78",
-      "ea": "0x25cf78",
-      "segment": ".text",
-      "size": 1348
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25D4BC",
-      "ea": "0x25d4bc",
-      "segment": ".text",
-      "size": 2048
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25DCBC",
-      "ea": "0x25dcbc",
-      "segment": ".text",
-      "size": 912
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25E04C",
-      "ea": "0x25e04c",
-      "segment": ".text",
-      "size": 672
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25E2EC",
-      "ea": "0x25e2ec",
-      "segment": ".text",
-      "size": 52
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25F4F4",
-      "ea": "0x25f4f4",
-      "segment": ".text",
-      "size": 12
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25F500",
-      "ea": "0x25f500",
-      "segment": ".text",
-      "size": 184
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25F648",
-      "ea": "0x25f648",
-      "segment": ".text",
-      "size": 1256
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25FD8C",
-      "ea": "0x25fd8c",
-      "segment": ".text",
-      "size": 172
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25FE38",
-      "ea": "0x25fe38",
-      "segment": ".text",
-      "size": 68
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25FE7C",
-      "ea": "0x25fe7c",
-      "segment": ".text",
-      "size": 60
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25FEB8",
-      "ea": "0x25feb8",
-      "segment": ".text",
-      "size": 60
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25FEF4",
-      "ea": "0x25fef4",
-      "segment": ".text",
-      "size": 68
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25FF38",
-      "ea": "0x25ff38",
-      "segment": ".text",
-      "size": 68
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25FF7C",
-      "ea": "0x25ff7c",
-      "segment": ".text",
-      "size": 108
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_25FFE8",
-      "ea": "0x25ffe8",
-      "segment": ".text",
-      "size": 104
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_2602A4",
-      "ea": "0x2602a4",
-      "segment": ".text",
-      "size": 88
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_2602FC",
-      "ea": "0x2602fc",
-      "segment": ".text",
-      "size": 88
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_260354",
-      "ea": "0x260354",
-      "segment": ".text",
-      "size": 88
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_2603AC",
-      "ea": "0x2603ac",
-      "segment": ".text",
-      "size": 188
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_260468",
-      "ea": "0x260468",
-      "segment": ".text",
-      "size": 296
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_260590",
-      "ea": "0x260590",
-      "segment": ".text",
-      "size": 92
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_260660",
-      "ea": "0x260660",
-      "segment": ".text",
-      "size": 640
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_2608E0",
-      "ea": "0x2608e0",
-      "segment": ".text",
-      "size": 740
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_260BC4",
-      "ea": "0x260bc4",
-      "segment": ".text",
-      "size": 440
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_260D7C",
-      "ea": "0x260d7c",
-      "segment": ".text",
-      "size": 132
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_260E00",
-      "ea": "0x260e00",
-      "segment": ".text",
-      "size": 140
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_260E8C",
-      "ea": "0x260e8c",
-      "segment": ".text",
-      "size": 1944
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_261624",
-      "ea": "0x261624",
-      "segment": ".text",
-      "size": 188
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_2616E0",
-      "ea": "0x2616e0",
-      "segment": ".text",
-      "size": 312
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_261818",
-      "ea": "0x261818",
-      "segment": ".text",
-      "size": 140
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_2618A4",
-      "ea": "0x2618a4",
-      "segment": ".text",
-      "size": 304
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_2619D4",
-      "ea": "0x2619d4",
-      "segment": ".text",
-      "size": 328
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_261D8C",
-      "ea": "0x261d8c",
-      "segment": ".text",
-      "size": 568
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_261FC4",
-      "ea": "0x261fc4",
-      "segment": ".text",
-      "size": 560
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_2621F4",
-      "ea": "0x2621f4",
-      "segment": ".text",
-      "size": 1012
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_2625E8",
-      "ea": "0x2625e8",
-      "segment": ".text",
-      "size": 636
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_262864",
-      "ea": "0x262864",
-      "segment": ".text",
-      "size": 528
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_262A74",
-      "ea": "0x262a74",
-      "segment": ".text",
-      "size": 832
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_262DB4",
-      "ea": "0x262db4",
-      "segment": ".text",
-      "size": 3944
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_263D1C",
-      "ea": "0x263d1c",
-      "segment": ".text",
-      "size": 4700
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_264F78",
-      "ea": "0x264f78",
-      "segment": ".text",
-      "size": 84
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_264FCC",
-      "ea": "0x264fcc",
-      "segment": ".text",
-      "size": 592
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_26521C",
-      "ea": "0x26521c",
-      "segment": ".text",
-      "size": 340
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_265370",
-      "ea": "0x265370",
-      "segment": ".text",
-      "size": 356
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_2654D4",
-      "ea": "0x2654d4",
-      "segment": ".text",
-      "size": 276
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_267ECC",
-      "ea": "0x267ecc",
-      "segment": ".text",
-      "size": 36
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_267EF0",
-      "ea": "0x267ef0",
-      "segment": ".text",
-      "size": 24
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_267F08",
-      "ea": "0x267f08",
-      "segment": ".text",
-      "size": 8
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_267F10",
-      "ea": "0x267f10",
-      "segment": ".text",
-      "size": 128
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_267F90",
-      "ea": "0x267f90",
-      "segment": ".text",
-      "size": 128
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_268010",
-      "ea": "0x268010",
-      "segment": ".text",
-      "size": 64
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_268050",
-      "ea": "0x268050",
-      "segment": ".text",
-      "size": 112
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_2680C0",
-      "ea": "0x2680c0",
-      "segment": ".text",
-      "size": 1352
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_268608",
-      "ea": "0x268608",
-      "segment": ".text",
-      "size": 756
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_2688FC",
-      "ea": "0x2688fc",
-      "segment": ".text",
-      "size": 1372
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_268E58",
-      "ea": "0x268e58",
-      "segment": ".text",
-      "size": 168
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_268F44",
-      "ea": "0x268f44",
-      "segment": ".text",
-      "size": 1936
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_2696D4",
-      "ea": "0x2696d4",
-      "segment": ".text",
-      "size": 1312
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_269BF4",
-      "ea": "0x269bf4",
-      "segment": ".text",
-      "size": 808
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_269F1C",
-      "ea": "0x269f1c",
-      "segment": ".text",
-      "size": 988
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_26A3D0",
-      "ea": "0x26a3d0",
-      "segment": ".text",
-      "size": 1332
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_26A904",
-      "ea": "0x26a904",
-      "segment": ".text",
-      "size": 1224
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_26ADCC",
-      "ea": "0x26adcc",
-      "segment": ".text",
-      "size": 104
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_26AE34",
-      "ea": "0x26ae34",
-      "segment": ".text",
-      "size": 868
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_26B198",
-      "ea": "0x26b198",
-      "segment": ".text",
-      "size": 1224
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_26B660",
-      "ea": "0x26b660",
-      "segment": ".text",
-      "size": 1260
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_26BB4C",
-      "ea": "0x26bb4c",
-      "segment": ".text",
-      "size": 1268
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_26C040",
-      "ea": "0x26c040",
-      "segment": ".text",
-      "size": 1500
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_26C61C",
-      "ea": "0x26c61c",
-      "segment": ".text",
-      "size": 1356
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_26CB68",
-      "ea": "0x26cb68",
-      "segment": ".text",
-      "size": 1680
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_26D1F8",
-      "ea": "0x26d1f8",
-      "segment": ".text",
-      "size": 3428
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_26DF5C",
-      "ea": "0x26df5c",
-      "segment": ".text",
-      "size": 6340
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_26F820",
-      "ea": "0x26f820",
-      "segment": ".text",
-      "size": 6580
     },
     {
       "category": "freetype_static_internal",
@@ -6173,6 +5129,7 @@
   ],
   "schema_version": 1,
   "source_artifacts": {
+    "freetype_source_matches": "artifacts/ida_freetype_source_matches_20260901.json",
     "profile": "artifacts/unresolved_function_profile.json",
     "role_candidates": "artifacts/unresolved_function_candidates.json",
     "static_role_aliases": [

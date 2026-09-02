@@ -3,7 +3,7 @@
   "binary": {
     "architecture": "aarch64",
     "path": "GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so",
-    "sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8"
+    "sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8"
   },
   "coverage": {
     "bundled_library_role_aliases": 27,

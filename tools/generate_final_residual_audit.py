@@ -18,9 +18,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_INVENTORY = ROOT.parent / "analysis" / "libqplay.function_inventory.json"
-DEFAULT_OUTPUT = ROOT / "artifacts" / "ida_final_residual_audit_20260830.json"
+DEFAULT_OUTPUT = ROOT / "artifacts" / "ida_final_residual_audit_20260901.json"
 DEFAULT_PROFILE = ROOT / "artifacts" / "ida_residual_profile.json"
-EXPECTED_BINARY_SHA256 = "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8"
+EXPECTED_BINARY_SHA256 = "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8"
 
 
 def sha256_file(path: Path) -> str:

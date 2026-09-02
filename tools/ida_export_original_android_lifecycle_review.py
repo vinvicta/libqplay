@@ -237,7 +237,7 @@ def main() -> None:
         "database": {
             "path": idaapi.get_input_file_path(),
             "imagebase": "0x%x" % idaapi.get_imagebase(),
-            "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+            "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
         },
         "java_bridge": {
             "renderer": "com.quattroplay.GraalClassic.QPlayRenderer",

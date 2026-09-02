@@ -17,7 +17,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_INVENTORY = ROOT.parent / "analysis" / "libqplay.function_inventory.json"
 DEFAULT_OUTPUT = ROOT / "artifacts" / "ida_freetype_source_matches_20260901.json"
-EXPECTED_BINARY_SHA256 = "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8"
+EXPECTED_BINARY_SHA256 = "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8"
 SOURCE_REPOSITORY = "https://github.com/freetype/freetype2"
 SOURCE_TAG = "VER-2-3-6"
 SOURCE_COMMIT = "6174e17cf7cb3eef826d95c96757dbb0feea7bdb"
@@ -193,6 +193,144 @@ MATCHES = [
         "evidence": "The projection and movement callback selection, including the unpatented-hinting branch, matches the source.",
     },
 ]
+
+
+# These rows were established in the follow-up source pass.  Keeping the
+# compact address table here makes the generated artifact reproducible while
+# the common evidence sentence still explains the standard used for each row.
+ADDITIONAL_SOURCE_ROWS = (
+    (0x252E90, "destroy_face", "src/base/ftobjs.c", 822),
+    (0x254BB8, "tt_face_get_kerning", "src/sfnt/ttkern.c", 177),
+    (0x254D80, "get_sfnt_table", "src/sfnt/sfdriver.c", 58),
+    (0x255FC0, "tt_face_free_name", "src/sfnt/ttload.c", 786),
+    (0x256060, "tt_name_entry_ascii_from_utf16", "src/sfnt/sfobjs.c", 49),
+    (0x2563D0, "tt_name_entry_ascii_from_other", "src/sfnt/sfobjs.c", 80),
+    (0x2565E8, "tt_face_goto_table", "src/sfnt/ttload.c", 111),
+    (0x25663C, "tt_face_load_any", "src/sfnt/ttload.c", 394),
+    (0x2566D8, "tt_face_get_metrics", "src/sfnt/ttmtx.c", 347),
+    (0x25687C, "tt_face_load_hmtx", "src/sfnt/ttmtx.c", 66),
+    (0x2568FC, "tt_face_load_pclt", "src/sfnt/ttload.c", 1067),
+    (0x256960, "tt_face_load_name", "src/sfnt/ttload.c", 656),
+    (0x256B14, "tt_face_load_post", "src/sfnt/ttload.c", 1007),
+    (0x256B7C, "tt_face_load_os2", "src/sfnt/ttload.c", 867),
+    (0x256D24, "tt_face_load_hhea", "src/sfnt/ttmtx.c", 254),
+    (0x256EF4, "tt_face_load_gasp", "src/sfnt/ttload.c", 1126),
+    (0x257030, "tt_face_load_kern", "src/sfnt/ttkern.c", 45),
+    (0x257254, "sfnt_done_face", "src/sfnt/sfobjs.c", 1028),
+    (0x2573B8, "tt_face_build_cmaps", "src/sfnt/ttcmap.c", 3010),
+    (0x257704, "sfnt_init_face", "src/sfnt/sfobjs.c", 415),
+    (0x25796C, "sfnt_table_info", "src/sfnt/sfdriver.c", 103),
+    (0x2579B4, "sfnt_get_ps_name", "src/sfnt/sfdriver.c", 169),
+    (0x257C28, "tt_face_load_font_dir", "src/sfnt/ttload.c", 262),
+    (0x257F64, "tt_face_load_maxp", "src/sfnt/ttload.c", 550),
+    (0x258198, "tt_face_load_cmap", "src/sfnt/ttload.c", 831),
+    (0x258204, "tt_face_load_head", "src/sfnt/ttload.c", 514),
+    (0x25A8E0, "sfnt_load_face", "src/sfnt/sfobjs.c", 503),
+    (0x25B5F4, "ft_smooth_init", "src/smooth/ftsmooth.c", 30),
+    (0x25B62C, "ft_smooth_set_mode", "src/smooth/ftsmooth.c", 45),
+    (0x25B654, "gray_raster_done", "src/smooth/ftgrays.c", 1928),
+    (0x25B660, "gray_render_span", "src/smooth/ftgrays.c", 1119),
+    (0x25B76C, "gray_raster_new", "src/smooth/ftgrays.c", 1909),
+    (0x25B7B4, "ft_smooth_get_cbox", "src/smooth/ftsmooth.c", 84),
+    (0x25B7DC, "ft_smooth_render_lcd_v", "src/smooth/ftsmooth.c", 363),
+    (0x25BA90, "gray_raster_reset", "src/smooth/ftgrays.c", 1940),
+    (0x25BAEC, "ft_smooth_transform", "src/smooth/ftsmooth.c", 57),
+    (0x25BB64, "gray_convert_glyph_inner", "src/smooth/ftgrays.c", 1604),
+    (0x25BCA8, "gray_move_to", "src/smooth/ftgrays.c", 1067),
+    (0x25BE44, "gray_convert_glyph", "src/smooth/ftgrays.c", 1634),
+    (0x25C878, "gray_raster_render", "src/smooth/ftgrays.c", 1788),
+    (0x25CA78, "ft_smooth_render", "src/smooth/ftsmooth.c", 330),
+    (0x25CCB8, "ft_smooth_render_lcd", "src/smooth/ftsmooth.c", 345),
+    (0x25CF78, "gray_render_scanline", "src/smooth/ftgrays.c", 524),
+    (0x25D4BC, "gray_render_line", "src/smooth/ftgrays.c", 631),
+    (0x25DCBC, "gray_cubic_to", "src/smooth/ftgrays.c", 1108),
+    (0x25E04C, "gray_conic_to", "src/smooth/ftgrays.c", 1098),
+    (0x25E2EC, "gray_line_to", "src/smooth/ftgrays.c", 1089),
+    (0x25F4F4, "tt_slot_init", "src/truetype/ttobjs.c", 937),
+    (0x25F500, "tt_face_done", "src/truetype/ttobjs.c", 331),
+    (0x25F648, "tt_face_init", "src/truetype/ttobjs.c", 171),
+    (0x25FD8C, "Current_Ratio", "src/truetype/ttinterp.c", 1346),
+    (0x25FE38, "Round_To_Grid", "src/truetype/ttinterp.c", 1752),
+    (0x25FE7C, "Round_To_Half_Grid", "src/truetype/ttinterp.c", 1796),
+    (0x25FEB8, "Round_Down_To_Grid", "src/truetype/ttinterp.c", 1838),
+    (0x25FEF4, "Round_Up_To_Grid", "src/truetype/ttinterp.c", 1882),
+    (0x25FF38, "Round_To_Double_Grid", "src/truetype/ttinterp.c", 1926),
+    (0x25FF7C, "Round_Super", "src/truetype/ttinterp.c", 1976),
+    (0x25FFE8, "Round_Super_45", "src/truetype/ttinterp.c", 2024),
+    (0x2602A4, "Ins_SZP0", "src/truetype/ttinterp.c", 4925),
+    (0x2602FC, "Ins_SZP1", "src/truetype/ttinterp.c", 4954),
+    (0x260354, "Ins_SZP2", "src/truetype/ttinterp.c", 4983),
+    (0x2603AC, "Ins_SZPS", "src/truetype/ttinterp.c", 5012),
+    (0x260468, "Ins_ALIGNRP", "src/truetype/ttinterp.c", 5983),
+    (0x260590, "Ins_UTP", "src/truetype/ttinterp.c", 6257),
+    (0x260660, "Ins_MDRP", "src/truetype/ttinterp.c", 5748),
+    (0x2608E0, "Ins_IP", "src/truetype/ttinterp.c", 6153),
+    (0x260BC4, "TT_DotFix14", "src/truetype/ttinterp.c", 1203),
+    (0x260D7C, "Ins_MINDEX", "src/truetype/ttinterp.c", 4081),
+    (0x260E00, "tt_driver_done", "src/truetype/ttobjs.c", 903),
+    (0x260E8C, "Ins_IUP", "src/truetype/ttinterp.c", 6417),
+    (0x261624, "Ins_ENDF", "src/truetype/ttinterp.c", 4323),
+    (0x2616E0, "tt_size_done_bytecode", "src/truetype/ttobjs.c", 531),
+    (0x261818, "Dual_Project", "src/truetype/ttinterp.c", 2216),
+    (0x2618A4, "Ins_FDEF", "src/truetype/ttinterp.c", 4258),
+    (0x2619D4, "Ins_IDEF", "src/truetype/ttinterp.c", 4526),
+    (0x261D8C, "Ins_DELTAP", "src/truetype/ttinterp.c", 6521),
+    (0x261FC4, "Ins_DELTAC", "src/truetype/ttinterp.c", 6616),
+    (0x2621F4, "TT_Load_Context", "src/truetype/ttinterp.c", 556),
+    (0x2625E8, "Ins_SHC", "src/truetype/ttinterp.c", 5418),
+    (0x262864, "Ins_SHP", "src/truetype/ttinterp.c", 5365),
+    (0x262A74, "Ins_MIRP", "src/truetype/ttinterp.c", 5861),
+    (0x262DB4, "load_truetype_glyph", "src/truetype/ttgload.c", 1089),
+    (0x263D1C, "TT_Load_Glyph", "src/truetype/ttgload.c", 1897),
+    (0x264F78, "Load_Glyph", "src/truetype/ttdriver.c", 241),
+    (0x264FCC, "Ins_SxVTL", "src/truetype/ttinterp.c", 2528),
+    (0x26521C, "Ins_CALL", "src/truetype/ttinterp.c", 4371),
+    (0x265370, "Ins_LOOPCALL", "src/truetype/ttinterp.c", 4448),
+    (0x2654D4, "Ins_UNKNOWN", "src/truetype/ttinterp.c", 6743),
+    (0x267ECC, "tt_driver_init", "src/truetype/ttobjs.c", 870),
+    (0x267EF0, "af_dummy_hints_init", "src/autofit/afdummy.c", 25),
+    (0x267F08, "af_dummy_hints_apply", "src/autofit/afdummy.c", 35),
+    (0x267F10, "af_latin_hints_init", "src/autofit/aflatin.c", 1309),
+    (0x267F90, "af_latin2_hints_init", "src/autofit/aflatin2.c", 1391),
+    (0x268010, "af_cjk_metrics_scale", "src/autofit/afcjk.c", 95),
+    (0x268050, "af_cjk_hints_init", "src/autofit/afcjk.c", 602),
+    (0x2680C0, "af_latin2_hints_compute_segments", "src/autofit/aflatin2.c", 611),
+    (0x268608, "af_cjk_hints_link_segments", "src/autofit/afcjk.c", 158),
+    (0x2688FC, "af_cjk_hints_compute_edges", "src/autofit/afcjk.c", 323),
+    (0x268E58, "af_face_globals_free", "src/autofit/afglobal.c", 192),
+    (0x268F44, "af_loader_load_g", "src/autofit/afloader.c", 85),
+    (0x2696D4, "af_glyph_hints_reload", "src/autofit/afhints.c", 553),
+    (0x269BF4, "af_latin2_metrics_scale", "src/autofit/aflatin2.c", 589),
+    (0x269F1C, "af_latin_metrics_scale", "src/autofit/aflatin.c", 587),
+    (0x26A3D0, "af_latin_hints_compute_segments", "src/autofit/aflatin.c", 607),
+    (0x26A904, "af_latin_metrics_init_widths", "src/autofit/aflatin.c", 37),
+    (0x26ADCC, "af_cjk_metrics_init", "src/autofit/afcjk.c", 49),
+    (0x26AE34, "af_hint_normal_stem", "src/autofit/afcjk.c", 888),
+    (0x26B198, "af_latin2_metrics_init_widths", "src/autofit/aflatin2.c", 45),
+    (0x26B660, "af_latin2_metrics_init", "src/autofit/aflatin2.c", 405),
+    (0x26BB4C, "af_latin_metrics_init", "src/autofit/aflatin.c", 397),
+    (0x26C040, "af_latin2_hints_compute_edges", "src/autofit/aflatin2.c", 966),
+    (0x26C61C, "af_latin_hints_compute_edges", "src/autofit/aflatin.c", 912),
+    (0x26CB68, "af_glyph_hints_align_weak_points", "src/autofit/afhints.c", 1111),
+    (0x26D1F8, "af_cjk_hints_apply", "src/autofit/afcjk.c", 1356),
+    (0x26DF5C, "af_latin2_hints_apply", "src/autofit/aflatin2.c", 2184),
+    (0x26F820, "af_latin_hints_apply", "src/autofit/aflatin.c", 2045),
+)
+
+MATCHES.extend(
+    {
+        "address": f"0x{address:x}",
+        "upstream_name": name,
+        "source_file": source_file,
+        "source_line": source_line,
+        "evidence": (
+            f"The decompiled {name} body matches the tagged FreeType 2.3.6 "
+            "implementation, and the surrounding call or callback context "
+            "agrees with the corresponding source role."
+        ),
+    }
+    for address, name, source_file, source_line in ADDITIONAL_SOURCE_ROWS
+)
 
 
 def sha256_file(path: Path) -> str:

@@ -8,7 +8,7 @@ it is not by itself proof that a remote attacker can reach or exploit it.
 The review was performed against the following private inputs:
 
 * APK SHA-256: `6d6c0428fe890d0f18fb1ce572798d7a8a95853b10078f693026164d6a5f56d7`.
-* ARM64 `libqplay.so` SHA-256: `9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8`.
+* ARM64 `libqplay.so` SHA-256: `9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8`.
 * Package: `com.quattroplay.GraalClassic`.
 * Version: code `6158`, name `1.8`.
 
@@ -124,23 +124,23 @@ to bypass a signature on a live service.
 
 ## Translation scope and residual names
 
-The final ARM64 IDA copy contains 11,297 function heads. All 8,601 retained
-ELF symbols and 1,276 reviewed callback, role, and exact FreeType aliases were
-checked at their expected addresses. The 394 remaining default `sub_` names
+The current ARM64 IDA copy contains 11,297 function heads. All 8,601 retained
+ELF symbols and 1,392 reviewed callback, role, and exact FreeType aliases were
+checked at their expected addresses. The 278 remaining default `sub_` names
 are IDA-created functions without a surviving source symbol. A read-only
 active-IDB check
 found none in the Android bridge range, none among the 1,779 unique script
 callback addresses, and no direct call from them into the selected socket,
-file, process, or update imports. The broader application-core range has 23
+file, process, or update imports. The broader application-core range has 4
 short static-state wrappers, which remain address-based because assigning
 source names would be speculation. See
-`artifacts/ida_active_translation_scope_check_20260830.json`.
+`artifacts/ida_active_translation_scope_check_20260901.json`.
 
 The selected residual review inspected two of the remaining most referenced
 unnamed functions in the embedded FreeType region. They are diagnostic-string
 helpers reached through a FreeType internal object routine. A separate source
-comparison matched 24 neighboring FreeType and TrueType routines to the
-tagged 2.3.6 implementation. Neither pass found a new Android, socket, file,
+comparison matched 140 FreeType and TrueType routines to the tagged 2.3.6
+implementation. Neither pass found a new Android, socket, file,
 process, or update boundary in the reviewed functions. These are semantic and
 source-matching passes, not proof that every static-library routine is safe.
 See

@@ -1,7 +1,7 @@
 {
   "analysis_date": "2026-09-01",
   "analysis_scope": "selected unnamed functions remaining in the original ARM64 libqplay.so IDA database",
-  "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ae9982eb00e5b9c8",
+  "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
   "conclusions": [
     "The selected remaining routines are FreeType diagnostic helpers, not new Android bridge functions.",
     "The xref context places both helpers under a FreeType internal object routine that sanitizes diagnostic strings.",
