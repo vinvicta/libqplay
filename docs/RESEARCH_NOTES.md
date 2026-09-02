@@ -1218,6 +1218,13 @@ aggregate extension count or byte budget was visible. This is recorded as
 `GIF-004`, a static memory-pressure concern, in
 `artifacts/gif_decoder_security_review_20260902.json`.
 
+The same API grows its `SavedImages` array for each image descriptor. The
+`reallocarray(existing, ImageCount + 1, 56)` site is `0x2ada90`, the count
+increment is `0x2adafc`, and the `DGifSlurp` record loop begins at `0x2ae72c`
+and runs until a trailer. There is no application frame-count limit in the
+reviewed path. This is recorded as `GIF-005`, a static frame-metadata and
+cumulative-resource concern, in the same machine-readable review.
+
 ## Corrected two-connection runtime trace
 
 The first useful local run sent the map and player properties on the same

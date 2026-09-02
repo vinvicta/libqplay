@@ -787,6 +787,16 @@ no aggregate extension count or byte budget. This is `GIF-004`, an
 availability and memory-pressure risk from repeated accepted blocks, not a
 demonstrated memory-corruption primitive.
 
+There is a parallel frame-count gap. `DGifGetImageDesc` at `0x2ad908` grows
+the `SavedImages` array with `reallocarray(existing, ImageCount + 1, 56)` at
+`0x2ada90`, increments `ImageCount` at `0x2adafc`, and the `DGifSlurp` record
+loop at `0x2ae72c` continues until a trailer. No application frame-count
+limit is visible. Each accepted descriptor can later acquire a color map and
+decoded pixel buffer, so many small frames can consume metadata while larger
+frames compound the existing dimension and cumulative-byte risks. This is
+`GIF-005`, a static availability and memory-pressure concern rather than a
+demonstrated overwrite.
+
 The strongest finding is a static memory-pressure and integer-wrap boundary,
 not a demonstrated remote crash. A peer would first need to cross the
 connector, game protocol, cache, and resource gates. A safe repair should use

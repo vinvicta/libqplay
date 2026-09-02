@@ -96,6 +96,13 @@ aggregate extension count or byte budget. This is recorded as `GIF-004`, a
 static availability and memory-pressure concern rather than a demonstrated
 overwrite.
 
+`DGifGetImageDesc` also grows the `SavedImages` array for every image record.
+The `reallocarray(existing, ImageCount + 1, 56)` call is at `0x2ada90`, the
+count increment is at `0x2adafc`, and `DGifSlurp` keeps walking records from
+`0x2ae72c` until a trailer. No application frame-count limit was visible.
+This is recorded as `GIF-005`, a frame-metadata and cumulative-resource
+availability concern rather than a demonstrated overwrite.
+
 One apparent function at `0x2ac400` was not code. The preserved ELF symbol
 `jpeg_fdct_float` ends at `0x2ac3fc`, and the preserved
 `jpeg_fdct_ifast` function begins at `0x2ac440`. The bytes from `0x2ac3fc`

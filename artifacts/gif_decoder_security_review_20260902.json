@@ -32,7 +32,8 @@
     "That the APK contains a uniquely identified giflib release.",
     "That the reviewed CVEs are exploitable or absent under every malformed GIF input.",
     "That GIF-003 is a demonstrated out-of-bounds write.",
-    "That GIF-004 is exploitable without a bounded malformed-GIF test."
+    "That GIF-004 is exploitable without a bounded malformed-GIF test.",
+    "That GIF-005 is exploitable without a bounded malformed-GIF test."
   ],
   "observed_extension_accumulation": {
     "addresses": [
@@ -46,6 +47,18 @@
     "assessment": "Each individual extension payload is limited by the GIF sub-block length byte to 255 bytes, but a file can present many blocks. Repeated accepted blocks can therefore retain unbounded extension metadata and payload memory until the decoder or allocator fails. This is a static resource-budget finding, not a demonstrated memory corruption primitive.",
     "id": "GIF-004",
     "instruction": "DGifSlurp passes every nonempty extension block to GifAddExtensionBlock; that helper grows the extension array with reallocarray(count + 1, 24), increments the count, and allocates the one-byte block length without an aggregate extension count or byte limit.",
+    "severity": "availability and memory-pressure risk"
+  },
+  "observed_frame_accumulation": {
+    "addresses": [
+      "0x2ada90",
+      "0x2adafc",
+      "0x2ad908",
+      "0x2ae72c"
+    ],
+    "assessment": "Many accepted image descriptors can consume retained frame metadata even when each individual image is small. The same records later receive color-map and decoded-pixel storage, so frame count and cumulative decoded-byte limits should be enforced before allocation. This is a static resource-budget finding, not a demonstrated memory corruption primitive.",
+    "id": "GIF-005",
+    "instruction": "DGifGetImageDesc grows the SavedImages array with reallocarray(existing, ImageCount + 1, 56), or mallocs the first 56-byte record, then increments ImageCount. DGifSlurp continues accepting image records until a trailer without an application frame-count budget.",
     "severity": "availability and memory-pressure risk"
   },
   "observed_lzw_checks": [
@@ -122,8 +135,8 @@
     "instruction": "DGifSlurp multiplies width and height in W20, sign-extends the 32-bit result for reallocarray, and separately multiplies width by a row index in W3 before sign-extending the offset.",
     "severity": "availability and memory-pressure risk"
   },
-  "overall_assessment": "The current ARM64 GIF LZW helper is not statically assigned any of the three reviewed upstream CVEs. Its visible bounds checks make the two 2018 dictionary-index patterns less likely to be present, but the exact giflib release is unknown and no malformed-image fuzzing was performed. GIF-003 remains an independent resource and integer-arithmetic hardening item. GIF-004 adds an unbounded extension-accumulation concern in DGifSlurp.",
-  "schema": "libqplay.gif-decoder-security-review.v2",
+  "overall_assessment": "The current ARM64 GIF LZW helper is not statically assigned any of the three reviewed upstream CVEs. Its visible bounds checks make the two 2018 dictionary-index patterns less likely to be present, but the exact giflib release is unknown and no malformed-image fuzzing was performed. GIF-003 remains an independent resource and integer-arithmetic hardening item. GIF-004 adds an unbounded extension-accumulation concern in DGifSlurp. GIF-005 adds an unbounded SavedImages frame-array concern.",
+  "schema": "libqplay.gif-decoder-security-review.v3",
   "source_comparison_references": [
     {
       "description": "Pinned giflib-style DGifDecompressLine role reference",
@@ -139,7 +152,7 @@
     }
   ],
   "tool": "tools/generate_gif_decoder_security_review.py",
-  "tool_version": 2,
+  "tool_version": 3,
   "upstream_context": [
     {
       "affected_versions": "giflib 3.0 through 3.1.1 are listed by NVD",

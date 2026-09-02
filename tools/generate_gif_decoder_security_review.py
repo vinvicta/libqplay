@@ -50,9 +50,9 @@ def build_report(inventory_path: Path) -> dict:
 
     return {
         "artifact": "gif_decoder_security_review_20260902",
-        "schema": "libqplay.gif-decoder-security-review.v2",
+        "schema": "libqplay.gif-decoder-security-review.v3",
         "tool": "tools/generate_gif_decoder_security_review.py",
-        "tool_version": 2,
+        "tool_version": 3,
         "analysis_date": "2026-09-02",
         "analysis_scope": (
             "static comparison of the embedded giflib-style GIF decoder and "
@@ -196,6 +196,31 @@ def build_report(inventory_path: Path) -> dict:
                 "finding, not a demonstrated memory corruption primitive."
             ),
         },
+        "observed_frame_accumulation": {
+            "id": "GIF-005",
+            "severity": "availability and memory-pressure risk",
+            "addresses": [
+                "0x2ada90",
+                "0x2adafc",
+                "0x2ad908",
+                "0x2ae72c",
+            ],
+            "instruction": (
+                "DGifGetImageDesc grows the SavedImages array with "
+                "reallocarray(existing, ImageCount + 1, 56), or mallocs the "
+                "first 56-byte record, then increments ImageCount. DGifSlurp "
+                "continues accepting image records until a trailer without an "
+                "application frame-count budget."
+            ),
+            "assessment": (
+                "Many accepted image descriptors can consume retained frame "
+                "metadata even when each individual image is small. The same "
+                "records later receive color-map and decoded-pixel storage, so "
+                "frame count and cumulative decoded-byte limits should be "
+                "enforced before allocation. This is a static resource-budget "
+                "finding, not a demonstrated memory corruption primitive."
+            ),
+        },
         "upstream_context": [
             {
                 "id": "CVE-2018-11489",
@@ -268,7 +293,8 @@ def build_report(inventory_path: Path) -> dict:
             "but the exact giflib release is unknown and no malformed-image "
             "fuzzing was performed. GIF-003 remains an independent resource and "
             "integer-arithmetic hardening item. GIF-004 adds an unbounded "
-            "extension-accumulation concern in DGifSlurp."
+            "extension-accumulation concern in DGifSlurp. GIF-005 adds an "
+            "unbounded SavedImages frame-array concern."
         ),
         "network_contacted": False,
         "fuzzing_performed": False,
@@ -277,6 +303,7 @@ def build_report(inventory_path: Path) -> dict:
             "That the reviewed CVEs are exploitable or absent under every malformed GIF input.",
             "That GIF-003 is a demonstrated out-of-bounds write.",
             "That GIF-004 is exploitable without a bounded malformed-GIF test.",
+            "That GIF-005 is exploitable without a bounded malformed-GIF test.",
         ],
     }
 
@@ -302,6 +329,7 @@ def main() -> int:
                 "findings": [
                     report["observed_slurp_hardening_gap"]["id"],
                     report["observed_extension_accumulation"]["id"],
+                    report["observed_frame_accumulation"]["id"],
                 ],
                 "inventory_rows": report["inventory"]["row_count"],
             },
