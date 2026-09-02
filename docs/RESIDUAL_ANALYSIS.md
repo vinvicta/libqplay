@@ -3,8 +3,10 @@
 The ELF symbol pass translated every name retained in the original ARM64
 library. The reviewed callback and role passes then added names only when the
 address, callers, and body supported the role. The current IDA inventory has
-124 address-only `sub_` functions. They are mostly compiler-generated cleanup
-and registration paths, not an unexamined application boundary.
+124 residual functions. They are mostly compiler-generated cleanup and
+registration paths, not an unexamined application boundary. The current IDA
+copy gives each one a stable descriptive label while keeping the address and
+the absence of a recovered source name explicit.
 
 The current address list is in
 `artifacts/ida_final_residual_audit_20260902.json`. The report was generated

@@ -70,25 +70,26 @@ script-table boundaries were applied, and the reviewed application, CyaSSL,
 and bundled-library aliases were added. The exact source-role pass then
 matched 141 FreeType functions, 153 IJG libjpeg 6b functions, one zlib
 function, and one static giflib role. The current copy has 11,296 functions,
-11,296 named function heads, and 124 remaining default `sub_` entries. The
-read-only verifier returned zero failures after the source-role pass. The copy
-hash and pass breakdown are in
+11,296 named function heads, and no remaining default `sub_` entries. The 124
+functions that lacked preserved source names now carry stable descriptive
+labels. The read-only verifier returned zero failures after the source-role
+and residual-label passes. The copy hash and pass breakdown are in
 `artifacts/ida_translation_verification_20260902.json`.
 
-The final scope check keeps that count honest. None of the 124 default names
+The final scope check keeps that count honest. None of the 124 residual labels
 is in the `0x240000` through `0x246fff` Android bridge range. None of the
 1,779 unique callback addresses in the script-table inventory currently has a
-default name, including the callbacks added during the Facebook, billing,
-partner, and device/media reviews. The remaining 23 default entries in the
+residual label, including the callbacks added during the Facebook, billing,
+partner, and device/media reviews. The remaining 23 labeled entries in the
 broader `0x1e0000` through `0x246fff` application-core range are short
-static-state or cleanup wrappers. No remaining default function has a direct call edge to
-the selected socket, file, process, or update imports. The IDA-generated
+static-state or cleanup wrappers. No residual function has a direct call edge
+to the selected socket, file, process, or update imports. The IDA-generated
 check is preserved in
 `artifacts/ida_active_translation_scope_check_20260902.json`.
 
 ## FreeType source matching
 
-The remaining default-name queue was not treated as an invitation to label
+The former default-name queue was not treated as an invitation to invent
 every routine by proximity. A local shallow checkout of the official
 FreeType 2.3.6 tree was compared with the active ARM64 pseudocode. The
 checkout is pinned to commit
@@ -144,7 +145,9 @@ One more correction was at `0x2ac400`. The preserved `jpeg_fdct_float` symbol
 ends at `0x2ac3fc` and `jpeg_fdct_ifast` starts at `0x2ac440`. The bytes in
 between are alignment and floating-point constants referenced by the DCT code,
 not a separate function. Removing that false IDA boundary reduced the final
-function inventory by one and left 124 genuine default `sub_` functions.
+function inventory by one and left 124 genuine residual functions. They now
+carry descriptive labels recorded in
+`artifacts/ida_descriptive_residual_labels_20260902.json`.
 The current source-role artifacts are
 `artifacts/ida_libjpeg_source_matches_20260902.json`,
 `artifacts/ida_zlib_source_matches_20260902.json`, and

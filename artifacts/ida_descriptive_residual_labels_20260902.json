@@ -1,0 +1,1013 @@
+{
+  "analysis_date": "2026-09-02",
+  "default_sub_count_after": 0,
+  "exported_row_count": 124,
+  "failures": [],
+  "input_path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so",
+  "interpretation": "Each row is an evidence-backed descriptive label for a function that had no preserved ELF source name. The address suffix keeps the label stable and the category records the recovered role.",
+  "network_contacted": false,
+  "profile_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/ida_residual_profile.json",
+  "profile_row_count": 124,
+  "rows": [
+    {
+      "address": "0xd2170",
+      "category": "plt0_resolver",
+      "comment": "Analyst label only. plt0_resolver; no preserved ELF source symbol was recovered.",
+      "name": "ida_plt0_aarch64_resolver_d2170",
+      "old_name": "sub_D2170",
+      "size": 20
+    },
+    {
+      "address": "0xe0514",
+      "category": "init_or_fini_array_entry",
+      "comment": "Analyst label only. init_or_fini_array_entry; no preserved ELF source symbol was recovered.",
+      "name": "ida_init_fini_array_entry_e0514",
+      "old_name": "sub_E0514",
+      "size": 16
+    },
+    {
+      "address": "0xe0524",
+      "category": "init_or_fini_array_entry",
+      "comment": "Analyst label only. init_or_fini_array_entry; no preserved ELF source symbol was recovered.",
+      "name": "ida_init_fini_array_entry_e0524",
+      "old_name": "sub_E0524",
+      "size": 12
+    },
+    {
+      "address": "0xe0530",
+      "category": "init_or_fini_array_entry",
+      "comment": "Analyst label only. init_or_fini_array_entry; no preserved ELF source symbol was recovered.",
+      "name": "ida_init_fini_array_entry_e0530",
+      "old_name": "sub_E0530",
+      "size": 52
+    },
+    {
+      "address": "0xe0564",
+      "category": "init_or_fini_array_entry",
+      "comment": "Analyst label only. init_or_fini_array_entry; no preserved ELF source symbol was recovered.",
+      "name": "ida_init_fini_array_entry_e0564",
+      "old_name": "sub_E0564",
+      "size": 64
+    },
+    {
+      "address": "0xe05a4",
+      "category": "init_or_fini_array_entry",
+      "comment": "Analyst label only. init_or_fini_array_entry; no preserved ELF source symbol was recovered.",
+      "name": "ida_init_fini_array_entry_e05a4",
+      "old_name": "sub_E05A4",
+      "size": 60
+    },
+    {
+      "address": "0xe05e0",
+      "category": "init_or_fini_array_entry",
+      "comment": "Analyst label only. init_or_fini_array_entry; no preserved ELF source symbol was recovered.",
+      "name": "ida_init_fini_array_entry_e05e0",
+      "old_name": "sub_E05E0",
+      "size": 12
+    },
+    {
+      "address": "0xe0758",
+      "category": "init_or_fini_array_entry",
+      "comment": "Analyst label only. init_or_fini_array_entry; no preserved ELF source symbol was recovered.",
+      "name": "ida_init_fini_array_entry_e0758",
+      "old_name": "sub_E0758",
+      "size": 24
+    },
+    {
+      "address": "0xe07b4",
+      "category": "init_or_fini_array_entry",
+      "comment": "Analyst label only. init_or_fini_array_entry; no preserved ELF source symbol was recovered.",
+      "name": "ida_init_fini_array_entry_e07b4",
+      "old_name": "sub_E07B4",
+      "size": 40
+    },
+    {
+      "address": "0xe07e4",
+      "category": "init_or_fini_array_entry",
+      "comment": "Analyst label only. init_or_fini_array_entry; no preserved ELF source symbol was recovered.",
+      "name": "ida_init_fini_array_entry_e07e4",
+      "old_name": "sub_E07E4",
+      "size": 36
+    },
+    {
+      "address": "0xe0808",
+      "category": "init_or_fini_array_entry",
+      "comment": "Analyst label only. init_or_fini_array_entry; no preserved ELF source symbol was recovered.",
+      "name": "ida_init_fini_array_entry_e0808",
+      "old_name": "sub_E0808",
+      "size": 12
+    },
+    {
+      "address": "0xe08c4",
+      "category": "init_or_fini_array_entry",
+      "comment": "Analyst label only. init_or_fini_array_entry; no preserved ELF source symbol was recovered.",
+      "name": "ida_init_fini_array_entry_e08c4",
+      "old_name": "sub_E08C4",
+      "size": 32
+    },
+    {
+      "address": "0xe090c",
+      "category": "init_or_fini_array_entry",
+      "comment": "Analyst label only. init_or_fini_array_entry; no preserved ELF source symbol was recovered.",
+      "name": "ida_init_fini_array_entry_e090c",
+      "old_name": "sub_E090C",
+      "size": 36
+    },
+    {
+      "address": "0xe0930",
+      "category": "init_or_fini_array_entry",
+      "comment": "Analyst label only. init_or_fini_array_entry; no preserved ELF source symbol was recovered.",
+      "name": "ida_init_fini_array_entry_e0930",
+      "old_name": "sub_E0930",
+      "size": 48
+    },
+    {
+      "address": "0xe0960",
+      "category": "init_or_fini_array_entry",
+      "comment": "Analyst label only. init_or_fini_array_entry; no preserved ELF source symbol was recovered.",
+      "name": "ida_init_fini_array_entry_e0960",
+      "old_name": "sub_E0960",
+      "size": 36
+    },
+    {
+      "address": "0xe0984",
+      "category": "init_or_fini_array_entry",
+      "comment": "Analyst label only. init_or_fini_array_entry; no preserved ELF source symbol was recovered.",
+      "name": "ida_init_fini_array_entry_e0984",
+      "old_name": "sub_E0984",
+      "size": 112
+    },
+    {
+      "address": "0xe09f4",
+      "category": "init_or_fini_array_entry",
+      "comment": "Analyst label only. init_or_fini_array_entry; no preserved ELF source symbol was recovered.",
+      "name": "ida_init_fini_array_entry_e09f4",
+      "old_name": "sub_E09F4",
+      "size": 56
+    },
+    {
+      "address": "0xe0a2c",
+      "category": "init_or_fini_array_entry",
+      "comment": "Analyst label only. init_or_fini_array_entry; no preserved ELF source symbol was recovered.",
+      "name": "ida_init_fini_array_entry_e0a2c",
+      "old_name": "sub_E0A2C",
+      "size": 136
+    },
+    {
+      "address": "0xe0ab4",
+      "category": "init_or_fini_array_entry",
+      "comment": "Analyst label only. init_or_fini_array_entry; no preserved ELF source symbol was recovered.",
+      "name": "ida_init_fini_array_entry_e0ab4",
+      "old_name": "sub_E0AB4",
+      "size": 28
+    },
+    {
+      "address": "0xe0ad0",
+      "category": "init_or_fini_array_entry",
+      "comment": "Analyst label only. init_or_fini_array_entry; no preserved ELF source symbol was recovered.",
+      "name": "ida_init_fini_array_entry_e0ad0",
+      "old_name": "sub_E0AD0",
+      "size": 40
+    },
+    {
+      "address": "0xe2b0c",
+      "category": "tstringlist_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstringlist_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstringlist_static_cleanup_e2b0c",
+      "old_name": "sub_E2B0C",
+      "size": 16
+    },
+    {
+      "address": "0xe3754",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_e3754",
+      "old_name": "sub_E3754",
+      "size": 12
+    },
+    {
+      "address": "0xe6c00",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_e6c00",
+      "old_name": "sub_E6C00",
+      "size": 12
+    },
+    {
+      "address": "0xe6c0c",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_e6c0c",
+      "old_name": "sub_E6C0C",
+      "size": 16
+    },
+    {
+      "address": "0xe857c",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_e857c",
+      "old_name": "sub_E857C",
+      "size": 12
+    },
+    {
+      "address": "0xe8588",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_e8588",
+      "old_name": "sub_E8588",
+      "size": 16
+    },
+    {
+      "address": "0xe8598",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_e8598",
+      "old_name": "sub_E8598",
+      "size": 16
+    },
+    {
+      "address": "0xe9220",
+      "category": "tstringlist_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstringlist_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstringlist_static_cleanup_e9220",
+      "old_name": "sub_E9220",
+      "size": 16
+    },
+    {
+      "address": "0xece3c",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_ece3c",
+      "old_name": "sub_ECE3C",
+      "size": 12
+    },
+    {
+      "address": "0xece48",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_ece48",
+      "old_name": "sub_ECE48",
+      "size": 16
+    },
+    {
+      "address": "0xece58",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_ece58",
+      "old_name": "sub_ECE58",
+      "size": 16
+    },
+    {
+      "address": "0xece68",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_ece68",
+      "old_name": "sub_ECE68",
+      "size": 16
+    },
+    {
+      "address": "0xf0f3c",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_f0f3c",
+      "old_name": "sub_F0F3C",
+      "size": 12
+    },
+    {
+      "address": "0xf0f48",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_f0f48",
+      "old_name": "sub_F0F48",
+      "size": 16
+    },
+    {
+      "address": "0xf0f58",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_f0f58",
+      "old_name": "sub_F0F58",
+      "size": 16
+    },
+    {
+      "address": "0xf0f68",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_f0f68",
+      "old_name": "sub_F0F68",
+      "size": 16
+    },
+    {
+      "address": "0xf0f78",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_f0f78",
+      "old_name": "sub_F0F78",
+      "size": 16
+    },
+    {
+      "address": "0xf0f88",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_f0f88",
+      "old_name": "sub_F0F88",
+      "size": 16
+    },
+    {
+      "address": "0xf0f98",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_f0f98",
+      "old_name": "sub_F0F98",
+      "size": 16
+    },
+    {
+      "address": "0xf0fa8",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_f0fa8",
+      "old_name": "sub_F0FA8",
+      "size": 16
+    },
+    {
+      "address": "0xf0fb8",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_f0fb8",
+      "old_name": "sub_F0FB8",
+      "size": 16
+    },
+    {
+      "address": "0xf0fc8",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_f0fc8",
+      "old_name": "sub_F0FC8",
+      "size": 16
+    },
+    {
+      "address": "0xf5150",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_f5150",
+      "old_name": "sub_F5150",
+      "size": 12
+    },
+    {
+      "address": "0xf515c",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_f515c",
+      "old_name": "sub_F515C",
+      "size": 16
+    },
+    {
+      "address": "0xf516c",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_f516c",
+      "old_name": "sub_F516C",
+      "size": 16
+    },
+    {
+      "address": "0x102778",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_102778",
+      "old_name": "sub_102778",
+      "size": 12
+    },
+    {
+      "address": "0x103bd0",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_103bd0",
+      "old_name": "sub_103BD0",
+      "size": 12
+    },
+    {
+      "address": "0x10512c",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_10512c",
+      "old_name": "sub_10512C",
+      "size": 12
+    },
+    {
+      "address": "0x10ce30",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_10ce30",
+      "old_name": "sub_10CE30",
+      "size": 12
+    },
+    {
+      "address": "0x114f34",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_114f34",
+      "old_name": "sub_114F34",
+      "size": 12
+    },
+    {
+      "address": "0x114f40",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_114f40",
+      "old_name": "sub_114F40",
+      "size": 16
+    },
+    {
+      "address": "0x114f50",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_114f50",
+      "old_name": "sub_114F50",
+      "size": 16
+    },
+    {
+      "address": "0x114f60",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_114f60",
+      "old_name": "sub_114F60",
+      "size": 16
+    },
+    {
+      "address": "0x114f70",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_114f70",
+      "old_name": "sub_114F70",
+      "size": 16
+    },
+    {
+      "address": "0x15ae70",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_15ae70",
+      "old_name": "sub_15AE70",
+      "size": 12
+    },
+    {
+      "address": "0x15ae7c",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_15ae7c",
+      "old_name": "sub_15AE7C",
+      "size": 16
+    },
+    {
+      "address": "0x15ae8c",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_15ae8c",
+      "old_name": "sub_15AE8C",
+      "size": 16
+    },
+    {
+      "address": "0x15ae9c",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_15ae9c",
+      "old_name": "sub_15AE9C",
+      "size": 16
+    },
+    {
+      "address": "0x165938",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_165938",
+      "old_name": "sub_165938",
+      "size": 12
+    },
+    {
+      "address": "0x165944",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_165944",
+      "old_name": "sub_165944",
+      "size": 16
+    },
+    {
+      "address": "0x16c8a4",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_16c8a4",
+      "old_name": "sub_16C8A4",
+      "size": 12
+    },
+    {
+      "address": "0x16c8b0",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_16c8b0",
+      "old_name": "sub_16C8B0",
+      "size": 16
+    },
+    {
+      "address": "0x17ba04",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_17ba04",
+      "old_name": "sub_17BA04",
+      "size": 16
+    },
+    {
+      "address": "0x17ba14",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_17ba14",
+      "old_name": "sub_17BA14",
+      "size": 16
+    },
+    {
+      "address": "0x17ba24",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_17ba24",
+      "old_name": "sub_17BA24",
+      "size": 16
+    },
+    {
+      "address": "0x180bc0",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_180bc0",
+      "old_name": "sub_180BC0",
+      "size": 12
+    },
+    {
+      "address": "0x180bcc",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_180bcc",
+      "old_name": "sub_180BCC",
+      "size": 16
+    },
+    {
+      "address": "0x180bdc",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_180bdc",
+      "old_name": "sub_180BDC",
+      "size": 16
+    },
+    {
+      "address": "0x180bec",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_180bec",
+      "old_name": "sub_180BEC",
+      "size": 16
+    },
+    {
+      "address": "0x180bfc",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_180bfc",
+      "old_name": "sub_180BFC",
+      "size": 16
+    },
+    {
+      "address": "0x180c0c",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_180c0c",
+      "old_name": "sub_180C0C",
+      "size": 16
+    },
+    {
+      "address": "0x18ad1c",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_18ad1c",
+      "old_name": "sub_18AD1C",
+      "size": 12
+    },
+    {
+      "address": "0x18ad28",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_18ad28",
+      "old_name": "sub_18AD28",
+      "size": 16
+    },
+    {
+      "address": "0x18ad38",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_18ad38",
+      "old_name": "sub_18AD38",
+      "size": 16
+    },
+    {
+      "address": "0x18ad48",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_18ad48",
+      "old_name": "sub_18AD48",
+      "size": 16
+    },
+    {
+      "address": "0x19f9cc",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_19f9cc",
+      "old_name": "sub_19F9CC",
+      "size": 12
+    },
+    {
+      "address": "0x19f9d8",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_19f9d8",
+      "old_name": "sub_19F9D8",
+      "size": 16
+    },
+    {
+      "address": "0x19f9e8",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_19f9e8",
+      "old_name": "sub_19F9E8",
+      "size": 16
+    },
+    {
+      "address": "0x19f9f8",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_19f9f8",
+      "old_name": "sub_19F9F8",
+      "size": 16
+    },
+    {
+      "address": "0x19fa08",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_19fa08",
+      "old_name": "sub_19FA08",
+      "size": 16
+    },
+    {
+      "address": "0x19fa18",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_19fa18",
+      "old_name": "sub_19FA18",
+      "size": 16
+    },
+    {
+      "address": "0x19fa28",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_19fa28",
+      "old_name": "sub_19FA28",
+      "size": 16
+    },
+    {
+      "address": "0x19fa38",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_19fa38",
+      "old_name": "sub_19FA38",
+      "size": 16
+    },
+    {
+      "address": "0x19fa48",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_19fa48",
+      "old_name": "sub_19FA48",
+      "size": 16
+    },
+    {
+      "address": "0x19fa58",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_19fa58",
+      "old_name": "sub_19FA58",
+      "size": 16
+    },
+    {
+      "address": "0x19fa68",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_19fa68",
+      "old_name": "sub_19FA68",
+      "size": 16
+    },
+    {
+      "address": "0x19fa78",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_19fa78",
+      "old_name": "sub_19FA78",
+      "size": 16
+    },
+    {
+      "address": "0x19fa88",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_19fa88",
+      "old_name": "sub_19FA88",
+      "size": 16
+    },
+    {
+      "address": "0x19fa98",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_19fa98",
+      "old_name": "sub_19FA98",
+      "size": 16
+    },
+    {
+      "address": "0x1abeb0",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_1abeb0",
+      "old_name": "sub_1ABEB0",
+      "size": 12
+    },
+    {
+      "address": "0x1ac9b0",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_1ac9b0",
+      "old_name": "sub_1AC9B0",
+      "size": 12
+    },
+    {
+      "address": "0x1adfc4",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_1adfc4",
+      "old_name": "sub_1ADFC4",
+      "size": 12
+    },
+    {
+      "address": "0x1adfd0",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_1adfd0",
+      "old_name": "sub_1ADFD0",
+      "size": 16
+    },
+    {
+      "address": "0x1b2fdc",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_1b2fdc",
+      "old_name": "sub_1B2FDC",
+      "size": 16
+    },
+    {
+      "address": "0x1bc80c",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_1bc80c",
+      "old_name": "sub_1BC80C",
+      "size": 12
+    },
+    {
+      "address": "0x1c008c",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_1c008c",
+      "old_name": "sub_1C008C",
+      "size": 16
+    },
+    {
+      "address": "0x1c5c54",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_1c5c54",
+      "old_name": "sub_1C5C54",
+      "size": 12
+    },
+    {
+      "address": "0x1ce384",
+      "category": "tstringlist_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstringlist_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstringlist_static_cleanup_1ce384",
+      "old_name": "sub_1CE384",
+      "size": 16
+    },
+    {
+      "address": "0x1cf1dc",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_1cf1dc",
+      "old_name": "sub_1CF1DC",
+      "size": 12
+    },
+    {
+      "address": "0x1d9198",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_1d9198",
+      "old_name": "sub_1D9198",
+      "size": 12
+    },
+    {
+      "address": "0x1dcafc",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_1dcafc",
+      "old_name": "sub_1DCAFC",
+      "size": 12
+    },
+    {
+      "address": "0x1e006c",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_1e006c",
+      "old_name": "sub_1E006C",
+      "size": 12
+    },
+    {
+      "address": "0x1e0e58",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_1e0e58",
+      "old_name": "sub_1E0E58",
+      "size": 12
+    },
+    {
+      "address": "0x20adbc",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_20adbc",
+      "old_name": "sub_20ADBC",
+      "size": 16
+    },
+    {
+      "address": "0x20fa90",
+      "category": "tgraalvar_static_cleanup_wrapper",
+      "comment": "Analyst label only. tgraalvar_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tgraalvar_static_cleanup_20fa90",
+      "old_name": "sub_20FA90",
+      "size": 12
+    },
+    {
+      "address": "0x214758",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_214758",
+      "old_name": "sub_214758",
+      "size": 12
+    },
+    {
+      "address": "0x214764",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_214764",
+      "old_name": "sub_214764",
+      "size": 16
+    },
+    {
+      "address": "0x214774",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_214774",
+      "old_name": "sub_214774",
+      "size": 16
+    },
+    {
+      "address": "0x214784",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_214784",
+      "old_name": "sub_214784",
+      "size": 16
+    },
+    {
+      "address": "0x224728",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_224728",
+      "old_name": "sub_224728",
+      "size": 12
+    },
+    {
+      "address": "0x224734",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_224734",
+      "old_name": "sub_224734",
+      "size": 16
+    },
+    {
+      "address": "0x226ccc",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_226ccc",
+      "old_name": "sub_226CCC",
+      "size": 12
+    },
+    {
+      "address": "0x226cd8",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_226cd8",
+      "old_name": "sub_226CD8",
+      "size": 16
+    },
+    {
+      "address": "0x22b15c",
+      "category": "tstringlist_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstringlist_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstringlist_static_cleanup_22b15c",
+      "old_name": "sub_22B15C",
+      "size": 16
+    },
+    {
+      "address": "0x22b16c",
+      "category": "tstringlist_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstringlist_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstringlist_static_cleanup_22b16c",
+      "old_name": "sub_22B16C",
+      "size": 16
+    },
+    {
+      "address": "0x22b1dc",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_22b1dc",
+      "old_name": "sub_22B1DC",
+      "size": 12
+    },
+    {
+      "address": "0x22b1e8",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_22b1e8",
+      "old_name": "sub_22B1E8",
+      "size": 16
+    },
+    {
+      "address": "0x22d9f0",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_22d9f0",
+      "old_name": "sub_22D9F0",
+      "size": 12
+    },
+    {
+      "address": "0x22ec18",
+      "category": "tgraalvar_static_cleanup_wrapper",
+      "comment": "Analyst label only. tgraalvar_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tgraalvar_static_cleanup_22ec18",
+      "old_name": "sub_22EC18",
+      "size": 16
+    },
+    {
+      "address": "0x2309d0",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_2309d0",
+      "old_name": "sub_2309D0",
+      "size": 12
+    },
+    {
+      "address": "0x2343d4",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_2343d4",
+      "old_name": "sub_2343D4",
+      "size": 12
+    },
+    {
+      "address": "0x2383f0",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_2383f0",
+      "old_name": "sub_2383F0",
+      "size": 12
+    },
+    {
+      "address": "0x2383fc",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_2383fc",
+      "old_name": "sub_2383FC",
+      "size": 16
+    },
+    {
+      "address": "0x23840c",
+      "category": "tstring_static_cleanup_wrapper",
+      "comment": "Analyst label only. tstring_static_cleanup_wrapper; no preserved ELF source symbol was recovered.",
+      "name": "ida_tstring_static_cleanup_23840c",
+      "old_name": "sub_23840C",
+      "size": 16
+    }
+  ],
+  "saved_copy": {
+    "bytes": 62171344,
+    "close_reopen_verified": false,
+    "path": "analysis/libqplay_translated_from_active_v14.i64",
+    "sha256": "6af4b6630f3688cf2a93128104ece811556fee3b23e2d609f229af9d8e7b2beb"
+  },
+  "schema": "libqplay.ida-descriptive-residual-labels.v1",
+  "tool": "tools/ida_export_descriptive_residual_labels.py"
+}

@@ -37,8 +37,9 @@ This is the short handoff view. The full reasoning and command history are in
 11. The symbol translation pass applied all 8,601 retained ELF names, then
     1,551 reviewed aliases, including 141 exact FreeType 2.3.6 matches, 153
     exact IJG libjpeg 6b matches, one zlib match, and one giflib role match.
-    The current packed copy has 11,296 functions, 124 address-only `sub_`
-    entries, and zero verification failures.
+    The current packed copy has 11,296 named functions, zero default `sub_`
+    entries, and 124 stable descriptive residual labels. Verification has
+    zero failures.
 
 The Android lifecycle review now gives a pre-network checkpoint. The GL thread
 must have a surface and window focus, and the permission callback must set

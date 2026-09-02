@@ -6,8 +6,9 @@ the 277 native role candidates, every exact script-table callback label that
 has a proposed name, 28 application or engine role aliases, 11 CyaSSL role
 aliases, 30 bundled library role aliases, four older persisted function
 reclassifications, and every exact FreeType, IJG libjpeg, and zlib source
-match at its expected address. The expected database totals are also checked
-after the boundary pass.
+match at its expected address, plus the 124 evidence-backed descriptive labels
+for IDA-created residual functions. The expected database totals are also
+checked after the boundary pass.
 """
 
 from __future__ import annotations
@@ -24,6 +25,7 @@ import idautils
 
 REPO = Path("/home/v/Desktop/graal-decomp/libqplay")
 REPORT_PATH = REPO / "artifacts/ida_translation_verification_20260902.json"
+RESIDUAL_LABELS_PATH = REPO / "artifacts/ida_descriptive_residual_labels_20260902.json"
 NATIVE_GROUPS = (
     "callbacks",
     "static_initializers",
@@ -156,9 +158,21 @@ def expected_names() -> list[dict]:
     return rows
 
 
+def expected_residual_labels() -> list[dict]:
+    labels = json.loads(RESIDUAL_LABELS_PATH.read_text(encoding="utf-8"))
+    return [
+        {
+            "source": "ida_descriptive_residual_labels",
+            "va": int(item["address"], 0),
+            "expected_name": item["name"],
+        }
+        for item in labels["rows"]
+    ]
+
+
 def main() -> None:
     ida_auto.auto_wait()
-    rows = expected_names()
+    rows = expected_names() + expected_residual_labels()
     failures = []
     for row in rows:
         actual_ea = ida_name.get_name_ea(ida_idaapi.BADADDR, row["expected_name"])
@@ -189,10 +203,10 @@ def main() -> None:
         "function_count": function_count,
         "default_sub_count": default_sub_count,
         "expected_function_count": 11296,
-        "expected_default_sub_count": 124,
+        "expected_default_sub_count": 0,
         "failures": failures,
         "status": "ok"
-        if not failures and function_count == 11296 and default_sub_count == 124
+        if not failures and function_count == 11296 and default_sub_count == 0
         else "failed",
     }
     function_heads_with_names = sum(
@@ -217,13 +231,14 @@ def main() -> None:
             "exact_libjpeg_source_matches": 153,
             "exact_zlib_source_matches": 1,
             "exact_giflib_source_matches": 1,
+            "descriptive_residual_labels": 124,
             "reviewed_function_names": 1551,
         },
         "database": {
             "source_idb": "GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so.i64",
-            "saved_copy": "analysis/libqplay_translated_from_active_v12.i64",
-            "saved_copy_bytes": 61991120,
-            "saved_copy_sha256": "77ecf848c9ed49b25896fef5b97b090234d380ff79d4591ee4113e00b8416625",
+            "saved_copy": "analysis/libqplay_translated_from_active_v14.i64",
+            "saved_copy_bytes": 62130384,
+            "saved_copy_sha256": "6af4b6630f3688cf2a93128104ece811556fee3b23e2d609f229af9d8e7b2beb",
             "saved_copy_reopen_verified": False,
         },
         "passes": [
@@ -238,6 +253,7 @@ def main() -> None:
             {"name": "exact IJG libjpeg 6b source matches", "renamed": 153, "failures": 0},
             {"name": "exact zlib 1.2.5 source matches", "renamed": 1, "failures": 0},
             {"name": "exact giflib static role matches", "renamed": 1, "failures": 0},
+            {"name": "descriptive residual labels", "renamed": 124, "failures": 0},
         ],
         "verification": {
             **result,
@@ -245,9 +261,9 @@ def main() -> None:
             "verified_reviewed_name_count": len(rows),
         },
         "notes": [
-            "The active ARM64 database was saved as the v12 packed copy after the exact FreeType, IJG libjpeg, zlib, and giflib role pass.",
-            "The v12 copy has not yet been independently closed and reopened; its active database names passed the read-only verifier.",
-            "The 124 remaining entries are IDA-created functions without preserved source names. They remain addressable and were not given speculative source names.",
+            "The active ARM64 database was saved as the v14 packed copy after the exact source-role pass and the 124 descriptive residual labels.",
+            "The v14 copy has not yet been independently closed and reopened; its active database names passed the read-only verifier.",
+            "The 124 descriptive labels identify IDA-created functions without preserved source names and are not presented as speculative upstream names.",
             "The verification and local replay steps contacted no live service.",
         ],
     }

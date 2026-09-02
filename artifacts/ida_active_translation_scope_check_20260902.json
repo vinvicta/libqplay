@@ -4,158 +4,161 @@
   "checks": {
     "android_bridge_range": {
       "default_sub_count": 0,
-      "default_sub_functions": [],
+      "descriptive_residual_count": 0,
       "end_exclusive": "0x247000",
+      "residual_functions": [],
       "start": "0x240000"
     },
     "application_core_range": {
-      "default_sub_count": 23,
-      "default_sub_functions": [
+      "default_sub_count": 0,
+      "descriptive_residual_count": 23,
+      "end_exclusive": "0x247000",
+      "residual_functions": [
         {
           "address": "0x1e006c",
-          "name": "sub_1E006C",
+          "name": "ida_tstring_static_cleanup_1e006c",
           "segment": ".text",
           "size": 12
         },
         {
           "address": "0x1e0e58",
-          "name": "sub_1E0E58",
+          "name": "ida_tstring_static_cleanup_1e0e58",
           "segment": ".text",
           "size": 12
         },
         {
           "address": "0x20adbc",
-          "name": "sub_20ADBC",
+          "name": "ida_tstring_static_cleanup_20adbc",
           "segment": ".text",
           "size": 16
         },
         {
           "address": "0x20fa90",
-          "name": "sub_20FA90",
+          "name": "ida_tgraalvar_static_cleanup_20fa90",
           "segment": ".text",
           "size": 12
         },
         {
           "address": "0x214758",
-          "name": "sub_214758",
+          "name": "ida_tstring_static_cleanup_214758",
           "segment": ".text",
           "size": 12
         },
         {
           "address": "0x214764",
-          "name": "sub_214764",
+          "name": "ida_tstring_static_cleanup_214764",
           "segment": ".text",
           "size": 16
         },
         {
           "address": "0x214774",
-          "name": "sub_214774",
+          "name": "ida_tstring_static_cleanup_214774",
           "segment": ".text",
           "size": 16
         },
         {
           "address": "0x214784",
-          "name": "sub_214784",
+          "name": "ida_tstring_static_cleanup_214784",
           "segment": ".text",
           "size": 16
         },
         {
           "address": "0x224728",
-          "name": "sub_224728",
+          "name": "ida_tstring_static_cleanup_224728",
           "segment": ".text",
           "size": 12
         },
         {
           "address": "0x224734",
-          "name": "sub_224734",
+          "name": "ida_tstring_static_cleanup_224734",
           "segment": ".text",
           "size": 16
         },
         {
           "address": "0x226ccc",
-          "name": "sub_226CCC",
+          "name": "ida_tstring_static_cleanup_226ccc",
           "segment": ".text",
           "size": 12
         },
         {
           "address": "0x226cd8",
-          "name": "sub_226CD8",
+          "name": "ida_tstring_static_cleanup_226cd8",
           "segment": ".text",
           "size": 16
         },
         {
           "address": "0x22b15c",
-          "name": "sub_22B15C",
+          "name": "ida_tstringlist_static_cleanup_22b15c",
           "segment": ".text",
           "size": 16
         },
         {
           "address": "0x22b16c",
-          "name": "sub_22B16C",
+          "name": "ida_tstringlist_static_cleanup_22b16c",
           "segment": ".text",
           "size": 16
         },
         {
           "address": "0x22b1dc",
-          "name": "sub_22B1DC",
+          "name": "ida_tstring_static_cleanup_22b1dc",
           "segment": ".text",
           "size": 12
         },
         {
           "address": "0x22b1e8",
-          "name": "sub_22B1E8",
+          "name": "ida_tstring_static_cleanup_22b1e8",
           "segment": ".text",
           "size": 16
         },
         {
           "address": "0x22d9f0",
-          "name": "sub_22D9F0",
+          "name": "ida_tstring_static_cleanup_22d9f0",
           "segment": ".text",
           "size": 12
         },
         {
           "address": "0x22ec18",
-          "name": "sub_22EC18",
+          "name": "ida_tgraalvar_static_cleanup_22ec18",
           "segment": ".text",
           "size": 16
         },
         {
           "address": "0x2309d0",
-          "name": "sub_2309D0",
+          "name": "ida_tstring_static_cleanup_2309d0",
           "segment": ".text",
           "size": 12
         },
         {
           "address": "0x2343d4",
-          "name": "sub_2343D4",
+          "name": "ida_tstring_static_cleanup_2343d4",
           "segment": ".text",
           "size": 12
         },
         {
           "address": "0x2383f0",
-          "name": "sub_2383F0",
+          "name": "ida_tstring_static_cleanup_2383f0",
           "segment": ".text",
           "size": 12
         },
         {
           "address": "0x2383fc",
-          "name": "sub_2383FC",
+          "name": "ida_tstring_static_cleanup_2383fc",
           "segment": ".text",
           "size": 16
         },
         {
           "address": "0x23840c",
-          "name": "sub_23840C",
+          "name": "ida_tstring_static_cleanup_23840c",
           "segment": ".text",
           "size": 16
         }
       ],
-      "end_exclusive": "0x247000",
       "start": "0x1e0000"
     },
     "direct_boundary_calls": {
       "default_sub_edge_count": 0,
       "edges": [],
+      "residual_edge_count": 0,
       "targets": [
         ".chmod",
         ".connect",
@@ -176,22 +179,24 @@
     },
     "script_table_callbacks": {
       "default_sub_count": 0,
-      "default_sub_functions": [],
+      "descriptive_residual_count": 0,
+      "residual_functions": [],
       "unique_callback_count": 1779
     }
   },
   "database": {
-    "default_sub_count": 124,
+    "default_sub_count": 0,
+    "descriptive_residual_count": 124,
     "function_count": 11296,
     "input_path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
   },
   "interpretation": [
-    "The 124 remaining default sub_ functions are outside the Android bridge callback region.",
-    "The 23 default functions in the broader application-core range are short static-state or cleanup wrappers; their decompiled bodies do not contain the selected socket, file, process, or update boundary calls.",
-    "Every address in the 1779-entry script callback inventory has a non-default active IDA name, including the callbacks reviewed in the focused Android passes."
+    "All 124 residual functions have stable descriptive labels; none remains a default sub_ name.",
+    "The 23 residual functions in the broader application-core range are short static-state or cleanup wrappers; their decompiled bodies do not contain the selected socket, file, process, or update boundary calls.",
+    "Every address in the 1779-entry script callback inventory has a non-residual active IDA name, including the callbacks reviewed in the focused Android passes."
   ],
   "network_contacted": false,
-  "schema": "libqplay.ida-active-translation-scope-check.v1",
+  "schema": "libqplay.ida-active-translation-scope-check.v2",
   "status": "ok",
   "tool": "tools/ida_export_active_translation_scope_check.py"
 }

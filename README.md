@@ -22,21 +22,24 @@ static-library, and exact embedded-library source aliases. The counts are:
 | Retained ELF symbols translated | 8,601 |
 | Additional reviewed function aliases | 1,551 |
 | IDA functions in the saved copy | 11,296 |
-| Remaining default `sub_` functions | 124 |
+| Residual functions with descriptive IDA labels | 124 |
 
 The retained ELF count includes 4,714 implementation functions, 3,183 PLT
-thunks, 199 jump thunks, and 505 data symbols. The 124 remaining `sub_`
-entries are code that IDA discovered without a preserved source symbol. They
-are kept address-based rather than being assigned guesses. The exact source
-role pass covers 141 FreeType 2.3.6 functions, 153 IJG libjpeg 6b functions,
-one zlib 1.2.5 function, and one static giflib GIF decoder helper. The compact
-verification record is `artifacts/ida_translation_verification_20260902.json`.
+thunks, 199 jump thunks, and 505 data symbols. The 124 residual entries are
+code that IDA discovered without a preserved source symbol. They now have
+stable address-based analyst labels, with their original `sub_` names and
+roles preserved in `artifacts/ida_descriptive_residual_labels_20260902.json`.
+The exact source role pass covers 141 FreeType 2.3.6 functions, 153 IJG
+libjpeg 6b functions, one zlib 1.2.5 function, and one static giflib GIF
+decoder helper. The compact verification record is
+`artifacts/ida_translation_verification_20260902.json`.
 
-The active-IDB scope check found zero default names in the Android bridge
-range, zero among the 1,779 unique script callback addresses, and zero direct
-calls from a remaining default function into the selected socket, file,
-process, or update imports. The broader application-core range contains 23
-short static-state or cleanup wrappers, which are documented without invented
+The active-IDB scope check found zero default names after the residual label
+pass, zero residual functions in the Android bridge range, zero among the
+1,779 unique script callback addresses, and zero direct calls from a residual
+function into the selected socket, file, process, or update imports. The
+broader application-core range contains 23 short static-state or cleanup
+wrappers, which are documented with descriptive labels without inventing
 source names. The check is preserved in
 `artifacts/ida_active_translation_scope_check_20260902.json`.
 
@@ -290,6 +293,8 @@ The compact record is
   Natives class access flags and direct Java bytecode callsites.
 * `artifacts/ida_translation_verification_20260902.json` records the final
   packed IDA copy, pass counts, hashes, and zero-failure verification result.
+* `artifacts/ida_descriptive_residual_labels_20260902.json` records the 124
+  evidence-backed labels applied to functions that had no preserved ELF name.
 * `artifacts/ida_final_residual_audit_20260902.json` records the current
   compact address-level residual audit.
 * `artifacts/ida_active_translation_scope_check_20260902.json` records the

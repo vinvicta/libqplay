@@ -11,10 +11,11 @@ The original active database started with 11,272 functions and 1,645 default
 `sub_` names. The complete reviewed pass added 25 function boundaries and
 1,551 names or aliases. One false boundary was then removed from a literal
 pool between two JPEG DCT routines. The current packed copy at
-`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v12.i64`
-contains 11,296 functions and 124 default names. The active IDA verifier
-returned zero failures after the expanded embedded-library source-role pass.
-A separate reopen of this current copy is still pending.
+`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v14.i64`
+contains 11,296 functions, all with non-default names. The active IDA
+verifier returned zero failures after the expanded embedded-library source-role
+pass and the 124 descriptive residual labels. A separate reopen of this
+current copy is still pending.
 
 The count is accounted for exactly:
 
@@ -26,7 +27,7 @@ The count is accounted for exactly:
    and one compiler branch veneer
 -149 source matches intersecting the old residual profile
 -  1 false function boundary removed from a literal pool
-=124 residual default entries
+=124 residual entries, now carrying descriptive IDA labels
 ```
 
 The 28 application and engine role aliases are behavior-based names, not
@@ -67,8 +68,10 @@ address bucket. Their evidence is recorded in
 
 The checked-in function inventory and script-table inventory were regenerated
 from the current saved IDA state. They now report 11,296 functions and 1,779
-unique script callback addresses, with no default `sub_` name in the callback
-set. The overlay and unresolved-function profile retain the earlier
+unique script callback addresses, with no residual name in the callback set.
+The 124 residual labels are recorded separately in
+`artifacts/ida_descriptive_residual_labels_20260902.json`. The overlay and
+unresolved-function profile retain the earlier
 pre-persistence snapshot because the residual calculation uses that snapshot
 as its input. Their 11,272-function and 1,645-default-name counts are
 historical inputs, not a description of the final database.
@@ -82,11 +85,13 @@ debug symbols survived.
 
 The current residual set is recorded in
 `artifacts/ida_final_residual_audit_20260902.json`. It contains one compact
-record per remaining default `sub_` function, including its address, size,
+record per residual function, including its address, size,
 segment, and incoming xref count. It also records the 11,296-row inventory
 hash, the original ARM64 library hash, address buckets, and the most
 referenced residual entries. The report contains 124 residual functions and
-does not publish another full inventory. When the checked-in residual profile
+does not publish another full inventory. The current IDA labels for those
+functions are in `artifacts/ida_descriptive_residual_labels_20260902.json`.
+When the checked-in residual profile
 matches the input addresses, the report also embeds its category counts and
 profile hash.
 
@@ -100,6 +105,12 @@ python3 tools/generate_final_residual_audit.py \
 The input path is local to the analysis workstation. The report's SHA-256
 fields make it possible to verify that a future export describes the same
 library and inventory.
+
+The descriptive labels can be applied in IDA with
+`tools/ida_apply_descriptive_residual_labels.py`. The script checks the input
+library hash, accepts either the original `sub_` names or labels already
+present, and writes only the evidence-backed names and comments. The read-only
+exporter is `tools/ida_export_descriptive_residual_labels.py`.
 
 The final packed-database verification is recorded separately in
 `artifacts/ida_translation_verification_20260902.json`. It includes the
@@ -138,5 +149,5 @@ check counts without loading the full records. The IDA scripts in `tools/`
 apply names only after checking the input library hash.
 
 The current residual queue is therefore useful rather than a defect. It
-separates confirmed names from hypotheses and leaves the original bytes
-unchanged for future re-analysis.
+separates confirmed source names from descriptive analyst labels and leaves
+the original bytes unchanged for future re-analysis.

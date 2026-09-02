@@ -29,11 +29,11 @@ with explicit fields.
 The active ARM64 database was then processed by the reviewed callback,
 script-table, application-role, CyaSSL, bundled-library, and exact embedded
 source-role passes. The current packed copy was saved as
-`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v12.i64`.
+`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v14.i64`.
 The active IDA verifier reports 11,296 functions, 11,296 named function heads,
-124 remaining default `sub_` entries, and zero failures after the expanded
-source-role pass. A separate close and reopen of that exact copy is still
-pending.
+zero remaining default `sub_` entries, and zero failures after the expanded
+source-role pass. The 124 residual functions carry stable descriptive labels;
+a separate close and reopen of that exact copy is still pending.
 
 The 1,551 reviewed aliases are made up of 277 native callback candidates, 906
 exact script-table callbacks, 28 application or engine role aliases, 11
@@ -43,15 +43,17 @@ zlib 1.2.5 match, and one exact giflib role match. The
 machine-readable record is
 `artifacts/ida_translation_verification_20260902.json`.
 
-The remaining 124 default names are not an unfinished application boundary.
-The active-IDB scope check found no default name in the Android bridge range,
-no default name among the 1,779 unique script callback addresses, and no
-direct call from a remaining default function to the selected socket, file,
-process, or update imports. The 23 entries in the broader application-core
-range are short static-state or cleanup wrappers around existing library objects. Their
-addresses remain available in
-`artifacts/ida_active_translation_scope_check_20260902.json` without guessed
-source names. The 141 exact FreeType and TrueType matches are listed in
+The remaining 124 functions are not an unfinished application boundary. They
+are IDA-created code without preserved source names, now labeled with their
+evidence-backed role and address. The active-IDB scope check found no default
+name or residual label in the Android bridge range, no residual label among
+the 1,779 unique script callback addresses, and no direct call from a
+residual function to the selected socket, file, process, or update imports.
+The 23 entries in the broader application-core range are short static-state or
+cleanup wrappers around existing library objects. Their labels are recorded in
+`artifacts/ida_descriptive_residual_labels_20260902.json`, and the scope
+check is in `artifacts/ida_active_translation_scope_check_20260902.json`. The
+141 exact FreeType and TrueType matches are listed in
 `artifacts/ida_freetype_source_matches_20260901.json`, with the pinned source
 tag, commit, source file, and line anchor for each routine. The current IJG,
 zlib, and giflib role records are in
