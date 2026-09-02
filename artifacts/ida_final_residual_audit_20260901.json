@@ -25,8 +25,6 @@
       "0x210000-0x21ffff": 4,
       "0x220000-0x22ffff": 10,
       "0x230000-0x23ffff": 5,
-      "0x250000-0x25ffff": 1,
-      "0x270000-0x27ffff": 3,
       "0x280000-0x28ffff": 25,
       "0x290000-0x29ffff": 77,
       "0x2a0000-0x2affff": 47,
@@ -34,16 +32,16 @@
       "0xe0000-0xeffff": 32,
       "0xf0000-0xfffff": 13
     },
-    "default_sub_functions": 278,
+    "default_sub_functions": 274,
     "elf_symbol_backed_functions": 8096,
-    "named_non_elf_functions": 2923,
+    "named_non_elf_functions": 2927,
     "path": "/home/v/Desktop/graal-decomp/analysis/libqplay.function_inventory.json",
     "row_count": 11297,
     "segment_counts": {
       ".plt": 1,
-      ".text": 277
+      ".text": 273
     },
-    "sha256": "300c97d07dff860976001a8fcf1e777f0f65a30fee72cf581782cfa61bad273b"
+    "sha256": "acbb76e492e684023c2fc761b7634d96ba58fafe32fae8ae096fce5cd78f869f"
   },
   "most_referenced_residuals": [
     {
@@ -75,12 +73,6 @@
       "name": "sub_2989A0",
       "size": 1264,
       "xrefs_to": 4
-    },
-    {
-      "ea": "0x27336c",
-      "name": "sub_27336C",
-      "size": 2220,
-      "xrefs_to": 3
     },
     {
       "ea": "0x28d2ec",
@@ -122,18 +114,6 @@
       "ea": "0xe2b0c",
       "name": "sub_E2B0C",
       "size": 16,
-      "xrefs_to": 2
-    },
-    {
-      "ea": "0x273350",
-      "name": "sub_273350",
-      "size": 16,
-      "xrefs_to": 2
-    },
-    {
-      "ea": "0x273360",
-      "name": "sub_273360",
-      "size": 12,
       "xrefs_to": 2
     },
     {
@@ -285,19 +265,29 @@
       "name": "sub_2938B0",
       "size": 540,
       "xrefs_to": 2
+    },
+    {
+      "ea": "0x293acc",
+      "name": "sub_293ACC",
+      "size": 540,
+      "xrefs_to": 2
+    },
+    {
+      "ea": "0x293ce8",
+      "name": "sub_293CE8",
+      "size": 360,
+      "xrefs_to": 2
+    },
+    {
+      "ea": "0x293e50",
+      "name": "sub_293E50",
+      "size": 896,
+      "xrefs_to": 2
     }
   ],
   "network_contacted": false,
   "residual_classification": {
     "categories": [
-      {
-        "category": "freetype_static_internal",
-        "count": 4,
-        "evidence": "The region is bracketed by the archive I/O helpers and the FreeType to bzip2 transition.",
-        "first_ea": "0x254b98",
-        "last_ea": "0x27336c",
-        "total_bytes": 2280
-      },
       {
         "category": "init_or_fini_array_entry",
         "count": 19,
@@ -348,7 +338,7 @@
       }
     ],
     "profile_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/ida_residual_profile.json",
-    "profile_sha256": "bf067752b4ee9f0c08aa58bac27a13c77fcf8e6b464c77c1128283df083f1ed5"
+    "profile_sha256": "66026b57f19c92b1dfb10d4fef9bdcbfcb37693e1d314db29b75b21f04387655"
   },
   "residual_functions": [
     {
@@ -1225,34 +1215,6 @@
       "segment": ".text",
       "size": 16,
       "xrefs_to": 1
-    },
-    {
-      "ea": "0x254b98",
-      "end_ea": "0x254bb8",
-      "segment": ".text",
-      "size": 32,
-      "xrefs_to": 1
-    },
-    {
-      "ea": "0x273350",
-      "end_ea": "0x273360",
-      "segment": ".text",
-      "size": 16,
-      "xrefs_to": 2
-    },
-    {
-      "ea": "0x273360",
-      "end_ea": "0x27336c",
-      "segment": ".text",
-      "size": 12,
-      "xrefs_to": 2
-    },
-    {
-      "ea": "0x27336c",
-      "end_ea": "0x273c18",
-      "segment": ".text",
-      "size": 2220,
-      "xrefs_to": 3
     },
     {
       "ea": "0x28a2f4",

@@ -1,0 +1,814 @@
+{
+  "alias_count": 30,
+  "aliases": [
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_27FD34",
+      "evidence": [
+        "The body hashes the lookahead, searches previous matches, emits the chosen match or literal, and flushes a block.",
+        "Its control flow matches zlib deflate_fast, including the short-match and end-of-input paths.",
+        "The function calls the translated zlib block-flush helper at 0x288e5c."
+      ],
+      "family": "zlib",
+      "original_profile_category": "zlib_static_internal",
+      "proposed_name": "zlib_deflate_fast",
+      "role": "Fast deflate compressor using a hash-chain match search.",
+      "segment": ".text",
+      "size": 2484,
+      "source_match": "exact-source-role",
+      "source_name": "deflate_fast",
+      "source_references": [
+        "https://github.com/madler/zlib/blob/develop/deflate.c",
+        "https://github.com/madler/zlib/blob/develop/trees.c"
+      ],
+      "va": "0x27fd34",
+      "xrefs_to": []
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_2806E8",
+      "evidence": [
+        "The body computes block boundaries, copies raw input to the pending output buffer, and flushes stored blocks.",
+        "It has the direct-block behavior and end-of-stream handling of zlib deflate_stored.",
+        "The function calls the translated zlib block-flush helper at 0x288e5c."
+      ],
+      "family": "zlib",
+      "original_profile_category": "zlib_static_internal",
+      "proposed_name": "zlib_deflate_stored",
+      "role": "Stored-block deflate path that copies input without matching.",
+      "segment": ".text",
+      "size": 1672,
+      "source_match": "exact-source-role",
+      "source_name": "deflate_stored",
+      "source_references": [
+        "https://github.com/madler/zlib/blob/develop/deflate.c",
+        "https://github.com/madler/zlib/blob/develop/trees.c"
+      ],
+      "va": "0x2806e8",
+      "xrefs_to": []
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_280D70",
+      "evidence": [
+        "The body carries prev_length, prev_match, and match_available state across lookahead iterations.",
+        "It chooses between the previous match, the current match, and a literal, which is the defining lazy-match behavior.",
+        "The function calls the translated zlib block-flush helper at 0x288e5c."
+      ],
+      "family": "zlib",
+      "original_profile_category": "zlib_static_internal",
+      "proposed_name": "zlib_deflate_slow",
+      "role": "Lazy-match deflate compressor using the previous match state.",
+      "segment": ".text",
+      "size": 2856,
+      "source_match": "exact-source-role",
+      "source_name": "deflate_slow",
+      "source_references": [
+        "https://github.com/madler/zlib/blob/develop/deflate.c",
+        "https://github.com/madler/zlib/blob/develop/trees.c"
+      ],
+      "va": "0x280d70",
+      "xrefs_to": []
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_286A30",
+      "evidence": [
+        "The body counts code lengths, builds canonical offsets, handles incomplete trees, and writes decode-table entries.",
+        "inflate calls it three times for the literal, length, and distance code tables at 0x285dd4.",
+        "The table-building algorithm matches zlib inftrees.c inflate_table."
+      ],
+      "family": "zlib",
+      "original_profile_category": "zlib_static_internal",
+      "proposed_name": "zlib_inflate_table",
+      "role": "Canonical Huffman decode-table builder used by inflate.",
+      "segment": ".text",
+      "size": 2680,
+      "source_match": "exact-source-role",
+      "source_name": "inflate_table",
+      "source_references": [
+        "https://github.com/madler/zlib/blob/develop/inftrees.c"
+      ],
+      "va": "0x286a30",
+      "xrefs_to": [
+        "0x285dd4"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_2874A8",
+      "evidence": [
+        "The body walks code lengths, groups repeated values, and emits the zlib bit patterns for tree-length runs.",
+        "The translated block flush routine calls it for the literal and distance trees at 0x2895a0."
+      ],
+      "family": "zlib",
+      "original_profile_category": "zlib_static_internal",
+      "proposed_name": "zlib_send_tree",
+      "role": "Encoder for a dynamic Huffman tree with repeat codes.",
+      "segment": ".text",
+      "size": 1440,
+      "source_match": "exact-source-role",
+      "source_name": "send_tree",
+      "source_references": [
+        "https://github.com/madler/zlib/blob/develop/trees.c"
+      ],
+      "va": "0x2874a8",
+      "xrefs_to": [
+        "0x2895a0"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_287A48",
+      "evidence": [
+        "The body reads the pending symbol buffer, emits literal or match codes, and writes the associated extra bits.",
+        "The translated block flush routine calls it with both dynamic and static trees at 0x2895c0."
+      ],
+      "family": "zlib",
+      "original_profile_category": "zlib_static_internal",
+      "proposed_name": "zlib_compress_block",
+      "role": "Emitter for literal and length symbols plus distance symbols.",
+      "segment": ".text",
+      "size": 1124,
+      "source_match": "exact-source-role",
+      "source_name": "compress_block",
+      "source_references": [
+        "https://github.com/madler/zlib/blob/develop/trees.c"
+      ],
+      "va": "0x287a48",
+      "xrefs_to": [
+        "0x2895c0"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_287EAC",
+      "evidence": [
+        "The body consumes a tree descriptor, builds the frequency heap, combines nodes, and generates bit lengths.",
+        "The translated block flush routine calls it for the literal, distance, and bit-length descriptors at 0x288ea8."
+      ],
+      "family": "zlib",
+      "original_profile_category": "zlib_static_internal",
+      "proposed_name": "zlib_build_tree",
+      "role": "Huffman tree builder that fills the heap and computes code lengths.",
+      "segment": ".text",
+      "size": 2652,
+      "source_match": "exact-source-role",
+      "source_name": "build_tree",
+      "source_references": [
+        "https://github.com/madler/zlib/blob/develop/trees.c"
+      ],
+      "va": "0x287eac",
+      "xrefs_to": [
+        "0x288ea8"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_288908",
+      "evidence": [
+        "The body installs the literal, distance, and bit-length tree descriptors, clears the bit state, and zeroes the three frequency arrays.",
+        "It sets the end-of-block frequency and the match counters exactly as zlib's _tr_init and init_block path require.",
+        "deflateReset calls it at 0x281a50. The zlib_ prefix is an analysis-family prefix, not part of the source name."
+      ],
+      "family": "zlib",
+      "original_profile_category": "zlib_static_internal",
+      "proposed_name": "zlib_tr_init",
+      "role": "Initializes zlib's tree descriptors, bit buffer, and first block.",
+      "segment": ".text",
+      "size": 144,
+      "source_match": "exact-source-role-with-prefix",
+      "source_name": "_tr_init",
+      "source_references": [
+        "https://github.com/madler/zlib/blob/develop/trees.c"
+      ],
+      "va": "0x288908",
+      "xrefs_to": [
+        "0x281a50"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_288998",
+      "evidence": [
+        "The body emits the final and stored-block bits, writes the length and one's complement, then copies the raw block bytes.",
+        "The deflate function uses it for the empty stored block path at 0x282094."
+      ],
+      "family": "zlib",
+      "original_profile_category": "zlib_static_internal",
+      "proposed_name": "zlib_tr_stored_block",
+      "role": "Writes a stored deflate block header, length, complement, and payload.",
+      "segment": ".text",
+      "size": 400,
+      "source_match": "exact-source-role-with-prefix",
+      "source_name": "_tr_stored_block",
+      "source_references": [
+        "https://github.com/madler/zlib/blob/develop/trees.c"
+      ],
+      "va": "0x288998",
+      "xrefs_to": [
+        "0x282094"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_288B28",
+      "evidence": [
+        "The body writes the static empty-block code and pads the bit buffer to a byte boundary.",
+        "The deflate function calls it at 0x2836f8 on the block-alignment path."
+      ],
+      "family": "zlib",
+      "original_profile_category": "zlib_static_internal",
+      "proposed_name": "zlib_tr_align",
+      "role": "Aligns a deflate stream with an empty static block.",
+      "segment": ".text",
+      "size": 820,
+      "source_match": "exact-source-role-with-prefix",
+      "source_name": "_tr_align",
+      "source_references": [
+        "https://github.com/madler/zlib/blob/develop/trees.c"
+      ],
+      "va": "0x288b28",
+      "xrefs_to": [
+        "0x2836f8"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_288E5C",
+      "evidence": [
+        "The body builds the three dynamic trees, compares stored and compressed costs, emits tree descriptions, and copies the symbol buffer.",
+        "All three deflate strategies call it, and its internal calls to build_tree, send_tree, and compress_block match zlib trees.c."
+      ],
+      "family": "zlib",
+      "original_profile_category": "zlib_static_internal",
+      "proposed_name": "zlib_tr_flush_block",
+      "role": "Selects and emits stored, static-Huffman, or dynamic-Huffman blocks.",
+      "segment": ".text",
+      "size": 2896,
+      "source_match": "exact-source-role-with-prefix",
+      "source_name": "_tr_flush_block",
+      "source_references": [
+        "https://github.com/madler/zlib/blob/develop/trees.c"
+      ],
+      "va": "0x288e5c",
+      "xrefs_to": [
+        "0x27ff30",
+        "0x28077c",
+        "0x280fa4",
+        "0x281ea0"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_2899AC",
+      "evidence": [
+        "The body writes the distance and length or literal into the pending symbol buffer, increments the corresponding tree frequencies, and reports when the buffer is full.",
+        "This is the exact behavior of the zlib _tr_tally helper, which is often exposed as a small standalone compiler function even when the source uses a macro-like call site."
+      ],
+      "family": "zlib",
+      "original_profile_category": "zlib_static_internal",
+      "proposed_name": "zlib_tr_tally",
+      "role": "Records a literal or match and updates the Huffman frequencies.",
+      "segment": ".text",
+      "size": 196,
+      "source_match": "exact-source-role-with-prefix",
+      "source_name": "_tr_tally",
+      "source_references": [
+        "https://github.com/madler/zlib/blob/develop/trees.c"
+      ],
+      "va": "0x2899ac",
+      "xrefs_to": []
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_289B80",
+      "evidence": [
+        "The body returns malloc(items * size) with the zlib allocator callback signature.",
+        "deflateInit2_ and inflateInit2_ install it in their stream allocator slots at 0x283cac and 0x2840dc."
+      ],
+      "family": "zlib",
+      "original_profile_category": "zlib_static_internal",
+      "proposed_name": "zlib_zcalloc",
+      "role": "Default zlib allocation callback implemented with malloc.",
+      "segment": ".text",
+      "size": 8,
+      "source_match": "exact-source-role-with-prefix",
+      "source_name": "zcalloc",
+      "source_references": [
+        "https://github.com/madler/zlib/blob/develop/zutil.c"
+      ],
+      "va": "0x289b80",
+      "xrefs_to": [
+        "0x283cac",
+        "0x2840dc"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_289B88",
+      "evidence": [
+        "The body ignores the opaque allocator context and calls free on the supplied pointer.",
+        "deflateInit2_ and inflateInit2_ install it in their stream allocator slots at 0x283c9c and 0x2840cc."
+      ],
+      "family": "zlib",
+      "original_profile_category": "zlib_static_internal",
+      "proposed_name": "zlib_zcfree",
+      "role": "Default zlib release callback implemented with free.",
+      "segment": ".text",
+      "size": 8,
+      "source_match": "exact-source-role-with-prefix",
+      "source_name": "zcfree",
+      "source_references": [
+        "https://github.com/madler/zlib/blob/develop/zutil.c"
+      ],
+      "va": "0x289b88",
+      "xrefs_to": [
+        "0x283c9c",
+        "0x2840cc"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_E02AC",
+      "evidence": [
+        "The body compares eight unrolled block bytes and quadrant values, wraps at nblock, decrements the sort budget, and returns the ordering result.",
+        "mainSort calls it three times from 0x27ebb8, and the six arguments match the historical mainGtU signature."
+      ],
+      "family": "bzip2",
+      "original_profile_category": "bzip2_static_internal",
+      "proposed_name": "bzip2_mainGtU",
+      "role": "Suffix comparator used by bzip2's main sorting algorithm.",
+      "segment": ".text",
+      "size": 424,
+      "source_match": "exact-source-role",
+      "source_name": "mainGtU",
+      "source_references": [
+        "https://sources.debian.org/src/bzip2/1.0.5-1%2Blenny1/blocksort.c/"
+      ],
+      "va": "0xe02ac",
+      "xrefs_to": [
+        "0x27ebb8"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_2751C0",
+      "evidence": [
+        "The large body selects coding groups, computes selector values, builds canonical codes, and emits the MTF stream with the bzip2 bit writer.",
+        "BZ2_compressBlock_EState_uchar calls it at 0x27962c after writing the block header and original pointer."
+      ],
+      "family": "bzip2",
+      "original_profile_category": "bzip2_static_internal",
+      "proposed_name": "bzip2_sendMTFValues",
+      "role": "Builds and emits bzip2's move-to-front Huffman coding tables.",
+      "segment": ".text",
+      "size": 15216,
+      "source_match": "exact-source-role",
+      "source_name": "sendMTFValues",
+      "source_references": [
+        "https://github.com/libarchive/bzip2/blob/master/compress.c"
+      ],
+      "va": "0x2751c0",
+      "xrefs_to": [
+        "0x27962c"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_27D6F0",
+      "evidence": [
+        "The body creates the 256-entry frequency table, performs the initial radix placement, builds bucket-head bits, and refines buckets by doubling depth.",
+        "BZ2_blockSort_EState calls it at 0x27f6e8. The verbosity argument is optimized out, leaving four register arguments in this build."
+      ],
+      "family": "bzip2",
+      "original_profile_category": "bzip2_static_internal",
+      "proposed_name": "bzip2_fallbackSort",
+      "role": "Fallback suffix sort for highly repetitive bzip2 blocks.",
+      "segment": ".text",
+      "size": 2548,
+      "source_match": "exact-source-role",
+      "source_name": "fallbackSort",
+      "source_references": [
+        "https://sources.debian.org/src/bzip2/1.0.5-1%2Blenny1/blocksort.c/"
+      ],
+      "va": "0x27d6f0",
+      "xrefs_to": [
+        "0x27f6e8"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_27E0E4",
+      "evidence": [
+        "The body initializes the two-byte frequency table, tracks bigDone buckets, performs quadrant updates, and invokes the translated mainGtU comparator.",
+        "BZ2_blockSort_EState calls it at 0x27f660. The verbosity argument is optimized out, so the binary exposes six register arguments."
+      ],
+      "family": "bzip2",
+      "original_profile_category": "bzip2_static_internal",
+      "proposed_name": "bzip2_mainSort",
+      "role": "Primary bzip2 suffix sort with running-order and quadrant refinement.",
+      "segment": ".text",
+      "size": 5336,
+      "source_match": "exact-source-role",
+      "source_name": "mainSort",
+      "source_references": [
+        "https://sources.debian.org/src/bzip2/1.0.5-1%2Blenny1/blocksort.c/"
+      ],
+      "va": "0x27e0e4",
+      "xrefs_to": [
+        "0x27f660"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_273350",
+      "evidence": [
+        "The callback accepts the bzip2 opaque context and address shape, ignores the context, checks for a non-null address, and calls free.",
+        "BZ2_bzCompressInit and BZ2_bzDecompressInit install this function in the bz_stream bzfree slot when the caller supplies no release callback.",
+        "The body matches the default_bzfree helper in bzip2/libbzip2 bzlib.c at source line 109."
+      ],
+      "family": "bzip2",
+      "original_profile_category": "freetype_static_internal",
+      "proposed_name": "default_bzfree",
+      "role": "Default bzip2 allocator release callback.",
+      "segment": ".text",
+      "size": 16,
+      "source_match": "exact-source-role",
+      "source_name": "default_bzfree",
+      "source_references": [
+        "https://github.com/libarchive/bzip2/blob/master/bzlib.c"
+      ],
+      "va": "0x273350",
+      "xrefs_to": [
+        "0x273e74",
+        "0x2741ec"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_273360",
+      "evidence": [
+        "The callback accepts the bzip2 opaque context, item count, and item size, ignores the context, and returns malloc(items * size).",
+        "BZ2_bzCompressInit and BZ2_bzDecompressInit install this function in the bz_stream bzalloc slot when the caller supplies no allocator callback.",
+        "The body matches the default_bzalloc helper in bzip2/libbzip2 bzlib.c at source line 102."
+      ],
+      "family": "bzip2",
+      "original_profile_category": "freetype_static_internal",
+      "proposed_name": "default_bzalloc",
+      "role": "Default bzip2 allocator callback.",
+      "segment": ".text",
+      "size": 12,
+      "source_match": "exact-source-role",
+      "source_name": "default_bzalloc",
+      "source_references": [
+        "https://github.com/libarchive/bzip2/blob/master/bzlib.c"
+      ],
+      "va": "0x273360",
+      "xrefs_to": [
+        "0x273e84",
+        "0x2741d8"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_27336C",
+      "evidence": [
+        "The body consumes the bz_stream input and output windows, performs the run-length input staging, updates block CRC state, and transitions between input and output modes.",
+        "It invokes the translated BZ2_compressBlock helper and is called by BZ2_bzCompress for running, flushing, and finishing actions.",
+        "The state machine matches the handle_compress helper in bzip2/libbzip2 bzlib.c at source line 361."
+      ],
+      "family": "bzip2",
+      "original_profile_category": "freetype_static_internal",
+      "proposed_name": "handle_compress",
+      "role": "bzip2 streaming compression state machine.",
+      "segment": ".text",
+      "size": 2220,
+      "source_match": "exact-source-role",
+      "source_name": "handle_compress",
+      "source_references": [
+        "https://github.com/libarchive/bzip2/blob/master/bzlib.c"
+      ],
+      "va": "0x27336c",
+      "xrefs_to": [
+        "0x273f60",
+        "0x273fdc",
+        "0x274068"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_24840C",
+      "evidence": [
+        "The body checks the central-directory signature, parses version, flags, method, CRC, sizes, attributes, and ZIP64 extra fields, then copies optional buffers.",
+        "unzGetCurrentFileInfo, unzGoToFirstFile, unzGoToNextFile, unzGoToFilePos, and unzSetOffset call it through the wrapper at 0x24a57c and the direct sites listed in xrefs.",
+        "The nine-argument shape matches the current minizip internal helper, including the private 64-bit info output."
+      ],
+      "family": "minizip",
+      "original_profile_category": "minizip_static_internal",
+      "proposed_name": "minizip_unz64local_GetCurrentFileInfoInternal",
+      "role": "Reads the current ZIP central-directory entry and optional name, extra field, and comment.",
+      "segment": ".text",
+      "size": 4468,
+      "source_match": "exact-source-role",
+      "source_name": "unz64local_GetCurrentFileInfoInternal",
+      "source_references": [
+        "https://github.com/madler/zlib/blob/develop/contrib/minizip/unzip.c"
+      ],
+      "va": "0x24840c",
+      "xrefs_to": [
+        "0x24a5b4",
+        "0x24a600",
+        "0x24af7c",
+        "0x24b150",
+        "0x24bbfc"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_249580",
+      "evidence": [
+        "The body resets the output sizes, verifies the local-header signature, reads method, flags, CRC, compressed and uncompressed sizes, and computes the local extra-field offset.",
+        "unzOpenCurrentFile3 calls it at 0x24b74c before allocating the per-file read state."
+      ],
+      "family": "minizip",
+      "original_profile_category": "minizip_static_internal",
+      "proposed_name": "minizip_unz64local_CheckCurrentFileCoherencyHeader",
+      "role": "Checks the current ZIP local header against the central-directory entry.",
+      "segment": ".text",
+      "size": 3920,
+      "source_match": "exact-source-role",
+      "source_name": "unz64local_CheckCurrentFileCoherencyHeader",
+      "source_references": [
+        "https://github.com/madler/zlib/blob/develop/contrib/minizip/unzip.c"
+      ],
+      "va": "0x249580",
+      "xrefs_to": [
+        "0x24b74c"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_152B0C",
+      "evidence": [
+        "The seven arguments match the historical build_lmt inputs for the local-minimum table, scanbeam tree, polygon, operation, and contour type.",
+        "The body counts optimal vertices, allocates the edge table, inserts scanbeam values, builds forward and reverse bounds, and emits the exact edge-table, scanbeam, and LMT allocation failure strings.",
+        "gpc_tristrip_clip calls it twice at 0x1537c0 for the two input polygons."
+      ],
+      "family": "gpc",
+      "original_profile_category": "gpc_static_internal",
+      "proposed_name": "gpc_build_lmt",
+      "role": "General Polygon Clipper edge-table and local-minimum-table builder.",
+      "segment": ".text",
+      "size": 2404,
+      "source_match": "exact-source-role",
+      "source_name": "build_lmt",
+      "source_references": [
+        "https://github.com/rickbrew/GeneralPolygonClipper/blob/main/gpc.c"
+      ],
+      "va": "0x152b0c",
+      "xrefs_to": [
+        "0x1537c0"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_2B3BE8",
+      "evidence": [
+        "The body handles short and long-form DER lengths, advances the caller offset, writes the decoded length, and returns the historical negative parse error on bounds failure.",
+        "CyaInt_ParseCertRelative calls it twice at 0x2b7360 while walking certificate fields.",
+        "The function is immediately before CyaSSL RSA decode code, so the old profile's YAJL family classification was a boundary mistake."
+      ],
+      "family": "cyassl",
+      "original_profile_category": "yajl_static_internal",
+      "proposed_name": "CyaInt_GetLength",
+      "role": "DER length decoder used by the CyaSSL certificate parser.",
+      "segment": ".text",
+      "size": 124,
+      "source_match": "exact-source-role",
+      "source_name": "GetLength",
+      "source_references": [
+        "https://nest-open-source.googlesource.com/nest-yale-lock/1.2/freertos/%2B/b9a7305351d35e2d3076d0b4ab3ec121f0aa8d52/FreeRTOS-Plus/Source/CyaSSL/ctaocrypt/src/asn.c"
+      ],
+      "va": "0x2b3be8",
+      "xrefs_to": [
+        "0x2b7360"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_2B3C64",
+      "evidence": [
+        "The body walks the DER subject sequence, hashes the signed subject bytes, recognizes common OIDs, and formats CN, emailAddress, UID, SN, C, L, ST, and OU fields.",
+        "CyaInt_DecodeToKey calls it for both subject and issuer names at 0x2b58e8.",
+        "The function is the CyaSSL ASN helper named GetName in the historical source, not a YAJL string routine."
+      ],
+      "family": "cyassl",
+      "original_profile_category": "yajl_static_internal",
+      "proposed_name": "CyaInt_GetName",
+      "role": "Certificate subject-name parser that formats distinguished-name fields.",
+      "segment": ".text",
+      "size": 1820,
+      "source_match": "exact-source-role",
+      "source_name": "GetName",
+      "source_references": [
+        "https://nest-open-source.googlesource.com/nest-yale-lock/1.2/freertos/%2B/b9a7305351d35e2d3076d0b4ab3ec121f0aa8d52/FreeRTOS-Plus/Source/CyaSSL/ctaocrypt/src/asn.c"
+      ],
+      "va": "0x2b3c64",
+      "xrefs_to": [
+        "0x2b58e8"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_246B50",
+      "evidence": [
+        "The body performs the initial and final bit permutations, sixteen DES rounds, and the eight S-box lookups per round.",
+        "des_ecb_encrypt, des_ecb_decrypt, des3_ecb_encrypt, and des3_ecb_decrypt call it with their respective key schedules.",
+        "The source name is desfunc; the LibTomCrypt prefix keeps the alias distinct from any future generic DES helper."
+      ],
+      "family": "tomcrypt",
+      "original_profile_category": "tomcrypt_des_static_internal",
+      "proposed_name": "LibTomCrypt_desfunc",
+      "role": "Shared LibTomCrypt DES block transform used by DES and 3DES.",
+      "segment": ".text",
+      "size": 612,
+      "source_match": "exact-source-role",
+      "source_name": "desfunc",
+      "source_references": [
+        "https://android.googlesource.com/platform/external/dropbear/+/refs/heads/donut-release/libtomcrypt/src/ciphers/des.c"
+      ],
+      "va": "0x246b50",
+      "xrefs_to": [
+        "0x246e28",
+        "0x246f48",
+        "0x247070",
+        "0x2471b4"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_2AF788",
+      "evidence": [
+        "The body ignores the allocator context and calls realloc on the supplied pointer and size.",
+        "yajl_set_default_alloc_funcs_yajl_alloc_funcs installs it in the realloc slot at 0x2af7c0.",
+        "The old profile called this three-entry region GIF support because it sat at a library boundary; the callback contract identifies it as YAJL."
+      ],
+      "family": "yajl",
+      "original_profile_category": "gif_static_internal",
+      "proposed_name": "yajl_internal_realloc",
+      "role": "Default YAJL realloc callback.",
+      "segment": ".text",
+      "size": 12,
+      "source_match": "exact-source-role",
+      "source_name": "yajl_internal_realloc",
+      "source_references": [
+        "https://sources.debian.org/src/yajl/2.1.0-3/src/yajl_alloc.c"
+      ],
+      "va": "0x2af788",
+      "xrefs_to": [
+        "0x2af7c0"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_2AF794",
+      "evidence": [
+        "The body ignores the allocator context and calls free on the supplied pointer.",
+        "yajl_set_default_alloc_funcs_yajl_alloc_funcs installs it in the free slot at 0x2af7b4."
+      ],
+      "family": "yajl",
+      "original_profile_category": "gif_static_internal",
+      "proposed_name": "yajl_internal_free",
+      "role": "Default YAJL free callback.",
+      "segment": ".text",
+      "size": 8,
+      "source_match": "exact-source-role",
+      "source_name": "yajl_internal_free",
+      "source_references": [
+        "https://sources.debian.org/src/yajl/2.1.0-3/src/yajl_alloc.c"
+      ],
+      "va": "0x2af794",
+      "xrefs_to": [
+        "0x2af7b4"
+      ]
+    },
+    {
+      "confidence": "high",
+      "current_ida_name": "sub_2AF79C",
+      "evidence": [
+        "The body ignores the allocator context and calls malloc for the requested size.",
+        "yajl_set_default_alloc_funcs_yajl_alloc_funcs installs it in the malloc slot at 0x2af7a4."
+      ],
+      "family": "yajl",
+      "original_profile_category": "gif_static_internal",
+      "proposed_name": "yajl_internal_malloc",
+      "role": "Default YAJL malloc callback.",
+      "segment": ".text",
+      "size": 8,
+      "source_match": "exact-source-role",
+      "source_name": "yajl_internal_malloc",
+      "source_references": [
+        "https://sources.debian.org/src/yajl/2.1.0-3/src/yajl_alloc.c"
+      ],
+      "va": "0x2af79c",
+      "xrefs_to": [
+        "0x2af7a4"
+      ]
+    }
+  ],
+  "application": {
+    "comments_added": 30,
+    "failure_count": 0,
+    "input_database": "analysis/libqplay_translated_from_active_v10.i64",
+    "output_database": "analysis/libqplay_translated_from_active_v11.i64",
+    "renamed_count": 30,
+    "script": "tools/ida_apply_static_library_aliases.py"
+  },
+  "artifact": "static_library_role_audit_20260901",
+  "binary": "private original ARM64 libqplay.so",
+  "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+  "classification_corrections": [
+    {
+      "corrected_family": "cyassl",
+      "previous_profile_category": "yajl_static_internal",
+      "reason": "The local decompilation and callback or ASN behavior identify a different library family than the address-only boundary pass.",
+      "va": "0x2b3be8"
+    },
+    {
+      "corrected_family": "cyassl",
+      "previous_profile_category": "yajl_static_internal",
+      "reason": "The local decompilation and callback or ASN behavior identify a different library family than the address-only boundary pass.",
+      "va": "0x2b3c64"
+    },
+    {
+      "corrected_family": "yajl",
+      "previous_profile_category": "gif_static_internal",
+      "reason": "The local decompilation and callback or ASN behavior identify a different library family than the address-only boundary pass.",
+      "va": "0x2af788"
+    },
+    {
+      "corrected_family": "yajl",
+      "previous_profile_category": "gif_static_internal",
+      "reason": "The local decompilation and callback or ASN behavior identify a different library family than the address-only boundary pass.",
+      "va": "0x2af794"
+    },
+    {
+      "corrected_family": "yajl",
+      "previous_profile_category": "gif_static_internal",
+      "reason": "The local decompilation and callback or ASN behavior identify a different library family than the address-only boundary pass.",
+      "va": "0x2af79c"
+    }
+  ],
+  "confidence_counts": {
+    "high": 30
+  },
+  "database": {
+    "close_reopen_verified": false,
+    "default_sub_function_count_after": 274,
+    "default_sub_function_count_before": 278,
+    "format": "packed IDA 9.3 database",
+    "function_count": 11297,
+    "input_path": "analysis/libqplay_translated_from_active_v10.i64",
+    "input_sha256": "5894e93f41d83d7978e38305b1a86dd06217a3efb8fd48e4ae2f743438c8e063",
+    "inventory_path": "analysis/libqplay.function_inventory.json",
+    "inventory_sha256": "acbb76e492e684023c2fc761b7634d96ba58fafe32fae8ae096fce5cd78f869f",
+    "path": "analysis/libqplay_translated_from_active_v11.i64",
+    "sha256": "26471ffbe194a721e4fde7e894a451c7c8dccbe61c32eafc8305190b37ee6917",
+    "verification_failures": 0,
+    "verified_name_count": 30
+  },
+  "family_counts": {
+    "bzip2": 7,
+    "cyassl": 2,
+    "gpc": 1,
+    "minizip": 2,
+    "tomcrypt": 1,
+    "yajl": 3,
+    "zlib": 14
+  },
+  "network_contacted": false,
+  "purpose": "Record evidence-backed aliases for unnamed static routines in the bundled zlib, bzip2, minizip, GPC, CyaSSL, LibTomCrypt, and YAJL implementations. These are analysis names, not surviving ELF names.",
+  "schema_version": 1,
+  "source_references": {
+    "bzip2_blocksort": "https://sources.debian.org/src/bzip2/1.0.5-1%2Blenny1/blocksort.c/",
+    "bzip2_bzlib": "https://github.com/libarchive/bzip2/blob/master/bzlib.c",
+    "bzip2_compress": "https://github.com/libarchive/bzip2/blob/master/compress.c",
+    "cyassl_asn": "https://nest-open-source.googlesource.com/nest-yale-lock/1.2/freertos/%2B/b9a7305351d35e2d3076d0b4ab3ec121f0aa8d52/FreeRTOS-Plus/Source/CyaSSL/ctaocrypt/src/asn.c",
+    "gpc": "https://github.com/rickbrew/GeneralPolygonClipper/blob/main/gpc.c",
+    "minizip_unzip": "https://github.com/madler/zlib/blob/develop/contrib/minizip/unzip.c",
+    "tomcrypt_des": "https://android.googlesource.com/platform/external/dropbear/+/refs/heads/donut-release/libtomcrypt/src/ciphers/des.c",
+    "yajl_alloc": "https://sources.debian.org/src/yajl/2.1.0-3/src/yajl_alloc.c",
+    "zlib_deflate": "https://github.com/madler/zlib/blob/develop/deflate.c",
+    "zlib_inftrees": "https://github.com/madler/zlib/blob/develop/inftrees.c",
+    "zlib_trees": "https://github.com/madler/zlib/blob/develop/trees.c",
+    "zlib_zutil": "https://github.com/madler/zlib/blob/develop/zutil.c"
+  },
+  "status": "aliases_applied_to_persisted_copy",
+  "verification": {
+    "failure_count": 0,
+    "script": "tools/ida_verify_static_library_aliases.py",
+    "status": "ok",
+    "verified_name_count": 30
+  }
+}

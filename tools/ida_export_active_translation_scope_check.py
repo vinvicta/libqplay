@@ -161,12 +161,12 @@ def main() -> None:
             },
         },
         "interpretation": [
-            "The 278 remaining default sub_ functions are outside the Android bridge callback region.",
+            "The 274 remaining default sub_ functions are outside the Android bridge callback region.",
             "The four default functions in the broader application-core range are short static-state wrappers around TString, TStringList, or TGraalVar objects; their decompiled bodies do not contain the selected socket, file, process, or update boundary calls.",
             "Every address in the 1779-entry script callback inventory has a non-default active IDA name, including the callbacks reviewed in the focused Android passes.",
         ],
         "status": "ok"
-        if len(default_rows) == 278
+        if len(default_rows) == 274
         and not android_defaults
         and not callback_defaults
         and not boundary_edges

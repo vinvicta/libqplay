@@ -19,15 +19,15 @@ DEFAULT_BINARY = (
     "lib/arm64-v8a/libqplay.so"
 )
 DEFAULT_PROFILE = "artifacts/unresolved_function_profile.json"
-DEFAULT_OUTPUT = "artifacts/static_library_role_audit_20260826.json"
-DEFAULT_INPUT_DATABASE = "analysis/libqplay_translated_all_v3.i64"
+DEFAULT_OUTPUT = "artifacts/static_library_role_audit_20260901.json"
+DEFAULT_INPUT_DATABASE = "analysis/libqplay_translated_from_active_v10.i64"
 DEFAULT_INPUT_DATABASE_SHA256 = (
-    "1db52b8b2169250852fcd1a5a2acfda859b81038e92b47158029ecc886356874"
+    "5894e93f41d83d7978e38305b1a86dd06217a3efb8fd48e4ae2f743438c8e063"
 )
 DEFAULT_INPUT_INVENTORY_SHA256 = (
     "e6045dc5b63f215c51e13ec3b62472ee415dee87533e225ced04812439959a87"
 )
-DEFAULT_DATABASE = "analysis/libqplay_translated_all_v4.i64"
+DEFAULT_DATABASE = "analysis/libqplay_translated_from_active_v11.i64"
 
 
 SOURCE_REFERENCES = {
@@ -39,6 +39,7 @@ SOURCE_REFERENCES = {
         "https://sources.debian.org/src/bzip2/1.0.5-1%2Blenny1/blocksort.c/"
     ),
     "bzip2_compress": "https://github.com/libarchive/bzip2/blob/master/compress.c",
+    "bzip2_bzlib": "https://github.com/libarchive/bzip2/blob/master/bzlib.c",
     "minizip_unzip": "https://github.com/madler/zlib/blob/develop/contrib/minizip/unzip.c",
     "gpc": "https://github.com/rickbrew/GeneralPolygonClipper/blob/main/gpc.c",
     "cyassl_asn": (
@@ -331,6 +332,54 @@ ALIASES = [
         "source_references": ["bzip2_blocksort"],
     },
     {
+        "ea": 0x273350,
+        "family": "bzip2",
+        "proposed_name": "default_bzfree",
+        "source_name": "default_bzfree",
+        "source_match": "exact-source-role",
+        "confidence": "high",
+        "role": "Default bzip2 allocator release callback.",
+        "evidence": [
+            "The callback accepts the bzip2 opaque context and address shape, ignores the context, checks for a non-null address, and calls free.",
+            "BZ2_bzCompressInit and BZ2_bzDecompressInit install this function in the bz_stream bzfree slot when the caller supplies no release callback.",
+            "The body matches the default_bzfree helper in bzip2/libbzip2 bzlib.c at source line 109.",
+        ],
+        "xrefs_to": ["0x273e74", "0x2741ec"],
+        "source_references": ["bzip2_bzlib"],
+    },
+    {
+        "ea": 0x273360,
+        "family": "bzip2",
+        "proposed_name": "default_bzalloc",
+        "source_name": "default_bzalloc",
+        "source_match": "exact-source-role",
+        "confidence": "high",
+        "role": "Default bzip2 allocator callback.",
+        "evidence": [
+            "The callback accepts the bzip2 opaque context, item count, and item size, ignores the context, and returns malloc(items * size).",
+            "BZ2_bzCompressInit and BZ2_bzDecompressInit install this function in the bz_stream bzalloc slot when the caller supplies no allocator callback.",
+            "The body matches the default_bzalloc helper in bzip2/libbzip2 bzlib.c at source line 102.",
+        ],
+        "xrefs_to": ["0x273e84", "0x2741d8"],
+        "source_references": ["bzip2_bzlib"],
+    },
+    {
+        "ea": 0x27336C,
+        "family": "bzip2",
+        "proposed_name": "handle_compress",
+        "source_name": "handle_compress",
+        "source_match": "exact-source-role",
+        "confidence": "high",
+        "role": "bzip2 streaming compression state machine.",
+        "evidence": [
+            "The body consumes the bz_stream input and output windows, performs the run-length input staging, updates block CRC state, and transitions between input and output modes.",
+            "It invokes the translated BZ2_compressBlock helper and is called by BZ2_bzCompress for running, flushing, and finishing actions.",
+            "The state machine matches the handle_compress helper in bzip2/libbzip2 bzlib.c at source line 361.",
+        ],
+        "xrefs_to": ["0x273f60", "0x273fdc", "0x274068"],
+        "source_references": ["bzip2_bzlib"],
+    },
+    {
         "ea": 0x24840C,
         "family": "minizip",
         "proposed_name": "minizip_unz64local_GetCurrentFileInfoInternal",
@@ -555,7 +604,7 @@ def generate(args: argparse.Namespace) -> dict[str, object]:
 
     return {
         "schema_version": 1,
-        "artifact": "static_library_role_audit_20260826",
+        "artifact": "static_library_role_audit_20260901",
         "status": "aliases_applied_to_persisted_copy",
         "purpose": (
             "Record evidence-backed aliases for unnamed static routines in the "

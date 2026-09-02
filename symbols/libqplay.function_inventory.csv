@@ -10227,7 +10227,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2444140,tt_cmap14_char_index,ida_named_non_elf,,,,,.text,8,2,5120,False,False,False
 2444148,tt_cmap14_char_next,ida_named_non_elf,,,,,.text,12,2,5120,False,False,False
 2444160,tt_cmap14_get_info,ida_named_non_elf,,,,,.text,24,2,5120,False,False,False
-2444184,sub_254B98,ida_default_sub,,,,,.text,32,1,5120,False,False,True
+2444184,tt_get_cmap_info,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
 2444216,tt_face_get_kerning,ida_named_non_elf,,,,,.text,456,1,5120,False,False,False
 2444672,get_sfnt_table,ida_named_non_elf,,,,,.text,160,1,5120,False,False,False
 2444832,tt_cmap0_validate,ida_named_non_elf,,,,,.text,160,2,5120,False,False,False
@@ -10429,9 +10429,9 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2567964,FT_Glyph_Copy,ida_named_non_elf,,,,,.text,228,1,5120,False,False,False
 2568192,FT_Get_Glyph,ida_named_non_elf,,,,,.text,328,1,5120,False,False,False
 2568520,FT_Glyph_To_Bitmap,ida_named_non_elf,,,,,.text,520,1,5120,False,False,False
-2569040,sub_273350,ida_default_sub,,,,,.text,16,2,5120,False,False,True
-2569056,sub_273360,ida_default_sub,,,,,.text,12,2,5120,False,False,True
-2569068,sub_27336C,ida_default_sub,,,,,.text,2220,3,5120,False,False,True
+2569040,default_bzfree,ida_named_non_elf,,,,,.text,16,2,5120,False,False,False
+2569056,default_bzalloc,ida_named_non_elf,,,,,.text,12,2,5120,False,False,False
+2569068,handle_compress,ida_named_non_elf,,,,,.text,2220,3,5120,False,False,False
 2571288,BZ2_bzCompressInit,ida_named_non_elf,,,,,.text,652,4,5120,False,False,False
 2571940,BZ2_bzCompress,ida_named_non_elf,,,,,.text,472,4,5120,False,False,False
 2572412,BZ2_bzCompressEnd,ida_named_non_elf,,,,,.text,156,4,5120,False,False,False

@@ -4,7 +4,7 @@
 This is a read-only check for IDALIB or the IDA Python console. It verifies
 the 277 native role candidates, every exact script-table callback label that
 has a proposed name, 28 application or engine role aliases, 11 CyaSSL role
-aliases, 27 bundled library role aliases, four older persisted function
+aliases, 30 bundled library role aliases, four older persisted function
 reclassifications, and every exact FreeType source match at its expected
 address. The expected database totals are also checked after the boundary
 pass.
@@ -64,7 +64,7 @@ def expected_names() -> list[dict]:
     script = load("artifacts/script_table_inventory.json")
     roles = load("artifacts/unresolved_function_candidates.json")
     cyassl = load("artifacts/cyassl_static_role_audit_20260826.json")
-    static_libraries = load("artifacts/static_library_role_audit_20260826.json")
+    static_libraries = load("artifacts/static_library_role_audit_20260901.json")
     freetype = load("artifacts/ida_freetype_source_matches_20260901.json")
     rows = []
     for group in NATIVE_GROUPS:
@@ -162,10 +162,10 @@ def main() -> None:
         "function_count": function_count,
         "default_sub_count": default_sub_count,
         "expected_function_count": 11297,
-        "expected_default_sub_count": 278,
+        "expected_default_sub_count": 274,
         "failures": failures,
         "status": "ok"
-        if not failures and function_count == 11297 and default_sub_count == 278
+        if not failures and function_count == 11297 and default_sub_count == 274
         else "failed",
     }
     function_heads_with_names = sum(
@@ -179,21 +179,21 @@ def main() -> None:
             "sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
         },
         "coverage": {
-            "bundled_library_role_aliases": 27,
+            "bundled_library_role_aliases": 30,
             "gpc_helper_aliases": 3,
             "cyassl_role_aliases": 11,
             "native_callback_candidates": 277,
             "retained_elf_symbols": 8601,
             "script_table_callbacks": 906,
             "application_and_engine_role_aliases": 28,
-            "exact_freetype_source_matches": 140,
-            "reviewed_function_names": 1392,
+            "exact_freetype_source_matches": 141,
+            "reviewed_function_names": 1396,
         },
         "database": {
             "source_idb": "GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so.i64",
-            "saved_copy": "analysis/libqplay_translated_from_active_v10.i64",
+            "saved_copy": "analysis/libqplay_translated_from_active_v11.i64",
             "saved_copy_bytes": 61286570,
-            "saved_copy_sha256": "5894e93f41d83d7978e38305b1a86dd06217a3efb8fd48e4ae2f743438c8e063",
+            "saved_copy_sha256": "26471ffbe194a721e4fde7e894a451c7c8dccbe61c32eafc8305190b37ee6917",
             "saved_copy_reopen_verified": False,
         },
         "passes": [
@@ -202,9 +202,9 @@ def main() -> None:
             {"name": "exact script-table callbacks", "renamed": 906, "boundary_additions": 20, "function_splits": 2, "failures": 0},
             {"name": "application and engine role candidates", "renamed": 28, "failures": 0},
             {"name": "CyaSSL static role aliases", "renamed": 11, "failures": 0},
-            {"name": "bundled-library role aliases", "renamed": 27, "failures": 0},
+            {"name": "bundled-library role aliases", "renamed": 30, "failures": 0},
             {"name": "GPC residual helper review", "renamed": 3, "failures": 0},
-            {"name": "exact FreeType 2.3.6 source matches", "renamed": 140, "failures": 0},
+            {"name": "exact FreeType 2.3.6 source matches", "renamed": 141, "failures": 0},
         ],
         "verification": {
             **result,
@@ -212,9 +212,9 @@ def main() -> None:
             "verified_reviewed_name_count": len(rows),
         },
         "notes": [
-            "The active ARM64 database was saved as the v10 packed copy after the exact FreeType 2.3.6 source-match pass.",
-            "The v10 copy has not yet been independently closed and reopened; its active database names passed the read-only verifier.",
-            "The 278 remaining entries are IDA-created functions without preserved source names. They remain addressable and were not given speculative source names.",
+            "The active ARM64 database was saved as the v11 packed copy after the final FreeType and bzip2 source-role pass.",
+            "The v11 copy has not yet been independently closed and reopened; its active database names passed the read-only verifier.",
+            "The 274 remaining entries are IDA-created functions without preserved source names. They remain addressable and were not given speculative source names.",
             "The verification and local replay steps contacted no live service.",
         ],
     }

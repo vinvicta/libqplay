@@ -4,10 +4,10 @@
 The public unresolved-function profile describes the 488 default functions in
 the pre-persistence inventory. The role-candidate pass names 28 application or
 engine entries, the first CyaSSL pass names 11 static TLS and crypto roles, and
-the next static-library pass names 27 zlib, bzip2, minizip, GPC, CyaSSL,
+the next static-library pass names 30 zlib, bzip2, minizip, GPC, CyaSSL,
 LibTomCrypt, and YAJL roles. IDA reclassifies one compiler branch veneer as a
 thunk when the saved copy is reopened. A later source comparison also names
-140 embedded FreeType and TrueType routines from the pinned FreeType 2.3.6
+141 embedded FreeType and TrueType routines from the pinned FreeType 2.3.6
 source. This helper subtracts those known changes and emits the exact residual
 count in the latest persisted database. It only reads JSON files and performs
 no network operation.
@@ -24,13 +24,13 @@ DEFAULT_PROFILE = "artifacts/unresolved_function_profile.json"
 DEFAULT_ROLES = "artifacts/unresolved_function_candidates.json"
 DEFAULT_STATIC_ROLES = [
     "artifacts/cyassl_static_role_audit_20260826.json",
-    "artifacts/static_library_role_audit_20260826.json",
+    "artifacts/static_library_role_audit_20260901.json",
 ]
 DEFAULT_OUTPUT = "artifacts/ida_residual_profile.json"
 
 CURRENT_DATABASE = {
-    "path": "analysis/libqplay_translated_from_active_v10.i64",
-    "sha256": "5894e93f41d83d7978e38305b1a86dd06217a3efb8fd48e4ae2f743438c8e063",
+    "path": "analysis/libqplay_translated_from_active_v11.i64",
+    "sha256": "26471ffbe194a721e4fde7e894a451c7c8dccbe61c32eafc8305190b37ee6917",
     "bytes": 61286570,
     "format": "packed IDA 9.3 database",
     "close_reopen_verified": False,
@@ -246,6 +246,7 @@ REANALYZED_FUNCTIONS = {
 # source-match artifact; this table supplies the residual arithmetic.
 ADDITIONAL_FREETYPE_REANALYZED = {
     0x252E90: "destroy_face",
+    0x254B98: "tt_get_cmap_info",
     0x254BB8: "tt_face_get_kerning",
     0x254D80: "get_sfnt_table",
     0x255FC0: "tt_face_free_name",

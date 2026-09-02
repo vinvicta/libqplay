@@ -7,26 +7,26 @@
   },
   "coverage": {
     "application_and_engine_role_aliases": 28,
-    "bundled_library_role_aliases": 27,
+    "bundled_library_role_aliases": 30,
     "cyassl_role_aliases": 11,
-    "exact_freetype_source_matches": 140,
+    "exact_freetype_source_matches": 141,
     "gpc_helper_aliases": 3,
     "native_callback_candidates": 277,
     "retained_elf_symbols": 8601,
-    "reviewed_function_names": 1392,
+    "reviewed_function_names": 1396,
     "script_table_callbacks": 906
   },
   "database": {
-    "saved_copy": "analysis/libqplay_translated_from_active_v10.i64",
+    "saved_copy": "analysis/libqplay_translated_from_active_v11.i64",
     "saved_copy_bytes": 61286570,
     "saved_copy_reopen_verified": false,
-    "saved_copy_sha256": "5894e93f41d83d7978e38305b1a86dd06217a3efb8fd48e4ae2f743438c8e063",
+    "saved_copy_sha256": "26471ffbe194a721e4fde7e894a451c7c8dccbe61c32eafc8305190b37ee6917",
     "source_idb": "GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so.i64"
   },
   "notes": [
-    "The active ARM64 database was saved as the v10 packed copy after the exact FreeType 2.3.6 source-match pass.",
-    "The v10 copy has not yet been independently closed and reopened; its active database names passed the read-only verifier.",
-    "The 278 remaining entries are IDA-created functions without preserved source names. They remain addressable and were not given speculative source names.",
+    "The active ARM64 database was saved as the v11 packed copy after the final FreeType and bzip2 source-role pass.",
+    "The v11 copy has not yet been independently closed and reopened; its active database names passed the read-only verifier.",
+    "The 274 remaining entries are IDA-created functions without preserved source names. They remain addressable and were not given speculative source names.",
     "The verification and local replay steps contacted no live service."
   ],
   "passes": [
@@ -61,7 +61,7 @@
     {
       "failures": 0,
       "name": "bundled-library role aliases",
-      "renamed": 27
+      "renamed": 30
     },
     {
       "failures": 0,
@@ -71,20 +71,20 @@
     {
       "failures": 0,
       "name": "exact FreeType 2.3.6 source matches",
-      "renamed": 140
+      "renamed": 141
     }
   ],
   "verification": {
-    "default_sub_count": 278,
-    "expected_default_sub_count": 278,
+    "default_sub_count": 274,
+    "expected_default_sub_count": 274,
     "expected_function_count": 11297,
-    "expected_name_count": 487,
+    "expected_name_count": 491,
     "failure_count": 0,
     "failures": [],
     "function_count": 11297,
     "function_heads_with_names": 11297,
     "status": "ok",
-    "verified_name_count": 487,
-    "verified_reviewed_name_count": 487
+    "verified_name_count": 491,
+    "verified_reviewed_name_count": 491
   }
 }

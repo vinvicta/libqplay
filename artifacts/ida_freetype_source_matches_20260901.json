@@ -5,9 +5,9 @@
   "inventory": {
     "path": "/home/v/Desktop/graal-decomp/analysis/libqplay.function_inventory.json",
     "row_count": 11297,
-    "sha256": "300c97d07dff860976001a8fcf1e777f0f65a30fee72cf581782cfa61bad273b"
+    "sha256": "acbb76e492e684023c2fc761b7634d96ba58fafe32fae8ae096fce5cd78f869f"
   },
-  "match_count": 140,
+  "match_count": 141,
   "matches": [
     {
       "address": "0x250e94",
@@ -34,6 +34,19 @@
       "source_url": "https://github.com/freetype/freetype2/blob/VER-2-3-6/src/base/ftobjs.c#L822",
       "upstream_name": "destroy_face",
       "xrefs_to": 2
+    },
+    {
+      "address": "0x254b98",
+      "confidence": "exact",
+      "evidence": "The decompiled tt_get_cmap_info body matches the tagged FreeType 2.3.6 implementation, and the surrounding call or callback context agrees with the corresponding source role.",
+      "ida_name": "tt_get_cmap_info",
+      "ida_name_origin": "ida_named_non_elf",
+      "size": 32,
+      "source_file": "src/sfnt/ttcmap.c",
+      "source_line": 3112,
+      "source_url": "https://github.com/freetype/freetype2/blob/VER-2-3-6/src/sfnt/ttcmap.c#L3112",
+      "upstream_name": "tt_get_cmap_info",
+      "xrefs_to": 1
     },
     {
       "address": "0x254bb8",

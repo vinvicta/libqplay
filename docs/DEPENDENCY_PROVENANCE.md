@@ -31,7 +31,7 @@ a release identifier.
 
 The current IDA pass compared the embedded TrueType and FreeType routines with
 the official FreeType 2.3.6 tree at tag `VER-2-3-6`, commit
-`6174e17cf7cb3eef826d95c96757dbb0feea7bdb`. One hundred forty function bodies
+`6174e17cf7cb3eef826d95c96757dbb0feea7bdb`. One hundred forty-one function bodies
 now have exact source-backed names, covering the SFNT face and table loaders,
 the smooth rasterizer, the TrueType interpreter and glyph loader, and the
 Latin, Latin2, CJK, and dummy autofit classes. The address-level evidence is kept

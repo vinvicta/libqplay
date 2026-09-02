@@ -9,9 +9,9 @@ their original source names.
 
 The original active database started with 11,272 functions and 1,645 default
 `sub_` names. The complete reviewed pass added 25 function boundaries and
-1,392 names or aliases. The current packed copy at
-`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v10.i64`
-contains 11,297 functions and 278 default names. The active IDA verifier
+1,396 names or aliases. The current packed copy at
+`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v11.i64`
+contains 11,297 functions and 274 default names. The active IDA verifier
 returned zero failures after the expanded FreeType source-match pass. A
 separate reopen of this current copy is still pending.
 
@@ -21,21 +21,22 @@ The count is accounted for exactly:
 488 pre-persistence unresolved entries
 - 28 applied application or engine role aliases
 - 11 applied CyaSSL static role aliases
-- 27 applied static-library role aliases
+- 30 applied static-library role aliases
 -  3 reviewed GPC helper aliases
 -  1 compiler branch veneer reclassified as a named thunk
-- 140 exact FreeType 2.3.6 source matches
-=278 residual default entries
+- 141 exact FreeType 2.3.6 source matches
+=274 residual default entries
 ```
 
 The 28 application and engine role aliases are behavior-based names, not
 recovered ELF source names. The CyaSSL pass adds seven high-confidence source
 role matches and four descriptive aliases for routines whose behavior is
 clear but whose exact source name is not preserved. The static-library pass
-adds 27 high-confidence source-role aliases across seven bundled libraries.
+adds 30 high-confidence source-role aliases across seven bundled libraries.
 The supporting records are
-`artifacts/cyassl_static_role_audit_20260826.json` and
-`artifacts/static_library_role_audit_20260826.json`.
+`artifacts/cyassl_static_role_audit_20260826.json`,
+`artifacts/static_library_role_audit_20260826.json`, and
+`artifacts/static_library_role_audit_20260901.json`.
 
 The three former GPC residuals were reviewed separately because they were not
 covered by the bundled-library alias artifact. `0xe01a0` is the tristrip
@@ -44,7 +45,7 @@ allocation-failure abort, `0x152200` is the scanbeam-tree cleanup helper, and
 roles match the corresponding private helpers in the
 [upstream GPC source](https://raw.githubusercontent.com/rickbrew/GeneralPolygonClipper/main/gpc.c).
 
-The source comparison now matches 140 functions to the tagged FreeType 2.3.6
+The source comparison now matches 141 functions to the tagged FreeType 2.3.6
 tree. The set covers the SFNT face and table loaders, the smooth rasterizer,
 the TrueType interpreter and glyph loader, and the Latin, Latin2, CJK, and
 dummy autofit classes. The exact address, size, xref count, source file, line
@@ -71,7 +72,7 @@ The current residual set is recorded in
 record per remaining default `sub_` function, including its address, size,
 segment, and incoming xref count. It also records the 11,297-row inventory
 hash, the original ARM64 library hash, address buckets, and the most
-referenced residual entries. The report contains 278 residual functions and
+referenced residual entries. The report contains 274 residual functions and
 does not publish another full inventory. When the checked-in residual profile
 matches the input addresses, the report also embeds its category counts and
 profile hash.
@@ -92,23 +93,22 @@ The final packed-database verification is recorded separately in
 source library hash, the saved IDA copy hash, all pass counts, and the exact
 function and residual totals.
 
-The 278 residual entries have also been classified by the persisted IDA
+The 274 residual entries have also been classified by the persisted IDA
 profile:
 
 | Class | Count | Interpretation |
 | --- | ---: | --- |
 | JPEG static internals | 150 | Unnamed routines inside the bundled JPEG implementation |
-| FreeType static internals | 4 | Unnamed routines inside the bundled FreeType implementation after exact source matches |
 | TString cleanup wrappers | 97 | Compiler-generated destructors for fixed global strings |
 | Init or fini array entries | 19 | Runtime registration or cleanup entry points referenced by ELF arrays |
 | TStringList cleanup wrappers | 5 | Compiler-generated destructors for fixed global string lists |
 | TGraalVar cleanup wrappers | 2 | Compiler-generated destructors for fixed global script values |
 | AArch64 PLT resolver | 1 | The resolver slot at `0xd2170`, not an imported function |
 
-This breakdown accounts for every residual entry. The large JPEG and remaining
-FreeType groups are not omitted from the analysis. They are left with
+This breakdown accounts for every residual entry. The large JPEG group and
+cleanup wrappers are not omitted from the analysis. They are left with
 address-based names because their local source names were not retained and a
-family label alone is not enough to prove an exact function match. The 140
+family label alone is not enough to prove an exact function match. The 141
 matched FreeType routines are no longer part of this residual table.
 
 ## How to work the remaining queue

@@ -14,8 +14,8 @@ import idautils
 
 
 REPO = Path("/home/v/Desktop/graal-decomp/libqplay")
-AUDIT_PATH = REPO / "artifacts/static_library_role_audit_20260826.json"
-REPORT_PATH = Path("/tmp/static_library_alias_verification_20260826.json")
+AUDIT_PATH = REPO / "artifacts/static_library_role_audit_20260901.json"
+REPORT_PATH = Path("/tmp/static_library_alias_verification_20260901.json")
 
 
 def main() -> None:

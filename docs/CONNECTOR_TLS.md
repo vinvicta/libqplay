@@ -70,8 +70,10 @@ below this TLS path. `CyaInt_GetLength` at `0x2b3be8` parses DER short and
 long-form lengths, and `CyaInt_GetName` at `0x2b3c64` builds the slash-delimited
 subject or issuer name used by the certificate decoder. Both are high-
 confidence source-role matches to the historical CyaSSL `GetLength` and
-`GetName` helpers. They are recorded with the other 27 aliases in
-`artifacts/static_library_role_audit_20260826.json`.
+`GetName` helpers. They are recorded in the historical CyaSSL and
+static-library audit at `artifacts/static_library_role_audit_20260826.json`.
+The current combined static-library audit adds the three bzip2 roles and
+contains 30 aliases in `artifacts/static_library_role_audit_20260901.json`.
 
 ## Local validity control
 

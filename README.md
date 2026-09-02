@@ -20,12 +20,12 @@ static-library, and exact FreeType source aliases. The counts are:
 | Kind | Count |
 | --- | ---: |
 | Retained ELF symbols translated | 8,601 |
-| Additional reviewed function aliases | 1,392 |
+| Additional reviewed function aliases | 1,396 |
 | IDA functions in the saved copy | 11,297 |
-| Remaining default `sub_` functions | 278 |
+| Remaining default `sub_` functions | 274 |
 
 The retained ELF count includes 4,714 implementation functions, 3,183 PLT
-thunks, 199 jump thunks, and 505 data symbols. The 278 remaining `sub_`
+thunks, 199 jump thunks, and 505 data symbols. The 274 remaining `sub_`
 entries are code that IDA discovered without a preserved source symbol. They
 are kept address-based rather than being assigned guesses. The compact
 verification record is `artifacts/ida_translation_verification_20260901.json`.
@@ -234,9 +234,12 @@ The compact record is
 * `artifacts/original_dependency_provenance_20260830.json` records the exact
   bundled zlib, bzip2, and FreeType version evidence, compression callsites,
   font paths, and conservative dependency findings.
-* `artifacts/ida_freetype_source_matches_20260901.json` records 140 exact
+* `artifacts/ida_freetype_source_matches_20260901.json` records 141 exact
   FreeType 2.3.6 source matches with address, size, xref, and source-line
   evidence.
+* `artifacts/static_library_role_audit_20260901.json` records 30 high-
+  confidence bundled-library role aliases, including the final bzip2 stream
+  callbacks.
 * `artifacts/original_residual_semantic_review_20260830.json` records the
   historical address-level behavior of the two selected FreeType diagnostic
   helpers. Both helpers are now source-labeled in the current IDA copy.

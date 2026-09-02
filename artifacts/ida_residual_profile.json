@@ -146,7 +146,7 @@
     "source": "artifacts/unresolved_function_candidates.json"
   },
   "applied_static_role_aliases": {
-    "count": 38,
+    "count": 41,
     "entries": [
       {
         "confidence": "high",
@@ -176,6 +176,24 @@
         "confidence": "high",
         "ea": "0x249580",
         "proposed_name": "minizip_unz64local_CheckCurrentFileCoherencyHeader",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x273350",
+        "proposed_name": "default_bzfree",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x273360",
+        "proposed_name": "default_bzalloc",
+        "source_match": "exact-source-role"
+      },
+      {
+        "confidence": "high",
+        "ea": "0x27336c",
+        "proposed_name": "handle_compress",
         "source_match": "exact-source-role"
       },
       {
@@ -379,48 +397,13 @@
     ],
     "sources": [
       "artifacts/cyassl_static_role_audit_20260826.json",
-      "artifacts/static_library_role_audit_20260826.json"
+      "artifacts/static_library_role_audit_20260901.json"
     ]
   },
   "artifact": "ida_persisted_residual_profile",
   "binary": "private original ARM64 libqplay.so",
   "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
   "categories": [
-    {
-      "category": "freetype_static_internal",
-      "count": 4,
-      "entries": [
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_254B98",
-          "ea": "0x254b98",
-          "segment": ".text",
-          "size": 32
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_273350",
-          "ea": "0x273350",
-          "segment": ".text",
-          "size": 16
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_273360",
-          "ea": "0x273360",
-          "segment": ".text",
-          "size": 12
-        },
-        {
-          "category": "freetype_static_internal",
-          "current_ida_name": "sub_27336C",
-          "ea": "0x27336c",
-          "segment": ".text",
-          "size": 2220
-        }
-      ],
-      "total_bytes": 2280
-    },
     {
       "category": "init_or_fini_array_entry",
       "count": 19,
@@ -2384,14 +2367,6 @@
   ],
   "category_summary": [
     {
-      "category": "freetype_static_internal",
-      "count": 4,
-      "evidence": "The region is bracketed by the archive I/O helpers and the FreeType to bzip2 transition.",
-      "first_ea": "0x254b98",
-      "last_ea": "0x27336c",
-      "total_bytes": 2280
-    },
-    {
       "category": "init_or_fini_array_entry",
       "count": 19,
       "evidence": "The address is referenced by the ELF .init_array or .fini_array.",
@@ -2443,11 +2418,11 @@
   "database": {
     "bytes": 61286570,
     "close_reopen_verified": false,
-    "default_sub_function_count": 278,
+    "default_sub_function_count": 274,
     "format": "packed IDA 9.3 database",
     "function_count": 11297,
-    "path": "analysis/libqplay_translated_from_active_v10.i64",
-    "sha256": "5894e93f41d83d7978e38305b1a86dd06217a3efb8fd48e4ae2f743438c8e063"
+    "path": "analysis/libqplay_translated_from_active_v11.i64",
+    "sha256": "26471ffbe194a721e4fde7e894a451c7c8dccbe61c32eafc8305190b37ee6917"
   },
   "ida_reclassified_functions": [
     {
@@ -2463,6 +2438,11 @@
     {
       "ea": "0x252e90",
       "new_name": "destroy_face",
+      "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
+    },
+    {
+      "ea": "0x254b98",
+      "new_name": "tt_get_cmap_info",
       "reason": "The current IDA name is backed by an exact comparison with the pinned FreeType 2.3.6 implementation."
     },
     {
@@ -3178,7 +3158,7 @@
     "unresolved_default_sub_function_count": 488
   },
   "purpose": "Account for every default sub_ function left in the persisted IDA translation copy without inventing source names.",
-  "remaining_default_sub_function_count": 278,
+  "remaining_default_sub_function_count": 274,
   "residual_default_sub_functions": [
     {
       "category": "plt0_resolver",
@@ -4054,34 +4034,6 @@
       "ea": "0x23840c",
       "segment": ".text",
       "size": 16
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_254B98",
-      "ea": "0x254b98",
-      "segment": ".text",
-      "size": 32
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_273350",
-      "ea": "0x273350",
-      "segment": ".text",
-      "size": 16
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_273360",
-      "ea": "0x273360",
-      "segment": ".text",
-      "size": 12
-    },
-    {
-      "category": "freetype_static_internal",
-      "current_ida_name": "sub_27336C",
-      "ea": "0x27336c",
-      "segment": ".text",
-      "size": 2220
     },
     {
       "category": "jpeg_static_internal",
@@ -5134,7 +5086,7 @@
     "role_candidates": "artifacts/unresolved_function_candidates.json",
     "static_role_aliases": [
       "artifacts/cyassl_static_role_audit_20260826.json",
-      "artifacts/static_library_role_audit_20260826.json"
+      "artifacts/static_library_role_audit_20260901.json"
     ],
     "validation": "artifacts/ida_translation_validation.json"
   },

@@ -200,6 +200,7 @@ MATCHES = [
 # the common evidence sentence still explains the standard used for each row.
 ADDITIONAL_SOURCE_ROWS = (
     (0x252E90, "destroy_face", "src/base/ftobjs.c", 822),
+    (0x254B98, "tt_get_cmap_info", "src/sfnt/ttcmap.c", 3112),
     (0x254BB8, "tt_face_get_kerning", "src/sfnt/ttkern.c", 177),
     (0x254D80, "get_sfnt_table", "src/sfnt/sfdriver.c", 58),
     (0x255FC0, "tt_face_free_name", "src/sfnt/ttload.c", 786),

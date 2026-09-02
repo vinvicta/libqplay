@@ -125,8 +125,8 @@ to bypass a signature on a live service.
 ## Translation scope and residual names
 
 The current ARM64 IDA copy contains 11,297 function heads. All 8,601 retained
-ELF symbols and 1,392 reviewed callback, role, and exact FreeType aliases were
-checked at their expected addresses. The 278 remaining default `sub_` names
+ELF symbols and 1,396 reviewed callback, role, and exact FreeType aliases were
+checked at their expected addresses. The 274 remaining default `sub_` names
 are IDA-created functions without a surviving source symbol. A read-only
 active-IDB check
 found none in the Android bridge range, none among the 1,779 unique script
@@ -139,7 +139,7 @@ source names would be speculation. See
 The selected residual review inspected two of the remaining most referenced
 unnamed functions in the embedded FreeType region. They are diagnostic-string
 helpers reached through a FreeType internal object routine. A separate source
-comparison matched 140 FreeType and TrueType routines to the tagged 2.3.6
+comparison matched 141 FreeType and TrueType routines to the tagged 2.3.6
 implementation. Neither pass found a new Android, socket, file,
 process, or update boundary in the reviewed functions. These are semantic and
 source-matching passes, not proof that every static-library routine is safe.

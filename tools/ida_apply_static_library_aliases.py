@@ -21,18 +21,18 @@ import ida_name
 
 
 REPO = Path("/home/v/Desktop/graal-decomp/libqplay")
-AUDIT_PATH = REPO / "artifacts/static_library_role_audit_20260826.json"
+AUDIT_PATH = REPO / "artifacts/static_library_role_audit_20260901.json"
 APPLY_RENAMES = os.environ.get("STATIC_LIBRARY_APPLY_RENAMES") == "1"
 SAVE_PATH = os.environ.get("STATIC_LIBRARY_SAVE_PATH")
 REPORT_PATH = os.environ.get(
     "STATIC_LIBRARY_REPORT_PATH",
-    "/tmp/static_library_alias_application_20260826.json",
+    "/tmp/static_library_alias_application_20260901.json",
 )
 
 
 def load_aliases() -> list[dict]:
     document = json.loads(AUDIT_PATH.read_text(encoding="utf-8"))
-    if document.get("artifact") != "static_library_role_audit_20260826":
+    if document.get("artifact") != "static_library_role_audit_20260901":
         raise RuntimeError("unexpected static-library role audit artifact")
     return document["aliases"]
 

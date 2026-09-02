@@ -68,14 +68,14 @@ The saved IDA database was later brought to the same state as the public
 translation plan. The active base database was copied, the callback and
 script-table boundaries were applied, and the reviewed application, CyaSSL,
 and bundled-library aliases were added. A pinned FreeType 2.3.6 source pass
-then matched 140 functions in total, including the SFNT loaders, smooth rasterizer,
+then matched 141 functions in total, including the SFNT loaders, smooth rasterizer,
 TrueType interpreter, glyph loader, and autofit classes. The current copy has
-11,297 functions, 11,297 named function heads, and 278 remaining default
+11,297 functions, 11,297 named function heads, and 274 remaining default
 `sub_` entries. The read-only verifier returned zero failures after the
 source-match pass. The copy hash and pass breakdown are in
 `artifacts/ida_translation_verification_20260901.json`.
 
-The final scope check keeps that count honest. None of the 278 default names
+The final scope check keeps that count honest. None of the 274 default names
 is in the `0x240000` through `0x246fff` Android bridge range. None of the
 1,779 unique callback addresses in the script-table inventory currently has a
 default name, including the callbacks added during the Facebook, billing,
@@ -97,7 +97,7 @@ checkout is pinned to commit
 anchors are listed in
 `artifacts/ida_freetype_source_matches_20260901.json`.
 
-The comparison matched 140 functions exactly enough to apply the upstream
+The comparison matched 141 functions exactly enough to apply the upstream
 names. The set spans the SFNT face and table loaders, the smooth rasterizer,
 the TrueType interpreter and glyph loader, and the Latin, Latin2, CJK, and
 dummy autofit classes. The strongest interpreter cluster includes
@@ -111,11 +111,13 @@ left address-based in the earlier residual review. `0x256060` is now
 slots, source declarations, and matching decompiler bodies supplied checks
 beyond a superficial name similarity.
 
-This follow-up reduced the default-name count from 394 to 278 and the
-FreeType residual bucket from 120 to 4. The four remaining FreeType entries
-are still address-based because their exact source names have not been
-established. The result is a smaller, more honest queue: source-backed names
-are visible in IDA, while unmatched code remains easy to revisit.
+This follow-up reduced the default-name count from 394 to 274 and removed the
+FreeType residual bucket entirely. The final source-role pass identified
+`tt_get_cmap_info` at `0x254b98` from the FreeType cmap service dispatch, and
+`default_bzfree`, `default_bzalloc`, and `handle_compress` at `0x273350`,
+`0x273360`, and `0x27336c` from the bzip2 stream initialization and compression
+state machine. The remaining queue is now limited to JPEG internals, cleanup
+wrappers, init or fini support, and the AArch64 resolver slot.
 
 ## Android lifecycle and the first network checkpoint
 

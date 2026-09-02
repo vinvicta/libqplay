@@ -2,22 +2,27 @@
 
 The symbol pass translated every name retained in the original ARM64 ELF, and
 the reviewed callback and role pass added names only where the address and
-behavior were checked. The current IDA inventory has 278 address-only `sub_`
+behavior were checked. The current IDA inventory has 274 address-only `sub_`
 functions. This is expected for code that IDA discovered inside static
 libraries, compiler-generated cleanup paths, and fixed init or fini arrays.
 
 The complete address list and coarse classification are in
-`artifacts/ida_final_residual_audit_20260901.json`. That report places 4
-functions in the embedded FreeType region, 150 in the embedded JPEG region,
-19 in init or fini array support, 102 in static cleanup wrappers or other
-support, and one AArch64 PLT resolver slot. The count is a property of this
-IDA database and the original library hash, not a claim that all 278 routines
-are application code.
+`artifacts/ida_final_residual_audit_20260901.json`. That report places 150
+functions in the embedded JPEG region, 19 in init or fini array support, 104
+in static cleanup wrappers, and one AArch64 PLT resolver slot. The count is a
+property of this IDA database and the original library hash, not a claim that
+all 274 routines are application code.
 
-One hundred forty routines formerly counted as residuals now have exact
+One hundred forty-one routines formerly counted as residuals now have exact
 matches in the tagged FreeType 2.3.6 source tree. The source file and line
 anchors, IDA sizes, xref counts, and matching evidence are recorded in
 `artifacts/ida_freetype_source_matches_20260901.json`.
+
+The final four entries in the older queue are also resolved. The callback
+wrapper at `0x254b98` is `tt_get_cmap_info`, while `0x273350`, `0x273360`, and
+`0x27336c` are the bzip2 roles `default_bzfree`, `default_bzalloc`, and
+`handle_compress`. The address evidence, xrefs, and source anchors are in
+`artifacts/static_library_role_audit_20260901.json`.
 
 ## Reviewed high-reference routines
 
@@ -44,7 +49,7 @@ exact source-match artifact.
 ## Naming decision
 
 The two diagnostic helpers were initially kept named by address. The later
-comparison established their exact SFNT source names. The 140 reviewed
+comparison established their exact SFNT source names. The 141 reviewed
 FreeType and TrueType routines were renamed only after the tagged source body,
 callback-table or vtable context, and the current IDA address all agreed. That
 distinction keeps source-backed names separate from useful hypotheses.

@@ -29,20 +29,20 @@ with explicit fields.
 The active ARM64 database was then processed by the reviewed callback,
 script-table, application-role, CyaSSL, bundled-library, and exact FreeType
 source-match passes. The current packed copy was saved as
-`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v10.i64`.
+`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v11.i64`.
 The active IDA verifier reports 11,297 functions, 11,297 named function heads,
-278 remaining default `sub_` entries, and zero failures after the expanded
+274 remaining default `sub_` entries, and zero failures after the expanded
 FreeType source-match pass. A separate close and reopen of that exact copy is
 still pending.
 
-The 1,392 reviewed names are made up of 277 native callback candidates, 906
+The 1,396 reviewed names are made up of 277 native callback candidates, 906
 exact script-table callbacks, 28 application or engine role aliases, 11
-CyaSSL aliases, 27 bundled-library aliases, 3 GPC helper aliases, and 140
+CyaSSL aliases, 30 bundled-library aliases, 3 GPC helper aliases, and 141
 exact FreeType 2.3.6 source matches. The
 machine-readable record is
 `artifacts/ida_translation_verification_20260901.json`.
 
-The remaining 278 default names are not an unfinished application boundary.
+The remaining 274 default names are not an unfinished application boundary.
 The active-IDB scope check found no default name in the Android bridge range,
 no default name among the 1,779 unique script callback addresses, and no
 direct call from a remaining default function to the selected socket, file,
@@ -50,9 +50,16 @@ process, or update imports. The 4 entries in the broader application-core
 range are short static-state wrappers around existing library objects. Their
 addresses remain available in
 `artifacts/ida_active_translation_scope_check_20260901.json` without guessed
-source names. The 140 exact FreeType and TrueType matches are listed in
+source names. The 141 exact FreeType and TrueType matches are listed in
 `artifacts/ida_freetype_source_matches_20260901.json`, with the pinned source
 tag, commit, source file, and line anchor for each routine.
+
+The last four entries removed from the older residual queue are
+`tt_get_cmap_info` at `0x254b98`, `default_bzfree` at `0x273350`,
+`default_bzalloc` at `0x273360`, and `handle_compress` at `0x27336c`.
+Their callback assignments and source control flow agree with the pinned
+FreeType and bzip2 implementations, so they are recorded as source-role
+aliases rather than address-only guesses.
 
 The public `symbols/libqplay.function_inventory.json` and
 `artifacts/script_table_inventory.json` are synchronized with this final
