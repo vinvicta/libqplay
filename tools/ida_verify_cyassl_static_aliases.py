@@ -13,7 +13,7 @@ import ida_name
 import idautils
 
 
-REPO = Path("/home/v/Desktop/graal-decomp/libqplay")
+REPO = Path(__file__).resolve().parents[1]
 AUDIT_PATH = REPO / "artifacts/cyassl_static_role_audit_20260826.json"
 REPORT_PATH = Path("/tmp/cyassl_static_alias_verification_20260826.json")
 

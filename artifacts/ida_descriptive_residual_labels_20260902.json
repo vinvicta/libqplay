@@ -3,10 +3,10 @@
   "default_sub_count_after": 0,
   "exported_row_count": 124,
   "failures": [],
-  "input_path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so",
+  "input_path": "<workspace>/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so",
   "interpretation": "Each row is an evidence-backed descriptive label for a function that had no preserved ELF source name. The address suffix keeps the label stable and the category records the recovered role.",
   "network_contacted": false,
-  "profile_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/ida_residual_profile.json",
+  "profile_path": "<workspace>/libqplay/artifacts/ida_residual_profile.json",
   "profile_row_count": 124,
   "rows": [
     {

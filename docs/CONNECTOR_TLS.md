@@ -144,9 +144,11 @@ path-specific `conf.gs` response or that the script handoff is broken. The
 current service's mode-3 response remains unverified.
 
 The semantic fixture was then corrected using the supplied Moreno.kahn
-workbench at commit `e1f49b5ce6fa46b41354d9a81f75994f91d3ff16`. Its source
-defines `StartScript_Fail` for the `conf.gs` role and `StartScript_Connector`
-for the `con.png` role. A private package containing only the failure-script
+workbench at commit `e1f49b5ce6fa46b41354d9a81f75994f91d3ff16`. This is a
+later revision than the archive-signing cross-check documented in
+`docs/HELPER_TOOLCHAIN.md`. Its source defines `StartScript_Fail` for the
+`conf.gs` role and `StartScript_Connector` for the `con.png` role. A private
+package containing only the failure-script
 role was signed with the matching test key, and the diagnostic library was
 patched to that public key while keeping native RSA verification enabled.
 The expired TLS control followed the same mode-3 transition, and the native

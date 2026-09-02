@@ -38,10 +38,7 @@ TARGETS = [
     ("0x2025a0", "THTTPRequest_runScript_void", "request state machine"),
 ]
 
-DEFAULT_OUTPUT = (
-    "/home/v/Desktop/graal-decomp/libqplay/artifacts/"
-    "connector_http_flow_review_20260830.json"
-)
+DEFAULT_OUTPUT = str(Path(__file__).resolve().parents[1] / "artifacts" / "connector_http_flow_review_20260830.json")
 
 
 CALL_WORDS = {

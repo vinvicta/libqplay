@@ -11,7 +11,7 @@ The original active database started with 11,272 functions and 1,645 default
 `sub_` names. The complete reviewed pass added 25 function boundaries and
 1,551 names or aliases. One false boundary was then removed from a literal
 pool between two JPEG DCT routines. The current packed copy at
-`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v14.i64`
+`<workspace>/analysis/libqplay_translated_from_active_v14.i64`
 contains 11,296 functions, all with non-default names. The active IDA
 verifier returned zero failures after the expanded embedded-library source-role
 pass and the 124 descriptive residual labels. A separate reopen of this
@@ -97,7 +97,7 @@ The report was generated from the private translated IDA export with:
 
 ```text
 python3 tools/generate_final_residual_audit.py \
-  /home/v/Desktop/graal-decomp/analysis/libqplay.function_inventory.json
+  <workspace>/analysis/libqplay.function_inventory.json
 ```
 
 The input path is local to the analysis workstation. The report's SHA-256

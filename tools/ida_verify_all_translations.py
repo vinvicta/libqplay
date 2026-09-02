@@ -23,7 +23,7 @@ import ida_name
 import idautils
 
 
-REPO = Path("/home/v/Desktop/graal-decomp/libqplay")
+REPO = Path(__file__).resolve().parents[1]
 REPORT_PATH = REPO / "artifacts/ida_translation_verification_20260902.json"
 RESIDUAL_LABELS_PATH = REPO / "artifacts/ida_descriptive_residual_labels_20260902.json"
 NATIVE_GROUPS = (
@@ -237,7 +237,7 @@ def main() -> None:
         "database": {
             "source_idb": "GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so.i64",
             "saved_copy": "analysis/libqplay_translated_from_active_v14.i64",
-            "saved_copy_bytes": 62130384,
+            "saved_copy_bytes": 62171344,
             "saved_copy_sha256": "6af4b6630f3688cf2a93128104ece811556fee3b23e2d609f229af9d8e7b2beb",
             "saved_copy_reopen_verified": False,
         },

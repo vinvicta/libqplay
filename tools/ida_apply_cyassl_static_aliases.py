@@ -21,7 +21,7 @@ import ida_loader
 import ida_name
 
 
-REPO = Path("/home/v/Desktop/graal-decomp/libqplay")
+REPO = Path(__file__).resolve().parents[1]
 AUDIT_PATH = REPO / "artifacts/cyassl_static_role_audit_20260826.json"
 APPLY_RENAMES = os.environ.get("CYASSL_APPLY_RENAMES") == "1"
 SAVE_PATH = os.environ.get("CYASSL_SAVE_PATH")

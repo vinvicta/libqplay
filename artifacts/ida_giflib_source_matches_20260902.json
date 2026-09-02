@@ -5,7 +5,7 @@
   "artifact": "ida_giflib_source_matches_20260902",
   "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
   "inventory": {
-    "path": "/home/v/Desktop/graal-decomp/analysis/libqplay.function_inventory.json",
+    "path": "<workspace>/analysis/libqplay.function_inventory.json",
     "row_count": 11296,
     "sha256": "c5e9c2e0b1c3e6cffa061ad7b2212815d54cc62e49ab0a3c6ba1cc9ea54b1844"
   },

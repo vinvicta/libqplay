@@ -41,10 +41,7 @@ TARGETS = [
     ("0x1eba28", "TClient_setEncryptionIn", "script-facing incoming cipher bridge"),
 ]
 
-DEFAULT_OUTPUT = (
-    "/home/v/Desktop/graal-decomp/libqplay/artifacts/"
-    "original_game_login_review_20260830.json"
-)
+DEFAULT_OUTPUT = str(Path(__file__).resolve().parents[1] / "artifacts" / "original_game_login_review_20260830.json")
 
 REDACTED_LITERALS = {
     "DOQLHRbY": "<redacted fixed key literal>",

@@ -32,10 +32,7 @@ TARGETS = [
     ("0x243158", "openAndroidURL_TString_const", "Android external intent bridge"),
 ]
 
-DEFAULT_OUTPUT = (
-    "/home/v/Desktop/graal-decomp/libqplay/artifacts/"
-    "original_external_url_review_20260830.json"
-)
+DEFAULT_OUTPUT = str(Path(__file__).resolve().parents[1] / "artifacts" / "original_external_url_review_20260830.json")
 
 
 def sha256_text(value: str) -> str:

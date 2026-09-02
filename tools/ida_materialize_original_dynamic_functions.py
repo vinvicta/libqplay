@@ -25,7 +25,7 @@ import ida_name
 import ida_nalt
 
 
-REPO = Path("/home/v/Desktop/graal-decomp/libqplay")
+REPO = Path(__file__).resolve().parents[1]
 SYMBOL_AUDIT = Path(
     os.environ.get(
         "ORIGINAL_DYNAMIC_SYMBOL_AUDIT",

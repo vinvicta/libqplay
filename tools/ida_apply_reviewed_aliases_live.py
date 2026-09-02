@@ -10,7 +10,7 @@ import os
 from pathlib import Path
 
 
-REPO = Path("/home/v/Desktop/graal-decomp/libqplay")
+REPO = Path(__file__).resolve().parents[1]
 
 
 def run_source(relative_path):

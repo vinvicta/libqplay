@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from pathlib import Path
 
 import ida_funcs
 import ida_hexrays
@@ -24,10 +25,7 @@ INIT_ARRAY_ADDRESS = 0x35D210
 INIT_ARRAY_COUNT = 20
 FINI_ARRAY_ADDRESS = 0x35D2B0
 FINI_ARRAY_COUNT = 10
-DEFAULT_OUTPUT = (
-    "/home/v/Desktop/graal-decomp/libqplay/artifacts/"
-    "original_native_init_review_20260830.json"
-)
+DEFAULT_OUTPUT = str(Path(__file__).resolve().parents[1] / "artifacts" / "original_native_init_review_20260830.json")
 
 BOUNDARY_TOKENS = (
     "connect",

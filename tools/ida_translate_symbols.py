@@ -8,6 +8,7 @@ import csv
 import json
 import os
 import re
+from pathlib import Path
 
 import ida_auto
 import ida_funcs
@@ -18,7 +19,7 @@ import idautils
 
 
 APPLY_RENAMES = False
-OUTPUT_DIR = "/home/v/Desktop/graal-decomp/analysis"
+OUTPUT_DIR = str(Path(__file__).resolve().parents[2] / "analysis")
 
 
 def is_mangled(name):

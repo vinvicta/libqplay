@@ -5,7 +5,7 @@
   "expected_binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
   "failure_count": 0,
   "failures": [],
-  "input": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so",
+  "input": "<workspace>/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so",
   "input_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
   "materialized_count": 11,
   "network_contacted": false,
@@ -149,6 +149,6 @@
   "saved": true,
   "symbol_audit": "artifacts/elf_symbol_table_audit_20260826.json",
   "symbol_audit_sha256": "ebc6c8bbaa5d5bbc516ff7ec49ca8ba1b5d9920c99b8cf3817e94097b1ad31af",
-  "symbol_list": "/home/v/Desktop/graal-decomp/libqplay/symbols/libqplay.symbols.json",
+  "symbol_list": "<workspace>/libqplay/symbols/libqplay.symbols.json",
   "symbol_list_sha256": "b9e5d272b8ea589ef689e8fd98658b645b01842b725bb9826e929dee585ad441"
 }

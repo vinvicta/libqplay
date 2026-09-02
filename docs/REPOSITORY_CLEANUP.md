@@ -7,8 +7,8 @@ small protocol observations rather than raw application payloads.
 
 ## Current tree
 
-The cleanup audit on 2026-09-02 found 243 tracked files and about 18.1 MiB in
-the current checkout. There are 99 JSON records containing 432,124 lines. No
+The cleanup audit on 2026-09-02 found 245 tracked files and about 18.1 MiB in
+the current checkout. There are 100 JSON records containing 433,571 lines. No
 APK, ELF library, IDA database, signing key, or packet capture is tracked. The
 source tree contains no retired comparison-package filename or reference.
 

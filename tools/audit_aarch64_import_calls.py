@@ -23,9 +23,10 @@ import struct
 from pathlib import Path
 
 
-DEFAULT_BINARY = (
-    "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/"
-    "lib/arm64-v8a/libqplay.so"
+DEFAULT_BINARY = str(
+    Path(__file__).resolve().parents[2]
+    / "GraalOnline+Classic_1.8_APKPure"
+    / "lib/arm64-v8a/libqplay.so"
 )
 DEFAULT_INVENTORY = "symbols/libqplay.function_inventory.json"
 DEFAULT_OUTPUT = "artifacts/original_aarch64_import_callsite_inventory_20260830.json"

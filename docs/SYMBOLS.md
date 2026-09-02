@@ -29,7 +29,7 @@ with explicit fields.
 The active ARM64 database was then processed by the reviewed callback,
 script-table, application-role, CyaSSL, bundled-library, and exact embedded
 source-role passes. The current packed copy was saved as
-`/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v14.i64`.
+`<workspace>/analysis/libqplay_translated_from_active_v14.i64`.
 The active IDA verifier reports 11,296 functions, 11,296 named function heads,
 zero remaining default `sub_` entries, and zero failures after the expanded
 source-role pass. The 124 residual functions carry stable descriptive labels;

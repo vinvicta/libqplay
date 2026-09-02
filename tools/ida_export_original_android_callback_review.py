@@ -49,10 +49,7 @@ TARGETS = [
     ("0x245f54", "Java_com_quattroplay_GraalClassic_Natives_onInvokeEvent", "Java-to-script event bridge"),
 ]
 
-DEFAULT_OUTPUT = (
-    "/home/v/Desktop/graal-decomp/libqplay/artifacts/"
-    "original_android_callback_review_20260830.json"
-)
+DEFAULT_OUTPUT = str(Path(__file__).resolve().parents[1] / "artifacts" / "original_android_callback_review_20260830.json")
 
 
 OBSERVATIONS = [

@@ -19,11 +19,13 @@ import re
 import struct
 import subprocess
 from collections import defaultdict
+from pathlib import Path
 
 
-DEFAULT_BINARY = (
-    "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/"
-    "lib/arm64-v8a/libqplay.so"
+DEFAULT_BINARY = str(
+    Path(__file__).resolve().parents[2]
+    / "GraalOnline+Classic_1.8_APKPure"
+    / "lib/arm64-v8a/libqplay.so"
 )
 DEFAULT_INVENTORY = "symbols/libqplay.function_inventory.json"
 DEFAULT_SYMBOLS = "symbols/libqplay.symbols.csv"

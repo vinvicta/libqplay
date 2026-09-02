@@ -21,7 +21,7 @@ import ida_idaapi
 import ida_name
 
 
-REPO = Path("/home/v/Desktop/graal-decomp/libqplay")
+REPO = Path(__file__).resolve().parents[1]
 DEFAULT_ARTIFACTS = (
     REPO / "artifacts/ida_libjpeg_source_matches_20260902.json",
     REPO / "artifacts/ida_zlib_source_matches_20260902.json",

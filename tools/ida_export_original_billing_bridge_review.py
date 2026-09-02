@@ -38,10 +38,7 @@ TARGETS = [
     ),
 ]
 
-DEFAULT_OUTPUT = (
-    "/home/v/Desktop/graal-decomp/libqplay/artifacts/"
-    "original_billing_bridge_review_20260830.json"
-)
+DEFAULT_OUTPUT = str(Path(__file__).resolve().parents[1] / "artifacts" / "original_billing_bridge_review_20260830.json")
 
 
 def sha256_text(value: str) -> str:

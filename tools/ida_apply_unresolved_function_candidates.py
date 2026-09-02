@@ -7,6 +7,7 @@ not claims about names recovered from the ELF.
 
 import json
 import os
+from pathlib import Path
 
 import ida_auto
 import ida_bytes
@@ -16,8 +17,9 @@ import ida_name
 
 
 APPLY_RENAMES = False
-CANDIDATE_PATH = "/home/v/Desktop/graal-decomp/libqplay/artifacts/unresolved_function_candidates.json"
-OUTPUT_PATH = "/home/v/Desktop/graal-decomp/analysis/unresolved_function_candidate_apply.json"
+REPO = Path(__file__).resolve().parents[1]
+CANDIDATE_PATH = str(REPO / "artifacts/unresolved_function_candidates.json")
+OUTPUT_PATH = str(REPO.parent / "analysis/unresolved_function_candidate_apply.json")
 
 
 def load_candidates():

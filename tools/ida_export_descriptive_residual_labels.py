@@ -21,10 +21,10 @@ import ida_nalt
 import idautils
 
 
-REPO = Path("/home/v/Desktop/graal-decomp/libqplay")
+REPO = Path(__file__).resolve().parents[1]
 PROFILE = REPO / "artifacts/ida_residual_profile.json"
 OUTPUT = REPO / "artifacts/ida_descriptive_residual_labels_20260902.json"
-SAVED_COPY = Path("/home/v/Desktop/graal-decomp/analysis/libqplay_translated_from_active_v14.i64")
+SAVED_COPY = REPO.parent / "analysis/libqplay_translated_from_active_v14.i64"
 PREFIXES = {
     "plt0_resolver": "ida_plt0_aarch64_resolver_",
     "init_or_fini_array_entry": "ida_init_fini_array_entry_",

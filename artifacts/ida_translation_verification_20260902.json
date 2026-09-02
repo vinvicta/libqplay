@@ -22,7 +22,7 @@
   },
   "database": {
     "saved_copy": "analysis/libqplay_translated_from_active_v14.i64",
-    "saved_copy_bytes": 62130384,
+    "saved_copy_bytes": 62171344,
     "saved_copy_reopen_verified": false,
     "saved_copy_sha256": "6af4b6630f3688cf2a93128104ece811556fee3b23e2d609f229af9d8e7b2beb",
     "source_idb": "GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so.i64"

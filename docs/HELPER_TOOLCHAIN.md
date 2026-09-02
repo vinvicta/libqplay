@@ -8,8 +8,8 @@ were copied into the research archive.
 ## Current checkout
 
 On 2026-08-28, the pinned commits were also cloned with Git into
-`/home/v/Desktop/graal-decomp/vendor/GScript.Go-HexaParser` and
-`/home/v/Desktop/graal-decomp/vendor/Moreno.kahn`. These are working
+`<workspace>/vendor/GScript.Go-HexaParser` and
+`<workspace>/vendor/Moreno.kahn`. These are working
 checkouts for this investigation and are still separate from the public
 archive. The current shell does not have a `go` executable, so this pass does
 not claim a new Go test run. The historical test results below remain tied to
@@ -327,6 +327,12 @@ Verified commit:
 5e3a05fc8fbcf3c3f72b3c263238b2ed275fc66d
 Add custom archive signing support
 ```
+
+This is the revision used for the archive-signing and extraction cross-check.
+The later mode-3 semantic-role control used Moreno.kahn commit
+`e1f49b5ce6fa46b41354d9a81f75994f91d3ff16`, which defines the separate
+`StartScript_Fail` and `StartScript_Connector` output slots. The two commits
+support different parts of the investigation.
 
 The Linux connector utility was built from `contool.c`:
 

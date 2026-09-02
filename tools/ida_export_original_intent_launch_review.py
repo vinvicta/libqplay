@@ -29,10 +29,7 @@ TARGETS = [
     ("0x202ad8", "TServerList_getServerStartConnect", "script-visible start destination getter"),
 ]
 
-DEFAULT_OUTPUT = (
-    "/home/v/Desktop/graal-decomp/libqplay/artifacts/"
-    "original_intent_launch_review_20260830.json"
-)
+DEFAULT_OUTPUT = str(Path(__file__).resolve().parents[1] / "artifacts" / "original_intent_launch_review_20260830.json")
 
 
 def sha256_text(value: str) -> str:

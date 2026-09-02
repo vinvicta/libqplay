@@ -9,6 +9,7 @@ generated plan inside IDA.
 
 import json
 import os
+from pathlib import Path
 
 import ida_auto
 import ida_bytes
@@ -19,8 +20,9 @@ import ida_name
 
 
 APPLY_RENAMES = False
-INVENTORY_PATH = "/home/v/Desktop/graal-decomp/libqplay/artifacts/script_table_inventory.json"
-OUTPUT_PATH = "/home/v/Desktop/graal-decomp/analysis/script_table_candidate_apply.json"
+REPO = Path(__file__).resolve().parents[1]
+INVENTORY_PATH = str(REPO / "artifacts/script_table_inventory.json")
+OUTPUT_PATH = str(REPO.parent / "analysis/script_table_candidate_apply.json")
 
 
 def load_inventory():

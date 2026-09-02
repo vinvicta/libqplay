@@ -12,7 +12,7 @@
   "input": {
     "bytes": 1847252,
     "magic": "dex\n035\u0000",
-    "path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/classes.dex",
+    "path": "<workspace>/GraalOnline+Classic_1.8_APKPure/classes.dex",
     "sha256": "58cf65ea6f1c473887164630e2091a7fcbe78f3f72720a6b076cfa6750ae4ffc"
   },
   "interpretation": [

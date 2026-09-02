@@ -38,7 +38,7 @@
     "default_sub_functions": 394,
     "elf_symbol_backed_functions": 8096,
     "named_non_elf_functions": 2807,
-    "path": "/home/v/Desktop/graal-decomp/analysis/libqplay.function_inventory.json",
+    "path": "<workspace>/analysis/libqplay.function_inventory.json",
     "row_count": 11297,
     "segment_counts": {
       ".plt": 1,
@@ -348,7 +348,7 @@
         "total_bytes": 80
       }
     ],
-    "profile_path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/ida_residual_profile.json",
+    "profile_path": "<workspace>/libqplay/artifacts/ida_residual_profile.json",
     "profile_sha256": "8190b8556a4edabc5235aff81919fb69cb2cf979e56107b1dcf7014374316558"
   },
   "residual_functions": [

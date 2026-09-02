@@ -34,10 +34,7 @@ TARGETS = [
     ("0x246104", "MainAndroid_script_requestnewfacebookgraph2", "Facebook Graph upload bridge"),
 ]
 
-DEFAULT_OUTPUT = (
-    "/home/v/Desktop/graal-decomp/libqplay/artifacts/"
-    "original_facebook_bridge_review_20260830.json"
-)
+DEFAULT_OUTPUT = str(Path(__file__).resolve().parents[1] / "artifacts" / "original_facebook_bridge_review_20260830.json")
 
 
 def sha256_text(value: str) -> str:

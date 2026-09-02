@@ -9,6 +9,7 @@ avoids applying a candidate to a different function if an IDB has changed.
 
 import json
 import os
+from pathlib import Path
 
 import ida_auto
 import ida_bytes
@@ -20,8 +21,9 @@ import ida_name
 
 APPLY_BOUNDARIES = False
 APPLY_RENAMES = False
-CANDIDATE_PATH = "/home/v/Desktop/graal-decomp/libqplay/artifacts/native_callback_candidates.json"
-OUTPUT_PATH = "/home/v/Desktop/graal-decomp/analysis/native_callback_candidate_apply.json"
+REPO = Path(__file__).resolve().parents[1]
+CANDIDATE_PATH = str(REPO / "artifacts/native_callback_candidates.json")
+OUTPUT_PATH = str(REPO.parent / "analysis/native_callback_candidate_apply.json")
 
 
 def load_candidates():

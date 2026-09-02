@@ -29,10 +29,7 @@ TARGETS = [
     ("0x2025a0", "THTTPRequest_runScript_void", "response completion state machine"),
 ]
 
-DEFAULT_OUTPUT = (
-    "/home/v/Desktop/graal-decomp/libqplay/artifacts/"
-    "original_http_framing_review_20260830.json"
-)
+DEFAULT_OUTPUT = str(Path(__file__).resolve().parents[1] / "artifacts" / "original_http_framing_review_20260830.json")
 
 
 def sha256_text(value: str) -> str:

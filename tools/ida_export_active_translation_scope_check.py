@@ -20,7 +20,7 @@ import ida_segment
 import idautils
 
 
-REPO = Path("/home/v/Desktop/graal-decomp/libqplay")
+REPO = Path(__file__).resolve().parents[1]
 SCRIPT_TABLE = REPO / "artifacts" / "script_table_inventory.json"
 OUTPUT = REPO / "artifacts" / "ida_active_translation_scope_check_20260902.json"
 ANDROID_START = 0x240000

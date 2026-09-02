@@ -16,10 +16,12 @@ import ida_bytes
 import ida_idaapi
 import ida_name
 import ida_nalt
+from pathlib import Path
 
 
-OUTPUT_PATH = "/home/v/Desktop/graal-decomp/analysis/inbound_handler_table.json"
-WORKSPACE_ROOT = "/home/v/Desktop/graal-decomp"
+REPO = Path(__file__).resolve().parents[1]
+OUTPUT_PATH = str(REPO.parent / "analysis/inbound_handler_table.json")
+WORKSPACE_ROOT = str(REPO.parent)
 TABLE_NAME = "off_369960"
 TABLE_EA = 0x369960
 ENTRY_STRIDE = 8

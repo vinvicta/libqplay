@@ -20,7 +20,7 @@ import ida_loader
 import ida_name
 
 
-REPO = Path("/home/v/Desktop/graal-decomp/libqplay")
+REPO = Path(__file__).resolve().parents[1]
 AUDIT_PATH = REPO / "artifacts/static_library_role_audit_20260901.json"
 APPLY_RENAMES = os.environ.get("STATIC_LIBRARY_APPLY_RENAMES") == "1"
 SAVE_PATH = os.environ.get("STATIC_LIBRARY_SAVE_PATH")

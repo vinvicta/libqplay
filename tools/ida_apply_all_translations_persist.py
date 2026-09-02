@@ -15,7 +15,7 @@ import os
 from pathlib import Path
 
 
-REPO = Path("/home/v/Desktop/graal-decomp/libqplay")
+REPO = Path(__file__).resolve().parents[1]
 APPLY = os.environ.get("LIBQPLAY_APPLY_TRANSLATIONS") == "1"
 source_path = REPO / "tools/ida_apply_all_translations.py"
 source = source_path.read_text(encoding="utf-8")

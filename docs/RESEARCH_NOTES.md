@@ -29,6 +29,13 @@ The custom `con` tool produced the same ZIP payload as the independent
 decoder. That cross-check separated a package parsing mistake from a client
 compatibility problem.
 
+The later mode-3 role check used a separate Moreno.kahn revision,
+`e1f49b5ce6fa46b41354d9a81f75994f91d3ff16`, because it contains the
+`StartScript_Fail` and `StartScript_Connector` output slots. The earlier
+`5e3a05f` revision supports the archive-signing and extraction cross-check;
+the later revision supports the semantic role correction. They are recorded
+separately rather than treated as one moving source snapshot.
+
 ## Symbol pass
 
 The first pass was intentionally mechanical. It extracted the surviving ELF

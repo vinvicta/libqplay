@@ -1,9 +1,9 @@
 {
   "artifact": "original_android_callback_review_20260830",
   "database": {
-    "idb_path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so.i64",
+    "idb_path": "<workspace>/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so.i64",
     "imagebase": "0x0",
-    "path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
+    "path": "<workspace>/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
   },
   "functions": [
     {

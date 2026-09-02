@@ -16,9 +16,10 @@ import json
 from pathlib import Path
 
 
-DEFAULT_BINARY = (
-    "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/"
-    "lib/arm64-v8a/libqplay.so"
+DEFAULT_BINARY = str(
+    Path(__file__).resolve().parents[2]
+    / "GraalOnline+Classic_1.8_APKPure"
+    / "lib/arm64-v8a/libqplay.so"
 )
 DEFAULT_PROFILE = "artifacts/unresolved_function_profile.json"
 DEFAULT_OUTPUT = "artifacts/cyassl_static_role_audit_20260826.json"

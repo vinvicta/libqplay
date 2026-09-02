@@ -44,10 +44,7 @@ TARGETS = [
     ("0x203360", "TServerList_handleClient_void", "game client event loop"),
 ]
 
-DEFAULT_OUTPUT = (
-    "/home/v/Desktop/graal-decomp/libqplay/artifacts/"
-    "game_connection_flow_review_20260830.json"
-)
+DEFAULT_OUTPUT = str(Path(__file__).resolve().parents[1] / "artifacts" / "game_connection_flow_review_20260830.json")
 
 
 CALL_WORDS = {

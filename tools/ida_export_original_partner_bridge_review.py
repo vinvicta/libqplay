@@ -48,10 +48,7 @@ TARGETS = [
     ("0x242ce0", "JNI_showTapJoyOffers", "TapJoy offers bridge"),
 ]
 
-DEFAULT_OUTPUT = (
-    "/home/v/Desktop/graal-decomp/libqplay/artifacts/"
-    "original_partner_bridge_review_20260830.json"
-)
+DEFAULT_OUTPUT = str(Path(__file__).resolve().parents[1] / "artifacts" / "original_partner_bridge_review_20260830.json")
 
 
 # The Distimo fallback contains a fixed mixed-case alphanumeric literal. Keep

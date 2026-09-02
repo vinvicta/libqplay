@@ -188,7 +188,7 @@
     "default_sub_count": 0,
     "descriptive_residual_count": 124,
     "function_count": 11296,
-    "input_path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
+    "input_path": "<workspace>/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
   },
   "interpretation": [
     "All 124 residual functions have stable descriptive labels; none remains a default sub_ name.",

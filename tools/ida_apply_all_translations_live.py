@@ -12,7 +12,7 @@ from pathlib import Path
 
 APPLY_BOUNDARIES = True
 APPLY_RENAMES = True
-REPO = Path("/home/v/Desktop/graal-decomp/libqplay")
+REPO = Path(__file__).resolve().parents[1]
 
 
 def run_source(relative_path, replacements):

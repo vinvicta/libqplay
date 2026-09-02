@@ -183,7 +183,7 @@
   "database": {
     "default_sub_count": 394,
     "function_count": 11297,
-    "input_path": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
+    "input_path": "<workspace>/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
   },
   "interpretation": [
     "The 394 remaining default sub_ functions are outside the Android bridge callback region.",

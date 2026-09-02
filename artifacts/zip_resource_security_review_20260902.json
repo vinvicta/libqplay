@@ -180,7 +180,7 @@
     }
   ],
   "inventory": {
-    "path": "/home/v/Desktop/graal-decomp/libqplay/symbols/libqplay.function_inventory.json",
+    "path": "<workspace>/libqplay/symbols/libqplay.function_inventory.json",
     "row_count": 11296,
     "sha256": "c5e9c2e0b1c3e6cffa061ad7b2212815d54cc62e49ab0a3c6ba1cc9ea54b1844"
   },

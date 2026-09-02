@@ -3,7 +3,7 @@
   "analysis_scope": "exact source matches for embedded FreeType and TrueType helpers in original ARM64 libqplay.so",
   "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
   "inventory": {
-    "path": "/home/v/Desktop/graal-decomp/analysis/libqplay.function_inventory.json",
+    "path": "<workspace>/analysis/libqplay.function_inventory.json",
     "row_count": 11297,
     "sha256": "acbb76e492e684023c2fc761b7634d96ba58fafe32fae8ae096fce5cd78f869f"
   },

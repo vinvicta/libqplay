@@ -24,12 +24,14 @@ import ida_nalt
 import ida_segment
 import ida_xref
 import idautils
+from pathlib import Path
 
 
-SYMBOL_JSON = "/home/v/Desktop/graal-decomp/libqplay/symbols/libqplay.symbols.json"
+REPO = Path(__file__).resolve().parents[1]
+SYMBOL_JSON = REPO / "symbols/libqplay.symbols.json"
 OUTPUT_DIR = os.environ.get(
     "LIBQPLAY_INVENTORY_OUTPUT_DIR",
-    "/home/v/Desktop/graal-decomp/analysis",
+    str(REPO.parent / "analysis"),
 )
 DEFAULT_SUB_RE = re.compile(r"^sub_[0-9A-Fa-f]+$")
 

@@ -18,7 +18,7 @@ from pathlib import Path
 import ida_loader
 
 
-REPO = Path("/home/v/Desktop/graal-decomp/libqplay")
+REPO = Path(__file__).resolve().parents[1]
 output_value = os.environ.get("LIBQPLAY_TRANSLATION_OUTPUT")
 if not output_value:
     raise RuntimeError("LIBQPLAY_TRANSLATION_OUTPUT must name a new .i64 file")

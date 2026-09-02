@@ -14,7 +14,7 @@
     "default_sub_functions": 0,
     "elf_symbol_backed_functions": 8096,
     "named_non_elf_functions": 3200,
-    "path": "/home/v/Desktop/graal-decomp/analysis/libqplay.function_inventory.json",
+    "path": "<workspace>/analysis/libqplay.function_inventory.json",
     "row_count": 11296,
     "segment_counts": {},
     "sha256": "4ad96b1c8942d790b672dbf841e611f20ae2fd15c19d8dd07b751b7062e598a7"

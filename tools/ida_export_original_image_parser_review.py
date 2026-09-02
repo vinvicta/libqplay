@@ -32,10 +32,7 @@ TARGETS = [
     ("0x152110", "TBitmap_readTGA_TStream", "TGA reader"),
 ]
 
-DEFAULT_OUTPUT = (
-    "/home/v/Desktop/graal-decomp/libqplay/artifacts/"
-    "original_image_parser_review_20260830.json"
-)
+DEFAULT_OUTPUT = str(Path(__file__).resolve().parents[1] / "artifacts" / "original_image_parser_review_20260830.json")
 
 
 def sha256_text(value: str) -> str:

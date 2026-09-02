@@ -158,7 +158,7 @@
       },
       "library_bytes": 3657208,
       "library_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
-      "source": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
+      "source": "<workspace>/GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so"
     },
     "2.2": {
       "certificates": [
@@ -199,7 +199,7 @@
       },
       "library_bytes": 3736872,
       "library_sha256": "45a7f97df9b40cdac6fbd42dc715bbabf3bbdb9b33876990e232133a8818941e",
-      "source": "/home/v/Desktop/graal-decomp/GraalOnline+Classic_2.2_installed.apk"
+      "source": "<workspace>/GraalOnline+Classic_2.2_installed.apk"
     }
   },
   "method": {

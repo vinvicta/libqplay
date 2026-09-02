@@ -42,10 +42,7 @@ TARGETS = [
     ("0xea100", "THashList_decodesimple_TString_const", "simple option decoding"),
 ]
 
-DEFAULT_OUTPUT = (
-    "/home/v/Desktop/graal-decomp/libqplay/artifacts/"
-    "original_credential_storage_review_20260830.json"
-)
+DEFAULT_OUTPUT = str(Path(__file__).resolve().parents[1] / "artifacts" / "original_credential_storage_review_20260830.json")
 
 
 def sha256_text(value: str) -> str:

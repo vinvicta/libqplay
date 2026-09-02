@@ -65,7 +65,7 @@
   ],
   "schema": "libqplay.ida-residual-semantic-review.v1",
   "source_audit": {
-    "path": "/home/v/Desktop/graal-decomp/libqplay/artifacts/ida_final_residual_audit_20260830.json",
+    "path": "<workspace>/libqplay/artifacts/ida_final_residual_audit_20260830.json",
     "sha256": "2ad6709e97bf5d89b595456b312e892404a64dcf84fc0997f6582bb137633f9b"
   },
   "tool": "tools/generate_original_residual_semantic_review.py",

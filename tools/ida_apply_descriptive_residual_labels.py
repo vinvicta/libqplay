@@ -22,7 +22,7 @@ import ida_name
 import ida_nalt
 
 
-REPO = Path("/home/v/Desktop/graal-decomp/libqplay")
+REPO = Path(__file__).resolve().parents[1]
 PROFILE = REPO / "artifacts/ida_residual_profile.json"
 EXPECTED_BINARY_SHA256 = "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8"
 PREFIXES = {
