@@ -823,7 +823,8 @@ This creates three conservative review items. The old zlib, bzip2, IJG, and
 giflib code is dependency exposure, not proof of a particular exploitable CVE
 because vendor backports and exact source revisions were not diffed. The GIF
 comparison narrows two historical dictionary-index concerns but does not
-replace fuzzing, and `GIF-003` remains an independent dimension-budget gap.
+replace fuzzing. `GIF-003` remains an independent dimension-budget gap, and
+`GIF-004` remains an extension-accumulation budget gap.
 Resource-backed font parsing reaches FreeType 2.3.6 without a separately
 established font-byte budget. The automatic decompression output buffer starts
 at 64 KiB and grows through 4 MiB, but that per-call behavior does not cap
