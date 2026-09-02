@@ -260,6 +260,9 @@ The compact record is
 * `artifacts/bmp_tga_decoder_security_review_20260902.json` records the BMP
   palette stack boundary, BMP row-size wrap, and TGA decoded-size wrap. These
   are static conditional findings with no malformed-image runtime result.
+* `artifacts/jpeg_decoder_security_review_20260902.json` records the JPEG
+  decoder-dimension path into the shared bitmap allocator and scanline copy,
+  including a conditional 32-bit RGB size-wrap candidate.
 * `artifacts/static_library_role_audit_20260901.json` records 30 high-
   confidence bundled-library role aliases, including the final bzip2 stream
   callbacks.

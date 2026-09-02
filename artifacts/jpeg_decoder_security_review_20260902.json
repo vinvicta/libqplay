@@ -1,0 +1,102 @@
+{
+  "analysis_date": "2026-09-02",
+  "analysis_scope": "static review of the original ARM64 JPEG wrapper's decoder dimensions, shared bitmap allocation, and scanline destination",
+  "artifact": "jpeg_decoder_security_review_20260902",
+  "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+  "functions": {
+    "bitmap_allocator": {
+      "address": "0x1140b0",
+      "ida_name": "TBitmap_allocateBitmap_uint_uint_bool_TBitmap_BitmapFormat",
+      "size": 748
+    },
+    "bytes_per_pixel": {
+      "address": "0x11405c",
+      "ida_name": "TBitmap_updateBytesPerPixel_void",
+      "size": 84
+    },
+    "error_handler": {
+      "address": "0x150f20",
+      "ida_name": "TBitmap_JPEG_errorExit",
+      "size": 32
+    },
+    "jpeg_wrapper": {
+      "address": "0x150fa8",
+      "ida_name": "TBitmap_readJPEG_TStream",
+      "size": 524
+    },
+    "message_handler": {
+      "address": "0x150eb0",
+      "ida_name": "TBitmap_JPEG_outputMessage",
+      "size": 112
+    }
+  },
+  "fuzzing_performed": false,
+  "inventory": {
+    "path": "/home/v/Desktop/graal-decomp/libqplay/symbols/libqplay.function_inventory.json",
+    "row_count": 11296,
+    "sha256": "c5e9c2e0b1c3e6cffa061ad7b2212815d54cc62e49ab0a3c6ba1cc9ea54b1844"
+  },
+  "network_contacted": false,
+  "not_claimed": [
+    "That JPEG-001 reproduces without a bounded JPEG corpus and an ARM64 allocator harness.",
+    "That the bundled IJG implementation accepts every dimension witness without failing earlier internal allocations.",
+    "That a conditional overflow candidate is an exploitable code-execution primitive.",
+    "That any specific historical IJG CVE maps directly to this binary without a vendor-source comparison."
+  ],
+  "overall_assessment": "The JPEG wrapper needs checked size_t arithmetic and a small decoded-pixel or decoded-byte budget before the shared bitmap allocation. JPEG-001 is a conditional dimension-wrap candidate that should be validated only in a disposable, address-sanitized ARM64 harness.",
+  "runtime_reproduction": false,
+  "scanline_boundary": {
+    "addresses": [
+      "0x151084",
+      "0x1510a8",
+      "0x1510b0",
+      "0x1510b8",
+      "0x1510c4",
+      "0x11415c",
+      "0x1141e4",
+      "0x1510dc",
+      "0x151120",
+      "0x15112c",
+      "0x151134"
+    ],
+    "arithmetic_example": {
+      "first_scanline_excess_bytes": 131071,
+      "mathematical_bitmap_bytes": 4295032830,
+      "mathematical_pixel_count": 1431677610,
+      "scanline_copy_bytes": 196605,
+      "wrapped_bitmap_allocation_bytes": 65534
+    },
+    "assessment": "The witness is within the JPEG dimension field range. Its mathematical RGB bitmap needs 4295032830 bytes, but the shared 32-bit allocation stores 65534 bytes while the first decoder scanline needs 196605 bytes. If the decoder accepts the dimensions, produces a scanline, and the wrapped-sized allocation returns storage, the first scanline can run past the bitmap allocation. This is a conditional static heap-overflow candidate, not a demonstrated crash.",
+    "decoder_fields": {
+      "description": "The JPEG SOF dimension fields are 16-bit, so this witness stays within the format's field range.",
+      "dimension_field_limit": 65535,
+      "output_components": 3,
+      "output_height": 21846,
+      "output_width": 65535
+    },
+    "id": "JPEG-001",
+    "instruction": "TBitmap_readJPEG_TStream calls the bundled JPEG decoder, passes output_width and output_height to the shared bitmap allocator with the three-byte RGB format, then calculates output_components * output_width in W24. Each scanline is submitted to jpeg_read_scanlines with a destination pointer formed from the bitmap base plus a 32-bit row offset.",
+    "severity": "potential heap-buffer-overflow, conditional",
+    "supporting_behavior": [
+      "The wrapper checks the JPEG input stream length before creating the decoder, but it has no application pixel or decoded-byte cap after jpeg_start_decompress reports its dimensions.",
+      "The RGB branch uses bitmap format 2, which the bytes-per-pixel helper maps to three bytes per pixel.",
+      "The shared allocator stores its width-times-height-times-bytes-per-pixel product in a 32-bit field before memalign.",
+      "The scanline loop does not compare the row copy length with the allocated bitmap capacity before calling jpeg_read_scanlines."
+    ]
+  },
+  "schema": "libqplay.jpeg-decoder-security-review.v1",
+  "tool": "tools/generate_jpeg_decoder_security_review.py",
+  "tool_version": 1,
+  "wrapper_hardening_gaps": [
+    {
+      "id": "JPEG-002",
+      "observation": "The wrapper delegates malformed syntax to the bundled IJG decoder and installs an errorExit setjmp path, but does not impose its own decoded pixel or cumulative texture budget before jpeg_start_decompress and bitmap allocation.",
+      "severity": "availability and memory-pressure risk"
+    },
+    {
+      "id": "JPEG-003",
+      "observation": "The wrapper uses a fixed local JPEG state area and a stream callback. Exact library cleanup behavior on every malformed input state should be checked in a bounded harness rather than inferred from the normal path.",
+      "severity": "parser robustness concern"
+    }
+  ]
+}
