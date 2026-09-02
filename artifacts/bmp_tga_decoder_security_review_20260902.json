@@ -1,0 +1,161 @@
+{
+  "analysis_date": "2026-09-02",
+  "analysis_scope": "static review of the original ARM64 BMP palette and row-copy boundaries, the shared bitmap allocator, and TGA dimension arithmetic",
+  "artifact": "bmp_tga_decoder_security_review_20260902",
+  "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+  "bmp_dimension_boundary": {
+    "addresses": [
+      "0x115fb4",
+      "0x115fb8",
+      "0x115fd0",
+      "0x11601c",
+      "0x116020",
+      "0x116070",
+      "0x11415c",
+      "0x1141e4"
+    ],
+    "arithmetic_example": {
+      "destination_row_copy_bytes": 3145728,
+      "first_row_shortfall_bytes": 1048576,
+      "mathematical_bitmap_bytes": 4297064448,
+      "source_row_bytes_padded": 3145728,
+      "source_row_bytes_without_padding": 3145728,
+      "stream_bytes_needed_for_first_row": 3145728,
+      "wrapped_bitmap_allocation_bytes": 2097152
+    },
+    "assessment": "For the witness dimensions, the shared allocator stores 2,097,152 bytes after 32-bit wrap, while the first 24-bit row copy requests 3,145,728 bytes. If the stream has that row available and the allocator returns the wrapped-sized buffer, the first read can run past the bitmap allocation. This is a conditional static heap-overflow candidate, not a fuzzing result.",
+    "header_fields": {
+      "bi_bit_count": 24,
+      "bi_compression": 0,
+      "bi_height": 1366,
+      "bi_width": 1048576,
+      "destination_bytes_per_pixel": 3,
+      "destination_format": 2
+    },
+    "id": "BMP-002",
+    "instruction": "The BMP reader passes the header width and absolute height to TBitmap_allocateBitmap with destination format 2. The allocator maps format 2 to three bytes per pixel and stores height * width * bytes_per_pixel in a 32-bit field before calling memalign. The reader then passes width * three as the destination row length to TStream_read.",
+    "severity": "potential heap-buffer-overflow, conditional",
+    "supporting_behavior": [
+      "The TStream_read_void_int implementation caps the copy by stream bytes remaining, but it does not know the allocation capacity of the bitmap destination.",
+      "The 24-bit source row is already four-byte aligned for this width, so the first row copy length is the full 3 * width value.",
+      "The header image-size field is read but is not used as a safety limit before the row loop."
+    ]
+  },
+  "bmp_palette_boundary": {
+    "addresses": [
+      "0x115f64",
+      "0x116114",
+      "0x11611c",
+      "0x116120",
+      "0x11612c"
+    ],
+    "arithmetic_example": {
+      "bytes_past_stack_buffer": 4,
+      "fixed_stack_buffer_bytes": 1024,
+      "palette_entries": 257,
+      "requested_bytes": 1028
+    },
+    "assessment": "A 4 or 8 bit BI_RGB BMP with biClrUsed greater than 256 and at least biClrUsed * 4 bytes remaining at the palette read can write beyond the fixed stack array. This is a static memory-corruption candidate. No malformed BMP was fuzzed, and no runtime crash or code-execution primitive was demonstrated.",
+    "header_fields": {
+      "bi_bit_count": [
+        4,
+        8
+      ],
+      "bi_clr_used": 257,
+      "bi_compression": 0
+    },
+    "id": "BMP-001",
+    "instruction": "TBitmap_readMSBmp_TStream selects the 4 or 8 bit palette case from the DIB bit count, loads biClrUsed from the header, shifts that count left by two in W2, and passes the result to TStream_read. The destination is the fixed 1,024-byte stack array at the function's SP+0x100 frame offset.",
+    "severity": "potential stack-buffer-overflow, conditional",
+    "supporting_behavior": [
+      "TStream_read_void_int copies the requested positive length, capped only by bytes remaining in the stream, into the caller-provided destination.",
+      "The normal biClrUsed value of zero is replaced with 256, which exactly fills the fixed buffer.",
+      "The later palette loop stops at the end of that fixed buffer, but that does not prevent the earlier oversized TStream_read copy."
+    ]
+  },
+  "functions": {
+    "bitmap_allocator": {
+      "address": "0x1140b0",
+      "ida_name": "TBitmap_allocateBitmap_uint_uint_bool_TBitmap_BitmapFormat",
+      "size": 748
+    },
+    "bmp_reader": {
+      "address": "0x115e28",
+      "ida_name": "TBitmap_readMSBmp_TStream",
+      "size": 1880
+    },
+    "bytes_per_pixel": {
+      "address": "0x11405c",
+      "ida_name": "TBitmap_updateBytesPerPixel_void",
+      "size": 84
+    },
+    "stream_read": {
+      "address": "0xf0684",
+      "ida_name": "TStream_read_void_int",
+      "size": 216
+    },
+    "tga_loader": {
+      "address": "0x1515cc",
+      "ida_name": "tga_load",
+      "size": 2876
+    },
+    "tga_reader": {
+      "address": "0x152110",
+      "ida_name": "TBitmap_readTGA_TStream",
+      "size": 240
+    }
+  },
+  "fuzzing_performed": false,
+  "inventory": {
+    "path": "/home/v/Desktop/graal-decomp/libqplay/symbols/libqplay.function_inventory.json",
+    "row_count": 11296,
+    "sha256": "c5e9c2e0b1c3e6cffa061ad7b2212815d54cc62e49ab0a3c6ba1cc9ea54b1844"
+  },
+  "network_contacted": false,
+  "not_claimed": [
+    "That any of these witnesses has been reproduced on a device or in an ARM64 sanitizer harness.",
+    "That the native server will deliver a malicious BMP or TGA before authentication and resource-cache gates.",
+    "That a conditional overflow candidate is an exploitable code-execution primitive.",
+    "That every allocator configuration returns storage for a wrapped or zero-byte request."
+  ],
+  "overall_assessment": "The BMP and TGA readers need checked size_t arithmetic and explicit format, dimension, palette, decoded-byte, and row-size limits before allocation or stream reads. BMP-001 is the sharpest direct fixed-buffer boundary. BMP-002 and TGA-001 are conditional dimension-wrap candidates that should be tested only in a bounded disposable ARM64 harness.",
+  "runtime_reproduction": false,
+  "schema": "libqplay.bmp-tga-decoder-security-review.v1",
+  "tga_dimension_boundary": {
+    "addresses": [
+      "0x151684",
+      "0x1516a4",
+      "0x151810",
+      "0x151814",
+      "0x151818",
+      "0x151ca4",
+      "0x152168",
+      "0x1521bc"
+    ],
+    "arithmetic_example": {
+      "first_pixel_write_bytes": 4,
+      "mathematical_decoded_bytes": 4294967296,
+      "pixel_count": 1073741824,
+      "wrapped_bitmap_allocation_bytes": 0,
+      "wrapped_tga_loader_allocation_bytes": 0
+    },
+    "assessment": "A 32-bit 32,768 by 32,768 TGA produces a nonzero 32-bit pixel count but a zero-byte decoded allocation after the four-byte pixel multiplication wraps. Depending on allocator behavior, the first pixel store can dereference a null or zero-sized allocation, and the wrapper has a corresponding zero-sized destination copy. This is a conditional static memory-safety candidate. No malformed TGA was fuzzed and no runtime crash was observed.",
+    "header_fields": {
+      "color_map_type": 0,
+      "height": 32768,
+      "image_type": 2,
+      "pixel_depth": 32,
+      "width": 32768
+    },
+    "id": "TGA-001",
+    "instruction": "tga_load accepts 16-bit width and height fields, multiplies them in W registers, then multiplies the resulting pixel count by four for a 32-bit pixel buffer. The direct image decode writes pixels through the same 32-bit index arithmetic without checking the malloc result. TBitmap_readTGA_TStream also allocates the destination bitmap from the same wrapped dimension product and copies each source row into it.",
+    "severity": "potential heap-buffer-overflow, conditional",
+    "supporting_behavior": [
+      "Image type 2 is accepted by the uncompressed true-color decode path.",
+      "The 32-bit pixel count is nonzero, so the decode loop is entered even though the byte allocation wraps to zero.",
+      "malloc(0) is not checked before the decoder stores the first pixel, and the wrapper does not validate the destination allocation before memcpy."
+    ]
+  },
+  "tool": "tools/generate_bmp_tga_decoder_security_review.py",
+  "tool_version": 1
+}

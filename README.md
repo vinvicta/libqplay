@@ -257,6 +257,9 @@ The compact record is
 * `artifacts/png_decoder_security_review_20260902.json` records the PNG/MNG
   raw-scanline and decoded-output size arithmetic, including a conditional
   32-bit dimension-wrap overflow candidate and its concrete arithmetic witness.
+* `artifacts/bmp_tga_decoder_security_review_20260902.json` records the BMP
+  palette stack boundary, BMP row-size wrap, and TGA decoded-size wrap. These
+  are static conditional findings with no malformed-image runtime result.
 * `artifacts/static_library_role_audit_20260901.json` records 30 high-
   confidence bundled-library role aliases, including the final bzip2 stream
   callbacks.
