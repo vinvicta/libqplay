@@ -89,12 +89,16 @@ enters mode 3, which uses `http://con.quattroplay.com/conf.gs` and its `con2`
 retry. A plain socket failure follows the ordinary two-attempt progression.
 
 This is not a claim that a network attacker can control the current service or
-that the fallback is reachable from every failure. It is a confirmed
-cleartext downgrade in the native state machine, with current endpoint
-availability and runtime reachability still unverified. A production repair
-should preserve peer and hostname verification, log the original TLS error,
-and reject the HTTPS-to-HTTP transition unless an operator explicitly accepts
-that policy for a controlled legacy endpoint.
+that the fallback is reachable from every failure. A private two-port
+emulator control confirmed runtime reachability for an expired-certificate
+failure: the client made no HTTPS GET and then sent plain `GET /conf.gs`. The
+control returned the archived `/con.png` package at that path and did not
+reach a synthetic game listener, so current endpoint availability and
+path-specific response behavior remain unverified. The runtime record is
+`artifacts/connector_fallback_runtime_control_20260902.json`. A production
+repair should preserve peer and hostname verification, log the original TLS
+error, and reject the HTTPS-to-HTTP transition unless an operator explicitly
+accepts that policy for a controlled legacy endpoint.
 
 The native libraries do have useful baseline mitigations. All four packaged
 libraries report a non-executable `GNU_STACK`, GNU RELRO, and `BIND_NOW` in the

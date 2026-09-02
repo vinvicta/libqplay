@@ -149,11 +149,19 @@ adb reverse tcp:18080 tcp:18080
 ```
 
 Use the expired-trust diagnostic package, with the local resolver patch and
-the connector HTTPS port set to 18443. The expected observation is a TCP and
-TLS arrival on the first listener, no HTTP request on that TLS connection, and
-then a plain `GET /conf.gs` on the second listener. If the second listener is
-silent, record the native connector mode and socket error before concluding
-that the fallback branch is absent. This is a local control only. It does not
+the connector HTTPS port set to 18443. The observed result on the private
+x86_64 emulator is a TCP and TLS arrival on the first listener, no HTTP request
+on that TLS connection, and then a plain `GET /conf.gs` on the second listener.
+The full metadata is in
+`artifacts/connector_fallback_runtime_control_20260902.json`.
+
+The first control returned the archived `/con.png` package for `/conf.gs`.
+The client remained at `Connecting to the login server...` and made no game
+connection. Repeating the response with title-case headers and
+`Connection: close` produced the same result. This is a useful boundary, not
+a proof that the package parser or script VM rejects a real `conf.gs` body.
+The current endpoint response must be obtained from an authorized source
+before making a release repair. This is a local control only. It does not
 validate the current service or justify disabling certificate verification.
 
 When `--output-dir` points to a new directory, the responder creates it before

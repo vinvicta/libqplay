@@ -40,6 +40,10 @@ This is the short handoff view. The full reasoning and command history are in
     The current packed copy has 11,296 named functions, zero default `sub_`
     entries, and 124 stable descriptive residual labels. Verification has
     zero failures.
+12. A private x86_64 two-port control reached the expired TLS responder,
+    emitted no HTTPS GET, and then issued plain `GET /conf.gs`. The same
+    result held with `Connection: close`. The fallback metadata is in
+    `artifacts/connector_fallback_runtime_control_20260902.json`.
 
 The Android lifecycle review now gives a pre-network checkpoint. The GL thread
 must have a surface and window focus, and the permission callback must set
@@ -84,11 +88,13 @@ The earlier xchg handler-table patch and packet-182 hide hypothesis are closed
 as false leads. Packet 182 maps to the process or window-list path, while
 packet 190 reaches the connecting-window completion wrapper.
 
-The remaining blockers are external validation rather than an identified
-local parser failure:
+The remaining blockers are endpoint-specific validation rather than an
+identified failure in the native TLS fallback transition:
 
 * the current connector certificate and package-signing chain have not been
   tested against a live service;
+* the response format served by the current mode-3 `conf.gs` endpoint is not
+  known, so the fallback package-to-game handoff remains open;
 * no live game-server login has been attempted or verified;
 * the working replay uses an x86_64 diagnostic APK, so ARM64 device behavior
   still needs a controlled run.
@@ -116,11 +122,11 @@ message. A private ARM64 run should record these checkpoints in order:
    reached TCP but sent no HTTP request with the expired trust material, while
    a matching valid bundle sent the GET. A live device that stops at this
    boundary should not be debugged by disabling certificate checks. Also
-   record the next connector mode and destination. Static analysis shows that
-   a nonzero CyaSSL error in mode 1 or 2 jumps directly to mode 3 and may send
-   plain `GET /conf.gs`, so the missing first GET is not by itself proof that
-   the state machine stopped. The focused record is
-   `artifacts/connector_fallback_review_20260902.json`.
+   record the next connector mode and destination. The two-port runtime
+   control confirms that this x86_64 build then sends plain `GET /conf.gs`.
+   The static model remains in `artifacts/connector_fallback_review_20260902.json`
+   and the runtime record is
+   `artifacts/connector_fallback_runtime_control_20260902.json`.
 5. If HTTP completes, check the binary envelope, RSA result, ZIP dispatch, and
    `StartScript_Connector`. A valid HTTP response that never emits
    `onServerWarp` is a connector package or script activation problem.

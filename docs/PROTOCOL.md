@@ -188,12 +188,18 @@ and keeps the two-attempt sequence.
 
 This distinction explains why an expired certificate can produce no HTTP GET
 on the first TLS connection while the eventual user-facing result is only a
-generic connector failure. The static path does not prove that a current
-service still publishes `conf.gs`. The existing expiry control listened only
-on the TLS diagnostic port, so it did not observe mode 3, and no live endpoint
-was contacted. A local two-port control should record both the failed TLS
-attempt and any subsequent plain `GET /conf.gs` before this transition is
-treated as a runtime fact.
+generic connector failure. A two-port loopback control now records both
+events: the expired TLS responder received a TCP connection and no HTTP
+request, followed by a plain `GET /conf.gs` on the second listener. The full
+metadata record is
+`artifacts/connector_fallback_runtime_control_20260902.json`.
+
+The same control returned the archived `/con.png` package for `/conf.gs`, and
+the client did not reach the synthetic game listener. A repeat using
+title-case headers and `Connection: close` behaved the same way. Therefore the
+runtime result confirms the native TLS-to-HTTP transition, but does not yet
+prove that the saved package is the correct response for the mode-3 endpoint
+or that the current service still publishes that response.
 
 The response parser is `THTTPRequest_preParseData_void` at ARM64 `0x201d68`.
 It lowercases each complete header line before checking the header name, so

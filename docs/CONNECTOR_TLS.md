@@ -106,16 +106,25 @@ use the normal two-attempt progression.
 This is both a compatibility lead and a transport-policy concern. A stale
 certificate can therefore be followed by a cleartext request, while an
 unavailable legacy fallback can hide the first TLS cause behind the generic
-failure screen. The current service's support for `conf.gs` is unverified.
-The existing expiry control did not observe it because its listener covered
-only the TLS diagnostic port. The diagnostic port patcher now supports this
-split explicitly. On ARM64, `--port 18443 --fallback-port 18080` changes the
-two HTTPS defaults and the two plain-HTTP defaults at the parser's separate
-instruction sites. On x86_64, the compiler folded those defaults into one
-expression, so the same pair is represented by a single immediate where
-`18080 = 18443 - 363`. The next bounded runtime control should use two
-responders and log the mode, attempt, transport, and native error for each
-connection.
+failure screen. The two-port runtime control now confirms that transition:
+the private x86_64 candidate reached the expired TLS responder on `18443`, sent
+no HTTP request there, and then sent `GET /conf.gs` to the cleartext responder
+on `18080`. The record is
+`artifacts/connector_fallback_runtime_control_20260902.json`.
+
+That control returned the archived `/con.png` package for `/conf.gs`. The
+client stayed at the native `Connecting to the login server...` checkpoint and
+opened no synthetic game connection. Repeating the test with title-case
+headers and `Connection: close` produced the same boundary. This proves the
+transport fallback, but not that the archived `/con.png` body is a valid
+path-specific `conf.gs` response or that the script handoff is broken. The
+current service's mode-3 response remains unverified.
+
+The diagnostic port patcher supports this split explicitly. On ARM64,
+`--port 18443 --fallback-port 18080` changes the two HTTPS defaults and the
+two plain-HTTP defaults at the parser's separate instruction sites. On
+x86_64, the compiler folded those defaults into one expression, so the same
+pair is represented by a single immediate where `18080 = 18443 - 363`.
 
 ## Repair boundary
 

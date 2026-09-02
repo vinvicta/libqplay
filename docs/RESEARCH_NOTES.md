@@ -1596,12 +1596,36 @@ contacted, and the current service's support for `conf.gs` remains unknown.
 
 The diagnostic port patcher now supports separate ARM64 defaults for the
 diagnostic TLS port and the mode-3 HTTP port. On x86_64 the compiler folded the
-two defaults into one expression with a fixed 363-port difference. A runtime
-control should use separate listeners, log the mode, attempt, endpoint,
-transport, ClientHello or plain TCP arrival, HTTP request, and native error
-before drawing a conclusion about the generic failure screen. A compatible
+two defaults into one expression with a fixed 363-port difference. A compatible
 repair should use a current authorized chain, preserve peer and hostname
 verification, and make any HTTPS-to-HTTP fallback an explicit policy decision.
+
+## Runtime two-port fallback control
+
+The static fallback branch was exercised on 2026-09-02 with a private x86_64
+package built from the stock 1.8 APK. The package changed only the connector
+HTTPS default to `18443`, the folded x86_64 fallback expression to `18080`,
+hostname resolution to `127.0.0.1`, and the outgoing game RC4 key to the fixed
+value used by the local responder. The native RSA result branch and
+certificate verification remained enabled. The APK and native hashes are in
+`artifacts/connector_fallback_runtime_control_20260902.json`.
+
+An expired test certificate was served on `127.0.0.1:18443`. The client
+reached the listener, aborted the TLS exchange before sending an HTTP request,
+and then opened the separate cleartext listener on `127.0.0.1:18080`. That
+listener recorded exactly one request with the original request shape, but the
+path was `/conf.gs`, which is the mode-3 fallback endpoint. The body returned
+was the archived 16,446-byte `/con.png` package because no current `conf.gs`
+body was available locally.
+
+The app stayed at the native `Connecting to the login server...` checkpoint
+and did not connect to the synthetic game responder. A repeat with title-case
+headers and `Connection: close` produced the same result. This closes the
+question of whether the native TLS error branch can reach mode 3 at runtime,
+but leaves the next boundary deliberately open: the archived `/con.png` body
+may not be the response format expected from `conf.gs`, and the local trace
+does not distinguish that case from a later script activation problem. No live
+host was contacted.
 
 ## Cross-ABI parity pass
 

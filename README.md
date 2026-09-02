@@ -55,10 +55,16 @@ diagnostic changes remain private to the local test build.
 The connector fallback audit found a second, more specific behavior. When the
 native CyaSSL read or write path records a TLS error, the connector skips its
 remaining HTTPS retry in modes 1 and 2 and jumps to the cleartext mode 3
-`conf.gs` endpoint. This is confirmed from static ARM64 control flow, not from
-a live service. The report and generator are
+`conf.gs` endpoint. A private two-port emulator control confirmed the runtime
+transition, including the failed TLS leg and the subsequent plain
+`GET /conf.gs`. The static and runtime records are
 `artifacts/connector_fallback_review_20260902.json` and
-`tools/generate_connector_fallback_review.py`.
+`artifacts/connector_fallback_runtime_control_20260902.json`.
+
+That control reused the archived `/con.png` package as the `/conf.gs` body and
+did not reach the synthetic game listener. The current mode-3 response is
+still unverified, so this is a transport finding and a compatibility lead, not
+a release repair.
 
 The symbolized handler-table investigation also produced an important
 correction. The original `setInDataHandlers` instructions are correct for this
@@ -266,6 +272,8 @@ The compact record is
   IDA export for the original connector request lifecycle.
 * `artifacts/connector_fallback_review_20260902.json` records the connector
   retry state machine and the TLS-error jump to its cleartext fallback.
+* `artifacts/connector_fallback_runtime_control_20260902.json` records the
+  private two-port runtime observation and its response-format limitation.
 * `artifacts/cross_abi_compatibility_review_20260902.json` compares the four
   native ABI variants without copying binaries into the repository.
 * `artifacts/game_connection_flow_review_20260830.json` preserves the compact

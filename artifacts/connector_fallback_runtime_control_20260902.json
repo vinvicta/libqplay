@@ -1,0 +1,106 @@
+{
+  "schema": "libqplay.connector-fallback-runtime-control.v1",
+  "artifact": "connector_fallback_runtime_control_20260902",
+  "analysis_date": "2026-09-02",
+  "scope": "private loopback-only x86_64 emulator control",
+  "network_contacted": false,
+  "purpose": "Observe the native transition from a failed HTTPS connector handshake to the mode-3 HTTP request without contacting a live service.",
+  "static_basis": {
+    "library": "private original 1.8 x86_64 libqplay.so",
+    "library_sha256": "b529184d981ec2a08e6a623e1d0634bb6a36d0e71856c544608190ed5b35a8d7",
+    "login_va": "0x204420",
+    "connector_mode_va": "0x203df4",
+    "download_completion_va": "0x200010",
+    "tls_read_va": "0x2074d4",
+    "tls_write_va": "0x207118"
+  },
+  "diagnostic_package": {
+    "apk_sha256": "fc9492422ba506b04c95000c8a769691ab5c98a072568dd5e3740e3e9715ab8b",
+    "apk_bytes": 24703004,
+    "native_member": "lib/x86_64/libqplay.so",
+    "native_sha256": "c2145a5bdd3611f548271000f630301c8d00b74ba538289cc7de9a157973cf32",
+    "native_bytes": 3850000,
+    "signature_schemes_verified": ["v1", "v2", "v3"],
+    "rsa_bypass_applied": false,
+    "patches": [
+      "patch_connector_tls_port_test.py --arch x86_64 --port 18443 --fallback-port 18080",
+      "patch_localhost_resolver_test.py --arch x86_64",
+      "patch_fixed_output_rc4_key_test.py --arch x86_64"
+    ],
+    "test_only": true
+  },
+  "emulator": {
+    "device": "emulator-5554",
+    "android_api": 36,
+    "selected_abi": "x86_64",
+    "adb_reverse": {
+      "18443": "127.0.0.1 TLS responder",
+      "18080": "127.0.0.1 HTTP responder",
+      "14900": "127.0.0.1 synthetic game responder"
+    }
+  },
+  "tls_leg": {
+    "port": 18443,
+    "certificate": "private expired test certificate for con.quattroplay.com",
+    "tcp_arrival": true,
+    "http_request_seen": false,
+    "responder_observation": "SSLZeroReturnError: TLS/SSL connection has been closed (EOF)",
+    "interpretation": "The client aborted the TLS exchange after the expired test certificate was presented, before sending an HTTP request."
+  },
+  "http_fallback_leg": {
+    "port": 18080,
+    "request_count": 1,
+    "request_path": "/conf.gs",
+    "request_sha256": "9e18c6d14a508488cb64d72f15af347d209b73ab072f6ad409676eb2c9261068",
+    "query_sha256": "7b1ace696d596b11df8c52c5546bb6076a91b11f4c5ba5908330f6b4aab6be9f",
+    "request_first_line": "GET /conf.gs?p=<encoded query> HTTP/1.0",
+    "host_header": "con.quattroplay.com:18080",
+    "user_agent": "Graal/6.15401",
+    "response_body_bytes": 16446,
+    "response_body_sha256": "73996942d493a8db4b7b6238dcc9d6e4bb68a91b48ba5946db4cff9252bc4b7c",
+    "response_body_source": "archived connector package reused from the local /con.png capture",
+    "header_controls": {
+      "keep_alive": {
+        "request_connection": "Keep-Alive",
+        "responder_connection": "keep-alive",
+        "game_connections": 0,
+        "native_log_state": "Connecting to the login server..."
+      },
+      "close": {
+        "request_connection": "Keep-Alive",
+        "responder_connection": "close",
+        "header_case": "title",
+        "game_connections": 0,
+        "native_log_state": "Connecting to the login server..."
+      }
+    }
+  },
+  "game_leg": {
+    "port": 14900,
+    "connections": 0,
+    "frames": [],
+    "interpretation": "The synthetic game responder was not reached after the fallback body was returned. This does not distinguish a path-specific conf.gs response requirement from a script activation or state-machine issue."
+  },
+  "native_log_checkpoint": [
+    "basedatafolder to: /data/user/0/com.quattroplay.GraalClassic/",
+    "Scanning files ...",
+    "Scanning done.",
+    "GraalClassic has been activated!",
+    "Initialized OpenGL.",
+    "Maximum texture size: 8192",
+    "Connecting to the login server..."
+  ],
+  "conclusion": {
+    "tls_error_to_http_fallback_runtime_proven": true,
+    "connector_package_to_game_handoff_runtime_proven": false,
+    "live_service_verified": false,
+    "certificate_verification_disabled": false,
+    "safe_repair_conclusion": "Use an authorized current trust chain and separately verify the service response for the mode-3 endpoint. Do not disable certificate verification based on this control."
+  },
+  "limitations": [
+    "The HTTP responder returned the archived /con.png package for /conf.gs because no current conf.gs response was available locally.",
+    "No remote host or production endpoint was contacted.",
+    "The x86_64 emulator did not execute the ARM64 native member.",
+    "The local responder logs do not expose the native CyaSSL numeric error value."
+  ]
+}
