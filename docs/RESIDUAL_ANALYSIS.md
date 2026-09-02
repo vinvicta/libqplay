@@ -88,6 +88,14 @@ corruption. The zero-height divide-by-zero described by
 assigned to this APK because the current `DGifSlurp` body does not show that
 direct divider state and the embedded giflib release is unknown.
 
+The same high-level loop retains every nonempty extension block. Its calls at
+`0x2ae77c`, `0x2ae7a0`, and `0x2ae914` feed `GifAddExtensionBlock`, whose
+`reallocarray(count + 1, 24)` and payload allocation occur at `0x2af03c` and
+`0x2af074`. Individual sub-blocks are at most 255 bytes, but there is no
+aggregate extension count or byte budget. This is recorded as `GIF-004`, a
+static availability and memory-pressure concern rather than a demonstrated
+overwrite.
+
 One apparent function at `0x2ac400` was not code. The preserved ELF symbol
 `jpeg_fdct_float` ends at `0x2ac3fc`, and the preserved
 `jpeg_fdct_ifast` function begins at `0x2ac440`. The bytes from `0x2ac3fc`

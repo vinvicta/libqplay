@@ -50,9 +50,9 @@ def build_report(inventory_path: Path) -> dict:
 
     return {
         "artifact": "gif_decoder_security_review_20260902",
-        "schema": "libqplay.gif-decoder-security-review.v1",
+        "schema": "libqplay.gif-decoder-security-review.v2",
         "tool": "tools/generate_gif_decoder_security_review.py",
-        "tool_version": 1,
+        "tool_version": 2,
         "analysis_date": "2026-09-02",
         "analysis_scope": (
             "static comparison of the embedded giflib-style GIF decoder and "
@@ -169,6 +169,33 @@ def build_report(inventory_path: Path) -> dict:
                 "corruption primitive."
             ),
         },
+        "observed_extension_accumulation": {
+            "id": "GIF-004",
+            "severity": "availability and memory-pressure risk",
+            "addresses": [
+                "0x2ae77c",
+                "0x2ae7a0",
+                "0x2ae914",
+                "0x2af03c",
+                "0x2af04c",
+                "0x2af074",
+            ],
+            "instruction": (
+                "DGifSlurp passes every nonempty extension block to "
+                "GifAddExtensionBlock; that helper grows the extension array "
+                "with reallocarray(count + 1, 24), increments the count, and "
+                "allocates the one-byte block length without an aggregate "
+                "extension count or byte limit."
+            ),
+            "assessment": (
+                "Each individual extension payload is limited by the GIF "
+                "sub-block length byte to 255 bytes, but a file can present "
+                "many blocks. Repeated accepted blocks can therefore retain "
+                "unbounded extension metadata and payload memory until the "
+                "decoder or allocator fails. This is a static resource-budget "
+                "finding, not a demonstrated memory corruption primitive."
+            ),
+        },
         "upstream_context": [
             {
                 "id": "CVE-2018-11489",
@@ -240,7 +267,8 @@ def build_report(inventory_path: Path) -> dict:
             "the two 2018 dictionary-index patterns less likely to be present, "
             "but the exact giflib release is unknown and no malformed-image "
             "fuzzing was performed. GIF-003 remains an independent resource and "
-            "integer-arithmetic hardening item."
+            "integer-arithmetic hardening item. GIF-004 adds an unbounded "
+            "extension-accumulation concern in DGifSlurp."
         ),
         "network_contacted": False,
         "fuzzing_performed": False,
@@ -248,6 +276,7 @@ def build_report(inventory_path: Path) -> dict:
             "That the APK contains a uniquely identified giflib release.",
             "That the reviewed CVEs are exploitable or absent under every malformed GIF input.",
             "That GIF-003 is a demonstrated out-of-bounds write.",
+            "That GIF-004 is exploitable without a bounded malformed-GIF test.",
         ],
     }
 
@@ -270,7 +299,10 @@ def main() -> int:
                 "output": output.as_posix(),
                 "lzw_decoder": report["functions"]["lzw_line_decoder"]["ida_name"],
                 "lzw_size": report["functions"]["lzw_line_decoder"]["size"],
-                "finding": report["observed_slurp_hardening_gap"]["id"],
+                "findings": [
+                    report["observed_slurp_hardening_gap"]["id"],
+                    report["observed_extension_accumulation"]["id"],
+                ],
                 "inventory_rows": report["inventory"]["row_count"],
             },
             sort_keys=True,

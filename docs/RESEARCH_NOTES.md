@@ -1209,6 +1209,15 @@ was contacted. The useful next experiment is a bounded local harness that
 checks dimension multiplication, oversized IDAT data, many GIF frames, and
 decoder error cleanup without writing the test corpus into the repository.
 
+The focused GIF pass also found that `DGifSlurp` retains every nonempty
+extension block until it reaches the next image or trailer. Calls at
+`0x2ae77c`, `0x2ae7a0`, and `0x2ae914` reach `GifAddExtensionBlock`, which
+grows the extension array at `0x2af03c` and allocates each payload at
+`0x2af074`. Each sub-block is capped at 255 bytes by its length byte, but no
+aggregate extension count or byte budget was visible. This is recorded as
+`GIF-004`, a static memory-pressure concern, in
+`artifacts/gif_decoder_security_review_20260902.json`.
+
 ## Corrected two-connection runtime trace
 
 The first useful local run sent the map and player properties on the same

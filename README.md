@@ -248,7 +248,8 @@ The compact record is
   release open.
 * `artifacts/gif_decoder_security_review_20260902.json` records the GIF LZW
   bounds-check comparison, the conditional review of three upstream giflib
-  CVEs, and the independent `DGifSlurp` dimension-arithmetic finding.
+  CVEs, and the independent `DGifSlurp` dimension-arithmetic and extension-
+  accumulation findings.
 * `artifacts/static_library_role_audit_20260901.json` records 30 high-
   confidence bundled-library role aliases, including the final bzip2 stream
   callbacks.

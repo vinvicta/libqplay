@@ -777,6 +777,16 @@ write. The zero-height divide-by-zero described by
 [CVE-2019-15133](https://nvd.nist.gov/vuln/detail/CVE-2019-15133) was not
 assigned to this binary because that exact divider state was not observed.
 
+The same `DGifSlurp` loop accumulates extension blocks before it reaches the
+next record. At `0x2ae77c`, `0x2ae7a0`, and `0x2ae914`, each nonempty block is
+passed to `GifAddExtensionBlock`. The helper grows the extension array with
+`reallocarray(count + 1, 24)` at `0x2af03c`, increments the count at
+`0x2af04c`, and allocates the block payload at `0x2af074`. The one-byte GIF
+sub-block length limits each payload to 255 bytes, but the reviewed path has
+no aggregate extension count or byte budget. This is `GIF-004`, an
+availability and memory-pressure risk from repeated accepted blocks, not a
+demonstrated memory-corruption primitive.
+
 The strongest finding is a static memory-pressure and integer-wrap boundary,
 not a demonstrated remote crash. A peer would first need to cross the
 connector, game protocol, cache, and resource gates. A safe repair should use
