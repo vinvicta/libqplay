@@ -1,0 +1,207 @@
+{
+  "analysis_date": "2026-09-02",
+  "analysis_scope": "static review of the bundled minizip entrypoints, ZIP-backed resource streams, and the script-facing extraction callback",
+  "application_limits": {
+    "aggregate_decoded_byte_cap": null,
+    "minizip_deflate_work_buffer_bytes": 16384,
+    "script_wildcard_behavior": "decompressfile can walk every loaded child resource when its pattern argument is '*', subject to the resource list that was already created",
+    "zip_resource_entry_count_cap": 10000,
+    "zip_resource_filename_buffer_bytes": 256,
+    "zip_resource_individual_reported_uncompressed_size_cap": 1073741824
+  },
+  "artifact": "zip_resource_security_review_20260902",
+  "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+  "findings": [
+    {
+      "addresses": [
+        "0xe8bac",
+        "0x24a55c",
+        "0x24a57c",
+        "0x24840c",
+        "0xefe7c",
+        "0xfca80",
+        "0xf0aa8"
+      ],
+      "assessment": "The two local limits reduce individual archive abuse but do not impose an aggregate decoded-byte, cumulative stream, or total extraction budget. Ten thousand entries can each pass the individual check, and the wildcard script path can turn the already-created resource set into many disk writes. This is a conditional availability and resource-policy finding, not a claim of arbitrary file write or a reproduced remote denial of service.",
+      "evidence": {
+        "entry_count_cap_address": "0xe8cbc",
+        "individual_size_check_address": "0xe8d58",
+        "save_address": "0xfcc64",
+        "stream_size_address": "0xeff74",
+        "unz_read_address": "0xeff90",
+        "wildcard_test_address": "0xfcbc8"
+      },
+      "id": "ZIP-001",
+      "instruction": "The ZIP resource scanner clamps the global entry count to 10000 and skips entries whose reported uncompressed size exceeds 0x40000000. For each accepted entry it creates or links a resource object. The stream loader then sizes a native TString from the entry's recorded size before reading it. The script decompressfile callback can select one entry or use '*' to save every loaded child resource.",
+      "severity": "availability and resource-policy gap, conditional"
+    },
+    {
+      "addresses": [
+        "0xefe7c",
+        "0xeff74",
+        "0xeff90",
+        "0x24b174",
+        "0xf0644",
+        "0xf10b8"
+      ],
+      "assessment": "If minizip returns a short non-negative count for a stored or otherwise truncated member, the logical stream length can remain equal to the archive-declared size even though fewer bytes were read. The cleared remainder can then be consumed as zero padding by later resource parsers. The exact malformed archive state that produces each return code still needs a bounded harness.",
+      "evidence": {
+        "declared_size_load_address": "0xeff6c",
+        "destination_capacity_load_address": "0xeff80",
+        "negative_only_test_address": "0xeff90",
+        "stream_set_size_call_address": "0xeff74",
+        "unz_read_call_address": "0xeff90",
+        "zero_fill_call_address": "0xf0668"
+      },
+      "id": "ZIP-002",
+      "instruction": "TResourceObject_getStream_void copies the archive metadata size into TStream_setSize_int, calls unzReadCurrentFile with the resulting data pointer and capacity, and only tests the sign bit of the returned count. It does not compare a non-negative return value with the declared entry size. TStream_setSize_int calls TString_setSize_int_bool with its boolean argument set, so a newly extended buffer is cleared before the ZIP read.",
+      "severity": "format-integrity and parser-robustness gap, conditional"
+    },
+    {
+      "addresses": [
+        "0x24b6fc",
+        "0x24b760",
+        "0x24b76c",
+        "0x24b844",
+        "0x24ba80",
+        "0x24b620"
+      ],
+      "assessment": "Repeated entries that reach an inflate initialization error can leak the temporary state and work buffer until process termination. The failure may be caused by allocation pressure or decoder initialization state. No malformed archive was run, so the report treats this as a conditional cleanup finding rather than a demonstrated leak loop.",
+      "evidence": {
+        "cleanup_entrypoint": "0x24b620",
+        "error_return_address": "0x24ba80",
+        "inflate_init_address": "0x24b844",
+        "parent_state_assignment_address": "0x24b87c",
+        "state_allocation_address": "0x24b760",
+        "work_buffer_allocation_address": "0x24b76c"
+      },
+      "id": "ZIP-003",
+      "instruction": "unzOpenCurrentFile3 allocates a 0x120-byte current-file state and a 0x4000-byte work buffer. For deflate entries it calls inflateInit2_. If that call returns an error, the function returns the error before assigning the state to the parent ZIP handle. The normal unzCloseCurrentFile cleanup path can therefore not see those allocations.",
+      "severity": "conditional resource leak on decoder initialization failure"
+    }
+  ],
+  "flow": {
+    "resource_zip": [
+      "TFileNameScan_scanZipResource_TResourceObject",
+      "unzOpen",
+      "unzGetGlobalInfo",
+      "unzGetCurrentFileInfo",
+      "TResourceObject_addZipFile_TResourceObject",
+      "TResourceObject_getStream_void",
+      "TStream_setSize_int",
+      "unzReadCurrentFile",
+      "unzCloseCurrentFile"
+    ],
+    "script_extract": [
+      "TFileScripting_script_decompressFile",
+      "TResourceObject_getStream_void",
+      "TStream_SaveToFile_TString_const_uint"
+    ],
+    "signed_connector_zip": [
+      "TScriptUniverse_compileZippedScripts_TString_const",
+      "TEncryption_rsa_verify_TString_const_TString_const_TString_const",
+      "unzOpen",
+      "unzReadCurrentFile",
+      "TScriptUniverse_addZippedScripts_TString_const_TSocketConnection"
+    ],
+    "trust_distinction": "The connector package is behind its outer RSA verification. Ordinary ZIP-backed resources use the resource and game-file trust path instead; this report does not assign either path a live remote reachability result."
+  },
+  "functions": {
+    "resource_stream_loader": {
+      "address": "0xefe7c",
+      "ida_name": "TResourceObject_getStream_void",
+      "size": 1148
+    },
+    "script_extract_callback": {
+      "address": "0xfca80",
+      "ida_name": "TFileScripting_script_decompressFile",
+      "size": 1292
+    },
+    "script_package_compile": {
+      "address": "0x22cf78",
+      "ida_name": "TScriptUniverse_compileZippedScripts_TString_const",
+      "size": 32
+    },
+    "stream_save_file": {
+      "address": "0xf0aa8",
+      "ida_name": "TStream_SaveToFile_TString_const_uint",
+      "size": 568
+    },
+    "stream_set_size": {
+      "address": "0xf0644",
+      "ida_name": "TStream_setSize_int",
+      "size": 64
+    },
+    "string_set_size": {
+      "address": "0xf10b8",
+      "ida_name": "TString_setSize_int_bool",
+      "size": 260
+    },
+    "zip_close_current": {
+      "address": "0x24b620",
+      "ida_name": "unzCloseCurrentFile",
+      "size": 144
+    },
+    "zip_file_info": {
+      "address": "0x24840c",
+      "ida_name": "minizip_unz64local_GetCurrentFileInfoInternal",
+      "size": 4468
+    },
+    "zip_open": {
+      "address": "0x24a624",
+      "ida_name": "unzOpen2",
+      "size": 2256
+    },
+    "zip_open_current": {
+      "address": "0x24b6fc",
+      "ida_name": "unzOpenCurrentFile3",
+      "size": 912
+    },
+    "zip_read_current": {
+      "address": "0x24b174",
+      "ida_name": "unzReadCurrentFile",
+      "size": 940
+    },
+    "zip_resource_scanner": {
+      "address": "0xe8bac",
+      "ida_name": "TFileNameScan_scanZipResource_TResourceObject",
+      "size": 1388
+    }
+  },
+  "fuzzing_performed": false,
+  "hardening_observations": [
+    {
+      "address": "0x24a624",
+      "observation": "unzOpen2 allocates a 0x150-byte archive state and immediately copies the file-function table into it at 0x24ac98 without a visible null check. This is an allocation-failure crash observation, not an archive-controlled memory-corruption claim."
+    },
+    {
+      "address": "0xe8d44",
+      "observation": "The scanner passes a 256-byte filename destination to unzGetCurrentFileInfo. The path uses the entry name as a virtual resource key; this review did not find a direct disk write of the raw ZIP entry name in that scanner."
+    }
+  ],
+  "inventory": {
+    "path": "/home/v/Desktop/graal-decomp/libqplay/symbols/libqplay.function_inventory.json",
+    "row_count": 11296,
+    "sha256": "c5e9c2e0b1c3e6cffa061ad7b2212815d54cc62e49ab0a3c6ba1cc9ea54b1844"
+  },
+  "library_identity": {
+    "entrypoints_are_statically_embedded": true,
+    "minizip_release": "not recovered",
+    "zlib_version": "1.2.5",
+    "zlib_version_address": "0x289b50"
+  },
+  "network_contacted": false,
+  "not_claimed": [
+    "That the exact minizip release or vendor patch level has been recovered.",
+    "That ZIP-001 is reachable from an unsigned connector package; the connector path has an outer RSA gate.",
+    "That a ZIP entry name escapes the application root in the reviewed resource scanner.",
+    "That ZIP-002 produces a parser confusion state for every truncated archive form.",
+    "That ZIP-003 was reproduced with an archive or allocation-failure harness.",
+    "That any production endpoint was contacted during this review."
+  ],
+  "overall_assessment": "The ZIP path has useful per-archive and per-entry limits, but it needs an aggregate decoded-byte budget, exact read-count validation, and cleanup on every decoder initialization error. Resource ZIPs and the signed connector ZIP should remain separate trust cases in a future bounded harness.",
+  "runtime_reproduction": false,
+  "schema": "libqplay.zip-resource-security-review.v1",
+  "tool": "tools/generate_zip_resource_security_review.py",
+  "tool_version": 1
+}

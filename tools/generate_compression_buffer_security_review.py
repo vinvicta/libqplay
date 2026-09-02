@@ -248,8 +248,8 @@ def build_report(inventory_path: Path) -> dict:
                 ],
                 "instruction": (
                     "Automatic zlib and bzip2 decompression starts at the larger "
-                    "of the shared capacity and 64 KiB. After an output-buffer- "
-                    "full result, each wrapper retries only while the next "
+                    "of the shared capacity and 64 KiB. After an "
+                    "output-buffer-full result, each wrapper retries only while the next "
                     "capacity is at most 4 MiB. Compression, however, first "
                     "requests input_length + 1024 and the shared helper rounds "
                     "that request upward without the 4 MiB ceiling."

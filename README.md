@@ -267,6 +267,9 @@ The compact record is
   shared zlib and bzip2 buffer growth loop, the signed-size stall witness, and
   the process-wide high-water behavior outside the nominal 4 MiB
   decompression retry policy.
+* `artifacts/zip_resource_security_review_20260902.json` records the minizip
+  resource and script-extraction paths, aggregate decoded-size gap, short-read
+  handling, and conditional inflate-initialization cleanup leak.
 * `artifacts/static_library_role_audit_20260901.json` records 30 high-
   confidence bundled-library role aliases, including the final bzip2 stream
   callbacks.

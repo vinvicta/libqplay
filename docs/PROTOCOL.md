@@ -275,6 +275,24 @@ entry count and individual reported size but has no visible aggregate
 decompressed-size budget. Long embedded crypto literals are redacted from the
 public artifact.
 
+The ordinary ZIP-backed resource path is separate from this signed connector
+package. `TFileNameScan_scanZipResource_TResourceObject` at `0xe8bac` caps the
+global entry count at 10,000 and ignores an entry above 1 GiB, then creates a
+resource object for each accepted member. `TResourceObject_getStream_void` at
+`0xefe7c` allocates the stream from the member's declared uncompressed size
+before calling minizip. Its caller checks only for a negative read result, not
+for an exact byte count. The focused record is
+`artifacts/zip_resource_security_review_20260902.json`.
+
+The script callback `decompressfile` is registered at the native script table
+and reaches `TFileScripting_script_decompressFile` at `0xfca80`. A `*` pattern
+walks the loaded child list and saves each resource to the selected write
+folder. The current path policy still checks the script source and write
+folder, but it has no aggregate decompressed-byte or total disk-output budget.
+The same ZIP report records a conditional leak when `inflateInit2_` fails in
+`unzOpenCurrentFile3` before its temporary state is attached to the parent
+handle.
+
 ## 3. Game login and framing
 
 The deeper native review is recorded in
