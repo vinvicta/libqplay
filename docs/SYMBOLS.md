@@ -100,19 +100,22 @@ cross-references and emulator traces.
 
 ## Cross-version comparison
 
-The public analysis currently contains the original 1.8 ARM64 library and the
-local diagnostic builds derived from it. A 2.2 APK, `libqplay` library, or IDA
-database is not present in the workspace, so this repository does not claim a
-1.8-to-2.2 symbol translation or protocol match. The later 2.2 build is
-reported to have stripped symbols, which makes a direct name transfer unsafe
-even after the binary is supplied.
+The public analysis contains the original 1.8 ARM64 library and local
+diagnostic builds derived from it. An installed 2.2 package has also been
+examined offline, but it is not provenance-checked and includes a separate
+`libxposed.so` that installs inline hooks and suppresses one anti-instrumentation
+path. Its `libqplay.so` is stripped according to the ELF tools, although the
+dynamic table retains useful anchors. The package is therefore not evidence
+about a stock 2.2 build.
 
-When a verified 2.2 input becomes available, the first comparison anchors
-should be the JNI exports, connector and TLS strings, packet parser constants,
-and recognizable bundled-library signatures. Any matches should be recorded
-with the 2.2 file hash and an address relative to its load base. Names should
-remain address-based until cross-references or a runtime trace establish that
-the 1.8 and 2.2 routines have the same behavior.
+The bounded 2.2 comparison is in `docs/ABI_2_2_COMPARISON.md`. The first
+anchors are the JNI exports, connector and TLS strings, packet parser
+constants, and recognizable bundled-library signatures. Any future matches
+should be recorded with the 2.2 file hash and an address relative to its load
+base. Names should remain address-based until cross-references or a runtime
+trace establish that the 1.8 and 2.2 routines have the same behavior. A
+verified stock 2.2 input is still needed before translating names or claiming
+protocol parity.
 
 ## Repeating the pass
 
