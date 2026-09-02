@@ -109,6 +109,14 @@ and the parser does not decode `Transfer-Encoding: chunked`. Legacy
 replay, but a current server's framing still needs to be verified. The
 evidence is in `artifacts/original_http_framing_review_20260830.json`.
 
+The cache write pass found a second compatibility lead. The native writer uses
+`fwrite` without checking the returned count, and the resource state is updated
+after the write without an atomic temporary-file rename. A truncated external
+cache can therefore look like a completed download on the next launch. URL
+derived names are escaped into `webfiles`, but ordinary path handling still
+uses lexical and filesystem heuristics. The focused evidence is in
+`artifacts/cache_filename_policy_review_20260902.json`.
+
 The Facebook bridge pass found that the Android script table exposes more than
 login status. An activated script can read the current Facebook access token,
 request additional read or publish permissions, issue authenticated Graph GET,
@@ -270,6 +278,9 @@ The compact record is
 * `artifacts/zip_resource_security_review_20260902.json` records the minizip
   resource and script-extraction paths, aggregate decoded-size gap, short-read
   handling, and conditional inflate-initialization cleanup leak.
+* `artifacts/cache_filename_policy_review_20260902.json` records URL-derived
+  filename escaping, ordinary cache path classification, unchecked file-write
+  results, URLCACHE persistence, and the resulting startup-integrity lead.
 * `artifacts/static_library_role_audit_20260901.json` records 30 high-
   confidence bundled-library role aliases, including the final bzip2 stream
   callbacks.

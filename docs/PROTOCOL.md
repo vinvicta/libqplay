@@ -640,6 +640,16 @@ prefixes, `stat`, and ordinary save operations. No canonical-root check or
 no-follow file creation is visible in this pass, so symlink behavior remains a
 local disposable-directory test rather than a confirmed traversal.
 
+The cache writer has an additional integrity edge. `TStream_SaveToFile` opens
+the destination in replace mode for ordinary saves and calls `fwrite` without
+checking the returned count. `TCachedStream_saveAndUpdate` then refreshes the
+resource object after the write. An interrupted or storage-full write can
+therefore leave a partial file at the expected name while later resource
+lookup sees an apparently present cache entry. This is the leading cache-based
+explanation for a later loading failure after a nominally completed download.
+The focused address-level record is
+`artifacts/cache_filename_policy_review_20260902.json`.
+
 This flow makes the level-parser availability findings reachable from a server
 file response in the native state machine. It does not by itself make a
 production peer untrusted. The connector and game sockets must first pass the

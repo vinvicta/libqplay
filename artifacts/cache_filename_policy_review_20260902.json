@@ -1,0 +1,197 @@
+{
+  "analysis_date": "2026-09-02",
+  "analysis_scope": "static review of URL-derived cache filenames, ordinary resource paths, cache writes, URLCACHE persistence, and post-download resource updates",
+  "artifact": "cache_filename_policy_review_20260902",
+  "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+  "findings": [
+    {
+      "addresses": [
+        "0x200010",
+        "0x1fb744",
+        "0x1fa6e8",
+        "0xf0aa8",
+        "0xf0b5c",
+        "0xee078"
+      ],
+      "assessment": "A process stop, storage-full condition, or other short write can leave a partial file at the expected cache name while the resource layer is still refreshed. A later load can then parse truncated or stale bytes and appear to be a network or protocol failure. This is a conditional local cache-integrity and startup availability finding, not proof of a remotely controlled write failure.",
+      "evidence": {
+        "cache_save_address": "0x1fa6e8",
+        "cache_save_and_update_address": "0x1fb744",
+        "download_completion_address": "0x200010",
+        "fclose_address": "0xf0b64",
+        "fwrite_address": "0xf0b5c",
+        "ordinary_save_mode": "wb",
+        "resource_update_call_address": "0x2003c0"
+      },
+      "id": "CACHE-001",
+      "instruction": "THTTPRequest_saveDownloadedData_void reaches the cache save path after a response is accepted. TStream_SaveToFile opens the destination, calls fwrite with the complete TString length, ignores the returned count and stream error state, and closes the file. TCachedStream_saveAndUpdate then continues into the resource-object update path without a write-success result.",
+      "severity": "cache-integrity and startup-availability gap, conditional"
+    },
+    {
+      "addresses": [
+        "0xe8208",
+        "0xe74e8",
+        "0x1fa920",
+        "0x1fb5b8",
+        "0x1fa6e8",
+        "0xf0aa8"
+      ],
+      "assessment": "The URL-derived route reduces ordinary slash and dot traversal because those bytes are encoded. The broader ordinary-file path still relies on lexical policy and platform filesystem behavior, so a future repair should resolve beneath an owned directory, reject symlinks where appropriate, and use an exclusive or atomic write strategy. No direct traversal through a reviewed server response was demonstrated.",
+      "evidence": {
+        "absolute_path_test_address": "0xe8208",
+        "allowed_character_initialization_address": "0xe8408",
+        "directory_creation_address": "0xe75e4",
+        "save_directory_prefix_checks": [
+          "0x1fa738",
+          "0x1fa7c4"
+        ],
+        "save_open_address": "0xf0b3c",
+        "url_escape_address": "0xe7a50"
+      },
+      "id": "CACHE-002",
+      "instruction": "URL-derived names are placed below webfiles and passed through TFiles_escapedFilename_TString_const, which preserves only an alphanumeric or underscore byte and encodes the rest. Ordinary paths are instead classified with string prefixes and the TFiles_hasAbsolutePath_TString_const heuristic. Directory creation and fopen then operate on the resulting path without a visible canonical-root check or no-follow flag.",
+      "severity": "filesystem hardening gap, conditional"
+    },
+    {
+      "addresses": [
+        "0x207eec",
+        "0x20800c",
+        "0x208114",
+        "0x1fb704"
+      ],
+      "assessment": "A malformed or very large local URL cache can consume parser and allocation time before the network path begins, and its entries are not authenticated. The reviewed path excludes '.code' from URL-cache insertion, which limits its effect on level-code provenance. This is a local-state hardening observation, not a claim that a remote peer can edit URLCACHE.txt.",
+      "evidence": {
+        "code_extension_exclusion_address": "0x207d7c",
+        "entry_save_address": "0x208098",
+        "filename_normalization_address": "0x1fb708",
+        "line_iteration_address": "0x207f4c",
+        "line_load_address": "0x207f3c",
+        "load_path_construction_address": "0x207f14",
+        "urlcache_save_address": "0x208114"
+      },
+      "id": "CACHE-003",
+      "instruction": "TURLCache_load_void reads baseuserfolder/URLCACHE.txt into a TStringList and processes every loaded line that contains at least two comma-separated fields. TURLCache_checkSave_bool_bool serializes all current entries back to the same file. The cache is keyed by a case-normalized filename and has no visible line count, byte budget, or integrity tag.",
+      "severity": "local cache availability and provenance gap, conditional"
+    }
+  ],
+  "flows": {
+    "ordinary_download": [
+      "THTTPRequest_saveDownloadedData_void",
+      "TCachedStream_saveAndUpdate_TCachedStream_TString_const",
+      "TCachedStream_resolveFilename_void",
+      "TCachedStream_save_bool",
+      "TFiles_forceDirectories_TString_const",
+      "TStream_SaveToFile_TString_const_uint",
+      "TResourceFunctions_updateResourceObject_TString_const_bool"
+    ],
+    "replacement_guard": "TCachedStream_save_bool recognizes the configured base executable and full executable path, deletes an existing target, then writes the replacement and sets the replacedgraalexe flag.",
+    "url_cache": [
+      "TURLCache_load_void",
+      "TURLCache_addURL_TString_const_TString_const",
+      "TURLCache_checkSave_bool_bool",
+      "TStream_SaveToFile_TString_const_uint"
+    ]
+  },
+  "functions": {
+    "absolute_path_test": {
+      "address": "0xe8208",
+      "ida_name": "TFiles_hasAbsolutePath_TString_const",
+      "size": 304
+    },
+    "cache_save": {
+      "address": "0x1fa6e8",
+      "ida_name": "TCachedStream_save_bool",
+      "size": 568
+    },
+    "cache_save_and_update": {
+      "address": "0x1fb744",
+      "ida_name": "TCachedStream_saveAndUpdate_TCachedStream_TString_const",
+      "size": 700
+    },
+    "download_completion": {
+      "address": "0x200010",
+      "ida_name": "THTTPRequest_saveDownloadedData_void",
+      "size": 2656
+    },
+    "download_filename_mapper": {
+      "address": "0x1fa920",
+      "ida_name": "TCachedStream_getDownloadFilename_TString_const",
+      "size": 3224
+    },
+    "force_directories": {
+      "address": "0xe74d4",
+      "ida_name": "TFiles_forceDirectories_TString_const",
+      "size": 344
+    },
+    "resolve_cached_filename": {
+      "address": "0x1fb5b8",
+      "ida_name": "TCachedStream_resolveFilename_void",
+      "size": 304
+    },
+    "resource_update": {
+      "address": "0xee078",
+      "ida_name": "TResourceFunctions_updateResourceObject_TString_const_bool",
+      "size": 1196
+    },
+    "stream_save_file": {
+      "address": "0xf0aa8",
+      "ida_name": "TStream_SaveToFile_TString_const_uint",
+      "size": 568
+    },
+    "url_cache_check_save": {
+      "address": "0x20800c",
+      "ida_name": "TURLCache_checkSave_bool_bool",
+      "size": 336
+    },
+    "url_cache_load": {
+      "address": "0x207eec",
+      "ida_name": "TURLCache_load_void",
+      "size": 288
+    },
+    "url_filename_escape": {
+      "address": "0xe7a50",
+      "ida_name": "TFiles_escapedFilename_TString_const",
+      "size": 344
+    }
+  },
+  "inventory": {
+    "path": "/home/v/Desktop/graal-decomp/libqplay/symbols/libqplay.function_inventory.json",
+    "row_count": 11296,
+    "sha256": "c5e9c2e0b1c3e6cffa061ad7b2212815d54cc62e49ab0a3c6ba1cc9ea54b1844"
+  },
+  "limitations": [
+    "No storage-full or interrupted-write runtime test was performed.",
+    "No symlink or hostile external-storage test was performed.",
+    "The report does not claim that a network peer can directly edit URLCACHE.txt.",
+    "This pass does not assign a live remote reachability result to any finding."
+  ],
+  "overall_assessment": "The original client has a useful lexical escape for URL-derived cache names, but its persistence layer treats file writes and local URL-cache records as trusted. The unchecked write result is the most useful compatibility lead because a corrupted external cache can reproduce a silent loading failure after a nominally successful download.",
+  "policy": {
+    "absolute_path_detection": "The helper checks for the configured URL marker, a leading '/', a colon, and configured '/' or '\\\\' separators.",
+    "allowed_url_filename_characters": "_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+    "atomic_tempfile_rename_seen": false,
+    "directory_mode": "0775",
+    "fsync_seen": false,
+    "ordinary_cache_mapping": "Recognized extensions are routed below application-owned directories such as levels, maps, sounds, music, tiles, and updatepackages. Relative names are not emitted as raw URL path separators by the URL-derived route.",
+    "save_mode": {
+      "append": "ab",
+      "replace": "wb"
+    },
+    "url_cache_prefix": "baseuserfolder/webfiles/",
+    "url_filename_encoding": "Characters outside the allowed set are emitted as '%' plus a zero-padded decimal byte value of at least three digits.",
+    "urlcache_filename": "baseuserfolder/URLCACHE.txt",
+    "urlcache_integrity_tag": false,
+    "urlcache_line_limit": null,
+    "write_count_checked": false
+  },
+  "repair_targets": [
+    "Return and check the exact fwrite count before updating a resource object.",
+    "Write downloaded data to a temporary file in the same directory and use a validated atomic rename.",
+    "Use checked canonical-root and no-follow policy for ordinary cache paths.",
+    "Bound URLCACHE.txt by bytes and entries, and treat malformed records as a cache reset rather than a partial load.",
+    "Keep the executable replacement path separate from ordinary resource caching and validate its final target explicitly."
+  ],
+  "schema": "libqplay.cache-filename-policy-review.v1",
+  "tool": "tools/generate_cache_filename_policy_review.py",
+  "tool_version": 1
+}
