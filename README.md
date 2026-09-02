@@ -234,6 +234,8 @@ The compact record is
   live game service.
 * `docs/SECURITY.md` records the original APK and ARM64 native trust-boundary
   review.
+* `docs/UPDATE_PACKAGES.md` explains the `GRPKG001` manifest parser, ordinary
+  and large-file transfer state, and the bounded completion-path crash review.
 * `docs/ABI_2_2_COMPARISON.md` records the bounded, offline comparison with
   the unverified installed 2.2 package.
 * `docs/DEPENDENCY_PROVENANCE.md` records the bundled compression, font, and
@@ -316,6 +318,9 @@ The compact record is
 * `artifacts/synthetic_basepackage_crash_20260902.json` records a local
   negative control in which a metadata-only base package reached a native null
   dereference. It contains hashes and stack metadata, not raw package data.
+* `artifacts/update_package_transfer_review_20260902.json` records the
+  packet-68, packet-84, packet-102, and packet-69 controls, the ARM64 handler
+  addresses, and the limits of the x86_64 diagnostic result.
 * `artifacts/static_library_role_audit_20260901.json` records 30 high-
   confidence bundled-library role aliases, including the final bzip2 stream
   callbacks.

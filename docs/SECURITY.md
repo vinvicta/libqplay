@@ -1231,6 +1231,16 @@ the connection has been accepted. It does not prove an unauthenticated remote
 exploit in the stock client, because connector trust, game protocol state, and
 the package state flags still gate reachability.
 
+The large-file completion path has a separate local availability lead. The
+focused record is `artifacts/update_package_transfer_review_20260902.json`,
+with the narrative in `docs/UPDATE_PACKAGES.md`. Static ARM64 analysis maps the
+sequence to packet 68, 84, 102, and 69. In a loopback-only x86_64 diagnostic
+replay, omitting packet 69 kept the process alive, while delivering it after a
+valid local package reached `TScriptSpace::receiveEvent` and faulted at a null
+address. A `probe.bin` filename produced the same trace, so this local result
+does not require a `.gupd` parser branch. It is not evidence that a production
+server can crash an unmodified client, and it has not been reproduced on ARM64.
+
 ### Executable replacement
 
 `TClient_handleUpdatePackageDownloaded` at `0x1ec044` calls the package lookup,

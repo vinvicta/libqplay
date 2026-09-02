@@ -1,0 +1,241 @@
+{
+  "artifact": "update_package_transfer_review",
+  "date": "2026-09-02",
+  "scope": "original ARM64 static analysis plus loopback-only x86_64 diagnostic replay",
+  "purpose": "Record the update-package manifest parser, large-file packet state machine, and the bounded completion-path crash controls without publishing raw package or packet data.",
+  "inputs": {
+    "original_apk_sha256": "6d6c0428fe890d0f18fb1ce572798d7a8a95853b10078f693026164d6a5f56d7",
+    "original_arm64_libqplay_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "real_local_basepackage": {
+      "filename": "basepackage.gupd",
+      "size": 152,
+      "sha256": "e0e0c0c77a576152a7f4d3c145aa6154c22e95ae89a89635b6e64740897d16bb",
+      "source": "private local Graal data directory",
+      "raw_body_published": false
+    },
+    "synthetic_metadata_only_package": {
+      "filename": "basepackage.gupd",
+      "size": 49,
+      "sha256": "d4b367d9f483ab15924819f4b4535725d3e5f5883e4ba0693c70955583219e9b",
+      "record": "See synthetic_basepackage_crash_20260902.json"
+    }
+  },
+  "static_addresses": [
+    {
+      "name": "TUpdatePackage_load_void",
+      "va": "0x209fa4",
+      "role": "Loads and parses a GRPKG001 manifest."
+    },
+    {
+      "name": "TClient_processIncomingPackages_void",
+      "va": "0x1e7d68",
+      "role": "Drains decoded incoming packets and dispatches them to handlers."
+    },
+    {
+      "name": "TClient_processFileChunk",
+      "va": "0x1ec764",
+      "role": "Associates a file chunk with a cached stream and emits chunk or completion events."
+    },
+    {
+      "name": "TClient_beginBigFileDownload",
+      "va": "0x1eb12c",
+      "role": "Starts the large-file transfer state."
+    },
+    {
+      "name": "TClient_setBigFileSize",
+      "va": "0x1ef48c",
+      "role": "Stores the declared large-file size."
+    },
+    {
+      "name": "TClient_parseEncodedFileChunk",
+      "va": "0x1f0de4",
+      "role": "Parses the encoded file field, filename, and data before forwarding the chunk."
+    },
+    {
+      "name": "TClient_finishDownloadFile",
+      "va": "0x1eb208",
+      "role": "Completes the ordinary file path."
+    },
+    {
+      "name": "TClient_finishFileDownload",
+      "va": "0x1eb294",
+      "role": "Completes the large-file path after the filename control packet."
+    },
+    {
+      "name": "TScriptSpace_receiveEvent",
+      "va": "0x229898",
+      "role": "Queues or dispatches a script event and begins with an owner virtual callback."
+    },
+    {
+      "name": "TScriptSpace_TScriptSpace",
+      "va": "0x229cf8",
+      "role": "Constructs a script space and invokes the created event."
+    },
+    {
+      "name": "TScriptSpace_invokeCreatedEvent",
+      "va": "0x229c74",
+      "role": "Calls receiveEvent with the created event name."
+    },
+    {
+      "name": "TGraalVar_createScriptSpace",
+      "va": "0x20e3d0",
+      "role": "Lazily allocates and constructs a script space for a variable."
+    }
+  ],
+  "manifest_parser": {
+    "header": "GRPKG001",
+    "records": [
+      "NAME",
+      "FLAG",
+      "VERSION",
+      "PLATFORM",
+      "ACCOUNTS",
+      "MODE",
+      "SUBPACKAGE",
+      "FILE",
+      "DESCRIPTION",
+      "DESCRIPTIONEND",
+      "ISMAINEXECUTABLE",
+      "USECHECKSUM",
+      "PROTECTOVERWRITE"
+    ],
+    "subpackage_behavior": "The value is reduced to a basename, checked for the .gupd extension, looked up as another package, and can start a nested download during parsing.",
+    "file_behavior": "The parser splits the directory and final component, checks the platform and TFileScripting_AllowedFoldername policy, blocks selected executable extensions, and stores accepted file metadata.",
+    "limits_observed": [
+      "No single visible total limit for manifest records or description length.",
+      "No single visible expansion budget for nested packages.",
+      "The parser itself does not provide a response signature check."
+    ]
+  },
+  "wire_state_machine": [
+    {
+      "wire_type": 68,
+      "handler_index": 21,
+      "handler": "TClient_beginBigFileDownload",
+      "effect": "Sets the large-file filename and begins the multi-packet transfer state."
+    },
+    {
+      "wire_type": 84,
+      "handler_index": 22,
+      "handler": "TClient_setBigFileSize",
+      "effect": "Decodes and stores the declared large-file size."
+    },
+    {
+      "wire_type": 102,
+      "handler_index": 24,
+      "handler": "TClient_parseEncodedFileChunk",
+      "effect": "Parses the five-character encoded field, filename length, filename, and data, then appends the data to a cached stream."
+    },
+    {
+      "wire_type": 69,
+      "handler_index": 23,
+      "handler": "TClient_finishFileDownload",
+      "effect": "Matches the completion filename against the large-file state, clears that state, emits onFileDownloaded, saves the cache, and updates a .gupd package when applicable."
+    }
+  ],
+  "completion_behavior": {
+    "ordinary_packet_102": [
+      "When no large-file filename is active, processFileChunk emits onFileChunkReceived and onFileDownloaded.",
+      "It removes the requested file, saves and updates the cached stream, and calls updatePackageDownloaded for a .gupd extension.",
+      "It then validates the resource key and clears the current-download marker."
+    ],
+    "large_file": [
+      "When a large-file filename is active, packet 102 emits onFileChunkReceived and retains the stream for later completion.",
+      "Packet 69 is the transition into the cached-file completion callback.",
+      "The completion callback can invoke a universe script event before the package update callback."
+    ],
+    "script_setup": "The first created event for a lazily created script space calls TScriptSpace_receiveEvent. Its ARM64 prologue dereferences the owner TGraalVar and calls the virtual slot at owner vtable offset 0x98 before queue processing."
+  },
+  "local_controls": [
+    {
+      "id": "valid_big_without_finish",
+      "package": "real local 152-byte basepackage.gupd",
+      "sequence": [68, 84, 102],
+      "control": "Omit packet 69",
+      "observation": "The x86_64 diagnostic process remained alive and continued to request the package again.",
+      "interpretation": "Packet 102 data alone did not reproduce the completion-path crash."
+    },
+    {
+      "id": "valid_big_delayed_finish",
+      "package": "real local 152-byte basepackage.gupd",
+      "sequence": [68, 84, 102, 69],
+      "control": "Delay packet 69 by 2 seconds",
+      "observation": "The process crashed after the completion sequence with the same TScriptSpace trace as the earlier metadata-only control.",
+      "capture": {
+        "incoming_size": 527,
+        "incoming_sha256": "2ec9521323e2aba33eaa5367549ec4f1e63ef9a55b792861413905a2382cbd79",
+        "outgoing_size": 504,
+        "outgoing_sha256": "67b6fa808480bc9002b36d82eb0e3d1f55b1daaa46235fcf8f15aded00e8bb1c"
+      },
+      "interpretation": "The timing control narrows the trigger to packet-69 finalization or the state transition immediately after it."
+    },
+    {
+      "id": "non_package_filename",
+      "package": "real local 152-byte basepackage.gupd",
+      "sequence": [68, 84, 102, 69],
+      "control": "Use probe.bin as the transfer filename",
+      "observation": "The x86_64 diagnostic process crashed at the same TScriptSpace receiveEvent offset.",
+      "interpretation": "The reproduced failure does not require a .gupd extension or package-specific completion callback."
+    },
+    {
+      "id": "valid_single_packet",
+      "package": "real local 152-byte basepackage.gupd",
+      "sequence": [102],
+      "control": "Return the complete package in one ordinary packet-102 response",
+      "observation": "The x86_64 diagnostic process remained alive during the bounded replay.",
+      "interpretation": "The ordinary packet-102 path and the large-file completion path are materially different state machines."
+    },
+    {
+      "id": "metadata_only_reference",
+      "package": "49-byte synthetic metadata-only package",
+      "sequence": [68, 84, 102, 69],
+      "control": "Return only the header and three metadata records",
+      "observation": "SIGSEGV at the first created-event script-space path.",
+      "record": "synthetic_basepackage_crash_20260902.json"
+    }
+  ],
+  "failure": {
+    "execution": "local x86_64 Android diagnostic build only",
+    "signal": "SIGSEGV",
+    "fault_address": "0x0",
+    "thread": "GLThread",
+    "diagnostic_native_offset": "0x242246",
+    "function": "TScriptSpace::receiveEvent(TString const&, TString const&, TGraalVar*)+38",
+    "stack": [
+      "TScriptSpace::receiveEvent",
+      "TScriptSpace::invokeCreatedEvent",
+      "TScriptSpace::TScriptSpace",
+      "TGraalVar::createScriptSpace",
+      "TGraalVar::receiveEvent",
+      "TClient::processIncomingPackages",
+      "TServerList::handleClient",
+      "TAdventure::timer",
+      "GuiCanvas::prerenderFrame",
+      "TClientEnvironment::runTimers",
+      "Java_com_quattroplay_GraalClassic_Natives_QPlayLoop"
+    ]
+  },
+  "assessment": {
+    "confirmed": [
+      "The original ARM64 code separates ordinary packet-102 completion from the 68, 84, 102, 69 large-file sequence.",
+      "In the local x86_64 diagnostic replay, packet-69 completion is the smallest changed condition associated with the reproduced crash.",
+      "A non-package filename still reaches the same failure, so package metadata parsing is not required for this local result."
+    ],
+    "not_proven": [
+      "The same failure occurs in the original ARM64 library.",
+      "An unmodified production client accepts the same server sequence.",
+      "A live server can deliver the sequence to an unmodified client.",
+      "The null dereference is exploitable beyond denial of service.",
+      "The local diagnostic build has exactly the same object initialization state as the stock x86_64 APK."
+    ],
+    "severity_language": "Treat this as a local availability lead and an input-validation target, not as a confirmed remote vulnerability."
+  },
+  "repair_targets": [
+    "Validate that the completion filename matches an active transfer and reject or reset an unexpected packet-69 transition.",
+    "Bound manifest records, description bytes, nested package count, declared file size, and aggregate received bytes.",
+    "Verify an authorized package signature or keyed integrity tag before activation and before executable replacement.",
+    "Use atomic cache writes, check write counts, and revalidate the final path with canonical containment and no-follow semantics.",
+    "Make script-space construction tolerate a missing owner callback and return a controlled error instead of calling a null virtual slot."
+  ],
+  "raw_data_policy": "Raw APKs, native files, packet captures, login fields, and package bodies remain outside the repository."
+}

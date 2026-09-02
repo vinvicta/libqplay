@@ -1413,6 +1413,20 @@ script setup path assumes required package records are present. It is a local
 synthetic-fixture result, not a live-server exploit claim. The compact private
 hash record is `artifacts/synthetic_basepackage_crash_20260902.json`.
 
+The follow-up controls narrowed the trigger. Static analysis maps the native
+large-file path to packet 68 for the filename, packet 84 for the declared size,
+packet 102 for chunks, and packet 69 for completion. A valid private
+152-byte `basepackage.gupd` sent as 68, 84, and 102 without packet 69 left the
+x86_64 diagnostic process alive. Delaying packet 69 by two seconds reproduced
+the same `TScriptSpace::receiveEvent` null fault. Repeating the large-file
+sequence with `probe.bin` instead of a package name produced the same trace,
+which separates the generic completion callback from package-specific
+metadata parsing. Returning the complete package through one ordinary packet
+102 also stayed alive during the bounded replay. The full control matrix,
+capture hashes, and static addresses are in
+`artifacts/update_package_transfer_review_20260902.json`; the narrative is in
+`docs/UPDATE_PACKAGES.md`.
+
 The public game responder accepts `--frame-after-client` and
 `--frame-after-map`. The first is useful for event-driven packet experiments.
 The second was used here to send packet 49 only after the GMAP response, which
