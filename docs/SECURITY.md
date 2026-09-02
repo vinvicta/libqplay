@@ -797,9 +797,24 @@ frames compound the existing dimension and cumulative-byte risks. This is
 `GIF-005`, a static availability and memory-pressure concern rather than a
 demonstrated overwrite.
 
-The strongest finding is a static memory-pressure and integer-wrap boundary,
-not a demonstrated remote crash. A peer would first need to cross the
-connector, game protocol, cache, and resource gates. A safe repair should use
+The direct bitmap wrapper adds a conditional arithmetic overflow candidate.
+At `0x150b88` and `0x150b90`, `TBitmap_readGIF_TStream` calculates the source
+length as a 32-bit height-times-width product before `malloc` and
+`DGifGetLine`. At `0x150c9c` and `0x150ca0`, it calculates the destination
+size as 32-bit width-times-height-times-8, rounds it at `0x150cb0`, and
+allocates it at `0x150cb8`. The row loop uses the 32-bit row offset at
+`0x150d40`, forms the destination pointer at `0x150d4c`, and copies each row
+at `0x150d50`. With width `16385` and height `32768`, the source and copy
+length are `536903680` bytes, but the wrapped destination calculation requests
+only `32768` bytes. If the large source allocation succeeds and the
+destination allocator returns storage, the copy can run past the destination.
+This is `GIF-006`, a conditional static heap-buffer-overflow candidate. No
+malformed GIF was fuzzed and no runtime crash was observed.
+
+These are static findings, not a demonstrated remote crash. GIF-006 needs
+priority validation in a disposable harness because its arithmetic can make
+the copy size exceed the allocated destination. A peer would first need to
+cross the connector, game protocol, cache, and resource gates. A safe repair should use
 checked multiplication and reject dimensions, decoded pixels, compressed
 chunks, animation frames, and cumulative texture bytes before allocation. A
 bounded malformed-image corpus should then be run only against a disposable

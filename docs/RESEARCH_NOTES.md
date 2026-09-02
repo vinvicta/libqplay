@@ -1225,6 +1225,16 @@ and runs until a trailer. There is no application frame-count limit in the
 reviewed path. This is recorded as `GIF-005`, a static frame-metadata and
 cumulative-resource concern, in the same machine-readable review.
 
+The direct `TBitmap_readGIF_TStream` wrapper exposes a sharper arithmetic
+candidate. It allocates the temporary source buffer from a 32-bit
+height-times-width product at `0x150b88`, then allocates the destination from
+a 32-bit width-times-height-times-8 product at `0x150c9c`, `0x150ca0`, and
+`0x150cb8`. The row-copy loop at `0x150d40` through `0x150d50` writes one
+decoded row at a time. Width `16385` and height `32768` produce a
+`536903680`-byte source and copy length but a `32768`-byte wrapped destination.
+This is recorded as `GIF-006`, a conditional static heap-overflow candidate;
+no malformed GIF fuzzing or crash reproduction has been performed.
+
 ## Corrected two-connection runtime trace
 
 The first useful local run sent the map and player properties on the same

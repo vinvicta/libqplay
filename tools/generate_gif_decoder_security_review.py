@@ -50,9 +50,9 @@ def build_report(inventory_path: Path) -> dict:
 
     return {
         "artifact": "gif_decoder_security_review_20260902",
-        "schema": "libqplay.gif-decoder-security-review.v3",
+        "schema": "libqplay.gif-decoder-security-review.v4",
         "tool": "tools/generate_gif_decoder_security_review.py",
-        "tool_version": 3,
+        "tool_version": 4,
         "analysis_date": "2026-09-02",
         "analysis_scope": (
             "static comparison of the embedded giflib-style GIF decoder and "
@@ -221,6 +221,48 @@ def build_report(inventory_path: Path) -> dict:
                 "finding, not a demonstrated memory corruption primitive."
             ),
         },
+        "observed_bitmap_copy_arithmetic": {
+            "id": "GIF-006",
+            "severity": "potential heap-buffer-overflow, conditional",
+            "addresses": [
+                "0x150b88",
+                "0x150b90",
+                "0x150ba8",
+                "0x150c9c",
+                "0x150ca0",
+                "0x150cb0",
+                "0x150cb8",
+                "0x150d40",
+                "0x150d4c",
+                "0x150d50",
+            ],
+            "instruction": (
+                "TBitmap_readGIF_TStream computes the source byte count as "
+                "MUL W0, height, width before malloc and DGifGetLine, then "
+                "computes the destination byte count as 32-bit width * height "
+                "* 8 followed by a rounded arithmetic shift by 3. The row-copy "
+                "loop multiplies each row index by width in W registers and "
+                "copies one full row into the destination."
+            ),
+            "arithmetic_example": {
+                "width": 16385,
+                "height": 32768,
+                "decoded_pixels": 536903680,
+                "source_allocation_bytes": 536903680,
+                "destination_allocation_bytes": 32768,
+                "copied_bytes": 536903680,
+            },
+            "assessment": (
+                "For the example dimensions, the source allocation and decode "
+                "length cover 536903680 pixels, while the 32-bit * 8 size "
+                "calculation wraps and requests only 32768 destination bytes. "
+                "If the large source allocation succeeds and the destination "
+                "malloc returns storage, the row loop can write the full source "
+                "length past that destination. This is a conditional static "
+                "heap-overflow finding; no malformed GIF was fuzzed and no "
+                "runtime crash was observed."
+            ),
+        },
         "upstream_context": [
             {
                 "id": "CVE-2018-11489",
@@ -294,7 +336,8 @@ def build_report(inventory_path: Path) -> dict:
             "fuzzing was performed. GIF-003 remains an independent resource and "
             "integer-arithmetic hardening item. GIF-004 adds an unbounded "
             "extension-accumulation concern in DGifSlurp. GIF-005 adds an "
-            "unbounded SavedImages frame-array concern."
+            "unbounded SavedImages frame-array concern. GIF-006 adds a "
+            "conditional 32-bit GIF bitmap-copy overflow candidate."
         ),
         "network_contacted": False,
         "fuzzing_performed": False,
@@ -304,6 +347,7 @@ def build_report(inventory_path: Path) -> dict:
             "That GIF-003 is a demonstrated out-of-bounds write.",
             "That GIF-004 is exploitable without a bounded malformed-GIF test.",
             "That GIF-005 is exploitable without a bounded malformed-GIF test.",
+            "That GIF-006 reproduces without a bounded malformed-GIF test and allocator validation.",
         ],
     }
 
@@ -330,6 +374,7 @@ def main() -> int:
                     report["observed_slurp_hardening_gap"]["id"],
                     report["observed_extension_accumulation"]["id"],
                     report["observed_frame_accumulation"]["id"],
+                    report["observed_bitmap_copy_arithmetic"]["id"],
                 ],
                 "inventory_rows": report["inventory"]["row_count"],
             },

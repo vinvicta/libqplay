@@ -250,6 +250,7 @@ The compact record is
   bounds-check comparison, the conditional review of three upstream giflib
   CVEs, and the independent `DGifSlurp` dimension-arithmetic and extension-
   accumulation findings plus the unbounded `SavedImages` frame-array review.
+  The same review records a conditional bitmap-copy overflow candidate.
 * `artifacts/static_library_role_audit_20260901.json` records 30 high-
   confidence bundled-library role aliases, including the final bzip2 stream
   callbacks.

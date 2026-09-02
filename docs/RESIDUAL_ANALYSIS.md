@@ -103,6 +103,17 @@ count increment is at `0x2adafc`, and `DGifSlurp` keeps walking records from
 This is recorded as `GIF-005`, a frame-metadata and cumulative-resource
 availability concern rather than a demonstrated overwrite.
 
+The direct bitmap wrapper has a separate arithmetic risk. At `0x150b88` and
+`0x150b90`, `TBitmap_readGIF_TStream` uses a 32-bit height-times-width value
+for the temporary source allocation and `DGifGetLine` length. At `0x150c9c`,
+`0x150ca0`, `0x150cb0`, and `0x150cb8`, it derives the destination allocation
+from a 32-bit width-times-height-times-8 calculation. The row copy at
+`0x150d40` through `0x150d50` still writes one row per decoded source row.
+The dimensions `16385` by `32768` make the source and copy length
+`536903680` bytes while the wrapped destination size is `32768` bytes. This
+is recorded as `GIF-006`, a conditional static heap-overflow candidate that
+still needs a bounded malformed-GIF harness and allocator validation.
+
 One apparent function at `0x2ac400` was not code. The preserved ELF symbol
 `jpeg_fdct_float` ends at `0x2ac3fc`, and the preserved
 `jpeg_fdct_ifast` function begins at `0x2ac440`. The bytes from `0x2ac3fc`

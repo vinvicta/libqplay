@@ -33,8 +33,35 @@
     "That the reviewed CVEs are exploitable or absent under every malformed GIF input.",
     "That GIF-003 is a demonstrated out-of-bounds write.",
     "That GIF-004 is exploitable without a bounded malformed-GIF test.",
-    "That GIF-005 is exploitable without a bounded malformed-GIF test."
+    "That GIF-005 is exploitable without a bounded malformed-GIF test.",
+    "That GIF-006 reproduces without a bounded malformed-GIF test and allocator validation."
   ],
+  "observed_bitmap_copy_arithmetic": {
+    "addresses": [
+      "0x150b88",
+      "0x150b90",
+      "0x150ba8",
+      "0x150c9c",
+      "0x150ca0",
+      "0x150cb0",
+      "0x150cb8",
+      "0x150d40",
+      "0x150d4c",
+      "0x150d50"
+    ],
+    "arithmetic_example": {
+      "copied_bytes": 536903680,
+      "decoded_pixels": 536903680,
+      "destination_allocation_bytes": 32768,
+      "height": 32768,
+      "source_allocation_bytes": 536903680,
+      "width": 16385
+    },
+    "assessment": "For the example dimensions, the source allocation and decode length cover 536903680 pixels, while the 32-bit * 8 size calculation wraps and requests only 32768 destination bytes. If the large source allocation succeeds and the destination malloc returns storage, the row loop can write the full source length past that destination. This is a conditional static heap-overflow finding; no malformed GIF was fuzzed and no runtime crash was observed.",
+    "id": "GIF-006",
+    "instruction": "TBitmap_readGIF_TStream computes the source byte count as MUL W0, height, width before malloc and DGifGetLine, then computes the destination byte count as 32-bit width * height * 8 followed by a rounded arithmetic shift by 3. The row-copy loop multiplies each row index by width in W registers and copies one full row into the destination.",
+    "severity": "potential heap-buffer-overflow, conditional"
+  },
   "observed_extension_accumulation": {
     "addresses": [
       "0x2ae77c",
@@ -135,8 +162,8 @@
     "instruction": "DGifSlurp multiplies width and height in W20, sign-extends the 32-bit result for reallocarray, and separately multiplies width by a row index in W3 before sign-extending the offset.",
     "severity": "availability and memory-pressure risk"
   },
-  "overall_assessment": "The current ARM64 GIF LZW helper is not statically assigned any of the three reviewed upstream CVEs. Its visible bounds checks make the two 2018 dictionary-index patterns less likely to be present, but the exact giflib release is unknown and no malformed-image fuzzing was performed. GIF-003 remains an independent resource and integer-arithmetic hardening item. GIF-004 adds an unbounded extension-accumulation concern in DGifSlurp. GIF-005 adds an unbounded SavedImages frame-array concern.",
-  "schema": "libqplay.gif-decoder-security-review.v3",
+  "overall_assessment": "The current ARM64 GIF LZW helper is not statically assigned any of the three reviewed upstream CVEs. Its visible bounds checks make the two 2018 dictionary-index patterns less likely to be present, but the exact giflib release is unknown and no malformed-image fuzzing was performed. GIF-003 remains an independent resource and integer-arithmetic hardening item. GIF-004 adds an unbounded extension-accumulation concern in DGifSlurp. GIF-005 adds an unbounded SavedImages frame-array concern. GIF-006 adds a conditional 32-bit GIF bitmap-copy overflow candidate.",
+  "schema": "libqplay.gif-decoder-security-review.v4",
   "source_comparison_references": [
     {
       "description": "Pinned giflib-style DGifDecompressLine role reference",
@@ -152,7 +179,7 @@
     }
   ],
   "tool": "tools/generate_gif_decoder_security_review.py",
-  "tool_version": 3,
+  "tool_version": 4,
   "upstream_context": [
     {
       "affected_versions": "giflib 3.0 through 3.1.1 are listed by NVD",
