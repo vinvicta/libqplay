@@ -25,10 +25,11 @@ from public `main` requires rebuilding the branch and force-pushing it. That
 operation is intentionally separate from ordinary research commits because it
 changes commit IDs for every downstream clone.
 
-A local history preview was built without changing the public branch. The
-preview retained the useful research commits, removed the obsolete comparison
-content from reachable history and messages, passed a full object check, and
-reduced the history to 82 commits. It remains a staging result until the
+A refreshed local history preview was built without changing the public
+branch. The preview retained the useful research commits, removed the obsolete
+comparison content from reachable history and messages, passed a full object
+check, and reduced the history to 83 commits. It includes the current tree
+through cleanup commit `be83606`. It remains a staging result until the
 repository owner explicitly authorizes replacing public `main`.
 
 ## Review rules
