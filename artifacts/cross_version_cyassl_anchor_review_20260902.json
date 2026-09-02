@@ -1,0 +1,127 @@
+{
+  "artifact": "cross_version_cyassl_anchor_review",
+  "date": "2026-09-02",
+  "scope": "Offline dynamic-symbol and function-byte comparison between the original 1.8 ARM64 library and the unverified installed 2.2 ARM64 library",
+  "inputs": {
+    "1.8_arm64_libqplay": {
+      "sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+      "size": 3657208,
+      "text_address": "0xe0170",
+      "text_file_offset": "0xe0170",
+      "text_size": 2021744
+    },
+    "2.2_arm64_libqplay": {
+      "sha256": "45a7f97df9b40cdac6fbd42dc715bbabf3bbdb9b33876990e232133a8818941e",
+      "size": 3736872,
+      "text_address": "0xdf800",
+      "text_file_offset": "0xdf800",
+      "text_size": 2078832
+    },
+    "installed_2.2_apk": "45f469692cb6ee2e8d0f1529d8b0871dafdf718e2c8b6e345cb5082e40257751"
+  },
+  "method": {
+    "symbol_source": "readelf -Ws dynamic symbol tables",
+    "function_scope": "defined FUNC entries whose exact mangled name begins with _ZN6CyaInt",
+    "byte_comparison": "Raw bytes at the symbol value for equal-sized functions; section virtual address equals file offset for both inputs",
+    "limitations": "Raw byte inequality can result from version changes, relocated PC-relative references, or surrounding layout. Equality is a strong implementation anchor but is not a complete behavioral proof."
+  },
+  "results": {
+    "cyassl_symbols_1_8": 253,
+    "cyassl_symbols_2_2": 253,
+    "exact_name_intersection": 253,
+    "same_size": 253,
+    "address_delta_0xd590_count": 240,
+    "address_delta_0xd588_count": 13,
+    "raw_function_bytes_equal": 84,
+    "shifted_0xd588_names": [
+      "_ZN6CyaInt10MakeSignerEPv",
+      "_ZN6CyaInt11DecodeToKeyEPNS_11DecodedCertEi",
+      "_ZN6CyaInt11FreeSignersEPNS_6SignerEPv",
+      "_ZN6CyaInt12FreeAltNamesEPNS_9DNS_entryEPv",
+      "_ZN6CyaInt12ValidateDateEPKhhi",
+      "_ZN6CyaInt13ToTraditionalEPhj",
+      "_ZN6CyaInt15EncodeSignatureEPhPKhji",
+      "_ZN6CyaInt15FreeDecodedCertEPNS_11DecodedCertE",
+      "_ZN6CyaInt15InitDecodedCertEPNS_11DecodedCertEPhjPv",
+      "_ZN6CyaInt17ParseCertRelativeEPNS_11DecodedCertEiiPv",
+      "_ZN6CyaInt18RsaPublicKeyDecodeEPKhPjPNS_6RsaKeyEj",
+      "_ZN6CyaInt19RsaPrivateKeyDecodeEPKhPjPNS_6RsaKeyEj",
+      "_ZN6CyaInt9ParseCertEPNS_11DecodedCertEiiPv"
+    ],
+    "selected_anchors": [
+      {
+        "name": "_ZN6CyaInt17CyaSSL_set_verifyEPNS_6CYASSLEiPFiiPNS_21CYASSL_X509_STORE_CTXEE",
+        "1.8_address": "0x2c5458",
+        "2.2_address": "0x2d29e8",
+        "size": 60,
+        "address_delta": "0xd590",
+        "raw_bytes_equal": true,
+        "role": "Sets peer-verification mode and callback."
+      },
+      {
+        "name": "_ZN6CyaInt29CyaSSL_CTX_load_verify_bufferEPNS_10CYASSL_CTXEPKhli",
+        "1.8_address": "0x2c6048",
+        "2.2_address": "0x2d35d8",
+        "size": 228,
+        "address_delta": "0xd590",
+        "raw_bytes_equal": true,
+        "role": "Loads a certificate bundle into the CyaSSL context."
+      },
+      {
+        "name": "_ZN6CyaInt24CyaSSL_check_domain_nameEPNS_6CYASSLEPKc",
+        "1.8_address": "0x2c5dc8",
+        "2.2_address": "0x2d3358",
+        "size": 132,
+        "address_delta": "0xd590",
+        "raw_bytes_equal": false,
+        "role": "Checks the peer certificate name against the requested host."
+      },
+      {
+        "name": "_ZN6CyaInt14CyaSSL_connectEPNS_6CYASSLE",
+        "1.8_address": "0x2c563c",
+        "2.2_address": "0x2d2bcc",
+        "size": 500,
+        "address_delta": "0xd590",
+        "raw_bytes_equal": false,
+        "role": "Runs the TLS connection state machine."
+      },
+      {
+        "name": "Java_com_quattroplay_GraalClassic_Natives_QPlayMain",
+        "1.8_address": "0x243858",
+        "2.2_address": "0x250644",
+        "1.8_size": 1092,
+        "2.2_size": 1092,
+        "address_delta": "0xcdec",
+        "raw_bytes_equal": false,
+        "role": "JNI native startup entrypoint."
+      },
+      {
+        "name": "Java_com_quattroplay_GraalClassic_Natives_QPlayLoop",
+        "1.8_address": "0x2440f4",
+        "2.2_address": "0x250ee0",
+        "1.8_size": 696,
+        "2.2_size": 1560,
+        "address_delta": "0xcdec",
+        "raw_bytes_equal": false,
+        "role": "JNI render and timer loop entrypoint."
+      }
+    ]
+  },
+  "assessment": {
+    "confirmed": [
+      "The 2.2 library retains the exact 253 CyaSSL dynamic function names present in the 1.8 library.",
+      "All 253 matched CyaSSL functions retain their 1.8 sizes, and their addresses follow one of two stable deltas.",
+      "84 matched CyaSSL function bodies are byte-for-byte equal at the corresponding addresses, including certificate-buffer loading and verification-mode setters.",
+      "Hostname-checking and TLS-connect bodies have changed despite retaining the same names and sizes, so the shared address delta is not enough to claim identical transport behavior.",
+      "The JNI startup entrypoint keeps its size and a separate address delta, while the render loop grows substantially in 2.2."
+    ],
+    "not_proven": [
+      "The installed package is an official or unmodified 2.2 release.",
+      "Any 1.8 application symbol maps to 2.2 by a single address delta.",
+      "The 2.2 trust bundle, connector endpoints, or package policy match 1.8.",
+      "The same runtime state, Java scripts, or server protocol behavior exists in both versions."
+    ],
+    "safe_use": "Use the exact CyaSSL names and the measured 0xd590 or 0xd588 delta as static anchors only. Recheck each target's bytes, callers, and data references before applying an IDA label or patch to 2.2."
+  },
+  "raw_data_policy": "APK and native files remain outside the repository; this artifact contains hashes, symbol metadata, and selected anchor measurements only."
+}

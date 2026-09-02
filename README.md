@@ -86,6 +86,13 @@ cross-version anchors, but its companion `libxposed.so` installs inline hooks
 and disables a Frida-detection path. It must not be treated as a stock 2.2
 reference.
 
+The first exact cross-version bridge is now measured in
+`artifacts/cross_version_cyassl_anchor_review_20260902.json`: all 253 retained
+CyaSSL names match between the two ARM64 libraries, with two stable address
+deltas and 84 byte-identical function bodies. The application entrypoints do
+not share that guarantee, so the result is useful for TLS analysis rather than
+blind address translation.
+
 The Android lifecycle review adds an important first diagnostic checkpoint.
 The connector is downstream of the GL surface, window focus, runtime
 permission completion, and the first render frame. A compatibility dialog or
@@ -238,6 +245,8 @@ The compact record is
   and large-file transfer state, and the bounded completion-path crash review.
 * `docs/ABI_2_2_COMPARISON.md` records the bounded, offline comparison with
   the unverified installed 2.2 package.
+* `artifacts/cross_version_cyassl_anchor_review_20260902.json` records the
+  exact 1.8 to 2.2 CyaSSL name, size, address, and byte measurements.
 * `docs/DEPENDENCY_PROVENANCE.md` records the bundled compression, font, and
   image-library versions and their input paths.
 * `artifacts/original_dex_webview_review_20260830.json` records the local smali

@@ -115,7 +115,10 @@ should be recorded with the 2.2 file hash and an address relative to its load
 base. Names should remain address-based until cross-references or a runtime
 trace establish that the 1.8 and 2.2 routines have the same behavior. A
 verified stock 2.2 input is still needed before translating names or claiming
-protocol parity.
+protocol parity. The CyaSSL anchor measurement in
+`artifacts/cross_version_cyassl_anchor_review_20260902.json` is the first
+verified static bridge: all 253 exact `CyaInt` names match, but only 84 bodies
+are byte-identical and the application routines do not share that guarantee.
 
 ## Repeating the pass
 

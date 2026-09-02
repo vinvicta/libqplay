@@ -1636,3 +1636,21 @@ This pass strengthens the diagnosis without overstating it. The stale trust
 material and connector fallback are not likely isolated to ARM64, but a missing
 legacy C++ runtime or an alignment-sensitive loader error still needs ARM64
 logcat or a physical device. No live endpoint was contacted.
+
+## 1.8 to 2.2 CyaSSL anchor pass
+
+The installed 2.2 package gives us a more useful bridge than its stripped label
+first suggested. The two ARM64 libraries retain the same 253 exact `CyaInt`
+dynamic function names, and all 253 exported sizes match. The 2.2 addresses
+move by `0xd590` for 240 functions and by `0xd588` for 13 certificate-parser
+functions. Eighty-four corresponding function bodies are byte-identical,
+including `CyaSSL_set_verify` and `CyaSSL_CTX_load_verify_buffer`.
+
+The result is strong enough to carry static CyaSSL labels into the 2.2 IDA
+database after checking callers and data references. It is not a general
+application address translation. `CyaSSL_check_domain_name` and
+`CyaSSL_connect` have changed bytes despite the same names and sizes, and the
+2.2 render loop grows from 696 to 1,560 bytes. The JNI startup entrypoint keeps
+its 1,092-byte size at a separate `0xcdec` delta. The exact hashes, addresses,
+and limits are in
+`artifacts/cross_version_cyassl_anchor_review_20260902.json`.

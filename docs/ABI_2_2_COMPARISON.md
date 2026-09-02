@@ -66,6 +66,36 @@ client methods, certificate-buffer loading, hostname checking, verification
 configuration, and `CyaSSL_connect`. These exports establish available code,
 not a successful connection or a currently valid trust configuration.
 
+### Exact CyaSSL anchors
+
+The 2.2 dynamic table preserves all 253 exact `CyaInt` function names found in
+the 1.8 ARM64 library. Every matched function has the same exported size. Two
+address deltas account for the block layout: 240 functions move by `0xd590`,
+and 13 certificate-parser functions move by `0xd588`. Eighty-four matched
+function bodies are byte-for-byte equal at those corresponding addresses.
+
+That gives us a useful static bridge into a stripped application build, but it
+does not make the application code position-independent from 1.8. For example,
+the certificate-buffer loader and verification setter are byte-identical,
+while the hostname checker and TLS connection state machine retain their names
+and sizes but have different bytes. The JNI startup entrypoint also keeps its
+1,092-byte size at a separate `0xcdec` delta, while the render loop changes
+from 696 to 1,560 bytes.
+
+| Anchor | 1.8 address | 2.2 address | Size | Raw bytes |
+| --- | ---: | ---: | ---: | --- |
+| `CyaSSL_set_verify` | `0x2c5458` | `0x2d29e8` | 60 | Equal |
+| `CyaSSL_CTX_load_verify_buffer` | `0x2c6048` | `0x2d35d8` | 228 | Equal |
+| `CyaSSL_check_domain_name` | `0x2c5dc8` | `0x2d3358` | 132 | Changed |
+| `CyaSSL_connect` | `0x2c563c` | `0x2d2bcc` | 500 | Changed |
+| `QPlayMain` | `0x243858` | `0x250644` | 1,092 | Changed |
+| `QPlayLoop` | `0x2440f4` | `0x250ee0` | 696 / 1,560 | Changed |
+
+The complete measurement record is
+`artifacts/cross_version_cyassl_anchor_review_20260902.json`. A 1.8 address
+should only be transferred to 2.2 when its exact name, size, bytes, callers,
+and data references have been checked again.
+
 The ELF metadata reports full RELRO, `BIND_NOW`, and a non-executable stack.
 Those baseline properties do not remove the risks of legacy transport policy
 or code that changes executable memory at runtime.
