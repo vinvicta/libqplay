@@ -7,11 +7,10 @@ small protocol observations rather than raw application payloads.
 
 ## Current tree
 
-The cleanup audit on 2026-09-02 found 237 tracked files and about 19 MiB in
-the current checkout. There are 96 JSON records containing about 422,597
-lines. No APK, ELF library, IDA database, signing key, or packet capture is
-tracked. The source tree contains no retired comparison-package filename or
-reference.
+The cleanup audit on 2026-09-02 found 243 tracked files and about 18.1 MiB in
+the current checkout. There are 99 JSON records containing 432,124 lines. No
+APK, ELF library, IDA database, signing key, or packet capture is tracked. The
+source tree contains no retired comparison-package filename or reference.
 
 The ignore policy now covers the common IDA database sidecars as well as APK,
 ELF, signing, capture, and temporary files. JSON is intentionally not ignored:

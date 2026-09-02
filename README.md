@@ -111,7 +111,8 @@ The unverified installed 2.2 comparison is recorded separately in
 `docs/ABI_2_2_COMPARISON.md`. It retains enough dynamic symbols for useful
 cross-version anchors, but its companion `libxposed.so` installs inline hooks
 and disables a Frida-detection path. It must not be treated as a stock 2.2
-reference.
+reference. Its offline security inventory is in
+`artifacts/comparison_apk_security_audit_20260902.json`.
 
 The first exact cross-version bridge is now measured in
 `artifacts/cross_version_cyassl_anchor_review_20260902.json`: all 253 retained
@@ -299,6 +300,11 @@ The compact record is
   exact 1.8 to 2.2 CyaSSL name, size, address, and byte measurements.
 * `artifacts/cross_version_symbol_overlap_20260902.json` records the compact
   all-family 1.8 to 2.2 retained-function overlap and anchor measurements.
+* `artifacts/cross_version_translation_candidates_20260902.json` records all
+  835 exact-name 1.8 to 2.2 address candidates with size and byte checks.
+* `artifacts/comparison_apk_security_audit_20260902.json` records the offline
+  manifest, DEX, ZIP, signing, ELF, and native-hook review for the comparison
+  APK.
 * `docs/DEPENDENCY_PROVENANCE.md` records the bundled compression, font, and
   image-library versions and their input paths.
 * `artifacts/original_dex_webview_review_20260830.json` records the local smali
