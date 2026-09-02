@@ -50,6 +50,12 @@ This is the short handoff view. The full reasoning and command history are in
     `MODE3_FAIL_SCRIPT_REACHED` from its `onCreated` event. This closes the
     local package-handoff ambiguity. The record is in
     `artifacts/connector_mode3_fail_script_runtime_control_20260902.json`.
+14. A targeted native package negative-control suite rejected malformed
+    signatures, missing EOCD records, invalid local offsets, and oversized
+    script metadata without a crash indicator. A one-byte-short ZIP still
+    executed the signed failure script, so the parser needs stricter end-record
+    and exact-read validation. The cases are in
+    `artifacts/connector_package_negative_controls_20260902.json`.
 
 The Android lifecycle review now gives a pre-network checkpoint. The GL thread
 must have a surface and window focus, and the permission callback must set

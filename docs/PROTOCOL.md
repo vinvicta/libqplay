@@ -330,6 +330,14 @@ control with the failure role reached its `onCreated` event after native
 signature verification and ZIP unpacking. The role-specific evidence is in
 `artifacts/connector_mode3_fail_script_runtime_control_20260902.json`.
 
+A targeted malformed-package control also reached the native parser. Four
+mutations were rejected without a crash indicator: a bad outer signature, a
+missing EOCD record, an invalid `.rk` local offset, and an oversized script
+entry. Removing only the final ZIP byte was accepted and the failure script
+still ran. This is a small format-integrity finding, not proof of an exploitable
+memory bug. The full case list and hashes are in
+`artifacts/connector_package_negative_controls_20260902.json`.
+
 The archived body has a valid ZIP and its RSA signature passes the public-key
 check recovered from this APK when the native wolfSSL raw-digest format is
 reproduced. An earlier generic ASN.1 `DigestInfo` check reported a mismatch

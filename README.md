@@ -72,6 +72,14 @@ unpacked and activated. It does not prove that the current service publishes
 that package or that the failure script should start a game. The runtime record
 is `artifacts/connector_mode3_fail_script_runtime_control_20260902.json`.
 
+A bounded native parser control then tested malformed but correctly signed ZIP
+envelopes. Bad signatures, missing EOCD records, invalid local offsets, and
+oversized script metadata were rejected without a crash indicator. A package
+missing only the final ZIP byte still executed, so the native reader has a
+format-integrity gap that deserves stricter end-record and exact-read checks.
+The compact evidence is in
+`artifacts/connector_package_negative_controls_20260902.json`.
+
 The symbolized handler-table investigation also produced an important
 correction. The original `setInDataHandlers` instructions are correct for this
 client revision. The earlier x86_64 `xchg` patch and the matching ARM64
@@ -282,6 +290,8 @@ The compact record is
   private two-port runtime observation and its response-format limitation.
 * `artifacts/connector_mode3_fail_script_runtime_control_20260902.json` records
   the matching mode-3 package and `StartScript_Fail` execution control.
+* `artifacts/connector_package_negative_controls_20260902.json` records the
+  targeted malformed signed-package controls and the one-byte EOF leniency.
 * `artifacts/cross_abi_compatibility_review_20260902.json` compares the four
   native ABI variants without copying binaries into the repository.
 * `artifacts/game_connection_flow_review_20260830.json` preserves the compact

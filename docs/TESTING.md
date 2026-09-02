@@ -182,6 +182,14 @@ unpack, script installation, and script execution. It does not establish what
 the current service returns or provide a production signing key. Keep the
 private keys and generated package outside this repository.
 
+The same private runner exercised five bounded mutations after re-signing the
+outer envelope: a flipped signature byte, a missing EOCD, an out-of-range
+`.rk` offset, an oversized script declaration, and a one-byte EOF truncation.
+The first four invalid cases were rejected without a filtered crash indicator.
+The one-byte truncation still executed the failure script, which is recorded as
+a parser-leniency result rather than an exploit. See
+`artifacts/connector_package_negative_controls_20260902.json`.
+
 When `--output-dir` points to a new directory, the responder creates it before
 accepting requests. This keeps capture setup separate from the protocol test.
 

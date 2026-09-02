@@ -1,0 +1,102 @@
+{
+  "schema": "libqplay.connector-package-negative-controls.v1",
+  "artifact": "connector_package_negative_controls_20260902",
+  "analysis_date": "2026-09-02",
+  "scope": "private loopback-only x86_64 emulator control",
+  "network_contacted": false,
+  "purpose": "Exercise the native signed connector-package boundary with a valid fixture and bounded malformed variants.",
+  "environment": {
+    "device": "emulator-5554",
+    "android_api": 36,
+    "selected_abi": "x86_64",
+    "diagnostic_package_sha256": "8e0e4067094e2bfab037c108817a3295c9898466ddb5059485b2ce08d7f5efce",
+    "native_rsa_verification": "enabled against the private helper test public key",
+    "certificate_verification": "enabled; an expired local certificate forces mode 3",
+    "loopback_ports": {
+      "18443": "expired-certificate TLS responder",
+      "18080": "mode-3 HTTP responder",
+      "14900": "synthetic game responder"
+    }
+  },
+  "common_observations": {
+    "compatibility_dialog_dismissed": true,
+    "crash_indicator_definition": "No FATAL, Fatal signal, SIGSEGV, SIGABRT, or Abort message line appeared in the filtered logcat sample.",
+    "rejection_log": "Rejected cases emitted Problem setting up the networking and retried the mode-3 request without a native crash indicator.",
+    "script_marker": "MODE3_FAIL_SCRIPT_REACHED"
+  },
+  "cases": [
+    {
+      "name": "valid",
+      "mutation": "none",
+      "body_bytes": 959,
+      "body_sha256": "eb444c1382c211e0a0c94576c82eee6f5a2db5853e5c673b6bf9cf823b48794f",
+      "mode3_http_requests": 1,
+      "script_marker_seen": true,
+      "crash_indicator_seen": false,
+      "result": "accepted and executed"
+    },
+    {
+      "name": "bad_signature",
+      "mutation": "flip one byte in the raw RSA-SSL signature and resign nothing",
+      "body_bytes": 959,
+      "body_sha256": "65f8e018a0b5720fb342199e6b28a95b7f2c7ede2efbdda1030e4e5f8dac11b1",
+      "mode3_http_requests": 2,
+      "script_marker_seen": false,
+      "crash_indicator_seen": false,
+      "result": "rejected before script execution"
+    },
+    {
+      "name": "truncated_zip",
+      "mutation": "remove the final byte of the outer encrypted ZIP, then recompute the valid raw RSA-SSL signature",
+      "body_bytes": 958,
+      "body_sha256": "0139fdb9a409830b845ea8c0d9743b5f1a2a6366f6e8b5343e0072529c726c4b",
+      "mode3_http_requests": 1,
+      "script_marker_seen": true,
+      "crash_indicator_seen": false,
+      "result": "accepted and executed despite one-byte EOF truncation"
+    },
+    {
+      "name": "missing_eocd",
+      "mutation": "remove the 22-byte ZIP end record, then recompute the valid raw RSA-SSL signature",
+      "body_bytes": 937,
+      "body_sha256": "fb128c98a19d71404e15c0bc33a168278eae4574ddc7f075f5e94a5c01917e05",
+      "mode3_http_requests": 2,
+      "script_marker_seen": false,
+      "crash_indicator_seen": false,
+      "result": "rejected before script execution"
+    },
+    {
+      "name": "bad_local_offset",
+      "mutation": "replace the .rk central-directory local-header offset with an out-of-range value, then resign",
+      "body_bytes": 959,
+      "body_sha256": "edf8d29ef0a4702b2827543431dffff6da2a66c65e0fea49409a9d89f7360f4a",
+      "mode3_http_requests": 2,
+      "script_marker_seen": false,
+      "crash_indicator_seen": false,
+      "result": "rejected before script execution"
+    },
+    {
+      "name": "oversized_script_entry",
+      "mutation": "set the StartScript_Fail central-directory uncompressed size above the native one-gibibyte per-entry limit, then resign",
+      "body_bytes": 959,
+      "body_sha256": "299d6a51a11a5e9dad43bfffdbd0b9c394ea497dc03a752b957688e2bbea1e39",
+      "mode3_http_requests": 2,
+      "script_marker_seen": false,
+      "crash_indicator_seen": false,
+      "result": "rejected before script execution"
+    }
+  ],
+  "assessment": {
+    "finding": "The native ZIP path accepts a package whose outer ZIP is missing only its final byte, while rejecting the same package with the complete 22-byte EOCD removed.",
+    "severity": "parser robustness and format-integrity concern",
+    "exploit_status": "not demonstrated",
+    "memory_safety_status": "No crash indicator was observed in this bounded suite. This does not replace allocator instrumentation or broader malformed-input testing.",
+    "repair": "Validate the complete ZIP end record and exact member read counts before script activation, while retaining the outer signature check.",
+    "limitations": [
+      "The suite used a private diagnostic public key and a private x86_64 APK.",
+      "The ARM64 library was not executed because no ARM64 Android system image is installed.",
+      "The test covered five targeted mutations, not exhaustive fuzzing.",
+      "No remote or production endpoint was contacted."
+    ]
+  }
+}

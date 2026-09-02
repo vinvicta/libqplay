@@ -1654,6 +1654,31 @@ a game socket. The current service's package, key, and connector script remain
 unverified. The compact record is
 `artifacts/connector_mode3_fail_script_runtime_control_20260902.json`.
 
+## Native signed-package negative controls
+
+The actual x86_64 package path was then exercised with a small targeted
+negative-control suite. Each mutated body was re-signed with the private test
+key, so the cases tested ZIP and dispatch behavior after the native outer RSA
+gate rather than relying on a signature bypass. The emulator used the same
+expired local certificate to enter mode 3 and a loopback HTTP responder.
+
+The invalid-signature case, a package with the complete 22-byte EOCD removed,
+an out-of-range `.rk` local-header offset, and an oversized script entry were
+all rejected. They emitted the ordinary networking-problem message and did
+not produce a filtered crash indicator. A one-byte-short version of the ZIP
+was different: the client still activated `StartScript_Fail` and emitted
+`MODE3_FAIL_SCRIPT_REACHED`. This likely reflects lenient handling of the
+otherwise empty end-record tail. It is a format-integrity and parser
+robustness concern, not a demonstrated memory-safety exploit.
+
+The result supports two repair requirements: validate the complete ZIP end
+record before trusting its offsets, and compare each non-negative decompressor
+read with the declared member size before exposing the stream to script or
+resource code. The six-case record is
+`artifacts/connector_package_negative_controls_20260902.json`. It is a
+bounded x86_64 control, not exhaustive fuzzing, and no live endpoint was
+contacted.
+
 ## Cross-ABI parity pass
 
 Because a physical ARM64 run is not currently available, the four native

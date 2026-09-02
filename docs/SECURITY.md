@@ -148,9 +148,11 @@ The findings use these terms:
 * **Live** would mean a current production service accepted the client. No live
   result is claimed here.
 
-The report does not install the APK, send an intent to another application,
-inject DEX, fuzz the native parser, contact a production endpoint, or attempt
-to bypass a signature on a live service.
+The report does not install a release APK, send an intent to another
+application, inject DEX, perform exhaustive native-parser fuzzing, contact a
+production endpoint, or attempt to bypass a signature on a live service. The
+bounded signed-package controls described below used only a private
+diagnostic APK and loopback responders.
 
 ## Translation scope and residual names
 
@@ -1088,6 +1090,25 @@ game connection after serving a `con.png` body at `/conf.gs` was not enough to
 identify a parser or VM failure. The current service's role-specific package
 and signing key remain unverified. See
 `artifacts/connector_mode3_fail_script_runtime_control_20260902.json`.
+
+### Signed-package malformed-input controls
+
+The targeted runtime record is
+`artifacts/connector_package_negative_controls_20260902.json`. It exercised
+the actual native package path with a valid failure-script package plus five
+small mutations. The diagnostic public key matched the test signer, so the
+malformed ZIP cases reached the native ZIP parser without weakening the outer
+signature gate.
+
+The native path rejected a flipped RSA signature, a missing 22-byte ZIP end
+record, an out-of-range `.rk` local-header offset, and a script entry whose
+declared uncompressed size exceeded the one-gibibyte per-entry limit. None of
+those cases produced a filtered logcat crash indicator. A package shortened by
+only its final ZIP byte still reached `StartScript_Fail.onCreated` and emitted
+`MODE3_FAIL_SCRIPT_REACHED`. The result is a format-integrity and parser
+robustness concern, not a demonstrated memory-safety exploit. The next repair
+should validate the complete end record and compare every non-negative member
+read with the declared size before activating script objects.
 
 ### Game-server TLS configuration
 
