@@ -1,0 +1,185 @@
+{
+  "analysis_date": "2026-09-02",
+  "artifact": "connector_fallback_review_20260902",
+  "binary": {
+    "path": "private original ARM64 libqplay.so",
+    "sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8"
+  },
+  "diagnostic_sequence": [
+    "Record the first HTTPS TCP connection and whether a ClientHello completes.",
+    "If the handshake fails before GET, observe the next destination separately rather than treating the absence of HTTP as the final state.",
+    "Record whether mode 3 opens a plain TCP connection and sends GET /conf.gs.",
+    "Keep certificate verification enabled while testing a current authorized endpoint; the fallback trace is not a reason to disable it."
+  ],
+  "findings": [
+    {
+      "assessment": "The first HTTPS certificate failure can occur before any HTTP request, then the native error path deliberately enters mode 3 and tries the cleartext conf.gs endpoint. If that legacy endpoint is unavailable, the user sees the generic connector failure even though the HTTPS failure was the first cause.",
+      "confidence": "confirmed-static",
+      "id": "CONNECTOR-FALLBACK-001",
+      "limits": [
+        "The static path does not prove that a current service still publishes conf.gs.",
+        "The existing local expired-certificate control listened on the TLS diagnostic port and therefore did not observe a mode-3 request.",
+        "No live endpoint was contacted."
+      ],
+      "severity": "compatibility and transport-policy concern",
+      "title": "TLS errors trigger a cleartext connector fallback"
+    }
+  ],
+  "functions": {
+    "download_completion": {
+      "address": "0x200010",
+      "evidence": [
+        "The connector marker at request offset 229 distinguishes connector failure from ordinary file failure.",
+        "The failure path reads the socket error field at byte offset 8312 and calls enterNextConnectorMode_int.",
+        "When that field is nonzero and connectormode is at most 2, the call argument is the explicit mode 3 value.",
+        "Otherwise the failure path uses the negative argument and follows the normal two-attempt progression."
+      ],
+      "name": "THTTPRequest_saveDownloadedData_void"
+    },
+    "enter_next_connector_mode": {
+      "address": "0x203df4",
+      "evidence": [
+        "An explicit positive mode stores connectormode and resets connectortries to 1.",
+        "A negative argument increments connectortries when the current attempt is the first try.",
+        "A negative argument advances the mode and resets connectortries to 1 after the second try or an invalid current mode.",
+        "Modes 1 through 3 construct the connector request; mode 4 calls showConnectFailure."
+      ],
+      "name": "TServerList_enterNextConnectorMode_int"
+    },
+    "login": {
+      "address": "0x204420",
+      "evidence": [
+        "The login path calls enterNextConnectorMode_int with mode 1 after showing the connecting window."
+      ],
+      "name": "TServerList_login_void"
+    },
+    "request_state_machine": {
+      "address": "0x2025a0",
+      "evidence": [
+        "A request with a socket error reaches the completion path that calls saveDownloadedData after the normal read and parse checks.",
+        "The redirect branch is separate and has its own ten-attempt counter."
+      ],
+      "name": "THTTPRequest_runScript_void"
+    },
+    "socket_error_field": {
+      "evidence": [
+        "The CyaSSL read and write error paths store the CyaSSL error result at byte offset 8312 and close the socket.",
+        "The plain recv and send paths report ordinary transport errors through the socket message field instead of this CyaSSL error field."
+      ],
+      "read_address": "0x2074d4",
+      "read_name": "TSocketConnection_read_void",
+      "write_address": "0x207118",
+      "write_name": "TSocketConnection_sendData_void_const_int"
+    }
+  },
+  "limitations": [
+    "This report is a static control-flow model, not a runtime trace.",
+    "The redirect retry counter and connector-mode counter are independent state variables.",
+    "A physical ARM64 run and a current service-side response are still required for end-to-end confirmation."
+  ],
+  "network_contacted": false,
+  "normal_attempt_order": [
+    {
+      "attempt": 1,
+      "endpoint": "https://con.quattroplay.com/con.png",
+      "failure_transition": {
+        "attempt": 2,
+        "mode": 1
+      },
+      "host": "con.quattroplay.com",
+      "mode": 1,
+      "path": "/con.png",
+      "scheme": "https"
+    },
+    {
+      "attempt": 2,
+      "endpoint": "https://con2.quattroplay.com/con.png",
+      "failure_transition": {
+        "attempt": 1,
+        "mode": 2
+      },
+      "host": "con2.quattroplay.com",
+      "mode": 1,
+      "path": "/con.png",
+      "scheme": "https"
+    },
+    {
+      "attempt": 1,
+      "endpoint": "https://con.quattroplay.com/con.gs",
+      "failure_transition": {
+        "attempt": 2,
+        "mode": 2
+      },
+      "host": "con.quattroplay.com",
+      "mode": 2,
+      "path": "/con.gs",
+      "scheme": "https"
+    },
+    {
+      "attempt": 2,
+      "endpoint": "https://con2.quattroplay.com/con.gs",
+      "failure_transition": {
+        "attempt": 1,
+        "mode": 3
+      },
+      "host": "con2.quattroplay.com",
+      "mode": 2,
+      "path": "/con.gs",
+      "scheme": "https"
+    },
+    {
+      "attempt": 1,
+      "endpoint": "http://con.quattroplay.com/conf.gs",
+      "failure_transition": {
+        "attempt": 2,
+        "mode": 3
+      },
+      "host": "con.quattroplay.com",
+      "mode": 3,
+      "path": "/conf.gs",
+      "scheme": "http"
+    },
+    {
+      "attempt": 2,
+      "endpoint": "http://con2.quattroplay.com/conf.gs",
+      "failure_transition": {
+        "attempt": 0,
+        "mode": 4,
+        "result": "showConnectFailure"
+      },
+      "host": "con2.quattroplay.com",
+      "mode": 3,
+      "path": "/conf.gs",
+      "scheme": "http"
+    }
+  ],
+  "repair_targets": [
+    "Use a current authorized trust chain and preserve peer and hostname verification.",
+    "Make fallback policy explicit and reject an HTTPS-to-HTTP downgrade unless the operator deliberately supports it.",
+    "Log connector mode, attempt, transport, and native socket error separately so the first failure is not hidden by the fallback result."
+  ],
+  "schema": "libqplay.connector-fallback-review.v1",
+  "scope": "static ARM64 IDA review of connector retry and TLS-error fallback",
+  "tls_error_shortcuts": [
+    {
+      "condition": "connector request fails with a nonzero CyaSSL error field",
+      "endpoint": "http://con.quattroplay.com/conf.gs",
+      "from": "mode 1, attempt 1 or 2",
+      "next": "mode 3, attempt 1"
+    },
+    {
+      "condition": "connector request fails with a nonzero CyaSSL error field",
+      "endpoint": "http://con.quattroplay.com/conf.gs",
+      "from": "mode 2, attempt 1 or 2",
+      "next": "mode 3, attempt 1"
+    },
+    {
+      "condition": "connector request fails with a nonzero CyaSSL error field",
+      "endpoint": "http://con2.quattroplay.com/conf.gs",
+      "from": "mode 3, attempt 1",
+      "next": "mode 3, attempt 2"
+    }
+  ],
+  "tool": "tools/generate_connector_fallback_review.py",
+  "tool_version": 1
+}

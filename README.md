@@ -52,6 +52,14 @@ mismatch because it used the wrong signature format. Certificate freshness
 and package verification are separate from the game-server protocol, and any
 diagnostic changes remain private to the local test build.
 
+The connector fallback audit found a second, more specific behavior. When the
+native CyaSSL read or write path records a TLS error, the connector skips its
+remaining HTTPS retry in modes 1 and 2 and jumps to the cleartext mode 3
+`conf.gs` endpoint. This is confirmed from static ARM64 control flow, not from
+a live service. The report and generator are
+`artifacts/connector_fallback_review_20260902.json` and
+`tools/generate_connector_fallback_review.py`.
+
 The symbolized handler-table investigation also produced an important
 correction. The original `setInDataHandlers` instructions are correct for this
 client revision. The earlier x86_64 `xchg` patch and the matching ARM64
@@ -215,6 +223,8 @@ The compact record is
   path.
 * `artifacts/connector_http_flow_review_20260830.json` preserves the compact
   IDA export for the original connector request lifecycle.
+* `artifacts/connector_fallback_review_20260902.json` records the connector
+  retry state machine and the TLS-error jump to its cleartext fallback.
 * `artifacts/game_connection_flow_review_20260830.json` preserves the compact
   IDA export for the connector-to-game socket lifecycle.
 * `artifacts/original_libc_callsite_review_20260830.json` records the direct

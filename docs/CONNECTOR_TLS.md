@@ -92,6 +92,26 @@ The full hashes and raw observations are in
 `artifacts/connector_tls_expiry_control_20260826.json`. The test packages,
 private keys, and emulator logs remain outside the repository.
 
+## TLS failure fallback
+
+The connector does not simply stop after a TLS error. Static control-flow
+evidence in `artifacts/connector_fallback_review_20260902.json` shows that
+`THTTPRequest_saveDownloadedData_void` reads the CyaSSL error field written by
+the socket read and write paths. For a connector request in HTTPS mode 1 or 2,
+a nonzero CyaSSL error sends the state machine directly to mode 3:
+`http://con.quattroplay.com/conf.gs`, followed by its `con2` retry. It skips
+the second HTTPS host and the alternate HTTPS file. Ordinary non-TLS failures
+use the normal two-attempt progression.
+
+This is both a compatibility lead and a transport-policy concern. A stale
+certificate can therefore be followed by a cleartext request, while an
+unavailable legacy fallback can hide the first TLS cause behind the generic
+failure screen. The current service's support for `conf.gs` is unverified.
+The existing expiry control did not observe it because its listener covered
+only the TLS diagnostic port. The next bounded runtime control should route
+the HTTPS and HTTP fallback ports separately and log the mode, attempt,
+transport, and native error for each connection.
+
 ## Repair boundary
 
 The old embedded chain should not be replaced with a guessed certificate. A

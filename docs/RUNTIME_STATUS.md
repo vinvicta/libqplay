@@ -108,7 +108,12 @@ message. A private ARM64 run should record these checkpoints in order:
    client sends `GET /con.png` afterward. The paired local validity control
    reached TCP but sent no HTTP request with the expired trust material, while
    a matching valid bundle sent the GET. A live device that stops at this
-   boundary should not be debugged by disabling certificate checks.
+   boundary should not be debugged by disabling certificate checks. Also
+   record the next connector mode and destination. Static analysis shows that
+   a nonzero CyaSSL error in mode 1 or 2 jumps directly to mode 3 and may send
+   plain `GET /conf.gs`, so the missing first GET is not by itself proof that
+   the state machine stopped. The focused record is
+   `artifacts/connector_fallback_review_20260902.json`.
 5. If HTTP completes, check the binary envelope, RSA result, ZIP dispatch, and
    `StartScript_Connector`. A valid HTTP response that never emits
    `onServerWarp` is a connector package or script activation problem.
