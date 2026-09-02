@@ -84,6 +84,25 @@ def build_report(inventory_path: Path, profile_path: Path | None = None) -> dict
         if profile_path is not None
         else None
     )
+    interpretation = [
+        "The 8601 translated aliases cover the names present in the retained ELF symbol export, including functions, thunks, and data.",
+        "The exact source pass now accounts for 141 FreeType 2.3.6 functions, 153 IJG libjpeg 6b functions, one zlib 1.2.5 function, and one static giflib role.",
+        "A false IDA function boundary inside the JPEG DCT literal pool was removed before this inventory was generated.",
+    ]
+    if default_rows:
+        interpretation.extend(
+            [
+                "The residual list contains IDA-created code functions with no preserved source symbol.",
+                "Addresses and behavior can be documented without inventing source names; a new alias should be added only when its role has evidence.",
+            ]
+        )
+    else:
+        interpretation.extend(
+            [
+                "The final inventory contains no default sub_ function names; IDA-created residual functions have descriptive analyst labels applied separately.",
+                "The pre-persistence residual profile remains a historical classification input and is not embedded when the final inventory has no default sub_ rows.",
+            ]
+        )
 
     return {
         "schema": "libqplay.ida-final-residual-audit.v1",
@@ -114,13 +133,7 @@ def build_report(inventory_path: Path, profile_path: Path | None = None) -> dict
             }
             for row in top_xrefs
         ],
-        "interpretation": [
-            "The 8601 translated aliases cover the names present in the retained ELF symbol export, including functions, thunks, and data.",
-            "The exact source pass now accounts for 141 FreeType 2.3.6 functions, 153 IJG libjpeg 6b functions, one zlib 1.2.5 function, and one static giflib role.",
-            "A false IDA function boundary inside the JPEG DCT literal pool was removed before this inventory was generated.",
-            "The residual list contains IDA-created code functions with no preserved source symbol in this APK.",
-            "Addresses and behavior can be documented without inventing source names; a new alias should be added only when its role has evidence.",
-        ],
+        "interpretation": interpretation,
     }
 
 

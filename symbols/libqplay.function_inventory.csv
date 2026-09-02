@@ -1,5 +1,5 @@
 ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alias,segment,size,xrefs_to,flags,is_thunk,is_library,is_default_sub
-860528,sub_D2170,ida_default_sub,,,,,.plt,20,0,5120,False,False,True
+860528,ida_plt0_aarch64_resolver_d2170,ida_named_non_elf,,,,,.plt,20,0,5120,False,False,False
 860560,plt_TGaniObject_setlocaly_double_bool,elf_symbol,plt_thunk,._ZN11TGaniObject9setlocalyEdb,"TGaniObject::setlocaly(double,bool)",plt_TGaniObject_setlocaly_double_bool,.plt,16,1,5312,True,False,False
 860576,plt_TServerPlayer_setHead_TString_const,elf_symbol,plt_thunk,._ZN13TServerPlayer7setHeadERK7TString,TServerPlayer::setHead(TString const&),plt_TServerPlayer_setHead_TString_const,.plt,16,1,5312,True,False,False
 860592,plt_TLevelLoader_loadBoard_TStream_short_int_bool,elf_symbol,plt_thunk,._ZN12TLevelLoader9loadBoardEP7TStreamPsib,"TLevelLoader::loadBoard(TStream *,short *,int,bool)",plt_TLevelLoader_loadBoard_TStream_short_int_bool,.plt,16,2,5312,True,False,False
@@ -3588,35 +3588,35 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 918188,bzip2_mainGtU,ida_named_non_elf,,,,,.text,424,3,5120,False,False,False
 918612,libjpeg_jdmarker_examine_app14,ida_named_non_elf,,,,,.text,128,2,5120,False,False,False
 918740,TFiles_clearStaticPaths,ida_named_non_elf,,,,,.text,64,1,5120,False,False,False
-918804,sub_E0514,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-918820,sub_E0524,ida_default_sub,,,,,.text,12,1,5120,False,False,True
-918832,sub_E0530,ida_default_sub,,,,,.text,52,1,5120,False,False,True
-918884,sub_E0564,ida_default_sub,,,,,.text,64,1,5120,False,False,True
-918948,sub_E05A4,ida_default_sub,,,,,.text,60,1,5120,False,False,True
-919008,sub_E05E0,ida_default_sub,,,,,.text,12,1,5120,False,False,True
+918804,ida_init_fini_array_entry_e0514,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+918820,ida_init_fini_array_entry_e0524,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
+918832,ida_init_fini_array_entry_e0530,ida_named_non_elf,,,,,.text,52,1,5120,False,False,False
+918884,ida_init_fini_array_entry_e0564,ida_named_non_elf,,,,,.text,64,1,5120,False,False,False
+918948,ida_init_fini_array_entry_e05a4,ida_named_non_elf,,,,,.text,60,1,5120,False,False,False
+919008,ida_init_fini_array_entry_e05e0,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 919020,TClient_clearStaticStrings,ida_named_non_elf,,,,,.text,148,1,5120,False,False,False
 919168,TSocket_clearStaticStrings,ida_named_non_elf,,,,,.text,40,1,5120,False,False,False
 919208,TServerFlying_clearStaticStrings,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
 919256,TFiles_resetStaticPathPointers,ida_named_non_elf,,,,,.text,52,1,5120,False,False,False
 919308,TResource_initializeLinkLists,ida_named_non_elf,,,,,.text,76,1,5120,False,False,False
-919384,sub_E0758,ida_default_sub,,,,,.text,24,1,5120,False,False,True
+919384,ida_init_fini_array_entry_e0758,ida_named_non_elf,,,,,.text,24,1,5120,False,False,False
 919408,TDrawTexture_initializeTexturesList,ida_named_non_elf,,,,,.text,68,1,5120,False,False,False
-919476,sub_E07B4,ida_default_sub,,,,,.text,40,1,5120,False,False,True
-919524,sub_E07E4,ida_default_sub,,,,,.text,36,1,5120,False,False,True
-919560,sub_E0808,ida_default_sub,,,,,.text,12,1,5120,False,False,True
+919476,ida_init_fini_array_entry_e07b4,ida_named_non_elf,,,,,.text,40,1,5120,False,False,False
+919524,ida_init_fini_array_entry_e07e4,ida_named_non_elf,,,,,.text,36,1,5120,False,False,False
+919560,ida_init_fini_array_entry_e0808,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 919572,TClientEnvironment_clearRestartState,ida_named_non_elf,,,,,.text,40,1,5120,False,False,False
 919612,clearCurAnis,ida_named_non_elf,,,,,.text,136,1,5120,False,False,False
-919748,sub_E08C4,ida_default_sub,,,,,.text,32,1,5120,False,False,True
+919748,ida_init_fini_array_entry_e08c4,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
 919780,TOptions_initializeWindowPosition,ida_named_non_elf,,,,,.text,24,1,5120,False,False,False
 919804,initializeDisplayedGif,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
-919820,sub_E090C,ida_default_sub,,,,,.text,36,1,5120,False,False,True
-919856,sub_E0930,ida_default_sub,,,,,.text,48,1,5120,False,False,True
-919904,sub_E0960,ida_default_sub,,,,,.text,36,1,5120,False,False,True
-919940,sub_E0984,ida_default_sub,,,,,.text,112,1,5120,False,False,True
-920052,sub_E09F4,ida_default_sub,,,,,.text,56,1,5120,False,False,True
-920108,sub_E0A2C,ida_default_sub,,,,,.text,136,1,5120,False,False,True
-920244,sub_E0AB4,ida_default_sub,,,,,.text,28,1,5120,False,False,True
-920272,sub_E0AD0,ida_default_sub,,,,,.text,40,1,5120,False,False,True
+919820,ida_init_fini_array_entry_e090c,ida_named_non_elf,,,,,.text,36,1,5120,False,False,False
+919856,ida_init_fini_array_entry_e0930,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
+919904,ida_init_fini_array_entry_e0960,ida_named_non_elf,,,,,.text,36,1,5120,False,False,False
+919940,ida_init_fini_array_entry_e0984,ida_named_non_elf,,,,,.text,112,1,5120,False,False,False
+920052,ida_init_fini_array_entry_e09f4,ida_named_non_elf,,,,,.text,56,1,5120,False,False,False
+920108,ida_init_fini_array_entry_e0a2c,ida_named_non_elf,,,,,.text,136,1,5120,False,False,False
+920244,ida_init_fini_array_entry_e0ab4,ida_named_non_elf,,,,,.text,28,1,5120,False,False,False
+920272,ida_init_fini_array_entry_e0ad0,ida_named_non_elf,,,,,.text,40,1,5120,False,False,False
 920312,TSounds_isMusicPlaying,ida_named_non_elf,,,,,.text,68,1,5120,False,False,False
 920380,TSounds_getMusicPos_void,elf_symbol,function,_ZN7TSounds11getMusicPosEv,TSounds::getMusicPos(void),TSounds_getMusicPos_void,.text,64,2,5120,False,False,False
 920444,TSounds_getMusicLen_void,elf_symbol,function,_ZN7TSounds11getMusicLenEv,TSounds::getMusicLen(void),TSounds_getMusicLen_void,.text,64,2,5120,False,False,False
@@ -3665,7 +3665,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 928380,TSounds_script_setSoundPitch,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 928392,TSounds_initStaticVars_void,elf_symbol,function,_Z22TSounds_initStaticVarsv,TSounds_initStaticVars(void),TSounds_initStaticVars_void,.text,76,4,5120,False,False,False
 928468,TSounds_initStaticScriptVars_void,elf_symbol,function,_Z28TSounds_initStaticScriptVarsv,TSounds_initStaticScriptVars(void),TSounds_initStaticScriptVars_void,.text,56,4,5120,False,False,False
-928524,sub_E2B0C,ida_default_sub,,,,,.text,16,2,5120,False,False,True
+928524,ida_tstringlist_static_cleanup_e2b0c,ida_named_non_elf,,,,,.text,16,2,5120,False,False,False
 928540,THashListObject_onResourceFileUpdated_TString_const,elf_symbol,function,_ZN15THashListObject21onResourceFileUpdatedERK7TString,THashListObject::onResourceFileUpdated(TString const&),THashListObject_onResourceFileUpdated_TString_const,.text,4,154,5120,False,False,False
 928544,THashListObject_onResourceObjectUpdated_void_TString_const,elf_symbol,function,_ZN15THashListObject23onResourceObjectUpdatedEPvRK7TString,"THashListObject::onResourceObjectUpdated(void *,TString const&)",THashListObject_onResourceObjectUpdated_void_TString_const,.text,4,159,5120,False,False,False
 928548,TSoundEffect_hasChannel_void,elf_symbol,function,_ZN12TSoundEffect10hasChannelEv,TSoundEffect::hasChannel(void),TSoundEffect_hasChannel_void,.text,16,2,5120,False,False,False
@@ -3719,7 +3719,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 931340,TSoundPlayerJava_TSoundPlayerJava__2,elf_symbol,function,_ZN16TSoundPlayerJavaD0Ev,TSoundPlayerJava::~TSoundPlayerJava(),TSoundPlayerJava_TSoundPlayerJava__2,.text,48,2,5120,False,False,False
 931388,JNIEnv_CallStaticBooleanMethod_jclass_jmethodID,elf_symbol,function,_ZN7_JNIEnv23CallStaticBooleanMethodEP7_jclassP10_jmethodIDz,"_JNIEnv::CallStaticBooleanMethod(_jclass *,_jmethodID *,...)",JNIEnv_CallStaticBooleanMethod_jclass_jmethodID,.text,140,4,5120,False,False,False
 931528,JNIEnv_CallStaticVoidMethod_jclass_jmethodID,elf_symbol,function,_ZN7_JNIEnv20CallStaticVoidMethodEP7_jclassP10_jmethodIDz,"_JNIEnv::CallStaticVoidMethod(_jclass *,_jmethodID *,...)",JNIEnv_CallStaticVoidMethod_jclass_jmethodID,.text,140,4,5120,False,False,False
-931668,sub_E3754,ida_default_sub,,,,,.text,12,1,5120,False,False,True
+931668,ida_tstring_static_cleanup_e3754,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 931680,TTranslationFile_getTranslation_TString_const,elf_symbol,function,_ZN16TTranslationFile14getTranslationERK7TString,TTranslationFile::getTranslation(TString const&),TTranslationFile_getTranslation_TString_const,.text,92,4,5120,False,False,False
 931772,TLanguage_getTranslation_TString_const,elf_symbol,function,_ZN9TLanguage14getTranslationERK7TString,TLanguage::getTranslation(TString const&),TLanguage_getTranslation_TString_const,.text,204,4,5120,False,False,False
 931976,findLanguage_TString_const,elf_symbol,function,_Z12findLanguageRK7TString,findLanguage(TString const&),findLanguage_TString_const,.text,156,4,5120,False,False,False
@@ -3771,8 +3771,8 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 945048,TGraalVar_setProtectedObject_int,elf_symbol,function,_ZN9TGraalVar18setProtectedObjectEi,TGraalVar::setProtectedObject(int),TGraalVar_setProtectedObject_int,.text,8,78,5120,False,False,False
 945056,MRandomGenerator_randF_void,elf_symbol,function,_ZN16MRandomGenerator5randFEv,MRandomGenerator::randF(void),MRandomGenerator_randF_void,.text,44,4,5120,False,False,False
 945104,TGraalVar_getLogName_void,elf_symbol,function,_ZN9TGraalVar10getLogNameEv,TGraalVar::getLogName(void),TGraalVar_getLogName_void,.text,48,75,5120,False,False,False
-945152,sub_E6C00,ida_default_sub,,,,,.text,12,1,5120,False,False,True
-945164,sub_E6C0C,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+945152,ida_tstring_static_cleanup_e6c00,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
+945164,ida_tstring_static_cleanup_e6c0c,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 945180,TFiles_fileExists_TString_const,elf_symbol,function,_ZN6TFiles10fileExistsERK7TString,TFiles::fileExists(TString const&),TFiles_fileExists_TString_const,.text,100,4,5120,False,False,False
 945280,TFiles_fileSize_TString_const,elf_symbol,function,_ZN6TFiles8fileSizeERK7TString,TFiles::fileSize(TString const&),TFiles_fileSize_TString_const,.text,96,4,5120,False,False,False
 945376,TFiles_fileIsFolder_TString_const,elf_symbol,function,_ZN6TFiles12fileIsFolderERK7TString,TFiles::fileIsFolder(TString const&),TFiles_fileIsFolder_TString_const,.text,284,4,5120,False,False,False
@@ -3803,16 +3803,16 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 951096,TFiles_initStaticVars_void,elf_symbol,function,_Z21TFiles_initStaticVarsv,TFiles_initStaticVars(void),TFiles_initStaticVars_void,.text,220,4,5120,False,False,False
 951316,TFiles_getRegistryValue_TString_const,elf_symbol,function,_ZN6TFiles16getRegistryValueERK7TString,TFiles::getRegistryValue(TString const&),TFiles_getRegistryValue_TString_const,.text,188,4,5120,False,False,False
 951504,TFiles_setRegistryValue_TString_const_TString_const,elf_symbol,function,_ZN6TFiles16setRegistryValueERK7TStringS2_,"TFiles::setRegistryValue(TString const&,TString const&)",TFiles_setRegistryValue_TString_const_TString_const,.text,172,4,5120,False,False,False
-951676,sub_E857C,ida_default_sub,,,,,.text,12,1,5120,False,False,True
-951688,sub_E8588,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-951704,sub_E8598,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+951676,ida_tstring_static_cleanup_e857c,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
+951688,ida_tstring_static_cleanup_e8588,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+951704,ida_tstring_static_cleanup_e8598,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 951720,TFileNameScan_readLevelPaths_TString_const,elf_symbol,function,_ZN13TFileNameScan14readLevelPathsERK7TString,TFileNameScan::readLevelPaths(TString const&),TFileNameScan_readLevelPaths_TString_const,.text,876,4,5120,False,False,False
 952596,TFileNameScan_clearResourceObjects_void,elf_symbol,function,_ZN13TFileNameScan20clearResourceObjectsEv,TFileNameScan::clearResourceObjects(void),TFileNameScan_clearResourceObjects_void,.text,108,4,5120,False,False,False
 952704,TFileNameScan_scanUserFolder_void,elf_symbol,function,_ZN13TFileNameScan14scanUserFolderEv,TFileNameScan::scanUserFolder(void),TFileNameScan_scanUserFolder_void,.text,556,4,5120,False,False,False
 953260,TFileNameScan_scanZipResource_TResourceObject,elf_symbol,function,_ZN13TFileNameScan15scanZipResourceEP15TResourceObject,TFileNameScan::scanZipResource(TResourceObject *),TFileNameScan_scanZipResource_TResourceObject,.text,1388,4,5120,False,False,False
 954648,TFileNameScan_setAllCheckUser_void,elf_symbol,function,_ZN13TFileNameScan15setAllCheckUserEv,TFileNameScan::setAllCheckUser(void),TFileNameScan_setAllCheckUser_void,.text,260,4,5120,False,False,False
 954908,TFileNameScan_initStaticVars_void,elf_symbol,function,_Z28TFileNameScan_initStaticVarsv,TFileNameScan_initStaticVars(void),TFileNameScan_initStaticVars_void,.text,4,4,5120,False,False,False
-954912,sub_E9220,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+954912,ida_tstringlist_static_cleanup_e9220,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 954928,TFileNameScan_loadCacheFile_TString_const_TString_const_bool,elf_symbol,function,_ZN13TFileNameScan13loadCacheFileERK7TStringS2_b,"TFileNameScan::loadCacheFile(TString const&,TString const&,bool)",TFileNameScan_loadCacheFile_TString_const_TString_const_bool,.text,1112,4,5120,False,False,False
 956040,TFileNameScan_loadCacheFile2_TStream_TString_const_bool,elf_symbol,function,_ZN13TFileNameScan14loadCacheFile2EP7TStreamRK7TStringb,"TFileNameScan::loadCacheFile2(TStream *,TString const&,bool)",TFileNameScan_loadCacheFile2_TStream_TString_const_bool,.text,1016,4,5120,False,False,False
 957056,TFileNameScan_scanDataFolder_void,elf_symbol,function,_ZN13TFileNameScan14scanDataFolderEv,TFileNameScan::scanDataFolder(void),TFileNameScan_scanDataFolder_void,.text,632,4,5120,False,False,False
@@ -3928,10 +3928,10 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 970212,TList_getU32_int,elf_symbol,function,_ZNK5TList6getU32Ei,TList::getU32(int),TList_getU32_int,.text,44,1,5120,False,False,False
 970256,TList_qsort_void_ulong_ulong_int_void_const_void_const,elf_symbol,function,_ZN5TList5qsortEPvmmPFiPKvS2_E,"TList::qsort(void *,ulong,ulong,int (*)(void const*,void const*))",TList_qsort_void_ulong_ulong_int_void_const_void_const,.text,4,4,5120,False,False,False
 970260,TList_Sort_int_void_const_void_const,elf_symbol,function,_ZN5TList4SortEPFiPKvS1_E,"TList::Sort(int (*)(void const*,void const*))",TList_Sort_int_void_const_void_const,.text,40,4,5120,False,False,False
-970300,sub_ECE3C,ida_default_sub,,,,,.text,12,1,5120,False,False,True
-970312,sub_ECE48,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-970328,sub_ECE58,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-970344,sub_ECE68,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+970300,ida_tstring_static_cleanup_ece3c,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
+970312,ida_tstring_static_cleanup_ece48,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+970328,ida_tstring_static_cleanup_ece58,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+970344,ida_tstring_static_cleanup_ece68,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 970360,TResourceFunctions_encryptTStream_TString_const_TStream,elf_symbol,function,_ZN18TResourceFunctions14encryptTStreamERK7TStringP7TStream,"TResourceFunctions::encryptTStream(TString const&,TStream *)",TResourceFunctions_encryptTStream_TString_const_TStream,.text,296,4,5120,False,False,False
 970656,TResourceFunctions_decryptTStream_TString_const_TStream,elf_symbol,function,_ZN18TResourceFunctions14decryptTStreamERK7TStringP7TStream,"TResourceFunctions::decryptTStream(TString const&,TStream *)",TResourceFunctions_decryptTStream_TString_const_TStream,.text,296,4,5120,False,False,False
 970952,TResourceFunctions_setEncodedFileKey_TString_const_int_TString_const,elf_symbol,function,_ZN18TResourceFunctions17setEncodedFileKeyERK7TStringiS2_,"TResourceFunctions::setEncodedFileKey(TString const&,int,TString const&)",TResourceFunctions_setEncodedFileKey_TString_const_int_TString_const,.text,164,4,5120,False,False,False
@@ -4007,16 +4007,16 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 986680,TStream_write_char_const,elf_symbol,function,_ZN7TStream5writeEPKc,TStream::write(char const*),TStream_write_char_const,.text,96,4,5120,False,False,False
 986776,TStream_fillZipFunctions_zlib_filefunc_def_s,elf_symbol,function,_ZN7TStream16fillZipFunctionsEP19zlib_filefunc_def_s,TStream::fillZipFunctions(zlib_filefunc_def_s *),TStream_fillZipFunctions_zlib_filefunc_def_s,.text,92,4,5120,False,False,False
 986872,TString_clear_void,elf_symbol,function,_ZN7TString5clearEv,TString::clear(void),TString_clear_void,.text,68,4,5120,False,False,False
-986940,sub_F0F3C,ida_default_sub,,,,,.text,12,1,5120,False,False,True
-986952,sub_F0F48,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-986968,sub_F0F58,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-986984,sub_F0F68,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-987000,sub_F0F78,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-987016,sub_F0F88,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-987032,sub_F0F98,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-987048,sub_F0FA8,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-987064,sub_F0FB8,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-987080,sub_F0FC8,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+986940,ida_tstring_static_cleanup_f0f3c,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
+986952,ida_tstring_static_cleanup_f0f48,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+986968,ida_tstring_static_cleanup_f0f58,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+986984,ida_tstring_static_cleanup_f0f68,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+987000,ida_tstring_static_cleanup_f0f78,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+987016,ida_tstring_static_cleanup_f0f88,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+987032,ida_tstring_static_cleanup_f0f98,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+987048,ida_tstring_static_cleanup_f0fa8,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+987064,ida_tstring_static_cleanup_f0fb8,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+987080,ida_tstring_static_cleanup_f0fc8,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 987096,TString_makeUnique_void,elf_symbol,function,_ZN7TString10makeUniqueEv,TString::makeUnique(void),TString_makeUnique_void,.text,116,4,5120,False,False,False
 987212,TString_getPointerAndClear_void,elf_symbol,function,_ZN7TString18getPointerAndClearEv,TString::getPointerAndClear(void),TString_getPointerAndClear_void,.text,108,1,5120,False,False,False
 987320,TString_setSize_int_bool,elf_symbol,function,_ZN7TString7setSizeEib,"TString::setSize(int,bool)",TString_setSize_int_bool,.text,260,4,5120,False,False,False
@@ -4111,9 +4111,9 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1003844,TVAArgs_FormatParameters_TVAArgs_FormatParameters,elf_symbol,function,_ZN24TVAArgs_FormatParametersD2Ev,TVAArgs_FormatParameters::~TVAArgs_FormatParameters(),TVAArgs_FormatParameters_TVAArgs_FormatParameters,.text,4,3,5120,False,False,False
 1003848,TVAArgs_FormatParameters_TVAArgs_FormatParameters__2,elf_symbol,function,_ZN24TVAArgs_FormatParametersD0Ev,TVAArgs_FormatParameters::~TVAArgs_FormatParameters(),TVAArgs_FormatParameters_TVAArgs_FormatParameters__2,.text,4,2,5120,False,False,False
 1003852,TStringFormatParameters_TStringFormatParameters__2,elf_symbol,function,_ZN23TStringFormatParametersD0Ev,TStringFormatParameters::~TStringFormatParameters(),TStringFormatParameters_TStringFormatParameters__2,.text,4,2,5120,False,False,False
-1003856,sub_F5150,ida_default_sub,,,,,.text,12,1,5120,False,False,True
-1003868,sub_F515C,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1003884,sub_F516C,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+1003856,ida_tstring_static_cleanup_f5150,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
+1003868,ida_tstring_static_cleanup_f515c,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1003884,ida_tstring_static_cleanup_f516c,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 1003900,TStringList_TStringList_void,elf_symbol,function,_ZN11TStringListC2Ev,TStringList::TStringList(void),TStringList_TStringList_void,.text,52,5,5120,False,False,False
 1003952,TStringList_setCapacity_int,elf_symbol,function,_ZN11TStringList11setCapacityEi,TStringList::setCapacity(int),TStringList_setCapacity_int,.text,92,4,5120,False,False,False
 1004044,TStringList_Add_TString_const,elf_symbol,function,_ZN11TStringList3AddERK7TString,TStringList::Add(TString const&),TStringList_Add_TString_const,.text,120,4,5120,False,False,False
@@ -4350,7 +4350,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1058656,TPanelInterface_captureScreen_int_int_int_int_uchar_int_int,elf_symbol,function,_ZN15TPanelInterface13captureScreenEiiiiPhii,"TPanelInterface::captureScreen(int,int,int,int,uchar *,int,int)",TPanelInterface_captureScreen_int_int_int_int_uchar_int_int,.text,8,5,5120,False,False,False
 1058664,TDrawingPanelPort_setPixels_uchar_int_int,elf_symbol,function,_ZN17TDrawingPanelPort9setPixelsEPhii,"TDrawingPanelPort::setPixels(uchar *,int,int)",TDrawingPanelPort_setPixels_uchar_int_int,.text,4,2,5120,False,False,False
 1058668,TDrawingPanelPort_getPixels_void,elf_symbol,function,_ZN17TDrawingPanelPort9getPixelsEv,TDrawingPanelPort::getPixels(void),TDrawingPanelPort_getPixels_void,.text,8,2,5120,False,False,False
-1058680,sub_102778,ida_default_sub,,,,,.text,12,1,5120,False,False,True
+1058680,ida_tstring_static_cleanup_102778,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 1058692,TGraphicOperation_allocArrays_float_float_float_void_int,elf_symbol,function,_ZN17TGraphicOperation11allocArraysEPPfS1_S1_PPvi,"TGraphicOperation::allocArrays(float **,float **,float **,void **,int)",TGraphicOperation_allocArrays_float_float_float_void_int,.text,488,4,5120,False,False,False
 1059180,TGraphicOperation_freeArrays_void,elf_symbol,function,_ZN17TGraphicOperation10freeArraysEv,TGraphicOperation::freeArrays(void),TGraphicOperation_freeArrays_void,.text,128,1,5120,False,False,False
 1059308,TGraphicOperation_drawPolygonEx_int_float_int_TString_const_float_bool,elf_symbol,function,_ZN17TGraphicOperation13drawPolygonExEiPfiRK7TStringS0_b,"TGraphicOperation::drawPolygonEx(int,float *,int,TString const&,float *,bool)",TGraphicOperation_drawPolygonEx_int_float_int_TString_const_float_bool,.text,900,4,5120,False,False,False
@@ -4377,7 +4377,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1063792,TDummyPanel_getTransformedClippingRectangle_void,elf_symbol,function,_ZN11TDummyPanel31getTransformedClippingRectangleEv,TDummyPanel::getTransformedClippingRectangle(void),TDummyPanel_getTransformedClippingRectangle_void,.text,28,2,5120,False,False,False
 1063820,TDummyPanel_TDummyPanel,elf_symbol,function,_ZN11TDummyPanelD2Ev,TDummyPanel::~TDummyPanel(),TDummyPanel_TDummyPanel,.text,20,3,5120,False,False,False
 1063840,TDummyPanel_TDummyPanel__2,elf_symbol,function,_ZN11TDummyPanelD0Ev,TDummyPanel::~TDummyPanel(),TDummyPanel_TDummyPanel__2,.text,48,2,5120,False,False,False
-1063888,sub_103BD0,ida_default_sub,,,,,.text,12,1,5120,False,False,True
+1063888,ida_tstring_static_cleanup_103bd0,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 1063900,TPanelInterface_drawPolygonEx_int_float_int_TString_const_float_bool,elf_symbol,function,_ZN15TPanelInterface13drawPolygonExEiPfiRK7TStringS0_b,"TPanelInterface::drawPolygonEx(int,float *,int,TString const&,float *,bool)",TPanelInterface_drawPolygonEx_int_float_int_TString_const_float_bool,.text,172,4,5120,False,False,False
 1064072,TPanelInterface_drawImageTiled_TString_const_float_float_float_float_int_int_int_int_int_int,elf_symbol,function,_ZN15TPanelInterface14drawImageTiledERK7TStringffffiiiiii,"TPanelInterface::drawImageTiled(TString const&,float,float,float,float,int,int,int,int,int,int)",TPanelInterface_drawImageTiled_TString_const_float_float_float_float_int_int_int_int_int_int,.text,456,3,5120,False,False,False
 1064528,TPanelInterface_drawImage_TString_const_float_float_float_float_int_int_int_int,elf_symbol,function,_ZN15TPanelInterface9drawImageERK7TStringffffiiii,"TPanelInterface::drawImage(TString const&,float,float,float,float,int,int,int,int)",TPanelInterface_drawImage_TString_const_float_float_float_float_int_int_int_int,.text,380,3,5120,False,False,False
@@ -4413,7 +4413,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1069268,TPixelBuffer_bindTexture_int,elf_symbol,function,_ZN12TPixelBuffer11bindTextureEi,TPixelBuffer::bindTexture(int),TPixelBuffer_bindTexture_int,.text,4,2,5120,False,False,False
 1069272,TTexture_deleteBitmap_void,elf_symbol,function,_ZN8TTexture12deleteBitmapEv,TTexture::deleteBitmap(void),TTexture_deleteBitmap_void,.text,56,5,5120,False,False,False
 1069328,TTexture_getBitmap_void,elf_symbol,function,_ZN8TTexture9getBitmapEv,TTexture::getBitmap(void),TTexture_getBitmap_void,.text,28,2,5120,False,False,False
-1069356,sub_10512C,ida_default_sub,,,,,.text,12,1,5120,False,False,True
+1069356,ida_tstring_static_cleanup_10512c,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 1069368,TTexture_setBitmap_TBitmap,elf_symbol,function,_ZN8TTexture9setBitmapEP7TBitmap,TTexture::setBitmap(TBitmap *),TTexture_setBitmap_TBitmap,.text,500,2,5120,False,False,False
 1069868,TTexture_get_allowedimageanimations,ida_named_non_elf,,,,,.text,96,1,5120,False,False,False
 1069964,TTexture_loadBitmap_void,elf_symbol,function,_ZN8TTexture10loadBitmapEv,TTexture::loadBitmap(void),TTexture_loadBitmap_void,.text,128,2,5120,False,False,False
@@ -4602,7 +4602,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1101020,TWindowGLES_init_void,elf_symbol,function,_ZN11TWindowGLES4initEv,TWindowGLES::init(void),TWindowGLES_init_void,.text,148,2,5120,False,False,False
 1101168,TWindowGLES_isNative_void,elf_symbol,function,_ZN11TWindowGLES8isNativeEv,TWindowGLES::isNative(void),TWindowGLES_isNative_void,.text,8,2,5120,False,False,False
 1101176,TFont_TFont,elf_symbol,function,_ZN5TFontD2Ev,TFont::~TFont(),TFont_TFont,.text,184,6,5120,False,False,False
-1101360,sub_10CE30,ida_default_sub,,,,,.text,12,1,5120,False,False,True
+1101360,ida_tstring_static_cleanup_10ce30,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 1101372,TFont_TFont__2,elf_symbol,function,_ZN5TFontD0Ev,TFont::~TFont(),TFont_TFont__2,.text,32,2,5120,False,False,False
 1101404,TFontCharInfo_initObject_void,elf_symbol,function,_ZN13TFontCharInfo10initObjectEv,TFontCharInfo::initObject(void),TFontCharInfo_initObject_void,.text,44,4,5120,False,False,False
 1101448,TFontCharInfo_TFontCharInfo_void,elf_symbol,function,_ZN13TFontCharInfoC1Ev,TFontCharInfo::TFontCharInfo(void),TFontCharInfo_TFontCharInfo_void,.text,132,5,5120,False,False,False
@@ -4841,11 +4841,11 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1133896,TBitmap_saveBitmapToStream_TStream_TString_const,elf_symbol,function,_ZN7TBitmap18saveBitmapToStreamEP7TStreamRK7TString,"TBitmap::saveBitmapToStream(TStream *,TString const&)",TBitmap_saveBitmapToStream_TStream_TString_const,.text,184,4,5120,False,False,False
 1134080,TBitmap_saveBitmap_TString_const,elf_symbol,function,_ZN7TBitmap10saveBitmapERK7TString,TBitmap::saveBitmap(TString const&),TBitmap_saveBitmap_TString_const,.text,188,4,5120,False,False,False
 1134268,TBitmap_saveBitmapToString_TString_const,elf_symbol,function,_ZN7TBitmap18saveBitmapToStringERK7TString,TBitmap::saveBitmapToString(TString const&),TBitmap_saveBitmapToString_TString_const,.text,120,4,5120,False,False,False
-1134388,sub_114F34,ida_default_sub,,,,,.text,12,1,5120,False,False,True
-1134400,sub_114F40,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1134416,sub_114F50,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1134432,sub_114F60,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1134448,sub_114F70,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+1134388,ida_tstring_static_cleanup_114f34,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
+1134400,ida_tstring_static_cleanup_114f40,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1134416,ida_tstring_static_cleanup_114f50,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1134432,ida_tstring_static_cleanup_114f60,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1134448,ida_tstring_static_cleanup_114f70,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 1134464,TBitmapLoader_forceRedownload_TResourceObject,elf_symbol,function,_ZN13TBitmapLoader15forceRedownloadEP15TResourceObject,TBitmapLoader::forceRedownload(TResourceObject *),TBitmapLoader_forceRedownload_TResourceObject,.text,60,4,5120,False,False,False
 1134524,TBitmapLoader_findImageFile_TString_const,elf_symbol,function,_ZN13TBitmapLoader13findImageFileERK7TString,TBitmapLoader::findImageFile(TString const&),TBitmapLoader_findImageFile_TString_const,.text,364,4,5120,False,False,False
 1134888,TBitmapLoader_guessFileType_TStream,elf_symbol,function,_ZN13TBitmapLoader13guessFileTypeEP7TStream,TBitmapLoader::guessFileType(TStream *),TBitmapLoader_guessFileType_TStream,.text,828,4,5120,False,False,False
@@ -5243,10 +5243,10 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1420584,GSFunctionsClient_script_keydown2,ida_named_non_elf,,,,,.text,228,1,5120,False,False,False
 1420812,gsfunctions_client_initStaticVars_void,elf_symbol,function,_Z33gsfunctions_client_initStaticVarsv,gsfunctions_client_initStaticVars(void),gsfunctions_client_initStaticVars_void,.text,44,4,5120,False,False,False
 1420856,gsfunctions_client_initStaticScriptVars_void,elf_symbol,function,_Z39gsfunctions_client_initStaticScriptVarsv,gsfunctions_client_initStaticScriptVars(void),gsfunctions_client_initStaticScriptVars_void,.text,56,4,5120,False,False,False
-1420912,sub_15AE70,ida_default_sub,,,,,.text,12,1,5120,False,False,True
-1420924,sub_15AE7C,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1420940,sub_15AE8C,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1420956,sub_15AE9C,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+1420912,ida_tstring_static_cleanup_15ae70,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
+1420924,ida_tstring_static_cleanup_15ae7c,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1420940,ida_tstring_static_cleanup_15ae8c,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1420956,ida_tstring_static_cleanup_15ae9c,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 1420972,TAdventure_checkOpenSecureURL_void,elf_symbol,function,_ZN10TAdventure18checkOpenSecureURLEv,TAdventure::checkOpenSecureURL(void),TAdventure_checkOpenSecureURL_void,.text,520,4,5120,False,False,False
 1421492,TAdventure_timer_void,elf_symbol,function,_ZN10TAdventure5timerEv,TAdventure::timer(void),TAdventure_timer_void,.text,792,4,5120,False,False,False
 1422296,TAdventure_initResources_void,elf_symbol,function,_ZN10TAdventure13initResourcesEv,TAdventure::initResources(void),TAdventure_initResources_void,.text,248,4,5120,False,False,False
@@ -5438,8 +5438,8 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1464556,TGraalAni_set_movie,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
 1464564,TGraalAni_get_singledirection,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
 1464572,TGraalAni_get_ganitype,ida_named_non_elf,,,,,.text,60,1,5120,False,False,False
-1464632,sub_165938,ida_default_sub,,,,,.text,12,1,5120,False,False,True
-1464644,sub_165944,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+1464632,ida_tstring_static_cleanup_165938,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
+1464644,ida_tstring_static_cleanup_165944,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 1464660,TGraalAni_set_setbackto,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
 1464668,TGraalAni_get_setbackto,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
 1464716,TGraalAni_getLogName_void,elf_symbol,function,_ZN9TGraalAni10getLogNameEv,TGraalAni::getLogName(void),TGraalAni_getLogName_void,.text,100,2,5120,False,False,False
@@ -5673,8 +5673,8 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1493012,TPlayer_get_horseimg,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
 1493060,TPlayer_get_chat,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
 1493108,TPlayer_get_nick,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
-1493156,sub_16C8A4,ida_default_sub,,,,,.text,12,1,5120,False,False,True
-1493168,sub_16C8B0,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+1493156,ida_tstring_static_cleanup_16c8a4,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
+1493168,ida_tstring_static_cleanup_16c8b0,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 1493184,TPlayer_get_weapon,ida_named_non_elf,,,,,.text,72,1,5120,False,False,False
 1493256,jump_TPlayer_setSword_TString_const,elf_symbol,jump_thunk,j_._ZN7TPlayer8setSwordERK7TString,TPlayer::setSword(TString const&),jump_TPlayer_setSword_TString_const,.text,4,2,5312,True,False,False
 1493260,jump_TGaniObject_setGaniOldSprite_int__2,elf_symbol,jump_thunk,j_._ZN11TGaniObject16setGaniOldSpriteEi_0,TGaniObject::setGaniOldSprite(int),jump_TGaniObject_setGaniOldSprite_int__2,.text,4,1,5312,True,False,False
@@ -5860,9 +5860,9 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1554592,TPlayer_setEnabledFeatures_int,elf_symbol,function,_ZN7TPlayer18setEnabledFeaturesEi,TPlayer::setEnabledFeatures(int),TPlayer_setEnabledFeatures_int,.text,168,2,5120,False,False,False
 1554760,ObjectsYCompare_void_const_void_const,elf_symbol,function,_Z15ObjectsYComparePKvS0_,"ObjectsYCompare(void const*,void const*)",ObjectsYCompare_void_const_void_const,.text,116,4,5120,False,False,False
 1554876,TPlayer_getDrawObjectListPredicate,ida_named_non_elf,,,,,.text,72,2,5120,False,False,False
-1554948,sub_17BA04,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1554964,sub_17BA14,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1554980,sub_17BA24,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+1554948,ida_tstring_static_cleanup_17ba04,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1554964,ida_tstring_static_cleanup_17ba14,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1554980,ida_tstring_static_cleanup_17ba24,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 1554996,TPlayer_drawSpriteAbsoluteOffset_int_int_int_int_int,elf_symbol,function,_ZN7TPlayer24drawSpriteAbsoluteOffsetEiiiii,"TPlayer::drawSpriteAbsoluteOffset(int,int,int,int,int)",TPlayer_drawSpriteAbsoluteOffset_int_int_int_int_int,.text,644,4,5120,False,False,False
 1555640,TPlayer_drawSpriteAbsolute_int_int_int,elf_symbol,function,_ZN7TPlayer18drawSpriteAbsoluteEiii,"TPlayer::drawSpriteAbsolute(int,int,int)",TPlayer_drawSpriteAbsolute_int_int_int,.text,20,4,5120,False,False,False
 1555660,TPlayer_drawSpriteOffset_int_int_int_float_float,elf_symbol,function,_ZN7TPlayer16drawSpriteOffsetEiiiff,"TPlayer::drawSpriteOffset(int,int,int,float,float)",TPlayer_drawSpriteOffset_int_int_int_float_float,.text,176,4,5120,False,False,False
@@ -5948,12 +5948,12 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1575672,TServerNPC_getHorseImg,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
 1575720,TServerNPC_getImage,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
 1575768,TServerNPC_getCodedID_void,elf_symbol,function,_ZN10TServerNPC10getCodedIDEv,TServerNPC::getCodedID(void),TServerNPC_getCodedID_void,.text,104,3,5120,False,False,False
-1575872,sub_180BC0,ida_default_sub,,,,,.text,12,1,5120,False,False,True
-1575884,sub_180BCC,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1575900,sub_180BDC,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1575916,sub_180BEC,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1575932,sub_180BFC,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1575948,sub_180C0C,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+1575872,ida_tstring_static_cleanup_180bc0,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
+1575884,ida_tstring_static_cleanup_180bcc,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1575900,ida_tstring_static_cleanup_180bdc,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1575916,ida_tstring_static_cleanup_180bec,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1575932,ida_tstring_static_cleanup_180bfc,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1575948,ida_tstring_static_cleanup_180c0c,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 1575964,TServerNPC_getPeltWithBlackStone,ida_named_non_elf,,,,,.text,20,1,5120,False,False,False
 1575984,TServerNPC_getPeltWithStone,ida_named_non_elf,,,,,.text,20,1,5120,False,False,False
 1576004,TServerNPC_getPeltWithVase,ida_named_non_elf,,,,,.text,20,1,5120,False,False,False
@@ -6175,10 +6175,10 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1617036,TServerPlayer_getAccount,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
 1617084,TServerPlayer_getChat,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
 1617132,TServerPlayer_getNick,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
-1617180,sub_18AD1C,ida_default_sub,,,,,.text,12,1,5120,False,False,True
-1617192,sub_18AD28,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1617208,sub_18AD38,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1617224,sub_18AD48,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+1617180,ida_tstring_static_cleanup_18ad1c,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
+1617192,ida_tstring_static_cleanup_18ad28,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1617208,ida_tstring_static_cleanup_18ad38,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1617224,ida_tstring_static_cleanup_18ad48,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 1617240,TServerPlayer_getPlayersIndex,ida_named_non_elf,,,,,.text,36,1,5120,False,False,False
 1617276,TServerPlayer_script_isMassPM,ida_named_non_elf,,,,,.text,84,1,5120,False,False,False
 1617360,TServerPlayer_script_isGuildPM,ida_named_non_elf,,,,,.text,84,1,5120,False,False,False
@@ -6419,20 +6419,20 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1702280,TServerLevel_getSparringZone,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
 1702288,TServerLevel_getTileLayerCount,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 1702300,TServerLevel_getWidth,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
-1702348,sub_19F9CC,ida_default_sub,,,,,.text,12,1,5120,False,False,True
-1702360,sub_19F9D8,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1702376,sub_19F9E8,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1702392,sub_19F9F8,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1702408,sub_19FA08,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1702424,sub_19FA18,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1702440,sub_19FA28,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1702456,sub_19FA38,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1702472,sub_19FA48,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1702488,sub_19FA58,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1702504,sub_19FA68,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1702520,sub_19FA78,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1702536,sub_19FA88,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-1702552,sub_19FA98,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+1702348,ida_tstring_static_cleanup_19f9cc,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
+1702360,ida_tstring_static_cleanup_19f9d8,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1702376,ida_tstring_static_cleanup_19f9e8,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1702392,ida_tstring_static_cleanup_19f9f8,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1702408,ida_tstring_static_cleanup_19fa08,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1702424,ida_tstring_static_cleanup_19fa18,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1702440,ida_tstring_static_cleanup_19fa28,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1702456,ida_tstring_static_cleanup_19fa38,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1702472,ida_tstring_static_cleanup_19fa48,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1702488,ida_tstring_static_cleanup_19fa58,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1702504,ida_tstring_static_cleanup_19fa68,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1702520,ida_tstring_static_cleanup_19fa78,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1702536,ida_tstring_static_cleanup_19fa88,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+1702552,ida_tstring_static_cleanup_19fa98,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 1702568,TServerLevelLink_getDestLevel,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
 1702616,TServerLevel_script_getMapPartFile,ida_named_non_elf,,,,,.text,184,1,5120,False,False,False
 1702808,TTilesLayer_setOffset,ida_named_non_elf,,,,,.text,52,1,5120,False,False,False
@@ -6605,7 +6605,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1752412,TNumberArrayVar_short_writeString_TString_const,elf_symbol,function,_ZN15TNumberArrayVarIsE11writeStringERK7TString,TNumberArrayVar<short>::writeString(TString const&),TNumberArrayVar_short_writeString_TString_const,.text,164,2,5120,False,False,False
 1752576,TNumberArrayVar_short_readString_void,elf_symbol,function,_ZN15TNumberArrayVarIsE10readStringEv,TNumberArrayVar<short>::readString(void),TNumberArrayVar_short_readString_void,.text,132,2,5120,False,False,False
 1752708,TNumberArrayVar_short_getArrayCellFloat_int,elf_symbol,function,_ZN15TNumberArrayVarIsE17getArrayCellFloatEi,TNumberArrayVar<short>::getArrayCellFloat(int),TNumberArrayVar_short_getArrayCellFloat_int,.text,44,2,5120,False,False,False
-1752752,sub_1ABEB0,ida_default_sub,,,,,.text,12,1,5120,False,False,True
+1752752,ida_tstring_static_cleanup_1abeb0,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 1752764,GuiBitmapButtonCtrl_get_pressedbitmap,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
 1752812,GuiBitmapButtonCtrl_get_normalbitmap,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
 1752860,GuiBitmapButtonCtrl_get_mouseoverbitmap,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
@@ -6644,7 +6644,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1755544,GuiBitmapCtrl_get_fullbitmap,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
 1755552,GuiBitmapCtrl_set_fullbitmap,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
 1755560,GuiBitmapCtrl_get_tile,ida_named_non_elf,,,,,.text,8,2,5120,False,False,False
-1755568,sub_1AC9B0,ida_default_sub,,,,,.text,12,1,5120,False,False,True
+1755568,ida_tstring_static_cleanup_1ac9b0,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 1755580,GuiBitmapCtrl_set_bitmaprectangle,ida_named_non_elf,,,,,.text,52,1,5120,False,False,False
 1755632,GuiBitmapCtrl_get_bitmaprectangle,ida_named_non_elf,,,,,.text,36,1,5120,False,False,False
 1755668,GuiBitmapCtrl_get_bitmap,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
@@ -6704,8 +6704,8 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1761100,non_virtual_thunk_to_GuiButtonBaseCtrlProperties_GuiButtonBaseCtrlProperties__2,elf_symbol,function,_ZThn16_N27GuiButtonBaseCtrlPropertiesD0Ev,`non-virtual thunk to'GuiButtonBaseCtrlProperties::~GuiButtonBaseCtrlProperties(),non_virtual_thunk_to_GuiButtonBaseCtrlProperties_GuiButtonBaseCtrlProperties__2,.text,8,2,5120,False,False,False
 1761108,GuiButtonBaseCtrl_GuiButtonBaseCtrl,elf_symbol,function,_ZN17GuiButtonBaseCtrlD1Ev,GuiButtonBaseCtrl::~GuiButtonBaseCtrl(),GuiButtonBaseCtrl_GuiButtonBaseCtrl,.text,52,3,5120,False,False,False
 1761160,GuiButtonBaseCtrl_GuiButtonBaseCtrl__2,elf_symbol,function,_ZN17GuiButtonBaseCtrlD0Ev,GuiButtonBaseCtrl::~GuiButtonBaseCtrl(),GuiButtonBaseCtrl_GuiButtonBaseCtrl__2,.text,60,2,5120,False,False,False
-1761220,sub_1ADFC4,ida_default_sub,,,,,.text,12,1,5120,False,False,True
-1761232,sub_1ADFD0,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+1761220,ida_tstring_static_cleanup_1adfc4,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
+1761232,ida_tstring_static_cleanup_1adfd0,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 1761248,GuiButtonCtrl_set_stylesection,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
 1761256,GuiButtonCtrl_get_stylesection,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
 1761304,GuiButtonCtrl_onResourceObjectUpdated_void_TString_const,elf_symbol,function,_ZN13GuiButtonCtrl23onResourceObjectUpdatedEPvRK7TString,"GuiButtonCtrl::onResourceObjectUpdated(void *,TString const&)",GuiButtonCtrl_onResourceObjectUpdated_void_TString_const,.text,96,2,5120,False,False,False
@@ -6878,7 +6878,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1781576,GuiControl_getScrollLineSizes_uint_uint,elf_symbol,function,_ZN10GuiControl18getScrollLineSizesEPjS0_,"GuiControl::getScrollLineSizes(uint *,uint *)",GuiControl_getScrollLineSizes_uint_uint,.text,20,27,5120,False,False,False
 1781596,GuiControl_getVertSizing,ida_named_non_elf,,,,,.text,64,1,5120,False,False,False
 1781660,GuiControl_getHorizSizing,ida_named_non_elf,,,,,.text,64,1,5120,False,False,False
-1781724,sub_1B2FDC,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+1781724,ida_tstring_static_cleanup_1b2fdc,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 1781740,GuiControl_setVertSizing,ida_named_non_elf,,,,,.text,128,1,5120,False,False,False
 1781868,GuiControl_setHorizSizing,ida_named_non_elf,,,,,.text,140,1,5120,False,False,False
 1782008,GuiControl_setHint,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
@@ -7104,7 +7104,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1820564,GuiMLTextCtrl_get_parsetags,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
 1820572,GuiMLTextCtrl_script_reflow,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
 1820604,GuiMLTextCtrl_setCursorPosition_int,elf_symbol,function,_ZN13GuiMLTextCtrl17setCursorPositionEi,GuiMLTextCtrl::setCursorPosition(int),GuiMLTextCtrl_setCursorPosition_int,.text,80,2,5120,False,False,False
-1820684,sub_1BC80C,ida_default_sub,,,,,.text,12,1,5120,False,False,True
+1820684,ida_tstring_static_cleanup_1bc80c,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 1820696,GuiMLTextCtrl_set_wordwrap,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
 1820704,GuiMLTextCtrl_set_urlbase,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
 1820712,GuiMLTextCtrl_get_urlbase,ida_named_non_elf,,,,,.text,36,1,5120,False,False,False
@@ -7231,7 +7231,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1835012,GuiScrollCtrl_set_willfirstrespond,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
 1835020,GuiScrollCtrl_get_vscrollbar,ida_named_non_elf,,,,,.text,64,1,5120,False,False,False
 1835084,GuiScrollCtrl_get_hscrollbar,ida_named_non_elf,,,,,.text,64,1,5120,False,False,False
-1835148,sub_1C008C,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+1835148,ida_tstring_static_cleanup_1c008c,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 1835164,GuiScrollCtrl_get_childmargin,ida_named_non_elf,,,,,.text,36,1,5120,False,False,False
 1835200,GuiScrollCtrl_get_scrollpos,ida_named_non_elf,,,,,.text,56,1,5120,False,False,False
 1835256,GuiScrollCtrl_calcChildExtents_void,elf_symbol,function,_ZN13GuiScrollCtrl16calcChildExtentsEv,GuiScrollCtrl::calcChildExtents(void),GuiScrollCtrl_calcChildExtents_void,.text,160,2,5120,False,False,False
@@ -7327,7 +7327,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1858564,GuiTextCtrl_set_maxchars,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
 1858572,GuiTextCtrl_get_text,ida_named_non_elf,,,,,.text,40,2,5120,False,False,False
 1858612,GuiTextCtrl_set_text,ida_named_non_elf,,,,,.text,32,2,5120,False,False,False
-1858644,sub_1C5C54,ida_default_sub,,,,,.text,12,1,5120,False,False,True
+1858644,ida_tstring_static_cleanup_1c5c54,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 1858656,GuiTextCtrlProperties_GuiTextCtrlProperties_void,elf_symbol,function,_ZN21GuiTextCtrlPropertiesC2Ev,GuiTextCtrlProperties::GuiTextCtrlProperties(void),GuiTextCtrlProperties_GuiTextCtrlProperties_void,.text,176,5,5120,False,False,False
 1858832,GuiTextCtrl_initObject_void,elf_symbol,function,_ZN11GuiTextCtrl10initObjectEv,GuiTextCtrl::initObject(void),GuiTextCtrl_initObject_void,.text,44,4,5120,False,False,False
 1858876,GuiTextCtrl_GuiTextCtrl_void,elf_symbol,function,_ZN11GuiTextCtrlC1Ev,GuiTextCtrl::GuiTextCtrl(void),GuiTextCtrl_GuiTextCtrl_void,.text,104,2,5120,False,False,False
@@ -7485,7 +7485,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1893040,TGUIStyle_initStaticVars_void,elf_symbol,function,_Z24TGUIStyle_initStaticVarsv,TGUIStyle_initStaticVars(void),TGUIStyle_initStaticVars_void,.text,48,4,5120,False,False,False
 1893088,TGUIStyle_TGUIStyle,elf_symbol,function,_ZN9TGUIStyleD2Ev,TGUIStyle::~TGUIStyle(),TGUIStyle_TGUIStyle,.text,132,6,5120,False,False,False
 1893220,TGUIStyle_TGUIStyle__2,elf_symbol,function,_ZN9TGUIStyleD0Ev,TGUIStyle::~TGUIStyle(),TGUIStyle_TGUIStyle__2,.text,32,2,5120,False,False,False
-1893252,sub_1CE384,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+1893252,ida_tstringlist_static_cleanup_1ce384,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 1893268,TGUIStyleInfo_Button_Button,elf_symbol,function,_ZN13TGUIStyleInfo6ButtonD2Ev,TGUIStyleInfo::Button::~Button(),TGUIStyleInfo_Button_Button,.text,112,3,5120,False,False,False
 1893380,TGUIStyleInfo_Button_Button__2,elf_symbol,function,_ZN13TGUIStyleInfo6ButtonD0Ev,TGUIStyleInfo::Button::~Button(),TGUIStyleInfo_Button_Button__2,.text,120,2,5120,False,False,False
 1893500,html_tag_html_tag_void,elf_symbol,function,_ZN8html_tagC1Ev,html_tag::html_tag(void),html_tag_html_tag_void,.text,16,5,5120,False,False,False
@@ -7503,7 +7503,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1896784,THTMLTagName_THTMLTagName,elf_symbol,function,_ZN12THTMLTagNameD1Ev,THTMLTagName::~THTMLTagName(),THTMLTagName_THTMLTagName,.text,20,3,5120,False,False,False
 1896804,THTMLAmpersand_THTMLAmpersand__2,elf_symbol,function,_ZN14THTMLAmpersandD0Ev,THTMLAmpersand::~THTMLAmpersand(),THTMLAmpersand_THTMLAmpersand__2,.text,72,2,5120,False,False,False
 1896876,THTMLTagName_THTMLTagName__2,elf_symbol,function,_ZN12THTMLTagNameD0Ev,THTMLTagName::~THTMLTagName(),THTMLTagName_THTMLTagName__2,.text,48,2,5120,False,False,False
-1896924,sub_1CF1DC,ida_default_sub,,,,,.text,12,1,5120,False,False,True
+1896924,ida_tstring_static_cleanup_1cf1dc,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 1896936,THTMLAtom_clear_void,elf_symbol,function,_ZN9THTMLAtom5clearEv,THTMLAtom::clear(void),THTMLAtom_clear_void,.text,88,4,5120,False,False,False
 1897024,THTMLAtom_THTMLAtom_THTMLPage,elf_symbol,function,_ZN9THTMLAtomC2EP9THTMLPage,THTMLAtom::THTMLAtom(THTMLPage *),THTMLAtom_THTMLAtom_THTMLPage,.text,12,5,5120,False,False,False
 1897036,THTMLAtom_setText_TString_const,elf_symbol,function,_ZN9THTMLAtom7setTextERK7TString,THTMLAtom::setText(TString const&),THTMLAtom_setText_TString_const,.text,40,4,5120,False,False,False
@@ -7702,7 +7702,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1937700,GuiPopUpMenuCtrl_script_forceclose,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
 1937732,GuiPopUpMenuCtrl_setProtectedObject_int,elf_symbol,function,_ZN16GuiPopUpMenuCtrl18setProtectedObjectEi,GuiPopUpMenuCtrl::setProtectedObject(int),GuiPopUpMenuCtrl_setProtectedObject_int,.text,44,2,5120,False,False,False
 1937776,GuiPopUpMenuCtrl_closePopUp_void,elf_symbol,function,_ZN16GuiPopUpMenuCtrl10closePopUpEv,GuiPopUpMenuCtrl::closePopUp(void),GuiPopUpMenuCtrl_closePopUp_void,.text,40,2,5120,False,False,False
-1937816,sub_1D9198,ida_default_sub,,,,,.text,12,1,5120,False,False,True
+1937816,ida_tstring_static_cleanup_1d9198,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 1937828,GuiPopUpContextMenuCtrl_GuiPopUpContextMenuCtrl,elf_symbol,function,_ZN23GuiPopUpContextMenuCtrlD1Ev,GuiPopUpContextMenuCtrl::~GuiPopUpContextMenuCtrl(),GuiPopUpContextMenuCtrl_GuiPopUpContextMenuCtrl,.text,32,6,5120,False,False,False
 1937860,GuiPopUpContextMenuCtrl_GuiPopUpContextMenuCtrl__2,elf_symbol,function,_ZN23GuiPopUpContextMenuCtrlD0Ev,GuiPopUpContextMenuCtrl::~GuiPopUpContextMenuCtrl(),GuiPopUpContextMenuCtrl_GuiPopUpContextMenuCtrl__2,.text,32,2,5120,False,False,False
 1937892,GuiPopUpMenuCtrl_script_rowcount,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
@@ -7807,7 +7807,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1952328,GuiTextListCtrl_get_sortorder,ida_named_non_elf,,,,,.text,60,1,5120,False,False,False
 1952388,GuiTextListCtrl_get_sortmode,ida_named_non_elf,,,,,.text,60,1,5120,False,False,False
 1952448,GuiTextListCtrl_get_groupsortorder,ida_named_non_elf,,,,,.text,60,1,5120,False,False,False
-1952508,sub_1DCAFC,ida_default_sub,,,,,.text,12,1,5120,False,False,True
+1952508,ida_tstring_static_cleanup_1dcafc,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 1952520,GuiTextListEntry_set_hint,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
 1952528,GuiTextListEntry_get_text,ida_named_non_elf,,,,,.text,76,2,5120,False,False,False
 1952604,GuiTextListEntry_get_hint,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
@@ -7914,7 +7914,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1966152,GuiDrawingPanel_get_partw,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 1966164,GuiDrawingPanel_get_parth,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 1966176,GuiDrawingPanel_get_enablecache,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
-1966188,sub_1E006C,ida_default_sub,,,,,.text,12,1,5120,False,False,True
+1966188,ida_tstring_static_cleanup_1e006c,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 1966200,GuiDrawingPanel_set_enablecache,ida_named_non_elf,,,,,.text,24,1,5120,False,False,False
 1966224,GuiDrawingPanel_get_availablefilters,ida_named_non_elf,,,,,.text,84,1,5120,False,False,False
 1966308,GuiDrawingPanel_script_setdrawpalette,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
@@ -7949,7 +7949,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 1969644,GuiDrawingPanel_GuiDrawingPanel__2,elf_symbol,function,_ZN15GuiDrawingPanelD0Ev,GuiDrawingPanel::~GuiDrawingPanel(),GuiDrawingPanel_GuiDrawingPanel__2,.text,92,2,5120,False,False,False
 1969736,GuiShowImgCtrl_get_offsetx,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
 1969744,GuiShowImgCtrl_get_offsety,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
-1969752,sub_1E0E58,ida_default_sub,,,,,.text,12,1,5120,False,False,True
+1969752,ida_tstring_static_cleanup_1e0e58,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 1969764,GuiShowImgCtrl_set_layer,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
 1969772,GuiShowImgCtrl_get_layer,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
 1969780,GuiShowImgCtrl_get_dir,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
@@ -8736,7 +8736,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2141168,GSFunctionsInitstaticscriptvars_script_radtodeg,ida_named_non_elf,,,,,.text,24,1,5120,False,False,False
 2141208,GSFunctionsInitstaticscriptvars_compareNearestPlayers,ida_named_non_elf,,,,,.text,320,4,5120,False,False,False
 2141528,GSFunctionsInitstaticscriptvars_script_strequals,ida_named_non_elf,,,,,.text,100,1,5120,False,False,False
-2141628,sub_20ADBC,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+2141628,ida_tstring_static_cleanup_20adbc,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 2141644,jump_TString_compareIgnoreCase_TString_const,elf_symbol,jump_thunk,j_._ZNK7TString17compareIgnoreCaseERKS_,TString::compareIgnoreCase(TString const&),jump_TString_compareIgnoreCase_TString_const,.text,4,1,5312,True,False,False
 2141648,GSFunctionsInitstaticscriptvars_script_uppercase,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
 2141680,GSFunctionsInitstaticscriptvars_script_lowercase,ida_named_non_elf,,,,,.text,32,1,5120,False,False,False
@@ -8884,7 +8884,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2160972,TGraalVar_clearValues_void,elf_symbol,function,_ZN9TGraalVar11clearValuesEv,TGraalVar::clearValues(void),TGraalVar_clearValues_void,.text,76,4,5120,False,False,False
 2161048,TGraalVar_TGraalVar,elf_symbol,function,_ZN9TGraalVarD1Ev,TGraalVar::~TGraalVar(),TGraalVar_TGraalVar,.text,216,9,5120,False,False,False
 2161264,TGraalVar_TGraalVar__2,elf_symbol,function,_ZN9TGraalVarD0Ev,TGraalVar::~TGraalVar(),TGraalVar_TGraalVar__2,.text,32,2,5120,False,False,False
-2161296,sub_20FA90,ida_default_sub,,,,,.text,12,1,5120,False,False,True
+2161296,ida_tgraalvar_static_cleanup_20fa90,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 2161308,TGraalVar_writeFloat_double,elf_symbol,function,_ZN9TGraalVar10writeFloatEd,TGraalVar::writeFloat(double),TGraalVar_writeFloat_double,.text,168,80,5120,False,False,False
 2161476,TGraalVar_setArrayCellFloat_int_double,elf_symbol,function,_ZN9TGraalVar17setArrayCellFloatEid,"TGraalVar::setArrayCellFloat(int,double)",TGraalVar_setArrayCellFloat_int_double,.text,100,81,5120,False,False,False
 2161576,TGraalVar_setArrayCellString_int_TString_const,elf_symbol,function,_ZN9TGraalVar18setArrayCellStringEiRK7TString,"TGraalVar::setArrayCellString(int,TString const&)",TGraalVar_setArrayCellString_int_TString_const,.text,112,81,5120,False,False,False
@@ -8965,10 +8965,10 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2179856,TGraalVarLink_TGraalVarLink,elf_symbol,function,_ZN13TGraalVarLinkD1Ev,TGraalVarLink::~TGraalVarLink(),TGraalVarLink_TGraalVarLink,.text,20,3,5120,False,False,False
 2179876,TGraalVarLink_TGraalVarLink__2,elf_symbol,function,_ZN13TGraalVarLinkD0Ev,TGraalVarLink::~TGraalVarLink(),TGraalVarLink_TGraalVarLink__2,.text,48,2,5120,False,False,False
 2179924,TGraalVar_readIniFromFile_TString_const_bool,elf_symbol,function,_ZN9TGraalVar15readIniFromFileERK7TStringb,"TGraalVar::readIniFromFile(TString const&,bool)",TGraalVar_readIniFromFile_TString_const_bool,.text,1024,4,5120,False,False,False
-2180952,sub_214758,ida_default_sub,,,,,.text,12,1,5120,False,False,True
-2180964,sub_214764,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-2180980,sub_214774,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-2180996,sub_214784,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+2180952,ida_tstring_static_cleanup_214758,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
+2180964,ida_tstring_static_cleanup_214764,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+2180980,ida_tstring_static_cleanup_214774,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+2180996,ida_tstring_static_cleanup_214784,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 2181012,TScript_getLogName_void,elf_symbol,function,_ZN7TScript10getLogNameEv,TScript::getLogName(void),TScript_getLogName_void,.text,100,2,5120,False,False,False
 2181112,TScriptCom_TScriptCom_uchar,elf_symbol,function,_ZN10TScriptComC2Eh,TScriptCom::TScriptCom(uchar),TScriptCom_TScriptCom_uchar,.text,20,5,5120,False,False,False
 2181132,TScriptCom_TScriptCom_uchar_double,elf_symbol,function,_ZN10TScriptComC2Ehd,"TScriptCom::TScriptCom(uchar,double)",TScriptCom_TScriptCom_uchar_double,.text,16,2,5120,False,False,False
@@ -9161,8 +9161,8 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2246240,non_virtual_thunk_to_TProperties_TProperties__2,elf_symbol,function,_ZThn16_N11TPropertiesD0Ev,`non-virtual thunk to'TProperties::~TProperties(),non_virtual_thunk_to_TProperties_TProperties__2,.text,8,2,5120,False,False,False
 2246248,TJoinedClassesProperty_writeObject_TGraalVar_TGraalVar,elf_symbol,function,_ZN22TJoinedClassesProperty11writeObjectEP9TGraalVarS1_,"TJoinedClassesProperty::writeObject(TGraalVar *,TGraalVar *)",TJoinedClassesProperty_writeObject_TGraalVar_TGraalVar,.text,96,2,5120,False,False,False
 2246344,TAniProperty_writeObject_TGraalVar_TGraalVar,elf_symbol,function,_ZN12TAniProperty11writeObjectEP9TGraalVarS1_,"TAniProperty::writeObject(TGraalVar *,TGraalVar *)",TAniProperty_writeObject_TGraalVar_TGraalVar,.text,96,2,5120,False,False,False
-2246440,sub_224728,ida_default_sub,,,,,.text,12,1,5120,False,False,True
-2246452,sub_224734,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+2246440,ida_tstring_static_cleanup_224728,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
+2246452,ida_tstring_static_cleanup_224734,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 2246468,TProperties_listPropertiesForDocumentation_void,elf_symbol,function,_ZN11TProperties30listPropertiesForDocumentationEv,TProperties::listPropertiesForDocumentation(void),TProperties_listPropertiesForDocumentation_void,.text,152,67,5120,False,False,False
 2246620,TAcceptStringProperty_writeString_TGraalVar_TString_const,elf_symbol,function,_ZN21TAcceptStringProperty11writeStringEP9TGraalVarRK7TString,"TAcceptStringProperty::writeString(TGraalVar *,TString const&)",TAcceptStringProperty_writeString_TGraalVar_TString_const,.text,60,2,5120,False,False,False
 2246680,TJoinedClassesProperty_writeString_TGraalVar_TString_const,elf_symbol,function,_ZN22TJoinedClassesProperty11writeStringEP9TGraalVarRK7TString,"TJoinedClassesProperty::writeString(TGraalVar *,TString const&)",TJoinedClassesProperty_writeString_TGraalVar_TString_const,.text,96,2,5120,False,False,False
@@ -9198,8 +9198,8 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2255796,TProperties_isOfType_TProperties,elf_symbol,function,_ZN11TProperties8isOfTypeEPS_,TProperties::isOfType(TProperties*),TProperties_isOfType_TProperties,.text,164,4,5120,False,False,False
 2255960,TEventObject_TEventObject,elf_symbol,function,_ZN12TEventObjectD1Ev,TEventObject::~TEventObject(),TEventObject_TEventObject,.text,84,6,5120,False,False,False
 2256044,TEventObject_TEventObject__2,elf_symbol,function,_ZN12TEventObjectD0Ev,TEventObject::~TEventObject(),TEventObject_TEventObject__2,.text,32,2,5120,False,False,False
-2256076,sub_226CCC,ida_default_sub,,,,,.text,12,1,5120,False,False,True
-2256088,sub_226CD8,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+2256076,ida_tstring_static_cleanup_226ccc,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
+2256088,ida_tstring_static_cleanup_226cd8,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 2256104,TEventObject_TEventObject_TString_const,elf_symbol,function,_ZN12TEventObjectC1ERK7TString,TEventObject::TEventObject(TString const&),TEventObject_TEventObject_TString_const,.text,72,5,5120,False,False,False
 2256176,TEventObject_unregisterEventCatchers_void,elf_symbol,function,_ZN12TEventObject23unregisterEventCatchersEv,TEventObject::unregisterEventCatchers(void),TEventObject_unregisterEventCatchers_void,.text,196,4,5120,False,False,False
 2256372,TEventCatcherList_TEventCatcherList_TString_const_TString_const,elf_symbol,function,_ZN17TEventCatcherListC2ERK7TStringS2_,"TEventCatcherList::TEventCatcherList(TString const&,TString const&)",TEventCatcherList_TEventCatcherList_TString_const_TString_const,.text,116,5,5120,False,False,False
@@ -9272,11 +9272,11 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2273100,TEventCatcherList_receiveEvent_TGraalVar,elf_symbol,function,_ZN17TEventCatcherList12receiveEventEP9TGraalVar,TEventCatcherList::receiveEvent(TGraalVar *),TEventCatcherList_receiveEvent_TGraalVar,.text,216,4,5120,False,False,False
 2273316,TEventObject_receiveEvent_TString_const_TGraalVar,elf_symbol,function,_ZN12TEventObject12receiveEventERK7TStringP9TGraalVar,"TEventObject::receiveEvent(TString const&,TGraalVar *)",TEventObject_receiveEvent_TString_const_TGraalVar,.text,88,4,5120,False,False,False
 2273404,TScriptSpace_setClasses_TString_const,elf_symbol,function,_ZN12TScriptSpace10setClassesERK7TString,TScriptSpace::setClasses(TString const&),TScriptSpace_setClasses_TString_const,.text,224,4,5120,False,False,False
-2273628,sub_22B15C,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-2273644,sub_22B16C,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+2273628,ida_tstringlist_static_cleanup_22b15c,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+2273644,ida_tstringlist_static_cleanup_22b16c,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 2273664,TScriptExecutionStats_TScriptExecutionStats,elf_symbol,function,_ZN21TScriptExecutionStatsD1Ev,TScriptExecutionStats::~TScriptExecutionStats(),TScriptExecutionStats_TScriptExecutionStats,.text,92,6,5120,False,False,False
-2273756,sub_22B1DC,ida_default_sub,,,,,.text,12,1,5120,False,False,True
-2273768,sub_22B1E8,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+2273756,ida_tstring_static_cleanup_22b1dc,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
+2273768,ida_tstring_static_cleanup_22b1e8,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 2273784,TScriptExecutionStats_TScriptExecutionStats__2,elf_symbol,function,_ZN21TScriptExecutionStatsD0Ev,TScriptExecutionStats::~TScriptExecutionStats(),TScriptExecutionStats_TScriptExecutionStats__2,.text,32,2,5120,False,False,False
 2273816,TScriptUniverse_writeFloat_double,elf_symbol,function,_ZN15TScriptUniverse10writeFloatEd,TScriptUniverse::writeFloat(double),TScriptUniverse_writeFloat_double,.text,60,2,5120,False,False,False
 2273876,TScriptUniverse_writeString_TString_const,elf_symbol,function,_ZN15TScriptUniverse11writeStringERK7TString,TScriptUniverse::writeString(TString const&),TScriptUniverse_writeString_TString_const,.text,68,2,5120,False,False,False
@@ -9341,7 +9341,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2283940,non_virtual_thunk_to_TActionScriptVarProperties_TActionScriptVarProperties__2,elf_symbol,function,_ZThn16_N26TActionScriptVarPropertiesD0Ev,`non-virtual thunk to'TActionScriptVarProperties::~TActionScriptVarProperties(),non_virtual_thunk_to_TActionScriptVarProperties_TActionScriptVarProperties__2,.text,8,2,5120,False,False,False
 2283948,TActionScriptVar_TActionScriptVar,elf_symbol,function,_ZN16TActionScriptVarD1Ev,TActionScriptVar::~TActionScriptVar(),TActionScriptVar_TActionScriptVar,.text,20,3,5120,False,False,False
 2283968,TActionScriptVar_TActionScriptVar__2,elf_symbol,function,_ZN16TActionScriptVarD0Ev,TActionScriptVar::~TActionScriptVar(),TActionScriptVar_TActionScriptVar__2,.text,48,2,5120,False,False,False
-2284016,sub_22D9F0,ida_default_sub,,,,,.text,12,1,5120,False,False,True
+2284016,ida_tstring_static_cleanup_22d9f0,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 2284028,TGraalVar_jsonMapKeyCallback,ida_named_non_elf,,,,,.text,184,1,5120,False,False,False
 2284212,TGraalVar_jsonStringCallback,ida_named_non_elf,,,,,.text,264,1,5120,False,False,False
 2284476,TGraalVar_jsonNumberCallback,ida_named_non_elf,,,,,.text,472,1,5120,False,False,False
@@ -9354,7 +9354,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2286192,TGraalVar_readJSON_TString_const,elf_symbol,function,_ZN9TGraalVar8readJSONERK7TString,TGraalVar::readJSON(TString const&),TGraalVar_readJSON_TString_const,.text,264,4,5120,False,False,False
 2286456,TGraalVar_writeJSONObject_yajl_gen_t_bool,elf_symbol,function,_ZN9TGraalVar15writeJSONObjectEP10yajl_gen_tb,"TGraalVar::writeJSONObject(yajl_gen_t *,bool)",TGraalVar_writeJSONObject_yajl_gen_t_bool,.text,1692,4,5120,False,False,False
 2288148,TGraalVar_writeJSON_int,elf_symbol,function,_ZN9TGraalVar9writeJSONEi,TGraalVar::writeJSON(int),TGraalVar_writeJSON_int,.text,516,4,5120,False,False,False
-2288664,sub_22EC18,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+2288664,ida_tgraalvar_static_cleanup_22ec18,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 2288680,TDoubleArrayVarProperties_TDoubleArrayVarProperties_void,elf_symbol,function,_ZN25TDoubleArrayVarPropertiesC1Ev,TDoubleArrayVarProperties::TDoubleArrayVarProperties(void),TDoubleArrayVarProperties_TDoubleArrayVarProperties_void,.text,136,5,5120,False,False,False
 2288816,TDoubleArrayVar_TDoubleArrayVar_TString_const,elf_symbol,function,_ZN15TDoubleArrayVarC1ERK7TString,TDoubleArrayVar::TDoubleArrayVar(TString const&),TDoubleArrayVar_TDoubleArrayVar_TString_const,.text,76,5,5120,False,False,False
 2288892,TDoubleArrayVar_initStaticScriptVars_void,elf_symbol,function,_Z36TDoubleArrayVar_initStaticScriptVarsv,TDoubleArrayVar_initStaticScriptVars(void),TDoubleArrayVar_initStaticScriptVars_void,.text,48,4,5120,False,False,False
@@ -9386,7 +9386,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2295548,TTiles_updateAnimatedTiles_TPlayer_TString_const,elf_symbol,function,_ZN6TTiles19updateAnimatedTilesEP7TPlayerRK7TString,"TTiles::updateAnimatedTiles(TPlayer *,TString const&)",TTiles_updateAnimatedTiles_TPlayer_TString_const,.text,504,4,5120,False,False,False
 2296052,TTiles_initStaticVars_void,elf_symbol,function,_Z21TTiles_initStaticVarsv,TTiles_initStaticVars(void),TTiles_initStaticVars_void,.text,164,4,5120,False,False,False
 2296216,TTiles_initStaticScriptVars_void,elf_symbol,function,_Z27TTiles_initStaticScriptVarsv,TTiles_initStaticScriptVars(void),TTiles_initStaticScriptVars_void,.text,56,4,5120,False,False,False
-2296272,sub_2309D0,ida_default_sub,,,,,.text,12,1,5120,False,False,True
+2296272,ida_tstring_static_cleanup_2309d0,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 2296284,TTilesBlock_TTilesBlock_bool,elf_symbol,function,_ZN11TTilesBlockC1Eb,TTilesBlock::TTilesBlock(bool),TTilesBlock_TTilesBlock_bool,.text,80,5,5120,False,False,False
 2296364,TTilesBlock_destroyImage_void,elf_symbol,function,_ZN11TTilesBlock12destroyImageEv,TTilesBlock::destroyImage(void),TTilesBlock_destroyImage_void,.text,52,4,5120,False,False,False
 2296416,TTilesBlock_TTilesBlock,elf_symbol,function,_ZN11TTilesBlockD2Ev,TTilesBlock::~TTilesBlock(),TTilesBlock_TTilesBlock,.text,4,5,5120,False,False,False
@@ -9500,7 +9500,7 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2311100,TShowImg_get_zoom,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
 2311108,TShowImg_set_zoom,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
 2311116,TShowImg_getz_void,elf_symbol,function,_ZN8TShowImg4getzEv,TShowImg::getz(void),TShowImg_getz_void,.text,8,2,5120,False,False,False
-2311124,sub_2343D4,ida_default_sub,,,,,.text,12,1,5120,False,False,True
+2311124,ida_tstring_static_cleanup_2343d4,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
 2311136,TShowImg_get_sound,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
 2311184,TShowImg_set_sound,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
 2311192,TShowImg_get_font,ida_named_non_elf,,,,,.text,48,1,5120,False,False,False
@@ -9660,9 +9660,9 @@ ea,name,name_origin,source_kind,original_symbol,demangled_symbol,translated_alia
 2327300,TParticleEmitter_set_wraptoclippingbox,ida_named_non_elf,,,,,.text,8,1,5120,False,False,False
 2327308,TParticleEmitter_script_advancetime,ida_named_non_elf,,,,,.text,112,1,5120,False,False,False
 2327432,TParticleEmitter_receiveEvent_TString_const_script_event_TGraalVar,elf_symbol,function,_ZN16TParticleEmitter12receiveEventERK7TString12script_eventP9TGraalVar,"TParticleEmitter::receiveEvent(TString const&,script_event,TGraalVar *)",TParticleEmitter_receiveEvent_TString_const_script_event_TGraalVar,.text,104,2,5120,False,False,False
-2327536,sub_2383F0,ida_default_sub,,,,,.text,12,1,5120,False,False,True
-2327548,sub_2383FC,ida_default_sub,,,,,.text,16,1,5120,False,False,True
-2327564,sub_23840C,ida_default_sub,,,,,.text,16,1,5120,False,False,True
+2327536,ida_tstring_static_cleanup_2383f0,ida_named_non_elf,,,,,.text,12,1,5120,False,False,False
+2327548,ida_tstring_static_cleanup_2383fc,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
+2327564,ida_tstring_static_cleanup_23840c,ida_named_non_elf,,,,,.text,16,1,5120,False,False,False
 2327580,TParticleEmitter_get_particle,ida_named_non_elf,,,,,.text,56,1,5120,False,False,False
 2327636,TParticleModifier_TParticleModifier,elf_symbol,function,_ZN17TParticleModifierD2Ev,TParticleModifier::~TParticleModifier(),TParticleModifier_TParticleModifier,.text,160,6,5120,False,False,False
 2327796,TParticleModifier_TParticleModifier__2,elf_symbol,function,_ZN17TParticleModifierD0Ev,TParticleModifier::~TParticleModifier(),TParticleModifier_TParticleModifier__2,.text,32,2,5120,False,False,False

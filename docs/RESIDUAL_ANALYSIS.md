@@ -3,14 +3,15 @@
 The ELF symbol pass translated every name retained in the original ARM64
 library. The reviewed callback and role passes then added names only when the
 address, callers, and body supported the role. The current IDA inventory has
-124 residual functions. They are mostly compiler-generated cleanup and
-registration paths, not an unexamined application boundary. The current IDA
-copy gives each one a stable descriptive label while keeping the address and
-the absence of a recovered source name explicit.
+11,296 named functions, including 124 IDA-created functions with stable
+descriptive labels. Those functions are mostly compiler-generated cleanup and
+registration paths, not an unexamined application boundary. The labels keep
+the address and the absence of a recovered source name explicit.
 
-The current address list is in
-`artifacts/ida_final_residual_audit_20260902.json`. The report was generated
-from the 11,296-row inventory for the original library hash
+The current label list is in
+`artifacts/ida_descriptive_residual_labels_20260902.json`. The final inventory
+audit at `artifacts/ida_final_residual_audit_20260902.json` reports zero
+default `sub_` names for the original library hash
 `9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8`.
 
 ## How the count changed
@@ -138,8 +139,9 @@ The 124 real residual functions are accounted for by the persisted profile:
 
 These labels describe behavior and ownership. They do not claim that an
 original source symbol survived. The machine-readable classification is in
-`artifacts/ida_residual_profile.json`, and the compact inventory is in
-`artifacts/ida_final_residual_audit_20260902.json`.
+`artifacts/ida_residual_profile.json`. The final compact naming audit is in
+`artifacts/ida_final_residual_audit_20260902.json`; it reports zero default
+names because the labels have already been applied.
 
 ## Reviewed high-reference routines
 

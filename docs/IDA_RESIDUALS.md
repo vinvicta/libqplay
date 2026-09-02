@@ -83,17 +83,15 @@ debug symbols survived.
 
 ## Compact residual audit
 
-The current residual set is recorded in
-`artifacts/ida_final_residual_audit_20260902.json`. It contains one compact
-record per residual function, including its address, size,
-segment, and incoming xref count. It also records the 11,296-row inventory
-hash, the original ARM64 library hash, address buckets, and the most
-referenced residual entries. The report contains 124 residual functions and
-does not publish another full inventory. The current IDA labels for those
-functions are in `artifacts/ida_descriptive_residual_labels_20260902.json`.
-When the checked-in residual profile
-matches the input addresses, the report also embeds its category counts and
-profile hash.
+The final naming audit is recorded in
+`artifacts/ida_final_residual_audit_20260902.json`. It is generated from the
+11,296-row final inventory and reports zero default `sub_` functions. The 124
+IDA-created functions that had no preserved source name now have descriptive
+labels in the active database, recorded in
+`artifacts/ida_descriptive_residual_labels_20260902.json`. The pre-persistence
+addresses and category counts remain in `artifacts/ida_residual_profile.json`
+as a historical input to the label pass. The final audit records the inventory
+hash and original ARM64 library hash without duplicating the full inventory.
 
 The report was generated from the private translated IDA export with:
 
@@ -104,7 +102,8 @@ python3 tools/generate_final_residual_audit.py \
 
 The input path is local to the analysis workstation. The report's SHA-256
 fields make it possible to verify that a future export describes the same
-library and inventory.
+library and inventory. If a future pre-label inventory is being classified,
+pass it explicitly and keep that report separate from the final naming audit.
 
 The descriptive labels can be applied in IDA with
 `tools/ida_apply_descriptive_residual_labels.py`. The script checks the input

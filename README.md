@@ -340,6 +340,10 @@ The compact record is
 * `symbols/libqplay.symbols.csv` is the searchable symbol table.
 * `symbols/libqplay.symbols.json` is the machine-readable equivalent.
 * `symbols/libqplay.symbols.summary.json` records the translation counts.
+* `symbols/libqplay.function_inventory.json` is the current 11,296-row IDA
+  function inventory with descriptive residual labels applied.
+* `symbols/libqplay.function_inventory.csv` is the same inventory in a
+  searchable tabular form, and its summary records zero default `sub_` names.
 * `tools/` contains IDAPython, parsing, replay, and diagnostic patch helpers.
 * `artifacts/` contains small metadata exports. APKs, certificates, private
   keys, captured credentials, and game assets are intentionally not included.
