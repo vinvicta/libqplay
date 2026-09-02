@@ -1549,8 +1549,10 @@ the earlier TLS-only control. The existing local control therefore proves the
 pre-HTTP TLS failure but not the later mode-3 request. No live endpoint was
 contacted, and the current service's support for `conf.gs` remains unknown.
 
-The next runtime control should use separate listeners for the diagnostic TLS
-port and the mode-3 HTTP port. It should log the mode, attempt, endpoint,
+The diagnostic port patcher now supports separate ARM64 defaults for the
+diagnostic TLS port and the mode-3 HTTP port. On x86_64 the compiler folded the
+two defaults into one expression with a fixed 363-port difference. A runtime
+control should use separate listeners, log the mode, attempt, endpoint,
 transport, ClientHello or plain TCP arrival, HTTP request, and native error
 before drawing a conclusion about the generic failure screen. A compatible
 repair should use a current authorized chain, preserve peer and hostname

@@ -77,10 +77,10 @@ or title-case names, with either connection value, and without
 ## TLS error and mode-3 fallback control
 
 The static retry review shows that a CyaSSL error in connector mode 1 or 2 can
-skip the remaining HTTPS attempt and enter mode 3, which uses plain HTTP on
-port 80. The existing expiry control used only the TLS listener, so it did not
-capture this second leg. A bounded follow-up needs two local responders and
-two reverse mappings:
+skip the remaining HTTPS attempt and enter mode 3, which uses plain HTTP. The
+existing expiry control used only the TLS listener, so it did not capture this
+second leg. A bounded follow-up needs two local responders and two reverse
+mappings:
 
 ```bash
 python3 tools/tls_capture_server.py \
@@ -103,12 +103,25 @@ python3 tools/connector_capture_server.py \
   --accept-timeout 180
 ```
 
+For an ARM64 library, set both device-side defaults explicitly in a private
+copy. The x86_64 parser uses one folded arithmetic expression, so the same
+pair is valid there because `18443 - 363 = 18080`:
+
+```bash
+python3 tools/patch_connector_tls_port_test.py \
+  --arch arm64-v8a \
+  --port 18443 \
+  --fallback-port 18080 \
+  /path/to/libqplay.so \
+  /tmp/libqplay.two-port.so
+```
+
 On the private emulator, map the connector's HTTPS port and the device's
-plain HTTP port separately:
+plain HTTP fallback port separately:
 
 ```bash
 adb reverse tcp:18443 tcp:18443
-adb reverse tcp:80 tcp:18080
+adb reverse tcp:18080 tcp:18080
 ```
 
 Use the expired-trust diagnostic package, with the local resolver patch and

@@ -108,9 +108,14 @@ certificate can therefore be followed by a cleartext request, while an
 unavailable legacy fallback can hide the first TLS cause behind the generic
 failure screen. The current service's support for `conf.gs` is unverified.
 The existing expiry control did not observe it because its listener covered
-only the TLS diagnostic port. The next bounded runtime control should route
-the HTTPS and HTTP fallback ports separately and log the mode, attempt,
-transport, and native error for each connection.
+only the TLS diagnostic port. The diagnostic port patcher now supports this
+split explicitly. On ARM64, `--port 18443 --fallback-port 18080` changes the
+two HTTPS defaults and the two plain-HTTP defaults at the parser's separate
+instruction sites. On x86_64, the compiler folded those defaults into one
+expression, so the same pair is represented by a single immediate where
+`18080 = 18443 - 363`. The next bounded runtime control should use two
+responders and log the mode, attempt, transport, and native error for each
+connection.
 
 ## Repair boundary
 

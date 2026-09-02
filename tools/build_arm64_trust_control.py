@@ -62,6 +62,11 @@ def parse_args() -> argparse.Namespace:
         help="private connector port used by the local responder",
     )
     parser.add_argument(
+        "--fallback-port",
+        type=int,
+        help="optional private plain-HTTP connector fallback port",
+    )
+    parser.add_argument(
         "--zipalign",
         type=Path,
         required=True,
@@ -156,7 +161,19 @@ def main() -> None:
         port = work / "libqplay.port.so"
         run_patch(
             "patch_connector_tls_port_test.py",
-            ["--arch", "arm64-v8a", "--port", str(args.port), str(loopback), str(port)],
+            [
+                "--arch",
+                "arm64-v8a",
+                "--port",
+                str(args.port),
+                *(
+                    ["--fallback-port", str(args.fallback_port)]
+                    if args.fallback_port is not None
+                    else []
+                ),
+                str(loopback),
+                str(port),
+            ],
         )
         fixed_key = work / "libqplay.fixed-key.so"
         run_patch(
@@ -212,6 +229,9 @@ def main() -> None:
             "output_native_sha256": sha256(final_native),
             "abi": "arm64-v8a",
             "connector_port": args.port,
+            "connector_fallback_port": (
+                args.fallback_port if args.fallback_port is not None else 80
+            ),
             "deterministic_zip_timestamps": True,
             "connector_script_unchanged": True,
             "native_rsa_bypass_applied": False,
