@@ -99,6 +99,13 @@ and `TBitmap_readGIF_TStream` at `0x150a38` reaches the embedded giflib path.
 The image parser review documents their allocation and downloaded-resource
 boundaries.
 
+The focused PNG arithmetic report is
+`artifacts/png_decoder_security_review_20260902.json`. It records the bundled
+zlib-backed PNG/MNG path's separate raw-scanline and decoded-output allocation
+expressions, plus `PNG-001`, a conditional 32-bit dimension-wrap overflow
+candidate. The report keeps the result at static-analysis confidence because
+no malformed PNG harness or live service test has been run.
+
 ## Security interpretation
 
 Three conservative findings are recorded in the machine-readable export:
@@ -114,6 +121,8 @@ Three conservative findings are recorded in the machine-readable export:
   unbounded extension-accumulation concern in `DGifSlurp`, and `GIF-005`, an
   unbounded `SavedImages` frame-array concern. The focused review also records
   `GIF-006`, a conditional 32-bit bitmap-copy overflow candidate.
+  The PNG report records `PNG-001`, a conditional 32-bit dimension-wrap
+  overflow candidate in the raw scanline and decoded-output path.
 * `DEP-002` covers resource-backed font data reaching FreeType 2.3.6. Native
   font parsing deserves its own input and allocation budget, but arbitrary
   server control over the font option has not been established.

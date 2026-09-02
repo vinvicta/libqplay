@@ -1,0 +1,140 @@
+{
+  "analysis_date": "2026-09-02",
+  "analysis_scope": "static review of PNG/MNG dimension arithmetic, decoded-output allocation, and the row decode path in the original ARM64 library",
+  "artifact": "png_decoder_security_review_20260902",
+  "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+  "broader_budget_gap": {
+    "observations": [
+      "PNG IDAT chunks accumulate through realloc without a visible compressed-byte budget.",
+      "MNG and animation frames are retained through the shared list path without a visible application frame-count budget.",
+      "The image resource path is reachable from server-delivered packet-102 resources in the local trace, but the live service was not contacted."
+    ],
+    "severity": "availability and memory-pressure risk"
+  },
+  "functions": {
+    "bitmap_wrapper": {
+      "address": "0x116fa0",
+      "ida_name": "TBitmap_readPNG_TStream",
+      "size": 620
+    },
+    "png_decoder": {
+      "address": "0x11b7a0",
+      "ida_name": "TMNGAnimation_decode_TMNGAnimationStep",
+      "size": 16324
+    },
+    "png_parser": {
+      "address": "0x11f9d8",
+      "ida_name": "TMNGAnimation_parsePicture_void",
+      "size": 3128
+    },
+    "stream_entry": {
+      "address": "0x11b47c",
+      "ida_name": "TImageAnimation_createFromStream_TStream",
+      "size": 140
+    }
+  },
+  "fuzzing_performed": false,
+  "inventory": {
+    "path": "/home/v/Desktop/graal-decomp/analysis/libqplay.function_inventory.json",
+    "row_count": 11296,
+    "sha256": "c5e9c2e0b1c3e6cffa061ad7b2212815d54cc62e49ab0a3c6ba1cc9ea54b1844"
+  },
+  "network_contacted": false,
+  "not_claimed": [
+    "That PNG-001 reproduces without a bounded malformed-PNG harness.",
+    "That the allocator returns storage for the wrapped witness sizes on every Android libc configuration.",
+    "That a remote server will deliver a malicious PNG before authentication or cache policy gates.",
+    "That the finding is an exploitable code-execution primitive."
+  ],
+  "observed_allocation_chain": [
+    {
+      "addresses": [
+        "0x11b4a8",
+        "0x11b4b8",
+        "0x11b4bc",
+        "0x11b4cc",
+        "0x11b4d0",
+        "0x11b4d4"
+      ],
+      "id": "PNG-ALLOC-OUTPUT",
+      "instruction": "TImageAnimation_createFromStream multiplies width by height and then by pixel bits in W registers, shifts the 32-bit result by three, sign-extends it, and passes it to memalign for the decoded output buffer.",
+      "interpretation": "The output allocation is not calculated in a checked size_t expression and has no visible dimension or pixel budget."
+    },
+    {
+      "addresses": [
+        "0x1203a0",
+        "0x1203a8",
+        "0x1203b0",
+        "0x1203b4",
+        "0x1203b8",
+        "0x1203bc",
+        "0x1203d4"
+      ],
+      "id": "PNG-ALLOC-RAW",
+      "instruction": "TMNGAnimation_parsePicture computes the filtered row size and height product in W registers, sign-extends the wrapped result, and passes it to realloc for the raw inflated scanline buffer.",
+      "interpretation": "The parser's raw-buffer size can wrap independently of the mathematical PNG scanline requirement."
+    },
+    {
+      "addresses": [
+        "0x11b868",
+        "0x11b878",
+        "0x11b88c",
+        "0x11b890",
+        "0x11b894"
+      ],
+      "id": "PNG-CHECK-RAW",
+      "instruction": "TMNGAnimation_decode recomputes the expected filtered scanline size with W-register multiplication and rejects only when the stored 32-bit raw size is smaller than that wrapped result.",
+      "interpretation": "A compressed stream whose inflated length equals the wrapped value can satisfy the visible size check even when the mathematical dimensions describe a much larger image."
+    },
+    {
+      "addresses": [
+        "0x11c58c",
+        "0x11c598",
+        "0x11c59c",
+        "0x11d3d4",
+        "0x11d3e8",
+        "0x11d410"
+      ],
+      "id": "PNG-ROW-DECODE",
+      "instruction": "The decoder advances the source and destination row pointers using the parsed dimensions. The generic 8-bit RGBA path prepares X9 as the destination and calls memcpy for each row.",
+      "interpretation": "The row loop has no independent check that its cumulative writes remain within the output allocation calculated by TImageAnimation_createFromStream."
+    }
+  ],
+  "observed_dimension_arithmetic": {
+    "arithmetic_example": {
+      "output_allocation_bytes": 262144,
+      "output_product_u32_before_shift": 2097152,
+      "output_required_bytes_mathematical": 17180131328,
+      "output_shortfall_bytes": 17179869184,
+      "raw_allocation_bytes": 327681,
+      "raw_check_value_after_32bit_wrap": 327681,
+      "raw_required_bytes_mathematical": 17180196865,
+      "raw_shortfall_bytes": 17179869184,
+      "row_bytes_mathematical": 262144,
+      "width_times_height_u32": 65536
+    },
+    "assessment": "The allocation and row-decode arithmetic form a conditional static heap-overflow candidate. A small compressed PNG can carry dimensions whose 32-bit products wrap to small positive sizes, allowing the visible raw-size check to pass before the decoder processes the parsed row count. This conclusion is based on IDA disassembly and arithmetic only; it is not a fuzzing result or a runtime crash reproduction.",
+    "evidence_chain": [
+      "The PNG parser accepts the IHDR dimensions into the animation step without a visible application dimension cap.",
+      "The parser's non-interlaced raw size is (ceil(pixel_bits * width / 8) + 1) * height, evaluated in W registers before SXTW.",
+      "The stream entry allocates the decoded output as width * height * pixel_bits / 8, also evaluated in W registers before SXTW.",
+      "The decoder compares the stored raw size against the same wrapped W-register expression and then enters a dimension-driven row loop.",
+      "For this witness, a zlib stream that inflates to 327681 bytes would match the wrapped raw-size check while the output allocation is only 262144 bytes for a mathematical 17180131328-byte RGBA image."
+    ],
+    "format": {
+      "bit_depth": 8,
+      "color_type": 6,
+      "description": "legal PNG 8-bit RGBA IHDR values",
+      "height": 65537,
+      "pixel_bits": 32,
+      "width": 65536
+    },
+    "id": "PNG-001",
+    "severity": "potential heap-buffer-overflow, conditional"
+  },
+  "overall_assessment": "The original PNG/MNG implementation has a concrete checked-size gap at both the raw scanline and decoded-output allocations. PNG-001 should be validated in a disposable ARM64 harness with strict address sanitization and hard process limits. A repair should use checked size_t arithmetic and reject dimensions, compressed IDAT bytes, decoded bytes, frame count, and cumulative texture memory before any allocation or decode.",
+  "runtime_reproduction": false,
+  "schema": "libqplay.png-decoder-security-review.v1",
+  "tool": "tools/generate_png_decoder_security_review.py",
+  "tool_version": 1
+}
