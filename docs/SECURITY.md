@@ -1241,6 +1241,15 @@ address. A `probe.bin` filename produced the same trace, so this local result
 does not require a `.gupd` parser branch. It is not evidence that a production
 server can crash an unmodified client, and it has not been reproduced on ARM64.
 
+An isolated mismatch control kept `basepackage.gupd` as the active transfer
+name but sent `mismatch.bin` in packet 69. The private outgoing capture decodes
+to the expected 68, 84, 102, 69 sequence and the client again entered
+`TScriptSpace::receiveEvent`. This run differed in an important way: it faulted
+with `SEGV_ACCERR` at a nonzero address and instruction offset `+43`, not at
+the null address seen in the matching-name controls. That makes the mismatch
+branch a stronger state-instability lead, while leaving the cause of the
+invalid callback unresolved.
+
 The same handler review found two input-validation gaps that are independent
 of the reproduced null dereference. Packet 84 combines five input bytes into a
 32-bit `bigfilesize` value without a visible character-range or overflow
@@ -1248,7 +1257,9 @@ check. Packet 69 uses its filename equality test to clear the active large-file
 marker, but both match and mismatch paths converge on cached-file lookup before
 completion callbacks. These are static state and arithmetic leads. The review
 does not show a direct allocation overflow, arbitrary file path, or production
-reachability.
+reachability. The mismatch replay does not by itself establish memory
+corruption or exploitability because it was run only against the x86_64
+diagnostic build and the fault address may reflect its private test state.
 
 ### Executable replacement
 

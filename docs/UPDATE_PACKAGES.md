@@ -168,7 +168,7 @@ The ARM64 constructor at `0x229cf8` invokes the `created` event through
 of `TScriptSpace_receiveEvent` at `0x229898` dereference the owner
 `TGraalVar`, load its vtable, and call the virtual slot at offset `0x98` before
 the ordinary event queue work. The local x86_64 instruction offset was
-`0x242246`, with the instruction pointer reported as zero. That is consistent
+`0x242246`, with the fault address reported as zero. That is consistent
 with a null or invalid owner callback, although it does not by itself prove
 which object field was wrong in the diagnostic build.
 
@@ -179,8 +179,8 @@ unequal branches then converge on `TCachedStream_getCachedFile` with the
 supplied name. If a cached stream is found, the handler can emit
 `onFileDownloaded`, save it, and take the `.gupd` callback path. No early
 reject for a mismatch is visible in the ARM64 decompilation. This is a
-state-confusion lead that needs an isolated filename-mismatch replay; it is
-not evidence that an arbitrary filesystem path is accepted.
+state-confusion lead, not evidence that an arbitrary filesystem path is
+accepted.
 
 The important follow-up was to vary only the transfer state:
 
@@ -191,10 +191,20 @@ The important follow-up was to vary only the transfer state:
 | Same large-file sequence with `probe.bin` instead of a `.gupd` name | Same `TScriptSpace` crash. | The local failure does not require package-specific metadata completion. |
 | Same package in one ordinary packet 102 | Process stayed alive during the bounded replay. | Ordinary completion and large-file completion have different state. |
 | Metadata-only package, packets 68, 84, 102, 69 | Same crash family. | Missing startup records may expose the unguarded script setup path, but are not required by the filename control. |
+| Active name `basepackage.gupd`, packet-69 name `mismatch.bin` | `SIGSEGV` with `SEGV_ACCERR` at a nonzero address in `TScriptSpace::receiveEvent` (`+43`). | A mismatch reaches the same script-space path, but its fault shape differs from the earlier null-address controls. |
 
 The delayed-finish capture is identified by hashes in
 `artifacts/update_package_transfer_review_20260902.json`. No packet body,
 credential, APK, or native library is stored in the public repository.
+
+The filename-mismatch control was decoded offline from the private responder
+capture. Packets 68, 84, 102, and 69 were sent in order, and the packet-69
+body was `mismatch.bin` while the active transfer name was `basepackage.gupd`.
+The process faulted in the same script-space construction chain, but with
+`SEGV_ACCERR`, a nonzero fault address, and instruction offset `+43` rather
+than the earlier null-address `+38` result. This is evidence that completion
+state affects the diagnostic failure, not proof of a corruptible pointer or
+remote code execution.
 
 ## Security interpretation
 
@@ -221,7 +231,8 @@ Other update-path concerns remain independent of this crash:
   response-signature check;
 * the packet-84 declared-size decoder has no visible range or overflow check;
 * packet-69 does not visibly reject a completion filename mismatch before
-  cached-file lookup;
+  cached-file lookup, and the local mismatch control reaches the same unstable
+  script-space path;
 * manifest and nested-package expansion lack a single visible aggregate
   budget;
 * cache writes are non-atomic and the reviewed `fwrite` result is not checked;

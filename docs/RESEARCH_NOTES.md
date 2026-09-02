@@ -1427,6 +1427,17 @@ capture hashes, and static addresses are in
 `artifacts/update_package_transfer_review_20260902.json`; the narrative is in
 `docs/UPDATE_PACKAGES.md`.
 
+The filename check was then isolated. The responder used `basepackage.gupd`
+for packets 68, 84, and 102, but sent `mismatch.bin` in packet 69. Offline
+decoding of the private outgoing capture confirmed that packet-69 body. The
+x86_64 diagnostic process again entered `TScriptSpace::receiveEvent`, but the
+fault was `SIGSEGV` with `SEGV_ACCERR` at a nonzero address and instruction
+offset `+43`, rather than the null-address `+38` seen in the matching-name
+controls. This is a useful correction to the earlier shorthand: the common
+fact is the script-space call chain, not one fixed null dereference. The result
+supports a completion-state instability lead, but does not establish that the
+mismatch alone corrupted a pointer or that the path is remotely reachable.
+
 The same static pass tightened the security interpretation. Packet 84 at
 `0x1ef48c` accepts any five available bytes and combines them with 32-bit
 shifts into `bigfilesize`; no visible range or overflow check precedes the
@@ -1434,8 +1445,8 @@ store. Packet 69 at `0x1eb294` clears `bigfilename` only when the equality test
 matches, but its equal and unequal paths both continue into cached-file lookup.
 That is a state-confusion and arithmetic-validation lead, not a proven memory
 corruption or arbitrary file write. The declared-size field's direct impact
-was not established, and the filename-mismatch case still needs an isolated
-replay.
+was not established, and the mismatch replay does not prove a memory-safety
+impact beyond the observed diagnostic crash.
 
 The public game responder accepts `--frame-after-client` and
 `--frame-after-map`. The first is useful for event-driven packet experiments.

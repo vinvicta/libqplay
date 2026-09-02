@@ -191,6 +191,21 @@
       "interpretation": "The reproduced failure does not require a .gupd extension or package-specific completion callback."
     },
     {
+      "id": "completion_filename_mismatch",
+      "package": "real local 152-byte basepackage.gupd",
+      "sequence": [68, 84, 102, 69],
+      "control": "Transfer filename basepackage.gupd; packet-69 filename mismatch.bin",
+      "capture": {
+        "incoming_size": 525,
+        "incoming_sha256": "5fa0935ab7db9616b596306d9a59accf651f7e027a61e839e8c4c66d3af9d3fe",
+        "outgoing_size": 530,
+        "outgoing_sha256": "ff9456ffd2769085f8b711bae0dfd31739f5701a5c2ffa7d1d2558009938492b",
+        "decoded_packet_69_body": "mismatch.bin"
+      },
+      "observation": "The x86_64 diagnostic process faulted after the packet-69 response. The call chain again entered TScriptSpace::receiveEvent, but this run produced SIGSEGV code SEGV_ACCERR at nonzero fault address 0x000071c9a61765a0, with diagnostic native offset 0x24224b and function offset +43.",
+      "interpretation": "A wrong completion name reached the same script-space setup path but did not reproduce the earlier null-address fault shape. This strengthens the state-instability lead while showing that the local result is not one universal null dereference."
+    },
+    {
       "id": "valid_single_packet",
       "package": "real local 152-byte basepackage.gupd",
       "sequence": [102],
@@ -234,7 +249,8 @@
       "In the local x86_64 diagnostic replay, packet-69 completion is the smallest changed condition associated with the reproduced crash.",
       "A non-package filename still reaches the same failure, so package metadata parsing is not required for this local result.",
       "The packet-84 parser has no visible range or overflow validation for its 32-bit declared-size field.",
-      "The packet-69 handler does not visibly reject a filename mismatch before attempting cached-file lookup."
+      "The packet-69 handler does not visibly reject a filename mismatch before attempting cached-file lookup.",
+      "A loopback replay with basepackage.gupd as the active name and mismatch.bin in packet 69 reached the same script-space call chain but produced a different SEGV_ACCERR fault shape."
     ],
     "not_proven": [
       "The same failure occurs in the original ARM64 library.",
@@ -242,7 +258,8 @@
       "A live server can deliver the sequence to an unmodified client.",
       "The null dereference is exploitable beyond denial of service.",
       "The local diagnostic build has exactly the same object initialization state as the stock x86_64 APK.",
-      "The unchecked declared-size field directly causes an allocation overflow or memory corruption."
+      "The unchecked declared-size field directly causes an allocation overflow or memory corruption.",
+      "The filename mismatch caused the nonzero fault address or is independently exploitable; the local run only establishes a different failure shape in the same callback path."
     ],
     "severity_language": "Treat this as a local availability lead and an input-validation target, not as a confirmed remote vulnerability."
   },
