@@ -142,6 +142,16 @@ text hash, and the same five `DT_NEEDED` libraries, including
 `libstdc++.so`. The ARM64 build has `0x10000` `LOAD` alignment; the armeabi,
 x86, and x86_64 builds use `0x1000`.
 
+The 1.8 to 2.2 ARM64 pass was then widened from CyaSSL to all defined dynamic
+function names. The two files share 835 exact names, with 830 matching sizes
+and 279 byte-identical bodies. The common names form several address-delta
+clusters, led by `0xd470` for 447 names and `0xd590` for 262 names. The
+families and selected anchors are in
+`artifacts/cross_version_symbol_overlap_20260902.json`; its family labels are
+triage buckets, not independent source attribution. This gives us a practical
+starting point for translating the stripped 2.2 database while preserving a
+strict recheck of bytes, callers, and data references for every target.
+
 The defined dynamic symbol sets are similar but not identical. The x86_64
 variant shares 6,486 defined names with ARM64, while armeabi shares 6,349 and
 x86 shares 6,346. ABI-specific mangling, compiler output, and data layout make

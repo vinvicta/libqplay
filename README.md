@@ -93,6 +93,14 @@ deltas and 84 byte-identical function bodies. The application entrypoints do
 not share that guarantee, so the result is useful for TLS analysis rather than
 blind address translation.
 
+The full retained-function overlap is recorded in
+`artifacts/cross_version_symbol_overlap_20260902.json`. It finds 835 exact
+shared defined-function names, 830 matching sizes, and 279 byte-identical
+bodies across CyaSSL, bundled media and compression libraries, JSON parsing,
+JNI, and a small residual bucket. The measured address clusters are
+family-specific, so exact names and per-function validation remain the
+translation rule.
+
 The Android lifecycle review adds an important first diagnostic checkpoint.
 The connector is downstream of the GL surface, window focus, runtime
 permission completion, and the first render frame. A compatibility dialog or
@@ -247,6 +255,8 @@ The compact record is
   the unverified installed 2.2 package.
 * `artifacts/cross_version_cyassl_anchor_review_20260902.json` records the
   exact 1.8 to 2.2 CyaSSL name, size, address, and byte measurements.
+* `artifacts/cross_version_symbol_overlap_20260902.json` records the compact
+  all-family 1.8 to 2.2 retained-function overlap and anchor measurements.
 * `docs/DEPENDENCY_PROVENANCE.md` records the bundled compression, font, and
   image-library versions and their input paths.
 * `artifacts/original_dex_webview_review_20260830.json` records the local smali

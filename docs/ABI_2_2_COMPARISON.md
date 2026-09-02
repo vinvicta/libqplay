@@ -96,6 +96,44 @@ The complete measurement record is
 should only be transferred to 2.2 when its exact name, size, bytes, callers,
 and data references have been checked again.
 
+### Broader retained-symbol overlap
+
+The same method was applied to every defined dynamic `FUNC` name, not just
+the CyaSSL namespace. The 1.8 input has 5,709 such names and the 2.2 input
+has 5,782. They share 835 exact names after removing symbol-version suffixes;
+1.8 has 4,874 names not present in 2.2, while 2.2 has 4,947 names not present
+in 1.8.
+
+Of the 835 shared names, 830 retain the same exported size and 279 have equal
+raw bytes at the corresponding file locations. The largest address clusters
+are `0xd470` for 447 names, `0xd590` for 262, `0xd588` for 47, and `0xd584`
+for 27. The remaining 52 names are spread across JNI, GIF, and isolated
+layout changes. This is why a single address delta is not a safe translation
+rule.
+
+The family labels below are conservative name buckets. They help prioritize
+matching work but are not claims that every routine was independently
+verified against its original source library.
+
+| Name family | Shared | Same size | Raw bytes equal |
+| --- | ---: | ---: | ---: |
+| CyaSSL | 253 | 253 | 84 |
+| FreeType or TrueType | 252 | 252 | 97 |
+| JPEG-like exports | 92 | 92 | 36 |
+| YAJL | 47 | 47 | 10 |
+| Crypto-like helpers | 40 | 40 | 9 |
+| zlib | 33 | 33 | 16 |
+| JNI | 27 | 22 | 0 |
+| GIF | 26 | 26 | 3 |
+| bzip2 | 17 | 17 | 8 |
+| Other retained names | 48 | 48 | 16 |
+
+The complete compact record and its reproducible generator are
+`artifacts/cross_version_symbol_overlap_20260902.json` and
+`tools/generate_cross_version_symbol_overlap.py`. It includes selected
+FreeType, JPEG, GIF, YAJL, zlib, bzip2, and JNI anchors without copying either
+native file into the repository.
+
 The ELF metadata reports full RELRO, `BIND_NOW`, and a non-executable stack.
 Those baseline properties do not remove the risks of legacy transport policy
 or code that changes executable memory at runtime.

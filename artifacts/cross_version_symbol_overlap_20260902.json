@@ -1,0 +1,546 @@
+{
+  "analysis_date": "2026-09-02",
+  "artifact": "cross_version_symbol_overlap_20260902",
+  "assessment": {
+    "confirmed": [
+      "The two inputs share 835 exact defined dynamic function names after symbol-version suffix normalization.",
+      "The shared names fall into several address-delta clusters rather than one universal translation offset.",
+      "830 shared functions retain the same exported size, and 279 are byte-for-byte equal at their corresponding file locations.",
+      "The bundled dependency families provide useful static anchors, while JNI entrypoints show multiple independent layout changes."
+    ],
+    "not_proven": [
+      "The installed 2.2 package is official or unmodified.",
+      "A shared name has identical callers, data references, or runtime behavior.",
+      "An address translated by a family delta is safe to patch without rechecking its bytes and cross-references.",
+      "The two packages use the same connector, trust material, package policy, or server protocol behavior."
+    ],
+    "safe_use": "Use exact names as the first lookup key. For a candidate 2.2 translation, recheck the measured size, raw bytes, callers, and data references in the target IDA database before applying a label or patch."
+  },
+  "family_rules": {
+    "CyaSSL": "Exact name prefix _ZN6CyaInt",
+    "FreeType/TrueType": "Known FreeType and TrueType export prefixes such as FT_, FTC_, TT_, t1_, cff_, and sfnt_",
+    "GIF": "Names beginning DGif, EGif, or Gif",
+    "JNI": "Exact name prefix Java_",
+    "JPEG-like": "Known JPEG export tokens such as jpeg, jinit, jdiv, and jfdct",
+    "YAJL": "Names containing the yajl token",
+    "bzip2": "Names beginning BZ2_ or containing the BZ2_ token",
+    "crypto-like": "Common legacy helper tokens such as Arc4, AES, HMAC, SHA, MD5, RSA, DES, RNG, and Base64",
+    "other": "Names not matched by a prior rule",
+    "zlib": "Known zlib export prefixes such as deflate, inflate, crc32, adler32, and zlib"
+  },
+  "inputs": {
+    "1.8_arm64_libqplay": {
+      "defined_func_names": 5709,
+      "path": "GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so",
+      "sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+      "size": 3657208,
+      "text_address": "0xe0170",
+      "text_file_offset": "0xe0170",
+      "text_size": 2021744
+    },
+    "2.2_arm64_libqplay": {
+      "defined_func_names": 5782,
+      "path": "analysis/GraalOnline+Classic_2.2_installed/lib/arm64-v8a/libqplay.so",
+      "sha256": "45a7f97df9b40cdac6fbd42dc715bbabf3bbdb9b33876990e232133a8818941e",
+      "size": 3736872,
+      "text_address": "0xdf800",
+      "text_file_offset": "0xdf800",
+      "text_size": 2078832
+    },
+    "installed_2.2_apk_sha256": "45f469692cb6ee2e8d0f1529d8b0871dafdf718e2c8b6e345cb5082e40257751"
+  },
+  "method": {
+    "byte_comparison": "Raw bytes at the symbol value for equal-sized functions, mapped through each input's .text section",
+    "family_labels": "Conservative name-prefix or name-token buckets used only for aggregate counts; the other bucket is not a source identification",
+    "function_scope": "Defined FUNC entries, with symbol-version suffixes removed from names for exact-name matching",
+    "limitations": "Raw byte inequality can result from implementation changes, relocated PC-relative references, or surrounding layout. Equality is a useful static anchor but is not a complete behavioral proof.",
+    "symbol_source": "readelf --dyn-syms --wide"
+  },
+  "network_contacted": false,
+  "raw_data_policy": "APK and native files remain outside the repository; this artifact contains hashes, symbol metadata, aggregate measurements, and selected names only.",
+  "results": {
+    "1_8_only_names": 4874,
+    "1_8_only_sample": [
+      "_Z10aniget_outv",
+      "_Z10anireallocPvm",
+      "_Z10anirestartP7__sFILE",
+      "_Z10aniset_outP7__sFILE",
+      "_Z10debugBreakv",
+      "_Z10floattostrd",
+      "_Z10getLiftWavb",
+      "_Z10png_getintPh",
+      "_Z10png_setintiPh",
+      "_Z10setDefAnisv",
+      "_Z10strtofloatRK7TString",
+      "_Z11GetHostNamev"
+    ],
+    "2_2_only_names": 4947,
+    "2_2_only_sample": [
+      "GifErrorString",
+      "Java_com_quattroplay_GraalClassic_Natives_onAppResume",
+      "TjMq7avg8R",
+      "WXgq7a6SIR",
+      "_Z10A0fhkbd57Fv",
+      "_Z10A5RLgaq7SIPviiii",
+      "_Z10A73Vva64stv",
+      "_Z10A8ZxSaRTcvRK10C8THgaTQxF",
+      "_Z10AHcikboiWGhRK10C8THgaTQxF",
+      "_Z10AOQdJah2fFRK10C8THgaTQxF",
+      "_Z10AWPmLa0iPsv",
+      "_Z10AbDy2anAKLv"
+    ],
+    "address_delta_histogram": [
+      {
+        "count": 447,
+        "delta": "0xd470"
+      },
+      {
+        "count": 262,
+        "delta": "0xd590"
+      },
+      {
+        "count": 47,
+        "delta": "0xd588"
+      },
+      {
+        "count": 27,
+        "delta": "0xd584"
+      },
+      {
+        "count": 11,
+        "delta": "0xd224"
+      },
+      {
+        "count": 11,
+        "delta": "0xd420"
+      },
+      {
+        "count": 8,
+        "delta": "0xd14c"
+      },
+      {
+        "count": 6,
+        "delta": "0xd414"
+      },
+      {
+        "count": 4,
+        "delta": "0xcdec"
+      },
+      {
+        "count": 3,
+        "delta": "0xd474"
+      },
+      {
+        "count": 2,
+        "delta": "0xbc8"
+      },
+      {
+        "count": 2,
+        "delta": "0xd144"
+      },
+      {
+        "count": 1,
+        "delta": "0x287c"
+      },
+      {
+        "count": 1,
+        "delta": "0xc50c"
+      },
+      {
+        "count": 1,
+        "delta": "0xd148"
+      },
+      {
+        "count": 1,
+        "delta": "0xd42c"
+      },
+      {
+        "count": 1,
+        "delta": "0xed78"
+      }
+    ],
+    "defined_func_names_1_8": 5709,
+    "defined_func_names_2_2": 5782,
+    "exact_name_intersection": 835,
+    "families": {
+      "CyaSSL": {
+        "address_deltas": [
+          {
+            "count": 240,
+            "delta": "0xd590"
+          },
+          {
+            "count": 13,
+            "delta": "0xd588"
+          }
+        ],
+        "common_names": 253,
+        "raw_bytes_equal": 84,
+        "same_size": 253,
+        "sample_names": [
+          "_ZN6CyaInt10AddSessionEPNS_6CYASSLE",
+          "_ZN6CyaInt10CyaSSL_newEPNS_10CYASSL_CTXE",
+          "_ZN6CyaInt10DeriveKeysEPNS_6CYASSLE",
+          "_ZN6CyaInt10DoFinishedEPNS_6CYASSLEPKhPji",
+          "_ZN6CyaInt10FreeArraysEPNS_6CYASSLEi",
+          "_ZN6CyaInt10FreeRsaKeyEPNS_6RsaKeyE",
+          "_ZN6CyaInt10GetSessionEPNS_6CYASSLEPh",
+          "_ZN6CyaInt10InitRsaKeyEPNS_6RsaKeyEPv"
+        ]
+      },
+      "FreeType/TrueType": {
+        "address_deltas": [
+          {
+            "count": 252,
+            "delta": "0xd470"
+          }
+        ],
+        "common_names": 252,
+        "raw_bytes_equal": 97,
+        "same_size": 252,
+        "sample_names": [
+          "FT_Activate_Size",
+          "FT_Add_Default_Modules",
+          "FT_Add_Module",
+          "FT_Angle_Diff",
+          "FT_Atan2",
+          "FT_Attach_File",
+          "FT_Attach_Stream",
+          "FT_Bitmap_Convert"
+        ]
+      },
+      "GIF": {
+        "address_deltas": [
+          {
+            "count": 11,
+            "delta": "0xd420"
+          },
+          {
+            "count": 9,
+            "delta": "0xd584"
+          },
+          {
+            "count": 6,
+            "delta": "0xd414"
+          }
+        ],
+        "common_names": 26,
+        "raw_bytes_equal": 3,
+        "same_size": 26,
+        "sample_names": [
+          "DGifCloseFile",
+          "DGifExtensionToGCB",
+          "DGifGetCode",
+          "DGifGetCodeNext",
+          "DGifGetExtension",
+          "DGifGetExtensionNext",
+          "DGifGetImageDesc",
+          "DGifGetLZCodes"
+        ]
+      },
+      "JNI": {
+        "address_deltas": [
+          {
+            "count": 11,
+            "delta": "0xd224"
+          },
+          {
+            "count": 8,
+            "delta": "0xd14c"
+          },
+          {
+            "count": 4,
+            "delta": "0xcdec"
+          },
+          {
+            "count": 2,
+            "delta": "0xd144"
+          },
+          {
+            "count": 1,
+            "delta": "0xd148"
+          },
+          {
+            "count": 1,
+            "delta": "0xd42c"
+          }
+        ],
+        "common_names": 27,
+        "raw_bytes_equal": 0,
+        "same_size": 22,
+        "sample_names": [
+          "Java_com_quattroplay_GraalClassic_Natives_QPlayLoop",
+          "Java_com_quattroplay_GraalClassic_Natives_QPlayMain",
+          "Java_com_quattroplay_GraalClassic_Natives_onAccelerator",
+          "Java_com_quattroplay_GraalClassic_Natives_onAddScriptFunction",
+          "Java_com_quattroplay_GraalClassic_Natives_onAmazonHistory",
+          "Java_com_quattroplay_GraalClassic_Natives_onAmazonHistoryDone",
+          "Java_com_quattroplay_GraalClassic_Natives_onAmazonPurchase",
+          "Java_com_quattroplay_GraalClassic_Natives_onAmazonUser"
+        ]
+      },
+      "JPEG-like": {
+        "address_deltas": [
+          {
+            "count": 92,
+            "delta": "0xd470"
+          }
+        ],
+        "common_names": 92,
+        "raw_bytes_equal": 36,
+        "same_size": 92,
+        "sample_names": [
+          "_Z13jdiv_round_upll",
+          "_Z13jpeg_idct_1x1P22jpeg_decompress_structP19jpeg_component_infoPsPPhj",
+          "_Z13jpeg_idct_2x2P22jpeg_decompress_structP19jpeg_component_infoPsPPhj",
+          "_Z13jpeg_idct_4x4P22jpeg_decompress_structP19jpeg_component_infoPsPPhj",
+          "_Z13jpeg_mem_initP18jpeg_common_struct",
+          "_Z13jpeg_mem_termP18jpeg_common_struct",
+          "_Z14jpeg_get_largeP18jpeg_common_structm",
+          "_Z14jpeg_get_smallP18jpeg_common_structm"
+        ]
+      },
+      "YAJL": {
+        "address_deltas": [
+          {
+            "count": 30,
+            "delta": "0xd588"
+          },
+          {
+            "count": 17,
+            "delta": "0xd584"
+          }
+        ],
+        "common_names": 47,
+        "raw_bytes_equal": 10,
+        "same_size": 47,
+        "sample_names": [
+          "_Z12yajl_buf_lenP10yajl_buf_t",
+          "_Z12yajl_lex_lexP12yajl_lexer_tPKhmPmPS2_S3_",
+          "_Z13yajl_buf_dataP10yajl_buf_t",
+          "_Z13yajl_buf_freeP10yajl_buf_t",
+          "_Z13yajl_do_parseP13yajl_handle_tPKhm",
+          "_Z13yajl_lex_freeP12yajl_lexer_t",
+          "_Z13yajl_lex_peekP12yajl_lexer_tPKhmm",
+          "_Z14yajl_buf_allocP16yajl_alloc_funcs"
+        ]
+      },
+      "bzip2": {
+        "address_deltas": [
+          {
+            "count": 17,
+            "delta": "0xd470"
+          }
+        ],
+        "common_names": 17,
+        "raw_bytes_equal": 8,
+        "same_size": 17,
+        "sample_names": [
+          "BZ2_bzBuffToBuffCompress",
+          "BZ2_bzBuffToBuffDecompress",
+          "BZ2_bzCompress",
+          "BZ2_bzCompressEnd",
+          "BZ2_bzCompressInit",
+          "BZ2_bzDecompress",
+          "BZ2_bzDecompressEnd",
+          "BZ2_bzDecompressInit"
+        ]
+      },
+      "crypto-like": {
+        "address_deltas": [
+          {
+            "count": 18,
+            "delta": "0xd470"
+          },
+          {
+            "count": 18,
+            "delta": "0xd590"
+          },
+          {
+            "count": 4,
+            "delta": "0xd588"
+          }
+        ],
+        "common_names": 40,
+        "raw_bytes_equal": 9,
+        "same_size": 40,
+        "sample_names": [
+          "_Z10Arc4SetKeyP4Arc4PKhj",
+          "_Z10HmacSetKeyP4HmaciPKhj",
+          "_Z10HmacUpdateP4HmacPKhj",
+          "_Z10InitSha256P6Sha256",
+          "_Z11Arc4ProcessP4Arc4PhPKhj",
+          "_Z11Sha256FinalP6Sha256Ph",
+          "_Z12Sha256UpdateP6Sha256PKhj",
+          "_Z13AesCbcDecryptP3AesPhPKhj"
+        ]
+      },
+      "other": {
+        "address_deltas": [
+          {
+            "count": 35,
+            "delta": "0xd470"
+          },
+          {
+            "count": 4,
+            "delta": "0xd590"
+          },
+          {
+            "count": 3,
+            "delta": "0xd474"
+          },
+          {
+            "count": 2,
+            "delta": "0xbc8"
+          },
+          {
+            "count": 1,
+            "delta": "0x287c"
+          },
+          {
+            "count": 1,
+            "delta": "0xc50c"
+          },
+          {
+            "count": 1,
+            "delta": "0xd584"
+          },
+          {
+            "count": 1,
+            "delta": "0xed78"
+          }
+        ],
+        "common_names": 48,
+        "raw_bytes_equal": 16,
+        "same_size": 48,
+        "sample_names": [
+          "Move_CVT",
+          "Move_CVT_Stretched",
+          "Read_CVT",
+          "Read_CVT_Stretched",
+          "Write_CVT",
+          "Write_CVT_Stretched",
+          "_Z12GenerateSeedP7OS_SeedPhj",
+          "_Z15crc32_combine64mml"
+        ]
+      },
+      "zlib": {
+        "address_deltas": [
+          {
+            "count": 33,
+            "delta": "0xd470"
+          }
+        ],
+        "common_names": 33,
+        "raw_bytes_equal": 16,
+        "same_size": 33,
+        "sample_names": [
+          "adler32",
+          "adler32_combine",
+          "crc32",
+          "crc32_combine",
+          "deflate",
+          "deflateBound",
+          "deflateCopy",
+          "deflateEnd"
+        ]
+      }
+    },
+    "raw_function_bytes_equal": 279,
+    "same_size": 830,
+    "selected_anchors": [
+      {
+        "1.8_address": "0x253f1c",
+        "1.8_size": 140,
+        "2.2_address": "0x26138c",
+        "2.2_size": 140,
+        "address_delta": "0xd470",
+        "name": "FT_Init_FreeType",
+        "raw_bytes_equal": false,
+        "role": "Bundled FreeType initialization anchor.",
+        "size_equal": true
+      },
+      {
+        "1.8_address": "0x28b3a4",
+        "1.8_size": 504,
+        "2.2_address": "0x298814",
+        "2.2_size": 504,
+        "address_delta": "0xd470",
+        "name": "jpeg_start_decompress",
+        "raw_bytes_equal": false,
+        "role": "Bundled JPEG decompression anchor.",
+        "size_equal": true
+      },
+      {
+        "1.8_address": "0x2ad62c",
+        "1.8_size": 468,
+        "2.2_address": "0x2baa40",
+        "2.2_size": 468,
+        "address_delta": "0xd414",
+        "name": "DGifOpen",
+        "raw_bytes_equal": false,
+        "role": "Bundled GIF decoder anchor.",
+        "size_equal": true
+      },
+      {
+        "1.8_address": "0x2af67c",
+        "1.8_size": 116,
+        "2.2_address": "0x2bcc00",
+        "2.2_size": 116,
+        "address_delta": "0xd584",
+        "name": "yajl_parse",
+        "raw_bytes_equal": false,
+        "role": "Bundled JSON parser anchor.",
+        "size_equal": true
+      },
+      {
+        "1.8_address": "0x281cb4",
+        "1.8_size": 7120,
+        "2.2_address": "0x28f124",
+        "2.2_size": 7120,
+        "address_delta": "0xd470",
+        "name": "deflate",
+        "raw_bytes_equal": false,
+        "role": "Bundled zlib compression anchor.",
+        "size_equal": true
+      },
+      {
+        "1.8_address": "0x27423c",
+        "1.8_size": 3156,
+        "2.2_address": "0x2816ac",
+        "2.2_size": 3156,
+        "address_delta": "0xd470",
+        "name": "BZ2_bzDecompress",
+        "raw_bytes_equal": false,
+        "role": "Bundled bzip2 decompression anchor.",
+        "size_equal": true
+      },
+      {
+        "1.8_address": "0x243858",
+        "1.8_size": 1092,
+        "2.2_address": "0x250644",
+        "2.2_size": 1092,
+        "address_delta": "0xcdec",
+        "name": "Java_com_quattroplay_GraalClassic_Natives_QPlayMain",
+        "raw_bytes_equal": false,
+        "role": "JNI native startup entrypoint.",
+        "size_equal": true
+      },
+      {
+        "1.8_address": "0x2440f4",
+        "1.8_size": 696,
+        "2.2_address": "0x250ee0",
+        "2.2_size": 1560,
+        "address_delta": "0xcdec",
+        "name": "Java_com_quattroplay_GraalClassic_Natives_QPlayLoop",
+        "raw_bytes_equal": false,
+        "role": "JNI render and timer loop entrypoint.",
+        "size_equal": false
+      }
+    ]
+  },
+  "schema": "libqplay.cross-version-symbol-overlap.v1",
+  "scope": "Offline comparison of defined ARM64 FUNC names and function bytes between the original 1.8 library and the unverified installed 2.2 library",
+  "tool": "tools/generate_cross_version_symbol_overlap.py",
+  "tool_version": 1
+}
