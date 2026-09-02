@@ -148,6 +148,852 @@
     "all_variants_have_same_needed_libraries": true,
     "all_variants_use_bind_now": true
   },
+  "symbol_anchors": {
+    "count": 40,
+    "rows": [
+      {
+        "symbol": "Java_com_quattroplay_GraalClassic_Natives_QPlayLoop",
+        "variants": {
+          "arm64-v8a": {
+            "size": "696",
+            "value": "00000000002440f4"
+          },
+          "armeabi": {
+            "size": "636",
+            "value": "00197d99"
+          },
+          "x86": {
+            "size": "806",
+            "value": "00240110"
+          },
+          "x86_64": {
+            "size": "693",
+            "value": "000000000025d690"
+          }
+        }
+      },
+      {
+        "symbol": "Java_com_quattroplay_GraalClassic_Natives_QPlayMain",
+        "variants": {
+          "arm64-v8a": {
+            "size": "1092",
+            "value": "0000000000243858"
+          },
+          "armeabi": {
+            "size": "828",
+            "value": "001976cd"
+          },
+          "x86": {
+            "size": "1277",
+            "value": "0023f760"
+          },
+          "x86_64": {
+            "size": "1103",
+            "value": "000000000025ce10"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN10TServerNPC9runScriptEv",
+        "variants": {
+          "arm64-v8a": {
+            "size": "608",
+            "value": "0000000000184aa0"
+          },
+          "armeabi": {
+            "size": "496",
+            "value": "00105d55"
+          },
+          "x86": {
+            "size": "623",
+            "value": "0015c630"
+          },
+          "x86_64": {
+            "size": "567",
+            "value": "0000000000198bd0"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN11TServerList16handleServerWarpEv",
+        "variants": {
+          "arm64-v8a": {
+            "size": "424",
+            "value": "0000000000204488"
+          },
+          "armeabi": {
+            "size": "324",
+            "value": "001687e5"
+          },
+          "x86": {
+            "size": "509",
+            "value": "001f4820"
+          },
+          "x86_64": {
+            "size": "471",
+            "value": "000000000021bb30"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN11TServerList22enterNextConnectorModeEi",
+        "variants": {
+          "arm64-v8a": {
+            "size": "1568",
+            "value": "0000000000203df4"
+          },
+          "armeabi": {
+            "size": "1164",
+            "value": "00168311"
+          },
+          "x86": {
+            "size": "1987",
+            "value": "001f3fe0"
+          },
+          "x86_64": {
+            "size": "1580",
+            "value": "000000000021b4a0"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN12THTTPRequest11sendRequestEv",
+        "variants": {
+          "arm64-v8a": {
+            "size": "544",
+            "value": "00000000001ffde8"
+          },
+          "armeabi": {
+            "size": "420",
+            "value": "001654dd"
+          },
+          "x86": {
+            "size": "629",
+            "value": "001ef5b0"
+          },
+          "x86_64": {
+            "size": "606",
+            "value": "0000000000217230"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN12THTTPRequest18saveDownloadedDataEv",
+        "variants": {
+          "arm64-v8a": {
+            "size": "2656",
+            "value": "0000000000200010"
+          },
+          "armeabi": {
+            "size": "2052",
+            "value": "00165681"
+          },
+          "x86": {
+            "size": "3317",
+            "value": "001ef830"
+          },
+          "x86_64": {
+            "size": "3128",
+            "value": "0000000000217490"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN12THTTPRequest20requestURLAsGameFileERK7TStringS2_jb",
+        "variants": {
+          "arm64-v8a": {
+            "size": "532",
+            "value": "00000000002013d4"
+          },
+          "armeabi": {
+            "size": "368",
+            "value": "0016654d"
+          },
+          "x86": {
+            "size": "616",
+            "value": "001f1060"
+          },
+          "x86_64": {
+            "size": "598",
+            "value": "0000000000218ab0"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN12THTTPRequest9runScriptEv",
+        "variants": {
+          "arm64-v8a": {
+            "size": "1072",
+            "value": "00000000002025a0"
+          },
+          "armeabi": {
+            "size": "868",
+            "value": "00167111"
+          },
+          "x86": {
+            "size": "1321",
+            "value": "001f24e0"
+          },
+          "x86_64": {
+            "size": "1239",
+            "value": "0000000000219cd0"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN12TScriptSpace9runScriptEv",
+        "variants": {
+          "arm64-v8a": {
+            "size": "844",
+            "value": "000000000022a5e0"
+          },
+          "armeabi": {
+            "size": "636",
+            "value": "001844e1"
+          },
+          "x86": {
+            "size": "826",
+            "value": "00221160"
+          },
+          "x86_64": {
+            "size": "795",
+            "value": "0000000000242fa0"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN15TScriptUniverse10runScriptsEb",
+        "variants": {
+          "arm64-v8a": {
+            "size": "488",
+            "value": "000000000022bcf8"
+          },
+          "armeabi": {
+            "size": "388",
+            "value": "00185461"
+          },
+          "x86": {
+            "size": "509",
+            "value": "00222ac0"
+          },
+          "x86_64": {
+            "size": "524",
+            "value": "00000000002446c0"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN16TGraalConnection13checkPacketIDEj",
+        "variants": {
+          "arm64-v8a": {
+            "size": "244",
+            "value": "00000000001fcd58"
+          },
+          "armeabi": {
+            "size": "188",
+            "value": "00163315"
+          },
+          "x86": {
+            "size": "266",
+            "value": "001ebd40"
+          },
+          "x86_64": {
+            "size": "221",
+            "value": "0000000000213f10"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN16TGraalConnection15setEncryptionInERK7TStringS2_S2_",
+        "variants": {
+          "arm64-v8a": {
+            "size": "228",
+            "value": "00000000001fdfd0"
+          },
+          "armeabi": {
+            "size": "116",
+            "value": "001640d9"
+          },
+          "x86": {
+            "size": "187",
+            "value": "001ed310"
+          },
+          "x86_64": {
+            "size": "157",
+            "value": "0000000000215370"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN16TGraalConnection22parseProtocol_NewGraalEv",
+        "variants": {
+          "arm64-v8a": {
+            "size": "1572",
+            "value": "00000000001fe31c"
+          },
+          "armeabi": {
+            "size": "1120",
+            "value": "001642fd"
+          },
+          "x86": {
+            "size": "1819",
+            "value": "001ed670"
+          },
+          "x86_64": {
+            "size": "1715",
+            "value": "0000000000215650"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN16TGraalConnection22parseProtocol_OldGraalEv",
+        "variants": {
+          "arm64-v8a": {
+            "size": "1236",
+            "value": "00000000001fc598"
+          },
+          "armeabi": {
+            "size": "1036",
+            "value": "00162cd5"
+          },
+          "x86": {
+            "size": "1615",
+            "value": "001eb340"
+          },
+          "x86_64": {
+            "size": "1373",
+            "value": "0000000000213650"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN17TSocketConnection13connectSocketERK7TStringi",
+        "variants": {
+          "arm64-v8a": {
+            "size": "564",
+            "value": "0000000000206bd8"
+          },
+          "armeabi": {
+            "size": "352",
+            "value": "0016a3ad"
+          },
+          "x86": {
+            "size": "572",
+            "value": "001f7aa0"
+          },
+          "x86_64": {
+            "size": "536",
+            "value": "000000000021e400"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN17TSocketConnection17enableSSLOnSocketEv",
+        "variants": {
+          "arm64-v8a": {
+            "size": "868",
+            "value": "0000000000206450"
+          },
+          "armeabi": {
+            "size": "740",
+            "value": "00169df9"
+          },
+          "x86": {
+            "size": "1051",
+            "value": "001f7120"
+          },
+          "x86_64": {
+            "size": "933",
+            "value": "000000000021dc60"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN17TSocketConnection21setVerifyGraalWebCertEv",
+        "variants": {
+          "arm64-v8a": {
+            "size": "168",
+            "value": "000000000020ab20"
+          },
+          "armeabi": {
+            "size": "108",
+            "value": "0016cfcd"
+          },
+          "x86": {
+            "size": "190",
+            "value": "001fc490"
+          },
+          "x86_64": {
+            "size": "160",
+            "value": "0000000000222270"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN17TSocketConnection4readEv",
+        "variants": {
+          "arm64-v8a": {
+            "size": "916",
+            "value": "00000000002074d4"
+          },
+          "armeabi": {
+            "size": "684",
+            "value": "0016a9b5"
+          },
+          "x86": {
+            "size": "1059",
+            "value": "001f84d0"
+          },
+          "x86_64": {
+            "size": "905",
+            "value": "000000000021ecb0"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN17TSocketConnection8sendDataEPKvi",
+        "variants": {
+          "arm64-v8a": {
+            "size": "852",
+            "value": "0000000000207118"
+          },
+          "armeabi": {
+            "size": "608",
+            "value": "0016a725"
+          },
+          "x86": {
+            "size": "922",
+            "value": "001f80d0"
+          },
+          "x86_64": {
+            "size": "818",
+            "value": "000000000021e920"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN17TSocketConnection9setStatusEi",
+        "variants": {
+          "arm64-v8a": {
+            "size": "44",
+            "value": "00000000002067b4"
+          },
+          "armeabi": {
+            "size": "36",
+            "value": "0016a0dd"
+          },
+          "x86": {
+            "size": "66",
+            "value": "001f7540"
+          },
+          "x86_64": {
+            "size": "29",
+            "value": "000000000021e010"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN6CyaInt11CyaSSL_readEPNS_6CYASSLEPvi",
+        "variants": {
+          "arm64-v8a": {
+            "size": "48",
+            "value": "00000000002c3c04"
+          },
+          "armeabi": {
+            "size": "30",
+            "value": "001f21b9"
+          },
+          "x86": {
+            "size": "81",
+            "value": "002d40c0"
+          },
+          "x86_64": {
+            "size": "42",
+            "value": "00000000002e55a0"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN6CyaInt12CyaSSL_writeEPNS_6CYASSLEPKvi",
+        "variants": {
+          "arm64-v8a": {
+            "size": "32",
+            "value": "00000000002c3bb4"
+          },
+          "armeabi": {
+            "size": "18",
+            "value": "001f2185"
+          },
+          "x86": {
+            "size": "60",
+            "value": "002d4020"
+          },
+          "x86_64": {
+            "size": "26",
+            "value": "00000000002e5550"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN6CyaInt13CyaSSL_writevEPNS_6CYASSLEPK5ioveci",
+        "variants": {
+          "arm64-v8a": {
+            "size": "500",
+            "value": "00000000002c5e54"
+          },
+          "armeabi": {
+            "size": "180",
+            "value": "001f3a11"
+          },
+          "x86": {
+            "size": "951",
+            "value": "002d6e80"
+          },
+          "x86_64": {
+            "size": "314",
+            "value": "00000000002e81d0"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN6CyaInt14CyaSSL_connectEPNS_6CYASSLE",
+        "variants": {
+          "arm64-v8a": {
+            "size": "500",
+            "value": "00000000002c563c"
+          },
+          "armeabi": {
+            "size": "372",
+            "value": "001f3491"
+          },
+          "x86": {
+            "size": "512",
+            "value": "002d6580"
+          },
+          "x86_64": {
+            "size": "494",
+            "value": "00000000002e7950"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN6CyaInt16CyaSSL_get_errorEPNS_6CYASSLEi",
+        "variants": {
+          "arm64-v8a": {
+            "size": "72",
+            "value": "00000000002c3d1c"
+          },
+          "armeabi": {
+            "size": "42",
+            "value": "001f2255"
+          },
+          "x86": {
+            "size": "70",
+            "value": "002d4240"
+          },
+          "x86_64": {
+            "size": "54",
+            "value": "00000000002e56a0"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN6CyaInt17CyaSSL_set_verifyEPNS_6CYASSLEiPFiiPNS_21CYASSL_X509_STORE_CTXEE",
+        "variants": {
+          "arm64-v8a": {
+            "size": "60",
+            "value": "00000000002c5458"
+          },
+          "armeabi": {
+            "size": "64",
+            "value": "001f3331"
+          },
+          "x86": {
+            "size": "85",
+            "value": "002d62b0"
+          },
+          "x86_64": {
+            "size": "66",
+            "value": "00000000002e7720"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN6CyaInt19CyaSSL_connect_certEPNS_6CYASSLE",
+        "variants": {
+          "arm64-v8a": {
+            "size": "60",
+            "value": "00000000002c5874"
+          },
+          "armeabi": {
+            "size": "32",
+            "value": "001f3629"
+          },
+          "x86": {
+            "size": "56",
+            "value": "002d67d0"
+          },
+          "x86_64": {
+            "size": "32",
+            "value": "00000000002e7b70"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN6CyaInt24CyaSSL_check_domain_nameEPNS_6CYASSLEPKc",
+        "variants": {
+          "arm64-v8a": {
+            "size": "132",
+            "value": "00000000002c5dc8"
+          },
+          "armeabi": {
+            "size": "72",
+            "value": "001f39c1"
+          },
+          "x86": {
+            "size": "130",
+            "value": "002d6de0"
+          },
+          "x86_64": {
+            "size": "102",
+            "value": "00000000002e8150"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN6CyaInt29CyaSSL_CTX_load_verify_bufferEPNS_10CYASSL_CTXEPKhli",
+        "variants": {
+          "arm64-v8a": {
+            "size": "228",
+            "value": "00000000002c6048"
+          },
+          "armeabi": {
+            "size": "156",
+            "value": "001f3ac5"
+          },
+          "x86": {
+            "size": "255",
+            "value": "002d7240"
+          },
+          "x86_64": {
+            "size": "229",
+            "value": "00000000002e8310"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN7TClient15requestDownloadERK7TString",
+        "variants": {
+          "arm64-v8a": {
+            "size": "336",
+            "value": "00000000001e8964"
+          },
+          "armeabi": {
+            "size": "224",
+            "value": "0015517d"
+          },
+          "x86": {
+            "size": "318",
+            "value": "001d6150"
+          },
+          "x86_64": {
+            "size": "267",
+            "value": "0000000000201120"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN7TClient15sendRequestTextERK7TStringS2_S2_",
+        "variants": {
+          "arm64-v8a": {
+            "size": "360",
+            "value": "00000000001f85e8"
+          },
+          "armeabi": {
+            "size": "232",
+            "value": "00160acd"
+          },
+          "x86": {
+            "size": "373",
+            "value": "001e79e0"
+          },
+          "x86_64": {
+            "size": "343",
+            "value": "00000000002104e0"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN7TClient19connectToGameServerEv",
+        "variants": {
+          "arm64-v8a": {
+            "size": "372",
+            "value": "00000000001e7058"
+          },
+          "armeabi": {
+            "size": "264",
+            "value": "00153ffd"
+          },
+          "x86": {
+            "size": "389",
+            "value": "001d4790"
+          },
+          "x86_64": {
+            "size": "367",
+            "value": "00000000001ffa60"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN7TClient20sendRequestFilesMoveERK7TStringS2_",
+        "variants": {
+          "arm64-v8a": {
+            "size": "400",
+            "value": "00000000001f8cd0"
+          },
+          "armeabi": {
+            "size": "276",
+            "value": "00160f59"
+          },
+          "x86": {
+            "size": "453",
+            "value": "001e81b0"
+          },
+          "x86_64": {
+            "size": "439",
+            "value": "0000000000210be0"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN7TClient21sendRequestFileRenameERK7TStringS2_",
+        "variants": {
+          "arm64-v8a": {
+            "size": "584",
+            "value": "00000000001f8a88"
+          },
+          "armeabi": {
+            "size": "396",
+            "value": "00160dcd"
+          },
+          "x86": {
+            "size": "717",
+            "value": "001e7ee0"
+          },
+          "x86_64": {
+            "size": "655",
+            "value": "0000000000210950"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN7TClient23sendRequestFileDeletionERK7TString",
+        "variants": {
+          "arm64-v8a": {
+            "size": "216",
+            "value": "00000000001f88fc"
+          },
+          "armeabi": {
+            "size": "136",
+            "value": "00160cd5"
+          },
+          "x86": {
+            "size": "218",
+            "value": "001e7d40"
+          },
+          "x86_64": {
+            "size": "180",
+            "value": "00000000002107f0"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN7TClient24sendRequestUpdatePackageEP14TUpdatePackageb",
+        "variants": {
+          "arm64-v8a": {
+            "size": "824",
+            "value": "00000000001f8e60"
+          },
+          "armeabi": {
+            "size": "580",
+            "value": "0016106d"
+          },
+          "x86": {
+            "size": "1036",
+            "value": "001e8380"
+          },
+          "x86_64": {
+            "size": "977",
+            "value": "0000000000210da0"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN7TClient25sendRequestFolderDeletionERK7TString",
+        "variants": {
+          "arm64-v8a": {
+            "size": "180",
+            "value": "00000000001f89d4"
+          },
+          "armeabi": {
+            "size": "112",
+            "value": "00160d5d"
+          },
+          "x86": {
+            "size": "178",
+            "value": "001e7e20"
+          },
+          "x86_64": {
+            "size": "148",
+            "value": "00000000002108b0"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN7TSocket9runScriptEv",
+        "variants": {
+          "arm64-v8a": {
+            "size": "696",
+            "value": "0000000000205bdc"
+          },
+          "armeabi": {
+            "size": "460",
+            "value": "001697b9"
+          },
+          "x86": {
+            "size": "729",
+            "value": "001f66c0"
+          },
+          "x86_64": {
+            "size": "676",
+            "value": "000000000021d390"
+          }
+        }
+      },
+      {
+        "symbol": "_ZN9TGraalVar9runScriptEv",
+        "variants": {
+          "arm64-v8a": {
+            "size": "16",
+            "value": "000000000020d7dc"
+          },
+          "armeabi": {
+            "size": "14",
+            "value": "0016f1f9"
+          },
+          "x86": {
+            "size": "41",
+            "value": "001ff9d0"
+          },
+          "x86_64": {
+            "size": "17",
+            "value": "0000000000224f70"
+          }
+        }
+      }
+    ],
+    "selection": "Exact defined dynamic symbol names shared by all four variants and containing a connector, socket, protocol, JNI, or CyaSSL anchor token."
+  },
   "tool": "tools/generate_cross_abi_compatibility_review.py",
   "tool_version": 1,
   "variants": [

@@ -142,3 +142,9 @@ x86 shares 6,346. ABI-specific mangling, compiler output, and data layout make
 address transfer unsafe. The shared trust hash and marker set do, however,
 make the stale connector chain a cross-build compatibility lead rather than an
 ARM64-only hypothesis. No ABI was executed by this comparison.
+
+The same report includes 40 exact shared address anchors for `QPlayMain`,
+`QPlayLoop`, connector selection, HTTP completion, socket setup, NewGraal
+framing, game connection, and selected CyaSSL calls. These addresses are
+useful when comparing the four 1.8 builds, but they must not be copied into a
+stripped 2.2 library without a new match and a new file hash.

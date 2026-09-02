@@ -47,6 +47,38 @@ MARKERS = (
     b"TLS_RSA_WITH_NULL_SHA256",
 )
 
+ANCHOR_TOKENS = (
+    "QPlayMain",
+    "QPlayLoop",
+    "enterNextConnectorMode",
+    "TServerList4login",
+    "handleServerWarp",
+    "sendRequest",
+    "saveDownloadedData",
+    "runScript",
+    "requestURLAsGameFile",
+    "connectSocket",
+    "enableSSLOnSocket",
+    "setVerifyGraalWebCert",
+    "TSocketConnection4read",
+    "TSocketConnection8sendData",
+    "setStatus",
+    "parseProtocol",
+    "checkPacketID",
+    "setEncryptionIn",
+    "connectToGameServer",
+    "processFileChunk",
+    "parseEncodedFileChunk",
+    "requestDownload",
+    "CyaSSL_connect",
+    "CyaSSL_CTX_load_verify_buffer",
+    "CyaSSL_set_verify",
+    "CyaSSL_check_domain_name",
+    "CyaSSL_get_error",
+    "CyaSSL_read",
+    "CyaSSL_write",
+)
+
 MACHINES = {
     3: "Intel 80386",
     40: "ARM",
@@ -149,6 +181,8 @@ def parse_dynamic_symbols(output: str) -> dict[str, object]:
             continue
         rows.append(
             {
+                "value": parts[1],
+                "size": parts[2],
                 "type": parts[3],
                 "index": parts[6],
                 "name": parts[7].split()[0],
@@ -156,6 +190,10 @@ def parse_dynamic_symbols(output: str) -> dict[str, object]:
         )
     defined = [row for row in rows if row["index"] != "UND"]
     defined_names = {str(row["name"]) for row in defined}
+    defined_symbols = {
+        str(row["name"]): {"value": row["value"], "size": row["size"]}
+        for row in defined
+    }
     function_types = {"FUNC", "IFUNC"}
     return {
         "dynamic_symbol_count": entry_count,
@@ -169,6 +207,7 @@ def parse_dynamic_symbols(output: str) -> dict[str, object]:
             "\n".join(sorted(defined_names)).encode("utf-8")
         ),
         "defined_symbol_names": defined_names,
+        "defined_symbols": defined_symbols,
     }
 
 
@@ -195,6 +234,7 @@ def inspect_variant(abi: str, path: Path) -> dict[str, object]:
     program = parse_program_headers(run_readelf("-lW", path=path))
     symbols = parse_dynamic_symbols(run_readelf("--dyn-syms", "--wide", path=path))
     names = symbols.pop("defined_symbol_names")
+    defined_symbols = symbols.pop("defined_symbols")
     return {
         "abi": abi,
         "path": str(path.relative_to(ROOT.parent)),
@@ -211,6 +251,7 @@ def inspect_variant(abi: str, path: Path) -> dict[str, object]:
         },
         "embedded_trust_text": trust_text_record(blob),
         "_defined_symbol_names": names,
+        "_defined_symbols": defined_symbols,
     }
 
 
@@ -238,11 +279,34 @@ def comparisons(variants: list[dict[str, object]]) -> list[dict[str, object]]:
     return results
 
 
+def anchor_symbol_rows(variants: list[dict[str, object]]) -> list[dict[str, object]]:
+    common = set(variants[0]["_defined_symbols"])
+    for item in variants[1:]:
+        common &= set(item["_defined_symbols"])
+    selected = sorted(
+        name
+        for name in common
+        if any(token in name for token in ANCHOR_TOKENS)
+    )
+    return [
+        {
+            "symbol": name,
+            "variants": {
+                item["abi"]: item["_defined_symbols"][name]
+                for item in variants
+            },
+        }
+        for name in selected
+    ]
+
+
 def build_report() -> dict[str, object]:
     variants = [inspect_variant(abi, path) for abi, path in VARIANTS.items()]
     comparison_rows = comparisons(variants)
+    anchor_rows = anchor_symbol_rows(variants)
     for item in variants:
         item.pop("_defined_symbol_names", None)
+        item.pop("_defined_symbols", None)
     trust_hashes = {
         item["embedded_trust_text"].get("sha256") for item in variants
     }
@@ -264,6 +328,11 @@ def build_report() -> dict[str, object]:
         "network_contacted": False,
         "variants": variants,
         "comparisons_to_arm64": comparison_rows,
+        "symbol_anchors": {
+            "selection": "Exact defined dynamic symbol names shared by all four variants and containing a connector, socket, protocol, JNI, or CyaSSL anchor token.",
+            "count": len(anchor_rows),
+            "rows": anchor_rows,
+        },
         "shared_properties": {
             "all_variants_have_same_connector_tls_marker_counts": all_markers_equal,
             "all_variants_have_same_embedded_trust_text_hash": all_trust_equal,

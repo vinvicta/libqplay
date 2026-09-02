@@ -1579,6 +1579,12 @@ the other three use `0x1000` alignment. The ARM64 to x86_64 comparison shares
 6,346. The differences are enough to make raw address transfer unsafe, even
 though the shared trust bytes make the certificate-expiry lead cross-build.
 
+The report also includes 40 exact shared address anchors for the two JNI entry
+points, connector selection and HTTP completion, socket and protocol setup,
+game connection, and selected CyaSSL operations. They are useful for locating
+the same 1.8 behavior in a different ABI build. They are not a substitute for
+function matching in the stripped 2.2 library.
+
 This pass strengthens the diagnosis without overstating it. The stale trust
 material and connector fallback are not likely isolated to ARM64, but a missing
 legacy C++ runtime or an alignment-sensitive loader error still needs ARM64
