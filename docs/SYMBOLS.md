@@ -158,6 +158,10 @@ families and selected anchors are in
 triage buckets, not independent source attribution. This gives us a practical
 starting point for translating the stripped 2.2 database while preserving a
 strict recheck of bytes, callers, and data references for every target.
+The review-only importer `tools/ida_apply_cross_version_translation_candidates.py`
+can apply only boundary-checked labels to a disposable 2.2 IDA copy after
+verifying the unverified comparison-library hash. It never overwrites the input
+database and does not patch instructions.
 
 The defined dynamic symbol sets are similar but not identical. The x86_64
 variant shares 6,486 defined names with ARM64, while armeabi shares 6,349 and

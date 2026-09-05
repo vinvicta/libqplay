@@ -166,10 +166,18 @@ delta, and whether the equal-sized raw byte ranges match. The generator can
 read the 2.2 library directly from its APK member, so the private native file
 does not need to be checked in.
 
-This map is suitable for locating a name in a 2.2 IDA database. It is not a
-bulk rename or patch script. A candidate still needs a target function-boundary
-check, caller and data-reference review, and a new file hash before an analyst
-changes the database.
+This map is suitable for locating a name in a 2.2 IDA database. The companion
+`tools/ida_apply_cross_version_translation_candidates.py` turns it into a
+conservative review plan. It checks the target input hash, existing function
+start, exact 2.2 boundary size, and name collisions before it can apply a
+label. Review-only mode is the default. Applying labels requires
+`CROSS_VERSION_APPLY_RENAMES=1` and a new `CROSS_VERSION_SAVE_PATH`; creating
+missing function boundaries additionally requires
+`CROSS_VERSION_ADD_FUNCTIONS=1`. The input database is never overwritten.
+
+Even after a successful plan, a candidate still needs caller and data-reference
+review. A size match or equal bytes is evidence for triage, not proof of
+identical behavior.
 
 The ELF metadata reports full RELRO, `BIND_NOW`, and a non-executable stack.
 Those baseline properties do not remove the risks of legacy transport policy

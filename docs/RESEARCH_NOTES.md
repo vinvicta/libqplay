@@ -1845,3 +1845,20 @@ size equality, the measured address delta, and raw-byte equality. Its generator
 can read `lib/arm64-v8a/libqplay.so` directly from the private 2.2 APK. This
 does not make a global delta safe and does not claim that the unverified
 package represents stock 2.2 behavior.
+
+## Conservative 2.2 IDA translation workflow
+
+The retained 2.2 dynamic names are now paired with a safe database workflow in
+`tools/ida_apply_cross_version_translation_candidates.py`. The script reads
+the 835-row metadata map, verifies that the active IDA input has the expected
+unverified 2.2 ARM64 SHA-256, and produces a review plan by default. Each row
+must resolve to an existing function start with the exact 2.2 symbol size and
+must not collide with a name already used elsewhere.
+
+The script can be enabled for a disposable database with
+`CROSS_VERSION_APPLY_RENAMES=1` and a new `CROSS_VERSION_SAVE_PATH`. Missing
+function boundaries are only created when `CROSS_VERSION_ADD_FUNCTIONS=1` is
+also set. The input database is never replaced, and the script adds labels and
+provenance comments only. It does not patch instructions or execute the
+companion hook library. A size match or equal bytes remains a triage signal;
+callers, data references, and runtime behavior must still be checked.
