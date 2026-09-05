@@ -165,6 +165,11 @@ ambiguous. The review record and CSV are
 `artifacts/cross_version_exact_byte_match_review_20260904.json` and
 `symbols/libqplay_2.2_exact_byte_unique_matches.csv`.
 
+The 2.2 ARM64 import scan maps 3,307 direct AArch64 transfers through 169 PLT
+entries. It records qplay callsites for `fork` and `execvp`, `dlopen` and
+`dlsym`, anti-instrumentation helpers, native sockets, and file boundaries in
+`artifacts/comparison_2_2_aarch64_import_callsite_review_20260904.json`.
+
 The Android lifecycle review adds an important first diagnostic checkpoint.
 The connector is downstream of the GL surface, window focus, runtime
 permission completion, and the first render frame. A compatibility dialog or
