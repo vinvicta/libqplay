@@ -1,0 +1,227 @@
+{
+  "artifact": "original_socket_policy_review_20260902",
+  "schema": "libqplay.original-socket-policy-review.v1",
+  "scope": "Original 1.8 ARM64 script socket policy and HTTP defaults",
+  "provenance": {
+    "source": "Active IDA ARM64 decompiler and instruction view",
+    "binary_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
+    "imagebase": "0x0",
+    "idb_snapshot": {
+      "label": "active-v16",
+      "bytes": 66603254,
+      "sha256": "8de29ae01481c021ed8c128077f493028f1472aadaf71f78b665c0f2491c5e78"
+    },
+    "rerunnable_exporter": "tools/ida_export_original_socket_policy_review.py"
+  },
+  "network_contacted": false,
+  "native_execution": false,
+  "fuzzing_performed": false,
+  "policy_format": {
+    "wildcard_policy": "*",
+    "entry_separator": ",",
+    "host_separator": ":",
+    "range_separator": "/",
+    "host_matching": "Exact comparison or native patternMatches",
+    "range_endpoints": "Inclusive in the intended logic",
+    "entries_without_host": "Use a wildcard host pattern",
+    "implementation_note": "The range branches compare the comma-separated entry index, not the requested port."
+  },
+  "global_values": [
+    {
+      "address": "0x385ad4",
+      "name": "data_THTTPRequest_webdownloadsizelimit",
+      "value": 104857600,
+      "hex_value": "0x6400000",
+      "unit": "bytes",
+      "meaning": "Selected web-download limit"
+    },
+    {
+      "address": "0x385ad8",
+      "name": "data_THTTPRequest_maxconnections",
+      "value": 10,
+      "hex_value": "0xa",
+      "unit": "requests",
+      "meaning": "HTTP request-pool limit"
+    },
+    {
+      "address": "0x390b10",
+      "name": "data_TSocket_allowedportsbind",
+      "value": null,
+      "meaning": "Process-global bind policy TString"
+    },
+    {
+      "address": "0x390b18",
+      "name": "data_TSocket_allowedsocketsconnect",
+      "value": null,
+      "meaning": "Process-global outbound policy TString"
+    },
+    {
+      "address": "0x390b08",
+      "name": "data_TSocket_allowedbindzero",
+      "value": null,
+      "meaning": "Conditional port-zero bind switch",
+      "value_note": "The static storage value is not treated as a runtime default without a startup capture."
+    }
+  ],
+  "functions": [
+    {
+      "address": "0x204d94",
+      "name": "TSocket_checkAllowConnect_TString_const_int",
+      "role": "Outbound policy gate",
+      "evidence": "Delegates to IsHostAndPortInList with data_TSocket_allowedsocketsconnect before native connection allocation."
+    },
+    {
+      "address": "0x2079ac",
+      "name": "IsHostAndPortInList_TString_const_TString_const_int",
+      "role": "Host and port matcher",
+      "evidence": "Accepts wildcard, comma-separated entries, exact or pattern-matched hosts, exact decimal ports, and slash-separated ranges."
+    },
+    {
+      "address": "0x204ec8",
+      "name": "TSocket_connect_TString_const_int",
+      "role": "Script outbound connection",
+      "evidence": "Checks policy first, logs a blocked connection when denied, and otherwise allocates TSocketConnection and copies script TLS fields."
+    },
+    {
+      "address": "0x2057a0",
+      "name": "TSocket_checkAllowBind_int",
+      "role": "Listener policy gate",
+      "evidence": "Accepts wildcard, conditionally handles port zero, and scans allowedportsbind for exact or range entries."
+    },
+    {
+      "address": "0x205948",
+      "name": "TSocket_bind_int_bool",
+      "role": "Script listener setup",
+      "evidence": "Checks bind policy before allocating TSocketConnection, calls bindSocket, and raises onBind or onBindFailed."
+    },
+    {
+      "address": "0x2068b4",
+      "name": "TSocketConnection_bindSocket_int_bool",
+      "role": "Native bind and listen",
+      "evidence": "Creates AF_INET TCP or UDP sockets, binds a zeroed sockaddr with the requested port, and calls listen with backlog 10 for TCP."
+    },
+    {
+      "address": "0xe0680",
+      "name": "TSocket_clearStaticStrings",
+      "role": "Policy-string cleanup",
+      "evidence": "Clears the process-global bind and outbound policy TString objects."
+    },
+    {
+      "address": "0x204678",
+      "name": "TSocket_setAllowedPortsBind",
+      "role": "Script bind-policy setter",
+      "evidence": "Assigns the supplied TString to data_TSocket_allowedportsbind."
+    },
+    {
+      "address": "0x204688",
+      "name": "TSocket_setAllowedSocketsConnect",
+      "role": "Script outbound-policy setter",
+      "evidence": "Assigns the supplied TString to data_TSocket_allowedsocketsconnect."
+    },
+    {
+      "address": "0x2025a0",
+      "name": "THTTPRequest_runScript_void",
+      "role": "HTTP completion and selected-download limit",
+      "evidence": "Uses the selected web-download limit after response parsing and participates in the ten-attempt redirect state machine."
+    }
+  ],
+  "instruction_evidence": [
+    {
+      "address": "0x207a2c",
+      "instruction": "MOV W21, #0",
+      "meaning": "Initializes the outbound allowlist entry index"
+    },
+    {
+      "address": "0x207a48",
+      "instruction": "MOV W1, W26",
+      "meaning": "Converts the requested outbound port for exact comparison"
+    },
+    {
+      "address": "0x207ad4",
+      "instruction": "CMP W21, W28",
+      "meaning": "Compares the outbound entry index with the parsed range end"
+    },
+    {
+      "address": "0x207ae0",
+      "instruction": "CMP W21, W0",
+      "meaning": "Compares the outbound entry index with the parsed range start"
+    },
+    {
+      "address": "0x205818",
+      "instruction": "MOV W20, #0",
+      "meaning": "Initializes the bind allowlist entry index"
+    },
+    {
+      "address": "0x20589c",
+      "instruction": "Builds a TString from W26",
+      "meaning": "Converts the requested bind port for exact comparison"
+    },
+    {
+      "address": "0x20591c",
+      "instruction": "CMP W20, W22",
+      "meaning": "Compares the bind entry index with the parsed range end"
+    },
+    {
+      "address": "0x205924",
+      "instruction": "CMP W20, W27",
+      "meaning": "Compares the bind entry index with the parsed range start"
+    },
+    {
+      "address": "0x206924",
+      "instruction": "Zeros the sockaddr address field",
+      "meaning": "The native bind address is IPv4 wildcard address 0.0.0.0"
+    },
+    {
+      "address": "0x2069f0",
+      "instruction": "listen(fd, 10)",
+      "meaning": "TCP listener backlog"
+    }
+  ],
+  "observations": [
+    {
+      "id": "SOCKET-POLICY-003",
+      "severity": "medium",
+      "confidence": "confirmed-static",
+      "title": "Configured socket port ranges compare the allowlist index instead of the requested port",
+      "evidence": [
+        "The outbound range branch uses W21, initialized as the list index, at 0x207ad4 and 0x207ae0 instead of requested port W26.",
+        "The bind range branch uses W20, initialized as the list index, at 0x20591c and 0x205924 instead of requested bind port W26.",
+        "Exact decimal port entries use the requested port and are not covered by this specific defect."
+      ],
+      "impact": "A configured range can deny its intended port or allow an unintended port when the entry index falls inside the range. A repair should compare the requested port and reject malformed ranges before use.",
+      "limits": "No untrusted production script was run and no live network or listener was opened."
+    },
+    {
+      "id": "SOCKET-POLICY-004",
+      "severity": "medium",
+      "confidence": "confirmed-static-conditional",
+      "title": "An activated script can request a wildcard-address listener when policy permits",
+      "evidence": [
+        "The script property table exposes bind, connect, send, and sendudp.",
+        "The bind path reaches TSocketConnection_bindSocket after its configurable policy gate.",
+        "The native sockaddr address is zeroed before the requested port is written, and TCP uses listen backlog 10."
+      ],
+      "impact": "A signed or otherwise activated script with a permissive policy may expose a local TCP or UDP service beyond loopback. A repair should disable listener creation for untrusted content and require an explicit approved-address policy.",
+      "limits": "Stock startup did not invoke bind in the reviewed local replay, and no external connection was observed."
+    },
+    {
+      "id": "HTTP-LIMIT-002",
+      "severity": "informational",
+      "confidence": "confirmed-static",
+      "title": "Selected web downloads are limited to 100 MiB and the HTTP pool defaults to ten requests",
+      "evidence": [
+        "The selected-download global at 0x385ad4 is 0x6400000.",
+        "The request-pool global at 0x385ad8 is 0xa.",
+        "The selected-download guard occurs after response parsing and is not a general response-buffer, header, or unknown-length cap."
+      ],
+      "impact": "These defaults provide useful operating limits but do not replace independent HTTP framing and aggregate-memory limits.",
+      "limits": "No malformed response was fuzzed and no live endpoint was contacted."
+    }
+  ],
+  "interpretation": [
+    "Exact host and port entries are a real pre-socket gate for script outbound connections.",
+    "Slash-separated port ranges are not reliable because both range branches use the allowlist entry index.",
+    "The script listener surface is conditional and remains behind package activation in the stock workflow.",
+    "The 100 MiB selected-download guard and ten-request pool default are useful operating limits, not substitutes for a general HTTP framing budget."
+  ]
+}

@@ -1800,6 +1800,44 @@ the repository or contact a network service. The safe translation workflow is
 to find the exact 2.2 name first, verify its size and bytes, then check its
 callers and data references before applying an IDA name or patch.
 
+## Native socket policy and HTTP defaults
+
+The next IDA pass followed the script-visible `TSocket` property table instead
+of assuming that the imported socket calls were unreachable. The outbound
+`TSocket.connect` callback at `0x204ec8` calls
+`TSocket_checkAllowConnect` before allocating a native connection. The matcher
+at `0x2079ac` accepts a policy string equal to `*`, or a comma-separated list
+of exact or pattern-matched hosts with exact decimal ports or slash-separated
+port ranges. An entry with no colon uses a wildcard host pattern.
+
+The range path contains a concrete register mistake. The loop index is set to
+zero in `W21` at `0x207a2c`, then incremented for each list entry. The range
+comparisons at `0x207ad4` and `0x207ae0` use `W21`, while the requested port is
+in `W26` and is only used for the exact decimal comparison at `0x207a48`. The
+bind matcher at `0x2057a0` repeats the error: `W20` is the list index, and the
+range comparisons at `0x20591c` and `0x205924` use it instead of requested
+bind port `W26`. This means a configured range can reject its intended port or
+allow an unintended port when the entry index falls inside the range. The
+result is confirmed statically, but no untrusted production script was run.
+
+The related bind path at `0x205948` reaches
+`TSocketConnection_bindSocket_int_bool` at `0x2068b4` after the policy gate.
+The native helper zeros the IPv4 address before writing the port, so an allowed
+listener is wildcard-bound rather than statically limited to loopback. TCP
+uses a listen backlog of ten, while the alternate flag selects a UDP socket.
+The stock connector replay did not invoke this branch. The static capability
+remains conditional on a signed and activated script package.
+
+The same pass recovered two HTTP defaults from the active IDA database:
+`data_THTTPRequest_webdownloadsizelimit` at `0x385ad4` is
+`0x6400000`, or 104857600 bytes (100 MiB), and
+`data_THTTPRequest_maxconnections` at `0x385ad8` is `0xa`, or ten concurrent
+requests. The former is checked only on selected download completion paths
+after response parsing. It does not cap ordinary responses, unknown-length
+responses, header lines, or the accumulated HTTP stream. The complete static
+record is `artifacts/original_socket_policy_review_20260902.json`. The
+rerunnable IDA exporter is `tools/ida_export_original_socket_policy_review.py`.
+
 The next step made that workflow searchable rather than implicit. The
 metadata-only `artifacts/cross_version_translation_candidates_20260902.json`
 contains all 835 exact-name rows, including both symbol values, per-function

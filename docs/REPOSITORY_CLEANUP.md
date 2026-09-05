@@ -8,8 +8,10 @@ small protocol observations rather than raw application payloads.
 ## Current tree
 
 The cleanup audit on 2026-09-02 found 245 tracked files and about 18.1 MiB in
-the current checkout. There are 100 JSON records containing 433,571 lines. No
-APK, ELF library, IDA database, signing key, or packet capture is tracked. The
+the then-current checkout. There were 100 JSON records containing 433,571
+lines. The later socket-policy review adds one compact JSON record and one
+rerunnable IDA exporter. No APK, ELF library, IDA database, signing key, or
+packet capture is tracked. The
 source tree contains no retired comparison-package filename or reference.
 
 The ignore policy now covers the common IDA database sidecars as well as APK,
@@ -28,9 +30,10 @@ changes commit IDs for every downstream clone.
 A refreshed local history preview was built without changing the public
 branch. The preview retained the useful research commits, removed the obsolete
 comparison content from reachable history and messages, passed a full object
-check, and reduced the history to 83 commits. It includes the current tree
-through cleanup commit `be83606`. It remains a staging result until the
-repository owner explicitly authorizes replacing public `main`.
+check, and reduced the history to 83 commits. It includes the tree through
+cleanup commit `be83606`, not later focused research commits. It remains a
+staging result until the repository owner explicitly authorizes replacing
+public `main`.
 
 ## Review rules
 

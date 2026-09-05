@@ -670,10 +670,19 @@ The import scan confirms the following native boundary:
 * `TSocketConnection_bindSocket_int_bool` at `0x2068b4` creates and configures
   a socket, then calls `bind` at `0x206940` and `listen` at `0x2069f0`.
   `TSocketConnection_acceptSocket_void` calls `accept` at `0x206e60`.
-* The native constructor at `0xe0ab4` clears the allowed-port and
-  allowed-outbound-socket string state. The script callbacks at `0x204678`
-  and `0x204688` replace those values. The exact matching rules and whether a
-  stock activated script invokes them still need a controlled loopback test.
+* The static cleanup helper `TSocket_clearStaticStrings` at `0xe0680` clears
+  the allowed-port and allowed-outbound-socket string state. The script
+  callbacks at `0x204678` and `0x204688` replace those values. The matcher
+  accepts `*`, comma-separated entries, exact host names or native patterns,
+  exact decimal ports, and slash-separated port ranges.
+* The range syntax has a confirmed implementation defect. The outbound
+  matcher at `0x2079ac` compares the range against its comma-separated entry
+  index in `W21`, not the requested port in `W26`. The bind matcher at
+  `0x2057a0` makes the same mistake with entry index `W20`. Exact port entries
+  still use the requested port, so this defect is specific to ranges. A
+  configured range can therefore deny the intended port or allow an unintended
+  one when the entry index happens to fall inside the range. The full static
+  record is `artifacts/original_socket_policy_review_20260902.json`.
 * The ordinary connector uses the separate nonblocking TCP path. The UDP
   branch reaches `sendto` at `0x2071f0` and `recvfrom` at `0x207730`, with the
   receive path recording sender metadata. No live destination was identified
@@ -681,12 +690,15 @@ The import scan confirms the following native boundary:
 
 This makes `SOCKET-001` a medium-severity conditional capability finding. An
 activated script that can set permissive values and invoke the bind operation
-may be able to create a local listener, but the static review does not show
-that the stock connector starts one, does not establish whether the listener
-is loopback-only, and did not observe an external connection. `SOCKET-002` is a
-lower-severity conditional UDP capability finding for the matching datagram
-send and receive path. The signed script package remains a key reachability
-gate for both.
+may be able to create a local listener. `TSocketConnection_bindSocket_int_bool`
+zeros the IPv4 address before writing the port, so the resulting TCP or UDP
+bind is a wildcard-address bind rather than a statically loopback-only bind.
+The static review does not show that the stock connector starts one, and no
+external connection was observed. `SOCKET-002` is a lower-severity conditional
+UDP capability finding for the matching datagram send and receive path. The
+signed script package remains a key reachability gate for both. The precise
+range bug and its evidence are tracked separately as `SOCKET-POLICY-003` in
+the new socket-policy artifact.
 
 The scanner also corrected a completeness issue in the older libc review:
 `TFiles_deleteFile_TString_const` reaches `unlink` through two unconditional
@@ -757,6 +769,15 @@ EOF cases, no malformed response was fuzzed, and no live endpoint was
 contacted. A repair should reject unsupported transfer codings, enforce
 header, line, body, and aggregate-memory limits, and reject conflicting or
 overflowed length values before appending or dispatching data.
+
+The selected-transfer default is `data_THTTPRequest_webdownloadsizelimit` at
+`0x385ad4`, initialized to `0x6400000`, or 104857600 bytes (100 MiB). The
+request-pool default is `data_THTTPRequest_maxconnections` at `0x385ad8`,
+initialized to `0xa`, or ten concurrent HTTP requests. These values are useful
+operational limits, but the selected-transfer check still occurs after header
+parsing and does not cap every ordinary response or the accumulated stream.
+The values and their callsites are preserved in
+`artifacts/original_socket_policy_review_20260902.json`.
 
 ## Downloaded image resources and native decoders
 

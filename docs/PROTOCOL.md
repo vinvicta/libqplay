@@ -283,6 +283,14 @@ web-download limit protects selected large transfers after headers have been
 parsed, but it is not a general header, unknown-length, or aggregate-memory
 limit.
 
+The selected-transfer default is `data_THTTPRequest_webdownloadsizelimit` at
+`0x385ad4`, initialized to `0x6400000`, or 104857600 bytes (100 MiB). The
+HTTP pool default is `data_THTTPRequest_maxconnections` at `0x385ad8`,
+initialized to `0xa`, or ten concurrent requests. These bounds apply to
+specific download and scheduling paths, not to every response stream. The
+exact values and their IDA callsites are in
+`artifacts/original_socket_policy_review_20260902.json`.
+
 These are static compatibility and availability findings. The original client
 uses HTTP/1.0 and the local responder used Content-Length or EOF, so no current
 server framing behavior is claimed. A compatible repair should either decode
@@ -461,6 +469,23 @@ The socket uses an asynchronous IPv4 TCP path:
 resolves the host with `gethostbyname`, and calls `connect`. `EINTR` retries the
 call, `EINPROGRESS` leaves status 4, immediate success reaches status 5, and
 other errors close the descriptor and record `connect call failed`.
+
+The script-facing `TSocket.connect` call is checked by
+`IsHostAndPortInList_TString_const_TString_const_int` before the native socket
+is allocated. Its policy string accepts `*`, comma-separated entries, exact or
+pattern-matched hosts, exact decimal ports, and slash-separated inclusive
+ranges. Exact entries compare the requested port correctly. The range branch
+does not: at `0x207ad4` and `0x207ae0` it compares the outbound allowlist entry
+index with the parsed bounds. The bind-side matcher at `0x20591c` and
+`0x205924` makes the same index-versus-port mistake. A repair must compare the
+requested port and reject malformed ranges before opening or binding a socket.
+
+The related script-facing bind path reaches `TSocketConnection_bindSocket`.
+It zeros the IPv4 address before writing the port, so an allowed TCP or UDP
+listener is a wildcard-address bind rather than a statically loopback-only
+listener. The stock connector replay did not invoke this branch, and no live
+endpoint or external listener was used. The full static review is
+`artifacts/original_socket_policy_review_20260902.json`.
 
 `TSocketConnection_checkConnecting` is called from the read path. For status 4
 it performs a zero-timeout `select` on the write set and then reads
