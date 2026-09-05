@@ -150,6 +150,13 @@ The stripped comparison library also has a complete searchable table of its
 hash and name-family counts. These are dynamic anchors only, not recovered
 local symbols or proof of stock 2.2 behavior.
 
+The broader `libqplay_2.2_dynamic_symbols.csv` table records all 6,773 ELF
+dynamic entries, including defined objects, imports, section markers, symbol
+versions, and a mechanical `c++filt` rendering where applicable. Its summary
+and rerunnable exporter are
+`symbols/libqplay_2.2_dynamic_symbols.summary.json` and
+`tools/generate_two_two_dynamic_symbol_table.py`.
+
 The Android lifecycle review adds an important first diagnostic checkpoint.
 The connector is downstream of the GL surface, window focus, runtime
 permission completion, and the first render frame. A compatibility dialog or

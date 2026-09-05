@@ -7,11 +7,11 @@ small protocol observations rather than raw application payloads.
 
 ## Current tree
 
-The cleanup audit on 2026-09-02 found 245 tracked files and about 18.1 MiB in
-the then-current checkout. There were 100 JSON records containing 433,571
-lines. The later socket-policy review adds one compact JSON record and one
-rerunnable IDA exporter. No APK, ELF library, IDA database, signing key, or
-packet capture is tracked. The
+The cleanup audit refreshed on 2026-09-04 found 251 tracked files and about
+18.4 MiB in the current checkout. There are 102 JSON records containing
+433,837 lines. The current tree also includes compact CSV indexes for the
+translated 1.8 symbols and the retained 2.2 dynamic symbols. No APK, ELF
+library, IDA database, signing key, or packet capture is tracked. The
 source tree contains no retired comparison-package filename or reference.
 
 The ignore policy now covers the common IDA database sidecars as well as APK,

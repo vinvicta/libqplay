@@ -134,6 +134,14 @@ defined `FUNC` names, values, sizes, and conservative family labels from the
 unverified comparison library. It is a searchable anchor table, not a claim
 that stripped local symbols were recovered.
 
+For a complete ELF-level view, use
+`symbols/libqplay_2.2_dynamic_symbols.csv`. It retains all 6,773 dynamic-table
+entries, including imports, objects, section records, symbol-version suffixes,
+and a mechanical `c++filt` rendering. The corresponding summary and generator
+are `symbols/libqplay_2.2_dynamic_symbols.summary.json` and
+`tools/generate_two_two_dynamic_symbol_table.py`. Obfuscated application names
+remain obfuscated because no semantic source names survive in this table.
+
 ## Repeating the pass
 
 Run the IDAPython script from IDA's Python console or with the IDA batch
