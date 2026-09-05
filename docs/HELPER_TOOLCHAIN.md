@@ -377,6 +377,23 @@ against the public key embedded in the APK. The earlier stale-package result
 was caused by the wrong high-level verifier, not by this fixture's signing
 key.
 
+## Linux utility recheck
+
+On 2026-09-04, the same pinned `contool.c` source was rebuilt in the current
+Linux environment. The source SHA-256 was
+`88deda939a9c8c9837b6fda42ed4a2dbdacb57c9e5fb28eca44e2fc2652ed474`, and the
+temporary executable SHA-256 was
+`3d70b8f597383bc39a9b89baceff4d7ac5f3187421f2e3b448d6e952f4249875`.
+
+The recheck used only local files. `conn-extract` reproduced the archived
+15,857-byte connector ZIP with SHA-256
+`fc937afa039dff52ff4ae7f2e3ad809d75c19f5698875d862e5646644446b2b5`.
+The `z-compress` and `z-decompress` pair, the DES encrypt/decrypt pair, and
+the resource-name encrypt/decrypt pair each returned the original input byte
+for byte. The `connector` command also produced a deterministic escaped
+query for a synthetic local parameter string. The utility's optional `fetch`
+command was not invoked, so this recheck contacted no network service.
+
 The optional `conpack_wsl.c` creator initially stopped at the missing
 `wolfssl/wolfcrypt/rsa.h` header. Cloning the wolfSSL source at commit
 `cb138b22a2e9111e5ac9fb9e13a690762c86b884` supplied the required headers and
