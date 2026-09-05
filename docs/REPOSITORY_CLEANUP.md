@@ -7,11 +7,12 @@ small protocol observations rather than raw application payloads.
 
 ## Current tree
 
-The cleanup audit refreshed on 2026-09-04 found 251 tracked files and about
-18.4 MiB in the current checkout. There are 102 JSON records containing
-433,837 lines. The current tree also includes compact CSV indexes for the
-translated 1.8 symbols and the retained 2.2 dynamic symbols. No APK, ELF
-library, IDA database, signing key, or packet capture is tracked. The
+The cleanup audit refreshed on 2026-09-04 found 259 tracked files and about
+20.4 MiB in the current checkout. There are 105 JSON records containing
+469,936 lines. The current tree also includes compact CSV indexes for the
+translated 1.8 symbols, the retained 2.2 dynamic symbols, and the exact-byte
+cross-version candidates. No APK, ELF library, IDA database, signing key, or
+packet capture is tracked. The
 source tree contains no retired comparison-package filename or reference.
 
 The ignore policy now covers the common IDA database sidecars as well as APK,
