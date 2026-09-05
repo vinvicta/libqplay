@@ -28,13 +28,15 @@ from public `main` requires rebuilding the branch and force-pushing it. That
 operation is intentionally separate from ordinary research commits because it
 changes commit IDs for every downstream clone.
 
-A refreshed local history preview was built without changing the public
-branch. The preview retained the useful research commits, removed the obsolete
-comparison content from reachable history and messages, passed a full object
-check, and reduced the history to 83 commits. It includes the tree through
-cleanup commit `be83606`, not later focused research commits. It remains a
-staging result until the repository owner explicitly authorizes replacing
-public `main`.
+A refreshed local history preview was built from the current `main` without
+changing the public branch. Commit `f204393` is the first clean tree in the
+existing line of development. The preview made that tree the new root and
+retained its 95 descendants, for 96 research commits in total. Reachable tree,
+commit-message, and path scans found no retired comparison-package material.
+The preview also removed its remote-tracking refs before packing, so the old
+history was not retained by an in-preview branch or tag. It remains a staging
+result until the repository owner explicitly authorizes replacing public
+`main`, because that replacement changes commit IDs for every later commit.
 
 ## Review rules
 
