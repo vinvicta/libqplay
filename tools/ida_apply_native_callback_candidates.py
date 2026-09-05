@@ -29,8 +29,11 @@ OUTPUT_PATH = str(REPO.parent / "analysis/native_callback_candidate_apply.json")
 def load_candidates():
     with open(CANDIDATE_PATH, "r", encoding="utf-8") as handle:
         document = json.load(handle)
-    if document.get("status") != "candidates_not_yet_applied_to_ida":
-        raise RuntimeError("candidate artifact status is not an unapplied plan")
+    if document.get("status") not in {
+        "candidates_not_yet_applied_to_ida",
+        "candidates_applied_to_verified_ida_v14",
+    }:
+        raise RuntimeError("candidate artifact status is not a recognized plan")
     groups = (
         "callbacks",
         "static_initializers",

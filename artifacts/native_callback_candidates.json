@@ -4,8 +4,8 @@
     "libqplay_sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8",
     "idb": "GraalOnline+Classic_1.8_APKPure/lib/arm64-v8a/libqplay.so.i64"
   },
-  "status": "candidates_not_yet_applied_to_ida",
-  "purpose": "High-confidence names recovered from native callback tables, compiler-generated initialization helpers, and adjacent sound wrappers. These entries are deliberately separate from ida_semantic_labels.json until the IDA database is updated.",
+  "status": "candidates_applied_to_verified_ida_v14",
+  "purpose": "High-confidence names recovered from native callback tables, compiler-generated initialization helpers, and adjacent sound wrappers. The evidence remains separate from ida_semantic_labels.json, and the application result is recorded below.",
   "source": [
     "TStream_fillZipFunctions_zlib_filefunc_def_s at 0xf0e98",
     "ARM64 disassembly of the callback bodies and nearby static initialization code",
@@ -2336,5 +2336,13 @@
       ]
     }
   ],
-  "network_contacted": false
+  "network_contacted": false,
+  "application": {
+    "boundaries_added": 5,
+    "comments_added": 277,
+    "failure_count": 0,
+    "renamed_count": 277,
+    "status": "applied_to_verified_private_v14_copy",
+    "verification": "artifacts/ida_translation_verification_20260902.json"
+  }
 }

@@ -43,6 +43,14 @@ The supporting records are
 `artifacts/static_library_role_audit_20260826.json`, and
 `artifacts/static_library_role_audit_20260901.json`.
 
+The two candidate-plan artifacts retain their original address-level evidence
+and now also record the application result. The native callback plan applied
+277 names and added five missing boundaries; the application and engine plan
+applied 28 names. Both had zero recorded failures in the private v14 copy and
+are included in the final verifier. The IDA helper scripts accept both a new
+candidate plan and one already applied to that verified copy, so the evidence
+can still be reviewed against a fresh matching IDB.
+
 The three former GPC residuals were reviewed separately because they were not
 covered by the bundled-library alias artifact. `0xe01a0` is the tristrip
 allocation-failure abort, `0x152200` is the scanbeam-tree cleanup helper, and

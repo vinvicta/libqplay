@@ -414,5 +414,12 @@
     "function_inventory": "symbols/libqplay.function_inventory.json",
     "unresolved_profile": "artifacts/unresolved_function_profile.json"
   },
-  "status": "candidates_not_yet_applied_to_ida"
+  "application": {
+    "comments_added": 28,
+    "failure_count": 0,
+    "renamed_count": 28,
+    "status": "applied_to_verified_private_v14_copy",
+    "verification": "artifacts/ida_translation_verification_20260902.json"
+  },
+  "status": "candidates_applied_to_verified_ida_v14"
 }

@@ -29,6 +29,9 @@ request and response integrity export is in
 The Android startup and pause boundary is recorded in
 `artifacts/original_android_lifecycle_review_20260830.json` and is generated
 by `tools/ida_export_original_android_lifecycle_review.py`.
+The method-level DEX callsite map is in
+`artifacts/original_dex_method_surface_review_20260904.json` and is generated
+by `tools/audit_dex_method_surface.py`.
 
 ## Executive assessment
 
@@ -565,6 +568,27 @@ below.
 No `DexClassLoader`, `load_dex`, or repository-specific `java_reflection`
 indicator was found in the original DEX, so dynamic code loading was not
 established by this static pass.
+
+The follow-up method-level DEX pass resolves the call instructions behind
+these string and smali findings. It found 10 WebView call instructions across
+seven callers, including the four application-owned paths: JavaScript is
+enabled in `QPlayActivity$27`, native HTML is loaded in `QPlayActivity$31`, a
+URL is loaded in `QPlayActivity$32`, and
+`InsideWebViewClient.shouldOverrideUrlLoading` reloads the supplied URL. The
+only resolved `addJavascriptInterface` caller is
+`bolts.WebViewAppLinkResolver.2`, so the game activity and the Bolts metadata
+bridge should not be conflated. The application-owned renderer also makes
+three intent reads while processing the incoming URI before calling
+`Natives.QPlayMain`.
+
+The same parser found 18 declared native methods and 21 direct call
+instructions into 14 of them. This confirms the Java-to-native startup and
+lifecycle edges without treating the four uncited native exports as live
+callers. The complete DEX contains 1,889 class definitions and 13,426 defined
+methods; all 11,952 methods with code were parsed without a bounds error. The
+callsite counts include bundled Android support, Facebook, Bolts, and billing
+code, so they are an inventory of reachable code references, not a claim that
+an external page or URI can drive every path at runtime.
 
 The safe maintenance direction is to remove the bridge from untrusted pages,
 use an explicit URL allowlist, validate every message as structured data, and

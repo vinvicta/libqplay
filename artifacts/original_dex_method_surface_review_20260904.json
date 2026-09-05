@@ -1,0 +1,1449 @@
+{
+  "analysis_date": "2026-09-04",
+  "analysis_scope": "offline DEX index, class-data, and code-item method-reference inventory for the original APK",
+  "code_parse_errors": [],
+  "dex": {
+    "class_count": 1889,
+    "code_parse_error_count": 0,
+    "defined_method_count": 13426,
+    "field_count": 6729,
+    "magic": "dex\n035\u0000",
+    "method_reference_count": 17111,
+    "methods_with_code": 11952,
+    "name": "classes.dex",
+    "native_method_count": 18,
+    "native_methods_with_direct_calls": 14,
+    "native_methods_without_direct_calls": 4,
+    "proto_count": 3918,
+    "sha256": "58cf65ea6f1c473887164630e2091a7fcbe78f3f72720a6b076cfa6750ae4ffc",
+    "size": 1847252,
+    "string_count": 16825,
+    "top_class_prefixes": [
+      {
+        "class_count": 222,
+        "prefix": "android.support.v4.app"
+      },
+      {
+        "class_count": 221,
+        "prefix": "android.support.v4.view"
+      },
+      {
+        "class_count": 160,
+        "prefix": "android.support.v4.widget"
+      },
+      {
+        "class_count": 157,
+        "prefix": "com.facebook"
+      },
+      {
+        "class_count": 128,
+        "prefix": "android.support.v4.media"
+      },
+      {
+        "class_count": 116,
+        "prefix": "com.facebook.widget"
+      },
+      {
+        "class_count": 101,
+        "prefix": "com.facebook.internal"
+      },
+      {
+        "class_count": 87,
+        "prefix": "android.support.v4.media.session"
+      },
+      {
+        "class_count": 75,
+        "prefix": "android.support.v4.view.accessibility"
+      },
+      {
+        "class_count": 68,
+        "prefix": "com.quattroplay.GraalClassic"
+      },
+      {
+        "class_count": 55,
+        "prefix": "android.support.v4.content"
+      },
+      {
+        "class_count": 48,
+        "prefix": "org.onepf.oms"
+      },
+      {
+        "class_count": 37,
+        "prefix": "bolts"
+      },
+      {
+        "class_count": 33,
+        "prefix": "android.support.v4.graphics.drawable"
+      },
+      {
+        "class_count": 27,
+        "prefix": "com.facebook.android"
+      },
+      {
+        "class_count": 25,
+        "prefix": "android.support.v4.os"
+      },
+      {
+        "class_count": 25,
+        "prefix": "android.support.v4.text"
+      },
+      {
+        "class_count": 24,
+        "prefix": "android.support.v4.util"
+      },
+      {
+        "class_count": 24,
+        "prefix": "org.intellij.lang.annotations"
+      },
+      {
+        "class_count": 24,
+        "prefix": "org.onepf.oms.appstore"
+      }
+    ],
+    "type_count": 2629
+  },
+  "execution_performed": false,
+  "input": {
+    "name": "GraalOnline+Classic_1.8_APKPure.apk",
+    "path": "private local APK, not committed",
+    "sha256": "6d6c0428fe890d0f18fb1ce572798d7a8a95853b10078f693026164d6a5f56d7",
+    "size": 25104728
+  },
+  "native_call_sites": [
+    {
+      "caller": "com.quattroplay.GraalClassic.GLThread->guardedRun()V",
+      "caller_group": "application",
+      "target": "com.quattroplay.GraalClassic.Natives->onSizeChanged(II)V"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.GLView$1->run()V",
+      "caller_group": "application",
+      "target": "com.quattroplay.GraalClassic.Natives->onAccelerator(III)V"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayActivity$11->run()V",
+      "caller_group": "application",
+      "target": "com.quattroplay.GraalClassic.Natives->onMouseEvent(IIII)V"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayActivity$12->run()V",
+      "caller_group": "application",
+      "target": "com.quattroplay.GraalClassic.Natives->onKeyEvent(IIIII)V"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayActivity$13->run()V",
+      "caller_group": "application",
+      "target": "com.quattroplay.GraalClassic.Natives->onInvokeEvent(Ljava/lang/String;Ljava/lang/String;)V"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayActivity$14->run()V",
+      "caller_group": "application",
+      "target": "com.quattroplay.GraalClassic.Natives->onKeyEvent(IIIII)V"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayActivity$15$1->run()V",
+      "caller_group": "application",
+      "target": "com.quattroplay.GraalClassic.Natives->onTextEntered(ZLjava/lang/String;)V"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayActivity$17->run()V",
+      "caller_group": "application",
+      "target": "com.quattroplay.GraalClassic.Natives->onTextEntered(ZLjava/lang/String;)V"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayActivity$19$1->run()V",
+      "caller_group": "application",
+      "target": "com.quattroplay.GraalClassic.Natives->onGooglePlayInitialized(Z)V"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayActivity$23->run()V",
+      "caller_group": "application",
+      "target": "com.quattroplay.GraalClassic.Natives->onGooglePlayPurchase(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayActivity$24$1->run()V",
+      "caller_group": "application",
+      "target": "com.quattroplay.GraalClassic.Natives->onInvokeEvent(Ljava/lang/String;Ljava/lang/String;)V"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayActivity$24$2->run()V",
+      "caller_group": "application",
+      "target": "com.quattroplay.GraalClassic.Natives->onInvokeEvent(Ljava/lang/String;Ljava/lang/String;)V"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayActivity$25$1$1->run()V",
+      "caller_group": "application",
+      "target": "com.quattroplay.GraalClassic.Natives->onInvokeEvent(Ljava/lang/String;Ljava/lang/String;)V"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayActivity$26$1$1->run()V",
+      "caller_group": "application",
+      "target": "com.quattroplay.GraalClassic.Natives->onInvokeEvent(Ljava/lang/String;Ljava/lang/String;)V"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayActivity$6->run()V",
+      "caller_group": "application",
+      "target": "com.quattroplay.GraalClassic.Natives->onAppPause()V"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayActivity$7->run()V",
+      "caller_group": "application",
+      "target": "com.quattroplay.GraalClassic.Natives->onAppLeaveBackground()V"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayActivity$8->run()V",
+      "caller_group": "application",
+      "target": "com.quattroplay.GraalClassic.Natives->onAppEnterBackground()V"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayActivity$9->run()V",
+      "caller_group": "application",
+      "target": "com.quattroplay.GraalClassic.Natives->onAccelerator(III)V"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayRenderer->loadLibrary()V",
+      "caller_group": "application",
+      "target": "com.quattroplay.GraalClassic.Natives->QPlayMain(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IIIFFFLjava/lang/String;)I"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayRenderer->runLibrary(Ljavax/microedition/khronos/opengles/GL10;)Z",
+      "caller_group": "application",
+      "target": "com.quattroplay.GraalClassic.Natives->QPlayLoop()I"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayRenderer->surfaceCreated(Ljavax/microedition/khronos/opengles/GL10;)V",
+      "caller_group": "application",
+      "target": "com.quattroplay.GraalClassic.Natives->onReloadTextures()V"
+    }
+  ],
+  "native_methods": [
+    {
+      "access_flags": "0x109",
+      "method": "com.quattroplay.GraalClassic.Natives->QPlayLoop()I"
+    },
+    {
+      "access_flags": "0x109",
+      "method": "com.quattroplay.GraalClassic.Natives->QPlayMain(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IIIFFFLjava/lang/String;)I"
+    },
+    {
+      "access_flags": "0x109",
+      "method": "com.quattroplay.GraalClassic.Natives->onAccelerator(III)V"
+    },
+    {
+      "access_flags": "0x109",
+      "method": "com.quattroplay.GraalClassic.Natives->onAddScriptFunction(Ljava/lang/String;)V"
+    },
+    {
+      "access_flags": "0x109",
+      "method": "com.quattroplay.GraalClassic.Natives->onAppEnterBackground()V"
+    },
+    {
+      "access_flags": "0x109",
+      "method": "com.quattroplay.GraalClassic.Natives->onAppLeaveBackground()V"
+    },
+    {
+      "access_flags": "0x109",
+      "method": "com.quattroplay.GraalClassic.Natives->onAppPause()V"
+    },
+    {
+      "access_flags": "0x109",
+      "method": "com.quattroplay.GraalClassic.Natives->onGooglePlayInitialized(Z)V"
+    },
+    {
+      "access_flags": "0x109",
+      "method": "com.quattroplay.GraalClassic.Natives->onGooglePlayPurchase(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"
+    },
+    {
+      "access_flags": "0x109",
+      "method": "com.quattroplay.GraalClassic.Natives->onInvokeEvent(Ljava/lang/String;Ljava/lang/String;)V"
+    },
+    {
+      "access_flags": "0x109",
+      "method": "com.quattroplay.GraalClassic.Natives->onKeyEvent(IIIII)V"
+    },
+    {
+      "access_flags": "0x109",
+      "method": "com.quattroplay.GraalClassic.Natives->onMouseEvent(IIII)V"
+    },
+    {
+      "access_flags": "0x109",
+      "method": "com.quattroplay.GraalClassic.Natives->onRegisterEvent(Ljava/lang/String;)V"
+    },
+    {
+      "access_flags": "0x109",
+      "method": "com.quattroplay.GraalClassic.Natives->onReloadTextures()V"
+    },
+    {
+      "access_flags": "0x109",
+      "method": "com.quattroplay.GraalClassic.Natives->onSizeChanged(II)V"
+    },
+    {
+      "access_flags": "0x109",
+      "method": "com.quattroplay.GraalClassic.Natives->onTextEntered(ZLjava/lang/String;)V"
+    },
+    {
+      "access_flags": "0x109",
+      "method": "com.quattroplay.GraalClassic.Natives->onVideoFinished()V"
+    },
+    {
+      "access_flags": "0x109",
+      "method": "com.quattroplay.GraalClassic.Natives->onVideoLoaded()V"
+    }
+  ],
+  "native_methods_without_direct_calls": [
+    "com.quattroplay.GraalClassic.Natives->onAddScriptFunction(Ljava/lang/String;)V",
+    "com.quattroplay.GraalClassic.Natives->onRegisterEvent(Ljava/lang/String;)V",
+    "com.quattroplay.GraalClassic.Natives->onVideoFinished()V",
+    "com.quattroplay.GraalClassic.Natives->onVideoLoaded()V"
+  ],
+  "network_contacted": false,
+  "notes": [
+    "A call site means the decoded DEX method body contains an invoke instruction targeting the listed method reference. It does not prove runtime reachability.",
+    "The report records API names and bounded callers only. It does not include method bodies, APK payloads, credentials, or live responses.",
+    "The native methods identify Java-to-native boundaries that should be paired with the translated ARM64 symbol inventory."
+  ],
+  "schema": "libqplay.original-dex-method-surface-review.v1",
+  "sensitive_call_sites": [
+    {
+      "caller": "android.support.v4.app.ActivityCompatJB->startActivity(Landroid/content/Context;Landroid/content/Intent;Landroid/os/Bundle;)V",
+      "family": "activity_launch",
+      "target": "android.content.Context->startActivity(Landroid/content/Intent;Landroid/os/Bundle;)V"
+    },
+    {
+      "caller": "android.support.v4.app.FragmentHostCallback->onStartActivityFromFragment(Landroid/support/v4/app/Fragment;Landroid/content/Intent;ILandroid/os/Bundle;)V",
+      "family": "activity_launch",
+      "target": "android.content.Context->startActivity(Landroid/content/Intent;)V"
+    },
+    {
+      "caller": "android.support.v4.app.TaskStackBuilder->startActivities(Landroid/os/Bundle;)V",
+      "family": "activity_launch",
+      "target": "android.content.Context->startActivity(Landroid/content/Intent;)V"
+    },
+    {
+      "caller": "bolts.AppLinkNavigation->navigate(Landroid/content/Context;)Lbolts/AppLinkNavigation$NavigationResult;",
+      "family": "activity_launch",
+      "target": "android.content.Context->startActivity(Landroid/content/Intent;)V"
+    },
+    {
+      "caller": "com.facebook.widget.WebDialog$DialogWebViewClient->shouldOverrideUrlLoading(Landroid/webkit/WebView;Ljava/lang/String;)Z",
+      "family": "activity_launch",
+      "target": "android.content.Context->startActivity(Landroid/content/Intent;)V"
+    },
+    {
+      "caller": "android.support.v4.app.NotificationManagerCompat->getEnabledListenerPackages(Landroid/content/Context;)Ljava/util/Set;",
+      "family": "device_identifier",
+      "target": "android.provider.Settings$Secure->getString(Landroid/content/ContentResolver;Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "caller": "com.facebook.internal.Utility->getHashedDeviceAndAppID(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;",
+      "family": "device_identifier",
+      "target": "android.provider.Settings$Secure->getString(Landroid/content/ContentResolver;Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "caller": "android.support.v4.app.ActivityCompat->getReferrer(Landroid/app/Activity;)Landroid/net/Uri;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getStringExtra(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "caller": "android.support.v4.app.RemoteInputCompatJellybean->getResultsFromIntent(Landroid/content/Intent;)Landroid/os/Bundle;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getExtras()Landroid/os/Bundle;"
+    },
+    {
+      "caller": "android.support.v4.app.ShareCompat$IntentReader->getHtmlText()Ljava/lang/String;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getStringExtra(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "caller": "android.support.v4.app.ShareCompat$IntentReader->getSubject()Ljava/lang/String;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getStringExtra(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "caller": "android.support.v4.app.ShareCompat->getCallingPackage(Landroid/app/Activity;)Ljava/lang/String;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getStringExtra(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "caller": "android.support.v4.content.LocalBroadcastManager->sendBroadcast(Landroid/content/Intent;)Z",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getData()Landroid/net/Uri;"
+    },
+    {
+      "caller": "android.support.v4.content.LocalBroadcastManager->sendBroadcast(Landroid/content/Intent;)Z",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getScheme()Ljava/lang/String;"
+    },
+    {
+      "caller": "bolts.AppLinks->getTargetUrl(Landroid/content/Intent;)Landroid/net/Uri;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getData()Landroid/net/Uri;"
+    },
+    {
+      "caller": "bolts.MeasurementEvent->getApplinkLogData(Landroid/content/Context;Ljava/lang/String;Landroid/os/Bundle;Landroid/content/Intent;)Landroid/os/Bundle;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getData()Landroid/net/Uri;"
+    },
+    {
+      "caller": "bolts.MeasurementEvent->getApplinkLogData(Landroid/content/Context;Ljava/lang/String;Landroid/os/Bundle;Landroid/content/Intent;)Landroid/os/Bundle;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getData()Landroid/net/Uri;"
+    },
+    {
+      "caller": "bolts.MeasurementEvent->getApplinkLogData(Landroid/content/Context;Ljava/lang/String;Landroid/os/Bundle;Landroid/content/Intent;)Landroid/os/Bundle;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getData()Landroid/net/Uri;"
+    },
+    {
+      "caller": "bolts.MeasurementEvent->getApplinkLogData(Landroid/content/Context;Ljava/lang/String;Landroid/os/Bundle;Landroid/content/Intent;)Landroid/os/Bundle;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getData()Landroid/net/Uri;"
+    },
+    {
+      "caller": "bolts.MeasurementEvent->getApplinkLogData(Landroid/content/Context;Ljava/lang/String;Landroid/os/Bundle;Landroid/content/Intent;)Landroid/os/Bundle;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getScheme()Ljava/lang/String;"
+    },
+    {
+      "caller": "bolts.MeasurementEvent->getApplinkLogData(Landroid/content/Context;Ljava/lang/String;Landroid/os/Bundle;Landroid/content/Intent;)Landroid/os/Bundle;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getScheme()Ljava/lang/String;"
+    },
+    {
+      "caller": "bolts.MeasurementEvent->getApplinkLogData(Landroid/content/Context;Ljava/lang/String;Landroid/os/Bundle;Landroid/content/Intent;)Landroid/os/Bundle;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getScheme()Ljava/lang/String;"
+    },
+    {
+      "caller": "bolts.MeasurementEvent->getApplinkLogData(Landroid/content/Context;Ljava/lang/String;Landroid/os/Bundle;Landroid/content/Intent;)Landroid/os/Bundle;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getScheme()Ljava/lang/String;"
+    },
+    {
+      "caller": "bolts.MeasurementEvent->sendBroadcastEvent(Landroid/content/Context;Ljava/lang/String;Landroid/content/Intent;Ljava/util/Map;)V",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getData()Landroid/net/Uri;"
+    },
+    {
+      "caller": "bolts.MeasurementEvent->sendBroadcastEvent(Landroid/content/Context;Ljava/lang/String;Landroid/content/Intent;Ljava/util/Map;)V",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getExtras()Landroid/os/Bundle;"
+    },
+    {
+      "caller": "com.facebook.AccessToken->createFromNativeLinkingIntent(Landroid/content/Intent;)Lcom/facebook/AccessToken;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getExtras()Landroid/os/Bundle;"
+    },
+    {
+      "caller": "com.facebook.AccessToken->createFromNativeLinkingIntent(Landroid/content/Intent;)Lcom/facebook/AccessToken;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getExtras()Landroid/os/Bundle;"
+    },
+    {
+      "caller": "com.facebook.AppLinkData->createFromActivity(Landroid/app/Activity;)Lcom/facebook/AppLinkData;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getData()Landroid/net/Uri;"
+    },
+    {
+      "caller": "com.facebook.AppLinkData->createFromActivity(Landroid/app/Activity;)Lcom/facebook/AppLinkData;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getStringExtra(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "caller": "com.facebook.AppLinkData->createFromAlApplinkData(Landroid/content/Intent;)Lcom/facebook/AppLinkData;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getData()Landroid/net/Uri;"
+    },
+    {
+      "caller": "com.facebook.AuthorizationClient$KatanaProxyAuthHandler->handleResultOk(Landroid/content/Intent;)Lcom/facebook/AuthorizationClient$Result;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getExtras()Landroid/os/Bundle;"
+    },
+    {
+      "caller": "com.facebook.AuthorizationClient$KatanaProxyAuthHandler->onActivityResult(IILandroid/content/Intent;)Z",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getStringExtra(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "caller": "com.facebook.BoltsMeasurementEventListener->onReceive(Landroid/content/Context;Landroid/content/Intent;)V",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getStringExtra(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "caller": "com.facebook.FacebookBroadcastReceiver->onReceive(Landroid/content/Context;Landroid/content/Intent;)V",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getExtras()Landroid/os/Bundle;"
+    },
+    {
+      "caller": "com.facebook.FacebookBroadcastReceiver->onReceive(Landroid/content/Context;Landroid/content/Intent;)V",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getStringExtra(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "caller": "com.facebook.FacebookBroadcastReceiver->onReceive(Landroid/content/Context;Landroid/content/Intent;)V",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getStringExtra(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "caller": "com.facebook.UiLifecycleHelper->cancelPendingAppCall(Lcom/facebook/widget/FacebookDialog$Callback;)V",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getStringExtra(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "caller": "com.facebook.UiLifecycleHelper->cancelPendingAppCall(Lcom/facebook/widget/FacebookDialog$Callback;)V",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getStringExtra(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "caller": "com.facebook.internal.NativeProtocol->getCallIdFromIntent(Landroid/content/Intent;)Ljava/util/UUID;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getStringExtra(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "caller": "com.facebook.internal.NativeProtocol->getErrorDataFromResultIntent(Landroid/content/Intent;)Landroid/os/Bundle;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getExtras()Landroid/os/Bundle;"
+    },
+    {
+      "caller": "com.facebook.internal.NativeProtocol->getSuccessResultsFromIntent(Landroid/content/Intent;)Landroid/os/Bundle;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getExtras()Landroid/os/Bundle;"
+    },
+    {
+      "caller": "com.facebook.widget.FacebookDialog->getEventName(Landroid/content/Intent;)Ljava/lang/String;",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getStringExtra(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "caller": "com.facebook.widget.LikeView$LikeControllerBroadcastReceiver->onReceive(Landroid/content/Context;Landroid/content/Intent;)V",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getExtras()Landroid/os/Bundle;"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayRenderer->loadLibrary()V",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getData()Landroid/net/Uri;"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayRenderer->loadLibrary()V",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getData()Landroid/net/Uri;"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayRenderer->loadLibrary()V",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getScheme()Ljava/lang/String;"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.util.IabHelper->getResponseCodeFromIntent(Landroid/content/Intent;)I",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getExtras()Landroid/os/Bundle;"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.util.IabHelper->handleActivityResult(IILandroid/content/Intent;)Z",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getExtras()Landroid/os/Bundle;"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.util.IabHelper->handleActivityResult(IILandroid/content/Intent;)Z",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getExtras()Landroid/os/Bundle;"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.util.IabHelper->handleActivityResult(IILandroid/content/Intent;)Z",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getStringExtra(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.util.IabHelper->handleActivityResult(IILandroid/content/Intent;)Z",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getStringExtra(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "caller": "org.onepf.oms.appstore.SamsungAppsBillingService->handleActivityResult(IILandroid/content/Intent;)Z",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getExtras()Landroid/os/Bundle;"
+    },
+    {
+      "caller": "org.onepf.oms.appstore.googleUtils.IabHelper->getResponseCodeFromIntent(Landroid/content/Intent;)I",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getExtras()Landroid/os/Bundle;"
+    },
+    {
+      "caller": "org.onepf.oms.appstore.googleUtils.IabHelper->handleActivityResult(IILandroid/content/Intent;)Z",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getStringExtra(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "caller": "org.onepf.oms.appstore.googleUtils.IabHelper->handleActivityResult(IILandroid/content/Intent;)Z",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getStringExtra(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "caller": "org.onepf.oms.appstore.googleUtils.IabHelper->processPurchaseSuccess(Landroid/content/Intent;Ljava/lang/String;Ljava/lang/String;)V",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getExtras()Landroid/os/Bundle;"
+    },
+    {
+      "caller": "org.onepf.oms.appstore.googleUtils.IabHelper->processPurchaseSuccess(Landroid/content/Intent;Ljava/lang/String;Ljava/lang/String;)V",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getExtras()Landroid/os/Bundle;"
+    },
+    {
+      "caller": "org.onepf.oms.appstore.nokiaUtils.NokiaStoreHelper->handleActivityResult(IILandroid/content/Intent;)Z",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getStringExtra(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "caller": "org.onepf.oms.appstore.skubitUtils.SkubitIabHelper->getResponseCodeFromIntent(Landroid/content/Intent;)I",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getExtras()Landroid/os/Bundle;"
+    },
+    {
+      "caller": "org.onepf.oms.appstore.skubitUtils.SkubitIabHelper->handleActivityResult(IILandroid/content/Intent;)Z",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getStringExtra(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "caller": "org.onepf.oms.appstore.skubitUtils.SkubitIabHelper->handleActivityResult(IILandroid/content/Intent;)Z",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getStringExtra(Ljava/lang/String;)Ljava/lang/String;"
+    },
+    {
+      "caller": "org.onepf.oms.appstore.skubitUtils.SkubitIabHelper->processPurchaseSuccess(Landroid/content/Intent;Ljava/lang/String;Ljava/lang/String;)V",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getExtras()Landroid/os/Bundle;"
+    },
+    {
+      "caller": "org.onepf.oms.appstore.skubitUtils.SkubitIabHelper->processPurchaseSuccess(Landroid/content/Intent;Ljava/lang/String;Ljava/lang/String;)V",
+      "family": "intent_boundary",
+      "target": "android.content.Intent->getExtras()Landroid/os/Bundle;"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayRenderer->loadLibrary()V",
+      "family": "native_loading",
+      "target": "java.lang.System->loadLibrary(Ljava/lang/String;)V"
+    },
+    {
+      "caller": "bolts.WebViewAppLinkResolver$3->call()Ljava/lang/Void;",
+      "family": "network",
+      "target": "java.net.URL-><init>(Ljava/lang/String;)V"
+    },
+    {
+      "caller": "bolts.WebViewAppLinkResolver$3->call()Ljava/lang/Void;",
+      "family": "network",
+      "target": "java.net.URL-><init>(Ljava/lang/String;)V"
+    },
+    {
+      "caller": "bolts.WebViewAppLinkResolver$3->call()Ljava/lang/Void;",
+      "family": "network",
+      "target": "java.net.URL->openConnection()Ljava/net/URLConnection;"
+    },
+    {
+      "caller": "bolts.WebViewAppLinkResolver$3->call()Ljava/lang/Void;",
+      "family": "network",
+      "target": "java.net.URLConnection->connect()V"
+    },
+    {
+      "caller": "bolts.WebViewAppLinkResolver->readFromConnection(Ljava/net/URLConnection;)Ljava/lang/String;",
+      "family": "network",
+      "target": "java.net.URLConnection->getInputStream()Ljava/io/InputStream;"
+    },
+    {
+      "caller": "bolts.WebViewAppLinkResolver->readFromConnection(Ljava/net/URLConnection;)Ljava/lang/String;",
+      "family": "network",
+      "target": "java.net.URLConnection->getInputStream()Ljava/io/InputStream;"
+    },
+    {
+      "caller": "com.facebook.Request->createConnection(Ljava/net/URL;)Ljava/net/HttpURLConnection;",
+      "family": "network",
+      "target": "java.net.URL->openConnection()Ljava/net/URLConnection;"
+    },
+    {
+      "caller": "com.facebook.Request->toHttpConnection(Lcom/facebook/RequestBatch;)Ljava/net/HttpURLConnection;",
+      "family": "network",
+      "target": "java.net.URL-><init>(Ljava/lang/String;)V"
+    },
+    {
+      "caller": "com.facebook.Request->toHttpConnection(Lcom/facebook/RequestBatch;)Ljava/net/HttpURLConnection;",
+      "family": "network",
+      "target": "java.net.URL-><init>(Ljava/lang/String;)V"
+    },
+    {
+      "caller": "com.facebook.Response->getRequestForPagedResults(Lcom/facebook/Response$PagingDirection;)Lcom/facebook/Request;",
+      "family": "network",
+      "target": "java.net.URL-><init>(Ljava/lang/String;)V"
+    },
+    {
+      "caller": "com.facebook.android.Util->openUrl(Ljava/lang/String;Ljava/lang/String;Landroid/os/Bundle;)Ljava/lang/String;",
+      "family": "network",
+      "target": "java.net.URL-><init>(Ljava/lang/String;)V"
+    },
+    {
+      "caller": "com.facebook.android.Util->openUrl(Ljava/lang/String;Ljava/lang/String;Landroid/os/Bundle;)Ljava/lang/String;",
+      "family": "network",
+      "target": "java.net.URL->openConnection()Ljava/net/URLConnection;"
+    },
+    {
+      "caller": "com.facebook.android.Util->parseUrl(Ljava/lang/String;)Landroid/os/Bundle;",
+      "family": "network",
+      "target": "java.net.URL-><init>(Ljava/lang/String;)V"
+    },
+    {
+      "caller": "com.facebook.internal.ImageDownloader->download(Lcom/facebook/internal/ImageDownloader$RequestKey;Landroid/content/Context;)V",
+      "family": "network",
+      "target": "java.net.URL-><init>(Ljava/lang/String;)V"
+    },
+    {
+      "caller": "com.facebook.internal.ImageDownloader->download(Lcom/facebook/internal/ImageDownloader$RequestKey;Landroid/content/Context;)V",
+      "family": "network",
+      "target": "java.net.URL->openConnection()Ljava/net/URLConnection;"
+    },
+    {
+      "caller": "android.support.v4.app.AppLaunchChecker->hasStartedFromLauncher(Landroid/content/Context;)Z",
+      "family": "preferences",
+      "target": "android.content.Context->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;"
+    },
+    {
+      "caller": "com.facebook.AuthorizationClient$WebViewAuthHandler->loadCookieToken()Ljava/lang/String;",
+      "family": "preferences",
+      "target": "android.content.Context->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;"
+    },
+    {
+      "caller": "com.facebook.AuthorizationClient$WebViewAuthHandler->saveCookieToken(Ljava/lang/String;)V",
+      "family": "preferences",
+      "target": "android.content.Context->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;"
+    },
+    {
+      "caller": "com.facebook.Settings->getLimitEventAndDataUsage(Landroid/content/Context;)Z",
+      "family": "preferences",
+      "target": "android.content.Context->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;"
+    },
+    {
+      "caller": "com.facebook.Settings->publishInstallAndWaitForResponse(Landroid/content/Context;Ljava/lang/String;Z)Lcom/facebook/Response;",
+      "family": "preferences",
+      "target": "android.content.Context->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;"
+    },
+    {
+      "caller": "com.facebook.Settings->setLimitEventAndDataUsage(Landroid/content/Context;Z)V",
+      "family": "preferences",
+      "target": "android.content.Context->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;"
+    },
+    {
+      "caller": "com.facebook.SharedPreferencesTokenCachingStrategy-><init>(Landroid/content/Context;Ljava/lang/String;)V",
+      "family": "preferences",
+      "target": "android.content.Context->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;"
+    },
+    {
+      "caller": "com.facebook.internal.LikeActionController$4$1->run()V",
+      "family": "preferences",
+      "target": "android.content.Context->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;"
+    },
+    {
+      "caller": "com.facebook.internal.LikeActionController->handleOnActivityResult(Landroid/content/Context;IILandroid/content/Intent;)Z",
+      "family": "preferences",
+      "target": "android.content.Context->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;"
+    },
+    {
+      "caller": "com.facebook.internal.LikeActionController->performFirstInitialize(Landroid/content/Context;)V",
+      "family": "preferences",
+      "target": "android.content.Context->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;"
+    },
+    {
+      "caller": "com.facebook.internal.LikeActionController->storeObjectIdForPendingController(Ljava/lang/String;)V",
+      "family": "preferences",
+      "target": "android.content.Context->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;"
+    },
+    {
+      "caller": "com.facebook.internal.Utility$1->onPostExecute(Lcom/facebook/model/GraphObject;)V",
+      "family": "preferences",
+      "target": "android.content.Context->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;"
+    },
+    {
+      "caller": "com.facebook.internal.Utility->loadAppSettingsAsync(Landroid/content/Context;Ljava/lang/String;)V",
+      "family": "preferences",
+      "target": "android.content.Context->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;"
+    },
+    {
+      "caller": "org.onepf.oms.appstore.FortumoBillingService->getFortumoSharedPrefs(Landroid/content/Context;)Landroid/content/SharedPreferences;",
+      "family": "preferences",
+      "target": "android.content.Context->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;"
+    },
+    {
+      "caller": "org.onepf.oms.appstore.FortumoBillingService->queryInventory(ZLjava/util/List;Ljava/util/List;)Lorg/onepf/oms/appstore/googleUtils/Inventory;",
+      "family": "preferences",
+      "target": "android.content.Context->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;"
+    },
+    {
+      "caller": "android.support.v4.app.ActionBarDrawerToggleHoneycomb$SetIndicatorInfo-><init>(Landroid/app/Activity;)V",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;"
+    },
+    {
+      "caller": "android.support.v4.app.ActionBarDrawerToggleHoneycomb$SetIndicatorInfo-><init>(Landroid/app/Activity;)V",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;"
+    },
+    {
+      "caller": "android.support.v4.app.ActionBarDrawerToggleHoneycomb->setActionBarDescription(Ljava/lang/Object;Landroid/app/Activity;I)Ljava/lang/Object;",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "android.support.v4.app.ActionBarDrawerToggleHoneycomb->setActionBarUpIndicator(Ljava/lang/Object;Landroid/app/Activity;Landroid/graphics/drawable/Drawable;I)Ljava/lang/Object;",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "android.support.v4.app.ActionBarDrawerToggleHoneycomb->setActionBarUpIndicator(Ljava/lang/Object;Landroid/app/Activity;Landroid/graphics/drawable/Drawable;I)Ljava/lang/Object;",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "android.support.v4.app.BundleCompatDonut->getBinder(Landroid/os/Bundle;Ljava/lang/String;)Landroid/os/IBinder;",
+      "family": "reflection",
+      "target": "java.lang.Class->getMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;"
+    },
+    {
+      "caller": "android.support.v4.app.BundleCompatDonut->getBinder(Landroid/os/Bundle;Ljava/lang/String;)Landroid/os/IBinder;",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "android.support.v4.app.BundleCompatDonut->putBinder(Landroid/os/Bundle;Ljava/lang/String;Landroid/os/IBinder;)V",
+      "family": "reflection",
+      "target": "java.lang.Class->getMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;"
+    },
+    {
+      "caller": "android.support.v4.app.BundleCompatDonut->putBinder(Landroid/os/Bundle;Ljava/lang/String;Landroid/os/IBinder;)V",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "android.support.v4.app.FragmentManagerImpl->setHWLayerAnimListenerIfAlpha(Landroid/view/View;Landroid/view/animation/Animation;)V",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;"
+    },
+    {
+      "caller": "android.support.v4.app.NotificationCompatJellybean->ensureActionReflectionReadyLocked()Z",
+      "family": "reflection",
+      "target": "java.lang.Class->forName(Ljava/lang/String;)Ljava/lang/Class;"
+    },
+    {
+      "caller": "android.support.v4.app.NotificationCompatJellybean->ensureActionReflectionReadyLocked()Z",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;"
+    },
+    {
+      "caller": "android.support.v4.app.NotificationCompatJellybean->ensureActionReflectionReadyLocked()Z",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;"
+    },
+    {
+      "caller": "android.support.v4.app.NotificationCompatJellybean->ensureActionReflectionReadyLocked()Z",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;"
+    },
+    {
+      "caller": "android.support.v4.app.NotificationCompatJellybean->ensureActionReflectionReadyLocked()Z",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;"
+    },
+    {
+      "caller": "android.support.v4.app.NotificationCompatJellybean->getExtras(Landroid/app/Notification;)Landroid/os/Bundle;",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;"
+    },
+    {
+      "caller": "android.support.v4.app.NotificationManagerCompatKitKat->areNotificationsEnabled(Landroid/content/Context;)Z",
+      "family": "reflection",
+      "target": "java.lang.Class->forName(Ljava/lang/String;)Ljava/lang/Class;"
+    },
+    {
+      "caller": "android.support.v4.app.NotificationManagerCompatKitKat->areNotificationsEnabled(Landroid/content/Context;)Z",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;"
+    },
+    {
+      "caller": "android.support.v4.app.NotificationManagerCompatKitKat->areNotificationsEnabled(Landroid/content/Context;)Z",
+      "family": "reflection",
+      "target": "java.lang.Class->getMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;"
+    },
+    {
+      "caller": "android.support.v4.app.NotificationManagerCompatKitKat->areNotificationsEnabled(Landroid/content/Context;)Z",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "android.support.v4.graphics.drawable.DrawableCompatJellybeanMr1->getLayoutDirection(Landroid/graphics/drawable/Drawable;)I",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;"
+    },
+    {
+      "caller": "android.support.v4.graphics.drawable.DrawableCompatJellybeanMr1->getLayoutDirection(Landroid/graphics/drawable/Drawable;)I",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "android.support.v4.graphics.drawable.DrawableCompatJellybeanMr1->setLayoutDirection(Landroid/graphics/drawable/Drawable;I)Z",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;"
+    },
+    {
+      "caller": "android.support.v4.graphics.drawable.DrawableCompatJellybeanMr1->setLayoutDirection(Landroid/graphics/drawable/Drawable;I)Z",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "android.support.v4.media.MediaBrowserServiceCompatApi24-><clinit>()V",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;"
+    },
+    {
+      "caller": "android.support.v4.media.ParceledListSliceAdapterApi21-><clinit>()V",
+      "family": "reflection",
+      "target": "java.lang.Class->forName(Ljava/lang/String;)Ljava/lang/Class;"
+    },
+    {
+      "caller": "android.support.v4.media.session.MediaSessionCompatApi24->getCallingPackage(Ljava/lang/Object;)Ljava/lang/String;",
+      "family": "reflection",
+      "target": "java.lang.Class->getMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;"
+    },
+    {
+      "caller": "android.support.v4.media.session.MediaSessionCompatApi24->getCallingPackage(Ljava/lang/Object;)Ljava/lang/String;",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "android.support.v4.text.ICUCompatApi23-><clinit>()V",
+      "family": "reflection",
+      "target": "java.lang.Class->forName(Ljava/lang/String;)Ljava/lang/Class;"
+    },
+    {
+      "caller": "android.support.v4.text.ICUCompatApi23-><clinit>()V",
+      "family": "reflection",
+      "target": "java.lang.Class->getMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;"
+    },
+    {
+      "caller": "android.support.v4.text.ICUCompatApi23->maximizeAndGetScript(Ljava/util/Locale;)Ljava/lang/String;",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "android.support.v4.text.ICUCompatIcs-><clinit>()V",
+      "family": "reflection",
+      "target": "java.lang.Class->forName(Ljava/lang/String;)Ljava/lang/Class;"
+    },
+    {
+      "caller": "android.support.v4.text.ICUCompatIcs-><clinit>()V",
+      "family": "reflection",
+      "target": "java.lang.Class->getMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;"
+    },
+    {
+      "caller": "android.support.v4.text.ICUCompatIcs-><clinit>()V",
+      "family": "reflection",
+      "target": "java.lang.Class->getMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;"
+    },
+    {
+      "caller": "android.support.v4.text.ICUCompatIcs->addLikelySubtags(Ljava/util/Locale;)Ljava/lang/String;",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "android.support.v4.text.ICUCompatIcs->getScript(Ljava/lang/String;)Ljava/lang/String;",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "android.support.v4.view.LayoutInflaterCompatHC->forceSetFactory2(Landroid/view/LayoutInflater;Landroid/view/LayoutInflater$Factory2;)V",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;"
+    },
+    {
+      "caller": "android.support.v4.view.ViewCompat$BaseViewCompatImpl->bindTempDetach()V",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;"
+    },
+    {
+      "caller": "android.support.v4.view.ViewCompat$BaseViewCompatImpl->bindTempDetach()V",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;"
+    },
+    {
+      "caller": "android.support.v4.view.ViewCompat$BaseViewCompatImpl->dispatchFinishTemporaryDetach(Landroid/view/View;)V",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "android.support.v4.view.ViewCompat$BaseViewCompatImpl->dispatchStartTemporaryDetach(Landroid/view/View;)V",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "android.support.v4.view.ViewCompat$ICSViewCompatImpl->hasAccessibilityDelegate(Landroid/view/View;)Z",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;"
+    },
+    {
+      "caller": "android.support.v4.view.ViewCompatBase->getMinimumHeight(Landroid/view/View;)I",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;"
+    },
+    {
+      "caller": "android.support.v4.view.ViewCompatBase->getMinimumWidth(Landroid/view/View;)I",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;"
+    },
+    {
+      "caller": "android.support.v4.view.ViewCompatEclairMr1->setChildrenDrawingOrderEnabled(Landroid/view/ViewGroup;Z)V",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;"
+    },
+    {
+      "caller": "android.support.v4.view.ViewCompatEclairMr1->setChildrenDrawingOrderEnabled(Landroid/view/ViewGroup;Z)V",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "android.support.v4.view.ViewPager->setChildrenDrawingOrderEnabledCompat(Z)V",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;"
+    },
+    {
+      "caller": "android.support.v4.view.ViewPager->setChildrenDrawingOrderEnabledCompat(Z)V",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "android.support.v4.widget.CompoundButtonCompatDonut->getButtonDrawable(Landroid/widget/CompoundButton;)Landroid/graphics/drawable/Drawable;",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;"
+    },
+    {
+      "caller": "android.support.v4.widget.PopupWindowCompatApi21-><clinit>()V",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;"
+    },
+    {
+      "caller": "android.support.v4.widget.PopupWindowCompatGingerbread->getWindowLayoutType(Landroid/widget/PopupWindow;)I",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;"
+    },
+    {
+      "caller": "android.support.v4.widget.PopupWindowCompatGingerbread->getWindowLayoutType(Landroid/widget/PopupWindow;)I",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "android.support.v4.widget.PopupWindowCompatGingerbread->setWindowLayoutType(Landroid/widget/PopupWindow;I)V",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;"
+    },
+    {
+      "caller": "android.support.v4.widget.PopupWindowCompatGingerbread->setWindowLayoutType(Landroid/widget/PopupWindow;I)V",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "android.support.v4.widget.SlidingPaneLayout$SlidingPanelLayoutImplJB-><init>()V",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;"
+    },
+    {
+      "caller": "android.support.v4.widget.SlidingPaneLayout$SlidingPanelLayoutImplJB-><init>()V",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;"
+    },
+    {
+      "caller": "android.support.v4.widget.SlidingPaneLayout$SlidingPanelLayoutImplJB->invalidateChildRegion(Landroid/support/v4/widget/SlidingPaneLayout;Landroid/view/View;)V",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "android.support.v4.widget.TextViewCompatDonut->retrieveField(Ljava/lang/String;)Ljava/lang/reflect/Field;",
+      "family": "reflection",
+      "target": "java.lang.Class->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;"
+    },
+    {
+      "caller": "bolts.MeasurementEvent->sendBroadcast()V",
+      "family": "reflection",
+      "target": "java.lang.Class->forName(Ljava/lang/String;)Ljava/lang/Class;"
+    },
+    {
+      "caller": "bolts.MeasurementEvent->sendBroadcast()V",
+      "family": "reflection",
+      "target": "java.lang.Class->getMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;"
+    },
+    {
+      "caller": "bolts.MeasurementEvent->sendBroadcast()V",
+      "family": "reflection",
+      "target": "java.lang.Class->getMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;"
+    },
+    {
+      "caller": "bolts.MeasurementEvent->sendBroadcast()V",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "bolts.MeasurementEvent->sendBroadcast()V",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "com.facebook.RequestAsyncTask->executeOnSettingsExecutor()Lcom/facebook/RequestAsyncTask;",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "com.facebook.Settings->getAsyncTaskExecutor()Ljava/util/concurrent/Executor;",
+      "family": "reflection",
+      "target": "java.lang.Class->getField(Ljava/lang/String;)Ljava/lang/reflect/Field;"
+    },
+    {
+      "caller": "com.facebook.SharedPreferencesTokenCachingStrategy->deserializeKey(Ljava/lang/String;Landroid/os/Bundle;)V",
+      "family": "reflection",
+      "target": "java.lang.Class->forName(Ljava/lang/String;)Ljava/lang/Class;"
+    },
+    {
+      "caller": "com.facebook.internal.Utility->getMethodQuietly(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;",
+      "family": "reflection",
+      "target": "java.lang.Class->getMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;"
+    },
+    {
+      "caller": "com.facebook.internal.Utility->getMethodQuietly(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;",
+      "family": "reflection",
+      "target": "java.lang.Class->forName(Ljava/lang/String;)Ljava/lang/Class;"
+    },
+    {
+      "caller": "com.facebook.internal.Utility->invokeMethodQuietly(Ljava/lang/Object;Ljava/lang/reflect/Method;[Ljava/lang/Object;)Ljava/lang/Object;",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "com.facebook.model.GraphObject$Factory$ProxyBase->proxyObjectMethods(Ljava/lang/Object;Ljava/lang/reflect/Method;[Ljava/lang/Object;)Ljava/lang/Object;",
+      "family": "reflection",
+      "target": "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "caller": "bolts.WebViewAppLinkResolver$2$1->runJavaScript(Landroid/webkit/WebView;)V",
+      "family": "webview",
+      "target": "android.webkit.WebView->loadUrl(Ljava/lang/String;)V"
+    },
+    {
+      "caller": "bolts.WebViewAppLinkResolver$2->then(Lbolts/Task;)Lbolts/Task;",
+      "family": "webview",
+      "target": "android.webkit.WebSettings->setJavaScriptEnabled(Z)V"
+    },
+    {
+      "caller": "bolts.WebViewAppLinkResolver$2->then(Lbolts/Task;)Lbolts/Task;",
+      "family": "webview",
+      "target": "android.webkit.WebView->addJavascriptInterface(Ljava/lang/Object;Ljava/lang/String;)V"
+    },
+    {
+      "caller": "bolts.WebViewAppLinkResolver$2->then(Lbolts/Task;)Lbolts/Task;",
+      "family": "webview",
+      "target": "android.webkit.WebView->loadDataWithBaseURL(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"
+    },
+    {
+      "caller": "com.facebook.widget.WebDialog->setUpWebView(I)V",
+      "family": "webview",
+      "target": "android.webkit.WebSettings->setJavaScriptEnabled(Z)V"
+    },
+    {
+      "caller": "com.facebook.widget.WebDialog->setUpWebView(I)V",
+      "family": "webview",
+      "target": "android.webkit.WebView->loadUrl(Ljava/lang/String;)V"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayActivity$27->run()V",
+      "family": "webview",
+      "target": "android.webkit.WebSettings->setJavaScriptEnabled(Z)V"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayActivity$31->run()V",
+      "family": "webview",
+      "target": "android.webkit.WebView->loadData(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayActivity$32->run()V",
+      "family": "webview",
+      "target": "android.webkit.WebView->loadUrl(Ljava/lang/String;)V"
+    },
+    {
+      "caller": "com.quattroplay.GraalClassic.QPlayActivity$InsideWebViewClient->shouldOverrideUrlLoading(Landroid/webkit/WebView;Ljava/lang/String;)Z",
+      "family": "webview",
+      "target": "android.webkit.WebView->loadUrl(Ljava/lang/String;)V"
+    },
+    {
+      "caller": "com.facebook.widget.WebDialog$DialogWebViewClient->onReceivedSslError(Landroid/webkit/WebView;Landroid/webkit/SslErrorHandler;Landroid/net/http/SslError;)V",
+      "family": "webview_ssl",
+      "target": "android.webkit.WebViewClient->onReceivedSslError(Landroid/webkit/WebView;Landroid/webkit/SslErrorHandler;Landroid/net/http/SslError;)V"
+    }
+  ],
+  "sensitive_families": {
+    "activity_launch": {
+      "call_site_count": 5,
+      "caller_count": 5,
+      "caller_groups": {
+        "android_support": 3,
+        "bolts": 1,
+        "facebook_sdk": 1
+      },
+      "callers": [
+        "android.support.v4.app.ActivityCompatJB->startActivity(Landroid/content/Context;Landroid/content/Intent;Landroid/os/Bundle;)V",
+        "android.support.v4.app.FragmentHostCallback->onStartActivityFromFragment(Landroid/support/v4/app/Fragment;Landroid/content/Intent;ILandroid/os/Bundle;)V",
+        "android.support.v4.app.TaskStackBuilder->startActivities(Landroid/os/Bundle;)V",
+        "bolts.AppLinkNavigation->navigate(Landroid/content/Context;)Lbolts/AppLinkNavigation$NavigationResult;",
+        "com.facebook.widget.WebDialog$DialogWebViewClient->shouldOverrideUrlLoading(Landroid/webkit/WebView;Ljava/lang/String;)Z"
+      ],
+      "target_count": 2,
+      "targets": [
+        "android.content.Context->startActivity(Landroid/content/Intent;)V",
+        "android.content.Context->startActivity(Landroid/content/Intent;Landroid/os/Bundle;)V"
+      ]
+    },
+    "device_identifier": {
+      "call_site_count": 2,
+      "caller_count": 2,
+      "caller_groups": {
+        "android_support": 1,
+        "facebook_sdk": 1
+      },
+      "callers": [
+        "android.support.v4.app.NotificationManagerCompat->getEnabledListenerPackages(Landroid/content/Context;)Ljava/util/Set;",
+        "com.facebook.internal.Utility->getHashedDeviceAndAppID(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;"
+      ],
+      "target_count": 1,
+      "targets": [
+        "android.provider.Settings$Secure->getString(Landroid/content/ContentResolver;Ljava/lang/String;)Ljava/lang/String;"
+      ]
+    },
+    "intent_boundary": {
+      "call_site_count": 56,
+      "caller_count": 33,
+      "caller_groups": {
+        "android_support": 7,
+        "application": 8,
+        "billing_sdk": 12,
+        "bolts": 11,
+        "facebook_sdk": 18
+      },
+      "callers": [
+        "android.support.v4.app.ActivityCompat->getReferrer(Landroid/app/Activity;)Landroid/net/Uri;",
+        "android.support.v4.app.RemoteInputCompatJellybean->getResultsFromIntent(Landroid/content/Intent;)Landroid/os/Bundle;",
+        "android.support.v4.app.ShareCompat$IntentReader->getHtmlText()Ljava/lang/String;",
+        "android.support.v4.app.ShareCompat$IntentReader->getSubject()Ljava/lang/String;",
+        "android.support.v4.app.ShareCompat->getCallingPackage(Landroid/app/Activity;)Ljava/lang/String;",
+        "android.support.v4.content.LocalBroadcastManager->sendBroadcast(Landroid/content/Intent;)Z",
+        "bolts.AppLinks->getTargetUrl(Landroid/content/Intent;)Landroid/net/Uri;",
+        "bolts.MeasurementEvent->getApplinkLogData(Landroid/content/Context;Ljava/lang/String;Landroid/os/Bundle;Landroid/content/Intent;)Landroid/os/Bundle;",
+        "bolts.MeasurementEvent->sendBroadcastEvent(Landroid/content/Context;Ljava/lang/String;Landroid/content/Intent;Ljava/util/Map;)V",
+        "com.facebook.AccessToken->createFromNativeLinkingIntent(Landroid/content/Intent;)Lcom/facebook/AccessToken;",
+        "com.facebook.AppLinkData->createFromActivity(Landroid/app/Activity;)Lcom/facebook/AppLinkData;",
+        "com.facebook.AppLinkData->createFromAlApplinkData(Landroid/content/Intent;)Lcom/facebook/AppLinkData;",
+        "com.facebook.AuthorizationClient$KatanaProxyAuthHandler->handleResultOk(Landroid/content/Intent;)Lcom/facebook/AuthorizationClient$Result;",
+        "com.facebook.AuthorizationClient$KatanaProxyAuthHandler->onActivityResult(IILandroid/content/Intent;)Z",
+        "com.facebook.BoltsMeasurementEventListener->onReceive(Landroid/content/Context;Landroid/content/Intent;)V",
+        "com.facebook.FacebookBroadcastReceiver->onReceive(Landroid/content/Context;Landroid/content/Intent;)V",
+        "com.facebook.UiLifecycleHelper->cancelPendingAppCall(Lcom/facebook/widget/FacebookDialog$Callback;)V",
+        "com.facebook.internal.NativeProtocol->getCallIdFromIntent(Landroid/content/Intent;)Ljava/util/UUID;",
+        "com.facebook.internal.NativeProtocol->getErrorDataFromResultIntent(Landroid/content/Intent;)Landroid/os/Bundle;",
+        "com.facebook.internal.NativeProtocol->getSuccessResultsFromIntent(Landroid/content/Intent;)Landroid/os/Bundle;",
+        "com.facebook.widget.FacebookDialog->getEventName(Landroid/content/Intent;)Ljava/lang/String;",
+        "com.facebook.widget.LikeView$LikeControllerBroadcastReceiver->onReceive(Landroid/content/Context;Landroid/content/Intent;)V",
+        "com.quattroplay.GraalClassic.QPlayRenderer->loadLibrary()V",
+        "com.quattroplay.GraalClassic.util.IabHelper->getResponseCodeFromIntent(Landroid/content/Intent;)I",
+        "com.quattroplay.GraalClassic.util.IabHelper->handleActivityResult(IILandroid/content/Intent;)Z",
+        "org.onepf.oms.appstore.SamsungAppsBillingService->handleActivityResult(IILandroid/content/Intent;)Z",
+        "org.onepf.oms.appstore.googleUtils.IabHelper->getResponseCodeFromIntent(Landroid/content/Intent;)I",
+        "org.onepf.oms.appstore.googleUtils.IabHelper->handleActivityResult(IILandroid/content/Intent;)Z",
+        "org.onepf.oms.appstore.googleUtils.IabHelper->processPurchaseSuccess(Landroid/content/Intent;Ljava/lang/String;Ljava/lang/String;)V",
+        "org.onepf.oms.appstore.nokiaUtils.NokiaStoreHelper->handleActivityResult(IILandroid/content/Intent;)Z",
+        "org.onepf.oms.appstore.skubitUtils.SkubitIabHelper->getResponseCodeFromIntent(Landroid/content/Intent;)I",
+        "org.onepf.oms.appstore.skubitUtils.SkubitIabHelper->handleActivityResult(IILandroid/content/Intent;)Z",
+        "org.onepf.oms.appstore.skubitUtils.SkubitIabHelper->processPurchaseSuccess(Landroid/content/Intent;Ljava/lang/String;Ljava/lang/String;)V"
+      ],
+      "target_count": 4,
+      "targets": [
+        "android.content.Intent->getData()Landroid/net/Uri;",
+        "android.content.Intent->getExtras()Landroid/os/Bundle;",
+        "android.content.Intent->getScheme()Ljava/lang/String;",
+        "android.content.Intent->getStringExtra(Ljava/lang/String;)Ljava/lang/String;"
+      ]
+    },
+    "native_loading": {
+      "call_site_count": 1,
+      "caller_count": 1,
+      "caller_groups": {
+        "application": 1
+      },
+      "callers": [
+        "com.quattroplay.GraalClassic.QPlayRenderer->loadLibrary()V"
+      ],
+      "target_count": 1,
+      "targets": [
+        "java.lang.System->loadLibrary(Ljava/lang/String;)V"
+      ]
+    },
+    "network": {
+      "call_site_count": 15,
+      "caller_count": 8,
+      "caller_groups": {
+        "bolts": 6,
+        "facebook_sdk": 9
+      },
+      "callers": [
+        "bolts.WebViewAppLinkResolver$3->call()Ljava/lang/Void;",
+        "bolts.WebViewAppLinkResolver->readFromConnection(Ljava/net/URLConnection;)Ljava/lang/String;",
+        "com.facebook.Request->createConnection(Ljava/net/URL;)Ljava/net/HttpURLConnection;",
+        "com.facebook.Request->toHttpConnection(Lcom/facebook/RequestBatch;)Ljava/net/HttpURLConnection;",
+        "com.facebook.Response->getRequestForPagedResults(Lcom/facebook/Response$PagingDirection;)Lcom/facebook/Request;",
+        "com.facebook.android.Util->openUrl(Ljava/lang/String;Ljava/lang/String;Landroid/os/Bundle;)Ljava/lang/String;",
+        "com.facebook.android.Util->parseUrl(Ljava/lang/String;)Landroid/os/Bundle;",
+        "com.facebook.internal.ImageDownloader->download(Lcom/facebook/internal/ImageDownloader$RequestKey;Landroid/content/Context;)V"
+      ],
+      "target_count": 4,
+      "targets": [
+        "java.net.URL-><init>(Ljava/lang/String;)V",
+        "java.net.URL->openConnection()Ljava/net/URLConnection;",
+        "java.net.URLConnection->connect()V",
+        "java.net.URLConnection->getInputStream()Ljava/io/InputStream;"
+      ]
+    },
+    "preferences": {
+      "call_site_count": 15,
+      "caller_count": 15,
+      "caller_groups": {
+        "android_support": 1,
+        "billing_sdk": 2,
+        "facebook_sdk": 12
+      },
+      "callers": [
+        "android.support.v4.app.AppLaunchChecker->hasStartedFromLauncher(Landroid/content/Context;)Z",
+        "com.facebook.AuthorizationClient$WebViewAuthHandler->loadCookieToken()Ljava/lang/String;",
+        "com.facebook.AuthorizationClient$WebViewAuthHandler->saveCookieToken(Ljava/lang/String;)V",
+        "com.facebook.Settings->getLimitEventAndDataUsage(Landroid/content/Context;)Z",
+        "com.facebook.Settings->publishInstallAndWaitForResponse(Landroid/content/Context;Ljava/lang/String;Z)Lcom/facebook/Response;",
+        "com.facebook.Settings->setLimitEventAndDataUsage(Landroid/content/Context;Z)V",
+        "com.facebook.SharedPreferencesTokenCachingStrategy-><init>(Landroid/content/Context;Ljava/lang/String;)V",
+        "com.facebook.internal.LikeActionController$4$1->run()V",
+        "com.facebook.internal.LikeActionController->handleOnActivityResult(Landroid/content/Context;IILandroid/content/Intent;)Z",
+        "com.facebook.internal.LikeActionController->performFirstInitialize(Landroid/content/Context;)V",
+        "com.facebook.internal.LikeActionController->storeObjectIdForPendingController(Ljava/lang/String;)V",
+        "com.facebook.internal.Utility$1->onPostExecute(Lcom/facebook/model/GraphObject;)V",
+        "com.facebook.internal.Utility->loadAppSettingsAsync(Landroid/content/Context;Ljava/lang/String;)V",
+        "org.onepf.oms.appstore.FortumoBillingService->getFortumoSharedPrefs(Landroid/content/Context;)Landroid/content/SharedPreferences;",
+        "org.onepf.oms.appstore.FortumoBillingService->queryInventory(ZLjava/util/List;Ljava/util/List;)Lorg/onepf/oms/appstore/googleUtils/Inventory;"
+      ],
+      "target_count": 1,
+      "targets": [
+        "android.content.Context->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;"
+      ]
+    },
+    "reflection": {
+      "call_site_count": 70,
+      "caller_count": 43,
+      "caller_groups": {
+        "android_support": 58,
+        "bolts": 5,
+        "facebook_sdk": 7
+      },
+      "callers": [
+        "android.support.v4.app.ActionBarDrawerToggleHoneycomb$SetIndicatorInfo-><init>(Landroid/app/Activity;)V",
+        "android.support.v4.app.ActionBarDrawerToggleHoneycomb->setActionBarDescription(Ljava/lang/Object;Landroid/app/Activity;I)Ljava/lang/Object;",
+        "android.support.v4.app.ActionBarDrawerToggleHoneycomb->setActionBarUpIndicator(Ljava/lang/Object;Landroid/app/Activity;Landroid/graphics/drawable/Drawable;I)Ljava/lang/Object;",
+        "android.support.v4.app.BundleCompatDonut->getBinder(Landroid/os/Bundle;Ljava/lang/String;)Landroid/os/IBinder;",
+        "android.support.v4.app.BundleCompatDonut->putBinder(Landroid/os/Bundle;Ljava/lang/String;Landroid/os/IBinder;)V",
+        "android.support.v4.app.FragmentManagerImpl->setHWLayerAnimListenerIfAlpha(Landroid/view/View;Landroid/view/animation/Animation;)V",
+        "android.support.v4.app.NotificationCompatJellybean->ensureActionReflectionReadyLocked()Z",
+        "android.support.v4.app.NotificationCompatJellybean->getExtras(Landroid/app/Notification;)Landroid/os/Bundle;",
+        "android.support.v4.app.NotificationManagerCompatKitKat->areNotificationsEnabled(Landroid/content/Context;)Z",
+        "android.support.v4.graphics.drawable.DrawableCompatJellybeanMr1->getLayoutDirection(Landroid/graphics/drawable/Drawable;)I",
+        "android.support.v4.graphics.drawable.DrawableCompatJellybeanMr1->setLayoutDirection(Landroid/graphics/drawable/Drawable;I)Z",
+        "android.support.v4.media.MediaBrowserServiceCompatApi24-><clinit>()V",
+        "android.support.v4.media.ParceledListSliceAdapterApi21-><clinit>()V",
+        "android.support.v4.media.session.MediaSessionCompatApi24->getCallingPackage(Ljava/lang/Object;)Ljava/lang/String;",
+        "android.support.v4.text.ICUCompatApi23-><clinit>()V",
+        "android.support.v4.text.ICUCompatApi23->maximizeAndGetScript(Ljava/util/Locale;)Ljava/lang/String;",
+        "android.support.v4.text.ICUCompatIcs-><clinit>()V",
+        "android.support.v4.text.ICUCompatIcs->addLikelySubtags(Ljava/util/Locale;)Ljava/lang/String;",
+        "android.support.v4.text.ICUCompatIcs->getScript(Ljava/lang/String;)Ljava/lang/String;",
+        "android.support.v4.view.LayoutInflaterCompatHC->forceSetFactory2(Landroid/view/LayoutInflater;Landroid/view/LayoutInflater$Factory2;)V",
+        "android.support.v4.view.ViewCompat$BaseViewCompatImpl->bindTempDetach()V",
+        "android.support.v4.view.ViewCompat$BaseViewCompatImpl->dispatchFinishTemporaryDetach(Landroid/view/View;)V",
+        "android.support.v4.view.ViewCompat$BaseViewCompatImpl->dispatchStartTemporaryDetach(Landroid/view/View;)V",
+        "android.support.v4.view.ViewCompat$ICSViewCompatImpl->hasAccessibilityDelegate(Landroid/view/View;)Z",
+        "android.support.v4.view.ViewCompatBase->getMinimumHeight(Landroid/view/View;)I",
+        "android.support.v4.view.ViewCompatBase->getMinimumWidth(Landroid/view/View;)I",
+        "android.support.v4.view.ViewCompatEclairMr1->setChildrenDrawingOrderEnabled(Landroid/view/ViewGroup;Z)V",
+        "android.support.v4.view.ViewPager->setChildrenDrawingOrderEnabledCompat(Z)V",
+        "android.support.v4.widget.CompoundButtonCompatDonut->getButtonDrawable(Landroid/widget/CompoundButton;)Landroid/graphics/drawable/Drawable;",
+        "android.support.v4.widget.PopupWindowCompatApi21-><clinit>()V",
+        "android.support.v4.widget.PopupWindowCompatGingerbread->getWindowLayoutType(Landroid/widget/PopupWindow;)I",
+        "android.support.v4.widget.PopupWindowCompatGingerbread->setWindowLayoutType(Landroid/widget/PopupWindow;I)V",
+        "android.support.v4.widget.SlidingPaneLayout$SlidingPanelLayoutImplJB-><init>()V",
+        "android.support.v4.widget.SlidingPaneLayout$SlidingPanelLayoutImplJB->invalidateChildRegion(Landroid/support/v4/widget/SlidingPaneLayout;Landroid/view/View;)V",
+        "android.support.v4.widget.TextViewCompatDonut->retrieveField(Ljava/lang/String;)Ljava/lang/reflect/Field;",
+        "bolts.MeasurementEvent->sendBroadcast()V",
+        "com.facebook.RequestAsyncTask->executeOnSettingsExecutor()Lcom/facebook/RequestAsyncTask;",
+        "com.facebook.Settings->getAsyncTaskExecutor()Ljava/util/concurrent/Executor;",
+        "com.facebook.SharedPreferencesTokenCachingStrategy->deserializeKey(Ljava/lang/String;Landroid/os/Bundle;)V",
+        "com.facebook.internal.Utility->getMethodQuietly(Ljava/lang/Class;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;",
+        "com.facebook.internal.Utility->getMethodQuietly(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;",
+        "com.facebook.internal.Utility->invokeMethodQuietly(Ljava/lang/Object;Ljava/lang/reflect/Method;[Ljava/lang/Object;)Ljava/lang/Object;",
+        "com.facebook.model.GraphObject$Factory$ProxyBase->proxyObjectMethods(Ljava/lang/Object;Ljava/lang/reflect/Method;[Ljava/lang/Object;)Ljava/lang/Object;"
+      ],
+      "target_count": 6,
+      "targets": [
+        "java.lang.Class->forName(Ljava/lang/String;)Ljava/lang/Class;",
+        "java.lang.Class->getDeclaredField(Ljava/lang/String;)Ljava/lang/reflect/Field;",
+        "java.lang.Class->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;",
+        "java.lang.Class->getField(Ljava/lang/String;)Ljava/lang/reflect/Field;",
+        "java.lang.Class->getMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;",
+        "java.lang.reflect.Method->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;"
+      ]
+    },
+    "webview": {
+      "call_site_count": 10,
+      "caller_count": 7,
+      "caller_groups": {
+        "application": 4,
+        "bolts": 4,
+        "facebook_sdk": 2
+      },
+      "callers": [
+        "bolts.WebViewAppLinkResolver$2$1->runJavaScript(Landroid/webkit/WebView;)V",
+        "bolts.WebViewAppLinkResolver$2->then(Lbolts/Task;)Lbolts/Task;",
+        "com.facebook.widget.WebDialog->setUpWebView(I)V",
+        "com.quattroplay.GraalClassic.QPlayActivity$27->run()V",
+        "com.quattroplay.GraalClassic.QPlayActivity$31->run()V",
+        "com.quattroplay.GraalClassic.QPlayActivity$32->run()V",
+        "com.quattroplay.GraalClassic.QPlayActivity$InsideWebViewClient->shouldOverrideUrlLoading(Landroid/webkit/WebView;Ljava/lang/String;)Z"
+      ],
+      "target_count": 5,
+      "targets": [
+        "android.webkit.WebSettings->setJavaScriptEnabled(Z)V",
+        "android.webkit.WebView->addJavascriptInterface(Ljava/lang/Object;Ljava/lang/String;)V",
+        "android.webkit.WebView->loadData(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V",
+        "android.webkit.WebView->loadDataWithBaseURL(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V",
+        "android.webkit.WebView->loadUrl(Ljava/lang/String;)V"
+      ]
+    },
+    "webview_ssl": {
+      "call_site_count": 1,
+      "caller_count": 1,
+      "caller_groups": {
+        "facebook_sdk": 1
+      },
+      "callers": [
+        "com.facebook.widget.WebDialog$DialogWebViewClient->onReceivedSslError(Landroid/webkit/WebView;Landroid/webkit/SslErrorHandler;Landroid/net/http/SslError;)V"
+      ],
+      "target_count": 1,
+      "targets": [
+        "android.webkit.WebViewClient->onReceivedSslError(Landroid/webkit/WebView;Landroid/webkit/SslErrorHandler;Landroid/net/http/SslError;)V"
+      ]
+    }
+  },
+  "tool": "tools/audit_dex_method_surface.py",
+  "tool_version": 1
+}
