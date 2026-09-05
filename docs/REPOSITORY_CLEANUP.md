@@ -9,7 +9,7 @@ small protocol observations rather than raw application payloads.
 
 The cleanup audit refreshed on 2026-09-04 found 239 tracked files and about
 17.8 MiB in the current checkout. There are 98 JSON records containing
-423,715 lines. The current tree contains compact indexes for the translated
+423,737 lines. The current tree contains compact indexes for the translated
 1.8 symbols and bounded protocol observations. No APK, ELF library, IDA
 database, signing key, or packet capture is tracked. Package-specific
 comparison reports and their generators have been removed from the source

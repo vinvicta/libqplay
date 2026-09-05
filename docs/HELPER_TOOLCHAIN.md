@@ -11,9 +11,13 @@ On 2026-08-28, the pinned commits were also cloned with Git into
 `<workspace>/vendor/GScript.Go-HexaParser` and
 `<workspace>/vendor/Moreno.kahn`. These are working
 checkouts for this investigation and are still separate from the public
-archive. The current shell does not have a `go` executable, so this pass does
-not claim a new Go test run. The historical test results below remain tied to
-the earlier environment where Go 1.22.2 was available.
+archive. A local Go 1.22.2 executable is available in the current environment,
+and the supplied HexaParser tests were rerun on 2026-09-04. The current result
+is recorded below alongside the earlier pinned run.
+
+The new run used temporary module and build caches under `/tmp`. It fetched
+only the declared Go modules from the Go module proxy, did not contact a game
+or connector service, and did not modify either helper checkout.
 
 ## HexaParser
 
@@ -45,6 +49,28 @@ service.
 The complete test run passed. The `gsbyte` package completed in about 7.1
 seconds, and the other packages reported no test files. No source changes
 were made to the helper checkout.
+
+## Current toolchain recheck
+
+The same pinned commit was rechecked with Go 1.22.2 on 2026-09-04 using
+`go test ./...`; the root, parser, and GS1 packages again reported no test
+files, and `gsbyte` passed. The decompiler, one-brace source repair, and GS2
+compiler were also rerun against the archived connector stream. They produced
+the same raw source, repaired source, and 16,141-byte bytecode hashes already
+recorded in this document:
+
+```text
+raw source:       cf60e41536ddebed89ca1c3b3342476763b3d28c1cc9fff29e211931a080afa5
+repaired source:  a30f9eca136e3b8ff827bfb1bfe13fb442bd2e882963bf9863cd8de5f2669e68
+compiled GS2:     67b70c449f87d6e3b71ef0fe92ba73fff9fe5fe7a1ad63aedb34e9daf4a7b752
+```
+
+After removing the compiler trailer byte `0x0a` for parsing, the rebuilt
+records remain `4/553/8271/7280` with 3,582 instructions. The original stays
+at `4/553/8293/6699` with 3,143 instructions. This recheck strengthens
+determinism, but it does not change the compatibility conclusion: the clean
+recompiled stream still has a different instruction layout and has not been
+proven compatible with the old VM.
 
 The tool can decompile the archived connector script produced by the local
 connector parser:
