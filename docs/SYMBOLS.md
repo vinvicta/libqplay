@@ -142,6 +142,15 @@ are `symbols/libqplay_2.2_dynamic_symbols.summary.json` and
 `tools/generate_two_two_dynamic_symbol_table.py`. Obfuscated application names
 remain obfuscated because no semantic source names survive in this table.
 
+For cross-version translation, the exact-byte review is in
+`artifacts/cross_version_exact_byte_match_review_20260904.json`. Its
+name-independent comparison found 574 2.2 functions with a unique 1.8
+candidate and leaves repeated byte sequences explicitly ambiguous. The
+searchable unique map is
+`symbols/libqplay_2.2_exact_byte_unique_matches.csv`. Exact bytes and size are
+useful evidence, but callers and data references still need to be checked in
+the future 2.2 IDA database.
+
 ## Repeating the pass
 
 Run the IDAPython script from IDA's Python console or with the IDA batch

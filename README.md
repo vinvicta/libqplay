@@ -157,6 +157,14 @@ and rerunnable exporter are
 `symbols/libqplay_2.2_dynamic_symbols.summary.json` and
 `tools/generate_two_two_dynamic_symbol_table.py`.
 
+An independent exact-byte bridge also found 957 2.2 dynamic functions whose
+size and full byte range occur in the translated 1.8 `.text` inventory. Of
+those, 574 have one possible 1.8 candidate and are exported as a conservative
+search map. The other 383 are repeated compiler or library sequences and stay
+ambiguous. The review record and CSV are
+`artifacts/cross_version_exact_byte_match_review_20260904.json` and
+`symbols/libqplay_2.2_exact_byte_unique_matches.csv`.
+
 The Android lifecycle review adds an important first diagnostic checkpoint.
 The connector is downstream of the GL surface, window focus, runtime
 permission completion, and the first render frame. A compatibility dialog or
