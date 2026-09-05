@@ -107,68 +107,9 @@ proves that the native client can reach a rendered world through a bounded
 loopback responder. Live endpoint availability, current package signing, and
 account authentication remain open.
 
-The unverified installed 2.2 comparison is recorded separately in
-`docs/ABI_2_2_COMPARISON.md`. It retains enough dynamic symbols for useful
-cross-version anchors, but its companion `libxposed.so` installs inline hooks
-and disables a Frida-detection path. It must not be treated as a stock 2.2
-reference. Its offline security inventory is in
-`artifacts/comparison_apk_security_audit_20260902.json`.
-
-The first exact cross-version bridge is now measured in
-`artifacts/cross_version_cyassl_anchor_review_20260902.json`: all 253 retained
-CyaSSL names match between the two ARM64 libraries, with two stable address
-deltas and 84 byte-identical function bodies. The application entrypoints do
-not share that guarantee, so the result is useful for TLS analysis rather than
-blind address translation.
-
-The same comparison found that the embedded TLS trust input changed entirely.
-The original 1.8 library decodes to six historical certificates, while the
-unverified installed 2.2 package decodes to one self-signed
-`cong.quattroplay.com` certificate dated 2025-01-01 through 2035-01-01. No
-decoded certificate is shared between the two versions. That package-specific
-anchor is not a safe repair source. The metadata and decoder are recorded in
-`artifacts/cross_version_trust_bundle_review_20260902.json` and
-`tools/generate_cross_version_trust_review.py`.
-
-The full retained-function overlap is recorded in
-`artifacts/cross_version_symbol_overlap_20260902.json`. It finds 835 exact
-shared defined-function names, 830 matching sizes, and 279 byte-identical
-bodies across CyaSSL, bundled media and compression libraries, JSON parsing,
-JNI, and a small residual bucket. The measured address clusters are
-family-specific, so exact names and per-function validation remain the
-translation rule.
-
-The complete 835-row name and address lookup is in
-`artifacts/cross_version_translation_candidates_20260902.json`. It records
-per-function sizes, address deltas, and byte equality while keeping the APK
-and native files outside Git. It is a review map for a future 2.2 IDA database,
-not a bulk patch list.
-
-The stripped comparison library also has a complete searchable table of its
-5,782 retained defined dynamic functions in
-`symbols/libqplay_2.2_dynamic_functions.csv`. The summary records the source
-hash and name-family counts. These are dynamic anchors only, not recovered
-local symbols or proof of stock 2.2 behavior.
-
-The broader `libqplay_2.2_dynamic_symbols.csv` table records all 6,773 ELF
-dynamic entries, including defined objects, imports, section markers, symbol
-versions, and a mechanical `c++filt` rendering where applicable. Its summary
-and rerunnable exporter are
-`symbols/libqplay_2.2_dynamic_symbols.summary.json` and
-`tools/generate_two_two_dynamic_symbol_table.py`.
-
-An independent exact-byte bridge also found 957 2.2 dynamic functions whose
-size and full byte range occur in the translated 1.8 `.text` inventory. Of
-those, 574 have one possible 1.8 candidate and are exported as a conservative
-search map. The other 383 are repeated compiler or library sequences and stay
-ambiguous. The review record and CSV are
-`artifacts/cross_version_exact_byte_match_review_20260904.json` and
-`symbols/libqplay_2.2_exact_byte_unique_matches.csv`.
-
-The 2.2 ARM64 import scan maps 3,307 direct AArch64 transfers through 169 PLT
-entries. It records qplay callsites for `fork` and `execvp`, `dlopen` and
-`dlsym`, anti-instrumentation helpers, native sockets, and file boundaries in
-`artifacts/comparison_2_2_aarch64_import_callsite_review_20260904.json`.
+The package-specific comparison material has been removed from this archive.
+Future cross-version work should use a separately verified input and keep its
+reports in an explicitly scoped branch.
 
 The Android lifecycle review adds an important first diagnostic checkpoint.
 The connector is downstream of the GL surface, window focus, runtime
@@ -268,7 +209,7 @@ require a real ARM64 loader test. The compact metadata-only report is
 `tools/generate_cross_abi_compatibility_review.py`.
 The report also carries 34 shared address anchors for the startup, connector,
 socket, protocol, JNI, and CyaSSL paths, without claiming that those addresses
-transfer to 2.2.
+transfer to another release.
 
 The native init/fini review confirms that `libqplay.so` runs a fixed 20-entry
 constructor array before `QPlayMain` and a 10-entry teardown array on unload.
@@ -330,17 +271,6 @@ The compact record is
   review.
 * `docs/UPDATE_PACKAGES.md` explains the `GRPKG001` manifest parser, ordinary
   and large-file transfer state, and the bounded completion-path crash review.
-* `docs/ABI_2_2_COMPARISON.md` records the bounded, offline comparison with
-  the unverified installed 2.2 package.
-* `artifacts/cross_version_cyassl_anchor_review_20260902.json` records the
-  exact 1.8 to 2.2 CyaSSL name, size, address, and byte measurements.
-* `artifacts/cross_version_symbol_overlap_20260902.json` records the compact
-  all-family 1.8 to 2.2 retained-function overlap and anchor measurements.
-* `artifacts/cross_version_translation_candidates_20260902.json` records all
-  835 exact-name 1.8 to 2.2 address candidates with size and byte checks.
-* `artifacts/comparison_apk_security_audit_20260902.json` records the offline
-  manifest, DEX, ZIP, signing, ELF, and native-hook review for the comparison
-  APK.
 * `docs/DEPENDENCY_PROVENANCE.md` records the bundled compression, font, and
   image-library versions and their input paths.
 * `artifacts/original_dex_webview_review_20260830.json` records the local smali

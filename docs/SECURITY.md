@@ -133,13 +133,6 @@ eliminate, the possibility of a constructor or allocation failure before
 `QPlayMain`. The detailed record is
 `artifacts/original_native_init_review_20260830.json`.
 
-The unverified 2.2 comparison has a separate direct-import review and must not
-be folded into the original 1.8 evidence. That scan records qplay callsites for
-process creation and executable handoff, runtime library loading, the
-anti-instrumentation cluster, native sockets, and file deletion. Its record is
-`artifacts/comparison_2_2_aarch64_import_callsite_review_20260904.json`, with
-the limitations described in `docs/ABI_2_2_COMPARISON.md`.
-
 ## Evidence boundaries
 
 The findings use these terms:

@@ -20,15 +20,6 @@ dates. Replacing the buffer with an authorized current certificate chain is
 the production-compatible repair direction. The certificate-skip branch is
 useful only as a private diagnostic control.
 
-The unverified installed 2.2 comparison package does not supply a reusable
-replacement. Its native string decodes to one different, self-signed
-certificate for `cong.quattroplay.com`, with a 2025-01-01 through 2035-01-01
-validity interval. The two versions share no decoded certificate DER hash.
-Because that package also carries a companion hook library, this is evidence
-of a package-specific trust choice, not evidence of an authorized current
-service chain. The full metadata-only comparison is in
-`artifacts/cross_version_trust_bundle_review_20260902.json`.
-
 There is a separate socket-state gate before the certificate check. The
 connector creates a nonblocking TCP socket and uses status 4 for a pending
 connect. `TSocketConnection_checkConnecting` at `0x206a48` polls the write set

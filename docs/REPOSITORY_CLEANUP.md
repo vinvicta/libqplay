@@ -7,13 +7,13 @@ small protocol observations rather than raw application payloads.
 
 ## Current tree
 
-The cleanup audit refreshed on 2026-09-04 found 259 tracked files and about
-20.4 MiB in the current checkout. There are 105 JSON records containing
-469,936 lines. The current tree also includes compact CSV indexes for the
-translated 1.8 symbols, the retained 2.2 dynamic symbols, and the exact-byte
-cross-version candidates. No APK, ELF library, IDA database, signing key, or
-packet capture is tracked. The
-source tree contains no retired comparison-package filename or reference.
+The cleanup audit refreshed on 2026-09-04 found 237 tracked files and about
+17.8 MiB in the current checkout. There are 97 JSON records containing
+422,251 lines. The current tree contains compact indexes for the translated
+1.8 symbols and bounded protocol observations. No APK, ELF library, IDA
+database, signing key, or packet capture is tracked. Package-specific
+comparison reports and their generators have been removed from the source
+tree.
 
 The ignore policy now covers the common IDA database sidecars as well as APK,
 ELF, signing, capture, and temporary files. JSON is intentionally not ignored:
@@ -28,11 +28,13 @@ from public `main` requires rebuilding the branch and force-pushing it. That
 operation is intentionally separate from ordinary research commits because it
 changes commit IDs for every downstream clone.
 
-A refreshed local history preview was built from the current `main` without
-changing the public branch. Commit `f204393` is the first clean tree in the
-existing line of development. The preview made that tree the new root and
-retained its 95 descendants, for 96 research commits in total. Reachable tree,
+A local history preview was built from `main` at `8a9e645` without changing
+the public branch. Commit `f204393` is the first clean tree in the existing
+line of development. That preview made the tree a new root and retained its
+95 descendants, for 96 research commits in total. Reachable tree,
 commit-message, and path scans found no retired comparison-package material.
+The preview predates the latest cleanup commits and must be rebuilt from the
+current `main` before any history replacement.
 The preview also removed its remote-tracking refs before packing, so the old
 history was not retained by an in-preview branch or tag. It remains a staging
 result until the repository owner explicitly authorizes replacing public

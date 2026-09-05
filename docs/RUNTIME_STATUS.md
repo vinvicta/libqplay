@@ -82,12 +82,6 @@ startup and pause evidence is in
   covered.
 * The early-pause callback behavior has not been rerun on a current ARM64
   device with activity, permission, and surface timestamps captured.
-* An installed 2.2 package has now been pulled and examined offline. Its
-  stripped ARM64 `libqplay` retains dynamic anchors, but the package also
-  contains a separate `libxposed.so` with inline hooks and a Frida-detection
-  replacement. It is unverified and modified, so no 2.2 behavior claim is
-  being transferred to the stock client. The bounded comparison is in
-  `docs/ABI_2_2_COMPARISON.md`.
 * The four 1.8 native ABI variants were compared statically. They share the
   connector trust text and marker set, but no non-ARM64 or physical ARM64
   runtime was executed in this pass.
