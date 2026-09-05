@@ -204,6 +204,17 @@ sequences remain ambiguous, and 4,825 2.2 functions have no exact match. This
 is a stronger anchor than a guessed address delta, but it still needs caller
 and data-reference review before a 2.2 IDA label is applied.
 
+The companion IDA helper is
+`tools/ida_apply_exact_byte_translation_candidates.py`. It is review-only by
+default. Before applying a candidate it checks the 2.2 input hash, resolves the
+address, confirms the existing function start and exact size, recomputes the
+function byte hash from IDA, and rejects name collisions. It preserves the
+original 2.2 exported name and the source-candidate evidence in an IDA comment.
+Creating missing boundaries and saving a new database require the separate
+`EXACT_BYTE_ADD_FUNCTIONS=1` and `EXACT_BYTE_SAVE_PATH` controls, together with
+`EXACT_BYTE_APPLY_RENAMES=1`. The input database is never overwritten. This
+pass deliberately does not rename the 383 ambiguous byte matches.
+
 ### 2.2 direct import callsites
 
 The stripped 2.2 ARM64 qplay file was also scanned through its AArch64 PLT.
