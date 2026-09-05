@@ -10,12 +10,15 @@ their original source names.
 The original active database started with 11,272 functions and 1,645 default
 `sub_` names. The complete reviewed pass added 25 function boundaries and
 1,551 names or aliases. One false boundary was then removed from a literal
-pool between two JPEG DCT routines. The current packed copy at
-`<workspace>/analysis/libqplay_translated_from_active_v14.i64`
+pool between two JPEG DCT routines. The latest packed copy at
+`<workspace>/analysis/libqplay_translated_from_active_v16.i64`
 contains 11,296 functions, all with non-default names. The active IDA
 verifier returned zero failures after the expanded embedded-library source-role
-pass and the 124 descriptive residual labels. A separate reopen of this
-current copy is still pending.
+pass and the 124 descriptive residual labels. The full verifier artifact
+describes the earlier v14 copy. The v16 copy has not been independently
+reopened because the IDA bridge is not currently available. Its private hash
+and persistence status are recorded in
+`artifacts/ida_active_copy_status_20260904.json`.
 
 The count is accounted for exactly:
 

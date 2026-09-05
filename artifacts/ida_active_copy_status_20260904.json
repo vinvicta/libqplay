@@ -1,0 +1,30 @@
+{
+  "artifact": "ida_active_copy_status_20260904",
+  "analysis_date": "2026-09-04",
+  "binary": {
+    "architecture": "aarch64",
+    "sha256": "9348dd87a571050e05a9c9b76d71d37aa697de1836be5b86ea9982eb00e5b9c8"
+  },
+  "latest_saved_copy": {
+    "path": "<workspace>/analysis/libqplay_translated_from_active_v16.i64",
+    "size": 66603254,
+    "sha256": "8de29ae01481c021ed8c128077f493028f1472aadaf71f78b665c0f2491c5e78",
+    "saved_from": "active translated IDA database after connector comments were added"
+  },
+  "last_completed_verification": {
+    "artifact": "ida_translation_verification_20260902",
+    "copy": "<workspace>/analysis/libqplay_translated_from_active_v14.i64",
+    "status": "ok",
+    "default_sub_count": 0,
+    "function_count": 11296,
+    "failure_count": 0
+  },
+  "current_copy_reopen_verified": false,
+  "ida_bridge_available": false,
+  "network_contacted": false,
+  "interpretation": [
+    "The v16 file is the latest private persistence revision and is not a substitute for a fresh close and reopen check.",
+    "The documented naming counts and zero-default-name result are taken from the completed v14 verifier; the v16 update is limited here to persistence status and the saved connector comments."
+  ],
+  "schema": "libqplay.ida-active-copy-status.v1"
+}
