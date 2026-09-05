@@ -23,22 +23,18 @@ Large raw dumps should be summarized before they are added.
 ## History status
 
 The current tree is clean, but the pre-cleanup Git history still contains
-obsolete comparison commits and unreachable objects. Removing those objects
-from public `main` requires rebuilding the branch and force-pushing it. That
-operation is intentionally separate from ordinary research commits because it
-changes commit IDs for every downstream clone.
+obsolete comparison commits. Removing those commits from public `main` requires
+rebuilding the branch and force-pushing it. That operation is intentionally
+separate from ordinary research commits because it changes commit IDs for
+every downstream clone.
 
-A local history preview was built from `main` at `8a9e645` without changing
-the public branch. Commit `f204393` is the first clean tree in the existing
-line of development. That preview made the tree a new root and retained its
-95 descendants, for 96 research commits in total. Reachable tree,
-commit-message, and path scans found no retired comparison-package material.
-The preview predates the latest cleanup commits and must be rebuilt from the
-current `main` before any history replacement.
-The preview also removed its remote-tracking refs before packing, so the old
-history was not retained by an in-preview branch or tag. It remains a staging
-result until the repository owner explicitly authorizes replacing public
-`main`, because that replacement changes commit IDs for every later commit.
+A fresh local preview was built from the current cleaned `main` without
+changing the public branch. It preserves the current tree as one new root
+commit, has exactly one reachable commit, and passed scans for retired paths,
+commit-message references, and forbidden text. The preview removed its
+remote-tracking refs and pruned unreachable objects before validation. It
+remains a staging result until the repository owner explicitly authorizes
+replacing public `main`.
 
 ## Review rules
 
