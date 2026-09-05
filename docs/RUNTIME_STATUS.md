@@ -34,12 +34,13 @@ This is the short handoff view. The full reasoning and command history are in
 10. The original no-swap handler table routes packet 190 to the native
     connecting-window completion wrapper. The rendered world remains visible
     without the centered connecting control.
-11. The symbol translation pass applied all 8,601 retained ELF names, then
-    1,551 reviewed aliases, including 141 exact FreeType 2.3.6 matches, 153
-    exact IJG libjpeg 6b matches, one zlib match, and one giflib role match.
-    The current packed copy has 11,296 named functions, zero default `sub_`
-    entries, and 124 stable descriptive residual labels. Verification has
-    zero failures.
+11. The completed v14 symbol translation pass applied all 8,601 retained ELF
+    names, then 1,551 reviewed aliases, including 141 exact FreeType 2.3.6
+    matches, 153 exact IJG libjpeg 6b matches, one zlib match, and one giflib
+    role match. That verified copy has 11,296 named functions, zero default
+    `sub_` entries, 124 stable descriptive residual labels, and zero
+    verification failures. The later private v16 persistence copy adds
+    connector comments but has not been independently reopened and verified.
 12. A private x86_64 two-port control reached the expired TLS responder,
     emitted no HTTPS GET, and then issued plain `GET /conf.gs`. The same
     result held with `Connection: close`. The fallback metadata is in

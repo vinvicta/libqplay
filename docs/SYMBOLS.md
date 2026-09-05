@@ -28,15 +28,17 @@ with explicit fields.
 
 The active ARM64 database was then processed by the reviewed callback,
 script-table, application-role, CyaSSL, bundled-library, and exact embedded
-source-role passes. The latest packed copy was saved as
-`<workspace>/analysis/libqplay_translated_from_active_v16.i64` after the
-connector comments were added.
-The active IDA verifier reports 11,296 functions, 11,296 named function heads,
-zero remaining default `sub_` entries, and zero failures after the expanded
-source-role pass. The 124 residual functions carry stable descriptive labels;
-the completed machine-readable verifier result describes the earlier v14 copy.
-The v16 copy has not been independently closed and reopened because the IDA
-bridge is not currently available. Its private hash and status are recorded in
+source-role passes. The completed verifier reports 11,296 functions, 11,296
+named function heads, zero remaining default `sub_` entries, and zero
+failures after the expanded source-role pass. The 124 residual functions
+carry stable descriptive labels; the machine-readable verifier result
+describes the verified private v14 copy.
+
+The latest private local persistence copy is
+`analysis/libqplay_translated_from_active_v16.i64`, saved after connector
+comments were added. It is outside the public archive and has not been
+independently closed and reopened because the IDA bridge is not currently
+available. Its private hash and status are recorded in
 `artifacts/ida_active_copy_status_20260904.json`.
 
 The 1,551 reviewed aliases are made up of 277 native callback candidates, 906

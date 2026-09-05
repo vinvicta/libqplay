@@ -14,7 +14,7 @@ handshake is not the same thing as a successful game login.
 ## Current status
 
 The symbol pass is complete for every name retained in the ELF export. The
-final ARM64 IDA copy also contains the reviewed callback, script-table,
+verified ARM64 IDA pass also contains the reviewed callback, script-table,
 static-library, and exact embedded-library source aliases. The counts are:
 
 | Kind | Count |
@@ -42,6 +42,12 @@ broader application-core range contains 23 short static-state or cleanup
 wrappers, which are documented with descriptive labels without inventing
 source names. The check is preserved in
 `artifacts/ida_active_translation_scope_check_20260902.json`.
+
+The zero-failure counts above come from the completed verification of the
+private v14 IDA copy. The latest private v16 copy adds connector comments but
+has not been independently closed and reopened because the IDA bridge is not
+currently available. Its persistence status is recorded in
+`artifacts/ida_active_copy_status_20260904.json`.
 
 The old connector has a concrete compatibility problem. Its embedded
 GraalWeb certificate expired on 2023-07-29, so the original HTTPS path cannot
@@ -420,9 +426,11 @@ The compact record is
 ## Inputs used for the analysis
 
 The primary input was the ARM64 library from the original Graal Online
-Classic 1.8 APK. The x86_64 library from the same package was used only for
-repeatable emulator experiments because the available Android emulator is
-x86_64.
+Classic 1.8 APK. The x86_64 library from the same package was used for the
+initial repeatable emulator experiments because the available Android
+emulator is x86_64. Later private diagnostic APKs exercised the ARM64 library
+through that emulator's translation layer. Those translated-ARM64 replays are
+useful local evidence, but they are not physical ARM64 device validation.
 
 Two helper repositories were also checked out locally during the work:
 

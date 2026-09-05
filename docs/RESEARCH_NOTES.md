@@ -13,7 +13,10 @@ launcher activity `com.quattroplay.GraalClassic.QPlayActivity`. The APK
 contains ARM64 and x86_64 native libraries. The ARM64 `libqplay.so` was loaded
 into IDA because that is the architecture with the most useful symbol
 information. The available emulator is x86_64, so the x86_64 library was used
-for runtime checks against the same application family.
+for the initial runtime checks against the same application family. Later
+private diagnostic APKs exercised the ARM64 library through the emulator's
+translation layer. Those translated-ARM64 replays are local emulator evidence,
+not physical ARM64 device validation.
 
 The original files are kept in the private working directory and are not
 committed here. The public archive contains hashes, symbol exports, scripts,
