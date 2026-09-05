@@ -144,6 +144,12 @@ per-function sizes, address deltas, and byte equality while keeping the APK
 and native files outside Git. It is a review map for a future 2.2 IDA database,
 not a bulk patch list.
 
+The stripped comparison library also has a complete searchable table of its
+5,782 retained defined dynamic functions in
+`symbols/libqplay_2.2_dynamic_functions.csv`. The summary records the source
+hash and name-family counts. These are dynamic anchors only, not recovered
+local symbols or proof of stock 2.2 behavior.
+
 The Android lifecycle review adds an important first diagnostic checkpoint.
 The connector is downstream of the GL surface, window focus, runtime
 permission completion, and the first render frame. A compatibility dialog or

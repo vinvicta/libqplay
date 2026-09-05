@@ -1,0 +1,39 @@
+{
+  "analysis_date": "2026-09-04",
+  "artifact": "libqplay_2.2_dynamic_functions",
+  "csv": "symbols/libqplay_2.2_dynamic_functions.csv",
+  "defined_function_count": 5782,
+  "family_counts": {
+    "CyaSSL": 253,
+    "FreeType/TrueType": 252,
+    "GIF": 27,
+    "JNI": 28,
+    "JPEG-like": 96,
+    "YAJL": 48,
+    "bzip2": 17,
+    "crypto-like": 53,
+    "other": 4975,
+    "zlib": 33
+  },
+  "limitations": [
+    "This table does not recover stripped local symbols or prove that the comparison package is an official stock 2.2 release.",
+    "A dynamic symbol value is an address anchor, not a verified function boundary in a future IDA database.",
+    "Family labels are name-based triage buckets and are not independent source attribution."
+  ],
+  "native_executed": false,
+  "network_contacted": false,
+  "normalization": "Defined FUNC entries only; symbol-version suffixes are removed",
+  "raw_data_policy": "The APK, native library, and companion hook library remain outside the repository.",
+  "schema": "libqplay.2-2-dynamic-function-inventory.v1",
+  "scope": "Retained defined FUNC entries in the unverified installed 2.2 ARM64 libqplay.so",
+  "source": {
+    "path": "analysis/GraalOnline+Classic_2.2_installed/lib/arm64-v8a/libqplay.so",
+    "sha256": "45a7f97df9b40cdac6fbd42dc715bbabf3bbdb9b33876990e232133a8818941e",
+    "size": 3736872,
+    "text_address": "0xdf800",
+    "text_file_offset": "0xdf800",
+    "text_size": 2078832
+  },
+  "symbol_source": "readelf --dyn-syms --wide",
+  "unverified_input": true
+}

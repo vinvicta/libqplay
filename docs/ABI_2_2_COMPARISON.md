@@ -179,6 +179,14 @@ Even after a successful plan, a candidate still needs caller and data-reference
 review. A size match or equal bytes is evidence for triage, not proof of
 identical behavior.
 
+For fast browsing, the complete retained 2.2 dynamic-function table is in
+`symbols/libqplay_2.2_dynamic_functions.csv`, with its hash and counts in
+`symbols/libqplay_2.2_dynamic_functions.summary.json`. It contains 5,782
+defined `FUNC` entries from `readelf --dyn-syms --wide`. This is the largest
+searchable name set available in the stripped comparison library. It does not
+recover local symbols and it is not evidence that the package is an official
+stock release.
+
 The ELF metadata reports full RELRO, `BIND_NOW`, and a non-executable stack.
 Those baseline properties do not remove the risks of legacy transport policy
 or code that changes executable memory at runtime.

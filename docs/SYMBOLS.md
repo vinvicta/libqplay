@@ -127,6 +127,13 @@ symbol values, sizes, address deltas, and raw-byte equality. Use it to locate a
 candidate in a future 2.2 IDA database, then verify callers and data references
 before applying any label or patch.
 
+The full retained 2.2 dynamic-function table is in
+`symbols/libqplay_2.2_dynamic_functions.csv`, with metadata in
+`symbols/libqplay_2.2_dynamic_functions.summary.json`. It records 5,782
+defined `FUNC` names, values, sizes, and conservative family labels from the
+unverified comparison library. It is a searchable anchor table, not a claim
+that stripped local symbols were recovered.
+
 ## Repeating the pass
 
 Run the IDAPython script from IDA's Python console or with the IDA batch
